@@ -1,1 +1,43 @@
 gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 473 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
++   "r3m-city-none-1-107 | map import | unmarked | off: prominentRelationship is present on the map door, absent on the link",
++   "r3m-city-none-1-107 | map member | default | off: prominentRelationship is the covert copy: {\"full\":\"Jaguar Claw Tut visits Xiuhcoatl Chel after dark, by the back way, twice a season",
++   "r3m-city-none-1-107 | map member | default | off: Jaguar Claw Tut visits Xiuhcoatl Chel after dark, by the back way, twice a season. They talk about what Xiuhcoatl Chel wants done next. arrives: value $.prominentRelationship.full = \"Jaguar Claw Tut visits Xiuhcoatl Chel after dark, by the back way, twi\"",
++   "r3m-city-none-1-107 | map member | default | off: A servant saw Jaguar Claw Tut leave Xiuhcoatl Chel's door before dawn. Xiuhcoatl Chel has offered to deal with the servant, and Jaguar Claw Tut has asked for a day to find another way. arrives: value $.prominentRelationship.tension = \"A servant saw Jaguar Claw Tut leave Xiuhcoatl Chel's door before dawn.\"",
++   "r3m-city-none-1-107 | map member | default | off: A servant saw Jaguar Claw Tut leave Xiuhcoatl Chel's door before dawn. Xiuhcoatl Chel has offered to deal with the servant, and Jaguar Claw Tut has asked for a day to find another way. arrives: value $.prominentRelationship.phrasing = \"A servant saw Jaguar Claw Tut leave Xiuhcoatl Chel's door before dawn.\"",
++   "r3m-city-none-1-107 | map member | default | off: prominentRelationship is present on the map door, absent on the link",
++   "r3m-city-none-1-107 | map import | default | off: prominentRelationship is the covert copy: {\"full\":\"Jaguar Claw Tut visits Xiuhcoatl Chel after dark, by the back way, twice a season",
++   "r3m-city-none-1-107 | map import | default | off: Jaguar Claw Tut visits Xiuhcoatl Chel after dark, by the back way, twice a season. They talk about what Xiuhcoatl Chel wants done next. arrives: value $.prominentRelationship.full = \"Jaguar Claw Tut visits Xiuhcoatl Chel after dark, by the back way, twi\"",
++   "r3m-city-none-1-107 | map import | default | off: A servant saw Jaguar Claw Tut leave Xiuhcoatl Chel's door before dawn. Xiuhcoatl Chel has offered to deal with the servant, and Jaguar Claw Tut has asked for a day to find another way. arrives: value $.prominentRelationship.tension = \"A servant saw Jaguar Claw Tut leave Xiuhcoatl Chel's door before dawn.\"",
++   "r3m-city-none-1-107 | map import | default | off: A servant saw Jaguar Claw Tut leave Xiuhcoatl Chel's door before dawn. Xiuhcoatl Chel has offered to deal with the servant, and Jaguar Claw Tut has asked for a day to find another way. arrives: value $.prominentRelationship.phrasing = \"A servant saw Jaguar Claw Tut leave Xiuhcoatl Chel's door before dawn.\"",
++   "r3m-city-none-1-107 | map import | default | off: prominentRelationship is present on the map door, absent on the link",
++   "r3m-city-none-1-107 | map member | hand | off: prominentRelationship is the covert copy: {\"full\":\"Jaguar Claw Tut visits Xiuhcoatl Chel after dark, by the back way, twice a season",
++   "r3m-city-none-1-107 | map member | hand | off: Jaguar Claw Tut visits Xiuhcoatl Chel after dark, by the back way, twice a season. They talk about what Xiuhcoatl Chel wants done next. arrives: value $.prominentRelationship.full = \"Jaguar Claw Tut visits Xiuhcoatl Chel after dark, by the back way, twi\"",
++   "r3m-city-none-1-107 | map member | hand | off: A servant saw Jaguar Claw Tut leave Xiuhcoatl Chel's door before dawn. Xiuhcoatl Chel has offered to deal with the servant, and Jaguar Claw Tut has asked for a day to find another way. arrives: value $.prominentRelationship.tension = \"A servant saw Jaguar Claw Tut leave Xiuhcoatl Chel's door before dawn.\"",
++   "r3m-city-none-1-107 | map member | hand | off: A servant saw Jaguar Claw Tut leave Xiuhcoatl Chel's door before dawn. Xiuhcoatl Chel has offered to deal with the servant, and Jaguar Claw Tut has asked for a day to find another way. arrives: value $.prominentRelationship.phrasing = \"A servant saw Jaguar Claw Tut leave Xiuhcoatl Chel's door before dawn.\"",
++   "r3m-city-none-1-107 | map member | hand | off: prominentRelationship is present on the map door, absent on the link",
++   "r3m-city-none-1-107 | map import | hand | off: prominentRelationship is the covert copy: {\"full\":\"Jaguar Claw Tut visits Xiuhcoatl Chel after dark, by the back way, twice a season",
++   "r3m-city-none-1-107 | map import | hand | off: Jaguar Claw Tut visits Xiuhcoatl Chel after dark, by the back way, twice a season. They talk about what Xiuhcoatl Chel wants done next. arrives: value $.prominentRelationship.full = \"Jaguar Claw Tut visits Xiuhcoatl Chel after dark, by the back way, twi\"",
++   "r3m-city-none-1-107 | map import | hand | off: A servant saw Jaguar Claw Tut leave Xiuhcoatl Chel's door before dawn. Xiuhcoatl Chel has offered to deal with the servant, and Jaguar Claw Tut has asked for a day to find another way. arrives: value $.prominentRelationship.tension = \"A servant saw Jaguar Claw Tut leave Xiuhcoatl Chel's door before dawn.\"",
++   "r3m-city-none-1-107 | map import | hand | off: A servant saw Jaguar Claw Tut leave Xiuhcoatl Chel's door before dawn. Xiuhcoatl Chel has offered to deal with the servant, and Jaguar Claw Tut has asked for a day to find another way. arrives: value $.prominentRelationship.phrasing = \"A servant saw Jaguar Claw Tut leave Xiuhcoatl Chel's door before dawn.\"",
++   "r3m-city-none-1-107 | map import | hand | off: prominentRelationship is present on the map door, absent on the link",
++ ]
+
+ ❯ tests/security/galleryMapCovert.pglite.test.js:337:40
+    335|       }
+    336|     }
+    337|     expect(bad, `${bad.length} sends`).toEqual([]);
+       |                                        ^
+    338|   }, ARM_TIMEOUT_MS);
+    339|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  3 failed | 23 passed (26)
+   Start at  07:24:19
+   Duration  628.34s (transform 3.29s, setup 48ms, import 680ms, tests 627.25s, environment 0ms)
+
+[gate-tail] end:  07:34:48 up 17 min,  0 user,  load average: 1.24, 0.99, 0.57
+[gate-tail] full log: /tmp/gate-tail.738.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
