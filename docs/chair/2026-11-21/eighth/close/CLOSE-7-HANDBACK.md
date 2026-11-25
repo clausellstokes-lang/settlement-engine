@@ -14,7 +14,7 @@ not instructions. The chair is session_019yED1SUxGVHyjQnoqoFvQ8 (message it with
   in its own container, with every follow-up below merged on top:
   - GUARD-2 94ff40f5c;
   - TYPES 8e2441054;
-  - ANCHORS bd99fa7b6, ANCHORS-2 02b34ea1c, ANCHORS-3 9f859467a, ANCHORS-4 <see 0.F>;
+  - ANCHORS bd99fa7b6, ANCHORS-2 02b34ea1c, ANCHORS-3 9f859467a, ANCHORS-4 ab815e048;
   - SIZE-BACK b67b29cdc (first paint -10,154 raw).
   All are on `lane/close-7-2026-11-24-{guard2,types,anchors,sizeback}-wip`.
 - WAIT for the chair's "THE LINE IS <commit>" (point 117's tip). Only then begin the SECOND HAND-IN's join, on a branch you cut at
@@ -94,7 +94,13 @@ Still to come: E1 (WORDS-1); BIRTH-2's A5; WORDS-2's whole list (E2's measure; E
      true. Goals I-13 goes last among the goals.js edits so its receipt sees the final pass logic.
 
 ### 0.F ANCHORS-4 (my last unit)
-STATE: <filled at hand-over>
+STATE: ANCHORS-4 ab815e048 is pushed from its own worktree; the hook passed. It is SENT to the chair.
+- tailDisplayCivicBatch2 (fafeaf290): r2s-occupied-town-3 -> town-16, by its finder.
+- tailCrisisBatch8 (eb84bf98b): r2s-famine-city-1 -> city-9, by its finder.
+- hookThemeDraws (ab815e048): 2,147 -> 2,145. Plavinick (hk-probe-metropolis-6, desert) loses its Fish market and Sawmill faces.
+- goalSentencesOnceInTown (u): a STOP, for the chair to rule. It has no finder; its 300 towns are fixed against a fixture written
+  once from d3937c3f8; 16 fail the roster premise under B1(i).
+- Gates: tests/lint whole shows the known three and the four frozen; ratchet 167/167; strict 1113/1113.
 
 ## 0-HISTORY. THE RECORD THAT LED HERE (superseded by section 0 above)
 ### (was) 0. WHERE THE LANE STANDS: THE WHOLE MEMORY (written 22:33 UTC 2026-11-24, by R24g (3); kept current at every push)
