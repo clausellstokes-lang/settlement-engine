@@ -22,9 +22,11 @@ Merged on `lane/close-7-2026-11-24-cures` (state at 00:04 UTC 2026-11-25):
 - A2 (merge 520ddb6a8 of -a2-wip fca95c197; fixes ce867a468, ea8b856b6, fca95c197). Its conflicts were unions of A1's and A2's
   rows; the register was rebuilt as A1's file plus A2's row and note.
 - The lighting census re-taken by its door at e7441a93f: files 3787->3789, parked 489->491; the plain run is green.
-- The cures branch's gates are RUNNING: own tests, tests/lint whole, tests/copy whole. Logs: scratchpad/cures-{own,lint,copy}.log.
-  Expected: lint shows only the known three (proseCorpusBytes RAW/GZIP, proseComposed A0b); copy 172/172.
-- The A2 line goes to the chair once they pass.
+- The cures branch's gates on e7441a93f (finished 00:23 UTC):
+  - own tests 133/133;
+  - tests/copy 172/172;
+  - tests/lint: only the known three red.
+- The A2 line was SENT to the chair at 00:23 UTC. The -cures branch is being pushed.
 
 Built and not merged:
 - B1(i): -b1i-wip 9d0f85e01 (pushed). Plain, by R24h. Its finish (R24e (1a), (1b), (2)) comes after LIVE-PATH.
@@ -45,11 +47,10 @@ R24h (23:00 UTC, recorded verbatim in `close-7/briefs/R24h.md`):
 ORDER: A2 (three fixes, then the mirror) to its merge; LIVE-PATH; B1(i)'s finish (R24e (1a), (1b), (2); plain); B1(ii); C1, with
 R24g's names, plain.
 
-THE NEXT COMMAND, when the cures gates finish:
-- `for f in own lint copy; do tail -6 scratchpad/cures-$f.log; done`
-- Then the guarded push of `-cures`, and the A2 line to the chair. The line carries: the table; the slot share; empty slots C
-  438->575, V 322->424; FOODSEC 0; records 0/0.
-- When the mirror's report lands: `git -C /home/user/wt/mirror log --oneline e7441a93f..HEAD`, then read the diff once.
+THE NEXT COMMAND: when the mirror's report lands, run
+`git -C /home/user/wt/mirror log --oneline e7441a93f..HEAD`, read the diff once, merge onto cures, run the gates as for A2 (the
+lighting census by its door if a test file was added), push, and send the mirror line. Then dispatch LIVE-PATH with a fresh
+Agent (brief `close-7/briefs/LIVE-PATH.md`).
 
 ### 0.1 Ground
 - THE LIT TREE (before every cure): `/home/user/wt/lit`, detached at d447ee31e (the flip; `origin/lane/close-6-2026-11-23-flip`).
