@@ -1,70 +1,76 @@
-SLICE 45 births (errors 0; restore loop on 43); classes {"LOST":131,"CHANGED":89,"GAINED":2}
+SLICE 60 births (errors 0; restore loop on 58); classes {"LOST":170,"CHANGED":124,"GAINED":3}
 BY KEY (all tabs):
-  safety.capture/ratio/crimeTypes                              {"LOST":92,"GAINED":2,"CHANGED":21}
-  power.stability                                              {"LOST":0,"GAINED":0,"CHANGED":32}
-  history.legacy/siegeNarrative                                {"LOST":1,"GAINED":0,"CHANGED":15}
-  legitimacy.multipliers/flags                                 {"LOST":14,"GAINED":0,"CHANGED":0}
-  power.factions.niche/rawPower/legitimacyCrisis               {"LOST":14,"GAINED":0,"CHANGED":0}
+  safety.capture/ratio/crimeTypes                              {"LOST":117,"GAINED":3,"CHANGED":31}
+  power.stability                                              {"LOST":0,"GAINED":0,"CHANGED":47}
+  history.legacy/siegeNarrative                                {"LOST":1,"GAINED":0,"CHANGED":20}
+  legitimacy.multipliers/flags                                 {"LOST":21,"GAINED":0,"CHANGED":0}
+  power.factions.niche/rawPower/legitimacyCrisis               {"LOST":21,"GAINED":0,"CHANGED":0}
   power.recentConflict                                         {"LOST":10,"GAINED":0,"CHANGED":0}
+  conditions.severity                                          {"LOST":0,"GAINED":0,"CHANGED":10}
   other:powerStructure                                         {"LOST":0,"GAINED":0,"CHANGED":8}
-  conditions.severity                                          {"LOST":0,"GAINED":0,"CHANGED":7}
-  defence.readiness.score                                      {"LOST":0,"GAINED":0,"CHANGED":5}
+  defence.readiness.score                                      {"LOST":0,"GAINED":0,"CHANGED":6}
   JOINT(conditions.severity+history.legacy/siegeNarrative)     {"LOST":0,"GAINED":0,"CHANGED":1}
+  UNKEYED                                                      {"LOST":0,"GAINED":0,"CHANGED":1}
 BY TAB x CLASS x KEY, up to three pairs from distinct births:
-  Systems/Economics|LOST|safety.capture/ratio/crimeTypes  n=90
+  Systems/Economics|LOST|safety.capture/ratio/crimeTypes  n=114
       r2r-city-0: "Shadow Economy: 16% of trade unrecorded▲"
       r2r-city-12: "Shadow Economy: 25% of trade unrecorded▲"
       r2r-city-24: "Shadow Economy: 13% of trade unrecorded▲"
-  Systems/Power|CHANGED|power.stability  n=32
+  Systems/Power|CHANGED|power.stability  n=47
       r2r-city-0: "Tense — regional monster threat  =>  Tense"
       r2r-city-12: "Unstable (pervasive organized crime)  =>  Unstable"
       r2r-hamlet-0: "Critical (under siege)  =>  Critical"
-  Summary/Foundations|CHANGED|safety.capture/ratio/crimeTypes  n=20
+  Summary/Foundations|CHANGED|safety.capture/ratio/crimeTypes  n=30
       r2r-city-24: "Criminal opportunityElevated  =>  Criminal opportunityContained"
       r2r-city-36: "Criminal opportunityElevated  =>  Criminal opportunityContained"
       r2r-hamlet-0: "Criminal opportunityElevated  =>  Criminal opportunityContained"
-  World/Daily Life|CHANGED|history.legacy/siegeNarrative  n=15
-      r2r-city-0: "The Siege still shapes how people here go about things. Beasts now roam the country around, and people keep close to home.  =>  Beasts now roam the country around, and people keep close to home."
-      r2r-city-12: "Ask how things came to be as they are here, and the Guild War soon comes up.  =>  Life goes on as usual, and nobody can point to anything new."
-      r2r-hamlet-0: "The Schism still shapes how people here go about things. War is close enough now to be felt in everyday business and in the mood of the place.  =>  War is close enough now to be felt in everyday business and in the mood of the place."
-  Systems/Power|LOST|legitimacy.multipliers/flags  n=14
+  Systems/Power|LOST|legitimacy.multipliers/flags  n=21
       r2r-hamlet-0: "Governance fractured."
       r2r-hamlet-24: "Governance fractured."
       r2r-hamlet-36: "Governance fractured."
-  Systems/Power|LOST|power.factions.niche/rawPower/legitimacyCrisis  n=14
+  Systems/Power|LOST|power.factions.niche/rawPower/legitimacyCrisis  n=21
       r2r-hamlet-0: "⚠"
       r2r-hamlet-24: "⚠"
       r2r-hamlet-36: "⚠"
+  World/Daily Life|CHANGED|history.legacy/siegeNarrative  n=20
+      r2r-city-0: "The Siege still shapes how people here go about things. Beasts now roam the country around, and people keep close to home.  =>  Beasts now roam the country around, and people keep close to home."
+      r2r-city-12: "Ask how things came to be as they are here, and the Guild War soon comes up.  =>  Life goes on as usual, and nobody can point to anything new."
+      r2r-hamlet-0: "The Schism still shapes how people here go about things. War is close enough now to be felt in everyday business and in the mood of the place.  =>  War is close enough now to be felt in everyday business and in the mood of the place."
   Summary/Overview|LOST|power.recentConflict  n=10
       r2r-city-0: "Two guild masters are having each other's warehouses robbed. Both deny it publicly. Both are losing patience."
       r2r-city-36: "The Ecclesiastical Council has been debating market levies for three months. The merchants have argued against every one of them, and nothing has been settled yet."
       r2r-city-48: "The Noble Governorship has been debating market levies for three months. The merchants have argued against every one of them, and nothing has been settled yet."
-  Summary/Foundations|CHANGED|conditions.severity  n=6
+  Summary/Foundations|CHANGED|conditions.severity  n=8
       r2r-hamlet-36: "Labor capacityStrained  =>  Labor capacityCritical"
+      r2s-insurgency-town-0: "Defense readinessStrained  =>  Defense readinessAdequate"
       r2s-occupied-town-0: "Defense readinessCritical  =>  Defense readinessStrained"
-      r2s-plague_onset-thorp-0: "Labor capacityStrained  =>  Labor capacityCritical"
-  Systems/Power|CHANGED|other:powerStructure  n=6
-      r2r-village-48: "Contests the seatReligious27▼  =>  Contests the seatReligious33▼"
-  Summary/Foundations|CHANGED|defence.readiness.score  n=5
+  Summary/Foundations|CHANGED|defence.readiness.score  n=6
       r2r-thorp-0: "Defense readinessStrained  =>  Defense readinessAdequate"
       r2r-thorp-48: "Defense readinessStrained  =>  Defense readinessAdequate"
       r2s-indebted-thorp-0: "Defense readinessStrained  =>  Defense readinessAdequate"
-  Summary/Foundations|LOST|safety.capture/ratio/crimeTypes  n=2
+  Systems/Power|CHANGED|other:powerStructure  n=6
+      r2r-village-48: "Contests the seatReligious27▼  =>  Contests the seatReligious33▼"
+  Summary/Foundations|LOST|safety.capture/ratio/crimeTypes  n=3
       r2r-town-0: "Law & orderCritical"
       r2s-infiltrated-thorp-0: "Law & orderCritical"
-  Summary/Foundations|GAINED|safety.capture/ratio/crimeTypes  n=2
+      r2s-wartime-town-0: "Law & orderStrained"
+  Summary/Foundations|GAINED|safety.capture/ratio/crimeTypes  n=3
       r2r-town-0: "Law & orderStrained"
       r2s-infiltrated-thorp-0: "Law & orderStrained"
+      r2s-wartime-town-0: "Law & orderAdequate"
+  World/Daily Life|CHANGED|conditions.severity  n=2
+      r2s-plague_onset-thorp-0: "Children are warned about asking for what the household cannot spare, and about going near any house where someone has fallen sick.  =>  Children are warned about going near any house where someone has fallen sick, and about asking for what the household cannot spare."
+      r2s-plague_onset-town-0: "What the Siege left behind is still part of daily life here. A fever has begun to go round, and people are keeping their distance. Beasts have overrun the country around, and nobody travels alone any more. There is sickness about, and it is getting close to a real outbreak.  =>  What the Siege left "
   Summary/Foundations|CHANGED|other:powerStructure  n=1
       r2r-village-48: "Ruling authorityAdequate  =>  Ruling authoritySurplus"
   World/Daily Life|CHANGED|other:powerStructure  n=1
       r2r-village-48: "Outsiders notice the mark of the Household Council on every door that matters. A visitor soon learns that the country beyond is not to be walked carelessly. Those who fall ill here cannot count on much care.  =>  Outsiders notice the mark of the Household Council on every door that matters. A visito"
   World/Daily Life|LOST|history.legacy/siegeNarrative  n=1
       r2s-infiltrated-thorp-0: "The Trade Collapse is still remembered here, and not lightly."
-  World/Daily Life|CHANGED|conditions.severity  n=1
-      r2s-plague_onset-thorp-0: "Children are warned about asking for what the household cannot spare, and about going near any house where someone has fallen sick.  =>  Children are warned about going near any house where someone has fallen sick, and about asking for what the household cannot spare."
   World/Daily Life|CHANGED|JOINT(conditions.severity+history.legacy/siegeNarrative)  n=1
       r2s-plague_onset-thorp-0: "People here still talk of the Schism, and of what it changed. A fever has begun to go round, and people are keeping their distance. There is sickness about, and it is getting close to a real outbreak.  =>  A fever has begun to go round, and people are keeping their distance. The sickness is everywhe"
+  Summary/Foundations|CHANGED|UNKEYED  n=1
+      r2s-slave_revolt-thorp-0: "Defense readinessCritical  =>  Defense readinessStrained"
   Systems/Defense|CHANGED|safety.capture/ratio/crimeTypes  n=1
       r2s-under_siege-town-0: "The military command holds out, but order among the people has gone, and things get worse as the food runs down. People quarrel over rations, food is sold under the counter, and the hungry have started to steal.  =>  The military command has taken charge of the streets, and more harshly as the food "
 TERM (2) WALK: 0 hits
