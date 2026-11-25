@@ -1058,3 +1058,8 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   THE CHAIR's OWN: wait-only and sort-only helpers of a landing may be cheap; the landing helper that runs the gate and
   cures stays on Opus. The chair's deep reads (212 and 213 final; a migration; a design ruling of weight) at the top
   effort as section 1 says.
+- 2026-11-25 05:26 UTC · T79 · V25 (unit 4's fail-closed rule re-stated on what is served); SNAP-CHRONICLE DOES NOT RIDE.
+  Both in `veil/RULING-V1.md`. V25: an unmatched description is served; EVERY served description, after the cut, names
+  no withheld power or is withheld whole; the table's totality by walker, census and one bounded pass over the writer's
+  history on master; one measure owed with the hunk (descriptions naming ANOTHER power after the cut, both pools).
+  Taken at high effort; re-read at the top effort with unit 4's 212 hunk. Sent to VEIL-55 (for VEIL-51) and VEIL-52.

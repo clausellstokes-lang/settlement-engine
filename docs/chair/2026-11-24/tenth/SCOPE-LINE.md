@@ -35,7 +35,7 @@ not made by this release is WRITTEN DOWN (the list below) and not worked.
 ## OUT, WRITTEN DOWN FOR THE OTHER WORKS
 | what | whose work | state |
 |---|---|---|
-| "SNAP-CHRONICLE" (A9): a map shared with its campaign is refused whole where the campaign has a chronicle, the editor ticking the chronicle by default | the map | live today; not made by this release; RULING V13 stands as that work's ruling; VEIL-52's cure parked at its commit boundary |
+| "SNAP-CHRONICLE" (A9): a map shared with its campaign is refused whole where the campaign has a chronicle, the editor ticking the chronicle by default | the map | live today; not made by this release; RULING V13 stands as that work's ruling; VEIL-52's cure is PARKED, green on its own test and unproven beyond it, at `lane/veil-52-2026-11-24-doors-wip` c89d3f638 (hand-back `veil/v52/builder/SNAP-CHRONICLE-HANDBACK.md`); ruled 05:27 UTC: it does not ride |
 | the owner's stored switch for the empty-section cut (A7) | (optional) | not built unless he asks |
 | any fault found in a barred area from now on | its own work | one line to the chair, recorded here, not measured further, not built |
 

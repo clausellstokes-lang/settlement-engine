@@ -515,3 +515,32 @@ weakens a proof):** reports reach the chair through VEIL-55 only (a ruling asked
 units 4 and 5 (both VEIL-51's) may ride together with ONE pool proof and ONE read by the chair; THE FULL POOL PROOF IS
 TAKEN ONCE, after units 3, 4 and 5 are in, each unit's own arms and differential still run at its merge; a short script
 restores a seat's local test database and tools after a machine restart. WHAT A PROOF CHECKS IS NOT REDUCED.
+**V25 (05:26 UTC): UNIT 4, V14's CONDITION 1 RE-STATED: THE RULE IS ON WHAT IS SERVED, NOT ON WHETHER A ROW MATCHED.** ASKED
+by VEIL-55 (05:24): read literally, "a desc the table cannot cut exactly is withheld whole" withholds every description
+that has NO standing tail (320 of 743 born today, 161 of 752 born on master: their writer wrote none), because at serve
+time "no tail" and "a tail in a form the table lacks" look alike. THAT READING IS NOT THE RULING's INTENT: 481 base
+descriptions would leave every shared page for nothing. RULED, four parts:
+(1) A description NO ROW MATCHES IS SERVED (it has no tail the table knows). A DIFFERENT-SPAN TIE is withheld whole and
+    reds (V15, unchanged; 0 on both pools).
+(2) THE INVARIANT, ON EVERY SERVED DESCRIPTION, MATCHED OR NOT, AFTER THE CUT: it does not contain the name of a power
+    the read withholds (212's own name search and fold, the same the legacy-names rule of V20 uses). Where it would, the
+    description is withheld whole. This is VEIL-55's backstop made general: it also covers a BASE text that names
+    another power, which the cut never touched. ITS TELL (a missing description says something hidden is named) is
+    phase 2's matter and is strictly less than serving the name.
+(3) THE TABLE's TOTALITY IS PROVEN THREE WAYS: the walker (every form the tip's and master's writers derive is a row; a
+    planted form reds); the census (uncut 0 on both pools); and ONE PASS OVER THE WRITER's HISTORY ON MASTER
+    (`git log -p` on the file or files that write the standing tail): every form any committed version derived is a row,
+    marked legacy with the last commit that had it; if there is none beyond today's, the hand-back says so. BOUNDED: an
+    hour; past it, stop and say what was covered.
+(4) ONE MEASURE WITH THE HUNK, both pools: how many descriptions, AFTER THE CUT, contain the name of ANOTHER power of
+    the same place (the worst case for part 2: every other power hidden), with three examples. If it is not near 0 it
+    is a finding of its own (R5-DESC beyond the tail) and comes to the chair before the merge.
+THE STANDING ARMS: a planted unknown-form tail naming a hidden power is withheld whole on every non-owner door; the same
+tail naming no hidden power is served (documented as the residue: it may print a standing; an inference, not a name);
+a no-tail description is served byte-equal. TAKEN AT HIGH EFFORT (the owner's setting for routine); IT IS RE-READ AT THE
+TOP EFFORT WITH UNIT 4's 212 HUNK, where its whole consequence lies.
+**SNAP-CHRONICLE DOES NOT RIDE (05:26 UTC).** VEIL-52 (05:17): the cure is green on its own test (3 of 3; the walker 4 of 4)
+and unproven beyond it; parked and pushed at `lane/veil-52-2026-11-24-doors-wip` c89d3f638 (7 files, +431 -19; its
+hand-back `veil/v52/builder/SNAP-CHRONICLE-HANDBACK.md`). It is the map's work by the owner's line (`SCOPE-LINE.md`), a
+fault live today and not made by this release; riding would owe four runs and a read. IT STAYS PARKED FOR THE MAP WORK,
+which finds it whole.
