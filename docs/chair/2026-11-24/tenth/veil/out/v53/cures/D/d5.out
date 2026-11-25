@@ -1,0 +1,10 @@
+D5 r5-city-0 form="City Council" A="Military/Guard" B="Merchant Guilds"
+D5   owner(names A) holder="Military/Guard" taker="Military/Guard"
+D5   owner(names B) holder="Merchant Guilds" taker="Merchant Guilds"
+D5   served documents deep-equal=true servedHasRecentConflict=false pages deep-equal=true
+D5   served text names A=true names B=true; page reader holder="Merchant Guilds" (both)
+D5 r5-city-1 form="City Council" A="Merchant Guilds" B="Military/Guard"
+D5   owner(names A) holder="Merchant Guilds" taker="Merchant Guilds"
+D5   owner(names B) holder="Military/Guard" taker="Military/Guard"
+D5   served documents deep-equal=true servedHasRecentConflict=false pages deep-equal=true
+D5   served text names A=true names B=true; page reader holder="Military/Guard" (both)

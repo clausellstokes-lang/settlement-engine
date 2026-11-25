@@ -1,0 +1,31 @@
+# V53 cures UNIT D: NOTES (partial, written as I go)
+
+- Tip found: lane/veil-53-2026-11-24-cures-wip at b61c1e630 (/home/user/cures53).
+- Read whole: `src/domain/seat/holderOfSeat.js`, `tests/lint/recentConflictReaders.walker.test.js`, `rulingPower.js :: transferRulingPower`.
+- The question before any src change (the unit's STOP): in REDSCAUSE (5)'s construction the owner's holder (A) is decided
+  ONLY by `transferTakerOf`'s tie-break on `powerStructure.recentConflict`, a key withheld on every shared read
+  (registry `power.recentConflict`, withhold always) and re-derived by `pageRederive.js :: rederiveRecentConflict` to the
+  BASELINE sentence. Hypothesis: two owner records that differ only in that withheld key (naming A, naming B) serve the
+  SAME document, so no read of the served document can equal the owner's on both. Probe follows.
+
+## MEASURED (d5.probe.test.js beside this file, run from /home/user/cures53 through `sh scripts/gate-mutex.sh --run --`, exit 0; d5.out)
+- Construction and twin (r5-city-0, r5-city-1): the owner's `holderOf` names A where `recentConflict` names A, and B where it
+  names B. The two SERVED documents (`toPublicSafe` + `applyVeil(resolveVeil(defaultVeilFor))`) are DEEP-EQUAL; neither holds
+  `powerStructure.recentConflict`; the two pages after `rederiveForPage` are deep-equal; the reader's holder is B on both.
+- So no function of the served document (or of the page) can equal the owner's holder on both records: the only fact that
+  tells A from B is the withheld key. Edge order is not that fact either: `transferRulingPower` rewrites a taker's existing
+  edge IN PLACE (`pairedWithWinner`), so the last matching edge need not be the last taker on a real record.
+
+## VERDICT: STOP (the unit's own STOP; COMMON-RULES 14 (e), N102). No src change, no test change, NO COMMIT.
+The owner's holder cannot be told from the served document without serving a new fact. A cure would need ONE of (each an
+owner/chair decision, none mine):
+1. a NEW SERVED FACT naming the last transfer's taker (e.g. a structured `lastTransfer.taker`, or serving the
+   `recentConflict` sentence where it is a `TRANSFER_WORDINGS` 'conflict' row; the key is withheld always today, registry
+   `power.recentConflict`, 212 `_gallery_veil_withhold_always`: a migration and a registry change); or
+2. retiring the earlier taker's edge on OLD records (U5 does it at a transfer only under the seat law): a record rewrite; or
+3. changing the OWNER's read so it no longer consults `recentConflict` (both audiences then read only edges: the last
+   matching edge, or NOBODY on two takers per Addendum 3's fail-closed). That moves the owner's page off the ruled CS2 R1
+   tie-break ("the transfer's own recentConflict sentence decides") and is not the ruling's "names the holder the owner's
+   page names" as written.
+The walker row for `holderOfSeat.js :: transferTakerOf (1)` is NOT added either: no honest verdict exists until the cure
+does (`page-copy` would be false: it reads the BASELINE copy and tie-breaks wrong).
