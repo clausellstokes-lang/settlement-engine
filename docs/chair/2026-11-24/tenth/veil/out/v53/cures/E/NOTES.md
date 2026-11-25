@@ -29,3 +29,11 @@
 - SEAT: CONFIRMED by the arm: rows "seat: born under it" / "born without it" keep the record (green after cure; pre-cure red
   only through the fortune defence term). Probe e2: stamping the seat marker dark moves no import output on these towns.
 - committed 90ddc2fe5
+- AFTER THE COMMIT (container restarted once: a 9-file single vitest was OOM-killed, exit 137; re-run one file at a time):
+  governing files 9 (git grep over tests/ for importRederive.js or its exports): 8 green; recentConflictReaders.walker
+  1 red "transferTakerOf (1): not registered" = holderOfSeat.js (unit D, not built), ON the trial join's list (lintfails.txt:24).
+  Per file: /var/tmp/v53/cures/E/governing.sum.
+- tests/lint WHOLE (--maxWorkers=1, through the mutex; the first attempt was cut by its background time limit, re-run):
+  26 files failed | 206 passed; 66 tests failed | 3376 passed. Its 66 failing titles = the trial join's 66
+  (/var/tmp/v53/grants/lintfails.txt, matched by prefix since that list cuts long titles): NEW none, GONE none.
+  Log /var/tmp/v53/cures/E/lint.log; titles /var/tmp/v53/cures/E/lintfails.mine.txt.
