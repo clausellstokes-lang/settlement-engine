@@ -11571,7 +11571,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
             "walls",
             "no crisis: occupied"
           ],
-          "text": "{settlement} pays wages for its defense as well as keeping its walls, and the money is found every season.",
+          "text": "{settlement} pays wages for its defense as well as keeping its walls.",
           "slots": [
             "settlement"
           ],

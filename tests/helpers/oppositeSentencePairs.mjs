@@ -44,11 +44,13 @@ export const OPPOSITE_PAIRS = Object.freeze([
 /**
  * THE CLAUSES PINNED AT 0 PAGES: a variant's tail after its first clause cut, which the page never prints (the page cuts the
  * line there). GEN-17 GARRISONED v2's "and the money is found every season" printed on 0 of the 900 (DISAGREE-PHASE1.md);
- * the row that makes the source match the page is on the chair's list for after the first deploy.
+ * the row that makes the source match the page was built by WORDS-2 E9 (the tenth chair's E9), and its old words moved to
+ * PINNED_OLD_WORDS.
  * @type {ReadonlyArray<Readonly<{ id: string, side: PairSide }>>}
  */
 export const PINNED_TAILS = Object.freeze([
-  Object.freeze({ id: 'GEN-17 GARRISONED v2 tail', side: side({ desk: 'general', position: 'DS-GEN-17', pool: 'GARRISONED', vids: [2] }) }),
+  // GEN-17 GARRISONED v2's tail LEFT this table (WORDS-2 E9, the tenth chair's E9): the source was corrected to what the page
+  // prints (its WORD_CORRECTIONS row), so no tail is left to hold; its old words are pinned at 0 pages in PINNED_OLD_WORDS.
   // The chair, N71 (PROSE-E): GEN-13 NO-MARKET v12 draws (46 of the 900 pages, every one beside ECO-10 `POSTURE: established`)
   // and the site mount prints it cut, "{settlement} has no market." (`generalDeskRead.js :: siteClause`); its tail, "and trades
   // in a small way: a sack here, a bundle there, carried between neighbours", would read as NO-MARKET v10's old words did
@@ -63,6 +65,9 @@ export const PINNED_TAILS = Object.freeze([
  * @type {ReadonlyArray<Readonly<{ id: string, side: PairSide, text: string }>>}
  */
 export const PINNED_OLD_WORDS = Object.freeze([
+  Object.freeze({ id: 'DS-GEN-17 GARRISONED v2, the old words (TENTH-CHAIR-E9)',
+    side: side({ desk: 'general', position: 'DS-GEN-17', pool: 'GARRISONED', vids: [2] }),
+    text: '{settlement} pays wages for its defense as well as keeping its walls, and the money is found every season.' }),
   Object.freeze({ id: 'DS-DEF-2 Economic Survival: WEAK v1, the old words (CHAIR-2026-11-23-03:55)',
     side: side({ desk: 'defense', position: 'DS-DEF-2', pool: 'Economic Survival: WEAK', vids: [1] }),
     text: '{settlement} is always short of money for its defence: no money is laid by to pay for a long one, and whoever is called to make one knows it.' }),
@@ -161,8 +166,9 @@ export function tailMatchersOf(s) {
 
 /**
  * The old words' matcher: the text's template and its clause-cut forms, but a cut the variant's NEW words also yield (PROSE-E:
- * CHAIN working v1 keeps its first clause, "{settlement}'s food trades are working,") — that cut is not the old words. While the
- * leaf still holds the old text (before the cure), nothing is excluded, so the pin reads the old words whole.
+ * CHAIN working v1 keeps its first clause, "{settlement}'s food trades are working,"), or that IS the new words whole (WORDS-2
+ * E9: GEN-17 GARRISONED v2's old words cut at their tail are its new words) — that cut is not the old words. While the leaf
+ * still holds the old text (before the cure), nothing is excluded, so the pin reads the old words whole.
  * @param {{ text: string, side: PairSide }} pin @returns {ReadonlyArray<RegExp>}
  */
 export function oldWordsMatchersOf(pin) {
@@ -170,7 +176,7 @@ export function oldWordsMatchersOf(pin) {
   const current = textsOf(pin.side);
   const shared = current.includes(pin.text)
     ? new Set()
-    : new Set(current.flatMap((t) => formsOf(t).cuts));
+    : new Set(current.flatMap((t) => { const g = formsOf(t); return [`${g.full}\\.`, ...g.cuts]; }));
   return Object.freeze([f.full, ...f.cuts.filter((c) => !shared.has(c))].map((src) => new RegExp(src)));
 }
 

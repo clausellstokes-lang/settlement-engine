@@ -9,8 +9,8 @@
  *          prints both sides of any row (WAGES and P1-P4 have none: ARM 5 holds them; CRITICAL v2-v3 x GARRISONED v1 is watched).
  *   ARM 2 (anti-vacuity): each side's matcher matches its own leaf texts, slot-filled; and on real pages (ARM 1's births
  *          and the named control seeds) each side of each row is found.
- *   ARM 3: each pinned tail (`PINNED_TAILS`: GEN-17 GARRISONED v2's "and the money is found every season", and GEN-13
- *          NO-MARKET v12's "and trades in a small way: …", the chair's N71; the page cuts both) prints on 0 pages of ARM 1's
+ *   ARM 3: each pinned tail (`PINNED_TAILS`: GEN-13 NO-MARKET v12's "and trades in a small way: …", the chair's N71; the
+ *          page cuts it; GEN-17 GARRISONED v2's tail left the table with WORDS-2 E9, below) prints on 0 pages of ARM 1's
  *          births; its matcher matches its own leaf text, and its variant's head prints: found by the side's matcher, or,
  *          where the printed head is a cut under the FLOOR (below), drawn by the ledger with the site mount's cut of its text
  *          (`generalDeskRead.js :: siteClause`) on the page.
@@ -24,6 +24,9 @@
  *          (on 244fa84ef's leaf dz-town-2 printed v1's, dz-town-36 v2's); each matcher matches its own text.
  *          PROSE-E (the chair, N70): five more re-worded in place, their old words pinned the same way (NO-MARKET v10; full
  *          legal chain v1, v2; CHAIN working v1; CRITICAL v1), red first on b443be64b's leaves.
+ *   ARM 6 (WORDS-2 E9, the tenth chair's E9): GEN-17 GARRISONED v2's source says what the page prints: the place's trim
+ *          (`generalDeskRead.js :: siteClause`) cuts nothing from it, so no clause of the leaf is a clause no page shows; its
+ *          old words ("…, and the money is found every season.") are held at 0 pages by ARM 5. Red first on 0ec96f13d8's leaf.
  * THE FLOOR (the chair, N71): the matcher does not match a clause cut of fewer than four literal words
  *   (`tests/helpers/oppositeSentencePairs.mjs :: formsOf`, `literalWords >= 4`), so a line the page prints only as such a cut
  *   is invisible to every arm that reads by matcher: NO-MARKET v12 draws on 46 of the 900 and prints as "{settlement} has no
@@ -184,4 +187,10 @@ describe('DISAGREE: no page prints both sides of an opposite pair', () => {
     expect(printed).toEqual([]);
     for (const pin of PINNED_OLD_WORDS) expect(textsOf(pin.side).includes(pin.text), `${pin.id}: the leaf no longer holds the old words`).toBe(false);
   }, 120_000); // its own budget: the births of ARM 1, reused
+
+  it('ARM 6: GEN-17 GARRISONED v2\'s source words are the words the page prints (the trim cuts nothing)', () => {
+    const v2 = DOSSIER_STATE_PROSE_GENERAL['DS-GEN-17'].pools.GARRISONED.find((v) => v.vid === 2);
+    expect(v2?.text).toBeTypeOf('string');
+    expect(siteClause(v2.text)).toBe(v2.text);
+  });
 });
