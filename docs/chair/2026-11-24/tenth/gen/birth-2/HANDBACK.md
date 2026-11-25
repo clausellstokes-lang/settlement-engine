@@ -45,7 +45,18 @@
   mutation manifest row.
 - UNIT D4: HANDED IN at 14:33 UTC: `lane/birth-2-2026-11-25-d4-wip` 57d26a136 on origin, "UNIT D4" sent to CLOSE-7 and the chair
   (section 2). Typecheck in its tree: ratchet OK 167/167; domain-strict OK 1113/1113.
-- UNIT C6 (given 14:40 UTC-ish by the chair): (A) P9 measure (probe probes/p9beasts.census.jsx; base counts C 0, V 129 from the page battery; prior ruling: CHARTERS-SECOND-WAVE-2026-11-12 pattern 9; the unused leaf facts/beastsReadiness.js), ONE message, build nothing; (B) the sameness census (scripts/sameness-census.mjs --measure --plan) on C and V, a table.
+- UNIT C6 as of 15:40 UTC:
+  (A) P9: measured and RULED (G22). BUILT on `lane/birth-2-2026-11-25-p9-wip` (worktree /home/user/wt/p9) at f1990cc84: the leaf
+      `facts/beastsReadiness.js` (beastsReadinessOf: shownScore, grade; scoresAsShown) read by DefenseTab, threatAssessment,
+      defenseDisplay, OverviewTab, generalDeskRead (DS-GEN-3), pdf viewModel (defenseScores). Walker
+      `tests/lint/beastsGradeOneReader.walker.test.js` red at base, green; plants executed; manifest row. Every-birth check
+      `probes/p9check.mjs`: base C 0, V 175. IN FLIGHT: sameness render of C/V on p9 (for p9check after) and the page battery
+      p9 C/V (scratchpad p9proof.sh). THEN: p9check after (expect 0), pages moved (expect C 0, V ~175, records 0), the four
+      "beyond the need" under CRITICAL/WEAK = 0, lint whole, copy whole, named tests, both typechecks in the p9 tree, the
+      lighting census by its door (two new test files... one new: the walker), push from /home/user/wt/p9, "UNIT P9".
+      NAMED, not built: the defense score AVERAGES (pdf viewModel scoreAvg x3, viewModelBodySlices) still average the stored
+      score (a different statistic; a parity contract ties them).
+  (B) SAMENESS: SENT to the chair (15:40 UTC); lists in `c6/` (over-C.json, over-V.json, check-C.log, sameness-bar.js).
 - Worktrees: /home/user/wt/d4 and /home/user/wt/a5 (node_modules and .husky/_ symlinked; excluded in info/exclude).
   Scratch tools: /home/user/c7tools/read25 (CLOSE-7's page battery copied). Runs: scratchpad queue*.sh, logs g-*.log.
 - Corpora: C = `close-7/read24/make-plan.mjs`, V = `make-visitor-plan.mjs` over the chair's `read/plan-lit.json`.
