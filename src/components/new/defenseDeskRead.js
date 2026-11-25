@@ -16,6 +16,7 @@
  * @enforced-by tests/lint/dossierMountRegistry.walker.test.js (ARM 2 + ARM 3)
  * @enforced-by tests/components/publicProseEquality.test.jsx (`defense:*`)
  */
+import { wallAfterBeasts } from '../../domain/display/stateProse/wallYield.js';
 import {
   defenseCriminalProse, defenseForcesProse, defenseMilitaryStatusProse, defensePostureProse,
   defenseStateProse, defenseSupportingProse, defenseThreatProse, defenseWallRationaleProse,
@@ -80,7 +81,7 @@ export function defenseDeskRead(settlement, options = {}) {
   const forces = options.publicDossier ? publicLens(r, 'forces') : defenseForcesProse(r, deskOpts);
   const posture = options.publicDossier ? publicLens(r, 'posture') : defensePostureProse(r, deskOpts);
   const status = options.publicDossier ? publicLens(r, 'status') : defenseMilitaryStatusProse(r, deskOpts);
-  const wall = options.publicDossier ? publicLens(r, 'wall') : defenseWallRationaleProse(r, deskOpts);
+  const wall = options.publicDossier ? publicLens(r, 'wall') : wallAfterBeasts(defenseWallRationaleProse(r, deskOpts), threat?.beasts); // G6 #9: one no-wall line
   const supporting = options.publicDossier ? publicLens(r, 'supporting') : defenseSupportingProse(r, deskOpts);
   // AUDIENCE-GATED (VEIL-FIX R2, 2026-11-10; 207's law, the hall-capture state is DM truth): the
   // player view draws the criminal lens from the record AFTER the public strip, so its capture

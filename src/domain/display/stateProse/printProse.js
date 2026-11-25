@@ -71,6 +71,7 @@
  *
  * @enforced-by tests/pdf/statePrintParity.test.jsx
  */
+import { wallAfterBeasts } from './wallYield.js';
 import { drawnAtMount } from './dossierMounts.js';
 import { tierNounFor, weaveBlock } from './weaveBlock.js';
 import {
@@ -416,7 +417,7 @@ export function buildPrintProse(settlement, ctx = {}) {
   const forces = defenseForcesProse(r, opts);
   const posture = defensePostureProse(r, opts);
   const status = defenseMilitaryStatusProse(r, opts);
-  const wall = defenseWallRationaleProse(r, opts);
+  const wall = wallAfterBeasts(defenseWallRationaleProse(r, opts), threat?.beasts); // G6 #9: one no-wall line (wallYield.js)
   const supporting = defenseSupportingProse(r, opts);
   // T2-24: silent where magic does not function, exactly as ViabilityTab gates it.
   const magic = magicWorksAt({ settlement: r }) === false ? { arcaneReliance: null } : defenseMagicDependencyProse(r, opts);
