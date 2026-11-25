@@ -7,7 +7,7 @@ before judging anything. Every hour here is read from `date -u`. No pull request
 
 ## 1. WHERE THE SEAT STANDS (my memory; WHOLE at every push; written so a successor on another account can go on from it alone)
 
-AS OF 00:35 UTC 2026-11-25. THE LANE'S OWNER: VEIL-55 (session_019yED1SoJ6KH9Wyp2Fera7R); never message VEIL-50. THE CHAIR:
+AS OF 00:53 UTC 2026-11-25. THE LANE'S OWNER: VEIL-55 (session_019yED1SoJ6KH9Wyp2Fera7R); never message VEIL-50. THE CHAIR:
 session_019yED1SUxGVHyjQnoqoFvQ8. THE LINE: 0559a8405 (point 115, the troubles rule DARK; no birth or page moves; merge nothing of it
 before the join). MARK RULE (00:29): no successor at 620,000; this section whole by 560,000, then work on; at a compaction say so to
 the chair in one line, re-read the start file, this section and the rulings, go on; finish a judgment before a compaction, never carry
@@ -35,10 +35,18 @@ all three world doors, BLIND 0; the `chronicle` section refused by the server's 
 the chair's item SNAP-CHRONICLE, A9). WDMI's plant served nowhere twice (stopped); wdmi on today-born: the map import adds no name the
 other doors lack (`MI-TIP-TABLE.txt`).
 
+### ALSO DONE AND SENT (00:3x-00:50, CONFIRMED): READ-COST (`READ-COST-TABLE.md`; RULED V11: its cure is MINE AFTER UNIT 3, a
+migration of its own cut after phase 1's SQL merges: (i) the dossier read takes one row's tile, (ii) stored tile columns by a server
+trigger, backfill, the list <150 ms at 840 rows, row-for-row differential 0; nothing built now). TODAY's IMPORT of a marked page
+(`PP-TODAY-IMPORT-TABLE.txt`): YES, RULED V12 (no interim without the owner's word). SNAP-CHRONICLE (`SNAP-CHRONICLE.txt`): refused
+with chronicle ticked (the editor's default), published without, master and tip; RULED V13: rides IN UNIT 3, client-only: (a)
+ALL_SECTION_KEYS and the editor lose `chronicle`; (b) the serializer drops it whatever a stored selection says; (c) red first: the
+editor's default shareMap on a campaign with a chronicle refused on the tip; green: published, served world holds no chronicle;
+(d) a WALKER: every offered section key and every top-level key the serializer can emit tried against the server's deny pattern
+read from `_gallery_world_snapshot_is_safe`'s net-current text (not copied), 0 refused; (e) the maker-facing copy naming the section
+goes, by tests/copy's rules. ALL THREE SMALL RUNS DONE; the held runner released 00:5x.
+
 ### RUNNING (detached; `/var/tmp/v52/log/run52.log` and `q52.log`; outputs `/var/tmp/v52/out/<step>`)
-- THE THREE SMALL RUNS FIRST (VEIL-55 00:29): `pptodayimp` (master's import of a marked page; result <=100 words to the chair, first
-  line yes or no), `readcost` (n115 with the list reads; to the chair), `snapchron` (SNAP-CHRONICLE through the client on master and
-  tip; <=120 words to the chair with the smaller cure: the client's section key, or the server's pattern sparing the one section).
 - HELD between its lines (kill -STOP 6777 at 00:3x, after `mimaster`'s line): the main runner `q52.sh mitip mimaster mijoin sntip
   snmaster snjoin`. RELEASE with `kill -CONT 6777` once the three small runs end. Then a waiter runs `q52.sh miplant2 snplant2`
   (VEIL-55's two owed plants: wdmi on r3m-metropolis-none-1-127; snap's person plant).
@@ -46,7 +54,7 @@ other doors lack (`MI-TIP-TABLE.txt`).
   /var/tmp/v18log/pg.log -w start"`), then relaunch what `q52.log` lacks with `setsid nohup sh v52/run52.sh q52:<steps> &`.
 
 ### OWED, IN ORDER
-1. The three small runs' results. 2. (1a) snap and (1b) wdmi tables on the three sets, to VEIL-55 (<=200 words each). 3. The two plants.
+1. (done.) 2. (1a) snap and (1b) wdmi tables on the three sets, to VEIL-55 (<=200 words each). 3. The two plants.
 4. The builder's diff read, then VEIL-55's read. 5. UNIT 3 AFTER MY COMPACTION (VEIL-55 00:29): on "R4-IDS MERGED <commit>": merge
 it (E116's five steps), `sameModuloIds` to the bijection, the census re-run, "a shown person stays shown"; then THE BUILD (D7) and the
 proofs (start file (3)-(6)); every function created needs its own grant line (211 part B); "TIP? IMPORT-DOOR <commit>" to VEIL-55.
