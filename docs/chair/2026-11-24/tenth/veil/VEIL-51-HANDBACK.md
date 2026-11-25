@@ -12,6 +12,47 @@ THE CODE IS LOCAL ONLY. `git push -q origin lane/veil-51-2026-11-24-r5desc-wip` 
 ("Destructive or Unwanted Actions"). Per the refusal rule, nothing was tried in its place. VEIL-55 and the chair were told
 (08:5x). Every code commit below lives ONLY in this container's worktrees. The documents branch holds the record.
 
+THE CHAIR, 09:02: THE REFUSAL STANDS; until the owner speaks, 8697f4eff is NOT pushed under any name, NOT copied into another
+branch or a patch file, and nothing in /home/user/wt/r5desc is deleted or reset. WHAT EXISTS ONLY IN THIS CONTAINER:
+- WORKTREE /home/user/wt/r5desc, branch lane/veil-51-2026-11-24-r5desc-wip, TIP 8697f4eff, base dbd4cd9e5 (on the remote).
+  `git log --oneline dbd4cd9e5..8697f4eff` (33 lines, merges included):
+    8697f4eff feat(veil, VEIL-51 unit 5 U2/U3 and unit 4 term (b)): the person rule in 212 and its registry rows; the stored argument is the live row with the served source
+    91605fd9c test(veil, VEIL-51 unit 4, RULING V27 (5)): the census's oracle is the writer: no cut base holds a sentence of its birth writer's tail
+    04711aa1b feat(veil, VEIL-51 unit 5 U1): a person's string naming a withheld power leaves from every copy of that person (twin; RULING V20, V27 (2))
+    2376572f3 test(veil, VEIL-51 unit 4, V27 term (a)): every share door passes its stored row to the veil (walker; red by design until unit 3)
+    483d95861 feat(veil, VEIL-51 unit 4, RULING V27 (1)): the stored belt: a desc naming a stored power the read does not serve leaves whole
+    802578955 feat(veil, VEIL-51 unit 4 item 5): the loss listed under V4: registry row power.desc is 'not drawn' (RULING V15)
+    a5e77c820 docs(veil, VEIL-51 unit 4 N3): R5-DESC's citations renumbered (36) -> (38); the belt's measured reach stated
+    bcf26ccbd fix(veil, VEIL-51 unit 4 N2b): a label's lower-case qualifier is cut; master's uncut standings no longer served
+    9c03baa71 feat(veil, VEIL-51 unit 4 N2): both engines read a standing row only as a tail; the different-span tie pinned unreachable
+    5b39bd019 feat(veil, VEIL-51 unit 4 N1): the shared page prints no standing; reader S narrowed to the cut alone (RULING V15)
+    04cfe6d85 merge(veil, VEIL-51 unit 4): STANDWALK (7010a0004) into R5-DESC's merged tree
+    e8cfe56a0 merge(veil, VEIL-51 unit 4): DESCARM (0ff0773c7) into R5-DESC's merged tree
+    89e7d2d2c chore(veil, VEIL-51 unit 4, merge M4): 212's header: R5-DESC's item renumbered (36) -> (38), after STORED-PROSE's (37)
+    2944a4db5 test(veil, VEIL-51 unit 4, merge M3): the composed census re-pinned to the merged registry
+    56727861a merge(veil, VEIL-51 unit 4): R5-DESC's code (aa54a6791) into the lane's tip dbd4cd9e5 (R4-IDS + STORED-PROSE)
+    7010a0004 test(veil, VEIL-51 STANDWALK): the tie rule as ruled: the cut judged by its span; a different-span tie reds
+    826859d82 test(veil, VEIL-51 STANDWALK): the standing table's totality walker, master's forms pinned, the stored-tail census
+    0ff0773c7 test(veil, VEIL-51 unit 4 DESCARM): a shown power's desc names no power the read withholds, the twin against 212 (RED BY DESIGN until R5-DESC's cure)
+    aa54a6791 test(veil, VEIL-40 R5D-PAGE-B2): never-there drops a tension naming a withheld power; N67's table whole; the hand-back (returned at the budget, not done)
+    c7a4e9a4e WIP, UNPROVED (VEIL-40 R5D-PAGE-B2): the stored halves, the share-class and name arms in progress, the stored-pool instruments; committed by the seat on the chair's order (nothing stays only in a container)
+    9b1fe3c34 Merge PIN-2 23bb8b8ae (lane/veil-39-2026-11-23-tip, the lane's tip) into lane/veil-40-2026-11-23-r5desc-wip
+    f0a896d73 docs(veil, VEIL-40 R5D-PAGE-B): item 5b's measure, phase 1 (Q1, Q2, Q3 on the full pools and act T; no cure)
+    74afc8219 test(veil, VEIL-37 R5D-PAGE-A): the two pins R5D-SQL moved, re-stated by cause; the hand-back
+    9bba26536 Merge commit '3ef7fb325' (lane/veil-37-2026-11-23-r5desc-wip: R5D-SQL-2 and the lane's tip 2d7ed483f) into lane/veil-37-2026-11-23-r5dpage-wip
+    bd030f275 veil(VEIL-37 R5D-PAGE-A): R5-DESC's page half: reader S over the served roster, the page readers' roster (E128), the plants, fidelity, differential, arm and pins
+    3ef7fb325 Merge commit '2d7ed483f' into lane/veil-37-2026-11-23-r5desc-wip
+    a1e395ae2 docs(veil, VEIL-37 R5D-SQL-2): hand-back (212 5ad8493a, the literal 2dced465 24,079; 16 rows' re moved; every run 0; the cost law WITHIN at 464.3 vs 494.8 ms), the runner, the probe and the run outputs
+    ab6ade69a veil(VEIL-37 R5D-SQL-2): the mask in the name slot (E136 (a)): every name and label slot of STANDING_FORMS takes the projection's mask
+    eeda6a126 docs(veil, VEIL-36 R5D-SQL): hand-back (212 a9b0884e, rollback, 211 and 210 unchanged; the cost law WITHIN at 641.7 vs 846.0 ms; the mask inside a standing is not cut by the table)
+    051bae78e veil(VEIL-36 R5D-SQL): R5-DESC's cure, first half: the standing cut by one table, the hidden or masked row's desc, the dmNote, the masked party, the belt
+    b30a9cdce docs(veil, VEIL-36 R5D-FORMS): hand-back: the sample count (64 prose names, not 63)
+    8001e3ad6 docs(veil, VEIL-36 R5D-FORMS): hand-back (117 rows; literal sha256 794367e0…; PG = JS on 6,009/6,009; the repeat needs a ruling)
+    4583ad3d4 scripts(veil, VEIL-36 R5D-FORMS): the table of standing forms (117 rows: tip, master@75e60fc94, master's history) and its door
+- WORKTREE /home/user/wt/n4, branch lane/veil-51-2026-11-24-n4-wip, 50e0bd13b (one WIP commit on 802578955).
+- WORKTREE /home/user/wt/arms, branch lane/veil-51-2026-11-24-arms-wip, 54b4fced3 (one WIP commit on 8697f4eff).
+- The data: /var/tmp/v51 (the pools, the logs, the PG16 cluster /var/tmp/v18pg).
+
 THE CODE BRANCH `lane/veil-51-2026-11-24-r5desc-wip`, worktree /home/user/wt/r5desc, tip 8697f4eff, on dbd4cd9e5 (the lane's tip,
 R4-IDS + STORED-PROSE). In order, every commit DONE and proved by its own red and green:
 - 56727861a, 2944a4db5, 89e7d2d2c: merge M (R5-DESC aa54a6791). Proof: 3 slices; two inherited reds read.
