@@ -7,7 +7,7 @@ before judging anything. Every hour here is read from `date -u`. No pull request
 
 ## 1. WHERE THE SEAT STANDS (my memory; WHOLE at every push; written so a successor on another account can go on from it alone)
 
-AS OF 04:58 UTC 2026-11-25. A SECOND CONTAINER RESTART ~01:14 (PostgreSQL restarted; lost steps relaunched 01:15:47: snmaster, snjoin, miplant2, snplant2; the builder resumed by message). DONE BY THEN: mimaster (rc=3, MAP OTHER rows), mijoin (rc=3), sntip (rc=0); the builder's commit f1da68754 on the -wip (the two test files); its tests/lint whole was cut and is being re-run. THE LANE'S OWNER: VEIL-55 (session_019yED1SoJ6KH9Wyp2Fera7R); never message VEIL-50. THE CHAIR:
+AS OF 05:22 UTC 2026-11-25. A SECOND CONTAINER RESTART ~01:14 (PostgreSQL restarted; lost steps relaunched 01:15:47: snmaster, snjoin, miplant2, snplant2; the builder resumed by message). DONE BY THEN: mimaster (rc=3, MAP OTHER rows), mijoin (rc=3), sntip (rc=0); the builder's commit f1da68754 on the -wip (the two test files); its tests/lint whole was cut and is being re-run. THE LANE'S OWNER: VEIL-55 (session_019yED1SoJ6KH9Wyp2Fera7R); never message VEIL-50. THE CHAIR:
 session_019yED1SUxGVHyjQnoqoFvQ8. THE LINE: 0559a8405 (point 115, the troubles rule DARK; no birth or page moves; merge nothing of it
 before the join). MARK RULE (00:29): no successor at 620,000; this section whole by 560,000, then work on; at a compaction say so to
 the chair in one line, re-read the start file, this section and the rulings, go on; finish a judgment before a compaction, never carry
@@ -91,6 +91,13 @@ with an inline tooth (a card id moved after the fold must make them differ). RUN
 outputs `/var/tmp/v52/u3/`): R = the arm PLAIN (red expected), G = folded + MemberCount + MapCovert + ImportEqualsRead. Then commit the
 fold with R and G quoted; then `u3a.sh L` (tests/lint whole). STILL OWED in unit 3: sameModuloIds -> the bijection (ImportEqualsRead),
 the census re-run, "a shown person stays shown", THE BUILD (D7: doors-3's section into 212), the door-equality arm, the proofs, "TIP?".
+
+### 05:2x: SCOPE (the owner's line via the chair 05:04, SCOPE-LINE.md): THIS RELEASE IS THE GENERATOR ALONE; UNIT 3 = HIDING ONLY at the
+map member and the map's import (no map feature touched; doors-3's tile/list/world work NOT taken); SNAP-CHRONICLE PARKED (builder told
+to stop at its next commit boundary; its five lines below when it reports); READ-COST after unit 3. A finding in a barred area: one line
+to the chair. ON `-dsql-wip`: 1839ce9ba (pushed) the bijection fold + tooth + citations: RED plain 8/18 (`/var/tmp/v52/u3/R.log`), GREEN
+folded: ServerVeil 18/18, MemberCount 11/11, MapCovert 8/8 (`G.log`). UNCOMMITTED: galleryImportEqualsRead's `sameModuloIds` switched to
+canonPeople (its two reds at G were the re-keyed ids: 4,722 and 16 differences); `u3a.sh I` running; then commit, then `u3a.sh L`.
 
 ### OWED, IN ORDER
 1. (done.) 2. (1a) snap and (1b) wdmi tables on the three sets, to VEIL-55 (<=200 words each). 3. The two plants.

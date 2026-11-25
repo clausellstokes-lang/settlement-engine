@@ -9,6 +9,7 @@ st() { echo "$1 rc=$2 $(date -u +%H:%M:%S) $(git -C $W rev-parse --short HEAD)" 
 for s in ${*:-R G L}; do case $s in
   R) cp $U/gsv.plain.js $W/$F; mx $F > $U/R.log 2>&1; r=$?; cp $U/gsv.folded.js $W/$F; st R $r;;
   G) cp $U/gsv.folded.js $W/$F; mx $F tests/security/galleryMapMemberCount.pglite.test.js tests/security/galleryMapCovert.pglite.test.js tests/security/galleryImportEqualsRead.pglite.test.js > $U/G.log 2>&1; st G $?;;
+  I) mx tests/security/galleryImportEqualsRead.pglite.test.js > $U/I.log 2>&1; st I $?;;
   L) (cd /home/user/settlement-engine && git fetch -q origin review-fixes-2026-07-08 && git branch -f review-fixes-2026-07-08 FETCH_HEAD); mx tests/lint > $U/L.log 2>&1; st L $?;;
 esac; done
 echo "u3a END $(date -u +%H:%M:%S)" >> $L
