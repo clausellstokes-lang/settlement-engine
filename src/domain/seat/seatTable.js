@@ -237,7 +237,7 @@ const bareForm = (form) => String(form ?? '').trim().replace(/ Ascendant$/, '');
  *  reader and the pair check), beside the old forms its rows keep; they are never drawn (a DM's event installs from the rows'
  *  weighted bands alone, which this leaves untouched). @type {Readonly<Record<string, ReadonlyArray<string>>>} */
 const BIRTH_NAMED_FORMS = Object.freeze({ [A.CRIMINAL]: Object.freeze(['Council of Aldermen', 'Council of Syndics', 'Senate']) });
-const ownForms = (r, kind) => [...(r.alt ? [r.alt] : []), ...SEAT_BANDS.flatMap((b) => Object.keys(r.bands[b])), ...(BIRTH_NAMED_FORMS[kind] || [])];
+const ownForms = (/** @type {SeatRow} */ r, /** @type {string} */ kind) => [...(r.alt ? [r.alt] : []), ...SEAT_BANDS.flatMap((b) => Object.keys(r.bands[b])), ...(BIRTH_NAMED_FORMS[kind] || [])];
 
 /** form -> the first kind (in table order) whose own rows hold it. @type {ReadonlyMap<string, string>} */
 const FORM_KIND = new Map(Object.entries(SEAT_TABLE).reverse()

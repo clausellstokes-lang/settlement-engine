@@ -194,7 +194,7 @@ function readIdentity(settlement) {
  * @param {unknown} settlement @returns {boolean}
  */
 export function fieldsBoughtIn(settlement) {
-  const facts = factsOf(/** @type {Parameters<typeof factsOf>[0]} */ (settlement));
+  const facts = /** @type {Parameters<typeof atomHolds>[1]} */ (factsOf(/** @type {Parameters<typeof factsOf>[0]} */ (settlement)));
   return atomHolds('grain imported', facts) === true && atomHolds('institution: farmland', facts) === false;
 }
 

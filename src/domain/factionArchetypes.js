@@ -104,7 +104,7 @@ function normCategory(value) {
  *  word 'shadow' (the town and city birth names read as a council, exactly as their old forms do). */
 const CRIMINAL_BIRTH_NAMES = new Set(['Senate']);
 
-export function factionArchetype(faction) {
+export function factionArchetype(/** @type {Object|string|null|undefined} */ faction) {
   if (!faction) return A.OTHER;
   if (typeof faction === 'string') {
     if (CRIMINAL_BIRTH_NAMES.has(faction.trim())) return A.CRIMINAL; // R24-C1 (CLOSE-7 BATCH): 'Senate' keeps the Shadow Senate's archetype

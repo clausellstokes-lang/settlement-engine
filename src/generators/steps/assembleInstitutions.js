@@ -448,7 +448,7 @@ registerStep('assembleInstitutions', {
    * Can this non-required catalog row roll here, and at what chance? (`rowRoll`, at this row's density.)
    * @returns {{ baseChance: number, resourceMult: number, p: number, drawn: boolean } | null}
    */
-  const rollFor = (category, name, inst) => rowRoll(rowEnv, category, name, inst, institutions, densityFor(name)); const withheld = (name) => landWithholdsHouse({ terrainType: rowEnv.terrainType, tradeRoute: rowEnv.tradeRoute, nearbyResources: rowEnv.nativeNearbyResources }, name); // B1(i) R24b: THE LAND WITHHOLDS A HOUSE AFTER ITS DRAW: the roll is made exactly as before (the same draw, the same chance); a house this land withholds here (domain/landWithholding.js) is then not taken, so no other draw shifts (one line, so no cited line moves)
+  const rollFor = (category, name, inst) => rowRoll(rowEnv, category, name, inst, institutions, densityFor(name)); const withheld = (name) => landWithholdsHouse({ terrainType: rowEnv.terrainType, tradeRoute: /** @type {string | null} */ (rowEnv.tradeRoute), nearbyResources: rowEnv.nativeNearbyResources }, name); // B1(i) R24b: THE LAND WITHHOLDS A HOUSE AFTER ITS DRAW: the roll is made exactly as before (the same draw, the same chance); a house this land withholds here (domain/landWithholding.js) is then not taken, so no other draw shifts (one line, so no cited line moves)
 
   // THE WEIGHTED EXCLUSIVE GROUP (2026-09-30). A group used to go to whichever member the
   // catalog happened to list first: the first roll that succeeded took it and every later
