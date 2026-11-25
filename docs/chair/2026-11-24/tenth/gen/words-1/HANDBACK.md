@@ -184,17 +184,25 @@ STATE AT 16:22 UTC:
 - The joined tree /home/user/wt/join REMOVED (its commits are in JOINED-PROOF.md).
 - NEXT (G20 (3)): when CLOSE-7 has taken D6, E1, E8: one line to the chair with my context size; under 600,000 build E8b
   as `lane/words-1-2026-11-25-e8b-wip`, else hand over at a commit boundary with E8b's design (G20 (2)) as the next unit.
-STATE AT 17:05 UTC — E8b IN BUILD (worktree /home/user/wt/e8b, branch -e8b-wip on 94b7a13d9, UNCOMMITTED):
+STATE AT 16:38 UTC (read from `date -u`; an earlier draft wrote 17:05 by mistake) — E8b IN BUILD (worktree /home/user/wt/e8b, branch -e8b-wip on 94b7a13d9, UNCOMMITTED):
 - MEASURE (records, base): the twelve rows, C 1157 strings, V 1126 (tells 899/852, impressions 202/215, crisis secrets 25/28,
   rare 11/12, siege goal.long 13/8, title secrets 2/5, behaviour 5/6). STOP sites: none (gender set at npcGenerator.js:132,
   before every draw of these lines; survey by an Explore agent, its claims spot-checked).
 - BUILT: personMention.js BOUND_CARD_LINES (regex literals), `boundReflexives(card)`, `heldCardLine(text)`; ONE pass at
   narrativeGenerator.js:1068 (goaledNpcs; skipped under a held npcs pin) and generateSettlementPipeline.js:617 (regen,
   non-keepers); held-form reads in rareSecrets.js :: rareRowOf, goals.js :: secretRefuses, tonightSheet.js (2), and
-  crisisFactFindings.js (1). Plan sent to the chair 16:50 ("build unless you veto").
+  crisisFactFindings.js (1). Plan sent to the chair at about 16:33 ("build unless you veto").
 - BARRED (one line sent to the chair): worldPulse/successorNpc.js:49-50 copies tell/goal.long onto a genderless successor.
 - Test: tests/generators/people/boundCardLines.test.js (11 C births, all twelve rows met). Gates (e8b-*.log) and renders of
-  wt/e8 vs wt/e8b, C and V (s-e8-*, s-e8b-*), running from 17:00.
+  wt/e8 vs wt/e8b, C and V (s-e8-*, s-e8b-*), running from 16:38.
+STATE AT 16:47 UTC: CHAIR G29 (plan not vetoed; proof adds (1) the ROUND TRIP: heldCardLine(stored after) byte-equal to the
+  base's stored string for every card of C and V, 0 differing, and a walker: no reader matches the twelve rows except through the
+  helper; (2) the successor byte-unchanged; the regen: a non-keeper re-resolved = a fresh resolve, a keeper untouched; STOP at any
+  moved string beyond the reflexive). G30: the ONE edit in successorNpc.js is allowed and required (copy the held form).
+  DONE in wt/e8b (uncommitted): successorNpc.js copies heldCardLine(tell / goal.long) (import at the file's end, no line moves);
+  tests/lint/boundCardLinesReaders.walker.test.js (readers of the row tables: HELD 4 through the helper, BEFORE_THE_PASS 3 with
+  reasons, the successor, a planted control); boundCardLines.test.js gains the regen case; manifest rationale for both tests.
+  Tools: tools/e8b-roundtrip.mjs (G29 (1) over the battery strings), tools/e8b-successor.mjs (G29 (2), made records, both trees).
 NOT IN STEP ONE (E8b): the card lines (tells 899/852, impressions, secrets, goal.long npcGenerator); their draws dedupe by text
 in registries (castPowers hookRegistry.tells, CarriedSecrets), so a draw-time fill would move draws: a design is owed.
 npcData.js was read in its changed region only (pairProse, the tie table), not whole: said in the hand-in.
