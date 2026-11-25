@@ -349,3 +349,17 @@ word equals the Prosperity word above it, and the page census walk keeps each li
 changed. TWO MEASURES ORDERED FROM WORDS-2 (333,999 used, cost 96.69): "TWICE-IN-PANEL" (what the set hides: a line of
 six words or more printed twice in one panel, on C and V) and "E13, STEP ONE" (for each of the 14 slots above their
 ceilings: the top sentence, its pool, why the share is high, since when, a cure in one line).
+
+**G32 (17:24 UTC): E13 STEP ONE: THE 14 SLOTS ABOVE THEIR CEILINGS, EACH BY ITS CAUSE.** WORDS-2's measure on the base with
+the door's own `measureSlots`. (1) OUTLOOK VIABILITY, web and PDF callout, hamlet (3 slots; .48 against .29): top "#
+feeds itself and pays its own way."; `dossierViewModel.js:311-316`, the self-sufficient verdict holds 3 lines and a
+twin; A GATE THAT FALLS FORWARD: lines 2 and 3 refuse wherever `needsImports` holds and `pickTrue` hands line 1 on
+(hamlets: line 1 72, line 2 7, line 3 6; thorp 98/4/1; village 54/0/1). RULED BUILT (`-e13a-wip`): each state of the
+verdict holds at least three true lines and the line is drawn among the admitted by the slot's keyed draw; new
+sentences named for the owner's veto. (2) THE NPCs HELP PILL, hamlet (1 slot; 1.00 against .70): a fixed caption, one
+line by construction. (3) PDF NPCRow and NotableNPCs FullCard, town, city, metropolis (10 slots; .95 to 1.00 against
+.08 to .60): a ROLE TITLE ("the senior craft-guild master", "the senior charter master") the door counts as a
+sentence because it is 25 characters long. (2) and (3): NOTHING BUILT; raising a ceiling or teaching the door to skip
+a title loosens a door: THE OWNER'S, named with the chair's recommendation (the door should not count a role title or
+a fixed caption as a drawn sentence). SINCE WHEN: the register was taken once, at 7e93c087b on 2026-11-20, and never
+re-taken; nothing says which of the 1,489 commits since crossed each ceiling.
