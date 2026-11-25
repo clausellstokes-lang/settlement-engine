@@ -54,16 +54,21 @@
   Governing run at 0ecb6e25c (90 files + tests/lint whole: 317 files, 4,682 tests): 14 red, 12 on RED-AT-LINE; the 2 others were the
   wiring census, re-taken by its door in 5262fbee4 (stamp only, 0 rows; --check 0; walker 79/79). Goldens moved by D3: 0 dark, 0 lit.
   Page battery over the 4: rows moved 0. Tables: `gen/birth-1/d3/`.
-- D5 (test re-cut): CAUSE KNOWN from the fortune-7 diagnosis (`lane/fortune-7-2026-11-22-u8-wip` measures/u8/DIAGNOSIS.md, R13
-  section): the will's order score sits on its X4 floor (never below the will with nothing built or standing), which the points-only
-  bound `armed + 0.1 x parts` predates; v3build-village-3 lit: will 6.86, armed 5.1, bound 6.8. No product fault. The re-cut needs the
-  parts' per-score dims (the list holds points only): plan a small pure reader beside `defencePartsOf`.
-- D8: measure written (`tools/measure-d8.mjs`), not run. Read: the thorp catalogue row "Lord's reeve" (face 'the reeve') seats
+- **D5 — BUILT, COMMITTED** on `lane/birth-1-2026-11-25-d5-wip` (worktree `/home/user/wt/d5`) at 289a70b3a. Cause (fortune-7's
+  diagnosis, confirmed): the will's order score sits on its X4 floor; the points-only bound predates X4; no product fault. The R13 arm
+  in `tests/generators/defenceParts.test.js` now reads the hold score by score through a new pure reader
+  `defenseGenerator.js :: defenceWillHoldOf` (no figure changes: C 0, V 0 records moved). Old arm red at the base (v3build-village-3
+  6.9 > 6.8); new arm green (defenceParts 19/19 + defenceDerived walker, 32/32). Every birth of C and V: 0 breaks of R13 score by
+  score; X4 binds on C 76, V 75; the old points bound would be red on V dp-village-64, -113 too (`d5/table.txt`). A planted-mutation
+  negative control was REFUSED by my permission check (told the chair; not retried). Governing run (25 files naming the defence
+  module + tests/lint whole) IN FLIGHT. Its RED-AT-LINE row (defenceParts R13) leaves the list when it lands (the chair's).
+- D8: MEASURED, RULING ASKED of the chair (~11:15 UTC; three candidates, A recommended: the face "the reeve" -> "the lord's reeve"). Count: every Feudal Stewardship thorp, C 12, V 18 (`d8/`). Builds nothing until the ruling.
+  Earlier notes: Read: the thorp catalogue row "Lord's reeve" (face 'the reeve') seats
   'Feudal Stewardship' (`rulingStructure.js` governanceLabelMap `"lord's reeve"`); its own desc says "A steward appointed by a distant
   lord". Hamlets up hold "Lord's steward" (face 'the steward'). The seat line is `governanceAccount.js :: governanceAccountOf` (role
   from `rulingChainOf`).
 - D7: read in (the proposal's crisis-body measure counts places whose crisis has no power of its own on the roster; its 509/900).
-  STRESS_POWER_FACES lists each crisis's powers. The measure of the SENTENCES that name a power is to be written.
+  STRESS_POWER_FACES lists each crisis's powers; `power/stressFactions.js :: applyStressEventFactions` pushes them (the density law may not seat them). `tools/measure-d7.mjs` written (crises, roster, every crisis sentence per birth); to run once on C and V, then the per-kind analysis offline.
 
 ### 0.2 Next step
 D8's measure (`tools/measure-d8.mjs`) on C and V, then the ruling asked; D7's measure; D5's re-cut meanwhile.
