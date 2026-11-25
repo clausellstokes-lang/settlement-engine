@@ -284,3 +284,17 @@ runs the door once as the gate runs it (its own plan: its `--check` on plan C re
 plan: 516 unregistered, 16 rises, 76 watch, 773 stale, 53 loose is NOT the door's reading) and reports five counts;
 it builds nothing for sameness. P9 is built (`lane/birth-2-2026-11-25-p9-wip` f1990cc84), proofs running; the "46
 settled towns" of G22 are 46 settled PLACES (44 towns, 1 hamlet, 1 village).
+
+**G24 (15:44 UTC): D7 RECEIVED (`lane/birth-1-2026-11-25-d7-wip` b0cca45be).** A crisis line naming a body the roster lacks:
+C 25 to 0, V 17 to 0 (oracle: the crisis's own powers by name off the roster; the leaf agrees on all 1,800); births
+moved C 25, V 17 (only `powerStructure.recentConflict`, and `pressureSentence` on C dp-city-93); goldens 0/0. Built: the
+atom `crisis body: <kind>` (indebted, religious_conversion), `src/domain/facts/crisisBody.js`, `CRISIS_BODY_SIBLINGS` in
+`data/powerSiblings.js` resolved at the END of `assembleSettlement.js` against the settled record. The seat's call,
+accepted: the conversion sentence's copy declares `priest` on the line (0 births moved; no shrink-only register gained a
+row). Listings by their own doors: factLayers.shared, table-pools, the PRESSURE_SENTENCES ledger 28 to 29, pool-dominance
+(1 row by `--bank-new`: its nature owed in the hand-in). BYTES: first paint raw 1,181,337 to 1,187,083 (+5,746; gzip
++1,646; Brotli +1,409), worker +3,221: `factsOf -> crisisBody -> people/stressPowerFaces` brings the face table into the
+eager chunk. RULED: no second home for the names; SIZE-BACK's method (the lazy-domain list, behaviour proven unchanged)
+is tried on it by CLOSE-7 at the second hand-in; the rest is named for the owner's size signing. Every BIRTH-1 unit
+(d2, d2b, d3, d5, d7, d8) is green on both typechecks in its own worktree. FOR THE OWNER'S VETO: the atom, the four
+sentences of G17/G18, the `priest` declaration.
