@@ -104,7 +104,7 @@ archives, in BATCH).
 Commits are on the same branch, one per file, test files only:
 - **98a6aef9f:** (1), the phone-floor baselines.
 - **11266dd3b:** (3), mergeLadderHeldKeys A2.
-- **The commit after 11266dd3b:** (3), editCorpusRatchet A4 and A5.
+- **1909b5325:** (3), editCorpusRatchet A4 and A5.
 
 ### (1) dossierPhoneFloorAllViews: RE-RECORDED (CONFIRMED by run)
 - MOBILE_BASELINE "World/Daily Life": prose 9 → 8.
@@ -147,3 +147,5 @@ The rows were measured by each file's own census, instrumented in copies on git-
     residue is 27 V-DEFENSE-INST, every escalation is EXHAUSTED, and determinism and undo hold.
   - mergeLadderHeldKeys is 8/8.
   - editCorpusRatchet A3 (328 vs 327) and A7 (honesty figures) stay red as at the cut. R24o does not name them.
+- **`tests/lint` whole at 1909b5325:** 6 of 227 files red, 5 tests. They are the known three and the four frozen, the same
+  as before. No test title moved.
