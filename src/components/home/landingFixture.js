@@ -13,7 +13,7 @@
  *
  * Provenance: seed `lf-033`, 12 one-week ticks of advanceCampaignWorld
  * over a 5-settlement region (fixture town + 4 neighbors), engine
- * generatorVersion 0.9.0 / simulationVersion 1.
+ * generatorVersion 0.10.0 / simulationVersion 1.
  * The town is a village — within the anon tier ceiling by design: the
  * "Forge this exact town" button replays { seed, config } through the SAME
  * store forge action as every other generation, so the artifact is a promise
@@ -34,7 +34,7 @@ export const fixture = {
   "seed": "lf-033",
   "weeks": 12,
   "engine": {
-    "generatorVersion": "0.9.0",
+    "generatorVersion": "0.10.0",
     "simulationVersion": 1
   },
   "forge": {
