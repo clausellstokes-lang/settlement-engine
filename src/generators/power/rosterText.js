@@ -99,7 +99,7 @@ export function settleStandingToRoster(powerStructure, annotated, force) {
     const base = !old.standing ? desc : desc === old.standing ? '' : desc.endsWith(` ${old.standing}`) ? desc.slice(0, -old.standing.length - 1) : null; // FAULTS-WATCH item 3 (BR30 (3)): a power with NO old standing (13g) takes the final roster's sentence at its end
     if (base === null) return f;
     moved = true;
-    return { ...f, desc: base && now.standing ? `${base} ${now.standing}` : (base || now.standing) };
+    return { ...f, desc: base && now.standing ? `${base} ${now.standing}` : (base || now.standing), ...(typeof f.dmStanding === 'string' ? { dmStanding: now.standing } : {}) }; // A5 (G1): the field with the description
   });
   return moved ? { ...powerStructure, factions: next } : powerStructure;
 }
@@ -230,7 +230,7 @@ export function settleStandingToLegitimacy(powerStructure, previousLegitimacy, r
     }
     if (base === null) return f;
     moved = true;
-    return { ...f, desc: base && now.standing ? `${base} ${now.standing}` : (base || now.standing) };
+    return { ...f, desc: base && now.standing ? `${base} ${now.standing}` : (base || now.standing), ...(typeof f.dmStanding === 'string' ? { dmStanding: now.standing } : {}) }; // A5 (G1): the field with the description
   });
   return moved ? { ...powerStructure, factions: next } : powerStructure;
 }

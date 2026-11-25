@@ -352,6 +352,7 @@ export const FACTION_RENAME_SURFACES = Object.freeze([
   { path: 'interSettlementRelationships[].factionName', kind: 'key', why: 'this settlement side of a neighbour link' },
   { path: 'interSettlementRelationships[].partnerFactionName', kind: 'key', why: 'the neighbour side of a link naming this faction' },
   { path: `${ROSTER}.desc`, kind: 'prose', why: 'the faction blurb names the faction' },
+  { path: `${ROSTER}.dmStanding`, kind: 'prose', why: 'the standing sentence, stored beside the blurb (A5, RULING G1); it names other powers, and the blurb ends with it' },
   { path: `${PAIRWISE}.narrative`, kind: 'prose', why: 'generated relationship prose names both factions' },
   { path: `${PAIRWISE}.dmNote`, kind: 'prose', why: 'the DM aside can name the faction' },
   { path: 'powerStructure.recentConflict', kind: 'prose', why: 'the recent-conflict line is faction-phrased prose' },
@@ -910,6 +911,7 @@ export function applyFactionRenameToSettlement(settlement, oldName, newName) {
     // mentions the old name is untouched. This runs BEFORE the label check
     // because the check reads the name the two lines below are about to change.
     mark(`${ROSTER}.desc`, rewriteProse(record, 'desc', oldName, newName));
+    mark(`${ROSTER}.dmStanding`, rewriteProse(record, 'dmStanding', oldName, newName)); // A5 (G1): the standing field as the blurb, the same function
     // A doubled-niche rival's tie to the faction it contests, on the RIVAL's record.
     mark(`${ROSTER}.contestsNiche`, rewriteKey(record, 'contestsNiche', oldName, newName));
     if (factionLabel(record) !== oldName) continue;

@@ -597,7 +597,7 @@ const RIVAL_DESC_OF_HOST = Object.freeze([
 function rivalDescOf(desc) {
   const d = typeof desc === 'string' ? desc : '';
   const row = RIVAL_DESC_OF_HOST.find(([host]) => host.test(d));
-  return row ? { desc: row[1] } : {};
+  return row ? { desc: row[1], dmStanding: '' } : {}; // A5 (G1): the rival's own line carries no standing
 }
 
 /**

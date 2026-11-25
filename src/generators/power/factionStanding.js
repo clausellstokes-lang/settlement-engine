@@ -373,7 +373,7 @@ export const annotateFactionStanding = (factions, force = { body: 'garrison' }, 
           }
         }
         if (rank > 0 && !faction.isGoverning && isAppointedOccupier(faction)) standing = occupierStanding(factions.find((f) => f.isGoverning)); // BAR2-PEOPLE (PP10)
-        standing && (faction.desc = faction.desc ? faction.desc + ' ' + standing : standing);
+        Object.assign(faction, { dmStanding: standing || '' }, standing ? { desc: faction.desc ? faction.desc + ' ' + standing : standing } : {}); // A5 (RULING G1): the standing also as its own field, DM-only by its name (publicSafe.js :: PRIVATE_KEY_RE's `\bdm`), '' where none; the description keeps it
       });
 };
 
@@ -412,7 +412,7 @@ export function settleSeatHolderToRecord(record) {
   if (form) {
     for (const f of ps.factions) {
       if (!f || f === apart?.holder || typeof f.desc !== 'string') continue;
-      for (const line of [...seatHolderLinesOf('standing', { form, holder: f }), ...seatHolderLinesOf('standingVacant', { form, holder: f })]) if (f.desc.includes(line)) f.desc = f.desc.replace(` ${line}`, '').replace(line, '').trim();
+      for (const line of [...seatHolderLinesOf('standing', { form, holder: f }), ...seatHolderLinesOf('standingVacant', { form, holder: f })]) if (f.desc.includes(line)) Object.assign(f, { desc: cutLine(f.desc, line) }, typeof f.dmStanding === 'string' ? { dmStanding: cutLine(f.dmStanding, line) } : {}); // A5 (G1): the field with the description
     }
   }
   if (!apart) return;
@@ -426,5 +426,9 @@ export function settleSeatHolderToRecord(record) {
   // one row a seat: the power step's W3 or W3v (drawn off the step's stream seed) gives way to the record's, else the rank line, else appended
   const written = [...seatHolderLinesOf('standing', apart), ...seatHolderLinesOf('standingVacant', apart)].find((line) => desc.includes(line));
   const rankLine = RANK_STANDINGS.find((re) => re.test(desc));
-  apart.holder.desc = written ? desc.replace(written, own) : rankLine ? desc.replace(rankLine, own) : desc ? `${desc} ${own}` : own;
+  const settled = (/** @type {string} */ text) => (written ? text.replace(written, own) : rankLine ? text.replace(rankLine, own) : text ? `${text} ${own}` : own);
+  Object.assign(apart.holder, { desc: settled(desc) }, typeof apart.holder.dmStanding === 'string' ? { dmStanding: settled(withoutSeatAccess(apart.holder.dmStanding)) } : {}); // A5 (G1): the field with the description
 }
+
+/** A seat line cut from a text, as the pass above cuts it (A5: the description and its standing field alike). @param {string} text @param {string} line */
+const cutLine = (text, line) => text.replace(` ${line}`, '').replace(line, '').trim();
