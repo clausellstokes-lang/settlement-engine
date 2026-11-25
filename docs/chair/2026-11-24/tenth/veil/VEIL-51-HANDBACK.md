@@ -128,8 +128,12 @@ Reports to the lane's owner: a FILE, at most 200 words. My context began with a 
     test-only, merged with unit 4. (aa54a6791 does NOT merge plain under DESCARM: the composed census in
     rosterChoiceComposedHosts.walker: unit 1's exact 4 vs R5D's 23 prose rows; VEIL-55: unit 4's merge resolves it WITH unit 1 on
     the lane's tip, named in the "TIP?". 212's header on the tip: R4-IDS (36)/(36b)/(36c), STORED-PROSE (37), R5D's item (38).)
-  RIVAL: galleryVeilRival rc 0 01:22 (2 of 2), its FIRST ENDED RUN: PASS. The other arms, after, cost running.
-  RUNNING (background, 2-hour limits): `rival.sh arms after cost` (from 01:07); c4tell (data for the put-back); STANDWALK.
+  RIVAL IS CUT OUT OF UNIT 4, UNDEBUGGED, TO PHASE 2 (V1-2; told VEIL-55 and the chair 02:16): its first ended run (01:07-02:15)
+    reds ONE arm, galleryRosterChoices.pglite 1 of 37 ("R3-CURE-2 unit 1 and unit 4 (i): THE FOLD AND THE NUMBER ID ..."). All else
+    passed: chains; galleryVeilRival 2/2, galleryVeilDesc 11/11, galleryVeilRecent 13/13, galleryWithholdAlways 9/9, HandRows 25/25;
+    the four walkers; standingForms --check; typecheck rc 0; eslint 0; tests/lint 45 of 3,314 (the base's); copy 2; cost WITHIN
+    (539.3 vs 539.4 ms). Receipts `u4/rival-receipts/`.
+  RUNNING (background): c4tell (data for the put-back; queued on the mutex); STANDWALK.
   IF THIS SEAT STOPS: re-run what u4.log lacks (`sh docs/chair/2026-11-24/tenth/veil/v51/u4/u4.sh <steps>`; `sh .../rival.sh`)
   after the trees above are re-made (`git worktree add --detach` at the commits named; node_modules linked).
 - NEXT: wait for "R4-IDS MERGED <commit>" from VEIL-55, then unit 2 (R5-DESC), reading PART 42 s1 block 0 (a3bc0dc9d) and
