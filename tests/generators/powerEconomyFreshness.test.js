@@ -635,7 +635,9 @@ describe('EM-R3 — the power structure is final under a held pin', () => {
     // 31 -> 32 (2026-11-15, the close of the tail round (TAIL-CLOSE-DOORS-4, the owner's word, 2026-11-15 06:00 UTC, in the chair's chat; record docs/shift-records/2026-11-15-the-close-of-the-tail-round.json)): measured by
     // this arm's own run at the golden's tree 8c11f73ea; the round's declared economy and cast moves (the economy read off
     // the town's own record, a face for every seat of power) leave one more held receipt stale at the closeout. Still live.
-    expect(staleAtCloseout).toHaveLength(32);
+    // 32 -> 29 (B1(i), CLOSE-7 BATCH; R24e (2), "the three counts are re-stated with their cause"): the 24 desert rows of the golden
+    // corpus B1(i) moves, their withheld houses and what follows. Still live.
+    expect(staleAtCloseout).toHaveLength(29);
     expect(staleWitness, 'no stale row was captured, so the refusal below proves nothing')
       .not.toBeNull();
     expect(() => assertPowerEconomyFreshness(
@@ -783,7 +785,8 @@ describe('EM-R3 — the power structure is final under a held pin', () => {
     // 29 -> 28 (2026-11-07, FIX-FOOD-ISOLATION, A3's same cause and row, measured): town|germanic|forest|isolated.
     // 28 -> 29 (2026-11-15, the close of the tail round, TAIL-CLOSE-DOORS-4, A3's same cause, measured by this arm's own run
     // at the golden's tree 8c11f73ea): the unpinned replay recomputes one more receipt.
-    expect(refreshedAway).toHaveLength(29);
+    // 29 -> 26 (B1(i), CLOSE-7 BATCH; R24e (2)): A3's same cause, the 24 desert golden rows B1(i) moves.
+    expect(refreshedAway).toHaveLength(26);
 
     // ANTI-VACUITY (2): the refresher is not inert in general — skip it on an UNPINNED run and
     // the record moves, so the identity above is a property of the HELD path.
