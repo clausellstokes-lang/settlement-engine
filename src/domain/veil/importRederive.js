@@ -30,6 +30,7 @@ import { defenceExactOf, generateDefenseProfile } from '../../generators/defense
 import { keepOfRecord } from '../facts/keep.js';
 import { promoteStressorsToConditions } from '../conditionPromotion.js';
 import { computePublicLegitimacy } from '../../generators/factionDynamics.js';
+import { resolveFortuneLawVersion } from '../fortune/fortuneLaw.js';
 import { generateSpatialLayout } from '../../generators/spatialGenerator.js';
 import { computeBaseProsperity, deriveProsperityLabel } from '../../generators/economy/prosperity.js';
 import { rederiveCrimeTypes, rederiveRecentConflict } from './pageRederive.js';
@@ -202,13 +203,20 @@ export function rederiveInPlace(s) {
 
   // 7. THE LEGITIMACY BREAKDOWN: each withheld cause from the served labels; a cause the served document does not
   //    decide is not known and is left out.
+  //    ⛔ UNDER THE RECORD'S LAWS (V53 cures UNIT E; RULING V3 (6), the owner's rule: a place keeps its laws, through an
+  //    import too). Every engine call of this re-derive is handed the record's own config, which carries each generation
+  //    law it was born under (every row of `GENERATION_LAWS`, by its `configKey`); this callee alone takes its law apart
+  //    from the config, as its fourth argument, and was handed none, so it read the dark version 1 and a place born under
+  //    the fortune law imported with a defence cause it was never born with (vr26-city-calm-3: stored 0, re-derived 10).
+  //    The law is read off the record by the law's own resolver, as its one engine caller reads it at birth
+  //    (`power/rulingStructure.js`). @guarded-by tests/domain/generationLawsSavedPlace.test.js ("THE VEIL'S IMPORT").
   if (legitimacy) {
     const b = recOf(legitimacy.breakdown) ?? {};
     legitimacy.breakdown = b;
     for (const key of ['prosperity', 'safety', 'defense']) {
       const v = underEachOutcome(s, outcomes, (r) => {
         const label = recOf(recOf(r.defenseProfile)?.readiness)?.label;
-        return /** @type {Doc} */ (computePublicLegitimacy(recOf(r.economicState) ?? {}, typeof label === 'string' ? label : '', String(r.tier)).breakdown)[key];
+        return /** @type {Doc} */ (computePublicLegitimacy(recOf(r.economicState) ?? {}, typeof label === 'string' ? label : '', String(r.tier), resolveFortuneLawVersion(r)).breakdown)[key];
       });
       if (typeof v === 'number' && Number.isFinite(v)) b[key] = v;
       else delete b[key];

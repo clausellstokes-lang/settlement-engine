@@ -816,3 +816,126 @@ describe('SAVED-PLACE: a saved place keeps every generation law it was born unde
     }
   }, LONG);
 });
+
+// ── THE VEIL'S IMPORT RE-DERIVE (V53 cures UNIT E; RULING V3 (6): a place keeps its laws, through an import too) ──────
+//
+// `importRederive.js :: rederiveInPlace` (the gallery import's save) re-derives what the share withholds with the
+// engine's own functions. Each is handed the record's own config, which carries every law the record was born under;
+// one took its law apart from that config and was handed none (`computePublicLegitimacy`, its fourth argument), so a
+// place born under the fortune law imported with a defence cause it was never born with (vr26-city-calm-3: stored 0,
+// re-derived 10). THE ARM WALKS `GENERATION_LAWS` ROW BY ROW, READ AT RUN TIME FROM THE GRAPH IT RUNS ON: for every row,
+// the record born under it, and the record born without it, re-derived through `rederiveInPlace`, keeps the record. It
+// names no law and counts none, so a row added later is walked with no edit here; the planted row below proves it.
+
+/** The import's town: VR26's city-calm-3, the case the defect was found on. */
+const IMPORT_SEED = 'vr26-city-calm-3';
+/** What the import's save does not put back BY DESIGN: the crisis cast's rows (step 9: not known on the importer's
+ *  record) and a condition's band (step 6: recomputed from the severity). Everything else it touches must come back. */
+const NOT_KEPT_BY_DESIGN = /(^|\.)cast\.|\.severityBand$/;
+
+/** The leaf paths at which `a` and `b` differ (an array of a different length is one leaf). */
+function driftOf(a, b, path = '', out = []) {
+  const rec = (v) => Boolean(v) && typeof v === 'object' && !Array.isArray(v);
+  if (rec(a) && rec(b)) {
+    for (const k of new Set([...Object.keys(a), ...Object.keys(b)])) driftOf(a[k], b[k], path ? `${path}.${k}` : k, out);
+  } else if (Array.isArray(a) && Array.isArray(b) && a.length === b.length) {
+    a.forEach((x, i) => driftOf(x, b[i], `${path}[${i}]`, out));
+  } else if (JSON.stringify(a) !== JSON.stringify(b)) {
+    out.push(path);
+  }
+  return out;
+}
+
+/** The import's graph, fresh from one registry: the register, the birth and the import's re-deriver. */
+async function importGraph() {
+  vi.resetModules();
+  const G = /** @type {any} */ ({});
+  G.boundary = await import('../../src/domain/density/densityCreateBoundary.js');
+  G.pipeline = await import('../../src/generators/generateSettlementPipeline.js');
+  G.importRederive = await import('../../src/domain/veil/importRederive.js');
+  G.configSlice = await import('../../src/store/configSlice.js');
+  G.dials = (await import('../security/veilChain.shared.mjs')).BIRTH_DIALS;
+  await G.boundary.loadGenerationLawPayloads();
+  return G;
+}
+
+/**
+ * THE WALK: every row of `G`'s own `GENERATION_LAWS`, in its order. The record born under every row (the birth's
+ * mint, each row's marker at `litVersionOf(name)` where the mint writes none) is re-derived, and for each row the
+ * record born WITHOUT that row's marker; each must come back from `rederiveInPlace` as it was stored.
+ * @param {any} G @param {(name: string) => number} litVersionOf
+ */
+function walkImport(G, litVersionOf) {
+  const rows = Object.entries(G.boundary.GENERATION_LAWS);
+  const birth = G.boundary.birthConfig({ ...G.configSlice.DEFAULT_CONFIG, ...G.dials, settType: 'city' });
+  const underEvery = { ...birth, ...Object.fromEntries(rows.map(([name, row]) => [row.configKey, birth[row.configKey] ?? litVersionOf(name)])) };
+  const born = (config) => G.pipeline.generateSettlementPipeline(config, null, { seed: IMPORT_SEED, customContent: {} });
+  const notKept = (record) => driftOf(record, G.importRederive.rederiveInPlace(structuredClone(record))).filter((p) => !NOT_KEPT_BY_DESIGN.test(p));
+  const lit = born(underEvery);
+  /** @type {Record<string, string[]>} */
+  const drift = {};
+  for (const [name, row] of rows) {
+    expect(lit.config[row.configKey], `${name}: the record is not born under it`).toBe(underEvery[row.configKey]);
+    drift[`${name}: born under it`] = notKept(lit);
+    drift[`${name}: born without it`] = notKept(born(withoutKeys(underEvery, [row.configKey])));
+  }
+  return { rows: rows.map(([name]) => name), drift, lit, notKept, born, underEvery };
+}
+
+describe('SAVED-PLACE, THE VEIL\'S IMPORT: the import\'s re-derive keeps every generation law the record was born under (V53 UNIT E)', () => {
+  it('every row of GENERATION_LAWS, walked at run time: a record born under it, and one born without it, comes back from rederiveInPlace as stored', async () => {
+    const G = await importGraph();
+    const walked = walkImport(G, (name) => TREE[name].litVersion);
+    expect(walked.rows, 'the walk did not take the register\'s rows').toEqual(ROWS.map(([name]) => name));
+    expect(walked.drift).toEqual(Object.fromEntries(Object.keys(walked.drift).map((k) => [k, []])));
+  }, LONG);
+
+  it('THE PLANTED ROW: a law added to GENERATION_LAWS is walked with no edit, and an import that forgets it reds (planted and restored in this block)', async () => {
+    // A law no file of the tree names: its row in the register, and the one reading of it the engine makes (the
+    // defence profile's monster score, at the birth and at the import's step 5b alike), read off the config it is handed.
+    const PLANT = Object.freeze({ name: 'plantedLaw', configKey: '_plantedLawVersion', version: 2 });
+    const BOUNDARY = spec('src/domain/density/densityCreateBoundary.js');
+    const DEFENCE = spec('src/generators/defenseGenerator.js');
+    try {
+      vi.doMock(BOUNDARY, async (importOriginal) => {
+        const actual = /** @type {any} */ (await importOriginal());
+        return {
+          ...actual,
+          GENERATION_LAWS: Object.freeze({
+            ...actual.GENERATION_LAWS,
+            [PLANT.name]: Object.freeze({
+              mint: 'newSettlementPlantedLaw', module: '(planted by this arm)', dial: 'NEW_SETTLEMENT_PLANTED_LAW_VERSION',
+              configKey: PLANT.configKey, wiring: 'UNWIRED', why: 'planted: a law the import must carry with no edit',
+            }),
+          }),
+        };
+      });
+      vi.doMock(DEFENCE, async (importOriginal) => {
+        const actual = /** @type {any} */ (await importOriginal());
+        return {
+          ...actual,
+          generateDefenseProfile: (settlement, ...rest) => {
+            const d = actual.generateDefenseProfile(settlement, ...rest);
+            return settlement?.config?.[PLANT.configKey] === PLANT.version ? { ...d, scores: { ...d.scores, monster: d.scores.monster + 1 } } : d;
+          },
+        };
+      });
+      const G = await importGraph();
+      const walked = walkImport(G, (name) => (name === PLANT.name ? PLANT.version : TREE[name].litVersion));
+      expect(walked.rows, 'the planted row was not walked').toEqual([...ROWS.map(([name]) => name), PLANT.name]);
+      // The planted law moves the record, so its row can fail.
+      const without = walked.born(withoutKeys(walked.underEvery, [PLANT.configKey]));
+      expect(walked.lit.defenseProfile.scores.monster, 'the planted law moved nothing').toBe(without.defenseProfile.scores.monster + 1);
+      expect(walked.drift).toEqual(Object.fromEntries(Object.keys(walked.drift).map((k) => [k, []])));
+      // THE CATCH: the same record, its planted marker forgotten on the way into the re-derive, does not come back.
+      const forgot = structuredClone(walked.lit);
+      delete forgot.config[PLANT.configKey];
+      expect(driftOf(walked.lit, G.importRederive.rederiveInPlace(forgot)).filter((p) => !NOT_KEPT_BY_DESIGN.test(p)))
+        .toContain('defenseProfile.scores.monster');
+    } finally {
+      vi.doUnmock(BOUNDARY);
+      vi.doUnmock(DEFENCE);
+      vi.resetModules();
+    }
+  }, LONG);
+});

@@ -100,6 +100,7 @@ describe('VR26: a value sent as stored either cannot be re-derived from the serv
     const { keepOfRecord } = await import('../../src/domain/facts/keep.js');
     const { generateSafetyProfile } = await import('../../src/generators/safetyProfile.js');
     const { computePublicLegitimacy } = await import('../../src/generators/factionDynamics.js');
+    const { resolveFortuneLawVersion } = await import('../../src/domain/fortune/fortuneLaw.js');
     await loadGenerationLawPayloads();
     rows = REGISTRY_ROWS.filter((r) => r.rule === 'diffuse');
 
@@ -123,7 +124,9 @@ describe('VR26: a value sent as stored either cannot be re-derived from the serv
       r.defenseProfile = { ...(r.defenseProfile || {}), scores: dp.scores, readiness: dp.readiness, economicGates: dp.economicGates };
       if (isRec(e.safetyProfile)) e.safetyProfile.safetyLabel = generateSafetyProfile(cfg, r.tier, inst).safetyLabel;
       if (isRec(r.powerStructure?.publicLegitimacy)) {
-        const pl = computePublicLegitimacy(e, dp.readiness.label, r.tier);
+        // V53 cures UNIT E (RULING V3 (6)): under the record's laws, as every other call here reads them off its config; this
+        // callee takes its law as its fourth argument, read off the record by the law's own resolver (else the dark version 1)
+        const pl = computePublicLegitimacy(e, dp.readiness.label, r.tier, resolveFortuneLawVersion(r));
         Object.assign(r.powerStructure.publicLegitimacy, { score: pl.score, label: pl.label, color: pl.color, bg: pl.bg });
       }
       r.publicProse = composePublicProse(r);
