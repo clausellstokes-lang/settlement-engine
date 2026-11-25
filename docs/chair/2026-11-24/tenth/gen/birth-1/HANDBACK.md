@@ -21,8 +21,13 @@
   narrativeQualityCorpus "ties of one archetype…" and "all 18 archetypes…", defenceParts R13.
 
 ### 0.1 Units
-- **D2 — BUILT, COMMITTED** on `lane/birth-1-2026-11-25-d2-wip`: d590c4bd2 (cure + test), e6fe5b586 (lighting census door: files
-  3798 -> 3799, parked 494 -> 495; walker green 34/34 after). Governing run (66 files naming the fields + tests/lint whole) IN FLIGHT.
+- **D2 — DONE, PUSHED** on `lane/birth-1-2026-11-25-d2-wip` at 4ea69f420: d590c4bd2 (cure + test), e6fe5b586 (lighting census door:
+  files 3798 -> 3799, parked 494 -> 495), 4ea69f420 (the test moved to `tests/domain/prominentTieNotCovert.test.js`: tests/generators is
+  a mutation-manifest enforcer tree). Governing run at e6fe5b586 (66 files naming the two fields or the module + tests/lint whole: 287
+  files, 4,489 tests): 13 red, ALL on RED-AT-LINE (goldens x2, the two golden-corpus A1s, proseComposed, proseCorpusBytes x2,
+  narrativeQualityCorpus x2, powerStructure F31 (relationshipArchetypes.js, at the base), editCorpusRatchet A3/A7) except the manifest
+  TOTALITY, cured by the move (re-run green with the lighting and negative-anchor walkers, 80/80). D2 touches no src/data or src/domain,
+  so tests/copy is not owed.
   - Measured at the base (oracle: the raw record's covert ties): C prominent=covert 8, pressure names both ends 5; V 7 and 3 (+1 V
     prominent joining a covert pair by an open reverse tie). The chair's "one in eighteen" is the lit golden corpus's rate (32 of 525),
     not C/V's (under 1 in 100).
@@ -43,4 +48,4 @@
 - D5, D8, D7: not started.
 
 ### 0.2 Next step
-Read the D2 governing log (`scratchpad/d2/gov.log`), push -d2-wip and this branch, hand in D2 to CLOSE-7 and the chair; then D3's measure.
+D2 handed in (UNIT line to CLOSE-7 and the chair). Next: D3's measure on C and V (`tools/measure-d3.mjs`).
