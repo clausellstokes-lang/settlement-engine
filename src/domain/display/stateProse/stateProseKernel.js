@@ -441,8 +441,9 @@ function ofForms(text, slots) {
   const holds = (/** @type {string} */ name) => !!slots && isFilled(slots[name]) && holdsPossessive(slots[name]);
   return text.replace(/(\bthe )?\{([a-zA-Z_][a-zA-Z0-9_]*)\}'s (?:\{([a-zA-Z_][a-zA-Z0-9_]*)\}|([a-z]+))/g, (whole, the, a, b, word, at) => {
     /** @type {string} */ let said;
-    if (b && holds(b) && !holds(a)) said = `${/^the\s/i.test(String(slots?.[b]).trim()) ? '' : 'the '}{${b}} at ${the || ''}{${a}}`;
-    else if (holds(a)) said = `the ${b ? `{${b}}` : word} of ${the || ''}{${a}}`;
+    const of = (/** @type {string} */ name) => '{' + name + '}';
+    if (b && holds(b) && !holds(a)) said = (/^the\s/i.test(String(slots?.[b]).trim()) ? '' : 'the ') + of(b) + ' at ' + (the || '') + of(a);
+    else if (holds(a)) said = 'the ' + (b ? of(b) : word) + ' of ' + (the || '') + of(a);
     else return whole;
     return at === 0 || /[.!?]\s*$/.test(text.slice(0, at)) ? said[0].toUpperCase() + said.slice(1) : said;
   });
