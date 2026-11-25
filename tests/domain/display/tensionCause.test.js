@@ -19,7 +19,7 @@ import { factsOf } from '../../../src/domain/facts/factsOf.js';
 import { declarationAdmits, declarationOf } from '../../../src/domain/facts/factVocabulary.js';
 import { solePowerNameOf } from '../../../src/data/tensionSidePower.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../../helpers/seedFailures.js';
-import { expectAbsentWithAnchor } from '../../helpers/anchoredNegatives.js';
+import { expectAbsentWithAnchor, expectPresentThenAbsent } from '../../helpers/anchoredNegatives.js';
 import { toPublicSafe } from '../../../src/domain/display/publicSafe.js';
 import { orderForceOf } from '../../../src/domain/facts/orderForce.js';
 
@@ -268,11 +268,17 @@ describe('force_unpaid_or_cut holds on its served arms alone (CAUSES-PARITY B)',
 
 // CAUSES-PARITY-2 F (PAGE-12; the first brief's F, the chair's (3)): THE LAW ON A BORN PLACE. hxd-city-138 (born as
 // measures/page-7/sim.mjs births it) holds crime_wave by its black market alone, and the black market is its one hideable
-// house. On the gallery's hiding read (toPublicSafe, then the veil's default set) the house is gone and the served page prints
-// what the same place born WITHOUT the house (its twin: the record with the black market removed) prints; the owner's page
-// keeps the black market's own wording.
-describe('a hidden house prints what the place without it prints (CAUSES-PARITY-2 F)', () => {
-  it('hxd-city-138: served == the house-free twin; the owner keeps the black market\'s wording', async () => {
+// house. RE-STATED BY THE CHAIR'S RULING V3 (3) (VEIL-53, 2026-11-24; N102: the rule stands): on the gallery's hiding read
+// (toPublicSafe, then the veil's default set) the house is gone AND the served document carries no crime_wave tension
+// (`galleryRosterChoices.js :: applyRosterChoices`, row `history.tension.crimeWave`, drops it while the served crime signal
+// is false), so the served read prints NO crime sentence, asserted, and the served document's lack of the tension is asserted
+// first (the absence grounded, not vacuous). The owner's read keeps its sentence: the owner's record prints the black market's
+// own wording, and the same place born WITHOUT the house (its twin) prints the plain crime sentence on the owner's read and on
+// its own served read (no house is hidden there, so the tension stays). The control plants the tension back on the served
+// document and the absence arm reds; restored in the same block, it holds.
+describe('a hidden house: the owner reads the crime sentence, the served read whose document lacks the tension prints none (CAUSES-PARITY-2 F)', () => {
+  /** @type {any} */ let place = null;
+  beforeAll(async () => {
     const { generateSettlementPipeline } = await import('../../../src/generators/generateSettlementPipeline.js');
     const { birthConfig, loadGenerationLawPayloads } = await import('../../../src/domain/density/densityCreateBoundary.js');
     const { DEFAULT_CONFIG } = await import('../../../src/store/configSlice.js');
@@ -284,26 +290,76 @@ describe('a hidden house prints what the place without it prints (CAUSES-PARITY-
     const doc = /** @type {any} */ (generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: 'city' }), null, { seed: 'hxd-city-138', customContent: {} }));
     const hide = (/** @type {any} */ r) => { const pub = toPublicSafe(r); return applyVeil(pub, resolveVeil(defaultVeilFor(pub), null)); };
     const isBlackMarket = (/** @type {any} */ i) => CAUSE_HOUSES.blackMarket.has(String(i?.name ?? '').trim().toLowerCase());
+    const twin = structuredClone(doc);
+    twin.institutions = twin.institutions.filter((/** @type {any} */ i) => !isBlackMarket(i));
+    place = { doc, hide, isBlackMarket, isHideableHouse, atomHolds, twin };
+  }, 120000);
+
+  /** @param {any} record @returns {string[]} */
+  const typesOf = (record) => (record.history?.currentTensions || []).map((/** @type {any} */ x) => x.type);
+
+  /**
+   * THE ABSENCE ARM: the served document carries no crime_wave tension (anchored by the owner's record, which carries it),
+   * and the served read prints neither the owner's crime sentence nor the plain one (each anchored by a read that prints it
+   * on the same path: the owner's record, and the twin's served read).
+   * @param {any} served @param {string} context
+   */
+  const expectServedSilent = (served, context) => {
+    const { doc, hide, twin } = place;
+    const t = doc.history.currentTensions.find((/** @type {any} */ x) => x.type === 'crime_wave');
+    const plain = tensionCauseSentenceOf(twin, t);
+    expectPresentThenAbsent(typesOf(doc), typesOf(served), 'crime_wave', `${context}: the served document lacks the tension`);
+    expect(served.history.currentTensions.find((/** @type {any} */ x) => x.type === 'crime_wave'), context).toBeUndefined();
+    expectPresentThenAbsent(sentencesOf(doc), sentencesOf(served), tensionCauseSentenceOf(doc, t), `${context}: no black-market sentence`);
+    expectPresentThenAbsent(sentencesOf(hide(twin)), sentencesOf(served), plain, `${context}: no plain crime sentence`);
+  };
+
+  it('hxd-city-138: the owner\'s read prints the sentence; the served read, its document lacking crime_wave, prints none', () => {
+    const { doc, hide, isBlackMarket, isHideableHouse, atomHolds, twin } = place;
     const row = /** @type {any} */ (TENSION_CAUSES.crime_wave.causes.find((c) => c.id === 'black_market'));
     const t = doc.history.currentTensions.find((/** @type {any} */ x) => x.type === 'crime_wave');
     expect(t).toBeTruthy();
     // the place: its one hideable house is the black market, and the owner prints the black market's wording
     expect(doc.institutions.filter((/** @type {any} */ i) => isHideableHouse(i)).map((/** @type {any} */ i) => isBlackMarket(i))).toEqual([true]);
     expect(row.wordings.map((/** @type {any} */ w) => w.text)).toContain(tensionCauseSentenceOf(doc, t));
+    expect(sentencesOf(doc)).toContain(tensionCauseSentenceOf(doc, t));
     expect(atomHolds('house: black_market', /** @type {any} */ (factsOf(doc)))).toBe(true);
-    // the hiding read: the house is gone, the row does not hold, its declared atom reads no
+    // the twin: the same place with the house removed; the owner's read prints the plain crime sentence
+    // ("Crime is on the rise here." at this tip; computed by the measure's pick, never quoted)
+    expect(twin.institutions.length).toBe(doc.institutions.length - 1);
+    const plain = tensionCauseSentenceOf(twin, t);
+    expect(plain).toBe(expectedOf(twin, 'crime_wave').sentence);
+    expect(typeof plain === 'string' && plain.length > 0).toBe(true);
+    expect(sentencesOf(twin)).toContain(plain);
+    expect(tensionCauseSentenceOf(doc, t)).not.toBe(plain);
+    // the twin's served read: no house is hidden there, the tension stays, and it prints the same plain sentence
+    const twinServed = hide(twin);
+    const tt = twinServed.history.currentTensions.find((/** @type {any} */ x) => x.type === 'crime_wave');
+    expect(tt).toBeTruthy();
+    expect(tensionCauseSentenceOf(twinServed, tt)).toBe(plain);
+    // the hiding read: the house is gone, the row does not hold, its declared atom reads no, and the tension is withheld
     const served = hide(doc);
-    const t2 = served.history.currentTensions.find((/** @type {any} */ x) => x.type === 'crime_wave');
     expect(served.institutions.some(isBlackMarket)).toBe(false);
     expect(TENSION_CAUSE_HOLDS[row.holds](served, factsOf(served))).toBe(false);
     expect(atomHolds('house: black_market', /** @type {any} */ (factsOf(served)))).toBe(false);
-    // the twin: the same place with the house removed
-    const twin = structuredClone(doc);
-    twin.institutions = twin.institutions.filter((/** @type {any} */ i) => !isBlackMarket(i));
-    expect(twin.institutions.length).toBe(doc.institutions.length - 1);
-    const plain = tensionCauseSentenceOf(twin, t);
-    expect(tensionCauseSentenceOf(served, t2)).toBe(plain);
-    expect(tensionCauseSentenceOf(hide(twin), t2)).toBe(plain);
-    expect(tensionCauseSentenceOf(doc, t)).not.toBe(plain);
-  }, 120000);
+    expectServedSilent(served, 'hxd-city-138 served');
+  });
+
+  it('the control: a crime_wave tension planted on the served document reds the absence arm; restored, it holds', () => {
+    const { doc, hide, twin } = place;
+    const t = doc.history.currentTensions.find((/** @type {any} */ x) => x.type === 'crime_wave');
+    const served = hide(doc);
+    const list = served.history.currentTensions;
+    const before = list.length;
+    list.push(structuredClone(t));
+    try {
+      // the catch: the planted document prints the plain crime sentence, and the absence arm reds on it
+      expect(sentencesOf(served)).toContain(tensionCauseSentenceOf(twin, t));
+      expect(() => expectServedSilent(served, 'planted')).toThrow(/REMOVAL/);
+    } finally {
+      list.splice(before);
+    }
+    expect(list.length).toBe(before);
+    expectServedSilent(served, 'restored');
+  });
 });
