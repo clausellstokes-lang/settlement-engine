@@ -84,6 +84,9 @@ export const FOLLOWER_BY_BEFORE = Object.freeze({
  */
 export const NO_PRONOUN_TAILS = Object.freeze(new Set(['would rather keep to themselves', 'cannot finish theirs']));
 
+/** E1: a word of the role is a possessive ("the network's head", "the carriers' master") */
+const ROLE_POSSESSIVE = /[\p{L}\p{N}](?:['’]s|s['’])(?=\s|$)/u;
+
 /** a name stands on its own: no letter or digit before it, none after (regex literals, so the copy's voice count reads no '!') */
 const NOT_AFTER_LETTER = /(?<![\p{L}\p{N}])/u.source;
 const NOT_BEFORE_LETTER = /(?![\p{L}\p{N}])/u.source;
@@ -99,12 +102,16 @@ const capFirst = (s) => (s ? s[0].toUpperCase() + s.slice(1) : s);
  * The mention a later occurrence takes, without its case: a pronoun's gender, or the word that stands for the person.
  * @param {{ name: string, gender: string, role: string }} p @param {Array<{ name: string, gender: string, role: string }>} named
  * @param {boolean} [noPronoun] the pronoun rung skipped (a mention before a tail of `NO_PRONOUN_TAILS`)
+ * @param {boolean} [possessive] the mention stands before "'s" (E1: a role holding a possessive is then skipped)
  * @returns {{ pronoun: 'female' | 'male' } | { word: string } | null}
  */
-function mentionOf(p, named, noPronoun = false) {
+function mentionOf(p, named, noPronoun = false, possessive = false) {
   const others = named.filter((q) => q !== p);
   if (!noPronoun && (p.gender === 'female' || p.gender === 'male') && !others.some((q) => q.gender === p.gender)) return { pronoun: p.gender };
-  if (p.role && !others.some((q) => q.role.toLowerCase() === p.role.toLowerCase())) return { word: p.role };
+  // E1 (WORDS-1, the tenth chair's G5): before "'s", a role that holds a possessive ("the network's head") is skipped and the
+  // next rung taken ("Lee's reputation"), never "the network's head's reputation"; the leaf's own test of a possessive word,
+  // as `powerSentenceName.js :: holdsPossessive` reads it (two pure leaves, no import between them)
+  if (p.role && !(possessive && ROLE_POSSESSIVE.test(p.role)) && !others.some((q) => q.role.toLowerCase() === p.role.toLowerCase())) return { word: p.role };
   const words = p.name.split(/\s+/);
   const surname = words[words.length - 1];
   if (words.length > 1 && !others.some((q) => q.name.split(/\s+/).includes(surname))) return { word: surname };
@@ -182,9 +189,9 @@ function oneSentence(sentence, people) {
   for (const h of hits) {
     if (!seen.has(h.p)) { seen.add(h.p); continue; }
     const after = sentence.slice(h.end).trimStart();
-    const m = mentionOf(h.p, named, [...NO_PRONOUN_TAILS].some((t) => after.startsWith(t)));
-    if (!m) continue;
     const possessive = /^['’]s(?![\p{L}\p{N}])/u.test(sentence.slice(h.end));
+    const m = mentionOf(h.p, named, [...NO_PRONOUN_TAILS].some((t) => after.startsWith(t)), possessive);
+    if (!m) continue;
     let word; let end = h.end;
     if ('pronoun' in m) {
       const forms = PRONOUN[m.pronoun];

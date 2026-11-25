@@ -24,7 +24,7 @@
  * OWNER'S VETO; nothing here is imported by the generator, and the one import is the possessive leaf (a pure leaf).
  */
 
-import { powerNameWithArticle, powerPossessive, powerSentenceName, powerVerb } from './powerSentenceName.js'; // COHERENCE-POWERS-7 (R3): a power's possessive through the one leaf, never a hand-formed "'s"
+import { holdsPossessive, powerNameWithArticle, powerPossessive, powerSentenceName, powerVerb } from './powerSentenceName.js'; // COHERENCE-POWERS-7 (R3): a power's possessive through the one leaf, never a hand-formed "'s"
 
 /**
  * A POWER IN A SENTENCE TAKES ITS ARTICLE (NAMES-1, the seventh chair's ruling CN1 of 2026-11-20, vetoable by the owner):
@@ -36,6 +36,8 @@ import { powerNameWithArticle, powerPossessive, powerSentenceName, powerVerb } f
 const the = (name, start = false) => powerNameWithArticle(name, start);
 /** @param {unknown} name @param {boolean} [start] @returns {string} the article form's possessive */
 const theOwn = (name, start = false) => `${the(name, start)}${powerPossessive(name).slice(powerSentenceName(name).length)}`;
+/** E1 (WORDS-1, G5): "the Guard's requests"; a name that holds a possessive, "the requests of the Thieves' Guild" @param {unknown} name @param {string} noun @returns {string} */
+const ownNoun = (name, noun) => (holdsPossessive(powerSentenceName(name)) ? `the ${noun} of ${the(name)}` : `${theOwn(name)} ${noun}`);
 /**
  * A WORD THAT FOLLOWS A POWER TAKES ITS NUMBER (NAMES-3, the seventh chair's rulings CV1 and CV7 of 2026-11-20, vetoable by
  * the owner): every verb whose subject is a power, and every "it"/"its" said of one, is written in both numbers and filled
@@ -192,8 +194,8 @@ function askerLine(f) {
   // NAMES-1 (CN1): every power with its article, "The" where it opens the line
   if (f.rank === 1) return `${f.name} heads ${the(f.ruler)} and also holds ${share} in ${the(f.power)}, so what ${the(f.power)} ${powerVerb(f.power, 'wants', 'want')} from ${the(f.ruler)} goes straight to the top.`; // NAMES-2 (item 5): the verb takes the power's number
   if (f.rank === 2) return `${the(f.power, true)} ${agree(f.power, 'brings', 'bring')} ${agree(f.power, 'its', 'their')} requests to ${the(f.ruler)} through ${f.name}, second in ${the(f.ruler)}, who holds ${share} in ${the(f.power)}.`;
-  if (f.rank === 3) return `${f.name} is third in ${the(f.ruler)} and holds ${share} in ${the(f.power)}, and carries ${theOwn(f.power)} requests to the two above.`;
-  return `While the seat of ${the(f.ruler)} stands empty, ${agree(f.ruler, 'its', 'their')} steward ${f.name} holds ${share} in ${the(f.power)}, and ${theOwn(f.power)} requests go through ${f.name}.`;
+  if (f.rank === 3) return `${f.name} is third in ${the(f.ruler)} and holds ${share} in ${the(f.power)}, and carries ${ownNoun(f.power, 'requests')} to the two above.`;
+  return `While the seat of ${the(f.ruler)} stands empty, ${agree(f.ruler, 'its', 'their')} steward ${f.name} holds ${share} in ${the(f.power)}, and ${ownNoun(f.power, 'requests')} go through ${f.name}.`;
 }
 
 /**
