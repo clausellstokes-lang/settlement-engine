@@ -93,3 +93,14 @@ disorder inside the place; an outside threat beside adequate law is two truths; 
 RULED OUT, LISTED FOR THE OWNER's EYE: #2 "Stable" beside "Public legitimacy: Contested" (C 7, V 75); #5 "keeps people
 under arms" beside "Defense: Vulnerable" (C 12, V 31); #12 no healer on Defense and in Daily Life (C 22, V 9). NOT
 DISAGREEMENTS: #14, #15. #13 is G3. THE PROOF: the whole census re-run after, all pairs before and after.
+
+**G7 (09:52 UTC): D6, THE CONTENDER's WORD: "COULD CONTEND", EVERY TIED CARD, SUBORDINATE INCLUDED.** WORDS-1's measure at
+0ec96f13d (`reports/D6.md` on `lane/words-1-2026-11-25`): the word lives on the card's label "Contender" and the
+roster's "Contests the seat"; nothing else moves. The first contender is tied to the printed ruler (dependent or
+symbiotic) on C 442 of the 632 pages that print one and on V 265 of 611; with subordinate, C 469 and V 400. THREE
+WORDINGS BROUGHT: (1) "Could contend" / "Could contest the seat"; (2) "Tied to the ruler" / "Tied to the ruler; could
+take the seat"; (3) "In reach of the seat". PICKED: (1). SCOPE: every tied card, tied meaning dependent, symbiotic OR
+subordinate (pages changed: C 502, V 452): a power the page shows as bound to the ruler does not "contest" in the
+present tense. A component's word; no record, standing, tie or order moves. OWED AS A COUNT: of the cards that keep
+"Contests the seat", how many hold a recorded conflict with the holder. THE OWNER's VETO LIST AT THE END GAINS the two
+phrases.
