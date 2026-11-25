@@ -162,10 +162,30 @@ GUARD MERGED (06:15 UTC) onto cures as eaf34abde (from -guard-wip 4569e73aa).
 - STEP B is RUNNING (same builder): (c2) merged 91c2b233f vs parent cc7ddec1c, (c1), and the four drift counts (3ii).
 - IF (c2) has ONE differing row: `git -C /home/user/wt/cures revert -m 1 eaf34abde`, then tell the chair.
 
-THE NEXT COMMAND: on step B's message:
-- if (c2) is 180/180 and the drift is <= 10, run the merged cures' gates (GUARD's own tests, tests/lint, tests/copy), push, and
-  send the GUARD line;
-- then brief BATCH (`close-7/briefs/BATCH.md`, narrow) for the same builder.
+GUARD DONE AND THE LINE SENT (06:44 UTC). The cures tip is 0ec96f13d.
+- Step B on 116 births: (c2) 180/180; (c1) 180/180; drift 180/9/1/4 (seated plus re-dealt = 5 <= 10).
+- The doors at the GUARD merge:
+  - the lighting census 91c2b233f (3796 -> 3798);
+  - the observed-shape register 0ec96f13d (`node scripts/check-observed-shape-readers.mjs --write`, shrink-only; input = the
+    distillate; walker 47/47).
+- Gates: copy 172/172; lint only the known three.
+- NEW RED ROWS for RED-AT-LINE ("bundle freshness", R24k 4a):
+  - intentAtlasBundle.freshness;
+  - edgeSharedBundleReproducibility › intentAtlasBundle.meta.json.
+- Red before GUARD as well: that test's aiCharter, aiGrounding, aiOutputSchema and engineBundle rows, and dmLayerGoldenIsolation
+  A7 (a golden).
+BATCH DISPATCHED to the same builder (a45b468ed08040c87). Brief `close-7/briefs/BATCH.md`, in /home/user/wt/batch on -batch-wip,
+cut at 0ec96f13d.
+
+THE NEXT COMMAND: on BATCH's message:
+- read `close-7/reports/BATCH.md` and the diff once (`git -C /home/user/wt/batch diff --stat 0ec96f13d..HEAD`);
+- re-read the ruling's lines 45-79, 138-157 and 182-197;
+- merge onto cures, run the gates, push, and send the BATCH line;
+- THEN THE LANDING: re-make FOR-THE-OWNER, read the sizes, and send "CLOSE-7 <commit>" with the hand-in. The hand-in names:
+  - the bundle rows and the two lint counts' causes (FEDFARE);
+  - GUARD's diff for the chair to read;
+  - REDERIVE-DRIFT written down;
+  - the veto list: sick care, K1, K2, food production ≥ adequate, and C1's three names.
 
 ### 0.1 Ground
 - THE LIT TREE (before every cure): `/home/user/wt/lit`, detached at d447ee31e (the flip; `origin/lane/close-6-2026-11-23-flip`).
