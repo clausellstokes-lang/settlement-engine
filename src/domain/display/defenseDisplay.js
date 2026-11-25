@@ -995,4 +995,4 @@ function diffuseUnderCoordinatedWave(row, settlement) {
   const note = diffuseNoteAsPrinted(row.note, settlement);
   return note === row.note ? row : Object.freeze({ ...row, note });
 }
-import { beastsReadinessOf } from '../domain/facts/beastsReadiness.js'; // P9 (RULING G22): the beasts grade read against the need; at the file's end, so no cited line moves
+import { beastsReadinessOf } from '../facts/beastsReadiness.js'; // P9 (RULING G22): the beasts grade read against the need; at the file's end, so no cited line moves
