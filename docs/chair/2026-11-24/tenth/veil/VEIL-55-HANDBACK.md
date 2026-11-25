@@ -5,7 +5,7 @@ THE CHAIR is the tenth chair, session_019yED1SUxGVHyjQnoqoFvQ8. MY START MESSAGE
 session_019yED1SoJ6KH9Wyp2Fera7R. IF YOUR CONTEXT BEGINS WITH A SUMMARY: tell the chair in one line, re-read that file and this
 section before judging anything. Every hour here is read from `date -u`.
 
-## 1. WHERE THE LANE STANDS (my memory; current at this push, 00:30 UTC 2026-11-25)
+## 1. WHERE THE LANE STANDS (my memory; current at this push, 01:16 UTC 2026-11-25)
 
 THE LAW: as VEIL-50's hand-back section 1 "THE LAW" (no pull request; push only `lane/veil-55-2026-11-24*` by the local branch's
 own name, ls-remote first; never --no-verify, force, master; every database local, PGHOST=/var/tmp/rv7; no `supabase` command).
@@ -77,6 +77,17 @@ A SUCCESSOR ON ANOTHER ACCOUNT, THE NEXT COMMAND: in a fresh container, `npm ci`
 - UNIT 3 (VEIL-52, `-mcsql-wip` 75a410f1b): um green at the map doors (0 of 7, 0 of 5); proof (b) 11 red = two test pins
   of 211's member (N84 (a)): a builder granted by me, test-only, on condition the link's page lacks the three paths too.
   PP (the owner's measure): the chair took it; PP-TODAY (master's chain) is the chair's word to VEIL-52.
+
+### RULINGS SINCE V6 (the chair's, 2026-11-25; written into `veil/RULING-V1.md` on `lane/chair-2026-11-08`)
+- V11 READ-COST: a migration of its own after phase 1's SQL merges (one row's tile; tile columns by trigger); VEIL-52 after unit 3;
+  placed in my PLAN-2.
+- V15 UNIT 4: phase 1 is the CUT ALONE; the shared page prints NO standing; no marker, no reader S; V14 (1) fail closed, (2) the
+  walker's totality, (5) "no standing on any non-owner read" stand; the loss listed under V4; the return is the put-back's.
+- V16 V3 (5) transferTakerOf: FAIL CLOSED where two or more takers (no holder anywhere on the page; one function, a walker; the
+  owner's read asserted; red first by the two-transfer plant; the reaching count stated).
+- The allowance at 32 per cent at 01:15; the chair's guess 17-22 hours: order phase 1's merges whole as early as possible.
+- The container restarted at ~00:41: p1 resumed from s140 (log `/var/tmp/v55/p1.log`); results before it stand (run4, ctrl, t140).
+- t140 (the form on the gate's 140, gallery and link): L1 0 of 3,360 each; 0 stored ids served; L2 84 = N117's 7 places.
 
 ### THE SEATS, THE RULINGS, WHAT IS OWED
 As VEIL-50's hand-back section 1 (VEIL-51, 52, 53; VEIL-54 not seated; V1 to V6; PLAN-2 and VEIL-52's owner measure owed
