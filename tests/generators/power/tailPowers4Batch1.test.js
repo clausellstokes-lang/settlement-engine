@@ -51,7 +51,10 @@ describe('TAIL-POWERS-4 · batch 1: a conflict line claims what the place bears'
 
   /** KEEP: each original where the place bears it. seed -> the line that still prints */
   const KEEP = /** @type {Record<string, string>} */ ({
-    'r2r-hamlet-8': 'and the families on each side no longer speak to one another', // a hamlet of 57
+    // RULING G13 (WORDS-2 E3): the stock grazing line prints only where herding leads the food; r2r-hamlet-8 (a hamlet of 57
+    // on fish) now prints the shore's quarrel, so the KEEP is read where herding leads, a hamlet of 73.
+    'r2r-hamlet-22': 'and the families on each side no longer speak to one another', // a hamlet of 73, herding leads
+    'r2r-hamlet-8': 'A dispute over rights on the shore and access to water', // a hamlet of 57 on the shore, fish leads
     'r2r-metropolis-17': 'The merchant class is outbuying noble landholdings. Three estates have changed hands', // a metropolis
     'r2r-town-10': 'The merchant class is outbuying noble landholdings.', // a town
   });
