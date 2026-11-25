@@ -23,63 +23,107 @@ const ROWS = arg('rows'); const REC = arg('rec'); const OUT = arg('out'); const 
 export const LEXICON = {
   market: [
     ['market.none', '-', /\b(?:keeps|has|holds) no market\b|\bno market or fair\b|\bthere is no market\b|\bhaving no market\b|\bno market of (?:its|any)\b|\bwhich has no market\b|\bno stall to take and no market day\b/i],
-    ['market.held', '+', /\bmarket day is\b|\bthe market (?:is|fills|runs|opens|square)\b|\b(?:its|the) market (?:draws|brings|sets)\b|\bbuyers? (?:come|crowd) to (?:the|its) market\b/i],
+    ['market.held', '+', /\bmarket day is\b|\bthe market is open\b|\bthe market (?:fills|runs|opens|square)\b|\b(?:its|the) market (?:draws|brings|sets)\b|\btraders at its market\b/i],
   ],
   food: [
-    ['food.plenty', '+', /\bmore than enough to eat\b|\bgoes? (?:to bed )?hungry\b(?<=nobody[^.]*)|\bfood is (?:not|never) a worry\b|\bsuggests to a visitor that food is a worry\b|\beats well\b|\bplenty to eat\b|\bwell fed\b/i],
-    ['food.short', '-', /\bhunger is (?:already )?here\b|\bmost households go short\b|\bfood trades are failing\b|\bnot enough to eat\b|\bfood the (?:town|city|village|hamlet|thorp|place) would miss\b|\bgoes? hungry\b(?<!nobody[^.]*)|\bfood is (?:short|scarce)\b|\bsell(?:s|ing)? [^.]*food it (?:cannot|can't) spare\b/i],
+    ['food.plenty', '+', /\bmore than enough to eat\b|\bnobody here goes (?:to bed )?hungry\b|\bsuggests to a visitor that food is a worry\b|\bFood is not what keeps\b|\beats well\b|\bgrows (?:far |a little )?more than it eats\b|\bnobody has to think about the pace\b/i],
+    ['food.short', '-', /\bhunger is (?:already )?here\b|\bhouseholds go short\b|\bfood trades are failing\b|\bnot enough to eat\b|\bfood the \{T\} would miss\b|\bgoes? hungry\b(?<!nobody here goes(?: to bed)? hungry)|\bfood is (?:short|scarce)\b|\bfalls (?:a little )?short of the food\b|\btighter belts\b/i],
   ],
-  defencePay: [
-    ['pay.paid', '+', /\bpays wages for its defen[cs]e\b|\bpays (?:its|the) (?:soldiers|guards|watch|garrison)\b/i],
-    ['pay.unpaid', '-', /\bno money to pay them\b|\b(?:soldiers|guards|watch|garrison) (?:go|goes|have gone) unpaid\b|\bwages? (?:are|is) (?:owed|late|in arrears)\b/i],
+  pay: [
+    ['pay.paid', '+', /\bpays wages for its defen[cs]e\b|\bkeeps paid guards\b|\bdraw wages\b/i],
+    ['pay.broke', '-', /\bno money to pay them\b|\bwould have to borrow the money first\b|\bnothing laid by to pay\b|\bcannot fund\b|\bno money to meet trouble\b/i],
+    ['pay.flush', '+', /\baccounts have money in hand\b|\bcan buy what a bad season needs\b/i],
   ],
   walls: [
     ['walls.none', '-', /\bhas no wall\b|\bno wall (?:marks|to fall back)\b|\bunwalled\b|\bwithout walls\b/i],
-    ['walls.some', '+', /\b(?:its|the) (?:town |city )?walls (?:are|stand|hold|keep|were)\b|\bbehind (?:its|the) walls\b|\bkeeping its walls\b|\bthinks of the (?:town |city )?walls\b/i],
+    ['walls.some', '+', /\b(?:its|the) (?:\{T\} )?walls (?:are|stand|hold|keep|were)\b|\bbehind (?:its|the) walls\b|\bkeeping its walls\b|\bthinks of the (?:\{T\} )?walls\b|\bbeneath the walls\b|\bwalls are walked\b/i],
+  ],
+  watch: [
+    ['watch.none', '-', /^There is no watch\.|\bkeeps no (?:watch|guard)\b|\bno watch (?:is kept|walks)\b/i],
+    ['watch.some', '+', /^(?:Professional \{T\} watch|City watch;|Town watch;)|\bthe (?:garrison and \{T\} )?watch keep|\bthe watch (?:answers|walks|keeps|is)\b|\bCrime at \{S\} is outrunning the watch\b/i],
   ],
   magic: [
-    ['magic.none', '-', /\bmagic is not a thing\b|\bno magic (?:is|here)\b|\bknows? no magic\b|\bwithout magic\b/i],
-    ['magic.some', '+', /\b(?:the Art|magic) (?:is|are) (?:used|practised|worked|common|sold|bought)\b|\b(?:its|the) (?:wizards?|mages?|sorcerers?) (?:sell|work|keep|are)\b/i],
+    ['magic.none', '-', /^Reliance on magic: None$|\bmagic is not a thing\b|\bwithout any magic at all\b/i],
+    ['magic.relied', '+', /^Reliance on magic: Relied upon$|\bA busy market for spell services\b|\bSpell scrolls for sale\b|\bMages' district\b/i],
   ],
   healer: [
-    ['healer.none', '-', /\bno healer (?:is kept|here|in)\b|\bthere is no healer\b/i],
-    ['healer.some', '+', /\b(?:the|its) healer (?:is|keeps|sees|tends)\b|\bthe sick (?:go|are taken) to (?:the|its) (?:healer|infirmary|hospital)\b/i],
-  ],
-  garrison: [
-    ['garrison.none', '-', /\bkeeps no (?:garrison|soldiers|watch|militia|guard)\b|\bno one (?:here )?under arms\b|\bnobody (?:here )?under arms\b|\bhas no (?:garrison|watch|militia)\b/i],
-    ['garrison.some', '+', /\bkeeps people under arms\b|\b(?:its|the) (?:garrison|watch|militia) (?:keeps|holds|walks|patrols|is (?:strong|ready))\b/i],
+    ['healer.none', '-', /\bno healer (?:is kept|here)\b|\bthere is no healer\b|\bno healer to send for\b/i],
+    ['healer.some', '+', /\b(?:the|its) healer (?:is|keeps|sees|tends)\b|\bhouse for the sick\b|\bthe sick (?:go|are taken) to\b/i],
   ],
   wealth: [
-    ['wealth.poor', '-', /\b(?:stays|is|remains) poor\b|\bin poverty\b|\bscrapes? by\b/i],
-    ['wealth.rich', '+', /\bnobody here calls the \w+ poor\b|\b(?:is|grows?|has grown) (?:wealthy|rich|prosperous)\b|\bdoes well on it\b/i],
+    ['wealth.poor', '-', /\b(?:stays|is|remains) poor\b|\bin poverty\b|\bscrapes? by\b|\bthe \{T\} is poor\b/i],
+    ['wealth.ok', '+', /\bnobody here calls the \{T\} poor\b|\b(?:is|grows?|has grown) (?:wealthy|rich|prosperous)\b|\bdoes well on it\b|\bmoney laid by\b/i],
   ],
   order: [
-    ['order.calm', '+', /\bnobody (?:here )?(?:locks|bars) (?:a|their) door\b|\bcrime is (?:rare|low|unknown)\b|\bthe streets are safe\b/i],
-    ['order.unrest', '-', /\border among the people has gone\b|\bcrime (?:is|runs) (?:rife|high|everywhere)\b|\bthe streets are not safe\b|\briots?\b/i],
+    ['order.calm', '+', /\bcrime is (?:rare|low|unknown)\b|\bthe streets are safe\b|\bnobody (?:here )?(?:locks|bars) (?:a|their) door/i],
+    ['order.crime', '-', /\border among the people has gone\b|\bcrime (?:is|runs) (?:rife|high|everywhere)\b|\bCrime at \{S\} is outrunning\b|\brecord of crimes at \{S\} grows faster\b|\bthe streets (?:stay )?badly (?:watched|guarded)\b/i],
+  ],
+  rule: [
+    ['rule.stable', '+', /^Governed by .* · Stable$/],
+    ['rule.broken', '-', /\bno stable governing authority\b|\bno longer trust those in charge\b|\bopen doubt here about whether\b|^Governed by .* · (?:Fractured|Contested|Unstable|Collapsed)$/i],
   ],
   seat: [
     ['seat.empty', '-', /\bseat (?:stands |lies |is )?empty\b|\bno one (?:holds|sits in) the seat\b|\bthe seat is vacant\b|\bnobody governs\b/i],
-    ['seat.held', '+', /\bholds the seat\b|\b(?:governs|rules) (?:here|in name|{S})\b/i],
+    ['seat.held', '+', /\bholds the seat\b|\bgoverns in name\b/i],
   ],
   trade: [
-    ['trade.none', '-', /\balmost nothing changes hands\b|\btrade (?:has )?stopped\b|\bnobody comes in to (?:sell|trade)\b/i],
-    ['trade.busy', '+', /\btrade (?:is brisk|flows|thrives)\b|\bthe roads bring buyers\b|\bfills: the roads bring\b/i],
+    ['trade.none', '-', /\balmost nothing changes hands\b|\btrade (?:has )?stopped\b|\bnobody comes in to (?:sell|trade)\b|\bLittle that comes past \{S\} stops there\b/i],
+    ['trade.busy', '+', /\bthe roads bring buyers\b|\bthe road is busy\b|\b's road is busy\b|\bBuyers from outside come\b|\bThe carts that leave \{S\}\b/i],
   ],
   temple: [
     ['temple.none', '-', /\bno (?:temple|church|shrine) (?:stands|here|of its own)\b|\bkeeps no (?:temple|church|shrine|priest)\b|\bwhen a priest comes through\b/i],
-    ['temple.some', '+', /\b(?:its|the) (?:temple|church|shrine|chapel) (?:stands|is|keeps|holds|bells?)\b|\b(?:the|its) priest (?:keeps|holds|leads|says)\b/i],
+    ['temple.some', '+', /\b(?:its|the) (?:temple|church|shrine|chapel) (?:stands|is|keeps|holds|bells?)\b|\bthe priest (?:has|keeps|holds|leads|says|wants)\b/i],
+  ],
+  defence: [
+    ['defence.armed', '+', /\bkeeps people under arms\b|\bpays wages for its defen[cs]e\b|\bkeeps paid guards\b/i],
+    ['defence.bare', '-', /^There is no watch\.|\bnobody would\b(?=[^.]*threat)|\bhas no wall\b|\bno one (?:here )?under arms\b/i],
+  ],
+  seatShape: [
+    ['seat.one', '+', /^A headman settles disputes\b|^A (?:lord's steward|reeve elected|single household head)\b|\bOne household head acts\b/i],
+    ['seat.many', '-', /^The ruling (?:two|three|four|five) of (?:Headman's Authority|Elected Reeve|Feudal Stewardship)\b|\bthe whole (?:Headman's Authority|Elected Reeve) must agree\b/i],
+  ],
+  viability: [
+    ['viable.no', '-', /^Viability=Not viable$/],
+    ['viable.yes', '+', /\bpays its way from year to year\b/i],
+  ],
+  danger: [
+    ['danger.none', '-', /\bnothing threatens\b|\bno threat (?:at|near)\b|\bsafe from (?:raids|beasts|monsters)\b/i],
+    ['danger.beasts', '+', /\bbeasts of the country around it come right up\b|\bMonsters prowl\b|\bMonster attacks\b|\babandoned after attacks\b/i],
   ],
 };
-/** a sentence about the place itself (its name, "here", or the place by its size word); cards and labels are not */
-export const ABOUT_PLACE = /\{S\}|\bhere\b|\bthe (?:thorp|hamlet|village|town|city|metropolis|place|settlement)\b/i;
-/** sections whose sentences speak of the past or of one person: never counted for a presence topic */
+/**
+ * THE LABELS: a health or foundations label is a claim too. Each row: the label's words, the topic it states, and its values'
+ * polarity (a value not listed is a middle value: neither). The page prints them as "<Label><Value>" (Foundations, Food
+ * Security) or as two lines (the Systems Health grid: "Prosperity", "Comfortable"); both are read as "<Label>=<Value>".
+ */
+export const LABELS = [
+  ['Food Security', 'food', { Secure: '+', Pressured: '-', Deficit: '-', 'Deficit — active famine': '-' }],
+  ['Food', 'food', { Secure: '+', Pressured: '-', Deficit: '-', 'Deficit — active famine': '-' }],
+  ['Prosperity', 'wealth', { Prosperous: '+', Comfortable: '+', Poor: '-', Struggling: '-' }],
+  ['Safety', 'order', { Unsafe: '-', Dangerous: '-', Desperate: '-', Volatile: '-' }],
+  ['Law & order', 'order', { Adequate: '+', Critical: '-', Collapsed: '-' }],
+  ['Healing capacity', 'healer', { Adequate: '+' }],
+  ['Public legitimacy', 'rule', { Contested: '-' }],
+  ['Ruling authority', 'rule', { Critical: '-' }],
+  ['Defense', 'defence', { Fortress: '+', 'Well-defended': '+', Defensible: '+', Vulnerable: '-', Undefended: '-' }],
+  ['Defense readiness', 'defence', { Adequate: '+', Critical: '-', Collapsed: '-' }],
+  ['Viability', 'viability', { 'Not viable': '-' }],
+  ['Trade connectivity', 'trade', { Adequate: '+', Critical: '-' }],
+];
+const LABEL_RE = new RegExp(`^(${LABELS.map(([l]) => l.replace(/[&]/g, '\\$&')).sort((a, b) => b.length - a.length).join('|')})=?(.+)$`);
+/** a health label's value as a polarity (a middle value is neither) */
+const LABEL_POLARITY = { Secure: '+', Adequate: '+', Pressured: '-', Strained: '-', Deficit: '-', Critical: '-', Collapsed: '-', Famine: '-',
+  Prosperous: '+', Wealthy: '+', Opulent: '+', Comfortable: '+', Poor: '-', Destitute: '-', Struggling: '-',
+  Safe: '+', Secure2: '+', Unsafe: '-', Dangerous: '-', Lawless: '-' };
+/** a sentence about the place itself (its name, "here", or the place by its size word), or a label line; cards are not */
+export const ABOUT_PLACE = /\{S\}|\bhere\b|\{T\}|\bthe (?:place|settlement)\b|^(?:Food Security|Prosperity|Safety)\w|^Governed by|^Reliance on magic|^There is no watch|^(?:Professional \{T\} watch|City watch;|Town watch;)|^A headman settles|^A (?:lord's steward|reeve elected)|^The ruling (?:two|three|four|five) of|\bmust agree\b|^Viability=|\bno stable governing authority\b|\bA busy market for spell services\b|\bSpell scrolls for sale\b|\bMages' district\b|\bno longer trust those in charge\b/i;
 export const SKIP_VIEWS = new Set(['World/History', 'World/NPCs', 'World/Relationships', 'Notes/DM Notes', 'Notes/AI Notes', 'Notes/Chronicle']);
 
 const sentences = (line) => String(line).split(/(?<=[.;!?])\s+(?=[A-Z"“'‘(])/).map((s) => s.trim()).filter((s) => s.length > 12);
 const norm = (s, name) => {
   let t = s;
   if (name) t = t.split(name).join('{S}');
-  return t.replace(/\d[\d,.]*/g, '{N}');
+  return t.replace(/\b(?:thorp|hamlet|village|town|city|metropolis)\b/g, '{T}').replace(/\d[\d,.]*/g, '{N}');
 };
 
 const files = readdirSync(ROWS).filter((f) => f.endsWith('.json')).sort();
@@ -94,11 +138,29 @@ for (const f of files) {
   pages += 1;
   let name = null;
   if (REC && existsSync(join(REC, `${r.seed}.json.gz`))) name = JSON.parse(gunzipSync(readFileSync(join(REC, `${r.seed}.json.gz`)))).record?.name ?? null;
+  // else the Overview's first line: "<name><size word>· <population> pop.· …"
+  if (!name) {
+    const head = String(r.printed?.['Summary/Overview']?.[0] ?? '').split('·')[0].trim();
+    name = head.endsWith(r.size) ? head.slice(0, -r.size.length).trim() : head || null;
+  }
   /** @type {Array<{ view: string, topic: string, id: string, pol: string, text: string }>} */
   const hits = [];
   for (const [view, lines] of Object.entries(r.printed)) {
     if (!Array.isArray(lines) || SKIP_VIEWS.has(view)) continue;
     const seen = new Set();
+    // a health label printed as two lines ("Prosperity", "Comfortable") is read as one
+    for (let li = 0; li < lines.length; li++) {
+      const l = String(lines[li]);
+      const two = /^(?:Prosperity|Safety|Defense|Viability)$/.test(l) && typeof lines[li + 1] === 'string' ? `${l}=${lines[li + 1]}` : null;
+      const m = (two ?? l).match(LABEL_RE);
+      if (m) {
+        const row = LABELS.find(([lab]) => lab === m[1]);
+        const pol = row?.[2][m[2]];
+        const k = `label|${m[1]}=${m[2]}`;
+        if (pol && !seen.has(k)) { seen.add(k); hits.push({ view, topic: row[1], id: `label.${m[1]}`, pol, text: `${m[1]}: ${m[2]}` }); }
+        continue;
+      }
+    }
     for (const line of lines) for (const s of sentences(line)) {
       const t = norm(s, name);
       if (!ABOUT_PLACE.test(t)) continue;
@@ -116,7 +178,7 @@ for (const f of files) {
   const pageKeys = new Set();
   for (let i = 0; i < hits.length; i++) for (let j = 0; j < hits.length; j++) {
     const a = hits[i]; const b = hits[j];
-    if (a.topic !== b.topic || a.view === b.view) continue;
+    if (a.topic !== b.topic || (a.view === b.view && a.text === b.text)) continue;
     let kind = null;
     if (a.pol === '+' && b.pol === '-') kind = 'CONFLICT';
     else if (a.pol === '-' && b.pol === '-' && i < j) kind = 'ECHO';
