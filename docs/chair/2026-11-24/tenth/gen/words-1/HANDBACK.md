@@ -216,6 +216,12 @@ STATE AT 18:36 UTC: E8b ACCEPTED (18:24). NEXT UNIT E13b "HOW THEY DEAL" (chair 
   V 703 in 336. DESIGN proposed: one town pass beside E8b's, cards of a pair ranked by fnv1a32(seed::dealing::card id), rank 0
   keeps today's line, new lines in a NEW table (generationForkCensus pins npcData.js:1686 by line). New sentences: 67 (none
   repeat on C∪V), 57 (3 a pair), 39 (2 for each doubling pair). WAITING ON THE CHAIR'S NUMBER.
+STATE AT 18:49 UTC: CHAIR G39 (18:37): E13b RULED: 70 new sentences (every pair two lines, the 18 pairs reaching three cards three);
+  cut ON TOP OF -e8b-wip e75f090b7 as `lane/words-1-2026-11-25-e13b-wip` (merge order E8, E8b, E13b). BUILT in /home/user/wt/e13b
+  (UNCOMMITTED): src/data/people/dealingLines.js (NPC_DEALING_LINES, first lines by import; DEALING_POOL_OF_FIRST_LINE),
+  src/generators/people/dealingLinesOfTown.js (the town pass), wired at narrativeGenerator.js:1068 and pipeline.js:617 (no line
+  moves), tests/generators/people/dealingLines.test.js, manifest rationale. e13b/SENTENCES.md holds the 70 for the owner.
+  Residual (pool exhausted) expected C 16, V 9 cards. Gates (e13b-*.log) and proof (s-e13b-*, twinb-*) running.
 NOT IN STEP ONE (E8b): the card lines (tells 899/852, impressions, secrets, goal.long npcGenerator); their draws dedupe by text
 in registries (castPowers hookRegistry.tells, CarriedSecrets), so a draw-time fill would move draws: a design is owed.
 npcData.js was read in its changed region only (pairProse, the tie table), not whole: said in the hand-in.

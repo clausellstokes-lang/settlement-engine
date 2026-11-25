@@ -3,9 +3,10 @@
  * TWIN DUMP (WORDS-1): per birth of a plan, on one tree, the record's hash RAW and the hash of the record with a unit's
  * declared word change NORMALIZED away; two trees' dumps compared (`--cmp`) say how many records moved, and whether
  * anything moved BESIDES the declared change (the normalized hashes must be equal, 900 of 900). A MEASURE.
- *   node twin-dump.mjs <tree> <plan.json> <out.json> --norm=<e8|none>
+ *   node twin-dump.mjs <tree> <plan.json> <out.json> --norm=<e8|behaviour|none>
  *   node twin-dump.mjs --cmp <a.json> <b.json>
  * --norm=e8: "himself"/"herself" → "themselves"; the bound tie's asked mention before "would rather keep to" → "§".
+ * --norm=behaviour (E13b, G39): every card's `npcs[i].presentation.behaviour` set aside ("§"), nothing else.
  * Also writes, per seed, the strings that carry the normalized change (count), for the before-and-after's examples.
  */
 import { readFileSync, writeFileSync } from 'node:fs';
@@ -38,7 +39,8 @@ const out = {};
 for (const p of JSON.parse(readFileSync(PLAN, 'utf8'))) {
   const s = generateSettlementPipeline(birthConfig(p.config), null, { seed: p.seed, customContent: {} });
   const j = JSON.stringify(s);
-  out[p.seed] = { size: p.size, raw: sha(j), norm: sha(normalize(j)) };
+  const jb = NORM === 'behaviour' ? JSON.stringify({ ...s, npcs: (s.npcs || []).map((c) => (c?.presentation && typeof c.presentation.behaviour === 'string' ? { ...c, presentation: { ...c.presentation, behaviour: '§' } } : c)) }) : null;
+  out[p.seed] = { size: p.size, raw: sha(j), norm: sha(jb ?? normalize(j)) };
 }
 writeFileSync(OUT, JSON.stringify(out));
 console.log(`twin-dump ${T} ${PLAN}: ${Object.keys(out).length} births (norm ${NORM})`);
