@@ -58,6 +58,11 @@ R24g's names, plain.
 - Point 116 (the troubles rule, LIT) is landing; births will move. At my first merge of the 116 line, re-born C and V re-state
   A2's counts and B1(i)'s table.
 
+CONTAINER RESTART at about 01:20 UTC 2026-11-25. The worktrees all survived.
+- Chain one's background gate run was LOST. The mirror's uncommitted work is snapshotted as `-mirror-snap` 0ebf92c2c and pushed,
+  with `-mirror-wip` fe948997a.
+- Chain one (a4c1ad5101be44ef0) was RESUMED to finish the mirror.
+
 THE NEXT COMMAND: when the mirror's report lands, run
 `git -C /home/user/wt/mirror log --oneline e7441a93f..HEAD`, read the diff once, merge onto cures, run the gates as for A2 (the
 lighting census by its door if a test file was added), push, and send the mirror line. Then dispatch LIVE-PATH with a fresh
