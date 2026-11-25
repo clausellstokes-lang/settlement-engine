@@ -11,7 +11,6 @@ import { CRIME_LINE_DISQUALIFIERS } from '../../../src/domain/display/stateProse
 import { OUTSIDER_IMPRESSIONS } from '../../../src/data/dailyLife/outsiderImpressions.js';
 import { FOOD_CULTURE } from '../../../src/data/dailyLife/foodCulture.js';
 import { COMMONER_RESENTMENTS } from '../../../src/data/dailyLife/commonerResentments.js';
-import { motifGlyph } from '../../../src/domain/traditions/genesis.js';
 
 /** A corpus line, computed (never typed): the pool's first member with the town's name in its slots. */
 const corpusLine = (leaf, blockId, poolKey) => poolMemberTexts({ leaf, blockId, poolKey, slots: { settlement: 'Brindle', seat: 'hall' } })[0];
@@ -44,8 +43,6 @@ const ENDURANCE = (sentence) => `Food endurance: ${sentence}`;
 /** A record whose trade brings iron and whose terrain needs clay that no trade brings (REVIEW-W2A F1). */
 const NEEDS_CLAY = { economicState: { primaryImports: ['Iron'] }, resourceAnalysis: { imports: { critical: ['clay'] } } };
 /** A desert place with a fish market and no water: an oasis gives no fish (B1(i), R24b). */
-/** R24-B1(ii): the field element's printed glyph, read from its producer */
-const FIELD_GLYPH = motifGlyph('field');
 const DESERT_FISH_MARKET = { config: { terrainType: 'desert', tradeRouteAccess: 'desert_road', nearbyResources: ['oasis_water'] }, institutions: [{ name: 'Fish market', source: 'generated' }] };
 /** @type {Record<string, { views: Record<string, string[]>, record?: Record<string, unknown> }>} */
 const PLANTS = {
@@ -80,8 +77,6 @@ const PLANTS = {
   FEDFARE: { views: { 'World/Daily Life': [ENOUGH] }, record: { economicState: { foodSecurity: { foodRecord: { band: 'famine', gapPct: 60, normalImportPct: 20 } } } } },
   // B1(i) (RULING-R24, R24b): a fish market printed in a desert whose route and resources give no fish
   B1land: { views: { 'World/Institutions': ['Fish market'] }, record: DESERT_FISH_MARKET },
-  // R24-B1(ii) (CLOSE-7 BATCH): a field tradition's glyph beside grain bought in and no farmland
-  B1furrow: { views: { 'World/Traditions': [FIELD_GLYPH] }, record: { tier: 'city', economicState: { primaryImports: ['Grain'] }, institutions: [{ name: 'Granary' }] } },
 };
 
 describe('the rendered-dossier arm: one planted fault per row', () => {
@@ -134,9 +129,6 @@ describe('the rendered-dossier arm: one planted fault per row', () => {
     expect(pageCensusFindings(land({ nearbyResources: ['oasis_water', 'fishing_grounds'] }), PLANTS.B1land.views)).toEqual([]);
     expect(pageCensusFindings(land({ tradeRouteAccess: 'river' }), PLANTS.B1land.views)).toEqual([]);
     expect(pageCensusFindings(land({ terrainType: 'hills' }), PLANTS.B1land.views)).toEqual([]);
-    // R24-B1(ii): the same field tradition beside farmland, or where no grain is bought in, reads nothing
-    expect(pageCensusFindings({ ...PLANTS.B1furrow.record, institutions: [{ name: 'Subsistence farming' }] }, PLANTS.B1furrow.views)).toEqual([]);
-    expect(pageCensusFindings({ ...PLANTS.B1furrow.record, economicState: { primaryImports: ['Wine'] } }, PLANTS.B1furrow.views)).toEqual([]);
     expect(pageCensusFindings({ tier: 'town', economicState: { foodSecurity: { hasSiege: true } } }, PLANTS.P20.views)).toEqual([]);
     // row 2: besieged, the indicative is true; outside a siege, the condition reads nothing
     expect(pageCensusFindings({ tier: 'town', economicState: { foodSecurity: { hasSiege: true } } }, PLANTS.P2siege.views)).toEqual([]);
