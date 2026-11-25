@@ -1,0 +1,128 @@
+C dp-thorp-0 [indebted]
+  power  before: The creditor's agent has blocked the money for repairs. In public they talk of prudence; in private they point to a clause in the loan.
+  power  after : Word from the creditor has blocked the money for repairs. In public those in charge talk of prudence; in private they point to a clause in the loan.
+C dp-thorp-29 [indebted]
+  power  before: The creditor's agent has blocked the money for repairs. In public they talk of prudence; in private they point to a clause in the loan.
+  power  after : Word from the creditor has blocked the money for repairs. In public those in charge talk of prudence; in private they point to a clause in the loan.
+C dp-thorp-31 [indebted]
+  power  before: The creditor's agent has blocked the money for repairs. In public they talk of prudence; in private they point to a clause in the loan.
+  power  after : Word from the creditor has blocked the money for repairs. In public those in charge talk of prudence; in private they point to a clause in the loan.
+C dp-thorp-34 [indebted]
+  power  before: The creditor's agent has blocked the money for repairs. In public they talk of prudence; in private they point to a clause in the loan.
+  power  after : Word from the creditor has blocked the money for repairs. In public those in charge talk of prudence; in private they point to a clause in the loan.
+C dp-thorp-88 [indebted]
+  power  before: The creditor's agent has blocked the money for repairs. In public they talk of prudence; in private they point to a clause in the loan.
+  power  after : Word from the creditor has blocked the money for repairs. In public those in charge talk of prudence; in private they point to a clause in the loan.
+C dp-thorp-108 [indebted]
+  power  before: The creditor's agent has blocked the money for repairs. In public they talk of prudence; in private they point to a clause in the loan.
+  power  after : Word from the creditor has blocked the money for repairs. In public those in charge talk of prudence; in private they point to a clause in the loan.
+C dp-hamlet-58 [religious_conversion]
+  power  before: The split is now open: two priests, two congregations, two registers of births, deaths and marriages. The Elder Council has not said which is lawful, so nobody knows whose wedding, will or deed would stand.
+  power  after : The split is now open: the converts keep their own register of births, deaths and marriages. The Elder Council has not said which is lawful, so nobody knows whose wedding, will or deed would stand.
+C dp-village-2 [indebted]
+  power  before: The creditor's agent has blocked the money for repairs. In public they talk of prudence; in private they point to a clause in the loan.
+  power  after : Word from the creditor has blocked the money for repairs. In public those in charge talk of prudence; in private they point to a clause in the loan.
+C dp-village-16 [religious_conversion]
+  power  before: The split is now open: two priests, two congregations, two registers of births, deaths and marriages. The Elder Council has not said which is lawful, so nobody knows whose wedding, will or deed would stand.
+  power  after : The split is now open: the converts keep their own register of births, deaths and marriages. The Elder Council has not said which is lawful, so nobody knows whose wedding, will or deed would stand.
+C dp-village-78 [religious_conversion]
+  power  before: The split is now open: two priests, two congregations, two registers of births, deaths and marriages. The Elder Council has not said which is lawful, so nobody knows whose wedding, will or deed would stand.
+  power  after : The split is now open: the converts keep their own register of births, deaths and marriages. The Elder Council has not said which is lawful, so nobody knows whose wedding, will or deed would stand.
+C dp-village-82 [religious_conversion]
+  power  before: The split is now open: two priests, two congregations, two registers of births, deaths and marriages. The Elder Council has not said which is lawful, so nobody knows whose wedding, will or deed would stand.
+  power  after : The split is now open: the converts keep their own register of births, deaths and marriages. The Elder Council has not said which is lawful, so nobody knows whose wedding, will or deed would stand.
+C dp-village-92 [indebted]
+  power  before: The creditor's agent has blocked the money for repairs. In public they talk of prudence; in private they point to a clause in the loan.
+  power  after : Word from the creditor has blocked the money for repairs. In public those in charge talk of prudence; in private they point to a clause in the loan.
+C dp-village-98 [religious_conversion]
+  power  before: The split is now open: two priests, two congregations, two registers of births, deaths and marriages. The Elder Council has not said which is lawful, so nobody knows whose wedding, will or deed would stand.
+  power  after : The split is now open: the converts keep their own register of births, deaths and marriages. The Elder Council has not said which is lawful, so nobody knows whose wedding, will or deed would stand.
+C dp-town-1 [religious_conversion]
+  power  before: The split is now open: two priests, two congregations, two registers of births, deaths and marriages. The Town Mayor has not said which is lawful, so nobody knows whose wedding, will or deed would stand.
+  power  after : The split is now open: the converts keep their own register of births, deaths and marriages. The Town Mayor has not said which is lawful, so nobody knows whose wedding, will or deed would stand.
+C dp-town-13 [indebted,infiltrated]
+  power  before: The creditor's agent has blocked the money for repairs. In public they talk of prudence; in private they point to a clause in the loan.
+  power  after : Word from the creditor has blocked the money for repairs. In public those in charge talk of prudence; in private they point to a clause in the loan.
+C dp-town-23 [indebted]
+  power  before: The creditor's agent has blocked the money for repairs. In public they talk of prudence; in private they point to a clause in the loan.
+  power  after : Word from the creditor has blocked the money for repairs. In public those in charge talk of prudence; in private they point to a clause in the loan.
+C dp-town-77 [indebted]
+  power  before: The creditor's agent has blocked the money for repairs. In public they talk of prudence; in private they point to a clause in the loan.
+  power  after : Word from the creditor has blocked the money for repairs. In public those in charge talk of prudence; in private they point to a clause in the loan.
+C dp-town-84 [indebted]
+  power  before: The creditor's agent has blocked the money for repairs. In public they talk of prudence; in private they point to a clause in the loan.
+  power  after : Word from the creditor has blocked the money for repairs. In public those in charge talk of prudence; in private they point to a clause in the loan.
+C dp-town-94 [indebted]
+  power  before: The creditor's agent has blocked the money for repairs. In public they talk of prudence; in private they point to a clause in the loan.
+  power  after : Word from the creditor has blocked the money for repairs. In public those in charge talk of prudence; in private they point to a clause in the loan.
+C dp-town-122 [indebted]
+  power  before: The creditor's agent has blocked the money for repairs. In public they talk of prudence; in private they point to a clause in the loan.
+  power  after : Word from the creditor has blocked the money for repairs. In public those in charge talk of prudence; in private they point to a clause in the loan.
+C dp-city-64 [indebted]
+  power  before: The creditor's agent has blocked the money for repairs. In public they talk of prudence; in private they point to a clause in the loan.
+  power  after : Word from the creditor has blocked the money for repairs. In public those in charge talk of prudence; in private they point to a clause in the loan.
+C dp-city-86 [indebted]
+  power  before: The creditor's agent has blocked the money for repairs. In public they talk of prudence; in private they point to a clause in the loan.
+  power  after : Word from the creditor has blocked the money for repairs. In public those in charge talk of prudence; in private they point to a clause in the loan.
+C dp-city-93 [indebted]
+  power  before: The creditor's agent has blocked the money for repairs. In public they talk of prudence; in private they point to a clause in the loan.
+  power  after : Word from the creditor has blocked the money for repairs. In public those in charge talk of prudence; in private they point to a clause in the loan.
+  press. before: Vatantala owes more than it can repay; the creditor's representative arrived last month, and every civic decision since has been made with one eye on what they might accept as partial satisfaction.
+  press. after : The City-State Council took the loans and is now repaying them, and nobody here has forgotten whose decision the borrowing was.
+C dp-city-111 [indebted]
+  power  before: The creditor's agent has blocked the money for repairs. In public they talk of prudence; in private they point to a clause in the loan.
+  power  after : Word from the creditor has blocked the money for repairs. In public those in charge talk of prudence; in private they point to a clause in the loan.
+C dp-metropolis-75 [indebted]
+  power  before: The creditor's agent has blocked the money for repairs. In public they talk of prudence; in private they point to a clause in the loan.
+  power  after : Word from the creditor has blocked the money for repairs. In public those in charge talk of prudence; in private they point to a clause in the loan.
+V dp-thorp-0 [indebted]
+  power  before: The creditor's agent has blocked the money for repairs. In public they talk of prudence; in private they point to a clause in the loan.
+  power  after : Word from the creditor has blocked the money for repairs. In public those in charge talk of prudence; in private they point to a clause in the loan.
+V dp-thorp-29 [indebted]
+  power  before: The creditor's agent has blocked the money for repairs. In public they talk of prudence; in private they point to a clause in the loan.
+  power  after : Word from the creditor has blocked the money for repairs. In public those in charge talk of prudence; in private they point to a clause in the loan.
+V dp-thorp-31 [indebted]
+  power  before: The creditor's agent has blocked the money for repairs. In public they talk of prudence; in private they point to a clause in the loan.
+  power  after : Word from the creditor has blocked the money for repairs. In public those in charge talk of prudence; in private they point to a clause in the loan.
+V dp-thorp-34 [indebted]
+  power  before: The creditor's agent has blocked the money for repairs. In public they talk of prudence; in private they point to a clause in the loan.
+  power  after : Word from the creditor has blocked the money for repairs. In public those in charge talk of prudence; in private they point to a clause in the loan.
+V dp-thorp-88 [indebted]
+  power  before: The creditor's agent has blocked the money for repairs. In public they talk of prudence; in private they point to a clause in the loan.
+  power  after : Word from the creditor has blocked the money for repairs. In public those in charge talk of prudence; in private they point to a clause in the loan.
+V dp-thorp-120 [indebted]
+  power  before: The creditor's agent has blocked the money for repairs. In public they talk of prudence; in private they point to a clause in the loan.
+  power  after : Word from the creditor has blocked the money for repairs. In public those in charge talk of prudence; in private they point to a clause in the loan.
+V dp-thorp-147 [religious_conversion]
+  power  before: The split is now open: two priests, two congregations, two registers of births, deaths and marriages. The Elder Council has not said which is lawful, so nobody knows whose wedding, will or deed would stand.
+  power  after : The split is now open: the converts keep their own register of births, deaths and marriages. The Elder Council has not said which is lawful, so nobody knows whose wedding, will or deed would stand.
+V dp-hamlet-58 [religious_conversion]
+  power  before: The split is now open: two priests, two congregations, two registers of births, deaths and marriages. The Elder Council has not said which is lawful, so nobody knows whose wedding, will or deed would stand.
+  power  after : The split is now open: the converts keep their own register of births, deaths and marriages. The Elder Council has not said which is lawful, so nobody knows whose wedding, will or deed would stand.
+V dp-hamlet-78 [indebted]
+  power  before: The creditor's agent has blocked the money for repairs. In public they talk of prudence; in private they point to a clause in the loan.
+  power  after : Word from the creditor has blocked the money for repairs. In public those in charge talk of prudence; in private they point to a clause in the loan.
+V dp-village-82 [religious_conversion]
+  power  before: The split is now open: two priests, two congregations, two registers of births, deaths and marriages. The Elder Council has not said which is lawful, so nobody knows whose wedding, will or deed would stand.
+  power  after : The split is now open: the converts keep their own register of births, deaths and marriages. The Elder Council has not said which is lawful, so nobody knows whose wedding, will or deed would stand.
+V dp-village-98 [religious_conversion]
+  power  before: The split is now open: two priests, two congregations, two registers of births, deaths and marriages. The Elder Council has not said which is lawful, so nobody knows whose wedding, will or deed would stand.
+  power  after : The split is now open: the converts keep their own register of births, deaths and marriages. The Elder Council has not said which is lawful, so nobody knows whose wedding, will or deed would stand.
+V dp-town-13 [indebted,infiltrated]
+  power  before: The creditor's agent has blocked the money for repairs. In public they talk of prudence; in private they point to a clause in the loan.
+  power  after : Word from the creditor has blocked the money for repairs. In public those in charge talk of prudence; in private they point to a clause in the loan.
+V dp-town-60 [indebted]
+  power  before: The creditor's agent has blocked the money for repairs. In public they talk of prudence; in private they point to a clause in the loan.
+  power  after : Word from the creditor has blocked the money for repairs. In public those in charge talk of prudence; in private they point to a clause in the loan.
+V dp-town-65 [indebted]
+  power  before: The creditor's agent has blocked the money for repairs. In public they talk of prudence; in private they point to a clause in the loan.
+  power  after : Word from the creditor has blocked the money for repairs. In public those in charge talk of prudence; in private they point to a clause in the loan.
+V dp-town-77 [indebted]
+  power  before: The creditor's agent has blocked the money for repairs. In public they talk of prudence; in private they point to a clause in the loan.
+  power  after : Word from the creditor has blocked the money for repairs. In public those in charge talk of prudence; in private they point to a clause in the loan.
+V dp-town-94 [indebted]
+  power  before: The creditor's agent has blocked the money for repairs. In public they talk of prudence; in private they point to a clause in the loan.
+  power  after : Word from the creditor has blocked the money for repairs. In public those in charge talk of prudence; in private they point to a clause in the loan.
+V dp-town-122 [indebted]
+  power  before: The creditor's agent has blocked the money for repairs. In public they talk of prudence; in private they point to a clause in the loan.
+  power  after : Word from the creditor has blocked the money for repairs. In public those in charge talk of prudence; in private they point to a clause in the loan.

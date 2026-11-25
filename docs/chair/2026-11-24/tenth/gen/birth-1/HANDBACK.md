@@ -93,7 +93,25 @@
   'Feudal Stewardship' (`rulingStructure.js` governanceLabelMap `"lord's reeve"`); its own desc says "A steward appointed by a distant
   lord". Hamlets up hold "Lord's steward" (face 'the steward'). The seat line is `governanceAccount.js :: governanceAccountOf` (role
   from `rulingChainOf`).
-- **D7 — RULED G17 (12:56 UTC): (1) and (3) yes as worded, (2) yes on a term (the whole sentence sent), (4) claimant left. A VOCABULARY ROW ASKED (`crisis body: <kind>`, COMMON-RULES 6) before building; nothing built.** Earlier record: `tools/measure-d7.mjs` (crises, roster, every crisis line; "own power"
+- **D7 — BUILT under G17 + G18 on `lane/birth-1-2026-11-25-d7-wip` (worktree `/home/user/wt/d7`); governing run IN FLIGHT; not yet
+  committed (the commit waits for the run, so lint-staged does not touch the tree under it); then the lighting and wiring doors,
+  push, hand-in.** The build: the atom `crisis body: <kind>` (keys `indebted`, `religious_conversion`; presence) homed in the new leaf
+  `src/domain/facts/crisisBody.js` (`crisisBodyOf(record, kind)`: a non-governing power that is the kind's own by
+  `people/stressPowerFaces.js :: stressPowerRowOf` read with that crisis alone, or a no-face name (`NO_FACE`); undefined with no powers;
+  it imports stressPowerRowOf, so not zero-import, told to the chair); wired `factsOf.js` (getter, keyed), `factLayers.js` (layer 3,
+  `factsCall`), `factVocabulary.js` (dim + FactsLike). The three power-sentence sentences are declared in `data/powerSiblings.js ::
+  CRISIS_BODY_SIBLINGS` (original `needs`, twin `excludes`), resolved sentence by sentence (`resolveSiblingSentences`) against the
+  SETTLED record by `assembleSettlement.js :: settleCrisisBodyLines` (at the END of the file; called on the pressure line's own line
+  404, so no cited line moves; a held powerStructure is not re-worded). The pressure pool's indebted row 0 declares `needs` and its
+  approved twin row (G18's sentence) stands beside it; the door resolves a refused row to the NEXT admitted row (the twin only where
+  none is): told to the chair at 13:08. No draw moves; no power is added.
+  - Red first: `tests/domain/crisisNamesWhatItHolds.test.js` at the base 6 red (a) / 3 green (b); on the tree 10/10.
+  - Check over every birth (`tools/check-d7.mjs`, oracle the crisis's own powers BY NAME off the roster, independent of the leaf):
+    C 25 -> 0, V 17 -> 0 births naming a crisis body the roster lacks; naming lines kept beside their body C 11, V 30 (unchanged);
+    leaf vs oracle disagree 0 of 1,800. Moved: C 25, V 17 (the stop was 30), the same births; fields moved (`measure-keys` sha256
+    per field): `powerStructure.recentConflict` C 25, V 17, `pressureSentence` C 1 (dp-city-93). Goldens dark/lit 0/525. Every moved
+    birth's lines before/after: `d7/moved-lines.txt`.
+  Earlier record: `tools/measure-d7.mjs` (crises, roster, every crisis line; "own power"
   by the tree's `stressPowerRowOf` + fortune-7's no-face list) and `tools/analyse-d7.mjs`; tables `d7/analysis-{C,V}.txt`. Almost every
   crisis line tells an event, the seat, or an outsider. Lines naming a LOCAL body the place may lack (printed, no body): indebted power
   sentence "The creditor's agent has blocked the money…" C 24 (19), V 27 (13); indebted pressure "the creditor's representative arrived
@@ -107,4 +125,6 @@
   sent to CLOSE-7 (waits for the byte word).
 
 ### 0.2 Next step
-Wait for the chair's word on D7's vocabulary row; then build D7 on `lane/birth-1-2026-11-25-d7-wip` (cut at the base): the fact leaf, the three declared twins, the late resolution in assembly before the pressure line, red first, the check over every birth (no crisis line names a local body the place does not hold: 0 on C and V). D8 parked (owner's leave).
+D7: read the governing run (`d7/gov-files.txt`, 282 files naming the touched modules, + tests/lint + tests/copy whole) against the
+known reds; commit; the lighting and wiring doors; push `-d7-wip`; hand in to CLOSE-7 and the chair, naming the atom and the new
+sentences for the owner's veto. D8 parked (owner's leave).
