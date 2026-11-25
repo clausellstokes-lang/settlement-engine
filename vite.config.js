@@ -572,6 +572,21 @@ export const FIRSTPAINT2_LAZY_DOMAIN = [
   // a build in this unit (the chair's at the close).
   // @guarded-by tests/architecture/factHomesLazy.test.js (a) and tests/domain/close7SickCare.test.js (e).
   '/src/domain/facts/sickCare.js',
+  // SIZE-BACK (CLOSE-7, 2026-11-25; the chair's YES to LANDING-117 (5a)). THE SAME PREMISE as sickCare.js above, measured by
+  // two builds (point 116 ddca5c789 against 97c6bfc7a: first paint +11,165 raw, close-7/reports/TYPES.md):
+  //   - domain/landWithholding.js (B1(i)) is generator-reached (steps/assembleInstitutions.js, cascadeGenerator.js,
+  //     factionCorrelation.js, none in the eager graph), so the derivation made it an ESD seed, EAGER, and it carried the whole
+  //     of data/geographyData.js (TERRAIN_DATA, LAND_GIVERS; data-lazy until then: it was geographyData's ONLY eager importer)
+  //     into the eager `data` chunk (+10,146 raw). Its other importer, coherence/pageCensusFindings.js, ships in no chunk.
+  //     Its imports: data/geographyData.js (back to data-lazy, which this chunk already imports) and
+  //     data/institutionalCatalog.js (eager `data`).
+  //   - domain/facts/foodProduction.js (THE MIRROR, R24d) is a new zero-import leaf of facts/factsOf.js (pinned here): the
+  //     derivation walked it into EAGER engine-core. Its one importer is factsOf.js; its one reader, the vocabulary's
+  //     `food production` atom, reaches it only through the factsOf object (`f.foodProduction`), so it rides with factsOf.
+  // No eager module imports either file. @guarded-by tests/build/vendorPdfLazy.test.js (the first-paint byte budget) and
+  //   tests/build/engineChunkLazy.test.js (no first-paint-reachable excision is left unpinned).
+  '/src/domain/landWithholding.js',
+  '/src/domain/facts/foodProduction.js',
 ];
 for (const frag of ENGINE_SHARED_DOMAIN_EXCISIONS) ENGINE_SHARED_DOMAIN.delete(frag);
 for (const frag of FIRSTPAINT2_LAZY_DOMAIN) ENGINE_SHARED_DOMAIN.delete(frag);
