@@ -33,8 +33,12 @@ BUILT, NOT MERGED (all pushed unless said):
   resolver into computePublicLegitimacy; the GENERATION_LAWS walk in the arm with a planted fifth row; seat law NOT forgotten);
   sent to VEIL-55 with its named departure.
 - The samenessHideable wording: 1ffb2328b PUSHED on -cures-wip (cites only; tests/lint whole 65 = the join's 66 less D's).
-RUNNING: the FAIL-CLOSED PAGES builder (`briefs/V53-FAILCLOSED-BRIEF.md`) on `lane/veil-53-2026-11-24-pages-wip` from 1ffb2328b,
-worktree `/home/user/pages53`, notes `out/v53/failclosed/NOTES.md`. (SIZED: `out/v53/pages/SIZING.md`, sent to VEIL-55.) The PAGES slice was STOPPED at 22:50 (the chair's order: it comes after the anon arm).
+- `lane/veil-53-2026-11-24-pages-wip` 04fa8d60e (PUSHED; worktree `/home/user/pages53`, on 1ffb2328b): FAIL-CLOSED PAGES:
+  004539777 the (C) classes (bands rows not printed; the legacy default, the siege sentence and the ring note print nothing; 3 owner
+  arms; 0 of 720 births lack a gating key, CONFIRMED); 04fa8d60e the totality walker (45 + 6 readers; BREAKDOWN_WITHHELD_TERMS held
+  to its row). Sent to VEIL-55 with TWO QUESTIONS for the chair: severity's re-derived bands (Labor capacity, readiness) are wrong
+  but never absent (lean: (C), fail closed); 11 re-derived readers have no failure arm (lean: each needs one).
+RUNNING: the anon arm builder on RULING V26's addendum (grants-wip).
 THE QUEUE, IN ORDER (the chair, 22:48, governs): (1) J1: DONE. (2) V3's five cures A-E, one builder each, stacked on `lane/veil-53-2026-11-24-cures-wip` from ba7460c33 (brief
 `briefs/V53-CURES-V3-BRIEF.md`). (3) The anon arm + carried read + the call-graph read (`briefs/V53-ANONARM-BRIEF.md`) on
 grants-wip. (4) FAIL-CLOSED PAGES (RULING V6): size it first: `out/v53/pages/slice.sh` (PAGES' probe verbatim, every 12th of the
@@ -48,8 +52,8 @@ variant, the owner's read unchanged and asserted; its reader joins the totality 
 started.
 DONE AND SENT: (0); (1) REDS-CAUSE (`out/v53/redscause/REDSCAUSE.md`; the import surprise to the chair: RULING V3 (6)); (2) J1
 classed; J12 and J12-V4 (`out/v53/J12.md`, `out/v53/j12/J12-V4.md`: prominentRelationship's 12/720 are the covert tie's own copy).
-NEXT COMMAND: on the FAIL-CLOSED builder's return: `git -C /home/user/pages53 log --oneline -4`, read its diffs once, re-run its
-red/green, push pages-wip, line to VEIL-55. THEN: V26's addendum on grants-wip (resume the anon arm builder).
+NEXT COMMAND: on the V26 builder's return: `git -C /home/user/grants53 log --oneline -4`, read its diffs once, push grants-wip,
+line to VEIL-55.
 THEN: the renumbering script (`briefs/V53-RENUMBER-BRIEF.md`), then items (5), (7), (8). "THE SEAT'S HOLDER IS STORED" only on VEIL-55's word.
 
 ## 2. RULINGS IN FORCE FOR THIS SEAT (all on the chair's branch, appended to `docs/chair/2026-11-24/tenth/veil/RULING-V1.md`)
@@ -93,3 +97,4 @@ THEN: the renumbering script (`briefs/V53-RENUMBER-BRIEF.md`), then items (5), (
 - 05:2x the anon arm done (73a3f8743 pushed). MY ERROR: restore.sh reset the local ledger ref to ba7460c33 at 05:14 (FETCH_HEAD after a multi-branch fetch); repaired to 235efce1a, script fixed.
 - 06:4x the slice sized and sent. A PUSH WITH NOTHING TO SEND TOOK THE WHOLE CHECK; KILLED; config clean; reported. Every push now ls-remote-guarded.
 - 06:5x the FAIL-CLOSED PAGES builder dispatched.
+- 08:0x FAIL-CLOSED PAGES pushed (04fa8d60e) with two questions; V26 addendum dispatched.
