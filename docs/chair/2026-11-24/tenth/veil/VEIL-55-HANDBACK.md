@@ -5,7 +5,7 @@ THE CHAIR is the tenth chair, session_019yED1SUxGVHyjQnoqoFvQ8. MY START MESSAGE
 session_019yED1SoJ6KH9Wyp2Fera7R. IF YOUR CONTEXT BEGINS WITH A SUMMARY: tell the chair in one line, re-read that file and this
 section before judging anything. Every hour here is read from `date -u`.
 
-## 1. WHERE THE LANE STANDS (my memory; current at this push, 02:47 UTC 2026-11-25)
+## 1. WHERE THE LANE STANDS (my memory; current at this push, 04:16 UTC 2026-11-25)
 
 THE LAW: as VEIL-50's hand-back section 1 "THE LAW" (no pull request; push only `lane/veil-55-2026-11-24*` by the local branch's
 own name, ls-remote first; never --no-verify, force, master; every database local, PGHOST=/var/tmp/rv7; no `supabase` command).
@@ -39,7 +39,19 @@ A SUCCESSOR ON ANOTHER ACCOUNT, THE NEXT COMMAND: in a fresh container, `npm ci`
 `lane/veil-55-2026-11-24-r4ids-wip` (= 8430edf5c), worktrees as "TREES AND MACHINE" below, then
 `sh v55/m0.sh` and `sh v55/p1.sh` (paths inside them), each detached; read `v55/out/` on this branch for what had finished.
 
-### NOW (02:47 UTC 2026-11-25): UNIT 2 GRANTED BY THE CHAIR (02:46, its read = V17)
+### NOW (04:1x UTC 2026-11-25): R4-IDS MERGED (tip 8430edf5c, pushed 02:52); UNIT 1 MERGED ON THE TIP (dbd4cd9e5)
+- UNIT 1's SLICE on dbd4cd9e5 (v55/u1.sh, u1c.sh; log /var/tmp/v55/u1.log), CONFIRMED: ppkey on the today-born stored 140: RED at
+  8430edf5c 3,360 of 3,360 reads carry publicProse at every door (page, link, import, twin); GREEN on dbd4cd9e5 0 of 3,360 each;
+  the unit's files + migrationRehearsal: 612 passed, 3 failed = the composed walker's power.desc/label/relation.dmNote (red by
+  design, unit 4's); galleryVeilIds 14/14; tests/lint whole 27 failed of 3,283 vs 51 of 3,307 at 8430edf5c: NO NEW TITLE, 24 gone
+  (the 23 prose composed rows + proseDrawnAnchors); tests/copy 2 (J1's voiceMechanics). A SLIP, CAUGHT: u1.sh's first test steps
+  ran in the main checkout (`mx` cds there); killed, re-run inside the merged worktree.
+- V19 (cure D's departure ACCEPTED; new unit "THE SEAT'S HOLDER IS STORED", VEIL-53's, after phase 1's SQL); V20 (unit 5's rule,
+  six terms; unit 5's SQL after unit 4); V21 (point 1's gaps: map import equal and the tail plant UNIT 4's TOOTH; snapshots
+  closed; the withheld-person class EMPTY BY DESIGN, with a committed standing arm "every stored person has a served card on
+  every non-owner read" owed at the join).
+
+### THEN (02:47 UTC 2026-11-25): UNIT 2 GRANTED BY THE CHAIR (02:46, its read = V17)
 - "TIP? R4-IDS 8430edf5c" sent 02:47 with `v55/TIP-R4-IDS.md` (be79e999f): EVERY PROOF GREEN. GRANTED 02:46.
 - THE NEXT COMMANDS, IN ORDER: (1) `git branch lane/veil-55-2026-11-24-tip 8430edf5c` in the checkout; ls-remote; `git push -u
   origin lane/veil-55-2026-11-24-tip` (a fast-forward of b58abc48b). (2) "R4-IDS MERGED 8430edf5c" to the chair, VEIL-51, VEIL-52,
