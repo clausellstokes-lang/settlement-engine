@@ -34,6 +34,9 @@ import { DAWN_WORK } from '../../data/dailyLife/dawnWork.js'; // R24-A2 (R24c (c
 import { famineOf } from '../facts/famine.js'; // R24-A2: the food band the page prints (`shownBand`)
 import { landWithholdsHouse } from '../landWithholding.js';
 import { nativeSemanticResourceKeys } from '../content/customContentSemanticAuthority.js';
+import { motifGlyph } from '../traditions/genesis.js'; // R24-B1(ii) (CLOSE-7 BATCH): the field element's printed glyph
+import { factsOf } from '../facts/factsOf.js'; // R24-B1(ii): the two atoms the furrows rule reads
+import { atomHolds } from '../facts/factVocabulary.js'; // R24-B1(ii)
 
 /** @typedef {Record<string, unknown>} Rec */
 /** @typedef {Readonly<Record<string, ReadonlyArray<string>>>} Views */
@@ -89,6 +92,9 @@ export const PAGE_CENSUS_ROWS = Object.freeze({
   // walker reads in this file's literals and its door never banks)
   FEDFARE: ['FEDFARE a fare line of a fed band beside a printed Deficit or Famine', 'CROSS'],
   B1land: ['B1(i) a house the land withholds standing in the desert with nothing that gives its thing (RULING-R24, R24b)', 'CROSS'],
+  // R24-B1(ii) (CLOSE-7 BATCH; the chair's RULING-R24 R24-B1(ii)): a founding tradition of the fields (its element's glyph on the
+  // Traditions tab) on a page whose record buys its grain in (`grain imported`, the fact A12 reads) and holds no farmland
+  B1furrow: ['B1(ii) a tradition of the fields where the grain is bought in and no farmland stands (RULING-R24 R24-B1(ii))', 'CROSS'],
 });
 
 /**
@@ -428,6 +434,15 @@ export function pageCensusFindings(settlement, views) {
       if (l) return [l, `${name}: ${land.terrainType}, route ${land.tradeRoute || 'none'}, resources ${land.nearbyResources.join(', ') || 'none'}`];
     }
     return null;
+  });
+  run('B1furrow', () => {
+    // R24-B1(ii): the Traditions tab prints a field tradition (its glyph on its own line), and the record buys its grain in
+    // and holds no farmland (`facts/factVocabulary.js :: atomHolds` over `factsOf`, the atoms' own readers)
+    const facts = factsOf(/** @type {Parameters<typeof factsOf>[0]} */ (rec));
+    if (atomHolds('grain imported', facts) !== true || atomHolds('institution: farmland', facts) !== false) return null;
+    const glyph = motifGlyph('field');
+    const l = V('World/Traditions').find((x) => x === glyph);
+    return l ? [l, 'a tradition of the fields: grain imported, no farmland'] : null;
   });
   return out;
 }
