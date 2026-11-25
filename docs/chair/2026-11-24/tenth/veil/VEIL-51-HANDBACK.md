@@ -164,7 +164,11 @@ UNIT 5, LEGACY-NAMES (the chair 02:36; brief START-VEIL-54.txt's unit steps and 
     master 14/38, 14/35, 14/15, 58/154, 58/154, 14/15, 4/8 (documents/strings, the seven paths in the brief's order); today-born roles
     15/15, 10/19, 15/15, the rest 0 (wd serves none of today's on a hiding read: the named thing stays served there).
     THE PLANTS (`u5/plant5.mjs`, r3m-town-none-0-23, one a path): EVERY ONE BITES (wd-plant5 02:49; `u5/receipts/`).
-  (2) THE RULE PROPOSED: `u5/PROPOSAL-U5.md`, sent to the chair and VEIL-55 (02:5x); NO BUILD BEFORE THE CHAIR'S WORD.
+  (2) THE RULE ACCEPTED (V20, the chair 02:53), SIX TERMS: (a) the lane's own fold, twin rule for rule, unknown forms (RIVAL's bare
+    form) listed for phase 2; (b) one plant a path as committed arms, red first; (c) 0 leaves differ on every nothing-hidden read, both
+    pools, both engines; (d) the tell counted (role-less cards on hiding reads, by door and Reveal); (e) every door, both Reveals, the
+    import; (f) registry rows people.role (copies), people.secondaryAffiliation, people.goal.short with reasons. ORDER: unit 4's 212 edit
+    first; unit 5's SQL only after unit 4 merges; each hunk to the chair before the grant; a near compaction comes before 212 opens.
 
 R4-IDS MERGED 8430edf5c (VEIL-55, 02:52; the lane's tip `lane/veil-55-2026-11-24-tip`). Unit 1 merged on it locally by VEIL-55
   (dbd4cd9e5), its slice running: UNIT 4's CODE BRANCH IS CUT ON THE COMMIT "UNIT 1 MERGED <commit>" NAMES, then the plain merges
