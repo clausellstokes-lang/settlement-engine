@@ -62,7 +62,15 @@
   score; X4 binds on C 76, V 75; the old points bound would be red on V dp-village-64, -113 too (`d5/table.txt`). A planted-mutation
   negative control was REFUSED by my permission check (told the chair; not retried). Governing run (25 files naming the defence
   module + tests/lint whole: 252 files, 3,938 tests): 5 red, all on RED-AT-LINE; lighting census unmoved. Its RED-AT-LINE row (defenceParts R13) leaves the list when it lands (the chair's).
-- **D8 — BUILT (ruling G10, option A); ONE STOP SENT TO THE CHAIR** on `lane/birth-1-2026-11-25-d8-wip` (worktree `/home/user/wt/d8`):
+- **D8 — PARKED (the chair's G11, 12:00 UTC): NOT handed to CLOSE-7; pushed at cf5d033e5.** WHAT IT STILL NEEDS IF THE OWNER GIVES THE LEAVE:
+  (1) ONE ROW in `tests/lint/presumedThings.widened.register.json` by its door `scripts/presumed-things-door.mjs` (arm1,
+  `src/data/institutionalCatalog.js`, things `house: lord's reeve` and `house: reeve`, reason "family", literal "the lord's reeve"),
+  as "the lord's appointee" stands; (2) then `tests/lint` whole and the 142 governing files re-run on the tip (the reds left after
+  cf5d033e5: presumedThings ARM 1 only; the others are RED-AT-LINE's); (3) the hand-in naming the catalogue word for the owner's
+  veto. Its cures (honorific row, three figures, seed loop) were committed and pushed in cf5d033e5 before G11 reached me (told the
+  chair; drop that commit at the merge if d391b1fbd's state is wanted).
+  The earlier record:
+- D8 — BUILT (ruling G10, option A); ONE STOP SENT TO THE CHAIR on `lane/birth-1-2026-11-25-d8-wip` (worktree `/home/user/wt/d8`):
   d391b1fbd (the catalogue word: the "Lord's reeve" row's face 'the reeve' -> "the lord's reeve"; the leaf `data/people/titleReadAs.js`
   read by `poolMap.js :: poolFor, titleLinesFor`; test `tests/domain/stewardshipReeveTitle.test.js` red 7/7 -> green), 7ee78b87f
   (lighting door), cf5d033e5 (the honorific registry's own row for the new face, `faceHonorifics.js` alias reverted; figures re-stated
@@ -89,4 +97,4 @@
   STRESS_POWER_FACES lists each crisis's powers; `power/stressFactions.js :: applyStressEventFactions` pushes them (the density law may not seat them). `tools/measure-d7.mjs` written (crises, roster, every crisis sentence per birth); to run once on C and V, then the per-kind analysis offline.
 
 ### 0.2 Next step
-Read D2b's governing log (`scratchpad/d2b/gov.log`); the build's figures; list the readers of the stored pressure line; push -d2b-wip; hand in. D8 on the chair's word. Then D7's measure (`tools/measure-d7.mjs`).
+Read D2b's governing log (`scratchpad/d2b/gov.log`); the build's figures; list the readers of the stored pressure line; push -d2b-wip; hand in. D8 parked (owner's leave). Then D7's measure (`tools/measure-d7.mjs`).
