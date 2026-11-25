@@ -340,7 +340,7 @@ THE PLAN OF UNIT 4's MERGE M (written 05:1x, BEFORE any resolution; worktree /ho
     master's on master-born): the served desc does not contain the writer's tail; LEFTOVER by that oracle 0, both pools.
     (6) RE-MEASURE after the cures, both pools, every other power hidden: served descs naming a stored power not served: 0; the
     count the rule withholds, three examples.
-  V27 (3) SENT (07:3x): the three 212 doors (gallery :3654, link :3717, import :3780) hold the stored row (src.j or base.j) before
+  V27 (3) SENT (07:30): the three 212 doors (gallery :3654, link :3717, import :3780) hold the stored row (src.j or base.j) before
     the projection; THE MAP MEMBER is 211's get_gallery_map (:1414), not restated in 212: STOP for the chair's word; the client's
     served page never holds the stored row (the server's body is final). FOUND: both engines' roster pass returns early unless
     a HOUSE is hidden whole (212 `if not whole then return s;`, twin `if (!whole) return;`), so a hand-hidden POWER never
@@ -429,7 +429,7 @@ RULING V1 (the tenth chair, 21:20 UTC 2026-11-24) whole. N90 (the whole-document
 N99. ppkey on the full pool is NOT re-run (0 of 46,752 per door at ced3b1de7) unless the tree's 212 or twin moves.
 
 ## 3. Log (every hour from `date -u`)
-- 07:3x RULING V27 read; V27 (3) sent (the map door: STOP); the early 'whole' gate found; plan P written before any edit.
+- 07:31 RULING V27 read; V27 (3) sent (the map door: STOP); the early 'whole' gate found; plan P written before any edit.
 - 07:27 N4 dispatched; N5 slices running; unit 5's plan U written before any edit.
 - 07:25 N3 (a5e77c820) and item 5 (802578955) local; two inherited reds read against 04cfe6d85.
 - 07:2x N2b built (local bcf26ccbd): master's uncut standings cut; census red first 4 -> 0; measure master 12 -> 8.
