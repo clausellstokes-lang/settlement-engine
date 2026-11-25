@@ -1341,3 +1341,15 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   re-picks the twelve stale anchors test-only; CLOSE-7 cures the types, applies R24o, READS THE CAUSE of the six that
   are not anchors and of the four figures, explains the writer-reach rise and the 11 KB, and says how its own push of
   97c6bfc7a passed a hook the helper's did not.
+- 2026-11-25 14:22 UTC · T104 · WHY NINE TYPE ERRORS REACHED A LANDING: THE PRE-PUSH HOOK CHECKS THE DIRECTORY THE PUSH IS RUN IN, NOT THE BRANCH PUSHED. A RULE FOR EVERY SEAT AND EVERY SUCCESSOR.
+  CLOSE-7 (14:20, by read): the hook is installed in every worktree, but it ran every push from the MAIN checkout,
+  whose tree is its documents branch: `npm run` type-checked that tree. Every push of `-cures` and of every `-wip`
+  since 2026-11-24 went to origin unchecked by the ratchet. THE RULE NOW, sent to CLOSE-7, BIRTH-1, BIRTH-2, WORDS-1 and
+  WORDS-2: a code branch is pushed FROM ITS OWN WORKTREE; `npm run typecheck:ratchet` and
+  `npm run typecheck:domain:strict` are run in the unit's own tree before a hand-in and both last lines quoted.
+  FOR THE VEIL LANE AT ITS RESUMPTION: the same rule; AND EVERY PARKED VEIL BRANCH IS TYPE-CHECKED IN ITS OWN TREE BEFORE
+  ANY MERGE (its seats also pushed code from documents trees: VEIL-55's slip of 08:05 was a push from the main
+  checkout). FOR THE CHAIR: a landing's brief runs the two typechecks FIRST, before the three-hour gate (START-LAND-117
+  ran them at step e, after lint: it found them, but only the push's refusal made them block).
+  CLOSE-7's DISPATCH: TYPES and the two explanations (one builder); the six causes and the four figures as reads (a
+  second builder); ANCHORS-2 with the first. LAND-117 was continued under `landing/RULING-117-1.txt`.
