@@ -9,10 +9,7 @@
  *                 compact marker linking UP to its card (an in-tab anchor), never
  *                 a duplicate of the card: "Holds power" on the ruler's row alone,
  *                 "Contests the seat" on a contender's (lane RULERS, 2026-11-03 —
- *                 four factions all read "Holds power" in 52 of 60 fresh towns); D6 (WORDS-1, the
- *                 tenth chair's G7): a contender the web binds to the ruler (dependent, symbiotic or
- *                 subordinate, `powerStrata.js :: BOUND_TO_RULER_KINDS`) reads "Could contend" on its card
- *                 and "Could contest the seat" on its row.
+ *                 four factions all read "Holds power" in 52 of 60 fresh towns).
  *   TheWeb      — the typed relationships between factions, grouped by their
  *                 finite `type` kind. Each side is an EntityLink to its row.
  *
