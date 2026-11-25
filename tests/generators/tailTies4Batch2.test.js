@@ -48,9 +48,15 @@ const NOT = [
   ['r2r-city-17', 'awkward questions about how few arrests are made', 'Mercenary quarter', "people never meet any trouble"],
   ['r2r-town-26', 'arrest records against the coin', "Warden's Lodge", 'against what'],
   ['r2r-city-35', 'is fought in raids, informants, and paperwork', 'Professional city watch', 'is fought with informants, threats and favours called in'],
-  ['r2r-city-39', "command reports to", 'Garrison', "Someone among"],
-  ['r2r-metropolis-12', 'operation street by street', 'Citadel', "operation out street by street"],
-  ['r2r-metropolis-12', 'ordered to stand down against', 'Citadel', 'cannot refuse. Nobody has said why.'],
+  // RE-PICKED (point 117, ruling 117-1, 2026-11-25): r2r-city-39 and r2r-metropolis-12 are desert places, and under the close's
+  // B1(i) their births re-deal their houses and ties (city-39 loses six houses, metropolis-12 two), so the ties no longer draw
+  // these lines. The lowest r2r-city whose mil_crim_suppression tie draws "Someone among" with its military end the Garrison
+  // is city-40 (35 and 42 are a watch's); the lowest r2r-metropolis whose tie draws variant 7's two lines with its military
+  // end the Citadel (its castellan) is metropolis-193 (no lower carrier's tie names the castellan). The famine pair below (r2s-famine-city-1, a desert town) is NOT re-picked: no r2s-famine-city 0 to 199 and no
+  // r2r-city 0 to 199 draws "colours and take"; left for the chair.
+  ['r2r-city-40', "command reports to", 'Garrison', "Someone among"],
+  ['r2r-metropolis-193', 'operation street by street', 'Citadel', "operation out street by street"],
+  ['r2r-metropolis-193', 'ordered to stand down against', 'Citadel', 'cannot refuse. Nobody has said why.'],
   ['r2s-wartime-town-3', "company after the last caravan was lost", 'Town watch', "people after the last caravan was lost"],
   ['r2s-wartime-town-3', "company under the watch's command", 'Town watch', "people answerable to the council alone"],
   ['r2s-famine-city-1', "colours on the road", 'Garrison', "colours and take"],
@@ -59,8 +65,10 @@ const NOT = [
   ['r2r-city-13', 'company guards', 'Professional city watch', "people guard"],
 ];
 /** [seed, a line of the same archetype, unchanged] */
+// RE-PICKED (point 117, ruling 117-1, 2026-11-25): r2r-metropolis-12 (a desert place, re-dealt under B1(i)) no longer draws
+// econ_mil_contract's line 0; the lowest r2r-metropolis that draws it is metropolis-25.
 const KEEP = [
-  ['r2r-town-39', 'has made dismantling'], ['r2r-metropolis-12', 'The contract is up for renewal'], ['r2r-city-19', 'silver pays for the favour'],
+  ['r2r-town-39', 'has made dismantling'], ['r2r-metropolis-25', 'The contract is up for renewal'], ['r2r-city-19', 'silver pays for the favour'],
 ];
 
 describe('TAIL-TIES-4 batch 2: a tie gives its military end no office its house does not hold (T19, decided (B))', () => {
