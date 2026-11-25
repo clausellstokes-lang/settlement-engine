@@ -6,7 +6,8 @@
  * "the reeve", so the seat line read "Isamu Liu, the reeve, holds its seat." beside a stewardship, as if two officers. The face
  * now says whose officer he is: "the lord's reeve". The seat's name is not changed (R24m: a renamed power re-deals every
  * name-keyed draw). The tables that take MEANING from a title read the new title as the old one (`data/people/titleReadAs.js`),
- * so the card keeps its name pool, its secret and presentation lines, its honorific and its styled form: only the title's
+ * so the card keeps its name pool and its secret and presentation lines (the honorific registry holds the new title's own row,
+ * the reeve's honorific): only the title's
  * words move (measured over C and V: 12 and 18 thorps, every differing leaf the title alone).
  *
  *   (a) RED FIRST, BY NAME (measured at 0ec96f13d, `gen/birth-1/d8/`): the governance paragraph of C dp-thorp-21, -29, -39 and
@@ -23,6 +24,7 @@ import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { governanceAccountOf } from '../../src/domain/display/governanceAccount.js';
 import { poolFor, titleLinesFor } from '../../src/generators/people/poolMap.js';
 import { honorificOfTitle, styledTitleOf } from '../../src/data/faceHonorifics.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 /** @param {string} seed @param {'C'|'V'} corpus */
 function birth(seed, corpus) {
@@ -53,9 +55,10 @@ describe('D8 (b): the new title reads as the reeve\'s in every table keyed on ti
     expect(poolFor("the lord's reeve", 'Government')).toEqual(poolFor('the reeve', 'Government'));
     expect(titleLinesFor("the lord's reeve")).toEqual(titleLinesFor('the reeve'));
     expect(titleLinesFor('the reeve'), 'the reeve has lines of its own').not.toBeNull();
-    for (const seed of ['a', 'b', 'c']) for (const gender of ['male', 'female']) {
+    const failures = collectSeedFailures(['a', 'b', 'c'].flatMap((seed) => ['male', 'female'].map((gender) => ({ seed, gender }))), ({ seed, gender }) => {
       expect(honorificOfTitle("the lord's reeve", gender, seed)).toBe(honorificOfTitle('the reeve', gender, seed));
-    }
+    });
+    expectNoSeedFailures(failures, 'the lord\'s reeve takes the reeve\'s honorific on every seed and gender');
     expect(styledTitleOf("the lord's reeve", 'female')).toBe("the lord's reeve");
   });
 });

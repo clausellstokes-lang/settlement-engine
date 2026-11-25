@@ -24,7 +24,6 @@
 
 import { pickVariant } from '../kernel/proseHash.js';
 import { titleForHolder } from './holderTitleForms.js'; // TAIL-TITLES K-C: the holder's form, one leaf
-import { titleKeyOf } from './people/titleReadAs.js'; // BIRTH-1 D8
 
 /** @typedef {string | { male: string, female: string }} Honorific */
 
@@ -36,6 +35,7 @@ export const FACE_HONORIFICS = Object.freeze({
   "the eldest": ["Elder", "Eldest"],
   "the eldest householder": ["Elder", { male: "Goodman", female: "Goodwife" }], // BAR3-PEOPLE-2 (P6, C33899 C35020): a personal honorific that names a sex takes the holder's form
   "the reeve": ["Reeve"],
+  "the lord's reeve": ["Reeve"], // BIRTH-1 D8 (the chair's G10): the "Lord's reeve" house's face says whose officer he is; his honorific is the reeve's
   "the household elder": ["Elder", "Head of the Household"],
   "the fence": ["Fence"],
   "the outlaw host": ["Captain", "Outlaw Chief"],
@@ -381,7 +381,7 @@ const HEAD_OF = /^the head of (.+)$/i;
  * @param {{ coastal?: boolean | null, culture?: string | null }} [place] @returns {string}
  */
 export function honorificOfTitle(title, gender, seed, place = {}) {
-  const t = titleKeyOf(String(title ?? '').trim()); // BIRTH-1 D8: a title read as another (data/people/titleReadAs.js)
+  const t = String(title ?? '').trim();
   if (!t) return '';
   const culture = place?.culture;
   const byCulture = typeof culture === 'string' && Object.hasOwn(FACE_HONORIFICS_BY_CULTURE, culture) ? FACE_HONORIFICS_BY_CULTURE[culture] : null;
@@ -410,7 +410,7 @@ export function styledTitleOf(title, gender) {
   { const held = titleForHolder(title, gender); if (held !== title) return held; } // TAIL-TITLES K-C: the holder's form, one leaf
   if (gender !== 'female' || typeof title !== 'string' || !title) return title;
   const t = title;
-  const pool = FACE_HONORIFICS[titleKeyOf(t.trim())]; // BIRTH-1 D8: a title read as another (data/people/titleReadAs.js)
+  const pool = FACE_HONORIFICS[t.trim()];
   const form = (pool || []).find((h) => typeof h !== 'string');
   if (!form || typeof form === 'string') return t;
   const male = form.male.split(' ').at(-1) || ''; const female = form.female.split(' ').at(-1) || '';

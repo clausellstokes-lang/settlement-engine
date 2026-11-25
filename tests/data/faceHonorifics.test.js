@@ -27,7 +27,7 @@ describe('the honorific registry', () => {
     const named = new Set(Object.keys(FACE_HONORIFICS));
     expect([...born].filter((t) => !named.has(t))).toEqual([]);
     expect([...named].filter((t) => !born.has(t))).toEqual([]);
-    expect(named.size).toBe(212);
+    expect(named.size).toBe(213); // BIRTH-1 D8 (the chair's G10): 212 -> 213, the "Lord's reeve" house's face "the lord's reeve"
   });
 
   it('every pool holds one to five forms, each capitalised, gendered forms carrying both', () => {
@@ -39,7 +39,7 @@ describe('the honorific registry', () => {
         forms += 1;
       }
     }
-    expect(forms).toBe(373);
+    expect(forms).toBe(374); // BIRTH-1 D8 (the chair's G10): 373 -> 374, the "the lord's reeve" row's one form, "Reeve"
   });
 
   it('the pick is deterministic and reaches every form of a pool', () => {

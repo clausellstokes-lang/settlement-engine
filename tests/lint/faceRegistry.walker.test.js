@@ -65,7 +65,7 @@ const NO_POWER = Object.freeze(['Village musician', 'Charlatan fortune tellers',
 const FAMILY_FIGURES = Object.freeze({ face: 165, seat: 2, none: 13 });
 const ROW_FIGURES = Object.freeze({ rows: 519, face: 463, seat: 4, none: 52 });
 const OVERRIDES = 36;
-const DISTINCT_TITLES = 185;
+const DISTINCT_TITLES = 186; // BIRTH-1 D8 (the chair's G10): 185 -> 186, the "Lord's reeve" house's face "the lord's reeve" (it said "the reeve", the village reeve's)
 
 const familyKey = (fam) => fam.shared?.name || familyNamesByTier(fam)[0].name;
 const classOf = (face) => (face === null ? 'none' : face === FACE_SEAT ? 'seat' : 'face');

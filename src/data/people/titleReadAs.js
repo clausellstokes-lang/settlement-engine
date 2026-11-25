@@ -4,7 +4,7 @@
  *
  * The thorp's "Lord's reeve" seats the Feudal Stewardship; its face said "the reeve", so the seat line read "Isamu Liu, the reeve,
  * holds its seat" beside a stewardship. The ruling: the face says whose officer he is, "the lord's reeve". The tables that take
- * MEANING from a title (its name pool, its secrets and presentations, its honorific, its styled form) read the new title exactly
+ * MEANING from a title (its name pool, its secrets and presentations; the honorific registry holds the new title's own row) read the new title exactly
  * as they read the old (R24g (2): a reader that takes meaning from a name reads the new name as it read the old), so the card is
  * the same card with the same lines and only its title's words move. One row; nothing copied.
  */
