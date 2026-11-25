@@ -1,0 +1,8 @@
+r3m-town-none-0-23
+relationships[0].npc1Role
+relationships[1].npc2Role
+npcs[0].role
+npcs[1].secondaryAffiliation
+factions[].members[0].secondaryAffiliation
+factions[].members[1].role
+factions[].members[2].goal.short

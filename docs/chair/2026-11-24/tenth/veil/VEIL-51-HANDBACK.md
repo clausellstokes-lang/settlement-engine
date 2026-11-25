@@ -163,8 +163,8 @@ UNIT 5, LEGACY-NAMES (the chair 02:36; brief START-VEIL-54.txt's unit steps and 
     from `npcData.js:536`. THE STRINGS (`u5/paths.mjs`, names = hideable houses + criminal powers, the lane's fold; NOT wd's judgment):
     master 14/38, 14/35, 14/15, 58/154, 58/154, 14/15, 4/8 (documents/strings, the seven paths in the brief's order); today-born roles
     15/15, 10/19, 15/15, the rest 0 (wd serves none of today's on a hiding read: the named thing stays served there).
-    THE PLANTS: `u5/plant5.mjs` (seed r3m-town-none-0-23, all seven paths, "PLANT" in each), run by `u5/u5.sh` (RUNNING from 02:4x).
-  (2) THE RULE PER PATH, at most 250 words, to the chair BEFORE any build: after the plant run.
+    THE PLANTS (`u5/plant5.mjs`, r3m-town-none-0-23, one a path): EVERY ONE BITES (wd-plant5 02:49; `u5/receipts/`).
+  (2) THE RULE PROPOSED: `u5/PROPOSAL-U5.md`, sent to the chair and VEIL-55 (02:5x); NO BUILD BEFORE THE CHAIR'S WORD.
 
 ### HANDS OVER (VEIL-51, 02:3x UTC 2026-11-25, near the mark; unit 1 granted; unit 4's no-SQL part done; NOTHING RUNNING)
 THE SUCCESSOR'S PACKET: START-VEIL-51.txt on `lane/chair-2026-11-08`; RULING-V1.md (V1-V15+) there; this section.
