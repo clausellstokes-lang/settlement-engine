@@ -51,7 +51,10 @@ A SUCCESSOR ON ANOTHER ACCOUNT, THE NEXT COMMAND: in a fresh container, `npm ci`
 - T78 (the owner ~05:22, the chair 05:23): a CHEAP-MODEL helper (haiku, or sonnet at low effort) ONLY for purely mechanical
   runs: start a named command, wait, return the exit code, the run's own totals and the failures sorted against a GIVEN LIST
   ("NOT ON THE LIST" verbatim; counts reconcile or the seat reads the run). NOTHING touching the veil's SQL, a differential's
-  verdict, a walker or a security read is mechanical. TO RELAY to VEIL-51, 52, 53 in my next line to each (not yet sent).
+  verdict, a walker or a security read is mechanical. RELAYED to VEIL-51 and VEIL-52 (05:2x); VEIL-53 in my next line to it.
+- FOR THE CHAIR in my next line to it (not a ruling): VEIL-52's self-correction: a local scratch trial-join commit ~21:30 UTC
+  2026-11-24 was made with `-c core.hooksPath=/dev/null` (never pushed; its script no longer does it).
+- UNIT 4 QUESTION with the chair (05:2x): V14 (1) literal vs VEIL-51's lean; my lean = its lean + a name-search backstop.
 - THE OWNER'S SCOPE LINE (the chair 05:04, SCOPE-LINE.md): THIS RELEASE IS THE GENERATOR ALONE (make, configure, read, export,
   share). PLAN-2 stands; unit 3 stays as HIDING ONLY at the two map doors; SNAP-CHRONICLE's cure OUT (parked); V19 stays; a barred-
   area finding is ONE LINE to the chair, not worked; at the end a real-browser walk of the journey on the joined tree (the chair's).
