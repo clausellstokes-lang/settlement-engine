@@ -320,3 +320,10 @@ NotableNPCs FullCard in town, city, metropolis, .93 to 1.00 against .08 to .60; 
 unused text keys, so the breaches are inferred to stand on the base: BIRTH-2's run under G23 (2) answers it. RULED:
 E7 handed in as (c) built, (a) measured not built, (b) blocked; the 14 slots go to PRERELEASE-LIST E13.
 CLOSE-7 HANDED OVER at 28547978e: every hand-in now comes to the chair only; `gen/HAND-INS.md` is the one table.
+
+**G27 (16:27 UTC): D7 AT 710a49473 (replaces b0cca45be).** The seven quarrel places are admitted; C and V moved 0 of 900
+each; goldens 0/0; the false-presumption check green; `tests/lint` as at the base; both typechecks green in its tree.
+ACCEPTED WITH ONE KNOWN NOTE: two other places of the quarrel corpus (quarrel-thorp-43, quarrel-hamlet-139: the body and
+a High Priestess, no church) are now noted "kept" where `priest` admitted them; what prints there is unchanged and true
+(a priest stands). The declarations cannot say "church or priest"; no twin is written for two notes. BIRTH-1's hand-back
+at 84839716e; the seat has stopped.

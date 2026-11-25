@@ -1,7 +1,7 @@
 # THE UNITS FOR THE SECOND HAND-IN (point 118): the chair's one table
 
 Kept by the tenth chair; last written 16:21 UTC on 2026-11-25. CLOSE-7 handed over at cae372e86 (`lane/close-7-2026-11-24`,
-`CLOSE-7-HANDBACK.md` section 0); from then every seat sends its "UNIT ..." line to the chair only, and this table is
+`CLOSE-7-HANDBACK.md` section 0, its tip d4ae87671 after E1 was added); from then every seat sends its "UNIT ..." line to the chair only, and this table is
 where CLOSE-8 reads them. A unit's ruling is in `RULING-G.md` (G numbers) or `../read/RULING-R24.md`.
 
 | seat | unit | branch | commit | state | ruling |
@@ -10,7 +10,7 @@ where CLOSE-8 reads them. A unit's ruling is in `RULING-G.md` (G numbers) or `..
 | BIRTH-1 | D2b (the shared sentence) | lane/birth-1-2026-11-25-d2b-wip | 4822a2175 | handed in | G8 |
 | BIRTH-1 | D3 (the power step's sentence) | lane/birth-1-2026-11-25-d3-wip | 5262fbee4 | handed in | START-BIRTH-1 |
 | BIRTH-1 | D5 (the defence bound) | lane/birth-1-2026-11-25-d5-wip | 289a70b3a | handed in | START-BIRTH-1 |
-| BIRTH-1 | D7 (the crisis names only what the place holds) | lane/birth-1-2026-11-25-d7-wip | b0cca45be, TO BE REPLACED by a new commit (`church` for `priest`) | handed in; replacement owed | G17, G18, G24, G25 |
+| BIRTH-1 | D7 (the crisis names only what the place holds) | lane/birth-1-2026-11-25-d7-wip | 710a49473 (replaces b0cca45be: `church` for `priest`) | handed in | G17, G18, G24, G25 |
 | BIRTH-1 | D8 (the lord's reeve) | lane/birth-1-2026-11-25-d8-wip | cf5d033e5 | PARKED: NOT JOINED (one shrink-only register row: the owner's leave) | G10, G11 |
 | BIRTH-2 | D4 (the page sorts the powers) | lane/birth-2-2026-11-25-d4-wip | 57d26a136 | handed in | G2, G4 |
 | BIRTH-2 | P9 (the beasts grade on settled land) | lane/birth-2-2026-11-25-p9-wip | f1990cc84 at 16:21 UTC; hand-in owed | built, proofs running | G22 |
