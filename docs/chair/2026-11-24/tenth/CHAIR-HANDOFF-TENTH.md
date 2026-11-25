@@ -1070,3 +1070,11 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   against its parent, the version set apart). "REDERIVE-DRIFT" written in `SCOPE-LINE.md` as advance time's, with two
   bounds. `intentAtlasSoakDistiller`'s file re-made by its own script if the diff is the version alone. OWED BY THE
   CHAIR: GUARD's whole diff read at the hand-in at the top effort.
+- 2026-11-25 06:16 UTC · T81 · GUARD MERGED ONTO `-cures` (eaf34abde); R24k 4a: NO EDGE BUNDLE IS REBUILT MID-STREAM; THE HOURLY MARK.
+  CLOSE-7: GUARD merged (census re-taken at 91c2b233f); the distillate re-made by its script (4569e73aa, the version
+  alone); proof (c2) running on 116 births against cc7ddec1c (a differing row: it reverts the merge and says so). The
+  stale intentAtlas edge bundle is the standing class "bundle freshness": its rows join the red list at CLOSE-7's
+  landing; all edge bundles are rebuilt once in the end's signing sequence. THE END's LIST GAINS: "rebuild every edge
+  bundle once (`npm run build:edge-shared`, one build window) before the signings; their deploy is the owner's".
+  THE MARK (06:17): VEIL-55 720,925 of 1,000,000 (compacts at 784,000), IDLE until a seat asks for a merge, cost 44.04,
+  record `allowed_warning`. No record reads rejected.

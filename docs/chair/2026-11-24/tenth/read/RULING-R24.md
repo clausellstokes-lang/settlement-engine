@@ -314,3 +314,12 @@ turn the feature off for new places".
    and comes to the chair. If the script or a register names a signing door for it, it is not re-made: it is listed
    for the owner's end signings and CLOSE-7 says which door.
 5. THE CHAIR READS GUARD's WHOLE DIFF AT THE HAND-IN, at the top effort (a stored value and the advance path move).
+**R24k item 4a (06:16 UTC): THE DISTILLATE WAS RE-MADE (4569e73aa: one line, the version; `intentAtlasSoakDistiller` green); THE
+EDGE BUNDLE IT FEEDS IS NOT REBUILT BY A SEAT.** CLOSE-7 asked (06:15): the distillate is an input of
+`supabase/functions/_shared/intentAtlasBundle.js`, whose freshness test now reads "Bundle is stale"; its door is
+`npm run build:edge-shared`, which writes every deployable Edge bundle (the engine bundle's version among them, which a
+client pins). RULED, as CLOSE-7 recommended: BUILD NOTHING MID-STREAM. A stale edge bundle is the list's standing class
+"bundle freshness" (four bundles are rows today); every edge bundle is rebuilt ONCE, in one build window, in the end's
+signing sequence, as the last close did (319d75ac1d on the line's history), and their deploy is the owner's hand. The
+new red rows are named in CLOSE-7's hand-in by job, file and title and join `RED-AT-LINE.tsv` as "bundle freshness" at
+its landing; nothing else joins.
