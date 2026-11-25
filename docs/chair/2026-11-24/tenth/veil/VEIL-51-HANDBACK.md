@@ -455,7 +455,7 @@ RULING V1 (the tenth chair, 21:20 UTC 2026-11-24) whole. N90 (the whole-document
 N99. ppkey on the full pool is NOT re-run (0 of 46,752 per door at ced3b1de7) unless the tree's 212 or twin moves.
 
 ## 3. Log (every hour from `date -u`)
-- 07:56 N5 green; V27 (6): 0 faults with the stored row on both pools; term (a)'s walker (red by design on 211's map door); r5desc at 2376572f3.
+- 07:55 N5 green; V27 (6): 0 faults with the stored row on both pools; term (a)'s walker (red by design on 211's map door); r5desc at 2376572f3.
 - 07:48 V27 (1) built (local 483d95861; the probes withhold 107 (3) in both engines); (5) and (6) running.
 - 07:31 RULING V27 read; V27 (3) sent (the map door: STOP); the early 'whole' gate found; plan P written before any edit.
 - 07:27 N4 dispatched; N5 slices running; unit 5's plan U written before any edit.
