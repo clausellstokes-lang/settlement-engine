@@ -94,6 +94,18 @@ Reports to the lane's owner: a FILE, at most 200 words. My context began with a 
     plant), server = twin per cell (gallery off 66 / DM 99, import 6 / 9, link 6, map 6 / 6); the positive GREEN (108 per place).
     eslint 0; proseDrawnAnchors green; manifest green after its row; negativeAssertionAnchor red = the base's same 4 files
     (standing); moduleScopeCwdRatchet the base's A4 (standing).
+  THE PROPOSAL ACCEPTED IN FORM (the chair's RULING V14, 00:56; VEIL-55's yes, 00:56). THE CHAIR's SIX CONDITIONS, each proved:
+    (1) FAIL CLOSED: a desc whose tail the table cannot cut exactly (no row, or more than one) is WITHHELD WHOLE on every
+    non-owner read; the count on both pools stated (expected 0); a hand-written desc planted and shown withheld. (2) TOTALITY BY
+    CONSTRUCTION: a walker derives the table's rows from the engine's writer (`annotateFactionStanding` and its callees), a new
+    form with no row reds; master's forms pinned by a recorded extraction from db832c892, named in the table. (3) FIDELITY: on
+    every nothing-hidden read, both pools, the page's standing equals the stored tail byte for byte; where S cannot reproduce it
+    the page prints NO standing; that count stated. (4) B2's STOP FIRST, SAY HOW: S writes a standing only for a power whose
+    stored desc carried one; if the page can know that only from a NEW SERVED MARKER, STOP and bring the chair its exact shape and
+    what a reader could learn from it BEFORE building. (5) on a hiding read no re-written standing names, counts or ranks against
+    a withheld power; GATE-1 and GATE-2 not worse. (6) first-paint and shared-page sizes before and after, for the owner's
+    signing; the writer lazy if it can be. VEIL-55's terms add: the fidelity differences read under V4 term 1. The 212 edit
+    after "R4-IDS MERGED"; the chair reads its hunk whole before VEIL-55's grant. RIVAL rides only on a first-run pass.
   RUNNING (background, 2-hour limit): `rival.sh arms after cost` (its first arm, galleryVeilRival, from 00:53).
   IF THIS SEAT STOPS: re-run what u4.log lacks (`sh docs/chair/2026-11-24/tenth/veil/v51/u4/u4.sh <steps>`; `sh .../rival.sh`)
   after the trees above are re-made (`git worktree add --detach` at the commits named; node_modules linked).
