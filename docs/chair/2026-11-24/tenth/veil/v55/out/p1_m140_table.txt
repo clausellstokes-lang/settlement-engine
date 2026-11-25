@@ -1,0 +1,263 @@
+documents 140; all shards done: true; faults 0; link twin copy = linkTwin.shared.mjs: 3360 same, 0 differ
+
+COMPARISONS (reads compared / reads differing):
+  L1 gallery | aligned: 3360 / 0
+  L1 gallery | canon: 3360 / 0
+  L1 link | aligned: 3360 / 0
+  L1 link | canon: 3360 / 0
+  L2 gallery | aligned: 3360 / 0
+  L2 gallery | canon: 3360 / 0
+  L2-vs-L1 server | canon: 6720 / 3360
+  L2-vs-L1 twin | canon: 6720 / 3360
+instrument split (canon and aligned disagree on a read): 0
+documents with two or more persons of one name (npcs[]): 0 of 140
+
+== L2-vs-L1 server | canon: 3360 of 6720 reads differ
+   by setting: dm|allOpen=140 dm|default=140 dm|g:000=140 dm|g:001=140 dm|g:010=140 dm|g:011=140 dm|g:100=140 dm|g:101=140 dm|g:110=140 dm|off=140 dm|own=140 dm|unmarked=140 off|allOpen=140 off|default=140 off|g:000=140 off|g:001=140 off|g:010=140 off|g:011=140 off|g:100=140 off|g:101=140 off|g:110=140 off|off=140 off|own=140 off|unmarked=140
+   documents (0): 
+   defenseProfile#keys: reads 3360, leaves 3360
+      e.g. r3m-city-indebted-0-36 off|default at defenseProfile#keys
+        server: chainModifiers,economicGates,institutions,magicDependency,readiness,scores,traditions
+        twin:   chainModifiers,institutions,magicDependency,readiness,scores,traditions
+   defenseProfile.economicGates#keys: reads 3360, leaves 3360
+      e.g. r3m-city-indebted-0-36 off|default at defenseProfile.economicGates#keys
+        server: disaster,economic,internal,military,monster
+        twin:   (absent)
+   defenseProfile.economicGates.disaster: reads 3360, leaves 3360
+      e.g. r3m-city-indebted-0-36 off|default at defenseProfile.economicGates.disaster
+        server: 1
+        twin:   (absent)
+   defenseProfile.economicGates.economic: reads 3360, leaves 3360
+      e.g. r3m-city-indebted-0-36 off|default at defenseProfile.economicGates.economic
+        server: 1
+        twin:   (absent)
+   defenseProfile.economicGates.monster: reads 3360, leaves 3360
+      e.g. r3m-city-indebted-0-36 off|default at defenseProfile.economicGates.monster
+        server: 1
+        twin:   (absent)
+   defenseProfile.scores#keys: reads 3360, leaves 3360
+      e.g. r3m-city-indebted-0-36 off|default at defenseProfile.scores#keys
+        server: disaster,economic,internal,magicDependency,magical,military,monster,traditions
+        twin:   magicDependency,traditions
+   defenseProfile.scores.disaster: reads 3360, leaves 3360
+      e.g. r3m-city-indebted-0-36 off|default at defenseProfile.scores.disaster
+        server: 76
+        twin:   (absent)
+   defenseProfile.scores.economic: reads 3360, leaves 3360
+      e.g. r3m-city-indebted-0-36 off|default at defenseProfile.scores.economic
+        server: 89
+        twin:   (absent)
+   defenseProfile.scores.internal: reads 3360, leaves 3360
+      e.g. r3m-city-indebted-0-36 off|default at defenseProfile.scores.internal
+        server: 78
+        twin:   (absent)
+   defenseProfile.scores.magical: reads 3360, leaves 3360
+      e.g. r3m-city-indebted-0-36 off|default at defenseProfile.scores.magical
+        server: 56
+        twin:   (absent)
+   defenseProfile.scores.military: reads 3360, leaves 3360
+      e.g. r3m-city-indebted-0-36 off|default at defenseProfile.scores.military
+        server: 100
+        twin:   (absent)
+   defenseProfile.scores.monster: reads 3360, leaves 3360
+      e.g. r3m-city-indebted-0-36 off|default at defenseProfile.scores.monster
+        server: 62
+        twin:   (absent)
+   economicState.compound#keys: reads 3360, leaves 3360
+      e.g. r3m-city-indebted-0-36 off|default at economicState.compound#keys
+        server: economyOutput,inst,raw
+        twin:   inst,raw
+   economicState.compound.economyOutput: reads 3360, leaves 3360
+      e.g. r3m-city-indebted-0-36 off|default at economicState.compound.economyOutput
+        server: 37.38948214078478
+        twin:   (absent)
+   powerStructure#keys: reads 3360, leaves 3360
+      e.g. r3m-city-indebted-0-36 off|default at powerStructure#keys
+        server: conflicts,factionRelationships,factions,governingName,government,powerProjectionVersion,publicLegitimacy,recentConflict,stability
+        twin:   conflicts,factionRelationships,factions,governingName,government,powerProjectionVersion,publicLegitimacy,stability
+   powerStructure.recentConflict: reads 3360, leaves 3360
+      e.g. r3m-city-indebted-0-36 off|default at powerStructure.recentConflict
+        server: "The creditor's agent has blocked the money for repairs. In public they talk of prudence; in private they point to a clause in the loan."
+        twin:   (absent)
+   defenseProfile.economicGates.military: reads 3048, leaves 3048
+      e.g. r3m-city-indebted-0-36 off|default at defenseProfile.economicGates.military
+        server: 1
+        twin:   (absent)
+   defenseProfile.economicGates.internal: reads 2904, leaves 2904
+      e.g. r3m-city-indebted-0-36 off|default at defenseProfile.economicGates.internal
+        server: 1
+        twin:   (absent)
+   activeConditions[]#keys: reads 2664, leaves 2664
+      e.g. r3m-city-indebted-0-36 off|default at activeConditions[0]#keys
+        server: affectedSystems,archetype,causes,description,duration,id,label,severity,severityBand,status,triggeredAt
+        twin:   affectedSystems,archetype,causes,description,duration,id,label,severityBand,status,triggeredAt
+   activeConditions[].severity: reads 2664, leaves 2664
+      e.g. r3m-city-indebted-0-36 off|default at activeConditions[0].severity
+        server: 0.35
+        twin:   (absent)
+   defenseProfile.readiness#keys: reads 1848, leaves 1848
+      e.g. r3m-city-infiltrated-0-32 off|default at defenseProfile.readiness#keys
+        server: background,border,color,label,score
+        twin:   background,border,color,label
+   defenseProfile.readiness.score: reads 1848, leaves 1848
+      e.g. r3m-city-infiltrated-0-32 off|default at defenseProfile.readiness.score
+        server: 73
+        twin:   (absent)
+   economicState.safetyProfile#keys: reads 1680, leaves 1680
+      e.g. r3m-city-indebted-0-36 off|unmarked at economicState.safetyProfile#keys
+        server: blackMarketCapture,compound,crimeTypes,criminalInstitutions,economicDragDesc,flags,guardEffectivenessDesc,safetyDesc,safetyLabel
+        twin:   compound,criminalInstitutions,economicDragDesc,flags,guardEffectivenessDesc,safetyDesc,safetyLabel
+   economicState.safetyProfile.crimeTypes#len: reads 1680, leaves 1680
+      e.g. r3m-city-indebted-0-36 off|unmarked at economicState.safetyProfile.crimeTypes#len
+        server: 1
+        twin:   (absent)
+   economicState.safetyProfile.crimeTypes[]#keys: reads 1124, leaves 2574
+      e.g. r3m-city-indebted-0-36 off|unmarked at economicState.safetyProfile.crimeTypes[0]#keys
+        server: desc,type
+        twin:   (absent)
+   economicState.safetyProfile.crimeTypes[].desc: reads 1124, leaves 2574
+      e.g. r3m-city-indebted-0-36 off|unmarked at economicState.safetyProfile.crimeTypes[0].desc
+        server: "Residents fleeing creditor obligations or transferring assets fraudulently to avoid collection."
+        twin:   (absent)
+   economicState.safetyProfile.crimeTypes[].type: reads 1124, leaves 2574
+      e.g. r3m-city-indebted-0-36 off|unmarked at economicState.safetyProfile.crimeTypes[0].type
+        server: "debt evasion"
+        twin:   (absent)
+   economicState.safetyProfile.blackMarketCapture: reads 280, leaves 280
+      e.g. r3m-city-indebted-0-36 off|unmarked at economicState.safetyProfile.blackMarketCapture
+        server: 0
+        twin:   (absent)
+== L2-vs-L1 twin | canon: 3360 of 6720 reads differ
+   by setting: dm|allOpen=140 dm|default=140 dm|g:000=140 dm|g:001=140 dm|g:010=140 dm|g:011=140 dm|g:100=140 dm|g:101=140 dm|g:110=140 dm|off=140 dm|own=140 dm|unmarked=140 off|allOpen=140 off|default=140 off|g:000=140 off|g:001=140 off|g:010=140 off|g:011=140 off|g:100=140 off|g:101=140 off|g:110=140 off|off=140 off|own=140 off|unmarked=140
+   documents (0): 
+   defenseProfile#keys: reads 3360, leaves 3360
+      e.g. r3m-city-indebted-0-36 off|default at defenseProfile#keys
+        server: chainModifiers,economicGates,institutions,magicDependency,readiness,scores,traditions
+        twin:   chainModifiers,institutions,magicDependency,readiness,scores,traditions
+   defenseProfile.economicGates#keys: reads 3360, leaves 3360
+      e.g. r3m-city-indebted-0-36 off|default at defenseProfile.economicGates#keys
+        server: disaster,economic,internal,military,monster
+        twin:   (absent)
+   defenseProfile.economicGates.disaster: reads 3360, leaves 3360
+      e.g. r3m-city-indebted-0-36 off|default at defenseProfile.economicGates.disaster
+        server: 1
+        twin:   (absent)
+   defenseProfile.economicGates.economic: reads 3360, leaves 3360
+      e.g. r3m-city-indebted-0-36 off|default at defenseProfile.economicGates.economic
+        server: 1
+        twin:   (absent)
+   defenseProfile.economicGates.monster: reads 3360, leaves 3360
+      e.g. r3m-city-indebted-0-36 off|default at defenseProfile.economicGates.monster
+        server: 1
+        twin:   (absent)
+   defenseProfile.scores#keys: reads 3360, leaves 3360
+      e.g. r3m-city-indebted-0-36 off|default at defenseProfile.scores#keys
+        server: disaster,economic,internal,magicDependency,magical,military,monster,traditions
+        twin:   magicDependency,traditions
+   defenseProfile.scores.disaster: reads 3360, leaves 3360
+      e.g. r3m-city-indebted-0-36 off|default at defenseProfile.scores.disaster
+        server: 76
+        twin:   (absent)
+   defenseProfile.scores.economic: reads 3360, leaves 3360
+      e.g. r3m-city-indebted-0-36 off|default at defenseProfile.scores.economic
+        server: 89
+        twin:   (absent)
+   defenseProfile.scores.internal: reads 3360, leaves 3360
+      e.g. r3m-city-indebted-0-36 off|default at defenseProfile.scores.internal
+        server: 78
+        twin:   (absent)
+   defenseProfile.scores.magical: reads 3360, leaves 3360
+      e.g. r3m-city-indebted-0-36 off|default at defenseProfile.scores.magical
+        server: 56
+        twin:   (absent)
+   defenseProfile.scores.military: reads 3360, leaves 3360
+      e.g. r3m-city-indebted-0-36 off|default at defenseProfile.scores.military
+        server: 100
+        twin:   (absent)
+   defenseProfile.scores.monster: reads 3360, leaves 3360
+      e.g. r3m-city-indebted-0-36 off|default at defenseProfile.scores.monster
+        server: 62
+        twin:   (absent)
+   economicState.compound#keys: reads 3360, leaves 3360
+      e.g. r3m-city-indebted-0-36 off|default at economicState.compound#keys
+        server: economyOutput,inst,raw
+        twin:   inst,raw
+   economicState.compound.economyOutput: reads 3360, leaves 3360
+      e.g. r3m-city-indebted-0-36 off|default at economicState.compound.economyOutput
+        server: 37.38948214078478
+        twin:   (absent)
+   powerStructure#keys: reads 3360, leaves 3360
+      e.g. r3m-city-indebted-0-36 off|default at powerStructure#keys
+        server: conflicts,factionRelationships,factions,governingName,government,powerProjectionVersion,publicLegitimacy,recentConflict,stability
+        twin:   conflicts,factionRelationships,factions,governingName,government,powerProjectionVersion,publicLegitimacy,stability
+   powerStructure.recentConflict: reads 3360, leaves 3360
+      e.g. r3m-city-indebted-0-36 off|default at powerStructure.recentConflict
+        server: "The creditor's agent has blocked the money for repairs. In public they talk of prudence; in private they point to a clause in the loan."
+        twin:   (absent)
+   defenseProfile.economicGates.military: reads 3048, leaves 3048
+      e.g. r3m-city-indebted-0-36 off|default at defenseProfile.economicGates.military
+        server: 1
+        twin:   (absent)
+   defenseProfile.economicGates.internal: reads 2904, leaves 2904
+      e.g. r3m-city-indebted-0-36 off|default at defenseProfile.economicGates.internal
+        server: 1
+        twin:   (absent)
+   activeConditions[]#keys: reads 2664, leaves 2664
+      e.g. r3m-city-indebted-0-36 off|default at activeConditions[0]#keys
+        server: affectedSystems,archetype,causes,description,duration,id,label,severity,severityBand,status,triggeredAt
+        twin:   affectedSystems,archetype,causes,description,duration,id,label,severityBand,status,triggeredAt
+   activeConditions[].severity: reads 2664, leaves 2664
+      e.g. r3m-city-indebted-0-36 off|default at activeConditions[0].severity
+        server: 0.35
+        twin:   (absent)
+   defenseProfile.readiness#keys: reads 1848, leaves 1848
+      e.g. r3m-city-infiltrated-0-32 off|default at defenseProfile.readiness#keys
+        server: background,border,color,label,score
+        twin:   background,border,color,label
+   defenseProfile.readiness.score: reads 1848, leaves 1848
+      e.g. r3m-city-infiltrated-0-32 off|default at defenseProfile.readiness.score
+        server: 73
+        twin:   (absent)
+   economicState.safetyProfile#keys: reads 1680, leaves 1680
+      e.g. r3m-city-indebted-0-36 off|unmarked at economicState.safetyProfile#keys
+        server: blackMarketCapture,compound,crimeTypes,criminalInstitutions,economicDragDesc,flags,guardEffectivenessDesc,safetyDesc,safetyLabel
+        twin:   compound,criminalInstitutions,economicDragDesc,flags,guardEffectivenessDesc,safetyDesc,safetyLabel
+   economicState.safetyProfile.crimeTypes#len: reads 1680, leaves 1680
+      e.g. r3m-city-indebted-0-36 off|unmarked at economicState.safetyProfile.crimeTypes#len
+        server: 1
+        twin:   (absent)
+   economicState.safetyProfile.crimeTypes[]#keys: reads 1124, leaves 2574
+      e.g. r3m-city-indebted-0-36 off|unmarked at economicState.safetyProfile.crimeTypes[0]#keys
+        server: desc,type
+        twin:   (absent)
+   economicState.safetyProfile.crimeTypes[].desc: reads 1124, leaves 2574
+      e.g. r3m-city-indebted-0-36 off|unmarked at economicState.safetyProfile.crimeTypes[0].desc
+        server: "Residents fleeing creditor obligations or transferring assets fraudulently to avoid collection."
+        twin:   (absent)
+   economicState.safetyProfile.crimeTypes[].type: reads 1124, leaves 2574
+      e.g. r3m-city-indebted-0-36 off|unmarked at economicState.safetyProfile.crimeTypes[0].type
+        server: "debt evasion"
+        twin:   (absent)
+   economicState.safetyProfile.blackMarketCapture: reads 280, leaves 280
+      e.g. r3m-city-indebted-0-36 off|unmarked at economicState.safetyProfile.blackMarketCapture
+        server: 0
+        twin:   (absent)
+
+STORED IDS SERVED (C), reads searched by door | engine: gallery page (L2) | server=3360; gallery | server=3360; gallery | twin=3360; import | server=3360; link | server=3360; link | twin=3360; map member | server=3360
+fresh-shaped stored ids (F)(i): 0; documents whose own walk finds stored ids: 140
+SERVED MARKER BY DOOR | setting kind | state (reads): 
+  gallery | marked | served marker: 3080
+  gallery | unmarked | NO served marker: 280
+  import | marked | no marker field: 3080
+  import | unmarked | no marker field: 280
+  link | marked | served marker: 3080
+  link | unmarked | served marker: 280
+  map member | marked | no marker field: 3080
+  map member | unmarked | no marker field: 280
+stored document = the dump's (MEAS_STORED_CMP): 0 same, 0 differ, 0 missing
+STORED-SIDE CENSUS (paths of the stored documents holding a stored person id, the re-key's own sites apart):
+  none
+HITS (outside publicProse):
+  none
+HITS INSIDE publicProse (apart, ruling (a')):
+  none
