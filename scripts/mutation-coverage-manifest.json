@@ -1983,6 +1983,10 @@
     "tests/security/migrationOrdering.test.js": {
       "kind": "uncovered"
     },
+    "tests/security/shareSnapshotDenyPattern.walker.test.js": {
+      "kind": "rationale",
+      "rationale": "SNAP-CHRONICLE'S WALKER (VEIL-52, the chair's V13). Its catching power is EXECUTED IN THE TEST BODY on every gate run rather than claimed: the walker derives BOTH SIDES FROM SOURCE (the left side is the live WORLD_SECTIONS and the top-level keys serializeWorldSnapshotPublic emits through worldSnapshotShareOpts, imported from src/; the right side is the deny-pattern expression cut out of the net-current public._gallery_world_snapshot_is_safe in supabase/migrations and evaluated by Postgres in pglite, plus that whole scanner), and its TOOTH arm runs the same predicate on the scratch key `chronicle` and requires it refused by both arms. A standing sweep plant would transiently mutate a shared source file to prove what the tooth already proves each run."
+    },
     "tests/security/migrationRefIntegrity.meta.test.js": {
       "kind": "mutation",
       "label": "security/runIf migration renumber"
