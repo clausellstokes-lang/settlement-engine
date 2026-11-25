@@ -5,7 +5,99 @@ account, unreachable). Its law: `docs/chair/2026-11-24/tenth/prompts/START-CLOSE
 COMMON-EIGHTH 4-15, COMMON-RULES, and START-CLOSE-6's N3, N5, N6, N7, N8 read for CLOSE-7). A successor reads that file, then
 this section.
 
-## 0. WHERE THE LANE STANDS: THE WHOLE MEMORY (written 22:33 UTC 2026-11-24, by R24g (3); kept current at every push)
+## 0. FOR CLOSE-8: THE HAND-OVER (CLOSE-7 stopped at the chair's mark, 678,965 against 620,000; 16:0x UTC 2026-11-25)
+Read START-CLOSE-7 (on lane/chair-2026-11-08), then THIS SECTION. Everything below "## 0-HISTORY" is the record that led here; it is
+not instructions. The chair is session_019yED1SUxGVHyjQnoqoFvQ8 (message it with the Claude Code Remote MCP send_message tool).
+
+### 0.A Where the line stands
+- THE FIRST HAND-IN: "CLOSE-7 97c6bfc7a" (branch `lane/close-7-2026-11-24-cures`). The chair's helper is landing it as POINT 117,
+  in its own container, with every follow-up below merged on top:
+  - GUARD-2 94ff40f5c;
+  - TYPES 8e2441054;
+  - ANCHORS bd99fa7b6, ANCHORS-2 02b34ea1c, ANCHORS-3 9f859467a, ANCHORS-4 <see 0.F>;
+  - SIZE-BACK b67b29cdc (first paint -10,154 raw).
+  All are on `lane/close-7-2026-11-24-{guard2,types,anchors,sizeback}-wip`.
+- WAIT for the chair's "THE LINE IS <commit>" (point 117's tip). Only then begin the SECOND HAND-IN's join, on a branch you cut at
+  that tip: `lane/close-8-...` per your own start file.
+
+### 0.B Every unit received for the SECOND hand-in (each cut at 0ec96f13d; each claims both typechecks green in its own tree)
+| unit | seat | branch | commit | merge note |
+|---|---|---|---|---|
+| D2 | BIRTH-1 | lane/birth-1-2026-11-25-d2-wip | 4ea69f420 | settlementNarrative.js only. Moves C 13 / V 9 (prominentRelationship, pressureSentence). Dark golden 15/525 and lit twin 32/525 named, not re-recorded. Owes a mutation-manifest row for tests/generators. G8 (1): the pick also skips an open tie between the two ends of a covert tie. |
+| D2b | BIRTH-1 | lane/birth-1-2026-11-25-d2b-wip | 4822a2175 | New leaf display/sharedSentence.js; OverviewTab.jsx; one import line in narrativeGenerator.js. Moves C 18 / V 19 (pressureSentence). Byte rise taken (+210 raw first paint, +256 worker). AT THE JOIN: re-run gen/birth-1/tools/measure-d2b.mjs and check-d2b.mjs (on lane/birth-1-2026-11-25) over every birth, because WORDS-2's E3 changes the quarrel lines; a place with no candidate is said, not patched. |
+| D3 | BIRTH-1 | lane/birth-1-2026-11-25-d3-wip | 5262fbee4 | rulingStructure.js, economyReconciliation.js, a new leaf power/governanceLabelRoster.js, and one line of assembleSettlement.js. Moves V 4 (recentConflict). |
+| D5 | BIRTH-1 | lane/birth-1-2026-11-25-d5-wip | 289a70b3a | Test re-cut through a new pure reader defenceWillHoldOf. Moves 0. RED-AT-LINE's "defenceParts R13" leaves the list. |
+| D7 | BIRTH-1 | lane/birth-1-2026-11-25-d7-wip | b0cca45be, REPLACED under G25 (per the chair; take the seat's NEW commit, ask BIRTH-1 for it) | The crisis names only what the place holds: atom `crisis body`, facts/crisisBody.js, assembleSettlement :: settleCrisisBodyLines. Moves C 25 / V 17. First paint +5,746 via factsOf -> crisisBody -> stressPowerFaces (G24: try SIZE-BACK's method). Veto list: the atom, four sentences, `priest`, the pool-dominance row. |
+| D8 | BIRTH-1 | (its UNIT line has not come) | | BIRTH-1 says it is green. |
+| D4 | BIRTH-2 | lane/birth-2-2026-11-25-d4-wip | 57d26a136 | One sorting reader, display/powersStrongestFirst.js. Moves 0. Its wiring and lighting doors take the line's side at the join and are re-taken. Hand-back: gen/birth-2/HANDBACK.md. |
+| D6 | WORDS-1 | lane/words-1-2026-11-25-d6-wip | 81ac266a5 | Moves the frozen writer-reach row "type on factionRelationships" (web-transitive N->R), NOT re-recorded: re-take it by its door (`node scripts/check-writer-reach.mjs --write`, shrink-only; it may refuse a rise) and send the diff to the chair. |
+| E8 | WORDS-1 | lane/words-1-2026-11-25-e8-wip | 94b7a13d9 | Conflicts with E1 (still to come) in goals.js (take both imports), in goalSentencesOnceInTown.test.js (keep both helpers; vantageHash(heldGoal(longTitled(c)))) and in personMention.js (keep both blocks). |
+Still to come: E1 (WORDS-1); BIRTH-2's A5; WORDS-2's whole list (E2's measure; E4, E3, E5, E6, E9, E12, E10, E11, E7); BIRTH-1's D8.
+
+### 0.C Ruled by the chair and NOT built (build them in the second hand-in)
+- GOALS I-13 (R24q 2 and the 09:02 ruling): the goal receipt records every card EITHER PASS of `dealGoals` read.
+  - The held lines become maps from a line to its holder's id; whole-roster reads add their counted members; pass two adds the
+    cards whose wording it read.
+  - The draws stay unchanged. 0 births move, no golden moves.
+  - Red first in goals.test.js. The measure (`close-7/batch/goals-i13.census.jsx`) goes from 136 (C) and 172 (V) to 0.
+  - ONE LINE OWED: every reader of a goal receipt's `refs` outside the measure, and whether more refs change what it does.
+  - Detail: `close-7/reports/BATCH.md` § GOALS I-13 and `READS-117.md` item 2.
+- NEED-ATOM (R24q 7), its own src unit.
+  - The need atom drops the Butchers' livestock need on r2r-town-54. The atom is wrong and the page is right.
+  - Red first on r2r-town-54.
+  - The rule is a check over every birth of C and V: the atom equals the needs of the houses that STAND, with the raw roster and
+    the catalogue as the oracle, not the leaf.
+  - Name every reader of the atom, and whether any page prints from it.
+- D6's writer-reach row: re-take it by its door at the join, and send the diff to the chair.
+- SIZE-BACK's method tried on D7's crisisBody (G24): make the file lazy in vite.config.js's lazy-domain list. The three proofs are
+  as `close-7/briefs/SIZE-BACK.md`: the five figures, VERIFY_DIST, and behaviour (no reader before its chunk).
+- The chair's later decisions: "the crisis has a body" is a measure first (CHAIR-0512 (A)); the contender's word softened, three
+  wordings with counts.
+
+### 0.D Tools, corpora, records
+- Corpora:
+  - C, the census 900: `close-7/read24/make-plan.mjs`;
+  - V, the visitor 900: `close-7/read24/make-visitor-plan.mjs`;
+  - both plans are made in `close-7/before-after/plans/`.
+- The page battery: `close-7/read25/page-battery.mjs` (`--plan --out --tree --workers --diff --views`). TOOL'S GAP: each worker's
+  first birth misses the lazy "Patron deity" card (rendering, not generation).
+- The ONE before-and-after method and its figures: `close-7/briefs/BEFORE-AFTER.md` and `close-7/reports/BEFORE-AFTER.md`. Its
+  trees were LINE ddca5c789, CURES 0ec96f13d and BATCH 206e6c3ae; the data is in `close-7/before-after/`.
+- Causes of point 117's reds: `close-7/reports/READS-117.md`. The chair's lists: landing/117/*.txt on the chair branch.
+- FOR-THE-OWNER.md section 9 is PREPARED, signed by nobody:
+  - the three owner's figures: the herald digest 473->466, dossierProseManifest DM-only 214->213, and cartography W2's three
+    desert rows;
+  - the four frozen corpus figures;
+  - the version bump; bundle freshness; statecraftExposureBand;
+  - the veto list; sizes; the known, written-down effects.
+  Sections 0 and 6 of that file are older and need the second hand-in's figures.
+- Every ruling R24 to R24q is verbatim in `close-7/briefs/`. The chair's own record is read/RULING-R24.md on the chair branch.
+- LESSONS:
+  - PUSH EVERY CODE BRANCH FROM ITS OWN WORKTREE. The pre-push hook checks the tree of the directory git push runs in.
+  - Any branch cut at 97c6bfc7a needs TYPES 8e2441054 merged, or the hook refuses it.
+  - Never read a gate through a pipe. Registers move only by their doors (lighting `LIGHTING_CENSUS_REFREEZE=<seat>`; wiring
+    `node scripts/wiring-census.mjs`; observed-shape `node scripts/check-observed-shape-readers.mjs --write`; writer-reach
+    `node scripts/check-writer-reach.mjs --write`).
+
+### 0.E The order I would join in, and why
+1. Cut the join branch at point 117's tip. Merge the units that move NO birth first: D5, D4, then D3 (V 4 only). The doors re-taken
+   at those merges are then quiet.
+2. Then the birth-moving words in their seats' noted order: D2, D2b, D7 (its new commit), then WORDS-1's E1 and E8 together (their
+   conflicts are noted above), then D6.
+   - Re-take the lighting and wiring censuses ONCE at the end of each seat's group, by their doors. Several units take the same
+     figure from the same base.
+3. Then my three ruled units: NEED-ATOM, GOALS I-13 (it touches goals.js, which E1 and E8 also touch: AFTER them), and the
+   crisisBody size-back.
+4. Then ONE before-and-after on C and V (the method in 0.D, against the join's base) and ONE gate (COMMON-EIGHTH 14), with D2b's
+   check re-run on the joined tree.
+   - WHY this order: the no-birth units first keep every later diff attributable. The words grouped by seat keep their own notes
+     true. Goals I-13 goes last among the goals.js edits so its receipt sees the final pass logic.
+
+### 0.F ANCHORS-4 (my last unit)
+STATE: <filled at hand-over>
+
+## 0-HISTORY. THE RECORD THAT LED HERE (superseded by section 0 above)
+### (was) 0. WHERE THE LANE STANDS: THE WHOLE MEMORY (written 22:33 UTC 2026-11-24, by R24g (3); kept current at every push)
 A successor reads START-CLOSE-7 (on `lane/chair-2026-11-08`), then this section, and needs nothing else to act. Context
 summaries so far: TWO (the second ~22:2x UTC). A THIRD before "CLOSE-7 <commit>": say so to the chair; it seats a successor here.
 
