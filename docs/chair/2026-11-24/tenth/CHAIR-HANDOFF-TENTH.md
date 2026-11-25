@@ -28,6 +28,19 @@ whole first message, as sent).
   on 2026-11-24. The chair's own context read 433,030 of 1,000,000 at 14:36.
 
 ## 1. THE OWNER'S WORDS THAT GOVERN, newest first
+"To these and all future questions I defer decisions to you:" (2026-11-25, shortly before 01:08 UTC, this account), written
+over the chair's own list of six, which he quoted whole: (1) old towns rebuilt on a decree: build the guard, yes or no;
+(2) the weekly allowance: carry on narrowed, or stop; (3) the troubles rule's three numbers: yes, or changes; (4) imports
+on the live site: leave until the release, or the interim block; (5) how many pages are public today; (6) the ten
+security files: his run, and the number from step 2. WHAT THE CHAIR DECIDED ON IT (T65): (1) YES, built (R24j); (2) carry
+on, narrowed; (3) YES as drafted, lit as point 116, the numbers staying drafts for his tuning signature; (4) no interim;
+(5) no number can be had without him: the gallery's speed fix is built in its planned place, not as an emergency;
+(6) NOT THE CHAIR'S TO TAKE: applying anything to the live database is his hand alone. HOW "ALL FUTURE QUESTIONS" IS
+READ: the chair decides every judgment call and tells him what and why, vetoable, and asks nothing. IT IS NOT, AND HE
+WAS TOLD SO THE SAME MINUTE, a grant of: applying a migration or any SQL to production, the pull request's merge, the
+deploy, a credential, a permission setting, the final signings of the reference records and the size budgets (announced
+and confirmed in the chat of that hour: the standard's rule 17), or anything a permission check refuses (reported, never
+routed round).
 "Do everything prerelease" (2026-11-24, about 22:19 UTC, this account). IT ENDS THE TWO-STAGE RELEASE: nothing is parked
 for after the release any more (the eighth chair's E30 and this chair's T21 are overridden by it; his earlier "Do all of it
 predeploy." stands again). THE LIST IT MAKES: `PRERELEASE-LIST.md` beside this file. IT IS NOT a signing of the troubles
@@ -858,3 +871,15 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   landing machine. The sentence is in `ci/LINE-NOW.md`'s first block; the reader and its table are in
   `docs/chair/2026-11-24/tenth/ci/`. POINT 115 IS WHOLE. What the troubles rule now waits for is the owner's yes on its
   three numbers, and nothing else.
+- 2026-11-25 01:11 UTC · T65 · THE OWNER DEFERS THE SIX QUESTIONS AND "ALL FUTURE QUESTIONS" TO THE CHAIR; THE CHAIR'S SIX DECISIONS.
+  His words are in section 1 with how they are read and what they do not grant. DECIDED: (1) THE GUARD IS BUILT: R24j in
+  `read/RULING-R24.md` (CLOSE-7's unit "GUARD": the version up to '0.10.0'; a birth stamps the engine and a load never
+  does; one seam in `applyRosterDecreesAtTick`; `engine_mismatch`; the live-path measure is its red; a lint arm ties
+  the version to the births). (2) CARRY ON, NARROWED: five seats, no new lane, saves at every result; VEIL-54 stays
+  unseated (unit 5 goes to a veil seat that frees). (3) THE TROUBLES RULE IS LIT, AS DRAFTED, AS POINT 116: a helper,
+  LAND-116, from `prompts/START-LAND-116.txt` (one commit: the dial and the three pins the flip list names; the proofs:
+  the old-way column of the golden corpus equal 525 of 525, the lit measure equal to the table he was shown, the
+  saved-place tests; the home page's town by its door if it moves; THE WIDE GATE, the whole suite once; every text says
+  "lit by the chair's decision, the owner having deferred the question; the numbers stay drafts"; nothing signed; the
+  tuning inventory must not move: its door is not run). (4) NO INTERIM for the import door (V12). (5) READ-COST stays in
+  its planned place (V11). (6) THE TEN FILES REMAIN HIS HAND; he is advised to run them as soon as he can.

@@ -242,3 +242,44 @@ is gone; control on master. (c) THE CURE IS THE OWNER'S DECISION (a ruled design
 engine's version goes up with this release (an existing field, no new stored shape); a place is re-derived only by the
 engine that bore it; for any other place a decree's newcomer is appended and nothing else moves, which is what a DM sees
 today. IN THE CHAIR'S JUDGMENT THIS HOLDS THE RELEASE until he has answered.
+
+## R24j (added 01:11 UTC on 2026-11-25): THE RE-DERIVATION's GUARD IS TO BE BUILT (the owner deferred the question; the chair decides yes)
+THE OWNER'S WORD, verbatim, shortly before 01:08 UTC on 2026-11-25, over the chair's list of six: "To these and all future
+questions I defer decisions to you". THE FIRST OF THE SIX: "Old towns rebuilt on a decree: build the guard I recommended,
+yes or no. This one holds the release." THE CHAIR'S DECISION: YES. CLOSE-7 BUILDS IT, as the unit "GUARD", next after
+the mirror and the live-path measure (R24i (b)), which is the guard's red.
+**THE RULE:** A STORED PLACE IS RE-DERIVED ONLY BY THE ENGINE THAT BORE IT. For any other place a decree's newcomer is
+appended and nothing else moves: what a DM sees on the live site today.
+**THE BRIEF (each point proved, red first):**
+ 1. THE VERSION GOES UP WITH THIS RELEASE: `src/domain/settlement.schema.js :: GENERATOR_VERSION` '0.9.0' to '0.10.0'.
+    An existing field of every record; no new stored shape. IT MOVES EVERY NEW RECORD's `generatorVersion` (and what
+    hashes it): named for the owner's golden signing at the end, with the other birth-moving items.
+ 2. A BIRTH STAMPS THE ENGINE; A LOAD NEVER DOES. `normalizeSettlement.js` today writes the CURRENT version onto any
+    record that has none, at every load, import and export: after this release that would make a record with no stamp
+    look new-born. RULED: the current version is written at birth alone (`steps/assembleSettlement.js`'s path); a record
+    that reaches `normalizeSettlement` with no `generatorVersion` is given the LEGACY value '0.9.0' (a named constant),
+    never the current one. Walk every caller (the two gallery imports, the PDF, the Foundry export, the save loader).
+ 3. THE GUARD, ONE SEAM, BEFORE EITHER ENGINE PATH (local and remote): in `editSlice.js :: applyRosterDecreesAtTick`
+    (the one caller of `regenerateWithLayer`, on master as on the line): where `record.generatorVersion !==
+    GENERATOR_VERSION` the engine is NOT run: the tick's newcomers are appended to the stored record through the
+    layer's own declared-append semantics (`dmLayer.js :: appendDeclared`'s rows, the same people the re-derivation
+    would have appended), the layer is written as today, ONE write to both homes as today; `rederived: false`.
+ 4. WHAT CANNOT BE HONOURED IS SAID, NOT DONE: a layer whose `roots` hold a world fact (which enters only as `config'`
+    and so needs the engine) on a place of another engine: each such root comes back in `unapplied` with a NEW closed
+    reason, `engine_mismatch`, added to `RederiveUnappliedReason` and its frozen list in both directions; nothing is
+    half-applied. Count on the 180 how often a master-born save holds one (expected 0).
+ 5. THE PROOFS: (a) RED FIRST: the live-path measure on the line as it stands (the 180 master-born saves, one decree
+    each): places move; (b) GREEN: with the guard, 0 of 180 move beyond the newcomer's own rows, by record hash with
+    the newcomer's rows set apart, and the newcomer is on the roster once (the U111 fault, a person appended twice,
+    stays red-first in its own test); (c) A PLACE OF THIS ENGINE STILL RE-DERIVES, and exactly (0 of 180 line-born
+    saves move beyond the newcomer): the guard must not turn the feature off for new places; (d) THE NEXT RELEASE,
+    SIMULATED: with the constant moved once more in a test double, today's line-born saves take the appended path.
+ 6. SO THAT IT CANNOT BE FORGOTTEN AT A LATER RELEASE: a test that ties the version to the births: a committed row
+    (the version and the digest of the golden manifest at the last release, master's: '0.9.0' and master's manifest
+    digest) and the rule "the manifest's digest differs from the released one, so the version differs from the released
+    one"; the release's own signing step adds the next row. A lint arm, not a habit.
+ 7. NO OTHER RE-RUN IS TOUCHED: the DM's own re-rolls (history, people, a section) are asked for by name and are meant
+    to change what they re-roll; say in the hand-in which of them run the engine on a stored record, each with the
+    laws it passes (`withRecord*Law`), so the list is on paper.
+ 8. NO PERSISTED SHAPE MOVES BUT THE VERSION's VALUE; no copy changes; no page changes.
+SIZE: M (the chair's guess 6 to 8 seat-hours). IT HOLDS THE RELEASE. R24i's (a) stands (no corrections leaf).

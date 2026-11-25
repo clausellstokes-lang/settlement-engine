@@ -46,7 +46,7 @@ owner's golden signing, asked ONCE at the end). **D** = it needs the owner's own
 ## D. HOW A PLACE IS BORN
 | # | what | size | flags | state |
 |---|---|---|---|---|
-| D1 | THE TROUBLES RULE, LIT | S (one commit and its gate) | B, **D** | LANDED DARK AS POINT 115 (0559a8405, 00:09 UTC on 2026-11-25; dark equality 525 of 525 twice by the helper's own instrument); HIS YES ON ITS THREE NUMBERS IS ASKED |
+| D1 | THE TROUBLES RULE, LIT | S (one commit) and its wide gate | B | BEING LIT AS POINT 116 (LAND-116): the owner deferred the question on 2026-11-25 and the chair decided yes, as drafted; the numbers stay DRAFTS for his tuning signature at the end (D9) |
 | D2 | the prominent tie is never a covert one (`genRelNarrative` picks the best tie that is not covert; about one birth in eighteen) | M | B | not started; it cures at the source what the veil hides at the doors |
 | D3 | the power step's sentence written before the coherence repair (intake 2; 1 page in 287) | M | B | not started |
 | D4 | the stored powers not always strongest-first, and nine readers that print as if they were (intake 1): THE PAGE SORTS, and the bar marks the holder | M | | not started |
@@ -55,7 +55,7 @@ owner's golden signing, asked ONCE at the end). **D** = it needs the owner's own
 | D7 | "the crisis has a body" (intake 12): built whole on `lane/fortune-7-2026-11-22-u8-wip` at 0b7037727; it changes the density design he signed; and the creditor's agent named with no card (35 of 900) | L | B, **D** | his proposal to accept or refuse |
 | D8 | a stewardship's holder titled "the reeve" (intake 6) | S to M | | the seat lane's wording |
 | D9 | the numbers he sets, left as drafts: the seat contest's factors (all 1 today), fortune's numbers, LASTING's ages | his | **D** | his signing or his leave |
-| D10 | A SAVED PLACE IS REBUILT BY THE NEW ENGINE WHEN A DECREE ADDS A NEWCOMER AT A TICK (RULING R24i; 180 of 180 master-born saves move with nothing held): the chair's lean: the version goes up with this release and a place is re-derived only by the engine that bore it; else the newcomer is appended | M | **D**; IT HOLDS THE RELEASE | asked of the owner 2026-11-24; one measure owed (the live path, pins held); not built |
+| D10 | THE RE-DERIVATION's GUARD (RULINGS R24i, R24j): a stored place is re-derived only by the engine that bore it; else a decree's newcomer is appended and nothing else moves; the version goes up to '0.10.0'; a birth stamps the engine and a load never does | M, 6 to 8 seat-hours | B; IT HOLDS THE RELEASE | DECIDED YES by the chair on the owner's deferral (2026-11-25); CLOSE-7's unit "GUARD", after the mirror and the live-path measure |
 
 ## E. WORDS AND PAGES
 | # | what | size | flags | state |
