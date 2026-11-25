@@ -325,3 +325,20 @@ marker), which is a paid feature. THE CHAIR'S RECOMMENDATION: no interim; close 
 makers hide things from people who can import (their own players on premium accounts): then the interim, with a fresh
 security read, is a few hours' work. (3) Phase 1's bar already holds this door (V1-3: every door equal to the party
 link's; the import of a marked page is in the joined tree's proof).
+
+## RULING V13 (added 00:51 UTC on 2026-11-25): "SNAP-CHRONICLE" DRIVEN THROUGH THE CLIENT; THE CURE IS THE CLIENT's
+VEIL-52 (`v52/out/SNAP-CHRONICLE.txt` at 85ef42a72; CONFIRMED, executed, through the client's own `shareMap`, on
+master's chain and client AND on the tip's): (1) YES: THE WHOLE PUBLISH IS REFUSED with the chronicle section ticked, AND
+TICKED IS THE EDITOR's DEFAULT (`ALL_SECTION_KEYS`); (2) the maker sees: "World snapshot contains a forbidden private key
+and cannot be shared"; (3) with the chronicle unticked the map publishes; (4) the tip behaves the same. So on the live
+site a map shared with its campaign fails by default wherever the campaign has a chronicle, until the maker unticks it.
+**RULED: THE CLIENT STOPS OFFERING AND SERIALIZING THE CHRONICLE SECTION OF A SHARED MAP's WORLD.** No migration; the
+server's deny pattern (`089_publish_map_server_snapshot_sanitize.sql:80`) is untouched; nothing new is served. WHY THIS
+SIDE: the server's refusal is the product's stated posture for a shared world; sparing the key would be a change to a
+security sanitiser that newly lets through the headlines and the affected settlements' names: a new capability and the
+owner's, not a repair. IT RIDES IN VEIL-52's UNIT 3, client-only: the editor and `ALL_SECTION_KEYS` lose `chronicle`; the
+serializer drops it whatever a stored selection says; red first (the default publish refused), then green (published; no
+chronicle in the served world); A WALKER: every section key the editor offers and every top-level key the serializer can
+emit is tried against the server's own deny pattern, read from the chain's net-current text, 0 refused; the copy that
+named the section leaves by `tests/copy`'s rules. THE OWNER IS TOLD; if he wants a shared map to carry its chronicle,
+that is a feature to design with the veil, on his word.
