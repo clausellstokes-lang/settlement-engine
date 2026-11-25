@@ -260,3 +260,19 @@
   - The other `.institution` hits in components, `domain/display` and the PDF sections are a SERVICE row's field, not a
     person's.
 - **No line is cured.**
+
+## (4) THE DISTILLATE: COMMITTED 4569e73aa (CONFIRMED by run)
+- **The door check:** no register or signing door names `src/domain/data/intentAtlas.distillate.json` (grep of `scripts/` and
+  `tests/`; it is absent from `tests/fixtures/.golden-freeze-register.json`). The mentions are a reader census's
+  file-snapshot baseline, the bundle freshness test, and the id-free gate.
+- **The run:** `node scripts/distill-intent-atlas.mjs`, through the mutex, exit=0 (`GUARD/distill2.log`; the first run, at
+  05:44, was stopped by the container restart).
+- **The diff is the version's value ALONE:** one line, `generatedFrom.generatorVersion` "0.9.0" → "0.10.0". Committed alone.
+- **The tests:**
+  - `intentAtlasSoakDistiller`: GREEN.
+  - `intentAtlasIdFree`: green.
+  - **`tests/edgeFunctions/intentAtlasBundle.freshness.test.js` › "the current source tree matches the recorded hash" is now
+    RED: "Bundle is stale".** The edge bundle records its inputs' hash, and the distillate is one of them. Its regeneration is
+    the bundle's own build step, which is outside step A. It is NOT run, and is named here for CLOSE-7's word.
+  - The door it names: `npm run build:edge-shared` (recorded hash 69ba037dc75892dc; the source now hashes 9988f16fd1912957).
+    Not run.

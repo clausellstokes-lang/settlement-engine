@@ -151,11 +151,19 @@ CURES AT cc7ddec1c (06:12 UTC), with point 116, ALL GATES:
   79/79.
 - The tuning registers did not red. -cures is pushing.
 
-THE NEXT COMMAND:
-- on the builder's step-A message, merge -guard-wip onto cures (9b777f3fb), taking the lighting census as the cures' side and
-  re-taking it by its door;
-- name both commits to the builder for STEP B: the merged commit, and 9b777f3fb as the parent without GUARD;
-- run the gates, push, and send the GUARD line (with (c2), the four counts and the golden list).
+GUARD MERGED (06:15 UTC) onto cures as eaf34abde (from -guard-wip 4569e73aa).
+- The lighting census was re-taken at 91c2b233f (3796 -> 3798).
+- STEP A: the distillate was re-made by its own script (4569e73aa; diff = the version alone). The null: no reader cures anything;
+  the field goes from absent to null.
+- RULING ASKED: the edge bundle (intentAtlasBundle freshness red; its door `npm run build:edge-shared` writes deployable
+  supabase/functions/_shared bundles, engineBundle among them). My recommendation: list it for the owner, not built.
+- STEP B is RUNNING (same builder): (c2) merged 91c2b233f vs parent cc7ddec1c, (c1), and the four drift counts (3ii).
+- IF (c2) has ONE differing row: `git -C /home/user/wt/cures revert -m 1 eaf34abde`, then tell the chair.
+
+THE NEXT COMMAND: on step B's message:
+- if (c2) is 180/180 and the drift is <= 10, run the merged cures' gates (GUARD's own tests, tests/lint, tests/copy), push, and
+  send the GUARD line;
+- then brief BATCH (`close-7/briefs/BATCH.md`, narrow) for the same builder.
 
 ### 0.1 Ground
 - THE LIT TREE (before every cure): `/home/user/wt/lit`, detached at d447ee31e (the flip; `origin/lane/close-6-2026-11-23-flip`).
