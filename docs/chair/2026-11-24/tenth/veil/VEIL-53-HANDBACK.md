@@ -18,7 +18,9 @@ BUILT, NOT MERGED (all pushed unless said):
 - `lane/veil-53-2026-11-24-j1-wip` e1b7a8714 (PUSHED; worktree `/home/user/j153`): J1's cure (RULING V2): d7e592b43 + my read's
   amendment e1b7a8714 (HOUSE_FLAGS one literal; presumedThings back to 57). READ BY VEIL-55: NO FAULT; rides the join (unit 7).
 - `lane/veil-53-2026-11-24-cures-wip` 6b674eb36 (PUSHED; worktree `/home/user/cures53`): V3's cure A = 8067faafb + my read's
-  amendment 6b674eb36 (only the three withheld terms; `food` keeps its old reading). Sent to VEIL-55. Cure B's builder RUNNING on
+  amendment 6b674eb36 (only the three withheld terms; `food` keeps its old reading). READ BY VEIL-55: NO FAULT (0 of 280 stored
+  records lack a term); rides the join. OWED TO THE V6 WALKER: hold `governanceAccount.js :: BREAKDOWN_WITHHELD_TERMS` equal to the
+  registry row `legitimacy.breakdown`'s withheld terms. Cure B's builder RUNNING on
   it (notes `out/v53/cures/B/`).
 RUNNING: cure B's builder only. The PAGES slice was STOPPED at 22:50 (the chair's order: it comes after the anon arm).
 THE QUEUE, IN ORDER (the chair, 22:48, governs): (1) J1: DONE. (2) V3's five cures A-E, one builder each, stacked on `lane/veil-53-2026-11-24-cures-wip` from ba7460c33 (brief
