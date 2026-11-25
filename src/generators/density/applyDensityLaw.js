@@ -592,7 +592,7 @@ const RIVAL_DESC_OF_HOST = Object.freeze([
 /**
  * The minted rival's description (14a): where its host's opens with a one-body line, the rival's own, whole (the host's
  * appended lines are the host's: its crisis notes, its standing); else nothing, and the copy stands.
- * @param {unknown} desc the host's description @returns {{ desc?: string }} the rival's (empty where the host's is copied as it is)
+ * @param {unknown} desc the host's description @returns {{ desc?: string, dmStanding?: string }} the rival's (empty where the host's is copied as it is; A5: its own line carries no standing)
  */
 function rivalDescOf(desc) {
   const d = typeof desc === 'string' ? desc : '';
