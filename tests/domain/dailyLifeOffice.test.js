@@ -18,6 +18,9 @@
  *       steward's family `house: lord's steward` answered by no office atom (headman and reeve still are); each line
  *       admitted exactly where its office holds, none where the steward's does; on 30 born places (five a size, M1's
  *       births) none prints where its office does not hold, and L12 prints nowhere.
+ *   (f) WORDS-2 E5 (intake 3): Dawn Work's W11, B19 and Gathering Places' P13 ("the elder") need `office: elders` (the
+ *       governing row's elders form), never `ruler: elder`, which a Headman's Authority also holds. Red first by name on
+ *       0ec96f13d8: C dp-hamlet-22, dp-hamlet-66, dp-village-22 printed W11 under a Headman's Authority.
  *   (e) THE DOOR: the leaf rides lazy, beside `facts/factsOf.js` (vite.config.js :: FIRSTPAINT2_LAZY_DOMAIN).
  */
 import { describe, it, expect, beforeAll } from 'vitest';
@@ -32,6 +35,8 @@ import { SEAT_BANDS, SEAT_TABLE, formKindOf } from '../../src/domain/seat/seatTa
 import { governingFactionOf, nameOf } from '../../src/domain/rulingPower.js';
 import { toPublicSafe } from '../../src/domain/display/publicSafe.js';
 import { COMMONER_RESENTMENTS } from '../../src/data/dailyLife/commonerResentments.js';
+import { DAWN_WORK } from '../../src/data/dailyLife/dawnWork.js';
+import { GATHERING_NAMED, GATHERING_PLAIN } from '../../src/data/dailyLife/gatheringPlaces.js';
 import { NEW_WORDS } from '../../src/domain/facts/registeredWords.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
@@ -262,4 +267,25 @@ describe('(e) the door: the leaf rides lazy, beside factsOf', () => {
     expect(route('src/domain/facts/factsOf.js')).toBe('coherence-lazy');
     expect(route(LEAF_REL)).toBe('coherence-lazy');
   });
+});
+
+describe('(f) E5: the elder lines need the elders\' office, never a headman\'s', () => {
+  /** every pool line of the three, wherever it sits */
+  const all = [];
+  const walk = (/** @type {unknown} */ v) => { if (Array.isArray(v)) v.forEach(walk); else if (v && typeof v === 'object') { const l = /** @type {any} */ (v); if (typeof l.id === 'string' && typeof l.text === 'string') all.push(l); else Object.values(l).forEach(walk); } };
+  walk(DAWN_WORK); walk(GATHERING_NAMED); walk(GATHERING_PLAIN);
+  const ELDER = all.filter((l) => ['W11', 'B19', 'P13'].includes(l.id));
+  it('W11, B19 and P13 each declare `office: elders` and not `ruler: elder`', () => {
+    expect(ELDER.map((l) => l.id).sort()).toEqual(['B19', 'P13', 'W11']);
+    for (const l of ELDER) expect([...l.needs], l.id).toEqual(['office: elders']);
+  });
+  it('C dp-hamlet-22, dp-hamlet-66, dp-village-22 (a Headman\'s Authority): none of the three prints', () => {
+    for (const seed of ['dp-hamlet-22', 'dp-hamlet-66', 'dp-village-22']) {
+      const rec = generateSettlementPipeline(birthConfig({ settType: seed.split('-')[1] }), null, { seed, customContent: {} });
+      expect(officeAt(rec).headman, `${seed}: a headman's office`).toBe(true);
+      const text = Object.values(deriveDailyLife(rec).slots).map((x) => x.text).join(' ');
+      expect(text.length).toBeGreaterThan(0);
+      expect(ELDER.filter((l) => text.includes(l.text.replace(/\.$/, ''))).map((l) => l.id), seed).toEqual([]);
+    }
+  }, 120_000);
 });
