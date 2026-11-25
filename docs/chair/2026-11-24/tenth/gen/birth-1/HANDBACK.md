@@ -62,16 +62,25 @@
   score; X4 binds on C 76, V 75; the old points bound would be red on V dp-village-64, -113 too (`d5/table.txt`). A planted-mutation
   negative control was REFUSED by my permission check (told the chair; not retried). Governing run (25 files naming the defence
   module + tests/lint whole: 252 files, 3,938 tests): 5 red, all on RED-AT-LINE; lighting census unmoved. Its RED-AT-LINE row (defenceParts R13) leaves the list when it lands (the chair's).
-- **D8 — BUILT (ruling G10, option A), runs IN FLIGHT** on `lane/birth-1-2026-11-25-d8-wip` (worktree `/home/user/wt/d8`): d391b1fbd
-  (the catalogue word: the "Lord's reeve" row's face 'the reeve' -> "the lord's reeve"; a zero-import leaf `data/people/titleReadAs.js`
-  read by `poolMap.js :: poolFor, titleLinesFor` and `faceHonorifics.js :: honorificOfTitle, styledTitleOf`, so the title-keyed tables
-  read the new title as the old; test `tests/domain/stewardshipReeveTitle.test.js`, red 7/7 at the base, 7/7 after), 7ee78b87f
-  (lighting door). Moves C 12, V 18 thorps; every differing leaf the title alone (`tools/leafcheck.mjs`). Without the leaf the card
-  re-dealt its secret, presentation and power (measured, refused). Governing run: 142 files naming the title or the changed
-  modules + tests/lint + tests/copy whole, started after 11:23 UTC. Owed: the goldens it moves; push; hand-in naming the catalogue word.
-- **D2b (ruling G8 (3)) — A STOP SENT, WAITING**: a pressure line equal to the prominent tie's line C 11, V 10 (11 with D2); sharing a
-  sentence with it C 18, V 19 (20). Proposed: cure at the draw by the shared-sentence test (~38 births, over the chair's 22). The
-  owner's Overview already hides the repeat (`OverviewTab.jsx`); the PDF does not.
+- **D8 — BUILT (ruling G10, option A); ONE STOP SENT TO THE CHAIR** on `lane/birth-1-2026-11-25-d8-wip` (worktree `/home/user/wt/d8`):
+  d391b1fbd (the catalogue word: the "Lord's reeve" row's face 'the reeve' -> "the lord's reeve"; the leaf `data/people/titleReadAs.js`
+  read by `poolMap.js :: poolFor, titleLinesFor`; test `tests/domain/stewardshipReeveTitle.test.js` red 7/7 -> green), 7ee78b87f
+  (lighting door), cf5d033e5 (the honorific registry's own row for the new face, `faceHonorifics.js` alias reverted; figures re-stated
+  by cause: honorific titles 212 -> 213, forms 373 -> 374, face registry distinct titles 185 -> 186; the test's seed loop collected).
+  Moves C 12, V 18 thorps, every differing leaf the title alone; goldens 0/0. Governing run at 7ee78b87f (142 files + tests/lint +
+  tests/copy whole: 384 files, 5,251 tests): 11 red, 7 known; 3 of the 4 new cured in cf5d033e5. THE STOP: `presumedThings.walker`
+  ARM 1 reds the catalogue literal "the lord's reeve" (3 words; "the reeve" had 2 and was never read); it cannot declare a need and
+  the register is shrink-only. Asked the chair: (a) one row in the widened register by its door, reason "family", as "the lord's
+  appointee" stands (recommended), (b) two words (none found), (c) withdraw D8. NOT PUSHED until the ruling.
+- **D2b — BUILT (ruling G8 (3), re-set: the shared-sentence test, ~38, stop over 45)** on `lane/birth-1-2026-11-25-d2b-wip` (worktree
+  `/home/user/wt/d2b`): 52ddb326e (the leaf `domain/display/sharedSentence.js :: sharesSentence`, the Overview's inline test moved
+  verbatim and read by `OverviewTab.jsx` and `narrativeGenerator.js :: generatePressureSentence`; test
+  `tests/domain/pressureNotTheTieLine.test.js` red 37/38 at the base, 38/38 after), 515a3d40c (lighting door). Census over every birth
+  (`tools/measure-d2b.mjs`, `check-d2b.mjs`): alone C 18 -> 0, V 19 -> 0 (moved C 18, V 19); joined with D2 (scratch tree
+  `/home/user/wt/join-d2-d2b`, merged --no-commit of -d2-wip 4ea69f420 and -d2b-wip 515a3d40c) V 20 -> 0, moved C 18, V 20; only the
+  pressure line moves; no place loses its line; goldens 0/0. Readers that print the stored line besides the Overview (for the hand-in):
+  to be listed (the PDF's view model `src/pdf/lib/viewModel.js`, the summary/quick guide, the tonight sheet, the Foundry export...).
+  Governing run IN FLIGHT; the build (first paint: a component imports the new leaf) owed.
   Earlier notes on D8:
   'Feudal Stewardship' (`rulingStructure.js` governanceLabelMap `"lord's reeve"`); its own desc says "A steward appointed by a distant
   lord". Hamlets up hold "Lord's steward" (face 'the steward'). The seat line is `governanceAccount.js :: governanceAccountOf` (role
@@ -80,4 +89,4 @@
   STRESS_POWER_FACES lists each crisis's powers; `power/stressFactions.js :: applyStressEventFactions` pushes them (the density law may not seat them). `tools/measure-d7.mjs` written (crises, roster, every crisis sentence per birth); to run once on C and V, then the per-kind analysis offline.
 
 ### 0.2 Next step
-Read D8's governing log (`scratchpad/d8/gov.log`) against RED-AT-LINE; D8's goldens; push -d8-wip; hand in. Then D7's measure (`tools/measure-d7.mjs`, one births run, analysis offline). D2b on the chair's word.
+Read D2b's governing log (`scratchpad/d2b/gov.log`); the build's figures; list the readers of the stored pressure line; push -d2b-wip; hand in. D8 on the chair's word. Then D7's measure (`tools/measure-d7.mjs`).

@@ -1,0 +1,76 @@
+dp-thorp-39
+  tie   : Mariam al-Malik has learned something about Jabir al-Din's family that he does not know.
+  before: Mariam al-Malik and Jabir al-Din respect each other, and it is real. Mariam al-Malik has learned something about Jabir al-Din's family that he does not know.
+  after : A dispute over grazing rights and water access has run for two seasons, and those on each side of it no longer speak to one another.
+dp-hamlet-23
+  tie   : Someone else has learned what favour Dobroslav Kozlov owes Ludmila Lebedev, and now has a hold on him too.
+  before: Someone else has learned what favour Dobroslav Kozlov owes Ludmila Lebedev, and now has a hold on him too.
+  after : A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.
+dp-hamlet-48
+  tie   : Shahd al-Dimashqi and Maryam al-Amin are teacher and heir. A third party has asked Shahd al-Dimashqi, quietly, whether Maryam al-Amin can be trusted. The answer took too long.
+  before: A third party has asked Shahd al-Dimashqi, quietly, whether Maryam al-Amin can be trusted. The answer took too long.
+  after : Monsters prowl near the outlying farms, and no one here can agree whether to raise a levy or pay others to drive them off.
+dp-hamlet-65
+  tie   : Jamilah al-Hassan voted against Jana al-Qadir on a small matter last week. Jana al-Qadir is waiting to see whether it was small.
+  before: Jamilah al-Hassan voted against Jana al-Qadir on a small matter last week. Jana al-Qadir is waiting to see whether it was small.
+  after : A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.
+dp-hamlet-72
+  tie   : Grata Nero has one favour left to call in, and is saving it. Torquatus Varro knows, and is watching for it.
+  before: Grata Nero and Torquatus Varro are teacher and heir. Grata Nero has one favour left to call in, and is saving it. Torquatus Varro knows, and is watching for it.
+  after : A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.
+dp-hamlet-142
+  tie   : Statius Rufus and Horatius Gallus respect each other, and it is real. Statius Rufus and Horatius Gallus are about to be on opposite sides of an important decision.
+  before: Statius Rufus and Horatius Gallus are about to be on opposite sides of an important decision.
+  after : A dispute over field rotation and grazing rights has divided the village for most of this season.
+dp-hamlet-149
+  tie   : Brennan Kelly has one favour left to call in, and is saving it. Ualgarg Kelly knows, and is watching for it.
+  before: Brennan Kelly has one favour left to call in, and is saving it. Ualgarg Kelly knows, and is watching for it.
+  after : A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.
+dp-village-4
+  tie   : Ughul Kiyad and Altantsetseg Jadaran each hold something over the other. Altantsetseg Jadaran has recently secured something that makes Ughul Kiyad's hold obsolete. The politeness continues, for now.
+  before: Altantsetseg Jadaran has recently secured something that makes Ughul Kiyad's hold obsolete. The politeness continues, for now.
+  after : The household that sells the most beyond the settlement has been throwing its weight around in community decisions.
+dp-village-26
+  tie   : The council has asked Leela Khanna and Rajesh Jain to audit each other's accounts. Both agreed, and neither is comfortable.
+  before: The council has asked Leela Khanna and Rajesh Jain to audit each other's accounts. Both agreed, and neither is comfortable.
+  after : A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.
+dp-village-81
+  tie   : Maxim Sokolov has written down what Natasha Bogdanov owes and left a sealed copy with a third party.
+  before: Maxim Sokolov has written down what Natasha Bogdanov owes and left a sealed copy with a third party.
+  after : A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.
+dp-village-84
+  tie   : Pompeius Denter has begun to act like someone who considers the debt paid. Tacitus Varro does not.
+  before: Pompeius Denter and Tacitus Varro are tied by a debt not yet paid. Pompeius Denter has begun to act like someone who considers the debt paid. Tacitus Varro does not.
+  after : A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.
+dp-village-100
+  tie   : Huitzilxochitl Ahau has begun teaching Yohualli Itza's methods as her own.
+  before: Huitzilxochitl Ahau has begun teaching Yohualli Itza's methods as her own.
+  after : A noble family is contesting a merchant's right to operate in their traditional market territory. The Elder Council is hearing the case and wishes it were not.
+dp-village-148
+  tie   : Khulood al-Rashidi and Tabassum al-Kindi are allies of convenience. Khulood al-Rashidi and Tabassum al-Kindi both want the same office, and the alliance cannot survive one of them winning it.
+  before: Khulood al-Rashidi and Tabassum al-Kindi both want the same office, and the alliance cannot survive one of them winning it.
+  after : The household that sells the most beyond the settlement has been throwing its weight around in community decisions.
+dp-city-43
+  tie   : Someone with a hold over Katla Thorsson has started asking why Asa Vargsson's people never meet any trouble. Katla Thorsson or Asa Vargsson will have to act before the other does.
+  before: Someone with a hold over Katla Thorsson has started asking why Asa Vargsson's people never meet any trouble. Katla Thorsson or Asa Vargsson will have to act before the other does.
+  after : A hedge wizard was dragged before the ecclesiastical court. The mages' quarter is very quiet at the moment.
+dp-city-144
+  tie   : Ishwar Srinivasan has declared a holy day on which no soldier may bear arms. Tukaram Kapur has a patrol scheduled for it.
+  before: Ishwar Srinivasan has declared a holy day on which no soldier may bear arms. Tukaram Kapur has a patrol scheduled for it.
+  after : The military commanders are pushing for expanded authority over civilian courts, and the City-State Council is losing ground.
+dp-metropolis-15
+  tie   : Chimalxochitl Paxbolon's quarter-day payment from Night Caan arrived with a name attached: someone the whisper broker wants dealt with.
+  before: Night Caan and Chimalxochitl Paxbolon are in a crooked arrangement together. Chimalxochitl Paxbolon's quarter-day payment from Night Caan arrived with a name attached: someone the whisper broker wants dealt with.
+  after : Monsters prowl near the outlying farms, and no one here can agree whether to raise a levy or pay others to drive them off.
+dp-metropolis-27
+  tie   : Amir al-Jabbar has taken silver from someone besides Sameer ibn Arabi, and the master of granaries has learned who.
+  before: Amir al-Jabbar has taken silver from someone besides Sameer ibn Arabi, and the master of granaries has learned who.
+  after : A guild's private soldiers arrested a rival's factor. The watch is refusing to intervene in what they call a 'merchant matter'.
+dp-metropolis-45
+  tie   : The last commission left traces that a determined investigator might find. Caoimhe MacGillivray is reconsidering the relationship.
+  before: The last commission left traces that a determined investigator might find. Caoimhe MacGillivray is reconsidering the relationship.
+  after : Several merchants have been found murdered this season, and people say the guard is doing nothing about it.
+dp-metropolis-79
+  tie   : Vigdis Ogmundsson and Katla Finsson are tied by a trade in magical goods. Katla Finsson has begun asking for workings of a different order: the kind with witnesses. Vigdis Ogmundsson has not yet said no.
+  before: Katla Finsson has begun asking for workings of a different order: the kind with witnesses. Vigdis Ogmundsson has not yet said no.
+  after : Several merchants have been found murdered this season, and people say the guard is doing nothing about it.

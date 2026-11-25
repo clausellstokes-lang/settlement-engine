@@ -1,0 +1,72 @@
+dp-thorp-39
+  tie   : Khatan Tayichi'ud and Qubilai Borjigin still respect each other, but what each of them wants is pulling apart, and both can see it.
+  before: Khatan Tayichi'ud and Qubilai Borjigin respect each other, and it is real. Khatan Tayichi'ud and Qubilai Borjigin still respect each other, but what each of them wants is pulling apart, and both can see it.
+  after : A dispute over grazing rights and water access has run for two seasons, and those on each side of it no longer speak to one another.
+dp-thorp-59
+  tie   : Aristoteles Chomatenos and Podromissa Attaleiates are rivals, and neither gives the other ground. A post opens at midsummer, and only Podromissa Attaleiates or Aristoteles Chomatenos can fill it.
+  before: A post opens at midsummer, and only Podromissa Attaleiates or Aristoteles Chomatenos can fill it.
+  after : A dispute over grazing rights and water access has run for two seasons, and those on each side of it no longer speak to one another.
+dp-thorp-92
+  tie   : Nerva Maximus and Secunda Cicero are allies of convenience. Someone else is working to pull Nerva Maximus and Secunda Cicero apart.
+  before: Nerva Maximus and Secunda Cicero are allies of convenience. Someone else is working to pull Nerva Maximus and Secunda Cicero apart.
+  after : A dispute over grazing rights and water access has run for two seasons, and those on each side of it no longer speak to one another.
+dp-thorp-127
+  tie   : Nakul Chuc has been telling clients that Cuauhtli Balam's work is slipping. Two of the clients have repeated it to Cuauhtli Balam.
+  before: Nakul Chuc has been telling clients that Cuauhtli Balam's work is slipping. Two of the clients have repeated it to Cuauhtli Balam.
+  after : A dispute over grazing rights and water access has run for two seasons, and those on each side of it no longer speak to one another.
+dp-thorp-128
+  tie   : A post opens at midsummer, and only Rian Sullivan or Tailtiu Murphy can fill it.
+  before: A post opens at midsummer, and only Rian Sullivan or Tailtiu Murphy can fill it.
+  after : A dispute over grazing rights and water access has run for two seasons, and those on each side of it no longer speak to one another.
+dp-hamlet-23
+  tie   : Ramesh Basu has begun to count the debt Veerendra Chatterjee owes among the militia captain's assets, and has had it written down before witnesses.
+  before: Ramesh Basu has begun to count the debt Veerendra Chatterjee owes among the militia captain's assets, and has had it written down before witnesses.
+  after : A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.
+dp-hamlet-45
+  tie   : Mechthild Richter has asked Luitgard Koch for a loan. It is the first time a debt between teacher and student has run that way.
+  before: Mechthild Richter has asked Luitgard Koch for a loan. It is the first time a debt between teacher and student has run that way.
+  after : A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.
+dp-hamlet-48
+  tie   : Ériu Quinn and Caoimhe Quinn are allies of convenience. The threat that brought Ériu Quinn and Caoimhe Quinn together is gone. Neither has said so aloud.
+  before: The threat that brought Ériu Quinn and Caoimhe Quinn together is gone. Neither has said so aloud.
+  after : A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.
+dp-hamlet-65
+  tie   : Cnoc Lynch and Aoife Murphy are rivals, and neither gives the other ground. Cnoc Lynch lost the last contract to Aoife Murphy by a single vote, and has learned who cast it.
+  before: Cnoc Lynch lost the last contract to Aoife Murphy by a single vote, and has learned who cast it.
+  after : A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.
+dp-hamlet-110
+  tie   : Donal MacCarthy has refused Lasairfhiona Byrne a small favour for the first time in years.
+  before: Donal MacCarthy has refused Lasairfhiona Byrne a small favour for the first time in years.
+  after : A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.
+dp-village-84
+  tie   : Tormod Larkin has written down what Garbhán Walsh owes and left a sealed copy with a third party.
+  before: Garbhán Walsh and Tormod Larkin each hold something over the other. Tormod Larkin has written down what Garbhán Walsh owes and left a sealed copy with a third party.
+  after : A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.
+dp-village-91
+  tie   : A document Abaqa Ongirad and Organa Ongirad each believed only they possessed has turned up in someone else's hands.
+  before: Abaqa Ongirad and Organa Ongirad each hold something over the other. A document Abaqa Ongirad and Organa Ongirad each believed only they possessed has turned up in someone else's hands.
+  after : A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.
+dp-village-100
+  tie   : Someone else has learned what favour Imix Moo owes Bolontiku Batab, and now has a hold on the waystation keeper too.
+  before: Someone else has learned what favour Imix Moo owes Bolontiku Batab, and now has a hold on the waystation keeper too.
+  after : A dispute over field rotation and grazing rights has divided the village for most of this season.
+dp-village-113
+  tie   : The balance between Athanasia Chrysoberges and Photeine Drimys has recently shifted. Photeine Drimys has noticed; Athanasia Chrysoberges has not, yet.
+  before: The balance between Athanasia Chrysoberges and Photeine Drimys has recently shifted. Photeine Drimys has noticed; Athanasia Chrysoberges has not, yet.
+  after : A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.
+dp-village-134
+  tie   : Ram Jain corrected Indumati Deshpande in public last month, and was right.
+  before: Ram Jain corrected Indumati Deshpande in public last month, and was right.
+  after : A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.
+dp-village-135
+  tie   : Zenobia Bassus has refused Scaevola Capito a small favour for the first time in years.
+  before: Zenobia Bassus has refused Scaevola Capito a small favour for the first time in years.
+  after : A dispute over field rotation and grazing rights has divided the village for most of this season.
+dp-village-146
+  tie   : Maize Caan has mentioned the debt aloud, at a dinner, in front of Dzuna Ek's partners.
+  before: Dzuna Ek and Maize Caan are tied by a debt not yet paid. Maize Caan has mentioned the debt aloud, at a dinner, in front of Dzuna Ek's partners.
+  after : A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.
+dp-town-101
+  tie   : Hademar Ritter has been telling clients that Gunter Schmitt's work is slipping. Two of the clients have repeated it to Gunter Schmitt.
+  before: Hademar Ritter has been telling clients that Gunter Schmitt's work is slipping. Two of the clients have repeated it to Gunter Schmitt.
+  after : The Town Mayor has been debating market levies for three months. The merchants have argued against every one of them, and nothing has been settled yet.
