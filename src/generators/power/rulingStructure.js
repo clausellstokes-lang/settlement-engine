@@ -304,7 +304,7 @@ export const generatePowerStructure = (
                         'Town Council');
   return /** @type {[any, any]} */ ([governingFaction, govModifier]);
   };
-  const [governingFaction, govModifier] = drawCouncilOfAKind(chooseGoverning, topCategory, topPriority, priorityByCategory, govBody, nativeInstitutions);
+  const [drawnFaction, govModifier] = drawCouncilOfAKind(chooseGoverning, topCategory, topPriority, priorityByCategory, govBody, nativeInstitutions); const governingFaction = HALL_NAME_AT_BIRTH[drawnFaction] ?? drawnFaction; // R24-C1 (CLOSE-7 BATCH; R24g (2)): the bought hall is born under a plain name (the table at the END)
   let informalModifier = null;
   govBody ||
     (['thorp', 'hamlet', 'village'].includes(tier) && topPriority > 65
@@ -349,7 +349,7 @@ export const generatePowerStructure = (
         'Senior clergy hold effective civic authority through the council; religious law shapes civil policy.', // BAR3-POWERS (C5398): no elected body the roster lacks
       'Merchant City Council': 'Wealthy merchants dominate council seats; trade interests drive policy and taxation.',
       'Corrupt City Council':
-        'Nominally elected, effectively purchased; council seats are openly traded among criminal and commercial interests.',
+        'Nominally elected, effectively purchased; council seats are openly traded among criminal and commercial interests.', 'Council of Syndics': 'Nominally elected, effectively purchased; council seats are openly traded among criminal and commercial interests.', // R24-C1: the birth name, the old form's own line
       'Ducal Governorship':
         'A duke or duchess governs the metropolis by royal appointment; the city is the administrative capital of a large territory.',
       'Grand Merchant Oligarchy':
@@ -365,7 +365,7 @@ export const generatePowerStructure = (
       'Merchant Council':
         'Prominent merchants dominate the council; trade and taxation policy favour commercial interests.',
       'Corrupt Council':
-        'The governing body is systematically compromised; offices are sold and justice is purchasable.',
+        'The governing body is systematically compromised; offices are sold and justice is purchasable.', 'Council of Aldermen': 'The governing body is systematically compromised; offices are sold and justice is purchasable.', // R24-C1
       'Arcane Council':
         'Mages and scholars hold the offices here; skill in magic is what earns a seat.',
       'Grand Merchant Senate':
@@ -375,7 +375,7 @@ export const generatePowerStructure = (
       'High Theocratic Council':
         'Senior clergy hold civic authority; religious law and civil law are functionally the same.',
       'Arcane Senate': 'A senate of senior mages governs; the stronger the mage, the louder the voice.',
-      'Shadow Senate': 'Nominal governance masks a criminal oligarchy; the real decisions happen in back rooms.',
+      'Shadow Senate': 'Nominal governance masks a criminal oligarchy; the real decisions happen in back rooms.', Senate: 'Nominal governance masks a criminal oligarchy; the real decisions happen in back rooms.', // R24-C1
       'Guild Council': 'The guilds govern together; the richer the guild, the more say it has.',
       'Merchant Guild Council':
         'A consortium of guild masters holds power; policy is shaped by trade interests and inter-guild bargaining.',
@@ -797,3 +797,8 @@ export function captureClimateOf(settlement) {
 /** The sets this step can answer (R-Q): every set whose atoms are settled before the power step. */
 const FACTION_DESC_SIBLINGS_SETTLED = Object.freeze(Object.fromEntries(Object.entries(FACTION_DESC_SIBLINGS)
   .filter(([, set]) => !set.some((l) => [...(/** @type {any} */ (l).needs || []), ...(/** @type {any} */ (l).excludes || [])].includes('militia')))));
+/** R24-C1 (CLOSE-7 BATCH; the chair's RULING-R24 R24-C1 and R24g (2)): the three forms that name, on a player's first screen, a hall
+ * that is bought are born under the plain names the chair ruled (each held to one size at birth: town, city, metropolis). Every
+ * vocabulary that knows an old form knows its birth name too, by exact name, and keeps the old one for saved places. At the END
+ * of the file so that no cited line moves. */
+const HALL_NAME_AT_BIRTH = Object.freeze({ 'Corrupt Council': 'Council of Aldermen', 'Corrupt City Council': 'Council of Syndics', 'Shadow Senate': 'Senate' });
