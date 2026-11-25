@@ -146,3 +146,16 @@ rename would re-deal every name-keyed draw: R24m); the card's role moves on thos
 WORDS-1 (E1's short title gives "the reeve's office") and to WORDS-2 (E6's L12 no longer waits; the steward's title is
 unchanged). The catalogue word is named for the owner's veto. ALSO: UNIT D3 received (BIRTH-1, `-d3-wip` 5262fbee4);
 E8's line in the shrink-only bank keeps "themselves" (WORDS-1's (b)).
+
+**G11 (12:00 UTC): D8 IS PARKED: "THE LORD's REEVE" NEEDS A ROW IN A SHRINK-ONLY REGISTER, WHICH IS THE OWNER's LEAVE.** BIRTH-1
+built D8 as G10 ruled (`-d8-wip` d391b1fbd: C 12 and V 18 thorps move, every differing leaf the title alone; red 7 of
+7 to green) and STOPPED: `tests/lint/presumedThings.walker.test.js` arm 1 reads catalogue literals of three words or
+more and reds "the lord's reeve" (it names a house); the widened register is shrink-only ("never add a row"); the
+precedent "the lord's appointee" stands banked from before that rule; "the reeve" (two words) was never read. The
+seat would not re-word the literal past the walker: right. RULED: no seat and not the chair adds that row; D8 is not
+handed to CLOSE-7; the branch stays as it is with what it still needs written in BIRTH-1's hand-back; THE OWNER IS
+ASKED ONCE for the leave (one row, reason "family", by the register's own door); without it the thorp's officer stays
+"the reeve", which the intake itself called no false line. G10's knock-ons: WORDS-1 keeps the title as a detector case
+only; WORDS-2's E6 is unaffected (the steward's title never changed). ALSO (WORDS-1, 10:49): E8's line in the
+shrink-only bank keeps "themselves"; (BIRTH-1) D2b by the shared-sentence test, about 38 births; UNIT D5 received
+(`-d5-wip` 289a70b3a: births moved 0; the R13 arm over every birth 0 of 1,800 breaks).
