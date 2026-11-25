@@ -119,11 +119,24 @@ PLAN AFTER GUARD: the same builder (a45b468ed08040c87) takes BATCH (brief `close
 - the goals I-13 measure;
 - one before-and-after on C and V at the cures tip with 116.
 
-THE NEXT COMMAND: on GUARD's message:
-- run `git -C /home/user/wt/guard log --oneline e2fd7caa4..HEAD`;
-- read `close-7/reports/GUARD.md` and the diff once;
-- re-read R24j's eight points;
-- merge onto cures (now holding 116), run the gates, push, and send the GUARD line with the golden list.
+GUARD BUILT (05:41 UTC): -guard-wip d6c941c62, pushed, cut at e2fd7caa4. Report `close-7/reports/GUARD.md`.
+- Proofs: (a) red 113/180; (b) 0/180; (d) 0/180; point 8: 0/900 on C and V; point 4: 0 world-fact roots.
+- (c) NOT EXACT and stopped alone. All 180 line-born places move beyond the newcomer:
+  - the receipt counts one more person in all 180;
+  - a kept person's house field turns from empty to null in 9;
+  - a power is seated in 1;
+  - conflicts are re-dealt in 4.
+- RULING ASKED of the chair: merge as built with (c) as a named finding and its own later unit, or make it exact first.
+- Goldens: one new red, intentAtlasSoakDistiller (its distillate stores 0.9.0). About 24 more were red at the cut, with the same
+  counts; check at the landing whether they are red at d447ee31e too.
+CURES at 9b777f3fb: point 116 merged, the census re-taken (3796). Its gates are RUNNING: the cures' 9 test files, tests/lint and
+tests/copy; logs `scratchpad/cures116-{own,lint,copy}.log`.
+
+THE NEXT COMMAND: on the chair's ruling on GUARD:
+- merge -guard-wip onto cures, taking the lighting census as the cures' side and re-taking it by its door;
+- run its gates, then re-take (c) on 116 births with `close-7/live-path/guard-proofs.census.jsx`;
+- push, and send the GUARD line.
+- Then brief BATCH for the same builder (a45b468ed08040c87).
 
 ### 0.1 Ground
 - THE LIT TREE (before every cure): `/home/user/wt/lit`, detached at d447ee31e (the flip; `origin/lane/close-6-2026-11-23-flip`).
