@@ -7,7 +7,7 @@ before judging anything. Every hour here is read from `date -u`. No pull request
 
 ## 1. WHERE THE SEAT STANDS (my memory; WHOLE at every push; written so a successor on another account can go on from it alone)
 
-AS OF 00:53 UTC 2026-11-25. THE LANE'S OWNER: VEIL-55 (session_019yED1SoJ6KH9Wyp2Fera7R); never message VEIL-50. THE CHAIR:
+AS OF 01:17 UTC 2026-11-25. A SECOND CONTAINER RESTART ~01:14 (PostgreSQL restarted; lost steps relaunched 01:15:47: snmaster, snjoin, miplant2, snplant2; the builder resumed by message). DONE BY THEN: mimaster (rc=3, MAP OTHER rows), mijoin (rc=3), sntip (rc=0); the builder's commit f1da68754 on the -wip (the two test files); its tests/lint whole was cut and is being re-run. THE LANE'S OWNER: VEIL-55 (session_019yED1SoJ6KH9Wyp2Fera7R); never message VEIL-50. THE CHAIR:
 session_019yED1SUxGVHyjQnoqoFvQ8. THE LINE: 0559a8405 (point 115, the troubles rule DARK; no birth or page moves; merge nothing of it
 before the join). MARK RULE (00:29): no successor at 620,000; this section whole by 560,000, then work on; at a compaction say so to
 the chair in one line, re-read the start file, this section and the rulings, go on; finish a judgment before a compaction, never carry
