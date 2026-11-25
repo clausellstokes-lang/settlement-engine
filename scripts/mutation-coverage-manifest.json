@@ -1892,6 +1892,10 @@
       "kind": "rationale",
       "ref": "pglite-executed"
     },
+    "tests/security/galleryVeilDescNames.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
     "tests/security/shareRenderTwice.pglite.test.jsx": {
       "kind": "rationale",
       "ref": "pglite-executed"
