@@ -5,7 +5,16 @@ THE CHAIR is the tenth chair, session_019yED1SUxGVHyjQnoqoFvQ8. MY START MESSAGE
 session_019yED1SoJ6KH9Wyp2Fera7R. IF YOUR CONTEXT BEGINS WITH A SUMMARY: tell the chair in one line, re-read that file and this
 section before judging anything. Every hour here is read from `date -u`.
 
-## 1. WHERE THE LANE STANDS (my memory; current at this push, 07:27 UTC 2026-11-25)
+## 1. WHERE THE LANE STANDS (my memory; current at this push, 08:53 UTC 2026-11-25)
+
+**THE LANE IS PAUSED (the owner ~08:50 UTC via the chair 08:52: "Pause the share page and focus on town fixes ... then do the
+share pages").** THE WHOLE STATE AT THE PAUSE IS `v55/PAUSE-2026-11-25.md` (this branch): the tip dbd4cd9e5 (units 2 and 1;
+nothing else merged), each seat's branch and commit, what is owed in order (unit 3's rework under V28; units 4+5 under V25,
+V27, V28; V23/V26's hunk and the owner's query; FAIL-CLOSED PAGES' arm under V29; MAP-COST/READ-COST measured first; the join;
+the one pool proof; the fresh security reader; the chair's read with a second reader) and the local setups to restore.
+Nothing half-done of mine: no run in flight, the save loop stopped, no scheduled task of mine. RULINGS V1 TO V29 STAND.
+THE NEXT COMMAND AT THE RESUMPTION: `sh v55/restore.sh`, re-read START-VEIL-55, this section, PAUSE-2026-11-25.md and
+RULING-V1.md's V21 to V29; then the seats' state by their own hand-backs; then section 3 of the pause page, in order.
 
 THE LAW: as VEIL-50's hand-back section 1 "THE LAW" (no pull request; push only `lane/veil-55-2026-11-24*` by the local branch's
 own name, ls-remote first; never --no-verify, force, master; every database local, PGHOST=/var/tmp/rv7; no `supabase` command).
