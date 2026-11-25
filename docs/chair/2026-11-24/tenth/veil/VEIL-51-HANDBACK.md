@@ -68,7 +68,14 @@ Reports to the lane's owner: a FILE, at most 200 words. My context began with a 
   /home/user/wt/u4m = detached d7764e67a + one untracked pure-data file wd imports for its withdrawn DAILY mode; template
   v51_c2), `plant.mjs` (the data plant: 4 seeds, a shown power's desc names the town's Thieves' Guild), `rival.sh` (VEIL-40's
   run.sh at 61a99a90d unchanged: chains, arms, after, cost; logs /var/tmp/v51/out/rival/, exits.txt there).
-  RUNNING (both background, serialized by the gate mutex): u4.sh from 23:54 (log /var/tmp/v51/out/u4/u4.log); rival.sh.
+  RESULTS (CONFIRMED): plant rc 0 (4 seeds: a shown power's desc names the Thieves' Guild; `stored-plant/PLANT.txt`).
+  RIVAL chains rc 0, 23:55 (FIRST RUN, PASS): 212 and 212+rollback apply; rollback = 211 (480 functions); catalogue 519, 79
+  _gallery_veil*; none executable by anon or authenticated; registry and standingForms checks 0.
+  (2) THE BUILDER DESCARM, dispatched 00:10 by the committed brief `v51/u4/DESCARM-BRIEF.md` (f33728d6a): ONE new arm
+  `tests/security/galleryVeilDescNames.pglite.test.js` on `lane/veil-51-2026-11-24-descarm-wip` (worktree /home/user/wt/descarm, cut
+  at d7764e67a), red by design; it commits locally; I read its diff once and push.
+  RUNNING (background, serialized by the gate mutex): u4.sh (wdplant, wdtoday, wdmaster; log /var/tmp/v51/out/u4/u4.log);
+  rival.sh (arms, after, cost); the builder's runs.
   IF THIS SEAT STOPS: re-run what u4.log lacks (`sh docs/chair/2026-11-24/tenth/veil/v51/u4/u4.sh <steps>`; `sh .../rival.sh`)
   after the trees above are re-made (`git worktree add --detach` at the commits named; node_modules linked).
 - NEXT: wait for "R4-IDS MERGED <commit>" from VEIL-55, then unit 2 (R5-DESC), reading PART 42 s1 block 0 (a3bc0dc9d) and
