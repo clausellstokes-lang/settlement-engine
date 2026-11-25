@@ -3,8 +3,9 @@
  * WORDS-2 · G6 #3+4 (the chair's question): of the pages that print "Law & order: Adequate" (Foundations) beside an unsafe
  * reading ("Safety: Unsafe/Dangerous/Desperate/Volatile" on the Overview, or DS-DEF-3's Unsafe lines), how many take the
  * unsafe reading from disorder INSIDE the place and how many from a threat OUTSIDE it. The cause is the record's own: the
- * safety profile's first strain (`economicState.safetyProfile.safetyStrains[0].condition`, the one the label prints), else
- * the crime-against-defence ratio (no strain: crime, inside). A MEASURE; changes nothing.
+ * stored safety label's condition (`economicState.safetyProfile.safetyLabel`, "<strain> — <condition> + <condition>…": the
+ * strains are not stored, the label carries them), else, a plain label, the crime-against-defence ratio (crime, inside).
+ * Corrected 10:4x UTC: the first version read `safetyStrains`, which the record does not store. A MEASURE; changes nothing.
  * Usage: node g3-unsafe-cause.mjs <battery rows dir> <records dir>
  */
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
@@ -26,9 +27,11 @@ for (const f of readdirSync(rows).filter((x) => x.endsWith('.json'))) {
   n += 1;
   const rec = join(recs, `${r.seed}.json.gz`);
   const s = existsSync(rec) ? JSON.parse(gunzipSync(readFileSync(rec)).toString()).record : null;
-  const strain = s?.economicState?.safetyProfile?.safetyStrains?.[0]?.condition ?? null;
+  const stored = String(s?.economicState?.safetyProfile?.safetyLabel ?? '');
+  const conds = stored.includes(' — ') ? stored.split(' — ').slice(1).join(' — ').split(' + ').map((x) => x.trim()) : [];
+  const strain = conds.length ? conds.join(' + ') : null;
   const cause = strain ?? 'crime against defence (no strain)';
-  const side = strain && OUTSIDE.has(strain) ? 'outside' : 'inside';
+  const side = conds.some((c) => OUTSIDE.has(c)) ? 'outside' : 'inside';
   const k = `${cause} | ${unsafeLabel ? `label ${label}` : ''}${unsafeLabel && def3 ? ' + ' : ''}${def3 ? 'DEF-3 line' : ''}`;
   out[side][k] = (out[side][k] || 0) + 1; if (seeds[side].length < 5) seeds[side].push(r.seed);
 }
