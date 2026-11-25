@@ -631,6 +631,10 @@ const WORD_CORRECTIONS = Object.freeze([
   // CHAIR-2026-11-23-N70: DS-DEF-2 Economic Survival: CRITICAL v1 said the town "cannot fund a response to anything" beside
   // DS-GEN-17 GARRISONED v1's people under arms (dz-village-7); re-worded in place
   { pool: 'DS-DEF-2 :: Economic Survival: CRITICAL', vid: 1, from: '241d7d7ffb3cdd7e9da1f23faf6f334094d789268e9da77cc056a7e77df95903', to: '35865f5965dd6be471f4d8172eb644b624b107c252094089643bea7322eaa192', ruling: 'CHAIR-2026-11-23-N70' },
+  // WORDS-2 E9 (the tenth chair's PRERELEASE-LIST E9; the ninth chair's intake): DS-GEN-17 GARRISONED v2's tail "and the
+  // money is found every season" printed on no page (the place's trim, `generalDeskRead.js :: siteClause`, cuts it), so
+  // the source now says what the page prints; re-worded in place
+  { pool: 'DS-GEN-17 :: GARRISONED', vid: 2, from: 'c79be9f74b113a7a991921a860891bdd50d602a2841edaa578f3deb4007266b2', to: 'cbaf147b509073657dbdc1ebd1c2fc722d5629427656a855901588e5619eb923', ruling: 'TENTH-CHAIR-E9' },
 ]);
 
 async function readNumberingBaseline() {

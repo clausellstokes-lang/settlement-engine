@@ -7493,7 +7493,7 @@ no compass word, no real-world place, no named analogy.*
 
 **`GARRISONED`**
 1. `[visitor · no crisis: occupied]` {settlement} keeps people under arms for its defence; the town does not trust to luck and neighbours.
-2. `[ledger · walls · no crisis: occupied]` {settlement} pays wages for its defense as well as keeping its walls, and the money is found every season.
+2. `[ledger · walls · no crisis: occupied]` {settlement} pays wages for its defense as well as keeping its walls.
 
 **`LETTERED`** {colour}
 1. `[visitor]` {settlement} supports trained practitioners of the Art, which few towns its size can afford.
