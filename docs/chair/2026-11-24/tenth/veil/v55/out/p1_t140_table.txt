@@ -1,0 +1,311 @@
+g:011=7 off|g:100=7 off|g:101=7 off|g:110=7 off|off=7 off|own=7 off|unmarked=7
+   documents (7): r3m-town-wartime-0-29, r3m-metropolis-none-1-137, r3m-city-infiltrated-0-42, r3m-metropolis-infiltrated-0-62, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-city-none-1-107
+   #keys: reads 84, leaves 84
+      e.g. r3m-town-wartime-0-29 off|default at #keys
+        server: activeConditions,arrivalScene,availableServices,config,conflicts,defenseProfile,economicState,economicViability,generatorVersion,history,id,institutions,name,neighborRelationship,npcs,population,power…
+        twin:   activeConditions,arrivalScene,availableServices,config,conflicts,defenseProfile,economicState,economicViability,generatorVersion,history,id,institutions,name,neighborRelationship,npcs,population,power…
+   prominentRelationship#keys: reads 84, leaves 84
+      e.g. r3m-town-wartime-0-29 off|default at prominentRelationship#keys
+        server: (absent)
+        twin:   full,npc1,npc2,phrasing,tension,type
+   prominentRelationship.full: reads 84, leaves 84
+      e.g. r3m-town-wartime-0-29 off|default at prominentRelationship.full
+        server: (absent)
+        twin:   "Irene Kalojan does what Elektra Gabalas asks, and Elektra Gabalas pays for it in coin that never passes through a counting-house. In company the two of them speak only of ordinary business."
+   prominentRelationship.npc1: reads 84, leaves 84
+      e.g. r3m-town-wartime-0-29 off|default at prominentRelationship.npc1
+        server: (absent)
+        twin:   "Irene Kalojan"
+   prominentRelationship.npc2: reads 84, leaves 84
+      e.g. r3m-town-wartime-0-29 off|default at prominentRelationship.npc2
+        server: (absent)
+        twin:   "Elektra Gabalas"
+   prominentRelationship.phrasing: reads 84, leaves 84
+      e.g. r3m-town-wartime-0-29 off|default at prominentRelationship.phrasing
+        server: (absent)
+        twin:   "Irene Kalojan has started spending Elektra Gabalas's coin where people can see it: a new roof, a new horse. Elektra Gabalas has noticed, and so have the neighbours."
+   prominentRelationship.tension: reads 84, leaves 84
+      e.g. r3m-town-wartime-0-29 off|default at prominentRelationship.tension
+        server: (absent)
+        twin:   "Irene Kalojan has started spending Elektra Gabalas's coin where people can see it: a new roof, a new horse. Elektra Gabalas has noticed, and so have the neighbours."
+   prominentRelationship.type: reads 84, leaves 84
+      e.g. r3m-town-wartime-0-29 off|default at prominentRelationship.type
+        server: (absent)
+        twin:   "Silent Partnership"
+== L2-vs-L1 server | canon: 3360 of 6720 reads differ
+   by setting: dm|allOpen=140 dm|default=140 dm|g:000=140 dm|g:001=140 dm|g:010=140 dm|g:011=140 dm|g:100=140 dm|g:101=140 dm|g:110=140 dm|off=140 dm|own=140 dm|unmarked=140 off|allOpen=140 off|default=140 off|g:000=140 off|g:001=140 off|g:010=140 off|g:011=140 off|g:100=140 off|g:101=140 off|g:110=140 off|off=140 off|own=140 off|unmarked=140
+   documents (0): 
+   defenseProfile#keys: reads 3360, leaves 3360
+      e.g. r3m-village-insurgency-0-4 off|default at defenseProfile#keys
+        server: chainModifiers,economicGates,institutions,magicDependency,readiness,scores,traditions
+        twin:   chainModifiers,institutions,magicDependency,readiness,scores,traditions
+   defenseProfile.economicGates#keys: reads 3360, leaves 3360
+      e.g. r3m-village-insurgency-0-4 off|default at defenseProfile.economicGates#keys
+        server: disaster,economic,monster
+        twin:   (absent)
+   defenseProfile.economicGates.disaster: reads 3360, leaves 3360
+      e.g. r3m-village-insurgency-0-4 off|default at defenseProfile.economicGates.disaster
+        server: 0.69
+        twin:   (absent)
+   defenseProfile.economicGates.economic: reads 3360, leaves 3360
+      e.g. r3m-village-insurgency-0-4 off|default at defenseProfile.economicGates.economic
+        server: 0.62
+        twin:   (absent)
+   defenseProfile.economicGates.monster: reads 3360, leaves 3360
+      e.g. r3m-village-insurgency-0-4 off|default at defenseProfile.economicGates.monster
+        server: 0.79
+        twin:   (absent)
+   defenseProfile.scores#keys: reads 3360, leaves 3360
+      e.g. r3m-village-insurgency-0-4 off|default at defenseProfile.scores#keys
+        server: disaster,economic,internal,magicDependency,magical,military,monster,traditions
+        twin:   magicDependency,traditions
+   defenseProfile.scores.disaster: reads 3360, leaves 3360
+      e.g. r3m-village-insurgency-0-4 off|default at defenseProfile.scores.disaster
+        server: 34
+        twin:   (absent)
+   defenseProfile.scores.economic: reads 3360, leaves 3360
+      e.g. r3m-village-insurgency-0-4 off|default at defenseProfile.scores.economic
+        server: 23
+        twin:   (absent)
+   defenseProfile.scores.internal: reads 3360, leaves 3360
+      e.g. r3m-village-insurgency-0-4 off|default at defenseProfile.scores.internal
+        server: 20
+        twin:   (absent)
+   defenseProfile.scores.magical: reads 3360, leaves 3360
+      e.g. r3m-village-insurgency-0-4 off|default at defenseProfile.scores.magical
+        server: 0
+        twin:   (absent)
+   defenseProfile.scores.military: reads 3360, leaves 3360
+      e.g. r3m-village-insurgency-0-4 off|default at defenseProfile.scores.military
+        server: 30
+        twin:   (absent)
+   defenseProfile.scores.monster: reads 3360, leaves 3360
+      e.g. r3m-village-insurgency-0-4 off|default at defenseProfile.scores.monster
+        server: 4
+        twin:   (absent)
+   economicState.compound#keys: reads 3360, leaves 3360
+      e.g. r3m-village-insurgency-0-4 off|default at economicState.compound#keys
+        server: economyOutput,inst,raw
+        twin:   inst,raw
+   economicState.compound.economyOutput: reads 3360, leaves 3360
+      e.g. r3m-village-insurgency-0-4 off|default at economicState.compound.economyOutput
+        server: 8.046964699474511
+        twin:   (absent)
+   powerStructure#keys: reads 3360, leaves 3360
+      e.g. r3m-village-insurgency-0-4 off|default at powerStructure#keys
+        server: conflicts,factionRelationships,factions,governingName,government,powerProjectionVersion,publicLegitimacy,recentConflict,stability
+        twin:   conflicts,factionRelationships,factions,governingName,government,powerProjectionVersion,publicLegitimacy,stability
+   powerStructure.recentConflict: reads 3360, leaves 3360
+      e.g. r3m-village-insurgency-0-4 off|default at powerStructure.recentConflict
+        server: "Pamphlets against those in charge pass from hand to hand, and several who were expected stayed away from the last assembly. Those in charge know that cells meet at night, and they have not moved, bec…
+        twin:   (absent)
+   defenseProfile.readiness#keys: reads 3202, leaves 3202
+      e.g. r3m-village-insurgency-0-4 off|default at defenseProfile.readiness#keys
+        server: background,border,color,label,score
+        twin:   background,border,color,label
+   defenseProfile.readiness.score: reads 3202, leaves 3202
+      e.g. r3m-village-insurgency-0-4 off|default at defenseProfile.readiness.score
+        server: 12
+        twin:   (absent)
+   defenseProfile.economicGates.military: reads 3048, leaves 3048
+      e.g. r3m-town-infiltrated-0-12 off|default at defenseProfile.economicGates.military
+        server: 1
+        twin:   (absent)
+   defenseProfile.economicGates.internal: reads 2904, leaves 2904
+      e.g. r3m-town-infiltrated-0-12 off|default at defenseProfile.economicGates.internal
+        server: 1
+        twin:   (absent)
+   activeConditions[]#keys: reads 2664, leaves 2664
+      e.g. r3m-village-insurgency-0-4 off|default at activeConditions[0]#keys
+        server: affectedSystems,archetype,causes,description,duration,id,label,severity,severityBand,status,triggeredAt
+        twin:   affectedSystems,archetype,causes,description,duration,id,label,severityBand,status,triggeredAt
+   activeConditions[].severity: reads 2664, leaves 2664
+      e.g. r3m-village-insurgency-0-4 off|default at activeConditions[0].severity
+        server: 0.85
+        twin:   (absent)
+   economicState.safetyProfile#keys: reads 1680, leaves 1680
+      e.g. r3m-village-insurgency-0-4 off|unmarked at economicState.safetyProfile#keys
+        server: blackMarketCapture,compound,crimeTypes,criminalInstitutions,economicDragDesc,flags,guardEffectivenessDesc,safetyDesc,safetyLabel
+        twin:   compound,criminalInstitutions,economicDragDesc,flags,guardEffectivenessDesc,safetyDesc,safetyLabel
+   economicState.safetyProfile.crimeTypes#len: reads 1680, leaves 1680
+      e.g. r3m-village-insurgency-0-4 off|unmarked at economicState.safetyProfile.crimeTypes#len
+        server: 3
+        twin:   (absent)
+   economicState.safetyProfile.crimeTypes[]#keys: reads 1124, leaves 2576
+      e.g. r3m-village-insurgency-0-4 off|unmarked at economicState.safetyProfile.crimeTypes[0]#keys
+        server: desc,type
+        twin:   (absent)
+   economicState.safetyProfile.crimeTypes[].desc: reads 1124, leaves 2576
+      e.g. r3m-village-insurgency-0-4 off|unmarked at economicState.safetyProfile.crimeTypes[0].desc
+        server: "Confrontations between the rebels' supporters and those loyal to the current authority. Officially categorised as riot and disorder."
+        twin:   (absent)
+   economicState.safetyProfile.crimeTypes[].type: reads 1124, leaves 2576
+      e.g. r3m-village-insurgency-0-4 off|unmarked at economicState.safetyProfile.crimeTypes[0].type
+        server: "political violence"
+        twin:   (absent)
+   economicState.safetyProfile.blackMarketCapture: reads 280, leaves 280
+      e.g. r3m-village-insurgency-0-4 off|unmarked at economicState.safetyProfile.blackMarketCapture
+        server: 7
+        twin:   (absent)
+== L2-vs-L1 twin | canon: 3360 of 6720 reads differ
+   by setting: dm|allOpen=140 dm|default=140 dm|g:000=140 dm|g:001=140 dm|g:010=140 dm|g:011=140 dm|g:100=140 dm|g:101=140 dm|g:110=140 dm|off=140 dm|own=140 dm|unmarked=140 off|allOpen=140 off|default=140 off|g:000=140 off|g:001=140 off|g:010=140 off|g:011=140 off|g:100=140 off|g:101=140 off|g:110=140 off|off=140 off|own=140 off|unmarked=140
+   documents (0): 
+   defenseProfile#keys: reads 3360, leaves 3360
+      e.g. r3m-village-insurgency-0-4 off|default at defenseProfile#keys
+        server: chainModifiers,economicGates,institutions,magicDependency,readiness,scores,traditions
+        twin:   chainModifiers,institutions,magicDependency,readiness,scores,traditions
+   defenseProfile.economicGates#keys: reads 3360, leaves 3360
+      e.g. r3m-village-insurgency-0-4 off|default at defenseProfile.economicGates#keys
+        server: disaster,economic,monster
+        twin:   (absent)
+   defenseProfile.economicGates.disaster: reads 3360, leaves 3360
+      e.g. r3m-village-insurgency-0-4 off|default at defenseProfile.economicGates.disaster
+        server: 0.69
+        twin:   (absent)
+   defenseProfile.economicGates.economic: reads 3360, leaves 3360
+      e.g. r3m-village-insurgency-0-4 off|default at defenseProfile.economicGates.economic
+        server: 0.62
+        twin:   (absent)
+   defenseProfile.economicGates.monster: reads 3360, leaves 3360
+      e.g. r3m-village-insurgency-0-4 off|default at defenseProfile.economicGates.monster
+        server: 0.79
+        twin:   (absent)
+   defenseProfile.scores#keys: reads 3360, leaves 3360
+      e.g. r3m-village-insurgency-0-4 off|default at defenseProfile.scores#keys
+        server: disaster,economic,internal,magicDependency,magical,military,monster,traditions
+        twin:   magicDependency,traditions
+   defenseProfile.scores.disaster: reads 3360, leaves 3360
+      e.g. r3m-village-insurgency-0-4 off|default at defenseProfile.scores.disaster
+        server: 34
+        twin:   (absent)
+   defenseProfile.scores.economic: reads 3360, leaves 3360
+      e.g. r3m-village-insurgency-0-4 off|default at defenseProfile.scores.economic
+        server: 23
+        twin:   (absent)
+   defenseProfile.scores.internal: reads 3360, leaves 3360
+      e.g. r3m-village-insurgency-0-4 off|default at defenseProfile.scores.internal
+        server: 20
+        twin:   (absent)
+   defenseProfile.scores.magical: reads 3360, leaves 3360
+      e.g. r3m-village-insurgency-0-4 off|default at defenseProfile.scores.magical
+        server: 0
+        twin:   (absent)
+   defenseProfile.scores.military: reads 3360, leaves 3360
+      e.g. r3m-village-insurgency-0-4 off|default at defenseProfile.scores.military
+        server: 30
+        twin:   (absent)
+   defenseProfile.scores.monster: reads 3360, leaves 3360
+      e.g. r3m-village-insurgency-0-4 off|default at defenseProfile.scores.monster
+        server: 4
+        twin:   (absent)
+   economicState.compound#keys: reads 3360, leaves 3360
+      e.g. r3m-village-insurgency-0-4 off|default at economicState.compound#keys
+        server: economyOutput,inst,raw
+        twin:   inst,raw
+   economicState.compound.economyOutput: reads 3360, leaves 3360
+      e.g. r3m-village-insurgency-0-4 off|default at economicState.compound.economyOutput
+        server: 8.046964699474511
+        twin:   (absent)
+   powerStructure#keys: reads 3360, leaves 3360
+      e.g. r3m-village-insurgency-0-4 off|default at powerStructure#keys
+        server: conflicts,factionRelationships,factions,governingName,government,powerProjectionVersion,publicLegitimacy,recentConflict,stability
+        twin:   conflicts,factionRelationships,factions,governingName,government,powerProjectionVersion,publicLegitimacy,stability
+   powerStructure.recentConflict: reads 3360, leaves 3360
+      e.g. r3m-village-insurgency-0-4 off|default at powerStructure.recentConflict
+        server: "Pamphlets against those in charge pass from hand to hand, and several who were expected stayed away from the last assembly. Those in charge know that cells meet at night, and they have not moved, bec…
+        twin:   (absent)
+   defenseProfile.readiness#keys: reads 3202, leaves 3202
+      e.g. r3m-village-insurgency-0-4 off|default at defenseProfile.readiness#keys
+        server: background,border,color,label,score
+        twin:   background,border,color,label
+   defenseProfile.readiness.score: reads 3202, leaves 3202
+      e.g. r3m-village-insurgency-0-4 off|default at defenseProfile.readiness.score
+        server: 12
+        twin:   (absent)
+   defenseProfile.economicGates.military: reads 3048, leaves 3048
+      e.g. r3m-town-infiltrated-0-12 off|default at defenseProfile.economicGates.military
+        server: 1
+        twin:   (absent)
+   defenseProfile.economicGates.internal: reads 2904, leaves 2904
+      e.g. r3m-town-infiltrated-0-12 off|default at defenseProfile.economicGates.internal
+        server: 1
+        twin:   (absent)
+   activeConditions[]#keys: reads 2664, leaves 2664
+      e.g. r3m-village-insurgency-0-4 off|default at activeConditions[0]#keys
+        server: affectedSystems,archetype,causes,description,duration,id,label,severity,severityBand,status,triggeredAt
+        twin:   affectedSystems,archetype,causes,description,duration,id,label,severityBand,status,triggeredAt
+   activeConditions[].severity: reads 2664, leaves 2664
+      e.g. r3m-village-insurgency-0-4 off|default at activeConditions[0].severity
+        server: 0.85
+        twin:   (absent)
+   economicState.safetyProfile#keys: reads 1680, leaves 1680
+      e.g. r3m-village-insurgency-0-4 off|unmarked at economicState.safetyProfile#keys
+        server: blackMarketCapture,compound,crimeTypes,criminalInstitutions,economicDragDesc,flags,guardEffectivenessDesc,safetyDesc,safetyLabel
+        twin:   compound,criminalInstitutions,economicDragDesc,flags,guardEffectivenessDesc,safetyDesc,safetyLabel
+   economicState.safetyProfile.crimeTypes#len: reads 1680, leaves 1680
+      e.g. r3m-village-insurgency-0-4 off|unmarked at economicState.safetyProfile.crimeTypes#len
+        server: 3
+        twin:   (absent)
+   economicState.safetyProfile.crimeTypes[]#keys: reads 1124, leaves 2576
+      e.g. r3m-village-insurgency-0-4 off|unmarked at economicState.safetyProfile.crimeTypes[0]#keys
+        server: desc,type
+        twin:   (absent)
+   economicState.safetyProfile.crimeTypes[].desc: reads 1124, leaves 2576
+      e.g. r3m-village-insurgency-0-4 off|unmarked at economicState.safetyProfile.crimeTypes[0].desc
+        server: "Confrontations between the rebels' supporters and those loyal to the current authority. Officially categorised as riot and disorder."
+        twin:   (absent)
+   economicState.safetyProfile.crimeTypes[].type: reads 1124, leaves 2576
+      e.g. r3m-village-insurgency-0-4 off|unmarked at economicState.safetyProfile.crimeTypes[0].type
+        server: "political violence"
+        twin:   (absent)
+   economicState.safetyProfile.blackMarketCapture: reads 280, leaves 280
+      e.g. r3m-village-insurgency-0-4 off|unmarked at economicState.safetyProfile.blackMarketCapture
+        server: 7
+        twin:   (absent)
+   #keys: reads 84, leaves 84
+      e.g. r3m-town-wartime-0-29 off|default at #keys
+        server: activeConditions,arrivalScene,availableServices,config,conflicts,defenseProfile,economicState,economicViability,generatorVersion,history,id,institutions,name,neighborRelationship,npcs,population,power…
+        twin:   activeConditions,arrivalScene,availableServices,config,conflicts,defenseProfile,economicState,economicViability,generatorVersion,history,id,institutions,name,neighborRelationship,npcs,population,power…
+   prominentRelationship#keys: reads 84, leaves 84
+      e.g. r3m-town-wartime-0-29 off|default at prominentRelationship#keys
+        server: full,npc1,npc2,phrasing,tension,type
+        twin:   (absent)
+   prominentRelationship.full: reads 84, leaves 84
+      e.g. r3m-town-wartime-0-29 off|default at prominentRelationship.full
+        server: "Irene Kalojan does what Elektra Gabalas asks, and Elektra Gabalas pays for it in coin that never passes through a counting-house. In company the two of them speak only of ordinary business."
+        twin:   (absent)
+   prominentRelationship.npc1: reads 84, leaves 84
+      e.g. r3m-town-wartime-0-29 off|default at prominentRelationship.npc1
+        server: "Irene Kalojan"
+        twin:   (absent)
+   prominentRelationship.npc2: reads 84, leaves 84
+      e.g. r3m-town-wartime-0-29 off|default at prominentRelationship.npc2
+        server: "Elektra Gabalas"
+        twin:   (absent)
+   prominentRelationship.phrasing: reads 84, leaves 84
+      e.g. r3m-town-wartime-0-29 off|default at prominentRelationship.phrasing
+        server: "Irene Kalojan has started spending Elektra Gabalas's coin where people can see it: a new roof, a new horse. Elektra Gabalas has noticed, and so have the neighbours."
+        twin:   (absent)
+   prominentRelationship.tension: reads 84, leaves 84
+      e.g. r3m-town-wartime-0-29 off|default at prominentRelationship.tension
+        server: "Irene Kalojan has started spending Elektra Gabalas's coin where people can see it: a new roof, a new horse. Elektra Gabalas has noticed, and so have the neighbours."
+        twin:   (absent)
+   prominentRelationship.type: reads 84, leaves 84
+      e.g. r3m-town-wartime-0-29 off|default at prominentRelationship.type
+        server: "Silent Partnership"
+        twin:   (absent)
+
+STORED IDS SERVED (C), reads searched by door | engine: gallery page (L2) | server=3360; gallery | server=3360; gallery | twin=3360; link | server=3360; link | twin=3360
+fresh-shaped stored ids (F)(i): 0; documents whose own walk finds stored ids: 140
+SERVED MARKER BY DOOR | setting kind | state (reads): 
+  gallery | marked | served marker: 3080
+  gallery | unmarked | NO served marker: 280
+  link | marked | served marker: 3080
+  link | unmarked | served marker: 280
+stored document = the dump's (MEAS_STORED_CMP): 0 same, 0 differ, 0 missing
+STORED-SIDE CENSUS (paths of the stored documents holding a stored person id, the re-key's own sites apart):
+  none
+HITS (outside publicProse):
+  none
+HITS INSIDE publicProse (apart, ruling (a')):
+  none
