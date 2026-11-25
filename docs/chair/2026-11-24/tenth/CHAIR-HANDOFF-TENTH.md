@@ -1469,3 +1469,4 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   on point 118's source when its hand-in arrives; (4) the owner told.
   THE HELPER LAND-117 (agent a8bcd6b57f4ff5bc6) AND THE BUILDER C1B (agent af6a50ea622cbd98c) HAVE FINISHED; the
   builder's tree /home/user/wt/c1b may be removed (its branch is merged).
+- 2026-11-25 20:44 UTC · T113 · CLOSE-8 SEATED FOR POINT 118: session_019yED1Rum15mnWDE2kokd6a (Opus, high effort; source `lane/join-2026-11-14` at 09c29806b, clone depth 400; outcome branch `lane/close-8-2026-11-25`; its start message is `prompts/START-CLOSE-8.txt`, named in its prompt). Its first message is due within 30 minutes, then its JOIN PLAN (the chair rules the order before any merge). The chair's check is armed for 21:25 UTC to read CI's run on 09c29806b by name.
