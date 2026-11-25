@@ -45,7 +45,7 @@
   mutation manifest row.
 - UNIT D4: HANDED IN at 14:33 UTC: `lane/birth-2-2026-11-25-d4-wip` 57d26a136 on origin, "UNIT D4" sent to CLOSE-7 and the chair
   (section 2). Typecheck in its tree: ratchet OK 167/167; domain-strict OK 1113/1113.
-- NEXT: FREE; asked the chair for a unit (14:33 UTC).
+- UNIT C6 (given 14:40 UTC-ish by the chair): (A) P9 measure (probe probes/p9beasts.census.jsx; base counts C 0, V 129 from the page battery; prior ruling: CHARTERS-SECOND-WAVE-2026-11-12 pattern 9; the unused leaf facts/beastsReadiness.js), ONE message, build nothing; (B) the sameness census (scripts/sameness-census.mjs --measure --plan) on C and V, a table.
 - Worktrees: /home/user/wt/d4 and /home/user/wt/a5 (node_modules and .husky/_ symlinked; excluded in info/exclude).
   Scratch tools: /home/user/c7tools/read25 (CLOSE-7's page battery copied). Runs: scratchpad queue*.sh, logs g-*.log.
 - Corpora: C = `close-7/read24/make-plan.mjs`, V = `make-visitor-plan.mjs` over the chair's `read/plan-lit.json`.
