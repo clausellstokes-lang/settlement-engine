@@ -105,6 +105,61 @@ export function reflexiveOf(card) {
   return g === 'female' ? 'herself' : g === 'male' ? 'himself' : 'themselves';
 }
 
+/**
+ * THE BOUND CARD LINES (E8b, WORDS-1; the tenth chair's G20 (2) of 2026-11-25): the closed table of the drawn card lines whose
+ * "themselves" binds the card's OWN person (hand-classed BOUND rows, `docs/chair/2026-11-24/tenth/gen/words-1/tools/
+ * e8-classes.mjs`), each with the card field that holds it. The draw and its dedupe run on the line's text as written; the
+ * reflexive is resolved only AFTER the last draw, once, where every card is final (`boundReflexives`, called by
+ * `narrativeGenerator.js :: generateCoherence` and the people regen), from the card's own `gender` (`reflexiveOf`). A reader that
+ * matches a stored line against its table reads it in the held form (`heldCardLine`). Regex literals, so no copy count reads them.
+ * @type {ReadonlyArray<readonly [string, string, RegExp]>}
+ */
+const BOUND_CARD_LINES = Object.freeze(/** @type {Array<readonly [string, string, RegExp]>} */ ([
+  ['personality', 'tell', /speaks of (themselves) in the third person when angry/],
+  ['presentation', 'impression', /sure of (themselves), and not careless with it/],
+  ['presentation', 'behaviour', /Gives away little about (themselves), and remembers/],
+  ['secret', 'what', /Is (themselves) a newcomer, arrived a decade ago/],
+  ['secret', 'what', /telling (themselves) it doesn't matter/],
+  ['secret', 'what', /cannot bring (themselves) to sell it/],
+  ['secret', 'what', /Is not (themselves) when the moon is full/],
+  ['secret', 'what', /Taught (themselves) to read from a single book/],
+  ['secret', 'what', /never once let (themselves) be seen/],
+  ['secret', 'what', /the households pay and spending it on (themselves)/],
+  ['secret', 'what', /moved the stone (themselves)/],
+  ['goal', 'long', /whatever the cost to (themselves)/],
+]));
+/** each row's held form: the bound reflexive written back as "themselves" */
+const HELD_CARD_LINES = Object.freeze(BOUND_CARD_LINES.map(([, , re]) => new RegExp(re.source.replace('(themselves)', '(?:himself|herself)'), 'g')));
+
+/**
+ * A card with its bound card lines' reflexive in the card's own form ("speaks of herself in the third person"); a card with no
+ * gender, or no bound line, is returned as it is (the same object).
+ * @template {Record<string, any>} C @param {C} card @returns {C}
+ */
+export function boundReflexives(card) {
+  const own = reflexiveOf(card);
+  if (own === 'themselves' || !card || typeof card !== 'object') return card;
+  /** @type {Record<string, any>} */ let out = card;
+  for (const [o, f, re] of BOUND_CARD_LINES) {
+    const holder = out[o]; const text = holder && typeof holder === 'object' ? holder[f] : undefined;
+    if (typeof text !== 'string' || !re.test(text)) continue;
+    const said = text.replace(re, (whole) => whole.replace('themselves', own));
+    out = { ...out, [o]: { ...holder, [f]: said } };
+  }
+  return /** @type {C} */ (out);
+}
+
+/**
+ * A stored card line read in its HELD form: a bound card line's own-form reflexive written back as "themselves", so a reader that
+ * matches the line against its table (a template, a row pattern, a refusal row) finds it as drawn. Any other text is returned as it is.
+ * @param {unknown} text @returns {string}
+ */
+export function heldCardLine(text) {
+  let t = String(text ?? '');
+  for (const re of HELD_CARD_LINES) t = t.replace(re, (whole) => whole.replace(/himself|herself/, 'themselves'));
+  return t;
+}
+
 /** a name stands on its own: no letter or digit before it, none after (regex literals, so the copy's voice count reads no '!') */
 const NOT_AFTER_LETTER = /(?<![\p{L}\p{N}])/u.source;
 const NOT_BEFORE_LETTER = /(?![\p{L}\p{N}])/u.source;

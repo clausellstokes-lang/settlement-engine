@@ -55,7 +55,7 @@ import { withRecordTroubleLaw } from '../domain/trouble/troubleLaw.js'; // K4-JO
 // Side-effect: registers all pipeline steps
 import './steps/index.js';
 import { takeAllegianceReceipts } from '../domain/people/allegiance.js';
-import { styledTitleOf } from '../data/faceHonorifics.js';
+import { styledTitleOf } from '../data/faceHonorifics.js'; import { boundReflexives } from '../data/people/personMention.js'; // E8b (WORDS-1, G20): the regen's bound card lines
 
 /**
  * Generate a complete settlement using the pipeline.
@@ -614,7 +614,7 @@ export function regenNPCsPipeline(settlement, handedConfig, options = {}) {
     // GOALS-2 (the chair's rulings of 12:05 and 12:37 UTC): the deal, the rare deal, then ONE post-pass by each card's final
     // secret (the want refused beside the card's own secret, no other card touched; people/goals.js)
     const dealtGoals = dealGoals({ ...settlement, config, conflicts }, roster, finalRelationships, getActiveRng(), { keep: new Set(preserved.map((p) => String(p.id))) });
-    const goaledRoster = refuseWantsBesideSecrets({ ...settlement, config, conflicts }, dealRareSecrets({ ...settlement, config, conflicts }, dealtGoals, finalRelationships, { seed, keep: new Set(preserved.map((p) => String(p.id))), worldLaw: generationContext }), finalRelationships, { keep: new Set(preserved.map((p) => String(p.id))), receiptsOf: dealtGoals });
+    const goaledRoster = refuseWantsBesideSecrets({ ...settlement, config, conflicts }, dealRareSecrets({ ...settlement, config, conflicts }, dealtGoals, finalRelationships, { seed, keep: new Set(preserved.map((p) => String(p.id))), worldLaw: generationContext }), finalRelationships, { keep: new Set(preserved.map((p) => String(p.id))), receiptsOf: dealtGoals }).map((c) => (new Set(preserved.map((p) => String(p.id))).has(String(c?.id)) ? c : boundReflexives(c))); // E8b (G20): a keeper is the user's
     // FIX-SECTION-REGEN (2026-11-09; car 2's finding): the hall-capture state is DERIVED from the cast, so a new cast
     // re-derives it, and the record must hold it — the seam above derives it on this regen's private view, which is
     // dropped. It is re-derived here over the FINAL roster (the user's canon merged in) through the full generation's
