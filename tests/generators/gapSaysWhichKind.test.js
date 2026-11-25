@@ -72,7 +72,7 @@ describe('a gap says which kind — READER R1\'s named births', () => {
   const seats = new Map();
   beforeAll(async () => {
     await ensureLaws();
-    for (const i of [0, 4, 5, 8, 9, 12, 22, 24, 289, 302, 764]) {
+    for (const i of [0, 4, 5, 8, 9, 12, 22, 24, 289, 302, 1196]) {
       const { settlement } = birth(i);
       lines.set(i, (settlement.resourceAnalysis?.gaps || []).filter((g) => g.institution));
       seats.set(i, new Set((settlement.institutions || []).map((inst) => inst.name)));
@@ -108,8 +108,13 @@ describe('a gap says which kind — READER R1\'s named births', () => {
     // RE-KEYED BY IDENTITY (BIRTH-3, 2026-11-17; the owner's supply rule, BR5: the seed picks the story, and a house the land
     // never gave its material buys it in where the town can trade): soak1k-302's sawmill now runs on imported timber; the
     // first birth in the soak's order that seats a sawmill and reads its timber missing is soak1k-764 (on no road)
+    // RE-KEYED BY IDENTITY (point 117, the chair's ruling 117-4 (A1), 2026-11-25; the close's B1(i): the land withholds a
+    // house whose material it cannot grow): soak1k-764 (a desert place, on no road) no longer seats a Sawmill. A Sawmill the
+    // land does not withhold can still lack its timber: on no road, where none is brought in. Searched in the soak's order, seeds 0 to 2999 (97 Sawmills seated): 10 Sawmill timber rows read `missing` with the
+    // LACKS line (1196 1346 1730 1982 1988 2192 2708 2762 2822 2846), none with the failed venture's line; the first is
+    // soak1k-1196 (a coastal village of 282, isolated). The assertion is unchanged.
     for (const [i, house, good] of [[9, 'Potter', 'clay'], [9, 'Brickmaker', 'clay'],
-      [9, 'Vintner', 'grapes'], [764, 'Sawmill', 'timber']]) {
+      [9, 'Vintner', 'grapes'], [1196, 'Sawmill', 'timber']]) {
       const hit = at(i, house, good);
       expect(hit.map((g) => g.kind), `soak1k-${i} ${house} -> ${good}`).toEqual(['missing']);
       expect(hit[0].impact).toMatch(LACKS);
