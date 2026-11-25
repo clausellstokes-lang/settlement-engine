@@ -23,3 +23,4 @@
   EXEMPT loop: `expect(e.reason.length, id).toBeGreaterThan(0)`); the title-matching check (`exemptionFaults`) reads `provedBy`,
   which names tensionCauseAtoms.walker, not tensionCause.test.js. No assertion moves.
 - COMMIT 1ffb2328b. Walker file 31/31. tests/lint whole --maxWorkers=1: running (/var/tmp/v53/cures/B55/lint.log).
+- tests/lint WHOLE --maxWorkers=1: 65 failed | 3378 passed (3443), 25 files red; = the trial join's 66 less recentConflictReaders (cured by D); no other new or gone.

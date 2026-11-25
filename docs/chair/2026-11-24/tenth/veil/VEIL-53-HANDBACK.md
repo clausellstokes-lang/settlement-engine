@@ -32,7 +32,8 @@ BUILT, NOT MERGED (all pushed unless said):
   shared reads (a registry row; 212's one line read by the chair); red first on the two-transfer plant; 0 born towns carry it. Cure E 90ddc2fe5 PUSHED (the fortune law's
   resolver into computePublicLegitimacy; the GENERATION_LAWS walk in the arm with a planted fifth row; seat law NOT forgotten);
   sent to VEIL-55 with its named departure.
-RUNNING: the samenessHideable wording commit (cure B's builder resumed). The PAGES slice was STOPPED at 22:50 (the chair's order: it comes after the anon arm).
+- The samenessHideable wording: 1ffb2328b PUSHED on -cures-wip (cites only; tests/lint whole 65 = the join's 66 less D's).
+RUNNING: the ANON ARM's builder on grants-wip (`briefs/V53-ANONARM-BRIEF.md`; notes `out/v53/anonarm/NOTES.md`). The PAGES slice was STOPPED at 22:50 (the chair's order: it comes after the anon arm).
 THE QUEUE, IN ORDER (the chair, 22:48, governs): (1) J1: DONE. (2) V3's five cures A-E, one builder each, stacked on `lane/veil-53-2026-11-24-cures-wip` from ba7460c33 (brief
 `briefs/V53-CURES-V3-BRIEF.md`). (3) The anon arm + carried read + the call-graph read (`briefs/V53-ANONARM-BRIEF.md`) on
 grants-wip. (4) FAIL-CLOSED PAGES (RULING V6): size it first: `out/v53/pages/slice.sh` (PAGES' probe verbatim, every 12th of the
@@ -46,7 +47,7 @@ variant, the owner's read unchanged and asserted; its reader joins the totality 
 started.
 DONE AND SENT: (0); (1) REDS-CAUSE (`out/v53/redscause/REDSCAUSE.md`; the import surprise to the chair: RULING V3 (6)); (2) J1
 classed; J12 and J12-V4 (`out/v53/J12.md`, `out/v53/j12/J12-V4.md`: prominentRelationship's 12/720 are the covert tie's own copy).
-NEXT COMMAND: on the wording commit's return, `git -C /home/user/cures53 log --oneline -3` and read its diff, then the anon arm (`briefs/V53-ANONARM-BRIEF.md` on grants-wip) (E's brief amended for point 115's fifth law; a question to VEIL-55 on
+NEXT COMMAND: on the anon arm builder's return, `git -C /home/user/cures53 log --oneline -3` and read its diff, then the anon arm (`briefs/V53-ANONARM-BRIEF.md` on grants-wip) (E's brief amended for point 115's fifth law; a question to VEIL-55 on
 re-making the trial join on 0559a8405: ANSWERED NO, the trial join stays at ba7460c33 until the join). AFTER E: one small commit on
 -cures-wip re-pointing `tests/lint/samenessHideable.walker`'s stale wording ("served == the house-free twin") to cure B's re-stated
 title, no assertion moved, tests/lint whole after, and say whether the walker reads that title anywhere it checks (VEIL-55, intake).
@@ -79,3 +80,4 @@ title, no assertion moved, tests/lint whole after, and say whether the walker re
 - 01:4x the container restarted (cure E survived as 90ddc2fe5); cure E pushed; cure D resumed on V16.
 - 02:3x cure D pushed (168587f9c) with its departure to the chair; the wording commit dispatched.
 - 02:52 R4-IDS MERGED (lane tip 8430edf5c, lane/veil-55-2026-11-24-tip). 02:51 the chair's V19 on cure D.
+- 03:0x wording commit pushed (1ffb2328b); the anon arm dispatched.
