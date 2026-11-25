@@ -438,7 +438,7 @@ export function pageCensusFindings(settlement, views) {
   run('B1furrow', () => {
     // R24-B1(ii): the Traditions tab prints a field tradition (its glyph on its own line), and the record buys its grain in
     // and holds no farmland (`facts/factVocabulary.js :: atomHolds` over `factsOf`, the atoms' own readers)
-    const facts = factsOf(/** @type {Parameters<typeof factsOf>[0]} */ (rec));
+    const facts = /** @type {Parameters<typeof atomHolds>[1]} */ (factsOf(/** @type {Parameters<typeof factsOf>[0]} */ (rec)));
     if (atomHolds('grain imported', facts) !== true || atomHolds('institution: farmland', facts) !== false) return null;
     const glyph = motifGlyph('field');
     const l = V('World/Traditions').find((x) => x === glyph);
