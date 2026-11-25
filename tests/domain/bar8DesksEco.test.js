@@ -66,14 +66,18 @@ const BREWER_TAVERN = 'bar0-metropolis-calm-rand-47';
 /** the towns of the seventh read's thirty: two that printed "must come from elsewhere" false at the base, one that bears it */
 const NOT_BROUGHT = Object.freeze([
   ['bar0-city-wartime-rand-47', 'copper ore'], // "Needed, and not brought in: … copper ore." (11c.needed)
-  ['bar0-town-calm-rand-46', 'clay'], // the potter is failing: no clay lies near and none is brought in (11c.venture)
+  // RE-ANCHORED (CLOSE-7 ANCHORS, by cause): bar0-town-calm-rand-46 is one of C1's carriers (R24m's accepted re-deal: "Corrupt
+  // Council" -> "Council of Aldermen"), and its lens good moved from clay, not brought in, to grain, brought in. No other town of the
+  // thirty holds a good that is not brought in (city-wartime-47 is the row above), so it is re-picked in its own shape's series:
+  // the first bar0-town-calm-rand-N past the thirty whose lens good is clay and is not brought in (a judgement: the thirty hold none).
+  ['bar0-town-calm-rand-136', 'clay'], // the potter is failing: no clay lies near and none is brought in (11c.venture)
 ]);
 const BROUGHT = Object.freeze([['bar0-metropolis-calm-rand-45', 'iron ore']]); // "Iron ore (local iron mines exhausted)"
 /** the births the leaf is held equal to the page's reading on (the thirty's ten shapes, one seed each, and the three above) */
 const EQUAL_SEEDS = Object.freeze([
   'bar0-thorp-calm-rand-45', 'bar0-hamlet-calm-rand-45', 'bar0-hamlet-under_siege-rand-45', 'bar0-village-calm-rand-45',
   'bar0-village-famine-rand-45', 'bar0-town-calm-rand-45', 'bar0-town-occupied-rand-45', 'bar0-city-wartime-rand-45',
-  'bar0-city-under_siege+famine-rand-45', 'bar0-metropolis-calm-rand-45', 'bar0-city-wartime-rand-47', 'bar0-town-calm-rand-46',
+  'bar0-city-under_siege+famine-rand-45', 'bar0-metropolis-calm-rand-45', 'bar0-city-wartime-rand-47', 'bar0-town-calm-rand-136',
   'bar0-town-occupied-rand-47', 'bar0-metropolis-calm-rand-46', 'bar0-village-calm-rand-47', 'bar0-town-calm-rand-47',
 ]);
 
