@@ -30,7 +30,7 @@ owner's golden signing, asked ONCE at the end). **D** = it needs the owner's own
 | # | what | size | flags | state |
 |---|---|---|---|---|
 | B1 | the grants fix (migration 211) | done | | landed, point 114; the owner has the ten files |
-| B2 | "G2": the two oracles (`has_role`, `profile_has_premium_access`: staff or premium, yes or no, for an account id) | M | Q | NOW BEFORE THE RELEASE: a seat when a place is free |
+| B2 | "G2", THE GRANTS FOLLOW-UP: the two oracles (`has_role`, `profile_has_premium_access`: staff or premium, yes or no, for an account id); AND (found by the veil's anon arm, 2026-11-25) the USER-class functions closed to anon (211's part A closed only SERVER and NOBODY; today they answer anon with nothing by their own gates) | M | Q | NOT STARTED: a migration of its own with a fresh security reader; a seat when a place is free, or the next account |
 | B3 | the owner's read for part B shows the role postgres by name (the reader's W1) | S | | in VEIL-53's work |
 
 ## C. THE FAULTS OF THE CHAIR'S READ OF SIXTEEN TOWNS (the close lane)

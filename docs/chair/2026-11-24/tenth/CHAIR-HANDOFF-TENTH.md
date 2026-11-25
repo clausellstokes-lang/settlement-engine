@@ -966,3 +966,10 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   cause; a test that cannot be re-anchored without changing its claim stays red and is the chair's), test-only, two
   commits, then `tests/lint` and `tests/domain` whole; the chair reads that diff before the line moves. ALSO: V20
   (unit 5's rule accepted, 02:53) written into `veil/RULING-V1.md`.
+- 2026-11-25 04:21 UTC · T73 · UNIT 1 MERGED IN THE VEIL's LANE; PLAN-2 ACCEPTED; THE ANON ARM's SURPRISE RULED; THREE GAPS CLOSED (V21 to V23).
+  THE LANE's TIP `lane/veil-55-2026-11-24-tip` is dbd4cd9e5 (R4-IDS 8430edf5c and unit 1): TWO OF PHASE 1's FIVE UNITS
+  ARE MERGED. PLAN-2 (V22): phase 1 left about 36 seat-hours; after it about 99 before the release; if the allowance
+  binds, the put-back goes ahead of phase 2. THE CHAIR's GUESS: this account's week ends about when phase 1's proof is
+  taken: the hand-off's reader on another account picks up at B1. V23: `_gallery_apply_member_overrides` closed in the
+  veil's SQL (it is called only inside definer doors); the USER doors open to anon joined B2. THE HOURLY CHECK at 03:35:
+  VEIL-53 533,184; every record `allowed_warning`. LAND-116's helper is curing the twelve stale anchors (T72).

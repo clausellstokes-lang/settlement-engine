@@ -476,3 +476,31 @@ is phase 2's; (b) the plants kept as committed arms, red first; (c) "loses nothi
 every read that hides nothing, both pools, both engines; (d) THE TELL COUNTED for phase 2 (cards left without a role on
 hiding reads); (e) every door and both Reveals; (f) registry rows with their reasons. ORDER: unit 4's 212 edit first
 on the lane's tip; unit 5's SQL after unit 4 has merged; the chair reads each hunk before its grant.
+
+## RULINGS V21, V22, V23 (added 04:21 UTC on 2026-11-25)
+**V21 (03:40): V1-3 POINT 1's THREE GAPS** (VEIL-52's instruments, tables on its lane at b2be7c17b, through VEIL-55):
+(a) names at the map's import equal the map member's, path for path, on three sets; the standing-tail plant caught 10 of
+10 at every door: KEPT AS UNIT 4's TOOTH (absent at every door after unit 4, or no grant); (b) the world snapshots: 0 of
+every kind on three sets, three plants caught: closed; (c) A WITHHELD PERSON's NAME: LISTED AS EMPTY BY DESIGN (a card
+hide keeps the name: 0 stored persons with no served card on every read): its fact becomes a standing assertion in the
+join's proof and a committed arm, "every stored person has a served card on every non-owner read": the day a rule
+withholds a person whole, that arm reds and the name instrument is owed.
+**V22 (04:17): "UNIT 1 MERGED dbd4cd9e5466473d0f2acc89b753639bf746ec53"** (the lane's tip: 8430edf5c and unit 1, its header
+item (37); its slice: `publicProse` on 3,360 of 3,360 reads at the base, 0 of 3,360 after; `tests/lint` 27 failed
+against 51 at 8430edf5c, no new title). **VEIL-55-PLAN-2 (a1cb9710d on its lane) IS ACCEPTED AS WRITTEN.** (A) PHASE 1
+LEFT, about 36 seat-hours, 14 to 18 wall hours: unit 4 (VEIL-51), unit 5 (VEIL-51), unit 3 (VEIL-52), FAIL-CLOSED PAGES
+and the anon arm (VEIL-53), the join (renumbering last), the proof, the fresh security reader, the chair's read of 212
+and 213 final. (B) AFTER PHASE 1's SQL, about 99 seat-hours: B1 the seat's holder stored (3), B2 READ-COST (6), B3
+phase 2 to R3 (35), B4 the put-back (25), B5 the composed host (18), B6 the standing at birth (12), LAST, the
+standing's return riding it. IF THE ALLOWANCE BINDS: A, B1, B2, then B4 AHEAD OF B3 (a shared page that says less but
+nothing false can ship; R3's tells are inferences, not leaks). THE CHAIR's GUESS: this account's week ends about when
+phase 1's proof is taken; each merge leaves the lane's tip whole and proven on its own.
+**V23 (04:20): THE ANON ARM's SURPRISE** (VEIL-53, `out/v53/anonarm/NOTES.md`): on the joined chain under the hosted
+default every door serves anon and authenticated (the plant caught); BUT `_gallery_apply_member_overrides` (SECURITY
+INVOKER, register class ANYONE) raises "permission denied for function _gallery_veil_str" when called directly, because
+the veil's restatement calls helpers 211's part B leaves closed; every caller is a definer door and no client calls it.
+RULED: CLOSED IN THE VEIL's SQL: revoked by exact signature from public, anon and authenticated; its register class
+corrected with its reason; `_gallery_sanitize_public_json` likewise only if nothing but definer doors calls it; the arm
+asserts both ways (direct calls refuse; every door still serves both roles; the owner's reads unchanged); the hunk is
+read by the chair. ALSO FOUND, NOT THE VEIL's: the USER-class doors are executable by anon (211's part A closed only
+SERVER and NOBODY; they answer anon with nothing by their own gates): listed for the grants follow-up (B2).
