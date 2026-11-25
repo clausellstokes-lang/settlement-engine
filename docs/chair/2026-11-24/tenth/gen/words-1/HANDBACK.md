@@ -125,6 +125,18 @@ STATE AT 14:50 UTC:
   (personMention qualifiedPossessives, "Kathleen Farrell (the hospital's master)'s family"); one secret stakes literal
   ("the carriers' master's door"). CURED in wt/e1 (uncommitted at 14:50), test extended; gates running (e1b-*.log); then the
   joined tree is rebuilt and re-rendered for the after side.
+STATE AT 15:31 UTC:
+- HANDED IN (15:24) to the chair and CLOSE-7: UNIT D6 81ac266a5 (C 502 / V 452 pages, owed count 115 on 109 / 170 on 160,
+  bound-with-conflict 285 on 240 / 215 on 192, flag vs oracle 0) and UNIT E8 94b7a13d9 step one (C 627 strings in 390 places,
+  V 595 in 381; e8-check on the joined tree 623 / 591 covered lines, 0 disagreeing; unexplained 0), with the merge note.
+- CHAIR G20 (15:24): (1) D6 stands as built; figure owed and SENT: cards still "Contender" C 503, V 671 (unbacked C 388,
+  V 501). (2) E8b WANTED before the release; design ruled: draw and dedupe on the line's text as today, the reflexive resolved
+  AFTER the draw where the line is bound to its person; proof = E8's (only the reflexive differs, 0 disagreeing, 0
+  unexplained); a site that stores text before its person is known is a STOP (report it, build nothing there). (3) Once
+  CLOSE-7 has taken D6, E1 and E8: say context size; under 600,000 build E8b as `-e8b-wip`, else write (2) here as the next
+  seat's unit and say HANDS OVER at a commit boundary.
+- E1 residue cure 902b7005d PUSHED (from wt/e1). Joined tree rebuilt with it (first joined renders kept as s-join1-*);
+  re-render of join C/V, E1 lint, typechecks on e1 and join running (s-join-*.log, e1c-lint.log, tc2-*.log).
 NOT IN STEP ONE (E8b): the card lines (tells 899/852, impressions, secrets, goal.long npcGenerator); their draws dedupe by text
 in registries (castPowers hookRegistry.tells, CarriedSecrets), so a draw-time fill would move draws: a design is owed.
 npcData.js was read in its changed region only (pairProse, the tie table), not whole: said in the hand-in.
