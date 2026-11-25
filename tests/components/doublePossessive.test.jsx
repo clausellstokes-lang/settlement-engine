@@ -57,16 +57,17 @@ describe('E1 · the double possessive', () => {
   });
 
   it('(2)(4) the fill writes the "of" form where a fill holds a possessive, and nothing else moves', () => {
-    expect(fillSlots("Nobody at {settlement} is in a position to take the {seat}'s place.", { settlement: 'Dzibcoba', seat: "Headman's Authority" }))
-      .toBe("Nobody at Dzibcoba is in a position to take the place of the Headman's Authority.");
-    expect(fillSlots("Some at {settlement} are in {faction}'s pocket.", { settlement: 'Xinba', faction: "the Thieves' Guild" }))
-      .toBe("Some at Xinba are in the pocket of the Thieves' Guild.");
-    expect(fillSlots("{settlement}'s {institution} is open but short of supplies.", { settlement: 'Uaymtzal', institution: "Caravan masters' exchange" }))
-      .toBe("The Caravan masters' exchange at Uaymtzal is open but short of supplies.");
+    // synthetic templates of the three joiner shapes (no corpus sentence is a test anchor: proseDrawnAnchors)
+    expect(fillSlots("At {settlement} none would take the {seat}'s chair.", { settlement: 'Dzibcoba', seat: "Headman's Authority" }))
+      .toBe("At Dzibcoba none would take the chair of the Headman's Authority.");
+    expect(fillSlots("A few at {settlement} sit in {faction}'s purse.", { settlement: 'Xinba', faction: "the Thieves' Guild" }))
+      .toBe("A few at Xinba sit in the purse of the Thieves' Guild.");
+    expect(fillSlots("{settlement}'s {institution} stands half empty.", { settlement: 'Uaymtzal', institution: "Caravan masters' exchange" }))
+      .toBe("The Caravan masters' exchange at Uaymtzal stands half empty.");
     // a fill without a possessive: byte for byte
-    expect(fillSlots("Nobody at {settlement} is in a position to take the {seat}'s place.", { settlement: 'Dzibcoba', seat: 'Elder Council' }))
-      .toBe("Nobody at Dzibcoba is in a position to take the Elder Council's place.");
-    expect(fillSlots("{settlement}'s {institution} is open.", { settlement: 'Uaymtzal', institution: 'Weekly market' })).toBe("Uaymtzal's Weekly market is open.");
+    expect(fillSlots("At {settlement} none would take the {seat}'s chair.", { settlement: 'Dzibcoba', seat: 'Elder Council' }))
+      .toBe("At Dzibcoba none would take the Elder Council's chair.");
+    expect(fillSlots("{settlement}'s {institution} stands half empty.", { settlement: 'Uaymtzal', institution: 'Weekly market' })).toBe("Uaymtzal's Weekly market stands half empty.");
   });
 
   it('(1) a later mention before "\'s" skips a role that holds a possessive; (3) the house fill takes the short title', () => {
