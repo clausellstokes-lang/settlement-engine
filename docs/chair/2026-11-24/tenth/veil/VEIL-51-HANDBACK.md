@@ -87,7 +87,14 @@ Reports to the lane's owner: a FILE, at most 200 words. My context began with a 
   wd-today rc 3 00:42 and wd-master rc 3 00:52 (3 = MAP OTHER listed, by design; CONFIRMED): the desc path 240 reads on 2 places
     (today) and 240 on 1 (master: r3m-city-none-1-117) = VEIL-50's tip counts. Every hit is a standing TAIL: R5D's reference cut
     leaves a base naming none (`u4/basetail.mjs`, offline). (4) PROPOSAL `u4/PROPOSAL.md` sent to VEIL-55 and the chair (00:57).
-  RUNNING (background, 2-hour limit): `rival.sh arms after cost`; the builder DESCARM (its red run).
+  (2) DESCARM RETURNED: 0ff0773c7 on `lane/veil-51-2026-11-24-descarm-wip` (pushed 00:56; above d7764e67a; the arm
+    `tests/security/galleryVeilDescNames.pglite.test.js`, 249 lines, + its manifest row). ITS DIFF READ ONCE BY ME: NO FAULT (the
+    lane's judgment line for line; recipe drift reds; read count asserted). RED BY DESIGN (CONFIRMED by its log
+    /var/tmp/v51/out/descarm/arm-run1.log): 396 desc faults over 324 engine-reads (all hiding), 3 of 3 places (both births, the
+    plant), server = twin per cell (gallery off 66 / DM 99, import 6 / 9, link 6, map 6 / 6); the positive GREEN (108 per place).
+    eslint 0; proseDrawnAnchors green; manifest green after its row; negativeAssertionAnchor red = the base's same 4 files
+    (standing); moduleScopeCwdRatchet the base's A4 (standing).
+  RUNNING (background, 2-hour limit): `rival.sh arms after cost` (its first arm, galleryVeilRival, from 00:53).
   IF THIS SEAT STOPS: re-run what u4.log lacks (`sh docs/chair/2026-11-24/tenth/veil/v51/u4/u4.sh <steps>`; `sh .../rival.sh`)
   after the trees above are re-made (`git worktree add --detach` at the commits named; node_modules linked).
 - NEXT: wait for "R4-IDS MERGED <commit>" from VEIL-55, then unit 2 (R5-DESC), reading PART 42 s1 block 0 (a3bc0dc9d) and
