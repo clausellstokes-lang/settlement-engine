@@ -132,11 +132,23 @@ GUARD BUILT (05:41 UTC): -guard-wip d6c941c62, pushed, cut at e2fd7caa4. Report 
 CURES at 9b777f3fb: point 116 merged, the census re-taken (3796). Its gates are RUNNING: the cures' 9 test files, tests/lint and
 tests/copy; logs `scratchpad/cures116-{own,lint,copy}.log`.
 
-THE NEXT COMMAND: on the chair's ruling on GUARD:
-- merge -guard-wip onto cures, taking the lighting census as the cures' side and re-taking it by its door;
-- run its gates, then re-take (c) on 116 births with `close-7/live-path/guard-proofs.census.jsx`;
-- push, and send the GUARD line.
-- Then brief BATCH for the same builder (a45b468ed08040c87).
+R24k (05:42; `close-7/briefs/R24k.md`): GUARD MERGES AS BUILT.
+- (c) is split. (c1) the feature is on: 180/180. (c2) the guard is inert on its own engine: the merged tree vs its parent, the
+  same line-born saves and decree, give records equal apart from the version, 180/180. Re-taken on 116 births at the merge.
+- The four movements are REDERIVE-DRIFT: written down, not worked.
+  - The null: no reader tells '' from null. ANSWERED, no line is cured (GUARD.md).
+  - At the re-take: if seated powers plus re-dealt conflicts exceed 10 of 180, it goes to the chair.
+- The distillate is re-made by its own script, one commit, the diff the version's value alone.
+SECOND CONTAINER RESTART at about 05:50. The distillate run and the cures-116 lint/copy run were LOST. Re-dispatched 05:57:
+- the builder resumed on STEP A (4);
+- the lint/copy re-run is in the background (logs `scratchpad/cures116-{lint,copy}.log`). The cures' own 9 files passed
+  166/166 before the restart.
+
+THE NEXT COMMAND:
+- on the builder's step-A message, merge -guard-wip onto cures (9b777f3fb), taking the lighting census as the cures' side and
+  re-taking it by its door;
+- name both commits to the builder for STEP B: the merged commit, and 9b777f3fb as the parent without GUARD;
+- run the gates, push, and send the GUARD line (with (c2), the four counts and the golden list).
 
 ### 0.1 Ground
 - THE LIT TREE (before every cure): `/home/user/wt/lit`, detached at d447ee31e (the flip; `origin/lane/close-6-2026-11-23-flip`).
