@@ -804,3 +804,13 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   `ci/LINE-NOW.md` is at point 115. OWED: CI by name within the hour; "THE LINE IS" to the five seats; THE OWNER'S YES
   ON THE RULE'S THREE NUMBERS (then one commit lights it, by a helper with its own gate). VEIL-54 IS STILL NOT SEATED
   (the allowance; T53): the freed landing place stays free.
+- 2026-11-25 00:17 UTC · T60 · "SNAP-CHRONICLE", A FINDING OUTSIDE THE VEIL (VEIL-52's SNAP; VEIL-55's line of 00:17).
+  The world snapshot's `chronicle` section is refused by `_gallery_world_snapshot_is_safe` on 35 of 35 local campaigns
+  that have a chronicle. The chair read master: `089_publish_map_server_snapshot_sanitize.sql:80` denies
+  `.*chronicle.*`, so the pattern is live. NOT YET DRIVEN THROUGH THE CLIENT: whether a maker who ticks the chronicle
+  is refused the whole publish is PLAUSIBLE. A9 on the pre-release list. One run owed by VEIL-52 (the client's own
+  publish path on master's tree and chain, and on the tip), after today's-import pass and READ-COST's run; it builds
+  nothing; the chair rules the cure. VEIL-55's unit 2 at 00:17: the security files 117 of 117, the catalogue, the salt
+  and the rollback green; the form, the stored arm, the pool and the gates running. "THE LINE IS 0559a8405" sent to
+  CLOSE-7 and VEIL-55 (for the veil's seats) at 00:10. The CI read for point 115 is armed for 00:57 UTC
+  (trig_01N3D3U6mgtBAQvhMbzMpEny); the hourly check for 00:29 (trig_017PbijvZjS4JSF9zHXKR7SK).
