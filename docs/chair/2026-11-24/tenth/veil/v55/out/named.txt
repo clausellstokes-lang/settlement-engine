@@ -1,1 +1,43 @@
 gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 11254 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+ ✓ tests/domain/leftLines.test.js (5 tests) 924ms
+ ✓ tests/domain/bar8Marks2.test.js (7 tests) 6078ms
+     ✓ each house and every one of its rows reads its state, alike on the three views (every row)  3959ms
+     ✓ the iron houses of the occupied towns print no "Short of iron." (the three views); a besieged town keeps its reading  1065ms
+     ✓ the house and every one of its rows read their state, alike on the three views (every row)  360ms
+     ✓ the besieged towns whose one supplier is stopped name none, and still print the reliance (the three views); a supplier at work is named  397ms
+ ✓ tests/store/galleryImportRederive.test.js (5 tests) 5231ms
+ ✓ tests/lib/partyLinkClient.test.js (7 tests) 26ms
+ ✓ tests/store/galleryImportServedBand.test.js (4 tests) 3667ms
+ ✓ tests/generators/bar8Rows.test.js (6 tests) 2547ms
+     ✓ N4: the owner's page, the public projection and the share veil print the same gap lines  747ms
+ ✓ tests/lib/galleryChronicle.test.js (4 tests) 14ms
+ ✓ tests/lib/galleryDescriptionScrub.test.js (5 tests) 33ms
+ ✓ tests/components/defenseRingNoteProjection.test.jsx (2 tests) 3083ms
+     ✓ soak1k-10, soak1k-11 and soak1k-41: each prints its seeded variant on the shared tab, three variants in all  2643ms
+     ✓ an unstamped shared record renders the note locally, as before (no seed: the original sentence)  427ms
+ ✓ tests/lib/galleryTagsClamp.test.js (3 tests) 11ms
+ ✓ tests/lib/galleryRealmArc.test.js (3 tests) 13ms
+ ✓ tests/components/publicCrisisHookLabel.test.jsx (2 tests) 778ms
+ ✓ tests/domain/leftMarks.test.js (6 tests) 78530ms
+     ✓ each house reads its state, alike on the record, its public projection and the share veil (every row)  1344ms
+     ✓ no other house of the table is marked short of its good over the census's 720  69746ms
+     ✓ the four maltsters on a short food line read "Short of grain."; the ten on a food line that is not short do not (every row, the three views)  367ms
+     ✓ absent on both tabs in the nine towns whose only mark is a venture's; present in r2r-city-20 (a short mark) and r2r-hamlet-27 (the maltster's)  2799ms
+     ✓ over the besieged towns of the 720 and the 150 no such house prints bare; the two cities' houses read "Curtailed by the siege." on the three views  4266ms
+ ✓ tests/components/leftChainCards.test.jsx (8 tests) 211634ms
+     ✓ (a) L18 (BR10 (3)): no card on a spent ground lists a source house at work, over the 720, the 150 and the thirty  88188ms
+     ✓ (a) the seventeen mines: at work on a live seam, and off their spent iron card on the rendered tab  6703ms
+     ✓ (a) THE NEGATIVE (BR10 (3) amended): a maker at work on a ground of its own keeps its place on a spent card of another ground  366ms
+     ✓ (b) L5 and L27: no output and no pill names a good whose every maker is marked short, over the 720 and the 150  3859ms
+     ✓ (c) L7: the metal share takes its twin beside an idle forge and a mine at work; a working smith keeps the line  810ms
+     ✓ (d) N4: the owner's page and the shared page read the cards, the lists and the metal share alike  111455ms
+
+ Test Files  34 passed (34)
+      Tests  866 passed | 1 skipped (867)
+   Start at  02:41:41
+   Duration  257.56s (transform 13.41s, setup 488ms, import 35.35s, tests 701.25s, environment 4.95s)
+
+JSON report written to /var/tmp/v55/out/p1/named.json
+[gate-tail] end:  02:45:59 up  2:03,  0 user,  load average: 3.74, 3.80, 3.17
+[gate-tail] full log: /tmp/gate-tail.11570.log
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)
