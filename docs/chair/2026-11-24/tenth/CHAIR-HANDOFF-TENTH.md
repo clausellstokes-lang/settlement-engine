@@ -1438,3 +1438,23 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   BIRTH-2 at 18:00: 733,556 used (cost 56.51); G23 (2) withdrawn; it hands in P9 and stops. BIRTH-1 woken for D8's one
   row. WORDS-2: E13a built 608f70826 (proofs), E13d ordered (G35). WORDS-1: E8b building.
 - 2026-11-25 18:30 UTC · T110 · D8 PARKED AGAIN (G38: two rows, the door refuses a new line, no declaration form): THE CHAIR's G34 COULD NOT BE CARRIED OUT AND WAS NOT FORCED; told the owner. Hand-ins since T109: E8b e75f090b7 (WORDS-1; now on E13b, a measure and a design first, G36); P9 34212dfd2 (BIRTH-2, stopped final; G37: its writer-reach rows and P9b are CLOSE-8's). The line has not moved; C1B's second reader and the helper's 117-6 report are owed.
+- 2026-11-25 18:43 UTC · T111 · B1(ii) IS OUT OF THE LANDING's TREE AND SIX REDS WENT GREEN WITH IT; C1B READ BY THE SECOND READER (four faults, R24s), "C1B-2" BEING BUILT; THE LINE HAS NOT MOVED.
+  THE LANDING's TREE (`/home/user/wt/line`, local `lane/stack-117-wip-2026-11-25`, NOT PUSHED) at 4e19c2a04b: be61181a3b
+  reverts 3388806b4d (genesis.js byte-equal to ddca5c7894's; no reference to `fieldsBoughtIn`, `B1furrow`, `FIELD_GLYPH`
+  left); 85cad120d5 the lighting census by its door (3,801 to 3,800); 4e19c2a04b the writer-reach register by its door
+  (one site fewer: read by the chair). THE TAB PROVEN BACK: soak 0 to 239, 96 towns and larger with byte-equal records:
+  shown traditions differing 0 (26 of 94 with B1(ii) in). ITS GATE: ratchet 167/167, strict 1113/1113, packets 257;
+  `tests/lint` 3 red (proseComposed A0b, proseCorpusBytes RAW and GZIP: size signings on the list). NOW GREEN, SO THEY
+  WERE B1(ii)'s AND NOT B1(i)'s (CLOSE-7's and the chair's attribution in R24q was WRONG on these): `newsHeadlineContract`,
+  `newsVoiceContract`, `observedShapeReaders` executed corpus, `proseFamilyContract` A1, `heraldKnowledgeDeskGolden`,
+  `statecraftExposureBand`. STILL RED, FOR RED-AT-LINE AT 117 (seven rows): the two intentAtlas bundle rows;
+  `faultsNeed` item 1; `dossierProseManifest` FOUR SEEDS and MIXED-POOL; `townCartographyCalibration` W2; `goals.test`
+  I-13. (`editCorpusRatchet` A3, A7 are on the list.) THE OWNER'S FIGURES TO SIGN FALL FROM THREE TO TWO (the herald
+  digest is not moved).
+  C1B: the second reader's four (R24s; `landing/117/SECOND-READER-C1B.txt`); the chair measured that every born hall
+  row carries `category: 'criminal'`; RULING-C1B-2 sent to the builder (agent af6a50ea622cbd98c): the row's category is
+  the mark; `rulingPower.js :: takenBy`; the number rule held to the halls; A DIFFERENTIAL against old-named twins in
+  place of the sweep. IF IT SHOWS ONE MORE READER, C1 COMES OUT OF 117 WHOLE. Then a short second read of the delta,
+  RULING-117-7 (merge, lighting census by its door, last gate, PUSH).
+  Seats: BIRTH-1 final (D8 parked again, G38); BIRTH-2 final (P9 34212dfd2); WORDS-1 building E13b (70 sentences, G39);
+  WORDS-2 hands over after E13a's hand-in (E13d written in its hand-back 0.8 for the next seat).
