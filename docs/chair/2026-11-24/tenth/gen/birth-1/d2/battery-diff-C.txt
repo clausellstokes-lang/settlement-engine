@@ -1,0 +1,14 @@
+dp-city-135	record MOVED	page MOVED	lost -	gained -
+dp-city-28	record MOVED	page MOVED	lost -	gained -
+dp-city-40	record MOVED	page MOVED	lost -	gained -
+dp-city-47	record MOVED	page MOVED	lost -	gained -
+dp-city-60	record MOVED	page MOVED	lost -	gained -
+dp-city-72	record MOVED	page MOVED	lost -	gained -
+dp-city-84	record MOVED	page MOVED	lost -	gained -
+dp-city-86	record MOVED	page MOVED	lost -	gained -
+dp-metropolis-120	record MOVED	page MOVED	lost -	gained -
+dp-metropolis-28	record MOVED	page MOVED	lost -	gained -
+dp-metropolis-46	record MOVED	page MOVED	lost -	gained -
+dp-town-29	record MOVED	page MOVED	lost -	gained -
+dp-town-77	record MOVED	page MOVED	lost -	gained -
+page-battery --diff: 13 births; record moved 13, page moved 13, rows moved 0

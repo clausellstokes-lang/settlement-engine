@@ -1,0 +1,5 @@
+ prominent is a covert tie                before 0/0/0/0/1/14 = 15   after 0/0/0/0/0/0 = 0
+ prominent joins a covert pair            before 0/0/0/0/1/14 = 15   after 0/0/0/0/0/0 = 0
+ pressure names a covert tie's two ends   before 0/0/0/0/0/0 = 0   after 0/0/0/0/0/0 = 0
+ records moved 15 of 525
+   prominent changed: 15  (city|germanic|coastal|port|civilized|golden-master-v3 metropolis|germanic|mountain|road|civilized|golden-master-v3 metropolis|latin|riverside|river|civilized|golden-master-v3 metropolis|latin|coastal|port|civilized|golden-master-v3 metropolis|celtic|desert|road|civilized|golden-master-v3 metropolis|arabic|coastal|port|civilized|golden-master-v3)

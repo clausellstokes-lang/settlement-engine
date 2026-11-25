@@ -1,0 +1,5 @@
+ prominent is a covert tie                before 0/0/0/1/14/17 = 32   after 0/0/0/0/0/0 = 0
+ prominent joins a covert pair            before 0/0/0/1/14/17 = 32   after 0/0/0/0/0/0 = 0
+ pressure names a covert tie's two ends   before 0/0/0/0/0/0 = 0   after 0/0/0/0/0/0 = 0
+ records moved 32 of 525
+   prominent changed: 32  (city|germanic|forest|isolated|civilized|golden-master-v3 city|germanic|coastal|port|civilized|golden-master-v3 city|latin|coastal|port|civilized|golden-master-v3 city|celtic|coastal|port|civilized|golden-master-v3 city|arabic|coastal|port|civilized|golden-master-v3 city|norse|coastal|port|civilized|golden-master-v3)

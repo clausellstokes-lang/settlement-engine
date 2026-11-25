@@ -1,0 +1,6 @@
+C prominent is a covert tie                before 0/0/0/1/4/3 = 8   after 0/0/0/0/0/0 = 0
+C prominent joins a covert pair            before 0/0/0/1/4/3 = 8   after 0/0/0/0/0/0 = 0
+C pressure names a covert tie's two ends   before 0/0/0/1/4/0 = 5   after 0/0/0/0/0/0 = 0
+C records moved 13 of 900
+C   pressure changed: 5  (dp-town-29 dp-city-40 dp-city-47 dp-city-84 dp-city-135)
+C   prominent changed: 8  (dp-town-77 dp-city-28 dp-city-60 dp-city-72 dp-city-86 dp-metropolis-28)

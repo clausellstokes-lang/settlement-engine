@@ -1,0 +1,15 @@
+city|germanic|coastal|port|civilized|golden-master-v3
+metropolis|germanic|mountain|road|civilized|golden-master-v3
+metropolis|latin|riverside|river|civilized|golden-master-v3
+metropolis|latin|coastal|port|civilized|golden-master-v3
+metropolis|celtic|desert|road|civilized|golden-master-v3
+metropolis|arabic|coastal|port|civilized|golden-master-v3
+metropolis|arabic|desert|road|civilized|golden-master-v3
+metropolis|norse|desert|road|civilized|golden-master-v3
+metropolis|east_asian|mountain|road|civilized|golden-master-v3
+metropolis|mesoamerican|riverside|river|civilized|golden-master-v3
+metropolis|south_asian|coastal|port|civilized|golden-master-v3
+metropolis|steppe|coastal|port|civilized|golden-master-v3
+metropolis|greek|riverside|river|civilized|golden-master-v3
+metropolis|mediterranean|riverside|river|civilized|golden-master-v3
+metropolis|mediterranean|coastal|port|civilized|golden-master-v3

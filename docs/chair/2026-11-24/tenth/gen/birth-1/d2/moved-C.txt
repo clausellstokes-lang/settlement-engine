@@ -1,0 +1,65 @@
+dp-town-29
+  PR before: A document Dhara Gupta and Sneha Roy each believed only they possessed has turned up in someone else's hands.
+  PR after: A document Dhara Gupta and Sneha Roy each believed only they possessed has turned up in someone else's hands.
+  PS before: Prashant Basu's sister has been seen talking to Varun Kapur's people. Prashant Basu does not know whether she went to them or they came to her.
+  PS after: Ram Patel and Lokesh Reddy each think the other owes the apology.
+dp-town-77
+  PR before: Someone else has begun asking questions that come close to Thaleia Chrysoberges's secret. Eudokia Comnenus wants Thaleia Chrysoberges to find out who is asking.
+  PR after: Constantinos Melas has mentioned the debt aloud, at a dinner, in front of Kallistrate Hexamilites's partners.
+  PS before: The interest on Dionchorion's debt now outpaces what the wool can bring in; the numbers have been quietly rearranged twice to hide it, and there is no third arrangement that works.
+  PS after: The interest on Dionchorion's debt now outpaces what the wool can bring in; the numbers have been quietly rearranged twice to hide it, and there is no third arrangement that works.
+dp-city-28
+  PR before: The child wants to leave Dalila al-Misri's crew. Dalila al-Misri has told Yara ibn Rashid that leaving is possible, once the postmaster has done one more thing.
+  PR after: A document Sawsan al-Hassan and Wafa al-Din each believed only they possessed has turned up in someone else's hands.
+  PS before: Luqman al-Jazari has taken on a client Laith al-Baghdadi turned away on principle.
+  PS after: Luqman al-Jazari has taken on a client Laith al-Baghdadi turned away on principle.
+dp-city-40
+  PR before: Vagn Jokullsson has asked Verdandi Sigurðarson for a second favour before repaying the first, which would put him two favours ahead.
+  PR after: Vagn Jokullsson has asked Verdandi Sigurðarson for a second favour before repaying the first, which would put him two favours ahead.
+  PS before: Raud Flokason's family has begun asking where the early money came from. Frigg Þorkellsson has told Raud Flokason that the questions must stop.
+  PS after: Estrid Karason has asked Gefjon Hrollasson for those reasons at last, and the woodcarver has not decided how much to say.
+dp-city-47
+  PR before: null
+  PR after: null
+  PS before: The child wants to leave Walburga Vogt's crew. Walburga Vogt has told Aldric Gärtner that leaving is possible, once he has done one more thing.
+  PS after: Sigebert Graf's child has asked to apprentice with Godela Lange. Godela Lange has not refused.
+dp-city-60
+  PR before: Ki Deng has asked Zhu Yang for something the sawyer cannot give without being noticed. Zhu Yang asked for time, and Ki Deng gave a week.
+  PR after: Riko Zhu has found the document that proves what Ying Kim did, and has kept it locked away.
+  PS before: Zhongxian is at war and, for now, on the right side of it: contracts are flowing, the garrison is reinforced, and the war chest is paying. The men who left to fight have not come back.
+  PS after: Zhongxian is at war and, for now, on the right side of it: contracts are flowing, the garrison is reinforced, and the war chest is paying. The men who left to fight have not come back.
+dp-city-72
+  PR before: Eirene Chortasmenos and Romanos Kamytzes are closely tied. Someone has started digging near the place where the body was hidden. Romanos Kamytzes wants Eirene Chortasmenos to put a stop to it, and she has no reason to give that would not raise questions.
+  PR after: Thomas Bryennios and Melissenos Oinaios are tied by a debt not yet paid. Melissenos Oinaios has begun to count the debt Thomas Bryennios owes among the watch commander's assets, and has had it written down before witnesses.
+  PS before: Something is spreading in Ioannoskala; the quarantine is partial, the healers are overwhelmed, and the watch commander who first identified it has gone quiet in a way that suggests either pressure or something worse.
+  PS after: Something is spreading in Ioannoskala; the quarantine is partial, the healers are overwhelmed, and the watch commander who first identified it has gone quiet in a way that suggests either pressure or something worse.
+dp-city-84
+  PR before: null
+  PR after: null
+  PS before: Melanthi Chomatenos has asked for a favour worth more than the whole debt. Petros Argyros has asked what happens if the answer is no.
+  PS after: Nikephoros Doukas and Stephanos Palaiologos both want the same office, and the alliance cannot survive one of them winning it.
+dp-city-86
+  PR before: Metellus Ravilla is praised in public for speaking out against crime. Secunda Falco finds it useful, and expects Metellus Ravilla to remember who chooses which criminals are caught.
+  PR after: Valentinus Cicero has begun to count the debt Junia Salinator owes among his assets, and has had it written down before witnesses.
+  PS before: The interest on Terraripa's debt now outpaces what the wool can bring in; the numbers have been quietly rearranged twice to hide it, and there is no third arrangement that works.
+  PS after: The interest on Terraripa's debt now outpaces what the wool can bring in; the numbers have been quietly rearranged twice to hide it, and there is no third arrangement that works.
+dp-city-135
+  PR before: Yellow Corn Chan now operates in ways Flower Chan would not approve of. Neither discusses the divergence directly.
+  PR after: Yellow Corn Chan now operates in ways Flower Chan would not approve of. Neither discusses the divergence directly.
+  PS before: Itzcuintli Kab and Kanleox Xiu are closely tied. Itzcuintli Kab's sister has been seen talking to Kanleox Xiu's people. Itzcuintli Kab does not know whether she went to them or they came to her.
+  PS after: Cipactli Uc and Cuauhtemoc Puc are teacher and heir. A third party has asked Cipactli Uc, quietly, whether Cuauhtemoc Puc can be trusted. The answer took too long.
+dp-metropolis-28
+  PR before: Shashi Anand and Jai Mishra are closely tied. The child wants to leave Jai Mishra's crew. Jai Mishra has told Shashi Anand that leaving is possible, once the stable master has done one more thing.
+  PR after: Jatin Mukherjee and Shashi Jha are rivals, and neither gives the other ground. Jatin Mukherjee has hired away Shashi Jha's best assistant. Shashi Jha has said nothing about it, to anyone.
+  PS before: The Grand Council has been debating market levies for three months. The merchants have argued against every one of them, and nothing has been settled yet.
+  PS after: The Grand Council has been debating market levies for three months. The merchants have argued against every one of them, and nothing has been settled yet.
+dp-metropolis-46
+  PR before: Photios Bryennios has started to think the truth coming out would hurt less than Ioanna Kurtikios's next request. Ioanna Kurtikios has noticed the change in Photios Bryennios.
+  PR after: Alexandros Angelos and Christodoulos Angelos both want the same office, and the alliance cannot survive one of them winning it.
+  PS before: The Grand Merchant Oligarchy has been debating market levies for three months. The merchants have argued against every one of them, and nothing has been settled yet.
+  PS after: The Grand Merchant Oligarchy has been debating market levies for three months. The merchants have argued against every one of them, and nothing has been settled yet.
+dp-metropolis-120
+  PR before: Sona Das has asked Udayan Giri for something he cannot give without being noticed. Udayan Giri asked for time, and Sona Das gave a week.
+  PR after: Someone else is working to pull Om Sahni and Parvati Kapoor apart.
+  PS before: Shyam Seth corrected Shyam Khatri in public last month, and was right.
+  PS after: Shyam Seth corrected Shyam Khatri in public last month, and was right.

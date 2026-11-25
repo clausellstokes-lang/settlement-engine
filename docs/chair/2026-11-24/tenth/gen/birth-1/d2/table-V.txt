@@ -1,0 +1,8 @@
+V prominent is a covert tie                before 0/1/0/1/4/1 = 7   after 0/0/0/0/0/0 = 0
+V prominent joins a covert pair            before 0/2/0/1/4/1 = 8   after 0/0/0/0/0/0 = 0
+V pressure names a covert tie's two ends   before 0/2/0/0/0/1 = 3   after 0/0/0/0/0/0 = 0
+V records moved 9 of 900
+V   prominent gone + pressure changed: 1  (dp-hamlet-67)
+V   prominent changed + pressure changed: 1  (dp-hamlet-76)
+V   prominent changed: 6  (dp-town-0 dp-city-23 dp-city-69 dp-city-92 dp-city-148 dp-metropolis-78)
+V   pressure changed: 1  (dp-metropolis-147)

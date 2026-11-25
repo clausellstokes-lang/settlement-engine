@@ -1,0 +1,10 @@
+dp-city-148	record MOVED	page MOVED	lost -	gained -
+dp-city-23	record MOVED	page MOVED	lost -	gained -
+dp-city-69	record MOVED	page MOVED	lost -	gained -
+dp-city-92	record MOVED	page MOVED	lost -	gained -
+dp-hamlet-67	record MOVED	page MOVED	lost -	gained -
+dp-hamlet-76	record MOVED	page MOVED	lost -	gained -
+dp-metropolis-147	record MOVED	page MOVED	lost -	gained -
+dp-metropolis-78	record MOVED	page MOVED	lost -	gained -
+dp-town-0	record MOVED	page MOVED	lost -	gained -
+page-battery --diff: 9 births; record moved 9, page moved 9, rows moved 0

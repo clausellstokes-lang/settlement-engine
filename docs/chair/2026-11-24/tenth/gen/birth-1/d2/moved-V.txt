@@ -1,0 +1,45 @@
+dp-hamlet-67
+  PR before: Zümür Tayichi'ud has begun to count the debt Ögedei Tayichi'ud owes among her assets, and has had it written down before witnesses.
+  PR after: null
+  PS before: Zümür Tayichi'ud hopes to rise again this season. Ögedei Tayichi'ud expects the favours to grow with Zümür Tayichi'ud's standing.
+  PS after: Someone has been stealing from the communal stores. Everyone suspects someone. No one is saying anything.
+dp-hamlet-76
+  PR before: Oula al-Qadir has started spending Wafa al-Basri's coin where people can see it: a new roof, a new horse. Wafa al-Basri has noticed, and so have the neighbours.
+  PR after: Haneen al-Qadir and Oula al-Qadir both want the same office, and the alliance cannot survive one of them winning it.
+  PS before: Oula al-Qadir has risen in standing this year, and Wafa al-Basri expects the price of silence to stay the same. Oula al-Qadir does not.
+  PS after: Haneen al-Qadir and Oula al-Qadir both want the same office, and the alliance cannot survive one of them winning it.
+dp-town-0
+  PR before: Zubayr al-Malik's sister has been seen talking to Samira al-Amin's people. Zubayr al-Malik does not know whether she went to them or they came to her.
+  PR after: Samira al-Amin has refused Lujain al-Zahir a small favour for the first time in years.
+  PS before: Every season brings more households to Nahrganj and no more work. The newcomers camp where they can, and the Town Council is counting heads it has no plan for.
+  PS after: Every season brings more households to Nahrganj and no more work. The newcomers camp where they can, and the Town Council is counting heads it has no plan for.
+dp-city-23
+  PR before: Saturninus Scaeva and Jucundus Corvinus are closely tied. Saturninus Scaeva's spouse has found the notes and wants to know who Jucundus Corvinus is.
+  PR after: Gallus Gratus and Sabinus Flavius are tied by a debt not yet paid. Gallus Gratus has offered to clear what is left of the debt in one payment. Sabinus Flavius would rather be repaid in favours.
+  PS before: Terentia Corvinus, the occupying governor, is simultaneously expected to enforce the occupiers' directives and protect the people those directives are aimed at: a position that is becoming untenable.
+  PS after: Terentia Corvinus, the occupying governor, is simultaneously expected to enforce the occupiers' directives and protect the people those directives are aimed at: a position that is becoming untenable.
+dp-city-69
+  PR before: A clerk has found a payment to Ioasaph Choniates that nobody can explain. Diogenes Phokas wants to know who the clerk talks to.
+  PR after: Ekaterini Comnenus has taken a precaution against Eirene Muzalon that the master fishmonger was not meant to discover. Eirene Muzalon has discovered it.
+  PS before: Someone inside Makrorema sold something important not long ago, and now everyone suspects everyone else; deals that took a handshake now take a witness.
+  PS after: Someone inside Makrorema sold something important not long ago, and now everyone suspects everyone else; deals that took a handshake now take a witness.
+dp-city-92
+  PR before: Asdis Hrollasson's spouse has found the notes and wants to know who Brynhild Sigmundsson is.
+  PR after: Ísgerðr Njálsson has offered to clear what is left of the debt in one payment. Skallag Helgason would rather be repaid in favours.
+  PS before: The creditor has begun taking payment from Fjordfjord in things other than coin (a warehouse here, a toll right there), and each transfer is legal, documented, and slightly worse than the last.
+  PS after: The creditor has begun taking payment from Fjordfjord in things other than coin (a warehouse here, a toll right there), and each transfer is legal, documented, and slightly worse than the last.
+dp-city-148
+  PR before: Theodor Theis has been seen dining with one of Cäcilia Meyer's rivals. Cäcilia Meyer has not mentioned it, and Theodor Theis cannot tell whether that is good or bad.
+  PR after: Cordula Ihle has begun to count the debt Peppo Fuchs owes among her assets, and has had it written down before witnesses.
+  PS before: Proof of corruption in the Merchant Guild Council has come out, and Gebhard Gruber, the Master of the Guilds, is expected to deal with it while being part of it.
+  PS after: Proof of corruption in the Merchant Guild Council has come out, and Gebhard Gruber, the Master of the Guilds, is expected to deal with it while being part of it.
+dp-metropolis-78
+  PR before: Grima Andersson wants a larger share this year. Brynhild Eriksson thinks the share is large enough already and has not yet found a way to tell Grima Andersson so.
+  PR after: Hildigunn Helgason voted against Ragna Ogmundsson on a small matter last week. Ragna Ogmundsson is waiting to see whether it was small.
+  PS before: The infiltration of Ulfholm shows only in negatives: the meeting that was rescheduled at exactly the wrong moment, the shipment that was delayed just long enough, the appointment that went to the second-best candidate for reasons no one can quite reconstruct.
+  PS after: The infiltration of Ulfholm shows only in negatives: the meeting that was rescheduled at exactly the wrong moment, the shipment that was delayed just long enough, the appointment that went to the second-best candidate for reasons no one can quite reconstruct.
+dp-metropolis-147
+  PR before: Timur Lukić has begun to count the debt Natasha Popov owes among his assets, and has had it written down before witnesses.
+  PR after: Timur Lukić has begun to count the debt Natasha Popov owes among his assets, and has had it written down before witnesses.
+  PS before: Valentina Antonović has made new friends who could protect her without Anatoly Simić. Anatoly Simić has heard, and has asked Valentina Antonović to call this week.
+  PS after: Stoycho Lazić has stopped answering Olivija Gusev's advice, though he still follows most of it.
