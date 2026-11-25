@@ -43,6 +43,12 @@ const held = (/** @type {string} */ t) => String(t).replace(/\b(?:him|her)self\b
 function classOf(a, b) {
   if (a === undefined || b === undefined) return 'OTHER';
   if (D6W.has(a.trim()) && D6W.has(b.trim())) return 'D6';
+  // D6's card label and roster marker, read inside a joined text node ("ContenderMilitary…" → "Could contendMilitary…")
+  if (b.replace(/^Could contend/, 'Contender').replace(/^Could contest the seat/, 'Contests the seat') === a && a !== b) return 'D6';
+  // E8's tie: the asked card's later mention takes its pronoun again with its own reflexive (N28's rung, now bound)
+  const TIE = /^(.+?) has asked (.+?) for an introduction (.+?) would rather keep to (\w+)\.$/;
+  const ta = TIE.exec(a); const tb = TIE.exec(b);
+  if (ta && tb && ta[1] === tb[1] && ta[2] === tb[2] && ta[4] === 'themselves' && /^(?:him|her)self$/.test(tb[4])) return 'E8';
   if (/Could contest the seat|could contest the seat/.test(b) && held(a) === held(b).replace(/could contest the seat/g, 'contests the seat').replace(/Could contest the seat/g, 'Contests the seat')) return 'D6';
   const e8 = held(b) === held(a) && a !== b;
   const e1 = sentDoubles(a, 3).length > sentDoubles(b, 3).length;

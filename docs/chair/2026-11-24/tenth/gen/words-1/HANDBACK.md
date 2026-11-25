@@ -114,6 +114,17 @@ STATE AT 13:32 UTC (`date -u`):
 - THEN the three hand-ins (UNIT lines to CLOSE-7 and the chair), each naming: frozen/golden rows moved (rosterFinalUnderHeldRoster
   A1, generationForkCensus A1, powerEconomyFreshness A4, dossierProseManifest DRIFT, the writer-reach row), E8's held line,
   the governanceAccount standing sentences (veil's lane), the veto-list phrases, partial reads.
+STATE AT 14:50 UTC:
+- TYPECHECKS (chair, 14:20): typecheck:ratchet 167/167 and domain:strict 1113/1113 in wt/e1, wt/e8, wt/d6 and wt/join: all OK.
+- THE JOINED PROOF RAN (`tools/joined-proof.mjs`, scratchpad proof-C.txt / proof-V.txt): C record moved 428, page 587; V 411 / 555;
+  battery rows moved 0 / 0; unexplained by any unit 0 / 0. E1 owner pages C 125/122 → 0 (122 places moved = the table), V 145/126
+  → 3 in 2. D6 pages C 502, V 452 (= G7's). E8 C 627 strings in 390 places, V 595 in 381.
+- E1 RESIDUE FOUND (owner pages and PUBLIC projection), five more joiners of sources (1)/(2): power.generated.js's possessive
+  standing alone (desk.stabilityHeader "one name, the Headman's Authority's," and legitimacyLens "it is not the {seat}'s.");
+  seatHolderLines "the {form's} seat(s)"; governanceNarrative's council meetings; the bracketed qualifier's possessive
+  (personMention qualifiedPossessives, "Kathleen Farrell (the hospital's master)'s family"); one secret stakes literal
+  ("the carriers' master's door"). CURED in wt/e1 (uncommitted at 14:50), test extended; gates running (e1b-*.log); then the
+  joined tree is rebuilt and re-rendered for the after side.
 NOT IN STEP ONE (E8b): the card lines (tells 899/852, impressions, secrets, goal.long npcGenerator); their draws dedupe by text
 in registries (castPowers hookRegistry.tells, CarriedSecrets), so a draw-time fill would move draws: a design is owed.
 npcData.js was read in its changed region only (pairProse, the tie table), not whole: said in the hand-in.
