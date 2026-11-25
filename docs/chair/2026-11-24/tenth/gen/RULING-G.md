@@ -368,3 +368,13 @@ re-taken; nothing says which of the 1,489 commits since crossed each ceiling.
 wording: "How they deal" is one line per (register, temperament), up to five identical on a page: E13b, its own unit
 after point 118 (it moves a stored string on nearly every birth). The rest are labels and lists printed where they
 belong. E13a is built at 608f70826; its proofs run.
+
+**G34, G35 (18:23 UTC): THE OWNER'S TWO DEFERRALS DECIDED.** His words: "I defer this to you:" over "One register row for
+'the lord's reeve', or leave it parked." and "Whether the repeated-wording check should skip job titles and fixed
+captions. I recommend yes." G34: THE ROW IS ADDED: D8 is unparked; BIRTH-1 adds the ONE row ("family") in the widened
+register by that register's own door, its own commit quoting the leave, then D8's proofs and hand-in; more than one
+row is a stop. G35: YES: the sameness door does not count a role title or a fixed caption as a drawn sentence; unit
+E13d (WORDS-2): the skip list is DERIVED by import from the titles' own homes and `sectionHelp.js`, never typed, never
+by length, never a slot skipped whole; a test that no drawn pool's line is in it; the door's reading before and after
+(only the eleven slots change; one still over its ceiling is a finding); the register re-taken only by `--write` and
+only if it passes.

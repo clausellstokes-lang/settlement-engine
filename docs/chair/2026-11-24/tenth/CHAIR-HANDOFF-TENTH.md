@@ -28,6 +28,13 @@ whole first message, as sent).
   on 2026-11-24. The chair's own context read 433,030 of 1,000,000 at 14:36.
 
 ## 1. THE OWNER'S WORDS THAT GOVERN, newest first
+
+**2026-11-25, about 18:23 UTC:** "I defer this to you:" over two of the chair's own lines pasted back: "One register row
+for 'the lord's reeve', or leave it parked." and "Whether the repeated-wording check should skip job titles and fixed
+captions. I recommend yes." THE CHAIR'S READING: these two, and only these two, are his leave for (a) ONE row in the
+shrink-only widened register for D8 and (b) the sameness door set to skip role titles and fixed captions. DECIDED:
+(a) the row is added, D8 unparked (G34); (b) yes, built by source and never by length or slot (G35). No other
+shrink-only register and no other door is covered by it.
 "Pause the share page and focus on town fixes and everything that changes new towns wording and the share page's quality
 work then do the share pages." (2026-11-25, about 08:50 UTC, this account, after the chair's progress table.) THE CHAIR'S
 READING: THE VEIL LANE STOPS AT ITS NEXT COMMIT BOUNDARY (four seats told at 08:52; each saves, writes its state, says
@@ -1418,3 +1425,15 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   WORDS-2 all sixteen in, now on two measures (G31). `prompts/START-CLOSE-8.txt` is drafted: @LINE117@ is filled and
   "at cae372e86" made "at the branch's tip" when it is seated, AFTER 117 is on the line.
   PRERELEASE-LIST E13 "SAMENESS-LIT" added (G23, G26). The hourly check at 17:00: WORDS-2 marked; no record rejected.
+- 2026-11-25 18:23 UTC · T109 · THE OWNER DEFERRED TWO ITEMS (section 1): D8 UNPARKED (G34), THE DOOR's FURNITURE RULE (G35); C1B BUILT, ITS SECOND READER STARTED; THE LINE HAS NOT MOVED.
+  C1B: cfb9427120 on local `lane/stack-117-c1b-wip-2026-11-25` (`/home/user/wt/c1b`, cut at 7ad51595aa; NOT pushed):
+  `src/data/boughtHallNames.js` the one home; every reader reads a birth name AS ITS OLD NAME READ; never a row the
+  record marks as the user's own. Its proofs: C 0 and V 12 births moved (all governed by the Council of Syndics; the
+  head-noun rule is general); 162 births of the three halls against ddca5c7894: 0 differing (archetype, category, seat
+  form, one guild tick); grammar 0; both typechecks green; packets valid; lint: its own red is the lighting census's
+  file count 3801 to 3803 (two new test files: re-taken by its door at the merge). THE CHAIR READ ITS DIFF WHOLE (no
+  fault found). A SECOND READER (agent aac7955706644d58b) is on it: NOTHING IS MERGED BEFORE ITS REPORT.
+  THE HELPER (117-6): be61181a3b reverts B1(ii), 85cad120d5 the lighting census by its door; its report is owed.
+  THEN: RULING-117-7: merge C1B `--no-ff`, the lighting census by its door, the last short gate, AND THE PUSH.
+  BIRTH-2 at 18:00: 733,556 used (cost 56.51); G23 (2) withdrawn; it hands in P9 and stops. BIRTH-1 woken for D8's one
+  row. WORDS-2: E13a built 608f70826 (proofs), E13d ordered (G35). WORDS-1: E8b building.
