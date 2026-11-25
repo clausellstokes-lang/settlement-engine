@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "366d78ec6f6ab4a0d330d863bd4556dc19515ab3",
-  "measuredBy": "lane/close-7-2026-11-24-mirror-wip (CLOSE-7 chain one, THE MIRROR)",
+  "measuredAtSha": "0a40b581d982da4e399314698710f382f60b44d2",
+  "measuredBy": "close-7-guard",
   "date": "2026-11-25",
-  "note": "THE MIRROR adds tests/domain/close7Mirror.test.js (3789 -> 3790 files), fe948997a",
-  "files": 3790,
+  "note": "GUARD (R24j): two new test files, tests/store/rederiveGuard.test.js and tests/lint/generatorVersionRelease.test.js",
+  "files": 3792,
   "parked": 492,
-  "credited": 3298,
-  "titles": 31925,
-  "suiteTitles": 8876
+  "credited": 3300,
+  "titles": 31934,
+  "suiteTitles": 8878
 }
