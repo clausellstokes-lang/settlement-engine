@@ -404,7 +404,7 @@ RULING V1 (the tenth chair, 21:20 UTC 2026-11-24) whole. N90 (the whole-document
 N99. ppkey on the full pool is NOT re-run (0 of 46,752 per door at ced3b1de7) unless the tree's 212 or twin moves.
 
 ## 3. Log (every hour from `date -u`)
-- 07:28 N4 dispatched; N5 slices running; unit 5's plan U written before any edit.
+- 07:27 N4 dispatched; N5 slices running; unit 5's plan U written before any edit.
 - 07:25 N3 (a5e77c820) and item 5 (802578955) local; two inherited reds read against 04cfe6d85.
 - 07:2x N2b built (local bcf26ccbd): master's uncut standings cut; census red first 4 -> 0; measure master 12 -> 8.
 - 07:16 N2 built (local 9c03baa71). V25's measure: 7/754 today, 12/765 master, NOT near 0: three classes; (iii) an uncut master standing (LABEL_RE's capital-only qualifier). N2b planned before its 212 edit. VEIL-55 told.
