@@ -41,7 +41,7 @@
     rosterFinalUnderHeldRoster A1 read the same corpus (already red).
   - Written down, not chased: a pressure sentence equal to the prominent tie's phrasing (printed twice) is a class at the base
     (C 11, V 10); D2 adds one (V dp-hamlet-76).
-- **D3 — BUILT, COMMITTED, NOT YET HANDED IN** on `lane/birth-1-2026-11-25-d3-wip` (worktree `/home/user/wt/d3`): bb77735cb (cure +
+- **D3 — DONE, PUSHED, HANDED IN** on `lane/birth-1-2026-11-25-d3-wip` at 5262fbee4 (worktree `/home/user/wt/d3`): bb77735cb (cure +
   test `tests/domain/powerSentenceSettledRoster.test.js`, red 7/13 at the base, 13/13 after), 0ecb6e25c (lighting door, files
   3798 -> 3799). Measured (oracle: the writer re-run whole over the final roster from the power step's intent, `tools/measure-d3.mjs`):
   C 0, V 4 stale (dp-hamlet-2, -100, -117: "The last harvest failed badly" beside the repair's Citizen militia; dp-town-15: a Street gang).
@@ -51,9 +51,9 @@
   sentence a second time over that roster, draw-free; the roster inputs and the noble-house test in the new leaf
   `power/governanceLabelRoster.js`). NOT the step order: the repair follows the faction-pull pass, which needs the power step's
   factions (a cycle), and the power step would see the repaired roster on C 148 / V 205 births.
-  Governing run (90 files naming the changed modules or the sentence + tests/lint whole) IN FLIGHT at 10:4x; reds seen so far to read
-  against RED-AT-LINE and the base: worldFactRederive, generationForkCensus, pipelinePinnedChoosers, proseWiringCensus (2), plus the
-  known family (goldens, proseComposed, proseCorpusBytes, powerStructure F31, editCorpusRatchet).
+  Governing run at 0ecb6e25c (90 files + tests/lint whole: 317 files, 4,682 tests): 14 red, 12 on RED-AT-LINE; the 2 others were the
+  wiring census, re-taken by its door in 5262fbee4 (stamp only, 0 rows; --check 0; walker 79/79). Goldens moved by D3: 0 dark, 0 lit.
+  Page battery over the 4: rows moved 0. Tables: `gen/birth-1/d3/`.
 - D5 (test re-cut): CAUSE KNOWN from the fortune-7 diagnosis (`lane/fortune-7-2026-11-22-u8-wip` measures/u8/DIAGNOSIS.md, R13
   section): the will's order score sits on its X4 floor (never below the will with nothing built or standing), which the points-only
   bound `armed + 0.1 x parts` predates; v3build-village-3 lit: will 6.86, armed 5.1, bound 6.8. No product fault. The re-cut needs the
@@ -66,4 +66,4 @@
   STRESS_POWER_FACES lists each crisis's powers. The measure of the SENTENCES that name a power is to be written.
 
 ### 0.2 Next step
-Read D3's governing log (`scratchpad/d3/gov.log`): every red against RED-AT-LINE / the base; then the goldens D3 moves (`tools/make-golden-plan.mjs` + `measure-keys.mjs`), push -d3-wip, hand in. Then D8's and D7's measures in one births run, D5's re-cut.
+D8's measure (`tools/measure-d8.mjs`) on C and V, then the ruling asked; D7's measure; D5's re-cut meanwhile.

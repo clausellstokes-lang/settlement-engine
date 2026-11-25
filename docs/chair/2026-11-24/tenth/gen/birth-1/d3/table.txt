@@ -1,0 +1,14 @@
+C: stale before 0, after 0; roster changed after the power step 148
+V: stale before 4, after 0; roster changed after the power step 205
+  dp-hamlet-2 added: Palisade or earthworks | Citizen militia
+    before: The last harvest failed badly. What remains is being rationed by whoever holds the stores. Neighbours who shared meals last winter are watching each other carefully.
+    after:  Food is short, and every quarrel in the settlement has grown sharper for it. Those with stocks are not advertising the fact. Those without are watching those with.
+  dp-hamlet-100 added: Palisade or earthworks | Citizen militia
+    before: The last harvest failed badly. What remains is being rationed by whoever holds the stores. Neighbours who shared meals last winter are watching each other carefully.
+    after:  Food is short, and every quarrel in the settlement has grown sharper for it. Those with stocks are not advertising the fact. Those without are watching those with.
+  dp-hamlet-117 added: Palisade or earthworks | Citizen militia
+    before: The last harvest failed badly. What remains is being rationed by whoever holds the stores. Neighbours who shared meals last winter are watching each other carefully.
+    after:  Food is short, and every quarrel in the settlement has grown sharper for it. Those with stocks are not advertising the fact. Those without are watching those with.
+  dp-town-15 added: Street gang
+    before: Two guild masters are having each other's warehouses robbed. Both deny it publicly. Both are losing patience.
+    after:  A guild's hired guards arrested a rival's factor. The watch is refusing to intervene in what they call a 'merchant matter'.

@@ -1,0 +1,5 @@
+dp-hamlet-100	record MOVED	page MOVED	lost -	gained -
+dp-hamlet-117	record MOVED	page MOVED	lost -	gained -
+dp-hamlet-2	record MOVED	page MOVED	lost -	gained -
+dp-town-15	record MOVED	page MOVED	lost -	gained -
+page-battery --diff: 4 births; record moved 4, page moved 4, rows moved 0

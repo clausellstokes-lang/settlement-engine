@@ -1,0 +1,5 @@
+dp-hamlet-2	powerStructure powerStructure.recentConflict
+dp-hamlet-100	powerStructure powerStructure.recentConflict
+dp-hamlet-117	powerStructure powerStructure.recentConflict
+dp-town-15	powerStructure powerStructure.recentConflict
+powerStructure 4 | powerStructure.recentConflict 4
