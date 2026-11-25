@@ -51,3 +51,52 @@ So every one of those moved INSIDE BATCH (B1(i), B1(ii), C1, P3source). Red ther
 - a7870e9cb (C1's first commit: the bought hall born "Council of Aldermen" / "Council of Syndics" / "Senate"): 16 failed;
   tailDisplayCivicBatch2 reds here with the tip's own row (`r2s-occupied-town-3: Merchant Guilds~Craft Guildsstable`).
   The other figures are the tip's. (P3source 4fc54fb45 and the later C1 commits were not run: the bisect had closed.)
+
+## Run 6: read probes (log `probes.log`, exit=0; scripts `r117/probe-*.mjs` in the scratchpad, each the test's own birth)
+Trees 97c6bfc7a, 3388806b4, 0ec96f13d; faultsNeed at 0ec96f13d (11 passed) and 6d30700e6 (1 failed: r2r-town-54);
+implementationPackets at 27408d4ec, before GUARD's merge (21 passed).
+
+## (3) THE SIX, AND THE SEVENTH
+
+1. **statecraftExposureBand U1 (scandals 78 > 57): B1(i).** CONFIRMED (run): green at 0ec96f13d, 78 at 6d30700e6 and at the tip.
+   The seeded realm's twenty years re-deal when any of its courts' houses re-deal; B1(i) withholds a desert court's fish,
+   timber and game houses (the note's own history: the band follows each re-deal of this one realm's draw). Which court is
+   desert: PLAUSIBLE (read). Not a dial move: EXPOSE_BASE is untouched. Re-keying the band by the note's method (mutant 0.06,
+   head-dark twin) is the chair's/owner's.
+2. **goals I-13 (Portaminus): a REAL keyed-determinism loss in `dealGoals`, latent, EXPOSED by B1(i).** No pinned value: the arm
+   compares two deals of the same town. CONFIRMED (run): red first at 6d30700e6 (Portaminus, desert, lost its Fish market, so the
+   sample's middle card X is now npc_weavers_textile_workers). CONFIRMED (probe): in the full deal the card's short goal is no
+   repeat (receipt `repeat` has only `long`); in the deal without X its pass-one wording "Make sure § is not left behind…" has
+   become a REPEAT (`repeat.short = 'free'`, `rotated {from 3, to 4}`) of another card's wording, so pass two rotates it.
+   GR1's pass two (goals.js ~860-925) reads every other holder of a wording and none of them enters `receipt.refs`; the
+   arm's exclusions (`refs`, `refused`, uncanny) cannot see it. goals.js is untouched in the range: the hole is the GOALS-1/3
+   pass's, the birth only reached it.
+3. **goalSentencesOnceInTown (all five tiers): B1(i).** CONFIRMED (run): green at 0ec96f13d; at 6d30700e6 the tip's exact
+   16 towns. Every red is (u)'s premise only, "the roster is not d3937c3f8's" (ids or count), under law 1; (p) the count and (t)
+   the reserve hold on both births. A withheld house takes its face off the roster. That the 16 are desert: PLAUSIBLE (read).
+4. **tailDisplayCivicBatch2 (r2s-occupied-town-3): C1, and NOT a regression.** CONFIRMED (run): green at 3388806b4, red at
+   a7870e9cb (C1's first commit). CONFIRMED (probe): Lykopetra (riverside) is governed by the bought hall; before C1 its
+   conflicts held Merchant Guilds vs Craft Guilds HIGH ("A broken promise of support") and the Web printed "escalating";
+   after the rename to "Council of Aldermen", `conflicts.js` keys its issue draw on the powers' names (BATCH.md's site, the
+   alias withdrawn under R24m), the pair holds NO conflict at all, and its row's direction is "stable", which is now TRUE (the
+   cure's rule is "no 'stable' beside a HIGH quarrel"). The anchor's premise moved: a re-anchor, not a cure.
+5. **tailCrisisBatch8 (Merchant Guilds on r2s-famine-city-1): B1(i), and NOT a K25 regression.** CONFIRMED (run): green at
+   0ec96f13d, red at 6d30700e6. CONFIRMED (probe): Skaldhammer (desert) loses Fish market, Toll bridge, Weavers, Chandler and
+   Smuggling network; the STORED stake is unchanged ("split · it could side with either camp"), but the page now prints
+   `Merchant Guilds · atOddsMany · in their own quarrel with Merchant Guild Council`: the re-dealt town gives it a quarrel with
+   the seat, the same kind of row The Commercial Circle's KEEP already prints. A power in its own quarrel is touched; the
+   anchor's premise moved. (That the quarrel comes from the re-dealt conflicts: PLAUSIBLE.)
+6. **The sixth (classified.txt names no "six"; taken as its one other class-4 row that is no seed anchor):
+   tests/scripts/implementationPackets.test.js: GUARD.** CONFIRMED (run): green at 27408d4ec, red at 0ec96f13d. 0a40b581d
+   (R24j 3, 4) widens `REDERIVE_UNAPPLIED_REASONS` to `['engine_mismatch', 'step_not_pinnable', 'unknown_key']`; the live
+   packet manifest's EM-R1b `requiredSymbols[7]` and EM-R1c `requiredSymbols[6]` (docs/implementation/PACKET_MANIFEST.json
+   :40409, :41374) quote the old line byte for byte. A docs row to re-state (or retire by its § rule), not a code fault.
+7. **faultsNeed item 1 (r2r-town-54): the ATOM is the wrong reader; the page is right. B1(i) exposes it, it does not leave a
+   dead house's need.** CONFIRMED (run): green at 0ec96f13d, red at 6d30700e6. CONFIRMED (probe, Erdenbuurt, desert):
+   page `["Livestock for meat and draft", "clay"]`, atom `["clay"]`. The livestock need is the Butchers (3-8)'s, a house that
+   STANDS and that the page marks short of livestock (`rowShortOf`); the Fish market that left has no need on the list. What
+   moved: the re-dealt town now has a live `Livestock auction` row at its Annual fair (none before). Both readers drop a need
+   a live house deals in, unless a live house is short of it; the page reads shortness from the mark
+   (`houseInputAtHand :: housesShortOf`), the atom's copy (`needNotBroughtIn.js :: dealtInHere`) reads only non-imported GAP
+   ROWS, and the Butchers have no gap row (gaps: Caravanserai camel_herds, Brickmaker clay, Potter clay). So the atom drops
+   livestock and the page keeps it. The cure is the atom's copy of the short rule, not B1(i).
