@@ -22,8 +22,11 @@ BUILT, NOT MERGED (all pushed unless said):
   records lack a term); rides the join. OWED TO THE V6 WALKER: hold `governanceAccount.js :: BREAKDOWN_WITHHELD_TERMS` equal to the
   registry row `legitimacy.breakdown`'s withheld terms. Cure B 5d04aaf9a PUSHED (test
   only, both halves); READ BY VEIL-55: NO FAULT. Cure C b61c1e630 PUSHED (test only),
-  sent to VEIL-55. Cure D's builder RUNNING (notes `out/v53/cures/D/`).
-RUNNING: cure D's builder only. The PAGES slice was STOPPED at 22:50 (the chair's order: it comes after the anon arm).
+  sent to VEIL-55. Cure D STOPPED AT ITS STOP (no
+  commit; CONFIRMED by probe `out/v53/cures/D/d5.probe.test.js`: the served documents of two records differing only in
+  recentConflict are deep-equal, so the shared page cannot name the owner's holder); A RULING IS OWED (my recommendation to
+  VEIL-55: fail closed, no holder named where two or more takers). Cure E's builder RUNNING (notes `out/v53/cures/E/`).
+RUNNING: cure E's builder only. The PAGES slice was STOPPED at 22:50 (the chair's order: it comes after the anon arm).
 THE QUEUE, IN ORDER (the chair, 22:48, governs): (1) J1: DONE. (2) V3's five cures A-E, one builder each, stacked on `lane/veil-53-2026-11-24-cures-wip` from ba7460c33 (brief
 `briefs/V53-CURES-V3-BRIEF.md`). (3) The anon arm + carried read + the call-graph read (`briefs/V53-ANONARM-BRIEF.md`) on
 grants-wip. (4) FAIL-CLOSED PAGES (RULING V6): size it first: `out/v53/pages/slice.sh` (PAGES' probe verbatim, every 12th of the
@@ -37,7 +40,7 @@ variant, the owner's read unchanged and asserted; its reader joins the totality 
 started.
 DONE AND SENT: (0); (1) REDS-CAUSE (`out/v53/redscause/REDSCAUSE.md`; the import surprise to the chair: RULING V3 (6)); (2) J1
 classed; J12 and J12-V4 (`out/v53/J12.md`, `out/v53/j12/J12-V4.md`: prominentRelationship's 12/720 are the covert tie's own copy).
-NEXT COMMAND: on cure D's builder's return, `git -C /home/user/cures53 log --oneline -3` and read its diff; then cure E, one builder (E's brief amended for point 115's fifth law; a question to VEIL-55 on
+NEXT COMMAND: on cure E's builder's return, `git -C /home/user/cures53 log --oneline -3` and read its diff; then cure D when ruled (E's brief amended for point 115's fifth law; a question to VEIL-55 on
 re-making the trial join on 0559a8405: ANSWERED NO, the trial join stays at ba7460c33 until the join). AFTER E: one small commit on
 -cures-wip re-pointing `tests/lint/samenessHideable.walker`'s stale wording ("served == the house-free twin") to cure B's re-stated
 title, no assertion moved, tests/lint whole after, and say whether the walker reads that title anywhere it checks (VEIL-55, intake).
@@ -66,3 +69,4 @@ title, no assertion moved, tests/lint whole after, and say whether the walker re
 - 00:2x cure B pushed (5d04aaf9a); cure C dispatched. The line is 0559a8405 (point 115, troubles law dark).
 - 00:30 the mark rule changed (no successor at 620k; whole hand-back by 560k).
 - 00:5x cure C pushed (b61c1e630); cure D dispatched.
+- 01:0x cure D stopped (ruling owed); cure E dispatched.
