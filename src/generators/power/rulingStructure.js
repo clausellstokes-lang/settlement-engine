@@ -302,9 +302,9 @@ export const generatePowerStructure = (
                             magic: 'Arcane Council',
                           }[topCategory]) ||
                         'Town Council');
-  return /** @type {[any, any]} */ ([governingFaction, govModifier]);
+  return /** @type {[any, any]} */ ([/** @type {Record<string, string>} */ ({ 'Corrupt Council': 'Council of Aldermen', 'Corrupt City Council': 'Council of Syndics', 'Shadow Senate': 'Senate' })[governingFaction] ?? governingFaction, govModifier]); // R24-C1 (CLOSE-7 BATCH; RULING-R24 R24-C1, R24g (2), R24m): the bought hall is born under the plain name the chair ruled; every reader that takes MEANING from the name knows it by exact name (the old forms kept for saved places); a reader that uses the name as an arbitrary key may re-deal (R24m)
   };
-  const [drawnFaction, govModifier] = drawCouncilOfAKind(chooseGoverning, topCategory, topPriority, priorityByCategory, govBody, nativeInstitutions); const governingFaction = HALL_NAME_AT_BIRTH[drawnFaction] ?? drawnFaction; // R24-C1 (CLOSE-7 BATCH; R24g (2)): the bought hall is born under a plain name (the table at the END)
+  const [governingFaction, govModifier] = drawCouncilOfAKind(chooseGoverning, topCategory, topPriority, priorityByCategory, govBody, nativeInstitutions);
   let informalModifier = null;
   govBody ||
     (['thorp', 'hamlet', 'village'].includes(tier) && topPriority > 65
@@ -797,8 +797,3 @@ export function captureClimateOf(settlement) {
 /** The sets this step can answer (R-Q): every set whose atoms are settled before the power step. */
 const FACTION_DESC_SIBLINGS_SETTLED = Object.freeze(Object.fromEntries(Object.entries(FACTION_DESC_SIBLINGS)
   .filter(([, set]) => !set.some((l) => [...(/** @type {any} */ (l).needs || []), ...(/** @type {any} */ (l).excludes || [])].includes('militia')))));
-/** R24-C1 (CLOSE-7 BATCH; the chair's RULING-R24 R24-C1 and R24g (2)): the three forms that name, on a player's first screen, a hall
- * that is bought are born under the plain names the chair ruled (each held to one size at birth: town, city, metropolis). Every
- * vocabulary that knows an old form knows its birth name too, by exact name, and keeps the old one for saved places. At the END
- * of the file so that no cited line moves. */
-const HALL_NAME_AT_BIRTH = Object.freeze({ 'Corrupt Council': 'Council of Aldermen', 'Corrupt City Council': 'Council of Syndics', 'Shadow Senate': 'Senate' });
