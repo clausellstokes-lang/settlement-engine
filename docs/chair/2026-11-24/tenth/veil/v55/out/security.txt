@@ -1,1 +1,43 @@
 gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 7173 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+ ✓ tests/security/migrationOrdering.test.js (6 tests) 3029ms
+     ✓ flags the forward reference as an ordering bug (not swallowed as environmental)  1764ms
+     ✓ a CORRECTLY ordered band of the same two files raises no ordering bug  1259ms
+ ✓ tests/security/mapSnapshotImport.contract.test.js (5 tests) 3ms
+ ✓ tests/security/profile_escalation.test.js (4 tests) 62ms
+ ✓ tests/security/townMapGalleryOptIn.test.js (6 tests) 41ms
+ ✓ tests/security/snapshotDenylistDrift.test.js (38 tests) 5ms
+ ✓ tests/security/moneyPathCoverageContract.test.js (3 tests) 4ms
+ ✓ tests/security/singleSession.pglite.test.js (7 tests) 1749ms
+ ✓ tests/security/moneyCheckConstraints.pglite.test.js (7 tests) 1752ms
+ ✓ tests/security/aiRequestIdempotency.pglite.test.js (6 tests) 1920ms
+ ✓ tests/security/singleSessionBelt.pglite.test.js (3 tests) 1957ms
+ ✓ tests/security/engineGenerationReport.pglite.test.js (2 tests) 1873ms
+ ✓ tests/security/securityQuestions.test.js (9 tests) 6ms
+ ✓ tests/security/publicTableRlsCensus.test.js (95 tests) 93ms
+ ✓ tests/security/rateLimitConfig.pglite.test.js (4 tests) 1623ms
+ ✓ tests/security/roadsSecretsProbe.test.js (4 tests) 7ms
+ ✓ tests/security/moneySecurityExecutionFloor.test.js (5 tests) 9ms
+ ✓ tests/security/surveyorStageKillSwitch.pglite.test.js (7 tests) 1807ms
+ ✓ tests/security/ipPrivacy.test.js (4 tests) 18ms
+ ✓ tests/security/noHardcodedPrivilegeEmail.test.js (2 tests) 610ms
+     ✓ no migration or edge function grants privilege via a hardcoded email literal  608ms
+ ✓ tests/security/townMapPlayerProjection.test.js (3 tests) 6ms
+ ✓ tests/security/cspReportSinkCap.test.js (4 tests) 20ms
+ ✓ tests/security/townMapFogPublicDrop.test.js (2 tests) 5ms
+ ✓ tests/security/worldSnapshotDenyCensus.test.js (4 tests) 3ms
+ ✓ tests/security/townMapEditsPublicDrop.test.js (2 tests) 4ms
+ ✓ tests/security/founderTransferDueCron.pglite.test.js (4 tests) 1900ms
+ ✓ tests/security/profileStripeSubPin.test.js (3 tests) 3ms
+ ✓ tests/security/billingRetentionHardening.test.js (4 tests) 3ms
+ ✓ tests/security/clientAiBoundary.contract.test.js (1 test) 127ms
+ ✓ tests/security/reservedNamesRls.pglite.test.js (3 tests) 1834ms
+
+ Test Files  169 passed | 1 skipped (170)
+      Tests  2113 passed | 1 skipped (2114)
+   Start at  02:04:38
+   Duration  2221.17s (transform 13.06s, setup 2.07s, import 15.32s, tests 4405.62s, environment 2.91s)
+
+JSON report written to /var/tmp/v55/out/p1/security.json
+[gate-tail] end:  02:41:40 up  1:59,  0 user,  load average: 4.53, 3.36, 2.84
+[gate-tail] full log: /tmp/gate-tail.7488.log
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)
