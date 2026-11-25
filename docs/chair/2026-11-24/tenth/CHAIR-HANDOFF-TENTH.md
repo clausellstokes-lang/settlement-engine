@@ -28,6 +28,15 @@ whole first message, as sent).
   on 2026-11-24. The chair's own context read 433,030 of 1,000,000 at 14:36.
 
 ## 1. THE OWNER'S WORDS THAT GOVERN, newest first
+"Pause the share page and focus on town fixes and everything that changes new towns wording and the share page's quality
+work then do the share pages." (2026-11-25, about 08:50 UTC, this account, after the chair's progress table.) THE CHAIR'S
+READING: THE VEIL LANE STOPS AT ITS NEXT COMMIT BOUNDARY (four seats told at 08:52; each saves, writes its state, says
+"PAUSED"; VEIL-55 writes the lane's pause page); no ruling of it is withdrawn. THE ORDER IS NOW: the town fixes (CLOSE-7:
+its hand-in with the guard lands first); EVERYTHING THAT MOVES A BIRTH (D2, D3, D5, D7, D8, E1, E8, A5) and the wording
+(D4, D6, E2 to E12) by four new seats that build units CLOSE-7 merges; THEN the share pages. OF "the share page's quality
+work" ONLY A5 (the standing sentence stored at birth) CAN BE DONE WHILE THE VEIL IS PAUSED: the put-back, the gallery's
+speed, the second stage and the stored sentences' return are built on the first stage's database text and follow it:
+told to the owner.
 "Do these:" (2026-11-25, about 05:22 UTC, this account), written over two of the chair's own lines pasted back: (1) "Lower my
 effort setting from \"max\" to \"high\" for routine coordination. Raise it again when I am reading database changes or
 making design rulings."; (2) "Allow a cheaper model for purely mechanical helpers: the ones that start a test run, wait,
@@ -1167,3 +1176,12 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   `veil/RULING-V1.md` V29. VEIL-53's `-pages-wip` 04fa8d60e rides the join with `-cures-wip`; three publicProseEquality
   daily_life rows red on its base predate the unit and are re-read at the join; its seed-named births are re-anchored
   at the join by their finder (point 116).
+- 2026-11-25 08:55 UTC · T92 · THE OWNER PAUSES THE SHARE PAGE; FOUR SEATS FOR BIRTHS AND WORDING; CLOSE-7 INTEGRATES.
+  His words in section 1. THE VEIL LANE: pause sent at 08:52 to VEIL-55, VEIL-51, VEIL-52, VEIL-53 (finish the step in
+  hand to a commit, push, the hand-back's first section the whole state, own checks deleted, "<SEAT> PAUSED"; VEIL-55
+  writes `veil/v55/PAUSE-2026-11-25.md` and says "VEIL LANE PAUSED"). THE NEW SEATS (the middle tier at high effort;
+  THEY BUILD THEMSELVES, no builder subagents; start files `prompts/START-GEN-COMMON.txt` and one each): BIRTH-1 (D2,
+  D3, D5, D8, D7's sentence), BIRTH-2 (A5, then D4), WORDS-1 (E1, E8, D6), WORDS-2 (E2's measure, E4, E3, E5, E6, E9,
+  E12, E10, E11, E7). Base: `lane/close-7-2026-11-24-cures` 0ec96f13d8. Each unit is handed to CLOSE-7, which merges
+  them into one hand-in. CLOSE-7 FIRST HANDS IN WHAT IT HAS (the guard, A1, A2, the mirror, B1, C1 under R24m,
+  P3source) so that the guard reaches the line; goals I-13 and C6 go into the second hand-in.
