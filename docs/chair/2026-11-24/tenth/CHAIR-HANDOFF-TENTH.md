@@ -1213,3 +1213,6 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   D2, D3, D5 built in order; D8 and D7 measured, rulings asked. BIRTH-2: A5 measured then ONE ruling message, D4
   meanwhile. WORDS-1: E1's measure and ruling message, E8 meanwhile, D6's three wordings. WORDS-2: E2's census in the
   background; E4, E3, E5, E6, E9, E12, E10, E11, E7.
+- 2026-11-25 09:11 UTC · T95 · G1: A5's SHAPE RULED ("BESIDE", the field private by its name). THE NEW SEATS' RULINGS LIVE IN `gen/RULING-G.md`.
+  OWED TO THE VEIL's LANE AT ITS RESUMPTION (also in G1's term 7): the new field joins what no non-owner read sends;
+  unit 4's cut for a place born after this lands is by the field.
