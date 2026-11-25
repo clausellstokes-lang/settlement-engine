@@ -57,6 +57,12 @@ A SUCCESSOR ON ANOTHER ACCOUNT, THE NEXT COMMAND: in a fresh container, `npm ci`
   MY SLICE: `v55/u3.sh` (galleryMapCovert + galleryServerVeil, red on the tip's 212 in scratch worktree /home/user/wt/u3red,
   green on /home/user/wt/u3; log /var/tmp/v55/u3.log). NEXT: "TIP? IMPORT-DOOR" to the chair (its whole read of the hunk);
   on the grant merge onto the tip, (39) renumbered (38).
+  SLICE DONE (CONFIRMED): RED on the tip's 212 = exactly the three fault arms of galleryMapCovert ((a), (b), chain B's places);
+  GREEN on 2f849aa53 26/26 (log /var/tmp/v55/u3.log, out/u3). VEIL-52's hunk file at 75b5ca36e = the unit's diff, line for line.
+  "TIP? IMPORT-DOOR 2f849aa53" SENT TO THE CHAIR 07:46; WAITING ON ITS WHOLE READ. Told VEIL-51 (07:3x): the map door is no STOP
+  (unit 3 restates it with src.j in scope); its 5-argument _gallery_veil accepted on two terms: every door calls it (a committed
+  arm: no door reaches the stored=null wrapper; a plant at all four doors and the twin) and the stored argument is the document
+  the door serves from (src.j; base.j at the link); the rollback drops it and section 7's loop revokes it.
 - RULINGS V25 (05:26, unit 4: the rule is on what is served; a desc no row matches is served; a different-span tie withheld),
   V26 (06:53, the down file re-grants the hosted ACL by exact signature; the rollback block's compare under the hosted harness;
   the owner's read-only pre-check query on the owner page), V27 (07:19, the withheld set = every stored power the served doc

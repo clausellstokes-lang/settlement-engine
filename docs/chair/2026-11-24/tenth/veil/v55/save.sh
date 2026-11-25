@@ -5,8 +5,8 @@
 D=/home/user/wt/docs; S=docs/chair/2026-11-24/tenth/veil/v55; O=$D/$S/out
 once() {
   mkdir -p $O; cd $D || return 1
-  for f in /var/tmp/v55/m0.log /var/tmp/v55/p1.log /var/tmp/v55/out/seated/exits.txt; do [ -f $f ] && cp $f $O/$(basename $(dirname $f))-$(basename $f); done
-  for f in /var/tmp/v55/out/u2/*.log /var/tmp/v55/out/p1/*/table.txt /var/tmp/v55/out/p1/*/window.txt /var/tmp/v55/out/p1/run4.txt /var/tmp/v55/out/p1/gates/*.txt; do
+  for f in /var/tmp/v55/m0.log /var/tmp/v55/p1.log /var/tmp/v55/u1.log /var/tmp/v55/u3.log /var/tmp/v55/out/seated/exits.txt; do [ -f $f ] && cp $f $O/$(basename $(dirname $f))-$(basename $f); done
+  for f in /var/tmp/v55/out/u2/*.log /var/tmp/v55/out/u3/*.txt /var/tmp/v55/out/p1/*/table.txt /var/tmp/v55/out/p1/*/window.txt /var/tmp/v55/out/p1/run4.txt /var/tmp/v55/out/p1/gates/*.txt; do
     [ -f "$f" ] && tail -c 20000 "$f" > "$O/$(echo "${f#/var/tmp/v55/out/}" | tr '/' '_')"; done
   for f in /var/tmp/v55/out/p1/security.txt /var/tmp/v55/out/p1/named.txt; do [ -f $f ] && tail -60 $f > $O/$(basename $f); done
   git add $S/out && git diff --cached --quiet && return 0
