@@ -1,0 +1,5 @@
+POOL /var/tmp/v51/out/p1/stored-today: reads 1228 (place x hidden power x Reveal), hiding reads 795; served descs naming a stored power not served: WITH the stored row 0, without it 4; descs the stored belt withholds whole 4
+  withheld e.g. r3m-city-infiltrated-1-112.json hide=Noble Families dm=false: The Landed Bloc's desc withheld whole: "Noble families with hereditary land rights and traditional privileges; active in civic politics and competitiv"
+  withheld e.g. r3m-city-none-0-37.json hide=Craft Guilds dm=false: The Trade Compact's desc withheld whole: "Craft guilds regulating production and apprenticeships; a reliable secondary presence in civic life."
+  withheld e.g. r3m-metropolis-none-0-57.json hide=Craft Guilds dm=false: The Guild Alliance's desc withheld whole: "Craft guilds regulating production and apprenticeships; a reliable secondary presence in civic life."
+rc=0 07:54:27

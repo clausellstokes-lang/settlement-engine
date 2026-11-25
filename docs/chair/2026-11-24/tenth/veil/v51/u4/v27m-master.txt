@@ -1,0 +1,5 @@
+POOL /var/tmp/v51/out/p1/stored-master: reads 1250 (place x hidden power x Reveal), hiding reads 812; served descs naming a stored power not served: WITH the stored row 0, without it 8; descs the stored belt withholds whole 8
+  withheld e.g. r3m-city-infiltrated-0-32.json hide=Craft Guilds dm=false: The Guild Alliance's desc withheld whole: "Well-organised craft guilds with established trade monopolies; a persistent civic voice that merchant houses m"
+  withheld e.g. r3m-city-none-0-37.json hide=Craft Guilds dm=false: The Trade Compact's desc withheld whole: "Craft guilds regulating production and apprenticeships; a reliable secondary presence in civic life."
+  withheld e.g. r3m-city-none-1-113.json hide=Craft Guilds dm=false: The Merchant Bloc's desc withheld whole: "Well-organised craft guilds with established trade monopolies; a persistent civic voice that merchant houses m"
+rc=0 07:52:19

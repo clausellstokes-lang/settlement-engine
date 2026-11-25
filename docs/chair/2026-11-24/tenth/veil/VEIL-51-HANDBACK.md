@@ -366,6 +366,23 @@ THE PLAN OF UNIT 4's MERGE M (written 05:1x, BEFORE any resolution; worktree /ho
     V27 (5)'s writer oracle in STANDWALK's census (master's writer from /home/user/wt/master, STANDWALK_MASTER_TREE), red first
     on the pre-N2b table (`u4/v27oracle.sh`); V27 (6)'s re-measure (`u4/v27measure.mjs`, one process a pool,
     /var/tmp/v51/out/v27/v27m-*.txt). N5 so far: DESCARM 2/2 GREEN (unit 4's red turned), galleryWithholdAlways 9/9.
+  VEIL-55 (07:30): NO STOP on the map door: unit 3 (VEIL-52, 2f849aa53) restates get_gallery_map in 212 as item (39), merges
+    FIRST taking (38) (R5-DESC renumbers on the re-merge); build on the tip after "UNIT 3 MERGED", passing src.j there too (four
+    server doors and the twin). TERMS: (a) a committed arm: no door reaches the 3/4-argument wrapper (a source scan) plus a
+    plant at each door (a projection-hidden power named in a desc: withheld at all four doors and the twin); (b) the stored
+    argument is the document the door serves from before the sanitiser; the rollback drops the new form and section 7's loop
+    revokes it, both shown in the run-4 catalogue.
+  TERM (a)'s WALKER (LOCAL 2376572f3): every LIVE function calling _gallery_veil is a registered door passing five arguments
+    with its stored row; RED BY DESIGN on exactly 211's get_gallery_map (3 arguments) until unit 3; the three 212 doors pass.
+  N5 ON 802578955 (CONFIRMED, `u4/n5.log`): DESCARM 2/2 GREEN, galleryWithholdAlways 9/9, galleryRosterChoices 39/39,
+    domain-strict rc 0. Walkers on 483d95861: 30 passed, 1 skipped.
+  V27 (6) THE RE-MEASURE (CONFIRMED, `u4/v27m-today.txt`, `u4/v27m-master.txt`; the twin with the stored row, every non-governing
+    power hand-hidden in turn, Reveal off and DM): TODAY 1,228 reads (795 hiding): served descs naming a stored power not served
+    WITH the stored row 0 (without it 4); the belt withholds 4. MASTER 1,250 reads (812 hiding): 0 (without it 8); withholds 8.
+    Examples: r3m-city-none-0-37 hide Craft Guilds, The Trade Compact ("Craft guilds regulating production ..."); r3m-city-
+    infiltrated-1-112 hide Noble Families, The Landed Bloc ("Noble families with hereditary land rights ..."); r3m-city-
+    infiltrated-0-32 (master) hide Craft Guilds, The Guild Alliance ("Well-organised craft guilds ..."). All at Reveal off.
+  r5desc FAST-FORWARDED to 2376572f3 (V27's branch on top of 802578955).
   THE PLAN OF UNIT 5, U (V20; written before any edit; built on lane/veil-51-2026-11-24-r5desc-wip after unit 4's last commit, riding
     with it by the efficiency rule; red first on a slice; its 212 hunk goes to the chair with unit 4's in ONE "TIP?"):
     U1 THE TWIN, host `galleryRosterChoices.js :: withholdPowerCopies` (R3's people pass; the namer `withheldPowerNamer` = the lane's
@@ -438,6 +455,7 @@ RULING V1 (the tenth chair, 21:20 UTC 2026-11-24) whole. N90 (the whole-document
 N99. ppkey on the full pool is NOT re-run (0 of 46,752 per door at ced3b1de7) unless the tree's 212 or twin moves.
 
 ## 3. Log (every hour from `date -u`)
+- 07:56 N5 green; V27 (6): 0 faults with the stored row on both pools; term (a)'s walker (red by design on 211's map door); r5desc at 2376572f3.
 - 07:48 V27 (1) built (local 483d95861; the probes withhold 107 (3) in both engines); (5) and (6) running.
 - 07:31 RULING V27 read; V27 (3) sent (the map door: STOP); the early 'whole' gate found; plan P written before any edit.
 - 07:27 N4 dispatched; N5 slices running; unit 5's plan U written before any edit.
