@@ -45,13 +45,17 @@ beforeAll(async () => {
 }, 180000);
 
 describe('D4 (a): the template narrative takes the five strongest', () => {
-  it.each(CASES)('%s (%s) stores its powers out of power order (the measure, re-read)', (seed, corpus) => {
-    const s = births[`${corpus} ${seed}`];
-    expect(s.powerStructure.factions.map((/** @type {any} */ f) => String(f.faction))).not.toEqual(ranked(s).map((f) => f.name));
-  });
-  it.each(CASES)('%s (%s): its five are the five strongest, strongest first', (seed, corpus) => {
-    const s = births[`${corpus} ${seed}`];
-    expect(extractFullContext(s).factions).toEqual(ranked(s).slice(0, 5).map((f) => `${f.name} (${f.power}%)`));
+  it('every case stores its powers out of power order (the measure, re-read), and its five are the five strongest', () => {
+    /** @type {string[]} */
+    const wrong = [];
+    for (const [seed, corpus] of CASES) {
+      const s = births[`${corpus} ${seed}`];
+      const stored = s.powerStructure.factions.map((/** @type {any} */ f) => String(f.faction));
+      if (JSON.stringify(stored) === JSON.stringify(ranked(s).map((f) => f.name))) wrong.push(`${seed}: stored in power order`);
+      const five = ranked(s).slice(0, 5).map((f) => `${f.name} (${f.power}%)`);
+      if (JSON.stringify(extractFullContext(s).factions) !== JSON.stringify(five)) wrong.push(`${seed}: ${JSON.stringify(extractFullContext(s).factions)}`);
+    }
+    expect(wrong).toEqual([]);
   });
 });
 
@@ -60,21 +64,26 @@ describe('D4 (b): the stored-text readers take the roster through the leaf', () 
   const bodyOf = (path, fn) => {
     const src = readFileSync(new URL(`../../${path}`, import.meta.url), 'utf8');
     const at = src.indexOf(`const ${fn} = `);
-    expect(at, `${path} :: ${fn}`).toBeGreaterThan(-1);
-    return src.slice(at, src.indexOf('\n};', at));
+    return at < 0 ? '' : src.slice(at, src.indexOf('\n};', at));
   };
-  it.each([
-    ['src/generators/narrativeGenerator.js', 'genSettSummary', ['topFaction']],
-    ['src/generators/narrativeGenerator.js', 'genPressureDetail', ['topFaction']],
-    ['src/generators/historyGenerator.js', 'buildHistoryContext', ['dominantFaction']],
-    ['src/generators/historyGenerator.js', 'buildHistoricalEvent', ['secFaction', 'altFaction']],
-  ])('%s :: %s', (path, fn, names) => {
-    const body = bodyOf(path, fn);
-    for (const name of names) {
-      const line = body.split('\n').find((l) => l.includes(`const ${name} =`)) || '';
-      expect(line, `${fn} :: ${name}`).toContain('powersStrongestFirst(');
-      expect(line, `${fn} :: ${name}`).not.toMatch(/factions\??\.?\[[01]\]/); // anchored: the line above asserts the same line reads through powersStrongestFirst, so a vanished or renamed line reds there first
+  it('genSettSummary, genPressureDetail, buildHistoryContext and buildHistoricalEvent read through powersStrongestFirst', () => {
+    const READERS = [
+      ['src/generators/narrativeGenerator.js', 'genSettSummary', ['topFaction']],
+      ['src/generators/narrativeGenerator.js', 'genPressureDetail', ['topFaction']],
+      ['src/generators/historyGenerator.js', 'buildHistoryContext', ['dominantFaction']],
+      ['src/generators/historyGenerator.js', 'buildHistoricalEvent', ['secFaction', 'altFaction']],
+    ];
+    /** @type {string[]} */
+    const wrong = [];
+    for (const [path, fn, names] of READERS) {
+      const body = bodyOf(String(path), String(fn));
+      if (!body) { wrong.push(`${path} :: ${fn} not found`); continue; }
+      for (const name of /** @type {string[]} */ (names)) {
+        const line = body.split('\n').find((l) => l.includes(`const ${name} =`)) || '';
+        if (!line.includes('powersStrongestFirst(') || /factions\??\.?\[[01]\]/.test(line)) wrong.push(`${fn} :: ${name}: ${line.trim()}`);
+      }
     }
+    expect(wrong).toEqual([]);
   });
 });
 
