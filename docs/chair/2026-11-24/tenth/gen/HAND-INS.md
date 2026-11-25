@@ -1,6 +1,6 @@
 # THE UNITS FOR THE SECOND HAND-IN (point 118): the chair's one table
 
-Kept by the tenth chair; last written 16:21 UTC on 2026-11-25. CLOSE-7 handed over at 28547978e (`lane/close-7-2026-11-24`,
+Kept by the tenth chair; last written 16:21 UTC on 2026-11-25. CLOSE-7 handed over at cae372e86 (`lane/close-7-2026-11-24`,
 `CLOSE-7-HANDBACK.md` section 0); from then every seat sends its "UNIT ..." line to the chair only, and this table is
 where CLOSE-8 reads them. A unit's ruling is in `RULING-G.md` (G numbers) or `../read/RULING-R24.md`.
 
