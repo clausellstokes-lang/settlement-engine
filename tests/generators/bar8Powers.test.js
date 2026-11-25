@@ -201,7 +201,14 @@ describe('BAR8-K-POWERS: a power\'s own words are true of that power and of the 
       expect(quarrel, `${seed}: the cascade's last quarrel still prints, over the place's own ground or water`).toMatch(/^A dispute over (rights on .+ and access to water|water access) has run for two seasons/);
     });
     expectNoSeedFailures(failures, 'no grazing quarrel in a place with no grazing');
-    // NEGATIVE beside it: a thorp with a foraging or a hunting ground, and a hamlet with common grazing, keep the stock line
-    for (const [seed, town] of townsOf('15b-')) expect(String(town.powerStructure?.recentConflict || ''), `${seed}: the stock line stands`).toMatch(GRAZING_QUARREL);
+    // NEGATIVE beside it, RESTATED by the tenth chair's RULING G13 (WORDS-2 E3): a foraging or hunting thorp or a hamlet with
+    // common grazing kept the stock line under BR15; G13 keeps the grazing quarrel only where herding is what the place lives
+    // by (its leading home food source, `foodRecord.foodSources[0]`, is the herds). Each such town keeps it exactly there.
+    const kept = townsOf('15b-').map(([seed, town]) => {
+      const herds = town.economicState?.foodSecurity?.foodRecord?.foodSources?.[0] === 'livestock';
+      return `${seed}: ${GRAZING_QUARREL.test(String(town.powerStructure?.recentConflict || '')) === herds ? 'as G13' : 'NOT as G13'}`;
+    });
+    expect(kept.length, 'the negative towns are live').toBeGreaterThan(0);
+    expect(kept.filter((k) => k.endsWith('NOT as G13'))).toEqual([]);
   });
 });
