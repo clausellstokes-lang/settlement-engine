@@ -183,6 +183,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         {
           "angle": "street",
           "marks": [
+            "no exports",
             "no crisis: under_siege",
             "no crisis: plague_onset"
           ],
