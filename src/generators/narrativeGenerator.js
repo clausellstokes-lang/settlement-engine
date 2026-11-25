@@ -31,7 +31,7 @@ import {
   random as _rng,
   setActiveRng,
 } from '../kernel/rngContext.js';
-import { landMemberships, rankPowers } from './people/castPowers.js'; import { boundReflexives } from '../data/people/personMention.js'; // E8b (WORDS-1, G20): the bound card lines' reflexive, resolved once the cards are final
+import { landMemberships, rankPowers } from './people/castPowers.js'; import { boundReflexives } from '../data/people/personMention.js'; import { dealingLinesOfTown } from './people/dealingLinesOfTown.js'; // E8b (WORDS-1, G20): the bound card lines' reflexive, resolved once the cards are final; E13b (G39): each pair's dealing lines in turn
 import { assignHandlers, dealAllegiances, leaveAllegianceReceipts } from '../domain/people/allegiance.js';
 import { hallCaptureOf, writeHallCapture } from '../domain/people/hallCapture.js';
 import { captureClimateOf } from './power/rulingStructure.js';
@@ -1065,7 +1065,7 @@ export const generateCoherence = (settlement, coherenceRng = null, pins = null, 
   // GOALS-2 (the chair's rulings of 12:05 and 12:37 UTC): the deal, the rare deal, then ONE post-pass by each card's final
   // secret (the want refused beside the card's own secret, no other card touched; people/goals.js)
   const dealtGoals = npcsHeld ? mergedNpcs : dealGoals(settlement, mergedNpcs, relationships, coherenceRng?.fork ? coherenceRng : getActiveRng());
-  const goaledNpcs = npcsHeld ? mergedNpcs : refuseWantsBesideSecrets(settlement, dealRareSecrets(settlement, dealtGoals, relationships, { seed: seed ?? settlement._seed }), relationships, { receiptsOf: dealtGoals }).map(boundReflexives); // E8b: after the last draw
+  const goaledNpcs = npcsHeld ? mergedNpcs : dealingLinesOfTown(refuseWantsBesideSecrets(settlement, dealRareSecrets(settlement, dealtGoals, relationships, { seed: seed ?? settlement._seed }), relationships, { receiptsOf: dealtGoals }).map(boundReflexives), seed ?? settlement._seed); // E8b, then E13b: after the last draw
   const withTies = { ...settlement, npcs: goaledNpcs, relationships };
 
   const history = settlement.history || {};
