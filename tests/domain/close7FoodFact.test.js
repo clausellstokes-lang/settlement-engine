@@ -17,6 +17,9 @@
  *   (b) THE CONTROLS (R24a (a)): V dp-metropolis-57 and the twin of dm24-hamlet-1 print "Pressured", so their shortage
  *       line is coherent and stays.
  *   (c) THE BOUND (R24d): a census place of each cell outside its bound, two inside, and the mirror's cell.
+ *   (d) WORDS-2, the tenth chair's RULING G6 #8 (the mirror of R24h): under a printed "Pressured" (the Economics tab: the
+ *       place falls a little short, "tighter belts") no fare line says nobody goes hungry or without (A7, A16 exclude
+ *       `food: = pressured`). Red first by name on 0ec96f13d8: C dp-city-73 (A7); V dp-hamlet-144 (A7), dp-village-31 (A16).
  *   THE TOTALITY ARM (R24c) is a lint arm: `tests/lint/foodBandReaders.walker.test.js`.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
@@ -109,5 +112,18 @@ describe('(c) the bound (R24d): the printed band bounds the fare, production pla
       expect(atomHolds(`food: = ${printed}`, factsOf(s)), seed).toBe(true);
       expect(fareBranch(s), seed).toBe(branch);
     }, 120000);
+  }
+});
+
+describe('(d) G6 #8: under a printed "Pressured" no fare line says nobody goes hungry or without', () => {
+  const NONE_SHORT = FOOD_CULTURE.adequate.filter((l) => ['A7', 'A16'].includes(l.id)).map((l) => formOf(l.text));
+  for (const [corpus, seed] of [['C', 'dp-city-73'], ['V', 'dp-hamlet-144'], ['V', 'dp-village-31']]) {
+    it(`${corpus} ${seed}`, () => {
+      const s = birth(seed, /** @type {any} */ (corpus));
+      expect(atomHolds('food: = pressured', factsOf(s))).toBe(true);
+      const text = Object.values(deriveDailyLife(s).slots).map((x) => x.text).join(' ');
+      expect(text.length).toBeGreaterThan(0);
+      expect(NONE_SHORT.filter((re) => re.test(text)).map(String)).toEqual([]);
+    });
   }
 });

@@ -77,7 +77,7 @@ export const FOOD_CULTURE = Object.freeze({
     { id: 'A4', text: 'Food is steady here, if not generous, and every household has enough with little left over.', needs: [] },
     { id: 'A5', text: 'The everyday fare is a simple stew and whatever else the day provides.', needs: [] },
     { id: 'A6', text: 'A pot of stew over the fire is the usual supper, and there is usually enough to go round.', needs: [] },
-    { id: 'A7', text: 'Nobody here goes hungry, though few eat richly.', needs: ['prosperity: < comfortable'] },
+    { id: 'A7', text: 'Nobody here goes hungry, though few eat richly.', needs: ['prosperity: < comfortable'], excludes: ['food: = pressured'] }, // WORDS-2, G6 #8: a printed Pressured says the place falls short
     { id: 'A8', text: 'Fish, fresh or dried, is the mainstay of most meals.', needs: ['fish'] },
     { id: 'A9', text: 'Bread is the mainstay of the table, with whatever else the household can add to it.', needs: ['grain'] },
     { id: 'A10', text: 'What the hunters bring home goes into the common pot, and it stretches a long way.', needs: ['game'] },
@@ -85,7 +85,7 @@ export const FOOD_CULTURE = Object.freeze({
     { id: 'A12', text: 'The grain is bought in, not grown here, so bread is never wasted.', needs: ['grain imported'] },
     { id: 'A14', text: 'The better-off eat well, and the rest eat plainly but enough.', needs: ['tier: ≥ village'] },
     { id: 'A15', text: 'Ordinary suppers here have a little more in them than plain fare elsewhere.', needs: ['prosperity: ≥ comfortable'] },
-    { id: 'A16', text: 'Money is short, so meals are plain, but nobody goes without.', needs: ['prosperity: ≤ poor'] },
+    { id: 'A16', text: 'Money is short, so meals are plain, but nobody goes without.', needs: ['prosperity: ≤ poor'], excludes: ['food: = pressured'] }, // WORDS-2, G6 #8: as A7
   ]),
   strained: frozen([
     { id: 'T1', text: 'Food is tighter than it should be, and households stretch what they have.', needs: [] },
