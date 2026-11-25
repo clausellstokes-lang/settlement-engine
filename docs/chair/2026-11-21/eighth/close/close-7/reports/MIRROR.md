@@ -78,3 +78,43 @@ print K2 and K1". By derivation on the seven places (`close-7/mirror/cell-{befor
   where the pick lands there. The seven pages move because the hold is gone. That is R24d's ruled move (C 4, V 3): the
   fare goes to the critical lines, the food grievance now fires (R24h), and Dawn Work takes the food branch.
 - I did not stop on this, because the brief's only stop is an id collision. I report it here for the chair.
+
+## 4. Proof (filled in as each run lands)
+
+**The cell on the before tree** (`food-of.mjs` over the before tree, 900 + 900): printed Famine over production adequate or
+surplus is exactly C dp-hamlet-117, dp-village-51, dp-village-54 (surplus) and dp-village-76; V dp-hamlet-100,
+dp-hamlet-139 and dp-village-76. That is C 4 and V 3, as A2's table had it at d447ee31e.
+
+**Red first, the row (the page battery over the before tree).** The before tree is e7441a93f's tree (`git archive`) with
+only `pageCensusFindings.js` taken from the build, so the before pages are read by the new row.
+- C: **PLENTY 4**, on dp-hamlet-117, dp-village-51, dp-village-54 and dp-village-76: exactly the cell, by seed.
+  Every other row: as below.
+- V: **PLENTY 3**, on dp-hamlet-100, dp-hamlet-139 and dp-village-76: exactly the cell, by seed.
+
+**Red first, the test** (`tests/domain/close7Mirror.test.js` run on the before tree's source through a scratch tree;
+nothing was written to any tree; `close-7/mirror/red-first-before.log`): **13 of 20 are red.**
+- All seven cell places are red by name, each on the fed fare it printed: six read the `adequate` branch, and C
+  dp-village-54 reads `surplus.wanting`.
+- Arm (b) is red ×4: the words and the atom are absent.
+- Arm (c) is red ×2: K1 is not printed on C dp-hamlet-117 or V dp-hamlet-139.
+- Green on both trees (7): the five cell places of (c) that print neither line, and the two controls of (d) (C7 and F6
+  stay where the source failed).
+
+**Commit 1: fe948997a** (the build, with its pins, row, register entry and wiring stamp 1455 → 1456). Own four files
+(`close7Mirror`, `pageCensusFindings`, `close7FoodFact`, `foodBandReaders` lint arm): **43/43 green.**
+
+## 5. For the owner's veto list (CLOSE-7 carries it to FOR-THE-OWNER)
+
+- **K2** (fare, critical branch, after C7): "Every fish that comes in is counted, and the shares are measured out house
+  by house." It needs `fish` and `food production: ≥ adequate`. It printed on no place of C or V (see § 3).
+- **K1** (Dawn Work, food branch, after F6): "Every hand that can be spared is out at first light, and what comes in is
+  counted before it is eaten." It needs `institution: farmland`, `tier: ≤ village` and `food production: ≥ adequate`.
+  It prints on C dp-hamlet-117 and V dp-hamlet-139.
+- **New vocabulary:** the atom `food production` (the place's own production band, read off the capacity profile
+  handed as its context), and its home `facts/foodProduction.js`.
+- **Judgment calls, each vetoable:**
+  - A context atom rather than a record-derived one (the cycle, § 2).
+  - K1 keeps F6's farmland need.
+  - PLENTY's "lines of plenty" are the three fed fare branches whole, A5 and A8 included ("simple stew", "fish is
+    the mainstay"), because each is a branch the bound gives only a fed page.
+  - "Taken in a pool" was read as the receiving pool (§ 1).

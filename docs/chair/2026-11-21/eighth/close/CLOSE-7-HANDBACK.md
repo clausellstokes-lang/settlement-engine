@@ -47,6 +47,14 @@ R24h (23:00 UTC, recorded verbatim in `close-7/briefs/R24h.md`):
 ORDER: A2 (three fixes, then the mirror) to its merge; LIVE-PATH; B1(i)'s finish (R24e (1a), (1b), (2); plain); B1(ii); C1, with
 R24g's names, plain.
 
+01:12 UTC 2026-11-25: THE OWNER DEFERS EVERY DECISION TO THE CHAIR. The chair ordered the unit GUARD, R24j (recorded in
+`close-7/briefs/GUARD-ORDER.md`): a stored place is re-derived only by the engine that bore it.
+- R24j's file commit c3ec2036da was NOT on origin at 01:15; I asked the chair to push it. READ R24j WHOLE before briefing GUARD.
+- NEW ORDER: the mirror to its merge; LIVE-PATH (now GUARD's RED: keep its harness); GUARD (it holds the release); B1(i)'s finish
+  may ride beside GUARD in another builder if their files do not meet; then B1(ii), C1.
+- Point 116 (the troubles rule, LIT) is landing; births will move. At my first merge of the 116 line, re-born C and V re-state
+  A2's counts and B1(i)'s table.
+
 THE NEXT COMMAND: when the mirror's report lands, run
 `git -C /home/user/wt/mirror log --oneline e7441a93f..HEAD`, read the diff once, merge onto cures, run the gates as for A2 (the
 lighting census by its door if a test file was added), push, and send the mirror line. Then dispatch LIVE-PATH with a fresh
