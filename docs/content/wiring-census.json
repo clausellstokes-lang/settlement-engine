@@ -12198,6 +12198,7 @@
         "market": 1,
         "no crisis: plague_onset": 4,
         "no crisis: under_siege": 4,
+        "no exports": 1,
         "no market": 1
       },
       "undeclared": 0,
