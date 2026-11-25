@@ -371,3 +371,32 @@ The 212 edit waits for "R4-IDS MERGED"; the chair reads its hunk whole before VE
 arms pass their first run (V1). WHAT A HIDING PAGE THEN SAYS IS BY DESIGN A STANDING AMONG THE POWERS IT SHOWS: that is
 what hiding a power means on a shared page, and it is the "not inferable" bar's own demand (a "second" with no first
 shown would tell).
+
+## RULING V15 (added 01:16 UTC on 2026-11-25): UNIT 4, V14's CONDITION (4): PHASE 1 IS THE CUT ALONE; THE SHARED PAGE PRINTS NO STANDING
+VEIL-51's stop (`v51/u4/C4-STOP.md` at 87ea14989; CONFIRMED, offline): the page's reader S on reads that hide nothing,
+against the stored desc: TODAY-BORN 750 of 754 the same (3 added: density rivals minted after the standing was written;
+1 changed); MASTER-BORN 193 of 765 the same (381 changed, 173 dropped, 18 added: master's writer wrote other words). NO
+SERVED KEY SAYS which rows carried a standing (`contestsNiche` is withheld; `generatorVersion` is 0.9.0 on all 280). So
+the page could know it only from a NEW SERVED MARKER (`standingWriter: 1` on a row at birth), which is a new served fact
+and, on a hiding read, a tell (a marked row the served roster leaves bare). VEIL-55's lean: the cut alone.
+**RULED:** PHASE 1 = THE CUT ALONE. No marker is served; reader S is not built in phase 1; the shared page prints NO
+standing on any non-owner read. THE NINTH CHAIR's N94, N95, N101 and N102 ("the shared page prints the table's own
+sentence for the served roster") DO NOT BIND PHASE 1: they were ruled before this measure. OF V14: conditions 1 (fail
+closed), 2 (the walker's totality) and 5 (as "no standing printed", asserted on both pools) stand; 3, 4 and 6 fall away
+with S. THE LOSS IS LISTED under V4 with its reason (each shown power's standing phrase is absent from every shared
+page). THE STANDING's RETURN is the put-back's question (S over the served roster for every row; a marker; or A5's stored
+field), WITH THE TELL MEASURED FIRST; where A5 sits in the order is VEIL-55's to propose in its second plan.
+
+## RULING V16 (added 01:16 UTC on 2026-11-25): V3 (5), `transferTakerOf`: FAIL CLOSED
+VEIL-53's cure D (probe `out/v53/cures/D/d5.probe.test.js`, CONFIRMED by it), through VEIL-55: after two transfers of
+the seat, two records that differ ONLY in the always-withheld `recentConflict` (taker A against taker B) serve deep-equal
+documents and render deep-equal shared pages, while the owner's page names A on one and B on the other
+(`transferRulingPower` rewrites an edge in place, so edge order does not decide it). So V3 (5)'s "the shared page names
+the holder the owner's page names" cannot be met from what is served.
+**RULED: ROUTE (4): WHERE THE SERVED RECORD HOLDS TWO OR MORE TAKERS THE SHARED PAGE NAMES NO HOLDER FROM THE
+TRANSFER.** Terms: (a) "no holder" means none anywhere on the page: every shared-page reader of the seat's holder goes
+through the one function, shown by a walker, so no stale holder (the birth's, or an earlier taker) is printed as the
+present one; (b) the owner's read unchanged and asserted; (c) red first by the two-transfer plant; (d) the site
+registered with its reason; (e) the count of places in both pools that reach it stated (expected 0: a birth leaves one
+taker; it arises in play). Serving the last taker (a new served fact) is not done in phase 1; the put-back weighs it
+under R3. V3's fifth cure is changed by this ruling from "cured" to "fail closed".

@@ -902,3 +902,12 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   COST: fewer turns, fuller messages, no reply to a seat's line that needs no ruling. THE CHAIR's OWN CONTEXT read
   522,649 at 01:13 (it was compacted at about 22:41): its next compaction is two hours off at this rate; this file is
   its memory.
+- 2026-11-25 01:16 UTC · T67 · TWO STOPS OF THE VEIL RULED (V15, V16); LAND-116 STARTED; CLOSE-7 TOLD OF THE GUARD.
+  V15: unit 4's phase 1 is the cut alone: the shared page prints no standing; no marker; reader S not built (it
+  re-derives 193 of 765 master-born standings); the standing's return is the put-back's, the tell measured first.
+  V16: `transferTakerOf` fails closed: two or more takers in the served record, no holder named on the shared page, none
+  anywhere (a walker). Both were the lane owner's lean. LAND-116 (the troubles rule lit) was started at about 01:12 UTC
+  as a helper in this container (its start file `prompts/START-LAND-116.txt`); it works in `/home/user/wt/line` from
+  0559a8405 and pushes only `lane/stack-116-wip-2026-11-25`. CLOSE-7 was sent R24j before the push that carried it had
+  ended and rightly waited; it has it now (origin at c3ec2036da, then e29f3b7e66). THE OWNER's 32 per cent passed to
+  CLOSE-7 and VEIL-55 with the chair's 17-to-22-hour guess.
