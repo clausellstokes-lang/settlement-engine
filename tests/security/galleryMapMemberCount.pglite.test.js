@@ -109,7 +109,7 @@ describe('gallery maps member_count — net-current execution (pglite)', () => {
         gallery_share_narrated boolean not null default false,
         gallery_member_overrides jsonb not null default '{}'::jsonb,
         ai_data jsonb default '{}'::jsonb,
-        -- 212's restated get_gallery_map (header item (36)) reads it for the member's link splice; 072's type and default.
+        -- 212's restated get_gallery_map (header item (39)) reads it for the member's link splice; 072's type and default.
         gallery_importable boolean not null default false
       );
       create table public.saved_maps (
@@ -186,7 +186,7 @@ describe('gallery maps member_count — net-current execution (pglite)', () => {
     // what the bodies need, before them
     await db.exec(netCurrentFn('_gallery_npc_key'));
     for (const fn of VEIL_HELPER_FNS) await db.exec(fn);
-    // 212's restated get_gallery_map (header item (36)) runs each member through the link's splice: load it too
+    // 212's restated get_gallery_map (header item (39)) runs each member through the link's splice: load it too
     await db.exec(netCurrentFn('_gallery_apply_member_overrides'));
     await db.exec(BACKDROP_FN);
     await db.exec(SAFE_FN);

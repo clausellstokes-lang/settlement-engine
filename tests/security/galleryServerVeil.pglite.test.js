@@ -24,7 +24,7 @@
  *   (2) no page changes: the LIVE page deep-equals the AT210 page of the same share read live
  *       (a frozen copy, old or new, is served as its live page; the import equals the listing's
  *       page; the map member equals, by value, the party link's page of the same row and marker:
- *       N84 (a), 212's header item (36));
+ *       N84 (a), 212's header item (39));
  *   (3) THE RED CONTROL: AT210 carries readable strings on the same rows (the measure of the
  *       phase-1 proposal), so (1) is not vacuous.
  *   (4) NO PAGE CARRIES A ROLE ITS CARD WITHHOLDS: no tie on any page (the 210 page included: the current client
@@ -486,18 +486,24 @@ describe('the server-side share veil (211) — execution against the real SQL an
           if (!member) faults.push(`${tag} map: no member`);
           else {
             fault(`${tag} map member shows what the listing hides`, carried(member, now.gPage).readable);
-            // N84 (a) (the chair, 2026-11-23; VR23) and 212's header item (36): THE MAP MEMBER IS THE PARTY LINK'S READ OF THE
+            // N84 (a) (the chair, 2026-11-23; VR23) and 212's header item (39): THE MAP MEMBER IS THE PARTY LINK'S READ OF THE
             // SAME TOWN (the public projection, the link's splice, the link's veil; an UNMARKED member takes the default veil as
             // the link does; share-level Reveal DM never applies). So the member EQUALS, BY VALUE, the party link's page of the
             // same row and marker (now.lPage, read above through the real client read), at every marker this arm reads, unmarked
-            // and marked. 211's member = listing rule is dropped, not loosened. Person ids are not re-keyed between the two reads
-            // (the same row, the same projection), so the comparison is plain.
-            const memberPage = canon(member);
+            // and marked. 211's member = listing rule is dropped, not loosened. Since R4-IDS (212 (36), VR10) each read draws its own
+            // salt, so the member and the link differ in every person id: the member is compared MODULO ITS READ'S BIJECTION AND
+            // NOTHING ELSE, folded exactly as now.lPage is (`people(canon(...))`, canonPeople's names by first appearance).
+            const memberPage = people(canon(memberRaw));
+            // TOOTH (a real id difference planted AFTER the fold): one card's canonical id moved to a name no card holds must
+            // make the two differ, or the fold would hide a real difference
+            const toothPage = JSON.parse(JSON.stringify(memberPage));
+            const toothCard = (Array.isArray(toothPage.npcs) ? toothPage.npcs : []).find((c) => isRec(c) && typeof c.id === 'string' && c.id.startsWith('npc#'));
+            if (toothCard) { toothCard.id = 'npc#planted'; if (JSON.stringify(toothPage) === JSON.stringify(now.lPage)) fault(`${tag} map member's bijection tooth did not bite`, [toothCard.name || '(card)']); }
             if (JSON.stringify(memberPage) !== JSON.stringify(now.lPage)) {
               const L = flat(now.lPage); const M = flat(memberPage);
               const diff = [...[...L.keys()].filter((p) => !M.has(p)).map((p) => `lacks ${p}`), ...[...M.keys()].filter((p) => !L.has(p)).map((p) => `+${p}`),
                 ...[...M].filter(([p, v]) => L.has(p) && !Object.is(L.get(p), v)).map(([p]) => `value ${p}`)];
-              fault(`${tag} map member is not the party link's page (N84 (a); 212 (36))`, diff.length ? diff : ['(order)']);
+              fault(`${tag} map member is not the party link's page (N84 (a); 212 (39))`, diff.length ? diff : ['(order)']);
             }
             fault(`${tag} map member carries a role its card withholds`, rolesItsCardWithholds(member));
           }
