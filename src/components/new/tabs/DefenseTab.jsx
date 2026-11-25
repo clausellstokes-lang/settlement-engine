@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { safetyLineSaidOnce } from '../../../domain/display/guardLineUnderTheLaw.js';
 import { FS, swatch, MUTED } from '../../theme.js';
 import { serif, Section } from '../Primitives';
 import Button from '../../primitives/Button.jsx';
@@ -358,7 +359,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier: publicD
   // economic-capacity read per page, R2); the row with prose under its bar stays.
   const caps = deriveSupportingCapabilities(r).filter((cap) => cap.label !== 'Economic Backing');
   const guardAssessment = deriveGuardAssessment(r);
-  const safetyLine = deriveSafetyLine(r); // BAR6-CRIME (a) (c) (d): the public-order line as printed (a DM's own line by identity)
+  const safetyLine = safetyLineSaidOnce(deriveSafetyLine(r), r, publicDossier); // BAR6-CRIME (a) (c) (d): the public-order line as printed (a DM's own line by identity); G6 #11: told once
   // X-52 FOOD ENDURANCE (lane DEFENSE-3): the one food record read for a siege, one sentence.
   const foodEndurance = foodEnduranceLine(r);
   const defViolations = deriveDefenseVulnerabilities(r);
