@@ -1,0 +1,34 @@
+{
+ "documents": 140,
+ "reads": 3360,
+ "cards": 6678,
+ "(1) withheld names spelled in ids, keys, slugs, by surface": {},
+ "(2) stored person ids served un-re-keyed": 0,
+ "(2) of them in stored-only fields": 0,
+ "stored-only keys seen": [
+  "publicProse"
+ ],
+ "(3) person ids shared by two reads of one surface": 0,
+ "(3) references unresolved within a read (all)": 274044,
+ "(3) of them beyond the stored document's own dangling": 0,
+ "stored documents' own dangling references": 36823,
+ "(4) re-keyed on the twin (off, unmarked, first read)": {
+  "ids": 26712,
+  "refs": 64484,
+  "ties": 26056
+ },
+ "(4) control: a planted bad reference": {
+  "caught": 140
+ },
+ "(4) control: bad references planted, caught": [
+  700,
+  700
+ ],
+ "(4) control: a stored id served": {
+  "caught": 140
+ },
+ "documents with no read on a surface": 0
+}
+FAULTS (first 30 of 0):
+
+GATE GREEN
