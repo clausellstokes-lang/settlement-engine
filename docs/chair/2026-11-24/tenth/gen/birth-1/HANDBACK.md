@@ -21,6 +21,19 @@
   narrativeQualityCorpus "ties of one archetype…" and "all 18 archetypes…", defenceParts R13.
 
 ### 0.1 Units
+FINAL (15:55 UTC, 2026-11-25, by `date -u`; the chair's G24: the seat STOPS unless the chair sends a unit). Every tip below equals origin's
+(`git ls-remote`, 15:55). Each code branch is green on `npm run typecheck:ratchet` (167, ceiling 167) and
+`npm run typecheck:domain:strict` (1113, ceiling 1113) IN ITS OWN WORKTREE, the same as the base.
+
+| unit | branch | tip | state |
+|---|---|---|---|
+| D2 | `lane/birth-1-2026-11-25-d2-wip` | 4ea69f420 | handed in (G8) |
+| D3 | `lane/birth-1-2026-11-25-d3-wip` | 5262fbee4 | handed in |
+| D5 | `lane/birth-1-2026-11-25-d5-wip` | 289a70b3a | handed in |
+| D2b | `lane/birth-1-2026-11-25-d2b-wip` | 4822a2175 | handed in (the chair took the bytes) |
+| D7 | `lane/birth-1-2026-11-25-d7-wip` | b0cca45be | handed in (G24; SIZE-BACK by CLOSE-7) |
+| D8 | `lane/birth-1-2026-11-25-d8-wip` | cf5d033e5 | PARKED (G11): owes ONE row of `tests/lint/presumedThings.widened.register.json`, by its door, reason "family", on the owner's leave; then tests/lint and the governing files, and the hand-in naming the catalogue word |
+
 - **D2 — DONE, PUSHED** on `lane/birth-1-2026-11-25-d2-wip` at 4ea69f420: d590c4bd2 (cure + test), e6fe5b586 (lighting census door:
   files 3798 -> 3799, parked 494 -> 495), 4ea69f420 (the test moved to `tests/domain/prominentTieNotCovert.test.js`: tests/generators is
   a mutation-manifest enforcer tree). Governing run at e6fe5b586 (66 files naming the two fields or the module + tests/lint whole: 287
@@ -93,7 +106,13 @@
   'Feudal Stewardship' (`rulingStructure.js` governanceLabelMap `"lord's reeve"`); its own desc says "A steward appointed by a distant
   lord". Hamlets up hold "Lord's steward" (face 'the steward'). The seat line is `governanceAccount.js :: governanceAccountOf` (role
   from `rulingChainOf`).
-- **D7 — PUSHED on `lane/birth-1-2026-11-25-d7-wip` at b0cca45be (5d9b3bba1 the unit; fe54f8b89 the lighting door, files
+- **D7 — HANDED IN (G24, 15:44: received as it is; the bytes to CLOSE-7's SIZE-BACK method, else named for the owner's size
+  signing). The pool-dominance row is a line over the door's bar banked as known: `ledger:powerSiblings:CRISIS_BODY_SIBLINGS` top1 1
+  over 93 notes in 51 towns of the dominance corpus, all position 0 (the original: 86 admitted, 7 kept). FINDING (not cured; the seat
+  stopped): the 7 kept are conversion places holding the body and a church but no senior cleric, so `priest` refuses the original and
+  the twin (excludes the body) is refused too: "two priests" prints there as at the base (quarrel-village-59, -129, -147, -284, -327,
+  quarrel-town-15, -288). A one-word cure on the chair's word: declare `church` (the clergy word's other atom) instead of `priest`.**
+  Pushed on `lane/birth-1-2026-11-25-d7-wip` at b0cca45be (5d9b3bba1 the unit; fe54f8b89 the lighting door, files
   3798 -> 3799, parked 494 -> 495; b0cca45be the wiring door, stamp only); the final governing run on the tip: 13 red tests in 10 files,
   ALL at the base (colourMarks4h, worldFactRederive, generationForkCensus, nameHeld, narrativeQualityCorpus x2, proseComposed (2327 /
   2103, the base's figure), proseCorpusBytes x2 (the six state-prose rows, the base's), editCorpusRatchet A3/A7, espionage's driven
@@ -142,5 +161,4 @@
   sent to CLOSE-7 (waits for the byte word).
 
 ### 0.2 Next step
-D7: wait for the chair's word on the byte rise; then the hand-in line to CLOSE-7 (unit, branch, b0cca45be; the atom, the four
-sentences and the `priest` declaration named for the owner's veto). D8 parked (owner's leave).
+NONE: the seat has stopped (G24). It acts again only on a unit the chair sends, or on the owner's leave for D8 (above).
