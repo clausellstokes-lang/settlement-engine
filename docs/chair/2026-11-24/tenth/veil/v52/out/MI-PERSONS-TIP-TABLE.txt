@@ -1,0 +1,51 @@
+PERSONS measure (WD_PERSONS=1; VEIL-55 02:57) on stored-tip, every read, every door, CONFIRMED
+FORM stored shards 4 places 140 (hidden-house 92, controls 48) | wall per shard ms [1279702,1226331,1221293,1236094] | server ms [1042222,984373,982378,993104]
+READS 19600 | HIDING 13210 on 95 places | no document {}
+HIDING BY engine|door|Reveal {"server|gallery|dm=false":950,"server|link|dm=false":950,"server|import|dm=false":950,"server|map|dm=false":950,"server|mapimport|dm=false":950,"twin|gallery|dm=false":950,"twin|link|dm=false":950,"server|gallery|dm=true":920,"server|link|dm=true":950,"server|import|dm=true":920,"server|map|dm=true":950,"server|mapimport|dm=true":950,"twin|gallery|dm=true":920,"twin|link|dm=true":950}
+DAILY (deriveDailyLife(served, null) vs the never-there read, by slot: differ / hiding reads)
+DAILY SIDE (after rederiveForPage): {}
+OFFICE LINES on hiding reads: served {} | never-there {} | differ 0  | L12 in the catalogue: false
+DM SLOT: in deriveDailyLife(served, null).slots 0 | as a key in a served document 0 {}
+OWNER-ISH KEYS in served documents (/audience|owner|^dm|_dm$|dmOnly|dm_only|dmLayer|isDm|gmOnly/i): 1
+  powerStructure.factionRelationships[].dmNote n=2610 {"server|gallery|dm=true":870,"server|import|dm=true":870,"twin|gallery|dm=true":870}
+NEVER-THERE records: 0 | still naming a withheld thing in their own strings: 0
+STORED vs BORN: same 0 differ 140 ["r3m-village-insurgency-0-4","r3m-village-under_siege-0-8","r3m-town-infiltrated-0-12","r3m-town-indebted-0-16","r3m-town-politically_fractured-0-20"] | births with a neighborRelationship name: 0
+NAMES: 1 path patterns
+  HIT powerStructure.factions[].desc [name] reads 280 places 2 doors {"server|gallery|dm=false":20,"server|link|dm=false":20,"server|import|dm=false":20,"server|map|dm=false":20,"server|mapimport|dm=false":20,"twin|gallery|dm=false":20,"twin|link|dm=false":20,"server|gallery|dm=true":20,"server|link|dm=true":20,"server|import|dm=true":20,"server|map|dm=true":20,"server|mapimport|dm=true":20,"twin|gallery|dm=true":20,"twin|link|dm=true":20} | ex {"seed":"r3m-town-none-0-17","setting":"own","dm":false,"eng":"server","door":"gallery","text":"Church institutions are well-embedded in civic life; their opinion on appointments, taxation, and law is sought and usually influential. Close enough to the two above that their support is worth buying; they play Thieves' Guild and Arcane C","wh":["Thieves' Guild","Street gang","Front businesses"]}
+MAP MEMBER: known fault (prominentRelationship / pressureSentence, Reveal off) {} | OTHER 80
+  MAP OTHER {"door":"map","pat":"powerStructure.factions[].desc","kind":"name","seed":"r3m-town-none-0-17","setting":"own","dm":false,"text":"Church institutions are well-embedded in civic life; their opinion on appointments, taxation, and law is sought and usually influential. Close enough to the two above that their support is worth buyin"}
+  MAP OTHER {"door":"mapimport","pat":"powerStructure.factions[].desc","kind":"name","seed":"r3m-town-none-0-17","setting":"own","dm":false,"text":"Church institutions are well-embedded in civic life; their opinion on appointments, taxation, and law is sought and usually influential. Close enough to the two above that their support is worth buyin"}
+  MAP OTHER {"door":"map","pat":"powerStructure.factions[].desc","kind":"name","seed":"r3m-town-none-0-17","setting":"g:000","dm":false,"text":"Church institutions are well-embedded in civic life; their opinion on appointments, taxation, and law is sought and usually influential. Close enough to the two above that their support is worth buyin"}
+  MAP OTHER {"door":"mapimport","pat":"powerStructure.factions[].desc","kind":"name","seed":"r3m-town-none-0-17","setting":"g:000","dm":false,"text":"Church institutions are well-embedded in civic life; their opinion on appointments, taxation, and law is sought and usually influential. Close enough to the two above that their support is worth buyin"}
+  MAP OTHER {"door":"map","pat":"powerStructure.factions[].desc","kind":"name","seed":"r3m-town-none-0-17","setting":"g:001","dm":false,"text":"Church institutions are well-embedded in civic life; their opinion on appointments, taxation, and law is sought and usually influential. Close enough to the two above that their support is worth buyin"}
+  MAP OTHER {"door":"mapimport","pat":"powerStructure.factions[].desc","kind":"name","seed":"r3m-town-none-0-17","setting":"g:001","dm":false,"text":"Church institutions are well-embedded in civic life; their opinion on appointments, taxation, and law is sought and usually influential. Close enough to the two above that their support is worth buyin"}
+  MAP OTHER {"door":"map","pat":"powerStructure.factions[].desc","kind":"name","seed":"r3m-town-none-0-17","setting":"g:010","dm":false,"text":"Church institutions are well-embedded in civic life; their opinion on appointments, taxation, and law is sought and usually influential. Close enough to the two above that their support is worth buyin"}
+  MAP OTHER {"door":"mapimport","pat":"powerStructure.factions[].desc","kind":"name","seed":"r3m-town-none-0-17","setting":"g:010","dm":false,"text":"Church institutions are well-embedded in civic life; their opinion on appointments, taxation, and law is sought and usually influential. Close enough to the two above that their support is worth buyin"}
+  MAP OTHER {"door":"map","pat":"powerStructure.factions[].desc","kind":"name","seed":"r3m-town-none-0-17","setting":"g:011","dm":false,"text":"Church institutions are well-embedded in civic life; their opinion on appointments, taxation, and law is sought and usually influential. Close enough to the two above that their support is worth buyin"}
+  MAP OTHER {"door":"mapimport","pat":"powerStructure.factions[].desc","kind":"name","seed":"r3m-town-none-0-17","setting":"g:011","dm":false,"text":"Church institutions are well-embedded in civic life; their opinion on appointments, taxation, and law is sought and usually influential. Close enough to the two above that their support is worth buyin"}
+  MAP OTHER {"door":"map","pat":"powerStructure.factions[].desc","kind":"name","seed":"r3m-town-none-0-17","setting":"g:100","dm":false,"text":"Church institutions are well-embedded in civic life; their opinion on appointments, taxation, and law is sought and usually influential. Close enough to the two above that their support is worth buyin"}
+  MAP OTHER {"door":"mapimport","pat":"powerStructure.factions[].desc","kind":"name","seed":"r3m-town-none-0-17","setting":"g:100","dm":false,"text":"Church institutions are well-embedded in civic life; their opinion on appointments, taxation, and law is sought and usually influential. Close enough to the two above that their support is worth buyin"}
+  MAP OTHER {"door":"map","pat":"powerStructure.factions[].desc","kind":"name","seed":"r3m-town-none-0-17","setting":"g:101","dm":false,"text":"Church institutions are well-embedded in civic life; their opinion on appointments, taxation, and law is sought and usually influential. Close enough to the two above that their support is worth buyin"}
+  MAP OTHER {"door":"mapimport","pat":"powerStructure.factions[].desc","kind":"name","seed":"r3m-town-none-0-17","setting":"g:101","dm":false,"text":"Church institutions are well-embedded in civic life; their opinion on appointments, taxation, and law is sought and usually influential. Close enough to the two above that their support is worth buyin"}
+  MAP OTHER {"door":"map","pat":"powerStructure.factions[].desc","kind":"name","seed":"r3m-town-none-0-17","setting":"g:110","dm":false,"text":"Church institutions are well-embedded in civic life; their opinion on appointments, taxation, and law is sought and usually influential. Close enough to the two above that their support is worth buyin"}
+  MAP OTHER {"door":"mapimport","pat":"powerStructure.factions[].desc","kind":"name","seed":"r3m-town-none-0-17","setting":"g:110","dm":false,"text":"Church institutions are well-embedded in civic life; their opinion on appointments, taxation, and law is sought and usually influential. Close enough to the two above that their support is worth buyin"}
+  MAP OTHER {"door":"map","pat":"powerStructure.factions[].desc","kind":"name","seed":"r3m-town-none-0-17","setting":"allOpen","dm":false,"text":"Church institutions are well-embedded in civic life; their opinion on appointments, taxation, and law is sought and usually influential. Close enough to the two above that their support is worth buyin"}
+  MAP OTHER {"door":"mapimport","pat":"powerStructure.factions[].desc","kind":"name","seed":"r3m-town-none-0-17","setting":"allOpen","dm":false,"text":"Church institutions are well-embedded in civic life; their opinion on appointments, taxation, and law is sought and usually influential. Close enough to the two above that their support is worth buyin"}
+  MAP OTHER {"door":"map","pat":"powerStructure.factions[].desc","kind":"name","seed":"r3m-town-none-0-17","setting":"off","dm":false,"text":"Church institutions are well-embedded in civic life; their opinion on appointments, taxation, and law is sought and usually influential. Close enough to the two above that their support is worth buyin"}
+  MAP OTHER {"door":"mapimport","pat":"powerStructure.factions[].desc","kind":"name","seed":"r3m-town-none-0-17","setting":"off","dm":false,"text":"Church institutions are well-embedded in civic life; their opinion on appointments, taxation, and law is sought and usually influential. Close enough to the two above that their support is worth buyin"}
+PERSONS (every read; a stored person with no served card / named in no served string): engine|door|Reveal reads readsNoCard readsOmitted noCard omitted
+  server|gallery|dm=false 1400 0 0 0 0
+  server|link|dm=false 1400 0 0 0 0
+  server|import|dm=false 1400 0 0 0 0
+  server|map|dm=false 1400 0 0 0 0
+  server|mapimport|dm=false 1400 0 0 0 0
+  twin|gallery|dm=false 1400 0 0 0 0
+  twin|link|dm=false 1400 0 0 0 0
+  server|gallery|dm=true 1400 0 0 0 0
+  server|link|dm=true 1400 0 0 0 0
+  server|import|dm=true 1400 0 0 0 0
+  server|map|dm=true 1400 0 0 0 0
+  server|mapimport|dm=true 1400 0 0 0 0
+  twin|gallery|dm=true 1400 0 0 0 0
+  twin|link|dm=true 1400 0 0 0 0
+PLANT none (WD_PLANT unset or no hideable house in the shard)
