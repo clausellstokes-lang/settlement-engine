@@ -2475,6 +2475,10 @@
       "kind": "rationale",
       "ref": "pglite-executed"
     },
+    "tests/security/veilDoorsHostedRoles.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
     "tests/security/profileColumnGrants.pglite.test.js": {
       "kind": "rationale",
       "ref": "pglite-executed"
