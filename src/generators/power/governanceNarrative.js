@@ -516,7 +516,7 @@ const deriveBaselineConflict = ({
   if (hasMarketInstitution) {
     return 'A dispute over field rotation and grazing rights has divided the village for most of this season.';
   }
-  return institutionFlags?.noGrazingQuarrel || 'A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.'; // BAR8-K-POWERS (15b, C31732): no grazing quarrel where nothing grazes (the power step reads the place: data/powerSiblings.js :: noGrazingQuarrelOf)
+  return institutionFlags?.noGrazingQuarrel === '' ? null : 'A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.'; // WORDS-2 E3 (RULING G9 (2)): the quarrel only where the record holds grazing; a calm place stores none (data/powerSiblings.js :: noGrazingQuarrelOf)
 };
 
 const selectPrimaryStress = (stressTypes, fallbackStressType) => {

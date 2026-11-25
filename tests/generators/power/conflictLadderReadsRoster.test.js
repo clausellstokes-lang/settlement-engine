@@ -74,3 +74,26 @@ describe('POWERS-13 #291 · the conflict ladder names a market or a court only w
     }), 'each twin keeps the line its market or court bears out');
   }, 240_000);
 });
+
+// WORDS-2 E3, the tenth chair's RULING G9 (2) (the owner's "Don't invent drama capitalize on what's already there if it's
+// there"): the cascade's last fall-through keeps the grazing quarrel only where the record holds grazing (a grazing house on
+// the live roster, the running pastoral chain, or a grass, pasture, meadow, steppe, grazing or herds ground nearby:
+// `powerSiblings.js :: noGrazingQuarrelOf`); a calm place without it stores no quarrel. Red first by name on 0ec96f13d8: V
+// dp-thorp-10, -104, -105 stored the quarrel with none of the three. The control keeps it: C dp-hamlet-0 (a grazing house).
+describe('E3 · the grazing quarrel only where the place grazes; a calm place stores none', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  const V = (/** @type {string} */ seed) => generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: seed.split('-')[1], _randomizePriorities: true }), null, { seed, customContent: {} });
+  const C = (/** @type {string} */ seed) => generateSettlementPipeline(birthConfig({ settType: seed.split('-')[1] }), null, { seed, customContent: {} });
+  const QUARREL = /grazing rights and water access|^A dispute over (?:rights on|water access)/;
+  it('V dp-thorp-10, -104, -105: no grazing in the record, and no quarrel stored', () => {
+    for (const seed of ['dp-thorp-10', 'dp-thorp-104', 'dp-thorp-105']) {
+      const s = V(seed);
+      expect(s.powerStructure?.governingFaction ?? s.powerStructure?.government, `${seed}: a seat stands`).toBeTruthy();
+      expect(QUARREL.test(String(s.powerStructure?.recentConflict ?? '')), `${seed}: ${s.powerStructure?.recentConflict}`).toBe(false);
+    }
+  }, 120_000);
+  it('the control: C dp-hamlet-0 holds a grazing house and keeps the quarrel', () => {
+    const s = C('dp-hamlet-0');
+    expect(String(s.powerStructure?.recentConflict ?? '')).toMatch(/grazing rights and water access/);
+  }, 120_000);
+});

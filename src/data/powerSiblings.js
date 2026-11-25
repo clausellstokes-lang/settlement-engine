@@ -69,32 +69,23 @@ export const BASELINE_CONFLICT_SIBLINGS = Object.freeze({
 
 /** A house that keeps beasts or grazing (the detector's own words, `tests/helpers/pageLaws/law15K.mjs`). */
 const GRAZING_HOUSE = /grazing|pasture|herd|shepherd|livestock|cattle|sheep|goat|ranch|dairy|stockyard|horse|stable|drover/i;
-/** A ground of the land: grazing, fields, farms, forest, foraging or hunting (the same). */
-const LAND_GROUND = /forag|hunt|grass|pasture|meadow|plain|steppe|farm|fertile|grain|orchard|mill|herb|grove|forest|wood(?!.*ship)|grazing|herds/i;
-/** The grounds a quarrel can be over, in order, and how the line names each. @type {ReadonlyArray<readonly [RegExp, string]>} */
-const QUARREL_GROUNDS = Object.freeze([
-  [/marsh/i, 'the marsh'], [/harbour|coast|shore|beach/i, 'the shore'],
-]);
+/** A ground near the place that is itself grazing: grass, pasture, meadow, steppe, grazing land or herds (WORDS-2 E3: the page law law15K.mjs's grazing land, less "plain"; never a field, a farm or a forest). */
+const GRAZING_GROUND = /grass|pasture|meadow|steppe|grazing|herds?\b/i;
 
 /**
- * BAR8-K-POWERS (rule 15b; the chair's BR15): THE QUARREL OVER THE GROUND THE PLACE HAS, where it has no grazing. The grazing
- * quarrel presumes grazing; the boundary is the second check's, and thin (C31732 STANDS in a thorp whose grounds are a deep
- * harbour, ship timber and ruins; C30951 and C31349, the same record but for a foraging or a hunting ground, were EXPLAINED:
- * a farming or foraging place can quarrel over grazing). So the twin is taken only where the place holds no grazing house,
- * no running pastoral chain and no ground of the land (grass, pasture, field, farm, forest, foraging or hunting ground); its
- * subject is read off the place's own grounds (the marsh, the shore), else its water.
+ * WORDS-2 E3, the tenth chair's RULING G9 (2) (the owner's rule: "Don't invent drama capitalize on what's already there if
+ * it's there"): THE CASCADE'S LAST FALL-THROUGH (`governanceNarrative.js :: deriveBaselineConflict`) KEEPS THE GRAZING QUARREL
+ * ONLY WHERE THE PLACE'S OWN RECORD HOLDS GRAZING: a grazing house on its roster, its running pastoral chain, or a grass, pasture,
+ * grazing or herds ground near it. A calm place with none of them stores NO quarrel. (It replaced BAR8-K-POWERS's twin of the
+ * quarrel over the place's other ground, the marsh, the shore or its water: a quarrel the record did not hold.)
  * Pure: a reading of the arguments, no draw.
  * @param {{ institutionNames?: ReadonlyArray<string>, pastoral?: boolean, grounds?: ReadonlyArray<unknown> }} place
- * @returns {string | null} the twin, or null where the place grazes (the stock line stands)
+ * @returns {string | null} null where the place grazes (the stock line stands); the empty string where it does not (no quarrel)
  */
 export function noGrazingQuarrelOf({ institutionNames = [], pastoral = false, grounds = [] }) {
   const names = (Array.isArray(institutionNames) ? institutionNames : []).map((n) => String(n || ''));
   const own = (Array.isArray(grounds) ? grounds : []).map((g) => String(g || ''));
-  if (pastoral === true || names.some((n) => GRAZING_HOUSE.test(n)) || own.some((g) => LAND_GROUND.test(g))) return null;
-  const ground = QUARREL_GROUNDS.find(([re]) => own.some((g) => re.test(g)));
-  return ground
-    ? `A dispute over rights on ${ground[1]} and access to water has run for two seasons, and those on each side of it no longer speak to one another.`
-    : 'A dispute over water access has run for two seasons, and those on each side of it no longer speak to one another.';
+  return pastoral === true || names.some((n) => GRAZING_HOUSE.test(n)) || own.some((g) => GRAZING_GROUND.test(g)) ? null : '';
 }
 // CENSUS-5e unit 2 (2026-11-05; the chair's answer 1 to CENSUS-5d, R-AN / R-U): the town military
 // modifier's set (`MILITARY_MODIFIER_SIBLINGS`: garrison-backed / arms-backed) dissolved. Garrison
