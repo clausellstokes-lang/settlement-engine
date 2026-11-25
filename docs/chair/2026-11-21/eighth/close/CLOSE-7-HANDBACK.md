@@ -242,6 +242,12 @@ gate for the lot):
     lane/birth-1-2026-11-25).
   - Owes: a mutation-manifest row for tests/generators.
 
+- D3: `lane/birth-1-2026-11-25-d3-wip` 5262fbee4, from BIRTH-1, cut at 0ec96f13d.
+  - Touches rulingStructure.js, economyReconciliation.js, a new leaf power/governanceLabelRoster.js, and one line of
+    assembleSettlement.js.
+  - Moves C 0 / V 4 (recentConflict). Goldens moved: 0.
+  - Its lighting and wiring census commits collide with D2's: re-take each once by its door at the merge.
+
 THE NEXT COMMAND: on BATCH's message:
 - read `close-7/reports/BATCH.md` and the diff once (`git -C /home/user/wt/batch diff --stat 0ec96f13d..HEAD`);
 - re-read the ruling's lines 45-79, 138-157 and 182-197;
