@@ -274,7 +274,7 @@ THE PLAN OF UNIT 4's MERGE M (written 05:1x, BEFORE any resolution; worktree /ho
   N1 BUILT (LOCAL 5b39bd019, CONFIRMED): S narrowed as re-planned; standingReaders walker re-pinned, red first (HEAD's reader: 2 of
     5 red: the writer's calls, its import, counts 4/1), green 5/5; domain-strict rc 0 (ceiling 1113): R5D's TS2345 sat in the writer's
     call and is gone with it.
-  N2 RE-PLANNED BEFORE ITS EDIT (07:3x; a judgment, VETOABLE, for the chair's read with the hunk): A DIFFERENT-SPAN TIE IS
+  N2 RE-PLANNED BEFORE ITS EDIT (07:1x; a judgment, VETOABLE, for the chair's read with the hunk): A DIFFERENT-SPAN TIE IS
     UNREACHABLE BY CONSTRUCTION, so no runtime "withhold whole" branch is written in either engine. WHY: every row is built by
     `standingForms.mjs :: reOf`, which ends it in `$` (all 117: CONFIRMED); none has a top-level `|`; none can begin by matching a
     space (each opens on a capital word or a capital class). 212's base extraction already forces the end
@@ -366,8 +366,8 @@ RULING V1 (the tenth chair, 21:20 UTC 2026-11-24) whole. N90 (the whole-document
 N99. ppkey on the full pool is NOT re-run (0 of 46,752 per door at ced3b1de7) unless the tree's 212 or twin moves.
 
 ## 3. Log (every hour from `date -u`)
-- 07:5x N2 built (local 9c03baa71). V25's measure: 7/754 today, 12/765 master, NOT near 0: three classes; (iii) an uncut master standing (LABEL_RE's capital-only qualifier). N2b planned before its 212 edit. VEIL-55 told.
-- 07:3x N1 built (local 5b39bd019; TS2345 gone); N2 re-planned (the different-span tie is unreachable by construction; the twin's end anchor forced; pinned), written before its edit.
+- 07:16 N2 built (local 9c03baa71). V25's measure: 7/754 today, 12/765 master, NOT near 0: three classes; (iii) an uncut master standing (LABEL_RE's capital-only qualifier). N2b planned before its 212 edit. VEIL-55 told.
+- 07:1x N1 built (local 5b39bd019; TS2345 gone); N2 re-planned (the different-span tie is unreachable by construction; the twin's end anchor forced; pinned), written before its edit.
 - 07:1x DESCARM and STANDWALK merged (local); N1 re-planned (S narrowed to the cut, the import's drop kept), written before the edit.
 - 07:02 mproof ended: M proved but for two inherited reds (107 (3), 4 reads; TS2345); both recorded at PROOF OF M RESULT.
 - 21:24 seated, read in. 21:25 line (0) to VEIL-50. 21:26 make-instruments started (rc 0 21:34). 21:33 p1 started.
