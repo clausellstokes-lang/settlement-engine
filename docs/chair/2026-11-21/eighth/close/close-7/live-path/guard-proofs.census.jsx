@@ -82,6 +82,9 @@ async function tick(doors, row, seed) {
     government: [loaded.powerStructure?.governingName ?? null, after.powerStructure?.governingName ?? null],
     pressureSentence: hash(loaded.pressureSentence) === hash(after.pressureSentence) ? null : [loaded.pressureSentence, after.pressureSentence],
     rowSameAsView: state.savedSettlements[0].settlement === after,
+    // (R24k c2) the whole after-record with `generatorVersion` set apart, so two trees' ticks of one save compare
+    afterNoVersion: (() => { const { generatorVersion: _v, ...rest } = after; return hash(rest); })(),
+    afterVersion: after.generatorVersion ?? null,
   });
   const dump = (process.env.GP_DUMP || '').split(',');
   if (dump.includes(seed) && process.env.GP_DUMP_DIR) writeFileSync(`${process.env.GP_DUMP_DIR}/${seed}.json`, JSON.stringify({ loaded, after }));
@@ -103,6 +106,8 @@ test(`guard proofs (${MODE})`, async () => {
       const born = pipe.generateSettlementPipeline(B.birthConfig({ settType: size }), null, { seed, customContent: {} });
       rowsIn.push([seed, JSON.parse(JSON.stringify({ name: born.name, tier: born.tier, data: born, config: born._config || null,
         seed: born._seed ?? null }))]);
+      // (R24k c2) GP_SAVE_DIR: write the saved row, so another tree can tick the SAME save (mode `master` reads GP_SAVED)
+      if (process.env.GP_SAVE_DIR) writeFileSync(`${process.env.GP_SAVE_DIR}/${seed}.json`, JSON.stringify(rowsIn.at(-1)[1]));
     }
   }
   if (MODE === 'next') {
