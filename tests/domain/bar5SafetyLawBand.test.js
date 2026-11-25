@@ -21,7 +21,7 @@ import { RULES } from '../helpers/pageLaws/law2.mjs';
 import { bandForVariable } from '../../src/domain/causalState.js';
 import { crimeWaveStands, foundationBandShown } from '../../src/domain/display/foundationBandShown.js';
 import { deriveGuardAssessment } from '../../src/domain/display/defenseDisplay.js';
-import { lawBandOf, quietPlaceKeepsLaw } from '../../src/domain/facts/lawBand.js';
+import { lawBandOf, ownCrimeUnsafe, quietPlaceKeepsLaw } from '../../src/domain/facts/lawBand.js';
 import { readFileSync } from 'node:fs';
 import { GUARD_LAW_FRAMES, GUARD_LAW_SIBLINGS, SIEGE_ORDER_FRAME, guardLineUnderTheLaw } from '../../src/domain/display/guardLineUnderTheLaw.js';
 import { COURT_AND_PRISON, COURT_NO_PRISON, NO_WATCH_SMALL } from '../../src/generators/safetyProfile.js';
@@ -101,6 +101,7 @@ describe('BAR5-SAFETY: a line that says how a wrong is answered reads the law ba
     // RE-KEYED BY BAR5-BAND, 2026-11-16 (the chair's ruling LB1, written inside `lawBandOf` by LB2): a quiet place that keeps
     // no office of the law (`quietPlaceKeepsLaw`) prints at least "strained"; every other row is as before. 45 of the 720 lift.
     /** @type {string[]} */ const lifted = [];
+    /** @type {string[]} */ const lowered = [];
     const failures = collectSeedFailures(CENSUS_720, (seed) => {
       const t = town(seed);
       const now = foundationBandShown(t, 'law_order', /** @type {string} */ (bandForVariable(t, 'law_order')));
@@ -108,9 +109,14 @@ describe('BAR5-SAFETY: a line that says how a wrong is answered reads the law ba
       const before = rowBefore(t);
       const floored = quietPlaceKeepsLaw(t) && RANK[/** @type {keyof typeof RANK} */ (before)] < RANK.strained;
       if (floored) lifted.push(seed);
-      expect(now, `${seed}: the row's band as before, or the quiet place's floor`).toBe(floored ? 'strained' : before);
+      // WORDS-2, the tenth chair's RULING G9 (1): where the place's own crime makes it Unsafe, the row is capped at `strained`
+      const capped = ownCrimeUnsafe(t) && RANK[/** @type {keyof typeof RANK} */ (before)] > RANK.strained;
+      if (capped) lowered.push(seed);
+      expect(now, `${seed}: the row's band as before, the quiet place's floor, or the own-crime cap`).toBe(floored || capped ? 'strained' : before);
     });
     expectNoSeedFailures(failures);
+    // WORDS-2 G9 (1): the own-crime cap lowers 7 of the 720 (measured at 0ec96f13d8 with the cap)
+    expect(lowered.length, 'G9 (1): the own-crime places the cap lowers in the 720').toBe(7);
     // re-measured lit (THE FLIP, CLOSE-6 F-FORTUNE, 2026-11-23): the floor lifts 21 of the 720 lit (45 before the flip)
     expect(lifted.length, 'BAR5-BAND LB1: the quiet places the floor lifts in the 720').toBe(21);
   }, 900_000);
