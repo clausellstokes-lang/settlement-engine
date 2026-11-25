@@ -191,6 +191,27 @@ THE OWNER's SCOPE LINE (the chair 05:04, `docs/chair/2026-11-24/tenth/SCOPE-LINE
   simulator, the map or custom content unless this release breaks or leaks there. UNITS 4 AND 5 STAND. A finding in a barred area: ONE
   LINE to the chair, not worked (no measure, no builder) unless a break or leak this release makes.
 
+THE CHAIR's CORRECTED RULE (05:10): nobody waits for a compaction; COMMITTED ATOMIC STEPS with reasons; BEFORE A JUDGMENT its plan here,
+  pushed; then make it; a compaction mid-step: one line to the chair and VEIL-55, re-read the start file, this hand-back and the step's
+  diff WHOLE against its plan.
+THE PLAN OF UNIT 4's MERGE M (written 05:1x, BEFORE any resolution; worktree /home/user/wt/r5desc, `git merge --no-commit aa54a6791` in
+  progress on dbd4cd9e5; 212 and the registry auto-merged, read in step M4):
+  M1 (twin) `src/domain/display/galleryRosterChoices.js :: withholdPowerCopies`: HEAD (R4-IDS) inlined the namer with ids filtered
+    `typeof f.id !== 'boolean'`; R5D extracted it to `withheldPowerNamer` (also called at :172). TAKE R5D's call; PORT HEAD's boolean
+    filter into `withheldPowerNamer`'s `wIds` line (both call sites then hold R4-IDS's rule). Expected diff vs HEAD: the inline body
+    replaced by the helper call; the helper's one line gains the filter.
+  M2 `tests/security/galleryWithholdAlways.pglite.test.js`: the two import blocks, UNION (bijection helpers + standingForms and the mask).
+  M3 `tests/lint/rosterChoiceComposedHosts.walker.test.js`: the MERGE COMMIT takes HEAD's header block (unit 1's census); a FOLLOW-UP
+    COMMIT re-pins the census to the registry as the merged tree holds it (measured by the walker, expected [FIRST,
+    'power.relation.dmNote']: unit 1 moved the prose rows to R2's always-host, R5D moved power.desc and power.label off the composed
+    form), drops R5D's "23 prose rows on the planned host" test (VEIL-55, 02:2x: unit 1's census stands), keeps R5D's per-row tests for
+    power.desc, power.label, power.relation.dmNote, and says both in the header.
+  M4 read the auto-merged 212 header and roster-choice hunks whole; renumber R5D's header item (36) -> (38) (VEIL-55); the registry's
+    merged rows checked by `node scripts/veil/rosterChoiceRegistry.mjs --check` and `standingForms.mjs --check`.
+  PROOF OF M: the three files' slices (galleryWithholdAlways.pglite, rosterChoiceComposedHosts.walker, galleryRosterChoices.pglite and
+    galleryVeilDesc.pglite) and the strict typecheck, each through the mutex. Then DESCARM and STANDWALK merged (plain), then PLAN-V15
+    item 2 by its own written plan.
+
 ### HANDS OVER (VEIL-51, 02:3x UTC 2026-11-25, near the mark; unit 1 granted; unit 4's no-SQL part done; NOTHING RUNNING)
 THE SUCCESSOR'S PACKET: START-VEIL-51.txt on `lane/chair-2026-11-08`; RULING-V1.md (V1-V15+) there; this section.
 MERGED: nothing of mine yet. GRANTED, NOT MERGED: unit 1 STORED-PROSE at d7764e67a (`lane/veil-51-2026-11-24-c2-wip`): VEIL-55 merges it
