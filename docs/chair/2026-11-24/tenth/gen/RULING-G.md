@@ -202,3 +202,28 @@ acts on a shrink-only register. A5 lands WITH the share veil's cut of the descri
 resumption, in one landing with its reader. The branch `lane/birth-2-2026-11-25-a5-wip` keeps its proofs; the
 writer-reach reds are left red and named; it is not handed to CLOSE-7. THE CHAIR's WORD TO THE OWNER AT 09:10 AND 11:44
 (that A5 is in this batch) IS CORRECTED TO HIM.
+
+**G13 AS BUILT, AND G16 (12:53):** the fact for "herding is what the place lives by" is
+`economicState.foodSecurity.foodRecord.foodSources[0] === 'livestock'`: the grazing quarrel stays on C 42 of 270 and V
+20 of 101 fall-through births (`-e3-wip` 4cf491891). G13 (3) was NOT 0 (C 41, V 16 pages would print the thin harvest
+or the late frost beside "Secure"): the two lines now exclude a Secure band (01b616134). G16: the small-place pool's
+own grazing line is drawn only where herding leads, by the same fact: one fact, both homes.
+
+**UNIT D2b RECEIVED (BIRTH-1, `-d2b-wip` 4822a2175; 12:51):** shares-a-sentence C 18 to 0, V 19 to 0; births moved
+C 18, V 19, the pressure line alone; one sentence test for the draw and the Overview (`sharedSentence.js`); THE RISE
+TAKEN BY THE CHAIR, named for the owner's size signing: first paint +210 raw, +70 gzip, -28 Brotli; the worker +256.
+CLOSE-7 re-runs its check on the joined tree (E3 changes the candidates).
+
+**G17 (12:57 UTC): D7, THE CRISIS NAMES ONLY WHAT THE PLACE HOLDS.** BIRTH-1's measure on C and V: almost every crisis line
+tells an event, the seat or an outsider said to be outside; the list's "509 of 900" was the forced-crisis corpus. The
+lines naming a local body the place may lack (printed, and with no body): the indebted power sentence "The creditor's
+agent has blocked the money for repairs..." (C 24 (19), V 27 (13)); the indebted pressure line "...the creditor's
+representative arrived last month..." (C 1 (1)); the religious-conversion power sentence "...two priests, two
+congregations, two registers..." (C 7 (6), V 5 (4)); the succession void's "every claimant is buying support" (C 6
+(2), V 6 (2)). RULED: where the body stands today's line stays (a declared twin; no draw, no power added); where it
+does not: (1) "Word from the creditor has blocked the money for repairs. In public those in charge talk of prudence;
+in private they point to a clause in the loan."; (2) letters in place of the representative, the whole sentence read
+so that "since" answers to something in it; (3) "the converts keep their own register of births, deaths and
+marriages", everything after it the original's own remainder; (4) "claimant" does not count (the void's own premise).
+The check: no crisis line names a local body the place does not hold: 0 on C and V. The new sentences are named for
+the owner's veto.
