@@ -342,3 +342,32 @@ chronicle in the served world); A WALKER: every section key the editor offers an
 emit is tried against the server's own deny pattern, read from the chain's net-current text, 0 refused; the copy that
 named the section leaves by `tests/copy`'s rules. THE OWNER IS TOLD; if he wants a shared map to carry its chronicle,
 that is a feature to design with the veil, on his word.
+
+## RULING V14 (added 00:57 UTC on 2026-11-25): UNIT 4 (R5-DESC NARROWED): THE PROPOSAL ACCEPTED IN FORM, ON SIX CONDITIONS
+VEIL-51 (`v51/u4/PROPOSAL.md` at 928733752, read by the chair). THE MEASURE (CONFIRMED by it; wd unchanged; server = twin
+in every cell, both wrong): `powerStructure.factions[].desc` names a withheld power on 240 reads of the today-born 140
+(two places) and 240 of the master-born 140 (one place), 20 a cell at every door and both Reveals; the plant bites
+(2 of 4). EVERY HIT IS A SHOWN POWER's STANDING TAIL (`annotateFactionStanding`'s "Close enough to ...; they play X and
+Y against each other ..."); the reference cut leaves a base naming no other power on all four.
+THE PROPOSAL (the form built at aa54a6791): on EVERY non-owner read, hiding or not, both engines, each power's `desc` is
+served WITHOUT its standing tail, cut by ONE table both engines read (`standingForms.data.json`); the base is kept; the
+page writes the standing again with the engine's own writer over the SERVED roster only
+(`pageRederive.js :: rederiveStanding`). Withheld, never masked, no new served fact. The narrower cut (only tails that
+name a withheld power) is rejected: the cut would be the tell.
+**ACCEPTED IN FORM. SIX CONDITIONS, each proved:**
+ 1. FAIL CLOSED: a desc whose tail the table cannot cut exactly (no row, or more than one) is WITHHELD WHOLE on every
+    non-owner read, never served uncut; the count on both pools stated (expected 0); a hand-written desc planted and
+    shown withheld. (The eighth chair's lean on this very table: "ONLY IF IT FAILS CLOSED".)
+ 2. TOTALITY BY CONSTRUCTION: a walker derives the table's rows from the engine's own writer; a new standing form with
+    no row reds; master's forms pinned by a recorded extraction from db832c892.
+ 3. FIDELITY: on every read that hides nothing, both pools, the page's standing equals the stored tail byte for byte;
+    where the reader cannot reproduce it the page prints NO standing, never a different one; the count stated.
+ 4. B2's STOP FIRST (the reader gave a density rival a standing its stored desc lacks: 48 fidelity faults): the reader
+    writes a standing only for a power whose stored desc carried one. IF THE PAGE CAN KNOW THAT ONLY FROM A NEW SERVED
+    MARKER, the seat stops and brings the chair the marker's shape and what a reader could learn from it.
+ 5. ON A HIDING READ no re-written standing names, counts or ranks against a withheld power; GATE-1 and GATE-2 not worse.
+ 6. THE PAGE's WEIGHT stated before and after for the owner's size signing; the writer lazy if it can be.
+The 212 edit waits for "R4-IDS MERGED"; the chair reads its hunk whole before VEIL-55's grant. RIVAL rides only if its
+arms pass their first run (V1). WHAT A HIDING PAGE THEN SAYS IS BY DESIGN A STANDING AMONG THE POWERS IT SHOWS: that is
+what hiding a power means on a shared page, and it is the "not inferable" bar's own demand (a "second" with no first
+shown would tell).

@@ -842,3 +842,12 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   kernel); here nothing was lost (push 255 had ended, the worktrees and the scratchpad survived); VEIL-55 resumed its
   proof chain at the lost step (run-4 green; the form on the gate's 140: L1 0 of 3,360 at gallery and link, 0 stored ids
   served, L2 84 = N117's 7 places); the other seats were not asked (each redoes a lost step by its own rule).
+- 2026-11-25 00:57 UTC · T63 · SNAP-CHRONICLE RULED (V13); UNIT 4's PROPOSAL ACCEPTED ON SIX CONDITIONS (V14); CI ON POINT 115 STILL RUNNING.
+  V13: VEIL-52 drove the client's own `shareMap` on master and tip: a map shared with its campaign is refused whole
+  wherever the campaign has a chronicle, and the chronicle section is ticked BY DEFAULT; the cure is the client's (the
+  section no longer offered or serialized; a walker against the server's own deny pattern), in VEIL-52's unit 3; the
+  owner told, with the feature (a chronicle on shared maps) named as his to ask for. V14: VEIL-51's unit 4: the standing
+  tail cut on every non-owner read by one table, the page re-writing it over the served roster: accepted in form; fail
+  closed, totality by a walker, fidelity byte for byte, B2's stop first, the hiding-read assertion, the page's weight.
+  CI's run on 0559a8405 (45515905198, number 1293) was in progress at 00:56 (started 00:09:55); its own check fires at
+  00:57. VEIL-52: hand-back whole, turn ended, unit 3 after its compaction.
