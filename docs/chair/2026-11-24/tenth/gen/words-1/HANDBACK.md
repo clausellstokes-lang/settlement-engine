@@ -47,6 +47,15 @@ the new label.
 E8 MEASURED ON RECORDS (`tools/e8-records.mjs`, `tools/e8-classes.mjs` = the hand-classed table): BOUND C 1786 strings in 521
 places, V 1746 in 526 (tells 899/852, want RANK.enter 466/433, the tie 157/158, impressions 202/215, secrets/goal.long the rest);
 BOUND-THEY (left as written) C 36, V 32; OTHER C 446, V 466. Scope question put to the chair in the E1 message (card lines + tie).
-NEXT STEP: E8 build on `lane/words-1-2026-11-25-e8-wip` cut at 0ec96f13d: a leaf `reflexiveOf(gender)` in personMention.js; a
-`{self}` slot filled at each composer (pairProse tie; goals.js wants, `self` a NAME_SLOT so wordings keep '§'; tells,
-presentations, secrets, goal.long at their draw sites); check script over every birth of C and V against the raw gender.
+E8 STEP ONE BUILT (10:00 UTC): `lane/words-1-2026-11-25-e8-wip` 5214ccd2f (worktree /home/user/wt/e8, hooks and node_modules
+linked), cut at 0ec96f13d, NOT YET PUSHED. `personMention.js :: reflexiveOf`; the tie mutual_leverage.tension[12] binds its asked
+card; the wants RANK.enter and POWER.corrupted carry `{self}` (goalFamilies.js), filled by goals.js only where the want is
+written (`writtenText`); every candidate is held/compared on the old text (`HELD_SELF`), stored texts read back by `heldText`.
+Red first: tests/generators/people/reflexiveSlot.test.js (2 red on base, 14 wrong in 5 births); green with goalFamilies,
+personMention walker and leaf tests (47/47).
+RUNNING (background): twin dumps base/e8 on C and V (`tools/twin-dump.mjs --norm=e8`, logs twin-*.log), then e8-check base/e8
+on C and V (`tools/e8-check.mjs`), then the named tests (27 files), tests/lint whole, tests/copy whole (logs e8-*.log).
+THEN: push -e8-wip; page battery renders of e8 for the before-and-after (pages moved, both zero checks); hand in "UNIT E8".
+NOT IN STEP ONE (E8b): the card lines (tells 899/852, impressions, secrets, goal.long npcGenerator); their draws dedupe by text
+in registries (castPowers hookRegistry.tells, CarriedSecrets), so a draw-time fill would move draws: a design is owed.
+npcData.js was read in its changed region only (pairProse, the tie table), not whole: said in the hand-in.
