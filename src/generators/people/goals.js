@@ -38,7 +38,7 @@ import { familyOfInstitution, isLawEnforcementInstitution, isNoPowerInstitution 
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
 import { chainPrintName } from '../../domain/display/chainPrintName.js';
 import { fillAgreement, powerNameWithArticle } from '../../domain/display/powerSentenceName.js';
-import { reflexiveOf, secondMentions } from '../../data/people/personMention.js';
+import { heldCardLine, reflexiveOf, secondMentions } from '../../data/people/personMention.js';
 import { filterDeclared, lineText, resolveSibling } from '../../domain/facts/drawDeclared.js';
 import { factsOf } from '../../domain/facts/factsOf.js';
 import { notePresumption, withPresumptionLedger } from '../../domain/facts/presumptionLedger.js';
@@ -277,7 +277,7 @@ function refusalRowsOf(settlement) {
 }
 
 /** Whether a card's own secret is a row of the closed list. @param {Rec} card @param {() => RegExp[]} rows the town's rows (`refusalRowsOf`) */
-const secretRefuses = (card, rows) => { const what = typeof card.secret === 'string' ? card.secret : str(rec(card.secret).what); return !!what && rows().some((re) => re.test(what.trim())); };
+const secretRefuses = (card, rows) => { const what = heldCardLine(typeof card.secret === 'string' ? card.secret : str(rec(card.secret).what)); /* E8b: held form */ return !!what && rows().some((re) => re.test(what.trim())); };
 
 /**
  * THE SETTLEMENT'S READS for the draw, computed once (draw-free): the houses, chains, dependencies,

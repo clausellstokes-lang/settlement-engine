@@ -30,7 +30,7 @@ import { rulingChainOf } from '../dossier/powerStrata.js';
 import { HELD_STORES_WORDS, defenseFactsOf } from '../defense/defenseFacts.js';
 import { institutionDisplayName } from '../display/institutionDisplayName.js';
 import { FOOD_SECURITY_BANDS } from '../../data/bandLadders.js';
-import { STRESS_INSTITUTION_EFFECTS } from '../../data/stressInstitutionEffects.js';
+import { STRESS_INSTITUTION_EFFECTS } from '../../data/stressInstitutionEffects.js'; import { heldCardLine } from '../../data/people/personMention.js'; // E8b: a crisis secret matched as drawn
 import { CRISIS_ROLE_LABEL, castHash, effectiveCastOf } from '../crisis/crisisCast.js';
 import { crisisSummaryForSurface } from '../crisis/crisisSummaryVantage.js';
 import { factsOf } from '../facts/factsOf.js';
@@ -571,7 +571,7 @@ function peopleOf(source) {
   // R11: the same holds when a target's OWN line falls back to their secret (soak1k-26, -55).
   /** @param {TonightNpc} npc */
   const withholdSecret = (npc) => targets.has(clean(/** @type {{ id?: unknown }} */ (npc).id) || clean(npc.name))
-    && patterns.some((re) => re.test(secretOf(npc)));
+    && patterns.some((re) => re.test(heldCardLine(secretOf(npc))));
 
   // THE CAST FIRST (docs/DESIGN_CRISIS_TAB.md): slot by slot, the worst crisis's holder first.
   // ROUND THREE (the chair's ruling on the increment's #176 #303 #856: "Wants to hold the line through the war with fewer
@@ -604,7 +604,7 @@ function peopleOf(source) {
 
   const keeper = patterns.length
     ? npcs.find(({ npc }) => {
-      const s = secretOf(npc);
+      const s = heldCardLine(secretOf(npc)); // E8b: matched in the held form
       const castVoiced = out.some((p) => p.why === 'cast' && p.name === clean(npc.name));
       return !!s && !castVoiced && !targets.has(clean(/** @type {{ id?: unknown }} */ (npc).id) || clean(npc.name)) && patterns.some((re) => re.test(s));
     })
