@@ -567,3 +567,29 @@ local rehearsal uses the hosted harness. TAKEN AT HIGH EFFORT; RE-READ WITH THE 
 the top effort.
 ALSO RECORDED (VEIL-55, item 1): a push of VEIL-53's with nothing to send ran the whole check from the hook and was
 killed (COMMON-EIGHTH 15 (c)); 15 (d) read clean; every push of that seat now checks `ls-remote` first.
+**V27 (07:19 UTC): V25 (4)'s MEASURE FOUND THREE THINGS; THE WITHHELD SET IS READ OFF THE STORED DOCUMENT.** VEIL-55 (07:18;
+VEIL-51's runs, PLAUSIBLE to VEIL-55): descriptions that, after the cut, name another power of the same place: 7 of 754
+born today, 12 of 765 born on master. THREE CLASSES: (i) a density rival's copied base names its HOST, and where the
+host is hand-hidden the projection drops the host's row at Reveal off BEFORE 212 runs, so 212's withheld set never
+holds it and V25 (2) passes while a hidden power is named; (ii) a noble base names the SEAT, which is never withheld
+(VR42): served, no leak; (iii) on master-born places an UNCUT standing tail: the table's label pattern wanted a capital
+in the qualifier and the census missed it. RULED:
+1. THE WITHHELD SET OF V25 (2) IS: EVERY POWER OF THE STORED DOCUMENT THAT THE SERVED DOCUMENT DOES NOT NAME, whatever
+   stage dropped it (the maker's hand-hiding in the projection, or the veil). The door has the stored row; it computes
+   the set from it. Class (i)'s description is then WITHHELD WHOLE; no new fact is served; RIVAL stays phase 2's.
+2. THE SAME SET FOR V20 (the legacy names in a person's strings): VEIL-51 proves it with a plant (a HAND-HIDDEN power
+   named in a person's role, at Reveal off): the key is omitted. If V20's check reads the narrower set, it is the same
+   hole and is cured in unit 5 the same way.
+3. IF A DOOR CANNOT SEE THE STORED ROW BEFORE THE PROJECTION DROPS IT, THAT IS NOT "LISTED": a hidden power's name on a
+   served page is the leak this phase exists to end. It stops and comes to the chair.
+4. CLASS (ii) IS LISTED, with one arm: wherever a served base names the seat's power, that power is on the served
+   roster (so a future change that withholds the seat reds here).
+5. CLASS (iii)'s CURE IS ACCEPTED (the pattern widened, the table and 212's forms re-made, red first), AND THE CENSUS's
+   ORACLE CHANGES: it missed the tail because it looked for tails with the table's own pattern. THE ORACLE IS THE
+   WRITER: for each power of each record the tail its writer derives (the tip's writer on places born today, master's
+   on places born on master) is computed, and the served description does not contain it. "LEFTOVER" counts by that
+   oracle; it must read 0 on both pools.
+6. RE-MEASURED AFTER THE CURES, both pools, with every other power hidden (the worst case): served descriptions naming a
+   stored power that is not served: 0; and the count the rule withholds, with three examples, in the hand-back.
+THE LESSON RECORDED: a check that finds its cases with the rule it is checking proves nothing; V25 (4) was an
+independent count and found three classes in one run. TAKEN AT HIGH EFFORT; RE-READ WITH UNIT 4's HUNK AT THE TOP EFFORT.

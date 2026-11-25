@@ -1116,3 +1116,9 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   compare moves to the hosted harness; ONE READ-ONLY QUERY IS ADDED TO THE END's LIST FOR THE OWNER (the two functions'
   access lists on the live database, before 212 is applied), written by VEIL-53 with its expected answer. Sent to
   VEIL-55. The end's two additions are in `PRERELEASE-LIST.md`.
+- 2026-11-25 07:19 UTC · T86 · V27: UNIT 4's MEASURE FOUND A HAND-HIDDEN POWER NAMED IN A RIVAL's DESCRIPTION; THE WITHHELD SET IS THE STORED ROSTER MINUS THE SERVED.
+  `veil/RULING-V1.md` V27. V25 (4)'s count (7 of 754 today-born; 12 of 765 master-born) split in three: (i) a density
+  rival's copied base naming a hand-hidden host (the projection drops the host before 212 runs: the check passed while
+  the name was served): CURED BY THE SET's DEFINITION, and the same set for V20 with a plant; (ii) the seat named
+  (served; listed with an arm); (iii) an uncut tail on master-born places the census had missed: cure accepted and the
+  census's oracle becomes the writer. Sent to VEIL-55 (for VEIL-51).
