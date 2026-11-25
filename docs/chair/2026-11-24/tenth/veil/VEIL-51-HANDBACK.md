@@ -271,6 +271,21 @@ THE PLAN OF UNIT 4's MERGE M (written 05:1x, BEFORE any resolution; worktree /ho
     them loses the import's drop of a hidden row's desc, a belt the plan never meant to remove. The walker is re-pinned to the
     narrowed reader (its writer-call arm inverted: the reader must NOT call the writer; the census counts measured), and the TS2345 is
     read again afterwards.
+  N1 BUILT (LOCAL 5b39bd019, CONFIRMED): S narrowed as re-planned; standingReaders walker re-pinned, red first (HEAD's reader: 2 of
+    5 red: the writer's calls, its import, counts 4/1), green 5/5; domain-strict rc 0 (ceiling 1113): R5D's TS2345 sat in the writer's
+    call and is gone with it.
+  N2 RE-PLANNED BEFORE ITS EDIT (07:3x; a judgment, VETOABLE, for the chair's read with the hunk): A DIFFERENT-SPAN TIE IS
+    UNREACHABLE BY CONSTRUCTION, so no runtime "withhold whole" branch is written in either engine. WHY: every row is built by
+    `standingForms.mjs :: reOf`, which ends it in `$` (all 117: CONFIRMED); none has a top-level `|`; none can begin by matching a
+    space (each opens on a capital word or a capital class). 212's base extraction already forces the end
+    (`'^(.*?)(?:^| )(' || re || ')$'`). So every row matching at a step's chosen start spans [that start, the end]: ONE span, and at
+    most a same-span tie, which is one reading. A runtime branch would be dead code in the SQL, untestable on the real table.
+    THE GAP FOUND, which N2 closes: the twin compiles `(?:^| )(re)` with NO forced end. A row ever landing without `$` would be cut
+    mid-text by the twin, while 212 would not cut it at all (its extraction returns null): the engines would differ.
+    N2 AS BUILT: (a) the twin's STANDING_ROWS compile gains the forced `$` (`(?:^| )(re)$`), 212's own reading, so both engines
+    read a match only as a tail; (b) the walker STANDWALK arm 1 pins the construction: every row ends in `$`, has no top-level `|`,
+    and cannot open on a space, so the tie rule's different-span class cannot arise, and its census keeps 0 on both pools;
+    (c) the twin's power.desc comment is re-cut to V15 ("the page re-derives the standing" goes). 212 itself is not edited for N2.
   PROOF OF M: the three files' slices (galleryWithholdAlways.pglite, rosterChoiceComposedHosts.walker, galleryRosterChoices.pglite and
     galleryVeilDesc.pglite) and the strict typecheck, each through the mutex. Then DESCARM and STANDWALK merged (plain), then PLAN-V15
     item 2 by its own written plan.
@@ -324,6 +339,7 @@ RULING V1 (the tenth chair, 21:20 UTC 2026-11-24) whole. N90 (the whole-document
 N99. ppkey on the full pool is NOT re-run (0 of 46,752 per door at ced3b1de7) unless the tree's 212 or twin moves.
 
 ## 3. Log (every hour from `date -u`)
+- 07:3x N1 built (local 5b39bd019; TS2345 gone); N2 re-planned (the different-span tie is unreachable by construction; the twin's end anchor forced; pinned), written before its edit.
 - 07:1x DESCARM and STANDWALK merged (local); N1 re-planned (S narrowed to the cut, the import's drop kept), written before the edit.
 - 07:02 mproof ended: M proved but for two inherited reds (107 (3), 4 reads; TS2345); both recorded at PROOF OF M RESULT.
 - 21:24 seated, read in. 21:25 line (0) to VEIL-50. 21:26 make-instruments started (rc 0 21:34). 21:33 p1 started.
