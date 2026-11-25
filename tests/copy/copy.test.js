@@ -97,12 +97,16 @@ describe('en map shape (drift guards)', () => {
   });
 
   it('has button + running labels for every AI feature', () => {
-    for (const feature of ['narrative', 'dailyLife', 'progression']) {
+    // WORDS-2 E7 (c) (the tenth chair's PRERELEASE-LIST E7; DAILY-3's hand-over leftover (c)): the daily-life AI button
+    // went with the engine's Daily Life page, and its keys `ai.dailyLife.*` had no reader, so they left the registry. The
+    // server's daily-life function and its price row are the owner's to retire (named in WORDS-2's hand-back).
+    for (const feature of ['narrative', 'progression']) {
       const f = en.ai[feature];
       expect(f).toBeDefined();
       expect(f.button).toContain('{cost}');
       expect(typeof f.running).toBe('string');
     }
+    expect(en.ai.dailyLife).toBeUndefined();
   });
 });
 
