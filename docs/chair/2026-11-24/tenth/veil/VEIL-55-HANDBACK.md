@@ -5,7 +5,7 @@ THE CHAIR is the tenth chair, session_019yED1SUxGVHyjQnoqoFvQ8. MY START MESSAGE
 session_019yED1SoJ6KH9Wyp2Fera7R. IF YOUR CONTEXT BEGINS WITH A SUMMARY: tell the chair in one line, re-read that file and this
 section before judging anything. Every hour here is read from `date -u`.
 
-## 1. WHERE THE LANE STANDS (my memory; current at this push, 04:24 UTC 2026-11-25)
+## 1. WHERE THE LANE STANDS (my memory; current at this push, 04:37 UTC 2026-11-25)
 
 THE LAW: as VEIL-50's hand-back section 1 "THE LAW" (no pull request; push only `lane/veil-55-2026-11-24*` by the local branch's
 own name, ls-remote first; never --no-verify, force, master; every database local, PGHOST=/var/tmp/rv7; no `supabase` command).
@@ -56,7 +56,11 @@ A SUCCESSOR ON ANOTHER ACCOUNT, THE NEXT COMMAND: in a fresh container, `npm ci`
   14 -> at or under 5 (pageRederive.js, importRederive.js: a domain leaf or injection; NO ceiling raised; its size to the chair
   first if large); (c) writer-reach's register re-taken by its own door, one commit (`veiled on allegiance`, `salt on reasons`, the
   two mutants' counts), no override; the chair reads that diff; a refused door goes to the chair in one line; (d) the order count
-  LISTED for the join's proof (its probe's twin re-pointed then); (e) V21's standing arm; (f) the frozen form's canon limit said.
+  LISTED for the join's proof (its probe's twin re-pointed then); (e) V21's standing arm; (f) the frozen form's canon limit said; (g) THE LINE IS ddca5c789 (POINT 116, THE TROUBLES RULE
+  LIT, births moved; the chair 04:37): the join is made on it; every born pool (today-born stored, the gate's 140, the pool)
+  RE-BORN on the joined tree, no figure from a pool born below 116 carried into the proof; GENERATION_LAWS five lit rows (cure E
+  walks the registry: no hand list); a test anchored on a named seed for a crime wave or a guild quarrel re-anchored by its own
+  finder, the assertion word for word. Pass this to the seats AT THE JOIN, not now.
 - THE NEXT COMMAND (mine): wait for unit 4's "TIP?" (VEIL-51, after its compaction); (was: the quiet-box items on dbd4cd9e5 (worktree /home/user/wt/tipm): the order count; `npm run build` then
   the four VERIFY_DIST reds by name; writer-reach's three identities; then read unit 4's "TIP?" (its 212 hunk to the chair first).
 
