@@ -209,8 +209,8 @@ STATE AT 18:22 UTC: UNIT E8b e75f090b7 HANDED IN to the chair (only). Moved C 11
   round trip 0/0; beyond the reflexive 0; other record strings 0; battery rows 0; unexplained 0; successor 6 built, 0 differing;
   regen keeper untouched; walker green; lint = base four; typechecks OK. Fault owned to the chair: one `npx tsc` run outside
   the mutex. All four of my units are handed in; the seat waits on the chair.
-STATE AT 18:47 UTC: E8b ACCEPTED (18:24). NEXT UNIT E13b "HOW THEY DEAL" (chair 18:24): measure and design in ONE message,
-  BUILD AND WRITE NOTHING BEFORE THE RULING; the sentences are the owner's to veto. MEASURE SENT 18:46 (tools/e13b-measure.mjs over
+STATE AT 18:36 UTC: E8b ACCEPTED (18:24). NEXT UNIT E13b "HOW THEY DEAL" (chair 18:24): measure and design in ONE message,
+  BUILD AND WRITE NOTHING BEFORE THE RULING; the sentences are the owner's to veto. MEASURE SENT 18:35 (tools/e13b-measure.mjs over
   the base battery records): cards holding a dealing line C 5148 / V 4861; 52 pairs (4 × 12 + 4 own lines), all met; town-pairs
   with 2/3/4/5 cards C 590/96/12/2, V 532/72/9/0; towns doubled C 333, V 336; full no-repeat moves C 826 strings in 333 places,
   V 703 in 336. DESIGN proposed: one town pass beside E8b's, cards of a pair ranked by fnv1a32(seed::dealing::card id), rank 0
