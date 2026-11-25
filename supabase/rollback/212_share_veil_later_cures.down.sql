@@ -186,6 +186,13 @@ create or replace function public._gallery_apply_member_overrides(
     ), '[]'::jsonb))
   end;
 $$;
+-- RULING V23's revokes undone: the two ACLs exactly as 001..211 leaves them under the hosted default, entry for entry and in order
+revoke execute on function public._gallery_apply_member_overrides(jsonb, jsonb, jsonb, boolean, boolean, boolean) from postgres, service_role;
+grant execute on function public._gallery_apply_member_overrides(jsonb, jsonb, jsonb, boolean, boolean, boolean) to public;
+grant execute on function public._gallery_apply_member_overrides(jsonb, jsonb, jsonb, boolean, boolean, boolean) to postgres;
+grant execute on function public._gallery_apply_member_overrides(jsonb, jsonb, jsonb, boolean, boolean, boolean) to anon, authenticated, service_role;
+revoke execute on function public._gallery_sanitize_public_json(jsonb, text[]) from service_role;
+grant execute on function public._gallery_sanitize_public_json(jsonb, text[]) to anon, authenticated, service_role;
 
 -- [212 down: back to 211 at 333b33973] public.get_gallery_dossier
 create or replace function public.get_gallery_dossier(dossier_slug text)
