@@ -9,7 +9,10 @@
  *                 compact marker linking UP to its card (an in-tab anchor), never
  *                 a duplicate of the card: "Holds power" on the ruler's row alone,
  *                 "Contests the seat" on a contender's (lane RULERS, 2026-11-03 —
- *                 four factions all read "Holds power" in 52 of 60 fresh towns).
+ *                 four factions all read "Holds power" in 52 of 60 fresh towns); D6 (WORDS-1, the
+ *                 tenth chair's G7): a contender the web binds to the ruler (dependent, symbiotic or
+ *                 subordinate, `powerStrata.js :: BOUND_TO_RULER_KINDS`) reads "Could contend" on its card
+ *                 and "Could contest the seat" on its row.
  *   TheWeb      — the typed relationships between factions, grouped by their
  *                 finite `type` kind. Each side is an EntityLink to its row.
  *
@@ -157,7 +160,7 @@ export function ThePowers({ settlement, powers, factionSupport, showCoupChip = t
                   onKeyDown: (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setOpenIdx(isExp ? null : i); } },
                 } : {})}>
                 <span style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800, color: accent, background: `${accent}14`, border: `1px solid ${accent}40`, padding: '1px 6px', flexShrink: 0 }}>
-                  {isRuler ? 'Ruler' : 'Contender'}
+                  {isRuler ? 'Ruler' : p.bound ? 'Could contend' : 'Contender' /* D6 (G7): a power bound to the ruler could contend */}
                 </span>
                 <span style={{ fontSize: FS.md, fontWeight: 700, color: swatch.inkMag, flex: 1, minWidth: 0, lineHeight: 1.2 }}>
                   <EntityLink id={factionIdFromName(p.name)} type="faction" fallback={p.name} style={{ color: swatch.inkMag }} />
@@ -329,10 +332,10 @@ export function FactionRow({ settlement, r, i, last = false, isExp, onToggle, ro
         <div style={{ fontSize: FS.md, fontWeight: 600, color: swatch.inkMag, flex: 1, minWidth: 0, lineHeight: 1.2 }}><InstitutionLink name={r.name} settlement={settlement} /></div>
         {r.isPower && (
           <Button variant="ghost" size="sm"
-            aria-label={`${r.name} ${holds ? 'holds power' : 'contests the seat'}, jump to its power card`} onClick={(e) => { e.stopPropagation(); onJumpToPower(r.name); }}
+            aria-label={`${r.name} ${holds ? 'holds power' : r.powerBound ? 'could contest the seat' : 'contests the seat'}, jump to its power card`} onClick={(e) => { e.stopPropagation(); onJumpToPower(r.name); }}
             onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') e.stopPropagation(); }}
             style={{ minHeight: 0, borderRadius: 0, fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 700, color: powerGold, background: `${powerGold}12`, border: `1px solid ${powerGold}40`, padding: '1px 6px', flexShrink: 0 }}>
-            {holds ? '↑ Holds power' : 'Contests the seat'}
+            {holds ? '↑ Holds power' : r.powerBound ? 'Could contest the seat' : 'Contests the seat'}
           </Button>
         )}
         <span style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 600, color: MUTED, flexShrink: 0 }}>{ARCHETYPE_LABEL[r.archetype] || 'Other'}</span>

@@ -109,6 +109,7 @@ function rulingHouseApartOf(settlement, options) {
  * @property {number}    [contenderCount]  How many contenders press the seat (ruler only).
  * @property {string}    [seatOf]       U7: the FORM whose seat the ruler holds, where the ruler is a holder apart from
  *                                      it (ruler only; never for a holder veiled to the reader, who is then not the ruler).
+ * @property {boolean}   [bound]        D6: a contender the web shows bound to the ruler (`boundToRuler`; contenders only).
  */
 
 /**
@@ -121,7 +122,29 @@ function rulingHouseApartOf(settlement, options) {
  * @property {string}  powerLabel        The faction's power-band label.
  * @property {boolean} isPower           True when this faction appears in THE POWERS.
  * @property {PowerRole | null} powerRole  'ruler' (holds the seat), 'contender' (contests it), or null.
+ * @property {boolean} [powerBound]      D6: a contender the web shows bound to the ruler (its marker's word).
  */
+
+/**
+ * THE TIES THAT BIND A POWER TO THE RULER (D6, WORDS-1; the tenth chair's ruling G7 of 2026-11-25, intake item 11): a
+ * contender whose tie with the printed ruler, or with the form whose seat that ruler holds, is one of these kinds is shown
+ * by the page itself as bound to the ruler, so it "could contend" and does not "contest" in the present tense. The word
+ * only: the list, its order, every standing and every tie are as before.
+ */
+export const BOUND_TO_RULER_KINDS = Object.freeze(['dependent', 'symbiotic', 'subordinate']);
+
+/**
+ * Whether `name` is bound to any of `rulers` by a tie of `BOUND_TO_RULER_KINDS` in the record's web.
+ * @param {unknown} relationships `powerStructure.factionRelationships` @param {string} name @param {string[]} rulers
+ * @returns {boolean}
+ */
+function boundToRuler(relationships, name, rulers) {
+  return (Array.isArray(relationships) ? relationships : []).some((r) => {
+    const pair = /** @type {{ pair?: unknown }} */ (r)?.pair; const type = /** @type {{ type?: unknown }} */ (r)?.type;
+    return Array.isArray(pair) && pair[0] !== pair[1] && pair.includes(name) && rulers.some((x) => pair.includes(x))
+      && typeof type === 'string' && BOUND_TO_RULER_KINDS.includes(type);
+  });
+}
 
 /**
  * Derive THE POWERS and THE FACTIONS strata from a settlement.
@@ -169,6 +192,9 @@ export function derivePowerStrata(settlement, options) {
 
   const apart = rulingHouseApartOf(settlement, options);
   const ruler = apart?.holder || governing;
+  // D6: the ruler as printed, and the form whose seat it holds where it stands apart
+  const rulers = [ruler ? nameOf(ruler) : '', apart && governing ? nameOf(governing) : ''].filter(Boolean);
+  const web = /** @type {{ factionRelationships?: unknown }} */ (ps).factionRelationships;
   if (ruler) {
     const name = nameOf(ruler);
     pushPower({
@@ -191,6 +217,7 @@ export function derivePowerStrata(settlement, options) {
       powerLabel: f ? (f.powerLabel || '') : '',
       role: 'contender',
       weight: c.weight,
+      bound: boundToRuler(web, c.name, rulers),
     });
   }
 
@@ -204,8 +231,9 @@ export function derivePowerStrata(settlement, options) {
       power: num(f.power),
       powerLabel: f.powerLabel || '',
       isPower: !!name && powerNames.has(name),
-      // "Holds power" is the ruler's word alone; a contender contests the seat.
+      // "Holds power" is the ruler's word alone; a contender contests the seat (D6: or could, where the web binds it to the ruler).
       powerRole: (name && powerNames.get(name)) || null,
+      ...(name && powerNames.get(name) === 'contender' ? { powerBound: boundToRuler(web, name, rulers) } : {}),
     };
   });
 

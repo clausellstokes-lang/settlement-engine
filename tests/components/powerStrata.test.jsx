@@ -153,10 +153,11 @@ describe('powerStrata — the holds-power marker links to the power card (in-tab
     const s = craftedSettlement();
     render(<PowerTab powerStructure={s.powerStructure} settlement={s} narrativeNote={null} />);
 
-    // Merchant Guilds is a contender → its roster row carries the marker, and a contender's
-    // marker reads "Contests the seat": "Holds power" is the ruler's word alone (lane RULERS).
-    const marker = screen.getByRole('button', { name: /Merchant Guilds contests the seat/i });
-    expect(marker.textContent).toBe('Contests the seat');
+    // Merchant Guilds is a contender → its roster row carries the marker; "Holds power" is the ruler's word alone (lane
+    // RULERS). D6 (WORDS-1, the tenth chair's G7): this fixture's web makes the Merchant Guilds the Town Council's
+    // DEPENDENT, so its marker reads "Could contest the seat" (a contender the web does not bind reads "Contests the seat").
+    const marker = screen.getByRole('button', { name: /Merchant Guilds could contest the seat/i });
+    expect(marker.textContent).toBe('Could contest the seat');
     expect(screen.getByRole('button', { name: /Town Council holds power/i }).textContent).toBe('↑ Holds power');
     expect(marker.tagName).toBe('BUTTON');
     // Its target power card exists in the DOM (the anchor the marker scrolls to).
