@@ -973,3 +973,15 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   taken: the hand-off's reader on another account picks up at B1. V23: `_gallery_apply_member_overrides` closed in the
   veil's SQL (it is called only inside definer doors); the USER doors open to anon joined B2. THE HOURLY CHECK at 03:35:
   VEIL-53 533,184; every record `allowed_warning`. LAND-116's helper is curing the twelve stale anchors (T72).
+- 2026-11-25 04:36 UTC · T74 · POINT 116 IS LANDED AND PUSHED: THE TROUBLES RULE, LIT. THE LINE IS ddca5c7894b8d8011a1426387a4ce03737dd79fa. BIRTHS MOVED.
+  LAND-116's second report: the twelve cured, test-only (18ac6b6f64: three arms of `livingContentLawWiring` read every
+  row of `GENERATION_LAWS` but their own, sensitive to a stray key of their own law's mint; 7bb5e6eaba: nine seed
+  anchors re-picked by each test's own finder under the lit law, assertions word for word, no count re-stated, no law
+  forced); the trouble table's DRAFT row note in the tuning register re-worded by hand (free text; the walker 76 of 76;
+  the inventory byte-unchanged). THE CHAIR READ THE WHOLE DIFF (9 files; no line of `src`) AND ACCEPTED ITS THREE
+  JUDGEMENTS (a metropolis row taking the other arm; a village row taking a metropolis; a city row taking a town: in
+  each no place of the named size meets the test's precondition under the lit law). After the cures: `tests/lint` whole
+  3 (the signings), `tests/domain` whole 3 of 20,188 (listed). THE WHOLE SUITE WAS NOT RE-RUN AFTER THE TWO TEST-ONLY
+  COMMITS: CI IS THAT RUN. The row and the gate's sentence are on the line (ddca5c789); pushed 04:36 UTC, a
+  fast-forward from 0559a8405. `ci/LINE-NOW.md` is at point 116. `RED-AT-LINE.tsv` unchanged (61). OWED: "THE LINE IS
+  ... BIRTHS MOVED" to CLOSE-7 and VEIL-55 (sent with this entry); CI by name within the hour. THE LANDING PLACE IS FREE.

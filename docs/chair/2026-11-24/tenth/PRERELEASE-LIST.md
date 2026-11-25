@@ -46,7 +46,7 @@ owner's golden signing, asked ONCE at the end). **D** = it needs the owner's own
 ## D. HOW A PLACE IS BORN
 | # | what | size | flags | state |
 |---|---|---|---|---|
-| D1 | THE TROUBLES RULE, LIT | S (one commit) and its wide gate | B | BEING LIT AS POINT 116 (LAND-116): the owner deferred the question on 2026-11-25 and the chair decided yes, as drafted; the numbers stay DRAFTS for his tuning signature at the end (D9) |
+| D1 | THE TROUBLES RULE, LIT | done | B | LANDED AS POINT 116 (ddca5c789, 04:36 UTC on 2026-11-25): a saved place does not move (525 of 525); the lit measure within 0.3 points of the owner's table; twelve stale test anchors cured test-only; CI's read owed. ITS NUMBERS STAY DRAFTS for the owner's tuning signature at the end (D9) |
 | D2 | the prominent tie is never a covert one (`genRelNarrative` picks the best tie that is not covert; about one birth in eighteen) | M | B | not started; it cures at the source what the veil hides at the doors |
 | D3 | the power step's sentence written before the coherence repair (intake 2; 1 page in 287) | M | B | not started |
 | D4 | the stored powers not always strongest-first, and nine readers that print as if they were (intake 1): THE PAGE SORTS, and the bar marks the holder | M | | not started |
