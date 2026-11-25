@@ -423,3 +423,11 @@ fitted to the proof sets: every pair holds at least two lines (52 new); the 18 p
 town hold three (18 more): 70; the pairs at four and five repeat once (about C 14, V 9 town-pairs). The sentences are
 the owner's to veto, in `e13b/SENTENCES.md`. Cut on top of E8b e75f090b7; moves about C 826 and V 703 strings in 333
 and 336 places and nothing else; a title row's line never re-ranked.
+
+**G40 (19:05 UTC): E13a RECEIVED (`lane/words-2-2026-11-25-e13a-wip` e0fd74c58); WORDS-2 HANDS OVER.** Records moved 0 / 0;
+pages C 240 (thorp 87, hamlet 77, village 54, town 22), V 116; on the door's own births the three Viability slots:
+hamlet .48 to .20 (ceiling .29), thorp .653 to .253, village .36 to .18, the larger sizes unchanged; no line saying
+nothing is bought in beside a marked need. THE TWO NEW SENTENCES, FOR THE OWNER'S VETO: "<town> feeds itself and pays
+its way, and buys in what it cannot make for itself." and "What <town> eats it grows, and what it spends it earns; some
+of what it needs is bought in." The sameness register is not re-taken: `--write` still refuses on the eleven slots
+until E13d. WORDS-2's hand-back section 0 (docs 37734ade0) carries every unit and E13d written whole for the next seat.
