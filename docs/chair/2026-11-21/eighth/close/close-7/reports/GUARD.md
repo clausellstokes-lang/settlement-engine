@@ -124,3 +124,13 @@
     the mirror's report found unstable from run to run. They are re-rendered with another birth first, below.
 - **POINT 8, PAGE BATTERY V (CONFIRMED by run, exit=0 both):** 900 births. **Rows moved 0, page moved 0, tables equal.**
   The record hash moved 900/900 (the version).
+- **POINT 8, THE TWO PAGE MOVES ON C ARE THE BATTERY'S, NOT THE UNIT'S (CONFIRMED by run):** the mirror's own
+  `plan-thorps-C.json` (dp-thorp-1 first, then 0, 2, 3) was re-rendered with `--views` and 1 worker on both trees
+  (`GUARD/thorps-diff.txt`). **Page moved 0 of 4**; the record moved 4 of 4 (the version).
+- **GATES at 89b8d8434 (CONFIRMED by run):**
+  - **`tests/copy` whole: 15 files, 172/172 green, exit=0.**
+  - **`tests/lint` whole:** 227 files, 3,376 passed and 4 failed. The known three are proseComposed A0b and proseCorpusBytes RAW
+    and GZIP. The fourth is this unit's: `mutationCoverageManifest` TOTALITY asked for an entry for the new invariant file
+    `tests/lint/generatorVersionRelease.test.js`. Answered by its door: a rationale entry in
+    `scripts/mutation-coverage-manifest.json` (the arm's red on the cut, executed, and its in-body mutants). The re-run is
+    queued.
