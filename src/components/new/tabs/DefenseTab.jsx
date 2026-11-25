@@ -411,7 +411,11 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier: publicD
         </div>
         <div style={{flex:1,borderLeft:`1px solid ${stressStatus.colour}40`,paddingLeft:12}}>
           {stressObj?.summary&&<p style={{fontSize: proseFontSize(FS['12.5'], isMobile),color:swatch['#3A2A10'],lineHeight:1.5,margin:'0 0 4px'}}>{stressObj.summary}</p>}
-          {stressObj?.viabilityNote&&<p style={{fontSize: proseFontSize(FS['11.5'], isMobile),color:swatch['#5A3A10'],fontStyle:'italic',margin:0,lineHeight:1.4}}>{stressObj.viabilityNote}</p>}
+          {/* WORDS-2, the tenth chair's RULING G6 #10 (one home): the crisis's own note ("if nothing is done") is printed by the
+              Crisis tab, which the owner's own view registers (OutputContainer.jsx :: hasCrisisTab: not a player view, not a
+              shared page); there this box leaves it to that tab. A player view and a shared page carry no Crisis tab, so they
+              keep it here, exactly as before. */}
+          {stressObj?.viabilityNote&&(playerView||publicDossier)&&<p style={{fontSize: proseFontSize(FS['11.5'], isMobile),color:swatch['#5A3A10'],fontStyle:'italic',margin:0,lineHeight:1.4}}>{stressObj.viabilityNote}</p>}
           {/* DS-DEF-8: what the override means for this town, in its own voice. */}
           <ProseBlock lines={statusLines} settlementName={r.name} tier={r.tier}
             style={{fontSize:proseFontSize(FS.xs, isMobile),color:swatch['#3A2A10'],lineHeight:1.5,margin:'6px 0 0',fontStyle:'italic'}}/>
