@@ -881,7 +881,7 @@ export const generatePressureSentence = settlement => {
   // Thorp/hamlet fallback — even stable small settlements have subsistence-level tensions
   if (['thorp', 'hamlet'].includes(detail.tier || '')) {
     const thorpPressures = [
-      'A dispute over grazing rights and water access has been running for two seasons without resolution.',
+      { text: 'A dispute over grazing rights and water access has been running for two seasons without resolution.', needs: ['livestock'], excludes: ['grain'] }, // WORDS-2 E3 (RULING G16): only where herding leads (foodSources [grain, livestock, …]: the herds first iff herds and no grain), the fact noGrazingQuarrelOf reads
       { text: 'The harvest was thin this year. Everyone knows it. Nobody is saying it directly.', excludes: ['food: ≥ secure'] }, // WORDS-2 E3 (RULING G13 (3)): never beside a printed Secure
       'A family moved away last spring. The reason is not discussed, but it affected the dynamics here.',
       { text: "The question of who tends the shared fields when the miller's household falls ill has never been properly settled.", needs: ['institution: mill'] },

@@ -57,4 +57,18 @@ describe('G13 (3): the small-place pool says no thin harvest or late frost besid
       expect(FOOD_TALK.test(String(s.pressureSentence)) ? `${id}: ${s.pressureSentence}` : null).toBe(null);
     }), 'no thin harvest or late frost beside a printed Secure');
   }, 240_000);
+  // RULING G16: the pool's own grazing line ("… has been running for two seasons without resolution") is drawn only where
+  // herding leads, by the fact the cascade's quarrel reads (`foodRecord.foodSources[0] === 'livestock'`; the row declares it as
+  // `needs: ['livestock'], excludes: ['grain']`, the source list being grain first, then the herds). Red first by name on E3's
+  // G13 (3) tree: C dp-hamlet-42 and dp-thorp-32 (game leads), dp-thorp-17 (grain), V dp-thorp-43 (no home source) printed it.
+  it('G16: C dp-hamlet-42, dp-thorp-17, dp-thorp-32 and V dp-thorp-43: herding does not lead, the pool prints another line', () => {
+    const POOL = /^A family moved away last spring|^A stranger passed through a month ago|^Two families have been in a quiet feud|^The question of who tends the shared fields|^The harvest was thin this year|^The last frost came late/;
+    expectNoSeedFailures(collectSeedFailures(['C dp-hamlet-42', 'C dp-thorp-17', 'C dp-thorp-32', 'V dp-thorp-43'], (id) => {
+      const [corpus, seed] = id.split(' ');
+      const settType = seed.split('-')[1];
+      const s = /** @type {any} */ (generateSettlementPipeline(birthConfig(corpus === 'C' ? { settType } : { ...DEFAULT_CONFIG, settType, _randomizePriorities: true }), null, { seed, customContent: {} }));
+      expect(s.economicState?.foodSecurity?.foodRecord?.foodSources?.[0] === 'livestock', `${id}: herding does not lead`).toBe(false);
+      expect(String(s.pressureSentence), `${id}: another line of the small-place pool prints`).toMatch(POOL);
+    }), 'the pool\'s grazing line only where herding leads');
+  }, 240_000);
 });
