@@ -1138,9 +1138,18 @@ export async function applyRosterDecreesAtTick(get, set, request) {
   //    bag equal to that layer — so a first newcomer's re-derivation is unmoved.
   const whole = /** @type {{roots: object, worldFacts: object, minted: object, phantoms: object}} */ (layer);
   const layerForRun = Object.freeze({ ...whole, minted: Object.freeze(mintedNow) });
-  const out = appended ?? await /** @type {{regenerateWithLayer: Function}} */ (lane).regenerateWithLayer(
+  const answer = appended ?? await /** @type {{regenerateWithLayer: Function}} */ (lane).regenerateWithLayer(
     live, storedConfigFor(get(), saveId, live), layerForRun, DECLARATION_CONSULT,
   ).then(null, () => null);
+  const answered = isPlainObject(answer) ? /** @type {{record?: unknown}} */ (answer).record : null;
+  // ⭐ GUARD-2 (CLOSE-7; the chair's ruling R24n (2)): THE ANSWER'S STAMP IS CHECKED. `bornHere` reads this
+  //    BUILD's constant, but on the remote lane the engine that runs is the service's bundle and the derive
+  //    sends no version. So the derived record is written ONLY IF its own `generatorVersion` is this build's
+  //    `GENERATOR_VERSION`; any other answer takes the APPEND path exactly as a place of another engine does
+  //    (`rederived: false`), never NOTHING_MINTED.
+  const foreignAnswer = appended === null && isPlainObject(answered)
+    && /** @type {{generatorVersion?: unknown}} */ (answered).generatorVersion !== GENERATOR_VERSION;
+  const out = foreignAnswer ? appendMinted(live, layerForRun, DECLARATION_CONSULT) : answer;
   const derived = isPlainObject(out) ? /** @type {{record?: unknown}} */ (out).record : null;
   if (!isPlainObject(derived) || !stillOurs()) return NOTHING_MINTED;
 
@@ -1170,7 +1179,7 @@ export async function applyRosterDecreesAtTick(get, set, request) {
     ok: /** @type {true} */ (true),
     saveId,
     minted,
-    rederived: appended === null,
+    rederived: appended === null && !foreignAnswer,
     unapplied: Array.isArray(reported) ? Object.freeze([...reported]) : NO_ROWS,
   };
 }
