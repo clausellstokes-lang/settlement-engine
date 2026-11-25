@@ -327,3 +327,15 @@ ACCEPTED WITH ONE KNOWN NOTE: two other places of the quarrel corpus (quarrel-th
 a High Priestess, no church) are now noted "kept" where `priest` admitted them; what prints there is unchanged and true
 (a priest stands). The declarations cannot say "church or priest"; no twin is written for two notes. BIRTH-1's hand-back
 at 84839716e; the seat has stopped.
+
+**G28, G29 (16:36 UTC): E8b's PLAN NOT VETOED.** WORDS-1 (its context about 200,000 by its own estimate) cuts E8b on top of
+`e8-wip` 94b7a13d9 (it re-uses `reflexiveOf`). Its measure at the base, bound card lines in 12 rows: C 1,157, V 1,126
+(the tell "speaks of themselves..." 899 / 852; the impression "sure of themselves" 202 / 215; crisis secrets 25 / 28;
+rare secrets 11 / 12; the siege goal.long 13 / 8; title secrets and a musician's behaviour 7 / 11). No stop site
+(gender is set at `npcGenerator.js:132`, before every draw). PLAN: every draw and dedupe untouched; ONE resolve pass
+after the last generation-time reader (`narrativeGenerator.js:1068`; skipped under a held `npcs` pin; on the regen
+path `generateSettlementPipeline.js:617`, non-keepers only), a closed table of the 12 rows; six later readers of the
+stored text read in the held form through one shared helper (`tonightSheet.js:574`, `:609`; `crisisFactFindings.js:233`;
+`rareSecrets.js:413`; `goals.js:1002`; `successorNpc.js:49-50`, which copies the held form). THE CHAIR ADDED: the round
+trip over every card of C and V (`heldText(after)` byte-equal to the base, 0 differing) and a walker that no reader
+matches those rows except through the helper; the successor's output byte-unchanged (advance time is another work).
