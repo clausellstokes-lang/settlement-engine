@@ -84,8 +84,10 @@ Reports to the lane's owner: a FILE, at most 200 words. My context began with a 
     finished plant step and held the lock 00:11-00:24 until the job's time limit killed it (its shards never wrote; the first
     run's files stand by their times). Fixed: one mutex call, no retry. (ii) the same time limit stopped rival.sh while its first
     arm WAITED (its mutex call gave up at 40 polls; no arm ran): relaunched `rival.sh arms after cost`, poll budget 1,000,000.
-  RUNNING (background, 2-hour limits, serialized by the gate mutex): `u4.sh wdtoday wdmaster`; `rival.sh arms after cost`;
-    the builder's red run (it holds the lock at 00:25).
+  wd-today rc 3 00:42 and wd-master rc 3 00:52 (3 = MAP OTHER listed, by design; CONFIRMED): the desc path 240 reads on 2 places
+    (today) and 240 on 1 (master: r3m-city-none-1-117) = VEIL-50's tip counts. Every hit is a standing TAIL: R5D's reference cut
+    leaves a base naming none (`u4/basetail.mjs`, offline). (4) PROPOSAL `u4/PROPOSAL.md` sent to VEIL-55 and the chair (00:57).
+  RUNNING (background, 2-hour limit): `rival.sh arms after cost`; the builder DESCARM (its red run).
   IF THIS SEAT STOPS: re-run what u4.log lacks (`sh docs/chair/2026-11-24/tenth/veil/v51/u4/u4.sh <steps>`; `sh .../rival.sh`)
   after the trees above are re-made (`git worktree add --detach` at the commits named; node_modules linked).
 - NEXT: wait for "R4-IDS MERGED <commit>" from VEIL-55, then unit 2 (R5-DESC), reading PART 42 s1 block 0 (a3bc0dc9d) and
