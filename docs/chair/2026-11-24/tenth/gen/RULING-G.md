@@ -58,3 +58,19 @@ through it (the template narrative's five powers, `aiLayer.js :: extractFullCont
 G2 (2)'s two stored lines (C 0, V 2). THE CHAIR TOLD THE OWNER AT 09:23 that up to 74 of 900 pages printed the power
 bar wrongly and that the Summary named the wrong power on 2: THOSE COUNTS WERE OF A COMPONENT NO USER SEES; corrected
 to him.
+
+**G5 (09:35 UTC): E1, THE DOUBLE POSSESSIVE, BY SOURCE; E8's SCOPE.** WORDS-1's measure at 0ec96f13d (owner pages): 125 hits in
+122 places on C, 145 in 126 on V, four sources. RULED: (1) a later mention's ROLE rung before 's, where the role holds
+a possessive (`personMention.js :: oneSentence`; "the network's head's reputation"; C 56, V 55): that rung is skipped
+and the next taken ("Lee's reputation"); with no rung left, the "of" form. (2) a POWER NAME holding a possessive in
+five joiners (`power.generated.js` twice, factionDynamics' ordained, governanceAccount's possessive, dmPowerLines'
+theOwn; "the Headman's Authority's place"; C 47, V 70): the "of" form at each joiner, only where the name holds one.
+(3) the want's HOUSE FILL (`goals.js :: PERSON_HOUSE_PLACE`; "the lord's steward's office"; C 20, V 19): the short
+title ("the steward's office"), derived from the long one's own source by dropping the possessor: no new table, no
+title hard-coded (D8 may re-word the title); else "the office of the lord's steward". (4) "{settlement}'s
+{institution}" where the institution's name holds a possessive (C 2, V 1): "the {institution} at {settlement}". THE
+CHECK: the measure's own detector over every composed sentence of every birth, on the owner's pages and the public
+projection's: 0. A re-worded joiner that writes a power's description or its standing tail is named for the veil's
+lane. E8's SCOPE: a reflexive bound to one person takes that person's own stored pronoun (card lines binding the
+card's own person, and the tie; "make themselves useful" printed 419 times on C); no stated gender, or "they", keeps
+"themselves".
