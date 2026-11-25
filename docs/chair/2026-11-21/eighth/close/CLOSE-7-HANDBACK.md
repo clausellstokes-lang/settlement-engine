@@ -119,6 +119,12 @@ Agent (brief `close-7/briefs/LIVE-PATH.md`).
   - (3) FIRST: MASTER-REDERIVE.
   - (4) P3SOURCE's line.
   - ORDER FOR CHAIN TWO: (3), then the leaf, B1(i)'s finish, B1(ii), C1.
+- R24i (the chair's own record, in `docs/chair/2026-11-24/tenth/read/RULING-R24.md` on the chair's branch, at 18811d473a): R24h's
+  items (2) to (4) written down, no more:
+  - (a) the corrections leaf is withdrawn; B1(i), B1(ii) and C1 are built plain;
+  - (b) the live-path measure (my LIVE-PATH.md, run after the mirror merges);
+  - (c) the cure is the owner's and is not built.
+  The A2 merge line was TAKEN by the chair at 00:23 UTC 2026-11-25.
 - R24g (22:32): the P3SOURCE line, C1's town name, and my memory.
   - (1) P3SOURCE line: "Reliance on magic: Relied upon · for food (magical provision) · supplied by Access to parish church ·
     Stopped by the siege." No marker. If P3source reads the last segment as a condition, teach it ONE thing: `rowMarkText`'s rows'
