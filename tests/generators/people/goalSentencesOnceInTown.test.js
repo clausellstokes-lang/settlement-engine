@@ -26,6 +26,7 @@ import { generateSettlementPipeline } from '../../../src/generators/generateSett
 import { birthConfig, loadGenerationLawPayloads } from '../../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../../src/store/configSlice.js';
 import { SIZES } from '../../components/pageCensusWalk.shared.mjs';
+import { TERRAIN_DATA } from '../../../src/data/geographyData.js';
 import { GOAL_FAMILY_LINES, GOAL_RESERVE_LINES, PERSONALITY_CLUSTERS, PERSONALITY_CLUSTER_OF } from '../../../src/data/people/goalFamilies.js';
 import { dealGoals } from '../../../src/generators/people/goals.js';
 import { createPRNG } from '../../../src/kernel/prng.js';
@@ -44,6 +45,22 @@ vi.mock('../../../src/generators/people/goals.js', async (importOriginal) => {
 /** The base's count by size (835fabd2d, `goals-final.base-835fabd2d.out.txt`): the gate's ceiling. */
 const CEILING = Object.freeze({ city: 1, metropolis: 2 });
 const TOWNS = 50;
+// (u) AND THE LAND (point 117, the chair's ruling 117-5 (C), 2026-11-25). CAUSE: B1(i) (`src/domain/landWithholding.js`: the
+// land withholds a house whose material it cannot give; only a terrain whose `TERRAIN_DATA[terrain].withholds` list is
+// non-empty can) takes a house, and its people, out of some of the 300 law-1 towns, so their rosters are no longer
+// d3937c3f8's. THE RULE: the fixture is NOT re-recorded and no town is struck out by a list; a town whose roster is not the
+// reference's is a stray EXCEPT where the town's own terrain has a non-empty `withholds` list (read from TERRAIN_DATA): there
+// (u) is not read on that town and the town is COUNTED (set aside). Every other town, and every withholding-terrain town
+// whose roster matches, is read exactly as before. Over the six sizes (u) is read on at least 280 of the 300 towns and at
+// most 20 are set aside. FOUND at the merge (point 117): 16 set aside, every one on the desert, and 284 read: thorp 0,
+// hamlet 1 (22), village 4 (21 33 43 49), town 3 (12 20 38), city 2 (19 22), metropolis 6 (1 13 20 29 32 37).
+/** @param {any} town @returns {boolean} the town's own terrain withholds something */
+const landWithholdsHere = (town) => {
+  const row = /** @type {Record<string, { withholds?: ReadonlyArray<string> }>} */ (TERRAIN_DATA)[String(town?.config?.terrainType ?? '')];
+  return Array.isArray(row?.withholds) && row.withholds.length > 0;
+};
+/** (u) per size, filled by the size arms: towns read and towns set aside. @type {Map<string, { read: number, setAside: string[] }>} */
+const U_TALLY = new Map();
 /** A line's text (a bare string, or a declared `{ line }`). @param {any} l @returns {string} */
 const textOf = (l) => (typeof l === 'string' ? l : l.line);
 /** Every PERSONALITY reserve line. */
@@ -58,6 +75,7 @@ function measure(size, law1) {
   let count = 0; let holdings = 0; let moved = 0;
   /** @type {string[]} */ const stray = []; /** @type {string[]} */ const drawnReserve = [];
   /** @type {string[]} */ const unexhausted = []; /** @type {string[]} */ const named = [];
+  /** @type {string[]} */ const setAside = []; let read = 0;
   for (let i = 0; i < TOWNS; i += 1) {
     const seed = `hxd-${size}-${i}`;
     log.lists = [];
@@ -69,8 +87,11 @@ function measure(size, law1) {
     if (law1) {
       const row = /** @type {any} */ (BORN).towns[seed];
       const now = townRow(town);
-      if (!row || row.ids !== now.ids || row.n !== now.n) stray.push(`${seed}: the roster is not d3937c3f8's`);
-      else (town.npcs || []).forEach((/** @type {any} */ c, /** @type {number} */ k) => {
+      const rosterIsReference = !!row && row.ids === now.ids && row.n === now.n;
+      if (!rosterIsReference && landWithholdsHere(town)) setAside.push(`${seed} (${town.config?.terrainType})`);
+      else read += 1;
+      if (!rosterIsReference && !landWithholdsHere(town)) stray.push(`${seed}: the roster is not d3937c3f8's (terrain ${town.config?.terrainType})`);
+      else if (rosterIsReference) (town.npcs || []).forEach((/** @type {any} */ c, /** @type {number} */ k) => {
         const was = rowHashes(row, k); const r = receipts.get(String(c.id));
         for (const v of /** @type {const} */ (['short', 'long'])) {
           if (vantageHash(c, v) === was[v]) continue;
@@ -95,7 +116,7 @@ function measure(size, law1) {
       if (!hs.some((h) => h.rung === 'exhausted')) unexhausted.push(line);
     }
   }
-  return { count, holdings, moved, stray, drawnReserve, unexhausted, named };
+  return { count, holdings, moved, stray, drawnReserve, unexhausted, named, setAside, read };
 }
 
 describe("the gate's count: no goal sentence printed twice in one town (p)", () => {
@@ -105,7 +126,8 @@ describe("the gate's count: no goal sentence printed twice in one town (p)", () 
     it(`(p) ${size}: every sentence printed twice is held by an 'exhausted' card, and the count is at most ${/** @type {any} */ (CEILING)[size] ?? 0}`, () => {
       // (p) and (t) on the product's LIT births, then on the law-1 births (u) makes, where (u) is read
       for (const law1 of [false, true]) {
-        const { count, holdings, moved, stray, drawnReserve, unexhausted, named } = measure(size, law1);
+        const { count, holdings, moved, stray, drawnReserve, unexhausted, named, setAside, read } = measure(size, law1);
+        if (law1) U_TALLY.set(size, { read, setAside });
         const law = law1 ? 'under law 1, the reference\'s own law' : 'lit';
         expect(holdings, `anti-vacuity (${law}): the towns print goals`).toBeGreaterThan(TOWNS);
         expect(unexhausted, `a sentence printed twice with no exhausted holder (${law})`).toEqual([]);
@@ -118,6 +140,15 @@ describe("the gate's count: no goal sentence printed twice in one town (p)", () 
       }
     }, 240_000); // its own budget, carrying the measured figure (CI-FIT-3, CLOSE-5, 2026-11-23): each tier now births twice (lit, and law 1 for (u): the chair's N66); the slowest of the six (metropolis) 52.3 s here on the flipped tree (075fbdd89, --maxWorkers=3; 30.1 s born once); about 96.2 s on a CI runner (the measured factor), past three quarters of its old 120 s; was 120_000 (one budget covers all six)
   }
+
+  it('(u) over the six sizes: read on at least 280 of the 300 towns, and at most 20 set aside on a withholding land', () => {
+    expect([...U_TALLY.keys()].sort(), '(u) every size arm ran its law-1 births').toEqual([...SIZES].sort());
+    const tallies = [...U_TALLY.values()];
+    const read = tallies.reduce((n, t) => n + t.read, 0);
+    const setAside = tallies.flatMap((t) => t.setAside);
+    expect(read, `(u) towns read (set aside: ${setAside.join(', ') || 'none'})`).toBeGreaterThanOrEqual(280);
+    expect(setAside.length, `(u) towns set aside: ${setAside.join(', ') || 'none'}`).toBeLessThanOrEqual(20);
+  });
 });
 
 describe('the draw never reaches the PERSONALITY reserve (t)', () => {
