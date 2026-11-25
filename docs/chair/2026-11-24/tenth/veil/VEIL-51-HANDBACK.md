@@ -175,6 +175,17 @@ R4-IDS MERGED 8430edf5c (VEIL-55, 02:52; the lane's tip `lane/veil-55-2026-11-24
   aa54a6791, DESCARM 0ff0773c7, STANDWALK 7010a0004 (NOT RIVAL); R5D narrowed to the cut (u4/PLAN-V15.md); 212's item (38). My context
   is high: the 212 edit (a judgment) is begun after a compaction if one is near (the chair's 02:36 rule).
 
+UNIT 1 MERGED dbd4cd9e5 (VEIL-55, 04:18; the lane's tip `lane/veil-55-2026-11-24-tip`; 212 header (36)/(36b)/(36c) R4-IDS, (37)
+  STORED-PROSE). V21's TOOTH for unit 4's grant: VEIL-52's standing-tail plant (r3m-city-indebted-0-46, `q52.sh miplant5` on VEIL-52's
+  branch) reads ABSENT at every door, the map's two among them. UNIT 4's CODE BRANCH CUT: `lane/veil-51-2026-11-24-r5desc-wip` at
+  dbd4cd9e5 (worktree /home/user/wt/r5desc), CLEAN, NOTHING MERGED YET. THE TRIAL MERGES (04:2x, each aborted): DESCARM 0ff0773c7
+  merges plain; aa54a6791 CONFLICTS in `src/domain/display/galleryRosterChoices.js` (the twin, vs R4-IDS), `tests/lint/
+  rosterChoiceComposedHosts.walker.test.js` (the composed census: resolve WITH unit 1: only power.desc, power.label,
+  power.relation.dmNote stay red until R5D's host), `tests/security/galleryWithholdAlways.pglite.test.js`; 212 auto-merges (read it
+  whole anyway); STANDWALK 7010a0004 the same three (it holds aa54a6791). THE NEXT STEP, AFTER THE COMPACTION (the chair's 02:36 and
+  02:53 rule: never begin 212 or the twin near one): in /home/user/wt/r5desc, `git merge aa54a6791`, resolve the three by reading both
+  sides whole; then DESCARM, STANDWALK; then PLAN-V15 item 2 (R5D narrowed to the cut, fail closed by span, S unwired), 212 item (38).
+
 ### HANDS OVER (VEIL-51, 02:3x UTC 2026-11-25, near the mark; unit 1 granted; unit 4's no-SQL part done; NOTHING RUNNING)
 THE SUCCESSOR'S PACKET: START-VEIL-51.txt on `lane/chair-2026-11-08`; RULING-V1.md (V1-V15+) there; this section.
 MERGED: nothing of mine yet. GRANTED, NOT MERGED: unit 1 STORED-PROSE at d7764e67a (`lane/veil-51-2026-11-24-c2-wip`): VEIL-55 merges it
