@@ -150,7 +150,13 @@ describe('a power the crisis has not touched prints no stake row', () => {
   const SILENT = [
     ['r2s-under_siege-town-2', 'under_siege', 'Landed Gentry'], ['r2s-under_siege-city-0', 'under_siege', 'Arcane Orders'],
     ['r2s-under_siege-metropolis-0', 'under_siege', 'Noble Houses'], ['r2s-under_siege-metropolis-2', 'under_siege', 'The Highborn Circle'],
-    ['r2s-famine-city-0', 'famine', 'The Landed Bloc'], ['r2s-famine-city-1', 'famine', 'Merchant Guilds'],
+    // RE-KEYED BY IDENTITY 2026-11-25, CLOSE-7 ANCHORS-4 (the tenth chair's R24q, point 117): THE CAUSE, B1(i) (R24b; green at 0ec96f13d,
+    // red at 6d30700e6): r2s-famine-city-1 (Skaldhammer, desert) loses its Fish market, Toll bridge, Weavers, Chandler and Smuggling
+    // network, and the re-dealt town gives Merchant Guilds its own quarrel with the seat, so the page prints "atOddsMany · in their own
+    // quarrel with Merchant Guild Council" (the record still stores the untouched split): touched, the row's premise gone. Re-picked by this
+    // row's own predicate (the record stores Merchant Guilds' untouched split; the famine section prints other rows and none for it), the
+    // lowest r2s-famine-city after -1: city-9 (the first three: 9, 10, 15). Was r2s-famine-city-1 (the KEEP below still reads city-1's other rows).
+    ['r2s-famine-city-0', 'famine', 'The Landed Bloc'], ['r2s-famine-city-9', 'famine', 'Merchant Guilds'],
     // RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit): r2s-indebted-city-3's Military/Guard lit stores no stake; the lowest r2s-indebted-city after -1 whose
     // Military/Guard stores the untouched split and holds no quarrel of its own is city-7 (city-0's prints its quarrel with the seat)
     ['r2s-indebted-city-1', 'indebted', 'Military/Guard'], ['r2s-indebted-city-7', 'indebted', 'Military/Guard'],
