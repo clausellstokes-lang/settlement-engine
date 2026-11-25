@@ -108,3 +108,4 @@ A9. IN under the border's exception: D10 (the guard), unit 3 of A1 as hiding onl
 the whole journey in a real browser, about 4 seat-hours. THE ORDER: safety (A1, D10), the read's faults (C), the
 birth-moving items (D, E1, E8), wording (E), the share page's quality (A3, A8, A2, A4, A5), the end (F).
 
+**B2, a count (06:27 UTC 2026-11-25, VEIL-53 through VEIL-55):** on the joined chain anon can execute 59 of 79 USER-class functions; their bodies' `auth.uid()` gates answer empty; closing them to anon is B2's.

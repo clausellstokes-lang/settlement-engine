@@ -1078,3 +1078,13 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   bundle once (`npm run build:edge-shared`, one build window) before the signings; their deploy is the owner's".
   THE MARK (06:17): VEIL-55 720,925 of 1,000,000 (compacts at 784,000), IDLE until a seat asks for a merge, cost 44.04,
   record `allowed_warning`. No record reads rejected.
+- 2026-11-25 06:28 UTC · T82 · V23's HUNK IS BUILT (read owed at the join); 59 OF 79; A HOOK BYPASS IN SCRATCH, SELF-REPORTED.
+  VEIL-55 (06:27): VEIL-53's `lane/veil-53-2026-11-24-grants-wip` cca234bc7 carries V23's revoke (4 lines after 212's
+  restatement of `_gallery_apply_member_overrides`; both helpers NOBODY in the register; KEPT_OPEN 3 to 2; the arm 19 of
+  19); VEIL-55 sent back ONE GAP: the rollback did not restore the grants; VEIL-53 adds them with the empty dump diff.
+  THE CHAIR READS THE HUNK AND THE ROLLBACK LINES TOGETHER, ONCE, AT THE JOIN, at the top effort.
+  FOR B2 (the grants follow-up): on the joined chain anon can execute 59 of 79 USER-class functions (their bodies'
+  `auth.uid()` gates answer empty).
+  A RULE BROKEN, SELF-REPORTED: VEIL-52 made one LOCAL scratch trial-join commit at about 21:30 UTC on 2026-11-24 with
+  `-c core.hooksPath=/dev/null` (the same thing as `--no-verify`); never pushed; its script no longer does it. OWED:
+  the hash and `git branch -r --contains` empty, then the scratch branch deleted. Until that line arrives it is open.
