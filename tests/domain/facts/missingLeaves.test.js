@@ -55,11 +55,13 @@ describe('presence on a card (patterns 8 and 18: never by the first word)', () =
   });
 });
 
-describe('beasts readiness against threat (pattern 9)', () => {
-  test('settled country graded weak is named; a frontier grade is read as it is', () => {
-    expect(beastsReadinessOf({ config: { monsterThreat: 'heartland' }, defenseProfile: { scores: { monster: 5 } } })).toMatchObject({ family: 'settled', grade: 'CRITICAL', settledAndWeak: true });
-    expect(beastsReadinessOf({ config: { monsterThreat: 'heartland' }, defenseProfile: { scores: { monster: 90 } } })).toMatchObject({ family: 'settled', grade: 'STRONG', settledAndWeak: false });
-    expect(beastsReadinessOf({ config: { monsterThreat: 'frontier' }, defenseProfile: { scores: { monster: 5 } } })).toMatchObject({ family: 'frontier', settledAndWeak: false });
+describe('beasts readiness against threat (pattern 9; RULING G22: read against the need)', () => {
+  test('settled country is graded no lower than Adequate; frontier and plagued are read as stored; real forces keep their grade', () => {
+    expect(beastsReadinessOf({ config: { monsterThreat: 'heartland' }, defenseProfile: { scores: { monster: 5 } } })).toMatchObject({ settled: true, score: 5, shownScore: 40, grade: 'ADEQUATE' });
+    expect(beastsReadinessOf({ config: { monsterThreat: 'heartland' }, defenseProfile: { scores: { monster: 90 } } })).toMatchObject({ settled: true, shownScore: 90, grade: 'STRONG' });
+    expect(beastsReadinessOf({ config: { monsterThreat: 'frontier' }, defenseProfile: { scores: { monster: 5 } } })).toMatchObject({ settled: false, shownScore: 5, grade: 'CRITICAL' });
+    expect(beastsReadinessOf({ config: { monsterThreat: 'plagued' }, defenseProfile: { scores: { monster: 25 } } })).toMatchObject({ settled: false, grade: 'WEAK' });
+    expect(beastsReadinessOf({ config: {}, defenseProfile: { scores: { monster: 5 } } })).toMatchObject({ settled: false, grade: 'CRITICAL' });
   });
 });
 

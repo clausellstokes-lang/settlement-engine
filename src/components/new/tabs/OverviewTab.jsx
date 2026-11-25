@@ -193,7 +193,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
 
   const eco = r.economicState || {};
   const dp = r.defenseProfile || {};
-  const scores = dp.scores || {};
+  const scores = scoresAsShown(r, dp.scores) || {}; // P9 (G22): the Monster Defense bar read against the need
   const magicReliance = deriveMagicRelianceView(r);
   const magicApart = magicMeasuresApartLine(r); // PAGE-1 MAGIC: what reliance and capability each count, where they sit apart
   const foodWord = foodWordShown(r); // the food word's one home (SURFACES-2 item 1)
@@ -625,3 +625,4 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
 }
 
 export default React.memo(OverviewTab);
+import { scoresAsShown } from '../../../domain/facts/beastsReadiness.js'; // P9 (RULING G22): the scores as printed (the beasts grade read against the need); at the file's end, so no cited line moves

@@ -282,7 +282,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier: publicD
   // F9 unit 1: Disasters & Famine takes the row's one score, held to Weak under an active
   // famine (threatAssessment.js :: disasterReadinessScore, which the PDF's rows read too).
   const threatScores = {
-    'Beasts & Monsters': scores.monster||0,
+    'Beasts & Monsters': beastsReadinessOf(r).shownScore, // P9 (G22): read against the need
     'Invasion & War': scores.military||0,
     'Internal Security': scores.internal||0,
     'Economic Survival': scores.economic||0,
@@ -731,3 +731,4 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier: publicD
 }
 
 export default React.memo(DefenseTab);
+import { beastsReadinessOf } from '../../../domain/facts/beastsReadiness.js'; // P9 (RULING G22): the beasts grade read against the need; at the file's end, so no cited line moves
