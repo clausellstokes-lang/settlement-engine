@@ -1,0 +1,1 @@
+batch 1 rc=0 04:31:44 seeds r2r-thorp-0,r2r-thorp-12,r2r-thorp-24,r2r-thorp-36,r2r-thorp-48,r2r-hamlet-0,r2r-hamlet-12,r2r-hamlet-24,r2r-hamlet-36,r2r-hamlet-48,r2r-village-0,r2r-village-12,r2r-village-24,r2r-village-36,r2r-village-48
