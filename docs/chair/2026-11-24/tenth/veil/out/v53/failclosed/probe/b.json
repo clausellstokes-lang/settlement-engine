@@ -1,0 +1,32 @@
+[
+ {
+  "i": 10,
+  "seed": "soak1k-10",
+  "key": "organized",
+  "owner": "One criminal ring decides what crime is allowed here. Its rules are predictable and it can be bargained with; it puts down random violence because that brings the law, and it lives on protection money and on any official it can buy.",
+  "localKey": "organized",
+  "local": "One criminal ring decides what crime is allowed here. Its rules are predictable and it can be bargained with; it puts down random violence because that brings the law, and it lives on protection money and on any official it can buy.",
+  "printedLocal": true,
+  "quietInPage": []
+ },
+ {
+  "i": 11,
+  "seed": "soak1k-11",
+  "key": "organized",
+  "owner": "Ask who runs crime here and the answer is one ring. It sets the rules and keeps to them, it can be bargained with, and it puts down any violence that would bring the law; it lives on protection money and on any official it can bribe.",
+  "localKey": "organized",
+  "local": "One criminal ring decides what crime is allowed here. Its rules are predictable and it can be bargained with; it puts down random violence because that brings the law, and it lives on protection money and on any official it can buy.",
+  "printedLocal": true,
+  "quietInPage": []
+ },
+ {
+  "i": 41,
+  "seed": "soak1k-41",
+  "key": "organized",
+  "owner": "Shopkeepers here pay one ring for protection, and the ring pays any official who will take its money. It stamps out random violence, which would bring the law, and its terms are known and can be negotiated.",
+  "localKey": "organized",
+  "local": "One criminal ring decides what crime is allowed here. Its rules are predictable and it can be bargained with; it puts down random violence because that brings the law, and it lives on protection money and on any official it can buy.",
+  "printedLocal": true,
+  "quietInPage": []
+ }
+]
