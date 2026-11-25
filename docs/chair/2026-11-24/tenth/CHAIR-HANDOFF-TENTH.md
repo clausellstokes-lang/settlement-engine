@@ -1301,3 +1301,7 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   bar of .30; the owner may veto: told him at 12:24).
   IN FLIGHT: LAND-117's gate; CLOSE-7 building GUARD-2 (R24n), then ANCHORS; D8 parked at
   `lane/birth-1-2026-11-25-d8-wip` cf5d033e5 with ONE red left (the register row: the owner's leave).
+- 2026-11-25 12:50 UTC · T101 · G15: A5 PARKED (it lands with the veil's cut, its reader); D8 parked with one red (the owner's leave). TWO OF THE BIRTH-MOVING ITEMS ARE THEREFORE NOT IN THE SECOND HAND-IN.
+  `gen/RULING-G.md` G14 and G15. FOR THE VEIL's RESUMPTION, FIRST IN ITS ORDER: A5 (`lane/birth-2-2026-11-25-a5-wip`,
+  BIRTH-2's hand-back) lands in one landing with unit 4's cut by the field, before the pools are re-born. BIRTH-2 goes
+  on with D4 and then asks the chair for a unit.

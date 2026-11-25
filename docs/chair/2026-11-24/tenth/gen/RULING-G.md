@@ -190,3 +190,15 @@ new line; (2) the fourth state measured; the bar: no cell's top line above .30; 
 with the food band the page prints (the count of thin-harvest or late-frost lines beside Secure: 0, or those lines
 read the printed band); (4) a calm village may print no tension line. THE OWNER MAY VETO: it changes what most calm
 small places are born saying.
+
+**G14 (12:50) AND ITS WITHDRAWAL, G15 (12:50 UTC): A5 IS PARKED UNTIL ITS READER LANDS WITH IT.** A5's field (`dmStanding` on
+each power) is written at birth and read by nothing under src (G1: every reader prints the description; the one
+reader to come is the paused veil's cut), so `tests/lint/writerReach.walker.test.js` reds it as a new dark identity
+(nine tests with its digest, mutant and lit arms). G14 ruled a hand-authored row in `scripts/lib/writer-dark-register.mjs`;
+BIRTH-2 stopped: that register takes a row only under three CLOSED reasons, each convicted by an executed clause
+(a door; a consumer under src; a surface it should reach), and none fits; the only growth door of its banked cohort is
+`--rebank --charter`; "a fourth reason is a charter act". RULED: G14 withdrawn. No re-bank, no fourth reason: both are
+acts on a shrink-only register. A5 lands WITH the share veil's cut of the description, at the head of the veil's
+resumption, in one landing with its reader. The branch `lane/birth-2-2026-11-25-a5-wip` keeps its proofs; the
+writer-reach reds are left red and named; it is not handed to CLOSE-7. THE CHAIR's WORD TO THE OWNER AT 09:10 AND 11:44
+(that A5 is in this batch) IS CORRECTED TO HIM.
