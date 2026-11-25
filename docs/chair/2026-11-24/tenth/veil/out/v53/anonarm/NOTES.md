@@ -81,3 +81,6 @@ criminal house hidden by `$veil` delta `card:institution:h`, its unlisted share,
 
 ## RULING V26
 - term (1)/(4): c2d9cf8a6 met (1) in SQL; comment amended (why + V26 + purity). Down sha 3ca5eac1... -> 7004a1c8...; hosted diff 0.
+- 79636ade9 (down comment), 8a809f298 (galleryVeilCures rollback block on bootHostedChain: red 4 ACL rows w/o re-grant; 212
+  compare green; block still red at 211-down = known two-211s: 134 part-A ACLs + _guard_server_owned_columns), page commit next.
+- owner page docs/chair/2026-11-24/tenth/veil/FOR-THE-OWNER-VEIL-ROLLBACK.md (none existed); its query on hosted 001..211 = expected.
