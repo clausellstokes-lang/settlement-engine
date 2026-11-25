@@ -28,7 +28,7 @@ import {
   KIND_OPTIONS, suggestedTagsForCampaign, campaignFacets, } from './galleryMapsUtils.js';
 import GalleryDescriptionEditor from '../GalleryDescriptionEditor.jsx';
 import CoverImageField from './CoverImageField.jsx';
-import WorldSectionToggles, { WORLD_SECTIONS } from './WorldSectionToggles.jsx';
+import WorldSectionToggles, { WORLD_SECTIONS, worldSnapshotShareOpts } from './WorldSectionToggles.jsx';
 import Button from '../primitives/Button.jsx';
 import {
   BORDER, BORDER2, CARD, CARD_ALT, sans, SP, FS, GREEN, GREEN_BG, RED, INK, BODY, MUTED } from '../theme.js';
@@ -159,9 +159,11 @@ export default function MapShareEditor({
   // fallback, never a write. The campaign-load SELECT omits the 088 gallery
   // columns, so the prop cannot be trusted as the persisted truth on first mount.
   const [importable, setImportable] = useState(undefined);
-  // The five living-world sections an owner may reveal. Default ALL ON; a saved
-  // share seeds from the persisted enabled-keys (an empty list still means "none
-  // on", so only a null/absent seed falls back to every key).
+  // The living-world sections an owner may reveal (WORLD_SECTIONS: no chronicle, see
+  // WorldSectionToggles' header). Default ALL ON; a saved share seeds from the persisted
+  // enabled-keys (an empty list still means "none on", so only a null/absent seed falls
+  // back to every key). A persisted key the editor no longer offers is held in the Set but
+  // never serialized or sent: enabledKeys and worldSnapshotShareOpts read offered keys only.
   const [enabledSections, setEnabledSections] = useState(() => new Set(
     Array.isArray(galleryWorldSections) ? galleryWorldSections : ALL_SECTION_KEYS,
   ));
@@ -276,15 +278,12 @@ export default function MapShareEditor({
   // Build the shareMap opts from the current draft. The world snapshot is the
   // public-safe projection of the live world, gated per section by the toggles;
   // it rides along only for a campaign share with at least one section on.
+  // SNAP-CHRONICLE (VEIL-52): the section opts come from worldSnapshotShareOpts, one
+  // boolean per OFFERED section, so a shared map's snapshot never carries `chronicle`
+  // (the server's scanner refuses it) whatever a stored selection says.
   function buildShareOpts() {
     const includeWorld = shareCampaign && anySectionOn;
-    const sectionOpts = {
-      worldClock: enabledSections.has('worldClock'),
-      chronicle: enabledSections.has('chronicle'),
-      pantheon: enabledSections.has('pantheon'),
-      warNetwork: enabledSections.has('warNetwork'),
-      dashboard: enabledSections.has('dashboard'),
-    };
+    const sectionOpts = worldSnapshotShareOpts(enabledSections);
     const snapshot = includeWorld
       ? serializeWorldSnapshotPublic(worldState, regionalGraph, memberList, sectionOpts)
       : null;
