@@ -86,7 +86,11 @@ export function withPowerSentenceNames(text) {
  */
 export function pluralPowerName(name) {
   const raw = typeof name === 'string' ? name.trim() : '';
-  const words = (raw ? powerSentenceName(raw) : '').split(/[\s/]+/).filter(Boolean);
+  const said = raw ? powerSentenceName(raw) : '';
+  // C1B (point 117; RULING-R24 R24r item 3): a name "X of Y" takes its number from X, its head noun the last word before
+  // " of " ("Council of Syndics" is one council; "Knights of the Rose" are many), measured first on the close's C and V
+  const of = said.indexOf(' of ');
+  const words = (of > 0 ? said.slice(0, of) : said).split(/[\s/]+/).filter(Boolean);
   const head = (words[words.length - 1] || '').replace(/[^A-Za-z']/g, '');
   return /[^s']s$/i.test(head);
 }

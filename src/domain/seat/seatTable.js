@@ -54,6 +54,7 @@
  */
 
 import { factionArchetype, FACTION_ARCHETYPES as A } from '../factionArchetypes.js';
+import { BOUGHT_HALL_NAMES } from '../../data/boughtHallNames.js';
 
 /** @typedef {'small' | 'town' | 'large'} SeatBand */
 /** @typedef {Readonly<Record<string, number>>} WeightedForms  form -> weight, in draw order */
@@ -233,15 +234,18 @@ const bareForm = (form) => String(form ?? '').trim().replace(/ Ascendant$/, '');
 
 /** Every form a row holds as its own: its bands and its alternate.
  *  @param {SeatRow} r @returns {string[]} */
-/** R24-C1 (CLOSE-7 BATCH; R24g (2)): the bought hall's three birth names are the criminal kind's OWN forms by exact name (the form
- *  reader and the pair check), beside the old forms its rows keep; they are never drawn (a DM's event installs from the rows'
- *  weighted bands alone, which this leaves untouched). @type {Readonly<Record<string, ReadonlyArray<string>>>} */
-const BIRTH_NAMED_FORMS = Object.freeze({ [A.CRIMINAL]: Object.freeze(['Council of Aldermen', 'Council of Syndics', 'Senate']) });
-const ownForms = (/** @type {SeatRow} */ r, /** @type {string} */ kind) => [...(r.alt ? [r.alt] : []), ...SEAT_BANDS.flatMap((b) => Object.keys(r.bands[b])), ...(BIRTH_NAMED_FORMS[kind] || [])];
+/** R24-C1 (CLOSE-7 BATCH; R24g (2)) and C1B (RULING-R24 R24r item 4): the bought hall's three birth names (`data/boughtHallNames.js`,
+ *  the one home) are a row's OWN forms by exact name wherever the old form each replaces is (the form reader and the pair check:
+ *  the criminal kind's), beside the old forms its rows keep; they are never drawn (a DM's event installs from the rows' weighted
+ *  bands alone, which this leaves untouched). */
+const ownForms = (/** @type {SeatRow} */ r) => {
+  const forms = [...(r.alt ? [r.alt] : []), ...SEAT_BANDS.flatMap((b) => Object.keys(r.bands[b]))];
+  return [...forms, ...BOUGHT_HALL_NAMES.filter((h) => forms.includes(h.oldName)).map((h) => h.birthName)];
+};
 
 /** form -> the first kind (in table order) whose own rows hold it. @type {ReadonlyMap<string, string>} */
 const FORM_KIND = new Map(Object.entries(SEAT_TABLE).reverse()
-  .flatMap(([kind, r]) => ownForms(r, kind).map((form) => /** @type {[string, string]} */ ([form, kind]))));
+  .flatMap(([kind, r]) => ownForms(r).map((form) => /** @type {[string, string]} */ ([form, kind]))));
 
 /**
  * THE FORM READER: the kind whose own rows hold a form ("<form> Ascendant" reads as its form), or
@@ -260,7 +264,7 @@ export function formKindOf(form) {
 export function pairLicense(kind, form) {
   const f = bareForm(form);
   const r = seatRowOf(kind);
-  if (ownForms(r, kind).includes(f)) return { pair: 'own', circumstance: null };
+  if (ownForms(r).includes(f)) return { pair: 'own', circumstance: null };
   if (Object.hasOwn(r.licenses, f)) return { pair: 'licensed', circumstance: r.licenses[f] };
   if (formKindOf(f) !== A.GOVERNMENT || kind === A.CRIMINAL) return { pair: 'none', circumstance: null };
   return { pair: CIVIC_HOLDER_KINDS.includes(kind) ? 'civic' : 'fallback', circumstance: null };
