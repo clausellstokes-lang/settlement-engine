@@ -261,3 +261,19 @@ more is built. D6's fault was a page contradicting itself (a contender beside a 
 unbound challenger with no quarrel contradicts nothing printed. The other course (present tense only where a quarrel
 with the holder is recorded) would also have to move the ruler's "Contested" and the heading: a redesign of the
 section's words, not a cure. NAMED FOR THE OWNER'S VETO with the two figures.
+
+**G22 (15:33 UTC): P9, THE BEASTS GRADE ON SETTLED LAND IS READ AGAINST THE NEED.** BIRTH-2's measure at 0ec96f13d8: C 0 of
+900 (every C birth is frontier country), V 129 of 900 print a CRITICAL (118) or WEAK (7) beasts grade beside "settled,
+nothing organized", and 4 print "defenses beyond the need" under CRITICAL or WEAK; every land; 102 score exactly 0.
+THE CAUSE READ: the grade is `scoreBand(defenseProfile.scores.monster)`, a readiness; `data/defenceWeights.js ::
+DEFENCE_TUNING.threat` gives settled country neither the folk ground nor the penalty, so a heartland place with no
+force is 0; the line reads the threat and is true. THE WRONG READER IS THE GRADE (the owner's rule: a rating low because
+a place is small is no danger). RULED: in settled country the grade is no lower than ADEQUATE, through the one leaf
+(`facts/beastsReadiness.js :: beastsReadinessOf`), for every printer (the Defense tab's row, `threatAssessment.js`,
+`defenseDisplay.js`, DS-GEN-3's band key). THE STORED SCORE DOES NOT MOVE. The 2026-11-12 ruling (CHARTERS-SECOND-WAVE
+pattern 9: "settled country graded weak gets its own authored situation") IS WITHDRAWN BY THIS ONE, under the owner's
+deferral of 2026-11-25: it needed new words and left CRITICAL printed over quiet land. The check over every birth with
+an independent oracle (raw `config.monsterThreat`, the printed grade): 0 on C and V, page and PDF; a walker: no printer
+reads the band except through the leaf. Expected move: C 0, V about 175 pages (129 + 46 settled towns graded low with
+no line), record hashes 0; a stop at V over 200 or any birth moved. Unit `-p9-wip`; BIRTH-2's last unit, its 620,000
+mark lifted for it. NAMED FOR THE OWNER'S VETO.
