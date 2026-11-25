@@ -425,3 +425,23 @@ ONE THING OWED IN THE "TIP? R4-IDS" LINE: the name of the COMMITTED test that ke
 a served document" standing on both pools: the fixed-path list is closed, and a new engine field that holds a person's
 id must turn something red. THE GRANT THEN WAITS ONLY ON THE PROOFS' END (m140, the stored arm, the pool, both gates,
 `tests/security` whole, the named files): the chair answers the table in one word.
+
+## RULING V18 (added 02:47 UTC on 2026-11-25): UNIT 2 (R4-IDS) IS GRANTED
+"TIP? R4-IDS 8430edf5c" (VEIL-55, 02:47 UTC; its file `v55/TIP-R4-IDS.md` at be79e999f on `lane/veil-55-2026-11-24`).
+ITS TABLE, CONFIRMED by it in its own container (VEIL-50's red rows taken as that seat's record on the unmoved tree):
+today-born unmoved 0 of 6,720; the six security files 117 of 117; the rollback: 001..211 and 212 and its down file equals
+001..211 (an empty diff), one drawer, 0 functions not VOLATILE in its closure, 0 salt carriers open to anon or
+authenticated, smoke rc 0; the form's control bites on the red tree (THE GAP 456 / 443 / 35 at every door) and reads 0
+on the tree; the form on the gate's 140, the today-born stored 140 and the master-born stored 140: L1 0 of 3,360 each
+(the master-born: N106's 352 to 0), 0 stored ids served, L2 84 = N117 (unit 3's) on the first two and 0 on the
+master-born; the stored arm on both sets: 0 stored ids, 0 withheld names in ids, 0 shared ids, controls 700 of 700; a
+new pool and its verify (45 re-read, 0 differ); THE GATES EQUAL TO THE STANDING FIGURES (GATE-1 4 of 92, GATE-2 20
+cells: not worse; R3 is phase 2's); `tests/security` WHOLE 169 files, 2,113 passed, 1 skipped, 0 failed; the 34 named
+files 866 passed, 1 skipped, 0 failed. THE STANDING TEST the chair asked for: `galleryVeilIds.pglite.test.js`, its arm
+over the WHOLE served document and marker (every string and key, no path list), born towns in both stored shapes and
+the plant, every marker and Reveal, server and twin; with `criminalSwitchHandReach`. One instrument limit named in the
+seat's file (the frozen form's canon comparison predates the member re-key; the aligned form reads 0).
+**GRANTED at 02:46 UTC.** The lane's tip: `lane/veil-55-2026-11-24-tip` at 8430edf5c (a fast-forward of b58abc48b).
+THEN: "R4-IDS MERGED" to the chair and the seats; unit 1 merged above it with its header item renumbered (37) and its
+slice re-run; then the quiet-box items; unit 4's 212 edit (VEIL-51) and unit 3 (VEIL-52) each on that tip, each hunk
+read whole by the chair before its grant.

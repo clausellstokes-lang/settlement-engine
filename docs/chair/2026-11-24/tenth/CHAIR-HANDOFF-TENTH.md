@@ -934,3 +934,16 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   marker's tell, measured: 528 of 1,177 hiding reads on 17 places (it bears V15 out). LAND-116: lint, the typechecks,
   the build and `tests/build` done by 01:47; THE WIDE GATE running since about 01:48 (70 files reported by 02:33).
   CLOSE-7 waits on its mirror builder. The hourly check is re-armed for 03:35 UTC.
+- 2026-11-25 02:47 UTC · T71 · UNIT 2 (R4-IDS) GRANTED (V18); THE MIRROR MERGED; LIVE-PATH MEASURED; VEIL-51 STAYS AND TAKES UNIT 5.
+  V18: every proof of unit 2 green in VEIL-55's container; the chair's read was V17; the lane's tip is to be
+  `lane/veil-55-2026-11-24-tip` at 8430edf5c; unit 1 merges above it. CLOSE-7 (02:35): THE MIRROR merged on `-cures` at
+  e2fd7caa4 (red first on C 4 and V 3, 0 after; born records 0; the new atom `food production: ≥ adequate` and the two
+  lines K1 and K2 for the owner's veto list; the row named FEDFARE accepted). CLOSE-7 (02:44): LIVE-PATH
+  (`close-7/reports/LIVE-PATH.md`): the real decree on 180 master-born saves: ON THE LINE 113 of 180 places move
+  (houses 65, powers 51, government 7, events 63), every person keeps the name (the layer pins the cast), 132 people
+  in 41 places belong to a house or power that is gone; MASTER'S CONTROL 4 of 180 (four thorps: the decree adds a power
+  and rewrites five stress rows on master itself: to be reported by cause in GUARD's proof (c)). The owner is told.
+  GUARD began at 02:44 in CLOSE-7's builder, cut at e2fd7caa4. VEIL-51 announced a hand-over at 02:35 under the old
+  mark rule (it had not been told T61's): told to stay, its hand-back whole at 3589462c9; it takes UNIT 5's measure
+  (the legacy names; the brief is START-VEIL-54's unit steps) while "R4-IDS MERGED" was awaited, then unit 4's code
+  first. So every unit of phase 1 has a seat and VEIL-54 is not needed.
