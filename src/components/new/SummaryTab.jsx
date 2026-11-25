@@ -17,6 +17,7 @@ import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
 import { edged } from '../../design/edgedBox.js';
 import { governingModifierWordsOf } from '../../domain/display/governingModifierWords.js';
+import { powersStrongestFirst } from '../../domain/display/powersStrongestFirst.js'; // D4 (BIRTH-2): the stored roster is not always strongest-first; the page sorts
 
 // Tier 7.19 — `second` was the per-file body-copy alias for '#6b5340'.
 // Routing it through `BODY` from tabConstants centralises future contrast
@@ -34,7 +35,7 @@ function characterSentence(r) {
   const sl=g.safetyProfile?.safetyLabel||'';
   const prosperity=g.prosperity||'Moderate';
   const stability=ps.stability||'Stable';
-  const ruling=ps.factions?.[0]?.faction||((['thorp','hamlet'].includes(tier)?'the household heads':['village'].includes(tier)?'the village elders':'the local council'));
+  const ruling=powersStrongestFirst(ps.factions)[0]?.faction||((['thorp','hamlet'].includes(tier)?'the household heads':['village'].includes(tier)?'the village elders':'the local council'));
   const age=p.age;
   const recentConflict=ps.recentConflict||'';
   const tradeDesc={port:'coastal port',river:'river settlement',crossroads:'crossroads market',road:'road-side settlement',isolated:'isolated settlement'}[tradeKey]||'settlement';
@@ -124,7 +125,7 @@ function SummaryTab({ settlement:r }) {
 
   const {name,tier,population:pop,institutions:g=[],npcs:w=[],conflicts:allConflicts=[],economicState:eco={},spatialLayout:spatial,powerStructure:ps={},history:hist={},economicViability:via,settlementReason:reason,config:cfg={},stress:stressRaw,prominentRelationship:pr,coherenceNotes:_cn=[]}=r;
   const stresses=(Array.isArray(stressRaw)?stressRaw:stressRaw?[stressRaw]:[]).filter(Boolean);
-  const allFactions=ps?.factions||[];
+  const allFactions=powersStrongestFirst(ps?.factions); // D4 (BIRTH-2): the copy text's three, the Power tile and the bar's five read strongest first
   const tradeAccess=(cfg.tradeRouteAccess||'road').replace(/_/g,' ');
   const tierLabel=TIER_LABELS[tier]||tier;
   const firstQuarter=spatial?.quarters?.[0];
