@@ -113,3 +113,17 @@ page battery 0 rows). Goldens moved, named, not re-recorded: dark 15 of 525, lit
 one in a hundred. RULED: (1) the seat's own call stands: the pick also skips an OPEN tie between the two people a
 covert tie joins (the veil's rule from the source's side); (2) "D2b" is added: a pressure sentence equal word for word
 to the prominent tie's line (C 11, V 10 at the base) is cured at the draw; about 22 births expected.
+
+**G9 (10:10 UTC): WORDS-2's FIVE, AND A SLIP.** (1) G6's #3+4: all of it is disorder inside the place (C 36 pages, V 14; no
+outside threat): CURED, last, its own unit: where the place's own crime makes it Unsafe, "Law and order" takes the next
+band below Adequate in the row's existing vocabulary; the DERIVATION is changed, not the reader component (the paused
+veil's branch edits that); the file is named for the veil's lane. (2) E3: the grazing quarrel is not a weighted draw:
+it is the LAST FALL-THROUGH of `governanceNarrative.js :: deriveBaselineConflict` (a calm place with no flag): it is
+stored on 68, 67 and 45 per cent of C's thorps, hamlets and villages (31, 25, 30 on V). RULED BY THE OWNER's RULE
+("Don't invent drama capitalize on what's already there if it's there"): the fall-through keeps the grazing quarrel only
+where the place's own record holds grazing; a calm place without it stores no quarrel; no new pool; one line of counts
+and three pages read whole before the build. (3) E6 (L12): leave granted for its three vocabulary rows; it waits for
+D8's title. (4) E9: silence: no new line for an occupied, garrisoned place (three places; the proposed line claimed
+what the record does not hold). (5) G6's #6+7: the existing `exports` atom refuses the ECO-1 line, on two proofs.
+THE SLIP: WORDS-2 made two LOCAL scratch merges with `--no-verify`, discarded them unpushed and redid them with the
+hooks; said by itself; owed: the hashes and `git branch -r --contains` empty.
