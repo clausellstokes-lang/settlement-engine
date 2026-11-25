@@ -31,8 +31,11 @@ const servicesOf = (town, house) => Object.values(town.availableServices || {}).
 describe('W2-FIX-DATA-6: the census writers in the data lane\'s files', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); }, 120_000);
 
-  test('CENSUS-2 b: under a siege the coaching inn takes no traveller off the road and sends no relay out (r2s-under_siege-town-1); a calm town keeps both lines (r2r-town-2)', () => {
-    const besieged = servicesOf(bornCensus('r2s-under_siege-town-1'), 'Coaching inn').map((v) => String(v.desc));
+  // RE-PICKED (point 117, ruling 117-1, 2026-11-25): r2s-under_siege-town-1 is a desert town, and under the close's B1(i)
+  // (the desert withholds fish, timber and game) its birth no longer seats a Coaching inn; the lowest r2s-under_siege-town
+  // whose inn deals both of its siege lines is town-29 (town-0's inn deals the beds line alone). The assertions are unchanged.
+  test('CENSUS-2 b: under a siege the coaching inn takes no traveller off the road and sends no relay out (r2s-under_siege-town-29); a calm town keeps both lines (r2r-town-2)', () => {
+    const besieged = servicesOf(bornCensus('r2s-under_siege-town-29'), 'Coaching inn').map((v) => String(v.desc));
     expect(besieged.filter((t) => /for travelers on the road|Reduces travel time/.test(t))).toEqual([]);
     expect(besieged).toContain('Beds, meals, and stabling, though with the roads held the rooms stand mostly empty.');
     expect(besieged).toContain('Relay horses kept for coaches and dispatch riders; while the siege holds the roads, none go out.');
