@@ -357,6 +357,15 @@ THE PLAN OF UNIT 4's MERGE M (written 05:1x, BEFORE any resolution; worktree /ho
     (after N4): V25's arm 1 on the owner-hidden power at Reveal off now withheld whole; class (ii)'s arm. P4 (5): the census's
     master oracle = master's writer run from a db832c892 tree (an env-gated measure, STANDWALK_MASTER_TREE). P5 (6): the
     re-measure, offline through the twin with the stored row, every power hidden in turn, Reveal off and DM, both pools.
+  V27 (1) BUILT BY P1-P2 (LOCAL 483d95861 on lane/veil-51-2026-11-24-v27-wip, worktree /home/user/wt/v27, cut at 802578955 while
+    N5 runs in r5desc; merged into r5desc after): the stored belt in both engines before the house gate; the 5-argument
+    `_gallery_veil`, the 3-argument roster choices, their wrappers, the three 212 doors pass the stored row; the rollback drops
+    both new forms. PROBES (CONFIRMED, `u4/v27twin.mjs`, `u4/probe.sql`): the 107 (3) record, hand-hidden Craft Guilds, Reveal
+    off: twin and server serve the Trade Compact's desc without the stored row, WITHHOLD IT WHOLE with it; at DM the host is
+    served and the desc stays. 212 apply/down/reapply rc 0. RUNNING: the light walkers (`/var/tmp/v51/out/v27/walk.log`);
+    V27 (5)'s writer oracle in STANDWALK's census (master's writer from /home/user/wt/master, STANDWALK_MASTER_TREE), red first
+    on the pre-N2b table (`u4/v27oracle.sh`); V27 (6)'s re-measure (`u4/v27measure.mjs`, one process a pool,
+    /var/tmp/v51/out/v27/v27m-*.txt). N5 so far: DESCARM 2/2 GREEN (unit 4's red turned), galleryWithholdAlways 9/9.
   THE PLAN OF UNIT 5, U (V20; written before any edit; built on lane/veil-51-2026-11-24-r5desc-wip after unit 4's last commit, riding
     with it by the efficiency rule; red first on a slice; its 212 hunk goes to the chair with unit 4's in ONE "TIP?"):
     U1 THE TWIN, host `galleryRosterChoices.js :: withholdPowerCopies` (R3's people pass; the namer `withheldPowerNamer` = the lane's
@@ -429,6 +438,7 @@ RULING V1 (the tenth chair, 21:20 UTC 2026-11-24) whole. N90 (the whole-document
 N99. ppkey on the full pool is NOT re-run (0 of 46,752 per door at ced3b1de7) unless the tree's 212 or twin moves.
 
 ## 3. Log (every hour from `date -u`)
+- 07:48 V27 (1) built (local 483d95861; the probes withhold 107 (3) in both engines); (5) and (6) running.
 - 07:31 RULING V27 read; V27 (3) sent (the map door: STOP); the early 'whole' gate found; plan P written before any edit.
 - 07:27 N4 dispatched; N5 slices running; unit 5's plan U written before any edit.
 - 07:25 N3 (a5e77c820) and item 5 (802578955) local; two inherited reds read against 04cfe6d85.
