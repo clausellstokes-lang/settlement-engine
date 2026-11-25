@@ -505,7 +505,7 @@ registerStep('assembleSettlement', {
   // config + _config) that keeps a what-if regeneration from erasing what the
   // DM's events did. Order matters: re-promotion dedupes against the
   // GENERATION-stamped twins the stressor promotion just minted.
-  return { settlement: settleMeritsTail(pins, reapplyEventConditions(promoteStressorsToConditions(normalizeSettlement(settlement)))) }; // FORTUNE U5a (the chair's ruling (A), 18:38 UTC): the merits of rule, the step's TAIL (`settleMeritsTail`, at the END)
+  return { settlement: settleMeritsTail(pins, reapplyEventConditions(promoteStressorsToConditions(normalizeSettlement(Object.assign(settlement, { generatorVersion: GENERATOR_VERSION }))))) }; // GUARD (R24j 2): a BIRTH stamps the engine (a load never does). FORTUNE U5a (the chair's ruling (A), 18:38 UTC): the merits of rule, the step's TAIL (`settleMeritsTail`, at the END)
 });
 import { keepOfRecord } from '../../domain/facts/keep.js'; // at the END on purpose: this file's writes are cited by LINE (COHERENCE-UPKEEP)
 import { settleFundingReasons } from '../structuralValidator.js'; import { keptGuardLine, purseWordOfBand } from '../safetyProfile.js'; import { economicSurvivalBandOf } from '../../domain/display/defenseScoreBands.js'; import { standingLabelOf } from '../../domain/facts/keep.js'; // at the END for the same reason (COHERENCE-UPKEEP-6)
@@ -575,3 +575,4 @@ function settleMeritsTail(pins, settlement) {
 import { settleMeritsOfRule } from '../../domain/fortune/fortuneMerits.js';
 import { legitimacyBandFor, withCaptureRelations } from '../factionDynamics.js';
 import { settleStandingToLegitimacy } from '../power/rosterText.js';
+import { GENERATOR_VERSION } from '../../domain/settlement.schema.js'; // GUARD (R24j 2): at the END, as above (this file's writes are cited by LINE)

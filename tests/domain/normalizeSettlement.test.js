@@ -12,7 +12,7 @@ import { normalizeSettlement, isNormalized } from '../../src/domain/normalizeSet
 import {
   SCHEMA_VERSION,
   SIMULATION_VERSION,
-  GENERATOR_VERSION,
+  LEGACY_GENERATOR_VERSION,
 } from '../../src/domain/settlement.schema.js';
 
 const sampleLegacy = () => ({
@@ -30,7 +30,9 @@ describe('normalizeSettlement()', () => {
     const out = normalizeSettlement(sampleLegacy());
     expect(out.schemaVersion).toBe(SCHEMA_VERSION);
     expect(out.simulationVersion).toBe(SIMULATION_VERSION);
-    expect(out.generatorVersion).toBe(GENERATOR_VERSION);
+    // GUARD (R24j 2): a load gives a stampless record the LEGACY engine, never the current one
+    // (the current version is written at birth alone), so a load cannot make an old place look new-born.
+    expect(out.generatorVersion).toBe(LEGACY_GENERATOR_VERSION);
   });
 
   it('does not overwrite existing version fields', () => {
