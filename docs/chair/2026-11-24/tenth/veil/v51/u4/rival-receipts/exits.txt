@@ -1,0 +1,10 @@
+sha256 rc=0 2026-11-24T23:55:39Z
+make-dbs rc=0 2026-11-24T23:55:40Z
+apply-212 rc=0 2026-11-24T23:55:40Z
+apply-212-then-rollback rc=0 2026-11-24T23:55:40Z
+rollback-equals-211 rc=0 2026-11-24T23:55:40Z (480 functions)
+catalogue-212 rc=0 2026-11-24T23:55:40Z (519 functions, 79 _gallery_veil*)
+veil-executable-by-anon-or-authenticated rc=0 2026-11-24T23:55:40Z (count 0)
+rosterChoiceRegistry.mjs --check rc=0 2026-11-24T23:55:40Z
+standingForms.mjs --check rc=0 2026-11-24T23:55:41Z
+arm tests/security/galleryVeilRival.pglite.test.js INTERRUPTED by the container's restart ~01:03 (held the lock from 00:53; no result); logs kept in interrupted-0103/
