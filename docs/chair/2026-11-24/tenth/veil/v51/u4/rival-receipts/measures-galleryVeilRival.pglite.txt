@@ -1,1 +1,6 @@
 R5DRV plants: faults 0 
+R5DRV pools: {"places":27,"births":61,"rivals":43,"rivalsGoverning":0,"rivalsOwnStamp":0,"records":69,"reads":1104,"rivalReads":1856,"rivalServed":1152,"lone":0,"q3Shown":16,"q3Own":16,"rosterMiss":0,"baseDiff":0,"q3Listed":32}
+R5DRV Q3 forms (setting, form, withheld, in the desc of, text: reads): 
+  shown | singular+lower | Noble Families | Royal Authority | noble family: 16
+  own | singular+lower | Noble Families | Royal Authority | noble family: 16
+R5DRV pool faults 0 
