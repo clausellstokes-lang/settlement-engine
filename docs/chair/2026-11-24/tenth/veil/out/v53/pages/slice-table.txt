@@ -1,50 +1,54 @@
-SLICE 15 births (errors 0; restore loop on 14); classes {"CHANGED":32,"LOST":33}
+SLICE 30 births (errors 0; restore loop on 28); classes {"LOST":83,"CHANGED":51,"GAINED":1}
 BY KEY (all tabs):
-  safety.capture/ratio/crimeTypes                              {"LOST":18,"GAINED":0,"CHANGED":5}
-  power.stability                                              {"LOST":0,"GAINED":0,"CHANGED":9}
+  safety.capture/ratio/crimeTypes                              {"LOST":59,"GAINED":1,"CHANGED":11}
+  power.stability                                              {"LOST":0,"GAINED":0,"CHANGED":17}
+  history.legacy/siegeNarrative                                {"LOST":0,"GAINED":0,"CHANGED":12}
+  power.recentConflict                                         {"LOST":10,"GAINED":0,"CHANGED":0}
   other:powerStructure                                         {"LOST":0,"GAINED":0,"CHANGED":8}
-  history.legacy/siegeNarrative                                {"LOST":0,"GAINED":0,"CHANGED":7}
-  legitimacy.multipliers/flags                                 {"LOST":5,"GAINED":0,"CHANGED":0}
-  power.factions.niche/rawPower/legitimacyCrisis               {"LOST":5,"GAINED":0,"CHANGED":0}
-  power.recentConflict                                         {"LOST":5,"GAINED":0,"CHANGED":0}
+  legitimacy.multipliers/flags                                 {"LOST":7,"GAINED":0,"CHANGED":0}
+  power.factions.niche/rawPower/legitimacyCrisis               {"LOST":7,"GAINED":0,"CHANGED":0}
   defence.readiness.score                                      {"LOST":0,"GAINED":0,"CHANGED":2}
   conditions.severity                                          {"LOST":0,"GAINED":0,"CHANGED":1}
 BY TAB x CLASS x KEY, up to three pairs from distinct births:
-  Systems/Economics|LOST|safety.capture/ratio/crimeTypes  n=18
-      r2r-hamlet-24: "Shadow Economy: 12% of trade unrecorded▲"
-      r2r-hamlet-48: "Shadow Economy: 11% of trade unrecorded▲"
-      r2r-village-24: "Shadow Economy: 22% of trade unrecorded▲"
-  Systems/Power|CHANGED|power.stability  n=9
+  Systems/Economics|LOST|safety.capture/ratio/crimeTypes  n=58
+      r2r-city-0: "Shadow Economy: 16% of trade unrecorded▲"
+      r2r-city-12: "Shadow Economy: 25% of trade unrecorded▲"
+      r2r-city-24: "Shadow Economy: 13% of trade unrecorded▲"
+  Systems/Power|CHANGED|power.stability  n=17
+      r2r-city-0: "Tense — regional monster threat  =>  Tense"
+      r2r-city-12: "Unstable (pervasive organized crime)  =>  Unstable"
       r2r-hamlet-0: "Critical (under siege)  =>  Critical"
-      r2r-hamlet-24: "Desperate — hunger is eroding order  =>  Desperate"
-      r2r-hamlet-36: "Tense (monster pressure from surrounding region)  =>  Tense"
-  World/Daily Life|CHANGED|history.legacy/siegeNarrative  n=7
+  World/Daily Life|CHANGED|history.legacy/siegeNarrative  n=12
+      r2r-city-0: "The Siege still shapes how people here go about things. Beasts now roam the country around, and people keep close to home.  =>  Beasts now roam the country around, and people keep close to home."
+      r2r-city-12: "Ask how things came to be as they are here, and the Guild War soon comes up.  =>  Life goes on as usual, and nobody can point to anything new."
       r2r-hamlet-0: "The Schism still shapes how people here go about things. War is close enough now to be felt in everyday business and in the mood of the place.  =>  War is close enough now to be felt in everyday business and in the mood of the place."
-      r2r-hamlet-24: "People here still talk of the Shortage, and of what it changed. The shortage of food has grown into a trouble the whole place shares.  =>  The shortage of food has grown into a trouble the whole place shares."
-      r2r-hamlet-36: "The Pilgrimage still shapes how people here go about things. War is close enough now to be felt in everyday business and in the mood of the place.  =>  War is close enough now to be felt in everyday business and in the mood of the place."
-  Systems/Power|CHANGED|other:powerStructure  n=6
-      r2r-village-48: "Contests the seatReligious27▼  =>  Contests the seatReligious33▼"
-  Summary/Foundations|CHANGED|safety.capture/ratio/crimeTypes  n=5
+  Summary/Foundations|CHANGED|safety.capture/ratio/crimeTypes  n=11
+      r2r-city-24: "Criminal opportunityElevated  =>  Criminal opportunityContained"
+      r2r-city-36: "Criminal opportunityElevated  =>  Criminal opportunityContained"
       r2r-hamlet-0: "Criminal opportunityElevated  =>  Criminal opportunityContained"
-      r2r-hamlet-48: "Criminal opportunityElevated  =>  Criminal opportunityContained"
-      r2r-village-12: "Criminal opportunityElevated  =>  Criminal opportunityContained"
-  Systems/Power|LOST|legitimacy.multipliers/flags  n=5
+  Summary/Overview|LOST|power.recentConflict  n=10
+      r2r-city-0: "Two guild masters are having each other's warehouses robbed. Both deny it publicly. Both are losing patience."
+      r2r-city-36: "The Ecclesiastical Council has been debating market levies for three months. The merchants have argued against every one of them, and nothing has been settled yet."
+      r2r-city-48: "The Noble Governorship has been debating market levies for three months. The merchants have argued against every one of them, and nothing has been settled yet."
+  Systems/Power|LOST|legitimacy.multipliers/flags  n=7
       r2r-hamlet-0: "Governance fractured."
       r2r-hamlet-24: "Governance fractured."
       r2r-hamlet-36: "Governance fractured."
-  Systems/Power|LOST|power.factions.niche/rawPower/legitimacyCrisis  n=5
+  Systems/Power|LOST|power.factions.niche/rawPower/legitimacyCrisis  n=7
       r2r-hamlet-0: "⚠"
       r2r-hamlet-24: "⚠"
       r2r-hamlet-36: "⚠"
-  Summary/Overview|LOST|power.recentConflict  n=5
-      r2r-hamlet-48: "A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another."
-      r2r-thorp-0: "The most devout households want a say over who may trade and when, and not everyone here agrees."
-      r2r-thorp-12: "The most devout households want a say over who may trade and when, and not everyone here agrees."
+  Systems/Power|CHANGED|other:powerStructure  n=6
+      r2r-village-48: "Contests the seatReligious27▼  =>  Contests the seatReligious33▼"
   Summary/Foundations|CHANGED|defence.readiness.score  n=2
       r2r-thorp-0: "Defense readinessStrained  =>  Defense readinessAdequate"
       r2r-thorp-48: "Defense readinessStrained  =>  Defense readinessAdequate"
   Summary/Foundations|CHANGED|conditions.severity  n=1
       r2r-hamlet-36: "Labor capacityStrained  =>  Labor capacityCritical"
+  Summary/Foundations|LOST|safety.capture/ratio/crimeTypes  n=1
+      r2r-town-0: "Law & orderCritical"
+  Summary/Foundations|GAINED|safety.capture/ratio/crimeTypes  n=1
+      r2r-town-0: "Law & orderStrained"
   Summary/Foundations|CHANGED|other:powerStructure  n=1
       r2r-village-48: "Ruling authorityAdequate  =>  Ruling authoritySurplus"
   World/Daily Life|CHANGED|other:powerStructure  n=1
