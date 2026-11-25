@@ -73,3 +73,10 @@ must red this arm if the import forgets it: prove that by a planted extra row or
 RED FIRST on vr26-city-calm-3 (stored defense 0, re-derived 10; `r5.out`'s IMPORT line), and the VR26 FIDELITY and MAIN reds.
 SAY, CONFIRMED BY THE ARM: whether the SEAT law (`_seatLawVersion`) is forgotten in the import too (VEIL-53's read, PLAUSIBLE:
 no callee of `rederiveInPlace` reads it; `computeBaseProsperity` already reads the fortune law from the config it is handed).
+
+UNIT E, AMENDED (the chair via VEIL-55, 00:10 UTC 2026-11-25): THE LINE IS 0559a8405 (point 115): `GENERATION_LAWS` gains a
+FIFTH row, `_troubleLawVersion` (the troubles law, landed DARK). The trial join (ba7460c33, point 114) holds FOUR rows and is
+NOT re-made by you. So: the cure carries the laws GENERICALLY (every row of `GENERATION_LAWS` by its `configKey`, read at run
+time; NO law named or counted by hand in the cure or in the arm), and the arm proves it by a PLANTED FIFTH ROW (a law row added
+in the test, restored in one block: the import must carry it or the arm reds), so that at the join, where the fifth row is real,
+the same arm walks five rows with no edit. Say in the commit message: "rows walked at ba7460c33: 4; the arm has no count".
