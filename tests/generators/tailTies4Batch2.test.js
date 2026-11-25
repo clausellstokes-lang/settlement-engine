@@ -52,15 +52,17 @@ const NOT = [
   // B1(i) their births re-deal their houses and ties (city-39 loses six houses, metropolis-12 two), so the ties no longer draw
   // these lines. The lowest r2r-city whose mil_crim_suppression tie draws "Someone among" with its military end the Garrison
   // is city-40 (35 and 42 are a watch's); the lowest r2r-metropolis whose tie draws variant 7's two lines with its military
-  // end the Citadel (its castellan) is metropolis-193 (no lower carrier's tie names the castellan). The famine pair below (r2s-famine-city-1, a desert town) is NOT re-picked: no r2s-famine-city 0 to 199 and no
-  // r2r-city 0 to 199 draws "colours and take"; left for the chair.
+  // end the Citadel (its castellan) is metropolis-193 (no lower carrier's tie names the castellan).
   ['r2r-city-40', "command reports to", 'Garrison', "Someone among"],
   ['r2r-metropolis-193', 'operation street by street', 'Citadel', "operation out street by street"],
   ['r2r-metropolis-193', 'ordered to stand down against', 'Citadel', 'cannot refuse. Nobody has said why.'],
   ['r2s-wartime-town-3', "company after the last caravan was lost", 'Town watch', "people after the last caravan was lost"],
   ['r2s-wartime-town-3', "company under the watch's command", 'Town watch', "people answerable to the council alone"],
-  ['r2s-famine-city-1', "colours on the road", 'Garrison', "colours and take"],
-  ['r2s-famine-city-1', "company was killed protecting", 'Garrison', "people was killed protecting"],
+  // RE-PICKED BY A WIDER SEARCH (ruling 117-3, point 117, 2026-11-25): r2s-famine-city-1 (a desert town) under B1(i) no
+  // longer seats the furrier whose Garrison contract (econ_mil_contract, line 5) drew these lines; searching r2s-famine-city
+  // in order, the first place whose Garrison tie draws them is r2s-famine-city-347 (875 Garrison ties seen in 0 to 347).
+  ['r2s-famine-city-347', "colours on the road", 'Garrison', "colours and take"],
+  ['r2s-famine-city-347', "company was killed protecting", 'Garrison', "people was killed protecting"],
   ['r2r-city-13', 'company has taken on a second client', 'Garrison', 'has learned who.'],
   ['r2r-city-13', 'company guards', 'Professional city watch', "people guard"],
 ];
