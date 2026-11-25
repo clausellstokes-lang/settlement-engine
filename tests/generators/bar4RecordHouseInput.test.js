@@ -62,6 +62,20 @@ const gapLineOf = (/** @type {string} */ chainKey, /** @type {string} */ house) 
   return `No ${spec.noun} ${spec.plural ? 'reach' : 'reaches'} the ${house}.`;
 };
 
+// B1(i) withholds this house from a desert at birth; the case stands for a house that arrives after birth (ruling 117-2,
+// point 117, 2026-11-25). r2r-village-69 is a desert village: its birth at the line's base ddca5c789 seated a Sawmill and
+// called it short of timber; under the close's B1(i) it seats none. The record below is the merged birth of r2r-village-69
+// plus the base birth's Sawmill and its two gap rows, COPIED VERBATIM from that base birth; no other key is touched.
+const SAWMILL_FROM_BASE = Object.freeze({"category":"Crafts","name":"Sawmill","required":false,"baseChance":0.35,"desc":"Powered by water or ox, the saw reduces logs to planks and beams whenever logs can be had, for building timber and furniture.","tags":["trade","timber"],"priorityCategory":"crafts","source":"generated","catalogId":"sawmill"});
+const SAWMILL_GAPS_FROM_BASE = Object.freeze([{"chain":"timber","institution":"Sawmill","kind":"missing","impact":"Sawmill exists but lacks access to timber","severity":"high"},{"chain":"mountain_timber","institution":"Sawmill","kind":"missing","impact":"Sawmill exists but lacks access to mountain_timber","severity":"high"}]);
+/** @returns {any} the merged birth of REKEYED.sawmill with the base birth's Sawmill and its gap rows */
+const sawmillArrived = () => {
+  const town = structuredClone(BORN.get(REKEYED.sawmill));
+  town.institutions = [...town.institutions, structuredClone(SAWMILL_FROM_BASE)];
+  town.resourceAnalysis.gaps = [...town.resourceAnalysis.gaps, ...structuredClone(SAWMILL_GAPS_FROM_BASE)];
+  return town;
+};
+
 describe('R1: a house the record calls short of its input is short on the page too (one reading, houseInputAtHand)', () => {
   it('the detector reads zero in every census town where it fired at c4ac1ef84a', () => {
     expect(FIRST).toHaveLength(64);
@@ -80,7 +94,7 @@ describe('R1: a house the record calls short of its input is short on the page t
   });
 
   it('POSITIVE CONTROL: a short sawmill whose town is still said to sell its "Milled lumber" fires', () => {
-    const town = structuredClone(BORN.get(REKEYED.sawmill));
+    const town = sawmillArrived();
     expect(houseInputSplits(town)).toEqual([]);
     town.economicState.primaryExports = [...town.economicState.primaryExports, 'Milled lumber'];
     expect(houseInputSplits(town).map((x) => `${x.house} ${x.chain}`)).toEqual(['Sawmill output: Milled lumber']);
@@ -91,7 +105,7 @@ describe('R1: a house the record calls short of its input is short on the page t
     // beside it struck (one house, one material, one line). No town of the 720 or the 150 prints the burner's general line alone
     // (every short burner is worked out), so the claim stays on this town, by the line the page now prints for the house.
     expect(resourceGapLines(BORN.get(BURNER_SHORT)).map((l) => l.impact)).toContain('The charcoal burner is worked out: its own ground is depleted (Managed woodland).');
-    expect(resourceGapLines(BORN.get(REKEYED.sawmill)).map((l) => l.impact)).toContain(gapLineOf('timber', 'sawmill'));
+    expect(resourceGapLines(sawmillArrived()).map((l) => l.impact)).toContain(gapLineOf('timber', 'sawmill'));
     // a siege shuts the road: the besieged caravanserai is short, and says so
     expect(resourceGapLines(BORN.get('r2s-under_siege-town-1')).map((l) => l.impact)).toContain(gapLineOf('camelCaravan', 'caravanserai'));
   });
