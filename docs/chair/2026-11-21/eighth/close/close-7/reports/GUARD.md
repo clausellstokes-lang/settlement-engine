@@ -229,3 +229,34 @@
   lint was not re-run after that one manifest line.
 - **`tests/copy` whole:** 172/172 green.
 - **No push.** No golden was edited and nothing was dropped. No permission check refused an action.
+
+---
+
+# GUARD-FINISH (R24k), STEP A
+
+## (3i) THE NULL: no reader tells the empty house field from null (PLAUSIBLE by read; twenty minutes, by grep and read)
+- **The premise, corrected.** In the (c) dumps (`GUARD/dump-born/`) the held person's field went from ABSENT to `null`
+  (`institution: undefined -> null`), not from `''`. The readers below collapse all three (absent, `''`, `null`) to "no house".
+- **The person readers on a page or an export** (the field is a person's `institution`). No caller of these prints "null",
+  throws, or sorts on the raw field:
+  - **Through `domain/people/cardPowers.js :: cardHouseOf`** → `cardInstitutionOf`. `recordOf(null)` is `{}`, so a null field
+    returns a null house.
+    - Readers: `components/new/npcComponents.jsx :: houseMarkShown` (line 228) and the search filter (line 94);
+      `domain/npcProfile.js` (line 349); `components/dossier/SettlementWorkbench.jsx` (line 112);
+      `domain/dossier/dossierSearch.js` (line 276); `pdf/lib/viewModel.js` `house` and `houseMark` (lines 789 and 794); and
+      `cardPowers.js :: facesByHouse`.
+    - Each skips or ORs past a null house.
+  - **The Foundry export:** `foundry/journalPages.js` (line 220) reads the PDF view model's `n.house`:
+    `kv('House', n.house ? … : n.house)`. So it is the view model's null; `kv` must skip an empty value (PLAUSIBLE, not
+    opened).
+  - **`domain/display/galleryVeil.js`:** `npcHouseOf` is `cardHouseOf(npc) || str(npc.institution)`, and `str(null)` is
+    `''`. The staffed set at line 1092 uses `str(n.institution)` and `.filter(Boolean)`.
+  - **Other domain readers, all null-safe:**
+    - `domain/people/patronage.js` (line 197): `String(rec(null).key ?? '')` is `''`;
+    - `domain/people/allegiance.js` (lines 282, 365 and 370): `rec()` and `str()`;
+    - `domain/people/seatKeeper.js` (line 58): `c.institution && typeof … === 'object'`;
+    - `domain/crisis/crisisCast.js` (lines 623, 722 and 844): `n.institution?.kind`;
+    - `domain/facts/factVocabulary.js` 'own house': `?.kind === 'house'`.
+  - The other `.institution` hits in components, `domain/display` and the PDF sections are a SERVICE row's field, not a
+    person's.
+- **No line is cured.**
