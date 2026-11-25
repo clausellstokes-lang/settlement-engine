@@ -69,7 +69,22 @@ A SUCCESSOR ON ANOTHER ACCOUNT, THE NEXT COMMAND: in a fresh container, `npm ci`
   my lean fail closed (`unread` where relationships is absent and a string present, twin matched, red first at four doors). Q2:
   an unmarked member now takes the default veil: 122 of the stored 140 lose rows, 99 have values re-derived. TIMING (140-member
   map, local): unmarked 12.5 s -> 50.3 s; marked 45.5 s -> 49.5 s (unit 3 brings unmarked to the marked cost; ~0.35 s a member).
-- RULING V28 (the chair 08:09; with the grant, still waiting the second reader: DO NOT MERGE UNIT 3 YET): (1) Q1 CURED FAIL
+- UNIT 3 NOT GRANTED (the chair 08:10; RULING V28 WHOLE at 647f2a0c7b, `veil/RULING-V1.md`). A SECOND READER FOUND WHAT THE
+  CHAIR AND I MISSED: in snapshot mode the member's source is the FROZEN COPY, which master's client stores already projected
+  (`useGalleryShareControls.js :: modeRecord` -> `galleryPayloadFor` = toPublicSafe), so `dropped` is empty and a covert tie's
+  copy and sentence PASS at the map member, the gallery read and the import. MY LESSON: I read the splice against the link's
+  and never asked what a frozen copy already lacks; a check must never ask a projection what was withheld. V28: (1) dropped
+  set = the source's ties + the LIVE row's covert ties + THE ORPHAN RULE, at every door reading a copy, twin rule for rule;
+  (2) MEASURED FIRST by the raw-town oracle (both pools, master's and the tip's freeze paths, three doors), the seat proposes
+  the exact rule, the chair rules; (3) no-relationships fails closed; (4) the pin gains snapshot (master and tip copies),
+  narrated and marked members; (5) stale 212 comments; (6) chronicle: MY ANSWER (08:12): N95 already put doors-3's
+  `_gallery_doors_chronicle` (3e1115c81) and the member's frozen name and tier into this restatement, with N84 (d)'s re-key
+  measure first: owed in the rework; (7) VR23 stands; (8) MAP-COST gains the view-count UPDATE's row lock.
+  PLACED (08:12): VEIL-52 reworks unit 3 on `lane/veil-52-2026-11-24-door2-wip` from 2f849aa53: MEASURE (A) then STOP to me,
+  then build (B), then MAP-COST (C); COVERT-UNREAD withdrawn into it. VEIL-51 TOLD: units 4+5 go on (first "TIP?" takes (38));
+  MY TERM (b) CORRECTED on V28's principle: the stored argument is the LIVE row's document together with src.j (a frozen copy
+  may lack a hand-hidden power a copied desc names); a snapshot plant; the twin's gap on snapshot reads listed, not invented.
+- RULING V28 (the chair 08:09, superseded in part by its 08:10 whole text; with the grant, still waiting the second reader: DO NOT MERGE UNIT 3 YET): (1) Q1 CURED FAIL
   CLOSED (`unread` also where dm_full has pr/ps and no `relationships` key; twin rule for rule; red first at four doors, plain and
   narrated): GIVEN TO VEIL-52 (08:11) as COVERT-UNREAD, a child of 2f849aa53 on `lane/veil-52-2026-11-24-unread-wip`, header (39)
   after unit 3. (2) VR23 STANDS (an unmarked member takes the default veil); the chair tells the owner what old links and maps
@@ -124,7 +139,7 @@ A SUCCESSOR ON ANOTHER ACCOUNT, THE NEXT COMMAND: in a fresh container, `npm ci`
   RE-BORN on the joined tree, no figure from a pool born below 116 carried into the proof; GENERATION_LAWS five lit rows (cure E
   walks the registry: no hand list); a test anchored on a named seed for a crime wave or a guild quarrel re-anchored by its own
   finder, the assertion word for word. Pass this to the seats AT THE JOIN, not now.
-- THE NEXT COMMAND (mine): unit 3's slice, then its "TIP?" to the chair; then units 4+5's "TIP?" (VEIL-51, one, V25/V27); (was: the quiet-box items on dbd4cd9e5 (worktree /home/user/wt/tipm): the order count; `npm run build` then
+- THE NEXT COMMAND (mine): wait for VEIL-52's measure (A) and VEIL-51's units 4+5 "TIP?"; (was: unit 3's slice, then its "TIP?"; then units 4+5's "TIP?" (VEIL-51, one, V25/V27); (was: the quiet-box items on dbd4cd9e5 (worktree /home/user/wt/tipm): the order count; `npm run build` then
   the four VERIFY_DIST reds by name; writer-reach's three identities; then read unit 4's "TIP?" (its 212 hunk to the chair first).
 
 ### NOW (04:1x UTC 2026-11-25): R4-IDS MERGED (tip 8430edf5c, pushed 02:52); UNIT 1 MERGED ON THE TIP (dbd4cd9e5)
