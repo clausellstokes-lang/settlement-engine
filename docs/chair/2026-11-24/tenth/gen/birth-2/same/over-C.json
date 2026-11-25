@@ -1,0 +1,2666 @@
+[
+ {
+  "z": "thorp",
+  "key": "pdf:canon_dossier | spatialLayout.layout",
+  "reading": 1,
+  "bar": 0.15,
+  "top": "An open cluster of farmsteads around a shared well",
+  "cls": "STATE"
+ },
+ {
+  "z": "thorp",
+  "key": "pdf:draft_brief | spatialLayout.layout",
+  "reading": 1,
+  "bar": 0.15,
+  "top": "An open cluster of farmsteads around a shared well",
+  "cls": "STATE"
+ },
+ {
+  "z": "hamlet",
+  "key": "pdf:canon_dossier | spatialLayout.layout",
+  "reading": 1,
+  "bar": 0.15,
+  "top": "Scattered farmsteads along a muddy track, a common at the centre",
+  "cls": "STATE"
+ },
+ {
+  "z": "hamlet",
+  "key": "pdf:draft_brief | spatialLayout.layout",
+  "reading": 1,
+  "bar": 0.15,
+  "top": "Scattered farmsteads along a muddy track, a common at the centre",
+  "cls": "STATE"
+ },
+ {
+  "z": "hamlet",
+  "key": "pdf:canon_dossier | economicViability.issues[].suggestedFixes[]",
+  "reading": 1,
+  "bar": 0.3,
+  "top": "Strengthen the local foodshed or reduce the supported population",
+  "cls": "NARRATIVE?"
+ },
+ {
+  "z": "hamlet",
+  "key": "pdf:draft_brief | economicViability.issues[].suggestedFixes[]",
+  "reading": 1,
+  "bar": 0.3,
+  "top": "Strengthen the local foodshed or reduce the supported population",
+  "cls": "NARRATIVE?"
+ },
+ {
+  "z": "village",
+  "key": "pdf:canon_dossier | spatialLayout.layout",
+  "reading": 1,
+  "bar": 0.15,
+  "top": "Clustered around church and green, fields radiating out in open strips",
+  "cls": "STATE"
+ },
+ {
+  "z": "village",
+  "key": "pdf:draft_brief | spatialLayout.layout",
+  "reading": 1,
+  "bar": 0.15,
+  "top": "Clustered around church and green, fields radiating out in open strips",
+  "cls": "STATE"
+ },
+ {
+  "z": "town",
+  "key": "web:Systems/Power | pressureSentence",
+  "reading": 1,
+  "bar": 0.3,
+  "top": "The # has been debating market levies for three months.",
+  "cls": "STATE"
+ },
+ {
+  "z": "city",
+  "key": "pdf:canon_dossier | spatialLayout.layout",
+  "reading": 1,
+  "bar": 0.15,
+  "top": "Walled city with sprawling suburbs beyond the gates, outlying wards growing faster than th",
+  "cls": "STATE"
+ },
+ {
+  "z": "city",
+  "key": "pdf:draft_brief | spatialLayout.layout",
+  "reading": 1,
+  "bar": 0.15,
+  "top": "Walled city with sprawling suburbs beyond the gates, outlying wards growing faster than th",
+  "cls": "STATE"
+ },
+ {
+  "z": "city",
+  "key": "web:Systems/Power | pressureSentence",
+  "reading": 1,
+  "bar": 0.3,
+  "top": "The # has been debating market levies for three months.",
+  "cls": "STATE"
+ },
+ {
+  "z": "metropolis",
+  "key": "web:Systems/Power | pressureSentence",
+  "reading": 1,
+  "bar": 0.3,
+  "top": "The # has been debating market levies for three months.",
+  "cls": "STATE"
+ },
+ {
+  "z": "metropolis",
+  "key": "pdf:canon_dossier | spatialLayout.layout",
+  "reading": 0.99,
+  "bar": 0.15,
+  "top": "Sprawling imperial capital: walled inner city, vast suburban rings, the palace district ab",
+  "cls": "STATE"
+ },
+ {
+  "z": "metropolis",
+  "key": "pdf:draft_brief | spatialLayout.layout",
+  "reading": 0.99,
+  "bar": 0.15,
+  "top": "Sprawling imperial capital: walled inner city, vast suburban rings, the palace district ab",
+  "cls": "STATE"
+ },
+ {
+  "z": "town",
+  "key": "pdf:canon_dossier | spatialLayout.layout",
+  "reading": 0.92,
+  "bar": 0.15,
+  "top": "Compact within walls, outlying farms and a weekly market field beyond the gates",
+  "cls": "STATE"
+ },
+ {
+  "z": "town",
+  "key": "pdf:draft_brief | spatialLayout.layout",
+  "reading": 0.92,
+  "bar": 0.15,
+  "top": "Compact within walls, outlying farms and a weekly market field beyond the gates",
+  "cls": "STATE"
+ },
+ {
+  "z": "town",
+  "key": "web:World/NPCs | npcs[].secret.what",
+  "reading": 0.88,
+  "bar": 0.15,
+  "top": "Neither has acknowledged the other was there",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "village",
+  "key": "pdf:canon_dossier | economicViability.issues[].suggestedFixes[]",
+  "reading": 0.81,
+  "bar": 0.3,
+  "top": "Establish seasonal access, patronage, or a dependable trade route",
+  "cls": "NARRATIVE?"
+ },
+ {
+  "z": "village",
+  "key": "pdf:draft_brief | economicViability.issues[].suggestedFixes[]",
+  "reading": 0.81,
+  "bar": 0.3,
+  "top": "Establish seasonal access, patronage, or a dependable trade route",
+  "cls": "NARRATIVE?"
+ },
+ {
+  "z": "metropolis",
+  "key": "session | COMPOSED@facts[].text",
+  "reading": 0.79,
+  "bar": 0.3,
+  "top": "Stores: a granary, about 0 months of grain.",
+  "cls": "STATE"
+ },
+ {
+  "z": "thorp",
+  "key": "session | COMPOSED@facts[].text",
+  "reading": 0.76,
+  "bar": 0.3,
+  "top": "No granary; about a month and a half in household stores.",
+  "cls": "STATE"
+ },
+ {
+  "z": "thorp",
+  "key": "web:Systems/Defense | COMPOSED@Armed Forces & Fortifications",
+  "reading": 0.75,
+  "bar": 0.3,
+  "top": "Defenders cannot control entry points or create chokepoints.",
+  "cls": "STATE"
+ },
+ {
+  "z": "hamlet",
+  "key": "web:Systems/Defense | COMPOSED@Armed Forces & Fortifications",
+  "reading": 0.75,
+  "bar": 0.3,
+  "top": "Defenders cannot control entry points or create chokepoints.",
+  "cls": "STATE"
+ },
+ {
+  "z": "hamlet",
+  "key": "session | COMPOSED@facts[].text",
+  "reading": 0.74,
+  "bar": 0.3,
+  "top": "No granary; about a month and a half in household stores.",
+  "cls": "STATE"
+ },
+ {
+  "z": "village",
+  "key": "web:Systems/Defense | COMPOSED@Armed Forces & Fortifications",
+  "reading": 0.74,
+  "bar": 0.3,
+  "top": "Defenders cannot control entry points or create chokepoints.",
+  "cls": "STATE"
+ },
+ {
+  "z": "city",
+  "key": "web:Summary/Overview | settlementReason[]",
+  "reading": 0.73,
+  "bar": 0.3,
+  "top": "Large enough that its appetites outrun its fields.",
+  "cls": "STATE"
+ },
+ {
+  "z": "city",
+  "key": "pdf:canon_dossier | settlementReason[]",
+  "reading": 0.73,
+  "bar": 0.3,
+  "top": "Large enough that its appetites outrun its fields.",
+  "cls": "STATE"
+ },
+ {
+  "z": "city",
+  "key": "pdf:draft_brief | settlementReason[]",
+  "reading": 0.73,
+  "bar": 0.3,
+  "top": "Large enough that its appetites outrun its fields.",
+  "cls": "STATE"
+ },
+ {
+  "z": "village",
+  "key": "web:Systems/Economics | economicState.safetyProfile.economicDragDesc",
+  "reading": 0.71,
+  "bar": 0.3,
+  "top": "Some goods change hands here without a licence or a duty paid.",
+  "cls": "STATE?"
+ },
+ {
+  "z": "village",
+  "key": "session | COMPOSED@facts[].text",
+  "reading": 0.68,
+  "bar": 0.3,
+  "top": "No walls and no standing force.",
+  "cls": "STATE"
+ },
+ {
+  "z": "thorp",
+  "key": "pdf:canon_dossier | economicViability.issues[].suggestedFixes[]",
+  "reading": 0.67,
+  "bar": 0.3,
+  "top": "Strengthen the local foodshed or reduce the supported population",
+  "cls": "NARRATIVE?"
+ },
+ {
+  "z": "thorp",
+  "key": "pdf:draft_brief | economicViability.issues[].suggestedFixes[]",
+  "reading": 0.67,
+  "bar": 0.3,
+  "top": "Strengthen the local foodshed or reduce the supported population",
+  "cls": "NARRATIVE?"
+ },
+ {
+  "z": "city",
+  "key": "web:World/NPCs | npcs[].secret.what",
+  "reading": 0.67,
+  "bar": 0.3,
+  "top": "Neither has acknowledged the other was there",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "metropolis",
+  "key": "web:World/NPCs | npcs[].secret.what",
+  "reading": 0.67,
+  "bar": 0.3,
+  "top": "Neither has acknowledged the other was there",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "town",
+  "key": "session | COMPOSED@facts[].text",
+  "reading": 0.65,
+  "bar": 0.3,
+  "top": "Stores: a granary, about six months of grain.",
+  "cls": "STATE"
+ },
+ {
+  "z": "metropolis",
+  "key": "web:Summary/Plot Hooks | npcs[].plotHooks[]",
+  "reading": 0.65,
+  "bar": 0.3,
+  "top": "They have promised the same order to two buyers, and both are due to collect on the same m",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "metropolis",
+  "key": "pdf:canon_dossier | npcs[].plotHooks[]",
+  "reading": 0.65,
+  "bar": 0.3,
+  "top": "They have promised the same order to two buyers, and both are due to collect on the same m",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "metropolis",
+  "key": "pdf:draft_brief | npcs[].plotHooks[]",
+  "reading": 0.65,
+  "bar": 0.3,
+  "top": "They have promised the same order to two buyers, and both are due to collect on the same m",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "metropolis",
+  "key": "web:Systems/Power | powerStructure.factions[].desc",
+  "reading": 0.63,
+  "bar": 0.3,
+  "top": "Magical practitioners are consulted but not formally empowered.",
+  "cls": "STATE"
+ },
+ {
+  "z": "metropolis",
+  "key": "web:World/Relationships | relationships[].tension",
+  "reading": 0.63,
+  "bar": 0.3,
+  "top": "# is about to call it in.",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "metropolis",
+  "key": "pdf:canon_dossier | powerStructure.factions[].desc",
+  "reading": 0.63,
+  "bar": 0.3,
+  "top": "Magical practitioners are consulted but not formally empowered.",
+  "cls": "STATE"
+ },
+ {
+  "z": "metropolis",
+  "key": "pdf:canon_dossier | relationships[].tension",
+  "reading": 0.63,
+  "bar": 0.3,
+  "top": "# is about to call it in.",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "metropolis",
+  "key": "pdf:draft_brief | powerStructure.factions[].desc",
+  "reading": 0.63,
+  "bar": 0.3,
+  "top": "Magical practitioners are consulted but not formally empowered.",
+  "cls": "STATE"
+ },
+ {
+  "z": "metropolis",
+  "key": "pdf:draft_brief | relationships[].tension",
+  "reading": 0.63,
+  "bar": 0.3,
+  "top": "# is about to call it in.",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "metropolis",
+  "key": "web:Summary/Overview | settlementReason[]",
+  "reading": 0.62,
+  "bar": 0.3,
+  "top": "Everything in the region is bought, sold or decided here.",
+  "cls": "STATE"
+ },
+ {
+  "z": "metropolis",
+  "key": "web:World/Relationships | relationships[].description",
+  "reading": 0.62,
+  "bar": 0.3,
+  "top": "# owes # a great deal, and neither has ever said so aloud.",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "metropolis",
+  "key": "pdf:canon_dossier | settlementReason[]",
+  "reading": 0.62,
+  "bar": 0.3,
+  "top": "Everything in the region is bought, sold or decided here.",
+  "cls": "STATE"
+ },
+ {
+  "z": "metropolis",
+  "key": "pdf:canon_dossier | relationships[].description",
+  "reading": 0.62,
+  "bar": 0.3,
+  "top": "# owes # a great deal, and neither has ever said so aloud.",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "metropolis",
+  "key": "pdf:draft_brief | settlementReason[]",
+  "reading": 0.62,
+  "bar": 0.3,
+  "top": "Everything in the region is bought, sold or decided here.",
+  "cls": "STATE"
+ },
+ {
+  "z": "metropolis",
+  "key": "pdf:draft_brief | relationships[].description",
+  "reading": 0.62,
+  "bar": 0.3,
+  "top": "# owes # a great deal, and neither has ever said so aloud.",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "thorp",
+  "key": "web:Summary/Overview | pressureSentence",
+  "reading": 0.61,
+  "bar": 0.15,
+  "top": "A dispute over grazing rights and water access has run for two seasons, and those on each ",
+  "cls": "STATE"
+ },
+ {
+  "z": "thorp",
+  "key": "web:Systems/Power | pressureSentence",
+  "reading": 0.61,
+  "bar": 0.15,
+  "top": "A dispute over grazing rights and water access has run for two seasons, and those on each ",
+  "cls": "STATE"
+ },
+ {
+  "z": "thorp",
+  "key": "pdf:canon_dossier | pressureSentence",
+  "reading": 0.61,
+  "bar": 0.15,
+  "top": "A dispute over grazing rights and water access has run for two seasons, and those on each ",
+  "cls": "STATE"
+ },
+ {
+  "z": "thorp",
+  "key": "pdf:draft_brief | pressureSentence",
+  "reading": 0.61,
+  "bar": 0.15,
+  "top": "A dispute over grazing rights and water access has run for two seasons, and those on each ",
+  "cls": "STATE"
+ },
+ {
+  "z": "thorp",
+  "key": "session | pressureSentence",
+  "reading": 0.61,
+  "bar": 0.15,
+  "top": "A dispute over grazing rights and water access has run for two seasons, and those on each ",
+  "cls": "STATE"
+ },
+ {
+  "z": "village",
+  "key": "pdf:canon_dossier | COMPOSED@Economics & Trade",
+  "reading": 0.61,
+  "bar": 0.3,
+  "top": "Rich farmland: the fields yield well over the usual.",
+  "cls": "NARRATIVE?"
+ },
+ {
+  "z": "village",
+  "key": "pdf:draft_brief | COMPOSED@Economics & Trade",
+  "reading": 0.61,
+  "bar": 0.3,
+  "top": "Rich farmland: the fields yield well over the usual.",
+  "cls": "NARRATIVE?"
+ },
+ {
+  "z": "village",
+  "key": "pdf:canon_dossier | COMPOSED@Power Structure",
+  "reading": 0.59,
+  "bar": 0.15,
+  "top": "# governs, with # pressing close behind.",
+  "cls": "STATE"
+ },
+ {
+  "z": "village",
+  "key": "pdf:draft_brief | COMPOSED@Power Structure",
+  "reading": 0.59,
+  "bar": 0.15,
+  "top": "# governs, with # pressing close behind.",
+  "cls": "STATE"
+ },
+ {
+  "z": "city",
+  "key": "web:World/Relationships | relationships[].description",
+  "reading": 0.57,
+  "bar": 0.3,
+  "top": "# has never asked for it back.",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "city",
+  "key": "web:World/Relationships | relationships[].tension",
+  "reading": 0.57,
+  "bar": 0.3,
+  "top": "# is about to call it in.",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "city",
+  "key": "pdf:canon_dossier | relationships[].description",
+  "reading": 0.57,
+  "bar": 0.3,
+  "top": "# has never asked for it back.",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "city",
+  "key": "pdf:canon_dossier | relationships[].tension",
+  "reading": 0.57,
+  "bar": 0.3,
+  "top": "# is about to call it in.",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "city",
+  "key": "pdf:draft_brief | relationships[].description",
+  "reading": 0.57,
+  "bar": 0.3,
+  "top": "# has never asked for it back.",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "city",
+  "key": "pdf:draft_brief | relationships[].tension",
+  "reading": 0.57,
+  "bar": 0.3,
+  "top": "# is about to call it in.",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "metropolis",
+  "key": "pdf:canon_dossier | COMPOSED@Economics & Trade",
+  "reading": 0.57,
+  "bar": 0.3,
+  "top": "Rich farmland: the fields yield well over the usual.",
+  "cls": "NARRATIVE?"
+ },
+ {
+  "z": "metropolis",
+  "key": "pdf:draft_brief | COMPOSED@Economics & Trade",
+  "reading": 0.57,
+  "bar": 0.3,
+  "top": "Rich farmland: the fields yield well over the usual.",
+  "cls": "NARRATIVE?"
+ },
+ {
+  "z": "metropolis",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:posture.posture.field",
+  "reading": 0.56,
+  "bar": 0.3,
+  "top": "Hired swords back the garrison.",
+  "cls": "STATE"
+ },
+ {
+  "z": "metropolis",
+  "key": "pdf:canon_dossier | COMPOSED@Power Structure",
+  "reading": 0.56,
+  "bar": 0.15,
+  "top": "# governs, with 0 other powers competing for influence.",
+  "cls": "STATE"
+ },
+ {
+  "z": "metropolis",
+  "key": "pdf:canon_dossier | publicProse.blocks.defense:posture.posture.field",
+  "reading": 0.56,
+  "bar": 0.3,
+  "top": "Hired swords back the garrison.",
+  "cls": "STATE"
+ },
+ {
+  "z": "metropolis",
+  "key": "pdf:draft_brief | COMPOSED@Power Structure",
+  "reading": 0.56,
+  "bar": 0.15,
+  "top": "# governs, with 0 other powers competing for influence.",
+  "cls": "STATE"
+ },
+ {
+  "z": "metropolis",
+  "key": "pdf:draft_brief | publicProse.blocks.defense:posture.posture.field",
+  "reading": 0.56,
+  "bar": 0.3,
+  "top": "Hired swords back the garrison.",
+  "cls": "STATE"
+ },
+ {
+  "z": "village",
+  "key": "web:Systems/Power | powerStructure.factionRelationships[].narrative",
+  "reading": 0.54,
+  "bar": 0.15,
+  "top": "The # holds the seat and collects the taxes; the # tell people that the #'s rule is right ",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "city",
+  "key": "pdf:canon_dossier | COMPOSED@Economics & Trade",
+  "reading": 0.54,
+  "bar": 0.3,
+  "top": "Rich farmland: the fields yield well over the usual.",
+  "cls": "NARRATIVE?"
+ },
+ {
+  "z": "city",
+  "key": "pdf:draft_brief | COMPOSED@Economics & Trade",
+  "reading": 0.54,
+  "bar": 0.3,
+  "top": "Rich farmland: the fields yield well over the usual.",
+  "cls": "NARRATIVE?"
+ },
+ {
+  "z": "town",
+  "key": "pdf:canon_dossier | COMPOSED@Economics & Trade",
+  "reading": 0.53,
+  "bar": 0.3,
+  "top": "Rich farmland: the fields yield well over the usual.",
+  "cls": "NARRATIVE?"
+ },
+ {
+  "z": "town",
+  "key": "pdf:draft_brief | COMPOSED@Economics & Trade",
+  "reading": 0.53,
+  "bar": 0.3,
+  "top": "Rich farmland: the fields yield well over the usual.",
+  "cls": "NARRATIVE?"
+ },
+ {
+  "z": "city",
+  "key": "session | COMPOSED@facts[].text",
+  "reading": 0.53,
+  "bar": 0.3,
+  "top": "Stores: a granary, about nine months of grain.",
+  "cls": "STATE"
+ },
+ {
+  "z": "hamlet",
+  "key": "web:World/Daily Life | publicProse.blocks.economy:economics.foodOnProsperity.sentence",
+  "reading": 0.52,
+  "bar": 0.3,
+  "top": "Food is what holds # back.",
+  "cls": "NARRATIVE?"
+ },
+ {
+  "z": "metropolis",
+  "key": "web:Systems/Power | powerStructure.factionRelationships[].narrative",
+  "reading": 0.52,
+  "bar": 0.3,
+  "top": "The money of the # pays for the charity of the #, and the charity keeps the poor quiet.",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "city",
+  "key": "web:Summary/Plot Hooks | npcs[].plotHooks[]",
+  "reading": 0.5,
+  "bar": 0.3,
+  "top": "Someone keeps paying off their small debts around the place before they can, and has left ",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "city",
+  "key": "pdf:canon_dossier | npcs[].plotHooks[]",
+  "reading": 0.5,
+  "bar": 0.3,
+  "top": "Someone keeps paying off their small debts around the place before they can, and has left ",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "city",
+  "key": "pdf:draft_brief | npcs[].plotHooks[]",
+  "reading": 0.5,
+  "bar": 0.3,
+  "top": "Someone keeps paying off their small debts around the place before they can, and has left ",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "metropolis",
+  "key": "pdf:canon_dossier | history.founding.foundedBy",
+  "reading": 0.5,
+  "bar": 0.15,
+  "top": "the slow accretion of three smaller settlements that eventually merged under a single admi",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "metropolis",
+  "key": "pdf:draft_brief | history.founding.foundedBy",
+  "reading": 0.5,
+  "bar": 0.15,
+  "top": "the slow accretion of three smaller settlements that eventually merged under a single admi",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "thorp",
+  "key": "web:World/NPCs | npcs[].structuralPosition",
+  "reading": 0.48,
+  "bar": 0.3,
+  "top": "Still the head shepherd as well.",
+  "cls": "STATE"
+ },
+ {
+  "z": "thorp",
+  "key": "web:Systems/Power | powerStructure.factions[].desc",
+  "reading": 0.47,
+  "bar": 0.15,
+  "top": "The oldest heads of the community decide things together; people follow them out of respec",
+  "cls": "STATE"
+ },
+ {
+  "z": "thorp",
+  "key": "pdf:canon_dossier | powerStructure.factions[].desc",
+  "reading": 0.47,
+  "bar": 0.15,
+  "top": "The oldest heads of the community decide things together; people follow them out of respec",
+  "cls": "STATE"
+ },
+ {
+  "z": "thorp",
+  "key": "pdf:draft_brief | powerStructure.factions[].desc",
+  "reading": 0.47,
+  "bar": 0.15,
+  "top": "The oldest heads of the community decide things together; people follow them out of respec",
+  "cls": "STATE"
+ },
+ {
+  "z": "town",
+  "key": "pdf:canon_dossier | COMPOSED@Power Structure",
+  "reading": 0.47,
+  "bar": 0.15,
+  "top": "# governs, with # pressing close behind.",
+  "cls": "STATE"
+ },
+ {
+  "z": "town",
+  "key": "pdf:draft_brief | COMPOSED@Power Structure",
+  "reading": 0.47,
+  "bar": 0.15,
+  "top": "# governs, with # pressing close behind.",
+  "cls": "STATE"
+ },
+ {
+  "z": "city",
+  "key": "web:Systems/Power | powerStructure.recentConflict",
+  "reading": 0.47,
+  "bar": 0.3,
+  "top": "The # has been debating market levies for three months.",
+  "cls": "STATE"
+ },
+ {
+  "z": "city",
+  "key": "pdf:canon_dossier | powerStructure.recentConflict",
+  "reading": 0.47,
+  "bar": 0.3,
+  "top": "The # has been debating market levies for three months.",
+  "cls": "STATE"
+ },
+ {
+  "z": "city",
+  "key": "pdf:draft_brief | powerStructure.recentConflict",
+  "reading": 0.47,
+  "bar": 0.3,
+  "top": "The # has been debating market levies for three months.",
+  "cls": "STATE"
+ },
+ {
+  "z": "metropolis",
+  "key": "web:Systems/Economics | publicProse.blocks.economy:economics.prosperityHeader.sentence",
+  "reading": 0.47,
+  "bar": 0.15,
+  "top": "With a little left over each year, # gets by on a broad base of trades, and every year peo",
+  "cls": "STATE"
+ },
+ {
+  "z": "city",
+  "key": "pdf:canon_dossier | COMPOSED@Power Structure",
+  "reading": 0.45,
+  "bar": 0.15,
+  "top": "# governs, with # pressing close behind.",
+  "cls": "STATE"
+ },
+ {
+  "z": "city",
+  "key": "pdf:draft_brief | COMPOSED@Power Structure",
+  "reading": 0.45,
+  "bar": 0.15,
+  "top": "# governs, with # pressing close behind.",
+  "cls": "STATE"
+ },
+ {
+  "z": "city",
+  "key": "web:Systems/Economics | publicProse.blocks.economy:economics.prosperityHeader.sentence",
+  "reading": 0.44,
+  "bar": 0.15,
+  "top": "With a little left over each year, # gets by on a broad base of trades, and every year peo",
+  "cls": "STATE"
+ },
+ {
+  "z": "village",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:wall.rationale.sentence",
+  "reading": 0.43,
+  "bar": 0.15,
+  "top": "No wall marks where # ends; the last houses simply give way to open country.",
+  "cls": "STATE"
+ },
+ {
+  "z": "village",
+  "key": "web:World/NPCs | npcs[].secret.what",
+  "reading": 0.43,
+  "bar": 0.15,
+  "top": "Neither has acknowledged the other was there",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "town",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:criminal.ringNote",
+  "reading": 0.43,
+  "bar": 0.3,
+  "top": "Criminal activity is coordinated enough to maintain routes and territories but lacks a sin",
+  "cls": "STATE"
+ },
+ {
+  "z": "town",
+  "key": "pdf:canon_dossier | publicProse.blocks.defense:criminal.ringNote",
+  "reading": 0.43,
+  "bar": 0.3,
+  "top": "Criminal activity is coordinated enough to maintain routes and territories but lacks a sin",
+  "cls": "STATE"
+ },
+ {
+  "z": "town",
+  "key": "pdf:draft_brief | publicProse.blocks.defense:criminal.ringNote",
+  "reading": 0.43,
+  "bar": 0.3,
+  "top": "Criminal activity is coordinated enough to maintain routes and territories but lacks a sin",
+  "cls": "STATE"
+ },
+ {
+  "z": "thorp",
+  "key": "web:Systems/Economics | publicProse.blocks.general:economics.craftReasonLine",
+  "reading": 0.42,
+  "bar": 0.15,
+  "top": "# brings in salt from outside.",
+  "cls": "STATE"
+ },
+ {
+  "z": "metropolis",
+  "key": "web:Systems/Power | powerStructure.recentConflict",
+  "reading": 0.42,
+  "bar": 0.3,
+  "top": "The # has been debating market levies for three months.",
+  "cls": "STATE"
+ },
+ {
+  "z": "metropolis",
+  "key": "pdf:canon_dossier | powerStructure.recentConflict",
+  "reading": 0.42,
+  "bar": 0.3,
+  "top": "The # has been debating market levies for three months.",
+  "cls": "STATE"
+ },
+ {
+  "z": "metropolis",
+  "key": "pdf:draft_brief | powerStructure.recentConflict",
+  "reading": 0.42,
+  "bar": 0.3,
+  "top": "The # has been debating market levies for three months.",
+  "cls": "STATE"
+ },
+ {
+  "z": "village",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:forces.fortification.sentence",
+  "reading": 0.41,
+  "bar": 0.15,
+  "top": "The village has an edge rather than a boundary at #, and the edge is wherever the last bui",
+  "cls": "STATE"
+ },
+ {
+  "z": "city",
+  "key": "web:Systems/Economics | publicProse.blocks.economy:economics.incomeMix.sentence",
+  "reading": 0.41,
+  "bar": 0.15,
+  "top": "#'s biggest trade earns a real portion of its living, but none of its trades could carry t",
+  "cls": "STATE"
+ },
+ {
+  "z": "hamlet",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:status.viability.sentence",
+  "reading": 0.4,
+  "bar": 0.3,
+  "top": "Nobody at # argues about the defences any more.",
+  "cls": "NARRATIVE?"
+ },
+ {
+  "z": "metropolis",
+  "key": "pdf:canon_dossier | history.founding.overcoming",
+  "reading": 0.4,
+  "bar": 0.15,
+  "top": "by making enough right decisions to survive the wrong ones",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "metropolis",
+  "key": "pdf:draft_brief | history.founding.overcoming",
+  "reading": 0.4,
+  "bar": 0.15,
+  "top": "by making enough right decisions to survive the wrong ones",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "hamlet",
+  "key": "web:Summary/Overview | pressureSentence",
+  "reading": 0.39,
+  "bar": 0.15,
+  "top": "A dispute over grazing rights and water access has run for two seasons, and the families o",
+  "cls": "STATE"
+ },
+ {
+  "z": "hamlet",
+  "key": "web:Systems/Economics | publicProse.blocks.economy:economics.prosperityHeader.sentence",
+  "reading": 0.39,
+  "bar": 0.15,
+  "top": "With a little left over each year, # gets by on a farm surplus, and every year people argu",
+  "cls": "STATE"
+ },
+ {
+  "z": "hamlet",
+  "key": "pdf:canon_dossier | pressureSentence",
+  "reading": 0.39,
+  "bar": 0.15,
+  "top": "A dispute over grazing rights and water access has run for two seasons, and the families o",
+  "cls": "STATE"
+ },
+ {
+  "z": "hamlet",
+  "key": "pdf:draft_brief | pressureSentence",
+  "reading": 0.39,
+  "bar": 0.15,
+  "top": "A dispute over grazing rights and water access has run for two seasons, and the families o",
+  "cls": "STATE"
+ },
+ {
+  "z": "hamlet",
+  "key": "session | pressureSentence",
+  "reading": 0.39,
+  "bar": 0.15,
+  "top": "A dispute over grazing rights and water access has run for two seasons, and the families o",
+  "cls": "STATE"
+ },
+ {
+  "z": "hamlet",
+  "key": "web:Systems/Power | pressureSentence",
+  "reading": 0.39,
+  "bar": 0.15,
+  "top": "A dispute over grazing rights and water access has run for two seasons, and the families o",
+  "cls": "STATE"
+ },
+ {
+  "z": "town",
+  "key": "web:Systems/Economics | publicProse.blocks.economy:economics.prosperityHeader.sentence",
+  "reading": 0.38,
+  "bar": 0.15,
+  "top": "With a little left over each year, # gets by on a market trade, and every year people argu",
+  "cls": "STATE"
+ },
+ {
+  "z": "town",
+  "key": "web:Systems/Power | powerStructure.recentConflict",
+  "reading": 0.38,
+  "bar": 0.3,
+  "top": "The # has been debating market levies for three months.",
+  "cls": "STATE"
+ },
+ {
+  "z": "town",
+  "key": "web:World/Relationships | relationships[].description",
+  "reading": 0.38,
+  "bar": 0.3,
+  "top": "# owes # a large sum in coin, borrowed in a bad year and repaid in small amounts ever sinc",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "town",
+  "key": "web:World/Relationships | relationships[].tension",
+  "reading": 0.38,
+  "bar": 0.3,
+  "top": "# has begun to act like someone who considers the debt paid.",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "town",
+  "key": "pdf:canon_dossier | powerStructure.recentConflict",
+  "reading": 0.38,
+  "bar": 0.3,
+  "top": "The # has been debating market levies for three months.",
+  "cls": "STATE"
+ },
+ {
+  "z": "town",
+  "key": "pdf:canon_dossier | relationships[].tension",
+  "reading": 0.38,
+  "bar": 0.3,
+  "top": "# has begun to act like someone who considers the debt paid.",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "town",
+  "key": "pdf:canon_dossier | relationships[].description",
+  "reading": 0.38,
+  "bar": 0.3,
+  "top": "# owes # a large sum in coin, borrowed in a bad year and repaid in small amounts ever sinc",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "town",
+  "key": "pdf:canon_dossier | history.founding.overcoming",
+  "reading": 0.38,
+  "bar": 0.15,
+  "top": "by making enough right decisions to survive the wrong ones",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "town",
+  "key": "pdf:draft_brief | powerStructure.recentConflict",
+  "reading": 0.38,
+  "bar": 0.3,
+  "top": "The # has been debating market levies for three months.",
+  "cls": "STATE"
+ },
+ {
+  "z": "town",
+  "key": "pdf:draft_brief | relationships[].tension",
+  "reading": 0.38,
+  "bar": 0.3,
+  "top": "# has begun to act like someone who considers the debt paid.",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "town",
+  "key": "pdf:draft_brief | relationships[].description",
+  "reading": 0.38,
+  "bar": 0.3,
+  "top": "# owes # a large sum in coin, borrowed in a bad year and repaid in small amounts ever sinc",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "town",
+  "key": "pdf:draft_brief | history.founding.overcoming",
+  "reading": 0.38,
+  "bar": 0.15,
+  "top": "by making enough right decisions to survive the wrong ones",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "city",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:threat.beasts.sentence",
+  "reading": 0.38,
+  "bar": 0.15,
+  "top": "Very little reaches # out of the wild country, and the reason is that the arrangements are",
+  "cls": "STATE"
+ },
+ {
+  "z": "metropolis",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:threat.beasts.sentence",
+  "reading": 0.38,
+  "bar": 0.15,
+  "top": "Very little reaches # out of the wild country, and the reason is that the arrangements are",
+  "cls": "STATE"
+ },
+ {
+  "z": "metropolis",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:threat.internal.sentence",
+  "reading": 0.38,
+  "bar": 0.15,
+  "top": "A case that reaches the court at # gets a hearing, and it is settled there rather than by ",
+  "cls": "STATE"
+ },
+ {
+  "z": "metropolis",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:forces.contracted.sentence",
+  "reading": 0.38,
+  "bar": 0.15,
+  "top": "The metropolis pays for some of its soldiers and knows which ones, and treats them accordi",
+  "cls": "STATE"
+ },
+ {
+  "z": "thorp",
+  "key": "web:Systems/Power | publicProse.blocks.power:desk.rulingStructure.sentence",
+  "reading": 0.37,
+  "bar": 0.15,
+  "top": "The # at # watches the thorp's temper closely: what it fears is the thorp turning on it.",
+  "cls": "STATE"
+ },
+ {
+  "z": "hamlet",
+  "key": "web:Systems/Economics | culturalIdentity.foodways",
+  "reading": 0.37,
+  "bar": 0.15,
+  "top": "Meals follow the season and what the household has put by.",
+  "cls": "STATE"
+ },
+ {
+  "z": "hamlet",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:forces.fortification.sentence",
+  "reading": 0.37,
+  "bar": 0.15,
+  "top": "You can walk into # from any direction and pass nobody on the way in.",
+  "cls": "STATE"
+ },
+ {
+  "z": "hamlet",
+  "key": "pdf:canon_dossier | culturalIdentity.foodways",
+  "reading": 0.37,
+  "bar": 0.15,
+  "top": "Meals follow the season and what the household has put by.",
+  "cls": "STATE"
+ },
+ {
+  "z": "hamlet",
+  "key": "pdf:draft_brief | culturalIdentity.foodways",
+  "reading": 0.37,
+  "bar": 0.15,
+  "top": "Meals follow the season and what the household has put by.",
+  "cls": "STATE"
+ },
+ {
+  "z": "city",
+  "key": "web:Systems/Power | powerStructure.factions[].desc",
+  "reading": 0.37,
+  "bar": 0.3,
+  "top": "City watch; it answers for keeping order and is growing more sure of its own authority.",
+  "cls": "STATE"
+ },
+ {
+  "z": "city",
+  "key": "pdf:canon_dossier | powerStructure.factions[].desc",
+  "reading": 0.37,
+  "bar": 0.3,
+  "top": "City watch; it answers for keeping order and is growing more sure of its own authority.",
+  "cls": "STATE"
+ },
+ {
+  "z": "city",
+  "key": "pdf:canon_dossier | history.founding.overcoming",
+  "reading": 0.37,
+  "bar": 0.15,
+  "top": "through determination and cooperation",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "city",
+  "key": "pdf:draft_brief | powerStructure.factions[].desc",
+  "reading": 0.37,
+  "bar": 0.3,
+  "top": "City watch; it answers for keeping order and is growing more sure of its own authority.",
+  "cls": "STATE"
+ },
+ {
+  "z": "city",
+  "key": "pdf:draft_brief | history.founding.overcoming",
+  "reading": 0.37,
+  "bar": 0.15,
+  "top": "through determination and cooperation",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "metropolis",
+  "key": "web:Systems/Power | publicProse.blocks.power:desk.operationReading.sentence",
+  "reading": 0.37,
+  "bar": 0.15,
+  "top": "Goods reach # unrecorded: the cargo lists are false, and the dues owed on them are never p",
+  "cls": "STATE?"
+ },
+ {
+  "z": "metropolis",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:wall.rationale.sentence",
+  "reading": 0.37,
+  "bar": 0.15,
+  "top": "Nobody in # thinks of the massive walls and fortifications as ornament; the metropolis kno",
+  "cls": "STATE"
+ },
+ {
+  "z": "city",
+  "key": "web:Systems/Power | powerStructure.factionRelationships[].narrative",
+  "reading": 0.36,
+  "bar": 0.3,
+  "top": "The money of the # pays for the charity of the #, and the charity keeps the poor quiet.",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "thorp",
+  "key": "pdf:canon_dossier | npcs[].presentation.behaviour",
+  "reading": 0.35,
+  "bar": 0.15,
+  "top": "Talks about the weather, the hills and the flocks; offers milk and bread.",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "thorp",
+  "key": "pdf:draft_brief | npcs[].presentation.behaviour",
+  "reading": 0.35,
+  "bar": 0.15,
+  "top": "Talks about the weather, the hills and the flocks; offers milk and bread.",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "hamlet",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:wall.rationale.sentence",
+  "reading": 0.35,
+  "bar": 0.15,
+  "top": "No wall marks where # ends; the last houses simply give way to open country.",
+  "cls": "STATE"
+ },
+ {
+  "z": "town",
+  "key": "web:Systems/Economics | publicProse.blocks.economy:economics.incomeMix.sentence",
+  "reading": 0.35,
+  "bar": 0.15,
+  "top": "Ask what # lives on and you will hear more than one trade named.",
+  "cls": "STATE"
+ },
+ {
+  "z": "metropolis",
+  "key": "web:Systems/Economics | publicProse.blocks.economy:economics.incomeMix.sentence",
+  "reading": 0.35,
+  "bar": 0.15,
+  "top": "#'s biggest trade earns a real portion of its living, but none of its trades could carry t",
+  "cls": "STATE"
+ },
+ {
+  "z": "metropolis",
+  "key": "web:Systems/Economics | publicProse.blocks.economy:economics.foodMeans.sentence",
+  "reading": 0.35,
+  "bar": 0.15,
+  "top": "A good part of what # eats is brought in, and everyone knows when the next load is due.",
+  "cls": "STATE"
+ },
+ {
+  "z": "thorp",
+  "key": "session | COMPOSED@people[].line",
+  "reading": 0.34,
+  "bar": 0.15,
+  "top": "get the shepherd collective through the season without borrowing.",
+  "cls": "NARRATIVE?"
+ },
+ {
+  "z": "hamlet",
+  "key": "web:Systems/Economics | publicProse.blocks.general:economics.craftReasonLine",
+  "reading": 0.34,
+  "bar": 0.15,
+  "top": "Ask where # gets its salt and somebody will point you at the carts.",
+  "cls": "STATE"
+ },
+ {
+  "z": "hamlet",
+  "key": "web:Systems/Power | publicProse.blocks.power:desk.rulingStructure.sentence",
+  "reading": 0.34,
+  "bar": 0.15,
+  "top": "The # at # watches the hamlet's temper closely: what it fears is the hamlet turning on it.",
+  "cls": "STATE"
+ },
+ {
+  "z": "village",
+  "key": "web:Systems/Power | powerStructure.factions[].desc",
+  "reading": 0.34,
+  "bar": 0.3,
+  "top": "The village priest is the most educated person for miles; moral authority and practical in",
+  "cls": "STATE"
+ },
+ {
+  "z": "village",
+  "key": "pdf:canon_dossier | powerStructure.factions[].desc",
+  "reading": 0.34,
+  "bar": 0.3,
+  "top": "The village priest is the most educated person for miles; moral authority and practical in",
+  "cls": "STATE"
+ },
+ {
+  "z": "village",
+  "key": "pdf:draft_brief | powerStructure.factions[].desc",
+  "reading": 0.34,
+  "bar": 0.3,
+  "top": "The village priest is the most educated person for miles; moral authority and practical in",
+  "cls": "STATE"
+ },
+ {
+  "z": "town",
+  "key": "web:Systems/Power | powerStructure.factions[].desc",
+  "reading": 0.34,
+  "bar": 0.3,
+  "top": "Church institutions are well-embedded in civic life; their opinion on appointments, taxati",
+  "cls": "STATE"
+ },
+ {
+  "z": "town",
+  "key": "pdf:canon_dossier | powerStructure.factions[].desc",
+  "reading": 0.34,
+  "bar": 0.3,
+  "top": "Church institutions are well-embedded in civic life; their opinion on appointments, taxati",
+  "cls": "STATE"
+ },
+ {
+  "z": "town",
+  "key": "pdf:draft_brief | powerStructure.factions[].desc",
+  "reading": 0.34,
+  "bar": 0.3,
+  "top": "Church institutions are well-embedded in civic life; their opinion on appointments, taxati",
+  "cls": "STATE"
+ },
+ {
+  "z": "city",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:posture.posture.field",
+  "reading": 0.34,
+  "bar": 0.3,
+  "top": "Hired swords back the garrison.",
+  "cls": "STATE"
+ },
+ {
+  "z": "city",
+  "key": "pdf:canon_dossier | publicProse.blocks.defense:posture.posture.field",
+  "reading": 0.34,
+  "bar": 0.3,
+  "top": "Hired swords back the garrison.",
+  "cls": "STATE"
+ },
+ {
+  "z": "city",
+  "key": "pdf:draft_brief | publicProse.blocks.defense:posture.posture.field",
+  "reading": 0.34,
+  "bar": 0.3,
+  "top": "Hired swords back the garrison.",
+  "cls": "STATE"
+ },
+ {
+  "z": "hamlet",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:threat.invasion.sentence",
+  "reading": 0.33,
+  "bar": 0.15,
+  "top": "The hamlet's plan for an army is to not be interesting to one, and everybody here can stat",
+  "cls": "STATE"
+ },
+ {
+  "z": "city",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:criminal.ringNote",
+  "reading": 0.33,
+  "bar": 0.3,
+  "top": "Criminal activity is coordinated enough to maintain routes and territories but lacks a sin",
+  "cls": "STATE"
+ },
+ {
+  "z": "city",
+  "key": "pdf:canon_dossier | publicProse.blocks.defense:criminal.ringNote",
+  "reading": 0.33,
+  "bar": 0.3,
+  "top": "Criminal activity is coordinated enough to maintain routes and territories but lacks a sin",
+  "cls": "STATE"
+ },
+ {
+  "z": "city",
+  "key": "pdf:draft_brief | publicProse.blocks.defense:criminal.ringNote",
+  "reading": 0.33,
+  "bar": 0.3,
+  "top": "Criminal activity is coordinated enough to maintain routes and territories but lacks a sin",
+  "cls": "STATE"
+ },
+ {
+  "z": "thorp",
+  "key": "pdf:canon_dossier | history.founding.foundedBy",
+  "reading": 0.32,
+  "bar": 0.15,
+  "top": "a single extended family who came and never left",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "thorp",
+  "key": "pdf:draft_brief | history.founding.foundedBy",
+  "reading": 0.32,
+  "bar": 0.15,
+  "top": "a single extended family who came and never left",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "thorp",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:forces.fortification.sentence",
+  "reading": 0.31,
+  "bar": 0.15,
+  "top": "There is no perimeter, which means the thorp cannot control entry and cannot make a chokep",
+  "cls": "STATE"
+ },
+ {
+  "z": "thorp",
+  "key": "web:World/Daily Life | publicProse.blocks.economy:economics.foodOnProsperity.sentence",
+  "reading": 0.31,
+  "bar": 0.3,
+  "top": "Food is what holds # back.",
+  "cls": "NARRATIVE?"
+ },
+ {
+  "z": "hamlet",
+  "key": "web:Systems/Power | powerStructure.factions[].desc",
+  "reading": 0.31,
+  "bar": 0.15,
+  "top": "The oldest heads of the community decide things together; people follow them out of respec",
+  "cls": "STATE"
+ },
+ {
+  "z": "hamlet",
+  "key": "pdf:canon_dossier | powerStructure.factions[].desc",
+  "reading": 0.31,
+  "bar": 0.15,
+  "top": "The oldest heads of the community decide things together; people follow them out of respec",
+  "cls": "STATE"
+ },
+ {
+  "z": "hamlet",
+  "key": "pdf:canon_dossier | history.founding.foundedBy",
+  "reading": 0.31,
+  "bar": 0.15,
+  "top": "a retired tradesperson whose skills attracted dependents",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "hamlet",
+  "key": "pdf:draft_brief | powerStructure.factions[].desc",
+  "reading": 0.31,
+  "bar": 0.15,
+  "top": "The oldest heads of the community decide things together; people follow them out of respec",
+  "cls": "STATE"
+ },
+ {
+  "z": "hamlet",
+  "key": "pdf:draft_brief | history.founding.foundedBy",
+  "reading": 0.31,
+  "bar": 0.15,
+  "top": "a retired tradesperson whose skills attracted dependents",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "hamlet",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:forces.charter.sentence",
+  "reading": 0.31,
+  "bar": 0.15,
+  "top": "Whatever comes out of the country is met by whoever the hamlet has, whether or not they ar",
+  "cls": "STATE"
+ },
+ {
+  "z": "town",
+  "key": "pdf:canon_dossier | history.founding.foundedBy",
+  "reading": 0.31,
+  "bar": 0.15,
+  "top": "military veterans given land grants who brought their skills with them",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "town",
+  "key": "pdf:draft_brief | history.founding.foundedBy",
+  "reading": 0.31,
+  "bar": 0.15,
+  "top": "military veterans given land grants who brought their skills with them",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "city",
+  "key": "web:Systems/Economics | publicProse.blocks.economy:economics.foodMeans.sentence",
+  "reading": 0.31,
+  "bar": 0.15,
+  "top": "A good part of what # eats is brought in, and everyone knows when the next load is due.",
+  "cls": "STATE"
+ },
+ {
+  "z": "city",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:wall.rationale.sentence",
+  "reading": 0.31,
+  "bar": 0.15,
+  "top": "Nobody in # thinks of the city walls and gates as ornament; the city knows what it is for ",
+  "cls": "STATE"
+ },
+ {
+  "z": "metropolis",
+  "key": "web:Summary/Overview | publicProse.blocks.general:overview.siteLines[]",
+  "reading": 0.31,
+  "bar": 0.3,
+  "top": "#'s market lives off through-traffic.",
+  "cls": "STATE?"
+ },
+ {
+  "z": "metropolis",
+  "key": "web:Summary/Plot Hooks | economicState.safetyProfile.plotHooks[]",
+  "reading": 0.31,
+  "bar": 0.15,
+  "top": "The smugglers have stopped moving their usual goods this week, and nobody can say why.",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "metropolis",
+  "key": "web:World/NPCs | npcs[].presentation.behaviour",
+  "reading": 0.31,
+  "bar": 0.3,
+  "top": "Remembers more than they show.",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "metropolis",
+  "key": "pdf:canon_dossier | economicState.safetyProfile.plotHooks[]",
+  "reading": 0.31,
+  "bar": 0.15,
+  "top": "The smugglers have stopped moving their usual goods this week, and nobody can say why.",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "metropolis",
+  "key": "pdf:canon_dossier | history.historicalEvents[].lastingEffects[]",
+  "reading": 0.31,
+  "bar": 0.3,
+  "top": "A standing security office and informant network persist",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "metropolis",
+  "key": "pdf:draft_brief | economicState.safetyProfile.plotHooks[]",
+  "reading": 0.31,
+  "bar": 0.15,
+  "top": "The smugglers have stopped moving their usual goods this week, and nobody can say why.",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "metropolis",
+  "key": "pdf:draft_brief | history.historicalEvents[].lastingEffects[]",
+  "reading": 0.31,
+  "bar": 0.3,
+  "top": "A standing security office and informant network persist",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "thorp",
+  "key": "web:Systems/Economics | culturalIdentity.foodways",
+  "reading": 0.3,
+  "bar": 0.15,
+  "top": "Meals follow the season and what the household has put by.",
+  "cls": "STATE"
+ },
+ {
+  "z": "thorp",
+  "key": "web:Systems/Power | publicProse.blocks.power:desk.successionRisk.sentence",
+  "reading": 0.3,
+  "bar": 0.15,
+  "top": "If anyone at # asked who might replace the #, the thorp would have no contender to name.",
+  "cls": "STATE"
+ },
+ {
+  "z": "thorp",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:wall.rationale.sentence",
+  "reading": 0.3,
+  "bar": 0.15,
+  "top": "No wall marks where # ends; the last houses simply give way to open country.",
+  "cls": "STATE"
+ },
+ {
+  "z": "thorp",
+  "key": "pdf:canon_dossier | culturalIdentity.foodways",
+  "reading": 0.3,
+  "bar": 0.15,
+  "top": "Meals follow the season and what the household has put by.",
+  "cls": "STATE"
+ },
+ {
+  "z": "thorp",
+  "key": "pdf:draft_brief | culturalIdentity.foodways",
+  "reading": 0.3,
+  "bar": 0.15,
+  "top": "Meals follow the season and what the household has put by.",
+  "cls": "STATE"
+ },
+ {
+  "z": "hamlet",
+  "key": "web:Systems/Power | publicProse.blocks.power:desk.successionRisk.sentence",
+  "reading": 0.3,
+  "bar": 0.15,
+  "top": "People at # may grumble, but nobody in the hamlet stands ready to lead them against the #.",
+  "cls": "STATE"
+ },
+ {
+  "z": "city",
+  "key": "web:World/NPCs | npcs[].presentation.behaviour",
+  "reading": 0.3,
+  "bar": 0.3,
+  "top": "Seems invested in your success here.",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "thorp",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:forces.charter.sentence",
+  "reading": 0.29,
+  "bar": 0.15,
+  "top": "Whatever comes out of the country is met by whoever the thorp has, whether or not they are",
+  "cls": "STATE"
+ },
+ {
+  "z": "metropolis",
+  "key": "web:Systems/Economics | culturalIdentity.foodways",
+  "reading": 0.29,
+  "bar": 0.15,
+  "top": "Meals follow the season and what the household has put by.",
+  "cls": "STATE"
+ },
+ {
+  "z": "metropolis",
+  "key": "web:Systems/Power | publicProse.blocks.power:desk.rulingStructure.sentence",
+  "reading": 0.29,
+  "bar": 0.15,
+  "top": "The # at # watches the metropolis's temper closely: what it fears is the metropolis turnin",
+  "cls": "STATE"
+ },
+ {
+  "z": "metropolis",
+  "key": "pdf:canon_dossier | culturalIdentity.foodways",
+  "reading": 0.29,
+  "bar": 0.15,
+  "top": "Meals follow the season and what the household has put by.",
+  "cls": "STATE"
+ },
+ {
+  "z": "metropolis",
+  "key": "pdf:draft_brief | culturalIdentity.foodways",
+  "reading": 0.29,
+  "bar": 0.15,
+  "top": "Meals follow the season and what the household has put by.",
+  "cls": "STATE"
+ },
+ {
+  "z": "thorp",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:threat.invasion.sentence",
+  "reading": 0.28,
+  "bar": 0.15,
+  "top": "# has no line and no force.",
+  "cls": "STATE"
+ },
+ {
+  "z": "thorp",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:forces.force.sentence",
+  "reading": 0.28,
+  "bar": 0.15,
+  "top": "If # were attacked, its people would fight with no leaders and no plan, each household for",
+  "cls": "STATE"
+ },
+ {
+  "z": "thorp",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:criminal.structure.sentence",
+  "reading": 0.28,
+  "bar": 0.15,
+  "top": "#'s books record no gang, guild or racket: what wrongdoing the thorp has, people do on the",
+  "cls": "STATE"
+ },
+ {
+  "z": "village",
+  "key": "web:Summary/Overview | settlementReason[]",
+  "reading": 0.28,
+  "bar": 0.15,
+  "top": "Sited on a route already worn deep before anyone built here; a road that old is not soon a",
+  "cls": "STATE"
+ },
+ {
+  "z": "village",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:threat.invasion.sentence",
+  "reading": 0.28,
+  "bar": 0.15,
+  "top": "If anyone came for #, nothing about the village would stop them; it is safe for exactly as",
+  "cls": "STATE"
+ },
+ {
+  "z": "village",
+  "key": "pdf:canon_dossier | settlementReason[]",
+  "reading": 0.28,
+  "bar": 0.15,
+  "top": "Sited on a route already worn deep before anyone built here; a road that old is not soon a",
+  "cls": "STATE"
+ },
+ {
+  "z": "village",
+  "key": "pdf:draft_brief | settlementReason[]",
+  "reading": 0.28,
+  "bar": 0.15,
+  "top": "Sited on a route already worn deep before anyone built here; a road that old is not soon a",
+  "cls": "STATE"
+ },
+ {
+  "z": "hamlet",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:forces.force.sentence",
+  "reading": 0.27,
+  "bar": 0.15,
+  "top": "Nobody at # is responsible for defending the hamlet; ask who is, and nobody can name anyon",
+  "cls": "STATE"
+ },
+ {
+  "z": "village",
+  "key": "web:Systems/Economics | publicProse.blocks.economy:economics.prosperityHeader.sentence",
+  "reading": 0.27,
+  "bar": 0.15,
+  "top": "# pays its way from year to year, and nobody here calls the village poor.",
+  "cls": "STATE"
+ },
+ {
+  "z": "village",
+  "key": "web:Systems/Economics | culturalIdentity.foodways",
+  "reading": 0.27,
+  "bar": 0.15,
+  "top": "Meals follow the season and what the household has put by.",
+  "cls": "STATE"
+ },
+ {
+  "z": "village",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:forces.force.sentence",
+  "reading": 0.27,
+  "bar": 0.15,
+  "top": "Defense here is individual armed citizens, with no command, no training and no way to coor",
+  "cls": "STATE"
+ },
+ {
+  "z": "village",
+  "key": "pdf:canon_dossier | culturalIdentity.foodways",
+  "reading": 0.27,
+  "bar": 0.15,
+  "top": "Meals follow the season and what the household has put by.",
+  "cls": "STATE"
+ },
+ {
+  "z": "village",
+  "key": "pdf:canon_dossier | history.founding.overcoming",
+  "reading": 0.27,
+  "bar": 0.15,
+  "top": "through determination and cooperation",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "village",
+  "key": "pdf:draft_brief | culturalIdentity.foodways",
+  "reading": 0.27,
+  "bar": 0.15,
+  "top": "Meals follow the season and what the household has put by.",
+  "cls": "STATE"
+ },
+ {
+  "z": "village",
+  "key": "pdf:draft_brief | history.founding.overcoming",
+  "reading": 0.27,
+  "bar": 0.15,
+  "top": "through determination and cooperation",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "town",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:threat.internal.sentence",
+  "reading": 0.27,
+  "bar": 0.15,
+  "top": "The town's law can name a wrong and cannot keep the person who did it, so it reaches for t",
+  "cls": "STATE"
+ },
+ {
+  "z": "town",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:forces.force.sentence",
+  "reading": 0.27,
+  "bar": 0.15,
+  "top": "There are people walking the town at # at night, and the town's sense of itself rests more",
+  "cls": "STATE"
+ },
+ {
+  "z": "city",
+  "key": "web:Systems/Power | publicProse.blocks.power:desk.operationReading.sentence",
+  "reading": 0.27,
+  "bar": 0.15,
+  "top": "Goods reach # unrecorded: the cargo lists are false, and the dues owed on them are never p",
+  "cls": "STATE?"
+ },
+ {
+  "z": "city",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:threat.internal.sentence",
+  "reading": 0.27,
+  "bar": 0.15,
+  "top": "Bring a complaint at # and there is a court to hear it and a cell for whoever it finds aga",
+  "cls": "STATE"
+ },
+ {
+  "z": "city",
+  "key": "pdf:canon_dossier | history.founding.foundedBy",
+  "reading": 0.27,
+  "bar": 0.15,
+  "top": "a powerful noble house that needed a commercial base independent of rivals",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "city",
+  "key": "pdf:draft_brief | history.founding.foundedBy",
+  "reading": 0.27,
+  "bar": 0.15,
+  "top": "a powerful noble house that needed a commercial base independent of rivals",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "city",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:forces.contracted.sentence",
+  "reading": 0.27,
+  "bar": 0.15,
+  "top": "The hired companies at # are doing the job they were paid for, and their contracts will ru",
+  "cls": "STATE"
+ },
+ {
+  "z": "thorp",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:threat.economic.sentence",
+  "reading": 0.26,
+  "bar": 0.15,
+  "top": "# is well off, but little of its wealth is set aside for its defence, and a long crisis wo",
+  "cls": "STATE"
+ },
+ {
+  "z": "thorp",
+  "key": "pdf:canon_dossier | history.founding.overcoming",
+  "reading": 0.26,
+  "bar": 0.15,
+  "top": "through determination and cooperation",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "thorp",
+  "key": "pdf:draft_brief | history.founding.overcoming",
+  "reading": 0.26,
+  "bar": 0.15,
+  "top": "through determination and cooperation",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "village",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:forces.charter.sentence",
+  "reading": 0.26,
+  "bar": 0.15,
+  "top": "Whatever comes out of the country is met by whoever the village has, whether or not they a",
+  "cls": "STATE"
+ },
+ {
+  "z": "village",
+  "key": "pdf:canon_dossier | history.founding.foundedBy",
+  "reading": 0.26,
+  "bar": 0.15,
+  "top": "a noble granted lands by the crown and obligated to populate them",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "village",
+  "key": "pdf:draft_brief | history.founding.foundedBy",
+  "reading": 0.26,
+  "bar": 0.15,
+  "top": "a noble granted lands by the crown and obligated to populate them",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "town",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:wall.rationale.sentence",
+  "reading": 0.26,
+  "bar": 0.15,
+  "top": "Fresh repairs show on #'s town walls; the town keeps its defences in working order against",
+  "cls": "STATE"
+ },
+ {
+  "z": "thorp",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:posture.posture.field",
+  "reading": 0.25,
+  "bar": 0.15,
+  "top": "When someone does wrong, the neighbours deal with it themselves, and the oldest families h",
+  "cls": "STATE"
+ },
+ {
+  "z": "thorp",
+  "key": "pdf:canon_dossier | publicProse.blocks.defense:posture.posture.field",
+  "reading": 0.25,
+  "bar": 0.15,
+  "top": "When someone does wrong, the neighbours deal with it themselves, and the oldest families h",
+  "cls": "STATE"
+ },
+ {
+  "z": "thorp",
+  "key": "pdf:draft_brief | publicProse.blocks.defense:posture.posture.field",
+  "reading": 0.25,
+  "bar": 0.15,
+  "top": "When someone does wrong, the neighbours deal with it themselves, and the oldest families h",
+  "cls": "STATE"
+ },
+ {
+  "z": "hamlet",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:criminal.structure.sentence",
+  "reading": 0.25,
+  "bar": 0.15,
+  "top": "What goes wrong at # goes wrong one thing at a time and belongs to whoever did it.",
+  "cls": "STATE"
+ },
+ {
+  "z": "hamlet",
+  "key": "pdf:canon_dossier | history.founding.overcoming",
+  "reading": 0.25,
+  "bar": 0.15,
+  "top": "by making enough right decisions to survive the wrong ones",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "hamlet",
+  "key": "pdf:draft_brief | history.founding.overcoming",
+  "reading": 0.25,
+  "bar": 0.15,
+  "top": "by making enough right decisions to survive the wrong ones",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "town",
+  "key": "web:Summary/Overview | settlementReason[]",
+  "reading": 0.25,
+  "bar": 0.15,
+  "top": "It stands roadside, where the day is measured in traffic: what arrives before noon, what l",
+  "cls": "STATE"
+ },
+ {
+  "z": "town",
+  "key": "pdf:canon_dossier | settlementReason[]",
+  "reading": 0.25,
+  "bar": 0.15,
+  "top": "It stands roadside, where the day is measured in traffic: what arrives before noon, what l",
+  "cls": "STATE"
+ },
+ {
+  "z": "town",
+  "key": "pdf:draft_brief | settlementReason[]",
+  "reading": 0.25,
+  "bar": 0.15,
+  "top": "It stands roadside, where the day is measured in traffic: what arrives before noon, what l",
+  "cls": "STATE"
+ },
+ {
+  "z": "thorp",
+  "key": "web:Systems/Economics | publicProse.blocks.economy:economics.prosperityHeader.sentence",
+  "reading": 0.24,
+  "bar": 0.15,
+  "top": "# pays its way from year to year, and nobody here calls the thorp poor.",
+  "cls": "STATE"
+ },
+ {
+  "z": "hamlet",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:threat.economic.sentence",
+  "reading": 0.24,
+  "bar": 0.15,
+  "top": "If # ever had to hire people to defend it, it would have to borrow the money first.",
+  "cls": "STATE"
+ },
+ {
+  "z": "hamlet",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:forces.arcane.sentence",
+  "reading": 0.24,
+  "bar": 0.15,
+  "top": "Whoever defends #, none of them works with magic.",
+  "cls": "STATE"
+ },
+ {
+  "z": "village",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:criminal.structure.sentence",
+  "reading": 0.24,
+  "bar": 0.15,
+  "top": "#'s books record no gang, guild or racket: what wrongdoing the village has, people do on t",
+  "cls": "STATE"
+ },
+ {
+  "z": "town",
+  "key": "web:Systems/Resources | publicProse.blocks.economy:economics.strategicValue.sentence",
+  "reading": 0.24,
+  "bar": 0.15,
+  "top": "For as long as others value #'s position, the town will have to reckon with who wants it a",
+  "cls": "STATE"
+ },
+ {
+  "z": "city",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:threat.economic.sentence",
+  "reading": 0.24,
+  "bar": 0.15,
+  "top": "Nobody in # lies awake over a lean year: there is enough in hand to see the city through o",
+  "cls": "STATE"
+ },
+ {
+  "z": "thorp",
+  "key": "web:Systems/Economics | publicProse.blocks.economy:economics.exportPosture.sentence",
+  "reading": 0.23,
+  "bar": 0.15,
+  "top": "Buyers from outside come to # for more than one thing.",
+  "cls": "STATE"
+ },
+ {
+  "z": "thorp",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:posture.posture.beside",
+  "reading": 0.23,
+  "bar": 0.15,
+  "top": "# could deal with a brawl or a thief, but the thorp could not hold off a raid.",
+  "cls": "STATE"
+ },
+ {
+  "z": "hamlet",
+  "key": "web:Systems/Resources | publicProse.blocks.economy:economics.strategicValue.sentence",
+  "reading": 0.23,
+  "bar": 0.15,
+  "top": "The people of # know what their ground is worth to others, and know that is reason enough ",
+  "cls": "STATE"
+ },
+ {
+  "z": "hamlet",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:posture.posture.beside",
+  "reading": 0.23,
+  "bar": 0.15,
+  "top": "# could deal with a brawl or a thief, but the hamlet could not hold off a raid.",
+  "cls": "STATE"
+ },
+ {
+  "z": "town",
+  "key": "web:Systems/Economics | publicProse.blocks.economy:economics.exportPosture.sentence",
+  "reading": 0.23,
+  "bar": 0.15,
+  "top": "Buyers from outside come to # for more than one thing.",
+  "cls": "STATE"
+ },
+ {
+  "z": "city",
+  "key": "web:Systems/Power | publicProse.blocks.power:desk.rulingStructure.sentence",
+  "reading": 0.23,
+  "bar": 0.15,
+  "top": "The # at # watches the city's temper closely: what it fears is the city turning on it.",
+  "cls": "STATE"
+ },
+ {
+  "z": "hamlet",
+  "key": "web:Systems/Economics | publicProse.blocks.economy:economics.foodSecurityRung.sentence",
+  "reading": 0.22,
+  "bar": 0.15,
+  "top": "# is fed, but what it keeps put by would not outlast a run of poor harvests.",
+  "cls": "STATE"
+ },
+ {
+  "z": "village",
+  "key": "web:Summary/Overview | publicProse.blocks.general:overview.siteLines[]",
+  "reading": 0.22,
+  "bar": 0.15,
+  "top": "The guilds are a power at # all the same.",
+  "cls": "STATE?"
+ },
+ {
+  "z": "village",
+  "key": "web:Systems/Economics | publicProse.blocks.economy:economics.exportPosture.sentence",
+  "reading": 0.22,
+  "bar": 0.15,
+  "top": "There is always something going out, and not always the same thing.",
+  "cls": "STATE"
+ },
+ {
+  "z": "village",
+  "key": "web:Systems/Power | publicProse.blocks.power:desk.rulingStructure.sentence",
+  "reading": 0.22,
+  "bar": 0.15,
+  "top": "The # at # has left obvious decisions untaken because its members cannot agree on them.",
+  "cls": "STATE"
+ },
+ {
+  "z": "city",
+  "key": "web:World/History | publicProse.blocks.general:history.foundedLine",
+  "reading": 0.22,
+  "bar": 0.15,
+  "top": "# has been added to so often that little of its first building is left standing.",
+  "cls": "STATE"
+ },
+ {
+  "z": "metropolis",
+  "key": "web:Systems/Resources | publicProse.blocks.economy:economics.strategicValue.sentence",
+  "reading": 0.22,
+  "bar": 0.15,
+  "top": "#'s position is worth watching over: whoever holds the ground holds what the assessment be",
+  "cls": "STATE"
+ },
+ {
+  "z": "metropolis",
+  "key": "web:World/History | publicProse.blocks.general:history.foundedLine",
+  "reading": 0.22,
+  "bar": 0.15,
+  "top": "The oldest houses in # stand at its middle, and everything newer has been built outward fr",
+  "cls": "STATE"
+ },
+ {
+  "z": "hamlet",
+  "key": "web:Systems/Economics | publicProse.blocks.economy:economics.exportPosture.sentence",
+  "reading": 0.21,
+  "bar": 0.15,
+  "top": "A merchant who comes to # for one thing usually leaves with two or three.",
+  "cls": "STATE"
+ },
+ {
+  "z": "hamlet",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:threat.internal.sentence",
+  "reading": 0.21,
+  "bar": 0.15,
+  "top": "If you are wronged at #, there is no court to take it to, and no local is surprised.",
+  "cls": "STATE"
+ },
+ {
+  "z": "village",
+  "key": "web:Systems/Economics | publicProse.blocks.economy:economics.foodSecurityRung.sentence",
+  "reading": 0.21,
+  "bar": 0.15,
+  "top": "Food reaches #'s tables as fast as it is eaten, and nobody has to think about the pace.",
+  "cls": "STATE"
+ },
+ {
+  "z": "village",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:posture.posture.beside",
+  "reading": 0.21,
+  "bar": 0.15,
+  "top": "Nothing in the village would stop a serious attack for long.",
+  "cls": "STATE"
+ },
+ {
+  "z": "village",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:threat.economic.sentence",
+  "reading": 0.21,
+  "bar": 0.15,
+  "top": "If # ever had to hire people to defend it, it would have to borrow the money first.",
+  "cls": "STATE"
+ },
+ {
+  "z": "village",
+  "key": "pdf:canon_dossier | npcs[].secret.what",
+  "reading": 0.21,
+  "bar": 0.15,
+  "top": "Was present when # did something they've never accounted for publicly.",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "village",
+  "key": "pdf:draft_brief | npcs[].secret.what",
+  "reading": 0.21,
+  "bar": 0.15,
+  "top": "Was present when # did something they've never accounted for publicly.",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "town",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:forces.charter.sentence",
+  "reading": 0.21,
+  "bar": 0.15,
+  "top": "Whatever comes out of the country is met by whoever the town has, whether or not they are ",
+  "cls": "STATE"
+ },
+ {
+  "z": "city",
+  "key": "web:Systems/Economics | culturalIdentity.foodways",
+  "reading": 0.21,
+  "bar": 0.15,
+  "top": "Meals follow the season and what the household has put by.",
+  "cls": "STATE"
+ },
+ {
+  "z": "city",
+  "key": "web:Systems/Economics | publicProse.blocks.economy:economics.foodSecurityRung.sentence",
+  "reading": 0.21,
+  "bar": 0.15,
+  "top": "In an ordinary season # has enough to eat, or near enough.",
+  "cls": "STATE"
+ },
+ {
+  "z": "city",
+  "key": "pdf:canon_dossier | culturalIdentity.foodways",
+  "reading": 0.21,
+  "bar": 0.15,
+  "top": "Meals follow the season and what the household has put by.",
+  "cls": "STATE"
+ },
+ {
+  "z": "city",
+  "key": "pdf:draft_brief | culturalIdentity.foodways",
+  "reading": 0.21,
+  "bar": 0.15,
+  "top": "Meals follow the season and what the household has put by.",
+  "cls": "STATE"
+ },
+ {
+  "z": "metropolis",
+  "key": "web:Systems/Economics | publicProse.blocks.economy:economics.exportPosture.sentence",
+  "reading": 0.21,
+  "bar": 0.15,
+  "top": "The yards here are full of goods bound out and no two of them are the same.",
+  "cls": "STATE"
+ },
+ {
+  "z": "metropolis",
+  "key": "pdf:canon_dossier | COMPOSED@Moderate",
+  "reading": 0.21,
+  "bar": 0.15,
+  "top": "Safety: Moderate day to day; crime is rising faster than those in charge can answer it.",
+  "cls": "STATE?"
+ },
+ {
+  "z": "metropolis",
+  "key": "pdf:draft_brief | COMPOSED@Moderate",
+  "reading": 0.21,
+  "bar": 0.15,
+  "top": "Safety: Moderate day to day; crime is rising faster than those in charge can answer it.",
+  "cls": "STATE?"
+ },
+ {
+  "z": "metropolis",
+  "key": "pdf:timeline_packet | COMPOSED@Moderate",
+  "reading": 0.21,
+  "bar": 0.15,
+  "top": "Safety: Moderate day to day; crime is rising faster than those in charge can answer it.",
+  "cls": "STATE?"
+ },
+ {
+  "z": "hamlet",
+  "key": "web:Summary/Overview | publicProse.blocks.general:overview.siteLines[]",
+  "reading": 0.2,
+  "bar": 0.15,
+  "top": "# keeps no market of any kind.",
+  "cls": "STATE?"
+ },
+ {
+  "z": "hamlet",
+  "key": "web:World/NPCs | npcs[].secret.what",
+  "reading": 0.2,
+  "bar": 0.15,
+  "top": "Neither has acknowledged the other was there",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "village",
+  "key": "web:World/History | publicProse.blocks.general:history.foundedLine",
+  "reading": 0.2,
+  "bar": 0.15,
+  "top": "Ask in # why it is here and people will tell you its first reason, though the place has lo",
+  "cls": "STATE"
+ },
+ {
+  "z": "metropolis",
+  "key": "web:Systems/Economics | publicProse.blocks.economy:economics.incomeWeight.sentence",
+  "reading": 0.2,
+  "bar": 0.15,
+  "top": "At # no large undertaking is reckoned up without asking what magic could add to it or take",
+  "cls": "STATE"
+ },
+ {
+  "z": "thorp",
+  "key": "web:Systems/Economics | publicProse.blocks.economy:economics.incomeMix.sentence",
+  "reading": 0.19,
+  "bar": 0.15,
+  "top": "# does not spread its living across many trades: one carries the place, and the rest are s",
+  "cls": "STATE"
+ },
+ {
+  "z": "thorp",
+  "key": "web:Systems/Economics | publicProse.blocks.economy:economics.foodSecurityRung.sentence",
+  "reading": 0.19,
+  "bar": 0.15,
+  "top": "In an ordinary season # has enough to eat, or near enough.",
+  "cls": "STATE"
+ },
+ {
+  "z": "thorp",
+  "key": "web:Systems/Resources | publicProse.blocks.economy:economics.strategicValue.sentence",
+  "reading": 0.19,
+  "bar": 0.15,
+  "top": "The people of # know what their ground is worth to others, and know that is reason enough ",
+  "cls": "STATE"
+ },
+ {
+  "z": "thorp",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:state.publicOrder.beside",
+  "reading": 0.19,
+  "bar": 0.15,
+  "top": "With no gaol at #, nobody who does wrong here can be locked away; most go on living beside",
+  "cls": "STATE"
+ },
+ {
+  "z": "thorp",
+  "key": "web:Systems/Magic | publicProse.blocks.magic.arcaneReliance.sentence",
+  "reading": 0.19,
+  "bar": 0.15,
+  "top": "Whatever magic reaches #, the thorp does not rest on it: nothing it lives by would stop wi",
+  "cls": "STATE"
+ },
+ {
+  "z": "hamlet",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:state.publicOrder.beside",
+  "reading": 0.19,
+  "bar": 0.15,
+  "top": "# pays nobody to keep the peace, and trouble here is settled among its own people.",
+  "cls": "STATE"
+ },
+ {
+  "z": "village",
+  "key": "web:Systems/Resources | publicProse.blocks.economy:economics.strategicValue.sentence",
+  "reading": 0.19,
+  "bar": 0.15,
+  "top": "#'s position is worth watching over: whoever holds the ground holds what the assessment be",
+  "cls": "STATE"
+ },
+ {
+  "z": "town",
+  "key": "web:Systems/Economics | culturalIdentity.foodways",
+  "reading": 0.19,
+  "bar": 0.15,
+  "top": "Meals follow the season and what the household has put by.",
+  "cls": "STATE"
+ },
+ {
+  "z": "town",
+  "key": "web:Systems/Economics | publicProse.blocks.economy:economics.foodSecurityRung.sentence",
+  "reading": 0.19,
+  "bar": 0.15,
+  "top": "# is fed, but what it keeps put by would not outlast a run of poor harvests.",
+  "cls": "STATE"
+ },
+ {
+  "z": "town",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:state.publicOrder.beside",
+  "reading": 0.19,
+  "bar": 0.15,
+  "top": "# keeps a working balance: the law is present, so is crime, and neither has the town to it",
+  "cls": "STATE"
+ },
+ {
+  "z": "town",
+  "key": "pdf:canon_dossier | culturalIdentity.foodways",
+  "reading": 0.19,
+  "bar": 0.15,
+  "top": "Meals follow the season and what the household has put by.",
+  "cls": "STATE"
+ },
+ {
+  "z": "town",
+  "key": "pdf:draft_brief | culturalIdentity.foodways",
+  "reading": 0.19,
+  "bar": 0.15,
+  "top": "Meals follow the season and what the household has put by.",
+  "cls": "STATE"
+ },
+ {
+  "z": "city",
+  "key": "web:Systems/Resources | publicProse.blocks.economy:economics.strategicValue.sentence",
+  "reading": 0.19,
+  "bar": 0.15,
+  "top": "#'s position is worth watching over: whoever holds the ground holds what the assessment be",
+  "cls": "STATE"
+ },
+ {
+  "z": "city",
+  "key": "web:Summary/Plot Hooks | economicState.safetyProfile.plotHooks[]",
+  "reading": 0.19,
+  "bar": 0.15,
+  "top": "A smuggler wants one crate moved quietly and will pay well, but will not say what is in it",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "city",
+  "key": "pdf:canon_dossier | economicState.safetyProfile.plotHooks[]",
+  "reading": 0.19,
+  "bar": 0.15,
+  "top": "A smuggler wants one crate moved quietly and will pay well, but will not say what is in it",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "city",
+  "key": "pdf:draft_brief | economicState.safetyProfile.plotHooks[]",
+  "reading": 0.19,
+  "bar": 0.15,
+  "top": "A smuggler wants one crate moved quietly and will pay well, but will not say what is in it",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "metropolis",
+  "key": "web:Systems/Economics | publicProse.blocks.economy:economics.foodSecurityRung.sentence",
+  "reading": 0.19,
+  "bar": 0.15,
+  "top": "In an ordinary season # has enough to eat, or near enough.",
+  "cls": "STATE"
+ },
+ {
+  "z": "metropolis",
+  "key": "web:Systems/Economics | publicProse.blocks.general:economics.craftReasonLine",
+  "reading": 0.19,
+  "bar": 0.15,
+  "top": "# has the hands for some of its work and not the goods that work starts from, and the hand",
+  "cls": "STATE"
+ },
+ {
+  "z": "thorp",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:forces.arcane.sentence",
+  "reading": 0.18,
+  "bar": 0.15,
+  "top": "Ask at # who would answer a threat worked by magic, and the answer is that nobody would.",
+  "cls": "STATE"
+ },
+ {
+  "z": "village",
+  "key": "web:Systems/Economics | publicProse.blocks.general:economics.craftReasonLine",
+  "reading": 0.18,
+  "bar": 0.15,
+  "top": "Ask where # gets its salt and somebody will point you at the carts.",
+  "cls": "STATE"
+ },
+ {
+  "z": "village",
+  "key": "web:Systems/Magic | publicProse.blocks.magic.arcaneReliance.sentence",
+  "reading": 0.18,
+  "bar": 0.15,
+  "top": "The work that keeps # fed and busy is done by ordinary labour, whatever magic is about the",
+  "cls": "STATE"
+ },
+ {
+  "z": "town",
+  "key": "web:Systems/Power | publicProse.blocks.power:desk.successionRisk.sentence",
+  "reading": 0.18,
+  "bar": 0.15,
+  "top": "The # outweighs everyone at # who wants its place, and the whole town knows who they are.",
+  "cls": "STATE"
+ },
+ {
+  "z": "town",
+  "key": "web:World/History | publicProse.blocks.general:history.foundedLine",
+  "reading": 0.18,
+  "bar": 0.15,
+  "top": "The oldest houses in # stand at its middle, and everything newer has been built outward fr",
+  "cls": "STATE"
+ },
+ {
+  "z": "city",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:forces.force.sentence",
+  "reading": 0.18,
+  "bar": 0.15,
+  "top": "Everyone who comes through #'s gate is counted there by a soldier whose job it is, and cou",
+  "cls": "STATE"
+ },
+ {
+  "z": "metropolis",
+  "key": "web:Systems/Economics | publicProse.blocks.economy:economics.criticalImport.sentence",
+  "reading": 0.18,
+  "bar": 0.15,
+  "top": "Everyone at # who works with grapes knows the country here does not give enough of it, and",
+  "cls": "STATE"
+ },
+ {
+  "z": "metropolis",
+  "key": "web:Systems/Power | publicProse.blocks.power:desk.successionRisk.sentence",
+  "reading": 0.18,
+  "bar": 0.15,
+  "top": "A visitor at # hears more than one name spoken about the hall, and the one with the most w",
+  "cls": "STATE"
+ },
+ {
+  "z": "metropolis",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:forces.force.sentence",
+  "reading": 0.18,
+  "bar": 0.15,
+  "top": "Everyone who comes through #'s gate is counted there by a soldier whose job it is, and cou",
+  "cls": "STATE"
+ },
+ {
+  "z": "thorp",
+  "key": "web:World/History | publicProse.blocks.general:history.foundedLine",
+  "reading": 0.17,
+  "bar": 0.15,
+  "top": "Generations of patching and rebuilding have nearly hidden the plan # was laid out to.",
+  "cls": "STATE"
+ },
+ {
+  "z": "thorp",
+  "key": "web:Summary/Overview | publicProse.blocks.general:overview.siteLines[]",
+  "reading": 0.17,
+  "bar": 0.15,
+  "top": "A visitor with goods to sell at # finds no stall to take and no market day to wait for.",
+  "cls": "STATE?"
+ },
+ {
+  "z": "hamlet",
+  "key": "web:Systems/Economics | publicProse.blocks.economy:economics.incomeMix.sentence",
+  "reading": 0.17,
+  "bar": 0.15,
+  "top": "Almost everyone's living at # depends on one source of income, whether or not they earn fr",
+  "cls": "STATE"
+ },
+ {
+  "z": "hamlet",
+  "key": "web:Systems/Magic | publicProse.blocks.magic.arcaneReliance.sentence",
+  "reading": 0.17,
+  "bar": 0.15,
+  "top": "Without any magic at all, # would still keep its living.",
+  "cls": "STATE"
+ },
+ {
+  "z": "village",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:threat.internal.sentence",
+  "reading": 0.17,
+  "bar": 0.15,
+  "top": "No court sits at # to decide a quarrel, and the place gets along without one.",
+  "cls": "STATE"
+ },
+ {
+  "z": "city",
+  "key": "web:Systems/Economics | publicProse.blocks.economy:economics.exportPosture.sentence",
+  "reading": 0.17,
+  "bar": 0.15,
+  "top": "There is always something going out, and not always the same thing.",
+  "cls": "STATE"
+ },
+ {
+  "z": "city",
+  "key": "web:Systems/Economics | publicProse.blocks.general:economics.craftReasonLine",
+  "reading": 0.17,
+  "bar": 0.15,
+  "top": "Some of #'s work goes only as far as the goods it needs from elsewhere allow, and stops wh",
+  "cls": "STATE"
+ },
+ {
+  "z": "city",
+  "key": "web:Systems/Resources | publicProse.blocks.economy:economics.resourceCondition.sentence",
+  "reading": 0.17,
+  "bar": 0.15,
+  "top": "Until somebody pays to open new workings, the hands that worked there are idle or gone els",
+  "cls": "STATE"
+ },
+ {
+  "z": "city",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:posture.posture.beside",
+  "reading": 0.17,
+  "bar": 0.15,
+  "top": "# reads as a defended place from the road in: the approaches are watched, the works are ke",
+  "cls": "STATE"
+ },
+ {
+  "z": "city",
+  "key": "web:Systems/Magic | publicProse.blocks.magic.arcaneReliance.sentence",
+  "reading": 0.17,
+  "bar": 0.15,
+  "top": "# relies on help beyond ordinary work, and on the people who give it continuing to be here",
+  "cls": "STATE"
+ },
+ {
+  "z": "metropolis",
+  "key": "web:Systems/Magic | publicProse.blocks.magic.arcaneReliance.sentence",
+  "reading": 0.17,
+  "bar": 0.15,
+  "top": "A visitor to # soon learns how much the metropolis leans on help beyond ordinary work, and",
+  "cls": "STATE"
+ },
+ {
+  "z": "thorp",
+  "key": "web:Systems/Economics | publicProse.blocks.economy:economics.criticalImport.sentence",
+  "reading": 0.16,
+  "bar": 0.15,
+  "top": "A visitor who asks at # about timber is told that the country around never yields enough.",
+  "cls": "STATE"
+ },
+ {
+  "z": "thorp",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:threat.internal.sentence",
+  "reading": 0.16,
+  "bar": 0.15,
+  "top": "# spends nothing on judgement: it pays no one to hear a case and keeps nowhere to hold an ",
+  "cls": "STATE"
+ },
+ {
+  "z": "village",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:forces.arcane.sentence",
+  "reading": 0.16,
+  "bar": 0.15,
+  "top": "Whoever defends #, none of them works with magic.",
+  "cls": "STATE"
+ },
+ {
+  "z": "town",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:posture.posture.beside",
+  "reading": 0.16,
+  "bar": 0.15,
+  "top": "People at # expect to hold against the usual trouble, and they claim no more than that.",
+  "cls": "STATE"
+ },
+ {
+  "z": "town",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:threat.economic.sentence",
+  "reading": 0.16,
+  "bar": 0.15,
+  "top": "Nobody in # lies awake over a lean year: there is enough in hand to see the town through o",
+  "cls": "STATE"
+ },
+ {
+  "z": "town",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:forces.arcane.sentence",
+  "reading": 0.16,
+  "bar": 0.15,
+  "top": "Ask at # who would answer a threat worked by magic, and the answer is that nobody would.",
+  "cls": "STATE"
+ },
+ {
+  "z": "metropolis",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:state.publicOrder.beside",
+  "reading": 0.16,
+  "bar": 0.15,
+  "top": "Visitors to # are told which few streets to avoid, and the advice turns out to be right.",
+  "cls": "STATE"
+ },
+ {
+  "z": "hamlet",
+  "key": "pdf:canon_dossier | history.founding.reason",
+  "reading": 0.15,
+  "bar": 0.15,
+  "top": "developed where herders gathered seasonally until the gathering became permanent",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "hamlet",
+  "key": "pdf:draft_brief | history.founding.reason",
+  "reading": 0.15,
+  "bar": 0.15,
+  "top": "developed where herders gathered seasonally until the gathering became permanent",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "village",
+  "key": "web:Systems/Economics | publicProse.blocks.economy:economics.incomeMix.sentence",
+  "reading": 0.15,
+  "bar": 0.15,
+  "top": "Ask at # what the place lives on and everyone gives the same answer.",
+  "cls": "STATE"
+ },
+ {
+  "z": "town",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:criminal.structure.sentence",
+  "reading": 0.15,
+  "bar": 0.15,
+  "top": "Criminal work at # is coordinated enough to hold routes and territories, though not yet ti",
+  "cls": "STATE"
+ },
+ {
+  "z": "city",
+  "key": "web:Systems/Power | publicProse.blocks.power:desk.successionRisk.sentence",
+  "reading": 0.15,
+  "bar": 0.15,
+  "top": "# has people who would take the hall if they could.",
+  "cls": "STATE"
+ },
+ {
+  "z": "metropolis",
+  "key": "web:Systems/Defense | publicProse.blocks.defense:posture.posture.beside",
+  "reading": 0.15,
+  "bar": 0.15,
+  "top": "The metropolis does not spend much time thinking about being attacked: its defences are in",
+  "cls": "STATE"
+ },
+ {
+  "z": "metropolis",
+  "key": "pdf:canon_dossier | npcs[].secret.what",
+  "reading": 0.15,
+  "bar": 0.15,
+  "top": "Was present when # did something they've never accounted for publicly.",
+  "cls": "NARRATIVE"
+ },
+ {
+  "z": "metropolis",
+  "key": "pdf:draft_brief | npcs[].secret.what",
+  "reading": 0.15,
+  "bar": 0.15,
+  "top": "Was present when # did something they've never accounted for publicly.",
+  "cls": "NARRATIVE"
+ }
+]
