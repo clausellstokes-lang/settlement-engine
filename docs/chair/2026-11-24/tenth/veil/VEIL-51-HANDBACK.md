@@ -218,6 +218,27 @@ THE PLAN OF UNIT 4's MERGE M (written 05:1x, BEFORE any resolution; worktree /ho
     measured; R5D's 23-prose pin dropped; walker 10/10), 89e7d2d2c (M4: R5D's 212 header item (38) after (37), comments only; 212
     applies and rolls back rc 0 on v27x211; registry and standingForms checks green). The machine restarted at 05:06 (PG16 restarted).
     RUNNING: `u4/mproof.sh` (the three pglite slices, domain-strict, the TS2345 read; log /var/tmp/v51/out/m/mproof.log).
+  THE PLAN OF ITEM 2, N (PLAN-V15 item 2: R5D narrowed to THE CUT ALONE; written 05:3x BEFORE any edit; built after the chair's word
+    on "no span matches"; worktree /home/user/wt/r5desc above 89e7d2d2c and the DESCARM/STANDWALK merges):
+    N1 THE PAGE PRINTS NO STANDING: reader S unwired: remove the calls `rederiveStanding(s)` in `src/domain/veil/pageRederive.js ::
+      rederiveForPage` (:339) and `rederiveStanding(s, { authoritative: true })` in `src/domain/veil/importRederive.js` (:133, :241);
+      `rederiveStanding` itself kept unexported-unused or deleted with its only callers (a walker may pin it: read first). Expected
+      diff: three call lines; the shared page shows the served base alone.
+    N2 FAIL CLOSED BY SPAN in both engines: the cut (212 `_gallery_veil_withhold_always`'s standing statement; the twin
+      `galleryWithholdAlways.js :: standingBase` (:214) and its caller) withholds a desc WHOLE where, at one step, rows match at the
+      chosen start over DIFFERENT spans (detectable at serve time; 0 on both pools; with every row anchored to the end it cannot occur
+      today, so the guard is a structural belt). WAY A (my lean, VEIL-55's): a desc NO row matches is served whole (it has no
+      standing); WAY B (the literal ruling): withheld whole too (481 base descs leave: 320 today, 161 master).
+    N3 THE BACKSTOP = R5D's BELT, already built ((38) (e); twin `galleryRosterChoices.js` :437): a desc whose base after the cut still
+      names a withheld power (212's own name search / the twin's buildNameSearch) leaves WHOLE, both lists. Kept; its twin comment
+      renumbered (36) -> (38).
+    N4 TESTS: `tests/security/galleryVeilDesc.pglite.test.js`'s page arms (TEETH, FIDELITY, DIFFERENTIAL, READER B, the stored halves:
+      they assert S) re-cut to V15: the page's desc = the served base on every non-owner read; the plants (a)-(g) stand; a FAIL-CLOSED
+      PLANT (a hand-written tail naming a withheld power that no row cuts: the belt withholds it whole); NO STANDING printed on any
+      non-owner read, both stored shapes; the owner's read unchanged. A builder, by a committed brief naming the file's line ranges.
+    N5 PROOF ON SLICES: DESCARM green; galleryVeilDesc, galleryWithholdAlways, galleryRosterChoices pglite; the walkers
+      (standingFormsTotality with the census, rosterChoiceComposedHosts, standingReaders); domain-strict; then V21's tooth
+      (`q52.sh miplant5`: absent at every door, the map's two among them).
   PROOF OF M: the three files' slices (galleryWithholdAlways.pglite, rosterChoiceComposedHosts.walker, galleryRosterChoices.pglite and
     galleryVeilDesc.pglite) and the strict typecheck, each through the mutex. Then DESCARM and STANDWALK merged (plain), then PLAN-V15
     item 2 by its own written plan.
