@@ -26,8 +26,10 @@ BUILT, NOT MERGED (all pushed unless said):
   commit; CONFIRMED by probe `out/v53/cures/D/d5.probe.test.js`: the served documents of two records differing only in
   recentConflict are deep-equal, so the shared page cannot name the owner's holder); RULED BY THE CHAIR (V16): fail closed;
   BUILT 168587f9c PUSHED (all holder readers
-  through `holderOf`; a HOLDER_READERS walker arm; 0 of 720 reach it), WITH A NAMED DEPARTURE FROM V16 (b) PUT TO THE CHAIR via
-  VEIL-55: an owner record whose own sentence does not decide two takers now gets no holder (was: the last edge, itself unreliable). Cure E 90ddc2fe5 PUSHED (the fortune law's
+  through `holderOf`; a HOLDER_READERS walker arm; 0 of 720 reach it), ITS OWNER DEPARTURE ACCEPTED BY THE CHAIR (RULING V19 (1));
+  READ BY VEIL-55: NO FAULT; rides the join. V19 (2): a NEW UNIT "THE SEAT'S HOLDER IS STORED" is mine, NOT TO START before VEIL-55's
+  word (placed after phase 1's SQL units in PLAN-2): transferRulingPower stores the holder's id; holderOf reads it first; withheld on
+  shared reads (a registry row; 212's one line read by the chair); red first on the two-transfer plant; 0 born towns carry it. Cure E 90ddc2fe5 PUSHED (the fortune law's
   resolver into computePublicLegitimacy; the GENERATION_LAWS walk in the arm with a planted fifth row; seat law NOT forgotten);
   sent to VEIL-55 with its named departure.
 RUNNING: the samenessHideable wording commit (cure B's builder resumed). The PAGES slice was STOPPED at 22:50 (the chair's order: it comes after the anon arm).
@@ -76,3 +78,4 @@ title, no assertion moved, tests/lint whole after, and say whether the walker re
 - 01:0x cure D stopped (ruling owed); cure E dispatched.
 - 01:4x the container restarted (cure E survived as 90ddc2fe5); cure E pushed; cure D resumed on V16.
 - 02:3x cure D pushed (168587f9c) with its departure to the chair; the wording commit dispatched.
+- 02:52 R4-IDS MERGED (lane tip 8430edf5c, lane/veil-55-2026-11-24-tip). 02:51 the chair's V19 on cure D.
