@@ -1,0 +1,8 @@
+SNAP on stored-join (q52 snjoin; snap.probe.jsx at cf198cc96+), CONFIRMED (executed)
+FORM stored shards 4 campaigns 36 (places 140, with a hideable house 92) g 4 ticks 12 plant false | wall per shard ms [466646,447122,449710,450337]
+READS 2160 | no world {} | publish {"publish_map":36} | sections present (campaigns) {"worldClock":36,"chronicle":36,"pantheon":36,"warNetwork":36,"dashboard":36}
+WORLD BYTES min 962 median 2019 max 2605 | ticks run [12] | pulse errors 0
+HITS BY KIND {}
+SECTIONS REFUSED BY THE SERVER'S OWN CHECK (campaigns) {"chronicle":36}
+PERSON HITS THE OLD SUBSTRING MATCH HAD AND THE WHOLE-WORD MATCH DOES NOT: {}
+PLANT BLIND CELLS 0

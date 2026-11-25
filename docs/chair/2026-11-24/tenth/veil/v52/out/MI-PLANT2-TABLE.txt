@@ -1,0 +1,39 @@
+WDMI plant 2 (VEIL-55 00:16: r3m-metropolis-none-1-127, master-born; 'Thieves' Guild Master' tie roles -> 'Smuggling network Master'), CONFIRMED
+FORM stored shards 1 places 1 (hidden-house 1, controls 0) | wall per shard ms [40137] | server ms [29284]
+READS 140 | HIDING 140 on 1 places | no document {}
+HIDING BY engine|door|Reveal {"server|gallery|dm=false":10,"server|link|dm=false":10,"server|import|dm=false":10,"server|map|dm=false":10,"server|mapimport|dm=false":10,"twin|gallery|dm=false":10,"twin|link|dm=false":10,"server|gallery|dm=true":10,"server|link|dm=true":10,"server|import|dm=true":10,"server|map|dm=true":10,"server|mapimport|dm=true":10,"twin|gallery|dm=true":10,"twin|link|dm=true":10}
+DAILY (deriveDailyLife(served, null) vs the never-there read, by slot: differ / hiding reads)
+DAILY SIDE (after rederiveForPage): {}
+OFFICE LINES on hiding reads: served {} | never-there {} | differ 0  | L12 in the catalogue: false
+DM SLOT: in deriveDailyLife(served, null).slots 0 | as a key in a served document 0 {}
+OWNER-ISH KEYS in served documents (/audience|owner|^dm|_dm$|dmOnly|dm_only|dmLayer|isDm|gmOnly/i): 1
+  powerStructure.factionRelationships[].dmNote n=30 {"server|gallery|dm=true":10,"server|import|dm=true":10,"twin|gallery|dm=true":10}
+NEVER-THERE records: 0 | still naming a withheld thing in their own strings: 0
+STORED vs BORN: same 0 differ 1 ["r3m-metropolis-none-1-127"] | births with a neighborRelationship name: 0
+NAMES: 4 path patterns
+  HIT npcs[].secondaryAffiliation [name] reads 180 places 1 doors {"server|gallery|dm=true":60,"server|import|dm=true":60,"twin|gallery|dm=true":60} | ex {"seed":"r3m-metropolis-none-1-127","setting":"own","dm":true,"eng":"server","door":"gallery","text":"Thieves' Guild","wh":["Thieves' Guild","The Shadow Compact","Smuggling network","Multiple criminal factions","Front businesses","Underground city"]}
+  HIT npcs[].role [name] reads 140 places 1 doors {"server|gallery|dm=false":10,"server|link|dm=false":10,"server|import|dm=false":10,"server|map|dm=false":10,"server|mapimport|dm=false":10,"twin|gallery|dm=false":10,"twin|link|dm=false":10,"server|gallery|dm=true":10,"server|link|dm=true":10,"server|import|dm=true":10,"server|map|dm=true":10,"server|mapimport|dm=true":10,"twin|gallery|dm=true":10,"twin|link|dm=true":10} | ex {"seed":"r3m-metropolis-none-1-127","setting":"own","dm":false,"eng":"server","door":"gallery","text":"Thieves' Guild Master","wh":["Thieves' Guild","The Shadow Compact","Smuggling network","Multiple criminal factions","Front businesses","Underground city"]}
+  HIT factions[].members[].secondaryAffiliation [name] reads 120 places 1 doors {"server|gallery|dm=true":40,"server|import|dm=true":40,"twin|gallery|dm=true":40} | ex {"seed":"r3m-metropolis-none-1-127","setting":"own","dm":true,"eng":"server","door":"gallery","text":"Thieves' Guild","wh":["Thieves' Guild","The Shadow Compact","Smuggling network","Multiple criminal factions","Front businesses","Underground city"]}
+  HIT factions[].members[].role [name] reads 30 places 1 doors {"server|gallery|dm=true":10,"server|import|dm=true":10,"twin|gallery|dm=true":10} | ex {"seed":"r3m-metropolis-none-1-127","setting":"own","dm":true,"eng":"server","door":"gallery","text":"Thieves' Guild Master","wh":["Thieves' Guild","The Shadow Compact","Smuggling network","Multiple criminal factions","Front businesses","Underground city"]}
+MAP MEMBER: known fault (prominentRelationship / pressureSentence, Reveal off) {} | OTHER 40
+  MAP OTHER {"door":"map","pat":"npcs[].role","kind":"name","seed":"r3m-metropolis-none-1-127","setting":"own","dm":false,"text":"Thieves' Guild Master"}
+  MAP OTHER {"door":"mapimport","pat":"npcs[].role","kind":"name","seed":"r3m-metropolis-none-1-127","setting":"own","dm":false,"text":"Thieves' Guild Master"}
+  MAP OTHER {"door":"map","pat":"npcs[].role","kind":"name","seed":"r3m-metropolis-none-1-127","setting":"g:000","dm":false,"text":"Thieves' Guild Master"}
+  MAP OTHER {"door":"mapimport","pat":"npcs[].role","kind":"name","seed":"r3m-metropolis-none-1-127","setting":"g:000","dm":false,"text":"Thieves' Guild Master"}
+  MAP OTHER {"door":"map","pat":"npcs[].role","kind":"name","seed":"r3m-metropolis-none-1-127","setting":"g:001","dm":false,"text":"Thieves' Guild Master"}
+  MAP OTHER {"door":"mapimport","pat":"npcs[].role","kind":"name","seed":"r3m-metropolis-none-1-127","setting":"g:001","dm":false,"text":"Thieves' Guild Master"}
+  MAP OTHER {"door":"map","pat":"npcs[].role","kind":"name","seed":"r3m-metropolis-none-1-127","setting":"g:010","dm":false,"text":"Thieves' Guild Master"}
+  MAP OTHER {"door":"mapimport","pat":"npcs[].role","kind":"name","seed":"r3m-metropolis-none-1-127","setting":"g:010","dm":false,"text":"Thieves' Guild Master"}
+  MAP OTHER {"door":"map","pat":"npcs[].role","kind":"name","seed":"r3m-metropolis-none-1-127","setting":"g:011","dm":false,"text":"Thieves' Guild Master"}
+  MAP OTHER {"door":"mapimport","pat":"npcs[].role","kind":"name","seed":"r3m-metropolis-none-1-127","setting":"g:011","dm":false,"text":"Thieves' Guild Master"}
+  MAP OTHER {"door":"map","pat":"npcs[].role","kind":"name","seed":"r3m-metropolis-none-1-127","setting":"g:100","dm":false,"text":"Thieves' Guild Master"}
+  MAP OTHER {"door":"mapimport","pat":"npcs[].role","kind":"name","seed":"r3m-metropolis-none-1-127","setting":"g:100","dm":false,"text":"Thieves' Guild Master"}
+  MAP OTHER {"door":"map","pat":"npcs[].role","kind":"name","seed":"r3m-metropolis-none-1-127","setting":"g:101","dm":false,"text":"Thieves' Guild Master"}
+  MAP OTHER {"door":"mapimport","pat":"npcs[].role","kind":"name","seed":"r3m-metropolis-none-1-127","setting":"g:101","dm":false,"text":"Thieves' Guild Master"}
+  MAP OTHER {"door":"map","pat":"npcs[].role","kind":"name","seed":"r3m-metropolis-none-1-127","setting":"g:110","dm":false,"text":"Thieves' Guild Master"}
+  MAP OTHER {"door":"mapimport","pat":"npcs[].role","kind":"name","seed":"r3m-metropolis-none-1-127","setting":"g:110","dm":false,"text":"Thieves' Guild Master"}
+  MAP OTHER {"door":"map","pat":"npcs[].role","kind":"name","seed":"r3m-metropolis-none-1-127","setting":"allOpen","dm":false,"text":"Thieves' Guild Master"}
+  MAP OTHER {"door":"mapimport","pat":"npcs[].role","kind":"name","seed":"r3m-metropolis-none-1-127","setting":"allOpen","dm":false,"text":"Thieves' Guild Master"}
+  MAP OTHER {"door":"map","pat":"npcs[].role","kind":"name","seed":"r3m-metropolis-none-1-127","setting":"off","dm":false,"text":"Thieves' Guild Master"}
+  MAP OTHER {"door":"mapimport","pat":"npcs[].role","kind":"name","seed":"r3m-metropolis-none-1-127","setting":"off","dm":false,"text":"Thieves' Guild Master"}
+PLANT "r3m-metropolis-none-1-127" "Smuggling network Master" | hiding reads {"server|gallery|dm=false":10,"server|link|dm=false":10,"server|import|dm=false":10,"server|map|dm=false":10,"server|mapimport|dm=false":10,"twin|gallery|dm=false":10,"twin|link|dm=false":10,"server|gallery|dm=true":10,"server|link|dm=true":10,"server|import|dm=true":10,"server|map|dm=true":10,"server|mapimport|dm=true":10,"twin|gallery|dm=true":10,"twin|link|dm=true":10} | present {} | caught {} | BLIND {}
