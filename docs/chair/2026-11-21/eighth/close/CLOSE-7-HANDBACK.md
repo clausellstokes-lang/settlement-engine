@@ -25,7 +25,13 @@ summaries so far: TWO (the second ~22:2x UTC). A THIRD before "CLOSE-7 <commit>"
 - ANCHORS-2 02b34ea1c: ACCEPTED (R24p, 15:32). TYPES is merged into it so the hook passes.
   - ANCHORS-3 is owed (builder a45b468ed08040c87): the 5255 case leaves; the one-week wording gets a direct call, or else the stem
     goes into 5441.
-- STILL OWED, IN ORDER:
+- SENT at 15:54 UTC:
+  - READS (`close-7/reports/READS-117.md`; seven causes and four figures, each with a proposed cure; the chair to rule);
+  - ANCHORS-3 9f859467a (a direct call of calendarLineOf; soak1k-5255 retired);
+  - SIZE-BACK b67b29cdc (first paint -10,154 raw).
+- NEXT on the chair's ruling: one builder for READS' items 3, 4 and 5, the hooks figure, and item 7 (the need atom, src, red first
+  on r2r-town-54).
+- (The list below is superseded.) STILL OWED, IN ORDER:
   - the READS message (seven causes and four figures, the proposed cure in one line each);
   - SIZE-BACK (builder a6a0bf694118b0846).
 - The units (D2, D2b, D3, D5 from BIRTH-1; D4 from BIRTH-2; D6 and E8 from WORDS-1) are for the SECOND hand-in, after point 117.

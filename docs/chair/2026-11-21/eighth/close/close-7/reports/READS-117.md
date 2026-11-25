@@ -13,7 +13,7 @@ whole range (`git diff d447ee31e 97c6bfc7a` empty on them), so every move is the
 
 ## Status
 
-PARTIAL — runs in progress.
+DONE: seven runs, all through the mutex, each log ending `exit=`.
 
 ## Run 1: the item tree 97c6bfc7a (log `tip-all.log`, exit=1; 9 files, 15 failed | 138 passed)
 Reproduces the chair's messages exactly, with the full arrays:
@@ -100,3 +100,32 @@ implementationPackets at 27408d4ec, before GUARD's merge (21 passed).
    (`houseInputAtHand :: housesShortOf`), the atom's copy (`needNotBroughtIn.js :: dealtInHere`) reads only non-imported GAP
    ROWS, and the Butchers have no gap row (gaps: Caravanserai camel_herds, Brickmaker clay, Potter clay). So the atom drops
    livestock and the page keeps it. The cure is the atom's copy of the short rule, not B1(i).
+
+## (4) THE FOUR FIGURES (every one first moves at 6d30700e6, B1(i), and is green at 0ec96f13d; CONFIRMED by run)
+Run 7, `probes2.log` (exit=0): the hook corpus and the Herald row at 97c6bfc7a and 0ec96f13d.
+- **hookThemeDraws 2,147 -> 2,145 (DOWN 2): B1(i).** What it is: an in-file pin of HK-3 ("no hook is lost"), one hook per
+  card, so the total is the cast of its 60-town corpus. CONFIRMED (probe): exactly one town moves, `hk-probe-metropolis-6`
+  (desert), 75 -> 73 cards and 75 -> 73 hooks: two withheld houses' faces are not minted. No hook was dropped from a card
+  (HK-3's invariant holds). Door: none; an in-file constant re-keyed "by this file's own corpus" with the cause written, at a
+  close under the owner's word (last: TAIL-CLOSE-DOORS-4, 2026-11-15). Its sibling pins (npcTotal 2149, hook-bearing 2147)
+  sit after the failing line and follow by the same two (PLAUSIBLE).
+- **heraldKnowledgeDeskGolden's digest: B1(i).** What it is: the non-omniscient Herald of the Full Simulation realm
+  rr-fresh-full after one year, held byte-stable (contentSha256, itemCount, each item's desk). Moved `a4294c06…` -> `4600b864…`;
+  CONFIRMED (probe) itemCount 473 -> 466 (DOWN 7): 18 section rows leave, 11 arrive, the realm's year re-dealt by its re-dealt
+  houses (which court is desert: PLAUSIBLE). The refile itself (the desks) is not what moved. Door: `recordGolden`, surface
+  `herald-knowledge-desk-golden`, `GOLDEN_SHIFT_SIGNED=<record> UPDATE_GOLDEN=1`; a re-record is the OWNER's to sign.
+- **dossierProseManifest: B1(i).** What it is: the composed-prose manifest over the golden master's 525 configurations at two
+  audiences. golden-master-v3 cells 72,614 -> 72,613 (DOWN 1; towns 516 and gm-seed-a/b/c unmoved); the mixed-pool arm's
+  DM-only positions 214 -> 213 (DOWN 1, the lawful direction; player-only still empty, no leak). B1I.md: 24 of the 525 golden
+  rows move, all desert. The DRIFT arm's 1,050 rows are red at 0ec96f13d too (not B1(i)'s). Door: the fixture moves only
+  through `scripts/prose-manifest-cells.mjs --record` under `GOLDEN_SHIFT_SIGNED` (register row `dossier-prose-manifest`);
+  the in-file figures are re-stated with the cause at a close under the owner's word and its record.
+- **townCartographyCalibration W2 (three desert rows): B1(i).** What it is: the frozen 504-row cartography corpus, 52 rows
+  re-measured live. Moved DOWN, institutions only (districts and scene buildings unmoved): city cg1-seed-06 83 -> 81 (carto
+  buildings 207 -> 203), metropolis cg1-seed-08 98 -> 95, village cg1-seed-05 15 -> 14; all three `desert|road`. Door: W0's
+  re-record arm, `UPDATE_CARTOGRAPHY_CALIBRATION=1` through `recordGolden` (surface `cartography-calibration-corpus`) under
+  an owner-signed `GOLDEN_SHIFT_SIGNED` record, with the written reason in the file's SHIFT RECORD header. Nothing re-recorded.
+
+## Clean-up
+The worktree `/home/user/wt/reads` is removed (`git worktree remove`); nothing was committed; no file under src/, tests/ or
+scripts/ was changed anywhere. This report is the one file written in the checkout.

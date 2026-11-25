@@ -149,3 +149,13 @@ The rows were measured by each file's own census, instrumented in copies on git-
   - editCorpusRatchet A3 (328 vs 327) and A7 (honesty figures) stay red as at the cut. R24o does not name them.
 - **`tests/lint` whole at 1909b5325:** 6 of 227 files red, 5 tests. They are the known three and the four frozen, the same
   as before. No test title moved.
+
+## ANCHORS-3 (the chair's ruling R24p): 9f859467a
+- I took the FIRST branch of the ruling: the wording can be called on its own.
+- The soak1k-5255 birth is retired. In its place is one direct call of `shownTraditions.js :: calendarLineOf` with a
+  hand-made one-week window (`{ startWeekOfYear: 13, weeks: 1 }`). It asserts "Kept in the same week as The Common
+  Offering." word for word.
+- soak1k-5441 keeps the three-in-one-window property.
+- The file is 2/2.
+- `tests/lint` whole: 6 of 227 files red, the known three and the four frozen, as before. The title count did not move (one
+  test out, one in).
