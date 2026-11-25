@@ -63,6 +63,10 @@ renumbering script (`briefs/V53-RENUMBER-BRIEF.md`), then items (5), (7), (8). "
 - THE CHAIR, 00:29 (2026-11-25): NO SUCCESSOR AT 620,000. By 560,000 this section and section 1 WHOLE and pushed, kept so at
   every push; then work on. On a compaction: one line to the chair, re-read START-VEIL-53.txt, this file and its rulings, go on.
   A judgment (a diff's read, a builder's acceptance) is finished before a compaction is near, or begun after it.
+- THE OWNER'S SCOPE LINE (the chair, 05:04 UTC 2026-11-25; `docs/chair/2026-11-24/tenth/SCOPE-LINE.md` on the chair's branch): this
+  release is THE GENERATOR ALONE (make, configure, read, export, share: gallery page, party link, import). No new work in advance
+  time, the simulator, the map or custom content unless this release breaks or leaks there; a finding there is ONE LINE to the
+  chair. Everything of this seat's STANDS (the join's work, the anon arm, FAIL-CLOSED PAGES, the seat's holder stored).
 - VEIL-55 (the lane's owner): J1 and cures A, B read, NO FAULT; each rides the join (unit 7); keep `-j1-wip` at e1b7a8714 and add
   B..E above 6b674eb36 on `-cures-wip`; the trial join stays at ba7460c33.
 
