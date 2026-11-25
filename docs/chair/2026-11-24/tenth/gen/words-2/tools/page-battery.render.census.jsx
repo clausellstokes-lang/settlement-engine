@@ -53,12 +53,12 @@ const load = async () => {
     import(/* @vite-ignore */ `${S}domain/density/densityCreateBoundary.js`),
     import(/* @vite-ignore */ `${S}store/configSlice.js`),
     import(/* @vite-ignore */ `${S}domain/coherence/pageCensusFindings.js`),
-    import(/* @vite-ignore */ `${TREE}/tests/components/pageCensusWalk.shared.mjs`),
+    import(/* @vite-ignore */ process.env.PAGE_BATTERY_WALK || `${TREE}/tests/components/pageCensusWalk.shared.mjs`), // WORDS-2: a counting copy, where given
   ]);
   await dens.loadGenerationLawPayloads();
   M = { OutputContainer: oc.default, generateSettlementPipeline: pipe.generateSettlementPipeline, withPublicProse: pub.withPublicProse,
     composePublicProse: ppc.composePublicProse, birthConfig: dens.birthConfig, DEFAULT_CONFIG: cfg.DEFAULT_CONFIG,
-    pageCensusFindings: find.pageCensusFindings, configOf: walk.configOf, storeFor: walk.storeFor, walkDossier: walk.walkDossier };
+    pageCensusFindings: find.pageCensusFindings, configOf: walk.configOf, storeFor: walk.storeFor, walkDossier: walk.walkDossier, lastRepeats: walk.lastRepeats };
   return M;
 };
 
@@ -77,6 +77,6 @@ for (const row of PLAN) {
     const findings = m.pageCensusFindings(town, views);
     writeFileSync(`${OUT}/${row.seed}.json`, JSON.stringify({ seed: row.seed, size: row.size, crisis: row.crisis ?? null,
       views: Object.keys(views).length, recordHash, pageHash: sha(views), rows: [...new Set(findings.map((f) => f.row))].sort(), findings,
-      ...(process.env.PAGE_BATTERY_VIEWS ? { printed: views } : {}) }));
+      ...(process.env.PAGE_BATTERY_VIEWS ? { printed: views } : {}), ...(m.lastRepeats ? { repeats: m.lastRepeats() } : {}) }));
   }, 300000);
 }
