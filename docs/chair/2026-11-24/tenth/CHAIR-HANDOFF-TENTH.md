@@ -1376,3 +1376,21 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   "SIZE-BACK <commit>", and its READS of seven non-anchor reds and four figures (the chair rules each).
   G18 and G19 are now written in `gen/RULING-G.md`. Marks at 15:00: BIRTH-1 53.16 (278,356 after a compaction).
   The children's board at 15:15 UTC: CLOSE-7 and WORDS-1 running; BIRTH-1, BIRTH-2, WORDS-2 idle after a turn.
+- 2026-11-25 16:01 UTC · T107 · THE READS RULED (R24q); A SECOND READER ON POINT 117's SOURCE; CLOSE-7 TOLD TO HAND OVER; G20 TO G25; THE LINE HAS NOT MOVED.
+  THE LANDING's TREE (`/home/user/wt/line`, local `lane/stack-117-wip-2026-11-25`, NOT PUSHED) at 6f9ed302b2: under
+  RULING-117-3 the famine pair re-picked by search (189ecf9e63: r2s-famine-city-347) and TYPES merged (2ad2b3fb31; BOTH
+  TYPECHECKS GREEN: ratchet 167/167, strict 1113/1113; validate:packets 257); under RULING-117-4 the sawmill pair
+  re-seated with its assertion unchanged (af9a471d00) and ANCHORS-2 02b34ea1c merged; the helper's report on 117-4 is
+  owed. TO MERGE NEXT: ANCHORS-3 9f859467a, SIZE-BACK b67b29cdc, "ANCHORS-4 <commit>" (CLOSE-7's last unit).
+  `read/RULING-R24.md` R24p, R24q: the seven causes and four figures ruled (three re-anchored by finder with the hooks
+  figure; statecraft, goals I-13, faultsNeed and the owner's three figures LISTED at 117; I-13 and NEED-ATOM cured in
+  the second hand-in). A SECOND READER (agent a9a5414d90b440ddb; top tier, max effort) reads ddca5c7894..2ad2b3fb31
+  outside GUARD: only GUARD had been through it: THE LINE DOES NOT MOVE BEFORE ITS REPORT.
+  CLOSE-7's MARK AT 16:00: 678,965 used, cost 591.30 (about 22 an hour since 11:44), `allowed_warning`; the weekly
+  window resets about 2026-12-01 15:00 UTC. IT HANDS OVER AFTER ANCHORS-4 with a hand-back for CLOSE-8; CLOSE-8 IS
+  SEATED BY THE CHAIR FOR THE SECOND HAND-IN (point 118) once 117 has landed: a lean start file is owed
+  (`prompts/START-CLOSE-8.txt`: reads COMMON rules, CLOSE-7-HANDBACK.md section 0, `gen/RULING-G.md`, R24q).
+  `gen/RULING-G.md` G20 (D6 stands; E8b's design), G21 (the unbound "Contender" stays: 388 and 501 cards), G22 (P9: the
+  beasts grade on settled land no lower than ADEQUATE; the 2026-11-12 ruling withdrawn; built f1990cc84, proofs
+  running), G23 (the sameness table; PRERELEASE-LIST E13 SAMENESS-LIT), G24 and G25 (D7 b0cca45be received; its bytes
+  to SIZE-BACK's door; `church` for `priest`, a new commit owed). BIRTH-1's hand-back final at bb9350cdc.
