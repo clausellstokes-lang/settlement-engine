@@ -9,6 +9,16 @@ this section.
 A successor reads START-CLOSE-7 (on `lane/chair-2026-11-08`), then this section, and needs nothing else to act. Context
 summaries so far: TWO (the second ~22:2x UTC). A THIRD before "CLOSE-7 <commit>": say so to the chair; it seats a successor here.
 
+### 0.000 POINT 117 DID NOT LAND YET (14:20 UTC). The chair's lists are on the chair branch: landing/117/{classified,new-reds-messages,raised-top}.txt.
+- LESSON (CONFIRMED by read): PUSH EVERY CODE BRANCH FROM ITS OWN WORKTREE. The pre-push hook checks the tree of the directory
+  git push runs in; pushes from the main checkout checked the documents branch's src.
+- ORDER, each its own branch cut at 97c6bfc7a (brief `close-7/briefs/LANDING-117.md`):
+  - (1) TYPES (builder a6a0bf694118b0846, /home/user/wt/types). JSDoc only. The ratchet and strict must be green.
+  - (2) ANCHORS-2 (R24o; builder a45b468ed08040c87, /home/user/wt/anchors).
+  - (3) the six causes and (4) the four figures, READS only (builder acf2f8a555891c8a8).
+  - (5) the first-paint +11,165 and writer-reach closureSizes +2 explanations (builder T, after TYPES).
+- The four seats' units WAIT for this.
+
 ### 0.00 THE FIRST HAND-IN IS SENT: "CLOSE-7 97c6bfc7a" (11:46 UTC 2026-11-25)
 The chair lands it in its own container with the whole suite. Its reds come back to me by file and title, for classing.
 - What the line holds:
