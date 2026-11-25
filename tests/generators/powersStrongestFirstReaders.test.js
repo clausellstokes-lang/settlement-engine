@@ -73,7 +73,7 @@ describe('D4 (b): the stored-text readers take the roster through the leaf', () 
     for (const name of names) {
       const line = body.split('\n').find((l) => l.includes(`const ${name} =`)) || '';
       expect(line, `${fn} :: ${name}`).toContain('powersStrongestFirst(');
-      expect(line, `${fn} :: ${name}`).not.toMatch(/factions\??\.?\[[01]\]/);
+      expect(line, `${fn} :: ${name}`).not.toMatch(/factions\??\.?\[[01]\]/); // anchored: the line above asserts the same line reads through powersStrongestFirst, so a vanished or renamed line reds there first
     }
   });
 });
