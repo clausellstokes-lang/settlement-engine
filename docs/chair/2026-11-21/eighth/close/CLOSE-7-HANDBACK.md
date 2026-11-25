@@ -15,13 +15,23 @@ The chair's standing orders:
 - Keep this section current at each push.
 - Start no new builder, and no run over 20 minutes, unless its partial results go to a pushed file.
 - FINISH THE UNIT IN HAND FIRST, IN THIS ORDER: A2 with the mirror, to its merge; MASTER-REDERIVE's table to the chair (DONE,
-  sent 22:4x); then the corrections-law leaf.
+  sent 22:4x); then the corrections-law leaf, which R24h WITHDREW (its new order follows below).
 
-Merged on `lane/close-7-2026-11-24-cures`: A1 only (bb457f3bf).
+Merged on `lane/close-7-2026-11-24-cures` (state at 00:04 UTC 2026-11-25):
+- A1 (bb457f3bf).
+- A2 (merge 520ddb6a8 of -a2-wip fca95c197; fixes ce867a468, ea8b856b6, fca95c197). Its conflicts were unions of A1's and A2's
+  rows; the register was rebuilt as A1's file plus A2's row and note.
+- The lighting census re-taken by its door at e7441a93f: files 3787->3789, parked 489->491; the plain run is green.
+- The cures branch's gates are RUNNING: own tests, tests/lint whole, tests/copy whole. Logs: scratchpad/cures-{own,lint,copy}.log.
+  Expected: lint shows only the known three (proseCorpusBytes RAW/GZIP, proseComposed A0b); copy 172/172.
+- The A2 line goes to the chair once they pass.
 
 Built and not merged:
-- A2: -a2-wip c92a301fa (pushed). Two fixes are in flight by chain one in /home/user/wt/a2.
-- B1(i): -b1i-wip 9d0f85e01 (pushed). It waits on the leaf.
+- B1(i): -b1i-wip 9d0f85e01 (pushed). Plain, by R24h. Its finish (R24e (1a), (1b), (2)) comes after LIVE-PATH.
+
+RUNNING: chain one on THE MIRROR (brief `close-7/briefs/MIRROR.md`), in /home/user/wt/mirror on -mirror-wip, cut at e7441a93f.
+On its report: re-read R24d lines 10-12, read the diff once, merge onto cures, push, send the mirror line. THEN LIVE-PATH by a
+FRESH builder (brief `close-7/briefs/LIVE-PATH.md`).
 
 R24h (23:00 UTC, recorded verbatim in `close-7/briefs/R24h.md`):
 - (1) A2 is NOT merged with the rise. The price-only keep is reversed: a page that prints its place as fed has no food grievance.
@@ -35,15 +45,11 @@ R24h (23:00 UTC, recorded verbatim in `close-7/briefs/R24h.md`):
 ORDER: A2 (three fixes, then the mirror) to its merge; LIVE-PATH; B1(i)'s finish (R24e (1a), (1b), (2); plain); B1(ii); C1, with
 R24g's names, plain.
 
-Running: chain one (agent a4c1ad5101be44ef0), on A2's three fixes. Its addendum goes at the end of `close-7/reports/A2.md`.
-
-THE NEXT COMMAND, when A2's fixes land:
-`git -C /home/user/wt/a2 log --oneline -3; git -C /home/user/wt/a2 diff c92a301fa..HEAD --stat`
-Then read the diff once and tail both gate logs. Then:
-`cd /home/user/wt/cures && git merge --no-ff lane/close-7-2026-11-24-a2-wip -m "Merge R24-A2 (CLOSE-7): ..."`
-Then the guarded push of -a2-wip and -cures, and the A2 line to the chair. Then the MIRROR unit on chain one (R24d's words, in
-section 0.2), cut at d447ee31e on `-mirror-wip`; or onto the a2 tip, if the mirror needs fareBandOf: it does, so cut it from
--a2-wip's tip.
+THE NEXT COMMAND, when the cures gates finish:
+- `for f in own lint copy; do tail -6 scratchpad/cures-$f.log; done`
+- Then the guarded push of `-cures`, and the A2 line to the chair. The line carries: the table; the slot share; empty slots C
+  438->575, V 322->424; FOODSEC 0; records 0/0.
+- When the mirror's report lands: `git -C /home/user/wt/mirror log --oneline e7441a93f..HEAD`, then read the diff once.
 
 ### 0.1 Ground
 - THE LIT TREE (before every cure): `/home/user/wt/lit`, detached at d447ee31e (the flip; `origin/lane/close-6-2026-11-23-flip`).
