@@ -22,6 +22,13 @@ summaries so far: TWO (the second ~22:2x UTC). A THIRD before "CLOSE-7 <commit>"
   - first paint is B1(i)'s eager landWithholding.js pulling geographyData.js, plus the mirror's foodProduction.js unpinned. The
     buy-back (vite lazy list, about 10.6 KB) is OFFERED, not built;
   - writer-reach +2 is sickCare.js and foodProduction.js through factsOf.js.
+- ANCHORS-2 02b34ea1c: ACCEPTED (R24p, 15:32). TYPES is merged into it so the hook passes.
+  - ANCHORS-3 is owed (builder a45b468ed08040c87): the 5255 case leaves; the one-week wording gets a direct call, or else the stem
+    goes into 5441.
+- STILL OWED, IN ORDER:
+  - the READS message (seven causes and four figures, the proposed cure in one line each);
+  - SIZE-BACK (builder a6a0bf694118b0846).
+- The units (D2, D2b, D3, D5 from BIRTH-1; D4 from BIRTH-2; D6 and E8 from WORDS-1) are for the SECOND hand-in, after point 117.
 - The four seats' units WAIT for this.
 
 ### 0.00 THE FIRST HAND-IN IS SENT: "CLOSE-7 97c6bfc7a" (11:46 UTC 2026-11-25)
