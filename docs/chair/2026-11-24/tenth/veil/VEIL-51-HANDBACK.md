@@ -150,6 +150,22 @@ Reports to the lane's owner: a FILE, at most 200 words. My context began with a 
     `u4/standwalk/measures-tierule.txt`): today 743: cut exactly 423, no tail 320, uncut 0, different-span ties 0, wrong 0, SAME-SPAN
     TIES 58; master 752: 591, 161, 0, 0, 0, SAME-SPAN TIES 38. The 96 and the pair (M-R2-buy, R2-buy) go in the "TIP?".
 
+### NOT A HAND-OVER: THE CHAIR, 02:36 UTC: "YOU DO NOT HAND OVER" (the mark rule of 00:29: no successor seat; I work on through
+compaction: at a compaction, one line to VEIL-55, re-read the start file, this hand-back and its rulings, go on; a judgment (a 212 edit,
+a "TIP?") is never carried across one). THE BLOCK BELOW STAYS AS THE SEAT's PACKET.
+UNIT 5, LEGACY-NAMES (the chair 02:36; brief START-VEIL-54.txt's unit steps and table only), TAKEN WHILE "R4-IDS MERGED" IS AWAITED;
+  NO SQL OF UNIT 5 BEFORE UNIT 4's MERGES; unit 4's code first when R4-IDS lands.
+  (1) THE MEASURE (CONFIRMED): wd-master (00:52, tree d7764e67a, template v51_c2) EQUALS the brief's table on all eight rows
+    (npc1Role 190, npc2Role 170, npcs.role 70 per cell on 7 places; npcs/members secondaryAffiliation 460/421 on 15; members.role
+    50 on 5; goal.short 20 on 2; the desc 20 on 1, unit 4's); today-born 0 on the seven. MASTER's WRITERS (git grep db832c892): roles
+    from `npcData.js:661` / `historyData.js:673` ("Thieves' Guild Master"), copied into npcs[].role, relationships' npc1Role/npc2Role,
+    members' role; secondaryAffiliation from `npcGenerator.js:1269` (crimeFaction) and `corruptionPass.js:74` (crimInst); goal.short
+    from `npcData.js:536`. THE STRINGS (`u5/paths.mjs`, names = hideable houses + criminal powers, the lane's fold; NOT wd's judgment):
+    master 14/38, 14/35, 14/15, 58/154, 58/154, 14/15, 4/8 (documents/strings, the seven paths in the brief's order); today-born roles
+    15/15, 10/19, 15/15, the rest 0 (wd serves none of today's on a hiding read: the named thing stays served there).
+    THE PLANTS: `u5/plant5.mjs` (seed r3m-town-none-0-23, all seven paths, "PLANT" in each), run by `u5/u5.sh` (RUNNING from 02:4x).
+  (2) THE RULE PER PATH, at most 250 words, to the chair BEFORE any build: after the plant run.
+
 ### HANDS OVER (VEIL-51, 02:3x UTC 2026-11-25, near the mark; unit 1 granted; unit 4's no-SQL part done; NOTHING RUNNING)
 THE SUCCESSOR'S PACKET: START-VEIL-51.txt on `lane/chair-2026-11-08`; RULING-V1.md (V1-V15+) there; this section.
 MERGED: nothing of mine yet. GRANTED, NOT MERGED: unit 1 STORED-PROSE at d7764e67a (`lane/veil-51-2026-11-24-c2-wip`): VEIL-55 merges it

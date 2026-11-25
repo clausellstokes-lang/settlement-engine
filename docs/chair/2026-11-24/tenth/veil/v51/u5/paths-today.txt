@@ -1,0 +1,17 @@
+documents 140; with a hideable house 93
+relationships[].npc1Role: documents 15, strings 15
+    r3m-city-indebted-0-46.json: the rookery boss
+    r3m-city-indebted-1-116.json: the rookery boss
+    r3m-city-none-0-33.json: the rookery boss
+relationships[].npc2Role: documents 10, strings 19
+    r3m-city-indebted-0-46.json: the rookery boss
+    r3m-city-indebted-0-46.json: the rookery boss
+    r3m-city-indebted-1-116.json: the rookery boss
+npcs[].role: documents 15, strings 15
+    r3m-city-indebted-0-46.json: the rookery boss
+    r3m-city-indebted-1-116.json: the rookery boss
+    r3m-city-none-0-33.json: the rookery boss
+npcs[].secondaryAffiliation: documents 0, strings 0
+factions[].members[].secondaryAffiliation: documents 0, strings 0
+factions[].members[].role: documents 0, strings 0
+factions[].members[].goal.short: documents 0, strings 0

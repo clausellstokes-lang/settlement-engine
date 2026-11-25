@@ -1,0 +1,29 @@
+documents 140; with a hideable house 92
+relationships[].npc1Role: documents 14, strings 38
+    r3m-city-infiltrated-0-42.json: Black Market Fence
+    r3m-city-infiltrated-0-42.json: Black Market Fence
+    r3m-city-infiltrated-1-102.json: Thieves' Guild Master
+relationships[].npc2Role: documents 14, strings 35
+    r3m-city-infiltrated-0-42.json: Black Market Fence
+    r3m-city-infiltrated-1-102.json: Thieves' Guild Master
+    r3m-city-infiltrated-1-102.json: Thieves' Guild Master
+npcs[].role: documents 14, strings 15
+    r3m-city-infiltrated-0-42.json: Black Market Fence
+    r3m-city-infiltrated-1-102.json: Thieves' Guild Master
+    r3m-city-insurgency-0-44.json: Black Market Fence
+npcs[].secondaryAffiliation: documents 58, strings 154
+    r3m-city-indebted-0-46.json: Thieves' Guild
+    r3m-city-indebted-0-46.json: Black market
+    r3m-city-indebted-1-106.json: Black market
+factions[].members[].secondaryAffiliation: documents 58, strings 154
+    r3m-city-indebted-0-46.json: Thieves' Guild
+    r3m-city-indebted-0-46.json: Black market
+    r3m-city-indebted-1-106.json: Black market
+factions[].members[].role: documents 14, strings 15
+    r3m-city-infiltrated-0-42.json: Black Market Fence
+    r3m-city-infiltrated-1-102.json: Thieves' Guild Master
+    r3m-city-insurgency-0-44.json: Black Market Fence
+factions[].members[].goal.short: documents 4, strings 8
+    r3m-city-indebted-1-106.json: Renegotiate the debt terms before the Corrupt City Council sends another representative
+    r3m-city-indebted-1-106.json: Identify which of their officers is on the thieves' guild payroll
+    r3m-city-indebted-1-106.json: Renegotiate the debt terms before the Corrupt City Council sends another representative
