@@ -79,6 +79,11 @@ corrected the same turn); the rule since: read `date -u` in one step, write it i
 - e3none: 646c16169 plus the uncommitted no-fall-through prototype (the chair's third state).
 Logs and batteries: the session scratchpad (`base-*`, `join3-*`, `joinx-*`, `rec-*`), not kept.
 
-### 0.6 Next step
-SAFETY-BLANK (G19 (5)): measure the labels printed with no value (C dp-village-57 "Safety"; any other label of that block),
-read the cause; a reader cure is built red first; a new word or fact is one message to the chair first.
+### 0.6 SAFETY-BLANK (G19 (5)), measured 17:00 UTC: no page prints a blank label
+The base battery's only label with no value is Overview "Safety" (C 54, V 63 pages), and in every one its word equals the
+Prosperity word above it. The page census walk keeps each line once per panel (`tests/components/pageCensusWalk.shared.mjs`
+:111-112), so the repeat never reaches the views; the page's StatusTag (OverviewTab.jsx:118-129, :407) prints the value or
+"—", and no Overview prints "—". Nothing cured in src. Reported to the chair; the walk is shared, not this lane's to change.
+
+### 0.7 Next step
+Wait for the chair's ruling on SAFETY-BLANK (a render proof on dp-village-57 offered; the walk's set is the chair's call).
