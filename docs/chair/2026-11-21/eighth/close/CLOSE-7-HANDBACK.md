@@ -313,6 +313,11 @@ gate for the lot):
   - NOTE FOR ANCHORS: dossierPhoneFloorAllViews is red at 0ec96f13d as "Daily Life prose 9->8". That is likely A2's emptied
     resentment slot (R24h): a floor or baseline that moved, NOT a stale anchor, so it goes to the chair.
 
+- D4: `lane/birth-2-2026-11-25-d4-wip` 57d26a136, from BIRTH-2 (session_019yED1QXSHeSLQce1gz2nTM; G2, G4).
+  - One sorting reader, domain/display/powersStrongestFirst.js, used by aiLayer, narrativeGenerator and historyGenerator.
+  - Moves C 0 / V 0. Its doors (wiring 1458->1459, lighting 3799) take the line's side at the merge and are re-taken.
+  - Edge bundles go stale. Its typecheck is green in its own tree (167/167; strict 1113/1113).
+
 THE NEXT COMMAND: on BATCH's message:
 - read `close-7/reports/BATCH.md` and the diff once (`git -C /home/user/wt/batch diff --stat 0ec96f13d..HEAD`);
 - re-read the ruling's lines 45-79, 138-157 and 182-197;
