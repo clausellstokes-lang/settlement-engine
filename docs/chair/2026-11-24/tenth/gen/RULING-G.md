@@ -439,3 +439,15 @@ without a doubled pair moved (0 of 567, 0 of 564); no two cards of a pair share 
 16 cards on C (12 pairs at four, 2 at five) and 9 on V. Five drafts were re-worded for the style and presumption
 walkers. THE 70 SENTENCES WENT TO THE OWNER FOR HIS VETO (the chair read the first two dispositions' tables: each says
 what its first line says, in the table's voice). WORDS-1 hands over after this.
+
+**G42 (20:48 UTC): CLOSE-8's JOIN PLAN RULED; POINT 118's CONTENTS FIXED; POINT 119 NAMED.** CLOSE-8 stands on 09c29806b
+(point 117). 29 units (the table less D8 and A5), every unit's merge-base with the line 0ec96f13d; conflicts predicted
+by `git merge-tree`: in src ONLY E1 with E8 (`goals.js`, `personMention.js`, `goalSentencesOnceInTown`: WORDS-1's note
+covers them); registers: the lighting census on 19 units, observed-shape on E4, E9, G1, G6, the mutation manifest D4
+with P9. THE ORDER: D5, D4, D3; D2, D2b, D7, P9; E1, D6, E8, E8b, E13b; E10, E11, E12, E7, E9, E4, G6, G1, G8, G9, G10,
+G11, G34, E5, E6, E13a; E3 LAST (the only WORDS-2 unit that moves records). RULED: (a) a census conflict takes the
+join's side and each door re-takes once per group and once after E3; (b) the mutation manifest is the union of D4's and
+P9's rows; (c) POINT 118 = the 29 units, the four cures (goals I-13, NEED-ATOM, D7's bytes, the writer-reach row for
+D6) and P9's writer-reach rows (G37 (i)). POINT 119, built by CLOSE-8 after its landing line, each with its own second
+read: B1(ii) REDESIGNED (R24r 1), B1(i)b (R24r 6), E13d (G35), P9b's measure (G37 (ii)). WORDS-1 HANDED OVER at
+93247bdb3 (E1, D6, E8, E8b, E13b in that order).
