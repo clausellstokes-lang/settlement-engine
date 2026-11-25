@@ -211,7 +211,13 @@ it(`V43-MEASURE wd (${FORM})`, async () => {
       const hh = arr(doc.institutions).find((h) => isRec(h) && E.isHideableHouse(h) && typeof h.name === 'string' && h.name && !from.includes(h.name));
       // VEIL-55 (02:57): WD_PLANT_POWER=1 names a HIDDEN POWER (a `hidden: true` faction of the town) instead of a house
       const hp = process.env.WD_PLANT_POWER === '1' ? arr(doc.powerStructure?.factions).find((f) => isRec(f) && f.hidden === true && typeof (f.faction || f.name) === 'string') : null;
-      if (process.env.WD_PLANT_POWER === '1') { if (hp) { const nm = hp.faction || hp.name; const shown = arr(doc.powerStructure?.factions).findIndex((f) => isRec(f) && f.hidden !== true && typeof f.desc === 'string' && f.desc);
+      // VEIL-55 (03:14): WD_PLANT_TAIL=1, the served class's own shape: the natural tail "they play <power> and <power> against each
+      // other when they can" (r3m-town-none-0-17) appended to a SHOWN power's desc, naming the town's Thieves' Guild (withheld by the
+      // veil's criminal groupings, not `hidden: true`, the case the server does not rewrite) and a second shown power
+      const tg = process.env.WD_PLANT_TAIL === '1' ? arr(doc.powerStructure?.factions).find((f) => isRec(f) && /Thieves/i.test(f.faction || f.name || '')) : null;
+      if (process.env.WD_PLANT_TAIL === '1') { if (tg) { const tn = tg.faction || tg.name; const F = arr(doc.powerStructure?.factions); const si = F.findIndex((f) => isRec(f) && f !== tg && f.hidden !== true && typeof f.desc === 'string' && f.desc); const other = F.find((f, k) => isRec(f) && k !== si && f !== tg && f.hidden !== true);
+        if (si >= 0) { doc = clone(doc); plantText = `They play ${tn} and ${other ? (other.faction || other.name) : 'the council'} against each other when they can.`; const f = doc.powerStructure.factions[si]; f.desc = `${f.desc} ${plantText}`; out.plant.done = true; out.plant.seed = b.seed; out.plant.text = plantText; out.plant.power = f.faction || f.name; out.plant.hidden = tn; } } }
+      else if (process.env.WD_PLANT_POWER === '1') { if (hp) { const nm = hp.faction || hp.name; const shown = arr(doc.powerStructure?.factions).findIndex((f) => isRec(f) && f.hidden !== true && typeof f.desc === 'string' && f.desc);
         if (shown >= 0) { doc = clone(doc); plantText = `The ${nm} quietly funds them.`; const f = doc.powerStructure.factions[shown]; f.desc = `${plantText} ${f.desc}`; out.plant.done = true; out.plant.seed = b.seed; out.plant.text = plantText; out.plant.power = f.faction || f.name; out.plant.hidden = nm; } } }
       else if (hh && process.env.WD_PLANT_DESC === '1') { // VEIL-55 (02:49): into a SHOWN power's desc BASE (before any standing tail)
         const shown = arr(doc.powerStructure?.factions).findIndex((f) => isRec(f) && f.hidden !== true && typeof f.desc === 'string' && f.desc);
@@ -303,7 +309,7 @@ it(`V43-MEASURE wd (${FORM})`, async () => {
           }
           for (const [q, k] of keys) if (ids.has(k)) hit(q, 'id-key', k);
           if (plantText) { // VEIL-52: the plant's tally on this hiding read
-            const pres = strs.some(([, s]) => s.includes(plantText)); const caught = readHits.some(([q, k, x]) => k === 'name' && (process.env.WD_PLANT_DESC === '1' || process.env.WD_PLANT_POWER === '1' ? /desc$/i.test(q) : /role$/i.test(q)) && x.includes(plantText)); // the instrument's OWN hit (VEIL-50's change)
+            const pres = strs.some(([, s]) => s.includes(plantText)); const caught = readHits.some(([q, k, x]) => k === 'name' && (process.env.WD_PLANT_DESC === '1' || process.env.WD_PLANT_POWER === '1' || process.env.WD_PLANT_TAIL === '1' ? /desc$/i.test(q) : /role$/i.test(q)) && x.includes(plantText)); // the instrument's OWN hit (VEIL-50's change)
             bump(out.plant.reads, `${tag}|dm=${dm}`); if (pres) bump(out.plant.present, `${tag}|dm=${dm}`); if (caught) bump(out.plant.caught, `${tag}|dm=${dm}`); if (pres && !caught && wh.some((w) => plantText.includes(w))) bump(out.plant.blind, `${tag}|dm=${dm}`);
           }
         }

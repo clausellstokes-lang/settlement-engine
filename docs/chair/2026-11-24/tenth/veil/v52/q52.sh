@@ -38,6 +38,7 @@ step_snplant3() { cpm; mx sh -c "SNAP_PLANT=1 SNAP_PLANT_PERSON=1 SNAP_MAXC=3 WD
 step_miplant4() { cpm; mx sh -c "WD_PLANT=1 WD_PLANT_POWER=1 WD_PLANT_SEED=r3m-city-none-1-111 WD_SEEDS=r3m-city-none-1-111 WD_SHARDS=1 sh $M/wdmi.sh /home/user/wt/join $O/mi-plant4 v28tpl stored $O/stored-master" > $O/mi-plant4.txt 2>&1; st miplant4 $?; }
 step_mipersonstip() { cpm; mx sh -c "WD_PERSONS=1 sh $M/wdmi.sh /home/user/wt/join $O/mi-persons-tip v28tpl stored $O/stored-today" > $O/mi-persons-tip.txt 2>&1; st mipersonstip $?; }
 step_mipersonsmaster() { cpm; mx sh -c "WD_PERSONS=1 sh $M/wdmi.sh /home/user/wt/join $O/mi-persons-master v28tpl stored $O/stored-master" > $O/mi-persons-master.txt 2>&1; st mipersonsmaster $?; }
+step_miplant5() { cpm; mx sh -c "WD_PLANT=1 WD_PLANT_TAIL=1 WD_PLANT_SEED=r3m-city-indebted-0-46 WD_SEEDS=r3m-city-indebted-0-46 WD_SHARDS=1 sh $M/wdmi.sh /home/user/wt/join $O/mi-plant5 v28tpl stored $O/stored-today" > $O/mi-plant5.txt 2>&1; st miplant5 $?; }
 # (1c) N115: the read's time, the tip's chain against master's own, on the same public rows
 step_n115() { mx sh $HERE/n115.sh > $O/n115.txt 2>&1; st n115 $?; }
 for s in ${*:-dumps miplant snplant mitip mimaster mijoin sntip snmaster snjoin n115}; do step_$s; done
