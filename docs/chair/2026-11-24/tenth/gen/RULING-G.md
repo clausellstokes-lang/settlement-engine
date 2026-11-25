@@ -339,3 +339,13 @@ stored text read in the held form through one shared helper (`tonightSheet.js:57
 `rareSecrets.js:413`; `goals.js:1002`; `successorNpc.js:49-50`, which copies the held form). THE CHAIR ADDED: the round
 trip over every card of C and V (`heldText(after)` byte-equal to the base, 0 differing) and a walker that no reader
 matches those rows except through the helper; the successor's output byte-unchanged (advance time is another work).
+
+**G30, G31 (17:01 UTC).** G30: E8b makes `worldPulse/successorNpc.js` copy the HELD form of a tell and of goal.long (one
+edit, under the border's exception: this release must not itself break advance time), so a successor's output is
+byte-equal to the base's. G31: WORDS-2's sixteen hand-ins received (`HAND-INS.md`). SAFETY-BLANK IS A FAULT OF THE
+MEASURE, NOT OF THE PAGE: a label with no value is only ever Overview "Safety" (C 54, V 63 pages), in every case its
+word equals the Prosperity word above it, and the page census walk keeps each line once per panel
+(`tests/components/pageCensusWalk.shared.mjs:111-112`); the page prints the word. Nothing built; the walk's set is not
+changed. TWO MEASURES ORDERED FROM WORDS-2 (333,999 used, cost 96.69): "TWICE-IN-PANEL" (what the set hides: a line of
+six words or more printed twice in one panel, on C and V) and "E13, STEP ONE" (for each of the 14 slots above their
+ceilings: the top sentence, its pool, why the share is high, since when, a cure in one line).

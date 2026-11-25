@@ -1394,3 +1394,27 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   beasts grade on settled land no lower than ADEQUATE; the 2026-11-12 ruling withdrawn; built f1990cc84, proofs
   running), G23 (the sameness table; PRERELEASE-LIST E13 SAMENESS-LIT), G24 and G25 (D7 b0cca45be received; its bytes
   to SIZE-BACK's door; `church` for `priest`, a new commit owed). BIRTH-1's hand-back final at bb9350cdc.
+- 2026-11-25 17:01 UTC · T108 · THE SECOND READER FOUND SIX FAULTS ON POINT 117 (R24r); B1(ii) IS BEING REVERTED ON THE LANDING's TREE; "C1B" BEING BUILT; CLOSE-7 HAS HANDED OVER; THE LINE HAS NOT MOVED.
+  THE LANDING's TREE (`/home/user/wt/line`, local `lane/stack-117-wip-2026-11-25`, NOT PUSHED) at 7ad51595aa after
+  RULING-117-5: ANCHORS-3/-4 (d5abee7e3f), SIZE-BACK (577f646db3), (u) set aside on withholding terrain (16 desert towns,
+  284 read). ITS SHORT GATE: both typechecks green, packets 257, lint the same seven, of the wide gate's 28 new-red
+  files 9 still red (the two intentAtlas rows; faultsNeed 1; dossierProseManifest FOUR SEEDS and MIXED-POOL; the herald
+  golden; cartography W2; statecraft U1; goals I-13; editCorpusRatchet A3, A7 are on the list). SIZES: first paint
+  1,181,885 raw (+1,011 on the line), 376,334 gzip (+230), 315,928 Brotli (+66); worker 2,721,496 (+4,173); engine chunk
+  934,263 (+1,265); all five over budget as at the line.
+  THE SECOND READER (`landing/117/SECOND-READER-117.txt`; R24r): (1) B1(ii) re-deals the Traditions tab at view time,
+  saved places included: OUT OF 117 (RULING-117-6, sent to the helper: revert 3388806b4d, genesis.js byte-equal to the
+  line's, the tab proven back on soak 0 to 239), redesigned for 118; (2) cured by SIZE-BACK; (3) "Council of Syndics"
+  plural and (4) the bought hall's meaning by exact name with three readers missing it (the pulse's thievesGuild among
+  them): unit C1B, a builder (agent af6a50ea622cbd98c) in `/home/user/wt/c1b` on local
+  `lane/stack-117-c1b-wip-2026-11-25`, brief `prompts/START-C1B-117.txt`; (5) a third name-keyed carrier, written
+  down; (6) the Furrier's district, for 118. NEXT ON 117: the helper's report on 117-6; C1B's report; THE CHAIR READS
+  C1B's DIFF AND A SECOND READER READS IT; the helper merges it, a last short gate (typechecks first; the files C1B
+  names; lint; the nine; build and sizes), the stack pushed FROM /home/user/wt/line, the row and the gate sentence,
+  RED-AT-LINE (the two intentAtlas rows; statecraft U1; goals I-13; faultsNeed 1; the herald golden; the manifest's two
+  arms; cartography W2; and the four lint rows ONLY IF the revert leaves them red), the line, LINE-NOW.md, CI by name.
+  CLOSE-7 HANDED OVER (`lane/close-7-2026-11-24` d4ae87671). `gen/HAND-INS.md` IS THE ONE TABLE for point 118: BIRTH-1
+  final (D7 710a49473); BIRTH-2 P9 owed and the door's own run (G23); WORDS-1 E1, E8, D6 in, E8b building (G29, G30);
+  WORDS-2 all sixteen in, now on two measures (G31). `prompts/START-CLOSE-8.txt` is drafted: @LINE117@ is filled and
+  "at cae372e86" made "at the branch's tip" when it is seated, AFTER 117 is on the line.
+  PRERELEASE-LIST E13 "SAMENESS-LIT" added (G23, G26). The hourly check at 17:00: WORDS-2 marked; no record rejected.
