@@ -504,3 +504,14 @@ corrected with its reason; `_gallery_sanitize_public_json` likewise only if noth
 asserts both ways (direct calls refuse; every door still serves both roles; the owner's reads unchanged); the hunk is
 read by the chair. ALSO FOUND, NOT THE VEIL's: the USER-class doors are executable by anon (211's part A closed only
 SERVER and NOBODY; they answer anon with nothing by their own gates): listed for the grants follow-up (B2).
+**V24 (sent 04:24 UTC as a message; written here 05:17 UTC): THE JOIN's REDS, EACH TO ITS OWN DOOR.** (1) The four size reds
+are the owner's signings at the end: no seat and not the chair raises a budget. (2) `domainGeneratorsBoundary` (14
+domain-to-generators edges against 5, from `pageRederive.js` and `importRederive.js`) is CURED AT THE JOIN, not ruled
+away: the re-derivation's callers reach the generators through the declared boundary or the count returns to 5. (3)
+Writer-reach's four are re-taken at the join by the register's own door: one commit, the identities named, no override
+flag; THE CHAIR READS THE REGISTER's DIFF BEFORE THE JOIN's GRANT. (4) The order count is listed for the join's proof.
+**THE LANE's EFFICIENCY ORDER (05:12 UTC, after the owner's question on token use; VEIL-55 may veto any part that
+weakens a proof):** reports reach the chair through VEIL-55 only (a ruling asked, a merge asked, a unit finished);
+units 4 and 5 (both VEIL-51's) may ride together with ONE pool proof and ONE read by the chair; THE FULL POOL PROOF IS
+TAKEN ONCE, after units 3, 4 and 5 are in, each unit's own arms and differential still run at its merge; a short script
+restores a seat's local test database and tools after a machine restart. WHAT A PROOF CHECKS IS NOT REDUCED.

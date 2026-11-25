@@ -1006,3 +1006,25 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   EARLIER THIS HOUR: VEIL-52 HAD BEEN IDLE 18 MINUTES WAITING FOR "ITS COMPACTION" BY THE CHAIR's OWN WORD (a compaction
   comes only while a seat works): corrected at 04:38; unit 3 begun. Its machine had restarted three times with nothing
   on disk lost.
+- 2026-11-25 05:17 UTC · T76 · THE OWNER ASKS FOR LESS TOKEN USE AND A FASTER BUILD: WHAT THE CHAIR CHANGED, WHAT IS HIS.
+  HIS WORDS (about 05:11): "Is there anyway to make all of this more efficient with token usage and product build?"
+  WHERE THE SPEND GOES (the records' API-priced costs): CLOSE-7 about a third, mostly fresh wide helpers; long sessions
+  re-reading memories of 500,000 to 600,000 tokens every turn; ceremony repeated per item (a proof, a read, a report).
+  CHANGED AT 05:12, IN FORCE: CLOSE-7 reuses ONE builder (GUARD's, then B1(i)'s finish, B1(ii), C1, P3source), names
+  exact files, symbols and line ranges ("read no wider"), runs gates and censuses itself, and takes every remaining
+  birth-moving item as ONE measured before-and-after and ONE hand-in (it cancelled RESTATE-116 before dispatch; the
+  line 116 is merged onto `-cures` at 27408d4ec); the veil lane's order is in `veil/RULING-V1.md` under V24. Seats
+  message the chair only for a ruling, a merge or a finished piece. THE MARK RULE AS CORRECTED AT 05:10: NO SUCCESSOR
+  SEAT; NOBODY WAITS FOR A COMPACTION, EVER; work in committed atomic steps; before a judgment its plan is in the
+  hand-back and pushed; a compaction mid-step is one line to the chair and the lane's owner, then start file, hand-back
+  and the step's diff re-read whole.
+  THE OWNER RAN `/compact` ON THE CHAIR (about 05:14). CHECKED AGAINST THE PRODUCT's DOCUMENTATION (a guide agent,
+  05:13; one fact confirmed on this machine: `CLAUDE_AUTOCOMPACT_PCT_OVERRIDE=92` is set by the cloud itself): (a) a
+  session can be made to compact earlier by the environment variable `CLAUDE_CODE_AUTO_COMPACT_WINDOW` (a token count,
+  at least 100000) set on the cloud environment; it takes effect when a session next starts or resumes; NOT SET: an
+  environment change is the owner's approval, and the chair has only told him; (b) no tool lets a session compact
+  itself or a parent compact a child: only the person's `/compact`; (c) effort is changed by the person typing
+  `/effort high`; a change re-writes the session's cache once, so the cheapest moment is just after a compaction; (d) a
+  helper's model and effort are set per call; a cheaper model for mechanical helpers stays unused without his word
+  ("Opus for everything else").
+  OWED, UNCHANGED: CI on point 116 by name (05:30); the hourly check (05:38).
