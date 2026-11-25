@@ -14,7 +14,7 @@ const { generateSettlementPipeline } = await import(`${T}/src/generators/generat
 const { birthConfig, loadGenerationLawPayloads } = await import(`${T}/src/domain/density/densityCreateBoundary.js`);
 await loadGenerationLawPayloads();
 const OWN = { male: 'himself', female: 'herself' };
-const WANTS = [/^Find a patron among those who lead .+, and make (\w+) useful to them\.$/, /^Set the terms between .+ and .+ (\w+), and stop taking them from others\.$/];
+const WANTS = [/^Find a patron among those who lead .+, and make (\w+) useful to them\.$/]; // POWER.corrupted's "Set the terms … themselves" is left (a banked red line; E8 option (b))
 const TIE = /^(.+?) has asked (.+?) for an introduction (.+?) would rather keep to (\w+)\.$/;
 const plan = JSON.parse(readFileSync(PLAN, 'utf8'));
 let checked = 0; const wrong = []; const placesChecked = new Set();

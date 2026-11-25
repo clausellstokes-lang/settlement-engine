@@ -71,20 +71,21 @@ personMention walker and leaf tests (47/47).
 E8 STEP ONE PROVEN ON RECORDS (10:25 UTC): twin (`tools/twin-dump.mjs --norm=e8`): C 390 records moved [0 3 18 77 142 150],
 V 385 [0 2 17 82 135 149], moved BEYOND the reflexive 0 and 0. Every-birth check (`tools/e8-check.mjs`): base C 627 wrong in
 390 places / V 616 in 385; E8 0 / 0. -e8-wip PUSHED at 5214ccd2f.
-E1 BUILT (10:25 UTC): `lane/words-1-2026-11-25-e1-wip` 2a378064a (worktree /home/user/wt/e1), NOT YET PUSHED. Test
-tests/components/doublePossessive.test.jsx; its red runs in /home/user/wt/red (detached base, the test file copied in, never
-committed). Touches: personMention.js (role rung, own regex ROLE_POSSESSIVE), powerSentenceName.js (holdsPossessive, re-exported),
-stateProseKernel.js (ofForms in fillSlots), factionDynamics.js (ruleOf on the line-18 one-liner; ORDAINED_SEAT reads both forms;
-line count unchanged), governanceAccount.js (rightToRule: THE STANDING SENTENCES, name it for the veil's lane), dmPowerLines.js
-(ownNoun), goals.js (houseFill short title). Read in part only: stateProseKernel.js, npcData.js (say so in the hand-ins).
-D6: worktree /home/user/wt/d6 on `-d6-wip` at base + tests/components/contenderBoundWord.test.jsx; its RED RUN IS QUEUED: edit
-nothing in wt/d6 until d6-red.log has its exit line. Plan: powerStrata.js BOUND_TO_RULER_KINDS + `bound` on contender entries,
-`powerBound` on roster rows (ties to the ruler OR its seatOf form); PowerStrata.jsx label/marker/aria; re-state the two pins
-(powerStrata.test.jsx crafted Merchant Guilds dependent -> "Could contest the seat"; powerSeatRender thorp-57 count) by cause.
-QUEUE (background, one at a time through the mutex): E8 named tests (rosterFinalUnderHeldRoster A1 golden red: check base), lint,
-copy; D6 red; E1 red, green. THEN: one scratch tree joining e1+e8+d6; page battery `--views --strings` on base and on it, C and V
-(`tools/page-battery.mjs` now writes record and public-projection strings under --strings); classify every changed string by unit.
-THEN: push -e8-wip; page battery renders of e8 for the before-and-after (pages moved, both zero checks); hand in "UNIT E8".
+STATE AT 11:01 UTC:
+- E8 -wip at b67bbf56d (PUSHED): option (b) taken (asked the chair 10:4x, "(b) unless you say (a)"): POWER.corrupted "Set the
+  terms … themselves" keeps its they-form (banked red row 48d62f1d94f5 in samenessHideable.existingReds.json, no door). Two goal
+  pins re-stated by cause (goalSentencesOnceInTown (u), goalsNoRepeatedWording (b): a want read in the held form). Re-run of
+  those three: 23/23. Its lint run e8-lint.log had 6 reds; base-lint.log decides which are known; e8-lint3 re-runs.
+  Known-red named (RED-AT-LINE): rosterFinalUnderHeldRoster A1, generationForkCensus A1 (golden). E8 copy 172/172.
+- E1 -wip at 2a378064a (PUSHED): red 3/4 on base (wt/red), green 4/4. Gates queued: e1-named (125 files), e1-copy, e1-lint.
+- D6 -wip at 24a3d7e7b (PUSHED): powerStrata.js BOUND_TO_RULER_KINDS/boundToRuler (`bound`, `powerBound`), PowerStrata.jsx
+  words; powerStrata.test.jsx pin re-stated by cause. Gates queued: d6-red (in wt/red), d6-named (49), d6-copy, d6-lint;
+  then e8-lint3.
+- SCRATCH (local only, never pushed): wt/all on `scratch/words-1-all2` = e1 + e8 + d6 merged WITH hooks (the first try,
+  scratch/words-1-all bfcca3c75, was committed with core.hooksPath=/dev/null: a fault, deleted, reported to the chair).
+- NEXT: when e8-lint3.log has its exit line, run `sh scratchpad/run-renders.sh` minus its wait (page battery --views
+  --strings on base and all, C and V, ~70 min, in TWO background calls under 2 h each), then classify every changed string
+  and page line by unit; the D6 owed count (contenders keeping "Contests" with a recorded conflict with the holder).
 NOT IN STEP ONE (E8b): the card lines (tells 899/852, impressions, secrets, goal.long npcGenerator); their draws dedupe by text
 in registries (castPowers hookRegistry.tells, CarriedSecrets), so a draw-time fill would move draws: a design is owed.
 npcData.js was read in its changed region only (pairProse, the tie table), not whole: said in the hand-in.
