@@ -118,3 +118,26 @@ nothing was written to any tree; `close-7/mirror/red-first-before.log`): **13 of
   - PLENTY's "lines of plenty" are the three fed fare branches whole, A5 and A8 included ("simple stew", "fish is
     the mainstay"), because each is a branch the bound gives only a fed page.
   - "Taken in a pool" was read as the receiving pool (§ 1).
+
+## 6. The gates, and the commits after the first (as they land)
+
+**tests/lint whole on fe948997a** (`lint.log`): 7 red in 6 files, 3370 passed.
+- Known reds, not this unit's: proseCorpusBytes RAW and GZIP, and proseComposed A0b.
+- The lighting census: the file count moved 3789 → 3790 (this unit's new test).
+- Three were this unit's, and each was re-stated by its cause:
+  - **presumptionClasses** "no NEW undeclared line": the row's label "PLENTY a line of plenty …" carries the plenty
+    class's word in the census file's literals, and the door never banks a new hit. **The row is renamed FEDFARE**,
+    "a fare line of a fed band beside a printed Deficit or Famine". That is the chair's "a line of plenty" said without
+    the class word. Register, plants and test follow. (Wherever this report says PLENTY above, read FEDFARE.)
+  - **presumedThings** ARM1_INSTRUMENTS: pageCensusFindings.js hits 11 → 12 (its label names "Famine").
+  - **samenessHideable** PHASE 3 RULE 2: K1's `institution: farmland` is added to the committed hand-pool house list.
+- **tests/copy whole on fe948997a** (`copy.log`): **15 files, 172/172, exit 0.**
+- The container restarted at about 01:20 UTC during the named-tests run. That run and the after measures reported
+  nothing and are re-run below in split runs.
+
+**Commit 2: 366d78ec6.** The rename and the three re-statements. Own four files plus the three walkers:
+**133/133 green, exit 0.**
+
+**Commit 3: 4c0051c4d.** The lighting census refrozen by its own door at 366d78ec6 on a clean tree: files
+3789 → 3790, parked 491 → 492, credited, titles and suite titles unchanged. The refreeze run fails by design; the
+walker run plainly after it is **34/34 green, exit 0.**
