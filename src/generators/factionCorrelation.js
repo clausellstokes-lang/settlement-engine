@@ -10,9 +10,11 @@ import { chance } from './helpers.js';
 import { ARCANE_INST_TAGS, ARCANE_INST_KW } from '../domain/magicFilter.js';
 import {
   isMaterializedCustomContent,
+  nativeSemanticResourceKeys,
 } from '../domain/content/customContentSemanticAuthority.js';
 import { isCategoryEnabled } from './categoryToggleReader.js';
 import { institutionToggleFor } from './institutionToggleReader.js';
+import { landWithholdsHouse } from '../domain/landWithholding.js';
 
 // Faction category → catalog category keys
 const FACTION_TO_CATALOG = {
@@ -142,6 +144,10 @@ export function applyFactionInstitutionBoosts(
 
   const tierCatalog = institutionalCatalog[tier] || {};
   const additions   = [];
+  // B1(i) (RULING-R24, R24b): a house the land withholds is drawn as before and then not taken; it still fills its slot under
+  // the cap and is marked present for this pass, so every later candidate meets the same draw it met before.
+  let taken = 0;
+  const land = { terrainType, tradeRoute, nearbyResources: nativeSemanticResourceKeys(config || {}) };
   // THE INSTITUTION BUDGET (X-46 car 3): the same density factor assembleInstitutions applies,
   // read once before the first draw. 1 with no population. The candidates' ORDER (by authored
   // baseChance) is untouched: one factor scales every candidate alike. The pipeline hands the
@@ -152,10 +158,10 @@ export function applyFactionInstitutionBoosts(
   const primaryBoost = boosts[0];
   if (!primaryBoost) return [];  // threshold already applied in deriveFactionBoosts
   for (const boost of [primaryBoost]) {
-    if (additions.length >= cap) break;
+    if (taken >= cap) break;
 
     for (const catalogCat of boost.catalogCategories) {
-      if (additions.length >= cap) break;
+      if (taken >= cap) break;
 
       const catInsts = tierCatalog[catalogCat] || {};
       // Check category toggle via the shared reader (pipeline-4: single predicate
@@ -203,7 +209,7 @@ export function applyFactionInstitutionBoosts(
       eligible.sort((a, b) => (b[1].baseChance || 0) - (a[1].baseChance || 0));
 
       for (const [name, def] of eligible) {
-        if (additions.length >= cap) break;
+        if (taken >= cap) break;
 
         // Boost multiplier: strong faction gets 1.3x, mild gets 1.1x —
         // a dampened nudge on the institution's REAL catalog rarity, run
@@ -217,6 +223,13 @@ export function applyFactionInstitutionBoosts(
         );
 
         if (chance(Math.min(boostedChance, 0.85))) {
+          taken++;
+          if (landWithholdsHouse(land, name)) {
+            existingNames.add(name.toLowerCase());
+            existingExact.add(name);
+            if (def.exclusiveGroup) takenGroups.add(def.exclusiveGroup);
+            continue;
+          }
           // Carry the full catalog def (desc/tags/priorityCategory/...) like
           // the assemble + cascade paths do — downstream passes classify by
           // tags, and metadata stubs are invisible to tag-keyed consumers.

@@ -42,6 +42,8 @@ const ENOUGH = FOOD_CULTURE.adequate.find((l) => l.id === 'A3').text;
 const ENDURANCE = (sentence) => `Food endurance: ${sentence}`;
 /** A record whose trade brings iron and whose terrain needs clay that no trade brings (REVIEW-W2A F1). */
 const NEEDS_CLAY = { economicState: { primaryImports: ['Iron'] }, resourceAnalysis: { imports: { critical: ['clay'] } } };
+/** A desert place with a fish market and no water: an oasis gives no fish (B1(i), R24b). */
+const DESERT_FISH_MARKET = { config: { terrainType: 'desert', tradeRouteAccess: 'desert_road', nearbyResources: ['oasis_water'] }, institutions: [{ name: 'Fish market', source: 'generated' }] };
 /** @type {Record<string, { views: Record<string, string[]>, record?: Record<string, unknown> }>} */
 const PLANTS = {
   P2siege: { views: { 'Systems/Defense': [ENDURANCE('the granary carries the town for about three months at full rations.')] }, record: { economicState: { foodSecurity: { hasSiege: false } } } },
@@ -73,6 +75,8 @@ const PLANTS = {
   FOODSEC: { views: { 'World/Daily Life': [PORTIONS] }, record: { economicState: { foodSecurity: { foodRecord: { band: 'secure', gapPct: 0, normalImportPct: 20 } } } } },
   // CLOSE-7 THE MIRROR (R24d): the fare's "they eat enough" beside a Food Security that prints Famine
   FEDFARE: { views: { 'World/Daily Life': [ENOUGH] }, record: { economicState: { foodSecurity: { foodRecord: { band: 'famine', gapPct: 60, normalImportPct: 20 } } } } },
+  // B1(i) (RULING-R24, R24b): a fish market printed in a desert whose route and resources give no fish
+  B1land: { views: { 'World/Institutions': ['Fish market'] }, record: DESERT_FISH_MARKET },
 };
 
 describe('the rendered-dossier arm: one planted fault per row', () => {
@@ -120,6 +124,11 @@ describe('the rendered-dossier arm: one planted fault per row', () => {
     // THE MIRROR (R24d): a line of plenty beside a printed Pressured is inside its bound; beside a printed Deficit it reds
     expect(pageCensusFindings(fed('pressured', 8), PLANTS.FEDFARE.views)).toEqual([]);
     expect(pageCensusFindings(fed('deficit', 45), PLANTS.FEDFARE.views).map((f) => f.row)).toEqual(['FEDFARE']);
+    // B1(i): the same fish market beside fishing grounds, or on a river route, or in the hills, reads nothing
+    const land = (/** @type {Record<string, unknown>} */ config) => ({ tier: 'town', ...DESERT_FISH_MARKET, config: { ...DESERT_FISH_MARKET.config, ...config } });
+    expect(pageCensusFindings(land({ nearbyResources: ['oasis_water', 'fishing_grounds'] }), PLANTS.B1land.views)).toEqual([]);
+    expect(pageCensusFindings(land({ tradeRouteAccess: 'river' }), PLANTS.B1land.views)).toEqual([]);
+    expect(pageCensusFindings(land({ terrainType: 'hills' }), PLANTS.B1land.views)).toEqual([]);
     expect(pageCensusFindings({ tier: 'town', economicState: { foodSecurity: { hasSiege: true } } }, PLANTS.P20.views)).toEqual([]);
     // row 2: besieged, the indicative is true; outside a siege, the condition reads nothing
     expect(pageCensusFindings({ tier: 'town', economicState: { foodSecurity: { hasSiege: true } } }, PLANTS.P2siege.views)).toEqual([]);

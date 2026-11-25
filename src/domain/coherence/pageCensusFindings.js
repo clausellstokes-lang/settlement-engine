@@ -32,6 +32,8 @@ import { FOOD_CULTURE } from '../../data/dailyLife/foodCulture.js'; // R24-A2 (C
 import { COMMONER_RESENTMENTS } from '../../data/dailyLife/commonerResentments.js'; // R24-A2
 import { DAWN_WORK } from '../../data/dailyLife/dawnWork.js'; // R24-A2 (R24c (c)): Dawn Work's food branch
 import { famineOf } from '../facts/famine.js'; // R24-A2: the food band the page prints (`shownBand`)
+import { landWithholdsHouse } from '../landWithholding.js';
+import { nativeSemanticResourceKeys } from '../content/customContentSemanticAuthority.js';
 
 /** @typedef {Record<string, unknown>} Rec */
 /** @typedef {Readonly<Record<string, ReadonlyArray<string>>>} Views */
@@ -86,6 +88,7 @@ export const PAGE_CENSUS_ROWS = Object.freeze({
   // (the chair's words are "a line of plenty"; the label says it without the plenty class's word, which the presumption-classes
   // walker reads in this file's literals and its door never banks)
   FEDFARE: ['FEDFARE a fare line of a fed band beside a printed Deficit or Famine', 'CROSS'],
+  B1land: ['B1(i) a house the land withholds standing in the desert with nothing that gives its thing (RULING-R24, R24b)', 'CROSS'],
 });
 
 /**
@@ -239,7 +242,8 @@ export function pageCensusFindings(settlement, views) {
   };
   const noArcane = D.some((l) => /No arcane practitioners on the rolls/.test(l));
   // the live roster (a ruin is no working house; a birth carries none, so the census's counter reads the same)
-  const roster = liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (rec)).map((i) => s(obj(i).name).toLowerCase());
+  const live = liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (rec));
+  const roster = live.map((i) => s(obj(i).name).toLowerCase());
 
   run('P2siege', () => {
     // the Food endurance line states what a siege does to the stores: outside a siege that is a condition, so a
@@ -411,6 +415,19 @@ export function pageCensusFindings(settlement, views) {
     if (!UNFED.has(printed)) return null;
     const said = all.find((l) => fedFare().some((line) => printedForm(s(line.text)).test(l)));
     return said ? [said, `Food Security prints ${printed}`] : null;
+  });
+  run('B1land', () => {
+    // a house printed on the page that the land withholds here (domain/landWithholding.js: the desert withholds fish, timber
+    // and game; a port or river route or a native nearby resource gives them back)
+    const config = obj(rec.config);
+    const land = { terrainType: s(config.terrainType), tradeRoute: s(config.tradeRouteAccess), nearbyResources: nativeSemanticResourceKeys(config) };
+    for (const house of live) {
+      const name = s(obj(house).name);
+      if (!name || !landWithholdsHouse(land, /** @type {Parameters<typeof landWithholdsHouse>[1]} */ (house))) continue;
+      const l = all.find((x) => x.includes(name));
+      if (l) return [l, `${name}: ${land.terrainType}, route ${land.tradeRoute || 'none'}, resources ${land.nearbyResources.join(', ') || 'none'}`];
+    }
+    return null;
   });
   return out;
 }
