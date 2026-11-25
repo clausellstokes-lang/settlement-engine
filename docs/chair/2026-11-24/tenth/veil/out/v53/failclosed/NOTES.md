@@ -42,3 +42,8 @@
   to deeply equal [defense, food, ...]". Manifest row added (rationale). No reader found that commit 1 left uncured (no commit 3
   needed by the census; the 11 re-derived readers carry no arm for the residual absence: listed PLAUSIBLE unreached).
 - COMMIT 2 = 04fa8d60e (07:40; one lint fix: no-useless-assignment in armFault). tests/lint whole running.
+- tests/lint WHOLE at 04fa8d60e: 25 files / 65 tests failed of 3,450 = EXACTLY the known 65 (cures/D/lintfails-D.txt, title for title); failClosedPages + mutationCoverageManifest green.
+- Components on the final tree: failClosedSharedPage 8/8, defenseRingNoteProjection 2/2, publicProseVeilInvariance green;
+  dossierPhoneFloorAllViews 2 red = BASE red (re-run at 1ffb2328b in /home/user/cures53: the same two, baseline diffs identical
+  line for line); publicProseEquality = its 3 base reds (daily_life soak1k-1/-7/-8). No commit 3 (the census found no uncured
+  reader). DONE 08:05. No push.
