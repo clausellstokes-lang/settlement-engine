@@ -36,7 +36,7 @@ export const UNPAID_GUARD_HOOK_PAID_TWIN = String(lineText({ text: 'The guard is
 //   facts              — the town's facts, for a hook that declares a thing
 const buildConflictPlotHooks = (factionA, factionB, conflict, instFlags, stressFlags, facts = null, pay = null) => {
   // ONE HASH PER QUARREL: it picks the hook and the offer's wording, so no other draw moves.
-  const seedKey = `${getActiveRng()?.seed ?? ''}::${factionA.name}>${factionB.name}::${conflict?.id ?? conflict?.issue}`; // COHERENCE-POWERS-8 (#337): the issue's stable id (its text, for every issue but a reworded one)
+  const seedKey = `${getActiveRng()?.seed ?? ''}::${conflictDrawName(factionA)}>${conflictDrawName(factionB)}::${conflict?.id ?? conflict?.issue}`; // COHERENCE-POWERS-8 (#337): the issue's stable id (its text, for every issue but a reworded one)
   const seedHash = fnv1a32(seedKey);
   const flagHooks = [];
   if (stressFlags.merchantCriminalBlur)
@@ -225,7 +225,7 @@ export const generateConflicts = (powers, relationships, config = {}, institutio
       castFree = applicableTemplates.filter((template) => !template.cast.length),
       offered = castOpen.length ? castOpen : castFree.length ? castFree : applicableTemplates.length ? applicableTemplates : issueTemplates,
       chosen = drawDeclared(offered, {
-        draw: (pool) => pick(pool), facts, key: `${getActiveRng()?.seed ?? ''}::${factionA.name}>${factionB.name}::conflict-issue`,
+        draw: (pool) => pick(pool), facts, key: `${getActiveRng()?.seed ?? ''}::${conflictDrawName(factionA)}>${conflictDrawName(factionB)}::conflict-issue`,
         poolId: 'conflicts:ISSUES', surface: 'power', drawKind: 'R', keepRefused: true,
       }).line || offered[0],
       intensity = ties > 1 ? 'high' : 'moderate';
@@ -250,3 +250,19 @@ export const generateConflicts = (powers, relationships, config = {}, institutio
   }
   return conflicts;
 };
+
+/**
+ * A DRAW KEY, NAMED AS ONE (CLOSE-7 BATCH; the chair's RULING-R24 R24l): A DISPLAY NAME MAY CHANGE; THE KEY A DRAW WAS DEALT ON
+ * DOES NOT. R24-C1 (R24g (2)) gives the bought hall three plain birth names; a conflict's issue and its hook are dealt on the two
+ * powers' names, so each renamed form is keyed here by the form it replaced, and its quarrels are dealt exactly as before.
+ * Read by exactly the two hash keys of this file (`buildConflictPlotHooks`'s `seedKey`, `generateConflicts`'s issue `key`);
+ * NEVER printed, NEVER stored, and NO vocabulary entry. It fires only for the three birth names: no other producer makes
+ * "Council of Aldermen" or "Council of Syndics", and no clean form at any size is named a plain "Senate" (C1-ANSWERS (a)).
+ * Its contents are pinned exactly by `tests/generators/power/conflictDrawName.test.js`; a later rename comes to the chair.
+ */
+export const CONFLICT_DRAW_KEY_OF = Object.freeze({ 'Council of Aldermen': 'Corrupt Council', 'Council of Syndics': 'Corrupt City Council', Senate: 'Shadow Senate' });
+/** @param {{ name?: unknown } | null | undefined} faction @returns {unknown} the key the faction's draws are dealt on (its name, but for a renamed form) */
+export function conflictDrawName(faction) {
+  const name = faction?.name;
+  return typeof name === 'string' && Object.hasOwn(CONFLICT_DRAW_KEY_OF, name) ? CONFLICT_DRAW_KEY_OF[/** @type {keyof typeof CONFLICT_DRAW_KEY_OF} */ (name)] : name;
+}
