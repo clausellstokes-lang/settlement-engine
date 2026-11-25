@@ -80,3 +80,14 @@ NOT re-made by you. So: the cure carries the laws GENERICALLY (every row of `GEN
 time; NO law named or counted by hand in the cure or in the arm), and the arm proves it by a PLANTED FIFTH ROW (a law row added
 in the test, restored in one block: the import must carry it or the arm reds), so that at the join, where the fifth row is real,
 the same arm walks five rows with no edit. Say in the commit message: "rows walked at ba7460c33: 4; the arm has no count".
+
+UNIT D, RULED (the chair's RULING V16, 01:15 UTC 2026-11-25, relayed by VEIL-55; the first builder's STOP and probe:
+`out/v53/cures/D/`): ROUTE (4), FAIL CLOSED: where the SERVED record holds two or more takers, the shared page names NO holder
+from the transfer. TERMS: (a) "no holder" means NONE ANYWHERE on the page: every shared-page reader of the seat's holder goes
+through ONE function (find every reader: grep `holderOf`, `transferTakerOf`, `holderOfSeat`, the seat's lines), and a WALKER (a
+lint arm or the existing recentConflictReaders walker's register, whichever owns the reads) shows it, so no stale holder (the
+birth's, or an earlier taker) is printed as the present one; (b) the owner's read unchanged and ASSERTED; RED FIRST by the
+two-transfer plant (`d5.probe.test.js`'s construction: the shared page names B while the owner names A); the site registered in
+`tests/lint/recentConflictReaders.walker.test.js`'s register with its reason; THE COUNT OF PLACES IN BOTH POOLS THAT REACH IT
+STATED (born: the census's 900 or the banked 720 at this tree; stored: say which pool you can reach locally; expected 0 at birth).
+Serving the last taker is NOT done in phase 1. No migration; no new served fact.
