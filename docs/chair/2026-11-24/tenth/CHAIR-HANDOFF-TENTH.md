@@ -28,6 +28,15 @@ whole first message, as sent).
   on 2026-11-24. The chair's own context read 433,030 of 1,000,000 at 14:36.
 
 ## 1. THE OWNER'S WORDS THAT GOVERN, newest first
+"So I need you to both draw a line and decide. What I want you to focus on is everything related to the generation,
+configuration, sharing etc. this bars advance time, the simulator, the map, and custom content. Those are different
+works. But in isolation everyone regarding the code and user experience for the generation without anything else."
+(2026-11-25, about 05:03 UTC, this account.) THE LINE AND THE CHAIR'S DECISIONS ON IT: `SCOPE-LINE.md` beside this file:
+this release is the generator on its own (make, configure, read, export, share: the gallery page, the party link, the
+import); no new work in the four barred areas except where this release itself would break or leak something there
+(three stay under that exception: the guard, unit 3 of the veil as hiding only, the seat's holder stored); SNAP-CHRONICLE
+is out; "the crisis has a body" is not taken (the sentence is cured, not the roster); the contender's word softened;
+a walk of the journey in a browser added at the end. IT DOES NOT CHANGE what stays his hand.
 "The weekly allowance: carry on, narrowed. We are at 32%" (2026-11-25, about 01:15 UTC, this account). THE ONE NUMBER THE
 CHAIR COULD NOT SEE: 32 per cent of the week used, about ten hours into it (the week began 2026-11-24 15:00 UTC; it
 resets 2026-12-01 15:00 UTC). "Narrowed" is the chair's own word for what he confirms: five seats, no new lane, every
@@ -985,3 +994,15 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   COMMITS: CI IS THAT RUN. The row and the gate's sentence are on the line (ddca5c789); pushed 04:36 UTC, a
   fast-forward from 0559a8405. `ci/LINE-NOW.md` is at point 116. `RED-AT-LINE.tsv` unchanged (61). OWED: "THE LINE IS
   ... BIRTHS MOVED" to CLOSE-7 and VEIL-55 (sent with this entry); CI by name within the hour. THE LANDING PLACE IS FREE.
+- 2026-11-25 05:05 UTC · T75 · THE OWNER DRAWS A LINE (section 1; `SCOPE-LINE.md`); HIS THREE QUESTIONS ON PROGRESS ANSWERED; A STALL OF THE CHAIR's MAKING CURED.
+  PROGRESS, AS TOLD HIM (04:58 to 05:01): about 20 per cent of the pre-release list by seat-hours (about 55 done, about
+  235 left); on the footing of the "60 per cent" he says he was told elsewhere (NOT IN THIS SESSION's RECORD: searched),
+  about 45 per cent: the whole nearly doubled, from about 200 to about 395 seat-hours (about 165 by "Do everything
+  prerelease", about 30 by the night's findings). THEN HIS LINE (05:03). THE CHAIR's ACTS: VEIL-52 told to park
+  SNAP-CHRONICLE's cure at its commit boundary and to build unit 3 as hiding only (if the cure is already green it says
+  so and the chair rules whether it rides); VEIL-55 told the line for the lane (PLAN-2 stands; V19 stays; a finding in a
+  barred area is one line to the chair and no work). CLOSE-7 is unchanged (the guard is in under the exception; its
+  cures are the generator's). D7 decided: not taken as built; D6 decided: softened; the journey walk added.
+  EARLIER THIS HOUR: VEIL-52 HAD BEEN IDLE 18 MINUTES WAITING FOR "ITS COMPACTION" BY THE CHAIR's OWN WORD (a compaction
+  comes only while a seat works): corrected at 04:38; unit 3 begun. Its machine had restarted three times with nothing
+  on disk lost.

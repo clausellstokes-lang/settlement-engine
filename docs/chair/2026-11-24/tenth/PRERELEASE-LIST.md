@@ -24,7 +24,7 @@ owner's golden signing, asked ONCE at the end). **D** = it needs the owner's own
 | A6 | PAGES ALREADY PUBLISHED | none | | NO DECISION OF THE OWNER'S (RULINGS V8, V9). MARKED pages (exported since the veil reached the live site): today only the browser hides; the release veils them on the server with no act by the maker. UNMARKED pages (exported before the veil existed): after the release the server sends exactly what the page shows (measured on the tip); they stay as they are. THE CHAIR'S EARLIER SENTENCES ("the server still sends its hidden parts"; "the release would protect new pages only") WERE WRONG as written and are corrected to the owner. OWED: "PP-TODAY" (the live chain and client), then the import door's pass |
 | A7 | an owner's stored switch for the empty-section cut (intake 5) | M | **D** | "not built unless he asks": offered, not assumed |
 | A8 | "READ-COST" (RULINGS V7, V11): master's own gallery reads compute every public row's tile, reading each row's whole document some 25 times: the page read AND the gallery's front list cost about 5.6 ms a public row (4.7 s at 840, local; measured on both chains) | (i) the page read takes one row's tile: S; (ii) the tile's facets become stored columns written by the server, backfilled once: M, about 8 seat-hours | Q | RULED (V11): a migration of its own after the veil's; VEIL-55 places it (the lean: VEIL-52 after unit 3); CUT FIRST AGAINST MASTER IF THE OWNER's COUNT OF PUBLIC PAGES IS IN THE HUNDREDS |
-| A9 | "SNAP-CHRONICLE" (RULING V13): a map shared with its campaign is refused whole by the server's safety check wherever the campaign has a chronicle, because the editor ticks the chronicle section BY DEFAULT and the server denies `.*chronicle.*` (CONFIRMED through the client's own `shareMap` on master and tip; the maker sees "World snapshot contains a forbidden private key and cannot be shared") | S | | RULED: the client stops offering and serializing the section; no migration; it rides in VEIL-52's unit 3 with a walker; a chronicle on shared maps would be a new feature, the owner's |
+| A9 | "SNAP-CHRONICLE" (RULING V13) | - | | OUT OF THIS RELEASE BY THE OWNER's LINE (`SCOPE-LINE.md`): a fault of the map feature, live today, not made by this release; parked for the map work with its ruling |
 
 ## B. THE DATABASE'S RULES
 | # | what | size | flags | state |
@@ -51,8 +51,8 @@ owner's golden signing, asked ONCE at the end). **D** = it needs the owner's own
 | D3 | the power step's sentence written before the coherence repair (intake 2; 1 page in 287) | M | B | not started |
 | D4 | the stored powers not always strongest-first, and nine readers that print as if they were (intake 1): THE PAGE SORTS, and the bar marks the holder | M | | not started |
 | D5 | the defence bound R13 re-cut score by score (intake 14) | S to M | | not started |
-| D6 | the contender tied to the ruler (intake 11): three ways | M | **D** (the chair's lean: a softer word where the two are tied) | his question |
-| D7 | "the crisis has a body" (intake 12): built whole on `lane/fortune-7-2026-11-22-u8-wip` at 0b7037727; it changes the density design he signed; and the creditor's agent named with no card (35 of 900) | L | B, **D** | his proposal to accept or refuse |
+| D6 | the contender tied to the ruler (intake 11) | M | | DECIDED BY THE CHAIR: the word is SOFTENED where the first contender is the ruler's own dependent or partner; a seat brings three wordings with counts; the owner may veto the word |
+| D7 | "the crisis has a body" | S to M | B | DECIDED BY THE CHAIR (`SCOPE-LINE.md`): THE BUILT PROPOSAL IS NOT TAKEN (it would give a power and a leader to more than half of all places); THE SENTENCE IS CURED: a crisis names only a power the place holds, or an outside party said to be outside; a measure first |
 | D8 | a stewardship's holder titled "the reeve" (intake 6) | S to M | | the seat lane's wording |
 | D9 | the numbers he sets, left as drafts: the seat contest's factors (all 1 today), fortune's numbers, LASTING's ages | his | **D** | his signing or his leave |
 | D10 | THE RE-DERIVATION's GUARD (RULINGS R24i, R24j): a stored place is re-derived only by the engine that bore it; else a decree's newcomer is appended and nothing else moves; the version goes up to '0.10.0'; a birth stamps the engine and a load never does | M, 6 to 8 seat-hours | B; IT HOLDS THE RELEASE | DECIDED YES by the chair on the owner's deferral (2026-11-25); CLOSE-7's unit "GUARD", after the mirror and the live-path measure |
@@ -101,4 +101,10 @@ each seat finishes the unit in hand; every result is pushed as it is made.
 lasts roughly 17 to 22 more hours at five seats and a landing; what is left on this list needs about twice that. ON THIS
 ACCOUNT ALONE the release falls after the reset of 2026-12-01 15:00 UTC (about 2026-12-02 or 03). WITH ANOTHER ACCOUNT
 TAKING THE HAND-OFF WHEN THIS ONE STOPS: about 2026-11-27 to 29. Neither counts the owner's own hands at the end.
+
+## ADDED 05:05 UTC ON 2026-11-25: THE OWNER's LINE
+`SCOPE-LINE.md` beside this file governs what is in: the generator on its own (make, configure, read, export, share). OUT:
+A9. IN under the border's exception: D10 (the guard), unit 3 of A1 as hiding only, D11. ADDED AT THE END (F): a walk of
+the whole journey in a real browser, about 4 seat-hours. THE ORDER: safety (A1, D10), the read's faults (C), the
+birth-moving items (D, E1, E8), wording (E), the share page's quality (A3, A8, A2, A4, A5), the end (F).
 
