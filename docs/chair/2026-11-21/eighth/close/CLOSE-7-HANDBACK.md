@@ -216,6 +216,23 @@ and ONE gate. Read `prompts/START-GEN-COMMON.txt` on the chair branch once. KEEP
   - NOT the order-free deal.
 - R24m (07:54): C1 is not widened; the 39 re-deals are accepted; the alias is withdrawn. The builder is removing it and proving.
 
+STATE AT 09:31 UTC (first hand-in in progress):
+- BATCH, -batch-wip at 206e6c3ae: C1 under R24m is PROVED.
+  - C 0/900 moved; only V's 39 move. Steps are equal to assembly; the cause is the tie-breaks.
+  - No golden rows. The name is a key in 9 sites.
+- Reds left in BATCH:
+  - B1(ii): traditionDescriptionSharedPage (the fixture town lost its rite of the dead) and four corpus walkers: newsHeadline,
+    newsVoice, proseFamilyContract, writerReach.
+  - B1(i)'s merge: editCorpusRatchet A4/A5/A7 and mergeLadderHeldKeys A2.
+  - The builder (a45b468ed08040c87) is re-anchoring the fixture by its finder, and classing the six by door (I run doors) or N6.
+- BEFORE-AFTER is RUNNING (fresh builder): three trees (LINE ddca5c789, CURES 0ec96f13d, BATCH 206e6c3ae). Report
+  `close-7/reports/BEFORE-AFTER.md`.
+- THEN:
+  - merge -batch-wip onto cures and re-take the doors;
+  - run COMMON-EIGHTH 14 (a)-(f) in the background;
+  - re-make FOR-THE-OWNER and read the sizes from (f)'s build;
+  - send "CLOSE-7 <commit>".
+
 THE NEXT COMMAND: on BATCH's message:
 - read `close-7/reports/BATCH.md` and the diff once (`git -C /home/user/wt/batch diff --stat 0ec96f13d..HEAD`);
 - re-read the ruling's lines 45-79, 138-157 and 182-197;
