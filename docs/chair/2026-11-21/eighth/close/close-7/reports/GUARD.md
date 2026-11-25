@@ -276,3 +276,29 @@
     the bundle's own build step, which is outside step A. It is NOT run, and is named here for CLOSE-7's word.
   - The door it names: `npm run build:edge-shared` (recorded hash 69ba037dc75892dc; the source now hashes 9988f16fd1912957).
     Not run.
+
+# GUARD-FINISH (R24k), STEP B: the re-take on births of the 116 tip (CONFIRMED by run)
+- **The trees, detached, made and removed by me:**
+  - MERGED, `/home/user/wt/g116` at 91c2b233f (the cures tip: the GUARD merge eaf34abde plus the lighting re-take);
+  - PARENT WITHOUT GUARD, `/home/user/wt/p116` at cc7ddec1c (the cures with point 116).
+  - Lockfiles are equal to the main checkout's, and nothing was written in either tree.
+- **The saves:** 180 born on the MERGED tree. `guard-proofs.census.jsx`, mode `born`, C corpus births `dp-<size>-0..29`, all
+  stamped 0.10.0, saved as rows to the scratchpad `GUARD/g116-saved/` (new option `GP_SAVE_DIR`).
+- **The ticks:** one decree each, through the store's own doors, ticked on the MERGED tree (the same run) and on the PARENT
+  (mode `master` reading those rows). The rows are `live-path/stepB-g116-rows.jsonl` and `stepB-p116-rows.jsonl`. Both runs:
+  exit=0, 0 errors.
+- **(c2) THE GUARD IS INERT ON ITS OWN ENGINE: 180/180 records are equal** with `generatorVersion` set apart (new field
+  `afterNoVersion`, the after-record hashed). After the tick, the merged tree stamps 0.10.0 and the parent 0.9.0. No differing
+  row.
+- **(c1) The feature is on: 180/180 re-derive on the merged tree** (and 180/180 on the parent). The newcomer is once and last
+  in 180/180.
+- **(3ii) THE FOUR REDERIVE-DRIFT COUNTS on the merged tree** (beyond the newcomer, the same measure as (c)):
+  1. **The receipt counts one more person: 180/180.**
+  2. **A held person's empty house field becomes null: 9 places,** one person each: dp-thorp-22, dp-thorp-24, dp-hamlet-7, 9,
+     13, 16, 21 and 27, and dp-village-3. These are the same seeds as at d8d7525dd. The cause is CONFIRMED on the earlier dumps
+     and PLAUSIBLE here, since the seeds and the column are the same.
+  3. **Powers seated: 1** (dp-thorp-13, "Third Bloc (Neutrals)"; its `stress` and `stressors` cast moves with it).
+  4. **Conflicts re-dealt: 4** (dp-hamlet-13, dp-village-16, 23 and 25).
+  - **Seated powers plus re-dealt conflicts: 5 of 180, within the bound of 10.**
+- **Trees:** g116 and p116 are removed. `/home/user/wt/master` and `/home/user/wt/line` (phase 1) are still in place for
+  CLOSE-7 to keep or remove.
