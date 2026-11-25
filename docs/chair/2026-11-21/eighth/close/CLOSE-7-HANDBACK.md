@@ -79,8 +79,18 @@ STATE AT 02:35 UTC 2026-11-25:
 - B1(i)'s finish may ride beside GUARD (their files do not meet). But point 116 (troubles LIT) re-births C and V, so B1(i)'s
   table is re-stated after 116 lands. Prefer to start B1(i)'s finish when the 116 line arrives.
 
-THE NEXT COMMAND: on LIVE-PATH's message, read `close-7/reports/LIVE-PATH.md`, send its table and the 100 words to the chair,
-then SendMessage the builder "start phase 2".
+LIVE-PATH DONE (report `close-7/reports/LIVE-PATH.md`, harness `close-7/live-path/`). SENT to the chair at 02:44 UTC.
+- On the line, 113 of 180 places move. People keep their names. 132 people end up in a house or power that is gone.
+- The master control moves 4 of 180: 4 thorps gain a power. This touches GUARD 5(c); the builder reports it by cause, and STOPS
+  on (c) alone if it cannot be exact.
+RUNNING: GUARD phase 2, by the same builder (agent a45b468ed08040c87), in /home/user/wt/guard on -guard-wip, cut at e2fd7caa4.
+Trees /home/user/wt/master and /home/user/wt/line are kept for it.
+
+THE NEXT COMMAND: on GUARD's message:
+- run `git -C /home/user/wt/guard log --oneline e2fd7caa4..HEAD`;
+- read `close-7/reports/GUARD.md` and the diff once;
+- re-read R24j's eight points;
+- merge onto cures, run the gates, push, and send the GUARD line with the golden list for the owner.
 
 ### 0.1 Ground
 - THE LIT TREE (before every cure): `/home/user/wt/lit`, detached at d447ee31e (the flip; `origin/lane/close-6-2026-11-23-flip`).
