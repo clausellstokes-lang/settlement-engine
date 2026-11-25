@@ -391,3 +391,20 @@ THE READER's ANSWERS THAT CLOSE THE CHAIR's OPEN QUESTION: the only writers of t
 (legacy, twice) and `assembleSettlement.js` (current); no path raises an old record to '0.10.0' (section re-rolls
 return parts; imports keep the source's stamp; exports normalise a copy); `regenerateWithLayer` has one caller; any
 value not strictly equal to '0.10.0' takes the append path.
+
+## R24o (added 13:45 UTC on 2026-11-25): POINT 117's STALE ANCHORS AND MOVED FIGURES (CLOSE-7's "ANCHORS bd99fa7b6")
+`lane/close-7-2026-11-24-anchors-wip`, cut at 97c6bfc7a, test-only; `close-7/reports/ANCHORS.md` holds each failure's
+first lines. CURED BY THE FILE's OWN FINDER, accepted: `bar6ScenesGoods` B7 (r2s-religious_conversion-metropolis-0 to
+r2s-famine-metropolis-0: 8c4614871); `bar8DesksEco` 11c (bar0-town-calm-rand-46, a C1 carrier whose good moved, to
+-136: bd99fa7b6). RULED, all test-only ("ANCHORS-2"):
+1. `dossierPhoneFloorAllViews`, both baselines: re-recorded by the test's own instruction (a deliberate move: R24h
+   takes a false food grievance off Daily Life: mobile prose 9 to 8; desktop measured and sub14 9 to 8; cause confirmed
+   by run at fca95c197); the diff may touch "World/Daily Life" alone.
+2. `traditionsSameWindowChain` soak1k-5255 (the place's seventh tradition changed with B1(ii)'s `genesis.js`: its
+   window no longer holds three): re-anchored by a finder added to the test; the property kept; expected lines derived
+   from the record; one literal of the sentence's form kept.
+3. THREE CENSUS FIGURES, asserted in both directions and re-keyed "by identity with its cause" at every earlier
+   landing: `editCorpusRatchet` A4 {E7 32, E8 10} to {29, 9}; A5 the four seat pairs 6 to 7; `mergeLadderHeldKeys` A2
+   E7 22 to 23, E8 5 to 4: all moved at B1(i)'s merge: re-stated with a dated comment naming the rows that left or
+   joined; every invariant of those arms green by run; A5's new non-commuting town diffed leaf by leaf (trace-only, or
+   the world field named and written down for advance time).
