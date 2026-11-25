@@ -58,6 +58,12 @@ import { DOSSIER_STATE_PROSE_ECONOMY } from '../../src/data/dossierStateProse/ec
 import { AUDIENCE_DM } from '../../src/domain/display/stateProse/stateProseKernel.js';
 import { PROSPERITY_TIERS } from '../../src/data/constants.js';
 import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
+import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
+import { economyDeskRead } from '../../src/components/new/economyDeskRead.js';
+import { economicsDeskArgs } from '../../src/components/new/deskHostArgs.js';
+import { factsOf } from '../../src/domain/facts/factsOf.js';
+import { atomHolds } from '../../src/domain/facts/factVocabulary.js';
 
 const ACCESS_ENUM = ['road', 'river', 'port', 'crossroads', 'isolated', 'mountain_pass'];
 const FOOD_LABELS = ['Surplus', 'Secure', 'Pressured', 'Import-Dependent', 'Deficit', 'Active Famine'];
@@ -1430,4 +1436,23 @@ describe('W1 ECO — the construction lenses', () => {
     expect(criticalImportPoolKey(null)).toBe(null);
     expect(incomeWeightPoolKey({ religionInfluence: 59, magicInfluence: 59 })).toBe(null);
   });
+});
+
+// WORDS-2, the tenth chair's RULINGS G6 #6+7 and G9 (5): ECO-1 COMBINATION C4 v2 ("Little that comes past X stops there.")
+// declares `no exports`: a place that sends goods out (the vocabulary's `exports` atom) is not one where little stops, and
+// it stood beside ECO-10's "Buyers from outside come to X for more than one thing." Red first by name on 0ec96f13d8: C
+// dp-city-17, dp-hamlet-120, dp-town-32 printed it with exports printed; the header slot then prints another C4 line.
+describe('G6 #6+7: "Little that comes past X stops there" refuses a place that sends goods out', () => {
+  it('C dp-city-17, dp-hamlet-120, dp-town-32: exports hold, the line is not drawn, and the header still prints a sentence', async () => {
+    await loadGenerationLawPayloads();
+    const C4 = DOSSIER_STATE_PROSE_ECONOMY['DS-ECO-1'].pools['COMBINATION C4: a low rung on a working approach'];
+    expect(C4.find((v) => v.vid === 2)?.marks).toContain('no exports');
+    for (const seed of ['dp-city-17', 'dp-hamlet-120', 'dp-town-32']) {
+      const s = generateSettlementPipeline(birthConfig({ settType: seed.split('-')[1] }), null, { seed, customContent: {} });
+      expect(atomHolds('exports', factsOf(s)), `${seed}: sends goods out`).toBe(true);
+      const header = economyDeskRead(s, { tier: s.tier, ...economicsDeskArgs(s) }).prosperityHeader?.sentence ?? '';
+      expect(header.length, `${seed}: the header slot still prints a sentence`).toBeGreaterThan(20);
+      expect(header, seed).not.toMatch(/Little that comes past .* stops there/); // anchored: the header is proved a printed sentence on the line above
+    }
+  }, 120_000);
 });

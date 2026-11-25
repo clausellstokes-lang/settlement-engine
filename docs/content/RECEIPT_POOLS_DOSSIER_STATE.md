@@ -830,7 +830,7 @@ the access.
 
 **COMBINATION C4: a low rung on a working approach**
 1. `[ledger · no crisis: under_siege · no crisis: plague_onset]` {settlement} sits on its {access} and stays poor all the same.
-2. `[street · no crisis: under_siege · no crisis: plague_onset]` Little that comes past {settlement} stops there. The town is poor, and its people say so to anyone who asks.
+2. `[street · no exports · no crisis: under_siege · no crisis: plague_onset]` Little that comes past {settlement} stops there. The town is poor, and its people say so to anyone who asks.
 3. `[visitor · market · no crisis: under_siege · no crisis: plague_onset]` {settlement}'s {access} is busy, and the town is poor all the same, and so are the traders at its market.
 4. `[ledger · crisis: under_siege]` With the siege closing the roads, {settlement} has lost what passing trade used to leave behind, and the town feels the loss.
 5. `[street · crisis: under_siege]` The siege has stopped {settlement}'s trade moving at all, and the money that trade brought in has stopped with it.
