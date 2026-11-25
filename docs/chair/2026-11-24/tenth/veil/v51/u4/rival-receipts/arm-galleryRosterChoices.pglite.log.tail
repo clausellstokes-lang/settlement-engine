@@ -1,1 +1,40 @@
-gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 7637 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
++ [
++   "hand-fold open dm=false gallery: the shown conflict lost",
++   "hand-fold open dm=false map: the shown conflict lost",
++   "hand-fold open dm=false link: the shown conflict lost",
++   "hand-fold open dm=false import: the shown conflict lost",
++   "hand-fold open dm=true gallery: the Ropers membership lost",
++   "hand-fold open dm=true gallery: the shown conflict lost",
++   "hand-fold open dm=true map: the shown conflict lost",
++   "hand-fold open dm=true import: the Ropers membership lost",
++   "hand-fold open dm=true import: the shown conflict lost",
++   "hand-fold openM dm=false gallery: the shown conflict lost",
++   "hand-fold openM dm=false map: the shown conflict lost",
++   "hand-fold openM dm=false link: the shown conflict lost",
++   "hand-fold openM dm=false import: the shown conflict lost",
++   "hand-fold openM dm=true gallery: the Ropers membership lost",
++   "hand-fold openM dm=true gallery: the shown conflict lost",
++   "hand-fold openM dm=true map: the shown conflict lost",
++   "hand-fold openM dm=true import: the Ropers membership lost",
++   "hand-fold openM dm=true import: the shown conflict lost",
++ ]
+
+ ❯ tests/security/galleryRosterChoices.pglite.test.js:763:17
+    761|     note('R3-CURE-2 unit 1, the tooth (reads serving the shown power\'…
+    762|     expect(tooth).toBeGreaterThan(0);
+    763|     expect(bad).toEqual([]);
+       |                 ^
+    764|   });
+    765|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 36 passed (37)
+   Start at  01:43:48
+   Duration  990.30s (transform 4.56s, setup 42ms, import 144ms, tests 989.96s, environment 0ms)
+
+[gate-tail] end:  02:00:19 up 56 min,  0 user,  load average: 1.03, 1.13, 1.51
+[gate-tail] full log: /var/tmp/v51/out/rival/tmp/gate-tail.7985.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
