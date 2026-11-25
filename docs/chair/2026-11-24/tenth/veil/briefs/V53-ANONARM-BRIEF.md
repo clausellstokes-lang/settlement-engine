@@ -73,3 +73,20 @@ returned or raised.
 ## YOUR FINAL MESSAGE (at most 200 words)
 The two commit hashes; for each its red (quoted) and green counts; the door/role table (5 doors x 2 roles: returned | refused by
 grant | RAISED); the plant's caught error text; `tests/lint` and `tests/security` whole counts with any red outside the known.
+
+## ADDENDUM: RULING V26 (the chair, 06:53 UTC 2026-11-25, `veil/RULING-V1.md` at afb14adb50 on the chair's branch), ON
+grants-wip after c2d9cf8a6, AS COMMITS (the chair reads the 212 hunk and the down lines together at the join)
+(1) The 212 down file grants BY EXACT SIGNATURE what the HOSTED 001..211 held on `_gallery_apply_member_overrides(...)` and
+    `_gallery_sanitize_public_json(jsonb, text[])`, with a COMMENT saying so and why (the hosted platform's default privileges;
+    RULING V26); NO conditional SQL, NO read of pg_default_acl in a rollback. (c2d9cf8a6's revoke-then-re-grant may already be this:
+    check the comment and that nothing is conditional; amend in a new commit if not.)
+(2) `tests/security/galleryVeilCures.pglite.test.js`'s ROLLBACK block: its WHOLE catalogue compare runs under the hosted-default
+    harness (`tests/security/hostedDefaultHarness.js :: bootHostedChain`, USED, not re-written); the plain-Postgres compare of THAT
+    block is RETIRED (removed, not kept with an exception); red first: the block's compare under the harness WITHOUT the down file's
+    re-grant shows the two ACL lines; green with it. Say what else in the file used the plain chain and is left as it is.
+(3) THE HARNESS IS A MODEL: ONE READ-ONLY QUERY for the owner's hand, written into the veil lane's owner page (find it: the
+    lane tip's `FOR-THE-OWNER*` under `docs/chair/2026-11-24/tenth/veil/` or the page VEIL-55 names; if none exists on this branch,
+    write `docs/chair/2026-11-24/tenth/veil/FOR-THE-OWNER-VEIL-ROLLBACK.md` and say so): the access lists (proacl) of the two
+    functions on the live database, run BEFORE 212 is applied, the EXPECTED answer beside it (the hosted 001..211 ACLs you read);
+    a difference corrects the down file first. No project identifier, no key, no credential in that page.
+(4) Both functions are pure; 211's bodies return with the rollback (say it is so in the down file, by reading it).

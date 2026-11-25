@@ -49,7 +49,7 @@ started.
 DONE AND SENT: (0); (1) REDS-CAUSE (`out/v53/redscause/REDSCAUSE.md`; the import surprise to the chair: RULING V3 (6)); (2) J1
 classed; J12 and J12-V4 (`out/v53/J12.md`, `out/v53/j12/J12-V4.md`: prominentRelationship's 12/720 are the covert tie's own copy).
 NEXT COMMAND: on the FAIL-CLOSED builder's return: `git -C /home/user/pages53 log --oneline -4`, read its diffs once, re-run its
-red/green, push pages-wip, line to VEIL-55. Pending answers: the rollback question (galleryVeilCures under the hosted harness).
+red/green, push pages-wip, line to VEIL-55. THEN: V26's addendum on grants-wip (resume the anon arm builder).
 THEN: the renumbering script (`briefs/V53-RENUMBER-BRIEF.md`), then items (5), (7), (8). "THE SEAT'S HOLDER IS STORED" only on VEIL-55's word.
 
 ## 2. RULINGS IN FORCE FOR THIS SEAT (all on the chair's branch, appended to `docs/chair/2026-11-24/tenth/veil/RULING-V1.md`)
