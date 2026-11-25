@@ -272,3 +272,35 @@ site, what the veil hides is hidden by the browser alone today. V8's ruling stan
 known reason the server-side veil exists; it now has figures, and the owner is told them.
 **ONE PASS ADDED (VEIL-52, before READ-COST's run):** today's IMPORT of a marked page on master's chain and client: does
 an importer's own copy hold what the maker's veil kept off the page? Its first line is a yes or a no.
+
+## RULING V11 (added 00:38 UTC on 2026-11-25): "READ-COST": THE LIST RUN, AND THE CURE RULED IN TWO PARTS
+VEIL-52 (`v52/out/READ-COST-TABLE.md` at 532a3fff3; CONFIRMED, executed; N115's rows, median ms of 20 reads):
+
+| read | tip, 1 public row | tip, 840 | master, 1 | master, 840 |
+|---|---|---|---|---|
+| `list_gallery_dossiers` (the gallery page's first call, its defaults) | 5.6 | 4,759 | 5.7 | 4,694 |
+| `list_featured` | 0.25 | 0.56 | the same | the same |
+| `list_curated` | 0.16 | 0.23 | the same | the same |
+
+THE GALLERY's FRONT LIST COSTS WHAT ITS PAGE READ COSTS: about 5.6 ms a public row, on master as on the tip, on this
+container's local cluster. It is paid on the first page any visitor opens. (FROM THE CHAIR'S TRAINING KNOWLEDGE, NOT
+CHECKED TODAY: the hosting service's default statement limit for a visitor's role is a few seconds; if so, the list would
+begin to fail outright somewhere in the hundreds of public pages. Production's own figure and count are unknown.)
+**THE CURE, RULED, IN TWO PARTS, EACH RED FIRST BY n115's HARNESS:**
+ (i) THE PAGE READ TAKES ONE ROW's TILE. `get_gallery_dossier` no longer joins the whole of
+     `_gallery_public_tile_rows()`: the helper is filtered to the one row, or the read takes a one-row twin kept equal
+     to it by a walker. BAR: the read at 840 public rows within twice its one-row time.
+ (ii) THE TILE READS NO `data`. The facets a tile needs (population, terrain, government type, magic level, stability,
+     primary resource, threat level; culture, prosperity, deity already have columns since 063) become STORED COLUMNS,
+     written by the server (a trigger on `settlements` at publish and at any change of `data` while public; never a
+     client's word), backfilled once for the rows already public; `_gallery_public_tile_rows()` reads the columns.
+     BAR: `list_gallery_dossiers` at 840 public rows under 150 ms on this harness; every tile field equal, row for row,
+     to the old helper's on both stored pools (a differential, 0 differing); the new columns on 211's part D guard list
+     (a client cannot write them); the new trigger function born closed (211's part B) and classed in the register.
+ ITS FORM: A MIGRATION OF ITS OWN, after the veil's (it edits the helper the veil's reads call and, for (i), the read 212
+ re-creates: so it is cut on the lane's tip AFTER phase 1's SQL units have merged, and it never re-opens 212's text).
+ One fresh security reader reads it with the veil's whole list; the chair reads it whole. It is applied by the owner's
+ hand like every migration. SIZE: (i) S; (ii) M (about 8 seat-hours with its proofs).
+ WHO AND WHEN: a unit of the veil lane's plan, VEIL-55's to place (the chair's lean: VEIL-52 after unit 3, since it
+ holds the harness). IF THE OWNER's COUNT OF PUBLIC PAGES SAYS THE LIVE GALLERY IS ALREADY SLOW (some hundreds), part
+ (ii) is cut FIRST against master's chain as a file he can apply before the release, as the grants' urgent file was.
