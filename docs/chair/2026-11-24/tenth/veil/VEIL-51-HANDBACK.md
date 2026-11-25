@@ -144,7 +144,34 @@ Reports to the lane's owner: a FILE, at most 200 words. My context began with a 
     13). EVERY AMBIGUOUS CASE is one pair, M-R2-buy (master's label form) and R2-buy (the tip's name form), matching the SAME SPAN of one
     "Close enough to the two above..." tail: one reading textually. Put to VEIL-55 and the chair (02:28): a tie over one span is ONE
     reading under V14 (1); then 0 to withhold whole. eslint 0; walkers no worse than aa54a6791.
-  NOTHING RUNNING. NEXT: the rulings asked; then wait for "R4-IDS MERGED".
+  THE TIE RULE, RULED (the chair 02:29; VEIL-55 02:29): the cut is judged by its SPAN: rows over ONE span are one reading; a desc is
+    withheld whole when no span matches or two rows match DIFFERENT spans; the walker reds on a different-span tie. BUILT BY ME in the
+    walker: 7010a0004 (pushed 02:32): a fourth arm (a planted different-span pair reds); the census re-run (CONFIRMED,
+    `u4/standwalk/measures-tierule.txt`): today 743: cut exactly 423, no tail 320, uncut 0, different-span ties 0, wrong 0, SAME-SPAN
+    TIES 58; master 752: 591, 161, 0, 0, 0, SAME-SPAN TIES 38. The 96 and the pair (M-R2-buy, R2-buy) go in the "TIP?".
+
+### HANDS OVER (VEIL-51, 02:3x UTC 2026-11-25, near the mark; unit 1 granted; unit 4's no-SQL part done; NOTHING RUNNING)
+THE SUCCESSOR'S PACKET: START-VEIL-51.txt on `lane/chair-2026-11-08`; RULING-V1.md (V1-V15+) there; this section.
+MERGED: nothing of mine yet. GRANTED, NOT MERGED: unit 1 STORED-PROSE at d7764e67a (`lane/veil-51-2026-11-24-c2-wip`): VEIL-55 merges it
+  after "R4-IDS MERGED" (212's header item (37)) and re-runs its slice. BUILT, NOT MERGED (unit 4's tests, merged WITH unit 4):
+  DESCARM 0ff0773c7 (`-descarm-wip`, red by design); STANDWALK 7010a0004 (`-walker-wip`, cut at aa54a6791).
+OWED (unit 4, after "R4-IDS MERGED <commit>" from VEIL-55), by `u4/PLAN-V15.md`: (1) the code branch `lane/<seat>-r5desc-wip` by
+  plain merges: aa54a6791, PIN-3 b58abc48b, the lane's tip VEIL-55 names (unit 1 inside it); DESCARM and STANDWALK; NOT RIVAL (cut to
+  phase 2). The composed census in `rosterChoiceComposedHosts.walker` (unit 1's exact 4 vs R5D's 23 prose rows) is resolved WITH unit
+  1 (VEIL-55: unit 1's census stands; R5D's re-pin falls away unless a row it moves is still composed): name it in the "TIP?".
+  212's header: R4-IDS (36)/(36b)/(36c), STORED-PROSE (37), R5D's item (38). The strict typecheck's TS2345 at pageRederive.js
+  :283 read against the joined line. (2) R5D narrowed to THE CUT ALONE (V15): every non-owner read, one table, FAIL CLOSED by span
+  (no span, or different spans: the desc withheld whole), in 212 AND the twin; reader S NOT wired on any shared read (out of
+  `rederiveForPage` and `importRederive.js :: rederiveInPlace`); SSKIP falls away. (3) the arms: DESCARM green; no standing printed on
+  any non-owner read, both pools; the fail-closed plant; the owner's read unchanged. (4) the loss listed under V4 (the shared page's
+  standing lines; about 426 of 754 today-born powers carry one). (5) the proof: wd's desc path -> 0 on both pools and the plant
+  (`u4/u4.sh`), every arm on the full pools once, L1, tests/lint and tests/copy whole, GATE-1/GATE-2 not worse; "TIP? R5-DESC" with
+  the chair's whole read of 212's hunk first.
+THE MACHINE: PG16 `su postgres -c "/usr/lib/postgresql/16/bin/pg_ctl -D /var/tmp/v18pg -l /var/tmp/v18log/pg.log -w start"` (socket
+  /var/tmp/rv7; templates v27x211, v28tpl, v51_c2); stored pools `/var/tmp/v51/out/p1/stored-{today,master}` (re-made by p1.sh's
+  `dumps` step if gone); instruments run unchanged from detached worktrees (i42 d71a3ee44: meas, dump; i43 b126c9813: wd).
+LESSONS: wd-an exits 3 on "MAP OTHER" (never retry on 3); background jobs need a 2-hour limit; never edit a running sh script; push
+  receipts of every long run (`u4/receipts.sh`); restarts happen (00:41, 01:03): a killed run is no run (the chair, 01:04).
   IF THIS SEAT STOPS: re-run what u4.log lacks (`sh docs/chair/2026-11-24/tenth/veil/v51/u4/u4.sh <steps>`; `sh .../rival.sh`)
   after the trees above are re-made (`git worktree add --detach` at the commits named; node_modules linked).
 - NEXT: wait for "R4-IDS MERGED <commit>" from VEIL-55, then unit 2 (R5-DESC), reading PART 42 s1 block 0 (a3bc0dc9d) and
@@ -173,6 +200,7 @@ N99. ppkey on the full pool is NOT re-run (0 of 46,752 per door at ced3b1de7) un
 
 ## 3. Log (every hour from `date -u`)
 - 21:24 seated, read in. 21:25 line (0) to VEIL-50. 21:26 make-instruments started (rc 0 21:34). 21:33 p1 started.
+- 02:32 the tie rule in the walker; HANDS OVER.
 - 00:10 THE LINE IS 0559a8405 (point 115, the troubles rule landed DARK: no birth or page moves; pools and proofs stand).
 - 22:49 the chair's allowance warning: push at every result. 23:19 p1 ended. 23:21 tipbuild. 23:25 TIP? sent.
 - 22:40 context summarized; owner change read (VEIL-55); line to VEIL-55. 22:42 the four measures read.
