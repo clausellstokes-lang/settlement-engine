@@ -239,14 +239,14 @@
  "digests": {
   "corpusMeta": "2fc0bed64cd75bee9bf307933c70806bddd7e3bca56bd43f6b10701001c26cf9",
   "inventory": "656a4d0007e96e46337a2ccfbef80d0e105da304c9aeaae4b35e118f0c65415e",
-  "manifests": "bef72145b9a44ca5dd732b65cf4c849ace5ebaf7ebc7fb49c440260c59a4d7da",
+  "manifests": "dd3cb102b52b9c0ee859c443f3ef7026b74b2cd6ccd1c4f80cf81441ea251ccd",
   "migrationReview": "e534f083e0e955fdb22847606961f18e4bda1cb8092c131f84b753bdd672cf4e",
   "rowTags": "d980efe88e9faed55dad533e43ccf6d4e3ea3dae24aa236375965207828d96f7",
   "scanStats": "ac00c964e2af5d5689eea798e60d73cccc9979b544c133ee9ffd6a9a040dd583",
   "sentinel": "469eefcf995d8b6e6cb53dd5ec7977c51be73e5af5bcd87996c2009b0fac6794"
  },
  "frozen": "2026-11-25",
- "frozenAtSha": "91c2b233f285524ccef7c687329c88efcb1265da",
+ "frozenAtSha": "eb2ee350abc9b58669df6d8a650e3424461c486e",
  "identities": 1551,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
@@ -2777,7 +2777,7 @@
   },
   "executionTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "37c350e00d73a4b1ac10ed3852d5a1426d4a91c8f1607323e1d04d1fbca48e98",
+   "digest": "1a09a33d8d17a0fa5b7aa0e1cacffd4a7a7be1a5bfa2201c6272aadb518a016a",
    "entries": [
     {
      "mode": "100644",
@@ -7500,8 +7500,8 @@
     {
      "mode": "100644",
      "path": "src/data/dossierStateProse/economy.generated.js",
-     "sha256": "615716005326c3f5762f27d133fcfabcb9c5947d0b2249d8ff235704b5a4f750",
-     "size": 214003,
+     "sha256": "bd85b5cb75dbc8f2279a3b944fcec147e32d50a4291003cbe65e7295e4fce8af",
+     "size": 214029,
      "type": "file"
     },
     {
@@ -39805,7 +39805,7 @@
   },
   "sourceTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "8d6c7732954f90914dc94c1a27fa858f5a36384178c1893345d64341321dc28a",
+   "digest": "0db69b4766e18ff03b251a5ffd20f47fb53402866d85e156b78bf9452d8edfaa",
    "entries": [
     {
      "mode": "100644",
@@ -44458,8 +44458,8 @@
     {
      "mode": "100644",
      "path": "src/data/dossierStateProse/economy.generated.js",
-     "sha256": "615716005326c3f5762f27d133fcfabcb9c5947d0b2249d8ff235704b5a4f750",
-     "size": 214003,
+     "sha256": "bd85b5cb75dbc8f2279a3b944fcec147e32d50a4291003cbe65e7295e4fce8af",
+     "size": 214029,
      "type": "file"
     },
     {
@@ -58681,10 +58681,10 @@
  },
  "scannerProvenance": {
   "detectorDigest": "4510771aaad7171b24f7d28199255626c9dd37de9015d991904184b37a1fae76",
-  "executionTreeDigest": "37c350e00d73a4b1ac10ed3852d5a1426d4a91c8f1607323e1d04d1fbca48e98",
+  "executionTreeDigest": "1a09a33d8d17a0fa5b7aa0e1cacffd4a7a7be1a5bfa2201c6272aadb518a016a",
   "scanTreeDigest": "3ea4e9094c7b60543a85129e145229439d500430adc7096cb542939aea9f337c",
-  "sourceTreeDigest": "8d6c7732954f90914dc94c1a27fa858f5a36384178c1893345d64341321dc28a",
-  "unscannedInputDigest": "fe7a5793ac524f4f0c16b52bc57f0011a1607126db3ccfe0c35984b229d293c3"
+  "sourceTreeDigest": "0db69b4766e18ff03b251a5ffd20f47fb53402866d85e156b78bf9452d8edfaa",
+  "unscannedInputDigest": "bfce35c204f487ff676f66bf6d216ee94736d50a20d9f9b351c52fe550d69cdb"
  },
  "schema": 46,
  "sentinel": {
