@@ -113,7 +113,12 @@ Reports to the lane's owner: a FILE, at most 200 words. My context began with a 
     (density rivals minted after the standing write), 1 CHANGED; master-born 193 of 765 SAME (381 CHANGED, 173 DROPPED, 18 ADDED: master's
     older words). No served key decides (contestsNiche withheld; generatorVersion 0.9.0 on all 280). A STOP UNDER (4): `u4/C4-STOP.md`
     (the marker's shape, what a reader learns, the no-marker alternative) sent to the chair and VEIL-55 (01:10).
-  RUNNING (background, 2-hour limit): `rival.sh arms after cost` (from 01:07).
+  RULED (the chair 01:04, VEIL-55 01:04): A RUN THE MACHINE KILLED IS NO RUN: the 01:07 start IS RIVAL's first run. The chair: machines
+    restart (00:41, 01:03): keep every arm's partial result in a pushed file: `u4/receipts.sh` copies RIVAL's exits, measures and log
+    tails to `u4/rival-receipts/` and pushes; a loop runs it while rival.sh lives (scratch rcpt-loop.sh, every 5 min on a change).
+  (4)'s TELL MEASURED WHILE THE RULING IS AWAITED: `u4/c4tell.mjs` (offline, the twin; through the mutex): on hiding reads, a row whose
+    marker disagrees with S over the served roster where the nothing-hidden read agrees. Smoke on r3m-town-none-0-17: 33 hiding reads, 0.
+  RUNNING (background, 2-hour limits): `rival.sh arms after cost` (from 01:07); c4tell on the today-born 140 (queued on the mutex).
   IF THIS SEAT STOPS: re-run what u4.log lacks (`sh docs/chair/2026-11-24/tenth/veil/v51/u4/u4.sh <steps>`; `sh .../rival.sh`)
   after the trees above are re-made (`git worktree add --detach` at the commits named; node_modules linked).
 - NEXT: wait for "R4-IDS MERGED <commit>" from VEIL-55, then unit 2 (R5-DESC), reading PART 42 s1 block 0 (a3bc0dc9d) and
