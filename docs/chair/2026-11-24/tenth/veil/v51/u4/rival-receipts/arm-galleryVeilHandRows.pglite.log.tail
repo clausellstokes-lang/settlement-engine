@@ -1,0 +1,14 @@
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 7077 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+[gate-tail] start:  01:41:30 up 37 min,  0 user,  load average: 1.17, 2.03, 2.20 · cores: 4
+
+ RUN  v4.1.8 /home/user/wt/r5rival
+
+
+ Test Files  1 passed (1)
+      Tests  25 passed (25)
+   Start at  01:41:30
+   Duration  136.63s (transform 1.51s, setup 39ms, import 290ms, tests 135.65s, environment 0ms)
+
+[gate-tail] end:  01:43:47 up 39 min,  0 user,  load average: 1.00, 1.63, 2.02
+[gate-tail] full log: /var/tmp/v51/out/rival/tmp/gate-tail.7443.log
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)
