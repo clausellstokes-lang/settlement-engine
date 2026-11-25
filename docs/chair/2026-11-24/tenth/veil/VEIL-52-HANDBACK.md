@@ -99,6 +99,12 @@ to the chair. ON `-dsql-wip`: 1839ce9ba (pushed) the bijection fold + tooth + ci
 folded: ServerVeil 18/18, MemberCount 11/11, MapCovert 8/8 (`G.log`). UNCOMMITTED: galleryImportEqualsRead's `sameModuloIds` switched to
 canonPeople (its two reds at G were the re-keyed ids: 4,722 and 16 differences); `u3a.sh I` running; then commit, then `u3a.sh L`.
 
+### SNAP-CHRONICLE PARKED (out of this release, the chair 05:04; V13 stands for the map work). BRANCH `lane/veil-52-2026-11-24-doors-wip`
+c89d3f638 (pushed; cut at dbd4cd9e5): e22528cfe red test, 2841a39e5 the client cure, 9ee09d58c the walker (WIP), c89d3f638 the builder's
+hand-back. GREEN: the cure's own test 3/3 (red 2/3 before), the walker 4/4 (`/var/tmp/v52/builder2/`). NOT RUN: tests/copy, tests/lint
+whole, typecheck, the existing tests naming the changed files, the walker's tooth. Brief: `v52/briefs/SNAP-CHRONICLE-BRIEF.md`
+(791b113e7). Told to the chair 05:30 (green on its own test, unproven beyond): the chair rules whether it rides.
+
 ### OWED, IN ORDER
 1. (done.) 2. (1a) snap and (1b) wdmi tables on the three sets, to VEIL-55 (<=200 words each). 3. The two plants.
 4. The builder's diff read, then VEIL-55's read. 5. UNIT 3 AFTER MY COMPACTION (VEIL-55 00:29): on "R4-IDS MERGED <commit>": merge
