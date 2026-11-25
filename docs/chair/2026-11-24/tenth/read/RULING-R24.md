@@ -439,3 +439,42 @@ SIZE-BACK: first paint 1,192,039 to 1,181,885 raw (-10,154), gzip 379,126 to 376
 worker unchanged; `VERIFY_DIST=1 tests/build` the same 15 red before and after; neither file has a reader on the eager
 path. A SECOND READER (top tier, max effort, not told the chair's conclusion) was started at 15:56 UTC on point 117's
 source diff (ddca5c7894..2ad2b3fb31) outside GUARD: the line does not move before its report is read.
+
+**R24r (16:40 UTC on 2026-11-25): THE SECOND READER ON POINT 117's SOURCE FOUND SIX FAULTS THE CHAIR AND THE WIDE GATE HAD PASSED.**
+Its report whole: `landing/117/SECOND-READER-117.txt` (read at 2ad2b3fb31; 186 tool uses; every item run unless marked).
+THE CHAIR READ THE CODE BEHIND EACH BEFORE RULING. RULED:
+1. **B1(ii) IS TAKEN OUT OF POINT 117.** `traditions/genesis.js` gives a field rite weight zero where grain is bought in;
+   the founding set is DERIVED AT VIEW TIME (`shownTraditions.js:84`), never stored, so (a) a zero weight shifts every
+   later weighted pick: on soak 0 to 239 the Traditions tab differs on 38 of 96 towns and larger, 33 of the 50 moved
+   rows NOT field rites, 24 of the 38 had printed no field rite at all; (b) it re-deals SAVED places on upgrade; (c) the
+   rule fires on 71 of 75 towns and larger (no catalogue row above village is farmland, so it is "grain imported" alone);
+   (d) it reads a user's good by NAME ("Ghost-grain incense"). The chair's R24-B1(ii) and its acceptance of
+   `genesis.js:222` (SCOPE-LINE) were wrong on (a) and (b): "no born record moves" could not see a view-time set.
+   AT 117: commit 3388806b4d reverted (genesis.js byte-equal to ddca5c7894's; its census finding and tests out).
+   FOR 118, REDESIGNED: the draw runs exactly as before and the rule is asked AFTER it (a refused field rite is replaced
+   by the next admitted pick; no other row moves); the predicate is the place's own food record (grain NOT grown here),
+   native goods only; a record not stamped by this engine keeps its set; the rule a check over every birth AND over the
+   shown set of every base-born record (0 moved).
+2. FIRST PAINT AND THE TERRAIN TABLE: cured by SIZE-BACK b67b29cdc (`landWithholding.js` on the lazy list), merged after
+   the commit the reader read. The gate's five sizes are its proof.
+3. **"COUNCIL OF SYNDICS" READS PLURAL** (`data/people/powerSentenceName.js :: pluralPowerName` takes the LAST word):
+   "The Council of Syndics are playing the outbreak down" beside "gives the orders". CURED IN 117 (unit C1B): a name of
+   the form "X of Y" takes its number from X. Measured first; if any birth outside the three bought-hall names moves on
+   C or V, the rule is held to names beginning "Council of " at 117 and the wider list goes to 118.
+4. **THE BOUGHT HALL'S MEANING IS CARRIED BY AN EXACT NAME, AND THREE READERS MISS IT.** `factionArchetype` knows
+   'Senate' only as a bare string (an object row with no category reads other); `worldPulse/thievesGuild.js` knew the
+   old hall by the word "shadow" in `CRIMINAL_NAME_RE`, so ADVANCE TIME CHANGES for new metropolises (the owner's line:
+   it must not); a user's own power named "Senate" now reads criminal. CURED IN 117 (unit C1B): ONE HOME for the three
+   birth names; every reader that took the old halls' meaning from a word reads the new names through it, the pulse
+   included, so that a new metropolis's hall is treated exactly as an old one; the exact-name reading never applies to a
+   row the record marks as user-authored, and a recognised category still wins; a SWEEP of every site in `src` and
+   `supabase/functions/_shared` that reads the words "shadow" or "corrupt" off a power's or a government's name.
+5. THE CONVERSION CRISIS'S VARIANT IS KEYED ON THE LENGTH OF THE HALL'S NAME (`stressFactions.js:364`,
+   `governingStressVignettes.js:84`): a THIRD name-keyed carrier of C1's re-deals; R24m named two and its sentence
+   "per-step hashes equal up to assembly" is WITHDRAWN. The re-deal stays accepted (R24m's ground: a birth name is a
+   key); the count of 39 was taken by record and stands. Written in SCOPE-LINE.
+6. THE HUNTER'S LODGE'S SUCCESSOR, "Furrier's district", IS NOT WITHHELD (18 of 40 desert cities and metropolises hold
+   it with no hunting grounds and no fur import): not a regression of 117; a unit for 118 ("B1(i)b": the successor
+   lives on what its lodge lives on; red first; the every-birth census arm).
+THE PRACTICE: the second reader has now found real faults on all three changes it was given. It reads EVERY source
+change before a landing, and from point 118 it is started when the hand-in arrives, not after the gate.
