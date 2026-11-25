@@ -239,3 +239,16 @@ E3: the custom-content leak (a quarrel keyed on a ground name a custom pack can 
 keys alone; THE FOURTH COLUMN HOLDS (highest share .24): E3 is ruled built. The seven "The shape of authority"
 headings G12 left with one line each leave WITH that line (a heading over nothing is not printed). A blank "Safety"
 section on the base (C dp-village-57) is its own unit, SAFETY-BLANK, WORDS-2's, a measure first.
+
+**G20 (15:24 UTC): D6 STANDS; E8b's DESIGN.** WORDS-1's hand-ins: D6 `lane/words-1-2026-11-25-d6-wip` 81ac266a5 (pages
+changed C 502, V 452, all page-only; cards to "Could contend" 933 / 669; the strata flag against the raw-record oracle
+disagreeing 0 / 0) and E8 step one `-e8-wip` 94b7a13d9 (places moved C 390, V 381; 0 disagreeing; nothing moved
+beyond the reflexive). ASKED: 285 (C) and 215 (V) bound cards say "Could contend" while in a recorded quarrel with the
+holder. RULED: it stands: the label is true either way, the quarrel is printed in its own place, and a quarrel with
+the holder is not a claim on the seat. One figure owed: the cards still reading "Contender" in all (backed by a
+recorded quarrel: 115 on 109 pages C, 170 on 160 V). E8b (the card lines: tells, impressions, secrets, goal.long;
+C 1,786 bound strings; their draws dedupe by text): WANTED BEFORE THE RELEASE; the draw and its dedupe run on the
+text as today, the reflexive resolved AFTER the draw where the line is bound to its person; a site that stores the
+text before its person is known is a stop. Built by WORDS-1 if its context is under 600,000, else by its successor.
+NAMED FOR THE OWNER by the seat: the frozen writer-reach row "type on factionRelationships" (N to R), not re-recorded;
+goldens `rosterFinalUnderHeldRoster` A1 and `generationForkCensus` A1 (both already on RED-AT-LINE).
