@@ -248,6 +248,16 @@ THE PLAN OF UNIT 4's MERGE M (written 05:1x, BEFORE any resolution; worktree /ho
     05:4x; 7,122 commits); every file whose history held the standing text ("Close enough to the two above"): factionStanding.js 4
     versions, powerGenerator.js 13; 15 read, 615 forms derived, EVERY ONE A ROW (0 not held); 2 versions unread (no standing append in
     them). The table marks legacy rows by the "M-" id and each row's `origins` (the commits that derived it).
+  PROOF OF M RESULT (CONFIRMED, `u4/mproof.sh` relaunched 05:56 after the restart; /var/tmp/v51/out/m/mproof.log): galleryWithholdAlways
+    9/9 rc 0; galleryRosterChoices 39/39 rc 0 (06:20); galleryVeilDesc rc 1, 16 of 17 (07:01): the ONE red is R5D's own named,
+    unpinned "107 (3), the chair's" (4 reads: r3m-city-none-0-37, hand hide of the density host Craft Guilds, server and twin, page and
+    import, Reveal off: The Trade Compact's served base "Craft guilds regulating production and apprenticeships; ..." names the hidden
+    host), EXACTLY R5D's own count at aa54a6791 (its B2 hand-back, item 3: "4 reads on the slice"): inherited, not the merge's.
+    domain-strict rc 1: `pageRederive.js` 1 strict error (baseline 0) = R5D's TS2345, inherited; N1 (S unwired) is where it is read.
+    THE BEARING ON N3 (V25 (2)): R5D's belt (`withholdPowerCopies`, the last loop) did NOT withhold that base: the belt's "withheld"
+    is the namer's (pub's powers no served list names), the arm's is the stored roster's. Why it misses is read by a probe before
+    N3 is written; under V25 (2) the 107 (3) class must be withheld whole (it is the invariant's own case), so its arm turns from
+    "the chair's, named" into a fault the build must green.
   PROOF OF M: the three files' slices (galleryWithholdAlways.pglite, rosterChoiceComposedHosts.walker, galleryRosterChoices.pglite and
     galleryVeilDesc.pglite) and the strict typecheck, each through the mutex. Then DESCARM and STANDWALK merged (plain), then PLAN-V15
     item 2 by its own written plan.
@@ -301,6 +311,7 @@ RULING V1 (the tenth chair, 21:20 UTC 2026-11-24) whole. N90 (the whole-document
 N99. ppkey on the full pool is NOT re-run (0 of 46,752 per door at ced3b1de7) unless the tree's 212 or twin moves.
 
 ## 3. Log (every hour from `date -u`)
+- 07:02 mproof ended: M proved but for two inherited reds (107 (3), 4 reads; TS2345); both recorded at PROOF OF M RESULT.
 - 21:24 seated, read in. 21:25 line (0) to VEIL-50. 21:26 make-instruments started (rc 0 21:34). 21:33 p1 started.
 - 02:32 the tie rule in the walker; HANDS OVER.
 - 00:10 THE LINE IS 0559a8405 (point 115, the troubles rule landed DARK: no birth or page moves; pools and proofs stand).
