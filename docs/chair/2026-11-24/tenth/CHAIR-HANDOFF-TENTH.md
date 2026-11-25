@@ -1229,3 +1229,21 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   THE CHAIR's CORRECTIONS TO THE OWNER THIS HOUR: D4's counts were of a component no user sees; D4's two stored lines
   were wrong on no birth; one more message label ahead of the clock (09:36 for 09:35): TIME LABELS ARE NOW LEFT OFF
   MESSAGES TO SEATS unless read in the call before.
+- 2026-11-25 10:56 UTC · T97 · THE NEW SEATS' SECOND HOUR: TWO UNITS HANDED IN (D2, D3); G6 TO G9; THE MARKS.
+  HANDED IN TO CLOSE-7: D2 (`lane/birth-1-2026-11-25-d2-wip` 4ea69f420: a covert prominent tie C 8 to 0, V 7 to 0;
+  births moved C 13, V 9; goldens named: dark 15, lit 32 of 525; G8) and D3 (`-d3-wip` 5262fbee4: the power step's
+  sentence re-written over the settled roster at the assembly's late replay; stale sentences V 4 to 0; births moved
+  C 0, V 4, in `powerStructure.recentConflict` alone; goldens 0). BIRTH-1 next: D8's count, D7's measure, D5, D2b.
+  `gen/RULING-G.md` G6 (E2's fifteen pairs: six cured, three left for the owner's eye), G7 (D6: "Could contend", every
+  tied card, subordinate included: C 502, V 452 pages), G8, G9 (the law band capped where the place's own crime makes
+  it unsafe: C 23, V 11 after WORDS-2's own correction of its count; E3 grounded in the record, a measure on
+  repetition owed; E6 waits for D8; E9 silence; `exports` refuses the ECO-1 line).
+  WORDS-1: E8's first half proven (the tie and the wants: records moved C 390, V 385, nothing beyond the reflexive;
+  the every-birth check 627 to 0 and 616 to 0); ONE LINE LEFT AS IT IS: goalFamilies POWER.corrupted.long sits in the
+  shrink-only bank `tests/lint/samenessHideable.existingReds.json` by its text's hash and no door re-keys it: it keeps
+  "themselves" (C 4, V 25 strings), named for the end. WORDS-2: G6's #10, #1, #8, #9, #11 and E5 built, proofs on a
+  joined tree; A SLIP said by itself (two local scratch merges with `--no-verify`, discarded unpushed, redone with the
+  hooks; hashes owed).
+  THE MARKS: CLOSE-7 at 10:49: 512,600 of 1,000,000, working, cost 486.95 (460.77 at 08:10: about 10 an hour, half
+  its earlier rate); its FIRST HAND-IN IS NOT IN YET. BIRTH-1 at 09:54: working. Every record `allowed_warning`; none
+  rejected. The hourly check is armed for 12:00.
