@@ -7,11 +7,12 @@ session_019yED1SUxGVHyjQnoqoFvQ8; CLOSE-7 is session_019yED1QNMqSLp7ohcZB88VP. A
 
 ### FOR THE JOIN (CLOSE-8), current at 16:26 UTC 2026-11-25 — read this block first; the log below is history
 
-THREE UNITS HANDED IN AND ACCEPTED BY THE CHAIR, each cut at the base `origin/lane/close-7-2026-11-24-cures` 0ec96f13d8:
+FOUR UNITS HANDED IN AND ACCEPTED BY THE CHAIR (merge E8 before E8b), cut at the base `origin/lane/close-7-2026-11-24-cures` 0ec96f13d8:
 | unit | branch | commit | what |
 |---|---|---|---|
 | E1 the double possessive (G5) | `lane/words-1-2026-11-25-e1-wip` | 902b7005d | owner pages C 125/122 → 0, V 145/126 → 0; public projection C 52/41, V 34/19 → 0 |
 | E8 the reflexive slot, STEP ONE | `lane/words-1-2026-11-25-e8-wip` | 94b7a13d9 | the tie and the RANK.enter want: C 627 strings in 390 places, V 595 in 381; 0 disagreeing |
+| E8b the bound card lines (G20, G28-G30), ON TOP OF E8 | `lane/words-1-2026-11-25-e8b-wip` | e75f090b7 | twelve card-line rows: C 1157 strings in 501 places, V 1126 in 500; round trip 0; successor byte-equal |
 | D6 the contender's word (G7, G20, G21) | `lane/words-1-2026-11-25-d6-wip` | 81ac266a5 | "Could contend" / "Could contest the seat" on bound cards: C 502, V 452 pages |
 
 The joined proof (`reports/JOINED-PROOF.md`): no battery row moved and 0 changes unexplained by a unit on C and V. Both typechecks
