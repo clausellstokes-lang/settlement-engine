@@ -252,3 +252,12 @@ text as today, the reflexive resolved AFTER the draw where the line is bound to 
 text before its person is known is a stop. Built by WORDS-1 if its context is under 600,000, else by its successor.
 NAMED FOR THE OWNER by the seat: the frozen writer-reach row "type on factionRelationships" (N to R), not re-recorded;
 goldens `rosterFinalUnderHeldRoster` A1 and `generationForkCensus` A1 (both already on RED-AT-LINE).
+
+**G21 (15:30 UTC): THE UNBOUND "CONTENDER" STAYS.** WORDS-1's figure: cards still reading "Contender" C 503, V 671; of them
+with no recorded quarrel with the holder C 388, V 501. READ BY THE CHAIR in `src/domain/dossier/powerStrata.js` and
+`PowerStrata.jsx` at 81ac266a5: a contender is a challenger of the coup derivation (`coupContenders`), the section's
+heading is "The Seat and Its Contenders", and the ruler's card says "Contested" from the same count. RULED: nothing
+more is built. D6's fault was a page contradicting itself (a contender beside a tie that binds it to the ruler); an
+unbound challenger with no quarrel contradicts nothing printed. The other course (present tense only where a quarrel
+with the holder is recorded) would also have to move the ruler's "Contested" and the heading: a redesign of the
+section's words, not a cure. NAMED FOR THE OWNER'S VETO with the two figures.
