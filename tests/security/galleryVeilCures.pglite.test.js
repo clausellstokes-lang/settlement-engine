@@ -27,6 +27,7 @@ import { PGlite } from '@electric-sql/pglite';
 import { pgcrypto } from '@electric-sql/pglite/contrib/pgcrypto';
 import { readFileSync, readdirSync } from 'node:fs';
 import { resolve, join } from 'node:path';
+import { bootHostedChain, ENVIRONMENTAL_FAILURE } from './hostedDefaultHarness.js';
 
 const PGLITE_BOOT_TIMEOUT_MS = 900_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
 const ROW_TIMEOUT_MS = 900_000;
@@ -1198,31 +1199,48 @@ describe('COHERENCE-VEIL-2: the review rows on 211, executed', () => {
   // ── THE ROLLBACK ──────────────────────────────────────────────────────────────────────────────
   // 212 (COHERENCE-VEIL-7) runs after 211 frozen at 333b33973, so its down file runs first: 001..212 then 212's down
   // file equals a chain stopped at 211, and 211's after it equals a chain stopped at 210.
-  it('the rollback: 001..212 then supabase/rollback/212_*.down.sql equals a chain stopped at 211, and 211_*.down.sql after it a chain stopped at 210, byte for byte', async () => {
+  // RULING V26 (2): the WHOLE compare runs on the hosted-default harness (bootHostedChain, the shared harness), the
+  // chain production runs; the plain-Postgres compare of this block is retired. Its three chains are booted here, one
+  // pair at a time, and closed after use; the file's other rows keep their plain chains (LIVE, AT210, AT211).
+  it('the rollback (hosted default): 001..212 then supabase/rollback/212_*.down.sql equals a chain stopped at 211, and 211_*.down.sql after it a chain stopped at 210, byte for byte', async () => {
     const down212 = readdirSync(ROLLBACK).filter((f) => /^212_.*\.down\.sql$/.test(f));
     expect(down212).toEqual(['212_share_veil_later_cures.down.sql']);
     const down = readdirSync(ROLLBACK).filter((f) => /^211_.*\.down\.sql$/.test(f));
     expect(down).toEqual(['211_server_side_share_veil.down.sql']);
-    const rolled = await buildDb();
-    expect(rolled.failed).toEqual([]);
     const CATALOGUE = `select p.oid::regprocedure::text as sig, md5(p.prosrc) as body, p.provolatile, p.prosecdef, p.proconfig::text as config,
         p.proacl::text as acl, pg_get_userbyid(p.proowner) as owner, pg_get_function_result(p.oid) as result
       from pg_proc p join pg_namespace ns on ns.oid = p.pronamespace where ns.nspname = 'public' order by 1`;
     const READS = ['get_gallery_dossier(text)', 'get_unlisted_dossier(text)', 'import_gallery_dossier(text)', 'get_gallery_map(text)',
       '_gallery_apply_member_overrides(jsonb,jsonb,jsonb,boolean,boolean,boolean)'];
     const def = (f) => `select pg_get_functiondef('public.${f}'::regprocedure) as d`;
-    // 212's down file: back to the frozen 211
-    await rolled.db.exec(readFileSync(join(ROLLBACK, down212[0]), 'utf-8'));
-    expect((await rolled.db.query(CATALOGUE)).rows).toEqual((await AT211.db.query(CATALOGUE)).rows);
-    for (const f of READS) expect((await rolled.db.query(def(f))).rows[0].d, `212 down: ${f}`).toBe((await AT211.db.query(def(f))).rows[0].d);
-    // then 211's: back to 210
-    await rolled.db.exec(readFileSync(join(ROLLBACK, down[0]), 'utf-8'));
-    const at210 = (await AT210.db.query(CATALOGUE)).rows;
-    const after = (await rolled.db.query(CATALOGUE)).rows;
-    expect(after.filter((x) => x.sig.includes('_gallery_veil'))).toEqual([]);
-    expect(after).toEqual(at210);
-    // and the four reads, as text
-    for (const f of READS.slice(0, 4)) expect((await rolled.db.query(def(f))).rows[0].d, f).toBe((await AT210.db.query(def(f))).rows[0].d);
+    /** Every catalogue row one side holds and the other lacks, as `- ` (expected) and `+ ` (rolled back) lines. */
+    const diff = (want, got) => {
+      const w = new Set(want.map((r) => JSON.stringify(r))); const g = new Set(got.map((r) => JSON.stringify(r)));
+      return [...[...w].filter((x) => !g.has(x)).map((x) => `- ${x}`), ...[...g].filter((x) => !w.has(x)).map((x) => `+ ${x}`)];
+    };
+    const unexpected = (c) => c.failures.filter((f) => !ENVIRONMENTAL_FAILURE.test(f.err));
+    const rolled = await bootHostedChain();
+    try {
+      expect(unexpected(rolled)).toEqual([]);
+      // 212's down file: back to the frozen 211
+      const at211 = await bootHostedChain({ upTo: 211 });
+      try {
+        expect(unexpected(at211)).toEqual([]);
+        await rolled.db.exec(readFileSync(join(ROLLBACK, down212[0]), 'utf-8'));
+        expect(diff((await at211.db.query(CATALOGUE)).rows, (await rolled.db.query(CATALOGUE)).rows), '212 down').toEqual([]);
+        for (const f of READS) expect((await rolled.db.query(def(f))).rows[0].d, `212 down: ${f}`).toBe((await at211.db.query(def(f))).rows[0].d);
+      } finally { await at211.db.close(); }
+      // then 211's: back to 210
+      const at210 = await bootHostedChain({ upTo: 210 });
+      try {
+        await rolled.db.exec(readFileSync(join(ROLLBACK, down[0]), 'utf-8'));
+        const after = (await rolled.db.query(CATALOGUE)).rows;
+        expect(after.filter((x) => x.sig.includes('_gallery_veil'))).toEqual([]);
+        expect(diff((await at210.db.query(CATALOGUE)).rows, after), '211 down').toEqual([]);
+        // and the four reads, as text
+        for (const f of READS.slice(0, 4)) expect((await rolled.db.query(def(f))).rows[0].d, f).toBe((await at210.db.query(def(f))).rows[0].d);
+      } finally { await at210.db.close(); }
+    } finally { await rolled.db.close(); }
   }, ROW_TIMEOUT_MS);
 
   // V5-7 (COHERENCE-VEIL-6; the fifth review §7.5): the owner applies 211 AS IT STOOD AT 333b33973 (sha256 eface6d0...)
