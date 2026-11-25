@@ -20,9 +20,9 @@ BUILT, NOT MERGED (all pushed unless said):
 - `lane/veil-53-2026-11-24-cures-wip` 6b674eb36 (PUSHED; worktree `/home/user/cures53`): V3's cure A = 8067faafb + my read's
   amendment 6b674eb36 (only the three withheld terms; `food` keeps its old reading). READ BY VEIL-55: NO FAULT (0 of 280 stored
   records lack a term); rides the join. OWED TO THE V6 WALKER: hold `governanceAccount.js :: BREAKDOWN_WITHHELD_TERMS` equal to the
-  registry row `legitimacy.breakdown`'s withheld terms. Cure B's builder RUNNING on
-  it (notes `out/v53/cures/B/`).
-RUNNING: cure B's builder only. The PAGES slice was STOPPED at 22:50 (the chair's order: it comes after the anon arm).
+  registry row `legitimacy.breakdown`'s withheld terms. Cure B 5d04aaf9a PUSHED (test
+  only, both halves), sent to VEIL-55. Cure C's builder RUNNING (notes `out/v53/cures/C/`).
+RUNNING: cure C's builder only. The PAGES slice was STOPPED at 22:50 (the chair's order: it comes after the anon arm).
 THE QUEUE, IN ORDER (the chair, 22:48, governs): (1) J1: DONE. (2) V3's five cures A-E, one builder each, stacked on `lane/veil-53-2026-11-24-cures-wip` from ba7460c33 (brief
 `briefs/V53-CURES-V3-BRIEF.md`). (3) The anon arm + carried read + the call-graph read (`briefs/V53-ANONARM-BRIEF.md`) on
 grants-wip. (4) FAIL-CLOSED PAGES (RULING V6): size it first: `out/v53/pages/slice.sh` (PAGES' probe verbatim, every 12th of the
@@ -36,7 +36,8 @@ variant, the owner's read unchanged and asserted; its reader joins the totality 
 started.
 DONE AND SENT: (0); (1) REDS-CAUSE (`out/v53/redscause/REDSCAUSE.md`; the import surprise to the chair: RULING V3 (6)); (2) J1
 classed; J12 and J12-V4 (`out/v53/J12.md`, `out/v53/j12/J12-V4.md`: prominentRelationship's 12/720 are the covert tie's own copy).
-NEXT COMMAND: on cure B's builder's return, `git -C /home/user/cures53 log --oneline -3` and read its diff; then cures C, D, E, one builder each.
+NEXT COMMAND: on cure C's builder's return, `git -C /home/user/cures53 log --oneline -3` and read its diff; then cures D, E, one builder each (E's brief amended for point 115's fifth law; a question to VEIL-55 on
+re-making the trial join on 0559a8405, default NO).
 
 ## 2. RULINGS IN FORCE FOR THIS SEAT
 RULING V1 (whole); N81, N87-N91, N103-N110 (PAUSED-HANDOFF 2.6); N107 (the copy reds go to the join; the cure's lean is the
@@ -48,3 +49,4 @@ join seat's to weigh); N108 (13G x S); PAUSED-HANDOFF section 6 word for word.
 - 22:42 owner now VEIL-55. 22:48 the chair: weekly warning, new order. 22:50 slice stopped.
 - 23:1x J1 cure pushed (e1b7a8714), line to VEIL-55; cure A builder dispatched.
 - 23:4x cure A pushed (6b674eb36), line to VEIL-55; cure B builder dispatched.
+- 00:2x cure B pushed (5d04aaf9a); cure C dispatched. The line is 0559a8405 (point 115, troubles law dark).

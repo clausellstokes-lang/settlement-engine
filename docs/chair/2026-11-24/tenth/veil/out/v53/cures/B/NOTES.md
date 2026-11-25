@@ -13,3 +13,6 @@
 - Stale prose (not touched, out of manifest): tests/lint/samenessHideable.walker.test.js EXEMPT reason still says "hxd-city-138 (served == the house-free twin)".
 - COMMIT 5d04aaf9a (hooks ran: lint-staged eslint --fix, clean).
 - tests/lint whole: running (log /var/tmp/v53/cures/B/lint.log).
+- AFTER the commit: own file tensionCause.test.js 19/19 green (/var/tmp/v53/cures/B/after-own.log). Governing files: 0 (no src
+  change in this unit). tests/lint WHOLE: 66 failed | 3376 passed (3442), 26 files red; the 66 failing titles match
+  /var/tmp/v53/grants/lintfails.txt one for one (by file and leaf title): no new red, none gone (/var/tmp/v53/cures/B/lint.log).
