@@ -41,3 +41,13 @@ So every one of those moved INSIDE BATCH (B1(i), B1(ii), C1, P3source). Red ther
 - tests/scripts/implementationPackets.test.js (the sixth; see below): `EM-R1b.requiredSymbols[7]` and
   `EM-R1c.requiredSymbols[6]` "is missing from src/domain/edit/dmLayer.js: export const REDERIVE_UNAPPLIED_REASONS =
   Object.freeze(['step_not_pinnable', 'unknown_key']);".
+
+## Runs 3 to 5: inside BATCH (logs `b1i-all.log`, `b1ii-all.log`, `c1a-all.log`; 10 files each)
+- 6d30700e6 (B1(i) merged and finished; nothing else of BATCH): 15 failed. EVERY item of the tip reds here with the tip's
+  exact figures (scandals 78; hooks 2145; tally 72,613; DM-only 213; herald `4600b864…`; the same 16 hxd towns; Portaminus's
+  same two lines; the same three desert cartography rows; Merchant Guilds on r2s-famine-city-1), EXCEPT tailDisplayCivicBatch2,
+  green here.
+- 3388806b4 (B1(ii)): 15 failed, the same; tailDisplayCivicBatch2 still green.
+- a7870e9cb (C1's first commit: the bought hall born "Council of Aldermen" / "Council of Syndics" / "Senate"): 16 failed;
+  tailDisplayCivicBatch2 reds here with the tip's own row (`r2s-occupied-town-3: Merchant Guilds~Craft Guildsstable`).
+  The other figures are the tip's. (P3source 4fc54fb45 and the later C1 commits were not run: the bisect had closed.)
