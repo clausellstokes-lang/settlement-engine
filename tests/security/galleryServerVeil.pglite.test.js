@@ -22,8 +22,9 @@
  *       the import — and gallery_member_overrides holds only members' booleans and the served
  *       marker {v: 2, mode, at, groupings} (no delta, no frozen copy);
  *   (2) no page changes: the LIVE page deep-equals the AT210 page of the same share read live
- *       (a frozen copy, old or new, is served as its live page; the map member and the import
- *       equal the listing's page);
+ *       (a frozen copy, old or new, is served as its live page; the import equals the listing's
+ *       page; the map member equals, by value, the party link's page of the same row and marker:
+ *       N84 (a), 212's header item (36));
  *   (3) THE RED CONTROL: AT210 carries readable strings on the same rows (the measure of the
  *       phase-1 proposal), so (1) is not vacuous.
  *   (4) NO PAGE CARRIES A ROLE ITS CARD WITHHOLDS: no tie on any page (the 210 page included: the current client
@@ -405,7 +406,7 @@ describe('the server-side share veil (211) — execution against the real SQL an
         }
         if (mode !== 'live' && now.gMode !== 'snapshot') fault(`${tag} gallery mode`, [String(now.gMode)]);
         if (mode !== 'live' && now.gAt !== at) fault(`${tag} snapshotAt`, [String(now.gAt)]);
-        // the import and the map page: the listing's page, nothing more
+        // the import: the listing's page, nothing more; the map page's member: the party link's page (below)
         if (mode === 'live' && !dm && ['all', 'opened', 'mixed', 'default', 'unmarked'].includes(name)) {
           H.db = LIVE.db; H.uid = READER;
           const imp = await gallery.fetchDossierForImport(slug);
@@ -422,12 +423,19 @@ describe('the server-side share veil (211) — execution against the real SQL an
           if (!member) faults.push(`${tag} map: no member`);
           else {
             fault(`${tag} map member shows what the listing hides`, carried(member, now.gPage).readable);
-            // R2-CURE (VEIL-21; the chair's ruling of 04:27 UTC, identity): an UNMARKED listing's page re-derives the black
-            // market's capture (pageRederive.js, `unveiled`: the read knows the share carries no veil); the map's member
-            // carries no veil record and cannot prove the underside grouping open, so it does not (VR17: where the veil cannot
-            // be sure, it withholds). That one path alone; every other path the listing shows, the member shows
-            const MEMBER_CANNOT_PROVE = name === 'unmarked' ? new Set(['economicState.safetyProfile.blackMarketCapture']) : new Set();
-            fault(`${tag} map member lacks what the listing shows`, carried(now.gPage, member).paths.filter((p) => !MEMBER_CANNOT_PROVE.has(p)));
+            // N84 (a) (the chair, 2026-11-23; VR23) and 212's header item (36): THE MAP MEMBER IS THE PARTY LINK'S READ OF THE
+            // SAME TOWN (the public projection, the link's splice, the link's veil; an UNMARKED member takes the default veil as
+            // the link does; share-level Reveal DM never applies). So the member EQUALS, BY VALUE, the party link's page of the
+            // same row and marker (now.lPage, read above through the real client read), at every marker this arm reads, unmarked
+            // and marked. 211's member = listing rule is dropped, not loosened. Person ids are not re-keyed between the two reads
+            // (the same row, the same projection), so the comparison is plain.
+            const memberPage = canon(member);
+            if (JSON.stringify(memberPage) !== JSON.stringify(now.lPage)) {
+              const L = flat(now.lPage); const M = flat(memberPage);
+              const diff = [...[...L.keys()].filter((p) => !M.has(p)).map((p) => `lacks ${p}`), ...[...M.keys()].filter((p) => !L.has(p)).map((p) => `+${p}`),
+                ...[...M].filter(([p, v]) => L.has(p) && !Object.is(L.get(p), v)).map(([p]) => `value ${p}`)];
+              fault(`${tag} map member is not the party link's page (N84 (a); 212 (36))`, diff.length ? diff : ['(order)']);
+            }
             fault(`${tag} map member carries a role its card withholds`, rolesItsCardWithholds(member));
           }
         }

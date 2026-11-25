@@ -108,7 +108,9 @@ describe('gallery maps member_count — net-current execution (pglite)', () => {
         -- from 025, 092 and 006.
         gallery_share_narrated boolean not null default false,
         gallery_member_overrides jsonb not null default '{}'::jsonb,
-        ai_data jsonb default '{}'::jsonb
+        ai_data jsonb default '{}'::jsonb,
+        -- 212's restated get_gallery_map (header item (36)) reads it for the member's link splice; 072's type and default.
+        gallery_importable boolean not null default false
       );
       create table public.saved_maps (
         id uuid primary key default gen_random_uuid(),
