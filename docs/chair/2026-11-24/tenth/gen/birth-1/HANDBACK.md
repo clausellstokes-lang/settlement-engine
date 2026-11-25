@@ -94,8 +94,16 @@
   lord". Hamlets up hold "Lord's steward" (face 'the steward'). The seat line is `governanceAccount.js :: governanceAccountOf` (role
   from `rulingChainOf`).
 - **D7 — PUSHED on `lane/birth-1-2026-11-25-d7-wip` at b0cca45be (5d9b3bba1 the unit; fe54f8b89 the lighting door, files
-  3798 -> 3799, parked 494 -> 495; b0cca45be the wiring door, stamp only); the final governing run on the tip IN FLIGHT (14:45 UTC);
-  then the build bytes and the hand-in.** First governing run (on the uncommitted tree): 21 red files; 13 at the base (RED-AT-LINE;
+  3798 -> 3799, parked 494 -> 495; b0cca45be the wiring door, stamp only); the final governing run on the tip: 13 red tests in 10 files,
+  ALL at the base (colourMarks4h, worldFactRederive, generationForkCensus, nameHeld, narrativeQualityCorpus x2, proseComposed (2327 /
+  2103, the base's figure), proseCorpusBytes x2 (the six state-prose rows, the base's), editCorpusRatchet A3/A7, espionage's driven
+  golden, the golden master). Typecheck in the unit's own worktree (the chair's order of 14:20): `[typecheck-ratchet] OK — no type
+  regressions (167 error(s), ceiling 167).` and `[domain-strict] ✓ no strict-type regressions (1113 errors, ceiling 1113).`, the
+  same on base, d2, d2b, d3, d5, d7, d8 (d3 had been pushed from the documents checkout; green in its own). A RULING ASKED of the
+  chair (bytes): first paint raw 1,181,337 -> 1,187,083 (+5,746), gzip 376,205 -> 377,851 (+1,646), Brotli 316,001 -> 317,410
+  (+1,409); the worker 2,718,790 -> 2,722,011 (+3,221). Cause: `factsOf -> crisisBody -> people/stressPowerFaces` brings the face
+  table (`data/stressPowerFaces.js`) into the eager `data` chunk (156,695 -> 160,643) from the lazy one. A buy-back means a second
+  home of the table's names (refused by the one-home rule): my recommendation is to take it. CLOSE-7 not yet sent (waits).** First governing run (on the uncommitted tree): 21 red files; 13 at the base (RED-AT-LINE;
   colourMarks4h red at the base too, re-run on `/home/user/wt/base`); the other 11 were D7's, cured: tailNarrativeRows /
   dossierContent (the twin row had shifted the pool's indices: it now stands at the pool's END); heldKeyWriterCensus A3 (a new
   imported call: the sentence split is inline through the `resolveSibling` the step already imports); factLayers walker (the keyed
@@ -134,6 +142,5 @@
   sent to CLOSE-7 (waits for the byte word).
 
 ### 0.2 Next step
-D7: read the final governing run (`d7/gov-files.txt` + tests/lint + tests/copy, on b0cca45be) against the base's reds; the build
-bytes; hand in to CLOSE-7 and the chair, naming the atom `crisis body: <kind>`, the new sentences and the `priest` declaration for
-the owner's veto. D8 parked (owner's leave).
+D7: wait for the chair's word on the byte rise; then the hand-in line to CLOSE-7 (unit, branch, b0cca45be; the atom, the four
+sentences and the `priest` declaration named for the owner's veto). D8 parked (owner's leave).
