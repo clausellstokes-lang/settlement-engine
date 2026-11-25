@@ -89,6 +89,14 @@ A SUCCESSOR ON ANOTHER ACCOUNT, THE NEXT COMMAND: in a fresh container, `npm ci`
 - The container restarted at ~00:41: p1 resumed from s140 (log `/var/tmp/v55/p1.log`); results before it stand (run4, ctrl, t140).
 - t140 (the form on the gate's 140, gallery and link): L1 0 of 3,360 each; 0 stored ids served; L2 84 = N117's 7 places.
 
+- THE CHAIR'S READ OF UNIT 2's 212 HUNK AND ROLLBACK: DONE AND CLEAR (01:19). THE GRANT WAITS ONLY ON THE PROOFS' END: send
+  "TIP? R4-IDS" with the table; merge on the chair's one-word answer. NAME IN THE LINE (the chair's ask): the COMMITTED test keeping
+  "no stored person id at any path of a served document": `tests/security/galleryVeilIds.pglite.test.js` arm (2) and THE CHAIR'S
+  ARM (personIdBijection.shared.mjs :: storedIdsServed over the WHOLE served document and marker, every string and every key, not
+  a path list) on born towns in BOTH stored shapes (new; master via masterOf) and the plant, marked/unmarked/shown, Reveal off/on,
+  server and twin; plus criminalSwitchHandReach (master's whole-member shape). The 140-town pools are the measure's (MEAS_C), not
+  a committed test: say so.
+
 ### THE SEATS, THE RULINGS, WHAT IS OWED
 As VEIL-50's hand-back section 1 (VEIL-51, 52, 53; VEIL-54 not seated; V1 to V6; PLAN-2 and VEIL-52's owner measure owed
 after "R4-IDS MERGED").
