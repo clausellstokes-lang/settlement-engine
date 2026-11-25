@@ -1,0 +1,20 @@
+     5362     2610     2244 content-identity-BiMB_uYV.js
+   164145    49227    40498 data-DmiKiOSQ.js
+   316686   101952    85940 engine-core-D6J6mQ4n.js
+   485174   154369   128140 index-6GoyOvHd.js
+     4960     2571     2320 kernel-DK1UYNki.js
+     3579     1472     1319 vendor-icons-aOW4IQH8.js
+   193176    60454    52076 vendor-react-DsScxBXT.js
+    17046     7106     6420 vendor-state-DXnjcO3h.js
+FIRST PAINT raw 1190128 gzip 379761 brotli 318957
+WORKER generation.worker-Crm7Bus3.js 2737079
+ENGINE engine-CQb64pQd.js 936529
+CHUNK coherence-lazy-3vWWOBFg.js 299009 imports: content-identity,data,data-lazy,engine-core,fortune-law,fortune-merits,kernel,narrative-mutations
+CHUNK engine-core-D6J6mQ4n.js 316686 imports: content-identity,data,kernel
+CHUNK engine-core-lazy-CIarc3e2.js 25876 imports: content-identity,custom-schema,data,data-lazy,engine-core,kernel
+CHUNK data-DmiKiOSQ.js 164145 imports: kernel
+CHUNK data-lazy-D4WWCBT1.js 2024970 imports: data,engine-core,kernel
+CHUNK data-lazy-D4WWCBT1.js 2024970 imports: data,engine-core,kernel
+SENTINEL "It has no one captain: the able-bodied householders" -> advanceInterval.worker-DB2_WdRM.js customContentPreview.worker-vz2Do5Mo.js data-lazy-D4WWCBT1.js generation.worker-Crm7Bus3.js pdfRender.worker-Hog5vh-T.js
+SENTINEL "contestsNiche" -> advanceInterval.worker-DB2_WdRM.js coherence-lazy-3vWWOBFg.js customContentPreview.worker-vz2Do5Mo.js engine-CQb64pQd.js generation.worker-Crm7Bus3.js pdfRender.worker-Hog5vh-T.js
+SENTINEL "stress:[{type:" -> advanceInterval.worker-DB2_WdRM.js coherence-lazy-3vWWOBFg.js customContentPreview.worker-vz2Do5Mo.js generation.worker-Crm7Bus3.js pdfRender.worker-Hog5vh-T.js

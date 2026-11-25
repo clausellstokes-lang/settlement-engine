@@ -1,0 +1,26 @@
+BEHAVIOUR (3), read on the final dist (byte-identical to the crisisBody-only build):
+PowerStrata -> InstitutionLink,NameColumns,OutputContainer,Primitives,coherence-lazy,engine-core,index,tabConstants,vendor-react
+coherence-lazy -> content-identity,data,data-lazy,engine-core,fortune-law,fortune-merits,kernel,narrative-mutations
+engine -> coherence-lazy,content-identity,custom-registry,custom-schema,data,data-lazy,engine-core,engine-core-lazy,format-number,fortune-law,fortune-merits,generator-helpers,kernel,living-content-seam,narrative-mutations,resource-chains,settlement-normalize,stress-priority,terrain-helpers,trouble-law
+
+crisisBodyOf call sites in src:
+src/domain/facts/crisisBody.js:9: *   crisisBodyOf(record, kind)  THE ONE READER: true where a power that is not the governing one (`isGoverning !== true`)
+src/domain/facts/crisisBody.js:39:export function crisisBodyOf(record, kind) {
+src/domain/facts/factsOf.js:159:    get crisisBody() { return (/** @type {string} */ key) => crisisBodyOf(record, key); },
+
+face-reader call sites in src (outside its home):
+src/components/new/tabs/power/PowerStrata.jsx:314:  const leaderless = memberCount === 0 ? leaderlessLineOf(settlement, 
+src/domain/facts/crisisBody.js:45:    !!f && f.isGoverning !== true && (!!stressPowerRowOf(alone, f) || named.includes(S
+src/generators/density/applyDensityLaw.js:201:      .filter((seat) => stressPowerRowOf({ stress: input.stress }, seat)?.
+src/generators/people/castPowers.js:227:  const veiledPowers = new Set(factions.filter((f) => isVeiledPower(f) || stress
+src/generators/people/castPowers.js:290:  const mintsBySent = (/** @type {Record<string, unknown>} */ f) => stressPowerR
+src/generators/people/castPowers.js:291:    || (stressPowerRowOf(settlement, f)?.claimant === true && !lineMemberOf(stre
+src/generators/people/castPowers.js:339:      const row = stressPowerRowOf(settlement, f)?.claimant === true || lordless
+src/generators/people/castPowers.js:444:      if (!chosen.length) take(lineMemberOf(stressPowerRowOf(settlement, faction
+src/generators/people/castPowers.js:535:    const row = stressPowerRowOf(settlement, f);
+src/generators/people/castPowers.js:558:    const row = stressPowerRowOf(settlement, f);
+src/generators/people/castPowers.js:616:  const claims = new Set(factions.filter((f) => stressPowerRowOf(settlement, f)?
+src/generators/people/castPowers.js:637:    && stressPowerRowOf(settlement, f)?.claimant !== true;
+src/generators/people/castPowers.js:667:    if (minted && stressPowerRowOf(settlement, f)?.claimant === true) raiseToOff
+
+chunks importing coherence-lazy statically: 155
