@@ -284,6 +284,15 @@ gate for the lot):
   - Births moved: C 0 / V 0. RED-AT-LINE's row "defenceParts R13" leaves the list.
   - Its negative control was not run (the seat's permission check refused it); the chair accepted the live anchor in its place.
 
+- D2b: `lane/birth-1-2026-11-25-d2b-wip` 4822a2175, from BIRTH-1 (G8 (3)).
+  - A new leaf domain/display/sharedSentence.js, OverviewTab.jsx, and one import line in narrativeGenerator.js.
+  - Moves C 18 / V 19 (pressureSentence). Goldens 0. Byte rise TAKEN (first paint +210 raw / +70 gz; worker +256): the owner's
+    size signing.
+  - CHAIR'S LINE: at the joined tree, RE-RUN `gen/birth-1/tools/measure-d2b.mjs` and `check-d2b.mjs` (on lane/birth-1-2026-11-25)
+    over every birth, because WORDS-2's E3 changes the quarrel lines. A place left with no candidate is said, not patched.
+  - NOTE FOR ANCHORS: dossierPhoneFloorAllViews is red at 0ec96f13d as "Daily Life prose 9->8". That is likely A2's emptied
+    resentment slot (R24h): a floor or baseline that moved, NOT a stale anchor, so it goes to the chair.
+
 THE NEXT COMMAND: on BATCH's message:
 - read `close-7/reports/BATCH.md` and the diff once (`git -C /home/user/wt/batch diff --stat 0ec96f13d..HEAD`);
 - re-read the ruling's lines 45-79, 138-157 and 182-197;
