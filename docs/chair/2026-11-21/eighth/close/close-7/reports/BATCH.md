@@ -112,3 +112,73 @@
     dp-town-7).
   - These are sorts, not the two hash keys R24l allows the alias. So byte-equality needs the alias widened to these
     tie-breaks, or the re-deal accepted. The chair's to rule.
+
+## ITEM 3, C1 UNDER R24m: DONE (the 39 re-deals accepted; R24l's alias removed)
+- **Commits (in `/home/user/wt/batch`, not pushed):**
+  - bd7a4f7b0: the birth name is given on `drawCouncilOfAKind`'s own return line, so `rulingStructure.js` stays under F31's
+    ceilings (799 lines; packed lines as at the cut). The deletion of `conflictDrawName.test.js` rode into this commit
+    because the first commit command failed partway; b9b5ea268's message records it, nothing was rewritten.
+  - b9b5ea268: R24l's alias removed. `conflicts.js` is back on its raw keys, with no table, no pin test and no dead code.
+    The birth names and the four vocabularies by exact name stay.
+  - 44fefb11a: a bought hall's label that begins "Council" was said twice by `governanceNarrative.js ::
+    rewriteFactionPhrasing` (V dp-town-57: "inside the Council of Aldermen of Aldermen"). The two replacers now leave a match
+    that already starts the label. `tests/generators/power/hallBirthNames.test.js` (V dp-town-57, dp-city-87, dp-metropolis-9)
+    was red first and is green 4/4 after (CONFIRMED).
+  - c3ac9b860: the lighting census door (files 3,799 → 3,801, parked 495 → 497). The walker is green 34/34 plainly after.
+- **THE PROOF (CONFIRMED by run; `batch/c1-proof.census.jsx`; prec1 = 6d30700e6, the tree before C1, against the batch tip):**
+  - **(1)** C: 0 of 900 records move. V: 39 carriers move (18 Corrupt Council, 14 Corrupt City Council, 7 Shadow Senate);
+    the 861 others do not move.
+  - **(2)** With the names mapped back, each pipeline step's patch hash (`onStep`) is equal up to assembly. 37 of the 39
+    first differ at `assembleSettlement` (step 20 of 22). Two, dp-city-87 and dp-city-117, first differ at `generatePower`
+    (step 11), and only because the correct possessive "Council of Syndics'" maps back as "Corrupt City Council'". These are
+    not a reader. **The cause, by site:**
+    - `generators/density/applyDensityLaw.js:504` and `generators/density/densityRoll.js:201` break ties on `seatKey`, the power's
+      display name (`seatKey.js`). R24m cites lines 502 and 199; the batch tree's lines are 504 and 201.
+    - The cast is the same people in another order. The two `conflicts.js` keys (lines 39 and 228) then draw on the new name.
+  - **(3)** The page battery over the 39 (`--diff`): records moved 39, pages moved 39 (the names), **rows moved 0**. The
+    pattern rows are equal on both trees (P17 30, P18 39, P16three 3).
+    - **The coherence receipts:** coherent on 39 of 39 before and after, with the same non-passing checks (none).
+    - **The two zero checks:** the 39's houses are equal by name on 39 of 39, so B1(i)'s two checks read as at prec1
+      (0 and 0).
+    - **The kinds:** none of the 27 conflict-issue kinds, the capture states or the relationship types among the 39 is absent
+      from V's other 861.
+  - **(4)** The three old strings print on 0 of the 39 player pages after (39 of 39 before; `toPublicSafe(withPublicProse)`).
+    The DM block's governing description ("bought") is equal word for word on 39 of 39.
+- **THE 39's GOLDEN ROWS:** none. The golden corpus (`tests/helpers/goldenMasterCorpus.js`) holds 0 rows governed by any of
+  the six names, before and after (CONFIRMED), so C1 moves no golden row.
+- **WRITTEN DOWN, NOT WORKED:** a power's display name is a key in 9 sites. A rename re-deals them, and a later rename should
+  know it.
+  - CONFIRMED by run: `conflicts.js:39` and `:228`, `applyDensityLaw.js:504` and `densityRoll.js:201` (via `seatKey`).
+  - PLAUSIBLE by read: `titularSuccession.js:200`, `densityCadence.js:154` and `:177`, `factionDensityKernel.js:435`, and
+    `settlementPolitics.js:769`.
+- **Not done:** the before-and-after (R24m gives it to a fresh builder). The 64 pinned test lines that C1-ANSWERS (c)
+  lists were not re-run one by one; the gates run are below.
+
+## GOALS I-13: THE CURE I PROPOSE (R24m; NOT BUILT, on the chair's word)
+**The cause (PLAUSIBLE by read; the counts above are CONFIRMED).** `generators/people/goals.js :: dealGoals` keys each card's draw
+on its own fork (`family.fork(card.id)`), so the draws are keyed. But two pieces of shared state let one card reach another
+without the receipt saying so:
+- **The held lines.** `heldShort` and `heldLong` (lines 783, 854-855) take every line an earlier card holds out of a later card's
+  candidates, so that no two people share a goal. Removing a card frees its line, and a later card's candidate list, and so its
+  draw, changes.
+- **The whole-roster reads.** `familyCandidates(card, cards, …)` reads the whole roster, for example `facesInPower(cards,
+  power).length` deciding the RANK cell's refusal (line 507).
+
+The receipt's `refs` names only a candidate's TARGET. So I-13's law ("a card whose draw read nothing of it") is measured
+against a receipt that does not record every read.
+
+**The cure:** the receipt records every card the draw read.
+- **The held lines:** `heldShort` and `heldLong` become maps from a line to its holder's id. Where a candidate is taken out
+  because another card holds it, that holder's id is added to the drawing card's receipt `refs`.
+- **The whole-roster reads:** where a candidate's refusal reads the roster (`facesInPower`), the counted members' ids are added
+  in the same way.
+
+The draws are unchanged and the receipts live in a `WeakMap`, never on the record. So **0 births move, and no golden or
+fingerprint moves**. I-13 is then green by its own terms. Proof: the measure (`batch/goals-i13.census.jsx`) re-run on C and V,
+136 and 172 faults down to 0, with the receipts' added refs counted.
+
+**Size:** S. About 25 lines in `goals.js` (two Sets become Maps, two `refs` pushes) and one red-first case in `goals.test.js`.
+
+**The alternative, not proposed:** making the deal order-free (draw over the unfiltered list, then resolve duplicates in a
+keyed second pass). It would move every birth whose cards now share a line (the 122 and 148 places at least) and every golden
+row with such a place, for a property no page shows.
