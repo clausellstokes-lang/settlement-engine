@@ -191,6 +191,11 @@ THE OWNER's SCOPE LINE (the chair 05:04, `docs/chair/2026-11-24/tenth/SCOPE-LINE
   simulator, the map or custom content unless this release breaks or leaks there. UNITS 4 AND 5 STAND. A finding in a barred area: ONE
   LINE to the chair, not worked (no measure, no builder) unless a break or leak this release makes.
 
+THE CHAIR's EFFICIENCY RULES (05:12, via VEIL-55): report to VEIL-55 ONLY, at most 200 words (routine news here; the chair through
+  VEIL-55); UNITS 4 AND 5 MAY RIDE TOGETHER (two commits, one branch, each red first on a SLICE, ONE "TIP?" with both 212 hunks; the
+  FULL-POOL PROOF ONCE after units 3, 4, 5 are on the tip; a slice fault the pools would have caught sends us back to one at a time);
+  builders reused, briefs exact ("read no wider"), the lowest effort that does it; MACHINE RESTORE: `v51/restore.sh` (05:20, run once:
+  templates present, pools 140 + 140).
 THE CHAIR's CORRECTED RULE (05:10): nobody waits for a compaction; COMMITTED ATOMIC STEPS with reasons; BEFORE A JUDGMENT its plan here,
   pushed; then make it; a compaction mid-step: one line to the chair and VEIL-55, re-read the start file, this hand-back and the step's
   diff WHOLE against its plan.
