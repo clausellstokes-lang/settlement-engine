@@ -1274,3 +1274,15 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   SECOND READER: every path that can stamp '0.10.0' onto a record this engine did not bear (a section re-roll, a
   clone, an import), since `assembleSettlement` stamps on every pipeline run. THE LINE DOES NOT MOVE BEFORE THE SECOND
   READER's REPORT, the gate, and the rulings on every (4) and (F).
+- 2026-11-25 12:16 UTC · T99 · R24n: THE SECOND READER FOUND A FAULT IN GUARD THE CHAIR HAD PASSED (a pinned packet symbol; CI's validate job would have failed); "GUARD-2" ORDERED; D8 PARKED (G11).
+  `read/RULING-R24.md` R24n: the pinned line returns byte-identical and `engine_mismatch` gets its own export; the
+  derived record's own stamp is checked before it is written (the remote lane's engine is the service's); four tests
+  for the append path. CLOSE-7 builds it on `-guard2-wip` cut at 97c6bfc7a BEFORE its ANCHORS. THE LINE DOES NOT MOVE
+  until GUARD-2 and ANCHORS are merged after LAND-117's gate and gated by the files they name, WITH
+  `npm run validate:packets` RUN (the landing's gate does not hold it: add it to every landing from now).
+  ALSO: G11 (D8 parked: "the lord's reeve" needs one row in a shrink-only register: the owner asked for his leave at
+  12:00); G12 (WORDS-2's G6 #1 marked `ruling body`: reaches Town Mayor C 47, V 9 and Priestly Guidance V 15: right).
+  BIRTH-2's unit branches are on origin (`-d4-wip` fe562508c, `-a5-wip` 7e1c465b5). THE MARKS: WORDS-1 at 11:59:
+  569,162, cost 24.86; CLOSE-7 at 11:44: 524,060, cost 494.67; none rejected. The hourly check is armed for 13:00.
+  THE SECOND READER HAS NOW FOUND A FAULT ON BOTH CHANGES IT WAS GIVEN (V28; R24n): IT STAYS ON EVERY CHANGE THE CHAIR
+  READS FOR A LANDING.

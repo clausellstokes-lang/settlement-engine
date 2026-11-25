@@ -111,3 +111,5 @@ birth-moving items (D, E1, E8), wording (E), the share page's quality (A3, A8, A
 **B2, a count (06:27 UTC 2026-11-25, VEIL-53 through VEIL-55):** on the joined chain anon can execute 59 of 79 USER-class functions; their bodies' `auth.uid()` gates answer empty; closing them to anon is B2's.
 
 **THE END, TWO ADDITIONS (2026-11-25):** (1) every edge bundle rebuilt once (`npm run build:edge-shared`, one build window) before the signings; their deploy is the owner's (R24k 4a). (2) ONE READ-ONLY QUERY FOR THE OWNER BEFORE 212 IS APPLIED: the access lists of `_gallery_apply_member_overrides` and `_gallery_sanitize_public_json` on the live database, against the expected answer (V26); a difference corrects the down file first.
+
+**THE END, A THIRD ADDITION (2026-11-25, R24n):** the release's signing step adds the row ('0.10.0', the signed golden manifest's digest) to the generator-version release list, or the lint arm of R24j 6 will not bite at the release after this one.

@@ -362,3 +362,32 @@ batteries of any birth and show no kind of seat outcome or conflict issue that d
 three strings on no player page; the DM block says the hall is bought, word for word. The 39's golden rows are named for
 the owner's end signing. WRITTEN DOWN, NOT WORKED: a power's display name is a key in several sites; a rename re-deals.
 THE CHAIR TURNED ITS OWN RULING OF 07:24 ON A MEASURE THIRTY MINUTES LATER: that is what the measure is for.
+
+## R24n (added 12:16 UTC on 2026-11-25): THE SECOND READER ON GUARD: ONE FAULT AND THREE GAPS; "GUARD-2" BEFORE THE LINE MOVES
+The chair read GUARD's five files whole at high effort and found no fault (T98). A second, independent top-tier reader
+at max effort (107 tool uses, about 27 minutes; not told the chair's read) reported "FAULTS: 1, QUESTIONS: 4". The
+chair checked the fault's facts in the tree.
+1. THE FAULT: `docs/implementation/PACKET_MANIFEST.json` (lines 40409, 41374: EM-R1b and EM-R1c, LANDED) pins verbatim
+   `export const REDERIVE_UNAPPLIED_REASONS = Object.freeze(['step_not_pinnable', 'unknown_key']);` ("PRESERVED
+   byte-identical ... no reason added"); GUARD made the list three; `scripts/implementation-packets.mjs` raises "symbol
+   is missing" unless a packet retires the pair; `validate:packets` is the third link of `npm run check` and CI runs
+   it. THE LANDING's OWN GATE DOES NOT RUN IT: without the second reader CI would have shown a failing job no test
+   names. CURED IN THE CODE: the pinned line returns byte-identical (the pin bag's refusal set is still two);
+   `engine_mismatch` gets its own frozen export, the append path's closed set, with a both-directions test.
+2. THE ANSWER's STAMP IS CHECKED: the seam compares the record with the client's constant, but on the remote lane the
+   engine that runs is the service's bundle, and `settlementRederiveAction.js` sends no version. A tab left open across
+   a later release, or a stale bundle, would rebuild a place of this engine with another. RULED: the derived record is
+   written only if its own `generatorVersion` is this build's; otherwise the tick takes the append path
+   (`rederived: false`). Red first by a lane double.
+3. THE APPEND PATH's TESTS: two ticks (the second appends only its own newcomers), a save that is not the active one,
+   a faction and a house newcomer, and the undo of an appended tick (if the undo does not take the person back it is a
+   finding, not a cure invented).
+NOTED, NOT BUILT: `engine_mismatch` reaches no reader today and no writer can put a world-fact root on a layer; the
+release arm (R24j 6) bites only once the release's signing step has added the '0.10.0' row: ON THE END's LIST;
+`traditions/genesis.js:222` changes the first tradition an advance mints for a place of any engine (CLOSE-7 says
+whether that is B1(ii)'s intent); a place the world pulse founds reads legacy and takes the append path (advance
+time's; written down).
+THE READER's ANSWERS THAT CLOSE THE CHAIR's OPEN QUESTION: the only writers of the stamp are `normalizeSettlement.js`
+(legacy, twice) and `assembleSettlement.js` (current); no path raises an old record to '0.10.0' (section re-rolls
+return parts; imports keep the source's stamp; exports normalise a copy); `regenerateWithLayer` has one caller; any
+value not strictly equal to '0.10.0' takes the append path.
