@@ -1,0 +1,7 @@
+# V53 cures UNIT C notes (partial, written as I go)
+- base: /home/user/cures53 lane/veil-53-2026-11-24-cures-wip @ 5d04aaf9a (A, B). Target: tests/security/traditionDescriptionSharedPage.test.js "TRAD-2 UNIT 2, PROVEN BORN" x3.
+- RED (5d04aaf9a, log /var/tmp/v53/cures/C/red.log): 3 failed | 4 passed of the block: NOT VACUOUS (:409 `expected false to be true`), CONTROL (:459 `expected [ …(2) ] to deeply equal [ Array(1) ]`), THE CHAIR'S QUESTIONS (:476 `metropolis: powers: ...`).
+- PROBE /var/tmp/v53/cures/C/probe/c.probe.test.js (helpers copied by sed from the test; vi.mock neutralizes one stage at a time) -> c.out:
+  - NV: in all 8 towns `added=[]`; the lane's `curateModelFor` offers the People eye itself (here:people 0/4/11/24/33/82/65/24) = the hand reading's count. VR34 landed.
+  - CONTROL: town Deirkala, house "Street gang". pub holds it at `economicState.activeChains[10].processingInstitutions[0]` and `institutions[27].name`. Served holds it nowhere; with `withholdSecondHomes` OFF the chain copy survives and `values` no longer holds it; with `applyRosterChoices` or `withholdAlways` OFF nothing changes. CONFIRMED: `gallerySecondHomes.js :: withholdSecondHomes`, its activeChains step (`hiddenName` over `processingInstitutions`).
+  - QUESTIONS: shares move only where a veiled power (Thieves' Guild) is withheld: metropolis 95->100, famine city 88->100, siege town 91->100; the other 5 equal; every served sum is 100; names/order unchanged.
