@@ -32,7 +32,9 @@ LANDING OF POINT 117 RUNNING (the chair's container, on 97c6bfc7a). Since then (
   - Builder a45b468ed08040c87 is on GUARD-2 now. ANCHORS is paused at a commit boundary.
 
 STILL MINE:
-- BEFORE-AFTER's last halves (builder a7bcddb98c583b23c; they go into the landing's record).
+- BEFORE-AFTER is DONE and was SENT to the chair (c209e1af6; `close-7/reports/BEFORE-AFTER.md`).
+  - Every figure is SAME or explained. GUARD differs in the version only. BATCH moves V 63 records.
+  - TOOL'S GAP: page-battery's first birth per worker misses a "Patron deity" card.
 - Then the SECOND HAND-IN. Cut a branch at the line's tip AFTER the landing, and merge the seats' units onto it (D2, D3 and D5 so
   far, all from BIRTH-1), with goals I-13.
 
