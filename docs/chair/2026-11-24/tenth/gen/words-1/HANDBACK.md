@@ -40,4 +40,13 @@ person: card lines (goal.short "make themselves useful" 419 printed, personality
 the tie "would rather keep to themselves". Needs a hand-classed bound/other table, like THEY_BOUND.
 E1 DONE AS A MEASURE (09:35 UTC): `reports/E1.md` (C 125/122, V 145/126; the four sources, three examples each, the
 proposed forms). THE RULING ASKED of the chair at 09:35 UTC. BUILD NOTHING OF E1 UNTIL IT COMES.
-NEXT STEP: E8 from e8-records (hand-class bound/other by template; red first; the slot; the check over every birth).
+D6 MEASURED, THREE WORDINGS SENT (09:51 UTC): `reports/D6.md` (ties read against the ruler OR its seatOf form: first contender
+N C 442/632, V 265/611; per-card N pages C 494 V 308). Recommended wording 1 "Could contend" · "Could contest the seat", every
+tied card, N. THE PICK IS THE CHAIR'S: build nothing of D6 until it comes. Flagged: a shared page showing the Power tab prints
+the new label.
+E8 MEASURED ON RECORDS (`tools/e8-records.mjs`, `tools/e8-classes.mjs` = the hand-classed table): BOUND C 1786 strings in 521
+places, V 1746 in 526 (tells 899/852, want RANK.enter 466/433, the tie 157/158, impressions 202/215, secrets/goal.long the rest);
+BOUND-THEY (left as written) C 36, V 32; OTHER C 446, V 466. Scope question put to the chair in the E1 message (card lines + tie).
+NEXT STEP: E8 build on `lane/words-1-2026-11-25-e8-wip` cut at 0ec96f13d: a leaf `reflexiveOf(gender)` in personMention.js; a
+`{self}` slot filled at each composer (pairProse tie; goals.js wants, `self` a NAME_SLOT so wordings keep '§'; tells,
+presentations, secrets, goal.long at their draw sites); check script over every birth of C and V against the raw gender.

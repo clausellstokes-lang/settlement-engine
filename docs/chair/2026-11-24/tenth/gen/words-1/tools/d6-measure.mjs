@@ -4,7 +4,7 @@
  * contender, and those whose contender is the ruler's own bargain partner in the web. A MEASURE: it changes nothing.
  * The method is CLOSE-2's `contender/measure.mjs` (lane/close-2-2026-11-22) over a plan file instead of its own seeds:
  * what the tab prints (`derivePowerStrata` → `powers`, role 'contender') against the typed ties
- * (`powerStructure.factionRelationships`) between the printed ruler and each contender.
+ * (`powerStructure.factionRelationships`) between the printed ruler (or the form whose seat it holds, `seatOf`) and each contender.
  *   N (narrow, "dependent or partner"): dependent, symbiotic.   W (wide): N + subordinate.
  * Usage: node d6-measure.mjs <tree> <plan.json> <out.json>
  * Writes per seed: { seed, size, ruler, contenders: [{ name, ties: [type…] }] }; prints the counts by size.
@@ -30,8 +30,11 @@ for (const p of plan) {
   const ruler = powers.find((x) => x.role === 'ruler');
   const contenders = powers.filter((x) => x.role === 'contender');
   const R = ruler?.name || '';
-  const tiesWith = (o) => rels.filter((r) => Array.isArray(r?.pair) && r.pair.includes(R) && r.pair.includes(o) && r.pair[0] !== r.pair[1]).map((r) => r.type);
-  const row = { seed: p.seed, size: p.size, ruler: R, contenders: contenders.map((c) => ({ name: c.name, ties: tiesWith(c.name) })) };
+  // the ruler as the tab prints it, and (where the holder stands apart from the form) the form whose seat it holds: a tie
+  // with either is a tie with the ruler (dp-town-3: the Guard is the Town Mayor's symbiotic partner, the Merchant Guilds hold it)
+  const RS = [R, ruler?.seatOf || ''].filter(Boolean);
+  const tiesWith = (o) => rels.filter((r) => Array.isArray(r?.pair) && RS.some((x) => r.pair.includes(x)) && r.pair.includes(o) && r.pair[0] !== r.pair[1]).map((r) => r.type);
+  const row = { seed: p.seed, size: p.size, ruler: R, seatOf: ruler?.seatOf || null, contenders: contenders.map((c) => ({ name: c.name, ties: tiesWith(c.name) })) };
   rows.push(row);
   const b = (by[p.size] ||= { n: 0, withC: 0, firstN: 0, firstW: 0, anyN: 0, anyW: 0, cardsN: 0, cardsW: 0 });
   b.n++;
