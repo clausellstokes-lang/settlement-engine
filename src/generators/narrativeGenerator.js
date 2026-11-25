@@ -144,7 +144,7 @@ const genSettSummary = settlement => {
             : tier === 'metropolis'
               ? 'the grand council'
               : 'the council');
-  const topFaction = factions[0]?.faction || 'the dominant power';
+  const topFaction = powersStrongestFirst(factions)[0]?.faction || 'the dominant power'; // D4 (RULING G2): the strongest, not the first stored row
 
   const crimFaction =
     factions.find(
@@ -486,7 +486,7 @@ const genPressureDetail = settlement => {
             : tier === 'metropolis'
               ? 'the grand council'
               : 'the council');
-  const topFaction = factions[0]?.faction || null;
+  const topFaction = powersStrongestFirst(factions)[0]?.faction || null; // D4 (RULING G2): the strongest, not the first stored row (the fold can outgrow it)
 
   const milForce = hasInst('garrison')
     ? 'the garrison'
@@ -1119,3 +1119,4 @@ export const generateCoherence = (settlement, coherenceRng = null, pins = null, 
     },
   };
 };
+import { powersStrongestFirst } from '../domain/display/powersStrongestFirst.js'; // D4 (RULING G2): at the file's end, so no cited line moves
