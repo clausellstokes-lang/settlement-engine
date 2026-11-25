@@ -7,7 +7,7 @@ before judging anything. Every hour here is read from `date -u`. No pull request
 
 ## 1. WHERE THE SEAT STANDS (my memory; WHOLE at every push; written so a successor on another account can go on from it alone)
 
-AS OF 06:46 UTC 2026-11-25. A SECOND CONTAINER RESTART ~01:14 (PostgreSQL restarted; lost steps relaunched 01:15:47: snmaster, snjoin, miplant2, snplant2; the builder resumed by message). DONE BY THEN: mimaster (rc=3, MAP OTHER rows), mijoin (rc=3), sntip (rc=0); the builder's commit f1da68754 on the -wip (the two test files); its tests/lint whole was cut and is being re-run. THE LANE'S OWNER: VEIL-55 (session_019yED1SoJ6KH9Wyp2Fera7R); never message VEIL-50. THE CHAIR:
+AS OF 08:22 UTC 2026-11-25. A SECOND CONTAINER RESTART ~01:14 (PostgreSQL restarted; lost steps relaunched 01:15:47: snmaster, snjoin, miplant2, snplant2; the builder resumed by message). DONE BY THEN: mimaster (rc=3, MAP OTHER rows), mijoin (rc=3), sntip (rc=0); the builder's commit f1da68754 on the -wip (the two test files); its tests/lint whole was cut and is being re-run. THE LANE'S OWNER: VEIL-55 (session_019yED1SoJ6KH9Wyp2Fera7R); never message VEIL-50. THE CHAIR:
 session_019yED1SUxGVHyjQnoqoFvQ8. THE LINE: 0559a8405 (point 115, the troubles rule DARK; no birth or page moves; merge nothing of it
 before the join). MARK RULE (00:29): no successor at 620,000; this section whole by 560,000, then work on; at a compaction say so to
 the chair in one line, re-read the start file, this section and the rulings, go on; finish a judgment before a compaction, never carry
@@ -118,6 +118,20 @@ the hunk for the chair's whole read; then READ-COST (V11).
 hooks-override commits of the trial join (e19f756d7, 18342ba96): contained in no branch, local or remote; worktree deleted; join
 rebuilt without the override (f937c4d9f, tree identical). NEXT: VEIL-55's answer (merge, or a re-merge if unit 4 lands first); then
 READ-COST (V11) as its own migration after phase 1's SQL merges.
+
+### 08:2x: UNIT 3: THE CHAIR'S WHOLE READ FINDS NO FAULT; the grant waits on a second reader; DO NOT TOUCH 2f849aa53. NEW (RULING V28,
+08:09, relayed by VEIL-55): (1) COVERT-UNREAD (V28 (1), FAIL CLOSED): a BUILDER (Agent, background) on brief `v52/briefs/COVERT-UNREAD-BRIEF.md`
+(3f3a429c7), branch `lane/veil-52-2026-11-24-unread-wip` (child of 2f849aa53; worktree /home/user/wt/unread; logs /var/tmp/v52/builder3/);
+the rule: on a public read `unread` also where dm_full is an object with prominentRelationship or pressureSentence and NO relationships
+key; 212 :: _gallery_apply_member_overrides (lateral cw) + twin gallerySecondHomes.js :: withholdCovertCopies; header item written (40);
+red first at all four doors + the twin, plain and narrated, with a control; the rollback (the down file already restores 211's apply:
+to be proven by rehearsal). REPORT to VEIL-55 as a FILE + <=200 words (the hunk, red/green per door, the rollback rc). (2) MAP-COST (V28
+(3)) into READ-COST's unit, MEASURE FIRST, after (1): (a) the hosted platform's statement timeout for anon/authenticated and whether a
+function-level `set statement_timeout` is honoured through its API layer, FROM ITS PUBLIC DOCUMENTATION with the date read, searched in
+generic words, no project name or identifier; (b) get_gallery_map's per-member cost by step on the today-born 140 (VEIL-55's whole-map
+figures: unmarked 12.5 s -> 50.3 s, marked 45.5 -> 49.5 s; its script `v55/out/q2/tmap.mjs` on lane/veil-55-2026-11-24); (c) a count-only
+query for the owner: public maps sharing their campaign and their member counts (max, median). Then propose the cure with its size; a
+raised timeout alone is not a cure. A FIFTH CONTAINER RESTART ~08:10 (PostgreSQL restarted 08:12).
 
 ### OWED, IN ORDER
 1. (done.) 2. (1a) snap and (1b) wdmi tables on the three sets, to VEIL-55 (<=200 words each). 3. The two plants.
