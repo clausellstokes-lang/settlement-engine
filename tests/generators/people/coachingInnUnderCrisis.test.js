@@ -76,7 +76,11 @@ describe('POWERS-14 · the towns read on the page: no coaching inn under a siege
       // line, and with the welcoming line's `crisis: famine` exclusion reverted in a scratch tree it deals the welcoming line
       // (false before the cure). Of the reader's candidates, town-5, city-5, city-6 and city-9 deal the transactional line with
       // the exclusion reverted too (never false: not this claim); city-10, metropolis-4, -5 and -10 bear it.
-      'r2s-under_siege-town-1': CAUTIOUS, 'r2s-famine-city-10': TRANSACTIONAL, 'r2s-famine-metropolis-3': TRANSACTIONAL,
+      // RE-PICKED (point 117, ruling 117-1, 2026-11-25): r2s-under_siege-town-1 is a desert town, and under the close's B1(i)
+      // its birth no longer seats a Coaching inn. Of the siege towns 0 to 39 that seat one (0, 29, 33, 38), town-29 is the
+      // lowest that bears the claim: with the two lines' `crisis: under_siege` exclusions reverted in a scratch tree its keeper
+      // deals the transactional line (false before the cure); town-0's keeper deals the cautious line either way.
+      'r2s-under_siege-town-29': CAUTIOUS, 'r2s-famine-city-10': TRANSACTIONAL, 'r2s-famine-metropolis-3': TRANSACTIONAL,
       'r2s-under_siege-metropolis-0': CAUTIOUS, 'r2s-under_siege-metropolis-3': CAUTIOUS, 'r2r-metropolis-14': CAUTIOUS,
       // the guard towns: read true, kept
       'r2r-city-0': WELCOMING, 'r2s-occupied-city-1': WELCOMING, 'r2s-plague_onset-city-2': WELCOMING, 'r2s-famine-metropolis-0': TRANSACTIONAL,
