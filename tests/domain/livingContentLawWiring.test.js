@@ -108,19 +108,26 @@ import { buildLivingContentRoster } from '../../src/domain/content/livingContent
 // (X-46 car 4, the owner's word of 2026-11-04, ODQ §934.104 R6(1)), so `birthConfig` now spreads
 // the DENSITY mint's marker beside this law's — the event the LIT arm's "or the density mint
 // waking up" was written to catch. The mocked CREATE arms below name that marker by its own mint
-// (`newSettlementDensityLaw()`), so each still asserts that the LIVING-CONTENT law writes exactly
-// its one key and nothing else, and the density half is held to what its own dial mints; the
-// product-path LIT arm keeps this law's own key only since the JOIN (its whole-value pin moved to
-// `generationLawsSavedPlace.test.js` (g)).
-import {
-  DENSITY_LAW_CONFIG_KEY,
-  newSettlementDensityLaw,
-} from '../../src/domain/density/densityLaw.js';
+// (`newSettlementDensityLaw()`, imported here by hand until point 116), so each still asserts that
+// the LIVING-CONTENT law writes exactly its one key and nothing else, and the density half is held
+// to what its own dial mints; the product-path LIT arm keeps this law's own key only since the JOIN
+// (its whole-value pin moved to `generationLawsSavedPlace.test.js` (g)).
 // ⭐ THE THIRD AND FOURTH LAWS AT BIRTH (the flip, 2026-11-23). The seat and fortune dials were lit together, so
-// `birthConfig` now spreads their markers beside the density one; the three CREATE arms that name the density marker by
-// its own mint name these two by theirs, so each still asserts that the LIVING-CONTENT law writes exactly its one key.
-import { SEAT_LAW_CONFIG_KEY, newSettlementSeatLaw } from '../../src/domain/seat/seatLaw.js';
-import { FORTUNE_LAW_CONFIG_KEY, newSettlementFortuneLaw } from '../../src/domain/fortune/fortuneLaw.js';
+// `birthConfig` spreads their markers beside the density one; the three CREATE arms named those two by their mints too.
+// ⭐ THE FIFTH LAW AT BIRTH (the trouble law, lit at point 116 on 2026-11-25), AND THE CURE THAT ENDS THE HAND LIST: the
+// three CREATE arms below named the other laws' mints one by one, so every lit dial reddened them. They now read EVERY
+// ROW OF `GENERATION_LAWS` BUT THIS LAW'S, each by its own mint and its own config key (this file's LIT arm's
+// `otherLaws` and `generationLawsSavedPlace.test.js` (g) already did), so the flip of another law's dial moves no pin here.
+const spec = (/** @type {string} */ rel) => `../../${rel}`;
+const OTHER_LAWS = await Promise.all(Object.values(GENERATION_LAWS)
+  .filter((row) => row.configKey !== LIVING_CONTENT_LAW_CONFIG_KEY)
+  .map(async (row) => ({ row, mod: /** @type {any} */ (await import(/* @vite-ignore */ spec(row.module))) })));
+/** What every other law's own mint writes at birth (read from its own module, named by its register row). */
+const otherLawsMinted = () => Object.assign({}, ...OTHER_LAWS.map(({ row, mod }) => mod[row.mint]()));
+/** The config keys of the other laws whose mint writes (each row's own `configKey`). */
+const otherLawKeys = () => OTHER_LAWS
+  .filter(({ row, mod }) => Object.keys(mod[row.mint]()).length > 0)
+  .map(({ row }) => row.configKey);
 
 vi.mock('../../src/lib/saves.js', () => ({
   saves: { update: vi.fn(() => Promise.resolve()), isConfigured: false },
@@ -280,13 +287,13 @@ describe('the living-content law is WIRED, and THE PROMISE survives it', () => {
     // THROUGH A MOCKED DARK LAW. It is what makes reverting the dial a one-line
     // act rather than a hope: the mint's dormant branch is exercised, not argued.
     return boundaryWithDarkLaw().then((mod) => {
-      // Not one byte of THIS law; the density marker (lit at 3420d01e3) and the seat and fortune markers (lit at the
-      // flip, 2026-11-23: this arm held the density marker alone until that day) are their own mints'.
-      const others = { ...newSettlementDensityLaw(), ...newSettlementSeatLaw(), ...newSettlementFortuneLaw() };
+      // Not one byte of THIS law; every other register row's marker is its own mint's (read from the registry: this arm
+      // hand-listed density, seat and fortune until the trouble mint was lit at point 116, 2026-11-25).
+      const others = otherLawsMinted();
       const minted = mod.birthConfig({ ...CONFIG });
       expect(minted).toEqual({ ...CONFIG, ...others });
       expect(Object.keys(minted).sort())
-        .toEqual([...Object.keys(CONFIG), DENSITY_LAW_CONFIG_KEY, SEAT_LAW_CONFIG_KEY, FORTUNE_LAW_CONFIG_KEY].sort());
+        .toEqual([...Object.keys(CONFIG), ...otherLawKeys()].sort());
       expect(minted[LIVING_CONTENT_LAW_CONFIG_KEY]).toBeUndefined();
       expect(mod.birthConfig(null)).toEqual({ ...others });
       expect(mod.birthConfig(undefined)).toEqual({ ...others });
@@ -305,14 +312,12 @@ describe('the living-content law is WIRED, and THE PROMISE survives it', () => {
     // once the marker's two config echoes are removed.
     const seed = 'l-mat-wiring-same-seed';
     const through = generateSettlementPipeline(birthConfig({ ...CONFIG }), null, { seed });
-    // The raw world carries the density law a birth mints (lit at 3420d01e3), and the seat and
-    // fortune laws (lit at the flip, 2026-11-23: the raw config carried the density law alone
-    // until that day), so the subtraction below isolates the living-content law and nothing
-    // else: those laws rightly move the world (the named roster and seats follow the
-    // population; the seat's holder and the place's fortune are read under their own laws).
-    const raw = generateSettlementPipeline({
-      ...CONFIG, ...newSettlementDensityLaw(), ...newSettlementSeatLaw(), ...newSettlementFortuneLaw(),
-    }, null, { seed });
+    // The raw world carries every other law a birth mints, read from the registry by each row's own
+    // mint (it hand-listed density, seat and fortune until the trouble mint was lit at point 116,
+    // 2026-11-25), so the subtraction below isolates the living-content law and nothing else:
+    // those laws rightly move the world (the named roster and seats follow the population; the
+    // seat's holder, the place's fortune and its troubles are read under their own laws).
+    const raw = generateSettlementPipeline({ ...CONFIG, ...otherLawsMinted() }, null, { seed });
     expect(worldBytesWithoutMarker(through)).toBe(worldBytesWithoutMarker(raw));
     // …and the marker really is there, so the comparison above is a subtraction
     // and not a description of two identical inputs.
@@ -379,13 +384,11 @@ describe('the living-content law is WIRED, and THE PROMISE survives it', () => {
       const world = generateSettlementPipeline(born, pack, { seed: 'l-mat-fix-clamp' });
       expect(world[ROSTER_KEY]).toBeUndefined();
       expect(world.config[LIVING_CONTENT_LAW_CONFIG_KEY]).toBeUndefined();
-      // The clamp takes the marker and NOTHING ELSE (the density mint adds its own, 3420d01e3; the
-      // seat and fortune mints theirs, lit at the flip, 2026-11-23).
+      // The clamp takes the marker and NOTHING ELSE (every other register row's mint adds its own key, read from
+      // the registry: hand-listed as density, seat and fortune until the trouble mint was lit at point 116).
       expect(Object.keys(born).sort()).toEqual([...new Set([
         ...Object.keys(hydrated).filter(k => k !== LIVING_CONTENT_LAW_CONFIG_KEY),
-        ...Object.keys(newSettlementDensityLaw()),
-        SEAT_LAW_CONFIG_KEY,
-        FORTUNE_LAW_CONFIG_KEY,
+        ...otherLawKeys(),
       ])].sort());
       vi.doUnmock('../../src/domain/content/livingContentLaw.js');
       vi.resetModules();
