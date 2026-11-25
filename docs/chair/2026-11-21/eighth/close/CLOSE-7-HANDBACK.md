@@ -241,6 +241,8 @@ gate for the lot):
   - Frozen surfaces moved, not re-recorded: the dark golden 15/525 and the lit twin 32/525 (lists in gen/birth-1/d2/ on
     lane/birth-1-2026-11-25).
   - Owes: a mutation-manifest row for tests/generators.
+  - A decision of the unit (the chair's G8 (1)): the pick also skips an OPEN tie between the two people a covert tie joins, so no
+    pressure sentence names both ends of a covert tie. Examples: V dp-hamlet-67 and dp-hamlet-76.
 
 - D3: `lane/birth-1-2026-11-25-d3-wip` 5262fbee4, from BIRTH-1, cut at 0ec96f13d.
   - Touches rulingStructure.js, economyReconciliation.js, a new leaf power/governanceLabelRoster.js, and one line of
