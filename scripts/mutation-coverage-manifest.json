@@ -1812,7 +1812,15 @@
       "kind": "rationale",
       "ref": "pglite-executed"
     },
+    "tests/security/galleryImportEqualsRead.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
     "tests/security/galleryMapMemberCount.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/galleryMapCovert.pglite.test.js": {
       "kind": "rationale",
       "ref": "pglite-executed"
     },
