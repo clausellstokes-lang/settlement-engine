@@ -5,7 +5,7 @@ THE CHAIR is the tenth chair, session_019yED1SUxGVHyjQnoqoFvQ8. MY START MESSAGE
 session_019yED1SoJ6KH9Wyp2Fera7R. IF YOUR CONTEXT BEGINS WITH A SUMMARY: tell the chair in one line, re-read that file and this
 section before judging anything. Every hour here is read from `date -u`.
 
-## 1. WHERE THE LANE STANDS (my memory; current at this push, 04:16 UTC 2026-11-25)
+## 1. WHERE THE LANE STANDS (my memory; current at this push, 04:18 UTC 2026-11-25)
 
 THE LAW: as VEIL-50's hand-back section 1 "THE LAW" (no pull request; push only `lane/veil-55-2026-11-24*` by the local branch's
 own name, ls-remote first; never --no-verify, force, master; every database local, PGHOST=/var/tmp/rv7; no `supabase` command).
@@ -38,6 +38,20 @@ aligned form is 0): named in the "TIP?".
 A SUCCESSOR ON ANOTHER ACCOUNT, THE NEXT COMMAND: in a fresh container, `npm ci` in a checkout of
 `lane/veil-55-2026-11-24-r4ids-wip` (= 8430edf5c), worktrees as "TREES AND MACHINE" below, then
 `sh v55/m0.sh` and `sh v55/p1.sh` (paths inside them), each detached; read `v55/out/` on this branch for what had finished.
+
+### THE ONE LIST (for a chair or successor on another account; current at 04:18 UTC 2026-11-25, read from date -u)
+- MERGED on the lane's tip `lane/veil-55-2026-11-24-tip`: b58abc48b (PIN-3) -> 8430edf5c (UNIT 2, R4-IDS + R4I-SQL-2; granted
+  02:46) -> dbd4cd9e5 (UNIT 1, STORED-PROSE d7764e67a; 212 header (37)). 212 sha256 at the tip 826fb94100741822.
+- GRANTED AND UNMERGED: none.
+- PLAN-2 ACCEPTED (V22, a1cb9710d). THE ALLOWANCE WILL BIND (the chair: about when phase 1's proof is taken): each merge leaves the
+  tip whole and proven on its own.
+- EACH SEAT HOLDS: VEIL-51: unit 4 (R5-DESC cut-alone, V15) to cut at dbd4cd9e5: aa54a6791 + DESCARM 0ff0773c7 (-descarm-wip) +
+  STANDWALK 7010a0004 (-walker-wip); then unit 5 (V20; proposal 9aea3a6a7). VEIL-52: unit 3 `-mcsql-wip` 912be7b4e (tests done;
+  SQL after its compaction; owes the bijection fold + citations at its merge); `q52.sh miplant5` = unit 4's tooth (V21); then
+  READ-COST (V11). VEIL-53: `-cures-wip` 1ffb2328b (cures A-E + wording, read: NO FAULT, rides the join), `-j1-wip` e1b7a8714 (read:
+  NO FAULT, rides the join), the anon arm running on grants-wip, FAIL-CLOSED PAGES' slice, then B1 (V19) on my word.
+- THE NEXT COMMAND (mine): the quiet-box items on dbd4cd9e5 (worktree /home/user/wt/tipm): the order count; `npm run build` then
+  the four VERIFY_DIST reds by name; writer-reach's three identities; then read unit 4's "TIP?" (its 212 hunk to the chair first).
 
 ### NOW (04:1x UTC 2026-11-25): R4-IDS MERGED (tip 8430edf5c, pushed 02:52); UNIT 1 MERGED ON THE TIP (dbd4cd9e5)
 - UNIT 1's SLICE on dbd4cd9e5 (v55/u1.sh, u1c.sh; log /var/tmp/v55/u1.log), CONFIRMED: ppkey on the today-born stored 140: RED at
