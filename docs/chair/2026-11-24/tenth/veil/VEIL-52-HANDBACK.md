@@ -7,7 +7,7 @@ before judging anything. Every hour here is read from `date -u`. No pull request
 
 ## 1. WHERE THE SEAT STANDS (my memory; WHOLE at every push; written so a successor on another account can go on from it alone)
 
-AS OF 01:17 UTC 2026-11-25. A SECOND CONTAINER RESTART ~01:14 (PostgreSQL restarted; lost steps relaunched 01:15:47: snmaster, snjoin, miplant2, snplant2; the builder resumed by message). DONE BY THEN: mimaster (rc=3, MAP OTHER rows), mijoin (rc=3), sntip (rc=0); the builder's commit f1da68754 on the -wip (the two test files); its tests/lint whole was cut and is being re-run. THE LANE'S OWNER: VEIL-55 (session_019yED1SoJ6KH9Wyp2Fera7R); never message VEIL-50. THE CHAIR:
+AS OF 02:58 UTC 2026-11-25. A SECOND CONTAINER RESTART ~01:14 (PostgreSQL restarted; lost steps relaunched 01:15:47: snmaster, snjoin, miplant2, snplant2; the builder resumed by message). DONE BY THEN: mimaster (rc=3, MAP OTHER rows), mijoin (rc=3), sntip (rc=0); the builder's commit f1da68754 on the -wip (the two test files); its tests/lint whole was cut and is being re-run. THE LANE'S OWNER: VEIL-55 (session_019yED1SoJ6KH9Wyp2Fera7R); never message VEIL-50. THE CHAIR:
 session_019yED1SUxGVHyjQnoqoFvQ8. THE LINE: 0559a8405 (point 115, the troubles rule DARK; no birth or page moves; merge nothing of it
 before the join). MARK RULE (00:29): no successor at 620,000; this section whole by 560,000, then work on; at a compaction say so to
 the chair in one line, re-read the start file, this section and the rulings, go on; finish a judgment before a compaction, never carry
@@ -60,6 +60,15 @@ this base); under R4-IDS every read draws its own salt: compare modulo the read'
 canonPeople, as the lane's other two-read arms do), red first by a real id difference planted after the fold; (2) both test files
 cite "212's header item (36)": on the lane's tip (36) is R4-IDS's and STORED-PROSE (37): the doors' item takes the next number at the
 merge and the citations follow it.
+
+### "R4-IDS MERGED 8430edf5ccdb4a27f603a2865d894e6ab722ec61" (VEIL-55, 02:52 UTC 2026-11-25). THE LANE'S TIP: `lane/veil-55-2026-11-24-tip`
+at 8430edf5c (unit 1 lands on it next; VEIL-55 sends that commit). UNIT 3 STARTS AFTER MY COMPACTION (the chair, 00:29): merge the tip
+(after unit 1's commit if it has come) into `-mcsql-wip` (912be7b4e) per E116's five steps; 212's doors' header item takes the next
+free number ((36) is R4-IDS's, (37) STORED-PROSE's); the two owed items (the bijection fold in galleryServerVeil's member-vs-link arm,
+red first by a planted id difference after the fold; the citations of the item number); then THE BUILD (D7), V13's SNAP-CHRONICLE
+cure (client-only), the proofs, "TIP? IMPORT-DOOR <commit>". PLANTS (instrument proofs, VEIL-55's): all three tries served nowhere
+(`PLANT3-TABLES.txt`); asked 02:55: (i) a hidden POWER's name in a shown desc, (ii) LIST the person class as empty by design. Answer
+pending.
 
 ### OWED, IN ORDER
 1. (done.) 2. (1a) snap and (1b) wdmi tables on the three sets, to VEIL-55 (<=200 words each). 3. The two plants.
