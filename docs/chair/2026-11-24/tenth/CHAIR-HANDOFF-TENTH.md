@@ -851,3 +851,10 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   closed, totality by a walker, fidelity byte for byte, B2's stop first, the hiding-read assertion, the page's weight.
   CI's run on 0559a8405 (45515905198, number 1293) was in progress at 00:56 (started 00:09:55); its own check fires at
   00:57. VEIL-52: hand-back whole, turn ended, unit 3 after its compaction.
+- 2026-11-25 00:59 UTC · T64 · CI ON POINT 115 READ BY NAME: 61 FOUND, 61 ON THE LIST, NONE NEW.
+  Run 45515905198 (number 1293) on 0559a8405, 00:09:55 to 00:57:42 UTC: the ratchet 39 of 42,820 in 3,723 files; build
+  and dist 13; coverage 8; the golden under tr_TR 1; no listed row green. `readerCorpusManifest` and `provenanceMap`
+  are in no failing job's log (green in CI): the landing gate's two reds outside the list were the calendar and the
+  landing machine. The sentence is in `ci/LINE-NOW.md`'s first block; the reader and its table are in
+  `docs/chair/2026-11-24/tenth/ci/`. POINT 115 IS WHOLE. What the troubles rule now waits for is the owner's yes on its
+  three numbers, and nothing else.
