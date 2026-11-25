@@ -104,6 +104,12 @@ THE CHAIR, 05:12 (`close-7/briefs/CHAIR-0512.md`):
     before-and-after on C and V, ONE hand-in. That before-and-after also re-states A1, A2 and the mirror on the 116 tree.
   - To the chair only: rulings, merges, the hand-in.
 - RESTATE-116 is SUPERSEDED (never dispatched).
+- THE OWNER, about 05:22 (the chair 05:23; T78): a cheaper model ("haiku", or "sonnet" at low effort) is allowed ONLY for a
+  PURELY MECHANICAL helper. Its whole job is to start a named command, wait, and return the exit code, the run's totals and the
+  failures sorted against a list I give it as a file.
+  - It edits nothing and judges nothing. A failure not on the list comes back as "NOT ON THE LIST" and I judge it.
+  - Its counts must reconcile. If they do not, I read the run myself.
+  - Builders, measurers, reviewers and anything that cures stay on Opus. A gate I run myself is unchanged.
 
 PLAN AFTER GUARD: the same builder (a45b468ed08040c87) takes BATCH (brief `close-7/briefs/BATCH.md`, to write):
 - B1(i)'s finish (R24e (1a), (1b), (2), plain);
