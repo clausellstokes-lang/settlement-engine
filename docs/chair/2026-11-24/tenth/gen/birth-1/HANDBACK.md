@@ -93,8 +93,18 @@
   'Feudal Stewardship' (`rulingStructure.js` governanceLabelMap `"lord's reeve"`); its own desc says "A steward appointed by a distant
   lord". Hamlets up hold "Lord's steward" (face 'the steward'). The seat line is `governanceAccount.js :: governanceAccountOf` (role
   from `rulingChainOf`).
-- D7: read in (the proposal's crisis-body measure counts places whose crisis has no power of its own on the roster; its 509/900).
-  STRESS_POWER_FACES lists each crisis's powers; `power/stressFactions.js :: applyStressEventFactions` pushes them (the density law may not seat them). `tools/measure-d7.mjs` written (crises, roster, every crisis sentence per birth); to run once on C and V, then the per-kind analysis offline.
+- **D7 — MEASURED, RULING ASKED (the words), nothing built.** `tools/measure-d7.mjs` (crises, roster, every crisis line; "own power"
+  by the tree's `stressPowerRowOf` + fortune-7's no-face list) and `tools/analyse-d7.mjs`; tables `d7/analysis-{C,V}.txt`. Almost every
+  crisis line tells an event, the seat, or an outsider. Lines naming a LOCAL body the place may lack (printed, no body): indebted power
+  sentence "The creditor's agent has blocked the money…" C 24 (19), V 27 (13); indebted pressure "the creditor's representative arrived
+  last month" C 1 (1); religious_conversion power sentence "two priests, two congregations…" C 7 (6), V 5 (4); succession pressure "every
+  claimant is buying support" C 6 (2), V 6 (2) (borderline). Proposed twins sent to the chair; the insurgency's "A strong power" is gated
+  by K6 (true), left. If ruled: each twin declared by the place's own powers at its print site (power sentence:
+  `governanceNarrative.js :: buildStressNarratives`; conversion: `governingStressVignettes.js`; pressure: `narrativeText.js`), no draw.
+- **D2b — HANDED TO THE CHAIR, A BYTE RULING ASKED**, pushed at 4822a2175 (+ wiring door). First paint raw +210 (1,181,337 -> 1,181,547),
+  gzip +70, Brotli -28; worker +256; all budgets over at the base already. Governing run (166 files + tests/lint + tests/copy): 16 red,
+  13 known; the wiring census cured by its door; dossierPhoneFloorAllViews red the same at the base (Daily Life prose 9 -> 8). NOT yet
+  sent to CLOSE-7 (waits for the byte word).
 
 ### 0.2 Next step
-Read D2b's governing log (`scratchpad/d2b/gov.log`); the build's figures; list the readers of the stored pressure line; push -d2b-wip; hand in. D8 parked (owner's leave). Then D7's measure (`tools/measure-d7.mjs`).
+Wait for the chair: D2b's byte word (then 'UNIT D2b' to CLOSE-7), D7's words (then build D7's twins, red first, check over every birth). D8 parked (owner's leave).
