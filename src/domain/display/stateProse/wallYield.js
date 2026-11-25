@@ -19,7 +19,8 @@ const SAYS_NO_WALL = Object.freeze([['Beasts & Monsters: settled, nothing organi
 
 /** Each such variant's text around its one `{settlement}` slot. */
 const HALVES = Object.freeze(SAYS_NO_WALL.flatMap(([pool, vid]) => {
-  const v = (DOSSIER_STATE_PROSE_DEFENSE['DS-DEF-2']?.pools?.[pool] || []).find((x) => x?.vid === vid);
+  const block = /** @type {{ pools?: Record<string, ReadonlyArray<{ vid?: number, text?: string }>> } | undefined} */ (DOSSIER_STATE_PROSE_DEFENSE['DS-DEF-2']);
+  const v = (block?.pools?.[pool] || []).find((/** @type {{ vid?: number, text?: string }} */ x) => x?.vid === vid);
   const parts = typeof v?.text === 'string' ? v.text.split('{settlement}') : [];
   return parts.length === 2 ? [Object.freeze({ pool, head: parts[0], tail: parts[1] })] : [];
 }));
