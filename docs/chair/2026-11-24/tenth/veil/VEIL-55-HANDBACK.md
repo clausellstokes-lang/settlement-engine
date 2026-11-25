@@ -69,6 +69,17 @@ A SUCCESSOR ON ANOTHER ACCOUNT, THE NEXT COMMAND: in a fresh container, `npm ci`
   my lean fail closed (`unread` where relationships is absent and a string present, twin matched, red first at four doors). Q2:
   an unmarked member now takes the default veil: 122 of the stored 140 lose rows, 99 have values re-derived. TIMING (140-member
   map, local): unmarked 12.5 s -> 50.3 s; marked 45.5 s -> 49.5 s (unit 3 brings unmarked to the marked cost; ~0.35 s a member).
+- RULING V28 (the chair 08:09; with the grant, still waiting the second reader: DO NOT MERGE UNIT 3 YET): (1) Q1 CURED FAIL
+  CLOSED (`unread` also where dm_full has pr/ps and no `relationships` key; twin rule for rule; red first at four doors, plain and
+  narrated): GIVEN TO VEIL-52 (08:11) as COVERT-UNREAD, a child of 2f849aa53 on `lane/veil-52-2026-11-24-unread-wip`, header (39)
+  after unit 3. (2) VR23 STANDS (an unmarked member takes the default veil); the chair tells the owner what old links and maps
+  lose (my Q2). (3) MAP-COST is a finding of this release, in READ-COST's unit (VEIL-52, after COVERT-UNREAD), MEASURE FIRST:
+  the platform's statement timeouts from public docs (dated), per-member cost by step on the 140, an owner count query (public
+  campaign maps, member counts max/median); then VEIL-52 proposes, the chair rules. Relayed to VEIL-52 08:11.
+- VEIL-51 (07:55): terms (a) (b) TAKEN on `lane/veil-51-2026-11-24-v27-wip`: 483d95861 (5-argument _gallery_veil; stored belt
+  before the house gate; three 212 doors pass src.j/base.j; twin by opts.stored; rollback drops both forms), 2376572f3 (term
+  (a)'s walker: reds today only on 211's get_gallery_map; green on unit 3's tip once the member call passes src.j). Next: per-door
+  plants, section 7's revoke in run-4's catalogue; V27 (5) oracle and (6) re-measure running.
 - SLIP (08:10, reported to the chair): a push ran from the main checkout (a broken && chain skipped its cd and the ls-remote
   compare); origin already held the tip; the hook ran `npm run check` to `test:ratchet`; `timeout 300` killed it; nothing left
   running, nothing pushed. CURE: I push ONLY through `v55/push.sh` (cd, ls-remote compare, exit if equal, scan the log).
