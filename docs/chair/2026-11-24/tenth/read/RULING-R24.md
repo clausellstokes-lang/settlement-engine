@@ -323,3 +323,23 @@ client pins). RULED, as CLOSE-7 recommended: BUILD NOTHING MID-STREAM. A stale e
 signing sequence, as the last close did (319d75ac1d on the line's history), and their deploy is the owner's hand. The
 new red rows are named in CLOSE-7's hand-in by job, file and title and join `RED-AT-LINE.tsv` as "bundle freshness" at
 its landing; nothing else joins.
+
+## R24l (added 07:23 UTC on 2026-11-25): C1's NAMES AND THE TWO DRAWS KEYED ON A POWER's NAME: A DRAW KEY, FROZEN
+ASKED by CLOSE-7 (07:21; `close-7/reports/BATCH.md` item 3; confirmed by run): `generators/power/conflicts.js` picks
+each conflict's issue and its plot hook from a hash of the two powers' NAMES, so C1's new names (R24g (2)) draw a
+different conflict and the people's goals and ties follow: 0 of the 39 carriers on V are byte-equal with the names
+mapped back; no other place moves. R24g (2) made this a STOP. RULED: THE ALIAS, as CLOSE-7 recommends, on five terms:
+(a) IT IS A DRAW KEY AND IS NAMED ONE: one function over one frozen table, read by exactly the two hash keys (the
+    hook's `seedKey`, the issue's `key`); never printed, never stored, no vocabulary entry. The rule its comment states:
+    a display name may change; the key a draw was dealt on does not.
+(b) IT FIRES ONLY FOR THE RENAMED FORM. "Council of Aldermen" and "Council of Syndics" are new strings (proven: no other
+    producer). "SENATE": if a clean form already prints it at that size, a string alias would re-deal every clean
+    Senate; there the alias reads a fact the birth already has in hand at that call, with NO NEW STORED FIELD; if none
+    reaches the function, "Senate" is not aliased: its carriers' re-deal is accepted, counted (expected 7 on V), their
+    goldens named, their diff proven confined to the conflict's own downstream fields.
+(c) THE PROOF IS ON ALL 900 OF V AND ALL 900 OF C: byte for byte the old births with the names mapped back, or exactly
+    the accepted Senate carriers differ, confined.
+(d) A test pins the table's exact contents; a later rename comes to the chair.
+(e) The old strings live in that table and its test only.
+WHY NOT THE RE-DEAL FOR ALL 39: it would cost users nothing (new places only; saved places are stored), but it gives up
+the one proof that the cure moves the name and nothing else.

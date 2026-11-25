@@ -1122,3 +1122,9 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   the name was served): CURED BY THE SET's DEFINITION, and the same set for V20 with a plant; (ii) the seat named
   (served; listed with an arm); (iii) an uncut tail on master-born places the census had missed: cure accepted and the
   census's oracle becomes the writer. Sent to VEIL-55 (for VEIL-51).
+- 2026-11-25 07:23 UTC · T87 · R24l: C1's NAMES KEEP THEIR CONFLICTS BY A FROZEN DRAW KEY; THE BATCH's STATE; THE HOURLY MARK.
+  `read/RULING-R24.md` R24l (the alias on five terms; "Senate" guarded against re-dealing a clean Senate; the proof on
+  all 900 of both corpora). CLOSE-7's BATCH (07:21): B1(i) merged with its census doors, its 8 reds re-anchored by
+  their own finders, its table 27 V places moved, both zero checks 0; B1(ii) committed; C1 held for this ruling;
+  P3source and goals I-13 going on. THE MARK (07:19): VEIL-53 619,230 of 1,000,000, working, cost 93.53, record
+  `allowed_warning`. No record reads rejected.
