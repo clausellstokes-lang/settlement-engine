@@ -208,6 +208,11 @@ THE PLAN OF UNIT 4's MERGE M (written 05:1x, BEFORE any resolution; worktree /ho
     power.desc, power.label, power.relation.dmNote, and says both in the header.
   M4 read the auto-merged 212 header and roster-choice hunks whole; renumber R5D's header item (36) -> (38) (VEIL-55); the registry's
     merged rows checked by `node scripts/veil/rosterChoiceRegistry.mjs --check` and `standingForms.mjs --check`.
+  M DONE BY THE PLAN (LOCAL on `lane/veil-51-2026-11-24-r5desc-wip`, /home/user/wt/r5desc; not pushed: "all local until the chair has
+    read the hunk"): 56727861a (the merge: M1, M2, M3's interim), 2944a4db5 (M3: COMPOSED_IDS = [FIRST, 'power.relation.dmNote'],
+    measured; R5D's 23-prose pin dropped; walker 10/10), 89e7d2d2c (M4: R5D's 212 header item (38) after (37), comments only; 212
+    applies and rolls back rc 0 on v27x211; registry and standingForms checks green). The machine restarted at 05:06 (PG16 restarted).
+    RUNNING: `u4/mproof.sh` (the three pglite slices, domain-strict, the TS2345 read; log /var/tmp/v51/out/m/mproof.log).
   PROOF OF M: the three files' slices (galleryWithholdAlways.pglite, rosterChoiceComposedHosts.walker, galleryRosterChoices.pglite and
     galleryVeilDesc.pglite) and the strict typecheck, each through the mutex. Then DESCARM and STANDWALK merged (plain), then PLAN-V15
     item 2 by its own written plan.
