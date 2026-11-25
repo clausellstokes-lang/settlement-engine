@@ -187,6 +187,10 @@ create or replace function public._gallery_apply_member_overrides(
   end;
 $$;
 -- RULING V23's revokes undone: the two ACLs exactly as 001..211 leaves them under the hosted default, entry for entry and in order
+-- RULING V26: by exact signature, what the HOSTED 001..211 held on these two. Why: the hosted platform's default privileges
+-- grant every new function in public to anon, authenticated and service_role by name, and 212's revokes removed those;
+-- unconditional, no read of pg_default_acl. Both are pure (IMMUTABLE): _gallery_apply_member_overrides returns to 211's
+-- body (restated just above); _gallery_sanitize_public_json is not restated by 212, so its 210 body stands untouched.
 revoke execute on function public._gallery_apply_member_overrides(jsonb, jsonb, jsonb, boolean, boolean, boolean) from postgres, service_role;
 grant execute on function public._gallery_apply_member_overrides(jsonb, jsonb, jsonb, boolean, boolean, boolean) to public;
 grant execute on function public._gallery_apply_member_overrides(jsonb, jsonb, jsonb, boolean, boolean, boolean) to postgres;
