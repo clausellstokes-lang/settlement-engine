@@ -5,7 +5,7 @@ THE CHAIR is the tenth chair, session_019yED1SUxGVHyjQnoqoFvQ8. MY START MESSAGE
 session_019yED1SoJ6KH9Wyp2Fera7R. IF YOUR CONTEXT BEGINS WITH A SUMMARY: tell the chair in one line, re-read that file and this
 section before judging anything. Every hour here is read from `date -u`.
 
-## 1. WHERE THE LANE STANDS (my memory; current at this push, 04:37 UTC 2026-11-25)
+## 1. WHERE THE LANE STANDS (my memory; current at this push, 05:06 UTC 2026-11-25)
 
 THE LAW: as VEIL-50's hand-back section 1 "THE LAW" (no pull request; push only `lane/veil-55-2026-11-24*` by the local branch's
 own name, ls-remote first; never --no-verify, force, master; every database local, PGHOST=/var/tmp/rv7; no `supabase` command).
@@ -43,6 +43,11 @@ A SUCCESSOR ON ANOTHER ACCOUNT, THE NEXT COMMAND: in a fresh container, `npm ci`
 - MERGED on the lane's tip `lane/veil-55-2026-11-24-tip`: b58abc48b (PIN-3) -> 8430edf5c (UNIT 2, R4-IDS + R4I-SQL-2; granted
   02:46) -> dbd4cd9e5 (UNIT 1, STORED-PROSE d7764e67a; 212 header (37)). 212 sha256 at the tip 826fb94100741822.
 - GRANTED AND UNMERGED: none.
+- THE OWNER'S SCOPE LINE (the chair 05:04, SCOPE-LINE.md): THIS RELEASE IS THE GENERATOR ALONE (make, configure, read, export,
+  share). PLAN-2 stands; unit 3 stays as HIDING ONLY at the two map doors; SNAP-CHRONICLE's cure OUT (parked); V19 stays; a barred-
+  area finding is ONE LINE to the chair, not worked; at the end a real-browser walk of the journey on the joined tree (the chair's).
+  Relayed to VEIL-51, 52, 53. UNIT 3 BUILDS NOW on dbd4cd9e5 (`lane/veil-52-2026-11-24-doors-wip`); the header number is set at
+  merge: whichever of units 3 and 4 lands first takes (38), the second re-merges.
 - PLAN-2 ACCEPTED (V22, a1cb9710d). THE ALLOWANCE WILL BIND (the chair: about when phase 1's proof is taken): each merge leaves the
   tip whole and proven on its own.
 - EACH SEAT HOLDS: VEIL-51: unit 4 (R5-DESC cut-alone, V15) to cut at dbd4cd9e5: aa54a6791 + DESCARM 0ff0773c7 (-descarm-wip) +
