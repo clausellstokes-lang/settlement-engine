@@ -35,7 +35,7 @@ NAMED FOR THE OWNER (nothing re-recorded):
 - For the veil's lane: these re-worded joiners write a power's description or standing: governanceAccount's four standing sentences,
   seatHolderLines standing/standingVacant, and factionDynamics's ordained narrative.
 
-E8b HANDED IN 18:3x UTC: `lane/words-1-2026-11-25-e8b-wip` e75f090b7, cut ON TOP OF `-e8-wip` 94b7a13d9 (G28; re-uses
+E8b HANDED IN 18:21 UTC: `lane/words-1-2026-11-25-e8b-wip` e75f090b7, cut ON TOP OF `-e8-wip` 94b7a13d9 (G28; re-uses
 `reflexiveOf`). E8 is merged BEFORE E8b; E8b's diff is read against 94b7a13d9 (it merges onto E1 as E8 does: personMention.js
 keeps both blocks; goals.js's import line gains heldCardLine). Proof: reports/e8b-proof-C.txt, -V.txt, e8b-successor.txt.
 THE DESIGN IT BUILT — E8b, the card lines (tells, impressions, secrets, goal.long; C 1786 bound strings at the measure), WANTED BEFORE THE
@@ -204,7 +204,7 @@ STATE AT 16:47 UTC: CHAIR G29 (plan not vetoed; proof adds (1) the ROUND TRIP: h
   tests/lint/boundCardLinesReaders.walker.test.js (readers of the row tables: HELD 4 through the helper, BEFORE_THE_PASS 3 with
   reasons, the successor, a planted control); boundCardLines.test.js gains the regen case; manifest rationale for both tests.
   Tools: tools/e8b-roundtrip.mjs (G29 (1) over the battery strings), tools/e8b-successor.mjs (G29 (2), made records, both trees).
-STATE AT 18:35 UTC: UNIT E8b e75f090b7 HANDED IN to the chair (only). Moved C 1157 in 501 / V 1126 in 500 (= the measure);
+STATE AT 18:22 UTC: UNIT E8b e75f090b7 HANDED IN to the chair (only). Moved C 1157 in 501 / V 1126 in 500 (= the measure);
   round trip 0/0; beyond the reflexive 0; other record strings 0; battery rows 0; unexplained 0; successor 6 built, 0 differing;
   regen keeper untouched; walker green; lint = base four; typechecks OK. Fault owned to the chair: one `npx tsc` run outside
   the mutex. All four of my units are handed in; the seat waits on the chair.
