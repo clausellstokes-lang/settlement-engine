@@ -275,6 +275,13 @@
 --       prominentRelationship and pressureSentence, the source being the narration or frozen copy it serves) and the
 --       link's veil (an unmarked member takes the default veil). Share-level Reveal DM never applies to it; no
 --       fallback to an unveiled projection. No function added, removed or re-signed.
+--   (40) NO RELATIONSHIPS KEY IS AN UNREAD TOWN (COVERT-UNREAD, VEIL-52; the chair's RULING V28 (1), Q1, FAIL CLOSED):
+--       _gallery_apply_member_overrides judged (24)'s covert copy and the sentence that tells it against the full town's
+--       own relationships[]; a full town that carries prominentRelationship or pressureSentence and NO relationships key
+--       gave it no tie to read, so on a public read (share-level Reveal DM off; the party link and the map member always)
+--       both were served. Where the ties cannot be checked the read now fails closed: such a town is `unread`, and both
+--       go (the existing `closed` path). Nothing else changes; twin: gallerySecondHomes.js :: withholdCovertCopies.
+--       No function added, removed or re-signed.
 --   (10) A PERSON HIDDEN BY THE PER-PERSON SWITCH IS NOT SENT IN A ROSTER COPY EITHER (COHERENCE-VEIL-6; the fifth
 --       review's V5-4, ruled by the chair): _gallery_apply_member_overrides now reduces each roster copy
 --       (factions[].members[], powerStructure.factions[].members[]) of a person the share does not reveal to the
@@ -3199,11 +3206,13 @@ create or replace function public._gallery_apply_member_overrides(
   -- THE FULL TOWN IN ONE SPELLING: its own copy, its own sentence, its own ties. `pub`: a read the sanitiser projected
   -- (Reveal DM off; the party link always); `dropped`: on such a read, every tie of the full town the sanitiser removes by
   -- its own condition (an object of relationships[] whose `covert` is JSON true); `unread`: the full town or its ties
-  -- cannot be read
+  -- cannot be read, or (V28 (1), FAIL CLOSED) the full town carries the copy or the sentence and NO relationships key, so
+  -- the ties they might tell cannot be checked
   cross join lateral (
     select not coalesce(settlement_share_dm, false) as pub,
            jsonb_typeof(dm_full) is distinct from 'object'
-             or (dm_full ? 'relationships' and jsonb_typeof(dm_full -> 'relationships') is distinct from 'array') as unread,
+             or (dm_full ? 'relationships' and jsonb_typeof(dm_full -> 'relationships') is distinct from 'array')
+             or (jsonb_typeof(dm_full) = 'object' and not (dm_full ? 'relationships') and (dm_full ? 'prominentRelationship' or dm_full ? 'pressureSentence')) as unread,
            coalesce((select jsonb_agg(t) from jsonb_array_elements(case when jsonb_typeof(dm_full -> 'relationships') = 'array' then dm_full -> 'relationships' else '[]' end) t
                       where jsonb_typeof(t) = 'object' and (t -> 'covert') = 'true'::jsonb), '[]') as dropped,
            dm_full -> 'prominentRelationship' as pr,

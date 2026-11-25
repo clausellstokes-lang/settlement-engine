@@ -1180,8 +1180,9 @@ function withholdTiesOfTheSwept(s, hit) {
  *   pressureSentence, where the stored sentence names both ends of a dropped tie, each end found as written, or holds
  *     the words (embedsAny) of that tie's description or tension or, where the copy goes with it, the copy's stored
  *     wording (its full and tension);
- *   both, WHERE UNSURE: the stored town is not a record, its relationships[] is there and not an array, or a dropped
- *     tie's two ends do not both carry a name.
+ *   both, WHERE UNSURE: the stored town is not a record, its relationships[] is there and not an array, a dropped
+ *     tie's two ends do not both carry a name, or (V28 (1), FAIL CLOSED) it carries prominentRelationship or
+ *     pressureSentence and has NO relationships key (the ties they might tell cannot be checked).
  * Reveal DM keeps the tie in the projection, so it keeps the four strings. A projection that is not a record is returned
  * as it is (the public projection of any such value is already {}). The projection is not changed: a copy comes back
  * without the keys that go. SQL twin, rule for rule: migration 212 :: _gallery_apply_member_overrides (the CASE around
@@ -1193,7 +1194,9 @@ function withholdTiesOfTheSwept(s, hit) {
  */
 export function withholdCovertCopies(pub, full, shareDm) {
   if (!isRec(pub) || shareDm) return pub;
-  const unread = !isRec(full) || (Object.prototype.hasOwnProperty.call(full, 'relationships') && !Array.isArray(full.relationships));
+  const unread = !isRec(full) || (Object.prototype.hasOwnProperty.call(full, 'relationships') && !Array.isArray(full.relationships))
+    || (isRec(full) && !Object.prototype.hasOwnProperty.call(full, 'relationships')
+      && (Object.prototype.hasOwnProperty.call(full, 'prominentRelationship') || Object.prototype.hasOwnProperty.call(full, 'pressureSentence')));
   /** @type {Rec[]} */
   const dropped = isRec(full) && Array.isArray(full.relationships)
     ? full.relationships.filter(/** @returns {t is Rec} */ (t) => isRec(t) && t.covert === true) : [];
