@@ -243,7 +243,10 @@ describe('force_unpaid_or_cut holds on its served arms alone (CAUSES-PARITY B)',
     // of the census plan's 720 the lowest r2r-city reborn with payCut and a crime wave is city-57 (alone of 0..59), and no
     // metropolis of the plan is, so the wartime fault's row takes the plan's other such city, r2s-recently_betrayed-city-1
     // (A JUDGEMENT, AT ANOTHER SIZE; the plan's r2s and r2r-metropolis births hold two: it and r2s-religious_conversion-city-0)
-    const WANT = ['r2r-city-57', 'r2s-religious_conversion-city-0', 'r2s-recently_betrayed-city-1'];
+    // RE-ANCHORED AT POINT 116 (the trouble law lit, 2026-11-25; LAND-116, the chair's ruling B): r2r-city-57 lit holds no crime wave, and no
+    // r2r-city of the plan's 0..59 holds payCut and one; the plan's lowest r2r town that does, the next size down, is
+    // r2r-town-15 (A JUDGEMENT, AT ANOTHER SIZE; lit, the plan holds it, hamlet-17, village-23, town-19, town-22 and the two r2s cities).
+    const WANT = ['r2r-town-15', 'r2s-religious_conversion-city-0', 'r2s-recently_betrayed-city-1'];
     /** @type {Array<[string, any]>} */ let faults = [];
     beforeAll(async () => {
       const { generateSettlementPipeline } = await import('../../../src/generators/generateSettlementPipeline.js');

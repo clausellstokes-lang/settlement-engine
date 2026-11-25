@@ -46,8 +46,11 @@ const crimeWave = (/** @type {any} */ t) => (t.history?.currentTensions || []).s
 
 /** @type {Array<{ row: string, seed: string, read: (t: any) => string[], not: string, instead: string }>} */
 const NOT = [
-  { row: 'C17459', seed: 'r2r-village-7', read: said('safetyDesc'), not: first(WELL[0]), instead: first(WELL[1]) },
-  { row: 'C17459', seed: 'r2r-city-21', read: said('safetyDesc'), not: first(WELL[0]), instead: first(WELL[1]) },
+  // RE-ANCHORED AT POINT 116 (the trouble law lit, 2026-11-25; LAND-116, the chair's ruling B): r2r-village-7 and r2r-city-21 lit hold no
+  // crime wave. Of the census's 720 lit, the towns with a crime wave whose safety line prints the twin are r2r-city-54 and
+  // r2r-metropolis-32, -37, -57, and no village: the village's row takes r2r-metropolis-32 (A JUDGEMENT, AT ANOTHER SIZE).
+  { row: 'C17459', seed: 'r2r-metropolis-32', read: said('safetyDesc'), not: first(WELL[0]), instead: first(WELL[1]) },
+  { row: 'C17459', seed: 'r2r-city-54', read: said('safetyDesc'), not: first(WELL[0]), instead: first(WELL[1]) },
   { row: 'C22802', seed: 'r2r-village-10', read: said('economicDragDesc'), not: sentences(HARM[0])[1], instead: first(HARM[1]) },
   { row: 'C22802', seed: 'r2r-town-18', read: said('economicDragDesc'), not: sentences(HARM[0])[1], instead: first(HARM[1]) },
   { row: 'C31257', seed: 'r2r-thorp-1', read: said('safetyDesc'), not: OCCUPIED[0], instead: OCCUPIED[1] },

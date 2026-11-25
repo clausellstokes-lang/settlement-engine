@@ -53,7 +53,9 @@ const UNANCHORED = [
   ['r2r-thorp-20', 'tyranny'], ['r2s-succession_void-metropolis-2', 'tyranny'],
   ['r2s-occupied-thorp-0', 'wild_magic'], ['r2s-under_siege-city-1', 'wild_magic'],
   ['r2r-thorp-26', 'trade_collapse'], ['r2s-slave_revolt-metropolis-0', 'trade_collapse'],
-  ['r2r-town-16', 'market_crash'], ['r2s-infiltrated-city-2', 'market_crash'],
+  // RE-ANCHORED AT POINT 116 (the trouble law lit, 2026-11-25; LAND-116, the chair's ruling B): r2r-town-16 lit holds no market_crash;
+  // the smallest census town (by size, then population) holding it unanchored, lit, is r2r-town-39. The largest is kept.
+  ['r2r-town-39', 'market_crash'], ['r2s-infiltrated-city-2', 'market_crash'],
   ['r2s-occupied-thorp-2', 'heresy_trial'], ['r2s-religious_conversion-city-2', 'heresy_trial'],
   ['r2r-hamlet-6', 'pilgrimage_surge'], ['r2s-monster_pressure-metropolis-1', 'pilgrimage_surge'],
 ];

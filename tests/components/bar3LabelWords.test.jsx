@@ -89,9 +89,15 @@ const FOUNDATIONS = [
   ['r2s-under_siege-hamlet-0', 'Healing capacityAdequate', 'Healing capacityStrained'],
   ['r2r-city-1', 'Law & orderSurplus', 'Law & orderStrained'],
   ['r2r-town-15', 'Law & orderAdequate', 'Law & orderStrained'],
-  ['r2s-occupied-city-1', 'Law & orderAdequate', 'Law & orderStrained'],
+  // RE-ANCHORED AT POINT 116 (the trouble law lit, 2026-11-25; LAND-116, the chair's ruling B): r2s-occupied-city-1 lit holds no crime wave and
+  // no r2s-occupied city does; the first r2s city of the census's order with a crime wave whose row bands Adequate without
+  // it (the crime wave set aside in scratch) is r2s-indebted-city-2.
+  ['r2s-indebted-city-2', 'Law & orderAdequate', 'Law & orderStrained'],
   ['r2r-thorp-1', 'Criminal opportunityContained', 'Criminal opportunityElevated'],
-  ['r2r-metropolis-1', 'Criminal opportunityContained', 'Criminal opportunityElevated'],
+  // RE-ANCHORED AT POINT 116 (the trouble law lit, 2026-11-25; LAND-116, the chair's ruling B): r2r-metropolis-1 lit holds no crime wave and no
+  // r2r metropolis of the census bands Contained without its crime wave; the first metropolis of the census's order that
+  // does is r2s-politically_fractured-metropolis-0 (A JUDGEMENT: the other arm, the same size).
+  ['r2s-politically_fractured-metropolis-0', 'Criminal opportunityContained', 'Criminal opportunityElevated'],
   ['r2s-wartime-city-0', 'Labor capacityAdequate', 'Labor capacityStrained'],
   ['r2s-wartime-metropolis-1', 'Labor capacityAdequate', 'Labor capacityStrained'],
 ];
