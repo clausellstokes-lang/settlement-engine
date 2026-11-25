@@ -277,3 +277,10 @@ an independent oracle (raw `config.monsterThreat`, the printed grade): 0 on C an
 reads the band except through the leaf. Expected move: C 0, V about 175 pages (129 + 46 settled towns graded low with
 no line), record hashes 0; a stop at V over 200 or any birth moved. Unit `-p9-wip`; BIRTH-2's last unit, its 620,000
 mark lifted for it. NAMED FOR THE OWNER'S VETO.
+
+**G23 (15:41 UTC): C6 (B), THE SAMENESS TABLE, RECEIVED; ITS OWN LANE.** Written whole in `PRERELEASE-LIST.md` as E13
+"SAMENESS-LIT" (C 97 and V 103 distinct wording slots over the owner's bar). BIRTH-2 saves its lists on its branch,
+runs the door once as the gate runs it (its own plan: its `--check` on plan C read the register against the wrong
+plan: 516 unregistered, 16 rises, 76 watch, 773 stale, 53 loose is NOT the door's reading) and reports five counts;
+it builds nothing for sameness. P9 is built (`lane/birth-2-2026-11-25-p9-wip` f1990cc84), proofs running; the "46
+settled towns" of G22 are 46 settled PLACES (44 towns, 1 hamlet, 1 village).

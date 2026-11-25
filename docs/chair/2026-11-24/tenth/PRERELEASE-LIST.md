@@ -113,3 +113,18 @@ birth-moving items (D, E1, E8), wording (E), the share page's quality (A3, A8, A
 **THE END, TWO ADDITIONS (2026-11-25):** (1) every edge bundle rebuilt once (`npm run build:edge-shared`, one build window) before the signings; their deploy is the owner's (R24k 4a). (2) ONE READ-ONLY QUERY FOR THE OWNER BEFORE 212 IS APPLIED: the access lists of `_gallery_apply_member_overrides` and `_gallery_sanitize_public_json` on the live database, against the expected answer (V26); a difference corrects the down file first.
 
 **THE END, A THIRD ADDITION (2026-11-25, R24n):** the release's signing step adds the row ('0.10.0', the signed golden manifest's digest) to the generator-version release list, or the lint arm of R24j 6 will not bite at the release after this one.
+
+## ADDED 15:41 UTC ON 2026-11-25: E13 "SAMENESS-LIT" (its own lane; nothing built yet)
+BIRTH-2's measure (C6 (B)) of the sameness door's count on the two 900-birth sets, laws on, at 0ec96f13d8, against the
+owner's bar (a one-a-place slot's top sentence over 15% of its places; a many-a-place slot over 30%): DISTINCT WORDING
+SLOTS OVER THE BAR: C 97, V 103 (by size, of the slots counted: thorp 52/156 and 49/172; hamlet 47/171 and 46/201;
+village 48/168 and 47/181; town 50/184 and 42/194; city 65/184 and 45/198; metropolis 71/179 and 54/194). THE WORST,
+both sets: the NPC secret "Neither has acknowledged the other was there" (towns 87 to 88%); "Defenders cannot control
+entry points..." (small places 74 to 79%); the reason line "Large enough that its appetites outrun its fields" (cities
+66 to 73%); the session sheet's stores line (33 to 79%). V adds "Magic runs strong here, but a thorp is too small..."
+(small 100%) and "A beleaguered outpost..." (76 to 87%); C adds the layout "An open cluster of farmsteads" (92 to 100%)
+and the pressure line "debating market levies for three months" (towns and up 100%). The grazing quarrel (C thorp 61%,
+hamlet 39%) is E3's, built. CAUTION ON THE READING: C and V each fix parts of the configuration, so a slot that hangs
+on a fixed part reads near 100% by the set's making; the lane's first step is to split those from true pools of one.
+The door's own check against its register (its own plan) is being run once by BIRTH-2: five counts owed (G23).
+The full lists: `gen/birth-2/same/` on `lane/birth-2-2026-11-25` once committed.
