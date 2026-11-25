@@ -74,8 +74,18 @@ Reports to the lane's owner: a FILE, at most 200 words. My context began with a 
   (2) THE BUILDER DESCARM, dispatched 00:10 by the committed brief `v51/u4/DESCARM-BRIEF.md` (f33728d6a): ONE new arm
   `tests/security/galleryVeilDescNames.pglite.test.js` on `lane/veil-51-2026-11-24-descarm-wip` (worktree /home/user/wt/descarm, cut
   at d7764e67a), red by design; it commits locally; I read its diff once and push.
-  RUNNING (background, serialized by the gate mutex): u4.sh (wdplant, wdtoday, wdmaster; log /var/tmp/v51/out/u4/u4.log);
-  rival.sh (arms, after, cost); the builder's runs.
+  wd-plant rc 0 at 00:11 (CONFIRMED; `/var/tmp/v51/out/u4/wd-plant/wd-table.txt`, shard jsons): 16,800 reads, 11,310 hiding on 95
+    places; ONE path, `powerStructure.factions[].desc`: the 2 natural places (r3m-town-none-0-17, r3m-city-none-1-117) 240 reads
+    (20 per engine, door and Reveal: server gallery, link, import, map; twin gallery, link; off and DM) = VEIL-50's 160 server
+    + 80 twin; THE PLANT BITES on 2 of 4 planted seeds (r3m-city-indebted-0-46, r3m-city-none-1-107: 120 reads each, every cell);
+    the other two (-insurgency-1-104, -infiltrated-0-42) are not hit: PLAUSIBLY no read of theirs withholds their Thieves'
+    Guild (not checked). MAP OTHER 80 (wd-an lists them; exit 3 by design).
+  TWO INCIDENTS (00:11-00:27), RECORDED: (i) wd-an exits 3 on "MAP OTHER", the mutex's give-up code: my u4.sh retry re-ran the
+    finished plant step and held the lock 00:11-00:24 until the job's time limit killed it (its shards never wrote; the first
+    run's files stand by their times). Fixed: one mutex call, no retry. (ii) the same time limit stopped rival.sh while its first
+    arm WAITED (its mutex call gave up at 40 polls; no arm ran): relaunched `rival.sh arms after cost`, poll budget 1,000,000.
+  RUNNING (background, 2-hour limits, serialized by the gate mutex): `u4.sh wdtoday wdmaster`; `rival.sh arms after cost`;
+    the builder's red run (it holds the lock at 00:25).
   IF THIS SEAT STOPS: re-run what u4.log lacks (`sh docs/chair/2026-11-24/tenth/veil/v51/u4/u4.sh <steps>`; `sh .../rival.sh`)
   after the trees above are re-made (`git worktree add --detach` at the commits named; node_modules linked).
 - NEXT: wait for "R4-IDS MERGED <commit>" from VEIL-55, then unit 2 (R5-DESC), reading PART 42 s1 block 0 (a3bc0dc9d) and
@@ -104,5 +114,6 @@ N99. ppkey on the full pool is NOT re-run (0 of 46,752 per door at ced3b1de7) un
 
 ## 3. Log (every hour from `date -u`)
 - 21:24 seated, read in. 21:25 line (0) to VEIL-50. 21:26 make-instruments started (rc 0 21:34). 21:33 p1 started.
+- 00:10 THE LINE IS 0559a8405 (point 115, the troubles rule landed DARK: no birth or page moves; pools and proofs stand).
 - 22:49 the chair's allowance warning: push at every result. 23:19 p1 ended. 23:21 tipbuild. 23:25 TIP? sent.
 - 22:40 context summarized; owner change read (VEIL-55); line to VEIL-55. 22:42 the four measures read.

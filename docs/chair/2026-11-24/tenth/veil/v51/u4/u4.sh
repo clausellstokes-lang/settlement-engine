@@ -10,7 +10,9 @@ I43=/home/user/wt/i43/docs/chair/2026-11-20/veil/out; W=/home/user/wt/u4m; O=/va
 P=$(cd "$(dirname "$0")" && pwd)
 export PGHOST=/var/tmp/rv7 PGUSER=postgres
 E="env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_COMMON_DIR -u GIT_OBJECT_DIRECTORY -u GIT_PREFIX -u GIT_NAMESPACE"
-mx() { while :; do (cd /home/user/settlement-engine && $E GATE_MUTEX_MAX_POLLS=100000 sh scripts/gate-mutex.sh --run -- "$@"); r=$?; [ $r = 3 ] || return $r; echo "  gave up, again $(date -u +%H:%M:%S)" >> $L; done; }
+# mx: ONE mutex call, NO retry: wd-an.mjs exits 3 when it lists unmapped hits ("MAP OTHER"), the same code as the mutex's give-up;
+#   the first form's retry re-ran the finished plant step (00:11, fixed 00:27 UTC). The poll budget is large enough not to give up.
+mx() { (cd /home/user/settlement-engine && $E GATE_MUTEX_MAX_POLLS=1000000 sh scripts/gate-mutex.sh --run -- "$@"); }
 st() { echo "$1 rc=$2 $(date -u +%H:%M:%S)" >> $L; }
 step_plant() { rm -rf $O/stored-plant; node $P/plant.mjs /var/tmp/v51/out/p1/stored-today $O/stored-plant > $O/plant.txt 2>&1; st plant $?; }
 step_wdplant() { mx sh $I43/v43/meas/wd.sh $W $O/wd-plant v51_c2 stored $O/stored-plant > $O/wd-plant.txt 2>&1; st wd-plant $?; }
