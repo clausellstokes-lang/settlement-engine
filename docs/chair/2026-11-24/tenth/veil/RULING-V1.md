@@ -400,3 +400,28 @@ present one; (b) the owner's read unchanged and asserted; (c) red first by the t
 registered with its reason; (e) the count of places in both pools that reach it stated (expected 0: a birth leaves one
 taker; it arises in play). Serving the last taker (a new served fact) is not done in phase 1; the put-back weighs it
 under R3. V3's fifth cure is changed by this ruling from "cured" to "fail closed".
+
+## RULING V17 (added 01:20 UTC on 2026-11-25): UNIT 2 (R4-IDS): THE CHAIR'S WHOLE READ OF ITS 212 HUNK: CLEAR
+Offered by VEIL-55 ahead of its proofs' end, so the grant does not wait on the read. READ WHOLE: `git diff b58abc48b
+8430edf5c` of `supabase/migrations/212_share_veil_later_cures.sql` (+283; sha256 fad4b9b998f80722) and
+`supabase/rollback/212_share_veil_later_cures.down.sql` (+14; b13c5be88c6f91cb): 459 diff lines.
+WHAT THE UNIT DOES: every person id re-keyed per read: `_gallery_veil` (restated VOLATILE) draws ONE salt a call
+(`gen_random_uuid()`, never returned) and, on every body it returns (veiled and unmarked), after the roster choices and
+before withhold-always, re-keys every person card's id and every reference at a fixed path as `npc_` and 16 hex of
+sha256(salt '|' id); the served marker's person keys follow by the card; seven helpers, revoked by name; the three reads
+STABLE to VOLATILE; (36c) two null-blind guards made `is distinct from 'number'`.
+WHAT THE CHAIR CHECKED: (a) NO PATH IS RE-KEYED TWICE (it matters: `_rekey_ref` re-keys any string spelled `npc_`, so a
+second pass would break a reference): the cards' four paths once; a card's own ties once, each tie's id by `_rekey_id`
+directly; the top-level ties; the cast's roles and levers; the trace's targets; each roster copy's members by the same
+`card` list; `ids` is taken from the body before any pass, so one id has one key throughout a document. (b) Both branches
+of `_gallery_veil` keep the order. (c) THE MARKER CANNOT CARRY A STORED ID: 211's `_gallery_veil_served` is an allowlist
+(two booleans a person; `$veil` with v, mode, at, groupings; no delta); groupings are tab and block addresses only
+(211, line 788); `_rekey_served` keeps only the keys of cards the body serves, so a withheld person's entry leaves.
+(d) (36c) is right: `jsonb_typeof` of an absent key is NULL and `<>` let it through. (e) The six "id as text" sites
+compare both sides through `_gallery_veil_id_text` (JavaScript's spelling: 1.0 equals 1, as the twin). (f) STABLE to
+VOLATILE: no caller in `src` makes a GET-style rpc; no other SQL of 212 calls the three reads. (g) The rollback restores
+211's statements and drops the seven, callers first. NO FAULT FOUND.
+ONE THING OWED IN THE "TIP? R4-IDS" LINE: the name of the COMMITTED test that keeps "no stored person id at any path of
+a served document" standing on both pools: the fixed-path list is closed, and a new engine field that holds a person's
+id must turn something red. THE GRANT THEN WAITS ONLY ON THE PROOFS' END (m140, the stored arm, the pool, both gates,
+`tests/security` whole, the named files): the chair answers the table in one word.

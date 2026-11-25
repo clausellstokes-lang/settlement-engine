@@ -911,3 +911,8 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   0559a8405 and pushes only `lane/stack-116-wip-2026-11-25`. CLOSE-7 was sent R24j before the push that carried it had
   ended and rightly waited; it has it now (origin at c3ec2036da, then e29f3b7e66). THE OWNER's 32 per cent passed to
   CLOSE-7 and VEIL-55 with the chair's 17-to-22-hour guess.
+- 2026-11-25 01:20 UTC · T68 · UNIT 2's 212 HUNK READ WHOLE BY THE CHAIR: CLEAR (RULING V17), AHEAD OF ITS PROOFS' END.
+  459 diff lines (212 +283, the rollback +14): the per-read re-key of every person id. No path re-keyed twice; the
+  marker's allowlist and the groupings carry no person id; the two null-blind guards are right; nothing calls the three
+  reads in a way VOLATILE breaks. One thing owed in VEIL-55's "TIP? R4-IDS": the committed test that keeps "no stored
+  person id at any path" standing. The grant is then one word on its table.
