@@ -392,6 +392,22 @@ THE PLAN OF UNIT 4's MERGE M (written 05:1x, BEFORE any resolution; worktree /ho
     LOSES NOTHING (`u5/losesnothing.mjs`, `u5/ln-*.txt`): 0 of 422 today-born and 0 of 416 master-born nothing-hidden reads
     differ (the twin). 212 apply/down/reapply rc 0 (the rollback drops _gallery_veil_person_named and both new forms).
     LISTED for phase 2: a tie's description prose names the role in brackets.
+  RULING V28 (relayed 08:12): UNIT 3 NOT GRANTED; units 4+5 go on, on dbd4cd9e5; if our TIP lands first it takes (38) and unit
+    3 re-merges after; the doors walker's red on 211's get_gallery_map stands and is LISTED in the TIP. VEIL-55 CORRECTED TERM (b)
+    (V28 (1)'s principle: the check never asks a projection what was withheld): the stored argument is the LIVE row's document
+    with the source served (in snapshot mode src.j is the frozen copy, possibly stored projected); ADD the snapshot plant; say
+    how the twin gets the live row on a snapshot read (it cannot: LISTED, the server is the floor).
+  BUILT (LOCAL on r5desc, CONFIRMED): 91605fd9c V27 (5) the writer oracle (red first on the pre-N2b table: master
+    LEFTOVER_BY_ORACLE 3; now 0 of 754 today, 0 of 765 master, master's writer from /home/user/wt/master; `u4/oracle-*.txt`);
+    8697f4eff unit 5 U2 (212's person rule, _gallery_veil_person_named) + U3 (three registry rows, markers, registry.json) +
+    TERM (b) (`stored` one document or an array, _gallery_veil_stored_docs / storedDocs; gallery and import pass
+    jsonb_build_array(base.j, src.j), link base.j). SNAPSHOT PLANT PROBED in both engines: the copy alone SERVES the desc
+    (the hole), [live, copy] WITHHOLDS it. Walkers: 13 passed, 1 red by design (211's map door).
+  r5desc NOW: dbd4cd9e5 .. 8697f4eff (merge M, DESCARM, STANDWALK, N1, N2, N2b, N3, item 5, V27 (1), term (a), U1, V27 (5),
+    U2/U3/term (b)). NEXT: N4's hand-back merged; then ONE ARMS BRIEF (a builder): V25's three standing arms re-run under V27,
+    class (ii)'s arm, the per-door plants (gallery, link, import; the map once unit 3 is in; the twin) incl. the snapshot plant,
+    unit 5's seven path plants and the V27 (2) plant as committed arms, V20 (c)/(d) (loses nothing asserted, the tell counted),
+    the run-4 catalogue (the rollback drops; section 7 revokes the new forms); then the slices, wd on both pools, the joint TIP.
   THE PLAN OF UNIT 5, U (V20; written before any edit; built on lane/veil-51-2026-11-24-r5desc-wip after unit 4's last commit, riding
     with it by the efficiency rule; red first on a slice; its 212 hunk goes to the chair with unit 4's in ONE "TIP?"):
     U1 THE TWIN, host `galleryRosterChoices.js :: withholdPowerCopies` (R3's people pass; the namer `withheldPowerNamer` = the lane's
@@ -464,6 +480,7 @@ RULING V1 (the tenth chair, 21:20 UTC 2026-11-24) whole. N90 (the whole-document
 N99. ppkey on the full pool is NOT re-run (0 of 46,752 per door at ced3b1de7) unless the tree's 212 or twin moves.
 
 ## 3. Log (every hour from `date -u`)
+- 08:38 V28 and the corrected term (b) built; V27 (5) oracle green, red first; unit 5 U2/U3 committed (local 8697f4eff).
 - 08:02 unit 5 U1 committed (local 04711aa1b); U2/U3 built and probed in both engines; loses nothing 0/838.
 - 07:55 N5 green; V27 (6): 0 faults with the stored row on both pools; term (a)'s walker (red by design on 211's map door); r5desc at 2376572f3.
 - 07:48 V27 (1) built (local 483d95861; the probes withhold 107 (3) in both engines); (5) and (6) running.
