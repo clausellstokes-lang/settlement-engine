@@ -1286,3 +1286,18 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   569,162, cost 24.86; CLOSE-7 at 11:44: 524,060, cost 494.67; none rejected. The hourly check is armed for 13:00.
   THE SECOND READER HAS NOW FOUND A FAULT ON BOTH CHANGES IT WAS GIVEN (V28; R24n): IT STAYS ON EVERY CHANGE THE CHAIR
   READS FOR A LANDING.
+- 2026-11-25 12:29 UTC · T100 · POINT 117's BEFORE-AND-AFTER (CLOSE-7, `close-7/reports/BEFORE-AFTER.md`); G12, G13; A CHECK FOR THE JOURNEY WALK.
+  THE TABLE (every figure confirmed by run; trees: the line ddca5c789, CURES 0ec96f13d, BATCH 206e6c3ae): NOHEAL C 13,
+  V 26 to 0; FOODSEC C 197, V 168 to 0; FEDFARE C 5, V 3 to 0 (C's fifth, dp-city-81, cured by A2's bound); A2's table
+  equal in every cell; K1 prints on C dp-hamlet-117 and V dp-hamlet-139, K2 nowhere. GUARD: all 1,800 records differ,
+  0 with `generatorVersion` set apart. CURES to BATCH: records moved C 0, V 63 (the 39 C1 carriers and 27 B1(i)
+  deserts, 3 in both); pages moved C 291 (290 are B1(ii)'s traditions), V 226; B1land, B1furrow and P3source 0.
+  FOR THE JOURNEY WALK AT THE END (a real browser): the Overview's "Patron deity" card
+  (`components/settlement/DeityAssignmentPanel.jsx`, which rides the lazy dossier chunk) is absent from a battery
+  worker's FIRST renders (the records are equal: it is rendering, not generation): does a real first dossier paint
+  show the panel late, or not at all?
+  `gen/RULING-G.md`: G12 (the council lines marked `ruling body`), G13 (E3: a fall-through quarrel only where a fact
+  distinguishes the place; grazing only where herding is what the place lives by; the fourth state measured against a
+  bar of .30; the owner may veto: told him at 12:24).
+  IN FLIGHT: LAND-117's gate; CLOSE-7 building GUARD-2 (R24n), then ANCHORS; D8 parked at
+  `lane/birth-1-2026-11-25-d8-wip` cf5d033e5 with ONE red left (the register row: the owner's leave).
