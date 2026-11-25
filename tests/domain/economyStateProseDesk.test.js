@@ -58,6 +58,7 @@ import { DOSSIER_STATE_PROSE_ECONOMY } from '../../src/data/dossierStateProse/ec
 import { AUDIENCE_DM } from '../../src/domain/display/stateProse/stateProseKernel.js';
 import { PROSPERITY_TIERS } from '../../src/data/constants.js';
 import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { economyDeskRead } from '../../src/components/new/economyDeskRead.js';
@@ -1447,12 +1448,13 @@ describe('G6 #6+7: "Little that comes past X stops there" refuses a place that s
     await loadGenerationLawPayloads();
     const C4 = DOSSIER_STATE_PROSE_ECONOMY['DS-ECO-1'].pools['COMBINATION C4: a low rung on a working approach'];
     expect(C4.find((v) => v.vid === 2)?.marks).toContain('no exports');
-    for (const seed of ['dp-city-17', 'dp-hamlet-120', 'dp-town-32']) {
+    const failures = collectSeedFailures(['dp-city-17', 'dp-hamlet-120', 'dp-town-32'], (seed) => {
       const s = generateSettlementPipeline(birthConfig({ settType: seed.split('-')[1] }), null, { seed, customContent: {} });
       expect(atomHolds('exports', factsOf(s)), `${seed}: sends goods out`).toBe(true);
       const header = economyDeskRead(s, { tier: s.tier, ...economicsDeskArgs(s) }).prosperityHeader?.sentence ?? '';
       expect(header.length, `${seed}: the header slot still prints a sentence`).toBeGreaterThan(20);
       expect(header, seed).not.toMatch(/Little that comes past .* stops there/); // anchored: the header is proved a printed sentence on the line above
-    }
+    });
+    expectNoSeedFailures(failures, 'C4 v2 is not drawn where the place sends goods out');
   }, 120_000);
 });
