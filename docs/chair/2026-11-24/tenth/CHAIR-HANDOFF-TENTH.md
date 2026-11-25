@@ -1185,3 +1185,12 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   E12, E10, E11, E7). Base: `lane/close-7-2026-11-24-cures` 0ec96f13d8. Each unit is handed to CLOSE-7, which merges
   them into one hand-in. CLOSE-7 FIRST HANDS IN WHAT IT HAS (the guard, A1, A2, the mirror, B1, C1 under R24m,
   P3source) so that the guard reaches the line; goals I-13 and C6 go into the second hand-in.
+- 2026-11-25 08:59 UTC · T93 · THE FOUR SEATS ARE SEATED (08:58 UTC); THE SIX NOW: CLOSE-7 AND FOUR, THE VEIL LANE PAUSING.
+  BIRTH-1 session_019yED1Sd4gJ4S1mkMpZPcFv (`lane/birth-1-2026-11-25`); BIRTH-2 session_019yED1QXSHeSLQce1gz2nTM
+  (`lane/birth-2-2026-11-25`); WORDS-1 session_019yED1NrhMzQiyCrSRXBVAs (`lane/words-1-2026-11-25`); WORDS-2
+  session_019yED1NcJBheUxDH3eUWLFc (`lane/words-2-2026-11-25`). All `claude-opus-5-5` at high effort, source
+  `lane/close-7-2026-11-24-cures` (depth 300). First messages due about 09:30. CLOSE-7 was told its two hand-ins at
+  08:55. The chair's hourly check is re-armed for 10:00 with the new rotation.
+  A SUCCESSOR READS: these four are builders in the close's lane; CLOSE-7 merges; the chair rules their design
+  questions (A5's shape is ruled BEFORE it is built: it is a stored shape); the veil's seats are idle, not gone: the
+  share pages resume from `veil/v55/PAUSE-2026-11-25.md` and V25 to V29.
