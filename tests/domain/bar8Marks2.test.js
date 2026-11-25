@@ -161,10 +161,17 @@ describe('(3) · J\'s 11a.atWork: the alchemist\'s shop is short of the herbs th
 });
 
 describe('(6) · K\'s 12f: the Magic tab names no supplier the page marks stopped', () => {
-  test('the besieged towns whose one supplier is stopped name none, and still print the reliance (the three views); a supplier at work is named', () => {
-    expectNoSeedFailures(collectSeedFailures(['r2s-under_siege-thorp-1', 'r2s-under_siege-thorp-2', 'r2s-under_siege-hamlet-2', 'bar0-hamlet-under_siege-rand-47'], (seed) => {
-      expect(alike(town(seed), (r) => deriveMagicSupplyView(r)), seed).toEqual({ supply: null, statable: true });
+  // RE-STATED BY ITS CAUSE (CLOSE-7 BATCH item 4; the chair's RULING-R24 R24g (1), P3SOURCE): the stopped supplier IS named, with
+  // the page's own stop beside it: "supplied by Access to a house of worship · Stopped by the siege." (the source `magicSourceOf`
+  // names, "Access to parish church", through the display seam its card is labelled by; the stop in `crisisStoppedRow.js ::
+  // rowMarkText`'s words), so the line neither hides the source nor says it supplies now.
+  test('the besieged towns whose one supplier is stopped name it with its stop, and still print the reliance (the three views); a supplier at work is named', () => {
+    expectNoSeedFailures(collectSeedFailures(['r2s-under_siege-thorp-1', 'r2s-under_siege-thorp-2', 'r2s-under_siege-hamlet-2'], (seed) => {
+      expect(alike(town(seed), (r) => deriveMagicSupplyView(r)), seed).toEqual({ supply: 'Access to a house of worship · Stopped by the siege.', statable: true });
     }), 'the stopped suppliers');
+    expectNoSeedFailures(collectSeedFailures(['bar0-hamlet-under_siege-rand-47'], (seed) => {
+      expect(String(alike(town(seed), (r) => deriveMagicSupplyView(r))?.supply), seed).toMatch(/^[^·]+ · Stopped by the siege\.$/);
+    }), 'a stopped supplier named with its stop');
     const at = alike(town('bar0-city-under_siege+famine-rand-46'), (r) => deriveMagicSupplyView(r));
     expect(at?.supply, 'a supplier at work').toContain("Mages' guild");
   }, 600_000);

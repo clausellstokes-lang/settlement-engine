@@ -764,7 +764,7 @@ export function deriveMagicSupplyView(settlement) {
   // house it marks stopped is not named. Where every house is so marked the reliance (the food ledger's) still prints, with
   // no supplier named: the record holds one, the crisis has stopped it.
   const houses = supplying.filter((name) => !stoppedOnPage(settlement, name));
-  if (supplying.length && !houses.length && !people.length) return { supply: null, statable: true };
+  if (supplying.length && !houses.length && !people.length) return { supply: stoppedSupplyOf(settlement, supplying), statable: true }; // R24g (1) (CLOSE-7 BATCH): named, with the page's own stop (`stoppedSupplyOf`, at the foot)
   const parts = houses.map(proseHouseName).filter((n, i, all) => n && all.findIndex((p) => p.toLowerCase() === n.toLowerCase()) === i);
   if (people.length === 1) parts.push(people[0]);
   else if (people.length > 1) parts.push(`${people.length} practitioners`);
@@ -912,3 +912,21 @@ function recordHoldsMagicFood(settlement) {
 }
 /** TAIL-DEFECON-D (#01134): the crises whose own lines say order has broken (a slave revolt, an insurgency): the Outlook's "keeps order" is not said under them. */
 const OPEN_REVOLT = Object.freeze(['slave_revolt', 'insurgency']);
+
+/**
+ * R24g (1) (CLOSE-7 BATCH; the chair's RULING-R24, P3SOURCE): where every supplier is a house the page marks stopped, the
+ * reliance names it WITH that stop: "Access to parish church · Stopped by the siege." The source by `magicSourceOf`'s name
+ * through the display seam (`proseHouseName`), the stop in `crisisStoppedRow.js :: rowMarkText`'s own words, the mark the
+ * house's card prints. Houses under one mark share it; houses under different marks each carry their own. At the foot, so no
+ * cited line moves.
+ * @param {object} settlement @param {readonly string[]} supplying the stopped houses, by roster name
+ * @returns {string}
+ */
+function stoppedSupplyOf(settlement, supplying) {
+  const rows = supplying.map((name) => ({ name: proseHouseName(name), mark: String(rowMarkText(settlement, 'house', { name }) || '') }))
+    .filter((r, i, all) => r.name && all.findIndex((p) => p.name.toLowerCase() === r.name.toLowerCase()) === i);
+  const join = (/** @type {string[]} */ xs) => (xs.length === 1 ? xs[0] : `${xs.slice(0, -1).join(', ')} and ${xs[xs.length - 1]}`);
+  return new Set(rows.map((r) => r.mark)).size === 1
+    ? `${join(rows.map((r) => r.name))} · ${rows[0].mark}`
+    : rows.map((r) => `${r.name} · ${r.mark}`).join(', ');
+}
