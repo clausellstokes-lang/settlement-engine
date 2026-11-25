@@ -1,6 +1,6 @@
 # WORDS-2 HAND-BACK (a seat of the tenth chair; branch `lane/words-2-2026-11-25`)
 
-## 0. WHERE THE LANE STANDS: THE WHOLE MEMORY (written 16:45, updated 16:55 UTC 2026-11-25; kept current at every push)
+## 0. WHERE THE LANE STANDS: THE WHOLE MEMORY (written 16:45, updated 18:05 UTC 2026-11-25; kept current at every push)
 A successor reads `docs/chair/2026-11-24/tenth/prompts/START-WORDS-2.txt` and `START-GEN-COMMON.txt` (on
 `lane/chair-2026-11-08`) whole, then this section, and needs nothing else.
 
@@ -85,5 +85,23 @@ Prosperity word above it. The page census walk keeps each line once per panel (`
 :111-112), so the repeat never reaches the views; the page's StatusTag (OverviewTab.jsx:118-129, :407) prints the value or
 "—", and no Overview prints "—". Nothing cured in src. Reported to the chair; the walk is shared, not this lane's to change.
 
-### 0.7 Next step
-Wait for the chair's ruling on SAFETY-BLANK (a render proof on dp-village-57 offered; the walk's set is the chair's call).
+### 0.7 After the hand-ins (RULINGS G31, G32; 17:00 to 18:05 UTC)
+- SAFETY-BLANK: CLOSED (G31) as a fault of the measure; the shared walk's set is NOT changed.
+- E13 STEP ONE (G31 (2)): sent 17:24; `e13/STEP-ONE.md`. G32: the 11 by-construction slots (the NPCs help pill, the role
+  titles) are the owner's (the chair's recommendation: the door should not count a role title or a fixed caption).
+- TWICE-IN-PANEL (G31 (1)): sent 17:56; `e13/TWICE-IN-PANEL.txt`; the counting walk `tools/pageCensusWalk.counting.mjs`
+  (faithful: page hashes equal the shared walk's 900/900 on C and V), the renderer takes it by `PAGE_BATTERY_WALK`.
+- E13a (G32 (1)), BUILT, NOT YET HANDED IN: `lane/words-2-2026-11-25-e13a-wip` 608f70826 (pushed from /home/user/wt/e13a;
+  typecheck 167/167, 1113/1113). `dossierViewModel.js`: the self-sufficient verdict draws among the admitted (`pickAdmitted`),
+  two new lines (named in the commit for the owner's veto). Test `tests/domain/viabilitySelfSufficientDraw.test.js`: red on
+  the base (THE DRAW .90; the new lines' arm), green 49/49 with outlookSaysThePages and dossierViewModel.
+  PROOFS RUNNING (scratchpad `q5.sh`): tests/copy, tests/lint, the door's births `--measure` (`same-e13a`), batteries C, V
+  (`e13a-C`, `e13a-V`). OWED for the hand-in: the three slots' hamlet top share at or under .29 and thorp, village not raised
+  (read with `tools/e13-slots.mjs` against `same-hxd`, the base); on C and V: records moved 0 (recordHash vs `base-*`), pages
+  moved explained by this unit alone (`before-after.mjs`), 0 pages where a self-sufficient line denies the record (the test's
+  oracle); the lighting census if its test titles moved it (the walker); the register re-taken ONLY by `--write` and only if
+  it passes (it will not while the 11 stand: say so). Then the hand-in line to the chair with its merge note (it shares
+  dossierViewModel.js with no other WORDS-2 unit).
+
+### 0.8 Next step
+E13a's proofs and hand-in (0.7). The base worktree `/home/user/wt/base` stays clean at 0ec96f13d8 for measures.
