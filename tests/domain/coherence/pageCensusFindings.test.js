@@ -36,6 +36,8 @@ const NO_ARCANE = 'Arcane Support None · No arcane practitioners on the rolls';
 const NO_HEALER_H7 = OUTSIDER_IMPRESSIONS['services.healing'].find((l) => l.id === 'H7').text;
 /** R24-A2 (CLOSE-7): the fare line that says portions are small, the pool's own words (found, not typed). */
 const PORTIONS = FOOD_CULTURE.strained.find((l) => l.id === 'T3').text;
+/** CLOSE-7 THE MIRROR (R24d): a fare line of a fed band, the pool's own words */
+const ENOUGH = FOOD_CULTURE.adequate.find((l) => l.id === 'A3').text;
 /** A Food endurance line as the Defense tab prints it (its label, then the leaf's sentence). @param {string} sentence */
 const ENDURANCE = (sentence) => `Food endurance: ${sentence}`;
 /** A record whose trade brings iron and whose terrain needs clay that no trade brings (REVIEW-W2A F1). */
@@ -69,6 +71,8 @@ const PLANTS = {
   NOHEAL: { views: { 'World/Daily Life': [NO_HEALER_H7] }, record: { institutions: [{ name: 'Priest (resident)' }], availableServices: { healing: [{ name: 'Healing', desc: '', institution: 'Priest (resident)' }] } } },
   // R24-A2 (CLOSE-7): the fare's "Portions are small" beside a Food Security that prints Secure
   FOODSEC: { views: { 'World/Daily Life': [PORTIONS] }, record: { economicState: { foodSecurity: { foodRecord: { band: 'secure', gapPct: 0, normalImportPct: 20 } } } } },
+  // CLOSE-7 THE MIRROR (R24d): the fare's "they eat enough" beside a Food Security that prints Famine
+  PLENTY: { views: { 'World/Daily Life': [ENOUGH] }, record: { economicState: { foodSecurity: { foodRecord: { band: 'famine', gapPct: 60, normalImportPct: 20 } } } } },
 };
 
 describe('the rendered-dossier arm: one planted fault per row', () => {
@@ -87,6 +91,7 @@ describe('the rendered-dossier arm: one planted fault per row', () => {
       NEW2: { 'Systems/Economics': PLANTS.NEW2.views['Systems/Economics'] },
       NOHEAL: PLANTS.NOHEAL.views, // R24-A1: the line with no care at hand is true
       FOODSEC: PLANTS.FOODSEC.views, // R24-A2: with no food ledger printed, the line contradicts nothing
+      PLENTY: PLANTS.PLENTY.views, // the mirror: with no food ledger printed, the line contradicts nothing
     };
     // row 5a re-read: the same line is true where an official is in pay; the line that presumes no buyer is true at none
     expect(pageCensusFindings({ tier: 'town', npcs: [OFFICIAL], powerStructure: { criminalCaptureState: 'none' } }, PLANTS.P5false.views)).toEqual([]);
@@ -112,6 +117,9 @@ describe('the rendered-dossier arm: one planted fault per row', () => {
     const price = COMMONER_RESENTMENTS.food.find((l) => l.id === 'F6').text;
     expect(pageCensusFindings(fed('secure', 0), { 'World/Daily Life': [price] })).toEqual([]);
     expect(pageCensusFindings(fed('surplus', 0), PLANTS.FOODSEC.views).map((f) => f.row)).toEqual(['FOODSEC']);
+    // THE MIRROR (R24d): a line of plenty beside a printed Pressured is inside its bound; beside a printed Deficit it reds
+    expect(pageCensusFindings(fed('pressured', 8), PLANTS.PLENTY.views)).toEqual([]);
+    expect(pageCensusFindings(fed('deficit', 45), PLANTS.PLENTY.views).map((f) => f.row)).toEqual(['PLENTY']);
     expect(pageCensusFindings({ tier: 'town', economicState: { foodSecurity: { hasSiege: true } } }, PLANTS.P20.views)).toEqual([]);
     // row 2: besieged, the indicative is true; outside a siege, the condition reads nothing
     expect(pageCensusFindings({ tier: 'town', economicState: { foodSecurity: { hasSiege: true } } }, PLANTS.P2siege.views)).toEqual([]);

@@ -226,9 +226,10 @@ function snakeCase(s) {
 //   printed Famine                       `critical` .. `collapsed`
 // ONE DERIVATION (`fareBandOf`), which the fare (`deriveFoodCulture`), the food grievance (R24h: it fires on the fare band
 // alone), the food visitor lens and Dawn Work's food branch all read, never each its own.
-// HELD (R24c (a), R24d: the mirror's own unit after A2): a printed Famine over a production band of `adequate` or
-// `surplus` keeps the production band; its lines (the fare's C7, Dawn Work's F6) say the source failed, and the words
-// ruled for that cell are the mirror unit's to build.
+// THE MIRROR (CLOSE-7, R24d's words; A2 held it): a printed Famine over a production band of `adequate` or `surplus` reads
+// `critical` like every other Famine; there the lines that say the source failed (the fare's C7, Dawn Work's F6) exclude
+// the vocabulary's `food production: ≥ adequate`, and the chair's lines in their place (K2, K1) need it. The two pools are
+// handed the capacity profile as the atom's context (`facts/foodProduction.js`).
 
 /** The fare bands, plentiful to collapsed: the order the bound is read in. */
 const FARE_LADDER = Object.freeze(['surplus', 'adequate', 'strained', 'critical', 'collapsed']);
@@ -251,7 +252,6 @@ function fareBandOf(s, ctx) {
   const printed = Object.keys(FARE_BOUNDS).find((p) => atomHolds(`food: = ${p}`, factsFor(s)) === true);
   const at = FARE_LADDER.indexOf(band);
   if (!printed || at < 0) return band;
-  if (printed === 'famine' && at <= FARE_LADDER.indexOf('adequate')) return band; // the mirror held (R24c (a))
   const [most, least] = FARE_BOUNDS[/** @type {keyof typeof FARE_BOUNDS} */ (printed)].map((b) => FARE_LADDER.indexOf(b));
   return FARE_LADDER[Math.min(Math.max(at, most), least)];
 }
@@ -281,7 +281,7 @@ function deriveFoodCulture(s, ctx) {
     : 'collapsed';
 
   const house = houseFinder(s);
-  const eligible = filterDeclared(FOOD_CULTURE[branch], { facts: factsFor(s), poolId: `dailyLife.food_culture.${branch}`, surface: 'dailyLife' });
+  const eligible = filterDeclared(FOOD_CULTURE[branch], { facts: factsFor(s), ctx: { capacities: ctx.capacities }, poolId: `dailyLife.food_culture.${branch}`, surface: 'dailyLife' }); // the mirror: `food production` reads the handed profile
   const text = sayDeclared(pickNameable(s, eligible, 'food_culture', branch, house, ctx.stated), house, refs);
   refs.push({ id: 'capacity.food_production', label: 'Food production', type: 'capacity' });
   // The slot still cites its food-security chains (references, not text: the slot keeps explaining itself).
@@ -334,7 +334,7 @@ function deriveDawnWork(s, ctx) {
   refs.push({ id: 'capacity.defense', label: 'Defense', type: 'capacity' });
 
   const house = houseFinder(s);
-  const eligible = filterDeclared(DAWN_WORK[branch], { facts: factsFor(s), poolId: `dailyLife.dawn_work.${branch}`, surface: 'dailyLife' });
+  const eligible = filterDeclared(DAWN_WORK[branch], { facts: factsFor(s), ctx: { capacities: ctx.capacities }, poolId: `dailyLife.dawn_work.${branch}`, surface: 'dailyLife' }); // the mirror: `food production` reads the handed profile
   const text = sayDeclared(pickNameable(s, eligible, 'dawn_work', branch, house, ctx.stated), house, refs);
 
   return slot('dawn_work', text, 'capacity.food_production + capacity.defense + dominant faction', refs);

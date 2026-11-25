@@ -37,6 +37,13 @@
  * THE SAMENESS LINES OF D5C-2 (the chair's E133 (2); `lines/D4C/DRAFT-1.md`,
  * taken 2026-11-22 21:55 UTC): defence W15; default B27, which excludes a siege in force as B26 does; each appended
  * at its branch's end, its keyed pick unchanged (`tests/domain/dailyLifeNewLines.test.js`).
+ *
+ * THE MIRROR (CLOSE-7; the chair's RULING-R24 R24d of 2026-11-24, the words his; vetoable by the owner, on the veto list):
+ * where the page prints Famine over the place's own production adequate or surplus, the food branch is taken (the fare's
+ * band, bounded by the printed band, is critical), and there F6 ("… looking for anything left to gather") would say the
+ * harvest failed. F6 now excludes `food production: ≥ adequate` (the vocabulary's atom, read off the capacity profile the
+ * deriver hands, `facts/foodProduction.js`), and K1, the chair's line in its place, needs it with F6's own needs (a small
+ * place, ruling 8; the farmland F6 read), appended after F6: K1 stands in F6's index of the eligible list.
  */
 
 /** @typedef {{ readonly id: string, readonly text: string, readonly needs: ReadonlyArray<string>, readonly excludes?: ReadonlyArray<string> }} DawnLine */
@@ -56,7 +63,8 @@ export const DAWN_WORK = Object.freeze({
     { id: 'F3', text: 'Hunters are out before light, and the rest of the day waits on what they bring home.', needs: ['game'] },
     { id: 'F4', text: 'People are at {market} before light, waiting to see what food comes in and what it will cost.', needs: ['market'] },
     { id: 'F5', text: 'The beasts are seen to before light, and nothing they give is wasted.', needs: ['livestock'] },
-    { id: 'F6', text: 'Every hand that can be spared is in the fields at first light, looking for anything left to gather.', needs: ['institution: farmland', 'tier: ≤ village'] },
+    { id: 'F6', text: 'Every hand that can be spared is in the fields at first light, looking for anything left to gather.', needs: ['institution: farmland', 'tier: ≤ village'], excludes: ['food production: ≥ adequate'] },
+    { id: 'K1', text: 'Every hand that can be spared is out at first light, and what comes in is counted before it is eaten.', needs: ['institution: farmland', 'tier: ≤ village', 'food production: ≥ adequate'] },
   ]),
 
   /** `defence`: the defence capacity is critical or collapsed, and a real outside threat stands at medium or above (ruling 8). */
