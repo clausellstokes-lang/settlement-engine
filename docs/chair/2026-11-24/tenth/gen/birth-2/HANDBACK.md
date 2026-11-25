@@ -45,18 +45,18 @@
   mutation manifest row.
 - UNIT D4: HANDED IN at 14:33 UTC: `lane/birth-2-2026-11-25-d4-wip` 57d26a136 on origin, "UNIT D4" sent to CLOSE-7 and the chair
   (section 2). Typecheck in its tree: ratchet OK 167/167; domain-strict OK 1113/1113.
-- UNIT C6 as of 16:58 UTC:
-  (A) P9 RULED G22; BUILT on `lane/birth-2-2026-11-25-p9-wip` (worktree /home/user/wt/p9): f1990cc84 (the cure) + e2b1d24ae (the
-      leaf's import path in defenseDisplay.js and threatAssessment.js; the push's typecheck caught it). ON ORIGIN.
-      PROOFS TAKEN at e2b1d24ae: every-birth check `probes/p9check.mjs` C 0 -> 0, V 175 -> 0 (`c6/p9check-{before,after}-*.json`);
-      page battery vs base (`c6/diff-p9-*.txt`): records moved C 0, V 0; pages C 2 (dp-thorp-2, -3: the known render noise),
-      V 175 (all heartland, stored CRITICAL 151 / WEAK 24: the grade alone); battery rows V 129 lost (P9 only), 0 gained.
-      IN FLIGHT: the gates (scratchpad p9gates.sh: tests/lint + tests/copy + 184 named files; both typechecks). THEN: the
-      lighting census by its door (the walker is one new test file), "UNIT P9" TO THE CHAIR ONLY (CLOSE-7 has handed over;
-      CLOSE-8 reads this section 0).
-  (B) SAVED (G23 (1)): `same/` (README, over-C/V, check tail). G23 (2): the door's own `--check` at the base QUEUED after the
-      gates (scratchpad door.sh -> door-check.log); report five counts, exit code, and whether its rises are WORDS-2's 14.
-  (G23 (3)): nothing built for sameness. After P9 and the door: hand-back made final, and STOP.
+- FINAL (18:24 UTC 2026-11-25): THE SEAT HAS STOPPED (the chair's word: nothing else owed). Hand-ins go to the chair only (CLOSE-7 handed over;
+  CLOSE-8 reads this section).
+- UNIT C6 (A) P9: HANDED IN to the chair: `lane/birth-2-2026-11-25-p9-wip` 34212dfd2 on origin (commits f1990cc84 the cure,
+  e2b1d24ae the leaf's import path, d2af68b43 the gate's cures, 34212dfd2 the lighting census by its door: files 3799, parked
+  495). Every-birth check C 0 -> 0, V 175 -> 0; records moved 0/0; pages moved C 2 (render noise), V 175 (grade alone);
+  battery rows V 129 lost (P9), 0 gained. Typecheck in its tree: ratchet OK 167/167, domain-strict OK 1113/1113.
+  REDS LEFT: base's (proseComposed, proseCorpusBytes, safetyReaderBytes); ONE ASKED OF THE CHAIR: writerReach "surfaceReach
+  round-trips": `monster on economicGates` / `monster on scores` lose web-display (the only `.monster` reader is the leaf, in
+  src/domain/facts, outside the display dirs); its door `node scripts/check-writer-reach.mjs --write`, not run (rule 9).
+  NAMED: the defense score averages (pdf scoreAvg) still average the stored score.
+- UNIT C6 (B): sameness measure SENT and SAVED (`same/`); the door's own run (G23 (2)) WITHDRAWN by the chair, not run.
+- D4: handed in (57d26a136). A5: PARKED by G15 (6de78192c), lands with the veil's cut.
 - Worktrees: /home/user/wt/d4 and /home/user/wt/a5 (node_modules and .husky/_ symlinked; excluded in info/exclude).
   Scratch tools: /home/user/c7tools/read25 (CLOSE-7's page battery copied). Runs: scratchpad queue*.sh, logs g-*.log.
 - Corpora: C = `close-7/read24/make-plan.mjs`, V = `make-visitor-plan.mjs` over the chair's `read/plan-lit.json`.
