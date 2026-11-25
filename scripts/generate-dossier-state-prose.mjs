@@ -631,6 +631,10 @@ const WORD_CORRECTIONS = Object.freeze([
   // CHAIR-2026-11-23-N70: DS-DEF-2 Economic Survival: CRITICAL v1 said the town "cannot fund a response to anything" beside
   // DS-GEN-17 GARRISONED v1's people under arms (dz-village-7); re-worded in place
   { pool: 'DS-DEF-2 :: Economic Survival: CRITICAL', vid: 1, from: '241d7d7ffb3cdd7e9da1f23faf6f334094d789268e9da77cc056a7e77df95903', to: '35865f5965dd6be471f4d8172eb644b624b107c252094089643bea7322eaa192', ruling: 'CHAIR-2026-11-23-N70' },
+  // WORDS-2 E4, the tenth chair's RULING G3 (a): DS-ECO-1 COMBINATION C4 v6 said "There is no market at {settlement}" a third
+  // time on its pages (GEN-13 NO-MARKET and the yield line already say it); re-worded in place, its closing clause kept (C4 is
+  // a low rung: `economyStateProse.js :: prosperityHeaderPoolKey`, rank <= LOW_RUNG_TO, Subsistence/Struggling/Poor)
+  { pool: 'DS-ECO-1 :: COMBINATION C4: a low rung on a working approach', vid: 6, from: 'e284cf5f1f6d43f5c199642c081a0f6f4ac6d78bc417b75ed3ffe9879493023e', to: 'e6244f4fc36979daaf0fc289bf29a5a0b3e006fd4150a6d00083c632d669dd35', ruling: 'TENTH-CHAIR-G3' },
 ]);
 
 async function readNumberingBaseline() {

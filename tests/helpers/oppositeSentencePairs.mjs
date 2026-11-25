@@ -63,6 +63,10 @@ export const PINNED_TAILS = Object.freeze([
  * @type {ReadonlyArray<Readonly<{ id: string, side: PairSide, text: string }>>}
  */
 export const PINNED_OLD_WORDS = Object.freeze([
+  // WORDS-2 E4, the tenth chair's RULING G3 (a): C4 v6 said "no market" a third time on its pages; re-worded in place
+  Object.freeze({ id: 'DS-ECO-1 COMBINATION C4 v6, the old words (TENTH-CHAIR-G3)',
+    side: side({ desk: 'economy', position: 'DS-ECO-1', pool: 'COMBINATION C4: a low rung on a working approach', vids: [6] }),
+    text: 'There is no market at {settlement} to hold whatever its {access} brings, and the town stays poor.' }),
   Object.freeze({ id: 'DS-DEF-2 Economic Survival: WEAK v1, the old words (CHAIR-2026-11-23-03:55)',
     side: side({ desk: 'defense', position: 'DS-DEF-2', pool: 'Economic Survival: WEAK', vids: [1] }),
     text: '{settlement} is always short of money for its defence: no money is laid by to pay for a long one, and whoever is called to make one knows it.' }),

@@ -24,6 +24,8 @@
  *          (on 244fa84ef's leaf dz-town-2 printed v1's, dz-town-36 v2's); each matcher matches its own text.
  *          PROSE-E (the chair, N70): five more re-worded in place, their old words pinned the same way (NO-MARKET v10; full
  *          legal chain v1, v2; CHAIN working v1; CRITICAL v1), red first on b443be64b's leaves.
+ *   WORDS-2 E4 (the tenth chair's RULING G3 (a)): DS-ECO-1 COMBINATION C4 v6's old words ("There is no market at …") join
+ *          ARM 5's pins, red first on 0ec96f13d8's leaf (the leaf still held them).
  * THE FLOOR (the chair, N71): the matcher does not match a clause cut of fewer than four literal words
  *   (`tests/helpers/oppositeSentencePairs.mjs :: formsOf`, `literalWords >= 4`), so a line the page prints only as such a cut
  *   is invisible to every arm that reads by matcher: NO-MARKET v12 draws on 46 of the 900 and prints as "{settlement} has no

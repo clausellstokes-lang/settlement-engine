@@ -235,10 +235,10 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
             "no crisis: under_siege",
             "no crisis: plague_onset"
           ],
-          "text": "There is no market at {settlement} to hold whatever its {access} brings, and the town stays poor.",
+          "text": "Whatever its {access} brings goes on past {settlement}, and the town stays poor.",
           "slots": [
-            "settlement",
-            "access"
+            "access",
+            "settlement"
           ],
           "vid": 6
         },
