@@ -1194,3 +1194,22 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   A SUCCESSOR READS: these four are builders in the close's lane; CLOSE-7 merges; the chair rules their design
   questions (A5's shape is ruled BEFORE it is built: it is a stored shape); the veil's seats are idle, not gone: the
   share pages resume from `veil/v55/PAUSE-2026-11-25.md` and V25 to V29.
+- 2026-11-25 09:02 UTC · T94 · THE VEIL LANE IS PAUSED (its page 1f8c0b353); ONE PUSH REFUSED BY A SEAT's OWN PERMISSION CHECK: CODE THAT EXISTS IN ONE CONTAINER ONLY; I-13 RULED; THE FOUR SEATS REPORTED.
+  VEIL-55 (08:54): "VEIL LANE PAUSED": `veil/v55/PAUSE-2026-11-25.md` at 1f8c0b353 on `lane/veil-55-2026-11-24` (the
+  tip dbd4cd9e5, each seat's branches and commits, the owed order, the local setups; the seats' own lines go into its
+  section 6).
+  THE REFUSAL (VEIL-51, 08:53; relayed by VEIL-55): `git push -q origin lane/veil-51-2026-11-24-r5desc-wip` from
+  /home/user/wt/r5desc was refused by its own permission check ("Destructive or Unwanted Actions"). ITS CODE BRANCH
+  8697f4eff (units 4 and 5 with V27's corrected term) IS IN THAT CONTAINER ONLY (the chair checked origin's veil
+  branches after a fetch: not there). VEIL-51 tried nothing in its place. THE CHAIR's ACT: the refusal stands; nobody
+  pushes it by another road (no other branch name, no patch file, no other seat); VEIL-51 told to change nothing in
+  that worktree and to write the commit, the path and its log into its hand-back; THE OWNER IS TOLD: only his word
+  (in that session, or a setting of his) settles it. THE RISK: a cloud container is reclaimed after inactivity; then
+  those commits are gone and units 4 and 5 are rebuilt from the rulings and the hand-back.
+  GOALS I-13 (CLOSE-7, 08:56): ruled YES as proposed (the receipt records every card the draw read; the draws
+  unchanged; 0 births move), in the second hand-in, with one line owed: every reader of a receipt's `refs` and whether
+  more refs change what it does.
+  THE FOUR SEATS' FIRST MESSAGES (08:59 to 09:00): all stand on 0ec96f13d8; nothing they could not follow. BIRTH-1:
+  D2, D3, D5 built in order; D8 and D7 measured, rulings asked. BIRTH-2: A5 measured then ONE ruling message, D4
+  meanwhile. WORDS-1: E1's measure and ruling message, E8 meanwhile, D6's three wordings. WORDS-2: E2's census in the
+  background; E4, E3, E5, E6, E9, E12, E10, E11, E7.
