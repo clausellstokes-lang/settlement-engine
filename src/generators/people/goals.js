@@ -37,7 +37,7 @@ import { GOAL_FAMILY_LINES, GOAL_LINE_MIN_MEMBERS, GOAL_LINE_NOT_ON_TIES, GOAL_R
 import { familyOfInstitution, isLawEnforcementInstitution, isNoPowerInstitution } from '../../data/institutionalCatalog.js';
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
 import { chainPrintName } from '../../domain/display/chainPrintName.js';
-import { fillAgreement, powerNameWithArticle } from '../../domain/display/powerSentenceName.js';
+import { fillAgreement, holdsPossessive, powerNameWithArticle } from '../../domain/display/powerSentenceName.js';
 import { secondMentions } from '../../data/people/personMention.js';
 import { filterDeclared, lineText, resolveSibling } from '../../domain/facts/drawDeclared.js';
 import { factsOf } from '../../domain/facts/factsOf.js';
@@ -186,7 +186,16 @@ export function houseFill(houseKey) {
   const key = str(houseKey).trim();
   if (!key) return '';
   const lower = key.toLowerCase();
-  const place = (/** @type {string} */ n) => (PERSON_HOUSE_PLACE[n].startsWith('the ') ? PERSON_HOUSE_PLACE[n] : `the ${n.replace(/\s*\(.*\)\s*/g, '')}'s ${PERSON_HOUSE_PLACE[n]}`);
+  // E1 (WORDS-1, the tenth chair's G5): a person noun that holds a possessive ("lord's steward") takes its SHORT title, the
+  // possessor dropped ("the steward's office", as `noble governor` gives "the governor's office"), never "the lord's
+  // steward's office"; where no short title is left, "the office of the lord's steward"
+  const place = (/** @type {string} */ n) => {
+    if (PERSON_HOUSE_PLACE[n].startsWith('the ')) return PERSON_HOUSE_PLACE[n];
+    const who = n.replace(/\s*\(.*\)\s*/g, '');
+    if (!holdsPossessive(who)) return `the ${who}'s ${PERSON_HOUSE_PLACE[n]}`;
+    const short = who.replace(/^.*[\p{L}\p{N}](?:['’]s|s['’])\s+/u, '');
+    return short && short !== who && !holdsPossessive(short) ? `the ${short}'s ${PERSON_HOUSE_PLACE[n]}` : `the ${PERSON_HOUSE_PLACE[n]} of the ${who}`;
+  };
   if (PERSON_HOUSE_PLACE[lower]) return place(lower);
   let noun = str(institutionDisplayName(key) || key).replace(/\s*\([^)]*\)\s*/g, ' ').replace(/\s+/g, ' ').trim();
   noun = noun.replace(/^(multiple|massive)\s+/i, '').split('/')[0].trim().toLowerCase();

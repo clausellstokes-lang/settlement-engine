@@ -84,6 +84,13 @@ export const FOLLOWER_BY_BEFORE = Object.freeze({
  */
 export const NO_PRONOUN_TAILS = Object.freeze(new Set(['would rather keep to themselves', 'cannot finish theirs']));
 
+/** E1: a word of the role is a possessive ("the network's head", "the carriers' master") */
+const ROLE_POSSESSIVE = /[\p{L}\p{N}](?:['’]s|s['’])(?=\s|$)/u;
+/** E1: the words that end a possessed noun phrase (its "of" form takes the words before them) */
+const OF_FORM_STOPS = ['and', 'or', 'but', 'to', 'in', 'on', 'at', 'by', 'for', 'with', 'from', 'is', 'are', 'was', 'were', 'has', 'have', 'had', 'will', 'would', 'that', 'which', 'who', 'than', 'as', 'before', 'after', 'since', 'because', 'while', 'when', 'if'].join('|');
+
+/** E1: a possessed noun phrase ends at a mark (a regex literal, so the copy's voice count reads no '!') */
+const OF_FORM_END = /[.,;:!?]/u.source;
 /** a name stands on its own: no letter or digit before it, none after (regex literals, so the copy's voice count reads no '!') */
 const NOT_AFTER_LETTER = /(?<![\p{L}\p{N}])/u.source;
 const NOT_BEFORE_LETTER = /(?![\p{L}\p{N}])/u.source;
@@ -99,12 +106,16 @@ const capFirst = (s) => (s ? s[0].toUpperCase() + s.slice(1) : s);
  * The mention a later occurrence takes, without its case: a pronoun's gender, or the word that stands for the person.
  * @param {{ name: string, gender: string, role: string }} p @param {Array<{ name: string, gender: string, role: string }>} named
  * @param {boolean} [noPronoun] the pronoun rung skipped (a mention before a tail of `NO_PRONOUN_TAILS`)
+ * @param {boolean} [possessive] the mention stands before "'s" (E1: a role holding a possessive is then skipped)
  * @returns {{ pronoun: 'female' | 'male' } | { word: string } | null}
  */
-function mentionOf(p, named, noPronoun = false) {
+function mentionOf(p, named, noPronoun = false, possessive = false) {
   const others = named.filter((q) => q !== p);
   if (!noPronoun && (p.gender === 'female' || p.gender === 'male') && !others.some((q) => q.gender === p.gender)) return { pronoun: p.gender };
-  if (p.role && !others.some((q) => q.role.toLowerCase() === p.role.toLowerCase())) return { word: p.role };
+  // E1 (WORDS-1, the tenth chair's G5): before "'s", a role that holds a possessive ("the network's head") is skipped and the
+  // next rung taken ("Lee's reputation"), never "the network's head's reputation"; the leaf's own test of a possessive word,
+  // as `powerSentenceName.js :: holdsPossessive` reads it (two pure leaves, no import between them)
+  if (p.role && !(possessive && ROLE_POSSESSIVE.test(p.role)) && !others.some((q) => q.role.toLowerCase() === p.role.toLowerCase())) return { word: p.role };
   const words = p.name.split(/\s+/);
   const surname = words[words.length - 1];
   if (words.length > 1 && !others.some((q) => q.name.split(/\s+/).includes(surname))) return { word: surname };
@@ -182,9 +193,9 @@ function oneSentence(sentence, people) {
   for (const h of hits) {
     if (!seen.has(h.p)) { seen.add(h.p); continue; }
     const after = sentence.slice(h.end).trimStart();
-    const m = mentionOf(h.p, named, [...NO_PRONOUN_TAILS].some((t) => after.startsWith(t)));
-    if (!m) continue;
     const possessive = /^['’]s(?![\p{L}\p{N}])/u.test(sentence.slice(h.end));
+    const m = mentionOf(h.p, named, [...NO_PRONOUN_TAILS].some((t) => after.startsWith(t)), possessive);
+    if (!m) continue;
     let word; let end = h.end;
     if ('pronoun' in m) {
       const forms = PRONOUN[m.pronoun];
@@ -214,6 +225,9 @@ export function qualifiedPossessives(text, cards) {
     const name = str(c?.name);
     const m = /^(.+?)\s+\(([^()]+)\)$/.exec(name);
     if (!m) continue;
+    // E1 (WORDS-1, G5): a qualifier that holds a possessive ("(the hospital's master)") would open into two possessives in a
+    // row; its possessive takes the "of" form instead, the bracket kept: "the family of Kathleen Farrell (the hospital's master)"
+    if (ROLE_POSSESSIVE.test(m[2])) out = out.replace(new RegExp(`${NOT_AFTER_LETTER}${esc(name)}['’]s ((?:\\p{Ll}+ )*?\\p{Ll}+)(?=${OF_FORM_END}|\\s+(?:${OF_FORM_STOPS})\\b|$)`, 'gu'), (_w, noun, at, all) => `${at === 0 || /[.!?]\s*$/.test(all.slice(0, at)) ? 'The' : 'the'} ${noun} of ${name}`);
     out = out.replace(new RegExp(`${NOT_AFTER_LETTER}${esc(name)}(['’])s${NOT_BEFORE_LETTER}`, 'gu'), (_w, q) => `${m[1]} ${m[2]}${q}s`);
   }
   return out;

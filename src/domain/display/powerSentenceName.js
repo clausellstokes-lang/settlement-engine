@@ -38,4 +38,4 @@
 
 // TAIL-TIES-6 (the chair's ruling (T23)): the body lives in the data layer (`data/people/powerSentenceName.js`, verbatim), so
 // `data/people/dmPowerLines.js` reads it without a data -> engine-core chunk edge; this path re-exports every name.
-export { PROSE_FORMS, powerSentenceName, powerNameAfterArticle, powerNameWithArticle, withPowerSentenceNames, powerPossessive, powerVerb, withPowerVerb, fillAgreement } from '../../data/people/powerSentenceName.js';
+export { PROSE_FORMS, powerSentenceName, powerNameAfterArticle, powerNameWithArticle, withPowerSentenceNames, powerPossessive, powerVerb, withPowerVerb, fillAgreement, holdsPossessive } from '../../data/people/powerSentenceName.js';
