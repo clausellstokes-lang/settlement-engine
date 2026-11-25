@@ -304,3 +304,24 @@ begin to fail outright somewhere in the hundreds of public pages. Production's o
  WHO AND WHEN: a unit of the veil lane's plan, VEIL-55's to place (the chair's lean: VEIL-52 after unit 3, since it
  holds the harness). IF THE OWNER's COUNT OF PUBLIC PAGES SAYS THE LIVE GALLERY IS ALREADY SLOW (some hundreds), part
  (ii) is cut FIRST against master's chain as a file he can apply before the release, as the grants' urgent file was.
+
+## RULING V12 (added 00:48 UTC on 2026-11-25): TODAY's IMPORT OF A MARKED PAGE: YES, THE COPY HOLDS WHAT THE VEIL HID
+VEIL-52 (`v52/out/PP-TODAY-IMPORT-TABLE.txt` at 8a6557fe8; CONFIRMED, executed; master's chain 001..203 and master's
+client, the master-born 140, both Reveals): ON THE LIVE SITE TODAY an importer of a MARKED page receives in their own
+copy what the maker's veil kept off the page: `import_gallery_dossier`'s data and master's `fetchDossierForImport`
+output each exceed the page by exactly (M)'s set (V10): hidden houses' names 2,238 leaves on 91 of 140 places at both
+Reveals; on Reveal-DM shares the hooks 9,277 and the secrets 8,320; corrupt flags; house and faction-member rows.
+UNMARKED: the import carries nothing the page lacks.
+WHO CAN DO IT (the chair's read of master, `131_repin_definer_search_path_pg_temp.sql`, CONFIRMED by read): the read
+returns rows only where `s.gallery_importable = true` (the maker switched import on), `auth.uid() is not null` and
+`current_user_has_premium_access()`. So: a signed-in premium account, on a page whose maker allowed import.
+WHAT IT IS: not a new hole of the line's; it is the browser-only veil seen at the one door where no network tool is
+needed: the importer simply owns a copy. THE RELEASE CURES IT (the tip's import door: 0, V10).
+**RULED:** (1) THE OWNER IS TOLD AT ONCE, in plain words, with the chair's recommendation. (2) NO INTERIM CHANGE IS BUILT
+WITHOUT HIS WORD (security posture is his: rule 17). WHAT AN INTERIM COULD BE, if he asks: one small migration against
+master's chain that makes `import_gallery_dossier` return no row for a share that carries the veil's marker, until the
+release; its cost: import stops for every page shared since the veil reached the live site (each export writes the
+marker), which is a paid feature. THE CHAIR'S RECOMMENDATION: no interim; close it with the release; UNLESS he knows
+makers hide things from people who can import (their own players on premium accounts): then the interim, with a fresh
+security read, is a few hours' work. (3) Phase 1's bar already holds this door (V1-3: every door equal to the party
+link's; the import of a marked page is in the joined tree's proof).

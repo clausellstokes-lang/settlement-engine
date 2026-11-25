@@ -831,3 +831,14 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   measure (R24i (b), its brief `close-7/briefs/LIVE-PATH.md`) follows the mirror's merge. The owner is told A2's result
   and the side effect, as his to veto. THE HOURLY CHECK is re-armed for 01:31 UTC (trig_01AKcbBg7Lzrg9vtzZ4oZuQb); the
   CI read for point 115 fires at 00:57 (trig_01N3D3U6mgtBAQvhMbzMpEny).
+- 2026-11-25 00:48 UTC · T62 · TODAY's IMPORT OF A MARKED PAGE GIVES THE IMPORTER WHAT THE VEIL HID (RULING V12); READ-COST RULED (V11); THE MACHINES RESTARTED AT ABOUT 00:41.
+  V12: VEIL-52's pass on master's chain and client: YES: an importer's copy of a marked page holds the hidden houses
+  (91 of 140 places) and, on Reveal-DM shares, the hooks and secrets. The chair read master's gate: import needs the
+  maker's `gallery_importable`, a signed-in user and premium access. The owner is told with a recommendation (no interim;
+  the release cures it; an interim that refuses import of marked shares is available on his word). V11: READ-COST's cure
+  ruled in two parts (the page read takes one row's tile; the tile's facets become stored columns written by the server,
+  backfilled once), a migration of its own after the veil's; VEIL-55 places it; first against master if the owner's count
+  of public pages is in the hundreds. THE RESTART: this container and VEIL-55's restarted at about 00:41 UTC (a new
+  kernel); here nothing was lost (push 255 had ended, the worktrees and the scratchpad survived); VEIL-55 resumed its
+  proof chain at the lost step (run-4 green; the form on the gate's 140: L1 0 of 3,360 at gallery and link, 0 stored ids
+  served, L2 84 = N117's 7 places); the other seats were not asked (each redoes a lost step by its own rule).
