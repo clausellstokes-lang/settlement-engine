@@ -18,6 +18,9 @@
  * custom-content row (`content/settlementContentProvenance.js :: customObject`'s marks). A DM's EDIT of a generated hall's text
  * (`_authored`, `_userEdits`) is not authorship: the hall is still the one the birth bought. A bare string carries no mark and
  * is read by its exact name.
+ * ⚠ ACCEPTED, NOT CURED (RULING C1B-3 (4)): a GENERATED power whose own category is criminal and which the user renames to
+ * exactly one of the three birth names is read as the hall: it is a criminal power by its own category, and the rename door
+ * (`factionRename.js`) stores no mark; closing it would need a mark stored at birth, which this point does not add.
  * @enforced-by tests/domain/boughtHallNames.test.js
  * @enforced-by tests/domain/boughtHallReaders.test.js
  */
