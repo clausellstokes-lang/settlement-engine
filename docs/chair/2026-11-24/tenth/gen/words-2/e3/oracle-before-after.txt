@@ -1,0 +1,4 @@
+rec-base-C {"births":900,"fall":{"grazing":270},"violations":{},"holdsNone":{"thorp":0,"hamlet":0,"village":0,"town":51,"city":21,"metropolis":1},"examples":{}}
+rec-base-V {"births":900,"fall":{"grazing":128,"water":4,"shore":5},"violations":{"grazing without it":27},"holdsNone":{"thorp":19,"hamlet":0,"village":0,"town":28,"city":9,"metropolis":3},"examples":{"grazing without it":["dp-thorp-10","dp-thorp-104","dp-thorp-105","dp-thorp-110","dp-thorp-113"]}}
+rec-e3-C {"births":900,"fall":{"grazing":270},"violations":{},"holdsNone":{"thorp":0,"hamlet":0,"village":0,"town":51,"city":21,"metropolis":1},"examples":{}}
+rec-e3-V {"births":900,"fall":{"grazing":101,"water":15,"marsh":7,"shore":5},"violations":{},"holdsNone":{"thorp":19,"hamlet":0,"village":0,"town":28,"city":9,"metropolis":3},"examples":{}}

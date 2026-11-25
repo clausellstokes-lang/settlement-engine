@@ -1,0 +1,78 @@
+== rec-base-C
+power	thorp	150	150	0.68	14	A dispute over grazing rights and water access has run for two seasons, and those on each 
+power	hamlet	150	150	0.667	17	A dispute over grazing rights and water access has run for two seasons, and the families o
+power	village	150	150	0.453	23	A dispute over grazing rights and water access has run for two seasons, and the families o
+power	town	150	150	0.233	21	The Town Mayor has been debating market levies for three months. The merchants have argued
+power	city	150	150	0.24	24	The City Council has been debating market levies for three months. The merchants have argu
+power	metropolis	150	150	0.2	27	The Grand Council has been debating market levies for three months. The merchants have arg
+overview	thorp	150	150	0.613	44	A dispute over grazing rights and water access has run for two seasons, and those on each 
+overview	hamlet	150	150	0.393	76	A dispute over grazing rights and water access has run for two seasons, and the families o
+overview	village	150	150	0.127	110	A dispute over grazing rights and water access has run for two seasons, and the families o
+overview	town	150	150	0.093	108	The Town Mayor has been debating market levies for three months. The merchants have argued
+overview	city	150	150	0.06	118	The Merchant oligarchy has been debating market levies for three months. The merchants hav
+overview	metropolis	150	150	0.067	101	The Grand Merchant Oligarchy has been debating market levies for three months. The merchan
+== rec-base-V
+power	thorp	150	150	0.307	24	A dispute over grazing rights and water access has run for two seasons, and those on each 
+power	hamlet	150	150	0.247	29	A dispute over grazing rights and water access has run for two seasons, and the families o
+power	village	150	150	0.3	38	A dispute over grazing rights and water access has run for two seasons, and the families o
+power	town	150	150	0.073	59	The creditor's agent has blocked the money for repairs. In public they talk of prudence; i
+power	city	150	150	0.133	58	The merchant class is outbuying noble landholdings. Three estates have changed hands in th
+power	metropolis	150	150	0.127	60	The merchant class is outbuying noble landholdings. Three estates have changed hands in th
+overview	thorp	150	150	0.28	56	A dispute over grazing rights and water access has run for two seasons, and those on each 
+overview	hamlet	150	150	0.107	97	The most devout households want a say over who may trade and when, and not everyone here a
+overview	village	150	150	0.113	113	A dispute over grazing rights and water access has run for two seasons, and the families o
+overview	town	150	150	0.027	121	The Corrupt Council's hold on {S} is weaker than it looks from outside.
+overview	city	150	150	0.04	129	The merchant class is outbuying noble landholdings. Three estates have changed hands in th
+overview	metropolis	150	150	0.047	125	The merchant class is outbuying noble landholdings. Three estates have changed hands in th
+== rec-e3-C
+power	thorp	150	150	0.68	14	A dispute over grazing rights and water access has run for two seasons, and those on each 
+power	hamlet	150	150	0.667	17	A dispute over grazing rights and water access has run for two seasons, and the families o
+power	village	150	150	0.453	23	A dispute over grazing rights and water access has run for two seasons, and the families o
+power	town	150	150	0.233	21	The Town Mayor has been debating market levies for three months. The merchants have argued
+power	city	150	150	0.24	24	The City Council has been debating market levies for three months. The merchants have argu
+power	metropolis	150	150	0.2	27	The Grand Council has been debating market levies for three months. The merchants have arg
+overview	thorp	150	150	0.613	44	A dispute over grazing rights and water access has run for two seasons, and those on each 
+overview	hamlet	150	150	0.393	76	A dispute over grazing rights and water access has run for two seasons, and the families o
+overview	village	150	150	0.127	110	A dispute over grazing rights and water access has run for two seasons, and the families o
+overview	town	150	150	0.093	108	The Town Mayor has been debating market levies for three months. The merchants have argued
+overview	city	150	150	0.06	118	The Merchant oligarchy has been debating market levies for three months. The merchants hav
+overview	metropolis	150	150	0.067	101	The Grand Merchant Oligarchy has been debating market levies for three months. The merchan
+== rec-e3-V
+power	thorp	150	150	0.213	30	The most devout households want a say over who may trade and when, and not everyone here a
+power	hamlet	150	150	0.247	29	A dispute over grazing rights and water access has run for two seasons, and the families o
+power	village	150	150	0.3	38	A dispute over grazing rights and water access has run for two seasons, and the families o
+power	town	150	150	0.073	59	The creditor's agent has blocked the money for repairs. In public they talk of prudence; i
+power	city	150	150	0.133	58	The merchant class is outbuying noble landholdings. Three estates have changed hands in th
+power	metropolis	150	150	0.127	60	The merchant class is outbuying noble landholdings. Three estates have changed hands in th
+overview	thorp	150	150	0.173	61	The most devout households want a say over who may trade and when, and not everyone here a
+overview	hamlet	150	150	0.107	97	The most devout households want a say over who may trade and when, and not everyone here a
+overview	village	150	150	0.113	113	A dispute over grazing rights and water access has run for two seasons, and the families o
+overview	town	150	150	0.027	121	The Corrupt Council's hold on {S} is weaker than it looks from outside.
+overview	city	150	150	0.04	129	The merchant class is outbuying noble landholdings. Three estates have changed hands in th
+overview	metropolis	150	150	0.047	125	The merchant class is outbuying noble landholdings. Three estates have changed hands in th
+== rec-e3none-C
+power	thorp	150	150	0.247	33	{S} tolerates the Elder Council, and no more.
+power	hamlet	150	150	0.133	42	{S} tolerates the Elder Council, and no more.
+power	village	150	150	0.26	36	{S} tolerates the Elder Council, and no more.
+power	town	150	150	0.233	21	The Town Mayor has been debating market levies for three months. The merchants have argued
+power	city	150	150	0.24	24	The City Council has been debating market levies for three months. The merchants have argu
+power	metropolis	150	150	0.2	27	The Grand Council has been debating market levies for three months. The merchants have arg
+overview	thorp	150	150	0.127	50	The question of who tends the shared fields when the miller's household falls ill has neve
+overview	hamlet	150	150	0.093	82	Two families have been in a quiet feud over a boundary marker for longer than anyone can c
+overview	village	150	131	0.073	109	A dispute over field rotation and grazing rights has divided the village for most of this 
+overview	town	150	150	0.093	108	The Town Mayor has been debating market levies for three months. The merchants have argued
+overview	city	150	150	0.06	118	The Merchant oligarchy has been debating market levies for three months. The merchants hav
+overview	metropolis	150	150	0.067	101	The Grand Merchant Oligarchy has been debating market levies for three months. The merchan
+== rec-e3none-V
+power	thorp	150	150	0.213	39	The most devout households want a say over who may trade and when, and not everyone here a
+power	hamlet	150	150	0.173	51	The most devout households want a say over who may trade and when, and not everyone here a
+power	village	150	150	0.08	61	Monsters prowl near the outlying farms, and no one here can agree whether to raise a levy 
+power	town	150	150	0.073	59	The creditor's agent has blocked the money for repairs. In public they talk of prudence; i
+power	city	150	150	0.133	58	The merchant class is outbuying noble landholdings. Three estates have changed hands in th
+power	metropolis	150	150	0.127	60	The merchant class is outbuying noble landholdings. Three estates have changed hands in th
+overview	thorp	150	150	0.173	60	The most devout households want a say over who may trade and when, and not everyone here a
+overview	hamlet	150	150	0.107	102	The most devout households want a say over who may trade and when, and not everyone here a
+overview	village	150	133	0.04	112	The most devout households want a say over who may trade and when, and not everyone here a
+overview	town	150	150	0.027	121	The Corrupt Council's hold on {S} is weaker than it looks from outside.
+overview	city	150	150	0.04	129	The merchant class is outbuying noble landholdings. Three estates have changed hands in th
+overview	metropolis	150	150	0.047	125	The merchant class is outbuying noble landholdings. Three estates have changed hands in th
