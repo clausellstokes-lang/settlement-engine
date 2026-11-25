@@ -882,14 +882,15 @@ export const generatePressureSentence = settlement => {
   if (['thorp', 'hamlet'].includes(detail.tier || '')) {
     const thorpPressures = [
       'A dispute over grazing rights and water access has been running for two seasons without resolution.',
-      'The harvest was thin this year. Everyone knows it. Nobody is saying it directly.',
+      { text: 'The harvest was thin this year. Everyone knows it. Nobody is saying it directly.', excludes: ['food: ≥ secure'] }, // WORDS-2 E3 (RULING G13 (3)): never beside a printed Secure
       'A family moved away last spring. The reason is not discussed, but it affected the dynamics here.',
       { text: "The question of who tends the shared fields when the miller's household falls ill has never been properly settled.", needs: ['institution: mill'] },
       'Two families have been in a quiet feud over a boundary marker for longer than anyone can clearly remember.',
-      'The last frost came late and damaged the seedstock. Recovery is possible but the margin is narrow.',
+      { text: 'The last frost came late and damaged the seedstock. Recovery is possible but the margin is narrow.', excludes: ['food: ≥ secure'] }, // WORDS-2 E3 (G13 (3))
       'A stranger passed through a month ago and asked questions nobody found comfortable.',
     ];
-    return textOf(thorpPressures[Math.floor(_rng() * thorpPressures.length)]); // R-C (CENSUS-2d): a declared row gives back its text; CENSUS-1e enforces
+    const at = Math.floor(_rng() * thorpPressures.length), facts = factsOf(settlement), admitted = (/** @type {unknown} */ t) => declarationAdmits(declarationOf(t), /** @type {any} */ (facts)).admitted; // WORDS-2 E3 (RULING G13 (3)): the stress pool's form: a row's declaration honoured after the one pick, a refused row resolving draw-free to the next admitted
+    return textOf([...thorpPressures.slice(at), ...thorpPressures.slice(0, at)].find(admitted) ?? thorpPressures[at]); // R-C (CENSUS-2d): a declared row gives back its text
   }
 
   return null;
