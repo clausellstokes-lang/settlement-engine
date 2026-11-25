@@ -308,3 +308,15 @@ in place of `priest` (a place with the body and a church may be told of its two 
 replacing b0cca45be at the hand-in; C, V and goldens moved 0. BIRTH-1's hand-back is final at bb9350cdc on
 `lane/birth-1-2026-11-25`: D2 4ea69f420, D3 5262fbee4, D5 289a70b3a, D2b 4822a2175, D7 (to be replaced), D8 cf5d033e5
 PARKED owing one widened-register row ("family") on the owner's leave.
+
+**G26 (16:21 UTC): E1 RECEIVED; E7 (b) BLOCKED BY ITS OWN DOOR; HAND-INS TO THE CHAIR.** E1 `lane/words-1-2026-11-25-e1-wip`
+902b7005d: the double possessive on owner pages C 125 in 122 places to 0, V 145 in 126 to 0; on the public projection
+52 in 41 and 34 in 19 to 0; record strings 120 and 96 to 0; places moved by page 122 / 126; battery rows 0/0;
+unexplained 0/0; five joiners the first joined run found cured by the same rules; named: the surname "He" reads "He's".
+E7 (WORDS-2): `node scripts/sameness-census.mjs --write` on E7's tree rendered 900 places twice and wrote nothing, exit
+1 ("a write never raises a ceiling"): 14 slots above their ceilings on both renders (PDF NPCQuickRef NPCRow and
+NotableNPCs FullCard in town, city, metropolis, .93 to 1.00 against .08 to .60; web World/NPCs InfoPill in hamlets,
+1.00 against .70; Viability in hamlets on the web tab and the PDF callout, .48 to .51 against .29). E7 changes only
+unused text keys, so the breaches are inferred to stand on the base: BIRTH-2's run under G23 (2) answers it. RULED:
+E7 handed in as (c) built, (a) measured not built, (b) blocked; the 14 slots go to PRERELEASE-LIST E13.
+CLOSE-7 HANDED OVER at 28547978e: every hand-in now comes to the chair only; `gen/HAND-INS.md` is the one table.
