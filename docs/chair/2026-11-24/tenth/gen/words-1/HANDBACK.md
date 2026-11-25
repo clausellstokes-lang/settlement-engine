@@ -83,7 +83,14 @@ STATE AT 11:01 UTC:
   then e8-lint3.
 - SCRATCH (local only, never pushed): wt/all on `scratch/words-1-all2` = e1 + e8 + d6 merged WITH hooks (the first try,
   scratch/words-1-all bfcca3c75, was committed with core.hooksPath=/dev/null: a fault, deleted, reported to the chair).
-- NEXT: when e8-lint3.log has its exit line, run `sh scratchpad/run-renders.sh` minus its wait (page battery --views
+- 12:05 UTC: CHAIR: (b) stands for E8's held line; D8 PARKED (keep "the lord's reeve" as a test case only; nothing waits on it);
+  a joined proof tree is NEVER committed: detached worktree, `git merge --no-commit --no-ff`, prove, record the commits, remove.
+  E1 -wip 97ba72d9b PUSHED: e1-named 117/121 files (reds: bar7DesksLines item 8 and goalSentencesOnceInTown (u), both
+  re-stated by E1's cause in 97ba72d9b; powerEconomyFreshness A4 and dossierProseManifest DRIFT are on RED-AT-LINE); copy
+  172/172; lint running. E8 -wip 94b7a13d9 PUSHED (manifest rationale for reflexiveSlot.test.js). Base lint (wt/red) reds:
+  proseComposed, proseCorpusBytes x2, sovereigntyLightingContract (+ proseDrawnAnchors from my copied E1 test, since cured).
+  CHAIN (bmv1hv30q, after e1-lint): d6-red, d6-named, d6-copy, d6-lint, e8-lint3, e1-re, e1-red2.
+- NEXT: when e1-red2.log has its exit line, run `sh scratchpad/run-renders.sh` minus its wait (page battery --views
   --strings on base and all, C and V, ~70 min, in TWO background calls under 2 h each), then classify every changed string
   and page line by unit; the D6 owed count (contenders keeping "Contests" with a recorded conflict with the holder).
 NOT IN STEP ONE (E8b): the card lines (tells 899/852, impressions, secrets, goal.long npcGenerator); their draws dedupe by text
