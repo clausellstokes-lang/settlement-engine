@@ -136,7 +136,15 @@ Reports to the lane's owner: a FILE, at most 200 words. My context began with a 
   THE REJECTED MARKER's TELL (data for the put-back; CONFIRMED, `u4/c4tell-today.txt`, 02:22): today-born 140, 4,620 twin reads, 1,177
     hiding: 528 HIDING READS CARRY A TELL (a marked row S over the served roster leaves bare, where the nothing-hidden read agrees) on
     17 places. V15's cut-alone is borne out.
-  RUNNING (background): STANDWALK.
+  ITEM 3 RETURNED: STANDWALK 826859d82 on `lane/veil-51-2026-11-24-walker-wip` (pushed 02:26; parent aa54a6791; test-only + its manifest
+    row): `tests/lint/standingFormsTotality.walker.test.js` + `tests/fixtures/standingForms.master-db832c892.json`. ITS DIFF READ ONCE:
+    NO FAULT. (1) totality green, all 117 rows match and cut their samples whole, the planted form reds by name; (2) master's 41 forms
+    (recorded extraction, its command in the fixture) all rows; (3) THE CENSUS (CONFIRMED, `u4/standwalk/measures.txt`): today 743 rows:
+    CUT EXACTLY 365, NO TAIL 320, UNCUT 0, WRONG 0, AMBIGUOUS 58 (DRIFT 4, hidden 11); master 752: 553, 161, 0, 0, AMBIGUOUS 38 (hidden
+    13). EVERY AMBIGUOUS CASE is one pair, M-R2-buy (master's label form) and R2-buy (the tip's name form), matching the SAME SPAN of one
+    "Close enough to the two above..." tail: one reading textually. Put to VEIL-55 and the chair (02:28): a tie over one span is ONE
+    reading under V14 (1); then 0 to withhold whole. eslint 0; walkers no worse than aa54a6791.
+  NOTHING RUNNING. NEXT: the rulings asked; then wait for "R4-IDS MERGED".
   IF THIS SEAT STOPS: re-run what u4.log lacks (`sh docs/chair/2026-11-24/tenth/veil/v51/u4/u4.sh <steps>`; `sh .../rival.sh`)
   after the trees above are re-made (`git worktree add --detach` at the commits named; node_modules linked).
 - NEXT: wait for "R4-IDS MERGED <commit>" from VEIL-55, then unit 2 (R5-DESC), reading PART 42 s1 block 0 (a3bc0dc9d) and
