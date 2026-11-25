@@ -93,6 +93,27 @@ STATE AT 11:01 UTC:
 - NEXT: when e1-red2.log has its exit line, run `sh scratchpad/run-renders.sh` minus its wait (page battery --views
   --strings on base and all, C and V, ~70 min, in TWO background calls under 2 h each), then classify every changed string
   and page line by unit; the D6 owed count (contenders keeping "Contests" with a recorded conflict with the holder).
+STATE AT 13:32 UTC (`date -u`):
+- GATES DONE (chain bmv1hv30q): E1 lint at 72db12c69 = the base's four reds only (proseComposed, proseCorpusBytes x2,
+  sovereigntyLightingContract); E1 re-run 28/28; E1 red on base 3/4. E8 lint (94b7a13d9) = the same four only.
+  D6: red on base 1/1; named 47/48 files (the red, dossierPhoneFloorAllViews x2 "World/Daily Life 9→8", is RED ON THE BASE
+  too: base-phonefloor.log, 13:18 UTC; not D6's); copy 172/172; lint: the base four + proseNumerics (CURED in 81ac266a5: my
+  header note shifted PowerStrata.jsx's ledger rows 285→288; the note dropped) + writerReach (FROZEN REGISTER, NAMED, NOT
+  RE-RECORDED: `scripts/.writer-reach-baseline.json` surfaceReach row "type on factionRelationships" web-transitive N→R, D6's
+  powerStrata.js now reads the tie's `type`; the shrink-only `--write` door, tried in the scratch tree wt/red and reverted,
+  would also re-freeze the base's own drift (closure sizes, digests), so it is the owner's/CLOSE-7's).
+- PUSHED: e1-wip 72db12c69 (13:19), d6-wip 81ac266a5 (13:24); e8-wip 94b7a13d9 unchanged.
+- THE JOINED PROOF TREE (chair's 11:01 method): /home/user/wt/join, detached at 0ec96f13d8; `git merge --no-commit --no-ff`
+  of e1-wip 72db12c69 + d6-wip 81ac266a5 (octopus of all three refused on goals.js and goalSentencesOnceInTown); then
+  `git diff 0ec96f13d8 e8-wip(94b7a13d9) | git apply -3`; three conflicts resolved by union (personMention.js: both blocks;
+  goals.js: both imports; the test: vantageHash(heldGoal(longTitled(c)))). CLOSE-7 meets the same two conflicts. Never
+  committed; removed after the proof.
+- RENDERING (13:30, two background calls, mutex): page battery --views --strings on wt/base and wt/join, C and V
+  (scratchpad s-base-C/V, s-join-C/V). Then: `tools/joined-proof.mjs <base> <join>` (E1 zero check on owner pages + public,
+  strings and lines classed by unit, rows moved, examples), `tools/e8-check.mjs` and `tools/d6-owed.mjs` on wt/join, C and V.
+- THEN the three hand-ins (UNIT lines to CLOSE-7 and the chair), each naming: frozen/golden rows moved (rosterFinalUnderHeldRoster
+  A1, generationForkCensus A1, powerEconomyFreshness A4, dossierProseManifest DRIFT, the writer-reach row), E8's held line,
+  the governanceAccount standing sentences (veil's lane), the veto-list phrases, partial reads.
 NOT IN STEP ONE (E8b): the card lines (tells 899/852, impressions, secrets, goal.long npcGenerator); their draws dedupe by text
 in registries (castPowers hookRegistry.tells, CarriedSecrets), so a draw-time fill would move draws: a design is owed.
 npcData.js was read in its changed region only (pairProse, the tie table), not whole: said in the hand-in.
