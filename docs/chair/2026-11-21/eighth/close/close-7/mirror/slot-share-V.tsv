@@ -1,0 +1,13 @@
+size	slot	before	after	commonest before	commonest after
+thorp	food_culture	17/150 0.113	17/150 0.113	A pot of stew over the fire is the usual supper, and there i	A pot of stew over the fire is the usual supper, and there i
+thorp	dawn_work	15/150 0.100	15/150 0.100	The first light goes to walking the edges of the fields; the	The first light goes to walking the edges of the fields; the
+hamlet	food_culture	13/150 0.087	13/150 0.087	Meals are plain and filling, and little goes to waste.	Meals are plain and filling, and little goes to waste.
+hamlet	dawn_work	12/150 0.080	11/150 0.073	People go out to their work together at dawn, and no one str	Before the day's work begins, someone looks out over the cou
+village	food_culture	12/150 0.080	12/150 0.080	Plain food is plentiful here, and second helpings are not be	Plain food is plentiful here, and second helpings are not be
+village	dawn_work	13/150 0.087	13/150 0.087	Water is fetched at first light in company, never alone, and	Water is fetched at first light in company, never alone, and
+town	food_culture	18/150 0.120	18/150 0.120	Food is steady here, if not generous, and every household ha	Food is steady here, if not generous, and every household ha
+town	dawn_work	15/150 0.100	15/150 0.100	The merchants are at their stalls before first light, and th	The merchants are at their stalls before first light, and th
+city	food_culture	13/150 0.087	13/150 0.087	There is enough to eat, if nobody asks for much more than th	There is enough to eat, if nobody asks for much more than th
+city	dawn_work	11/150 0.073	11/150 0.073	At the inns and taverns, breakfast is already being served t	At the inns and taverns, breakfast is already being served t
+metropolis	food_culture	17/150 0.113	17/150 0.113	Most households eat simply, and they eat enough.	Most households eat simply, and they eat enough.
+metropolis	dawn_work	14/150 0.093	14/150 0.093	The gates are opened at first light, and the first of the da	The gates are opened at first light, and the first of the da

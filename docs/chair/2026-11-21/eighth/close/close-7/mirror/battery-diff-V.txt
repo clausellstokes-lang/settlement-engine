@@ -1,0 +1,4 @@
+dp-hamlet-100	record same	page MOVED	lost PLENTY	gained -
+dp-hamlet-139	record same	page MOVED	lost PLENTY	gained -
+dp-village-76	record same	page MOVED	lost PLENTY	gained -
+page-battery --diff: 900 births; record moved 0, page moved 3, rows moved 3

@@ -1,0 +1,9 @@
+births 900; pages whose Daily Life moved 4; by slot {"food_culture":4,"commoner_resentments":4,"outsider_impressions":2,"dawn_work":4}
+  dp-hamlet-117 (adequate|famine): food_culture, commoner_resentments, dawn_work
+  dp-village-51 (adequate|famine): food_culture, commoner_resentments, dawn_work
+  dp-village-54 (surplus|famine): food_culture, commoner_resentments, outsider_impressions, dawn_work
+  dp-village-76 (adequate|famine): food_culture, commoner_resentments, outsider_impressions, dawn_work
+K2: before 0 [] after 0 []
+K1: before 0 [] after 1 [dp-hamlet-117]
+C7: before 0 [] after 0 []
+F6: before 9 [dp-thorp-12 dp-thorp-70 dp-thorp-98 dp-thorp-122 dp-hamlet-91 dp-hamlet-103 dp-village-52 dp-village-97 dp-village-117] after 9 [dp-thorp-12 dp-thorp-70 dp-thorp-98 dp-thorp-122 dp-hamlet-91 dp-hamlet-103 dp-village-52 dp-village-97 dp-village-117]

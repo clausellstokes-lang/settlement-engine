@@ -1,0 +1,13 @@
+size	slot	before	after	commonest before	commonest after
+thorp	food_culture	17/150 0.113	17/150 0.113	Food is steady here, if not generous, and every household ha	Food is steady here, if not generous, and every household ha
+thorp	dawn_work	19/150 0.127	19/150 0.127	Everyone keeps within call of the houses in the first hours,	Everyone keeps within call of the houses in the first hours,
+hamlet	food_culture	16/150 0.107	16/150 0.107	The everyday fare is a simple stew and whatever else the day	The everyday fare is a simple stew and whatever else the day
+hamlet	dawn_work	18/150 0.120	18/150 0.120	Before anyone goes out to work, each household looks to its 	The elder is asked at first light whether all is well before
+village	food_culture	12/150 0.080	12/150 0.080	The place grows more than it eats, and it shows in every hou	The place grows more than it eats, and it shows in every hou
+village	dawn_work	22/150 0.147	20/150 0.133	The first light goes to walking the edges of the fields; the	The first light goes to walking the edges of the fields; the
+town	food_culture	15/150 0.100	15/150 0.100	Most households eat simply, and they eat enough.	Most households eat simply, and they eat enough.
+town	dawn_work	12/150 0.080	12/150 0.080	Loads are made ready before light for the journey out, and t	Loads are made ready before light for the journey out, and t
+city	food_culture	17/150 0.113	17/150 0.113	Meals are plain and filling, and little goes to waste.	Meals are plain and filling, and little goes to waste.
+city	dawn_work	16/150 0.107	16/150 0.107	Stalls go up at the fish market at first light, and the firs	Stalls go up at the fish market at first light, and the firs
+metropolis	food_culture	16/150 0.107	16/150 0.107	The everyday fare is a simple stew and whatever else the day	The everyday fare is a simple stew and whatever else the day
+metropolis	dawn_work	16/150 0.107	16/150 0.107	At the inns and taverns, breakfast is already being served t	At the inns and taverns, breakfast is already being served t

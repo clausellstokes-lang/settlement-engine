@@ -141,3 +141,86 @@ nothing was written to any tree; `close-7/mirror/red-first-before.log`): **13 of
 **Commit 3: 4c0051c4d.** The lighting census refrozen by its own door at 366d78ec6 on a clean tree: files
 3789 → 3790, parked 491 → 492, credited, titles and suite titles unchanged. The refreeze run fails by design; the
 walker run plainly after it is **34/34 green, exit 0.**
+
+**tests/lint whole on 4c0051c4d** (`g2-lint.log`, its own mutex run): **3374 passed, 3 failed, exit 1.**
+- The 3 failures are the known three only: proseCorpusBytes RAW and GZIP, and proseComposed A0b.
+- A0b reads 2327 against its ceiling of 2103, the same figure as on A2's tree, so it is not moved by this unit.
+
+**tests/copy whole on 4c0051c4d** (`g2-copy.log`): **15 files, 172/172, exit 0.**
+
+**Named tests** (every test file naming a changed file, outside tests/lint and tests/copy: 183 files in five runs,
+`g2-named-0{0..4}.log`):
+- 00: 423 passed, 1 failed. **colourMarks4h** is red on the before tree too.
+- 01: 599 passed, 3 failed: **this unit's**. `dailyLifeDawn`, `dailyLifeFoodResentments` and `dailyLifeNoRepeat` each
+  re-derive the keyed pick with `filterDeclared` and no context. The `food production` atom is then unanswered, so their
+  oracles refused C7, F6 and K1 where the page held them correctly:
+  - hxd-hamlet-2 is a cell place of their own corpus and prints K1;
+  - hxd-hamlet-4 prints C7 (production below adequate).
+  The oracles now hand the deriver's own context (`ctx: { capacities: deriveAllCapacities(rec) }`). Re-stated by cause.
+- 02: 297/297.
+- 03: 512 passed, 3 failed.
+  - **narrativeQualityCorpus** ×2 is red on the before tree too.
+  - **bar5WorldLines (c)** is this unit's: its three r2s famine towns of the surplus band ARE the mirror's cell (they
+    print Famine). They printed the `surplus.wanting` lines W1, W4 and W2 under A2's hold; under R24d's bound they print
+    the critical fare (C3, C0, C2).
+  - The pin is re-stated by its cause: the line is a critical fare line, still never "plentiful". These seeds are of the
+    720 door's own prefix, so the 720 run should also show the cell there.
+- 04: 280/280.
+
+**The fare's and Dawn Work's slots on C (`food-of.mjs`, before = the before tree, after = 4c0051c4d;
+`close-7/mirror/food-compare-C.txt`):**
+- The Daily Life moved on **4 pages of 900**, exactly the cell: fare 4, grievance 4, visitor 2, Dawn Work 4.
+- K1 prints on dp-hamlet-117. K2 prints nowhere, and neither does C7.
+- F6 prints on the same 9 places before and after.
+
+**The fare's and Dawn Work's slots on V** (`close-7/mirror/food-compare-V.txt`):
+- The Daily Life moved on **3 pages of 900**, exactly the cell: fare 3, grievance 3, visitor 1, Dawn Work 3.
+- K1 prints on dp-hamlet-139. K2 prints nowhere.
+- C7 prints on the same 3 places before and after (dp-thorp-70, dp-hamlet-41, dp-town-89), and F6 on the same 17.
+
+**Commit 4: 62efe59ee.** The four pins of the named tests re-stated. Those four files: **36/36 green, exit 0.**
+
+## 7. The proof, whole (every run on the after tree is at 4c0051c4d's source; 62efe59ee changes tests only)
+
+**The page battery** (`read25/page-battery.mjs`; before = e7441a93f's tree with the new row's reader, after = the
+build). Receipts: `close-7/mirror/battery-{before,after}-{C,V}.table.txt` and `battery-diff-{C,V}.txt`.
+- **Born records moved: 0 of 900 on C, 0 of 900 on V** (the battery's record hash). The cure is on the page only, so
+  no golden or frozen surface moved (N6), and no golden byte change was dropped. None of this unit's files is in
+  `tests/fixtures/.golden-freeze-register.json`.
+- **FEDFARE: C 4 → 0, V 3 → 0.**
+- Every other row is equal before and after on both corpora (P3source, NOHEAL and FOODSEC at 0).
+- **Pages changed by this unit: C 4, V 3, the cell's places only.**
+  - V: the battery's page hash moved on exactly those 3.
+  - C: the page hash moved on 7. The 4 cell places, plus dp-thorp-0, dp-thorp-2 and dp-thorp-3, each the FIRST birth
+    of its battery worker.
+  - Those three are not this unit's: their Daily Life is identical before and after (`food-of`). Re-rendered on both
+    trees in one plan with another birth first (`plan-thorps-C.json`, `--views`), they read **page moved 0**.
+  - The first birth a worker renders does not hash stably from run to run: dp-thorp-1, first in that re-render, hashes
+    differently from its own battery runs (`thorps-pagehash.tsv`).
+- **The commonest-sentence share of the fare and Dawn Work slots, by size** (places printing the slot's commonest
+  sentence / 150; `close-7/mirror/slot-share-{C,V}.tsv`):
+
+  | size | C fare before → after | C Dawn Work before → after | V fare before → after | V Dawn Work before → after |
+  |---|---|---|---|---|
+  | thorp | 0.113 → 0.113 | 0.127 → 0.127 | 0.113 → 0.113 | 0.100 → 0.100 |
+  | hamlet | 0.107 → 0.107 | 0.120 → 0.120 | 0.087 → 0.087 | 0.080 → 0.073 |
+  | village | 0.080 → 0.080 | 0.147 → 0.133 | 0.080 → 0.080 | 0.087 → 0.087 |
+  | town | 0.100 → 0.100 | 0.080 → 0.080 | 0.120 → 0.120 | 0.100 → 0.100 |
+  | city | 0.113 → 0.113 | 0.107 → 0.107 | 0.087 → 0.087 | 0.073 → 0.073 |
+  | metropolis | 0.107 → 0.107 | 0.107 → 0.107 | 0.113 → 0.113 | 0.093 → 0.093 |
+
+  No share rises. Three fall, each where a cell place left the commonest Dawn Work sentence for the food branch: C
+  village, V hamlet, and C hamlet's tie, where the commonest sentence changed at the same 0.120.
+
+## 8. The gates, in sum
+- **Own:** close7Mirror, pageCensusFindings, close7FoodFact, the foodBandReaders lint arm and the three restated walkers
+  are green (133/133). The four restated named tests are green (36/36).
+- **tests/lint whole** (at 4c0051c4d; 62efe59ee changes no lint file): 3374 passed, 3 failed, the known three only.
+- **tests/copy whole:** 172/172.
+- **Named (183 files, five runs):** green except colourMarks4h and narrativeQualityCorpus ×2, both red on the before
+  tree, and the four this unit re-stated, green since 62efe59ee.
+- **Not taken in this unit:** the 720 door run. The r2s famine towns of `bar5WorldLines` show the cell exists in that
+  corpus too. Nothing is pushed.
+
+**Commits on `lane/close-7-2026-11-24-mirror-wip`:** fe948997a (the build), 366d78ec6 (FEDFARE and the lint
+re-statements), 4c0051c4d (the lighting census), 62efe59ee (the named pins).
