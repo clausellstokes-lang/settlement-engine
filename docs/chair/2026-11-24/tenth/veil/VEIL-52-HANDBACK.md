@@ -53,6 +53,14 @@ goes, by tests/copy's rules. ALL THREE SMALL RUNS DONE; the held runner released
 - After a container restart: start PostgreSQL (`su postgres -c "/usr/lib/postgresql/16/bin/pg_ctl -D /var/tmp/v18pg -l
   /var/tmp/v18log/pg.log -w start"`), then relaunch what `q52.log` lacks with `setsid nohup sh v52/run52.sh q52:<steps> &`.
 
+### UNIT (2) TESTS DONE (02:41, VEIL-55 read the diff: NO FAULT ON THIS BASE): `-mcsql-wip` 912be7b4e (f1da68754 the two test files;
+222b6110d the builder's hand-back; 912be7b4e the harness line); tests/lint whole 48 = 48 titles (`v52/out/LINT-PAIR-MCSQL.txt`).
+OWED AT UNIT 3's MERGE ONTO "R4-IDS MERGED", NAMED IN "TIP?": (1) galleryServerVeil's member-vs-link arm compares plainly (no re-key on
+this base); under R4-IDS every read draws its own salt: compare modulo the read's bijection (personIdBijection.shared.mjs ::
+canonPeople, as the lane's other two-read arms do), red first by a real id difference planted after the fold; (2) both test files
+cite "212's header item (36)": on the lane's tip (36) is R4-IDS's and STORED-PROSE (37): the doors' item takes the next number at the
+merge and the citations follow it.
+
 ### OWED, IN ORDER
 1. (done.) 2. (1a) snap and (1b) wdmi tables on the three sets, to VEIL-55 (<=200 words each). 3. The two plants.
 4. The builder's diff read, then VEIL-55's read. 5. UNIT 3 AFTER MY COMPACTION (VEIL-55 00:29): on "R4-IDS MERGED <commit>": merge
