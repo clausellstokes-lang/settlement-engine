@@ -98,8 +98,9 @@ STATE: ANCHORS-4 ab815e048 is pushed from its own worktree; the hook passed. It 
 - tailDisplayCivicBatch2 (fafeaf290): r2s-occupied-town-3 -> town-16, by its finder.
 - tailCrisisBatch8 (eb84bf98b): r2s-famine-city-1 -> city-9, by its finder.
 - hookThemeDraws (ab815e048): 2,147 -> 2,145. Plavinick (hk-probe-metropolis-6, desert) loses its Fish market and Sawmill faces.
-- goalSentencesOnceInTown (u): a STOP, for the chair to rule. It has no finder; its 300 towns are fixed against a fixture written
-  once from d3937c3f8; 16 fail the roster premise under B1(i).
+- goalSentencesOnceInTown (u): STOPPED by me; the chair RULED and BUILT it on the landing's tree (16:16). Nothing is owed: a stray
+  is counted on a terrain whose `withholds` list is non-empty; there are two new assertions (read on at least 280 of 300; at most
+  20 set aside); the fixture is not re-recorded.
 - Gates: tests/lint whole shows the known three and the four frozen; ratchet 167/167; strict 1113/1113.
 
 ## 0-HISTORY. THE RECORD THAT LED HERE (superseded by section 0 above)
