@@ -99,3 +99,51 @@ archives, in BATCH).
 - **`tests/lint` whole at bd99fa7b6:** 6 of 227 files red, 5 tests. They are the known three (proseComposed A0b,
   proseCorpusBytes RAW and GZIP) and the four frozen (newsHeadline, newsVoice, observedShapeReaders, proseFamilyContract).
   These are the same reds the hand-in's lint shows. No test title moved, so the lighting census needs no door.
+
+## ANCHORS-2 (the chair's ruling R24o)
+Commits are on the same branch, one per file, test files only:
+- **98a6aef9f:** (1), the phone-floor baselines.
+- **11266dd3b:** (3), mergeLadderHeldKeys A2.
+- **The commit after 11266dd3b:** (3), editCorpusRatchet A4 and A5.
+
+### (1) dossierPhoneFloorAllViews: RE-RECORDED (CONFIRMED by run)
+- MOBILE_BASELINE "World/Daily Life": prose 9 → 8.
+- DESKTOP_BASELINE "World/Daily Life": measured and sub14 9 → 8.
+- No other view moved; the failure's diff held that one row only. The file is 2/2 after.
+- The cause, R24h fca95c197, is written beside each figure and in the commit message.
+
+### (2) traditionsSameWindowChain: STOPPED, NOT BUILT (CONFIRMED by run; `ANCH/probe3.census.jsx`, `ANCH/finder.jsonl`)
+- Under today's rules, the first soak seed with three traditions in one window is **soak1k-5441**: "Deepwinter, the seventh
+  and eighth weeks", The Old Procession, The Hearth Contest, The Great Stars Offering.
+- No soak seed in 0 to 5999 holds three in a ONE-week window.
+- Three conflicts with R24o (2) as written:
+  - **The form literal:** 5441's window is two weeks, so its lines read "Kept in the same weeks as". The literal R24o keeps,
+    "Kept in the same week as", does not occur in them.
+  - **A duplicate:** 5441 is already the file's second test.
+  - **The cost:** a finder that scans from 0 runs about 115 ms a birth, so about 10.5 minutes to reach 5441. That is too slow
+    for a unit test.
+- For the chair: (a) let the finder find 5441 and derive the week word from the window; or (b) bound the scan; or (c) retire
+  the soak1k-5255 arm, since 5441 now carries the property.
+
+### (3) THE THREE FIGURES: RE-KEYED BY IDENTITY (CONFIRMED by run)
+The rows were measured by each file's own census, instrumented in copies on git-archive trees at the cut 0ec96f13d and at
+9d8c944a3 (B1(i)'s merge with its doors).
+- **editCorpusRatchet A4, declared-only {32, 10} → {29, 9}.** None joined. These LEFT:
+  - E7: metropolis|germanic|plains, |hills and |mountain (each |road|civilized|golden-master-v3);
+  - E8: metropolis|germanic|desert|road|civilized|golden-master-v3.
+- **mergeLadderHeldKeys A2, E7 22 → 23 and E8 5 → 4.**
+  - JOINED E7: town|germanic|plains|crossroads|civilized|golden-master-v3.
+  - LEFT E8: metropolis|germanic|desert|road|civilized|golden-master-v3.
+- **A4 also asserts that census**, and I re-stated those lines by the same cause:
+  - config rows {22, 5} → {23, 4};
+  - steps {88, 20} → {92, 16}.
+  - I measured both at the tip. R24o did not name them; that is mine to flag.
+- **editCorpusRatchet A5, the four seat pairs 6 → 7.**
+  - JOINED: city|germanic|desert|road|civilized|golden-master-v3.
+  - **Diffed leaf by leaf in both orders at the tip: TRACE-ONLY.** The one differing leaf is
+    `simulationTrace[112].causes[0].effect` ("59 npcs" | "60 npcs"), as at PEOPLE-1. Every world field is identical.
+- **The invariants, by run at the tip:**
+  - A4 and A5 are green: the layer channel is silent, there is no held motion, nothing real moved, went or arrived, the live
+    residue is 27 V-DEFENSE-INST, every escalation is EXHAUSTED, and determinism and undo hold.
+  - mergeLadderHeldKeys is 8/8.
+  - editCorpusRatchet A3 (328 vs 327) and A7 (honesty figures) stay red as at the cut. R24o does not name them.
