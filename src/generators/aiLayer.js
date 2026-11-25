@@ -24,7 +24,6 @@
  */
 
 import { formatCount } from '../domain/formatNumber.js';
-import { powersStrongestFirst } from '../domain/display/powersStrongestFirst.js'; // D4 (BIRTH-2): the five powers the template narrative names, strongest first
 
 // ── Data extraction ─────────────────────────────────────────────────────────
 
@@ -430,3 +429,4 @@ export async function runTemplateNarrative(settlement, onProgress) {
   };
 }
 import { chainPrintName } from '../domain/display/chainPrintName.js'; // COHERENCE-AGREE-6 (F1): what a chain prints under
+import { powersStrongestFirst } from '../domain/display/powersStrongestFirst.js'; // D4 (BIRTH-2): the five powers the template narrative names, strongest first

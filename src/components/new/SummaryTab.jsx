@@ -17,7 +17,6 @@ import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
 import { edged } from '../../design/edgedBox.js';
 import { governingModifierWordsOf } from '../../domain/display/governingModifierWords.js';
-import { powersStrongestFirst } from '../../domain/display/powersStrongestFirst.js'; // D4 (BIRTH-2): the stored roster is not always strongest-first; the page sorts
 
 // Tier 7.19 — `second` was the per-file body-copy alias for '#6b5340'.
 // Routing it through `BODY` from tabConstants centralises future contrast
@@ -420,3 +419,4 @@ export default React.memo(SummaryTab);
 // import sits here, not at the head, so the line-keyed prose-numerics register's rows above stay put.
 import { crisisHookFor } from '../../domain/crisis/crisisHooks.js';
 import { prosperityInCrisisLine } from '../../domain/display/prosperityInCrisis.js';
+import { powersStrongestFirst } from '../../domain/display/powersStrongestFirst.js'; // D4 (BIRTH-2): the stored roster is not always strongest-first; the page sorts
