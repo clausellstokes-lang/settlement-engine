@@ -919,7 +919,7 @@ const OPEN_REVOLT = Object.freeze(['slave_revolt', 'insurgency']);
  * through the display seam (`proseHouseName`), the stop in `crisisStoppedRow.js :: rowMarkText`'s own words, the mark the
  * house's card prints. Houses under one mark share it; houses under different marks each carry their own. At the foot, so no
  * cited line moves.
- * @param {object} settlement @param {readonly string[]} supplying the stopped houses, by roster name
+ * @param {DossierSettlementView | null | undefined} settlement @param {readonly string[]} supplying the stopped houses, by roster name
  * @returns {string}
  */
 function stoppedSupplyOf(settlement, supplying) {
