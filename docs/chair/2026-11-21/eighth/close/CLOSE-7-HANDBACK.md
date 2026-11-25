@@ -345,6 +345,15 @@ gate for the lot):
     - personMention.js: keep both blocks.
   - Both typecheck green in their own trees.
 
+- D7: `lane/birth-1-2026-11-25-d7-wip` b0cca45be, from BIRTH-1 (G17, G18, G24): the crisis names only what the place holds.
+  - New atom `crisis body: <kind>` (facts/crisisBody.js); CRISIS_BODY_SIBLINGS; assembleSettlement :: settleCrisisBodyLines.
+  - Moves C 25 / V 17 (recentConflict, plus pressureSentence on C dp-city-93). Goldens 0. Typecheck green in its own tree.
+  - First paint +5,746 raw through factsOf -> crisisBody -> stressPowerFaces; worker +3,221. The chair asks for SIZE-BACK's method
+    on it (G24).
+  - VETO LIST: the atom; four sentences ("Word from the creditor has blocked the money for repairs." and three more, in BIRTH-1's
+    message); `priest` declared on the conversion original; the pool-dominance row.
+  - BIRTH-1 says D8 is green too (its UNIT line has not come).
+
 THE NEXT COMMAND: on BATCH's message:
 - read `close-7/reports/BATCH.md` and the diff once (`git -C /home/user/wt/batch diff --stat 0ec96f13d..HEAD`);
 - re-read the ruling's lines 45-79, 138-157 and 182-197;
