@@ -86,11 +86,38 @@ LIVE-PATH DONE (report `close-7/reports/LIVE-PATH.md`, harness `close-7/live-pat
 RUNNING: GUARD phase 2, by the same builder (agent a45b468ed08040c87), in /home/user/wt/guard on -guard-wip, cut at e2fd7caa4.
 Trees /home/user/wt/master and /home/user/wt/line are kept for it.
 
+POINT 116 (05:14 UTC; `close-7/briefs/LINE-116.md`): the line is ddca5c789, the troubles rule LIT, and births move.
+- It is MERGED onto cures as 27408d4ec. Its one conflict, the lighting baseline, took the line's side.
+- The lighting re-take by its door is QUEUED (task log `scratchpad/cures116-refreeze.log`, then `cures116-lighting-green.log`).
+  Then: commit the refreeze, run tests/lint, tests/copy and the cures' own tests on the merged tree, push -cures.
+- Stale named-seed anchors (crime wave or guild quarrel) may red: each is cured by the test's own finder, the assertion word for
+  word.
+
+THE CHAIR, 05:12 (`close-7/briefs/CHAIR-0512.md`):
+- SCOPE: this release is the generator alone. A fault in advance, simulator, map or custom content is one line to the chair.
+- LATER UNITS: "the crisis has a body" (measure first); the contender's word softened (three wordings with counts).
+- EFFICIENCY:
+  - REUSE ONE BUILDER across near units.
+  - Briefs name exact files, symbols and lines, say "read no wider", and give the ten binding lines.
+  - Run-only builders go at the lowest effort.
+  - BATCH every birth-moving item left (B1(ii), C1, P3source, goals I-13; later D2, D3, D5-D8, E1, E8) into ONE harness, ONE
+    before-and-after on C and V, ONE hand-in. That before-and-after also re-states A1, A2 and the mirror on the 116 tree.
+  - To the chair only: rulings, merges, the hand-in.
+- RESTATE-116 is SUPERSEDED (never dispatched).
+
+PLAN AFTER GUARD: the same builder (a45b468ed08040c87) takes BATCH (brief `close-7/briefs/BATCH.md`, to write):
+- B1(i)'s finish (R24e (1a), (1b), (2), plain);
+- B1(ii) (CHAIN-1 phase 4, plain);
+- C1 (R24b with R24g's names, plain);
+- P3source (R24g (1));
+- the goals I-13 measure;
+- one before-and-after on C and V at the cures tip with 116.
+
 THE NEXT COMMAND: on GUARD's message:
 - run `git -C /home/user/wt/guard log --oneline e2fd7caa4..HEAD`;
 - read `close-7/reports/GUARD.md` and the diff once;
 - re-read R24j's eight points;
-- merge onto cures, run the gates, push, and send the GUARD line with the golden list for the owner.
+- merge onto cures (now holding 116), run the gates, push, and send the GUARD line with the golden list.
 
 ### 0.1 Ground
 - THE LIT TREE (before every cure): `/home/user/wt/lit`, detached at d447ee31e (the flip; `origin/lane/close-6-2026-11-23-flip`).
