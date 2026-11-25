@@ -40,9 +40,9 @@
  *   4. THE DIAL IS ONE LINE. `NEW_SETTLEMENT_TROUBLE_LAW_VERSION` is the only place a new world's
  *      trouble law is chosen, and the mint reads it and nothing else.
  *
- * ⛔ THE LAW IS DARK, AND LIGHTING IT IS THE OWNER'S WORD, NOT A LANE'S (the chair's one unit at the
- * close). Every proof of law 2 sets `_troubleLawVersion: 2` explicitly AFTER `birthConfig`, in a test
- * or in the lane's instrument, never as a default under `src/`.
+ * ⭐ THE LAW IS LIT AT POINT 116 ON 2026-11-25 BY THE TENTH CHAIR'S DECISION, THE OWNER HAVING DEFERRED
+ * THE QUESTION TO IT; ITS NUMBERS (`TROUBLE_WEIGHT_TUNING`) STAY DRAFTS UNTIL THE OWNER'S TUNING SIGNATURE.
+ * Every new birth mints `_troubleLawVersion: 2` through `birthConfig`; a world with no marker reads 1.
  *
  * ⛔ THE VERSION NUMBERS ARE SPELLED ONCE, IN `TROUBLE_LAW_VERSIONS`, AND THE NAMED VERSIONS ARE READ
  * FROM IT (vocabulary, not tuning).
@@ -82,11 +82,11 @@ export const DEFAULT_TROUBLE_LAW_VERSION = TROUBLE_LAW_VERSIONS[0];
 /** The version the weighted trouble law (the three numbers read how much is there) runs under. */
 export const WEIGHTED_TROUBLE_LAW_VERSION = TROUBLE_LAW_VERSIONS[1];
 
-/** ⭐ THE ONE DIAL — the trouble law a NEWLY-created world mints under. AT THE DEFAULT: lighting it is
- *  the owner's word, and reverting is the same one line. Typed as the SPACE of versions (the
+/** ⭐ THE ONE DIAL — the trouble law a NEWLY-created world mints under. LIT AT POINT 116 (the tenth
+ *  chair's decision), and reverting is the same one line. Typed as the SPACE of versions (the
  *  living-content dial's lesson), so the mint's dark comparison stays reachable when the dial moves.
  *  @type {number} */
-export const NEW_SETTLEMENT_TROUBLE_LAW_VERSION = DEFAULT_TROUBLE_LAW_VERSION;
+export const NEW_SETTLEMENT_TROUBLE_LAW_VERSION = WEIGHTED_TROUBLE_LAW_VERSION;
 
 /**
  * ⭐ THE TROUBLE LAW'S ONE TUNING TABLE. EVERY VALUE IS A DRAFT, signed by none (the seat KINDS-1's

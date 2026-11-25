@@ -10,20 +10,20 @@
  * moves. The light is the owner's word, never a lane's (the chair's one unit at the close).
  *
  * THE ARMS, in the brief's order (K1.md, MANIFEST item 6):
- *   1. CREATE (dark, the product path) — no `_troubleLawVersion` on a birth (its own key only: the
- *      one pin of `birthConfig(null)` is `tests/domain/generationLawsSavedPlace.test.js` (g), E61 (5),
- *      which spreads every register row's mint, this law's included).
+ *   1. CREATE (lit, the product path; point 116) — every birth mints `_troubleLawVersion: 2` (its own
+ *      key only: the one pin of `birthConfig(null)` is `tests/domain/generationLawsSavedPlace.test.js`
+ *      (g), E61 (5), which spreads every register row's mint, this law's included).
  *   2. CREATE/CLAMP — an incoming `_troubleLawVersion: 2` (the Library-Load hop, walked) is
  *      clamped away: an imported marker never decides a birth.
  *   3. READ — the closed membership read, from a config, a settlement's `config` and its `_config`;
  *      everything that is not an enabled version fails closed to 1.
- *   4. THE REGISTER — `GENERATION_LAWS.trouble` is a WIRED row whose why says the dial is dark.
+ *   4. THE REGISTER — `GENERATION_LAWS.trouble` is a WIRED row whose why says the dial is lit, by whom.
  *   5. CREATE (lit, fired deliberately) — through the mocked-module seam, the mint reaches
  *      `birthConfig` and the clamp does not defeat it; the real reader still reads a markerless
  *      world as 1 under a lit dial.
  *   6. THE TABLE — `TROUBLE_WEIGHT_TUNING` is deep-frozen, and every row has 0 < floor <= ceiling < 1.
- *   7. THE HEADER — the leaf carries the owner's two rules VERBATIM, says it is DARK, and imports
- *      nothing.
+ *   7. THE HEADER — the leaf carries the owner's two rules VERBATIM, says it is LIT and by whose
+ *      decision (its numbers drafts), and imports nothing.
  *
  * @enforced-by this test
  */
@@ -104,29 +104,32 @@ describe('the trouble law (KINDS-1 K1) is WIRED and lands DARK', () => {
     expect(WEIGHTED_TROUBLE_LAW_VERSION).toBe(TROUBLE_LAW_VERSIONS[1]);
     expect(DEFAULT_TROUBLE_LAW_VERSION).toBe(1);
     expect(WEIGHTED_TROUBLE_LAW_VERSION).toBe(2);
-    // The dial's value is pinned in ONE test only, "1. CREATE (dark)" below (the chair's rule of 22:01 UTC).
+    // The dial's value is pinned in ONE test only, "1. CREATE (lit)" below (the chair's rule of 22:01 UTC).
   });
 
-  // ── 1. CREATE (dark) ─────────────────────────────────────────────────────────
-  // ⭐ THE ONE ARM OF THIS FILE THAT MOVES WITH THE DIAL: it follows `NEW_SETTLEMENT_TROUBLE_LAW_VERSION` (the owner's
-  // word; one commit on the flip's list). Every other arm of the lane's files forces its law in its own config.
-  it('1. CREATE (dark): birthConfig carries no _troubleLawVersion — its own key only, on a config, null and undefined', () => {
+  // ── 1. CREATE (lit) ──────────────────────────────────────────────────────────
+  // ⭐ THE ONE ARM OF THIS FILE THAT MOVES WITH THE DIAL: it follows `NEW_SETTLEMENT_TROUBLE_LAW_VERSION`. LIT AT POINT
+  // 116 ON 2026-11-25 BY THE TENTH CHAIR'S DECISION, THE OWNER HAVING DEFERRED THE QUESTION TO IT; ITS NUMBERS
+  // (`TROUBLE_WEIGHT_TUNING`) STAY DRAFTS UNTIL THE OWNER'S TUNING SIGNATURE. Until then this arm asserted the dial at
+  // the default and no key on a birth. Every other arm of the lane's files forces its law in its own config.
+  it('1. CREATE (lit): birthConfig mints _troubleLawVersion: 2 — its own key only, on a config, null and undefined', () => {
     expect(
       NEW_SETTLEMENT_TROUBLE_LAW_VERSION,
-      'the trouble dial is not at the default. Lighting it is the owner\'s word (the chair\'s one'
-      + ' unit at the close); this is the one arm that moves with it.',
-    ).toBe(DEFAULT_TROUBLE_LAW_VERSION);
-    expect(newSettlementTroubleLaw()).toEqual({});
+      'the trouble dial is not lit. It was lit at point 116 by the tenth chair\'s decision, the owner'
+      + ' having deferred the question to it; this is the one arm that moves with it.',
+    ).toBe(WEIGHTED_TROUBLE_LAW_VERSION);
+    expect(NEW_SETTLEMENT_TROUBLE_LAW_VERSION).not.toBe(DEFAULT_TROUBLE_LAW_VERSION);
+    expect(newSettlementTroubleLaw()).toEqual({ [TROUBLE_LAW_CONFIG_KEY]: 2 });
     const born = birthConfig({ ...CONFIG });
-    expect(Object.hasOwn(born, TROUBLE_LAW_CONFIG_KEY)).toBe(false);
-    expect(born[TROUBLE_LAW_CONFIG_KEY]).toBeUndefined();
-    expect(isWeightedTrouble(born)).toBe(false);
+    expect(Object.hasOwn(born, TROUBLE_LAW_CONFIG_KEY)).toBe(true);
+    expect(born[TROUBLE_LAW_CONFIG_KEY]).toBe(2);
+    expect(isWeightedTrouble(born)).toBe(true);
     // ⭐ THE WHOLE VALUE OF `birthConfig(null)` IS PINNED ONCE, NOT HERE (CLOSE-1 JOIN, the chair's E61 (5),
     // COMMON-RULES 14 (c)): `tests/domain/generationLawsSavedPlace.test.js` (g) pins it from every register row's own
     // mint, dark and lit, this law's included; it is the pin on the flip's list. This arm keeps the trouble law's own
-    // key: absent on every birth while its dial is dark.
+    // key: 2 on every birth now its dial is lit.
     for (const empty of [null, undefined]) {
-      expect(Object.hasOwn(birthConfig(empty), TROUBLE_LAW_CONFIG_KEY), `birthConfig(${empty})`).toBe(false);
+      expect(birthConfig(empty)[TROUBLE_LAW_CONFIG_KEY], `birthConfig(${empty})`).toBe(2);
     }
   });
 
@@ -190,7 +193,7 @@ describe('the trouble law (KINDS-1 K1) is WIRED and lands DARK', () => {
   });
 
   // ── 4. THE REGISTER ──────────────────────────────────────────────────────────
-  it('4. GENERATION_LAWS.trouble is a WIRED row that says the dial is dark, and why', () => {
+  it('4. GENERATION_LAWS.trouble is a WIRED row that says the dial is lit, by whose decision, and why', () => {
     const row = GENERATION_LAWS.trouble;
     expect(row, 'the create boundary carries no trouble-law row').toBeTruthy();
     expect(row.configKey).toBe('_troubleLawVersion');
@@ -200,7 +203,11 @@ describe('the trouble law (KINDS-1 K1) is WIRED and lands DARK', () => {
     expect(row.module).toBe(LEAF_REL);
     expect(row.wiring).toBe('WIRED');
     expect(String(row.why).length).toBeGreaterThan(60);
-    expect(row.why).toMatch(/\bdark\b/i);
+    // Until point 116 this read /\bdark\b/i: the row now says the dial is lit, by whom, and that its numbers are drafts.
+    expect(row.why).toMatch(/THE DIAL IS LIT AT POINT 116 ON 2026-11-25 BY THE TENTH CHAIR'S DECISION/);
+    expect(row.why).toMatch(/THE OWNER HAVING DEFERRED THE QUESTION TO IT/);
+    expect(row.why).toMatch(/STAY DRAFTS UNTIL THE OWNER'S TUNING SIGNATURE/);
+    expect(row.why).not.toMatch(/THE DIAL IS DARK/); // anchored: the same why is matched positively on the three lines above
     expect(row.why).toMatch(/owner/i);
     expect(row.why).toMatch(/zero-import leaf/i);
     expect(row.why).toMatch(/own chunk/i);
@@ -260,15 +267,19 @@ describe('the trouble law (KINDS-1 K1) is WIRED and lands DARK', () => {
   });
 
   // ── 7. THE HEADER ────────────────────────────────────────────────────────────
-  it('7. the leaf\'s header carries the owner\'s two rules verbatim, says it is DARK, and the leaf imports nothing', () => {
+  it('7. the leaf\'s header carries the owner\'s two rules verbatim, says it is LIT and by whose decision, and the leaf imports nothing', () => {
     const text = readFileSync(join(process.cwd(), LEAF_REL), 'utf8');
     const header = text.slice(0, text.indexOf('*/'));
     for (const rule of OWNER_RULES) {
       expect(header, `the owner's rule is not in the header verbatim: ${rule}`).toContain(rule);
     }
     expect(header).toMatch(/A WORLD BORN BEFORE THE LIGHT NEVER CHANGES/);
-    expect(header).toMatch(/\bDARK\b/);
-    expect(header).toMatch(/owner's word/i);
+    // Until point 116 this read /\bDARK\b/ and /owner's word/i: the header now says the law is lit, by whom, and that
+    // its numbers stay drafts (the idiom's "DARK BY DEFAULT" property still stands, so DARK alone proves nothing).
+    expect(header).toMatch(/THE LAW IS LIT AT POINT 116 ON 2026-11-25 BY THE TENTH CHAIR'S DECISION/);
+    expect(header).toMatch(/THE OWNER HAVING DEFERRED\s+\*\s+THE QUESTION TO IT/);
+    expect(header).toMatch(/STAY DRAFTS UNTIL THE OWNER'S TUNING SIGNATURE/);
+    expect(header).not.toMatch(/THE LAW IS DARK/); // anchored: the same header is matched positively on the three lines above
     // The leaf imports nothing: no cycle can form through it. The liveness anchor first: the text
     // read is the leaf itself (it declares the mint), so an absent import is the leaf's.
     expect(text).toMatch(/^export function newSettlementTroubleLaw\(\)/m);
