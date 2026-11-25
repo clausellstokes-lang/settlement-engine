@@ -54,7 +54,11 @@ THE NEXT COMMAND, when the cures gates finish:
 ### 0.1 Ground
 - THE LIT TREE (before every cure): `/home/user/wt/lit`, detached at d447ee31e (the flip; `origin/lane/close-6-2026-11-23-flip`).
   Read and run, never committed.
-- THE LINE: tip f9531eb3a (point 114, the grants fix: no birth or page moves). Point 113 landed 17:21. The chair names any later
+- THE LINE: tip 0559a8405 since 00:10 UTC 2026-11-25 (point 115: the troubles rule, landed DARK; no birth and no page moves;
+  `close-7/briefs/LINE-115.md`). Registers at that tip: lighting census files 3,792; wiring producerIndexFiles 1,456; tuning
+  register homes 22; tuning inventory tables 284, keys 2,305. At the landing, take the line's side of each and re-take it by its
+  own door. A door my permission check refuses is run by NOBODY: one line to the chair with the exact command and the reason.
+- Before that: tip f9531eb3a (point 114, the grants fix: no birth or page moves). Point 113 landed 17:21. The chair names any later
   tip. `/home/user/wt/line` is detached at f9531eb3a, made by chain two for MASTER-REDERIVE; chain two removes it.
   `/home/user/wt/master` is detached at db832c892 (origin/master), and likewise chain two's.
 - My branch: `lane/close-7-2026-11-24` (docs, briefs, reports, this file). Checkout `/home/user/settlement-engine`.

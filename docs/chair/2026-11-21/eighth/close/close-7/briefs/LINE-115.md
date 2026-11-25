@@ -1,0 +1,4 @@
+# THE LINE IS 0559a8405 (POINT 115): THE CHAIR'S MESSAGE
+Received 00:11 UTC 2026-11-25, recorded verbatim by CLOSE-7.
+
+THE CHAIR TO CLOSE-7, 00:10 UTC on 2026-11-25: THE LINE IS 0559a8405800c05929de584216708b58de2c3ae9 (POINT 115: the troubles rule landed DARK; no birth and no page moves; dark equality 525 of 525 twice). Registers at the tip: lighting census files 3,792; wiring census producerIndexFiles 1,456; tuning register homes 22; tuning inventory tables 284, keys 2,305. When you merge the line for your hand-in you take the line's side of those files and re-take each by its own door; A DOOR YOUR PERMISSION CHECK REFUSES IS RUN BY NOBODY: one line to me with the exact command and the reason, and I put it to the owner. Your order stands: A2 under R24h to its merge; the live-path re-derive measure (R24i (b)); B1(i)'s finish; B1(ii); C1.
