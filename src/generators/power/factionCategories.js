@@ -146,6 +146,10 @@ const FACTION_CATEGORY_KEYWORDS = {
   ],
 };
 
+/** R24-C1 (CLOSE-7 BATCH; R24g (2)): the bought hall's three birth names, criminal BY EXACT NAME (their words say no crime, and
+ *  'Senate' as a word would take the Arcane and Merchant senates with it); the old forms stay criminal by their own words. */
+const CRIMINAL_BY_NAME = new Set(['Council of Aldermen', 'Council of Syndics', 'Senate']);
+
 export const inferFactionCategory = (factionName) => {
   const catalogTag = factionCatalogArcaneTag(factionName);
   for (const [cat, keywords] of Object.entries(FACTION_CATEGORY_KEYWORDS)) {
@@ -161,6 +165,7 @@ export const inferFactionCategory = (factionName) => {
       })) return cat;
       continue;
     }
+    if (cat === 'criminal' && CRIMINAL_BY_NAME.has(factionName)) return cat;
     if (keywords.some((kw) => factionName.includes(kw))) return cat;
   }
   return 'other'; // changed: 'other' not 'government' — prevents governing dump

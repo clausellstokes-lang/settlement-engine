@@ -455,7 +455,7 @@ describe('EM-B2a3 — the institution and power choosers consult the pin seam', 
     // write-through count stays 52, so the control is still not vacuous.
     const bareAssemble = writeThrough(ASSEMBLE, 'uncloned');
     const barePower = writeThrough(POWER, 'uncloned');
-    expect(bareAssemble.mutated).toBe(33); // 2026-11-05, records 12–26 (the rung-1 landing's signed shifts, ODQ §934.105; re-keyed at the landed tip by LANDING-5 under the chair's ruling 4): 52 -> 33, still not vacuous
+    expect(bareAssemble.mutated).toBe(32); // B1(i) (CLOSE-7 BATCH; R24e (2), "the three counts are re-stated with their cause"): 33 -> 32, the 24 desert rows of the golden corpus B1(i) moves (the withheld houses and what follows); 2026-11-05, records 12–26 (the rung-1 landing's signed shifts, ODQ §934.105; re-keyed at the landed tip by LANDING-5 under the chair's ruling 4): 52 -> 33, still not vacuous
     // 2026-11-05 (LANDING-5, the chair's ruling 4, re-keyed BY IDENTITY with its step, bisected over the
     // landing's first-parent stages): the uncloned bag is refused outright on ONE row again, from F6 BUDGET-FLOOR
     // (6d84aa834, record 22) — a later pass pushes into the frozen record's array. The member path above still

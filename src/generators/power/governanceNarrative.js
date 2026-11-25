@@ -186,7 +186,7 @@ const rewriteFactionPhrasing = (
     )
     .replace(
       /\bthe council\b/gi,
-      match => preserveSentenceCase(match, councilLabel),
+      (match, at, whole) => (whole.toLowerCase().startsWith(councilLabel.toLowerCase(), at) ? match : preserveSentenceCase(match, councilLabel)), // R24-C1 (CLOSE-7 BATCH): the label already said ("the Council of Aldermen") is not said twice
     )
     .replace(
       /\ba council\b/gi,
@@ -199,7 +199,7 @@ const rewriteFactionPhrasing = (
         governingBodyOverride ? `the ${powerPossessive(powerNameAfterArticle(governingBodyOverride))} meetings` : `${councilLabel.replace(/^the /, '')} meetings`, // NAMES-1 (CN1): "the Elder Council's meetings", never "Elder Council meetings"
       ),
     )
-    .replace(/\binside the council\b/gi, `inside ${councilLabel}`)
+    .replace(/\binside the council\b/gi, (match, at, whole) => (whole.startsWith(`inside ${councilLabel}`, at) ? match : `inside ${councilLabel}`)) // R24-C1 (CLOSE-7 BATCH): a label that itself begins "Council" ("the Council of Aldermen") is not said twice
     .replace(
       /\bthe grain merchants\b/gi,
       match => preserveSentenceCase(match, merchantLabel),

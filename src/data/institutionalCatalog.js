@@ -84,8 +84,8 @@ const ROW_KEYS = Object.freeze([
 /** The keys a tier entry may declare that stay in the registry and never ride onto a row. */
 const GUARD_KEYS = Object.freeze(['minPopulation', 'requiresAny']);
 /** The registry-only marks a tier entry may declare (the fabric and the rarity, X-46 car 3; the face
- *  and its no-power flag, the people car); never on a row. */
-const MARK_KEYS = Object.freeze(['fabric', 'rare', 'face', 'noPower', 'front', 'lawEnforcement']); const NOTE_KEYS = Object.freeze(['thresholdNote']); // CENSUS-4 R8: the designer's threshold note ("viable above 5,000 souls"), registry-only, never on a row or a page
+ *  and its no-power flag, the people car; what the house lives on, B1(i) R24b); never on a row. */
+const MARK_KEYS = Object.freeze(['fabric', 'rare', 'face', 'noPower', 'front', 'lawEnforcement', 'livesOn']); const NOTE_KEYS = Object.freeze(['thresholdNote']); // CENSUS-4 R8: the designer's threshold note ("viable above 5,000 souls"), registry-only, never on a row or a page
 /**
  * THE FRONT MARK (the allegiance train, car 1, ALLEGIANCE-CAR1, 2026-11-08; the design §1.4 and the
  * chair's ruling J-7): a legitimate family whose house's face can carry a hidden allegiance AS A FRONT
@@ -165,7 +165,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       successor: 'Docks/port facilities',
     },
     {
-      shared: { name: 'Fishmonger', face: 'the fishmonger' },
+      shared: { name: 'Fishmonger', face: 'the fishmonger', livesOn: 'fish' },
       at: {
         village: { baseChance: 0.35, forbiddenTradeRoutes: ['isolated'], desc: 'Buys, salts, and sells fish, whenever fish can be had. The link between the fisher and the buyer. Near water: fresh. Inland: dried or salted.', tags: ['trade'], priorityCategory: 'economy' },
       },
@@ -173,7 +173,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       successor: 'Fish market',
     },
     {
-      shared: { front: 'prime', name: 'Fish market', face: 'the master fishmonger', desc: "A covered fish market under the market wardens. Whenever fish can be had, the morning's catch or the week's salted barrels are sold by weight and inspected for rot.", tags: ['market', 'trade'], priorityCategory: 'government' },
+      shared: { front: 'prime', name: 'Fish market', face: 'the master fishmonger', livesOn: 'fish', desc: "A covered fish market under the market wardens. Whenever fish can be had, the morning's catch or the week's salted barrels are sold by weight and inspected for rot.", tags: ['market', 'trade'], priorityCategory: 'government' },
       at: {
         village: { baseChance: 0.3, desc: "An open-air stall or small covered market where the day's catch is sold. Prices drop fast. Fish doesn't wait." },
         town: { baseChance: 0.45 },
@@ -213,7 +213,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       ceiling: { tier: 'village', reason: 'Fowling is a marsh and field trade; towns buy the birds at market.' },
     },
     {
-      shared: { name: "Woodcutter's camp", face: 'the camp foreman', terrainRequired: ['forest'], desc: 'Felling crews and a stacking yard at the forest edge, cutting timber and charcoal wood and carting both.', tags: ['economy', 'timber'], priorityCategory: 'economy' },
+      shared: { name: "Woodcutter's camp", face: 'the camp foreman', livesOn: 'timber', terrainRequired: ['forest'], desc: 'Felling crews and a stacking yard at the forest edge, cutting timber and charcoal wood and carting both.', tags: ['economy', 'timber'], priorityCategory: 'economy' },
       at: {
         thorp: { baseChance: 0.55, desc: 'Seasonal felling and timber stacking. The whole settlement smells of fresh sawdust and pine resin.' },
         hamlet: { baseChance: 0.45 },
@@ -222,7 +222,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       ceiling: { tier: 'village', reason: 'Timber reaches towns as sawn stock; the commercial sawmill is the town rung of the trade.' },
     },
     {
-      shared: { front: 'front', name: 'Charcoal burner', face: 'the collier', desc: 'Kiln crews in the surrounding woodland supply charcoal to the smelters, smiths, and bakers. Metalworking here burns through a forest a generation.', tags: ['trade'], priorityCategory: 'economy' },
+      shared: { front: 'front', name: 'Charcoal burner', face: 'the collier', livesOn: 'timber', desc: 'Kiln crews in the surrounding woodland supply charcoal to the smelters, smiths, and bakers. Metalworking here burns through a forest a generation.', tags: ['trade'], priorityCategory: 'economy' },
       at: {
         hamlet: { baseChance: 0.2, desc: 'Operates kilns in nearby woodland. Supplies fuel for smithing and baking. Essential intermediate step between forest and forge.' },
         village: { baseChance: 0.18, desc: "Operates kilns in the surrounding woodland, supplying fuel for smithing, baking, and heating. The settlement's most reliable fuel source when timber is abundant." },
@@ -270,7 +270,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       },
     },
     {
-      shared: { name: "Hunter's lodge", face: 'the master of the hunt', desc: "Organises hunting parties across the surrounding territory. Sells venison, pelts, and game to market. Doubles as a source of local wilderness knowledge: which trails are safe, which aren't.", tags: ['trade', 'military'], priorityCategory: 'economy' },
+      shared: { name: "Hunter's lodge", face: 'the master of the hunt', livesOn: 'game', desc: "Organises hunting parties across the surrounding territory. Sells venison, pelts, and game to market. Doubles as a source of local wilderness knowledge: which trails are safe, which aren't.", tags: ['trade', 'military'], priorityCategory: 'economy' },
       at: {
         hamlet: { baseChance: 0.25, desc: 'Hunters pool knowledge, prepare game, and sell pelts. Tracks routes, seasons, and dangerous animals.' },
         village: { baseChance: 0.18 },
@@ -699,7 +699,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       },
     },
     {
-      shared: { front: 'front', name: 'Sawmill (commercial)', face: 'the sawyer', desc: 'A water- or ox-powered mill producing planks and beams for the construction trade. Employs a permanent crew.', tags: ['trade', 'timber'], priorityCategory: 'crafts' },
+      shared: { front: 'front', name: 'Sawmill (commercial)', face: 'the sawyer', livesOn: 'timber', desc: 'A water- or ox-powered mill producing planks and beams for the construction trade. Employs a permanent crew.', tags: ['trade', 'timber'], priorityCategory: 'crafts' },
       at: {
         village: { name: 'Sawmill', baseChance: 0.35, desc: 'Water- or ox-powered saw. Converts raw logs to planks and beams whenever logs can be had, for building and furniture.' },
         town: { baseChance: 0.28, desc: "A water- or ox-powered mill producing planks and beams for the construction trade. A town near timber can supply an entire region's building needs. Employs a permanent crew." },
@@ -1726,7 +1726,7 @@ const clonePlain = (value) => (value && typeof value === 'object' ? JSON.parse(J
  * One family's entry at one tier, as the catalog row every reader takes. Throws on an unknown
  * key so a typo'd field can never ride silently into generation.
  * @param {InstitutionFamily} fam @param {string} tier
- * @returns {{ name: string, row: Record<string, unknown>, guards: { minPopulation?: number, requiresAny?: string[] } | null, fabric: boolean, rare: boolean, face: string | null, noPower: boolean, front: string | null, lawEnforcement: boolean }}
+ * @returns {{ name: string, row: Record<string, unknown>, guards: { minPopulation?: number, requiresAny?: string[] } | null, fabric: boolean, rare: boolean, face: string | null, noPower: boolean, front: string | null, lawEnforcement: boolean, livesOn: string | null }}
  */
 function deriveRow(fam, tier) {
   const merged = { ...(fam.shared || {}), ...fam.at[tier] };
@@ -1757,7 +1757,8 @@ function deriveRow(fam, tier) {
   }
   // A FABRIC ROW HAS NO FACE WHATEVER ITS FAMILY SAYS (R-P1 a): the walk to another's mill is not a miller.
   const fabric = merged.fabric === true;
-  return { name, row, guards, fabric, rare: merged.rare === true, face: fabric ? null : /** @type {string | null} */ (face), noPower: merged.noPower === true, front: typeof merged.front === 'string' ? merged.front : null, lawEnforcement: merged.lawEnforcement === true };
+  if (merged.livesOn !== undefined && !(typeof merged.livesOn === 'string' && merged.livesOn.trim())) throw new Error(`institutionalCatalog: livesOn on ${tier} / ${name} must be a thing's name or absent`);
+  return { name, row, guards, fabric, rare: merged.rare === true, face: fabric ? null : /** @type {string | null} */ (face), noPower: merged.noPower === true, front: typeof merged.front === 'string' ? merged.front : null, lawEnforcement: merged.lawEnforcement === true, livesOn: typeof merged.livesOn === 'string' ? merged.livesOn : null };
 }
 
 /**
@@ -1787,6 +1788,8 @@ const NO_POWER_NAMES = new Set();
 const FRONT_BY_NAME = new Map();
 /** THE LAW MARK by name (ALLEGIANCE-CAR4, J-14). Registry-only. @type {Set<string>} */
 const LAW_NAMES = new Set();
+/** WHAT A HOUSE LIVES ON by name (B1(i), RULING-R24 R24b): 'fish' | 'timber' | 'game'. Registry-only. @type {Map<string, string>} */
+const LIVES_ON_BY_NAME = new Map();
 
 /** @returns {Record<string, Record<string, Record<string, Record<string, any>>>>} */
 function buildCatalog() {
@@ -1798,7 +1801,7 @@ function buildCatalog() {
     for (const shelf of SHELF_ORDER) {
       for (const fam of INSTITUTION_FAMILIES) {
         if (fam.shelf !== shelf || !fam.at[tier]) continue;
-        const { name, row, guards, fabric, rare, face, noPower, front, lawEnforcement } = deriveRow(fam, tier);
+        const { name, row, guards, fabric, rare, face, noPower, front, lawEnforcement, livesOn } = deriveRow(fam, tier);
         if (guards) GUARDS_BY_ROW.set(guardKey(tier, name), Object.freeze(guards));
         if (fabric) { FABRIC_ROWS.add(guardKey(tier, name)); FABRIC_NAMES.add(name); }
         if (rare) RARE_ROWS.add(guardKey(tier, name));
@@ -1810,6 +1813,7 @@ function buildCatalog() {
         if (noPower) NO_POWER_NAMES.add(name);
         if (front) FRONT_BY_NAME.set(name, front);
         if (lawEnforcement) LAW_NAMES.add(name);
+        if (livesOn) LIVES_ON_BY_NAME.set(name, livesOn);
         if (!block[shelf]) block[shelf] = {};
         for (const other of Object.values(block)) {
           if (other[name]) throw new Error(`institutionalCatalog: "${name}" listed twice at ${tier}`);
@@ -1887,6 +1891,19 @@ export function institutionRowGuardsPass(tier, name, { population = null, presen
     if (!presentNames || !guards.requiresAny.some(required => presentNames.has(required))) return false;
   }
   return true;
+}
+
+/**
+ * WHAT A CATALOGUE HOUSE LIVES ON (B1(i), RULING-R24 R24b): the thing a land can withhold ('fish', 'timber', 'game'),
+ * or null for a house that lives on nothing a land withholds. Registry-only (`livesOn` on the family), never on a row or
+ * a save; read by domain/landWithholding.js :: landWithholdsHouse. A custom or DM-authored house lives on nothing here.
+ * @param {{ name?: unknown, isCustom?: unknown, source?: unknown } | string | null | undefined} institution a roster row or a catalogue name
+ * @returns {string | null}
+ */
+export function livesOnOf(institution) {
+  if (typeof institution === 'string') return LIVES_ON_BY_NAME.get(institution) ?? null;
+  if (isStrangerHouse(institution)) return null;
+  return LIVES_ON_BY_NAME.get(String(institution?.name ?? '')) ?? null;
 }
 
 /**

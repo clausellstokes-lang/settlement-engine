@@ -3266,6 +3266,14 @@
       "kind": "rationale",
       "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
     },
+    "tests/generators/desertWithholdsHouses.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/power/hallBirthNames.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by CLOSE-7 BATCH C1 (RULING-R24 R24-C1, R24m). It pins rulingStructure.js :: drawCouncilOfAKind's birth names for the bought hall (Council of Aldermen, Council of Syndics, Senate), factionCategories.js's criminal category by exact name, no old form on the player's projection, and governanceNarrative.js :: rewriteFactionPhrasing saying a label that begins \"Council\" once. The commit records it red at the cure's parent (V dp-town-57, \"inside the Council of Aldermen of Aldermen\") and green at the cure (4 of 4). A sweep plant would re-plant the same cure-revert the commit already describes."
+    },
     "tests/generators/densityTrimRelationships.test.js": {
       "kind": "rationale",
       "ref": "generators-tree-admitted-subject-coupled-2026-08-30"

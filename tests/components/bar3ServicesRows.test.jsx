@@ -162,7 +162,7 @@ const CURTAILED = 'Curtailed by the siege.';
 const CURTAILED_HOUSES = [
   ['r2s-under_siege-village-0', "Travelers' inn", 'Meals'],
   ['r2s-under_siege-village-0', "Cartographer's workshop", 'Map making'],
-  ['r2s-under_siege-town-1', 'Inn (multiple)', 'Meals and drink'],
+  ['r2s-under_siege-town-2', 'Inn (multiple)', 'Meals and drink'], // B1(i) (CLOSE-7 BATCH; R24e (2)): re-anchored by the census family's own order: r2s-under_siege-town-1 is a desert town whose lost food houses (Fish market, Hunter's lodge) leave its inn stopped, not curtailed; town-2 (mountain) is the family's first non-desert birth with an Inn (multiple) offering 'Meals and drink'
   ['r2s-under_siege-city-0', 'Luxury goods quarter', 'Custom commissions'],
   ['r2r-metropolis-14', 'Inns and taverns (district)', 'Entertainment'],
   ['r2r-metropolis-14', 'Cemetery network', 'Central register'],
@@ -253,7 +253,7 @@ const KEEP_FIELD = [
   ['r2r-thorp-45', 'access_to_external_mill', SIEGE],
   // SV8b: the record cannot tell (no chain on the water; no game on the food record): "Stopped by the siege." stands
   ['r2s-under_siege-thorp-0', 'fishing_community', SIEGE],
-  ['r2s-under_siege-town-1', 'hunter_s_lodge', SIEGE],
+  ['r2s-under_siege-town-4', 'hunter_s_lodge', SIEGE], // B1(i) (CLOSE-7 BATCH; R24e (2)): re-anchored by the census family's own order: town-1 is a DESERT town with no game, whose Hunter's lodge the land now withholds (the very fault B1(i) cures); town-4 (coastal) is the family's first non-desert birth whose lodge prints the plain stop (town-0's adds "Short of game.")
 ];
 
 /** The siege's partial mark before a description, a short mark (S5) between them where the house is short too. @param {string} text @param {string} desc */

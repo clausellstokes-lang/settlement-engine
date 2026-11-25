@@ -44,7 +44,7 @@ export const SEAT_MINT_TITLES = Object.freeze({
   'Religious Authorities': 'the high priest',
   'Priestly Guidance': 'the elder priest',
   "Thieves' Guild": 'the guildmaster',
-  'Corrupt Council': "the council's fixer",
+  'Corrupt Council': "the council's fixer", 'Council of Aldermen': "the council's fixer", // R24-C1 (CLOSE-7 BATCH): the birth name, by exact name; the old form kept for saved places
   'Merchant Guilds': 'the guild master',
   'Craft Guilds': 'the craft-guild master',
   'Grain Holders': 'the grain factor',
