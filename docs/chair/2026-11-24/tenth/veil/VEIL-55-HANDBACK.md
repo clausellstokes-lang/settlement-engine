@@ -84,6 +84,13 @@ A SUCCESSOR ON ANOTHER ACCOUNT, THE NEXT COMMAND: in a fresh container, `npm ci`
   then build (B), then MAP-COST (C); COVERT-UNREAD withdrawn into it. VEIL-51 TOLD: units 4+5 go on (first "TIP?" takes (38));
   MY TERM (b) CORRECTED on V28's principle: the stored argument is the LIVE row's document together with src.j (a frozen copy
   may lack a hand-hidden power a copied desc names); a snapshot plant; the twin's gap on snapshot reads listed, not invented.
+- FAIL-CLOSED PAGES (VEIL-53, `lane/veil-53-2026-11-24-pages-wip` 04fa8d60e on -cures-wip 1ffb2328b; client + tests, no SQL):
+  READ WHOLE: NO FAULT; GRANTED BY ME (08:19); RIDES THE JOIN with -cures-wip. Slice (v55/fc.sh, CONFIRMED): red on 1ffb2328b = 6
+  class arms + ring note; green on 04fa8d60e with the walker. 0 of 280 stored records lack a gating key. LISTED FOR THE JOIN: 3
+  publicProseEquality daily_life rows (soak1k-1/7/8) red on 1ffb2328b with its own file (pre-existing; -cures-wip sits on
+  b58abc48b); its hand-named births re-anchored by finder (point 116). TWO RULINGS ASKED OF THE CHAIR (08:19): (1) re-derived
+  severity's wrong bands (Labor capacity, readiness's severity half): fail closed, rows lost counted; (2) ONE totality arm over
+  rederiveForPage's keys + an unreadable-document plant, instead of 11 arms (my lean; VEIL-53's: an arm each).
 - RULING V28 (the chair 08:09, superseded in part by its 08:10 whole text; with the grant, still waiting the second reader: DO NOT MERGE UNIT 3 YET): (1) Q1 CURED FAIL
   CLOSED (`unread` also where dm_full has pr/ps and no `relationships` key; twin rule for rule; red first at four doors, plain and
   narrated): GIVEN TO VEIL-52 (08:11) as COVERT-UNREAD, a child of 2f849aa53 on `lane/veil-52-2026-11-24-unread-wip`, header (39)
