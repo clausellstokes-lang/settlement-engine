@@ -1148,3 +1148,18 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   TOLD THE OWNER (08:07): the correction that old party links and old map members DO change (the chair had said old
   pages stay as they are: true of gallery pages only). CLOCK FAULTS OF THE CHAIR THIS HOUR: three messages labelled
   ahead of the clock (07:52, 07:54, 08:09 for about 07:48, 07:49, 08:06).
+- 2026-11-25 08:14 UTC · T90 · UNIT 3's REWORK IS PLACED (VEIL-52, whole, on V28); THE CHRONICLE IS N95's AND IS OWED IN IT; A PUSH SLIP; THE MARK.
+  VEIL-55 (08:12): its own "no fault" recorded as wrong in its hand-back. V28 (6) answered: the member's chronicle is
+  covered by N95 of the ninth chair (doors-3's `_gallery_doors_chronicle`, `lane/veil-doors-3-2026-11-20` 3e1115c81: the
+  chronicle against the served body, people by id; and the member's FROZEN name and tier in snapshot mode), with N84
+  (d) (the chronicle after the re-key measured first); unit 3 carried neither: OWED IN THE REWORK, not a new finding.
+  VEIL-52 reworks unit 3 whole: the dropped set (source's ties, the live row's covert ties, the orphan rule) at the
+  gallery read, the import and the map member with the twin; the measure first by the raw-town oracle; the
+  no-relationships case folded in; the pin's four members; the stale comments; doors-3's chronicle and the frozen name
+  and tier; the row lock in MAP-COST's measure. It proposes the exact rule on the table before building; VEIL-55 reads
+  it whole; then the chair and a second reader.
+  A SLIP, REPORTED BY VEIL-55 (COMMON-EIGHTH 15 (c)): at about 08:05 a push of its ran from the main checkout with
+  nothing to send; the hook reached the test ratchet; its timeout killed it; nothing pushed or changed; every push of
+  its is now a script that compares `ls-remote` first.
+  THE MARK (08:10): CLOSE-7 457,883 of 1,000,000, working, cost 460.77 (344.16 at 02:33: about 21 an hour), record
+  `allowed_warning`. (07:19: VEIL-53 619,230, cost 93.53.) No record reads rejected.
