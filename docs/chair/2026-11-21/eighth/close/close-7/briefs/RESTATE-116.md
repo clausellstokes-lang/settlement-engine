@@ -1,3 +1,7 @@
+# SUPERSEDED (05:13 UTC 2026-11-25, by the chair's efficiency order in `CHAIR-0512.md` (4)). Not dispatched. Its re-statement of A1, A2
+# and the mirror on the merged tree is FOLDED INTO THE ONE BATCHED BEFORE-AND-AFTER (see BATCH.md, to come). Its stale-anchor test
+# run is done by CLOSE-7 as the cures branch's own gate.
+
 READS WHOLE: `close-7/briefs/CURES-COMMON.md` (its laws bind you); `close-7/briefs/LINE-116.md` (THIS UNIT'S RULING, the chair's
 words: (1) and (2) govern); then the reports `close-7/reports/A1.md`, `A2.md` (with its addendum) and `MIRROR.md`, for the figures you
 re-state and how each was measured. WINDOW: 1,000,000 tokens.
