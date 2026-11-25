@@ -133,7 +133,10 @@ Reports to the lane's owner: a FILE, at most 200 words. My context began with a 
     passed: chains; galleryVeilRival 2/2, galleryVeilDesc 11/11, galleryVeilRecent 13/13, galleryWithholdAlways 9/9, HandRows 25/25;
     the four walkers; standingForms --check; typecheck rc 0; eslint 0; tests/lint 45 of 3,314 (the base's); copy 2; cost WITHIN
     (539.3 vs 539.4 ms). Receipts `u4/rival-receipts/`.
-  RUNNING (background): c4tell (data for the put-back; queued on the mutex); STANDWALK.
+  THE REJECTED MARKER's TELL (data for the put-back; CONFIRMED, `u4/c4tell-today.txt`, 02:22): today-born 140, 4,620 twin reads, 1,177
+    hiding: 528 HIDING READS CARRY A TELL (a marked row S over the served roster leaves bare, where the nothing-hidden read agrees) on
+    17 places. V15's cut-alone is borne out.
+  RUNNING (background): STANDWALK.
   IF THIS SEAT STOPS: re-run what u4.log lacks (`sh docs/chair/2026-11-24/tenth/veil/v51/u4/u4.sh <steps>`; `sh .../rival.sh`)
   after the trees above are re-made (`git worktree add --detach` at the commits named; node_modules linked).
 - NEXT: wait for "R4-IDS MERGED <commit>" from VEIL-55, then unit 2 (R5-DESC), reading PART 42 s1 block 0 (a3bc0dc9d) and

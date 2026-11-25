@@ -1,0 +1,11 @@
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 2257 after 115 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+places 140 | twin reads 4620 | hiding 1177 | hiding reads WITH A TELL 528 | places 17
+  r3m-city-infiltrated-1-102.json dm=true own gallery: The Independent Bloc (marked, S writes none)
+  r3m-city-infiltrated-1-102.json dm=true g:000 gallery: The Independent Bloc (marked, S writes none)
+  r3m-city-infiltrated-1-102.json dm=true g:001 gallery: The Independent Bloc (marked, S writes none)
+  r3m-city-infiltrated-1-102.json dm=true g:010 gallery: The Independent Bloc (marked, S writes none)
+  r3m-city-infiltrated-1-102.json dm=true g:011 gallery: The Independent Bloc (marked, S writes none)
+  r3m-city-infiltrated-1-102.json dm=true g:100 gallery: The Independent Bloc (marked, S writes none)
+  r3m-city-infiltrated-1-102.json dm=true g:101 gallery: The Independent Bloc (marked, S writes none)
+  r3m-city-infiltrated-1-102.json dm=true g:110 gallery: The Independent Bloc (marked, S writes none)
+c4tell rc=0 02:22:40
