@@ -87,6 +87,19 @@ describe('(5) NEVER A USER\'S OWN ROW', () => {
     expect(factionArchetype({ faction: 'Senate', power: 50 })).toBe(A.CRIMINAL);
     for (const row of OWN) expect(factionArchetype(row)).toBe(A.OTHER);
   });
+  /** RULING C1B-3 (3): the user's own rows as the record holds them, each CRIMINAL by its own category, so the strict gate
+   *  alone cannot answer: ADD_FACTION's row (`events/mutateEntities.js :: addFaction`, its fields as it writes them) and the
+   *  custom-content marks. */
+  const OWN_CRIMINAL = [
+    { id: 'faction.senate', name: 'Senate', faction: 'Senate', status: 'active', description: '', impairments: [], internalSeats: {}, memberNpcIds: [], createdByEventId: 'evt-1', category: 'criminal' },
+    ...OWN.slice(1).map((row) => ({ ...row, category: 'criminal' })),
+  ];
+  test('the guild never floors or caps the user\'s own criminal "Senate": power and legitimacy unmoved', () => {
+    for (const row of OWN_CRIMINAL) {
+      const f = applyGuildToSettlement(metropolis(row), 0.8).powerStructure.factions[0];
+      expect([row, f.power, f.legitimacy]).toEqual([row, 20, 60]);
+    }
+  });
   test('the guild never floors the user\'s own "Senate"; their own "Shadow Senate" still reads by its word, as before', () => {
     for (const row of OWN) {
       expect(applyGuildToSettlement(metropolis(row), 0.8).powerStructure.factions[0].power).toBe(20);
@@ -128,5 +141,25 @@ describe('RULING C1B-2 (2): the seat passes from a new hall exactly as from its 
         expect(now.transfer?.toGovernment).toBe(was.transfer?.toGovernment);
       });
     }
+  }
+});
+
+describe('RULING C1B-3 (1)-(2): the seat\'s label, by LITERALS (the old-named twins run first; a row with no category keeps its name)', () => {
+  /** @param {string} tier @param {Record<string, unknown>[]} factions @param {string} winner @param {string} cause @param {boolean} [demoteIncumbent] */
+  const label = (tier, factions, winner, cause, demoteIncumbent) => {
+    const r = transferRulingPower({ tier, powerStructure: { government: String(factions.find((f) => f.isGoverning)?.faction), factions } }, winner, { cause, demoteIncumbent });
+    return r.error ?? r.transfer?.toGovernment;
+  };
+  /** @param {string} hall */
+  const halls = (hall) => [{ faction: hall, category: 'criminal', isGoverning: true, power: 50 }, { faction: "Thieves' Guild", category: 'criminal', power: 45 }, { faction: 'Reform Assembly', category: 'government', power: 40 }];
+  test('the second reader\'s city: a NON-governing "Council of Syndics" with no category keeps its own name (as at 7ad51595aa)', () => {
+    expect(label('city', [{ faction: 'Town Council', category: 'government', isGoverning: true, power: 50 }, { faction: 'Council of Syndics', power: 30 }, { faction: 'Reform Assembly', category: 'civic', power: 45 }], 'Reform Assembly', 'coup')).toBe('City Council');
+  });
+  for (const demoteIncumbent of [true, false]) for (const cause of ['coup', 'election']) {
+    test(`${cause}, incumbent ${demoteIncumbent ? 'stays' : 'goes'}: the halls' labels are their old-named twins'`, () => {
+      expect(label('metropolis', halls('Senate'), "Thieves' Guild", cause, demoteIncumbent)).toBe('Shadow Senate Ascendant');
+      expect(label('city', halls('Council of Syndics'), 'Reform Assembly', cause, demoteIncumbent)).toBe(demoteIncumbent ? 'City Council Ascendant' : 'City Council');
+      expect(label('town', halls('Council of Aldermen'), 'Reform Assembly', cause, demoteIncumbent)).toBe('Town Council');
+    });
   }
 });
