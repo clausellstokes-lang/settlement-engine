@@ -1,0 +1,28 @@
+set /var/tmp/v52/out/stored-master tpl v52dsql; documents 140; all done true; faults 0
+towns whose raw record holds a covert tie: 0; of them, raw prominentRelationship tells one: 0, raw pressureSentence tells one: 0
+RED (covert towns only, Reveal off): copy | door | towns | no body | served PR tells | served PS tells | (cross-check: = raw telling PR | = raw telling PS)
+  M | gallery | 0 | 0 | 0 | 0 | (0 | 0)
+  M | import | 0 | 0 | 0 | 0 | (0 | 0)
+  M | map | 0 | 0 | 0 | 0 | (0 | 0)
+  M | link | 0 | 0 | 0 | 0 | (0 | 0)
+  T | gallery | 0 | 0 | 0 | 0 | (0 | 0)
+  T | import | 0 | 0 | 0 | 0 | (0 | 0)
+  T | map | 0 | 0 | 0 | 0 | (0 | 0)
+  T | link | 0 | 0 | 0 | 0 | (0 | 0)
+  live | gallery | 0 | 0 | 0 | 0 | (0 | 0)
+  live | import | 0 | 0 | 0 | 0 | (0 | 0)
+  live | map | 0 | 0 | 0 | 0 | (0 | 0)
+  live | link | 0 | 0 | 0 | 0 | (0 | 0)
+THE RULE (every town, Reveal off): copy | door | reads | PR served | PS served | LEAKS LEFT PR | PS | clean withheld PR a/b/c/d | PS a/b/c/d | telling withheld PR | PS
+  M | gallery | 140 | 87 | 128 | 0 | 0 | 0/0/0/0 (any 0) | 0/0/0/0 (any 0) | 0 | 0
+  M | import | 140 | 87 | 128 | 0 | 0 | 0/0/0/0 (any 0) | 0/0/0/0 (any 0) | 0 | 0
+  M | map | 140 | 87 | 128 | 0 | 0 | 0/0/0/0 (any 0) | 0/0/0/0 (any 0) | 0 | 0
+  M | link | 140 | 87 | 128 | 0 | 0 | 0/0/0/0 (any 0) | 0/0/0/0 (any 0) | 0 | 0
+  T | gallery | 140 | 87 | 128 | 0 | 0 | 0/0/0/0 (any 0) | 0/0/0/0 (any 0) | 0 | 0
+  T | import | 140 | 87 | 128 | 0 | 0 | 0/0/0/0 (any 0) | 0/0/0/0 (any 0) | 0 | 0
+  T | map | 140 | 87 | 128 | 0 | 0 | 0/0/0/0 (any 0) | 0/0/0/0 (any 0) | 0 | 0
+  T | link | 140 | 87 | 128 | 0 | 0 | 0/0/0/0 (any 0) | 0/0/0/0 (any 0) | 0 | 0
+  live | gallery | 140 | 87 | 128 | 0 | 0 | 0/0/0/0 (any 0) | 0/0/0/0 (any 0) | 0 | 0
+  live | import | 140 | 87 | 128 | 0 | 0 | 0/0/0/0 (any 0) | 0/0/0/0 (any 0) | 0 | 0
+  live | map | 140 | 87 | 128 | 0 | 0 | 0/0/0/0 (any 0) | 0/0/0/0 (any 0) | 0 | 0
+  live | link | 140 | 87 | 128 | 0 | 0 | 0/0/0/0 (any 0) | 0/0/0/0 (any 0) | 0 | 0
