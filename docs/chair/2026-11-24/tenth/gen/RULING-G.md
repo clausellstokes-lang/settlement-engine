@@ -127,3 +127,13 @@ D8's title. (4) E9: silence: no new line for an occupied, garrisoned place (thre
 what the record does not hold). (5) G6's #6+7: the existing `exports` atom refuses the ECO-1 line, on two proofs.
 THE SLIP: WORDS-2 made two LOCAL scratch merges with `--no-verify`, discarded them unpushed and redid them with the
 hooks; said by itself; owed: the hashes and `git branch -r --contains` empty.
+**G9 (2), THE LINE THAT CAME BACK (10:24 UTC):** WORDS-2 read "grazing in the record" as a grazing house on the live roster, the
+running pastoral chain, or a pasture, grazing or herds ground nearby. Fall-through births that KEEP the line: C 102,
+100 and 68 of 102, 100 and 68 (thorps, hamlets, villages: ALL: almost every small C roster holds a grazing house); V 19
+of 55, 37 of 37, 45 of 45 (36 thorps store none). A place that stores none: the Power paragraph ends a sentence
+sooner; the Overview's tension line takes another existing line; no empty heading, no broken sentence. SO THE RULE CURES
+WHAT IS INVENTED, NOT THE REPETITION (C's thorps still store it on 68 per cent): THE CHAIR's WORD TO THE OWNER ("many
+small calm towns will show no quarrel line") WAS WRONG FOR C and is corrected to him. RULED: built as ruled; a grounded
+variant (the water quarrel, the shore quarrel) is NOT retired; ONE MEASURE OWED: the top line's share and the count of
+distinct lines in the two slots, by size, on C and V, today, under the grounded rule, and with no fall-through quarrel
+at all; then the chair rules whether a calm place with grazing keeps a grazing quarrel.
