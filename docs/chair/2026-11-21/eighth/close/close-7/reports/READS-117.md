@@ -32,3 +32,12 @@ Reproduces the chair's messages exactly, with the full arrays:
   (p) and (t) hold on both births.
 - goals I-13: Portaminus `npc_parish_churches_10_30`, short goal "Make sure Iulia Volso is not left behind by the changes in
   the work." (full deal) -> "Keep the old lessons between them and Iulia Volso private." (deal with the middle card removed).
+
+## Run 2: GUARD's tip 0ec96f13d, the tree BATCH was cut at (log `guardtip-all.log`, exit=1; 10 files, 2 failed | 172 passed)
+Green there: statecraftExposureBand, goals I-13, goalSentencesOnceInTown, tailDisplayCivicBatch2, tailCrisisBatch8,
+hookThemeDraws, heraldKnowledgeDeskGolden, townCartographyCalibration, and dossierProseManifest's tally and mixed-pool arms.
+So every one of those moved INSIDE BATCH (B1(i), B1(ii), C1, P3source). Red there:
+- dossierProseManifest's DRIFT arm (1050 rows), the same count as at the tip: red before BATCH (the chair's class 1).
+- tests/scripts/implementationPackets.test.js (the sixth; see below): `EM-R1b.requiredSymbols[7]` and
+  `EM-R1c.requiredSymbols[6]` "is missing from src/domain/edit/dmLayer.js: export const REDERIVE_UNAPPLIED_REASONS =
+  Object.freeze(['step_not_pinnable', 'unknown_key']);".
