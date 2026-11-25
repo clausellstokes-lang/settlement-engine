@@ -24,12 +24,12 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "520ddb6a810a57dc1954a514e71c0a356ffa1068",
-  "measuredBy": "CLOSE-7",
+  "measuredAtSha": "366d78ec6f6ab4a0d330d863bd4556dc19515ab3",
+  "measuredBy": "lane/close-7-2026-11-24-mirror-wip (CLOSE-7 chain one, THE MIRROR)",
   "date": "2026-11-25",
-  "note": "R24-A2 merged onto the cures branch after R24-A1: the census re-taken at the merge (A1 and A2 test files together)",
-  "files": 3789,
-  "parked": 491,
+  "note": "THE MIRROR adds tests/domain/close7Mirror.test.js (3789 -> 3790 files), fe948997a",
+  "files": 3790,
+  "parked": 492,
   "credited": 3298,
   "titles": 31925,
   "suiteTitles": 8876
