@@ -7,7 +7,7 @@ before judging anything. Every hour here is read from `date -u`. No pull request
 
 ## 1. WHERE THE SEAT STANDS (my memory; WHOLE at every push; written so a successor on another account can go on from it alone)
 
-AS OF 04:18 UTC 2026-11-25. A SECOND CONTAINER RESTART ~01:14 (PostgreSQL restarted; lost steps relaunched 01:15:47: snmaster, snjoin, miplant2, snplant2; the builder resumed by message). DONE BY THEN: mimaster (rc=3, MAP OTHER rows), mijoin (rc=3), sntip (rc=0); the builder's commit f1da68754 on the -wip (the two test files); its tests/lint whole was cut and is being re-run. THE LANE'S OWNER: VEIL-55 (session_019yED1SoJ6KH9Wyp2Fera7R); never message VEIL-50. THE CHAIR:
+AS OF 04:46 UTC 2026-11-25. A SECOND CONTAINER RESTART ~01:14 (PostgreSQL restarted; lost steps relaunched 01:15:47: snmaster, snjoin, miplant2, snplant2; the builder resumed by message). DONE BY THEN: mimaster (rc=3, MAP OTHER rows), mijoin (rc=3), sntip (rc=0); the builder's commit f1da68754 on the -wip (the two test files); its tests/lint whole was cut and is being re-run. THE LANE'S OWNER: VEIL-55 (session_019yED1SoJ6KH9Wyp2Fera7R); never message VEIL-50. THE CHAIR:
 session_019yED1SUxGVHyjQnoqoFvQ8. THE LINE: 0559a8405 (point 115, the troubles rule DARK; no birth or page moves; merge nothing of it
 before the join). MARK RULE (00:29): no successor at 620,000; this section whole by 560,000, then work on; at a compaction say so to
 the chair in one line, re-read the start file, this section and the rulings, go on; finish a judgment before a compaction, never carry
@@ -76,6 +76,12 @@ next free number at my merge. UNIT (1) ALL DONE (03:38): wdmi plant 5 caught 10/
 the persons measure 0 at every door, both sets (`MI-PERSONS-*-TABLE.txt`): the class empty by design (VEIL-55 takes it to the chair).
 KEEP `q52.sh miplant5` READY: it is UNIT 4's TOOTH at the map doors (V21): VEIL-55 will ask me to run it on unit 4's tree (expected:
 absent at every door). A THIRD CONTAINER RESTART at ~04:15 (PostgreSQL restarted 04:17; nothing was running).
+
+### UNIT 3 BEGUN 04:41 UTC (the chair 04:38: an idle seat is never compacted; begin now; finish a judgment before a compaction).
+`lane/veil-52-2026-11-24-doors-wip` cut at dbd4cd9e5 (worktree `/home/user/wt/doors`). PART (1), NO SQL: a BUILDER (Agent, background) on
+SNAP-CHRONICLE's cure by `v52/briefs/SNAP-CHRONICLE-BRIEF.md` (791b113e7); its report `docs/chair/2026-11-24/tenth/veil/v52/builder/
+SNAP-CHRONICLE-HANDBACK.md` on the -wip; logs `/var/tmp/v52/builder2/`. THEN the map-door arms. PART (2), 212: ASKED VEIL-55 04:45 for my
+place (unit 4 = (38)); no SQL until its word; the hunk to the chair before VEIL-55's grant.
 
 ### OWED, IN ORDER
 1. (done.) 2. (1a) snap and (1b) wdmi tables on the three sets, to VEIL-55 (<=200 words each). 3. The two plants.
