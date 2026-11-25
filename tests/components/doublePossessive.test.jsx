@@ -74,6 +74,9 @@ describe('E1 · the double possessive', () => {
     expect(secondMentions("Wei Lee wants Kang Zhou's position, and Wei Lee wants Kang Zhou's reputation.", cards))
       .toBe("Wei Lee wants Kang Zhou's position, and the senior charter master wants Zhou's reputation.");
     expect(secondMentions('Wei Lee owes Kang Zhou, and Wei Lee fears Kang Zhou.', cards)).toBe("Wei Lee owes Kang Zhou, and the senior charter master fears the network's head.");
+    // D8 (the chair's G10): a Feudal Stewardship thorp's officer is "the lord's reeve": the role rung and the fill hold on it
+    const reeve = [{ name: 'Wei Lee', gender: 'male', role: 'the elder' }, { name: 'Kang Zhou', gender: 'male', role: "the lord's reeve" }];
+    expect(secondMentions("Wei Lee owes Kang Zhou, and Wei Lee wants Kang Zhou's ear.", reeve)).toBe("Wei Lee owes Kang Zhou, and the elder wants Zhou's ear.");
     expect(houseFill("lord's steward")).toBe("the steward's office");
     expect(houseFill("lord's reeve")).toBe("the reeve's office");
     expect(houseFill('cooper')).toBe("the cooper's yard");
