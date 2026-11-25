@@ -1,0 +1,28 @@
+tests/lint WHOLE, title for title: the lane's tip dbd4cd9e5 vs -dsql-wip 2f849aa53, CONFIRMED (executed, 05:50 and 06:4x UTC): both 16 files | 27 tests failed of 3,283. NEW: none. GONE: none. The 27 titles (identical):
+ FAIL  tests/lint/chainPrintSites.walker.test.js > F1: every file that makes words of an active chain's name or source asks the leaf > no file reads a chain's name or source outside the three lists
+ FAIL  tests/lint/domainAnyCastBaseline.test.js > domain any-cast ratchet — `--update` refuses to bank a declared overrun > ⛔ every LIVE declared row is refused against the LIVE register
+ FAIL  tests/lint/domainAnyCastBaseline.test.js > domain any-cast ratchet — frozen baseline governance > baseline exactly matches the tree (airtight against any drift mode)
+ FAIL  tests/lint/domainAnyCastBaseline.test.js > domain any-cast ratchet — frozen baseline governance > no file exceeds its baseline (new files get 0) — fix the types, do not widen
+ FAIL  tests/lint/domainAnyCastBaseline.test.js > domain any-cast ratchet — the declared-overrun ledger is honest > ⛔ no UNDECLARED file exceeds its baseline (the ledger is the only widening path)
+ FAIL  tests/lint/factLayers.walker.test.js > nothing reads at or above its own layer (shrink-only) > READERS: every file reads exactly its banked LINES (by content, each with its reason), and no file reads outside the register
+ FAIL  tests/lint/moduleScopeCwdRatchet.test.js > module-scope working-directory ratchet (tests/build, tests/lint) > A4 — NO GUARDED DIRECTORY CARRIES MORE MODULE-SCOPE WORKING-DIRECTORY ROOTS THAN BANKED
+ FAIL  tests/lint/negativeAssertionAnchor.walker.test.js > negative-assertion anchor walker (habitat removal) > no NEW un-anchored negative assertion anywhere in the test corpus
+ FAIL  tests/lint/noLegacyFactionReaders.walker.test.js > no legacy faction readers outside FPZ (PEOPLE-5, M-2; landed by PEOPLE-LAND) > every read outside the FPZ list is red; zero at the landing
+ FAIL  tests/lint/noLegacyFactionReaders.walker.test.js > the retired per-card fields: every remaining site is a named row (PULSE-SITES, S3) > the scan of src/ equals the named list exactly (shrink-only)
+ FAIL  tests/lint/observedShapeReaders.walker.test.js > reader-with-no-writer ratchet: the live scan > A1/A7: schema-7 filters narrow ordinary noise while explained writers stay banked live
+ FAIL  tests/lint/observedShapeReaders.walker.test.js > reader-with-no-writer ratchet: the live scan > SHRINK-ONLY: no file exceeds its frozen ceiling, and no row has vanished
+ FAIL  tests/lint/presumedThings.walker.test.js > ARM 1 — the source > ⛔ every source literal that names a thing declares it, or has its row
+ FAIL  tests/lint/presumptionClasses.walker.test.js > the tree against its register > no NEW undeclared line: every hit is banked (declare the line; the door never banks a new one)
+ FAIL  tests/lint/proseWiringCensus.walker.test.js > SEAM car 5b — THE HOLDER CENSUS: the source of each construction (SITTING §Q) > ⭐ THE DRY READ: both modes, and the one that writes is not among them
+ FAIL  tests/lint/proseWiringCensus.walker.test.js > car 0 — the committed JSON and its interlock > the committed census is byte-identical to a fresh build, and the stamp is live
+ FAIL  tests/lint/rosterChoiceComposedHosts.walker.test.js > every COMPOSED row of the registry names a host that exists in both engines (E78 (2): RED today by design, R5's worklist) > power.desc: its server and twin hosts are declared and exist (not PLANNED)
+ FAIL  tests/lint/rosterChoiceComposedHosts.walker.test.js > every COMPOSED row of the registry names a host that exists in both engines (E78 (2): RED today by design, R5's worklist) > power.label: its server and twin hosts are declared and exist (not PLANNED)
+ FAIL  tests/lint/rosterChoiceComposedHosts.walker.test.js > every COMPOSED row of the registry names a host that exists in both engines (E78 (2): RED today by design, R5's worklist) > power.relation.dmNote: its server and twin hosts are declared and exist (not PLANNED)
+ FAIL  tests/lint/seedLoopTotality.walker.test.js > seed-loop totality walker (habitat removal) > no NEW bare seed loop anywhere in the test corpus
+ FAIL  tests/lint/slugifyIdiomBaseline.test.js > slugify idiom baseline ratchet (code-quality-5) > baseline exactly matches the files that still inline a slug builder
+ FAIL  tests/lint/sovereigntyLightingContract.walker.test.js > the sovereignty lighting condition — a marker is EVIDENCE only in a live title > THE CENSUS IS AN ASSERTION, NOT A SENTENCE — every stated figure is executed
+ FAIL  tests/lint/styleLaw.walker.test.js > the style walker — the ratchet at the tree > ⛔ no file's count of any struck phrase RISES above its baseline
+ FAIL  tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the MUTANTS > THE GROWTH LAW IS EXECUTED: a live-derived register is green and ONE planted dark identity reds
+ FAIL  tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the MUTANTS > THE SWAP MUTANT: a new dark identity at constant count reds with its identity named
+ FAIL  tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the frozen register > the surfaceReach grammar round-trips: parse(format(reach)) equals reach for every LIT identity
+ FAIL  tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the live judgment > the banked cohort is exact — a member now LIT or no longer written is stale, never silently spent
