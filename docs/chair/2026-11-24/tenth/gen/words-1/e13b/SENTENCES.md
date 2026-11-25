@@ -1,15 +1,15 @@
 # E13b — the "How they deal" sentences (FOR THE OWNER'S VETO)
 
-The tenth chair's ruling G39 (2026-11-25): each of the 52 pairs (disposition × trait family, or the disposition's own line) holds two lines; the eighteen pairs that reach three or more cards in one town on C or V hold three. **70 new sentences.** The first line of each pair is the existing sentence (shown for reference, unchanged, imported in the code); every line after it is new and the owner's to strike. Source: `src/data/people/dealingLines.js` on `lane/words-1-2026-11-25-e13b-wip`.
+The tenth chair's ruling G39 (2026-11-25): each of the 52 pairs (disposition × trait family, or the disposition's own line) holds two lines; the eighteen pairs that reach three or more cards in one town on C or V hold three. **70 new sentences.** The first line of each pair is the existing sentence (shown for reference, unchanged, imported in the code); every line after it is new and the owner's to strike. Source: `src/data/people/dealingLines.js` on `lane/words-1-2026-11-25-e13b-wip`. Five drafts were reworded before hand-in to clear the repository's style and presumption walkers ("rather than", "a stranger", "judges" ×2, "unhurried").
 
 ## welcoming
 
 | family | first line (existing) | new line(s) |
 |---|---|---|
-| own | Offers information freely, and asks questions that sound like interest, not prying. | 2. Shares what they know without being asked, and their questions feel friendly rather than nosy.<br>3. Talks openly and willingly; when they ask about you, it comes across as curiosity, not prying. |
+| own | Offers information freely, and asks questions that sound like interest, not prying. | 2. Shares what they know without being asked, and their questions feel friendly, not nosy.<br>3. Talks openly and willingly; when they ask about you, it comes across as curiosity, not prying. |
 | straight | Glad to talk, and says plainly what they know and what they don't. | 2. Happy to help, and honest about where their knowledge ends. |
 | warm | Makes you welcome, finds you a seat, and helps without counting the cost. | 2. Greets you like a guest, sees you comfortable, and gives help freely. |
-| careful | Friendly, but takes their time; hears the whole question before answering it. | 2. Warm enough, but in no hurry; lets you finish before they answer.<br>3. Kindly and unhurried; listens to everything you ask, then answers with care. |
+| careful | Friendly, but takes their time; hears the whole question before answering it. | 2. Warm enough, but in no hurry; lets you finish before they answer.<br>3. Kindly and slow to reply; listens to everything you ask, then answers with care. |
 | sharp | Friendly and quick; by the end of the talk they know more about you than you do about them. | 2. Easy company and quick-witted; somehow you end the talk having told them more than they told you. |
 | dutiful | Open with you until your business touches the people they answer for; then they close up. | 2. Talks freely enough, but goes quiet the moment you ask about the people in their care. |
 | price | Free with talk and small favours, and remembers every one when they want something back. | 2. Generous with small kindnesses, and keeps count of each one for later.<br>3. Hands out help and chatter freely, and calls in every favour when it suits them. |
@@ -47,7 +47,7 @@ The tenth chair's ruling G39 (2026-11-25): each of the 52 pairs (disposition × 
 | warm | Kind but careful; helps once they know who you are and why you came. | 2. Kindly, but wary at first; helps once they understand who you are and what you want. |
 | careful | Answers slowly, checks what you say against what they know, and gives little at a first meeting. | 2. Slow to answer, weighs your words against what they already know, and shares little the first time. |
 | sharp | Says little, watches closely, and notices what you leave out. | 2. Quiet and watchful, and quick to spot what you do not say. |
-| dutiful | Asks your business first, and weighs it against the people they look after. | 2. Wants to know your business before anything else, and judges it by the people in their care. |
+| dutiful | Asks your business first, and weighs it against the people they look after. | 2. Wants to know your business before anything else, and measures it against the people in their care. |
 | price | Says little until it is clear what you can offer. | 2. Keeps quiet until they know what is in it for them.<br>3. Stays guarded until you show what you can give. |
 | lofty | Keeps you at a distance, and makes you prove you are worth their time. | 2. Holds you at arm's length until you show you deserve their attention.<br>3. Aloof and wary; you must earn their time before they give it. |
 | guarded | Answers questions without volunteering anything, and watches who you talk to next. | 2. Says only what the question requires, and pays close attention to the company you keep. |
@@ -64,8 +64,8 @@ The tenth chair's ruling G39 (2026-11-25): each of the 52 pairs (disposition × 
 | straight | Brief and blunt; tells you what they think of your request and goes back to work. | 2. Short and frank; gives you their view of what you want, then returns to their work. |
 | warm | Busy, but not unkind; points you to someone who can help. | 2. Too busy to help, but kind about it, and sends you to someone who can. |
 | careful | Polite, brief and busy; asks you to come back when they have time. | 2. Courteous but occupied; tells you to return when they are less busy. |
-| sharp | Hears you out for a moment, decides you are not worth more, and says so. | 2. Listens briefly, judges you not worth the time, and tells you as much. |
-| dutiful | Has no time for strangers while their own people need them. | 2. Puts their own people first, and has nothing to spare for a stranger. |
+| sharp | Hears you out for a moment, decides you are not worth more, and says so. | 2. Gives you a moment's hearing, finds you not worth the time, and tells you as much. |
+| dutiful | Has no time for strangers while their own people need them. | 2. Puts their own people first, and has nothing to spare for anyone else. |
 | price | Has no time for you unless you are buying. | 2. Ignores you until there is money on the table. |
 | lofty | Barely looks up; you are plainly beneath their notice. | 2. Hardly glances your way; you are clearly not worth their attention. |
 | guarded | Cuts the talk short and gives no reason. | 2. Ends the conversation quickly, without saying why. |
