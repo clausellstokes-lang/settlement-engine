@@ -118,7 +118,11 @@ Reports to the lane's owner: a FILE, at most 200 words. My context began with a 
     tails to `u4/rival-receipts/` and pushes; a loop runs it while rival.sh lives (scratch rcpt-loop.sh, every 5 min on a change).
   (4)'s TELL MEASURED WHILE THE RULING IS AWAITED: `u4/c4tell.mjs` (offline, the twin; through the mutex): on hiding reads, a row whose
     marker disagrees with S over the served roster where the nothing-hidden read agrees. Smoke on r3m-town-none-0-17: 33 hiding reads, 0.
-  RUNNING (background, 2-hour limits): `rival.sh arms after cost` (from 01:07); c4tell on the today-born 140 (queued on the mutex).
+  RULING V15 (the chair 01:15, relayed by VEIL-55 01:16): PHASE 1 IS THE CUT ALONE; the shared page prints NO standing; no marker;
+    reader S not built. V14 (1), (2), (5 restated: no standing printed on any non-owner read) stand; (3), (4), (6) fall away. THE PLAN
+    RE-CUT: `u4/PLAN-V15.md` (the code branch after "R4-IDS MERGED"; narrow R5D to the cut, fail closed; the totality walker and
+    census; the arms; the loss listed under V4; the proof).
+  RUNNING (background, 2-hour limits): `rival.sh arms after cost` (from 01:07); c4tell on the today-born 140 (data for the put-back).
   IF THIS SEAT STOPS: re-run what u4.log lacks (`sh docs/chair/2026-11-24/tenth/veil/v51/u4/u4.sh <steps>`; `sh .../rival.sh`)
   after the trees above are re-made (`git worktree add --detach` at the commits named; node_modules linked).
 - NEXT: wait for "R4-IDS MERGED <commit>" from VEIL-55, then unit 2 (R5-DESC), reading PART 42 s1 block 0 (a3bc0dc9d) and
