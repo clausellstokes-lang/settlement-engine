@@ -1,0 +1,547 @@
+DIFF dp-town-7 (Corrupt Council -> Council of Aldermen):
+  .economicState.primaryImports.8: "Stolen bronze work" -> "Gold and silver torcs"
+  .economicState.primaryImports.9: "Undeclared cattle" -> "Stolen bronze work"
+  .powerStructure.factions.0.category: "criminal" -> "government"
+  .powerStructure.factions.0.captureState: "corrupted" -> "equilibrium"
+  .powerStructure.factionRelationships.1.type: "corrupted" -> "tense"
+  .powerStructure.factionRelationships.1.captureState: "corrupted" -> "equilibrium"
+  .powerStructure.factionRelationships.1.narrative: "The Thieves' Guild has bought key people in the Corrupt Council. Its own crimes go unpunished, and its rivals are the ones who get arrested -> "The Corrupt Council leaves the Thieves' Guild alone because stamping it out would cost more than it saves. The Thieves' Guild keeps its hea
+  .powerStructure.criminalCaptureState: "corrupted" -> "equilibrium"
+  .powerStructure.conflicts.0.issue: "A loan called in early" -> "Prices set on everyday goods"
+  .powerStructure.conflicts.0.stakes: "Solvency" -> "Livelihoods"
+  .powerStructure.conflicts.0.desc: "The Corrupt Council and the Craft Guilds are in high conflict over a loan called in early. The stakes are solvency." -> "The Corrupt Council and the Craft Guilds are in high conflict over prices set on everyday goods. The stakes are livelihoods."
+  .powerStructure.conflicts.0.plotHooks.0: "If the loan is paid, a workshop closes; someone wants it paid by any means." -> "Someone is offering to resolve the conflict \"permanently\" for a price. Both powers have received the offer. Neither has refused yet."
+  .powerStructure.conflicts.1.parties.0: "Thieves' Guild" -> "Corrupt Council"
+DIFF dp-town-11 (Corrupt Council -> Council of Aldermen):
+  .economicState.primaryImports.8: "Stolen silver" -> "Fine wine and olive oil"
+  .powerStructure.factions.1.category: "criminal" -> "government"
+  .powerStructure.factions.1.captureState: "corrupted" -> undefined
+  .powerStructure.factionRelationships.1.narrative: "The Corrupt Council holds the seat and collects the taxes; the Religious Authorities tell people that the Corrupt Council's rule is right a -> "The Corrupt Council holds the seat and collects the taxes; the Religious Authorities have long told people that the Corrupt Council's rule 
+  .powerStructure.criminalCaptureState: "corrupted" -> "none"
+  .powerStructure.conflicts.0.parties.0: "Military/Guard" -> "Corrupt Council"
+  .powerStructure.conflicts.0.parties.1: "Corrupt Council" -> "Religious Authorities"
+  .powerStructure.conflicts.0.intensity: "high" -> "moderate"
+  .powerStructure.conflicts.0.desc: "The Guard and the Corrupt Council are in high conflict over an account of public money. The stakes are trust in office." -> "The Corrupt Council and the Religious Authorities are in moderate conflict over an account of public money. The stakes are trust in office.
+  .powerStructure.conflicts.0.plotHooks.0: "Someone wants the accounts copied before they can be changed." -> "A clerk has found a sum missing from the accounts and is afraid to say so out loud."
+  .powerStructure.conflicts.2.parties.0: "Religious Authorities" -> "Corrupt Council"
+  .powerStructure.conflicts.2.parties.1: "War Council" -> "Landed Gentry"
+  .powerStructure.conflicts.2.issue: "Rites refused to members of the other power" -> "Rents and dues owed on land"
+DIFF dp-town-19 (Corrupt Council -> Council of Aldermen):
+  .economicState.primaryImports.5: "Smuggled jade and gems" -> "Fine porcelain and lacquerware"
+  .powerStructure.factions.0.category: "criminal" -> "government"
+  .powerStructure.factions.0.captureState: "corrupted" -> "equilibrium"
+  .powerStructure.factions.2.desc: "Criminal organisations have captured significant influence; corruption is systemic, not exceptional. Close enough to the two above that the -> "Criminal organisations have captured significant influence; corruption is systemic, not exceptional. Close enough to the two above that the
+  .powerStructure.factions.3.desc: "Town watch; it enforces ordinances, manages disorder, and reports to the council." -> "Town watch; it enforces ordinances, manages disorder, and reports to the council. A slow war with the guild: arrests are made, the gangs re
+  .powerStructure.factionRelationships.2.type: "corrupted" -> "tense"
+  .powerStructure.factionRelationships.2.captureState: "corrupted" -> "equilibrium"
+  .powerStructure.factionRelationships.2.narrative: "The Thieves' Guild has bought key people in the Corrupt Council. Its own crimes go unpunished, and its rivals are the ones who get arrested -> "The Corrupt Council leaves the Thieves' Guild alone because stamping it out would cost more than it saves. The Thieves' Guild keeps its hea
+  .powerStructure.factionRelationships.3.type: "corrupted" -> "tense"
+  .powerStructure.factionRelationships.3.captureState: "corrupted" -> "equilibrium"
+  .powerStructure.factionRelationships.3.narrative: "The Guard and the Thieves' Guild have a working arrangement. Patrol routes avoid certain streets. Certain arrests never happen. The rank an -> "The Guard knows where the Thieves' Guild works, and the Thieves' Guild knows the patrol rota. Neither has yet pushed the other hard enough 
+  .powerStructure.criminalCaptureState: "corrupted" -> "equilibrium"
+  .powerStructure.conflicts.0: {"parties":["Corrupt Council","Military/Guard"],"issue":"An unpaid debt between the two powers","stakes":"Money and face","intensity":"moder -> undefined
+DIFF dp-town-36 (Corrupt Council -> Council of Aldermen):
+  .powerStructure.factions.0.category: "criminal" -> "government"
+  .powerStructure.factions.0.captureState: "corrupted" -> undefined
+  .powerStructure.criminalCaptureState: "corrupted" -> "none"
+  .npcs.0.id: "npc_town_hall" -> "npc_craft_guilds_5_15"
+  .npcs.0.name: "Scipio Metellus" -> "Valentinus Serranus"
+  .npcs.0.role: "the council's fixer" -> "Mayor"
+  .npcs.0.title: "the council's fixer" -> "the senior craft-guild master"
+  .npcs.0.category: "government" -> "economy"
+  .npcs.0.personality.dominant: "brave" -> "intuitive"
+  .npcs.0.personality.flaw: null -> "deceitful"
+  .npcs.0.personality.modifier: "fatalistic" -> "theatrical"
+  .npcs.0.personality.tell: "laughs loudly at their own jokes, silently at others'" -> "pauses for exactly three seconds before answering any question"
+  .npcs.0.personality.speech: "Talks to everyone in the room except the person the answer is for" -> "Ends disagreements by restating the other position, slightly wrong"
+DIFF dp-town-41 (Corrupt Council -> Council of Aldermen):
+  .economicState.primaryImports.5: "Stolen silver and hack-silver" -> "Silver and hack-silver"
+  .powerStructure.factions.0.category: "criminal" -> "government"
+  .powerStructure.factions.0.captureState: "corrupted" -> "equilibrium"
+  .powerStructure.factions.4.desc: "Town watch; it enforces ordinances, manages disorder, and reports to the council. Wartime has turned this power from a civic institution in -> "Town watch; it enforces ordinances, manages disorder, and reports to the council. Wartime has turned this power from a civic institution in
+  .powerStructure.factions.5.desc: "Organised criminal network controls the black market and several informal revenue streams; present in council discussions through intermedi -> "Organised criminal network controls the black market and several informal revenue streams; present in council discussions through intermedi
+  .powerStructure.factionRelationships.1.direction: "escalating" -> "stable"
+  .powerStructure.factionRelationships.1.narrative: "The Corrupt Council needs the taxes and loans of the Merchant Guilds, and the Merchant Guilds need the Corrupt Council to enforce their con -> "The Corrupt Council needs the taxes and loans of the Merchant Guilds, and the Merchant Guilds need the Corrupt Council to enforce their con
+  .powerStructure.factionRelationships.3.type: "corrupted" -> "tense"
+  .powerStructure.factionRelationships.3.direction: "escalating" -> "stable"
+  .powerStructure.factionRelationships.3.captureState: "corrupted" -> "equilibrium"
+  .powerStructure.factionRelationships.3.narrative: "The Thieves' Guild has bought key people in the Corrupt Council. Its own crimes go unpunished, and its rivals are the ones who get arrested -> "The Corrupt Council leaves the Thieves' Guild alone because stamping it out would cost more than it saves. The Thieves' Guild keeps its hea
+  .powerStructure.factionRelationships.5.type: "corrupted" -> "tense"
+  .powerStructure.factionRelationships.5.captureState: "corrupted" -> "equilibrium"
+DIFF dp-town-44 (Corrupt Council -> Council of Aldermen):
+  .economicState.primaryImports.7: "Stolen silver plate" -> "Fine wine and amphorae"
+  .economicState.primaryImports.8: "Undeclared wine and oil" -> "Stolen silver plate"
+  .economicState.safetyProfile.crimeTypes.0.desc: "Organized crime has filled the power vacuum left by absent or failed civil authority. It provides a form of order and extracts a price for  -> "Organized crime keeps its own order where the civil authority's reach fails, and extracts a price for it."
+  .powerStructure.factions.0.category: "criminal" -> "government"
+  .npcs.0.id: "npc_town_council" -> "npc_docks_port_facilities"
+  .npcs.0.name: "Justa Silanus" -> "Tubertus Plancus"
+  .npcs.0.gender: "female" -> "male"
+  .npcs.0.role: "the first councillor" -> "Mayor"
+  .npcs.0.title: "the first councillor" -> "the wharfinger"
+  .npcs.0.category: "government" -> "other"
+  .npcs.0.personality.dominant: null -> "clever"
+  .npcs.0.personality.flaw: "vain" -> "cold-blooded"
+  .npcs.0.personality.modifier: "contrarian" -> "cynical"
+DIFF dp-town-47 (Corrupt Council -> Council of Aldermen):
+  .economicState.primaryImports.6: "Stolen mail and weapons" -> "Master-crafted plate armour"
+  .economicState.primaryImports.7: "Undeclared furs and amber" -> "Stolen mail and weapons"
+  .powerStructure.factions.0.category: "criminal" -> "government"
+  .powerStructure.factions.0.captureState: "corrupted" -> "equilibrium"
+  .powerStructure.factionRelationships.2.type: "corrupted" -> "tense"
+  .powerStructure.factionRelationships.2.captureState: "corrupted" -> "equilibrium"
+  .powerStructure.factionRelationships.2.narrative: "The Thieves' Guild has bought key people in the Corrupt Council. Its own crimes go unpunished, and its rivals are the ones who get arrested -> "The Corrupt Council leaves the Thieves' Guild alone because stamping it out would cost more than it saves. The Thieves' Guild keeps its hea
+  .powerStructure.factionRelationships.4.type: "corrupted" -> "tense"
+  .powerStructure.factionRelationships.4.captureState: "corrupted" -> "equilibrium"
+  .powerStructure.factionRelationships.4.narrative: "The Guard and the Thieves' Guild have a working arrangement. Patrol routes avoid certain streets. Certain arrests never happen. The rank an -> "The Guard knows where the Thieves' Guild works, and the Thieves' Guild knows the patrol rota. Neither pushes the other hard enough to start
+  .powerStructure.criminalCaptureState: "corrupted" -> "equilibrium"
+  .npcs.0.id: "npc_town_hall" -> "npc_shipyard"
+  .npcs.0.name: "Hans Becker" -> "Yolanda Hartmann"
+DIFF dp-town-57 (Corrupt Council -> Council of Aldermen):
+  .economicState.primaryImports.8: "Stolen silver" -> "Fine wine and olive oil"
+  .economicState.safetyProfile.crimeTypes.0.desc: "Petty theft, minor fraud, and opportunistic violence are persistent, driven by too many people with too little, and too few consequences fo -> "Petty theft, minor fraud, and opportunistic violence are persistent. No single dominant organisation: just the steady pressure of too many 
+  .powerStructure.factions.2.category: "criminal" -> "government"
+  .powerStructure.factions.2.captureState: "corrupted" -> undefined
+  .powerStructure.recentConflict: "The investigation into the betrayal has been obstructed twice. The obstruction came from inside the Corrupt Council. No one will say who." -> "The investigation into the betrayal has been obstructed twice. The obstruction came from inside the Corrupt Council of Aldermen of Aldermen
+  .powerStructure.factionRelationships.3.narrative: "The Merchant Guilds and the Craft Guilds are at odds over an unpaid debt between the two powers, and fight over who keeps the profit of the -> "The Merchant Guilds and the Craft Guilds vote together against the Landed Gentry, then fight over who keeps the profit."
+  .powerStructure.criminalCaptureState: "corrupted" -> "none"
+  .powerStructure.conflicts.0.parties.1: "Craft Guilds" -> "Landed Gentry"
+  .powerStructure.conflicts.0.desc: "The Merchant Guilds and the Craft Guilds are in moderate conflict over an unpaid debt between the two powers. The stakes are money and face -> "The Merchant Guilds and the Landed Gentry are in moderate conflict over an unpaid debt between the two powers. The stakes are money and fac
+  .powerStructure.conflicts.0.plotHooks.0: "The debt is due at the end of the month, and the man who signed for it has gone away." -> "A moneylender has bought the debt and means to collect it from whichever side pays first."
+  .npcs.0.id: "npc_town_watch" -> "npc_merchant_guilds_3_8"
+  .npcs.0.name: "Manouel Kyriadotes" -> "Evdokia Lekapenos"
+  .npcs.0.gender: "male" -> "female"
+DIFF dp-town-75 (Corrupt Council -> Council of Aldermen):
+  .economicState.primaryImports.7: "Stolen silver plate" -> "Fine wine and amphorae"
+  .powerStructure.factions.0.category: "criminal" -> "government"
+  .powerStructure.factions.0.captureState: "corrupted" -> undefined
+  .powerStructure.factionRelationships.1.type: "corrupted" -> "competitive"
+  .powerStructure.factionRelationships.1.captureState: "corrupted" -> "adversarial"
+  .powerStructure.factionRelationships.1.narrative: "The Thieves' Guild has bought key people in the Corrupt Council. Its own crimes go unpunished, and its rivals are the ones who get arrested -> "The Corrupt Council is hunting the Thieves' Guild in earnest but not catching all of it; the Thieves' Guild pulls back and regroups, and do
+  .powerStructure.factionRelationships.1.dmNote: "Ask: which specific officials have arrangements with the Thieves' Guild? The answer drives dozens of plot hooks." -> null
+  .powerStructure.factionRelationships.2.direction: "stable" -> "escalating"
+  .powerStructure.factionRelationships.2.narrative: "The Merchant Guilds and the Craft Guilds vote together whenever trade is at stake, then fight over who keeps the profit." -> "The Merchant Guilds and the Craft Guilds are at odds over a broken promise of support, and fight over who keeps the profit of the trade."
+  .powerStructure.criminalCaptureState: "corrupted" -> "adversarial"
+  .powerStructure.conflicts.0.parties.0: "Corrupt Council" -> "Merchant Guilds"
+  .powerStructure.conflicts.0.issue: "Who speaks for the place to outsiders" -> "A broken promise of support"
+  .powerStructure.conflicts.0.stakes: "Outside influence" -> "Trust"
+DIFF dp-town-80 (Corrupt Council -> Council of Aldermen):
+  .economicState.primaryImports.5: "Stolen silver" -> "Fine wine and olive oil"
+  .powerStructure.factions.0.category: "criminal" -> "government"
+  .powerStructure.factions.0.captureState: "corrupted" -> undefined
+  .powerStructure.criminalCaptureState: "corrupted" -> "none"
+  .npcs.0.id: "npc_town_watch" -> "npc_craft_guilds_5_15"
+  .npcs.0.name: "Pulcheria Alexios" -> "Theodoros Alexios"
+  .npcs.0.gender: "female" -> "male"
+  .npcs.0.role: "the watch captain" -> "Mayor"
+  .npcs.0.title: "the watch captain" -> "the senior craft-guild master"
+  .npcs.0.category: "military" -> "economy"
+  .npcs.0.personality.dominant: null -> "level-headed"
+  .npcs.0.personality.flaw: "ruthless" -> "cruel"
+  .npcs.0.personality.modifier: "ambitious" -> "inscrutable"
+DIFF dp-town-92 (Corrupt Council -> Council of Aldermen):
+  .economicState.primaryImports.6: "Undeclared luxury silk" -> "Spices and rare aromatics"
+  .powerStructure.factions.0.category: "criminal" -> "government"
+  .powerStructure.factions.0.captureState: "corrupted" -> undefined
+  .powerStructure.criminalCaptureState: "corrupted" -> "none"
+  .npcs.0.id: "npc_town_hall" -> "npc_merchant_warehouses"
+  .npcs.0.name: "Basim al-Mawsili" -> "Rand ibn Ahmed"
+  .npcs.0.gender: "male" -> "female"
+  .npcs.0.role: "the council's fixer" -> "Mayor"
+  .npcs.0.title: "the council's fixer" -> "the warehouse factor"
+  .npcs.0.category: "government" -> "economy"
+  .npcs.0.personality.dominant: null -> "plain-dealing"
+  .npcs.0.personality.flaw: "cold-blooded" -> null
+  .npcs.0.personality.modifier: "traditionalist" -> "ambitious"
+DIFF dp-town-96 (Corrupt Council -> Council of Aldermen):
+  .economicState.primaryImports.9: "Stolen silver and hack-silver" -> "Silver and hack-silver"
+  .powerStructure.factions.0.category: "criminal" -> "government"
+  .powerStructure.factions.0.captureState: "corrupted" -> "equilibrium"
+  .powerStructure.factions.2.desc: "Organised criminal network controls the black market and several informal revenue streams; present in council discussions through intermedi -> "Organised criminal network controls the black market and several informal revenue streams; present in council discussions through intermedi
+  .powerStructure.factions.3.desc: "Town watch; it enforces ordinances, manages disorder, and reports to the council. They and the religious authorities both keep people in li -> "Town watch; it enforces ordinances, manages disorder, and reports to the council. A slow war with the guild: arrests are made, the gangs re
+  .powerStructure.factionRelationships.2.type: "corrupted" -> "tense"
+  .powerStructure.factionRelationships.2.captureState: "corrupted" -> "equilibrium"
+  .powerStructure.factionRelationships.2.narrative: "The Thieves' Guild has bought key people in the Corrupt Council. Its own crimes go unpunished, and its rivals are the ones who get arrested -> "The Corrupt Council leaves the Thieves' Guild alone because stamping it out would cost more than it saves. The Thieves' Guild keeps its hea
+  .powerStructure.factionRelationships.3.narrative: "The Merchant Guilds and the Craft Guilds are at odds over who buys the raw materials first, and fight over who keeps the profit of the trad -> "The Merchant Guilds and the Craft Guilds vote together whenever trade is at stake, then fight over who keeps the profit."
+  .powerStructure.factionRelationships.4.type: "corrupted" -> "tense"
+  .powerStructure.factionRelationships.4.captureState: "corrupted" -> "equilibrium"
+  .powerStructure.factionRelationships.4.narrative: "The Guard and the Thieves' Guild have a working arrangement. Patrol routes avoid certain streets. Certain arrests never happen. The rank an -> "The Guard knows where the Thieves' Guild works, and the Thieves' Guild knows the patrol rota. Neither pushes the other hard enough to start
+  .powerStructure.criminalCaptureState: "corrupted" -> "equilibrium"
+DIFF dp-town-101 (Corrupt Council -> Council of Aldermen):
+  .economicState.primaryImports.2: "Undeclared luxury silk" -> "Spices and rare aromatics"
+  .economicState.primaryImports.3: "Stolen spice shipments" -> "Undeclared luxury silk"
+  .powerStructure.factions.0.category: "criminal" -> "government"
+  .powerStructure.factions.0.captureState: "corrupted" -> "equilibrium"
+  .powerStructure.factionRelationships.0.type: "corrupted" -> "tense"
+  .powerStructure.factionRelationships.0.captureState: "corrupted" -> "equilibrium"
+  .powerStructure.factionRelationships.0.narrative: "The Thieves' Guild has bought key people in the Corrupt Council. Its own crimes go unpunished, and its rivals are the ones who get arrested -> "The Corrupt Council leaves the Thieves' Guild alone because stamping it out would cost more than it saves. The Thieves' Guild keeps its hea
+  .powerStructure.criminalCaptureState: "corrupted" -> "equilibrium"
+  .npcs.0.id: "npc_town_hall" -> "npc_merchant_warehouses"
+  .npcs.0.name: "Rashid al-Yamani" -> "Yusuf al-Jazari"
+  .npcs.0.role: "the council's fixer" -> "Mayor"
+  .npcs.0.title: "the council's fixer" -> "the warehouse factor"
+  .npcs.0.category: "government" -> "economy"
+DIFF dp-town-104 (Corrupt Council -> Council of Aldermen):
+  .economicState.primaryImports.6: "Undeclared luxury silk" -> "Spices and rare aromatics"
+  .economicState.safetyProfile.crimeTypes.0.desc: "Residents fleeing creditor obligations, transferring assets fraudulently, or using criminal networks to avoid collection." -> "Residents fleeing creditor obligations or transferring assets fraudulently to avoid collection."
+  .powerStructure.factions.0.category: "criminal" -> "government"
+  .powerStructure.factions.0.captureState: "corrupted" -> undefined
+  .powerStructure.criminalCaptureState: "corrupted" -> "none"
+  .npcs.0.id: "npc_town_hall" -> "npc_docks_port_facilities"
+  .npcs.0.name: "Suha ibn Tufayl" -> "Khadija ibn Sina"
+  .npcs.0.role: "the council's fixer" -> "Mayor"
+  .npcs.0.title: "the council's fixer" -> "the wharfinger"
+  .npcs.0.category: "government" -> "other"
+  .npcs.0.personality.flaw: null -> "cruel"
+  .npcs.0.personality.modifier: "pragmatic" -> "contrarian"
+  .npcs.0.personality.tell: "cleans or fidgets with their hands constantly" -> "deflects personal questions with a counter-question"
+DIFF dp-town-106 (Corrupt Council -> Council of Aldermen):
+  .economicState.primaryImports.5: "Stolen silver" -> "Fine wine and olive oil"
+  .powerStructure.factions.0.category: "criminal" -> "government"
+  .powerStructure.factions.0.captureState: "corrupted" -> undefined
+  .powerStructure.factions.1.desc: "Town watch; it enforces ordinances, manages disorder, and reports to the council. Behind the governing council by too much to challenge ope -> "Town watch; it enforces ordinances, manages disorder, and reports to the council. Behind the governing council by too much to challenge ope
+  .powerStructure.factions.3.desc: "Organised criminal network controls the black market and several informal revenue streams; present in council discussions through intermedi -> "Organised criminal network controls the black market and several informal revenue streams; present in council discussions through intermedi
+  .powerStructure.factionRelationships.2.type: "corrupted" -> "competitive"
+  .powerStructure.factionRelationships.2.captureState: "corrupted" -> "adversarial"
+  .powerStructure.factionRelationships.2.narrative: "The Thieves' Guild has bought key people in the Corrupt Council. Its own crimes go unpunished, and its rivals are the ones who get arrested -> "The Corrupt Council is hunting the Thieves' Guild in earnest but not catching all of it; the Thieves' Guild pulls back and regroups, and do
+  .powerStructure.factionRelationships.2.dmNote: "Ask: which specific officials have arrangements with the Thieves' Guild? The answer drives dozens of plot hooks." -> null
+  .powerStructure.factionRelationships.3.narrative: "The Merchant Guilds and the Craft Guilds are at odds over ownership of a disputed building, and fight over who keeps the profit of the trad -> "The Merchant Guilds and the Craft Guilds vote together against the Landed Gentry, then fight over who keeps the profit."
+  .powerStructure.factionRelationships.4.type: "corrupted" -> "competitive"
+  .powerStructure.factionRelationships.4.captureState: "corrupted" -> "adversarial"
+  .powerStructure.factionRelationships.4.narrative: "The Guard and the Thieves' Guild have a working arrangement. Patrol routes avoid certain streets. Certain arrests never happen. The rank an -> "The Guard is hunting the Thieves' Guild in earnest and making real arrests; the Thieves' Guild knows the streets and the people better, hid
+DIFF dp-town-115 (Corrupt Council -> Council of Aldermen):
+  .economicState.primaryImports.5: "Stolen silver and hack-silver" -> "Silver and hack-silver"
+  .economicState.safetyProfile.crimeTypes.0.desc: "Petty theft, minor fraud, and opportunistic violence are persistent, driven by too many people with too little, and too few consequences fo -> "Petty theft, minor fraud, and opportunistic violence are persistent. No single dominant organisation: just the steady pressure of too many 
+  .powerStructure.factions.0.category: "criminal" -> "government"
+  .powerStructure.factions.0.captureState: "corrupted" -> undefined
+  .powerStructure.factionRelationships.2.narrative: "The Merchant Guilds and the Craft Guilds are at odds over weights and measures used in trade, and fight over who keeps the profit of the tr -> "The Merchant Guilds and the Craft Guilds vote together against the Landed Gentry, then fight over who keeps the profit."
+  .powerStructure.criminalCaptureState: "corrupted" -> "none"
+  .powerStructure.conflicts.0.parties.0: "Merchant Guilds" -> "Religious Authorities"
+  .powerStructure.conflicts.0.parties.1: "Craft Guilds" -> "Landed Gentry"
+  .powerStructure.conflicts.0.issue: "Weights and measures used in trade" -> "An informer planted by one power in the other"
+  .powerStructure.conflicts.0.stakes: "Honest dealing" -> "Secrets"
+  .powerStructure.conflicts.0.desc: "The Merchant Guilds and the Craft Guilds are in moderate conflict over weights and measures used in trade. The stakes are honest dealing." -> "The Religious Authorities and the Landed Gentry are in moderate conflict over an informer planted by one power in the other. The stakes are
+  .powerStructure.conflicts.0.plotHooks.0: "A set of short weights has been found, and each side says the other made them." -> "A list of names has gone missing, and whoever has it knows who the informer is."
+  .npcs.0.id: "npc_town_council" -> "npc_blacksmiths_3_10"
+DIFF dp-town-132 (Corrupt Council -> Council of Aldermen):
+  .economicState.primaryImports.7: "Stolen gems and spices" -> "Precious stones and gems"
+  .economicState.primaryImports.8: "Opium and contraband" -> "Stolen gems and spices"
+  .powerStructure.factions.0.category: "criminal" -> "government"
+  .powerStructure.factions.0.captureState: "corrupted" -> "equilibrium"
+  .powerStructure.factionRelationships.2.type: "corrupted" -> "tense"
+  .powerStructure.factionRelationships.2.captureState: "corrupted" -> "equilibrium"
+  .powerStructure.factionRelationships.2.narrative: "The Thieves' Guild has bought key people in the Corrupt Council. Its own crimes go unpunished, and its rivals are the ones who get arrested -> "The Corrupt Council leaves the Thieves' Guild alone because stamping it out would cost more than it saves. The Thieves' Guild keeps its hea
+  .powerStructure.factionRelationships.4.type: "corrupted" -> "tense"
+  .powerStructure.factionRelationships.4.captureState: "corrupted" -> "equilibrium"
+  .powerStructure.factionRelationships.4.narrative: "The Guard and the Thieves' Guild have a working arrangement. Patrol routes avoid certain streets. Certain arrests never happen. The rank an -> "The Guard knows where the Thieves' Guild works, and the Thieves' Guild knows the patrol rota. Neither pushes the other hard enough to start
+  .powerStructure.criminalCaptureState: "corrupted" -> "equilibrium"
+  .powerStructure.conflicts.0.intensity: "high" -> "moderate"
+  .powerStructure.conflicts.0.desc: "The Corrupt Council and the Merchant Guilds are in high conflict over control of the dock taxation authority. The stakes are port revenue." -> "The Corrupt Council and the Merchant Guilds are in moderate conflict over control of the dock taxation authority. The stakes are port reven
+DIFF dp-town-147 (Corrupt Council -> Council of Aldermen):
+  .economicState.primaryImports.6: "Stolen silver" -> "Marble and bronze sculpture"
+  .powerStructure.factions.0.category: "criminal" -> "government"
+  .powerStructure.factions.0.captureState: "corrupted" -> undefined
+  .powerStructure.factionRelationships.2.narrative: "The Merchant Guilds and the Craft Guilds vote together against the Landed Gentry, then fight over who keeps the profit." -> "The Merchant Guilds and the Craft Guilds are at odds over control of the market licensing process, and fight over who keeps the profit of t
+  .powerStructure.criminalCaptureState: "corrupted" -> "none"
+  .powerStructure.conflicts.0.parties.0: "Corrupt Council" -> "Military/Guard"
+  .powerStructure.conflicts.0.issue: "Protection money taken from traders" -> "Rights to the best market stalls"
+  .powerStructure.conflicts.0.stakes: "Safety of trade" -> "Custom"
+  .powerStructure.conflicts.0.intensity: "high" -> "moderate"
+  .powerStructure.conflicts.0.desc: "The Corrupt Council and the Merchant Guilds are in high conflict over protection money taken from traders. The stakes are safety of trade." -> "The Guard and the Merchant Guilds are in moderate conflict over rights to the best market stalls. The stakes are custom."
+  .powerStructure.conflicts.0.plotHooks.0: "The man who collects the money wants out, and is offering what he knows in return for help." -> "Someone is moving stall markers after dark, and both sides have set a man to watch."
+  .powerStructure.conflicts.1.parties.0: "Corrupt Council" -> "Landed Gentry"
+  .powerStructure.conflicts.1.desc: "The Corrupt Council and the Craft Guilds are in moderate conflict over precedence at public gatherings. The stakes are standing." -> "The Landed Gentry and the Craft Guilds are in moderate conflict over precedence at public gatherings. The stakes are standing."
+DIFF dp-city-32 (Corrupt City Council -> Council of Syndics):
+  .powerStructure.factions.0.category: "criminal" -> "government"
+  .powerStructure.factions.0.captureState: "corrupted" -> undefined
+  .powerStructure.factionRelationships.1.type: "corrupted" -> "competitive"
+  .powerStructure.factionRelationships.1.captureState: "corrupted" -> "adversarial"
+  .powerStructure.factionRelationships.1.narrative: "The Thieves' Guild has bought key people in the Corrupt City Council. Its own crimes go unpunished, and its rivals are the ones who get arr -> "The Corrupt City Council is hunting the Thieves' Guild in earnest but not catching all of it; the Thieves' Guild pulls back and regroups, a
+  .powerStructure.factionRelationships.1.dmNote: "Ask: which specific officials have arrangements with the Thieves' Guild? The answer drives dozens of plot hooks." -> null
+  .powerStructure.criminalCaptureState: "corrupted" -> "adversarial"
+  .powerStructure.conflicts.0.plotHooks.0: "The only copy of the deed is held by an old clerk who will not say which side he favours." -> "Someone is offering to resolve the conflict \"permanently\" for a price. Both powers have received the offer. Neither has refused yet."
+  .npcs.0.id: "npc_city_hall" -> "npc_merchant_guilds_15_40"
+  .npcs.0.name: "Chang Hu" -> "Guiying Park"
+  .npcs.0.gender: "male" -> "female"
+  .npcs.0.role: "the head of Corrupt City Council" -> "Lord Mayor"
+  .npcs.0.title: "the head of Corrupt City Council" -> "the senior guild master"
+DIFF dp-city-37 (Corrupt City Council -> Council of Syndics):
+  .economicState.primaryImports.7: "Smuggled jade and gems" -> "Fine porcelain and lacquerware"
+  .powerStructure.factions.0.category: "criminal" -> "government"
+  .powerStructure.factions.0.captureState: "corrupted" -> undefined
+  .powerStructure.factions.1.desc: "City watch; it answers for keeping order and is growing more sure of its own authority. Behind the governing council by too much to challen -> "City watch; it answers for keeping order and is growing more sure of its own authority. Behind the governing council by too much to challen
+  .powerStructure.factions.5.desc: "Organised criminal network controls the black market and several informal revenue streams; present in council discussions through intermedi -> "Organised criminal network controls the black market and several informal revenue streams; present in council discussions through intermedi
+  .powerStructure.factionRelationships.2.type: "corrupted" -> "competitive"
+  .powerStructure.factionRelationships.2.captureState: "corrupted" -> "adversarial"
+  .powerStructure.factionRelationships.2.narrative: "The Thieves' Guild has bought key people in the Corrupt City Council. Its own crimes go unpunished, and its rivals are the ones who get arr -> "The Corrupt City Council is hunting the Thieves' Guild in earnest but not catching all of it; the Thieves' Guild pulls back and regroups, a
+  .powerStructure.factionRelationships.2.dmNote: "Ask: which specific officials have arrangements with the Thieves' Guild? The answer drives dozens of plot hooks." -> null
+  .powerStructure.factionRelationships.4.type: "corrupted" -> "competitive"
+  .powerStructure.factionRelationships.4.captureState: "corrupted" -> "adversarial"
+  .powerStructure.factionRelationships.4.narrative: "The Guard and the Thieves' Guild have a working arrangement. Patrol routes avoid certain streets. Certain arrests never happen. The rank an -> "The Guard is hunting the Thieves' Guild in earnest and making real arrests; the Thieves' Guild knows the streets and the people better, hid
+  .powerStructure.criminalCaptureState: "corrupted" -> "adversarial"
+DIFF dp-city-53 (Corrupt City Council -> Council of Syndics):
+  .powerStructure.factions.0.category: "criminal" -> "government"
+  .powerStructure.factions.0.captureState: "corrupted" -> "equilibrium"
+  .powerStructure.factions.1.desc: "City watch; law enforcement and external defence, stretched between multiple responsibilities. The gap between them and the governing counc -> "City watch; law enforcement and external defence, stretched between multiple responsibilities. The gap between them and the governing counc
+  .powerStructure.factionRelationships.2.type: "corrupted" -> "tense"
+  .powerStructure.factionRelationships.2.direction: "escalating" -> "stable"
+  .powerStructure.factionRelationships.2.captureState: "corrupted" -> "equilibrium"
+  .powerStructure.factionRelationships.2.narrative: "The Thieves' Guild has bought key people in the Corrupt City Council. Its own crimes go unpunished, and its rivals are the ones who get arr -> "The Corrupt City Council leaves the Thieves' Guild alone because stamping it out would cost more than it saves. The Thieves' Guild keeps it
+  .powerStructure.factionRelationships.3.direction: "escalating" -> "stable"
+  .powerStructure.factionRelationships.3.narrative: "The Merchant Guilds and the Craft Guilds are at odds over who buys the raw materials first, and fight over who keeps the profit of the trad -> "The Merchant Guilds and the Craft Guilds vote together against the Noble Families, then fight over who keeps the profit."
+  .powerStructure.factionRelationships.4.type: "corrupted" -> "tense"
+  .powerStructure.factionRelationships.4.captureState: "corrupted" -> "equilibrium"
+  .powerStructure.factionRelationships.4.narrative: "The Guard and the Thieves' Guild have a working arrangement. Patrol routes avoid certain streets. Certain arrests never happen. The rank an -> "The Guard knows where the Thieves' Guild works, and the Thieves' Guild knows the patrol rota. Neither has yet pushed the other hard enough 
+  .powerStructure.criminalCaptureState: "corrupted" -> "equilibrium"
+DIFF dp-city-87 (Corrupt City Council -> Council of Syndics):
+  .powerStructure.factions.1.category: "criminal" -> "government"
+  .powerStructure.factionRelationships.0.direction: "stable" -> "escalating"
+  .powerStructure.factionRelationships.1.narrative: "The Corrupt City Council holds the seat and collects the taxes; the Religious Authorities tell people that the Corrupt City Council's rule  -> "The Corrupt City Council holds the seat and collects the taxes; the Religious Authorities have long told people that the Corrupt City Counc
+  .powerStructure.conflicts.0.intensity: "moderate" -> "high"
+  .powerStructure.conflicts.0.desc: "The Corrupt City Council and the Guard are in moderate conflict over the right to raise a new levy. The stakes are revenue." -> "The Corrupt City Council and the Guard are in high conflict over the right to raise a new levy. The stakes are revenue."
+  .powerStructure.conflicts.1.parties.0: "Military/Guard" -> "Thieves' Guild"
+  .powerStructure.conflicts.1.parties.1: "Noble Families" -> "Corrupt City Council"
+  .powerStructure.conflicts.1.desc: "The Guard and the Noble Families are in moderate conflict over whether to open back-channel negotiations with the insurgency. The stakes ar -> "The Thieves' Guild and the Corrupt City Council are in moderate conflict over whether to open back-channel negotiations with the insurgency
+  .powerStructure.conflicts.1.plotHooks.0: "A neutral figure is being pressured by both the Guard and the Noble Families to take a side before the next council session." -> "A neutral figure is being pressured by both the Thieves' Guild and the Corrupt City Council to take a side before the next council session.
+  .powerStructure.conflicts.2: undefined -> {"parties":["Corrupt City Council","Religious Authorities"],"issue":"A preacher who denounces the other power","stakes":"Public opinion","in
+  .npcs.0.id: "npc_veiled_7c9418d61bf7a688" -> "npc_merchant_guilds_15_40"
+  .npcs.0.name: "Filomena Gusev" -> "Sofia Egorov"
+  .npcs.0.role: "the network's head" -> "Lord Mayor"
+DIFF dp-city-91 (Corrupt City Council -> Council of Syndics):
+  .powerStructure.factions.0.category: "criminal" -> "government"
+  .powerStructure.factions.0.captureState: "corrupted" -> undefined
+  .powerStructure.factions.2.desc: "Organised criminal network controls the black market and several informal revenue streams; present in council discussions through intermedi -> "Organised criminal network controls the black market and several informal revenue streams; present in council discussions through intermedi
+  .powerStructure.factions.3.desc: "City watch; law enforcement and external defence, stretched between multiple responsibilities. They and the religious authorities both keep -> "City watch; law enforcement and external defence, stretched between multiple responsibilities. A slow war with the guild: arrests are made,
+  .powerStructure.factionRelationships.2.type: "corrupted" -> "competitive"
+  .powerStructure.factionRelationships.2.captureState: "corrupted" -> "adversarial"
+  .powerStructure.factionRelationships.2.narrative: "The Thieves' Guild has bought key people in the Corrupt City Council. Its own crimes go unpunished, and its rivals are the ones who get arr -> "The Corrupt City Council is hunting the Thieves' Guild in earnest but not catching all of it; the Thieves' Guild pulls back and regroups, a
+  .powerStructure.factionRelationships.2.dmNote: "Ask: which specific officials have arrangements with the Thieves' Guild? The answer drives dozens of plot hooks." -> null
+  .powerStructure.factionRelationships.3.direction: "stable" -> "escalating"
+  .powerStructure.factionRelationships.3.narrative: "The Merchant Guilds and the Craft Guilds vote together against the Noble Families, then fight over who keeps the profit." -> "The Merchant Guilds and the Craft Guilds are at odds over a broken promise of support, and fight over who keeps the profit of the trade."
+  .powerStructure.factionRelationships.4.type: "corrupted" -> "competitive"
+  .powerStructure.factionRelationships.4.captureState: "corrupted" -> "adversarial"
+  .powerStructure.factionRelationships.4.narrative: "The Guard and the Thieves' Guild have a working arrangement. Patrol routes avoid certain streets. Certain arrests never happen. The rank an -> "The Guard is hunting the Thieves' Guild in earnest and making real arrests; the Thieves' Guild knows the streets and the people better, hid
+DIFF dp-city-92 (Corrupt City Council -> Council of Syndics):
+  .powerStructure.factions.0.category: "criminal" -> "government"
+  .powerStructure.conflicts.0.plotHooks.0: "Someone wants the accounts copied before they can be changed." -> "A clerk has found a sum missing from the accounts and is afraid to say so out loud."
+  .powerStructure.conflicts.2.parties.1: "Merchant Guilds" -> "Arcane Orders"
+  .powerStructure.conflicts.2.issue: "Stolen goods sold openly" -> "Magic used in public without leave"
+  .powerStructure.conflicts.2.stakes: "Reputation and profit" -> "Public safety"
+  .powerStructure.conflicts.2.desc: "The Corrupt City Council and the Merchant Guilds are in moderate conflict over stolen goods sold openly. The stakes are reputation and prof -> "The Corrupt City Council and the Arcane Orders are in moderate conflict over magic used in public without leave. The stakes are public safe
+  .powerStructure.conflicts.2.plotHooks.0: "A merchant has found his own stolen cloth for sale two streets away." -> "A spell went wrong in the street last week, and both sides blame someone the other trained."
+  .npcs.0.id: "npc_mayor_and_council" -> "npc_merchant_guilds_15_40"
+  .npcs.0.name: "Gunnar Thorsson" -> "Ísgerðr Njálsson"
+  .npcs.0.gender: "male" -> "female"
+  .npcs.0.role: "the mayor" -> "Lord Mayor"
+  .npcs.0.title: "the mayor" -> "the senior guild master"
+  .npcs.0.category: "government" -> "economy"
+DIFF dp-city-97 (Corrupt City Council -> Council of Syndics):
+  .economicState.primaryImports.7: "Stolen silver and hack-silver" -> "Silver and hack-silver"
+  .powerStructure.factions.0.category: "criminal" -> "government"
+  .powerStructure.factions.1.desc: "City watch; it answers for keeping order and is growing more sure of its own authority. Behind the governing council by too much to challen -> "City watch; it answers for keeping order and is growing more sure of its own authority. Behind the governing council by too much to challen
+  .powerStructure.factions.4.desc: "Criminal network operating in shadows; it keeps out of the law's sight and takes what it can from illicit trade." -> "Criminal network operating in shadows; it keeps out of the law's sight and takes what it can from illicit trade. They are roughly even with
+  .powerStructure.conflicts.0.parties.0: "Corrupt City Council" -> "Arcane Orders"
+  .powerStructure.conflicts.0.parties.1: "Military/Guard" -> "Craft Guilds"
+  .powerStructure.conflicts.0.issue: "The right to raise a new levy" -> "Magic used in public without leave"
+  .powerStructure.conflicts.0.stakes: "Revenue" -> "Public safety"
+  .powerStructure.conflicts.0.desc: "The Corrupt City Council and the Guard are in high conflict over the right to raise a new levy. The stakes are revenue." -> "The Arcane Orders and the Craft Guilds are in high conflict over magic used in public without leave. The stakes are public safety."
+  .powerStructure.conflicts.0.plotHooks.0: "Each side has been told, in secret, that the other can be made to go away for good. The price is the same for both." -> "A spell went wrong in the street last week, and both sides blame someone the other trained."
+  .npcs.0.id: "npc_city_administration" -> "npc_merchant_guilds_15_40"
+  .npcs.0.name: "Magnhild Ragnarsson" -> "Snorri Styrkarsson"
+  .npcs.0.gender: "female" -> "male"
+DIFF dp-city-101 (Corrupt City Council -> Council of Syndics):
+  .economicState.primaryImports.7: "Smuggled jade and gems" -> "Fine porcelain and lacquerware"
+  .powerStructure.factions.0.category: "criminal" -> "government"
+  .powerStructure.factions.0.captureState: "corrupted" -> undefined
+  .powerStructure.factions.2.desc: "City watch; it answers for keeping order and is growing more sure of its own authority. They are always at the table, but cannot set their  -> "City watch; it answers for keeping order and is growing more sure of its own authority. They are always at the table, but cannot set their 
+  .powerStructure.factions.7.desc: "Criminal network operating in shadows; it keeps out of the law's sight and takes what it can from illicit trade." -> "Criminal network operating in shadows; it keeps out of the law's sight and takes what it can from illicit trade. They are roughly even with
+  .powerStructure.factionRelationships.2.type: "corrupted" -> "competitive"
+  .powerStructure.factionRelationships.2.captureState: "corrupted" -> "adversarial"
+  .powerStructure.factionRelationships.2.narrative: "The Thieves' Guild has bought key people in the Corrupt City Council. Its own crimes go unpunished, and its rivals are the ones who get arr -> "The Corrupt City Council is hunting the Thieves' Guild in earnest but not catching all of it; the Thieves' Guild pulls back and regroups, a
+  .powerStructure.factionRelationships.2.dmNote: "Ask: which specific officials have arrangements with the Thieves' Guild? The answer drives dozens of plot hooks." -> null
+  .powerStructure.factionRelationships.4.type: "corrupted" -> "competitive"
+  .powerStructure.factionRelationships.4.captureState: "corrupted" -> "adversarial"
+  .powerStructure.factionRelationships.4.narrative: "The Guard and the Thieves' Guild have a working arrangement. Patrol routes avoid certain streets. Certain arrests never happen. The rank an -> "The Guard is hunting the Thieves' Guild in earnest and making real arrests; the Thieves' Guild knows the streets and the people better, hid
+  .powerStructure.criminalCaptureState: "corrupted" -> "adversarial"
+DIFF dp-city-103 (Corrupt City Council -> Council of Syndics):
+  .economicState.primaryImports.7: "Stolen silver" -> "Marble and bronze sculpture"
+  .powerStructure.factions.0.category: "criminal" -> "government"
+  .powerStructure.factions.0.captureState: "corrupted" -> undefined
+  .powerStructure.factions.1.desc: "City watch; it answers for keeping order and is growing more sure of its own authority. Behind the governing council by too much to challen -> "City watch; it answers for keeping order and is growing more sure of its own authority. Behind the governing council by too much to challen
+  .powerStructure.factions.5.desc: "Criminal network operating in shadows; it keeps out of the law's sight and takes what it can from illicit trade." -> "Criminal network operating in shadows; it keeps out of the law's sight and takes what it can from illicit trade. They are roughly even with
+  .powerStructure.factionRelationships.2.type: "corrupted" -> "competitive"
+  .powerStructure.factionRelationships.2.captureState: "corrupted" -> "adversarial"
+  .powerStructure.factionRelationships.2.narrative: "The Thieves' Guild has bought key people in the Corrupt City Council. Its own crimes go unpunished, and its rivals are the ones who get arr -> "The Corrupt City Council is hunting the Thieves' Guild in earnest but not catching all of it; the Thieves' Guild pulls back and regroups, a
+  .powerStructure.factionRelationships.2.dmNote: "Ask: which specific officials have arrangements with the Thieves' Guild? The answer drives dozens of plot hooks." -> null
+  .powerStructure.factionRelationships.4.type: "corrupted" -> "competitive"
+  .powerStructure.factionRelationships.4.captureState: "corrupted" -> "adversarial"
+  .powerStructure.factionRelationships.4.narrative: "The Guard and the Thieves' Guild have a working arrangement. Patrol routes avoid certain streets. Certain arrests never happen. The rank an -> "The Guard is hunting the Thieves' Guild in earnest and making real arrests; the Thieves' Guild knows the streets and the people better, hid
+  .powerStructure.criminalCaptureState: "corrupted" -> "adversarial"
+DIFF dp-city-109 (Corrupt City Council -> Council of Syndics):
+  .powerStructure.factions.0.category: "criminal" -> "government"
+  .powerStructure.factions.0.captureState: "corrupted" -> "equilibrium"
+  .powerStructure.factionRelationships.1.type: "corrupted" -> "tense"
+  .powerStructure.factionRelationships.1.captureState: "corrupted" -> "equilibrium"
+  .powerStructure.factionRelationships.1.narrative: "The Thieves' Guild has bought key people in the Corrupt City Council. Its own crimes go unpunished, and its rivals are the ones who get arr -> "The Corrupt City Council leaves the Thieves' Guild alone because stamping it out would cost more than it saves. The Thieves' Guild keeps it
+  .powerStructure.factionRelationships.2.direction: "escalating" -> "stable"
+  .powerStructure.factionRelationships.2.narrative: "The Merchant Guilds and the Craft Guilds are at odds over an unpaid debt between the two powers, and fight over who keeps the profit of the -> "The Merchant Guilds and the Craft Guilds vote together whenever trade is at stake, then fight over who keeps the profit."
+  .powerStructure.criminalCaptureState: "corrupted" -> "equilibrium"
+  .powerStructure.conflicts.0.issue: "Blame for a costly failure last season" -> "Control of a key trade route checkpoint"
+  .powerStructure.conflicts.0.stakes: "Reputation" -> "Economic leverage"
+  .powerStructure.conflicts.0.desc: "The Corrupt City Council and the Craft Guilds are in high conflict over blame for a costly failure last season. The stakes are reputation." -> "The Corrupt City Council and the Craft Guilds are in high conflict over control of a key trade route checkpoint. The stakes are economic le
+  .powerStructure.conflicts.0.plotHooks.0: "Leading members of both powers are partners in the same business, one that skirts the law, and neither side wants that said aloud during ar -> "The post burned down last week, and both sides want it rebuilt by their own people."
+  .powerStructure.conflicts.1.parties.0: "Merchant Guilds" -> "Corrupt City Council"
+DIFF dp-city-117 (Corrupt City Council -> Council of Syndics):
+  .powerStructure.factions.2.desc: "Organised criminal network controls the black market and several informal revenue streams; present in council discussions through intermedi -> "Organised criminal network controls the black market and several informal revenue streams; present in council discussions through intermedi
+  .powerStructure.factions.3.category: "criminal" -> "government"
+  .powerStructure.factions.3.captureState: "corrupted" -> "equilibrium"
+  .powerStructure.factions.6.desc: "City watch; law enforcement and external defence, stretched between multiple responsibilities. They and the religious authorities both keep -> "City watch; law enforcement and external defence, stretched between multiple responsibilities. A slow war with the guild: arrests are made,
+  .powerStructure.recentConflict: "Two powers have stopped coming to the Corrupt City Council's meetings. Each makes its own decisions now, and the others overturn them withi -> "Two powers have stopped coming to the Corrupt City Council' meetings. Each makes its own decisions now, and the others overturn them within
+  .powerStructure.factionRelationships.2.narrative: "The Corrupt City Council holds the seat and collects the taxes; the Religious Authorities tell people that the Corrupt City Council's rule  -> "The Corrupt City Council holds the seat and collects the taxes; the Religious Authorities tell people that the Corrupt City Council' rule i
+  .powerStructure.factionRelationships.3.type: "corrupted" -> "tense"
+  .powerStructure.factionRelationships.3.captureState: "corrupted" -> "equilibrium"
+  .powerStructure.factionRelationships.3.narrative: "The Thieves' Guild has bought key people in the Corrupt City Council. Its own crimes go unpunished, and its rivals are the ones who get arr -> "The Corrupt City Council leaves the Thieves' Guild alone because stamping it out would cost more than it saves. The Thieves' Guild keeps it
+  .powerStructure.factionRelationships.5.type: "corrupted" -> "tense"
+  .powerStructure.factionRelationships.5.captureState: "corrupted" -> "equilibrium"
+  .powerStructure.factionRelationships.5.narrative: "The Guard and the Thieves' Guild have a working arrangement. Patrol routes avoid certain streets. Certain arrests never happen. The rank an -> "The Guard knows where the Thieves' Guild works, and the Thieves' Guild knows the patrol rota. Neither pushes the other hard enough to start
+  .powerStructure.criminalCaptureState: "corrupted" -> "equilibrium"
+DIFF dp-city-120 (Corrupt City Council -> Council of Syndics):
+  .powerStructure.factions.1.category: "criminal" -> "government"
+  .powerStructure.factions.1.captureState: "corrupted" -> "equilibrium"
+  .powerStructure.factionRelationships.2.type: "corrupted" -> "tense"
+  .powerStructure.factionRelationships.2.captureState: "corrupted" -> "equilibrium"
+  .powerStructure.factionRelationships.2.narrative: "The Thieves' Guild has bought key people in the Corrupt City Council. Its own crimes go unpunished, and its rivals are the ones who get arr -> "The Corrupt City Council leaves the Thieves' Guild alone because stamping it out would cost more than it saves. The Thieves' Guild keeps it
+  .powerStructure.factionRelationships.4.type: "corrupted" -> "tense"
+  .powerStructure.factionRelationships.4.captureState: "corrupted" -> "equilibrium"
+  .powerStructure.factionRelationships.4.narrative: "The Guard and the Thieves' Guild have a working arrangement. Patrol routes avoid certain streets. Certain arrests never happen. The rank an -> "The Guard knows where the Thieves' Guild works, and the Thieves' Guild knows the patrol rota. Neither has yet pushed the other hard enough 
+  .powerStructure.criminalCaptureState: "corrupted" -> "equilibrium"
+  .npcs.0.id: "npc_garrison" -> "npc_merchant_guilds_15_40"
+  .npcs.0.name: "Stylianos Attaleiates" -> "Despoina Doukas"
+  .npcs.0.gender: "male" -> "female"
+  .npcs.0.role: "the garrison commander" -> "Lord Mayor"
+DIFF dp-city-127 (Corrupt City Council -> Council of Syndics):
+  .powerStructure.factions.0.category: "criminal" -> "government"
+  .powerStructure.factions.0.captureState: "corrupted" -> "equilibrium"
+  .powerStructure.factions.2.desc: "City watch; it answers for keeping order and is growing more sure of its own authority. They are always at the table, but cannot set their  -> "City watch; it answers for keeping order and is growing more sure of its own authority. They are always at the table, but cannot set their 
+  .powerStructure.factions.3.desc: "Organised criminal network controls the black market and several informal revenue streams; present in council discussions through intermedi -> "Organised criminal network controls the black market and several informal revenue streams; present in council discussions through intermedi
+  .powerStructure.factionRelationships.2.type: "corrupted" -> "tense"
+  .powerStructure.factionRelationships.2.captureState: "corrupted" -> "equilibrium"
+  .powerStructure.factionRelationships.2.narrative: "The Thieves' Guild has bought key people in the Corrupt City Council. Its own crimes go unpunished, and its rivals are the ones who get arr -> "The Corrupt City Council leaves the Thieves' Guild alone because stamping it out would cost more than it saves. The Thieves' Guild keeps it
+  .powerStructure.factionRelationships.3.narrative: "The Merchant Guilds and the Craft Guilds are at odds over blame for a costly failure last season, and fight over who keeps the profit of th -> "The Merchant Guilds and the Craft Guilds are at odds over an unpaid debt between the two powers, and fight over who keeps the profit of the
+  .powerStructure.factionRelationships.4.type: "corrupted" -> "tense"
+  .powerStructure.factionRelationships.4.captureState: "corrupted" -> "equilibrium"
+  .powerStructure.factionRelationships.4.narrative: "The Guard and the Thieves' Guild have a working arrangement. Patrol routes avoid certain streets. Certain arrests never happen. The rank an -> "The Guard knows where the Thieves' Guild works, and the Thieves' Guild knows the patrol rota. Neither pushes the other hard enough to start
+  .powerStructure.criminalCaptureState: "corrupted" -> "equilibrium"
+  .powerStructure.conflicts.0.parties.0: "Merchant Guilds" -> "Thieves' Guild"
+DIFF dp-city-149 (Corrupt City Council -> Council of Syndics):
+  .powerStructure.factions.0.category: "criminal" -> "government"
+  .powerStructure.factions.0.captureState: "corrupted" -> undefined
+  .powerStructure.factions.1.desc: "Organised criminal network controls the black market and several informal revenue streams; present in council discussions through intermedi -> "Organised criminal network controls the black market and several informal revenue streams; present in council discussions through intermedi
+  .powerStructure.factions.4.desc: "City watch; law enforcement and external defence, stretched between multiple responsibilities. They and the religious authorities both keep -> "City watch; law enforcement and external defence, stretched between multiple responsibilities. A slow war with the guild: arrests are made,
+  .powerStructure.factionRelationships.2.type: "corrupted" -> "competitive"
+  .powerStructure.factionRelationships.2.captureState: "corrupted" -> "adversarial"
+  .powerStructure.factionRelationships.2.narrative: "The Thieves' Guild has bought key people in the Corrupt City Council. Its own crimes go unpunished, and its rivals are the ones who get arr -> "The Corrupt City Council is hunting the Thieves' Guild in earnest but not catching all of it; the Thieves' Guild pulls back and regroups, a
+  .powerStructure.factionRelationships.2.dmNote: "Ask: which specific officials have arrangements with the Thieves' Guild? The answer drives dozens of plot hooks." -> null
+  .powerStructure.factionRelationships.4.type: "corrupted" -> "competitive"
+  .powerStructure.factionRelationships.4.captureState: "corrupted" -> "adversarial"
+  .powerStructure.factionRelationships.4.narrative: "The Guard and the Thieves' Guild have a working arrangement. Patrol routes avoid certain streets. Certain arrests never happen. The rank an -> "The Guard is hunting the Thieves' Guild in earnest and making real arrests; the Thieves' Guild knows the streets and the people better, hid
+  .powerStructure.criminalCaptureState: "corrupted" -> "adversarial"
+  .powerStructure.conflicts.0.parties.1: "Craft Guilds" -> "Military/Guard"
+DIFF dp-metropolis-9 (Shadow Senate -> Senate):
+  .powerStructure.factions.0.category: "criminal" -> "government"
+  .powerStructure.factions.0.captureState: "corrupted" -> "equilibrium"
+  .powerStructure.factions.2.desc: "Organised criminal network controls the black market and several informal revenue streams; present in council discussions through intermedi -> "Organised criminal network controls the black market and several informal revenue streams; present in council discussions through intermedi
+  .powerStructure.factions.5.desc: "Small for a place of this size; it cannot enforce the law everywhere at once, and it knows it." -> "Small for a place of this size; it cannot enforce the law everywhere at once, and it knows it. A slow war with the guild: arrests are made,
+  .powerStructure.factionRelationships.2.type: "corrupted" -> "tense"
+  .powerStructure.factionRelationships.2.captureState: "corrupted" -> "equilibrium"
+  .powerStructure.factionRelationships.2.narrative: "The Thieves' Guild has bought key people in the Shadow Senate. Its own crimes go unpunished, and its rivals are the ones who get arrested." -> "The Shadow Senate leaves the Thieves' Guild alone because stamping it out would cost more than it saves. The Thieves' Guild keeps its head 
+  .powerStructure.factionRelationships.4.type: "corrupted" -> "tense"
+  .powerStructure.factionRelationships.4.captureState: "corrupted" -> "equilibrium"
+  .powerStructure.factionRelationships.4.narrative: "The Guard and the Thieves' Guild have a working arrangement. Patrol routes avoid certain streets. Certain arrests never happen. The rank an -> "The Guard knows where the Thieves' Guild works, and the Thieves' Guild knows the patrol rota. Neither pushes the other hard enough to start
+  .powerStructure.criminalCaptureState: "corrupted" -> "equilibrium"
+  .powerStructure.conflicts.0.parties.0: "Thieves' Guild" -> "Shadow Senate"
+  .powerStructure.conflicts.0.parties.1: "Craft Guilds" -> "Arcane Orders"
+DIFF dp-metropolis-35 (Shadow Senate -> Senate):
+  .powerStructure.factions.0.category: "criminal" -> "government"
+  .powerStructure.factions.0.captureState: "corrupted" -> "equilibrium"
+  .powerStructure.factions.1.desc: "City watch; it answers for keeping order and is growing more sure of its own authority. They operate in the shadow of the Shadow Senate, cl -> "City watch; it answers for keeping order and is growing more sure of its own authority. They operate in the shadow of the Shadow Senate, cl
+  .powerStructure.factionRelationships.0.direction: "stable" -> "escalating"
+  .powerStructure.factionRelationships.0.narrative: "The Shadow Senate gives the orders and the Guard carries them out; each needs the other to stay strong." -> "The Shadow Senate gives the orders and the Guard carries them out; each needs the other to stay strong. Even so, the two are now at odds ov
+  .powerStructure.factionRelationships.2.type: "corrupted" -> "tense"
+  .powerStructure.factionRelationships.2.direction: "declining" -> "stable"
+  .powerStructure.factionRelationships.2.captureState: "corrupted" -> "equilibrium"
+  .powerStructure.factionRelationships.2.narrative: "The Thieves' Guild has bought key people in the Shadow Senate. Its own crimes go unpunished, and its rivals are the ones who get arrested." -> "The Shadow Senate leaves the Thieves' Guild alone because stamping it out would cost more than it saves. The Thieves' Guild keeps its head 
+  .powerStructure.factionRelationships.3.narrative: "The Merchant Guilds and the Craft Guilds are at odds over members leaving one power for the other, and fight over who keeps the profit of t -> "The Merchant Guilds and the Craft Guilds are at odds over a broken promise of support, and fight over who keeps the profit of the trade."
+  .powerStructure.factionRelationships.4.type: "corrupted" -> "tense"
+  .powerStructure.factionRelationships.4.captureState: "corrupted" -> "equilibrium"
+  .powerStructure.factionRelationships.4.narrative: "The Guard and the Thieves' Guild have a working arrangement. Patrol routes avoid certain streets. Certain arrests never happen. The rank an -> "The Guard knows where the Thieves' Guild works, and the Thieves' Guild knows the patrol rota. Neither pushes the other hard enough to start
+DIFF dp-metropolis-36 (Shadow Senate -> Senate):
+  .powerStructure.factions.0.category: "criminal" -> "government"
+  .powerStructure.factions.0.captureState: "corrupted" -> "equilibrium"
+  .powerStructure.factions.2.desc: "Organised criminal network controls the black market and several informal revenue streams; present in council discussions through intermedi -> "Organised criminal network controls the black market and several informal revenue streams; present in council discussions through intermedi
+  .powerStructure.factions.3.desc: "City watch; law enforcement and external defence, stretched between multiple responsibilities." -> "City watch; law enforcement and external defence, stretched between multiple responsibilities. A slow war with the guild: arrests are made,
+  .powerStructure.factionRelationships.2.type: "corrupted" -> "tense"
+  .powerStructure.factionRelationships.2.captureState: "corrupted" -> "equilibrium"
+  .powerStructure.factionRelationships.2.narrative: "The Thieves' Guild has bought key people in the Shadow Senate. Its own crimes go unpunished, and its rivals are the ones who get arrested." -> "The Shadow Senate leaves the Thieves' Guild alone because stamping it out would cost more than it saves. The Thieves' Guild keeps its head 
+  .powerStructure.factionRelationships.3.type: "corrupted" -> "tense"
+  .powerStructure.factionRelationships.3.captureState: "corrupted" -> "equilibrium"
+  .powerStructure.factionRelationships.3.narrative: "The Guard and the Thieves' Guild have a working arrangement. Patrol routes avoid certain streets. Certain arrests never happen. The rank an -> "The Guard knows where the Thieves' Guild works, and the Thieves' Guild knows the patrol rota. Neither pushes the other hard enough to start
+  .powerStructure.criminalCaptureState: "corrupted" -> "equilibrium"
+  .powerStructure.conflicts.0.plotHooks.0: "A will left by the last holder of the seat names an heir that neither side will accept." -> "Someone is offering to resolve the conflict \"permanently\" for a price. Both powers have received the offer. Neither has refused yet."
+  .powerStructure.conflicts.1.issue: "Precedence at public gatherings" -> "Members leaving one power for the other"
+DIFF dp-metropolis-45 (Shadow Senate -> Senate):
+  .powerStructure.factions.0.category: "criminal" -> "government"
+  .powerStructure.factions.0.captureState: "corrupted" -> undefined
+  .powerStructure.factions.2.desc: "City watch; it answers for keeping order and is growing more sure of its own authority. They are always at the table, but cannot set their  -> "City watch; it answers for keeping order and is growing more sure of its own authority. They are always at the table, but cannot set their 
+  .powerStructure.factions.6.desc: "Criminal network operating in shadows; it keeps out of the law's sight and takes what it can from illicit trade." -> "Criminal network operating in shadows; it keeps out of the law's sight and takes what it can from illicit trade. They are roughly even with
+  .powerStructure.factionRelationships.2.type: "corrupted" -> "competitive"
+  .powerStructure.factionRelationships.2.captureState: "corrupted" -> "adversarial"
+  .powerStructure.factionRelationships.2.narrative: "The Thieves' Guild has bought key people in the Shadow Senate. Its own crimes go unpunished, and its rivals are the ones who get arrested." -> "The Shadow Senate is hunting the Thieves' Guild in earnest but not catching all of it; the Thieves' Guild pulls back and regroups, and does
+  .powerStructure.factionRelationships.2.dmNote: "Ask: which specific officials have arrangements with the Thieves' Guild? The answer drives dozens of plot hooks." -> null
+  .powerStructure.factionRelationships.4.type: "corrupted" -> "competitive"
+  .powerStructure.factionRelationships.4.captureState: "corrupted" -> "adversarial"
+  .powerStructure.factionRelationships.4.narrative: "The Guard and the Thieves' Guild have a working arrangement. Patrol routes avoid certain streets. Certain arrests never happen. The rank an -> "The Guard is hunting the Thieves' Guild in earnest and making real arrests; the Thieves' Guild knows the streets and the people better, hid
+  .powerStructure.criminalCaptureState: "corrupted" -> "adversarial"
+  .powerStructure.conflicts.0.parties.0: "Craft Guilds" -> "Shadow Senate"
+DIFF dp-metropolis-73 (Shadow Senate -> Senate):
+  .powerStructure.factions.0.category: "criminal" -> "government"
+  .powerStructure.factions.0.captureState: "corrupted" -> "equilibrium"
+  .powerStructure.factions.1.desc: "Standing army with genuine political weight; command appointments are patronage, and the council knows it. They operate in the shadow of th -> "Standing army with genuine political weight; command appointments are patronage, and the council knows it. They operate in the shadow of th
+  .powerStructure.factionRelationships.2.type: "corrupted" -> "tense"
+  .powerStructure.factionRelationships.2.captureState: "corrupted" -> "equilibrium"
+  .powerStructure.factionRelationships.2.narrative: "The Thieves' Guild has bought key people in the Shadow Senate. Its own crimes go unpunished, and its rivals are the ones who get arrested." -> "The Shadow Senate leaves the Thieves' Guild alone because stamping it out would cost more than it saves. The Thieves' Guild keeps its head 
+  .powerStructure.factionRelationships.4.type: "corrupted" -> "tense"
+  .powerStructure.factionRelationships.4.captureState: "corrupted" -> "equilibrium"
+  .powerStructure.factionRelationships.4.narrative: "The Guard and the Thieves' Guild have a working arrangement. Patrol routes avoid certain streets. Certain arrests never happen. The rank an -> "The Guard knows where the Thieves' Guild works, and the Thieves' Guild knows the patrol rota. Neither pushes the other hard enough to start
+  .powerStructure.criminalCaptureState: "corrupted" -> "equilibrium"
+  .powerStructure.conflicts.0.parties.0: "Arcane Orders" -> "Military/Guard"
+  .powerStructure.conflicts.0.parties.1: "Craft Guilds" -> "Thieves' Guild"
+  .powerStructure.conflicts.0.issue: "Prices set on everyday goods" -> "An informer planted by one power in the other"
+DIFF dp-metropolis-94 (Shadow Senate -> Senate):
+  .powerStructure.factions.0.category: "criminal" -> "government"
+  .powerStructure.factions.0.captureState: "corrupted" -> undefined
+  .powerStructure.factions.2.desc: "Organised criminal network controls the black market and several informal revenue streams; present in council discussions through intermedi -> "Organised criminal network controls the black market and several informal revenue streams; present in council discussions through intermedi
+  .powerStructure.factions.5.desc: "City watch; law enforcement and external defence, stretched between multiple responsibilities." -> "City watch; law enforcement and external defence, stretched between multiple responsibilities. A slow war with the guild: arrests are made,
+  .powerStructure.factionRelationships.2.type: "corrupted" -> "competitive"
+  .powerStructure.factionRelationships.2.captureState: "corrupted" -> "adversarial"
+  .powerStructure.factionRelationships.2.narrative: "The Thieves' Guild has bought key people in the Shadow Senate. Its own crimes go unpunished, and its rivals are the ones who get arrested." -> "The Shadow Senate is hunting the Thieves' Guild in earnest but not catching all of it; the Thieves' Guild pulls back and regroups, and does
+  .powerStructure.factionRelationships.2.dmNote: "Ask: which specific officials have arrangements with the Thieves' Guild? The answer drives dozens of plot hooks." -> null
+  .powerStructure.factionRelationships.3.direction: "stable" -> "escalating"
+  .powerStructure.factionRelationships.3.narrative: "The Merchant Guilds and the Craft Guilds vote together against the Noble Houses, then fight over who keeps the profit." -> "The Merchant Guilds and the Craft Guilds are at odds over control of the market licensing process, and fight over who keeps the profit of t
+  .powerStructure.factionRelationships.4.type: "corrupted" -> "competitive"
+  .powerStructure.factionRelationships.4.captureState: "corrupted" -> "adversarial"
+  .powerStructure.factionRelationships.4.narrative: "The Guard and the Thieves' Guild have a working arrangement. Patrol routes avoid certain streets. Certain arrests never happen. The rank an -> "The Guard is hunting the Thieves' Guild in earnest and making real arrests; the Thieves' Guild knows the streets and the people better, hid
+DIFF dp-metropolis-115 (Shadow Senate -> Senate):
+  .powerStructure.factions.1.category: "criminal" -> "government"
+  .powerStructure.conflicts.1.parties.0: "Religious Authorities" -> "Thieves' Guild"
+  .powerStructure.conflicts.1.issue: "Trading on holy days" -> "Rights to the best market stalls"
+  .powerStructure.conflicts.1.stakes: "Custom and income" -> "Custom"
+  .powerStructure.conflicts.1.intensity: "high" -> "moderate"
+  .powerStructure.conflicts.1.desc: "The Religious Authorities and the Craft Guilds are in high conflict over trading on holy days. The stakes are custom and income." -> "The Thieves' Guild and the Craft Guilds are in moderate conflict over rights to the best market stalls. The stakes are custom."
+  .powerStructure.conflicts.1.plotHooks.0: "A shop opened on the last holy day and was stoned that night; the owner wants to know who threw the first one." -> "A good stall has been taken over by night, and its holder wants it back before market day."
+  .powerStructure.conflicts.2.parties.0: "Thieves' Guild" -> "Shadow Senate"
+  .powerStructure.conflicts.2.issue: "Precedence at public gatherings" -> "Members leaving one power for the other"
+  .powerStructure.conflicts.2.stakes: "Standing" -> "Loyalty and numbers"
+  .powerStructure.conflicts.2.desc: "The Thieves' Guild and the Craft Guilds are in moderate conflict over precedence at public gatherings. The stakes are standing." -> "The Shadow Senate and the Craft Guilds are in moderate conflict over members leaving one power for the other. The stakes are loyalty and nu
+  .powerStructure.conflicts.2.plotHooks.0: "Someone is offering to resolve the conflict \"permanently\" for a price. Both powers have received the offer. Neither has refused yet." -> "A member who crossed over wants to go back, and needs someone to carry the message quietly."
+  .npcs.0.id: "npc_mayor_and_council" -> "npc_international_trade_center"
+places 900; record moved 39; carriers of a birth name 39; byte-equal mapped back 0; other places moved 0
