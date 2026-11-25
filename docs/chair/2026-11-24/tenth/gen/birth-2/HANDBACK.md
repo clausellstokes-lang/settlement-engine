@@ -92,31 +92,52 @@
 - FROZEN SURFACES IT MOVES (named for the owner's signing, none re-recorded): PENDING the gate run (goldens, the observed-shape
   baseline, the edge bundles under supabase/functions/_shared).
 
-## 2. UNIT D4: THE POWERS STRONGEST-FIRST (RULINGS G2, G4)
-- Branch `lane/birth-2-2026-11-25-d4-wip`, cut at 0ec96f13d8; commits 1c1ec43f4, 2cf611af9, 66e313f4a.
+## 2. UNIT D4: THE POWERS STRONGEST-FIRST (RULINGS G2, G4): HANDED IN
+- Branch `lane/birth-2-2026-11-25-d4-wip`, cut at 0ec96f13d8. Commits: 1c1ec43f4 (the leaf; aiLayer; the dropped Summary
+  sort), 2cf611af9 (G2: narrative topFaction x2), 66e313f4a (G4: SummaryTab back to base; history readers), fe562508c (the
+  leaf's JSDoc row type: typecheck ratchet), 0ae502db6 (manifest row; anchor), c6c948dfe (wiring census by its door:
+  producerIndexFiles 1458 -> 1459), 263e9e135 and 2f2956675 (lighting census by its door: files 3798 -> 3799, parked 494,
+  credited 3304 -> 3305, titles 31980 -> 31983, suiteTitles 8889 -> 8892), 512613d2f (the red test without `it.each`), 57d26a136 (its header corrected).
 - THE ONE SORTING READER: `src/domain/display/powersStrongestFirst.js :: powersStrongestFirst` (a stable copy, ties in roster
-  order, as `pdf/lib/viewModel.js` already sorts).
-- MEASURED at 0ec96f13d8: out of power order C 69/900 (city 29, metropolis 40), V 121/900 (town 1, city 51, metropolis 69).
-  Causes read: `applyDensityLaw.js :: resizeSeats` appends minted rivals after the last sort; `rulerKin.js :: foldKin` adds a
-  folded share to the ruler in place (V dp-town-93, dp-city-134: the first row is not the strongest).
-- THE NINE READERS OF INTAKE ITEM 1, LIVE OR NOT, and how often each would print wrongly on C / V:
-  | reader | live? | wrong C / V |
-  |---|---|---|
-  | `SummaryTab.jsx :: characterSentence` ("Power rests with") | DEAD (SummaryTab mounted nowhere) | 0 / 2 |
-  | SummaryTab copy text (three) | DEAD | 5 / 14 |
-  | SummaryTab Power tile | DEAD | 0 / 2 |
-  | SummaryTab `FactionBar` five | DEAD | 14 / 74 |
-  | `narrativeGenerator.js :: genPressureDetail` topFaction (stored) | live at birth | 0 / 0 stored lines wrong |
-  | `narrativeGenerator.js :: genSettSummary` topFaction (NPC secrets) | live at birth | 0 / 0 stored lines wrong |
-  | `historyGenerator.js` dominantFaction | birth (sorted then) and regeneration | 0 / 0 at birth |
-  | `historyGenerator.js` secFaction / altFaction | birth (sorted then) and regeneration | 0 / 0 at birth |
-  | `aiLayer.js :: extractFullContext` five (template narrative) | LIVE (`OutputContainer.jsx :: runTemplateNarrative`) | 14 / 74 |
-  All the live ones now read through the leaf. Other live print sites checked: the PDF and Foundry (`viewModel.js` sorts
-  already); `headlines.js` (the governing row first); `LibraryToolbar.jsx` (names only, 20 > any roster);
-  `personaSlicer.js :: buildPersonaSlice` (roster of 8; no caller: dead).
-- FOR A LATER TIDY (G4): `src/components/new/SummaryTab.jsx` is mounted nowhere; tests that render it:
-  tests/components/economyFreshnessNote.test.jsx, governingModifierSurfaces.test.jsx, phoneChromeFloor.census.test.js,
-  statBandsOverDigits.test.jsx; tests/ui/prosperityInCrisisSurfaces.test.jsx, summaryTabPhase2.test.jsx (its comment);
-  tests/pdf/labelLadderParity.test.jsx; and lint walkers that list it (copyCorruption, proseNumerics, writerReach, and others).
-- RED FIRST: `tests/generators/powersStrongestFirstReaders.test.js`: 7 of 11 red at the base, 11 of 11 green.
-- RECORDS MOVED (re-born at 2cf611af9): C 0, V 0. At 66e313f4a: PENDING (the page battery's record hashes).
+  order, as `pdf/lib/viewModel.js` already sorts). The stored ORDER is not changed.
+- MEASURED at 0ec96f13d8 (`probes/d4order.census.jsx`): out of power order C 69/900 (city 29, metropolis 40), V 121/900
+  (town 1, city 51, metropolis 69). Causes read: `applyDensityLaw.js :: resizeSeats` appends minted rivals after the last
+  sort; `rulerKin.js :: foldKin` adds a folded share to the ruler in place (V dp-town-93, dp-city-134: first row not the
+  strongest).
+- THE NINE READERS OF INTAKE ITEM 1 (G4 (2)), and how often each printed wrongly on C / V at the base:
+  | reader | live? | wrong C / V | now |
+  |---|---|---|---|
+  | `SummaryTab.jsx :: characterSentence` ("Power rests with") | DEAD | 0 / 2 | untouched (G4) |
+  | SummaryTab copy text (three) | DEAD | 5 / 14 | untouched |
+  | SummaryTab Power tile | DEAD | 0 / 2 | untouched |
+  | SummaryTab `FactionBar` (five) | DEAD | 14 / 74 | untouched; no chip (G4) |
+  | `narrativeGenerator.js :: genPressureDetail` topFaction (stored pressure line) | live, birth | 0 / 0 lines wrong | via the leaf |
+  | `narrativeGenerator.js :: genSettSummary` topFaction (NPC secrets) | live, birth | 0 / 0 lines wrong | via the leaf |
+  | `historyGenerator.js :: buildHistoryContext` dominantFaction | live; birth reads a sorted roster; regeneration reads the stored one | 0 / 0 at birth | via the leaf |
+  | `historyGenerator.js :: buildHistoricalEvent` secFaction, altFaction | as above | 0 / 0 at birth | via the leaf |
+  | `aiLayer.js :: extractFullContext` five (template narrative, `OutputContainer.jsx :: runTemplateNarrative`) | LIVE | 14 / 74 | via the leaf |
+  Other print sites checked, not changed: the PDF and Foundry (`viewModel.js` sorts already); `pdf/lib/headlines.js` (the
+  governing row first); `LibraryToolbar.jsx` (names, 20 > any roster); `personaSlicer.js :: buildPersonaSlice` (no caller).
+- FOR A LATER TIDY (G4, named not built): `src/components/new/SummaryTab.jsx` is mounted nowhere (no src importer). Tests
+  that render it: tests/components/economyFreshnessNote.test.jsx, governingModifierSurfaces.test.jsx,
+  statBandsOverDigits.test.jsx, phoneChromeFloor.census.test.js; tests/ui/prosperityInCrisisSurfaces.test.jsx; tests/pdf/
+  labelLadderParity.test.jsx; lint walkers that list it (copyCorruption, proseNumerics, writerReach, institutionLabelSeam,
+  chartProportionCensus, economyReadModelCoverage, styleShorthandLonghand, vocabularyTotality, noLegacyFactionReaders).
+- RED FIRST: `tests/generators/powersStrongestFirstReaders.test.js` (no `each`; failures collected and asserted once): red
+  2 of 3 at the base (the leaf copied in), green 3 of 3.
+- BEFORE AND AFTER (page battery, CLOSE-7's `read25/page-battery.mjs`, base 0ec96f13d8 vs 66e313f4a; later commits change
+  no src but the JSDoc): C records moved 0/900, pages moved 1 (dp-thorp-3: render noise, flips between two hashes on the
+  SAME tree, base and D4 alike: a "Patron deity" premium block on the Power view), battery rows moved 0; V records 0/900,
+  pages 0, rows 0. Re-birth at 2cf611af9: C 0, V 0. Zero checks: no place moves, so none applies.
+- THREE EXAMPLES READ: V dp-town-93 (stored Religious Authorities 38, Arcane Council 42, War Council 20): the template
+  narrative now names Arcane Council (42%) first; its pressure line already named the Arcane Council through the governing
+  row. V dp-city-134 (Religious Authorities 28, Military/Guard 27, Ecclesiastical Council 31, The Order of the Watch 14): the
+  narrative's five open on the Ecclesiastical Council (31%). C dp-city-5 (stored Religious Authorities 36, Military/Guard 19,
+  City Council 15, The Shield Compact 10, The Devout Circle 20): the narrative's five now read Religious Authorities, The
+  Devout Circle, Military/Guard, City Council, The Shield Compact.
+- GATES at the tip: tests/lint whole + the unit's test (final run: see the hand-in line); tests/copy whole and the 35 named
+  files and the goldens with the first gate. REDS THAT ARE THE BASE's (red at 0ec96f13d8 on the same files): the goldens
+  (generatorGoldenMaster, generatorGoldenMasterLit, dmLayerGoldenIsolation), engineBundleReplay, dossierPhoneFloorAllViews,
+  worldFactRederive A7, proseComposed, proseCorpusBytes. NAMED, NOT TOUCHED (under supabase/): the edge bundles go stale by
+  the src change (edgeSharedBundleReproducibility 5, aiGroundingBundle.freshness 2); `npm run build:edge-shared` at the
+  landing.
