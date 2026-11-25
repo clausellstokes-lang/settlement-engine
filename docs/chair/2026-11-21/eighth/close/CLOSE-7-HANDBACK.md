@@ -49,7 +49,10 @@ R24g's names, plain.
 
 01:12 UTC 2026-11-25: THE OWNER DEFERS EVERY DECISION TO THE CHAIR. The chair ordered the unit GUARD, R24j (recorded in
 `close-7/briefs/GUARD-ORDER.md`): a stored place is re-derived only by the engine that bore it.
-- R24j's file commit c3ec2036da was NOT on origin at 01:15; I asked the chair to push it. READ R24j WHOLE before briefing GUARD.
+- R24j is READ WHOLE (on the chair's branch at c3ec2036d) and copied verbatim to `close-7/briefs/R24j.md`.
+- The GUARD brief is `close-7/briefs/GUARD.md`, on `-guard-wip`, cut at the cures tip after the mirror merges.
+- PLAN: ONE FRESH builder does LIVE-PATH, then GUARD, on my word, keeping the harness.
+- Allowance: 32% of the week at 01:15, with 17 to 22 hours left by the chair's guess. What is merged must be whole at every push.
 - NEW ORDER: the mirror to its merge; LIVE-PATH (now GUARD's RED: keep its harness); GUARD (it holds the release); B1(i)'s finish
   may ride beside GUARD in another builder if their files do not meet; then B1(ii), C1.
 - Point 116 (the troubles rule, LIT) is landing; births will move. At my first merge of the 116 line, re-born C and V re-state
