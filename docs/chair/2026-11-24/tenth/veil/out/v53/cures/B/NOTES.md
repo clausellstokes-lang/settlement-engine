@@ -12,3 +12,4 @@
 - GREEN: tensionCause.test.js 19 passed (19) (log /var/tmp/v53/cures/B/green1.log).
 - Stale prose (not touched, out of manifest): tests/lint/samenessHideable.walker.test.js EXEMPT reason still says "hxd-city-138 (served == the house-free twin)".
 - COMMIT 5d04aaf9a (hooks ran: lint-staged eslint --fix, clean).
+- tests/lint whole: running (log /var/tmp/v53/cures/B/lint.log).
