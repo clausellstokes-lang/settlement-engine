@@ -18,6 +18,7 @@ import { deriveDailyLifeSlot } from '../../src/domain/dailyLife.js';
 import { DAWN_WORK } from '../../src/data/dailyLife/dawnWork.js';
 import { filterDeclared } from '../../src/domain/facts/drawDeclared.js';
 import { factsOf } from '../../src/domain/facts/factsOf.js';
+import { deriveAllCapacities } from '../../src/domain/capacityModel.js'; // CLOSE-7 THE MIRROR: the profile the pools' `food production` atom reads
 import { defenceOf } from '../../src/domain/facts/defence.js';
 import { hasInstitution } from '../../src/domain/facts/institutions.js';
 import { deriveAllThreatProfiles } from '../../src/domain/threatProfile.js';
@@ -82,7 +83,8 @@ describe('the route on born places (ruling 11): eligible by declared atoms, then
       const own = ownLine(s.text);
       expect(own, `${seed}: "${s.text}"`).toBeTruthy();
       const { branch, line } = /** @type {{ branch: string, line: any }} */ (own);
-      expect(filterDeclared(POOLS[/** @type {keyof typeof POOLS} */ (branch)], { facts: factsOf(rec) }), `${seed}: ${line.id} is eligible`).toContain(line);
+      // CLOSE-7 THE MIRROR: the deriver hands the pools the capacity profile (`food production`, K1 and F6), so the oracle does
+      expect(filterDeclared(POOLS[/** @type {keyof typeof POOLS} */ (branch)], { facts: factsOf(rec), ctx: { capacities: deriveAllCapacities(rec) } }), `${seed}: ${line.id} is eligible`).toContain(line);
       for (const ref of s.references.filter((r) => r.type === 'institution')) {
         const row = (rec.institutions || []).find((/** @type {any} */ i) => i?.id === ref.id || i?.name === ref.label);
         expect(row && isLiveInstitution(row) && !isHideableHouse(row) && !ACCESS_ONLY.test(String(row.name)), `${seed}: ${ref.label}`).toBe(true);

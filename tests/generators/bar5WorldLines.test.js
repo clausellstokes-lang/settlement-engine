@@ -116,12 +116,17 @@ describe('BAR5-WORLD (c): a town in want is not told its bread is plentiful', ()
   // takes its own pool, `FOOD_CULTURE['surplus.wanting']` (W0 "The stores still hold: …" and four siblings, by the keyed
   // pick), so these towns print W1, W4 and W2 where W0 alone printed. The meaning kept: a town in want is told what it
   // still has, never that its bread is plentiful.
-  it('the famine towns of the surplus band print the stores that still hold (every town; red at the base)', () => {
-    const wanting = FOOD_CULTURE['surplus.wanting'].map((l) => l.text);
-    expect(wanting.length).toBeGreaterThan(0);
+  // CLOSE-7 THE MIRROR (the chair's R24d, re-stated by its cause): these three print FAMINE over a surplus production band,
+  // the cell A2 held; the printed band now bounds the fare (Famine: critical..collapsed), so each prints a line of the
+  // critical fare (C3, C0, C2 by the keyed pick), where W1, W4 and W2 printed. The meaning kept, and sharpened: a town the
+  // page calls famished is told it goes short, never that its bread is plentiful. `surplus.wanting` stays the pool of a
+  // surplus place under a famine or siege threat whose page does not print Famine.
+  it('the famine towns of the surplus band print the critical fare, never plenty (every town; red at the base)', () => {
+    const critical = FOOD_CULTURE.critical.map((l) => l.text);
+    expect(critical.length).toBeGreaterThan(0);
     expectNoSeedFailures(collectSeedFailures(['r2s-famine-hamlet-2', 'r2s-famine-town-1', 'r2s-famine-metropolis-3'], (seed) => {
       const text = String(deriveDailyLife(born(seed)).slots.food_culture?.text);
-      expect(wanting, `${seed}: what prints instead: "${text}"`).toContain(text);
+      expect(critical, `${seed}: what prints instead: "${text}"`).toContain(text);
       expect(/plentiful|plenty/i.test(text), `${seed}: told its bread is plentiful: "${text}"`).toBe(false);
     }), 'the surplus band under a famine');
   });
