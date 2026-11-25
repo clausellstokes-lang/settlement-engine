@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "fffcd919e7dd880079b3be7880caa6e7ef3304cc",
-  "measuredBy": "LAND-117",
+  "measuredAtSha": "1b6ee56159ea582401ce976b684b4301a3d00247",
+  "measuredBy": "CLOSE-8",
   "date": "2026-11-25",
-  "note": "ruling 117-7: C1B merged at point 117 (two test files: tests/domain/boughtHallNames.test.js, tests/domain/boughtHallReaders.test.js)",
-  "files": 3802,
-  "parked": 498,
-  "credited": 3304,
-  "titles": 31986,
-  "suiteTitles": 8890
+  "note": "CLOSE-8 join, after group g1 (G42 (a))",
+  "files": 3804,
+  "parked": 499,
+  "credited": 3305,
+  "titles": 31989,
+  "suiteTitles": 8893
 }
