@@ -1138,3 +1138,13 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   away). TWO QUESTIONS SENT TO VEIL-55: Q1 a source with a prominentRelationship or pressureSentence but no
   `relationships` key is read as "no ties dropped" (a narrated share?); Q2 what an unmarked member of an old map loses
   under the default veil, for the owner.
+- 2026-11-25 08:10 UTC · T89 · UNIT 3 NOT GRANTED (V28): A FROZEN COPY BLINDS THE COVERT CHECK AT THREE DOORS; THE CHAIR's "NO FAULT" WAS WRONG.
+  `veil/RULING-V1.md` V28, eight parts. The second reader (a top-tier helper at max effort, 64 tool uses, about 21
+  minutes) found F1; the chair checked its three facts on master (`modeRecord`, `galleryPayloadFor`, `publicSafe.js`'s
+  covert drop). ALSO IN V28: the no-`relationships` case fails closed; VR23 stands; MAP-COST (about 0.35 s a member on
+  local PG16; 140 members 50 s; the view-count UPDATE holds the row lock through the read) goes to READ-COST's unit,
+  measure first (the platform's timeout from its public documentation; the cost by step; a count-only query for the
+  owner). VEIL-55's Q2 for the owner: under the default veil 122 of 140 unmarked members lose rows, 18 unchanged.
+  TOLD THE OWNER (08:07): the correction that old party links and old map members DO change (the chair had said old
+  pages stay as they are: true of gallery pages only). CLOCK FAULTS OF THE CHAIR THIS HOUR: three messages labelled
+  ahead of the clock (07:52, 07:54, 08:09 for about 07:48, 07:49, 08:06).

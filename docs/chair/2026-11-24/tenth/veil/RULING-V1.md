@@ -593,3 +593,39 @@ in the qualifier and the census missed it. RULED:
    stored power that is not served: 0; and the count the rule withholds, with three examples, in the hand-back.
 THE LESSON RECORDED: a check that finds its cases with the rule it is checking proves nothing; V25 (4) was an
 independent count and found three classes in one run. TAKEN AT HIGH EFFORT; RE-READ WITH UNIT 4's HUNK AT THE TOP EFFORT.
+**V28 (08:10 UTC): UNIT 3 IS NOT GRANTED. THE SECOND READER FOUND WHAT THE CHAIR AND THE LANE's OWNER MISSED: THE COVERT CHECK
+IS BLIND ON A FROZEN COPY.** The hunk (VEIL-52's 2f849aa53; `v52/out/U3-212-HUNK.diff` at 75b5ca36e) was read whole by
+the chair at high effort (no fault found; said so to VEIL-55 at about 07:48) and then, by the owner's word on database
+changes, by a second, independent top-tier reader at max effort. ITS FINDING, WHICH THE CHAIR CHECKED ON MASTER's CODE:
+(F1) IN SNAPSHOT MODE THE MEMBER's SOURCE IS THE FROZEN COPY, AND THE COPY MASTER's CLIENT STORES IS ALREADY A PUBLIC
+PROJECTION (`useGalleryShareControls.js :: modeRecord` stores `galleryPayloadFor(settlement, ...)`, which is
+`toPublicSafe` alone; `publicSafe.js` drops every nested object whose `covert` is true). So the copy holds no covert
+tie, `_gallery_apply_member_overrides`'s `dropped` is empty, and the covert tie's `prominentRelationship` and the
+`pressureSentence` that tells it pass, where the party link (which reads the live row) withholds them. THE GALLERY READ
+AND THE IMPORT SHARE THE BLIND SPOT (they hand the copy to the same check). The pinning test never runs the path (its
+markers are unmarked, default and `mode: 'live'`). RULED:
+1. THE CURE's PRINCIPLE: THE COVERT CHECK NEVER ASKS A PROJECTION WHICH TIES WERE COVERT. On a public read the dropped
+   set is read from (a) the source's own ties AND (b) THE LIVE STORED ROW's covert ties; and (c) THE ORPHAN RULE: a
+   `prominentRelationship` that is the copy of NO tie present in the source's `relationships[]` (neither the same two
+   ends and type, nor its text) is withheld, and the `pressureSentence` with it (unsure is closed). At every door that
+   reads a copy: the gallery read, the import, the map member. The twin rule for rule.
+2. MEASURED BEFORE IT IS BUILT, by an oracle that is not the rule: every town of both pools that holds a covert tie,
+   frozen by master's own client path (`toPublicSafe` as master has it) and by the tip's, read at Reveal off at the
+   three doors: does either string that tells the covert tie arrive (the RAW town says which copy and which sentence
+   are the covert tie's)? RED FIRST on the tip; after the cure 0; and the count of clean strings the rule withholds
+   (over-withholding), with examples. The seat proposes the exact rule on that table; if (a)+(b)+(c) leaves a leak or
+   withholds much that is clean, the proposal says so and the chair rules.
+3. (V28 part 1, as sent 08:06) A SOURCE THAT CARRIES EITHER STRING AND NO `relationships` KEY IS `unread`: FAIL CLOSED,
+   red first by a plant at all four doors. (The second reader found the same, independently.)
+4. THE PIN TEST GAINS THE PATHS IT NEVER RAN: a member in snapshot mode (a master-made copy and a tip-made copy), a
+   narrated member, a marked member; each against the link's read of the same town.
+5. THE STALE COMMENTS in 212 that still give the map member the listing's path are corrected in the same hunk.
+6. THE CHRONICLE: the member still sends the live `chronicle` beside a veiled (or frozen) town; the link sends none.
+   Unchanged from 211. VEIL-55 answers in one line which ruling of the doors' seat covers it; if none, it is a finding.
+7. VR23 STANDS (an unmarked member takes the default veil); the owner is told what old links and old maps lose.
+8. "MAP-COST" GOES INTO READ-COST's UNIT, MEASURE FIRST (as sent 08:06), AND GAINS ONE LINE FROM THE SECOND READER: the
+   function's first statement is the view-count UPDATE, so the row lock is held for the whole read: concurrent readers
+   of one map wait in line. Measured with the rest; the counter moves after the read or out of it in the cure.
+THE LESSON RECORDED: two whole reads at high effort passed this hunk; the third, independent and at the top effort,
+found a leak in three doors by asking where the frozen copy comes from. THE SECOND READER STAYS for every database
+change the chair reads while the owner is away.
