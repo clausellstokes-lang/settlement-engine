@@ -43,7 +43,13 @@ function webLines(s) {
 // kept in r2r-city-10, whose dependent pair with the Highborn Circle still prints "declining".
 // [seed, the line that must not print, what prints in its place: the pair without "stable" (the record's chip, if any)]
 const CURED = [
-  ['r2s-occupied-town-3', 'Merchant Guilds~Craft Guildsstable', 'Merchant Guilds~Craft Guildsescalating'],
+  // RE-KEYED BY IDENTITY 2026-11-25, CLOSE-7 ANCHORS-4 (the tenth chair's R24q, point 117): THE CAUSE, C1 (R24-C1 under R24m; its first
+  // commit a7870e9cb, green at 3388806b4): r2s-occupied-town-3 (Lykopetra) is governed by the bought hall, born now "Council of Aldermen";
+  // conflicts.js keys its issue draw on the powers' names, so the town's conflicts re-draw and Merchant Guilds and Craft Guilds hold no
+  // quarrel at all (before: HIGH, "A broken promise of support"); its "stable" chip is now true, the cure's premise gone. Re-picked by this
+  // row's own predicate (the record's conflicts hold the pair at HIGH, its Web row tense with the record's "escalating" chip), the lowest
+  // r2s-occupied-town: town-16 (the first three: 16, 66, 180). Was r2s-occupied-town-3.
+  ['r2s-occupied-town-16', 'Merchant Guilds~Craft Guildsstable', 'Merchant Guilds~Craft Guildsescalating'],
   ['r2r-city-1', 'Military City Council↓Merchant Guildsstable', 'Military City Council↓Merchant Guilds'],
   ['r2r-city-10', 'Merchant Guild Council↔Merchant Guildsstable', 'Merchant Guild Council↔Merchant Guildsescalating'],
 ];

@@ -289,7 +289,14 @@ describe('HK-3 draws — the corpus, through the real pipeline', () => {
     // reads 2107, measured by this file's own corpus at the merged tree; 0 hookless still.
     // RE-KEYED 2026-11-15, the close of the tail round (TAIL-CLOSE-DOORS-4, the owner's word, 2026-11-15 06:00 UTC, in the chair's chat; record docs/shift-records/2026-11-15-the-close-of-the-tail-round.json): the round gives a face to every seat of power that had none, so the cast, and with it
     // the one-hook-per-card total, 2107 -> 2147, measured by this file's own corpus at the golden's tree 8c11f73ea; 0 hookless still.
-    expect(total, 'the corpus NPC-hook total moved — HK-3 must never drop a hook').toBe(2147);
+    // RE-KEYED BY IDENTITY 2026-11-25, CLOSE-7 ANCHORS-4 (the tenth chair's R24q, point 117): THE CAUSE, B1(i) (RULING-R24 R24b; merged
+    // into BATCH at f82d9d671): the desert withholds the houses that live on fish, timber and game. Bisected (green at 0ec96f13d, 2145 at
+    // 6d30700e6, the tip 97c6bfc7a the same); ONE town of this file's corpus moves, hk-probe-metropolis-6 (Plavinick, desert), 75 -> 73
+    // cards: the two withheld houses' faces are not minted (Milena Bykov of the Fish market, Ivan Bogdanov of the Sawmill (commercial)),
+    // and the cascade's re-deal trades the Butchers (3-8) and the Veteran's lodge for a Vintner and an Enchanter's shop (two out, two in).
+    // Every other town of the 60 is unmoved; no card lost a hook (HK-3's invariant holds), so the one-hook-per-card total follows the cast,
+    // 2147 -> 2145, measured by this file's own corpus at 9f859467a.
+    expect(total, 'the corpus NPC-hook total moved — HK-3 must never drop a hook').toBe(2145);
     expect(duplicates, 'the exact-duplicate residual is bounded pool EXHAUSTION and must not move').toBe(HOOK_DUPLICATES_AT_TIP);
 
     // A PRE-EXISTING CONDITION, pinned here so HK-3 cannot be blamed for it and so
@@ -385,11 +392,12 @@ describe('HK-3 draws — the corpus, through the real pipeline', () => {
     // 2116 -> 2107 at STYLE-2-MERGE point 47 (the COHERENCE-AGREE re-dealt casts, -9 as on the lane's base; 0 hookless still).
     // 2107 -> 2149 at the close of the tail round, 2026-11-15 (TAIL-CLOSE-DOORS-4, the owner's word of 06:00 UTC: a face for every seat of power),
     // measured by this file's own corpus at the golden's tree 8c11f73ea; the hook total above reads 2147 (the hookless arm below is the law's, not re-taken).
-    expect(npcTotal, 'the NPC denominator must be a real corpus').toBe(2149);
+    // 2149 -> 2147 at CLOSE-7 ANCHORS-4 (R24q, point 117), RE-KEYED BY IDENTITY: B1(i)'s desert metropolis hk-probe-metropolis-6, 75 -> 73 cards (the note above).
+    expect(npcTotal, 'the NPC denominator must be a real corpus').toBe(2147);
     expect(hookless, 'hookless NPCs grew — a hook-bearing record is being dropped downstream').toBe(0);
     expect(hooklessAll.filter((x) => !isStandIn(x)).map((x) => x.id), 'every hookless card is a crisis stand-in').toEqual([]);
     expect([...standIns].sort(), 'the crisis stand-ins of this corpus (HK1: the exemption is not vacuous)').toEqual(['npc_temp_grain', 'npc_temp_healer']);
-    expect(npcTotal - standIns.length - hookless, 'a hook-bearing NPC was dropped (561 at every step of the rung-1 window; 2157 = the cast at the car\'s tip; 2116 at STYLE-2-MERGE point 46; 2107 at point 47; 2147 at the close of the tail round)').toBe(2147);
+    expect(npcTotal - standIns.length - hookless, 'a hook-bearing NPC was dropped (561 at every step of the rung-1 window; 2157 = the cast at the car\'s tip; 2116 at STYLE-2-MERGE point 46; 2107 at point 47; 2147 at the close of the tail round; 2145 at CLOSE-7 ANCHORS-4, B1(i)\'s desert metropolis)').toBe(2145);
     expect(total, 'one plot hook per card (PEOPLE-3): the hook total is the cast').toBe(npcTotal - standIns.length);
   });
 
