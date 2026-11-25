@@ -5,6 +5,51 @@ FILE: `docs/chair/2026-11-24/tenth/prompts/START-VEIL-52.txt` on `lane/chair-202
 there) governs where they differ. IF YOUR CONTEXT BEGINS WITH A SUMMARY: tell VEIL-50 in one line, re-read that file and this section
 before judging anything. Every hour here is read from `date -u`. No pull request, ever; no hosted database; never the `supabase` command.
 
+## 0. PAUSED BY THE OWNER (about 08:50 UTC 2026-11-25: "Pause the share page and focus on town fixes ... then do the share pages."; the
+chair's order 08:52). THE WHOLE STATE, for the resumption (V28 stands). Nothing runs; no helper is live; no scheduled check of mine exists.
+
+BRANCHES (all pushed; origin = local):
+- `lane/veil-52-2026-11-24` (documents, scripts, tables, this file).
+- UNIT 3 AS BUILT, NOT GRANTED: `lane/veil-52-2026-11-24-dsql-wip` 2f849aa53 = the lane's tip dbd4cd9e5 (R4-IDS + unit 1) + MAPCOVERT-GREEN-SQL
+  (get_gallery_map restated as the party link's read; 212 header item (39)) + the test cures (the bijection fold; sameModuloIds ->
+  canonPeople). Its slice proofs (um red 63/39 on the tip's 212, green 0/0 on its own; V21's tail plant caught 10/10; rollback EQUAL;
+  tests/lint 27 = 27): `v52/out/U3-SLICE-PROOFS.txt`, `U3-LINT-PAIR.txt`, hunk `U3-212-HUNK.diff`. NOT GRANTED by V28: F1 (the covert check is
+  blind on a FROZEN copy: snapshot mode's source is master's toPublicSafe projection, `dropped` empty; the gallery read, the import and the
+  map member all pass the covert copy). DO NOT TOUCH 2f849aa53.
+- `lane/veil-52-2026-11-24-unread-wip` 662a9c207: COVERT-UNREAD (V28 (1)/(3): no `relationships` key with either string -> unread, fail
+  closed; SQL + twin + galleryCovertUnread test: red at five doors + twin, plain and narrated; green 7/7; control passes; rollback EQUAL
+  480). WITHDRAWN as a unit (folds into the rework); its commit is the rework's starting material for V28 (3). Pin files and tests/lint NOT run.
+- THE REWORK: `lane/veil-52-2026-11-24-door2-wip` 08a9dd8fb (cut at 2f849aa53): V28 (2)'s MEASURE, "WIP, PAUSED": probe, runner, analyser,
+  four raw tables, `docs/chair/2026-11-24/tenth/veil/v52/frozen/FROZEN-COVERT-TABLE.md` (brief `v52/briefs/FROZEN-COVERT-MEASURE-BRIEF.md`).
+  RAN (four gated runs, both sets x both templates v52tip/v52dsql, exit 0; the builder's report, PLAUSIBLE until I read the table):
+  today-born 69 towns hold a covert tie; the MASTER-MADE frozen copy served a telling prominentRelationship in 7 at the gallery read, the
+  import and the map member, on both templates; the TIP-MADE copy and the party link 0; NEW: on v52tip the LIVE-mode map member also
+  served those 7 (on v52dsql 0: unit 3 cures the live path); pressureSentence telling 0 everywhere (no stored sentence tells a covert tie);
+  master-born holds no covert tie (all 0). THE RULE (a)+(b)+(c) evaluated offline: 0 leaks left; withholds 6 CLEAN pressureSentences per
+  master-copy door, all by (c) the orphan rule (e.g. r3m-city-infiltrated-0-42, "Bolin Hu, the Master of the Guilds..."). NOT DONE:
+  part (d) and narrated rows not exercised; no per-part "only" counts. THE RULE I WOULD PROPOSE (not yet sent; the chair rules): (a)+(b)
+  as V28 states; (c) the orphan rule applied to prominentRelationship ONLY, the sentence withheld with it only when it names both ends of
+  the withheld copy (so the 6 clean sentences stay); (d) as built in 662a9c207. To check on resumption: (c)'s six against that narrowing.
+- PARKED for the map work (the chair's ruling, not this release): `lane/veil-52-2026-11-24-doors-wip` c89d3f638 (SNAP-CHRONICLE, V13).
+- `-mcsql-wip` 912be7b4e (unit 3's earlier base, superseded by -dsql-wip).
+
+NOT BEGUN (V28 (B), after the chair's ruling on the measure): the rule at every door that reads a copy + the twin; the pin gains a
+snapshot member (master- and tip-made copies), a narrated member, a marked member, each against the link's read; the stale 212 comments
+(~2981-2985, 3010-3012, 3532-3534); per N95 doors-3's `_gallery_doors_chronicle` (lane/veil-doors-3-2026-11-20 3e1115c81) and the
+member's FROZEN name and tier join the restatement, the chronicle after the re-key measured first (N84 (d)).
+
+MAP-COST / READ-COST (V11; V28 (3) and (8)), WHAT EXISTS: (a) the platform's timeouts (`v52/mapcost/A-PLATFORM-TIMEOUTS.md`: anon 3 s,
+authenticated 8 s, a function-level `set statement_timeout` clause hoisted by the API layer; search-rendered, PLAUSIBLE); (b)
+get_gallery_map by step (`v52/mapcost/B-STEPS.md`: ~0.45-0.49 s a member; roster choices ~46%, the sanitiser ~23% (1.07 M recursive
+calls), the name search ~13%); (c) the owner's count-only query (`v52/mapcost/C-OWNER-COUNTS.sql`, not run: the owner's hand); READ-COST
+(`v52/out/READ-COST-TABLE.md`, N115-TABLE.md: the gallery read and list ~4.7 s at 840 public rows, master's own). NOT DONE: V28 (8)'s
+lock measure (the view-count UPDATE first holds the map row through the read); the cure's proposal.
+
+NEXT, IN ORDER, ON RESUMPTION: (1) read FROZEN-COVERT-TABLE.md whole; report it to VEIL-55's successor (FILE + 200 words) with the rule
+proposed above; STOP for the chair's ruling; (2) V28 (B) on -door2-wip, red first, 662a9c207's commit taken in; (3) "TIP?" with the hunk
+for the chair and its second reader; (4) MAP-COST: the lock measure, then the cure proposal; READ-COST's cure (V11) after phase 1's SQL.
+THE MACHINE: `v52/restore.sh` (after a restart: start PostgreSQL; fresh: ~10 min). Templates v52tip, v52dsql, v52mc on /var/tmp/rv7.
+
 ## 1. WHERE THE SEAT STANDS (my memory; WHOLE at every push; written so a successor on another account can go on from it alone)
 
 AS OF 08:45 UTC 2026-11-25. A SECOND CONTAINER RESTART ~01:14 (PostgreSQL restarted; lost steps relaunched 01:15:47: snmaster, snjoin, miplant2, snplant2; the builder resumed by message). DONE BY THEN: mimaster (rc=3, MAP OTHER rows), mijoin (rc=3), sntip (rc=0); the builder's commit f1da68754 on the -wip (the two test files); its tests/lint whole was cut and is being re-run. THE LANE'S OWNER: VEIL-55 (session_019yED1SoJ6KH9Wyp2Fera7R); never message VEIL-50. THE CHAIR:
