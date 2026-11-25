@@ -236,11 +236,12 @@ it(`VEIL-52 snap (${FORM})`, async () => {
         const openNames = new Set(servedNamesOf(openDoc));
         const whs = [...new Set(wh)].filter((n) => !openNames.has(n));
         // the plant's person: the first withheld person of the first read, published once into the chronicle-style line
-        if (PLANT && out.plant.campaign === campaign.id && !plantPerson) {
+        // VEIL-55 (00:16): the person plant goes on the FIRST campaign, any campaign, where a read withholds a person
+        if (PLANT && !out.plant.personDone && !plantPerson) {
           plantPerson = [...persons.entries()].find(([, k]) => k === 'person-withheld')?.[0] || null;
           if (plantPerson) {
             const withP = clone(snapshot); withP.dashboard = isRec(withP.dashboard) ? withP.dashboard : {}; withP.dashboard.realmArcLines = [...arr(withP.dashboard.realmArcLines), `${plantPerson} was seen`];
-            out.plant.person = plantPerson;
+            out.plant.person = plantPerson; out.plant.personDone = true; out.plant.personCampaign = campaign.id;
             if (await safe(withP)) { snapshot = withP; slug = await publish(snapshot); j -= 1; continue; } // re-read this setting with the person planted
             out.plant.refused.person = true;
           }
@@ -265,12 +266,14 @@ it(`VEIL-52 snap (${FORM})`, async () => {
             // a person's name as a WHOLE WORD (no letter or digit on either side; VEIL-50's change); the old substring match's extra hits are counted
             for (const [pn, kind] of persons) { const sub = s.includes(pn); if (!sub) continue; if (wordRe(pn).test(s)) hit(q, kind, s); else bump(out.personSubstrOnly, kind); }
           }
+          if (PLANT && plantPerson && out.plant.personCampaign === campaign.id) { const t = `${door}|dm=${dm}`; // the person plant, on its own campaign
+            if (strs.some(([, x]) => x.includes(`${plantPerson} was seen`)) && persons.get(plantPerson) === 'person-withheld') { bump(out.plant.expect, `person|${t}`); if (readHits.some(([q, k, x]) => k === 'person-withheld' && x.includes(`${plantPerson} was seen`))) bump(out.plant.caught, `person|${t}`); } }
           if (PLANT && out.plant.campaign === campaign.id) { // EXPECT = the plant is served on this read (and withheld); CAUGHT = the instrument's own hit on it
             const t = `${door}|dm=${dm}`;
             const has = (txt) => strs.some(([, x]) => x.includes(txt));
             const got = (kind, f) => readHits.some(([q, k, x]) => k === kind && f(q, x));
             if (plantHouse && has(`${plantHouse} holds the docks`) && whs.includes(plantHouse)) { bump(out.plant.expect, `name|${t}`); if (got('name', (q, x) => x.includes(`${plantHouse} holds the docks`))) bump(out.plant.caught, `name|${t}`); }
-            if (plantPerson && has(`${plantPerson} was seen`) && persons.get(plantPerson) === 'person-withheld') { bump(out.plant.expect, `person|${t}`); if (got('person-withheld', (q, x) => x.includes(`${plantPerson} was seen`))) bump(out.plant.caught, `person|${t}`); }
+            if (false && plantPerson && has(`${plantPerson} was seen`) && persons.get(plantPerson) === 'person-withheld') { bump(out.plant.expect, `person|${t}`); if (got('person-withheld', (q, x) => x.includes(`${plantPerson} was seen`))) bump(out.plant.caught, `person|${t}`); }
             if (objs.some(([q]) => /plantCopy$/.test(q))) { bump(out.plant.expect, `copy|${t}`); if (got('copy', (q) => /plantCopy$/.test(q))) bump(out.plant.caught, `copy|${t}`); }
             if (keys.some(([q, k]) => k === 'publicProse' && /plantCopy/.test(q))) { bump(out.plant.expect, `ppkey|${t}`); if (got('ppkey', (q) => /plantCopy/.test(q))) bump(out.plant.caught, `ppkey|${t}`); }
           }

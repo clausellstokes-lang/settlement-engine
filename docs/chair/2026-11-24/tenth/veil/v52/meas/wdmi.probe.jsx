@@ -187,6 +187,7 @@ it(`V43-MEASURE wd (${FORM})`, async () => {
   let i = -1;
   for (const b of E.pool(Number(process.env.RV9_N || 2), SHARD)) {
     i += 1; if (i % PICK !== 0) continue;
+    if (process.env.WD_SEEDS && !process.env.WD_SEEDS.split(',').includes(b.seed)) continue; // VEIL-52: a seed filter for the plant
     const p0 = Date.now();
     const born = E.birth(b.cfg, b.seed, null);
     if (isRec(born.neighborRelationship) && born.neighborRelationship.name) out.neighbour += 1;
@@ -202,7 +203,15 @@ it(`V43-MEASURE wd (${FORM})`, async () => {
     // VEIL-52 23:1x: the plant also rewrites relationships[].npc1Role/npc2Role (the legacy class's own paths); the first plant,
     // npcs[].role alone, was served at no door
     let plantText = null;
-    if (PLANT && !out.plant.done) {
+    // VEIL-55's re-plant (00:16 UTC): WD_PLANT_SEED names a place where the door IS live; there, each tie role equal to
+    // WD_PLANT_FROM (default "Thieves' Guild Master", a string that reaches `mapimport`) is rewritten to name ANOTHER hideable house
+    // of that town ("<house> Master"); nothing else of the record moves.
+    if (PLANT && process.env.WD_PLANT_SEED && b.seed === process.env.WD_PLANT_SEED && !out.plant.done) {
+      const from = process.env.WD_PLANT_FROM || "Thieves' Guild Master";
+      const hh = arr(doc.institutions).find((h) => isRec(h) && E.isHideableHouse(h) && typeof h.name === 'string' && h.name && !from.includes(h.name));
+      if (hh) { doc = clone(doc); plantText = `${hh.name} Master`; let n = 0; for (const r of arr(doc.relationships)) if (isRec(r)) { if (r.npc1Role === from) { r.npc1Role = plantText; n += 1; } if (r.npc2Role === from) { r.npc2Role = plantText; n += 1; } } out.plant.done = true; out.plant.seed = b.seed; out.plant.text = plantText; out.plant.rewritten = n; }
+    }
+    if (PLANT && !process.env.WD_PLANT_SEED && !out.plant.done) {
       const hh = arr(doc.institutions).find((h) => isRec(h) && E.isHideableHouse(h) && typeof h.name === 'string' && h.name);
       if (hh) { doc = clone(doc); plantText = `${hh.name} Master`; for (const n of arr(doc.npcs)) if (isRec(n)) n.role = plantText; for (const r of arr(doc.relationships)) if (isRec(r)) { r.npc1Role = plantText; r.npc2Role = plantText; } out.plant.done = true; out.plant.seed = b.seed; out.plant.text = plantText; }
     }

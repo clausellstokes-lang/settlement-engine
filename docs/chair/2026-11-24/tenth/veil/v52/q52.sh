@@ -30,6 +30,8 @@ step_ppimp() { mkdir -p $I44/v52/pp && cp $HERE/pp/* $I44/v52/pp/; mx sh -c "PP_
 step_pptoday() { mkdir -p $I44/v52/pp && cp $HERE/pp/* $I44/v52/pp/; mx sh -c "PP_TODAY=1 PP_CLASSIFY_SRC=/home/user/wt/tip sh $I44/v52/pp/pp.sh /home/user/wt/master $O/pp-today v52mst stored $O/stored-master" > $O/pp-today.txt 2>&1; st pptoday $?; }
 step_readcost() { mx sh -c "N115_LISTS=1 N115_OUT=/var/tmp/v52/out/readcost sh $HERE/n115.sh" > $O/readcost.txt 2>&1; st readcost $?; }
 step_pptodayimp() { mkdir -p $I44/v52/pp && cp $HERE/pp/* $I44/v52/pp/; mx sh -c "PP_TODAY=1 PP_IMPORT=1 PP_CLASSIFY_SRC=/home/user/wt/tip sh $I44/v52/pp/pp.sh /home/user/wt/master $O/pp-todayimp v52mst stored $O/stored-master" > $O/pp-todayimp.txt 2>&1; st pptodayimp $?; }
+step_miplant2() { cpm; mx sh -c "WD_PLANT=1 WD_PLANT_SEED=r3m-metropolis-none-1-127 WD_SEEDS=r3m-metropolis-none-1-127 WD_SHARDS=1 sh $M/wdmi.sh /home/user/wt/join $O/mi-plant2 v28tpl stored $O/stored-master" > $O/mi-plant2.txt 2>&1; st miplant2 $?; }
+step_snplant2() { cpm; mx sh -c "SNAP_PLANT=1 WD_SHARDS=1 sh $M/snap.sh /home/user/wt/join $O/sn-plant2 v28tpl stored $O/stored-master" > $O/sn-plant2.txt 2>&1; st snplant2 $?; }
 # (1c) N115: the read's time, the tip's chain against master's own, on the same public rows
 step_n115() { mx sh $HERE/n115.sh > $O/n115.txt 2>&1; st n115 $?; }
 for s in ${*:-dumps miplant snplant mitip mimaster mijoin sntip snmaster snjoin n115}; do step_$s; done
