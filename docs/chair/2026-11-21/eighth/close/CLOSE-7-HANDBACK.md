@@ -177,6 +177,16 @@ GUARD DONE AND THE LINE SENT (06:44 UTC). The cures tip is 0ec96f13d.
 BATCH DISPATCHED to the same builder (a45b468ed08040c87). Brief `close-7/briefs/BATCH.md`, in /home/user/wt/batch on -batch-wip,
 cut at 0ec96f13d.
 
+BATCH (07:22 UTC):
+- Committed: B1(i) merged with its doors; B1(i)'s 8 reds re-anchored; its table (27 V moved; both zero checks 0); B1(ii).
+- C1 STOPPED. conflicts.js hashes the two powers' NAMES for the issue (line 228) and the plot hook (line 39), so 0 of the 39 V
+  carriers are byte-equal.
+- RULING ASKED of the chair. My recommendation: a frozen NEW->OLD key alias, read by conflicts.js for its two hash keys alone.
+- The builder commits C1 held as one commit, goes on with P3source and goals I-13, and holds the before-and-after until C1
+  settles.
+- The builder is at about 640k of its 1M window. A fresh builder may be needed for the before-and-after; if so, it runs on its
+  own narrow brief.
+
 THE NEXT COMMAND: on BATCH's message:
 - read `close-7/reports/BATCH.md` and the diff once (`git -C /home/user/wt/batch diff --stat 0ec96f13d..HEAD`);
 - re-read the ruling's lines 45-79, 138-157 and 182-197;
