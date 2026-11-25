@@ -323,6 +323,15 @@ gate for the lot):
   - Moves C 0 / V 0. Its doors (wiring 1458->1459, lighting 3799) take the line's side at the merge and are re-taken.
   - Edge bundles go stale. Its typecheck is green in its own tree (167/167; strict 1113/1113).
 
+- D6: `lane/words-1-2026-11-25-d6-wip` 81ac266a5, and E8: `lane/words-1-2026-11-25-e8-wip` 94b7a13d9, from WORDS-1
+  (session_019yED1NrhMzQiyCrSRXBVAs).
+  - D6 moves one frozen writer-reach row ("type on factionRelationships", web-transitive N->R), not re-recorded.
+  - MERGE NOTE with E1, still to come:
+    - goals.js: take both imports;
+    - goalSentencesOnceInTown.test.js: keep both helpers;
+    - personMention.js: keep both blocks.
+  - Both typecheck green in their own trees.
+
 THE NEXT COMMAND: on BATCH's message:
 - read `close-7/reports/BATCH.md` and the diff once (`git -C /home/user/wt/batch diff --stat 0ec96f13d..HEAD`);
 - re-read the ruling's lines 45-79, 138-157 and 182-197;
