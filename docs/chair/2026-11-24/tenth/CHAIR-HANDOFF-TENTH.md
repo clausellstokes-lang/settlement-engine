@@ -1353,3 +1353,16 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   ran them at step e, after lint: it found them, but only the push's refusal made them block).
   CLOSE-7's DISPATCH: TYPES and the two explanations (one builder); the six causes and the four figures as reads (a
   second builder); ANCHORS-2 with the first. LAND-117 was continued under `landing/RULING-117-1.txt`.
+- 2026-11-25 14:53 UTC · T105 · LAND-117 UNDER 117-1: GUARD-2 AND ANCHORS MERGED ON THE LANDING's TREE; NINE STALE ANCHORS RE-PICKED; FOUR LEFT; G19; BIRTH-2 GIVEN C6.
+  THE LANDING's TREE (/home/user/wt/line, not pushed): the merge c3cf5f65da; the town's door f2a837b3b9; GUARD-2
+  095b3f4dbc; ANCHORS ac87eb3225; nine test-only re-picks; HEAD 0addb4255f. `npm run validate:packets`: "valid: 257
+  packets (0 READY)". THE NINE: every old seed was a desert place under B1(i) (its Coaching inn, Courthouse, Fish
+  market or ties gone) or a C1 carrier. LEFT: `faultsNeed` item 1 (NOT an anchor: the need atom reads ['clay'], the
+  page lists two needs, r2r-town-54: to CLOSE-7 for its cause); three cases no longer born (`bar4RecordHouseInput`
+  twice, `gapSaysWhichKind`, `tailTies4Batch2`'s famine pair): RULING-117-2: restated on the merged birth plus the
+  objects copied verbatim from the base birth; a stop where the reader then prints another line. `tests/lint` whole:
+  the same seven (S).
+  `gen/RULING-G.md` G19 (WORDS-2: E3's custom-content leak cured by native ground keys; THE FOURTH COLUMN HOLDS,
+  highest .24: E3 ruled built; G12's seven headings leave with their only line; a blank "Safety" on the base, C
+  dp-village-57, made a unit SAFETY-BLANK). UNIT D4 received (BIRTH-2, `-d4-wip` 57d26a136: records 0 and 0; both
+  typechecks green in its tree); BIRTH-2 given "C6" (P9, a measure first; the sameness door's run with the laws on).
