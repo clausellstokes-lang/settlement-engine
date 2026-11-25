@@ -122,3 +122,5 @@
   - **The record hash moved 900/900.** That is the version, which the births comparison proves.
   - **The page hash moved 2/900:** dp-thorp-2 and dp-thorp-3. Both are among the first births a battery worker renders, which
     the mirror's report found unstable from run to run. They are re-rendered with another birth first, below.
+- **POINT 8, PAGE BATTERY V (CONFIRMED by run, exit=0 both):** 900 births. **Rows moved 0, page moved 0, tables equal.**
+  The record hash moved 900/900 (the version).
