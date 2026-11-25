@@ -36,3 +36,19 @@ does (`page-copy` would be false: it reads the BASELINE copy and tie-breaks wron
   (the page's door, audience passed; its four callers read its answer); `factionDynamics.js :: seatHolderApartOf` (owner, birth
   and the final-record pass); `rulingPowerCoup.js` (owner, play-time engine). Crisis `levers[].holderName` is an institution's
   holder, another fact.
+- FOUND: `rulingPowerCoup.js :: coupContenders` reads `holderOf` with the OWNER's audience and runs on shared pages
+  (`powerStrata.js :: derivePowerStrata`, `EngineSections.jsx`, `powerDeskRead.js`, `printProse.js`): on the served
+  two-taker page it drops the LAST edge's taker (B) from the contest, a wrong holder read through `transferTakerOf`'s
+  undecided fallback (the walker's unregistered site is reached exactly here). So the fail-closed belongs in the ONE function
+  for both audiences: two or more takers that the transfer's own sentence does not decide answer NOBODY (R1, Addendum 3's
+  shape). Owner: unchanged wherever its own sentence decides (the plant, arm (3)'s real three-transfer town); the only owner
+  change is the undecided fallback (last edge -> nobody), which arm (3)'s own comment shows can name a stale taker.
+- RED (old code, /var/tmp/v53/cures/D/red.log): `holderTwoTakers.test.js` 2 failed | 3 passed: "(2) the shared page names NO
+  holder from the transfer ..." -> `r5-city-0 reader: ... "holderName": "Merchant Guilds"` (B; the owner names
+  Military/Guard); "(3) none anywhere on the page ..." -> `r5-city-0: expected [ 'Merchant Guilds' ] to deeply equal [ 'City Council' ]`.
+- CURE: `holderOfSeat.js :: transferTakersOf` (new export: the edge read alone); `transferTakerOf` returns null where the
+  sentence singles out no taker (was: the last edge); `holderOf` answers NOBODY (R1, no R2/R3) on two or more undecided
+  takers, and refuses every undecided taker's keeper as a crowned seat's person (fail closed).
+- WALKER: `recentConflictReaders.walker.test.js` REGISTER row `holderOfSeat.js :: transferTakerOf` (n 1, page-copy, with
+  why) + new arm HOLDER_READERS (5 sites: holderOf, transferTakerOf, rulingHouseApartOf, coupContenders, seatHolderApartOf;
+  the leaf's R1 reads called by holderOf alone). GREEN: walker + new test 10/10.
