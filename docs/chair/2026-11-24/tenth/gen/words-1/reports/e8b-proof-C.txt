@@ -1,0 +1,23 @@
+joined-proof scratchpad/s-e8-C → scratchpad/s-e8b-C: births 900
+  places moved: record hash 501, page hash 43; page-battery rows moved on 0 places
+  E1 detector (gap 1) before: owner pages 125 hits in 122 places; public projection 52 in 41; record strings 120 in 116
+  E1 detector (gap 1) after: owner pages 125 hits in 122 places; public projection 52 in 41; record strings 120 in 116
+    AFTER: dp-city-10 page: Uaymtzal's Caravan masters' — Uaymtzal's Caravan masters' exchange can offer less the longer its supplies stay short, and nobody is putting it right.
+    AFTER: dp-city-101 page: network's head's — Wei Lee wants Kang He's position, and the senior charter master wants the network's head's reputation. They are civil in public and unforgiv
+    AFTER: dp-city-114 page: hospital's master's — Laberia Moderatus cannot finish what they have started without Tertulla Julianus's help, and the network's head cannot finish theirs without
+    AFTER: dp-city-115 page: network's head's — Nerthus Magnrsson has begun teaching Solveig Svensson's methods as the network's head's own.
+    AFTER: dp-city-123 page: hospital's master's — Zena al-Dimashqi wants Suha al-Nuri's position, and the senior abbess wants the hospital's master's reputation. They are civil in public and
+    AFTER: dp-city-13 page: network's head's — Elektra Iasites blames Photeine Lekapenos for a death in the network's head's family. Photeine Lekapenos has never denied it.
+    AFTER: dp-city-139 page: hospital's master's — Diebold Jäger needs Folker Köhler's seal on certain papers; the bowyer needs the hospital's master's silence about certain others. Neither h
+    AFTER: dp-city-141 page: exchange's steward's — Sang Zhang needs Yun Kwon's seal on certain papers; the keeper of the houses needs the exchange's steward's silence about certain others. Ne
+  E8: 1157 strings, 43 printed lines; places 501 (page 43)
+    dp-city-0 [record]
+      − speaks of themselves in the third person when angry
+      + speaks of himself in the third person when angry
+    dp-city-1 [record]
+      − speaks of themselves in the third person when angry
+      + speaks of herself in the third person when angry
+    dp-city-10 [record]
+      − speaks of themselves in the third person when angry
+      + speaks of herself in the third person when angry
+  OTHER (unexplained by any unit): 0

@@ -35,9 +35,10 @@ NAMED FOR THE OWNER (nothing re-recorded):
 - For the veil's lane: these re-worded joiners write a power's description or standing: governanceAccount's four standing sentences,
   seatHolderLines standing/standingVacant, and factionDynamics's ordained narrative.
 
-E8b (G28): cut ON TOP OF `-e8-wip` 94b7a13d9 as `lane/words-1-2026-11-25-e8b-wip` (re-uses `reflexiveOf`). E8 is merged BEFORE
-E8b; E8b's diff is read against 94b7a13d9. IN BUILD by WORDS-1 from 16:30 UTC (measure first).
-NOT BUILT YET — E8b, the card lines (tells, impressions, secrets, goal.long; C 1786 bound strings at the measure), WANTED BEFORE THE
+E8b HANDED IN 18:3x UTC: `lane/words-1-2026-11-25-e8b-wip` e75f090b7, cut ON TOP OF `-e8-wip` 94b7a13d9 (G28; re-uses
+`reflexiveOf`). E8 is merged BEFORE E8b; E8b's diff is read against 94b7a13d9 (it merges onto E1 as E8 does: personMention.js
+keeps both blocks; goals.js's import line gains heldCardLine). Proof: reports/e8b-proof-C.txt, -V.txt, e8b-successor.txt.
+THE DESIGN IT BUILT — E8b, the card lines (tells, impressions, secrets, goal.long; C 1786 bound strings at the measure), WANTED BEFORE THE
 RELEASE. The design was ruled by the chair in G20 (2):
 - The draw and its dedupe run on the line's text exactly as today: no draw moves, no dedupe key changes.
 - The reflexive is resolved AFTER the draw, where the line is bound to its person.
@@ -203,6 +204,10 @@ STATE AT 16:47 UTC: CHAIR G29 (plan not vetoed; proof adds (1) the ROUND TRIP: h
   tests/lint/boundCardLinesReaders.walker.test.js (readers of the row tables: HELD 4 through the helper, BEFORE_THE_PASS 3 with
   reasons, the successor, a planted control); boundCardLines.test.js gains the regen case; manifest rationale for both tests.
   Tools: tools/e8b-roundtrip.mjs (G29 (1) over the battery strings), tools/e8b-successor.mjs (G29 (2), made records, both trees).
+STATE AT 18:35 UTC: UNIT E8b e75f090b7 HANDED IN to the chair (only). Moved C 1157 in 501 / V 1126 in 500 (= the measure);
+  round trip 0/0; beyond the reflexive 0; other record strings 0; battery rows 0; unexplained 0; successor 6 built, 0 differing;
+  regen keeper untouched; walker green; lint = base four; typechecks OK. Fault owned to the chair: one `npx tsc` run outside
+  the mutex. All four of my units are handed in; the seat waits on the chair.
 NOT IN STEP ONE (E8b): the card lines (tells 899/852, impressions, secrets, goal.long npcGenerator); their draws dedupe by text
 in registries (castPowers hookRegistry.tells, CarriedSecrets), so a draw-time fill would move draws: a design is owed.
 npcData.js was read in its changed region only (pairProse, the tie table), not whole: said in the hand-in.

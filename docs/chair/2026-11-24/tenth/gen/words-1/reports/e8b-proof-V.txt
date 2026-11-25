@@ -1,0 +1,23 @@
+joined-proof scratchpad/s-e8-V → scratchpad/s-e8b-V: births 900
+  places moved: record hash 500, page hash 51; page-battery rows moved on 0 places
+  E1 detector (gap 1) before: owner pages 145 hits in 126 places; public projection 34 in 19; record strings 96 in 90
+  E1 detector (gap 1) after: owner pages 145 hits in 126 places; public projection 34 in 19; record strings 96 in 90
+    AFTER: dp-city-10 page: Oberwiese's Caravan masters' — Oberwiese's Caravan masters' exchange can offer less the longer its supplies stay short, and nobody is putting it right.
+    AFTER: dp-city-103 page: Thieves' Guild's — Somebody at Megaikon is a little too well informed about the Corrupt City Council's business and a little too easy about money, and nobody h
+    AFTER: dp-city-109 page: Thieves' Guild's — Someone has bought a member of the Corrupt City Council at Chinggisnuur: news of the Corrupt City Council's business now goes where it shoul
+    AFTER: dp-city-11 page: Thieves' Guild's — Somebody at Dunholme runs an illegal business big enough to matter, and nobody will say exactly what it is. Some of the Merchant City Counci
+    AFTER: dp-city-115 page: Thieves' Guild's — With everyone's mind on the present danger, nobody at Cathsike is watching its officials, and they are paid little enough to be bought. Some
+    AFTER: dp-city-120 page: Thieves' Guild's — Someone in the Corrupt City Council at Palaiochori is being paid to pass on what they hear. Whoever it is, they hear a great deal. Some of t
+    AFTER: dp-city-121 page: exchange's steward's — Walpurga Volso blames Maesia Paullus for a death in the exchange's steward's family. Maesia Paullus has never denied it.
+    AFTER: dp-city-123 page: exchange's steward's — Quinn MacDonald blames Malcolm MacGregor for a death in the exchange's steward's family. Malcolm MacGregor has never denied it.
+  E8: 1126 strings, 51 printed lines; places 500 (page 51)
+    dp-city-0 [record]
+      − speaks of themselves in the third person when angry
+      + speaks of himself in the third person when angry
+    dp-city-1 [record]
+      − speaks of themselves in the third person when angry
+      + speaks of himself in the third person when angry
+    dp-city-10 [record]
+      − speaks of themselves in the third person when angry
+      + speaks of herself in the third person when angry
+  OTHER (unexplained by any unit): 0
