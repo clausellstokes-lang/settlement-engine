@@ -49,7 +49,11 @@ const PAIRS = [
 ];
 /** KEEP: a true sibling of a cured line, green before and after [seed, words that must still print] */
 const KEEP = [
-  ['r2s-religious_conversion-town-0', 'Losing congregation to the new faith faster than leadership acknowledges publicly.'],
+  // RE-PICKED (point 117, ruling 117-1, 2026-11-25): the faith's conversion line is chosen by the governing faction's name
+  // (`stressFactions.js`, its length mod 3); under the close's C1 r2s-religious_conversion-town-0's council is born the
+  // "Council of Aldermen" (was "Corrupt Council") and draws the rival-sides line; the lowest r2s-religious_conversion-town
+  // that draws this line is town-8.
+  ['r2s-religious_conversion-town-8', 'Losing congregation to the new faith faster than leadership acknowledges publicly.'],
   ['r2s-wartime-metropolis-0', 'coordinating supply, conscription, and military contracting.'],
 ];
 /** @type {Record<string, string>} */
