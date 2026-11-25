@@ -420,3 +420,22 @@ window; no one-week case in seeds 0 to 5999. RULED: the 5255 case leaves as a bi
 test by one direct call of the function that words the window if it can be called alone; else the case is retired
 (the stem asserted in the 5441 test) and "the one-week wording has no test and no birth in soak 0 to 5999" is written
 in the seat's hand-back. "ANCHORS-3 <commit>" owed.
+
+**R24q (15:56 UTC on 2026-11-25): CLOSE-7's READS OF POINT 117 RULED; ANCHORS-3 9f859467a AND SIZE-BACK b67b29cdc RECEIVED.**
+The seat's bisect over the stage trees: only B1(i) and C1 moved anything; every cause confirmed by run (its
+`close-7/reports/READS-117.md`). (1) `statecraftExposureBand` (78 over 57): B1(i) re-deals the one seeded realm,
+EXPOSE_BASE unchanged: nothing raised; LISTED at 117; re-measured with the tuning signature at the end. (2) goals I-13:
+a real determinism loss in `dealGoals` (pass two reads other cards' wordings, none in `refs`), exposed not made by
+B1(i): LISTED at 117, cured in the second hand-in inside the receipt cure. (3) `goalSentencesOnceInTown` ((u)'s roster
+premise, 16 towns), (4) `tailDisplayCivicBatch2` (C1: the pair's high quarrel is gone after the rename, "stable" is
+true), (5) `tailCrisisBatch8` (Merchant Guilds now quarrels with the seat; its stored stake unchanged) and the figure
+`hookThemeDraws` 2,147 to 2,145 (one desert metropolis loses two cards): ONE BUILDER, TEST-ONLY, FOR 117, each by its
+test's own finder: "ANCHORS-4 <commit>" owed. (6) `implementationPackets`: cured by GUARD-2. (7) `faultsNeed`: THE ATOM
+IS WRONG, the page right (it drops the livestock need of the Butchers, who stand): LISTED at 117; its own src unit
+"NEED-ATOM" in the second hand-in with a check over every birth. THE OWNER'S THREE FIGURES (the herald digest, items
+473 to 466; `dossierProseManifest` DM-only 214 to 213; cartography W2's three desert rows): prepared, signed by nobody,
+LISTED at 117. ANCHORS-3: the one-week wording is tested by one direct call of `calendarLineOf` (R24p's first branch).
+SIZE-BACK: first paint 1,192,039 to 1,181,885 raw (-10,154), gzip 379,126 to 376,341, Brotli 318,345 to 315,834; the
+worker unchanged; `VERIFY_DIST=1 tests/build` the same 15 red before and after; neither file has a reader on the eager
+path. A SECOND READER (top tier, max effort, not told the chair's conclusion) was started at 15:56 UTC on point 117's
+source diff (ddca5c7894..2ad2b3fb31) outside GUARD: the line does not move before its report is read.
