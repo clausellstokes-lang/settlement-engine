@@ -1,0 +1,1795 @@
+E1-PAIRS (CURE-118, proof (a) of START-CURE-118.txt; the tenth chair G45 (2)+(4)). Every string that differs between the tip
+(lane/stack-118-cures-wip-2026-11-26 at b812c96549, cures 1-5) and a SCRATCH copy of the same tip with E1 stubbed to the identity
+(powerSentenceName.js :: holdsPossessive -> false; personMention.js ROLE_POSSESSIVE never matches; stateProseKernel.js :: ofForms
+returns its text). Births: C (dp-<size>-<i>, {settType}), V (the same seeds, the visitor config of plan-lit.json), soak 0-419
+(corpus.mjs :: birth(i)). Strings: the born record, the public projection (composePublicProse), the print desk's prose
+(buildPrintProse, the screen's desks headless), the view-model (deriveDossierViewModel, deriveViability), the owner's Daily Life.
+B = E1 stubbed (before), A = the tip (after). CLASS read by hand, pair by pair: SOUND or GARBLED.
+
+THE READING (355 distinct pairs, every one read): 443 SOUND (rule (1)'s later mention, 'the network's head's X' -> 'Lee's X';
+rule (2)'s "of" forms, 'the place of the Headman's Authority', 'in the pocket of the Thieves' Guild', 'that of the Headman's
+Authority'; rule (3)'s house fill, 'the steward's office'; the qualifier, 'the family of Kathleen Farrell (the hospital's master)').
+1 GARBLED, A THIRD KIND (neither finding 2 nor finding 4): soak1k-166 relationships[7], "the midwife needs master)'s silence":
+E1 rule (1) (`personMention.js :: mentionOf`, a role holding a possessive skipped before "'s") falls to the SURNAME rung, which
+takes the last word of a bracketed card name, "Nagendra Bajaj (the hospital's master)" -> "master)". Base 09c29806b85a: "the
+midwife needs the hospital's master's silence". Per START-CURE-118: E1: A THIRD KIND, STOPPED; nothing more built on E1.
+HOSTILE NAMES (c): 12 names x town/city, stubbed vs tip: 1 sentence holding the place's name differs (Dragon's Reach city:
+"in the Thieves' Guild's pocket" -> "in the pocket of the Thieves' Guild", the measured {faction} shape); none garbled.
+
+PAIRS 444 (C 182, V 168, soak 94); GARBLED 1.
+
+C	dp-city-101	record.relationships[43].description	SOUND
+  B: Wei Lee wants Kang He's position, and the senior charter master wants the network's head's reputation. They are civil in public and unforgiving in private.
+  A: Wei Lee wants Kang He's position, and the senior charter master wants Lee's reputation. They are civil in public and unforgiving in private.
+
+C	dp-city-114	record.relationships[68].description	SOUND
+  B: Laberia Moderatus cannot finish what they have started without Tertulla Julianus's help, and the network's head cannot finish theirs without the hospital's master's. Neither lets the other forget it.
+  A: Laberia Moderatus cannot finish what they have started without Tertulla Julianus's help, and the network's head cannot finish theirs without Moderatus's. Neither lets the other forget it.
+
+C	dp-city-115	record.relationships[18].tension	SOUND
+  B: Nerthus Magnrsson has begun teaching Solveig Svensson's methods as the network's head's own.
+  A: Nerthus Magnrsson has begun teaching Solveig Svensson's methods as Magnrsson's own.
+
+C	dp-city-123	record.relationships[12].description	SOUND
+  B: Zena al-Dimashqi wants Suha al-Nuri's position, and the senior abbess wants the hospital's master's reputation. They are civil in public and unforgiving in private.
+  A: Zena al-Dimashqi wants Suha al-Nuri's position, and the senior abbess wants al-Dimashqi's reputation. They are civil in public and unforgiving in private.
+
+C	dp-city-13	record.relationships[14].description	SOUND
+  B: Elektra Iasites blames Photeine Lekapenos for a death in the network's head's family. Photeine Lekapenos has never denied it.
+  A: Elektra Iasites blames Photeine Lekapenos for a death in Iasites's family. Photeine Lekapenos has never denied it.
+
+C	dp-city-139	record.relationships[33].description	SOUND
+  B: Diebold Jäger needs Folker Köhler's seal on certain papers; the bowyer needs the hospital's master's silence about certain others. Neither has asked for more than the other could pay.
+  A: Diebold Jäger needs Folker Köhler's seal on certain papers; the bowyer needs Jäger's silence about certain others. Neither has asked for more than the other could pay.
+
+C	dp-city-141	record.relationships[37].description	SOUND
+  B: Sang Zhang needs Yun Kwon's seal on certain papers; the keeper of the houses needs the exchange's steward's silence about certain others. Neither has asked for more than the other could pay.
+  A: Sang Zhang needs Yun Kwon's seal on certain papers; the keeper of the houses needs Zhang's silence about certain others. Neither has asked for more than the other could pay.
+
+C	dp-city-145	record.relationships[20].tension	SOUND
+  B: Dietmar Vogel has asked Tassilo Naumann for a vote against the exchange's steward's own interests. It is the first payment Dietmar Vogel has asked for.
+  A: Dietmar Vogel has asked Tassilo Naumann for a vote against Naumann's own interests. It is the first payment Dietmar Vogel has asked for.
+
+C	dp-city-16	record.relationships[3].description	SOUND
+  B: Everyone thinks Una Doherty made their own way. In fact Bé Bhinn O'Meara paid for every step, and Una Doherty takes the network's head's instructions without argument.
+  A: Everyone thinks Una Doherty made their own way. In fact Bé Bhinn O'Meara paid for every step, and Una Doherty takes O'Meara's instructions without argument.
+
+C	dp-city-19	record.relationships[35].description	SOUND
+  B: Plotina Macer cannot finish what they have started without Iovita Rutilius's help, and the assayer cannot finish theirs without the exchange's steward's. Neither lets the other forget it.
+  A: Plotina Macer cannot finish what they have started without Iovita Rutilius's help, and the assayer cannot finish theirs without Macer's. Neither lets the other forget it.
+
+C	dp-city-30	record.relationships[24].description	SOUND
+  B: Cato Flaccus wants Denter Tacitus's position, and the quarry master wants the exchange's steward's reputation. They are civil in public and unforgiving in private.
+  A: Cato Flaccus wants Denter Tacitus's position, and the quarry master wants Flaccus's reputation. They are civil in public and unforgiving in private.
+
+C	dp-city-33	record.relationships[66].description	SOUND
+  B: Laelia Regulus wants Iovita Pacuvius's position, and the master fishmonger wants the network's spider's reputation. They are civil in public and unforgiving in private.
+  A: Laelia Regulus wants Iovita Pacuvius's position, and the master fishmonger wants Regulus's reputation. They are civil in public and unforgiving in private.
+
+C	dp-city-49	record.relationships[13].description	SOUND
+  B: Sudha Sahni blames Anuradha Deshpande for a death in the hospital's master's family. Anuradha Deshpande has never denied it.
+  A: Sudha Sahni blames Anuradha Deshpande for a death in Sahni's family. Anuradha Deshpande has never denied it.
+
+C	dp-city-55	record.relationships[1].tension	SOUND
+  B: Nasr al-Qurashi has begun teaching Adnan al-Andalusi the garrison commander's methods as the exchange's steward's own.
+  A: Nasr al-Qurashi has begun teaching Adnan al-Andalusi the garrison commander's methods as al-Qurashi's own.
+
+C	dp-city-60	record.relationships[11].description	SOUND
+  B: Everyone thinks Genji Kobayashi made their own way. In fact Il Lee paid for every step, and Genji Kobayashi takes the network's spider's instructions without argument.
+  A: Everyone thinks Genji Kobayashi made their own way. In fact Il Lee paid for every step, and Genji Kobayashi takes Lee's instructions without argument.
+
+C	dp-city-61	record.relationships[20].description	SOUND
+  B: Everyone thinks Yaroslava Solovyov made their own way. In fact Irina Kuznetsov paid for every step, and Yaroslava Solovyov takes the network's head's instructions without argument.
+  A: Everyone thinks Yaroslava Solovyov made their own way. In fact Irina Kuznetsov paid for every step, and Yaroslava Solovyov takes Kuznetsov's instructions without argument.
+
+C	dp-city-70	record.relationships[21].tension	SOUND
+  B: Patli Nah has begun teaching Yohualli Dzul's methods as the hospital's master's own.
+  A: Patli Nah has begun teaching Yohualli Dzul's methods as Nah's own.
+
+C	dp-city-73	record.relationships[55].description	SOUND
+  B: Everyone thinks Chakib al-Hakim made their own way. In fact Aziz al-Jabiri paid for every step, and Chakib al-Hakim takes the network's head's instructions without argument.
+  A: Everyone thinks Chakib al-Hakim made their own way. In fact Aziz al-Jabiri paid for every step, and Chakib al-Hakim takes al-Jabiri's instructions without argument.
+
+C	dp-city-94	record.relationships[48].description	SOUND
+  B: Lyudmyla Dmitriev blames Dragana Tretyakov for a death in the hospital's master's family. Dragana Tretyakov has never denied it.
+  A: Lyudmyla Dmitriev blames Dragana Tretyakov for a death in Dmitriev's family. Dragana Tretyakov has never denied it.
+
+C	dp-city-97	record.relationships[56].description	SOUND
+  B: Chino-Ujin Taichiud wants Ariun Mangghud's position, and the smelt master wants the network's head's reputation. They are civil in public and unforgiving in private.
+  A: Chino-Ujin Taichiud wants Ariun Mangghud's position, and the smelt master wants Taichiud's reputation. They are civil in public and unforgiving in private.
+
+C	dp-hamlet-1	public.blocks.power:desk.stabilityHeader.sentence	SOUND
+  B: Anyone doing business at Keshigkotan needs one name, the Headman's Authority's, and can plan a season ahead on its word.
+  A: Anyone doing business at Keshigkotan needs one name, that of the Headman's Authority, and can plan a season ahead on its word.
+
+C	dp-hamlet-1	public.blocks.power:desk.successionHold.sentence	SOUND
+  B: The hamlet's backing makes the Headman's Authority's hold at Keshigkotan hard to shake; a challenge that would be serious elsewhere is a nuisance here.
+  A: The hamlet's backing makes the hold of the Headman's Authority at Keshigkotan hard to shake; a challenge that would be serious elsewhere is a nuisance here.
+
+C	dp-hamlet-102	public.blocks.power:desk.successionRisk.sentence	SOUND
+  B: Nobody at Dzibcoba is in a position to take the Headman's Authority's place: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+  A: Nobody at Dzibcoba is in a position to take the place of the Headman's Authority: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+
+C	dp-hamlet-102	print.power.power.succession	SOUND
+  B: Nobody at Dzibcoba is in a position to take the Headman's Authority's place: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+  A: Nobody at Dzibcoba is in a position to take the place of the Headman's Authority: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+
+C	dp-hamlet-106	public.blocks.power:desk.successionHold.sentence	SOUND
+  B: Public rejection is breaking the Headman's Authority's grip at Flachmark faster than the Headman's Authority can shore it up, and every measure taken to shore it up costs a little more of what remains.
+  A: Public rejection is breaking the grip of the Headman's Authority at Flachmark faster than the Headman's Authority can shore it up, and every measure taken to shore it up costs a little more of what remains.
+
+C	dp-hamlet-106	public.blocks.power:governance.text	SOUND
+  B: The Headman's Authority governs Flachmark. Its seat is held by Trude Neumann, the pawnbroker and Headman. Crime has left the Headman's Authority's right to rule contested in Flachmark.
+  A: The Headman's Authority governs Flachmark. Its seat is held by Trude Neumann, the pawnbroker and Headman. Crime has left the right of the Headman's Authority to rule contested in Flachmark.
+
+C	dp-hamlet-11	public.blocks.power:desk.stabilityHeader.sentence	SOUND
+  B: Anyone doing business at Teotitepec needs one name, the Headman's Authority's, and can plan a season ahead on its word.
+  A: Anyone doing business at Teotitepec needs one name, that of the Headman's Authority, and can plan a season ahead on its word.
+
+C	dp-hamlet-11	public.blocks.power:desk.successionHold.sentence	SOUND
+  B: The hamlet's backing makes the Headman's Authority's hold at Teotitepec hard to shake; a challenge that would be serious elsewhere is a nuisance here.
+  A: The hamlet's backing makes the hold of the Headman's Authority at Teotitepec hard to shake; a challenge that would be serious elsewhere is a nuisance here.
+
+C	dp-hamlet-115	public.blocks.power:desk.stabilityHeader.sentence	SOUND
+  B: Anyone doing business at Bab-al-oasis needs one name, the Headman's Authority's, and can plan a season ahead on its word.
+  A: Anyone doing business at Bab-al-oasis needs one name, that of the Headman's Authority, and can plan a season ahead on its word.
+
+C	dp-hamlet-115	public.blocks.power:desk.successionRisk.sentence	SOUND
+  B: Nobody at Bab-al-oasis is in a position to take the Headman's Authority's place: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+  A: Nobody at Bab-al-oasis is in a position to take the place of the Headman's Authority: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+
+C	dp-hamlet-115	print.power.power.succession	SOUND
+  B: Nobody at Bab-al-oasis is in a position to take the Headman's Authority's place: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+  A: Nobody at Bab-al-oasis is in a position to take the place of the Headman's Authority: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+
+C	dp-hamlet-124	record.npcs[0].goal.short	SOUND
+  B: Find the lord's steward's office one more source of money.
+  A: Find the steward's office one more source of money.
+
+C	dp-hamlet-127	public.blocks.power:desk.successionRisk.sentence	SOUND
+  B: Nobody at Gortwood is in a position to take the Headman's Authority's place: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+  A: Nobody at Gortwood is in a position to take the place of the Headman's Authority: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+
+C	dp-hamlet-127	print.power.power.succession	SOUND
+  B: Nobody at Gortwood is in a position to take the Headman's Authority's place: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+  A: Nobody at Gortwood is in a position to take the place of the Headman's Authority: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+
+C	dp-hamlet-128	public.blocks.power:desk.successionRisk.sentence	SOUND
+  B: Nobody at Kallikastro is in a position to take the Headman's Authority's place: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+  A: Nobody at Kallikastro is in a position to take the place of the Headman's Authority: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+
+C	dp-hamlet-128	print.power.power.succession	SOUND
+  B: Nobody at Kallikastro is in a position to take the Headman's Authority's place: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+  A: Nobody at Kallikastro is in a position to take the place of the Headman's Authority: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+
+C	dp-hamlet-132	record.npcs[0].goal.long	SOUND
+  B: See the lord's steward's office out of debt for good, with money set aside for bad years.
+  A: See the steward's office out of debt for good, with money set aside for bad years.
+
+C	dp-hamlet-133	public.blocks.power:desk.successionHold.sentence	SOUND
+  B: Public rejection is breaking the Headman's Authority's grip at Sundnes faster than the Headman's Authority can shore it up, and every measure taken to shore it up costs a little more of what remains.
+  A: Public rejection is breaking the grip of the Headman's Authority at Sundnes faster than the Headman's Authority can shore it up, and every measure taken to shore it up costs a little more of what remains.
+
+C	dp-hamlet-133	public.blocks.power:governance.text	SOUND
+  B: The Headman's Authority governs Sundnes. Its seat is held by Walpurga Svensson, the dairy farmer and Headman. Insecurity has left the Headman's Authority's right to rule contested in Sundnes. The sick have been shut away under quarantine. Many ignore it, and two people who tried to enforce it were beaten.
+  A: The Headman's Authority governs Sundnes. Its seat is held by Walpurga Svensson, the dairy farmer and Headman. Insecurity has left the right of the Headman's Authority to rule contested in Sundnes. The sick have been shut away under quarantine. Many ignore it, and two people who tried to enforce it were beaten.
+
+C	dp-hamlet-136	record.npcs[0].goal.short	SOUND
+  B: Keep the accounts of the lord's steward's office balanced, and show them to anyone who asks.
+  A: Keep the accounts of the steward's office balanced, and show them to anyone who asks.
+
+C	dp-hamlet-14	public.blocks.power:desk.stabilityHeader.sentence	SOUND
+  B: Anyone doing business at Rotgrund needs one name, the Headman's Authority's, and can plan a season ahead on its word.
+  A: Anyone doing business at Rotgrund needs one name, that of the Headman's Authority, and can plan a season ahead on its word.
+
+C	dp-hamlet-146	record.npcs[0].goal.short	SOUND
+  B: Get the lord's steward's office through the season without borrowing.
+  A: Get the steward's office through the season without borrowing.
+
+C	dp-hamlet-147	public.blocks.power:desk.stabilityHeader.sentence	SOUND
+  B: Anyone doing business at Copanmal needs one name, the Headman's Authority's, and can plan a season ahead on its word.
+  A: Anyone doing business at Copanmal needs one name, that of the Headman's Authority, and can plan a season ahead on its word.
+
+C	dp-hamlet-147	public.blocks.power:desk.successionRisk.sentence	SOUND
+  B: Nobody at Copanmal is in a position to take the Headman's Authority's place: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+  A: Nobody at Copanmal is in a position to take the place of the Headman's Authority: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+
+C	dp-hamlet-147	print.power.power.succession	SOUND
+  B: Nobody at Copanmal is in a position to take the Headman's Authority's place: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+  A: Nobody at Copanmal is in a position to take the place of the Headman's Authority: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+
+C	dp-hamlet-15	public.blocks.power:desk.successionRisk.sentence	SOUND
+  B: Nobody at Uxmaltzal is in a position to take the Headman's Authority's place: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+  A: Nobody at Uxmaltzal is in a position to take the place of the Headman's Authority: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+
+C	dp-hamlet-15	print.power.power.succession	SOUND
+  B: Nobody at Uxmaltzal is in a position to take the Headman's Authority's place: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+  A: Nobody at Uxmaltzal is in a position to take the place of the Headman's Authority: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+
+C	dp-hamlet-16	record.npcs[1].goal.short	SOUND
+  B: Pay every hand at the lord's steward's office in full and on time this season.
+  A: Pay every hand at the steward's office in full and on time this season.
+
+C	dp-hamlet-17	record.npcs[0].goal.short	SOUND
+  B: Cut the spending at the lord's steward's office by a tenth this season, and keep the work going.
+  A: Cut the spending at the steward's office by a tenth this season, and keep the work going.
+
+C	dp-hamlet-19	public.blocks.power:desk.successionRisk.sentence	SOUND
+  B: Nobody at Tumenkhand is in a position to take the Headman's Authority's place: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+  A: Nobody at Tumenkhand is in a position to take the place of the Headman's Authority: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+
+C	dp-hamlet-19	public.blocks.power:desk.successionHold.sentence	SOUND
+  B: The hamlet's backing makes the Headman's Authority's hold at Tumenkhand hard to shake; a challenge that would be serious elsewhere is a nuisance here.
+  A: The hamlet's backing makes the hold of the Headman's Authority at Tumenkhand hard to shake; a challenge that would be serious elsewhere is a nuisance here.
+
+C	dp-hamlet-19	print.power.power.succession	SOUND
+  B: Nobody at Tumenkhand is in a position to take the Headman's Authority's place: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+  A: Nobody at Tumenkhand is in a position to take the place of the Headman's Authority: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+
+C	dp-hamlet-24	public.blocks.power:desk.stabilityHeader.sentence	SOUND
+  B: Anyone doing business at Qasrnagar needs one name, the Headman's Authority's, and can plan a season ahead on its word.
+  A: Anyone doing business at Qasrnagar needs one name, that of the Headman's Authority, and can plan a season ahead on its word.
+
+C	dp-hamlet-3	record.npcs[0].goal.short	SOUND
+  B: Get the lord's steward's office through the season without borrowing.
+  A: Get the steward's office through the season without borrowing.
+
+C	dp-hamlet-37	public.blocks.power:desk.successionRisk.sentence	SOUND
+  B: Nobody at Inverthwaite is in a position to take the Headman's Authority's place: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+  A: Nobody at Inverthwaite is in a position to take the place of the Headman's Authority: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+
+C	dp-hamlet-37	print.power.power.succession	SOUND
+  B: Nobody at Inverthwaite is in a position to take the Headman's Authority's place: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+  A: Nobody at Inverthwaite is in a position to take the place of the Headman's Authority: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+
+C	dp-hamlet-38	public.blocks.power:desk.successionHold.sentence	SOUND
+  B: The hamlet's backing makes the Headman's Authority's hold at Kallikastro hard to shake; a challenge that would be serious elsewhere is a nuisance here.
+  A: The hamlet's backing makes the hold of the Headman's Authority at Kallikastro hard to shake; a challenge that would be serious elsewhere is a nuisance here.
+
+C	dp-hamlet-40	public.blocks.power:desk.stabilityHeader.sentence	SOUND
+  B: Anyone doing business at Somagrad needs one name, the Headman's Authority's, and can plan a season ahead on its word.
+  A: Anyone doing business at Somagrad needs one name, that of the Headman's Authority, and can plan a season ahead on its word.
+
+C	dp-hamlet-40	public.blocks.power:desk.successionRisk.sentence	SOUND
+  B: Nobody at Somagrad is in a position to take the Headman's Authority's place: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+  A: Nobody at Somagrad is in a position to take the place of the Headman's Authority: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+
+C	dp-hamlet-40	print.power.power.succession	SOUND
+  B: Nobody at Somagrad is in a position to take the Headman's Authority's place: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+  A: Nobody at Somagrad is in a position to take the place of the Headman's Authority: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+
+C	dp-hamlet-42	record.npcs[0].goal.long	SOUND
+  B: See the lord's steward's office out of debt for good, with money set aside for bad years.
+  A: See the steward's office out of debt for good, with money set aside for bad years.
+
+C	dp-hamlet-44	public.blocks.power:desk.successionRisk.sentence	SOUND
+  B: Nobody at Itzatun is in a position to take the Headman's Authority's place: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+  A: Nobody at Itzatun is in a position to take the place of the Headman's Authority: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+
+C	dp-hamlet-44	print.power.power.succession	SOUND
+  B: Nobody at Itzatun is in a position to take the Headman's Authority's place: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+  A: Nobody at Itzatun is in a position to take the place of the Headman's Authority: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+
+C	dp-hamlet-51	record.npcs[0].goal.short	SOUND
+  B: Collect what is owed to the lord's steward's office before the season is out.
+  A: Collect what is owed to the steward's office before the season is out.
+
+C	dp-hamlet-55	public.blocks.power:desk.successionHold.sentence	SOUND
+  B: The hamlet's backing makes the Headman's Authority's hold at Altaiüüd hard to shake; a challenge that would be serious elsewhere is a nuisance here.
+  A: The hamlet's backing makes the hold of the Headman's Authority at Altaiüüd hard to shake; a challenge that would be serious elsewhere is a nuisance here.
+
+C	dp-hamlet-64	record.npcs[0].goal.short	SOUND
+  B: Get the lord's steward's office through the season without borrowing.
+  A: Get the steward's office through the season without borrowing.
+
+C	dp-hamlet-66	public.blocks.power:desk.successionHold.sentence	SOUND
+  B: Public rejection is breaking the Headman's Authority's grip at Lidovallis faster than the Headman's Authority can shore it up, and every measure taken to shore it up costs a little more of what remains.
+  A: Public rejection is breaking the grip of the Headman's Authority at Lidovallis faster than the Headman's Authority can shore it up, and every measure taken to shore it up costs a little more of what remains.
+
+C	dp-hamlet-66	public.blocks.power:governance.text	SOUND
+  B: Lidovallis is governed by the Headman's Authority. Fronto Rufus, the stable keeper and Headman, holds its seat. In Lidovallis, the Headman's Authority's right to rule is contested. Insecurity is the reason. The Independent Bloc claims the right to rule by other means, and no longer comes to the hall's meetings. Each side makes its own decisions now, and the others overturn them within days.
+  A: Lidovallis is governed by the Headman's Authority. Fronto Rufus, the stable keeper and Headman, holds its seat. In Lidovallis, the right of the Headman's Authority to rule is contested. Insecurity is the reason. The Independent Bloc claims the right to rule by other means, and no longer comes to the hall's meetings. Each side makes its own decisions now, and the others overturn them within days.
+
+C	dp-hamlet-68	public.blocks.power:desk.stabilityHeader.sentence	SOUND
+  B: Anyone doing business at Vishnupur needs one name, the Headman's Authority's, and can plan a season ahead on its word.
+  A: Anyone doing business at Vishnupur needs one name, that of the Headman's Authority, and can plan a season ahead on its word.
+
+C	dp-hamlet-68	public.blocks.power:desk.successionRisk.sentence	SOUND
+  B: Nobody at Vishnupur is in a position to take the Headman's Authority's place: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+  A: Nobody at Vishnupur is in a position to take the place of the Headman's Authority: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+
+C	dp-hamlet-68	print.power.power.succession	SOUND
+  B: Nobody at Vishnupur is in a position to take the Headman's Authority's place: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+  A: Nobody at Vishnupur is in a position to take the place of the Headman's Authority: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+
+C	dp-hamlet-69	public.blocks.power:desk.stabilityHeader.sentence	SOUND
+  B: Anyone doing business at Ribatkarez needs one name, the Headman's Authority's, and can plan a season ahead on its word.
+  A: Anyone doing business at Ribatkarez needs one name, that of the Headman's Authority, and can plan a season ahead on its word.
+
+C	dp-hamlet-7	record.npcs[0].goal.short	SOUND
+  B: Pay every hand at the lord's steward's office in full and on time this season.
+  A: Pay every hand at the steward's office in full and on time this season.
+
+C	dp-hamlet-71	public.blocks.power:desk.successionRisk.sentence	SOUND
+  B: Nobody at Suryapeth is in a position to take the Headman's Authority's place: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+  A: Nobody at Suryapeth is in a position to take the place of the Headman's Authority: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+
+C	dp-hamlet-71	print.power.power.succession	SOUND
+  B: Nobody at Suryapeth is in a position to take the Headman's Authority's place: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+  A: Nobody at Suryapeth is in a position to take the place of the Headman's Authority: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+
+C	dp-hamlet-73	public.blocks.power:desk.successionRisk.sentence	SOUND
+  B: Nobody at Bergfoss is in a position to take the Headman's Authority's place: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+  A: Nobody at Bergfoss is in a position to take the place of the Headman's Authority: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+
+C	dp-hamlet-73	print.power.power.succession	SOUND
+  B: Nobody at Bergfoss is in a position to take the Headman's Authority's place: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+  A: Nobody at Bergfoss is in a position to take the place of the Headman's Authority: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+
+C	dp-hamlet-74	public.blocks.power:desk.stabilityHeader.sentence	SOUND
+  B: Anyone doing business at Hartfeld needs one name, the Headman's Authority's, and can plan a season ahead on its word.
+  A: Anyone doing business at Hartfeld needs one name, that of the Headman's Authority, and can plan a season ahead on its word.
+
+C	dp-hamlet-79	record.npcs[0].goal.short	SOUND
+  B: Collect what is owed to the lord's steward's office before the season is out.
+  A: Collect what is owed to the steward's office before the season is out.
+
+C	dp-hamlet-84	record.powerStructure.recentConflict	SOUND
+  B: Two powers have stopped coming to the Headman's Authority's meetings. Each makes its own decisions now, and the others overturn them within days.
+  A: Two powers have stopped coming to the meetings of the Headman's Authority. Each makes its own decisions now, and the others overturn them within days.
+
+C	dp-hamlet-84	public.blocks.power:governance.text	SOUND
+  B: Lina ibn Rashid, the alewife and Headman, holds the seat of the Headman's Authority. The Headman's Authority governs Bab-al-khel. In Bab-al-khel, the Headman's Authority's right to rule is contested. Insecurity is the reason. The Independent Bloc claims the right to rule by other means, and no longer comes to the hall's meetings. Each side makes its own decisions now, and the others overturn them within days.
+  A: Lina ibn Rashid, the alewife and Headman, holds the seat of the Headman's Authority. The Headman's Authority governs Bab-al-khel. In Bab-al-khel, the right of the Headman's Authority to rule is contested. Insecurity is the reason. The Independent Bloc claims the right to rule by other means, and no longer comes to the hall's meetings. Each side makes its own decisions now, and the others overturn them within days.
+
+C	dp-hamlet-86	public.blocks.power:desk.successionRisk.sentence	SOUND
+  B: Nobody at Weian is in a position to take the Headman's Authority's place: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+  A: Nobody at Weian is in a position to take the place of the Headman's Authority: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+
+C	dp-hamlet-86	print.power.power.succession	SOUND
+  B: Nobody at Weian is in a position to take the Headman's Authority's place: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+  A: Nobody at Weian is in a position to take the place of the Headman's Authority: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+
+C	dp-hamlet-9	public.blocks.power:desk.successionRisk.sentence	SOUND
+  B: Nobody at Ribattappa is in a position to take the Headman's Authority's place: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+  A: Nobody at Ribattappa is in a position to take the place of the Headman's Authority: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+
+C	dp-hamlet-9	print.power.power.succession	SOUND
+  B: Nobody at Ribattappa is in a position to take the Headman's Authority's place: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+  A: Nobody at Ribattappa is in a position to take the place of the Headman's Authority: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+
+C	dp-hamlet-90	public.blocks.power:desk.successionHold.sentence	SOUND
+  B: The hamlet's backing makes the Headman's Authority's hold at Nordby hard to shake; a challenge that would be serious elsewhere is a nuisance here.
+  A: The hamlet's backing makes the hold of the Headman's Authority at Nordby hard to shake; a challenge that would be serious elsewhere is a nuisance here.
+
+C	dp-hamlet-94	public.blocks.power:desk.successionHold.sentence	SOUND
+  B: The hamlet's backing makes the Headman's Authority's hold at Rotsee hard to shake; a challenge that would be serious elsewhere is a nuisance here.
+  A: The hamlet's backing makes the hold of the Headman's Authority at Rotsee hard to shake; a challenge that would be serious elsewhere is a nuisance here.
+
+C	dp-hamlet-99	record.npcs[0].goal.short	SOUND
+  B: Get the lord's steward's office through the season without borrowing.
+  A: Get the steward's office through the season without borrowing.
+
+C	dp-metropolis-1	record.relationships[68].description	SOUND
+  B: Everyone thinks Hadrian Strabo made their own way. In fact Jucundus Plancus paid for every step, and Hadrian Strabo takes the guild's master's instructions without argument.
+  A: Everyone thinks Hadrian Strabo made their own way. In fact Jucundus Plancus paid for every step, and Hadrian Strabo takes Plancus's instructions without argument.
+
+C	dp-metropolis-103	record.relationships[47].tension	SOUND
+  B: Manduhai Noyakin has begun teaching Namsrai Besud's methods as the guild's master's own.
+  A: Manduhai Noyakin has begun teaching Namsrai Besud's methods as Noyakin's own.
+
+C	dp-metropolis-105	record.relationships[76].description	SOUND
+  B: Chiyo Deng needs Noriko Im's seal on certain papers; the tailor needs the hospital's master's silence about certain others. Neither has asked for more than the other could pay.
+  A: Chiyo Deng needs Noriko Im's seal on certain papers; the tailor needs Deng's silence about certain others. Neither has asked for more than the other could pay.
+
+C	dp-metropolis-105	print.power.power.criminalUnderside	SOUND
+  B: A share of what arrives at Xinba never appears at the gate, and the dues on it are never paid. Some of the Democratic assembly's people at Xinba are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: A share of what arrives at Xinba never appears at the gate, and the dues on it are never paid. Some of the Democratic assembly's people at Xinba are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+C	dp-metropolis-107	record.relationships[73].tension	SOUND
+  B: Yax Uc has asked Sak Zaz for a vote against the network's head's own interests. It is the first payment Yax Uc has asked for.
+  A: Yax Uc has asked Sak Zaz for a vote against Zaz's own interests. It is the first payment Yax Uc has asked for.
+
+C	dp-metropolis-111	print.power.power.criminalUnderside	SOUND
+  B: Some of the goods that reach Ravenstrand pay none of the dues owed on them. Some of the Grand Council's people at Ravenstrand are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: Some of the goods that reach Ravenstrand pay none of the dues owed on them. Some of the Grand Council's people at Ravenstrand are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+C	dp-metropolis-114	record.relationships[25].description	SOUND
+  B: Mei Feng still keeps Yuna Lin's hours and the hospital's master's ledger format. Everyone who deals with Mei Feng recognises the teacher.
+  A: Mei Feng still keeps Yuna Lin's hours and Lin's ledger format. Everyone who deals with Mei Feng recognises the teacher.
+
+C	dp-metropolis-118	print.power.power.criminalUnderside	SOUND
+  B: Goods reach Altaurbs unrecorded: the cargo lists are false, and the dues owed on them are never paid. Some of the Grand Council's people at Altaurbs are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: Goods reach Altaurbs unrecorded: the cargo lists are false, and the dues owed on them are never paid. Some of the Grand Council's people at Altaurbs are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+C	dp-metropolis-119	record.relationships[75].description	SOUND
+  B: Zaachila Nacxit cannot finish what they have started without Pakal Oc's help, and the chancellor cannot finish theirs without the hospital's master's. Neither lets the other forget it.
+  A: Zaachila Nacxit cannot finish what they have started without Pakal Oc's help, and the chancellor cannot finish theirs without Nacxit's. Neither lets the other forget it.
+
+C	dp-metropolis-12	record.relationships[80].description	SOUND
+  B: Radomir Kudryavtsev needs Timofei Simić's seal on certain papers; the dragon needs the hospital's master's silence about certain others. Neither has asked for more than the other could pay.
+  A: Radomir Kudryavtsev needs Timofei Simić's seal on certain papers; the dragon needs Kudryavtsev's silence about certain others. Neither has asked for more than the other could pay.
+
+C	dp-metropolis-124	record.relationships[48].description	SOUND
+  B: Rain Vukub needs Chimalxochitl Kanil's seal on certain papers; the collier needs the hospital's master's silence about certain others. Neither has asked for more than the other could pay.
+  A: Rain Vukub needs Chimalxochitl Kanil's seal on certain papers; the collier needs Vukub's silence about certain others. Neither has asked for more than the other could pay.
+
+C	dp-metropolis-128	record.relationships[47].description	SOUND
+  B: Lin Deng takes Tao Yamada's silver every quarter day and looks the other way when the network's head's people pass. Each treats the other as a reliable colleague.
+  A: Lin Deng takes Tao Yamada's silver every quarter day and looks the other way when Yamada's people pass. Each treats the other as a reliable colleague.
+
+C	dp-metropolis-128	record.relationships[76].description	SOUND
+  B: Noriko Suzuki needs Narae Pan's seal on certain papers; the whisper broker needs the guild's master's silence about certain others. Neither has asked for more than the other could pay.
+  A: Noriko Suzuki needs Narae Pan's seal on certain papers; the whisper broker needs Suzuki's silence about certain others. Neither has asked for more than the other could pay.
+
+C	dp-metropolis-129	record.relationships[21].description	SOUND
+  B: Bodvar Haraldsson knows something about Nori Randversson that would end the hospital's master's standing here. Bodvar Haraldsson has never threatened to tell, and has never needed to.
+  A: Bodvar Haraldsson knows something about Nori Randversson that would end Randversson's standing here. Bodvar Haraldsson has never threatened to tell, and has never needed to.
+
+C	dp-metropolis-131	print.power.power.criminalUnderside	SOUND
+  B: Goods reach Wadihaven unrecorded: the cargo lists are false, and the dues owed on them are never paid. Some of the Grand Guild Consortium's people at Wadihaven are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: Goods reach Wadihaven unrecorded: the cargo lists are false, and the dues owed on them are never paid. Some of the Grand Guild Consortium's people at Wadihaven are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+C	dp-metropolis-135	record.relationships[50].description	SOUND
+  B: Zara ibn Tufayl needs Fariha al-Misri's seal on certain papers; the banker needs the network's head's silence about certain others. Neither has asked for more than the other could pay.
+  A: Zara ibn Tufayl needs Fariha al-Misri's seal on certain papers; the banker needs Tufayl's silence about certain others. Neither has asked for more than the other could pay.
+
+C	dp-metropolis-141	record.relationships[85].description	SOUND
+  B: Satish Shah still keeps Veerendra Sahni's hours and the guild's master's ledger format. Everyone who deals with Satish Shah recognises the teacher.
+  A: Satish Shah still keeps Veerendra Sahni's hours and Sahni's ledger format. Everyone who deals with Satish Shah recognises the teacher.
+
+C	dp-metropolis-144	record.relationships[18].tension	SOUND
+  B: Jade Lahun has begun to count the debt Rain Tzuc owes among the guild's master's assets, and has had it written down before witnesses.
+  A: Jade Lahun has begun to count the debt Rain Tzuc owes among Lahun's assets, and has had it written down before witnesses.
+
+C	dp-metropolis-147	record.relationships[31].description	SOUND
+  B: Regulus Merula needs Aelius Zoilus's seal on certain papers; the cooper needs the hospital's master's silence about certain others. Neither has asked for more than the other could pay.
+  A: Regulus Merula needs Aelius Zoilus's seal on certain papers; the cooper needs Merula's silence about certain others. Neither has asked for more than the other could pay.
+
+C	dp-metropolis-149	print.power.power.criminalUnderside	SOUND
+  B: Some of the goods that reach Gantulgakotan pay none of the dues owed on them. Some of the Grand Merchant Oligarchy's people at Gantulgakotan are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: Some of the goods that reach Gantulgakotan pay none of the dues owed on them. Some of the Grand Merchant Oligarchy's people at Gantulgakotan are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+C	dp-metropolis-16	record.relationships[19].description	SOUND
+  B: Waltrada Ott still keeps Anna Goldstein's hours and the hospital's master's ledger format. Everyone who deals with Waltrada Ott recognises the teacher.
+  A: Waltrada Ott still keeps Anna Goldstein's hours and Goldstein's ledger format. Everyone who deals with Waltrada Ott recognises the teacher.
+
+C	dp-metropolis-17	record.relationships[3].description	SOUND
+  B: Everyone thinks Razan al-Jazari made their own way. In fact Halima ibn Umar paid for every step, and Razan al-Jazari takes the network's head's instructions without argument.
+  A: Everyone thinks Razan al-Jazari made their own way. In fact Halima ibn Umar paid for every step, and Razan al-Jazari takes Umar's instructions without argument.
+
+C	dp-metropolis-25	record.relationships[13].description	SOUND
+  B: Everyone thinks Snake Yam made their own way. In fact Tezozomoc Xoc paid for every step, and Snake Yam takes the guild's master's instructions without argument.
+  A: Everyone thinks Snake Yam made their own way. In fact Tezozomoc Xoc paid for every step, and Snake Yam takes Xoc's instructions without argument.
+
+C	dp-metropolis-25	record.relationships[45].description	SOUND
+  B: Venus Woman Jalach needs Itzpapalotl Coh's seal on certain papers; the senior abbess needs the network's head's silence about certain others. Neither has asked for more than the other could pay.
+  A: Venus Woman Jalach needs Itzpapalotl Coh's seal on certain papers; the senior abbess needs Jalach's silence about certain others. Neither has asked for more than the other could pay.
+
+C	dp-metropolis-29	print.power.power.criminalUnderside	SOUND
+  B: The criminal interest at Fionnham sells safety from itself and calls it something else, steadily, to the same people, every season. Some of the Grand Merchant Oligarchy's people at Fionnham are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: The criminal interest at Fionnham sells safety from itself and calls it something else, steadily, to the same people, every season. Some of the Grand Merchant Oligarchy's people at Fionnham are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+C	dp-metropolis-34	record.relationships[18].tension	SOUND
+  B: Uinal Caan has begun teaching Lamat Nacxit's methods as the network's head's own.
+  A: Uinal Caan has begun teaching Lamat Nacxit's methods as Caan's own.
+
+C	dp-metropolis-39	record.relationships[17].tension	SOUND
+  B: Maeve MacDonald has begun to count the debt Tailte Gordon owes among the hospital's master's assets, and has had it written down before witnesses.
+  A: Maeve MacDonald has begun to count the debt Tailte Gordon owes among MacDonald's assets, and has had it written down before witnesses.
+
+C	dp-metropolis-40	record.relationships[55].description	SOUND
+  B: Irina Sokolov cannot finish what they have started without Irina Borisov's help, and the chief magistrate cannot finish theirs without the network's head's. Neither lets the other forget it.
+  A: Irina Sokolov cannot finish what they have started without Irina Borisov's help, and the chief magistrate cannot finish theirs without Sokolov's. Neither lets the other forget it.
+
+C	dp-metropolis-54	print.power.power.criminalUnderside	SOUND
+  B: A share of what arrives at Devamala never appears at the gate, and the dues on it are never paid. Some of the Grand Council's people at Devamala are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: A share of what arrives at Devamala never appears at the gate, and the dues on it are never paid. Some of the Grand Council's people at Devamala are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+C	dp-metropolis-57	print.power.power.criminalUnderside	SOUND
+  B: A share of what arrives at Navapalli never appears at the gate, and the dues on it are never paid. Some of the Grand Council's people at Navapalli are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: A share of what arrives at Navapalli never appears at the gate, and the dues on it are never paid. Some of the Grand Council's people at Navapalli are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+C	dp-metropolis-59	record.relationships[10].tension	SOUND
+  B: Shiv Acharya has begun to count the debt Pradeep Mahajan owes among the network's head's assets, and has had it written down before witnesses.
+  A: Shiv Acharya has begun to count the debt Pradeep Mahajan owes among Acharya's assets, and has had it written down before witnesses.
+
+C	dp-metropolis-69	record.relationships[84].description	SOUND
+  B: Egilbert Kaiser cannot finish what they have started without Uto Waldmann's help, and the college master cannot finish theirs without the guild's master's. Neither lets the other forget it.
+  A: Egilbert Kaiser cannot finish what they have started without Uto Waldmann's help, and the college master cannot finish theirs without Kaiser's. Neither lets the other forget it.
+
+C	dp-metropolis-7	print.power.power.criminalUnderside	SOUND
+  B: Goods reach Temürkum unrecorded: the cargo lists are false, and the dues owed on them are never paid. Some of the Royal Authority's people at Temürkum are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: Goods reach Temürkum unrecorded: the cargo lists are false, and the dues owed on them are never paid. Some of the Royal Authority's people at Temürkum are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+C	dp-metropolis-73	record.relationships[63].description	SOUND
+  B: Kassandra Chomatenos still keeps Eleni Chomatenos's hours and the network's head's ledger format. Everyone who deals with Kassandra Chomatenos recognises the teacher.
+  A: Kassandra Chomatenos still keeps Eleni Chomatenos's hours and Eleni's ledger format. Everyone who deals with Kassandra Chomatenos recognises the teacher.
+
+C	dp-metropolis-74	record.relationships[70].description	SOUND
+  B: Philippos Triakontaphyllos needs Ioasaph Vatatzes's seal on certain papers; the master baker needs the guild's master's silence about certain others. Neither has asked for more than the other could pay.
+  A: Philippos Triakontaphyllos needs Ioasaph Vatatzes's seal on certain papers; the master baker needs Triakontaphyllos's silence about certain others. Neither has asked for more than the other could pay.
+
+C	dp-metropolis-75	print.power.power.criminalUnderside	SOUND
+  B: A share of what arrives at Lykotopia never appears at the gate, and the dues on it are never paid. Some of the Grand Guild Consortium's people at Lykotopia are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: A share of what arrives at Lykotopia never appears at the gate, and the dues on it are never paid. Some of the Grand Guild Consortium's people at Lykotopia are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+C	dp-metropolis-76	print.power.power.criminalUnderside	SOUND
+  B: A share of what arrives at Tzultzin never appears at the gate, and the dues on it are never paid. Some of the Grand Merchant Oligarchy's people at Tzultzin are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: A share of what arrives at Tzultzin never appears at the gate, and the dues on it are never paid. Some of the Grand Merchant Oligarchy's people at Tzultzin are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+C	dp-metropolis-79	record.relationships[65].description	SOUND
+  B: Poulcheria Dalassenos needs Evanthia Synadenos's goodwill this year, and the woodcarver will need the network's head's the next. Both of them have counted the years.
+  A: Poulcheria Dalassenos needs Evanthia Synadenos's goodwill this year, and the woodcarver will need Dalassenos's the next. Both of them have counted the years.
+
+C	dp-metropolis-80	record.relationships[56].description	SOUND
+  B: Everyone thinks Rekha Mukherjee made their own way. In fact Leela Chatterjee paid for every step, and Rekha Mukherjee takes the network's head's instructions without argument.
+  A: Everyone thinks Rekha Mukherjee made their own way. In fact Leela Chatterjee paid for every step, and Rekha Mukherjee takes Chatterjee's instructions without argument.
+
+C	dp-metropolis-85	record.relationships[66].description	SOUND
+  B: Svetlana Čupić needs Zhanna Lazarev's seal on certain papers; the smelt master needs the network's head's silence about certain others. Neither has asked for more than the other could pay.
+  A: Svetlana Čupić needs Zhanna Lazarev's seal on certain papers; the smelt master needs Čupić's silence about certain others. Neither has asked for more than the other could pay.
+
+C	dp-metropolis-87	record.relationships[68].description	SOUND
+  B: Nabil al-Andalusi needs Fuad al-Umayyad's goodwill this year, and the chronicler will need the network's spider's the next. Both of them have counted the years.
+  A: Nabil al-Andalusi needs Fuad al-Umayyad's goodwill this year, and the chronicler will need al-Andalusi's the next. Both of them have counted the years.
+
+C	dp-metropolis-87	record.prominentRelationship.full	SOUND
+  B: Nabil al-Andalusi needs Fuad al-Umayyad's goodwill this year, and the chronicler will need the network's spider's the next. Both of them have counted the years.
+  A: Nabil al-Andalusi needs Fuad al-Umayyad's goodwill this year, and the chronicler will need al-Andalusi's the next. Both of them have counted the years.
+
+C	dp-metropolis-89	record.relationships[61].tension	SOUND
+  B: Chan Kanil has asked Yagul Paxbolon for a vote against the hospital's master's own interests. It is the first payment Chan Kanil has asked for.
+  A: Chan Kanil has asked Yagul Paxbolon for a vote against Paxbolon's own interests. It is the first payment Chan Kanil has asked for.
+
+C	dp-metropolis-90	record.relationships[14].tension	SOUND
+  B: Ravi Nayak has asked Rajan Acharya for a vote against the hospital's master's own interests. It is the first payment Ravi Nayak has asked for.
+  A: Ravi Nayak has asked Rajan Acharya for a vote against Acharya's own interests. It is the first payment Ravi Nayak has asked for.
+
+C	dp-metropolis-91	print.power.power.criminalUnderside	SOUND
+  B: Some of the goods that reach Wadizamin pay none of the dues owed on them. Some of the Grand Merchant Oligarchy's people at Wadizamin are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: Some of the goods that reach Wadizamin pay none of the dues owed on them. Some of the Grand Merchant Oligarchy's people at Wadizamin are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+C	dp-metropolis-97	print.power.power.criminalUnderside	SOUND
+  B: Some of the goods that reach Somagiri pay none of the dues owed on them. Some of the Ducal Governorship's people at Somagiri are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: Some of the goods that reach Somagiri pay none of the dues owed on them. Some of the Ducal Governorship's people at Somagiri are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+C	dp-thorp-102	record.npcs[0].goal.long	SOUND
+  B: Leave more money at the lord's reeve's office than there was when they took charge.
+  A: Leave more money at the reeve's office than there was when they took charge.
+
+C	dp-thorp-110	record.npcs[0].goal.long	SOUND
+  B: Leave more money at the lord's reeve's office than there was when they took charge.
+  A: Leave more money at the reeve's office than there was when they took charge.
+
+C	dp-thorp-127	record.npcs[0].goal.long	SOUND
+  B: See the lord's reeve's office out of debt for good, with money set aside for bad years.
+  A: See the reeve's office out of debt for good, with money set aside for bad years.
+
+C	dp-thorp-134	record.npcs[0].goal.long	SOUND
+  B: Make the lord's reeve's office too sound for any creditor to threaten.
+  A: Make the reeve's office too sound for any creditor to threaten.
+
+C	dp-thorp-148	record.npcs[0].goal.short	SOUND
+  B: Pay every hand at the lord's reeve's office in full and on time this season.
+  A: Pay every hand at the reeve's office in full and on time this season.
+
+C	dp-thorp-45	record.npcs[0].goal.short	SOUND
+  B: Get the lord's reeve's office through the season without borrowing.
+  A: Get the reeve's office through the season without borrowing.
+
+C	dp-thorp-59	record.npcs[0].goal.short	SOUND
+  B: Get the lord's reeve's office through the season without borrowing.
+  A: Get the reeve's office through the season without borrowing.
+
+C	dp-thorp-97	record.npcs[0].goal.short	SOUND
+  B: Pay every hand at the lord's reeve's office in full and on time this season.
+  A: Pay every hand at the reeve's office in full and on time this season.
+
+C	dp-town-109	record.npcs[3].goal.long	SOUND
+  B: See the lord's appointee's office out of debt for good, with money set aside for bad years.
+  A: See the appointee's office out of debt for good, with money set aside for bad years.
+
+C	dp-town-120	record.relationships[15].description	SOUND
+  B: Ciara O'Flaherty blames Rónnat O'Riordan for a death in the carriers' master's family. Rónnat O'Riordan has never denied it.
+  A: Ciara O'Flaherty blames Rónnat O'Riordan for a death in O'Flaherty's family. Rónnat O'Riordan has never denied it.
+
+C	dp-town-15	record.npcs[2].goal.long	SOUND
+  B: See the lord's appointee's office out of debt for good, with money set aside for bad years.
+  A: See the appointee's office out of debt for good, with money set aside for bad years.
+
+C	dp-town-23	record.npcs[1].goal.long	SOUND
+  B: See the lord's appointee's office out of debt for good, with money set aside for bad years.
+  A: See the appointee's office out of debt for good, with money set aside for bad years.
+
+C	dp-town-29	record.npcs[1].goal.short	SOUND
+  B: Collect what is owed to the lord's appointee's office before the season is out.
+  A: Collect what is owed to the appointee's office before the season is out.
+
+C	dp-town-4	record.npcs[2].goal.long	SOUND
+  B: See the lord's appointee's office out of debt for good, with money set aside for bad years.
+  A: See the appointee's office out of debt for good, with money set aside for bad years.
+
+C	dp-town-44	record.npcs[1].goal.long	SOUND
+  B: See the lord's appointee's office out of debt for good, with money set aside for bad years.
+  A: See the appointee's office out of debt for good, with money set aside for bad years.
+
+C	dp-town-6	record.npcs[2].goal.short	SOUND
+  B: Get the lord's appointee's office through the season without borrowing.
+  A: Get the appointee's office through the season without borrowing.
+
+C	dp-town-62	record.relationships[2].tension	SOUND
+  B: Waitling Burke has begun to count the debt Gareth Hennessy owes among the carriers' master's assets, and has had it written down before witnesses.
+  A: Waitling Burke has begun to count the debt Gareth Hennessy owes among Burke's assets, and has had it written down before witnesses.
+
+C	dp-town-64	record.relationships[21].description	SOUND
+  B: Anjali Gupta wants Ganga Basu's position, and the master of the hunt wants the carriers' master's reputation. They are civil in public and unforgiving in private.
+  A: Anjali Gupta wants Ganga Basu's position, and the master of the hunt wants Gupta's reputation. They are civil in public and unforgiving in private.
+
+C	dp-town-7	record.npcs[1].goal.short	SOUND
+  B: Get the lord's appointee's office through the season without borrowing.
+  A: Get the appointee's office through the season without borrowing.
+
+C	dp-town-77	print.power.power.criminalUnderside	SOUND
+  B: Goods reach Dionchorion unrecorded: the cargo lists are false, and the dues owed on them are never paid. Some of the Town Council's people at Dionchorion are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: Goods reach Dionchorion unrecorded: the cargo lists are false, and the dues owed on them are never paid. Some of the Town Council's people at Dionchorion are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+C	dp-village-103	public.blocks.power:governance.text	SOUND
+  B: The Headman's Authority governs Buyanköl. Its seat is held by Enkhtuya Jadaran, the dairy farmer and Headman. Insecurity has left the Headman's Authority's right to rule contested in Buyanköl. The Military Party no longer takes its orders. Alone, the hall can no longer make its orders hold, though it still gives them. Conscription has taken the workers, and every household is short-handed. Crown supply carts take what they need first, and local needs come second. Prices have risen and will rise again. A crown officer came last week and left with a list of what will be taken next month, and those in charge signed it because they saw no other choice.
+  A: The Headman's Authority governs Buyanköl. Its seat is held by Enkhtuya Jadaran, the dairy farmer and Headman. Insecurity has left the right of the Headman's Authority to rule contested in Buyanköl. The Military Party no longer takes its orders. Alone, the hall can no longer make its orders hold, though it still gives them. Conscription has taken the workers, and every household is short-handed. Crown supply carts take what they need first, and local needs come second. Prices have risen and will rise again. A crown officer came last week and left with a list of what will be taken next month, and those in charge signed it because they saw no other choice.
+
+C	dp-village-132	record.powerStructure.factionRelationships[0].narrative	SOUND
+  B: The Headman's Authority holds the seat and collects the taxes; the Religious Authorities tell people that the Headman's Authority's rule is right and ordained. Each props up the other.
+  A: The Headman's Authority holds the seat and collects the taxes; the Religious Authorities tell people that the rule of the Headman's Authority is right and ordained. Each props up the other.
+
+C	dp-village-132	public.blocks.power:desk.stabilityHeader.sentence	SOUND
+  B: Anyone doing business at Birmela needs one name, the Headman's Authority's, and can plan a season ahead on its word.
+  A: Anyone doing business at Birmela needs one name, that of the Headman's Authority, and can plan a season ahead on its word.
+
+C	dp-village-136	record.npcs[1].goal.long	SOUND
+  B: Leave more money at the lord's steward's office than there was when they took charge.
+  A: Leave more money at the steward's office than there was when they took charge.
+
+C	dp-village-137	record.powerStructure.factionRelationships[0].narrative	SOUND
+  B: The Headman's Authority holds the seat and collects the taxes; the Religious Authorities have long told people that the Headman's Authority's rule is right and ordained, but the two are now at odds over an account of public money.
+  A: The Headman's Authority holds the seat and collects the taxes; the Religious Authorities have long told people that the rule of the Headman's Authority is right and ordained, but the two are now at odds over an account of public money.
+
+C	dp-village-144	record.powerStructure.factionRelationships[0].narrative	SOUND
+  B: The Headman's Authority holds the seat and collects the taxes; the Religious Authorities tell people that the Headman's Authority's rule is right and ordained. Each props up the other.
+  A: The Headman's Authority holds the seat and collects the taxes; the Religious Authorities tell people that the rule of the Headman's Authority is right and ordained. Each props up the other.
+
+C	dp-village-144	public.blocks.power:desk.stabilityHeader.sentence	SOUND
+  B: Anyone doing business at Gortby needs one name, the Headman's Authority's, and can plan a season ahead on its word.
+  A: Anyone doing business at Gortby needs one name, that of the Headman's Authority, and can plan a season ahead on its word.
+
+C	dp-village-17	record.powerStructure.factionRelationships[0].narrative	SOUND
+  B: The Headman's Authority holds the seat and collects the taxes; the Religious Authorities tell people that the Headman's Authority's rule is right and ordained. Each props up the other.
+  A: The Headman's Authority holds the seat and collects the taxes; the Religious Authorities tell people that the rule of the Headman's Authority is right and ordained. Each props up the other.
+
+C	dp-village-22	record.powerStructure.factionRelationships[0].narrative	SOUND
+  B: The Headman's Authority holds the seat and collects the taxes; the Religious Authorities have long told people that the Headman's Authority's rule is right and ordained, but the two are now at odds over precedence at public gatherings.
+  A: The Headman's Authority holds the seat and collects the taxes; the Religious Authorities have long told people that the rule of the Headman's Authority is right and ordained, but the two are now at odds over precedence at public gatherings.
+
+C	dp-village-22	public.blocks.power:desk.stabilityHeader.sentence	SOUND
+  B: Anyone doing business at Devagram needs one name, the Headman's Authority's, and can plan a season ahead on its word.
+  A: Anyone doing business at Devagram needs one name, that of the Headman's Authority, and can plan a season ahead on its word.
+
+C	dp-village-31	record.powerStructure.factionRelationships[0].narrative	SOUND
+  B: The Headman's Authority holds the seat and collects the taxes; the Religious Authorities tell people that the Headman's Authority's rule is right and ordained. Each props up the other.
+  A: The Headman's Authority holds the seat and collects the taxes; the Religious Authorities tell people that the rule of the Headman's Authority is right and ordained. Each props up the other.
+
+C	dp-village-31	public.blocks.power:desk.stabilityHeader.sentence	SOUND
+  B: Anyone doing business at Roccapolis needs one name, the Headman's Authority's, and can plan a season ahead on its word.
+  A: Anyone doing business at Roccapolis needs one name, that of the Headman's Authority, and can plan a season ahead on its word.
+
+C	dp-village-33	record.powerStructure.factionRelationships[1].narrative	SOUND
+  B: The Headman's Authority holds the seat and collects the taxes; the Religious Authorities have long told people that the Headman's Authority's rule is right and ordained, but the two are now at odds over ownership of a disputed building.
+  A: The Headman's Authority holds the seat and collects the taxes; the Religious Authorities have long told people that the rule of the Headman's Authority is right and ordained, but the two are now at odds over ownership of a disputed building.
+
+C	dp-village-33	public.blocks.power:desk.stabilityHeader.sentence	SOUND
+  B: Anyone doing business at Itzatepec needs one name, the Headman's Authority's, and can plan a season ahead on its word.
+  A: Anyone doing business at Itzatepec needs one name, that of the Headman's Authority, and can plan a season ahead on its word.
+
+C	dp-village-44	public.blocks.power:desk.successionHold.sentence	SOUND
+  B: Public rejection is breaking the Headman's Authority's grip at Miroko faster than the Headman's Authority can shore it up, and every measure taken to shore it up costs a little more of what remains.
+  A: Public rejection is breaking the grip of the Headman's Authority at Miroko faster than the Headman's Authority can shore it up, and every measure taken to shore it up costs a little more of what remains.
+
+C	dp-village-47	record.powerStructure.factionRelationships[1].narrative	SOUND
+  B: The Headman's Authority holds the seat and collects the taxes; the Religious Authorities tell people that the Headman's Authority's rule is right and ordained. Each props up the other.
+  A: The Headman's Authority holds the seat and collects the taxes; the Religious Authorities tell people that the rule of the Headman's Authority is right and ordained. Each props up the other.
+
+C	dp-village-47	public.blocks.power:desk.successionHold.sentence	SOUND
+  B: The village's backing makes the Headman's Authority's hold at Neadwell hard to shake; a challenge that would be serious elsewhere is a nuisance here.
+  A: The village's backing makes the hold of the Headman's Authority at Neadwell hard to shake; a challenge that would be serious elsewhere is a nuisance here.
+
+C	dp-village-56	record.npcs[2].goal.short	SOUND
+  B: Get the lord's steward's office through the season without borrowing.
+  A: Get the steward's office through the season without borrowing.
+
+C	dp-village-58	record.relationships[12].tension	SOUND
+  B: Statius Aurelius has begun to count the debt Plancus Celer owes among the bloc's speaker's assets, and has had it written down before witnesses.
+  A: Statius Aurelius has begun to count the debt Plancus Celer owes among Aurelius's assets, and has had it written down before witnesses.
+
+C	dp-village-66	record.powerStructure.factionRelationships[0].narrative	SOUND
+  B: The Headman's Authority holds the seat and collects the taxes; the Religious Authorities tell people that the Headman's Authority's rule is right and ordained. Each props up the other.
+  A: The Headman's Authority holds the seat and collects the taxes; the Religious Authorities tell people that the rule of the Headman's Authority is right and ordained. Each props up the other.
+
+C	dp-village-66	public.blocks.power:desk.successionHold.sentence	SOUND
+  B: The village's backing makes the Headman's Authority's hold at Torriporta hard to shake; a challenge that would be serious elsewhere is a nuisance here.
+  A: The village's backing makes the hold of the Headman's Authority at Torriporta hard to shake; a challenge that would be serious elsewhere is a nuisance here.
+
+C	dp-village-67	public.blocks.power:governance.text	SOUND
+  B: The Headman's Authority answers to the occupiers of Saraitala. Its seat is held by Unurtsetseg Jalayir, the alewife and Headman. In Saraitala, the Headman's Authority's right to rule is contested. Poverty and the curfew are the reason. The hall is at odds with the Occupation Authority. The hall still gives its orders, but it can no longer make them hold alone. An occupying officer arrested a local elder for "seditious speech". The Headman's Authority filed a formal protest. The protest was returned unread.
+  A: The Headman's Authority answers to the occupiers of Saraitala. Its seat is held by Unurtsetseg Jalayir, the alewife and Headman. In Saraitala, the right of the Headman's Authority to rule is contested. Poverty and the curfew are the reason. The hall is at odds with the Occupation Authority. The hall still gives its orders, but it can no longer make them hold alone. An occupying officer arrested a local elder for "seditious speech". The Headman's Authority filed a formal protest. The protest was returned unread.
+
+C	dp-village-68	record.powerStructure.recentConflict	SOUND
+  B: Two powers have stopped coming to the Headman's Authority's meetings. Each makes its own decisions now, and the others overturn them within days.
+  A: Two powers have stopped coming to the meetings of the Headman's Authority. Each makes its own decisions now, and the others overturn them within days.
+
+C	dp-village-68	public.blocks.power:governance.text	SOUND
+  B: The Headman's Authority governs Mönkhobo. Its seat is held by Ughul Naiman, the quarry master and Headman. Insecurity has left the Headman's Authority's right to rule contested in Mönkhobo. The Religious Authorities are at odds with it. Without bargaining with them first, the hall settles nothing large. The Independent Bloc claims the right to rule by other means, and no longer comes to the hall's meetings. Each side now makes its own decisions, and within days the others overturn them.
+  A: The Headman's Authority governs Mönkhobo. Its seat is held by Ughul Naiman, the quarry master and Headman. Insecurity has left the right of the Headman's Authority to rule contested in Mönkhobo. The Religious Authorities are at odds with it. Without bargaining with them first, the hall settles nothing large. The Independent Bloc claims the right to rule by other means, and no longer comes to the hall's meetings. Each side now makes its own decisions, and within days the others overturn them.
+
+C	dp-village-69	record.powerStructure.recentConflict	SOUND
+  B: Two powers have stopped coming to the Headman's Authority's meetings. Each makes its own decisions now, and the others overturn them within days.
+  A: Two powers have stopped coming to the meetings of the Headman's Authority. Each makes its own decisions now, and the others overturn them within days.
+
+C	dp-village-69	public.blocks.power:desk.successionHold.sentence	SOUND
+  B: Public rejection is breaking the Headman's Authority's grip at Steinfurt faster than the Headman's Authority can shore it up, and every measure taken to shore it up costs a little more of what remains.
+  A: Public rejection is breaking the grip of the Headman's Authority at Steinfurt faster than the Headman's Authority can shore it up, and every measure taken to shore it up costs a little more of what remains.
+
+C	dp-village-69	public.blocks.power:governance.text	SOUND
+  B: Kunigunde Richter, the innkeeper and Headman, holds the seat of the Headman's Authority. The Headman's Authority governs Steinfurt. In Steinfurt, the Headman's Authority's right to rule is contested. Insecurity is the reason. The hall is at odds with the Religious Authorities. Without bargaining with them first, the hall settles nothing large. The Independent Bloc claims the right to rule by other means, and no longer comes to the hall's meetings. Each side makes its own decisions now, and the others overturn them within days.
+  A: Kunigunde Richter, the innkeeper and Headman, holds the seat of the Headman's Authority. The Headman's Authority governs Steinfurt. In Steinfurt, the right of the Headman's Authority to rule is contested. Insecurity is the reason. The hall is at odds with the Religious Authorities. Without bargaining with them first, the hall settles nothing large. The Independent Bloc claims the right to rule by other means, and no longer comes to the hall's meetings. Each side makes its own decisions now, and the others overturn them within days.
+
+C	dp-village-76	record.npcs[1].goal.short	SOUND
+  B: Collect what is owed to the lord's steward's office before the season is out.
+  A: Collect what is owed to the steward's office before the season is out.
+
+V	dp-city-101	record.relationships[11].description	SOUND
+  B: Yun Watanabe needs Hiroshi Wu's seal on certain papers; the luxury merchant needs the hospital's master's silence about certain others. Neither has asked for more than the other could pay.
+  A: Yun Watanabe needs Hiroshi Wu's seal on certain papers; the luxury merchant needs Watanabe's silence about certain others. Neither has asked for more than the other could pay.
+
+V	dp-city-103	print.power.power.criminalUnderside	SOUND
+  B: A share of what arrives at Megaikon never appears at the gate, and the dues on it are never paid. Some of the Council of Syndics's people at Megaikon are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: A share of what arrives at Megaikon never appears at the gate, and the dues on it are never paid. Some of the Council of Syndics's people at Megaikon are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+V	dp-city-109	print.power.power.criminalUnderside	SOUND
+  B: Goods reach Chinggisnuur unrecorded: the cargo lists are false, and the dues owed on them are never paid. Some of the Council of Syndics's people at Chinggisnuur are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: Goods reach Chinggisnuur unrecorded: the cargo lists are false, and the dues owed on them are never paid. Some of the Council of Syndics's people at Chinggisnuur are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+V	dp-city-11	print.power.power.criminalUnderside	SOUND
+  B: Somebody at Dunholme runs an illegal business big enough to matter, and nobody will say exactly what it is. Some of the Merchant City Council's people at Dunholme are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: Somebody at Dunholme runs an illegal business big enough to matter, and nobody will say exactly what it is. Some of the Merchant City Council's people at Dunholme are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+V	dp-city-115	print.power.power.criminalUnderside	SOUND
+  B: With everyone's mind on the present danger, nobody at Cathsike is watching its officials, and they are paid little enough to be bought. Somebody at Cathsike does very well out of business nobody asks about; the money is all anyone sees. Some of the Democratic assembly's people at Cathsike are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: With everyone's mind on the present danger, nobody at Cathsike is watching its officials, and they are paid little enough to be bought. Somebody at Cathsike does very well out of business nobody asks about; the money is all anyone sees. Some of the Democratic assembly's people at Cathsike are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+V	dp-city-120	record.relationships[25].description	SOUND
+  B: Zosime Hexamilites needs Melane Angelos's seal on certain papers; the district madam needs the exchange's steward's silence about certain others. Neither has asked for more than the other could pay.
+  A: Zosime Hexamilites needs Melane Angelos's seal on certain papers; the district madam needs Hexamilites's silence about certain others. Neither has asked for more than the other could pay.
+
+V	dp-city-120	print.power.power.criminalUnderside	SOUND
+  B: Some of the goods that reach Palaiochori pay none of the dues owed on them. Some of the Council of Syndics's people at Palaiochori are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: Some of the goods that reach Palaiochori pay none of the dues owed on them. Some of the Council of Syndics's people at Palaiochori are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+V	dp-city-121	record.relationships[10].description	SOUND
+  B: Walpurga Volso blames Maesia Paullus for a death in the exchange's steward's family. Maesia Paullus has never denied it.
+  A: Walpurga Volso blames Maesia Paullus for a death in Volso's family. Maesia Paullus has never denied it.
+
+V	dp-city-123	record.relationships[14].description	SOUND
+  B: Quinn MacDonald blames Malcolm MacGregor for a death in the exchange's steward's family. Malcolm MacGregor has never denied it.
+  A: Quinn MacDonald blames Malcolm MacGregor for a death in MacDonald's family. Malcolm MacGregor has never denied it.
+
+V	dp-city-13	record.relationships[1].description	SOUND
+  B: Everyone thinks Mirjana Klimov made their own way. In fact Eva Komarov paid for every step, and Mirjana Klimov takes the network's head's instructions without argument.
+  A: Everyone thinks Mirjana Klimov made their own way. In fact Eva Komarov paid for every step, and Mirjana Klimov takes Komarov's instructions without argument.
+
+V	dp-city-13	record.relationships[17].tension	SOUND
+  B: Vesna Dmitriev has begun to count the debt Elica Nikolayev owes among the exchange's steward's assets, and has had it written down before witnesses.
+  A: Vesna Dmitriev has begun to count the debt Elica Nikolayev owes among Dmitriev's assets, and has had it written down before witnesses.
+
+V	dp-city-13	record.relationships[45].tension	SOUND
+  B: Elica Nikolayev has asked Eva Komarov for a vote against the network's head's own interests. It is the first payment Elica Nikolayev has asked for.
+  A: Elica Nikolayev has asked Eva Komarov for a vote against Komarov's own interests. It is the first payment Elica Nikolayev has asked for.
+
+V	dp-city-132	record.relationships[8].description	SOUND
+  B: Mansur al-Rashidi wants Samir al-Amin's position, and the watch commander wants the hospital's master's reputation. They are civil in public and unforgiving in private.
+  A: Mansur al-Rashidi wants Samir al-Amin's position, and the watch commander wants al-Rashidi's reputation. They are civil in public and unforgiving in private.
+
+V	dp-city-137	record.relationships[12].description	SOUND
+  B: Everyone thinks Dayaram Nayak made their own way. In fact Laxman Jha paid for every step, and Dayaram Nayak takes the network's head's instructions without argument.
+  A: Everyone thinks Dayaram Nayak made their own way. In fact Laxman Jha paid for every step, and Dayaram Nayak takes Jha's instructions without argument.
+
+V	dp-city-148	record.relationships[4].description	SOUND
+  B: Everyone thinks Helena Gruber made their own way. In fact Cäcilia Waldmann paid for every step, and Helena Gruber takes the network's spider's instructions without argument.
+  A: Everyone thinks Helena Gruber made their own way. In fact Cäcilia Waldmann paid for every step, and Helena Gruber takes Waldmann's instructions without argument.
+
+V	dp-city-149	record.relationships[52].description	SOUND
+  B: Jormundr Kolbeinsson needs Ubbi Nidudsson's seal on certain papers; the master smith needs the network's head's silence about certain others. Neither has asked for more than the other could pay.
+  A: Jormundr Kolbeinsson needs Ubbi Nidudsson's seal on certain papers; the master smith needs Kolbeinsson's silence about certain others. Neither has asked for more than the other could pay.
+
+V	dp-city-149	print.power.power.criminalUnderside	SOUND
+  B: Goods reach Tyraker unrecorded: the cargo lists are false, and the dues owed on them are never paid. Some of the Council of Syndics's people at Tyraker are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: Goods reach Tyraker unrecorded: the cargo lists are false, and the dues owed on them are never paid. Some of the Council of Syndics's people at Tyraker are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+V	dp-city-16	record.relationships[18].description	SOUND
+  B: Teamhair Ryan married into Kathleen Farrell the hospital's master's family. Kathleen Farrell (the hospital's master) opposed the match and still calls Teamhair Ryan by surname.
+  A: Teamhair Ryan married into the family of Kathleen Farrell (the hospital's master). Kathleen Farrell (the hospital's master) opposed the match and still calls Teamhair Ryan by surname.
+
+V	dp-city-16	record.relationships[18].tension	SOUND
+  B: Teamhair Ryan's child wants to marry into Kathleen Farrell the hospital's master's household. Neither parent has given an answer.
+  A: Teamhair Ryan's child wants to marry into the household of Kathleen Farrell (the hospital's master). Neither parent has given an answer.
+
+V	dp-city-19	record.relationships[28].tension	SOUND
+  B: Loudovika Skleros has begun teaching Juliana Makrembolites the tailor's methods as the network's head's own.
+  A: Loudovika Skleros has begun teaching Juliana Makrembolites the tailor's methods as Skleros's own.
+
+V	dp-city-25	record.relationships[35].description	SOUND
+  B: Gebhard Müller needs Wolfger Schröder's seal on certain papers; the theatre manager needs the exchange's steward's silence about certain others. Neither has asked for more than the other could pay.
+  A: Gebhard Müller needs Wolfger Schröder's seal on certain papers; the theatre manager needs Müller's silence about certain others. Neither has asked for more than the other could pay.
+
+V	dp-city-25	print.power.power.criminalUnderside	SOUND
+  B: Nothing at Goldstift is moving the city's view of its rulers: not the harvest, not the watch, not the walls. The Merchant Guild Council stands on the bare fact of being the Merchant Guild Council. Goods reach Goldstift unrecorded: the cargo lists are false, and the dues owed on them are never paid. Some of the Merchant Guild Council's people at Goldstift are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: Nothing at Goldstift is moving the city's view of its rulers: not the harvest, not the watch, not the walls. The Merchant Guild Council stands on the bare fact of being the Merchant Guild Council. Goods reach Goldstift unrecorded: the cargo lists are false, and the dues owed on them are never paid. Some of the Merchant Guild Council's people at Goldstift are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+V	dp-city-30	print.power.power.criminalUnderside	SOUND
+  B: Some of the goods that reach Naglfoss pay none of the dues owed on them. Some of the Noble Governorship's people at Naglfoss are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: Some of the goods that reach Naglfoss pay none of the dues owed on them. Some of the Noble Governorship's people at Naglfoss are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+V	dp-city-33	record.relationships[17].description	SOUND
+  B: Viktor Bauer needs Nikolaus Steinberg's seal on certain papers; the rookery boss needs the exchange's steward's silence about certain others. Neither has asked for more than the other could pay.
+  A: Viktor Bauer needs Nikolaus Steinberg's seal on certain papers; the rookery boss needs Bauer's silence about certain others. Neither has asked for more than the other could pay.
+
+V	dp-city-38	print.power.power.criminalUnderside	SOUND
+  B: Somebody at Naranjohuitz runs an illegal business big enough to matter, and nobody will say exactly what it is. Some of the Merchant oligarchy's people at Naranjohuitz are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: Somebody at Naranjohuitz runs an illegal business big enough to matter, and nobody will say exactly what it is. Some of the Merchant oligarchy's people at Naranjohuitz are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+V	dp-city-44	print.power.power.criminalUnderside	SOUND
+  B: Officials at Archopyrgos are paid little and watched less, and a purse offered in the right doorway would not be turned away. There is a second market at Archopyrgos running alongside the lawful one, selling what the lawful one may not and competing with it directly for the same custom. Some of the Democratic assembly's people at Archopyrgos are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: Officials at Archopyrgos are paid little and watched less, and a purse offered in the right doorway would not be turned away. There is a second market at Archopyrgos running alongside the lawful one, selling what the lawful one may not and competing with it directly for the same custom. Some of the Democratic assembly's people at Archopyrgos are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+V	dp-city-47	print.power.power.criminalUnderside	SOUND
+  B: The criminal interest at Dar-al-oasis sells safety from itself and calls it something else, steadily, to the same people, every season. Some of the Merchant Guild Council's people at Dar-al-oasis are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: The criminal interest at Dar-al-oasis sells safety from itself and calls it something else, steadily, to the same people, every season. Some of the Merchant Guild Council's people at Dar-al-oasis are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+V	dp-city-57	record.relationships[1].description	SOUND
+  B: Priya Panda takes Anusaya Parekh's silver every quarter day and looks the other way when the network's head's people pass. Each treats the other as a reliable colleague.
+  A: Priya Panda takes Anusaya Parekh's silver every quarter day and looks the other way when Parekh's people pass. Each treats the other as a reliable colleague.
+
+V	dp-city-57	print.power.power.criminalUnderside	SOUND
+  B: Nothing at Kashithal is moving the city's view of its rulers: not the harvest, not the watch, not the walls. The City Council stands on the bare fact of being the City Council. A share of what arrives at Kashithal never appears at the gate, and the dues on it are never paid. Some of the City Council's people at Kashithal are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: Nothing at Kashithal is moving the city's view of its rulers: not the harvest, not the watch, not the walls. The City Council stands on the bare fact of being the City Council. A share of what arrives at Kashithal never appears at the gate, and the dues on it are never paid. Some of the City Council's people at Kashithal are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+V	dp-city-64	record.relationships[4].description	SOUND
+  B: Wind Koh's people are never where Chimalli Tzuc's crew is working, and the network's head's silver pays for the favour.
+  A: Wind Koh's people are never where Chimalli Tzuc's crew is working, and Tzuc's silver pays for the favour.
+
+V	dp-city-67	record.relationships[14].tension	SOUND
+  B: Dietwald Hartmann has asked Meinhard Fuchs for a vote against the exchange's steward's own interests. It is the first payment Dietwald Hartmann has asked for.
+  A: Dietwald Hartmann has asked Meinhard Fuchs for a vote against Fuchs's own interests. It is the first payment Dietwald Hartmann has asked for.
+
+V	dp-city-81	record.relationships[17].description	SOUND
+  B: Mongke Önggirad wants Purev Borjigin's position, and the quarry master wants the exchange's steward's reputation. They are civil in public and unforgiving in private.
+  A: Mongke Önggirad wants Purev Borjigin's position, and the quarry master wants Önggirad's reputation. They are civil in public and unforgiving in private.
+
+V	dp-city-87	print.power.power.criminalUnderside	SOUND
+  B: Goods reach Goratsy unrecorded: the cargo lists are false, and the dues owed on them are never paid. Some of the Council of Syndics's people at Goratsy are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: Goods reach Goratsy unrecorded: the cargo lists are false, and the dues owed on them are never paid. Some of the Council of Syndics's people at Goratsy are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+V	dp-city-91	print.power.power.criminalUnderside	SOUND
+  B: Several perfectly ordinary businesses at Archodion exist to make criminal revenue look ordinary, and they are good enough at it to also turn a legitimate profit. Some of the Council of Syndics's people at Archodion are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: Several perfectly ordinary businesses at Archodion exist to make criminal revenue look ordinary, and they are good enough at it to also turn a legitimate profit. Some of the Council of Syndics's people at Archodion are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+V	dp-city-92	record.relationships[1].description	SOUND
+  B: Eindride Ingvarsson wants Inge Sigvaldsson's position, and the pawnbroker wants the network's head's reputation. They are civil in public and unforgiving in private.
+  A: Eindride Ingvarsson wants Inge Sigvaldsson's position, and the pawnbroker wants Ingvarsson's reputation. They are civil in public and unforgiving in private.
+
+V	dp-city-97	print.power.power.criminalUnderside	SOUND
+  B: Some of the goods that reach Víkland pay none of the dues owed on them. Some of the Council of Syndics's people at Víkland are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: Some of the goods that reach Víkland pay none of the dues owed on them. Some of the Council of Syndics's people at Víkland are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+V	dp-city-98	record.relationships[4].tension	SOUND
+  B: Pradeep Dubey has asked Shyam Seth for a vote against the exchange's steward's own interests. It is the first payment Pradeep Dubey has asked for.
+  A: Pradeep Dubey has asked Shyam Seth for a vote against Seth's own interests. It is the first payment Pradeep Dubey has asked for.
+
+V	dp-hamlet-115	public.blocks.power:desk.stabilityHeader.sentence	SOUND
+  B: Anyone doing business at Staroichi needs one name, the Headman's Authority's, and can plan a season ahead on its word.
+  A: Anyone doing business at Staroichi needs one name, that of the Headman's Authority, and can plan a season ahead on its word.
+
+V	dp-hamlet-115	public.blocks.power:desk.successionRisk.sentence	SOUND
+  B: Nobody at Staroichi is in a position to take the Headman's Authority's place: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+  A: Nobody at Staroichi is in a position to take the place of the Headman's Authority: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+
+V	dp-hamlet-115	public.blocks.power:governance.text	SOUND
+  B: The Headman's Authority governs Staroichi. Its seat is held by Todor Aleksandrov, the camp foreman and Headman. Poverty has left the Headman's Authority's right to rule contested in Staroichi. The most devout households want a say over who may trade and when, and not everyone here agrees.
+  A: The Headman's Authority governs Staroichi. Its seat is held by Todor Aleksandrov, the camp foreman and Headman. Poverty has left the right of the Headman's Authority to rule contested in Staroichi. The most devout households want a say over who may trade and when, and not everyone here agrees.
+
+V	dp-hamlet-115	print.power.power.succession	SOUND
+  B: Nobody at Staroichi is in a position to take the Headman's Authority's place: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+  A: Nobody at Staroichi is in a position to take the place of the Headman's Authority: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+
+V	dp-hamlet-124	record.npcs[0].goal.short	SOUND
+  B: Find the lord's steward's office one more source of money.
+  A: Find the steward's office one more source of money.
+
+V	dp-hamlet-126	record.npcs[0].goal.short	SOUND
+  B: Get the lord's steward's office through the season without borrowing.
+  A: Get the steward's office through the season without borrowing.
+
+V	dp-hamlet-128	public.blocks.power:desk.legitimacyLens.sentence	SOUND
+  B: Newcomers to Onongol are told early which door to knock on, and it is not the Headman's Authority's.
+  A: Newcomers to Onongol are told early which door to knock on, and it is not that of the Headman's Authority.
+
+V	dp-hamlet-128	public.blocks.power:desk.successionRisk.sentence	SOUND
+  B: Nobody at Onongol is in a position to take the Headman's Authority's place: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+  A: Nobody at Onongol is in a position to take the place of the Headman's Authority: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+
+V	dp-hamlet-128	print.power.power.succession	SOUND
+  B: Nobody at Onongol is in a position to take the Headman's Authority's place: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+  A: Nobody at Onongol is in a position to take the place of the Headman's Authority: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+
+V	dp-hamlet-129	public.blocks.power:desk.legitimacyLens.sentence	SOUND
+  B: Newcomers to Niederthal are told early which door to knock on, and it is not the Headman's Authority's.
+  A: Newcomers to Niederthal are told early which door to knock on, and it is not that of the Headman's Authority.
+
+V	dp-hamlet-129	public.blocks.power:governance.text	SOUND
+  B: Niederthal is governed by the Headman's Authority. Reinhard Klein, the headman, holds its seat. Few in Niederthal still accept the Headman's Authority's right to rule. Poverty and insecurity have cost it its standing. The last harvest failed badly. What remains is being rationed by whoever holds the stores. Neighbours who shared meals last winter are watching each other carefully.
+  A: Niederthal is governed by the Headman's Authority. Reinhard Klein, the headman, holds its seat. Few in Niederthal still accept the right of the Headman's Authority to rule. Poverty and insecurity have cost it its standing. The last harvest failed badly. What remains is being rationed by whoever holds the stores. Neighbours who shared meals last winter are watching each other carefully.
+
+V	dp-hamlet-131	public.blocks.power:governance.text	SOUND
+  B: The Headman's Authority governs Trethorpe. Its seat is held by Uathach Quinn, the caravanserai keeper and Headman. Poverty has left the Headman's Authority's right to rule contested in Trethorpe. The most devout households want a say over who may trade and when, and not everyone here agrees.
+  A: The Headman's Authority governs Trethorpe. Its seat is held by Uathach Quinn, the caravanserai keeper and Headman. Poverty has left the right of the Headman's Authority to rule contested in Trethorpe. The most devout households want a say over who may trade and when, and not everyone here agrees.
+
+V	dp-hamlet-132	public.blocks.power:desk.successionRisk.sentence	SOUND
+  B: Nobody at Uaymmal is in a position to take the Headman's Authority's place: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+  A: Nobody at Uaymmal is in a position to take the place of the Headman's Authority: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+
+V	dp-hamlet-132	print.power.power.succession	SOUND
+  B: Nobody at Uaymmal is in a position to take the Headman's Authority's place: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+  A: Nobody at Uaymmal is in a position to take the place of the Headman's Authority: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+
+V	dp-hamlet-136	record.npcs[0].goal.short	SOUND
+  B: Keep the accounts of the lord's steward's office balanced, and show them to anyone who asks.
+  A: Keep the accounts of the steward's office balanced, and show them to anyone who asks.
+
+V	dp-hamlet-137	public.blocks.power:governance.text	SOUND
+  B: Lateranus Gallus, the mine captain and Headman, holds the seat of the Headman's Authority. The Headman's Authority governs Magnaplenum. Insecurity has left the Headman's Authority's right to rule contested in Magnaplenum. The trouble is inside the government, not in the streets. Officials drag their feet on orders, and taxes are collected but not handed over. Certain people are meeting in private who have no business meeting at all. Those in charge have noticed, and must decide whether to act before the plotters are ready.
+  A: Lateranus Gallus, the mine captain and Headman, holds the seat of the Headman's Authority. The Headman's Authority governs Magnaplenum. Insecurity has left the right of the Headman's Authority to rule contested in Magnaplenum. The trouble is inside the government, not in the streets. Officials drag their feet on orders, and taxes are collected but not handed over. Certain people are meeting in private who have no business meeting at all. Those in charge have noticed, and must decide whether to act before the plotters are ready.
+
+V	dp-hamlet-141	print.power.power.criminalUnderside	SOUND
+  B: Some of the Free Elder Council's people at Sanctavetum are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: Some of the Free Elder Council's people at Sanctavetum are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+V	dp-hamlet-2	public.blocks.power:desk.successionHold.sentence	SOUND
+  B: Public rejection is breaking the Headman's Authority's grip at Kripaganj faster than the Headman's Authority can shore it up, and every measure taken to shore it up costs a little more of what remains.
+  A: Public rejection is breaking the grip of the Headman's Authority at Kripaganj faster than the Headman's Authority can shore it up, and every measure taken to shore it up costs a little more of what remains.
+
+V	dp-hamlet-2	public.blocks.power:governance.text	SOUND
+  B: No one holds the seat at Kripaganj. Few in Kripaganj still accept the Headman's Authority's right to rule. Poverty and insecurity have cost it its standing. Food is short, and every quarrel in the settlement has grown sharper for it. Those with stocks are not advertising the fact. Those without are watching those with.
+  A: No one holds the seat at Kripaganj. Few in Kripaganj still accept the right of the Headman's Authority to rule. Poverty and insecurity have cost it its standing. Food is short, and every quarrel in the settlement has grown sharper for it. Those with stocks are not advertising the fact. Those without are watching those with.
+
+V	dp-hamlet-21	public.blocks.power:desk.successionRisk.sentence	SOUND
+  B: Nobody at Langenwiese is in a position to take the Headman's Authority's place: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+  A: Nobody at Langenwiese is in a position to take the place of the Headman's Authority: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+
+V	dp-hamlet-21	public.blocks.power:desk.successionHold.sentence	SOUND
+  B: Public rejection is breaking the Headman's Authority's grip at Langenwiese faster than the Headman's Authority can shore it up, and every measure taken to shore it up costs a little more of what remains.
+  A: Public rejection is breaking the grip of the Headman's Authority at Langenwiese faster than the Headman's Authority can shore it up, and every measure taken to shore it up costs a little more of what remains.
+
+V	dp-hamlet-21	public.blocks.power:governance.text	SOUND
+  B: Eckehart Hoffmann, the boat-headman, holds the seat of the Headman's Authority. The Headman's Authority governs Langenwiese. Insecurity has left the Headman's Authority's right to rule contested in Langenwiese. A farmstead three miles out was destroyed last night. The farmer and his family are unaccounted for. The militia is not going out to look.
+  A: Eckehart Hoffmann, the boat-headman, holds the seat of the Headman's Authority. The Headman's Authority governs Langenwiese. Insecurity has left the right of the Headman's Authority to rule contested in Langenwiese. A farmstead three miles out was destroyed last night. The farmer and his family are unaccounted for. The militia is not going out to look.
+
+V	dp-hamlet-21	print.power.power.succession	SOUND
+  B: Nobody at Langenwiese is in a position to take the Headman's Authority's place: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+  A: Nobody at Langenwiese is in a position to take the place of the Headman's Authority: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+
+V	dp-hamlet-3	public.blocks.power:desk.stabilityHeader.sentence	SOUND
+  B: Anyone doing business at Invercombe needs one name, the Headman's Authority's, and can plan a season ahead on its word.
+  A: Anyone doing business at Invercombe needs one name, that of the Headman's Authority, and can plan a season ahead on its word.
+
+V	dp-hamlet-41	public.blocks.power:desk.stabilityHeader.sentence	SOUND
+  B: The Headman's Authority's hold on Archotopia is being decided outside the hall rather than inside it, and the hamlet knows it.
+  A: The hold of the Headman's Authority on Archotopia is being decided outside the hall rather than inside it, and the hamlet knows it.
+
+V	dp-hamlet-41	public.blocks.power:desk.successionRisk.sentence	SOUND
+  B: Nobody at Archotopia is in a position to take the Headman's Authority's place: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+  A: Nobody at Archotopia is in a position to take the place of the Headman's Authority: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+
+V	dp-hamlet-41	print.power.power.succession	SOUND
+  B: Nobody at Archotopia is in a position to take the Headman's Authority's place: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+  A: Nobody at Archotopia is in a position to take the place of the Headman's Authority: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+
+V	dp-hamlet-44	record.npcs[0].goal.short	SOUND
+  B: Keep the accounts of the lord's steward's office balanced, and show them to anyone who asks.
+  A: Keep the accounts of the steward's office balanced, and show them to anyone who asks.
+
+V	dp-hamlet-46	record.npcs[0].goal.short	SOUND
+  B: Get the lord's steward's office through the season without borrowing.
+  A: Get the steward's office through the season without borrowing.
+
+V	dp-hamlet-51	record.npcs[0].goal.short	SOUND
+  B: Collect what is owed to the lord's steward's office before the season is out.
+  A: Collect what is owed to the steward's office before the season is out.
+
+V	dp-hamlet-52	public.blocks.power:desk.successionHold.sentence	SOUND
+  B: Public rejection is breaking the Headman's Authority's grip at Weipo faster than the Headman's Authority can shore it up, and every measure taken to shore it up costs a little more of what remains.
+  A: Public rejection is breaking the grip of the Headman's Authority at Weipo faster than the Headman's Authority can shore it up, and every measure taken to shore it up costs a little more of what remains.
+
+V	dp-hamlet-52	public.blocks.power:governance.text	SOUND
+  B: The Headman's Authority governs Weipo. Its seat is held by Bing Wu, the chief. Poverty has left the Headman's Authority's right to rule contested in Weipo. A dispute over water access has run for two seasons, and those on each side of it no longer speak to one another.
+  A: The Headman's Authority governs Weipo. Its seat is held by Bing Wu, the chief. Poverty has left the right of the Headman's Authority to rule contested in Weipo. A dispute over water access has run for two seasons, and those on each side of it no longer speak to one another.
+
+V	dp-hamlet-66	public.blocks.power:desk.successionHold.sentence	SOUND
+  B: Public rejection is breaking the Headman's Authority's grip at Weichsteig faster than the Headman's Authority can shore it up, and every measure taken to shore it up costs a little more of what remains.
+  A: Public rejection is breaking the grip of the Headman's Authority at Weichsteig faster than the Headman's Authority can shore it up, and every measure taken to shore it up costs a little more of what remains.
+
+V	dp-hamlet-66	public.blocks.power:governance.text	SOUND
+  B: Weichsteig is governed by the Headman's Authority. Cyriak Wolf, the stable keeper and Headman, holds its seat. Few in Weichsteig still accept the Headman's Authority's right to rule. Insecurity and poverty have cost it its standing. The Independent Bloc claims the right to rule by other means, and no longer comes to the hall's meetings. Each side makes its own decisions now, and the others overturn them within days.
+  A: Weichsteig is governed by the Headman's Authority. Cyriak Wolf, the stable keeper and Headman, holds its seat. Few in Weichsteig still accept the right of the Headman's Authority to rule. Insecurity and poverty have cost it its standing. The Independent Bloc claims the right to rule by other means, and no longer comes to the hall's meetings. Each side makes its own decisions now, and the others overturn them within days.
+
+V	dp-hamlet-67	public.blocks.power:desk.successionRisk.sentence	SOUND
+  B: Nobody at Ulankul is in a position to take the Headman's Authority's place: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+  A: Nobody at Ulankul is in a position to take the place of the Headman's Authority: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+
+V	dp-hamlet-67	public.blocks.power:governance.text	SOUND
+  B: Ulankul is governed by the Headman's Authority. Zümür Tayichi'ud, the chief, holds its seat. Poverty has left the Headman's Authority's right to rule contested in Ulankul. Someone has been stealing from the communal stores. Everyone suspects someone. No one is saying anything.
+  A: Ulankul is governed by the Headman's Authority. Zümür Tayichi'ud, the chief, holds its seat. Poverty has left the right of the Headman's Authority to rule contested in Ulankul. Someone has been stealing from the communal stores. Everyone suspects someone. No one is saying anything.
+
+V	dp-hamlet-67	print.power.power.succession	SOUND
+  B: Nobody at Ulankul is in a position to take the Headman's Authority's place: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+  A: Nobody at Ulankul is in a position to take the place of the Headman's Authority: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+
+V	dp-hamlet-73	public.blocks.power:desk.successionRisk.sentence	SOUND
+  B: Nobody at Kamennitsa is in a position to take the Headman's Authority's place: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+  A: Nobody at Kamennitsa is in a position to take the place of the Headman's Authority: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+
+V	dp-hamlet-73	print.power.power.succession	SOUND
+  B: Nobody at Kamennitsa is in a position to take the Headman's Authority's place: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+  A: Nobody at Kamennitsa is in a position to take the place of the Headman's Authority: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+
+V	dp-hamlet-79	public.blocks.power:governance.text	SOUND
+  B: Hadwig Bauer, the chief, holds the seat of the Headman's Authority. The Headman's Authority governs Eisenturm. Few in Eisenturm still accept the Headman's Authority's right to rule. Insecurity and poverty have cost it its standing. Pamphlets against those in charge pass from hand to hand, and several who were expected stayed away from the last assembly. Those in charge know that cells meet at night, and they have not moved, because moving would admit there is a rising.
+  A: Hadwig Bauer, the chief, holds the seat of the Headman's Authority. The Headman's Authority governs Eisenturm. Few in Eisenturm still accept the right of the Headman's Authority to rule. Insecurity and poverty have cost it its standing. Pamphlets against those in charge pass from hand to hand, and several who were expected stayed away from the last assembly. Those in charge know that cells meet at night, and they have not moved, because moving would admit there is a rising.
+
+V	dp-hamlet-80	public.blocks.power:desk.legitimacyLens.sentence	SOUND
+  B: Newcomers to Malono are told early which door to knock on, and it is not the Headman's Authority's.
+  A: Newcomers to Malono are told early which door to knock on, and it is not that of the Headman's Authority.
+
+V	dp-hamlet-80	public.blocks.power:governance.text	SOUND
+  B: Malono is governed by the Headman's Authority. Dubravka Morozov, the boat-master and Headman, holds its seat. Few in Malono still accept the Headman's Authority's right to rule. Insecurity and poverty have cost it its standing. Pamphlets against those in charge pass from hand to hand, and several who were expected stayed away from the last assembly. Those in charge know that cells meet at night, and they have not moved, because moving would admit there is a rising.
+  A: Malono is governed by the Headman's Authority. Dubravka Morozov, the boat-master and Headman, holds its seat. Few in Malono still accept the right of the Headman's Authority to rule. Insecurity and poverty have cost it its standing. Pamphlets against those in charge pass from hand to hand, and several who were expected stayed away from the last assembly. Those in charge know that cells meet at night, and they have not moved, because moving would admit there is a rising.
+
+V	dp-metropolis-105	print.power.power.criminalUnderside	SOUND
+  B: A share of what arrives at Aquaaltum never appears at the gate, and the dues on it are never paid. Some of the Democratic assembly's people at Aquaaltum are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: A share of what arrives at Aquaaltum never appears at the gate, and the dues on it are never paid. Some of the Democratic assembly's people at Aquaaltum are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+V	dp-metropolis-108	print.power.power.criminalUnderside	SOUND
+  B: Terrastagnum has no strong opinion of the Grand Merchant Oligarchy either way. Some of the goods that reach Terrastagnum pay none of the dues owed on them. Some of the Grand Merchant Oligarchy's people at Terrastagnum are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: Terrastagnum has no strong opinion of the Grand Merchant Oligarchy either way. Some of the goods that reach Terrastagnum pay none of the dues owed on them. Some of the Grand Merchant Oligarchy's people at Terrastagnum are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+V	dp-metropolis-111	record.relationships[14].tension	SOUND
+  B: Rufus Torquatus has begun teaching Lentulus Barba's methods as the network's head's own.
+  A: Rufus Torquatus has begun teaching Lentulus Barba's methods as Torquatus's own.
+
+V	dp-metropolis-111	print.power.power.criminalUnderside	SOUND
+  B: Officials at Monteplenum are paid little and watched less, and a purse offered in the right doorway would not be turned away. Some of the goods that reach Monteplenum pay none of the dues owed on them. Some of the Ducal Governorship's people at Monteplenum are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: Officials at Monteplenum are paid little and watched less, and a purse offered in the right doorway would not be turned away. Some of the goods that reach Monteplenum pay none of the dues owed on them. Some of the Ducal Governorship's people at Monteplenum are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+V	dp-metropolis-117	print.power.power.criminalUnderside	SOUND
+  B: Nothing at Ravenvik is moving the metropolis's view of its rulers: not the harvest, not the watch, not the walls. The Grand Merchant Oligarchy stands on the bare fact of being the Grand Merchant Oligarchy. A share of what arrives at Ravenvik never appears at the gate, and the dues on it are never paid. Some of the Grand Merchant Oligarchy's people at Ravenvik are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: Nothing at Ravenvik is moving the metropolis's view of its rulers: not the harvest, not the watch, not the walls. The Grand Merchant Oligarchy stands on the bare fact of being the Grand Merchant Oligarchy. A share of what arrives at Ravenvik never appears at the gate, and the dues on it are never paid. Some of the Grand Merchant Oligarchy's people at Ravenvik are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+V	dp-metropolis-118	print.power.power.criminalUnderside	SOUND
+  B: Goods reach Staroburg unrecorded: the cargo lists are false, and the dues owed on them are never paid. Some of the Grand Guild Consortium's people at Staroburg are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: Goods reach Staroburg unrecorded: the cargo lists are false, and the dues owed on them are never paid. Some of the Grand Guild Consortium's people at Staroburg are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+V	dp-metropolis-12	record.relationships[22].tension	SOUND
+  B: Narayanan Trivedi has begun to count the debt Satyajit Giri owes among the guild's master's assets, and has had it written down before witnesses.
+  A: Narayanan Trivedi has begun to count the debt Satyajit Giri owes among Trivedi's assets, and has had it written down before witnesses.
+
+V	dp-metropolis-12	record.relationships[53].description	SOUND
+  B: Narayanan Trivedi needs Dayaram Goswami's seal on certain papers; the master fishmonger needs the guild's master's silence about certain others. Neither has asked for more than the other could pay.
+  A: Narayanan Trivedi needs Dayaram Goswami's seal on certain papers; the master fishmonger needs Trivedi's silence about certain others. Neither has asked for more than the other could pay.
+
+V	dp-metropolis-120	record.relationships[77].description	SOUND
+  B: Angelina Tarchaneiotes needs Eirene Tornikios's goodwill this year, and the sawyer will need the network's head's the next. Both of them have counted the years.
+  A: Angelina Tarchaneiotes needs Eirene Tornikios's goodwill this year, and the sawyer will need Tarchaneiotes's the next. Both of them have counted the years.
+
+V	dp-metropolis-130	record.relationships[50].description	SOUND
+  B: Coatl Ixim needs Yum Batab's seal on certain papers; the master smith needs the network's spider's silence about certain others. Neither has asked for more than the other could pay.
+  A: Coatl Ixim needs Yum Batab's seal on certain papers; the master smith needs Ixim's silence about certain others. Neither has asked for more than the other could pay.
+
+V	dp-metropolis-130	print.power.power.criminalUnderside	SOUND
+  B: Mayanhuitz has a watch, but nobody keeps an eye on the officials, and they are paid too little to refuse a purse. Goods reach Mayanhuitz unrecorded: the cargo lists are false, and the dues owed on them are never paid. Some of the Royal Authority's people at Mayanhuitz are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: Mayanhuitz has a watch, but nobody keeps an eye on the officials, and they are paid too little to refuse a purse. Goods reach Mayanhuitz unrecorded: the cargo lists are false, and the dues owed on them are never paid. Some of the Royal Authority's people at Mayanhuitz are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+V	dp-metropolis-136	record.relationships[14].description	SOUND
+  B: Chimalxochitl Xaman blames Huana Ramillete for a death in the hospital's master's family. Huana Ramillete has never denied it.
+  A: Chimalxochitl Xaman blames Huana Ramillete for a death in Xaman's family. Huana Ramillete has never denied it.
+
+V	dp-metropolis-140	record.relationships[5].tension	SOUND
+  B: Varun Patil has asked Chitragupta Oommen for a vote against the network's head's own interests. It is the first payment Varun Patil has asked for.
+  A: Varun Patil has asked Chitragupta Oommen for a vote against Oommen's own interests. It is the first payment Varun Patil has asked for.
+
+V	dp-metropolis-19	record.relationships[73].description	SOUND
+  B: Vidar Jokullsson needs Palnatoke Sigmundsson's goodwill this year, and the customs collector will need the network's head's the next. Both of them have counted the years.
+  A: Vidar Jokullsson needs Palnatoke Sigmundsson's goodwill this year, and the customs collector will need Jokullsson's the next. Both of them have counted the years.
+
+V	dp-metropolis-21	print.power.power.criminalUnderside	SOUND
+  B: Whoever holds Nokhoiserai's streets now, nobody is watching its officials, and they are paid poorly enough to be bought. Goods reach Nokhoiserai unrecorded: the cargo lists are false, and the dues owed on them are never paid. Some of the Ducal Governorship's people at Nokhoiserai are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: Whoever holds Nokhoiserai's streets now, nobody is watching its officials, and they are paid poorly enough to be bought. Goods reach Nokhoiserai unrecorded: the cargo lists are false, and the dues owed on them are never paid. Some of the Ducal Governorship's people at Nokhoiserai are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+V	dp-metropolis-24	record.relationships[21].tension	SOUND
+  B: Peig Kennedy has asked Ide O'Donnell for a vote against the exchange's steward's own interests. It is the first payment Peig Kennedy has asked for.
+  A: Peig Kennedy has asked Ide O'Donnell for a vote against O'Donnell's own interests. It is the first payment Peig Kennedy has asked for.
+
+V	dp-metropolis-26	record.relationships[45].description	SOUND
+  B: Everyone thinks Zina Grbić made their own way. In fact Lyudmyla Jovanović paid for every step, and Zina Grbić takes the network's head's instructions without argument.
+  A: Everyone thinks Zina Grbić made their own way. In fact Lyudmyla Jovanović paid for every step, and Zina Grbić takes Jovanović's instructions without argument.
+
+V	dp-metropolis-30	record.relationships[77].description	SOUND
+  B: Tamara al-Hassan needs Waad al-Jabbar's goodwill this year, and the customs collector will need the hospital's master's the next. Both of them have counted the years.
+  A: Tamara al-Hassan needs Waad al-Jabbar's goodwill this year, and the customs collector will need al-Hassan's the next. Both of them have counted the years.
+
+V	dp-metropolis-40	record.relationships[57].description	SOUND
+  B: Everyone thinks Lamat Oc made their own way. In fact Malinalxochitl Ahau paid for every step, and Lamat Oc takes the guild's master's instructions without argument.
+  A: Everyone thinks Lamat Oc made their own way. In fact Malinalxochitl Ahau paid for every step, and Lamat Oc takes Ahau's instructions without argument.
+
+V	dp-metropolis-43	record.relationships[80].description	SOUND
+  B: Everyone thinks Despoina Komnenos made their own way. In fact Theodosia Comnenus paid for every step, and Despoina Komnenos takes the guild's master's instructions without argument.
+  A: Everyone thinks Despoina Komnenos made their own way. In fact Theodosia Comnenus paid for every step, and Despoina Komnenos takes Comnenus's instructions without argument.
+
+V	dp-metropolis-45	print.power.power.criminalUnderside	SOUND
+  B: Some of the goods that reach Rathhurst pay none of the dues owed on them. Some of the Senate's people at Rathhurst are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: Some of the goods that reach Rathhurst pay none of the dues owed on them. Some of the Senate's people at Rathhurst are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+V	dp-metropolis-46	record.relationships[57].description	SOUND
+  B: Albinus Salinator still keeps Rutilius Tubertus's hours and the network's head's ledger format. Everyone who deals with Albinus Salinator recognises the teacher.
+  A: Albinus Salinator still keeps Rutilius Tubertus's hours and Tubertus's ledger format. Everyone who deals with Albinus Salinator recognises the teacher.
+
+V	dp-metropolis-48	record.relationships[14].description	SOUND
+  B: Fenghua Xia wants Huilan Suzuki's position, and the senior abbess wants the hospital's master's reputation. They are civil in public and unforgiving in private.
+  A: Fenghua Xia wants Huilan Suzuki's position, and the senior abbess wants Xia's reputation. They are civil in public and unforgiving in private.
+
+V	dp-metropolis-50	record.relationships[25].description	SOUND
+  B: Thyra Ubbason needs Rind Eindriðason's seal on certain papers; the master carpenter needs the hospital's master's silence about certain others. Neither has asked for more than the other could pay.
+  A: Thyra Ubbason needs Rind Eindriðason's seal on certain papers; the master carpenter needs Ubbason's silence about certain others. Neither has asked for more than the other could pay.
+
+V	dp-metropolis-52	print.power.power.criminalUnderside	SOUND
+  B: Víkhavn has no settled view of the Grand Guild Consortium yet; the first crisis will make one for it. A share of what arrives at Víkhavn never appears at the gate, and the dues on it are never paid. Some of the Grand Guild Consortium's people at Víkhavn are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: Víkhavn has no settled view of the Grand Guild Consortium yet; the first crisis will make one for it. A share of what arrives at Víkhavn never appears at the gate, and the dues on it are never paid. Some of the Grand Guild Consortium's people at Víkhavn are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+V	dp-metropolis-56	record.relationships[17].description	SOUND
+  B: Jade Xoc still keeps Underworld Queen Dzul's hours and the hospital's master's ledger format. Everyone who deals with Jade Xoc recognises the teacher.
+  A: Jade Xoc still keeps Underworld Queen Dzul's hours and Dzul's ledger format. Everyone who deals with Jade Xoc recognises the teacher.
+
+V	dp-metropolis-56	record.relationships[85].description	SOUND
+  B: Mazatl Dzunum needs Wind Nauat's goodwill this year, and the arena master will need the guild's master's the next. Both of them have counted the years.
+  A: Mazatl Dzunum needs Wind Nauat's goodwill this year, and the arena master will need Dzunum's the next. Both of them have counted the years.
+
+V	dp-metropolis-58	record.relationships[44].tension	SOUND
+  B: Tanya Kostić has begun teaching Petra Frolov's methods as the network's spider's own.
+  A: Tanya Kostić has begun teaching Petra Frolov's methods as Kostić's own.
+
+V	dp-metropolis-61	print.power.power.criminalUnderside	SOUND
+  B: Some of the goods that reach Bab-al-mela pay none of the dues owed on them. Some of the Grand Guild Consortium's people at Bab-al-mela are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: Some of the goods that reach Bab-al-mela pay none of the dues owed on them. Some of the Grand Guild Consortium's people at Bab-al-mela are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+V	dp-metropolis-62	record.relationships[1].description	SOUND
+  B: Da Liu's people are never where Tao Deng's crew is working, and the network's head's silver pays for the favour.
+  A: Da Liu's people are never where Tao Deng's crew is working, and Deng's silver pays for the favour.
+
+V	dp-metropolis-63	print.power.power.criminalUnderside	SOUND
+  B: A share of what arrives at Unterfurt never appears at the gate, and the dues on it are never paid. Some of the Grand Guild Consortium's people at Unterfurt are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: A share of what arrives at Unterfurt never appears at the gate, and the dues on it are never paid. Some of the Grand Guild Consortium's people at Unterfurt are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+V	dp-metropolis-64	record.relationships[9].tension	SOUND
+  B: Thorir Eyjolfsson has asked Gunnar Snorrason for a vote against the hospital's master's own interests. It is the first payment Thorir Eyjolfsson has asked for.
+  A: Thorir Eyjolfsson has asked Gunnar Snorrason for a vote against Snorrason's own interests. It is the first payment Thorir Eyjolfsson has asked for.
+
+V	dp-metropolis-7	print.power.power.criminalUnderside	SOUND
+  B: Goods reach Temürkum unrecorded: the cargo lists are false, and the dues owed on them are never paid. Some of the Royal Authority's people at Temürkum are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: Goods reach Temürkum unrecorded: the cargo lists are false, and the dues owed on them are never paid. Some of the Royal Authority's people at Temürkum are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+V	dp-metropolis-70	record.relationships[0].tension	SOUND
+  B: Demetrios Hexamilites has begun teaching Xenophon Chomatenos's methods as the hospital's master's own.
+  A: Demetrios Hexamilites has begun teaching Xenophon Chomatenos's methods as Hexamilites's own.
+
+V	dp-metropolis-76	print.power.power.criminalUnderside	SOUND
+  B: A share of what arrives at Bjornfjord never appears at the gate, and the dues on it are never paid. Some of the Ducal Governorship's people at Bjornfjord are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: A share of what arrives at Bjornfjord never appears at the gate, and the dues on it are never paid. Some of the Ducal Governorship's people at Bjornfjord are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+V	dp-metropolis-77	record.relationships[55].description	SOUND
+  B: Zhiwei Qian needs Enlai Kato's goodwill this year, and the chief magistrate will need the hospital's master's the next. Both of them have counted the years.
+  A: Zhiwei Qian needs Enlai Kato's goodwill this year, and the chief magistrate will need Qian's the next. Both of them have counted the years.
+
+V	dp-metropolis-78	print.power.power.criminalUnderside	SOUND
+  B: A share of what arrives at Ulfholm never appears at the gate, and the dues on it are never paid. Some of the Arcane Senate's people at Ulfholm are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: A share of what arrives at Ulfholm never appears at the gate, and the dues on it are never paid. Some of the Arcane Senate's people at Ulfholm are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+V	dp-metropolis-79	record.relationships[6].description	SOUND
+  B: Böðvildr Finsson needs Solveig Olafsson's seal on certain papers; the senior abbess needs the hospital's master's silence about certain others. Neither has asked for more than the other could pay.
+  A: Böðvildr Finsson needs Solveig Olafsson's seal on certain papers; the senior abbess needs Finsson's silence about certain others. Neither has asked for more than the other could pay.
+
+V	dp-metropolis-79	record.relationships[82].tension	SOUND
+  B: Frigg Snorrason has begun to count the debt Katla Finsson owes among the guild's master's assets, and has had it written down before witnesses.
+  A: Frigg Snorrason has begun to count the debt Katla Finsson owes among Snorrason's assets, and has had it written down before witnesses.
+
+V	dp-metropolis-81	print.power.power.criminalUnderside	SOUND
+  B: Some of the goods that reach Fjordmark pay none of the dues owed on them. Some of the Grand Council's people at Fjordmark are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: Some of the goods that reach Fjordmark pay none of the dues owed on them. Some of the Grand Council's people at Fjordmark are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+V	dp-metropolis-85	record.relationships[72].description	SOUND
+  B: Gordanka Vinogradov needs Vera Zaytsev's seal on certain papers; the ropemaker needs the guild's master's silence about certain others. Neither has asked for more than the other could pay.
+  A: Gordanka Vinogradov needs Vera Zaytsev's seal on certain papers; the ropemaker needs Vinogradov's silence about certain others. Neither has asked for more than the other could pay.
+
+V	dp-metropolis-86	print.power.power.criminalUnderside	SOUND
+  B: Officials at Jalalüüd are paid little and watched less, and a purse offered in the right doorway would not be turned away. Some of the goods that reach Jalalüüd pay none of the dues owed on them. Some of the High Theocratic Council's people at Jalalüüd are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: Officials at Jalalüüd are paid little and watched less, and a purse offered in the right doorway would not be turned away. Some of the goods that reach Jalalüüd pay none of the dues owed on them. Some of the High Theocratic Council's people at Jalalüüd are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+V	dp-metropolis-91	record.relationships[41].description	SOUND
+  B: Arif al-Nuri needs Ishaq al-Hakim's goodwill this year, and the black marketeer will need the hospital's master's the next. Both of them have counted the years.
+  A: Arif al-Nuri needs Ishaq al-Hakim's goodwill this year, and the black marketeer will need al-Nuri's the next. Both of them have counted the years.
+
+V	dp-metropolis-99	record.relationships[63].description	SOUND
+  B: Temür Kereit wants Jochi Barlas's position, and the dean wants the hospital's master's reputation. They are civil in public and unforgiving in private.
+  A: Temür Kereit wants Jochi Barlas's position, and the dean wants Kereit's reputation. They are civil in public and unforgiving in private.
+
+V	dp-thorp-123	record.npcs[0].goal.short	SOUND
+  B: Get the lord's reeve's office through the season without borrowing.
+  A: Get the reeve's office through the season without borrowing.
+
+V	dp-thorp-135	record.npcs[0].goal.short	SOUND
+  B: Collect what is owed to the lord's reeve's office before the season is out.
+  A: Collect what is owed to the reeve's office before the season is out.
+
+V	dp-thorp-141	record.npcs[0].goal.short	SOUND
+  B: Collect what is owed to the lord's reeve's office before the season is out.
+  A: Collect what is owed to the reeve's office before the season is out.
+
+V	dp-thorp-146	record.npcs[0].goal.short	SOUND
+  B: Cut the spending at the lord's reeve's office by a tenth this season, and keep the work going.
+  A: Cut the spending at the reeve's office by a tenth this season, and keep the work going.
+
+V	dp-thorp-15	record.npcs[0].goal.long	SOUND
+  B: Leave more money at the lord's reeve's office than there was when they took charge.
+  A: Leave more money at the reeve's office than there was when they took charge.
+
+V	dp-thorp-30	record.npcs[0].goal.short	SOUND
+  B: Get the lord's reeve's office through the season without borrowing.
+  A: Get the reeve's office through the season without borrowing.
+
+V	dp-thorp-59	record.npcs[0].goal.short	SOUND
+  B: Get the lord's reeve's office through the season without borrowing.
+  A: Get the reeve's office through the season without borrowing.
+
+V	dp-thorp-86	record.npcs[0].goal.long	SOUND
+  B: See the lord's reeve's office out of debt for good, with money set aside for bad years.
+  A: See the reeve's office out of debt for good, with money set aside for bad years.
+
+V	dp-thorp-90	record.npcs[0].goal.long	SOUND
+  B: Leave more money at the lord's reeve's office than there was when they took charge.
+  A: Leave more money at the reeve's office than there was when they took charge.
+
+V	dp-thorp-95	record.npcs[1].goal.long	SOUND
+  B: See the lord's reeve's office out of debt for good, with money set aside for bad years.
+  A: See the reeve's office out of debt for good, with money set aside for bad years.
+
+V	dp-thorp-96	record.npcs[0].goal.short	SOUND
+  B: Pay every hand at the lord's reeve's office in full and on time this season.
+  A: Pay every hand at the reeve's office in full and on time this season.
+
+V	dp-town-0	print.power.power.criminalUnderside	SOUND
+  B: Officials at Nahrganj are paid little and watched less, and a purse offered in the right doorway would not be turned away. A share of what arrives at Nahrganj never appears at the gate, and the dues on it are never paid. Some of the Town Council's people at Nahrganj are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: Officials at Nahrganj are paid little and watched less, and a purse offered in the right doorway would not be turned away. A share of what arrives at Nahrganj never appears at the gate, and the dues on it are never paid. Some of the Town Council's people at Nahrganj are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+V	dp-town-106	print.power.power.criminalUnderside	SOUND
+  B: The money lost at Palaioambelos's gambling tables pays for far more than the tables, and every unpaid debt pulls someone in deeper. Some of the Council of Aldermen's people at Palaioambelos are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: The money lost at Palaioambelos's gambling tables pays for far more than the tables, and every unpaid debt pulls someone in deeper. Some of the Council of Aldermen's people at Palaioambelos are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+V	dp-town-110	record.npcs[1].goal.short	SOUND
+  B: Find the lord's appointee's office one more source of money.
+  A: Find the appointee's office one more source of money.
+
+V	dp-town-111	print.power.power.criminalUnderside	SOUND
+  B: A share of what arrives at Longmiao never appears at the gate, and the dues on it are never paid. Some of the Guild Council's people at Longmiao are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: A share of what arrives at Longmiao never appears at the gate, and the dues on it are never paid. Some of the Guild Council's people at Longmiao are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+V	dp-town-116	print.power.power.criminalUnderside	SOUND
+  B: There is money at Bergstrand that does not come from the market, and people will not say where it does come from. Some of the Guild Council's people at Bergstrand are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: There is money at Bergstrand that does not come from the market, and people will not say where it does come from. Some of the Guild Council's people at Bergstrand are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+V	dp-town-118	print.power.power.criminalUnderside	SOUND
+  B: Goods reach Spitzplatz unrecorded: the cargo lists are false, and the dues owed on them are never paid. Some of the Arcane Council's people at Spitzplatz are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: Goods reach Spitzplatz unrecorded: the cargo lists are false, and the dues owed on them are never paid. Some of the Arcane Council's people at Spitzplatz are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+V	dp-town-128	record.npcs[0].goal.short	SOUND
+  B: Get the lord's appointee's office through the season without borrowing.
+  A: Get the appointee's office through the season without borrowing.
+
+V	dp-town-144	print.power.power.criminalUnderside	SOUND
+  B: Some of the goods that reach Yuntang pay none of the dues owed on them. Some of the Merchant Council's people at Yuntang are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: Some of the goods that reach Yuntang pay none of the dues owed on them. Some of the Merchant Council's people at Yuntang are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+V	dp-town-146	record.npcs[1].goal.long	SOUND
+  B: See the lord's appointee's office out of debt for good, with money set aside for bad years.
+  A: See the appointee's office out of debt for good, with money set aside for bad years.
+
+V	dp-town-30	record.npcs[0].goal.long	SOUND
+  B: See the lord's appointee's office out of debt for good, with money set aside for bad years.
+  A: See the appointee's office out of debt for good, with money set aside for bad years.
+
+V	dp-town-38	record.relationships[2].description	SOUND
+  B: Klara Novikov still keeps Ivana Borisov's hours and the bloc's speaker's ledger format. Everyone who deals with Klara Novikov recognises the teacher.
+  A: Klara Novikov still keeps Ivana Borisov's hours and Borisov's ledger format. Everyone who deals with Klara Novikov recognises the teacher.
+
+V	dp-town-61	record.relationships[21].tension	SOUND
+  B: Ruqayya ibn Zuhr has asked Huda ibn Battuta for a vote against the post's master's own interests. It is the first payment Ruqayya ibn Zuhr has asked for.
+  A: Ruqayya ibn Zuhr has asked Huda ibn Battuta for a vote against Battuta's own interests. It is the first payment Ruqayya ibn Zuhr has asked for.
+
+V	dp-town-63	print.power.power.criminalUnderside	SOUND
+  B: The town's debts start in one house and are collected in another, and the two are the same concern. Some of the Guild Council's people at Katokastro are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: The town's debts start in one house and are collected in another, and the two are the same concern. Some of the Guild Council's people at Katokastro are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+V	dp-town-72	record.relationships[10].description	SOUND
+  B: Viktoriya Davydov needs Marina Borisov's seal on certain papers; the apothecary needs the creditor's agent's silence about certain others. Neither has asked for more than the other could pay.
+  A: Viktoriya Davydov needs Marina Borisov's seal on certain papers; the apothecary needs Davydov's silence about certain others. Neither has asked for more than the other could pay.
+
+V	dp-town-77	record.npcs[2].goal.long	SOUND
+  B: See the lord's appointee's office out of debt for good, with money set aside for bad years.
+  A: See the appointee's office out of debt for good, with money set aside for bad years.
+
+V	dp-town-78	record.npcs[1].goal.short	SOUND
+  B: Get the lord's appointee's office through the season without borrowing.
+  A: Get the appointee's office through the season without borrowing.
+
+V	dp-town-9	print.power.power.criminalUnderside	SOUND
+  B: There is money at Megavrysi that does not come from the market, and people will not say where it does come from. Some of the Town Council's people at Megavrysi are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: There is money at Megavrysi that does not come from the market, and people will not say where it does come from. Some of the Town Council's people at Megavrysi are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+V	dp-town-90	record.npcs[0].goal.short	SOUND
+  B: Cut the spending at the lord's appointee's office by a tenth this season, and keep the work going.
+  A: Cut the spending at the appointee's office by a tenth this season, and keep the work going.
+
+V	dp-town-91	record.relationships[13].tension	SOUND
+  B: Vilbirg Fuchs has begun to count the debt Richardis Goldstein owes among the carriers' master's assets, and has had it written down before witnesses.
+  A: Vilbirg Fuchs has begun to count the debt Richardis Goldstein owes among Fuchs's assets, and has had it written down before witnesses.
+
+V	dp-town-96	print.power.power.criminalUnderside	SOUND
+  B: There is money at Ingikvam that does not come from the market, and people will not say where it does come from. Some of the Council of Aldermen's people at Ingikvam are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: There is money at Ingikvam that does not come from the market, and people will not say where it does come from. Some of the Council of Aldermen's people at Ingikvam are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+V	dp-village-102	record.npcs[1].goal.short	SOUND
+  B: Get the lord's steward's office through the season without borrowing.
+  A: Get the steward's office through the season without borrowing.
+
+V	dp-village-104	record.powerStructure.factionRelationships[1].narrative	SOUND
+  B: The Headman's Authority holds the seat and collects the taxes; the Religious Authorities tell people that the Headman's Authority's rule is right and ordained. Each props up the other.
+  A: The Headman's Authority holds the seat and collects the taxes; the Religious Authorities tell people that the rule of the Headman's Authority is right and ordained. Each props up the other.
+
+V	dp-village-104	public.blocks.power:desk.stabilityHeader.sentence	SOUND
+  B: Anyone doing business at Ingibø needs one name, the Headman's Authority's, and can plan a season ahead on its word.
+  A: Anyone doing business at Ingibø needs one name, that of the Headman's Authority, and can plan a season ahead on its word.
+
+V	dp-village-104	public.blocks.power:governance.text	SOUND
+  B: Rorik Svensson, the head shepherd and Headman, holds the seat of the Headman's Authority. The Headman's Authority governs Ingibø. In Ingibø, the Headman's Authority's right to rule is contested. Poverty is the reason.
+  A: Rorik Svensson, the head shepherd and Headman, holds the seat of the Headman's Authority. The Headman's Authority governs Ingibø. In Ingibø, the right of the Headman's Authority to rule is contested. Poverty is the reason.
+
+V	dp-village-136	record.powerStructure.factions[1].desc	SOUND
+  B: Dominant commercial class at a trade nexus; they set prices and fund the hall. They hold the Headman's Authority's seat, and answer for what it does. The craft guilds are present but outpaced; merchants set prices, craft masters object, and merchants win more often than not.
+  A: Dominant commercial class at a trade nexus; they set prices and fund the hall. They hold the seat of the Headman's Authority, and answer for what it does. The craft guilds are present but outpaced; merchants set prices, craft masters object, and merchants win more often than not.
+
+V	dp-village-141	record.powerStructure.factionRelationships[1].narrative	SOUND
+  B: The Headman's Authority holds the seat and collects the taxes; the Religious Authorities tell people that the Headman's Authority's rule is right and ordained. Each props up the other.
+  A: The Headman's Authority holds the seat and collects the taxes; the Religious Authorities tell people that the rule of the Headman's Authority is right and ordained. Each props up the other.
+
+V	dp-village-145	record.powerStructure.factionRelationships[0].narrative	SOUND
+  B: The Headman's Authority holds the seat and collects the taxes; the Religious Authorities tell people that the Headman's Authority's rule is right and ordained. Each props up the other.
+  A: The Headman's Authority holds the seat and collects the taxes; the Religious Authorities tell people that the rule of the Headman's Authority is right and ordained. Each props up the other.
+
+V	dp-village-145	public.blocks.power:desk.stabilityHeader.sentence	SOUND
+  B: Anyone doing business at Llanbeck needs one name, the Headman's Authority's, and can plan a season ahead on its word.
+  A: Anyone doing business at Llanbeck needs one name, that of the Headman's Authority, and can plan a season ahead on its word.
+
+V	dp-village-145	public.blocks.power:desk.successionHold.sentence	SOUND
+  B: Public rejection is breaking the Headman's Authority's grip at Llanbeck faster than the Headman's Authority can shore it up, and every measure taken to shore it up costs a little more of what remains.
+  A: Public rejection is breaking the grip of the Headman's Authority at Llanbeck faster than the Headman's Authority can shore it up, and every measure taken to shore it up costs a little more of what remains.
+
+V	dp-village-145	public.blocks.power:governance.text	SOUND
+  B: The Headman's Authority governs Llanbeck. Its seat is held by Peadar Doyle, the innkeeper and Headman. Poverty has left the Headman's Authority's right to rule contested in Llanbeck. A dispute over water access has run for two seasons, and those on each side of it no longer speak to one another.
+  A: The Headman's Authority governs Llanbeck. Its seat is held by Peadar Doyle, the innkeeper and Headman. Poverty has left the right of the Headman's Authority to rule contested in Llanbeck. A dispute over water access has run for two seasons, and those on each side of it no longer speak to one another.
+
+V	dp-village-33	record.powerStructure.factionRelationships[1].narrative	SOUND
+  B: The Headman's Authority holds the seat and collects the taxes; the Religious Authorities tell people that the Headman's Authority's rule is right and ordained. Each props up the other.
+  A: The Headman's Authority holds the seat and collects the taxes; the Religious Authorities tell people that the rule of the Headman's Authority is right and ordained. Each props up the other.
+
+V	dp-village-76	record.npcs[1].goal.short	SOUND
+  B: Collect what is owed to the lord's steward's office before the season is out.
+  A: Collect what is owed to the steward's office before the season is out.
+
+V	dp-village-79	record.powerStructure.factionRelationships[1].narrative	SOUND
+  B: The Headman's Authority holds the seat and collects the taxes; the Religious Authorities tell people that the Headman's Authority's rule is right and ordained. Each props up the other.
+  A: The Headman's Authority holds the seat and collects the taxes; the Religious Authorities tell people that the rule of the Headman's Authority is right and ordained. Each props up the other.
+
+V	dp-village-79	public.blocks.power:desk.stabilityHeader.sentence	SOUND
+  B: Anyone doing business at Vatandavan needs one name, the Headman's Authority's, and can plan a season ahead on its word.
+  A: Anyone doing business at Vatandavan needs one name, that of the Headman's Authority, and can plan a season ahead on its word.
+
+S	soak1k-101	print.power.power.criminalUnderside	SOUND
+  B: Tzulche has a watch, but nobody keeps an eye on the officials, and they are paid too little to refuse a purse. A share of what arrives at Tzulche never appears at the gate, and the dues on it are never paid. Some of the Grand Merchant Oligarchy's people at Tzulche are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: Tzulche has a watch, but nobody keeps an eye on the officials, and they are paid too little to refuse a purse. A share of what arrives at Tzulche never appears at the gate, and the dues on it are never paid. Some of the Grand Merchant Oligarchy's people at Tzulche are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+S	soak1k-106	record.relationships[39].description	SOUND
+  B: Bakab Xul needs Nezahualcoyotl Chel's seal on certain papers; the bowyer needs the network's head's silence about certain others. Neither has asked for more than the other could pay.
+  A: Bakab Xul needs Nezahualcoyotl Chel's seal on certain papers; the bowyer needs Xul's silence about certain others. Neither has asked for more than the other could pay.
+
+S	soak1k-106	record.prominentRelationship.full	SOUND
+  B: Bakab Xul needs Nezahualcoyotl Chel's seal on certain papers; the bowyer needs the network's head's silence about certain others. Neither has asked for more than the other could pay.
+  A: Bakab Xul needs Nezahualcoyotl Chel's seal on certain papers; the bowyer needs Xul's silence about certain others. Neither has asked for more than the other could pay.
+
+S	soak1k-106	print.power.power.criminalUnderside	SOUND
+  B: Itzaahau has a watch, but nobody keeps an eye on the officials, and they are paid too little to refuse a purse. Some of the goods that reach Itzaahau pay none of the dues owed on them. Some of the Merchant oligarchy's people at Itzaahau are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: Itzaahau has a watch, but nobody keeps an eye on the officials, and they are paid too little to refuse a purse. Some of the goods that reach Itzaahau pay none of the dues owed on them. Some of the Merchant oligarchy's people at Itzaahau are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+S	soak1k-107	print.power.power.criminalUnderside	SOUND
+  B: Some of the goods that reach Gankhuusaray pay none of the dues owed on them. Some of the Senate's people at Gankhuusaray are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: Some of the goods that reach Gankhuusaray pay none of the dues owed on them. Some of the Senate's people at Gankhuusaray are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+S	soak1k-110	record.npcs[0].goal.long	SOUND
+  B: Hand on the lord's steward's office with full stores, honest accounts and nothing owed.
+  A: Hand on the steward's office with full stores, honest accounts and nothing owed.
+
+S	soak1k-111	print.power.power.criminalUnderside	SOUND
+  B: A watch walks Langenheim's streets, but the danger is in the hall, where officials paid next to nothing are worth buying. You can trade at Langenheim with a respectable house and never learn what else it does. Some of the Merchant Council's people at Langenheim are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: A watch walks Langenheim's streets, but the danger is in the hall, where officials paid next to nothing are worth buying. You can trade at Langenheim with a respectable house and never learn what else it does. Some of the Merchant Council's people at Langenheim are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+S	soak1k-116	public.blocks.power:governance.text	SOUND
+  B: Kleinbrunn is governed by the Headman's Authority. Wilhelmina Schneider, the caravanserai keeper and Headman, holds its seat. Few in Kleinbrunn still accept the Headman's Authority's right to rule. Poverty and insecurity have cost it its standing. The hall is at odds with the Religious Authorities. Without bargaining with them first, the hall settles nothing large. Food is short, and every quarrel in the settlement has grown sharper for it. Those with stocks are not advertising the fact. Those without are watching those with.
+  A: Kleinbrunn is governed by the Headman's Authority. Wilhelmina Schneider, the caravanserai keeper and Headman, holds its seat. Few in Kleinbrunn still accept the right of the Headman's Authority to rule. Poverty and insecurity have cost it its standing. The hall is at odds with the Religious Authorities. Without bargaining with them first, the hall settles nothing large. Food is short, and every quarrel in the settlement has grown sharper for it. Those with stocks are not advertising the fact. Those without are watching those with.
+
+S	soak1k-117	record.npcs[1].goal.long	SOUND
+  B: Be remembered as the one who kept the lord's appointee's office out of debt.
+  A: Be remembered as the one who kept the appointee's office out of debt.
+
+S	soak1k-117	record.relationships[22].tension	SOUND
+  B: Pius Julianus has begun teaching Capito Sabinus's methods as the lord's appointee's own.
+  A: Pius Julianus has begun teaching Capito Sabinus's methods as Julianus's own.
+
+S	soak1k-130	record.relationships[55].description	SOUND
+  B: Líadan Ryan wants Bé Bhinn Gallagher's position, and the college master wants the network's spider's reputation. They are civil in public and unforgiving in private.
+  A: Líadan Ryan wants Bé Bhinn Gallagher's position, and the college master wants Ryan's reputation. They are civil in public and unforgiving in private.
+
+S	soak1k-139	record.npcs[0].goal.short	SOUND
+  B: Cut the spending at the lord's steward's office by a tenth this season, and keep the work going.
+  A: Cut the spending at the steward's office by a tenth this season, and keep the work going.
+
+S	soak1k-142	record.relationships[31].description	SOUND
+  B: Christophoros Melas collects a "security fee" from Stylianos Alexios, and what it buys is that the network's head's people stay away. Stylianos Alexios pays on the day it falls due.
+  A: Christophoros Melas collects a "security fee" from Stylianos Alexios, and what it buys is that Melas's people stay away. Stylianos Alexios pays on the day it falls due.
+
+S	soak1k-143	print.power.power.criminalUnderside	SOUND
+  B: Goods reach Lykokastro unrecorded: the cargo lists are false, and the dues owed on them are never paid. Some of the Grand Guild Consortium's people at Lykokastro are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: Goods reach Lykokastro unrecorded: the cargo lists are false, and the dues owed on them are never paid. Some of the Grand Guild Consortium's people at Lykokastro are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+S	soak1k-146	record.npcs[0].goal.short	SOUND
+  B: Get the lord's steward's office through the season without borrowing.
+  A: Get the steward's office through the season without borrowing.
+
+S	soak1k-154	record.relationships[5].description	SOUND
+  B: Vangchug Uighur still keeps Qutlugh Yorqin's hours and the journeymen's warden's ledger format. Everyone who deals with Vangchug Uighur recognises the teacher.
+  A: Vangchug Uighur still keeps Qutlugh Yorqin's hours and Yorqin's ledger format. Everyone who deals with Vangchug Uighur recognises the teacher.
+
+S	soak1k-154	print.power.power.criminalUnderside	SOUND
+  B: A share of what arrives at Tarkhantash never appears at the gate, and the dues on it are never paid. Some of the Merchant oligarchy's people at Tarkhantash are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: A share of what arrives at Tarkhantash never appears at the gate, and the dues on it are never paid. Some of the Merchant oligarchy's people at Tarkhantash are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+S	soak1k-157	record.npcs[0].goal.long	SOUND
+  B: Make the lord's steward's office too sound for any creditor to threaten.
+  A: Make the steward's office too sound for any creditor to threaten.
+
+S	soak1k-158	record.powerStructure.factionRelationships[1].narrative	SOUND
+  B: The Headman's Authority holds the seat and collects the taxes; the Religious Authorities tell people that the Headman's Authority's rule is right and ordained. Each props up the other.
+  A: The Headman's Authority holds the seat and collects the taxes; the Religious Authorities tell people that the rule of the Headman's Authority is right and ordained. Each props up the other.
+
+S	soak1k-160	record.relationships[29].description	SOUND
+  B: Crispus Silanus needs Plinius Albinus's goodwill this year, and the grove elder will need the exchange's steward's the next. Both of them have counted the years.
+  A: Crispus Silanus needs Plinius Albinus's goodwill this year, and the grove elder will need Silanus's the next. Both of them have counted the years.
+
+S	soak1k-160	record.relationships[45].description	SOUND
+  B: Everyone thinks Isidora Opimius made their own way. In fact Lucia Caesar paid for every step, and Isidora Opimius takes the network's spider's instructions without argument.
+  A: Everyone thinks Isidora Opimius made their own way. In fact Lucia Caesar paid for every step, and Isidora Opimius takes Caesar's instructions without argument.
+
+S	soak1k-160	print.power.power.criminalUnderside	SOUND
+  B: Officials at Villavicus are paid little and watched less, and a purse offered in the right doorway would not be turned away. Some of the goods that reach Villavicus pay none of the dues owed on them. Some of the Noble Governorship's people at Villavicus are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: Officials at Villavicus are paid little and watched less, and a purse offered in the right doorway would not be turned away. Some of the goods that reach Villavicus pay none of the dues owed on them. Some of the Noble Governorship's people at Villavicus are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+S	soak1k-161	record.relationships[65].description	SOUND
+  B: Jaguar Vukub cannot finish what they have started without Coatl Xib's help, and the master metalworker cannot finish theirs without the network's head's. Neither lets the other forget it.
+  A: Jaguar Vukub cannot finish what they have started without Coatl Xib's help, and the master metalworker cannot finish theirs without Vukub's. Neither lets the other forget it.
+
+S	soak1k-165	print.power.power.criminalUnderside	SOUND
+  B: Goods reach Burjkarez unrecorded: the cargo lists are false, and the dues owed on them are never paid. Some of the Church Council's people at Burjkarez are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: Goods reach Burjkarez unrecorded: the cargo lists are false, and the dues owed on them are never paid. Some of the Church Council's people at Burjkarez are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+S	soak1k-166	record.relationships[7].description	GARBLED
+  B: Nagendra Bajaj (the hospital's master) needs Chandrasekhar Trivedi's seal on certain papers; the midwife needs the hospital's master's silence about certain others. Neither has asked for more than the other could pay.
+  A: Nagendra Bajaj (the hospital's master) needs Chandrasekhar Trivedi's seal on certain papers; the midwife needs master)'s silence about certain others. Neither has asked for more than the other could pay.
+
+S	soak1k-167	record.relationships[25].description	SOUND
+  B: Everyone thinks Fujio Wang made their own way. In fact Yu An paid for every step, and Fujio Wang takes the network's spider's instructions without argument.
+  A: Everyone thinks Fujio Wang made their own way. In fact Yu An paid for every step, and Fujio Wang takes An's instructions without argument.
+
+S	soak1k-17	print.power.power.criminalUnderside	SOUND
+  B: Goods reach Weißhausen unrecorded: the cargo lists are false, and the dues owed on them are never paid. Some of the Grand Council's people at Weißhausen are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: Goods reach Weißhausen unrecorded: the cargo lists are false, and the dues owed on them are never paid. Some of the Grand Council's people at Weißhausen are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+S	soak1k-171	record.npcs[0].goal.long	SOUND
+  B: See the lord's appointee's office out of debt for good, with money set aside for bad years.
+  A: See the appointee's office out of debt for good, with money set aside for bad years.
+
+S	soak1k-173	record.relationships[6].description	SOUND
+  B: Julia Tacitus still uses Grata Regulus's methods and the commoners' tribune's ledger format. Everyone who sees Julia Tacitus's work recognises the teacher.
+  A: Julia Tacitus still uses Grata Regulus's methods and Regulus's ledger format. Everyone who sees Julia Tacitus's work recognises the teacher.
+
+S	soak1k-176	record.relationships[5].tension	SOUND
+  B: Naresh Balan has begun teaching Nagendra Jain's methods as the bloc's speaker's own.
+  A: Naresh Balan has begun teaching Nagendra Jain's methods as Balan's own.
+
+S	soak1k-178	print.power.power.criminalUnderside	SOUND
+  B: Goods reach Kaltenkirche unrecorded: the cargo lists are false, and the dues owed on them are never paid. Some of the City-State Council's people at Kaltenkirche are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: Goods reach Kaltenkirche unrecorded: the cargo lists are false, and the dues owed on them are never paid. Some of the City-State Council's people at Kaltenkirche are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+S	soak1k-184	print.power.power.criminalUnderside	SOUND
+  B: A share of what arrives at Rajiagam never appears at the gate, and the dues on it are never paid. Some of the Merchant oligarchy's people at Rajiagam are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: A share of what arrives at Rajiagam never appears at the gate, and the dues on it are never paid. Some of the Merchant oligarchy's people at Rajiagam are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+S	soak1k-203	record.relationships[3].description	SOUND
+  B: Akna Ek still keeps Chimalli Ramillete's hours and the newcomers' speaker's ledger format. Everyone who deals with Akna Ek recognises the teacher.
+  A: Akna Ek still keeps Chimalli Ramillete's hours and Ramillete's ledger format. Everyone who deals with Akna Ek recognises the teacher.
+
+S	soak1k-203	record.relationships[56].description	SOUND
+  B: Ixquil Chuc wants Miyahuaxochitl Chan's position, and the district madam wants the network's head's reputation. They are civil in public and unforgiving in private.
+  A: Ixquil Chuc wants Miyahuaxochitl Chan's position, and the district madam wants Chuc's reputation. They are civil in public and unforgiving in private.
+
+S	soak1k-209	print.power.power.criminalUnderside	SOUND
+  B: Goods reach Bayarkotan unrecorded: the cargo lists are false, and the dues owed on them are never paid. Some of the Democratic assembly's people at Bayarkotan are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: Goods reach Bayarkotan unrecorded: the cargo lists are false, and the dues owed on them are never paid. Some of the Democratic assembly's people at Bayarkotan are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+S	soak1k-221	print.power.power.criminalUnderside	SOUND
+  B: Easbeck has a watch, but nobody keeps an eye on the officials, and they are paid too little to refuse a purse. A share of what arrives at Easbeck never appears at the gate, and the dues on it are never paid. Some of the Royal Authority's people at Easbeck are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: Easbeck has a watch, but nobody keeps an eye on the officials, and they are paid too little to refuse a purse. A share of what arrives at Easbeck never appears at the gate, and the dues on it are never paid. Some of the Royal Authority's people at Easbeck are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+S	soak1k-231	print.power.power.criminalUnderside	SOUND
+  B: A watch walks Kolberg's streets, but the danger is in the hall, where officials paid next to nothing are worth buying. Some of the Merchant oligarchy's people at Kolberg are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: A watch walks Kolberg's streets, but the danger is in the hall, where officials paid next to nothing are worth buying. Some of the Merchant oligarchy's people at Kolberg are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+S	soak1k-235	public.blocks.power:governance.text	SOUND
+  B: The Headman's Authority governs Daba. Its seat is held by Fengyi Li, the head shepherd and Headman. In Daba, the Headman's Authority's right to rule is contested. Insecurity is the reason. The revolt began among the bonded labourers and has not been put down. Those in charge were slow to act, because nobody wanted to admit how organised the rebels were. The rebels' buildings are marked, and parts of the settlement are contested. In public, those in charge say it is being handled; in private, they are scrambling.
+  A: The Headman's Authority governs Daba. Its seat is held by Fengyi Li, the head shepherd and Headman. In Daba, the right of the Headman's Authority to rule is contested. Insecurity is the reason. The revolt began among the bonded labourers and has not been put down. Those in charge were slow to act, because nobody wanted to admit how organised the rebels were. The rebels' buildings are marked, and parts of the settlement are contested. In public, those in charge say it is being handled; in private, they are scrambling.
+
+S	soak1k-237	record.relationships[11].tension	SOUND
+  B: Mist Hrafnsson has begun teaching Skuld Eriksson's methods as the council's fixer's own.
+  A: Mist Hrafnsson has begun teaching Skuld Eriksson's methods as Hrafnsson's own.
+
+S	soak1k-239	print.power.power.criminalUnderside	SOUND
+  B: A watch walks Colleorum's streets, but the danger is in the hall, where officials paid next to nothing are worth buying. A share of what arrives at Colleorum never appears at the gate, and the dues on it are never paid. Some of the Ducal Governorship's people at Colleorum are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: A watch walks Colleorum's streets, but the danger is in the hall, where officials paid next to nothing are worth buying. A share of what arrives at Colleorum never appears at the gate, and the dues on it are never paid. Some of the Ducal Governorship's people at Colleorum are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+S	soak1k-248	print.power.power.criminalUnderside	SOUND
+  B: Officials at Madinatserai are paid little and watched less, and a purse offered in the right doorway would not be turned away. Some of the Elder Council's people at Madinatserai are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: Officials at Madinatserai are paid little and watched less, and a purse offered in the right doorway would not be turned away. Some of the Elder Council's people at Madinatserai are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+S	soak1k-25	record.npcs[0].goal.long	SOUND
+  B: See the lord's steward's office out of debt for good, with money set aside for bad years.
+  A: See the steward's office out of debt for good, with money set aside for bad years.
+
+S	soak1k-250	print.power.power.criminalUnderside	SOUND
+  B: Officials at Mayanco are paid little and watched less, and a purse offered in the right doorway would not be turned away. There is money at Mayanco that does not come from the market, and people will not say where it does come from. Some of the Merchant oligarchy's people at Mayanco are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: Officials at Mayanco are paid little and watched less, and a purse offered in the right doorway would not be turned away. There is money at Mayanco that does not come from the market, and people will not say where it does come from. Some of the Merchant oligarchy's people at Mayanco are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+S	soak1k-255	record.relationships[2].description	SOUND
+  B: Octavia Pansa still keeps Tertia Capito's hours and the revolt's leader's ledger format. Everyone who deals with Octavia Pansa recognises the teacher.
+  A: Octavia Pansa still keeps Tertia Capito's hours and Capito's ledger format. Everyone who deals with Octavia Pansa recognises the teacher.
+
+S	soak1k-263	print.power.power.criminalUnderside	SOUND
+  B: A share of what arrives at Jabalabad never appears at the gate, and the dues on it are never paid. Some of the Grand Guild Consortium's people at Jabalabad are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: A share of what arrives at Jabalabad never appears at the gate, and the dues on it are never paid. Some of the Grand Guild Consortium's people at Jabalabad are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+S	soak1k-268	record.relationships[76].description	SOUND
+  B: Nadia al-Yamani needs Mariam al-Baghdadi's seal on certain papers; the woodcarver needs the network's head's silence about certain others. Neither has asked for more than the other could pay.
+  A: Nadia al-Yamani needs Mariam al-Baghdadi's seal on certain papers; the woodcarver needs al-Yamani's silence about certain others. Neither has asked for more than the other could pay.
+
+S	soak1k-286	record.relationships[7].tension	SOUND
+  B: Nakul Nauat has begun teaching Axayacatl Nauat's methods as the network's head's own.
+  A: Nakul Nauat has begun teaching Axayacatl Nauat's methods as Nakul's own.
+
+S	soak1k-292	print.power.power.criminalUnderside	SOUND
+  B: A watch walks Ringwood's streets, but the danger is in the hall, where officials paid next to nothing are worth buying. A share of what arrives at Ringwood never appears at the gate, and the dues on it are never paid. Some of the Noble Governorship's people at Ringwood are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: A watch walks Ringwood's streets, but the danger is in the hall, where officials paid next to nothing are worth buying. A share of what arrives at Ringwood never appears at the gate, and the dues on it are never paid. Some of the Noble Governorship's people at Ringwood are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+S	soak1k-3	print.power.power.criminalUnderside	SOUND
+  B: Officials at Al-karez are paid little and watched less, and a purse offered in the right doorway would not be turned away. Somebody at Al-karez runs an illegal business big enough to matter, and nobody will say exactly what it is. Some of the Guild Council's people at Al-karez are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: Officials at Al-karez are paid little and watched less, and a purse offered in the right doorway would not be turned away. Somebody at Al-karez runs an illegal business big enough to matter, and nobody will say exactly what it is. Some of the Guild Council's people at Al-karez are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+S	soak1k-303	record.npcs[1].goal.short	SOUND
+  B: Get the lord's appointee's office through the season without borrowing.
+  A: Get the appointee's office through the season without borrowing.
+
+S	soak1k-303	print.power.power.criminalUnderside	SOUND
+  B: A watch walks Jabaldeh's streets, but the danger is in the hall, where officials paid next to nothing are worth buying. Some of the goods that reach Jabaldeh pay none of the dues owed on them. Some of the Feudal Appointee's people at Jabaldeh are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: A watch walks Jabaldeh's streets, but the danger is in the hall, where officials paid next to nothing are worth buying. Some of the goods that reach Jabaldeh pay none of the dues owed on them. Some of the Feudal Appointee's people at Jabaldeh are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+S	soak1k-31	public.blocks.power:desk.successionRisk.sentence	SOUND
+  B: Nobody at Saraicaravansarai is in a position to take the Headman's Authority's place: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+  A: Nobody at Saraicaravansarai is in a position to take the place of the Headman's Authority: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+
+S	soak1k-31	public.blocks.power:desk.successionHold.sentence	SOUND
+  B: Public rejection is breaking the Headman's Authority's grip at Saraicaravansarai faster than the Headman's Authority can shore it up, and every measure taken to shore it up costs a little more of what remains.
+  A: Public rejection is breaking the grip of the Headman's Authority at Saraicaravansarai faster than the Headman's Authority can shore it up, and every measure taken to shore it up costs a little more of what remains.
+
+S	soak1k-31	public.blocks.power:governance.text	SOUND
+  B: The Headman's Authority governs Saraicaravansarai. Its seat is held by Zulzaga Barlas, the mine captain and Headman. In Saraicaravansarai, the Headman's Authority's right to rule is contested. Insecurity is the reason. More families arrived this week, and more the week before. The work they came for is not here, and every household taken in is one more the stores must cover. The Headman's Authority is being asked to choose between the residents who were here first and the ones still arriving, and has not chosen.
+  A: The Headman's Authority governs Saraicaravansarai. Its seat is held by Zulzaga Barlas, the mine captain and Headman. In Saraicaravansarai, the right of the Headman's Authority to rule is contested. Insecurity is the reason. More families arrived this week, and more the week before. The work they came for is not here, and every household taken in is one more the stores must cover. The Headman's Authority is being asked to choose between the residents who were here first and the ones still arriving, and has not chosen.
+
+S	soak1k-31	print.power.power.succession	SOUND
+  B: Nobody at Saraicaravansarai is in a position to take the Headman's Authority's place: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+  A: Nobody at Saraicaravansarai is in a position to take the place of the Headman's Authority: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+
+S	soak1k-311	print.power.power.criminalUnderside	SOUND
+  B: Kashiagam has a watch, but nobody keeps an eye on the officials, and they are paid too little to refuse a purse. A share of what arrives at Kashiagam never appears at the gate, and the dues on it are never paid. Some of the Democratic assembly's people at Kashiagam are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: Kashiagam has a watch, but nobody keeps an eye on the officials, and they are paid too little to refuse a purse. A share of what arrives at Kashiagam never appears at the gate, and the dues on it are never paid. Some of the Democratic assembly's people at Kashiagam are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+S	soak1k-313	public.blocks.power:desk.successionRisk.sentence	SOUND
+  B: Nobody at Achilopolis is in a position to take the Headman's Authority's place: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+  A: Nobody at Achilopolis is in a position to take the place of the Headman's Authority: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+
+S	soak1k-313	print.power.power.succession	SOUND
+  B: Nobody at Achilopolis is in a position to take the Headman's Authority's place: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+  A: Nobody at Achilopolis is in a position to take the place of the Headman's Authority: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+
+S	soak1k-319	record.npcs[0].goal.short	SOUND
+  B: Get the lord's steward's office through the season without borrowing.
+  A: Get the steward's office through the season without borrowing.
+
+S	soak1k-323	record.relationships[50].description	SOUND
+  B: Miroslav Horvat blames Radoslav Nikolayev for a death in the guild's master's family. Radoslav Nikolayev has never denied it.
+  A: Miroslav Horvat blames Radoslav Nikolayev for a death in Horvat's family. Radoslav Nikolayev has never denied it.
+
+S	soak1k-323	print.power.power.criminalUnderside	SOUND
+  B: Whoever holds Starotsy's streets now, nobody is watching its officials, and they are paid poorly enough to be bought. Some of the goods that reach Starotsy pay none of the dues owed on them. Some of the High Theocratic Council's people at Starotsy are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: Whoever holds Starotsy's streets now, nobody is watching its officials, and they are paid poorly enough to be bought. Some of the goods that reach Starotsy pay none of the dues owed on them. Some of the High Theocratic Council's people at Starotsy are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+S	soak1k-326	public.blocks.power:desk.successionHold.sentence	SOUND
+  B: The village's backing makes the Headman's Authority's hold at Bergvoll hard to shake; a challenge that would be serious elsewhere is a nuisance here.
+  A: The village's backing makes the hold of the Headman's Authority at Bergvoll hard to shake; a challenge that would be serious elsewhere is a nuisance here.
+
+S	soak1k-335	print.power.power.criminalUnderside	SOUND
+  B: Some of the goods that reach Vysokovich pay none of the dues owed on them. Some of the Senate's people at Vysokovich are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: Some of the goods that reach Vysokovich pay none of the dues owed on them. Some of the Senate's people at Vysokovich are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+S	soak1k-349	record.npcs[1].goal.short	SOUND
+  B: Get the lord's steward's office through the season without borrowing.
+  A: Get the steward's office through the season without borrowing.
+
+S	soak1k-353	record.relationships[9].description	SOUND
+  B: Theodora Makrembolites pays Nikomedissa Zonoras for a respectable name, and the network's spider's goods travel under it, past inspectors who never look inside.
+  A: Theodora Makrembolites pays Nikomedissa Zonoras for a respectable name, and Makrembolites's goods travel under it, past inspectors who never look inside.
+
+S	soak1k-353	print.power.power.criminalUnderside	SOUND
+  B: Officials at Kalliskala are paid little and watched less, and a purse offered in the right doorway would not be turned away. Goods reach Kalliskala unrecorded: the cargo lists are false, and the dues owed on them are never paid. Some of the Ducal Governorship's people at Kalliskala are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: Officials at Kalliskala are paid little and watched less, and a purse offered in the right doorway would not be turned away. Goods reach Kalliskala unrecorded: the cargo lists are false, and the dues owed on them are never paid. Some of the Ducal Governorship's people at Kalliskala are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+S	soak1k-359	print.power.power.criminalUnderside	SOUND
+  B: Goods reach Rasabad unrecorded: the cargo lists are false, and the dues owed on them are never paid. Some of the Ducal Governorship's people at Rasabad are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: Goods reach Rasabad unrecorded: the cargo lists are false, and the dues owed on them are never paid. Some of the Ducal Governorship's people at Rasabad are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+S	soak1k-367	public.blocks.power:governance.text	SOUND
+  B: No one holds the seat at Bellamunicipium. Few in Bellamunicipium still accept the Headman's Authority's right to rule. Poverty and insecurity have cost it its standing. The elder who kept the peace is gone. No one has stepped forward to take that role. Small disputes that would have been settled quickly are now sitting open.
+  A: No one holds the seat at Bellamunicipium. Few in Bellamunicipium still accept the right of the Headman's Authority to rule. Poverty and insecurity have cost it its standing. The elder who kept the peace is gone. No one has stepped forward to take that role. Small disputes that would have been settled quickly are now sitting open.
+
+S	soak1k-368	record.powerStructure.factions[1].desc	SOUND
+  B: International merchant houses controlling port licences and import flows; their political leverage is structural, not merely financial. They hold the Headman's Authority's seat, and answer for what it does.
+  A: International merchant houses controlling port licences and import flows; their political leverage is structural, not merely financial. They hold the seat of the Headman's Authority, and answer for what it does.
+
+S	soak1k-368	record.powerStructure.factionRelationships[0].narrative	SOUND
+  B: The Headman's Authority's seats are filled by the Merchant Guilds.
+  A: The seats of the Headman's Authority are filled by the Merchant Guilds.
+
+S	soak1k-368	public.blocks.power:governance.text	SOUND
+  B: The Headman's Authority governs Mönkhserai. Its seat is held by Dorbei Kiyad, the boat-headman. Insecurity has left the Headman's Authority's right to rule contested in Mönkhserai. The trouble is inside the government, not in the streets. Officials drag their feet on orders, and taxes are collected but not handed over. Certain people are meeting in private who have no business meeting at all. Those in charge have noticed, and must decide whether to act before the plotters are ready.
+  A: The Headman's Authority governs Mönkhserai. Its seat is held by Dorbei Kiyad, the boat-headman. Insecurity has left the right of the Headman's Authority to rule contested in Mönkhserai. The trouble is inside the government, not in the streets. Officials drag their feet on orders, and taxes are collected but not handed over. Certain people are meeting in private who have no business meeting at all. Those in charge have noticed, and must decide whether to act before the plotters are ready.
+
+S	soak1k-373	public.blocks.power:desk.successionRisk.sentence	SOUND
+  B: Nobody at Lundhavn is in a position to take the Headman's Authority's place: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+  A: Nobody at Lundhavn is in a position to take the place of the Headman's Authority: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+
+S	soak1k-373	public.blocks.power:governance.text	SOUND
+  B: The Headman's Authority governs Lundhavn. Its seat is held by Magnr Andersson, the boat-headman. Insecurity has left the Headman's Authority's right to rule contested in Lundhavn. Word from the creditor has blocked the money for repairs. In public those in charge talk of prudence; in private they point to a clause in the loan.
+  A: The Headman's Authority governs Lundhavn. Its seat is held by Magnr Andersson, the boat-headman. Insecurity has left the right of the Headman's Authority to rule contested in Lundhavn. Word from the creditor has blocked the money for repairs. In public those in charge talk of prudence; in private they point to a clause in the loan.
+
+S	soak1k-373	print.power.power.succession	SOUND
+  B: Nobody at Lundhavn is in a position to take the Headman's Authority's place: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+  A: Nobody at Lundhavn is in a position to take the place of the Headman's Authority: whatever the hamlet thinks of the Headman's Authority, no contender stands ready to try.
+
+S	soak1k-382	print.power.power.criminalUnderside	SOUND
+  B: Some of the goods that reach Ulaankotan pay none of the dues owed on them. Some of the Royal Authority's people at Ulaankotan are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: Some of the goods that reach Ulaankotan pay none of the dues owed on them. Some of the Royal Authority's people at Ulaankotan are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+S	soak1k-384	record.npcs[0].goal.short	SOUND
+  B: Get the lord's reeve's office through the season without borrowing.
+  A: Get the reeve's office through the season without borrowing.
+
+S	soak1k-393	record.npcs[1].goal.short	SOUND
+  B: Keep the accounts of the lord's appointee's office balanced, and show them to anyone who asks.
+  A: Keep the accounts of the appointee's office balanced, and show them to anyone who asks.
+
+S	soak1k-393	print.power.power.criminalUnderside	SOUND
+  B: Benheath has a watch, but nobody keeps an eye on the officials, and they are paid too little to refuse a purse. Some of the Feudal Appointee's people at Benheath are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: Benheath has a watch, but nobody keeps an eye on the officials, and they are paid too little to refuse a purse. Some of the Feudal Appointee's people at Benheath are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+S	soak1k-394	record.relationships[15].tension	SOUND
+  B: Enkhtuya Merv has asked Borchigid Ghurid for a vote against the exchange's steward's own interests. It is the first payment Enkhtuya Merv has asked for.
+  A: Enkhtuya Merv has asked Borchigid Ghurid for a vote against Ghurid's own interests. It is the first payment Enkhtuya Merv has asked for.
+
+S	soak1k-395	record.relationships[44].description	SOUND
+  B: Corvus Metellus needs Gallus Merula's goodwill this year, and the house boss will need the network's spider's the next. Both of them have counted the years.
+  A: Corvus Metellus needs Gallus Merula's goodwill this year, and the house boss will need Metellus's the next. Both of them have counted the years.
+
+S	soak1k-399	print.power.power.criminalUnderside	SOUND
+  B: Some of the goods that reach Villafundus pay none of the dues owed on them. Some of the Council of Aldermen's people at Villafundus are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: Some of the goods that reach Villafundus pay none of the dues owed on them. Some of the Council of Aldermen's people at Villafundus are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+S	soak1k-403	public.blocks.power:desk.successionHold.sentence	SOUND
+  B: Public rejection is breaking the Headman's Authority's grip at Jabalistan faster than the Headman's Authority can shore it up, and every measure taken to shore it up costs a little more of what remains.
+  A: Public rejection is breaking the grip of the Headman's Authority at Jabalistan faster than the Headman's Authority can shore it up, and every measure taken to shore it up costs a little more of what remains.
+
+S	soak1k-410	record.powerStructure.factionRelationships[0].narrative	SOUND
+  B: The Headman's Authority holds the seat and collects the taxes; the Religious Authorities have long told people that the Headman's Authority's rule is right and ordained, but the two are now at odds over who speaks for the place to outsiders.
+  A: The Headman's Authority holds the seat and collects the taxes; the Religious Authorities have long told people that the rule of the Headman's Authority is right and ordained, but the two are now at odds over who speaks for the place to outsiders.
+
+S	soak1k-415	public.blocks.power:desk.successionHold.sentence	SOUND
+  B: Public rejection is breaking the Headman's Authority's grip at Kleingate faster than the Headman's Authority can shore it up, and every measure taken to shore it up costs a little more of what remains.
+  A: Public rejection is breaking the grip of the Headman's Authority at Kleingate faster than the Headman's Authority can shore it up, and every measure taken to shore it up costs a little more of what remains.
+
+S	soak1k-415	public.blocks.power:governance.text	SOUND
+  B: Theodelinde Weber, the boat-master and Headman, holds the seat of the Headman's Authority. The Headman's Authority governs Kleingate. In Kleingate, the Headman's Authority's right to rule is contested. Insecurity is the reason. The revolt began among the bonded labourers and has not been put down. Those in charge were slow to act, because nobody wanted to admit how organised the rebels were. The rebels' buildings are marked, and parts of the settlement are contested. In public, those in charge say it is being handled; in private, they are scrambling.
+  A: Theodelinde Weber, the boat-master and Headman, holds the seat of the Headman's Authority. The Headman's Authority governs Kleingate. In Kleingate, the right of the Headman's Authority to rule is contested. Insecurity is the reason. The revolt began among the bonded labourers and has not been put down. Those in charge were slow to act, because nobody wanted to admit how organised the rebels were. The rebels' buildings are marked, and parts of the settlement are contested. In public, those in charge say it is being handled; in private, they are scrambling.
+
+S	soak1k-47	print.power.power.criminalUnderside	SOUND
+  B: The criminal interest at Divoin sells safety from itself and calls it something else, steadily, to the same people, every season. Some of the Senate's people at Divoin are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: The criminal interest at Divoin sells safety from itself and calls it something else, steadily, to the same people, every season. Some of the Senate's people at Divoin are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+S	soak1k-49	public.blocks.power:desk.legitimacyLens.sentence	SOUND
+  B: Newcomers to Jalaldavan are told early which door to knock on, and it is not the Headman's Authority's.
+  A: Newcomers to Jalaldavan are told early which door to knock on, and it is not that of the Headman's Authority.
+
+S	soak1k-49	public.blocks.power:desk.successionHold.sentence	SOUND
+  B: Public rejection is breaking the Headman's Authority's grip at Jalaldavan faster than the Headman's Authority can shore it up, and every measure taken to shore it up costs a little more of what remains.
+  A: Public rejection is breaking the grip of the Headman's Authority at Jalaldavan faster than the Headman's Authority can shore it up, and every measure taken to shore it up costs a little more of what remains.
+
+S	soak1k-55	public.blocks.power:governance.text	SOUND
+  B: No one holds the seat at Pratolitus. Few in Pratolitus still accept the Headman's Authority's right to rule. Insecurity and poverty have cost it its standing. The elder who kept the peace is gone. No one has stepped forward to take that role. Small disputes that would have been settled quickly are now sitting open.
+  A: No one holds the seat at Pratolitus. Few in Pratolitus still accept the right of the Headman's Authority to rule. Insecurity and poverty have cost it its standing. The elder who kept the peace is gone. No one has stepped forward to take that role. Small disputes that would have been settled quickly are now sitting open.
+
+S	soak1k-65	record.relationships[47].description	SOUND
+  B: Petrissa Brauer wants Guta Sauer's position, and the master smith wants the hospital's master's reputation. They are civil in public and unforgiving in private.
+  A: Petrissa Brauer wants Guta Sauer's position, and the master smith wants Brauer's reputation. They are civil in public and unforgiving in private.
+
+S	soak1k-68	record.powerStructure.factions[1].desc	SOUND
+  B: Dominant commercial class; their capital and networks give them leverage even formal institutions must respect. They hold the Headman's Authority's seat, and answer for what it does. The craft guilds are present but outpaced; merchants set prices, craft masters object, and merchants win more often than not.
+  A: Dominant commercial class; their capital and networks give them leverage even formal institutions must respect. They hold the seat of the Headman's Authority, and answer for what it does. The craft guilds are present but outpaced; merchants set prices, craft masters object, and merchants win more often than not.
+
+S	soak1k-83	record.relationships[81].tension	SOUND
+  B: Ahulane Uman has begun teaching Muluc Zo's methods as the hospital's master's own.
+  A: Ahulane Uman has begun teaching Muluc Zo's methods as Uman's own.
+
+S	soak1k-9	print.power.power.criminalUnderside	SOUND
+  B: Some of the goods that reach Shangjin pay none of the dues owed on them. Some of the Guild Council's people at Shangjin are in the Thieves' Guild's pocket, and each of them has something to lose if it comes out.
+  A: Some of the goods that reach Shangjin pay none of the dues owed on them. Some of the Guild Council's people at Shangjin are in the pocket of the Thieves' Guild, and each of them has something to lose if it comes out.
+
+S	soak1k-93	record.relationships[1].tension	SOUND
+  B: Muluc Hau has asked Lamat Kin for a vote against the bloc's speaker's own interests. It is the first payment Muluc Hau has asked for.
+  A: Muluc Hau has asked Lamat Kin for a vote against Kin's own interests. It is the first payment Muluc Hau has asked for.
