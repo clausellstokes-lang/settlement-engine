@@ -36,21 +36,24 @@ const FAILED_GOODS = Object.freeze({
   game: Object.freeze(['game meat']),
 });
 
+/** Food that arrives under names no food source's own good carries (G72 (6)): a frozen list of its own, beside `FAILED_GOODS`. */
+const FOOD_ARRIVING_GOODS = Object.freeze(['provisions', 'game']);
+
 /**
  * VIABILITY-TRUE (the tenth chair's G61 (1)): is this trade good one of the food sources' own goods (`FAILED_GOODS`: grain,
  * flour, livestock, dairy, fish, seafood, the catch, game meat), read as the Economics tab reads a failed food against a
  * label (a whole word, lower case)? Salt, hides and the other goods the regional catalogue files under food are not.
- * KNOWN MISSES, NAMED (VIABILITY-TRUE-2, the tenth chair's G68 (V3); the second reader of 119-C): "Preserved provisions"
- * (107 of its rendered pages) and "Game and hides (...)" (102) are food this word list does not catch. They print no
- * false line, BY MEASURE (CLOSE-11 at 7279e571c; soak 0-999 with C's and V's thorps, hamlets and villages, 1,900 births):
- * of the 68 places whose printed arriving list holds "Preserved provisions", 67 also print food pounds brought in and 65
- * a food source's own good, none neither; of the 68 holding "Game and hides", all 68 print food pounds brought in. So
- * `buysFood` is already true by another leaf wherever they arrive, and no "feeds itself" line printed beside either.
+ * FOOD THAT ARRIVES UNDER OTHER NAMES (CURE-119, the tenth chair's G72 (6)): it also answers yes to the whole words of
+ * `FOOD_ARRIVING_GOODS` ("Preserved provisions", "Game and hides (...)"). THE "KNOWN MISSES" PARAGRAPH (VIABILITY-TRUE-2,
+ * G68 (V3)) IS CLOSED: its measure ("none neither": every place where they arrived also printed food pounds or a food
+ * source's own good) held on the small tiers it was taken on (thorps, hamlets, villages) and failed in towns (r7x-town-68,
+ * C dp-town-101 printed "feeds itself" beside an arriving "Preserved provisions" and no pounds). `FAILED_GOODS` stays as it
+ * is: the famine's marks read it.
  * @param {unknown} label @returns {boolean}
  */
 export function isFoodSourceGood(label) {
   const item = String(label ?? '').toLowerCase().replace(/_/g, ' ');
-  return Object.values(FAILED_GOODS).some((words) => words.some((g) => new RegExp(`\\b${g}\\b`).test(item)));
+  return [...Object.values(FAILED_GOODS), FOOD_ARRIVING_GOODS].some((words) => words.some((g) => new RegExp(`\\b${g}\\b`).test(item)));
 }
 
 /**
