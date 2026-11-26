@@ -836,6 +836,7 @@ the access.
 5. `[street · crisis: under_siege]` The siege has stopped {settlement}'s trade moving at all, and the money that trade brought in has stopped with it.
 6. `[visitor · no market · no exports · no crisis: under_siege · no crisis: plague_onset]` Whatever its {access} brings goes on past {settlement}, and the town stays poor.
 7. `[ledger · crisis: under_siege]` Since the siege began, no passing traffic brings money into {settlement}, and nothing has taken its place.
+8. `[street · no crisis: under_siege · no crisis: plague_onset]` {settlement} is poor, and its {access} has not changed that.
 
 **COMBINATION C5: a low rung on a narrow approach**
 1. `[visitor]` {settlement} is poor, and the road to it is long and hard. What the road does not bring in, the people here go without.
