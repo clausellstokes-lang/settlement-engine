@@ -388,10 +388,15 @@ describe('E13d (G35): the door does not count a role title or a fixed caption as
     expect(scanSource('data/g.js', `export const ORDER = ['the senior craft-guild master', 'the senior charter master'];`, skip, titles)).toMatchObject({ hits: [], titleTables: 1 });
     // the chair's condition (G52, accepted reading): a table of titles with ONE drawn sentence added is NOT a title table
     expect(scanSource('data/m.js', `export const P = ['the senior craft-guild master', 'the senior charter master', 'Who holds power and how firmly.'];`, skip, titles)).toMatchObject({ titleTables: 0, hits: ['data/m.js:1: the senior craft-guild master', 'data/m.js:1: the senior charter master', 'data/m.js:1: Who holds power and how firmly.'] });
-    expect(scanSource('data/k.js', `export const ROWS = [['the senior charter master', 304, [['Who holds power and how firmly.', 'x']]]];`, skip, titles)).toMatchObject({ hits: ['data/k.js:1: Who holds power and how firmly.'], titleTables: 1 }); // a row keyed by its title: the key passes, its body is read
     expect(scanSource('data/l.js', `export const P = ['the senior charter master', 'A line of the pool that is long enough.'];`, skip, titles).hits).toEqual(['data/l.js:1: the senior charter master']); // a title as a LINE of a pool is a hit
     expect(scanSource('data/h.js', `export const X = [ 'Who holds power and how firmly.' `, skip, titles).unread).toHaveLength(1);
     expect(scanSource('data/i.yaml', 'x: 1', skip, titles).unread).toHaveLength(1);
+  });
+  test('a row KEYED by its title passes its key and never its body: a skipped sentence in the body of ["<title>", n, [...]] is a hit (the chair\'s condition on the third exception)', () => {
+    const titles = new Set(roleTitles());
+    expect(scanSource('data/k.js', `export const ROWS = [['the senior charter master', 304, [['Who holds power and how firmly.', 'x']]]];`, skip, titles)).toMatchObject({ hits: ['data/k.js:1: Who holds power and how firmly.'], titleTables: 1 });
+    expect(scanSource('data/k2.js', `export const ROWS = [['the senior charter master', 304, { text: 'Who holds power and how firmly.' }]];`, skip, titles)).toMatchObject({ hits: ['data/k2.js:1: Who holds power and how firmly.'], titleTables: 1 });
+    expect(scanSource('data/k3.js', `export const ROWS = [['the senior charter master', 304, []]];`, skip, titles)).toMatchObject({ hits: [], titleTables: 1 }); // the key alone passes
   });
   test('the door skips by the whole sentence, never by length or by slot: a title alone is not counted, a drawn line beside it still is, and a line that holds a title is counted', () => {
     const title = 'the senior craft-guild master';
