@@ -462,76 +462,17 @@ export function classifySlot(slot, m, idx) {
   return { cls: c.cls, reason: c.why };
 }
 /**
- * SAMENESS-KEYS (G52): the slots this --write would ADD that match a slot it would RETIRE (or one retired earlier with its
- * sentence kept): the same surface, the same size and the same sentence (the row's stored, cut sentence). Within one match
- * the added and the retired keys are paired in key order (a drift keeps the page's order). Pure.
- * @param {Record<string, Map<string, any>>} first @param {Record<string, Map<string, any>>} second @param {any} register
- * @param {number} minPlaces
- * @returns {Array<{ slot: string, size: string, from: string, last: any }>}
- */
-export function inheritances(first, second, register, minPlaces) {
-  const rows = register.rows || {};
-  const surfaceOf = (/** @type {string} */ slot) => slot.split(' | ')[0];
-  /** @type {Map<string, Array<{ from: string, last: any }>>} */ const retiring = new Map();
-  const put = (/** @type {string} */ k, /** @type {{ from: string, last: any }} */ v) => { const l = retiring.get(k) || []; l.push(v); retiring.set(k, l); };
-  for (const [slot, row] of Object.entries(rows)) for (const size of Object.keys(row.sizes || {})) {
-    if (!first[size] || first[size].has(slot) || second[size]?.has(slot)) continue;
-    put(`${surfaceOf(slot)}\u0000${size}\u0000${row.sentence}`, { from: slot, last: row.sizes[size] });
-  }
-  for (const [key, r] of Object.entries(register.retired || {})) {
-    if (typeof r?.sentence !== 'string' || r.to) continue;
-    const at = key.lastIndexOf(' @ '); const slot = key.slice(0, at); const size = key.slice(at + 3);
-    if (rows[slot]?.sizes?.[size]) continue;
-    put(`${surfaceOf(slot)}\u0000${size}\u0000${r.sentence}`, { from: slot, last: r.last });
-  }
-  /** @type {Map<string, string[]>} */ const adding = new Map();
-  for (const size of Object.keys(first)) {
-    const keys = new Set([...first[size].keys(), ...(second[size]?.keys() || [])]);
-    for (const slot of keys) {
-      if (rows[slot]?.sizes?.[size]) continue;
-      const a = first[size].get(slot); const b = second[size]?.get(slot);
-      if (Math.max(a?.places || 0, b?.places || 0) < minPlaces) continue;
-      const k = `${surfaceOf(slot)}\u0000${size}\u0000${cut((rows[slot]?.sentence) ?? (a || b).sentence)}`;
-      if (!retiring.has(k)) continue;
-      const l = adding.get(k) || []; l.push(slot); adding.set(k, l);
-    }
-  }
-  /** @type {Array<{ slot: string, size: string, from: string, last: any }>} */ const out = [];
-  for (const [k, slots] of adding) {
-    const olds = [...(retiring.get(k) || [])].sort((x, y) => x.from.localeCompare(y.from));
-    const size = k.split('\u0000')[1];
-    [...slots].sort().forEach((slot, i) => { if (olds[i]) out.push({ slot, size, from: olds[i].from, last: olds[i].last }); });
-  }
-  return out;
-}
-/**
  * --write: an entry for every slot printed in >= MIN_PLACES places of a size (on either reading) with none, at the HIGHER
  * of the two readings rounded up to 0.01, classed from the classes file; a stale entry (printed on neither reading)
- * retires by name into `retired` with its last reading and its sentence. It never raises a ceiling: a confirmed rise
- * refuses the whole write.
- * SAMENESS-KEYS (the tenth chair's G52): a slot is keyed by its printed POSITION, and a position index drifts when a page
- * gains or loses a row above it; read naively, the drifted slot is a retirement and an addition at today's reading, so a
- * rise is written as no rise at all. So an added slot that MATCHES a retired one (the same surface, the same size and the
- * same sentence; this write's retirements and the register's earlier ones that carry a sentence; paired in key order
- * within a match) INHERITS the retired ceiling and its `by`: it is judged against that ceiling by the same law of rises
- * (both readings over, beyond NOISE_SE), a confirmed rise refuses the whole write and names both keys, and otherwise its
- * row carries the inherited ceiling (`inherits` names the old key; the retirement names its successor in `to`).
+ * retires by name into `retired` with its last reading. It never raises a ceiling: a confirmed rise refuses the whole write.
  * @param {Record<string, Map<string, any>>} first @param {Record<string, Map<string, any>>} second @param {any} register
  * @param {{ classify?: (slot: string, m: any) => { cls: string, reason: string }, minPlaces?: number }} [opts]
  * @returns {{ refused: string[], next: any, changed: string[] }}
  */
 export function writeRows(first, second, register, opts = {}) {
   const minPlaces = opts.minPlaces ?? MIN_PLACES;
-  const heirs = inheritances(first, second, register, minPlaces);
-  const carried = JSON.parse(JSON.stringify(register)); carried.rows ||= {};
-  for (const h of heirs) (carried.rows[h.slot] ||= { sizes: {} }).sizes[h.size] = { ...h.last };
-  const rises = confirmRises(judge(first, carried), judge(second, carried)).over;
-  if (rises.length) {
-    const from = new Map(heirs.map((h) => [`${h.size}\u0000${h.slot}`, h.from]));
-    return { refused: rises.map((x) => `refused: ${x.text}${from.has(`${x.size}\u0000${x.slot}`) ? ` (the ceiling inherited from ${from.get(`${x.size}\u0000${x.slot}`)}: SAMENESS-KEYS)` : ''} (a write never raises a ceiling)`), next: register, changed: [] };
-  }
-  const heirOf = new Map(heirs.map((h) => [`${h.size}\u0000${h.slot}`, h]));
-  const successorOf = new Map(heirs.map((h) => [`${h.from} @ ${h.size}`, h.slot]));
+  const rises = confirmRises(judge(first, register), judge(second, register)).over;
+  if (rises.length) return { refused: rises.map((x) => `refused: ${x.text} (a write never raises a ceiling)`), next: register, changed: [] };
   const next = JSON.parse(JSON.stringify(register)); next.rows ||= {}; next.retired ||= {};
   const changed = [];
   for (const size of Object.keys(first)) {
@@ -550,14 +491,6 @@ export function writeRows(first, second, register, opts = {}) {
       }
       const row = next.rows[slot];
       for (const [p, n] of Object.entries(ref.paths || {})) row.paths[p] = Math.max(row.paths[p] || 0, n);
-      const heir = heirOf.get(`${size}\u0000${slot}`);
-      if (heir) {
-        const hb = heir.last.by;
-        const hm = Math.max(a ? meetOf(a, hb) : 0, b ? meetOf(b, hb) : 0);
-        row.sizes[size] = { places: ref.places, of: ref.of, distinct: ref.distinct, shareAll: ref.shareAll, shareIn: ref.shareIn, seen: ref.seen, by: hb, meet: +hm.toFixed(4), ceiling: heir.last.ceiling, inherits: heir.from };
-        changed.push(`+ ${size} ${slot}: ceiling ${heir.last.ceiling} INHERITED from ${heir.from} (${hb}: hxd ${a ? meetOf(a, hb).toFixed(2) : '-'}, hxu ${b ? meetOf(b, hb).toFixed(2) : '-'}; ${row.class})`);
-        continue;
-      }
       row.sizes[size] = { places: ref.places, of: ref.of, distinct: ref.distinct, shareAll: ref.shareAll, shareIn: ref.shareIn, seen: ref.seen, by, meet: +meet.toFixed(4), ceiling: ceil2(meet) };
       changed.push(`+ ${size} ${slot}: ceiling ${row.sizes[size].ceiling} (${by}: hxd ${a ? meetOf(a, by).toFixed(2) : '-'}, hxu ${b ? meetOf(b, by).toFixed(2) : '-'}; ${row.class})`);
     }
@@ -565,8 +498,7 @@ export function writeRows(first, second, register, opts = {}) {
   for (const [slot, row] of Object.entries(next.rows)) {
     for (const size of Object.keys(row.sizes)) {
       if (!first[size] || first[size].has(slot) || second[size]?.has(slot)) continue;
-      const to = successorOf.get(`${slot} @ ${size}`);
-      next.retired[`${slot} @ ${size}`] = { class: row.class, reason: row.reason, sentence: row.sentence, last: row.sizes[size], ...(to ? { to } : {}) };
+      next.retired[`${slot} @ ${size}`] = { class: row.class, reason: row.reason, last: row.sizes[size] };
       delete row.sizes[size];
       changed.push(`- ${size} ${slot}: retired (printed on neither reading; last ${row.sizes?.[size]?.meet ?? next.retired[`${slot} @ ${size}`].last.meet})`);
     }

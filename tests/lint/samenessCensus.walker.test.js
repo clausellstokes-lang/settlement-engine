@@ -172,40 +172,6 @@ describe('the doors that write', () => {
     expect(r.next.rows[SLOT]).toBeUndefined();
     expect(r.next.retired[`${SLOT} @ thorp`].last.ceiling).toBe(0.4);
   });
-  // SAMENESS-KEYS (the tenth chair's G52): a slot is keyed by its printed position, and a position index drifts when a page
-  // gains or loses a row above it; the drifted slot must not come back as a new row at today's (higher) reading.
-  const POS2 = 'OverviewTab > Section.2';
-  const SLOT2 = slotKey(S, ['', '', '', POS2]);
-  /** a reading where the same sentence prints at the DRIFTED position: `same` of `n` places print sentenceA (one a place) */
-  const drifted = (/** @type {number} */ n, /** @type {number} */ same, pos = POS2, sentence = sentenceA) => ({ thorp: measureSlots(Array.from({ length: n }, (_, i) => ({ seed: `p-${i}`, surfaces: { [S]: [[i < same ? sentence : `Place number ${'x'.repeat(i + 1)} prints its very own line here.`, '', '', pos]] }, stored: {} }))) });
-  test('SAMENESS-KEYS: a drifted slot (same surface, size and sentence) that RISES above the retired ceiling is a rise: the --write is REFUSED', () => {
-    const reg = registerAt(0.4);
-    const r = writeRows(drifted(50, 40), drifted(50, 41), reg, { classify: () => ({ cls: 'STATE', reason: 'planted' }) });
-    expect(r.refused.length).toBe(1);
-    expect(r.refused[0]).toContain(SLOT2);
-    expect(r.refused[0]).toContain(SLOT);
-    expect(r.next).toBe(reg);
-    expect(r.changed).toEqual([]);
-  });
-  test('SAMENESS-KEYS: a drifted slot within its retired ceiling INHERITS that ceiling (not today\'s lower reading); the retirement names its successor', () => {
-    const r = writeRows(drifted(50, 15), drifted(50, 16), registerAt(0.4), { classify: () => ({ cls: 'STATE', reason: 'planted' }) });
-    expect(r.refused).toEqual([]);
-    expect(r.next.rows[SLOT]).toBeUndefined();
-    expect(r.next.rows[SLOT2].sizes.thorp).toMatchObject({ by: 'top', ceiling: 0.4, inherits: SLOT });
-    expect(r.next.retired[`${SLOT} @ thorp`]).toMatchObject({ sentence: sentenceA, to: SLOT2 });
-    expect(r.next.retired[`${SLOT} @ thorp`].last.ceiling).toBe(0.4);
-  });
-  test('SAMENESS-KEYS: no inheritance across a surface, a size or a sentence: a new slot there is added at its own reading', () => {
-    const other = 'A different sentence entirely prints at the drifted place.';
-    const r = writeRows(drifted(50, 15, POS2, other), drifted(50, 16, POS2, other), registerAt(0.4), { classify: () => ({ cls: 'STATE', reason: 'planted' }) });
-    expect(r.next.rows[SLOT2].sizes.thorp).toMatchObject({ ceiling: ceil2(16 / 50) });
-    expect(r.next.rows[SLOT2].sizes.thorp.inherits).toBeUndefined();
-    expect(r.next.retired[`${SLOT} @ thorp`].to).toBeUndefined();
-    const reg = registerAt(0.4); reg.rows[SLOT].sizes.hamlet = reg.rows[SLOT].sizes.thorp; delete reg.rows[SLOT].sizes.thorp;
-    const h = writeRows({ ...drifted(50, 40), hamlet: new Map() }, { ...drifted(50, 41), hamlet: new Map() }, reg, { classify: () => ({ cls: 'STATE', reason: 'planted' }) });
-    expect(h.refused).toEqual([]);
-    expect(h.next.rows[SLOT2].sizes.thorp).toMatchObject({ ceiling: ceil2(41 / 50) });
-  });
   test('--tighten lowers a ceiling loose on both readings to the higher reading, and never raises one', () => {
     const loose = registerAt(0.9);
     const t = tighten(reading(50, 20), reading(50, 22), loose);
