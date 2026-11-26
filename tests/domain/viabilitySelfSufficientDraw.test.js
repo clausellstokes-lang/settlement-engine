@@ -28,7 +28,7 @@ const LINES = [
   ['feeds', /^VIABLE: \S.* feeds itself and pays its own way\.$/],
   ['owes', /^VIABLE: \S.* grows what it eats and makes what it needs, and owes no one for either\.$/],
   ['nothing', /^VIABLE: Nothing .* needs to get through the year has to come from outside\.$/],
-  ['buysIn', /^VIABLE: \S.* feeds itself and pays its way, and buys in what it cannot make for itself\.$/],
+  ['buysIn', /^VIABLE: \S.* feeds itself and pays its way, and buys in some of what it cannot make for itself\.$/],
   ['earns', /^VIABLE: What .* eats it grows, and what it spends it earns; some of what it uses is bought in\.$/],
 ];
 const LOW = ['Subsistence', 'Struggling', 'Poor'];
@@ -111,13 +111,20 @@ describe('CURE-118 (2), amended: no line says a need is bought in', () => {
     expect(POOL.length, POOL.join(' | ')).toBe(5);
     expect(POOL.filter((t) => /needs?\b[^.;]*\bbought in/.test(t))).toEqual([]);
   });
-  for (const [seed, allowed] of /** @type {const} */ ([['dp-hamlet-82', ['feeds', 'owes', 'nothing', 'buysIn', 'earns']], ['dp-hamlet-13', ['feeds', 'buysIn', 'earns']]])) {
+  // RULING CURE-118-6 (K): line 4 says the place buys in SOME of what it cannot make, never all of it (dp-hamlet-56 prints it
+  // beside "Needed, and not brought in: timber, metals.")
+  test('no line says the place buys in all it cannot make', () => {
+    const buys = POOL.filter((t) => /buys in [^.;]*cannot make/.test(t));
+    expect(buys.length, 'line 4 is in the pool').toBe(1);
+    expect(buys[0]).toMatch(/buys in some of what it cannot make/);
+  });
+  for (const [seed, allowed] of /** @type {const} */ ([['dp-hamlet-82', ['feeds', 'owes', 'nothing', 'buysIn', 'earns']], ['dp-hamlet-13', ['feeds', 'buysIn', 'earns']], ['dp-hamlet-56', ['feeds', 'buysIn', 'earns']]])) {
     test(`${seed}: something arrives, and the line printed is true of the facts by the four states`, () => {
       const s = generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: 'hamlet' }), null, { seed, customContent: {} });
       const h = holds(s);
       expect(h.bought, 'something is printed as arriving').toBe(true);
       expect(h.marked, 'no ARRIVING good is a marked need').toBe(false);
-      if (seed === 'dp-hamlet-13') expect(tradeListsAsPrinted(s).needed.length, 'a need is printed as not met').toBeGreaterThan(0);
+      if (seed !== 'dp-hamlet-82') expect(tradeListsAsPrinted(s).needed.length, 'a need is printed as not met').toBeGreaterThan(0);
       const t = deriveViability(s).summary;
       expect(t).not.toMatch(/needs?\b[^.;]*\bbought in/); // anchored: t is proved a self-sufficient line on the next line
       expect(allowed, t).toContain(LINES.find(([, re]) => re.test(t))?.[0]);
