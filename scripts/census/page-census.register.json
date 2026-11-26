@@ -205,15 +205,13 @@
  },
  "grid": {
   "r2r-thorp-0": [
-   "P8any",
-   "P9"
+   "P8any"
   ],
   "r2s-under_siege-thorp-0": [],
   "r2r-hamlet-0": [],
   "r2s-occupied-hamlet-0": [],
   "r2r-village-0": [
-   "P17",
-   "P9"
+   "P17"
   ],
   "r2s-indebted-village-0": [
    "NEW2",
