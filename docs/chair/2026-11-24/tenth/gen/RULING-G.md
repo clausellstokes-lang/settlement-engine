@@ -895,3 +895,15 @@ THE SEATS' MARK: CLOSE-11 stood at 384,390 used tokens 43 minutes after seating,
 ends a seat before its work, and each new seat pays that seating again (about 10 to 12 in cost). THE MARK IS 650,000 (the
 automatic summary comes at 784,000), a turn ended every hour so the chair can read it; the next start file is trimmed by
 what CLOSE-11 reports its dearest reading to have been.
+
+**G69 (17:05 UTC on 2026-11-26): C4-SECOND-LINE's GATE: THIRTEEN NEW REDS FROM ONE ADDED VARIANT, RULED BY KIND.** CLOSE-11 gated
+CLOSE-10's 3647bae53 (the generator's check 0; typechecks at their ceilings): 20 failing rows, 7 on the line's list, 13 new.
+(a) COUNT PINS IN TESTS that state the corpus's own figure (3,182 variants and the like, now one more): re-pointed in one
+commit, each named with its old and new figure. (b) COMMITTED DATA with its own door (the wiring census; the observed-shape
+baseline): re-taken by those doors, each its own commit. (c) THE SHIFT REGISTER (`dossierStateProseProjection` SEAM car 4:
+five pins: the variant count's sum, a per-pool hash, the face counts' sum and hash, the vids' hash) IS OWNER-GATED BY ITS OWN
+WORDS ("owner-gated per batch landing"; "one owner re-record"): ITS ROWS ARE EDITED BY NOBODY: the five pins stay red, each
+named with its recorded and its present value, and the rows as they would read are PREPARED in a note for his signing. They
+join `ci/RED-AT-LINE.tsv` at point 119's landing as the owner's. (d) `proseComposed` A0b gains a second failing assertion
+(an over-claim of 20 against a shrink-only ceiling of 19): expected to clear with the wiring census's re-take; if it does
+not, the seat stops: the ceiling is raised by nobody.
