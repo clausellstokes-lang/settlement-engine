@@ -53,6 +53,11 @@ export function beastsReadinessOf(record) {
  */
 export function scoresAsShown(record, scores) {
   if (!scores || typeof scores !== 'object' || !('monster' in scores)) return scores;
+  // P9b-2 (the tenth chair's G68 (P2)): a stored monster score that is not a number is passed through as it is, never made
+  // one (settled country read it as 0 and printed the adequate cut, so a mean that was null became 40 and the PDF's
+  // defence headline spoke where it was silent)
+  const stored = /** @type {Record<string, unknown>} */ (scores).monster;
+  if (typeof stored !== 'number' || !Number.isFinite(stored)) return scores;
   const { shownScore, score } = beastsReadinessOf(record);
   return shownScore === score ? scores : /** @type {S} */ ({ ...scores, monster: shownScore });
 }
