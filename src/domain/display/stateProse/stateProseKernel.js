@@ -425,33 +425,36 @@ export function resolveDeclaredPosition(declarations, drawn, facts, key, where =
   return pick;
 }
 
+/** Where a one-word possessed phrase is sure to end: a mark, or a joining word after it (CURE-118 (4)). */
+const OF_FORM_BOUND = String.raw`[,.;:!?]|\s+(?:and|or|but|to|in|on|at|by|for|with|from|is|are|was|were|has|have|had|will|would|that|which|who|than|as|before|after|since|because|while|when|if)\b`;
+
 /**
- * THE "OF" FORM OF A NAME THAT HOLDS A POSSESSIVE (E1, WORDS-1; the tenth chair's ruling G5 of 2026-11-25), as a rule of the
- * fill, never a case: where a slot's fill holds a possessive word (`powerSentenceName.js :: holdsPossessive`: "Headman's
- * Authority", "the Thieves' Guild", "Caravan masters' exchange"), the template's possessive joiner on it is written the
- * other way round, so no sentence prints two possessives in a row:
- *   "{a}'s {b}", the fill of {b} holding one          → "the {b} at {a}"   ("The Caravan masters' exchange at Uaymtzal …")
- *   "the {a}'s word" / "{a}'s word", {a} holding one   → "the word of the {a}" / "the word of {a}" ("take the place of the
- *                                                         Headman's Authority", "in the pocket of the Thieves' Guild")
- *   "the {a}'s" / "{a}'s" standing alone before , . ; : ! ?, {a} holding one → "that of the {a}" / "that of {a}" ("needs
- *                                                         one name, that of the Headman's Authority, and …")
- * A template whose fills hold no possessive is returned as it is, byte for byte. A form at the sentence's head takes "The".
+ * THE "OF" FORM OF A NAME THAT HOLDS A POSSESSIVE (E1, WORDS-1; the tenth chair's ruling G5 of 2026-11-25), on THE TEMPLATE
+ * SHAPES E1 MEASURED ONLY (CURE-118 (4), the chair's G45 (2)): where a rewrite cannot be sure where the possessed phrase
+ * ends, the ORIGINAL sentence stands (an awkward double possessive is a blemish; a garbled sentence is a fault). Slot-aware:
+ *   "{settlement}'s {institution}", the INSTITUTION's name holding a possessive (`powerSentenceName.js :: holdsPossessive`)
+ *       → "the {institution} at {settlement}"   ("The Caravan masters' exchange at Uaymtzal …")
+ *   "the {seat}'s word" / "{faction}'s word", the POWER's name holding one, the possessed word ONE word bounded by a mark
+ *       or a joining word (OF_FORM_BOUND) → "the word of the {seat}" / "the word of {faction}" ("take the place of the
+ *       Headman's Authority", "in the pocket of the Thieves' Guild"); a longer phrase ("the {seat}'s own armed officials")
+ *       cannot be told, so it stands
+ *   "the {seat}'s" / "{faction}'s" standing alone before , . ; : ! ? → "that of the {seat}" / "that of {faction}"
+ * It never rewrites because a PLACE's own name holds a possessive ("Dragon's Reach": {settlement}, and {counterpart}, a
+ * neighbour or a rival power, is not among the slots E1 measured), and never guesses a phrase's end. A template whose
+ * fills hold no possessive is returned as it is, byte for byte. A form at the sentence's head takes "The".
  * @param {string} text @param {Record<string, unknown> | null | undefined} slots @returns {string}
  */
 function ofForms(text, slots) {
   if (!text.includes("}'s")) return text;
   const holds = (/** @type {string} */ name) => !!slots && isFilled(slots[name]) && holdsPossessive(slots[name]);
-  const head = (/** @type {number} */ at) => at === 0 || /[.!?]\s*$/.test(text.slice(0, at));
-  const alone = text.replace(/(\bthe )?\{([a-zA-Z_][a-zA-Z0-9_]*)\}'s(?=[,.;:!?])/g, (whole, the, a, at) => (holds(a) ? (head(at) ? 'That of ' : 'that of ') + (the || '') + '{' + a + '}' : whole));
-  if (alone !== text) return ofForms(alone, slots);
-  return text.replace(/(\bthe )?\{([a-zA-Z_][a-zA-Z0-9_]*)\}'s (?:\{([a-zA-Z_][a-zA-Z0-9_]*)\}|([a-z]+))/g, (whole, the, a, b, word, at) => {
-    /** @type {string} */ let said;
-    const of = (/** @type {string} */ name) => '{' + name + '}';
-    if (b && holds(b) && !holds(a)) said = (/^the\s/i.test(String(slots?.[b]).trim()) ? '' : 'the ') + of(b) + ' at ' + (the || '') + of(a);
-    else if (holds(a)) said = 'the ' + (b ? of(b) : word) + ' of ' + (the || '') + of(a);
-    else return whole;
-    return head(at) ? said[0].toUpperCase() + said.slice(1) : said;
-  });
+  // a form at the sentence's head takes "The" (`all` is the string the replace walks, `at` the form's place in it)
+  const cap = (/** @type {string} */ said, /** @type {number} */ at, /** @type {string} */ all) => (at === 0 || /[.!?]\s*$/.test(all.slice(0, at)) ? said[0].toUpperCase() + said.slice(1) : said);
+  return text
+    .replace(/(\bthe )?\{(seat|faction)\}'s(?=[,.;:!?])/g, (whole, the, a, at, all) => (holds(a) ? cap('that of ' + (the || '') + '{' + a + '}', at, all) : whole))
+    .replace(new RegExp(`(\\bthe )?\\{(seat|faction)\\}'s ([a-z]+)(?=${OF_FORM_BOUND})`, 'g'), (whole, the, a, word, at, all) => (holds(a) ? cap('the ' + word + ' of ' + (the || '') + '{' + a + '}', at, all) : whole))
+    .replace(/(\bthe )?\{settlement\}'s \{institution\}/g, (whole, the, at, all) => (holds('institution') && !holds('settlement')
+      ? cap((/^the\s/i.test(String(slots?.institution).trim()) ? '' : 'the ') + '{institution} at ' + (the || '') + '{settlement}', at, all)
+      : whole));
 }
 
 /**
