@@ -18,7 +18,7 @@
       "src/domain/display/stateProse/stressorsStateProseCandidates.js": "ee0548fc8b662da76e4bf85a1fae30433e9f738277c774e16c6a7abd7fb93552",
       "src/domain/display/stateProse/warFaithStateProseCandidates.js": "b5b193dd2a2c83d077da5f82fd4a5fc5f5ad15a3b6a214725daf41ede442324b"
     },
-    "producerIndexFiles": 1459
+    "producerIndexFiles": 1465
   },
   "totals": {
     "pools": 861,
@@ -12148,7 +12148,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 7,
-      "grammars": 3,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [
         "rank"
@@ -12198,6 +12198,7 @@
         "market": 1,
         "no crisis: plague_onset": 4,
         "no crisis: under_siege": 4,
+        "no exports": 1,
         "no market": 1
       },
       "undeclared": 0,
@@ -35624,6 +35625,7 @@
         "no crisis: succession": 1,
         "no ruler: lord": 5,
         "no seat members": 2,
+        "ruling body": 3,
         "seat members": 3
       },
       "undeclared": 0,
@@ -69050,7 +69052,7 @@
       "subject": "COMBINATION C4: a low rung on a working approach",
       "fields": [],
       "readingFunction": "prosperityHeaderPoolKey",
-      "count": "7 variant(s) · 3 grammar(s) · slots {access, settlement}"
+      "count": "7 variant(s) · 2 grammar(s) · slots {access, settlement}"
     },
     {
       "tier": "COVERED",

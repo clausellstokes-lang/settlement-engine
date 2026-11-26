@@ -32,6 +32,8 @@ const KIND_ROWS = Object.freeze({
   bridge: 'Toll bridge', square: 'Market square', bakery: 'Bakers (5-15)', warehouse: 'Merchant warehouses',
   theatre: 'Theaters', fishingLanding: "Fisher's landing", rootCellar: 'Communal root cellar', shepherd: 'Shepherd',
   craftGuild: 'Craft guilds (5-15)',
+  // WORDS-2 E6 (the tenth chair's leave, RULING G9 (3)): the steward's own house, appended for L12
+  lordsSteward: "Lord's steward",
 });
 const planted = (/** @type {string[]} */ names) => ({ tier: 'village', institutions: names.map((name) => ({ name })) });
 

@@ -18,12 +18,13 @@ import { drawCouncilOfAKind } from './rulerKin.js'; // COHERENCE-POWERS 2B
 import { applyStressEventFactions } from './stressFactions.js';
 import { annotateFactionStanding } from './factionStanding.js';
 import { buildGovernanceLabels } from './governanceNarrative.js';
+import { governanceLabelRosterOf, hasNobleHouseIn, noGrazingQuarrelOfBirth } from './governanceLabelRoster.js'; // BIRTH-1 D3; G43: the grazing flag's one home
 import {
   isMaterializedCustomContent,
   nativeSemanticName,
   nativeSemanticNames,
 } from '../../domain/content/customContentSemanticAuthority.js';
-import { resolveGenerationWorldLaw } from '../generationContext.js'; import { hasMarketInstitution } from '../economy/viability.js'; import { defenseFactsOf, forceWordsOf } from '../../domain/defense/defenseFacts.js'; import { courtHoldersOf } from '../../domain/facts/defence.js'; import { resolveSibling } from '../../domain/facts/drawDeclared.js'; import { birthFactsOf, factsOf } from '../../domain/facts/factsOf.js'; import { textOf } from '../../domain/facts/textOf.js'; import { MILITARY_GUARD_LABEL } from '../../data/factionLabelSiblings.js'; import { FACTION_DESC_SIBLINGS, GOV_DESC_OF_UNNAMED_SEAT, REEVE_ANSWERS_TO_ELECTORS, noGrazingQuarrelOf } from '../../data/powerSiblings.js'; export { FACTION_DESC_SIBLINGS }; import { occupiedSeatLine } from './governingStressVignettes.js'; import { resolveFortuneLawVersion } from '../../domain/fortune/fortuneLaw.js'; // SIZE-3, R6, F1, F10, CENSUS-1c, CENSUS-4f, CENSUS-5c and CENSUS-5e (R-AB: the tables moved to data/powerSiblings.js, re-exported): one line, so no cited line moves; FORTUNE-1 U3 (FS2): the fortune law's reader, for the standing (F31's ceilings: no line added, no packed line added)
+import { resolveGenerationWorldLaw } from '../generationContext.js'; import { hasMarketInstitution } from '../economy/viability.js'; import { defenseFactsOf, forceWordsOf } from '../../domain/defense/defenseFacts.js'; import { courtHoldersOf } from '../../domain/facts/defence.js'; import { resolveSibling } from '../../domain/facts/drawDeclared.js'; import { birthFactsOf, factsOf } from '../../domain/facts/factsOf.js'; import { textOf } from '../../domain/facts/textOf.js'; import { MILITARY_GUARD_LABEL } from '../../data/factionLabelSiblings.js'; import { FACTION_DESC_SIBLINGS, GOV_DESC_OF_UNNAMED_SEAT, REEVE_ANSWERS_TO_ELECTORS } from '../../data/powerSiblings.js'; export { FACTION_DESC_SIBLINGS }; import { occupiedSeatLine } from './governingStressVignettes.js'; import { resolveFortuneLawVersion } from '../../domain/fortune/fortuneLaw.js'; // SIZE-3, R6, F1, F10, CENSUS-1c, CENSUS-4f, CENSUS-5c and CENSUS-5e (R-AB: the tables moved to data/powerSiblings.js, re-exported): one line, so no cited line moves; FORTUNE-1 U3 (FS2): the fortune law's reader, for the standing (F31's ceilings: no line added, no packed line added)
 
 import { renormalizeFactionPower } from './renormalizeFactionPower.js'; export { renormalizeFactionPower }; // LANDING-R2 (ODQ §934.105): moved verbatim to power/renormalizeFactionPower.js, re-exported for its importers
 import { normalizeAndAnnotateFactions } from './normalizeAndAnnotateFactions.js';
@@ -94,16 +95,7 @@ export const generatePowerStructure = (
             })
           ? Math.round(9 * priorityToMultiplier(instFlags.magicInfluence))
           : 0,
-    hasNobleInst = nativeInstitutions.some((inst) => {
-      var nameLower = nativeSemanticName(inst).toLowerCase();
-      return (
-        nameLower.includes('lord') ||
-        nameLower.includes('noble') ||
-        nameLower.includes('manor') ||
-        nameLower.includes('royal seat') ||
-        nameLower.includes('feudal')
-      );
-    }),
+    hasNobleInst = hasNobleHouseIn(nativeInstitutions), // BIRTH-1 D3: the noble house's words in one home (power/governanceLabelRoster.js)
     economyDisplacesNobles = priorities.economy > 70 && !hasNobleInst,
     hasRoyalSeat = nativeInstitutions.some(function (inst) {
       return nativeSemanticName(inst).toLowerCase().includes('royal seat');
@@ -681,11 +673,11 @@ export const generatePowerStructure = (
   factions.forEach((f) => {
     if (!f.category) f.category = inferFactionCategory(f.faction || '');
   });
-  const { stability, recentConflict } = buildGovernanceLabels({
+  const labelInputs = {
     factions,
     config,
     stressFlags,
-    instFlags: { ...instFlags, garrisonStands: defenseFactsOf({ institutions: nativeInstitutions }).hasGarrison, noGrazingQuarrel: noGrazingQuarrelOf({ institutionNames: instNames, pastoral: economicState?.foodSecurity?.chains?.['Pastoral & livestock'] === true, grounds: config?.nearbyResources }) }, // TAIL-POWERS-3 P16 (G5): the garrison, for the military word; BAR8-K-POWERS (15b): the cascade's last quarrel where nothing grazes
+    instFlags: { ...instFlags, garrisonStands: defenseFactsOf({ institutions: nativeInstitutions }).hasGarrison, noGrazingQuarrel: noGrazingQuarrelOfBirth(config, economicState) }, // TAIL-POWERS-3 P16 (G5): the garrison, for the military word; BAR8-K-POWERS (15b): the cascade's last quarrel where nothing grazes, from its one home (G43, power/governanceLabelRoster.js)
     neighbourRelationship,
     instNames,
     priorities,
@@ -696,7 +688,11 @@ export const generatePowerStructure = (
     stressEntries: stressEntries || [],
     fallbackStressType: stressType,
     failedFoodSource: economicState?.foodSecurity?.foodRecord?.failedSource ?? null, defenseLabel: projection.defenseLabel || null, militaryGate: projection.militaryGate ?? null, // POWERS-14 (NEW1): the record's readiness label, on the replay; PP11: its funding gate
-  });
+  };
+  const { stability, recentConflict: sentenceOverOwnRoster } = buildGovernanceLabels(labelInputs);
+  // BIRTH-1 D3 (intake 2): the late replay hands the SETTLED roster (after the coherence repair) for the sentence alone; the
+  // writer draws nothing, so the stability, the powers and every draw stand as the roster above gives them
+  const recentConflict = projection.sentenceInstitutions ? buildGovernanceLabels({ ...labelInputs, ...governanceLabelRosterOf(config, projection.sentenceInstitutions, economicState) }).recentConflict : sentenceOverOwnRoster;
   // ── Public legitimacy & faction dynamics ────────────────────────────────
   // At this point defenseProfile isn't computed yet — we use a provisional
   // defense label derived from institution presence for the legitimacy score,

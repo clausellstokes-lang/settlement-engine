@@ -268,7 +268,7 @@ registerStep('assembleSettlement', {
       settlement.powerStructure,
       settlement.economicState,
       ctx.powerIntent,
-      { defenseLabel: settlement.defenseProfile.readiness.label, militaryGate: settlement.defenseProfile.economicGates?.military, pins, forces: factsOf(settlement).defence }, // BAR6-POWERS (10/g): the settled roster's defence atoms (`defenceOf`, through the fact home this file imports), for `militaryForceLine.js`
+      { defenseLabel: settlement.defenseProfile.readiness.label, militaryGate: settlement.defenseProfile.economicGates?.military, pins, forces: factsOf(settlement).defence, sentenceInstitutions: settlement.institutions }, // BAR6-POWERS (10/g): the settled roster's defence atoms (`defenceOf`, through the fact home this file imports), for `militaryForceLine.js`; BIRTH-1 D3: the settled roster, the power step's sentence re-written over it (economyReconciliation.js)
     );
     refreshPowerGenerationTraces(
       ctx,
@@ -401,7 +401,7 @@ registerStep('assembleSettlement', {
   }
 
   // The pressure line, on its own 'pressure-sentence' child, now that the ties exist (PEOPLE-4 TIES).
-  settlement.pressureSentence = inAssemblySubstream(rng, 'pressure-sentence', () => generatePressureSentence(settlement));
+  settlement.pressureSentence = inAssemblySubstream(rng, 'pressure-sentence', () => generatePressureSentence(settleCrisisBodyLines(pins, settlement))); // BIRTH-1 D7: the power step's crisis sentence first reads the settled roster (settleCrisisBodyLines, at the END), no draw
 
   // ── GS-2 ONE FACTION SET (chair ruling on G-SEAMS S2, ODQ §934.101). The power factions are
   // the factions. `factions` groups the FINAL roster by each NPC's power affiliation and mints
@@ -576,3 +576,23 @@ import { settleMeritsOfRule } from '../../domain/fortune/fortuneMerits.js';
 import { legitimacyBandFor, withCaptureRelations } from '../factionDynamics.js';
 import { settleStandingToLegitimacy } from '../power/rosterText.js';
 import { GENERATOR_VERSION } from '../../domain/settlement.schema.js'; // GUARD (R24j 2): at the END, as above (this file's writes are cited by LINE)
+/**
+ * THE CRISIS NAMES ONLY WHAT THE PLACE HOLDS (BIRTH-1 D7; the tenth chair's rulings G17, G18 of 2026-11-25). The power step
+ * writes its crisis sentence (`recentConflict`) before the roster is resized; a sentence that names the crisis's own body (the
+ * creditor's agent, a second congregation) resolves here, sentence by sentence, against the SETTLED roster
+ * (`data/powerSiblings.js :: CRISIS_BODY_SIBLINGS`, the atom `crisis body: <kind>`), before the pressure line reads the record.
+ * No roll. A HELD powerStructure is the DM's and is not re-worded. At the END of the file so no cited line moves.
+ * @param {any} pins the step's pins
+ * @param {any} settlement the assembled record
+ * @returns {any} the record, its crisis sentence true of its roster
+ */
+function settleCrisisBodyLines(pins, settlement) {
+  const power = settlement.powerStructure;
+  if (chooseOrPin(pins, 'powerStructure', () => UNPINNED) !== UNPINNED || typeof power?.recentConflict !== 'string') return settlement;
+  const opts = { facts: () => factsOf(settlement), poolId: 'powerSiblings:CRISIS_BODY_SIBLINGS', surface: 'power', drawKind: /** @type {const} */ ('T') };
+  // sentence by sentence (as `drawDeclared.js :: resolveSiblingSentences` splits), through the one door this step already calls
+  const line = power.recentConflict.split(/(?<=[.!?])(\s+)/).map((part) => resolveSibling(part, CRISIS_BODY_SIBLINGS, opts)).join('');
+  if (line !== power.recentConflict) settlement.powerStructure = { ...power, recentConflict: line };
+  return settlement;
+}
+import { CRISIS_BODY_SIBLINGS } from '../../data/powerSiblings.js'; // BIRTH-1 D7: at the END, as above (this file's writes are cited by LINE)

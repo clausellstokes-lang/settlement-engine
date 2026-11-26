@@ -67,6 +67,7 @@
  */
 import { STATE_MARK_DIMENSIONS, EMPTY_DECLARATION, declarationOfTags, declarationOfMarks, declarationAdmits, declares, atomsOf, COLOUR_MARK } from '../../facts/factVocabulary.js';
 import { activePresumptionLedger, notePresumption } from '../../facts/presumptionLedger.js';
+import { holdsPossessive } from '../../../data/people/powerSentenceName.js'; // E1 (G5): the "of" form's one predicate
 
 /**
  * One authored sentence, as the corpus projection emits it.
@@ -425,6 +426,35 @@ export function resolveDeclaredPosition(declarations, drawn, facts, key, where =
 }
 
 /**
+ * THE "OF" FORM OF A NAME THAT HOLDS A POSSESSIVE (E1, WORDS-1; the tenth chair's ruling G5 of 2026-11-25), as a rule of the
+ * fill, never a case: where a slot's fill holds a possessive word (`powerSentenceName.js :: holdsPossessive`: "Headman's
+ * Authority", "the Thieves' Guild", "Caravan masters' exchange"), the template's possessive joiner on it is written the
+ * other way round, so no sentence prints two possessives in a row:
+ *   "{a}'s {b}", the fill of {b} holding one          → "the {b} at {a}"   ("The Caravan masters' exchange at Uaymtzal …")
+ *   "the {a}'s word" / "{a}'s word", {a} holding one   → "the word of the {a}" / "the word of {a}" ("take the place of the
+ *                                                         Headman's Authority", "in the pocket of the Thieves' Guild")
+ *   "the {a}'s" / "{a}'s" standing alone before , . ; : ! ?, {a} holding one → "that of the {a}" / "that of {a}" ("needs
+ *                                                         one name, that of the Headman's Authority, and …")
+ * A template whose fills hold no possessive is returned as it is, byte for byte. A form at the sentence's head takes "The".
+ * @param {string} text @param {Record<string, unknown> | null | undefined} slots @returns {string}
+ */
+function ofForms(text, slots) {
+  if (!text.includes("}'s")) return text;
+  const holds = (/** @type {string} */ name) => !!slots && isFilled(slots[name]) && holdsPossessive(slots[name]);
+  const head = (/** @type {number} */ at) => at === 0 || /[.!?]\s*$/.test(text.slice(0, at));
+  const alone = text.replace(/(\bthe )?\{([a-zA-Z_][a-zA-Z0-9_]*)\}'s(?=[,.;:!?])/g, (whole, the, a, at) => (holds(a) ? (head(at) ? 'That of ' : 'that of ') + (the || '') + '{' + a + '}' : whole));
+  if (alone !== text) return ofForms(alone, slots);
+  return text.replace(/(\bthe )?\{([a-zA-Z_][a-zA-Z0-9_]*)\}'s (?:\{([a-zA-Z_][a-zA-Z0-9_]*)\}|([a-z]+))/g, (whole, the, a, b, word, at) => {
+    /** @type {string} */ let said;
+    const of = (/** @type {string} */ name) => '{' + name + '}';
+    if (b && holds(b) && !holds(a)) said = (/^the\s/i.test(String(slots?.[b]).trim()) ? '' : 'the ') + of(b) + ' at ' + (the || '') + of(a);
+    else if (holds(a)) said = 'the ' + (b ? of(b) : word) + ' of ' + (the || '') + of(a);
+    else return whole;
+    return head(at) ? said[0].toUpperCase() + said.slice(1) : said;
+  });
+}
+
+/**
  * Substitute every `{slot}` in a sentence. Returns `null` when any named slot lacks a
  * fill — a rendered `{counterpart}` is worse than no sentence, and this is the second
  * gate on the same invariant `variantIsAnchored` checks, kept because the composer and
@@ -436,7 +466,7 @@ export function resolveDeclaredPosition(declarations, drawn, facts, key, where =
 export function fillSlots(text, slots) {
   if (typeof text !== 'string' || text === '') return null;
   let unfilled = false;
-  const out = text.replace(/\{([a-zA-Z_][a-zA-Z0-9_]*)\}/g, (whole, name) => {
+  const out = ofForms(text, slots).replace(/\{([a-zA-Z_][a-zA-Z0-9_]*)\}/g, (whole, name) => {
     const value = slots ? slots[name] : undefined;
     if (!isFilled(value)) { unfilled = true; return whole; }
     return String(value).trim();

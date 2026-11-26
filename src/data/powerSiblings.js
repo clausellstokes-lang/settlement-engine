@@ -67,34 +67,35 @@ export const BASELINE_CONFLICT_SIBLINGS = Object.freeze({
   ]),
 });
 
-/** A house that keeps beasts or grazing (the detector's own words, `tests/helpers/pageLaws/law15K.mjs`). */
-const GRAZING_HOUSE = /grazing|pasture|herd|shepherd|livestock|cattle|sheep|goat|ranch|dairy|stockyard|horse|stable|drover/i;
-/** A ground of the land: grazing, fields, farms, forest, foraging or hunting (the same). */
-const LAND_GROUND = /forag|hunt|grass|pasture|meadow|plain|steppe|farm|fertile|grain|orchard|mill|herb|grove|forest|wood(?!.*ship)|grazing|herds/i;
-/** The grounds a quarrel can be over, in order, and how the line names each. @type {ReadonlyArray<readonly [RegExp, string]>} */
+/** The grounds a quarrel can be over, in order, and how the line names each (BAR8-K-POWERS's, unchanged). @type {ReadonlyArray<readonly [RegExp, string]>} */
 const QUARREL_GROUNDS = Object.freeze([
   [/marsh/i, 'the marsh'], [/harbour|coast|shore|beach/i, 'the shore'],
 ]);
+/** A ground near the place that is water: a marsh, a harbour or shore, fishing, a river's fish, mills or clay, an oasis, springs, a floodplain or a lake. */
+const WATER_GROUND = /marsh|harbour|coast|shore|beach|fish|river|oasis|spring|floodplain|lake/i;
 
 /**
- * BAR8-K-POWERS (rule 15b; the chair's BR15): THE QUARREL OVER THE GROUND THE PLACE HAS, where it has no grazing. The grazing
- * quarrel presumes grazing; the boundary is the second check's, and thin (C31732 STANDS in a thorp whose grounds are a deep
- * harbour, ship timber and ruins; C30951 and C31349, the same record but for a foraging or a hunting ground, were EXPLAINED:
- * a farming or foraging place can quarrel over grazing). So the twin is taken only where the place holds no grazing house,
- * no running pastoral chain and no ground of the land (grass, pasture, field, farm, forest, foraging or hunting ground); its
- * subject is read off the place's own grounds (the marsh, the shore), else its water.
+ * WORDS-2 E3, the tenth chair's RULING G9 (2), its STOP, and RULING G13 (the owner's rule: "Don't invent drama capitalize on
+ * what's already there if it's there"): THE CASCADE'S LAST FALL-THROUGH (`governanceNarrative.js :: deriveBaselineConflict`)
+ * KEEPS A QUARREL ONLY WHERE THE RECORD HOLDS A FACT THAT DISTINGUISHES THE PLACE. The grazing quarrel (the stock line, `null`
+ * here) only where herding is what the place lives by: its LEADING home food source is the herds
+ * (`economicState.foodSecurity.foodRecord.foodSources[0] === 'livestock'`, `generators/foodLand.js :: foodSources`, the
+ * estate's "leading home food source" of `facts/leadingSourceSpent.js`), never merely a grazing house on the roster. Else
+ * BAR8-K-POWERS's twin, word for word, where the place's own land holds its subject: the marsh or the shore (a ground near
+ * it), else water (a water ground near it, a riverside or coastal terrain, a river or port road). A calm place holding none
+ * of them stores NO quarrel (the empty string). No new line is written.
  * Pure: a reading of the arguments, no draw.
- * @param {{ institutionNames?: ReadonlyArray<string>, pastoral?: boolean, grounds?: ReadonlyArray<unknown> }} place
- * @returns {string | null} the twin, or null where the place grazes (the stock line stands)
+ * @param {{ leadingFood?: unknown, grounds?: ReadonlyArray<unknown>, terrain?: unknown, route?: unknown }} place
+ * @returns {string | null} null where herding leads (the stock line stands); the twin where the land holds the marsh, the
+ *   shore or water; the empty string where it holds none (no quarrel)
  */
-export function noGrazingQuarrelOf({ institutionNames = [], pastoral = false, grounds = [] }) {
-  const names = (Array.isArray(institutionNames) ? institutionNames : []).map((n) => String(n || ''));
+export function noGrazingQuarrelOf({ leadingFood = null, grounds = [], terrain = null, route = null }) {
   const own = (Array.isArray(grounds) ? grounds : []).map((g) => String(g || ''));
-  if (pastoral === true || names.some((n) => GRAZING_HOUSE.test(n)) || own.some((g) => LAND_GROUND.test(g))) return null;
+  if (leadingFood === 'livestock') return null;
   const ground = QUARREL_GROUNDS.find(([re]) => own.some((g) => re.test(g)));
-  return ground
-    ? `A dispute over rights on ${ground[1]} and access to water has run for two seasons, and those on each side of it no longer speak to one another.`
-    : 'A dispute over water access has run for two seasons, and those on each side of it no longer speak to one another.';
+  if (ground) return `A dispute over rights on ${ground[1]} and access to water has run for two seasons, and those on each side of it no longer speak to one another.`;
+  const water = own.some((g) => WATER_GROUND.test(g)) || terrain === 'riverside' || terrain === 'coastal' || route === 'river' || route === 'port';
+  return water ? 'A dispute over water access has run for two seasons, and those on each side of it no longer speak to one another.' : '';
 }
 // CENSUS-5e unit 2 (2026-11-05; the chair's answer 1 to CENSUS-5d, R-AN / R-U): the town military
 // modifier's set (`MILITARY_MODIFIER_SIBLINGS`: garrison-backed / arms-backed) dissolved. Garrison
@@ -172,4 +173,27 @@ export const GOV_DESC_OF_UNNAMED_SEAT = Object.freeze({
   'Priestly Guidance': 'The priest guides the community, and disputes are brought to the priest to settle.',
   'Town Mayor': "A mayor runs the town's day-to-day business.",
   'Grand Guild Council': 'The guilds of the metropolis govern together; the richer the guild, the more say it has.',
+});
+
+/**
+ * THE CRISIS LINES THAT NAME THE CRISIS'S OWN BODY (BIRTH-1 D7; the tenth chair's rulings G17 (1) and (3), G18 of 2026-11-25).
+ * The power step's sentence (`governanceNarrative.js :: buildStressNarratives`, `governingStressVignettes.js ::
+ * buildReligiousConversionNarrative`) names a local body of the crisis (the creditor's agent; a second priest and congregation),
+ * written before the roster settles. Each such sentence is declared here by its text: the original `needs` the crisis's own power
+ * on the settled roster (`crisis body: <kind>`, `domain/facts/crisisBody.js`), its twin `excludes` it. Resolved sentence by
+ * sentence against the SETTLED record (`assembleSettlement.js`, before the pressure line); no draw.
+ */
+export const CRISIS_BODY_SIBLINGS = Object.freeze({
+  "The creditor's agent has blocked the money for repairs.": Object.freeze([
+    Object.freeze({ text: "The creditor's agent has blocked the money for repairs.", needs: Object.freeze(['crisis body: indebted']) }),
+    Object.freeze({ text: 'Word from the creditor has blocked the money for repairs.', twinOf: "The creditor's agent has blocked the money for repairs.", excludes: Object.freeze(['crisis body: indebted']) }),
+  ]),
+  'In public they talk of prudence; in private they point to a clause in the loan.': Object.freeze([
+    Object.freeze({ text: 'In public they talk of prudence; in private they point to a clause in the loan.', needs: Object.freeze(['crisis body: indebted']) }),
+    Object.freeze({ text: 'In public those in charge talk of prudence; in private they point to a clause in the loan.', twinOf: 'In public they talk of prudence; in private they point to a clause in the loan.', excludes: Object.freeze(['crisis body: indebted']) }),
+  ]),
+  'The split is now open: two priests, two congregations, two registers of births, deaths and marriages.': Object.freeze([
+    Object.freeze({ text: 'The split is now open: two priests, two congregations, two registers of births, deaths and marriages.', needs: Object.freeze(['crisis body: religious_conversion', 'church']) }), // "two priests" presumes the clergy (the registered word `clergy`, declared on the line): a church (the tenth chair's G25)
+    Object.freeze({ text: 'The split is now open: the converts keep their own register of births, deaths and marriages.', twinOf: 'The split is now open: two priests, two congregations, two registers of births, deaths and marriages.', excludes: Object.freeze(['crisis body: religious_conversion']) }),
+  ]),
 });

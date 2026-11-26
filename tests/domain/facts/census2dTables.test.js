@@ -245,7 +245,9 @@ describe('PRESSURE_SENTENCES (narrativeText.js, R: the rows inside each stressor
     // 21 -> 23 (TAIL-NARRATIVE, READ-ALL 20438/20439 and 00172): monster_pressure[1] needs a force that musters, [2] the hamlet tier
     // 23 -> 28 (BAR6-SCENES, 2026-11-16; re-keyed by identity, this batch's own count): the size rows occupied[5],
     // politically_fractured[0] and [5], mass_migration(strongeconomy)[0] (`tier`), and wartime(losing)[0] (`legitimacy crisis`)
-    expect(declaring).toBe(28);
+    // 28 -> 29 (BIRTH-1 D7, the tenth chair's rulings G17 (2) and G18, 2026-11-25): indebted[0] names the creditor's representative and
+    // needs the creditor's own power on the roster (`crisis body: indebted`); its twin row stands at the pool's end, never drawn
+    expect(declaring).toBe(29);
   });
 });
 

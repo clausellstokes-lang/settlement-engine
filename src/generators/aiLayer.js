@@ -168,7 +168,7 @@ export function extractFullContext(s) {
     govCat:       governing?.category || null,
     stability:    ps.stability ?? null,
     factionCount: factions.length,
-    factions:     factions.slice(0, 5).map(f => `${f.faction} (${f.power}%)`),
+    factions:     powersStrongestFirst(factions).slice(0, 5).map(f => `${f.faction} (${f.power}%)`), // D4 (BIRTH-2): the five strongest, strongest first
     // Conflict entries are { parties, issue, stakes, desc, … } (powerGenerator's
     // generateConflicts) — description/type exist only on legacy/edge shapes.
     conflicts:    conflicts.slice(0, 3).map(c => c.desc || c.description || c.issue || c.type).filter(Boolean),
@@ -429,3 +429,4 @@ export async function runTemplateNarrative(settlement, onProgress) {
   };
 }
 import { chainPrintName } from '../domain/display/chainPrintName.js'; // COHERENCE-AGREE-6 (F1): what a chain prints under
+import { powersStrongestFirst } from '../domain/display/powersStrongestFirst.js'; // D4 (BIRTH-2): the five powers the template narrative names, strongest first

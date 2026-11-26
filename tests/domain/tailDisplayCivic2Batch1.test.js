@@ -48,7 +48,7 @@ const KEPT = [
   ['r2r-town-37', 'Disasters & Famine', 'The outbreak has come. Clergy provide basic wound care: better than nothing, worse than a hospital.'],
   ['r2r-town-12', 'Disasters & Famine', 'The hospital can isolate the sick and keep an outbreak from spreading.'],
   ['r2r-village-8', 'Disasters & Famine', 'A healer treats the sick one at a time; an outbreak would outrun it.'],
-  ['r2r-thorp-0', 'Beasts & Monsters', 'Quiet country, and nothing organised is kept against it.'],
+  ['r2r-thorp-0', 'Beasts & Monsters', 'Quiet country and no organised defence, which is all the country asks.'], // P9 (RULING G22): settled country is graded Adequate at least, so the reassurance prints
   ['r2r-city-1', 'Beasts & Monsters', 'Quiet country, and far more defences than it calls for.'],
   ['r2s-famine-city-3', 'Beasts & Monsters', 'Quiet country, and far more defences than it calls for.'],
   ['r2r-town-10', 'Beasts & Monsters', 'The primary threats here are internal.'],

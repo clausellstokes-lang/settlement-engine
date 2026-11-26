@@ -33,6 +33,20 @@ import { createPRNG } from '../../../src/kernel/prng.js';
 import { rowHashes, townRow, vantageHash } from '../../fixtures/goalHashes.mjs';
 import BORN from '../../fixtures/goal-hashes-d3937c3f8.json';
 
+/**
+ * E1 (WORDS-1, the tenth chair's G5): a want's house fill of a person noun that holds a possessive takes its short title
+ * ("the appointee's office", never "the lord's appointee's office"); d3937c3f8's hashes hold the long form, so a holding is
+ * read in that form here. @param {any} c @returns {any}
+ */
+const longTitled = (c) => (c?.goal ? { ...c, goal: { ...c.goal, ...Object.fromEntries(['short', 'long'].map((v) => [v, typeof c.goal[v] === 'string' ? c.goal[v].replace(/\bthe (steward|reeve|appointee)'s office\b/g, "the lord's $1's office") : c.goal[v]])) } } : c);
+
+/**
+ * E8 (WORDS-1, the tenth chair's G5): the reflexive slot writes a want's `{self}` as its card's own form ("make himself useful");
+ * d3937c3f8's hashes hold the line as written before the slot ("themselves"), so a holding is read in that form here.
+ * @param {any} c @returns {any}
+ */
+const heldGoal = (c) => (c?.goal ? { ...c, goal: { ...c.goal, ...Object.fromEntries(['short', 'long'].map((v) => [v, typeof c.goal[v] === 'string' ? c.goal[v].replace(/\b(?:him|her)self\b/g, 'themselves') : c.goal[v]])) } } : c);
+
 /** Every receipt list the deal and the post-pass returned, in call order (reset per town). */
 const log = vi.hoisted(() => /** @type {{ lists: any[][] }} */ ({ lists: [] }));
 vi.mock('../../../src/generators/people/goals.js', async (importOriginal) => {
@@ -94,7 +108,7 @@ function measure(size, law1) {
       else if (rosterIsReference) (town.npcs || []).forEach((/** @type {any} */ c, /** @type {number} */ k) => {
         const was = rowHashes(row, k); const r = receipts.get(String(c.id));
         for (const v of /** @type {const} */ (['short', 'long'])) {
-          if (vantageHash(c, v) === was[v]) continue;
+          if (vantageHash(heldGoal(longTitled(c)), v) === was[v]) continue; // E1 + E8: read in the reference's form (`longTitled`, `heldGoal`)
           moved += 1;
           if (!r?.repeat?.[v] && !r?.[v]?.refusedBy) stray.push(`${seed} ${c.id}.${v}: moved from d3937c3f8, no repeat and no refusal on its receipt ("${c.goal?.[v]}")`);
         }

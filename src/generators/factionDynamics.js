@@ -15,7 +15,7 @@
  *   applyLegitimacyMultipliers → mutates faction array in place
  */
 
-import { LEGITIMACY_CUTS, READINESS_BANDS, legitimacyBandOf } from '../data/bandLadders.js'; import { STRESS_POWER_FACES } from '../data/stressPowerFaces.js'; import { powerNameAfterArticle, powerNameWithArticle, powerPossessive } from '../domain/display/powerSentenceName.js'; import { pluralPowerName } from '../domain/display/governanceAccount.js'; /** TAIL-POWERS-B (P3 + the agreement law): a power in a relation line takes its prose form (`say`) and the verb its number (`verb`). NAMES-1 (CN1): the form with its article, "the Elder Council" (`opening` raises a sentence's first "the"), and its possessive "the Guard's" (`sayOf`). @param {{faction?: string} | null | undefined} f */ const say = (f) => powerNameWithArticle(f?.faction); /** @param {{faction?: string}} f @param {string} one @param {string} many */ const verb = (f, one, many) => (pluralPowerName(say(f)) ? many : one); /** @param {{faction?: string}} f */ const sayOf = (f) => `the ${powerPossessive(powerNameAfterArticle(f?.faction))}`; /** @param {unknown} t @returns {any} */ const opening = (t) => (typeof t === 'string' ? t.replace(/(^|[.!?]\s+)the /g, '$1The ') : t); import { DEFAULT_FORTUNE_LAW_VERSION, FORTUNE_LAW_TUNING, SIZE_RELATIVE_FORTUNE_LAW_VERSION, readFortuneLawVersion } from '../domain/fortune/fortuneLaw.js'; // one line: the holder census keys this file by line (FORTUNE-1 U3: the fortune law's import rides it, and its helpers sit below computePublicLegitimacy)
+import { LEGITIMACY_CUTS, READINESS_BANDS, legitimacyBandOf } from '../data/bandLadders.js'; import { STRESS_POWER_FACES } from '../data/stressPowerFaces.js'; import { holdsPossessive, powerNameAfterArticle, powerNameWithArticle, powerPossessive } from '../domain/display/powerSentenceName.js'; import { pluralPowerName } from '../domain/display/governanceAccount.js'; /** TAIL-POWERS-B (P3 + the agreement law): a power in a relation line takes its prose form (`say`) and the verb its number (`verb`). NAMES-1 (CN1): the form with its article, "the Elder Council" (`opening` raises a sentence's first "the"), and its possessive "the Guard's" (`sayOf`). @param {{faction?: string} | null | undefined} f */ const say = (f) => powerNameWithArticle(f?.faction); /** @param {{faction?: string}} f @param {string} one @param {string} many */ const verb = (f, one, many) => (pluralPowerName(say(f)) ? many : one); /** @param {{faction?: string}} f */ const sayOf = (f) => `the ${powerPossessive(powerNameAfterArticle(f?.faction))}`; /** E1 (WORDS-1, G5): "the Guard's rule"; a name that holds a possessive, "the rule of the Headman's Authority" @param {{faction?: string}} f */ const ruleOf = (f) => (holdsPossessive(say(f)) ? `the rule of ${say(f)}` : `${sayOf(f)} rule`); /** @param {unknown} t @returns {any} */ const opening = (t) => (typeof t === 'string' ? t.replace(/(^|[.!?]\s+)the /g, '$1The ') : t); import { DEFAULT_FORTUNE_LAW_VERSION, FORTUNE_LAW_TUNING, SIZE_RELATIVE_FORTUNE_LAW_VERSION, readFortuneLawVersion } from '../domain/fortune/fortuneLaw.js'; // one line: the holder census keys this file by line (FORTUNE-1 U3: the fortune law's import rides it, and its helpers sit below computePublicLegitimacy)
 // ── Public legitimacy contributions ──────────────────────────────────────────
 // Prosperity → ±20
 const PROSPERITY_CONTRIB = {
@@ -437,7 +437,7 @@ export function withConflictRelations(powerStructure, conflicts) {
     // TAIL-POWERS-B-4 (P31 (5)): the seat and the faith that "props up" its rule are not said to prop each other up beside a HIGH quarrel
     const ordained = ORDAINED_SEAT.exec(narrative);
     const direction = quarrel.intensity === 'high' ? 'escalating' : row.direction;
-    if (ordained) return { ...row, direction, narrative: `${ordained[1]}; ${ordained[2]} ${ordained[3] === 'tells' ? 'has' : 'have'} long told people that ${ordained[4]} rule is right and ordained, but the two are now at odds over ${issue}.` };
+    if (ordained) return { ...row, direction, narrative: `${ordained[1]}; ${ordained[2]} ${ordained[3] === 'tells' ? 'has' : 'have'} long told people that ${ordained[4]} is right and ordained, but the two are now at odds over ${issue}.` };
     return { ...row, direction, narrative: `${narrative} Even so, the two are now at odds over ${issue}.` };
   });
   return moved ? { ...powerStructure, factionRelationships } : powerStructure;
@@ -490,9 +490,9 @@ export const MERCHANT_CRAFT_VOTE = Object.freeze({
 
 /** The seat-and-faith row's dependent line (computeFactionRelationships), in either of its seat forms: its parts, for the
  * HIGH twin (withConflictRelations). */
-const ORDAINED_SEAT = /^(.+ holds the seat(?: and collects the taxes)?); (.+) (tells|tell) people that (.+) rule is right and ordained\. Each props up the other\.$/;
+const ORDAINED_SEAT = /^(.+ holds the seat(?: and collects the taxes)?); (.+) (tells|tell) people that (.+) is right and ordained\. Each props up the other\.$/; // E1 (G5): its 4th part the rule whole, "X's rule" or "the rule of X"
 
-import { SEAT_HOLDER_LINES } from '../data/seatHolderLines.js'; // SEAT-10 U6 (CS12): the holder's lines, the chair's wordings; these imports sit here, below the lines the holder census cites by number (tests/lint/proseWiringCensus.walker.test.js)
+import { SEAT_HOLDER_LINES, seatOfForm } from '../data/seatHolderLines.js'; // SEAT-10 U6 (CS12): the holder's lines, the chair's wordings; these imports sit here, below the lines the holder census cites by number (tests/lint/proseWiringCensus.walker.test.js)
 import { fillAgreement } from '../data/people/powerSentenceName.js';
 import { pickVariantMixed } from '../kernel/proseHash.js';
 import { getActiveRng } from '../kernel/rngContext.js';
@@ -555,7 +555,7 @@ export function seatHolderLinesOf(pool, apart) {
 /** @param {string} line @param {{ form: Record<string, any>, holder: Record<string, any> }} apart @returns {string} */
 function seatHolderFill(line, apart) {
   const form = powerNameAfterArticle(apart.form.faction);
-  return opening(fillAgreement(line, { holder: say(apart.holder) })
+  return opening(fillAgreement(holdsPossessive(form) ? seatOfForm(line) : line, { holder: say(apart.holder) }) // E1 (G5): the "of" form for a name that holds a possessive
     .replace(/\{form's\}/g, powerPossessive(form))
     .replace(/\{form\}/g, form)
     .replace(/\{holder\}/g, say(apart.holder)));
@@ -701,7 +701,7 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
       type = 'dependent';
       // TAIL-POWERS-B: the seat, not an order a siege, a famine, an insurgency or an occupation denies (was "keeps order")
       // TAIL-POWERS-B-4 (P31 (5)): under an occupation the occupier takes the levy; the seat is said held, and no taxes are said
-      narrative = `${say(gov)} holds the seat${stressed('occupied') ? '' : ' and collects the taxes'}; ${say(rel)} ${verb(rel, 'tells', 'tell')} people that ${sayOf(gov)} rule is right and ordained. Each props up the other.`;
+      narrative = `${say(gov)} holds the seat${stressed('occupied') ? '' : ' and collects the taxes'}; ${say(rel)} ${verb(rel, 'tells', 'tell')} people that ${ruleOf(gov)} is right and ordained. Each props up the other.`;
     } else {
       type = 'subordinate';
       narrative = `${rel.faction} answers to ${gov.faction}. Its priests look after their flocks and have no say in the hall.`;

@@ -9,8 +9,8 @@
  *          prints both sides of any row (WAGES and P1-P4 have none: ARM 5 holds them; CRITICAL v2-v3 x GARRISONED v1 is watched).
  *   ARM 2 (anti-vacuity): each side's matcher matches its own leaf texts, slot-filled; and on real pages (ARM 1's births
  *          and the named control seeds) each side of each row is found.
- *   ARM 3: each pinned tail (`PINNED_TAILS`: GEN-17 GARRISONED v2's "and the money is found every season", and GEN-13
- *          NO-MARKET v12's "and trades in a small way: …", the chair's N71; the page cuts both) prints on 0 pages of ARM 1's
+ *   ARM 3: each pinned tail (`PINNED_TAILS`: GEN-13 NO-MARKET v12's "and trades in a small way: …", the chair's N71; the
+ *          page cuts it; GEN-17 GARRISONED v2's tail left the table with WORDS-2 E9, below) prints on 0 pages of ARM 1's
  *          births; its matcher matches its own leaf text, and its variant's head prints: found by the side's matcher, or,
  *          where the printed head is a cut under the FLOOR (below), drawn by the ledger with the site mount's cut of its text
  *          (`generalDeskRead.js :: siteClause`) on the page.
@@ -24,6 +24,17 @@
  *          (on 244fa84ef's leaf dz-town-2 printed v1's, dz-town-36 v2's); each matcher matches its own text.
  *          PROSE-E (the chair, N70): five more re-worded in place, their old words pinned the same way (NO-MARKET v10; full
  *          legal chain v1, v2; CHAIN working v1; CRITICAL v1), red first on b443be64b's leaves.
+ *   ARM 6 (WORDS-2 E9, the tenth chair's E9): GEN-17 GARRISONED v2's source says what the page prints: the place's trim
+ *          (`generalDeskRead.js :: siteClause`) cuts nothing from it, so no clause of the leaf is a clause no page shows; its
+ *          old words ("…, and the money is found every season.") are held at 0 pages by ARM 5. Red first on 0ec96f13d8's leaf.
+ *   WORDS-2 E4 (the tenth chair's RULING G3 (a)): DS-ECO-1 COMBINATION C4 v6's old words ("There is no market at …") join
+ *          ARM 5's pins, red first on 0ec96f13d8's leaf (the leaf still held them).
+ *   ARM 7 (WORDS-2, the tenth chair's RULINGS G6 #1 and G12, IN THE WORDS, NOT THE SEAT): DS-POW-5 `council` v1, v2, v4, the
+ *          lines that presuppose a body deciding together ("the whole {seat} must agree"), declare `ruling body`; so a single
+ *          holder draws none of them: a headman or a reeve (`office:`), a Town Mayor, a Priestly Guidance (the governing row's
+ *          form, read here apart from the mark); the steward is `ruler: lord`, already refused. A council-held birth still
+ *          draws them. Its seeds: dp-hamlet-1, -101, -102 (E2's census, `docs/chair/2026-11-24/tenth/gen/words-2/E2-CENSUS.md`
+ *          #1), red first on 0ec96f13d8's leaf. Nothing of who sits or holds is read differently.
  * THE FLOOR (the chair, N71): the matcher does not match a clause cut of fewer than four literal words
  *   (`tests/helpers/oppositeSentencePairs.mjs :: formsOf`, `literalWords >= 4`), so a line the page prints only as such a cut
  *   is invisible to every arm that reads by matcher: NO-MARKET v12 draws on 46 of the 900 and prints as "{settlement} has no
@@ -42,6 +53,8 @@ import { siteClause } from '../../src/components/new/generalDeskRead.js';
 import { eligibleVariants } from '../../src/domain/display/stateProse/stateProseKernel.js';
 import { economicRowPoolKey, foodTradesPoolKey } from '../../src/domain/display/stateProse/defenseStateProse.js';
 import { institutionsPoolKey } from '../../src/domain/display/stateProse/generalStateProse.js';
+import { factsOf } from '../../src/domain/facts/factsOf.js';
+import { governingFactionOf, nameOf } from '../../src/domain/rulingPower.js';
 import { factsAnswered } from '../../src/domain/facts/factsAnswered.js';
 import { wallsAnswered } from '../../src/domain/defense/defenseFacts.js';
 import { crisisAnswered } from '../../src/domain/crisis/crisisFacts.js';
@@ -184,4 +197,26 @@ describe('DISAGREE: no page prints both sides of an opposite pair', () => {
     expect(printed).toEqual([]);
     for (const pin of PINNED_OLD_WORDS) expect(textsOf(pin.side).includes(pin.text), `${pin.id}: the leaf no longer holds the old words`).toBe(false);
   }, 120_000); // its own budget: the births of ARM 1, reused
+
+  it('ARM 6: GEN-17 GARRISONED v2\'s source words are the words the page prints (the trim cuts nothing)', () => {
+    const v2 = DOSSIER_STATE_PROSE_GENERAL['DS-GEN-17'].pools.GARRISONED.find((v) => v.vid === 2);
+    expect(v2?.text).toBeTypeOf('string');
+    expect(siteClause(v2.text)).toBe(v2.text);
+  });
+  it('ARM 7: a single holder draws no line of a body deciding together; a council still does (G6 #1, G12)', async () => {
+    const BODY = ['DS-POW-5::council::v1', 'DS-POW-5::council::v2', 'DS-POW-5::council::v4'];
+    const SINGLE_SEEDS = ['dp-hamlet-1', 'dp-hamlet-101', 'dp-hamlet-102'];
+    const wrong = []; let singles = 0; let councilDraws = 0;
+    for (const seed of [...SINGLE_SEEDS, ...SEEDS]) {
+      const { s, drawn } = await birthOf(seed);
+      const office = factsOf(s).office || {};
+      const form = String(nameOf(governingFactionOf(s)) || '').replace(/ Ascendant$/, '');
+      const body = BODY.filter((k) => drawn.has(k));
+      if (office.headman || office.reeve || form === 'Town Mayor' || form === 'Priestly Guidance') { singles += 1; if (body.length) wrong.push(`${seed} (${form}): ${body.join(', ')}`); }
+      else councilDraws += body.length;
+    }
+    expect(singles).toBeGreaterThanOrEqual(SINGLE_SEEDS.length);
+    expect(councilDraws, 'a council-held birth still draws a body line (the arm is not vacuous)').toBeGreaterThan(0);
+    expect(wrong).toEqual([]);
+  }, 120_000); // its own budget: the births of ARM 1, reused, and the three seeds
 });

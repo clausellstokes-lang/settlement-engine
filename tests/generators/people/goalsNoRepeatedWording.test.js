@@ -78,7 +78,8 @@ function holdingsOf(cast) {
   for (const c of cast) {
     const r = receipts.get(String(c.id));
     if (!r) continue;
-    for (const v of /** @type {const} */ (['short', 'long'])) if (c.goal?.[v]) out.push({ id: String(c.id), v, text: c.goal[v], wording: wordingOf(c.goal[v]), receipt: r });
+    // E8 (WORDS-1): the wording of a want is read with its `{self}` as the deal holds it ("themselves"), the card's own form written over it
+    for (const v of /** @type {const} */ (['short', 'long'])) if (c.goal?.[v]) out.push({ id: String(c.id), v, text: c.goal[v], wording: wordingOf(String(c.goal[v]).replace(/\b(?:him|her)self\b/g, 'themselves')), receipt: r });
   }
   return out;
 }

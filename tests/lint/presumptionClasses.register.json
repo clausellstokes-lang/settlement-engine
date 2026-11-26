@@ -1,7 +1,7 @@
 {
  "about": "THE PRESUMPTION-CLASSES WALKER'S REGISTER (tests/lint/presumptionClasses.walker.test.js; BAR6-GUARD, the chair's ruling BG1 of 2026-11-16). TODAY'S DEBT, SHRINK-ONLY: one row a (file, class, line) that held a presumption-class word and declared nothing that answers it at the base. A row is [class, status at the base, the line's first 120 characters, literalHash(the whole line)]. Written ONLY by scripts/presumption-classes-door.mjs: --shrink removes the rows a cure leaves stale and lowers the ceiling; --bank debt-at-base banks only a line whose whole literal stood in its file at the base. A NEW line is never banked: it declares. No other seat edits this file or the walker (BG1); the round's close re-banks it through its door.",
  "base": "afa46d644",
- "ceiling": 1774,
+ "ceiling": 1773,
  "rows": {
   "src/components/dossier/EngineSections.jsx": [
    ["office","none","Besieged by a coalition (${warStatus.besiegedBy.map(nameFor).join(', ')}). The garrison is thinning under sustained assa","548678a29a9134ec"],
@@ -1985,7 +1985,6 @@
   ],
   "src/generators/narrativeGenerator.js": [
    ["plenty","none","This settlement has a recovery narrative: significant economic hardship in its past, followed by more recent growth. Cur","b0344511c2b5b5f8"],
-   ["resource","none","A dispute over grazing rights and water access has been running for two seasons without resolution.","459a98a14448feec"],
    ["size","none","A handful of houses; you could greet everyone in it before noon.","de107064541f4bbc"],
    ["size","none","was founded when a group of skilled artisans pooled resources to build a permanent workshop district away from guild res","ecbe1eaaf96fae49"],
    ["sovereign","none","was established to control a salt deposit that the local lord considered more valuable than the surrounding farmland com","0337b157fabfa958"],

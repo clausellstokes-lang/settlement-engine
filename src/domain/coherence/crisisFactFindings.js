@@ -38,7 +38,7 @@ import { governingFactionOf } from '../rulingPower.js';
 
 /** A want compared in one form: lower-cased, unclosed, spaces folded. @param {unknown} v @returns {string} */
 const bareWant = (v) => (typeof v === 'string' ? v : '').replace(/\s+/g, ' ').trim().replace(/[.!?]$/, '').toLowerCase();
-import { STRESS_INSTITUTION_EFFECTS } from '../../data/stressInstitutionEffects.js';
+import { STRESS_INSTITUTION_EFFECTS } from '../../data/stressInstitutionEffects.js'; import { heldCardLine } from '../../data/people/personMention.js'; // E8b: a crisis secret matched as drawn
 import { migrationDirectionOf } from '../crisis/migrationDirection.js';
 import { firstRankMembershipOf, powerOrderOf } from '../people/membership.js';
 
@@ -230,7 +230,7 @@ export function crisisCastSenseFindings(settlement, surfaces = {}) {
       const patterns = pool.map((x) => templatePattern(x.secret));
       for (const row of e.cast.roles.filter((r) => r.role === 'target' && r.kind === 'npc')) {
         const voiced = (sheet.people || []).find((p) => p.name === str(row.name));
-        if (voiced && patterns.some((re) => re.test(str(voiced.line)))) {
+        if (voiced && patterns.some((re) => re.test(heldCardLine(str(voiced.line))))) {
           out.push({ surface: 'tonight', quote: `${voiced.name}: ${voiced.line}`, detail: `target_runs_plot: the ${str(e.type)} target carries its own secret` });
         }
       }

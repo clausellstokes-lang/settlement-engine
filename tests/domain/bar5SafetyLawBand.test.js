@@ -21,9 +21,11 @@ import { RULES } from '../helpers/pageLaws/law2.mjs';
 import { bandForVariable } from '../../src/domain/causalState.js';
 import { crimeWaveStands, foundationBandShown } from '../../src/domain/display/foundationBandShown.js';
 import { deriveGuardAssessment } from '../../src/domain/display/defenseDisplay.js';
-import { lawBandOf, quietPlaceKeepsLaw } from '../../src/domain/facts/lawBand.js';
+import { lawBandOf, ownCrimeUnsafe, quietPlaceKeepsLaw } from '../../src/domain/facts/lawBand.js';
 import { readFileSync } from 'node:fs';
-import { GUARD_LAW_FRAMES, GUARD_LAW_SIBLINGS, SIEGE_ORDER_FRAME, guardLineUnderTheLaw } from '../../src/domain/display/guardLineUnderTheLaw.js';
+import { GUARD_LAW_FRAMES, GUARD_LAW_SIBLINGS, SIEGE_ORDER_FRAME, guardLineUnderTheLaw, safetyLineSaidOnce } from '../../src/domain/display/guardLineUnderTheLaw.js';
+import { deriveSafetyLine } from '../../src/domain/display/defenseDisplay.js';
+import { governsLine } from '../../src/domain/summary/settlementQuickGuide.js';
 import { COURT_AND_PRISON, COURT_NO_PRISON, NO_WATCH_SMALL } from '../../src/generators/safetyProfile.js';
 import { applyUserEdit } from '../../src/domain/userEdits.js';
 
@@ -101,6 +103,7 @@ describe('BAR5-SAFETY: a line that says how a wrong is answered reads the law ba
     // RE-KEYED BY BAR5-BAND, 2026-11-16 (the chair's ruling LB1, written inside `lawBandOf` by LB2): a quiet place that keeps
     // no office of the law (`quietPlaceKeepsLaw`) prints at least "strained"; every other row is as before. 45 of the 720 lift.
     /** @type {string[]} */ const lifted = [];
+    /** @type {string[]} */ const lowered = [];
     const failures = collectSeedFailures(CENSUS_720, (seed) => {
       const t = town(seed);
       const now = foundationBandShown(t, 'law_order', /** @type {string} */ (bandForVariable(t, 'law_order')));
@@ -108,9 +111,14 @@ describe('BAR5-SAFETY: a line that says how a wrong is answered reads the law ba
       const before = rowBefore(t);
       const floored = quietPlaceKeepsLaw(t) && RANK[/** @type {keyof typeof RANK} */ (before)] < RANK.strained;
       if (floored) lifted.push(seed);
-      expect(now, `${seed}: the row's band as before, or the quiet place's floor`).toBe(floored ? 'strained' : before);
+      // WORDS-2, the tenth chair's RULING G9 (1): where the place's own crime makes it Unsafe, the row is capped at `strained`
+      const capped = ownCrimeUnsafe(t) && RANK[/** @type {keyof typeof RANK} */ (before)] > RANK.strained;
+      if (capped) lowered.push(seed);
+      expect(now, `${seed}: the row's band as before, the quiet place's floor, or the own-crime cap`).toBe(floored || capped ? 'strained' : before);
     });
     expectNoSeedFailures(failures);
+    // WORDS-2 G9 (1): the own-crime cap lowers 7 of the 720 (measured at 0ec96f13d8 with the cap)
+    expect(lowered.length, 'G9 (1): the own-crime places the cap lowers in the 720').toBe(7);
     // re-measured lit (THE FLIP, CLOSE-6 F-FORTUNE, 2026-11-23): the floor lifts 21 of the 720 lit (45 before the flip)
     expect(lifted.length, 'BAR5-BAND LB1: the quiet places the floor lifts in the 720').toBe(21);
   }, 900_000);
@@ -158,6 +166,22 @@ describe('BAR5-SAFETY: a line that says how a wrong is answered reads the law ba
       // the lines that only say what stands are true in every band: they print as drawn, even beside Collapsed
       const collapsed = { history: { currentTensions: [] }, institutions: [{ name: 'Courthouse' }], powerStructure: { publicLegitimacy: { score: 0 } } };
       for (const line of COURT_NO_PRISON(lawRef).slice(0, 2)) expect(guardLineUnderTheLaw(line, collapsed), line).toBe(line);
+    }
+  });
+});
+
+describe('G6 #11 (WORDS-2): "no stable governing authority" is not told a third time on the Defense tab', () => {
+  const C = (/** @type {string} */ seed) => generateSettlementPipeline(birthConfig({ settType: seed.split('-')[1] }), null, { seed, customContent: {} });
+  test('C dp-city-117, dp-city-124 (a city line) and dp-thorp-101 (the small line): the identity line says it, the Defense line does not', () => {
+    for (const seed of ['dp-city-117', 'dp-city-124', 'dp-thorp-101']) {
+      const s = C(seed);
+      expect(governsLine(s), `${seed}: the identity line says it`).toMatch(/no stable governing authority/i);
+      const stored = deriveSafetyLine(s);
+      expect(stored, `${seed}: the stored line opens with it`).toMatch(/No stable governing authority[.;] /);
+      const owner = safetyLineSaidOnce(stored, s, false);
+      expect(owner, `${seed}: the owner's Defense line`).not.toMatch(/no stable governing authority/i); // anchored: the stored line is proved to hold the words on the line above
+      expect(owner?.length, `${seed}: the rest of the line stays`).toBeGreaterThan(20);
+      expect(safetyLineSaidOnce(stored, s, true), `${seed}: a shared page keeps the line whole`).toBe(stored);
     }
   });
 });

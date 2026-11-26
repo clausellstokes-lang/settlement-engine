@@ -761,12 +761,6 @@ export const en = Object.freeze({
       description: 'A literary thesis of the settlement, refined across 13 passes.',
       running:     'Composing the thesis…',
     },
-    dailyLife: {
-      button:      'Generate daily life ({cost} credits)',
-      shortLabel:  'Daily life',
-      description: 'Five parallel paragraphs from dawn to night, in the voice of the place.',
-      running:     'Living the day…',
-    },
     progression: {
       button:      'Generate progression ({cost} credits)',
       shortLabel:  'Progression',

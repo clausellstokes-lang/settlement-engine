@@ -22,7 +22,7 @@ import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { bandForVariable } from '../../src/domain/causalState.js';
 import { foundationBandShown } from '../../src/domain/display/foundationBandShown.js';
-import { lawBandOf, quietPlaceKeepsLaw } from '../../src/domain/facts/lawBand.js';
+import { lawBandOf, ownCrimeUnsafe, quietPlaceKeepsLaw } from '../../src/domain/facts/lawBand.js';
 import { safetyBandOf } from '../../src/domain/display/labelBands.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { law1cBand, quietFactsOf } from '../helpers/pageLaws/law1Band.mjs';
@@ -117,4 +117,25 @@ describe('BAR5-BAND LB1: a quiet place without an office of the law prints its l
     });
     expectNoSeedFailures(failures);
   }, 900_000);
+});
+
+// WORDS-2, the tenth chair's RULING G9 (1) (E2's census #3+4): where the place's own crime makes it Unsafe (a plain stored
+// label below Moderate), "Law & order" does not read Adequate: the band is capped at `strained`, as under a crime wave.
+// Red first by name on 0ec96f13d8: C dp-city-12, -140, -143 printed "Adequate" beside "Unsafe". The control, a rung set by a
+// crisis (C dp-city-34, "Volatile — Succession Crisis"), keeps its band.
+describe('G9 (1): the place\'s own crime caps the law\'s band', () => {
+  const C = (/** @type {string} */ seed) => generateSettlementPipeline(birthConfig({ settType: seed.split('-')[1] }), null, { seed, customContent: {} });
+  test('C dp-city-12, -140, -143: a plain "Unsafe", and the band is not above strained', () => {
+    for (const seed of ['dp-city-12', 'dp-city-140', 'dp-city-143']) {
+      const s = C(seed);
+      expect(ownCrimeUnsafe(s), seed).toBe(true);
+      expect(bandForVariable(s, 'law_order'), `${seed}: the model's band is unchanged`).toBe('adequate');
+      expect(lawBandOf(s), seed).toBe('strained');
+    }
+  });
+  test('the control: C dp-city-34 (a succession crisis set its rung) keeps "adequate"', () => {
+    const s = C('dp-city-34');
+    expect(ownCrimeUnsafe(s)).toBe(false);
+    expect(lawBandOf(s)).toBe('adequate');
+  });
 });

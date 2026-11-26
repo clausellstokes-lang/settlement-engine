@@ -2252,6 +2252,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "angle": "ledger",
           "marks": [
             "no ruler: lord",
+            "ruling body",
             "seat members"
           ],
           "text": "Decisions at {settlement} are slow because the whole {seat} must agree, and once made they are rarely undone.",
@@ -2265,6 +2266,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "angle": "street",
           "marks": [
             "no ruler: lord",
+            "ruling body",
             "seat members"
           ],
           "text": "At {settlement} the town's business goes to the whole {seat}, and everybody has learned how long the answer takes.",
@@ -2290,6 +2292,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "angle": "counterforce",
           "marks": [
             "no ruler: lord",
+            "ruling body",
             "seat members"
           ],
           "text": "The {seat} at {settlement} has left obvious decisions untaken because its members cannot agree on them.",

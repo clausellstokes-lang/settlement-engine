@@ -177,6 +177,8 @@ export const INSTITUTION_WORDS = Object.freeze([
   // DAILY-1/DAILY-2 (rulings 8 and 12 of 2026-11-20; vetoable by the owner): the 13 appended rows of `INSTITUTION_KIND_PATTERNS`
   'waterSource', 'dwellings', 'farmland', 'commonGrazing', 'bridge', 'square', 'bakery', 'warehouse', 'theatre',
   'fishingLanding', 'rootCellar', 'shepherd', 'craftGuild',
+  // WORDS-2 E6 (the tenth chair's leave, RULING G9 (3); vetoable by the owner): the steward's own house, for L12
+  'lordsSteward',
 ]);
 
 /** The terrain classes (`steps/resolveConfig.js`). */
@@ -247,7 +249,7 @@ export const ROUTE_WORDS = Object.freeze(['road', 'river', 'port', 'crossroads',
  * @property {boolean} [rulingBody]
  * @property {boolean} [soldiers] @property {boolean} [commander]
  * @property {Readonly<import('../dossier/faithReading.js').FaithReading>} [faith] @property {boolean} [guardPresence]
- * @property {boolean} [guild] @property {boolean} [sacredHouse] @property {boolean} [rivalPower] @property {boolean} [seatOutranked] @property {boolean} [forceWalksByDay] @property {boolean} [sovereign] @property {boolean} [seatMembers] @property {boolean} [ironAtHand] @property {boolean} [timberAtHand]
+ * @property {boolean} [guild] @property {boolean} [sacredHouse] @property {boolean} [rivalPower] @property {(key: string) => boolean|undefined} [crisisBody] @property {boolean} [seatOutranked] @property {boolean} [forceWalksByDay] @property {boolean} [sovereign] @property {boolean} [seatMembers] @property {boolean} [ironAtHand] @property {boolean} [timberAtHand]
  * @property {boolean} [timberReachesSawmill] @property {boolean} [enchanting] @property {(key: string) => boolean|undefined} [tradeAtWork] @property {(key: string) => boolean|undefined} [goodExported] @property {boolean} [legitimacyCrisis] @property {boolean} [legalHouse] @property {boolean} [appointedPost]
  * @property {boolean} [dangerComing] @property {boolean} [uprising] @property {boolean} [legacyRuin] @property {boolean} [courtSits] @property {boolean} [courtOrGaol] @property {boolean} [sickCare] @property {(capacities: unknown) => string|undefined} [foodProduction] @property {boolean} [magicSupply] @property {string} [magicRelianceShown] @property {boolean} [criminalIncome]
  * @property {ReadonlyArray<string>} [foodSources] @property {string|null} [failedSource] @property {boolean} [leadingSourceSpent] @property {boolean} [ownPlots] @property {ReadonlyArray<unknown>} [imports]
@@ -376,6 +378,11 @@ export const FACT_DIMENSIONS = Object.freeze({
   // own label, one leaf). A line naming "a strong power" that defies the government needs one. The family (shared
   // power, ruling body, rival power) is named: no fourth without the chair.
   'rival power': dim({ shape: 'presence', home: 'rivalPower', reader: (f) => bool(f.rivalPower) }),
+  // BIRTH-1 D7, THE TENTH CHAIR'S RULING G18 of 2026-11-25 (vetoable by the owner): the settled roster holds a power of the
+  // crisis's OWN (the body the crisis pushes, by the stress-power table or by name; `crisisBody.js`), not the governing one. A
+  // crisis line that names such a body (the creditor's agent; a second congregation) needs one. Keyed by the crisis kind.
+  'crisis body': dim({ shape: 'presence', home: 'crisisBody', keys: ['indebted', 'religious_conversion'],
+    reader: (/** @type {FactsLike} */ f, /** @type {string|null} */ key) => (typeof f.crisisBody === 'function' && key ? f.crisisBody(key) : undefined) }),
   // BAR5-POWERS, THE CHAIR'S RULING SO1 of 2026-11-16 (the family's fourth; vetoable by the owner): some power not the governing
   // one stands ABOVE the seat by its own standing (`seatOutranked.js`, the label the Power tab prints; the settled record only,
   // K10). A line saying the seat holds because no rival outweighs it presumes none (DS-POW-4 › Holding v3, its one line).

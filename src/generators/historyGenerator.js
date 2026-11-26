@@ -96,7 +96,7 @@ const buildHistoryContext = (
   })();
 
   // Power structure context
-  const dominantFaction = powerStructure?.factions?.[0]?.faction || 'the governing council';
+  const dominantFaction = powersStrongestFirst(powerStructure?.factions)[0]?.faction || 'the governing council'; // D4 (RULING G4): the strongest, not the first stored row
   const stability = powerStructure?.stability || 'Stable';
   const recentConflict = powerStructure?.recentConflict || null;
 
@@ -388,8 +388,8 @@ const buildHistoricalEvent = (
 
   // Resolve faction names for text substitution
   const govFaction = factions.find(f => f.isGoverning)?.faction || 'the governing authority';
-  const secFaction = (factions.find(f => !f.isGoverning) || factions[1])?.faction || 'the merchant class';
-  const altFaction = factions[1]?.faction || 'the merchant class';
+  const secFaction = (powersStrongestFirst(factions).find(f => !f.isGoverning) || powersStrongestFirst(factions)[1])?.faction || 'the merchant class'; // D4 (RULING G4): a regenerated history reads a stored roster, not always strongest-first
+  const altFaction = powersStrongestFirst(factions)[1]?.faction || 'the merchant class';
   const crimeFaction =
     factions.find(f => f.faction?.toLowerCase().includes('thieves') || f.faction?.toLowerCase().includes('criminal'))
       ?.faction || null;
@@ -1244,3 +1244,4 @@ import { crimeWaveBar, guildSwapBar, isWeightedTrouble, smallPlaceCrimeChance } 
 export const TRADE_COLLAPSE_AT_FOUNDING = 'The trade the settlement was founded to serve failed within its first few years, and the wealth it was meant to carry never came';
 /** @param {any} event @param {unknown} templateType @param {number} age */
 const collapseAtFounding = (event, templateType, age) => { if (event && templateType === 'trade_collapse' && typeof event.yearsAgo === 'number' && event.yearsAgo >= age - 5) event.description = TRADE_COLLAPSE_AT_FOUNDING; return event; };
+import { powersStrongestFirst } from '../domain/display/powersStrongestFirst.js'; // D4 (RULING G4): at the file's end, so no cited line moves

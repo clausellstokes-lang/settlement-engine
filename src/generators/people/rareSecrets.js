@@ -41,7 +41,7 @@
  */
 
 import { HOLDER_KEYS, RARE_SECRET_FAMILIES, RARE_SECRET_AGE_YEARS, RARE_SECRET_GENERATION_YEARS, RARE_SECRET_ODDS, RARE_SECRET_ROWS } from '../../data/rareSecrets.js';
-import { NPC_AGE_DATA, NPC_PRESENTATION_MODES } from '../../data/npcData.js';
+import { NPC_AGE_DATA, NPC_PRESENTATION_MODES } from '../../data/npcData.js'; import { heldCardLine } from '../../data/people/personMention.js'; // E8b: a stored row read as drawn
 import { STRESS_INSTITUTION_EFFECTS } from '../../data/stressInstitutionEffects.js';
 import { filterDeclared } from '../../domain/facts/drawDeclared.js';
 import { factsOf } from '../../domain/facts/factsOf.js';
@@ -302,7 +302,7 @@ const ROW_PATTERNS = Object.freeze(/** @type {readonly Family[]} */ (RARE_SECRET
  * @param {unknown} secret @returns {{ family: Family, row: RareRow, name: string | null } | null}
  */
 export function rareRowOf(secret) {
-  const what = str(rec(secret).what); const stakes = str(rec(secret).stakes);
+  const what = heldCardLine(str(rec(secret).what)); const stakes = str(rec(secret).stakes); // E8b: in the held form
   if (!what) return null;
   const hit = ROW_PATTERNS.find((p) => p.what.test(what) && p.stakes.test(stakes));
   if (!hit) return null;

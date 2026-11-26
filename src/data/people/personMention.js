@@ -84,6 +84,82 @@ export const FOLLOWER_BY_BEFORE = Object.freeze({
  */
 export const NO_PRONOUN_TAILS = Object.freeze(new Set(['would rather keep to themselves', 'cannot finish theirs']));
 
+/** E1: a word of the role is a possessive ("the network's head", "the carriers' master") */
+const ROLE_POSSESSIVE = /[\p{L}\p{N}](?:['’]s|s['’])(?=\s|$)/u;
+/** E1: the words that end a possessed noun phrase (its "of" form takes the words before them) */
+const OF_FORM_STOPS = ['and', 'or', 'but', 'to', 'in', 'on', 'at', 'by', 'for', 'with', 'from', 'is', 'are', 'was', 'were', 'has', 'have', 'had', 'will', 'would', 'that', 'which', 'who', 'than', 'as', 'before', 'after', 'since', 'because', 'while', 'when', 'if'].join('|');
+
+/** E1: a possessed noun phrase ends at a mark (a regex literal, so the copy's voice count reads no '!') */
+const OF_FORM_END = /[.,;:!?]/u.source;
+
+/**
+ * THE REFLEXIVE SLOT (E8, WORDS-1; the tenth chair's PRERELEASE-LIST row E8, the ninth chair's N26 "a reflexive slot in the
+ * templates (the right form)"): a composed line whose reflexive binds ONE person writes it through this slot, filled from
+ * that person's own `gender`: "himself", "herself"; a card with no gender (an older stored town's card) keeps the they-form
+ * the line wrote before. The template names WHOM it binds (the slot is handed that card); no code rewrites a reflexive.
+ * @enforced-by tests/generators/people/reflexiveSlot.test.js
+ * @param {MentionCard | null | undefined} card @returns {'himself' | 'herself' | 'themselves'}
+ */
+export function reflexiveOf(card) {
+  const g = str(card?.gender);
+  return g === 'female' ? 'herself' : g === 'male' ? 'himself' : 'themselves';
+}
+
+/**
+ * THE BOUND CARD LINES (E8b, WORDS-1; the tenth chair's G20 (2) of 2026-11-25): the closed table of the drawn card lines whose
+ * "themselves" binds the card's OWN person (hand-classed BOUND rows, `docs/chair/2026-11-24/tenth/gen/words-1/tools/
+ * e8-classes.mjs`), each with the card field that holds it. The draw and its dedupe run on the line's text as written; the
+ * reflexive is resolved only AFTER the last draw, once, where every card is final (`boundReflexives`, called by
+ * `narrativeGenerator.js :: generateCoherence` and the people regen), from the card's own `gender` (`reflexiveOf`). A reader that
+ * matches a stored line against its table reads it in the held form (`heldCardLine`). Regex literals, so no copy count reads them.
+ * @type {ReadonlyArray<readonly [string, string, RegExp]>}
+ */
+const BOUND_CARD_LINES = Object.freeze(/** @type {Array<readonly [string, string, RegExp]>} */ ([
+  ['personality', 'tell', /speaks of (themselves) in the third person when angry/],
+  ['presentation', 'impression', /sure of (themselves), and not careless with it/],
+  ['presentation', 'behaviour', /Gives away little about (themselves), and remembers/],
+  ['secret', 'what', /Is (themselves) a newcomer, arrived a decade ago/],
+  ['secret', 'what', /telling (themselves) it doesn't matter/],
+  ['secret', 'what', /cannot bring (themselves) to sell it/],
+  ['secret', 'what', /Is not (themselves) when the moon is full/],
+  ['secret', 'what', /Taught (themselves) to read from a single book/],
+  ['secret', 'what', /never once let (themselves) be seen/],
+  ['secret', 'what', /the households pay and spending it on (themselves)/],
+  ['secret', 'what', /moved the stone (themselves)/],
+  ['goal', 'long', /whatever the cost to (themselves)/],
+]));
+/** each row's held form: the bound reflexive written back as "themselves" */
+const HELD_CARD_LINES = Object.freeze(BOUND_CARD_LINES.map(([, , re]) => new RegExp(re.source.replace('(themselves)', '(?:himself|herself)'), 'g')));
+
+/**
+ * A card with its bound card lines' reflexive in the card's own form ("speaks of herself in the third person"); a card with no
+ * gender, or no bound line, is returned as it is (the same object).
+ * @template {Record<string, any>} C @param {C} card @returns {C}
+ */
+export function boundReflexives(card) {
+  const own = reflexiveOf(card);
+  if (own === 'themselves' || !card || typeof card !== 'object') return card;
+  /** @type {Record<string, any>} */ let out = card;
+  for (const [o, f, re] of BOUND_CARD_LINES) {
+    const holder = out[o]; const text = holder && typeof holder === 'object' ? holder[f] : undefined;
+    if (typeof text !== 'string' || !re.test(text)) continue;
+    const said = text.replace(re, (whole) => whole.replace('themselves', own));
+    out = { ...out, [o]: { ...holder, [f]: said } };
+  }
+  return /** @type {C} */ (out);
+}
+
+/**
+ * A stored card line read in its HELD form: a bound card line's own-form reflexive written back as "themselves", so a reader that
+ * matches the line against its table (a template, a row pattern, a refusal row) finds it as drawn. Any other text is returned as it is.
+ * @param {unknown} text @returns {string}
+ */
+export function heldCardLine(text) {
+  let t = String(text ?? '');
+  for (const re of HELD_CARD_LINES) t = t.replace(re, (whole) => whole.replace(/himself|herself/, 'themselves'));
+  return t;
+}
+
 /** a name stands on its own: no letter or digit before it, none after (regex literals, so the copy's voice count reads no '!') */
 const NOT_AFTER_LETTER = /(?<![\p{L}\p{N}])/u.source;
 const NOT_BEFORE_LETTER = /(?![\p{L}\p{N}])/u.source;
@@ -99,12 +175,16 @@ const capFirst = (s) => (s ? s[0].toUpperCase() + s.slice(1) : s);
  * The mention a later occurrence takes, without its case: a pronoun's gender, or the word that stands for the person.
  * @param {{ name: string, gender: string, role: string }} p @param {Array<{ name: string, gender: string, role: string }>} named
  * @param {boolean} [noPronoun] the pronoun rung skipped (a mention before a tail of `NO_PRONOUN_TAILS`)
+ * @param {boolean} [possessive] the mention stands before "'s" (E1: a role holding a possessive is then skipped)
  * @returns {{ pronoun: 'female' | 'male' } | { word: string } | null}
  */
-function mentionOf(p, named, noPronoun = false) {
+function mentionOf(p, named, noPronoun = false, possessive = false) {
   const others = named.filter((q) => q !== p);
   if (!noPronoun && (p.gender === 'female' || p.gender === 'male') && !others.some((q) => q.gender === p.gender)) return { pronoun: p.gender };
-  if (p.role && !others.some((q) => q.role.toLowerCase() === p.role.toLowerCase())) return { word: p.role };
+  // E1 (WORDS-1, the tenth chair's G5): before "'s", a role that holds a possessive ("the network's head") is skipped and the
+  // next rung taken ("Lee's reputation"), never "the network's head's reputation"; the leaf's own test of a possessive word,
+  // as `powerSentenceName.js :: holdsPossessive` reads it (two pure leaves, no import between them)
+  if (p.role && !(possessive && ROLE_POSSESSIVE.test(p.role)) && !others.some((q) => q.role.toLowerCase() === p.role.toLowerCase())) return { word: p.role };
   const words = p.name.split(/\s+/);
   const surname = words[words.length - 1];
   if (words.length > 1 && !others.some((q) => q.name.split(/\s+/).includes(surname))) return { word: surname };
@@ -182,9 +262,9 @@ function oneSentence(sentence, people) {
   for (const h of hits) {
     if (!seen.has(h.p)) { seen.add(h.p); continue; }
     const after = sentence.slice(h.end).trimStart();
-    const m = mentionOf(h.p, named, [...NO_PRONOUN_TAILS].some((t) => after.startsWith(t)));
-    if (!m) continue;
     const possessive = /^['’]s(?![\p{L}\p{N}])/u.test(sentence.slice(h.end));
+    const m = mentionOf(h.p, named, [...NO_PRONOUN_TAILS].some((t) => after.startsWith(t)), possessive);
+    if (!m) continue;
     let word; let end = h.end;
     if ('pronoun' in m) {
       const forms = PRONOUN[m.pronoun];
@@ -214,6 +294,9 @@ export function qualifiedPossessives(text, cards) {
     const name = str(c?.name);
     const m = /^(.+?)\s+\(([^()]+)\)$/.exec(name);
     if (!m) continue;
+    // E1 (WORDS-1, G5): a qualifier that holds a possessive ("(the hospital's master)") would open into two possessives in a
+    // row; its possessive takes the "of" form instead, the bracket kept: "the family of Kathleen Farrell (the hospital's master)"
+    if (ROLE_POSSESSIVE.test(m[2])) out = out.replace(new RegExp(`${NOT_AFTER_LETTER}${esc(name)}['’]s ((?:\\p{Ll}+ )*?\\p{Ll}+)(?=${OF_FORM_END}|\\s+(?:${OF_FORM_STOPS})\\b|$)`, 'gu'), (_w, noun, at, all) => `${at === 0 || /[.!?]\s*$/.test(all.slice(0, at)) ? 'The' : 'the'} ${noun} of ${name}`);
     out = out.replace(new RegExp(`${NOT_AFTER_LETTER}${esc(name)}(['’])s${NOT_BEFORE_LETTER}`, 'gu'), (_w, q) => `${m[1]} ${m[2]}${q}s`);
   }
   return out;

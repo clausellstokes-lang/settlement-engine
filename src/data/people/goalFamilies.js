@@ -49,6 +49,9 @@
  *   {above} {below} {other}  a person, by name; a person may take "'s".
  *   {handler} {agent} {target}
  *   {flaw} {dominant} {modifier}  the card's own trait words (allowed; no line uses them).
+ *   {self}                   the reflexive of the card that holds the want (E8, WORDS-1: "himself",
+ *                            "herself", from the card's own gender; "themselves" for a card with none);
+ *                            `people/goals.js` fills it when the want is written to the card.
  * A line whose slot cannot fill from the record is not drawn: the slot is its own gate.
  *
  * ── STRUCK SLOTS (the record does not hold them at birth in a form a player reads) ──
@@ -74,7 +77,7 @@ export const GOAL_FAMILIES = Object.freeze(['RANK', 'POWER', 'INSTITUTION', 'SUP
 
 /** Each family's allowed slot set (design §6.1, less the struck slots; SUPPLY gains {house}). */
 export const GOAL_SLOTS = Object.freeze({
-  RANK: Object.freeze(['power', 'above', 'below']),
+  RANK: Object.freeze(['power', 'above', 'below', 'self']),
   POWER: Object.freeze(['power', 'rival', 'issue']),
   INSTITUTION: Object.freeze(['house', 'otherHouse']),
   SUPPLY: Object.freeze(['resource', 'import', 'house']),
@@ -101,7 +104,7 @@ export const GOAL_SLOTS_STRUCK = Object.freeze({
 
 /** The slots each sub-kind may use (a subset of its family's `GOAL_SLOTS`): what car 4 must fill. */
 export const GOAL_SUBKIND_SLOTS = Object.freeze({
-  RANK: Object.freeze({ climb: ['power', 'above'], defend: ['power', 'below'], enter: ['power'] }),
+  RANK: Object.freeze({ climb: ['power', 'above'], defend: ['power', 'below'], enter: ['power', 'self'] }),
   POWER: Object.freeze({ tense: ['power', 'rival'], competitive: ['power', 'rival'], corrupted: ['power', 'rival'], conflict: ['power', 'rival', 'issue'] }),
   INSTITUTION: Object.freeze({ solvency: ['house'], rebuilding: ['house'], charter: ['house'], takeover: ['house', 'otherHouse'] }),
   SUPPLY: Object.freeze({ impaired: ['house'], dependency: ['resource', 'house'], isolation: ['import'], expansion: ['house'], want: ['resource', 'house'] }),
@@ -267,7 +270,7 @@ export const GOAL_FAMILY_LINES = Object.freeze({
       short: cell([
         'Do one thing for {power} this season that the people who lead {power|it|them} cannot ignore.',
         'Be in the room the next time {power} must decide something that matters.',
-        'Find a patron among those who lead {power}, and make themselves useful to them.',
+        'Find a patron among those who lead {power}, and make {self} useful to them.',
         'Bring {power} a piece of news before anyone else does.',
         'Take on the work in {power} that no one else wants, and do it without complaint.',
         'Be asked for an opinion by those who lead {power}, once, this season.',

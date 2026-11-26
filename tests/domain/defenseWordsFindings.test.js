@@ -11,6 +11,9 @@
  * chair's ruling: the Defense tab prints NO stored food; its granary/stores row leaves the tab
  * entirely and the Economy tab prints the months once. `defenseFactsOf` keeps
  * `storedFoodMonths` for the certification check only.
+ * ⭐ G6 #9 (WORDS-2, the tenth chair's ruling): where the beasts row already says the place has no wall, the unwalled
+ * wall-rationale line (the second on the tab) yields at the two read sites (`defenseDeskRead.js`, `printProse.js`, through
+ * `stateProse/wallYield.js`); red first by name on 0ec96f13d8 (V dp-hamlet-114, -115, -126).
  * ⭐ Since X-52 (lane DEFENSE-3) the tab carries ONE "Food endurance" line that reads the food
  * record for a siege and links to the Economy tab's stores row; the silence pin lifts it out.
  */
@@ -33,6 +36,9 @@ import { drawnAtMount } from '../../src/domain/display/stateProse/dossierMounts.
 import { tierNounFor } from '../../src/domain/display/stateProse/weaveBlock.js';
 import { deriveCriminalStructure } from '../../src/domain/display/defenseDisplay.js';
 import { DefenseTab } from '../../src/components/new/tabs/DefenseTab.jsx';
+import { defenseDeskRead } from '../../src/components/new/defenseDeskRead.js';
+import { buildPrintProse } from '../../src/domain/display/stateProse/printProse.js';
+import { pageTextsOf } from '../helpers/oppositeSentencePairs.mjs';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const SMALL = ['thorp', 'hamlet', 'village'];
@@ -400,4 +406,32 @@ describe('MATCHER · a defence term is a finding only as a claim about this plac
     const quiet = NEW_CONTROLS.filter(([term, sentence]) => !defenseWordsFindings(BARE, sentence).some((f) => f.term === term));
     expect(quiet).toEqual([]);
   });
+});
+
+describe('G6 #9: one no-wall line on the Defense tab (the second yields)', () => {
+  const V = (/** @type {string} */ seed) => generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: seed.split('-')[1], _randomizePriorities: true }), null, { seed, customContent: {} });
+  const C = (/** @type {string} */ seed) => generateSettlementPipeline(birthConfig({ settType: seed.split('-')[1] }), null, { seed, customContent: {} });
+  const opts = (/** @type {any} */ s) => ({ seed: String(s?._seed ?? s?.id ?? ''), audience: 'dm', tierNoun: tierNounFor(s?.tier) }); // defenseDeskRead.js's option bag
+  const noWall = (/** @type {unknown} */ t) => typeof t === 'string' && /has no wall/.test(t);
+  it('V dp-hamlet-114, -115, -126: the beasts row says no wall, and the wall line is silent', async () => {
+    await loadGenerationLawPayloads();
+    for (const seed of ['dp-hamlet-114', 'dp-hamlet-115', 'dp-hamlet-126']) {
+      const s = V(seed);
+      const desk = defenseDeskRead(s, { tier: s.tier });
+      expect(noWall(desk.threat.beasts?.sentence), `${seed}: the beasts row says it`).toBe(true);
+      expect(defenseWallRationaleProse(s, opts(s)).rationale?.sentence ?? null, `${seed}: the wall desk alone still draws its line`).not.toBe(null);
+      expect(desk.wall.rationale?.sentence ?? null, `${seed}: the tab's wall line yields`).toBe(null);
+      expect(pageTextsOf(buildPrintProse(s, {})).filter(noWall).length, `${seed}: the print desk says it once`).toBe(1);
+    }
+  }, 120_000);
+  it('the control: an unwalled small place whose beasts row says nothing of a wall keeps its wall line', async () => {
+    await loadGenerationLawPayloads();
+    const kept = [];
+    for (const seed of ['dp-hamlet-0', 'dp-hamlet-1', 'dp-thorp-0', 'dp-thorp-1', 'dp-village-0']) {
+      const s = C(seed);
+      const desk = defenseDeskRead(s, { tier: s.tier });
+      if (!noWall(desk.threat.beasts?.sentence) && desk.wall.rationale?.sentence) kept.push(seed);
+    }
+    expect(kept.length).toBeGreaterThan(0);
+  }, 120_000);
 });

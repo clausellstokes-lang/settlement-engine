@@ -33,7 +33,7 @@
  */
 import { FAMILY_WORDS, familiesOf, meets, wordsOf } from './criticalImportBroughtIn.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
-import { ventureOnPage } from './supplyStory.js';
+import { idOfHouse, impliedGroundsOf, ventureOnPage } from './supplyStory.js'; // NEED-ATOM: two more of its names (no new module)
 import { chainPrintName } from '../display/chainPrintName.js';
 import { LUXURY_CLASS, NOT_A_GOOD } from '../../data/tradeListDeclarations.js'; // their home (imports nothing; FR13 (a))
 import { filterDeclared, lineText } from './drawDeclared.js'; // the kernel's door the luxury pool is read through (FR15)
@@ -45,7 +45,7 @@ import { filterDeclared, lineText } from './drawDeclared.js'; // the kernel's do
  */
 export const WORKING_CHAIN_STATUSES_COPY = Object.freeze(['running', 'operational', 'entrepot', 'vulnerable', 'magically_sustained']);
 
-/** @typedef {{ resourceAnalysis?: unknown, economicState?: unknown, institutions?: unknown, availableServices?: unknown, tier?: unknown }} NeedRecord */
+/** @typedef {{ resourceAnalysis?: unknown, economicState?: unknown, institutions?: unknown, availableServices?: unknown, tier?: unknown, config?: unknown }} NeedRecord */
 
 /** @param {unknown} v @returns {unknown[]} */
 const arr = (v) => (Array.isArray(v) ? v : []);
@@ -113,13 +113,79 @@ export const NEED_DEALT_ROWS_COPY = Object.freeze(/** @type {ReadonlyArray<reado
 ]));
 
 /**
+ * THE HOUSES WHOSE STOCK IS A GOOD A ROW DEALS IN, a COPY of the rows of `crisisDependence.js :: HOUSE_NEED_INPUT` whose good
+ * a row of `NEED_DEALT_ROWS_COPY` deals in (catalogue id -> the good): the butchers' stock is livestock. Each is a house whose
+ * dependence holds INPUT (`rowShortOf`'s gate). That table is pinned lazy with its module (EG1); the guard holds this copy
+ * equal to its rows, the gate and `HOUSE_TRADE_INPUT` (none of whose goods a row deals in) included.
+ * @type {Readonly<Record<string, string>>}
+ */
+export const HOUSE_STOCK_COPY = Object.freeze({ butchers_3_8: 'livestock' });
+
+/**
+ * HOW THE ONE READER OF AN INPUT FINDS A STOCK GOOD HAD (`houseInputAtHand.js :: inputAtHandCore` for the good's chain, which
+ * is pinned lazy): a COPY, good by good, of what answers it: `grounds` the ground keys whose key or catalogued goods name it
+ * (`RESOURCE_DATA`, a native ground not used up, or a ground a house implies there), `made` the words of the town's own
+ * production that name the raw good, `bought` the import words that bring it to a house whose stock it is (its chain's
+ * names, the trade's stock word "game", the catalogue's one good "animal products"), `food` the food record's sources. The
+ * guard holds each to the reader itself, ground by ground and word by word.
+ * @type {Readonly<Record<string, Readonly<{ grounds: ReadonlyArray<string>, made: ReadonlyArray<string>, bought: ReadonlyArray<string>, food: ReadonlyArray<string> }>>>}
+ */
+export const GOOD_HAD_COPY = Object.freeze({
+  livestock: Object.freeze({
+    grounds: Object.freeze(['fertile_floodplain', 'grazing_land', 'camel_herds', 'alpine_pasture']),
+    made: Object.freeze(['livestock']),
+    bought: Object.freeze(['livestock', 'game', 'animal products']),
+    food: Object.freeze(['livestock']),
+  }),
+});
+
+/** The words of a worked good, as the one reader of an input reads an import (`houseInputAtHand.js :: WORKED_GOOD`, a copy held by the guard). */
+const WORKED_INPUT = /\b(?:tools?|arms|armou?r|weapons?|fittings?|components?|torcs?|jewel(?:le)?ry|candles?|supplies|equipment|vessels?|rigging|cordage|work|carved|carvings?)\b/i;
+/** `houseInputAtHand.js`'s matcher of a whole name: one spacing, singular words, one names the other. @param {string} x */
+const normed = (x) => ` ${x.toLowerCase().replace(/\([^)]*\)/g, ' ').replace(/[_/\-,.]+/g, ' ').replace(/\s+/g, ' ').trim()} `.replace(/([a-z]{3,}[^su\s])s(?= )/g, '$1');
+/** @param {string} a @param {string} b */
+const wholeTokens = (a, b) => { const x = normed(a), y = normed(b); return x.trim() !== '' && y.trim() !== '' && (x.includes(y) || y.includes(x)); };
+/** A row a user authored (custom content). @param {{ custom?: unknown, source?: unknown, isCustom?: unknown } | null | undefined} row */
+const isCustom = (row) => row?.custom === true || row?.source === 'custom' || row?.isCustom === true;
+
+/**
+ * Whether a stock good is had (`inputAtHandCore` is not 'missing' for a house of `HOUSE_STOCK_COPY`), in the record's words:
+ * a native ground not used up, or a ground a house implies there, gives it; the town's production names it; an import that
+ * is no worked good brings it; the food record names it a source.
+ * @param {NeedRecord} record @param {Record<string, unknown>} eco @param {string} good
+ */
+function stockHad(record, eco, good) {
+  const had = GOOD_HAD_COPY[good];
+  if (!had) return true;
+  const c = /** @type {Record<string, unknown>} */ (record.config && typeof record.config === 'object' ? record.config : {});
+  const low = (/** @type {unknown} */ v) => String(v).trim().toLowerCase();
+  // `customContentSemanticAuthority.js :: nativeSemanticResourceKeys` and `resourceSemantics.js :: availableNativeResourceKeys`
+  const nativeOf = (/** @type {unknown} */ values) => {
+    if (Array.isArray(c.nearbyResourcesNative)) { const keys = new Set(c.nearbyResourcesNative.map(low)); return strings(values).filter((v) => keys.has(low(v))); }
+    const custom = new Set(arr(c.nearbyResourcesCustom).map(low)); return strings(values).filter((v) => !custom.has(low(v)));
+  };
+  const spent = new Set(nativeOf(Array.isArray(c.nearbyResourcesNativeDepleted) ? c.nearbyResourcesNativeDepleted : c.nearbyResourcesDepleted));
+  // (a legacy save's `nearbyResourcesState`, which no generator writes, is not read: the observed-shape law)
+  const live = nativeOf(c.nearbyResources).filter((k) => !spent.has(k));
+  const implied = [...impliedGroundsOf(/** @type {Parameters<typeof impliedGroundsOf>[0]} */ (record)).states].filter(([, st]) => st === 'there').map(([g]) => g);
+  if ([...live, ...implied].some((g) => had.grounds.includes(g))) return true;
+  if (strings(eco.localProduction).some((e) => had.made.some((n) => wholeTokens(e, n)))) return true;
+  if (strings(eco.primaryImports).some((imp) => !WORKED_INPUT.test(imp.replace(/\([^)]*\)/g, ' ')) && had.bought.some((n) => wholeTokens(imp, n)))) return true;
+  const food = /** @type {{ foodSecurity?: { foodRecord?: { foodSources?: unknown } | null } | null }} */ (eco).foodSecurity?.foodRecord?.foodSources;
+  return strings(food).some((x) => had.food.includes(x));
+}
+
+/**
  * THE GOODS A LIVE HOUSE ON THE PAGE DEALS IN (`tradeListDisplay.js :: dealtInHere`): a live house's printed service row that
  * deals in the good, save the failed venture's own material and a good a live house of the town is marked short of
  * (FAULTS-NEED item 0). The page reads the mark (`crisisStoppedRow.js :: rowShortOf`'s gate over `houseInputAtHand.js ::
- * housesShortOf`); here, in the record's words, the gap row of a live house that is not bought in and names the good.
- * @param {NeedRecord} record @param {unknown[]} gaps
+ * housesShortOf`); here, in the record's words: the gap row of a live house that is not bought in and names the good
+ * (`housesShortOf` (i)), and (NEED-ATOM, CLOSE-8's cure 3b: r2r-town-54's Butchers, a house that stands, marked short of
+ * livestock with no gap row) a standing house whose stock is the good (`HOUSE_STOCK_COPY`) with no gap row of its own, where
+ * the record's own need list names the good and the good is not had (`housesShortOf` (iii), `housesWantingTradeInput`).
+ * @param {NeedRecord} record @param {unknown[]} gaps @param {string[]} critical @param {Record<string, unknown>} eco
  */
-function dealtInHere(record, gaps) {
+function dealtInHere(record, gaps, critical, eco) {
   const av = record.availableServices;
   const rows = Array.isArray(av) ? av : av && typeof av === 'object' ? Object.values(av).flat() : [];
   if (!rows.length) return [];
@@ -128,6 +194,14 @@ function dealtInHere(record, gaps) {
   const short = /** @type {Array<{ kind?: unknown, chain?: unknown, institution?: unknown }>} */ (gaps)
     .filter((g) => g && g.kind !== 'imported' && typeof g.chain === 'string' && live.has(String(g.institution ?? '')))
     .map((g) => String(g.chain).replace(/_/g, ' '));
+  const gapped = new Set(gaps.map((g) => String(/** @type {{ institution?: unknown } | null} */ (g)?.institution ?? '')).filter(Boolean));
+  for (const inst of liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (record))) {
+    const name = typeof inst?.name === 'string' ? inst.name : '';
+    if (!name || isCustom(inst) || gapped.has(name)) continue;
+    const id = idOfHouse(inst);
+    const good = Object.prototype.hasOwnProperty.call(HOUSE_STOCK_COPY, id) ? HOUSE_STOCK_COPY[id] : '';
+    if (good && critical.some((c) => wholeTokens(c, good)) && !stockHad(record, eco, good)) short.push(good);
+  }
   /** @type {string[]} */
   const out = [];
   for (const [good, re] of NEED_DEALT_ROWS_COPY) {
@@ -158,7 +232,7 @@ export function needListOf(record) {
   const made = madeHere(r, eco);
   const gaps = arr(res?.gaps);
   const gapGoods = importedByGapRow(gaps);
-  const dealt = dealtInHere(r, gaps);
+  const dealt = dealtInHere(r, gaps, critical, eco);
   return keptOnImports(terrain, r, eco.primaryExports).filter((x) => !fromTrade.has(x)
     && !arriving.some((imp) => meets(x, imp)) && !made.some((m) => meets(x, m))
     && !gapGoods.some((g) => meets(x, g)) && !dealt.some((g) => meets(x, g)));

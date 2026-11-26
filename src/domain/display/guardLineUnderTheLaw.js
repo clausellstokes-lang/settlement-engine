@@ -307,3 +307,24 @@ export function fundingReasonAsPrinted(reason, record) {
   if (f.paid) return reason;
   return (f.kept ? FUNDED_EMBATTLED_VOLUNTEERS : FUNDED_EMBATTLED_NO_FORCE) + String(reason).slice(FUNDED_EMBATTLED_SHOWN.length);
 }
+
+// ─── WORDS-2, the tenth chair's RULING G6 #11 (E2's census: "no stable governing authority" said three times on one page) ───
+import { isEdited } from '../userEdits.js';
+/** The safety line's opening clause of the political fracture (`generators/safetyProfile.js`, its two lines). */
+const NO_STABLE_AUTHORITY = /No stable governing authority[.;] (\w)/;
+/**
+ * THE SAFETY LINE WITHOUT THE THIRD TELLING: where the page's identity line already says the place has no stable governing
+ * authority (the stored stability, `settlementQuickGuide.js :: governsLine`, which the Overview prints and the Power tab
+ * repeats), the Defense tab's line drops its own opening clause and begins at the next one ("Whoever holds sway decides…",
+ * "Enforcement is inconsistent; …"). A shared page prints no identity line of its own reading, so it keeps the line whole;
+ * a DM's own line (an edited field) is returned as written.
+ * @param {string | null} line the line as printed (`defenseDisplay.js :: deriveSafetyLine`)
+ * @param {unknown} record @param {boolean} publicDossier
+ * @returns {string | null}
+ */
+export function safetyLineSaidOnce(line, record, publicDossier) {
+  if (typeof line !== 'string' || publicDossier || isEdited(/** @type {never} */ (record), 'economicState.safetyProfile.safetyDesc')) return line;
+  const stability = /** @type {{ powerStructure?: { stability?: unknown } } | null} */ (record)?.powerStructure?.stability;
+  if (!/no stable governing authority/i.test(String(stability ?? ''))) return line;
+  return line.replace(NO_STABLE_AUTHORITY, (_, /** @type {string} */ c) => c.toUpperCase());
+}

@@ -467,6 +467,8 @@ const computeDefenseScores = (settlement, keep, instead = null) => {
   // court's law) never lowers it on another. X4: and never below the will the same place has with nothing built or
   // standing (the base configuration's own rate, unheld), so a wall never lowers the will.
   let willHeld = 0;
+  /** @type {Record<string, { before: number, armed: number, floor: number, after: number }>} the hold, score by score (`defenceWillHoldOf`) */
+  const willHold = {};
   if (bos) {
     const armedParts = parts.filter((q) => ARMED.has(q.id));
     const will = parts.find((q) => q.id === 'will');
@@ -476,7 +478,9 @@ const computeDefenseScores = (settlement, keep, instead = null) => {
       for (const d of Object.keys(will.dims)) {
         const armedOn = armedParts.reduce((a, q) => a + Math.max(0, q.dims[d] || 0), 0);
         const floor = Math.min(will.dims[d], Object.hasOwn(unheld, d) ? /** @type {any} */ (unheld)[d] : 0);
+        const was = will.dims[d];
         will.dims[d] = Math.max(floor, Math.min(will.dims[d], armedOn));
+        willHold[d] = { before: was, armed: armedOn, floor, after: will.dims[d] };
       }
       willHeld = (before - sumOf(will.dims)) / n;
     }
@@ -560,7 +564,7 @@ const computeDefenseScores = (settlement, keep, instead = null) => {
   const raw = fullSum - readinessHeld + size - danger;
   const total = Math.min(100, Math.max(0, raw));
 
-  return { parts, crises, n, dims, full, size, danger, raw, total, willHeld, sustainsHeld, wallsFull, wallsPart,
+  return { parts, crises, n, dims, full, size, danger, raw, total, willHeld, willHold, sustainsHeld, wallsFull, wallsPart,
     t, inst, hasStanding, hired, law, chains, magicExists, tradMon };
 };
 
@@ -714,6 +718,21 @@ export function generateDefenseProfile(settlement, upkeep = keepOf(undefined)) {
 export function defencePartsOf(settlement, upkeep) {
   const s = /** @type {any} */ (settlement);
   return listOf(computeDefenseScores(s, upkeep ?? keepOfRecord(s.economicState))).list;
+}
+
+/**
+ * R13 SCORE BY SCORE, re-derived from the record (BIRTH-1 D5, the tenth chair's PRERELEASE-LIST D5, intake 14). Where something is
+ * built or standing, for each score of the martial will: its points before the hold, the armed bodies' points on that score as the
+ * hold read them, the floor it is never held below (UPKEEP-MEASURE-2 X4: the will the place has with nothing built or standing),
+ * and its points after (`willHold`, empty where nothing is built or standing); and every part's points per score after every rule.
+ * Nothing stores or prints this; it changes no figure. Pure in the record. @param {Object} settlement
+ * @param {{ bought: number, funded: number }} [upkeep] the standing keep
+ * @returns {{ n: number, willHold: Record<string, { before: number, armed: number, floor: number, after: number }>, parts: Array<{ id: string, group: string, dims: Record<string, number> }> }}
+ */
+export function defenceWillHoldOf(settlement, upkeep) {
+  const s = /** @type {any} */ (settlement);
+  const r = computeDefenseScores(s, upkeep ?? keepOfRecord(s.economicState));
+  return { n: r.n, willHold: r.willHold, parts: r.parts.map((p) => ({ id: p.id, group: p.group, dims: { ...p.dims } })) };
 }
 
 /**

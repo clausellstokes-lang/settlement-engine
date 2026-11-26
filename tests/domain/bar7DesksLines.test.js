@@ -284,7 +284,8 @@ describe('item 8 · a slash label takes its prose form in {institution}', () => 
     expectNoSeedFailures(collectSeedFailures(LABELS.map((l) => [l]), ([label]) => {
       const out = economyStateProse({ name: 'Plantford', economicState: {} }, { impairedInstitution: label }, { seed: 'bar7-desks' });
       const said = JSON.stringify(out.impairedService ?? '');
-      expect(said).toMatch(/Plantford's [A-Z]/);
+      // E1 (WORDS-1, the tenth chair's G5): a form that holds a possessive ("Hunters' lodge") reads "The Hunters' lodge at Plantford"
+      expect(said).toMatch(/Plantford's [A-Z]|The [A-Z][^"]*['’] [a-z]+ at Plantford /);
       expect(said).not.toMatch(/\//); // anchored: the line above holds the sentence printed
       // every form is singular: the desk's own singular verbs and "its" agree with it
       expect(said).not.toMatch(/Plantford's [A-Z][^"]*?s (?:is|can|does|still) /); // anchored: two lines above hold the sentence printed

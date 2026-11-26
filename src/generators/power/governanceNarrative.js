@@ -12,7 +12,7 @@
  * those precedence rules explicit when adding new narrative cases.
  */
 
-import { FAILED_SOURCE_WORDS } from '../economy/foodBalance.js'; import { defenceOf } from '../../domain/facts/defence.js'; import { resolveGenerationWorldLaw } from '../generationContext.js'; import { migrationDirectionOfConfig } from '../../domain/migrationDirection.js'; import { resolveSibling } from '../../domain/facts/drawDeclared.js'; import { factsOf } from '../../domain/facts/factsOf.js'; import { BASELINE_CONFLICT_SIBLINGS } from '../../data/powerSiblings.js'; export { BASELINE_CONFLICT_SIBLINGS }; import { buildInsurgencyNarrative, buildMigrationNarrative, buildReligiousConversionNarrative, buildWartimeNarrative } from './governingStressVignettes.js'; import { migrationDirectionOf } from '../../domain/crisis/migrationDirection.js'; import { powerNameAfterArticle, powerNameWithArticle, powerPossessive } from '../../domain/display/powerSentenceName.js'; // NAMES-1 (CN1, the seventh chair's ruling of 2026-11-20, vetoable by the owner): a power in a sentence takes its article // F10, CENSUS-1c, CENSUS-5c (R-AB: the table moved to data/powerSiblings.js, re-exported): one line, so no cited line moves — LANDING-R2 (ODQ §934.105): the four governing-faction stress vignettes moved verbatim to power/governingStressVignettes.js, imported on this line, so no cited line moves — W3 POW (WAVE-RULINGS item 8): the label reads the entry's direction through F13's reader, imported on this line // BAR3-POWERS (C36418): the failed source's words, first on this line
+import { FAILED_SOURCE_WORDS } from '../economy/foodBalance.js'; import { defenceOf } from '../../domain/facts/defence.js'; import { resolveGenerationWorldLaw } from '../generationContext.js'; import { migrationDirectionOfConfig } from '../../domain/migrationDirection.js'; import { resolveSibling } from '../../domain/facts/drawDeclared.js'; import { factsOf } from '../../domain/facts/factsOf.js'; import { BASELINE_CONFLICT_SIBLINGS } from '../../data/powerSiblings.js'; export { BASELINE_CONFLICT_SIBLINGS }; import { buildInsurgencyNarrative, buildMigrationNarrative, buildReligiousConversionNarrative, buildWartimeNarrative } from './governingStressVignettes.js'; import { migrationDirectionOf } from '../../domain/crisis/migrationDirection.js'; import { holdsPossessive, powerNameAfterArticle, powerNameWithArticle, powerPossessive } from '../../domain/display/powerSentenceName.js'; // NAMES-1 (CN1, the seventh chair's ruling of 2026-11-20, vetoable by the owner): a power in a sentence takes its article // F10, CENSUS-1c, CENSUS-5c (R-AB: the table moved to data/powerSiblings.js, re-exported): one line, so no cited line moves — LANDING-R2 (ODQ §934.105): the four governing-faction stress vignettes moved verbatim to power/governingStressVignettes.js, imported on this line, so no cited line moves — W3 POW (WAVE-RULINGS item 8): the label reads the entry's direction through F13's reader, imported on this line // BAR3-POWERS (C36418): the failed source's words, first on this line
 
 const SMALL_SETTLEMENT_TIERS = new Set(['thorp', 'hamlet', 'village']);
 
@@ -196,7 +196,7 @@ const rewriteFactionPhrasing = (
       /\bcouncil meetings\b/gi,
       match => preserveSentenceCase(
         match,
-        governingBodyOverride ? `the ${powerPossessive(powerNameAfterArticle(governingBodyOverride))} meetings` : `${councilLabel.replace(/^the /, '')} meetings`, // NAMES-1 (CN1): "the Elder Council's meetings", never "Elder Council meetings"
+        governingBodyOverride ? (holdsPossessive(powerNameAfterArticle(governingBodyOverride)) ? `the meetings of ${powerNameWithArticle(governingBodyOverride)}` : `the ${powerPossessive(powerNameAfterArticle(governingBodyOverride))} meetings`) : `${councilLabel.replace(/^the /, '')} meetings`, // NAMES-1 (CN1): "the Elder Council's meetings", never "Elder Council meetings"
       ),
     )
     .replace(/\binside the council\b/gi, (match, at, whole) => (whole.startsWith(`inside ${councilLabel}`, at) ? match : `inside ${councilLabel}`)) // R24-C1 (CLOSE-7 BATCH): a label that itself begins "Council" ("the Council of Aldermen") is not said twice
@@ -516,7 +516,7 @@ const deriveBaselineConflict = ({
   if (hasMarketInstitution) {
     return 'A dispute over field rotation and grazing rights has divided the village for most of this season.';
   }
-  return institutionFlags?.noGrazingQuarrel || 'A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.'; // BAR8-K-POWERS (15b, C31732): no grazing quarrel where nothing grazes (the power step reads the place: data/powerSiblings.js :: noGrazingQuarrelOf)
+  return institutionFlags?.noGrazingQuarrel === '' ? null : (institutionFlags?.noGrazingQuarrel || 'A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.'); // WORDS-2 E3 (RULING G9 (2) and its stop): each quarrel only where the record holds what it names; a calm place holding none stores none (data/powerSiblings.js :: noGrazingQuarrelOf)
 };
 
 const selectPrimaryStress = (stressTypes, fallbackStressType) => {

@@ -830,11 +830,11 @@ the access.
 
 **COMBINATION C4: a low rung on a working approach**
 1. `[ledger · no crisis: under_siege · no crisis: plague_onset]` {settlement} sits on its {access} and stays poor all the same.
-2. `[street · no crisis: under_siege · no crisis: plague_onset]` Little that comes past {settlement} stops there. The town is poor, and its people say so to anyone who asks.
+2. `[street · no exports · no crisis: under_siege · no crisis: plague_onset]` Little that comes past {settlement} stops there. The town is poor, and its people say so to anyone who asks.
 3. `[visitor · market · no crisis: under_siege · no crisis: plague_onset]` {settlement}'s {access} is busy, and the town is poor all the same, and so are the traders at its market.
 4. `[ledger · crisis: under_siege]` With the siege closing the roads, {settlement} has lost what passing trade used to leave behind, and the town feels the loss.
 5. `[street · crisis: under_siege]` The siege has stopped {settlement}'s trade moving at all, and the money that trade brought in has stopped with it.
-6. `[visitor · no market · no crisis: under_siege · no crisis: plague_onset]` There is no market at {settlement} to hold whatever its {access} brings, and the town stays poor.
+6. `[visitor · no market · no crisis: under_siege · no crisis: plague_onset]` Whatever its {access} brings goes on past {settlement}, and the town stays poor.
 7. `[ledger · crisis: under_siege]` Since the siege began, no passing traffic brings money into {settlement}, and nothing has taken its place.
 
 **COMBINATION C5: a low rung on a narrow approach**
@@ -2478,10 +2478,10 @@ and never an assertion that the feared thing is happening.
 6. `[visitor · no crisis: succession · crisis: occupied]` At {settlement} the {seat} still answers quickly, but under the occupation it carries out what the occupiers decide.
 
 **`council`** {colour}
-1. `[ledger · no ruler: lord · seat members]` Decisions at {settlement} are slow because the whole {seat} must agree, and once made they are rarely undone.
-2. `[street · no ruler: lord · seat members]` At {settlement} the town's business goes to the whole {seat}, and everybody has learned how long the answer takes.
+1. `[ledger · no ruler: lord · ruling body · seat members]` Decisions at {settlement} are slow because the whole {seat} must agree, and once made they are rarely undone.
+2. `[street · no ruler: lord · ruling body · seat members]` At {settlement} the town's business goes to the whole {seat}, and everybody has learned how long the answer takes.
 3. `[unfolding · no crisis: succession]` The {seat} at {settlement} watches the town's temper closely: what it fears is the town turning on it.
-4. `[counterforce · no ruler: lord · seat members]` The {seat} at {settlement} has left obvious decisions untaken because its members cannot agree on them.
+4. `[counterforce · no ruler: lord · ruling body · seat members]` The {seat} at {settlement} has left obvious decisions untaken because its members cannot agree on them.
 5. `[counterforce · no ruler: lord · no seat members]` The {seat} at {settlement} has left obvious decisions untaken, and nobody there can make it take them.
 6. `[street · no ruler: lord · no seat members]` At {settlement} the town's business goes to the {seat}, and everybody has learned how long the answer takes.
 
@@ -7493,7 +7493,7 @@ no compass word, no real-world place, no named analogy.*
 
 **`GARRISONED`**
 1. `[visitor · no crisis: occupied]` {settlement} keeps people under arms for its defence; the town does not trust to luck and neighbours.
-2. `[ledger · walls · no crisis: occupied]` {settlement} pays wages for its defense as well as keeping its walls, and the money is found every season.
+2. `[ledger · walls · no crisis: occupied]` {settlement} pays wages for its defense as well as keeping its walls.
 
 **`LETTERED`** {colour}
 1. `[visitor]` {settlement} supports trained practitioners of the Art, which few towns its size can afford.

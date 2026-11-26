@@ -31,7 +31,7 @@ import {
   random as _rng,
   setActiveRng,
 } from '../kernel/rngContext.js';
-import { landMemberships, rankPowers } from './people/castPowers.js';
+import { landMemberships, rankPowers } from './people/castPowers.js'; import { boundReflexives } from '../data/people/personMention.js'; import { dealingLinesOfTown } from './people/dealingLinesOfTown.js'; // E8b (WORDS-1, G20): the bound card lines' reflexive, resolved once the cards are final; E13b (G39): each pair's dealing lines in turn
 import { assignHandlers, dealAllegiances, leaveAllegianceReceipts } from '../domain/people/allegiance.js';
 import { hallCaptureOf, writeHallCapture } from '../domain/people/hallCapture.js';
 import { captureClimateOf } from './power/rulingStructure.js';
@@ -79,7 +79,7 @@ import { generateSiegeCapability } from './narrative/siegeCapability.js';
 // second copy.
 import { buildStressProfile, historySiegeNarrative } from './narrative/historyCoherence.js';
 import { resolveGenerationWorldLaw } from './generationContext.js';
-import { deriveHistoryChallengeRoute } from './history/historyRouteContext.js'; // CENSUS-4 (factsOf: imported on line 26 by CENSUS-1c)
+import { deriveHistoryChallengeRoute } from './history/historyRouteContext.js'; import { sharesSentence } from '../domain/display/sharedSentence.js'; // CENSUS-4 (factsOf: imported on line 26 by CENSUS-1c); BIRTH-1 D2b: the one sentence test, the Overview's own (one line, so no cited line moves)
 
 // Keep the established public import path while the implementation lives with
 // the other extracted narrative policies.
@@ -144,7 +144,7 @@ const genSettSummary = settlement => {
             : tier === 'metropolis'
               ? 'the grand council'
               : 'the council');
-  const topFaction = factions[0]?.faction || 'the dominant power';
+  const topFaction = powersStrongestFirst(factions)[0]?.faction || 'the dominant power'; // D4 (RULING G2): the strongest, not the first stored row
 
   const crimFaction =
     factions.find(
@@ -486,7 +486,7 @@ const genPressureDetail = settlement => {
             : tier === 'metropolis'
               ? 'the grand council'
               : 'the council');
-  const topFaction = factions[0]?.faction || null;
+  const topFaction = powersStrongestFirst(factions)[0]?.faction || null; // D4 (RULING G2): the strongest, not the first stored row (the fold can outgrow it)
 
   const milForce = hasInst('garrison')
     ? 'the garrison'
@@ -873,7 +873,7 @@ export const generatePressureSentence = settlement => {
 
   // Relationship narrative
   const relNarr = genRelNarrative(settlement);
-  if (relNarr?.phrasing) return relNarr.phrasing;
+  if (relNarr?.phrasing && !sharesSentence(relNarr.phrasing, settlement.prominentRelationship?.phrasing)) return relNarr.phrasing; // BIRTH-1 D2b (the chair's G8 (3)): a line that shares a sentence with the notable connection's passes to the next candidate; the draw is taken either way
 
   // Fallback: generic pressure
   if (detail.recentConflict) return detail.recentConflict;
@@ -881,15 +881,16 @@ export const generatePressureSentence = settlement => {
   // Thorp/hamlet fallback — even stable small settlements have subsistence-level tensions
   if (['thorp', 'hamlet'].includes(detail.tier || '')) {
     const thorpPressures = [
-      'A dispute over grazing rights and water access has been running for two seasons without resolution.',
-      'The harvest was thin this year. Everyone knows it. Nobody is saying it directly.',
+      { text: 'A dispute over grazing rights and water access has been running for two seasons without resolution.', needs: ['livestock'], excludes: ['grain'] }, // WORDS-2 E3 (RULING G16): only where herding leads (foodSources [grain, livestock, …]: the herds first iff herds and no grain), the fact noGrazingQuarrelOf reads
+      { text: 'The harvest was thin this year. Everyone knows it. Nobody is saying it directly.', excludes: ['food: ≥ secure'] }, // WORDS-2 E3 (RULING G13 (3)): never beside a printed Secure
       'A family moved away last spring. The reason is not discussed, but it affected the dynamics here.',
       { text: "The question of who tends the shared fields when the miller's household falls ill has never been properly settled.", needs: ['institution: mill'] },
       'Two families have been in a quiet feud over a boundary marker for longer than anyone can clearly remember.',
-      'The last frost came late and damaged the seedstock. Recovery is possible but the margin is narrow.',
+      { text: 'The last frost came late and damaged the seedstock. Recovery is possible but the margin is narrow.', excludes: ['food: ≥ secure'] }, // WORDS-2 E3 (G13 (3))
       'A stranger passed through a month ago and asked questions nobody found comfortable.',
     ];
-    return textOf(thorpPressures[Math.floor(_rng() * thorpPressures.length)]); // R-C (CENSUS-2d): a declared row gives back its text; CENSUS-1e enforces
+    const at = Math.floor(_rng() * thorpPressures.length), facts = factsOf(settlement), admitted = (/** @type {unknown} */ t) => declarationAdmits(declarationOf(t), /** @type {any} */ (facts)).admitted; // WORDS-2 E3 (RULING G13 (3)): the stress pool's form: a row's declaration honoured after the one pick, a refused row resolving draw-free to the next admitted
+    return textOf([...thorpPressures.slice(at), ...thorpPressures.slice(0, at)].find(admitted) ?? thorpPressures[at]); // R-C (CENSUS-2d): a declared row gives back its text
   }
 
   return null;
@@ -1065,7 +1066,7 @@ export const generateCoherence = (settlement, coherenceRng = null, pins = null, 
   // GOALS-2 (the chair's rulings of 12:05 and 12:37 UTC): the deal, the rare deal, then ONE post-pass by each card's final
   // secret (the want refused beside the card's own secret, no other card touched; people/goals.js)
   const dealtGoals = npcsHeld ? mergedNpcs : dealGoals(settlement, mergedNpcs, relationships, coherenceRng?.fork ? coherenceRng : getActiveRng());
-  const goaledNpcs = npcsHeld ? mergedNpcs : refuseWantsBesideSecrets(settlement, dealRareSecrets(settlement, dealtGoals, relationships, { seed: seed ?? settlement._seed }), relationships, { receiptsOf: dealtGoals });
+  const goaledNpcs = npcsHeld ? mergedNpcs : dealingLinesOfTown(refuseWantsBesideSecrets(settlement, dealRareSecrets(settlement, dealtGoals, relationships, { seed: seed ?? settlement._seed }), relationships, { receiptsOf: dealtGoals }).map(boundReflexives), seed ?? settlement._seed); // E8b, then E13b: after the last draw
   const withTies = { ...settlement, npcs: goaledNpcs, relationships };
 
   const history = settlement.history || {};
@@ -1119,3 +1120,4 @@ export const generateCoherence = (settlement, coherenceRng = null, pins = null, 
     },
   };
 };
+import { powersStrongestFirst } from '../domain/display/powersStrongestFirst.js'; // D4 (RULING G2): at the file's end, so no cited line moves

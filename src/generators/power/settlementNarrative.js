@@ -241,6 +241,9 @@ export const genSuccessionNarr = (ctx) => {
   return narratives;
 };
 
+/** A tie's two ends, unordered (its card ids; a tie without ids by its two names). @param {any} rel @returns {string} */
+const tiePairKey = (rel) => [String(rel?.from ?? rel?.npc1Name ?? ''), String(rel?.to ?? rel?.npc2Name ?? '')].sort().join('\u0000');
+
 // genRelNarrative — pick the most salient relationship and render a rumour for it
 export const genRelNarrative = (input) => {
   var firstStress, topScored;
@@ -262,10 +265,18 @@ export const genRelNarrative = (input) => {
       };
     });
   scored.sort((a, b) => b.score - a.score);
-  const topRel = (topScored = scored[0]) == null ? void 0 : topScored.r;
+  // BIRTH-1 D2 (the tenth chair's PRERELEASE-LIST D2): THE PROMINENT TIE IS NEVER A COVERT ONE. A handler tie
+  // (`covert: true`, people/ties.js :: drawTies) is hidden DM state, and the pick's copy of its strings carries no flag,
+  // so the pick is the best tie that is NOT covert and does not join the two people a covert tie joins (a pair's open tie
+  // the other way still names both ends of the hidden one: V dp-hamlet-67, -76). The scores above are drawn over every
+  // tie and the rumour below is drawn whatever is picked, so no draw is added, removed or moved; where no tie qualifies
+  // there is no prominent tie.
+  const covertPairs = new Set(relationships.filter((rel) => rel?.covert === true).map(tiePairKey));
+  const topRel = (topScored = scored.find((s) => s.r?.covert !== true && !covertPairs.has(tiePairKey(s.r)))) == null ? void 0 : topScored.r;
+  const rumour = pickRandom2(STRESS_RUMORS);
   if (!topRel) return null;
   const cards = new Map((Array.isArray(input.npcs) ? input.npcs : []).map((n) => [n?.id, n])); // BAR2-PEOPLE-2 (PP3b): the tie's two cards
-  const phrasing = pickRandom2(STRESS_RUMORS)(topRel, cards);
+  const phrasing = rumour(topRel, cards);
   // the tie's `from` end leads (`npc1`), its `to` end follows (`npc2`)
   return {
     npc1: topRel.npc1Name,

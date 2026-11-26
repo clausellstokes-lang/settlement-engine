@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { safetyLineSaidOnce } from '../../../domain/display/guardLineUnderTheLaw.js';
 import { FS, swatch, MUTED } from '../../theme.js';
 import { serif, Section } from '../Primitives';
 import Button from '../../primitives/Button.jsx';
@@ -282,7 +283,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier: publicD
   // F9 unit 1: Disasters & Famine takes the row's one score, held to Weak under an active
   // famine (threatAssessment.js :: disasterReadinessScore, which the PDF's rows read too).
   const threatScores = {
-    'Beasts & Monsters': scores.monster||0,
+    'Beasts & Monsters': beastsReadinessOf(r).shownScore, /* P9 (G22): read against the need */
     'Invasion & War': scores.military||0,
     'Internal Security': scores.internal||0,
     'Economic Survival': scores.economic||0,
@@ -358,7 +359,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier: publicD
   // economic-capacity read per page, R2); the row with prose under its bar stays.
   const caps = deriveSupportingCapabilities(r).filter((cap) => cap.label !== 'Economic Backing');
   const guardAssessment = deriveGuardAssessment(r);
-  const safetyLine = deriveSafetyLine(r); // BAR6-CRIME (a) (c) (d): the public-order line as printed (a DM's own line by identity)
+  const safetyLine = safetyLineSaidOnce(deriveSafetyLine(r), r, publicDossier); // BAR6-CRIME (a) (c) (d): the public-order line as printed (a DM's own line by identity); G6 #11: told once
   // X-52 FOOD ENDURANCE (lane DEFENSE-3): the one food record read for a siege, one sentence.
   const foodEndurance = foodEnduranceLine(r);
   const defViolations = deriveDefenseVulnerabilities(r);
@@ -411,7 +412,11 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier: publicD
         </div>
         <div style={{flex:1,borderLeft:`1px solid ${stressStatus.colour}40`,paddingLeft:12}}>
           {stressObj?.summary&&<p style={{fontSize: proseFontSize(FS['12.5'], isMobile),color:swatch['#3A2A10'],lineHeight:1.5,margin:'0 0 4px'}}>{stressObj.summary}</p>}
-          {stressObj?.viabilityNote&&<p style={{fontSize: proseFontSize(FS['11.5'], isMobile),color:swatch['#5A3A10'],fontStyle:'italic',margin:0,lineHeight:1.4}}>{stressObj.viabilityNote}</p>}
+          {/* WORDS-2, the tenth chair's RULING G6 #10 (one home): the crisis's own note ("if nothing is done") is printed by the
+              Crisis tab, which the owner's own view registers (OutputContainer.jsx :: hasCrisisTab: not a player view, not a
+              shared page); there this box leaves it to that tab. A player view and a shared page carry no Crisis tab, so they
+              keep it here, exactly as before. */}
+          {stressObj?.viabilityNote&&(playerView||publicDossier)&&<p style={{fontSize: proseFontSize(FS['11.5'], isMobile),color:swatch['#5A3A10'],fontStyle:'italic',margin:0,lineHeight:1.4}}>{stressObj.viabilityNote}</p>}
           {/* DS-DEF-8: what the override means for this town, in its own voice. */}
           <ProseBlock lines={statusLines} settlementName={r.name} tier={r.tier}
             style={{fontSize:proseFontSize(FS.xs, isMobile),color:swatch['#3A2A10'],lineHeight:1.5,margin:'6px 0 0',fontStyle:'italic'}}/>
@@ -731,3 +736,4 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier: publicD
 }
 
 export default React.memo(DefenseTab);
+import { beastsReadinessOf } from '../../../domain/facts/beastsReadiness.js'; // P9 (RULING G22): the beasts grade read against the need; at the end of the file, so no cited line moves
