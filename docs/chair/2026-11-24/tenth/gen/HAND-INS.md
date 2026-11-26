@@ -140,3 +140,14 @@ sentence. NEW ON A PAGE, the owner's to veto: that sentence.
 E13d-3 as its seat reports it: records 0, pages 0; the walker 33 of 33 (red first 1); the register NOT re-taken; typechecks at
 their ceilings; tests/lint whole the line's three. New sentences: none. ALSO: B1(i)c-2 built by CLOSE-11 (38e92b68e), its
 gate queued; C4's gate on a copy of 3647bae53 queued.
+
+| CLOSE-11 | B1(i)c-2 (the port gives furs) | lane/close-11-2026-11-26-b1ic2-wip | 38e92b68e (on CLOSE-10's 19a5855f3) | handed in 18:11 UTC; the diff READ BY THE CHAIR AND ACCEPTED (one route added to `LAND_GIVERS.furs`, two comments; the residuals named); its second read is the join's | G60, G67 |
+
+B1(i)c-2 as its seat reports it: stored at birth; records moved against the line V 10, soak 18 (CLOSE-10's 27 less its 9
+ports); the desert ports' records byte-equal to the line again (129 of 129; 99 held the district); every other birth
+byte-equal to 19a5855f3 (623 of 623); its own check 30 of 30 (red first 5); every desert port measured prints itself an
+entrepot (129 of 129). Its gate (7,630 tests): 20 red, 17 on the line's list; THE THREE OTHERS ARE CLOSE-10's NAMED FIGURES,
+unchanged, for the owner: `siteCoherenceRatchet` C1 (the road metropolis: ore 14 to 15, iron 2 to 1), `hookThemeDraws`
+"no hook is lost" (2145 to 2144), `pipelinePinnedChoosers` A6 (32 to 33). New sentences: none.
+ALSO ON ORIGIN, NOT A HAND-IN: CLOSE-11's coded, unproven B1(ii) draft `lane/close-11-2026-11-26-b1ii-wip` e809f2a2e: given
+to the local builder B1II-119 to read once and judge.
