@@ -185,3 +185,9 @@ on C small, V small and the soak at every tier: given to the join's second reade
 **ALL SIX UNITS OF POINT 119 ARE IN AND READ BY THE CHAIR** (20:29 UTC): E13d-3 9e73a943a; B1(i)c-2 38e92b68e; P9b-2 cabb56d92;
 C4-SECOND-LINE 40eec947a; VIABILITY-TRUE-2 ecb5b9853; B1(ii) LOCAL 8a37259dc4. The helper LAND-119 and one second reader are
 started together.
+
+**CLOSE-11 HANDED OVER at cc0434caf** (20:35 UTC on 2026-11-26; `lane/close-11-2026-11-26`,
+`docs/chair/2026-11-21/eighth/close/CLOSE-11-HANDBACK.md` section 0: the five unit branches and tips, the merge order, four
+lessons). ITS DEAREST READING FOR THE LEAST: `docs/OPERATING_STANDARD.md` (36 KB): the owner's standing instruction makes every
+session read it, so no seat is excused it by the chair; the saving is that small, ruled units go to builders on the chair's
+machine, which read a brief and CLAUDE.md. NO SEAT IS WORKING.
