@@ -239,14 +239,14 @@
  "digests": {
   "corpusMeta": "2fc0bed64cd75bee9bf307933c70806bddd7e3bca56bd43f6b10701001c26cf9",
   "inventory": "656a4d0007e96e46337a2ccfbef80d0e105da304c9aeaae4b35e118f0c65415e",
-  "manifests": "7f79dda22d08f220f1f330b83ac5453703468d6fec3a96518119f752f0378d75",
+  "manifests": "84b11a8c8c354e761e390eab46d7fb341f999341435b4640c130052b676389e2",
   "migrationReview": "e534f083e0e955fdb22847606961f18e4bda1cb8092c131f84b753bdd672cf4e",
   "rowTags": "d980efe88e9faed55dad533e43ccf6d4e3ea3dae24aa236375965207828d96f7",
-  "scanStats": "b22599b00fe7d328867ccef7ee971bfc2a5265d267476a3b9bb39d919f9c2718",
-  "sentinel": "9b980b5cb58bd3db48034bdf77f993962ed3dc563624e92a5b20708532d09cee"
+  "scanStats": "9105e688f0c270025059434ab5b19d7bb8ac5b2bb1e358d0c91b5b610c6311f1",
+  "sentinel": "813177d37d1739572d3b4c95284f4a8c2c92cbc2c860ed38d63ee656844bdad7"
  },
  "frozen": "2026-11-26",
- "frozenAtSha": "b2831334fab5475a51734f9cffb13523c1bd2d4c",
+ "frozenAtSha": "5b59b5c080e42e3caa8211275c6385a426e021a4",
  "identities": 1551,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
@@ -2777,7 +2777,7 @@
   },
   "executionTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "751f8156005d081c9d995066341fd74c1692a318f269f9a4cc571ced093a9157",
+   "digest": "383b64d35482ae433c6faef3f149833cf56fab204506562caabe754170a98bc5",
    "entries": [
     {
      "mode": "100644",
@@ -5925,8 +5925,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/DefenseTab.jsx",
-     "sha256": "76431c7a3e41c31edfb987fcce3a4f6b879b108c56e39d01b6fa9e65640277bb",
-     "size": 54364,
+     "sha256": "8480cbb9eb0959765209f924629269eee3a8c35484bb7ef22345d2ae3dde4552",
+     "size": 54349,
      "type": "file"
     },
     {
@@ -7514,8 +7514,8 @@
     {
      "mode": "100644",
      "path": "src/data/dossierStateProse/general.generated.js",
-     "sha256": "d6df1e97b119da8af6ef0877bd945845dcb3c1d4f0bfb52899efe7685227f1f6",
-     "size": 312472,
+     "sha256": "9847e736e50f0348fdfce01281cb4a4fabb7aa5fb4d6b030d0ca52281591b31c",
+     "size": 312480,
      "type": "file"
     },
     {
@@ -9754,8 +9754,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/commoditiesShown.js",
-     "sha256": "008e04defb85f4d538fd006ecef1f52a50f3ca346a61eb8874969539201adeee",
-     "size": 4250,
+     "sha256": "d26060a537d600e2142d4d3e201ba93704e4591b556531b4e0a3a20817132897",
+     "size": 4892,
      "type": "file"
     },
     {
@@ -9852,8 +9852,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/dossierViewModel.js",
-     "sha256": "dc880470c656df8d138dfb49af7c885dc456f28aaaa7d1742dc5acdb4c2af090",
-     "size": 54432,
+     "sha256": "bfad537ec209475d00169f20c2386de32233cbb249ac041270a6870febebfe8e",
+     "size": 56397,
      "type": "file"
     },
     {
@@ -9992,8 +9992,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/guardLineUnderTheLaw.js",
-     "sha256": "225577814e0814cd55f8089787878864d910a6267f3feb3910b6683dbfe28423",
-     "size": 24653,
+     "sha256": "65866c8aa401f31c077c367be19933a189fc9193644e3ff01118776a96d9154e",
+     "size": 25775,
      "type": "file"
     },
     {
@@ -21452,7 +21452,7 @@
   },
   "scanTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "0891744e8733c07e95b0706ff0e7d277ac70676248104bf95e6627f92229f27c",
+   "digest": "b8a06a126d328f6d719f05a6c1c9228fbce02e0eb102ce58ace32cbd7e0b2148",
    "entries": [
     {
      "mode": "100644",
@@ -24530,8 +24530,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/DefenseTab.jsx",
-     "sha256": "76431c7a3e41c31edfb987fcce3a4f6b879b108c56e39d01b6fa9e65640277bb",
-     "size": 54364,
+     "sha256": "8480cbb9eb0959765209f924629269eee3a8c35484bb7ef22345d2ae3dde4552",
+     "size": 54349,
      "type": "file"
     },
     {
@@ -28240,8 +28240,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/commoditiesShown.js",
-     "sha256": "008e04defb85f4d538fd006ecef1f52a50f3ca346a61eb8874969539201adeee",
-     "size": 4250,
+     "sha256": "d26060a537d600e2142d4d3e201ba93704e4591b556531b4e0a3a20817132897",
+     "size": 4892,
      "type": "file"
     },
     {
@@ -28338,8 +28338,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/dossierViewModel.js",
-     "sha256": "dc880470c656df8d138dfb49af7c885dc456f28aaaa7d1742dc5acdb4c2af090",
-     "size": 54432,
+     "sha256": "bfad537ec209475d00169f20c2386de32233cbb249ac041270a6870febebfe8e",
+     "size": 56397,
      "type": "file"
     },
     {
@@ -28478,8 +28478,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/guardLineUnderTheLaw.js",
-     "sha256": "225577814e0814cd55f8089787878864d910a6267f3feb3910b6683dbfe28423",
-     "size": 24653,
+     "sha256": "65866c8aa401f31c077c367be19933a189fc9193644e3ff01118776a96d9154e",
+     "size": 25775,
      "type": "file"
     },
     {
@@ -39931,7 +39931,7 @@
   },
   "sourceTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "52acb6cae5ff1371f67464685f184d03dc40ac8db074c9c3f942b8fea4a968fb",
+   "digest": "a068febcb8e244413f7bd6d7c726f14ca883c386bd0ab1fc85a164a683a387be",
    "entries": [
     {
      "mode": "100644",
@@ -43009,8 +43009,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/DefenseTab.jsx",
-     "sha256": "76431c7a3e41c31edfb987fcce3a4f6b879b108c56e39d01b6fa9e65640277bb",
-     "size": 54364,
+     "sha256": "8480cbb9eb0959765209f924629269eee3a8c35484bb7ef22345d2ae3dde4552",
+     "size": 54349,
      "type": "file"
     },
     {
@@ -44598,8 +44598,8 @@
     {
      "mode": "100644",
      "path": "src/data/dossierStateProse/general.generated.js",
-     "sha256": "d6df1e97b119da8af6ef0877bd945845dcb3c1d4f0bfb52899efe7685227f1f6",
-     "size": 312472,
+     "sha256": "9847e736e50f0348fdfce01281cb4a4fabb7aa5fb4d6b030d0ca52281591b31c",
+     "size": 312480,
      "type": "file"
     },
     {
@@ -46838,8 +46838,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/commoditiesShown.js",
-     "sha256": "008e04defb85f4d538fd006ecef1f52a50f3ca346a61eb8874969539201adeee",
-     "size": 4250,
+     "sha256": "d26060a537d600e2142d4d3e201ba93704e4591b556531b4e0a3a20817132897",
+     "size": 4892,
      "type": "file"
     },
     {
@@ -46936,8 +46936,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/dossierViewModel.js",
-     "sha256": "dc880470c656df8d138dfb49af7c885dc456f28aaaa7d1742dc5acdb4c2af090",
-     "size": 54432,
+     "sha256": "bfad537ec209475d00169f20c2386de32233cbb249ac041270a6870febebfe8e",
+     "size": 56397,
      "type": "file"
     },
     {
@@ -47076,8 +47076,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/guardLineUnderTheLaw.js",
-     "sha256": "225577814e0814cd55f8089787878864d910a6267f3feb3910b6683dbfe28423",
-     "size": 24653,
+     "sha256": "65866c8aa401f31c077c367be19933a189fc9193644e3ff01118776a96d9154e",
+     "size": 25775,
      "type": "file"
     },
     {
@@ -58864,20 +58864,20 @@
  },
  "scanStats": {
   "files": 2639,
-  "reads": 152389,
-  "resolved": 13326,
-  "unresolved": 139063
+  "reads": 152390,
+  "resolved": 13325,
+  "unresolved": 139065
  },
  "scannerProvenance": {
   "detectorDigest": "4510771aaad7171b24f7d28199255626c9dd37de9015d991904184b37a1fae76",
-  "executionTreeDigest": "751f8156005d081c9d995066341fd74c1692a318f269f9a4cc571ced093a9157",
-  "scanTreeDigest": "0891744e8733c07e95b0706ff0e7d277ac70676248104bf95e6627f92229f27c",
-  "sourceTreeDigest": "52acb6cae5ff1371f67464685f184d03dc40ac8db074c9c3f942b8fea4a968fb",
-  "unscannedInputDigest": "14513f3971d9efdf8483f786554fdaa1e37e778be4a371896272c3f48ee92059"
+  "executionTreeDigest": "383b64d35482ae433c6faef3f149833cf56fab204506562caabe754170a98bc5",
+  "scanTreeDigest": "b8a06a126d328f6d719f05a6c1c9228fbce02e0eb102ce58ace32cbd7e0b2148",
+  "sourceTreeDigest": "a068febcb8e244413f7bd6d7c726f14ca883c386bd0ab1fc85a164a683a387be",
+  "unscannedInputDigest": "8a171d74ceee5db4552a9f3ff82706c2fe28e4b9c7814c9efd96af7bf07faaa6"
  },
  "schema": 46,
  "sentinel": {
-  "resolvedReads": 13326,
+  "resolvedReads": 13325,
   "totalKeys": 12726,
   "usableShapes": 545
  },
