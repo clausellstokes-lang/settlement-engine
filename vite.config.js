@@ -587,6 +587,24 @@ export const FIRSTPAINT2_LAZY_DOMAIN = [
   //   tests/build/engineChunkLazy.test.js (no first-paint-reachable excision is left unpinned).
   '/src/domain/landWithholding.js',
   '/src/domain/facts/foodProduction.js',
+  // D7-BYTES (CLOSE-8 cure 3c, 2026-11-25; the tenth chair's G24: SIZE-BACK's method). THE SAME PREMISE as foodProduction.js
+  // above: facts/crisisBody.js (BIRTH-1 D7, the one reader of `crisis body: <kind>`) is a new leaf of facts/factsOf.js (pinned
+  // here), which is generator-reached, so the derivation walked it into EAGER engine-core, and through its one import,
+  // people/stressPowerFaces.js (excised above, TAIL-TIES-8), the face table data/stressPowerFaces.js into the eager `data`
+  // chunk. Its one importer is factsOf.js; its one call site is factsOf's `crisisBody` getter, so it rides with factsOf.
+  // people/stressPowerFaces.js (the face table's one reader) is pinned beside it, never left an orphan (FP-G11): with only
+  // crisisBody.js pinned, Rollup already placed it here (measured), and the pin makes that placement the rule's, not a
+  // tie-break between its manual-chunk importers. Its importers: crisisBody.js (here), generators/people/castPowers.js and
+  // density/applyDensityLaw.js (`engine`, which imports this chunk) and components/new/tabs/power/PowerStrata.jsx (whose
+  // chunk imports this chunk). Its imports: rulingPower.js and people/membership.js (engine-core), data/stressPowerFaces.js
+  // (data-lazy, which this chunk imports). So no chunk gains an edge.
+  // MEASURED (npm run build, the vendorPdfLazy closure method; the join 0ef4d2a11 before, this after): first paint
+  // 1,195,718 -> 1,190,128 B raw (gzip 381,485 -> 379,761; Brotli 320,038 -> 318,957); `data` 168,098 -> 164,145;
+  // engine-core 318,322 -> 316,686; the generation worker unchanged (2,737,079, same hash); no chunk gains or loses an edge.
+  // No eager module imports either. @guarded-by tests/build/vendorPdfLazy.test.js (the first-paint byte budget) and
+  //   tests/build/engineChunkLazy.test.js (no first-paint-reachable excision is left unpinned).
+  '/src/domain/facts/crisisBody.js',
+  '/src/domain/people/stressPowerFaces.js',
 ];
 for (const frag of ENGINE_SHARED_DOMAIN_EXCISIONS) ENGINE_SHARED_DOMAIN.delete(frag);
 for (const frag of FIRSTPAINT2_LAZY_DOMAIN) ENGINE_SHARED_DOMAIN.delete(frag);
