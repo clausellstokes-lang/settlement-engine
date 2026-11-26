@@ -9,16 +9,16 @@ A seat of THE TENTH CHAIR (session_019yED1SUxGVHyjQnoqoFvQ8), successor of CLOSE
 Base: the line `lane/join-2026-11-14` at POINT 118, 9d22f040e. Each unit in its own worktree (`/home/user/wt-<unit>`,
 node_modules symlinked; `/node_modules` and `/.husky/_` in the clone's `info/exclude`), pushed from that worktree.
 
-### 0.1 The units (order by the chair, 17:01 UTC: B1(i)c-2, C4's gate, VIABILITY-TRUE-2, P9b-2, B1(ii); then the join)
+### 0.1 The units (the chair, 18:07 UTC: FOUR HAND-INS, then "CLOSE-11 HANDS OVER"; B1(ii) and THE JOIN are NOT this seat's)
 
 | unit | branch | tip | state |
 |---|---|---|---|
-| (1) B1(i)c-2 (G67) | lane/close-11-2026-11-26-b1ic2-wip | 38e92b68e (on 19a5855f3) | built; dirs gate (lint, generators, data, copy) RUNNING; then push + hand-in |
-| (2) E13d-3 (G67) | lane/close-11-2026-11-26-e13d3-wip | 9e73a943a | PUSHED, HANDED IN, ACCEPTED (17:01) |
-| (3) C4's gate (copy of CLOSE-10's 3647bae53) | lane/close-11-2026-11-26-c4second-wip | 1e35d273a (wiring census by its door) | gate: 20 red, 7 line's, 13 its own; ruling asked on the shift register (owner-gated pins) and A0b over-claim 20>19 |
-| (4) VIABILITY-TRUE-2 (G68: V1 debt homes, V2 the tab's fallback, V3 comment) | lane/close-11-2026-11-26-viability2-wip | 7279e571c + V2 uncommitted in /home/user/wt-via2 | V1's render measure (debt homes, scratch via/) and V3's measure queued on /home/user/wt-via-base |
-| (5) P9b-2 (G68: P1 SummaryTab sixth mean, P2 non-numeric score) | — | — | not started |
-| (6) B1(ii) (G64) | lane/close-11-2026-11-26-b1ii-wip | uncommitted in /home/user/wt-b1ii | coded (`settlement.schema.js :: bornByThisEngine`; `genesis.js :: fieldRiteRefused`, the rule after the draw; census row B1furrow + plant/controls); typechecks green; line measure: field shown 362/1800, refusing 246, refusing+field 61, farmland admits 32; master-born 360 (stamp 0.9.0) shown sets byte-equal 360/360; after-births queued |
+| B1(i)c-2 (G67) | lane/close-11-2026-11-26-b1ic2-wip | 38e92b68e (on 19a5855f3) | PUSHED, HANDED IN 18:06 (gate: 20 red = 17 line's + C1, hookThemeDraws 2145->2144, A6 32->33) |
+| E13d-3 (G67) | lane/close-11-2026-11-26-e13d3-wip | 9e73a943a | PUSHED, HANDED IN, ACCEPTED 17:01 (not among the four: done before) |
+| C4-SECOND-LINE gated (G49, G69) | lane/close-11-2026-11-26-c4second-wip | 3edb597c2 (on CLOSE-10's 3647bae53: census 1e35d273a, pins 6a8d5f673, observed-shape bd2ac3285, shift register PREPARED 3edb597c2) | full gate re-run queued (c4-gate2.log); then push + hand-in |
+| VIABILITY-TRUE-2 (G68 V1-V3) | lane/close-11-2026-11-26-viability2-wip | 7279e571c + V2 uncommitted in /home/user/wt-via2 | V1 render measure (via/base.log) and V3 measure (via/v3.jsonl) queued on /home/user/wt-via-base |
+| P9b-2 (G68 P1, P2) | lane/close-11-2026-11-26-p9b2-wip | 12c77ae3f + red test tests/ui/defenceMeanAsShown.test.jsx (uncommitted) | red run queued (p9b2-red.log); cures designed: SummaryTab defScore = avgScore(scoresAsShown(r, dp.scores)) on its own line, imports at line 9 and the file's end; scoresAsShown passes a non-numeric monster through |
+| B1(ii) | lane/close-11-2026-11-26-b1ii-wip | e809f2a2e | NOT MINE (chair 18:07): coded, unproven, pushed for the chair's builder |
 
 **C4's 13 own reds** (a) count pins +1: projection MUTANT 3182, proseComposed GUARD 3182, wiring VARIANT 3182, composeStateProse 3182,
 proseEntryContradiction 3650/2942, PAYOFF Poor/road 3->4, stateProseKernel UNIFORM group list; (b) doors: wiring census (DONE
