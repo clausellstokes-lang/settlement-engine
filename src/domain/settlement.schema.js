@@ -52,7 +52,7 @@ export const GENERATOR_VERSION  = '0.10.0'; // GUARD (R24j 1, 2026-11-25): 0.9.0
 // current version is written at BIRTH alone (generators/steps/assembleSettlement.js).
 export const LEGACY_GENERATOR_VERSION = '0.9.0';
 /** A stamp the floor reader can compare: exactly three dot-separated whole numbers. */
-const THREE_NUMBER_STAMP = /^(\d+)\.(\d+)\.(\d+)$/;
+const THREE_NUMBER_STAMP = /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$/; // G74: no padded number (0.010.0 is malformed)
 /** @param {unknown} stamp @returns {number[] | null} */
 const stampNumbers = (stamp) => {
   if (typeof stamp !== 'string') return null;

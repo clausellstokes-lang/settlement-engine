@@ -68,6 +68,8 @@ describe('B1(ii): the twins keep their whole set', () => {
  * through `settlement.schema.js :: bornAtOrAfter`: three dot-separated whole numbers, compared number by number.
  * RED FIRST (the equality reader `bornByThisEngine` of ef10a71f3a): "a record stamped 0.11.0 ... is refused" failed
  * (expected false to be true), and so did the simulated next release: the 0.10.0-born place drew `field` again.
+ * G74 (CURE-119): no padded number: '0.010.0' and '00.10.00' answer false. RED FIRST (5c024476d0): "0.9.0, no stamp, ...
+ * are not asked" failed at stamp 0.010.0 (expected true to be false).
  */
 describe('G72 (1): the field rule\'s stamp is a floor', () => {
   test('records stamped 0.10.0, 0.11.0 and 1.0.0, whose food record refuses, are refused a field rite', () => {
@@ -77,9 +79,9 @@ describe('G72 (1): the field rule\'s stamp is a floor', () => {
       expectPresentThenAbsent(elements(before), elements(deriveFoundingTraditions(s)), 'field', `stamp ${stamp}`);
     }
   });
-  test('0.9.0, no stamp, legacy, 0.10, 0.10.0-rc1 and numbers are not asked: the whole set stands', () => {
+  test('0.9.0, no stamp, legacy, 0.10, 0.10.0-rc1, padded stamps and numbers are not asked: the whole set stands', () => {
     const { generatorVersion: _drop, ...stampless } = place(['livestock', 'fish']);
-    const records = [stampless, ...['0.9.0', 'legacy', '0.10', '0.10.0-rc1', 10, 0.1, null].map((stamp) => place(['livestock', 'fish'], { generatorVersion: stamp }))];
+    const records = [stampless, ...['0.9.0', 'legacy', '0.10', '0.10.0-rc1', '0.010.0', '00.10.00', 10, 0.1, null].map((stamp) => place(['livestock', 'fish'], { generatorVersion: stamp }))];
     for (const s of records) {
       expect(fieldRiteRefused(s), String(s.generatorVersion)).toBe(false);
       expect(JSON.stringify(deriveFoundingTraditions(s))).toBe(JSON.stringify(before));
