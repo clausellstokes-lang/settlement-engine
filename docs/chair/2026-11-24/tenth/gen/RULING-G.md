@@ -556,3 +556,31 @@ band back). RULED: `avgScore(scoresAsShown(s, dp.scores))` at the five sites (pd
 records move, the parity row equal. NOT the retirement of the dead fields (more churn; the parity pin and the headline gate read
 them). ORDER: after point 118 lands (`dossierViewModel.js` is the cures' file), cut on the new line. Confirmed by the seat by source
 read and measure, not by a rendered-text diff: the unit's proof is that diff.
+
+**G49 (07:19 UTC on 2026-11-26): THE SECOND READER ON THE CURES OF POINT 118 (seven findings; `landing/118/SECOND-READER-CURES-118.txt`), RULED.**
+THE REMOVAL OF E1 IS SOUND by its read and the chair's (src clean by E1's names; nine files byte-equal to before E1;
+`personMention.js` byte-equal to E8b's; nothing of a later unit lost). ITS FINDINGS:
+(1) the lighting census baseline stale and the observed-shape baseline holding E1's hashes: re-taken by their doors (RULING-CURE-118-3 (G)).
+(2) FIX (3) RE-DRAWS SAVED TOWNS OUTSIDE ITS CLAIM (the fare is a modulo over the eligible lines: 111 of 150 moved fare lines on
+the soak came from a line that was not false). ACCEPTED FOR POINT 118 on G45 (5)'s footing: a landing is not a release, no saved
+town sees a point, and WORDS-2's A7 and A16 on the same pool already re-draw the same places in this point. WHAT CHANGES IS D13:
+ITS BAR IS NOW MASTER. D13 STABLE-PICKS is proven against towns BORN ON MASTER (db832c8926, what a saved town was shown) and
+viewed on the release: a flavour line a saved town printed on master prints again unless that line is refused now or gone; and
+its FIRST STEP IS A MEASURE of which fact atoms a master-born record lacks on the line (the reader: with the food record absent,
+`excludes` refuses the unknown atom and 79 places printing "Secure" lose true lines). The slots it must cover are named: the
+fare, the viability summary, the state-prose pools.
+(3) CURE (2) AMENDED: "what it needs is bought in" needs BOTH a marked need AND something arriving (`needsImports && buysIn`);
+as built it admitted five lines on a place with an arriving luxury and no need, two contradicting each other (dp-hamlet-82).
+The state "a marked need, nothing arriving" has line 1 alone: accepted. THE CHAIR ACCEPTED (2) AS BUILT BEFORE THIS READ AND
+SAID SO TO THE OWNER: corrected to him.
+(4) E2b, written down (the fallback beside "No recorded imports.": 4 of 1,000; at the base too).
+(5) FIX (1)'s COST: a calm C4 place with exports and no market (129 of 1,000) admits v1 alone; v1 rises 148 to 215 pages. ACCEPTED
+for 118 (the fix is right; the pool is thin). ITS CURE IS A UNIT OF POINT 119, "C4-SECOND-LINE": one line true of EVERY calm C4
+place, so no gate can make it false: `[street · no crisis: under_siege · no crisis: plague_onset]` "{settlement} is poor, and
+its {access} has not changed that." (the chair's wording; the owner's to veto), written in the content document and projected by
+the generator, never by hand in the generated file. The mark `no exports` reads the stored list (soak1k-888 prints none and
+lost v6 all the same): a refusal the place did not need, in the safe direction: accepted, named.
+(6) A1 ("There is enough to eat, if nobody asks for much more than the day needs.") STAYS UNMARKED: a conditional line that
+reads as scarcity, as A3 ("Most households...") and A6 ("usually enough") are quantified; a printed Pressured (a share of the
+need unmet) does not make it false. A judgment, the chair's, vetoable.
+(7) E1's known cost (102 of 1,000 soak births print a double possessive again): G47, E1R.

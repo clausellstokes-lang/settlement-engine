@@ -166,3 +166,9 @@ rewriting finished sentences). The fault it cured stands: owner pages 125 and 14
 34. The rebuild: authored twins on each template that puts a possessive after a slot; never a pattern over a finished
 sentence; its proof includes reading every changed pair and hostile place names. E2b: "buying in what its own land and
 trades do not provide" beside an empty arriving list where only food is bought: 8 pages of 2,220; older than this work.
+
+## ADDED 07:19 UTC ON 2026-11-26 (G49): C4-SECOND-LINE (POINT 119), AND D13's BAR
+C4-SECOND-LINE: one always-true line for the pool "a low rung on a working approach" ("{settlement} is poor, and its {access}
+has not changed that."), so a calm poor place with exports and no market does not print one sentence on 215 of 1,000 pages.
+D13 STABLE-PICKS: its bar is master: a saved town's flavour lines print as they did on master unless the line is refused or
+gone; first a measure of the fact atoms a master-born record lacks; slots: the fare, the viability summary, the state-prose pools.
