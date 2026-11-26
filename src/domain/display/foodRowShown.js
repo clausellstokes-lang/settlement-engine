@@ -85,3 +85,16 @@ export function foodRowShown(town, tradeOpen) {
     deficitPct,
   };
 }
+
+/**
+ * VIABILITY-TRUE-2 (the tenth chair's G68 (V2)): THE FOOD BALANCE THE ECONOMICS TAB'S ROW PRINTS, ITS FALLBACK INCLUDED: the
+ * food record's row (`foodRowShown`, handed in) where the town has a food record, else the viability view's balance (a record
+ * written before 2026-11-03 has none, and the tab still prints the view's pounds: "Production: 31 lbs/day + 1 imported").
+ * The tab and every reader of what the tab prints read the row through this, never a second reading.
+ * @param {ReturnType<typeof foodRowShown>} row the town's `foodRowShown` (the caller's, with its carrier test)
+ * @param {{ metrics?: { foodBalance?: Record<string, unknown> | null } | null } | null | undefined} view the town's `economicViability`
+ * @returns {FoodRowView | Record<string, unknown> | null | undefined} the balance the row prints
+ */
+export function foodBalanceShown(row, view) {
+  return row?.fb ?? view?.metrics?.foodBalance;
+}

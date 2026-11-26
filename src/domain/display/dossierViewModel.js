@@ -958,16 +958,19 @@ function stoppedSupplyOf(settlement, supplying) {
     : rows.map((r) => `${r.name} · ${r.mark}`).join(', ');
 }
 /**
- * VIABILITY-TRUE (G61): the food the page's Food Security row prints as brought in, in its own pounds (0 where it prints none).
+ * VIABILITY-TRUE (G61): the food the page's Food Security row prints as brought in, in its own pounds (0 where it prints none):
+ * the Economics tab's own value by the tab's own path (`foodRowShown.js :: foodBalanceShown`, the view's balance for a record
+ * with no food record; VIABILITY-TRUE-2, G68 (V2)).
  * @param {unknown} settlement @returns {number}
  */
 function foodPoundsShown(settlement) {
   const s = /** @type {Parameters<typeof foodRowShown>[0]} */ (settlement);
   const eco = /** @type {Parameters<typeof carriersOf>[1]} */ (/** @type {{ economicState?: unknown } | null | undefined} */ (settlement)?.economicState);
-  return Number(foodRowShown(s, !!carriersOf(/** @type {Parameters<typeof carriersOf>[0]} */ (settlement), eco))?.fb?.importCoverage) || 0;
+  const view = /** @type {Parameters<typeof foodBalanceShown>[1]} */ (/** @type {{ economicViability?: unknown } | null | undefined} */ (settlement)?.economicViability);
+  return Number(foodBalanceShown(foodRowShown(s, !!carriersOf(/** @type {Parameters<typeof carriersOf>[0]} */ (settlement), eco)), view)?.importCoverage) || 0; // G68 (V2): the tab's own value, its fallback included
 }
 /** VIABILITY-TRUE (G61): the Economics tab's printed arriving list. @param {unknown} settlement @returns {string[]} */
 function arrivingShown(settlement) {
   return tradeListsAsPrinted(/** @type {Parameters<typeof tradeListsAsPrinted>[0]} */ (settlement)).imports.map(String);
 }
-import { foodRowShown } from './foodRowShown.js'; import { carriersOf } from './foodCarrier.js'; import { isFoodSourceGood } from './commoditiesShown.js'; // VIABILITY-TRUE (G61): at the END, so no cited line moves
+import { foodRowShown, foodBalanceShown } from './foodRowShown.js'; import { carriersOf } from './foodCarrier.js'; import { isFoodSourceGood } from './commoditiesShown.js'; // VIABILITY-TRUE (G61): at the END, so no cited line moves

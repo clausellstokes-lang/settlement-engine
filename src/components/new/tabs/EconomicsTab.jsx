@@ -327,7 +327,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
   if (!eco) return <Empty message="No economic data available."/>;
 
   const prosColor = PROSPERITY_COLORS[eco.prosperity] || '#a0762a';
-  const fbRow = foodRowShown(s, !!carriersOf(s, eco)); const fb = fbRow?.fb ?? via?.metrics?.foodBalance; // W2-C-LEAVES-5 item 4: the food record, one home
+  const fbRow = foodRowShown(s, !!carriersOf(s, eco)); const fb = foodBalanceShown(fbRow, via); // W2-C-LEAVES-5 item 4: the food record, one home; VIABILITY-TRUE-2 (G68 V2): its fallback in the leaf
   // Deficit % MUST come from the canonical display model, the same value the PDF
   // prints. Since ODQ §934.15 that model states the RECORD'S own residual share
   // rather than re-deriving one from the published pounds, so this tab, the PDF
@@ -813,7 +813,7 @@ import { famineOf } from '../../../domain/facts/famine.js'; // W2-C-LEAVES item 
  */
 // W2-C-LEAVES-5 item 4: the row, the bar and the sentence now read ONE figure for it, the food record's own pounds brought
 // in as the row prints them (domain/display/foodRowShown.js): the record's share rounds a few pounds to 0% (2 of 720).
-import { foodRowShown } from '../../../domain/display/foodRowShown.js';
+import { foodRowShown, foodBalanceShown } from '../../../domain/display/foodRowShown.js';
 
 /**
  * W2-C-LEAVES item 4(b) (2026-11-13; REVIEW-W2A-3 R2; the census's row P6need, 642 of 720): A NEED IS NOT AN IMPORT.
