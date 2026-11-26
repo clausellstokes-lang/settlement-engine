@@ -309,14 +309,23 @@ export function fundingReasonAsPrinted(reason, record) {
 }
 
 // ─── WORDS-2, the tenth chair's RULING G6 #11 (E2's census: "no stable governing authority" said three times on one page) ───
-import { NO_STABLE_AUTHORITY_LINES } from '../../data/noStableAuthorityLines.js';
+/**
+ * The engine's two sentences of the political fracture, each spelled WHOLE (RULING CURE-118-7 (6c)): the generator writes
+ * them (`generators/safetyProfile.js`, by the size of the place and its force); the capture is what the Defense tab prints of
+ * each. Regex literals, so no presumption or copy walker reads a second copy of the sentence. Tied to the generator's
+ * wording by `tests/domain/bar5SafetyLawBand.test.js` (CURE-118 (6c)), which bears places carrying each.
+ */
+const NO_STABLE_AUTHORITY_SENTENCES = Object.freeze([
+  /No stable governing authority; (whoever holds sway decides what rules apply, and that changes\.)/g,
+  /No stable governing authority\. (Enforcement is inconsistent; which power controls a district determines what rules apply\.)/g,
+]);
 /**
  * THE SAFETY LINE WITHOUT THE THIRD TELLING: where the record's stored stability says the place has no stable governing
  * authority (the identity line, `settlementQuickGuide.js :: governsLine`: the Overview prints it on a stamped record, the Power
  * tab on every page and every share), the Defense tab's line drops the opening clause of the ENGINE'S OWN sentence and begins
  * at the next one ("Whoever holds sway decides…", "Enforcement is inconsistent; …"). RULING CURE-118-6 (6b): only the engine's
- * two sentences are trimmed, recognised WHOLE by their text (`data/noStableAuthorityLines.js`, the generator's own home for
- * them); any other text, an owner's own line among it, is returned as written. The function needs to know neither who wrote
+ * two sentences are trimmed, recognised WHOLE (`NO_STABLE_AUTHORITY_SENTENCES`, the generator's wording spelled by pattern;
+ * RULING CURE-118-7 (6c)); any other text, an owner's own line among it, is returned as written. The function needs to know neither who wrote
  * the line nor which page prints it: the owner's view and the shared page run the same text through the same test.
  * @param {string | null} line the line as printed (`defenseDisplay.js :: deriveSafetyLine`)
  * @param {unknown} record
@@ -327,6 +336,6 @@ export function safetyLineSaidOnce(line, record) {
   const stability = /** @type {{ powerStructure?: { stability?: unknown } } | null} */ (record)?.powerStructure?.stability;
   if (!/no stable governing authority/i.test(String(stability ?? ''))) return line;
   let out = line;
-  for (const { whole, rest } of Object.values(NO_STABLE_AUTHORITY_LINES)) out = out.split(whole).join(rest);
+  for (const re of NO_STABLE_AUTHORITY_SENTENCES) out = out.replace(re, (_, /** @type {string} */ rest) => rest[0].toUpperCase() + rest.slice(1));
   return out;
 }
