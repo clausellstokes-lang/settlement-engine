@@ -89,6 +89,6 @@ describe('CURE-118 (2): "bought in" only where something arrives', () => {
     expect(tradeListsAsPrinted(s).imports, 'soak1k-132 prints nothing arriving').toEqual([]);
     const t = deriveViability(s).summary;
     expect(t.startsWith('VIABLE'), t).toBe(true);
-    expect(t, 'no line says anything is bought in').not.toMatch(/\bbought in\b|\bbuys in\b|\bbuying in\b/);
+    expect(t, 'no line says anything is bought in').not.toMatch(/\bbought in\b|\bbuys in\b|\bbuying in\b/); // anchored: the verdict is proved a printed VIABLE line on the line above
   }, 120_000);
 });
