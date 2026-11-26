@@ -30,7 +30,8 @@ function displayText(s) {
 
 /** [row, seed, the sentence that must NOT print, what prints instead] */
 const GONE = [
-  ['00585', 'r2r-thorp-27', 'buying in what its own land and trades do not provide', 'gets through the year on its own land and trades, and goes without what they do not provide.'],
+  ['00585', 'r2r-thorp-27', 'buying in some of what its own land and trades do not provide', // VIABILITY-TRUE (G61): the twin's words take "some of"
+    'gets through the year on its own land and trades, and goes without what they do not provide.'],
   ['00628', 'r2s-plague_onset-thorp-0', 'and the difference arrives', 'grows less than it eats, and part of the difference arrives'],
   ['14073', 'r2s-plague_onset-hamlet-2', 'Much of what', 'eats is brought in by road; its own land does not produce enough.'],
   ['14072', 'r2s-slave_revolt-thorp-1', 'Much of what', 'eats is brought in by river; its own land does not produce enough.'],
@@ -44,7 +45,7 @@ const GONE = [
 ];
 /** [row, seed, a true sibling that must still print] */
 const KEEP = [
-  ['00585', 'r2r-thorp-6', 'buying in what its own land and trades do not provide'],
+  ['00585', 'r2r-thorp-6', 'buying in some of what its own land and trades do not provide'], // VIABILITY-TRUE (G61)
   ['00628', 'r2r-thorp-16', 'cannot feed itself: part of its food comes in by road.'],
   ['01134', 'r2r-town-17', 'keeps order and pays its way, but it has to buy food'],
   ['B13779', 'r2r-thorp-0', 'No healer is kept here; the sick are tended by their own families.'],

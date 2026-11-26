@@ -19,6 +19,9 @@ import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { deriveViability } from '../../src/domain/display/dossierViewModel.js';
 import { tradeListsAsPrinted } from '../../src/domain/display/tradeListDisplay.js';
+import { foodRowShown } from '../../src/domain/display/foodRowShown.js';
+import { carriersOf } from '../../src/domain/display/foodCarrier.js';
+import { isFoodSourceGood } from '../../src/domain/display/commoditiesShown.js';
 import { birth as soakBirth, ensureLaws } from '../../scripts/audit/soak-review/corpus.mjs';
 
 beforeAll(async () => { await loadGenerationLawPayloads(); });
@@ -41,7 +44,10 @@ function holds(s) {
   return {
     marked: printed.some((i) => necessity.some((n) => i.includes(n)) || critical.some((t) => i.includes(t) || t.includes(i))),
     bought: printed.length > 0, // CURE-118 (2), G45 (3)+(6): what ARRIVES, the printed arriving list alone (an unmet need is not bought)
-    buysFood: Number(eco.foodSecurity?.foodRecord?.normalImportPct) > 0,
+    // VIABILITY-TRUE (the tenth chair's G61): food bought is what the PAGE prints: the Food Security row's own pounds (the
+    // record's rounded share read 0% beside "+ 1 imported", and a share the row does not print is no arrival on the page), or a
+    // food source's own good on the printed arriving list
+    buysFood: (Number(foodRowShown(s, !!carriersOf(s, eco))?.fb?.importCoverage) || 0) > 0 || tradeListsAsPrinted(s).imports.some(isFoodSourceGood),
     low: LOW.includes(String(eco.prosperity ?? '')),
   };
 }
