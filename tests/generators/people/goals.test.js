@@ -215,6 +215,31 @@ describe('I-13: keyed determinism', () => {
     }
     expect(compared, 'anti-vacuity').toBeGreaterThan(20);
   });
+
+  it('GOALS-I13 (CLOSE-8 cure 3a): Portaminus by name, where pass two rotated a card whose receipt named none it read', () => {
+    // CLOSE-7 READS-117 item 2: with the middle card removed, npc_customs_house (before it) draws another line among its TIES
+    // candidates to that card, takes the wording npc_parish_churches_10_30 held, and GR1's pass two rotates the latter's short goal
+    const s = towns.find((t) => t.name === 'Portaminus');
+    expect(s, 'anti-vacuity: the slice holds Portaminus').toBeTruthy();
+    const cards = s.npcs.filter((c) => !c.temporary).map((c) => ({ ...c, goal: null }));
+    const X = cards[Math.floor(cards.length / 2)];
+    const full = dealGoals(s, cards, s.relationships, createPRNG(`i13::${s.name}`));
+    const less = dealGoals(s, cards.filter((c) => c !== X), s.relationships.filter((t) => t.from !== X.id && t.to !== X.id), createPRNG(`i13::${s.name}`));
+    const rFull = new Map(goalReceiptsOf(full).map((r) => [r.id, r]));
+    const rLess = new Map(goalReceiptsOf(less).map((r) => [r.id, r]));
+    const byId = new Map(less.map((c) => [c.id, c]));
+    expect([...rFull.values(), ...rLess.values()].some((r) => r.uncanny?.landed), 'no uncanny goal landed').toBe(false);
+    let compared = 0; const faults = [];
+    for (const c of full) {
+      if (c.id === X.id) continue;
+      const a = rFull.get(c.id); const b = rLess.get(c.id);
+      if (a.refs.includes(X.id) || a.refused || b.refused) continue;
+      compared += 1;
+      if (JSON.stringify(byId.get(c.id).goal) !== JSON.stringify(c.goal)) faults.push(c.id);
+    }
+    expect(compared, 'anti-vacuity: the town compares cards').toBeGreaterThan(5);
+    expect(faults, 'Portaminus').toEqual([]);
+  });
 });
 
 describe('the fills (WRITE-GOALS §6, bound exactly) and J-16', () => {
