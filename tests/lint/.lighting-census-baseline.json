@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "a0bb0772230aba6c5cf4b89618df618ee488cc6d",
-  "measuredBy": "CLOSE-10",
+  "measuredAtSha": "228123b7bad694b12d92af67c9f22e6bd4f9e94b",
+  "measuredBy": "CLOSE-11",
   "date": "2026-11-26",
-  "note": "E13d-2: the title-keyed row arm",
+  "note": "E13d-3 (G67): SAMENESS-KEYS three walker arms out, the bullet arm in",
   "files": 3815,
   "parked": 506,
   "credited": 3309,
-  "titles": 32028,
+  "titles": 32026,
   "suiteTitles": 8906
 }
