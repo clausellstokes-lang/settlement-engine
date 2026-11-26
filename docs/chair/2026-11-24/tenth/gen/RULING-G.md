@@ -765,3 +765,21 @@ would." (written in the content document and projected). (3) G56's older safety 
 ADDITION (b), THE PROOF: after the build, PER LINE, prints false by the page's own leaves: 0, on C and V small places AND on
 soak 0 to 999 at every tier; and the count of places whose printed line was TRUE before and moves anyway (their admitted set
 shrank): named, for D13 (this slot is E13a's intended exception). All view time; no record moves.
+
+**G62 (13:41 UTC on 2026-11-26): D13's MEASURE AGAINST MASTER, AND ITS BAR CHANGED: FORWARD STABILITY, NOT "WHAT MASTER PRINTED".**
+CLOSE-10's measure: 360 V keys (60 a tier) born on an archive of master db832c8926, round-tripped as a save, read by the
+line's `normalizeSettlement` and viewed by the line; beside master's own view of the same records. (a) FACT ATOMS A
+MASTER-BORN RECORD LACKS: 0 (all 67 atoms the Daily Life pools and the state-prose marks use are answered as on a line-born
+record; master already carries the food record; the second reader's 79 "Secure" refusals are a record with NO food record at
+all: an older save than master's shape, whose existence in production nobody here can know). (b) PRINTED FLAVOUR LINES THAT
+DIFFER, MASTER TO LINE: Daily Life 2,852 of 2,880 (re-deals 211; refused by the line's own declared needs 635; GONE, nothing
+on the line to print again, 1,506); the viability summary 360 of 360 (master printed one fixed sentence a verdict; E13a);
+state prose, another variant of the same pool 987 (re-deals 439; 548 unmatched, unproven), AND 5,595 slots printing the SAME
+variant in new wording. SO: A SAVED TOWN READ ON THIS RELEASE IS RE-WORDED NEARLY EVERYWHERE, BY THE REBUILT WORDING ITSELF
+(the declared pools, months of units), NOT BY A RE-DEAL; WHAT IS STORED AT BIRTH (the people, the houses, the powers, the
+history, the numbers) DOES NOT MOVE (the guard, point 117). THE CHAIR TOLD THE OWNER "a one-time reshuffle of saved towns'
+Daily Life lines": THAT UNDERSTATED IT, corrected to him. D13's BAR OF G49 ("prints what it printed on master") IS WITHDRAWN:
+it can hold for about 650 lines of 360 towns. THE NEW BAR: FORWARD STABILITY: from the released tip, a later change to a pool
+moves the printed line only for the towns that drew the changed line. The seat designs to that (five points put to it: the
+pick; the sites it covers; whether the switch can be taken in the same release so saved towns change once; storing picks at
+save, proposed only, a persisted shape being the owner's; the save with no food record).
