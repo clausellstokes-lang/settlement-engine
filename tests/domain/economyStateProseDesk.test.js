@@ -15,6 +15,7 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
+import { variantByVid } from '../helpers/drawnProse.js';
 import {
   ACCESS_NOUN,
   COMPLEXITY_NOUN,
@@ -1484,4 +1485,25 @@ describe('CURE-118 (1): every C4 line that says the trade passes the place by re
     const claim = C4().filter((v) => PASSES_BY.includes(v.vid)).map((v) => formOf(v.text));
     expect(claim.filter((re) => re.test(header)).map(String), header).toEqual([]);
   }, 120_000);
+});
+
+/*
+ * G72 (5) (CURE-119): C4's SECOND LINE SAYS WHAT THE GATE KNOWS. DS-ECO-1 `COMBINATION C4` v8 said the place is easy to
+ * reach beside "the roads are dangerous" (8 of the 119 pages printing it): the gate knows a working trade route, not a safe
+ * road. Its words say "well placed for trade", corrected in place (WORD_CORRECTIONS row, ruling G72; G70's wording replaced):
+ * the same vid, no slot added, no mark changed. RED FIRST (ef10a71f3a's leaf): "v8 says well placed for trade" failed: the
+ * line read "... and being easy to reach has not changed that.".
+ */
+describe('G72 (5): DS-ECO-1 COMBINATION C4 v8', () => {
+  const POOL = 'COMBINATION C4: a low rung on a working approach';
+  it('v8 says well placed for trade, and nothing of the road being easy', () => {
+    const v8 = variantByVid({ leaf: 'economy', blockId: 'DS-ECO-1', poolKey: POOL, vid: 8, slots: { settlement: 'Ashford' } });
+    expect(v8).toMatch(/\bwell placed for trade\b/);
+    expect(/easy to reach/.test(v8)).toBe(false);
+  });
+  it('the same vid, no slot added, no mark changed', () => {
+    const v8 = /** @type {any} */ (DOSSIER_STATE_PROSE_ECONOMY)['DS-ECO-1'].pools[POOL].find((/** @type {any} */ v) => v.vid === 8);
+    expect({ angle: v8.angle, slots: v8.slots, marks: v8.marks })
+      .toEqual({ angle: 'street', slots: ['settlement'], marks: ['no crisis: under_siege', 'no crisis: plague_onset'] });
+  });
 });

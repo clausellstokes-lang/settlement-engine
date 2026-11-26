@@ -108,3 +108,33 @@ describe('G56 (1): the engine\'s older safety sentence is trimmed as the current
     expect(safetyLineSaidOnce(own, record)).toBe(own);
   });
 });
+
+/*
+ * G72 (6) (CURE-119): FOOD THAT ARRIVES UNDER OTHER NAMES. `commoditiesShown.js :: isFoodSourceGood` also answers yes to the
+ * whole words `provisions` and `game`. The oracle here is the page's printed arriving list read by NAME ("Preserved
+ * provisions"), not the leaf under test. RED FIRST (ef10a71f3a + cures 1, 2, 4, 5): both towns failed: r7x-town-68
+ * "Flachsteig feeds itself and pays its own way." (L1), C dp-town-101 "What Breitenfeld eats it grows, and what it spends it
+ * earns; some of what it uses is bought in." (L5); and the word list ([false, false, false, true]).
+ */
+describe('G72 (6): no feeds-itself line beside an arriving "Preserved provisions"', () => {
+  /** The second reader's dials (its `r7x` corpus). */
+  const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
+  /** The lines that say the place feeds itself (the reader's L1, L2, L4, L5). */
+  const FEEDS_ITSELF = /feeds itself|eats it grows|grows what it eats/;
+  test('r7x-town-68 and C dp-town-101 print a viability line, and not one that says the place feeds itself', () => {
+    const towns = [
+      generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...DIALS, settType: 'town' }), null, { seed: 'r7x-town-68', customContent: {} }),
+      c('dp-town-101'),
+    ];
+    for (const s of towns) {
+      expect(tradeListsAsPrinted(s).imports.map(String), 'the premise: Preserved provisions arrive').toContain('Preserved provisions');
+      const summary = String(deriveViability(s).summary);
+      expect(summary, 'the slot prints a viability line').toMatch(/^VIABLE: /);
+      expect(FEEDS_ITSELF.test(summary), `${s.name}: ${summary}`).toBe(false);
+    }
+  }, 120_000);
+  test('provisions and game are food by the whole word; provisioning, gaming, salt and hides are not', () => {
+    expect(['Preserved provisions', 'Game and hides (furs, leather)', 'Provisions', 'game meat', 'Gaming tables', 'Salt', 'Hides', 'Ship provisioning'].map(isFoodSourceGood))
+      .toEqual([true, true, true, true, false, false, false, false]);
+  });
+});
