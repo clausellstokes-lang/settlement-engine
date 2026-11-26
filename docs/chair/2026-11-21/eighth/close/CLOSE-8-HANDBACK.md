@@ -67,8 +67,10 @@ Also, by HAND-INS: B1(ii) REDESIGNED (R24r 1), B1(i)b (R24r 6), P9's (i) writer-
   652->659, campaign-pdf 224->228, world-book 239->243, foundry 525->531), scanStats, verdictDigest, frozenAtSha; cohort 1366->1366,
   shrink-only, a dry run byte-equal. One commit (the door writes all at once; D6 and P9 not separable). THE GAP (G37 (i)): the page
   shows the beasts' grade but the register says web-transitive only; truth needs a display-reader declaration (a detector change).
-  Walker 52/52; lint the line's three only. IN FLIGHT: a helper (cheaper tier) runs typechecks, validate:packets, tests/lint,
-  tests/copy on 3836a832e3; PROOF-4 builder (before-and-after, every unit's check, build) on the same tip.
+  Walker 52/52; lint the line's three only. PROOF (4) DONE on 3836a832e3 (no commit after it): the landing record
+  `close-8/LANDING-118.md` holds everything sent; "CLOSE-8 3836a832e3" SENT to the chair. G45 (the second reader's eight cures) is
+  the chair's builder's, outside my proof. NEXT, POINT 119 IN THIS ORDER (G45): B1(i)b; E13d (G35); P9b's measure; B1(ii)
+  REDESIGNED last (a view-time rule must not re-deal a SAVED town). Each red first with its every-birth check.
 - GOALS-I13 (G44, taken as built): b136ae0b2d cure, e59e38ddbb the residual written in goals.js and goals.test.js (comments);
   faults C 136->6, V 172->6; records 0; receipts in goals.js :: RECEIPTS (a WeakMap; not on the record, not served); 100-birth
   timing on thorps no difference (3340 vs 3327 ms median); on 50 cities + 50 metropolises: median 37,604 -> 37,435 ms (in the runs' spread), mean refs a town 63 -> 2,822. Measure README:
