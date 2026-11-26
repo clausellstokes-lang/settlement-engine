@@ -1,0 +1,6 @@
+C births 900 recordHash moved 0 fields moved {} refs base 22130 tip 871039 added 848909 receipts 27360
+V births 900 recordHash moved 0 fields moved {} refs base 20285 tip 771338 added 751053 receipts 26185
+base C compared 3531 faults 136 towns 122 uncanny towns 218
+tip C compared 2585 faults 6 towns 6 uncanny towns 218
+base V compared 3366 faults 172 towns 148 uncanny towns 204
+tip V compared 2426 faults 6 towns 6 uncanny towns 204
