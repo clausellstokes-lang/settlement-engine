@@ -10,6 +10,8 @@
  * the food import share; the prosperity word. (A raw critical list the page does not print, luxuries, is not a need it marks.)
  * Births: C's hamlets (`dp-hamlet-<i>`, `birthConfig({ settType })`), 150 of them.
  */
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { beforeAll, describe, expect, test } from 'vitest';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
@@ -27,7 +29,7 @@ const LINES = [
   ['owes', /^VIABLE: \S.* grows what it eats and makes what it needs, and owes no one for either\.$/],
   ['nothing', /^VIABLE: Nothing .* needs to get through the year has to come from outside\.$/],
   ['buysIn', /^VIABLE: \S.* feeds itself and pays its way, and buys in what it cannot make for itself\.$/],
-  ['earns', /^VIABLE: What .* eats it grows, and what it spends it earns; some of what it needs is bought in\.$/],
+  ['earns', /^VIABLE: What .* eats it grows, and what it spends it earns; some of what it uses is bought in\.$/],
 ];
 const LOW = ['Subsistence', 'Struggling', 'Poor'];
 /** @param {any} s the oracle's reading of the record */
@@ -93,16 +95,32 @@ describe('CURE-118 (2): "bought in" only where something arrives', () => {
   }, 120_000);
 });
 
-// RULING CURE-118-3 (F): "what it needs is bought in" needs BOTH a marked need AND something arriving. dp-hamlet-82 prints an
-// arriving good that is no marked need (incense): lines 4 and 5 refuse, and the place reads one of lines 1 to 3.
-describe('CURE-118 (2), amended: lines 4 and 5 need a marked need and an arrival', () => {
-  test('dp-hamlet-82: something arrives, no need is marked, and no line says what it needs is bought in', () => {
-    const s = generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: 'hamlet' }), null, { seed: 'dp-hamlet-82', customContent: {} });
-    const h = holds(s);
-    expect(h.bought, 'something is printed as arriving').toBe(true);
-    expect(h.marked, 'no arriving good is a marked need').toBe(false);
-    const t = deriveViability(s).summary;
-    const hit = LINES.find(([, re]) => re.test(t));
-    expect(hit?.[0], t).toMatch(/^(feeds|owes|nothing)$/);
+// RULINGS CURE-118-3 (F) and CURE-118-4 (H): no line the self-sufficient pool can print says a NEED is bought in (line 5 says
+// what it USES is bought in), and lines 4 and 5 admit on something arriving. The four states: no marked need and nothing
+// arriving, lines 1-3; no marked need and something arriving, 1-5; a marked need and something arriving, 1, 4, 5; a marked
+// need and nothing arriving, line 1 alone. dp-hamlet-82: incense arrives, no need is marked; dp-hamlet-13: timber is needed
+// (the terrain's critical, printed as a need not met) and does not arrive, while other goods do.
+describe('CURE-118 (2), amended: no line says a need is bought in', () => {
+  /** the self-sufficient pool's texts, read from the source of `deriveViability` (its `pickAdmitted` list) */
+  const POOL = (() => {
+    const src = readFileSync(resolve(import.meta.dirname, '../../src/domain/display/dossierViewModel.js'), 'utf8');
+    const at = src.indexOf("verdict: 'self_sufficient'"); const list = src.slice(src.indexOf('pickAdmitted(pick, [', at), src.indexOf('], [', src.indexOf('pickAdmitted(pick, [', at)));
+    return [...list.matchAll(/`([^`]*)`/g)].map((m) => m[1]);
+  })();
+  test('the pool holds five lines and none says a need is bought in', () => {
+    expect(POOL.length, POOL.join(' | ')).toBe(5);
+    expect(POOL.filter((t) => /needs?\b[^.;]*\bbought in/.test(t))).toEqual([]);
   });
+  for (const [seed, allowed] of /** @type {const} */ ([['dp-hamlet-82', ['feeds', 'owes', 'nothing', 'buysIn', 'earns']], ['dp-hamlet-13', ['feeds', 'buysIn', 'earns']]])) {
+    test(`${seed}: something arrives, and the line printed is true of the facts by the four states`, () => {
+      const s = generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: 'hamlet' }), null, { seed, customContent: {} });
+      const h = holds(s);
+      expect(h.bought, 'something is printed as arriving').toBe(true);
+      expect(h.marked, 'no ARRIVING good is a marked need').toBe(false);
+      if (seed === 'dp-hamlet-13') expect(tradeListsAsPrinted(s).needed.length, 'a need is printed as not met').toBeGreaterThan(0);
+      const t = deriveViability(s).summary;
+      expect(t).not.toMatch(/needs?\b[^.;]*\bbought in/); // anchored: t is proved a self-sufficient line on the next line
+      expect(allowed, t).toContain(LINES.find(([, re]) => re.test(t))?.[0]);
+    });
+  }
 });
