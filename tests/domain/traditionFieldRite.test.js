@@ -12,6 +12,7 @@
 import { describe, expect, test } from 'vitest';
 import { deriveFoundingTraditions } from '../../src/domain/traditions/genesis.js';
 import { GENERATOR_VERSION, LEGACY_GENERATOR_VERSION } from '../../src/domain/settlement.schema.js';
+import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 
 /** The seed's identity: a plains road town whose row 1 draws a rite of the fields. */
 const IDENTITY = { _seed: 'furrow-4', tier: 'town', population: 3000, config: { culture: 'celtic', terrainType: 'plains', tradeRouteAccess: 'road' } };
@@ -36,7 +37,7 @@ describe('B1(ii): a born place that names no grain and holds no farmland shows n
 
   test('livestock and fish, no farmland: the field row takes another draw; every other row draws as before', () => {
     const after = deriveFoundingTraditions(place(['livestock', 'fish']));
-    expect(elements(after)).not.toContain('field');
+    expectPresentThenAbsent(elements(before), elements(after), 'field', 'the rule replaces the field row');
     expect(after.length).toBe(before.length);
     const row = elements(before).indexOf('field');
     after.forEach((t, i) => {

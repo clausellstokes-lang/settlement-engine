@@ -190,8 +190,6 @@ function readIdentity(settlement) {
 
 /** The element of the fields (TRADITION_ELEMENTS 'field', glyph ▦): no founding candidate, so only an addition draws it. */
 const FIELD_ELEMENT = 'field';
-/** How many further attempts a refused rite of the fields may take before its row keeps its first draw (G64 (1)). */
-const FIELD_RETRIES = 10;
 
 /**
  * B1(ii), NO TRADITION BLESSES FIELDS THE PLACE DOES NOT HAVE (the tenth chair's G64 (2), (3)): the place's own food record
@@ -440,7 +438,7 @@ export function deriveFoundingTraditions(settlement) {
       // attempts, until an admitted one; if all ten draw a refused rite, the row keeps its first draw (never dropped).
       if (refusesFieldRite && el.id === FIELD_ELEMENT) {
         const first = Math.min(attempt, 4);
-        for (let k = first + 1; k <= first + FIELD_RETRIES; k += 1) {
+        for (let k = first + 1; k <= first + 10; k += 1) { // ten further attempts (G64 (1))
           const [e, a] = drawAt(k);
           if (e.id !== FIELD_ELEMENT) { el = e; act = a; break; }
         }
