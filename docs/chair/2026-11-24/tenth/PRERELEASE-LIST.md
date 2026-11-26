@@ -186,3 +186,9 @@ have buyers, sea-borne food and a boat arriving. Measure first; after point 119'
 ## 10:25 UTC ON 2026-11-26 (G55): QUARANTINE-ONE-WAY IS WITHDRAWN (the owner's reading, re-derived by the chair: the rule and its leaking are one story). Not a unit.
 
 ## ADDED 11:05 UTC ON 2026-11-26 (G58): OVERVIEW-NAMES-THE-SEAT (small, measure first): the Overview's "Governed by" line names the power, not the seat's holder, who prints on the Power tab. Not where the seat is empty; never a veiled face on a player view or a share.
+
+## ADDED 15:50 UTC ON 2026-11-26 (G67)
+E13e "THE SAMENESS DOOR KEYED BY WHAT IT MEASURES": the register keys a slot by its printed position, so a drifted slot is a
+retirement and an addition and a rise can be written unseen; SAMENESS-KEYS (inheritance) was taken out of point 119 as
+unsound on such keys. Re-key by surface, size and sentence; with E13c. Until then the register is not re-taken without the
+matched report. B1(i)c-2 (point 119): the port route gives furs.

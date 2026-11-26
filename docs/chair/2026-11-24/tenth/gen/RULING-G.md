@@ -846,3 +846,29 @@ REPEATED THE SEAT'S FIRST ANSWER TO THE OWNER ("numbers shift on insertion"): co
 says a trade good is food is `domain/region/goodsCatalog.js :: normalizeGood` (category 'food'); it counts Salt and "Raw hides
 and animal products" as food, so those arrivals also refuse "feeds itself": accepted (the refusal drops a claim and the place
 prints the buying-in line, which is true of it); counted separately in the proof.
+
+**G67 (15:50 UTC on 2026-11-26): THE SECOND READER ON B1(i)c AND E13d-2 WITH SAMENESS-KEYS (`landing/119/SECOND-READER-119-B.txt`), RULED.**
+B1(i)c (19a5855f3) IS SOUND BUT FOR ONE GIVER, AND THE CHAIR'S OWN G60 SAID IT: "if a port is an entrepot there, a port gives
+furs". The seat ruled a port out (a port is an entrepot only by houses the draw does not yet know); the reader measured that
+ALL 94 desert port cities and metropolises print as entrepots, and 65 of 80 that held the district at the line lose it.
+RULED, "B1(i)c-2": the PORT route gives furs (furs come by sea: `LAND_GIVERS.furs.routes: ['port']` beside the entrepot
+route). The residual, named: a desert port city without the two houses that make a port an entrepot would keep the district
+(0 of 94 measured). Everything else of A holds: `deriveIsEntrepot` unchanged over 928 cases; none standing with no giver
+(0 of 343); none wrongly withheld (0 of 217); a forced one stands; nothing on a page presumes it; no hook is lost (a card
+fewer where the master furrier is not minted); non-desert births unmoved. ADVANCE TIME (outside the line, written down): the
+time-advance gap list can name the district once its tannery stands, and asks no land.
+SAMENESS-KEYS (354d27d85) COMES OUT OF POINT 119: ITS DESIGN CANNOT BE MADE RIGHT ON A REGISTER KEYED BY POSITION. Three
+confirmed ways `inheritances` hides a rise (an heir needs the row's one stored sentence to be today's commonest at that
+size, and 620 of 642 rows span sizes; like siblings re-use keys so nothing retires; an earlier retirement is consumed again)
+and one false refusal no door can clear (key order crossing at 9 to 10). By the chair's own rule a unit whose fault is its
+design is not patched three times. WHAT STANDS INSTEAD: (i) THE REGISTER IS NOT RE-TAKEN AT POINT 119 (a re-take is where a
+drifted rise is laundered: none is made, so none is laundered); (ii) the hole is written on the pre-release list as "E13e:
+the sameness door keyed by what it measures" (surface, size and sentence, not a position), built with E13c's rest; (iii)
+until then any re-take is preceded by the reader's own report: additions matched to retirements by surface, size and
+sentence, the higher ones named. E13d (the skip, G35) STAYS, with one cure: a title printed behind a bullet ("· the senior
+charter master", PDF OtherNameRow.1, 10 of 60 towns) is still counted: the door's cut drops a leading bullet before it
+matches. E13d-2's GUARD IS ACCEPTED AS WHAT IT IS, AND SAYS SO: it catches a skipped string written as a verbatim literal,
+any shape of pool; it does NOT see a string built by concatenation, an interpolated template, a spread array, a key, wrapped
+JSX text (ten planted cases passed it): its header names those limits, so nobody reads it as a proof. Today's truth is
+measured, not guarded: every skipped print in 60 rendered towns sits at a caption position or a PDF role cell, and no skipped
+string occurs outside its homes in 210,926 literals.
