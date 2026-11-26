@@ -836,3 +836,13 @@ admit where the record has no food record. NOT TAKEN: the door stays fail-closed
 a save exists in production; every production save is re-worded by this release anyway (G62), so this is not a re-deal to
 prevent; such a town still draws among the lines that carry no mark; and an exception inside `declarationAdmits` is a cost
 carried by every later reader of that door for a case that may be empty. Written down; reopened if such a save is shown.
+
+**G66 (14:05 UTC on 2026-11-26): G65 (1) CORRECTED BY THE SEAT, AND A NOTE ON G61.** A STATE-PROSE `vid` IS NOT RENUMBERED BY AN
+INSERTION: the generator's own numbering guard (FR7, `scripts/generate-dossier-state-prose.mjs`) already holds it
+append-only (a new line takes the next number; nothing is renumbered or reused; words change in place only through a
+`WORD_CORRECTIONS` row with a ruling). The 548 lines the D13 measure could not match by `vid` were its walker's miss. SO
+G63's condition (1) IS ALREADY MET FOR STATE PROSE; the Daily Life ids and the viability lines need the same hold. THE CHAIR
+REPEATED THE SEAT'S FIRST ANSWER TO THE OWNER ("numbers shift on insertion"): corrected to him. ON G61: the existing home that
+says a trade good is food is `domain/region/goodsCatalog.js :: normalizeGood` (category 'food'); it counts Salt and "Raw hides
+and animal products" as food, so those arrivals also refuse "feeds itself": accepted (the refusal drops a claim and the place
+prints the buying-in line, which is true of it); counted separately in the proof.
