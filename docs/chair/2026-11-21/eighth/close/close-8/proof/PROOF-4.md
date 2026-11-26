@@ -127,3 +127,24 @@ exit 1, 5 failed / 61 passed, the five size arms; figures from their assertion m
 | generation worker | 2,740,114 | 2,722,294 | +17,820 | 2,579,708 |
 | engine chunk | 937,530 | 934,213 | +3,317 | 909,928 |
 All five over budget, as at the line; every other arm of the two files green.
+- E13a, the door's own births (hxd, 150 a size) on the join, the three Viability slots (web Outlook, PDF canon_dossier, draft_brief, equal): thorp .253, hamlet .20 (ceiling .29), village .18, town .253, city .153, metropolis .133 = the seat's after figures (thorp .253, hamlet .20, village .18) exactly (CONFIRMED).
+
+## The Patron deity block: render noise on every place it touches (CONFIRMED)
+C dp-thorp-0, -1, -2 and V dp-thorp-0, -2: the block flips between renders of the SAME join (battery vs re-renders, and
+between two re-renders for C/V dp-thorp-0). C dp-metropolis-16, -20 and V dp-metropolis-3, -7 (BEFORE rows from the fill
+renders): re-rendered on the BEFORE tree they print the block, as every join render does; the BEFORE battery's absence is
+noise. These lines are the only lines classed NOISE; every other moved line of those places is a unit's.
+
+## STOPS AND FINDINGS
+- STOP: none. Unexplained: C 0 places/0 pages, V 0/0.
+- D3's measure reads stale C 25, V 17 on the join: exactly D7's births (D7 settles its twin after D3's re-write; the measure's
+  oracle is the writer alone). D3's own staleness 0. A measure interplay, not a fault.
+- GOALS-I13 reads 6/6 faults (C/V), its own tip figure (G44 residual), not 0/0.
+- E3 against "G13 (built)": the differing cells are D2b's (C overview x4) and D7's (V power town), not G43's; G43 moves no
+  cell (C has no D3 move; V's 4 D3 moves change no top share).
+- E13b's "behaviour-aside hash equal" cannot be read against the line tip (other units move the same records); in its place
+  e13b-proof: every moved behaviour string is E13b's pair move or E8b's reflexive, residual C 16 / V 9.
+- Tool copies changed (mine, under proof/tools): d4sum.mjs takes D4_ONLY; e13a-door-slots read through the join's script
+  (tools-C/e13a-door-slots.join.mjs); twin-strings run as a births measure (tools-C/measure-strings.mjs); unit-attribute's and
+  joined-proof's rules copied into tools-C/attr.mjs. My own queue drivers were stopped twice to reorder (only while their child
+  waited on the mutex, or after a render had finished); no run was cut.
