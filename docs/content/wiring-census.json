@@ -23,7 +23,7 @@
   "totals": {
     "pools": 861,
     "blocks": 69,
-    "variants": 3182,
+    "variants": 3183,
     "resolved": 492,
     "unresolved": 369,
     "resolvedWithPredicate": 321,
@@ -12147,7 +12147,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 7,
+      "variants": 8,
       "grammars": 2,
       "predicate": [],
       "branchReads": [
@@ -12196,8 +12196,8 @@
       "lineDeclares": {
         "crisis: under_siege": 3,
         "market": 1,
-        "no crisis: plague_onset": 4,
-        "no crisis: under_siege": 4,
+        "no crisis: plague_onset": 5,
+        "no crisis: under_siege": 5,
         "no exports": 2,
         "no market": 1
       },
@@ -69052,7 +69052,7 @@
       "subject": "COMBINATION C4: a low rung on a working approach",
       "fields": [],
       "readingFunction": "prosperityHeaderPoolKey",
-      "count": "7 variant(s) · 2 grammar(s) · slots {access, settlement}"
+      "count": "8 variant(s) · 2 grammar(s) · slots {access, settlement}"
     },
     {
       "tier": "COVERED",
