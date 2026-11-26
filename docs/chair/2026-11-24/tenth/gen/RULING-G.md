@@ -476,3 +476,39 @@ every earlier holding"; the residual is written where the property is claimed (t
 comment) with its counts; the measure kept runnable. ITS CURE IS AN ORDER-FREE DEAL, WHICH MOVES BIRTHS: its own
 decision, named for the owner on the pre-release list; not point 118 nor 119. The only reader of `refs`:
 `goals.js :: refuseWantsBesideSecrets` (copies them to a moved card's receipt).
+
+**G45 (05:29 UTC on 2026-11-26): THE SECOND READER ON POINT 118 FOUND EIGHT; EACH RULED.** Its report: `landing/118/SECOND-READER-118.txt`
+(the join at 3836a832e3; every finding run). THE CHAIR HAD ACCEPTED EVERY ONE OF THESE UNITS ON ITS SEAT'S PROOF.
+(1) E4 WITH G6: G6 marked one line of pool C4 `no exports`; E4's rewording of the same claim (the chair's own G3 wording)
+carries no mark and prints beside printed exports (18 of 300 births). RULED, AND A RULE FOR EVERY SUCH CURE: THE GATE BELONGS
+TO THE CLAIM, NOT TO ONE LINE: every line of a pool that makes the refused claim carries the mark, and the check counts by
+claim with the page's own printed fact as oracle. CURED IN 118.
+(2) E1's `ofForms` garbles a place whose NAME holds a possessive ("the gambling of Dragon's Reach tables"); view-time, so
+saved towns so named too. (4) E1's `qualifiedPossessives` puts the verb before its subject (1 of 420 births; stored;
+served publicly). RULED: ONE PRINCIPLE: where a rewrite cannot be sure where the possessed phrase ends, the ORIGINAL
+stands (an awkward double possessive is a blemish, a garbled sentence a fault); `ofForms` acts only on the template
+shapes E1 measured, never on a place's own name. THE PROOF IS BY READING: every pair E1 changes on C, V and soak 0 to
+419 written out and read; twelve hostile place names. THE THRESHOLD (the lesson of C1): a THIRD kind of garble and E1
+COMES OUT OF 118 whole, re-built at the template level (authored twins) for a later point.
+(3) and (6) E13a says "bought in" where nothing arrives (4 of 300 small births); its test counts an unmet need as bought.
+THE CHAIR's G32 SAID "only what `needsImports` and the verdict already say": that wording made the fault: a line that
+says something is bought asserts an arrival. RULED: the lines admit on what arrives; the test's oracle is the printed
+arriving list. CURED IN 118.
+(5) A SAVED TOWN's DAILY LIFE IS RE-DEALT BEYOND THE RULED LINES: G8, E5 and E6 change the admitted lists and
+`dailyLife.js:426` picks `eligible[hash % length]`: of 360 base-born records 62 lines move, 53 of them lines no unit
+ruled on, each to another true line of its pool. THIS IS THE CLASS THAT TOOK B1(ii) OUT (R24r). RULED, WITH THE LINE DRAWN:
+a NAMED THING of a saved town (a rite, a person, a house, a power) never changes by a view-time re-deal; a flavour
+sentence drawn from a pool may, once, at this release. ACCEPTED FOR 118, MEASURED AND TOLD TO THE OWNER (about one saved
+town in six sees one Daily Life line replaced by another true one). ITS CURE IS A UNIT OF ITS OWN, "STABLE-PICKS": a
+view-time pick that a line's admission can move only for the towns that drew that line (the highest hash of seed, slot
+and line id in place of an index into a list), taken by a record this engine bore, so that no later pool change re-deals
+a saved town; on the pre-release list.
+(7) D7's ruled pressure twin ("the creditor's letters began last month") cannot print: a refused row takes the next
+admitted row and the twin only when none is admitted. NOT A FAULT OF TRUTH (the line printed is true and names no absent
+body); the chair's report of that sentence to the owner as one a page would show is CORRECTED. Left as built.
+(8) G8 moves its claim to sibling lines: a measure first by the cures' builder; if the siblings make the refused claim,
+rule (1)'s rule applies.
+ALSO READ, FOR THE SHARE PAGE's LANE, OLDER THAN THIS CHANGE: a veiled face's TITLE in public tie prose ("…which would
+put the gang boss two favours ahead"): 207 strings in 360 births at the base, 199 at the join. THE CURES: one builder
+(`prompts/START-CURE-118.txt`, its tree /home/user/wt/cure118 cut at the landing tree's 55bbd338a3), then a short second
+read of its diff, then the helper merges it. THE LINE DOES NOT MOVE BEFORE.

@@ -151,3 +151,11 @@ at 6 towns of 900 on each proof set. What a user would see: after deleting or re
 town in 150 another character's goal sentence changes wording. The cure is a deal whose result does not hang on the
 order of the cards; it MOVES BIRTHS (every town's goals are re-dealt once). The chair's recommendation: accept the
 residual for this release and take the order-free deal with the next change that moves goals anyway.
+
+## ADDED 05:29 UTC ON 2026-11-26: D13 "STABLE-PICKS", AND ONE ROW FOR THE SHARE PAGE (G45)
+D13: every view-time pool that picks `eligible[hash % length]` (Daily Life at `src/domain/dailyLife.js:426`; the
+census of the others is the unit's first step) re-deals a SAVED town whenever a line's admission changes. Point 118
+does it once (62 lines in 360 saved towns, 53 of them collateral, each to another true line). The cure: a pick that an
+admission change moves only for the towns that drew that line, taken by records this engine bore. A16 (the share page):
+a veiled face's TITLE in public tie prose, 207 strings in 360 births, older than this release's work: for the veil's
+phase 1 list at its resumption.
