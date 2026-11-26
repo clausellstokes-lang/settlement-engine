@@ -309,24 +309,24 @@ export function fundingReasonAsPrinted(reason, record) {
 }
 
 // ─── WORDS-2, the tenth chair's RULING G6 #11 (E2's census: "no stable governing authority" said three times on one page) ───
-import { isEdited } from '../userEdits.js';
-/** The safety line's opening clause of the political fracture (`generators/safetyProfile.js`, its two lines). */
-const NO_STABLE_AUTHORITY = /No stable governing authority[.;] (\w)/;
+import { NO_STABLE_AUTHORITY_LINES } from '../../data/noStableAuthorityLines.js';
 /**
- * THE SAFETY LINE WITHOUT THE THIRD TELLING: where the page's identity line already says the place has no stable governing
- * authority (the stored stability, `settlementQuickGuide.js :: governsLine`, which the Overview prints and the Power tab
- * repeats), the Defense tab's line drops its own opening clause and begins at the next one ("Whoever holds sway decides…",
- * "Enforcement is inconsistent; …"). A shared page reads the record it is handed the same way (its Overview prints the
- * identity line too: soak1k-7; RULING CURE-118-5 (6)), so the owner's player view and the shared page print the same line;
- * a record that carries no such stability keeps the line whole by the test below. A DM's own line (an edited field) is
- * returned as written.
+ * THE SAFETY LINE WITHOUT THE THIRD TELLING: where the record's stored stability says the place has no stable governing
+ * authority (the identity line, `settlementQuickGuide.js :: governsLine`: the Overview prints it on a stamped record, the Power
+ * tab on every page and every share), the Defense tab's line drops the opening clause of the ENGINE'S OWN sentence and begins
+ * at the next one ("Whoever holds sway decides…", "Enforcement is inconsistent; …"). RULING CURE-118-6 (6b): only the engine's
+ * two sentences are trimmed, recognised WHOLE by their text (`data/noStableAuthorityLines.js`, the generator's own home for
+ * them); any other text, an owner's own line among it, is returned as written. The function needs to know neither who wrote
+ * the line nor which page prints it: the owner's view and the shared page run the same text through the same test.
  * @param {string | null} line the line as printed (`defenseDisplay.js :: deriveSafetyLine`)
  * @param {unknown} record
  * @returns {string | null}
  */
 export function safetyLineSaidOnce(line, record) {
-  if (typeof line !== 'string' || isEdited(/** @type {never} */ (record), 'economicState.safetyProfile.safetyDesc')) return line;
+  if (typeof line !== 'string') return line;
   const stability = /** @type {{ powerStructure?: { stability?: unknown } } | null} */ (record)?.powerStructure?.stability;
   if (!/no stable governing authority/i.test(String(stability ?? ''))) return line;
-  return line.replace(NO_STABLE_AUTHORITY, (_, /** @type {string} */ c) => c.toUpperCase());
+  let out = line;
+  for (const { whole, rest } of Object.values(NO_STABLE_AUTHORITY_LINES)) out = out.split(whole).join(rest);
+  return out;
 }

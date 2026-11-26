@@ -10,7 +10,7 @@ import {
   institutionMatchesNativeName,
   institutionMatchesRegex,
 } from '../domain/institutionClassify.js';
-import { institutionCategoryFlags } from './roleCategory.js';
+import { institutionCategoryFlags } from './roleCategory.js'; import { NO_STABLE_AUTHORITY_LINES } from '../data/noStableAuthorityLines.js'; // RULING CURE-118-6 (6b): the two sentences' one home, on this line so the file keeps its line count
 import { CRIMINAL_GOVERNANCE_TYPE, crimeSignalOf } from '../domain/crimeSignal.js';
 import { runningCriminalChains } from '../domain/facts/criminalStructureKey.js'; // BAR6-CRIME: the crime fact's leaf (defenseDisplay re-exports it), so the engine core reaches no display
 import { defenceOf } from '../domain/facts/defence.js';
@@ -207,7 +207,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
       const strainLabel = safetyRatio >= 2 ? 'Tense' : safetyRatio >= 1 ? 'Strained' : 'Volatile';
       safetyStrains.push({ strain: strainLabel, condition: 'Political Fracture' });
       safetyDescs.push(
-        small || !(inst.hasGarrison || inst.hasWatch || inst.hasMilitia || inst.hasMercenary) ? 'No stable governing authority; whoever holds sway decides what rules apply, and that changes.' : 'No stable governing authority. Enforcement is inconsistent; which power controls a district determines what rules apply.'
+        small || !(inst.hasGarrison || inst.hasWatch || inst.hasMilitia || inst.hasMercenary) ? NO_STABLE_AUTHORITY_LINES.small.whole : NO_STABLE_AUTHORITY_LINES.enforced.whole // RULING CURE-118-6 (6b): one home
       );
     }
     if (hasStress('succession_void')) {
