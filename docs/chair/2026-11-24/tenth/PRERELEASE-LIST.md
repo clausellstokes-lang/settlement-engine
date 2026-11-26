@@ -199,3 +199,7 @@ changes a stored desk's wording must bump `PUBLIC_PROSE_VERSION` (no wording uni
 a record of the shape written before 2026-11-03 (no food record): every line its page prints false by its own page.
 
 ## ADDED 18:35 UTC ON 2026-11-26 (G70): the prose walker reads an `{access}` slot as an undeclared claim (four standing over-claims of A0b's nineteen): the matcher's cure, with E13c's rest. C4-SECOND-LINE's sentence is "{settlement} is poor, and being easy to reach has not changed that."
+
+- **P9c** (G72 (3), 21:49 UTC 2026-11-26): a stored monster score that is not a number prints "Critical" on the Overview beside "Adequate" on the Defense tab, in settled country only; hand-made. MEASURED WITH OLD-SAVE at point 120: does any saved shape hold such a score? If yes, cured at the leaf (no bar and no grade anywhere); if no, closed with the count.
+- **TRADITIONS-DRAW-KNOWS-NEEDS** (G73 (B)): the Traditions tab drops drawn rows whose declared need the place lacks: 726 rows in 653 of 2,700 births on the line (failing market 541, no smith 146, no river 37, no coast 32), so about a quarter of places show fewer traditions than their size's band. Nothing false is printed. A draw that knew the needs must sit behind the stamp floor (it would re-deal saved towns). For a ruling after point 120.
+- **B1furrow counts a DM's own field tradition** (G73 (C)): test-side census row only; no page reads it; custom content is outside the owner's line. Noted, not worked.

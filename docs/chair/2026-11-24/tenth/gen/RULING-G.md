@@ -982,3 +982,19 @@ Proof: the reader's table again, L1 and L5 false 0.
 
 BY WHOM: one local builder (CURE-119, `/home/user/wt/cure119`, branch `lane/stack-119-cures-wip-2026-11-26` cut at the
 helper's tip ef10a71f3a, never pushed by the builder), one commit a cure; then the same reader on the cures.
+
+**G73 (21:49 UTC on 2026-11-26): THE READER'S THREE ANSWERS (appended to `landing/119/SECOND-READER-119-D.txt`).** (A) THE
+FIVE FALSE PRINTS OF THE STRAINED LINE ARE FINDING 2's, COUNTED ONCE: each "keeps order and pays its way, but it has to buy
+food…" beside the merchant-league debt sentence, nothing else on the page denying it: G72 (2)'s sentence change cures all
+five; no seventh fault. (B) THE TAB ALREADY DROPS DRAWN TRADITIONS, ON THE LINE AS ON THE UNIT: of 2,700 births the line's
+tab drops 726 drawn rows in 653 places (`shownTraditions.js :: shownOver`, the declared needs: a failing market 541, no
+smith 146, no river 37, no coast 32; 36 are tide rites, 32 of them on river places, because the draw's weight zeroes a
+water rite only where there is no water at all and the tab asks a tide rite for a coast). The unit makes it 730 in 657:
+B1(ii)'s replacement walk admits anything that is not a field rite, so 4 of its 93 replacements are then dropped.
+RULED: NOT A FAULT OF B1(ii) AND NOT CURED AT 119: it is the base's own shape (the draw does not know the tab's needs), no
+page states anything false by it, and a draw that knew the needs would re-deal every saved town's set unless it sat behind
+the stamp floor. WRITTEN DOWN as TRADITIONS-DRAW-KNOWS-NEEDS in the pre-release list, for a ruling after point 120 with the
+measure above (a quarter of places show fewer traditions than their size's band says). (C) THE BIRTH RULE NEVER TOUCHES A
+TRADITION A DM WROTE OR ADOPTED (custom rows are appended after the draw and exempt from the needs filter; a lit mirror
+shows what is stored; both stayed shown in the reader's run); only the test-side census row `B1furrow` counts them, and no
+page reads that row: one line in the list, not a cure.
