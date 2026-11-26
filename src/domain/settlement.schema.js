@@ -51,6 +51,18 @@ export const GENERATOR_VERSION  = '0.10.0'; // GUARD (R24j 1, 2026-11-25): 0.9.0
 // a stamp being checked, never the current one, so a load can never make an old place look new-born. The
 // current version is written at BIRTH alone (generators/steps/assembleSettlement.js).
 export const LEGACY_GENERATOR_VERSION = '0.9.0';
+/**
+ * THE GUARD'S READER (R24j 3; B1(ii), the tenth chair's G64 (3)): WAS THIS RECORD BORN BY THIS ENGINE? Its stamp is this
+ * build's `GENERATOR_VERSION`. A record a load gave the legacy stamp, one stamped by another engine, or one with no stamp
+ * answers false: the comparison `store/editSlice.js :: applyRosterDecreesAtTick` makes (`bornHere`) before re-deriving a
+ * stored place, read here for a rule added to how a place is READ (`traditions/genesis.js`), so a place an earlier engine
+ * bore keeps what it was shown. (editSlice keeps its own line: its guard test G6, tests/store/rederiveGuard.test.js, moves
+ * the constant by mocking this module, which a reader closed over the constant here does not see.) A reader of the
+ * existing stamp: no stored field is added for it and no version moves.
+ * @param {unknown} record @returns {boolean}
+ */
+export const bornByThisEngine = (record) => !!record && typeof record === 'object'
+  && /** @type {{ generatorVersion?: unknown }} */ (record).generatorVersion === GENERATOR_VERSION;
 
 // ── Canonical field-name map ────────────────────────────────────────────────
 // When the legacy shape uses multiple names for the same concept, this map
