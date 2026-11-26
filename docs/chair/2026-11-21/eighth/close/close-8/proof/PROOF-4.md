@@ -105,3 +105,25 @@ of any place is theirs.
 D3 V: stale BEFORE 4 (dp-hamlet-2, -100, -117, dp-town-15: the seat's 4) -> AFTER 17 = exactly D7's 17 V births (the
 settled twin, as on C); D3's own staleness 0. D3's 4 V moves: stored = the BEFORE tree's writer over the settled roster.
 - P9 p9check (AFTER, C render + p9beasts probe): heartland births 0; printed below Adequate 0 on every surface (the seat's C 0).
+V (CONFIRMED): D2 7/8/3 -> 0/0/0; D2b 19 -> 0; D7 17 -> 0 (kept beside body 30, disagree 0); D5 R13 breaks 0 (X4 binds 74;
+the seat's 75); NEED-ATOM leaf != page 0, oracle refusals 0 (4 needs dropped as dealt, each admitted by the oracle);
+GOALS-I13 compared 2,426, faults 6 in 6 towns (= its tip figure, G44's residual); E8 covered 590 in 380 places, disagreeing 0;
+E5 fault 2 -> 0. E3 e3-slots V AFTER vs "G13 (built)": eleven cells equal; ONE differs: power town .047 (built .073): the
+built cell's top line was the creditor's agent line (11 towns); D7 turned 6 of them to its twin, the top is now another line
+(7 towns) — D7's, not G43's. G43's own V reach: D3's 4 moves (stored = the writer over the settled roster), no cell moved.
+- V D6 d6-owed: flag vs oracle disagreements 0 (C 0): 0/0. Bound 669 cards on 453 pages; free "Contender" 671 (the seat's 671).
+- V D4: out of order 121 -> 121; stored order differs 0 births (C 0): D4 moves 0 records (and no string of any place is D4's).
+- V P9 p9check (AFTER render + probe): heartland 273; printed below Adequate on web Defense 0, web Overview 0, PDF 0 (C 0): 0/0.
+- E8b e8b-successor (BEFORE vs AFTER, the seat's seeds dp-city-1, -53, -0): 6 successors built, differing 0.
+- Census pair #3 (Law & order Adequate beside Safety Unsafe/Dangerous): C 27 -> 4, V 11 -> 0; the 4 C pages (dp-city-46, dp-metropolis-32, -59, -65) each print Dangerous under a crisis (disease outbreak x3, insurgency): the crisis-set rungs G34 left (G9 (1)). #1 (G1's pair: a headman's card beside 'must agree') C 11 -> 0, V 10 -> 0; #4, #6+7, #8, #9, #10, #11, #13 -> 0 on both (BEFORE C 4/1/1/0/291/28/1, V 2/19/10/17/285/25/9; my counts by each pair's own two printed sentences, so #10 counts every Crisis note the Defense tab repeated).
+
+## Step 4 — THE BUILD (CONFIRMED, 05:45 UTC; `npm run build` in the join exit 0; then VERIFY_DIST=1 vitest of the two files:
+exit 1, 5 failed / 61 passed, the five size arms; figures from their assertion messages)
+| | join | line | delta | budget |
+|---|---|---|---|---|
+| first paint raw | 1,192,243 | 1,182,894 | +9,349 | 1,175,492 |
+| first paint gzip | 380,313 | 376,732 | +3,581 | 373,999 |
+| first paint Brotli | 319,289 | 316,604 | +2,685 | 313,994 |
+| generation worker | 2,740,114 | 2,722,294 | +17,820 | 2,579,708 |
+| engine chunk | 937,530 | 934,213 | +3,317 | 909,928 |
+All five over budget, as at the line; every other arm of the two files green.
