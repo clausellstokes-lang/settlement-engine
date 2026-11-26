@@ -88,3 +88,12 @@ section 0): NOT STARTED and for a fresh seat cut on the line after point 118 lan
 (G49), C4-SECOND-LINE (G49), B1(ii) redesigned.
 
 **POINT 118 LANDED (12:08 UTC on 2026-11-26): THE LINE IS 9d22f040e4eee6add2190728381ac7ab8e12d510** (the landing itself 88a070e97d; E1 out; D8 and A5 not in). Point 119's units are CLOSE-10's (`prompts/START-CLOSE-10.txt`).
+
+| CLOSE-10 | E13d-2 with SAMENESS-KEYS (on CLOSE-9's E13d door, 3467006b9 picked) | lane/close-10-2026-11-26-e13d2-wip | 245ded883 (on the line 9d22f040e4: 50765e60d the door and walker, 354d27d85 SAMENESS-KEYS, 3ad7acaa0 E13d-2, 245ded883 the lighting census by its door); one more commit owed (the arm of the third exception) | handed in 12:52 UTC; the door's diff read by the chair; the second reader starts when B1(i)c is handed in (one reader for both) | G35, G52 |
+
+E13d-2 with SAMENESS-KEYS as its seat reports it: records 0, pages 0 (no src change); the walker 34 of 34, about 5 seconds
+whole; the guard reads every string and template literal of src by AST (2,659 files, over 200,000 literals), any shape and
+home; a hit outside the four homes fails; THREE EXCEPTIONS, each with its own arm: an array wholly of role titles; object
+keys; a row keyed by its title (the key passes, its body is read: accepted by the chair on the condition of its own red-first
+arm). Red first: the reader's plant red under the new guard; SAMENESS-KEYS two reds at the base (a drifted rise written; a
+drifted slot added at its own reading). The register is NOT re-taken (once, at the join). tests/lint whole: the line's three.
