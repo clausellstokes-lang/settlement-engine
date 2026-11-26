@@ -731,3 +731,18 @@ bears three places of each sentence; against (6b)'s function 4,444 printed Defen
 edited cases; owner's page and shared page): differing 0; no walker objected; tests/lint at its three base reds; typechecks at
 their ceilings; tests/copy 175 of 175; `publicProseEquality` 428 of 428. Read by the chair. `landing/RULING-118-3.txt` (amended
 to name it) SENT to the helper: the last merge, the gate, the push of `lane/stack-118-wip-2026-11-26`.
+
+**G60 (12:21 UTC on 2026-11-26): B1(i)c RULED ON CLOSE-10's MEASURE: THE FURRIER'S DISTRICT LIVES ON FURS, AND FURS REACH A DESERT PLACE BY ITS OWN GROUNDS OR BY AN ENTREPOT.**
+The measure (the line 9d22f040e4; V re-born; C has no desert): imports are decided AFTER the houses (assembleInstitutions, the
+cascade, then generateEconomy), so the draw cannot read them; and the "northern furs entrepot" the second reader saw on three
+places IS THE DISTRICT'S OWN CHAIN (withhold the district and the chain vanishes: circular), while their "raw hides" import is
+the tanner's livestock chain. What the draw holds: the route, the terrain, the native resources with their depletion, the
+neighbour. V's desert districts, 15: own grounds (spent) 2; a crossroads, where the desert's entrepot flag is the route alone
+(`tradeGoods.js :: deriveIsEntrepot`) 3; a road with no grounds 10. RULED (the seat's P1, with one change): `livesOn: 'furs'`
+on the Furrier's district; the desert withholds furs; furs are given by `hunting_grounds` (spent or not: a spent ground's
+import "Game and hides" follows from the key) or by A ROUTE THAT MAKES THE PLACE AN ENTREPOT: THE GIVER'S ROUTES ARE READ FROM
+`deriveIsEntrepot`'s OWN HOME, NOT TYPED AGAIN AS 'crossroads', so the rule and the chain that prints "entrepot" cannot part
+(if a port is an entrepot there, a port gives furs). Data and one read, no runtime rule beside it. The Hunter's lodge keeps
+'game'. RESIDUAL, ACCEPTED AND NAMED: three road cities that buy the tanner's raw hides lose the district (livestock hides
+are not furs, and they are bought after the draw). NOT TAKEN: reading imports at the draw. The instrument B1land skips a
+user-forced row. Proofs as G52 gives them; `siteCoherenceRatchet` C1 re-read and named if it moves.
