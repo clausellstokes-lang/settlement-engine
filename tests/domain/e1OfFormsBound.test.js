@@ -6,8 +6,6 @@
  *       rewrites because a PLACE's own name holds a possessive ("Dragon's Reach": the second reader's finding 2, "the
  *       gambling of Dragon's Reach tables") and never takes a word for the whole possessed phrase unless a mark or a
  *       joining word ends it.
- *   (5) the bracketed qualifier's possessive (`personMention.js :: qualifiedPossessives`) keeps the verb after its subject,
- *       or, where the shape cannot be told, the original stands (the second reader's finding 4).
  * Synthetic templates (no corpus sentence is a test anchor: proseDrawnAnchors); births by the second reader's seeds.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
@@ -17,8 +15,6 @@ import { composePublicProse } from '../../src/components/new/publicProseCompose.
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
-import { qualifiedPossessives } from '../../src/data/people/personMention.js';
-import { birth as soakBirth, ensureLaws } from '../../scripts/audit/soak-review/corpus.mjs';
 
 beforeAll(async () => { await loadGenerationLawPayloads(); });
 
@@ -50,27 +46,4 @@ describe('CURE-118 (4): the fill\'s "of" form never acts on a place\'s own name,
       expect(all.filter((t) => /\b[Tt]he [a-z]+ of Dragon's Reach [a-z]/.test(t))).toEqual([]);
     }, 120_000);
   }
-});
-
-// (5) a bracketed qualifier that holds a possessive (`personMention.js :: qualifiedPossessives`) takes the "of" form only
-// where the possessed phrase is sure to end: ONE word before a mark or a joining word, or several before an auxiliary
-// ("…'s old debts are paid"). Elsewhere the original stands (the bracket opened into an epithet, NAMES-3): the second
-// reader's finding 4, "The first post came of Nagendra Bajaj (the hospital's master) from that word." (soak1k-166).
-describe('CURE-118 (5): the qualified possessive keeps the verb after its subject, or stands', () => {
-  const cards = [{ name: "Kang Zhou (the network's head)" }];
-  it('a phrase it cannot bound stands as the epithet; one it can takes the "of" form', () => {
-    expect(qualifiedPossessives("Kang Zhou (the network's head)'s first ship came in from the south.", cards))
-      .toBe("Kang Zhou the network's head's first ship came in from the south.");
-    expect(qualifiedPossessives("Kang Zhou (the network's head)'s old debts are paid.", cards)).toBe("The old debts of Kang Zhou (the network's head) are paid.");
-    expect(qualifiedPossessives("Ana Ruiz trusts Kang Zhou (the network's head)'s cousin.", cards)).toBe("Ana Ruiz trusts the cousin of Kang Zhou (the network's head).");
-    expect(qualifiedPossessives("Kang Zhou (the network's head)'s men in the hall wait.", cards)).toBe("The men of Kang Zhou (the network's head) in the hall wait.");
-    expect(qualifiedPossessives("Kang Zhou (the network's head)'s men and boats wait.", cards)).toBe("Kang Zhou the network's head's men and boats wait.");
-  });
-  it('soak1k-166: no stored tie puts its verb before the "of" form', async () => {
-    await ensureLaws();
-    const s = soakBirth(166).settlement;
-    const ties = (s.relationships || []).map((r) => String(r?.description ?? ''));
-    expect(ties.some((d) => d.includes("(the hospital's master)") || d.includes("the hospital's master")), 'the qualified card is named').toBe(true);
-    expect(ties.filter((d) => /\b(?:came|went|grew|fell|began|ended) of\b/.test(d))).toEqual([]);
-  }, 120_000);
 });

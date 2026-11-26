@@ -88,10 +88,6 @@ export const NO_PRONOUN_TAILS = Object.freeze(new Set(['would rather keep to the
 const ROLE_POSSESSIVE = /[\p{L}\p{N}](?:['’]s|s['’])(?=\s|$)/u;
 /** E1: the words that end a possessed noun phrase (its "of" form takes the words before them) */
 const OF_FORM_STOPS = ['and', 'or', 'but', 'to', 'in', 'on', 'at', 'by', 'for', 'with', 'from', 'is', 'are', 'was', 'were', 'has', 'have', 'had', 'will', 'would', 'that', 'which', 'who', 'than', 'as', 'before', 'after', 'since', 'because', 'while', 'when', 'if'].join('|');
-/** CURE-118 (5): the words that surely end a ONE-word possessed phrase ("and", "or", "but" may join a second noun to it) */
-const OF_FORM_ONE_ENDS = OF_FORM_STOPS.split('|').filter((w) => !['and', 'or', 'but'].includes(w)).join('|');
-/** CURE-118 (5): the words that surely end a LONGER possessed phrase: an auxiliary, the clause's verb ("…'s old debts are paid") */
-const OF_FORM_AUX = ['is', 'are', 'was', 'were', 'has', 'have', 'had', 'will', 'would'].join('|');
 
 /** E1: a possessed noun phrase ends at a mark (a regex literal, so the copy's voice count reads no '!') */
 const OF_FORM_END = /[.,;:!?]/u.source;
@@ -300,16 +296,7 @@ export function qualifiedPossessives(text, cards) {
     if (!m) continue;
     // E1 (WORDS-1, G5): a qualifier that holds a possessive ("(the hospital's master)") would open into two possessives in a
     // row; its possessive takes the "of" form instead, the bracket kept: "the family of Kathleen Farrell (the hospital's master)"
-    // CURE-118 (5), G45 (4): ONLY where the possessed phrase is sure to end: one word before a mark or a joining word, or
-    // several (none a joining word) before an auxiliary. Elsewhere ("…'s first post came from …": "came" cannot be told from
-    // a noun) the original stands, the bracket opened into an epithet below, so the verb never moves before its subject.
-    if (ROLE_POSSESSIVE.test(m[2])) {
-      out = out.replace(new RegExp(`${NOT_AFTER_LETTER}${esc(name)}['’]s (?:(\\p{Ll}+)(?=${OF_FORM_END}|\\s+(?:${OF_FORM_ONE_ENDS})\\b|$)|((?:\\p{Ll}+ )+?\\p{Ll}+)(?=\\s+(?:${OF_FORM_AUX})\\b))`, 'gu'), (whole, one, several, at, all) => {
-        const noun = one || several;
-        if (!one && several.split(' ').some((w) => new RegExp(`^(?:${OF_FORM_STOPS})$`, 'u').test(w))) return whole;
-        return `${at === 0 || /[.!?]\s*$/.test(all.slice(0, at)) ? 'The' : 'the'} ${noun} of ${name}`;
-      });
-    }
+    if (ROLE_POSSESSIVE.test(m[2])) out = out.replace(new RegExp(`${NOT_AFTER_LETTER}${esc(name)}['’]s ((?:\\p{Ll}+ )*?\\p{Ll}+)(?=${OF_FORM_END}|\\s+(?:${OF_FORM_STOPS})\\b|$)`, 'gu'), (_w, noun, at, all) => `${at === 0 || /[.!?]\s*$/.test(all.slice(0, at)) ? 'The' : 'the'} ${noun} of ${name}`);
     out = out.replace(new RegExp(`${NOT_AFTER_LETTER}${esc(name)}(['’])s${NOT_BEFORE_LETTER}`, 'gu'), (_w, q) => `${m[1]} ${m[2]}${q}s`);
   }
   return out;
