@@ -659,3 +659,23 @@ food row's pounds, the arriving list with its foodstuffs, the "needed, and not b
 the reader's cases red first; where a gate cannot equal the claim, the sentence changes. (4) THE VEIL LANE's (A17, written
 down, the lane paused): `defenseDisplay.js` about line 968 re-reads facts the default veil removes, so the owner's line and
 the shared line differ on 10 of 600 places (r4b-hamlet-91). (5) the comment's claim about the Overview corrected in (6b).
+
+**G54 (10:21 UTC on 2026-11-26): THE MERGED TREE OF POINT 118 GATED; ONE NEW RED, OF CURE (3), RULED; A FAULT THE CHAIR FOUND BY READING A TOWN COLD.**
+The helper merged the cures (d0dc0eddb0) into the landing tree at 75f1f4742c without conflict; typechecks 167/167 and 1113/1113,
+packets 257; NO DOOR MOVED (the home page's town byte-identical to 55bbd338a3; the page census grid 0 falls, nothing rose; the
+wiring census, the observed-shape baseline and the lighting census unchanged); the four once-red files green (442 tests);
+tests/lint 3 failed, all on the list; tests/copy 175 of 175; tests/build 13 failed, all on the list; the named set (244 files,
+3,557 tests) 10 failed, 9 on the list, ONE NEW: `tests/domain/dailyLifeFoodResentments.test.js` pins an earlier chair's line A4
+with no exclusion, and cure (3) gave it one. RULED (L): the pin for A4 alone expects `['food: = pressured']` (G45 (8)); the form
+of the test is not weakened. THE FIVE SIZES with E1 out: first paint 1,190,929 raw (+8,035 on point 117), 379,787 gzip
+(+3,055), 318,825 Brotli (+2,221); the worker 2,739,058 (+16,764); the engine chunk 937,249 (+3,036): all over budget as at
+point 117, re-recorded by nobody, the owner's to sign.
+WRITTEN DOWN, FOUND BY THE CHAIR READING ONE FRESH TOWN COLD FOR THE OWNER (seed owner-fresh-1, a town, Xinling, under a
+disease outbreak; `$S/owner/fresh/town.txt`): "QUARANTINE-ONE-WAY": the Defense tab says "Nobody comes into Xinling and nobody
+leaves." while the Overview says "Fewer buyers come to Xinling each week for fear of the sickness, and fewer sellers.", the
+crisis text says the quarantine "is not being enforced consistently", the viability line says "the food comes in by sea" and a
+hook has a boat come in. One page, two readings of the same quarantine. A unit after point 119's seven: measure first (how
+many outbreak places print both), then the sentence that claims a sealed town changes or is gated on a fact that says sealed.
+ALSO SEEN AND NOT RULED (the owner's taste, said to him): labels where a reader expects names ("Feudal Appointee",
+"Religious Authorities", "The Siege", "The Arcane Incident"); thirty hooks in one shape in a row; an exports list with
+near-twins ("River craft", "Cargo barges", "River barges").

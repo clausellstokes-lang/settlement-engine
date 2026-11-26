@@ -178,3 +178,7 @@ VIABILITY-TRUE (point 119): every viability line and both fallbacks true of what
 rounded food gate. B1(i)c (point 119): the Furrier's district where hides reach the place. E13d-2 and SAMENESS-KEYS (point
 119): the skip's guard over every pool; a drifted slot inherits its ceiling. A17 (the veil lane, paused): the Defense line
 re-reads facts the default veil removes: owner and shared differ on 10 of 600 places.
+
+## ADDED 10:21 UTC ON 2026-11-26 (G54)
+QUARANTINE-ONE-WAY: an outbreak town's Defense tab says nobody comes in or leaves while its Overview, viability line and hooks
+have buyers, sea-borne food and a boat arriving. Measure first; after point 119's seven.
