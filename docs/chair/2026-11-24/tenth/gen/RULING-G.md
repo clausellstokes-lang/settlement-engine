@@ -612,3 +612,29 @@ the helper found three that do, and screen and PDF agree on all three): cure (9)
 prints no council line, as G1 means): cure (7), the anchor re-chosen by the test's own criterion. (4)
 `crisisBlindDossierProse`: A TABLE LACKING A DIMENSION (`ruling body`, first declared by a state-prose pool in G1): cure
 (8), the setter added as its sibling's. All four on the cures' branch (RULING-CURE-118-5); none goes on the known-reds list.
+
+**G52 (08:57 UTC on 2026-11-26): THE SECOND READER ON POINT 119's FIRST TWO UNITS (`landing/119/SECOND-READER-119-A.txt`), RULED. BOTH GO BACK.**
+B1(i)b (32704b806) IS RIGHT IN ITS DIRECTION AND WRONG IN ITS RULE. The flag `livesOn: 'game'` reads "the land lists hunting
+grounds", not "furs reach this place": two desert metropolises keep the district on DEPLETED grounds (they print the import
+"Game and hides (local hunting grounds exhausted)": right, but by accident), and three (dp-metropolis-19, -98, -143: a
+crossroads with a northern-furs entrepot, importing raw hides) LOSE it. A furrier works hides; a hunter's lodge hunts. R24r 6's
+own words were "no hunting grounds AND no fur import". RULED, "B1(i)c": the Furrier's district stands where hides reach the
+place: game on its own land, OR hides or furs that arrive (the entrepot's goods, a route's, as far as the house draw can know
+them: MEASURE FIRST what is known at the draw; if the imports are decided after the houses, say so and propose, do not guess).
+The Hunter's lodge keeps its own rule. Its instrument (`pageCensusFindings.js` B1land) does not report a house the user
+FORCED. Its checks: every desert birth of C and V (the district beside no game and no arriving hides: 0; the district withheld
+where hides arrive: 0); a forced district stands; base-born records byte-equal. `siteCoherenceRatchet` C1 (one place,
+bookkeeping: the cascade's re-deal changed which export decides its row) is re-read after the rework: if it still moves, it is
+NAMED for the owner and raised by nobody.
+E13d (3b4fe205f): THE SKIP IS SOUND TODAY (no counter-example in 304,427 source literals; 19 strings, only in their homes) AND
+ITS GUARD IS HOLLOW: the walker's arm that says "no line of a drawn pool is in the skipped set" reads only plain-string arrays
+under src/data, not the 1,482 object pools (5,655 lines) nor anything outside src/data: a planted caption in a Daily Life pool
+passes it. RULED, "E13d-2": the guard reads every drawn pool whatever its shape and home (the register's own drawn rows are
+the list of pools; a pool it cannot read is a failure, not a pass), red first on the reader's plant. AND THE REGISTER'S RE-TAKE
+(81c2efc8e) IS DROPPED FROM THE UNIT: (i) it was taken without B1(i)b, which moves 19 births of the door's corpus; (ii) THE
+DOOR HAS A HOLE THE READER FOUND: a slot keyed by its position index that drifts is retired and re-registered at today's
+reading, so a rise is written as a retirement and an addition: 599 of 788 additions are a retired slot one index on, 29 of
+them HIGHER (the largest: village, both PDFs, "No granary: under siege...", 0.58 to 0.77). RULED, "SAMENESS-KEYS": on a
+re-take, an added slot that matches a retired one by surface, size and sentence INHERITS the retired ceiling, so a rise is a
+rise and the door itself says so; the register is re-taken ONCE, at point 119's join, by that door; what it then refuses is
+named for E13c and raised by nobody. This makes the door stricter, which is the chair's to order.

@@ -1,0 +1,19 @@
+THE SECOND READER ON POINT 119's FIRST TWO UNITS (independent, top tier, max effort). Tips read: A = B1(i)b 32704b806, B = E13d 3b4fe205f, both on 3836a832e3. Evidence: scratch `reader3/out`.
+FINDINGS
+1. B, tests/lint/samenessCensus.walker.test.js:258-285. The guard reads only plain-string arrays exported under src/data: not the 1,482 {text} object pools there (5,655 lines), nothing outside src/data; its register arm cannot fire. "Who holds power and how firmly." planted as DAWN_WORK.food F1 (src/data/dailyLife/dawnWork.js): walker 30/30 green; planted in SIEGE_TWINS_ON_OFFER: red. CONFIRMED.
+2. A, src/data/geographyData.js:737; test line 78. "Has game" means the key hunting_grounds is listed. The positive control dp-metropolis-30 and dp-metropolis-117 (V's only deserts keeping the district) hold it DEPLETED and print the import "Game and hides (local hunting grounds exhausted)"; dp-metropolis-19/98/143 (crossroads, furs_north entrepot, importing raw hides) lose it. CONFIRMED. Chair's call.
+3. B, scripts/sameness-census.mjs:481-501. Kept keys keep their ceilings (2,521 checked); a slot whose position index drifted is retired and re-registered at today's reading. 599 of 788 additions match a retired entry (surface, size, sentence): 527 equal, 43 lower, 29 higher; largest, village, both PDFs, DefenseSecurity PageChrome.1.9.2 to 1.10.2, "No granary: under siege...", 0.58 to 0.77. None a title or caption slot; none past 4 SE on hxd. CONFIRMED.
+4. A against B. A moves 11 hxd and 8 hxu births of the sameness door's corpus; B's register was taken without A; door not re-run. CONFIRMED.
+5. A, src/domain/coherence/pageCensusFindings.js:419. B1land reports a forced district (dp-city-20) and a pre-change saved one. CONFIRMED. Instrument only.
+QUESTIONS
+A1. One reader, landWithholdsHouse (the draw, the cascade, the faction boost, B1land). Game: desert without a native hunting_grounds key; no route gives it. Not what the page prints (2).
+A2. No leak at birth: none standing in 154 desert births. Forced stands (dp-city-20, dp-metropolis-19). CONFIRMED. The world pulse (institutionLifecycle.js:222) asks no land; predates A.
+A3. Nothing dangles: the 13 records hold no furrier, fur or pelt string (one tanner line in dp-city-149 predates A). CONFIRMED.
+A4. C1 counts places by terrain, map site kind and the export deciding it. One place, metropolis/desert/road@scw0-a1, still mountain-flank: the cascade's re-deal dropped "Refined iron ingots" from the exports, so "Iron ore" decides. Kinds and totals unmoved: bookkeeping. CONFIRMED; red on the branch.
+A5. Nothing in the app; four base-born records load byte-equal. Only B1land (5).
+Claims: 13 of 900 and red-first CONFIRMED; other houses re-dealt in 9, not 10; "C" not identifiable.
+B1. No counter-example: in 304,427 source literals the 19 skipped strings occur only in their homes and as title-table keys; on 34 rendered hxd places the skip removed 16 title-only or caption-only slots and moved no other reading. CONFIRMED.
+B2. Four: the guildmaster of thieves, the senior charter master, the senior craft-guild master, the speaker of the assembly (not met). Whole only in PDF role cells; within longer lines, counted.
+B3. Same pieces. A name-masked caption still counts; the reverse cannot happen (no member holds # or 0).
+B4. Yes (3). Sample of 20: 9 dropped and 9 added are the same sentences one index on (one up: NotableNPCs "called by", town 0.63 to 0.67); 2 new.
+A safety check refused its removal of the node_modules links in its scratch; not retried (the refusal stands; the links are scratch). Worktrees removed.
