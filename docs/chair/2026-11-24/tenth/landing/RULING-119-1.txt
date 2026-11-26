@@ -1,0 +1,19 @@
+RULING 119-1, from the chair to LAND-119. NO PUSH YET. Two things, in this order.
+
+(A) THE FIVE (4) ARE ATTRIBUTED BEFORE ANYTHING ELSE MOVES. `tests/domain/mergeLadderHeldKeys.test.js` (EM-R8 A2, A3, A5,
+A6) and `tests/property/editCorpusRatchet.test.js` (A4) pin MEASURED figures over the 63-row edit corpus (their own
+comments record each earlier move with the landing that caused it). Find the cause, do not re-point anything:
+ 1. Run those two files alone at each of: the line 9d22f040e4, merge 1 (156b0ce489), merge 2 (7d8b79401b), and, only if
+    merge 2 is green, on up the six merges, until the first red. Use ONE scratch worktree under /home/user/wt/ (detached,
+    `node_modules` linked, removed when done), never /home/user/wt/line's own checkout. Another worker (/home/user/wt/cure119)
+    is running tests: when the gate mutex is held, WAIT in pieces under ten minutes and try again; kill nothing.
+ 2. At the first red tree, NAME THE ROW: which of the 63 corpus rows and which edit (the tests' own labels, e.g.
+    `E8 <tier>|<culture>|<terrain>|<route>|…`) is the one trial that stopped being quiet (rebuilt 62 -> 63, quiet 471 -> 470,
+    declared-only E8 9 -> 10), and WHAT path it now escalates on (the path the census names). Then say in one sentence what
+    differs in that town's BIRTH between the parent tree and the first red tree (e.g. a district it no longer has).
+ 3. Say whether, at that tree, the trial's merged record still equals the post-pass pipeline (A6's own claim) apart from the
+    count: that is, whether the figure moved because the town moved, or because the merge now does something it did not.
+Report those three things in at most 150 words and STOP. Do not edit either test file.
+
+(B) HELD FOR THE NEXT RULING: the cures branch `lane/stack-119-cures-wip-2026-11-26` (in /home/user/wt/cure119) is not yet
+cleared; you will be told when to merge it. Until then /home/user/wt/line stays at ef10a71f3a, clean, unpushed.
