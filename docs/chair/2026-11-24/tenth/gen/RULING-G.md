@@ -512,3 +512,17 @@ ALSO READ, FOR THE SHARE PAGE's LANE, OLDER THAN THIS CHANGE: a veiled face's TI
 put the gang boss two favours ahead"): 207 strings in 360 births at the base, 199 at the join. THE CURES: one builder
 (`prompts/START-CURE-118.txt`, its tree /home/user/wt/cure118 cut at the landing tree's 55bbd338a3), then a short second
 read of its diff, then the helper merges it. THE LINE DOES NOT MOVE BEFORE.
+
+**G46 (06:17 UTC on 2026-11-26): "CLOSE-8 3836a832e3" RECEIVED; POINT 119 GOES TO A FRESH SEAT.** The join's own proof (its
+`close-8/LANDING-118.md` at f060302d86): typechecks 167 and 1113; packets 257; `tests/lint` the line's three; `tests/copy`
+175 of 175; C moved 746 records and 887 pages, V 650 and 857, unexplained 0 / 0; battery rows 0 and -129 (P9's); every
+unit's every-birth check 0 or explained (E8b's round trip 824 / 700 = E13b's and E1's strings; E3 22 of 24 cells equal
+to WORDS-2's column, the two by D2b and D7; D3's 25 / 17 = D7's twin births; GOALS-I13 6 / 6, G44). SIZES ON THE JOIN
+(named for the owner, raised by nobody): first paint 1,192,243 raw (+9,349 on the line), 380,313 gzip (+3,581), 319,289
+Brotli (+2,685); the worker 2,740,114 (+17,820); the engine chunk 937,530 (+3,317). I-13's cost: 100 cities and
+metropolises 37,604 to 37,435 ms; refs a town 63 to 2,822, held in a WeakMap, not on the record, not served. THE
+WRITER-REACH REGISTER re-taken by its door: D6's row N to R; P9's two web-display rows REMOVED (the door has no form to
+declare a reader on display's behalf: THE REGISTER NOW UNDER-STATES, written down under G37). Rows of the known list
+green on the join: `defenceParts` R13, `faultsNeed` 1, goals I-13, the five of ANCHORS-5. CLOSE-8 (485,514 used at
+05:45, cost 116.87) HANDS OVER; point 119 (B1(i)b, E13d, P9b, D13 STABLE-PICKS as a design, B1(ii) redesigned last) is
+CLOSE-9's (`prompts/START-CLOSE-9.txt`), on the join's tree, outside the cures' files.

@@ -57,3 +57,9 @@ WORDS-2's COMMON MERGE NOTE (16:55 UTC): every unit but E3 moves 0 records on C 
 MANY UNITS (`tests/lint/.lighting-census-baseline.json`, `docs/content/wiring-census.json`,
 `scripts/.observed-shape-readers-baseline.json`): after the merges they are RE-TAKEN BY THEIR OWN DOORS, never merged by
 hand.
+
+## POINT 118 AS JOINED (06:17 UTC on 2026-11-26)
+"CLOSE-8 3836a832e3" (`lane/close-8-2026-11-25-join`): all 29 units in the ruled order; G43 bb6bcd035f (no seat's unit);
+ANCHORS-5 26a8ad9e3c; NEED-ATOM 031e04e84c; D7-BYTES f94dc00d82; GOALS-I13 e59e38ddbb; the writer-reach re-take. THE
+SECOND READER's EIGHT (G45) are cured on the landing's tree by the chair's builder, not on the join. POINT 119 (CLOSE-9):
+B1(i)b, E13d, P9b (a measure), D13 STABLE-PICKS (a design), B1(ii) redesigned.
