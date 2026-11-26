@@ -639,6 +639,9 @@ const WORD_CORRECTIONS = Object.freeze([
   // time on its pages (GEN-13 NO-MARKET and the yield line already say it); re-worded in place, its closing clause kept (C4 is
   // a low rung: `economyStateProse.js :: prosperityHeaderPoolKey`, rank <= LOW_RUNG_TO, Subsistence/Struggling/Poor)
   { pool: 'DS-ECO-1 :: COMBINATION C4: a low rung on a working approach', vid: 6, from: 'e284cf5f1f6d43f5c199642c081a0f6f4ac6d78bc417b75ed3ffe9879493023e', to: 'e6244f4fc36979daaf0fc289bf29a5a0b3e006fd4150a6d00083c632d669dd35', ruling: 'TENTH-CHAIR-G3' },
+  // VIABILITY-TRUE (the tenth chair's G61 (2)): DS-GEN-18 BOUGHT-IN v2 said the place buys in what it cannot make beside the
+  // page's own "Needed, and not brought in" (9 of 10 prints on V's small places); its words take "some of", corrected in place
+  { pool: 'DS-GEN-18 :: BOUGHT-IN', vid: 2, from: '354d370b49e159b5d19d38ee84a13b7b455b07ebdd9d399aa34d3c3a5079ffde', to: 'e463113d4cf56b027fe83e7bfafb339769612e435bec7cb0480eb38ff9e09136', ruling: 'G61' },
 ]);
 
 async function readNumberingBaseline() {

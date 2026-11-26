@@ -12018,7 +12018,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
             "market",
             "no crisis: under_siege"
           ],
-          "text": "{settlement} buys in what it cannot make, and the trading keeps as many people busy as the making would.",
+          "text": "{settlement} buys in some of what it cannot make, and the trading keeps as many people busy as the making would.",
           "slots": [
             "settlement"
           ],

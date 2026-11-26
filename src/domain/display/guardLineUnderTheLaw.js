@@ -318,6 +318,9 @@ export function fundingReasonAsPrinted(reason, record) {
 const NO_STABLE_AUTHORITY_SENTENCES = Object.freeze([
   /No stable governing authority; (whoever holds sway decides what rules apply, and that changes\.)/g,
   /No stable governing authority\. (Enforcement is inconsistent; which power controls a district determines what rules apply\.)/g,
+  // VIABILITY-TRUE (G56 (1), G61): the same sentence as the engine wrote it until 2026-11-09 (e608542bd .. 503fc64dd0), so an
+  // older save is trimmed as a new one is
+  /No stable governing authority\. (Enforcement is inconsistent; which faction controls a district determines what rules apply\.)/g,
 ]);
 /**
  * THE SAFETY LINE WITHOUT THE THIRD TELLING: where the record's stored stability says the place has no stable governing

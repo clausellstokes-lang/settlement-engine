@@ -322,8 +322,8 @@ export function deriveViability(settlement) {
       `Nothing ${town} needs to get through the year has to come from outside.`,
       `${town} feeds itself and pays its way, and buys in some of what it cannot make for itself.`, // RULING CURE-118-6 (K): "some of" (a need may go unmet)
       `What ${town} eats it grows, and what it spends it earns; some of what it uses is bought in.`,
-    ], [!seen.buysFood && seen.paysItsWay, !seen.buysFood && !seen.needsImports, !seen.buysFood && !seen.needsImports,
-      !seen.buysFood && seen.paysItsWay && seen.buysIn, !seen.buysFood && seen.paysItsWay && seen.buysIn], seen.buysIn ? `${town} gets through the year, buying in what its own land and trades do not provide.` : `${town} gets through the year on its own land and trades, and goes without what they do not provide.`)}`, // TAIL-DEFECON-D (#00585): it buys in only where something arrives
+    ], [!seen.buysFood && seen.paysItsWay, !seen.buysFood && !seen.needsImports && !seen.owesDebt, !seen.buysFood && !seen.needsImports,
+      !seen.buysFood && seen.paysItsWay && seen.buysIn, !seen.buysFood && seen.paysItsWay && seen.buysIn], seen.buysIn ? `${town} gets through the year, buying in some of what its own land and trades do not provide.` : `${town} gets through the year on its own land and trades, and goes without what they do not provide.`)}`, // TAIL-DEFECON-D (#00585): it buys in only where something arrives; VIABILITY-TRUE (G61): line 2 "owes no one" not beside the debt line; the twin says "some of" (a need may go unmet)
     rawSummary,
   };
 }
@@ -848,7 +848,7 @@ function pickTrue(pick, pool, ok, twin) {
  * (the food record's import share), and the imports its printed trade list marks as a necessity or as what the terrain
  * cannot produce (the Economics tab's own list and marks: `EconomicsTab.jsx :: shownImports`).
  * @param {DossierSettlementView | null | undefined} settlement
- * @returns {{ keepsOrder: boolean, paysItsWay: boolean, buysFood: boolean, buysIn: boolean, needsImports: boolean }}
+ * @returns {{ keepsOrder: boolean, paysItsWay: boolean, buysFood: boolean, buysIn: boolean, owesDebt: boolean, needsImports: boolean }}
  */
 function outlookFactsOf(settlement) {
   const town = /** @type {OutlookSettlement | null | undefined} */ (/** @type {unknown} */ (settlement));
@@ -868,8 +868,14 @@ function outlookFactsOf(settlement) {
     settlement, { side: 'imports', exports: Array.isArray(eco.primaryExports) ? [...eco.primaryExports] : [] })); // a copy read (tradeListWriters)
   return {
     keepsOrder: law !== 'critical' && law !== 'collapsed' && !OPEN_REVOLT.some((t) => stressTypes.includes(t)), // TAIL-DEFECON-D (#01134): not under open revolt
-    paysItsWay: !['Subsistence', ...PROSPERITY_LABELS.slice(0, PROSPERITY_LABELS.indexOf('Poor') + 1)].includes(String(eco.prosperity ?? '')),
-    buysFood: Number(record?.normalImportPct) > 0, buysIn: Number(record?.normalImportPct) > 0 || tradeListsAsPrinted(/** @type {Parameters<typeof tradeListsAsPrinted>[0]} */ (/** @type {unknown} */ (settlement))).imports.length > 0, // TAIL-DEFECON-D: food bought, or an import the Economics tab prints as arriving
+    paysItsWay: !['Subsistence', ...PROSPERITY_LABELS.slice(0, PROSPERITY_LABELS.indexOf('Poor') + 1)].includes(String(eco.prosperity ?? '')) && !stressTypes.includes('indebted'), // VIABILITY-TRUE (G61): not beside the printed debt line
+    // VIABILITY-TRUE (the tenth chair's G61): the three gates read WHAT THE PAGE PRINTS: the food row's own pounds brought in
+    // (`foodRowShown.js`, with the tab's carrier test; the record's rounded share read 0% beside "+ 1 imported"), a good on the
+    // printed arriving list that is a food source's own good (`commoditiesShown.js :: isFoodSourceGood`), the
+    // printed arriving list itself; and the debt line the page prints (the `indebted` stress's own sentence).
+    buysFood: foodPoundsShown(settlement) > 0 || arrivingShown(settlement).some(isFoodSourceGood),
+    buysIn: foodPoundsShown(settlement) > 0 || arrivingShown(settlement).length > 0,
+    owesDebt: stressTypes.includes('indebted'),
     needsImports: imports.some((imp) => necessity.some((n) => imp.includes(n)) || terrain.some((t) => imp.includes(t) || t.includes(imp))),
   };
 }
@@ -951,3 +957,17 @@ function stoppedSupplyOf(settlement, supplying) {
     ? `${join(rows.map((r) => r.name))} · ${rows[0].mark}`
     : rows.map((r) => `${r.name} · ${r.mark}`).join(', ');
 }
+/**
+ * VIABILITY-TRUE (G61): the food the page's Food Security row prints as brought in, in its own pounds (0 where it prints none).
+ * @param {unknown} settlement @returns {number}
+ */
+function foodPoundsShown(settlement) {
+  const s = /** @type {Parameters<typeof foodRowShown>[0]} */ (settlement);
+  const eco = /** @type {Parameters<typeof carriersOf>[1]} */ (/** @type {{ economicState?: unknown } | null | undefined} */ (settlement)?.economicState);
+  return Number(foodRowShown(s, !!carriersOf(/** @type {Parameters<typeof carriersOf>[0]} */ (settlement), eco))?.fb?.importCoverage) || 0;
+}
+/** VIABILITY-TRUE (G61): the Economics tab's printed arriving list. @param {unknown} settlement @returns {string[]} */
+function arrivingShown(settlement) {
+  return tradeListsAsPrinted(/** @type {Parameters<typeof tradeListsAsPrinted>[0]} */ (settlement)).imports.map(String);
+}
+import { foodRowShown } from './foodRowShown.js'; import { carriersOf } from './foodCarrier.js'; import { isFoodSourceGood } from './commoditiesShown.js'; // VIABILITY-TRUE (G61): at the END, so no cited line moves

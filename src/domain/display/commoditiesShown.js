@@ -37,6 +37,17 @@ const FAILED_GOODS = Object.freeze({
 });
 
 /**
+ * VIABILITY-TRUE (the tenth chair's G61 (1)): is this trade good one of the food sources' own goods (`FAILED_GOODS`: grain,
+ * flour, livestock, dairy, fish, seafood, the catch, game meat), read as the Economics tab reads a failed food against a
+ * label (a whole word, lower case)? Salt, hides and the other goods the regional catalogue files under food are not.
+ * @param {unknown} label @returns {boolean}
+ */
+export function isFoodSourceGood(label) {
+  const item = String(label ?? '').toLowerCase().replace(/_/g, ' ');
+  return Object.values(FAILED_GOODS).some((words) => words.some((g) => new RegExp(`\\b${g}\\b`).test(item)));
+}
+
+/**
  * The goods of the food a famine in force failed (`FAILED_GOODS`), spaced and lower case; none outside a famine or where
  * the record names no failed source. The Economics tab's "Produced locally" reads it too
  * (`tradeListDisplay.js :: localProductionAsPrinted`): the one reading of what the famine took.

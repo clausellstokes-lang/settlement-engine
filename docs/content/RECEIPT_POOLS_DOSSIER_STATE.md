@@ -7553,7 +7553,7 @@ no compass word, no real-world place, no named analogy.*
 
 **`BOUGHT-IN`** {colour}
 1. `[ledger · no crisis: under_siege]` {settlement} brings in {good} from outside.
-2. `[visitor · market · no crisis: under_siege]` {settlement} buys in what it cannot make, and the trading keeps as many people busy as the making would.
+2. `[visitor · market · no crisis: under_siege]` {settlement} buys in some of what it cannot make, and the trading keeps as many people busy as the making would.
 3. `[street]` {institution} at {settlement} eats what the carts bring; the town's crafts begin at the weighbeam, not the field.
 4. `[trade · no crisis: under_siege]` Ask where {settlement} gets its {good} and somebody will point you at the carts.
 5. `[local · guild · tier: ≥ village · no crisis: under_siege]` Much of the work in {settlement}'s workshops begins with unloading a cart.
