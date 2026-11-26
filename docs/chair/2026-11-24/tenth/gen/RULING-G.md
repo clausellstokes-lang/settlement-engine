@@ -714,3 +714,13 @@ loose pattern; a test ties the two spellings together by bearing places that car
 (which the chair and the second reader read): the printed Defense line differing 0 over C, V, the soak and the edited cases.
 NO SECOND READ OF (6c): its behaviour is (6b)'s by that proof, a mechanical equality stronger than a re-read; the chair reads
 its diff. (K) 211 summaries, all by the two words, elsewhere 0; (L) A4 alone pinned to its one exclusion, 16 of 16: ACCEPTED.
+
+**G58 (11:05 UTC on 2026-11-26): THE CHAIR'S "WHO IS IN CHARGE: PARTLY" WAS ITS OWN PRINT'S FAULT; CORRECTED TO THE OWNER.** The owner:
+"shouldn't there be a person in the office unless specifically called against?" MEASURED on five fresh births (a thorp, a
+hamlet, a village, a town, a city; `$S/owner/fresh/who.txt`): EVERY ONE HAS A NAMED HOLDER OF THE SEAT, printed on the Power
+tab ("The seat: Shufen Zhang, the lord's appointee"; "Komnenou Gabalas, the head shepherd and Elder"; "Bashir al-Malik, the
+senior guild master and Lord Mayor") and, for the DM, the ruling two or three in "Who really runs this town". The chair's cold
+read had printed the Power tab without its record (a fault of the chair's script), saw only the Overview's "Governed by Feudal
+Appointee" and said "the office, not the person". WRITTEN DOWN, SMALL, MEASURE FIRST ("OVERVIEW-NAMES-THE-SEAT"): the
+Overview's "Governed by" line names the power and its stability and not the holder, who is one tab away; whether the first
+screen should carry the name (not where the seat is empty, and never a veiled face on a player view or a share).

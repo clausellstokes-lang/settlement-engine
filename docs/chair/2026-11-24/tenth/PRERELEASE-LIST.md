@@ -184,3 +184,5 @@ QUARANTINE-ONE-WAY: an outbreak town's Defense tab says nobody comes in or leave
 have buyers, sea-borne food and a boat arriving. Measure first; after point 119's seven.
 
 ## 10:25 UTC ON 2026-11-26 (G55): QUARANTINE-ONE-WAY IS WITHDRAWN (the owner's reading, re-derived by the chair: the rule and its leaking are one story). Not a unit.
+
+## ADDED 11:05 UTC ON 2026-11-26 (G58): OVERVIEW-NAMES-THE-SEAT (small, measure first): the Overview's "Governed by" line names the power, not the seat's holder, who prints on the Power tab. Not where the seat is empty; never a veiled face on a player view or a share.
