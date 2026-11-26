@@ -1507,3 +1507,31 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
 **T134 (19:07 UTC on 2026-11-26): POINT 119: THREE UNITS DONE AND READ, THREE BUILT AND IN THEIR GATES WITH THE SEAT; THE HELPER'S FILE DRAFTED.** DONE AND READ BY THE CHAIR: E13d-3 (`lane/close-11-2026-11-26-e13d3-wip` 9e73a943a); B1(i)c-2 (`...-b1ic2-wip` 38e92b68e: the port gives furs); B1(ii) (LOCAL `lane/stack-119-b1ii-wip-2026-11-26` 8a37259dc4 in /home/user/wt/b1ii, built by the chair's builder B1II-119 in about 50 minutes and 260,000 tokens: G71). WITH CLOSE-11 (session_019yED1NAJjzPdSNzH3LdaRo; 574,128 used, cost 30.11 at 19:07 UTC; MARK 720,000 FIRM; at 690,000 it hands in what is ungated as UNGATED): C4-SECOND-LINE (sentence changed: "…being easy to reach has not changed that.", G70; the shift register's five pins left for the owner, G69), VIABILITY-TRUE-2 and P9b-2 (`landing/RULING-119-CURES-1.txt`). `prompts/START-LAND-119.txt` IS DRAFTED (six merges in order, the doors, the gate; three marks to fill). NEXT: as the hourly check's prompt says: record and read the three; fill the marks; start LAND-119 and ONE second reader together. THEN point 120 (D13 stable picks, G63; the OLD-SAVE measure, G68): BY A LOCAL BUILDER, NOT A SEAT. NEXT PUSH NUMBER 409.
 
 **T135 (20:32 UTC on 2026-11-26): POINT 119: ALL SIX UNITS IN AND READ; THE JOIN AND ITS SECOND READ STARTED TOGETHER.** UNITS (rows in `gen/HAND-INS.md`; each read whole by the chair): E13d-3 9e73a943a; B1(i)c-2 38e92b68e; P9b-2 cabb56d92; C4-SECOND-LINE 40eec947a ("{settlement} is poor, and being easy to reach has not changed that.", G70; the shift register's five pins left for the owner, G69); VIABILITY-TRUE-2 ecb5b9853 (its per-line table by the rendered page NOT run by its seat: given to the second reader); B1(ii) LOCAL `lane/stack-119-b1ii-wip-2026-11-26` 8a37259dc4 (/home/user/wt/b1ii; G71). THE HELPER LAND-119 (agent a9b1370e53d44857a; `prompts/START-LAND-119.txt` at dd8cffc0ff; /home/user/wt/line from 9d22f040e4: six merges in order (1) E13d-3 (2) B1(i)c-2 (3) P9b-2 (4) C4-SECOND-LINE (5) VIABILITY-TRUE-2 (6) B1(ii); the doors; typechecks; the wide gate; NO PUSH until ruled; scratch `$S/landing/119/gate/`). THE SECOND READER (agent a5153b40fbcfac272; scratch `$S/reader7/`): B1(ii) whole; the five cure units against `landing/119/SECOND-READER-119-B.txt` and `-C.txt`; the viability table. CLOSE-11 (session_019yED1NAJjzPdSNzH3LdaRo; 593,443 used at 20:07 UTC) TOLD TO HAND OVER (hand-back, then "CLOSE-11 HANDS OVER"). WHEN BOTH REPORT: rule the reader's findings (cures by a LOCAL builder on a branch cut at the helper's tip, as CURE-118 was; NOT a seat); rule every (4) and (F) of the helper's gate; then the ruling to the helper to merge the cures and PUSH `lane/stack-119-wip-2026-11-26`; the row and "THE GATE OF POINT 119" in LANDINGS-SIXTH.md on the line; RED-AT-LINE.tsv (new rows named for the owner: `siteCoherenceRatchet` C1, `hookThemeDraws`, `pipelinePinnedChoosers` A6, the shift register's two tests); push the line; LINE-NOW.md; CI by name. NEXT PUSH NUMBER 413.
+
+## T136 (22:37 UTC on 2026-11-26): POINT 119: THE READER FOUND SIX FAULTS, FIVE CURES ARE BUILT AND READ BY THE CHAIR, THE READER IS RE-READING THEM; THE HELPER'S WIDE GATE STILL RUNS
+
+- **THE LINE IS STILL 9d22f040e4 = POINT 118.** The helper LAND-119 (agent a9b1370e53d44857a) holds /home/user/wt/line at
+  ef10a71f3a (six merges, two door commits), its wide gate running (`$S/landing/119/gate/w-wide.log`); it has not reported.
+- **THE SECOND READER** (agent a5153b40fbcfac272) reported six findings: `landing/119/SECOND-READER-119-D.txt` (with its
+  three follow-up answers). RULED IN G72 AND G73 (`gen/RULING-G.md`): (1) the field rule's stamp was an equality with the
+  build's constant: the chair's own fault in G64 (3): now a floor (`bornAtOrAfter`, `FIELD_RITE_SINCE = '0.10.0'`); (2) the
+  merchant-league line stated a debt no fact holds: the sentence changes ("…who trade in it…"); it was also all five false
+  prints of the strained line; (3) a non-numeric monster score: NOT cured, P9c, measured with OLD-SAVE at point 120; (4)
+  the field rule reads the page's grain; (5) C4's line says "being well placed for trade"; (6) `provisions` and `game`
+  count as food arriving. Written down, not cured: TRADITIONS-DRAW-KNOWS-NEEDS (the tab drops 726 drawn rows in 653 of
+  2,700 births on the line).
+- **THE CURE BUILDER CURE-119** (agent aaa83c6f3c62f138b; /home/user/wt/cure119, `lane/stack-119-cures-wip-2026-11-26`,
+  brief `prompts/START-CURE-119.txt`): five cure commits 57ff4f89ad, 5b94c6cb32, 927e3747bf, bc312a455f, b6eaf811b0 and
+  two observed-shape door commits; THE CHAIR HAS READ ALL FIVE SOURCE DIFFS (nothing to rule against; one thing to watch at
+  the join: cure 4 makes `traditions/genesis.js` import `display/tradeListDisplay.js`: the five SIZES must be read against
+  point 118's). Its gate and proofs are not yet reported. THE READER WAS SENT THE FIVE COMMITS AT 22:37 UTC (its questions (a)
+  to (e): the floor under a later constant and every path that writes the stamp; which places change and whether each
+  prints grain; the two sentences on their pages; the false-print table again).
+- **THE OWNER ASKED FOR A WHOLE TOWN READ** (Ioannorion, village, seed `owner-read-3`, text in
+  `owner/IOANNORION-READ-2026-11-26.txt`): nine items R1 to R9 in the pre-release list, each to be MEASURED over the census
+  first and cured by a local builder AFTER point 119 moves; none joins the landing in flight. He was told: useful as a
+  setting, thin in texture; against a model: the engine's advantage is trust, persistence and a state a simulator can step.
+- **NEXT:** when the builder, the reader and the helper have reported: rule; `landing/RULING-119-1.txt` to the helper
+  (merge the cures branch, typechecks, the named tests, lint, copy, build, sizes, PUSH `lane/stack-119-wip-2026-11-26`);
+  the row and the gate paragraph; push the line; RED-AT-LINE.tsv and LINE-NOW.md; CI by name. Push 415 launched; NEXT PUSH
+  NUMBER 416.
