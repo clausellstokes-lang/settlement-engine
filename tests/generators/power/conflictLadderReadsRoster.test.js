@@ -52,16 +52,20 @@ describe('POWERS-13 #291 · the conflict ladder names a market or a court only w
   beforeAll(async () => { await loadGenerationLawPayloads(); });
   it('the guard towns: each line is gone where its market or court is not, and says what the ladder says next', () => {
     expectNoSeedFailures(collectSeedFailures([
-      ['bar0-village-calm-rand-1', LEVIES, 'A dispute over grazing rights and water access has run for two seasons'],
-      ['r2r-village-4', LEVIES, 'A dispute over grazing rights and water access has run for two seasons'],
+      // WORDS-2 E3 (RULING G13): the ladder's last rung keeps a quarrel only where the record holds what it names; the
+      // grazing line went where herding does not lead: rand-1 holds a marsh (its twin), r2r-village-4 (grain leads) and
+      // r2r-hamlet-14 (grain, a desert road) hold none of the four, so they store no quarrel ('')
+      ['bar0-village-calm-rand-1', LEVIES, 'A dispute over rights on the marsh and access to water has run for two seasons'],
+      ['r2r-village-4', LEVIES, ''],
       ['r2r-hamlet-56', MURDERED, 'Someone has been stealing from the communal stores.'],
-      ['r2r-hamlet-14', OUTBUYING, 'A dispute over grazing rights and water access has run for two seasons'],
+      ['r2r-hamlet-14', OUTBUYING, ''],
       ['r2r-village-8', COURTS, "The strongest armed household has started making decisions on everyone's behalf without asking."],
     ], ([seed, gone, now]) => {
       const s = born(seed);
       if (gone === COURTS) expect(court(s), `${seed}: the town lacks a court`).toBe(false);
       else expect(market(s), `${seed}: the town lacks a market`).toBe(false);
-      expectAbsentWithAnchor(conflict(s), gone, now, `${seed}: the ladder's next line, not the line naming what it lacks`);
+      if (now === '') expect(conflict(s), `${seed}: no quarrel stored (G13)`).toBe('');
+      else expectAbsentWithAnchor(conflict(s), gone, now, `${seed}: the ladder's next line, not the line naming what it lacks`);
     }), 'each guard town prints the ladder\'s next line, not the line naming what it lacks');
   }, 240_000);
   it('the twins: each line keeps its place where its market or court stands', () => {
@@ -73,4 +77,62 @@ describe('POWERS-13 #291 · the conflict ladder names a market or a court only w
       expect(conflict(s), seed).toContain(line);
     }), 'each twin keeps the line its market or court bears out');
   }, 240_000);
+});
+
+// WORDS-2 E3, the tenth chair's RULING G9 (2), its STOP and RULING G13 (the owner's "Don't invent drama capitalize on what's
+// already there if it's there"): the cascade's last fall-through keeps a quarrel only where the record holds a fact that
+// distinguishes the place (`powerSiblings.js :: noGrazingQuarrelOf`): the grazing quarrel only where herding is what the place
+// lives by (its leading home food source, `foodRecord.foodSources[0]`, is the herds), never for a grazing house on the roster;
+// BAR8-K-POWERS's marsh, shore or water twin, word for word, where its own land holds that; a calm place holding none stores
+// none. The oracle here is the test's own reading of the record, not the leaf. Red first by name on 0ec96f13d8: C
+// dp-hamlet-1, -10, -101 and V dp-thorp-10 stored the grazing quarrel where grain, game or nothing leads. Controls that keep
+// their grounded quarrel: C dp-hamlet-0 (the herds lead), V dp-thorp-17 (the shore), dp-thorp-111 (water).
+/** What each named seed stores under G13 (read off the oracle-checked run above). */
+const EXPECTED = Object.freeze({
+  'C dp-hamlet-1': '', 'C dp-hamlet-10': 'marsh', 'C dp-hamlet-101': 'marsh', 'V dp-thorp-10': '',
+  'V dp-thorp-104': 'water', 'V dp-thorp-105': '', 'V dp-thorp-110': 'marsh', 'V dp-thorp-113': 'marsh',
+});
+describe('E3 · each fall-through quarrel only where the record holds a fact that distinguishes the place', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  const V = (/** @type {string} */ seed) => generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: seed.split('-')[1], _randomizePriorities: true }), null, { seed, customContent: {} });
+  const C = (/** @type {string} */ seed) => generateSettlementPipeline(birthConfig({ settType: seed.split('-')[1] }), null, { seed, customContent: {} });
+  /** @param {string} line */
+  const kindOf = (line) => (/grazing rights and water access/.test(line) ? 'grazing'
+    : /^A dispute over rights on the marsh/.test(line) ? 'marsh'
+      : /^A dispute over rights on the shore/.test(line) ? 'shore'
+        : /^A dispute over water access/.test(line) ? 'water' : '');
+  /** What the record holds, read by this test's own words. @param {any} s */
+  const holds = (s) => {
+    const grounds = (s?.config?.nearbyResources || []).map(String);
+    return {
+      grazing: s?.economicState?.foodSecurity?.foodRecord?.foodSources?.[0] === 'livestock',
+      marsh: grounds.some((g) => /marsh/i.test(g)),
+      shore: grounds.some((g) => /harbour|coast|shore|beach/i.test(g)),
+      water: grounds.some((g) => /marsh|harbour|coast|shore|beach|fish|river|oasis|spring|floodplain|lake/i.test(g))
+        || ['riverside', 'coastal'].includes(s?.config?.terrainType) || ['river', 'port'].includes(s?.config?.tradeRouteAccess),
+    };
+  };
+  /** @param {string} seed @param {any} s */
+  const read = (seed, s) => {
+    const k = kindOf(String(s.powerStructure?.recentConflict ?? ''));
+    const h = /** @type {Record<string, boolean>} */ (holds(s));
+    return { k, h, seed };
+  };
+  it('C dp-hamlet-1, -10, -101, V dp-thorp-10, -104, -105, -110, -113: herding does not lead, no grazing quarrel; any quarrel names what the land holds', () => {
+    const got = /** @type {Record<string, string>} */ ({});
+    const failures = collectSeedFailures(['C dp-hamlet-1', 'C dp-hamlet-10', 'C dp-hamlet-101', 'V dp-thorp-10', 'V dp-thorp-104', 'V dp-thorp-105', 'V dp-thorp-110', 'V dp-thorp-113'], (id) => {
+      const [corpus, seed] = id.split(' ');
+      const { k, h } = read(seed, corpus === 'C' ? C(seed) : V(seed));
+      expect(h.grazing, `${id}: herding does not lead`).toBe(false);
+      if (k) expect(h[k], `${id}: "${k}" quarrel, held ${JSON.stringify(h)}`).toBe(true);
+      got[id] = k;
+    });
+    expectNoSeedFailures(failures, 'no fall-through quarrel without its fact');
+    expect(got).toEqual(EXPECTED);
+  }, 240_000);
+  it('the controls keep their grounded quarrel: C dp-hamlet-0 grazing (the herds lead), V dp-thorp-17 the shore, dp-thorp-111 water', () => {
+    expect(kindOf(String(C('dp-hamlet-0').powerStructure?.recentConflict ?? ''))).toBe('grazing');
+    expect(kindOf(String(V('dp-thorp-17').powerStructure?.recentConflict ?? ''))).toBe('shore');
+    expect(kindOf(String(V('dp-thorp-111').powerStructure?.recentConflict ?? ''))).toBe('water');
+  }, 180_000);
 });
