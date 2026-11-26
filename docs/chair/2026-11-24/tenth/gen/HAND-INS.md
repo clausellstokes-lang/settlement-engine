@@ -191,3 +191,5 @@ started together.
 lessons). ITS DEAREST READING FOR THE LEAST: `docs/OPERATING_STANDARD.md` (36 KB): the owner's standing instruction makes every
 session read it, so no seat is excused it by the chair; the saving is that small, ruled units go to builders on the chair's
 machine, which read a brief and CLAUDE.md. NO SEAT IS WORKING.
+
+| CURES OF 119 (G72 (1), (2), (4), (5), (6)) | CURE-119, LOCAL builder | `lane/stack-119-cures-wip-2026-11-26` (tree /home/user/wt/cure119, never pushed by the builder), tip 26c19ddecf on ef10a71f3a: 57ff4f89ad, 5b94c6cb32, 927e3747bf, bc312a455f, b6eaf811b0, two observed-shape door commits, one commit moving its tests into their existing homes | handed in 23:11 UTC 2026-11-26; src: five files (two generated strings, `commoditiesShown.js`, `settlement.schema.js`, `genesis.js`), READ BY THE CHAIR; proofs: master-born 0 of 360 moved; C and V traditions byte-equal after cure 1; cure 4 moves V dp-city-54 only (prints "Desert grain" and "grain"); soak 0-479 false prints 0 on every viability line; A0b over-claims 19; the lighting census's title count 32,035 to 32,045 is re-taken by its door at the join; the reader is on them |
