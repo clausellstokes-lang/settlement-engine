@@ -868,14 +868,14 @@ function outlookFactsOf(settlement) {
     settlement, { side: 'imports', exports: Array.isArray(eco.primaryExports) ? [...eco.primaryExports] : [] })); // a copy read (tradeListWriters)
   return {
     keepsOrder: law !== 'critical' && law !== 'collapsed' && !OPEN_REVOLT.some((t) => stressTypes.includes(t)), // TAIL-DEFECON-D (#01134): not under open revolt
-    paysItsWay: !['Subsistence', ...PROSPERITY_LABELS.slice(0, PROSPERITY_LABELS.indexOf('Poor') + 1)].includes(String(eco.prosperity ?? '')) && !stressTypes.includes('indebted'), // VIABILITY-TRUE (G61): not beside the printed debt line
+    paysItsWay: !['Subsistence', ...PROSPERITY_LABELS.slice(0, PROSPERITY_LABELS.indexOf('Poor') + 1)].includes(String(eco.prosperity ?? '')) && !owesDebtShown(settlement), // VIABILITY-TRUE (G61): not beside the printed debt line; VIABILITY-TRUE-2 (G68 (V1)): every home that prints one
     // VIABILITY-TRUE (the tenth chair's G61): the three gates read WHAT THE PAGE PRINTS: the food row's own pounds brought in
     // (`foodRowShown.js`, with the tab's carrier test; the record's rounded share read 0% beside "+ 1 imported"), a good on the
     // printed arriving list that is a food source's own good (`commoditiesShown.js :: isFoodSourceGood`), the
     // printed arriving list itself; and the debt line the page prints (the `indebted` stress's own sentence).
     buysFood: foodPoundsShown(settlement) > 0 || arrivingShown(settlement).some(isFoodSourceGood),
     buysIn: foodPoundsShown(settlement) > 0 || arrivingShown(settlement).length > 0,
-    owesDebt: stressTypes.includes('indebted'),
+    owesDebt: owesDebtShown(settlement), // VIABILITY-TRUE-2 (G68 (V1)): the stress's debt line or the tension's
     needsImports: imports.some((imp) => necessity.some((n) => imp.includes(n)) || terrain.some((t) => imp.includes(t) || t.includes(imp))),
   };
 }
@@ -968,6 +968,26 @@ function foodPoundsShown(settlement) {
   const eco = /** @type {Parameters<typeof carriersOf>[1]} */ (/** @type {{ economicState?: unknown } | null | undefined} */ (settlement)?.economicState);
   const view = /** @type {Parameters<typeof foodBalanceShown>[1]} */ (/** @type {{ economicViability?: unknown } | null | undefined} */ (settlement)?.economicViability);
   return Number(foodBalanceShown(foodRowShown(s, !!carriersOf(/** @type {Parameters<typeof carriersOf>[0]} */ (settlement), eco)), view)?.importCoverage) || 0; // G68 (V2): the tab's own value, its fallback included
+}
+/**
+ * VIABILITY-TRUE-2 (the tenth chair's G68 (V1)): DOES THE PAGE PRINT THAT THE PLACE OWES A DEBT? The homes that print such a
+ * sentence, found by rendering the page (CLOSE-11, on a copy of 7279e571c: the Overview, History, Daily Life, Economics and
+ * Viability tabs of C's thorps and hamlets and soak 0-999, 1,300 places; every sentence holding "owes", "debt", "repay",
+ * "creditor" or "loan" read, and each that says THE PLACE owes traced to its home): (1) the `indebted` STRESS (its card,
+ * "owes an outside power more than it can ever repay", its beats and the governing modifier "the creditors have a say in
+ * every decision"); (2) the `outside_debt` TENSION (`history.currentTensions`: "The settlement owes a heavy debt to an outside
+ * power, and the power is preparing to collect", soak1k-361 with no stress). Every place-owes sentence of the 1,300 sat on a
+ * place holding one of the two (the history's origin line "owes more than it owns", 19 places, among them); the rest of
+ * what the words matched is not the place owing (a past Debt Crisis, the bank's loans, a quarrel between two powers, one
+ * household's dues). ONE READER, here, for the three gates that need it (L1, L2, L4, L5 and the strained line).
+ * @param {unknown} settlement @returns {boolean}
+ */
+function owesDebtShown(settlement) {
+  const s = /** @type {{ stress?: unknown, history?: { currentTensions?: unknown } | null } | null | undefined} */ (settlement);
+  const stress = Array.isArray(s?.stress) ? s.stress : s?.stress ? [s.stress] : [];
+  if (stress.some((e) => /** @type {{ type?: unknown } | null} */ (e)?.type === 'indebted')) return true;
+  const tensions = s?.history?.currentTensions;
+  return Array.isArray(tensions) && tensions.some((t) => /** @type {{ type?: unknown } | null} */ (t)?.type === 'outside_debt');
 }
 /** VIABILITY-TRUE (G61): the Economics tab's printed arriving list. @param {unknown} settlement @returns {string[]} */
 function arrivingShown(settlement) {
