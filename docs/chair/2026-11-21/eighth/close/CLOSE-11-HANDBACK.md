@@ -9,33 +9,25 @@ A seat of THE TENTH CHAIR (session_019yED1SUxGVHyjQnoqoFvQ8), successor of CLOSE
 Base: the line `lane/join-2026-11-14` at POINT 118, 9d22f040e. Each unit in its own worktree (`/home/user/wt-<unit>`,
 node_modules symlinked; `/node_modules` and `/.husky/_` in the clone's `info/exclude`), pushed from that worktree.
 
-### 0.1 The units
+### 0.1 The units (order by the chair, 17:01 UTC: B1(i)c-2, C4's gate, VIABILITY-TRUE-2, P9b-2, B1(ii); then the join)
 
 | unit | branch | tip | state |
 |---|---|---|---|
-| (1) B1(i)c-2 (G67) | lane/close-11-2026-11-26-b1ic2-wip | 38e92b68e (on CLOSE-10's 19a5855f3) | built, red 5 then 30/30; dirs gate queued |
-| (2) E13d-3 (G67) | lane/close-11-2026-11-26-e13d3-wip | 9e73a943a (on CLOSE-10's 559fcc0d1) | built; typechecks green; tests/lint whole running |
-| (3) C4-SECOND-LINE (G49) | lane/close-11-2026-11-26-c4second-wip | (uncommitted in /home/user/wt-c4s) | line 8 appended and projected; red-first and measure running |
-| (4) B1(ii) (G64) | — | — | not started |
-| (5) cures of P9b / VIABILITY-TRUE | — | — | wait for the chair's rulings |
-| (6) THE JOIN | — | — | when the chair says |
+| (1) B1(i)c-2 (G67) | lane/close-11-2026-11-26-b1ic2-wip | 38e92b68e (on 19a5855f3) | built; dirs gate (lint, generators, data, copy) RUNNING; then push + hand-in |
+| (2) E13d-3 (G67) | lane/close-11-2026-11-26-e13d3-wip | 9e73a943a | PUSHED, HANDED IN, ACCEPTED (17:01) |
+| (3) C4's gate (copy of CLOSE-10's 3647bae53) | lane/close-11-2026-11-26-c4second-wip | 1e35d273a (wiring census by its door) | gate: 20 red, 7 line's, 13 its own; ruling asked on the shift register (owner-gated pins) and A0b over-claim 20>19 |
+| (4) VIABILITY-TRUE-2 (G68: V1 debt homes, V2 the tab's fallback, V3 comment) | lane/close-11-2026-11-26-viability2-wip | 7279e571c + V2 uncommitted in /home/user/wt-via2 | V1's render measure (debt homes, scratch via/) and V3's measure queued on /home/user/wt-via-base |
+| (5) P9b-2 (G68: P1 SummaryTab sixth mean, P2 non-numeric score) | — | — | not started |
+| (6) B1(ii) (G64) | lane/close-11-2026-11-26-b1ii-wip | uncommitted in /home/user/wt-b1ii | coded (`settlement.schema.js :: bornByThisEngine`; `genesis.js :: fieldRiteRefused`, the rule after the draw; census row B1furrow + plant/controls); typechecks green; line measure: field shown 362/1800, refusing 246, refusing+field 61, farmland admits 32; master-born 360 (stamp 0.9.0) shown sets byte-equal 360/360; after-births queued |
 
-**(1) B1(i)c-2.** `LAND_GIVERS.furs.routes: ['port']`; comments in geographyData.js and the catalogue row corrected, the
-port residual named. Measured (V and soak city+metro, 632; 120 desert ports forced, `dpp-<size>-<i>` = V's config +
-`terrainOverride: 'desert'`, `tradeRouteAccess: 'port'`): every desert port prints isEntrepot (soak 9/9, forced 120/120);
-desert ports byte-equal to the line 129/129; everything else byte-equal to 19a5855f3 623/623; moved vs the line V 10,
-soak 18, forced 0, non-desert 0. Stored at birth. OWED: the dirs gate (lint, generators, data, copy) read against the
-line's list + C1 + the two stored figures; push; hand-in.
+**C4's 13 own reds** (a) count pins +1: projection MUTANT 3182, proseComposed GUARD 3182, wiring VARIANT 3182, composeStateProse 3182,
+proseEntryContradiction 3650/2942, PAYOFF Poor/road 3->4, stateProseKernel UNIFORM group list; (b) doors: wiring census (DONE
+1e35d273a), observed-shape baseline --write (owed); (c) SHIFT REGISTER 5 pins, owner-gated: ASKED; (d) A0b over-claim 20 > 19: re-run
+after the census queued (shared run).
 
-**(2) E13d-3.** b52ec10f5 reverts SAMENESS-KEYS (sameness-census.mjs byte-equal to 50765e60d); 228123b7b `isNotDrawn`
-(one leading bullet dropped; the bare side matched against the skip set and each title as printed, uncut: 10 titles of
-23-24 letters) + the guard's header names what it does not see; 9e73a943a the lighting census by its door (titles
-32028 -> 32026). Red first 1, walker 33/33. Typechecks 167/1113. Register NOT re-taken.
-
-**(3) C4-SECOND-LINE.** Line 8 `[street · no crisis: under_siege · no crisis: plague_onset]` in the content document,
-`npm run gen:dossier-prose` (economy 519 -> 520 variants). Red-first arm at the foot of
-`tests/domain/economyStateProseDesk.test.js` (the calm-only lines are [1, 8]). EXPECTED to move: the same file's
-"THE PAYOFF" pin `drawnKeys('Poor', 'road', …).size` 3 (a count my unit moves: re-record in the same commit, named).
+**For the chair (asked 16:50):** the file of the start list that cost the most and gave the least: `docs/OPERATING_STANDARD.md`
+(36 KB, nearly all about seats, batching and the chair's own tooling; for a close seat only rule 1 and §6 bind, and CLAUDE.md
+and COMMON-RULES already carry both).
 
 ### 0.2 Tools (scratch: /tmp/claude-0/…/scratchpad/tools)
 CLOSE-8's births harness (`births.mjs`, `births.census.jsx`), CLOSE-10's measures; `run-births.sh <tree> <plan> <out>
