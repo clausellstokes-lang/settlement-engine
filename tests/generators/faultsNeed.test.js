@@ -11,6 +11,9 @@
 //            `importsAsPrinted(record).needed`, label by label, on every town this file births (the seventh read's thirty and the
 //            fixed towns of the other items) and on a constructed record for each branch of the page's reader; its copied tables
 //            are held to their homes; `need not brought in: <family>` reads it through `factsOf`, the public page and the veil alike.
+//            NEED-ATOM (CLOSE-8's cure 3b, 2026-11-25): the atom's copy of the page's "short" reads the houses that stand and
+//            the mark the page reads (r2r-town-54's Butchers, short of livestock with no gap row): `HOUSE_STOCK_COPY` and
+//            `GOOD_HAD_COPY` held to their homes and to the page itself, ground by ground and branch by branch.
 //   item 2   11e.wantBuy: a card's SUPPLY dependency goal ("Buy {resource} at the market …", "Secure a steady supply of {resource}
 //            …") is dealt only where its good is brought in or had: never where the need list names it (C8867,
 //            bar0-city-wartime-rand-45's "Buy stone and iron and grain …" beside "Needed, and not brought in: stone, …").
@@ -23,7 +26,7 @@ import { beforeAll, describe, expect, it } from 'vitest';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { importsAsPrinted, needMetBy, NEED_DEALT_ROWS, MARKS } from '../../src/domain/display/tradeListDisplay.js';
-import { MARK_RES, NEED_DEALT_ROWS_COPY, NEED_KEYS, WORKING_CHAIN_STATUSES_COPY, goodNeededNotBroughtIn, needListOf, needNotBroughtInOf } from '../../src/domain/facts/needNotBroughtIn.js';
+import { GOOD_HAD_COPY, HOUSE_STOCK_COPY, MARK_RES, NEED_DEALT_ROWS_COPY, NEED_KEYS, WORKING_CHAIN_STATUSES_COPY, goodNeededNotBroughtIn, needListOf, needNotBroughtInOf } from '../../src/domain/facts/needNotBroughtIn.js';
 import { FACT_DIMENSIONS, atomHolds, declarationAdmits } from '../../src/domain/facts/factVocabulary.js';
 import { variantFactDeclaration } from '../../src/domain/display/stateProse/stateProseKernel.js';
 import { DOSSIER_STATE_PROSE_ECONOMY } from '../../src/data/dossierStateProse/economy.generated.js';
@@ -34,6 +37,9 @@ import { GOAL_FAMILY_LINES } from '../../src/data/people/goalFamilies.js';
 import { WORKING_CHAIN_STATUSES } from '../../src/domain/facts/chainWorking.js';
 import { rowShortOf } from '../../src/domain/display/crisisStoppedRow.js';
 import { liveInstitutions } from '../../src/domain/institutions/institutionRoster.js';
+import { HOUSE_NEED_INPUT, HOUSE_TRADE_INPUT, INPUT, houseDependenceOf } from '../../src/data/crisisDependence.js';
+import { CHAIN_INPUTS } from '../../src/domain/facts/houseInputAtHand.js';
+import { RESOURCE_DATA } from '../../src/data/goods/identity.js';
 
 /** The towns each item is held in, with the items each one holds (the controls beside them). */
 const TOWNS = Object.freeze({
@@ -166,7 +172,25 @@ describe('FAULTS-NEED item 1: the atom `need not brought in` (FR2) states the pa
     expect(MARK_RES.map(String)).toEqual(MARKS.map((m) => String(m.re)));
     expect(NEED_DEALT_ROWS_COPY.map(([g, re]) => [g, String(re)])).toEqual(NEED_DEALT_ROWS.map(([g, re]) => [g, String(re)]));
     expect([...(FACT_DIMENSIONS['need not brought in'].keys || [])]).toEqual([...NEED_KEYS]);
+    // NEED-ATOM: the copy of the houses whose stock a row deals in is the dependence table's own, each through the page's gate
+    const dealtGood = (/** @type {string} */ key) => NEED_DEALT_ROWS_COPY.map(([g]) => g).find((g) => needMetBy(g, String(CHAIN_INPUTS[key]?.noun ?? key)));
+    const want = Object.fromEntries(Object.entries(HOUSE_NEED_INPUT).filter(([, key]) => dealtGood(key)).map(([id, key]) => [id, dealtGood(key)]));
+    expect({ ...HOUSE_STOCK_COPY }).toEqual(want);
+    expect(Object.keys(HOUSE_STOCK_COPY).length, 'the copy holds a row (the butchers)').toBeGreaterThan(0);
+    expect(Object.entries(HOUSE_TRADE_INPUT).filter(([, key]) => dealtGood(key)), 'no trade house\'s good is one a row deals in').toEqual([]);
+    for (const id of Object.keys(HOUSE_STOCK_COPY)) expect(houseDependenceOf({ catalogId: id }), `${id} passes rowShortOf's gate`).toContain(INPUT);
+    expect(Object.keys(GOOD_HAD_COPY).sort()).toEqual([...new Set(Object.values(HOUSE_STOCK_COPY))].sort());
   });
+  // NEED-ATOM: a butcher (its stock livestock), a fair's livestock auction, no house that proves a pasture: the page's mark decides
+  const stockTown = (/** @type {Record<string, unknown>} */ over = {}, /** @type {Record<string, unknown>} */ eco = {}) => ({
+    tier: 'town', config: { tradeRouteAccess: 'road', nearbyResources: [], nearbyResourcesDepleted: [], stressTypes: [] },
+    institutions: [{ name: 'Butchers (3-8)', catalogId: 'butchers_3_8', tags: ['food'] }, { name: 'Annual fair', catalogId: 'annual_fair' }],
+    economicState: { primaryImports: [], primaryExports: [], localProduction: [], activeChains: [], ...eco },
+    resourceAnalysis: { imports: { critical: ['Livestock for meat and draft', 'salt'] }, gaps: [] },
+    availableServices: { economy: [{ name: 'Livestock auction', institution: 'Annual fair' }] },
+    ...over,
+  });
+  const LABEL = 'Livestock for meat and draft';
   it('a constructed record: each branch of the page\'s reader, the leaf beside it', () => {
     const base = town({});
     same(base);
@@ -209,6 +233,46 @@ describe('FAULTS-NEED item 1: the atom `need not brought in` (FR2) states the pa
     const shortGaps = [{ chain: 'livestock', institution: 'Dairy farmer', kind: 'missing', impact: 'No livestock reaches the dairy farmer.' }];
     same(rows('Shepherd', shortGaps));
     expect(needListOf(rows('Shepherd', shortGaps))).toContain('livestock');
+    // NEED-ATOM: the stock good had or not (`HOUSE_STOCK_COPY`, `GOOD_HAD_COPY`), the leaf beside the page, branch by branch
+    same(stockTown());
+    expect(needListOf(stockTown()), 'r2r-town-54\'s shape: the butchers stand short of livestock, the auction answers nothing').toContain(LABEL);
+    const fed = stockTown({}, { foodSecurity: { foodRecord: { foodSources: ['livestock'] } } });
+    same(fed);
+    expectAbsentWithAnchor(needListOf(fed), LABEL, 'salt', 'the food record\'s livestock feeds the butchers: the auction answers the need');
+    const made = stockTown({}, { localProduction: ['Livestock'] });
+    same(made);
+    expectAbsentWithAnchor(needListOf(made), LABEL, 'salt', 'the town\'s own livestock');
+    // a house of another stock, a dead butcher, a custom one, or one the record's gap rows speak of: not read by the copy
+    for (const butcher of [{ name: 'Butchers (3-8)', catalogId: 'butchers_3_8', status: 'ruined' }, { name: 'Butchers (3-8)', catalogId: 'butchers_3_8', custom: true }]) {
+      const s = stockTown({ institutions: [butcher, { name: 'Annual fair', catalogId: 'annual_fair' }] });
+      same(s);
+      expectAbsentWithAnchor(needListOf(s), LABEL, 'salt', 'no standing native butcher: the auction answers the need');
+    }
+    const gapped = stockTown({ resourceAnalysis: { imports: { critical: [LABEL, 'salt'] }, gaps: [{ chain: 'grain', institution: 'Butchers (3-8)', kind: 'imported', impact: 'Butchers (3-8) runs on imported grain' }] } });
+    same(gapped);
+    const unnamed = stockTown({ resourceAnalysis: { imports: { critical: ['salt'] }, gaps: [] } });
+    same(unnamed);
+    for (const imp of ['Livestock', 'Game and hides (local hunting grounds exhausted)', 'Raw hides and animal products', 'Livestock equipment', 'Carved livestock figures', 'Animal fat', 'Hides']) {
+      const s = stockTown({}, { primaryImports: [imp] });
+      expect(needListOf(s), imp).toEqual(importsAsPrinted(s).needed);
+    }
+    expectAbsentWithAnchor(needListOf(stockTown({}, { primaryImports: ['Game and hides (local hunting grounds exhausted)'] })), LABEL, 'salt', 'game stocks the butchers\' counters');
+    expect(needListOf(stockTown({}, { primaryImports: ['Livestock equipment'] }))).toContain(LABEL);
+    /** @type {string[]} */
+    const gives = [];
+    for (const key of Object.keys(RESOURCE_DATA)) {
+      const live = stockTown({ config: { tradeRouteAccess: 'road', nearbyResources: [key], nearbyResourcesDepleted: [], stressTypes: [] } });
+      expect(needListOf(live), `${key} live`).toEqual(importsAsPrinted(live).needed);
+      if (!needListOf(live).includes(LABEL)) gives.push(key);
+      const spent = stockTown({ config: { tradeRouteAccess: 'road', nearbyResources: [key], nearbyResourcesDepleted: [key], stressTypes: [] } });
+      expect(needListOf(spent), `${key} used up`).toEqual(importsAsPrinted(spent).needed);
+      expect(needListOf(spent), `${key} used up gives nothing`).toContain(LABEL);
+    }
+    expect(gives.sort(), 'the copy\'s grounds are the ones the page reads as giving livestock').toEqual([...GOOD_HAD_COPY.livestock.grounds].sort());
+    // a ground a house implies (a shepherd's pasture) is there: the page and the leaf alike
+    const shepherd = stockTown({ institutions: [...stockTown().institutions, { name: 'Shepherd', catalogId: 'shepherd' }] });
+    same(shepherd);
+    expectAbsentWithAnchor(needListOf(shepherd), LABEL, 'salt', 'the shepherd proves the pasture');
     // no resource analysis: no list, no answer
     expect(needListOf({})).toEqual([]);
     expect(needNotBroughtInOf({})).toBeUndefined();
