@@ -187,7 +187,10 @@ describe('the chair\'s lines of B3 F1: A4, A12, T9, C5 and F0', () => {
       expect(line, `${slot}.${branch} ${id}`).toBeDefined();
       expect(line?.text, `${slot}.${branch} ${id}`).toBe(text);
       expect(line?.needs, `${slot}.${branch} ${id}`).toEqual(needs);
-      expect(line?.excludes, `${slot}.${branch} ${id}`).toBeUndefined();
+      // the tenth chair's G45 (8) (CURE-118 (3)): A4's "every household has enough" refuses a printed Pressured, A7's claim; A4
+      // ALONE carries that exclusion, exactly; A12, T9, C5 and F0 carry none
+      if (slot === 'food_culture' && branch === 'adequate' && id === 'A4') expect(line?.excludes, `${slot}.${branch} ${id}`).toEqual(['food: = pressured']);
+      else expect(line?.excludes, `${slot}.${branch} ${id}`).toBeUndefined();
     }
   });
   it('no line prints where its record lacks what it needs (grain, grain imported, a market), on the 30 born places', () => {

@@ -320,7 +320,7 @@ export function deriveViability(settlement) {
       `${town} feeds itself and pays its own way.`,
       `${town} grows what it eats and makes what it needs, and owes no one for either.`,
       `Nothing ${town} needs to get through the year has to come from outside.`,
-      `${town} feeds itself and pays its way, and buys in what it cannot make for itself.`,
+      `${town} feeds itself and pays its way, and buys in some of what it cannot make for itself.`, // RULING CURE-118-6 (K): "some of" (a need may go unmet)
       `What ${town} eats it grows, and what it spends it earns; some of what it uses is bought in.`,
     ], [!seen.buysFood && seen.paysItsWay, !seen.buysFood && !seen.needsImports, !seen.buysFood && !seen.needsImports,
       !seen.buysFood && seen.paysItsWay && seen.buysIn, !seen.buysFood && seen.paysItsWay && seen.buysIn], seen.buysIn ? `${town} gets through the year, buying in what its own land and trades do not provide.` : `${town} gets through the year on its own land and trades, and goes without what they do not provide.`)}`, // TAIL-DEFECON-D (#00585): it buys in only where something arrives

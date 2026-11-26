@@ -309,24 +309,33 @@ export function fundingReasonAsPrinted(reason, record) {
 }
 
 // ─── WORDS-2, the tenth chair's RULING G6 #11 (E2's census: "no stable governing authority" said three times on one page) ───
-import { isEdited } from '../userEdits.js';
-/** The safety line's opening clause of the political fracture (`generators/safetyProfile.js`, its two lines). */
-const NO_STABLE_AUTHORITY = /No stable governing authority[.;] (\w)/;
 /**
- * THE SAFETY LINE WITHOUT THE THIRD TELLING: where the page's identity line already says the place has no stable governing
- * authority (the stored stability, `settlementQuickGuide.js :: governsLine`, which the Overview prints and the Power tab
- * repeats), the Defense tab's line drops its own opening clause and begins at the next one ("Whoever holds sway decides…",
- * "Enforcement is inconsistent; …"). A shared page reads the record it is handed the same way (its Overview prints the
- * identity line too: soak1k-7; RULING CURE-118-5 (6)), so the owner's player view and the shared page print the same line;
- * a record that carries no such stability keeps the line whole by the test below. A DM's own line (an edited field) is
- * returned as written.
+ * The engine's two sentences of the political fracture, each spelled WHOLE (RULING CURE-118-7 (6c)): the generator writes
+ * them (`generators/safetyProfile.js`, by the size of the place and its force); the capture is what the Defense tab prints of
+ * each. Regex literals, so no presumption or copy walker reads a second copy of the sentence. Tied to the generator's
+ * wording by `tests/domain/bar5SafetyLawBand.test.js` (CURE-118 (6c)), which bears places carrying each.
+ */
+const NO_STABLE_AUTHORITY_SENTENCES = Object.freeze([
+  /No stable governing authority; (whoever holds sway decides what rules apply, and that changes\.)/g,
+  /No stable governing authority\. (Enforcement is inconsistent; which power controls a district determines what rules apply\.)/g,
+]);
+/**
+ * THE SAFETY LINE WITHOUT THE THIRD TELLING: where the record's stored stability says the place has no stable governing
+ * authority (the identity line, `settlementQuickGuide.js :: governsLine`: the Overview prints it on a stamped record, the Power
+ * tab on every page and every share), the Defense tab's line drops the opening clause of the ENGINE'S OWN sentence and begins
+ * at the next one ("Whoever holds sway decides…", "Enforcement is inconsistent; …"). RULING CURE-118-6 (6b): only the engine's
+ * two sentences are trimmed, recognised WHOLE (`NO_STABLE_AUTHORITY_SENTENCES`, the generator's wording spelled by pattern;
+ * RULING CURE-118-7 (6c)); any other text, an owner's own line among it, is returned as written. The function needs to know neither who wrote
+ * the line nor which page prints it: the owner's view and the shared page run the same text through the same test.
  * @param {string | null} line the line as printed (`defenseDisplay.js :: deriveSafetyLine`)
  * @param {unknown} record
  * @returns {string | null}
  */
 export function safetyLineSaidOnce(line, record) {
-  if (typeof line !== 'string' || isEdited(/** @type {never} */ (record), 'economicState.safetyProfile.safetyDesc')) return line;
+  if (typeof line !== 'string') return line;
   const stability = /** @type {{ powerStructure?: { stability?: unknown } } | null} */ (record)?.powerStructure?.stability;
   if (!/no stable governing authority/i.test(String(stability ?? ''))) return line;
-  return line.replace(NO_STABLE_AUTHORITY, (_, /** @type {string} */ c) => c.toUpperCase());
+  let out = line;
+  for (const re of NO_STABLE_AUTHORITY_SENTENCES) out = out.replace(re, (_, /** @type {string} */ rest) => rest[0].toUpperCase() + rest.slice(1));
+  return out;
 }

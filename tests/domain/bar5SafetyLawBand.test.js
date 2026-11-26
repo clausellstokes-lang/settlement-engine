@@ -28,6 +28,8 @@ import { deriveSafetyLine } from '../../src/domain/display/defenseDisplay.js';
 import { governsLine } from '../../src/domain/summary/settlementQuickGuide.js';
 import { COURT_AND_PRISON, COURT_NO_PRISON, NO_WATCH_SMALL } from '../../src/generators/safetyProfile.js';
 import { applyUserEdit } from '../../src/domain/userEdits.js';
+import { toPublicSafe } from '../../src/domain/display/publicSafe.js';
+import { projectShareVeil } from '../../src/domain/display/galleryVeil.js';
 
 const SIZE = '(thorp|hamlet|village|town|city|metropolis)';
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -185,4 +187,44 @@ describe('G6 #11 (WORDS-2): "no stable governing authority" is not told a third 
       expect(safetyLineSaidOnce(stored, s), `${seed}: the shared page prints the owner's line`).toBe(owner);
     }
   });
+});
+
+// RULING CURE-118-6 (6b): the function trims ONLY the engine's own two sentences, recognised whole by their text; it needs to
+// know neither who wrote the line nor which page prints it. An owner's own line that opens with the same words prints WHOLE on
+// the owner's page and on the shared page (the edit marks are not served: `publicSafe.js`), in both of the engine's forms.
+describe('CURE-118 (6b): an owner\'s own line is never trimmed, on either page', () => {
+  const C = (/** @type {string} */ seed) => generateSettlementPipeline(birthConfig({ settType: seed.split('-')[1] }), null, { seed, customContent: {} });
+  for (const own of ['No stable governing authority; the three farms each keep their own peace.', 'No stable governing authority. The three farms each keep their own peace.']) {
+    test(`dp-thorp-101 edited to "${own}"`, () => {
+      const s = /** @type {any} */ (structuredClone(C('dp-thorp-101')));
+      expect(String(s.powerStructure?.stability), 'the stored stability says it').toMatch(/no stable governing authority/i);
+      applyUserEdit(s, 'economicState.safetyProfile.safetyDesc', own);
+      const shared = projectShareVeil(toPublicSafe(structuredClone(s)), null);
+      expect(deriveSafetyLine(s), 'the owner\'s stored line').toContain(own);
+      expect(safetyLineSaidOnce(deriveSafetyLine(s), s), 'the owner\'s page').toContain(own);
+      expect(safetyLineSaidOnce(deriveSafetyLine(shared), shared), 'the shared page').toContain(own);
+    });
+  }
+});
+
+// RULING CURE-118-7 (6c): the Defense tab spells the engine's two sentences by pattern (`guardLineUnderTheLaw.js ::
+// NO_STABLE_AUTHORITY_SENTENCES`); the generator writes them (`safetyProfile.js`). This arm ties the two spellings together on
+// born places carrying each: if the generator's wording ever moves, it goes red.
+describe('CURE-118 (6c): the engine\'s two sentences are recognised whole (red if the generator\'s wording moves)', () => {
+  const C = (/** @type {string} */ seed) => generateSettlementPipeline(birthConfig({ settType: seed.split('-')[1] }), null, { seed, customContent: {} });
+  for (const [form, seeds, opening, rest] of /** @type {const} */ ([
+    ['";" (small or no force)', ['dp-thorp-13', 'dp-thorp-95', 'dp-thorp-101'], 'No stable governing authority; ', 'Whoever holds sway decides'],
+    ['"." (a force stands)', ['dp-town-38', 'dp-town-42', 'dp-town-56'], 'No stable governing authority. ', 'Enforcement is inconsistent;'],
+  ])) {
+    test(`the ${form} sentence: ${seeds.join(', ')}`, () => {
+      for (const seed of seeds) {
+        const s = C(seed);
+        const stored = String(deriveSafetyLine(s) ?? '');
+        expect(stored, `${seed}: the stored line carries the sentence`).toContain(opening);
+        const said = String(safetyLineSaidOnce(stored, s) ?? '');
+        expect(said, `${seed}: recognised, and the remainder printed`).toContain(rest);
+        expect(said, `${seed}: recognised, the opening clause dropped`).not.toContain(opening); // anchored: the stored line is proved to hold it above
+      }
+    });
+  }
 });
