@@ -125,3 +125,12 @@ provide." NEW ON A PAGE, the owner's to veto: twin A and DS-GEN-18 line 2 with "
 **CLOSE-10 HANDED OVER at 9355bed72** (`lane/close-10-2026-11-26`; its hand-back section 0; its tools under `close-10/tools`).
 C4-SECOND-LINE was BUILT by it (3647bae53) and NOT PUSHED: the chair asked it to push and hand it in (16:11 UTC); if it does not,
 CLOSE-11 rebuilds it (G49).
+
+| CLOSE-10 | C4-SECOND-LINE (one always-true line for pool C4) | lane/close-10-2026-11-26-c4second-wip | 3647bae53 (on the line 9d22f040e4) | handed in 16:14 UTC BUILT BUT UNGATED (only the pre-push hook's fast path ran): CLOSE-11 gates it on a copy (its unit 3) | G49 |
+
+C4-SECOND-LINE as its seat reports it: line 8 "{settlement} is poor, and its {access} has not changed that." written in the
+content document and projected (C4 seven variants to eight); view time; records 0; v1 on the soak 215 pages to 127; line 8 on
+119 soak pages (88 from v1, 31 re-dealt from other C4 lines by the pool's modulo pick: the D13 class); C4 places whose line
+moves: soak 119, C 17, V 111; every {access} fill read (the port, the crossroads, the road, the river), sound in the
+sentence. NEW ON A PAGE, the owner's to veto: that sentence.
+**CLOSE-10's FINAL HAND-OVER IS c4aa73338** (its hand-back's section 0.2 filled). Its five units of point 119 are on origin.
