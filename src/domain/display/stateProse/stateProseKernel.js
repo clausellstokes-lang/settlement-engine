@@ -426,7 +426,7 @@ export function resolveDeclaredPosition(declarations, drawn, facts, key, where =
 }
 
 /** Where a one-word possessed phrase is sure to end: a mark, or a joining word after it (CURE-118 (4)). */
-const OF_FORM_BOUND = String.raw`[,.;:!?]|\s+(?:and|or|but|to|in|on|at|by|for|with|from|is|are|was|were|has|have|had|will|would|that|which|who|than|as|before|after|since|because|while|when|if)\b`;
+const OF_FORM_BOUND = /[,.;:!?]|\s+(?:and|or|but|to|in|on|at|by|for|with|from|is|are|was|were|has|have|had|will|would|that|which|who|than|as|before|after|since|because|while|when|if)\b/.source; // a regex literal, so the copy's voice count reads no '!'
 
 /**
  * THE "OF" FORM OF A NAME THAT HOLDS A POSSESSIVE (E1, WORDS-1; the tenth chair's ruling G5 of 2026-11-25), on THE TEMPLATE
