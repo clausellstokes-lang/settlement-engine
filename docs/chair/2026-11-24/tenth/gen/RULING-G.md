@@ -724,3 +724,10 @@ read had printed the Power tab without its record (a fault of the chair's script
 Appointee" and said "the office, not the person". WRITTEN DOWN, SMALL, MEASURE FIRST ("OVERVIEW-NAMES-THE-SEAT"): the
 Overview's "Governed by" line names the power and its stability and not the holder, who is one tab away; whether the first
 screen should carry the name (not where the seat is empty, and never a veiled face on a player view or a share).
+
+**G59 (11:22 UTC on 2026-11-26): (6c) ACCEPTED; THE CURES' BRANCH IS WHOLE AT bd5ad2da0c.** `safetyProfile.js` byte-equal to
+d0dc0eddb0, the leaf deleted; two whole-sentence patterns in `guardLineUnderTheLaw.js`, no `isEdited`, no page; the tying test
+bears three places of each sentence; against (6b)'s function 4,444 printed Defense lines compared (C, V, soak 0 to 419, the two
+edited cases; owner's page and shared page): differing 0; no walker objected; tests/lint at its three base reds; typechecks at
+their ceilings; tests/copy 175 of 175; `publicProseEquality` 428 of 428. Read by the chair. `landing/RULING-118-3.txt` (amended
+to name it) SENT to the helper: the last merge, the gate, the push of `lane/stack-118-wip-2026-11-26`.
