@@ -473,6 +473,7 @@
   {"pool":"src/data/dailyLife/commonerResentments.js :: COMMONER_RESENTMENTS::food","sha":"4fbba5294d2c","house":"market"},
   {"pool":"src/data/dailyLife/commonerResentments.js :: COMMONER_RESENTMENTS::food","sha":"798b8a31bfdf","house":"market"},
   {"pool":"src/data/dailyLife/commonerResentments.js :: COMMONER_RESENTMENTS::food","sha":"ab17d974c4d6","house":"market"},
+  {"pool":"src/data/dailyLife/commonerResentments.js :: COMMONER_RESENTMENTS::legitimacy","sha":"ecd9893f7982","house":"institution: lordsSteward"},
   {"pool":"src/data/dailyLife/commonerResentmentsDm.js :: COMMONER_RESENTMENTS_DM::crime55","sha":"19590512b977","house":"market"},
   {"pool":"src/data/dailyLife/commonerResentmentsDm.js :: COMMONER_RESENTMENTS_DM::crime55","sha":"3ba9920dfeb7","house":"gate"},
   {"pool":"src/data/dailyLife/commonerResentmentsDm.js :: COMMONER_RESENTMENTS_DM::crime55","sha":"59389d564089","house":"market"},

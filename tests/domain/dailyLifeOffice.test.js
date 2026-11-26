@@ -1,9 +1,10 @@
 /**
  * tests/domain/dailyLifeOffice.test.js — DAILY-3 · B3 L8, THE FIVE `office:` ATOMS AND LEGITIMACY L8 TO L11 (the chair's
  * E72 and E82 of 2026-11-22; the brief `docs/chair/2026-11-20/content/daily/briefs/B3-L8-OFFICE-LINES.md`; the measure
- * `measures/OFFICE`, point 97's table of forms). L12 ("The lord's steward is obeyed, but not much liked.") is NOT BUILT
- * (DAILY-4 unit (0a), the chair's E107, `briefs/D4-L12-CUT.md`): cut from this landing, for after the first deploy with
- * the ruled shape `house: lord's steward` beside `office: lord's steward` and `sovereign`. Its atom stays, unused.
+ * `measures/OFFICE`, point 97's table of forms). L12 ("The lord's steward is obeyed, but not much liked."), cut by DAILY-4
+ * unit (0a) (the chair's E107, `briefs/D4-L12-CUT.md`), RETURNS (WORDS-2 E6, the tenth chair's RULING G9 (3), D8 ruled at
+ * G10) in E107's ruled shape: `sovereign`, `office: lord's steward` and the steward's own house `house: lord's steward`,
+ * answered by `institution: lordsSteward`.
  *
  *   (a) THE TABLE: each office key's forms are KEYS of its row in `seat/seatTable.js :: SEAT_TABLE` (row `government`;
  *       row `noble` for the steward), read back through `formKindOf`; the steward is Feudal Stewardship, never Feudal
@@ -13,11 +14,13 @@
  *   (c) THE HOME: the governing ROW's form (`rulingPower.js :: nameOf(governingFactionOf(record))`) through `formKindOf`;
  *       never `powerStructure.government`, never a name test on a label. FAIL CLOSED: no governing row, or one stamped
  *       `hidden: true`, and every office is false; the shared read reads the same.
- *   (d) THE LINES: L8 to L11, verbatim from LINES-2 § 2 legitimacy, each with its one need, in the pool between L7 and
- *       L13 (L11 then L13); L12 ABSENT from the pool (NOT BUILT, named in the pool file's NOT BUILT note), and the
- *       steward's family `house: lord's steward` answered by no office atom (headman and reeve still are); each line
- *       admitted exactly where its office holds, none where the steward's does; on 30 born places (five a size, M1's
- *       births) none prints where its office does not hold, and L12 prints nowhere.
+ *   (d) THE LINES: L8 to L11, verbatim from LINES-2 § 2 legitimacy, each with its one need, then L12 with its three, in
+ *       the pool between L7 and L13 (L12 then L13); the steward's family `house: lord's steward` answered by the house
+ *       itself, `institution: lordsSteward` (headman and reeve by their office atoms); the NOT BUILT note no longer names
+ *       L12; each line admitted exactly where its needs hold (L12 never on the steward's form alone, never beside a thorp's
+ *       "Lord's reeve"); on the born places C dp-hamlet-122, -124, -137 L12 is admitted, on the steward thorps C
+ *       dp-thorp-102, -110, -127 it is not; on 30 born places (five a size, M1's births) none prints where its needs do not
+ *       hold.
  *   (f) WORDS-2 E5 (intake 3): Dawn Work's W11, B19 and Gathering Places' P13 ("the elder") need `office: elders` (the
  *       governing row's elders form), never `ruler: elder`, which a Headman's Authority also holds. Red first by name on
  *       0ec96f13d8: C dp-hamlet-22, dp-hamlet-66, dp-village-22 printed W11 under a Headman's Authority.
@@ -64,8 +67,8 @@ const LINES = Object.freeze([
   { id: 'L10', text: 'The mayor is blamed for most of what goes wrong, fairly or not.', needs: ['office: mayor'] },
   { id: 'L11', text: 'People say the reeve they chose has forgotten who chose them.', needs: ['office: reeve'] },
 ]);
-/** L12, NOT BUILT (the chair's E107): asserted ABSENT from the pool, by its id, its text and its office need. */
-const CUT = Object.freeze({ id: 'L12', text: 'The lord\'s steward is obeyed, but not much liked.', office: "office: lord's steward" });
+/** L12, RETURNED in E107's ruled shape (WORDS-2 E6): its text and its three needs. */
+const L12 = Object.freeze({ id: 'L12', text: 'The lord\'s steward is obeyed, but not much liked.', needs: ['sovereign', "office: lord's steward", 'institution: lordsSteward'] });
 
 /** A planted record governed by a row of that name (the row the seat holds), with a decoy label. */
 const governedBy = (/** @type {string} */ name, /** @type {Record<string, unknown>} */ extra = {}) => ({
@@ -199,11 +202,11 @@ describe('(c) on 30 born places: the atom is the measure\'s reading, the shared 
   });
 });
 
-describe('(d) L8 to L11 in the legitimacy pool, each printed only where its office holds; L12 NOT BUILT', () => {
+describe('(d) L8 to L12 in the legitimacy pool, each printed only where its needs hold', () => {
   const pool = COMMONER_RESENTMENTS.legitimacy;
   /** The pool's office lines: every line that declares an `office:` need. */
   const officeLines = () => pool.filter((l) => l.needs.some((n) => n.startsWith('office: ')));
-  it('L8..L11 stand verbatim with their one need, between L7 and L13 (L11 then L13); L12 is ABSENT (NOT BUILT, the chair\'s E107)', () => {
+  it('L8..L11 stand verbatim with their one need, then L12 with its three, between L7 and L13 (L12 then L13)', () => {
     const ids = pool.map((l) => l.id);
     for (const line of LINES) {
       const got = pool.find((l) => l.id === line.id);
@@ -211,48 +214,63 @@ describe('(d) L8 to L11 in the legitimacy pool, each printed only where its offi
     }
     expect(ids.indexOf('L8')).toBe(ids.indexOf('L7') + 1);
     expect(ids.slice(ids.indexOf('L8'), ids.indexOf('L11') + 1)).toEqual(['L8', 'L9', 'L10', 'L11']);
-    expect(ids.indexOf('L13')).toBe(ids.indexOf('L11') + 1);
-    expect(officeLines().map((l) => l.id)).toEqual(LINES.map((l) => l.id));
-    // L12 ABSENT: no line of its id, its text or its office need, in any branch; the ids are not renumbered (L13 stays L13)
-    expect(ids).toContain('L13');
-    // anchored: ids is proved the live pool's ids by its L13 asserted on the line above
-    expect(ids).not.toContain(CUT.id);
+    const got12 = pool.find((l) => l.id === L12.id);
+    expect(got12 && { id: got12.id, text: got12.text, needs: [...got12.needs] }).toEqual(L12);
+    expect(ids.indexOf('L12')).toBe(ids.indexOf('L11') + 1);
+    expect(ids.indexOf('L13')).toBe(ids.indexOf('L12') + 1);
+    expect(officeLines().map((l) => l.id)).toEqual([...LINES.map((l) => l.id), L12.id]);
+    // L12 in no other branch
     for (const [branch, lines] of Object.entries(COMMONER_RESENTMENTS)) {
-      expect(lines.filter((l) => l.text === CUT.text || l.needs.includes(CUT.office)).map((l) => l.id), branch).toEqual([]);
+      if (branch !== 'legitimacy') expect(lines.filter((l) => l.text === L12.text || l.needs.includes(L12.needs[1])).map((l) => l.id), branch).toEqual([]);
     }
   });
-  it('the file header\'s NOT BUILT note names L12 alone of the office lines; the steward\'s family is answered by no office atom (HOUSE_FAMILIES: two rows, headman and reeve)', () => {
-    expect([...(NEW_WORDS["house: lord's steward"]?.atoms ?? ['missing'])]).toEqual([]);
+  it('the file header\'s NOT BUILT note names no office line; the steward\'s family is answered by its own house (institution: lordsSteward), headman and reeve by their office atoms', () => {
+    expect([...(NEW_WORDS["house: lord's steward"]?.atoms ?? ['missing'])]).toEqual(['institution: lordsSteward']);
     expect([...(NEW_WORDS['house: headman']?.atoms ?? [])]).toEqual(['office: headman']);
     expect([...(NEW_WORDS['house: reeve']?.atoms ?? [])]).toEqual(['office: reeve']);
     const src = readFileSync(join(ROOT, 'src/data/dailyLife/commonerResentments.js'), 'utf8');
     const notBuilt = /\* NOT BUILT[\s\S]*?\n \*\n/.exec(src)?.[0] ?? '';
     expect(notBuilt).toMatch(/legitimacy #4/);
-    expect(notBuilt).toMatch(/legitimacy #12 "The lord's steward is obeyed, but not much liked\."/);
-    expect(notBuilt).toMatch(/`house: lord's steward`/);
-    // anchored: notBuilt is proved non-empty by its legitimacy #4 and #12 rows asserted on the lines above
-    expect(notBuilt).not.toMatch(/#8|#9|#10|#11|elders|headman|mayor|reeve/);
+    // anchored: notBuilt is proved non-empty by its legitimacy #4 row asserted on the line above
+    expect(notBuilt).not.toMatch(/#8|#9|#10|#11|#12|elders|headman|mayor|reeve|steward/);
     // anchored: src is the pool's own source, which holds the NOT BUILT block read above
     expect(src).not.toMatch(/government-label\s+name test/);
   });
-  it('each office line of the pool is admitted exactly where its office holds, none where the steward\'s does (planted, every form)', () => {
+  it('each office line of the pool is admitted exactly where its needs hold; L12 never on the steward\'s form alone, never beside a "Lord\'s reeve" (planted, every form)', () => {
     for (const k of KEYS) for (const f of RULED[k][1]) {
       const admitted = filterDeclared(officeLines(), { facts: factsOf(governedBy(f)) }).map((l) => l.id);
       expect(admitted, `${k}: ${f}`).toEqual(k === "lord's steward" ? [] : [LINES[KEYS.indexOf(k)].id]);
     }
+    const withHouse = (/** @type {string} */ house) => ({ ...governedBy('Feudal Stewardship'), institutions: [{ name: house }] });
+    expect(filterDeclared(officeLines(), { facts: factsOf(withHouse("Lord's steward")) }).map((l) => l.id)).toEqual([L12.id]);
+    expect(filterDeclared(officeLines(), { facts: factsOf(withHouse("Lord's reeve")) }).map((l) => l.id)).toEqual([]);
+    expect(filterDeclared(officeLines(), { facts: factsOf({ ...governedBy('Town Mayor'), institutions: [{ name: "Lord's steward" }] }) }).map((l) => l.id)).toEqual(['L10']);
     expect(filterDeclared(officeLines(), { facts: factsOf(governedBy('Elder Council', { hidden: true })) })).toEqual([]);
   });
-  it('false 0: on the born places no L8..L11 prints where its office does not hold, and L12 prints nowhere', () => {
+  it('false 0: on the born places no L8..L11 prints where its office does not hold, and L12 only beside the steward\'s office and own house', () => {
     const failures = collectSeedFailures(seeds(), (seed) => {
       const { rec, resent } = at(seed);
       const office = officeAt(rec);
       for (const [i, line] of LINES.entries()) {
         expect(resent.includes(line.text) && office[KEYS[i]] !== true, `${seed} ${line.id}: "${resent}"`).toBe(false);
       }
-      expect(resent.includes(CUT.text), `${seed} ${CUT.id}: "${resent}"`).toBe(false);
+      const stewardsHouse = (rec?.institutions || []).some((/** @type {any} */ i) => /^lord's steward$/i.test(String(i?.name || '')));
+      expect(resent.includes(L12.text) && !(office["lord's steward"] === true && stewardsHouse), `${seed} ${L12.id}: "${resent}"`).toBe(false);
     });
-    expectNoSeedFailures(failures, 'L8..L11 print only where their office holds; L12 nowhere');
+    expectNoSeedFailures(failures, 'L8..L12 print only where their needs hold');
   });
+  it('born places of the corpus: L12 admitted on C dp-hamlet-122, -124, -137 (office, own house, a grievance); not on the steward thorps C dp-thorp-102, -110, -127 (a "Lord\'s reeve")', () => {
+    const C = (/** @type {string} */ seed) => generateSettlementPipeline(birthConfig({ settType: seed.split('-')[1] }), null, { seed, customContent: {} });
+    for (const seed of ['dp-hamlet-122', 'dp-hamlet-124', 'dp-hamlet-137']) {
+      const rec = C(seed);
+      expect(filterDeclared([L12], { facts: factsOf(rec) }).map((l) => l.id), seed).toEqual([L12.id]);
+    }
+    for (const seed of ['dp-thorp-102', 'dp-thorp-110', 'dp-thorp-127']) {
+      const rec = C(seed);
+      expect(officeAt(rec)["lord's steward"], `${seed}: the steward's office holds`).toBe(true);
+      expect(filterDeclared([L12], { facts: factsOf(rec) }).map((l) => l.id), seed).toEqual([]);
+    }
+  }, 240_000);
 });
 
 describe('(e) the door: the leaf rides lazy, beside factsOf', () => {

@@ -177,6 +177,8 @@ export const INSTITUTION_WORDS = Object.freeze([
   // DAILY-1/DAILY-2 (rulings 8 and 12 of 2026-11-20; vetoable by the owner): the 13 appended rows of `INSTITUTION_KIND_PATTERNS`
   'waterSource', 'dwellings', 'farmland', 'commonGrazing', 'bridge', 'square', 'bakery', 'warehouse', 'theatre',
   'fishingLanding', 'rootCellar', 'shepherd', 'craftGuild',
+  // WORDS-2 E6 (the tenth chair's leave, RULING G9 (3); vetoable by the owner): the steward's own house, for L12
+  'lordsSteward',
 ]);
 
 /** The terrain classes (`steps/resolveConfig.js`). */

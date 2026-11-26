@@ -482,7 +482,9 @@ const phrasePattern = (words) => {
  */
 // DAILY-2 B2 (the chair's grant of 2026-11-20 20:31, in ruling 20's form; vetoable by the owner): `house: baker` <- institution:
 // bakery and `house: warehouse` <- institution: warehouse, for dawn_work's B0, B1 (bakers) and M0, M2 (warehouses).
-const HOUSE_FAMILY_KINDS = Object.freeze({ bathhouse: 'bathhouse', theater: 'theatre', 'root cellar': 'rootCellar', baker: 'bakery', warehouse: 'warehouse' });
+// WORDS-2 E6 (the tenth chair's leave, RULING G9 (3), D8 ruled at G10; vetoable by the owner): `house: lord's steward` <-
+// institution: lordsSteward, the steward's own house, for L12's return in its ruled shape (E107).
+const HOUSE_FAMILY_KINDS = Object.freeze({ bathhouse: 'bathhouse', theater: 'theatre', 'root cellar': 'rootCellar', baker: 'bakery', warehouse: 'warehouse', "lord's steward": 'lordsSteward' });
 
 const HOUSE_FAMILIES = (() => {
   /** @type {Set<string>} */ const names = new Set();
@@ -515,9 +517,9 @@ const HOUSE_FAMILIES = (() => {
       // DAILY-3 B3 L8 (the chair's leave E95 of 2026-11-22): two rows, `headman` and `reeve`, are answered by the
       // OFFICE-HOLDER'S reading of the word: a person who holds the office the place is governed by (`facts/officeForms.js`,
       // the governing row's form), NOT a building. A line whose words presume the house itself (its door, its hall, its yard,
-      // a visit to it) still needs the house's own atom. The steward's row went with L12 (DAILY-4 unit (0a), the chair's
-      // E107): on four steward thorps the office held while another officer held the seat and no steward's house stood, so
-      // `lord's steward` waits for the house's own atom (L12's return: `house: lord's steward` beside the office and `sovereign`).
+      // a visit to it) still needs the house's own atom. The steward's office row went with L12 (DAILY-4 unit (0a), the chair's
+      // E107): on four steward thorps the office held while another officer held the seat and no steward's house stood. The
+      // family is now answered by the HOUSE itself, `institution: lordsSteward` (HOUSE_FAMILY_KINDS, WORDS-2 E6, RULING G9 (3)).
       words: re, atoms: kind ? [`institution: ${kind}`] : key === "thieves' guild" ? ['house: thieves_guild'] : key === 'smuggling' ? ['house: smuggling']
         : key === 'headman' ? ['office: headman'] : key === 'reeve' ? ['office: reeve'] : [],
       absent: (_f, rosterNames, record) => !rosterHas(rosterNames, stem) && !powerNames(record).some((n) => stem.test(n)),
