@@ -598,3 +598,17 @@ wording, the owner's to veto), and lines 4 and 5 admit on `buysIn` with no food 
 is one the page already checks (its own arriving list). Four states, written in the comment. The proof: against the join, three
 counted classes and no fourth. The viability slot is re-dealt against master by E13a's own design (G32, G40): D13 names it as
 an intended exception.
+
+**G51 (08:12 UTC on 2026-11-26): THE FOUR NEW REDS OF POINT 118'S WIDE GATE, EACH RULED BY ITS CAUSE.** The landing's helper traced
+each to the join's unit that turned it red (halving in a detached scratch worktree; all four green at 09c29806b85a, all four
+red at 3836a832e3). (1) `publicProseEquality` (defense, soak1k-7): A PRODUCT FAULT OF G11 (merge e1bf9d2a13):
+`safetyLineSaidOnce` trims the Defense line's opening clause only off the shared page, believing a shared page prints no
+identity line; it does (its Overview prints "no stable governing authority"), so the owner's player view and the shared page
+differ. CURE (6): the exemption leaves; proof: the two pages equal on every such place, and no shared page loses the fact.
+THE CHAIR ACCEPTED G11 (G6 #11) WITHOUT THIS; the equality test caught it, which is what the wide gate is for. (2)
+`smallPlaceTierNoun`: A STALE SAMPLE (G6 put `no exports` on C4 v2, and none of the arm's 60 places draws the header now;
+the helper found three that do, and screen and PDF agree on all three): cure (9), named places added by key. (3)
+`bar8DesksDef` 14c: A STALE ANCHOR (G1's mark `ruling body`: r2r-hamlet-33 is a headman with a second, one holder, and
+prints no council line, as G1 means): cure (7), the anchor re-chosen by the test's own criterion. (4)
+`crisisBlindDossierProse`: A TABLE LACKING A DIMENSION (`ruling body`, first declared by a state-prose pool in G1): cure
+(8), the setter added as its sibling's. All four on the cures' branch (RULING-CURE-118-5); none goes on the known-reds list.
