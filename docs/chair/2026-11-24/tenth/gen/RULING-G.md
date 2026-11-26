@@ -690,3 +690,16 @@ themselves in and some carry on as before", and the page says three more times t
 shipyard's ('Ocean-going vessels', 'River barges': `:437`). Different kinds, truly listed. The one pair that says one thing
 twice is 'Ship construction' (the shipyard's service: "Build ocean-going vessels from keel up") beside 'Ocean-going vessels':
 said to the owner once, his call, no unit.
+
+**G56 (10:33 UTC on 2026-11-26): (6b) AND (K) ACCEPTED FOR POINT 118 ON THE SAME READER'S FOLLOW-UP; ITS FOUR RULED.** The claims
+hold: one Defense line on the owner's page, a default share, a party link and DM-full, for the edited cases too; births
+byte-equal (600, 352 carrying a sentence); every sentence today's engine writes is recognised (270, 0 missed); line 4 says
+"some of". ITS FOUR: (1) a save from before 2026-11-09 carries the sentence's OLDER wording ("which faction controls a
+district") and prints it whole on every page: the benign direction G53 named (the same on both pages; what live prints today);
+THE OLDER FORM JOINS THE LEAF in point 119, with D13's measure of master-born records, not here. (2) THE VEIL LANE's, A17
+WIDENED: `defenseDisplay.js` about line 968 re-derives the public-order line on a share and so does not show an owner's own
+edited line there (the edit marks are unserved): older than this point; the lane is paused; written down. (3) an owner's line
+that KEEPS the engine's sentence and adds to it is trimmed on the owner's own page too: accepted (the same on every page; the
+fact stands in the identity line), named. (4) the universal "buys in what it cannot make" survives in two older homes (the
+fallback twin, `dossierViewModel.js:326`: 36 of 39 prints beside "Needed, and not brought in"; `general.generated.js:12021`):
+VIABILITY-TRUE's, added to its brief.

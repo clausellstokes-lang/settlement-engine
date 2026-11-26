@@ -8,3 +8,10 @@ THE SECOND READER'S SHORT READ OF THE LAST CURES OF POINT 118 (independent, top 
 Q1: yes (2, 3, 6), none from f47d03b1fd: of 194 summaries it changed in 2,100 places, none is false by list, mark or rung. No two admitted lines contradict by the page's marks. buysIn without an arrival: no; one function, one record, one gate.
 Q2a: false (1 new, 4 old); unedited, unveiled: equal, 600 of 600. Q2b: true: stability survived 1,800 projections, the Power tab prints it on every share, no veil address hides it. Q2c: false on default shares and party links (1); true for the owner and DM-full.
 Other printers (read): none; the PDF Defence chapter and Foundry journal print the label, never this line.
+
+THE SAME READER'S FOLLOW-UP ON THE DELTA d0dc0eddb0..ad02ef727c ((6b) and (K)):
+1. (iii) misses older saves. The engine wrote "...which faction controls a district..." from e608542bd2 until 503fc64dd0 (2026-11-09); nothing migrates it. d0dc0eddb0 trimmed it; the tip prints it whole on every page. CONFIRMED.
+2. defenseDisplay.js:968 is still blind to edits on a share: r4b-thorp-0 edited to "...and organized crime has a limited foothold." prints "...has found no foothold." on a default share and party link. CONFIRMED.
+3. An owner's line that keeps the engine sentence and adds one is now trimmed on the owner's own page (whole there before). CONFIRMED.
+4. The universal survives beside "Needed, and not brought in": the twin (dossierViewModel.js:326), dp-thorp-90, 36 of 39 prints; and general.generated.js:12021, dp-village-50: "Izamatl buys in what it cannot make...". CONFIRMED.
+(i) True of the function and both named cases (owner, default share, party link, DM-full); false of the printed line (2). (ii) True: 600 births byte-equal, 352 carrying a sentence. (iii) True for today's births (270, every stress partner, 0 mismatches); false for 1. (iv) True: dp-hamlet-56 prints "...buys in some of what it cannot make for itself."
