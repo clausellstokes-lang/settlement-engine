@@ -27,7 +27,15 @@
  *
  * THE RECEIPT (the confidence of "plausibility with confidence"): per card, the families that passed,
  * their weights, the rolls, the sub-kind, the slots filled and the ids read. Kept beside the returned
- * cast (`goalReceiptsOf`), never on the record.
+ * cast (`goalReceiptsOf`, the module's `RECEIPTS` WeakMap), never on the record.
+ * GOALS-I13 (CLOSE-8 cure 3a; the chair's G44): `refs` names every card either pass READ (held lines'
+ * holders, the cards a call's slots name, the members a floor counts, namesakes, agents, the uncanny
+ * cap, and the town's holdings a repeat's rung walks). WHAT STILL BREAKS I-13: a transitive ABSENCE
+ * read. Card B is no repeat and reads nothing of X; with X gone, an earlier card A that did read X
+ * takes B's wording, so B becomes a repeat and pass two rotates it. Likewise a siege line held by a
+ * card that read X is freed for another. Measured over every birth (CLOSE-7's goals-i13 census, 900
+ * each): C 6 faults in 6 towns, V 6 in 6 (before the cure 136 and 172). Its cure is an order-free
+ * deal, which moves births: a later point.
  *
  * Every dial is born DRAFT (`GOAL_FAMILY_TUNING`, `LAW_PURSUIT_TUNING`); signing is the owner's.
  * DM-only by construction: `npcs[].goal` (and so `intent`) never reaches a public page (design §6.3).

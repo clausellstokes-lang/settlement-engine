@@ -191,6 +191,14 @@ describe('THE UNCANNY FAMILY (the owner\'s word: magic ON only as the gate; rare
   });
 });
 
+/**
+ * I-13 (keyed determinism), over the receipt's `refs` (GOALS-I13, CLOSE-8 cure 3a; the chair's G44): every card either pass
+ * READ is named. WHAT STILL BREAKS I-13, not caught by this arm's sample: a transitive ABSENCE read. Card B is no repeat and
+ * reads nothing of X; with X gone, an earlier card A that did read X takes B's wording, so B becomes a repeat and GR1's pass
+ * two rotates it; likewise a siege line held by a card that read X is freed for another. Measured over every birth
+ * (CLOSE-7's goals-i13 census, 900 each): C 6 faults in 6 towns, V 6 in 6 (before the cure 136 and 172). Its cure is an
+ * order-free deal, which moves births: a later point.
+ */
 describe('I-13: keyed determinism', () => {
   it('removing a card leaves every card whose draw read nothing of it byte-identical', () => {
     let compared = 0;
