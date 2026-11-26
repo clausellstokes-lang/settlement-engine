@@ -998,3 +998,22 @@ measure above (a quarter of places show fewer traditions than their size's band 
 TRADITION A DM WROTE OR ADOPTED (custom rows are appended after the draw and exempt from the needs filter; a lit mirror
 shows what is stored; both stayed shown in the reader's run); only the test-side census row `B1furrow` counts them, and no
 page reads that row: one line in the list, not a cure.
+
+**G74 (23:14 UTC on 2026-11-26): THE READER ON THE FIVE CURES (`landing/119/SECOND-READER-119-E.txt`): FOUR CLEAN, CURE (4)
+COMES OUT.** CLEAN, BY RENDERED PAGES: (1) the floor: 2,700 places born 0.10.0, saved and loaded, show identical sets under
+constants 0.11.0 and 1.0.0; every stamp below the floor or malformed answers false; no reader of the removed function
+remains. (2) the power line: 133 pages, nothing beside it denies the new words. (5) C4's line: 223 pages, none denies the
+placing (13 still say the roads are dangerous: being well placed does not deny that). No pick moved on 2,800 of 2,800. (6)
+the table over 2,800 places: FALSE PRINTS 0 ON EVERY VIABILITY LINE (L1 223, L2 14, L3 21, L4 170, L5 178, twin A 346,
+twin B 37, strained 42, general 67); food record removed, 300: 0.
+**CURE (4) OPENS A FAULT AND IS TAKEN OUT WHOLE: THE CHAIR'S RULING G72 (4) WAS WRONG IN ITS DESIGN.** It made the field
+rule read the page's printed trade lists, and those lists CHANGE: the world pulse's first tick rewrites them (date palms
+marked depleted; "Desert grain" leaves the lists) before the tick mints the traditions from the same record, so the unlit
+tab shows the field rite and the first mint shows its replacement (5 of the 5 places the cure changes). A rule about what
+a place's traditions ARE must read only what does not move after birth; the food record's sources and the farmland atom do
+not (the reader's first read: mint equals tab, 40 of 40). The import also put 28 KB into the tradition code's and the pulse
+kernel's closure. So: commit 927e3747bf is reverted on the cures branch and its tests removed; FINDING 4 STANDS UNCURED AT
+119 AND IS WRITTEN DOWN (R11): 4 of 2,700 births (date-palm desert places whose page prints "Desert grain") are refused a
+field rite, 1 of them shows a different set. Its root is at birth, not at the rule: date palms print a GRAIN good while the
+food record names no grain source; cured there if at all, after a measure. ALSO, one line: the floor reader takes no
+padded number ('0.010.0' read as 0.10.0; hand-made).
