@@ -19,7 +19,11 @@
  *
  * @enforced-by tests/lint/samenessCensus.walker.test.js
  */
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync } from 'node:fs';
+import { join, relative, sep } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { parse } from 'espree';
+import ts from 'typescript';
 import { describe, expect, test } from 'vitest';
 
 import {
@@ -275,6 +279,69 @@ describe('the register', () => {
   });
 });
 
+/** E13d-2: the four homes the skipped sentences are derived from (the guard does not read them as pools). */
+const SKIP_HOMES = new Set(['data/faceHonorifics.js', 'data/institutionalCatalog.js', 'generators/people/mintTitles.js', 'copy/sectionHelp.js']);
+/**
+ * E13d-2: read ONE source file's literals by its syntax tree. `rel` is the path under src/. Every string literal, template
+ * (its expressions as `{…}`), JSX text and JSON value is cut by the door's `sentencesOf` after the door's digit mask; an
+ * object key is not a line; an array whose every element is a role title is a title table. Style sheets hold no pool.
+ * @param {string} rel @param {string} src @param {Set<string>} skip @param {Set<string>} titles
+ */
+function scanSource(rel, src, skip, titles) {
+  /** @type {{ hits: string[], unread: string[], literals: number, titleTables: number }} */
+  const out = { hits: [], unread: [], literals: 0, titleTables: 0 };
+  const check = (/** @type {string} */ text, /** @type {string} */ at) => { out.literals++; for (const x of sentencesOf(String(text).replace(/\d+/g, '0'))) if (skip.has(x)) out.hits.push(`${rel}${at}: ${x}`); };
+  if (/\.css$/.test(rel)) return out;
+  if (/\.json$/.test(rel)) {
+    let v; try { v = JSON.parse(src); } catch (e) { out.unread.push(`${rel}: ${String(e)}`); return out; }
+    const walkJson = (/** @type {unknown} */ x) => { if (typeof x === 'string') check(x, ''); else if (Array.isArray(x)) x.forEach(walkJson); else if (x && typeof x === 'object') Object.values(x).forEach(walkJson); };
+    walkJson(v); return out;
+  }
+  if (/\.ts$/.test(rel)) {
+    const sf = ts.createSourceFile(rel, src, ts.ScriptTarget.Latest, true);
+    if (/** @type {any} */ (sf).parseDiagnostics?.length) { out.unread.push(`${rel}: ${/** @type {any} */ (sf).parseDiagnostics.length} parse errors`); return out; }
+    const walkTs = (/** @type {import('typescript').Node} */ n) => { if (ts.isStringLiteral(n) || ts.isNoSubstitutionTemplateLiteral(n)) check(n.text, ''); ts.forEachChild(n, walkTs); };
+    walkTs(sf); return out;
+  }
+  if (!/\.(m?js|jsx)$/.test(rel)) { out.unread.push(`${rel}: not a source the guard can read`); return out; }
+  let ast; try { ast = parse(src, { ecmaVersion: 'latest', sourceType: 'module', ecmaFeatures: { jsx: true }, loc: true }); } catch (e) { out.unread.push(`${rel}: ${String(e)}`); return out; }
+  const walk = (/** @type {any} */ n) => {
+    if (!n || typeof n.type !== 'string') return;
+    if (n.type === 'Literal') { if (typeof n.value === 'string') check(n.value, `:${n.loc.start.line}`); return; }
+    if (n.type === 'TemplateLiteral') { check(n.quasis.map((/** @type {any} */ q, /** @type {number} */ i) => q.value.cooked + (i < n.expressions.length ? '{…}' : '')).join(''), `:${n.loc.start.line}`); n.expressions.forEach(walk); return; }
+    if (n.type === 'JSXText') { if (n.value.trim()) check(n.value.trim(), `:${n.loc.start.line}`); return; }
+    if (n.type === 'ArrayExpression' && n.elements.length >= 2 && n.elements.every((/** @type {any} */ e) => e?.type === 'Literal' && typeof e.value === 'string' && titles.has(e.value))) { out.titleTables++; return; }
+    const isStr = (/** @type {any} */ e) => (e?.type === 'Literal' && typeof e.value === 'string') || e?.type === 'TemplateLiteral';
+    if (n.type === 'ArrayExpression' && n.elements.length >= 2 && isStr(n.elements[0]) && titles.has(n.elements[0].value) && !n.elements.slice(1).some(isStr)) { out.titleTables++; n.elements.slice(1).forEach(walk); return; } // a row keyed by its title (["<title>", 304, [...]]): the title is the row's key, its body is read
+    for (const [k, c] of Object.entries(n)) {
+      if (k === 'loc' || k === 'range' || k === 'parent') continue;
+      if (n.type === 'Property' && k === 'key' && !n.computed) continue; // a key is never printed as a line
+      if (Array.isArray(c)) c.forEach(walk); else if (c && typeof c === 'object') walk(c);
+    }
+  };
+  walk(ast); return out;
+}
+/** E13d-2: every file under src/, read by `scanSource`; the four homes are not read as pools. @param {Set<string>} skip @param {Set<string>} titles */
+function scanSourceTree(skip, titles) {
+  const root = fileURLToPath(new URL('../../src/', import.meta.url));
+  /** @type {{ hits: string[], unread: string[], literals: number, titleTables: string[], files: number }} */
+  const out = { hits: [], unread: [], literals: 0, titleTables: [], files: 0 };
+  const walkDir = (/** @type {string} */ d) => {
+    for (const e of readdirSync(d, { withFileTypes: true })) {
+      const full = join(d, e.name);
+      if (e.isDirectory()) { walkDir(full); continue; }
+      const rel = relative(root, full).split(sep).join('/');
+      if (SKIP_HOMES.has(rel)) continue;
+      out.files++;
+      const r = scanSource(rel, readFileSync(full, 'utf8'), skip, titles);
+      out.hits.push(...r.hits); out.unread.push(...r.unread); out.literals += r.literals;
+      if (r.titleTables) out.titleTables.push(rel);
+    }
+  };
+  walkDir(root);
+  return out;
+}
+
 describe('E13d (G35): the door does not count a role title or a fixed caption as a drawn sentence', () => {
   const skip = notDrawnSentences();
   test('not vacuous: the four long face titles the door met and the NPCs pill are in the set', () => {
@@ -288,38 +355,44 @@ describe('E13d (G35): the door does not count a role title or a fixed caption as
     const fromHomes = new Set([...roleTitles().flatMap((t) => [t, t.charAt(0).toUpperCase() + t.slice(1)]), ...fixedCaptions()].flatMap((x) => sentencesOf(x.replace(/\d+/g, '0'))));
     expect([...skip].filter((x) => !fromHomes.has(x))).toEqual([]);
   });
-  test('no line of a drawn pool the door knows is in the set: the register\'s drawn rows (STATE, NARRATIVE, CATALOGUE) and every string pool exported under src/data', async () => {
+  // E13d-2 (the tenth chair's G52): THE GUARD READS EVERY POOL WHATEVER ITS SHAPE AND HOME. A pool is handed to the door
+  // (`drawDeclared` and its kin) at its call site, so no register resolves a pool to its lines: the guard reads every string,
+  // template and JSX text literal of every source file under src/ by its syntax tree (plain arrays, `{ text }` rows, nested
+  // tables, a pool built inside a function), cut and masked as the door cuts and masks. A literal outside the four homes that
+  // is a skipped sentence FAILS, save a table whose every element is a role title (an order, a key list), a row keyed by its title
+  // (`["<title>", 304, [...]]`: the key passes, the body is read) and an object KEY (a key is never printed as a line). A file the guard cannot read FAILS: it is never skipped.
+  test('no line of any pool under src/ is in the set, whatever its shape and home; and the register\'s drawn rows (STATE, NARRATIVE, CATALOGUE) neither', () => {
     const drawnRows = Object.entries(readRegister().rows).filter(([, r]) => /^(STATE|NARRATIVE|CATALOGUE)\??$/.test(r.class));
     expect(drawnRows.length).toBeGreaterThan(100);
     expect(drawnRows.filter(([, r]) => skip.has(r.sentence)).map(([k]) => k)).toEqual([]);
-    const { readdirSync } = await import('node:fs');
-    const root = new URL('../../src/data/', import.meta.url);
-    /** @type {string[]} */ const files = [];
-    const walk = (/** @type {URL} */ d) => { for (const e of readdirSync(d, { withFileTypes: true })) { const u = new URL(e.name + (e.isDirectory() ? '/' : ''), d); if (e.isDirectory()) walk(u); else if (/\.js$/.test(e.name) && !/\.test\./.test(e.name)) files.push(u.href); } };
-    walk(root);
-    const homes = /\/src\/data\/(faceHonorifics|institutionalCatalog)\.js$/;
-    /** @type {string[]} */ const hits = []; let pools = 0;
-    const titles = new Set(roleTitles()); /** @type {string[]} */ const titleLists = [];
-    const seen = new Set();
-    const visit = (/** @type {unknown} */ v, /** @type {string} */ at, depth = 0) => {
-      if (!v || typeof v !== 'object' || seen.has(v) || depth > 8) return;
-      seen.add(v);
-      if (Array.isArray(v) && v.length >= 2 && v.every((x) => typeof x === 'string')) {
-        if (v.every((x) => titles.has(x))) { titleLists.push(at); return; } // a list of role titles (an order, a key list) is a title table, not a drawn pool
-        pools++;
-        for (const line of v) for (const s of sentencesOf(String(line).replace(/\d+/g, '0'))) if (skip.has(s)) hits.push(`${at}: ${s}`);
-        return;
-      }
-      for (const [k, x] of Object.entries(v)) visit(x, `${at}.${k}`, depth + 1);
+    const scan = scanSourceTree(skip, new Set(roleTitles()));
+    expect(scan.unread).toEqual([]);
+    expect(scan.files).toBeGreaterThan(2500);
+    expect(scan.literals).toBeGreaterThan(200000); // not vacuous: the second reader counted 304,427 source literals
+    expect(scan.titleTables).toEqual(expect.arrayContaining(['data/stressPowerFaces.js', 'data/people/titleSecretsPresentations.js'])); // not vacuous: a literal title table outside the homes is met and passed over as a table
+    expect(scan.hits).toEqual([]);
+  }, 300000);
+  test('the guard reads a pool of any shape: a planted skipped sentence in a { text } row, a nested table, a template, JSX text or a JSON value is a hit; a key and a title table are not; an unreadable file is a failure', () => {
+    const titles = new Set(roleTitles());
+    const caption = 'Who holds power and how firmly.';
+    expect(skip.has(caption)).toBe(true);
+    const plants = {
+      'data/a.js': `export const P = Object.freeze({ food: [{ id: 'F1', text: 'Who holds power and how firmly.', needs: [] }] });`,
+      'domain/b.js': `const T = { a: { b: [['x', "Who holds power and how firmly."]] } }; export default T;`,
+      'domain/c.js': `export const f = (n) => \`Who holds power and how firmly.\`;`,
+      'components/d.jsx': `export const D = () => <p>Who holds power and how firmly.</p>;`,
     };
-    for (const f of files.filter((x) => !homes.test(x))) {
-      const mod = await import(/* @vite-ignore */ f);
-      for (const [name, value] of Object.entries(mod)) visit(value, `${f.split('/src/data/')[1]}::${name}`);
-    }
-    expect(pools).toBeGreaterThan(500);
-    expect(titleLists).toEqual(expect.arrayContaining(['people/titleSecretsPresentations.js::TITLE_ORDER', 'personHooksByTitle.js::PERSON_HOOK_TITLES'])); // not vacuous: the title tables met outside the homes are passed over as tables
-    expect(hits).toEqual([]);
-  }, 120000);
+    for (const [file, src] of Object.entries(plants)) expect({ file, hits: scanSource(file, src, skip, titles).hits.length }).toEqual({ file, hits: 1 });
+    expect(scanSource('data/e.json', JSON.stringify({ k: ['a', caption] }), skip, titles).hits).toHaveLength(1);
+    expect(scanSource('data/f.js', `export const K = { 'Who holds power and how firmly.': 1 };`, skip, titles).hits).toEqual([]);
+    expect(scanSource('data/g.js', `export const ORDER = ['the senior craft-guild master', 'the senior charter master'];`, skip, titles)).toMatchObject({ hits: [], titleTables: 1 });
+    // the chair's condition (G52, accepted reading): a table of titles with ONE drawn sentence added is NOT a title table
+    expect(scanSource('data/m.js', `export const P = ['the senior craft-guild master', 'the senior charter master', 'Who holds power and how firmly.'];`, skip, titles)).toMatchObject({ titleTables: 0, hits: ['data/m.js:1: the senior craft-guild master', 'data/m.js:1: the senior charter master', 'data/m.js:1: Who holds power and how firmly.'] });
+    expect(scanSource('data/k.js', `export const ROWS = [['the senior charter master', 304, [['Who holds power and how firmly.', 'x']]]];`, skip, titles)).toMatchObject({ hits: ['data/k.js:1: Who holds power and how firmly.'], titleTables: 1 }); // a row keyed by its title: the key passes, its body is read
+    expect(scanSource('data/l.js', `export const P = ['the senior charter master', 'A line of the pool that is long enough.'];`, skip, titles).hits).toEqual(['data/l.js:1: the senior charter master']); // a title as a LINE of a pool is a hit
+    expect(scanSource('data/h.js', `export const X = [ 'Who holds power and how firmly.' `, skip, titles).unread).toHaveLength(1);
+    expect(scanSource('data/i.yaml', 'x: 1', skip, titles).unread).toHaveLength(1);
+  });
   test('the door skips by the whole sentence, never by length or by slot: a title alone is not counted, a drawn line beside it still is, and a line that holds a title is counted', () => {
     const title = 'the senior craft-guild master';
     const drawn = 'The guild keeps its own books and will not open them.';
