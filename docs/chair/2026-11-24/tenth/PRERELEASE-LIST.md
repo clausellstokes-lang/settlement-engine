@@ -197,3 +197,5 @@ matched report. B1(i)c-2 (point 119): the port route gives furs.
 A18 (the share lane, paused): the shared page prints a desk's wording as STORED at the owner's last save; a release that
 changes a stored desk's wording must bump `PUBLIC_PROSE_VERSION` (no wording unit does). OLD-SAVE (point 120, a measure):
 a record of the shape written before 2026-11-03 (no food record): every line its page prints false by its own page.
+
+## ADDED 18:35 UTC ON 2026-11-26 (G70): the prose walker reads an `{access}` slot as an undeclared claim (four standing over-claims of A0b's nineteen): the matcher's cure, with E13c's rest. C4-SECOND-LINE's sentence is "{settlement} is poor, and being easy to reach has not changed that."

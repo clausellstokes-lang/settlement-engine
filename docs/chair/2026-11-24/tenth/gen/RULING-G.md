@@ -907,3 +907,13 @@ named with its recorded and its present value, and the rows as they would read a
 join `ci/RED-AT-LINE.tsv` at point 119's landing as the owner's. (d) `proseComposed` A0b gains a second failing assertion
 (an over-claim of 20 against a shrink-only ceiling of 19): expected to clear with the wiring census's re-take; if it does
 not, the seat stops: the ceiling is raised by nobody.
+
+**G70 (18:35 UTC on 2026-11-26): C4-SECOND-LINE's SENTENCE CHANGES AGAIN, BEFORE IT HAS LANDED: NO CEILING IS RAISED FOR IT.** After
+the wiring census's re-take `proseComposed` A0b still read over-claims 20 against its shrink-only ceiling 19: the walker
+reads an `{access}` slot as a claim on a reading the pool does not declare (the same artifact that already holds four of
+the nineteen: C3 v3, C4 v1, v3, v6), and the chair's line 8 carried the slot. The seat stopped and put three ways. RULED:
+NOT an owed count raised (a ceiling raised is nobody's here); NOT the breach left inside a row that is already red; THE
+SENTENCE WITHOUT THE SLOT: "{settlement} is poor, and being easy to reach has not changed that." (C4 is "a low rung on a
+working approach": every C4 place is easy to reach, as C5's are not; the chair's wording, the owner's to veto; G49's wording
+withdrawn). Changed on the unit's branch (the line has printed on no page). The walker's own cure of the slot artifact (so
+the four standing over-claims can leave) is written down for E13c's rest.
