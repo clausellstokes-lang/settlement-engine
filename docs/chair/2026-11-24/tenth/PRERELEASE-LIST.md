@@ -143,3 +143,11 @@ split from the sets' fixed configuration. WHAT TWICE-IN-PANEL ALSO FOUND AND IS 
 its service rows ("Access to a house of worship", up to 4); one goods list on two Economic Flows rows; a person
 named on two institutions' Connection rows. Pages with any line of six words or more twice in one panel: C 758, V 703
 of 900, by panel NPCs 926 / 847 line-instances, Institutions 598 / 494, Economics 273 / 542, Services 187 / 139.
+
+## ADDED 01:17 UTC ON 2026-11-26: D12 "THE ORDER-FREE GOAL DEAL" (a decision for the owner; nothing built)
+Goals are dealt with a no-repeat rule read by ABSENCE against every earlier card, so removing one card can change a
+later card that read nothing of it, through a card between them (G44). After point 118's receipt cure it is measured
+at 6 towns of 900 on each proof set. What a user would see: after deleting or re-rolling one character, in about one
+town in 150 another character's goal sentence changes wording. The cure is a deal whose result does not hang on the
+order of the cards; it MOVES BIRTHS (every town's goals are re-dealt once). The chair's recommendation: accept the
+residual for this release and take the order-free deal with the next change that moves goals anyway.

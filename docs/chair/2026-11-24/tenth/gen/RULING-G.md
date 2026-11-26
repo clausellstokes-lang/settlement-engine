@@ -463,3 +463,16 @@ G13 and G19 (1) silently undone wherever D3's path writes. THE TYPECHECK CAUGHT 
 copy brought up to date but ONE function computing the flag from the birth's inputs, called by both sites; a test that
 `noGrazingQuarrelOf(` is called from exactly one place in src; D3's every-birth check 0 and E3's four columns equal on
 the joined tree or each differing cell named. The commit is no seat's unit: the second reader reads it by name.
+
+**G44 (01:17 UTC on 2026-11-26): GOALS-I13 TAKEN AS BUILT, SHORT OF ZERO; THE RESIDUAL IS THE DEAL'S DESIGN.**
+`lane/close-8-2026-11-25-goals-i13-wip` b136ae0b2d (`goals.js` and `goals.test.js` only): the receipt now records the
+held lines' holders (cell, reserve, crisis, siege), the RANK floor's ids, namesakes, the handler's agents, the uncanny
+cap, every slot a candidate-builder reads, and pass two's rung over every holding. I-13 faults: C 136 (122 towns) to
+6 (6), V 172 (148) to 6 (6); records moved 0 / 0 by hash and fields; draws, order, keys and candidate lists unchanged;
+red first on a named case (Portaminus). THE TWELVE LEFT ARE TRANSITIVE ABSENCE READS: card B read nothing of X; with X
+gone an earlier card A takes another wording, which B then repeats, so pass two rotates B (11), and one siege line is
+freed the same way. RULED: taken into 118; the vacuity floor is not lowered and the receipt is not made to say "read
+every earlier holding"; the residual is written where the property is claimed (the test's header, the receipt's
+comment) with its counts; the measure kept runnable. ITS CURE IS AN ORDER-FREE DEAL, WHICH MOVES BIRTHS: its own
+decision, named for the owner on the pre-release list; not point 118 nor 119. The only reader of `refs`:
+`goals.js :: refuseWantsBesideSecrets` (copies them to a moved card's receipt).
