@@ -69,8 +69,10 @@ describe('B1(i)b: the Furrier\'s district lives on what its lodge lives on', () 
     test(`${seed}: desert with no hunting_grounds, and no Furrier's district stands`, () => {
       const s = born[seed];
       expect(s.config.terrainType).toBe('desert');
-      expect(s.config.nearbyResources).not.toContain('hunting_grounds');
-      expect(liveNames(s)).not.toContain("Furrier's district");
+      expect(s.config.nearbyResources.length).toBeGreaterThan(0);
+      expect(s.config.nearbyResources).not.toContain('hunting_grounds'); // anchored: the line above proves the resource list is read and filled
+      expect(liveNames(s).length).toBeGreaterThan(40);
+      expect(liveNames(s)).not.toContain("Furrier's district"); // anchored: the line above proves this is the city's live roster, filled
     });
   }
   test('POSITIVE CONTROL dp-metropolis-30: desert beside hunting_grounds keeps its Furrier\'s district (the resource gives game)', () => {
