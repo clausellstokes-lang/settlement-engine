@@ -47,9 +47,22 @@ Also, by HAND-INS: B1(ii) REDESIGNED (R24r 1), B1(i)b (R24r 6), P9's (i) writer-
   Typechecks 167/1113 after every src merge. `tests/lint` whole after g3: the line's three + writerReach (P9's `monster` rows, and
   D6's row behind it: my cures). tests/generators/people + boundCardLinesReaders after g3: 224/225, the one red goals I-13 (on
   RED-AT-LINE; my cure 3a).
-  GROUP 4 IN FLIGHT: 13 E10, 14 E11, 15 E12, 16 E7, 17 E9 chained, then lint (a slip: lint after 17, not 15; E10-E12 are test-only;
-  from here lint after 20, 23, 26, 29). Next: 18 E4 (conflicts with E9 by WORDS-2's note), G6, G1, G8, G9, G10, G11, G34, E5, E6,
-  E13a; `npm run gen:dossier-prose` after E4/E9/G1/G6 to re-project the .md and economy.generated.js; doors g4; then E3 alone; doors.
+  GROUP 4 (state at 00:24 UTC 2026-11-26): 13 E10 c5ee349f4f, 14 E11 683cab69e9, 15 E12 7070aff226, 16 E7 a7fb9180c5, 17 E9
+  000ac55b41, 18 E4 fc40ddeb86 (E9 conflicts: generator rows, opposite-pairs header and pins: union by WORDS-2's note), 19 G6
+  79fd56b248, 20 G1 f2d5d54fed (opposite-pairs test: ARM 6 + E4 note + ARM 7), 21 G8 34e6223308, 22 G9 3a29a6e3e4, 23 G10 d744c4e70d,
+  24 G11 e1bf9d2a13, 25 G34 e770ddc203, 26 E5 0650d04f16, 27 E6 1b2c5e3ebe (dailyLifeOffice header: E6's (d) + E5's (f)), 28 E13a
+  00fffd5fef; doors g4: lighting d8651d2a81 (->3815), wiring 8aff7e3047, observed-shape 85d93cdfd2. GROUP 4 BOUNDARY = 85d93cdfd2.
+  `npm run gen:dossier-prose` after E4 and after G1: byte-equal (nothing to commit). oppositeSentencePairs, dailyLifeOffice,
+  bar5SafetyLawBand green on the joined tree. Lint after g4: the line's three + writerReach. A slip: lint ran after 17 (not 15).
+  IN FLIGHT: 29 E3, then its doors, then lint. THEN: ANCHORS-5 (a builder), the cures merged (NEED-ATOM, D7-BYTES, GOALS-I13), the
+  writer-reach rows (D6, P9) by the door, proof (4).
+- D7-BYTES DONE (builder; its REPORT.md write refused too: the report kept here): `lane/close-8-2026-11-25-d7-bytes-wip` f94dc00d82,
+  PUSHED, vite.config.js only: `facts/crisisBody.js` and `people/stressPowerFaces.js` on FIRSTPAINT2_LAZY_DOMAIN. Join 0ef4d2a11 ->
+  tip: first paint 1,195,718 -> 1,190,128 raw (-5,590), gzip 381,485 -> 379,761 (-1,724), Brotli 320,038 -> 318,957 (-1,081); worker
+  2,737,079 unchanged (same hash); engine chunk +3. tests/build VERIFY_DIST the same 15 reds by name; typechecks 167/1113; no chunk
+  edge gained or lost; crisisBodyOf's one call site (factsOf getter) in the same chunk. NOT BOUGHT BACK, named for the owner's size
+  signing: the worker's +3,221 (its own build); about 156 B raw first paint (the `crisis body` row in factVocabulary.js, eager).
+- GOALS-I13: builder started (after D7-BYTES) on `/home/user/wt/goals-i13` (`lane/close-8-2026-11-25-goals-i13-wip`, cut 0ef4d2a11b).
 - NEED-ATOM DONE (builder; its REPORT.md write was refused by its permission check: told the chair; the report kept here):
   `lane/close-8-2026-11-25-need-atom-wip` 031e04e84c, PUSHED, on 09c29806b, two files (needNotBroughtIn.js, faultsNeed.test.js).
   faultsNeed red 1/11 at the base (r2r-town-54), 11/11 after. The cure: `dealtInHere` also counts a standing, non-custom house with
@@ -59,7 +72,7 @@ Also, by HAND-INS: B1(ii) REDESIGNED (R24r 1), B1(i)b (R24r 6), P9's (i) writer-
   0; records moved 0/0; readers' returns moved 0. Readers (a page prints from each): goals.js :: needUnmet, needUnmetGoods; factsOf
   :: needNotBroughtIn -> institutionDescVariants.js (fair luxury, silk/spice lines), DS-ECO-8 POOR v1/v6. Gates: 167/1113; copy
   172/172; lint the line's three. Merges into the join after E3. Measures in `close-8/need-atom/` (`after2-*` final).
-- D7-BYTES: builder started 23:09 UTC on `/home/user/wt/d7-bytes` (`lane/close-8-2026-11-25-d7-bytes-wip`, cut at 0ef4d2a11b).
+- (superseded) D7-BYTES: builder started 23:09 UTC on `/home/user/wt/d7-bytes` (`lane/close-8-2026-11-25-d7-bytes-wip`, cut at 0ef4d2a11b).
 - MARK (the chair, 22:45): 351,788 used by its read; hand-over mark raised to 650,000 for 118 on three conditions: frugal reads;
   every cure and proof run a builder's or a mechanical helper's; this section current at the end of every group.
 - BEFORE battery (line tip, --views) DONE: scratchpad `before-C/`, `before-V/`, 900 each.
