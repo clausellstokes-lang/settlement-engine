@@ -15,9 +15,9 @@ worktree (`/home/user/wt-<unit>`, node_modules symlinked; `/node_modules` and `/
 | unit | branch | tip | state |
 |---|---|---|---|
 | B1(i)c (G52, G60) | lane/close-10-2026-11-26-b1ic-wip | 19a5855f3 | PUSHED, HANDED IN 14:50 |
-| E13d-2 + SAMENESS-KEYS (G52) | lane/close-10-2026-11-26-e13d2-wip | see 0.2 | 245ded883 handed in; arm a0bb07722 + census commit to push |
-| P9b (G48) | lane/close-10-2026-11-26-p9b-wip | 12c77ae3f | built; gate at hand-over: see 0.2 |
-| VIABILITY-TRUE (G53, G56, G61) | lane/close-10-2026-11-26-viability-wip | d90765fdc (+ census commit) | built; gate running at hand-over |
+| E13d-2 + SAMENESS-KEYS (G52) | lane/close-10-2026-11-26-e13d2-wip | 559fcc0d1 | PUSHED, HANDED IN (final tip) |
+| P9b (G48) | lane/close-10-2026-11-26-p9b-wip | 12c77ae3f | PUSHED, HANDED IN |
+| VIABILITY-TRUE (G53, G56, G61) | lane/close-10-2026-11-26-viability-wip | 7279e571c | PUSHED, HANDED IN |
 | C4-SECOND-LINE (G49) | lane/close-10-2026-11-26-c4second-wip | 3647bae53 (local, NOT pushed) | built and measured; NOT gated, NOT handed in (the chair, 15:03: to a fresh seat) |
 | B1(ii) REDESIGNED (G64) | — | — | design accepted, NOT built (to a fresh seat) |
 | D13 STABLE-PICKS | — | — | closed for 119 (G63, G65): point 120's one unit, design (A) accepted in principle |
@@ -79,8 +79,14 @@ shown sets byte-equal; name/motif shifts counted, each a later row of the same t
 where the predicate holds and no farmland stands; census row B1furrow (as 3388806b4). CLOSE-9's counts (the join): field rites
 shown C 238, V 105; refusing places C 45, V 41, farmland on C 16, V 6 of them.
 
-### 0.2 At hand-over (filled at the last push)
-See the end of this file.
+### 0.2 At hand-over
+All built units pushed; C4-SECOND-LINE's 3647bae53 exists only in /home/user/wt-c4 (not pushed: the chair's order): a successor
+rebuilds it from its one content line and the generator (two files), cheaper than fetching a container. Gates of the three
+handed in at hand-over: tests/lint whole at the line's three (proseCorpusBytes x2, proseComposed A0b) on each; tests/build 13
+on each, as the line. P9b sizes: raw first paint, worker and engine equal to the line's; gzip +6, Brotli +124. VIABILITY-TRUE:
+gzip +7, Brotli +183, raw 0; door commits: lighting census 85f645abf, observed-shape --write 7279e571c (findings unchanged;
+the hashes of its changed source files and the input digest), the two older tests re-pointed fb4dc4b67 (tailDefeconDisplayLines
+#00585, viabilitySelfSufficientDraw's food oracle), the general line computed from its pool 5b59b5c08 (proseDrawnAnchors).
 
 ### 0.3 Tools (all committed under `docs/chair/2026-11-21/eighth/close/close-10/tools/`)
 - Births: CLOSE-8's harness (`origin/lane/close-8-2026-11-25:.../close-8/proof/tools/birth-1/births.mjs`, its `make-plan.mjs` for
