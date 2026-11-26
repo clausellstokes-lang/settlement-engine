@@ -638,3 +638,24 @@ them HIGHER (the largest: village, both PDFs, "No granary: under siege...", 0.58
 re-take, an added slot that matches a retired one by surface, size and sentence INHERITS the retired ceiling, so a rise is a
 rise and the door itself says so; the register is re-taken ONCE, at point 119's join, by that door; what it then refuses is
 named for E13c and raised by nobody. This makes the door stricter, which is the chair's to order.
+
+**G53 (09:31 UTC on 2026-11-26): THE CURES OF RULINGS 4 AND 5 ACCEPTED; THE SHORT SECOND READ (`landing/118/SECOND-READER-CURES-118-B.txt`) RULED.**
+The builder at d0dc0eddb0: (H) against the join on C, V and soak 0 to 999: 184 summaries by the one word, 25 from line 4 or 5
+to line 1 (a marked need, nothing arriving), 9 re-drawn (no marked need, something arriving), other 0; cure (6): 82 places, the
+two pages' Defense lines differing 0, shared pages losing the fact 0, `publicProseEquality` 428 of 428; cures (7) (r2r-hamlet-33
+to r2r-hamlet-42), (8), (9) (three named thorps); the four once-red files green; lint at its three base reds. THE READER'S SIX:
+(1) NEW, AND THE CHAIR'S RULING MADE IT: cure (6) trims an owner's OWN line on a shared page, because the edit marks are not
+served (`publicSafe.js`; they stay unserved: the projection is not widened to cure a page). RULED (6b): the function trims only
+THE ENGINE'S OWN SENTENCE, recognised whole by its text (two forms, one home shared with the generator), with no `isEdited`
+and no knowledge of the page: owner and visitor run the same text through the same test. Its failures are benign in both
+directions: a form it misses prints whole on both pages; an owner who typed the engine's exact sentence is trimmed on both.
+(2) LINE 4 ("buys in what it cannot make for itself", new in this point) prints beside "Needed, and not brought in: timber,
+metals.": RULED (K): "buys in SOME OF what it cannot make for itself" (the sentence, not the gate; the chair's wording, the
+owner's to veto). (3) and (6), OLDER THAN THIS POINT: the food gate reads a rounded share while the food row prints pounds
+("Nothing X needs has to come from outside" beside "+ 1 imported"; "feeds itself" beside the import "Bulk grain"); "pays its way"
+on an indebted place beside "owes an outside power more than it can ever repay"; and E2b. ALL OF THEM ARE ONE UNIT OF POINT 119,
+"VIABILITY-TRUE": every line of the viability slot and both fallbacks held to its claim against what the same page prints (the
+food row's pounds, the arriving list with its foodstuffs, the "needed, and not brought in" list, the debt line), measure first,
+the reader's cases red first; where a gate cannot equal the claim, the sentence changes. (4) THE VEIL LANE's (A17, written
+down, the lane paused): `defenseDisplay.js` about line 968 re-reads facts the default veil removes, so the owner's line and
+the shared line differ on 10 of 600 places (r4b-hamlet-91). (5) the comment's claim about the Overview corrected in (6b).

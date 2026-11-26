@@ -172,3 +172,9 @@ C4-SECOND-LINE: one always-true line for the pool "a low rung on a working appro
 has not changed that."), so a calm poor place with exports and no market does not print one sentence on 215 of 1,000 pages.
 D13 STABLE-PICKS: its bar is master: a saved town's flavour lines print as they did on master unless the line is refused or
 gone; first a measure of the fact atoms a master-born record lacks; slots: the fare, the viability summary, the state-prose pools.
+
+## ADDED 09:31 UTC ON 2026-11-26 (G52, G53)
+VIABILITY-TRUE (point 119): every viability line and both fallbacks true of what the same page prints; takes in E2b and the
+rounded food gate. B1(i)c (point 119): the Furrier's district where hides reach the place. E13d-2 and SAMENESS-KEYS (point
+119): the skip's guard over every pool; a drifted slot inherits its ceiling. A17 (the veil lane, paused): the Defense line
+re-reads facts the default veil removes: owner and shared differ on 10 of 600 places.
