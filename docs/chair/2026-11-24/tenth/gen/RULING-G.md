@@ -544,3 +544,15 @@ stubbed to the identity). THE DOUBLE POSSESSIVE STAYS ON PAGES FOR NOW (owner pa
 projection 52 and 34): a blemish, known. ITS REBUILD ("E1R") IS AT THE TEMPLATE'S LEVEL: each template that puts a
 possessive after a slot gets an authored twin, chosen where the slot's value is itself a possessive phrase; no finished
 sentence is ever rewritten by pattern. On the pre-release list.
+
+**G48 (07:13 UTC on 2026-11-26): P9b RULED: THE MEAN READS THROUGH THE LEAF, A UNIT OF POINT 119, BUILT AFTER POINT 118 LANDS.** CLOSE-9's
+measure on the join 3836a832e3 (C and V re-born): the 175 V births where P9's leaf lifts the beasts grade (C 0); the mean of the
+stored scores differs from the mean of the scores as shown in 172 of 175 (+1 to +7 points; its band in 68). WHAT PRINTS FROM THE
+MEAN: NOTHING, 0 of 175 (no PDF section prints "Score avg" since W4; `headlines.js :: defenseHeadline` reads the mean only where no
+readiness label exists, and all 175 carry one; the parity contract's `defense.scoreAvg` row; the web's `deriveDefensePosture`,
+printed by no component). So P9b is not a page fault today: it is a door left open (a later printer of the mean would bring the low
+band back). RULED: `avgScore(scoresAsShown(s, dp.scores))` at the five sites (pdf viewModel three, `viewModelBodySlices` one,
+`dossierViewModel :: deriveDefensePosture`), web and PDF in ONE commit (the parity row), with its proof: 0 printed lines move, 0
+records move, the parity row equal. NOT the retirement of the dead fields (more churn; the parity pin and the headline gate read
+them). ORDER: after point 118 lands (`dossierViewModel.js` is the cures' file), cut on the new line. Confirmed by the seat by source
+read and measure, not by a rendered-text diff: the unit's proof is that diff.
