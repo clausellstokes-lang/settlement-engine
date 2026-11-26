@@ -151,3 +151,5 @@ unchanged, for the owner: `siteCoherenceRatchet` C1 (the road metropolis: ore 14
 "no hook is lost" (2145 to 2144), `pipelinePinnedChoosers` A6 (32 to 33). New sentences: none.
 ALSO ON ORIGIN, NOT A HAND-IN: CLOSE-11's coded, unproven B1(ii) draft `lane/close-11-2026-11-26-b1ii-wip` e809f2a2e: given
 to the local builder B1II-119 to read once and judge.
+
+| the chair's builder B1II-119 | B1(ii) (no tradition blesses fields the place does not have) | LOCAL `lane/stack-119-b1ii-wip-2026-11-26` (tree /home/user/wt/b1ii; never pushed; merged by the landing's helper) | dd583bbf7e, ONE CURE OWED (no repeated motif, G71) | built 18:39 UTC; read whole by the chair; its second read is the join's | G64, G71 |

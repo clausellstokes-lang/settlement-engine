@@ -917,3 +917,19 @@ SENTENCE WITHOUT THE SLOT: "{settlement} is poor, and being easy to reach has no
 working approach": every C4 place is easy to reach, as C5's are not; the chair's wording, the owner's to veto; G49's wording
 withdrawn). Changed on the unit's branch (the line has printed on no page). The walker's own cure of the slot artifact (so
 the four standing over-claims can leave) is written down for E13c's rest.
+
+**G71 (18:39 UTC on 2026-11-26): B1(ii) BUILT BY THE LOCAL BUILDER IN 32 MINUTES; ACCEPTED BUT FOR ONE CURE.** B1II-119 (tree
+/home/user/wt/b1ii, local branch `lane/stack-119-b1ii-wip-2026-11-26`, tip dd583bbf7e on 9d22f040e4; read whole by the
+chair): `genesis.js :: fieldRiteRefused` (the food record names its sources, none grain; the atom `institution: farmland`
+answers false; an unanswered list or atom lets the rite stand) asked only of a record `settlement.schema.js ::
+bornByThisEngine` (a reader of the existing stamp in the stamp's own home; no stored field, no version moved; `editSlice.js`
+keeps its own line because its guard test mocks the constant); a refused row takes the next attempt's draw on the motif
+reroll's own forks, ten further attempts, else its first draw; the census row B1furrow. ITS PROOF: field rites shown where
+refused C 29 to 0, V 35 to 0; places differing C 29, V 35 (33 and 39 rows), unexplained 0; RECORDS MOVED 0 of 1,800; the 360
+master-born records 0 moved (17 keep a false field rite, as ruled); fallback rows 0; shifts: name 0, motif C 1 row, V 3 rows,
+each a later row of the same town. RULED ON ITS TWO FINDINGS: (1) THE REPLACEMENT DRAW CAN REPEAT A MOTIF THE TOWN ALREADY
+HOLDS (C 2 towns, V 2; the base 0): A FAULT, CURED: the walk takes the first attempt both admitted and of an unused motif
+(the base reroll's own test), else the first admitted, else the first draw. (2) A MILL IS NOT A FIELD: grain among the named
+sources or farmland admits, nothing else (three V places change, rightly). The lighting census is re-taken by its door at the
+join (the builder's own check refused its way of making its tree clean: the refusal stands). THE METHOD: this unit cost one
+local builder 245,000 tokens from a two-page brief; a seat pays more than that to be seated.
