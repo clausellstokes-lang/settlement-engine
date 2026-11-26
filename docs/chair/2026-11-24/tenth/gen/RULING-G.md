@@ -703,3 +703,14 @@ that KEEPS the engine's sentence and adds to it is trimmed on the owner's own pa
 fact stands in the identity line), named. (4) the universal "buys in what it cannot make" survives in two older homes (the
 fallback twin, `dossierViewModel.js:326`: 36 of 39 prints beside "Needed, and not brought in"; `general.generated.js:12021`):
 VIABILITY-TRUE's, added to its brief.
+
+**G57 (10:38 UTC on 2026-11-26): (6b)'S LEAF BROKE TWO SHRINK-ONLY DOORS; RESHAPED AS (6c); NOTHING RE-BANKED.** The builder stopped,
+rightly: `presumedThings` and `presumptionClasses` bank the two "No stable governing authority" sentences BY THEIR FILE;
+moving them to a new leaf leaves one banked row stale and two hits fresh, and their doors never bank a literal that was not in
+its file at the base. THE FAULT IS THE CHAIR'S RULING ("one home shared with the generator", ordered without asking what banks
+those sentences). RULED (RULING-CURE-118-7): the generator keeps its own literals (`safetyProfile.js` byte-equal to
+d0dc0eddb0; the leaf deleted); the display function recognises the two sentences WHOLE by two patterns where the base held one
+loose pattern; a test ties the two spellings together by bearing places that carry each sentence; proof of sameness with (6b)
+(which the chair and the second reader read): the printed Defense line differing 0 over C, V, the soak and the edited cases.
+NO SECOND READ OF (6c): its behaviour is (6b)'s by that proof, a mechanical equality stronger than a re-read; the chair reads
+its diff. (K) 211 summaries, all by the two words, elsewhere 0; (L) A4 alone pinned to its one exclusion, 16 of 16: ACCEPTED.
