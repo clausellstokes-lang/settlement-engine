@@ -153,3 +153,13 @@ ALSO ON ORIGIN, NOT A HAND-IN: CLOSE-11's coded, unproven B1(ii) draft `lane/clo
 to the local builder B1II-119 to read once and judge.
 
 | the chair's builder B1II-119 | B1(ii) (no tradition blesses fields the place does not have) | LOCAL `lane/stack-119-b1ii-wip-2026-11-26` (tree /home/user/wt/b1ii; never pushed; merged by the landing's helper) | 8a37259dc4 (the cure: one named test `motifUnused` used by the reroll and the walk; towns with a repeated motif C 0, V 0; the proof's numbers unchanged: C 29 places and 33 rows, V 35 and 39, unexplained 0, records moved 0, the 360 master-born 0 moved, fallback rows 0) | built 18:39 UTC; read whole by the chair; its second read is the join's | G64, G71 |
+
+| CLOSE-11 | C4-SECOND-LINE gated (on CLOSE-10's 3647bae53) | lane/close-11-2026-11-26-c4second-wip | 40eec947a | handed in 19:25 UTC; the diff READ BY THE CHAIR AND ACCEPTED (one line in the content document, its projection, count pins that state the corpus's figure, two doors; no ceiling touched); its second read is the join's | G49, G69, G70 |
+
+C4-SECOND-LINE as its seat reports it: line 8 "{settlement} is poor, and being easy to reach has not changed that." (the
+chair's second wording, G70); view time; records 0; soak 0 to 999 against the line: v1's pages 215 to 127; line 8 on 119;
+C4 places moved 119 (the pool's modulo pick: the D13 class). `proseComposed` A0b: over-claims 19 (its ceiling 19); under-claims
+2,328 (the line 2,327). Its gate (5,012 tests): 9 red: 7 the line's, and THE SHIFT REGISTER's TWO TESTS (five pins, untouched,
+NAMED for the owner: the variant count's sum 3,182 to 3,183 and its digest; the face counts' sum 3,182 to 3,183 and digest;
+the vids' digest; prepared in `close-11/c4/SHIFT-REGISTER-PREPARED.md`). MERGE NOTE: merge it BEFORE VIABILITY-TRUE-2; then the
+projection, the wiring census and the observed-shape baseline once, each by its door.
