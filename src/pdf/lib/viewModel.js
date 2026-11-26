@@ -255,7 +255,7 @@ function summarySlice(active, ai, useAi, aiDailyLife) {
       },
       defense: {
         readiness: dp?.readiness?.label || null,
-        scoreAvg: avgScore(dp?.scores),
+        scoreAvg: avgScore(scoresAsShown(s, dp?.scores)), // P9b (G48): the mean of the scores as printed
       },
     },
     factionsPower: factions.slice().sort((a, b) => (b?.power || 0) - (a?.power || 0)).map(f => ({
@@ -330,7 +330,7 @@ function identitySlice(s, canonical = s) {
       // consumer was the chapter-02 MAGIC chip, which therefore never printed on any
       // settlement. Removed rather than kept warm (the reader-without-writer dock).
       defenseLabel:   dp?.readiness?.label || null,
-      defenseScoreAvg: avgScore(dp?.scores),
+      defenseScoreAvg: avgScore(scoresAsShown(s, dp?.scores)), // P9b (G48): the mean of the scores as printed
       activeStress:   stressArray(s).map(x => x?.label || x?.icon).filter(Boolean),
     },
   };
@@ -408,7 +408,7 @@ function overviewSlice(active, ai, useAi) {
     economyOutput:      ec?.compound?.economyOutput ?? null,
     economicComplexity: complexityLabelShown(ec) || null,
     defenseScores:      scoresAsShown(s, dp?.scores) || {}, // P9 (G22): the beasts score read against the need
-    defenseScoreAvg:    avgScore(dp?.scores),
+    defenseScoreAvg:    avgScore(scoresAsShown(s, dp?.scores)), // P9b (G48): the mean of the scores as printed
     defenseReadiness:   dp?.readiness || null,
     safetyRatio:        sp?.safetyRatio,
     magicDependency:    !!dp?.magicDependency,

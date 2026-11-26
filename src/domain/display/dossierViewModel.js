@@ -644,7 +644,7 @@ export function deriveDefensePosture(settlement) {
   const dp = settlement?.defenseProfile || {};
   // ONE derivation, in defenseScoreBands.js. This was a second inline copy of the same mean,
   // which is the drift `parityContract.js`'s `defense.scoreAvg` row exists to catch.
-  return { readinessLabel: dp.readiness?.label || null, scoreAvg: avgScore(dp.scores) };
+  return { readinessLabel: dp.readiness?.label || null, scoreAvg: avgScore(scoresAsShown(settlement, dp.scores)) }; // P9b (G48): the mean of the scores as printed, as the PDF's
 }
 
 /**
@@ -951,3 +951,4 @@ function stoppedSupplyOf(settlement, supplying) {
     ? `${join(rows.map((r) => r.name))} · ${rows[0].mark}`
     : rows.map((r) => `${r.name} · ${r.mark}`).join(', ');
 }
+import { scoresAsShown } from '../facts/beastsReadiness.js'; // P9b (RULING G48): the mean reads the scores as printed; at the end of the file, so no cited line moves

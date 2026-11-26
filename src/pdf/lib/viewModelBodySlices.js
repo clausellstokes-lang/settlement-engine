@@ -191,7 +191,7 @@ export function defenseSlice(active) {
 
   return {
     scores:                dp.scores || {},
-    scoreAvg:              avgScore(dp.scores),
+    scoreAvg:              avgScore(scoresAsShown(s, dp.scores)), // P9b (G48): the mean of the scores as printed
     threatReadiness,
     militaryStress,
     readiness:             dp.readiness || null,
@@ -440,3 +440,4 @@ export function normalizeIncomeSources(arr) {
       : (total > 0 ? (Number(s.raw) / total) * 100 : 0),
   }));
 }
+import { scoresAsShown } from '../../domain/facts/beastsReadiness.js'; // P9b (RULING G48): the mean reads the scores as printed (the beasts grade read against the need); at the end of the file, so no cited line moves
