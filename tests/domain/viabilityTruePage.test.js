@@ -20,6 +20,7 @@ import { carriersOf } from '../../src/domain/display/foodCarrier.js';
 import { isFoodSourceGood } from '../../src/domain/display/commoditiesShown.js';
 import { generalDeskLines } from '../../src/components/new/generalDeskRead.js';
 import { safetyLineSaidOnce } from '../../src/domain/display/guardLineUnderTheLaw.js';
+import { variantByVid } from '../helpers/drawnProse.js';
 import { birth as soakBirth, ensureLaws } from '../../scripts/audit/soak-review/corpus.mjs';
 
 /** C's birth (`birthConfig({ settType })`, the close's make-plan.mjs) @param {string} seed */
@@ -40,7 +41,7 @@ const LINES = /** @type {Array<[string, RegExp, (p: ReturnType<typeof page>) => 
   ['L1 feeds itself, pays its own way', /feeds itself and pays its own way\./, (p) => p.food || p.debt],
   ['L2 grows and makes what it needs, owes no one', /grows what it eats and makes what it needs, and owes no one/, (p) => p.food || p.needed || p.debt],
   ['L3 nothing needed comes from outside', /^VIABLE: Nothing .* needs to get through the year has to come from outside\./, (p) => p.food || p.needed],
-  ['L4 buys in some of what it cannot make', /feeds itself and pays its way, and buys in some of what it cannot make/, (p) => p.food || p.debt || !p.any],
+  ['L4 feeds itself and buys in part', /feeds itself and pays its way, and buys in some of what it cannot make/, (p) => p.food || p.debt || !p.any],
   ['L5 some of what it uses is bought in', /it grows, and what it spends it earns; some of what it uses is bought in/, (p) => p.food || p.debt || !p.any],
   ['twin A buying in', /gets through the year, buying in (some of )?what its own land and trades do not provide/, (p) => !p.any],
   ['twin A universal', /gets through the year, buying in what its own land and trades do not provide/, (p) => p.needed],
@@ -51,9 +52,11 @@ const LINES = /** @type {Array<[string, RegExp, (p: ReturnType<typeof page>) => 
 function falseLines(s) {
   const t = String(deriveViability(s).summary); const p = page(s);
   /** @type {string[]} */ const out = LINES.filter(([, re, bad]) => re.test(t) && bad(p)).map(([n]) => n);
-  const gen = JSON.stringify(generalDeskLines(s));
-  if (/buys in what it cannot make/.test(gen) && p.needed) out.push('general: buys in what it cannot make, beside an unmet need');
-  if (/buys in (some of )?what it cannot make/.test(gen) && !p.any) out.push('general: buys in, nothing arrives');
+  // DS-GEN-18 BOUGHT-IN v2, computed from its pool (never a literal anchor): "buys in some of what it cannot make" holds only
+  // where something arrives (its unmet-need fault is cured by its words, G61 (2))
+  const name = String(s?.name ?? '');
+  const bought = variantByVid({ leaf: 'general', blockId: 'DS-GEN-18', poolKey: 'BOUGHT-IN', vid: 2, slots: { settlement: name } });
+  if (name && JSON.stringify(generalDeskLines(s)).includes(bought) && !p.any) out.push('general: buys in, nothing arrives');
   return out;
 }
 
