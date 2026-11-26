@@ -17,6 +17,7 @@ import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { deriveViability } from '../../src/domain/display/dossierViewModel.js';
 import { tradeListsAsPrinted } from '../../src/domain/display/tradeListDisplay.js';
+import { birth as soakBirth, ensureLaws } from '../../scripts/audit/soak-review/corpus.mjs';
 
 beforeAll(async () => { await loadGenerationLawPayloads(); });
 
@@ -37,7 +38,7 @@ function holds(s) {
   const ra = s?.resourceAnalysis?.imports; const critical = ra && !Array.isArray(ra) ? low(ra.critical) : [];
   return {
     marked: printed.some((i) => necessity.some((n) => i.includes(n)) || critical.some((t) => i.includes(t) || t.includes(i))),
-    bought: printed.length > 0 || critical.length > 0, // the record's printed imports, or a good its terrain cannot produce (the Economics tab lists it)
+    bought: printed.length > 0, // CURE-118 (2), G45 (3)+(6): what ARRIVES, the printed arriving list alone (an unmet need is not bought)
     buysFood: Number(eco.foodSecurity?.foodRecord?.normalImportPct) > 0,
     low: LOW.includes(String(eco.prosperity ?? '')),
   };
@@ -76,4 +77,18 @@ describe('E13a: the self-sufficient verdict draws among its true lines', () => {
     const seen = new Set(rows.filter((r) => r.line && r.h.bought && !r.h.low).map((r) => r.line));
     expect([...seen].sort(), 'the lines printed in that state').toEqual(expect.arrayContaining(['buysIn', 'earns', 'feeds']));
   });
+});
+
+// CURE-118 (2), the tenth chair's G45 (3) and (6): a line that says something is bought in asserts an arrival. The two E13a
+// lines admitted on a marked need (`needsImports`), so soak1k-132 (thorp) said "some of what it needs is bought in" while
+// the page printed nothing arriving (`tradeListsAsPrinted(s).imports` empty; a need not met printed apart).
+describe('CURE-118 (2): "bought in" only where something arrives', () => {
+  test('soak1k-132: nothing printed as arriving, and the verdict says nothing is bought in', async () => {
+    await ensureLaws();
+    const s = soakBirth(132).settlement;
+    expect(tradeListsAsPrinted(s).imports, 'soak1k-132 prints nothing arriving').toEqual([]);
+    const t = deriveViability(s).summary;
+    expect(t.startsWith('VIABLE'), t).toBe(true);
+    expect(t, 'no line says anything is bought in').not.toMatch(/\bbought in\b|\bbuys in\b|\bbuying in\b/);
+  }, 120_000);
 });
