@@ -134,3 +134,9 @@ content document and projected (C4 seven variants to eight); view time; records 
 moves: soak 119, C 17, V 111; every {access} fill read (the port, the crossroads, the road, the river), sound in the
 sentence. NEW ON A PAGE, the owner's to veto: that sentence.
 **CLOSE-10's FINAL HAND-OVER IS c4aa73338** (its hand-back's section 0.2 filled). Its five units of point 119 are on origin.
+
+| CLOSE-11 | E13d-3 (the skip without SAMENESS-KEYS; the bullet; the guard's limits said) | lane/close-11-2026-11-26-e13d3-wip | 9e73a943a (on CLOSE-10's 559fcc0d1: b52ec10f5 reverts SAMENESS-KEYS, the script byte-equal to E13d's 50765e60d; 228123b7b the bullet; the guard's header; 9e73a943a the lighting census by its door) | handed in 16:39 UTC; the door's diff READ BY THE CHAIR AND ACCEPTED (a title is matched uncut ONLY behind one leading bullet: ten titles of 23 or 24 letters fall under the door's 25-letter floor alone and passed it behind "· "); no source of the product changes; ITS SECOND READ IS THE JOIN'S | G67 |
+
+E13d-3 as its seat reports it: records 0, pages 0; the walker 33 of 33 (red first 1); the register NOT re-taken; typechecks at
+their ceilings; tests/lint whole the line's three. New sentences: none. ALSO: B1(i)c-2 built by CLOSE-11 (38e92b68e), its
+gate queued; C4's gate on a copy of 3647bae53 queued.
