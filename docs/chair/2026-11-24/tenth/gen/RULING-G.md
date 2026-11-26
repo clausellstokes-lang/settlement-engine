@@ -822,3 +822,17 @@ What this leaves for later, named: a rule added AFTER the release will need a wa
 option (B), or a law row): the owner's, when it comes. (5) THE PROOF as the seat states it, with: master-born records (the
 360 of its D13 measure) shown sets byte-equal, 0 moved; the name and motif shifts counted and each a later row of the SAME
 town; every birth of C and V: no field rite shown where the predicate holds and no farmland stands.
+
+**G65 (14:04 UTC on 2026-11-26): D13's THREE OWED ANSWERS RULED.** (1) A STATE-PROSE `vid` IS A POSITION: the line's number in the
+content document's numbered list; an insertion mid-list renumbers every later line. So point 120's first work is IDS MADE
+APPEND-ONLY AT THE DOCUMENT (G63 (1)), before any pick stands on them. (iv) STORING A TOWN'S PICKS AT SAVE (the seat's
+proposal, as asked: about 32 picks a town, 0.3 to 0.5 KB): beyond stable picks it would fix ONLY the steal by an added line
+(about 1 in n+1); it would NOT help any production save (master-born, no stored picks), a refused or removed line (it must
+fall back), or a reworded line; and it costs a persisted shape (a migration; the share and party projections must carry or
+veil it; export and import). THE CHAIR'S RECOMMENDATION TO THE OWNER, WHOSE DECISION IT IS: NO. Nothing is built for it.
+(v) A SAVE WITH NO FOOD RECORD AT ALL (360 line-born towns with the record stripped): the page prints NO food word (360 of
+360); the food atoms are unanswered; the fare moves on 294. The seat proposed that an `excludes` atom of the food dimension
+admit where the record has no food record. NOT TAKEN: the door stays fail-closed without exception. Why: no one can show such
+a save exists in production; every production save is re-worded by this release anyway (G62), so this is not a re-deal to
+prevent; such a town still draws among the lines that carry no mark; and an exception inside `declarationAdmits` is a cost
+carried by every later reader of that door for a case that may be empty. Written down; reopened if such a save is shown.
