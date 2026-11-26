@@ -36,7 +36,6 @@ import { waterAccessKind } from '../tradeRouteSemantics.js';
 import { bornAtOrAfter } from '../settlement.schema.js'; // B1(ii) (G64 (3), G72 (1)): the floor reader of the engine's stamp
 import { factsOf } from '../facts/factsOf.js'; // B1(ii): farmland on the roster, through its atom's own reader
 import { atomHolds } from '../facts/factVocabulary.js'; // B1(ii)
-import { tradeListsAsPrinted } from '../display/tradeListDisplay.js'; // G72 (4): the page's own Produced locally and Exports
 import { evil01, chaos01 } from '../worldPulse/deityAxes.js';
 import { seasonForTick } from '../worldPulse/worldState.js';
 import { popToTier, TIER_ORDER } from '../../data/constants.js';
@@ -192,19 +191,6 @@ function readIdentity(settlement) {
 /** The element of the fields (TRADITION_ELEMENTS 'field', glyph ▦): no founding candidate, so only an addition draws it. */
 const FIELD_ELEMENT = 'field';
 
-/** A grain good, by the whole word on the printed item, lower-cased (flour is not grain: a mill is not a field, G71). */
-const GRAIN_WORD = /\bgrain\b/;
-
-/**
- * G72 (4): DOES THE PAGE PRINT A GRAIN GOOD? The page's own "Produced locally" or Exports list, read through the leaf that
- * prints them (`display/tradeListDisplay.js :: tradeListsAsPrinted`), holds the whole word `grain`.
- * @param {unknown} settlement @returns {boolean}
- */
-function pagePrintsGrain(settlement) {
-  const { exports, local } = tradeListsAsPrinted(/** @type {Parameters<typeof tradeListsAsPrinted>[0]} */ (settlement));
-  return [...exports, ...local].some((x) => GRAIN_WORD.test(String(x).toLowerCase()));
-}
-
 // The engine that first carried the field rule (G72 (1)): a literal, never the build's GENERATOR_VERSION, so the next release keeps the rule for places 0.10.0 bore.
 const FIELD_RITE_SINCE = '0.10.0';
 
@@ -213,8 +199,7 @@ const FIELD_RITE_SINCE = '0.10.0';
  * NAMES its sources (`economicState.foodSecurity.foodRecord.foodSources`, the native keys the generator writes, never a
  * user's good by name) and `grain` is not among them, and no farmland stands on the roster (the atom `institution:
  * farmland`, through its own reader: FARMLAND ADMITS THE RITE). An empty or absent source list is unanswered, and so is an
- * unanswered farmland atom: the rite stands. Where the page's own Produced locally or Exports list prints a grain good
- * (`pagePrintsGrain`, G72 (4)), the rite stands too. ASKED ONLY OF A RECORD BORN AT OR AFTER THE ENGINE THAT FIRST CARRIED THE RULE
+ * unanswered farmland atom: the rite stands. ASKED ONLY OF A RECORD BORN AT OR AFTER THE ENGINE THAT FIRST CARRIED THE RULE
  * (`settlement.schema.js :: bornAtOrAfter`, `FIELD_RITE_SINCE`; G72 (1)): a place an earlier engine bore keeps its whole set.
  * @param {unknown} settlement @returns {boolean}
  */
@@ -223,7 +208,6 @@ export function fieldRiteRefused(settlement) {
   const sources = /** @type {{ economicState?: { foodSecurity?: { foodRecord?: { foodSources?: unknown } | null } | null } | null }} */ (settlement)
     .economicState?.foodSecurity?.foodRecord?.foodSources;
   if (!Array.isArray(sources) || sources.length === 0 || sources.includes('grain')) return false;
-  if (pagePrintsGrain(settlement)) return false; // G72 (4): the page prints grain the food record does not name
   const facts = /** @type {Parameters<typeof atomHolds>[1]} */ (factsOf(/** @type {Parameters<typeof factsOf>[0]} */ (settlement)));
   return atomHolds('institution: farmland', facts) === false;
 }

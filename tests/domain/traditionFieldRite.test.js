@@ -9,13 +9,9 @@
  *
  * RED FIRST (the line 9d22f040e): the born place below shows "The Quiet Furrow Feast" (element `field`, row 1).
  */
-import { beforeAll, describe, expect, test, vi } from 'vitest';
+import { describe, expect, test, vi } from 'vitest';
 import { deriveFoundingTraditions, fieldRiteRefused } from '../../src/domain/traditions/genesis.js';
 import { GENERATOR_VERSION, LEGACY_GENERATOR_VERSION, bornAtOrAfter } from '../../src/domain/settlement.schema.js';
-import { tradeListsAsPrinted } from '../../src/domain/display/tradeListDisplay.js';
-import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
-import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
-import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 
 /** The seed's identity: a plains road town whose row 1 draws a rite of the fields. */
@@ -119,37 +115,3 @@ describe('G72 (1): the field rule\'s stamp is a floor', () => {
   });
 });
 
-/*
- * G72 (4) (CURE-119): THE FIELD RULE READS THE PAGE'S GRAIN. The rite stands where the page's own "Produced locally" or
- * Exports list prints a grain good (the whole word `grain`, lower-cased; flour does not count: a mill is not a field, G71),
- * read through the leaf that prints those lists (`display/tradeListDisplay.js :: tradeListsAsPrinted`).
- * RED FIRST (ef10a71f3a + cures 1, 2): "the reader's case keeps The Procession of the Fields" failed: r7d-city-24 (desert,
- * date palms, sources ["fish"]) prints Exports "Desert grain" and Produced locally "grain", and was refused the rite.
- */
-describe('G72 (4): the field rule reads the page\'s grain', () => {
-  /** The second reader's dials (its `r7x` corpus), with the desert set (its `r7d` keys). */
-  const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
-  /** @param {any} s */
-  const printed = (s) => { const l = tradeListsAsPrinted(s); return [...l.exports, ...l.local].map((x) => String(x).toLowerCase()); };
-  /** @type {any} */ let city;
-  beforeAll(async () => {
-    await loadGenerationLawPayloads();
-    city = generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...DIALS, settType: 'city', terrainOverride: 'desert' }), null, { seed: 'r7d-city-24', customContent: {} });
-  }, 120_000);
-
-  test('the reader\'s case, r7d-city-24, whose page prints grain, keeps The Procession of the Fields', () => {
-    expect(city.economicState.foodSecurity.foodRecord.foodSources, 'the premise: the food record names fish alone').toEqual(['fish']);
-    expect(printed(city).some((x) => /\bgrain\b/.test(x)), 'the premise: the page prints grain').toBe(true);
-    expect(fieldRiteRefused(city)).toBe(false);
-    expect(deriveFoundingTraditions(city).map((t) => t.name)).toContain('The Procession of the Fields');
-  });
-  test('a place whose page prints only flour (its mill grinds grain bought in) is still refused', () => {
-    const flour = place(['livestock', 'fish'], {
-      institutions: [{ name: 'Tavern' }, { name: 'Mill' }],
-      economicState: { foodSecurity: { foodRecord: { foodSources: ['livestock', 'fish'] } }, localProduction: ['Flour'], primaryExports: ['Flour'], primaryImports: ['Grain'] },
-    });
-    expect(printed(flour), 'the premise: the page prints flour made and sent out').toEqual(['flour', 'flour']);
-    expect(fieldRiteRefused(flour)).toBe(true);
-    expectPresentThenAbsent(elements(before), elements(deriveFoundingTraditions(flour)), 'field', 'flour is not grain');
-  });
-});
