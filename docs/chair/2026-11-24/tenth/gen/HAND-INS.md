@@ -172,3 +172,16 @@ not five named ones; the component is unmounted); its own check 3 of 3, red firs
 soak1k-14; a mean of 40 against none); records 0; view time; the lighting census by its door; its gate (3,580 tests) 3 red,
 all the line's. MERGE NOTE: shares `dossierViewModel.js` with VIABILITY-TRUE-2 (different functions; both add an import at
 the end of the file: keep both). New sentences: none.
+
+| CLOSE-11 | VIABILITY-TRUE-2 (the debt gate's two homes; the food pounds by the tab's own path) | lane/close-11-2026-11-26-viability2-wip | ecb5b9853 (on CLOSE-10's 7279e571c) | handed in 20:29 UTC; the diff READ BY THE CHAIR AND ACCEPTED; its second read is the join's | G61, G68 |
+
+VIABILITY-TRUE-2 as its seat reports it: V1: `owesDebtShown` reads the `indebted` stress AND the `outside_debt` tension (found
+by rendering five tabs of 1,300 places: every sentence saying the place owes sat on one of the two); V2:
+`foodRowShown.js :: foodBalanceShown(row, view)`, read by the Economics tab and by the gate alike; V3: the two known misses
+of `isFoodSourceGood` written with their measure (they print no false line: where they arrive, food pounds print too). ITS
+TEST'S ORACLE IS THE RENDERED Overview, History and Economics TEXT; red first 8 of 8 on a copy of 7279e571c; green at the tip.
+Records 0; view time. Its gate: the line's reds only. NOT RUN, OWED: the per-line table of false prints by the rendered page
+on C small, V small and the soak at every tier: given to the join's second reader. New sentences: none.
+**ALL SIX UNITS OF POINT 119 ARE IN AND READ BY THE CHAIR** (20:29 UTC): E13d-3 9e73a943a; B1(i)c-2 38e92b68e; P9b-2 cabb56d92;
+C4-SECOND-LINE 40eec947a; VIABILITY-TRUE-2 ecb5b9853; B1(ii) LOCAL 8a37259dc4. The helper LAND-119 and one second reader are
+started together.
