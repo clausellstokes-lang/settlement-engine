@@ -63,3 +63,16 @@ hand.
 ANCHORS-5 26a8ad9e3c; NEED-ATOM 031e04e84c; D7-BYTES f94dc00d82; GOALS-I13 e59e38ddbb; the writer-reach re-take. THE
 SECOND READER's EIGHT (G45) are cured on the landing's tree by the chair's builder, not on the join. POINT 119 (CLOSE-9):
 B1(i)b, E13d, P9b (a measure), D13 STABLE-PICKS (a design), B1(ii) redesigned.
+
+## POINT 119'S HAND-INS (opened 07:48 UTC on 2026-11-26)
+| seat | unit | branch | commit | state | ruling |
+|---|---|---|---|---|---|
+| CLOSE-9 | E13d (the sameness door skips role titles and fixed captions) | lane/close-9-2026-11-26-e13d-wip | 3b4fe205f (on 3836a832e3; 3467006b9 door and walker, 81c2efc8e the register by --write, 3b4fe205f the lighting census by its door) | handed in 07:48 UTC; NOT YET READ by the chair or a second reader | G35 |
+
+E13d as its seat reports it: `scripts/sameness-census.mjs :: measureSlots` skips a printed sentence that IS a role title (the
+honorific tables, the catalogue's faces, the minted titles) or IS a caption sentence of `sectionHelp.js`: 19 sentences, derived
+by import, whole-sentence match, no slot skipped whole. Records moved 0, pages moved 0; the door's confirmed rises 11 to 0. THE
+REGISTER'S RE-TAKE IS ITS OWN COMMIT (81c2efc8e: 1,528 changes over 650 rows, because the register had not been re-taken since
+7e93c087b: 546 unregistered and 742 stale; E13d's own share 83) AND IS RULED AT THE LANDING, NOT ASSUMED. Found and left: a
+caption that a place's own name masks still counts. Merge note: the two registers take the line's side and are re-taken by
+their doors.
