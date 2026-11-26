@@ -783,3 +783,23 @@ it can hold for about 650 lines of 360 towns. THE NEW BAR: FORWARD STABILITY: fr
 moves the printed line only for the towns that drew the changed line. The seat designs to that (five points put to it: the
 pick; the sites it covers; whether the switch can be taken in the same release so saved towns change once; storing picks at
 save, proposed only, a persisted shape being the owner's; the save with no food record).
+
+**G63 (13:43 UTC on 2026-11-26): D13's DESIGN (A) ACCEPTED IN PRINCIPLE AS POINT 120's ONE UNIT; NOT BUILT IN POINT 119.** The seat's
+design (its message crossed the chair's change of bar and reached the same crux): STABLE-PICKS BY RENDEZVOUS: at the view-time
+slots a town page prints from (`dailyLife.js :: pickNameable`, eleven sites; `dossierViewModel.js :: pickAdmitted` and
+`pickTrue`; `stateProseKernel.js :: resolveDeclaredPosition`'s drawn index) the pick is the ADMITTED line with the highest
+hash of the slot's key and THE LINE'S OWN ID. A pool edit then moves only a town whose drawn line was refused or removed, or
+one for which an added line hashes highest (about 1 in n+1); no law stamp (a production save is re-worded by this release
+anyway, G62, so the switch costs it nothing more: SAVED TOWNS CHANGE ONCE). Option (B) (a `since` stamp on lines added later,
+so an addition never steals) NOT TAKEN now. RULED: ACCEPTED, WITH FOUR CONDITIONS, AND AS ITS OWN POINT: (1) AN ID THAT NEVER
+MOVES: the design stands on line ids, and the measure itself found 548 state-prose lines it could not match by `vid` (a pool
+renumbered?): a line's id is APPEND-ONLY in its pool (never renumbered, never reused; a removed line's id is retired), held by
+a walker with its own baseline; where a pool has no ids today, they are written once. (2) ITS COST IS MEASURED BEFORE IT IS
+BUILT: the switch re-deals every line-born page, so every test that pins "this seed prints this line" goes stale: a scratch
+build, never committed, and the count of reds by file across `tests/domain`, `tests/components`, `tests/generators`,
+`tests/lint`, `tests/copy`: the chair rules on that count. (3) ITS PROOF as the seat states it (the 360 master-born records;
+a planted removal of an undrawn line moves 0; a planted removal of a drawn line moves exactly its drawers; a planted addition
+moves exactly the towns it out-hashes), AND records moved 0 on C and V, AND the page lines that move are in the three slot
+families and nowhere else. (4) THE OTHER VIEW-TIME `% length` SITES (77 by its census): each named as on a town page or
+outside the line (advance time, the simulator, the map, admin), with the town-page ones counted, not left as one number.
+ORDER: point 119 is finished first (units 1 to 4b, B1(ii)'s design); D13 is POINT 120, alone, so its churn is read alone.
