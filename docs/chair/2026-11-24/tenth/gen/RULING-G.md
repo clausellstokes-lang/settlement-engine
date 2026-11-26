@@ -872,3 +872,26 @@ any shape of pool; it does NOT see a string built by concatenation, an interpola
 JSX text (ten planted cases passed it): its header names those limits, so nobody reads it as a proof. Today's truth is
 measured, not guarded: every skipped print in 60 rendered towns sits at a caption position or a PDF role cell, and no skipped
 string occurs outside its homes in 210,926 literals.
+
+**G68 (16:59 UTC on 2026-11-26): THE SECOND READER ON VIABILITY-TRUE AND P9b (`landing/119/SECOND-READER-119-C.txt`), RULED; CLOSE-11's MARK RAISED.**
+VIABILITY-TRUE (7279e571c): 1,707 of 1,720 rendered pages true; PDF and Foundry print the same sentence on all 1,720; the
+correction row sound; the older safety sentence exact. ITS HOLES: (1) THE DEBT GATE AND ITS ORACLE READ THE SAME FIELD AND
+BOTH MISSED A SECOND PRINTER: the Overview prints a debt sentence from the tension `outside_debt` with no `indebted`
+stress (13 of 1,720 pages; the seat's "0 false" was true of its oracle, not of the page): cure V1: the gate reads every home
+that prints a debt sentence, and THE ORACLE READS THE RENDERED PAGE. (3) A record with no food record (THE SHAPE WRITTEN
+BEFORE 2026-11-03: so such saves may well exist in production, which G65 (v) said nobody could show): the Economics tab
+falls back and still prints imported pounds while the gate reads 0: cure V2: the gate reads the tab's own value by the tab's
+own path. G65 (v) IS REOPENED AS A MEASURE in point 120: a record of the pre-2026-11-03 shape, every line its page prints
+false by its own page. (2) THE SHARE LANE's, A18, written down (paused): the shared page prints the viability summary STORED
+at the owner's last save, and `PUBLIC_PROSE_VERSION` ('pp-1'; the stored prose is new in this pull request and is not on
+master, so no production page is stale today) is bumped by no wording unit: the rule "a release that changes a stored
+desk's wording bumps the version" is the lane's to set. NAMED: `isFoodSourceGood` misses "Preserved provisions" and "Game
+and hides" (no false print in 4,970 births).
+P9b (12c77ae3f): 0 of 9,680 surface texts differ over 440 places; the five values agree. ITS HOLES: (4) a SIXTH mean in the
+unmounted `SummaryTab.jsx` still averages stored scores and bands Critical where the others band Weak: cure P1; (5) a
+non-numeric stored score is turned into a number, so a null mean becomes 40 and a silent headline prints: cure P2.
+`landing/RULING-119-CURES-1.txt` SENT to CLOSE-11.
+THE SEATS' MARK: CLOSE-11 stood at 384,390 used tokens 43 minutes after seating, most of it the seating; a mark of 400,000
+ends a seat before its work, and each new seat pays that seating again (about 10 to 12 in cost). THE MARK IS 650,000 (the
+automatic summary comes at 784,000), a turn ended every hour so the chair can read it; the next start file is trimmed by
+what CLOSE-11 reports its dearest reading to have been.

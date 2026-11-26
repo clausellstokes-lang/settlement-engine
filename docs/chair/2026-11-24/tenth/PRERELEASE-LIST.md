@@ -192,3 +192,8 @@ E13e "THE SAMENESS DOOR KEYED BY WHAT IT MEASURES": the register keys a slot by 
 retirement and an addition and a rise can be written unseen; SAMENESS-KEYS (inheritance) was taken out of point 119 as
 unsound on such keys. Re-key by surface, size and sentence; with E13c. Until then the register is not re-taken without the
 matched report. B1(i)c-2 (point 119): the port route gives furs.
+
+## ADDED 16:59 UTC ON 2026-11-26 (G68)
+A18 (the share lane, paused): the shared page prints a desk's wording as STORED at the owner's last save; a release that
+changes a stored desk's wording must bump `PUBLIC_PROSE_VERSION` (no wording unit does). OLD-SAVE (point 120, a measure):
+a record of the shape written before 2026-11-03 (no food record): every line its page prints false by its own page.
