@@ -157,7 +157,12 @@ function bornCensus(/** @type {string} */ seed) {
   return generateSettlementPipeline(birthConfig(cfg), null, { seed, customContent: {} });
 }
 const ONE_MEMBER = ['r2r-hamlet-30', 'r2r-thorp-1', 'r2s-occupied-village-0', 'r2s-plague_onset-hamlet-0'];
-const MANY_MEMBERS = ['r2r-hamlet-6', 'r2r-hamlet-25', 'r2r-hamlet-33'];
+// RULING CURE-118-5 (7): r2r-hamlet-33 (Puripuram: a seat of one holder and a second, so no council line prints since G1's
+// `ruling body`) is re-chosen by the arm's own criterion. THE SCAN'S RULE: the census keys r2r-hamlet-0.. in order, born as
+// `bornCensus` births them; a key is taken where on the record, its public form and the share veil the seat counts two or
+// more members (`seatMembers`), v2 and its sibling v1 are admitted and the twin v6 refused, and the owner's printed dossier
+// says "goes to the whole <seat>"; the first such key not named already (0..119: 6, 25, 42, 45, 58, ...) is r2r-hamlet-42.
+const MANY_MEMBERS = ['r2r-hamlet-6', 'r2r-hamlet-25', 'r2r-hamlet-42'];
 
 describe('BAR8-DESKS-DEF · 14c over born census towns: the seat of one takes the twin, the seat of many the line (every town, every form)', () => {
   // A PLAIN TEST THAT LOOPS OVER THE ROWS (2026-11-18, BAR8-DESKS-2, ruling BR32 (3)): it was an `it.each`, which the
