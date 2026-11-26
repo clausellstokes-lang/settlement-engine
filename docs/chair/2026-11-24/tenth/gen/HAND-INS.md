@@ -108,3 +108,20 @@ ore 14 to 15, iron 2 to 1); TWO STORED FIGURES for the owner's signing: `hookThe
 `pipelinePinnedChoosers` A6 (32 to 33). Sizes: first paint +63 raw on the line, the worker +186. New sentences: none.
 E13d-2's third-exception arm is a0bb07722 on the seat's machine (35 of 35), not yet pushed. ALSO BUILT, NOT YET HANDED IN:
 VIABILITY-TRUE at d90765fdc (false prints 0 after, by the seat); P9b in its gates.
+
+| CLOSE-10 | P9b (the mean reads the scores as shown) | lane/close-10-2026-11-26-p9b-wip | 12c77ae3f (on the line 9d22f040e4) | handed in 16:11 UTC; read by the chair (five call sites, three files) | G48 |
+| CLOSE-10 | VIABILITY-TRUE (every viability line true of its own page) | lane/close-10-2026-11-26-viability-wip | 7279e571c (d90765fdc the build; fb4dc4b67 two older tests re-pointed; 85f645abf the lighting census; 5b59b5c08; 7279e571c observed-shape by its door) | handed in 16:11 UTC; the source read by the chair; ONE SECOND READER FOR BOTH STARTED AT THE HAND-IN (agent a3f2ad90597420247; scratch `$S/reader6/`) | G61, G56 |
+| CLOSE-10 | E13d-2 final tip | lane/close-10-2026-11-26-e13d2-wip | 559fcc0d1 (a0bb07722 the title-keyed arm; the census) | CLOSE-11 builds E13d-3 on it (G67) | G67 |
+
+P9b as its seat reports it: records 0; pages 0 (175 V births, web, three PDFs and the session sheet byte-equal); view time; one
+named red, `safetyReaderBytes`, on the list. VIABILITY-TRUE as its seat reports it: THE FOOD HOME IS
+`commoditiesShown.js :: isFoodSourceGood` (the food sources' own goods), NOT the goods catalogue (which files Salt under
+food: twin A would then print on 362 of C's 450 small places): a change from G66's note, accepted on that measure. False
+prints AFTER, per line (L1 to L5, twins A and B, the strained line, the general pool's line): 0 on C small, V small and soak 0
+to 999 at every tier. Summaries moved C 33, V 73, soak 110; a line TRUE before that moved: only by twin A's own "some of"
+(V 15, soak 10); by a shrunk admitted set 0. Records 0; view time. A self-sufficient place that owes a debt and buys a
+little food (soak1k-285): "Castelminus gets through the year, buying in some of what its own land and trades do not
+provide." NEW ON A PAGE, the owner's to veto: twin A and DS-GEN-18 line 2 with "some of".
+**CLOSE-10 HANDED OVER at 9355bed72** (`lane/close-10-2026-11-26`; its hand-back section 0; its tools under `close-10/tools`).
+C4-SECOND-LINE was BUILT by it (3647bae53) and NOT PUSHED: the chair asked it to push and hand it in (16:11 UTC); if it does not,
+CLOSE-11 rebuilds it (G49).
