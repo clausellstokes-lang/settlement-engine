@@ -417,12 +417,14 @@ export function pageCensusFindings(settlement, views) {
     return said ? [said, `Food Security prints ${printed}`] : null;
   });
   run('B1land', () => {
-    // a house printed on the page that the land withholds here (domain/landWithholding.js: the desert withholds fish, timber
-    // and game; a port or river route or a native nearby resource gives them back)
+    // a house printed on the page that the land withholds here (domain/landWithholding.js: the desert withholds fish, timber,
+    // game and furs; a port or river route, an entrepot route (furs) or a native nearby resource gives them back). A house the
+    // USER forced (`source: 'forced'`) is the user's to keep: never reported (B1(i)c, G52)
     const config = obj(rec.config);
     const land = { terrainType: s(config.terrainType), tradeRoute: s(config.tradeRouteAccess), nearbyResources: nativeSemanticResourceKeys(config) };
     for (const house of live) {
       const name = s(obj(house).name);
+      if (obj(house).source === 'forced') continue;
       if (!name || !landWithholdsHouse(land, /** @type {Parameters<typeof landWithholdsHouse>[1]} */ (house))) continue;
       const l = all.find((x) => x.includes(name));
       if (l) return [l, `${name}: ${land.terrainType}, route ${land.tradeRoute || 'none'}, resources ${land.nearbyResources.join(', ') || 'none'}`];

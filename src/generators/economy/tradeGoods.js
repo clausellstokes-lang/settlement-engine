@@ -7,7 +7,7 @@ import { customDeps as _customDeps } from '../../lib/dependencyEngine.js';
 import { COMMODITY_CATEGORY_MAP, GOODS_CATEGORIES, GOODS_MODIFIERS_BY_TIER } from '../../data/goods/chains.js';
 import { RESOURCE_DATA } from '../../data/goods/identity.js';
 import { TIER_ORDER } from '../../data/constants.js';
-import { tradeRouteTier } from '../../domain/tradeRouteSemantics.js';
+import { tradeRouteTier, routeMakesEntrepot } from '../../domain/tradeRouteSemantics.js'; // B1(i)c: the entrepot route's one home
 import {
   nativeSemanticName,
   nativeSemanticNames,
@@ -92,7 +92,7 @@ const deriveIsEntrepot = (route, institutions = []) => {
   const instNames = nativeSemanticNames(institutions)
     .map(name => name.toLowerCase());
   return (
-    route === 'crossroads' ||
+    routeMakesEntrepot(route) ||
     (route === 'port' && instNames.some((name) => name.includes('international trade') || name.includes('warehouse district')))
   );
 };

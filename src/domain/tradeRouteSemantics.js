@@ -171,6 +171,18 @@ export function tradeRouteSemantics(value) {
   };
 }
 
+/**
+ * B1(i)c (the tenth chair's G60): THE ROUTE THAT MAKES A PLACE AN ENTREPOT BY ITSELF, whatever stands there: a crossroads.
+ * (A port is an entrepot only with an international trade house or a warehouse district: that clause reads the roster and
+ * stays in `generators/economy/tradeGoods.js :: deriveIsEntrepot`, which reads THIS for its first clause.) Read also by
+ * `domain/landWithholding.js`: furs reach a desert place by such a route, so the land rule and the chain that prints
+ * "entrepot" cannot part.
+ * @param {unknown} value the raw trade-route value @returns {boolean}
+ */
+export function routeMakesEntrepot(value) {
+  return value === 'crossroads';
+}
+
 /** The route values the random route pools can roll (resolveConfig TERRAIN_ROUTE_POOLS). */
 export const GENERATED_ROUTE_VALUES = Object.freeze([
   'road', 'river', 'crossroads', 'port', 'isolated',
