@@ -1,3 +1,6 @@
+WHY E1 LEFT POINT 118 (RULING CURE-118-2): THREE KINDS OF GARBLE FROM ONE UNIT. (1) ofForms took one word for a place's possessed phrase: "The money lost at the gambling of Dragon's Reach tables pays for far more than the tables" (town "Dragon's Reach", second-118-a).
+(2) qualifiedPossessives put the verb before its subject: "The first post came of Nagendra Bajaj (the hospital's master) from that word." (soak1k-166, relationships[23]).
+(3) mentionOf's role skip fell to the surname rung of a bracketed name: "the midwife needs master)'s silence about certain others." (soak1k-166, relationships[7]).
 E1-PAIRS (CURE-118, proof (a) of START-CURE-118.txt; the tenth chair G45 (2)+(4)). Every string that differs between the tip
 (lane/stack-118-cures-wip-2026-11-26 at b812c96549, cures 1-5) and a SCRATCH copy of the same tip with E1 stubbed to the identity
 (powerSentenceName.js :: holdsPossessive -> false; personMention.js ROLE_POSSESSIVE never matches; stateProseKernel.js :: ofForms
