@@ -43,12 +43,24 @@
  * THE READING: shareAll (the commonest sentence's places over ALL the size's places) is the ceiling's reading for a slot
  * printing at most 1.5 sentences a place; SEEN for a slot printing more; shareIn (over the holders) is printed beside.
  * MIN_PLACES and NOISE_SE are measured; their measures are written beside them (MIN_PLACES_MEASURE, NOISE_SE_MEASURE).
+ * WHAT THE DOOR DOES NOT COUNT (E13d; the owner, deferring it to the chair: "Whether the repeated-wording check should skip
+ * job titles and fixed captions. I recommend yes."; the tenth chair's G35: "the sameness door does not count a role title or
+ * a fixed caption as a drawn sentence"): a printed sentence that IS a role title (a face's title in `faceHonorifics.js`'s
+ * tables, the catalogue's faces, the mints' titles in `mintTitles.js`) or IS a sentence of a fixed section caption
+ * (`copy/sectionHelp.js`) is not counted at any slot: its share is how many places hold that person or that section, not
+ * how often a draw repeats. The set is DERIVED BY IMPORT from those homes (`notDrawnSentences`), never typed; it is matched
+ * by the whole sentence's text, never by its length, and no slot is skipped whole (a slot that prints a drawn sentence
+ * beside a title is still counted by its drawn sentences). Held by tests/lint/samenessCensus.walker.test.js.
  */
 import { execFileSync, spawn } from 'node:child_process';
 import { existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join, relative } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
+import { FACE_HONORIFICS, FACE_HONORIFICS_INLAND, FACE_HONORIFICS_BY_CULTURE } from '../src/data/faceHonorifics.js';
+import { faceRows, FACE_SEAT } from '../src/data/institutionalCatalog.js';
+import { SEAT_MINT_TITLES, OTHER_MINT_ROWS } from '../src/generators/people/mintTitles.js';
+import { SECTION_HELP, SYSTEMS_HEALTH_VINTAGE } from '../src/copy/sectionHelp.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const RENDER = join(ROOT, 'scripts/census/sameness-census.render.census.jsx');
@@ -73,6 +85,35 @@ export function maskerFor(t) {
 const SPLIT = /(?<=[.!?…])\s+(?=[A-Z"“'‘#0])/u;
 /** The sentences of one masked line (census.mjs's threshold). @param {string} line @returns {string[]} */
 export const sentencesOf = (line) => String(line).split(SPLIT).map((s) => s.trim()).filter((s) => s.length >= 25 && s.includes(' '));
+/**
+ * THE ROLE TITLES, from their own homes (E13d, G35): every face title `faceHonorifics.js` keys its honorifics by (its walker
+ * pins every catalogue face and mint title there), the catalogue's own faces, and the two mints' titles.
+ * @returns {string[]}
+ */
+export function roleTitles() {
+  const titles = new Set([...Object.keys(FACE_HONORIFICS), ...Object.keys(FACE_HONORIFICS_INLAND)]);
+  for (const byTitle of Object.values(FACE_HONORIFICS_BY_CULTURE)) for (const t of Object.keys(byTitle)) titles.add(t);
+  for (const r of faceRows()) if (typeof r.face === 'string' && r.face !== FACE_SEAT) titles.add(r.face);
+  for (const t of Object.values(SEAT_MINT_TITLES)) titles.add(String(t));
+  for (const row of Object.values(OTHER_MINT_ROWS)) titles.add(String(row.title));
+  return [...titles].sort();
+}
+/** THE FIXED SECTION CAPTIONS (E13d, G35): every `?` pill's words and the vintage sentence. @returns {string[]} */
+export function fixedCaptions() { return [...Object.values(SECTION_HELP), SYSTEMS_HEALTH_VINTAGE]; }
+/**
+ * THE SENTENCES THE DOOR DOES NOT COUNT (E13d, G35): each role title as printed (its own case and sentence case) and each
+ * sentence of each fixed caption, masked as the door masks (digits to `0`) and cut by the door's own `sentencesOf`, so
+ * only what the door would otherwise count is here. Derived by import, never typed.
+ * @returns {Set<string>}
+ */
+export function notDrawnSentences() {
+  const out = new Set();
+  const add = (/** @type {string} */ text) => { for (const s of sentencesOf(String(text).replace(/\d+/g, '0'))) out.add(s); };
+  for (const t of roleTitles()) { add(t); add(t.charAt(0).toUpperCase() + t.slice(1)); }
+  for (const c of fixedCaptions()) add(c);
+  return out;
+}
+const NOT_DRAWN = notDrawnSentences();
 /** The surface FAMILY a slot's surface belongs to (table c). @param {string} surface */
 export const familyOf = (surface) => (surface.startsWith('web:') ? 'web' : surface);
 
@@ -283,6 +324,7 @@ export function measureSlots(rows) {
   rows.forEach((row, i) => {
     const heads = storedHeads(row.stored);
     for (const [surface, lines] of Object.entries(row.surfaces)) for (const line of lines) for (const s of sentencesOf(line[0])) {
+      if (NOT_DRAWN.has(s)) continue; // E13d (G35): a role title or a fixed caption is not a drawn sentence
       const paths = attributionOf(s, row.stored, heads);
       const key = slotKey(surface, line);
       let sl = slots.get(key); if (!sl) { sl = { bySentence: new Map(), paths: new Map(), exactOnly: true }; slots.set(key, sl); }

@@ -25,8 +25,12 @@ import { describe, expect, test } from 'vitest';
 import {
   CORPUS, LAW1_MEASURE, MIN_PLACES, NOISE_SE, REGISTER_PATH, SIZES, attributionOf, ceil2, confirmRises, emptyRegister,
   incompleteRender, judge, law1RedPlaces, law1WatchPlaces, measureSlots, readRegister, repeatsInPlace, shareError, slotKey,
-  storedHeads, tighten, writeRows,
+  storedHeads, tighten, writeRows, notDrawnSentences, roleTitles, fixedCaptions, sentencesOf,
 } from '../../scripts/sameness-census.mjs';
+import { FACE_HONORIFICS, FACE_HONORIFICS_INLAND, FACE_HONORIFICS_BY_CULTURE } from '../../src/data/faceHonorifics.js';
+import { faceRows } from '../../src/data/institutionalCatalog.js';
+import { SEAT_MINT_TITLES, OTHER_MINT_ROWS } from '../../src/generators/people/mintTitles.js';
+import { SECTION_HELP, SYSTEMS_HEALTH_VINTAGE } from '../../src/copy/sectionHelp.js';
 
 const S = 'web:Summary/Overview';
 const POS = 'OverviewTab > Section';
@@ -234,5 +238,67 @@ describe('the register', () => {
   test('the classes file cites by symbol, never by line', () => {
     const classes = readFileSync(new URL('../../scripts/census/sameness-census.classes.json', import.meta.url), 'utf8');
     expect(classes.match(/\.(m?jsx?):\d+/g) || []).toEqual([]);
+  });
+});
+
+describe('E13d (G35): the door does not count a role title or a fixed caption as a drawn sentence', () => {
+  const skip = notDrawnSentences();
+  test('not vacuous: the four long face titles the door met and the NPCs pill are in the set', () => {
+    for (const x of ['the senior craft-guild master', 'the senior charter master', 'the speaker of the assembly', 'the guildmaster of thieves', 'The people worth knowing and what each one holds.']) expect(skip.has(x)).toBe(true);
+  });
+  test('every skipped string comes from the homes, by import: a face title (its own case or sentence case) or a sentence of a section caption', () => {
+    const homeTitles = new Set([...Object.keys(FACE_HONORIFICS), ...Object.keys(FACE_HONORIFICS_INLAND), ...Object.values(FACE_HONORIFICS_BY_CULTURE).flatMap((t) => Object.keys(t)),
+      ...faceRows().map((r) => r.face).filter((f) => typeof f === 'string'), ...Object.values(SEAT_MINT_TITLES).map(String), ...Object.values(OTHER_MINT_ROWS).map((r) => String(r.title))]);
+    for (const t of roleTitles()) expect({ t, home: homeTitles.has(t) }).toEqual({ t, home: true });
+    expect([...fixedCaptions()].sort()).toEqual([...Object.values(SECTION_HELP), SYSTEMS_HEALTH_VINTAGE].sort());
+    const fromHomes = new Set([...roleTitles().flatMap((t) => [t, t.charAt(0).toUpperCase() + t.slice(1)]), ...fixedCaptions()].flatMap((x) => sentencesOf(x.replace(/\d+/g, '0'))));
+    expect([...skip].filter((x) => !fromHomes.has(x))).toEqual([]);
+  });
+  test('no line of a drawn pool the door knows is in the set: the register\'s drawn rows (STATE, NARRATIVE, CATALOGUE) and every string pool exported under src/data', async () => {
+    const drawnRows = Object.entries(readRegister().rows).filter(([, r]) => /^(STATE|NARRATIVE|CATALOGUE)\??$/.test(r.class));
+    expect(drawnRows.length).toBeGreaterThan(100);
+    expect(drawnRows.filter(([, r]) => skip.has(r.sentence)).map(([k]) => k)).toEqual([]);
+    const { readdirSync } = await import('node:fs');
+    const root = new URL('../../src/data/', import.meta.url);
+    /** @type {string[]} */ const files = [];
+    const walk = (/** @type {URL} */ d) => { for (const e of readdirSync(d, { withFileTypes: true })) { const u = new URL(e.name + (e.isDirectory() ? '/' : ''), d); if (e.isDirectory()) walk(u); else if (/\.js$/.test(e.name) && !/\.test\./.test(e.name)) files.push(u.href); } };
+    walk(root);
+    const homes = /\/src\/data\/(faceHonorifics|institutionalCatalog)\.js$/;
+    /** @type {string[]} */ const hits = []; let pools = 0;
+    const titles = new Set(roleTitles()); /** @type {string[]} */ const titleLists = [];
+    const seen = new Set();
+    const visit = (/** @type {unknown} */ v, /** @type {string} */ at, depth = 0) => {
+      if (!v || typeof v !== 'object' || seen.has(v) || depth > 8) return;
+      seen.add(v);
+      if (Array.isArray(v) && v.length >= 2 && v.every((x) => typeof x === 'string')) {
+        if (v.every((x) => titles.has(x))) { titleLists.push(at); return; } // a list of role titles (an order, a key list) is a title table, not a drawn pool
+        pools++;
+        for (const line of v) for (const s of sentencesOf(String(line).replace(/\d+/g, '0'))) if (skip.has(s)) hits.push(`${at}: ${s}`);
+        return;
+      }
+      for (const [k, x] of Object.entries(v)) visit(x, `${at}.${k}`, depth + 1);
+    };
+    for (const f of files.filter((x) => !homes.test(x))) {
+      const mod = await import(/* @vite-ignore */ f);
+      for (const [name, value] of Object.entries(mod)) visit(value, `${f.split('/src/data/')[1]}::${name}`);
+    }
+    expect(pools).toBeGreaterThan(500);
+    expect(titleLists).toEqual(expect.arrayContaining(['people/titleSecretsPresentations.js::TITLE_ORDER', 'personHooksByTitle.js::PERSON_HOOK_TITLES'])); // not vacuous: the title tables met outside the homes are passed over as tables
+    expect(hits).toEqual([]);
+  }, 120000);
+  test('the door skips by the whole sentence, never by length or by slot: a title alone is not counted, a drawn line beside it still is, and a line that holds a title is counted', () => {
+    const title = 'the senior craft-guild master';
+    const drawn = 'The guild keeps its own books and will not open them.';
+    const holds = 'The senior craft-guild master keeps the guild\'s books.';
+    const sameLength = 'x'.repeat(title.length - 4) + ' y z'; // as long as the title, with spaces: counted
+    expect(sameLength.length).toBe(title.length);
+    const rows = Array.from({ length: 20 }, (_, i) => ({ seed: `p-${i}`, surfaces: { [S]: [[title, '', '', POS], [i < 10 ? drawn : holds, '', '', POS], [sameLength, '', '', 'Other > Row']] }, stored: {} }));
+    const m = measureSlots(rows);
+    const at = /** @type {any} */ (m.get(SLOT));
+    expect(at).toMatchObject({ places: 20, distinct: 2, topPlaces: 10 });
+    expect([at.sentence === drawn || at.sentence === holds]).toEqual([true]);
+    expect(m.get(slotKey(S, ['', '', '', 'Other > Row']))).toMatchObject({ places: 20, distinct: 1, sentence: sameLength });
+    const onlyTitle = measureSlots(places(20, () => title));
+    expect([...onlyTitle.keys()]).toEqual([]);
   });
 });
