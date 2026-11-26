@@ -54,7 +54,10 @@ Also, by HAND-INS: B1(ii) REDESIGNED (R24r 1), B1(i)b (R24r 6), P9's (i) writer-
   00fffd5fef; doors g4: lighting d8651d2a81 (->3815), wiring 8aff7e3047, observed-shape 85d93cdfd2. GROUP 4 BOUNDARY = 85d93cdfd2.
   `npm run gen:dossier-prose` after E4 and after G1: byte-equal (nothing to commit). oppositeSentencePairs, dailyLifeOffice,
   bar5SafetyLawBand green on the joined tree. Lint after g4: the line's three + writerReach. A slip: lint ran after 17 (not 15).
-  IN FLIGHT: 29 E3, then its doors, then lint. THEN: ANCHORS-5 (a builder), the cures merged (NEED-ATOM, D7-BYTES, GOALS-I13), the
+  29 E3 b0815cab58 MERGED (no textual conflict) but the typecheck STOPPED it: D3 x E3 semantic conflict (D3's leaf
+  governanceLabelRoster.js calls E3's changed `noGrazingQuarrelOf` with the old argument shape). STOP SENT TO THE CHAIR (00:3x UTC
+  2026-11-26, re-sent after a container restart) with a one-line cure proposed (the leaf takes E3's exact arguments). WAITING the
+  ruling; the join is NOT pushed past c0abbf8d49 (the hook would refuse b0815cab58). Then E3's doors and lint. THEN: ANCHORS-5 (a builder), the cures merged (NEED-ATOM, D7-BYTES, GOALS-I13), the
   writer-reach rows (D6, P9) by the door, proof (4).
 - D7-BYTES DONE (builder; its REPORT.md write refused too: the report kept here): `lane/close-8-2026-11-25-d7-bytes-wip` f94dc00d82,
   PUSHED, vite.config.js only: `facts/crisisBody.js` and `people/stressPowerFaces.js` on FIRSTPAINT2_LAZY_DOMAIN. Join 0ef4d2a11 ->
