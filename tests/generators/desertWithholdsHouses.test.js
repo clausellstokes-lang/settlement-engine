@@ -15,6 +15,11 @@
  * metropolises of the visitor 900 with no hunting grounds held the district (V: 10 of the 15 desert districts); the positive
  * controls keep it before and after (dp-metropolis-19, a crossroads entrepot; dp-metropolis-30, spent hunting grounds); a
  * district the user FORCES stands (dp-city-20).
+ *
+ * B1(i)c-2 (CLOSE-11; the tenth chair's G67): FURS COME BY SEA: the PORT route gives furs (`LAND_GIVERS.furs.routes`), beside
+ * the entrepot route. RED FIRST (19a5855f3): desert port cities and metropolises born with the port forced (the plan
+ * `dpp-<size>-<i>`: the visitor's config with `terrainOverride: 'desert'`, `tradeRouteAccess: 'port'`) print
+ * `isEntrepot: true` and lost the district they held at the line (measured: 90 of 120, every one an entrepot).
  */
 import { beforeAll, describe, expect, test } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
@@ -43,10 +48,19 @@ const NAMED_FURRIER = ['dp-city-20', 'dp-city-54', 'dp-city-55', 'dp-city-65', '
 /** B1(i)c's positive controls: furs reach these places (an entrepot route; spent hunting grounds) */
 const FURS_REACH = { 'dp-metropolis-19': 'crossroads', 'dp-metropolis-98': 'crossroads', 'dp-metropolis-143': 'crossroads', 'dp-metropolis-30': 'spent grounds', 'dp-metropolis-117': 'spent grounds' };
 
+/** B1(i)c-2: desert port cities and metropolises (port forced) that held the district at the line, each printing isEntrepot */
+const NAMED_PORT = ['dpp-city-1', 'dpp-city-4', 'dpp-city-5', 'dpp-metropolis-0'];
+/** the desert-port birth (the visitor's config, the land and the route forced) @param {string} seed */
+const desertPort = (seed) => {
+  const size = String(seed.split('-')[1]);
+  return generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: size, _randomizePriorities: true, terrainOverride: 'desert', tradeRouteAccess: 'port' }), null, { seed, customContent: {} });
+};
+
 /** @type {Record<string, any>} */ const born = {};
 beforeAll(async () => {
   await loadGenerationLawPayloads();
   for (const seed of [...Object.keys(NAMED), 'dp-village-129', ...NAMED_FURRIER, ...Object.keys(FURS_REACH)]) born[seed] = visitor(seed);
+  for (const seed of NAMED_PORT) born[seed] = desertPort(seed);
   const forced = { ...DEFAULT_CONFIG, settType: 'city', _randomizePriorities: true, _institutionToggles: { "city::Economy::Furrier's district": { allow: true, require: true } } };
   born['forced:dp-city-20'] = generateSettlementPipeline(birthConfig(forced), null, { seed: 'dp-city-20', customContent: {} });
 }, 300000);
@@ -88,6 +102,14 @@ describe('B1(i)c: the Furrier\'s district stands where furs reach the place', ()
       expect(liveNames(s)).toContain(FURRIER);
     });
   }
+  for (const seed of NAMED_PORT) {
+    test(`B1(i)c-2 ${seed}: a desert port prints itself an entrepot, and furs come by sea: its Furrier's district stands`, () => {
+      const s = born[seed];
+      expect([s.config.terrainType, s.config.tradeRouteAccess, s.config.nearbyResources.includes('hunting_grounds')]).toEqual(['desert', 'port', false]);
+      expect(s.economicState.isEntrepot).toBe(true); // the page's own entrepot flag
+      expect(liveNames(s)).toContain(FURRIER);
+    });
+  }
   test('a district the USER forces stands, whatever the land (dp-city-20, the same seed, forced)', () => {
     const s = born['forced:dp-city-20'];
     expect([s.config.terrainType, s.config.nearbyResources.includes('hunting_grounds')]).toEqual(['desert', false]);
@@ -106,6 +128,9 @@ describe('B1(i): one function, declared as data', () => {
     expect([landWithholdsHouse(crossroads, FURRIER), landWithholdsHouse(crossroads, "Hunter's lodge")]).toEqual([false, true]);
     const grounds = { ...desert, nearbyResources: ['hunting_grounds'] };
     expect([landWithholdsHouse(grounds, FURRIER), landWithholdsHouse(grounds, "Hunter's lodge")]).toEqual([false, false]);
+    // B1(i)c-2: a port gives furs (by sea) and not game; a river, a road or an isolated place gives neither
+    expect([landWithholdsHouse({ ...desert, tradeRoute: 'port' }, FURRIER), landWithholdsHouse({ ...desert, tradeRoute: 'port' }, "Hunter's lodge")]).toEqual([false, true]);
+    for (const tradeRoute of ['river', 'road', 'isolated', 'mountain_pass']) expect({ tradeRoute, held: landWithholdsHouse({ ...desert, tradeRoute }, FURRIER) }).toEqual({ tradeRoute, held: true });
     for (const terrainType of ['plains', 'hills', 'mountain', 'forest', 'coastal', 'riverside']) {
       for (const name of WITHHELD_IN_DESERT) expect(landWithholdsHouse({ terrainType, tradeRoute: 'road', nearbyResources: [] }, name)).toBe(false);
     }

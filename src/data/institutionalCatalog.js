@@ -280,8 +280,8 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       successor: "Furrier's district",
     },
     {
-      // B1(i)c (G60): the furrier works furs, so it lives on FURS, which reach a place by its own hunting grounds or by an
-      // entrepot route (domain/landWithholding.js; data/geographyData.js :: LAND_GIVERS); the Hunter's lodge lives on game
+      // B1(i)c (G60, G67): the furrier works furs, so it lives on FURS, which reach a place by its own hunting grounds, an
+      // entrepot route or the sea (domain/landWithholding.js; data/geographyData.js :: LAND_GIVERS); the Hunter's lodge lives on game
       shared: { front: 'front', name: "Furrier's district", face: 'the master furrier', livesOn: 'furs', baseChance: 0.35, desc: 'Fur processors, traders, and retailers concentrated in one area. High-value trade. Quality furs are luxury goods.', tags: ['trade', 'guild'], priorityCategory: 'economy' },
       at: {
         city: {},

@@ -736,12 +736,13 @@ export const LAND_GIVERS = Object.freeze({
   timber: Object.freeze({ routes: Object.freeze([]), resources: Object.freeze(["managed_forest", "shipbuilding_timber", "mountain_timber"]) }),
   game: Object.freeze({ routes: Object.freeze([]), resources: Object.freeze(["hunting_grounds"]) }),
   // B1(i)c (G60): furs reach a place by its own hunting grounds (spent or not: a spent ground's "Game and hides" import is
-  // written at birth from the depletion the draw already sees) or by a route that makes it an entrepot (`entrepot`:
-  // domain/tradeRouteSemantics.js :: routeMakesEntrepot, the one home `tradeGoods.js :: deriveIsEntrepot` reads; a port is
-  // an entrepot only by the houses that stand there, which the draw does not yet know, so a port does not give furs here).
-  // ACCEPTED RESIDUAL (G60): a desert road place whose tanner buys in raw hides (the livestock good, bought after the draw)
-  // does not keep a Furrier's district by it.
-  furs: Object.freeze({ routes: Object.freeze([]), resources: Object.freeze(["hunting_grounds"]), entrepot: true }),
+  // written at birth from the depletion the draw already sees), by a route that makes it an entrepot by itself (`entrepot`:
+  // domain/tradeRouteSemantics.js :: routeMakesEntrepot, the one home `tradeGoods.js :: deriveIsEntrepot` reads), or BY SEA
+  // (B1(i)c-2, G67: the port route; every desert port city and metropolis measured prints itself an entrepot, 94 of 94).
+  // ACCEPTED RESIDUALS: a desert road place whose tanner buys in raw hides (the livestock good, bought after the draw) does
+  // not keep a Furrier's district by it (G60); a desert port WITHOUT the two houses that make a port an entrepot (an
+  // international trade house, a warehouse district) keeps it all the same (G67: 0 of 94 measured).
+  furs: Object.freeze({ routes: Object.freeze(["port"]), resources: Object.freeze(["hunting_grounds"]), entrepot: true }),
 });
 
 // TERRAIN_PENALTIES computed from STRESS_TYPES — see stressTypes.js
