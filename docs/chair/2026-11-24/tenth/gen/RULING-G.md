@@ -746,3 +746,22 @@ import "Game and hides" follows from the key) or by A ROUTE THAT MAKES THE PLACE
 'game'. RESIDUAL, ACCEPTED AND NAMED: three road cities that buy the tanner's raw hides lose the district (livestock hides
 are not furs, and they are bought after the draw). NOT TAKEN: reading imports at the draw. The instrument B1land skips a
 user-forced row. Proofs as G52 gives them; `siteCoherenceRatchet` C1 re-read and named if it moves.
+
+**G61 (13:22 UTC on 2026-11-26): VIABILITY-TRUE RULED ON CLOSE-10's MEASURE.** The measure (the line 9d22f040e4; C and V thorp,
+hamlet, village, 450 each; the oracle the page's own leaves: the food row's pounds, the printed arriving list, "Needed, and
+not brought in", the debt line): prints false by the page: L1 ("feeds itself and pays its own way") C 5 of 128, V 4 of 81
+(a debt line 4, food arriving 5); L4 C 6 of 114 (debt 4, food 2); L5 C 5 of 104, V 2 of 45 (debt 3, food 4); THE FALLBACK
+TWIN A ("...buying in what its own land and trades do not provide.") C 17 OF 17, V 52 OF 67 (beside "Needed, and not brought
+in" 69; nothing arriving 3); the general pool's "buys in what it cannot make" C 6 of 6, V 9 of 10; L2, L3, twin B and the
+strained line 0. Self-sufficient places whose food row prints imported pounds while the rounded share reads 0: C 2, V 16.
+RULED, the seat's proposals with two additions: (1) THE GATES READ WHAT THE PAGE PRINTS: `buysFood` is the food row's printed
+imported pounds above 0, or a foodstuff on the printed arriving list (BY AN EXISTING HOME that says a trade good is food; if
+there is none, the gate is the food row alone and the seat says what that leaves); `buysIn` is printed pounds above 0 or a
+non-empty printed arriving list; `paysItsWay` is false where the page prints its debt line. ADDITION (a): L2 SAYS "OWES NO
+ONE": it too refuses where the debt line prints (its count was 0 by luck, not by its gate). (2) THE SENTENCES, where no gate
+can carry a universal: twin A reads "...buying in SOME OF what its own land and trades do not provide."; the general pool's
+line reads "{settlement} buys in some of what it cannot make, and the trading keeps as many people busy as the making
+would." (written in the content document and projected). (3) G56's older safety sentence as a third whole-sentence pattern.
+ADDITION (b), THE PROOF: after the build, PER LINE, prints false by the page's own leaves: 0, on C and V small places AND on
+soak 0 to 999 at every tier; and the count of places whose printed line was TRUE before and moves anyway (their admitted set
+shrank): named, for D13 (this slot is E13a's intended exception). All view time; no record moves.
