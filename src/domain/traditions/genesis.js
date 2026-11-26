@@ -425,23 +425,31 @@ export function deriveFoundingTraditions(settlement) {
         );
         return [e, a];
       };
+      /** the motif reroll's one test: the town holds no tradition of this (element, act) yet @param {TraditionElement} e @param {TraditionAct} a */
+      const motifUnused = (e, a) => !usedMotifs.has(`${e.id}|${a.id}`);
       // Reroll a few times to avoid an identical (element,act) motif already present.
       el = TRADITION_ELEMENTS[0];
       act = TRADITION_ACTS[0];
       let attempt = 0;
       for (; attempt < 5; attempt += 1) {
         [el, act] = drawAt(attempt);
-        if (!usedMotifs.has(`${el.id}|${act.id}`)) break;
+        if (motifUnused(el, act)) break;
       }
       // B1(ii) (G64 (1)): THE DRAW AS BEFORE, THE RULE AFTER. A drawn rite of the fields the place refuses takes the NEXT
       // attempt's draw (the motif reroll's own forks: no weight changes, so no other row's draw moves), up to ten further
-      // attempts, until an admitted one; if all ten draw a refused rite, the row keeps its first draw (never dropped).
+      // attempts. It takes the first that is ADMITTED and whose motif the town has not used (the reroll's own test,
+      // `motifUnused`: the base never shows one town a motif twice), else the first admitted; if all ten draw a refused rite,
+      // the row keeps its first draw (never dropped). The chair's ruling on B1II-119's finding 1.
       if (refusesFieldRite && el.id === FIELD_ELEMENT) {
         const first = Math.min(attempt, 4);
+        /** @type {[TraditionElement, TraditionAct] | null} */ let admitted = null;
         for (let k = first + 1; k <= first + 10; k += 1) { // ten further attempts (G64 (1))
           const [e, a] = drawAt(k);
-          if (e.id !== FIELD_ELEMENT) { el = e; act = a; break; }
+          if (e.id === FIELD_ELEMENT) continue;
+          if (motifUnused(e, a)) { admitted = [e, a]; break; }
+          admitted ||= [e, a];
         }
+        if (admitted) [el, act] = admitted;
       }
     }
     usedMotifs.add(`${el.id}|${act.id}`);
