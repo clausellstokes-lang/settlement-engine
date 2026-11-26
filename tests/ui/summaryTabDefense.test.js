@@ -22,6 +22,7 @@
 import { describe, test, expect, beforeAll } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { deriveDefensePosture } from '../../src/domain/display/dossierViewModel.js';
+import { scoresAsShown } from '../../src/domain/facts/beastsReadiness.js';
 
 const SEED = 'summary-defense-parity-2026-06';
 
@@ -55,7 +56,9 @@ describe('Defense average — canonical scoreAvg correctness', () => {
     // The bug was a 5-key mean. A modern settlement carries a numeric `disaster`
     // key too, so the canonical (all-numeric) mean must be computed over >5
     // values — proving the old 5-key formula was structurally wrong.
-    const scores = metropolis.defenseProfile?.scores || {};
+    // P9b-2 (the tenth chair's G68 (P1)): the mean is of the scores AS PRINTED (`beastsReadiness.js :: scoresAsShown`, the
+    // beasts score read against the need), the leaf every defence mean reads (P9b); the stored bag still carries `disaster`
+    const scores = scoresAsShown(metropolis, metropolis.defenseProfile?.scores || {});
     const numeric = Object.values(scores).filter((v) => typeof v === 'number');
     expect(numeric.length).toBeGreaterThan(5);
     expect(scores.disaster).toEqual(expect.any(Number));

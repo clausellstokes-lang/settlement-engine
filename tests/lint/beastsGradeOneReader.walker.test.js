@@ -30,12 +30,13 @@ const READS = /\.monster\b(?!Threat)/;
 
 /** THE WHOLE LIST: every file of `src` with such a line, its exact count of such lines (code only), and its class. */
 const MONSTER_SCORE_READERS = Object.freeze({
-  'src/domain/facts/beastsReadiness.js': [1, 'LEAF', 'the one reader: the grade read against the need (RULING G22)'],
+  'src/domain/facts/beastsReadiness.js': [2, 'LEAF', 'the one reader: the grade read against the need (RULING G22); and scoresAsShown passing a score that is not a number through (P9b-2, G68 (P2))'],
   'src/domain/defenseLedger.js': [1, 'SIMULATOR', 'the ledger the capacity model and the world pulse read: the stored score, as G22 keeps it'],
   'src/domain/facts/monsterFrontier.js': [1, 'FRONTIER', 'the `monster frontier` atom reads the score only in frontier country, which the cure does not touch'],
   'src/lib/structuralFingerprint.js': [1, 'INSTRUMENT', 'the structural fingerprint: a number, never printed'],
   'src/lib/researchCapture.js': [1, 'INSTRUMENT', 'a research snapshot of the fingerprint: never printed'],
-  'src/components/new/SummaryTab.jsx': [1, 'DEAD', 'mounted nowhere (RULING G4; named for a later tidy): its systems average'],
+  // P9b-2 (G68 (P1)): src/components/new/SummaryTab.jsx's systems average (DEAD, mounted nowhere) now reads the scores as
+  // printed through the leaf (`scoresAsShown`), so it no longer reads the stored score: its row leaves the list
 });
 const CLASSES = new Set(['LEAF', 'SIMULATOR', 'FRONTIER', 'INSTRUMENT', 'DEAD']);
 
