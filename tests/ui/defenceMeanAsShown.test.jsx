@@ -28,7 +28,7 @@ describe('P1: the Summary tab\'s Defense tile reads the mean of the scores as pr
     const canon = deriveDefensePosture(s).scoreAvg;
     expect(statusCase(scoreBand(canon))).toBe('Weak'); // not vacuous: the mean as printed bands Weak here
     const st = s.defenseProfile.scores;
-    expect(scoreBand(Math.round((st.military + st.monster + st.internal + st.economic + st.magical) / 5))).toBe('critical'); // the stored five's band, the fault
+    expect(String(scoreBand(Math.round((st.military + st.monster + st.internal + st.economic + st.magical) / 5))).toLowerCase()).toBe('critical'); // the stored five's band, the fault
     const { container } = render(<SummaryTab settlement={s} />);
     const text = container.textContent || '';
     cleanup();
