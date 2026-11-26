@@ -163,3 +163,12 @@ C4 places moved 119 (the pool's modulo pick: the D13 class). `proseComposed` A0b
 NAMED for the owner: the variant count's sum 3,182 to 3,183 and its digest; the face counts' sum 3,182 to 3,183 and digest;
 the vids' digest; prepared in `close-11/c4/SHIFT-REGISTER-PREPARED.md`). MERGE NOTE: merge it BEFORE VIABILITY-TRUE-2; then the
 projection, the wiring census and the observed-shape baseline once, each by its door.
+
+| CLOSE-11 | P9b-2 (the sixth mean; a non-numeric score passed through) | lane/close-11-2026-11-26-p9b2-wip | cabb56d92 (on CLOSE-10's 12c77ae3f) | handed in 20:11 UTC; the diff READ BY THE CHAIR AND ACCEPTED; its second read is the join's | G48, G68 |
+
+P9b-2 as its seat reports it: P2: `scoresAsShown` returns the scores untouched where the stored monster score is not a finite
+number; P1: `SummaryTab.jsx`'s mean is `avgScore(scoresAsShown(...))` like the other five (so it averages every stored key,
+not five named ones; the component is unmounted); its own check 3 of 3, red first 2 of 3 ("Critical" against "Weak" at
+soak1k-14; a mean of 40 against none); records 0; view time; the lighting census by its door; its gate (3,580 tests) 3 red,
+all the line's. MERGE NOTE: shares `dossierViewModel.js` with VIABILITY-TRUE-2 (different functions; both add an import at
+the end of the file: keep both). New sentences: none.
