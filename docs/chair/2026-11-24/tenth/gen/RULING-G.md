@@ -679,3 +679,14 @@ many outbreak places print both), then the sentence that claims a sealed town ch
 ALSO SEEN AND NOT RULED (the owner's taste, said to him): labels where a reader expects names ("Feudal Appointee",
 "Religious Authorities", "The Siege", "The Arcane Incident"); thirty hooks in one shape in a row; an exports list with
 near-twins ("River craft", "Cargo barges", "River barges").
+
+**G55 (10:25 UTC on 2026-11-26): QUARANTINE-ONE-WAY WITHDRAWN; THE EXPORT LIST IS NOT A FAULT.** The owner, of the chair's cold read of
+Xinling: "I don't necessarily see too much of a discrepancy here, it's semantics in nature in my view" and "aren't these the
+different kinds of barges". RE-DERIVED, AND HE IS RIGHT ON BOTH. (1) "Nobody comes into Xinling and nobody leaves." is the
+quarantine's rule, printed under "Military status: Quarantine active"; the sentence beside it says "some families shut
+themselves in and some carry on as before", and the page says three more times that the rule leaks ("not everyone obeys",
+"resisted", "not being enforced consistently"). One story: a quarantine declared and leaking. NOT a contradiction; no unit.
+(2) The exports are two yards' goods: the boatyard's ('River craft', 'Cargo barges': `supplyChainData.js:365`) and the
+shipyard's ('Ocean-going vessels', 'River barges': `:437`). Different kinds, truly listed. The one pair that says one thing
+twice is 'Ship construction' (the shipyard's service: "Build ocean-going vessels from keel up") beside 'Ocean-going vessels':
+said to the owner once, his call, no unit.

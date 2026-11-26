@@ -182,3 +182,5 @@ re-reads facts the default veil removes: owner and shared differ on 10 of 600 pl
 ## ADDED 10:21 UTC ON 2026-11-26 (G54)
 QUARANTINE-ONE-WAY: an outbreak town's Defense tab says nobody comes in or leaves while its Overview, viability line and hooks
 have buyers, sea-borne food and a boat arriving. Measure first; after point 119's seven.
+
+## 10:25 UTC ON 2026-11-26 (G55): QUARANTINE-ONE-WAY IS WITHDRAWN (the owner's reading, re-derived by the chair: the rule and its leaking are one story). Not a unit.
