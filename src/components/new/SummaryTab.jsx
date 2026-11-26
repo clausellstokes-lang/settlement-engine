@@ -6,7 +6,7 @@ import { serif } from './Primitives';
 import { BODY, FACTION_COLORS } from './tabConstants.js';
 import { entityAnchor, normalizeNpcTraits } from '../../domain/dossier/entityLinks.js';
 import { deriveFoodBalance } from '../../domain/display/dossierViewModel.js';
-import { scoreBand, scoreColor } from '../../domain/display/defenseScoreBands.js';
+import { scoreBand, scoreColor, avgScore } from '../../domain/display/defenseScoreBands.js';
 import { statusCase, tokenCase } from './labelLadder.js';
 import { stabilityBandOf, complexityBandOf } from '../../domain/display/labelBands.js';
 import EconomyFreshnessNote from './EconomyFreshnessNote.jsx'; // R-4: the ONE stale-window note leaf; taxonomy in domain/display/economyFreshness.js
@@ -175,7 +175,7 @@ function SummaryTab({ settlement:r }) {
   // number on the surface. It reads as the band word instead, off the shared
   // defenseScoreBands ladder (which also takes over the local 70/45/25 colour
   // twin, so the tile's colour and its word can never disagree).
-  const defScore=dp.scores?Math.round((dp.scores.military+dp.scores.monster+dp.scores.internal+dp.scores.economic+dp.scores.magical)/5):null;
+  const defScore=dp.scores?avgScore(scoresAsShown(r,dp.scores)):null; // P9b-2 (G68 (P1)): the mean of the scores as printed, the five other means' leaf
   const defColor=scoreColor(defScore);
 
   // Power stability color
@@ -419,3 +419,4 @@ export default React.memo(SummaryTab);
 // import sits here, not at the head, so the line-keyed prose-numerics register's rows above stay put.
 import { crisisHookFor } from '../../domain/crisis/crisisHooks.js';
 import { prosperityInCrisisLine } from '../../domain/display/prosperityInCrisis.js';
+import { scoresAsShown } from '../../domain/facts/beastsReadiness.js'; // P9b-2 (G68 (P1)): the Defense tile's mean reads the scores as printed; at the end, so no line-keyed row moves
