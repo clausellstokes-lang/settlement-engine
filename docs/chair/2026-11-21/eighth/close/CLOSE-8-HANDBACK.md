@@ -58,12 +58,13 @@ Also, by HAND-INS: B1(ii) REDESIGNED (R24r 1), B1(i)b (R24r 6), P9's (i) writer-
   power/governanceLabelRoster.js, both sites call it, walker tests/lint/grazingQuarrelOneHome.walker.test.js + manifest row
   (planted proofs red/green); lighting ae135e8ee6 (->3816); doors e3: lighting 30e0a2c382, wiring and observed-shape unchanged.
   JOIN PUSHED at 30e0a2c382 (02:06 UTC). G43's commit is NO SEAT'S UNIT: name it in the landing line.
-  NEXT ON THE JOIN: ANCHORS-5 (builder running, brief close-8/briefs/ANCHORS-5.md); merge NEED-ATOM 031e04e84c, D7-BYTES
-  f94dc00d82, GOALS-I13 e59e38ddbb (G44: as built); WRITER-REACH (brief close-8/briefs/WRITER-REACH.md); validate:packets,
-  tests/lint, tests/copy whole; PROOF-4 (brief close-8/briefs/PROOF-4.md).
+  ANCHORS-5 26a8ad9e3c (trad-dead-city-arabic-22 -> -0 in both SPECS, RE-KEYED BY IDENTITY comments, cause R24-B1(i); 50/50, both
+  NOT VACUOUS arms loop every SPECS town: 3 and 5; finder refused no candidate; lint the line's three + writerReach). CURES MERGED:
+  NEED-ATOM de397d6de6, D7-BYTES 18564b34b1, GOALS-I13 81c6223752 (typechecks 167/1113). NEXT: WRITER-REACH (builder running on the
+  join at 81c6223752); validate:packets, tests/lint, tests/copy whole; PROOF-4 (brief close-8/briefs/PROOF-4.md); push the join.
 - GOALS-I13 (G44, taken as built): b136ae0b2d cure, e59e38ddbb the residual written in goals.js and goals.test.js (comments);
   faults C 136->6, V 172->6; records 0; receipts in goals.js :: RECEIPTS (a WeakMap; not on the record, not served); 100-birth
-  timing on thorps no difference (3340 vs 3327 ms median); re-timing on 50 cities + 50 metropolises asked. Measure README:
+  timing on thorps no difference (3340 vs 3327 ms median); on 50 cities + 50 metropolises: median 37,604 -> 37,435 ms (in the runs' spread), mean refs a town 63 -> 2,822. Measure README:
   close-8/goals-i13/README.md. The order-free deal: for the owner's pre-release list, not 118 nor 119.
 - NEED-ATOM DONE (builder; its REPORT.md write was refused by its permission check: told the chair; the report kept here):
   `lane/close-8-2026-11-25-need-atom-wip` 031e04e84c, PUSHED, on 09c29806b, two files (needNotBroughtIn.js, faultsNeed.test.js).
