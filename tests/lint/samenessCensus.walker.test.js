@@ -15,7 +15,9 @@
  * held by sibling stored paths, split into several slots (each "100%" of the places that drew it), or two mirrored paths
  * that flip the slot's identity between places; a register off its shape (law, corpus, classes, ceilings at or
  * above their meets, reasons cited by line instead of by symbol).
- * WHAT IT DOES NOT: render the page (the door's own `--check` does); judge the live register against a live reading.
+ * WHAT IT DOES NOT: render the page (the door's own `--check` does); judge the live register against a live reading; prove
+ * that no skipped string can reach a page (the E13d-2 guard below catches only a string written whole as one literal: its
+ * own header names what it does not see).
  *
  * @enforced-by tests/lint/samenessCensus.walker.test.js
  */
@@ -327,6 +329,14 @@ describe('E13d (G35): the door does not count a role title or a fixed caption as
   // tables, a pool built inside a function), cut and masked as the door cuts and masks. A literal outside the four homes that
   // is a skipped sentence FAILS, save a table whose every element is a role title (an order, a key list), a row keyed by its title
   // (`["<title>", 304, [...]]`: the key passes, the body is read) and an object KEY (a key is never printed as a line). A file the guard cannot read FAILS: it is never skipped.
+  // WHAT THIS GUARD DOES NOT SEE (the tenth chair's G67; the second reader of 119-B planted ten cases that passed it): it is
+  // NOT A PROOF that no skipped string can reach a page. It catches a skipped string written WHOLE as one literal, in any
+  // shape of pool. It does not see a string BUILT at run time: joined by `+` or `.join`, or filled into a template from a
+  // variable (`${title}`); a title row whose rest is spread (`[title, ...MORE]`) or is an object or a nested array; an object
+  // or JSON KEY that some code prints; a JSX text wrapped over two lines; a title written with a lower-case first letter
+  // where the page capitalises it; and a template in a `.ts` file. Today's truth is MEASURED, not guarded: every skipped
+  // print in 60 rendered towns sat at a caption position or a PDF role cell, and no skipped string occurred outside its
+  // homes in 210,926 literals (the second reader, 2026-11-26).
   test('no line of any pool under src/ is in the set, whatever its shape and home; and the register\'s drawn rows (STATE, NARRATIVE, CATALOGUE) neither', () => {
     const drawnRows = Object.entries(readRegister().rows).filter(([, r]) => /^(STATE|NARRATIVE|CATALOGUE)\??$/.test(r.class));
     expect(drawnRows.length).toBeGreaterThan(100);
@@ -378,5 +388,19 @@ describe('E13d (G35): the door does not count a role title or a fixed caption as
     expect(m.get(slotKey(S, ['', '', '', 'Other > Row']))).toMatchObject({ places: 20, distinct: 1, sentence: sameLength });
     const onlyTitle = measureSlots(places(20, () => title));
     expect([...onlyTitle.keys()]).toEqual([]);
+  });
+  // E13d-3 (the tenth chair's G67; the second reader of 119-B, finding 6): the PDF's OtherNameRow prints a title behind a
+  // bullet ("· the senior charter master", 10 of 60 towns). The cut drops ONE leading bullet before it matches; a title under
+  // the sentence floor alone ("the senior guild master", 23 letters) is a sentence behind its bullet, and is a title still.
+  test('a title printed behind a list bullet is the same title: not counted; a drawn line behind a bullet still is', () => {
+    const PDF = 'pdf:canon_dossier';
+    const bulleted = ['· the senior charter master', '· the senior guild master', '• The senior craft-guild master'];
+    for (const b of bulleted) expect(sentencesOf(b)).toEqual([b]); // not vacuous: each is a sentence the door would count
+    const drawnBehind = '· The guild keeps its own books and will not open them.';
+    const holdsBehind = '· the senior charter master keeps the guild\'s books.';
+    const rows = Array.from({ length: 20 }, (_, i) => ({ seed: `p-${i}`, surfaces: { [PDF]: [...bulleted.map((b, k) => [b, '', '', `OtherNameRow.${k + 1}`]), [drawnBehind, '', '', 'Bullet.1'], [holdsBehind, '', '', 'Bullet.2']] }, stored: {} }));
+    const m = measureSlots(rows);
+    expect([...m.keys()].sort()).toEqual([slotKey(PDF, ['', '', '', 'Bullet.1']), slotKey(PDF, ['', '', '', 'Bullet.2'])]);
+    expect(m.get(slotKey(PDF, ['', '', '', 'Bullet.1']))).toMatchObject({ places: 20, sentence: drawnBehind });
   });
 });

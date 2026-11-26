@@ -50,7 +50,9 @@
  * (`copy/sectionHelp.js`) is not counted at any slot: its share is how many places hold that person or that section, not
  * how often a draw repeats. The set is DERIVED BY IMPORT from those homes (`notDrawnSentences`), never typed; it is matched
  * by the whole sentence's text, never by its length, and no slot is skipped whole (a slot that prints a drawn sentence
- * beside a title is still counted by its drawn sentences). Held by tests/lint/samenessCensus.walker.test.js.
+ * beside a title is still counted by its drawn sentences). A title printed behind a list bullet ("· the senior charter
+ * master", the PDF's OtherNameRow) is the same title: the cut drops one leading bullet before it matches (`isNotDrawn`;
+ * E13d-3, the tenth chair's G67). Held by tests/lint/samenessCensus.walker.test.js.
  */
 import { execFileSync, spawn } from 'node:child_process';
 import { existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
@@ -114,6 +116,22 @@ export function notDrawnSentences() {
   return out;
 }
 const NOT_DRAWN = notDrawnSentences();
+/** A list bullet the page prints before a title (the PDF's `OtherNameRow`: "· the senior charter master"). */
+const LEAD_BULLET = /^[·•]\s*/u;
+/** Each role title as printed (its own case and sentence case, masked), UNCUT: a title under the door's sentence floor is
+ * not a sentence alone, but behind a bullet it is ("· the senior guild master"). Derived by import, never typed. */
+const TITLES_AS_PRINTED = new Set(roleTitles().flatMap((t) => [t, t.charAt(0).toUpperCase() + t.slice(1)]).map((t) => t.replace(/\d+/g, '0')));
+/**
+ * IS THIS CUT SENTENCE ONE THE DOOR DOES NOT COUNT (E13d, G35; the bullet: E13d-3, the tenth chair's G67)? A sentence of
+ * the set, or a role title or a sentence of the set behind ONE leading list bullet: the door's cut drops the bullet
+ * before it matches, and the match is still the whole sentence.
+ * @param {string} s a sentence as `sentencesOf` cut it @returns {boolean}
+ */
+export function isNotDrawn(s) {
+  if (NOT_DRAWN.has(s)) return true;
+  const bare = s.replace(LEAD_BULLET, '');
+  return bare !== s && (NOT_DRAWN.has(bare) || TITLES_AS_PRINTED.has(bare));
+}
 /** The surface FAMILY a slot's surface belongs to (table c). @param {string} surface */
 export const familyOf = (surface) => (surface.startsWith('web:') ? 'web' : surface);
 
@@ -324,7 +342,7 @@ export function measureSlots(rows) {
   rows.forEach((row, i) => {
     const heads = storedHeads(row.stored);
     for (const [surface, lines] of Object.entries(row.surfaces)) for (const line of lines) for (const s of sentencesOf(line[0])) {
-      if (NOT_DRAWN.has(s)) continue; // E13d (G35): a role title or a fixed caption is not a drawn sentence
+      if (isNotDrawn(s)) continue; // E13d (G35): a role title or a fixed caption is not a drawn sentence, bulleted or not (G67)
       const paths = attributionOf(s, row.stored, heads);
       const key = slotKey(surface, line);
       let sl = slots.get(key); if (!sl) { sl = { bySentence: new Map(), paths: new Map(), exactOnly: true }; slots.set(key, sl); }
