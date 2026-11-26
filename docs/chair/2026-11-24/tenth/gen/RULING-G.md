@@ -584,3 +584,17 @@ lost v6 all the same): a refusal the place did not need, in the safe direction: 
 reads as scarcity, as A3 ("Most households...") and A6 ("usually enough") are quantified; a printed Pressured (a share of the
 need unmet) does not make it false. A judgment, the chair's, vetoable.
 (7) E1's known cost (102 of 1,000 soak births print a double possessive again): G47, E1R.
+
+**G50 (08:04 UTC on 2026-11-26): CURE (2) A THIRD TIME: THE SENTENCE CHANGES, NOT THE GATE. E1'S REMOVAL PROVEN.** The cures' builder
+(tip cc80d9c215): E1 out by revert 6a1ec0e036 (its own cures (4), (5) reverted first); nothing of E1's names left; against the
+run with E1's rewriters stubbed (C 900, V 900, soak 420; about 9.15 million strings) 30 strings differ, all one authored literal
+("laid at the carriers' master's door"), byte-equal to the line's 09c29806b85a; all other strings 0; typechecks 167/167 and
+1113/1113; the kept units' tests green each alone; tests/copy 175 of 175; both baselines by their doors; tests/lint at its three
+base reds. THE AMENDMENT OF G49 (3) WAS THE CHAIR'S OWN FAULT OF DESIGN: `needsImports && buysIn` says a need is MARKED and
+something arrives, not that the NEEDED thing arrives: 15 of C's 103 self-sufficient hamlets (dp-hamlet-13: timber needed and not
+arriving, incense arriving) still printed "some of what it needs is bought in". Three gates on one sentence is the unit's
+design, by the chair's own rule. RULED (RULING-CURE-118-4): line 5 says "some of what it USES is bought in" (the chair's
+wording, the owner's to veto), and lines 4 and 5 admit on `buysIn` with no food bought: the gate is the claim, and the claim
+is one the page already checks (its own arriving list). Four states, written in the comment. The proof: against the join, three
+counted classes and no fourth. The viability slot is re-dealt against master by E13a's own design (G32, G40): D13 names it as
+an intended exception.
