@@ -18,7 +18,7 @@ worktree (`/home/user/wt-<unit>`, node_modules symlinked; `/node_modules` and `/
 | E13d-2 + SAMENESS-KEYS (G52) | lane/close-10-2026-11-26-e13d2-wip | 559fcc0d1 | PUSHED, HANDED IN (final tip) |
 | P9b (G48) | lane/close-10-2026-11-26-p9b-wip | 12c77ae3f | PUSHED, HANDED IN |
 | VIABILITY-TRUE (G53, G56, G61) | lane/close-10-2026-11-26-viability-wip | 7279e571c | PUSHED, HANDED IN |
-| C4-SECOND-LINE (G49) | lane/close-10-2026-11-26-c4second-wip | 3647bae53 (local, NOT pushed) | built and measured; NOT gated, NOT handed in (the chair, 15:03: to a fresh seat) |
+| C4-SECOND-LINE (G49) | lane/close-10-2026-11-26-c4second-wip | 3647bae53 | PUSHED, HANDED IN 16:1x (built and measured; its wide gate NOT run: owed by the join) |
 | B1(ii) REDESIGNED (G64) | — | — | design accepted, NOT built (to a fresh seat) |
 | D13 STABLE-PICKS | — | — | closed for 119 (G63, G65): point 120's one unit, design (A) accepted in principle |
 | THE JOIN | — | — | not started (to a fresh seat) |
@@ -80,8 +80,9 @@ where the predicate holds and no farmland stands; census row B1furrow (as 338880
 shown C 238, V 105; refusing places C 45, V 41, farmland on C 16, V 6 of them.
 
 ### 0.2 At hand-over
-All built units pushed; C4-SECOND-LINE's 3647bae53 exists only in /home/user/wt-c4 (not pushed: the chair's order): a successor
-rebuilds it from its one content line and the generator (two files), cheaper than fetching a container. Gates of the three
+All built units pushed and handed in (C4-SECOND-LINE pushed at the chair's word of 16:08: its gate, gen --check, typecheck,
+tests/copy + data + named files, tests/lint, build, is NOT run and is owed by whoever joins it; the pre-push hook's fast path
+passed). Gates of the three
 handed in at hand-over: tests/lint whole at the line's three (proseCorpusBytes x2, proseComposed A0b) on each; tests/build 13
 on each, as the line. P9b sizes: raw first paint, worker and engine equal to the line's; gzip +6, Brotli +124. VIABILITY-TRUE:
 gzip +7, Brotli +183, raw 0; door commits: lighting census 85f645abf, observed-shape --write 7279e571c (findings unchanged;
