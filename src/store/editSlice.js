@@ -53,7 +53,7 @@ import {
   DECREE_AUTHORS, markApplied, recordOverride, reopen, reorder, RESOLUTION_MISSING_KINDS,
   resolveDecree, revertTick, stage, withdraw, WITHDRAWN_REASON_KINDS,
 } from '../domain/edit/registry.js';
-import { GENERATOR_VERSION, bornByThisEngine } from '../domain/settlement.schema.js';
+import { GENERATOR_VERSION } from '../domain/settlement.schema.js';
 
 /**
  * The closed transient vocabulary. VALUES, never a boolean. `decree` JOINS HERE (EM-C4b)
@@ -1105,7 +1105,7 @@ export async function applyRosterDecreesAtTick(get, set, request) {
   //    longer held. The layer is written below as today, both homes in the ONE write below as
   //    today, and the receipt says `rederived: false`. A world-fact root (it enters only as
   //    `config′`, which needs the engine) comes back `engine_mismatch`, never half-applied.
-  const bornHere = bornByThisEngine(record); // the guard's reader, in the stamp's home (settlement.schema.js)
+  const bornHere = /** @type {{generatorVersion?: unknown}} */ (record).generatorVersion === GENERATOR_VERSION;
   const appended = bornHere ? null : appendMinted(
     record,
     Object.freeze({ .../** @type {object} */ (layer), minted: Object.freeze(mintedNow) }),
