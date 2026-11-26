@@ -92,3 +92,17 @@ describe('CURE-118 (2): "bought in" only where something arrives', () => {
     expect(t, 'no line says anything is bought in').not.toMatch(/\bbought in\b|\bbuys in\b|\bbuying in\b/); // anchored: the verdict is proved a printed VIABLE line on the line above
   }, 120_000);
 });
+
+// RULING CURE-118-3 (F): "what it needs is bought in" needs BOTH a marked need AND something arriving. dp-hamlet-82 prints an
+// arriving good that is no marked need (incense): lines 4 and 5 refuse, and the place reads one of lines 1 to 3.
+describe('CURE-118 (2), amended: lines 4 and 5 need a marked need and an arrival', () => {
+  test('dp-hamlet-82: something arrives, no need is marked, and no line says what it needs is bought in', () => {
+    const s = generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: 'hamlet' }), null, { seed: 'dp-hamlet-82', customContent: {} });
+    const h = holds(s);
+    expect(h.bought, 'something is printed as arriving').toBe(true);
+    expect(h.marked, 'no arriving good is a marked need').toBe(false);
+    const t = deriveViability(s).summary;
+    const hit = LINES.find(([, re]) => re.test(t));
+    expect(hit?.[0], t).toMatch(/^(feeds|owes|nothing)$/);
+  });
+});
