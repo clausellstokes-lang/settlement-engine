@@ -1,0 +1,1 @@
+export function measure(t) { return { furrier: (t.institutions || []).some((i) => i.name === "Furrier's district"), exports: (t.economicState?.primaryExports || []).map(String), names: (t.institutions || []).map((i) => i.name) }; }
