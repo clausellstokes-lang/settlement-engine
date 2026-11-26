@@ -76,3 +76,13 @@ REGISTER'S RE-TAKE IS ITS OWN COMMIT (81c2efc8e: 1,528 changes over 650 rows, be
 7e93c087b: 546 unregistered and 742 stale; E13d's own share 83) AND IS RULED AT THE LANDING, NOT ASSUMED. Found and left: a
 caption that a place's own name masks still counts. Merge note: the two registers take the line's side and are re-taken by
 their doors.
+
+| CLOSE-9 | B1(i)b (the Furrier's district lives on game) | lane/close-9-2026-11-26-b1ib-wip | 32704b806 (on 3836a832e3) | handed in 08:09 UTC; read by the chair (one data flag and its test); the second reader started at the hand-in | R24r 6 |
+
+B1(i)b as its seat reports it: stored at birth; records moved C 0, V 13 (the cascade re-deals other houses in 10); 300 base-born
+records load byte-equal; a reader sees: a desert city or metropolis with no hunting grounds no longer lists a Furrier's district.
+NAMED AND NOT RE-TAKEN: `siteCoherenceRatchet` C1 goes red BY THIS UNIT (desert|mountain-flank|ore 14 to 15, iron 2 to 1; a
+shrink-only door, "never regenerate"): RULED AT THE LANDING, raised by nobody. Sizes: first paint +15 raw, worker +15.
+**CLOSE-9 HANDED OVER at 5844b44c0** (`lane/close-9-2026-11-26`, `docs/chair/2026-11-21/eighth/close/CLOSE-9-HANDBACK.md`
+section 0): NOT STARTED and for a fresh seat cut on the line after point 118 lands: P9b's build (G48), D13's measure and design
+(G49), C4-SECOND-LINE (G49), B1(ii) redesigned.
