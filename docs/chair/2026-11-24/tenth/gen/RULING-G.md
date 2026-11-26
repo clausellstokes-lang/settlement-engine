@@ -451,3 +451,15 @@ P9's rows; (c) POINT 118 = the 29 units, the four cures (goals I-13, NEED-ATOM, 
 D6) and P9's writer-reach rows (G37 (i)). POINT 119, built by CLOSE-8 after its landing line, each with its own second
 read: B1(ii) REDESIGNED (R24r 1), B1(i)b (R24r 6), E13d (G35), P9b's measure (G37 (ii)). WORDS-1 HANDED OVER at
 93247bdb3 (E1, D6, E8, E8b, E13b in that order).
+
+**G43 (00:28 UTC on 2026-11-26): D3 WITH E3: A MERGE THAT WAS CLEAN IN TEXT AND WRONG IN MEANING; ONE HOME.** CLOSE-8 stopped
+after 29 of 29 (E3 merged at b0815cab58, not pushed): `typecheck:ratchet` +1, TS2353 in
+`src/generators/power/governanceLabelRoster.js`. D3's new leaf (`governanceLabelRosterOf`, read by `rulingStructure.js`
+at about line 695, the sentence re-written over the repaired roster) COPIES rulingStructure's inline flag in the OLD
+shape (`institutionNames`, `pastoral`, raw `config.nearbyResources`); E3 changed `data/powerSiblings.js ::
+noGrazingQuarrelOf` to `({ leadingFood, grounds, terrain, route })` and its one call. Git merged it; at run time D3's
+re-write path would have called E3's rule with no leading food, raw custom-leaking grounds and no terrain or route:
+G13 and G19 (1) silently undone wherever D3's path writes. THE TYPECHECK CAUGHT IT (the seats' JSDoc). RULED: not the
+copy brought up to date but ONE function computing the flag from the birth's inputs, called by both sites; a test that
+`noGrazingQuarrelOf(` is called from exactly one place in src; D3's every-birth check 0 and E3's four columns equal on
+the joined tree or each differing cell named. The commit is no seat's unit: the second reader reads it by name.
