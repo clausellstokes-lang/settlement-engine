@@ -15,7 +15,9 @@
  * seed (`${seed}::tradition:genesis`), with `.fork(label)` for every sub-draw, so
  * the same settlement yields the same set forever, on any device. Reads ONLY stable
  * settlement fields (seed, tier, terrain, culture, economic character, patron-deity
- * alignment axes) — never live campaign state. Zero settlement-object writes.
+ * alignment axes) — never live campaign state. Zero settlement-object writes. ONE RULE reads the finished record
+ * (B1(ii), the tenth chair's G64: `fieldRiteRefused`, the food record's sources and farmland on the roster), and only for
+ * a record this engine bore; it moves no draw, only which attempt's draw a refused row takes.
  *
  * GENESIS STATE SHAPE: every record leaves the campaign-time fields null/empty —
  * ownerKey/ownerKind (assigned by T-3 politics), lastHeldYear/lastOutcome (stamped
@@ -31,6 +33,10 @@ import { createPRNG } from '../../kernel/prng.js';
 import { slugify } from '../../kernel/slugify.js';
 import { resolveTerrain } from '../resolveTerrain.js';
 import { waterAccessKind } from '../tradeRouteSemantics.js';
+import { bornByThisEngine } from '../settlement.schema.js'; // B1(ii) (G64 (4)): the rule is asked only of a record this engine bore
+import { isGrainFoodSource } from '../facts/institutions.js'; // B1(ii): the food record's grain sources (a grain field, a mill)
+import { factsOf } from '../facts/factsOf.js'; // B1(ii): farmland on the roster, through its atom's own reader
+import { atomHolds } from '../facts/factVocabulary.js'; // B1(ii)
 import { evil01, chaos01 } from '../worldPulse/deityAxes.js';
 import { seasonForTick } from '../worldPulse/worldState.js';
 import { popToTier, TIER_ORDER } from '../../data/constants.js';
@@ -180,7 +186,29 @@ function readIdentity(settlement) {
     chaos: deity ? chaos01(deity) : 0.5,
     hasDeity: !!deity,
     deityRef: (deity && typeof deity._deityRef === 'string') ? deity._deityRef : null,
+    refusesFieldRite: fieldRiteRefused(settlement),
   };
+}
+
+/** The element of the fields (TRADITION_ELEMENTS 'field', glyph ▦: "The Common Furrow Fair"). */
+const FIELD_ELEMENT = 'field';
+
+/**
+ * B1(ii), NO TRADITION BLESSES FIELDS THE PLACE DOES NOT HAVE (the tenth chair's G64, on CLOSE-10's design): the place's own
+ * food record NAMES its sources and none is a grain source (`facts/institutions.js :: isGrainFoodSource`: a grain field or a
+ * mill; fixed keys the generator writes off the land, never a user's good by name), and the roster holds no farmland (the
+ * atom `institution: farmland`, through its own reader: FARMLAND ADMITS THE RITE, G64 (2)). An empty or absent source list is
+ * unanswered, and so is an unanswered farmland atom: the rite stands. ASKED ONLY OF A RECORD THIS ENGINE BORE (G64 (4):
+ * `settlement.schema.js :: bornByThisEngine`, the guard's stamp): a place an earlier engine bore keeps its whole set.
+ * @param {unknown} settlement @returns {boolean}
+ */
+export function fieldRiteRefused(settlement) {
+  if (!bornByThisEngine(settlement)) return false;
+  const sources = /** @type {{ economicState?: { foodSecurity?: { foodRecord?: { foodSources?: unknown } | null } | null } | null }} */ (settlement)
+    .economicState?.foodSecurity?.foodRecord?.foodSources;
+  if (!Array.isArray(sources) || sources.length === 0 || sources.some(isGrainFoodSource)) return false;
+  const facts = /** @type {Parameters<typeof atomHolds>[1]} */ (factsOf(/** @type {Parameters<typeof factsOf>[0]} */ (settlement)));
+  return atomHolds('institution: farmland', facts) === false;
 }
 
 /** @typedef {ReturnType<typeof readIdentity>} TraditionIdentity */
@@ -387,18 +415,40 @@ export function deriveFoundingTraditions(settlement) {
       );
     } else {
       // Reroll a few times to avoid an identical (element,act) motif already present.
+      /** @param {number} k @returns {[TraditionElement, TraditionAct]} the draw of attempt k, on its own two forks */
+      const drawAt = (k) => {
+        const e = rng.fork(`el:${k}`).weightedPick(
+          /** @type {TraditionElement[]} */ ([...TRADITION_ELEMENTS]),
+          TRADITION_ELEMENTS.map((x) => elementWeight(x, id)),
+        );
+        const a = rng.fork(`act:${k}`).weightedPick(
+          /** @type {TraditionAct[]} */ ([...TRADITION_ACTS]),
+          TRADITION_ACTS.map((x) => actWeight(x, e, id, false)),
+        );
+        return [e, a];
+      };
       el = TRADITION_ELEMENTS[0];
       act = TRADITION_ACTS[0];
-      for (let attempt = 0; attempt < 5; attempt += 1) {
-        el = rng.fork(`el:${attempt}`).weightedPick(
-          /** @type {TraditionElement[]} */ ([...TRADITION_ELEMENTS]),
-          TRADITION_ELEMENTS.map((e) => elementWeight(e, id)),
-        );
-        act = rng.fork(`act:${attempt}`).weightedPick(
-          /** @type {TraditionAct[]} */ ([...TRADITION_ACTS]),
-          TRADITION_ACTS.map((a) => actWeight(a, el, id, false)),
-        );
+      let attempt = 0;
+      for (; attempt < 5; attempt += 1) {
+        [el, act] = drawAt(attempt);
         if (!usedMotifs.has(`${el.id}|${act.id}`)) break;
+      }
+      // B1(ii) (G64): THE DRAW AS BEFORE, THE RULE AFTER. A drawn rite of the fields the place refuses
+      // (`fieldRiteRefused`) takes the NEXT attempt's draw (the motif reroll's own forks, so no weight changes and no other
+      // row's draw moves), up to the tenth attempt, an unused motif first; if every later attempt draws a refused rite, the
+      // row keeps its first draw (a row is never dropped).
+      if (id.refusesFieldRite && el.id === FIELD_ELEMENT) {
+        /** @type {[TraditionElement, TraditionAct] | null} */ let taken = null;
+        /** @type {[TraditionElement, TraditionAct] | null} */ let usedMotif = null;
+        for (let k = Math.min(attempt, 4) + 1; k < 10 && !taken; k += 1) {
+          const [e, a] = drawAt(k);
+          if (e.id === FIELD_ELEMENT) continue;
+          if (!usedMotifs.has(`${e.id}|${a.id}`)) taken = [e, a];
+          else usedMotif ||= [e, a];
+        }
+        const next = taken || usedMotif;
+        if (next) [el, act] = next;
       }
     }
     usedMotifs.add(`${el.id}|${act.id}`);

@@ -11,6 +11,8 @@ import { CRIME_LINE_DISQUALIFIERS } from '../../../src/domain/display/stateProse
 import { OUTSIDER_IMPRESSIONS } from '../../../src/data/dailyLife/outsiderImpressions.js';
 import { FOOD_CULTURE } from '../../../src/data/dailyLife/foodCulture.js';
 import { COMMONER_RESENTMENTS } from '../../../src/data/dailyLife/commonerResentments.js';
+import { motifGlyph } from '../../../src/domain/traditions/genesis.js'; // B1(ii) (G64)
+import { GENERATOR_VERSION, LEGACY_GENERATOR_VERSION } from '../../../src/domain/settlement.schema.js'; // B1(ii): the stamp
 
 /** A corpus line, computed (never typed): the pool's first member with the town's name in its slots. */
 const corpusLine = (leaf, blockId, poolKey) => poolMemberTexts({ leaf, blockId, poolKey, slots: { settlement: 'Brindle', seat: 'hall' } })[0];
@@ -44,6 +46,8 @@ const ENDURANCE = (sentence) => `Food endurance: ${sentence}`;
 const NEEDS_CLAY = { economicState: { primaryImports: ['Iron'] }, resourceAnalysis: { imports: { critical: ['clay'] } } };
 /** A desert place with a fish market and no water: an oasis gives no fish (B1(i), R24b). */
 const DESERT_FISH_MARKET = { config: { terrainType: 'desert', tradeRouteAccess: 'desert_road', nearbyResources: ['oasis_water'] }, institutions: [{ name: 'Fish market', source: 'generated' }] };
+/** B1(ii) (G64): a record this engine bore whose food record names its sources, none of them grain, and no farmland stands. */
+const NO_FIELDS = { generatorVersion: GENERATOR_VERSION, tier: 'town', institutions: [{ name: 'Tavern' }], economicState: { foodSecurity: { foodRecord: { foodSources: ['livestock', 'fish'] } } } };
 /** @type {Record<string, { views: Record<string, string[]>, record?: Record<string, unknown> }>} */
 const PLANTS = {
   P2siege: { views: { 'Systems/Defense': [ENDURANCE('the granary carries the town for about three months at full rations.')] }, record: { economicState: { foodSecurity: { hasSiege: false } } } },
@@ -77,6 +81,8 @@ const PLANTS = {
   FEDFARE: { views: { 'World/Daily Life': [ENOUGH] }, record: { economicState: { foodSecurity: { foodRecord: { band: 'famine', gapPct: 60, normalImportPct: 20 } } } } },
   // B1(i) (RULING-R24, R24b): a fish market printed in a desert whose route and resources give no fish
   B1land: { views: { 'World/Institutions': ['Fish market'] }, record: DESERT_FISH_MARKET },
+  // B1(ii) (G64): the field element's glyph on the Traditions tab, on a record that names no grain and holds no farmland
+  B1furrow: { views: { 'World/Traditions': [motifGlyph('field')] }, record: NO_FIELDS },
 };
 
 describe('the rendered-dossier arm: one planted fault per row', () => {
@@ -129,6 +135,12 @@ describe('the rendered-dossier arm: one planted fault per row', () => {
     expect(pageCensusFindings(land({ nearbyResources: ['oasis_water', 'fishing_grounds'] }), PLANTS.B1land.views)).toEqual([]);
     expect(pageCensusFindings(land({ tradeRouteAccess: 'river' }), PLANTS.B1land.views)).toEqual([]);
     expect(pageCensusFindings(land({ terrainType: 'hills' }), PLANTS.B1land.views)).toEqual([]);
+    // B1(ii) (G64): the same glyph beside farmland, beside a grain source or a mill, with no source named, or on a record an
+    // earlier engine bore (the legacy stamp), reads nothing
+    const furrow = (/** @type {Record<string, unknown>} */ over) => ({ ...NO_FIELDS, ...over });
+    expect(pageCensusFindings(furrow({ institutions: [{ name: 'Farmland' }] }), PLANTS.B1furrow.views)).toEqual([]);
+    for (const foodSources of [['livestock', 'grain'], ['fish', 'mill'], []]) expect(pageCensusFindings(furrow({ economicState: { foodSecurity: { foodRecord: { foodSources } } } }), PLANTS.B1furrow.views)).toEqual([]);
+    expect(pageCensusFindings(furrow({ generatorVersion: LEGACY_GENERATOR_VERSION }), PLANTS.B1furrow.views)).toEqual([]);
     expect(pageCensusFindings({ tier: 'town', economicState: { foodSecurity: { hasSiege: true } } }, PLANTS.P20.views)).toEqual([]);
     // row 2: besieged, the indicative is true; outside a siege, the condition reads nothing
     expect(pageCensusFindings({ tier: 'town', economicState: { foodSecurity: { hasSiege: true } } }, PLANTS.P2siege.views)).toEqual([]);

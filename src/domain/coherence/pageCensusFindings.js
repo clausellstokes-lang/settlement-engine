@@ -34,6 +34,7 @@ import { DAWN_WORK } from '../../data/dailyLife/dawnWork.js'; // R24-A2 (R24c (c
 import { famineOf } from '../facts/famine.js'; // R24-A2: the food band the page prints (`shownBand`)
 import { landWithholdsHouse } from '../landWithholding.js';
 import { nativeSemanticResourceKeys } from '../content/customContentSemanticAuthority.js';
+import { fieldRiteRefused, motifGlyph } from '../traditions/genesis.js'; // B1(ii) (G64): the furrows rule and the field element's printed glyph
 
 /** @typedef {Record<string, unknown>} Rec */
 /** @typedef {Readonly<Record<string, ReadonlyArray<string>>>} Views */
@@ -89,6 +90,9 @@ export const PAGE_CENSUS_ROWS = Object.freeze({
   // walker reads in this file's literals and its door never banks)
   FEDFARE: ['FEDFARE a fare line of a fed band beside a printed Deficit or Famine', 'CROSS'],
   B1land: ['B1(i) a house the land withholds standing in the desert with nothing that gives its thing (RULING-R24, R24b)', 'CROSS'],
+  // B1(ii) (the tenth chair's G64): a tradition of the fields (its element's glyph on the Traditions tab) on a page whose record
+  // this engine bore names its food sources, none of them grain, and holds no farmland (`genesis.js :: fieldRiteRefused`)
+  B1furrow: ['B1(ii) a tradition of the fields where the food record names no grain and no farmland stands (G64)', 'CROSS'],
 });
 
 /**
@@ -428,6 +432,14 @@ export function pageCensusFindings(settlement, views) {
       if (l) return [l, `${name}: ${land.terrainType}, route ${land.tradeRoute || 'none'}, resources ${land.nearbyResources.join(', ') || 'none'}`];
     }
     return null;
+  });
+  run('B1furrow', () => {
+    // B1(ii) (G64): the Traditions tab prints a field tradition (its glyph on its own line) where the rule refuses one: a
+    // record this engine bore, its food record naming its sources and none of them grain, no farmland on the roster
+    if (!fieldRiteRefused(rec)) return null;
+    const glyph = motifGlyph('field');
+    const l = V('World/Traditions').find((x) => x === glyph);
+    return l ? [l, 'a tradition of the fields: no grain among the food sources, no farmland'] : null;
   });
   return out;
 }
