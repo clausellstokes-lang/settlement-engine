@@ -6,8 +6,9 @@ this unit's tip (`tests/data/dossierStateProseProjection.contract.test.js`, SEAM
 leaves themselves" and its MUTANT arm) and join the line's known reds at the landing, as his signing.
 
 ONE CAUSE for all five: DS-ECO-1 `COMBINATION C4: a low rung on a working approach` gains v8, appended (the tenth chair's
-G49 (5): `[street · no crisis: under_siege · no crisis: plague_onset]` "{settlement} is poor, and its {access} has not
-changed that."), projected by `npm run gen:dossier-prose`. One pool moves from 7 variants to 8; no pool is added or
+G49 (5), worded by its ruling (B) of 18:35 UTC: `[street · no crisis: under_siege · no crisis: plague_onset]` "{settlement}
+is poor, and being easy to reach has not changed that."), projected by `npm run gen:dossier-prose`. The rewording moves
+none of the five pins (no count, no face, no number changes). One pool moves from 7 variants to 8; no pool is added or
 removed; no variant is renumbered (v8 takes the next number). Measured by the contract test at the tip (CLOSE-10's
 3647bae53 plus CLOSE-11's door and pin commits).
 
