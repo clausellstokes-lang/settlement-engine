@@ -803,3 +803,22 @@ moves exactly the towns it out-hashes), AND records moved 0 on C and V, AND the 
 families and nowhere else. (4) THE OTHER VIEW-TIME `% length` SITES (77 by its census): each named as on a town page or
 outside the line (advance time, the simulator, the map, admin), with the town-page ones counted, not left as one number.
 ORDER: point 119 is finished first (units 1 to 4b, B1(ii)'s design); D13 is POINT 120, alone, so its churn is read alone.
+
+**G64 (13:52 UTC on 2026-11-26): B1(ii)'s REDESIGN RULED: THE DRAW AS BEFORE, THE RULE AFTER; FARMLAND ADMITS; NO NEW STORED FIELD.**
+CLOSE-10's design (`traditions/genesis.js :: deriveFoundingTraditions`; the `field` element is met only in the addition loop):
+each addition row draws its element and act exactly as today on its own forks; if the drawn element is `field` and the rule
+refuses it, the row takes the next attempt's draw (the forks the motif reroll already uses), up to ten; no weight changes, so
+no other row's DRAW moves; one side path to be measured (the replaced row's name and motif enter the used sets and can shift a
+later row's reroll in the same town). THE PREDICATE: the place's own food record names its sources and grain is not among
+them (fixed keys off native resources, never a user's good by name); an empty list is unanswered and the rite stands. RULED:
+(1) THE DESIGN IS ACCEPTED. (2) FARMLAND ON THE ROSTER ADMITS THE RITE (fields exist): about C 29 and V 35 places are then
+refused. (3) IF TEN ATTEMPTS ALL DRAW A REFUSED RITE, THE ROW KEEPS ITS FIRST DRAW (a row is never dropped): the count of
+such rows reported, expected 0. (4) THE STAMP: NEITHER OF THE SEAT'S TWO IS TAKEN: no sixth law row and no engine bump: A
+STORED FIELD IS NOT ADDED FOR THIS. The rule is asked only of a record THIS ENGINE BORE, by the stamp the guard of point 117
+already reads (`GENERATOR_VERSION` against `LEGACY_GENERATOR_VERSION`): every production save is master-born (legacy or
+stampless) and keeps its whole set; a record born on the working line before this rule carries the same stamp as a new
+birth and gets the rule, and that is accepted BECAUSE SUCH A RECORD BELONGS TO NO USER (the line has never been released).
+What this leaves for later, named: a rule added AFTER the release will need a way to tell release-born from later-born (D13's
+option (B), or a law row): the owner's, when it comes. (5) THE PROOF as the seat states it, with: master-born records (the
+360 of its D13 measure) shown sets byte-equal, 0 moved; the name and motif shifts counted and each a later row of the SAME
+town; every birth of C and V: no field rite shown where the predicate holds and no farmland stands.
