@@ -159,3 +159,10 @@ does it once (62 lines in 360 saved towns, 53 of them collateral, each to anothe
 admission change moves only for the towns that drew that line, taken by records this engine bore. A16 (the share page):
 a veiled face's TITLE in public tie prose, 207 strings in 360 births, older than this release's work: for the veil's
 phase 1 list at its resumption.
+
+## ADDED 06:35 UTC ON 2026-11-26: E1R, AND A PAIR WRITTEN DOWN (G47)
+E1R "THE DOUBLE POSSESSIVE, REBUILT AT THE TEMPLATE": E1 was taken out of point 118 (three kinds of garble from
+rewriting finished sentences). The fault it cured stands: owner pages 125 and 145 of 900, the public projection 52 and
+34. The rebuild: authored twins on each template that puts a possessive after a slot; never a pattern over a finished
+sentence; its proof includes reading every changed pair and hostile place names. E2b: "buying in what its own land and
+trades do not provide" beside an empty arriving list where only food is bought: 8 pages of 2,220; older than this work.

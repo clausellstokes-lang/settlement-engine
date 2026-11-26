@@ -17,7 +17,7 @@ where CLOSE-8 reads them. A unit's ruling is in `RULING-G.md` (G numbers) or `..
 | BIRTH-2 | D4 (the page sorts the powers) | lane/birth-2-2026-11-25-d4-wip | 57d26a136 | handed in | G2, G4 |
 | BIRTH-2 | P9 (the beasts grade on settled land) | lane/birth-2-2026-11-25-p9-wip | 34212dfd2 | handed in (18:24 UTC); records moved C 0, V 0; pages C 2 (render noise: dp-thorp-2, -3: CLOSE-8 says what the noise is), V 175 (all heartland, stored band CRITICAL 151 or WEAK 24); every-birth check V 175 to 0; MERGE: the lighting census: take the line's side and re-take it by its door; the writer-reach rows for `monster`: see G37 | G22, G37 |
 | BIRTH-2 | A5 (the standing sentence its own field) | lane/birth-2-2026-11-25-a5-wip | 6de78192c | PARKED: NOT JOINED (lands with the share page) | G1, G15 |
-| WORDS-1 | E1 (the double possessive as a class) | lane/words-1-2026-11-25-e1-wip | 902b7005d | handed in | G5 |
+| WORDS-1 | E1 (the double possessive as a class) | lane/words-1-2026-11-25-e1-wip | 902b7005d | **TAKEN OUT OF POINT 118 (G47)**: handed in, joined, then reverted on the cures' branch; rebuilt as E1R later | G5 |
 | WORDS-1 | E8 step one (the reflexive) | lane/words-1-2026-11-25-e8-wip | 94b7a13d9 | handed in | G5, G20 |
 | WORDS-1 | D6 (the contender's word) | lane/words-1-2026-11-25-d6-wip | 81ac266a5 | handed in | G7, G20, G21 |
 | WORDS-1 | E8b (the reflexive on card lines; ON TOP OF E8: merge E8 first) | lane/words-1-2026-11-25-e8b-wip | e75f090b7 | handed in (18:24 UTC); C 1,157 strings in 501 places, V 1,126 in 500; round trip 0/0; one edit in worldPulse/successorNpc.js (the held form copied, G30); a walker tests/lint/boundCardLinesReaders.walker.test.js | G20, G29, G30 |

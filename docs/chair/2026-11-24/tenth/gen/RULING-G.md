@@ -526,3 +526,21 @@ declare a reader on display's behalf: THE REGISTER NOW UNDER-STATES, written dow
 green on the join: `defenceParts` R13, `faultsNeed` 1, goals I-13, the five of ANCHORS-5. CLOSE-8 (485,514 used at
 05:45, cost 116.87) HANDS OVER; point 119 (B1(i)b, E13d, P9b, D13 STABLE-PICKS as a design, B1(ii) redesigned last) is
 CLOSE-9's (`prompts/START-CLOSE-9.txt`), on the join's tree, outside the cures' files.
+
+**G47 (06:35 UTC on 2026-11-26): E1 COMES OUT OF POINT 118; THE OTHER THREE CURES ACCEPTED.** The cures' builder (branch
+`lane/stack-118-cures-wip-2026-11-26`, tree /home/user/wt/cure118, tip 53db42b4cb): (1) 8413326b00: C4 v6 carries
+`no exports` (the siege lines say trade has stopped, another claim); pages printing the claim beside printed exports
+C 0, V 0, soak 0. (2) 7b90b362c8: the two viability lines admit on `buysIn`; the test's oracle is the printed arriving
+list; top share C thorp .36, hamlet .37, village .33; V .38, .26, .37. FOUND AND LEFT: the pre-existing twin line
+"…buying in what its own land and trades do not provide." prints on 8 pages whose arriving list is empty while food is
+bought (`buysIn` counts the food's import share): at the base too: written down for a later unit. (3) d41f839642: G8
+refuses A7 and A16 under a printed Pressured band; A4 and A14 make the same claim and now carry the mark; A3 ("Most
+households…") does not. (4), (5) and THE READING OF EVERY PAIR E1 CHANGES: 444 pairs (355 distinct) on C, V and soak
+0 to 419: 443 sound, ONE GARBLED AND OF A THIRD KIND: soak1k-166 "the midwife needs master)'s silence about certain
+others" (E1's `mentionOf` skips the possessive role and takes "master)" off a bracketed name as a surname). THE
+THRESHOLD OF G45 HOLDS: three kinds from one unit is its design. E1 IS REVERTED ON THE CURES' BRANCH (RULING-CURE-118-2:
+its merge 512428a78b reverted; E8, E8b, E13b, D6 and cures (1) to (3) kept; proven EQUAL to the run with E1's rewriters
+stubbed to the identity). THE DOUBLE POSSESSIVE STAYS ON PAGES FOR NOW (owner pages 125 and 145 of 900; the public
+projection 52 and 34): a blemish, known. ITS REBUILD ("E1R") IS AT THE TEMPLATE'S LEVEL: each template that puts a
+possessive after a slot gets an authored twin, chosen where the slot's value is itself a possessive phrase; no finished
+sentence is ever rewritten by pattern. On the pre-release list.
