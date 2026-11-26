@@ -97,3 +97,14 @@ home; a hit outside the four homes fails; THREE EXCEPTIONS, each with its own ar
 keys; a row keyed by its title (the key passes, its body is read: accepted by the chair on the condition of its own red-first
 arm). Red first: the reader's plant red under the new guard; SAMENESS-KEYS two reds at the base (a drifted rise written; a
 drifted slot added at its own reading). The register is NOT re-taken (once, at the join). tests/lint whole: the line's three.
+
+| CLOSE-10 | B1(i)c (the Furrier's district lives on furs: own grounds or an entrepot route) | lane/close-10-2026-11-26-b1ic-wip | 19a5855f3 (on the line 9d22f040e4) | handed in 14:55 UTC; the source diff read by the chair (seven files; as ruled: `routeMakesEntrepot` the one home; a port not a giver, since a port is an entrepot only by its houses); THE SECOND READER STARTED AT THE HAND-IN, with E13d-2 at 245ded883 (agent a4a5e2a1c838fb198; scratch `$S/reader5/`) | G52, G60 |
+
+B1(i)c as its seat reports it: records moved V 10, soak 27, C 0 (exactly the desert births with the district and neither
+grounds nor a crossroads; unexplained 0); the cascade re-deals other houses in V 7, soak 20; its own check 26 of 26 (red first
+11); stored at birth; 300 V cities and metropolises load byte-equal; a forced district stands. NAMED, RAISED BY NOBODY:
+`siteCoherenceRatchet` C1 (one metropolis: the cascade drops "Refined iron ingots" from its exports, so "Iron ore" decides:
+ore 14 to 15, iron 2 to 1); TWO STORED FIGURES for the owner's signing: `hookThemeDraws` "no hook is lost" (2145 to 2144) and
+`pipelinePinnedChoosers` A6 (32 to 33). Sizes: first paint +63 raw on the line, the worker +186. New sentences: none.
+E13d-2's third-exception arm is a0bb07722 on the seat's machine (35 of 35), not yet pushed. ALSO BUILT, NOT YET HANDED IN:
+VIABILITY-TRUE at d90765fdc (false prints 0 after, by the seat); P9b in its gates.
