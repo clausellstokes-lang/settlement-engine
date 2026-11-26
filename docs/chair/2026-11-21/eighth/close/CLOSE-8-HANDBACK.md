@@ -54,18 +54,17 @@ Also, by HAND-INS: B1(ii) REDESIGNED (R24r 1), B1(i)b (R24r 6), P9's (i) writer-
   00fffd5fef; doors g4: lighting d8651d2a81 (->3815), wiring 8aff7e3047, observed-shape 85d93cdfd2. GROUP 4 BOUNDARY = 85d93cdfd2.
   `npm run gen:dossier-prose` after E4 and after G1: byte-equal (nothing to commit). oppositeSentencePairs, dailyLifeOffice,
   bar5SafetyLawBand green on the joined tree. Lint after g4: the line's three + writerReach. A slip: lint ran after 17 (not 15).
-  29 E3 b0815cab58 MERGED (no textual conflict) but the typecheck STOPPED it: D3 x E3 semantic conflict (D3's leaf
-  governanceLabelRoster.js calls E3's changed `noGrazingQuarrelOf` with the old argument shape). STOP SENT TO THE CHAIR (00:3x UTC
-  2026-11-26, re-sent after a container restart) with a one-line cure proposed (the leaf takes E3's exact arguments). WAITING the
-  ruling; the join is NOT pushed past c0abbf8d49 (the hook would refuse b0815cab58). Then E3's doors and lint. THEN: ANCHORS-5 (a builder), the cures merged (NEED-ATOM, D7-BYTES, GOALS-I13), the
-  writer-reach rows (D6, P9) by the door, proof (4).
-- D7-BYTES DONE (builder; its REPORT.md write refused too: the report kept here): `lane/close-8-2026-11-25-d7-bytes-wip` f94dc00d82,
-  PUSHED, vite.config.js only: `facts/crisisBody.js` and `people/stressPowerFaces.js` on FIRSTPAINT2_LAZY_DOMAIN. Join 0ef4d2a11 ->
-  tip: first paint 1,195,718 -> 1,190,128 raw (-5,590), gzip 381,485 -> 379,761 (-1,724), Brotli 320,038 -> 318,957 (-1,081); worker
-  2,737,079 unchanged (same hash); engine chunk +3. tests/build VERIFY_DIST the same 15 reds by name; typechecks 167/1113; no chunk
-  edge gained or lost; crisisBodyOf's one call site (factsOf getter) in the same chunk. NOT BOUGHT BACK, named for the owner's size
-  signing: the worker's +3,221 (its own build); about 156 B raw first paint (the `crisis body` row in factVocabulary.js, eager).
-- GOALS-I13: builder started (after D7-BYTES) on `/home/user/wt/goals-i13` (`lane/close-8-2026-11-25-goals-i13-wip`, cut 0ef4d2a11b).
+  29 E3 b0815cab58 (typecheck red: D3 x E3) -> G43 RULED (one home): bb6bcd035f `noGrazingQuarrelOfBirth` in
+  power/governanceLabelRoster.js, both sites call it, walker tests/lint/grazingQuarrelOneHome.walker.test.js + manifest row
+  (planted proofs red/green); lighting ae135e8ee6 (->3816); doors e3: lighting 30e0a2c382, wiring and observed-shape unchanged.
+  JOIN PUSHED at 30e0a2c382 (02:06 UTC). G43's commit is NO SEAT'S UNIT: name it in the landing line.
+  NEXT ON THE JOIN: ANCHORS-5 (builder running, brief close-8/briefs/ANCHORS-5.md); merge NEED-ATOM 031e04e84c, D7-BYTES
+  f94dc00d82, GOALS-I13 e59e38ddbb (G44: as built); WRITER-REACH (brief close-8/briefs/WRITER-REACH.md); validate:packets,
+  tests/lint, tests/copy whole; PROOF-4 (brief close-8/briefs/PROOF-4.md).
+- GOALS-I13 (G44, taken as built): b136ae0b2d cure, e59e38ddbb the residual written in goals.js and goals.test.js (comments);
+  faults C 136->6, V 172->6; records 0; receipts in goals.js :: RECEIPTS (a WeakMap; not on the record, not served); 100-birth
+  timing on thorps no difference (3340 vs 3327 ms median); re-timing on 50 cities + 50 metropolises asked. Measure README:
+  close-8/goals-i13/README.md. The order-free deal: for the owner's pre-release list, not 118 nor 119.
 - NEED-ATOM DONE (builder; its REPORT.md write was refused by its permission check: told the chair; the report kept here):
   `lane/close-8-2026-11-25-need-atom-wip` 031e04e84c, PUSHED, on 09c29806b, two files (needNotBroughtIn.js, faultsNeed.test.js).
   faultsNeed red 1/11 at the base (r2r-town-54), 11/11 after. The cure: `dealtInHere` also counts a standing, non-custom house with
