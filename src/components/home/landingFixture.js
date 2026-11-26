@@ -77,7 +77,7 @@ export const fixture = {
     "tier": "village",
     "eyebrow": "road village · mountain",
     "prose": "Cnocby has no one thing to look at as you come in, only a great many small ones: a mended fence, a painted door, a bench beside a house. Earth-banked enclosures and older rounded foundations remain visible between newer halls.",
-    "pressure": "Étaín Sullivan and Lasair Hayes will both present proposals at the next council session. Only one will be accepted.",
+    "pressure": "A dispute over water access has run for two seasons, and those on each side of it no longer speak to one another.",
     "hooks": [
       {
         "kind": "NPC",
