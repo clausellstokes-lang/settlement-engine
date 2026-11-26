@@ -37,6 +37,23 @@ const FAILED_GOODS = Object.freeze({
 });
 
 /**
+ * VIABILITY-TRUE (the tenth chair's G61 (1)): is this trade good one of the food sources' own goods (`FAILED_GOODS`: grain,
+ * flour, livestock, dairy, fish, seafood, the catch, game meat), read as the Economics tab reads a failed food against a
+ * label (a whole word, lower case)? Salt, hides and the other goods the regional catalogue files under food are not.
+ * KNOWN MISSES, NAMED (VIABILITY-TRUE-2, the tenth chair's G68 (V3); the second reader of 119-C): "Preserved provisions"
+ * (107 of its rendered pages) and "Game and hides (...)" (102) are food this word list does not catch. They print no
+ * false line, BY MEASURE (CLOSE-11 at 7279e571c; soak 0-999 with C's and V's thorps, hamlets and villages, 1,900 births):
+ * of the 68 places whose printed arriving list holds "Preserved provisions", 67 also print food pounds brought in and 65
+ * a food source's own good, none neither; of the 68 holding "Game and hides", all 68 print food pounds brought in. So
+ * `buysFood` is already true by another leaf wherever they arrive, and no "feeds itself" line printed beside either.
+ * @param {unknown} label @returns {boolean}
+ */
+export function isFoodSourceGood(label) {
+  const item = String(label ?? '').toLowerCase().replace(/_/g, ' ');
+  return Object.values(FAILED_GOODS).some((words) => words.some((g) => new RegExp(`\\b${g}\\b`).test(item)));
+}
+
+/**
  * The goods of the food a famine in force failed (`FAILED_GOODS`), spaced and lower case; none outside a famine or where
  * the record names no failed source. The Economics tab's "Produced locally" reads it too
  * (`tradeListDisplay.js :: localProductionAsPrinted`): the one reading of what the famine took.
