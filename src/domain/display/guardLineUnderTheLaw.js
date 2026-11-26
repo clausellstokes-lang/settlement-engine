@@ -316,14 +316,16 @@ const NO_STABLE_AUTHORITY = /No stable governing authority[.;] (\w)/;
  * THE SAFETY LINE WITHOUT THE THIRD TELLING: where the page's identity line already says the place has no stable governing
  * authority (the stored stability, `settlementQuickGuide.js :: governsLine`, which the Overview prints and the Power tab
  * repeats), the Defense tab's line drops its own opening clause and begins at the next one ("Whoever holds sway decides…",
- * "Enforcement is inconsistent; …"). A shared page prints no identity line of its own reading, so it keeps the line whole;
- * a DM's own line (an edited field) is returned as written.
+ * "Enforcement is inconsistent; …"). A shared page reads the record it is handed the same way (its Overview prints the
+ * identity line too: soak1k-7; RULING CURE-118-5 (6)), so the owner's player view and the shared page print the same line;
+ * a record that carries no such stability keeps the line whole by the test below. A DM's own line (an edited field) is
+ * returned as written.
  * @param {string | null} line the line as printed (`defenseDisplay.js :: deriveSafetyLine`)
- * @param {unknown} record @param {boolean} publicDossier
+ * @param {unknown} record
  * @returns {string | null}
  */
-export function safetyLineSaidOnce(line, record, publicDossier) {
-  if (typeof line !== 'string' || publicDossier || isEdited(/** @type {never} */ (record), 'economicState.safetyProfile.safetyDesc')) return line;
+export function safetyLineSaidOnce(line, record) {
+  if (typeof line !== 'string' || isEdited(/** @type {never} */ (record), 'economicState.safetyProfile.safetyDesc')) return line;
   const stability = /** @type {{ powerStructure?: { stability?: unknown } } | null} */ (record)?.powerStructure?.stability;
   if (!/no stable governing authority/i.test(String(stability ?? ''))) return line;
   return line.replace(NO_STABLE_AUTHORITY, (_, /** @type {string} */ c) => c.toUpperCase());
