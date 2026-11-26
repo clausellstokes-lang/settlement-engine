@@ -1061,9 +1061,11 @@ describe('DESK-7 — the {complexity} band, wired from the chair\'s eleven forms
     expect(drawnKeys('Moderate', 'road', deriveEconomicComplexity('town', 4, 0, false)).size).toBe(3);
     expect(drawnKeys('Struggling', 'mountain_pass', '').size).toBe(2);
     expect(drawnKeys('Struggling', 'mountain_pass', deriveEconomicComplexity('hamlet', 1, 1, false)).size).toBe(3);
-    // C4 is the ONE combination the slot never touched, and it must not move.
-    expect(drawnKeys('Poor', 'road', '').size).toBe(3);
-    expect(drawnKeys('Poor', 'road', deriveEconomicComplexity('village', 1, 0, true)).size).toBe(3);
+    // C4 is the ONE combination the slot never touched, and the slot must not move it. C4-SECOND-LINE (G49 (5); CLOSE-11): 3 -> 4,
+    // the pool's own growth, the one cause: v8 ("{settlement} is poor, and its {access} has not changed that.") is drawn by the
+    // measured town too (v1, v2, v3 and v8; the slot still adds nothing).
+    expect(drawnKeys('Poor', 'road', '').size).toBe(4);
+    expect(drawnKeys('Poor', 'road', deriveEconomicComplexity('village', 1, 0, true)).size).toBe(4);
   });
 
   it('renders no broken English with the real fills in the real seams', () => {

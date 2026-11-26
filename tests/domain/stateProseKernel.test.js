@@ -1041,10 +1041,11 @@ describe('the state-prose reader — law 6, the index-stable draw', () => {
     expect(rows.filter((r) => departureTestable(r.n, r.pools) && !(r.deepest < departureBound(r.n)))
       .map((r) => `n=${r.n}: deepest ${r.deepest}`), 'a group over its departure bound').toEqual([]);
     // …and the groups too small for it, NAMED (measured at 6581c349c; a group that grows into the test leaves this list).
+    // C4-SECOND-LINE (G49 (5); CLOSE-11): ONE pool moved, DS-ECO-1 `COMBINATION C4`, n=7 -> n=8 (v8 appended), so n=7 35 -> 34 and n=8 8 -> 9.
     // DISAGREE (PROSE-6, 2026-11-23; the chair's rulings of 03:45 and 03:55 UTC), re-measured after the withdrawal: ONE pool moved, DS-DEF-2 `CHAIN: food trades failing`, n=6 -> n=12 (F1-F6 appended as v7-v12), so n=6 40 -> 39 and n=12 1 -> 2; DS-DEF-2 `Economic Survival: WEAK` stays at n=6 (W1-W3 withdrawn; v1, v2 re-worded in place).
     expect(rows.filter((r) => !departureTestable(r.n, r.pools)).map((r) => `n=${r.n}: ${r.pools} pools`),
       'the groups too small to test the departure at p = 0.001').toEqual([
-      'n=5: 43 pools', 'n=6: 39 pools', 'n=7: 35 pools', 'n=8: 8 pools', 'n=9: 7 pools', 'n=10: 6 pools',
+      'n=5: 43 pools', 'n=6: 39 pools', 'n=7: 34 pools', 'n=8: 9 pools', 'n=9: 7 pools', 'n=10: 6 pools',
       'n=11: 3 pools', 'n=12: 2 pools', 'n=13: 2 pools',
     ]);
     // The per-pool ceiling and the slot reach, every pool of every group.
