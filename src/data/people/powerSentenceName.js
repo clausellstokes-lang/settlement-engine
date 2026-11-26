@@ -131,17 +131,6 @@ export function withPowerVerb(text, name, one, many) {
   return said.replace(new RegExp(`(\\b[Tt]he ${esc(body)}) ${esc(one)}\\b`, 'g'), `$1 ${many}`);
 }
 
-/**
- * A NAME THAT HOLDS A POSSESSIVE TAKES NO SECOND ONE (E1, WORDS-1; the tenth chair's ruling G5 of 2026-11-25): a name with a
- * possessive word in it ("Headman's Authority", "the Thieves' Guild", "Caravan masters' exchange") set before "'s" read
- * "the Headman's Authority's place". Every joiner that writes a name's possessive asks this first and, where it holds,
- * writes the "of" form ("the place of the Headman's Authority"); a name without one prints as before, byte for byte.
- * @param {unknown} name @returns {boolean}
- */
-export function holdsPossessive(name) {
-  return /[\p{L}\p{N}](?:['’]s|s['’])(?=\s|$)/u.test(String(name ?? '').trim());
-}
-
 /** @param {unknown} name @returns {string} the sentence name with its possessive */
 export function powerPossessive(name) {
   const said = powerSentenceName(name);

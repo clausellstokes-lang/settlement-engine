@@ -309,17 +309,21 @@ export function deriveViability(settlement) {
   }
   return {
     viable: true, verdict: 'self_sufficient', label: VIABILITY_LABEL.self_sufficient,
-    // WORDS-2 E13a (the tenth chair's RULING G32 (1)): each state (marked imports; none) holds at least three true lines, and
-    // the line is drawn AMONG THE ADMITTED by the slot's own keyed draw (`pickAdmitted`), never handed to the next true one:
-    // where a necessity import is marked, lines 2 and 3 refuse and the old pick gave line 1 to nearly every hamlet (.48).
+    // WORDS-2 E13a (the tenth chair's RULING G32 (1)): the line is drawn AMONG THE ADMITTED by the slot's own keyed draw
+    // (`pickAdmitted`), never handed to the next true one (the old pick gave line 1 to nearly every hamlet, .48). CURE-118 (2)
+    // and RULING CURE-118-4 (H): each line's gate is its claim. Lines 2 and 3 speak of what it NEEDS (no marked need,
+    // `needsImports`); lines 4 and 5 of what it BUYS (something arriving, `buysIn`: with no food bought, the printed arriving
+    // list non-empty), so line 5 says what it USES is bought in. The four states: no marked need and nothing arriving, lines
+    // 1, 2, 3; no marked need and something arriving, 1 to 5 (all true together, one prints); a marked need and something
+    // arriving, 1, 4, 5; a marked need and nothing arriving, line 1 alone.
     summary: `VIABLE: ${pickAdmitted(pick, [
       `${town} feeds itself and pays its own way.`,
       `${town} grows what it eats and makes what it needs, and owes no one for either.`,
       `Nothing ${town} needs to get through the year has to come from outside.`,
       `${town} feeds itself and pays its way, and buys in what it cannot make for itself.`,
-      `What ${town} eats it grows, and what it spends it earns; some of what it needs is bought in.`,
+      `What ${town} eats it grows, and what it spends it earns; some of what it uses is bought in.`,
     ], [!seen.buysFood && seen.paysItsWay, !seen.buysFood && !seen.needsImports, !seen.buysFood && !seen.needsImports,
-      !seen.buysFood && seen.paysItsWay && seen.needsImports, !seen.buysFood && seen.paysItsWay && seen.needsImports], seen.buysIn ? `${town} gets through the year, buying in what its own land and trades do not provide.` : `${town} gets through the year on its own land and trades, and goes without what they do not provide.`)}`, // TAIL-DEFECON-D (#00585): it buys in only where something arrives
+      !seen.buysFood && seen.paysItsWay && seen.buysIn, !seen.buysFood && seen.paysItsWay && seen.buysIn], seen.buysIn ? `${town} gets through the year, buying in what its own land and trades do not provide.` : `${town} gets through the year on its own land and trades, and goes without what they do not provide.`)}`, // TAIL-DEFECON-D (#00585): it buys in only where something arrives
     rawSummary,
   };
 }

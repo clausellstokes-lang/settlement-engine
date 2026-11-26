@@ -65,6 +65,8 @@ import { economyDeskRead } from '../../src/components/new/economyDeskRead.js';
 import { economicsDeskArgs } from '../../src/components/new/deskHostArgs.js';
 import { factsOf } from '../../src/domain/facts/factsOf.js';
 import { atomHolds } from '../../src/domain/facts/factVocabulary.js';
+import { tradeListsAsPrinted } from '../../src/domain/display/tradeListDisplay.js';
+import { birth, ensureLaws } from '../../scripts/audit/soak-review/corpus.mjs';
 
 const ACCESS_ENUM = ['road', 'river', 'port', 'crossroads', 'isolated', 'mountain_pass'];
 const FOOD_LABELS = ['Surplus', 'Secure', 'Pressured', 'Import-Dependent', 'Deficit', 'Active Famine'];
@@ -1456,5 +1458,28 @@ describe('G6 #6+7: "Little that comes past X stops there" refuses a place that s
       expect(header, seed).not.toMatch(/Little that comes past .* stops there/); // anchored: the header is proved a printed sentence on the line above
     });
     expectNoSeedFailures(failures, 'C4 v2 is not drawn where the place sends goods out');
+  }, 120_000);
+});
+
+// CURE-118 (1), the tenth chair's G45 (1): THE GATE BELONGS TO THE CLAIM, NOT TO ONE LINE. C4 v2 carried `no exports` (G6
+// #6+7); E4's rewording of the same claim, C4 v6 ("whatever the approach brings goes on past the place"), carried none, so
+// the refused claim came back beside printed exports (soak1k-188, the second reader's finding 1). Every C4 line that says
+// the trade passes the place by carries the mark; the oracle is the export list the page prints (`tradeListsAsPrinted`).
+describe('CURE-118 (1): every C4 line that says the trade passes the place by refuses a place that prints exports', () => {
+  const C4 = () => DOSSIER_STATE_PROSE_ECONOMY['DS-ECO-1'].pools['COMBINATION C4: a low rung on a working approach'];
+  const PASSES_BY = [2, 6]; // the claim's lines, by reading the pool: v2 "comes past ... stops there", v6 "goes on past"
+  /** A pool line's printed form: its `{slot}` read as any words, its "town" as the place's own noun (the weave's tier noun). @param {string} t */
+  const formOf = (t) => new RegExp(t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/\\\{[a-z]+\\\}/g, '.+?').replace(/\btown\b/g, '\\w+'));
+  it('every line of the claim carries `no exports`', () => {
+    for (const vid of PASSES_BY) expect(C4().find((v) => v.vid === vid)?.marks, `C4 v${vid}`).toContain('no exports');
+  });
+  it('soak1k-188: exports printed, and the header prints no line of the claim', async () => {
+    await ensureLaws();
+    const s = birth(188).settlement;
+    expect(tradeListsAsPrinted(s).exports.length, 'soak1k-188 prints exports').toBeGreaterThan(0);
+    const header = economyDeskRead(s, { tier: s.tier, ...economicsDeskArgs(s) }).prosperityHeader?.sentence ?? '';
+    expect(header.length, 'the header slot still prints a sentence').toBeGreaterThan(20);
+    const claim = C4().filter((v) => PASSES_BY.includes(v.vid)).map((v) => formOf(v.text));
+    expect(claim.filter((re) => re.test(header)).map(String), header).toEqual([]);
   }, 120_000);
 });

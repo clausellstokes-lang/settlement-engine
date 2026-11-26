@@ -178,10 +178,11 @@ describe('G6 #11 (WORDS-2): "no stable governing authority" is not told a third 
       expect(governsLine(s), `${seed}: the identity line says it`).toMatch(/no stable governing authority/i);
       const stored = deriveSafetyLine(s);
       expect(stored, `${seed}: the stored line opens with it`).toMatch(/No stable governing authority[.;] /);
-      const owner = safetyLineSaidOnce(stored, s, false);
+      const owner = safetyLineSaidOnce(stored, s);
       expect(owner, `${seed}: the owner's Defense line`).not.toMatch(/no stable governing authority/i); // anchored: the stored line is proved to hold the words on the line above
       expect(owner?.length, `${seed}: the rest of the line stays`).toBeGreaterThan(20);
-      expect(safetyLineSaidOnce(stored, s, true), `${seed}: a shared page keeps the line whole`).toBe(stored);
+      // RULING CURE-118-5 (6): the shared page reads the same record the same way, so the two pages print the same line
+      expect(safetyLineSaidOnce(stored, s), `${seed}: the shared page prints the owner's line`).toBe(owner);
     }
   });
 });

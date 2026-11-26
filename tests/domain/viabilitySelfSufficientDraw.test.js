@@ -10,6 +10,8 @@
  * the food import share; the prosperity word. (A raw critical list the page does not print, luxuries, is not a need it marks.)
  * Births: C's hamlets (`dp-hamlet-<i>`, `birthConfig({ settType })`), 150 of them.
  */
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { beforeAll, describe, expect, test } from 'vitest';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
@@ -17,6 +19,7 @@ import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { deriveViability } from '../../src/domain/display/dossierViewModel.js';
 import { tradeListsAsPrinted } from '../../src/domain/display/tradeListDisplay.js';
+import { birth as soakBirth, ensureLaws } from '../../scripts/audit/soak-review/corpus.mjs';
 
 beforeAll(async () => { await loadGenerationLawPayloads(); });
 
@@ -26,7 +29,7 @@ const LINES = [
   ['owes', /^VIABLE: \S.* grows what it eats and makes what it needs, and owes no one for either\.$/],
   ['nothing', /^VIABLE: Nothing .* needs to get through the year has to come from outside\.$/],
   ['buysIn', /^VIABLE: \S.* feeds itself and pays its way, and buys in what it cannot make for itself\.$/],
-  ['earns', /^VIABLE: What .* eats it grows, and what it spends it earns; some of what it needs is bought in\.$/],
+  ['earns', /^VIABLE: What .* eats it grows, and what it spends it earns; some of what it uses is bought in\.$/],
 ];
 const LOW = ['Subsistence', 'Struggling', 'Poor'];
 /** @param {any} s the oracle's reading of the record */
@@ -37,7 +40,7 @@ function holds(s) {
   const ra = s?.resourceAnalysis?.imports; const critical = ra && !Array.isArray(ra) ? low(ra.critical) : [];
   return {
     marked: printed.some((i) => necessity.some((n) => i.includes(n)) || critical.some((t) => i.includes(t) || t.includes(i))),
-    bought: printed.length > 0 || critical.length > 0, // the record's printed imports, or a good its terrain cannot produce (the Economics tab lists it)
+    bought: printed.length > 0, // CURE-118 (2), G45 (3)+(6): what ARRIVES, the printed arriving list alone (an unmet need is not bought)
     buysFood: Number(eco.foodSecurity?.foodRecord?.normalImportPct) > 0,
     low: LOW.includes(String(eco.prosperity ?? '')),
   };
@@ -76,4 +79,48 @@ describe('E13a: the self-sufficient verdict draws among its true lines', () => {
     const seen = new Set(rows.filter((r) => r.line && r.h.bought && !r.h.low).map((r) => r.line));
     expect([...seen].sort(), 'the lines printed in that state').toEqual(expect.arrayContaining(['buysIn', 'earns', 'feeds']));
   });
+});
+
+// CURE-118 (2), the tenth chair's G45 (3) and (6): a line that says something is bought in asserts an arrival. The two E13a
+// lines admitted on a marked need (`needsImports`), so soak1k-132 (thorp) said "some of what it needs is bought in" while
+// the page printed nothing arriving (`tradeListsAsPrinted(s).imports` empty; a need not met printed apart).
+describe('CURE-118 (2): "bought in" only where something arrives', () => {
+  test('soak1k-132: nothing printed as arriving, and the verdict says nothing is bought in', async () => {
+    await ensureLaws();
+    const s = soakBirth(132).settlement;
+    expect(tradeListsAsPrinted(s).imports, 'soak1k-132 prints nothing arriving').toEqual([]);
+    const t = deriveViability(s).summary;
+    expect(t.startsWith('VIABLE'), t).toBe(true);
+    expect(t, 'no line says anything is bought in').not.toMatch(/\bbought in\b|\bbuys in\b|\bbuying in\b/); // anchored: the verdict is proved a printed VIABLE line on the line above
+  }, 120_000);
+});
+
+// RULINGS CURE-118-3 (F) and CURE-118-4 (H): no line the self-sufficient pool can print says a NEED is bought in (line 5 says
+// what it USES is bought in), and lines 4 and 5 admit on something arriving. The four states: no marked need and nothing
+// arriving, lines 1-3; no marked need and something arriving, 1-5; a marked need and something arriving, 1, 4, 5; a marked
+// need and nothing arriving, line 1 alone. dp-hamlet-82: incense arrives, no need is marked; dp-hamlet-13: timber is needed
+// (the terrain's critical, printed as a need not met) and does not arrive, while other goods do.
+describe('CURE-118 (2), amended: no line says a need is bought in', () => {
+  /** the self-sufficient pool's texts, read from the source of `deriveViability` (its `pickAdmitted` list) */
+  const POOL = (() => {
+    const src = readFileSync(resolve(import.meta.dirname, '../../src/domain/display/dossierViewModel.js'), 'utf8');
+    const at = src.indexOf("verdict: 'self_sufficient'"); const list = src.slice(src.indexOf('pickAdmitted(pick, [', at), src.indexOf('], [', src.indexOf('pickAdmitted(pick, [', at)));
+    return [...list.matchAll(/`([^`]*)`/g)].map((m) => m[1]);
+  })();
+  test('the pool holds five lines and none says a need is bought in', () => {
+    expect(POOL.length, POOL.join(' | ')).toBe(5);
+    expect(POOL.filter((t) => /needs?\b[^.;]*\bbought in/.test(t))).toEqual([]);
+  });
+  for (const [seed, allowed] of /** @type {const} */ ([['dp-hamlet-82', ['feeds', 'owes', 'nothing', 'buysIn', 'earns']], ['dp-hamlet-13', ['feeds', 'buysIn', 'earns']]])) {
+    test(`${seed}: something arrives, and the line printed is true of the facts by the four states`, () => {
+      const s = generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: 'hamlet' }), null, { seed, customContent: {} });
+      const h = holds(s);
+      expect(h.bought, 'something is printed as arriving').toBe(true);
+      expect(h.marked, 'no ARRIVING good is a marked need').toBe(false);
+      if (seed === 'dp-hamlet-13') expect(tradeListsAsPrinted(s).needed.length, 'a need is printed as not met').toBeGreaterThan(0);
+      const t = deriveViability(s).summary;
+      expect(t).not.toMatch(/needs?\b[^.;]*\bbought in/); // anchored: t is proved a self-sufficient line on the next line
+      expect(allowed, t).toContain(LINES.find(([, re]) => re.test(t))?.[0]);
+    });
+  }
 });

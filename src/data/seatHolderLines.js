@@ -85,17 +85,8 @@ const HOLDER_SLOT = /(?!They )[^.]+?/.source;
 const SENTENCE_START = /(?:^|[.!?] )/.source;
 /** @param {string} slot @returns {string} what a slot reads as: a name, and a holder's name is never "They" */
 const slotPattern = (slot) => (slot.startsWith('{holder}') ? HOLDER_SLOT : NAME_SLOT);
-/**
- * E1 (WORDS-1, the tenth chair's G5): a line's "of" form, for a form whose name holds a possessive ("the {form's} seat" →
- * "the seat of the {form}"), so no line prints two possessives in a row; filled by `factionDynamics.js :: seatHolderFill`,
- * and found by the same pattern as its line (`patternOf`). A line with no "{form's}" is returned as it is.
- * @param {string} line @returns {string}
- */
-export const seatOfForm = (line) => line.replace(/\b([Tt])he \{form's\} (seats?)\b/g, (_w, t, n) => t + 'he ' + n + ' of the {form}');
-/** @param {string} line @returns {RegExp} the line's pattern (its "of" form's too): its fixed parts, a name between each pair, from a sentence's start to its own full stop */
-const patternOf = (line) => (seatOfForm(line) === line ? patternOfOne(line) : new RegExp(`(?:${patternOfOne(line).source}|${patternOfOne(seatOfForm(line)).source})`));
-/** @param {string} line @returns {RegExp} */
-const patternOfOne = (line) => {
+/** @param {string} line @returns {RegExp} the line's pattern: its fixed parts, a name between each pair, from a sentence's start to its own full stop */
+const patternOf = (line) => {
   const slots = line.match(SLOT) || [];
   const parts = line.split(SLOT).map(escapeText);
   const body = parts.map((part, i) => (i < slots.length ? part + slotPattern(slots[i]) : part)).join('');

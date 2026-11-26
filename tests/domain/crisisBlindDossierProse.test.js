@@ -135,6 +135,8 @@ const PRESENCE_SETTER = {
   'timber at hand': (f, _a, want) => ({ ...f, timberAtHand: want }),
   // BAR6-POWERS (2026-11-16): `seat members` (`seatMembers.js`), declared by DS-POW-5 › council's counterforce line and its twin
   'seat members': (f, _a, want) => ({ ...f, seatMembers: want }),
+  // RULING CURE-118-5 (8): `ruling body` (G1, the three DS-POW-5 council lines' mark; factVocabulary's home `rulingBody`), set as its sibling is
+  'ruling body': (f, _a, want) => ({ ...f, rulingBody: want }),
   // DEBT-1 (2026-11-17): the presence atoms state pools declare since the table's last extension (one-home facts each):
   // BAR6-CRIME's `crime wave` (`lawBand.js :: crimeWaveStands`) and `rival rings` (`rivalRings.js`), BAR6-DEFDESK's `monster
   // frontier` (`monsterFrontier.js`), and `food surplus` (the food record's `growsMoreThanEats`)

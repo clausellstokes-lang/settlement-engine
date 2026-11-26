@@ -33,6 +33,8 @@ import { OUTSIDER_IMPRESSIONS } from '../../src/data/dailyLife/outsiderImpressio
 import { DAWN_WORK } from '../../src/data/dailyLife/dawnWork.js';
 import { factsOf } from '../../src/domain/facts/factsOf.js';
 import { atomHolds } from '../../src/domain/facts/factVocabulary.js';
+import { birth as soakBirth, ensureLaws } from '../../scripts/audit/soak-review/corpus.mjs';
+import { foodBandShownKey } from '../../src/domain/facts/foodBandShown.js';
 
 /** A pool line's printed form: its `{slot}` read as any name. @param {string} t */
 const formOf = (t) => new RegExp(t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/\\\{[a-z]+\\\}/g, '.+?'));
@@ -125,5 +127,27 @@ describe('(d) G6 #8: under a printed "Pressured" no fare line says nobody goes h
       expect(text.length).toBeGreaterThan(0);
       expect(NONE_SHORT.filter((re) => re.test(text)).map(String)).toEqual([]);
     });
+  }
+});
+
+// CURE-118 (3), the tenth chair's G45 (8): G6 #8 refused "nobody goes hungry / without" (A7, A16) under a printed
+// Pressured, and the claim moved to its siblings. Read whole, A4 ("every household has enough") and A14 ("the rest eat
+// plainly but enough") say every household has enough: THE SAME CLAIM, so the same mark. A3 ("Most households … eat
+// enough") leaves some short and is kept. Red first by name on 55bbd338a3: soak1k-26 printed A4, soak1k-51 A14.
+describe('(e) CURE-118 (3): every line of the "nobody goes short" claim refuses a printed "Pressured"', () => {
+  const CLAIM = ['A4', 'A7', 'A14', 'A16'];
+  it('every line of the claim excludes `food: = pressured`', () => {
+    for (const id of CLAIM) expect(FOOD_CULTURE.adequate.find((l) => l.id === id)?.excludes, id).toContain('food: = pressured');
+  });
+  for (const i of [26, 51]) {
+    it(`soak1k-${i}`, async () => {
+      await ensureLaws();
+      const s = soakBirth(i).settlement;
+      expect(foodBandShownKey(s?.economicState?.foodSecurity?.foodRecord), 'the page prints Pressured').toBe('pressured');
+      const text = String(deriveDailyLife(s, { audience: 'owner' }).slots.food_culture?.text || '');
+      expect(text.length, 'the fare slot prints a line').toBeGreaterThan(0);
+      const said = FOOD_CULTURE.adequate.filter((l) => CLAIM.includes(l.id) && formOf(l.text).test(text)).map((l) => l.id);
+      expect(said, text).toEqual([]);
+    }, 120_000);
   }
 });
