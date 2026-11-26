@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "8118d00a43a5c1c65eada9926f6bd4e30dcdd502",
-  "measuredBy": "CURE-118",
+  "measuredAtSha": "3ad7acaa024325404f4e0245d6fd8a5f39c7f82a",
+  "measuredBy": "CLOSE-10",
   "date": "2026-11-26",
-  "note": "RULING CURE-118-6 (6b), (K) and (L): their test arms",
+  "note": "E13d (four arms), SAMENESS-KEYS (three arms) and E13d-2 (the any-shape guard and its synthetic arm): new walker titles in tests/lint/samenessCensus.walker.test.js",
   "files": 3815,
   "parked": 506,
   "credited": 3309,
-  "titles": 32019,
-  "suiteTitles": 8905
+  "titles": 32027,
+  "suiteTitles": 8906
 }
