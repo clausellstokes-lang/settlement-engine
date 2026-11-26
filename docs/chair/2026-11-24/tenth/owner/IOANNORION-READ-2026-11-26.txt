@@ -1,0 +1,873 @@
+NAME Ioannorion | tier village | pop 215 | seed owner-read-3
+
+######## SUMMARY (153 lines)
+Ioannorion
+Village · 215 pop. · crossroads · est. ~113 yrs ago
+Copy
+Ioannorion is a comfortable village. A crossroads market. Founded approximately 113 years ago. It sits on an active frontier. Power rests with religious authorities; stability: anxious — people fear the sickness more than they heed orders. The streets are not safe. The sick have been shut away under quarantine. Many ignore it, and two people who tried to enforce it were beaten..
+Disease Outbreak
+Active crisis
+Something is spreading in Ioannorion. It is not yet a plague, but it will be if nothing changes. The sick outnumber those who can tend them. The origin is disputed. Quarantine measures are being resisted.
+Hook:
+The first person to name the outbreak has gone quiet. Their last message suggested the disease is not natural. Reaching them means crossing a quarantine that is not being enforced consistently.
+Arrival
+Some of Ioannorion's market stalls are closed. Not all, not most, but several, in a pattern that isn't about the day of the week. The ones that are open are busy; the ones that are closed have been for a while. Carts of grain rattle toward the mills while the ovens send the smell of bread down every lane. Members of some association walk together, each wearing the same small badge, and greet one another by it.
+Power
+Anxious
+Religious Authorities
+Economy
+Comfortable
+Mixed
+Defense
+Undefended
+Systems average: Critical
+Prosperous before the outbreak; Comfortable while it lasts.
+Power & Conflict
+72%
+28%
+Religious Authorities
+72%
+Elder Council
+28%
+The sick have been shut away under quarantine. Many ignore it, and two people who tried to enforce it were beaten.
+Notable Connection
+Drosida Drimys and Eirene Hyaleas are tied by a debt not yet paid. Drosida Drimys has begun to act like someone who considers the debt paid. Eirene Hyaleas does not.
+→ See Relationships tab for the full web.
+Key Figures
+Dimitra Doukas
+the master fishmonger
+●●●
+Flaw: imperious
+Goal: Ask Prokopios Hexamilites for advice on one hard decision this season.
+→
+Ask Prokopios Hexamilites for advice on one hard decision this season.
+Nikon Attaleiates
+the priest
+Flaw: hypocritical
+Temperament: steadfast
+Goal: Have the last word in the next argument that matters.
+→
+Have the last word in the next argument that matters.
+Ioanna Gabalas
+the head shepherd
+Temperament: scholarly
+Goal: Find the weak spot in what Prokopios Hexamilites is doing, and press on it.
+→
+Find the weak spot in what Prokopios Hexamilites is doing, and press on it.
+Prokopios Hexamilites
+the fuller
+Temperament: clever
+Goal: Stop the Religious Authorities from taking anything more from the Elder Council this season.
+→
+Stop the Religious Authorities from taking anything more from the Elder Council this season.
+Elektra Hyaleas
+the miller
+Temperament: merciful
+Goal: Answer the next move by the Religious Authorities against the Elder Council, quickly and in public.
+→
+Answer the next move by the Religious Authorities against the Elder Council, quickly and in public.
+Drosida Drimys
+the alewife
+Flaw: imperious
+Temperament: generous
+Goal: Get the most out of the work at the ale house while it runs well, and put the gains by.
+→
+Get the most out of the work at the ale house while it runs well, and put the gains by.
+Plot Hooks (18)
+Tensions 8
+NPCs 8
+Economy 1
+History 1
+Disease outbreak
+In the outbreak, Nikon Attaleiates of Religious Authorities, who runs the office that decides how the crisis goes, holds the key to it.
+Nikon Attaleiates
+Disease outbreak
+The outbreak turns on the house of worship, run by Nikon Attaleiates: whoever wins it over decides how the outbreak goes.
+Dimitra doukas
+Elder
+Elder Council · High influence
+Their master craftsman is talking to a rival. They haven't confronted them. They're not sure what they'd do.
+Dimitra Doukas
+Resource conflict
+Timber is short this season, and the builders are bidding against each other for what is left in the yards.
+Religious event
+59y ago
+Still affecting this settlement
+A letter found this year tells it this way: a relic claimed by both sides has resurfaced in a private collection
+Resource scarcity
+A critical resource is running short, and some are hoarding it while others cannot pay the prices asked
+A family that cannot pay the prices asked is selling its last good tools to buy what it needs
+Resource scarcity
+A critical resource is running short, and some are hoarding it while others cannot pay the prices asked
+A store of the scarce goods is being kept off the market on purpose
+Resource scarcity
+A critical resource is running short, and some are hoarding it while others cannot pay the prices asked
+An alternative source exists but the information is being suppressed
+Wild magic
+Strange flares of magic come without warning, and what causes them, and what to do about the people they touch, is argued over by everyone
+The flares are no accident: someone is working magic they cannot control, and hiding the notes
+Wild magic
+Strange flares of magic come without warning, and what causes them, and what to do about the people they touch, is argued over by everyone
+A child touched by a flare is showing something the family cannot conceal
+Wild magic
+Strange flares of magic come without warning, and what causes them, and what to do about the people they touch, is argued over by everyone
+The flares come more often in one part of the settlement, and those in charge are pretending otherwise
+Nikon attaleiates
+the priest
+Religious Authorities · Moderate influence
+Their predecessor left a sealed letter to be opened at their death; it never was, and it is still where it was left.
+Nikon Attaleiates
+Ioanna gabalas
+the head shepherd
+Elder Council
+They've been offered money to not ask questions about something they hadn't even started asking about.
+Ioanna Gabalas
+Prokopios hexamilites
+the fuller
+Elder Council
+A regular customer has stopped coming. The reason they've been given doesn't make sense.
+Prokopios Hexamilites
+Elektra hyaleas
+the miller
+Elder Council
+A customer paid them with a ring that someone else has reported stolen.
+Elektra Hyaleas
+Drosida drimys
+the alewife
+Elder Council
+They saw an accident that was no accident, and the person responsible knows they saw it.
+Drosida Drimys
+Eirene hyaleas
+the horse-coper
+Elder Council
+They have promised the same order to two buyers, and both are due to collect on the same morning.
+Eirene Hyaleas
+Zosime comnenus
+the sawyer
+They overheard two people they know settle a bribe, and do not know whom to tell.
+Zosime Comnenus
+Setting & Context
+Institutions
+16 total
+7
+3
+4
+2
+▼
+
+######## OVERVIEW (65 lines)
+Ioannorion
+village
+·
+215 pop.
+·
+crossroads
+·
+113 years old
+Greek-inspired, and it shows: built around the agora, on the open plain.
+Governed by
+Elder Council · Anxious — people fear the sickness more than they heed orders
+"The Religious Conflict is why the local clergy and the civic authority maintain a relationship of careful, documented mutual respect rather than the easy cooperation you find elsewhere"
+Plains
+The place
+Some of Ioannorion's market stalls are closed. Not all, not most, but several, in a pattern that isn't about the day of the week. The ones that are open are busy; the ones that are closed have been for a while. Carts of grain rattle toward the mills while the ovens send the smell of bread down every lane. Members of some association walk together, each wearing the same small badge, and greet one another by it.
+Active crisis
+Disease Outbreak
+Something is spreading in Ioannorion. It is not yet a plague, but it will be if nothing changes. The sick outnumber those who can tend them. The origin is disputed. Quarantine measures are being resisted.
+Hook:
+The first person to name the outbreak has gone quiet. Their last message suggested the disease is not natural. Reaching them means crossing a quarantine that is not being enforced consistently.
+The sickness in Ioannorion spreads further each week, and more households have someone ill.
+The disease is not a plague yet, but every day the quarantine is ignored or bargained around brings it closer.
+Systems Health
+▲
+?
+Safety, viability and defense, read side by side. As judged at the first survey · Food Security is re-judged as your campaign goes on.
+Prosperity
+Comfortable
+Prosperous before the outbreak; Comfortable while it lasts.
+Safety
+Dangerous
+Viability
+Viable
+Defense
+Undefended
+Reliance on magic
+None
+Monster Defense
+Critical
+Economic Resilience
+Weak
+Magical Capability
+Critical
+Food Security
+Secure
+Half the goods traded in Ioannorion are only passing through. Buying and selling at Ioannorion is done face to face at the market with no guild between seller and buyer. Few in Ioannorion hold an office.
+Tensions & Conflicts
+▲
+?
+Who is at odds with whom, and how badly.
+▸
+A critical resource is running short, and some are hoarding it while others cannot pay the prices asked
+Those hoarding what they can
+Those who cannot pay the prices
+Those who would fix a fair price
+▸
+Strange flares of magic come without warning, and what causes them, and what to do about the people they touch, is argued over by everyone
+Those touched by the flares
+Those who fear them
+Those who would study the flares
+Settlement Origin
+▲
+It stands where the roads meet, on ground travellers stopped at long before anyone built here.
+Notable connection
+Drosida Drimys and Eirene Hyaleas are tied by a debt not yet paid. Drosida Drimys has begun to act like someone who considers the debt paid. Eirene Hyaleas does not.
+
+######## POWER (87 lines)
+Who runs this place?
+?
+Who holds power and how firmly.
+The power
+Elder Council
+(minor)
+The seat
+Dimitra Doukas
+, the master fishmonger and Elder
+Public legitimacy
+38
+Contested
+Stability
+Anxious — people fear the sickness more than they heed orders
+The Elder Council governs Ioannorion. Its seat is held by Dimitra Doukas, the master fishmonger and Elder. Insecurity has left the Elder Council's right to rule contested in Ioannorion. The Religious Authorities are at odds with it. Without bargaining with them first, the hall settles nothing large. The sick have been shut away under quarantine. Many ignore it, and two people who tried to enforce it were beaten.
+The Seat and Its Contenders (2)
+▲
+Who holds and who contests the seat. Open a power to see the institutions behind it.
+Ruler
+Elder Council
+Government
+Minor
+▼
+Contender
+Religious Authorities
+Religious
+Dominant
+▼
+The Powers (2)
+▲
+72
+28
+Religious Authorities
+Contests the seat
+Religious
+72
+▼
+↳
+1 member
+· first
+Nikon Attaleiates
+Elder Council
+↑ Holds power
+Government
+28
+▼
+↳
+6 members
+· first
+Dimitra Doukas
+· second
+Ioanna Gabalas
+· third
+Drosida Drimys
+The Web (1)
+▲
+How the powers stand to one another, grouped by the kind of tie.
+~
+Tense
+(1)
+Elder Council
+~
+Religious Authorities
+escalating
+People take their marriages, inheritances and hard times to the Religious Authorities, not to the Elder Council, and the two do not agree on who decides what.
+The shape of authority
+The Elder Council at Ioannorion watches the village's temper closely: what it fears is the village turning on it.
+Rule and succession
+The Religious Authorities could now take the hall from the Elder Council at Ioannorion; the Elder Council keeps it only because the office is still its own.
+Who really runs this village
+For the DM only. Nothing here appears on a player view or a shared page.
+The ruling three of Elder Council
+Head
+·
+Dimitra Doukas
+, the master fishmonger
+Second
+·
+Ioanna Gabalas
+, the head shepherd
+Third
+·
+Drosida Drimys
+, the alewife
+The hall
+The seat is not in criminal hands
+. Nobody at the head of the Elder Council answers to a criminal house, and no criminal power here is strong enough to push it.
+
+######## ECONOMICS (67 lines)
+Comfortable
+Prosperous before the outbreak; Comfortable while it lasts.
+Mixed subsistence and market
+It gets about three quarters of what its work could yield.
+Trade
+crossroads
+With a little left over each year, Ioannorion gets by on a mix of field and market, and every year people argue over how to spend it.
+The descriptions here are of ordinary times. While the outbreak lasts, a row it touches is marked.
+Income Sources
+▲
+42%
+Harvest
+What the households grow and raise on their holdings; the main living at this scale.
+14%
+Market Taxes
+Curtailed by the outbreak. Market day stall fees and toll collection on goods entering the market.
+13%
+Toll Revenue
+Curtailed by the outbreak. Tolls taken on the roads that meet here at the crossroads.
+12%
+Entrepôt Trade
+Goods passing through the crossroads, and what their traders spend while they stop.
+9%
+Church Tithes
+Tithes, offerings, and fees for burial and sacramental services collected by resident clergy.
+5%
+Pilgrim Trade
+Curtailed by the outbreak. Offerings, hospitality fees, relic sales, and incidental commerce from visiting pilgrims.
+5%
+Wool & Textile Trade
+Cloth is woven or finished here.
+Ask what Ioannorion lives on and you will hear more than one trade named. Faith carries real weight at Ioannorion: what the religious houses say is heard in the village's dealings, whatever their own share of its money. No amount of work in the country around Ioannorion brings up enough timber for what the place does with it: the shortfall is in the land, not in the hands.
+Trade Profile
+▲
+Exports
+Milled flour
+Medicinal herbs
+Wild honey
+Imports
+Fine pottery for libations
+Incense and votive candles
+Salt
+Settlement necessity
+Needed, and not brought in: stone, metals, luxury goods, mountain timber.
+Ioannorion sells on goods it never made: some of what leaves the village entered it as imports the same season.
+Produced locally
+grain
+flour
+Ale (barrel)
+Beer (barrel)
+Overland cargo transport
+Escorted caravan
+Food Security
+▲
+Production: 416 lbs/day
++ 14 imported
+Need: 430 lbs/day
+What is grown here and brought in covers each day's food, with nothing to spare against a bad year.
+No granary; about two months in household stores.
+The table is bread from the home fields, with game from the woods beside it. Market supply and imported grain become politically charged as population grows.
+Ioannorion is fed, but what it keeps put by would not outlast a run of poor harvests.
+Ioannorion's food comes from more than one source, the grain harvest most of all, so a poor year in one does not empty the village's tables.
+Economic Flows (4 active)
+▼
+?
+What is made here and what it depends on.
+A visitor at Ioannorion may find a workshop ready to work and waiting on goods that no trade in the place makes.
+
+######## RESOURCES (52 lines)
+Terrain
+Plains
+What the land offers
+✓ Central trade hub
+✓ Grain production
+Resource Exploitation
+▲
+Unexploited
+Animal hides
+high value
+Animal hides
+→
+leather
+→
+boots
+→
+armor
+Needs: Tannery, Leatherworkers' guild
+Draws on: livestock, game
+✓ Fully exploited
+Grain
+medium value
+Draws on: farmland, water source
+For as long as others value Ioannorion's position, the village will have to reckon with who wants it and what they will offer for it.
+Nearby Resources
+▲
+Open Grazing Land
+Abundant
+Strategic Crossroads
+Wild Foraging Areas
+Gemstone Deposits
+Extensive Grain Fields
+Hunting Grounds
+Commodities available
+Extensive Grain Fields
+grain
+flour
+Strategic Crossroads
+trade access
+Gemstone Deposits
+luxury
+Wild Foraging Areas
+honey
+medicinal herbs
+Hunting Grounds
+game meat
+animal hides
+furs
+Gaps & Opportunities
+▲
+No one here works the animal hides near Ioannorion.
+The sawmill is failing: no timber lies near and none is brought in.
+
+######## SERVICES (1 lines)
+Generate a settlement to see available services.
+
+######## DEFENSE (53 lines)
+Defensive posture
+Undefended
+Guard assessment
+There is no watch here. A thief is known by name within a day, and everyone shuns them until they make it right.
+You can walk into the centre of Ioannorion without being stopped, challenged or counted by anybody at all.
+Military status
+Quarantine active
+Coming into Ioannorion, you pass shuttered doors, and nobody can tell you which houses hold the sick.
+Nobody at Ioannorion is paid to hold the quarantine, so households take turns at the edge of the place, turning travellers away. The village is shaken by this trouble, but it is still standing and means to stay that way.
+Threat Assessment
+Each bar shows how ready the settlement is for that threat, as judged at the first survey; Disasters & Famine is re-judged as your campaign goes on. A longer bar is safer.
+Beasts & Monsters
+Critical
+▼
+Invasion & War
+Critical
+▼
+Ioannorion has no line and no force. Organized aggression cannot be resisted here; what preserves the village is distance, diplomacy, or being beneath notice.
+Internal Security
+Critical
+▼
+Ioannorion keeps no court and no gaol, and no wrong done there is written down; order is kept by whoever is armed and standing there, and when they leave, nothing keeps it.
+Economic Survival
+Weak
+▼
+If Ioannorion ever had to hire people to defend it, it would have to borrow the money first.
+Disasters & Famine
+Adequate
+▼
+Food endurance:
+No granary: under siege the outlying fields would be lost;
+household stores
+would carry the village for about two months at full rations, about four months on half, and what is still harvested would stretch them further.
+Criminal Architecture & Public Order
+▲
+Dangerous — plague unrest — plague conditions
+Neighbours keep the quarantine among themselves, but not everyone obeys. Frightened neighbours turn on the sick, and medicine and burials cost whatever the seller asks.
+Parts of Ioannorion are closed off against the sickness, and people cross the street to avoid anyone who coughs.
+Active crime patterns
+quarantine violation
+Movement restrictions ignored for economic necessity or family access. Creates both genuine public health risk and enforcement revenue.
+plague profiteering
+Price gouging on medicines, protective herbs, and burial services. Often conducted by otherwise respectable merchants.
+Armed Forces & Fortifications
+▲
+Unfortified.
+No perimeter walls. Defenders cannot control entry points or create chokepoints.
+Ioannorion is too small to wall and knows it; the village's safety is its neighbours, its distance, and its unimportance.
+No organized force.
+Defense relies on individual armed citizens. No command structure, no training, no coordinated response.
+The village has an edge rather than a boundary at Ioannorion, and the edge is wherever the last building happens to be. Nobody at Ioannorion is responsible for defending the village; ask who is, and nobody can name anyone. The village knows it needs specialists against the creatures, and has none of its own to send. Whoever defends Ioannorion, none of them works with magic.
+Supporting Capabilities
+▼
+
+######## VIABILITY (8 lines)
+✓ Viable
+Ioannorion can stand, but only while the goods it buys in keep arriving and the routes that bring them stay open.
+Judged at the first survey; not re-run since.
+Not every account of Ioannorion squares with every other, and the points on which they differ are not small ones.
+Active Stress Effects (1)
+▲
+Crisis Thinning the Harvest
+The sickness is spreading among those who work the fields, and the ones still at work face a short harvest and a hard winter.
+
+######## DAILYLIFE (17 lines)
+Food
+Secure
+Access
+Crossroads
+Culture
+Greek
+Active stress
+Disease
+Ioannorion's purse closes every year ahead. The margin is not large but it is dependable, and there is money laid by behind it.
+Ask who decides things here, and the answer is the Religious Authorities. This is frontier country, and people speak of the wild beyond as close at hand. Any business with the Elder Council means a long wait, and visitors are warned of it.
+The first hour is spent seeing that nothing was disturbed in the night; only then does the ordinary work begin.
+The hunters bring in more than enough, and game is often in the pot.
+Where the water is drawn and out on the common, people stop to talk as they pass.
+Children are warned about sharing cups and spoons with anyone outside the household, and about breaking or spoiling what cannot easily be replaced.
+Commoners resent the council's indifference to ordinary complaints.
+What the place is short of, and who is to blame for it, is not discussed with strangers.
+A sickness has taken hold here, and it is still spreading. There is sickness about, and it is getting close to a real outbreak.
+
+######## FAITH (6 lines)
+Faith
+A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. In better times most folk attend the rites through the year; while the quarantine holds they keep them at home.
+The faith’s god and the church’s name are yours to set.
+Awaken a living pantheon (a patron god, rival cults, and the rising and ebbing of devotion) with a premium campaign.
+Awaken the pantheon →
+Available at launch
+
+######## MAGIC (24 lines)
+Magic
+Magic in the world at large, not the village's own:
+Medium
+Envelope
+Availability
+moderate
+Legality
+restricted
+Institutional control
+unregulated
+Service cost
+costly
+Risk
+moderate
+Religious acceptance
+hostile
+Roles
+Reliance on magic: None
+Economic role: occasional
+Military role: absent
+Medical role: absent
+Infrastructure role: occasional
+Reliance on magic, as judged at the first survey
+The village would go on as it is if the arcane went away; nothing it lives by waits on a spell.
+
+######## HISTORY (41 lines)
+Ioannorion
+113 years old
+"The Religious Conflict is why the local clergy and the civic authority maintain a relationship of careful, documented mutual respect rather than the easy cooperation you find elsewhere"
+Current Tensions (2)
+▲
+Resource Scarcity
+A critical resource is running short, and some are hoarding it while others cannot pay the prices asked
+Those hoarding what they can
+Those who cannot pay the prices
+Those who would fix a fair price
+Wild magic
+Strange flares of magic come without warning, and what causes them, and what to do about the people they touch, is argued over by everyone
+Those touched by the flares
+Those who fear them
+Those who would study the flares
+Founding
+▲
+Origin:
+grew as an agricultural market center
+Founded by:
+a noble granted lands by the crown and obligated to populate them
+Early trial:
+political pressure from surrounding lords
+How survived:
+with help from external allies at a critical moment
+The sickness reached it as easily as news does, and faster than anyone could shut a door against it.
+Generations of patching and rebuilding have nearly hidden the plan Ioannorion was laid out to.
+Major Historical Events (1)
+▲
+Founded
+Now
+59y
+Religious
+The Religious Conflict
+Religious
+minor
+Rival faiths and doctrines contended for followers and standing in the community
+59y ago
+Last century
+▼
+Nobody in Ioannorion has finished putting right the legacy the religious conflict left, and that legacy is two generations old.
+
+######## TRADITIONS (8 lines)
+The
+founding traditions
+of Ioannorion.
+✒
+The Old Fair
+Charter
+Kept in Seedtime, the sixth week.
+A fair day that marks the granting of the charter. The Elder Council oversees it. Ioannorion has kept it since its founding 113 years ago by a noble granted lands by the crown and obligated to populate them.
+
+######## INSTITUTIONS (136 lines)
+?
+Each house: what it is, who it backs, what it offers. The badge says who put it here: you, the living world, or a dependency.
+The descriptions here are of ordinary times. While the outbreak lasts, a row it touches is marked.
+Fuller
+Crafts
+Finishes woven cloth, cleaning and thickening it, the work often driven by water. Raw weave leaves as hard-wearing textile.
+Connection:
+Master Fuller Prokopios Hexamilites
+Backs
+Elder Council
+Services
+Fulled cloth
+Mill
+Crafts
+Water or windmill with monopoly milling rights. The miller is often the wealthiest and most resented figure in the village.
+Connection:
+Master Miller Elektra Hyaleas
+Backs
+Elder Council
+Services
+Grain milling
+Sawmill
+Crafts
+Failing: a failed venture. Powered by water or ox, the saw reduces logs to planks and beams whenever logs can be had, for building timber and furniture.
+Connection:
+Master Sawyer Zosime Comnenus
+Backs
+Elder Council
+Services
+Lumber milling
+Ale house
+Economy
+Run from the home. Ale is brewed and sold under the same roof.
+Connection:
+Alewife Drosida Drimys
+Backs
+Elder Council
+Services
+Drink service
+Common grazing land
+Economy
+Common grazing held by the village as a whole, next to the open fields, for every household's beasts.
+Backs
+Elder Council
+Services
+Pasturage
+(curtailed)
+Farmland
+Economy
+Open fields worked in rotation.
+Backs
+Elder Council
+Services
+Grain at harvest
+Fish market
+Economy
+An open stall or small roofed shed selling salted and smoked fish. Packed in barrels, it keeps for months.
+Connection:
+Elder Dimitra Doukas
+, the master fishmonger
+Backs
+Elder Council
+Services
+Preserved fish
+Wholesale trade
+Pack animal trader
+Economy
+Curtailed by the outbreak. Deals in mules, donkeys, and draft horses, buying and selling, and hires them out to travellers and merchants who need something to carry a load down the road.
+Connection:
+Horse-Dealer Eirene Hyaleas
+Backs
+Elder Council
+Services
+Pack animal hire
+(curtailed)
+Pack animal sales
+Shepherd
+Economy
+Manages sheep flocks for wool and meat. Seasonal transhumance. Moves flocks between lowland winter pasture and upland summer grazing. Key supplier to the textile trade.
+Connection:
+Master Shepherd Ioanna Gabalas
+Backs
+Elder Council
+Services
+Wool shearing
+Livestock management
+Weekly market
+Economy
+Curtailed by the outbreak. Local produce and wares. Held under charter.
+Backs
+Elder Council
+Services
+General trade
+(curtailed)
+Tax collection
+(curtailed)
+Graveyard
+Religious
+Hallowed ground about the church.
+Backs
+Religious Authorities
+Services
+Burial
+House of worship
+Religious
+The hub of village life. Built in stone. Tithes are compulsory.
+Connection:
+Vicar Nikon Attaleiates
+Backs
+Religious Authorities
+Services
+Life ceremonies
+Religious services
+Priest (resident)
+Religious
+Administers the sacraments and gathers the tithe. Frequently the sole person here who can read.
+Backs
+Religious Authorities
+Wayside shrine
+Religious
+A roadside prayer marker at the parish edge. No clergy of its own.
+Backs
+Religious Authorities
+Services
+Wayside blessing
+(curtailed)
+The fabric of the place
+Dwellings
+Infrastructure
+Timber construction with stone foundations.
+Services
+Hospitality
+(curtailed)
+Multiple water sources
+Infrastructure
+Several wells and springs, spread through the village.
+
+######## NPCS (1 lines)
+No key figures are recorded for this settlement.
+
+######## RELATIONSHIPS (45 lines)
+NPC Relationships (8)
+▲
+All (8)
+Rivals (1)
+Leverage (1)
+Nikon Attaleiates
+Mentor and Successor
+Dimitra Doukas
+the priest · lifelong · Elder
+▼
+Dimitra Doukas
+Mentor and Successor
+Prokopios Hexamilites
+Elder · devoted · the fuller
+▼
+Ioanna Gabalas
+Mutual Leverage
+Prokopios Hexamilites
+the head shepherd · unbreakable · the fuller
+▼
+Drosida Drimys
+Outstanding Debt
+Eirene Hyaleas
+the alewife · substantial · the horse-coper
+▼
+Eirene Hyaleas
+Mutual Leverage
+Prokopios Hexamilites
+the horse-coper · unbreakable · the fuller
+▼
+Elektra Hyaleas
+Mutual Leverage
+Nikon Attaleiates
+the miller · stable · the priest
+▼
+Prokopios Hexamilites
+Genuine Respect
+Drosida Drimys
+the fuller · genuine · the alewife
+▼
+Zosime Comnenus
+Professional Rivalry
+Eirene Hyaleas
+the sawyer · bitter · the horse-coper
+▼
+
+######## PLOTHOOKS (34 lines)
+NPCs
+Dimitra Doukas
+Their master craftsman is talking to a rival. They haven't confronted them. They're not sure what they'd do.
+Nikon Attaleiates
+Their predecessor left a sealed letter to be opened at their death; it never was, and it is still where it was left.
+Ioanna Gabalas
+They've been offered money to not ask questions about something they hadn't even started asking about.
+Prokopios Hexamilites
+A regular customer has stopped coming. The reason they've been given doesn't make sense.
+Elektra Hyaleas
+A customer paid them with a ring that someone else has reported stolen.
+Drosida Drimys
+They saw an accident that was no accident, and the person responsible knows they saw it.
+Eirene Hyaleas
+They have promised the same order to two buyers, and both are due to collect on the same morning.
+Zosime Comnenus
+They overheard two people they know settle a bribe, and do not know whom to tell.
+History
+Disease Outbreak
+In the outbreak, Nikon Attaleiates of Religious Authorities, who runs the office that decides how the crisis goes, holds the key to it.
+The outbreak turns on the house of worship, run by Nikon Attaleiates: whoever wins it over decides how the outbreak goes.
+Religious Event
+A letter found this year tells it this way: a relic claimed by both sides has resurfaced in a private collection
+Resource Scarcity
+A family that cannot pay the prices asked is selling its last good tools to buy what it needs
+A store of the scarce goods is being kept off the market on purpose
+An alternative source exists but the information is being suppressed
+Wild Magic
+The flares are no accident: someone is working magic they cannot control, and hiding the notes
+A child touched by a flare is showing something the family cannot conceal
+The flares come more often in one part of the settlement, and those in charge are pretending otherwise
+Outlook
+Resource Conflict
+Timber is short this season, and the builders are bidding against each other for what is left in the yards.
+
+######## RUMORS (3 lines)
+Available at launch
+What Ioannorion has heard from the rest of the realm, true or not, as the news reaches it.
+Beside each telling, what the DM knows to be true.
+
+######## CRISIS (30 lines)
+Disease Outbreak.
+Something is spreading in Ioannorion. It is not yet a plague, but it will be if nothing changes. The sick outnumber those who can tend them. The origin is disputed. Quarantine measures are being resisted.
+Who it touches
+bears the brunt:
+Religious Authorities
+· its people tend the sick; next in line, the first choice already holding a role that contradicts this one
+holds the lever:
+Nikon Attaleiates
+· runs the office that decides how the crisis goes
+Stakes
+Religious Authorities
+split
+· gains and loses by it at once
+Elder Council
+must answer for it
+· it governs here
+Levers
+Wayside shrine
+House of worship
+· held by
+Nikon Attaleiates
+What the players see first
+Food:
+Secure. No granary; about two months in household stores.
+Defence:
+No walls and no standing force.
+If nothing is done
+Fewer people come to market, travel is discouraged, and some goods stop arriving.
+Hook
+The first person to name the outbreak has gone quiet. Their last message suggested the disease is not natural. Reaching them means crossing a quarantine that is not being enforced consistently.
+
+######## DMCOMPASS (1 lines)
+No guidance yet. Run the Narrative Layer to draw it out.
