@@ -25,7 +25,7 @@
  * owner's to veto (docs/chair/2026-11-09/OWNER-WORDS-DOSSIER-2026-11-09.md).
  */
 import { rulingChainOf } from '../dossier/powerStrata.js';
-import { holdsPossessive, powerNameWithArticle, powerSentenceName } from './powerSentenceName.js';
+import { powerNameWithArticle, powerSentenceName } from './powerSentenceName.js';
 import { seatKeeperOf } from '../people/seatKeeper.js';
 import { drawDeclared, resolveDeclared } from '../facts/drawDeclared.js';
 import { factsOf } from '../facts/factsOf.js';
@@ -130,8 +130,6 @@ export { pluralPowerName };
 
 /** @param {string} named the name as prose carries it @returns {string} */
 const possessive = (named) => (/s$/i.test(named) ? `${named}'` : `${named}'s`);
-/** E1 (WORDS-1, G5): "X's right to rule"; a name that holds a possessive, "the right of X to rule" @param {string} named @returns {string} */
-const rightToRule = (named) => (holdsPossessive(named) ? `the right of ${named} to rule` : `${possessive(named)} right to rule`);
 
 /**
  * THE ARRANGEMENT (the chair's condition (e), 2026-11-09): a slotted sentence whose frame would repeat
@@ -162,15 +160,15 @@ function standingSentence(label, causes, place, ruler, pick) {
   const a = pick(`standing:${label}:${causes.length ? 'causes' : 'bare'}`, causes.length ? 2 : 1);
   switch (label) {
     case 'Legitimacy Crisis':
-      if (!causes.length) return `Few in ${place} still accept ${rightToRule(ruler)}.`;
+      if (!causes.length) return `Few in ${place} still accept ${possessive(ruler)} right to rule.`;
       return a === 0
         ? `${by} ${one ? 'has' : 'have'} cost ${ruler} its standing. Few in ${place} still accept its right to rule.`
-        : `Few in ${place} still accept ${rightToRule(ruler)}. ${by} ${one ? 'has' : 'have'} cost it its standing.`;
+        : `Few in ${place} still accept ${possessive(ruler)} right to rule. ${by} ${one ? 'has' : 'have'} cost it its standing.`;
     case 'Contested':
-      if (!causes.length) return `${capFirst(rightToRule(ruler))} is contested in ${place}.`;
+      if (!causes.length) return `${capFirst(possessive(ruler))} right to rule is contested in ${place}.`;
       return a === 0
-        ? `${by} ${one ? 'has' : 'have'} left ${rightToRule(ruler)} contested in ${place}.`
-        : `In ${place}, ${rightToRule(ruler)} is contested. ${by} ${one ? 'is' : 'are'} the reason.`;
+        ? `${by} ${one ? 'has' : 'have'} left ${possessive(ruler)} right to rule contested in ${place}.`
+        : `In ${place}, ${possessive(ruler)} right to rule is contested. ${by} ${one ? 'is' : 'are'} the reason.`;
     case 'Tolerated':
       if (!causes.length) return `${place} tolerates ${ruler}, and no more.`;
       return a === 0

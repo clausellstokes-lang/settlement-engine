@@ -1481,7 +1481,7 @@ const ROWS = [
   ]],
   ["the carriers' master", 55, [
     S("Hires out carriers to anyone who pays, including people moving goods that must not be seen",
-      "Whatever was in those loads would be laid at the door of the carriers' master"),
+      "Whatever was in those loads would be laid at the carriers' master's door"),
     S("Has been keeping back part of the carriers' wages as fees they never agreed to",
       "The carriers are close to walking out, and they know where everything is"),
     S("Lost a carrier on the road last year and told the family the carrier had run off",
