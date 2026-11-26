@@ -15,6 +15,7 @@ import {
   isMaterializedCustomContent,
   nativeSemanticName,
   nativeSemanticNames,
+  nativeSemanticResourceKeys,
 } from '../../domain/content/customContentSemanticAuthority.js';
 import { defenseFactsOf } from '../../domain/defense/defenseFacts.js';
 import { noGrazingQuarrelOf } from '../../data/powerSiblings.js';
@@ -29,6 +30,18 @@ export const hasNobleHouseIn = (native) => native.some((inst) => {
 });
 
 /**
+ * THE GRAZING FLAG'S ONE HOME (the tenth chair's RULING G43, 2026-11-26): the cascade's last quarrel
+ * (`data/powerSiblings.js :: noGrazingQuarrelOf`) from the birth's own inputs, exactly WORDS-2 E3's arguments: the leading
+ * home food source, the NATIVE ground keys only (G19 (1): no custom-content leak), the terrain and the route. It reads no
+ * roster. Both sites read it here, the power step (`rulingStructure.js :: generatePowerStructure`) and the late replay's
+ * settled roster (`governanceLabelRosterOf` below): one home, never a second copy (`tests/lint/grazingQuarrelOneHome.walker.test.js`).
+ * @param {Record<string, any>} config @param {Record<string, any> | null | undefined} economicState @returns {string | null}
+ */
+export function noGrazingQuarrelOfBirth(config, economicState) {
+  return noGrazingQuarrelOf({ leadingFood: economicState?.foodSecurity?.foodRecord?.foodSources?.[0], grounds: nativeSemanticResourceKeys(config), terrain: config?.terrainType, route: config?.tradeRouteAccess });
+}
+
+/**
  * The roster's own inputs to `buildGovernanceLabels`, exactly as the power step derives them from the roster it holds.
  * @param {Record<string, any>} config @param {Array<any>} institutions @param {Record<string, any> | null | undefined} economicState
  */
@@ -40,7 +53,7 @@ export function governanceLabelRosterOf(config, institutions, economicState) {
     instFlags: {
       ...getInstFlags(config, institutions),
       garrisonStands: defenseFactsOf({ institutions: native }).hasGarrison,
-      noGrazingQuarrel: noGrazingQuarrelOf({ institutionNames: instNames, pastoral: economicState?.foodSecurity?.chains?.['Pastoral & livestock'] === true, grounds: config?.nearbyResources }),
+      noGrazingQuarrel: noGrazingQuarrelOfBirth(config, economicState), // G43: the one home above
     },
     instNames,
     hasNobleInstitution: hasNobleHouseIn(native),
