@@ -933,3 +933,52 @@ HOLDS (C 2 towns, V 2; the base 0): A FAULT, CURED: the walk takes the first att
 sources or farmland admits, nothing else (three V places change, rightly). The lighting census is re-taken by its door at the
 join (the builder's own check refused its way of making its tree clean: the refusal stands). THE METHOD: this unit cost one
 local builder 245,000 tokens from a two-page brief; a seat pays more than that to be seated.
+
+**G72 (21:41 UTC on 2026-11-26): THE SECOND READER ON POINT 119'S SIX UNITS (report: `landing/119/SECOND-READER-119-D.txt`;
+evidence in its scratch `reader7/run`): SIX FINDINGS, ALL CONFIRMED BY RENDERED PAGES; FIVE CURED BEFORE THE LINE MOVES, ONE
+WRITTEN DOWN FOR A MEASURE.** Its table of the viability lines over 2,800 places (printed/false): L1 224/1, L2 14/0, L3
+21/0, L4 170/0, L5 179/1, twin A 344/0, twin B 37/0, strained 42/5, general 67/0; with the food record removed, 300
+places, 0 false. The furs cure, the sameness guard's skip and the Defense tile's mean all read as cured.
+
+(1) **B1(ii)'s RULE HOLDS ONLY WHILE THE STAMP EQUALS THIS BUILD'S CONSTANT: A FAULT OF THE CHAIR'S OWN RULING (G64 (3)),
+CURED.** `bornByThisEngine` compares the stamp with `GENERATOR_VERSION` for equality; the release test forces a new constant
+the next time births move; on that day every place born at 0.10.0 without fields is read without the rule and its replaced
+rite comes back ("The Great Stars Fair" is "The Great Furrow Fair" again): exactly the re-deal of a saved town the stamp was
+read to prevent, one release later. THE CURE: the rule is asked of a record whose stamp is AT OR AFTER THE ENGINE THAT FIRST
+CARRIED THE RULE, a literal in the rule's own file (`FIELD_RITE_SINCE = '0.10.0'`), never the build's constant: a reader in
+`settlement.schema.js` that compares two three-number stamps and answers false for anything else (no stamp, the legacy
+stamp, a malformed one). Master's births are stamped 0.9.0 (read on db832c8926), so no live-site record meets the floor.
+`bornByThisEngine` goes if nothing else reads it. No stored field, no version moved.
+
+(2) **A THIRD HOME PRINTS DEBT: THE SENTENCE CHANGES, NOT THE GATE (G50).** The Power tab's merchant-league line "The people
+who run {settlement} are also the people it owes money to, and they do not keep the two apart." carries NO mark: it is
+dealt to any merchant-league place, and it states a debt no fact of the record holds (beside "keeps order and pays its
+way": soak1k-87, soak1k-124, C dp-town-93; and beside any prosperity). The viability gate cannot be made to read a claim
+no fact stands behind. THE SENTENCE BECOMES: "The people who run {settlement} are also the people who trade in it, and
+they do not keep the two apart." Same id (vid 2), same slots, no mark added, so no pick moves. Vetoable by the owner. The
+builder lists every other unmarked state-prose sentence that says the PLACE owes, and cures none of them without a ruling.
+
+(3) **A STORED MONSTER SCORE THAT IS NOT A NUMBER PRINTS "CRITICAL" ON THE OVERVIEW BESIDE "ADEQUATE" ON THE DEFENSE TAB
+(settled country only): NOT CURED AT 119; P9c, MEASURED AT POINT 120.** The case is hand-made: no birth of this engine or of
+master's writes a monster score that is not a number. Whether any SAVED shape does is the OLD-SAVE measure's own question
+(G68). If one does, the cure is at the leaf (a score that is not a number prints no bar and no grade anywhere); if none
+does, the item closes with that count. P9b is not opened a third time on a case nobody has shown to exist.
+
+(4) **THE FIELD RULE READ ONLY THE FOOD RECORD, AND THE PAGE PRINTS GRAIN THE RECORD DOES NOT NAME: CURED BY READING THE
+PAGE (G61's rule).** r7d-city-24 (desert, date palms, sources ["fish"]) prints Exports "Desert grain" and Produced locally
+"grain", and lost "The Procession of the Fields"; 4 of 330. THE CURE: the rite stands wherever the page's own Produced
+locally or Exports list prints a grain good (the whole word; flour does not count: a mill is not a field, G71), read
+through the leaf that prints those lists; if the layering lint refuses that import from `traditions/`, the builder STOPS.
+
+(5) **"BEING EASY TO REACH" BESIDE "THE ROADS ARE DANGEROUS" (8 of the 119 pages printing C4's line): THE SENTENCE
+CHANGES.** The gate knows a working trade route, not a safe road. The line becomes: "{settlement} is poor, and being well
+placed for trade has not changed that." Same id, no slot added (the walker's count of over-claims stays 19), no pick moves.
+Vetoable by the owner; it replaces G70's wording in his list.
+
+(6) **"FEEDS ITSELF" BESIDE AN ARRIVING "PRESERVED PROVISIONS" (two towns): CURED IN THE WORD LIST.** VIABILITY-TRUE-2's
+measured "none neither" was taken on the small tiers and fails in towns. `isFoodSourceGood` also answers yes to the whole
+words `provisions` and `game` (a list of its own beside `FAILED_GOODS`, which stays as it is: the famine's marks read it).
+Proof: the reader's table again, L1 and L5 false 0.
+
+BY WHOM: one local builder (CURE-119, `/home/user/wt/cure119`, branch `lane/stack-119-cures-wip-2026-11-26` cut at the
+helper's tip ef10a71f3a, never pushed by the builder), one commit a cure; then the same reader on the cures.

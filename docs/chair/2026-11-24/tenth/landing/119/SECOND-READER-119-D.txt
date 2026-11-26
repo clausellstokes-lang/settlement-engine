@@ -1,0 +1,26 @@
+READ on 9d22f040e4: 8a37259dc4; 38e92b68e; 9e73a943a (and from 50765e60d); cabb56d92; ecb5b9853; 40eec947a. Tabs rendered from scratch bundles; worktrees removed. Evidence: /tmp/claude-0/-home-user-settlement-engine/716f8968-c3c3-52a7-92aa-37ba085c7c08/scratchpad/reader7/run
+
+FINDINGS
+1. B1(ii), settlement.schema.js :: bornByThisEngine (L64), genesis.js :: fieldRiteRefused (L204). The rule holds only while the stamp EQUALS the build's constant; generatorVersionRelease.test.js forces a new constant when births next move; every 0.10.0-born unlit place then reverts. V dp-city-38 under constant 0.11.0: "The Great Stars Fair" is "The Great Furrow Fair" again. CONFIRMED.
+2. VIABILITY-TRUE-2, dossierViewModel.js :: owesDebtShown. A third home prints debt: the Power tab's merchant_league line, "The people who run Neatopia are also the people it owes money to", beside "Neatopia keeps order and pays its way": soak1k-87, soak1k-124, C dp-town-93. CONFIRMED.
+3. P9b-2, beastsReadiness.js :: scoresAsShown. The pass-through also feeds the per-score printers (OverviewTab.jsx:197). soak1k-14 with scores.monster 'unknown' or null: Overview "Monster Defense Critical" (the line: "Adequate"); the Defense tab "Adequate". CONFIRMED, hand-made.
+4. B1(ii), fieldRiteRefused reads only `grain`. r7d-city-24 (r7x's config, terrainOverride desert; date_palms, sources ["fish"]) prints Exports "Desert grain", Produced locally "grain"; "The Procession of the Fields" becomes "The Fair of the Market"; 4 of 330. CONFIRMED.
+5. C4, v8. soak1k-205: "Bjornby is poor, and being easy to reach has not changed that." beside Daily Life "The country around is overrun with beasts, and the roads are dangerous." 8 of 119 pages printing it. CONFIRMED.
+6. VIABILITY-TRUE-2, commoditiesShown.js :: isFoodSourceGood: its "none neither" fails in towns: r7x-town-68 "Flachsteig feeds itself and pays its own way." and C dp-town-101 (L5) beside Imports "Preserved provisions", no pounds. CONFIRMED.
+
+(I) 2,700 births (C; V; r7x-<tier>-<i> under the page census's dials; 450 a tier), line against unit, same records.
+1. Yes. 93 places: 104 rows replaced, 7 later motif shifts; also 15 untouched rows print another description, 3 another calendar line (V dp-city-38 row 4); in 4 the tab drops an inadmissible replacement (V dp-city-72, tide). 13 replacements are harvest rites.
+2. True: 2,254 unrefused places byte-equal (grain 449, farmland 619, empty list 1,186). No small place is refused; 50 of 450 larger places keep a field rite on an empty list.
+3. Fresh 0.10.0; round trip and import keep it; 0.9.0 and stampless false; 360 db832c892 births identical. No path stamps a live-site record; remote births carry the service's constant (both read). Finding 1.
+4. foodSources is what the page prints; `mill` towns mill bought grain; finding 4. Farmland: the live roster.
+5. Pulse first mint equals the tab, 40 of 40; shared rows too; the PDF prints only the mirror.
+6. Fires on a DM's custom field tradition and an adopted rite in a lit mirror; blind where the stamp differs.
+
+(II)
+(a) Gone: desert port 80 of 80 byte-equal to the line, crossroads 80 of 80; road, river, isolated, pass: 126 of 240 lose the district, none with grounds, none an entrepot.
+(b) Byte-equal apart from the bullet; inheritance gone; no drawn line skipped (ten newly skippable titles occur elsewhere only as keys, unscanned by the guard). Finding 4 stated, not closed.
+(c) Tile equals the canonical band, 240 of 240; six means, one set; finding 3.
+(d) 2,800 places, printed/false: L1 224/1; L2 14/0; L3 21/0; L4 170/0; L5 179/1; twin A 344/0; twin B 37/0; strained 42/5; general 67/0. Food record removed, 300: 0.
+(e) Poor (48) or Struggling (71) by the page; a working route on all; finding 5. Tests: counts only.
+
+(III) 480 soak pages against the line: 62 viability sentences change, 5 not false before (twin A gains "some of"); 3 of 13 general lines likewise. Not these diffs: the line's water rule already moves 109 of 360 live-site records' traditions.
