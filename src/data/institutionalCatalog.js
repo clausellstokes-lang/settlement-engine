@@ -280,7 +280,8 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       successor: "Furrier's district",
     },
     {
-      shared: { front: 'front', name: "Furrier's district", face: 'the master furrier', baseChance: 0.35, desc: 'Fur processors, traders, and retailers concentrated in one area. High-value trade. Quality furs are luxury goods.', tags: ['trade', 'guild'], priorityCategory: 'economy' },
+      // B1(i)b (R24r 6): the Hunter's lodge's successor lives on what its lodge lives on (tests/generators/desertWithholdsHouses.test.js)
+      shared: { front: 'front', name: "Furrier's district", face: 'the master furrier', livesOn: 'game', baseChance: 0.35, desc: 'Fur processors, traders, and retailers concentrated in one area. High-value trade. Quality furs are luxury goods.', tags: ['trade', 'guild'], priorityCategory: 'economy' },
       at: {
         city: {},
         metropolis: {},
