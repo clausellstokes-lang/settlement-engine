@@ -32,7 +32,7 @@ describe('P1: the Summary tab\'s Defense tile reads the mean of the scores as pr
     const { container } = render(<SummaryTab settlement={s} />);
     const text = container.textContent || '';
     cleanup();
-    expect(text.match(/Systems average: (\w+)/)?.[1]).toBe(statusCase(scoreBand(canon)));
+    expect(text.match(/Systems average: ([A-Z][a-z]+)/)?.[1]).toBe(statusCase(scoreBand(canon)));
   }, 120000);
 });
 
