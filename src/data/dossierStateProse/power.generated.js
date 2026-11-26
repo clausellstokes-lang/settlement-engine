@@ -2382,7 +2382,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The people who run {settlement} are also the people it owes money to, and they do not keep the two apart.",
+          "text": "The people who run {settlement} are also the people who trade in it, and they do not keep the two apart.",
           "slots": [
             "settlement"
           ],
