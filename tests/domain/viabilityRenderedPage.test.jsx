@@ -60,7 +60,7 @@ describe('V1: no line says the place pays its way or owes no one beside a debt t
       expect(debtPrinted(s)).toBe(true); // not vacuous: the rendered page says the place owes
       const summary = String(deriveViability(s).summary);
       expect(summary).toMatch(/VIABLE/);
-      expect(summary).not.toMatch(PAYS);
+      expect(summary).not.toMatch(PAYS); // anchored: the summary is proved a printed VIABLE line on the line above
     }, 120000);
   }
   test('every birth of C\'s thorps and hamlets (300): no pays-its-way line beside a rendered debt', () => {
@@ -85,6 +85,6 @@ describe('V2: a record with no food record — the line reads the pounds the tab
     expect(poundsPrinted(s)).toBeGreaterThan(0); // not vacuous: the fallback row prints imported pounds
     const summary = String(deriveViability(s).summary);
     expect(summary).toMatch(/VIABLE/);
-    expect(summary).not.toMatch(FEEDS_ITSELF);
+    expect(summary).not.toMatch(FEEDS_ITSELF); // anchored: the summary is proved a printed VIABLE line on the line above
   }, 120000);
 });
