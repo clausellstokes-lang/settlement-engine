@@ -86,3 +86,5 @@ shrink-only door, "never regenerate"): RULED AT THE LANDING, raised by nobody. S
 **CLOSE-9 HANDED OVER at 5844b44c0** (`lane/close-9-2026-11-26`, `docs/chair/2026-11-21/eighth/close/CLOSE-9-HANDBACK.md`
 section 0): NOT STARTED and for a fresh seat cut on the line after point 118 lands: P9b's build (G48), D13's measure and design
 (G49), C4-SECOND-LINE (G49), B1(ii) redesigned.
+
+**POINT 118 LANDED (12:08 UTC on 2026-11-26): THE LINE IS 9d22f040e4eee6add2190728381ac7ab8e12d510** (the landing itself 88a070e97d; E1 out; D8 and A5 not in). Point 119's units are CLOSE-10's (`prompts/START-CLOSE-10.txt`).
