@@ -84,6 +84,10 @@ describe('secondMentions: the first mention keeps the full name; a later one in 
     const koh = 'Chac Chel Koh (the senior guild master)';
     expect(secondMentions(`${koh} once spoke up for Ahulane Ek when it cost ${koh} something to do it.`, [M(koh, 'Master of the Guilds'), M('Ahulane Ek', 'the wizard')]))
       .toBe(`${koh} once spoke up for Ahulane Ek when it cost Koh something to do it.`);
+    // a stand-in card whose name is itself a description ("The Veteran Soldier", its role bare) has no surname: the name, its
+    // article in the sentence's case (the golden's hamlet|latin|forest|isolated|civilized row)
+    expect(secondMentions('The Veteran Soldier wants Vibius Aurelius\'s position, and Vibius Aurelius wants The Veteran Soldier\'s reputation.', [{ name: 'The Veteran Soldier', role: 'Veteran Soldier' }, M('Vibius Aurelius', 'the steward')]))
+      .toBe('The Veteran Soldier wants Vibius Aurelius\'s position, and he wants the Veteran Soldier\'s reputation.');
   });
 
   it('R13: a name that is itself a role word is never changed (a place, a person, a power)', () => {
