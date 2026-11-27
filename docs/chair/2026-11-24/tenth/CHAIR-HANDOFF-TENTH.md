@@ -1600,3 +1600,4 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   dissolves them; ten towns rendered both ways; how many places hold a legitimate person with a criminal tie. NOT BUILT
   before point 120 lands.
 - NEXT PUSH NUMBER 422.
+- OWED-6's agent: a0dcc007a2a9e6c8f (continued by SendMessage; its report comes as a message).
