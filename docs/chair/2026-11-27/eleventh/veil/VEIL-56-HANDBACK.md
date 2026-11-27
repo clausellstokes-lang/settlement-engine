@@ -74,3 +74,12 @@ THE NEXT COMMAND: read each child's first report as it lands; relay the chair's 
   tests 37/37 on the scratch. MY RULING TO U45: scratch births count as THE BASE's MEASURE only (tails served 0, `dmStanding` served 0,
   fail-closed count 0 or a finding); the committed proof is the four plants. OWED AT THE JOIN: the field cut on real births on the re-born
   pools; A5's merge read against the two settlers the base lacks.
+- 2026-11-27T23:43:48Z: MC seated on 2f849aa53 (its permission check refused a pkill of the recipe's gate step; nothing tried in its place).
+  PG STOPPED WITH TWO FINDINGS (`pg/PG-REPORT.md` on `lane/veil-56-2026-11-27-pg-docs` 5a279a277; PLAUSIBLE to me): (A) V29 (1)'s false band
+  reaches five rows, not two (Trade connectivity, Social trust, Strength of the powers beside Labor and Defense); rows lost a pool: the
+  named two 89-92 / 64-65 and wrong rows remain; every row reading a re-derived severity 374-377 / 349-350, 0 wrong. (B) "present is not
+  right": born today only severity differs; BORN ON MASTER every re-derived key but economyOutput differs on most towns (Infrastructure
+  condition wrong on 43, Defense readiness on 10). TWO RULINGS ASKED OF THE CHAIR, with my recommendation (the interval test if PG measures
+  it 0 wrong, else every such row; (B) after the cause by key). PG's ORDERS MEANWHILE: M1 the interval test counted, M2 the cause by key
+  (the record's own laws as cure E; engine drift traced; any served field that tells a master-born record), M3 the totality arm and plant.
+  PG waits for my "BAND-RULE: ..." before building V29 (1).
