@@ -1601,3 +1601,16 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   before point 120 lands.
 - NEXT PUSH NUMBER 422.
 - OWED-6's agent: a0dcc007a2a9e6c8f (continued by SendMessage; its report comes as a message).
+
+## T141 (05:01 UTC on 2026-11-27): THE SIX OWED ROWS TRACED AND RULED (G77); THEIR FOUR CURES BEING BUILT
+
+- OWED-6's trace: ALL SIX from the point 84 merge 31a0534450 (the tie reserve: 26 extra relationship lines). No fault a
+  user sees. Rows 1, 15, 16, 22 are CURED by a local builder OWED-CURE (brief `prompts/START-OWED-CURE.txt`; tree
+  /home/user/wt/owedcure, branch `lane/stack-120-owed-wip-2026-11-27` cut at 1f946c43f1; started 05:01 UTC; its agent id is
+  in the next line): 26 ledger rows with verdicts, three lines of two stale tests, one packed line split; no birth and no
+  page moves. Rows 27, 28 (`editCorpusRatchet` A3, A7) are RE-CLASSED in RED-AT-LINE.tsv to the owner's one signing.
+  THE CURES LAND WITH POINT 120 (the helper merges two local branches: D13's and this one); the chair reads the diff and
+  the 26 verdicts (`$S/owedcure/ledger-26.tsv`); a second reader is NOT started for it (no source behaviour changes: one
+  helper re-wrapped over lines, tests and a ledger) UNLESS the diff shows otherwise.
+- D13-120 is in phase 2 (not reported).
+- OWED-CURE's agent: a0ae4ceb56c215c3c (continued by SendMessage; its report comes as a message). OWED-6 (a0dcc007a2a9e6c8f) is finished.
