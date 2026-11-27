@@ -213,7 +213,12 @@ const mod = (n, m) => ((n % m) + m) % m;
  * (`cert:false-presumption`) records the line the tie prints, never a candidate passed over.
  * @template T @param {() => T} fn @returns {{ result: T, notes: any[] }}
  */
-const quiet = (fn) => { /** @type {any[]} */ const notes = []; const { result } = withPresumptionLedger(fn, /** @type {any} */ (notes)); return { result, notes }; };
+const quiet = (fn) => {
+  /** @type {any[]} */
+  const notes = [];
+  const { result } = withPresumptionLedger(fn, /** @type {any} */ (notes));
+  return { result, notes };
+};
 
 /**
  * GS-1 (ODQ §934.101): THE TIE-PROSE DRAW, WITHOUT REPLACEMENT PER SETTLEMENT. One draw per
