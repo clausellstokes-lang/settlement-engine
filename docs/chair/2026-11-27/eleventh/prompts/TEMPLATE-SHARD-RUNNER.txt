@@ -5,7 +5,8 @@ THE COMMIT: @@SHA@@ (fetch it: `git fetch origin @@REF@@`; it is that branch's t
 SET UP, in the repository's root:
  1. `npm ci` (about two minutes). If it fails, say its last twenty lines and STOP.
  2. `git fetch origin review-fixes-2026-07-08:review-fixes-2026-07-08` (two suites read that old docs branch as a LOCAL ref; if the fetch fails, go on and say so).
- 3. `mkdir -p /tmp/shard`.
+ 3. `git fetch --unshallow origin` (the clone is shallow, and a few tests resolve old commits by their id; if git says the repository is already complete, or the fetch fails, go on and say which).
+ 4. `mkdir -p /tmp/shard`.
 
 THE RUN (one command, in the background, its exit code appended to its own log; never read a result through a pipe):
  `(timeout 9000 npx vitest run @@TARGETS@@ --shard=@@K@@/@@N@@ --maxWorkers=3 --reporter=default --reporter=json --outputFile=/tmp/shard/result.json > /tmp/shard/run.log 2>&1; echo "exit=$?" >> /tmp/shard/run.log) &`
