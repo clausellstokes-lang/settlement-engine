@@ -1,0 +1,19 @@
+POOL /var/tmp/v56/stored-master cuts 0.25,0.5,0.75 stored severities outside their band: 0
+
+[default] TODAY'S PAGE wrong (re-derived default vs the stored severity): 10 {"Social trust":2,"Trade connectivity":3,"Labor capacity":1,"Strength of the powers":1,"Defense readiness":3}
+  INTERVAL TEST: printed wrong 0 {} {}
+  INTERVAL TEST: rows lost 30 {"Social trust":8,"Trade connectivity":9,"Labor capacity":6,"Defense readiness":4,"Strength of the powers":3}
+  lost, by the bands its corners straddle: {"Social trust: Adequate/Strained":5,"Trade connectivity: Adequate/Strained":8,"Labor capacity: Adequate/Strained":6,"Defense readiness: Adequate/Strained":2,"Strength of the powers: Strained/Critical":1,"Social trust: Strained/Critical":2,"Defense readiness: Strained/Critical":2,"Trade connectivity: Strained/Critical":1,"Social trust: Critical/Collapsed":1,"Strength of the powers: Adequate/Strained":2}
+  non-monotone (row, condition) inside a band: 0 
+
+[allShown] TODAY'S PAGE wrong (re-derived default vs the stored severity): 9 {"Social trust":2,"Trade connectivity":3,"Labor capacity":1,"Strength of the powers":1,"Defense readiness":2}
+  INTERVAL TEST: printed wrong 0 {} {}
+  INTERVAL TEST: rows lost 30 {"Social trust":8,"Trade connectivity":9,"Labor capacity":6,"Defense readiness":4,"Strength of the powers":3}
+  lost, by the bands its corners straddle: {"Social trust: Adequate/Strained":5,"Trade connectivity: Adequate/Strained":8,"Labor capacity: Adequate/Strained":6,"Defense readiness: Adequate/Strained":3,"Strength of the powers: Strained/Critical":1,"Social trust: Strained/Critical":2,"Defense readiness: Strained/Critical":1,"Trade connectivity: Strained/Critical":1,"Social trust: Critical/Collapsed":1,"Strength of the powers: Adequate/Strained":2}
+  non-monotone (row, condition) inside a band: 0 
+
+[widest] TODAY'S PAGE wrong (re-derived default vs the stored severity): 10 {"Social trust":2,"Trade connectivity":3,"Labor capacity":1,"Strength of the powers":1,"Defense readiness":3}
+  INTERVAL TEST: printed wrong 0 {} {}
+  INTERVAL TEST: rows lost 30 {"Social trust":8,"Trade connectivity":9,"Labor capacity":6,"Defense readiness":4,"Strength of the powers":3}
+  lost, by the bands its corners straddle: {"Social trust: Adequate/Strained":5,"Trade connectivity: Adequate/Strained":8,"Labor capacity: Adequate/Strained":6,"Defense readiness: Adequate/Strained":2,"Strength of the powers: Strained/Critical":1,"Social trust: Strained/Critical":2,"Defense readiness: Strained/Critical":2,"Trade connectivity: Strained/Critical":1,"Social trust: Critical/Collapsed":1,"Strength of the powers: Adequate/Strained":2}
+  non-monotone (row, condition) inside a band: 0 

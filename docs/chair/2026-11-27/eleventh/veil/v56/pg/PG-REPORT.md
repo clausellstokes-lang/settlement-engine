@@ -46,6 +46,28 @@ its number; the page puts back the band's fixed default (`activeConditions.js ::
 105 of 111 stored severities differ from it (e.g. r3m-city-indebted-0-36: stored 0.23, page 0.15). Every Foundations row scales
 that number (`applyConditions`: `Math.round(cond.severity * scale)`), so a row near a band edge crosses it.
 
+### M1 (V31 (A)): THE INTERVAL TEST, MEASURED (CONFIRMED; 2026-11-27, pushed 23:56 UTC by `date -u`)
+THE RULE MEASURED: a Foundations row that reads a re-derived severity is printed only where it prints the same word at every
+corner of the re-derived conditions' served-band intervals. Otherwise it is not printed. `probe/interval.probe.jsx`, every
+marker, both pools. THE ENGINE'S INTERVALS: clean. The cuts were read off `activeConditions.js :: severityBand` by bisection:
+0.25, 0.5, 0.75, so low [0, .25), medium [.25, .5), high [.5, .75), critical [.75, 1]. `deriveActiveCondition` clamps to
+[0, 1], and 0 stored severities on either pool lie outside their stored band. An open upper end is tested at its cut less 1e-9.
+THE ORACLE: the same page with each condition's severity set to the owner's STORED one (the swap test).
+MONOTONE: 0 (row, condition) pairs non-monotone inside a band, at 7 points per interval, both pools, every marker.
+| pool, marker | today's page wrong | INTERVAL TEST printed wrong | INTERVAL TEST rows lost, by row |
+|---|---|---|---|
+| today-born default | 8 | **0** | 37: Trade connectivity 16, Defense readiness 7, Social trust 6, Labor capacity 5, Strength of the powers 3 |
+| today-born all-shown | 8 | **0** | 37: Trade 16, Defense 8, Social trust 6, Labor 5, Strength 2 |
+| today-born widest | 8 | **0** | 37: as default |
+| master-born default | 10 | **0** | 30: Trade 9, Social trust 8, Labor 6, Defense 4, Strength 3 |
+| master-born all-shown | 9 | **0** | 30: as default |
+| master-born widest | 10 | **0** | 30: as default |
+NEAR WHICH THRESHOLD (the bands a lost row's corners straddle; today all-shown / master all-shown): Adequate|Strained 25 / 24,
+Strained|Critical 10 / 5, Surplus|Adequate 2 / 0, Critical|Collapsed 0 / 1.
+AGAINST THE OTHER TWO RULES (rows lost per pool): the two named rows 89-92 / 64-65, and they leave wrong rows; every reading
+row 374-377 / 349-350; THE INTERVAL TEST 37 / 30, with 0 wrong. V31 (A)'s condition holds on both pools: 0 wrong, a clean interval
+for every band.
+
 ### (2)(a) PRESENCE: every key `rederiveForPage` puts back, where the owner's record holds it and the page holds its parent
 At every marker on both pools: scores (6), gates, economyOutput, recentConflict and every condition's severity are PRESENT (0 absent).
 ABSENT, each with what is printed instead:
