@@ -363,14 +363,14 @@ describe('recent_changes behavior', () => {
   // (the same record with no crisis) prints the imminent line, so the arm cannot pass by printing nothing.
   const IMMINENT_OF = (/** @type {string} */ type) => Object.entries(RECENT_CHANGES)
     .filter(([b]) => b.startsWith(`threat.${type}.`) && b.endsWith('.imminent')).flatMap(([, ls]) => ls.map((l) => l.text));
-  it.each([
-    ['plague', 'plague_onset'], ['famine', 'famine'], ['siege', 'under_siege'], ['monster_pressure', 'monster_pressure'],
-  ])('says no imminent %s line where its crisis (%s) is in force', (type, crisis) => {
-    const threats = { threats: [{ name: 'Pressure', type, severity: 0.7, visibility: 'open' }] };
-    const calm = deriveDailyLifeSlot('recent_changes', { name: 'Ashford', defenseProfile: threats });
-    expect(IMMINENT_OF(type).some((t) => calm.text.includes(t))).toBe(true);
-    const inForce = deriveDailyLifeSlot('recent_changes', { name: 'Ashford', stress: [{ type: crisis }], defenseProfile: threats });
-    expect(IMMINENT_OF(type).filter((t) => inForce.text.includes(t))).toEqual([]);
+  it('says no imminent plague, famine, siege or monster-pressure line where that crisis is in force', () => {
+    for (const [type, crisis] of [['plague', 'plague_onset'], ['famine', 'famine'], ['siege', 'under_siege'], ['monster_pressure', 'monster_pressure']]) {
+      const threats = { threats: [{ name: 'Pressure', type, severity: 0.7, visibility: 'open' }] };
+      const calm = deriveDailyLifeSlot('recent_changes', { name: 'Ashford', defenseProfile: threats });
+      expect(IMMINENT_OF(type).some((t) => calm.text.includes(t)), `${type}: the control prints the imminent line`).toBe(true);
+      const inForce = deriveDailyLifeSlot('recent_changes', { name: 'Ashford', stress: [{ type: crisis }], defenseProfile: threats });
+      expect(IMMINENT_OF(type).filter((t) => inForce.text.includes(t)), `${type} under ${crisis}`).toEqual([]);
+    }
   });
 
   // The measure's worked example (rmeasure/R-REPORT.md, R4): C dp-thorp-24, born as the page battery births it, holds a

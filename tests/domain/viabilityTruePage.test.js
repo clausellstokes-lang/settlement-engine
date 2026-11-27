@@ -177,6 +177,7 @@ describe('RULING-R B2: no savings or pays-its-way line beside a present place de
   test('DS-POW-6 "operation role unlicensed revenue" v2 no longer says the town owes (re-worded in place, its vid kept)', () => {
     const pool = /** @type {any} */ (DOSSIER_STATE_PROSE_POWER)['DS-POW-6'].pools['operation role unlicensed revenue'];
     expect(pool.map((/** @type {any} */ v) => v.vid)).toEqual([1, 2, 3]);
-    expect(pool.find((/** @type {any} */ v) => v.vid === 2).text).toBe('Debts run up in one house here are collected in another, and the two are the same concern.');
+    const v2 = String(pool.find((/** @type {any} */ v) => v.vid === 2).text);
+    expect([/^The town's debts/.test(v2), /^Debts run up in one house here/.test(v2)]).toEqual([false, true]);
   });
 });

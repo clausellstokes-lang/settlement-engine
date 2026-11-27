@@ -1499,8 +1499,9 @@ const SOLVENT_LINES = Object.freeze([
  */
 function solventCorpus(corpus, blockId, poolKey, solvency) {
   const row = SOLVENT_LINES.find((r) => r.block === blockId && r.pool === poolKey && r.on.some((f) => solvency[f]));
-  const block = row ? /** @type {Record<string, any>} */ (corpus)[blockId] : null;
-  if (!row || !block?.pools?.[poolKey]) return corpus;
-  const pool = block.pools[poolKey].filter((/** @type {{ vid?: unknown }} */ v) => !row.vids.includes(Number(v.vid)));
+  const block = row ? /** @type {{ pools?: Record<string, ReadonlyArray<{ vid?: unknown }>> } | undefined} */ (/** @type {Record<string, unknown>} */ (corpus)[blockId]) : undefined;
+  const lines = block?.pools?.[poolKey];
+  if (!row || !block || !lines) return corpus;
+  const pool = lines.filter((v) => !row.vids.includes(Number(v.vid)));
   return /** @type {typeof CORPUS} */ ({ ...corpus, [blockId]: { ...block, pools: { ...block.pools, [poolKey]: pool } } });
 }
