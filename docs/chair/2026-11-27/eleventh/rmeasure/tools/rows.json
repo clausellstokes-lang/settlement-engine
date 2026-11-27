@@ -1,0 +1,167 @@
+[
+ {
+  "key": "R1",
+  "item": "R1 builder's reason as prose (Crisis)",
+  "home": "src/domain/crisis/crisisCast.js :: CAST_REASONS.nextInLine, appended by deriveCrisisCast's take() and STORED in the cast row; printed by src/domain/crisis/crisisPage.js :: composeCrisisPage (Crisis tab, PDF CrisisSections) and by src/domain/crisis/crisisHooks.js :: castSentence (the crisis plot hooks, 'In the famine, X \u2026 takes the worst of it: <reason>.')",
+  "test": "a printed line holds the nextInLine sentence (always a fault: it is the builder's note, not prose)",
+  "kind": "BIRTH (stored reason); a view cure reaches every record",
+  "cure": "composeCrisisPage and crisisHooks' castSentence drop the fixed '; next in line, \u2026' suffix of a stored reason (a print-time strip of a constant: reaches every saved town; rewording the constant alone moves births).",
+  "surfaces": "share: yes, through the crisis plot hook on Plot Hooks (C 8, V see sub) though the Crisis tab is hidden there; PDF: yes (CrisisSections, measured through composeCrisisPage); session sheet: crisis hooks (PLAUSIBLE)",
+  "pdfKey": "R1"
+ },
+ {
+  "key": "R2",
+  "item": "R2 doubled sentence ends",
+  "home": "src/components/new/SummaryTab.jsx :: characterSentence (recentConflict + '.'), a tab unmounted since X-5 (dossierLazyTabs.js); no live tab prints one",
+  "test": "any printed line (owner and share, every tab) matching '..' (not an ellipsis), '. .', '?.', '!.', ',.', ';.', ':.', '.,' or '.;'",
+  "kind": "FORMAT",
+  "cure": "none needed on a live surface; if SummaryTab is ever re-mounted, drop the appended '.' when recentConflict already ends a sentence.",
+  "surfaces": "PDF state prose + daily life + crisis page, Tonight sheet: scanned, 0",
+  "note": "Ioannorion's 'were beaten..' came from the retired Summary tab the chair's quick render mounted."
+ },
+ {
+  "key": "R3",
+  "item": "R3 second name lower-cased (dossier)",
+  "home": "src/components/new/SummaryTab.jsx :: tokenCase(v.source) (unmounted); the live PlotHooksTab uses nameOrTokenCase",
+  "test": "a person's name printed with its second word lower-cased (case-sensitive), on any owner or share line",
+  "kind": "FORMAT",
+  "cure": "none on the dossier (PlotHooksTab is already right).",
+  "surfaces": "see R3 session row"
+ },
+ {
+  "key": "R3session",
+  "item": "R3 second name lower-cased (session sheet)",
+  "home": "src/components/session/SessionMode.jsx :: 'Threads to pull' heading tokenCase(hook.source)",
+  "test": "the session sheet's hook headings (collectPlotHooks less the Tonight sheet's, first 12, tokenCase(source)) include a person's name with a lower-cased second word",
+  "kind": "FORMAT",
+  "cure": "SessionMode's heading takes nameOrTokenCase(hook.source), as PlotHooksTab does (one call).",
+  "surfaces": "session sheet only (measured through its view models: composeTonightSheet, collectPlotHooks, tokenCase); dossier, share: no; PDF PlotHooks: no tokenCase (PLAUSIBLE)",
+  "note": "The dossier's own Plot Hooks tab is clean (R3: 0 on C and V, 800/817 pages print hook names correctly)."
+ },
+ {
+  "key": "R4",
+  "item": "R4 imminent threat beside its crisis in force (Daily Life)",
+  "home": "src/data/dailyLife/recentChanges.js :: RECENT_CHANGES['threat.<kind>.any.imminent'] (T0/T1), drawn by src/domain/dailyLife.js :: deriveRecentChanges (acute open threat at stage imminent)",
+  "test": "Daily Life prints a line of a threat.<kind>.*.imminent pool while the record's stress holds that kind's crisis (plague->plague_onset, famine, siege->under_siege, monster_pressure)",
+  "kind": "VIEW GATE",
+  "cure": "deriveRecentChanges skips an imminent-stage threat branch whose crisis is in force (or the imminent lines declare an exclusion atom 'crisis: <kind>'); view-time, so every saved town is reached (the shared page's stamped prose needs PUBLIC_PROSE_VERSION).",
+  "surfaces": "PDF: yes (IdentityDailyLife's slots); share: yes (Daily Life prints there)",
+  "shareKey": "R4",
+  "pdfKey": "R4"
+ },
+ {
+  "key": "R5R10R12",
+  "item": "R5/R10/R12 solvency line beside a present debt / no savings",
+  "home": "A lines: src/data/dossierStateProse/economy.generated.js :: DS-ECO-8 pools.COMFORTABLE vid 1 ('purse closes every year ahead \u2026 money laid by behind it') and vid 2 ('People here put things by, and can.'), Daily Life standingOfLiving; src/domain/display/dossierViewModel.js :: deriveViability ('feeds itself and pays its way', SS2 'owes no one'). B lines: defense.generated.js :: DS-DEF-2 pools['Economic Survival: WEAK'] vid 5 ('would have to borrow the money first'), vids 1/2 ('nothing laid by'); DS-ECO-8 STRUGGLING v5; DS-POW-6 'operation role unlicensed revenue' v2; historyData.js indebted/foreign-debt tensions and hooks; unspokenTopics.js",
+  "test": "on one page: a savings line (DS-ECO-8 COMFORTABLE v1/v2) beside a no-savings/borrow line (DS-DEF-2 WEAK), or any solvency line (savings, 'pays its way', 'owes no one') beside a PRESENT debt of the place (indebted crisis, the external-debt tension, its hooks, DS-ECO-8 v5, DS-POW-6 v2, Daily Life's owed-to-outsiders lines, other present-tense place-debt sentences); a sentence naming a person is a person's debt and is not counted",
+  "kind": "VIEW GATE",
+  "cure": "DS-ECO-8 COMFORTABLE v1/v2 and deriveViability's 'pays its way'/'owes no one' rows each read the same two facts the B homes read (economic survival grade WEAK; a present place debt: stress indebted or an external-debt tension) and stand down to a sibling that claims no savings and no freedom from debt; view-time desks, so all saved towns are reached (shared page: PUBLIC_PROSE_VERSION bump).",
+  "surfaces": "share: yes (both lines printed on the share); PDF: yes (state prose daily_life + defense + the viability rows)",
+  "shareKey": "R5R10R12 (both lines)",
+  "pdfKey": "R5R10R12 (both lines, state prose + daily life)",
+  "note": "The 'soft' pair (a solvency line beside the grade Weak only) is counted apart in R5R10R12-softWeak."
+ },
+ {
+  "key": "R5R10R12-softWeak",
+  "item": "R5 soft pair: solvency line beside the grade Weak only",
+  "home": "OverviewTab Systems Health 'Economic Resilience' and DefenseTab 'Economic Survival' (defenseProfile score band) against the A lines above",
+  "test": "an A line on a page whose only B is the Weak grade",
+  "kind": "WORDING",
+  "cure": "no change proposed until the owner says whether 'Weak' resilience contradicts 'pays its way' (it need not: one is a margin, the other a shock).",
+  "surfaces": "share: yes; PDF: yes (PLAUSIBLE)"
+ },
+ {
+  "key": "R6a",
+  "item": "R6 scarcity tension that never names the good",
+  "home": "src/data/historyData.js :: HISTORICAL_EVENTS_DATA resource_scarcity (description; byMemory.unanchored.description), stored in history.currentTensions[].description at birth",
+  "test": "a page prints the scarcity tension ('a critical resource is running short' / 'became scarce') and another of its lines names the short good (DS-ECO shortfall 'brings up enough <good>', 'no <good> lies near', '<Good> is short this season', '<good> supply is tighter')",
+  "kind": "BIRTH (stored description); a view cure can reach it",
+  "cure": "where the record names the short good (the same reader as DS-ECO's shortfall line), the tension prints a named twin ('Timber is running short \u2026'); print-time, so saved towns are reached; the stored string stays.",
+  "surfaces": "share: yes (History/Overview tensions); PDF: yes (HistoryFounding currentTensions, PLAUSIBLE)",
+  "shareKey": "R6a",
+  "pdfKey": "R6a"
+ },
+ {
+  "key": "R6b",
+  "item": "R6 one tension led into more than one hook",
+  "home": "src/components/new/SummaryTab.jsx (unmounted) printed the tension above each of its hooks; the live PlotHooksTab groups a tension's hooks under one heading",
+  "test": "a tension description printed twice or more within one snapshot of one panel (the walk's per-snapshot repeat count)",
+  "kind": "FORMAT",
+  "cure": "none on a live surface.",
+  "surfaces": "none measured"
+ },
+ {
+  "key": "R7",
+  "item": "R7 'not every account squares' with no tab saying which",
+  "home": "src/data/dossierStateProse/general.generated.js :: DS-GEN-11 pools['criticalIssueCount: critical contradictions on the record'] (7 vids), keyed by src/domain/display/stateProse/generalStateProse.js :: criticalIssuePoolKey (count > 0 OR battery judgment needs_review), shown by ViabilityTab's verdictLines",
+  "test": "the pool prints and the Outlook tab prints no non-stress critical issue by title (only stress consequences count, or the count is 0 and the battery said needs_review: its findings print only on the staff panel)",
+  "kind": "VIEW GATE",
+  "cure": "criticalIssuePoolKey counts only the issues the Outlook tab lists as contradictions (not stress_consequence) and does not take recordClean=false alone; else the pool is silent.",
+  "surfaces": "share: yes; PDF: yes (buildPrintProse viability)",
+  "shareKey": "R7",
+  "pdfKey": "R7",
+  "note": "Cause of the 117 C / 118 V pages that print the pool: count 0 with the battery's 'needs_review' (C 83, V 69: the battery's findings print only on the staff panel), only stress consequences (C 11, V 9), a non-stress critical issue (C 23, V 40: the Outlook lists it by title: innocent when it does)."
+ },
+ {
+  "key": "R8a",
+  "item": "R8 'game from the woods' with no woodland",
+  "home": "src/domain/foodways.js :: SOURCE_PHRASES.game[0], stored at birth as economicState.foodSecurity.foodRecord.foodwaysLine and record.foodwaysLine; re-read at print by foodwaysLineShown",
+  "test": "the page prints 'game from the woods' and the record's nearbyResources hold none of managed_forest, ancient_grove, shipbuilding_timber, mountain_timber and its terrain is not forest",
+  "kind": "VIEW GATE (stored line, print-time re-read exists)",
+  "cure": "the print-time re-read swaps 'game from the woods' for its sibling 'the hunters' game' where the record holds no woodland (reaches every saved town).",
+  "surfaces": "share: yes; PDF: yes (IdentityDailyLife foodways)",
+  "shareKey": "R8a",
+  "pdfKey": "R8a",
+  "note": "Every C birth holds woodland (C's resources always include a woodland resource), so the test cannot fire on C; V: 19 faults (thorp 13), e.g. a plains thorp with hunting grounds only."
+ },
+ {
+  "key": "R8b",
+  "item": "R8 commodity listed under a category its page says is needed and not brought in",
+  "home": "src/domain/display/commoditiesShown.js :: commoditiesShown (resourceData commodities, e.g. gemstone_deposits -> 'luxury') against src/domain/display/tradeListDisplay.js :: importsAsPrinted(record).needed ('Needed, and not brought in: \u2026 luxury goods')",
+  "test": "a commodity chip equals, after stripping ' goods' and a plural s, a name on the page's 'Needed, and not brought in' list",
+  "kind": "VIEW GATE",
+  "cure": "importsAsPrinted's needMetBy also counts a commodity the place's own resources list (a need met at home is not printed as unmet).",
+  "surfaces": "share: yes; PDF: Needed line not printed, commodities yes (no pair)",
+  "shareKey": "R8b"
+ },
+ {
+  "key": "R11",
+  "item": "R11 date palms print grain the food record does not name",
+  "home": "src/data/resourceData.js :: date_palms (commodities ['grain','dates'], tradeGoods 'Desert grain') against economicState.foodSecurity.foodRecord.foodSources",
+  "test": "date_palms held, foodSources lack grain, and the page prints 'Desert grain' or a 'grain' row on Economics/Resources",
+  "kind": "BIRTH",
+  "cure": "date_palms' commodities and trade goods carry 'dates' only, or the food record admits the palms' grain at birth; a view cure could hide the printed 'grain' rows but not the stored exports or the refused field rite.",
+  "surfaces": "share: yes; PDF: yes (PLAUSIBLE)",
+  "shareKey": "R11",
+  "note": "C holds no date palms (0 pages). V: 21 date-palm pages; 14 print 'Desert grain' with no grain among the food sources: 7 with a non-empty source list (livestock or game: the field-rite-refused class the list counted ~4 of 2,700) and 7 with an EMPTY source list (the rite stands there: unanswered)."
+ },
+ {
+  "key": "R13",
+  "item": "R13 a role title where a name belongs (tie lines)",
+  "home": "src/data/people/personMention.js :: secondMentions (rule 2: a later mention takes the card's role 'as the card states it'), over the tie lines of src/data/npcData.js (pairProse), stored at birth in relationships[].description/tension",
+  "test": "in a sentence that names a person in full, a card's bare capitalised role (no article: 'Elder', 'Headman') stands alone (not before a name, not in a power's name, not after 'the' or in an apposition)",
+  "kind": "BIRTH (stored tie strings); a view cure can reach ties",
+  "cure": "secondMentions' rule 2 takes a role only when it reads as a description ('the miller'), else falls to rule 3 (the surname); a print-time pass could swap a bare npc1Role/npc2Role back to the surname on stored ties only.",
+  "surfaces": "share: yes (same count); PDF: yes (Relationships prints descriptions, PLAUSIBLE)"
+ },
+ {
+  "key": "SEAT",
+  "item": "OVERVIEW-NAMES-THE-SEAT",
+  "home": "src/domain/summary/settlementQuickGuide.js :: governsLine (via src/components/new/overviewIdentity.js :: overviewIdentityOf; the share reads the stamped publicProse 'overview:identity')",
+  "test": "the Overview prints 'Governed by <power>' while the Power tab's 'The seat' names a person of the roster",
+  "kind": "VIEW GATE",
+  "cure": "governsLine names holderOf(settlement, {audience}).person where one holds the seat ('Governed by <power>, seat held by <name>'), the power alone where the seat is empty or the face is veiled to the reader; the stamped share line needs PUBLIC_PROSE_VERSION.",
+  "surfaces": "share: yes ('Governed by' printed there)",
+  "shareKey": "SEAT (Governed by)"
+ },
+ {
+  "key": "SEAT-veiled",
+  "item": "OVERVIEW-NAMES-THE-SEAT: holders veiled / withheld on the share",
+  "home": "src/domain/seat/holderOfSeat.js :: holderOf (reader audience drops a veiled face) / src/domain/people/cardPowers.js :: cardInstitutionVeilOf",
+  "test": "of the SEAT pages: the card veil says 'veiled' (cardInstitutionVeilOf), or the share's Power tab 'The seat' names another or no holder",
+  "kind": "VIEW GATE",
+  "cure": "the share's Power paragraph and the Institutions connection read the same reader holderOf the seat cell reads (or the seat cell stops withholding a face nothing else hides); a governsLine cure must read the reader's holderOf.",
+  "surfaces": "share",
+  "note": "Card veil 'veiled': 0 on C and V. But on V 39 share pages (town 18, city 14, metropolis 7; the owner's Power reads '<power> \u2026 criminal sway') print the seat cell as 'No named seat-holder stands in the record. The chain ends, honestly, at the power.' while the SAME share names the holder in the Power paragraph ('Donal Murphy, the mayor, holds its seat') and on Institutions ('Connection: Lord Mayor Donal Murphy'): the share contradicts itself, and if the withholding is meant, it leaks."
+ }
+]
