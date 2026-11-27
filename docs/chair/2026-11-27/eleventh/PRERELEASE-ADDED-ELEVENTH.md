@@ -42,3 +42,21 @@
   must be visible; scope: the frame is cheap, deliberate DM-explained disagreement is the dear part: measured first,
   rationed, with VOICES. RECOMMENDED TO HIM: adopt the frame as the stance; keep the bar for accidents where it is; nothing
   built from it; the work in flight is unaffected (every cure in points 122 and 123 is of an accident).
+
+- **DISQUALIFIERS, NOT QUALIFIERS: THE OWNER's SIMPLIFICATION OF THE FLOOR, AND THE CHAIR's ANSWER** (22:29 UTC on 2026-11-27; a thought, NOT a
+  request to build). HIS WORDS, VERBATIM, over the chair's floor quoted back ("every disagreement the page shows is one the
+  engine chose, and the DM's view can say which account is right and why …"): "To this, I would like to make it easier by
+  saying trying to force meant reconciliations, we simply draw relationships where if one thing is true another can't be so
+  that we loom for disqualifiers rather than qualifiers: […] What are your thoughts?" THE CHAIR's ANSWER: BETTER THAN ITS OWN
+  FLOOR, WHICH IT WITHDRAWS (intent and an explanation per disagreement is dear and never complete; under his rule the
+  answer to "which is right" is always THE RECORD). IT FITS THE ENGINE's GRAIN (lines already declare `excludes`; Daily
+  Life's `stated` set; today's pair table of savings against debt). WHAT IT CHANGES, SAID TO HIM: the default moves from
+  fail-closed (unknown: silent) to FAIL-OPEN (unknown: print): more variety and fewer thin pages; an accident nobody has
+  drawn prints until a reader draws it: the list grows by reading and converges rather than proves. THREE THINGS THE CHAIR
+  WOULD HOLD: (1) relationships are drawn between CLAIMS, never between sentences (a few hundred claims, one small table);
+  (2) A QUALIFIER STAYS FOR NOUNS: a line that names a thing (a house, a wall, a person, a number) still needs it to exist;
+  (3) SCOPED BY VOICE: the survey against the record, and the survey against itself on one page, are disqualified; a quoted
+  person against either is allowed; of two survey lines that exclude each other the harder claim stands and the softer
+  yields to a fallback, so no page goes blank. THE PROMISE AS THE CHAIR WORDED IT FOR HIM: "Nothing the survey says is ruled
+  out by the record or by itself. People in the town may see it differently." CHECKABLE: clashes on drawn relationships
+  counted over the corpora, target 0; COLD-READ-20 finds the relationships not yet drawn. Nothing built.
