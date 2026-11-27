@@ -142,3 +142,68 @@ KEYS, ADMISSION, THE PICK (base against tip, every draw of both corpora):
   tip == my rank's head 900/900. Tip frames plain 197, traveller 194, official 180, newcomer 171, local 158.
 - THE PDF HEADS (`pdf/lib/headlines.js :: seedPick`): overview 293 | 287 picks (a crisis in force), economics 876 | 794, people 758 | 765; key equal to the
   base's on every pick; no empty key on either corpus; tip == my rank's head on every pick; moved overview 232 | 222, economics 730 | 632, people 381 | 380.
+
+## (3) THE BAR, BY MY OWN PLANTED EDITS — CONFIRMED on C (`scripts/plants-spec.mjs`, `plant-run.sh`, `an-plant.mjs`; `out/plants/results-C.txt`; V below)
+Each plant is ONE source replacement applied IN MEMORY at bundle time (`tools/buildB.mjs --plant`, each anchor must occur exactly once; no tree
+touched), the tip's and its twin on the base; the 900 saved records of C are read by the planted bundle and by the unplanted one; a town "moves" when
+what the site prints differs. "Should move" is my own reading from the UNPLANTED run's picks and my own hash (the tip only: the base picks by position).
+Tip: moved / should; extra; missing   [base: towns moved, of them NOT printers of the edited line]. In every plant the other sites moved 0.
+ONE TRADITION TABLE, `ELEMENT_GLOSS` (the founding pool: 1,282 draws in 623 towns):
+- T1 a printed line removed (GLOSS.founding.2):                213 / 213; 0; 0   [420, 206]
+- T2 a line added (GLOSS.founding.4, colour):                  136 / 136; 0; 0; every moved town prints the new line   [461]
+- T3 a line added with a need NO town of C has (`river`):        0 / 0; the 1,282 draws that refuse it: 0 moved   [408]
+- T3b a line added with a need SOME towns lack (`tier: ≥ town`): 73 / 73; 0; 0; all to the new line; the 542 draws that REFUSE it: 0 moved
+- T4 a line re-worded in place (GLOSS.founding.1):             211 / 211; 0; 0   [212, 0]
+- T5 the pool's rows in reverse order:                           0 / 0   [419]
+- T6 a line no town printed, removed (TOO.seat.2, an `again` line printable in 28 rotated draws, printed in none): 0 / 0   [0]
+     (no line of a RANKED tradition pool is printed by no town of C: every drawn pool's every line prints somewhere)
+- T7 a drawn line of a declared pool removed (GLOSS.harvest.3):  82 / 82; 0; 0   [162, 83]
+- T8 a TWIN removed (GLOSS.harvest.2):                          25 / 25; 0; 0   [20, 0]
+THE TURN (frames the rotation walks):
+- T9 HOUSE.placePower.2 removed:  165 / 165; 0; 0; 66 rotated draws of the pool in 30 towns: the 7 of those towns that did not print the removed line: 0 moved   [271, 97]
+- T10 ECON.chief.2 removed:       213 / 213; 0; 0; 185 rotated draws in 84 towns: the 13 that did not print it: 0 moved   [293, 72]
+     (so a second rite's turned wording is stable when a line neither rite printed is removed)
+- T11 POWER.seat.4 added (colour): 218 towns moved; every one prints the new line somewhere; 436 of the 438 moved draws go to the new line; the other 2
+     (dp-town-22, owner and reader) are a CASCADE through the rotation: its first rite takes the new line, which frees "It falls to {power}.", and its
+     later rite, whose rank that line heads, turns back to it. (8 of the 218 are towns where the new line out-ranked a ROTATED wording.)   [base: 618 towns moved]
+- T12 A DECLARED LINE ADDED TO A FRAME TABLE (HOUSE.placePower.4, needs `coast`; no town of C has a coast, so EVERY town refuses it):
+     30 TOWNS MOVE (66 draws), none can print the line: every town with a rotated draw of that pool. `traditionDescription.js :: drawTurn` rotates
+     only where `all.every(isColourLine)`: one declared line switches the rotation OFF for every town, and each of the 30 then prints one keeper
+     sentence under two rites (dp-town-62: "It is held at the weekly market, in the keeping of the Merchant Guilds." under rites 1 and 2; unplanted: 0
+     such towns). The same rule on the base (278 towns moved there). HERE THE BAR DOES NOT HOLD: a line no place can print changes what 30 places print.
+     (Whether a walker forbids a declared line in a frame table: (7), mutant H3.)
+THE SCOPE LINE (5 frames, each printed by 158 to 197 towns: none is printed by no town, so that removal cannot be planted here):
+- S1 a printed frame removed ('official'): 180 / 180; 0; 0   [720, 539]      - S2 a frame added ('visitor'): 160 / 160; all to it   [709]
+- S4 re-worded in place ('traveller'):     194 / 194; 0; 0   [184, 0]        - S5 rows reversed: 0 / 0   [755]
+- S3 a frame added WITH `needs: ['coast']`: 160 / 160, the same towns as S2: all 160 print it and NONE has a coast (900 of 900 towns of C have none):
+     A NEED ON A ROW OF THIS POOL IS READ BY NOBODY (no door stands at the scope line or at the PDF heads; `scripts/q3-s3-coast.mjs`).
+THE CAST WANTS (the lever pool: 31 calls, 4 keys):
+- C1 a line no town printed, removed (lever.2, refused in every call): 0 / 0   [4, 4]     - C2 a printed line removed (lever.3): 22 / 22   [4, 0]
+- C3 a line added (lever.4): 5 / 5, all to it   [19]     - C4 a line added that needs a house ({house}; all 31 refuse it): 0 moved   [19]
+- C5 re-worded (lever.1): 9 / 9   [27, 0]                    - C6 rows reversed: 0 / 0   [31]
+ONE PDF HEADLINE LIST (the economics head, 876 picks):
+- H1 a printed row removed ('official'): 191 / 191; 0; 0   [694, 268]   - H2 a row added ('merchant'): 203 / 203, all to it   [700]
+- H3 re-worded ('trade'): 275 / 275   [60, 0]                           - H4 rows reversed: 0 / 0   [876]
+BEYOND THE BRIEF, THE RING: R1 RING-3 removed 56 / 56 [113, 68]; R2 RING-5 added needing `tier: ≥ city` 33 / 33, all to it [127];
+  R3 RING-2 (the streets vantage, refused by 84 places) removed: 21 / 21: only the towns that printed it [116, 87].
+NO TOWN MOVED THAT SHOULD NOT in 30 of the 31 plants; the one that does is T12.
+
+## Housekeeping
+- My first push of the notes (019bf004a, 20:55 UTC) went out WITHOUT the pre-push hook: the report worktree, cut fresh from the chair's tip, had no
+  `.husky/_` (the shims `npm ci` writes only in the main checkout), so git found no hook. Not `--no-verify`. Cured (`npx husky` in that worktree);
+  every later commit and push runs the hooks.
+
+## (3)/(7) T12's GUARD, AND THE NEW ID TEST UNDER HONEST WORK — CONFIRMED (`scripts/mutants.mjs` in my scratch worktree /home/user/mut, `mut/results-h3.jsonl`)
+- H3 (the declared frame line of T12, tests untouched): RED on the two COUNT pins (`traditionDescriptionFrames.walker` "THE COUNT … expected 144 to
+  be 143"; `traditionDescriptionIds` "143 ids") and on 2 rows of `tests/domain/traditionDescription.test.js` "ONE TOWN, NO SENTENCE TWICE".
+- H3b (the same, the two pins moved to 144 as an author would): STILL RED on those 2 rows ("A KEEPER SLOT THAT R…: expected 2 to be 3"; "THE EIGHT
+  TOWNS …: expected [ …(2) ] to deeply equal []"). So T12's edit cannot land unseen while those rows stand. No walker states the rule itself ("a frame
+  table holds colour lines only"): `traditionDescriptionFrames.walker` asks only that a colour line declare nothing else.
+- H1b AN HONEST REMOVAL (GLOSS.founding.2 removed, ITS ID RETIRED so the pool reads .1 and .3; the two pins moved to 142): RED in
+  `tests/domain/traditionDescriptionIds.test.js :: each pool's lines are <TABLE>.<pool>.1 … n in order`: "ELEMENT_GLOSS.founding: expected
+  [ 'GLOSS.founding.1', 'GLOSS.founding.3' ] to deeply equal [ 'GLOSS.founding.1', 'GLOSS.founding.2' ]". THE NEW TEST DEMANDS IDS DENSE 1..n IN ORDER:
+  the only way to green it after a removal is to RENUMBER the survivors, which the table's own header forbids ("never renumbered or reused (a removed
+  line's id is retired)") and which re-deals every town that printed a renumbered line. (Also red there, on its own law: the walker's FLOORS,
+  "gloss.founding: 2 < 3": every gloss pool is AT its floor of three, so no gloss line can be removed without adding one.)
+- H2b an honest append (GLOSS.founding.4 'keeps the founding day', pins to 144): the ids test and the count GREEN; RED only on the walker's style law
+  ("no first sentence says 'kept' twice": my words, not the ids).
