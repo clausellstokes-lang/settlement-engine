@@ -114,3 +114,16 @@ See section 4, newest last.
 - **E7, POINTS 120 AND 121 LAND AS ONE STACK WITH ONE WIDE GATE IF 121 IS BUILT AND READ BY THE TIME 120's READER IS RULED;**
   else 120 lands alone (the standard's rule 8; the wide gate is about three hours of the one test gate).
 - FIVE SEATS WORK: D13-120R, GUARD-120R, R-MEASURE, TAIL-121; OWED-CURE-R and TAIL-CENSUS are finished.
+
+## V4 (16:08 UTC on 2026-11-27): THE OWNER'S WORD ON PUSHES, MODELS AND EFFORT; E2 IS ANSWERED
+- HIS WORDS, VERBATIM, in this session (about 16:08 UTC on 2026-11-27): "Please use the best combinations of models and effort per model to
+  complete the tasks. I defer all judgement (absolutely all judgement to you), and give you all permissions!"
+- THE CHAIR'S READING, TOLD TO HIM THE SAME MINUTE: (1) IT ANSWERS E2: this session pushes the record to
+  `lane/chair-2026-11-08`, the working line to `lane/join-2026-11-14` (only after a landing's gate is ruled, a
+  fast-forward, the hook let run) and transport branches under `lane/stack-*`. (2) MODELS AND EFFORT ARE THE CHAIR'S PER
+  SEAT: builders and measures on the middle tier at high effort; the independent reader of a change on the top tier at max
+  effort; a helper that only starts a run, waits and sorts failures by name on a cheaper model at low effort; the chair
+  architects, reads and rules. (3) IT IS NOT READ AS A GRANT OF: the pull request's merge, the deploy, any migration or SQL
+  on the live database, a credential, a permission setting, or the final signings (goldens, size budgets, tuning numbers):
+  each is asked in its own words at its hour (the standard's rule 17), and anything a permission check refuses is reported,
+  never routed round.
