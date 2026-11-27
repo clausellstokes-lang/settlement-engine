@@ -473,3 +473,23 @@ See section 4, newest last.
   LEAVES POINT 122 AND JOINS POINT 123 (the birth cures) as C3**, from the builder's commit 22d7fe306, after its pair table
   is read.
 - R-BIRTH: three commits on R13 (`lane/stack-123-rbirth-wip-2026-11-27` at bc5c1ab8c); not yet reported.
+
+## V20 (22:32 UTC on 2026-11-27): THE OWNER APPROVES "THE SURVEY" FOR THIS RELEASE: THE CHARTER WRITTEN; TWO MEASURE SEATS STARTED
+- HIS WORD, VERBATIM (about 21:55 UTC), after two exchanges recorded in `PRERELEASE-ADDED-ELEVENTH.md`: "Then I approve of all
+  of this as planned and to be implemented prerelease". THE CHAIR's READING, TOLD TO HIM IN SIX POINTS THE SAME MINUTE
+  (`SURVEY-CHARTER.md`, which is the one home of this program's frame): the document as ONE OBSERVER's survey; THE RULE "say it
+  unless something rules it out", relationships drawn between CLAIMS; the two guards (a qualifier stays for NOUNS; scoped by
+  VOICE, the harder claim standing); the promise reworded; VOICES as the third layer on the settled design; ALL BEFORE THE
+  RELEASE. IT SUPERSEDES the chair's own earlier intention (V8) to bring VOICES to him as a number before taking it: he has
+  taken it; the number still comes, with the order of work, when the measures are in.
+- **E18, THE ORDER:** S0 two read-only measures now (child seats); points 121 to 123 land as they clear; the share veil resumes
+  on children beside it; S1 the chair rules the design on the measures (`SURVEY-DESIGN.md`, to write) and gives the owner ONE
+  NUMBER; S2 built in units, each read by an independent reader; S3 COLD-READ-20 is the acceptance test of the new promise.
+  WHAT IT IS NOT: a loosening for accidents (a clash on a drawn relationship is a fault, target 0); a change to the record;
+  a substitute for the server-side veil.
+- THE TWO MEASURE BRIEFS: `prompts/START-SURVEY-MEASURE.txt` (the door as it is; every atom classed NOUN, JUDGMENT, STATE; who
+  declares; WHAT FAIL-OPEN WOULD NEWLY PRINT, with fifty sampled lines read for truth; the clashes already on a page from a
+  first exclusion table; harder and softer; every place the product states its promise) and
+  `prompts/START-VOICES-MEASURE.txt` (the pools by angle; who could say each line, per town; the traits as the engine folds
+  them; the person with a criminal tie; which past findings the frame dissolves; TEN TOWNS READ COLD BOTH WAYS). Each pushes
+  its files to its own branch under `survey/` and reports by message.
