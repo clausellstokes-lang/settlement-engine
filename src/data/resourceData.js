@@ -301,9 +301,9 @@ export const RESOURCE_DATA = {
     terrain: "desert",
     label: "Date Palms and Orchards",
     desc: "Productive desert agriculture: dates, figs, and drought-resistant crops in sufficient quantity to trade.",
-    commodities: ["grain", "dates"],
+    commodities: ["dates"], // R11 (RULING-R, the eleventh chair, 2026-11-27): the palms give dates, not grain
     instBoosts: { market: 1.4, farm: 1.6, granary: 1.5 },
-    tradeGoods: ["Date harvest", "Dried fruit", "Desert grain"],
+    tradeGoods: ["Date harvest", "Dried fruit", "Pressed dates"],
     forbidden: ["port"],
     warning: null,
     category: "land",
