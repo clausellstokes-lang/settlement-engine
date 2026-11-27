@@ -1,0 +1,13 @@
+{
+  "label": "TAILCOST",
+  "shard": "2/3",
+  "commit": "c9ebf6b696ab76a02be33b4e09aded6e6a3c0744",
+  "files": 931,
+  "tests": 10791,
+  "passed": 10777,
+  "failed": 14,
+  "suiteErrors": 0,
+  "exit": 1,
+  "startedUtc": "2026-11-27T17:09:44Z",
+  "endedUtc": "2026-11-27T17:45:52Z"
+}
