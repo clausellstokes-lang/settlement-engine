@@ -60,7 +60,7 @@
  * NO POWER'S NAME AND NO KIND WORD OF A POWER THE SERVED ROSTER DOES NOT CARRY. The served roster (servedRosterOf, below) is
  * `powerStructure.factions` with every row the read hides OUT, as if never there: a row flagged `hidden` (the DM door serves
  * it stamped) and a row under the projection's mask (publicSafe.js :: HIDDEN_POWER_MASK, act T's owner-hidden taker). Every
- * reader here reads that roster: the crime list's seats; THE STANDING (below); and the recent-conflict sentence, whose writer
+ * reader here reads that roster: the crime list's seats; THE STANDING's cut (below); and the recent-conflict sentence, whose writer
  * (generatePowerStructure) builds its OWN roster from the served houses and config and may re-create a power the read
  * withholds (a power the owner hid by hand: R5DESC-MEASURE, 930 of 1,410 hiding pages). What it builds is CUT to the served
  * roster's rows before its sentence is drawn: the writer's rows the served roster does not carry, and the rows the read
@@ -71,19 +71,16 @@
  * power was never there; cutting the writer's reads by every unserved row withheld the sentence on 7 of the 21
  * nothing-hidden births of R5C2's slice measured (r5c2-m3-<size>-0..5; R5D-PAGE-A's hand-back: the seat's to rule).
  *
- * THE STANDING (R5-DESC; the chair's E115, E116, E121, E126, E129, each vetoable by the owner):
- *   powerStructure.factions[].desc's standing tail    rosterText.js :: standingRosterOf + factionStanding.js ::
- *                                                    annotateFactionStanding over the SERVED ROSTER (the served houses'
- *                                                    force, the served seat's legitimacy), appended to the served base
+ * THE STANDING (R5-DESC; the chair's E115, E116, E121, E126, E129; NARROWED BY RULING V15, the tenth chair, 2026-11-25
+ * 01:16 UTC: PHASE 1 IS THE CUT ALONE, THE SHARED PAGE PRINTS NO STANDING; no marker is served, reader S is not built):
+ *   powerStructure.factions[].desc's standing tail    NOT DRAWN: the served base alone
  * cut on every non-owner read of every place (212 :: _gallery_veil_withhold_always, by ONE table, STANDING_FORMS; the twin
- * galleryWithholdAlways.js :: standingBase), it is drawn by every power card. THE ONE READER (rederiveStanding, below: reader
- * S, R5DESC-MEASURE's) writes each served power's standing again by the engine's own writer over the served roster, the cut
- * rows out, and appends it to the served base. The served desc is cut again by the twin's table first (a base is its own
- * cut), so the reader is idempotent and a server that still sends the tail cannot double it. A cut row's own desc is
- * served by neither engine; the import's save (importRederive.js, authoritative) drops one whatever the document held. On
- * a nothing-hidden page it reproduces the stored desc but for one class, LISTED by the fidelity arm
- * (tests/security/galleryVeilDesc.pglite.test.js): a stored standing carrying the seat-contest line
- * (factionStanding.js :: SEAT_CONTESTED_STANDING, which reads the seat's legitimacy after the last standing write).
+ * galleryWithholdAlways.js :: standingBase). THE ONE READER (rederiveStanding, below) keeps its name, its export and both
+ * doors' calls and WRITES NOTHING: each served row's desc is the twin's table's cut of itself (a no-op on a desc the veil
+ * already cut; a desc no row matches passes whole, RULING V25 (1)), so a server that still sends the tail (the deploy
+ * window: a client meeting a server without 212's cut) prints none. A cut row's own desc is served by neither engine; the
+ * import's save (importRederive.js, authoritative) drops one whatever the document held. THE LOSS IS LISTED under V4
+ * (registry row power.desc): each shown power's standing phrase is absent from every shared page.
  *
  * NOTHING HERE RUNS ON AN OWNER'S OWN RECORD: it is called on a non-owner page's served document alone
  * (src/lib/gallery.js :: fetchPublicDossier, fetchGalleryMap). Pure in its input's values; works in place on the page's
@@ -99,8 +96,6 @@ import { READINESS_BANDS } from '../../data/bandLadders.js';
 import { generatePowerStructure } from '../../generators/power/rulingStructure.js';
 import { isAdversarialRelationship } from '../relationships/canonicalRelationship.js';
 import { deepClone } from '../clone.js';
-import { standingRosterOf, standingForceOf } from '../../generators/power/rosterText.js';
-import { annotateFactionStanding } from '../../generators/power/factionStanding.js';
 import { HIDDEN_POWER_MASK } from '../display/publicSafe.js';
 import { standingBase } from '../display/galleryWithholdAlways.js';
 import { buildNameSearch } from '../display/gallerySecondHomes.js';
@@ -259,12 +254,10 @@ export function rederiveRecentConflict(doc, { authoritative = false } = {}) {
 }
 
 /**
- * THE ONE READER OF THE STANDING (R5-DESC, reader S): each served power's standing written again by the engine's own writer
- * (rosterText.js :: standingRosterOf, factionStanding.js :: annotateFactionStanding, as rosterText.js :: standingsOf calls
- * it) over the SERVED ROSTER (servedRosterOf: every row the read hides out), with the served houses' force and the served
- * seat's legitimacy, and appended to each served row's base (its served desc as the one table cuts it:
- * galleryWithholdAlways.js :: standingBase, so a desc already re-derived, or sent whole, is never doubled). In place. A row
- * with no desc is left so; where the writer cannot read the roster the base is drawn alone.
+ * THE ONE READER OF THE STANDING (R5-DESC; narrowed to THE CUT ALONE by RULING V15): it writes no standing. Each served
+ * roster row's desc (servedRosterOf: every row the read hides out) becomes its own cut by the twin's table
+ * (galleryWithholdAlways.js :: standingBase): the served base alone, so the page prints no standing even where a server
+ * still sends one. In place. A row with no desc is left so.
  * @template T @param {T} doc
  * @param {{ authoritative?: boolean }} [opts] `authoritative` (the import's save): a row the read hides keeps no desc,
  *   whatever the document held
@@ -276,21 +269,7 @@ export function rederiveStanding(doc, { authoritative = false } = {}) {
   const ps = recOf(s.powerStructure);
   if (!ps || !Array.isArray(ps.factions)) return doc;
   if (authoritative) for (const f of ps.factions) if (isRec(f) && isCutRow(f)) delete f.desc;
-  const roster = servedRosterOf(s);
-  /** @type {Map<string, string> | null} */ let standings;
-  try {
-    const seats = standingRosterOf(roster).map((f) => ({ ...f, desc: '' }));
-    annotateFactionStanding(seats, standingForceOf(s.institutions), { publicLegitimacy: ps.publicLegitimacy });
-    standings = new Map(seats.map((f) => [f.faction, String(f.desc || '')]));
-  } catch {
-    standings = null; // a roster the engine cannot read: the page draws the base alone
-  }
-  for (const f of roster) {
-    if (typeof f.desc !== 'string') continue;
-    const base = standingBase(f.desc);
-    const tail = standings?.get(String(f.faction || '')) ?? '';
-    f.desc = base && tail ? `${base} ${tail}` : (base || tail);
-  }
+  for (const f of servedRosterOf(s)) if (typeof f.desc === 'string') f.desc = standingBase(f.desc);
   return doc;
 }
 

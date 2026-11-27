@@ -130,7 +130,7 @@ export function rederiveInPlace(s) {
     if (layout) delete layout.quarters;
     if (Array.isArray(s.activeConditions)) s.activeConditions = [];
     castsNotKnown(s);
-    rederiveStanding(s, { authoritative: true }); // 12 (below): the standing reads the served roster and houses alone, no config
+    rederiveStanding(s, { authoritative: true }); // 12 (below): the standing's cut reads the served roster alone, no config
     return s;
   }
 
@@ -235,9 +235,10 @@ export function rederiveInPlace(s) {
   //     where it equalled the sentence, is not re-filled (E97 (1)).
   rederiveRecentConflict(s, { authoritative: true });
 
-  // 12. THE STANDING (R5-DESC; E115, E121, E126, E129): cut on every read, written again by the page's ONE reader over the
-  //     SERVED ROSTER (pageRederive.js :: rederiveStanding: every row the read hides out) and appended to each served base.
-  //     AUTHORITATIVE: a row the read hides keeps no desc, whatever the document held.
+  // 12. THE STANDING (R5-DESC; E115, E121, E126, E129; RULING V15: THE CUT ALONE): cut on every read, and cut again by the
+  //     page's ONE reader (pageRederive.js :: rederiveStanding, which writes no standing) on each SERVED ROSTER row's desc,
+  //     so the saved copy holds the served base alone. AUTHORITATIVE: a row the read hides keeps no desc, whatever the
+  //     document held.
   rederiveStanding(s, { authoritative: true });
   return s;
 }

@@ -5,11 +5,12 @@
  *
  * THE LAW. A power's STANDING (the tail factionStanding.js :: annotateFactionStanding appends to its desc) is on NO shared
  * read of ANY place: 212 :: _gallery_veil_withhold_always and the twin galleryWithholdAlways.js :: withholdAlways cut it by
- * ONE table (`registry: power.desc`). ONE reader writes it again from the document in hand by the engine's own writer
- * (src/domain/veil/pageRederive.js :: rederiveStanding: rosterText.js :: standingRosterOf and annotateFactionStanding over
- * the SERVED ROSTER, pageRederive.js :: servedRosterOf, every row the read hides out), appended to the served base as the
- * twin's table cuts it (standingBase). The page calls it through rederiveForPage; the import's save through
- * importRederive.js :: rederiveInPlace (authoritative).
+ * ONE table (`registry: power.desc`). RULING V15 (the tenth chair, 2026-11-25 01:16 UTC): PHASE 1 IS THE CUT ALONE; THE
+ * SHARED PAGE PRINTS NO STANDING. The ONE reader (src/domain/veil/pageRederive.js :: rederiveStanding) keeps its name, its
+ * export and both doors' calls, and WRITES NOTHING: each served row's desc (pageRederive.js :: servedRosterOf, every row the
+ * read hides out) is the twin's table's cut of itself (standingBase: a no-op on a desc the veil already cut), and at the
+ * import's save (authoritative) a row the read hides keeps no desc. It calls NO writer of the standing. The page calls it
+ * through rederiveForPage; the import's save through importRederive.js :: rederiveInPlace (authoritative).
  *
  * THE WALKER: every code line of every module under src/ that names the standing's writer or its cut
  * (`annotateFactionStanding`, `standingRosterOf`, `standingForceOf`, `standingBase`; a word; comment lines are not code) is a
@@ -39,18 +40,18 @@ const BIRTH_WHY = 'the birth or the roster\'s re-settlement: the generator write
 
 /** @type {Readonly<Record<string, { n: number, verdict: 'one-reader' | 'veil' | 'owner-only' | 'not-a-read', why?: string }>>} */
 const REGISTER = Object.freeze({
-  'src/domain/veil/pageRederive.js :: (module)': { n: 4, verdict: 'one-reader' },
-  'src/domain/veil/pageRederive.js :: rederiveStanding': { n: 4, verdict: 'one-reader' },
+  'src/domain/veil/pageRederive.js :: (module)': { n: 1, verdict: 'one-reader' },
+  'src/domain/veil/pageRederive.js :: rederiveStanding': { n: 1, verdict: 'one-reader' },
   'src/domain/display/galleryWithholdAlways.js :: standingBase': { n: 1, verdict: 'veil', why: 'THE CUT itself: the twin of 212\'s standing cut by the one table (registry: power.desc)' },
   'src/domain/display/galleryWithholdAlways.js :: withholdAlways': { n: 1, verdict: 'veil', why: 'cuts the standing off every served desc on every non-owner read (registry: power.desc)' },
   'src/domain/display/galleryRosterChoices.js :: (module)': { n: 1, verdict: 'veil', why: 'the belt\'s import of the twin\'s cut (212 (36) (e))' },
   'src/domain/display/galleryRosterChoices.js :: withholdPowerCopies': { n: 1, verdict: 'veil', why: 'the belt: a desc whose base, as the cut leaves it, still names a withheld power leaves whole (212 (36) (e))' },
-  'src/generators/power/factionStanding.js :: annotateFactionStanding': { n: 1, verdict: 'owner-only', why: 'THE WRITER itself, run at birth and by the ONE reader over the served roster' },
+  'src/generators/power/factionStanding.js :: annotateFactionStanding': { n: 1, verdict: 'owner-only', why: 'THE WRITER itself, run at birth only (V15: the ONE reader calls no writer)' },
   'src/generators/power/normalizeAndAnnotateFactions.js :: (module)': { n: 1, verdict: 'owner-only', why: BIRTH_WHY },
   'src/generators/power/normalizeAndAnnotateFactions.js :: normalizeAndAnnotateFactions': { n: 1, verdict: 'owner-only', why: BIRTH_WHY },
   'src/generators/power/rosterText.js :: (module)': { n: 1, verdict: 'owner-only', why: BIRTH_WHY },
-  'src/generators/power/rosterText.js :: standingRosterOf': { n: 1, verdict: 'owner-only', why: 'the roster as the standing reads it (by power), run at birth and by the ONE reader over the served roster' },
-  'src/generators/power/rosterText.js :: standingForceOf': { n: 1, verdict: 'owner-only', why: 'the force the standing names, from the houses: run at birth and by the ONE reader over the served houses' },
+  'src/generators/power/rosterText.js :: standingRosterOf': { n: 1, verdict: 'owner-only', why: 'the roster as the standing reads it (by power), run at birth only (V15: the ONE reader calls no writer)' },
+  'src/generators/power/rosterText.js :: standingForceOf': { n: 1, verdict: 'owner-only', why: 'the force the standing names, from the houses: run at birth only (V15: the ONE reader calls no writer)' },
   'src/generators/power/rosterText.js :: standingsOf': { n: 1, verdict: 'owner-only', why: BIRTH_WHY },
   'src/generators/power/rosterText.js :: settleStandingToRoster': { n: 1, verdict: 'owner-only', why: BIRTH_WHY },
   'src/generators/power/rosterText.js :: settleTensionsToRoster': { n: 1, verdict: 'owner-only', why: BIRTH_WHY },
@@ -120,21 +121,22 @@ describe('R5-DESC: every reader of the standing, registered', () => {
     expect({ unregistered, stale, moved, reasonless }).toEqual({ unregistered: [], stale: [], moved: [], reasonless: [] });
   });
 
-  it('THE ONE READER exists, runs the engine\'s own writer over the SERVED ROSTER (every row the read hides out), appends to the base the twin\'s table cuts, and is wired at both doors: rederiveForPage and the import\'s save (authoritative)', () => {
+  it('THE ONE READER exists, CALLS NO WRITER (V15: the page prints no standing), cuts each SERVED ROSTER row\'s desc by the twin\'s table, and is wired at both doors: rederiveForPage and the import\'s save (authoritative)', () => {
     const out = [];
     const page = read('src/domain/veil/pageRederive.js');
     const reader = codeOf(declBody(page, 'rederiveStanding') || '');
     if (!reader) out.push('pageRederive.js :: rederiveStanding: no such top-level declaration');
     else {
       if (!/export function rederiveStanding\(/.test(reader)) out.push('rederiveStanding is not exported');
-      for (const call of ['standingRosterOf(', 'annotateFactionStanding(', 'standingForceOf(', 'servedRosterOf(', 'standingBase(']) if (!reader.includes(call)) out.push(`rederiveStanding does not call ${call}`);
+      for (const call of ['servedRosterOf(', 'standingBase(']) if (!reader.includes(call)) out.push(`rederiveStanding does not call ${call}`);
+      // V15 (the inverse of R5-DESC's arm): the reader writes nothing, so it calls no writer of the standing
+      for (const call of ['standingRosterOf(', 'annotateFactionStanding(', 'standingForceOf(']) if (reader.includes(call)) out.push(`rederiveStanding calls the writer's ${call} (V15: the page prints no standing)`);
       if (!/if \(authoritative\) for \(const f of ps\.factions\) if \(isRec\(f\) && isCutRow\(f\)\) delete f\.desc;/.test(reader)) out.push('rederiveStanding does not drop a hidden row\'s desc at the import\'s save');
     }
     const roster = codeOf(declBody(page, 'servedRosterOf') || '');
     if (!/!isCutRow\(f\)/.test(roster)) out.push('servedRosterOf does not take the rows the read hides out');
     if (!/f\.hidden === true \|\| f\.faction === HIDDEN_POWER_MASK \|\| f\.name === HIDDEN_POWER_MASK/.test(codeOf(declBody(page, 'isCutRow') || ''))) out.push('isCutRow is not the stamp or the mask');
-    if (!/import \{[^}]*\bstandingRosterOf\b[^}]*\} from '\.\.\/\.\.\/generators\/power\/rosterText\.js'/.test(page)) out.push('pageRederive.js does not import standingRosterOf from the engine\'s own module');
-    if (!/import \{[^}]*\bannotateFactionStanding\b[^}]*\} from '\.\.\/\.\.\/generators\/power\/factionStanding\.js'/.test(page)) out.push('pageRederive.js does not import annotateFactionStanding from the engine\'s own module');
+    if (/import \{[^}]*\b(?:standingRosterOf|standingForceOf|annotateFactionStanding)\b[^}]*\} from/.test(page)) out.push('pageRederive.js imports a writer of the standing (V15: the page prints no standing)');
     if (!/import \{[^}]*\bstandingBase\b[^}]*\} from '\.\.\/display\/galleryWithholdAlways\.js'/.test(page)) out.push('pageRederive.js does not import the twin\'s cut');
     if (!codeOf(declBody(page, 'rederiveForPage') || '').includes('rederiveStanding(s)')) out.push('rederiveForPage does not call rederiveStanding');
     for (const reader2 of ['rederiveCrimeTypes', 'holdsOverServed']) if (!codeOf(declBody(page, reader2) || '').includes('servedRosterOf(s)')) out.push(`${reader2} does not read the served roster`);
