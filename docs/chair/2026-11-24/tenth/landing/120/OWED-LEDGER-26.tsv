@@ -1,0 +1,27 @@
+id	text	verdict	reason
+peer_rivalry.desc#8	{A} and {B} have made each other better by the contest, and each would admit it, though never to the other.	colour	a feeling between the two parties; names no institution, office, crisis or season
+peer_rivalry.desc#9	{A} and {B} were friends before they were rivals, and still are on the days the contest rests.	colour	their personal history; no fact of the place
+peer_rivalry.tension#8	{B} has come out ahead three times running. {A} has said nothing and started earlier each morning.	colour	a private tally and habit; no record atom
+peer_rivalry.tension#9	{A} needs {B}'s help with something outside the contest, and has not yet found a way to ask.	colour	an unasked request between the parties; claims nothing of the place
+mentor_legacy.desc#8	{A} still gives {B} advice now and then, unasked, and {B} still hears out every word of it.	colour	teacher-pupil habit; the tie rule, not a record atom
+mentor_legacy.desc#9	{A} taught {B} patience, which {A} never managed to learn.	colour	a trait taught; no fact of the place
+mentor_legacy.tension#8	{B} has stopped answering {A}'s advice, though {B} still follows most of it.	colour	a private estrangement; no atom
+mentor_legacy.tension#9	{B} means to take a pupil this year and has not yet asked {A}'s blessing.	colour	taking a pupil is the tie's own trade relation (as tension#4, colour); no record atom
+mutual_leverage.desc#8	{A} cannot finish what they have started without {B}'s help, and {B} cannot finish theirs without {A}'s. Neither lets the other forget it.	colour	mutual dependence of the parties; no atom
+mutual_leverage.desc#9	{A} needs {B}'s goodwill this year, and {B} will need {A}'s the next. Both of them have counted the years.	colour	goodwill counted by years; no season or office
+mutual_leverage.desc#10	{A} hears of trouble early and {B} hears of opportunity early, and each passes the word to the other a day before anyone else.	colour	news shared between the two; no institution named
+mutual_leverage.desc#11	{A} and {B} know exactly what each would refuse the other, and so neither ever asks for it.	colour	an unspoken limit between them; no atom
+mutual_leverage.desc#12	{A} can open doors for {B} that {B} could never open alone, and {B} does the same for {A} in other places. Each uses the other sparingly.	colour	unnamed doors and places; claims no particular place
+mutual_leverage.tension#8	{A} wants the arrangement with {B} written down and witnessed. {B} would rather keep it a matter of word.	colour	a written, witnessed bargain (as tension#7, colour); no court or office named
+mutual_leverage.tension#9	{A}'s year of need has come early, and {B} has not yet decided how generous to be.	colour	a private reckoning; no atom
+mutual_leverage.tension#10	{A} learned of something last week and told {B} a day late. {B} has noticed the day.	colour	news passed late; no atom
+mutual_leverage.tension#11	{B} needs something this season that lies just past what {A} has always refused.	colour	an unnamed need; no atom
+mutual_leverage.tension#12	{A} has asked {B} for an introduction {B} would rather keep to themselves.	colour	a personal introduction; no institution
+wary_alliance.desc#8	{A} and {B} want the same thing for the settlement, for different reasons, and keep their reasons to themselves.	colour	"the settlement" is always present; motives kept private, no atom
+wary_alliance.desc#9	{A} and {B} are allies on one matter only, agreed in plain terms, and never stretch it to anything else.	colour	an unnamed matter agreed between them; no council, vote or bloc
+wary_alliance.tension#8	{B} has asked {A} for those reasons at last, and {A} has not decided how much to say.	colour	a private question; no atom
+wary_alliance.tension#9	{B} has asked {A} to stretch the alliance to a second matter. {A} has not said yes or no.	colour	an unnamed second matter; no council or vote
+old_debt.desc#8	{B} once spoke up for {A} when it cost {B} something to do it. {A} has never been asked for anything in return.	colour	an unnamed occasion of speaking up; no council, court or vote
+old_debt.desc#9	{B} stood surety for {A} once, and {A} has kept every term since so that {B} would never have to pay.	colour	a personal surety (as desc#4's private loan, colour); no court or bank named
+old_debt.tension#8	{B} has asked {A} to speak up for someone else, as {B} once spoke up for {A}.	colour	a request between the parties; no atom
+old_debt.tension#9	{B}'s surety for {A} still stands, and {B} would like to be released from it.	colour	a private surety; no atom

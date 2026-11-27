@@ -1614,3 +1614,11 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   helper re-wrapped over lines, tests and a ledger) UNLESS the diff shows otherwise.
 - D13-120 is in phase 2 (not reported).
 - OWED-CURE's agent: a0ae4ceb56c215c3c (continued by SendMessage; its report comes as a message). OWED-6 (a0dcc007a2a9e6c8f) is finished.
+
+## T142 (05:28 UTC on 2026-11-27): THE FOUR CURES OF THE OWED ROWS HANDED IN AND ACCEPTED (G78)
+
+- `lane/stack-120-owed-wip-2026-11-27` at 9c19f4723f (local, /home/user/wt/owedcure): MERGED BY POINT 120's LANDING HELPER
+  beside D13's branch. Rows 1, 15, 16, 22 leave RED-AT-LINE.tsv at that landing (75 to 71 if nothing else moves).
+- WATCH AT THE LANDING: `readerShapeResolver` "pulse-like" (264 against 256 in the builder's whole lint run; green alone on
+  the line's tree and on CI): the helper's whole `tests/lint` decides.
+- D13-120 still in phase 2 (not reported). OWED-CURE (a0ae4ceb56c215c3c) is finished.
