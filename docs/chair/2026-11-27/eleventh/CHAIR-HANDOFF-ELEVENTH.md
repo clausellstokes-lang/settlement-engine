@@ -312,3 +312,24 @@ See section 4, newest last.
   owner's on 464 of 900; master holds no stamp.
 - THE LANDING OF POINT 120: the product is cleared by the reader. STILL OWED BEFORE THE LINE MOVES: the guard's round merged
   by the helper; the joined tip's whole suite in four shards, read by name; the chair's row and gate paragraph.
+
+## V13 (19:27 UTC on 2026-11-27): THE LANDING HELPER's JOIN REPORTED AND ACCEPTED; THE GUARD's ROUND IN, READ AND ACCEPTED (E14); ONE MORE MERGE
+- LAND-120R (29 minutes): on `lane/join-2026-11-14`'s local tree: 8e5d33b36, 2422fde1d, 42883b5c4 (no conflict; each merge's
+  tree equal to its branch's tip); THE LIGHTING CENSUS RE-TAKEN BY ITS DOOR at a607d0b97 (files 3,820 to 3,822; credited
+  3,311 to 3,313; titles 32,043 to 32,074; suite titles 8,913 to 8,917; parked 509); the stable-pick door "matches the tree
+  (144 scopes, 637 ids)"; the observed-shape check, the prose generator's check and the wiring census (3,183 variants) GREEN,
+  not re-taken. `typecheck:ratchet` 167 of 167; the strict domain check 1113 of 1113; `validate:packets` 257 valid; lint 0
+  errors; build clean. `VERIFY_DIST=1 tests/build`: 628 tests, 13 failed, ALL 13 ON THE LIST. THE HOME PAGE's SAMPLE TOWN DID
+  NOT MOVE. THE FIVE SIZES: first paint 1,191,245 raw (+253 on point 119) / 379,929 gzip (+124) / 318,936 Brotli (-26); the
+  generation worker 2,739,250 (0); the engine chunk 937,247 (0): named for the owner's size signing, raised by nobody.
+  PUSHED AS TRANSPORT: `lane/stack-120-wip-2026-11-27` at a607d0b97.
+- GUARD-120R's ROUND (16 minutes): 818380f0f on 30539f145, four test-side files, the baseline unchanged. THE CHAIR READ THE
+  DIFF OF THE SHARED MODULE AND THE DOOR: every pair `[<string>, <string or template>]` in the function is a row and a row
+  whose id is not of the form is a problem; the skeleton refusal needs present AND retired empty; a non-JSON baseline is a
+  refusal (exit 2); the floors are 80 scopes, 350 Daily Life ids, 12 viability rows (a little over half of 144, 615, 22; the
+  largest scope holds 33 lines). Its proofs: P9 retired, SS1 re-worded, a whole branch retired: the walker's file green each
+  time; a new id into a wholly retired scope accepted, its retired id back refused; the three odd rows red and refused.
+- **E14: ACCEPTED. THE GUARD IS CLOSED AGAIN.** LAND-120R resumed (ruling 120R-3, by message): merge 818380f0f, the door,
+  the lighting census again if its titles moved, the three guard files alone, lint. THEN: the push of the new tip and FOUR
+  SHARDS of the whole suite on it (`shards/prompts/LAND120-*.txt` are rendered for a607d0b97 and are re-rendered for the
+  new tip).
