@@ -1692,3 +1692,15 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   reports, so the pair-form commit is covered.
 - THEN: the landing helper (`prompts/START-LAND-120.txt`, to write): two local branches; the lighting census by its door
   in the line's tree; the wide gate once.
+
+## T148 (08:02 UTC on 2026-11-27): POINT 120: THE BUILDER'S LAST CURE IN (15adda3ee1), READ; THE LANDING HELPER STARTED BESIDE THE READER'S RE-READ
+
+- D13-120 finished: tip 15adda3ee1 (the viability rows as pairs; the strip ban green, nothing banked; printed lines 0 of
+  1,800 differ from cf061bca1a; the walker's three plants still red). The chair read the commit.
+- THE LANDING HELPER LAND-120 STARTED (brief `prompts/START-LAND-120.txt`; /home/user/wt/line at 1f946c43f1; scratch
+  `$S/landing/120/land/`): two local merges (15adda3ee1, then 9c19f4723f), the lighting census by its door, the gates, THE
+  WIDE GATE once, classify; NO PUSH until ruled. Its agent id is in the next line.
+- THE READER (a11860ef534ef1300) is re-reading the cures (it reads the log again before it reports). If it finds a fault:
+  the cure by D13-120 on its branch, merged by the helper after its gate (as at point 119).
+- `readerShapeResolver` "pulse-like" 264 against 256 is THE KNOWN LONG-TMPDIR ARTIFACT (the landing brief has said so since
+  point 118): not a red of any unit.
