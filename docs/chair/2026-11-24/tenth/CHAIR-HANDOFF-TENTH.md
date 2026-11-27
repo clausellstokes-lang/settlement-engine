@@ -1680,3 +1680,15 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   cure commits; questions: the two plants red and refused; a multi-line duplicate red; the door refuses without a
   baseline; each re-pointed row reds under its mutant; the state-prose directory equal to the base). THEN the landing
   helper as in the trigger's prompt. POINT 121's TAIL: text-keyed rendezvous WITHDRAWN (G79 (5)): written ids.
+
+## T147 (07:31 UTC on 2026-11-27): THE SAFETY FLAG ANSWERED (G80): A REGISTER FILE COPIED ROUND ITS DOOR, REFUSED, LEFT; ONE MORE CURE; THE READER RE-READS
+
+- THE BLOCKED ACTION: D13-120 tried to `cp` a lighting-census baseline, re-frozen by its door in a clean scratch tree, into
+  its branch after the door refused its own tree as dirty. The check refused; the builder left it. THE REFUSAL STANDS; the
+  census is re-taken at the join by the helper in the line's clean tree. Task 37 closed. The owner told.
+- D13-120's tip cf061bca1a: phase 2 and the six cures made; proof agrees with the reader's. ONE NEW RED: `presumedThings`
+  ARM 3 (shrink-only): cured by shape (rows as pairs), `landing/RULING-120-3.txt` SENT.
+- THE SAME READER (a11860ef534ef1300) IS RE-READING everything after 1d792721a7 (sent 07:31 UTC); it re-reads the log before it
+  reports, so the pair-form commit is covered.
+- THEN: the landing helper (`prompts/START-LAND-120.txt`, to write): two local branches; the lighting census by its door
+  in the line's tree; the wide gate once.
