@@ -165,6 +165,9 @@ const esc = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 /** @param {string} s @returns {string} */
 const capFirst = (s) => (s ? s[0].toUpperCase() + s.slice(1) : s);
 
+/** a name's words, its bracket qualifier set aside ("Chac Chel Koh (the senior guild master)": its surname is "Koh") @param {string} name */
+const bareWords = (name) => name.replace(/\s+\([^()]+\)$/, '').split(/\s+/);
+
 /** a role that reads as a description in a sentence: it carries its article ("the miller"); a bare title ("Elder") does not (R13) */
 const ROLE_AS_DESCRIPTION = /^the\s/;
 
@@ -178,10 +181,10 @@ function mentionOf(p, named, noPronoun = false) {
   const others = named.filter((q) => q !== p);
   if (!noPronoun && (p.gender === 'female' || p.gender === 'male') && !others.some((q) => q.gender === p.gender)) return { pronoun: p.gender };
   if (ROLE_AS_DESCRIPTION.test(p.role) && !others.some((q) => q.role.toLowerCase() === p.role.toLowerCase())) return { word: p.role };
-  const words = p.name.split(/\s+/);
+  const words = bareWords(p.name);
   const surname = words[words.length - 1];
-  if (words.length > 1 && !others.some((q) => q.name.split(/\s+/).includes(surname))) return { word: surname };
-  if (words.length > 1 && !others.some((q) => q.name.split(/\s+/).includes(words[0]))) return { word: words[0] };
+  if (words.length > 1 && !others.some((q) => bareWords(q.name).includes(surname))) return { word: surname };
+  if (words.length > 1 && !others.some((q) => bareWords(q.name).includes(words[0]))) return { word: words[0] };
   return null;
 }
 

@@ -80,6 +80,10 @@ describe('secondMentions: the first mention keeps the full name; a later one in 
       .toBe('Rhona Ashby has asked Silas Brent for an introduction Brent would rather keep to themselves.');
     expect(secondMentions('Ana Ruiz needs Bea Ruiz\'s seal, and Bea Ruiz needs Ana Ruiz\'s silence.', [F('Ana Ruiz', 'Alderman'), F('Bea Ruiz', 'Lord Mayor')]))
       .toBe('Ana Ruiz needs Bea Ruiz\'s seal, and Bea needs Ana\'s silence.');
+    // a name qualified by its bracket (npcDisplayNames.js) gives its surname from the bare name, never "master)" (V dp-city-78)
+    const koh = 'Chac Chel Koh (the senior guild master)';
+    expect(secondMentions(`${koh} once spoke up for Ahulane Ek when it cost ${koh} something to do it.`, [M(koh, 'Master of the Guilds'), M('Ahulane Ek', 'the wizard')]))
+      .toBe(`${koh} once spoke up for Ahulane Ek when it cost Koh something to do it.`);
   });
 
   it('R13: a name that is itself a role word is never changed (a place, a person, a power)', () => {
