@@ -186,7 +186,9 @@ ONE PDF HEADLINE LIST (the economics head, 876 picks):
 - H3 re-worded ('trade'): 275 / 275   [60, 0]                           - H4 rows reversed: 0 / 0   [876]
 BEYOND THE BRIEF, THE RING: R1 RING-3 removed 56 / 56 [113, 68]; R2 RING-5 added needing `tier: ≥ city` 33 / 33, all to it [127];
   R3 RING-2 (the streets vantage, refused by 84 places) removed: 21 / 21: only the towns that printed it [116, 87].
-NO TOWN MOVED THAT SHOULD NOT in 30 of the 31 plants; the one that does is T12.
+NO TOWN MOVED THAT SHOULD NOT in 30 of the 31 plants; the one that does is T12. (Five plants were added later, below: T14, the same shape as T12 at
+another pool, and T13, T15, T16, the id test's removals and replacements. The final count: 36 plants; a town moves that should not under T12 and T14,
+and under T13 and T16, which re-number ids on purpose.)
 
 ## Housekeeping
 - My first push of the notes (019bf004a, 20:55 UTC) went out WITHOUT the pre-push hook: the report worktree, cut fresh from the chair's tip, had no
@@ -197,7 +199,7 @@ NO TOWN MOVED THAT SHOULD NOT in 30 of the 31 plants; the one that does is T12.
 - H3 (the declared frame line of T12, tests untouched): RED on the two COUNT pins (`traditionDescriptionFrames.walker` "THE COUNT … expected 144 to
   be 143"; `traditionDescriptionIds` "143 ids") and on 2 rows of `tests/domain/traditionDescription.test.js` "ONE TOWN, NO SENTENCE TWICE".
 - H3b (the same, the two pins moved to 144 as an author would): STILL RED on those 2 rows ("A KEEPER SLOT THAT R…: expected 2 to be 3"; "THE EIGHT
-  TOWNS …: expected [ …(2) ] to deeply equal []"). So T12's edit cannot land unseen while those rows stand. No walker states the rule itself ("a frame
+  TOWNS …: expected [ …(2) ] to deeply equal []"). So T12's edit AT THIS POOL cannot land unseen while those rows stand (at CAUSE_FRAMES.dead the same edit reds NOTHING: "THE EXCEPTION'S GUARD, POOL BY POOL", below). No walker states the rule itself ("a frame
   table holds colour lines only"): `traditionDescriptionFrames.walker` asks only that a colour line declare nothing else.
 - H1b AN HONEST REMOVAL (GLOSS.founding.2 removed, ITS ID RETIRED so the pool reads .1 and .3; the two pins moved to 142): RED in
   `tests/domain/traditionDescriptionIds.test.js :: each pool's lines are <TABLE>.<pool>.1 … n in order`: "ELEMENT_GLOSS.founding: expected
@@ -303,3 +305,202 @@ A difference is "explained" only if putting the site's tip line in place of its 
 - A fourth wording added to `CONSEQUENCE.tense`: 59 towns of C move, 24 to the added wording and 35 NOT (re-dealt among the old three), the same on
   the tip and on the base. The seat's arrangements, the four estranged-power sentences, the consequences and the fracture line pick by
   `fnv(seed::slot) % n`: this is not in the claim's list of what was left on purpose; the census lists it as "a fixed list of orders … not a pool of wordings".
+
+## (3) THE SAME PLANTS ON V — CONFIRMED (`out/plants/results-V.txt`; V's 900 records born once and read from JSON; the base's side run for ten plants)
+Tip moved / should; extra [base moved, of them not printers]:
+- T1 168 / 168; 0 [323, 157]   T2 108 / 108, all to the new line   T3 (needs `river`; V has rivers) 20 / 20, the 832 refusing draws: 0 moved
+- T3b (needs `tier: ≥ town`) 57 / 57, the 420 refusing draws: 0 moved   T4 155 / 155   T5 reversed 0 / 0 [329]   T6 0 / 0   T7 44 / 44   T8 14 / 14
+- THE TURN: T9 107 / 107, of 16 towns with a rotated draw the 3 that did not print the removed line: 0 moved; T10 174 / 174, the 11 such towns: 0 moved;
+  T11 250 towns move, every one prints the new line (490 of 534 moved draws go to it; the rest are the cascade inside those towns).
+- T12 (the declared frame line; V has coasts): 23 towns move, 8 of them to the new line and 15 THAT NEVER PRINT IT (28 of the 551 refusing draws move)
+  [base 196]. The exception stands on V as on C.
+- SCOPE (the same seeds as C): S1 180 / 180 [720, 539]; S2 160 / 160; S3 (a need nobody reads) 160; S4 194 / 194; S5 0 / 0 [755].
+- CAST WANTS (40 calls): C1 0 / 0 [23, 23]; C2 13 / 13; C3 4 / 4; C4 the 40 refusing calls: 0 moved; C5 27 / 27; C6 0 / 0 [40].
+- THE ECONOMICS HEAD (794 picks): H1 171 / 171 [662, 331]; H2 112 / 112; H3 187 / 187; H4 0 / 0 [794].
+- THE RING: R1 51 / 51; R2 23 / 23; R3 (RING-2 removed) 28 / 28 [145, 109].
+- G1 (the unconverted arrangement): 42 towns move, 14 to the added wording, 28 not.
+SO, ON C AND V: of 32 plants a corpus (31 on the converted picks), every one moves exactly the towns my own reading says, except T12; the pool's order
+reversed moves 0 towns at every site (base: 419 | 329, 755, 31 | 40, 876 | 794).
+
+## (8) THE WALKERS AND REGISTERS — CONFIRMED (`scripts/walkers.sh`: each file ALONE by vitest, json reporter, exit code kept; `out/walkers-*/`)
+ON THE TIP (/home/user/tip, 2ab62ef33; no tracked file changed by the runs):
+- `tests/lint/presumedThings.walker.test.js` 43/43 green (every arm; exit 0; 140 s)      - `declaredLineShape.test.js` 3/3 green (exit 0)
+- `drawDeclaredKeys.walker.test.js` 3/3 green (exit 0)                                    - `samenessHideable.walker.test.js` 31/31 green (exit 0)
+- `domainAnyCastBaseline.test.js` 19/19 green (exit 0)                                    - `stablePickIds.walker.test.js` 25/25 green (exit 0)
+- `node scripts/stable-pick-ids-door.mjs`: "the baseline matches the tree (144 scopes, 637 ids)", exit 0.
+- REGISTER, BASELINE AND WALKER FILES CHANGED AGAINST THE BASE: none (`git diff --stat 360e716c2 2ab62ef33 -- tests/lint scripts` is empty).
+THE BOUND RETURN: the walker's ARM 1 reading of the tip is the base's (5,359 hits, the same keys; `institutionServices.js` 131 on both: part 1 above).
+WITH THE DIRECT RETURN RESTORED (/home/user/q8): the walker is RED, 2 of 43, both in ARM 1: "every source literal that names a thing declares it, or
+  has its row: expected [ …(4) ] to deeply equal []" (the 4 new hits: siege 3, walls 1, all in `src/data/institutionServices.js`) and "no stale row:
+  … expected [ …(15) ] to deeply equal []" (the 15 hits gone: 14 in `institutionServices.js`, 1 in `src/domain/prose/holderTable.js`). So a tidy-up
+  that undoes the binding is SEEN (the walker reds); but nothing about those 19 literals changed: the walker's reading of two data files hangs on
+  the shape of one `return` in the door. The door's comment ("moves 10 hits on institutionServices.js") gives the net of one file, not the 19 keys of two.
+
+## (7) THE RE-POINTED TESTS — CONFIRMED (`scripts/mutants-spec.mjs`, `mutants.mjs` in my scratch worktree /home/user/mut; `mut/results.jsonl`, `mut/<id>.json`)
+BY READING THE DIFF (16 test files: 11 re-pointed, 5 new). Cases (`it`) and `expect(` counts, base to tip, file by file: bar6CrimeOneReading 4/26 to 4/26;
+crisisFactFindings.wants 2/6 to 2/6; ringNoteStreetsSmallPlace 2/4 to 2/4; fortuneLastingSentence 10/65 to 10/65; fortuneMeritSentence 10/47 to 10/47;
+tailCrisisBatch2 4/2 to 4/2; tailDefeconDisplayLines 2/1 to 2/1; tonightOwnGoal 7/17 to 7/17; tonightWantRegister 5/8 to 5/8; traditionDescription 57/158
+to 57/158; traditionDescriptionSharedPage 50/120 to 50/120; pickRendezvous 8/19 to 10/22; new: drawDeclaredRanked 8/15, pageFramesRanked 7/12,
+tonightCastWantsRanked 3/6, traditionDescriptionIds 1/3. No case dropped; no skip, todo or only; every changed `expect` keeps its matcher kind and points
+at the line the place now prints (two became LONGER: `/the Flood, 12 years ago/` to `/in memory of the Flood since then, 12 years ago/`). The five
+scope-line anchors keep their seed and their forbidden clause; only "what prints in its place" carries the new frame's words. #B00162 is re-seated
+(r2r-town-7 to r2r-town-40), as the builder says.
+BASELINE. The tip, unmutated: 0 red of 249 (19 files: the 16 changed test files, `tests/pdf/headlines.test.js`, and the walkers
+`traditionDescriptionFrames` and `declaredLineShape`). No mutant's red is a file that failed to load (suite errors 0 of 54): each is an assertion.
+THE BASE'S OWN TEST FILES ON THE TIP'S SOURCE (ten re-pointed files; tailDefecon aside, the merge mixed it): 14 red of 151: exactly the rows of the
+builder's table (the five scope anchors by seed: r2s-plague_onset-hamlet-1, r2s-under_siege-metropolis-0, r2r-thorp-24, r2r-thorp-54,
+r2s-mass_migration-hamlet-1). ONE row of the table is NOT red there: `crisisFactFindings.wants`'s struck tic: on rows `{ id, text }` the base's
+`Object.values(CAST_WANTS).flat().join(' ')` reads "[object Object] …" and can no longer fail: the re-pointing (`.map((w) => w.text)`) is what keeps
+it alive (my mutant T5 reds it).
+A MUTANT FOR EVERY ROW (54 mutants of mine, one edit each, each run on the files that could see it; ALL 54 red at least one row). The 20 rows of
+`repointed.tsv`, and the mutants of mine that red each:
+  1 fortuneMeritSentence U5b (a)                      F1 (idOf by text: 1 of 6), F3 (key order: 3 of 6), F5 (first row: 3 of 6)
+  2 fortuneLastingSentence U7b (a); (b) three rows    (a) F2 4/4, F4 3/4, F6 2/4; (b) fixed line after the first merit: F1 F3 F5; (b) "It" opening: F2 F4 F6;
+                                                      (b) first merit's sentence not printed: F2 F4
+  3 THE LEAF'S PICK IS THE RENDEZVOUS PICK            D1 (rankKey altered: 15 draws), D5 (door walks the rank from the bottom: 24)
+  4 a rite … says only what is done: one sentence     D2 (id GLOSS.long-sun.3x), D5, D6 (a power sentence for every rite), K1 (lowest hash)
+  5 the dead take the MOST RECENT …                   D3 (id CAUSE.dead.3x), D4 (the OLDEST event), D5, K1, C3
+  6 CONTROL: "The Granary Fire" … STILL recalled      C1 C2 C3 C5 C6 and D4 (below)
+  7 tonightOwnGoal: an empty seat never "gives way"   T1 (HELD_SEAT less instigator.3), T2 (less instigator.1), T3 (the seat never read)
+  8 tonightWantRegister: every line voiceable         T4 (defender.2 lengthened)
+  9 crisisFactFindings.wants: no "rather than"        T5 (exploiter.1 says it)
+ 10 ringNote: thorp and hamlet print the next in rank R2 (only the head asked), R5 (RING-2 loses its tier), and H2 (a fifth vantage appended)
+ 11 ringNote: village, town, city keep it             R4 (RING-2 never), R6 (tier ≥ town), R9 (key altered)
+ 12 bar6 (c) the positive controls (w28)              R1 (RING-2 loses `excludes crime wave`), R2, R9
+ 13 tailDefecon #B11428 r2s-plague_onset-village-3    R3 (the streets skip dropped: LIVENESS ANCHOR)
+ 14 tailDefecon #B00162 r2r-town-40                   R7 (id RING-1x), R8 (ringWithoutSeat ignores the seat), R9
+ 15 tailCrisisBatch2: no FALSE clause (5 anchors)     S1 (key altered: 2 of 33), S9 (always the first frame: 5 of 33, the five anchors)
+ 16-18 anchors hamlet-1, thorp-24, migration-hamlet-1 S2 (newcomer frame re-worded: the three seeds), and each seed's own clause let through: S5, S6, S8
+ 19 anchor r2s-under_siege-metropolis-0               S3 (traveller frame re-worded), S5 (estates clause let through)
+ 20 anchor r2r-thorp-54                               S4 (local frame re-worded), S7 (an elder's rule never read)
+ROWS THAT DO NOT RED: none.
+THE NEW TESTS, the same way: the kernel (K1 lowest hash: 4 rows of pickRendezvous.test.js; K2 a tie to the larger id: the tie row, on a real tie
+C139599/C322382; K3 the tail unsorted: 3 rows; K4 a falsy key ranked: 2 rows), the door (N1 the twin never asked, N2 `taken` ignored, N3 no throw on a
+line with no id: one row each of drawDeclaredRanked), the heads (N4 N5 N6: one row each of pageFramesRanked), the cast wants (T6: the first admitted
+in pool order: tonightCastWantsRanked).
+WHAT THE SITE TESTS TAKE ON TRUST (by K1): with the kernel's rank inverted the fortune files (20 cases), pageFramesRanked (7), tonightCastWantsRanked (3),
+drawDeclaredRanked (8) and "THE LEAF'S PICK" stay GREEN: their expectation is the kernel's own pick over the key. What the kernel's pick IS stands
+in `tests/kernel/pickRendezvous.test.js` (4 rows red) and in the rows pinned to printed words (2 red in traditionDescription.test.js). A layering,
+not a hole: said so the next reader does not take the site rows for a pin of the hash.
+
+THE CONTROL, ON ITS MERITS (`tests/security/traditionDescriptionSharedPage.test.js`, TRAD-4 UNIT 7 (1); my probe `tools/hC.jsx` runs the test's own
+SPECS, plant and helpers on each tree: `out/control-{base,tip}/control.json`).
+- The change: `RECALL` was the string 'in memory of the great fire, 2 years ago'; it is now `/in memory of the great fire(?: since then)?, 2 years ago/`.
+  The pool is CAUSE.dead: .1 'It is kept in memory of {event}, {when}.', .2 '{Town} keeps it in memory of {event}, {when}.', .3 'It has been kept in
+  memory of {event} since then, {when}.' The string matched .1 and .2 only; the pattern matches the three and nothing else of the table.
+- Of the five born towns TWO are controls (three hold a "granary": Grünwiese, Chrissotopia, Terranovum, on both trees; the test asks `> 1`).
+  BASE: Khanqila draws CAUSE.dead.2, Farovetum CAUSE.dead.2: the string matched both. TIP: Khanqila draws CAUSE.dead.3 ("A day of small offerings that
+  honours the dead. It is kept by the monasteries. It has been kept in memory of the great fire since then, 2 years ago."), Farovetum CAUSE.dead.1
+  ("… It is kept in memory of the great fire, 2 years ago."). So the string, left alone, reds the CONTROL at Khanqila on the tip (seen: the base's
+  file on the tip's source, "Khanqila: expected false to be true").
+- The same `recalls` is the NEGATIVE of the arm beside it ("THE PLANTS … recall no fire of two years ago", 20 plants): there the pattern is the
+  STRICTER reading. On both trees the 20 plants recall nothing under either matcher, and their descriptions and rows are byte-equal with the event
+  withheld (20/20, 20/20).
+- It can still fail: the CONTROL reds under C1 (`holdsAName` answers true), C2 (the reader names the event by its name), C3 (the year one off),
+  C5 (the reader given no event), C6 (the kind's phrase re-worded), D4 (the oldest event taken); under C4 (`holdsAName` answers false) the CONTROL
+  stays green and THE PLANTS red with 60 entries (20 plants x descriptions, rows, recalled).
+- MY JUDGMENT: not a loosening. What the control asserts (the reader is still told the event, by its kind and its year, where no held name shares a
+  word with it) is what it asserted; the frame around it was never the subject. The other honest cure (another seed) would leave the negative arm
+  blind to the third frame on Khanqila's four plants. One thing the builder does not say: the control stands on exactly two towns, the floor of its own
+  `> 1` (unchanged by this change).
+
+## (5) A BASE-STAMPED PAGE READ ON THE TIP: IS ANYTHING WORSE THAN ANOTHER TRUE LINE? — CONFIRMED on C (`scripts/q5-foreign-mixed.mjs`; the tip's own render of the base's stamp on the same record, 900 towns)
+- 891 of 900 pages print a stored line where the tip's fresh page prints its own: 3,315 lines displaced, 3,315 stored in their place, in four views
+  (World/Traditions 838, Summary/Overview 723, Systems/Defense 76, Systems/Power 64): the four blocks of the stamp, nothing else.
+- Each stored line is one the base printed for that town through the same door (admission equal on every draw, (2) above): a line true of the town.
+- ONE PAGE, TWO WORDINGS? A displaced line still printed in another view of the base-stamped page: 0 of 900. A displaced sentence of six words or
+  more (one the stored line does not hold) printed in another view: 0. A stored line's own sentence printed in two views: 0. The traditions block is
+  stored whole (the base's own rotation), so no rite's stored sentence meets a live one.
+- So the owner's page (derived at render) and that owner's page shared before the change differ in 891 | 894 towns (V by its stamps; V's shared
+  pages were not rendered) until the owner saves again; nothing printed is false, repeated or self-contradicting.
+
+## (4) (5) (6) THE RENDERED PAGES, V — CONFIRMED, the owner's tabs (`out/an-pages-V.txt`, `out/q6-census-V.txt`; V's shared pages were NOT walked: V's stamps and the sites' own functions stand for them, (5) part 1)
+- RECORDS MOVED: 0 of 900 (recordHash equal 900/900; the born record's JSON byte-equal 900/900).
+- THE STAMP differs in 894 of 900 towns, only in the four blocks: traditions 848, overview:identity 723, defense:criminal 95, power:governance 63.
+- THE OWNER'S TABS: 1,092,108 printed lines on each tree; views byte-equal 18,354 of 20,087; towns with a view that differs 894; the views that differ:
+  World/Traditions 852, Summary/Overview 723, Systems/Defense 95, Systems/Power 63, and no other. TOWNS WITH A DIFFERENCE THE SITES' OWN LINES DO NOT
+  EXPLAIN: 0 (each site's base line replaced by its tip line in the base's page gives the tip's page, line for line).
+- The tip's tabs hold each site's line: scope 900/900, governance paragraph 900/900, descriptions 2,541/2,541, ring note 450/450.
+- WITHIN ONE PAGE: a line twice in one snapshot 40,410 on both trees; a sentence of six words or more in two lines of one view 1,572 and 1,572 (a
+  converted site's: 0, 0); in two views of one dossier 9,820 and 9,820 (a converted paragraph's: 359 and 359, the tension sentence the Overview and
+  Power both print, not a converted pick); a whole sentence under two rites 0, 0. THE PAGE CENSUS (28 patterns): towns gaining a row on the tip 0,
+  losing one 0 (rows: P17 486, P18 416, P16three 237, P8any 134, NEW2 6, P19 2, P14 1, equal on both trees).
+- Time: the owner's walk 2,907 ms a town on the base, 2,880 on the tip (the same 4-process load).
+- THE OLD MATCHER ON THE TIP, executed (`mut/mutants-c7.json`, `mut/results-c7.jsonl`): the string in place of the pattern: 1 red of 50, the CONTROL
+  at Khanqila. With every plant made to leak (C4's `holdsAName` answers false) and read through the string: THE PLANTS red with 52 entries, not 60:
+  the string does not see 8 of the 20 "recalled" leaks (the four plants each of Khanqila and Terranovum, whose rite draws CAUSE.dead.3 on the tip);
+  the pattern sees 20 of 20. So on its negative arm the change is a TIGHTENING.
+
+## (3)/(7) THE ID TEST AGAINST THE BAR: A REMOVAL RE-NUMBERED — CONFIRMED by plant T13 on C and V (`out/plants/results-*.txt`; the tip alone, the base has no ids)
+`tests/domain/traditionDescriptionIds.test.js` asks of every pool `lines.map((l) => l.id)` toEqual `<TAG>.<pool>.1 … n` in source order: DENSE ids.
+- T1 (above): GLOSS.founding.2 ("honours the founding") removed, the other ids as they were: 213 | 168 towns move, exactly its printers.
+- T13: the SAME removal with the line after it re-numbered into the gap (GLOSS.founding.3 "remembers the founding days" becomes GLOSS.founding.2),
+  which is what the test asks for: 309 | 244 towns move: the 213 | 168 printers and 96 | 76 towns that NEVER printed the removed line
+  (dp-thorp-36, dp-thorp-68: "remembers the founding days" becomes "marks the founding"). No other site moves; errors 0.
+- So the one new test that reads the ids pushes an author removing a line (any but a pool's last) to the edit that breaks the bar, and reds the
+  edit that keeps it (the id retired: H1b above, "[GLOSS.founding.1, GLOSS.founding.3] to deeply equal [GLOSS.founding.1, GLOSS.founding.2]"). Its
+  own header says the ids are there "so a later edit to a pool moves only the places that printed, or now out-rank to, that line". Unique ids of the
+  stated form would hold that; density does not. (Which edits it greens and reds, executed: below.)
+
+## (3) THE EXCEPTION'S GUARD, POOL BY POOL — CONFIRMED (`mut/mutants-j.json`, `mut/results-j.jsonl`: my scratch worktree, nine tradition test files, 182 cases; the unmutated tip 0 red)
+T12's shape (one DECLARED line, `needs: ['coast']`, appended to a frame pool the rotation walks; the two 143 pins moved to 144 as an author would):
+  J1 HOUSE_FRAMES.placePower   2 red: "ONE TOWN, NO SENTENCE TWICE": the keeper slot that runs out ("expected 2 to be 3"); THE EIGHT TOWNS
+  J2 HOUSE_FRAMES.body         1 red: THE EIGHT TOWNS (5 sentences twice)
+  J3 POWER_FRAMES.seat         4 red: THE EIGHT TOWNS (10); the shared page's UNIT 10 rows (Suryatala; Ringthwaite and Bergbrekka)
+  J4 ECONOMY_FRAMES.chief      3 red: THE PAYER RUNS OUT; the keeper slot; THE EIGHT TOWNS (4)
+  J5 CAUSE_FRAMES.dead         0 red of 182: NO TEST HOLDS IT.
+So the exception is held where a born town of the tests happens to exhaust that pool, by rows written for another purpose; no row and no walker
+states "a pool the rotation walks holds colour lines only" (`traditionDescription.js :: drawTurn`'s `all.every(isColourLine)`). Not probed: the other
+seven frame pools (HOUSE bodyPerson, place, placePerson; POWER religious, merchantry; ECONOMY lesser, only), the founding causes, OWNER_FRAMES.
+- AT THE POOL NO TEST HOLDS, on the corpora (plant T14: `line({ id: 'CAUSE.dead.4', …, needs: ['coast'] })` appended to CAUSE_FRAMES.dead):
+  C: all 173 draws refuse the line, and 4 towns move (should 0): the 10 rotated draws; each of the 4 then prints a whole sentence under two rites
+  (unplanted 0): dp-metropolis-99 "Morkholm keeps it in memory of the Siege, 120 years ago." under rites 4 and 5; dp-metropolis-4 "Stormbø keeps it
+  in memory of the Siege, 68 years ago." under rites 3 and 6; dp-city-7 "Temürbulag keeps it in memory of the Siege, 57 years ago." under 2 and 4.
+  V: 5 towns move, 4 of them to the new line (they have a coast), 1 that refuses it (dp-city-58). The base under the same plant: 54 | 58 towns.
+  THIS CORRECTS MY EARLY NOTE TO THE CHAIR ("held by a test"): held at four of the five pools I probed, not at this one.
+
+## (7) WHAT THE NEW ID TEST GREENS AND REDS — CONFIRMED (`mut/mutants-m.json`, `mut/results-m.jsonl`; five files, 147 cases; pool GLOSS.founding)
+  M1 line 2 removed, line 3 RE-NUMBERED to 2 (pins 142)      the id test GREEN; 2 red, both the walker's FLOORS ("gloss.founding: 2 < 3", a law of the base)
+  M2 line 2 removed, its id RETIRED (ids 1, 3; pins 142)     3 red: the floors and the id test
+  M3 line 2 REPLACED, id retired (ids 1, 3, 4; three lines)  1 red: the id test alone
+  M4 line 2 REPLACED, ids dense (1, 2 = the old 3, 3 = new)  0 red of 147
+  M5 the three rows written in another order, ids kept        1 red: the id test alone (plant T5: a re-ordering moves no town)
+A gloss pool sits on its floor of three, so an honest removal there is a REPLACEMENT: M3 against M4. The corpus numbers of the two: below (T15, T16).
+- THE TWO REPLACEMENTS ON THE CORPORA (plants T15, T16; the door's line == my own rank over the planted ids on every draw: 1,282/1,282 | 1,006/1,006):
+  T15, the id RETIRED (ids 1, 3, 4; the id test RED): 300 | 239 towns move: the 213 | 168 that printed the removed line and 87 | 71 the new line
+  out-ranks; a town moved for neither cause: 0 | 0.
+  T16, ids DENSE (0 red of 147): 420 | 338 towns move: the 213 | 168 and 207 | 170 that never printed the removed line, of them 169 | 137 that the new
+  line does NOT out-rank under the ids as they were: moved by the re-numbering alone (dp-thorp-4: "remembers the founding days" becomes "recalls the
+  founding").
+
+## (9) WHAT THE CONVERSION COSTS — CONFIRMED (`tools/hT.jsx`, built without trace wraps; each site's own function over C's 900 saved records; two passes a tree, three rounds a pass, medians of six; ms a town)
+  governanceAccountOf            base 0.059   tip 0.061
+  describeTraditions (owner)     base 0.098   tip 0.114     (the one site whose cost moves: +0.016 ms a town)
+  sharedTraditionRowsOf          base 0.762   tip 0.782
+  composeTonightSheet            base 3.134   tip 3.067
+  deriveCriminalStructure        base 0.077   tip 0.073
+  cultureScopeLine               base 0.177   tip 0.143
+  the three PDF heads            base 0.0072  tip 0.0086
+  composePublicProse (the stamp) base 76.7    tip 77.1      (ranges 73.6 to 77.1 and 73.2 to 80.0: inside the noise)
+  THE HELPERS ALONE (microseconds a call, 200,000 calls): `pickRendezvous` over 3 lines 0.79 on the base, 0.70 on the tip (10 lines 2.1, 30 lines
+  5.9); the index pick it replaces (`pickVariantMixed`) 0.35 and 0.33 at any size; `rankRendezvous` (new) 3 lines 1.1, 10 lines 2.8, 30 lines 8.5.
+  THE RENDERED PAGE: the owner's walk 3,194 ms a town on the base and 3,076 on the tip (C); 2,907 and 2,880 (V); a birth 353 and 345 (C).
+  So: a converted pick costs about twice the index pick it replaces, a third of a microsecond more; no page, stamp or birth is measurably slower.
+
+## BEFORE REPORTING (2026-11-27)
+- The judged branch re-fetched at 22:24 UTC and again just before the report was sent: `lane/stack-121-tail-wip-2026-11-27` is at 2ab62ef33, the
+  commit I judged: nothing new to read.
+- The chair's record branch moved after I cut mine (e5c601208 to f34d87106 at 22:24 UTC): NOT read (I was not to know the chair's view). A branch
+  `lane/stack-121-guard-wip-2026-11-27` exists (cccda7569): NOT read, not mine to judge.
+- One early note went to the chair (the T12 exception, "held by a test"); the report corrects it (held at four of five pools probed).
+- Pushed here: these notes and SECOND-READER-121.txt, nothing else. No file of the judged branch was changed; every plant and mutant lived in memory
+  (bundles) or in my scratch worktree, which is clean (`git status` of /home/user/mut after the last run: clean).
+
+## NOT CHECKED (plainly)
+- The whole suite (not mine to run): I ran the 16 changed test files, the six walkers of question (8), the tradition and PDF-head files beside them.
+- A real browser, and the PDF's bytes: pages were rendered by the tree's own components under jsdom; PDF chapters were walked as element trees.
+- A hosted share (the server's path): a fresh share was composed as the save path composes it and rendered by the tree's own shared-page component.
+- V's shared pages (V: the owner's tabs, the stamps and the sites' own functions); the DM share on 60 towns of C only.
+- The exception's guard at seven of the twelve frame pools, the founding causes and OWNER_FRAMES (five pools probed).
+- Corpora: C and V, 900 towns each, fresh births; no town with history played forward, no lit mirror but the one I lit for the PDF's chapter, no custom content.
+- The guard branch; the chair's entries after e5c601208; the committed edge bundles beyond a search for the sites' keys (they predate the change).
