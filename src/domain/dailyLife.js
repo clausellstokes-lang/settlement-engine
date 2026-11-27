@@ -62,7 +62,7 @@ import { nativeSemanticName } from './content/customContentSemanticAuthority.js'
 import { isHideableHouse, isVeiledPower } from './people/cardVeil.js';
 import { leaderLeadOfRecord } from './facts/leaderLead.js';
 import { institutionSentenceNoun } from './display/institutionSentenceNoun.js';
-import { pickVariantMixed } from '../kernel/proseHash.js';
+import { pickRendezvous } from '../kernel/proseHash.js';
 
 // ── Local typedefs ───────────────────────────────────────────────────────
 
@@ -345,7 +345,7 @@ function deriveDawnWork(s, ctx) {
 // THE RE-CUT: `named` when the record holds a live sacred house, market or inn the page may name, else `plain`.
 // THE ROUTE (ruling 12): a branch's pool (`data/dailyLife/gatheringPlaces.js`) is filtered to the lines the record
 // admits by their declared atoms (`facts/drawDeclared.js :: filterDeclared`) and whose every named house the live roster
-// can name; then `kernel/proseHash.js :: pickVariantMixed(eligible, '<name>::dailyLife.gathering_places::<branch>')`
+// can name; then `kernel/proseHash.js :: pickRendezvous(eligible, '<name>::dailyLife.gathering_places::<branch>', id)`
 // picks one (a nameless record takes index 0 of the eligible list). No line true: the EMPTY string (ruling 3).
 
 /** @typedef {{ id?: string, name?: string }} RosterRow */
@@ -411,10 +411,10 @@ function houseFinder(s) {
  * THE ROUTE (ruling 11), one for every slot: each deriver hands its branch's pool to the door itself
  * (`facts/drawDeclared.js :: filterDeclared`, the pool named in the call so the presumed-things walker sees it drawn);
  * here the lines the record admits keep only those whose every named house the live roster can name, and
- * `kernel/proseHash.js :: pickVariantMixed(eligible, '<name>::dailyLife.<slot>::<branch>')` picks one (a nameless
+ * `kernel/proseHash.js :: pickRendezvous(eligible, '<name>::dailyLife.<slot>::<branch>', id)` picks one (a nameless
  * record takes index 0 of the eligible list; no eligible line, nothing). A line picked (and so said) adds the condition
  * its branch DECLARES it states to `stated` (D4C-1), where the caller hands one.
- * @template {{ text: string }} T
+ * @template {{ id: string, text: string }} T
  * @param {DailyLifeSettlement} s @param {ReadonlyArray<T>} admitted the door's lines @param {string} slotKey @param {string} branch
  * @param {HouseFinder} house
  * @param {Set<string>} [stated]
@@ -423,7 +423,8 @@ function houseFinder(s) {
 function pickNameable(s, admitted, slotKey, branch, house, stated) {
   const eligible = admitted.filter((l) => housesNamedIn(l.text).every((k) => !!house(k)));
   const name = /** @type {{ name?: unknown }} */ (s).name;
-  const pick = pickVariantMixed(eligible, typeof name === 'string' && name ? `${name}::dailyLife.${slotKey}::${branch}` : null);
+  // the rendezvous (point 120, D13 STABLE-PICKS): the eligible line whose own `id` hashes highest with the slot's key
+  const pick = pickRendezvous(eligible, typeof name === 'string' && name ? `${name}::dailyLife.${slotKey}::${branch}` : null, (l) => l.id);
   const k = pick ? statesOf(slotKey, branch) : null;
   if (k) stated?.add(k);
   return pick;
@@ -782,9 +783,10 @@ function outsiderParts(s, ctx, stated) {
   }
   if (!real) options.push({ branch: 'ordinary', lens: null, lines: admitted('ordinary') });
   const sayable = options.filter((o) => o.lines.length > 0);
-  let second = pickVariantMixed(sayable, pickKey(s, 'outsider_impressions', 'second'));
+  // the rendezvous over the options, each its branch's name as its id (point 120, D13 STABLE-PICKS)
+  let second = pickRendezvous(sayable, pickKey(s, 'outsider_impressions', 'second'), (o) => o.branch);
   // an option whose condition another slot states yields: the keyed pick among the options left
-  if (second && yields(second.branch)) second = pickVariantMixed(sayable.filter((o) => !yields(o.branch)), pickKey(s, 'outsider_impressions', 'second'));
+  if (second && yields(second.branch)) second = pickRendezvous(sayable.filter((o) => !yields(o.branch)), pickKey(s, 'outsider_impressions', 'second'), (o) => o.branch);
   if (second) {
     const part = say(second.branch, second.lines);
     if (part.said && second.lens) {

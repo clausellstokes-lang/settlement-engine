@@ -24,7 +24,7 @@
  * Lines name no house by its roster name, say no "town", and need no hideable house or crime atom
  * (`tests/domain/dailyLifeAtoms.test.js`, arm (c)); "the healers" needs a sick house. The deriver (`domain/dailyLife.js ::
  * deriveRecentChanges`) hands each branch's lines to `facts/drawDeclared.js :: filterDeclared` and picks one by
- * `kernel/proseHash.js :: pickVariantMixed` keyed `<record.name>::dailyLife.recent_changes::<branch>`.
+ * `kernel/proseHash.js :: pickRendezvous` keyed `<record.name>::dailyLife.recent_changes::<branch>`.
  *
  * NOT BUILT (a walker's reading whose cure is a rewording or an atom, the chair's; each names a thing or a class no true
  * declaration answers, so the line waits):

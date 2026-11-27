@@ -27,7 +27,7 @@ import { isMarketInstitution } from '../../src/domain/facts/market.js';
 import { liveInstitutions } from '../../src/domain/institutions/institutionRoster.js';
 import { nativeSemanticName } from '../../src/domain/content/customContentSemanticAuthority.js';
 import { isHideableHouse } from '../../src/domain/people/cardVeil.js';
-import { pickVariantMixed } from '../../src/kernel/proseHash.js';
+import { pickRendezvous } from '../../src/kernel/proseHash.js';
 import * as Gathering from '../../src/data/dailyLife/gatheringPlaces.js';
 import * as Dawn from '../../src/data/dailyLife/dawnWork.js';
 import * as Child from '../../src/data/dailyLife/childWarnings.js';
@@ -129,7 +129,7 @@ function readSlot(rec, slot, text, house) {
     // CLOSE-7 THE MIRROR: the deriver hands the fare and Dawn Work the capacity profile (`food production`), so the instrument does
     const eligible = filterDeclared(/** @type {any} */ (pool), { facts: /** @type {any} */ (facts), ctx: { capacities }, poolId: `dailyLife.${slot}.${branch}`, surface: 'dailyLife' })
       .filter((/** @type {any} */ l) => [...l.text.matchAll(/\{(\w+)\}/g)].map((m) => m[1]).filter((k) => !filled.includes(k)).every((k) => !!house(k)));
-    const pick = /** @type {any} */ (pickVariantMixed(eligible, name ? `${name}::dailyLife.${slot}::${branch}` : null));
+    const pick = /** @type {any} */ (pickRendezvous(eligible, name ? `${name}::dailyLife.${slot}::${branch}` : null, (/** @type {any} */ l) => l.id));
     if (!pick) continue;
     const m = templateRe(pick.text).exec(text);
     if (m) parts.push({ slot, branch, id: pick.id, said: m[0], at: m.index, states: statesOf(slot, branch) });

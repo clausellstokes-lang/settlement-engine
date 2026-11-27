@@ -24,7 +24,7 @@
  */
 
 import { cleanNum } from './placeholders.js';
-import { pickVariant } from '../../kernel/proseHash.js';
+import { pickRendezvous } from '../../kernel/proseHash.js';
 import { avgScore } from './defenseScoreBands.js';
 import { deriveMagicProfile } from '../magicProfile.js';
 import { deriveMagicReliance, magicDialAbsent, magicWorksAt, MAGIC_RELIANCE_WORD } from '../magicReliance.js';
@@ -204,6 +204,12 @@ export function deriveFoodBalance(settlement) {
  * from the base settlement, never an AI clone.
  */
 /**
+ * One viability line: its id (a pool prefix and a number, unique across every pool of `deriveViability`, written once,
+ * append-only: never renumbered, never reused) and its sentence. A PAIR read by index, never `{ id, text }`: these rows
+ * are not declared pool lines (their truth is the gate beside them, G61) and do not pass the declaring door (G80).
+ * @typedef {readonly [string, string]} ViabilityLine
+ */
+/**
  * Viability verdict (§1f). Reconciles the generator's verdict with the food
  * balance + trade dependencies so the wording never claims "self-sufficient"
  * while the dossier shows a food deficit. buildConflict() (economicGenerator)
@@ -219,16 +225,21 @@ export function deriveViability(settlement) {
   // #36 (STYLE-RULINGS §1; W2 DEF, 2026-11-07): each verdict says its finding in the town's own
   // name, from a few variants the seed chooses (the same town always reads the same line).
   const name = viabilityName(settlement);
-  const pick = (/** @type {readonly string[]} */ pool) => pickVariant(pool, viabilitySeed(settlement));
+  // D13 STABLE-PICKS (point 120): the rendezvous over the rows' own ids: the row whose id hashes highest with the slot's
+  // key prints, so a pool edit moves only a town whose drawn row was removed or refused, or one an added row out-hashes.
+  const pick = (/** @type {readonly ViabilityLine[]} */ pool) => pickRendezvous(pool, viabilitySeed(settlement), (r) => r[0])?.[1];
 
   if (v.viable === false) {
+    const said = name
+      ? pick([
+        ['NV1', `${name} cannot last as things stand.`],
+        ['NV2', `As things stand, ${name} will not survive.`],
+      ])
+      : null;
     return {
       viable: false, verdict: 'not_viable', label: VIABILITY_LABEL.not_viable,
       summary: name
-        ? `✗ NOT VIABLE: ${pick([
-          `${name} cannot last as things stand.`,
-          `As things stand, ${name} will not survive.`,
-        ])}`
+        ? `✗ NOT VIABLE: ${said}`
         : (rawSummary || 'Not viable: critical issues prevent the settlement from surviving.'),
       rawSummary,
     };
@@ -260,24 +271,24 @@ export function deriveViability(settlement) {
       // shows the coverage), the route just was not recorded: the phrase falls back to "from outside".
       line = covered
         ? pick([
-          `${town} lies off the trade roads, yet it gets by: some of its food comes in ${route}${magicFed ? ', magic supplies a share,' : ''} and it draws on its stores.`,
-          `${town} grows less than it eats and has no dependable road to make up the rest; what it lacks comes in ${route}${magicFed ? ' and by magic' : ''}, and from its stores.`,
+          ['IC1', `${town} lies off the trade roads, yet it gets by: some of its food comes in ${route}${magicFed ? ', magic supplies a share,' : ''} and it draws on its stores.`],
+          ['IC2', `${town} grows less than it eats and has no dependable road to make up the rest; what it lacks comes in ${route}${magicFed ? ' and by magic' : ''}, and from its stores.`],
         ])
         : pick([
-          `${town} grows less than it eats, and nothing from outside makes up the difference; it lives on its own land${magicFed ? ', on magic,' : ''} and on what is in store.`,
-          `Nothing reliable reaches ${town} from outside, and its own land does not grow enough; the rest comes from its stores${magicFed ? ' and from magic' : ''}.`,
+          ['IU1', `${town} grows less than it eats, and nothing from outside makes up the difference; it lives on its own land${magicFed ? ', on magic,' : ''} and on what is in store.`],
+          ['IU2', `Nothing reliable reaches ${town} from outside, and its own land does not grow enough; the rest comes from its stores${magicFed ? ' and from magic' : ''}.`],
         ]);
     } else if (covered) {
       line = pickTrue(pick, [
-        `${town} cannot feed itself: part of its food comes in ${route}.`,
-        `${town} grows less than it eats, and part of the difference arrives ${route}.`, // TAIL-DEFECON-D: a residual deficit stands
-        `${town} keeps order and pays its way, but it has to buy food to get through the year, and the food comes in ${route}.`,
-        `Some of what ${town} eats is brought in ${route}; its own land does not produce enough.`, // TAIL-DEFECON-D: 'much' overclaimed
+        ['DC1', `${town} cannot feed itself: part of its food comes in ${route}.`],
+        ['DC2', `${town} grows less than it eats, and part of the difference arrives ${route}.`], // TAIL-DEFECON-D: a residual deficit stands
+        ['DC3', `${town} keeps order and pays its way, but it has to buy food to get through the year, and the food comes in ${route}.`],
+        ['DC4', `Some of what ${town} eats is brought in ${route}; its own land does not produce enough.`], // TAIL-DEFECON-D: 'much' overclaimed
       ], [true, true, seen.keepsOrder && seen.paysItsWay, true], '');
     } else {
       line = pick([
-        `${town} grows less than it eats, and its trade brings in little food to make up the difference.`,
-        `${town}'s own land does not grow enough, and little food reaches it from outside.`,
+        ['DL1', `${town} grows less than it eats, and its trade brings in little food to make up the difference.`],
+        ['DL2', `${town}'s own land does not grow enough, and little food reaches it from outside.`],
       ]);
     }
     return {
@@ -292,21 +303,30 @@ export function deriveViability(settlement) {
     const stresses = /** @type {{ stressTypes?: unknown } | undefined} */ (settlement?.config)?.stressTypes;
     const printedImports = Array.isArray(stresses) && stresses.includes('under_siege') ? [] : settlement?.economicState?.primaryImports;
     const goods = dependencyGoods(v.dependencies, printedImports), many = goods !== null && (/ and /.test(goods) || /s$/.test(goods)); // UPKEEP-8 (#253): a good the import list holds, and its number
+    const said = pick(goods
+      ? [
+        ['DG1', `${town} can stand, but only while ${goods} ${many ? 'keep' : 'keeps'} arriving and the routes that bring ${many ? 'them' : 'it'} stay open.`],
+        ['DG2', `${town}'s trades run on ${goods} brought in from elsewhere; if that supply stopped, they would stop with it.`],
+        ['DG3', `${town} works well enough, as long as nobody cuts it off from the ${goods} it buys in.`],
+      ]
+      : [
+        ['DN1', `${town} can stand, but only while the goods it buys in keep arriving and the routes that bring them stay open.`],
+        ['DN2', `${town}'s trades run on goods brought in from elsewhere; if that supply stopped, they would stop with it.`],
+      ]);
     return {
       viable: true, verdict: 'dependent', label: VIABILITY_LABEL.dependent,
-      summary: `VIABLE WITH CRITICAL DEPENDENCIES: ${pick(goods
-        ? [
-          `${town} can stand, but only while ${goods} ${many ? 'keep' : 'keeps'} arriving and the routes that bring ${many ? 'them' : 'it'} stay open.`,
-          `${town}'s trades run on ${goods} brought in from elsewhere; if that supply stopped, they would stop with it.`,
-          `${town} works well enough, as long as nobody cuts it off from the ${goods} it buys in.`,
-        ]
-        : [
-          `${town} can stand, but only while the goods it buys in keep arriving and the routes that bring them stay open.`,
-          `${town}'s trades run on goods brought in from elsewhere; if that supply stopped, they would stop with it.`,
-        ])}`,
+      summary: `VIABLE WITH CRITICAL DEPENDENCIES: ${said}`,
       rawSummary,
     };
   }
+  const said = pickAdmitted(pick, [
+    ['SS1', `${town} feeds itself and pays its own way.`],
+    ['SS2', `${town} grows what it eats and makes what it needs, and owes no one for either.`],
+    ['SS3', `Nothing ${town} needs to get through the year has to come from outside.`],
+    ['SS4', `${town} feeds itself and pays its way, and buys in some of what it cannot make for itself.`], // RULING CURE-118-6 (K): "some of" (a need may go unmet)
+    ['SS5', `What ${town} eats it grows, and what it spends it earns; some of what it uses is bought in.`],
+  ], [!seen.buysFood && seen.paysItsWay, !seen.buysFood && !seen.needsImports && !seen.owesDebt, !seen.buysFood && !seen.needsImports,
+    !seen.buysFood && seen.paysItsWay && seen.buysIn, !seen.buysFood && seen.paysItsWay && seen.buysIn], seen.buysIn ? `${town} gets through the year, buying in some of what its own land and trades do not provide.` : `${town} gets through the year on its own land and trades, and goes without what they do not provide.`); // TAIL-DEFECON-D (#00585): it buys in only where something arrives; VIABILITY-TRUE (G61): line 2 "owes no one" not beside the debt line; the twin says "some of" (a need may go unmet)
   return {
     viable: true, verdict: 'self_sufficient', label: VIABILITY_LABEL.self_sufficient,
     // WORDS-2 E13a (the tenth chair's RULING G32 (1)): the line is drawn AMONG THE ADMITTED by the slot's own keyed draw
@@ -316,14 +336,7 @@ export function deriveViability(settlement) {
     // list non-empty), so line 5 says what it USES is bought in. The four states: no marked need and nothing arriving, lines
     // 1, 2, 3; no marked need and something arriving, 1 to 5 (all true together, one prints); a marked need and something
     // arriving, 1, 4, 5; a marked need and nothing arriving, line 1 alone.
-    summary: `VIABLE: ${pickAdmitted(pick, [
-      `${town} feeds itself and pays its own way.`,
-      `${town} grows what it eats and makes what it needs, and owes no one for either.`,
-      `Nothing ${town} needs to get through the year has to come from outside.`,
-      `${town} feeds itself and pays its way, and buys in some of what it cannot make for itself.`, // RULING CURE-118-6 (K): "some of" (a need may go unmet)
-      `What ${town} eats it grows, and what it spends it earns; some of what it uses is bought in.`,
-    ], [!seen.buysFood && seen.paysItsWay, !seen.buysFood && !seen.needsImports && !seen.owesDebt, !seen.buysFood && !seen.needsImports,
-      !seen.buysFood && seen.paysItsWay && seen.buysIn, !seen.buysFood && seen.paysItsWay && seen.buysIn], seen.buysIn ? `${town} gets through the year, buying in some of what its own land and trades do not provide.` : `${town} gets through the year on its own land and trades, and goes without what they do not provide.`)}`, // TAIL-DEFECON-D (#00585): it buys in only where something arrives; VIABILITY-TRUE (G61): line 2 "owes no one" not beside the debt line; the twin says "some of" (a need may go unmet)
+    summary: `VIABLE: ${said}`,
     rawSummary,
   };
 }
@@ -813,9 +826,9 @@ import { safetyShownOf } from './safetyShown.js';
 // spends; not "grows what it eats" or "feeds itself" where it buys its food or lists critical imports).
 
 /**
- * The keyed draw AMONG THE ADMITTED (WORDS-2 E13a, RULING G32 (1)): the slot's own draw (`pick`) over the lines whose
- * truth holds, so each true line is as likely as another; the twin only where none is true.
- * @param {(pool: readonly string[]) => unknown} pick @param {readonly string[]} pool @param {readonly boolean[]} ok
+ * The keyed draw AMONG THE ADMITTED (WORDS-2 E13a, RULING G32 (1)): the slot's own draw (`pick`, the rendezvous over the
+ * rows' ids) over the lines whose truth holds, so each true line is as likely as another; the twin only where none is true.
+ * @param {(pool: readonly ViabilityLine[]) => string | undefined} pick @param {readonly ViabilityLine[]} pool @param {readonly boolean[]} ok
  * @param {string} twin @returns {string}
  */
 function pickAdmitted(pick, pool, ok, twin) {
@@ -824,15 +837,14 @@ function pickAdmitted(pick, pool, ok, twin) {
 }
 
 /**
- * The seed's variant where it is true; else the next true one in the pool's order; else the twin ('' keeps the pool's
- * own pick, for a pool whose every variant is true of its branch).
- * @param {(pool: readonly string[]) => string | undefined} pick @param {readonly string[]} pool @param {readonly boolean[]} ok
+ * The highest hash among the rows true of this place (D13 STABLE-PICKS, point 120: the rendezvous over the true rows);
+ * else the twin ('' keeps the pool's own pick, for a pool whose every variant is true of its branch).
+ * @param {(pool: readonly ViabilityLine[]) => string | undefined} pick @param {readonly ViabilityLine[]} pool @param {readonly boolean[]} ok
  * @param {string} twin @returns {string}
  */
 function pickTrue(pick, pool, ok, twin) {
-  const at = Math.max(0, pool.indexOf(String(pick(pool))));
-  for (let k = 0; k < pool.length; k++) { const j = (at + k) % pool.length; if (ok[j]) return pool[j]; }
-  return twin || pool[at];
+  const admitted = pool.filter((_, j) => ok[j]);
+  return admitted.length ? String(pick(admitted)) : (twin || String(pick(pool)));
 }
 
 /**

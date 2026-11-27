@@ -87,3 +87,35 @@ export function pickVariantMixed(pool, seed) {
   if (pool.length === 1 || !seed) return pool[0];
   return pool[mix32(fnv1a32(String(seed))) % pool.length];
 }
+
+/**
+ * The rendezvous pick (point 120, D13 STABLE-PICKS): the line with the HIGHEST
+ * `mix32(fnv1a32('<slotKey>::<id>'))`, where `id` is the line's own id (`idOf(line)`).
+ *
+ * Why it exists: a modulus pick (`pickVariant`, `pickVariantMixed`) indexes the list by position, so any edit
+ * to a pool re-deals the line of keys that never drew the edited line. Here each line competes on its own
+ * hash: removing a line that was not the pick leaves the pick; removing the pick gives the next highest;
+ * adding a line moves only the keys for which the new line hashes highest (about 1 in n+1); the order of
+ * the list does not matter.
+ *
+ * Contract: non-array or empty list → undefined; ANY falsy key → the first line (as the old pick did); a
+ * tie of hashes goes to the SMALLER id (by string). Pure: zero PRNG draws, no clock.
+ * @template T
+ * @param {readonly T[]} lines
+ * @param {string | number | null | undefined} slotKey
+ * @param {(line: T) => string} idOf
+ * @returns {T | undefined}
+ */
+export function pickRendezvous(lines, slotKey, idOf) {
+  if (!Array.isArray(lines) || lines.length === 0) return undefined;
+  if (!slotKey) return lines[0];
+  let best = lines[0];
+  let bestId = String(idOf(best));
+  let bestH = mix32(fnv1a32(`${slotKey}::${bestId}`));
+  for (let i = 1; i < lines.length; i += 1) {
+    const id = String(idOf(lines[i]));
+    const h = mix32(fnv1a32(`${slotKey}::${id}`));
+    if (h > bestH || (h === bestH && id < bestId)) { best = lines[i]; bestId = id; bestH = h; }
+  }
+  return best;
+}

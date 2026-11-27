@@ -9,7 +9,7 @@
  * the slot is the EMPTY string). A line is a whole sentence, `{ id, text, needs }` as in `childWarnings.js`. The deriver
  * (`domain/dailyLife.js :: deriveCommonerResentmentsDm`) runs only when `deriveDailyLife(record, { audience: 'owner' })`
  * is called; it hands the branch's lines to `facts/drawDeclared.js :: filterDeclared` and picks one by
- * `kernel/proseHash.js :: pickVariantMixed` keyed `<record.name>::dailyLife.commoner_resentments_dm::<branch>`.
+ * `kernel/proseHash.js :: pickRendezvous` keyed `<record.name>::dailyLife.commoner_resentments_dm::<branch>`.
  * No line needs a crime atom (`tests/domain/dailyLifeAtoms.test.js`, arm (c)); the branch itself is the crime fact, and it
  * is read on the owner's audience alone (`tests/domain/dailyLifeOwnerSlot.test.js`).
  *

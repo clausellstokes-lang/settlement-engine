@@ -6,7 +6,7 @@
  * and a metropolis printed "Great cathedral" with no article or a bracketed qualifier. THE GREEN: on born places of every
  * size (M1's births `hxd-<size>-0..2`), the slot prints only a line of its branch's pool whose declared atoms the record
  * holds, every named house is a live, non-hideable, non-access row printed `the <noun>`, no bracket, and no M1 clause
- * the record cannot stand behind; the pick is `pickVariantMixed` over the eligible lines on the name key; a nameless
+ * the record cannot stand behind; the pick is `pickRendezvous` over the eligible lines on the name key; a nameless
  * record takes index 0 of the eligible list; a place with no true line prints the EMPTY string (ruling 3).
  */
 import { describe, it, expect, beforeAll } from 'vitest';
@@ -17,7 +17,8 @@ import { deriveDailyLifeSlot } from '../../src/domain/dailyLife.js';
 import { GATHERING_NAMED, GATHERING_PLAIN } from '../../src/data/dailyLife/gatheringPlaces.js';
 import { filterDeclared } from '../../src/domain/facts/drawDeclared.js';
 import { factsOf } from '../../src/domain/facts/factsOf.js';
-import { pickVariantMixed } from '../../src/kernel/proseHash.js';
+import { atomHolds } from '../../src/domain/facts/factVocabulary.js';
+import { pickRendezvous } from '../../src/kernel/proseHash.js';
 import { institutionSentenceNoun } from '../../src/domain/display/institutionSentenceNoun.js';
 import { isLiveInstitution, liveInstitutions } from '../../src/domain/institutions/institutionRoster.js';
 import { ACCESS_ONLY } from '../../src/domain/facts/liveInstitutionNames.js';
@@ -78,10 +79,13 @@ describe('the route on born places (ruling 12): eligible by declared atoms, then
       const { rec } = at(seed);
       const s = /** @type {any} */ (deriveDailyLifeSlot('gathering_places', rec));
       if (!s.text) return;
-      const branch = s.references.length ? 'named' : 'plain';
-      const eligible = filterDeclared(branch === 'named' ? GATHERING_NAMED : GATHERING_PLAIN, { facts: factsOf(rec) });
       const own = lines.find((l) => new RegExp(`^${l.text.replace(/[.*+?^$()|[\]\\]/g, '\\$&').replace(/\\?\{\w+\\?\}/g, '.+')}$`).test(s.text));
       expect(own, `${seed}: "${s.text}"`).toBeTruthy();
+      // D13 STABLE-PICKS (point 120): the branch is the printed line's own pool, not "it names a house": a named-branch line
+      // may name none (N32, drawn by hxd-hamlet-2 under the rendezvous), and the named branch rests on an atom the record holds
+      const branch = GATHERING_NAMED.includes(/** @type {any} */ (own)) ? 'named' : 'plain';
+      if (branch === 'named') expect(['sacredHouse', 'market', 'institution: tavern'].some((a) => atomHolds(a, /** @type {any} */ (factsOf(rec))) === true), `${seed}: a named line where the record holds no sacred house, market or inn`).toBe(true);
+      const eligible = filterDeclared(branch === 'named' ? GATHERING_NAMED : GATHERING_PLAIN, { facts: factsOf(rec) });
       expect(eligible, `${seed}: ${own?.id} is eligible`).toContain(own);
       for (const ref of s.references) {
         const row = (rec.institutions || []).find((/** @type {any} */ i) => i?.id === ref.id || i?.name === ref.label);
@@ -92,13 +96,13 @@ describe('the route on born places (ruling 12): eligible by declared atoms, then
     });
     expectNoSeedFailures(failures, 'every born place prints an eligible line of its pool, its houses live and nameable');
   });
-  it('the pick is pickVariantMixed over the eligible lines on `<name>::dailyLife.gathering_places::<branch>`', () => {
+  it('the pick is pickRendezvous (D13 STABLE-PICKS) over the eligible lines on `<name>::dailyLife.gathering_places::<branch>`', () => {
     const plain = { name: 'Ashby', tier: 'thorp', institutions: [{ name: 'Water source' }, { name: 'Dwellings (1-8)' }, { name: 'Subsistence farming' }] };
     const eligible = filterDeclared(GATHERING_PLAIN, { facts: factsOf(plain) });
     // D5C-2 phase B appended P16 to P20 (`lines/D4C/DRAFT-2.md`); by the chair's ruling (b) of 2026-11-23 01:57 UTC each
     // needs `institution: dwellings` at least, and this thorp holds dwellings, water and fields, so all five are eligible here
     expect(eligible.map((l) => l.id)).toEqual(['P1', 'P2', 'P3', 'P4', 'P5', 'P6', 'P7', 'P8', 'P9', 'P16', 'P17', 'P18', 'P19', 'P20']);
-    expect(text(plain)).toBe(/** @type {any} */ (pickVariantMixed(eligible, 'Ashby::dailyLife.gathering_places::plain')).text);
+    expect(text(plain)).toBe(/** @type {any} */ (pickRendezvous(eligible, 'Ashby::dailyLife.gathering_places::plain', (/** @type {any} */ l) => l.id)).text);
     expect(text({ ...plain, name: undefined })).toBe(eligible[0].text);
   });
   it('a named place: N0 (today\'s, reworded) at index 0 for a nameless record holding a church, a market and an inn', () => {
