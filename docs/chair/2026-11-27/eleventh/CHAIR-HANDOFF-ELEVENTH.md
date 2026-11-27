@@ -354,3 +354,33 @@ See section 4, newest last.
   only on a render worker's first dossier, on both trees; preloaded: 64 of 64 print, 0 differ). **R14 IS CLOSED: not a
   fault of the product.**
 - E7 DECIDED: POINT 120 LANDS ALONE (point 121's builder has committed its door's unit only).
+
+## V15 (19:51 UTC on 2026-11-27): POINT 121 BUILT (cf2e84c2d), ITS SOURCE READ WHOLE BY THE CHAIR, ACCEPTED FOR THE INDEPENDENT READ (E15); A SHORT ROUND
+- TAIL-121's PHASE 2 (2 h 40 min in all; `lane/stack-121-tail-wip-2026-11-27`, local, /home/user/wt/tail, on df0401af6):
+  39e0063c4 the door's ranked mode and `kernel/proseHash.js :: rankRendezvous`; 999135901 fortune; 4471a391f the tradition
+  description (143 ids `<TABLE>.<pool>.<n>`, unique across the table file); 11f0197cb the cast wants (13 ids; the held-seat
+  pair read by id); cf2e84c2d the page frames (the ring vantage RING-1 to RING-4; the PDF's three headline lists; the scope
+  line's five frames by name). `hookLines.js` BYTE-EQUAL TO THE BASE. A line with no id in a ranked draw THROWS.
+- ITS PROOF (300 births of C, 300 of V): RECORDS MOVED 0 and 0; lines outside the units 0; admitted sets 4,867 compared, 0
+  differ; planted edits, tip [base]: an unprinted line removed 0 [3]; a line printed by 10 towns removed: those 10 [31]; a
+  colour line added: the 6 it out-ranks [31]; A LINE ADDED WITH A NEED: it out-ranks 6, 5 refuse it, 0 REFUSERS MOVE, 1 moves
+  [27]; the scope line: 114 [494] and 112 [462]. The owner's page against a fresh shared page on 60 towns: the scope line,
+  the ring and governance agree; traditions differ by design as on the base. NOT RENDERED by the builder: the PDF and the
+  player view (the reader's).
+- THE THREE WALKERS OF RULING 121-2, registers unchanged: the any-cast baseline green (no `any`); `drawDeclaredKeys`'s two
+  rows were the hooks' (gone with them); `presumedThings` ARM 1's 4 and 15 rows came from ONE FORM, `return drawRanked(…)`
+  inside the door: the walker's trace is depth-limited and order-dependent; `const ranked = …; return ranked` reads the
+  base's 131 hits exactly. A FRAGILITY OF THAT WALKER, WRITTEN DOWN (the reader is asked to confirm it; a comment now says
+  why the form stands).
+- THE CHAIR READ every changed line under src (eleven files). NOTED: the ring vantage used to fall back to the table's own
+  note when its one drawn row was refused and now walks the rank to the next row the place can print (the ruled bar; more
+  variety; put to the reader to judge on its merits). The fortune draws keep the rendezvous inside the door's `draw` (their
+  pools declare nothing): a comment says a declaring line moves them to the ranked mode.
+- **E15: ACCEPTED FOR THE INDEPENDENT READ.** RULING 121-3 (`landing/RULING-121-3.txt`): the shared page's CONTROL (its
+  recall now matches any dead frame) is RULED NOT A LOOSENING (the claim is the event and its year; the sibling check reads
+  it so; its mutant reds); `tailCrisisBatch2`'s five re-pointed anchors must each red under a mutant (one mutant red two);
+  two comments; THE LINE's JOINED TIP 360e716c2 MERGED INTO THE BRANCH by the builder (both sides' rows kept in test
+  conflicts). THEN: the branch pushed; READER 121 in a child session (`prompts/START-READER-121-CHILD.txt`, base
+  360e716c2); the guard's new scopes by GUARD-120R on a branch cut from the merged tip, from the builder's table of seven
+  modules.
+- 15 rows re-pointed (`landing/121/repointed.tsv`, filed here as handed in; the five anchors' rows follow).
