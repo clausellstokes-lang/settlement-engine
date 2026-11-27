@@ -1,0 +1,18 @@
+{
+ "towns": 140,
+ "noShown": 0,
+ "shownServed": 0,
+ "shownWithheld": 140,
+ "controlServed": 140,
+ "controlWithheld": 0,
+ "chronNull": 0,
+ "ex": [
+  "r3m-village-none-0-1: \"Byung Xu\" shown in the body; its ADD_NPC entry withheld",
+  "r3m-village-occupied-0-5: \"Ahmed al-Isfahani\" shown in the body; its ADD_NPC entry withheld",
+  "r3m-village-wartime-0-9: \"Simeon Kamytzes\" shown in the body; its ADD_NPC entry withheld",
+  "r3m-town-none-0-13: \"Uilleam O'Halloran\" shown in the body; its ADD_NPC entry withheld",
+  "r3m-town-none-0-17: \"Üljeytü Ongut\" shown in the body; its ADD_NPC entry withheld"
+ ],
+ "toothServed": 128,
+ "toothWithheld": 12
+}
