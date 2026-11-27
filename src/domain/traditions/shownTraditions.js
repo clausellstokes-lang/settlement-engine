@@ -27,7 +27,7 @@ import { mergeCustomFoundingTraditions } from './customFounding.js';
 import { describeTraditions, withoutFunction } from './traditionDescription.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { isHideableHouse } from '../people/cardVeil.js';
-import { TRADITION_ELEMENTS } from '../../data/traditionCorpus.js';
+import { TRADITION_ELEMENTS, TRADITION_ACTS } from '../../data/traditionCorpus.js';
 import { filterDeclared } from '../facts/drawDeclared.js';
 import { factsOf } from '../facts/factsOf.js';
 
@@ -53,7 +53,7 @@ const ELEMENT_NEEDS = new Map(TRADITION_ELEMENTS.filter((e) => Array.isArray(e.n
  * act id → the facts it declares. A FAIR IS KEPT WHERE THERE IS A MARKET (NOLANE-2, BAR-169/170): the act `fair` presumes
  * the market the Overview's market line reads (`market`, the vocabulary's market atom). Kind A, display only.
  */
-const ACT_NEEDS = new Map([['fair', ['market']]]);
+const ACT_NEEDS = new Map(TRADITION_ACTS.filter((a) => Array.isArray(a.needs) && a.needs.length).map((a) => [a.id, a.needs]));
 
 /** The facts a generated tradition's motif declares: its element's, and its act's. @param {AnyRec|null|undefined} rec @returns {string[]} */
 export function motifNeeds(rec) {

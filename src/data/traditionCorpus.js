@@ -39,6 +39,7 @@
  * @property {string}   noun     the display noun ("Feast")
  * @property {boolean}  deityFit a devotional act (offering/vigil) — biases deity dedication
  * @property {boolean}  grand    an act that tends to run the grander two-week window
+ * @property {ReadonlyArray<string>} [needs] the facts the act presumes (a fair: the market; NOLANE-2)
  */
 // CENSUS-3b unit 5 (the lane's Phase B 5; R6): the three water-keyed elements DECLARE the water
 // they presume (`needs`, the vocabulary's water atoms: First Landing `navigable` — a coast, a river
@@ -87,7 +88,7 @@ export const TRADITION_ACTS = Object.freeze([
   { id: 'procession', noun: 'Procession', deityFit: false, grand: true  },
   { id: 'vigil',      noun: 'Vigil',      deityFit: true,  grand: false },
   { id: 'contest',    noun: 'Contest',    deityFit: false, grand: true  },
-  { id: 'fair',       noun: 'Fair',       deityFit: false, grand: true  },
+  { id: 'fair',       noun: 'Fair',       deityFit: false, grand: true, needs: Object.freeze(['market']) },
   { id: 'offering',   noun: 'Offering',   deityFit: true,  grand: false },
 ]);
 
