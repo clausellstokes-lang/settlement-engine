@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "ef3e017f7c4a7a37dcf82fb5da7278b69b3a462a",
-  "measuredBy": "LAND-119",
+  "measuredAtSha": "42883b5c4abd020b850eea9dc06ace074f1f2ab4",
+  "measuredBy": "LAND-120R",
   "date": "2026-11-27",
-  "note": "point 119: the cures of the second reader (G72) move the test titles",
-  "files": 3820,
+  "note": "point 120: the stable-pick id guard and the re-pointed rows of D13 and OWED-CURE move the files and test titles",
+  "files": 3822,
   "parked": 509,
-  "credited": 3311,
-  "titles": 32043,
-  "suiteTitles": 8913
+  "credited": 3313,
+  "titles": 32074,
+  "suiteTitles": 8917
 }
