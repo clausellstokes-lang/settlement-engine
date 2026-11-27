@@ -83,3 +83,8 @@ THE NEXT COMMAND: read each child's first report as it lands; relay the chair's 
   it 0 wrong, else every such row; (B) after the cause by key). PG's ORDERS MEANWHILE: M1 the interval test counted, M2 the cause by key
   (the record's own laws as cure E; engine drift traced; any served field that tells a master-born record), M3 the totality arm and plant.
   PG waits for my "BAND-RULE: ..." before building V29 (1).
+- 2026-11-27T23:47:23Z: MC (CONFIRMED by it; PLAUSIBLE to me; files on `lane/veil-56-2026-11-27-mc-docs`): (1) `mc/B-STEPS-RERUN.md` c171332ac:
+  unit 3's 140-member map 63.1 s unmarked / 61.4 s marked (VEIL-52: 68.0 / 62.6), call counts equal; ON THE TIP the unmarked map is 15.6 s:
+  unit 3's default veil (VR23) costs x4.1. (2) `mc/LOCK.md` f6d7212ca: V28 (8)'s LOCK IS REAL: 8 readers of one 20-member map finish in
+  series (5.9 s to 50.9 s); with the view-count UPDATE moved after the read (a one-line local trial) 4 readers all in about 6.6 s, 8 in
+  13.5 s (CPU-bound), the count still right; master's 088 has the same line first. Its cure goes into `mc/PROPOSAL.md` for the chair.
