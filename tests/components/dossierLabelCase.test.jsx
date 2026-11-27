@@ -460,6 +460,25 @@ describe('a hook source is a name or a token, and the card may not confuse the t
     cleanup();
   }, 60000);
 
+  test("the session sheet's Threads to pull heading keeps an NPC's own spelling (R3, RULING-R, the eleventh chair)", () => {
+    // R-MEASURE R3 (session sheet): this heading still ran `hook.source` through `tokenCase`, so 892 of 900 sheets read
+    // "Zhong wu" for Zhong Wu. It takes `nameOrTokenCase`, as the Plot Hooks card above does.
+    // The Tonight sheet takes the first hooks and the panel prints the rest, so the town holds more than the sheet takes.
+    const people = ['Sita Goswami', 'Zhong Wu', 'Mara Vell', 'Oswin Hale', 'Ilse Brand', 'Tomas Reed'];
+    const town = {
+      ...HOOK_SOURCE_TOWN,
+      npcs: people.map((name, i) => ({ name, role: 'Mayor', plotHooks: [`Hook ${i + 1} of ${name}, who will not say why.`] })),
+      economicViability: { plotHooks: ['trade_route', 'trade_route', 'trade_route'].map((category, i) => ({ hook: `The caravans have stopped, ${i + 1}.`, category })) },
+    };
+    const { container } = render(<SessionMode settlement={town} onClose={() => {}} />);
+    const headings = [...container.querySelectorAll('#sf-session-hooks span')].map((el) => (el.textContent || '').trim());
+    const personHeads = headings.filter((h) => people.some((p) => p.toLowerCase() === h.toLowerCase()));
+    expect(personHeads.length, 'the Threads to pull section rendered no NPC hook heading').toBeGreaterThan(0);
+    // anchored: the line above proves an NPC hook's heading rendered, so the check below is not vacuous.
+    expect(personHeads.filter((h) => !people.includes(h))).toEqual([]);
+    cleanup();
+  }, 60000);
+
   test('nameOrTokenCase cases a token and hands a written name straight back', () => {
     expect(nameOrTokenCase('trade_route')).toBe('Trade route');
     expect(nameOrTokenCase('npc')).toBe('NPC');

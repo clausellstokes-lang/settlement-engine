@@ -39,7 +39,7 @@ import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 import { composeTonightSheet, TONIGHT_COPY } from '../../domain/summary/tonightSheet.js';
 import TonightSheet from '../TonightSheet.jsx';
 import EconomyFreshnessNote from '../new/EconomyFreshnessNote.jsx';
-import { tokenCase } from '../new/labelLadder.js';
+import { nameOrTokenCase, tokenCase } from '../new/labelLadder.js';
 import { collectPlotHooks, PLOT_HOOK_CATEGORIES } from '../../domain/dossier/plotHooks.js';
 import { settlementWarStatus, settlementWarExhaustion, warExhaustionBand } from '../../domain/display/warStatus.js';
 import { settlementMobilization } from '../../domain/display/mobilizationStatus.js';
@@ -430,7 +430,7 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
                   return (
                     <Card key={i} accent={cat.color}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 8, marginBottom: 2 }}>
-                        <span style={{ fontFamily: serif, fontWeight: 700, fontSize: FS.md, color: INK, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{tokenCase(hook.source)}</span>
+                        <span style={{ fontFamily: serif, fontWeight: 700, fontSize: FS.md, color: INK, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{nameOrTokenCase(hook.source)}</span>
                         {/* The same 'NPCs' -> 'NPCS' break as PlotHooksTab's badge, on the DM-screen twin. */}
                         <span style={{ fontSize: chromeFontSize(FS.nano, mobile), fontWeight: 800, color: cat.color, flexShrink: 0 }}>{tokenCase(cat.label)}</span>
                       </div>
