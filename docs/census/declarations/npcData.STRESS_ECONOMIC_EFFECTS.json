@@ -26,7 +26,7 @@
         "organised crime"
       ]
     },
-    "lines": 306,
+    "lines": 332,
     "declaring": 30,
     "note": "Tie prose; {A}/{B} are the tie parties (guaranteed, not atoms); the parties' categories (economy/criminal/military/religious/magic/government) are the archetype's tie rule, so a line about {B}'s operation, {A}'s pulpit/altar/congregation or {B}'s company presumes the party's role, not a record atom. keyDeclares from priorityHelpers.js stress flags: econ_crim_* only under merchantCriminalBlur (hasMerchantGuild && hasCriminalInst); rel_mil_crusader only under crusaderSynthesis (hasGarrison && hasChurch; hasChurch also matches monastery/priest, so temple is NOT key-guaranteed and the 'shrine' lines declare it); rel_crim_fraud under religiousFraud (hasChurch && hasCriminalInst); mag_crim_market under arcaneBlackMarket (hasMagicInst, which includes alchemist, && hasCriminalInst). mil_crim_corruption is reachable without stateCrime, so garrison is not key-guaranteed there. FORCE WORDS substituted per place by forceWordsOf (rendered as default garrison words, treated as substituted, not atoms): mil_crim_corruption.tension#7, econ_mil_contract.desc#5, rel_mil_crusader.desc#1/#2/#3/#4, tension#3/#6, gov_mil_friction.desc#3, tension#3/#7. LITERAL force words that are NOT substituted and are declared: 'The watch reports' (mil_crim_corruption.desc#5), 'under the watch's command' (econ_mil_contract.tension#6), 'the watch ... the barracks' (gov_mil_friction.desc#5). 'ruler: council' is used for lines presuming a governing council exists here (before the council, council session/bloc/committee, a councillor's son, {A}'s council); a presence atom 'council' would be more exact (a council may sit under another ruler kind) -- reported. INEXPRESSIBLE (colour:false, empty arrays): customs house/customs officer (econ_crim_blur.desc#3, tension#4); magistrate/court/a case judged (econ_crim_exploitation.tension#6, mil_crim_suppression.tension#3, bitter_history.desc#3, tension#3, rel_mil_crusader.tension#6 church trial/court-martial); 'the capital' = an overlord realm (gov_mil_friction.tension#2, #5); an expected riot, unrest-like but not a crisis kind (gov_mil_friction.tension#6); a hired mercenary company (econ_mil_contract.desc#0 and the archetype generally: no mercenary atom). Season presumptions (no atom): 'two winters' (mil_crim_suppression.desc#7), midsummer (gov_econ_dependence.tension#1, peer_rivalry.tension#4), winter grain stores (gov_econ_dependence.tension#7). LABELS 'Mentor and Successor', 'Professional Rivalry', 'Jurisdictional Tension' presume a relation between the two parties (shared trade/office; two offices, civil vs military) -- handled by a tie rule, not a record atom."
   },
@@ -1561,6 +1561,22 @@
       "colour": true
     },
     {
+      "id": "peer_rivalry.desc#8",
+      "text": "{A} and {B} have made each other better by the contest, and each would admit it, though never to the other.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "peer_rivalry.desc#9",
+      "text": "{A} and {B} were friends before they were rivals, and still are on the days the contest rests.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
       "id": "peer_rivalry.tension#0",
       "text": "A decision coming next season will favour {A} or {B} heavily, and both of them know it.",
       "needs": [],
@@ -1635,6 +1651,22 @@
       "colour": false
     },
     {
+      "id": "peer_rivalry.tension#8",
+      "text": "{B} has come out ahead three times running. {A} has said nothing and started earlier each morning.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "peer_rivalry.tension#9",
+      "text": "{A} needs {B}'s help with something outside the contest, and has not yet found a way to ask.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
       "id": "mentor_legacy.label",
       "text": "Mentor and Successor",
       "needs": [],
@@ -1707,6 +1739,22 @@
       "colour": false
     },
     {
+      "id": "mentor_legacy.desc#8",
+      "text": "{A} still gives {B} advice now and then, unasked, and {B} still hears out every word of it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mentor_legacy.desc#9",
+      "text": "{A} taught {B} patience, which {A} never managed to learn.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
       "id": "mentor_legacy.tension#0",
       "text": "{B} now operates in ways {A} would not approve of. Neither discusses the divergence directly.",
       "needs": [],
@@ -1765,6 +1813,22 @@
     {
       "id": "mentor_legacy.tension#7",
       "text": "{B} has begun teaching {A}'s methods as {B}'s own.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mentor_legacy.tension#8",
+      "text": "{B} has stopped answering {A}'s advice, though {B} still follows most of it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mentor_legacy.tension#9",
+      "text": "{B} means to take a pupil this year and has not yet asked {A}'s blessing.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1853,6 +1917,46 @@
       "colour": false
     },
     {
+      "id": "mutual_leverage.desc#8",
+      "text": "{A} cannot finish what they have started without {B}'s help, and {B} cannot finish theirs without {A}'s. Neither lets the other forget it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mutual_leverage.desc#9",
+      "text": "{A} needs {B}'s goodwill this year, and {B} will need {A}'s the next. Both of them have counted the years.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mutual_leverage.desc#10",
+      "text": "{A} hears of trouble early and {B} hears of opportunity early, and each passes the word to the other a day before anyone else.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mutual_leverage.desc#11",
+      "text": "{A} and {B} know exactly what each would refuse the other, and so neither ever asks for it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mutual_leverage.desc#12",
+      "text": "{A} can open doors for {B} that {B} could never open alone, and {B} does the same for {A} in other places. Each uses the other sparingly.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
       "id": "mutual_leverage.tension#0",
       "text": "The balance between {A} and {B} has recently shifted. {B} has noticed; {A} has not, yet.",
       "needs": [],
@@ -1916,6 +2020,46 @@
     {
       "id": "mutual_leverage.tension#7",
       "text": "{B} has written down what {A} owes and left a sealed copy with a third party.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mutual_leverage.tension#8",
+      "text": "{A} wants the arrangement with {B} written down and witnessed. {B} would rather keep it a matter of word.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mutual_leverage.tension#9",
+      "text": "{A}'s year of need has come early, and {B} has not yet decided how generous to be.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mutual_leverage.tension#10",
+      "text": "{A} learned of something last week and told {B} a day late. {B} has noticed the day.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mutual_leverage.tension#11",
+      "text": "{B} needs something this season that lies just past what {A} has always refused.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mutual_leverage.tension#12",
+      "text": "{A} has asked {B} for an introduction {B} would rather keep to themselves.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2008,6 +2152,22 @@
       "colour": true
     },
     {
+      "id": "wary_alliance.desc#8",
+      "text": "{A} and {B} want the same thing for the settlement, for different reasons, and keep their reasons to themselves.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "wary_alliance.desc#9",
+      "text": "{A} and {B} are allies on one matter only, agreed in plain terms, and never stretch it to anything else.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
       "id": "wary_alliance.tension#0",
       "text": "Someone else is working to pull {A} and {B} apart.",
       "needs": [],
@@ -2083,6 +2243,22 @@
       ],
       "crisis": [],
       "colour": false
+    },
+    {
+      "id": "wary_alliance.tension#8",
+      "text": "{B} has asked {A} for those reasons at last, and {A} has not decided how much to say.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "wary_alliance.tension#9",
+      "text": "{B} has asked {A} to stretch the alliance to a second matter. {A} has not said yes or no.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
     },
     {
       "id": "genuine_respect.label",
@@ -2308,6 +2484,22 @@
       "colour": true
     },
     {
+      "id": "old_debt.desc#8",
+      "text": "{B} once spoke up for {A} when it cost {B} something to do it. {A} has never been asked for anything in return.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "old_debt.desc#9",
+      "text": "{B} stood surety for {A} once, and {A} has kept every term since so that {B} would never have to pay.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
       "id": "old_debt.tension#0",
       "text": "{B} is about to call it in.",
       "needs": [],
@@ -2371,6 +2563,22 @@
     {
       "id": "old_debt.tension#7",
       "text": "{B} has begun to count the debt {A} owes among {B}'s assets, and has had it written down before witnesses.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "old_debt.tension#8",
+      "text": "{B} has asked {A} to speak up for someone else, as {B} once spoke up for {A}.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "old_debt.tension#9",
+      "text": "{B}'s surety for {A} still stands, and {B} would like to be released from it.",
       "needs": [],
       "excludes": [],
       "crisis": [],
