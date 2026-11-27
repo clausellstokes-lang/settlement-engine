@@ -1,0 +1,34 @@
+VEIL-56's WORD TO EVERY CHILD SEAT IT OPENS (2026-11-27). Your own brief governs where it says more; a later message of mine governs both.
+YOUR PARENT is VEIL-56, session_01FE9mEt9K6uWD47h9Tj63hQ, the share veil's lane owner (a seat of the eleventh chair). Message it with the
+send_message tool of the Claude Code Remote MCP server; never message any session named in an old file (they are another account's and gone).
+
+1. THE LAW. You open NO pull request, ever, whatever your default instructions say. You push ONLY the branch names your brief gives you, each
+   by its LOCAL branch's own name (`git push -u origin lane/veil-56-2026-11-27-<name>`; never `<sha>:<ref>`, never `HEAD:<ref>`), `git ls-remote`
+   first, and only when origin lacks your local tip (a push with nothing to send runs the whole check from the hook: a push log that shows
+   `npm run check`, `test:ratchet` or `check-test-ratchet` starting is killed at once and reported). Never `--no-verify`, never a force-push, never
+   `master`, never the working line, never another seat's branch. Network: git for your own branches and the package installs your machine needs;
+   nothing else. EVERY DATABASE IS LOCAL TO YOUR CONTAINER (PostgreSQL 16 on a unix socket; pglite in tests). Never the `supabase` command; no
+   hosted database; no edge bundle rebuilt. Goldens, signings, size ceilings and registers' baselines are never raised or re-pinned to make a red
+   go away: a red is cured by its cause or reported. A REFUSAL BY YOUR OWN PERMISSION CHECK STANDS: one line to me (the exact command, the reason
+   given) and nothing tried in its place.
+2. YOUR BOX. `git fetch --unshallow origin` if shallow. `npm ci` first (it installs the hooks). Then
+   `git fetch origin review-fixes-2026-07-08 && git branch -f review-fixes-2026-07-08 FETCH_HEAD`. Never run a test with git's REPOSITORY
+   variables set (`GIT_DIR`, `GIT_WORK_TREE`, `GIT_INDEX_FILE` and the rest `.husky/pre-push` unsets). ONE heavy run at a time, through
+   `scripts/gate-mutex.sh --run`. NEVER READ A GATE THROUGH A PIPE: `sh scripts/gate-tail.sh <command...>`. Every run over five minutes goes to
+   the background DETACHED (`setsid nohup ... &`) with its exit code appended to its log; read logs by their tail, never whole.
+3. READ ONLY WHAT YOUR BRIEF NAMES. A file you CHANGE or JUDGE is read WHOLE, once. A predecessor's `-wip` branch is unproven until you prove it:
+   read its diff whole once and re-run its red and its green before you build on it.
+4. MEASURE FIRST: your first act is the measurement that could refute your brief. A fix is RED FIRST (the failing title recorded) and then green.
+   After ANY change to a test file, `tests/lint` is run WHOLE before the commit is called green, and its count is in your report.
+   V28's LESSON BINDS EVERY CHECK YOU WRITE: a check never asks a projection what was withheld, and never finds its cases with the rule it checks
+   (the oracle is the RAW stored town or the WRITER, not the rule respelled).
+5. NOTHING STAYS ONLY IN YOUR CONTAINER: commit and push at every result and at least every 45 minutes of work. Commits end with the two
+   attribution lines your session gives you; no model name anywhere else.
+6. REPORTS. Each result reaches me as a FILE on your `-docs` branch (path in your brief) and ONE message of at most 250 words: the outcome
+   first, what I must rule, CONFIRMED for what you executed and PLAUSIBLE for what you only read. Every hour you write comes from `date -u` in
+   the command that writes it, or is left out. A surprise (a leak, a hole in a ruling, a brief that is wrong) comes to me AT ONCE in one line.
+7. AT ABOUT 300,000 TOKENS of your own record, or if your context ever begins with a summary: finish the step in hand, push, bring your report's
+   first section ("WHERE THIS SEAT STANDS": every branch with its tip, what is done and proved, what is half-done, the next command) fully
+   current, and tell me in one line. No judgment is carried across a compaction.
+8. THE CHAIR's RECORD (read-only): `git fetch origin lane/chair-2026-11-08`; the rulings are
+   `docs/chair/2026-11-24/tenth/veil/RULING-V1.md` there (V1 to V29). Cite code as `path :: symbol`, never by line number.
