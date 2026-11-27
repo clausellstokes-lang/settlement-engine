@@ -15,7 +15,7 @@ import { describe, expect, test, beforeAll } from 'vitest';
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import {
-  BASELINE_REL, ROOT, VIABILITY_FILE_REL, VIABILITY_SCOPE, baselineProblems, dailyLifeTreeOf, doorPlan, findings,
+  BASELINE_REL, DAILY_LIFE_EXPORTS, ROOT, VIABILITY_FILE_REL, VIABILITY_SCOPE, baselineProblems, dailyLifeTreeOf, doorPlan, findings,
   fingerprintOf, readBaseline, readTree, viabilityRowsIn, viabilityTreeOf,
 } from './stablePickIds.shared.mjs';
 
@@ -159,7 +159,7 @@ describe('guard-the-guard: the Daily Life faults', () => {
     const whole = dailyLifeTreeOf({ 'y.js': { DAWN_WORK: { food: [{ id: 'F1', text: 'a' }] } }, 'z.js': {} }, { whole: true }).problems.join('\n');
     expect(whole).toMatch(/z\.js: a pool file that holds no line/);
     expect(whole).toMatch(/GATHERING_PLAIN: read 0 times/);
-    expect(whole).not.toMatch(/DAWN_WORK: read/);
+    expect(whole.match(/: read 0 times/g)).toHaveLength(Object.keys(DAILY_LIFE_EXPORTS).length - 1); // DAWN_WORK, read once, is not among them
   });
 });
 
