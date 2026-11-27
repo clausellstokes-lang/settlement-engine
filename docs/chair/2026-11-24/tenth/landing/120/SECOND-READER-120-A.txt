@@ -1,0 +1,24 @@
+THE SECOND READER ON POINT 120 (STABLE PICKS), its report as received
+
+READER 120. Tip 1d792721a7, unchanged. 2,160 dossiers (C, V, 360 master-born) rendered on base and tip; 28 planted bundles on C. NO VITEST: the builder's gates held the mutex from 05:38; walker verdicts by its instruments and door. Worktrees removed.
+
+FINDINGS, each CONFIRMED by execution
+1. tests/lint/stablePickIds.shared.mjs :: findings holds ids, not the line each names. gathering_places|plain: a line inserted as P3, P3..P11 renumbered P4..P12: one red, "unbanked P12"; door "+1 added"; green. 100 of C's 190 towns move, 94 between old lines (appended as P21: 12). P1/P2 swapped: green; 17 towns print the other's words.
+2. :: viabilityIdsIn reads one-line literals: a second 'SS1' over several source lines: 22 ids seen, green; pickRendezvous takes the first of a shared id: 96 towns print "... keeps itself."
+3. scripts/stable-pick-ids-door.mjs with no baseline file writes one, `retired` empty ("+636 added"): retired P9 reused, green.
+4. Tests' own rows over mutant bundles: tailDefeconDisplayLines GONE #14073, #14072, #14075 now sit on DC1/DC2 towns: DC4 back to "Much of what" passes on tip, reds 3 rows on base. close7Mirror (d): deriveFoodCulture dropping C7 passes on tip (V dp-thorp-70 prints C2), reds on base.
+5. Kernel (no page draws a joint: 0 of 2,160): composeStateProse.js :: drawConnective, keyed by text: "Also," re-worded moves 457 of 900 joints, 164 that drew another phrase; base 275.
+6. The shared page prints a STORED verdict (publicProse, viewModel:viability; lib/saves.js :: publicProseForRow): a base stamp read by the tip, 34 of 60 shared pages differ from the owner's. No master save has a stamp.
+7. Viability lines moved: C 464, V 469, master-born 179; G76 says 233 and 246.
+
+(1) Deterministic; my argmax agrees on 25,845 picks; tie: smaller id by string; empty: undefined; falsy key, shared or missing id: list order. C: 246 lines admitted in 50+ towns, none undrawn, none over 3x. Pools on one key, slots: independent (chi-square 13.1 on 12; 66.9 on 64).
+(2) Index draws on family keys 0; keys equal; admitted sets equal on 23,395 keys; words byte-equal.
+(3) Renumbering and a shared id pass (1, 2); reuse and removal red; the door frees ids (3).
+(4) Tip moved = should, none wrongly [base]: undrawn B13 removed 0 [15]; B12 removed 35 [328]; B99 added 29 [327]; B5 re-worded 27 [25]; B3 narrowed 18 [317]; SS4 removed 124 [210]; SS6 added 87 [261]; SS1 re-worded 96 [122]; SS5 narrowed 27 [56].
+(5) Records 0, 0, 0. Outside the families 0 (tabs, PDF, Foundry, projection). Daily Life 6.5, 6.8, 6.8 a town; connectives 0.
+(6) Player view, fresh shared page, PDF, Foundry, AI grounding: 0 differ. No pulse reader.
+(7) A sentence twice: 0, 0; page census, viability false table: none new.
+(8) Finding 4; dailyLifeGathering's named branch rests on an atom.
+(9) Unsaid: eight pool headers name the old pick; the walker pins 22. Render 165.6 ms against 166.9.
+NOT CHECKED: tests, gates; a browser; advance time; the edge bundle. A chained `sleep` was blocked; I waited on conditions instead.
+Evidence: scratchpad/reader8/out
