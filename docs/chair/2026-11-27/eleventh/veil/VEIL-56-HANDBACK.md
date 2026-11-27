@@ -99,3 +99,10 @@ THE NEXT COMMAND: read each child's first report as it lands; relay the chair's 
   13.5 s (CPU-bound), the count still right; master's 088 has the same line first. Its cure goes into `mc/PROPOSAL.md` for the chair.
 - 2026-11-27T23:48:23Z: THE CHAIR's ORDER ON THE ALLOWANCE relayed to all four (U3R, U45: push at every step, a state section current; U3R's `galleryImportEqualsRead` struck from its proofs, taken at the pool proof; PG, MC: finish the measure in hand, state note, STOP).
 - 2026-11-27T23:49:14Z: RULING V31 taken and relayed (PG: M1 then M2, then STOP; MC: the 200-word proposal in its state note, then STOP).
+- 2026-11-27T23:49:44Z: PG, V29 (2)'s PLANT MEASURED (`-pg-docs` 241754fb4; CONFIRMED by it, towns of 140 born today / on master, a served document
+  with every re-derived key absent): the Defense threat-row badge reads "Critical" 112 / 106 (`DefenseTab`, `threatScores[label]||0`);
+  the Overview systems-health badge "Critical" 103 / 101 (`OverviewTab :: ScoreRow`, `score||0`); Foundations "Infrastructure condition"
+  "Adequate" for "Surplus" 69 / 87. THREE GUARDS OWED (V29 (2): a reader that prints a band from nothing gets its own guard), red first, AT
+  "GO PG". PLAUSIBLE, NOT MEASURED, FOR PG's RESUMPTION: a Defense sentence ("What goes wrong at <town> goes wrong one thing at a time ...")
+  printed from an ABSENT crime list on 2 towns; the list is absent BY DESIGN on default-veil pages, so it may be a wrong line on real shares:
+  measure it there first.
