@@ -299,3 +299,46 @@ the scratch is on my container only and goes with it.
   walked 900/900 and 900/900; Foundry 900/900; AI grounding 900/900. The same as C.
 - Every worktree I made is removed (`git worktree remove --force`: chair, base, reader120, guardp, r8) and the master archive deleted; the main
   checkout is clean on `lane/reader-120r-2026-11-27`. Nothing of the two judged branches was changed; no branch but mine was pushed; no pull request.
+
+## AFTER THE CHAIR'S TWO MESSAGES (read at 19:13 UTC; queued 17:53 and 18:54: they reached me only after my report was sent)
+Message 1 gave the whole-suite count of stale rows at df0401af6 (24 in nine tests/domain files: the same 24 and the same per-file figures as my own
+run of the base's tests on the tip) and asked whether the ORACLE rows can still fail. Message 2 named the builder's table and one thing to confirm or
+refute. I fetched the chair's branch (53af08688) and read ONE file of it, `landing/120/repointed.tsv`; nothing else of its new commits.
+
+### (8) AGAIN, WITH THE BUILDER'S OWN TABLE — CONFIRMED (`scripts/q8-builder.mjs`; /home/user/r8 re-made = 80b133cae merged with 30539f145)
+- The table: 24 rows, 13 mutants (its M1 to M12 and M15). Each mutant planted by me as the table words it, the row's file run, the row found BY ITS
+  FULL TITLE: 24 of 24 RED; in all 24 my red line is the line the builder wrote down. ROWS THAT DO NOT RED UNDER THEIR MUTANT: 0.
+  (M1 idOf -> the line's text: 8 rows; M2 the second pick's id with a '~': 1; M3 DC2's old words: 1; M4 DC4 "Much of what": 3; M5 / M6 DC3's gate
+  true / false: 1 + 1; M7 SS4 "buys in all of what": 1; M8 SS5 "needs is bought in": 1; M9 K1's row deleted: 3; M10 F6 loses its excludes: 1;
+  M11 / M12 the deriver drops C7 / F6: 1 + 1; M15 Gathering always 'named': 1.)
+- THE ORACLE ROWS (the chair's question): they CAN fail for a wrong pick in the SOURCE: with `pickNameable` set back to the modulus (my M10a) all
+  eight red (the three "the pick is" rows; dailyLifeFoodResentments; dailyLifeNoRepeat (b); the three of dailyLifeOutsiderUnspokenRecent); with the
+  second pick set back to the modulus (my M11a) the outsider row reds; with the wrong id or key (my M10b, M10c, M11b; the builder's M1, M2) they red.
+  They CANNOT fail for a fault INSIDE `pickRendezvous`: with the helper taking the lowest hash (my M15) all six oracle files stay green, because the
+  oracle calls the same function. That fault is held by tests/kernel/pickRendezvous.test.js (3 red) and by the seated rows (close7Mirror 8,
+  tailDefecon 7). It was so on the base (the oracles called `pickVariantMixed`): not a loosening.
+
+### (5) THE "PATRON DEITY" BLOCK — THE BUILDER'S ACCOUNT CONFIRMED, AND MADE EXACT (page battery; `out/pd/`)
+- The block is two lines on the Power view: "Patron deity" and "Assign a patron god to awaken the settlement's religion layer. Upgrade to premium…".
+  It is `src/components/settlement/DeityAssignmentPanel.jsx`, mounted LAZY under `<Suspense fallback={null}>` (`OutputContainer.jsx:720`,
+  `dossier/dossierLazyTabs.js:37`). The walk (`tests/components/pageCensusWalk.shared.mjs :: walkDossier`) waits for a panel to hold 15 characters,
+  not for a lazy child, so THE FIRST DOSSIER A RENDER PROCESS DRAWS can be read before the panel's module has loaded. None of these files is in the
+  diff (`git diff 1f946c43f1 <tip>` over them: empty).
+- IN MY OWN 900-TOWN RUNS (4 workers): C: the block is missing on dp-thorp-0, 1, 2, 3 (each worker's first dossier) on the BASE AND ON THE TIP ALIKE,
+  present on the other 896; V: missing on dp-thorp-1 alone, on both trees. So my "0 lines outside the families" stands as measured, but it stood on
+  the race falling the same way on both trees. The same record on the SAME tree: C dp-thorp-0 on the tip prints the block in my 12-town run and not
+  in my 900-town run (record hash equal; those two lines the only difference in the whole dossier).
+- CONTROLLED (8 thorps dp-thorp-0..7, two orders X = 0..7 and Y = 4..7,0..3, base and tip, twice each, 4 workers): the block is missing in 13 of the
+  32 renders that were a worker's first dossier and in 0 of the 32 that were not; never on any other town. Base against tip in the same order: 4
+  lines differ in one pair (dp-thorp-1, dp-thorp-3) and 2 in another: every one a line of this block. The same tree in two orders: 10 lines, all of
+  this block. With one worker on an idle machine the first dossier printed it in 8 of 8 runs: it is a race under load, by which dossier is first.
+- THE MECHANISM PROVEN: in a scratch copy of the battery's renderer I load the panel's module before the first dossier (one line): the block prints
+  in 64 of 64 renders; base against tip, any order: 0 lines differ outside Daily Life and the Outlook (114 inside); one tree in two orders: 0.
+- SO: the builder's four lines are the measuring harness's (a lazy panel the walk does not wait for), on the base as on the tip; NOT a line this
+  change moves. Seen beside it, not this point's: any gate that hashes a whole walked page can differ on a process's first dossier.
+
+## THE REPORT, REVISED (19:3x UTC)
+`SECOND-READER-120R.txt` now carries the two answers above ((5) the Patron deity block; (8) the builder's table, 24 of 24 red; the oracle rows) in
+place of some detail that stays in these notes (finding 3's two riders: hand-deleted present ids re-banked, a non-JSON baseline exits 1; my plants
+"order reversed 0 [333]" and "second-pick option refused 70 [92]"; my own 21 mutants and M13b, the one no row reds, which moves 0 of 1,800 towns).
+497 words. The verdict and the four findings are unchanged. Of the chair's commits after 87e8a9009 I read one file, `landing/120/repointed.tsv`.
