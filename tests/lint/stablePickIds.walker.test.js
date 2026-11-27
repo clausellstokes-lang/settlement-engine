@@ -8,15 +8,19 @@
  * `./stablePickIds.shared.mjs`, whose head says what the guard is FOR and what it DOES NOT CATCH. The one door is
  * `node scripts/stable-pick-ids-door.mjs` (`--write` to add, retire, or re-bank a re-wording; it never makes a baseline).
  *
+ * The imported pools (point 121) are read by a PLAIN-NODE child of the door (`--print-tree`), never by this file's own
+ * import under the test loader, so a `say` frame's fingerprint is one in the door and here (RULING 121-6).
+ *
  * The tree arms below read the real tree; the guard-the-guard arms plant each fault in memory, through the SAME
  * functions, and hold the verdicts to it.
  */
 import { describe, expect, test, beforeAll } from 'vitest';
-import { existsSync } from 'node:fs';
+import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import {
   BASELINE_REL, DAILY_LIFE_EXPORTS, IMPORTED_POOLS, ROOT, VIABILITY_SCOPE, baselineProblems, dailyLifeTreeOf, doorPlan,
-  findings, fingerprintOf, idProblem, importedPoolsTreeOf, readBaseline, readTree, viabilityRowsIn, viabilityTreeOf,
+  findings, fingerprintOf, idProblem, importedPoolsTreeFromChild, importedPoolsTreeOf, readBaseline, readTree, viabilityRowsIn, viabilityTreeOf,
 } from './stablePickIds.shared.mjs';
 
 /** @typedef {import('./stablePickIds.shared.mjs').Tree} Tree */
@@ -24,7 +28,9 @@ import {
 
 /** @type {Tree} */ let tree;
 /** @type {Baseline | null} */ let baseline;
-beforeAll(async () => { tree = await readTree(ROOT); baseline = readBaseline(ROOT); });
+// ONE RUNTIME (RULING 121-6): the imported pools are read by a PLAIN-NODE child of the door, never by this file's own
+// import under the test loader (which rewrites an imported binding inside a `say` frame's source)
+beforeAll(async () => { tree = await readTree(ROOT, { importedFromChild: true }); baseline = readBaseline(ROOT); }, 60_000);
 
 /** @param {string} kind */
 const ofKind = (kind) => (baseline ? findings(tree, baseline).filter((f) => f.kind === kind).map((f) => `${f.scope} ${f.id}: ${f.detail}`) : ['the baseline is absent']);
@@ -371,6 +377,51 @@ describe('guard-the-guard: an id is a non-empty string with no space at either e
       expect(doorPlan(pools, BANK).next, JSON.stringify(id)).toBeNull();
       // the viability rows: their id form already refuses it
       expect(viabilityRowsIn(plant(`    [${JSON.stringify(id)}, \`\${town} keeps itself.\`],\n`)).problems.join('\n'), JSON.stringify(id)).toMatch(/a row whose id is not of the id's form/);
+    }
+  });
+});
+
+// ── GUARD-THE-GUARD: ONE RUNTIME, the imported pools read by a plain-node child (RULING 121-6) ─────────────────────────
+
+describe('guard-the-guard: a `say` frame is fingerprinted as plain node prints it, the same in the door and the walker', () => {
+  const FIXTURE_REL = 'tests/lint/fixtures/stablePickIdsSay.fixture.mjs';
+  const ONE = /** @type {ReadonlyArray<ImportedPool>} */ ([{ module: FIXTURE_REL, export: 'FRAMES', scope: 'fixture.FRAMES', layout: 'flat', words: 'say' }]);
+
+  test('a frame naming an imported binding, its block body without a semicolon: the child reads the source as written, twice alike', async () => {
+    const read = () => importedPoolsTreeFromChild(ONE, { args: [FIXTURE_REL, 'FRAMES'] });
+    const [first, second] = [read(), read()];
+    expect([first.problems, second.problems]).toEqual([[], []]);
+    const fp = first.scopes.get('fixture.FRAMES')?.[0]?.fp;
+    expect(fp).toMatch(/^[0-9a-f]{12}$/);
+    expect(second.scopes.get('fixture.FRAMES')?.[0]?.fp).toBe(fp);
+    // the source as written in the file (plain node's String(fn)), with no loader's rewriting
+    const text = readFileSync(join(ROOT, FIXTURE_REL), 'utf8');
+    const start = text.indexOf('(/** @type {string} */ s) => {');
+    const asWritten = text.slice(start, text.indexOf('\n  } }),', start) + 4);
+    expect(asWritten).toMatch(/basename\(s\)\n {4}return/);
+    // anchored: the slice is the frame itself (its imported call, no semicolon), held on the line above
+    expect(asWritten).not.toMatch(/__vite_ssr_|__vi_/);
+    expect(fp).toBe(fingerprintOf(asWritten));
+    // the trap is real: this file's own import, under the test loader, spells the frame otherwise
+    const loaded = String((await import('./fixtures/stablePickIdsSay.fixture.mjs')).FRAMES[0].say);
+    expect(loaded).toMatch(/__vite_ssr_/);
+    expect(fingerprintOf(loaded)).not.toBe(fp);
+  });
+
+  test('FAIL-CLOSED: a child that exits non-zero, prints nothing, prints no JSON, or reads fewer scopes than the table is red, its stderr named', () => {
+    const dir = mkdtempSync(join(tmpdir(), 'stable-pick-ids-child-'));
+    try {
+      /** @param {string} name @param {string} body @returns {string} */
+      const door = (name, body) => { const f = join(dir, name); writeFileSync(f, body); return f; };
+      const said = (/** @type {string} */ f) => importedPoolsTreeFromChild(ONE, { door: f }).problems.join('\n');
+      expect(said(door('exit.mjs', "process.stderr.write('boom'); process.exit(3);\n"))).toMatch(/exited 3 .*stderr: boom/);
+      expect(said(door('empty.mjs', '\n'))).toMatch(/printed nothing/);
+      expect(said(door('text.mjs', "process.stdout.write('not json');\n"))).toMatch(/printed no JSON/);
+      expect(said(door('shape.mjs', "process.stdout.write('[1]');\n"))).toMatch(/JSON that is not a tree/);
+      expect(said(door('few.mjs', "process.stdout.write(JSON.stringify({ scopes: [], problems: [] }));\n"))).toMatch(/read 0 scopes where the table names 1/);
+      expect(said(join(dir, 'absent.mjs'))).toMatch(/exited 1 .*stderr: .*Cannot find module/s);
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
     }
   });
 });
