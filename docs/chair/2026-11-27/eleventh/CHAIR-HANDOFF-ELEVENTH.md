@@ -420,3 +420,27 @@ See section 4, newest last.
   elsewhere without a row is not seen).
 - **E16: ACCEPTED.** PUSHED AS TRANSPORT. READER 121 was sent it as a tenth question (by message): its own plants on the
   imported pools, and WHETHER EVERY POOL ON THE RANKED PICK IS IN THE TABLE.
+
+## V18 (20:25 UTC on 2026-11-27): POINT 120 LANDED: THE LINE IS 682667fe2bbfc614be8185668119c638b2e3cf71
+- **THE WHOLE SUITE AT 360e716c2, FOUR SHARDS (LAND120; 19:36 to 20:19 UTC):** 3,822 files, 43,889 tests, 57 failed: ALL 57 ON
+  THE LIST, NONE NEW; the four owed rows green. (`shards/results/LAND120-on.tsv`; `LAND120-new.tsv` is empty.)
+- **THE LINE MOVED AT 20:24 UTC ON 2026-11-27**, a fast-forward 1f946c43f1..682667fe2 (the row and "THE GATE OF POINT 120" in
+  `docs/chair/2026-11-17/sixth/LANDINGS-SIXTH.md`; the landing itself its parent 360e716c2, also
+  `lane/stack-120-wip-2026-11-27`). The hook ran (the type ratchet, the strict check, the linter). ON THE OWNER'S WORD OF
+  THIS SESSION (V4).
+- THE RECORDS: `ci/RED-AT-LINE.tsv` 71 rows (four leave; none new); `ci/LINE-NOW.md` at point 120, its CI bullet NOT YET
+  READ; the reader's report and notes in `landing/120/`; the builder's mutant table beside them.
+- WHAT POINT 120 COST, FOR THE NEXT CHAIR's PLANNING: the takeover at 15:48 UTC; the rebuild 15:56 to 18:54 (three hours,
+  most of it one machine's one gate; with children from the start it is about ninety minutes); the reader 1 h 40 min; the
+  join 35 minutes; the whole suite 43 minutes in four shards. NOTHING WAS LOST THIS TIME BECAUSE EVERY BRANCH WAS PUSHED AS
+  IT WAS MADE.
+- NEXT, IN THIS ORDER: (1) CI's run on 682667fe2 read by name (the form of `tenth/ci/ci-read-119.py`), its bullet into
+  LINE-NOW.md; (2) POINT 121 when READER 121 (session_01FE9mEuzqAKrQvpFqvj65UN) reports: rule, cure, then two local merges
+  on the line (2ab62ef33, then cccda7569), the doors, lint, build, sizes, four shards; (3) POINTS 122 and 123 as the three
+  cure builders report (R-CURES-A session_01FE9mEu1ow6pwTLRS8G9x5f, R-CURES-B session_01FE9mEv7yYJ4g5vAbdzBnwD, R-BIRTH
+  session_01FE9mEvwwZLxUT1dypvNkrW): the chair's whole read of each branch, D1 (the Overview's seat line) by a builder on
+  point 121's tip, ONE independent reader over 122 and 123; (4) RENAME-REDEALS and TRAD-NEEDS measured; VOICES measured and
+  put to the owner as one number; (5) the share veil resumed on children; (6) the end (COLD-READ-20, the browser walk, the
+  close).
+- FOR THE OWNER, HIS HAND ONLY, UNCHANGED: the signings at the end (71 rows on the list; the sizes), the migrations, the
+  merge, the deploy. Vetoes open on point 120: none (no new sentence).
