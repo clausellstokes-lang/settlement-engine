@@ -3557,8 +3557,9 @@ grant execute on function public.import_gallery_dossier(text) to authenticated;
 -- veil (VR23), as the link does. No fallback to an unveiled projection: the link's veil returns a body on every read (for
 -- a projection that is not an object, {}: measured on PostgreSQL 16), and were it ever to return none the member is sent
 -- with `settlement` JSON null, its tile fields and chronicle as before; either falls toward withholding, never toward the
--- unveiled projection. NOTHING ELSE: the chronicle, the member's name and tier, the world, the map state, the IDOR
--- guard, view_count and the grant are 211's. Pinned by execution: tests/security/galleryMapCovert.pglite.test.js.
+-- unveiled projection. (U3R, N95 (2)) A FROZEN member's name and tier are its copy's (doors-3's statement, VEIL-DOORS-2
+-- item 6), else the row's; and (V28 (1) (b)) the live row's covert ties join the source's for the covert check. NOTHING
+-- ELSE: the chronicle, the world, the map state, the IDOR guard, view_count and the grant are 211's. Pinned by execution: tests/security/galleryMapCovert.pglite.test.js.
 create or replace function public.get_gallery_map(p_slug text)
 returns jsonb language plpgsql security definer set search_path = public, pg_temp as $$
 declare
@@ -3578,8 +3579,9 @@ begin
     -- member to its public gallery dossier (null when that member isn't published).
     select jsonb_agg(jsonb_build_object(
       'old_id',      s.id::text,
-      'name',        s.name,
-      'tier',        s.tier,
+      -- U3R (N95 (2); VEIL-DOORS-2 item 6, doors-3's statement): a frozen member's name and tier are its copy's
+      'name',        coalesce(case when src.copied then nullif(btrim(public._gallery_veil_str(src.j -> 'name')), '') end, s.name),
+      'tier',        coalesce(case when src.copied then nullif(btrim(public._gallery_veil_str(src.j -> 'tier')), '') end, s.tier),
       'public_slug', case when s.is_public then s.public_slug else null end,
       -- 212 (N84 (1), N95 (2)): the party link's read of the same town: the link's splice, then the link's veil
       'settlement',  vm.v -> 'body',
@@ -3600,6 +3602,7 @@ begin
     ) base
     cross join lateral (
       select case when cp.copy is not null then cp.copy else base.j end as j,
+             cp.copy is not null as copied,
              coalesce(length(cp.copy::text) > public._gallery_veil_copy_bound(), false) as refused
         from (select case when mv.v ->> 'mode' = 'snapshot' and jsonb_typeof(mv.v -> 'snapshot') = 'object' then mv.v -> 'snapshot' end as copy
                 from (select s.gallery_member_overrides -> '$veil' as v offset 0) mv) cp

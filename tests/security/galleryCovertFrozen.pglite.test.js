@@ -226,6 +226,24 @@ describe('COVERT-FROZEN: a frozen copy made by master\'s client path (a public p
     expect(bad, `${bad.length} losses`).toEqual([]);
   }, ARM_TIMEOUT_MS);
 
+  it('COVERT-FROZEN THE FROZEN MEMBER\'s NAME AND TIER (N95 (2); doors-3\'s statement): a map member in snapshot mode is named and tiered as its copy, the live row renamed and re-tiered after the freeze; a live member as its row', async () => {
+    const born = bornTown({ open: true }); const copy = { ...freeze(born, 'master'), name: 'Saltmere as frozen', tier: 'village' };
+    const live = { ...born, name: 'Saltmere renamed later' };
+    const bad = [];
+    for (const [frozen, want] of [[true, { name: 'Saltmere as frozen', tier: 'village' }], [false, { name: 'Saltmere renamed later', tier: 'town' }]]) {
+      seq += 1; const slug = `frozname${seq}`;
+      const ov = veil.writeShareVeil({}, [], frozen ? { mode: 'snapshot', at: AT, snapshot: copy } : { mode: 'live', at: AT });
+      const id = (await db.query(`insert into public.settlements (id,user_id,name,tier,data,is_public,public_slug,published_at,unlisted_slug,visibility,gallery_member_overrides,gallery_share_dm,gallery_importable)
+        values (gen_random_uuid(), $1, $2, 'town', $3::jsonb, true, $4, now(), $5, 'unlisted', $6::jsonb, false, true) returning id::text as id`, [OWNER, live.name, JSON.stringify(live), slug, `${slug}-l`, JSON.stringify(ov)])).rows[0].id;
+      await db.query(`insert into public.saved_maps (id, user_id, name, map_data, is_public, public_slug, share_kind, gallery_share_campaign, gallery_importable, unlisted_slug, visibility)
+        values (gen_random_uuid(), $1, 'map', $2::jsonb, true, $3, 'map_with_campaign', true, true, $4, 'public')`, [OWNER, JSON.stringify({ campaign: { settlementIds: [id] } }), `${slug}-m`, `${slug}-mu`]);
+      await db.exec(`set test.uid = '';`);
+      const m = (await db.query(`select public.get_gallery_map($1) as x`, [`${slug}-m`])).rows[0]?.x?.members?.[0];
+      if (m?.name !== want.name || m?.tier !== want.tier) bad.push(`${frozen ? 'frozen' : 'live'} member: name ${JSON.stringify(m?.name)}, tier ${JSON.stringify(m?.tier)}; want ${JSON.stringify(want)}`);
+    }
+    expect(bad).toEqual([]);
+  }, ARM_TIMEOUT_MS);
+
   it('COVERT-FROZEN THE TWIN, rule for rule (withholdCovertCopies with the live stored rows): over the master-made copy it withholds both strings; over the drifted rows the copy; over the tooth neither', () => {
     const born = bornTown();
     const copy = freeze(born, 'master');
