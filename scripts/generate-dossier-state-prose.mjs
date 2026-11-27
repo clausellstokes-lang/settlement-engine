@@ -642,6 +642,12 @@ const WORD_CORRECTIONS = Object.freeze([
   // VIABILITY-TRUE (the tenth chair's G61 (2)): DS-GEN-18 BOUGHT-IN v2 said the place buys in what it cannot make beside the
   // page's own "Needed, and not brought in" (9 of 10 prints on V's small places); its words take "some of", corrected in place
   { pool: 'DS-GEN-18 :: BOUGHT-IN', vid: 2, from: '354d370b49e159b5d19d38ee84a13b7b455b07ebdd9d399aa34d3c3a5079ffde', to: 'e463113d4cf56b027fe83e7bfafb339769612e435bec7cb0480eb38ff9e09136', ruling: 'G61' },
+  // CURE-119 (the tenth chair's G72 (2)): DS-POW-5 merchant_league v2 (street, no mark) said the rulers are "the people it owes
+  // money to", a debt no fact of the record holds, on any merchant-league place; its words say trade instead, corrected in place
+  { pool: 'DS-POW-5 :: merchant_league', vid: 2, from: '10c498483048964bff9990379caf15de7f12d1f6ca1a4dd1a177c627c6f279a1', to: '2b8da301096da05faf441e389407f30783a9fe09b3b8c2473c1b1e097289d28c', ruling: 'G72' },
+  // CURE-119 (the tenth chair's G72 (5), replacing G70's wording): DS-ECO-1 COMBINATION C4 v8 said "being easy to reach" beside
+  // "the roads are dangerous"; the gate knows a working trade route, not a safe road: "being well placed for trade", in place
+  { pool: 'DS-ECO-1 :: COMBINATION C4: a low rung on a working approach', vid: 8, from: 'f67d750251eee21153a3aef8117a04529bc3019fb68ffa7dfca93f772fd8421c', to: 'ac6b5ec285eeb33f75a7693a2f414f1f1d764eb01957c421487c31a10c37cc13', ruling: 'G72' },
 ]);
 
 async function readNumberingBaseline() {

@@ -836,7 +836,7 @@ the access.
 5. `[street · crisis: under_siege]` The siege has stopped {settlement}'s trade moving at all, and the money that trade brought in has stopped with it.
 6. `[visitor · no market · no exports · no crisis: under_siege · no crisis: plague_onset]` Whatever its {access} brings goes on past {settlement}, and the town stays poor.
 7. `[ledger · crisis: under_siege]` Since the siege began, no passing traffic brings money into {settlement}, and nothing has taken its place.
-8. `[street · no crisis: under_siege · no crisis: plague_onset]` {settlement} is poor, and being easy to reach has not changed that.
+8. `[street · no crisis: under_siege · no crisis: plague_onset]` {settlement} is poor, and being well placed for trade has not changed that.
 
 **COMBINATION C5: a low rung on a narrow approach**
 1. `[visitor]` {settlement} is poor, and the road to it is long and hard. What the road does not bring in, the people here go without.
@@ -2494,7 +2494,7 @@ and never an assertion that the feared thing is happening.
 
 **`merchant_league`** {colour}
 1. `[ledger · no crisis: occupied]` The {seat} at {settlement} is run by the houses that keep the account books, and it decides things the way a business does: by what pays.
-2. `[street]` The people who run {settlement} are also the people it owes money to, and they do not keep the two apart.
+2. `[street]` The people who run {settlement} are also the people who trade in it, and they do not keep the two apart.
 3. `[unfolding]` What the {seat} at {settlement} fears most is running out of money, and every decision is made with that in mind.
 4. `[counterforce]` The {seat} at {settlement} has let quarrels drop that it could have won, because winning would have cost more than it was worth.
 

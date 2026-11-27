@@ -22,6 +22,7 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
+import { variantByVid } from '../helpers/drawnProse.js';
 import {
   SLOT_FILL_SHAPES,
   SLOT_FILL_TABLES,
@@ -1680,5 +1681,25 @@ describe('WIRING W3 — the structure flags and the GM advisory speak', () => {
     expect(crimLine).toContain('Thieves Guild');
     expect([...reached].sort()).toEqual([...W3_ADVISORY_POOLS].sort());
     expect(W3_ADVISORY_POOLS).toHaveLength(2);
+  });
+});
+
+/*
+ * G72 (2) (CURE-119): THE POWER LINE THAT STATED A DEBT NO FACT HOLDS. DS-POW-5 `merchant_league` v2 (street, no mark) said
+ * the rulers are the people the place owes money to; its words say trade instead, corrected in place (WORD_CORRECTIONS row,
+ * ruling G72): the same vid, the same slots, no mark, so no pick moves. RED FIRST (ef10a71f3a's leaf): "v2 says trade, not
+ * debt" failed: the line read "... are also the people it owes money to, ...".
+ */
+describe('G72 (2): DS-POW-5 merchant_league v2 states no debt', () => {
+  it('v2 says the rulers trade in the place, and nothing of owing', () => {
+    const v2 = variantByVid({ leaf: 'power', blockId: 'DS-POW-5', poolKey: 'merchant_league', vid: 2, slots: { settlement: 'Ashford' } });
+    expect(v2).toMatch(/\bwho trade in it\b/);
+    expect(/\bowes?\b|\bdebt/i.test(v2)).toBe(false);
+  });
+  it('the same vid, the same slots, no mark: no pick moves', () => {
+    const pool = /** @type {any} */ (DOSSIER_STATE_PROSE_POWER)['DS-POW-5'].pools.merchant_league;
+    const v2 = pool.find((/** @type {any} */ v) => v.vid === 2);
+    expect({ vids: pool.map((/** @type {any} */ v) => v.vid), angle: v2.angle, slots: v2.slots, marks: v2.marks ?? null })
+      .toEqual({ vids: [1, 2, 3, 4], angle: 'street', slots: ['settlement'], marks: null });
   });
 });

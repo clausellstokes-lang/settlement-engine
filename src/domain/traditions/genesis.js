@@ -33,7 +33,7 @@ import { createPRNG } from '../../kernel/prng.js';
 import { slugify } from '../../kernel/slugify.js';
 import { resolveTerrain } from '../resolveTerrain.js';
 import { waterAccessKind } from '../tradeRouteSemantics.js';
-import { bornByThisEngine } from '../settlement.schema.js'; // B1(ii) (G64 (3)): the guard's reader of the engine's stamp
+import { bornAtOrAfter } from '../settlement.schema.js'; // B1(ii) (G64 (3), G72 (1)): the floor reader of the engine's stamp
 import { factsOf } from '../facts/factsOf.js'; // B1(ii): farmland on the roster, through its atom's own reader
 import { atomHolds } from '../facts/factVocabulary.js'; // B1(ii)
 import { evil01, chaos01 } from '../worldPulse/deityAxes.js';
@@ -191,17 +191,20 @@ function readIdentity(settlement) {
 /** The element of the fields (TRADITION_ELEMENTS 'field', glyph ▦): no founding candidate, so only an addition draws it. */
 const FIELD_ELEMENT = 'field';
 
+// The engine that first carried the field rule (G72 (1)): a literal, never the build's GENERATOR_VERSION, so the next release keeps the rule for places 0.10.0 bore.
+const FIELD_RITE_SINCE = '0.10.0';
+
 /**
  * B1(ii), NO TRADITION BLESSES FIELDS THE PLACE DOES NOT HAVE (the tenth chair's G64 (2), (3)): the place's own food record
  * NAMES its sources (`economicState.foodSecurity.foodRecord.foodSources`, the native keys the generator writes, never a
  * user's good by name) and `grain` is not among them, and no farmland stands on the roster (the atom `institution:
  * farmland`, through its own reader: FARMLAND ADMITS THE RITE). An empty or absent source list is unanswered, and so is an
- * unanswered farmland atom: the rite stands. ASKED ONLY OF A RECORD THIS ENGINE BORE (`settlement.schema.js ::
- * bornByThisEngine`, the re-derivation guard's own reader of the stamp): a place an earlier engine bore keeps its whole set.
+ * unanswered farmland atom: the rite stands. ASKED ONLY OF A RECORD BORN AT OR AFTER THE ENGINE THAT FIRST CARRIED THE RULE
+ * (`settlement.schema.js :: bornAtOrAfter`, `FIELD_RITE_SINCE`; G72 (1)): a place an earlier engine bore keeps its whole set.
  * @param {unknown} settlement @returns {boolean}
  */
 export function fieldRiteRefused(settlement) {
-  if (!bornByThisEngine(settlement)) return false;
+  if (!bornAtOrAfter(settlement, FIELD_RITE_SINCE)) return false;
   const sources = /** @type {{ economicState?: { foodSecurity?: { foodRecord?: { foodSources?: unknown } | null } | null } | null }} */ (settlement)
     .economicState?.foodSecurity?.foodRecord?.foodSources;
   if (!Array.isArray(sources) || sources.length === 0 || sources.includes('grain')) return false;

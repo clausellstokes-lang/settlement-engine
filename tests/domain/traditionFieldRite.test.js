@@ -9,9 +9,9 @@
  *
  * RED FIRST (the line 9d22f040e): the born place below shows "The Quiet Furrow Feast" (element `field`, row 1).
  */
-import { describe, expect, test } from 'vitest';
-import { deriveFoundingTraditions } from '../../src/domain/traditions/genesis.js';
-import { GENERATOR_VERSION, LEGACY_GENERATOR_VERSION } from '../../src/domain/settlement.schema.js';
+import { describe, expect, test, vi } from 'vitest';
+import { deriveFoundingTraditions, fieldRiteRefused } from '../../src/domain/traditions/genesis.js';
+import { GENERATOR_VERSION, LEGACY_GENERATOR_VERSION, bornAtOrAfter } from '../../src/domain/settlement.schema.js';
 import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 
 /** The seed's identity: a plains road town whose row 1 draws a rite of the fields. */
@@ -61,3 +61,59 @@ describe('B1(ii): the twins keep their whole set', () => {
     same(stampless);
   });
 });
+
+/*
+ * G72 (1) (CURE-119): THE FIELD RULE'S STAMP IS A FLOOR, NOT AN EQUALITY. `fieldRiteRefused` is asked of a record whose stamp
+ * is AT OR AFTER the engine that first carried the rule (`FIELD_RITE_SINCE = '0.10.0'`, a literal in the rule's own file),
+ * through `settlement.schema.js :: bornAtOrAfter`: three dot-separated whole numbers, compared number by number.
+ * RED FIRST (the equality reader `bornByThisEngine` of ef10a71f3a): "a record stamped 0.11.0 ... is refused" failed
+ * (expected false to be true), and so did the simulated next release: the 0.10.0-born place drew `field` again.
+ * G74 (CURE-119): no padded number: '0.010.0' and '00.10.00' answer false. RED FIRST (5c024476d0): "0.9.0, no stamp, ...
+ * are not asked" failed at stamp 0.010.0 (expected true to be false).
+ */
+describe('G72 (1): the field rule\'s stamp is a floor', () => {
+  test('records stamped 0.10.0, 0.11.0 and 1.0.0, whose food record refuses, are refused a field rite', () => {
+    for (const stamp of ['0.10.0', '0.11.0', '1.0.0']) {
+      const s = place(['livestock', 'fish'], { generatorVersion: stamp });
+      expect(fieldRiteRefused(s), stamp).toBe(true);
+      expectPresentThenAbsent(elements(before), elements(deriveFoundingTraditions(s)), 'field', `stamp ${stamp}`);
+    }
+  });
+  test('0.9.0, no stamp, legacy, 0.10, 0.10.0-rc1, padded stamps and numbers are not asked: the whole set stands', () => {
+    const { generatorVersion: _drop, ...stampless } = place(['livestock', 'fish']);
+    const records = [stampless, ...['0.9.0', 'legacy', '0.10', '0.10.0-rc1', '0.010.0', '00.10.00', 10, 0.1, null].map((stamp) => place(['livestock', 'fish'], { generatorVersion: stamp }))];
+    for (const s of records) {
+      expect(fieldRiteRefused(s), String(s.generatorVersion)).toBe(false);
+      expect(JSON.stringify(deriveFoundingTraditions(s))).toBe(JSON.stringify(before));
+    }
+  });
+  test('the reader compares number by number, never as text; a malformed floor or no record answers false', () => {
+    expect([['0.10.0', '0.9.0'], ['0.9.0', '0.10.0'], ['0.10.0', '0.10.0'], ['0.10.1', '0.10.0'], ['2.0.0', '10.0.0'], ['0.10.0', '0.10']]
+      .map(([have, floor]) => bornAtOrAfter({ generatorVersion: have }, floor))).toEqual([true, false, true, true, false, false]);
+    expect([bornAtOrAfter(null, '0.10.0'), bornAtOrAfter('0.10.0', '0.10.0')]).toEqual([false, false]);
+  });
+  test('the next release, simulated: with the build constant read as 0.11.0, a 0.10.0-born unlit place still shows its replaced rite', async () => {
+    vi.resetModules();
+    // The module mocked as tests/store/rederiveGuard.test.js G6 does. A real release moves the constant every reader closes
+    // over; a spread does not re-bind a closure, so a reader of the constant (the equality reader G72 (1) removed) is re-bound
+    // here to the moved constant: the simulation is of the release, not of one export.
+    vi.doMock('../../src/domain/settlement.schema.js', async (importOriginal) => {
+      const real = /** @type {Record<string, unknown>} */ (await importOriginal());
+      const moved = { ...real, GENERATOR_VERSION: '0.11.0' };
+      if ('bornByThisEngine' in real) moved.bornByThisEngine = (/** @type {any} */ r) => !!r && typeof r === 'object' && r.generatorVersion === '0.11.0';
+      return moved;
+    });
+    try {
+      const schema = await import('../../src/domain/settlement.schema.js');
+      expect(schema.GENERATOR_VERSION, 'the premise: the constant has moved').toBe('0.11.0');
+      const next = await import('../../src/domain/traditions/genesis.js');
+      const born = place(['livestock', 'fish'], { generatorVersion: '0.10.0' });
+      expect(next.fieldRiteRefused(born)).toBe(true);
+      expectPresentThenAbsent(elements(before), elements(next.deriveFoundingTraditions(born)), 'field', 'the replaced rite does not come back');
+    } finally {
+      vi.doUnmock('../../src/domain/settlement.schema.js');
+      vi.resetModules();
+    }
+  });
+});
+

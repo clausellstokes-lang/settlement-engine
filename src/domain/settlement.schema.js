@@ -51,18 +51,32 @@ export const GENERATOR_VERSION  = '0.10.0'; // GUARD (R24j 1, 2026-11-25): 0.9.0
 // a stamp being checked, never the current one, so a load can never make an old place look new-born. The
 // current version is written at BIRTH alone (generators/steps/assembleSettlement.js).
 export const LEGACY_GENERATOR_VERSION = '0.9.0';
+/** A stamp the floor reader can compare: exactly three dot-separated whole numbers. */
+const THREE_NUMBER_STAMP = /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$/; // G74: no padded number (0.010.0 is malformed)
+/** @param {unknown} stamp @returns {number[] | null} */
+const stampNumbers = (stamp) => {
+  if (typeof stamp !== 'string') return null;
+  const m = THREE_NUMBER_STAMP.exec(stamp);
+  return m ? [Number(m[1]), Number(m[2]), Number(m[3])] : null;
+};
 /**
- * THE GUARD'S READER (R24j 3; B1(ii), the tenth chair's G64 (3)): WAS THIS RECORD BORN BY THIS ENGINE? Its stamp is this
- * build's `GENERATOR_VERSION`. A record a load gave the legacy stamp, one stamped by another engine, or one with no stamp
- * answers false: the comparison `store/editSlice.js :: applyRosterDecreesAtTick` makes (`bornHere`) before re-deriving a
- * stored place, read here for a rule added to how a place is READ (`traditions/genesis.js`), so a place an earlier engine
- * bore keeps what it was shown. (editSlice keeps its own line: its guard test G6, tests/store/rederiveGuard.test.js, moves
- * the constant by mocking this module, which a reader closed over the constant here does not see.) A reader of the
- * existing stamp: no stored field is added for it and no version moves.
- * @param {unknown} record @returns {boolean}
+ * THE FLOOR READER (B1(ii), the tenth chair's G64 (3) as cured by G72 (1)): WAS THIS RECORD BORN BY AN ENGINE AT OR AFTER
+ * `floor`? Both the record's `generatorVersion` and `floor` must be exactly three dot-separated whole numbers, compared
+ * number by number. No stamp, the legacy stamp below the floor, a malformed stamp ('0.10', '0.10.0-rc1', 'legacy', a
+ * number) or a malformed floor answers false. A rule added to how a place is READ asks it with the engine that FIRST
+ * carried the rule (a literal in the rule's own file), never this build's `GENERATOR_VERSION`: a later release keeps the
+ * rule for the places the earlier engine bore. (`store/editSlice.js :: applyRosterDecreesAtTick` keeps its own equality
+ * line: re-derivation is the bearing engine's alone.) A reader of the existing stamp: no stored field, no version moved.
+ * @param {unknown} record @param {string} floor @returns {boolean}
  */
-export const bornByThisEngine = (record) => !!record && typeof record === 'object'
-  && /** @type {{ generatorVersion?: unknown }} */ (record).generatorVersion === GENERATOR_VERSION;
+export const bornAtOrAfter = (record, floor) => {
+  if (!record || typeof record !== 'object') return false;
+  const have = stampNumbers(/** @type {{ generatorVersion?: unknown }} */ (record).generatorVersion);
+  const need = stampNumbers(floor);
+  if (!have || !need) return false;
+  for (let i = 0; i < 3; i += 1) if (have[i] !== need[i]) return have[i] > need[i];
+  return true;
+};
 
 // ── Canonical field-name map ────────────────────────────────────────────────
 // When the legacy shape uses multiple names for the same concept, this map

@@ -239,14 +239,14 @@
  "digests": {
   "corpusMeta": "2fc0bed64cd75bee9bf307933c70806bddd7e3bca56bd43f6b10701001c26cf9",
   "inventory": "656a4d0007e96e46337a2ccfbef80d0e105da304c9aeaae4b35e118f0c65415e",
-  "manifests": "c9196927596fe662777f3e45b157f689da30622a23aa5aef7fd562827a2dd82f",
+  "manifests": "df9497fae89006269805598e761716e6929ee947630a2b53b38d960de2c9b4a8",
   "migrationReview": "e534f083e0e955fdb22847606961f18e4bda1cb8092c131f84b753bdd672cf4e",
   "rowTags": "d980efe88e9faed55dad533e43ccf6d4e3ea3dae24aa236375965207828d96f7",
-  "scanStats": "49e5c1dac62d2aa389ea8011181cc6337f6be69124da862ad79971df02306b5d",
-  "sentinel": "04b02920c10e435e271223070e3ebd383e4bc0a45d559f69da55790a4fc33ec1"
+  "scanStats": "cf8bcfdcb57360f53e3d9b5e0ab5512106929a37c2abcd4a44fafd2afb035705",
+  "sentinel": "4c2a406378425fea0a9635c233d36eeb43f53294eb0af81a030fec72f3e21cf3"
  },
  "frozen": "2026-11-26",
- "frozenAtSha": "ec6e7ed5cb3f56ad1dff15a74e82a71fff27f063",
+ "frozenAtSha": "bc312a455f7247f1323b6941ff73cebe0ec4c1bb",
  "identities": 1551,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
@@ -2777,7 +2777,7 @@
   },
   "executionTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "d484c44efd9fc48b7b38c940771283fe1f8082f4c955366418b6cfd26068d294",
+   "digest": "6068800ed1ac04cfb25860f78489df6ee4039c6e05a9c6f69f389c67d96eb9bf",
    "entries": [
     {
      "mode": "100644",
@@ -7507,8 +7507,8 @@
     {
      "mode": "100644",
      "path": "src/data/dossierStateProse/economy.generated.js",
-     "sha256": "eb79f43dc2651873484823c26677b4b099d970d55146be86a29837de14bdab98",
-     "size": 214391,
+     "sha256": "fb43494c1aa4ce90e2bf0b3d5f700ec821a068f1539e4752f01918d3b923aee7",
+     "size": 214399,
      "type": "file"
     },
     {
@@ -7521,8 +7521,8 @@
     {
      "mode": "100644",
      "path": "src/data/dossierStateProse/power.generated.js",
-     "sha256": "13b49b05024e9c6f900d4051d242c340cfd42b4814a785dcf616911479529dba",
-     "size": 140008,
+     "sha256": "240763de81546ef105381c3956cdcaf95549959cb7b49f3ea613a3553706e162",
+     "size": 140007,
      "type": "file"
     },
     {
@@ -8886,8 +8886,8 @@
     {
      "mode": "100644",
      "path": "src/domain/coherence/pageCensusFindings.js",
-     "sha256": "0b2377539d5db426def4f2e432e98a519dace27a9f17fcc3f1e27535568d4500",
-     "size": 30391,
+     "sha256": "05abadeaf41ca4cfe59564270e240ab12079643c8b18b5d7505a2833063830b9",
+     "size": 31434,
      "type": "file"
     },
     {
@@ -13093,8 +13093,8 @@
     {
      "mode": "100644",
      "path": "src/domain/settlement.schema.js",
-     "sha256": "0a800a2cfa0a853622563249510c171ba572299cf6318b6e009fde5a9431cbdd",
-     "size": 82185,
+     "sha256": "eb089da5f91bbd89e40a67bf308742accd937d526b7d9cb9b75a0d9be4dffc70",
+     "size": 83879,
      "type": "file"
     },
     {
@@ -14108,8 +14108,8 @@
     {
      "mode": "100644",
      "path": "src/domain/traditions/genesis.js",
-     "sha256": "67a36de627bab84678e427eeca9bf0f2ca8b14cb69c8efa1977ff09bc03b4fd1",
-     "size": 22442,
+     "sha256": "7fe8df42e6f535049768b57caad8b3bce0319f0e7fcde1eb5297f093f83c7d88",
+     "size": 27472,
      "type": "file"
     },
     {
@@ -21452,7 +21452,7 @@
   },
   "scanTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "c28b36e9b8e90974865b5044d70945d2ff332299a9990ec7dbb5e27abeebc556",
+   "digest": "d6ef45b6aad909fb625d525695f983387d8eb56f396cd14c3d22fdcf59ffb4b6",
    "entries": [
     {
      "mode": "100644",
@@ -27407,8 +27407,8 @@
     {
      "mode": "100644",
      "path": "src/domain/coherence/pageCensusFindings.js",
-     "sha256": "0b2377539d5db426def4f2e432e98a519dace27a9f17fcc3f1e27535568d4500",
-     "size": 30391,
+     "sha256": "05abadeaf41ca4cfe59564270e240ab12079643c8b18b5d7505a2833063830b9",
+     "size": 31434,
      "type": "file"
     },
     {
@@ -31579,8 +31579,8 @@
     {
      "mode": "100644",
      "path": "src/domain/settlement.schema.js",
-     "sha256": "0a800a2cfa0a853622563249510c171ba572299cf6318b6e009fde5a9431cbdd",
-     "size": 82185,
+     "sha256": "eb089da5f91bbd89e40a67bf308742accd937d526b7d9cb9b75a0d9be4dffc70",
+     "size": 83879,
      "type": "file"
     },
     {
@@ -32594,8 +32594,8 @@
     {
      "mode": "100644",
      "path": "src/domain/traditions/genesis.js",
-     "sha256": "67a36de627bab84678e427eeca9bf0f2ca8b14cb69c8efa1977ff09bc03b4fd1",
-     "size": 22442,
+     "sha256": "7fe8df42e6f535049768b57caad8b3bce0319f0e7fcde1eb5297f093f83c7d88",
+     "size": 27472,
      "type": "file"
     },
     {
@@ -39931,7 +39931,7 @@
   },
   "sourceTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "26ace79573577bf8c84f059c731c0d5d0190d714e9fe1a184e744d6a6f2a8347",
+   "digest": "165f9983c88ab068e4bbacdba2e82384d571dc811a4c511b5b844d85f5a3841d",
    "entries": [
     {
      "mode": "100644",
@@ -44591,8 +44591,8 @@
     {
      "mode": "100644",
      "path": "src/data/dossierStateProse/economy.generated.js",
-     "sha256": "eb79f43dc2651873484823c26677b4b099d970d55146be86a29837de14bdab98",
-     "size": 214391,
+     "sha256": "fb43494c1aa4ce90e2bf0b3d5f700ec821a068f1539e4752f01918d3b923aee7",
+     "size": 214399,
      "type": "file"
     },
     {
@@ -44605,8 +44605,8 @@
     {
      "mode": "100644",
      "path": "src/data/dossierStateProse/power.generated.js",
-     "sha256": "13b49b05024e9c6f900d4051d242c340cfd42b4814a785dcf616911479529dba",
-     "size": 140008,
+     "sha256": "240763de81546ef105381c3956cdcaf95549959cb7b49f3ea613a3553706e162",
+     "size": 140007,
      "type": "file"
     },
     {
@@ -45970,8 +45970,8 @@
     {
      "mode": "100644",
      "path": "src/domain/coherence/pageCensusFindings.js",
-     "sha256": "0b2377539d5db426def4f2e432e98a519dace27a9f17fcc3f1e27535568d4500",
-     "size": 30391,
+     "sha256": "05abadeaf41ca4cfe59564270e240ab12079643c8b18b5d7505a2833063830b9",
+     "size": 31434,
      "type": "file"
     },
     {
@@ -50177,8 +50177,8 @@
     {
      "mode": "100644",
      "path": "src/domain/settlement.schema.js",
-     "sha256": "0a800a2cfa0a853622563249510c171ba572299cf6318b6e009fde5a9431cbdd",
-     "size": 82185,
+     "sha256": "eb089da5f91bbd89e40a67bf308742accd937d526b7d9cb9b75a0d9be4dffc70",
+     "size": 83879,
      "type": "file"
     },
     {
@@ -51192,8 +51192,8 @@
     {
      "mode": "100644",
      "path": "src/domain/traditions/genesis.js",
-     "sha256": "67a36de627bab84678e427eeca9bf0f2ca8b14cb69c8efa1977ff09bc03b4fd1",
-     "size": 22442,
+     "sha256": "7fe8df42e6f535049768b57caad8b3bce0319f0e7fcde1eb5297f093f83c7d88",
+     "size": 27472,
      "type": "file"
     },
     {
@@ -58864,20 +58864,20 @@
  },
  "scanStats": {
   "files": 2639,
-  "reads": 152398,
-  "resolved": 13327,
-  "unresolved": 139071
+  "reads": 152409,
+  "resolved": 13332,
+  "unresolved": 139077
  },
  "scannerProvenance": {
   "detectorDigest": "4510771aaad7171b24f7d28199255626c9dd37de9015d991904184b37a1fae76",
-  "executionTreeDigest": "d484c44efd9fc48b7b38c940771283fe1f8082f4c955366418b6cfd26068d294",
-  "scanTreeDigest": "c28b36e9b8e90974865b5044d70945d2ff332299a9990ec7dbb5e27abeebc556",
-  "sourceTreeDigest": "26ace79573577bf8c84f059c731c0d5d0190d714e9fe1a184e744d6a6f2a8347",
-  "unscannedInputDigest": "189ed6510bf0dc837065ec40ba032fe926289e0254d248a52185c83d12c35c65"
+  "executionTreeDigest": "6068800ed1ac04cfb25860f78489df6ee4039c6e05a9c6f69f389c67d96eb9bf",
+  "scanTreeDigest": "d6ef45b6aad909fb625d525695f983387d8eb56f396cd14c3d22fdcf59ffb4b6",
+  "sourceTreeDigest": "165f9983c88ab068e4bbacdba2e82384d571dc811a4c511b5b844d85f5a3841d",
+  "unscannedInputDigest": "74cb8de5a06e6e833d239f6c11c3b5f0eb2c39f02dcf1afc352ff7bab7d82673"
  },
  "schema": 46,
  "sentinel": {
-  "resolvedReads": 13327,
+  "resolvedReads": 13332,
   "totalKeys": 12726,
   "usableShapes": 545
  },
