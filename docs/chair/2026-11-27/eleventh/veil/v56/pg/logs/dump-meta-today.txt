@@ -1,0 +1,2 @@
+dump 2026-11-27T23:31:42Z tree /home/user/settlement-engine at 04fa8d60ea4cb3749b34404899c4042ed22f826a
+end 2026-11-27T23:32:08Z

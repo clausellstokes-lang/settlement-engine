@@ -1,0 +1,53 @@
+POOL /var/tmp/v56/stored-today n=140
+
+[default] rows LOST {"Criminal opportunity":140,"Law & order":140,"Defense readiness":8}
+  CHANGED {"Defense readiness":6,"Ruling authority":7,"Religious authority":3,"Strength of the powers":3,"Trade connectivity":4,"Economic capacity":2}
+  GAINED {}
+  rows reading a re-derived severity (owner prints the row): {"Trade connectivity":76,"Strength of the powers":60,"Public legitimacy":94,"Criminal opportunity":18,"Social trust":48,"Defense readiness":59,"Food":4,"Labor capacity":34,"Housing pressure":3}
+  of them printed with a band != owner: {"Defense readiness":4,"Trade connectivity":4}
+  examples of CHANGED: {"Defense readiness":"r3m-city-infiltrated-0-42: Adequate => Surplus","Ruling authority":"r3m-city-infiltrated-1-102: Strained => Adequate","Religious authority":"r3m-city-under_siege-1-108: Strained => Adequate","Strength of the powers":"r3m-metropolis-none-0-53: Strained => Adequate","Trade connectivity":"r3m-metropolis-wartime-1-139: Adequate => Strained","Economic capacity":"r3m-town-none-0-17: Strained => Critical"}
+
+[allShown] rows LOST {"Criminal opportunity":140,"Law & order":140,"Defense readiness":2}
+  CHANGED {"Trade connectivity":4,"Defense readiness":4}
+  GAINED {}
+  rows reading a re-derived severity (owner prints the row): {"Trade connectivity":76,"Strength of the powers":60,"Public legitimacy":94,"Criminal opportunity":18,"Social trust":48,"Defense readiness":59,"Food":4,"Labor capacity":34,"Housing pressure":3}
+  of them printed with a band != owner: {"Trade connectivity":4,"Defense readiness":4}
+  examples of CHANGED: {"Trade connectivity":"r3m-metropolis-wartime-1-139: Adequate => Strained","Defense readiness":"r3m-town-insurgency-0-24: Strained => Adequate"}
+
+[widest] rows LOST {"Criminal opportunity":140,"Law & order":140,"Defense readiness":8}
+  CHANGED {"Defense readiness":6,"Ruling authority":7,"Religious authority":3,"Strength of the powers":3,"Trade connectivity":4,"Economic capacity":2}
+  GAINED {}
+  rows reading a re-derived severity (owner prints the row): {"Trade connectivity":76,"Strength of the powers":60,"Public legitimacy":94,"Criminal opportunity":18,"Social trust":48,"Defense readiness":59,"Food":4,"Labor capacity":34,"Housing pressure":3}
+  of them printed with a band != owner: {"Defense readiness":4,"Trade connectivity":4}
+  examples of CHANGED: {"Defense readiness":"r3m-city-infiltrated-0-42: Adequate => Surplus","Ruling authority":"r3m-city-infiltrated-1-102: Strained => Adequate","Religious authority":"r3m-city-under_siege-1-108: Strained => Adequate","Strength of the powers":"r3m-metropolis-none-0-53: Strained => Adequate","Trade connectivity":"r3m-metropolis-wartime-1-139: Adequate => Strained","Economic capacity":"r3m-town-none-0-17: Strained => Critical"}
+
+owner record rows != owner public rows on 121 towns
+
+[default] PRESENCE (owner holds, parent served): cases {"defenseProfile.scores.disaster":140,"defenseProfile.scores.economic":140,"defenseProfile.scores.internal":140,"defenseProfile.scores.magical":140,"defenseProfile.scores.military":140,"defenseProfile.scores.monster":140,"defenseProfile.readiness.score":140,"defenseProfile.economicGates":140,"economicState.compound.economyOutput":140,"economicState.safetyProfile.blackMarketCapture":140,"economicState.safetyProfile.crimeTypes":140,"powerStructure.recentConflict":140,"activeConditions.[].severity":111}
+  ABSENT {"economicState.safetyProfile.blackMarketCapture":140,"economicState.safetyProfile.crimeTypes":140,"defenseProfile.readiness.score":8} ex {"economicState.safetyProfile.blackMarketCapture":"r3m-city-indebted-0-36","economicState.safetyProfile.crimeTypes":"r3m-city-indebted-0-36","defenseProfile.readiness.score":"r3m-city-indebted-0-46"}
+
+[allShown] PRESENCE (owner holds, parent served): cases {"defenseProfile.scores.disaster":140,"defenseProfile.scores.economic":140,"defenseProfile.scores.internal":140,"defenseProfile.scores.magical":140,"defenseProfile.scores.military":140,"defenseProfile.scores.monster":140,"defenseProfile.readiness.score":140,"defenseProfile.economicGates":140,"economicState.compound.economyOutput":140,"economicState.safetyProfile.blackMarketCapture":140,"economicState.safetyProfile.crimeTypes":140,"powerStructure.recentConflict":140,"activeConditions.[].severity":111}
+  ABSENT {"economicState.safetyProfile.blackMarketCapture":140,"defenseProfile.readiness.score":2} ex {"economicState.safetyProfile.blackMarketCapture":"r3m-city-indebted-0-36","defenseProfile.readiness.score":"r3m-town-occupied-1-85"}
+
+[widest] PRESENCE (owner holds, parent served): cases {"defenseProfile.scores.disaster":140,"defenseProfile.scores.economic":140,"defenseProfile.scores.internal":140,"defenseProfile.scores.magical":140,"defenseProfile.scores.military":140,"defenseProfile.scores.monster":140,"defenseProfile.readiness.score":140,"defenseProfile.economicGates":140,"economicState.compound.economyOutput":140,"economicState.safetyProfile.blackMarketCapture":140,"economicState.safetyProfile.crimeTypes":140,"powerStructure.recentConflict":140,"activeConditions.[].severity":111}
+  ABSENT {"economicState.safetyProfile.blackMarketCapture":140,"economicState.safetyProfile.crimeTypes":140,"defenseProfile.readiness.score":8} ex {"economicState.safetyProfile.blackMarketCapture":"r3m-city-indebted-0-36","economicState.safetyProfile.crimeTypes":"r3m-city-indebted-0-36","defenseProfile.readiness.score":"r3m-city-indebted-0-46"}
+
+[allShown] EQUALITY of re-derived keys: compared {"defenseProfile.scores.disaster":140,"defenseProfile.scores.economic":140,"defenseProfile.scores.internal":140,"defenseProfile.scores.magical":140,"defenseProfile.scores.military":140,"defenseProfile.scores.monster":140,"defenseProfile.readiness.score":138,"defenseProfile.economicGates":140,"economicState.compound.economyOutput":140,"economicState.safetyProfile.crimeTypes":140,"powerStructure.recentConflict":140,"activeConditions.[].severity":111}
+  DIFFER {"activeConditions.[].severity":105}
+   activeConditions.[].severity: r3m-city-indebted-0-36: owner 0.23 page 0.15
+
+[default] EQUALITY of re-derived keys: compared {"defenseProfile.scores.disaster":140,"defenseProfile.scores.economic":140,"defenseProfile.scores.internal":140,"defenseProfile.scores.magical":140,"defenseProfile.scores.military":140,"defenseProfile.scores.monster":140,"defenseProfile.readiness.score":132,"defenseProfile.economicGates":140,"economicState.compound.economyOutput":140,"powerStructure.recentConflict":140,"activeConditions.[].severity":111}
+  DIFFER {"activeConditions.[].severity":105,"defenseProfile.scores.internal":82,"economicState.compound.economyOutput":84,"defenseProfile.readiness.score":68,"powerStructure.recentConflict":8}
+   activeConditions.[].severity: r3m-city-indebted-0-36: owner 0.23 page 0.15
+   defenseProfile.scores.internal: r3m-city-indebted-0-46: owner 67 page 78
+   economicState.compound.economyOutput: r3m-city-indebted-0-46: owner 24.465864791082044 page 26.81998425578478
+   defenseProfile.readiness.score: r3m-city-indebted-1-116: owner 66 page 67
+   powerStructure.recentConflict: r3m-city-infiltrated-0-32: owner "The City Council has been debating market levies for three months. The merchants have argued against every one of them, and nothing has been settled yet." page "A noble family is contesting a merchant's right to operate in their traditional market territory. The City Council is hearing the case and wishes it were not."
+
+[widest] EQUALITY of re-derived keys: compared {"defenseProfile.scores.disaster":140,"defenseProfile.scores.economic":140,"defenseProfile.scores.internal":140,"defenseProfile.scores.magical":140,"defenseProfile.scores.military":140,"defenseProfile.scores.monster":140,"defenseProfile.readiness.score":132,"defenseProfile.economicGates":140,"economicState.compound.economyOutput":140,"powerStructure.recentConflict":140,"activeConditions.[].severity":111}
+  DIFFER {"activeConditions.[].severity":105,"defenseProfile.scores.internal":82,"economicState.compound.economyOutput":84,"defenseProfile.readiness.score":68,"powerStructure.recentConflict":8}
+   activeConditions.[].severity: r3m-city-indebted-0-36: owner 0.23 page 0.15
+   defenseProfile.scores.internal: r3m-city-indebted-0-46: owner 67 page 78
+   economicState.compound.economyOutput: r3m-city-indebted-0-46: owner 24.465864791082044 page 26.81998425578478
+   defenseProfile.readiness.score: r3m-city-indebted-1-116: owner 66 page 67
+   powerStructure.recentConflict: r3m-city-infiltrated-0-32: owner "The City Council has been debating market levies for three months. The merchants have argued against every one of them, and nothing has been settled yet." page "A noble family is contesting a merchant's right to operate in their traditional market territory. The City Council is hearing the case and wishes it were not."

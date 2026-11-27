@@ -1,0 +1,75 @@
+POOL /var/tmp/v56/stored-master n=140
+
+[default] rows LOST {"Criminal opportunity":140,"Defense readiness":63,"Law & order":140}
+  CHANGED {"Infrastructure condition":43,"Ruling authority":5,"Social trust":2,"Trade connectivity":3,"Defense readiness":12,"Religious authority":2,"Labor capacity":1,"Strength of the powers":1,"Economic capacity":1}
+  GAINED {}
+  rows reading a re-derived severity (owner prints the row): {"Trade connectivity":76,"Strength of the powers":60,"Public legitimacy":94,"Criminal opportunity":18,"Social trust":48,"Defense readiness":59,"Food":4,"Labor capacity":34,"Housing pressure":3}
+  of them printed with a band != owner: {"Social trust":2,"Trade connectivity":3,"Defense readiness":5,"Labor capacity":1,"Strength of the powers":1}
+  examples of CHANGED: {"Infrastructure condition":"r3m-city-indebted-0-36: Adequate => Surplus","Ruling authority":"r3m-city-indebted-1-106: Strained => Adequate","Social trust":"r3m-city-infiltrated-0-32: Strained => Adequate","Trade connectivity":"r3m-city-infiltrated-0-42: Adequate => Strained","Defense readiness":"r3m-city-infiltrated-0-42: Adequate => Surplus","Religious authority":"r3m-city-infiltrated-1-102: Strained => Adequate","Labor capacity":"r3m-city-wartime-1-119: Adequate => Strained","Strength of the powers":"r3m-metropolis-insurgency-1-134: Strained => Critical","Economic capacity":"r3m-town-none-0-17: Strained => Critical"}
+
+[allShown] rows LOST {"Criminal opportunity":140,"Defense readiness":63,"Law & order":140}
+  CHANGED {"Infrastructure condition":43,"Social trust":2,"Trade connectivity":3,"Religious authority":1,"Defense readiness":12,"Labor capacity":1,"Strength of the powers":1}
+  GAINED {}
+  rows reading a re-derived severity (owner prints the row): {"Trade connectivity":76,"Strength of the powers":60,"Public legitimacy":94,"Criminal opportunity":18,"Social trust":48,"Defense readiness":59,"Food":4,"Labor capacity":34,"Housing pressure":3}
+  of them printed with a band != owner: {"Social trust":2,"Trade connectivity":3,"Defense readiness":6,"Labor capacity":1,"Strength of the powers":1}
+  examples of CHANGED: {"Infrastructure condition":"r3m-city-indebted-0-36: Adequate => Surplus","Social trust":"r3m-city-infiltrated-0-32: Strained => Adequate","Trade connectivity":"r3m-city-infiltrated-0-42: Adequate => Strained","Religious authority":"r3m-city-infiltrated-1-102: Strained => Adequate","Defense readiness":"r3m-city-none-0-43: Adequate => Surplus","Labor capacity":"r3m-city-wartime-1-119: Adequate => Strained","Strength of the powers":"r3m-metropolis-insurgency-1-134: Strained => Critical"}
+
+[widest] rows LOST {"Criminal opportunity":140,"Defense readiness":63,"Law & order":140}
+  CHANGED {"Infrastructure condition":43,"Ruling authority":5,"Social trust":2,"Trade connectivity":3,"Defense readiness":12,"Religious authority":2,"Labor capacity":1,"Strength of the powers":1,"Economic capacity":1}
+  GAINED {}
+  rows reading a re-derived severity (owner prints the row): {"Trade connectivity":76,"Strength of the powers":60,"Public legitimacy":94,"Criminal opportunity":18,"Social trust":48,"Defense readiness":59,"Food":4,"Labor capacity":34,"Housing pressure":3}
+  of them printed with a band != owner: {"Social trust":2,"Trade connectivity":3,"Defense readiness":5,"Labor capacity":1,"Strength of the powers":1}
+  examples of CHANGED: {"Infrastructure condition":"r3m-city-indebted-0-36: Adequate => Surplus","Ruling authority":"r3m-city-indebted-1-106: Strained => Adequate","Social trust":"r3m-city-infiltrated-0-32: Strained => Adequate","Trade connectivity":"r3m-city-infiltrated-0-42: Adequate => Strained","Defense readiness":"r3m-city-infiltrated-0-42: Adequate => Surplus","Religious authority":"r3m-city-infiltrated-1-102: Strained => Adequate","Labor capacity":"r3m-city-wartime-1-119: Adequate => Strained","Strength of the powers":"r3m-metropolis-insurgency-1-134: Strained => Critical","Economic capacity":"r3m-town-none-0-17: Strained => Critical"}
+
+owner record rows != owner public rows on 122 towns
+
+[default] PRESENCE (owner holds, parent served): cases {"defenseProfile.scores.disaster":140,"defenseProfile.scores.economic":140,"defenseProfile.scores.internal":140,"defenseProfile.scores.magical":140,"defenseProfile.scores.military":140,"defenseProfile.scores.monster":140,"defenseProfile.readiness.score":140,"defenseProfile.economicGates":140,"economicState.compound.economyOutput":140,"economicState.safetyProfile.blackMarketCapture":140,"economicState.safetyProfile.crimeTypes":140,"powerStructure.recentConflict":140,"activeConditions.[].severity":111}
+  ABSENT {"defenseProfile.readiness.score":63,"economicState.safetyProfile.blackMarketCapture":140,"economicState.safetyProfile.crimeTypes":140} ex {"defenseProfile.readiness.score":"r3m-city-indebted-0-36","economicState.safetyProfile.blackMarketCapture":"r3m-city-indebted-0-36","economicState.safetyProfile.crimeTypes":"r3m-city-indebted-0-36"}
+
+[allShown] PRESENCE (owner holds, parent served): cases {"defenseProfile.scores.disaster":140,"defenseProfile.scores.economic":140,"defenseProfile.scores.internal":140,"defenseProfile.scores.magical":140,"defenseProfile.scores.military":140,"defenseProfile.scores.monster":140,"defenseProfile.readiness.score":140,"defenseProfile.economicGates":140,"economicState.compound.economyOutput":140,"economicState.safetyProfile.blackMarketCapture":140,"economicState.safetyProfile.crimeTypes":140,"powerStructure.recentConflict":140,"activeConditions.[].severity":111}
+  ABSENT {"defenseProfile.readiness.score":63,"economicState.safetyProfile.blackMarketCapture":140} ex {"defenseProfile.readiness.score":"r3m-city-indebted-0-36","economicState.safetyProfile.blackMarketCapture":"r3m-city-indebted-0-36"}
+
+[widest] PRESENCE (owner holds, parent served): cases {"defenseProfile.scores.disaster":140,"defenseProfile.scores.economic":140,"defenseProfile.scores.internal":140,"defenseProfile.scores.magical":140,"defenseProfile.scores.military":140,"defenseProfile.scores.monster":140,"defenseProfile.readiness.score":140,"defenseProfile.economicGates":140,"economicState.compound.economyOutput":140,"economicState.safetyProfile.blackMarketCapture":140,"economicState.safetyProfile.crimeTypes":140,"powerStructure.recentConflict":140,"activeConditions.[].severity":111}
+  ABSENT {"defenseProfile.readiness.score":63,"economicState.safetyProfile.blackMarketCapture":140,"economicState.safetyProfile.crimeTypes":140} ex {"defenseProfile.readiness.score":"r3m-city-indebted-0-36","economicState.safetyProfile.blackMarketCapture":"r3m-city-indebted-0-36","economicState.safetyProfile.crimeTypes":"r3m-city-indebted-0-36"}
+
+[allShown] EQUALITY of re-derived keys: compared {"defenseProfile.scores.disaster":140,"defenseProfile.scores.economic":140,"defenseProfile.scores.internal":140,"defenseProfile.scores.magical":140,"defenseProfile.scores.military":140,"defenseProfile.scores.monster":140,"defenseProfile.economicGates":140,"economicState.compound.economyOutput":140,"economicState.safetyProfile.crimeTypes":140,"powerStructure.recentConflict":140,"activeConditions.[].severity":111,"defenseProfile.readiness.score":77}
+  DIFFER {"defenseProfile.scores.disaster":98,"defenseProfile.scores.economic":122,"defenseProfile.scores.internal":132,"defenseProfile.scores.military":133,"defenseProfile.scores.monster":112,"defenseProfile.economicGates":98,"powerStructure.recentConflict":124,"activeConditions.[].severity":106,"defenseProfile.scores.magical":114,"economicState.safetyProfile.crimeTypes":76,"defenseProfile.readiness.score":70}
+   defenseProfile.scores.disaster: r3m-city-indebted-0-36: owner 67 page 76
+   defenseProfile.scores.economic: r3m-city-indebted-0-36: owner 61 page 89
+   defenseProfile.scores.internal: r3m-city-indebted-0-36: owner 60 page 78
+   defenseProfile.scores.military: r3m-city-indebted-0-36: owner 75 page 100
+   defenseProfile.scores.monster: r3m-city-indebted-0-36: owner 57 page 62
+   defenseProfile.economicGates: r3m-city-indebted-0-36: owner {"military":0.9,"monster":0.92,"internal":0.91,"economic":0.86,"disaster":0.88} page {"military":1,"monster":1,"internal":1,"economic":1,"disaster":1}
+   powerStructure.recentConflict: r3m-city-indebted-0-36: owner "The creditor's representative blocked the infrastructure repair budget. Publicly they cited fiscal responsibility. Privately they cited a clause in the debt ag page "The creditor's agent has blocked the money for repairs. In public they talk of prudence; in private they point to a clause in the loan."
+   activeConditions.[].severity: r3m-city-indebted-0-36: owner 0.33 page 0.35
+   defenseProfile.scores.magical: r3m-city-indebted-0-46: owner 66 page 67
+   economicState.safetyProfile.crimeTypes: r3m-city-indebted-0-46: owner [{"type":"Survival crime","desc":"Hunger-driven theft of food, livestock, and stored goods. Enforcement struggles to distinguish survival crime from organised t page [{"type":"Survival crime","desc":"Theft of food, livestock, and stored goods by people with too little. Enforcement struggles to distinguish survival crime from
+   defenseProfile.readiness.score: r3m-city-indebted-1-116: owner 61 page 75
+
+[default] EQUALITY of re-derived keys: compared {"defenseProfile.scores.disaster":140,"defenseProfile.scores.economic":140,"defenseProfile.scores.internal":140,"defenseProfile.scores.magical":140,"defenseProfile.scores.military":140,"defenseProfile.scores.monster":140,"defenseProfile.economicGates":140,"economicState.compound.economyOutput":140,"powerStructure.recentConflict":140,"activeConditions.[].severity":111,"defenseProfile.readiness.score":77}
+  DIFFER {"defenseProfile.scores.disaster":98,"defenseProfile.scores.economic":122,"defenseProfile.scores.internal":135,"defenseProfile.scores.military":133,"defenseProfile.scores.monster":112,"defenseProfile.economicGates":98,"powerStructure.recentConflict":126,"activeConditions.[].severity":106,"defenseProfile.scores.magical":114,"economicState.compound.economyOutput":85,"defenseProfile.readiness.score":70}
+   defenseProfile.scores.disaster: r3m-city-indebted-0-36: owner 67 page 76
+   defenseProfile.scores.economic: r3m-city-indebted-0-36: owner 61 page 89
+   defenseProfile.scores.internal: r3m-city-indebted-0-36: owner 60 page 78
+   defenseProfile.scores.military: r3m-city-indebted-0-36: owner 75 page 100
+   defenseProfile.scores.monster: r3m-city-indebted-0-36: owner 57 page 62
+   defenseProfile.economicGates: r3m-city-indebted-0-36: owner {"military":0.9,"monster":0.92,"internal":0.91,"economic":0.86,"disaster":0.88} page {"military":1,"monster":1,"internal":1,"economic":1,"disaster":1}
+   powerStructure.recentConflict: r3m-city-indebted-0-36: owner "The creditor's representative blocked the infrastructure repair budget. Publicly they cited fiscal responsibility. Privately they cited a clause in the debt ag page "The creditor's agent has blocked the money for repairs. In public they talk of prudence; in private they point to a clause in the loan."
+   activeConditions.[].severity: r3m-city-indebted-0-36: owner 0.33 page 0.35
+   defenseProfile.scores.magical: r3m-city-indebted-0-46: owner 66 page 67
+   economicState.compound.economyOutput: r3m-city-indebted-0-46: owner 24.465864791082044 page 26.81998425578478
+   defenseProfile.readiness.score: r3m-city-indebted-1-116: owner 61 page 75
+
+[widest] EQUALITY of re-derived keys: compared {"defenseProfile.scores.disaster":140,"defenseProfile.scores.economic":140,"defenseProfile.scores.internal":140,"defenseProfile.scores.magical":140,"defenseProfile.scores.military":140,"defenseProfile.scores.monster":140,"defenseProfile.economicGates":140,"economicState.compound.economyOutput":140,"powerStructure.recentConflict":140,"activeConditions.[].severity":111,"defenseProfile.readiness.score":77}
+  DIFFER {"defenseProfile.scores.disaster":98,"defenseProfile.scores.economic":122,"defenseProfile.scores.internal":135,"defenseProfile.scores.military":133,"defenseProfile.scores.monster":112,"defenseProfile.economicGates":98,"powerStructure.recentConflict":126,"activeConditions.[].severity":106,"defenseProfile.scores.magical":114,"economicState.compound.economyOutput":85,"defenseProfile.readiness.score":70}
+   defenseProfile.scores.disaster: r3m-city-indebted-0-36: owner 67 page 76
+   defenseProfile.scores.economic: r3m-city-indebted-0-36: owner 61 page 89
+   defenseProfile.scores.internal: r3m-city-indebted-0-36: owner 60 page 78
+   defenseProfile.scores.military: r3m-city-indebted-0-36: owner 75 page 100
+   defenseProfile.scores.monster: r3m-city-indebted-0-36: owner 57 page 62
+   defenseProfile.economicGates: r3m-city-indebted-0-36: owner {"military":0.9,"monster":0.92,"internal":0.91,"economic":0.86,"disaster":0.88} page {"military":1,"monster":1,"internal":1,"economic":1,"disaster":1}
+   powerStructure.recentConflict: r3m-city-indebted-0-36: owner "The creditor's representative blocked the infrastructure repair budget. Publicly they cited fiscal responsibility. Privately they cited a clause in the debt ag page "The creditor's agent has blocked the money for repairs. In public they talk of prudence; in private they point to a clause in the loan."
+   activeConditions.[].severity: r3m-city-indebted-0-36: owner 0.33 page 0.35
+   defenseProfile.scores.magical: r3m-city-indebted-0-46: owner 66 page 67
+   economicState.compound.economyOutput: r3m-city-indebted-0-46: owner 24.465864791082044 page 26.81998425578478
+   defenseProfile.readiness.score: r3m-city-indebted-1-116: owner 61 page 75
