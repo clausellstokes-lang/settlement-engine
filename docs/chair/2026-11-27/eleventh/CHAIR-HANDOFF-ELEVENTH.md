@@ -88,3 +88,29 @@ See section 4, newest last.
 - TAIL-CENSUS STARTED (brief `prompts/START-TAIL-CENSUS.txt`; read-only, no test runs; scratch `tail/`): the 18 and 7
   town-page sites of point 121's candidate, each with its pool, its ids and a proposal.
 - BRIEFS WRITTEN AHEAD: `START-GUARD-120R.txt`, `START-READER-120R.txt`, `START-LAND-120R.txt`, `START-R-MEASURE.txt`.
+
+## V3 (16:08 UTC on 2026-11-27): STEP 3 READ; THE GUARD AND THE WHOLE-TOWN MEASURE STARTED; THE TAIL'S CENSUS IN AND RULED (E6); POINT 121's BUILDER IN PHASE 1
+- D13-120R's STEP 3 (df0401af658b36cf86ed39bf82b97b9a89433710), READ WHOLE BY THE CHAIR: 22 rows as pairs, ids NV1-2, IC1-2,
+  IU1-2, DC1-4, DL1-2, DG1-3, DN1-2, SS1-5 (the first build's prefixes), seven picks through the helper, `pickTrue` the
+  highest hash among the true rows, no sentence changed. The builder goes on to the stale tests and the proof.
+- GUARD-120R STARTED (tree /home/user/wt/guard, branch `lane/stack-120-guard-wip-2026-11-27` cut at df0401af6; told to NAME
+  the outsider second pick's branch-name id in "does not catch").
+- R-MEASURE STARTED (tree /home/user/wt/rmeasure, detached at df0401af6; scratch `rmeasure/`; no vitest; changes nothing):
+  R1 to R13, the vacuous row, OVERVIEW-NAMES-THE-SEAT, each counted on C and V as the pages will print after point 120.
+- TAIL-CENSUS finished (`tail/TAIL-REPORT.md`, `tail/TAIL-SITES.tsv` beside this file): 24 sites: 1 covered by point 120,
+  8 OUT of the owner's line (each prints only after an advance, on the map or the war tab, or from a campaign ledger),
+  3 LEAVE, 12 CONVERT in 6 units.
+- **E6, THE TAIL RULED:** POINT 121 IS FIVE UNITS (fortune; hooks; tradition description; tonight's cast wants; page frames).
+  TENSION CAUSE IS NOT CONVERTED (no importer in src: dormant code is not changed, G79 (5)); a condition of its wiring.
+  THE BAR FOR A SITE WITH A DOOR, as the chair read `facts/drawDeclared.js :: drawDeclared`: a plain rendezvous in the
+  door's `draw` callback does NOT hold the bar (a line ADDED that a place refuses can move it from its top line's twin to
+  the door's argmax, which is keyed by another hash and by POSITION where a line has no id). RULED: the printed line is the
+  highest-ranked line the place CAN PRINT (admitted, or refused with an admitted twin); the "next one" rules become "the
+  next in rank"; keys unchanged; every pool exported as rows a walker reads at run time. HOW each site holds it (the Daily
+  Life route, or a ranked mode of the door, with every walker and register that reads the door named) is PHASE 1 of the
+  builder, with the stale-test cost by a scratch build: the chair rules before phase 2.
+- TAIL-121 STARTED IN PHASE 1 (brief `prompts/START-TAIL-121.txt`; tree /home/user/wt/tail, branch
+  `lane/stack-121-tail-wip-2026-11-27` cut at df0401af6; scratch `landing/121/tail/`).
+- **E7, POINTS 120 AND 121 LAND AS ONE STACK WITH ONE WIDE GATE IF 121 IS BUILT AND READ BY THE TIME 120's READER IS RULED;**
+  else 120 lands alone (the standard's rule 8; the wide gate is about three hours of the one test gate).
+- FIVE SEATS WORK: D13-120R, GUARD-120R, R-MEASURE, TAIL-121; OWED-CURE-R and TAIL-CENSUS are finished.
