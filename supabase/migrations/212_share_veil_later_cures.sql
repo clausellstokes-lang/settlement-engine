@@ -2490,7 +2490,9 @@ $$;
 -- no longer raise (_gallery_veil_second_homes recomposed the served flags by the engine's own table, item C). What is left
 -- is dense, in order (VR21). A fixed-path pass: no text is scanned but the fields named. Twin: galleryRosterChoices.js ::
 -- applyRosterChoices, rule for rule.
-create or replace function public._gallery_veil_roster_choices(doc jsonb, pub jsonb)
+-- RULING V27 (1) (THE STORED BELT, (38)): the THREE-ARGUMENT form; `stored` is the stored document the door serves from
+-- (NULL: no stored row, today's behaviour). The two-argument form below is a wrapper passing NULL.
+create or replace function public._gallery_veil_roster_choices(doc jsonb, pub jsonb, stored jsonb)
 returns jsonb language plpgsql immutable as $$
 declare
   s jsonb := doc;
@@ -2543,6 +2545,12 @@ declare
   -- the name search's hits over those bases
   bl jsonb;
   hb jsonb;
+  -- RULING V27 (1), THE STORED BELT: the served powers' names, the stored powers no served list names, their search and its
+  -- hits over the served descs
+  sv_names text[];
+  sw text[];
+  ssr jsonb;
+  ssh jsonb;
   crimlabels jsonb := '{"thieves'' guild chapter": "Thieves'' Guild Chapter", "thieves'' guild (powerful)": "Thieves'' Guild (Powerful)",
     "assassins'' guild": "Assassins'' Guild", "multiple criminal factions": "Rival Gangs", "black market": "Black Market",
     "black market bazaar": "Black Market Bazaar", "smuggling operation": "Smuggling Operation", "smuggling network": "Smuggling Network",
@@ -2735,6 +2743,45 @@ begin
                                                                                                then e - 'dmNote' else e end order by o), '[]')
                                                                       from jsonb_array_elements(s #> '{powerStructure,factionRelationships}') with ordinality x(e, o)));
       end if;
+    end if;
+  end if;
+  -- RULING V27 (1), THE STORED BELT ((38); the tenth chair, 2026-11-25 07:19 UTC; VEIL-51's 483d95861, rebuilt by VEIL-56's
+  -- U45): THE WITHHELD SET IS READ OFF THE STORED DOCUMENT: every power of `stored`'s two lists (powerStructure.factions[],
+  -- factions[]) that NO served list names, whatever stage dropped it (the maker's hand-hiding in the projection, or the
+  -- veil). A served desc (both lists) that names one by the lane's fold (_gallery_veil_name_search over those names, the
+  -- served powers' names its open names) and whose BASE, as the always-pass's standing cut leaves it, still names one,
+  -- leaves WHOLE (the key; the power stays): (38) (e)'s mechanism over the stored set. It runs BEFORE the house gate, so a
+  -- hand-hidden POWER (no house hidden whole) reaches it. No new served fact: a desc is withheld, never masked. A NULL or
+  -- non-object `stored` leaves the read as it was. Twin: galleryRosterChoices.js :: applyRosterChoices (`stored`)
+  if jsonb_typeof(stored) = 'object' then
+    sv_names := array(select v from (select jsonb_array_elements(case when jsonb_typeof(s #> '{powerStructure,factions}') = 'array' then s #> '{powerStructure,factions}' else '[]' end) f
+                                     union all select jsonb_array_elements(case when jsonb_typeof(s -> 'factions') = 'array' then s -> 'factions' else '[]' end)) q,
+      lateral (select q.f ->> 'faction' as v where jsonb_typeof(q.f -> 'faction') = 'string' union select q.f ->> 'name' where jsonb_typeof(q.f -> 'name') = 'string') w);
+    sw := array(select distinct v from (select jsonb_array_elements(case when jsonb_typeof(stored #> '{powerStructure,factions}') = 'array' then stored #> '{powerStructure,factions}' else '[]' end) f
+                                        union all select jsonb_array_elements(case when jsonb_typeof(stored -> 'factions') = 'array' then stored -> 'factions' else '[]' end)) q,
+      lateral (select q.f ->> 'faction' as v where jsonb_typeof(q.f -> 'faction') = 'string' union select q.f ->> 'name' where jsonb_typeof(q.f -> 'name') = 'string') w
+      where jsonb_typeof(q.f) = 'object' and v <> ''
+        and not (public._gallery_veil_str(q.f -> 'faction') = any(sv_names) or public._gallery_veil_str(q.f -> 'name') = any(sv_names)));
+    ssr := case when cardinality(sw) > 0 then public._gallery_veil_name_search(sw, sv_names) end;
+    if ssr is not null then
+      ssh := public._gallery_veil_name_hits(jsonb_build_array(
+              (select jsonb_agg(e -> 'desc') from jsonb_array_elements(case when jsonb_typeof(s #> '{powerStructure,factions}') = 'array' then s #> '{powerStructure,factions}' else '[]' end) e where jsonb_typeof(e -> 'desc') = 'string'),
+              (select jsonb_agg(e -> 'desc') from jsonb_array_elements(case when jsonb_typeof(s -> 'factions') = 'array' then s -> 'factions' else '[]' end) e where jsonb_typeof(e -> 'desc') = 'string')), ssr);
+      foreach sd in array array['powerStructure', 'top'] loop
+        pth := case when sd = 'top' then array['factions'] else array['powerStructure', 'factions'] end;
+        if jsonb_typeof(s #> pth) = 'array'
+           and exists (select 1 from jsonb_array_elements(s #> pth) e
+                        where jsonb_typeof(e -> 'desc') = 'string' and public._gallery_veil_power_named(e -> 'desc', '{}'::text[], ssh)) then
+          bl := public._gallery_veil_withhold_always(jsonb_build_object('factions', (select jsonb_agg(jsonb_build_object('desc',
+                  case when jsonb_typeof(e -> 'desc') = 'string' and public._gallery_veil_power_named(e -> 'desc', '{}'::text[], ssh) then e -> 'desc' end) order by o)
+                  from jsonb_array_elements(s #> pth) with ordinality x(e, o)))) -> 'factions';
+          hb := public._gallery_veil_name_hits((select jsonb_agg(y.d -> 'desc') from jsonb_array_elements(bl) y(d) where jsonb_typeof(y.d -> 'desc') = 'string'), ssr);
+          s := jsonb_set(s, pth, (select coalesce(jsonb_agg(case when jsonb_typeof(y.d -> 'desc') = 'string' and public._gallery_veil_power_named(y.d -> 'desc', '{}'::text[], hb)
+                                                                 then x.e - 'desc' else x.e end order by x.o), '[]')
+                                    from jsonb_array_elements(s #> pth) with ordinality x(e, o)
+                                    left join jsonb_array_elements(bl) with ordinality y(d, o2) on y.o2 = x.o));
+        end if;
+      end loop;
     end if;
   end if;
   if not whole then return s; end if;
@@ -3086,8 +3133,15 @@ begin
   return s;
 end $$;
 
+-- [212: NEW] public._gallery_veil_roster_choices (the two-argument form: RULING V27 (1)'s wrapper, no stored row)
+create or replace function public._gallery_veil_roster_choices(doc jsonb, pub jsonb)
+returns jsonb language sql immutable as $$
+  select public._gallery_veil_roster_choices(doc, pub, null::jsonb)
+$$;
+
 -- VR27 (as amended): called only inside the definer reads (by _gallery_veil), revoked by name
 revoke execute on function public._gallery_veil_roster_choices(jsonb, jsonb) from public, anon, authenticated;
+revoke execute on function public._gallery_veil_roster_choices(jsonb, jsonb, jsonb) from public, anon, authenticated;
 -- R3-CURE-2: and its helper, called only by it
 revoke execute on function public._gallery_veil_power_named(jsonb, text[], jsonb) from public, anon, authenticated;
 -- R3-CURE-4: and its two helpers, called only by it
@@ -3300,7 +3354,10 @@ revoke execute on function public._gallery_veil_rekey_served(jsonb, jsonb, text)
 -- by the card (_gallery_veil_rekey_served, over the body as it stood before the re-key). Twin: galleryVeil.js ::
 -- applyVeil (after applyRosterChoices, before withholdAlways), projectShareVeil's unmarked path;
 -- galleryVeilPeople.js :: readSalt.
-create or replace function public._gallery_veil(pub jsonb, overrides jsonb, link boolean, copy boolean default false)
+-- RULING V27 (1) (THE STORED BELT, (38)): the FIVE-ARGUMENT form; `stored` (no default, so a call of three or four
+-- arguments resolves to the wrapper below, which passes NULL) is the stored document the door serves from, handed to the
+-- roster choices on both paths (the marked body and an unmarked listing's projection).
+create or replace function public._gallery_veil(pub jsonb, overrides jsonb, link boolean, copy boolean, stored jsonb)
 returns jsonb language plpgsql volatile as $$
 declare
   -- the stored overrides, decompressed ONCE: every later look at them is in memory (a stored object
@@ -3323,7 +3380,7 @@ begin
   -- VEIL-22 (R3): and the roster choices before it (nothing is hidden whole there: VR31's shares alone can move)
   -- R4-IDS (item 5): and every person id re-keyed between the two, the marker's person keys with it (registry: people.rekey)
   if res is null then
-    body := case when jsonb_typeof(pub) = 'object' then public._gallery_veil_roster_choices(pub, pub) end;
+    body := case when jsonb_typeof(pub) = 'object' then public._gallery_veil_roster_choices(pub, pub, stored) end;
     served := public._gallery_veil_rekey_served(public._gallery_veil_served(ov, null, to_jsonb(people), copy), coalesce(body, '{}'::jsonb), salt);
     return jsonb_build_object('served', served)
       || case when body is not null then jsonb_build_object('body', public._gallery_veil_withhold_always(public._gallery_veil_rekey(body, salt))) else '{}'::jsonb end;
@@ -3336,7 +3393,7 @@ begin
       where jsonb_typeof(e) <> 'object' or public._gallery_veil_truthy(e -> 'name') or public._gallery_veil_truthy(e -> 'role')), '[]'));
   end if;
   -- VEIL-22 (R3): the drawn conditional rows (the roster choices), then R2's step
-  body := public._gallery_veil_roster_choices(body, pub);
+  body := public._gallery_veil_roster_choices(body, pub, stored);
   -- R4-IDS (items 5, 6): the served marker by the cards as they stand, then every person id re-keyed under the call's salt
   -- (registry: people.rekey)
   served := public._gallery_veil_rekey_served(public._gallery_veil_served(ov, res -> 'groupings', to_jsonb(people), copy), body, salt);
@@ -3348,6 +3405,14 @@ begin
     'groupings', res -> 'groupings',
     'served', served);
 end $$;
+
+-- [212: RESTATED] public._gallery_veil (211's four-argument signature): RULING V27 (1)'s wrapper, no stored row. A door
+-- that holds its stored row calls the five-argument form (tests/lint/veilDoorsPassStored.walker.test.js); 211's
+-- get_gallery_map, not restated here, still calls this one until unit 3 restates it.
+create or replace function public._gallery_veil(pub jsonb, overrides jsonb, link boolean, copy boolean default false)
+returns jsonb language sql volatile as $$
+  select public._gallery_veil(pub, overrides, link, copy, null::jsonb)
+$$;
 
 -- VR27 (as amended): a helper this lane adds, called only inside the definer reads, is revoked by name
 revoke execute on function public._gallery_veil_minus_at(jsonb, text[], text[]) from public, anon, authenticated;
@@ -3655,7 +3720,8 @@ as $$
   ) proj
   -- 211: the share's veil, applied here (NULL for an unmarked listing: served as before); the freeze
   -- date travels only with the frozen copy (R5)
-  cross join lateral (select public._gallery_veil(proj.d, s.gallery_member_overrides, false, src.copied) as v offset 0) vl
+  -- RULING V27 (1): the stored row the read serves from (src.j: the frozen copy in snapshot mode, else the live town)
+  cross join lateral (select public._gallery_veil(proj.d, s.gallery_member_overrides, false, src.copied, src.j) as v offset 0) vl
   where s.public_slug = dossier_slug
     and s.is_public = true
     and not src.refused
@@ -3718,7 +3784,8 @@ as $$
     offset 0
   ) proj
   -- 211: the share's veil; an unmarked share takes the default veil (the link's readers are players)
-  cross join lateral (select public._gallery_veil(proj.d, s.gallery_member_overrides, true) as v offset 0) vl
+  -- RULING V27 (1): the stored row the link serves from (base.j)
+  cross join lateral (select public._gallery_veil(proj.d, s.gallery_member_overrides, true, false, base.j) as v offset 0) vl
   where s.unlisted_slug = p_slug
   limit 1;
 $$;
@@ -3781,7 +3848,8 @@ as $$
     offset 0
   ) proj
   -- 211: the share's veil (NULL for an unmarked listing: served as before)
-  cross join lateral (select public._gallery_veil(proj.d, s.gallery_member_overrides, false, src.copied) as v offset 0) vl
+  -- RULING V27 (1): the stored row the import serves from (src.j)
+  cross join lateral (select public._gallery_veil(proj.d, s.gallery_member_overrides, false, src.copied, src.j) as v offset 0) vl
   where s.public_slug = dossier_slug
     and s.is_public = true
     and not src.refused

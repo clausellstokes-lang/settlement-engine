@@ -29,6 +29,10 @@
 -- (ruling 53's fold). Rehearsed on a local chain: 001..211 + 212 + this file equals 001..211 (every public function's
 -- definition, volatility and grants; docs/chair/2026-11-20/veil/out/v35/r4isql/).
 --
+-- RULING V27 (1) ((38), THE STORED BELT): 212 creates two NEW FORMS, the five-argument _gallery_veil and the
+-- three-argument _gallery_veil_roster_choices (211's four-argument _gallery_veil goes back in section 1, verbatim; the
+-- two-argument roster choices is dropped as before); both new forms are dropped first in section 2, by signature.
+--
 -- NOT reversed, because there is nothing to: no stored row was written by 212.
 
 -- ── 1. the six functions 212 restated, at the frozen 211's statements, verbatim ───────────────────────
@@ -439,6 +443,9 @@ end $$;
 
 -- ── 2. the helpers 212 created, by signature (thirty-one: COHERENCE-VEIL-10 replaced the eighth seat's sweep, _folded_name, _names and _sweep, by the name search's fourteen, _name_* and _named; COHERENCE-VEIL-11 added _case_fold; COHERENCE-VEIL-12 added _name_bound and _name_pad, and _clauses, which VEIL-15 replaced by _runs; VEIL-16 added _name_json and _name_tokens, and _name_near takes a range of tokens) ──
 -- VEIL-35 (R4-IDS): the seven, callers first (the re-key and the marker, then the carriers they call, then the fold)
+-- RULING V27 (1): the two new forms, by signature (the five-argument _gallery_veil first: it calls the other)
+drop function if exists public._gallery_veil(jsonb, jsonb, boolean, boolean, jsonb);
+drop function if exists public._gallery_veil_roster_choices(jsonb, jsonb, jsonb);
 drop function if exists public._gallery_veil_rekey_served(jsonb, jsonb, text);
 drop function if exists public._gallery_veil_rekey(jsonb, text);
 drop function if exists public._gallery_veil_rekey_each(jsonb, text[], text[], jsonb, text);

@@ -615,9 +615,12 @@ function dropField(card, kind, field) {
  *
  * @param {unknown} publicSettlement  toPublicSafe's output (never a raw record)
  * @param {Iterable<string>|null|undefined} veil  resolveVeil's output
- * @param {{ salt?: string }} [opts]  R4I-PAGE-2 S1 (the chair's E136 (b)): the read's salt, passed ONLY by the owner's own
- *   curate switch (criminalVeilSwitch.js :: presentCriminalGroupings, whose copies must compare under one salt); absent,
- *   one is drawn for this call, as before. No share read passes one, and the server takes none from a caller.
+ * @param {{ salt?: string, stored?: unknown }} [opts]  R4I-PAGE-2 S1 (the chair's E136 (b)): the read's salt, passed ONLY by
+ *   the owner's own curate switch (criminalVeilSwitch.js :: presentCriminalGroupings, whose copies must compare under one
+ *   salt); absent, one is drawn for this call, as before. No share read passes one, and the server takes none from a caller.
+ *   `stored` (RULING V27 (1), THE STORED BELT; 212 (38)): the stored document the read serves from, handed to the roster
+ *   choices, which withhold a served desc naming a stored power no served list names (212 :: _gallery_veil's fifth
+ *   argument); absent, the read is as before.
  * @returns {Rec}
  */
 export function applyVeil(publicSettlement, veil, opts) {
@@ -781,7 +784,7 @@ export function applyVeil(publicSettlement, veil, opts) {
   // rungs the owner's save shipped for it as TEXT, so the owner's later toggle needs no re-save.
   dropVeiledPublicProse(s, groupings);
   // VEIL-22 (R3): the drawn conditional rows (212 :: _gallery_veil_roster_choices, before R2's step)
-  applyRosterChoices(s, isRec(publicSettlement) ? publicSettlement : {}, instKind.idOf);
+  applyRosterChoices(s, isRec(publicSettlement) ? publicSettlement : {}, instKind.idOf, opts ? opts.stored : undefined);
   // R4-IDS (item 5; VR10): every person id re-keyed under the call's salt, after the roster choices (which compare the
   // body's people with the projection's by stored id) and before withhold-always (whose cast pass matches roles to people
   // by id: both re-keyed); 212 :: _gallery_veil_rekey, galleryVeilPeople.js :: rekeyPeople (registry: people.rekey)
@@ -1272,9 +1275,11 @@ export function curateModelFor(publicSettlement, deltas) {
  * stored deltas, applied. An unmarked (pre-veil) share is returned unchanged.
  * @param {Rec} publicSettlement  toPublicSafe's output
  * @param {unknown} memberOverrides  the share row's gallery_member_overrides
+ * @param {{ stored?: unknown }} [opts]  RULING V27 (1) (212 (38), THE STORED BELT): the stored document the read serves from
+ *   (212 :: _gallery_veil's fifth argument), on both paths; absent, the read is as before
  * @returns {Rec}
  */
-export function projectShareVeil(publicSettlement, memberOverrides) {
+export function projectShareVeil(publicSettlement, memberOverrides, opts) {
   const { marked, deltas } = readShareVeil(memberOverrides);
   // VEIL-19 (item D (4)): an unmarked share is served as before, but for each income row's `weight` (every non-owner read);
   // VEIL-21 (R2): and for what no non-owner read sends whatever the veil (212 :: _gallery_veil, the unmarked body)
@@ -1283,11 +1288,11 @@ export function projectShareVeil(publicSettlement, memberOverrides) {
   // (withhold_always(rekey(roster_choices(pub, pub), salt)), 212 :: _gallery_veil's unmarked body)
   if (!marked) {
     const s = /** @type {Rec} */ (deepClone(withholdIncomeWeights(publicSettlement)));
-    applyRosterChoices(s, publicSettlement, CARD_KINDS.institution.idOf);
+    applyRosterChoices(s, publicSettlement, CARD_KINDS.institution.idOf, opts ? opts.stored : undefined);
     rekeyPeople(s, readSalt());
     return withholdAlways(s);
   }
-  return applyVeil(publicSettlement, resolveVeil(defaultVeilFor(publicSettlement), deltas));
+  return applyVeil(publicSettlement, resolveVeil(defaultVeilFor(publicSettlement), deltas), opts && opts.stored !== undefined ? { stored: opts.stored } : undefined);
 }
 
 /**

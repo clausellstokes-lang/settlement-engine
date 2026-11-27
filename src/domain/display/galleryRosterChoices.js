@@ -122,9 +122,11 @@ const objectsOf = (list) => (Array.isArray(list) ? list.filter(isRec) : []);
  * flag "a hidden house raised" is one the stored record holds true (or not at all: unsure) that the served houses no longer
  * raise (withholdSecondHomes recomposed them, item C). What is left is dense (VR21). SQL twin: 212 ::
  * _gallery_veil_roster_choices, rule for rule.
- * @param {Rec} s @param {Rec} pub @param {(card: Rec) => string} idOf
+ * RULING V27 (1) (212 (38), THE STORED BELT): `stored`, the stored document the read serves from (212's third argument);
+ * absent or not an object, the read is as before.
+ * @param {Rec} s @param {Rec} pub @param {(card: Rec) => string} idOf @param {unknown} [stored]
  */
-export function applyRosterChoices(s, pub, idOf) {
+export function applyRosterChoices(s, pub, idOf, stored) {
   // registry: power.entry (VR42: the governing power's row is never removed; any other criminal power where a house is hidden whole)
   const { served: houses, gone: goneHouses } = rosterHouses(s, pub, idOf);
   const gone = goneHouses.map(h => caseFold(str(h.name)));
@@ -175,6 +177,9 @@ export function applyRosterChoices(s, pub, idOf) {
       }
     }
   }
+  // RULING V27 (1), THE STORED BELT (212 (38); the tenth chair, 07:19 UTC 2026-11-25): before the house gate, so a
+  // hand-hidden POWER reaches it
+  withholdStoredNamedDescs(s, ps, stored);
   if (!whole) return;
 
   // R3-CURE (unit 2; the chair's ruling of 07:39: "LEAVES WHOLE" MEANS EVERY COPY): the withheld powers (every power of
@@ -445,6 +450,29 @@ function withholdPowerCopies(s, pub, ps) {
   for (const holder of [ps, s]) {
     if (holder && Array.isArray(holder.factions)) {
       holder.factions = holder.factions.map(f => (isRec(f) && typeof f.desc === 'string' && named(f.desc) && named(standingBase(f.desc)) ? (({ desc: _d, ...rest }) => rest)(f) : f));
+    }
+  }
+}
+
+/**
+ * RULING V27 (1), THE STORED BELT (212 (38); VEIL-51's 483d95861, rebuilt by VEIL-56's U45): THE WITHHELD SET IS READ OFF
+ * THE STORED DOCUMENT: every power of `stored`'s two lists that NO served list names, whatever stage dropped it (the
+ * maker's hand-hiding in the projection, or the veil). A served desc (both lists) that names one by the lane's fold
+ * (buildNameSearch over those names, the served powers' names open) and whose BASE, as the standing cut leaves it
+ * (standingBase), still names one, leaves WHOLE (the key; the power stays). No new served fact. In place; a `stored`
+ * that is not an object changes nothing. SQL twin: 212 :: _gallery_veil_roster_choices (sv_names, sw, ssr).
+ * @param {Rec} s @param {Rec | null} ps @param {unknown} stored
+ */
+function withholdStoredNamedDescs(s, ps, stored) {
+  if (!isRec(stored)) return;
+  const servedNames = new Set([...objectsOf(ps?.factions), ...objectsOf(s.factions)].flatMap(powerNamesOf));
+  const out = [...objectsOf(recAt(stored, 'powerStructure')?.factions), ...objectsOf(stored.factions)]
+    .filter(f => ![str(f.faction), str(f.name)].some(n => servedNames.has(n)));
+  const search = buildNameSearch([...new Set(out.flatMap(powerNamesOf).filter(v => v !== ''))], servedNames);
+  if (!search) return;
+  for (const holder of [ps, s]) {
+    if (holder && Array.isArray(holder.factions)) {
+      holder.factions = holder.factions.map(f => (isRec(f) && typeof f.desc === 'string' && search.hit(f.desc) && search.hit(standingBase(f.desc)) ? (({ desc: _d, ...rest }) => rest)(f) : f));
     }
   }
 }
