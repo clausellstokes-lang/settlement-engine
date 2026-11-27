@@ -62,3 +62,9 @@ THE NEXT COMMAND: read each child's first report as it lands; relay the chair's 
   TWO NOTES FOR THE JOIN: (1) the block asserts no unexpected boot failure on the full chain and on the chain to 211 but not on the chain
   to 210; (2) the owner's page says "after 211 and before 212": its numbers move with the renumbering. It is read again on the joined tree
   with the second reader and the chair (the pause page's item 3).
+- 2026-11-27T23:29:54Z: THE CHAIR: my first line and plan ACCEPTED as written. RULING V30 (`docs/chair/2026-11-27/eleventh/veil/RULING-V30.md` on
+  the chair's record, c1fecc6cd; read by me): my recommendation IS the rule ((a)+(b) in the link's spelling; an orphan copy always withheld;
+  the sentence closed where the orphan is not a live covert tie's copy, judged as the link judges where (b) names the tie; drift: both go;
+  NOT VEIL-52's narrowing). OWED BEFORE "TIP? U3R": the writer-oracle at every door and the link, the drift plant red first, (d) and narrated
+  copies, the clean count restated. RELAYED to U3R as "PS-RULE". U3R, U45, PG each sent a first line (seated on 08a9dd8fb, dbd4cd9e5,
+  04fa8d60e); MC's first line not yet in.
