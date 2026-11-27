@@ -45,7 +45,7 @@ beforeAll(async () => { await loadGenerationLawPayloads(); }, 120000);
 describe('SEAM-ECON item 1 (8c.export): a crop the scarce harvest denies is not sent out', () => {
   // [seed, a crop the record exports, a sibling that still prints]
   const GONE = [
-    ['bar0-village-famine-rand-27', 'Desert grain', 'Sacred wood'], // the crops failed (no source named): "Harvest Scarce in the famine."
+    ['bar0-village-famine-rand-27', 'Pressed dates', 'Sacred wood'], // the crops failed (no source named): "Harvest Scarce in the famine." (R11: the palms' good, "Desert grain" before)
     ['bar0-village-famine-rand-38', 'Milled flour', 'Sacred wood'], // the herds failed; the mark reads the harvest's grain scarce with them
   ];
   test('each town: the record exports the crop, the page does not; its sibling prints (every row)', () => {
