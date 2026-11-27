@@ -21,7 +21,7 @@ const LEAD = 'A critical resource ';
 
 /** The two stored sentences, each led by "A critical resource ". @type {ReadonlySet<string>} */
 const STORED = new Set([SCARCITY?.description, SCARCITY?.byMemory?.unanchored?.description]
-  .filter((d) => typeof d === 'string' && d.startsWith(LEAD)));
+  .filter(/** @returns {d is string} */ (d) => typeof d === 'string' && d.startsWith(LEAD)));
 
 /**
  * @param {unknown} settlement the record (its `resourceAnalysis.imports` is read)
