@@ -1705,3 +1705,16 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
 - `readerShapeResolver` "pulse-like" 264 against 256 is THE KNOWN LONG-TMPDIR ARTIFACT (the landing brief has said so since
   point 118): not a red of any unit.
 - LAND-120's agent: ad227fbdc9f50547d (continued by SendMessage with a ruling file `landing/RULING-120-4.txt` or later; its report comes as a message). D13-120 (a16f77d1000cac948) is finished and can be resumed for a cure.
+
+## T149 (08:08 UTC on 2026-11-27): THE READER'S RE-READ RULED (G81); ONE LAST ROUND ON THE ID GUARD SENT; THE HELPER'S GATE RUNS
+
+- THE READER (a11860ef534ef1300, finished; 883,000 tokens in all: NOT resumed again): the product clean on 15adda3ee1;
+  four findings, all in the id guard (test-side). `landing/120/SECOND-READER-120-B.txt`.
+- G81: THE GUARD CATCHES HONEST MISTAKES, NOT A DELIBERATE EDITOR; four cheap hardenings once (`landing/RULING-120-4.txt`,
+  SENT to D13-120 a16f77d1000cac948), a "does not catch" list in the guard's own head, THEN THE GUARD IS CLOSED. No third
+  read by the second reader (no product source changes): the builder proves by the reader's plants; THE CHAIR READS THE DIFF.
+- LAND-120 (ad227fbdc9f50547d) is merging and gating in /home/user/wt/line on 15adda3ee1 and 9c19f4723f; its wide gate
+  takes about two hours. WHEN IT REPORTS AND THE BUILDER'S LAST ROUND IS IN AND READ: `landing/RULING-120-5.txt` to the
+  helper: merge the builder's branch AGAIN (the new commits are test-side: fast for git), `node scripts/stable-pick-ids-door.mjs`
+  must say the baseline matches the tree, the lighting census by its door again if the count moved, `tests/lint` whole,
+  typechecks; then PUSH `lane/stack-120-wip-2026-11-27`; then the chair's row, gate paragraph, the line's push, the lists, CI.
