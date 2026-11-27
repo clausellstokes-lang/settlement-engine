@@ -528,7 +528,7 @@ See section 4, newest last.
 - A LESSON FOR THE NEXT CHAIR: `list_events` with kinds ["result"] on a child returns about 40,000 tokens of run metadata for
   three sentences: use `list_sessions` with `children: true` (its `post_turn_summary`) and the branches.
 
-## V22 (23:25 UTC on 2026-11-27): READER 121 REPORTED (5 FINDINGS, "THE BAR HOLDS", NO LANDING-STOPPER); RULED (E19, 121-4); ONE CURE ROUND STARTED; RULING 123-1 RECORDED; THIS MACHINE RESTARTED
+## V22 (23:15 UTC on 2026-11-27): READER 121 REPORTED (5 FINDINGS, "THE BAR HOLDS", NO LANDING-STOPPER); RULED (E19, 121-4); ONE CURE ROUND STARTED; RULING 123-1 RECORDED; THIS MACHINE RESTARTED
 - **THE MACHINE RESTARTED at about 23:10 UTC** (uptime read 2 minutes at 23:12): every worktree, the scratchpad and
   `node_modules` survived; every LOCAL background seat was lost with it (none was owed a report: TAIL-121 and GUARD-120R had
   finished). The child seats run on their own machines and were not touched.
@@ -561,3 +561,62 @@ See section 4, newest last.
   V after 122-A-1 (its tip e096d4a96).
 - THE SURVEY's MEASURES: SURVEY-MEASURE has pushed (A) and (G) (`lane/survey-measure-2026-11-27` at f6c629b80); VOICES-MEASURE
   has pushed nothing yet. Neither has reported.
+
+## V23 (23:50 UTC on 2026-11-27): POINT 121 JOINED LOCALLY (04fe78096), ITS WHOLE SUITE RUNNING IN FOUR SHARDS; THE SHARE VEIL RESUMED (VEIL-56, V30); TWO MEASURES STARTED; **THE ACCOUNT's WEEKLY WINDOW READS "allowed_warning"**
+- **THE ACCOUNT (read at 23:47 UTC by `get_session` on this session and on two children):** `rate_limit_info`: seven_day,
+  status `allowed_warning`, no overage, resets 2026-12-04 about 09:00 UTC (it read `allowed` at 15:48 UTC). THE OWNER WAS TOLD
+  AT ONCE, in plain words, with his choice (extra usage on, or the week stretched by fewer seats). UNTIL HE ANSWERS THE CHAIR
+  STRETCHES IT: NO NEW SEAT is started; town work goes before the share veil (his order of 2026-11-25); every seat pushes at
+  every step boundary (an idle container may be reclaimed: unpushed work is lost, as the old account's was); the veil lane
+  is cut to two builders. A SUCCESSOR READS THIS FIRST and reads the window before starting anything.
+- **E20: CURE-121 ACCEPTED** (the chair read its diff whole): `lane/stack-121-cure-wip-2026-11-27` e422098f8 (the ids test
+  append-only; the rotation's pin: six rotated tables, ECONOMY_FRAMES among them: the brief said five call sites, there are
+  six), b510bd328 (the frames' `{ id, say }` pin), fbd2c84ed (the door's comment: 5,348 not 5,359; 19 keys). Every plant red
+  where it should be; a renumbering is green in the ids test and RED in the guard, as ruled.
+- **READER 121's AMENDED REPORT** (a926c2c2f; filed whole: `landing/121/`): item (10): 43 plants on the guard: the seven
+  faults red and refused, point 120's 144 scopes equal (+262, -0), every ranked pool in the table; FINDING 6: three things
+  the guard did not see. **RULED 121-5** (`landing/RULING-121-5.txt`): (a) a row moved between two pools of one export: not
+  a breach of the bar, said in the head, the cast wants' id form pinned (`<role>.<n>`); (b) an empty-string id: a fault,
+  refused in every family (`idProblem`); (c) a `say` frame naming an imported binding could never be banked (the test
+  loader rewrites a function's source): a fault; (d) case, whitespace and comments said in the head. THE BUILDER (GUARD-121C,
+  a fresh local Opus seat) STOPPED RIGHTLY ON (c): it ran the loader's own transform and showed four forms no text
+  normaliser can undo. **RULED 121-6 (by message; E21): NO NORMALISER; ONE RUNTIME:** the walker takes the imported-pools
+  family from a plain-node child of the door (`node scripts/stable-pick-ids-door.mjs --print-tree`), fail-closed on a bad
+  exit, empty output, bad JSON or too few scopes. Built at 9d49b33b3 (after c23762c74 and 4f542974d); the chair read the
+  diff whole; the walker's file got faster (1.7 s to 0.65 s); the baseline unchanged (160 scopes, 819 ids).
+- **LAND-121** (a local Opus helper; `prompts/START-LAND-121.txt`; its scratch `…/scratchpad/landing/121/land/`): on
+  682667fe2, three merges, no conflict: c46d98e02 (the ranked picks, 2ab62ef33), c0c516ac0 (the guard's third family,
+  cccda7569), ff495a53d (the reader's cure round, fbd2c84ed); the lighting census by its own door cadad474d (files 3,822 to
+  3,826; titles 32,076 to 32,103); observed-shape, `gen:dossier-prose --check`, the wiring census green, not re-taken; the
+  ids' door "matches". Ratchet 167 of 167, strict 1113 of 1113, packets 257 valid, lint 0 errors, build clean;
+  `VERIFY_DIST=1 tests/build`: 628 tests, 13 failed, ALL 13 ON THE LIST. THE FIVE SIZES: first paint 1,192,955 raw (+1,710
+  on point 120) / 380,432 gzip (+503) / 319,327 Brotli (+391); the generation worker 2,741,042 (+1,792); the engine chunk
+  937,247 (0): NAMED FOR THE OWNER's SIZE SIGNING, raised by nobody. THE HOME PAGE's SAMPLE TOWN DID NOT MOVE (its two
+  freshness tests green; its door not run).
+- **THE CHAIR's OWN TWO COMMITS ON THE LINE's LOCAL TREE:** 4fb44bdd4 (merge of the guard's cure round, 9d49b33b3) and
+  04fe78096 (the lighting census again by its own door: titles 32,103 to 32,108, suite titles 8,927 to 8,929); both
+  typechecks and eslint on the merged files green; the census, the walker, the cast wants and the mutation manifest 81 of 81.
+  **THE JOINED TIP IS 04fe78096, PUSHED AS TRANSPORT `lane/stack-121-wip-2026-11-27` (23:46 UTC; the hook clean). THE
+  LINE ITSELF HAS NOT MOVED (origin's `lane/join-2026-11-14` is 682667fe2).**
+- **THE WHOLE SUITE, "LAND121", FOUR SHARDS ON 04fe78096 (started 23:46 UTC; the cheaper tier):**
+  session_01FE9mEvdmfmAtfVhyJnjj2a (1/4), session_01FE9mEtt6aGajEv3yHmSicz (2/4), session_01FE9mExDbgLTDSXghTAxJzi (3/4),
+  session_01FE9mEtsmEiSnNwhfTACnpt (4/4); each pushes `lane/shard-land121-<k>of4-2026-11-27`. WHEN ALL FOUR ARE IN:
+  `shards/results/sort.py LAND121 4`; expected: the list's rows and none new (57 failed at point 120). THEN: the row and the
+  gate paragraph in `docs/chair/2026-11-17/sixth/LANDINGS-SIXTH.md` (it says F1's exception by name, F4's number, the
+  sizes), the fast-forward push of the line, `LINE-NOW.md`, CI read by name.
+- **THE SHARE VEIL IS RESUMED (23:17 UTC): VEIL-56**, session_01FE9mEt9K6uWD47h9Tj63hQ (`claude-fable-5-2`, high), the lane's
+  owner, brief `prompts/START-VEIL-56.txt`; documents `lane/veil-56-2026-11-27`, the tip `lane/veil-56-2026-11-27-tip`
+  (dbd4cd9e5). WHAT IT FOUND: VEIL-51's V27 work is in no ref and no document (a true rebuild of units 4 and 5);
+  **THE BRIEF's "the tip stands on point 116" IS WRONG: the tip's merge base with the line is 8f3b8bf4b (POINT 73): the
+  join carries points 74 to 120**; a trial merge of 682667fe2: 16 conflicts, all documents, registers and four test files,
+  none under src or supabase. ITS SEATS (Opus, high): U3R session_01FE9mEwfVPNQEWPDzhFpCtc (unit 3's rework), U45
+  session_01FE9mEtsxe2wE8icsSaauPj (units 4 and 5 rebuilt, A5's field in the cut), PG session_01FE9mEuyVYboBzwMNjdP4M8
+  (V29's arm), MC session_01FE9mEvbYUFFY3VDhYajTtC (MAP-COST, READ-COST). **RULING V30** (`veil/RULING-V30.md`): unit 3's
+  rule for the covert check on a copy, as VEIL-56 recommended ("unsure is closed"; the writer as oracle and a drift plant
+  before "TIP?"). AFTER THE WINDOW's WARNING (23:48): U3R and U45 only; PG and MC finish the measure in hand, push, stop.
+- **TWO MEASURES STARTED (23:19 UTC; Opus, high; on cccda7569):** RENAME-MEASURE session_01FE9mEwJ5n5jBNfPkShS7Ky
+  (`prompts/START-RENAME-MEASURE.txt`; `lane/rename-measure-2026-11-27`, at (C) by 23:39) and TRAD-MEASURE
+  session_01FE9mEufpvXTPAep9k4Hb9H (`prompts/START-TRAD-MEASURE.txt`; `lane/trad-measure-2026-11-27`, at (D) by 23:45).
+- STILL OUT, NOT REPORTED: R-CURES-A (re-rendering after 122-A-1), R-CURES-B (B4's corpora), R-BIRTH (pushing 1e8576d08),
+  SURVEY-MEASURE, VOICES-MEASURE. OWED BY THE CHAIR AFTER THEM: the whole read of the final cure branches; D1 (the
+  Overview's "Governed by", after point 121 lands); ONE independent reader over points 122 and 123; their landings.
