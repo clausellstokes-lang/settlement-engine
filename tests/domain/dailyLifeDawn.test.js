@@ -7,7 +7,7 @@
  * printed "Bakers light their ovens first …". THE GREEN: on born places of every size (M1's births `hxd-<size>-0..2`),
  * the slot prints only a line of its branch's pool whose declared atoms the record holds, its houses live, non-hideable,
  * non-access rows said `the <noun>`; the defence pool only under a real outside threat at medium or above (ruling 8);
- * a calm thorp or hamlet holds >= 7 eligible default lines; the pick is `pickVariantMixed` over the eligible lines on
+ * a calm thorp or hamlet holds >= 7 eligible default lines; the pick is `pickRendezvous` over the eligible lines on
  * `<name>::dailyLife.dawn_work::<branch>`; a nameless record takes index 0; no true line gives the EMPTY string (ruling 3).
  */
 import { describe, it, expect, beforeAll } from 'vitest';
@@ -22,7 +22,7 @@ import { deriveAllCapacities } from '../../src/domain/capacityModel.js'; // CLOS
 import { defenceOf } from '../../src/domain/facts/defence.js';
 import { hasInstitution } from '../../src/domain/facts/institutions.js';
 import { deriveAllThreatProfiles } from '../../src/domain/threatProfile.js';
-import { pickVariantMixed } from '../../src/kernel/proseHash.js';
+import { pickRendezvous } from '../../src/kernel/proseHash.js';
 import { isLiveInstitution } from '../../src/domain/institutions/institutionRoster.js';
 import { ACCESS_ONLY } from '../../src/domain/facts/liveInstitutionNames.js';
 import { isHideableHouse } from '../../src/domain/people/cardVeil.js';
@@ -111,13 +111,13 @@ describe('the route on born places (ruling 11): eligible by declared atoms, then
     });
     expectNoSeedFailures(failures, 'every born thorp and hamlet holds at least seven eligible default lines');
   });
-  it('the pick is pickVariantMixed over the eligible lines on `<name>::dailyLife.dawn_work::<branch>`; a nameless record takes index 0', () => {
+  it('the pick is pickRendezvous (D13 STABLE-PICKS) over the eligible lines on `<name>::dailyLife.dawn_work::<branch>`; a nameless record takes index 0', () => {
     const calm = { name: 'Ashby', tier: 'thorp', institutions: [{ name: 'Water source' }, { name: 'Dwellings (1-8)' }, { name: 'Subsistence farming' }] };
     const text = slotOf(calm).text;
     const own = /** @type {{ branch: string, line: any }} */ (ownLine(text));
     expect(own, text).toBeTruthy();
     const eligible = filterDeclared(POOLS[/** @type {keyof typeof POOLS} */ (own.branch)], { facts: factsOf(calm) });
-    expect(text).toBe(/** @type {any} */ (pickVariantMixed(eligible, `Ashby::dailyLife.dawn_work::${own.branch}`)).text);
+    expect(text).toBe(/** @type {any} */ (pickRendezvous(eligible, `Ashby::dailyLife.dawn_work::${own.branch}`, (/** @type {any} */ l) => l.id)).text);
     expect(slotOf({ ...calm, name: undefined }).text).toBe(eligible[0].text);
   });
   it('a calm place with no true line prints the EMPTY string (ruling 3)', () => {

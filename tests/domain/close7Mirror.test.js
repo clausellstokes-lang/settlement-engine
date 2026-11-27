@@ -13,10 +13,11 @@
  *       reads it off the place's own Daily Life); after, each reads the critical fare and the row reads nothing.
  *   (b) THE WORDS AND THEIR CONDITIONS: K2 and K1 verbatim, each appended after the line it stands in for, with that
  *       line's needs and the atom; C7 and F6 exclude the atom; the atom is fail-closed without a profile.
- *   (c) WHERE THEY PRINT: K1 on the two cell places whose Dawn Work stood on F6's index (C dp-hamlet-117, V dp-hamlet-139);
- *       no cell place prints C7 or F6. K2 prints on no place of C or V: no cell place's pick stands on C7's index.
+ *   (c) WHERE THEY PRINT: K1 on the cell places whose Dawn Work draws it (D13 STABLE-PICKS, point 120: the rendezvous over the
+ *       lines' ids, so C dp-village-76, C dp-village-54, V dp-hamlet-100); no cell place prints C7 or F6. K2 prints on no
+ *       place of C or V: no cell place holds fish.
  *   (d) C7 AND F6 STAY where the source did fail: V dp-thorp-70 (Famine over strained production) keeps C7 and F6, and
- *       C dp-village-52 (the same cell of C) keeps F6.
+ *       C dp-village-52 (the same cell of C) keeps F6 (each record under a stated other name: see (d)).
  */
 import { beforeAll, describe, expect, it } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
@@ -55,7 +56,7 @@ const CELL = /** @type {const} */ ([
   ['V', 'dp-hamlet-100', 'adequate'], ['V', 'dp-hamlet-139', 'adequate'], ['V', 'dp-village-76', 'adequate'],
 ]);
 /** The cell's places whose Dawn Work stands on F6's index of the food branch (measured: `close-7/mirror/`). */
-const K1_PLACES = new Set(['C dp-hamlet-117', 'V dp-hamlet-139']);
+const K1_PLACES = new Set(['C dp-village-76', 'C dp-village-54', 'V dp-hamlet-100']); // D13 STABLE-PICKS: the K1 drawers under the rendezvous
 
 beforeAll(async () => { await loadGenerationLawPayloads(); }, 120000);
 
@@ -116,7 +117,10 @@ describe('(c) where the chair\'s lines print', () => {
 
 describe('(d) C7 and F6 stay where the source did fail', () => {
   it('V dp-thorp-70: Famine over strained production keeps C7 and F6', () => {
-    const s = birth('dp-thorp-70', 'V');
+    // D13 STABLE-PICKS (point 120): the pick is keyed by the town's NAME, and under the rendezvous the record's own name
+    // (Darhannuur) draws C2 and F1, though C7 and F6 are both admitted. The SAME record under the stated name 'Ashfield' draws
+    // C7 and F6 (found by the keys' hashes), so a deriver that drops C7 or F6 where the source failed reds this row.
+    const s = { ...birth('dp-thorp-70', 'V'), name: 'Ashfield' };
     expect(atomHolds('food: = famine', factsOf(s))).toBe(true);
     expect(deriveAllCapacities(s).capacities.food_production.band).toBe('strained');
     const slots = slotsOf(s);
@@ -124,7 +128,10 @@ describe('(d) C7 and F6 stay where the source did fail', () => {
     expect(String(slots.dawn_work?.text)).toContain(String(dawnOf('F6')?.text));
   }, 120000);
   it('C dp-village-52: Famine over strained production keeps F6', () => {
-    const s = birth('dp-village-52', 'C');
+    // D13 STABLE-PICKS: the record's own name (Bayarserai) draws F1 under the rendezvous; under the stated name 'Ashby' the
+    // same record draws F6 (found by the key's hash), so a deriver that drops F6 where the source failed reds this row
+    const s = { ...birth('dp-village-52', 'C'), name: 'Ashby' };
+    expect(atomHolds('food: = famine', factsOf(s))).toBe(true);
     expect(deriveAllCapacities(s).capacities.food_production.band).toBe('strained');
     expect(String(slotsOf(s).dawn_work?.text)).toContain(String(dawnOf('F6')?.text));
   }, 120000);

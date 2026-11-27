@@ -7,7 +7,7 @@
  * from the rating alone. THE GREEN: on born places of every size (M1's births `hxd-<size>-0..2`), the slot is either one
  * `none` sentence or "Children are warned about A[, and about B]." with at most two kinds, each part a line of its kind's
  * pool whose declared atoms the record holds, its houses live, non-hideable, non-access rows said `the <noun>`; a calm
- * thorp holds >= 7 eligible `none` lines; the pick is `pickVariantMixed` on `<name>::dailyLife.child_warnings::<kind>`.
+ * thorp holds >= 7 eligible `none` lines; the pick is `pickRendezvous` on `<name>::dailyLife.child_warnings::<kind>`.
  */
 import { describe, it, expect, beforeAll } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
@@ -19,7 +19,7 @@ import { filterDeclared } from '../../src/domain/facts/drawDeclared.js';
 import { factsOf } from '../../src/domain/facts/factsOf.js';
 import { marketOf } from '../../src/domain/facts/market.js';
 import { deriveAllThreatProfiles } from '../../src/domain/threatProfile.js';
-import { pickVariantMixed } from '../../src/kernel/proseHash.js';
+import { pickRendezvous } from '../../src/kernel/proseHash.js';
 import { isLiveInstitution } from '../../src/domain/institutions/institutionRoster.js';
 import { ACCESS_ONLY } from '../../src/domain/facts/liveInstitutionNames.js';
 import { isHideableHouse } from '../../src/domain/people/cardVeil.js';
@@ -115,10 +115,10 @@ describe('the route on born places (ruling 11): eligible by declared atoms, then
     });
     expectNoSeedFailures(failures, 'every born thorp holds at least seven eligible `none` lines');
   });
-  it('a calm place takes the `none` pool by pickVariantMixed on `<name>::dailyLife.child_warnings::none`; a nameless record takes index 0', () => {
+  it('a calm place takes the `none` pool by pickRendezvous (D13 STABLE-PICKS) on `<name>::dailyLife.child_warnings::none`; a nameless record takes index 0', () => {
     const calm = { name: 'Ashby', tier: 'thorp', institutions: [{ name: 'Water source' }, { name: 'Dwellings (1-8)' }, { name: 'Subsistence farming' }], config: { monsterThreat: 'safe' } };
     const eligible = filterDeclared(CHILD_WARNINGS.none, { facts: factsOf(calm) });
-    expect(slotOf(calm).text).toBe(/** @type {any} */ (pickVariantMixed(eligible, 'Ashby::dailyLife.child_warnings::none')).text);
+    expect(slotOf(calm).text).toBe(/** @type {any} */ (pickRendezvous(eligible, 'Ashby::dailyLife.child_warnings::none', (/** @type {any} */ l) => l.id)).text);
     expect(slotOf({ ...calm, name: undefined }).text).toBe(eligible[0].text);
   });
 });

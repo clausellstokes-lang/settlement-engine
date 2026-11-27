@@ -1,0 +1,1362 @@
+{
+  "_doc": "THE ID GUARD of point 120: per scope (<slot>|<branch> for Daily Life; viability), each present id with the fingerprint of its words as banked, and the retired ids. Changed ONLY by scripts/stable-pick-ids-door.mjs --write (it adds, retires, re-banks a re-wording); never re-made. See tests/lint/stablePickIds.shared.mjs.",
+  "scopes": {
+    "child_warnings|unrest": {
+      "present": {
+        "U0": "2278be128ba4",
+        "U1": "2ddaccab996b",
+        "U2": "263203a40f97",
+        "U3": "b6190ba03f21",
+        "U4": "bf96610b5ac2",
+        "U5": "e71ac240f842",
+        "U6": "01995cabd16c",
+        "U7": "ebe36040facd",
+        "U8": "38f6be87e752",
+        "U9": "a335003ac110",
+        "U10": "41d480074aa3"
+      },
+      "retired": []
+    },
+    "child_warnings|economic_collapse": {
+      "present": {
+        "E1": "a91753124146",
+        "E2": "b044f961f282",
+        "E3": "3b252ff3441b",
+        "E4": "40efe8f7440a",
+        "E5": "6d53ad30bbe0",
+        "E6": "5d09a9bf03b2",
+        "E7": "b92820fbaa5d",
+        "E8": "5bc28eaf02d1"
+      },
+      "retired": []
+    },
+    "child_warnings|monster_pressure": {
+      "present": {
+        "P0": "5940fc1ce2f1",
+        "P1": "03b093faf02c",
+        "P2": "1626eb0f39f8",
+        "P3": "dd2d7f1c8936",
+        "P4": "d0b7907b03f4",
+        "P5": "3bb080dec3a5",
+        "P6": "f02edf4695cf",
+        "P7": "84bfd828046a",
+        "P8": "31a1aa42dc4f",
+        "P9": "44695ab06b9b",
+        "P10": "5e3b3d2286c7",
+        "P11": "5e9bf50390ca",
+        "P12": "6acff6eb207d",
+        "P13": "d2cb4f43bd17"
+      },
+      "retired": []
+    },
+    "child_warnings|plague": {
+      "present": {
+        "L0": "8587f7408be1",
+        "L1": "c4035a373544",
+        "L2": "400c18631599",
+        "L3": "4ecce6511230"
+      },
+      "retired": []
+    },
+    "child_warnings|siege": {
+      "present": {
+        "S0": "3be99c907650",
+        "S1": "e54b0ee8e972",
+        "S2": "51ceaa8c77e4"
+      },
+      "retired": []
+    },
+    "child_warnings|famine": {
+      "present": {
+        "A0": "a24b1b6ebba8",
+        "A1": "9fbb11a07ff2",
+        "A2": "9e0417b835b4"
+      },
+      "retired": []
+    },
+    "child_warnings|bandit_raids": {
+      "present": {
+        "R0": "b53cc304928a",
+        "R1": "6a30ea217a71",
+        "R2": "cb4f30bcdf8e"
+      },
+      "retired": []
+    },
+    "child_warnings|rival_neighbor": {
+      "present": {
+        "N2": "a4e03136d21f"
+      },
+      "retired": []
+    },
+    "child_warnings|arcane_instability": {
+      "present": {
+        "Z0": "bca72c09d955",
+        "Z1": "632d76c00003"
+      },
+      "retired": []
+    },
+    "child_warnings|default": {
+      "present": {
+        "D0": "9ea18739ceb2"
+      },
+      "retired": []
+    },
+    "child_warnings|none": {
+      "present": {
+        "X0": "92cd1d3ee89d",
+        "X1": "9e54f1341a14",
+        "X2": "244df3cee566",
+        "X3": "0e0f1b78a26d",
+        "X4": "47aefe66e399",
+        "X5": "dc693597a6cc",
+        "X6": "1d37587d1b51",
+        "X7": "d047c3b214e2",
+        "X8": "759f98b23cec",
+        "X9": "4275dbb90bc3",
+        "X10": "7fb89aaae592",
+        "X11": "dbfe94f735c0",
+        "X12": "8893945e3527",
+        "X13": "ac826a495487",
+        "X14": "74c7fa41ffa5",
+        "X15": "8ef04ad59d81",
+        "X16": "fd6e9d984a5d",
+        "X17": "6299473b48e2"
+      },
+      "retired": []
+    },
+    "commoner_resentments|legitimacy": {
+      "present": {
+        "L0": "73b4803eb9c8",
+        "L1": "419162e1ea73",
+        "L2": "e0d76bacd687",
+        "L3": "005ab65504ba",
+        "L5": "94b535ac469f",
+        "L6": "b9ebe055d04f",
+        "L7": "3f564ba44a60",
+        "L8": "3efb157a1237",
+        "L9": "ed77d5271dd9",
+        "L10": "a26432763e87",
+        "L11": "5d211e09c883",
+        "L12": "4c0264bba928",
+        "L13": "8bf9c9e97dbb",
+        "L14": "ea7a0b77c93a",
+        "L15": "bf05436107e0"
+      },
+      "retired": []
+    },
+    "commoner_resentments|food": {
+      "present": {
+        "F0": "5d035ebdcb5f",
+        "F1": "846a0ec8dc1e",
+        "F2": "c6904e9556e3",
+        "F3": "86363929264a",
+        "F4": "324136595557",
+        "F5": "fc62cd11aae5",
+        "F6": "7d6ef360a2e4",
+        "F7": "d9e7e9904f7c",
+        "F8": "0c1f69459354",
+        "F9": "27609ff7e230",
+        "F10": "4e7795eaa644",
+        "F11": "71522cbba76a",
+        "F12": "3c7d5450cef4",
+        "F13": "e94a3d46104c"
+      },
+      "retired": []
+    },
+    "commoner_resentments|uprising": {
+      "present": {
+        "U0": "b7cd2f7c701b",
+        "U1": "59b0c78171aa",
+        "U2": "b89ea7b41116"
+      },
+      "retired": []
+    },
+    "commoner_resentments_dm|crime70": {
+      "present": {
+        "K70_0": "1185cfcc8172",
+        "K70_1": "dc3e52da149a",
+        "K70_2": "1425452bd87b",
+        "K70_3": "919e51aa560d",
+        "K70_4": "6a65f4919a1e",
+        "K70_5": "b97d43a08434"
+      },
+      "retired": []
+    },
+    "commoner_resentments_dm|crime55": {
+      "present": {
+        "K55_0": "a3656099ea4b",
+        "K55_1": "ed171be86533",
+        "K55_2": "59d12ecbf4bb",
+        "K55_3": "a3396f330d1f",
+        "K55_4": "30ff1fce6a56",
+        "K55_5": "baf3ffb707ff",
+        "K55_6": "b57460921d23"
+      },
+      "retired": []
+    },
+    "dawn_work|food": {
+      "present": {
+        "F0": "e62d3fdad7df",
+        "F1": "a6a68369a904",
+        "F2": "b109934b67f2",
+        "F3": "15cad63c8b12",
+        "F4": "b4a9d335ea0f",
+        "F5": "46195f77d577",
+        "F6": "9cb760c6681c",
+        "K1": "b5d46e382441"
+      },
+      "retired": []
+    },
+    "dawn_work|defence": {
+      "present": {
+        "W0": "126419b8e056",
+        "W1": "ec17cae85e1a",
+        "W2": "a5503d7de19b",
+        "W3": "f3b4436c8a9b",
+        "W4": "26740013c657",
+        "W5": "83c79e30c32c",
+        "W6": "becd3d198f60",
+        "W7": "914b4529e343",
+        "W8": "fa465e3a3854",
+        "W9": "9b7a9d39d224",
+        "W10": "6df5fa7d90bb",
+        "W11": "9576a62bbb11",
+        "W13": "8687bea6130c",
+        "W14": "9bbad17d0fd2",
+        "W15": "dc624a4b8506"
+      },
+      "retired": []
+    },
+    "dawn_work|craft": {
+      "present": {
+        "C0": "35c7d1104da2",
+        "C1": "913571de4b68",
+        "C2": "c450bd309634"
+      },
+      "retired": []
+    },
+    "dawn_work|merchant_siege": {
+      "present": {
+        "S0": "267189395b09",
+        "S1": "f1e9b3aff771"
+      },
+      "retired": []
+    },
+    "dawn_work|merchant": {
+      "present": {
+        "M0": "b8b9ba2ae132",
+        "M1": "d2425a4c9afe",
+        "M2": "0615c1be0f1e",
+        "M3": "d5a08210d0c9",
+        "M4": "a1290316e4b2",
+        "M5": "c13fb7546afc",
+        "M6": "813c0fc28827"
+      },
+      "retired": []
+    },
+    "dawn_work|default": {
+      "present": {
+        "B0": "5fda1b5d4d49",
+        "B1": "93d8d9132f55",
+        "B2": "9909f06f3a09",
+        "B3": "ee299cd8ca75",
+        "B4": "034a99a6e862",
+        "B5": "a52f079e7947",
+        "B6": "0a2b91f2e7f5",
+        "B7": "452c6c8e9b42",
+        "B8": "bf084256d28b",
+        "B9": "66e4ffd930da",
+        "B10": "805bdec0bc21",
+        "B11": "96dfa9044985",
+        "B12": "fc4531ff7293",
+        "B13": "483b8c1fb587",
+        "B14": "8c9839e9aec1",
+        "B15": "28513e99f527",
+        "B16": "796d26028465",
+        "B17": "7a4c63700c5e",
+        "B18": "d79696c18713",
+        "B19": "6ecbeff49e04",
+        "B20": "5489a5a27fc5",
+        "B21": "1480236039bc",
+        "B22": "9517f79c6c9e",
+        "B23": "b37725b56af6",
+        "B24": "289873e0ad5c",
+        "B25": "7e1136e45444",
+        "B26": "4e50bba02786",
+        "B27": "fa655c81f59b"
+      },
+      "retired": []
+    },
+    "food_culture|surplus.wanting": {
+      "present": {
+        "W0": "f5f8f80b8fb4",
+        "W1": "180e30fa0cad",
+        "W2": "1c1db1f66353",
+        "W3": "aeca6035134a",
+        "W4": "e7184c66924a"
+      },
+      "retired": []
+    },
+    "food_culture|surplus": {
+      "present": {
+        "S0": "4572065f911c",
+        "S1": "6fb57d864193",
+        "S2": "c3caf3355b07",
+        "S3": "1b9b59efdf66",
+        "S4": "363afac2bbe7",
+        "S5": "44f938d39dd5",
+        "S6": "65747637977b",
+        "S7": "4440226dfb3f",
+        "S8": "45145c2be10b",
+        "S9": "ab4670d9231e",
+        "S11": "bac79ac8042c",
+        "S12": "03fa0396acb6"
+      },
+      "retired": []
+    },
+    "food_culture|adequate": {
+      "present": {
+        "A0": "de6e675dcbeb",
+        "A1": "fb45a7fd32bd",
+        "A2": "2db26ba41f72",
+        "A3": "455dbec320fd",
+        "A4": "2f6c523ac6ea",
+        "A5": "1a6d59f8b869",
+        "A6": "cfb291707c31",
+        "A7": "bd2a749962b9",
+        "A8": "7a2163eedf5a",
+        "A9": "8b7d84262113",
+        "A10": "c53fe191a734",
+        "A11": "4eff3896fce6",
+        "A12": "1b6c3419ac08",
+        "A14": "c37a3ae7f1cb",
+        "A15": "4f0ff10b55c6",
+        "A16": "0634716b1af7"
+      },
+      "retired": []
+    },
+    "food_culture|strained": {
+      "present": {
+        "T1": "654f2980e940",
+        "T2": "ad4798790843",
+        "T3": "773e2cb3e855",
+        "T4": "d38621c7bad3",
+        "T5": "52ccff7b3cca",
+        "T6": "ec2136b96677",
+        "T7": "721ee6dda2fd",
+        "T8": "801477e37394",
+        "T9": "c2c90ea61080",
+        "T10": "38f9e239744d",
+        "T11": "072fad5fbbec"
+      },
+      "retired": []
+    },
+    "food_culture|critical": {
+      "present": {
+        "C0": "21c15b8b095b",
+        "C1": "fafc2e522aae",
+        "C2": "5a7b6cb94190",
+        "C3": "885fe744b371",
+        "C4": "806a15837829",
+        "C5": "2bf9bb434722",
+        "C6": "6fd7adeaaf45",
+        "C7": "38780e638a7c",
+        "K2": "1628749c98f3"
+      },
+      "retired": []
+    },
+    "food_culture|collapsed": {
+      "present": {
+        "X0": "10eed72905e5",
+        "X1": "1a47a5f4b362",
+        "X2": "ce244ed55189",
+        "X3": "6c3da73a0d6c"
+      },
+      "retired": []
+    },
+    "gathering_places|named": {
+      "present": {
+        "N0": "4b5e9df117e3",
+        "N1": "cde014e4c750",
+        "N2": "b835f674314d",
+        "N3": "e107eeb5b066",
+        "N4": "1dd327117a6a",
+        "N5": "e2874feaa312",
+        "N6": "ebeaf008dd68",
+        "N7": "3177c5ca0b98",
+        "N8": "d51912afdd40",
+        "N9": "6b77aeb87e9c",
+        "N10": "3a681c5a146e",
+        "N11": "0ff562d6c23d",
+        "N12": "2a2ae0468992",
+        "N13": "a173eb6c6a5f",
+        "N14": "7fb689e1607c",
+        "N15": "643a6234e4e1",
+        "N16": "0239887ff688",
+        "N17": "15ac3119c64f",
+        "N18": "211ead175275",
+        "N19": "8683f5f1b7e6",
+        "N20": "7caaea98e0c9",
+        "N21": "64d00e4151d7",
+        "N22": "33770602ff81",
+        "N23": "ccf39f047f31",
+        "N24": "2ca5dbbca9d7",
+        "N25": "dfc9ea6b0761",
+        "N28": "7cfd7f2d2db9",
+        "N29": "dea072cc1c3c",
+        "N30": "68faf4024042",
+        "N31": "f457baa67b47",
+        "N32": "a312ef65ab29",
+        "N33": "f3612620ba17",
+        "N34": "cb944515fb50"
+      },
+      "retired": []
+    },
+    "gathering_places|plain": {
+      "present": {
+        "P0": "d1d43cd785e0",
+        "P1": "0c47dcd14a96",
+        "P2": "2abac8d1c899",
+        "P3": "3b409d216b0c",
+        "P4": "5f4dc37dc925",
+        "P5": "9832fc3fe970",
+        "P6": "52d1e5324068",
+        "P7": "c5cdf4a84a5c",
+        "P8": "e0884ff86bba",
+        "P9": "16d9e116db69",
+        "P10": "98cf06b44e0e",
+        "P11": "6ec9f9005983",
+        "P13": "dcd7206871aa",
+        "P14": "2b67a3f9b07f",
+        "P15": "24faeebf5bd3",
+        "P16": "df1e4b9d8062",
+        "P17": "a77d7a1f0a01",
+        "P18": "aa4c7f1f7533",
+        "P19": "cb572d369b0c",
+        "P20": "12bcd7a5eb18"
+      },
+      "retired": []
+    },
+    "outsider_impressions|power": {
+      "present": {
+        "P0": "c6397b5ce399",
+        "P1": "94f30fab1331",
+        "P2": "5eb52a339619",
+        "P3": "9b31dba0d64a",
+        "P4": "1005d7bcba21",
+        "P5": "a613c693a568",
+        "P6": "26b3a1d2e4cf",
+        "P8": "0ba2cb5d0794",
+        "P12": "053ec88d4e67",
+        "P13": "4ef7eb35d69a",
+        "P14": "10be5436b349"
+      },
+      "retired": []
+    },
+    "outsider_impressions|power.level": {
+      "present": {
+        "V0": "4a67d9c57fd8",
+        "V1": "add8a71daee5",
+        "V2": "0bb39f3b34db",
+        "V3": "0d40e8fa1913",
+        "V4": "90fe2b8aa5b5",
+        "V5": "11e7fa9da156"
+      },
+      "retired": []
+    },
+    "outsider_impressions|threat.unrest.void": {
+      "present": {
+        "UV0": "4e5449e12d79",
+        "UV1": "dafefb3f9d2a"
+      },
+      "retired": []
+    },
+    "outsider_impressions|threat.unrest.stressor": {
+      "present": {
+        "US0": "feb442d73686",
+        "US1": "786a3e2b0412"
+      },
+      "retired": []
+    },
+    "outsider_impressions|threat.economic_collapse.route": {
+      "present": {
+        "ER0": "c9c6afbcc28b",
+        "ER1": "00f8d0ab816a"
+      },
+      "retired": []
+    },
+    "outsider_impressions|threat.economic_collapse.stressor": {
+      "present": {
+        "ES0": "10782ad066c0",
+        "ES1": "794e23f66dfc"
+      },
+      "retired": []
+    },
+    "outsider_impressions|threat.monster_pressure.overrun": {
+      "present": {
+        "MO0": "0a808113afbe",
+        "MO1": "a9b67e34b777",
+        "MO2": "5ea6633d72d2",
+        "MO3": "6ff6b76ea956",
+        "MO4": "f2fb855725c8",
+        "MO5": "e9c199a7b126"
+      },
+      "retired": []
+    },
+    "outsider_impressions|threat.monster_pressure.frontier": {
+      "present": {
+        "MF0": "7b2af8d2f6b9",
+        "MF1": "6fa3e8806448",
+        "MF2": "465a78a01572",
+        "MF3": "0ffc8ab4b802",
+        "MF4": "835309169519",
+        "MF5": "891c1e24c486",
+        "MF6": "410038c0cb7f",
+        "MF7": "8967044d8ca3",
+        "MF8": "c1d730e640d8",
+        "MF9": "7c77fd1952f2"
+      },
+      "retired": []
+    },
+    "outsider_impressions|threat.monster_pressure.stressor": {
+      "present": {
+        "MS0": "340c92e9f246",
+        "MS1": "8336897b4fe8"
+      },
+      "retired": []
+    },
+    "outsider_impressions|threat.plague.any": {
+      "present": {
+        "PL0": "ede829bd4ede",
+        "PL1": "8744f9adb190",
+        "PL2": "63c35d3b11d7",
+        "PL3": "cf08d53ef11b"
+      },
+      "retired": []
+    },
+    "outsider_impressions|threat.famine.any": {
+      "present": {
+        "FA0": "2d3e1d39c90f",
+        "FA2": "b10dba34e1ea"
+      },
+      "retired": []
+    },
+    "outsider_impressions|threat.siege.any": {
+      "present": {
+        "SI0": "9fd2a4b1bac1",
+        "SI1": "e9ecb7d83401",
+        "SI2": "e9cad4223092"
+      },
+      "retired": []
+    },
+    "outsider_impressions|threat.bandit_raids.any": {
+      "present": {
+        "BR0": "55d4c898ffe9",
+        "BR1": "6676d18db58d"
+      },
+      "retired": []
+    },
+    "outsider_impressions|threat.rival_neighbor.any": {
+      "present": {
+        "RN0": "744d0efd740f",
+        "RN1": "cff13522b67e"
+      },
+      "retired": []
+    },
+    "outsider_impressions|threat.arcane_instability.any": {
+      "present": {
+        "AI0": "1fe9601e5329",
+        "AI1": "b60c137e90d9"
+      },
+      "retired": []
+    },
+    "outsider_impressions|services.healing": {
+      "present": {
+        "H0": "6f981c819dc7",
+        "H1": "7de70b292e59",
+        "H2": "fb97657ff135",
+        "H3": "5c6f3b9917d0",
+        "H4": "23e0d2e16237",
+        "H5": "a91aba4add15",
+        "H6": "6a9fefe92f4f",
+        "H7": "59d2ca43b96e",
+        "H8": "cd2f68da2d55",
+        "H9": "5bf51cc58df0"
+      },
+      "retired": []
+    },
+    "outsider_impressions|services.administrative": {
+      "present": {
+        "A1": "e9ec25bee822",
+        "A2": "7f297cc660f1",
+        "A3": "d193e75884c0",
+        "A4": "f90ff9327039",
+        "A5": "d642141f13c3",
+        "A6": "458684e86c3d"
+      },
+      "retired": []
+    },
+    "outsider_impressions|services.food_production": {
+      "present": {
+        "F0": "2f6bcda1b523",
+        "F1": "0a191457fdba",
+        "F2": "e1d793856290"
+      },
+      "retired": []
+    },
+    "outsider_impressions|services.defense": {
+      "present": {
+        "D0": "279b62e3652e",
+        "D1": "4bed123a1207",
+        "D2": "08406097b244",
+        "D3": "5be7c9488000",
+        "D4": "4d34d4d362f7",
+        "D6": "efab97068542",
+        "D7": "ca0735b664f7",
+        "D10": "9c10f7179da1",
+        "D11": "b1ed80673eef",
+        "D12": "b4dc88300328",
+        "D13": "7942a511c8c4",
+        "D14": "91279e8626d3",
+        "D15": "e083d7e0e94e"
+      },
+      "retired": []
+    },
+    "outsider_impressions|services.magical": {
+      "present": {
+        "G0": "52ade5e172ba",
+        "G1": "3f3d6de1918f"
+      },
+      "retired": []
+    },
+    "outsider_impressions|ordinary": {
+      "present": {
+        "O0": "bd18b6364717",
+        "O1": "8e4fdabf87d3",
+        "O2": "003065d01979",
+        "O3": "da55372f9c3d"
+      },
+      "retired": []
+    },
+    "recent_changes|condition.plague": {
+      "present": {
+        "K0": "5118e9095da1",
+        "K1": "70eecab24f4b",
+        "K2": "e49435343255"
+      },
+      "retired": []
+    },
+    "recent_changes|condition.famine": {
+      "present": {
+        "K0": "2c74c55643be",
+        "K1": "99827f2f6a8b",
+        "K2": "14bacee2f413"
+      },
+      "retired": []
+    },
+    "recent_changes|condition.war_pressure": {
+      "present": {
+        "K2": "f6236276418c"
+      },
+      "retired": []
+    },
+    "recent_changes|condition.alliance_burden": {
+      "present": {
+        "K0": "80f418baba0d",
+        "K1": "a12405f35d98"
+      },
+      "retired": []
+    },
+    "recent_changes|condition.vassal_extraction": {
+      "present": {
+        "K0": "ff2da5bfaaf9",
+        "K1": "04e69c396c59",
+        "K2": "00d664b6f87d"
+      },
+      "retired": []
+    },
+    "recent_changes|condition.rebellion": {
+      "present": {
+        "K0": "c1728c4f6e3c",
+        "K1": "588d55554cf6",
+        "K2": "9b8ba1d1fc54"
+      },
+      "retired": []
+    },
+    "recent_changes|condition.faction_challenge": {
+      "present": {
+        "K0": "e03628e4e233",
+        "K1": "a91b06d7c018",
+        "K2": "f16d2cff75c1"
+      },
+      "retired": []
+    },
+    "recent_changes|condition.government_overthrown": {
+      "present": {
+        "K0": "a7698b88141f",
+        "K1": "80983eaf83fc"
+      },
+      "retired": []
+    },
+    "recent_changes|condition.coup_suppressed": {
+      "present": {
+        "K0": "c69ef2e238b8",
+        "K1": "de8d0d15cf7e"
+      },
+      "retired": []
+    },
+    "recent_changes|condition.stressor_residual": {
+      "present": {
+        "K0": "8d4ddc45c83a",
+        "K1": "70090f9cadb9"
+      },
+      "retired": []
+    },
+    "recent_changes|condition.custom_crisis": {
+      "present": {
+        "K0": "90a9aa9ddd2d",
+        "K1": "a820232c3488"
+      },
+      "retired": []
+    },
+    "recent_changes|condition.magical_instability": {
+      "present": {
+        "K0": "fd715a781726",
+        "K1": "f013e515f188"
+      },
+      "retired": []
+    },
+    "recent_changes|condition.trade_route_cut": {
+      "present": {
+        "K0": "b135a6c0e248",
+        "K1": "de55c4946b8a"
+      },
+      "retired": []
+    },
+    "recent_changes|condition.regional_import_shortage": {
+      "present": {
+        "K0": "12d6ffa8c2ce",
+        "K1": "7e4103e9c091"
+      },
+      "retired": []
+    },
+    "recent_changes|condition.regional_export_market_loss": {
+      "present": {
+        "K0": "03290712cc89",
+        "K1": "bf3098fc0a7b"
+      },
+      "retired": []
+    },
+    "recent_changes|condition.regional_route_disruption": {
+      "present": {
+        "K0": "33a099801822",
+        "K1": "a5570190c67a"
+      },
+      "retired": []
+    },
+    "recent_changes|condition.regional_authority_instability": {
+      "present": {
+        "K0": "02c6bb29f6fc",
+        "K1": "c1d08f95339a",
+        "K2": "894c99e651e5"
+      },
+      "retired": []
+    },
+    "recent_changes|condition.regional_tax_revenue_disruption": {
+      "present": {
+        "K0": "2d3d247ce711",
+        "K1": "723c7fcd55c0",
+        "K2": "38cc652a9f35"
+      },
+      "retired": []
+    },
+    "recent_changes|condition.regional_protection_gap": {
+      "present": {
+        "K0": "5721d955c207",
+        "K1": "e3158122e1e0"
+      },
+      "retired": []
+    },
+    "recent_changes|condition.regional_service_disruption": {
+      "present": {
+        "K0": "f914d6328893",
+        "K1": "1221b48ddd68"
+      },
+      "retired": []
+    },
+    "recent_changes|condition.cold_war_sanctions": {
+      "present": {
+        "K0": "94b5c42d0819",
+        "K1": "d8dac4727260"
+      },
+      "retired": []
+    },
+    "recent_changes|condition.regional_conflict_pressure": {
+      "present": {
+        "K0": "682bedea7866",
+        "K1": "cdf073c12e0d"
+      },
+      "retired": []
+    },
+    "recent_changes|condition.regional_migration_pressure": {
+      "present": {
+        "K0": "ca587ab27f65",
+        "K1": "f39a6cb04bf2",
+        "K2": "2baa54ce8bf1"
+      },
+      "retired": []
+    },
+    "recent_changes|condition.regional_information_shock": {
+      "present": {
+        "K0": "21c9e0a95054",
+        "K1": "f92e10c4dff8"
+      },
+      "retired": []
+    },
+    "recent_changes|condition.regional_religious_pressure": {
+      "present": {
+        "K0": "afe1eaed23cc",
+        "K1": "4298bec1cf9a",
+        "K2": "99546c484469"
+      },
+      "retired": []
+    },
+    "recent_changes|condition.food_anchor_lost": {
+      "present": {
+        "K0": "2563ae00ab12",
+        "K1": "ee05bc26a424"
+      },
+      "retired": []
+    },
+    "recent_changes|condition.dominant_npc_removed": {
+      "present": {
+        "K0": "8bb831f8fcba",
+        "K1": "180f18d81015",
+        "K2": "2f7e5a6869bc"
+      },
+      "retired": []
+    },
+    "recent_changes|condition.war_exhaustion": {
+      "present": {
+        "K0": "707176c6036b",
+        "K1": "9596a0dbf241"
+      },
+      "retired": []
+    },
+    "recent_changes|condition.war_mobilization": {
+      "present": {
+        "K0": "de61d8b160c2",
+        "K1": "82ba2dcb496b"
+      },
+      "retired": []
+    },
+    "recent_changes|condition.reinforcement_cost": {
+      "present": {
+        "K0": "4dc2916a4d35",
+        "K1": "ee0510477618"
+      },
+      "retired": []
+    },
+    "recent_changes|condition.trade_realignment": {
+      "present": {
+        "K0": "b3c58d9d40f4",
+        "K1": "807648615c11"
+      },
+      "retired": []
+    },
+    "recent_changes|condition.vassal_trade_coercion": {
+      "present": {
+        "K0": "4041d7e34730",
+        "K1": "4685b8510a1a"
+      },
+      "retired": []
+    },
+    "recent_changes|condition.trade_embargo": {
+      "present": {
+        "K0": "b56429b15801",
+        "K1": "4b6c1d4d8a4f"
+      },
+      "retired": []
+    },
+    "recent_changes|condition.occupation_burden": {
+      "present": {
+        "K0": "3819e44939a0",
+        "K1": "d6e444314343"
+      },
+      "retired": []
+    },
+    "recent_changes|condition.war_spoils": {
+      "present": {
+        "K0": "59a4c03d2f31"
+      },
+      "retired": []
+    },
+    "recent_changes|condition.reconstruction": {
+      "present": {
+        "K0": "63daefec640e",
+        "K1": "15aba3e10ad8"
+      },
+      "retired": []
+    },
+    "recent_changes|condition.boom": {
+      "present": {
+        "K1": "410c005ee818"
+      },
+      "retired": []
+    },
+    "recent_changes|condition.flourishing": {
+      "present": {
+        "K0": "8b93306b5ba1",
+        "K1": "9c4248c23e15"
+      },
+      "retired": []
+    },
+    "recent_changes|threat.unrest.void.imminent": {
+      "present": {
+        "T0": "1abff362d02d",
+        "T1": "9ae889f41ba8"
+      },
+      "retired": []
+    },
+    "recent_changes|threat.unrest.void.realized": {
+      "present": {
+        "T0": "0abefa4bdf44",
+        "T1": "17ededeee80e"
+      },
+      "retired": []
+    },
+    "recent_changes|threat.unrest.stressor.imminent": {
+      "present": {
+        "T0": "b27353d2e056",
+        "T1": "40e9fdc087d8"
+      },
+      "retired": []
+    },
+    "recent_changes|threat.unrest.stressor.realized": {
+      "present": {
+        "T0": "7ce53de04f08",
+        "T1": "0724a70f54bf"
+      },
+      "retired": []
+    },
+    "recent_changes|threat.economic_collapse.route.imminent": {
+      "present": {
+        "T0": "353430210454",
+        "T1": "277e414aa417"
+      },
+      "retired": []
+    },
+    "recent_changes|threat.economic_collapse.route.realized": {
+      "present": {
+        "T0": "e864276c69a8",
+        "T1": "9262eef3c484"
+      },
+      "retired": []
+    },
+    "recent_changes|threat.economic_collapse.stressor.imminent": {
+      "present": {
+        "T0": "353430210454",
+        "T1": "2e03854b3e2c"
+      },
+      "retired": []
+    },
+    "recent_changes|threat.economic_collapse.stressor.realized": {
+      "present": {
+        "T0": "e864276c69a8",
+        "T1": "ad8e23999b5c"
+      },
+      "retired": []
+    },
+    "recent_changes|threat.monster_pressure.overrun.imminent": {
+      "present": {
+        "T0": "83d9683dc788",
+        "T1": "65c63807125d"
+      },
+      "retired": []
+    },
+    "recent_changes|threat.monster_pressure.overrun.realized": {
+      "present": {
+        "T0": "dab1984455c7",
+        "T1": "2142c967ff58",
+        "T2": "695b93693195",
+        "T3": "66acd05594e3",
+        "T4": "61fc10872a9b"
+      },
+      "retired": []
+    },
+    "recent_changes|threat.monster_pressure.frontier.imminent": {
+      "present": {
+        "T0": "9c17265d051f",
+        "T1": "0e156b3f6db1"
+      },
+      "retired": []
+    },
+    "recent_changes|threat.monster_pressure.frontier.realized": {
+      "present": {
+        "T0": "513e5b65cd15",
+        "T1": "f209f8918db4"
+      },
+      "retired": []
+    },
+    "recent_changes|threat.monster_pressure.stressor.imminent": {
+      "present": {
+        "T0": "0a4145a8e085",
+        "T1": "a422eba67039"
+      },
+      "retired": []
+    },
+    "recent_changes|threat.monster_pressure.stressor.realized": {
+      "present": {
+        "T0": "d920e2fe8de9",
+        "T1": "8975ad8a08a5"
+      },
+      "retired": []
+    },
+    "recent_changes|threat.plague.any.imminent": {
+      "present": {
+        "T0": "8cfab540a0c3",
+        "T1": "e68caf150c97",
+        "T2": "c3706e2553f0"
+      },
+      "retired": []
+    },
+    "recent_changes|threat.plague.any.realized": {
+      "present": {
+        "T0": "15cc2098738f",
+        "T1": "cbfc1db83721"
+      },
+      "retired": []
+    },
+    "recent_changes|threat.famine.any.imminent": {
+      "present": {
+        "T0": "512d10f89796",
+        "T1": "ca89e0be2454"
+      },
+      "retired": []
+    },
+    "recent_changes|threat.famine.any.realized": {
+      "present": {
+        "T0": "500c391e666a",
+        "T1": "23f3611b7487"
+      },
+      "retired": []
+    },
+    "recent_changes|threat.siege.any.imminent": {
+      "present": {
+        "T0": "19ea8e8ce94c",
+        "T1": "871f09307607"
+      },
+      "retired": []
+    },
+    "recent_changes|threat.siege.any.realized": {
+      "present": {
+        "T0": "d9e232e488db",
+        "T1": "c4187b7ffb90"
+      },
+      "retired": []
+    },
+    "recent_changes|threat.bandit_raids.any.imminent": {
+      "present": {
+        "T0": "5e414a596e16",
+        "T1": "67d7ab57b8aa"
+      },
+      "retired": []
+    },
+    "recent_changes|threat.bandit_raids.any.realized": {
+      "present": {
+        "T0": "0efcc762523a",
+        "T1": "e389d62313c9"
+      },
+      "retired": []
+    },
+    "recent_changes|threat.rival_neighbor.any.imminent": {
+      "present": {
+        "T0": "168bf9de7aff",
+        "T1": "39a0a27d6120"
+      },
+      "retired": []
+    },
+    "recent_changes|threat.rival_neighbor.any.realized": {
+      "present": {
+        "T0": "3675e35a7a26",
+        "T1": "08bb2876f9fa"
+      },
+      "retired": []
+    },
+    "recent_changes|threat.arcane_instability.any.imminent": {
+      "present": {
+        "T0": "cec0c75632d6",
+        "T1": "40173cdbd977"
+      },
+      "retired": []
+    },
+    "recent_changes|threat.arcane_instability.any.realized": {
+      "present": {
+        "T0": "5281ecbd468a",
+        "T1": "67e8f9ac13cd"
+      },
+      "retired": []
+    },
+    "recent_changes|beat": {
+      "present": {
+        "B0": "887bb304aaaa",
+        "B1": "47c6f42d028d",
+        "B2": "efb676d5c5b3",
+        "B3": "d09d4b6da698",
+        "B4": "0abe92711614",
+        "B5": "2c788c404450",
+        "B6": "fa1b22550190",
+        "B7": "b289e3bed8b4",
+        "B8": "c9fc79819c00"
+      },
+      "retired": []
+    },
+    "recent_changes|calm": {
+      "present": {
+        "C1": "d0c8c33a7c5b",
+        "C2": "f0bb534db935",
+        "C3": "01ac742a7da0",
+        "C4": "b8f2b9ff1fb3",
+        "C5": "087c5d5fb074",
+        "C6": "691a49ec1a10",
+        "C7": "62e853bff93c"
+      },
+      "retired": []
+    },
+    "unspoken_topics|wound.succession_crisis": {
+      "present": {
+        "W0": "13d7721307fe",
+        "W1": "4d5884a68a34",
+        "W2": "7589797f98ce",
+        "W3": "55b3646cbc0e"
+      },
+      "retired": []
+    },
+    "unspoken_topics|wound.economic_disparity": {
+      "present": {
+        "W0": "7b12be198796",
+        "W1": "9f8d7fa693a4",
+        "W2": "8011546ea21d"
+      },
+      "retired": []
+    },
+    "unspoken_topics|wound.religious_tension": {
+      "present": {
+        "W0": "65517618e400",
+        "W1": "b49becb0eb30",
+        "W2": "9b6268dba570"
+      },
+      "retired": []
+    },
+    "unspoken_topics|wound.guild_conflict": {
+      "present": {
+        "W0": "4a24e7660d08",
+        "W1": "e838cb5556d3",
+        "W2": "a8b8adeb40ad",
+        "W4": "210a0b1f0f73",
+        "W5": "ac735bd7dd7c"
+      },
+      "retired": []
+    },
+    "unspoken_topics|wound.external_threat": {
+      "present": {
+        "W0": "64ce2e4ee4ed",
+        "W1": "c39c88b46618",
+        "W2": "1d5336c5fe19"
+      },
+      "retired": []
+    },
+    "unspoken_topics|wound.resource_scarcity": {
+      "present": {
+        "W0": "7fe9a7c9ecb4",
+        "W1": "071eff0bae4d",
+        "W3": "ceb3111fdd19",
+        "W4": "d784d107c074"
+      },
+      "retired": []
+    },
+    "unspoken_topics|wound.magical_controversy": {
+      "present": {
+        "W0": "a8be14d30157",
+        "W1": "b0193cbceefa",
+        "W2": "648c65ac331d"
+      },
+      "retired": []
+    },
+    "unspoken_topics|wound.generational_divide": {
+      "present": {
+        "W0": "99bd314a806e",
+        "W1": "0b16890ae840",
+        "W2": "2c22cc659d38"
+      },
+      "retired": []
+    },
+    "unspoken_topics|wound.outside_debt": {
+      "present": {
+        "W0": "22e339155e19",
+        "W1": "9d36038b6d7d",
+        "W2": "1f60d5785258"
+      },
+      "retired": []
+    },
+    "unspoken_topics|wound.infiltration_fear": {
+      "present": {
+        "W0": "188f3ba447f2",
+        "W1": "c5ed97a7d86f",
+        "W2": "85839f5a8341"
+      },
+      "retired": []
+    },
+    "unspoken_topics|wound.disputed_land": {
+      "present": {
+        "W0": "60b941b817a8",
+        "W1": "0970a6e4aa48",
+        "W2": "58991ec47351"
+      },
+      "retired": []
+    },
+    "unspoken_topics|wound.population_friction": {
+      "present": {
+        "W0": "23643b76fe0d",
+        "W1": "642bc69cf548",
+        "W2": "649b60dd51bd"
+      },
+      "retired": []
+    },
+    "unspoken_topics|wound.leadership_vacuum": {
+      "present": {
+        "W0": "847e2eeb8671",
+        "W1": "a8ce920c6f41",
+        "W2": "c04aaa1fe6e8"
+      },
+      "retired": []
+    },
+    "unspoken_topics|wound.market_crash": {
+      "present": {
+        "W0": "0c0d4abfc936",
+        "W1": "fba2bb19649c",
+        "W2": "6f328e890db6"
+      },
+      "retired": []
+    },
+    "unspoken_topics|wound.trade_collapse": {
+      "present": {
+        "W0": "fb03c4f4810f",
+        "W1": "3e0d86f72195"
+      },
+      "retired": []
+    },
+    "unspoken_topics|wound.great_fire": {
+      "present": {
+        "W0": "5bef46b79c10",
+        "W1": "2bf21d5e67f4",
+        "W2": "372705266619"
+      },
+      "retired": []
+    },
+    "unspoken_topics|wound.plague_years": {
+      "present": {
+        "W0": "08d8aeff98c7",
+        "W1": "ce72e7b00b5d",
+        "W2": "27d2f3172c60"
+      },
+      "retired": []
+    },
+    "unspoken_topics|wound.great_flood": {
+      "present": {
+        "W0": "4408bd393d6e",
+        "W1": "a7a765771d43",
+        "W2": "3808e4e9e09a"
+      },
+      "retired": []
+    },
+    "unspoken_topics|wound.heresy_trial": {
+      "present": {
+        "W0": "ecfecacbd8ff",
+        "W1": "1a90b1cc9754",
+        "W2": "50626a5b3b62"
+      },
+      "retired": []
+    },
+    "unspoken_topics|wound.pilgrimage_surge": {
+      "present": {
+        "W0": "f3ed96c982c8",
+        "W1": "e1c76a74ba84",
+        "W2": "234de71af8d7"
+      },
+      "retired": []
+    },
+    "unspoken_topics|wound.popular_uprising": {
+      "present": {
+        "W0": "f12ebd0994c1",
+        "W1": "836975a4aa06",
+        "W2": "081b3e85ee59"
+      },
+      "retired": []
+    },
+    "unspoken_topics|wound.tyranny": {
+      "present": {
+        "W0": "3150429e6030",
+        "W1": "44437bd83913",
+        "W2": "f16e1a715177"
+      },
+      "retired": []
+    },
+    "unspoken_topics|wound.legitimacy_crisis": {
+      "present": {
+        "W0": "a2169f0fedfb",
+        "W1": "9955bd2bec0e",
+        "W2": "2b9e2d8e9ada"
+      },
+      "retired": []
+    },
+    "unspoken_topics|wound.demographic_pressure": {
+      "present": {
+        "W0": "dfc7f31c6832",
+        "W1": "489c2d65458e"
+      },
+      "retired": []
+    },
+    "unspoken_topics|wound.trade_dispute": {
+      "present": {
+        "W0": "dc32dc9028d1",
+        "W1": "634555a5e025"
+      },
+      "retired": []
+    },
+    "unspoken_topics|wound.wild_magic": {
+      "present": {
+        "W0": "d305c4b4b459",
+        "W1": "cc5e43d2741b"
+      },
+      "retired": []
+    },
+    "viability": {
+      "present": {
+        "NV1": "ca9924c09103",
+        "NV2": "5d7cfa3670aa",
+        "IC1": "7de2cf0bac50",
+        "IC2": "3950487998c4",
+        "IU1": "7884f28c28de",
+        "IU2": "10027cd457ec",
+        "DC1": "800d8a8b75c9",
+        "DC2": "0dfdbbcaee19",
+        "DC3": "d745244a16fa",
+        "DC4": "6e0bf93c7401",
+        "DL1": "d2a6e9448caf",
+        "DL2": "0047842f7162",
+        "DG1": "6c2ed3c12d22",
+        "DG2": "8a51143b1fb1",
+        "DG3": "09554789e3e7",
+        "DN1": "93d6b176d552",
+        "DN2": "6a2c9705ff06",
+        "SS1": "67c349faa8d1",
+        "SS2": "7d4c4d2fabb2",
+        "SS3": "b9abe73e1d8f",
+        "SS4": "823555e4c925",
+        "SS5": "074cbc1c3219"
+      },
+      "retired": []
+    }
+  }
+}
