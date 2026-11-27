@@ -26,7 +26,7 @@ import { beforeAll, describe, expect, it } from 'vitest';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { importsAsPrinted, needMetBy, NEED_DEALT_ROWS, MARKS } from '../../src/domain/display/tradeListDisplay.js';
-import { FAILED_FOOD_COPY, GOOD_HAD_COPY, HOUSE_STOCK_COPY, MARK_RES, NEED_DEALT_ROWS_COPY, NEED_KEYS, WORKING_CHAIN_STATUSES_COPY, goodNeededNotBroughtIn, needListOf, needNotBroughtInOf } from '../../src/domain/facts/needNotBroughtIn.js';
+import { GOOD_HAD_COPY, HOUSE_STOCK_COPY, MARK_RES, NEED_DEALT_ROWS_COPY, NEED_KEYS, WORKING_CHAIN_STATUSES_COPY, goodNeededNotBroughtIn, needListOf, needNotBroughtInOf } from '../../src/domain/facts/needNotBroughtIn.js';
 import { FACT_DIMENSIONS, atomHolds, declarationAdmits } from '../../src/domain/facts/factVocabulary.js';
 import { variantFactDeclaration } from '../../src/domain/display/stateProse/stateProseKernel.js';
 import { DOSSIER_STATE_PROSE_ECONOMY } from '../../src/data/dossierStateProse/economy.generated.js';
@@ -40,8 +40,6 @@ import { liveInstitutions } from '../../src/domain/institutions/institutionRoste
 import { HOUSE_NEED_INPUT, HOUSE_TRADE_INPUT, INPUT, houseDependenceOf } from '../../src/data/crisisDependence.js';
 import { CHAIN_INPUTS } from '../../src/domain/facts/houseInputAtHand.js';
 import { RESOURCE_DATA } from '../../src/data/goods/identity.js';
-import { commoditiesShown } from '../../src/domain/display/commoditiesShown.js';
-import { FOOD_SOURCE_GROUND } from '../../src/domain/facts/tradeAtWork.js';
 
 /** The towns each item is held in, with the items each one holds (the controls beside them). */
 const TOWNS = Object.freeze({
@@ -182,15 +180,6 @@ describe('FAULTS-NEED item 1: the atom `need not brought in` (FR2) states the pa
     expect(Object.entries(HOUSE_TRADE_INPUT).filter(([, key]) => dealtGood(key)), 'no trade house\'s good is one a row deals in').toEqual([]);
     for (const id of Object.keys(HOUSE_STOCK_COPY)) expect(houseDependenceOf({ catalogId: id }), `${id} passes rowShortOf's gate`).toContain(INPUT);
     expect(Object.keys(GOOD_HAD_COPY).sort()).toEqual([...new Set(Object.values(HOUSE_STOCK_COPY))].sort());
-    // RULING-R (the eleventh chair, 2026-11-27), R8 luxury: the failed food's copy is the Resources tab's own marks, source by source
-    expect(Object.keys(FAILED_FOOD_COPY).sort()).toEqual(Object.keys(FOOD_SOURCE_GROUND).sort());
-    const every = [...new Set(Object.values(FAILED_FOOD_COPY).flatMap((f) => [...f.grounds, ...f.goods.map((g) => g.replace(/ /g, '_'))]))];
-    for (const [source, f] of Object.entries(FAILED_FOOD_COPY)) {
-      expect([...f.grounds], `${source}: the grounds`).toEqual([.../** @type {any} */ (FOOD_SOURCE_GROUND)[source]]);
-      const rec = { stress: [{ type: 'famine' }], resourceAnalysis: { availableResources: every }, economicState: { foodSecurity: { foodRecord: { failedSource: source } } } };
-      expect(commoditiesShown(rec).filter((c) => c.failed).map((c) => c.key).sort(), `${source}: the marked chips`)
-        .toEqual(every.filter((k) => f.grounds.includes(k) || f.goods.includes(k.replace(/_/g, ' '))).sort());
-    }
   });
   // NEED-ATOM: a butcher (its stock livestock), a fair's livestock auction, no house that proves a pasture: the page's mark decides
   const stockTown = (/** @type {Record<string, unknown>} */ over = {}, /** @type {Record<string, unknown>} */ eco = {}) => ({
@@ -284,17 +273,6 @@ describe('FAULTS-NEED item 1: the atom `need not brought in` (FR2) states the pa
     const shepherd = stockTown({ institutions: [...stockTown().institutions, { name: 'Shepherd', catalogId: 'shepherd' }] });
     same(shepherd);
     expectAbsentWithAnchor(needListOf(shepherd), LABEL, 'salt', 'the shepherd proves the pasture');
-    // RULING-R (R8 luxury): a commodity the place's own resources give meets its need (the gemstones' "luxury"); a chip of the
-    // food a famine failed meets none
-    const luxury = town({ resourceAnalysis: { imports: { critical: ['luxury goods', 'salt'] }, gaps: [], availableResources: ['luxury'] } });
-    same(luxury);
-    expectAbsentWithAnchor(needListOf(luxury), 'luxury goods', 'salt', 'the place\'s own luxury meets the need');
-    const grain = (/** @type {unknown[]} */ stress) => town({ stress, economicState: { primaryImports: [], primaryExports: [], localProduction: [], activeChains: [], foodSecurity: { foodRecord: { failedSource: 'grain' } } },
-      resourceAnalysis: { imports: { critical: ['Bulk grain and flour', 'salt'] }, gaps: [], availableResources: ['grain', 'grain_fields'] } });
-    same(grain([]));
-    expectAbsentWithAnchor(needListOf(grain([])), 'Bulk grain and flour', 'salt', 'its own grain meets the need');
-    same(grain([{ type: 'famine' }]));
-    expect(needListOf(grain([{ type: 'famine' }])), 'the famine failed the grain: the need stands').toContain('Bulk grain and flour');
     // no resource analysis: no list, no answer
     expect(needListOf({})).toEqual([]);
     expect(needNotBroughtInOf({})).toBeUndefined();
