@@ -16,3 +16,22 @@ three faults of that measure. RULED, as VEIL-56 recommended:
    (ii) THE DRIFT PLANT, red first; (iii) (d) and narrated copies exercised. The count of clean strings withheld is restated
    under the writer-oracle, with examples.
 6. V28's items 3 to 8 stand unchanged.
+
+**V31 (23:52 UTC on 2026-11-27): FAIL-CLOSED PAGES (V29's arm): THE FALSE BAND, AND MASTER-BORN TOWNS.** On PG's measure
+(`lane/veil-56-2026-11-27-pg-docs` 5a279a277, `pg/PG-REPORT.md`; both pools re-made, 140 each), through VEIL-56.
+(A) V29 (1) named two rows; the false band reaches FIVE (born today, nothing hidden: Trade connectivity 4, Defense readiness
+4 wrong; born on master: Trade 3, Social trust 2, Strength of the powers 1, Labor 1, Defense 2): the served document carries
+the band only and the page puts back the band's fixed default (105 of 111 stored severities differ from it). RULED: the named
+two cannot stand (V6). FIRST CHOICE, THE INTERVAL TEST: a row that reads a re-derived severity prints on a shared page only
+where its printed value is the same at both ends of the served band's severity interval (served data alone); it is the rule
+IF it reads 0 wrong on both pools by the oracle (the owner's stored severity swapped in) and every band has a clean interval.
+ELSE every such row is not printed (about 375 rows a pool), listed under V4 for the put-back. The rows lost are counted on
+both pools and named for the owner.
+(B) On a share hiding nothing, a MASTER-BORN town's re-derived keys differ from the owner's stored values on most towns
+(military score 133 of 140, `recentConflict` 124, gates 98, crime types 76, readiness 70): "Infrastructure condition" wrong
+on 43 towns, "Defense readiness" on 10. These are the towns live today. RULED: THE CAUSE BY KEY IS MEASURED FIRST (PG's M2,
+allowed through the stop: measure only); nothing built until its table. If today's engine re-derives a master document
+wrongly on the OWNER's page too, it is a town fault and goes to the line's work; else the expected rule is that rows reading
+keys the page cannot re-derive faithfully are not printed on a shared page.
+MC's two findings taken (the row lock real, cured by moving the view count's UPDATE after the read; the default veil's cost
+on an unmarked 140-member map 15.6 s to 63.1 s): ruled with unit 3's "TIP?".
