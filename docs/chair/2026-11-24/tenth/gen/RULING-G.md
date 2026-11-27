@@ -1017,3 +1017,19 @@ kernel's closure. So: commit 927e3747bf is reverted on the cures branch and its 
 field rite, 1 of them shows a different set. Its root is at birth, not at the rule: date palms print a GRAIN good while the
 food record names no grain source; cured there if at all, after a measure. ALSO, one line: the floor reader takes no
 padded number ('0.010.0' read as 0.10.0; hand-made).
+
+**G75 (00:00 UTC on 2026-11-26): THE FIVE NEW REDS OF POINT 119's WIDE GATE, BY THEIR CAUSE: STORED FIGURES THAT FOLLOW THE
+FURS BIRTHS; NAMED FOR THE OWNER, RAISED BY NOBODY.** `tests/domain/mergeLadderHeldKeys.test.js` EM-R8 A2, A3, A5, A6 and
+`tests/property/editCorpusRatchet.test.js` A4. THE HELPER'S BISECT: green at the line 9d22f040e4 and at merge 1; all five
+first red at merge 2 (7d8b79401b, B1(i)c-2: the Furrier's district lives on furs). The unit holds no file of the merge
+(`src/domain/edit/`): THE MERGE DOES WHAT IT DID; THREE OF THE CORPUS'S 498 TRIALS MOVED BECAUSE TWO OF ITS 63 TOWNS ARE
+BORN DIFFERENTLY (the desert city loses its Furrier's district and what the same dice then deal changes; the desert
+metropolis likewise): E6 on the desert city rebuilds its conflict citations (62 to 63) and still equals the post-pass
+pipeline; E8 on the desert metropolis is declared-only on the power structure (9 to 10); E7 (terrain to desert) on the
+hills city, whose own birth is unchanged, now escalates on the defence profile and EXHAUSTS (quiet 471 to 470): its
+re-derived desert self is the one that moved; exhaustion on the config channel is the file's own asserted shape (A2's
+title), now one row more. RULED: figures measured over births, moved by a ruled change of births, in tests that assert
+both ways: they join `siteCoherenceRatchet` C1, `hookThemeDraws` and `pipelinePinnedChoosers` A6 as rows of RED-AT-LINE
+named for the owner's one signing at the end; no test is edited at 119. THE CURES BRANCH IS CLEARED at 2fd2c81ff2 (cures
+1, 2, 5, 6, the revert of 4, the padded-number line; lint's reds the known ones and the lighting title count, re-taken by
+its door at the join). THE HELPER MERGES AND PUSHES THE STACK BRANCH (`landing/RULING-119-2.txt`).

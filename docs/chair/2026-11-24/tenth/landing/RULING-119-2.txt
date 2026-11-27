@@ -1,0 +1,29 @@
+RULING 119-2, from the chair to LAND-119. Your bisect is accepted: the five new reds are stored figures that follow
+B1(i)c-2's births (G75); no test is edited; they will be rows of the red list. Now, in /home/user/wt/line, in this order:
+
+1. MERGE THE CURES: `git merge --no-ff lane/stack-119-cures-wip-2026-11-26` (a LOCAL branch, tip 2fd2c81ff2, cut at your
+   tip ef10a71f3a; message `merge(119): the cures of the second reader's findings (G72 (1), (2), (5), (6); (4) taken out, G74)`).
+   No conflict is expected; if one appears outside a register or a generated file, STOP and report.
+2. DOORS, each in its own commit only if its check is red: the lighting census (the cures' tests move the title count:
+   32,035 stored), by its own door as you did at ef10a71f3a; `npm run gen:dossier-prose` then its `--check`, and
+   `node scripts/wiring-census.mjs`, and the observed-shape check: expected to change nothing (the cures branch carries
+   their re-takes). The sameness register and the shift register's rows are NOT touched.
+3. `npm run typecheck:ratchet`; `npm run typecheck:domain:strict`; `npm run validate:packets`.
+4. NAMED TESTS, one run: `tests/domain/traditionFieldRite.test.js`, `tests/domain/traditionFieldRiteMotif.test.js`,
+   `tests/domain/powerStateProseDesk.test.js`, `tests/domain/economyStateProseDesk.test.js`,
+   `tests/domain/viabilityTruePage.test.js`, `tests/architecture/layerBoundaries.test.js`,
+   `tests/domain/mergeLadderHeldKeys.test.js`, `tests/property/editCorpusRatchet.test.js` (these last two: the SAME reds as
+   in your wide gate and no other: say so by name), and every test file that names `isFoodSourceGood`, `bornAtOrAfter` or
+   `fieldRiteRefused`.
+5. `tests/lint` whole and `tests/copy` whole; `npm run lint`; `npm run build`; `tests/build`; the five sizes against your
+   own figures at ef10a71f3a (first paint 1,190,992 raw / 379,822 gzip / 318,929 Brotli; worker 2,739,250; engine 937,247).
+   Classify every red as before: on the list (1), one of the named stored figures (S), or new (4). NO second wide gate:
+   the server's run on the line is the independent one.
+6. IF AND ONLY IF step 4 and step 5 show no (4): PUSH the stack branch from /home/user/wt/line:
+   `git push origin HEAD:refs/heads/lane/stack-119-wip-2026-11-26` (the hook runs; never bypassed; a network error is
+   retried up to four times with a wait between). Push NOTHING else: not `lane/join-2026-11-14`, not the cures branch.
+   If a (4) appears, do NOT push: report it.
+REPORT, at most 250 words: the merge commit; each door commit or "no change"; the three typecheck lines; step 4's reds by
+name; step 5's table and every (S) by name; the five sizes; the pushed tip and the push's last line, or why not pushed;
+`git status --short`. One heavy run at a time, each over five minutes in the background with its exit code in its log,
+waited for in pieces under ten minutes. A refusal by your own permission check stands: report it, try nothing in its place.
