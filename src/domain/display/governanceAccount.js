@@ -32,7 +32,7 @@ import { factsOf } from '../facts/factsOf.js';
 import { textOf } from '../facts/textOf.js';
 import { meritsOf, weatheredCatastrophe } from '../fortune/fortuneMerits.js';
 import { FORTUNE_LAW_TUNING } from '../fortune/fortuneLaw.js';
-import { pickVariantMixed } from '../../kernel/proseHash.js';
+import { pickRendezvous } from '../../kernel/proseHash.js';
 import { FORTUNE_MERIT_LINES, FORTUNE_MERIT_RECENT_YEARS, FORTUNE_MERIT_TIME_WORDS } from '../../data/fortuneMeritLines.js';
 import { FORTUNE_LASTING_CENTURIES_YEARS, FORTUNE_LASTING_LINES, FORTUNE_LASTING_TIME_WORDS } from '../../data/fortuneLastingLines.js';
 
@@ -369,7 +369,7 @@ export function governanceAccountOf(settlement, opts = {}) {
     // the fortune law's merit credits the record (`fortuneMerits.js :: meritsOf`, the predicate the birth used), the
     // event `weatheredCatastrophe` returns is named directly after the standing, opening on its stored name. The time
     // words band its `yearsAgo` (the pool's own `FORTUNE_MERIT_RECENT_YEARS`, then the law's `weatheredWithinYears`), never a figure.
-    // The wording is the kernel's mixed keyed pick through the one door, keyed on the place's name and the event's (what
+    // The wording is the kernel's rendezvous on each line's id (point 121) through the one door, keyed on the place's name and the event's (what
     // every shared read serves, so the owner's page and a shared one say the same line); no roll.
     const meritRecord = /** @type {import('../fortune/fortuneMerits.js').MeritRecord} */ (/** @type {unknown} */ (s));
     const merits = standing ? meritsOf(meritRecord) : [];
@@ -383,7 +383,7 @@ export function governanceAccountOf(settlement, opts = {}) {
     if (event && band) {
       const identity = `${place}::${event}::${yearsAgo}`;
       const { line } = drawDeclared(FORTUNE_MERIT_LINES, {
-        draw: (pool) => pickVariantMixed(pool, identity),
+        draw: (pool) => pickRendezvous(pool, identity, (l) => l.id),
         key: `${identity}::fortuneMerit`,
         facts,
         poolId: 'fortuneMeritLines:FORTUNE_MERIT_LINES',
@@ -400,7 +400,7 @@ export function governanceAccountOf(settlement, opts = {}) {
     // THE LASTING REASON (FORTUNE U7b; the chair's words E57 and E57 amended, 2026-11-22, vetoable by the owner): where
     // `meritsOf` credits 'lasting', the place's age is named after the standing and after the first merit's sentence. The
     // time words band `history.age` by the pool's own `FORTUNE_LASTING_CENTURIES_YEARS`, never a figure. Where LASTING
-    // credits alone, the wording is the kernel's mixed keyed pick among the drawn rows through the one door, keyed on the
+    // credits alone, the wording is the kernel's rendezvous on each row's id (point 121) among the drawn rows through the one door, keyed on the
     // place's name and age (both served on every shared read); where both merits credit, the one fixed row, with no draw.
     // The chair's ruling of 12:28 UTC 2026-11-22 (U7d): the fixed row prints only where the first merit's sentence PRINTED
     // in this paragraph; where both credit but it did not (an event whose stored name is empty), the drawn rows, as alone.
@@ -410,7 +410,7 @@ export function governanceAccountOf(settlement, opts = {}) {
       const both = meritPrinted;
       const identity = `${place}::${age}`;
       const lasting = both ? FORTUNE_LASTING_LINES.find((l) => l.when === 'both') : drawDeclared(FORTUNE_LASTING_LINES, {
-        draw: (pool) => pickVariantMixed(pool.filter((l) => l.when === 'alone'), identity),
+        draw: (pool) => pickRendezvous(pool.filter((l) => l.when === 'alone'), identity, (l) => l.id),
         key: `${identity}::fortuneLasting`,
         facts,
         poolId: 'fortuneLastingLines:FORTUNE_LASTING_LINES',
