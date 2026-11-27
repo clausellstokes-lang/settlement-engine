@@ -79,6 +79,19 @@ engines' writers differ. Its print: Infrastructure condition wrong on 43 of 140,
 (At DEFAULT and WIDEST the today-born pool differs too: internal 82, economyOutput 84, readiness 68, recentConflict 8. Those veils
 hide houses, so the page re-derives over fewer houses. That is the veil working, not a fault.)
 
+### (2)(b) THE PLANT, MEASURED (no guard built yet): a served document the engine cannot read
+`probe/plant.probe.jsx`, at ALL-SHOWN. `rederiveForPage` runs on a copy with no `config`, and the config is put back
+afterwards, so every re-derived key is ABSENT on an otherwise ordinary served document. Each tab's printed lines are diffed
+against the normal page. LINES PRINTED ONLY ON THE PLANT (a reader printing from nothing):
+| tab :: line | today-born | master-born | reader (CONFIRMED by its code) |
+|---|---|---|---|
+| Defense :: a threat row's badge "Critical" (also "Adequate"/"Strong" once its bar's score moves) | 112 (+5) | 106 (+23) | `DefenseTab.jsx :: DefenseTab`, `threatScores[label]\|\|0` then `scoreBand` |
+| Overview :: a systems-health row's badge "Critical" | 103 | 101 | `OverviewTab.jsx :: ScoreRow`, `score \|\| 0` then `scoreBand` |
+| Foundations :: "Infrastructure condition: Adequate" (the page said "Surplus") | 69 | 87 | `causalState.js`'s infrastructure deriver over the absent re-derived inputs (PLAUSIBLE: which input not yet traced) |
+| Defense :: "What goes wrong at <town> goes wrong one thing at a time and belongs to whoever did it." | 2 | 0 | a crime-structure sentence read off the absent crime list (PLAUSIBLE; it may also print on a default-veil page, where the list is absent by design: not yet measured) |
+Lines the plant DROPS (silent: no row, no sentence): Foundations 385 / 280, Defense 798 / 796, Summary 420 / 420, Overview
+277 / 269, Economics 140 / 140 (today / master).
+
 ### AN ASIDE (CONFIRMED, not mine to cure)
 The owner's raw record and the owner's public read (`toPublicSafe`) print different Foundations rows on 121 of 140 today-born
 towns and 122 of 140 master-born (for example Social trust "Adequate" against "Strained", r3m-city-infiltrated-0-32). The
