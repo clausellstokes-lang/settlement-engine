@@ -24,6 +24,13 @@ describe('CAST_WANTS: rows with ids, the pick by the rendezvous over the admitte
     expect(new Set(rows.map((r) => r.id)).size).toBe(rows.length);
   });
 
+  it('every id of CAST_WANTS[role] is `<role>.<n>`, <n> a positive whole number with no leading zero (the id pins its pool: RULING 121-5 (a))', () => {
+    for (const [role, pool] of Object.entries(CAST_WANTS)) {
+      expect(pool.length, role).toBeGreaterThan(0);
+      for (const r of pool) expect(r.id, role).toMatch(new RegExp(`^${esc(role)}\\.[1-9][0-9]*$`));
+    }
+  });
+
   it('a person with no goal voices the highest-ranked line the town leaves true, on the key person|crisis|role', () => {
     let reached = 0;
     for (const [role, pool] of Object.entries(CAST_WANTS)) {

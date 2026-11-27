@@ -64,6 +64,11 @@
  *     not by what it prints (a re-worded outside value is not seen);
  *   - a pool that is not in `IMPORTED_POOLS`: the table is the list of what is held, and a ranked pick added elsewhere
  *     without a row here is not seen.
+ *   - a row moved between two pools of one export, its id and words kept: a record's arrays are read into ONE scope and
+ *     the array's key is not banked (the id's own form pins the pool where it carries one: the tradition table's and the
+ *     cast wants' tests);
+ *   - letter case and whitespace alone are no re-wording (the fingerprint collapses whitespace and lower-cases);
+ *   - a comment added inside a `say` function IS read as a re-wording (its source text is fingerprinted: red until re-banked).
  */
 import { createHash } from 'node:crypto';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
