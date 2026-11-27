@@ -53,8 +53,10 @@ export const MASK_RE = [...HIDDEN_POWER_MASK].map((c) => (META.has(c) ? `[${c}]`
  * or the mask. */
 export const NAME_RE = `${WORDS}|${MASK_RE}`;
 /** A raw roster label (master's and older engines named the power so): words, one optional slashed pair, one trailing bracket;
- * or the mask. */
-export const LABEL_RE = `${WORDS}(?: ?/ ?${WORDS})?(?: [(]${WORDS}[)])?|${MASK_RE}`;
+ * or the mask. N2b (RULING V27 (5), class (iii)): the bracket's words may open in LOWER case, as master's labels carry them
+ * ("Merchant Guilds (dominant)": 10 master-born names); the head word of the label itself stays capital. */
+const BRACKET_WORDS = `${W}(?: ${W}){0,5}`;
+export const LABEL_RE = `${WORDS}(?: ?/ ?${WORDS})?(?: [(]${BRACKET_WORDS}[)])?|${MASK_RE}`;
 const FORBIDDEN = /[\\^[\]`]|\$\{/; // no literal may hold these (they cannot be bracket-escaped alike, or break the carriers)
 
 /** A literal, every metacharacter escaped as a one-character bracket ([.]): no backslash, so JSON, a JS template literal and a
@@ -421,6 +423,7 @@ const SAMPLE_LABELS = [
   'The Inquiry', 'The Peerage', "Thieves' Guild", 'Third Bloc (Neutrals)', 'Town Council', 'Town Mayor', 'War Council',
   'Loyalist Noble Opposition', 'Underground Old Faith', 'Conversion Enforcement Office', 'Noble Claimant (Senior Line)',
   'Noble Claimant (Reform Line)', 'Shadow Senate', 'Corrupt City Council', 'High Theocratic Council', 'Grand Military Council',
+  'Merchant Guilds (dominant)', // N2b: a real master label, its bracket in lower case, so --check exercises the widened slot
 ];
 const HEADER = {
   name: 'STANDING_FORMS',

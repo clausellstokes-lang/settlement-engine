@@ -28,7 +28,9 @@
  *          stored tail is the writer's tail where the desc ends in it, else (DRIFT: the stored roster's re-run is not the
  *          birth's; counted and listed) the longest form-boundary suffix of it the desc ends in;
  *        master-born: the master writer is out of reach at run time; its recorded templates (arm 2's fixture) judge: every
- *          cut segment must be one recorded template whole, and no base may still end in one.
+ *          cut segment must be one recorded template whole, and no base may still end in one; and (N2b, LEFTOVER: the class
+ *          the table's own patterns could not see, RULING V27 (5) class (iii)) no base may hold, ANYWHERE, a row's literal
+ *          opening (its template up to its first slot or choice) of 14 characters or more: such a base is UNCUT.
  *      Classes per pool: CUT EXACTLY, NO TAIL, UNCUT (a tail the cut misses), DIFFERENT-SPAN TIE (two rows match DIFFERENT
  *      spans at one start: two bases possible, the desc withheld whole; the chair's V14 (1) ruling, 02:29: a tie over ONE span is
  *      one reading, counted apart as `same-span ties`), WRONG
@@ -263,6 +265,8 @@ describe('standing forms: the table is total over the writers (V14 (2)) and the 
     const fx = JSON.parse(readFileSync(join(ROOT, FIXTURE_PATH), 'utf8'));
     const masterWhole = fx.forms.map((f) => ({ template: f.template, re: new RegExp(`^(?:${f.re})`) }));
     const masterTail = fx.forms.map((f) => ({ template: f.template, re: new RegExp(`(?:^| )(${f.re})`) }));
+    // N2b: every row's literal opening of 14 characters or more (the template up to its first slot or choice)
+    const openings = table.forms.map((r) => (r.template.includes('{') ? r.template.slice(0, r.template.indexOf('{')) : r.template)).filter((o) => o.length >= 14);
     const mirrorErrors = [];
 
     /** The cut's steps, each with every row matching at its start (the cut keeps the smallest id): it must agree with cutDesc. */
@@ -352,12 +356,14 @@ describe('standing forms: the table is total over the writers (V14 (2)) and the 
         if (steps.some((st) => st.tie === 'same-span tie')) bump(master, 'same-span ties');
         const base = cut ? cut.base : f.desc;
         const left = masterTail.find((m) => m.re.test(base));
+        const leftover = openings.find((o) => base.includes(o)) || null;
+        if (leftover) bump(master, 'LEFTOVER');
         const foreign = steps.filter((s) => !masterWhole.some((m) => m.re.test(s.text)));
-        const k = foreign.length ? 'WRONG' : left ? 'UNCUT' : steps.some((s) => s.tie === 'different-span tie') ? 'DIFFERENT-SPAN TIE' : cut ? 'CUT EXACTLY' : 'NO TAIL';
+        const k = foreign.length ? 'WRONG' : left || leftover ? 'UNCUT' : steps.some((s) => s.tie === 'different-span tie') ? 'DIFFERENT-SPAN TIE' : cut ? 'CUT EXACTLY' : 'NO TAIL';
         if (cut === null) bump(master, 'cut null');
         master.counts[k] += 1;
         if (!['CUT EXACTLY', 'NO TAIL'].includes(k)) {
-          master.cases.push({ class: k, file, faction: f.faction, desc: f.desc, cut: cut ? cut.standing : '', foreign: foreign.map((s) => s.text), leftTemplate: left ? left.template : null, ids: steps.map((s) => s.ids) });
+          master.cases.push({ class: k, file, faction: f.faction, desc: f.desc, cut: cut ? cut.standing : '', foreign: foreign.map((s) => s.text), leftTemplate: left ? left.template : null, leftover, ids: steps.map((s) => s.ids) });
         }
       }
     }
