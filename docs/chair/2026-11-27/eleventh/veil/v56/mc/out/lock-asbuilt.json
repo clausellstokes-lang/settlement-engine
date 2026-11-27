@@ -1,0 +1,92 @@
+{
+ "db": "mcl_asbuilt",
+ "variant": "asbuilt",
+ "members": 20,
+ "files": [
+  "r3m-city-indebted-0-36.json",
+  "r3m-city-infiltrated-1-112.json",
+  "r3m-city-none-0-37.json",
+  "r3m-city-none-1-111.json",
+  "r3m-city-politically_fractured-0-40.json",
+  "r3m-city-under_siege-1-118.json",
+  "r3m-metropolis-indebted-1-126.json",
+  "r3m-metropolis-insurgency-0-64.json",
+  "r3m-metropolis-none-0-63.json",
+  "r3m-metropolis-none-1-137.json",
+  "r3m-metropolis-politically_fractured-1-130.json",
+  "r3m-metropolis-wartime-0-69.json",
+  "r3m-town-infiltrated-0-12.json",
+  "r3m-town-insurgency-1-94.json",
+  "r3m-town-none-1-81.json",
+  "r3m-town-occupied-0-25.json",
+  "r3m-town-under_siege-0-18.json",
+  "r3m-town-wartime-1-99.json",
+  "r3m-village-none-0-1.json",
+  "r3m-village-occupied-1-75.json"
+ ],
+ "runs": [
+  {
+   "n": 1,
+   "batchMs": 6688,
+   "readerMs": [
+    6688
+   ],
+   "min": 6688,
+   "max": 6688,
+   "viewCountRise": 1,
+   "members": [
+    20
+   ]
+  },
+  {
+   "n": 2,
+   "batchMs": 12813,
+   "readerMs": [
+    6372,
+    12813
+   ],
+   "min": 6372,
+   "max": 12813,
+   "viewCountRise": 2,
+   "members": [
+    20
+   ]
+  },
+  {
+   "n": 4,
+   "batchMs": 24475,
+   "readerMs": [
+    6115,
+    12331,
+    18280,
+    24475
+   ],
+   "min": 6115,
+   "max": 24475,
+   "viewCountRise": 4,
+   "members": [
+    20
+   ]
+  },
+  {
+   "n": 8,
+   "batchMs": 50887,
+   "readerMs": [
+    5940,
+    12352,
+    18878,
+    25344,
+    31731,
+    38153,
+    44511,
+    50887
+   ],
+   "min": 5940,
+   "max": 50887,
+   "viewCountRise": 8,
+   "members": [
+    20
+   ]
+  }
+ ]
+}
