@@ -32,7 +32,7 @@ import { factsOf } from '../facts/factsOf.js';
 import { textOf } from '../facts/textOf.js';
 import { meritsOf, weatheredCatastrophe } from '../fortune/fortuneMerits.js';
 import { FORTUNE_LAW_TUNING } from '../fortune/fortuneLaw.js';
-import { pickVariantMixed } from '../../kernel/proseHash.js';
+import { pickRendezvous } from '../../kernel/proseHash.js';
 import { FORTUNE_MERIT_LINES, FORTUNE_MERIT_RECENT_YEARS, FORTUNE_MERIT_TIME_WORDS } from '../../data/fortuneMeritLines.js';
 import { FORTUNE_LASTING_CENTURIES_YEARS, FORTUNE_LASTING_LINES, FORTUNE_LASTING_TIME_WORDS } from '../../data/fortuneLastingLines.js';
 
@@ -383,7 +383,7 @@ export function governanceAccountOf(settlement, opts = {}) {
     if (event && band) {
       const identity = `${place}::${event}::${yearsAgo}`;
       const { line } = drawDeclared(FORTUNE_MERIT_LINES, {
-        draw: (pool) => pickVariantMixed(pool, identity),
+        draw: (pool) => pickRendezvous(pool, identity, (l) => l.id),
         key: `${identity}::fortuneMerit`,
         facts,
         poolId: 'fortuneMeritLines:FORTUNE_MERIT_LINES',
@@ -410,7 +410,7 @@ export function governanceAccountOf(settlement, opts = {}) {
       const both = meritPrinted;
       const identity = `${place}::${age}`;
       const lasting = both ? FORTUNE_LASTING_LINES.find((l) => l.when === 'both') : drawDeclared(FORTUNE_LASTING_LINES, {
-        draw: (pool) => pickVariantMixed(pool.filter((l) => l.when === 'alone'), identity),
+        draw: (pool) => pickRendezvous(pool.filter((l) => l.when === 'alone'), identity, (l) => l.id),
         key: `${identity}::fortuneLasting`,
         facts,
         poolId: 'fortuneLastingLines:FORTUNE_LASTING_LINES',

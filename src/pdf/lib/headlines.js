@@ -14,6 +14,7 @@ import { coverageRatioPct } from './foodCoverage.js';
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
 import { plotHookSourcePage } from '../../domain/dossier/plotHooks.js';
 import { withPowerSentenceNames, powerSentenceName } from '../../domain/display/powerSentenceName.js';
+import { pickRendezvous } from '../../kernel/proseHash.js';
 
 // ── Shared plain-word helpers (the owner's style law of 2026-11-07: the label stays as the
 // first word, the machinery leaves, the town's own nouns fill the slots) ──────────────────
@@ -47,10 +48,8 @@ const sentenceCase = (labelText) => {
  * @template T @param {string} key @param {ReadonlyArray<T>} variants @returns {T}
  */
 function seedPick(key, variants) {
-  let h = 2166136261;
   const k = String(key || '');
-  for (let i = 0; i < k.length; i++) { h ^= k.charCodeAt(i); h = Math.imul(h, 16777619); }
-  return variants[(h >>> 0) % variants.length];
+  return pickRendezvous([...variants], k, (v) => `H-${variants.indexOf(v) + 1}`);
 }
 /** How much of a food gap imports close, in words (the per cent stays in the section's table). */
 function coverageWords(pct) {

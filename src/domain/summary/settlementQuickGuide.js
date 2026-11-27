@@ -23,7 +23,7 @@ import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { waterAccessKind } from '../tradeRouteSemantics.js';
 import { resolveTerrain } from '../resolveTerrain.js';
 import { populationBandOf } from '../facts/populationBand.js';
-import { pickVariant } from '../../kernel/proseHash.js';
+import { pickRendezvous } from '../../kernel/proseHash.js';
 import { foodBandOf, voicedLineOf } from './tonightSheet.js';
 
 const INFLUENCE_RANK = Object.freeze({
@@ -215,7 +215,7 @@ export function cultureScopeLine(settlement) {
   // with no seed (every hand-built caller) gets frame 0, the line as it always read.
   const seed = cleanText(/** @type {{ _seed?: unknown }} */ (source)._seed);
   // SCOPE_LINE_FRAMES is a frozen five-frame pool, so the pick is never the empty pool's undefined.
-  return sentence(/** @type {(label: string, phrase: string) => string} */ (pickVariant(SCOPE_LINE_FRAMES, seed ? `${seed}::culture-scope-line` : null))(label, phrase));
+  return sentence(/** @type {(label: string, phrase: string) => string} */ (pickRendezvous([...SCOPE_LINE_FRAMES], seed ? `${seed}::culture-scope-line` : null, (f) => `SCOPE-${SCOPE_LINE_FRAMES.indexOf(f) + 1}`))(label, phrase));
 }
 
 /**

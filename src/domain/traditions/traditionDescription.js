@@ -77,7 +77,7 @@
  * (TRAD-4 unit 5; tests/domain/traditionDescription.test.js holds it). Every pool the leaf draws, frames included, is a
  * table of declared lines (CTR10), drawn through the one `draw` below.
  */
-import { pickVariantMixed } from '../../kernel/proseHash.js';
+import { rankRendezvous } from '../../kernel/proseHash.js';
 import { powerNameInProse } from '../display/governanceAccount.js';
 import { institutionHouseLabel } from '../display/institutionDisplayName.js';
 import { houseSentenceName } from '../../data/houseSentenceName.js';
@@ -274,7 +274,7 @@ const settlementSeedOf = (settlement) => String(settlement._seed ?? settlement.i
  */
 function draw(pool, seed, slot, poolId, facts, crisisScoped = false, turned = undefined) {
   const drawn = drawDeclared(pool, {
-    draw: (p) => (turned === undefined ? pickVariantMixed(p, `${seed}::${slot}`) : turned), facts, key: `${seed}::${slot}`,
+    draw: () => turned, ...(turned === undefined ? { rankKey: `${seed}::${slot}` } : {}), facts, key: `${seed}::${slot}`,
     poolId: `traditionDescription:${poolId}`, surface: 'traditions', drawKind: 'H', crisisScoped,
   });
   const text = drawn.line == null ? null : lineText(drawn.line);
@@ -300,12 +300,12 @@ function draw(pool, seed, slot, poolId, facts, crisisScoped = false, turned = un
 function drawTurn(pool, seed, slot, poolId, facts, render, taken, leaveOut = false, again = []) {
   const all = [...pool, ...again];
   if (taken && taken.size > 0 && all.length > 1 && all.every((l) => isColourLine(l))) {
-    const start = pool.indexOf(/** @type {L} */ (pickVariantMixed(pool, `${seed}::${slot}`)));
-    const free = [...pool.keys()].map((k) => pool[(start + k) % pool.length]).concat(again)
+    /** @type {L[]} */ const ranked = rankRendezvous([...pool], `${seed}::${slot}`, (l) => pool.indexOf(l));
+    const free = [...ranked, ...again]
       .find((l) => !taken.has(render(String(lineText(l)))));
     if (free === undefined) {
       if (leaveOut) return null;
-    } else if (free !== pool[start]) {
+    } else if (free !== ranked[0]) {
       return render(draw(all, seed, slot, poolId, facts, false, free));
     }
   }

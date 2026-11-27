@@ -31,7 +31,7 @@
 import { declarationOf, declarationAdmits, declarationOfTags, declares, atomsOf } from './factVocabulary.js';
 import { activePresumptionLedger, notePresumption } from './presumptionLedger.js';
 import { hashKey } from '../display/stateProse/stateProseKernel.js';
-import { fnv1a32 } from '../../kernel/proseHash.js';
+import { fnv1a32, rankRendezvous } from '../../kernel/proseHash.js';
 import { UNTYPED } from '../hookThemes.js';
 
 /** @typedef {import('./factVocabulary.js').FactsLike} FactsLike */
@@ -104,6 +104,8 @@ function poolDeclares(pool, tagged) {
  *   the texts the rest of the roster already carries. A line whose `heldKey` is held is excluded
  *   from the candidates BEFORE the draw (and from the twin and the argmax); a pool with every
  *   candidate held spends NO roll and answers `none`. An empty or absent set changes nothing.
+ * @property {string} [rankKey] SCRATCH (TAIL-121): the RANKED mode's slot key (the domain walked in rendezvous rank)
+ * @property {Set<string>} [taken] SCRATCH (TAIL-121): ids the ranked mode skips (the next in rank)
  * @property {(line: L) => string} [heldKey] the text a line would put on the figure (default: its
  *   `lineText`, trimmed)
  */
@@ -189,6 +191,7 @@ export function drawDeclared(pool, options) {
     note(options, null, list, [], 'none');
     return { line: null, text: null, refused: null, resolvedBy: 'none' };
   }
+  if (typeof options.rankKey === 'string') return /** @type {DrawResult<L>} */ (drawRanked(list, domain, options, declared, tagged, scoped, poolAtoms, isHeld));
   const drawn = options.draw(/** @type {L[]} */ (domain));
   if (!declared) {
     note(options, drawn, list, [], drawn == null ? 'none' : 'drawn');
@@ -413,4 +416,45 @@ function note(options, line, pool, atoms, resolvedBy) {
     ...(typeof line === 'object' && /** @type {{ colour?: unknown }} */ (line).colour === true ? { colour: true } : {}), // R-AO: counted by declared-share
     ...(options.ctx ? { ctx: options.ctx } : {}),
   });
+}
+
+/** SCRATCH (TAIL-121 phase 1): THE RANKED MODE. The domain walked in rendezvous rank of (rankKey, the line's id); the first
+ * line admitted, or whose twin is admitted, prints; lines in `taken` (ids) are skipped. Notes exactly the printed line. */
+/** @param {any} list @param {any} domain @param {any} options @param {boolean} declared @param {boolean} tagged @param {boolean} scoped @param {any} poolAtoms @param {any} isHeld @returns {any} */
+function drawRanked(list, domain, options, declared, tagged, scoped, poolAtoms, isHeld) {
+  const idOf = (/** @type {any} */ l) => String(lineIdOf(l, list.indexOf(l)));
+  const taken = options.taken instanceof Set ? options.taken : null;
+  const ranked = rankRendezvous(/** @type {any[]} */ (domain), options.rankKey, idOf).filter((/** @type {any} */ l) => !(taken && taken.has(idOf(l))));
+  if (!declared) {
+    const top = ranked[0] ?? null;
+    note(options, top, list, [], top == null ? 'none' : 'drawn');
+    return { line: top, text: lineText(top), refused: null, resolvedBy: top == null ? 'none' : 'drawn' };
+  }
+  const facts = typeof options.facts === 'function' ? options.facts() : options.facts ?? null;
+  const admit = (/** @type {any} */ line) => {
+    if (isHeld && isHeld(line)) return { admitted: false, refused: ['(held)'] };
+    if (poolAtoms && !declarationAdmits(declarationOfTags(poolAtoms), facts).admitted) return { admitted: false, refused: ['(pool) ' + poolAtoms.join(' · ')] };
+    return declarationAdmits(declarationOf(line, { tagged }), facts, { crisisScoped: scoped, ctx: options.ctx });
+  };
+  /** @type {any} */ let firstRefused = null;
+  for (const l of ranked) {
+    const v = admit(l);
+    if (v.admitted) {
+      note(options, l, list, atomsOf(declarationOf(l, { tagged })), l === ranked[0] ? 'drawn' : 'argmax');
+      return { line: l, text: lineText(l), refused: firstRefused, resolvedBy: l === ranked[0] ? 'drawn' : 'argmax' };
+    }
+    if (firstRefused === null) firstRefused = v.refused;
+    const own = lineText(l);
+    const twin = typeof options.twin === 'function' ? options.twin(l) : list.find((/** @type {any} */ t) => isTwin(t) && t.twinOf === own);
+    if (twin != null && twin !== l && admit(twin).admitted) {
+      note(options, twin, list, atomsOf(declarationOf(twin, { tagged })), 'twin');
+      return { line: twin, text: lineText(twin), refused: v.refused, resolvedBy: 'twin' };
+    }
+  }
+  const top = ranked[0] ?? null;
+  if (top != null && options.keepRefused === true) {
+    note(options, top, list, atomsOf(declarationOf(top, { tagged })), 'kept');
+    return { line: top, text: lineText(top), refused: firstRefused, resolvedBy: 'kept' };
+  }
+  return { line: null, text: null, refused: firstRefused, resolvedBy: 'none' };
 }

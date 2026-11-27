@@ -632,7 +632,7 @@ export function foodEnduranceLine(settlement) {
 
 // ─── SW-B5 FRAMES: the criminal ring's note gets vantages ─────────────────────
 // ⚠ AT THE END OF THE FILE so no line above moves (lines of this module are cited elsewhere).
-import { hashKey } from './stateProse/stateProseKernel.js';
+import { rankRendezvous } from '../../kernel/proseHash.js';
 
 /**
  * ⭐ THE RING'S NOTE GETS VANTAGES (lane SW-B5 FRAMES, 2026-11-09; STYLE-RULINGS-2 B5, the
@@ -675,10 +675,15 @@ const ORGANIZED_RING_NOTES = Object.freeze([
 function withRingVantage(row, settlement) {
   const seed = settlement?._seed;
   if (row.key !== 'organized' || typeof seed !== 'string' || !seed) return row;
-  const drawn = ORGANIZED_RING_NOTES[hashKey(`${seed}::defenseDisplay:organizedRing`) % ORGANIZED_RING_NOTES.length];
-  const [kept] = filterDeclared([drawn], { facts: () => factsOf(/** @type {Parameters<typeof factsOf>[0]} */ (/** @type {unknown} */ (settlement))),
-    poolId: 'defenseDisplay:ORGANIZED_RING_NOTES', surface: 'defense', drawKind: 'H' });
-  const note = kept === undefined || (drawn === ORGANIZED_RING_NOTES[1] && streetsNotQuiet(settlement)) ? row.note : lineText(kept); // TAIL-DEFECON-D (#B11428)
+  const ranked = rankRendezvous([...ORGANIZED_RING_NOTES], `${seed}::defenseDisplay:organizedRing`, (l) => `RING-${ORGANIZED_RING_NOTES.indexOf(l) + 1}`);
+  const facts = () => factsOf(/** @type {Parameters<typeof factsOf>[0]} */ (/** @type {unknown} */ (settlement)));
+  /** @type {(typeof ORGANIZED_RING_NOTES)[number] | undefined} */ let kept;
+  for (const drawn of ranked) {
+    if (drawn === ORGANIZED_RING_NOTES[1] && streetsNotQuiet(settlement)) continue;
+    kept = filterDeclared([drawn], { facts, poolId: 'defenseDisplay:ORGANIZED_RING_NOTES', surface: 'defense', drawKind: 'H' })[0];
+    if (kept !== undefined) break;
+  }
+  const note = kept === undefined ? row.note : lineText(kept); // TAIL-DEFECON-D (#B11428)
   return note === row.note ? row : Object.freeze({ ...row, note });
 }
 

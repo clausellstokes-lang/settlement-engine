@@ -31,7 +31,8 @@ import { HELD_STORES_WORDS, defenseFactsOf } from '../defense/defenseFacts.js';
 import { institutionDisplayName } from '../display/institutionDisplayName.js';
 import { FOOD_SECURITY_BANDS } from '../../data/bandLadders.js';
 import { STRESS_INSTITUTION_EFFECTS } from '../../data/stressInstitutionEffects.js'; import { heldCardLine } from '../../data/people/personMention.js'; // E8b: a crisis secret matched as drawn
-import { CRISIS_ROLE_LABEL, castHash, effectiveCastOf } from '../crisis/crisisCast.js';
+import { CRISIS_ROLE_LABEL, effectiveCastOf } from '../crisis/crisisCast.js';
+import { pickRendezvous } from '../../kernel/proseHash.js';
 import { crisisSummaryForSurface } from '../crisis/crisisSummaryVantage.js';
 import { factsOf } from '../facts/factsOf.js';
 import { CRISIS_NOUN, LINE_ROLE_CLAUSE } from '../crisis/crisisHooks.js';
@@ -164,8 +165,7 @@ export function castWantOf(role, personId, crisis, ownWant, house = '', facts = 
   const pool = /** @type {Record<string, ReadonlyArray<string>>} */ (CAST_WANTS)[role];
   if (!pool || pool.length === 0) return ownWant;
   const noun = /** @type {Record<string, string>} */ (CRISIS_NOUN)[crisis] || 'crisis';
-  const start = Math.floor(castHash(personId, crisis, role) * pool.length);
-  const line = pool.map((_, k) => pool[(start + k) % pool.length]).find((l) => castWantAdmits(l, house, noun, facts));
+  const line = pickRendezvous(pool.filter((l) => castWantAdmits(l, house, noun, facts)), `${personId}|${crisis}|${role}`, (l) => `${role}.${pool.indexOf(l) + 1}`);
   if (!line) return '';
   const named = house ? powerNameInProse(house) : '';
   return line

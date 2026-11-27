@@ -89,6 +89,22 @@ export function pickVariantMixed(pool, seed) {
 }
 
 /**
+ * SCRATCH (TAIL-121): the whole list in rendezvous rank (highest hash first; a tie to the smaller id); a falsy key
+ * keeps list order. `pickRendezvous(l, k, f)` is `rankRendezvous(l, k, f)[0]`.
+ * @template T
+ * @param {readonly T[]} lines
+ * @param {string | number | null | undefined} slotKey
+ * @param {(line: T) => string | number} idOf
+ * @returns {T[]}
+ */
+export function rankRendezvous(lines, slotKey, idOf) {
+  if (!Array.isArray(lines) || lines.length === 0) return [];
+  if (!slotKey) return [...lines];
+  return lines.map((l) => { const id = String(idOf(l)); return { l, id, h: mix32(fnv1a32(`${slotKey}::${id}`)) }; })
+    .sort((x, y) => (y.h - x.h) || (x.id < y.id ? -1 : x.id > y.id ? 1 : 0)).map((x) => x.l);
+}
+
+/**
  * The rendezvous pick (point 120, D13 STABLE-PICKS): the line with the HIGHEST
  * `mix32(fnv1a32('<slotKey>::<id>'))`, where `id` is the line's own id (`idOf(line)`).
  *

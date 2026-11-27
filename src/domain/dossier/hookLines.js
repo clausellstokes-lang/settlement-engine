@@ -36,7 +36,6 @@
  * PURE: no rng, no clock, no store, no React.
  */
 
-import { fnv1a32 } from '../../kernel/proseHash.js';
 import { drawDeclared, lineText } from '../facts/drawDeclared.js';
 import { pluralPowerName } from '../display/governanceAccount.js';
 import { powerNameWithArticle, powerSentenceName } from '../../data/people/powerSentenceName.js';
@@ -78,7 +77,7 @@ const ISSUE_FAMILIES = Object.freeze([
  * A line takes the two parties and the issue as the record spells them, and returns one
  * sentence. The issue arrives lower-cased at the call site (the record stores it
  * Title-Case, as a label), so a line may drop it mid-sentence without re-casing it.
- * @typedef {((a: HookParty, b: HookParty, issue: string) => string) | { text: (a: HookParty, b: HookParty, issue: string) => string, needs?: string[], excludes?: string[] }} HookLine a template, or the declared form around one (CENSUS-2c)
+ * @typedef {{ id: string, text: (a: HookParty, b: HookParty, issue: string) => string, needs?: string[], excludes?: string[] }} HookLine a template, or the declared form around one (CENSUS-2c)
  */
 
 /**
@@ -116,66 +115,66 @@ const of = (p) => (p.plural && /s$/i.test(p.name) ? `${p.name}'` : `${p.name}'s`
  */
 /** @type {ReadonlyArray<HookLine>} */
 const LICENCE_LINES = Object.freeze([
-  (a, b, issue) => `${a.name} ${has(a)} begun issuing ${its(a)} own papers over ${issue}, and ${b.name} ${is(b)} refusing to honour them.`,
-  (a, b, issue) => `A clerk who holds the only complete record of ${issue} has stopped coming to work, and both ${a.name} and ${b.name} have sent someone to find them.`,
-  (a, b, issue) => `${b.name} ${has(b)} offered to drop ${its(b)} claim on ${issue} in exchange for something ${it(b)} will not put in writing, and ${a.name} ${is(a)} tempted.`,
-  (a, b, issue) => `Two sets of papers covering ${issue} are in circulation, one sealed by ${a.name} and one by ${b.name}, and nobody outside either camp can tell which is binding.`,
-  (a, b, issue) => `${a.name} ${has(a)} quietly stopped enforcing ${issue} against anyone who pays ${b.name} instead, and the arrangement is about to become public.`,
+  { id: 'LIC-1', text: (a, b, issue) => `${a.name} ${has(a)} begun issuing ${its(a)} own papers over ${issue}, and ${b.name} ${is(b)} refusing to honour them.` },
+  { id: 'LIC-2', text: (a, b, issue) => `A clerk who holds the only complete record of ${issue} has stopped coming to work, and both ${a.name} and ${b.name} have sent someone to find them.` },
+  { id: 'LIC-3', text: (a, b, issue) => `${b.name} ${has(b)} offered to drop ${its(b)} claim on ${issue} in exchange for something ${it(b)} will not put in writing, and ${a.name} ${is(a)} tempted.` },
+  { id: 'LIC-4', text: (a, b, issue) => `Two sets of papers covering ${issue} are in circulation, one sealed by ${a.name} and one by ${b.name}, and nobody outside either camp can tell which is binding.` },
+  { id: 'LIC-5', text: (a, b, issue) => `${a.name} ${has(a)} quietly stopped enforcing ${issue} against anyone who pays ${b.name} instead, and the arrangement is about to become public.` },
 ]);
 
 /** @type {ReadonlyArray<HookLine>} */
 const JURISDICTION_LINES = Object.freeze([
-  (a, b, issue) => `${a.name} ${has(a)} taken someone into custody over ${issue}, and ${b.name} ${has(b)} sent people to take them back.`,
-  (a, b, issue) => `A ruling on ${issue} went ${of(a)} way, and ${b.name} ${has(b)} simply carried on as though it did not.`,
-  (a, b, issue) => `${b.name} ${has(b)} started keeping ${its(b)} own account of ${issue}, and ${it(b)} no longer ${verb(b, 'agrees', 'agree')} with ${of(a)} about what happened.`,
-  (a, b, issue) => `Somebody acting for ${a.name} overstepped badly over ${issue}, and ${b.name} ${is(b)} holding the proof back for a better moment.`,
-  (a, b, issue) => `${a.name} and ${b.name} have both claimed the right to settle ${issue}, and the people who must live with the answer are being asked to choose.`,
+  { id: 'JUR-1', text: (a, b, issue) => `${a.name} ${has(a)} taken someone into custody over ${issue}, and ${b.name} ${has(b)} sent people to take them back.` },
+  { id: 'JUR-2', text: (a, b, issue) => `A ruling on ${issue} went ${of(a)} way, and ${b.name} ${has(b)} simply carried on as though it did not.` },
+  { id: 'JUR-3', text: (a, b, issue) => `${b.name} ${has(b)} started keeping ${its(b)} own account of ${issue}, and ${it(b)} no longer ${verb(b, 'agrees', 'agree')} with ${of(a)} about what happened.` },
+  { id: 'JUR-4', text: (a, b, issue) => `Somebody acting for ${a.name} overstepped badly over ${issue}, and ${b.name} ${is(b)} holding the proof back for a better moment.` },
+  { id: 'JUR-5', text: (a, b, issue) => `${a.name} and ${b.name} have both claimed the right to settle ${issue}, and the people who must live with the answer are being asked to choose.` },
 ]);
 
 /** @type {ReadonlyArray<HookLine>} */
 const PROPERTY_LINES = Object.freeze([
-  { text: (a, b, issue) => `${a.name} ${has(a)} posted guards on what ${it(a)} ${verb(a, 'says', 'say')} is ${its(a)} own, and ${b.name} ${verb(b, 'says', 'say')} ${issue} was never ${of(a)} to hold.`, needs: ['guardPresence'] }, // CENSUS-2c: the rulings §3's composite
-  (a, b, issue) => `An inventory of ${issue} came up short, and ${a.name} and ${b.name} each say the other took the difference.`,
-  (a, b, issue) => `${b.name} ${has(b)} produced an old deed bearing on ${issue}; it is good enough for ${a.name} to take seriously and old enough for ${a.name} to doubt.`,
-  (a, b, issue) => `Someone has been moving what ${issue} covers out of the building at night, and both ${a.name} and ${b.name} assume the other arranged it.`,
-  (a, b, issue) => `${a.name} ${has(a)} offered to split ${issue} down the middle, and ${b.name} ${has(b)} not yet said whether ${it(b)} will take it.`, // BAR6-POWERS (LAW 6 › 6d-members' class, LAW 5W office): no members presumed of a power that may be one person
+  { id: 'PRO-1', text: (a, b, issue) => `${a.name} ${has(a)} posted guards on what ${it(a)} ${verb(a, 'says', 'say')} is ${its(a)} own, and ${b.name} ${verb(b, 'says', 'say')} ${issue} was never ${of(a)} to hold.`, needs: ['guardPresence'] }, // CENSUS-2c: the rulings §3's composite
+  { id: 'PRO-2', text: (a, b, issue) => `An inventory of ${issue} came up short, and ${a.name} and ${b.name} each say the other took the difference.` },
+  { id: 'PRO-3', text: (a, b, issue) => `${b.name} ${has(b)} produced an old deed bearing on ${issue}; it is good enough for ${a.name} to take seriously and old enough for ${a.name} to doubt.` },
+  { id: 'PRO-4', text: (a, b, issue) => `Someone has been moving what ${issue} covers out of the building at night, and both ${a.name} and ${b.name} assume the other arranged it.` },
+  { id: 'PRO-5', text: (a, b, issue) => `${a.name} ${has(a)} offered to split ${issue} down the middle, and ${b.name} ${has(b)} not yet said whether ${it(b)} will take it.` }, // BAR6-POWERS (LAW 6 › 6d-members' class, LAW 5W office): no members presumed of a power that may be one person
 ]);
 
 /** @type {ReadonlyArray<HookLine>} */
 const REVENUE_LINES = Object.freeze([
-  (a, b, issue) => `${a.name} ${has(a)} stopped paying what ${b.name} ${verb(b, 'says', 'say')} ${it(a)} ${verb(a, 'owes', 'owe')} on ${issue}, and the stoppage is costing a third party money.`,
-  (a, b, issue) => `A clerk's ledger covering ${issue} is missing a season, and ${a.name} ${verb(a, 'benefits', 'benefit')} from its absence more than ${b.name} ${verb(b, 'does', 'do')}.`,
-  (a, b, issue) => `${b.name} ${has(b)} undercut ${a.name} on ${issue} at a price that cannot be honest, and nobody has worked out yet where the difference comes from.`,
-  (a, b, issue) => `${a.name} ${has(a)} begun turning away anyone who deals with ${b.name} over ${issue}, and the refusals are starting to bite the wrong people.`,
-  (a, b, issue) => `Both ${a.name} and ${b.name} have promised the same share of ${issue} to the same outsider, who has now arrived to collect.`,
+  { id: 'REV-1', text: (a, b, issue) => `${a.name} ${has(a)} stopped paying what ${b.name} ${verb(b, 'says', 'say')} ${it(a)} ${verb(a, 'owes', 'owe')} on ${issue}, and the stoppage is costing a third party money.` },
+  { id: 'REV-2', text: (a, b, issue) => `A clerk's ledger covering ${issue} is missing a season, and ${a.name} ${verb(a, 'benefits', 'benefit')} from its absence more than ${b.name} ${verb(b, 'does', 'do')}.` },
+  { id: 'REV-3', text: (a, b, issue) => `${b.name} ${has(b)} undercut ${a.name} on ${issue} at a price that cannot be honest, and nobody has worked out yet where the difference comes from.` },
+  { id: 'REV-4', text: (a, b, issue) => `${a.name} ${has(a)} begun turning away anyone who deals with ${b.name} over ${issue}, and the refusals are starting to bite the wrong people.` },
+  { id: 'REV-5', text: (a, b, issue) => `Both ${a.name} and ${b.name} have promised the same share of ${issue} to the same outsider, who has now arrived to collect.` },
 ]);
 
 /** @type {ReadonlyArray<HookLine>} */
 const PEOPLE_LINES = Object.freeze([
-  (a, b, issue) => `${a.name} ${has(a)} drawn up names under ${issue}, and ${b.name} ${has(b)} been quietly telling people how to keep off the list.`,
-  (a, b, issue) => `A family caught between ${a.name} and ${b.name} over ${issue} has asked for someone from outside to speak for them.`,
-  (a, b, issue) => `${b.name} ${has(b)} taken on people ${a.name} had already claimed under ${issue}, and neither will release them.`,
-  (a, b, issue) => `Someone has been paid to swear to a version of ${issue} that suits ${a.name}, and ${b.name} ${verb(b, 'knows', 'know')} who paid and not yet who swore.`,
-  (a, b, issue) => `${a.name} and ${b.name} have each offered protection over ${issue} to the same households, on terms that cannot both be kept.`,
+  { id: 'PEO-1', text: (a, b, issue) => `${a.name} ${has(a)} drawn up names under ${issue}, and ${b.name} ${has(b)} been quietly telling people how to keep off the list.` },
+  { id: 'PEO-2', text: (a, b, issue) => `A family caught between ${a.name} and ${b.name} over ${issue} has asked for someone from outside to speak for them.` },
+  { id: 'PEO-3', text: (a, b, issue) => `${b.name} ${has(b)} taken on people ${a.name} had already claimed under ${issue}, and neither will release them.` },
+  { id: 'PEO-4', text: (a, b, issue) => `Someone has been paid to swear to a version of ${issue} that suits ${a.name}, and ${b.name} ${verb(b, 'knows', 'know')} who paid and not yet who swore.` },
+  { id: 'PEO-5', text: (a, b, issue) => `${a.name} and ${b.name} have each offered protection over ${issue} to the same households, on terms that cannot both be kept.` },
 ]);
 
 /** @type {ReadonlyArray<HookLine>} */
 const SEAT_LINES = Object.freeze([
-  (a, b, issue) => `${a.name} ${has(a)} a candidate for ${issue} and ${b.name} ${has(b)} a reason the candidate cannot stand, and the reason is true.`,
-  (a, b, issue) => `A vote on ${issue} has been postponed three times, each time by whichever of ${a.name} or ${b.name} would have lost it.`,
-  (a, b, issue) => `${b.name} ${has(b)} let it be known ${it(b)} will accept ${of(a)} answer to ${issue} if one of ${its(b)} own people is kept on, and the condition is the real dispute.`,
-  (a, b, issue) => `Two people are already acting as though ${issue} is settled in their favour, one backed by ${a.name} and one by ${b.name}.`,
-  (a, b, issue) => `Someone with no part in ${a.name} or ${b.name} has been promised ${issue} by both of them, and has told neither about the other.`,
+  { id: 'SEAT-1', text: (a, b, issue) => `${a.name} ${has(a)} a candidate for ${issue} and ${b.name} ${has(b)} a reason the candidate cannot stand, and the reason is true.` },
+  { id: 'SEAT-2', text: (a, b, issue) => `A vote on ${issue} has been postponed three times, each time by whichever of ${a.name} or ${b.name} would have lost it.` },
+  { id: 'SEAT-3', text: (a, b, issue) => `${b.name} ${has(b)} let it be known ${it(b)} will accept ${of(a)} answer to ${issue} if one of ${its(b)} own people is kept on, and the condition is the real dispute.` },
+  { id: 'SEAT-4', text: (a, b, issue) => `Two people are already acting as though ${issue} is settled in their favour, one backed by ${a.name} and one by ${b.name}.` },
+  { id: 'SEAT-5', text: (a, b, issue) => `Someone with no part in ${a.name} or ${b.name} has been promised ${issue} by both of them, and has told neither about the other.` },
 ]);
 
 /** @type {ReadonlyArray<HookLine>} */
 const STANDING_LINES = Object.freeze([
-  (a, b, issue) => `${a.name} ${has(a)} stopped speaking to ${b.name} about ${issue} and started speaking about it to everybody else.`,
-  (a, b, issue) => `A go-between who carried messages on ${issue} between ${a.name} and ${b.name} has been caught keeping copies.`,
-  (a, b, issue) => `${b.name} ${is(b)} waiting for ${a.name} to overreach on ${issue}, and ${has(b)} arranged for it to be witnessed when it happens.`,
-  (a, b, issue) => `An old debt between ${a.name} and ${b.name} has been called in over ${issue}, years after both sides had stopped mentioning it.`,
-  (a, b, issue) => `Someone has been feeding ${a.name} and ${b.name} the same warning about each other over ${issue}, and neither has asked who.`,
-  (a, b, issue) => `${a.name} ${has(a)} offered ${b.name} better terms on ${issue} than ${b.name} expected, and ${b.name} ${is(b)} looking for the catch before ${it(b)} ${verb(b, 'answers', 'answer')}.`,
+  { id: 'STA-1', text: (a, b, issue) => `${a.name} ${has(a)} stopped speaking to ${b.name} about ${issue} and started speaking about it to everybody else.` },
+  { id: 'STA-2', text: (a, b, issue) => `A go-between who carried messages on ${issue} between ${a.name} and ${b.name} has been caught keeping copies.` },
+  { id: 'STA-3', text: (a, b, issue) => `${b.name} ${is(b)} waiting for ${a.name} to overreach on ${issue}, and ${has(b)} arranged for it to be witnessed when it happens.` },
+  { id: 'STA-4', text: (a, b, issue) => `An old debt between ${a.name} and ${b.name} has been called in over ${issue}, years after both sides had stopped mentioning it.` },
+  { id: 'STA-5', text: (a, b, issue) => `Someone has been feeding ${a.name} and ${b.name} the same warning about each other over ${issue}, and neither has asked who.` },
+  { id: 'STA-6', text: (a, b, issue) => `${a.name} ${has(a)} offered ${b.name} better terms on ${issue} than ${b.name} expected, and ${b.name} ${is(b)} looking for the catch before ${it(b)} ${verb(b, 'answers', 'answer')}.` },
 ]);
 
 /** @type {Readonly<Record<string, ReadonlyArray<HookLine>>>} */
@@ -199,12 +198,12 @@ const CONFLICT_LINES = Object.freeze({
  * @type {ReadonlyArray<string | { text: string, needs?: string[], excludes?: string[] }>} a line, or the declared form around one (CENSUS-2c)
  */
 const FOOD_GAP_LINES = Object.freeze([
-  { text: 'Grain is coming in, and the people bringing it have worked out exactly how much that is worth. The price has moved twice this month.', excludes: ['crisis: under_siege'] },
-  { text: 'Enough food arrives to keep the place fed, and whoever runs the carts has started asking favours in return.', excludes: ['starving', 'famine', 'crisis: famine', 'crisis: under_siege'] },
-  'A supplier who has carried the shortfall for years wants the arrangement put on paper now, and the terms have changed.',
-  { text: 'The last two deliveries were short by the same amount; the supplier blames the scales, and nobody has checked the supplier.', excludes: ['crisis: under_siege'] },
-  { text: 'Somebody has begun buying grain forward at prices nobody local can match, and will not say who it is for.', needs: ['market'] },
-  'A merchant has offered to cover the whole gap from one source, which would solve this season and hand them next season.',
+  { id: 'FOOD-1', text: 'Grain is coming in, and the people bringing it have worked out exactly how much that is worth. The price has moved twice this month.', excludes: ['crisis: under_siege'] },
+  { id: 'FOOD-2', text: 'Enough food arrives to keep the place fed, and whoever runs the carts has started asking favours in return.', excludes: ['starving', 'famine', 'crisis: famine', 'crisis: under_siege'] },
+  { id: 'FOOD-3', text: 'A supplier who has carried the shortfall for years wants the arrangement put on paper now, and the terms have changed.' },
+  { id: 'FOOD-4', text: 'The last two deliveries were short by the same amount; the supplier blames the scales, and nobody has checked the supplier.', excludes: ['crisis: under_siege'] },
+  { id: 'FOOD-5', text: 'Somebody has begun buying grain forward at prices nobody local can match, and will not say who it is for.', needs: ['market'] },
+  { id: 'FOOD-6', text: 'A merchant has offered to cover the whole gap from one source, which would solve this season and hand them next season.' },
 ]);
 
 /**
@@ -244,7 +243,7 @@ function spoken(line, a, b, issue) {
  *   ruling 3 ("one hook per conflict, chosen").
  */
 export function createConflictHookDraw(facts = null) {
-  /** @type {Map<string, { base: number, used: number }>} */
+  /** @type {Map<string, { key: string, taken: Set<string> }>} */
   const draws = new Map();
   return (conflict) => {
     const parties = Array.isArray(conflict?.parties) ? conflict.parties : [];
@@ -263,15 +262,17 @@ export function createConflictHookDraw(facts = null) {
     const pool = CONFLICT_LINES[family] || CONFLICT_LINES.standing;
     let draw = draws.get(family);
     if (!draw) {
-      draw = { base: fnv1a32(`${a}>${b}::${rawIssue}::${family}`), used: 0 };
+      draw = { key: `${a}>${b}::${rawIssue}::${family}`, taken: new Set() };
       draws.set(family, draw);
     }
-    const offset = draw.base + draw.used;
-    draw.used += 1;
-    const drawn = drawDeclared(pool, {
-      draw: (p) => p[offset % p.length], facts, key: `${a}>${b}::${rawIssue}::${family}`,
-      poolId: `HOOK_LINE_POOLS.conflict.${family}`, surface: 'plot_hooks', drawKind: 'H',
-    });
+    /** @type {import('../facts/drawDeclared.js').DrawDeclaredOptions<HookLine>} */
+    const opts = {
+      draw: () => null, rankKey: draw.key, facts, key: `${a}>${b}::${rawIssue}::${family}`,
+      poolId: `HOOK_LINE_POOLS.conflict.${family}`, surface: 'plot_hooks', drawKind: /** @type {const} */ ('H'),
+    };
+    let drawn = drawDeclared(pool, { ...opts, taken: draw.taken });
+    if (drawn.line == null && draw.taken.size > 0) { draw.taken.clear(); drawn = drawDeclared(pool, { ...opts, taken: draw.taken }); }
+    if (drawn.line != null) draw.taken.add(String(drawn.line.id));
     return drawn.line == null ? [] : [spoken(drawn.line, pa, pb, issue)];
   };
 }
@@ -289,7 +290,7 @@ export function foodGapHookLine(place, facts = null) {
   const band = typeof place?.band === 'string' ? place.band : '';
   const seed = `${name}::${band}::food-gap`;
   const drawn = drawDeclared(FOOD_GAP_LINES, {
-    draw: (p) => p[fnv1a32(seed) % p.length], facts, key: seed,
+    draw: () => null, rankKey: seed, facts, key: seed,
     poolId: 'HOOK_LINE_POOLS.foodGap', surface: 'plot_hooks', drawKind: 'H',
   });
   return drawn.line == null ? '' : String(lineText(drawn.line));
