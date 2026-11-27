@@ -34,6 +34,13 @@
  * No publicProse on any shared read: the 24 prose rows left the composed form for R2's always-host. The census is now an
  * EXACT count of 4 composed rows by id (COMPOSED_IDS); the three still on the planned host are power.desc, power.label
  * and power.relation.dmNote, red by design until chain A builds their host.
+ *
+ * ── UNIT 4's MERGE M3 (R5-DESC aa54a6791 on the lane's tip; VEIL-51's plan, rebuilt by VEIL-56's U45) ─────────────
+ * R5-DESC moved its three rows: `power.desc` and `power.label` LEFT the composed form, `power.relation.dmNote` is BUILT on
+ * R3's roster-choice host in both engines. The census is RE-PINNED to the merged registry, MEASURED: exactly two composed
+ * rows, FIRST and `power.relation.dmNote`, both on hosts that exist, so no composed row sits on a planned host. Unit 1's
+ * census (the prose rows on R2's always-host) STANDS: R5-DESC's own pin "the 23 prose.* rows on R5's planned host" is
+ * dropped (it was taken before unit 1 moved them; VEIL-55, 02:2x UTC 2026-11-25). R5-DESC's per-row tests are kept.
  */
 import { describe, expect, test } from 'vitest';
 import { REGISTRY_HOSTS, REGISTRY_ROWS } from '../../src/domain/veil/rosterChoiceRegistry.js';
@@ -44,10 +51,11 @@ const LEFT = 'power.recentConflict';
 const FIRST = 'history.founding.overcoming';
 
 /**
- * VEIL-41 C2-BUILD (a') (2707d6829): the registry's composed rows, EXACTLY, in its own order: FIRST, then the three left on
- * R5's planned composed host (chain A's worklist). A row joining or leaving the composed form reds the census by id.
+ * VEIL-41 C2-BUILD (a') (2707d6829), RE-PINNED AT UNIT 4's MERGE M3: the registry's composed rows, EXACTLY, in its own
+ * order: FIRST, then `power.relation.dmNote` (built on R3's roster-choice host by R5-DESC). A row joining or leaving the
+ * composed form reds the census by id.
  */
-const COMPOSED_IDS = Object.freeze([FIRST, 'power.desc', 'power.label', 'power.relation.dmNote']);
+const COMPOSED_IDS = Object.freeze([FIRST, 'power.relation.dmNote']);
 
 /** A composed row (VR12): its `inputs` non-empty. */
 const isComposed = (r) => Array.isArray(r.inputs) && r.inputs.length > 0;
@@ -103,9 +111,9 @@ describe('the judgment proves itself on synthetic rows (its own controls)', () =
 
   test('the census is not vacuous: the registry holds composed rows, walked in its own order from the first; power.recentConflict is not among them (E97 (5): the pin re-taken, the row having left the composed form)', () => {
     // VEIL-41 C2-BUILD (a') (2707d6829, N49): the 24 prose rows LEFT the composed form for the always-host (no publicProse on
-    // any shared read), so the census is an EXACT count, not a floor: 4 composed rows, by id. history.founding.overcoming
-    // (FIRST) sits on hosts that exist; the three rows LEFT ON THE PLANNED COMPOSED HOST (public._gallery_veil_composed /
-    // gallerySecondHomes.js :: withholdComposed) are power.desc, power.label and power.relation.dmNote, chain A's worklist.
+    // any shared read), so the census is an EXACT count, not a floor. UNIT 4's M3: R5-DESC moved its three rows, so the
+    // registry holds 2 composed rows, by id: history.founding.overcoming (FIRST) and power.relation.dmNote, both on hosts
+    // that exist.
     expect(COMPOSED.length).toBe(COMPOSED_IDS.length);
     expect(COMPOSED.map((r) => r.id)).toEqual(COMPOSED_IDS);
     expect(ORDERED[0]?.id).toBe(FIRST);
@@ -127,7 +135,7 @@ describe('THE ROW THAT LEFT THE COMPOSED FORM, walked by name (R5-RECENT: E92 (1
   });
 });
 
-describe('every COMPOSED row of the registry names a host that exists in both engines (E78 (2): RED today by design; the 23 prose.* rows on R5\'s planned host are CHAIN C\'s worklist, E134 (2))', () => {
+describe('every COMPOSED row of the registry names a host that exists in both engines (E78 (2); since unit 4\'s M3 no composed row sits on a planned host)', () => {
   for (const r of ORDERED) {
     test(`${r.id}: its server and twin hosts are declared and exist (not PLANNED)`, () => {
       // anchored: hostFaultsOf names three faults on the synthetic planned rows above, so an empty list here is a judgment
@@ -154,17 +162,11 @@ describe('R5-DESC\'s ROWS, walked by name (E115 (3), E121, E126, E129; 212 (36))
     // anchored: the same judgment names faults on the synthetic planned rows above, so an empty list is a judgment
     expect(hostFaultsOf(r, REGISTRY_HOSTS)).toEqual([]);
   });
-  test('THE PINS RE-TAKEN BY CAUSE (R5D-SQL moved power.desc, power.label, power.relation.dmNote): of the composed rows, exactly the 23 prose.* rows sit on R5\'s planned host (CHAIN C\'s worklist, E134 (2)); no other row does', () => {
-    const planned = ORDERED.filter((r) => hostFaultsOf(r, REGISTRY_HOSTS).length > 0).map((r) => r.id);
-    expect(planned.length).toBe(23);
-    expect(planned.filter((id) => !id.startsWith('prose.'))).toEqual([]);
-    expect(ORDERED.length).toBe(26);
-  });
   test('power.label: OFF THE COMPOSED FORM, a plain diffuse row (its census 0 hits: R5DESC-MEASURE; the page arm counts again)', () => {
     const r = rowOf('power.label');
     expect(isComposed(r), 'power.label is in the registry and has left the composed form (no inputs)').toBe(false);
     expect({ rule: r.rule, built: r.built }).toEqual({ rule: 'diffuse', built: true });
-    expect(ORDERED.length, 'the composed list the absences are read from is the registry\'s, non-empty').toBeGreaterThanOrEqual(10);
+    expect(ORDERED.length, 'the composed list the absences are read from is the registry\'s, non-empty').toBeGreaterThan(0);
     // anchored: ORDERED is asserted non-empty on the line above and equal to the registry's composed list in the controls
     expect(ORDERED.map((x) => x.id)).not.toContain('power.label');
     // anchored: as above, the absence is of a member of a list asserted present
