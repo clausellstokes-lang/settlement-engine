@@ -46,3 +46,13 @@ THE NEXT COMMAND: read each child's first report as it lands; relay the chair's 
 
 ## 2. LOG (every hour from `date -u`)
 - 2026-11-27T23:26:27Z: first line to the chair sent; the measure (A) message sent; the machine restoring; four briefs written.
+- 2026-11-27T23:28:39Z: THE MACHINE UP (instruments check 0, walker 0, harnesses 0, accept 0, tpl 0, gate 0). FOUR CHILDREN SEATED (opus-5-5, high):
+  U3R session_01FE9mEwfVPNQEWPDzhFpCtc; U45 session_01FE9mEtsxe2wE8icsSaauPj; PG session_01FE9mEuyVYboBzwMNjdP4M8; MC session_01FE9mEvbYUFFY3VDhYajTtC.
+- THE JOIN IS BIGGER THAN THE BRIEF SAYS (CONFIRMED): the tip's merge base with the line is 8f3b8bf4b (point 73), not point 116. A scratch
+  trial merge of 682667fe2 into dbd4cd9e5 (worktree /home/user/wt/trialjoin, aborted): 16 conflicts, all documents, registers and tests
+  (ARCHITECTURE.md, docs/CURRENT_STATE.md, docs/DEPLOY.md, docs/content/wiring-census.json, scripts/.writer-reach-baseline.json,
+  scripts/ops/migrationRehearsalCore.mjs, tests/components/dossierPhoneFloorAllViews.test.jsx, tests/lint/.lighting-census-baseline.json,
+  tests/lint/.tuning-inventory.json, tests/lint/ruinFilterRoster.walker.test.js, tests/lint/tuningRegister.walker.test.js,
+  tests/ops/migrationRehearsal.test.js, tests/scripts/{implementationPackets,implementationSession,landingStageMeasure}.test.js,
+  tests/soak-harness/soakRegister.test.js); none under src/ or supabase/. Told the chair. VEIL-53's branches sit on its old trial join
+  (point 114, ba7460c33) and come in as merges.
