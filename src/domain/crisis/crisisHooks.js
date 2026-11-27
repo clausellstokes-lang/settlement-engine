@@ -105,6 +105,21 @@ const CLAUSE_SAYS = new Set([CAST_REASONS.face, CAST_REASONS.defenderMilitary]);
 const str = (v) => (typeof v === 'string' ? v : '');
 
 /**
+ * R1 (RULING-R, the eleventh chair, 2026-11-27): `deriveCrisisCast` stores a passed-over pick's reason with the fixed
+ * suffix "; " + `CAST_REASONS.nextInLine`, the builder's note of why the first choice was skipped. It is not prose: the
+ * reason prints without it (here and on the Crisis page), and the stored reason keeps it. Only that suffix is cut.
+ */
+const NEXT_IN_LINE_SUFFIX = `; ${CAST_REASONS.nextInLine}`;
+
+/**
+ * A stored cast reason as it prints: the next-in-line note dropped; anything else (a non-string included) passes through.
+ * @template T @param {T} reason @returns {T}
+ */
+export function castReasonShown(reason) {
+  return /** @type {T} */ (typeof reason === 'string' && reason.endsWith(NEXT_IN_LINE_SUFFIX) ? reason.slice(0, -NEXT_IN_LINE_SUFFIX.length) : reason);
+}
+
+/**
  * @typedef {Object} HookSettlement
  * @property {Array<{ id?: unknown, name?: unknown, memberships?: unknown }>=} npcs
  * @property {unknown=} powerStructure
@@ -193,7 +208,7 @@ const PREDICATE_REASONS = new Set(['leverRuns', 'instigatorRival', 'instigatorBa
  * @returns {string}
  */
 function castSentenceOf(noun, clauseOf, words, holder) {
-  const reason = str(holder.reason);
+  const reason = str(castReasonShown(holder.reason));
   if (CLAUSE_SAYS.has(reason) || !PREDICATE_REASONS.has(reason)) return castSentence(noun, clauseOf(words), reason);
   // TAIL-CRISIS-3 (batch 3's inheritors read): the rival's reason is its POWER's standing ("already carries more weight than
   // whoever holds the seat"), never the person's, so the clause is said of the person's power

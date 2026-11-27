@@ -17,7 +17,7 @@
  * Pure; lazy-only (its readers are the Crisis tab, the print chapter, the journal).
  */
 
-import { crisisHookFor } from './crisisHooks.js';
+import { castReasonShown, crisisHookFor } from './crisisHooks.js';
 import { crisisContainer } from '../facts/crisisKind.js';
 import { CRISIS_ROLE_LABEL, STAKE_REASONS, effectiveCastOf } from './crisisCast.js';
 import { composeTonightSheet } from '../summary/tonightSheet.js';
@@ -270,7 +270,7 @@ export function composeCrisisPage(settlement) {
         id: r.id,
         doorId: castDoorId(s, r.kind, r.id),
         name: r.name,
-        reason: speak(r.reason),
+        reason: speak(castReasonShown(r.reason)), // R1: the next-in-line note is the builder's, not printed
         temporary: !!r.temporary,
       })),
       absent: (cast?.absent || []).map((a) => ({ role: a.role, roleLabel: CRISIS_ROLE_LABEL[a.role] || a.role, reason: speak(a.reason) })),

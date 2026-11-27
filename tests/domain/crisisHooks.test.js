@@ -280,3 +280,21 @@ describe('the plague slot on born towns: the dean is not named the healer, the h
     expect(plagueHookOf(born('r2r-city-19'))).toMatch(/^Una Murray, the healer who identified the outbreak first, has gone quiet\./);
   });
 });
+
+// R1 (RULING-R, the eleventh chair, 2026-11-27): the cast's "; next in line, …" is the builder's note, stored with the reason
+// when the first choice was passed over. The hook prints the reason without it; the stored reason is not re-worded.
+describe('R1: the next-in-line note of a stored cast reason is never printed in a hook', () => {
+  const passedOver = (reason) => `${reason}; ${CAST_REASONS.nextInLine}`;
+  it('a reason after a colon prints without the note, and the record keeps it', () => {
+    const entry = { type: 'famine', cast: cast([npcRow('brunt', 'n1', 'Mara Vell', passedOver(CAST_REASONS.bruntBase.food_security))]) };
+    const [hook] = crisisHooksOf(town(), entry);
+    expect(hook.text).toBe('In the famine, Mara Vell of Millers’ Guild takes the worst of it: the hunger falls first on its people.');
+    expect(entry.cast.roles[0].reason).toBe(passedOver(CAST_REASONS.bruntBase.food_security));
+  });
+  it('a predicate reason is still said of the holder once the note is dropped', () => {
+    const fed = town({ economicState: { foodSecurity: { label: 'Secure' } } });
+    const entry = { type: 'famine', cast: cast([npcRow('lever', 'n1', 'Mara Vell', passedOver(CAST_REASONS.leverRuns))]) };
+    const [hook] = crisisHooksOf(fed, entry);
+    expect(hook.text).toBe('In the crisis, Mara Vell of Millers’ Guild, who runs the office that decides how the crisis goes, holds the key to it.');
+  });
+});
