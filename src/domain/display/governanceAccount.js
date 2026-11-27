@@ -383,6 +383,7 @@ export function governanceAccountOf(settlement, opts = {}) {
     if (event && band) {
       const identity = `${place}::${event}::${yearsAgo}`;
       const { line } = drawDeclared(FORTUNE_MERIT_LINES, {
+        // the pool declares nothing, so the door never refuses: A LINE THAT EVER DECLARES A NEED MOVES THIS DRAW TO `rankKey` (point 121's bar)
         draw: (pool) => pickRendezvous(pool, identity, (l) => l.id),
         key: `${identity}::fortuneMerit`,
         facts,
@@ -410,6 +411,7 @@ export function governanceAccountOf(settlement, opts = {}) {
       const both = meritPrinted;
       const identity = `${place}::${age}`;
       const lasting = both ? FORTUNE_LASTING_LINES.find((l) => l.when === 'both') : drawDeclared(FORTUNE_LASTING_LINES, {
+        // the pool declares nothing, so the door never refuses: A LINE THAT EVER DECLARES A NEED MOVES THIS DRAW TO `rankKey` (point 121's bar)
         draw: (pool) => pickRendezvous(pool.filter((l) => l.when === 'alone'), identity, (l) => l.id),
         key: `${identity}::fortuneLasting`,
         facts,
