@@ -1718,3 +1718,12 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   helper: merge the builder's branch AGAIN (the new commits are test-side: fast for git), `node scripts/stable-pick-ids-door.mjs`
   must say the baseline matches the tree, the lighting census by its door again if the count moved, `tests/lint` whole,
   typechecks; then PUSH `lane/stack-120-wip-2026-11-27`; then the chair's row, gate paragraph, the line's push, the lists, CI.
+
+## T150 (08:43 UTC on 2026-11-27): THE ID GUARD's LAST ROUND IN AND READ; THE GUARD IS CLOSED (G81); THE HELPER'S WIDE GATE AWAITED
+
+- D13-120's final tip 94e25c6cd1 (0c76f8dd5c the four hardenings and the guard's head; 94e25c6cd1 the coverage entry):
+  test-side files only; ids unchanged (636 and 22), 573 fingerprints re-banked by the door; every plant of the reader
+  reds and is refused, a retired sentence under a new id is accepted, a comment naming an id is green; lint: the base's
+  reds and the lighting contract. READ BY THE CHAIR. THE GUARD IS CLOSED: nothing further is cured in it at this point.
+- THE HELPER (ad227fbdc9f50547d) merged 15adda3ee1, NOT 94e25c6cd1: ITS SECOND MERGE OF THE BRANCH (two test-side commits)
+  comes with `landing/RULING-120-5.txt` after its wide gate is ruled.
