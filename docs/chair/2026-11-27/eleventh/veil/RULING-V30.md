@@ -35,3 +35,15 @@ wrongly on the OWNER's page too, it is a town fault and goes to the line's work;
 keys the page cannot re-derive faithfully are not printed on a shared page.
 MC's two findings taken (the row lock real, cured by moving the view count's UPDATE after the read; the default veil's cost
 on an unmarked 140-member map 15.6 s to 63.1 s): ruled with unit 3's "TIP?".
+
+**V32 (23:56 UTC on 2026-11-27): V28's ITEM 6, THE MEMBER's CHRONICLE.** On U3R's measure of N84 (d)
+(`u3r/N84D-CHRONICLE-REKEY.md` on `lane/veil-56-2026-11-27-u3r-docs`): with doors-3's `_gallery_doors_chronicle` on the
+R4-IDS chain, 140 of 140 entries naming a SHOWN person are withheld on both pools (`gone_people` compares the projection's
+stored ids with the body's re-keyed ids); it leaks nothing and loses fidelity; the tip's 211 member sends the live chronicle
+whole beside a veiled town (the leak). RULED, as VEIL-56 recommended: IN UNIT 3 THE FUNCTION IS TAKEN AS IT FAILS CLOSED, the
+loss listed under V4 for the owner; THE TRUE RULE (gone people judged on stored ids before the re-key, never by name; served
+person ids re-keyed by the same call's bijection) is built once on unit 4's five-argument `_gallery_veil` after units 3 and
+4+5 merge. CONDITION: the raw-town measure reads 0 served entries naming a withheld person, power or house or carrying a
+stored id. ALSO ACCEPTED IN PRINCIPLE (read with the hunk): the orphan rule on every public read, the link included.
+U3R re-ran VEIL-52's measure (A) on this account: every table byte-identical; code WIP `lane/veil-56-2026-11-27-door2-wip`
+5ab9caeb7.
