@@ -527,3 +527,37 @@ See section 4, newest last.
 - R-BIRTH is in its last gate run (not reported). READER 121 is rendering V (not reported beyond its early note).
 - A LESSON FOR THE NEXT CHAIR: `list_events` with kinds ["result"] on a child returns about 40,000 tokens of run metadata for
   three sentences: use `list_sessions` with `children: true` (its `post_turn_summary`) and the branches.
+
+## V22 (23:25 UTC on 2026-11-27): READER 121 REPORTED (5 FINDINGS, "THE BAR HOLDS", NO LANDING-STOPPER); RULED (E19, 121-4); ONE CURE ROUND STARTED; RULING 123-1 RECORDED; THIS MACHINE RESTARTED
+- **THE MACHINE RESTARTED at about 23:10 UTC** (uptime read 2 minutes at 23:12): every worktree, the scratchpad and
+  `node_modules` survived; every LOCAL background seat was lost with it (none was owed a report: TAIL-121 and GUARD-120R had
+  finished). The child seats run on their own machines and were not touched.
+- **READER 121** (`lane/reader-121-2026-11-27` at bcef616c4; filed here: `landing/121/SECOND-READER-121.txt`,
+  `landing/121/reader-notes.md`): BY EXECUTION on its own births of C and V: the pick is the head of the rank 20,000/20,000;
+  every unranked door call of every birth identical (2,997,784 | 2,919,694); records 0 | 0; lines outside the sites 0 of
+  1,120,886 | 1,092,108; moved: scope 723 | 723, descriptions 2,456 | 2,486, ring 76 | 95, governance 64 | 63; one line a town
+  on tabs, fresh share, PDF, Foundry, Tonight, search; 54 mutants and all 20 re-pointed rows red; six walkers green.
+  NOT CHECKED BY IT: the whole suite; a browser; PDF bytes; a hosted share; V's shared pages; seven frame pools. THE GUARD
+  BRANCH (cccda7569) was "not checked" in the report ONLY BECAUSE the chair's tenth question reached it after it sent: it is
+  reading the guard NOW by its own plants and will amend the report (its message of 23:11 UTC). THE LANDING WAITS FOR THAT.
+- **E19, RULING 121-4** (`landing/RULING-121-4.txt`: the ruling and the cure seat's brief in one file):
+  F1 the rotation (`traditionDescription.js :: drawTurn`) is switched off for a whole pool by one declared line: HELD BY
+  NAME (a pin, a sentence at the rotation, the gate paragraph), not rebuilt; F2 the dense-ids test works against the bar
+  (renumbering passes it green; a retired id reds it): A FAULT OF THE TEST, made append-only in meaning; F3 the door's
+  comment corrected to the reader's numbers (the walker's trace NOT touched: named below); F4 the cast want's key holds no
+  town: NOT A FAULT OF POINT 121 (the base's own key, 31/31 | 40/40), not cured, recorded for the survey's voices work;
+  F5 the scope line's frames and the PDF's chapter heads print by rank with no door: HELD BY NAME (a pin that their rows
+  hold `id` and `say` only).
+- **CURE-121**: a FRESH local builder (Opus) in `/home/user/wt/cure121` on `lane/stack-121-cure-wip-2026-11-27`, cut from
+  cccda7569; three units (two test files, one comment). The seat that built point 121 is not resumed.
+- **POINT 121's LANDING, AS IT NOW STANDS:** after CURE-121 and the reader's amended report (and any guard cure it asks):
+  the cure branch (it holds 2ab62ef33 and cccda7569) merged on the line; the doors by name (lighting census first); lint,
+  build, sizes; the whole suite in four shards (label LAND121); the row and the gate paragraph (it says F1's exception and
+  F4's number); the fast-forward push; LINE-NOW and the red list; CI by name.
+- **RULING 123-1 (sent to R-BIRTH by message at about 23:00 UTC; its text is the message):** C2, R11 "the date palms'
+  grain": the date palms CARRY DATES: the trade good "Desert grain" is renamed "Pressed dates" (a word for the owner's
+  veto); R15 (seven food-source lists that are empty) is RECORDED, not built. R-BIRTH pushed C2 at 1e8576d08 (23:02 UTC),
+  not yet reported. R-CURES-B pushed its round at 1b0241706 (22:58 UTC), not yet reported. R-CURES-A is re-rendering C and
+  V after 122-A-1 (its tip e096d4a96).
+- THE SURVEY's MEASURES: SURVEY-MEASURE has pushed (A) and (G) (`lane/survey-measure-2026-11-27` at f6c629b80); VOICES-MEASURE
+  has pushed nothing yet. Neither has reported.

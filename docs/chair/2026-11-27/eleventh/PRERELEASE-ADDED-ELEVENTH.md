@@ -60,3 +60,17 @@
   yields to a fallback, so no page goes blank. THE PROMISE AS THE CHAIR WORDED IT FOR HIM: "Nothing the survey says is ruled
   out by the record or by itself. People in the town may see it differently." CHECKABLE: clashes on drawn relationships
   counted over the corpora, target 0; COLD-READ-20 finds the relationships not yet drawn. Nothing built.
+
+## ADDED AT V22 (from the independent read of point 121; each a named item, none built in point 121)
+- **PRESUMED-TRACE-FORM (a measure):** `tests/lint/presumedThings.shared.mjs :: trace` follows a RETURNED CALL's arguments as
+  a reach: with `return drawRanked(…)` written directly in `facts/drawDeclared.js` the walker reads 5,348 hits, not 5,359
+  (19 keys differ: 18 on `src/data/institutionServices.js`, 1 on `src/domain/prose/holderTable.js`), in two files the change
+  does not touch. Point 121 holds the count by binding the result to a name, with a comment. OWED: which reading is the true
+  one, and the trace taught it, so that no walker's count hangs on the form of one `return`.
+- **STAND-IN WANTS (for the survey's voices work):** `summary/tonightSheet.js :: castWantOf` keys on `person|crisis|role`
+  and every want it voices today is a stand-in's (`npc_temp_<kind>`, no town in the key): 31 | 40 calls on C | V are 4
+  distinct keys (`npc_temp_warden|monster_pressure|lever` in 19 towns of C: one line); the pool offers such a person two
+  lines. Not a fault of any one page. To be re-read whole when a stand-in is given a voice.
+- **THE ROTATION OVER ADMITTED LINES (only if a frame table is ever to hold a declared line):** `traditionDescription.js ::
+  drawTurn` rotates only where every line of the pool is colour; point 121 pins that (ruling 121-4, F1). A frame that
+  claims something needs the rotation rebuilt over the lines the record admits, first.
