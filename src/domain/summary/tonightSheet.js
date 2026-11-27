@@ -31,7 +31,8 @@ import { HELD_STORES_WORDS, defenseFactsOf } from '../defense/defenseFacts.js';
 import { institutionDisplayName } from '../display/institutionDisplayName.js';
 import { FOOD_SECURITY_BANDS } from '../../data/bandLadders.js';
 import { STRESS_INSTITUTION_EFFECTS } from '../../data/stressInstitutionEffects.js'; import { heldCardLine } from '../../data/people/personMention.js'; // E8b: a crisis secret matched as drawn
-import { CRISIS_ROLE_LABEL, castHash, effectiveCastOf } from '../crisis/crisisCast.js';
+import { CRISIS_ROLE_LABEL, effectiveCastOf } from '../crisis/crisisCast.js';
+import { pickRendezvous } from '../../kernel/proseHash.js';
 import { crisisSummaryForSurface } from '../crisis/crisisSummaryVantage.js';
 import { factsOf } from '../facts/factsOf.js';
 import { CRISIS_NOUN, LINE_ROLE_CLAUSE } from '../crisis/crisisHooks.js';
@@ -65,37 +66,38 @@ export const TONIGHT_COPY = Object.freeze({
  * voiced from the crisis cast wants what the ROLE wants, read after "Wants to". An instigator's
  * want fits an instigator, never the want of the people answering the crisis ("identify the
  * infiltrator", soak1k-1805); the seat-holder's want stays the seat's (the NPC's own goal). One
- * line per person, chosen by `castHash` over the person, the crisis and the role: no draw.
+ * line per person, the rendezvous of the person, the crisis and the role with each line's id (`castWantOf`): no draw.
  * ROUND THREE (the chair's ruling): these lines are voiced ONLY for a cast person whose card carries no goal of its own
  * (`castWantOf`); a person with a goal wants what their card says they want.
  */
-export const CAST_WANTS = Object.freeze(/** @type {Record<string, ReadonlyArray<string>>} */ ({
+/** @typedef {{ id: string, text: string }} CastWant  a role's want, by its own id (tonight.castWants; point 121: written once, never renumbered) */
+export const CAST_WANTS = Object.freeze(/** @type {Record<string, ReadonlyArray<CastWant>>} */ ({
   // SW-6 CRISIS-SURFACES (STYLE-RULINGS-2 B3, A·T3; W4 PEOPLE #40, granted by the chair 12:5x): the wants read
   // the crisis's scarce good ({scarce}), its noun ({noun}) and the person's own house ({people}: "the people of
   // the Elder Council"; {house}: "the Elder Council"), filled by `castWantOf`; the struck tic "thanked rather
   // than blamed" is gone.
   instigator: Object.freeze([
-    'keep the pressure on until the seat gives way, and keep their own hand out of sight.',
-    'use this crisis to take the seat for themselves.',
-    'be the one people turn to when the seat fails.',
+    Object.freeze({ id: 'instigator.1', text: 'keep the pressure on until the seat gives way, and keep their own hand out of sight.' }),
+    Object.freeze({ id: 'instigator.2', text: 'use this crisis to take the seat for themselves.' }),
+    Object.freeze({ id: 'instigator.3', text: 'be the one people turn to when the seat fails.' }),
   ]),
   brunt: Object.freeze([
-    'get {people} a fair share of {scarce} before it runs out.',
-    'be heard by the seat before the {noun} takes what {people} have left.',
-    'hold {people} together through the {noun}, and remember who helped.',
+    Object.freeze({ id: 'brunt.1', text: 'get {people} a fair share of {scarce} before it runs out.' }),
+    Object.freeze({ id: 'brunt.2', text: 'be heard by the seat before the {noun} takes what {people} have left.' }),
+    Object.freeze({ id: 'brunt.3', text: 'hold {people} together through the {noun}, and remember who helped.' }),
   ]),
   lever: Object.freeze([
-    'decide who gets the {scarce}, and not be blamed by those who go without.',
-    'keep {house} working through the {noun}, whatever it costs them.',
-    'share out the {scarce} without being crushed between those who want it.',
+    Object.freeze({ id: 'lever.1', text: 'decide who gets the {scarce}, and not be blamed by those who go without.' }),
+    Object.freeze({ id: 'lever.2', text: 'keep {house} working through the {noun}, whatever it costs them.' }),
+    Object.freeze({ id: 'lever.3', text: 'share out the {scarce} without being crushed between those who want it.' }),
   ]),
   exploiter: Object.freeze([
-    'sell {scarce} dear while others go without.',
-    'come out of the {noun} richer than they went in, without anyone tracing how.',
+    Object.freeze({ id: 'exploiter.1', text: 'sell {scarce} dear while others go without.' }),
+    Object.freeze({ id: 'exploiter.2', text: 'come out of the {noun} richer than they went in, without anyone tracing how.' }),
   ]),
   defender: Object.freeze([
-    'hold the line through the {noun} with fewer hands than the line needs.',
-    'keep {house} standing long enough for someone else to end the {noun}.',
+    Object.freeze({ id: 'defender.1', text: 'hold the line through the {noun} with fewer hands than the line needs.' }),
+    Object.freeze({ id: 'defender.2', text: 'keep {house} standing long enough for someone else to end the {noun}.' }),
   ]),
 }));
 
@@ -131,20 +133,21 @@ export function castWantFactsOf(source) {
 /**
  * The role wants that say the seat is still held (it can still "give way", it can still "fail"): false where the seat
  * stands empty (the increment's #303, rpf-city-succession_void+politically_fractured-13: "keep the pressure on until the
- * seat gives way" where the seat has given way). Read by reference to the pool, so the pool's words stay its own.
+ * seat gives way" where the seat has given way). Read by the lines' own ids (point 121), so the pool's words stay its own.
  */
-const CAST_WANTS_HELD_SEAT = new Set([CAST_WANTS.instigator[0], CAST_WANTS.instigator[2]]);
+const CAST_WANTS_HELD_SEAT = new Set(['instigator.1', 'instigator.3']);
 
 /**
  * Is this role want true of the person and the town (ROUND THREE, the chair's ruling on the increment's #176 #303
  * #856)? A line that names the person's house needs one (never "their house" for a person with none); a line that
  * says the seat is held needs a held seat; a line whose crisis noun takes a singular verb needs a singular noun
- * ("the raids takes"). @param {string} line @param {string} house @param {string} noun @param {{ seatEmpty?: boolean }} facts
+ * ("the raids takes"). @param {CastWant} want @param {string} house @param {string} noun @param {{ seatEmpty?: boolean }} facts
  * @returns {boolean}
  */
-function castWantAdmits(line, house, noun, facts) {
+function castWantAdmits(want, house, noun, facts) {
+  const line = want.text;
   if (/\{house\}/.test(line) && !house) return false;
-  if (CAST_WANTS_HELD_SEAT.has(line) && facts.seatEmpty) return false;
+  if (CAST_WANTS_HELD_SEAT.has(want.id) && facts.seatEmpty) return false;
   if (/\{noun\} takes/.test(line) && /s$/.test(noun)) return false;
   return true;
 }
@@ -152,21 +155,21 @@ function castWantAdmits(line, house, noun, facts) {
 /**
  * The want a cast person WITH NO GOAL OF THEIR OWN voices (ROUND THREE, the chair's ruling: one home for what a person
  * wants is the person's own goal, as the card prints it; the role's line only where the card carries none, and only
- * where it is true of that person in that crisis): the role's own pool, one line by `castHash` over the person, the
- * crisis and the role (no draw); a line the town makes false (`castWantAdmits`) resolves draw-free to the pool's next
- * admitted line; '' where none is admitted. Filled with the crisis's scarce good and noun and the person's own house
+ * where it is true of that person in that crisis): the role's own pool, the line of the highest rendezvous rank of
+ * (`person|crisis|role`, the line's id) among those the town leaves true (`castWantAdmits`; point 121, TAIL-PICKS: a
+ * line the town makes false never moves the pick; no draw); '' where none is admitted. Filled with the crisis's scarce good and noun and the person's own house
  * (their first-rank power; '' when they hold none). A role with no pool (never voiced today) falls back to `ownWant`.
  * @param {string} role @param {string} personId @param {string} crisis @param {string} ownWant @param {string} [house]
  * @param {{ seatEmpty?: boolean, forceStands?: boolean }} [facts] the town's facts a line is read against (`castWantFactsOf`)
  * @returns {string}
  */
 export function castWantOf(role, personId, crisis, ownWant, house = '', facts = {}) {
-  const pool = /** @type {Record<string, ReadonlyArray<string>>} */ (CAST_WANTS)[role];
+  const pool = /** @type {Record<string, ReadonlyArray<CastWant>>} */ (CAST_WANTS)[role];
   if (!pool || pool.length === 0) return ownWant;
   const noun = /** @type {Record<string, string>} */ (CRISIS_NOUN)[crisis] || 'crisis';
-  const start = Math.floor(castHash(personId, crisis, role) * pool.length);
-  const line = pool.map((_, k) => pool[(start + k) % pool.length]).find((l) => castWantAdmits(l, house, noun, facts));
-  if (!line) return '';
+  const want = pickRendezvous(pool.filter((l) => castWantAdmits(l, house, noun, facts)), `${personId}|${crisis}|${role}`, (l) => l.id);
+  if (!want) return '';
+  const line = want.text;
   const named = house ? powerNameInProse(house) : '';
   return line
     .replace(/\{people\}/g, named ? `the people of ${named}` : 'their own people')

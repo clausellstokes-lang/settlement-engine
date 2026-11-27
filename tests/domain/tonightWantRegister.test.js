@@ -50,7 +50,7 @@ describe('R11 · the voiceable shape rule', () => {
   });
 
   it('every CAST_WANTS line is voiceable (the register the rule is written to)', () => {
-    for (const line of Object.values(CAST_WANTS).flat()) expect(isVoiceableWant(line), line).toBe(true);
+    for (const { text: line } of Object.values(CAST_WANTS).flat()) expect(isVoiceableWant(line), line).toBe(true); // point 121: rows { id, text }
   });
 
   it(`more than ${WANT_MAX_WORDS} words is not voiceable, however concrete`, () => {
