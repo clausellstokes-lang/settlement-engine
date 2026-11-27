@@ -1580,3 +1580,23 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   since points 83 and 84, "owed by the landing lane", their causes not re-traced by this chair) ARE EACH TRACED TO THEIR
   CAUSE AND THE FIX GOES INTO A LANDING BEFORE THE END: a local builder's measure, after D13-120's phase 1 reports.
 - D13-120 (agent a16f77d1000cac948) is still in phase 1 (its own long test runs); not reported.
+
+## T140 (04:28 UTC on 2026-11-27): D13's MEASURES RULED (G76), PHASE 2 BEING BUILT; THE SIX OWED FAILURES BEING TRACED; THE OWNER'S "VOICES"
+
+- **D13-120** (agent a16f77d1000cac948; /home/user/wt/d13): phase 1 reported and RULED IN G76: cost 29 new reds (23 stale
+  line pins, 0 stored figures); every town moves once (about 6.6 Daily Life lines, a quarter of viability lines); state
+  prose's main draw is ALREADY a rendezvous; OLD-SAVE and P9c CLOSED; the tail of 24 other town-page picks is POINT 121's
+  candidate (TAIL-PICKS), not 120. PHASE 2 SENT (`landing/RULING-120-1.txt`, nine steps). WHEN IT REPORTS: the chair
+  reads its source change AND starts the second reader (Agent general-purpose, model fable, effort max, background, not
+  told the chair's conclusion) at the hand-in; then a landing helper (the form of `prompts/START-LAND-119.txt`).
+- **OWED-6** (a second LOCAL builder, measure only, brief `prompts/START-OWED-6.txt`, tree /home/user/wt/owed6): traces the
+  six list rows "owed a fix" (rows 1, 15, 16, 22, 27, 28) to cause and proposed cure; changes nothing. Promised to the owner.
+- **THE OWNER'S "VOICES"** (two classes of prose: FACTUAL and SAID; his words and the design as it stands are in the
+  pre-release list under "VOICES"): quotes by a named person chosen by institution, right or skewed with no reason needed;
+  deliberate lies only, rarely, from a legitimate person with a criminal tie, marked for the DM only; a criminal house's
+  direct quotes DM-only; the grain DEFERRED TO THE CHAIR, then reopened by his point that lookup speed is no limit: TWO
+  CANDIDATES go to a cold read (four written versions plus manner tags; forty-eight written versions a line). A MEASURE
+  FIRST, AFTER POINT 120: lines that could move, by angle; the readers' last forty findings sorted by whether the frame
+  dissolves them; ten towns rendered both ways; how many places hold a legitimate person with a criminal tie. NOT BUILT
+  before point 120 lands.
+- NEXT PUSH NUMBER 422.
