@@ -47,16 +47,19 @@
  * threat.siege.any.realized #0 ("under siege") needs a siege in force (`crisis: under_siege`); trade_route_cut #0, #1
  * ("a trade route") need a route (`route open`); vassal_extraction #1, rebellion #0, vassal_trade_coercion #0, #1 ("an
  * overlord") need a sovereign (`sovereign`); calm #2 ("as usual") needs no crisis in force (`crisis: calm`).
+ * RULING-R (the eleventh chair, 2026-11-27), R4: an imminent-stage threat line speaks of a trouble still to come, so it
+ * is not said where that kind's crisis is already in force: the plague, famine, siege and monster-pressure imminent lines
+ * exclude their crisis (`crisis: plague_onset`, `famine`, `under_siege`, `monster_pressure`); wordings and ids unchanged.
  *
  * THE SAMENESS LINES OF D5C-2 (the chair's E133 (2); `lines/D4C/DRAFT-2.md`,
  * taken 2026-11-22 21:55 UTC): beat B8, appended at the branch's end, its keyed pick unchanged
  * (`tests/domain/dailyLifeNewLines.test.js`).
  */
 
-/** @typedef {{ readonly id: string, readonly text: string, readonly needs: ReadonlyArray<string> }} RecentLine */
+/** @typedef {{ readonly id: string, readonly text: string, readonly needs: ReadonlyArray<string>, readonly excludes?: ReadonlyArray<string> }} RecentLine */
 
-/** @param {ReadonlyArray<{ id: string, text: string, needs: string[] }>} lines @returns {ReadonlyArray<RecentLine>} */
-const frozen = (lines) => Object.freeze(lines.map((l) => Object.freeze({ ...l, needs: Object.freeze([...l.needs]) })));
+/** @param {ReadonlyArray<{ id: string, text: string, needs: string[], excludes?: string[] }>} lines @returns {ReadonlyArray<RecentLine>} */
+const frozen = (lines) => Object.freeze(lines.map((l) => Object.freeze({ ...l, needs: Object.freeze([...l.needs]), ...(l.excludes ? { excludes: Object.freeze([...l.excludes]) } : {}) })));
 
 /** The pools by branch. */
 export const RECENT_CHANGES = Object.freeze({
@@ -252,8 +255,8 @@ export const RECENT_CHANGES = Object.freeze({
     { id: 'T1', text: 'The trade the place lives by has collapsed.', needs: [] },
   ]),
   'threat.monster_pressure.overrun.imminent': frozen([
-    { id: 'T0', text: 'Beasts are pressing close to the place, and people are uneasy.', needs: [] },
-    { id: 'T1', text: 'More beasts are being seen near the place than anyone likes.', needs: [] },
+    { id: 'T0', text: 'Beasts are pressing close to the place, and people are uneasy.', needs: [], excludes: ['crisis: monster_pressure'] },
+    { id: 'T1', text: 'More beasts are being seen near the place than anyone likes.', needs: [], excludes: ['crisis: monster_pressure'] },
   ]),
   'threat.monster_pressure.overrun.realized': frozen([
     { id: 'T0', text: 'Beasts have overrun the country around, and nobody travels alone any more.', needs: [] },
@@ -263,41 +266,41 @@ export const RECENT_CHANGES = Object.freeze({
     { id: 'T4', text: 'People go out only in company now, for the beasts are everywhere.', needs: [] },
   ]),
   'threat.monster_pressure.frontier.imminent': frozen([
-    { id: 'T0', text: 'Beasts from the wild are coming closer, and people are uneasy.', needs: [] },
-    { id: 'T1', text: 'More beasts are being seen at the edge of the settled land than anyone likes.', needs: [] },
+    { id: 'T0', text: 'Beasts from the wild are coming closer, and people are uneasy.', needs: [], excludes: ['crisis: monster_pressure'] },
+    { id: 'T1', text: 'More beasts are being seen at the edge of the settled land than anyone likes.', needs: [], excludes: ['crisis: monster_pressure'] },
   ]),
   'threat.monster_pressure.frontier.realized': frozen([
     { id: 'T0', text: 'Beasts from the wild have come right up to the place.', needs: [] },
     { id: 'T1', text: 'The wild has pressed in, and beasts are seen close by.', needs: [] },
   ]),
   'threat.monster_pressure.stressor.imminent': frozen([
-    { id: 'T0', text: 'Beasts and raiders are pressing close, and people are uneasy.', needs: [] },
-    { id: 'T1', text: 'More beasts and raiders are about than anyone likes.', needs: [] },
+    { id: 'T0', text: 'Beasts and raiders are pressing close, and people are uneasy.', needs: [], excludes: ['crisis: monster_pressure'] },
+    { id: 'T1', text: 'More beasts and raiders are about than anyone likes.', needs: [], excludes: ['crisis: monster_pressure'] },
   ]),
   'threat.monster_pressure.stressor.realized': frozen([
     { id: 'T0', text: 'Beasts and raiders have struck, and the roads are no longer safe.', needs: [] },
     { id: 'T1', text: 'The country around is in the hands of beasts and raiders.', needs: [] },
   ]),
   'threat.plague.any.imminent': frozen([
-    { id: 'T0', text: 'A sickness is close to taking hold, and people are wary of every fever.', needs: [] },
-    { id: 'T1', text: 'There is sickness about, and it is getting close to a real outbreak.', needs: [] },
-    { id: 'T2', text: 'Sickness is spreading, and the healers fear it will get worse.', needs: ['sick house'] },
+    { id: 'T0', text: 'A sickness is close to taking hold, and people are wary of every fever.', needs: [], excludes: ['crisis: plague_onset'] },
+    { id: 'T1', text: 'There is sickness about, and it is getting close to a real outbreak.', needs: [], excludes: ['crisis: plague_onset'] },
+    { id: 'T2', text: 'Sickness is spreading, and the healers fear it will get worse.', needs: ['sick house'], excludes: ['crisis: plague_onset'] },
   ]),
   'threat.plague.any.realized': frozen([
     { id: 'T0', text: 'Sickness has broken out in earnest, and few households are untouched.', needs: [] },
     { id: 'T1', text: 'The sickness is everywhere now, and the sick are many.', needs: [] },
   ]),
   'threat.famine.any.imminent': frozen([
-    { id: 'T0', text: 'Food is close to running out, and every household is counting what it has.', needs: [] },
-    { id: 'T1', text: 'Hunger is close, and people are eating as little as they can.', needs: [] },
+    { id: 'T0', text: 'Food is close to running out, and every household is counting what it has.', needs: [], excludes: ['crisis: famine'] },
+    { id: 'T1', text: 'Hunger is close, and people are eating as little as they can.', needs: [], excludes: ['crisis: famine'] },
   ]),
   'threat.famine.any.realized': frozen([
     { id: 'T0', text: 'Hunger has arrived, and many households now go without.', needs: [] },
     { id: 'T1', text: 'There is no longer enough food, and people are going hungry.', needs: [] },
   ]),
   'threat.siege.any.imminent': frozen([
-    { id: 'T0', text: 'An enemy is close, and the place is preparing for a siege.', needs: [] },
-    { id: 'T1', text: 'A siege is expected, and people are getting ready for it.', needs: [] },
+    { id: 'T0', text: 'An enemy is close, and the place is preparing for a siege.', needs: [], excludes: ['crisis: under_siege'] },
+    { id: 'T1', text: 'A siege is expected, and people are getting ready for it.', needs: [], excludes: ['crisis: under_siege'] },
   ]),
   'threat.siege.any.realized': frozen([
     { id: 'T0', text: 'The place is under siege, and nothing comes in or goes out freely.', needs: ['crisis: under_siege'] },

@@ -356,6 +356,34 @@ describe('recent_changes behavior', () => {
     const s = deriveDailyLifeSlot('recent_changes', { population: 1000 });
     expect(RECENT_CHANGES.calm.map((l) => l.text)).toContain(s.text);
   });
+
+  // RULING-R (the eleventh chair, 2026-11-27), R4 (unit B1): an IMMINENT-stage threat line ("getting close to a real
+  // outbreak") does not print where that kind's crisis is IN FORCE (plague_onset, famine, under_siege, monster_pressure):
+  // the imminent lines declare the crisis on their `excludes` side, and the slot says its other true lines. The control
+  // (the same record with no crisis) prints the imminent line, so the arm cannot pass by printing nothing.
+  const IMMINENT_OF = (/** @type {string} */ type) => Object.entries(RECENT_CHANGES)
+    .filter(([b]) => b.startsWith(`threat.${type}.`) && b.endsWith('.imminent')).flatMap(([, ls]) => ls.map((l) => l.text));
+  it.each([
+    ['plague', 'plague_onset'], ['famine', 'famine'], ['siege', 'under_siege'], ['monster_pressure', 'monster_pressure'],
+  ])('says no imminent %s line where its crisis (%s) is in force', (type, crisis) => {
+    const threats = { threats: [{ name: 'Pressure', type, severity: 0.7, visibility: 'open' }] };
+    const calm = deriveDailyLifeSlot('recent_changes', { name: 'Ashford', defenseProfile: threats });
+    expect(IMMINENT_OF(type).some((t) => calm.text.includes(t))).toBe(true);
+    const inForce = deriveDailyLifeSlot('recent_changes', { name: 'Ashford', stress: [{ type: crisis }], defenseProfile: threats });
+    expect(IMMINENT_OF(type).filter((t) => inForce.text.includes(t))).toEqual([]);
+  });
+
+  // The measure's worked example (rmeasure/R-REPORT.md, R4): C dp-thorp-24, born as the page battery births it, holds a
+  // plague in force and printed "There is sickness about, and it is getting close to a real outbreak." beside its fever.
+  it('the born plague thorp (C dp-thorp-24) says no imminent plague line', async () => {
+    const boundary = await import('../../src/domain/density/densityCreateBoundary.js');
+    await boundary.loadGenerationLawPayloads();
+    const town = generateSettlementPipeline(boundary.birthConfig({ settType: 'thorp' }), null, { seed: 'dp-thorp-24', customContent: {} });
+    expect([town.stress].flat().map((e) => e?.type)).toContain('plague_onset');
+    const text = deriveDailyLife(town, { audience: 'owner' }).slots.recent_changes.text;
+    expect(IMMINENT_OF('plague').filter((t) => text.includes(t))).toEqual([]);
+    expect(text).toBe('A fever has begun to go round, and people are keeping their distance.');
+  });
 });
 
 // ── Composer ───────────────────────────────────────────────────────────
