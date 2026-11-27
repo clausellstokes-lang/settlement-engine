@@ -284,3 +284,31 @@ See section 4, newest last.
   reports by message. OWED: D1 (the Overview's seat line) after point 121's page-frames unit; each cure branch gets the
   chair's whole read and ONE independent reader over points 122 and 123 together before they land.
 - TAIL-121: the door's unit committed (39e0063c4); on its four units.
+
+## V12 (19:08 UTC on 2026-11-27): THE INDEPENDENT READER ON POINT 120 REBUILT: THE BAR HOLDS, THE PRODUCT IS CLEAN; FOUR FINDINGS, RULED (E13); ONE ROUND ON THE GUARD
+- THE READER (session_01FE9mEvGeBq7canVFL3PMpz, 1 h 40 min; its report `landing/120/SECOND-READER-120R.txt` and notes beside
+  it, copied from `lane/reader-120r-2026-11-27` at 885d929c7): executed on the base 1f946c43f1 against 80b133cae with the
+  guard 30539f145. NO FAULT OF THE FIRST BUILD IS REPEATED.
+- WHAT HOLDS, BY ITS OWN EXECUTION: the helper agrees with its own reference on 20,000 of 20,000 picks, is order-independent,
+  ties to the smaller id; no line starved or over three times its share; pools on one key independent. No index draw left
+  (0 of 10,725 and 10,942). Keys equal; ADMITTED SETS EQUAL (9,672 of 9,672; 9,770 of 9,770; viability 781 and 756); the words
+  of 615 lines and 24 sentences equal; the state-prose directory equal. Its 18 planted edits: every town that moved should
+  have, none extra: tip [base]: an undrawn line removed 0 [15]; a drawn line removed 36 [316]; a line added 25 [327]; re-worded
+  35 [35]; narrowed 11 [66]; THE POOL's ORDER REVERSED 0 [333]; viability 124 [210], 87 [261], 106 [98], 26 [51]. RECORDS MOVED
+  0 of 900, 0 of 900, 0 of 360 (the master-born). RENDERED LINES OUTSIDE THE FAMILIES: 0 of 1,120,878 (C) and 0 of 1,092,106
+  (V): so the builder's four "Patron deity" lines were its own render order, not this change (R14 stays a measure). The same
+  line on 900 of 900 across the owner's tab, the player view, a fresh shared page, the PDF's chapters, Foundry and the AI
+  grounding. No sentence twice. All 24 re-pointed rows red under its 21 mutants.
+- **E13, THE FOUR FINDINGS RULED** (`landing/RULING-120R-2.txt`, sent to GUARD-120R, resumed): (1) the guard's own tests pin
+  the baseline's exact counts and SS1's live words, so a line honestly retired or SS1 honestly re-worded leaves the walker
+  RED with no door cure: CURED (true floors; fixtures of their own). (2) a wholly retired scope cannot take a line under a
+  new id: CURED (the empty-present refusal is for the emptied skeleton only). (3) a viability pair whose id is not of the
+  id's form (`'SS1b'`, `'SELFS1'`) is read by nobody: CURED (red, not unread); a non-JSON baseline exits 2; "does not catch"
+  gains two lines. (4) `pickRendezvous` handed a duplicate id, a missing id or a falsy key answers by LIST ORDER: unreachable
+  today (0 duplicate ids, held by the guard); a NAMELESS record's picks follow the pool's order as the old pick's did: NOT
+  CURED; whether a saved town can be nameless joins RENAME-REDEALS. WHY (1) TO (3) ARE CURED THOUGH G81 CLOSED THE GUARD:
+  they trip HONEST work; G81 closed it against the deliberate kind.
+- KNOWN, RESTATED BY THE READER (A18): a shared page stamped before this change prints another viability line than the
+  owner's on 464 of 900; master holds no stamp.
+- THE LANDING OF POINT 120: the product is cleared by the reader. STILL OWED BEFORE THE LINE MOVES: the guard's round merged
+  by the helper; the joined tip's whole suite in four shards, read by name; the chair's row and gate paragraph.
