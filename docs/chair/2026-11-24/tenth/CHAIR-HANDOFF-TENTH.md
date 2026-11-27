@@ -1559,3 +1559,12 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   sentences ("…are also the people who trade in it…"; "…being well placed for trade has not changed that."); the older
   open items unchanged (security files and step 2's number; VEIL-51's refused push; storing picks at save: the chair says no).
   Push 417 done; NEXT PUSH NUMBER 418.
+
+## T138 (00:41 UTC on 2026-11-27): POINT 120's BUILDER STARTED (PHASE 1: THE MEASURES)
+
+- D13-120, a LOCAL builder (brief `prompts/START-D13-120.txt`; tree /home/user/wt/d13, branch
+  `lane/stack-120-d13-wip-2026-11-27` cut at 1f946c43f1): PHASE 1 ONLY: the three slot families as they are; THE COST of the
+  rendezvous pick by a scratch build (reds by file, sorted: stale line pins; stored figures; other); how many page lines
+  move on C and V; the other `% length` sites sorted by town page or outside the line; the OLD-SAVE measure (no food record)
+  and P9c. IT STOPS AND REPORTS; the chair rules on the count (G63 (2)) before phase 2 is built.
+- STILL OWED BY THE CHAIR: CI's run on 1f946c43f1 read by name (the hourly check does it when the run has ended).
