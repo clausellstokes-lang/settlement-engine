@@ -8,7 +8,7 @@
  * the atoms the record must hold (a conjunction), `{house}` a house the deriver names from the live roster (never a
  * hideable house, never an access-only row), printed `the <noun>` through `display/institutionSentenceNoun.js`. A line
  * whose house the roster cannot name is not eligible. The deriver filters a branch to its eligible lines
- * (`facts/drawDeclared.js :: filterDeclared`) and picks one by `kernel/proseHash.js :: pickVariantMixed` keyed
+ * (`facts/drawDeclared.js :: filterDeclared`) and picks one by `kernel/proseHash.js :: pickRendezvous` keyed
  * `<record.name>::dailyLife.gathering_places::<branch>`. Index 0 of each branch is TODAY's text (N0 as reworded, P0).
  *
  * Need → atom (ruling 12 (2)): sacred → `sacredHouse`; church → `church`; cathedral → `church` (its house a cathedral);

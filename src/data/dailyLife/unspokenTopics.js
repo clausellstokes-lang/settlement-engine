@@ -15,7 +15,7 @@
  * in LINES-2 § 4. "The merchants", "buyers" need a market; "the guilds" a (non-criminal) guild. No line names a house by
  * its roster name, says "town" or needs a hideable house or a crime atom (`tests/domain/dailyLifeAtoms.test.js`, arm (c)).
  * The deriver (`domain/dailyLife.js :: deriveUnspokenTopics`) hands the branch's lines to `facts/drawDeclared.js ::
- * filterDeclared` and picks one by `kernel/proseHash.js :: pickVariantMixed` keyed
+ * filterDeclared` and picks one by `kernel/proseHash.js :: pickRendezvous` keyed
  * `<record.name>::dailyLife.unspoken_topics::wound.<type>`.
  *
  * NOT BUILT (a walker's reading whose cure is a rewording, the chair's; the style law strikes "a stranger", and its

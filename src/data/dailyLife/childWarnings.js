@@ -10,7 +10,7 @@
  * sentence. A line is `{ id, text, needs }` as in `dawnWork.js`; `{house}` a house the deriver names from the live roster
  * (never a hideable house, never an access-only row), printed `the <noun>` through `display/institutionSentenceNoun.js`.
  * The deriver hands `CHILD_WARNINGS[kind]` to `facts/drawDeclared.js :: filterDeclared` and picks one eligible line by
- * `kernel/proseHash.js :: pickVariantMixed` keyed `<record.name>::dailyLife.child_warnings::<kind>`. No line needs a
+ * `kernel/proseHash.js :: pickRendezvous` keyed `<record.name>::dailyLife.child_warnings::<kind>`. No line needs a
  * hideable house or a crime fact (`tests/domain/dailyLifeAtoms.test.js`, arm (c)).
  *
  * DAILY-2's cure of 2026-11-20 (a stricter need, wordings unchanged; the presumed-things walker's `streets`): U7 and P9 say

@@ -13,7 +13,7 @@
  * wealthier streets" and "the better-off" need a place larger than a hamlet (`tier: ≥ village`); "what can be bought"
  * needs a market. No line names a house by its roster name (they name kinds: "temple kitchens" needs a sacred house).
  * The deriver (`domain/dailyLife.js :: deriveFoodCulture`) hands the branch's lines to `facts/drawDeclared.js ::
- * filterDeclared` and picks one by `kernel/proseHash.js :: pickVariantMixed` keyed
+ * filterDeclared` and picks one by `kernel/proseHash.js :: pickRendezvous` keyed
  * `<record.name>::dailyLife.food_culture::<branch>`. No line needs a hideable house or a crime atom
  * (`tests/domain/dailyLifeAtoms.test.js`, arm (c)).
  *

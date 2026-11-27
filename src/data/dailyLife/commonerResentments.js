@@ -17,7 +17,7 @@
  * number (`fillAgreement`); a line that says it declares `government named`. "The council" needs a ruling body (`ruling
  * body`); "the price of food", "the stalls" need a market. The deriver (`domain/dailyLife.js ::
  * deriveCommonerResentments`) hands each branch's lines to `facts/drawDeclared.js :: filterDeclared` and picks one by
- * `kernel/proseHash.js :: pickVariantMixed` keyed `<record.name>::dailyLife.commoner_resentments::<branch>`. No line
+ * `kernel/proseHash.js :: pickRendezvous` keyed `<record.name>::dailyLife.commoner_resentments::<branch>`. No line
  * needs a hideable house or a crime atom (`tests/domain/dailyLifeAtoms.test.js`, arm (c)).
  *
  * NOT BUILT (a need with no atom, ruling 10; `dailyLifeAtoms.test.js :: NOT_GRANTED`):

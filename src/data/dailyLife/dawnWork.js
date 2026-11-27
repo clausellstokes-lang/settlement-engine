@@ -14,7 +14,7 @@
  * deriver names from the live roster (never a hideable house, never an access-only row), printed `the <noun>` through
  * `display/institutionSentenceNoun.js`. A line whose house the roster cannot name is not eligible. The deriver filters a
  * branch to its eligible lines (`facts/drawDeclared.js :: filterDeclared`) and picks one by
- * `kernel/proseHash.js :: pickVariantMixed` keyed `<record.name>::dailyLife.dawn_work::<branch>`. Index 0 of each branch
+ * `kernel/proseHash.js :: pickRendezvous` keyed `<record.name>::dailyLife.dawn_work::<branch>`. Index 0 of each branch
  * is TODAY's text, with its needs declared (F0, W0, C0, S0, M0, B0). No line true: the EMPTY string (ruling 3).
  *
  * Need → atom (`tests/domain/dailyLifeAtoms.test.js :: NEED_ATOMS`): granary, smith, mill, bathhouse, bakery,
