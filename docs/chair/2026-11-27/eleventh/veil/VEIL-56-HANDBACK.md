@@ -14,7 +14,7 @@ suite re-run speculatively (`galleryImportEqualsRead` only at the one pool proof
 the briefs in `v56/briefs/`, and each child's state file: U3R `u3r/U3R-PROOFS.md` (`-u3r-docs`, code `-door2-wip`), U45 `u45/MISSING.md`
 (`-u45-docs`, code `-u45-wip`), PG `pg/PG-REPORT.md` (`-pg-docs`, code `-pages-wip`), MC `mc/STATE.md` (`-mc-docs`). OPEN WITH THE CHAIR:
 V29's two findings from PG (the false band reaches five rows; re-derived keys wrong on master-born towns): see the log; PG builds nothing
-of V29 (1) before "BAND-RULE". RULED: V30 (unit 3's rule; relayed to U3R).**
+of V29 (1) before "BAND-RULE". RULED: V30 (unit 3's rule; relayed to U3R). RULED: V31 (the chair's record, beside V30): (A) THE INTERVAL TEST is V29 (1)'s rule IF PG's M1 reads 0 wrong on both pools and every band has a clean interval, ELSE every row reading a re-derived severity is not printed; rows lost counted and named either way. (B) PG MAY RUN M2 (the cause by key, measure only; and whether the OWNER's page is wrong too: then a town fault for the line); NOTHING BUILT ON (B) until the chair has the table. MC writes its cost proposal in 200 words in `mc/STATE.md` and stops; the chair rules it with unit 3's "TIP?". PG BUILDS NOTHING until I have M1's table and say which branch.**
 
 THE LANE IS RESUMED. THE TIP `lane/veil-56-2026-11-27-tip` = dbd4cd9e5 (units 2 and 1; nothing else merged). The line: 682667fe2 (point 120)
 at my start; ITS 211 IS THE GRANTS FIX, so the lane's 211 and 212 become 212 and 213 AT THE JOIN (in every file here "212" still means
@@ -98,3 +98,4 @@ THE NEXT COMMAND: read each child's first report as it lands; relay the chair's 
   series (5.9 s to 50.9 s); with the view-count UPDATE moved after the read (a one-line local trial) 4 readers all in about 6.6 s, 8 in
   13.5 s (CPU-bound), the count still right; master's 088 has the same line first. Its cure goes into `mc/PROPOSAL.md` for the chair.
 - 2026-11-27T23:48:23Z: THE CHAIR's ORDER ON THE ALLOWANCE relayed to all four (U3R, U45: push at every step, a state section current; U3R's `galleryImportEqualsRead` struck from its proofs, taken at the pool proof; PG, MC: finish the measure in hand, state note, STOP).
+- 2026-11-27T23:49:14Z: RULING V31 taken and relayed (PG: M1 then M2, then STOP; MC: the 200-word proposal in its state note, then STOP).
