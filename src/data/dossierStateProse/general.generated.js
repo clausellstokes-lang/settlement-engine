@@ -9224,7 +9224,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           6,
           7
         ],
-        "readsCount": 2,
+        "readsCount": 1,
         "attach": [],
         "colour": true
       },
