@@ -38,7 +38,9 @@
  * every exported value of every pool file that holds an id-bearing object must sit at a slot this module names; every
  * slot it names is read exactly once; a pool file that holds no line is red. The imported-pools reader is fail-closed:
  * every module of its table must import; every named export must exist, have its layout, and yield at least one row;
- * every row must carry a string `id` and its words; an export named twice in the table is red.
+ * every row must carry a string `id` and its words; an export named twice in the table is red. IN EVERY FAMILY an id is a
+ * NON-EMPTY string with no space at either end and no line break (`idProblem`; the viability rows' id form already holds
+ * it); anything else is red, the row named, and the door refuses it.
  *
  * WHAT IT IS FOR: an honest mistake.
  *   - an insertion that shifts the later ids;
@@ -117,6 +119,16 @@ export const IMPORTED_POOLS = Object.freeze([
 /** An id's form: a prefix of letters and a number (`P3`, `SS1`; lower case counted too). */
 export const ID_FORM = /^[A-Za-z]{1,4}[0-9]+$/;
 
+/**
+ * AN ID IS a non-empty string with no space at either end and no line break (RULING 121-5 (b)), in EVERY family's reader:
+ * anything else is red in the walker and refused by the door, the row named.
+ * @param {unknown} id @returns {string | null} why the value is not an id, or null when it is one
+ */
+export const idProblem = (id) => (typeof id !== 'string' ? 'not a string'
+  : id === '' ? 'an empty string'
+    : /^\s|\s$/.test(id) ? 'a space at an end'
+      : /[\r\n\u2028\u2029]/.test(id) ? 'a line break' : null);
+
 /** @param {string} words @returns {string} the words as the fingerprint reads them */
 export const normaliseWords = (words) => words.replace(/\s+/g, ' ').trim().toLowerCase();
 
@@ -151,6 +163,8 @@ function readBranch(scopes, problems, scope, lines, where) {
   /** @type {TreeLine[]} */ const out = scopes.get(scope) ?? [];
   lines.forEach((l, i) => {
     if (!l || typeof l.id !== 'string' || typeof l.text !== 'string') { problems.push(`${where}[${i}]: a line without a string id and text`); return; }
+    const bad = idProblem(l.id);
+    if (bad) { problems.push(`${where}[${i}]: the id ${JSON.stringify(l.id)} is not an id (${bad}: an id is a non-empty string with no space at either end and no line break)`); return; }
     out.push({ id: l.id, fp: fingerprintOf(l.text) });
   });
   scopes.set(scope, out);
@@ -437,6 +451,8 @@ export function importedPoolsTreeOf(modules, table) {
         const r = /** @type {{ id?: unknown, text?: unknown, say?: unknown } | null} */ (row);
         const words = !r ? null : pool.words === 'text' ? (typeof r.text === 'string' ? r.text : null) : (typeof r.say === 'function' ? String(r.say) : null);
         if (!r || typeof r.id !== 'string' || words === null) { problems.push(`${where}${k}[${i}]: a row without a string id and its ${pool.words === 'text' ? 'text' : '`say` function'}`); return; }
+        const bad = idProblem(r.id);
+        if (bad) { problems.push(`${where}${k}[${i}]: the id ${JSON.stringify(r.id)} is not an id (${bad}: an id is a non-empty string with no space at either end and no line break)`); return; }
         lines.push({ id: r.id, fp: fingerprintOf(words) });
       });
     }

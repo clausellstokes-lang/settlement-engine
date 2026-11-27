@@ -16,7 +16,7 @@ import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import {
   BASELINE_REL, DAILY_LIFE_EXPORTS, IMPORTED_POOLS, ROOT, VIABILITY_SCOPE, baselineProblems, dailyLifeTreeOf, doorPlan,
-  findings, fingerprintOf, importedPoolsTreeOf, readBaseline, readTree, viabilityRowsIn, viabilityTreeOf,
+  findings, fingerprintOf, idProblem, importedPoolsTreeOf, readBaseline, readTree, viabilityRowsIn, viabilityTreeOf,
 } from './stablePickIds.shared.mjs';
 
 /** @typedef {import('./stablePickIds.shared.mjs').Tree} Tree */
@@ -346,5 +346,31 @@ describe('guard-the-guard: the imported pools (point 121)', () => {
     const onlyTwo = { scopes: { 'x.flat': BANK.scopes['x.flat'], 'x.byRole': BANK.scopes['x.byRole'] } };
     const added = doorPlan(poolTree(mods()), onlyTwo);
     expect([added.refusals, added.added]).toEqual([[], ['x.frames plain', 'x.frames told']]);
+  });
+});
+
+// ── GUARD-THE-GUARD: AN ID IS A NON-EMPTY STRING, no space at either end, no line break (RULING 121-5 (b)) ───────────────
+
+describe('guard-the-guard: an id is a non-empty string with no space at either end and no line break, in every family', () => {
+  const NOT_IDS = ['', ' ', ' P1', 'P1 ', '\tP1', 'P\n1', 'P\r1'];
+  test('the rule itself: the live forms are ids; the empty string, a space at an end, a line break are not', () => {
+    for (const id of ['P1', 'SS1', 'RING-1', 'instigator.1', 'plain', 'a b']) expect(idProblem(id), id).toBeNull();
+    for (const id of NOT_IDS) expect(idProblem(id), JSON.stringify(id)).not.toBeNull();
+  });
+
+  test('each family reads such an id as RED, the row named, and the door refuses it (nothing to write)', () => {
+    for (const id of NOT_IDS) {
+      const daily = dailyLifeTreeOf({ 'q.js': { GATHERING_PLAIN: [{ id: 'P0', text: 'A.' }, { id, text: 'B.' }] } });
+      expect(daily.problems.join('\n'), JSON.stringify(id)).toMatch(/GATHERING_PLAIN\[1\]: the id .* is not an id/);
+      const dailyPlan = doorPlan(daily, { scopes: { 'gathering_places|plain': { present: { P0: fingerprintOf('A.') }, retired: [] } } });
+      expect([dailyPlan.refusals.join('\n'), dailyPlan.next], JSON.stringify(id)).toEqual([expect.stringMatching(/the reader cannot read the tree: .*GATHERING_PLAIN\[1\]/), null]);
+      const pools = poolTree(mods({ flat: [{ id: 'F.1', text: 'One.' }, { id, text: 'Two.' }], frames: [{ id, say: FRAME_A }] }));
+      const said = pools.problems.join('\n');
+      expect(said, JSON.stringify(id)).toMatch(/FLAT\[1\]: the id .* is not an id/);
+      expect(said, JSON.stringify(id)).toMatch(/FRAMES\[0\]: the id .* is not an id/);
+      expect(doorPlan(pools, BANK).next, JSON.stringify(id)).toBeNull();
+      // the viability rows: their id form already refuses it
+      expect(viabilityRowsIn(plant(`    [${JSON.stringify(id)}, \`\${town} keeps itself.\`],\n`)).problems.join('\n'), JSON.stringify(id)).toMatch(/a row whose id is not of the id's form/);
+    }
   });
 });
