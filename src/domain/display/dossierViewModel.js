@@ -992,18 +992,17 @@ function foodPoundsShown(settlement) {
  * place holding one of the two (the history's origin line "owes more than it owns", 19 places, among them); the rest of
  * what the words matched is not the place owing (a past Debt Crisis, the bank's loans, a quarrel between two powers, one
  * household's dues). ONE READER, here, for the three gates that need it (L1, L2, L4, L5 and the strained line).
+ * RULING-R (the eleventh chair, 2026-11-27, R5) reads the timeline's `outside_debt` event ("The Debt Crisis") as the
+ * place owing too: its printed description and hooks say the creditor is collecting now (`solvencyShown.js`).
  * @param {unknown} settlement @returns {boolean}
  */
 function owesDebtShown(settlement) {
-  const s = /** @type {{ stress?: unknown, history?: { currentTensions?: unknown } | null } | null | undefined} */ (settlement);
-  const stress = Array.isArray(s?.stress) ? s.stress : s?.stress ? [s.stress] : [];
-  if (stress.some((e) => /** @type {{ type?: unknown } | null} */ (e)?.type === 'indebted')) return true;
-  const tensions = s?.history?.currentTensions;
-  return Array.isArray(tensions) && tensions.some((t) => /** @type {{ type?: unknown } | null} */ (t)?.type === 'outside_debt');
+  return placeOwesShown(settlement); // RULING-R (the eleventh chair, 2026-11-27), R5: the reader moved to `solvencyShown.js`, which the Economy desk reads too; it also reads the timeline's `outside_debt` event
 }
 /** VIABILITY-TRUE (G61): the Economics tab's printed arriving list. @param {unknown} settlement @returns {string[]} */
 function arrivingShown(settlement) {
   return tradeListsAsPrinted(/** @type {Parameters<typeof tradeListsAsPrinted>[0]} */ (settlement)).imports.map(String);
 }
 import { foodRowShown, foodBalanceShown } from './foodRowShown.js'; import { carriersOf } from './foodCarrier.js'; import { isFoodSourceGood } from './commoditiesShown.js'; // VIABILITY-TRUE (G61): at the END, so no cited line moves
+import { owesDebtShown as placeOwesShown } from './solvencyShown.js'; // RULING-R (R5): at the end of the file, so no cited line moves
 import { scoresAsShown } from '../facts/beastsReadiness.js'; // P9b (RULING G48): the mean reads the scores as printed; at the end of the file, so no cited line moves

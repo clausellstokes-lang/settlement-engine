@@ -3686,7 +3686,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The town's debts start in one house and are collected in another, and the two are the same concern.",
+          "text": "Debts run up in one house here are collected in another, and the two are the same concern.",
           "slots": [],
           "vid": 2
         },
