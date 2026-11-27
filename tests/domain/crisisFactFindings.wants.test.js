@@ -22,7 +22,7 @@ describe('the cast want reads the crisis and the house (SW-6, #40)', () => {
     // anchored: the subject is the exact text or constant asserted positively beside it (SW-6), so it cannot have drifted away
     expect(want).not.toMatch(/\{/);
     // anchored: the subject is the exact text or constant asserted positively beside it (SW-6), so it cannot have drifted away
-    expect(Object.values(CAST_WANTS).flat().join(' ')).not.toMatch(/rather than/);
+    expect(Object.values(CAST_WANTS).flat().map((w) => w.text).join(' ')).not.toMatch(/rather than/); // point 121: rows { id, text }
   });
   it('the checker passes the house-filled want and refuses another role\'s', () => {
     const s = town();

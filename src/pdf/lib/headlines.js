@@ -14,6 +14,7 @@ import { coverageRatioPct } from './foodCoverage.js';
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
 import { plotHookSourcePage } from '../../domain/dossier/plotHooks.js';
 import { withPowerSentenceNames, powerSentenceName } from '../../domain/display/powerSentenceName.js';
+import { pickRendezvous } from '../../kernel/proseHash.js';
 
 // ── Shared plain-word helpers (the owner's style law of 2026-11-07: the label stays as the
 // first word, the machinery leaves, the town's own nouns fill the slots) ──────────────────
@@ -41,17 +42,61 @@ const sentenceCase = (labelText) => {
   return t.charAt(0).toUpperCase() + t.slice(1);
 };
 /**
- * THE SEED CHOOSES (WIRING-RULINGS §8(3)): one stable variant per town, from a string the
- * town always carries. The same town prints the same variant forever; a sibling town under the
- * same circumstance prints another.
- * @template T @param {string} key @param {ReadonlyArray<T>} variants @returns {T}
+ * THE SEED CHOOSES (WIRING-RULINGS §8(3); point 121, TAIL-PICKS): one stable row per town, from a string the town always
+ * carries: the row of the highest rendezvous rank of (that string, the row's own id), so an edit to a chapter's rows moves
+ * only the towns that printed, or now out-rank to, the edited row. An EMPTY key takes the FIRST row (the helper's
+ * contract; the old FNV modulus took the second of four on an empty key).
+ * @template {{ id: string }} T @param {string} key @param {ReadonlyArray<T>} rows @returns {T}
  */
-function seedPick(key, variants) {
-  let h = 2166136261;
-  const k = String(key || '');
-  for (let i = 0; i < k.length; i++) { h ^= k.charCodeAt(i); h = Math.imul(h, 16777619); }
-  return variants[(h >>> 0) % variants.length];
+function seedPick(key, rows) {
+  return /** @type {T} */ (pickRendezvous(rows, String(key || ''), (r) => r.id));
 }
+
+/** @typedef {{ where: string, what: string, after: string, seen: string | null, single: boolean }} OverviewHeadlineSlots */
+/**
+ * THE OVERVIEW HEAD'S ROWS (pdf.headlines.overview): four vantages on the town and its trouble, by id, append-only.
+ * @type {ReadonlyArray<{ id: string, say: (s: OverviewHeadlineSlots) => string }>}
+ */
+export const OVERVIEW_HEADLINES = Object.freeze([
+  // [traveller · S] what you walk into
+  Object.freeze({ id: 'traveller', say: (/** @type {OverviewHeadlineSlots} */ s) => (s.single && s.seen
+    ? `You reach ${s.where} and it shows at once: ${s.seen}`
+    : `You reach ${s.where} in the middle of ${s.what}${s.after}`) }),
+  // [local · S] what every house talks about
+  Object.freeze({ id: 'local', say: (/** @type {OverviewHeadlineSlots} */ s) => `In ${s.where} the talk is all of ${s.what}${s.after}` }),
+  // [official · S] what those in charge have to deal with
+  Object.freeze({ id: 'official', say: (/** @type {OverviewHeadlineSlots} */ s) => `Those in charge of ${s.where} have ${s.what} on their hands${s.after}` }),
+  // [newcomer · S] what you hear when you ask
+  Object.freeze({ id: 'newcomer', say: (/** @type {OverviewHeadlineSlots} */ s) => `Ask in ${s.where} what is wrong and you hear of ${s.what}${s.after}` }),
+]);
+
+/**
+ * THE ECONOMICS HEAD'S ROWS (pdf.headlines.economics), by id, append-only. Keyed on the top export and the prosperity: NO
+ * TOWN in the key (named for RENAME-REDEALS, not changed).
+ * @type {ReadonlyArray<{ id: string, say: (s: { topExport: string }) => string }>}
+ */
+export const ECONOMICS_HEADLINES = Object.freeze([
+  // [trade · S] what it sells
+  Object.freeze({ id: 'trade', say: (/** @type {{ topExport: string }} */ s) => `Most of what it sells is ${s.topExport}` }),
+  // [local · S] what households live on
+  Object.freeze({ id: 'local', say: (/** @type {{ topExport: string }} */ s) => `Its people make their living from ${s.topExport}` }),
+  // [official · S] what the purse rests on
+  Object.freeze({ id: 'official', say: (/** @type {{ topExport: string }} */ s) => `Its income rests on ${s.topExport}` }),
+  // [traveller · S] what you see going out
+  Object.freeze({ id: 'traveller', say: (/** @type {{ topExport: string }} */ s) => `What goes out of here is mostly ${s.topExport}` }),
+]);
+
+/** @typedef {{ count: string, total: number, named: string }} NpcsHeadlineSlots */
+/**
+ * THE PEOPLE HEAD'S ROWS (pdf.headlines.npcs), by id, append-only.
+ * @type {ReadonlyArray<{ id: string, say: (s: NpcsHeadlineSlots) => string }>}
+ */
+export const NPCS_HEADLINES = Object.freeze([
+  // [official · S] who carries the weight
+  Object.freeze({ id: 'official', say: (/** @type {NpcsHeadlineSlots} */ s) => `${s.count} people worth knowing; ${s.named} carries the most weight.` }),
+  // [newcomer · S] what you hear when you ask
+  Object.freeze({ id: 'newcomer', say: (/** @type {NpcsHeadlineSlots} */ s) => `Ask who matters here and you hear ${countWord(s.total)} names; ${s.named} comes first.` }),
+]);
 /** How much of a food gap imports close, in words (the per cent stays in the section's table). */
 function coverageWords(pct) {
   if (!(pct > 0)) return null;
@@ -121,19 +166,7 @@ export function overviewHeadline(o, identity) {
     // One crisis: the clause follows a colon. Several: the nouns are listed and the first crisis's
     // clause is its own sentence, so the colon never pins one crisis's evidence on the list.
     const after = seen ? (crises.length === 1 ? `: ${seen}` : `. ${capFirst(seen)}`) : '';
-    const variants = [
-      // [traveller · S] what you walk into
-      () => (crises.length === 1 && seen
-        ? `You reach ${where} and it shows at once: ${seen}`
-        : `You reach ${where} in the middle of ${what}${after}`),
-      // [local · S] what every house talks about
-      () => `In ${where} the talk is all of ${what}${after}`,
-      // [official · S] what those in charge have to deal with
-      () => `Those in charge of ${where} have ${what} on their hands${after}`,
-      // [newcomer · S] what you hear when you ask
-      () => `Ask in ${where} what is wrong and you hear of ${what}${after}`,
-    ];
-    body = seedPick(name || tierWord || '', variants)();
+    body = seedPick(name || tierWord || '', OVERVIEW_HEADLINES).say({ where, what, after, seen, single: crises.length === 1 });
   } else {
     body = `${capFirst(where)} has no crisis on its hands this season`;
   }
@@ -215,17 +248,7 @@ export function economicsHeadline(eco) {
   }
   let body = null;
   if (topExport) {
-    const variants = [
-      // [trade · S] what it sells
-      () => `Most of what it sells is ${topExport}`,
-      // [local · S] what households live on
-      () => `Its people make their living from ${topExport}`,
-      // [official · S] what the purse rests on
-      () => `Its income rests on ${topExport}`,
-      // [traveller · S] what you see going out
-      () => `What goes out of here is mostly ${topExport}`,
-    ];
-    body = seedPick(`${topExport}|${eco.prosperity || ''}`, variants)();
+    body = seedPick(`${topExport}|${eco.prosperity || ''}`, ECONOMICS_HEADLINES).say({ topExport });
     if (food) body += `; ${food}`;
   } else if (food) {
     body = capFirst(food);
@@ -408,13 +431,7 @@ export function npcsHeadline(npcs) {
   const named = `${top.name}${who ? `, ${who},` : ''}`;
   if (total === 1) return `One person worth knowing: ${named.replace(/,$/, '')}.`;
   const count = capFirst(countWord(total));
-  const variants = [
-    // [official · S] who carries the weight
-    () => `${count} people worth knowing; ${named} carries the most weight.`,
-    // [newcomer · S] what you hear when you ask
-    () => `Ask who matters here and you hear ${countWord(total)} names; ${named} comes first.`,
-  ];
-  return seedPick(String(top.name || ''), variants)();
+  return seedPick(String(top.name || ''), NPCS_HEADLINES).say({ count, total, named });
 }
 
 // ── Hooks ──────────────────────────────────────────────────────────────────

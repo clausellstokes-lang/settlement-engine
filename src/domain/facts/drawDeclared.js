@@ -31,7 +31,7 @@
 import { declarationOf, declarationAdmits, declarationOfTags, declares, atomsOf } from './factVocabulary.js';
 import { activePresumptionLedger, notePresumption } from './presumptionLedger.js';
 import { hashKey } from '../display/stateProse/stateProseKernel.js';
-import { fnv1a32 } from '../../kernel/proseHash.js';
+import { fnv1a32, rankRendezvous } from '../../kernel/proseHash.js';
 import { UNTYPED } from '../hookThemes.js';
 
 /** @typedef {import('./factVocabulary.js').FactsLike} FactsLike */
@@ -79,7 +79,13 @@ function poolDeclares(pool, tagged) {
 /**
  * @template [L=unknown] the pool's line type
  * @typedef {object} DrawDeclaredOptions
- * @property {(pool: L[]) => L | null | undefined} draw the site's existing selector over the pool it is handed
+ * @property {(pool: L[]) => L | null | undefined} [draw] the site's existing selector over the pool it is handed (required
+ *   unless `rankKey` is given)
+ * @property {string} [rankKey] THE RANKED MODE (point 121, TAIL-PICKS): for a view-time slot whose line must not re-deal
+ *   when its pool is edited. The domain is walked in rendezvous rank of (`rankKey`, the line's own `id`) and the first
+ *   line the place admits, or whose twin it admits, prints; `draw` is not called. Every line must carry an `id`.
+ * @property {ReadonlySet<string>} [taken] the ranked mode only: the ids an earlier slot of the set took (skipped: the
+ *   next in rank)
  * @property {object|null|(() => object|null)} [facts] `factsOf(record)`, or a thunk to it (read only when a line declares)
  * @property {string} [key] the hash key prefix for the argmax resolution (`seed::pool`)
  * @property {string} [poolId] the pool's name in the ledger and the census
@@ -189,6 +195,12 @@ export function drawDeclared(pool, options) {
     note(options, null, list, [], 'none');
     return { line: null, text: null, refused: null, resolvedBy: 'none' };
   }
+  if (typeof options.rankKey === 'string') {
+    // BOUND BEFORE IT IS RETURNED, on purpose: tests/lint/presumedThings.shared.mjs's trace reads a direct `return drawRanked(…)` as another reach and moves 10 hits on institutionServices.js
+    const ranked = drawRanked(list, domain, options, declared, admitter(options, tagged, scoped, poolAtoms, isHeld));
+    return ranked;
+  }
+  if (typeof options.draw !== 'function') throw new TypeError(`drawDeclared: no draw and no rankKey (${options.poolId || '(unnamed)'})`);
   const drawn = options.draw(/** @type {L[]} */ (domain));
   if (!declared) {
     note(options, drawn, list, [], drawn == null ? 'none' : 'drawn');
@@ -242,6 +254,81 @@ export function drawDeclared(pool, options) {
   }
   note(options, null, list, [], 'none');
   return { line: null, text: null, refused: verdict.refused, resolvedBy: 'none' };
+}
+
+/**
+ * THE RANKED MODE'S admission test (the unranked draw's own, read the same way), the facts read when it is first asked
+ * for (a thunk, so an undeclared ranked draw reads none).
+ * @template L
+ * @param {DrawDeclaredOptions<L>} options @param {boolean} tagged @param {boolean} scoped
+ * @param {ReadonlyArray<string> | null} poolAtoms @param {((line: L) => boolean) | null} isHeld
+ * @returns {() => (line: L) => { admitted: boolean, refused: string[] }}
+ */
+function admitter(options, tagged, scoped, poolAtoms, isHeld) {
+  return () => {
+    const facts = /** @type {FactsLike | null} */ (typeof options.facts === 'function' ? options.facts() : options.facts ?? null);
+    return (line) => {
+      if (isHeld && isHeld(line)) return { admitted: false, refused: ['(held)'] };
+      if (poolAtoms && !declarationAdmits(declarationOfTags(poolAtoms), facts).admitted) {
+        return { admitted: false, refused: ['(pool) ' + poolAtoms.join(' · ')] };
+      }
+      return declarationAdmits(declarationOf(line, { tagged }), facts, { crisisScoped: scoped, ctx: options.ctx });
+    };
+  };
+}
+
+/**
+ * THE RANKED MODE (`options.rankKey`, point 121): the domain in rendezvous rank, less the `taken` ids; the first line
+ * admitted prints (`drawn`: a refused line ranked above it changes neither the line nor its note), or a refused line's
+ * admitted twin (`twin`); nothing printable: the head kept (`keepRefused`) or none. Only the printed line is noted.
+ * @template L
+ * @param {ReadonlyArray<L>} list @param {ReadonlyArray<L>} domain @param {DrawDeclaredOptions<L>} options
+ * @param {boolean} declared @param {() => (line: L) => { admitted: boolean, refused: string[] }} admitOf
+ * @returns {DrawResult<L>}
+ */
+function drawRanked(list, domain, options, declared, admitOf) {
+  const poolId = options.poolId || '(unnamed)';
+  const taken = options.taken;
+  const ranked = rankRendezvous(domain, options.rankKey, (l) => rankedIdOf(l, poolId)).filter((l) => !taken || !taken.has(rankedIdOf(l, poolId)));
+  const tagged = options.tagged === true;
+  const head = ranked.length ? ranked[0] : null;
+  if (!declared) {
+    note(options, head, list, [], head == null ? 'none' : 'drawn');
+    return { line: head, text: head == null ? null : lineText(head), refused: null, resolvedBy: head == null ? 'none' : 'drawn' };
+  }
+  const admit = admitOf();
+  /** @type {string[] | null} */ let refused = null;
+  for (const l of ranked) {
+    const verdict = admit(l);
+    if (verdict.admitted) {
+      note(options, l, list, atomsOf(declarationOf(l, { tagged })), 'drawn');
+      return { line: l, text: lineText(l), refused: null, resolvedBy: 'drawn' };
+    }
+    if (refused === null) refused = verdict.refused;
+    const own = lineText(l);
+    const twin = typeof options.twin === 'function'
+      ? options.twin(l)
+      : list.find((t) => isTwin(t) && /** @type {{twinOf: string}} */ (/** @type {unknown} */ (t)).twinOf === own);
+    if (twin != null && twin !== l && admit(twin).admitted) {
+      note(options, twin, list, atomsOf(declarationOf(twin, { tagged })), 'twin');
+      return { line: twin, text: lineText(twin), refused: verdict.refused, resolvedBy: 'twin' };
+    }
+  }
+  if (head != null && options.keepRefused === true) {
+    note(options, head, list, atomsOf(declarationOf(head, { tagged })), 'kept');
+    return { line: head, text: lineText(head), refused, resolvedBy: 'kept' };
+  }
+  return { line: null, text: null, refused, resolvedBy: 'none' };
+}
+
+/**
+ * A ranked line's own id. A line with none is the caller's mistake, never a position: it throws.
+ * @param {unknown} line @param {string} poolId @returns {string}
+ */
+function rankedIdOf(line, poolId) {
+  const id = line && typeof line === 'object' ? /** @type {{ id?: unknown }} */ (line).id : undefined;
+  if (typeof id === 'string' || typeof id === 'number') return String(id);
+  throw new TypeError(`drawDeclared ranked mode: a line with no id in pool ${poolId}`);
 }
 
 /**

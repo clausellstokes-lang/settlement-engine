@@ -6,7 +6,7 @@
  * ⭐ WHAT THIS FILE PROVES, on places born under the fortune law by the fixture arm
  * (`{ ...birthConfig(cfg), _fortuneLawVersion: 2 }` after `loadGenerationLawPayloads()`):
  *   (a) where `meritsOf` credits 'lasting' alone, the paragraph holds the pool's keyed pick among its drawn rows
- *       (`pickVariantMixed` keyed on `${place}::${age}`), its time word by `history.age` against the pool's own cut-off,
+ *       (`pickRendezvous` on the row's id, keyed on `${place}::${age}`; point 121), its time word by `history.age` against the pool's own cut-off,
  *       DIRECTLY after the standing sentence, and nothing else of the paragraph moved (the same record with the merit's
  *       input taken away is the paragraph without it);
  *   (b) where both merits credit, the pool's ONE fixed row prints directly after the first merit's sentence, and none of
@@ -33,7 +33,10 @@ import { resolvePrimaryStress } from '../../src/generators/stressPriority.js';
 import { rulingChainOf } from '../../src/domain/dossier/powerStrata.js';
 import { meritsOf, weatheredCatastrophe } from '../../src/domain/fortune/fortuneMerits.js';
 import { FORTUNE_LAW_CONFIG_KEY, FORTUNE_LAW_TUNING } from '../../src/domain/fortune/fortuneLaw.js';
-import { pickVariantMixed } from '../../src/kernel/proseHash.js';
+import { pickRendezvous } from '../../src/kernel/proseHash.js';
+
+/** The line's own id: the pick is the rendezvous on it (point 121, TAIL-PICKS). @param {any} l @returns {string} */
+const idOfLine = (l) => l.id;
 import { FORTUNE_MERIT_LINES, FORTUNE_MERIT_RECENT_YEARS, FORTUNE_MERIT_TIME_WORDS } from '../../src/data/fortuneMeritLines.js';
 import { buildPrintProse } from '../../src/domain/display/stateProse/printProse.js';
 import { toPublicSafe } from '../../src/domain/display/publicSafe.js';
@@ -142,7 +145,7 @@ const weatheredSentenceOf = (record) => {
   const ev = /** @type {any} */ (weatheredCatastrophe(record));
   const band = ev.yearsAgo <= FORTUNE_MERIT_RECENT_YEARS ? FORTUNE_MERIT_TIME_WORDS.recent : FORTUNE_MERIT_TIME_WORDS.generation;
   const place = String(record.name).trim();
-  const picked = /** @type {any} */ (pickVariantMixed(FORTUNE_MERIT_LINES, `${place}::${String(ev.name).trim()}::${ev.yearsAgo}`));
+  const picked = /** @type {any} */ (pickRendezvous(FORTUNE_MERIT_LINES, `${place}::${String(ev.name).trim()}::${ev.yearsAgo}`, idOfLine));
   return fill(picked.text, { event: String(ev.name).trim(), place, seat: slotsOf(record).seat, ...band });
 };
 
@@ -180,7 +183,7 @@ beforeAll(async () => {
  */
 const expectedOf = (record, standing) => {
   if (caseOf(record) === 'both') return fill(FIXED.text, slotsOf(record));
-  const picked = /** @type {any} */ (pickVariantMixed(DRAWN, `${String(record.name).trim()}::${record.history.age}`));
+  const picked = /** @type {any} */ (pickRendezvous(DRAWN, `${String(record.name).trim()}::${record.history.age}`, idOfLine));
   const sentence = fill(picked.text, slotsOf(record));
   return lastSentenceOf(standing).startsWith(`${String(record.name).trim()} `) ? onIt(sentence) : sentence;
 };
@@ -215,7 +218,7 @@ describe('U7b (a): the LASTING sentence, directly after the standing, where LAST
       const merited = paragraphOf(record);
       const { without, bare } = placementOf(record);
       // the keyed pick, filled: printed once, in one of its two openings
-      const picked = fill(/** @type {any} */ (pickVariantMixed(DRAWN, `${String(record.name).trim()}::${record.history.age}`)).text, slotsOf(record));
+      const picked = fill(/** @type {any} */ (pickRendezvous(DRAWN, `${String(record.name).trim()}::${record.history.age}`, idOfLine)).text, slotsOf(record));
       const printed = [picked, onIt(picked)].filter((s) => merited.includes(s));
       expect(printed, `${seed}: ${merited}`).toHaveLength(1);
       expect(countOf(merited, printed[0]), seed).toBe(1);
@@ -286,7 +289,7 @@ describe('U7b (b): both merits, the fixed line; the "It" opening', () => {
       const fixedIt = onIt(fill(FIXED.text, slots));
       expect(merited.includes(fixedIt), seed).toBe(false);
       if (caseOf(record) === 'both') { expect(drawnIt, seed).toEqual([]); return; }
-      const picked = fill(/** @type {any} */ (pickVariantMixed(DRAWN, `${place}::${record.history.age}`)).text, slots);
+      const picked = fill(/** @type {any} */ (pickRendezvous(DRAWN, `${place}::${record.history.age}`, idOfLine)).text, slots);
       const printed = merited.includes(onIt(picked)) ? onIt(picked) : picked;
       expect(countOf(merited, printed), `${seed}: ${merited}`).toBe(1);
       const opensOnPlace = lastSentenceOf(merited.slice(0, merited.indexOf(printed)).trim()).startsWith(`${place} `);
@@ -315,7 +318,7 @@ describe('U7b (b): both merits, the fixed line; the "It" opening', () => {
     // exactly one drawn row, and it is the keyed pick
     const said = DRAWN.flatMap((/** @type {any} */ l) => { const s = fill(l.text, slots); return [s, onIt(s)]; })
       .filter((/** @type {string} */ s) => merited.includes(s));
-    const picked = fill(/** @type {any} */ (pickVariantMixed(DRAWN, `${place}::${planted.history.age}`)).text, slots);
+    const picked = fill(/** @type {any} */ (pickRendezvous(DRAWN, `${place}::${planted.history.age}`, idOfLine)).text, slots);
     expect(said, `${seed}: ${merited}`).toHaveLength(1);
     expect([picked, onIt(picked)].includes(said[0]), `${seed}: ${merited}`).toBe(true);
     // in the opening the file's own rule gives: "It" only after a standing whose last sentence opens on the place

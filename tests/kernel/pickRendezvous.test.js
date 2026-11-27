@@ -97,3 +97,24 @@ describe('pickRendezvous — the highest hash of (slot key, line id)', () => {
     }
   });
 });
+
+describe('rankRendezvous — the whole list in rendezvous rank (point 121, TAIL-PICKS)', () => {
+  it('pickRendezvous is the head of rankRendezvous for every input, ties and falsy keys included', async () => {
+    const { rankRendezvous } = await import('../../src/kernel/proseHash.js');
+    const tie = [{ id: 'C322382', text: 'large' }, { id: 'C139599', text: 'small' }];
+    for (const key of [...keys.slice(0, 120), 'tie', null, undefined, '', 0]) {
+      for (const list of [lines, lines.slice().reverse(), lines.slice(3, 4), tie, []]) {
+        expect(rankRendezvous(list, key, idOf)[0]).toBe(pickRendezvous(list, key, idOf));
+      }
+    }
+  });
+
+  it('is the descending order of the stated hash, a tie to the smaller id, and holds every line once', async () => {
+    const { rankRendezvous } = await import('../../src/kernel/proseHash.js');
+    for (const key of keys.slice(0, 50)) {
+      const want = [...lines].sort((a, b) => score(key, b.id) - score(key, a.id) || (a.id < b.id ? -1 : 1));
+      expect(rankRendezvous(lines, key, idOf)).toEqual(want);
+    }
+    expect(rankRendezvous(lines, '', idOf)).toEqual(lines);
+  });
+});

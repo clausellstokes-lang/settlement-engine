@@ -20,7 +20,7 @@
  * law tuning (E57): it lives here beside the words it chooses, and nothing that computes the merit, the birth or any
  * score reads it.
  *
- * THE PICK among A, B and C is the kernel's mixed keyed pick (`kernel/proseHash.js :: pickVariantMixed`) keyed on
+ * THE PICK among A, B and C is the kernel's rendezvous on each line's id (`kernel/proseHash.js :: pickRendezvous`, point 121) keyed on
  * `${place}::${age}`, drawn through the one door (`facts/drawDeclared.js :: drawDeclared`) at its one call site; no roll,
  * no draw count changed. The rows declare no atom: the merit's predicate gates the pool, and every field it and the fills
  * read is served on every shared read (tests/domain/fortuneLastingVeil.test.js); none is a house or a fact about crime.

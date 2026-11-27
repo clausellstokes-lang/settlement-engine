@@ -16,7 +16,7 @@
  * seventh chair's ruling of 01:48 UTC 2026-11-22): it lives here beside the words it chooses, and nothing that computes
  * the merit, the birth or any score reads it.
  *
- * THE PICK among A, B and C is the kernel's mixed keyed pick (`kernel/proseHash.js :: pickVariantMixed`), drawn through
+ * THE PICK among A, B and C is the kernel's rendezvous on each line's id (`kernel/proseHash.js :: pickRendezvous`, point 121), drawn through
  * the one door (`facts/drawDeclared.js :: drawDeclared`) at its one call site; no roll, no draw count changed. The lines
  * declare no atom: the merit's predicate gates the pool, and every field it and the fills read is served on every shared
  * read (COMMON-RULES 14(e)); none is a house or a fact about crime.

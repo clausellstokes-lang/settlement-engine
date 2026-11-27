@@ -632,7 +632,7 @@ export function foodEnduranceLine(settlement) {
 
 // ─── SW-B5 FRAMES: the criminal ring's note gets vantages ─────────────────────
 // ⚠ AT THE END OF THE FILE so no line above moves (lines of this module are cited elsewhere).
-import { hashKey } from './stateProse/stateProseKernel.js';
+import { rankRendezvous } from '../../kernel/proseHash.js';
 
 /**
  * ⭐ THE RING'S NOTE GETS VANTAGES (lane SW-B5 FRAMES, 2026-11-09; STYLE-RULINGS-2 B5, the
@@ -642,20 +642,22 @@ import { hashKey } from './stateProse/stateProseKernel.js';
  * what crime is allowed, it is predictable and can be bargained with, it puts down random
  * violence because that brings the law, it lives on protection money and bought officials —
  * from another vantage. No new fact is read. The settlement's own seed chooses (`_seed`, the
- * birth's identity) through the kernel's avalanched `hashKey`, with no draw; a record with no seed prints the original. Only the note
+ * birth's identity) through the kernel's rendezvous on each row's id (point 121), with no draw; a record with no seed prints the original. Only the note
  * varies: `key`, `label` and the colours are the table's, so every reader of `key` is unmoved.
  * W2-C-LEAVES-9 (the chair's ruling of 2026-11-14 05:28 (1)): the second vantage says "the streets", a size word a thorp or
  * a hamlet makes false (`registeredWords.js :: streets`), so it DECLARES the tier where it is true; `withRingVantage`
  * hands the drawn vantage to the list door and, where it is refused, prints the table's own note.
- * @type {ReadonlyArray<string | { text: string, needs: string[], excludes?: string[] }>}
+ * POINT 121 (TAIL-PICKS; defense.organizedRing): rows by id, RING-1 to RING-4, append-only; the vantage is the row of the
+ * highest rendezvous rank of (the seed's key, its id) that the place can print (`withRingVantage`).
+ * @type {ReadonlyArray<{ id: string, text: string, needs?: ReadonlyArray<string>, excludes?: ReadonlyArray<string> }>}
  */
-const ORGANIZED_RING_NOTES = Object.freeze([
-  CRIM_STRUCTURE_DATA.organized.note,
+export const ORGANIZED_RING_NOTES = Object.freeze([
+  Object.freeze({ id: 'RING-1', text: CRIM_STRUCTURE_DATA.organized.note }),
   // BAR6-CRIME (9a.wave, BRIEF-BAR6 (b); C43177): "keeps the streets quiet" presumes no crime wave (`crime wave`, the one
   // reading `facts/lawBand.js :: crimeWaveStands`); refused, the table's own note prints (no roll moves)
-  { text: 'Crime here answers to one ring. It keeps the streets quiet because trouble brings the law, lives on protection money and on whatever official it can pay, and anyone who needs something from it can bargain.', needs: ['tier: ≥ village'], excludes: ['crime wave'] },
-  'Shopkeepers here pay one ring for protection, and the ring pays any official who will take its money. It stamps out random violence, which would bring the law, and its terms are known and can be negotiated.',
-  'Ask who runs crime here and the answer is one ring. It sets the rules and keeps to them, it can be bargained with, and it puts down any violence that would bring the law; it lives on protection money and on any official it can bribe.',
+  Object.freeze({ id: 'RING-2', text: 'Crime here answers to one ring. It keeps the streets quiet because trouble brings the law, lives on protection money and on whatever official it can pay, and anyone who needs something from it can bargain.', needs: ['tier: ≥ village'], excludes: ['crime wave'] }),
+  Object.freeze({ id: 'RING-3', text: 'Shopkeepers here pay one ring for protection, and the ring pays any official who will take its money. It stamps out random violence, which would bring the law, and its terms are known and can be negotiated.' }),
+  Object.freeze({ id: 'RING-4', text: 'Ask who runs crime here and the answer is one ring. It sets the rules and keeps to them, it can be bargained with, and it puts down any violence that would bring the law; it lives on protection money and on any official it can bribe.' }),
 ]);
 
 /**
@@ -675,10 +677,16 @@ const ORGANIZED_RING_NOTES = Object.freeze([
 function withRingVantage(row, settlement) {
   const seed = settlement?._seed;
   if (row.key !== 'organized' || typeof seed !== 'string' || !seed) return row;
-  const drawn = ORGANIZED_RING_NOTES[hashKey(`${seed}::defenseDisplay:organizedRing`) % ORGANIZED_RING_NOTES.length];
-  const [kept] = filterDeclared([drawn], { facts: () => factsOf(/** @type {Parameters<typeof factsOf>[0]} */ (/** @type {unknown} */ (settlement))),
-    poolId: 'defenseDisplay:ORGANIZED_RING_NOTES', surface: 'defense', drawKind: 'H' });
-  const note = kept === undefined || (drawn === ORGANIZED_RING_NOTES[1] && streetsNotQuiet(settlement)) ? row.note : lineText(kept); // TAIL-DEFECON-D (#B11428)
+  // POINT 121: the vantages in rendezvous rank; the first the place can print (the list door asked one row at a time, so
+  // only the printed row is noted; RING-2's streets also need quiet streets, TAIL-DEFECON-D #B11428); none: the table's note.
+  const facts = () => factsOf(/** @type {Parameters<typeof factsOf>[0]} */ (/** @type {unknown} */ (settlement)));
+  /** @type {(typeof ORGANIZED_RING_NOTES)[number] | undefined} */ let kept;
+  for (const drawn of rankRendezvous(ORGANIZED_RING_NOTES, `${seed}::defenseDisplay:organizedRing`, (l) => l.id)) {
+    if (drawn.id === 'RING-2' && streetsNotQuiet(settlement)) continue;
+    kept = filterDeclared([drawn], { facts, poolId: 'defenseDisplay:ORGANIZED_RING_NOTES', surface: 'defense', drawKind: 'H' })[0];
+    if (kept !== undefined) break;
+  }
+  const note = kept === undefined ? row.note : lineText(kept);
   return note === row.note ? row : Object.freeze({ ...row, note });
 }
 

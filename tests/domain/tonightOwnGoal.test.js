@@ -101,8 +101,8 @@ describe('ROUND THREE · a role\'s line is said only where the town leaves it tr
     for (const id of ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']) {
       const held = castWantOf('instigator', id, 'succession_void', '', 'Noble Families');
       const empty = castWantOf('instigator', id, 'succession_void', '', 'Noble Families', { seatEmpty: true });
-      expect(CAST_WANTS.instigator).toContain(held);
-      expect(empty).toBe(CAST_WANTS.instigator[1]);
+      expect(CAST_WANTS.instigator.map((w) => w.text)).toContain(held);
+      expect(empty).toBe(CAST_WANTS.instigator.find((w) => w.id === 'instigator.2')?.text); // point 121: read by id
     }
   });
   it('a line naming the person\'s house is never said of a person with none ("their house")', () => {

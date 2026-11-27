@@ -5,8 +5,8 @@
  *
  * ⭐ WHAT THIS FILE PROVES, on places born under the fortune law by the fixture arm
  * (`{ ...birthConfig(cfg), _fortuneLawVersion: 2 }` after `loadGenerationLawPayloads()`):
- *   (a) where `meritsOf` credits the record, the paragraph holds the pool's sentence for it (the kernel's mixed keyed
- *       pick over `FORTUNE_MERIT_LINES`, the time word the law's table gives the event's `yearsAgo`), DIRECTLY after the
+ *   (a) where `meritsOf` credits the record, the paragraph holds the pool's sentence for it (the kernel's rendezvous
+ *       pick over `FORTUNE_MERIT_LINES` on each row's id, the time word the law's table gives the event's `yearsAgo`), DIRECTLY after the
  *       standing sentence, and nothing else of the paragraph moved (the same record forced to law 1 is the paragraph
  *       without it); both bands of `yearsAgo` are hit;
  *   (b) a law-1 birth, a law-2 birth without the merit and a record with no `publicLegitimacy` print none of the pool's
@@ -33,7 +33,10 @@ import { resolvePrimaryStress } from '../../src/generators/stressPriority.js';
 import { rulingChainOf } from '../../src/domain/dossier/powerStrata.js';
 import { meritsOf, weatheredCatastrophe } from '../../src/domain/fortune/fortuneMerits.js';
 import { FORTUNE_LAW_CONFIG_KEY, FORTUNE_LAW_TUNING } from '../../src/domain/fortune/fortuneLaw.js';
-import { pickVariantMixed } from '../../src/kernel/proseHash.js';
+import { pickRendezvous } from '../../src/kernel/proseHash.js';
+
+/** The line's own id: the pick is the rendezvous on it (point 121, TAIL-PICKS). @param {any} l @returns {string} */
+const idOfLine = (l) => l.id;
 import { legitimacyReadingPoolKey, powerStateProse } from '../../src/domain/display/stateProse/powerStateProse.js';
 import { governanceLedger } from '../../src/domain/governanceLedger.js';
 import { buildPrintProse } from '../../src/domain/display/stateProse/printProse.js';
@@ -141,7 +144,7 @@ describe('U5b (a): the merit\'s sentence, directly after the standing', () => {
     const failures = collectSeedFailures(SIX, ({ seed, record }) => {
       expect(meritsOf(record).includes('weathered'), seed).toBe(true);
       const ev = /** @type {any} */ (weatheredCatastrophe(record));
-      const picked = pickVariantMixed(POOL, `${String(record.name).trim()}::${String(ev.name).trim()}::${ev.yearsAgo}`);
+      const picked = pickRendezvous(POOL, `${String(record.name).trim()}::${String(ev.name).trim()}::${ev.yearsAgo}`, idOfLine);
       const sentence = /** @type {string} */ (fillOf(POOL, TIMES, record, picked));
       // the first merit's own paragraph: the second merit's input taken away (U7b prints LASTING's line after this one)
       const merited = paragraphOf({ ...record, history: { ...record.history, age: undefined } });
