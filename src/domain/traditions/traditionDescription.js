@@ -291,6 +291,8 @@ function draw(pool, seed, slot, poolId, facts, crisisScoped = false, turned = un
  * `taken`, drawn through the one draw (over the pool and its `again` lines, so the ledger's line id indexes both). Every
  * wording taken: null where `leaveOut` (the payer, and a keeper beyond its fifth: the sentence is left out), else the
  * pick as alone. A pool with a declared line or a twin is drawn as alone.
+ * THE EXCEPTION, HELD BY NAME (ruling 121-4, F1): one declared line or twin switches the rotation off for its whole pool
+ * and moves towns that never print it, so no rotated pool may hold one (tests/domain/traditionDescriptionIds.test.js).
  * @template L
  * @param {ReadonlyArray<L>} pool @param {string} seed @param {string} slot @param {string} poolId
  * @param {() => object|null} facts @param {(text: string) => string} render the frame filled with its slots

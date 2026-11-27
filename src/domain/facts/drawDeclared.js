@@ -196,7 +196,8 @@ export function drawDeclared(pool, options) {
     return { line: null, text: null, refused: null, resolvedBy: 'none' };
   }
   if (typeof options.rankKey === 'string') {
-    // BOUND BEFORE IT IS RETURNED, on purpose: tests/lint/presumedThings.shared.mjs's trace reads a direct `return drawRanked(…)` as another reach and moves 10 hits on institutionServices.js
+    // BOUND BEFORE IT IS RETURNED, on purpose: presumedThings.shared.mjs's trace reads a direct `return drawRanked(…)`
+    // as another reach: 5,348 hits, not 5,359; 19 keys differ (18 institutionServices.js: 14 gone, 4 new; 1 holderTable.js)
     const ranked = drawRanked(list, domain, options, declared, admitter(options, tagged, scoped, poolAtoms, isHeld));
     return ranked;
   }

@@ -81,3 +81,19 @@ describe('the PDF chapter heads: rows { id, say }, the head of the rank on the k
     }
   });
 });
+
+describe('the scope line and the chapter heads pass no door: every row is exactly { id, say } (ruling 121-4, F5, held by name)', () => {
+  it('no row of SCOPE_LINE_FRAMES, OVERVIEW_HEADLINES, ECONOMICS_HEADLINES or NPCS_HEADLINES claims anything', () => {
+    const TABLES = { SCOPE_LINE_FRAMES, OVERVIEW_HEADLINES, ECONOMICS_HEADLINES, NPCS_HEADLINES };
+    /** @type {string[]} */ const bad = [];
+    for (const [name, rows] of Object.entries(TABLES)) {
+      for (const row of /** @type {ReadonlyArray<Record<string, unknown>>} */ (rows)) {
+        const keys = Object.keys(row).sort();
+        if (keys.join(',') !== 'id,say' || typeof row.id !== 'string' || typeof row.say !== 'function') bad.push(`${name} '${String(row.id)}': keys ${keys.join(', ')}`);
+      }
+    }
+    expect(bad, 'these tables print by rank WITHOUT the door (drawDeclared): a row that declares `needs`, `excludes`, a '
+      + 'tag or a twin would print where the record refuses it (a `needs: [\'coast\']` frame prints inland). Route the '
+      + 'table through drawDeclared first; ORGANIZED_RING_NOTES is not one of these (it passes the door)').toEqual([]);
+  });
+});
