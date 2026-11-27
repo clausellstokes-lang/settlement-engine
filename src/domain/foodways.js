@@ -239,12 +239,33 @@ export function foodwaysLineOf(settlement) {
   const record = s?.economicState?.foodSecurity?.foodRecord;
   const line = record?.foodwaysLine;
   if (!(typeof line === 'string' && line.trim())) return null;
-  const fed = farmedOneFrame(tilledOneFrame(fedLineOf(line.trim(), record || {}, fishedOut(s?.economicState?.activeChains) || catchStoppedBySiege(s)), s), s);
+  const fed = farmedOneFrame(tilledOneFrame(fedLineOf(huntersGameOf(line.trim(), s), record || {}, fishedOut(s?.economicState?.activeChains) || catchStoppedBySiege(s)), s), s);
   // BAR4-HOUSES (H1 (iv), (v)): each culture sentence that presumes the market trading or a harvest in store is read
   // against the record it prints from (`data/foodwaysPrintSiblings.js`), its twin printed where refused.
   return resolveSiblingSentences(fed, FOODWAYS_PRINT_SIBLINGS, {
     facts: () => foodwaysFactsOf(s), poolId: 'foodwaysPrintSiblings:FOODWAYS_PRINT_SIBLINGS', surface: 'economics', drawKind: 'T',
   });
+}
+
+/** The nearby resources that are woodland (RULING-R, R8: the measure's own four). */
+const WOODLAND_RESOURCES = Object.freeze(['managed_forest', 'ancient_grove', 'shipbuilding_timber', 'mountain_timber']);
+
+/**
+ * RULING-R (the eleventh chair, 2026-11-27), R8 woods: "game from the woods" names a woodland the record may not hold. Where
+ * the record handed carries its config and the config holds no woodland (none of WOODLAND_RESOURCES nearby, and the
+ * terrain not forest, jungle or wood), the phrase reads as its sibling of the same source, "the hunters' game" (capitalised
+ * at a sentence's head, as the composer capitalises). The stored line stays; a record handed without its config (the
+ * identity call at assembly) is read as before. Pure.
+ * @param {string} line @param {unknown} handed the record handed @returns {string}
+ */
+function huntersGameOf(line, handed) {
+  const config = /** @type {{ config?: { nearbyResources?: unknown, terrainType?: unknown } | null } | null | undefined} */ (handed)?.config;
+  const nearby = config?.nearbyResources;
+  if (!Array.isArray(nearby) || !line.includes(SOURCE_PHRASES.game[0]) && !line.startsWith(capital(SOURCE_PHRASES.game[0]))) return line;
+  if (nearby.some((r) => WOODLAND_RESOURCES.includes(String(r))) || /forest|jungle|wood/.test(String(config?.terrainType ?? ''))) return line;
+  return line.startsWith(capital(SOURCE_PHRASES.game[0]))
+    ? `${capital(SOURCE_PHRASES.game[1])}${line.slice(SOURCE_PHRASES.game[0].length)}`
+    : line.replace(SOURCE_PHRASES.game[0], SOURCE_PHRASES.game[1]);
 }
 
 /**

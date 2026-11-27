@@ -243,3 +243,34 @@ describe('(d) a partial chain names as missing no house whose kind stands on the
     expect(seen.filter((t) => t.named.length).length).toBeGreaterThanOrEqual(3);
   });
 });
+
+// RULING-R (the eleventh chair, 2026-11-27), R8 woods (unit B3): the print-time re-read of the foodways line says "the
+// hunters' game" in place of "game from the woods" where the record holds no woodland (none of managed_forest,
+// ancient_grove, shipbuilding_timber, mountain_timber among the nearby resources, and the terrain not forest). The stored
+// line stays; a record handed without its config (the identity call at assembly) is read as before.
+describe('(e) "game from the woods" only where the record holds woodland', () => {
+  /** @param {object} config @param {string} line */
+  const rec = (config, line) => ({ config, economicState: { activeChains: [], foodSecurity: { foodRecord: { band: 'secure', foodSources: ['game'], failedSource: null, foodwaysLine: line } } } });
+  it('a plains place of hunting grounds alone prints the hunters\' game; a woodland or a forest keeps the woods', () => {
+    const plains = { terrainType: 'plains', nearbyResources: ['hunting_grounds', 'crossroads_position'] };
+    expect(foodwaysLineOf(rec(plains, 'Its own food is game from the woods.'))).toBe('Its own food is the hunters\' game.');
+    expect(foodwaysLineOf(rec({ ...plains, nearbyResources: ['hunting_grounds', 'managed_forest'] }, 'Its own food is game from the woods.'))).toBe('Its own food is game from the woods.');
+    expect(foodwaysLineOf(rec({ ...plains, terrainType: 'forest' }, 'Its own food is game from the woods.'))).toBe('Its own food is game from the woods.');
+    // at a sentence's head the phrase is capitalised, and so is its sibling
+    const lead = { ...rec(plains, 'Game from the woods and the field grain anchor the table.') };
+    lead.economicState.foodSecurity.foodRecord.foodSources = ['game', 'grain'];
+    expect(foodwaysLineOf(lead)).toBe('The hunters\' game and the field grain anchor the table.');
+    // the stored line stays, and a record handed without its config is read as before
+    const bare = rec(plains, 'Its own food is game from the woods.');
+    expect(bare.economicState.foodSecurity.foodRecord.foodwaysLine).toBe('Its own food is game from the woods.');
+    expect(foodwaysLineOf({ economicState: bare.economicState })).toBe('Its own food is game from the woods.');
+  });
+
+  it('the measure\'s worked example (V dp-thorp-24, a plains thorp of hunting grounds) prints the hunters\' game', async () => {
+    await loadGenerationLawPayloads();
+    const s = generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: 'thorp', _randomizePriorities: true }), null, { seed: 'dp-thorp-24', customContent: {} });
+    expect([s.config.terrainType, s.config.nearbyResources]).toEqual(['plains', ['hunting_grounds', 'crossroads_position', 'gemstone_deposits']]);
+    expect(s.economicState.foodSecurity.foodRecord.foodwaysLine).toContain('game from the woods');
+    expect(foodwaysLineOf(s)).toBe('Each holding grows for its own table, and beyond that its food is the hunters\' game. Smoking, drying, fermenting, and winter storage are central household technologies.');
+  }, 120000);
+});
