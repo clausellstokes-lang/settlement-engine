@@ -333,3 +333,24 @@ See section 4, newest last.
   the lighting census again if its titles moved, the three guard files alone, lint. THEN: the push of the new tip and FOUR
   SHARDS of the whole suite on it (`shards/prompts/LAND120-*.txt` are rendered for a607d0b97 and are re-rendered for the
   new tip).
+
+## V14 (19:36 UTC on 2026-11-27): THE FOURTH MERGE; THE FINAL JOINED TIP 360e716c2 PUSHED; THE LANDING's WHOLE SUITE ON FOUR CHILDREN; R14 CLOSED
+- LAND-120R on ruling 120R-3 (6 minutes): 6d5aba988 the guard's round merged (no conflict); THE LIGHTING CENSUS RE-TAKEN BY
+  ITS DOOR AGAIN at 360e716c2 (titles 32,074 to 32,076; nothing else moved); both typechecks at their ceilings; the door
+  "matches the tree (144 scopes, 637 ids)"; `stablePickIds.walker` 25 of 25, `mutationCoverageManifest` 10 of 10,
+  `sovereigntyLightingContract.walker` 34 of 34; lint 0 errors. THE LINE's LOCAL TREE STANDS ON
+  360e716c2f7f52669e531d9aa603c61c1222acbc, clean: 1f946c43f1 + four merges + two door commits. NOT YET ON
+  `lane/join-2026-11-14`.
+- PUSHED AS TRANSPORT: `lane/stack-120-wip-2026-11-27` at 360e716c2 (the hook ran: both typechecks and the linter).
+- THE LANDING's WHOLE SUITE ("LAND120", four shards on 360e716c2): session_01FE9mExFodwZcpvZpr8mG9Y (1/4),
+  session_01FE9mEvk4gfYeYDga8Kwb5p (2/4), session_01FE9mEwKc4C2urrp3K7Ewt6 (3/4), session_01FE9mEsqT48LoySMLg47HKh (4/4).
+  EXPECTED, from the pre-run: 86 less the 24 re-pointed pins, the lighting census and the four owed rows: about 57, every
+  one on the list. WHEN ALL FOUR ARE IN: `shards/results/sort.py LAND120 4`; every row not on the list is ruled before the
+  line moves; then the chair's row and "THE GATE OF POINT 120" in `docs/chair/2026-11-17/sixth/LANDINGS-SIXTH.md` on the
+  line (a docs commit), the fast-forward push of `lane/join-2026-11-14`, `LINE-NOW.md` and `RED-AT-LINE.tsv` (75 to 71:
+  rows `colourMarks4h`, `narrativeQualityCorpus` twice and `powerStructure` F31 leave), CI's run read by name.
+- THE READER's SECOND MESSAGE (19:30 UTC; its final report at 5a69a320e): verdict and findings unchanged; the builder's
+  table 24 of 24 red under its 13 mutants; THE FOUR "PATRON DEITY" LINES ARE THE HARNESS's (a lazily loaded panel missing
+  only on a render worker's first dossier, on both trees; preloaded: 64 of 64 print, 0 differ). **R14 IS CLOSED: not a
+  fault of the product.**
+- E7 DECIDED: POINT 120 LANDS ALONE (point 121's builder has committed its door's unit only).
