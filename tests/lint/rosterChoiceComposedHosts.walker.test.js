@@ -146,10 +146,10 @@ describe('every COMPOSED row of the registry names a host that exists in both en
 
 describe('R5-DESC\'s ROWS, walked by name (E115 (3), E121, E126, E129; 212 (38))', () => {
   const rowOf = (id) => REGISTRY_ROWS.find((x) => x.id === id) ?? { id, inputs: ['(no such row)'], server: '', twin: '' };
-  test('power.desc: not composed; withheld ALWAYS, the page re-deriving it (rederiveStanding), built on R2\'s always-host in both engines (hosts that exist)', () => {
+  test('power.desc: not composed; withheld ALWAYS, NOT DRAWN by the page (RULING V15: the shared page prints no standing), built on R2\'s always-host in both engines (hosts that exist)', () => {
     const r = rowOf('power.desc');
     expect(isComposed(r), 'power.desc is in the registry and has left the composed form (no inputs)').toBe(false);
-    expect({ rule: r.rule, when: r.when, page: r.page, built: r.built }).toEqual({ rule: 'withhold', when: 'always', page: 're-derive', built: true });
+    expect({ rule: r.rule, when: r.when, page: r.page, built: r.built }).toEqual({ rule: 'withhold', when: 'always', page: 'not drawn', built: true });
     expect({ server: r.server, twin: r.twin }).toEqual({ server: 'public._gallery_veil_withhold_always', twin: 'src/domain/display/galleryWithholdAlways.js :: withholdAlways' });
     // anchored: the same judgment names faults on the synthetic planned rows above, so an empty list is a judgment
     expect(hostFaultsOf(r, REGISTRY_HOSTS)).toEqual([]);

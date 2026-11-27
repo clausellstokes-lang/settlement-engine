@@ -148,7 +148,7 @@ describe('R5-DESC: every reader of the standing, registered', () => {
     expect(out).toEqual([]);
   });
 
-  it('THE TAIL NEVER SHIPS: both always-hosts cut the standing and drop a hidden or masked row\'s desc; the registry row power.desc is withheld always, re-derived by the page, built', () => {
+  it('THE TAIL NEVER SHIPS: both always-hosts cut the standing and drop a hidden or masked row\'s desc; the registry row power.desc is withheld always, NOT DRAWN by the page (RULING V15), built', () => {
     const out = [];
     const always = sqlBody(read('supabase/migrations/212_share_veil_later_cures.sql'), '_gallery_veil_withhold_always') || '';
     if (!always.includes('-- registry: power.desc\n')) out.push('212 :: _gallery_veil_withhold_always does not name power.desc');
@@ -159,7 +159,7 @@ describe('R5-DESC: every reader of the standing, registered', () => {
     if (!/f\.hidden === true \|\| f\.faction === HIDDEN_POWER_MASK \|\| f\.name === HIDDEN_POWER_MASK\)\) delete f\.desc/.test(twin)) out.push('galleryWithholdAlways.js :: withholdAlways does not drop a hidden or masked row\'s desc');
     const row = REGISTRY_ROWS.find((r) => r.id === 'power.desc');
     if (!row) out.push('the registry has no row power.desc');
-    else if (row.rule !== 'withhold' || row.when !== 'always' || row.page !== 're-derive' || !row.built || (row.inputs || []).length) out.push(`the registry row power.desc is ${row.rule}/${row.when}/page ${row.page}/built ${row.built}/inputs ${JSON.stringify(row.inputs)}`);
+    else if (row.rule !== 'withhold' || row.when !== 'always' || row.page !== 'not drawn' || !row.built || (row.inputs || []).length) out.push(`the registry row power.desc is ${row.rule}/${row.when}/page ${row.page}/built ${row.built}/inputs ${JSON.stringify(row.inputs)}`);
     expect(out).toEqual([]);
   });
 });
