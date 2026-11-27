@@ -6,9 +6,11 @@
  *   · THE PLACE OWES A DEBT NOW (`owesDebtShown`): the `indebted` stress (its card, "owes an outside power more than it
  *     can ever repay", and the governing modifier "the creditors have a say in every decision"); the `outside_debt`
  *     tension ("The settlement owes a heavy debt to an outside power, and the power is preparing to collect"); and, read
- *     here since RULING-R, an `outside_debt` event of the timeline ("The Debt Crisis": "The settlement had borrowed
- *     heavily from a foreign power now ready to call the debt in", its hooks "A creditor's agent is in town conducting a
- *     quiet assessment before enforcement"), whose printed words say the creditor is collecting now.
+ *     here since RULING-R, an `outside_debt` event of the timeline ("The Debt Crisis") ONLY WHERE ITS HOOK PRINTS on the
+ *     Plot Hooks tab ("A creditor's agent is in town conducting a quiet assessment before enforcement": the page says
+ *     the creditor is collecting now; `dossier/plotHooks.js :: collectPlotHooks`, the reader that decides it, RULING
+ *     122-B-1 (i)). An old Debt Crisis whose event carries no hook prints only its past, in the History timeline (61 of
+ *     the 86 such pages of the measure's C), and is not read as owing.
  *   · IT HAS NOTHING LAID BY (`nothingLaidByShown`): the Economic Survival row reads Weak or Critical
  *     (`defenseScoreBands.js :: economicSurvivalBandOf`, the one home the Defense desk's DS-DEF-2 row is keyed on: "has
  *     nothing laid by to pay for a long defence", "would have to borrow the money first").
@@ -16,6 +18,7 @@
  * viability rows read the debt alone; the savings lines read both. Pure, display only.
  */
 import { economicSurvivalBandOf } from './defenseScoreBands.js';
+import { collectPlotHooks } from '../dossier/plotHooks.js';
 
 /**
  * @param {unknown} settlement @returns {boolean} the page says the place owes a debt now
@@ -27,7 +30,12 @@ export function owesDebtShown(settlement) {
   const tensions = s?.history?.currentTensions;
   if (Array.isArray(tensions) && tensions.some((t) => /** @type {{ type?: unknown } | null} */ (t)?.type === 'outside_debt')) return true;
   const events = s?.history?.historicalEvents;
-  return Array.isArray(events) && events.some((e) => /** @type {{ templateType?: unknown } | null} */ (e)?.templateType === 'outside_debt');
+  const debts = new Set((Array.isArray(events) ? events : [])
+    .filter((e) => /** @type {{ templateType?: unknown } | null} */ (e)?.templateType === 'outside_debt')
+    .map((e) => /** @type {{ name?: unknown }} */ (e).name).filter((n) => typeof n === 'string' && n !== ''));
+  if (!debts.size) return false;
+  return collectPlotHooks(/** @type {Parameters<typeof collectPlotHooks>[0]} */ (settlement)).some((h) => h.category === 'history'
+    && (h.parties || []).some((p) => p.kind === 'history' && debts.has(String(/** @type {{ eventId?: unknown }} */ (p).eventId))));
 }
 
 /**

@@ -174,6 +174,17 @@ describe('RULING-R B2: no savings or pays-its-way line beside a present place de
     expect(String(deriveViability(s).summary)).toMatch(/^VIABLE/);
     expect(/pays its (own )?way|owes no one|what it spends it earns/.test(String(deriveViability(s).summary))).toBe(false);
   }, 120000);
+  // RULING 122-B-1 (i), the chair, 2026-11-27: the timeline's outside_debt event is the place owing only where its page says
+  // the creditor is collecting NOW, its hook printed on the Plot Hooks tab (`collectPlotHooks`). An old Debt Crisis whose
+  // event carries no hook prints only its past in the History timeline: there "pays its way" still prints.
+  test('C dp-thorp-4 and dp-town-120 (an old Debt Crisis, no hook printed): "pays its way" still prints', () => {
+    const thorp = c('dp-thorp-4');
+    const ev = (thorp.history.historicalEvents || []).filter((/** @type {any} */ e) => e.templateType === 'outside_debt');
+    expect(ev.map((/** @type {any} */ e) => [e.yearsAgo, (e.plotHooks || []).length])).toEqual([[83, 0]]);
+    expect(String(deriveViability(thorp).summary)).toMatch(/feeds itself and pays its own way\./);
+    const town = c('dp-town-120');
+    expect(printed(town).includes(words('DS-ECO-1', 'COMBINATION C3: the middle rungs', 2, town))).toBe(true);
+  }, 120000);
   test('DS-POW-6 "operation role unlicensed revenue" v2 no longer says the town owes (re-worded in place, its vid kept)', () => {
     const pool = /** @type {any} */ (DOSSIER_STATE_PROSE_POWER)['DS-POW-6'].pools['operation role unlicensed revenue'];
     expect(pool.map((/** @type {any} */ v) => v.vid)).toEqual([1, 2, 3]);
