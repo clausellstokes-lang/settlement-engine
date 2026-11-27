@@ -1,0 +1,1028 @@
+{
+ "db": "mcs_u3_hand",
+ "marker": "hand",
+ "members": 140,
+ "single": {
+  "n": 140,
+  "mean": 445.1,
+  "median": 306.9,
+  "p90": 1356.6,
+  "max": 1859.5
+ },
+ "bySize": {
+  "city": {
+   "n": 40,
+   "mean": 487.6,
+   "median": 330.6,
+   "p90": 1188.6,
+   "max": 1540.5
+  },
+  "metropolis": {
+   "n": 40,
+   "mean": 799.2,
+   "median": 461.2,
+   "p90": 1697.9,
+   "max": 1859.5
+  },
+  "town": {
+   "n": 40,
+   "mean": 243,
+   "median": 115.7,
+   "p90": 776.1,
+   "max": 834.5
+  },
+  "village": {
+   "n": 20,
+   "mean": 56.1,
+   "median": 55.6,
+   "p90": 84.3,
+   "max": 84.3
+  }
+ },
+ "sumOfSingles": 62312,
+ "wholeMapMs": 58950,
+ "wholeServed": 140,
+ "missMs": 0.8,
+ "perDoc": [
+  {
+   "seed": "r3m-city-indebted-0-36",
+   "size": "city",
+   "bytes": 231735,
+   "ms": 145.6,
+   "served": 1
+  },
+  {
+   "seed": "r3m-city-indebted-0-46",
+   "size": "city",
+   "bytes": 308411,
+   "ms": 1188.6,
+   "served": 1
+  },
+  {
+   "seed": "r3m-city-indebted-1-106",
+   "size": "city",
+   "bytes": 271462,
+   "ms": 238.8,
+   "served": 1
+  },
+  {
+   "seed": "r3m-city-indebted-1-116",
+   "size": "city",
+   "bytes": 339986,
+   "ms": 332.6,
+   "served": 1
+  },
+  {
+   "seed": "r3m-city-infiltrated-0-32",
+   "size": "city",
+   "bytes": 351290,
+   "ms": 337.4,
+   "served": 1
+  },
+  {
+   "seed": "r3m-city-infiltrated-0-42",
+   "size": "city",
+   "bytes": 410737,
+   "ms": 1498,
+   "served": 1
+  },
+  {
+   "seed": "r3m-city-infiltrated-1-102",
+   "size": "city",
+   "bytes": 221780,
+   "ms": 847.4,
+   "served": 1
+  },
+  {
+   "seed": "r3m-city-infiltrated-1-112",
+   "size": "city",
+   "bytes": 312243,
+   "ms": 280.3,
+   "served": 1
+  },
+  {
+   "seed": "r3m-city-insurgency-0-34",
+   "size": "city",
+   "bytes": 371355,
+   "ms": 330.6,
+   "served": 1
+  },
+  {
+   "seed": "r3m-city-insurgency-0-44",
+   "size": "city",
+   "bytes": 399758,
+   "ms": 373.7,
+   "served": 1
+  },
+  {
+   "seed": "r3m-city-insurgency-1-104",
+   "size": "city",
+   "bytes": 409082,
+   "ms": 1289.3,
+   "served": 1
+  },
+  {
+   "seed": "r3m-city-insurgency-1-114",
+   "size": "city",
+   "bytes": 357607,
+   "ms": 1143.3,
+   "served": 1
+  },
+  {
+   "seed": "r3m-city-none-0-31",
+   "size": "city",
+   "bytes": 300230,
+   "ms": 273.5,
+   "served": 1
+  },
+  {
+   "seed": "r3m-city-none-0-33",
+   "size": "city",
+   "bytes": 284701,
+   "ms": 255,
+   "served": 1
+  },
+  {
+   "seed": "r3m-city-none-0-37",
+   "size": "city",
+   "bytes": 203399,
+   "ms": 202.8,
+   "served": 1
+  },
+  {
+   "seed": "r3m-city-none-0-41",
+   "size": "city",
+   "bytes": 222693,
+   "ms": 226.6,
+   "served": 1
+  },
+  {
+   "seed": "r3m-city-none-0-43",
+   "size": "city",
+   "bytes": 357393,
+   "ms": 335.7,
+   "served": 1
+  },
+  {
+   "seed": "r3m-city-none-0-47",
+   "size": "city",
+   "bytes": 400418,
+   "ms": 385.6,
+   "served": 1
+  },
+  {
+   "seed": "r3m-city-none-1-101",
+   "size": "city",
+   "bytes": 316401,
+   "ms": 317.8,
+   "served": 1
+  },
+  {
+   "seed": "r3m-city-none-1-103",
+   "size": "city",
+   "bytes": 300351,
+   "ms": 298.5,
+   "served": 1
+  },
+  {
+   "seed": "r3m-city-none-1-107",
+   "size": "city",
+   "bytes": 271030,
+   "ms": 960.3,
+   "served": 1
+  },
+  {
+   "seed": "r3m-city-none-1-111",
+   "size": "city",
+   "bytes": 366788,
+   "ms": 380.9,
+   "served": 1
+  },
+  {
+   "seed": "r3m-city-none-1-113",
+   "size": "city",
+   "bytes": 369003,
+   "ms": 335.5,
+   "served": 1
+  },
+  {
+   "seed": "r3m-city-none-1-117",
+   "size": "city",
+   "bytes": 204379,
+   "ms": 682,
+   "served": 1
+  },
+  {
+   "seed": "r3m-city-occupied-0-35",
+   "size": "city",
+   "bytes": 206134,
+   "ms": 107.9,
+   "served": 1
+  },
+  {
+   "seed": "r3m-city-occupied-0-45",
+   "size": "city",
+   "bytes": 362823,
+   "ms": 326.7,
+   "served": 1
+  },
+  {
+   "seed": "r3m-city-occupied-1-105",
+   "size": "city",
+   "bytes": 312820,
+   "ms": 306.9,
+   "served": 1
+  },
+  {
+   "seed": "r3m-city-occupied-1-115",
+   "size": "city",
+   "bytes": 187635,
+   "ms": 183.5,
+   "served": 1
+  },
+  {
+   "seed": "r3m-city-politically_fractured-0-40",
+   "size": "city",
+   "bytes": 364213,
+   "ms": 1174.4,
+   "served": 1
+  },
+  {
+   "seed": "r3m-city-politically_fractured-0-50",
+   "size": "city",
+   "bytes": 216975,
+   "ms": 115.4,
+   "served": 1
+  },
+  {
+   "seed": "r3m-city-politically_fractured-1-110",
+   "size": "city",
+   "bytes": 321997,
+   "ms": 291.7,
+   "served": 1
+  },
+  {
+   "seed": "r3m-city-politically_fractured-1-120",
+   "size": "city",
+   "bytes": 271882,
+   "ms": 246.1,
+   "served": 1
+  },
+  {
+   "seed": "r3m-city-under_siege-0-38",
+   "size": "city",
+   "bytes": 279986,
+   "ms": 154.5,
+   "served": 1
+  },
+  {
+   "seed": "r3m-city-under_siege-0-48",
+   "size": "city",
+   "bytes": 389275,
+   "ms": 378.8,
+   "served": 1
+  },
+  {
+   "seed": "r3m-city-under_siege-1-108",
+   "size": "city",
+   "bytes": 217573,
+   "ms": 806.9,
+   "served": 1
+  },
+  {
+   "seed": "r3m-city-under_siege-1-118",
+   "size": "city",
+   "bytes": 291727,
+   "ms": 311.3,
+   "served": 1
+  },
+  {
+   "seed": "r3m-city-wartime-0-39",
+   "size": "city",
+   "bytes": 305617,
+   "ms": 288.4,
+   "served": 1
+  },
+  {
+   "seed": "r3m-city-wartime-0-49",
+   "size": "city",
+   "bytes": 270700,
+   "ms": 261.8,
+   "served": 1
+  },
+  {
+   "seed": "r3m-city-wartime-1-109",
+   "size": "city",
+   "bytes": 431393,
+   "ms": 1540.5,
+   "served": 1
+  },
+  {
+   "seed": "r3m-city-wartime-1-119",
+   "size": "city",
+   "bytes": 364069,
+   "ms": 348.9,
+   "served": 1
+  },
+  {
+   "seed": "r3m-metropolis-indebted-0-56",
+   "size": "metropolis",
+   "bytes": 493634,
+   "ms": 1859.5,
+   "served": 1
+  },
+  {
+   "seed": "r3m-metropolis-indebted-0-66",
+   "size": "metropolis",
+   "bytes": 486968,
+   "ms": 1799,
+   "served": 1
+  },
+  {
+   "seed": "r3m-metropolis-indebted-1-126",
+   "size": "metropolis",
+   "bytes": 489759,
+   "ms": 496.1,
+   "served": 1
+  },
+  {
+   "seed": "r3m-metropolis-indebted-1-136",
+   "size": "metropolis",
+   "bytes": 434829,
+   "ms": 1356.6,
+   "served": 1
+  },
+  {
+   "seed": "r3m-metropolis-infiltrated-0-52",
+   "size": "metropolis",
+   "bytes": 438821,
+   "ms": 436.1,
+   "served": 1
+  },
+  {
+   "seed": "r3m-metropolis-infiltrated-0-62",
+   "size": "metropolis",
+   "bytes": 424792,
+   "ms": 385.5,
+   "served": 1
+  },
+  {
+   "seed": "r3m-metropolis-infiltrated-1-122",
+   "size": "metropolis",
+   "bytes": 452124,
+   "ms": 438.6,
+   "served": 1
+  },
+  {
+   "seed": "r3m-metropolis-infiltrated-1-132",
+   "size": "metropolis",
+   "bytes": 427444,
+   "ms": 420.2,
+   "served": 1
+  },
+  {
+   "seed": "r3m-metropolis-insurgency-0-54",
+   "size": "metropolis",
+   "bytes": 376991,
+   "ms": 268.8,
+   "served": 1
+  },
+  {
+   "seed": "r3m-metropolis-insurgency-0-64",
+   "size": "metropolis",
+   "bytes": 381841,
+   "ms": 226.7,
+   "served": 1
+  },
+  {
+   "seed": "r3m-metropolis-insurgency-1-124",
+   "size": "metropolis",
+   "bytes": 455702,
+   "ms": 1575.6,
+   "served": 1
+  },
+  {
+   "seed": "r3m-metropolis-insurgency-1-134",
+   "size": "metropolis",
+   "bytes": 459758,
+   "ms": 1492.6,
+   "served": 1
+  },
+  {
+   "seed": "r3m-metropolis-none-0-51",
+   "size": "metropolis",
+   "bytes": 484208,
+   "ms": 529.2,
+   "served": 1
+  },
+  {
+   "seed": "r3m-metropolis-none-0-53",
+   "size": "metropolis",
+   "bytes": 481494,
+   "ms": 1695.7,
+   "served": 1
+  },
+  {
+   "seed": "r3m-metropolis-none-0-57",
+   "size": "metropolis",
+   "bytes": 412311,
+   "ms": 428.1,
+   "served": 1
+  },
+  {
+   "seed": "r3m-metropolis-none-0-61",
+   "size": "metropolis",
+   "bytes": 397667,
+   "ms": 367.7,
+   "served": 1
+  },
+  {
+   "seed": "r3m-metropolis-none-0-63",
+   "size": "metropolis",
+   "bytes": 454553,
+   "ms": 538.3,
+   "served": 1
+  },
+  {
+   "seed": "r3m-metropolis-none-0-67",
+   "size": "metropolis",
+   "bytes": 420724,
+   "ms": 414.5,
+   "served": 1
+  },
+  {
+   "seed": "r3m-metropolis-none-1-121",
+   "size": "metropolis",
+   "bytes": 423780,
+   "ms": 461.2,
+   "served": 1
+  },
+  {
+   "seed": "r3m-metropolis-none-1-123",
+   "size": "metropolis",
+   "bytes": 424040,
+   "ms": 389.2,
+   "served": 1
+  },
+  {
+   "seed": "r3m-metropolis-none-1-127",
+   "size": "metropolis",
+   "bytes": 431267,
+   "ms": 1605.2,
+   "served": 1
+  },
+  {
+   "seed": "r3m-metropolis-none-1-131",
+   "size": "metropolis",
+   "bytes": 360451,
+   "ms": 327.3,
+   "served": 1
+  },
+  {
+   "seed": "r3m-metropolis-none-1-133",
+   "size": "metropolis",
+   "bytes": 440108,
+   "ms": 448.1,
+   "served": 1
+  },
+  {
+   "seed": "r3m-metropolis-none-1-137",
+   "size": "metropolis",
+   "bytes": 501610,
+   "ms": 524,
+   "served": 1
+  },
+  {
+   "seed": "r3m-metropolis-occupied-0-55",
+   "size": "metropolis",
+   "bytes": 494475,
+   "ms": 456,
+   "served": 1
+  },
+  {
+   "seed": "r3m-metropolis-occupied-0-65",
+   "size": "metropolis",
+   "bytes": 427766,
+   "ms": 1255,
+   "served": 1
+  },
+  {
+   "seed": "r3m-metropolis-occupied-1-125",
+   "size": "metropolis",
+   "bytes": 463726,
+   "ms": 458.6,
+   "served": 1
+  },
+  {
+   "seed": "r3m-metropolis-occupied-1-135",
+   "size": "metropolis",
+   "bytes": 448312,
+   "ms": 396.4,
+   "served": 1
+  },
+  {
+   "seed": "r3m-metropolis-politically_fractured-0-60",
+   "size": "metropolis",
+   "bytes": 465291,
+   "ms": 1717.1,
+   "served": 1
+  },
+  {
+   "seed": "r3m-metropolis-politically_fractured-0-70",
+   "size": "metropolis",
+   "bytes": 505756,
+   "ms": 489.9,
+   "served": 1
+  },
+  {
+   "seed": "r3m-metropolis-politically_fractured-1-130",
+   "size": "metropolis",
+   "bytes": 443330,
+   "ms": 447,
+   "served": 1
+  },
+  {
+   "seed": "r3m-metropolis-politically_fractured-1-140",
+   "size": "metropolis",
+   "bytes": 473325,
+   "ms": 1576,
+   "served": 1
+  },
+  {
+   "seed": "r3m-metropolis-under_siege-0-58",
+   "size": "metropolis",
+   "bytes": 473805,
+   "ms": 444.6,
+   "served": 1
+  },
+  {
+   "seed": "r3m-metropolis-under_siege-0-68",
+   "size": "metropolis",
+   "bytes": 499361,
+   "ms": 554.1,
+   "served": 1
+  },
+  {
+   "seed": "r3m-metropolis-under_siege-1-128",
+   "size": "metropolis",
+   "bytes": 422253,
+   "ms": 1405.4,
+   "served": 1
+  },
+  {
+   "seed": "r3m-metropolis-under_siege-1-138",
+   "size": "metropolis",
+   "bytes": 383703,
+   "ms": 342.7,
+   "served": 1
+  },
+  {
+   "seed": "r3m-metropolis-wartime-0-59",
+   "size": "metropolis",
+   "bytes": 456212,
+   "ms": 1524.7,
+   "served": 1
+  },
+  {
+   "seed": "r3m-metropolis-wartime-0-69",
+   "size": "metropolis",
+   "bytes": 386607,
+   "ms": 349.5,
+   "served": 1
+  },
+  {
+   "seed": "r3m-metropolis-wartime-1-129",
+   "size": "metropolis",
+   "bytes": 393447,
+   "ms": 367.9,
+   "served": 1
+  },
+  {
+   "seed": "r3m-metropolis-wartime-1-139",
+   "size": "metropolis",
+   "bytes": 471065,
+   "ms": 1697.9,
+   "served": 1
+  },
+  {
+   "seed": "r3m-town-indebted-0-16",
+   "size": "town",
+   "bytes": 166961,
+   "ms": 152.9,
+   "served": 1
+  },
+  {
+   "seed": "r3m-town-indebted-0-26",
+   "size": "town",
+   "bytes": 158352,
+   "ms": 87.3,
+   "served": 1
+  },
+  {
+   "seed": "r3m-town-indebted-1-86",
+   "size": "town",
+   "bytes": 128142,
+   "ms": 73.3,
+   "served": 1
+  },
+  {
+   "seed": "r3m-town-indebted-1-96",
+   "size": "town",
+   "bytes": 121558,
+   "ms": 74.4,
+   "served": 1
+  },
+  {
+   "seed": "r3m-town-infiltrated-0-12",
+   "size": "town",
+   "bytes": 201243,
+   "ms": 794.6,
+   "served": 1
+  },
+  {
+   "seed": "r3m-town-infiltrated-0-22",
+   "size": "town",
+   "bytes": 127532,
+   "ms": 159.9,
+   "served": 1
+  },
+  {
+   "seed": "r3m-town-infiltrated-1-82",
+   "size": "town",
+   "bytes": 148779,
+   "ms": 83.8,
+   "served": 1
+  },
+  {
+   "seed": "r3m-town-infiltrated-1-92",
+   "size": "town",
+   "bytes": 190024,
+   "ms": 120.3,
+   "served": 1
+  },
+  {
+   "seed": "r3m-town-insurgency-0-14",
+   "size": "town",
+   "bytes": 194653,
+   "ms": 701.8,
+   "served": 1
+  },
+  {
+   "seed": "r3m-town-insurgency-0-24",
+   "size": "town",
+   "bytes": 166798,
+   "ms": 94.3,
+   "served": 1
+  },
+  {
+   "seed": "r3m-town-insurgency-1-84",
+   "size": "town",
+   "bytes": 217697,
+   "ms": 115.7,
+   "served": 1
+  },
+  {
+   "seed": "r3m-town-insurgency-1-94",
+   "size": "town",
+   "bytes": 172564,
+   "ms": 181.4,
+   "served": 1
+  },
+  {
+   "seed": "r3m-town-none-0-11",
+   "size": "town",
+   "bytes": 203125,
+   "ms": 115.7,
+   "served": 1
+  },
+  {
+   "seed": "r3m-town-none-0-13",
+   "size": "town",
+   "bytes": 183775,
+   "ms": 100.4,
+   "served": 1
+  },
+  {
+   "seed": "r3m-town-none-0-17",
+   "size": "town",
+   "bytes": 173029,
+   "ms": 753.3,
+   "served": 1
+  },
+  {
+   "seed": "r3m-town-none-0-21",
+   "size": "town",
+   "bytes": 186330,
+   "ms": 834.5,
+   "served": 1
+  },
+  {
+   "seed": "r3m-town-none-0-23",
+   "size": "town",
+   "bytes": 242310,
+   "ms": 829.5,
+   "served": 1
+  },
+  {
+   "seed": "r3m-town-none-0-27",
+   "size": "town",
+   "bytes": 138512,
+   "ms": 80.8,
+   "served": 1
+  },
+  {
+   "seed": "r3m-town-none-1-81",
+   "size": "town",
+   "bytes": 152747,
+   "ms": 88.9,
+   "served": 1
+  },
+  {
+   "seed": "r3m-town-none-1-83",
+   "size": "town",
+   "bytes": 94202,
+   "ms": 53.8,
+   "served": 1
+  },
+  {
+   "seed": "r3m-town-none-1-87",
+   "size": "town",
+   "bytes": 161191,
+   "ms": 92.2,
+   "served": 1
+  },
+  {
+   "seed": "r3m-town-none-1-91",
+   "size": "town",
+   "bytes": 198206,
+   "ms": 739.9,
+   "served": 1
+  },
+  {
+   "seed": "r3m-town-none-1-93",
+   "size": "town",
+   "bytes": 130239,
+   "ms": 70.7,
+   "served": 1
+  },
+  {
+   "seed": "r3m-town-none-1-97",
+   "size": "town",
+   "bytes": 172023,
+   "ms": 92,
+   "served": 1
+  },
+  {
+   "seed": "r3m-town-occupied-0-15",
+   "size": "town",
+   "bytes": 184486,
+   "ms": 102.1,
+   "served": 1
+  },
+  {
+   "seed": "r3m-town-occupied-0-25",
+   "size": "town",
+   "bytes": 124595,
+   "ms": 66.7,
+   "served": 1
+  },
+  {
+   "seed": "r3m-town-occupied-1-85",
+   "size": "town",
+   "bytes": 204557,
+   "ms": 776.1,
+   "served": 1
+  },
+  {
+   "seed": "r3m-town-occupied-1-95",
+   "size": "town",
+   "bytes": 194048,
+   "ms": 104.5,
+   "served": 1
+  },
+  {
+   "seed": "r3m-town-politically_fractured-0-20",
+   "size": "town",
+   "bytes": 163656,
+   "ms": 90.7,
+   "served": 1
+  },
+  {
+   "seed": "r3m-town-politically_fractured-0-30",
+   "size": "town",
+   "bytes": 158414,
+   "ms": 156.5,
+   "served": 1
+  },
+  {
+   "seed": "r3m-town-politically_fractured-1-100",
+   "size": "town",
+   "bytes": 157689,
+   "ms": 84.2,
+   "served": 1
+  },
+  {
+   "seed": "r3m-town-politically_fractured-1-90",
+   "size": "town",
+   "bytes": 166137,
+   "ms": 88.2,
+   "served": 1
+  },
+  {
+   "seed": "r3m-town-under_siege-0-18",
+   "size": "town",
+   "bytes": 157446,
+   "ms": 142.6,
+   "served": 1
+  },
+  {
+   "seed": "r3m-town-under_siege-0-28",
+   "size": "town",
+   "bytes": 127718,
+   "ms": 119.1,
+   "served": 1
+  },
+  {
+   "seed": "r3m-town-under_siege-1-88",
+   "size": "town",
+   "bytes": 151243,
+   "ms": 171.2,
+   "served": 1
+  },
+  {
+   "seed": "r3m-town-under_siege-1-98",
+   "size": "town",
+   "bytes": 202626,
+   "ms": 230.5,
+   "served": 1
+  },
+  {
+   "seed": "r3m-town-wartime-0-19",
+   "size": "town",
+   "bytes": 189807,
+   "ms": 201.8,
+   "served": 1
+  },
+  {
+   "seed": "r3m-town-wartime-0-29",
+   "size": "town",
+   "bytes": 166681,
+   "ms": 672.7,
+   "served": 1
+  },
+  {
+   "seed": "r3m-town-wartime-1-89",
+   "size": "town",
+   "bytes": 228741,
+   "ms": 133.6,
+   "served": 1
+  },
+  {
+   "seed": "r3m-town-wartime-1-99",
+   "size": "town",
+   "bytes": 141023,
+   "ms": 86.9,
+   "served": 1
+  },
+  {
+   "seed": "r3m-village-indebted-0-6",
+   "size": "village",
+   "bytes": 81846,
+   "ms": 47.2,
+   "served": 1
+  },
+  {
+   "seed": "r3m-village-indebted-1-76",
+   "size": "village",
+   "bytes": 101115,
+   "ms": 59.6,
+   "served": 1
+  },
+  {
+   "seed": "r3m-village-infiltrated-0-2",
+   "size": "village",
+   "bytes": 65221,
+   "ms": 46.5,
+   "served": 1
+  },
+  {
+   "seed": "r3m-village-infiltrated-1-72",
+   "size": "village",
+   "bytes": 89178,
+   "ms": 51.4,
+   "served": 1
+  },
+  {
+   "seed": "r3m-village-insurgency-0-4",
+   "size": "village",
+   "bytes": 73611,
+   "ms": 45.4,
+   "served": 1
+  },
+  {
+   "seed": "r3m-village-insurgency-1-74",
+   "size": "village",
+   "bytes": 99313,
+   "ms": 55.8,
+   "served": 1
+  },
+  {
+   "seed": "r3m-village-none-0-1",
+   "size": "village",
+   "bytes": 103940,
+   "ms": 57.4,
+   "served": 1
+  },
+  {
+   "seed": "r3m-village-none-0-3",
+   "size": "village",
+   "bytes": 97175,
+   "ms": 61.4,
+   "served": 1
+  },
+  {
+   "seed": "r3m-village-none-0-7",
+   "size": "village",
+   "bytes": 79069,
+   "ms": 45.8,
+   "served": 1
+  },
+  {
+   "seed": "r3m-village-none-1-71",
+   "size": "village",
+   "bytes": 104983,
+   "ms": 84.3,
+   "served": 1
+  },
+  {
+   "seed": "r3m-village-none-1-73",
+   "size": "village",
+   "bytes": 100472,
+   "ms": 74.5,
+   "served": 1
+  },
+  {
+   "seed": "r3m-village-none-1-77",
+   "size": "village",
+   "bytes": 96197,
+   "ms": 54.5,
+   "served": 1
+  },
+  {
+   "seed": "r3m-village-occupied-0-5",
+   "size": "village",
+   "bytes": 96367,
+   "ms": 55.6,
+   "served": 1
+  },
+  {
+   "seed": "r3m-village-occupied-1-75",
+   "size": "village",
+   "bytes": 110028,
+   "ms": 59.2,
+   "served": 1
+  },
+  {
+   "seed": "r3m-village-politically_fractured-0-10",
+   "size": "village",
+   "bytes": 89513,
+   "ms": 84.3,
+   "served": 1
+  },
+  {
+   "seed": "r3m-village-politically_fractured-1-80",
+   "size": "village",
+   "bytes": 115680,
+   "ms": 63.2,
+   "served": 1
+  },
+  {
+   "seed": "r3m-village-under_siege-0-8",
+   "size": "village",
+   "bytes": 82225,
+   "ms": 47.8,
+   "served": 1
+  },
+  {
+   "seed": "r3m-village-under_siege-1-78",
+   "size": "village",
+   "bytes": 70699,
+   "ms": 40.4,
+   "served": 1
+  },
+  {
+   "seed": "r3m-village-wartime-0-9",
+   "size": "village",
+   "bytes": 82967,
+   "ms": 47.1,
+   "served": 1
+  },
+  {
+   "seed": "r3m-village-wartime-1-79",
+   "size": "village",
+   "bytes": 72222,
+   "ms": 41.5,
+   "served": 1
+  }
+ ]
+}
