@@ -444,3 +444,32 @@ See section 4, newest last.
   close).
 - FOR THE OWNER, HIS HAND ONLY, UNCHANGED: the signings at the end (71 rows on the list; the sizes), the migrations, the
   merge, the deploy. Vetoes open on point 120: none (no new sentence).
+
+## V19 (21:19 UTC on 2026-11-27): CI ON POINT 120 READ BY NAME: 71 FAILING ROWS, ALL ON THE LIST, NONE NEW; THE CURE BRANCHES READ SO FAR; THE READER OF 121's EARLY NOTE
+- CI run 46063413287 (number 1304) on 682667fe2: the test ratchet 49, build and dist 13, coverage floors 8, the golden master
+  under tr_TR 1: 71 rows, EXACTLY THE LIST's 71; validation, the type ratchets, lint, Chromium and Deno green. `ci/LINE-NOW.md`
+  carries the bullet; `ci/ci-read-120.py` and `ci/run-682667fe2.tsv` beside this file.
+- READER 121's EARLY NOTE (21:01 UTC, not its report), RULED NOT A STOPPER: `traditions/traditionDescription.js :: drawTurn`
+  rotates only where every line of the pool is a colour line, so ONE DECLARED LINE ADDED TO A FRAME TABLE switches the
+  rotation off for every town: its plant moved 30 towns that cannot print the line (278 on the base; no frame table holds a
+  declared line today; a sentence-twice test reds on such an edit). TO BE HELD BY NAME in the cure round after its report
+  (a pin that the rotated frame tables hold colour lines only; a line at `drawTurn`). Its other results so far: records
+  moved 0 and 0; every door call of a birth identical base to tip in order (2,997,784 and 2,919,694 calls); 30 of 31 plants
+  move only the towns they should; the pool's order reversed moves 0.
+- R-CURES-A: FIVE UNITS PUSHED (`lane/stack-122-rcures-a-wip-2026-11-27` at e275fb263; not yet reported). THE CHAIR READ ITS
+  SOURCE DIFF WHOLE: A1 the suffix cut by the constant itself (`crisisHooks.js :: castReasonShown`); A2 one call; A3 a new
+  leaf `display/tensionDescriptionShown.js` called by the History row, the search, the Overview and the PDF ("A critical
+  resource, <good>, became scarce…"); A4 `criticalIssuePoolKey` keyed by the issues the Outlook lists (it names the decided
+  arm it overturns: lane SELF-VOUCH's "needs review" alone); A5 the test row. DOORS IT RE-TOOK: the wiring census twice,
+  the writer-reach register by its shrink-only `--write` (the dark cohort unmoved; closures grew), AND THE TUNING INVENTORY
+  by its walker's ritual: THE CHAIR READ THAT DIFF: one new dependent file on two rows (`LEADER_FROM`, `SOLE_EARNER_FROM`) and
+  two stale `line` fields; NO VALUE, LEAF, KEY OR DIGEST MOVED. (The tenth chair asked the owner before that door once,
+  because a permission check refused it; here no check refused; the owner is told at the landing; his tuning signature is
+  on values, which did not move.) ASKED OF THE BUILDER BEFORE ACCEPTANCE (by message): THE FIVE SIZES base against tip (A3's
+  helper imports `historyData.js` and `economyStateProse.js` into more surfaces), and a lighter shape if first paint grows.
+- R-CURES-B: B1, B2, B3 pushed (`lane/stack-122-rcures-b-wip-2026-11-27` at d326d1128; not yet reported); B4 BUILT AND
+  REVERTED BY THE BUILDER: IT MOVES BIRTHS (13 of 300: the Annual fair's description, read at birth on the atom
+  `need not brought in: luxury`; `tests/generators/faultsNeed.test.js` holds that leaf equal to the page's list). **E17: B4
+  LEAVES POINT 122 AND JOINS POINT 123 (the birth cures) as C3**, from the builder's commit 22d7fe306, after its pair table
+  is read.
+- R-BIRTH: three commits on R13 (`lane/stack-123-rbirth-wip-2026-11-27` at bc5c1ab8c); not yet reported.
