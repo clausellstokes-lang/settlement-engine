@@ -22,3 +22,23 @@
   WHAT THE CHAIR TOLD HIM TO EXPECT: a town that agrees with itself and is clearly machine-made in its phrasing; stable
   picks invisible to a reader; about a hundred wording slots still over his sameness bar; one to three small oddities in
   a town read closely; one flat voice unless VOICES is taken.
+
+- **THE SURVEYOR AS ONE OBSERVER: THE OWNER's THOUGHT, AND THE CHAIR's ANSWER** (22:23 UTC on 2026-11-27; NOT A REQUEST TO BUILD: his words: "Not
+  asking you to do so but to ask you what your thoughts are."). HIS WORDS, VERBATIM: "Treat the surveyor or factual voice as
+  the upfront for all intents and purposes the factual voice but also as simply one observer that could be wrong or is based
+  off of observation to complete the illusion. The document itself and the whole thing ironically could be skewed but as an
+  immersion process and as an illusion where all the facts can /should be reconciled by the reader but also provides
+  different vantages to integrate or compare things for a story. Very dnd dm like. […] And yes this could mean changing the
+  promise appropriately." THE CHAIR's ANSWER, GIVEN IN FULL: the frame is right and suits the product; ITS RISK IS BECOMING
+  AN EXCUSE: a disagreement someone MEANT (a who, and a reason each sees it so) is story; a disagreement nobody meant (the
+  generator tripping) is a bug under any frame. THE FLOOR THE CHAIR WOULD HOLD: every disagreement a page shows is one THE
+  ENGINE CHOSE, and the DM's view says which account is right and why ("the reader can reconcile" needs a reconciliation to
+  exist). THREE LAYERS: the RECORD exact (the DM's ground truth); THE SURVEYOR's PROSE one careful observer, wrong only by
+  vantage and omission, each marked for the DM; THE SAID LINES (VOICES) named people, right or skewed. THE PROMISE WOULD
+  BECOME: "the record is true; the page is an honest account by observers; where an account departs from the record, the
+  DM is told": page-truth checks stay whole for the record and for a hard fact the surveyor states, relaxed only for lines
+  designated as someone's account. CONSEQUENCES: the player's page IS the in-world document, the DM's page is it with margin
+  notes; hidden things become "what the survey never learned" (the hiding itself stays on the server). CAUTIONS: attribution
+  must be visible; scope: the frame is cheap, deliberate DM-explained disagreement is the dear part: measured first,
+  rationed, with VOICES. RECOMMENDED TO HIM: adopt the frame as the stance; keep the bar for accidents where it is; nothing
+  built from it; the work in flight is unaffected (every cure in points 122 and 123 is of an accident).
