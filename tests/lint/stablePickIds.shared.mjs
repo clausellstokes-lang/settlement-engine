@@ -25,7 +25,8 @@
  * the tree (below).
  *
  * THE VIABILITY READER IS FAIL-CLOSED: line and block comments are stripped; every row `[<id>, <sentence>]` is seen
- * whatever its layout and quote style; EVERY STRING OF AN ID'S FORM inside the function, in any quote style (single,
+ * whatever its layout and quote style (every pair `[<a plain string>, <a string or a template>]` is a row, and a row whose
+ * id is not of the id's form is red); EVERY STRING OF AN ID'S FORM inside the function, in any quote style (single,
  * double, backtick), at any depth, is counted as an id key, and the count of id keys must equal the count of rows read;
  * a row form it does not recognise, a function it cannot find or lex, is red. The Daily Life reader is fail-closed too:
  * every exported value of every pool file that holds an id-bearing object must sit at a slot this module names; every
@@ -43,7 +44,10 @@
  *   - a swap laundered through several door runs;
  *   - a scope's entry deleted whole from the baseline (the door banks the scope afresh, its retired ids freed);
  *   - the outsider impressions' SECOND pick (`src/domain/dailyLife.js :: outsiderParts`) draws among options keyed by
- *     their BRANCH NAME, not a line's id: a renamed branch re-deals that pick.
+ *     their BRANCH NAME, not a line's id: a renamed branch re-deals that pick;
+ *   - present ids deleted from the baseline by hand and then shifted in the tree (they are banked afresh);
+ *   - `pickRendezvous` itself, handed a duplicate or a missing id or a falsy key, returns the first line in LIST ORDER
+ *     (the guard is what keeps duplicates out; a nameless record's picks follow the pool's order, as the old pick's did).
  */
 import { createHash } from 'node:crypto';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
@@ -285,14 +289,18 @@ function collect(toks, acc) {
   for (let k = 0; k < toks.length; k++) {
     const t = toks[k];
     const content = plainContent(t);
-    if (content !== null && ID_FORM.test(content)) {
-      acc.idKeys++;
+    if (content !== null) {
       const a = toks[k - 1]; const comma = toks[k + 1]; const b = toks[k + 2];
       let close = toks[k + 3];
       if (isPunc(close, ',')) close = toks[k + 4];
       const sentence = b && (b.t === 'str' || b.t === 'tpl') ? b.body : null;
-      if (isPunc(a, '[') && isPunc(comma, ',') && sentence !== null && isPunc(close, ']')) acc.rows.push({ id: content, src: sentence });
-      else acc.unread.push(`${content} (at ${t.at}): a string of an id's form outside a row \`[<id>, <sentence>]\``);
+      // EVERY pair `[<a plain string>, <a string or a template>]` is a row (RULING 120R-2, cure 3)
+      const isRow = isPunc(a, '[') && isPunc(comma, ',') && sentence !== null && isPunc(close, ']');
+      const idForm = ID_FORM.test(content);
+      if (idForm) acc.idKeys++;
+      if (isRow && idForm) acc.rows.push({ id: content, src: /** @type {string} */ (sentence) });
+      else if (isRow) acc.unread.push(`${JSON.stringify(content)} (at ${t.at}): a row whose id is not of the id's form`);
+      else if (idForm) acc.unread.push(`${content} (at ${t.at}): a string of an id's form outside a row \`[<id>, <sentence>]\``);
     }
     if (t.t === 'tpl') for (const sub of t.inner) collect(sub, acc);
   }
@@ -340,7 +348,11 @@ export async function readTree(root = ROOT) {
 export function readBaseline(root = ROOT) {
   const p = join(root, BASELINE_REL);
   if (!existsSync(p)) return null;
-  return JSON.parse(readFileSync(p, 'utf8'));
+  try {
+    return JSON.parse(readFileSync(p, 'utf8'));
+  } catch (e) {
+    throw new Error(`${BASELINE_REL} is not JSON (${/** @type {Error} */ (e).message}): restore it from git; the baseline is never re-made`);
+  }
 }
 
 /** @param {Baseline} baseline @returns {string[]} what is malformed in the baseline itself */
@@ -393,7 +405,7 @@ export function findings(tree, baseline) {
 /**
  * THE DOOR'S PLAN: what `--write` would do, or why it refuses.
  * It ONLY adds ids, retires a vanished id, and re-banks a re-wording in place; it never renumbers and never frees a
- * retired id. It refuses a missing baseline, a baseline emptied where the tree holds ids, a move, a reuse, a duplicate,
+ * retired id. It refuses a missing baseline, a baseline emptied to a skeleton where the tree holds ids, a move, a reuse, a duplicate,
  * a malformed baseline, and a tree the reader cannot read.
  * @param {Tree} tree @param {Baseline | null} baseline
  * @returns {{ refusals: string[], added: string[], retired: string[], reworded: string[], next: Baseline | null }}
@@ -414,7 +426,8 @@ export function doorPlan(tree, baseline) {
   if (bankedTotal === 0 && treeTotal > 0) refusals.push('the baseline banks no id at all while the tree holds ids: restore the baseline from git; it is never refilled');
   for (const [scope, lines] of tree.scopes) {
     const s = baseline.scopes[scope];
-    if (s && Object.keys(s.present).length === 0 && lines.length > 0) refusals.push(`${scope}: the baseline's present is empty where the tree holds ids: restore the baseline from git; it is never refilled`);
+    // the EMPTIED SKELETON only (RULING 120R-2, cure 2): a wholly retired scope takes new ids as any scope does
+    if (s && Object.keys(s.present).length === 0 && s.retired.length === 0 && lines.length > 0) refusals.push(`${scope}: the baseline's present and retired are empty where the tree holds ids: restore the baseline from git; it is never refilled`);
   }
   const f = findings(tree, baseline);
   for (const x of f) {

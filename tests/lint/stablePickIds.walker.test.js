@@ -12,10 +12,10 @@
  * functions, and hold the verdicts to it.
  */
 import { describe, expect, test, beforeAll } from 'vitest';
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import {
-  BASELINE_REL, DAILY_LIFE_EXPORTS, ROOT, VIABILITY_FILE_REL, VIABILITY_SCOPE, baselineProblems, dailyLifeTreeOf, doorPlan, findings,
+  BASELINE_REL, DAILY_LIFE_EXPORTS, ROOT, VIABILITY_SCOPE, baselineProblems, dailyLifeTreeOf, doorPlan, findings,
   fingerprintOf, readBaseline, readTree, viabilityRowsIn, viabilityTreeOf,
 } from './stablePickIds.shared.mjs';
 
@@ -39,12 +39,14 @@ describe('the id guard of point 120: the tree against its baseline', () => {
     expect(tree.problems).toEqual([]);
   });
 
-  test('guard-the-guard: the reader is not vacuous (floors from the first baseline: 144 scopes, 615 + 22 ids)', () => {
-    expect(tree.scopes.size).toBeGreaterThanOrEqual(144);
+  // TRUE FLOORS (RULING 120R-2, cure 1 (a)): a little over half the first baseline's counts (144 scopes; 615 + 22 ids), so a
+  // reader that reads nothing or half reds, while honest retirements (any one scope: the largest holds 33 lines; several
+  // lines) leave room: 80 scopes, 350 Daily Life ids, 12 viability rows.
+  test('guard-the-guard: the reader is not vacuous (true floors: 80 scopes, 350 Daily Life ids, 12 viability rows)', () => {
+    expect(tree.scopes.size).toBeGreaterThanOrEqual(80);
     const daily = [...tree.scopes].filter(([s]) => s !== VIABILITY_SCOPE).reduce((n, [, l]) => n + l.length, 0);
-    expect(daily).toBeGreaterThanOrEqual(615);
-    expect(tree.scopes.get(VIABILITY_SCOPE)?.length ?? 0).toBeGreaterThanOrEqual(22);
-    expect(tree.scopes.get('gathering_places|plain')?.map((l) => l.id)).toEqual(expect.arrayContaining(['P0', 'P1', 'P2']));
+    expect(daily).toBeGreaterThanOrEqual(350);
+    expect(tree.scopes.get(VIABILITY_SCOPE)?.length ?? 0).toBeGreaterThanOrEqual(12);
   });
 
   test('NO SILENT REMOVAL: every banked present id is in the tree (a removed line is retired by the door)', () => {
@@ -145,8 +147,25 @@ describe('guard-the-guard: the Daily Life faults', () => {
     expect(doorPlan(dailyTree(BANKED), null).refusals[0]).toMatch(/restore it from git; the baseline is never re-made/);
     const skeleton = { scopes: { 'gathering_places|plain': { present: {}, retired: [] } } };
     expect(doorPlan(dailyTree(BANKED), skeleton).refusals.join('\n')).toMatch(/restore the baseline from git; it is never refilled/);
+    // the emptied skeleton of ONE scope, beside a scope that still banks its ids: refused
+    const two = dailyLifeTreeOf({ 'x.js': { GATHERING_PLAIN: [{ id: 'P0', text: 'A.' }], GATHERING_NAMED: [{ id: 'N0', text: 'B.' }] } });
+    const oneEmptied = { scopes: { 'gathering_places|plain': { present: {}, retired: [] }, 'gathering_places|named': { present: { N0: fingerprintOf('B.') }, retired: [] } } };
+    expect(doorPlan(two, oneEmptied).refusals.join('\n')).toMatch(/gathering_places\|plain: .*never refilled/);
     expect(doorPlan(dailyTree(BANKED), { scopes: {} }).refusals.join('\n')).toMatch(/it is never refilled/);
     expect(baselineProblems(bankOf(BANKED, ['P1']))).toEqual(['gathering_places|plain P1: banked present AND retired']);
+  });
+
+  test('A WHOLLY RETIRED SCOPE takes a line under a NEW id (added, green); its retired id coming back is red and refused', () => {
+    const named = { 'gathering_places|named': { present: { N0: fingerprintOf('B.') }, retired: [] } };
+    const retiredWhole = { scopes: { 'gathering_places|plain': { present: {}, retired: ['K1'] }, ...named } };
+    const fresh = dailyLifeTreeOf({ 'x.js': { GATHERING_PLAIN: [{ id: 'ZZ9', text: 'A new line.' }], GATHERING_NAMED: [{ id: 'N0', text: 'B.' }] } });
+    const plan = doorPlan(fresh, retiredWhole);
+    expect([plan.refusals, plan.added]).toEqual([[], ['gathering_places|plain ZZ9']]);
+    expect(findings(fresh, /** @type {Baseline} */ (plan.next))).toEqual([]);
+    expect(plan.next?.scopes['gathering_places|plain'].retired).toEqual(['K1']);
+    const back = dailyLifeTreeOf({ 'x.js': { GATHERING_PLAIN: [{ id: 'K1', text: 'A new line.' }], GATHERING_NAMED: [{ id: 'N0', text: 'B.' }] } });
+    expect(kinds(back, retiredWhole)).toEqual(['reused K1']);
+    expect(doorPlan(back, retiredWhole).refusals).toHaveLength(1);
   });
 
   test('THE DAILY LIFE READER is fail-closed: an id-bearing export it does not name, a line without text', () => {
@@ -163,64 +182,94 @@ describe('guard-the-guard: the Daily Life faults', () => {
   });
 });
 
-// ── GUARD-THE-GUARD: the viability reader, over planted source text ───────────────────────────────────────────────────
+// ── GUARD-THE-GUARD: the viability reader, over a FIXTURE source (never the live words: RULING 120R-2, cure 1 (b)) ──────
 
-const SOURCE = readFileSync(join(ROOT, VIABILITY_FILE_REL), 'utf8');
-const SS1 = "    ['SS1', `${town} feeds itself and pays its own way.`],\n";
-/** @param {string} needle @param {string} add @returns {string} the source with `add` written after `needle` */
-const plant = (needle, add) => {
-  expect(SOURCE.includes(needle), `the plant's anchor is in ${VIABILITY_FILE_REL}`).toBe(true);
-  return SOURCE.replace(needle, `${needle}${add}`);
+/** A small `deriveViability` in the live function's shapes: pairs over pools, a nested template, a regex, a comment. */
+const FIXTURE = [
+  "import { pickRendezvous } from '../../kernel/proseHash.js';",
+  '/** A helper before the function: `[\'XX1\', \'not read\']` in a comment. */',
+  'const helper = (x) => x;',
+  'export function deriveViability(settlement) {',
+  "  const town = settlement?.name || 'The settlement'; const goods = helper('grain');",
+  '  const many = / and /.test(goods) || /s$/.test(goods);',
+  '  const pick = (pool) => pickRendezvous(pool, town, (r) => r[0])?.[1];',
+  '  if (settlement?.lean) {',
+  '    return pick([',
+  "      ['AA1', `${town} cannot last.`],",
+  "      ['AA2', `${town} will not survive ${many ? `the ${'year'}` : 'long'}.`],",
+  '    ]);',
+  '  }',
+  '  return pick([',
+  "    ['SS1', `${town} feeds itself.`],",
+  "    ['SS2', `${town} owes no one.`], // a comment beside a row",
+  '  ]);',
+  '}',
+  "export const after = [['ZZ1', 'outside the function']];",
+  '',
+].join('\n');
+const ROW = "    ['SS1', `${town} feeds itself.`],\n";
+/** @param {string} add @param {string} [needle] @returns {string} the fixture with `add` written after `needle` */
+const plant = (add, needle = ROW) => {
+  expect(FIXTURE.includes(needle), "the plant's anchor is in the fixture").toBe(true);
+  return FIXTURE.replace(needle, `${needle}${add}`);
 };
+/** @param {string} src @returns {Baseline} the fixture's rows banked */
+const bankSrc = (src) => ({ scopes: { [VIABILITY_SCOPE]: { present: Object.fromEntries((viabilityTreeOf(src).scopes.get(VIABILITY_SCOPE) ?? []).map((l) => [l.id, l.fp])), retired: [] } } });
 
 describe('guard-the-guard: the viability reader (fail-closed)', () => {
-  test('the real function: every row read, as many id keys as rows', () => {
-    const r = viabilityRowsIn(SOURCE);
+  test('the fixture: its four rows read, as many id keys as rows; nothing outside the function is read', () => {
+    const r = viabilityRowsIn(FIXTURE);
     expect(r.problems).toEqual([]);
-    expect(r.idKeys).toBe(r.rows.length);
-    expect(r.rows.map((x) => x.id)).toContain('SS1');
+    expect(r.rows.map((x) => x.id)).toEqual(['AA1', 'AA2', 'SS1', 'SS2']);
+    expect(r.idKeys).toBe(4);
   });
 
-  test('a second SS1 over three source lines, in double quotes, in backticks: each red (twice in its scope)', () => {
+  test('a second SS1 over three source lines, in double quotes, in backticks: each red (twice in its scope) and refused', () => {
     const forms = [
       "    [\n      'SS1',\n      `${town} keeps itself.`,\n    ],\n",
       '    ["SS1", `${town} keeps itself.`],\n',
       '    [`SS1`, `${town} keeps itself.`],\n',
     ];
     for (const add of forms) {
-      const t = viabilityTreeOf(plant(SS1, add));
+      const t = viabilityTreeOf(plant(add));
       expect(t.problems, add).toEqual([]);
-      const ids = t.scopes.get(VIABILITY_SCOPE)?.map((l) => l.id) ?? [];
-      expect(ids.filter((id) => id === 'SS1'), add).toHaveLength(2);
-      const bank = { scopes: { [VIABILITY_SCOPE]: { present: Object.fromEntries((viabilityTreeOf(SOURCE).scopes.get(VIABILITY_SCOPE) ?? []).map((l) => [l.id, l.fp])), retired: [] } } };
-      expect(findings(t, bank).map((f) => `${f.kind} ${f.id}`), add).toContain('duplicate SS1');
+      expect(t.scopes.get(VIABILITY_SCOPE)?.filter((l) => l.id === 'SS1'), add).toHaveLength(2);
+      expect(findings(t, bankSrc(FIXTURE)).map((f) => `${f.kind} ${f.id}`), add).toContain('duplicate SS1');
+      expect(doorPlan(t, bankSrc(FIXTURE)).refusals.length, add).toBeGreaterThan(0);
+    }
+  });
+
+  test('A ROW WHOSE ID IS NOT OF THE ID\'S FORM is red and refused (every pair of a plain string and a sentence is a row)', () => {
+    for (const add of ["    ['SELFS1', `${town} keeps itself.`],\n", "    ['SS1b', `${town} keeps itself.`],\n", "    ['SS_6', 'plain words'],\n"]) {
+      const t = viabilityTreeOf(plant(add));
+      expect(t.problems.join('\n'), add).toMatch(/a row whose id is not of the id's form/);
+      expect(doorPlan(t, bankSrc(FIXTURE)).refusals.join('\n'), add).toMatch(/the reader cannot read the tree/);
     }
   });
 
   test('a row form the reader does not recognise, or an id key outside a row, is red', () => {
-    expect(viabilityRowsIn(plant(SS1, "    ['SS9', said],\n")).problems.join('\n')).toMatch(/id keys against/);
-    expect(viabilityRowsIn(plant(SS1, "    { id: 'SS9', text: `x` },\n")).problems.join('\n')).toMatch(/outside a row/);
-    expect(viabilityRowsIn(plant(SS1, "    ['SS9', `a ${'SS8'} b`],\n")).problems.join('\n')).toMatch(/id keys against/);
-    expect(viabilityRowsIn(SOURCE.replace(/function deriveViability\(/, 'function deriveViabilityGone(')).problems.join('\n')).toMatch(/written 0 times/);
-    const cut = SOURCE.slice(0, SOURCE.indexOf('function deriveViability(') + 400);
-    expect(viabilityRowsIn(cut).problems.join('\n')).toMatch(/cannot read it/);
+    expect(viabilityRowsIn(plant("    ['SS9', said],\n")).problems.join('\n')).toMatch(/id keys against/);
+    expect(viabilityRowsIn(plant("    { id: 'SS9', text: `x` },\n")).problems.join('\n')).toMatch(/outside a row/);
+    expect(viabilityRowsIn(plant("    ['SS9', `a ${'SS8'} b`],\n")).problems.join('\n')).toMatch(/id keys against/);
+    expect(viabilityRowsIn(FIXTURE.replace('function deriveViability(', 'function deriveViabilityGone(')).problems.join('\n')).toMatch(/written 0 times/);
+    expect(viabilityRowsIn(FIXTURE.slice(0, FIXTURE.indexOf('if (settlement?.lean)'))).problems.join('\n')).toMatch(/cannot read it/);
   });
 
   test('a comment naming an id is not read (green); a nested template in a sentence is read (green)', () => {
     for (const add of ["    // 'SS4' and \"SS2\" were re-worded here\n", "    /* ['SS4', `x`], */\n"]) {
-      const r = viabilityRowsIn(plant(SS1, add));
+      const r = viabilityRowsIn(plant(add));
       expect(r.problems, add).toEqual([]);
-      expect(r.rows.length).toBe(viabilityRowsIn(SOURCE).rows.length);
+      expect(r.rows).toHaveLength(4);
     }
-    const r = viabilityRowsIn(plant(SS1, "    ['SS6', `${town} ${seen.buysIn ? `buys ${'some'} in` : 'keeps'} itself.`],\n"));
+    const r = viabilityRowsIn(plant("    ['SS6', `${town} ${settlement.buysIn ? `buys ${'some'} in` : 'keeps'} itself.`],\n"));
     expect(r.problems).toEqual([]);
-    expect(r.rows.map((x) => x.id)).toContain('SS6');
+    expect(r.rows.map((x) => x.id)).toEqual(['AA1', 'AA2', 'SS1', 'SS6', 'SS2']);
   });
 
   test('the fingerprint reads the sentence source as written, whitespace and letter case aside', () => {
-    const a = viabilityTreeOf(SOURCE).scopes.get(VIABILITY_SCOPE)?.find((l) => l.id === 'SS1');
-    expect(a?.fp).toBe(fingerprintOf('${town} feeds itself and pays its own way.'));
-    const b = viabilityTreeOf(SOURCE.replace(SS1, "    ['SS1', `${town}   FEEDS itself and pays its own way. `],\n")).scopes.get(VIABILITY_SCOPE)?.find((l) => l.id === 'SS1');
-    expect(b?.fp).toBe(a?.fp);
+    const fp = (/** @type {string} */ src) => viabilityTreeOf(src).scopes.get(VIABILITY_SCOPE)?.find((l) => l.id === 'SS1')?.fp;
+    expect(fp(FIXTURE)).toBe(fingerprintOf('${town} feeds itself.'));
+    expect(fp(FIXTURE.replace(ROW, "    ['SS1', `${town}   FEEDS itself. `],\n"))).toBe(fp(FIXTURE));
+    expect(fp(FIXTURE.replace(ROW, "    ['SS1', `${town} feeds itself well.`],\n"))).toBe(fingerprintOf('${town} feeds itself well.'));
   });
 });

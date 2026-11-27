@@ -9,8 +9,9 @@
  *                                                   re-wording in place (printed `re-worded: <id>`)
  *
  * It never renumbers, never frees a retired id, and never makes a baseline. IT REFUSES (exit 2, nothing written) when:
- * the baseline file is absent ("restore it from git; the baseline is never re-made"); the baseline's `present` is empty
- * for a scope where the tree holds ids, or banks no id at all ("restore the baseline from git; it is never refilled");
+ * the baseline file is absent or not JSON ("restore it from git; the baseline is never re-made"); a scope's `present`
+ * AND `retired` are both empty where the tree holds ids (an emptied skeleton), or the baseline banks no id at all
+ * ("restore the baseline from git; it is never refilled"); a wholly retired scope takes new ids as any scope does;
  * a banked fingerprint is found under a DIFFERENT present id (an id moved between lines: a shifted insertion, a swap);
  * a retired id is in the tree again; an id is written twice in its scope; the baseline is malformed; the reader cannot
  * read the tree. A move is matched against PRESENT ids only: a sentence whose id is retired may come back under a NEW
@@ -23,7 +24,14 @@ import { BASELINE_REL, ROOT, baselineText, doorPlan, findings, readBaseline, rea
 
 const write = process.argv.includes('--write');
 const tree = await readTree(ROOT);
-const baseline = readBaseline(ROOT);
+/** @type {import('../tests/lint/stablePickIds.shared.mjs').Baseline | null} */ let baseline;
+try {
+  baseline = readBaseline(ROOT);
+} catch (e) {
+  console.log(`REFUSED  ${/** @type {Error} */ (e).message}`);
+  console.log('stable-pick-ids door: REFUSED (1); nothing written.');
+  process.exit(2);
+}
 const plan = doorPlan(tree, baseline);
 
 if (plan.refusals.length) {
