@@ -1,0 +1,302 @@
+{
+ "db": "mcb_tip",
+ "members": 140,
+ "maps": {
+  "unmarked": {
+   "wallMs": 15581.3,
+   "members": 140,
+   "perMemberMs": 111.3,
+   "functions": [
+    {
+     "funcname": "_gallery_sanitize_public_json",
+     "calls": "832527",
+     "total_ms": "11462.6",
+     "self_ms": "11462.6"
+    },
+    {
+     "funcname": "_gallery_veil_withhold_always",
+     "calls": "140",
+     "total_ms": "2197.5",
+     "self_ms": "1566.5"
+    },
+    {
+     "funcname": "_gallery_veil_each_minus_at",
+     "calls": "7658",
+     "total_ms": "610.0",
+     "self_ms": "610.0"
+    },
+    {
+     "funcname": "get_gallery_map",
+     "calls": "1",
+     "total_ms": "15564.7",
+     "self_ms": "543.6"
+    },
+    {
+     "funcname": "_gallery_veil_rekey",
+     "calls": "140",
+     "total_ms": "1004.8",
+     "self_ms": "499.6"
+    },
+    {
+     "funcname": "_gallery_veil_rekey_each",
+     "calls": "1607",
+     "total_ms": "494.8",
+     "self_ms": "276.7"
+    },
+    {
+     "funcname": "_gallery_veil_rekey_at",
+     "calls": "14036",
+     "total_ms": "218.1",
+     "self_ms": "218.1"
+    },
+    {
+     "funcname": "_gallery_veil_roster_choices",
+     "calls": "140",
+     "total_ms": "148.8",
+     "self_ms": "148.8"
+    },
+    {
+     "funcname": "_gallery_veil",
+     "calls": "140",
+     "total_ms": "3554.6",
+     "self_ms": "135.1"
+    },
+    {
+     "funcname": "_gallery_veil_cards",
+     "calls": "420",
+     "total_ms": "47.0",
+     "self_ms": "46.6"
+    },
+    {
+     "funcname": "_gallery_veil_rekey_served",
+     "calls": "140",
+     "total_ms": "37.9",
+     "self_ms": "22.1"
+    },
+    {
+     "funcname": "_gallery_veil_cast",
+     "calls": "222",
+     "total_ms": "20.9",
+     "self_ms": "20.9"
+    },
+    {
+     "funcname": "_gallery_veil_served",
+     "calls": "140",
+     "total_ms": "7.1",
+     "self_ms": "7.1"
+    },
+    {
+     "funcname": "_gallery_chronicle_json",
+     "calls": "140",
+     "total_ms": "3.7",
+     "self_ms": "3.7"
+    },
+    {
+     "funcname": "_gallery_veil_resolve",
+     "calls": "140",
+     "total_ms": "2.7",
+     "self_ms": "2.7"
+    },
+    {
+     "funcname": "_gallery_veil_kinds",
+     "calls": "6",
+     "total_ms": "0.4",
+     "self_ms": "0.4"
+    },
+    {
+     "funcname": "update_updated_at",
+     "calls": "1",
+     "total_ms": "0.1",
+     "self_ms": "0.1"
+    },
+    {
+     "funcname": "_gallery_world_snapshot_is_safe",
+     "calls": "1",
+     "total_ms": "0.0",
+     "self_ms": "0.0"
+    },
+    {
+     "funcname": "_gallery_veil_copy_bound",
+     "calls": "1",
+     "total_ms": "0.0",
+     "self_ms": "0.0"
+    },
+    {
+     "funcname": "enforce_account_active_write",
+     "calls": "1",
+     "total_ms": "0.0",
+     "self_ms": "0.0"
+    },
+    {
+     "funcname": "_saved_maps_world_snapshot_guard",
+     "calls": "1",
+     "total_ms": "0.1",
+     "self_ms": "0.0"
+    },
+    {
+     "funcname": "enforce_moderation_ban",
+     "calls": "1",
+     "total_ms": "0.0",
+     "self_ms": "0.0"
+    }
+   ]
+  },
+  "marked": {
+   "wallMs": 56244.9,
+   "members": 140,
+   "perMemberMs": 401.7,
+   "functions": [
+    {
+     "funcname": "_gallery_veil_roster_choices",
+     "calls": "140",
+     "total_ms": "27689.5",
+     "self_ms": "15726.5"
+    },
+    {
+     "funcname": "_gallery_sanitize_public_json",
+     "calls": "832527",
+     "total_ms": "11939.3",
+     "self_ms": "11939.3"
+    },
+    {
+     "funcname": "_gallery_veil_name_hit",
+     "calls": "316512",
+     "total_ms": "7844.6",
+     "self_ms": "7844.6"
+    },
+    {
+     "funcname": "_gallery_veil_copy_names",
+     "calls": "143515",
+     "total_ms": "11665.4",
+     "self_ms": "4212.5"
+    },
+    {
+     "funcname": "_gallery_veil_second_homes",
+     "calls": "140",
+     "total_ms": "9360.6",
+     "self_ms": "2283.9"
+    },
+    {
+     "funcname": "_gallery_veil_withhold_always",
+     "calls": "140",
+     "total_ms": "2255.1",
+     "self_ms": "1593.5"
+    },
+    {
+     "funcname": "_gallery_veil_hidden_name",
+     "calls": "17216",
+     "total_ms": "1375.8",
+     "self_ms": "1375.8"
+    },
+    {
+     "funcname": "_gallery_veil_name_ready",
+     "calls": "12780",
+     "total_ms": "2419.4",
+     "self_ms": "1332.2"
+    },
+    {
+     "funcname": "_gallery_veil_name_prep",
+     "calls": "14580",
+     "total_ms": "1089.1",
+     "self_ms": "1089.1"
+    },
+    {
+     "funcname": "_gallery_veil_name_sweep",
+     "calls": "87",
+     "total_ms": "1574.1",
+     "self_ms": "1081.7"
+    },
+    {
+     "funcname": "_gallery_veil_name_hits",
+     "calls": "123",
+     "total_ms": "3435.3",
+     "self_ms": "1050.3"
+    },
+    {
+     "funcname": "_gallery_veil_apply",
+     "calls": "140",
+     "total_ms": "12059.2",
+     "self_ms": "713.8"
+    },
+    {
+     "funcname": "_gallery_veil_each_minus_at",
+     "calls": "7658",
+     "total_ms": "639.5",
+     "self_ms": "639.5"
+    },
+    {
+     "funcname": "_gallery_veil_rekey",
+     "calls": "140",
+     "total_ms": "998.2",
+     "self_ms": "493.9"
+    },
+    {
+     "funcname": "get_gallery_map",
+     "calls": "1",
+     "total_ms": "56240.1",
+     "self_ms": "468.6"
+    },
+    {
+     "funcname": "_gallery_veil_name_tokens",
+     "calls": "9114",
+     "total_ms": "375.3",
+     "self_ms": "375.3"
+    },
+    {
+     "funcname": "_gallery_veil_grouping",
+     "calls": "1120",
+     "total_ms": "336.4",
+     "self_ms": "336.4"
+    },
+    {
+     "funcname": "_gallery_veil_fold",
+     "calls": "12894",
+     "total_ms": "297.7",
+     "self_ms": "297.7"
+    },
+    {
+     "funcname": "_gallery_veil_own_id",
+     "calls": "21946",
+     "total_ms": "486.9",
+     "self_ms": "296.5"
+    },
+    {
+     "funcname": "_gallery_veil_card_id",
+     "calls": "63864",
+     "total_ms": "767.3",
+     "self_ms": "280.3"
+    },
+    {
+     "funcname": "_gallery_veil_rekey_each",
+     "calls": "1570",
+     "total_ms": "493.9",
+     "self_ms": "270.0"
+    },
+    {
+     "funcname": "_gallery_veil_card",
+     "calls": "6670",
+     "total_ms": "295.9",
+     "self_ms": "253.0"
+    },
+    {
+     "funcname": "_gallery_veil_rekey_at",
+     "calls": "14036",
+     "total_ms": "223.8",
+     "self_ms": "223.8"
+    },
+    {
+     "funcname": "_gallery_veil",
+     "calls": "140",
+     "total_ms": "43828.1",
+     "self_ms": "217.7"
+    },
+    {
+     "funcname": "_gallery_veil_map",
+     "calls": "218",
+     "total_ms": "708.1",
+     "self_ms": "205.5"
+    }
+   ]
+  }
+ }
+}

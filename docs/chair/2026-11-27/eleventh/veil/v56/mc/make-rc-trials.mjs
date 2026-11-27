@@ -32,7 +32,7 @@ const exprOf = (f) => {
 const ex = Object.fromEntries(FIELDS.map((f) => [f, exprOf(f)]));
 const typ = (f) => (f === 'population' ? 'integer' : 'text');
 let ii = `${HDR}alter table public.settlements ${FIELDS.map((f) => `add column if not exists mc_${f} ${typ(f)}`).join(', ')};\n`;
-ii += `update public.settlements s set ${FIELDS.map((f) => `mc_${f} = ${ex[f]}`).join(',\n  ')}\n where s.is_public = true;\n`;
+ii += `-- the backfill writes no row's updated_at (a user trigger would move the tile's own updated_at)\nalter table public.settlements disable trigger user;\nupdate public.settlements s set ${FIELDS.map((f) => `mc_${f} = ${ex[f]}`).join(',\n  ')}\n where s.is_public = true;\nalter table public.settlements enable trigger user;\n`;
 let h2 = helper;
 for (const f of FIELDS) h2 = rep(h2, `${ex[f]} as ${f},`, `s.mc_${f} as ${f},`, `col ${f}`);
 { const left = h2.split('\n').filter((l) => l.includes('s.data')); if (left.length) throw new Error('(ii) still reads data: ' + left.join(' / ')); }

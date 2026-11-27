@@ -1,5 +1,7 @@
 -- MC LOCAL TRIAL ONLY (never applied but to a local test database)
 alter table public.settlements add column if not exists mc_population integer, add column if not exists mc_terrain text, add column if not exists mc_government_type text, add column if not exists mc_magic_level text, add column if not exists mc_stability text, add column if not exists mc_primary_resource text, add column if not exists mc_threat_level text, add column if not exists mc_culture text, add column if not exists mc_prosperity text, add column if not exists mc_primary_deity text;
+-- the backfill writes no row's updated_at (a user trigger would move the tile's own updated_at)
+alter table public.settlements disable trigger user;
 update public.settlements s set mc_population = case
       when (s.data->>'population') ~ '^[0-9]+$' then (s.data->>'population')::integer
       else null
@@ -49,6 +51,7 @@ update public.settlements s set mc_population = case
       nullif(s.data #>> '{config,primaryDeitySnapshot,name}', '')
     )
  where s.is_public = true;
+alter table public.settlements enable trigger user;
 create or replace function public._gallery_public_tile_rows()
 returns table (
   id uuid,

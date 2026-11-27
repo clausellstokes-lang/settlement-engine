@@ -1,0 +1,27 @@
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 7541 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+unmarked wall ms 15581 members 140
+   _gallery_sanitize_public_json 832527 total 11462.6 self 11462.6
+   _gallery_veil_withhold_always 140 total 2197.5 self 1566.5
+   _gallery_veil_each_minus_at 7658 total 610.0 self 610.0
+   get_gallery_map 1 total 15564.7 self 543.6
+   _gallery_veil_rekey 140 total 1004.8 self 499.6
+   _gallery_veil_rekey_each 1607 total 494.8 self 276.7
+   _gallery_veil_rekey_at 14036 total 218.1 self 218.1
+   _gallery_veil_roster_choices 140 total 148.8 self 148.8
+   _gallery_veil 140 total 3554.6 self 135.1
+   _gallery_veil_cards 420 total 47.0 self 46.6
+   _gallery_veil_rekey_served 140 total 37.9 self 22.1
+   _gallery_veil_cast 222 total 20.9 self 20.9
+marked wall ms 56245 members 140
+   _gallery_veil_roster_choices 140 total 27689.5 self 15726.5
+   _gallery_sanitize_public_json 832527 total 11939.3 self 11939.3
+   _gallery_veil_name_hit 316512 total 7844.6 self 7844.6
+   _gallery_veil_copy_names 143515 total 11665.4 self 4212.5
+   _gallery_veil_second_homes 140 total 9360.6 self 2283.9
+   _gallery_veil_withhold_always 140 total 2255.1 self 1593.5
+   _gallery_veil_hidden_name 17216 total 1375.8 self 1375.8
+   _gallery_veil_name_ready 12780 total 2419.4 self 1332.2
+   _gallery_veil_name_prep 14580 total 1089.1 self 1089.1
+   _gallery_veil_name_sweep 87 total 1574.1 self 1081.7
+   _gallery_veil_name_hits 123 total 3435.3 self 1050.3
+   _gallery_veil_apply 140 total 12059.2 self 713.8
