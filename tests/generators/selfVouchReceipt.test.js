@@ -65,7 +65,10 @@ describe('the self-vouch line follows the receipt\'s battery judgment', () => {
       slots: { settlement: settlement.name },
     });
     expect(contradiction.length, 'the contradiction members the page can fill').toBeGreaterThan(0);
-    expect(contradiction.some((line) => verdict(settlement).includes(line)), `the verdict prints a contradiction member: ${verdict(settlement)}`).toBe(true);
+    // RE-KEYED BY R7 (RULING-R, the eleventh chair, 2026-11-27): the battery's "needs review" alone (its findings print only on
+    // the staff panel; the Outlook tab lists no contradiction here) no longer prints the contradiction pool: the page neither
+    // vouches (above) nor claims a contradiction it does not name. The members are computed above, so this is not vacuous.
+    expect(contradiction.some((line) => verdict(settlement).includes(line)), `the verdict prints a contradiction member: ${verdict(settlement)}`).toBe(false);
   });
 
   // 2026-11-04 (chair's ruling P1): SOAK-3 re-dealt the corpus (the de-aliased cellFor), so the old seed no longer carries this case's premise; re-pointed to the first seed of the new corpus that does (a record the battery finds clean that prints this line): was soak1k-278. Re-picked 2026-11-04 after x46-1b and x46-3 composed (the budget moved the corpus again).

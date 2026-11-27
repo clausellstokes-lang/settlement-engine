@@ -775,7 +775,12 @@ const UNVIABLE = Object.freeze({
   economicViability: {
     viable: false,
     summary: '✗ NOT VIABLE: the sums do not close',
-    issues: [], warnings: [],
+    // R7 (RULING-R, the eleventh chair, 2026-11-27): the contradiction lens prints only beside contradictions the tab lists
+    // by title, so the two the count claims are listed (the generator's own shape: foodBalance.js's critical issue).
+    issues: [
+      { severity: 'critical', category: 'Food Production', title: 'Uncovered Local Food Deficit', description: 'Settlement cannot cover ~400 lbs of food per day (40% of needs) and has no dependable trade route.' },
+      { severity: 'critical', category: 'Trade', title: 'No Dependable Trade Route', description: 'The road that carries the town\'s food in is closed half the year.' },
+    ], warnings: [],
     metrics: {
       criticalIssueCount: 2, tradeAccess: 'road',
       foodBalance: { dailyNeed: 1000, deficit: 400, rawDeficit: 400 },
