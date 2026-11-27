@@ -14,7 +14,7 @@
  *       lens is strained); `recent_changes` takes no rating as an acute threat or as a source.
  *   (c) RULING 7: no hidden or rumoured threat is said by any of the three; a veiled power is never named; a crime wound
  *       falls to the next tension the record holds; no crime or corruption beat is said.
- *   (d) THE ROUTE (ruling 11): every printed sentence is its branch's keyed pick (`pickVariantMixed` keyed
+ *   (d) THE ROUTE (ruling 11): every printed sentence is its branch's keyed pick (`pickRendezvous` keyed
  *       `<record.name>::dailyLife.<slot>::<branch>`) of the slot's own pool (`src/data/dailyLife/outsiderImpressions.js`,
  *       `unspokenTopics.js`, `recentChanges.js`), admitted by its declared atoms (`facts/drawDeclared.js ::
  *       filterDeclared`); a slot with no true line is the EMPTY string. D4C-1 (the chair's E133 (1)): the outsider line
@@ -34,7 +34,7 @@ import { isVeiledPower } from '../../src/domain/people/cardVeil.js';
 import { EVENT_TYPE_NAMES } from '../../src/data/historyData.js';
 import { factsOf } from '../../src/domain/facts/factsOf.js';
 import { filterDeclared } from '../../src/domain/facts/drawDeclared.js';
-import { pickVariantMixed } from '../../src/kernel/proseHash.js';
+import { pickRendezvous } from '../../src/kernel/proseHash.js';
 import { fillAgreement, powerNameAfterArticle, powerNameWithArticle, powerPossessive } from '../../src/domain/display/powerSentenceName.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
@@ -145,7 +145,7 @@ function expected(rec, P) {
   const facts = factsOf(rec);
   /** @param {string} slot @param {any} pools @param {string} branch @param {(t: string) => string} [fill] */
   const say = (slot, pools, branch, fill = (t) => t) => {
-    const pick = pickVariantMixed(filterDeclared(pools[branch] || [], { facts }), `${rec.name}::dailyLife.${slot}::${branch}`);
+    const pick = pickRendezvous(filterDeclared(pools[branch] || [], { facts }), `${rec.name}::dailyLife.${slot}::${branch}`, (/** @type {any} */ l) => l.id);
     return pick ? fill(pick.text) : '';
   };
   const threats = deriveAllThreatProfiles(rec);
@@ -213,8 +213,8 @@ function expected(rec, P) {
     }
     const options = (real ? (strained >= 3 ? lenses : []) : [...lenses, 'ordinary'])
       .filter((b) => filterDeclared(P.OUTSIDER_IMPRESSIONS[b], { facts }).length > 0);
-    let second = pickVariantMixed(options, `${rec.name}::dailyLife.outsider_impressions::second`);
-    if (second && yields(second, st)) second = pickVariantMixed(options.filter((b) => !yields(b, st)), `${rec.name}::dailyLife.outsider_impressions::second`);
+    let second = pickRendezvous(options, `${rec.name}::dailyLife.outsider_impressions::second`, (b) => b);
+    if (second && yields(second, st)) second = pickRendezvous(options.filter((b) => !yields(b, st)), `${rec.name}::dailyLife.outsider_impressions::second`, (b) => b);
     if (second) out.push(say('outsider_impressions', P.OUTSIDER_IMPRESSIONS, second, (t) => fillGov(t, gov)));
     return { parts: out.filter(Boolean), real };
   };

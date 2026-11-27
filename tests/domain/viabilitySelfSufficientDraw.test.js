@@ -107,10 +107,12 @@ describe('CURE-118 (2): "bought in" only where something arrives', () => {
 // need and nothing arriving, line 1 alone. dp-hamlet-82: incense arrives, no need is marked; dp-hamlet-13: timber is needed
 // (the terrain's critical, printed as a need not met) and does not arrive, while other goods do.
 describe('CURE-118 (2), amended: no line says a need is bought in', () => {
-  /** the self-sufficient pool's texts, read from the source of `deriveViability` (its `pickAdmitted` list) */
+  /** the self-sufficient pool's texts, read from the source of `deriveViability` (its `pickAdmitted` list; since D13 STABLE-PICKS,
+   * point 120, a list of [id, sentence] pairs written just before the verdict's return: the sentences are read) */
   const POOL = (() => {
     const src = readFileSync(resolve(import.meta.dirname, '../../src/domain/display/dossierViewModel.js'), 'utf8');
-    const at = src.indexOf("verdict: 'self_sufficient'"); const list = src.slice(src.indexOf('pickAdmitted(pick, [', at), src.indexOf('], [', src.indexOf('pickAdmitted(pick, [', at)));
+    const at = src.lastIndexOf('pickAdmitted(pick, [', src.indexOf("verdict: 'self_sufficient'"));
+    const list = src.slice(at, src.indexOf('], [', at));
     return [...list.matchAll(/`([^`]*)`/g)].map((m) => m[1]);
   })();
   test('the pool holds five lines and none says a need is bought in', () => {

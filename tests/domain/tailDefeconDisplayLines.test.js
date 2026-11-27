@@ -32,11 +32,13 @@ function displayText(s) {
 const GONE = [
   ['00585', 'r2r-thorp-27', 'buying in some of what its own land and trades do not provide', // VIABILITY-TRUE (G61): the twin's words take "some of"
     'gets through the year on its own land and trades, and goes without what they do not provide.'],
-  ['00628', 'r2s-plague_onset-thorp-0', 'and the difference arrives', 'grows less than it eats, and part of the difference arrives'],
-  ['14073', 'r2s-plague_onset-hamlet-2', 'Much of what', 'eats is brought in by road; its own land does not produce enough.'],
-  ['14072', 'r2s-slave_revolt-thorp-1', 'Much of what', 'eats is brought in by river; its own land does not produce enough.'],
-  ['14075', 'r2s-plague_onset-thorp-1', 'Much of what', 'eats is brought in from outside; its own land does not produce enough.'],
-  ['01134', 'r2s-slave_revolt-town-0', 'keeps order and pays its way', 'eats is brought in by river; its own land does not produce enough.'],
+  // D13 STABLE-PICKS (point 120): each viability row below sits on a place that DRAWS the line it guards under the rendezvous
+  // (DC2 for #00628; DC4 for #14073, #14072, #14075; DC3 out-hashing the rest but refused for #01134), so the old words red it
+  ['00628', 'r2s-plague_onset-thorp-1', 'and the difference arrives', 'grows less than it eats, and part of the difference arrives'],
+  ['14073', 'r2s-plague_onset-hamlet-5', 'Much of what', 'eats is brought in by road; its own land does not produce enough.'],
+  ['14072', 'r2s-slave_revolt-village-7', 'Much of what', 'eats is brought in by river; its own land does not produce enough.'],
+  ['14075', 'r2s-plague_onset-village-11', 'Much of what', 'eats is brought in from outside; its own land does not produce enough.'],
+  ['01134', 'r2s-slave_revolt-town-5', 'keeps order and pays its way', 'eats is brought in by road; its own land does not produce enough.'],
   ['B13779', 'r2s-plague_onset-thorp-0', 'the sick are tended by their own families', "No healer's house stands here; the sick are tended by one of the place's own."],
   ['B02441', 'r2r-city-2', 'A criminal operation with a hold on part of the place or its trade.', 'A quarter given over to pleasure: a trade that runs at the edge of the law.'],
   ['B00162', 'r2s-occupied-town-1', 'criminal ring decides what crime is allowed', 'Crime here is run as a business: its money passes through shops that look honest, and whoever runs it keeps out of sight.'],
@@ -47,7 +49,7 @@ const GONE = [
 const KEEP = [
   ['00585', 'r2r-thorp-6', 'buying in some of what its own land and trades do not provide'], // VIABILITY-TRUE (G61)
   ['00628', 'r2r-thorp-16', 'cannot feed itself: part of its food comes in by road.'],
-  ['01134', 'r2r-town-17', 'keeps order and pays its way, but it has to buy food'],
+  ['01134', 'r2r-town-13', 'keeps order and pays its way, but it has to buy food'], // D13: a DC3 drawer
   ['B13779', 'r2r-thorp-0', 'No healer is kept here; the sick are tended by their own families.'],
   ['B02441', 'r2r-city-2', 'Operates unlicensed gambling.'],
   ['B00162', 'r2r-town-7', 'One criminal ring decides what crime is allowed here.'],
