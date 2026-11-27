@@ -384,3 +384,23 @@ See section 4, newest last.
   360e716c2); the guard's new scopes by GUARD-120R on a branch cut from the merged tip, from the builder's table of seven
   modules.
 - 15 rows re-pointed (`landing/121/repointed.tsv`, filed here as handed in; the five anchors' rows follow).
+
+## V16 (20:00 UTC on 2026-11-27): POINT 121's ROUND IN (tip 2ab62ef33, pushed); ITS READER STARTED; THE GUARD's NEW SCOPES BEING BUILT
+- TAIL-121 on ruling 121-3 (6 minutes): 757c10115 the two comments; 2ab62ef33 THE LINE's JOINED TIP 360e716c2 MERGED INTO THE
+  BRANCH, NO CONFLICT (`tailDefeconDisplayLines` merged by itself, both sides' rows kept); the five anchors of
+  `tailCrisisBatch2` each red under a frame's re-wording (the newcomer frame reds three, the traveller one, the local one;
+  rows added to `landing/121/repointed.tsv`, 20 rows); both typechecks green; the stable-pick door "matches the tree (144
+  scopes, 637 ids)"; its 16 test files 199 of 199; the six walkers green alone. TAIL-121 IS FINISHED unless the reader
+  finds a fault (523,000 tokens: a cure after the read goes to a FRESH builder with the report, not to it).
+- PUSHED AS TRANSPORT: `lane/stack-121-tail-wip-2026-11-27` at 2ab62ef33.
+- READER 121: session_01FE9mEuzqAKrQvpFqvj65UN (the top tier, max effort; `prompts/START-READER-121-CHILD.txt`; base
+  360e716c2, tip 2ab62ef33; nine questions: the rank and the door's ranked mode, with THE UNRANKED DOOR PROVEN UNCHANGED ON
+  THE CORPORA; each site; the bar by its own plants, a line added with a need some towns lack among them; what moved; every
+  surface, the four stored stamps counted; within a page; the re-pointed rows by its own mutants; the walkers and
+  registers; anything unsaid). It pushes `lane/reader-121-2026-11-27` and reports by message.
+- GUARD-120R RESUMED (ruling `landing/RULING-121G-1.txt`; tree /home/user/wt/guard121, branch
+  `lane/stack-121-guard-wip-2026-11-27` cut at 2ab62ef33): a THIRD FAMILY of the guard, read BY IMPORT at run time: seven
+  modules, about 180 ids in 16 scopes; a `.say` frame fingerprinted by its function's source; the baseline gains the scopes
+  by the door's own `--write`; point 120's scopes must not change.
+- THE LANDING OF POINT 121, WHEN THE READER IS RULED: two local merges on the line (2ab62ef33 is already above the line's tip:
+  a fast-forward in content; then the guard's branch), the doors, lint, build, sizes, the whole suite in four shards.
