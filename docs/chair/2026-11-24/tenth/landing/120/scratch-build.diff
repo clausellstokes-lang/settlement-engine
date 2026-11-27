@@ -1,0 +1,125 @@
+diff --git a/src/domain/dailyLife.js b/src/domain/dailyLife.js
+index 573f7c2860..034ecf5374 100644
+--- a/src/domain/dailyLife.js
++++ b/src/domain/dailyLife.js
+@@ -62,7 +62,7 @@ import { nativeSemanticName } from './content/customContentSemanticAuthority.js'
+ import { isHideableHouse, isVeiledPower } from './people/cardVeil.js';
+ import { leaderLeadOfRecord } from './facts/leaderLead.js';
+ import { institutionSentenceNoun } from './display/institutionSentenceNoun.js';
+-import { pickVariantMixed } from '../kernel/proseHash.js';
++import { pickRendezvous } from '../kernel/proseHash.js';
+ 
+ // ── Local typedefs ───────────────────────────────────────────────────────
+ 
+@@ -423,7 +423,7 @@ function houseFinder(s) {
+ function pickNameable(s, admitted, slotKey, branch, house, stated) {
+   const eligible = admitted.filter((l) => housesNamedIn(l.text).every((k) => !!house(k)));
+   const name = /** @type {{ name?: unknown }} */ (s).name;
+-  const pick = pickVariantMixed(eligible, typeof name === 'string' && name ? `${name}::dailyLife.${slotKey}::${branch}` : null);
++  const pick = pickRendezvous(eligible, typeof name === 'string' && name ? `${name}::dailyLife.${slotKey}::${branch}` : null, (l) => String(/** @type {any} */ (l).id ?? l.text));
+   const k = pick ? statesOf(slotKey, branch) : null;
+   if (k) stated?.add(k);
+   return pick;
+@@ -782,9 +782,9 @@ function outsiderParts(s, ctx, stated) {
+   }
+   if (!real) options.push({ branch: 'ordinary', lens: null, lines: admitted('ordinary') });
+   const sayable = options.filter((o) => o.lines.length > 0);
+-  let second = pickVariantMixed(sayable, pickKey(s, 'outsider_impressions', 'second'));
++  let second = pickRendezvous(sayable, pickKey(s, 'outsider_impressions', 'second'), (o) => String(o.branch));
+   // an option whose condition another slot states yields: the keyed pick among the options left
+-  if (second && yields(second.branch)) second = pickVariantMixed(sayable.filter((o) => !yields(o.branch)), pickKey(s, 'outsider_impressions', 'second'));
++  if (second && yields(second.branch)) second = pickRendezvous(sayable.filter((o) => !yields(o.branch)), pickKey(s, 'outsider_impressions', 'second'), (o) => String(o.branch));
+   if (second) {
+     const part = say(second.branch, second.lines);
+     if (part.said && second.lens) {
+diff --git a/src/domain/display/dossierViewModel.js b/src/domain/display/dossierViewModel.js
+index d592bff9a3..471a872270 100644
+--- a/src/domain/display/dossierViewModel.js
++++ b/src/domain/display/dossierViewModel.js
+@@ -24,7 +24,7 @@
+  */
+ 
+ import { cleanNum } from './placeholders.js';
+-import { pickVariant } from '../../kernel/proseHash.js';
++import { pickVariant, pickRendezvous } from '../../kernel/proseHash.js';
+ import { avgScore } from './defenseScoreBands.js';
+ import { deriveMagicProfile } from '../magicProfile.js';
+ import { deriveMagicReliance, magicDialAbsent, magicWorksAt, MAGIC_RELIANCE_WORD } from '../magicReliance.js';
+@@ -220,6 +220,7 @@ export function deriveViability(settlement) {
+   // name, from a few variants the seed chooses (the same town always reads the same line).
+   const name = viabilityName(settlement);
+   const pick = (/** @type {readonly string[]} */ pool) => pickVariant(pool, viabilitySeed(settlement));
++  const rv = (/** @type {readonly string[]} */ pool) => pickRendezvous(pool, viabilitySeed(settlement), (t) => String(t));
+ 
+   if (v.viable === false) {
+     return {
+@@ -268,7 +269,7 @@ export function deriveViability(settlement) {
+           `Nothing reliable reaches ${town} from outside, and its own land does not grow enough; the rest comes from its stores${magicFed ? ' and from magic' : ''}.`,
+         ]);
+     } else if (covered) {
+-      line = pickTrue(pick, [
++      line = pickTrue(rv, [
+         `${town} cannot feed itself: part of its food comes in ${route}.`,
+         `${town} grows less than it eats, and part of the difference arrives ${route}.`, // TAIL-DEFECON-D: a residual deficit stands
+         `${town} keeps order and pays its way, but it has to buy food to get through the year, and the food comes in ${route}.`,
+@@ -316,7 +317,7 @@ export function deriveViability(settlement) {
+     // list non-empty), so line 5 says what it USES is bought in. The four states: no marked need and nothing arriving, lines
+     // 1, 2, 3; no marked need and something arriving, 1 to 5 (all true together, one prints); a marked need and something
+     // arriving, 1, 4, 5; a marked need and nothing arriving, line 1 alone.
+-    summary: `VIABLE: ${pickAdmitted(pick, [
++    summary: `VIABLE: ${pickAdmitted(rv, [
+       `${town} feeds itself and pays its own way.`,
+       `${town} grows what it eats and makes what it needs, and owes no one for either.`,
+       `Nothing ${town} needs to get through the year has to come from outside.`,
+@@ -830,9 +831,8 @@ function pickAdmitted(pick, pool, ok, twin) {
+  * @param {string} twin @returns {string}
+  */
+ function pickTrue(pick, pool, ok, twin) {
+-  const at = Math.max(0, pool.indexOf(String(pick(pool))));
+-  for (let k = 0; k < pool.length; k++) { const j = (at + k) % pool.length; if (ok[j]) return pool[j]; }
+-  return twin || pool[at];
++  const admitted = pool.filter((_, j) => ok[j]);
++  return admitted.length ? String(pick(admitted)) : (twin || String(pick(pool)));
+ }
+ 
+ /**
+diff --git a/src/domain/display/stateProse/composeStateProse.js b/src/domain/display/stateProse/composeStateProse.js
+index bfebbaadf2..81ce10ba40 100644
+--- a/src/domain/display/stateProse/composeStateProse.js
++++ b/src/domain/display/stateProse/composeStateProse.js
+@@ -751,7 +751,8 @@ function drawConnective(connectives, relation, seat, blockId, spineKey, modifier
+   const list = bySeat ? bySeat[seat] : undefined;
+   if (!Array.isArray(list) || list.length === 0) return null;
+   const key = `${seed}::${blockId}::${spineKey}::joint::${modifierKey}`;
+-  const drawn = list.length === 1 || !seed ? 0 : hashKey(key) % list.length;
++  let drawn = 0; // D13 SCRATCH: the rendezvous over the list, the phrase its own id
++  if (list.length > 1 && seed) { let bh = -1; for (let i = 0; i < list.length; i += 1) { const h = hashKey(`${key}::${list[i]}`); if (h > bh) { bh = h; drawn = i; } } }
+   // CENSUS-1h unit 7 (R-AQ): the position-keyed channel, checked AFTER the modulus draw; a list
+   // with no declaration (all four today, `{colour}` by CENSUS-2e) returns the drawn position.
+   const declared = connectives === CONNECTIVES ? DOSSIER_CONNECTIVE_DECLARATIONS[relation]?.[seat] : undefined;
+diff --git a/src/kernel/proseHash.js b/src/kernel/proseHash.js
+index 14819cfb36..cd2e041f62 100644
+--- a/src/kernel/proseHash.js
++++ b/src/kernel/proseHash.js
+@@ -87,3 +87,21 @@ export function pickVariantMixed(pool, seed) {
+   if (pool.length === 1 || !seed) return pool[0];
+   return pool[mix32(fnv1a32(String(seed))) % pool.length];
+ }
++
++/**
++ * D13 SCRATCH MEASURE ONLY (never committed): the rendezvous pick. The pool member with the highest
++ * `mix32(fnv1a32(seed::id))`; ties to the earlier member. Falsy seed -> index 0, as `pickVariant`.
++ * @template T
++ * @param {readonly T[]} pool @param {string | number | null | undefined} seed @param {(x: T) => string} idOf
++ * @returns {T | undefined}
++ */
++export function pickRendezvous(pool, seed, idOf) {
++  if (!Array.isArray(pool) || pool.length === 0) return undefined;
++  if (pool.length === 1 || !seed) return pool[0];
++  let best = pool[0]; let bestH = mix32(fnv1a32(`${seed}::${idOf(best)}`));
++  for (let i = 1; i < pool.length; i += 1) {
++    const h = mix32(fnv1a32(`${seed}::${idOf(pool[i])}`));
++    if (h > bestH) { best = pool[i]; bestH = h; }
++  }
++  return best;
++}

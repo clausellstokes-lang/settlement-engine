@@ -1,0 +1,137 @@
+TOWN PAGE	src/domain/display/causeConjunctionContent.js:229	if	draw: (p) => p[h % p.length], facts, key: `${String(seedId ?? '')}::${keyStr}`,
+TOWN PAGE	src/domain/display/causeLifecycleVocabulary.js:159	if	? ((/** @type {number} */ (variant) % p.length) + p.length) % p.length
+TOWN PAGE	src/domain/display/defenseDisplay.js:678	withRingVantage	const drawn = ORGANIZED_RING_NOTES[hashKey(`${seed}::defenseDisplay:organizedRing`) % ORGANIZED_RING_NOTES.len
+TOWN PAGE	src/domain/display/dossierViewModel.js:834	for	for (let k = 0; k < pool.length; k++) { const j = (at + k) % pool.length; if (ok[j]) return pool[j]; }
+TOWN PAGE	src/domain/display/heraldCausalGrammar.js:67	pickCausal	return pool[avalanche32(fnv1a32(String(seed))) % pool.length];
+TOWN PAGE	src/domain/display/marketPrices.js:254	crierLineFor	draw: (p) => (seed ? p[fnv1a32(`${seed}::${tag}`) % p.length] : p[0]),
+TOWN PAGE	src/domain/display/settlementRumors.js:640	widenedPhrase	draw: (p) => p[avalanche32(fnv1a32(`${seed}::what::${key}`)) % p.length],
+TOWN PAGE	src/domain/display/settlementRumors.js:760	frameHeadline	draw: (p) => (seed ? p[fnv1a32(`${seed}::${band}`) % p.length] : p[0]),
+TOWN PAGE	src/domain/display/stateProse/composeStateProse.js:754	drawConnective	const drawn = list.length === 1 || !seed ? 0 : hashKey(key) % list.length;
+TOWN PAGE	src/domain/display/stateProse/stateProseKernel.js:542	drawVariant	if (bestVid === null) return eligible[avalanche32(fnv1a32(parent)) % eligible.length];
+TOWN PAGE	src/domain/display/stateProse/stateProseKernel.js:547	for	if (vid === null) return eligible[avalanche32(fnv1a32(parent)) % eligible.length];
+TOWN PAGE	src/domain/display/warAndRoadNames.js:91	pickLine	draw: (p) => p[seed ? fnv1a32(seed) % p.length : 0], key: seed || '', poolId, surface, drawKind: 'H',
+TOWN PAGE	src/domain/dossier/hookLines.js:272	createConflictHookDraw	draw: (p) => p[offset % p.length], facts, key: `${a}>${b}::${rawIssue}::${family}`,
+TOWN PAGE	src/domain/dossier/hookLines.js:292	foodGapHookLine	draw: (p) => p[fnv1a32(seed) % p.length], facts, key: seed,
+TOWN PAGE	src/domain/foodways.js:214	fedLineOf	const own = capital(frames[/** @type {{ frameIndex: number }} */ (read).frameIndex % frames.length]
+TOWN PAGE	src/domain/summary/tonightSheet.js:168	castWantOf	const line = pool.map((_, k) => pool[(start + k) % pool.length]).find((l) => castWantAdmits(l, house, noun, fa
+TOWN PAGE	src/domain/traditions/prose.js:51	pickLine	draw: (p) => p[seed ? fnv1a32(seed) % p.length : 0],
+TOWN PAGE	src/domain/traditions/traditionDescription.js:304	drawTurn	const free = [...pool.keys()].map((k) => pool[(start + k) % pool.length]).concat(again)
+TOWN PAGE	src/pdf/lib/headlines.js:53	for	return variants[(h >>> 0) % variants.length];
+not view-time (birth, stored)	src/data/cultureProfiles.js:695	for	const row = values[(at + k) % values.length];
+not view-time (birth, stored)	src/data/npcData.js:1685	pairProse	const said = closureFor(isTieIndex(variant) ? lines[tieIndexOf(variant) % lines.length]
+not view-time (birth, stored)	src/data/npcData.js:2636	for	for (let k = 1; k < pool.length; k += 1) { const next = pool[(at + k) % pool.length]; if (!deniesFlaw(next, fl
+not view-time (birth, stored)	src/data/npcData.js:2655	for	const next = pool[(at + k) % pool.length];
+not view-time (birth, stored)	src/domain/foodways.js:116	composeFoodwaysLine	const flavour = fitting.length ? fitting[offset % fitting.length] : '';
+not view-time (birth, stored)	src/domain/foodways.js:121	if	return claimless.length ? claimless[offset % claimless.length] : 'Meals follow the season and what the househo
+not view-time (birth, stored)	src/domain/foodways.js:127	if	draw: (p) => p[offset % p.length], facts, key: `foodways|${input.identity}`,
+not view-time (birth, stored)	src/domain/foodways.js:136	if	let pick = (offset + slot) % library.length;
+not view-time (birth, stored)	src/domain/foodways.js:137	if	for (let tries = 0; tries < library.length && used.has(String(lineText(library[pick]))); tries += 1) pick = (p
+not view-time (birth, stored)	src/generators/defenseGenerator.js:206	apportionTenths	for (let k = 0; left > 0 && order.length; k = (k + 1) % order.length, left -= 1) out[order[k][1]] += 1;
+not view-time (birth, stored)	src/generators/defenseGenerator.js:207	apportionTenths	for (let k = order.length - 1; left < 0 && order.length; k = (k + order.length - 1) % order.length, left += 1)
+not view-time (birth, stored)	src/generators/history/resourceEventAdmission.js:35	for	const e = list[(i + k) % list.length];
+not view-time (birth, stored)	src/generators/historyGenerator.js:1208	for	const row = pool[(i + k) % pool.length];
+not view-time (birth, stored)	src/generators/hookVariety.js:169	for	const row = pool[(start + k) % pool.length];
+not view-time (birth, stored)	src/generators/legacyGenerator.js:142	mundaneLegacyVoice	return pool[stableEventPick(ev) % pool.length];
+not view-time (birth, stored)	src/generators/narrative/foundingRowAdmits.js:251	for	const row = pool[(at + k) % pool.length];
+not view-time (birth, stored)	src/generators/narrative/foundingRowAdmits.js:310	for	const row = pool[(at + k) % pool.length];
+not view-time (birth, stored)	src/generators/narrative/foundingRowAdmits.js:385	for	const f = founders[(at + k) % founders.length];
+not view-time (birth, stored)	src/generators/narrative/settlementOriginProse.js:350	for	const i = (at + k) % pool.length;
+not view-time (birth, stored)	src/generators/neighbourGenerator.js:458	getMundaneLoreFactionLabel	const index = ((Number(pick) || 0) % pool.length + pool.length) % pool.length;
+not view-time (birth, stored)	src/generators/npc/factionLeaderSecret.js:245	for	const r = rows[(at + k) % rows.length];
+not view-time (birth, stored)	src/generators/npcGenerator.js:521	ownPoolHook	}; /** R2-CODE-A-2 (the cold list REVIEW-W2A-3, MEDIUM #676 #678 #968 #969): A SOLDIER'S LINE ON A HOLDER WHO 
+not view-time (birth, stored)	src/generators/people/dealingLinesOfTown.js:45	for	const line = rank < free.length ? free[rank] : lines[(rank - free.length) % lines.length];
+not view-time (birth, stored)	src/generators/people/goals.js:1095	withReserve	let walk = [...withReserve(own.map((_, k) => own[(at + 1 + k) % own.length])), ...families.flatMap((f) => with
+not view-time (birth, stored)	src/generators/people/goals.js:724	for	for (let k = 1; k < own.length; k += 1) { const c = own[(at + k) % own.length]; if (!c.refused) return c; }
+not view-time (birth, stored)	src/generators/people/goals.js:962	for	const order = group.map((_, k) => group[(at + k) % group.length]).filter((x) => !x.refused);
+not view-time (birth, stored)	src/generators/people/poolMap.js:396	nextAdmitted	for (let k = 1; k < rows.length; k += 1) { const r = rows[(at + k) % rows.length]; if (admits(table[keyOf(r)])
+not view-time (birth, stored)	src/generators/people/rareSecrets.js:447	for	const at = fnv1a32(`${seed}::${RARE_SECRETS_KEY}::${family}::${String(c.id)}::row`) % standing.length;
+not view-time (birth, stored)	src/generators/people/representatives.js:401	facts	const start = pool.length ? hookOffsetOf(key) % pool.length : 0;
+not view-time (birth, stored)	src/generators/people/representatives.js:403	facts	const row = pool[(start + i) % pool.length];
+not view-time (birth, stored)	src/generators/people/ties.js:254	temperOfTie	const rows = index < 0 ? [] : [archetype?.desc?.lines, archetype?.tension?.lines].filter((l) => Array.isArray(
+not view-time (birth, stored)	src/generators/power/conflicts.js:63	if	draw: (pool) => pool[seedHash % pool.length], facts, key: seedKey,
+not view-time (birth, stored)	src/generators/power/relationshipArchetypes.js:171	trustOfRow	const row = lines.length ? lines[i % lines.length] : null;
+not view-time (birth, stored)	src/generators/power/relationshipArchetypes.js:181	field	const row = lines.length ? lines[i % lines.length] : null;
+not view-time (birth, stored)	src/generators/power/relationshipArchetypes.js:267	createTieProseDraw	: named[(draw.base + used - size) % named.length];
+not view-time (birth, stored)	src/generators/safetyProfile.js:754	if	draw: (pool) => (seed ? pool[hashKey(`${seed}::safetyProfile:SMUGGLING_HOOKS`) % pool.length] : pool[0]),
+not view-time (birth, stored)	src/generators/safetyProfile.js:979	voiceOf	return seed ? pool[hashKey(`${seed}::safetyProfile:${poolId}`) % pool.length] : pool[0];
+not view-time (birth, stored)	src/generators/steps/resolveResources.js:225	categoryOf	const refill = pool[fnv1a32(`${rng.seed}::refill::${key}`) % pool.length];
+not-a-pick (UI keys/colour/rotation/deal/apportion)	src/components/AccountMenu.jsx:350	onMenuKey	rows[(move + rows.length) % rows.length].focus();
+not-a-pick (UI keys/colour/rotation/deal/apportion)	src/components/dossier/DossierGroupTabStrip.jsx:23	DossierGroupTabStrip	if (e.key === 'ArrowRight' || e.key === 'ArrowDown') j = (i + 1) % ids.length;
+not-a-pick (UI keys/colour/rotation/deal/apportion)	src/components/dossier/DossierGroupTabStrip.jsx:24	DossierGroupTabStrip	else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') j = (i - 1 + ids.length) % ids.length;
+not-a-pick (UI keys/colour/rotation/deal/apportion)	src/components/dossier/DossierTabStrip.jsx:34	DossierTabStrip	if (e.key === 'ArrowRight' || e.key === 'ArrowDown') j = (i + 1) % tabs.length;
+not-a-pick (UI keys/colour/rotation/deal/apportion)	src/components/dossier/DossierTabStrip.jsx:35	DossierTabStrip	else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') j = (i - 1 + tabs.length) % tabs.length;
+not-a-pick (UI keys/colour/rotation/deal/apportion)	src/components/new/SummaryTab.jsx:74	FactionBar	const c=FACTION_COLORS[i%FACTION_COLORS.length];
+not-a-pick (UI keys/colour/rotation/deal/apportion)	src/components/new/SummaryTab.jsx:82	FactionBar	const c=FACTION_COLORS[i%FACTION_COLORS.length];
+not-a-pick (UI keys/colour/rotation/deal/apportion)	src/components/new/tabs/PowerTab.jsx:480	PowerTab	const c = FACTION_COLORS[i % FACTION_COLORS.length];
+not-a-pick (UI keys/colour/rotation/deal/apportion)	src/components/new/tabs/power/PowerStrata.jsx:283	jumpToPower	const c = FACTION_COLORS[i % FACTION_COLORS.length];
+not-a-pick (UI keys/colour/rotation/deal/apportion)	src/components/new/tabs/power/PowerStrata.jsx:306	FactionRow	const c = FACTION_COLORS[i % FACTION_COLORS.length];
+not-a-pick (UI keys/colour/rotation/deal/apportion)	src/components/primitives/MobileTabStrip.jsx:88	onKeyDown	if (event.key === 'ArrowRight' || event.key === 'ArrowDown') j = (i + 1) % tabs.length;
+not-a-pick (UI keys/colour/rotation/deal/apportion)	src/components/primitives/MobileTabStrip.jsx:89	onKeyDown	else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') j = (i - 1 + tabs.length) % tabs.length;
+not-a-pick (UI keys/colour/rotation/deal/apportion)	src/domain/display/forceComposition.js:275	for	counts[remainders[i % remainders.length].type] += 1;
+not-a-pick (UI keys/colour/rotation/deal/apportion)	src/domain/dossier/powerSupport.js:426	for	const to = claimants[i % claimants.length].name;
+not-a-pick (UI keys/colour/rotation/deal/apportion)	src/domain/people/allegiance.js:421	for	const handler = handlers[i % handlers.length];
+not-a-pick (UI keys/colour/rotation/deal/apportion)	src/store/aiSlice.js:340	isCurrentRequest	rotIdx = (rotIdx + 1) % ROTATING_AI_PROGRESS.length;
+not-a-pick (UI keys/colour/rotation/deal/apportion)	src/store/aiSlice.js:628	isCurrentRequest	rotIdx = (rotIdx + 1) % ROTATING_AI_PROGRESS.length;
+not-a-pick (apportionment)	src/domain/worldPulse/warCoalitionSettlement.js:195	allocateExactUnits	for (let index = 0; residual > 0; index = (index + 1) % byRemainder.length) {
+not-a-pick (comment)	src/data/npcData.js:1632	for	// Object.entries().find: identity is load-bearing). `size` hands the pool length to the draw. GOALS-1 (GR3 fo
+not-a-pick (comment)	src/domain/display/heraldCausalGrammar.js:21	?	* even number of times holds it constant and `% pool.length` on a power-of-two
+not-a-pick (comment)	src/domain/display/newsVoice.js:80	for	* the pulse kernel. Selection is `variants[fnv(id) % variants.length]`, so a
+not-a-pick (comment)	src/domain/display/rumorFallbackPhrasePools.js:53	?	* ORDER IS LOAD-BEARING. Selection is `hash(seed) % pool.length` over
+not-a-pick (comment)	src/domain/display/rumorFallbackPhrasePools.js:888	?	* Selection is `hash(seed) % pool.length` and no pool CHANGES LENGTH here, so every
+not-a-pick (comment)	src/domain/display/rumorFallbackPhrasePoolsEvents.js:37	?	* ORDER IS LOAD-BEARING. Selection is `hash(seed) % pool.length` over
+not-a-pick (comment)	src/domain/display/rumorPhrasePools.js:25	?	* ORDER IS LOAD-BEARING. Selection is `hash(seed) % pool.length` over
+not-a-pick (comment)	src/domain/display/stateProse/stateProseKernel.js:493	stableVid	* eligible set, NOT `hash(parent) % eligible.length`. The two differ only in what an
+not-a-pick (comment)	src/domain/display/stateProse/stateProseKernel.js:50	?	*    rather than `% eligible.length`, so that appending a wording moves about a quarter of
+not-a-pick (comment)	src/domain/prose/entryWalker.js:43	?	* `eligible[avalanche32(fnv1a32(seed::blockId::poolKey)) % eligible.length]`, so a
+not-a-pick (comment)	src/domain/worldPulse/informationNews.js:39	?	* `fnv1a32(namespacedSeed) % eligible.length`, which aliases onto a parity class through the
+not-a-pick (comment)	src/generators/narrative/settlementOriginProse.js:30	?	* 3. NO POWER-OF-TWO POOL. `pickVariant` selects with `fnv1a32(key) % pool.length`,
+not-a-site (the pick kernel; callers counted)	src/kernel/proseHash.js:52	pickVariant	return pool[fnv1a32(String(seed)) % pool.length];
+not-a-site (the pick kernel; callers counted)	src/kernel/proseHash.js:88	pickVariantMixed	return pool[mix32(fnv1a32(String(seed))) % pool.length];
+outside the line	src/components/admin/AdminTrendsCharts.jsx:153	colorOf	const colorOf = (c, i) => (c === 'other' ? MUTED : PALETTE[i % PALETTE.length]);
+outside the line	src/components/admin/AdminTrendsCharts.jsx:218	BarList	<span style={{ display: 'block', height: '100%', width: `${(v / peak) * 100}%`, background: PALETTE[i % PALETT
+outside the line	src/components/admin/AdminTrendsPanel.jsx:238	applyPreset	color: PALETTE[i % PALETTE.length],
+outside the line	src/components/map/TerritoryLayer.jsx:112	tierOf	color: OWNER_COLORS[owner % OWNER_COLORS.length],
+outside the line	src/domain/display/chronicleReadModel.js:452	headlineFor	return pool[fnv1a32(`${tick}::${span}`) % pool.length];
+outside the line	src/domain/display/chroniclersLetter.js:412	for	const greeting = empty ? QUIET[fp % QUIET.length] : GREETINGS[fp % GREETINGS.length];
+outside the line	src/domain/display/chroniclersLetter.js:414	for	const closing = closingPool[fp % closingPool.length];
+outside the line	src/domain/display/discourseKernel.js:298	pick	return pool[fnv1a32(`${String(seedId ?? '')}::${key}`) % pool.length];
+outside the line	src/domain/display/guidanceNotes.js:172	noteKeyFor	return variants[h % variants.length];
+outside the line	src/domain/display/newsBody.js:61	pickBody	return pool[fnv1a32(`${seed}::${cell}`) % pool.length];
+outside the line	src/domain/display/newsVoice.js:702	newsVoiceLine	return variants[h % variants.length];
+outside the line	src/domain/interior/interiorModel.js:324	for	const fkind = vocab[(i + rot) % vocab.length];
+outside the line	src/domain/realmMap/realmPlateRenderer.js:188	for	const a = raw[(i - 1 + raw.length) % raw.length];
+outside the line	src/domain/realmMap/realmPlateRenderer.js:190	for	const c = raw[(i + 1) % raw.length];
+outside the line	src/domain/resourceSites.js:208	for	const bearing = RESOURCE_SITE_BEARINGS[mixedHash32(token) % RESOURCE_SITE_BEARINGS.length];
+outside the line	src/domain/resourceSites.js:211	for	const band = admissible[mixedHash32(`${token}|band`) % admissible.length];
+outside the line	src/domain/townCartography/cartographyBuildings.js:487	for	const candidate = siblings[(at + k - 1 + step) % siblings.length];
+outside the line	src/domain/townCartography/cartographyDefenses.js:168	for	const b = ring[(segment + 1) % ring.length];
+outside the line	src/domain/townCartography/cartographyParcels.js:149	if	const offset = (Number.isFinite(stamp) ? stamp : 0) % candidates.length;
+outside the line	src/domain/townCartography/cartographyParcels.js:97	for	const b = ward.polygon[(edge + 1) % ward.polygon.length];
+outside the line	src/domain/townCartography/cartographyWards.js:82	for	const b = polygon[(index + 1) % polygon.length];
+outside the line	src/domain/townCartography/cartographyWards.js:83	for	const c = polygon[(index + 2) % polygon.length];
+outside the line	src/domain/townMap/arch/conditionParams.js:133	for	const asset = spec.statVocab[i % spec.statVocab.length];
+outside the line	src/domain/townMap/asymmetrySources.js:154	if	if (hint === 'gate' && gatePoints.length > 0) return { x: gatePoints[digit % gatePoints.length].x, y: gatePoin
+outside the line	src/domain/townScene/buildingProfiles.js:397	buildSceneBuildingProfile	% COMMONS_SHAPE_KINDS.length;
+outside the line	src/domain/townScene/sceneBuildingFabric.js:122	for	const row = remainders[i % remainders.length];
+outside the line	src/domain/townScene/sceneBuildingFabric.js:174	if	const shift = shifts[layer % shifts.length];
+outside the line	src/domain/townScene/sceneGeometryTemplates.js:189	for	const next = directions[(index + 1) % directions.length];
+outside the line	src/domain/undercity/monotoneComponents.js:345	seedPick	return admissible[avalanche32(fnv1a32(token)) % admissible.length];
+outside the line	src/domain/undercity/sewerDerivation.js:451	deriveWells	anchor: served[Math.floor(unitDraw(`${identity}|well-anchor`) * served.length) % served.length],
+outside the line	src/domain/undercity/sewerDerivation.js:461	if	anchor: served[Math.floor(unitDraw(`${identity}|cistern-anchor`) * served.length) % served.length],
+outside the line	src/domain/undercity/staticComponents.js:207	seedPick	return admissible[avalanche32(fnv1a32(token)) % admissible.length];
+outside the line	src/domain/worldPulse/brokerageServicesRules.js:265	nameFor	const act = available[(fnv1a32(settlementId) + tick) % available.length];
+outside the line	src/domain/worldPulse/commercialReasonsNews.js:197	for	const templateIndex = eligible[fnv1a32(String(seed)) % eligible.length];
+outside the line	src/domain/worldPulse/envoyChanceMeeting.js:614	for	const picked = eligible[pickRoll % eligible.length];
+outside the line	src/domain/worldPulse/eventProse.js:1028	envoyReceipt	const templateIndex = namespacedSeed ? eligible[fnv1a32(namespacedSeed) % eligible.length] : eligible[0];
+outside the line	src/domain/worldPulse/eventProse.js:474	dispositionReceipt	const templateIndex = namespacedSeed ? eligible[fnv1a32(namespacedSeed) % eligible.length] : eligible[0];
+outside the line	src/domain/worldPulse/eventProse.js:569	lineageReceipt	const templateIndex = namespacedSeed ? eligible[fnv1a32(namespacedSeed) % eligible.length] : eligible[0];
+outside the line	src/domain/worldPulse/eventProse.js:683	warCostReceipt	const templateIndex = namespacedSeed ? eligible[fnv1a32(namespacedSeed) % eligible.length] : eligible[0];
+outside the line	src/domain/worldPulse/eventProse.js:76	pickLineWithFamily	const templateIndex = seed ? fnv1a32(seed) % pool.length : 0;
+outside the line	src/domain/worldPulse/eventProse.js:799	warRulingReceipt	const templateIndex = namespacedSeed ? eligible[fnv1a32(namespacedSeed) % eligible.length] : eligible[0];
+outside the line	src/domain/worldPulse/eventProse.js:913	warCoalitionReceipt	const templateIndex = namespacedSeed ? eligible[fnv1a32(namespacedSeed) % eligible.length] : eligible[0];
+outside the line	src/domain/worldPulse/factionCompetition.js:902	institutionCandidate	const target = institutions[Math.floor((entry.index + tick) % institutions.length)];
+outside the line	src/domain/worldPulse/marketNews.js:119	for	const templateIndex = eligible[fnv1a32(String(seed)) % eligible.length];
+outside the line	src/domain/worldPulse/npcCirculation.js:374	siblingFactionFor	const start = fnv1a32(key) % SIBLING_BRANCH_WORDS.length;
+outside the line	src/domain/worldPulse/npcCirculation.js:376	for	const candidate = `${SIBLING_BRANCH_WORDS[(start + i) % SIBLING_BRANCH_WORDS.length]} ${parent}`;
+outside the line	src/domain/worldPulse/proseSelection.js:97	pickLine	const idx = seed ? fnv1a32(seed) % pool.length : 0;
+outside the line	src/domain/worldPulse/sovereigntyNews.js:335	sovereigntyReceipt	const templateIndex = namespacedSeed ? eligible[fnv1a32(namespacedSeed) % eligible.length] : eligible[0];
