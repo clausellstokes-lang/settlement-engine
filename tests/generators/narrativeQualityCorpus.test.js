@@ -622,7 +622,7 @@ describe('relationship archetype pools hold eight variants each (GS-1)', () => {
     for (const key of keys) {
       for (const field of ['desc', 'tension']) {
         const pool = STRESS_ECONOMIC_EFFECTS[key][field];
-        expect(pool.size, `${key}.${field} pool size`).toBe(8);
+        expect(pool.head ?? pool.size, `${key}.${field} pool size`).toBe(8);
         const lines = Array.from({ length: 8 }, (_, index) => masked(pool(A, B, index)));
         expect(new Set(lines).size, `${key}.${field} has a duplicated variant`).toBe(8);
       }
