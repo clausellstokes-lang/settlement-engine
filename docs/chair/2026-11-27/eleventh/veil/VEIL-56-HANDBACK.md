@@ -68,3 +68,9 @@ THE NEXT COMMAND: read each child's first report as it lands; relay the chair's 
   NOT VEIL-52's narrowing). OWED BEFORE "TIP? U3R": the writer-oracle at every door and the link, the drift plant red first, (d) and narrated
   copies, the clean count restated. RELAYED to U3R as "PS-RULE". U3R, U45, PG each sent a first line (seated on 08a9dd8fb, dbd4cd9e5,
   04fa8d60e); MC's first line not yet in.
+- 2026-11-27T23:34:11Z: U45's FIRST ACT (`u45/MISSING.md` on `lane/veil-56-2026-11-27-u45-docs` ef7d7ac0a; PLAUSIBLE to me, its message): 15 lost
+  steps + two helper branches to rebuild (9 small, 4 medium, 2 large); every instrument survives. A5's TRIAL on a scratch branch: the base
+  is 1,669 commits behind A5's; 9cbf5cf16 conflicts (the base lacks `settleSeatHolderToRecord` and `settleStandingToLegitimacy`); A5's
+  tests 37/37 on the scratch. MY RULING TO U45: scratch births count as THE BASE's MEASURE only (tails served 0, `dmStanding` served 0,
+  fail-closed count 0 or a finding); the committed proof is the four plants. OWED AT THE JOIN: the field cut on real births on the re-born
+  pools; A5's merge read against the two settlers the base lacks.
