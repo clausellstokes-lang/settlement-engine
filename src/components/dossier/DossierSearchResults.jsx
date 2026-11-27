@@ -121,7 +121,7 @@ const RENDERERS = Object.freeze({
     Component: HistoryEventCard,
     props: (o, ctx, ui) => ({ evt: o.raw, h: ctx.history, isExp: ui.open, onToggle: ui.toggle }),
   },
-  tension: { Component: TensionRow, props: (o) => ({ t: o.raw }) },
+  tension: { Component: TensionRow, props: (o, ctx) => ({ t: o.raw, settlement: ctx.settlement }) }, // R6: the row prints the tension's description as the tab does
   // TRAD-2 unit 2: the description (and, on a shared page, the drawn calendar line) the search indexed for this view's
   // audience, printed under the row as the tab prints it (dossierSearch.js :: traditionsOf).
   tradition: {

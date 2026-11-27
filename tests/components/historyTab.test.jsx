@@ -264,3 +264,35 @@ describe('the print history chapter marks the same events (X-14b, chair item 3)'
     expectAbsentWithAnchor(text, 'Plot hooks', 'Still relevant today', 'the print hooks kicker');
   });
 });
+
+// R6 (RULING-R, the eleventh chair, 2026-11-27): the resource-scarcity tension's stored words name no good ("A critical
+// resource …"), while the Economics tab names the one the record holds short (the DS-ECO shortfall line's reader,
+// economyStateProse.js :: criticalImportRow). Where the record names the good, the tension prints a named twin; the
+// stored string stays; where it names none, the line prints as stored.
+describe('HistoryTab — the scarcity tension names the good the record holds short (R6)', () => {
+  const PAST = 'A critical resource became scarce, causing hoarding and price gouging';
+  const LIVE = 'A critical resource is running short, and some are hoarding it while others cannot pay the prices asked';
+  const townWith = (description, imports) => ({
+    ...settlementWith([]),
+    history: { ...settlementWith([]).history, currentTensions: [{ type: 'resource_scarcity', description, factions: [], severity: ['minor'] }] },
+    ...(imports ? { resourceAnalysis: { imports } } : {}),
+  });
+  const SAWMILL = { critical: ['timber', 'stone'], reasons: { timber: 'Required by Sawmill but not available in Plains terrain', stone: 'Plains terrain cannot produce this locally' } };
+  it('both stored forms print the good by name, and the record keeps its words', () => {
+    for (const [stored, shown] of [
+      [PAST, 'A critical resource, timber, became scarce, causing hoarding and price gouging'],
+      [LIVE, 'A critical resource, timber, is running short, and some are hoarding it while others cannot pay the prices asked'],
+    ]) {
+      const s = townWith(stored, SAWMILL);
+      render(<HistoryTab settlement={s} />);
+      expect(screen.getByText(shown)).toBeTruthy();
+      expectAbsentWithAnchor(document.body.textContent || '', stored, shown);
+      expect(s.history.currentTensions[0].description).toBe(stored);
+      cleanup();
+    }
+  });
+  it('where the record names no short good, the stored words print as they are', () => {
+    render(<HistoryTab settlement={townWith(PAST, null)} />);
+    expect(screen.getByText(PAST)).toBeTruthy();
+  });
+});

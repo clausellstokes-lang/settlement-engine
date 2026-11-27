@@ -496,7 +496,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
           <div key={i} style={{display:'flex',gap:8,marginBottom:6,paddingBottom:6,borderBottom:i<(hist.currentTensions?.length||0)-1||(r.conflicts||[]).length>0?'1px solid #e8d080':'none'}}>
             <span style={{fontSize:FS.sm,flexShrink:0,marginTop:1,color:swatch['#B8860B']}}>▸</span>
             <div>
-              <p style={{fontSize:proseFontSize(FS.md,mobile),color:swatch.inkMag2,lineHeight:1.45,margin:0}}>{typeof t==='object'?t.description:t}</p>
+              <p style={{fontSize:proseFontSize(FS.md,mobile),color:swatch.inkMag2,lineHeight:1.45,margin:0}}>{typeof t==='object'?tensionDescriptionShown(r,t):t}</p>
               {t.factions?.length>0&&<div style={{display:'flex',gap:4,marginTop:3,flexWrap:'wrap'}}>
                 {t.factions.map((f,j)=><span key={j} style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:600,color:swatch['#7A5010'],background:swatch['#F5E8C0'],padding:'0 5px'}}>{f}</span>)}
               </div>}
@@ -626,3 +626,4 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
 
 export default React.memo(OverviewTab);
 import { scoresAsShown } from '../../../domain/facts/beastsReadiness.js'; // P9 (RULING G22): the scores as printed (the beasts grade read against the need); at the end of the file, so no cited line moves
+import { tensionDescriptionShown } from '../../../domain/display/tensionDescriptionShown.js'; // R6 (RULING-R, the eleventh chair): the scarcity tension names its good; at the end of the file, so no cited line moves
