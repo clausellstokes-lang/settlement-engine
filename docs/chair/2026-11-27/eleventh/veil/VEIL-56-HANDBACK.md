@@ -106,3 +106,11 @@ THE NEXT COMMAND: read each child's first report as it lands; relay the chair's 
   "GO PG". PLAUSIBLE, NOT MEASURED, FOR PG's RESUMPTION: a Defense sentence ("What goes wrong at <town> goes wrong one thing at a time ...")
   printed from an ABSENT crime list on 2 towns; the list is absent BY DESIGN on default-veil pages, so it may be a wrong line on real shares:
   measure it there first.
+- 2026-11-27T23:53:56Z: U3R (code `-door2-wip` 5ab9caeb7, WIP, pushed): MEASURE (A) CONFIRMED on this account (tables byte-identical to VEIL-52's);
+  662a9c207 re-proved (red 6 of 7, green 7 of 7). I ACCEPTED the orphan rule on EVERY public read, the link included (one spelling; 0 clean
+  copies withheld on live sources; a listed change of the link's read, one arm at the link; told the chair). A RULE ASKED OF THE CHAIR (V28
+  (6)): N84 (d)'s measure (`u3r/N84D-CHRONICLE-REKEY.md`): doors-3's `_gallery_doors_chronicle` on the R4-IDS chain withholds 140 of 140
+  entries naming a SHOWN person (`gone_people` compares stored ids with re-keyed ids); 128 served with the ids put back. MY RECOMMENDATION:
+  taken as it fails closed in unit 3, the loss listed; the true rule (stored ids before the re-key, never by name) built once on unit 4's
+  five-argument `_gallery_veil` after both units merge. U3R HOLDS THE CHRONICLE, measures (raw town as oracle: served / withheld; any served
+  entry naming a withheld thing or carrying a stored id; what 211's member serves today), then A2, A3, B.
