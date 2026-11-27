@@ -127,3 +127,26 @@ See section 4, newest last.
   on the live database, a credential, a permission setting, or the final signings (goldens, size budgets, tuning numbers):
   each is asked in its own words at its hour (the standard's rule 17), and anything a permission check refuses is reported,
   never routed round.
+
+## V5 (16:37 UTC on 2026-11-27): THE OWNER: "Feel free to make children sessions"; TRANSPORT PUSHED; THE FOUR-WAY PRE-RUN OF POINT 120's SOURCE COMMIT STARTED
+- HIS WORDS, VERBATIM (about 16:14 UTC): "Feel free to make children sessions". WHY IT MATTERS: this machine has ONE test gate
+  and four cores (load 13 at 16:31 UTC with four seats on it; `tests/domain` alone had held the gate 25 minutes).
+- PUSHED AS TRANSPORT (the hook let run each time): `lane/stack-120-owed-wip-2026-11-27` at c1dd12135;
+  `lane/stack-120-d13-wip-2026-11-27` at df0401af6 (step 3: the source change whole; the builder's later commits are
+  tests). THE RECORD is pushed to `lane/chair-2026-11-08` at every entry from now on.
+- **E8, THE SHARD RUNNER:** a child session on the cheaper tier at medium effort that runs ONE shard of a vitest run on ONE
+  exact commit, lists the failing tests by name (file, whole title, first message line), commits the two result files on
+  top of that commit at `docs/chair/2026-11-27/eleventh/shards/<LABEL>/<k>-of-<n>/` and pushes the branch
+  `lane/shard-<label>-<k>of<n>-2026-11-27` (transport only, never merged). Template `prompts/TEMPLATE-SHARD-RUNNER.txt`;
+  `shards/render.sh` fills it; the rendered prompts are kept in `shards/prompts/`; a child's first message only points at
+  its prompt on this branch. It judges nothing: the chair or a builder sorts its list.
+- THE PRE-RUN "PRE120" (the whole suite on df0401af6 in four shards): session_01FE9mEupamfS4E6NusGuxsz (1/4),
+  session_01FE9mExDNXYRJtQXW9MZH4X (2/4), session_01FE9mEvd8izCmWeTqbQX6hm (3/4), session_01FE9mEwk4UASe5AMnH1k4MA (4/4).
+  WHAT IT IS FOR: every test OUTSIDE the builder's seven directories that pins a line the pick moved, and every stored
+  figure that follows the pages, is named NOW and goes to D13-120R before the landing, not after its wide gate. IT IS NOT
+  the landing's gate (that runs on the joined tip, in shards the same way).
+- TAIL-121 TOLD (ruling 121-0, by message): its cost run (B) is the children's: it commits its scratch build on the local
+  branch `lane/scratch-121-costbuild-2026-11-27` and writes `landing/121/tail/COSTBUILD.txt`; the chair pushes it and
+  starts three shards on it (the eight directories), then continues the builder with the failing names.
+- PLANNED WITH CHILDREN: the independent reader of point 120 in its own container (top tier, max effort) as soon as both
+  of its branches are finished and pushed; the landing's wide gate in four shards.
