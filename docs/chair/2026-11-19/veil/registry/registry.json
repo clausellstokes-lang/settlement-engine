@@ -195,6 +195,11 @@
     "by": "src/generators/historyGenerator.js :: buildHistoricalEvent"
   },
   {
+    "path": "^history\\.currentTensions\\[\\]\\.factions\\[\\]$",
+    "rule": "withhold",
+    "by": "src/generators/historyGenerator.js :: generateHistory"
+  },
+  {
     "path": "^history\\.(historicalEvents|eventsTimeline)\\[\\] \\(only in A\\)$",
     "rule": "withhold",
     "by": "src/generators/historyGenerator.js :: buildHistoricalEvent"
@@ -260,6 +265,11 @@
     "by": "src/generators/power/rulingStructure.js :: generatePowerStructure"
   },
   {
+    "path": "^powerStructure\\.factions\\[\\]\\.desc$",
+    "rule": "withhold",
+    "by": "src/generators/power/rulingStructure.js :: generatePowerStructure"
+  },
+  {
     "path": "^powerStructure\\.factions\\[\\]\\.power$",
     "rule": "recompose",
     "by": "src/generators/factionDynamics.js :: applyLegitimacyMultipliers"
@@ -271,6 +281,11 @@
   },
   {
     "path": "^powerStructure\\.factionRelationships\\[\\] \\(only in A\\)$",
+    "rule": "withhold",
+    "by": "src/generators/factionDynamics.js :: withCaptureRelations"
+  },
+  {
+    "path": "^powerStructure\\.factionRelationships\\[\\]\\.dmNote$",
     "rule": "withhold",
     "by": "src/generators/factionDynamics.js :: withCaptureRelations"
   },

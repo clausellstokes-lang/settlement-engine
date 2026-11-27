@@ -11,6 +11,7 @@
     "^economicState\\.safetyProfile\\.safetyLabel$",
     "^history\\.founding\\.overcoming$",
     "^powerStructure\\.factions\\[\\] \\(only in B\\)$",
+    "^powerStructure\\.factions\\[\\]\\.powerLabel$",
     "^powerStructure\\.factionRelationships\\[\\] \\(only in B\\)$",
     "^powerStructure\\.publicLegitimacy\\.label$",
     "^powerStructure\\.publicLegitimacy\\.score$",
