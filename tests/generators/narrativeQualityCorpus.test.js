@@ -477,12 +477,13 @@ describe('relationship tie prose is drawn without replacement per settlement (GS
   /** The line with both names masked: two ties sharing it share a template. */
   const templateOf = (text, nameA, nameB) =>
     longestFirst([nameA, nameB]).reduce((out, name) => out.split(name).join('X'), String(text));
-  /** How many distinct templates a field's pool renders, read index by index (the pool's own `size`). */
+  /** How many distinct templates a field's pool renders, read index by index over the pool's drawn head (`head`; G77: the
+   * tie RESERVE past a frozen head of eight is drawn only past the head, so a pool without one reads its whole `size`). */
   const poolSize = (key, field) => {
     const pool = STRESS_ECONOMIC_EFFECTS[key][field];
     const a = { name: 'Ravel Probe' };
     const b = { name: 'Sorn Probe' };
-    return new Set(Array.from({ length: pool.size }, (_, index) => templateOf(pool(a, b, index), a.name, b.name))).size;
+    return new Set(Array.from({ length: pool.head ?? pool.size }, (_, index) => templateOf(pool(a, b, index), a.name, b.name))).size;
   };
   const institutions = [
     { name: 'Town watch', category: 'Defense', tags: ['defense'] },
@@ -553,7 +554,7 @@ describe('relationship tie prose is drawn without replacement per settlement (GS
     const pool = STRESS_ECONOMIC_EFFECTS[key].tension;
     const a = { name: 'Ravel Probe' };
     const b = { name: 'Sorn Probe' };
-    return Array.from({ length: pool.size }, (_, index) => pool(a, b, index))
+    return Array.from({ length: pool.head ?? pool.size }, (_, index) => pool(a, b, index))
       .some(line => line.includes(a.name) && line.includes(b.name));
   };
 
