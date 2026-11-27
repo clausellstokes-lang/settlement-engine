@@ -184,9 +184,18 @@ export function importsAsPrinted(settlement) {
     // gap rows `crisisStoppedRow.js :: housesOnImportedInput` reads, matched as an import is (`needMetBy`), no second matcher.
     // BAR8 J-INCOME item 4 (11e.offer, the need list's half): a good a live house on the page deals in (`NEED_DEALT_ROWS`) is
     // not "needed, and not brought in", save the failed venture's own material (`supplyStory.js :: ventureOnPage`).
+    // RULING-R (the eleventh chair, 2026-11-27), R8 luxury: a need the place's OWN resources supply (a commodity the Resources
+    // tab lists for it, `commoditiesShown.js :: commoditiesShown`, not marked failed) is not printed as unmet, matched as an
+    // import is (`needMetBy`): "luxury goods" beside the "luxury" of its gemstone deposits or precious-metal veins.
     needed: kept.filter((x) => !fromTrade.has(x) && !arriving.some((imp) => needMetBy(x, imp)) && !made.some((m) => needMetBy(x, m))
-      && !importedByGapRow(settlement).some((g) => needMetBy(x, g)) && !dealtInHere(settlement).some((g) => needMetBy(x, g))),
+      && !importedByGapRow(settlement).some((g) => needMetBy(x, g)) && !dealtInHere(settlement).some((g) => needMetBy(x, g))
+      && !ownCommodities(settlement).some((c) => needMetBy(x, c))),
   };
+}
+
+/** RULING-R (R8 luxury): the commodities the page lists for the place's own resources, failed ones left out. @param {unknown} settlement @returns {string[]} */
+function ownCommodities(settlement) {
+  return commoditiesShown(settlement).filter((c) => !c.failed).map((c) => c.label);
 }
 
 /**
@@ -726,7 +735,7 @@ export function exportsAsPrinted(settlement) {
     .map(String);
 }
 import { chainCrisisStateShown, failedGroundsOf } from './chainStateShown.js';
-import { failedFoodGoodsOf } from './commoditiesShown.js'; // BAR5-FOOD (L3.failedFood)
+import { failedFoodGoodsOf, commoditiesShown } from './commoditiesShown.js'; // BAR5-FOOD (L3.failedFood); RULING-R (R8 luxury): the place's own commodities
 
 /**
  * THE CROP A SCARCE HARVEST DENIES IS NOT SENT OUT (SEAM-ECON item 1, LAW 8's 8c.export; the chair's BRIEF-BAR6-SEAM, 2026-11-17;
