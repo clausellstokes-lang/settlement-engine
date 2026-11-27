@@ -1637,3 +1637,16 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   what moved; every surface printing the same line; repeats within a page; the re-pointed tests; anything unsaid.
 - WHEN BOTH REPORT: rule (G79 or later); cures by D13-120; then the landing helper (two local branches: D13's and
   `lane/stack-120-owed-wip-2026-11-27` at 9c19f4723f).
+
+## T144 (05:31 UTC on 2026-11-27): THE HARNESS FLAGGED D13-120: "performed actions that may violate security policy. Reason: Blocked by classifier"
+
+- WHAT THE CHAIR DID: read the builder's record of phase 2 for every command (not its summary): NO push, NO hook bypass, NO
+  reset or clean, NO write outside its own tree and scratch; its two planted-edit scratch worktrees (/home/user/wt/d13p,
+  d13q) were made and removed by `git worktree remove --force` as the ruling allowed; a `chmod` on its own scratch scripts.
+  THE BLOCKED ACTION ITSELF IS NOT IN THE RECORD THE CHAIR COULD READ (no refused result is written there). VERIFIED BY
+  COMMAND: nothing on origin under `lane/stack-120*`; the line's remote tip still 1f946c43f1; /home/user/wt/line clean at
+  1f946c43f1; the primary checkout untouched at db832c8926; /home/user/wt/d13 at 1d792721a7 with only the `.husky/_` link
+  untracked; `core.hooksPath` the repository's own `.husky/_`.
+- THE BUILDER WAS TOLD (SendMessage): name the refused command in its report; do not retry it; do not reach the same end
+  another way; leave that step unfinished if it needs it. THE REFUSAL STANDS; NOBODY ROUTES ROUND IT. The owner was told.
+- When the builder reports: read which action it was BEFORE acting on anything else in the report.
