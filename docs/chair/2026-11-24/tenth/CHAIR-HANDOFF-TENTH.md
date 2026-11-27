@@ -1622,3 +1622,18 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
 - WATCH AT THE LANDING: `readerShapeResolver` "pulse-like" (264 against 256 in the builder's whole lint run; green alone on
   the line's tree and on CI): the helper's whole `tests/lint` decides.
 - D13-120 still in phase 2 (not reported). OWED-CURE (a0ae4ceb56c215c3c) is finished.
+
+## T143 (05:29 UTC on 2026-11-27): POINT 120: THE SECOND READER STARTED ON THE BUILT CODE; THE CHAIR HAS READ STEPS 1 TO 4
+
+- D13-120 (a16f77d1000cac948; /home/user/wt/d13) has committed steps 1 to 6 (80841fe6fe the helper `kernel/proseHash.js ::
+  pickRendezvous`; c68e64fb7c Daily Life; f4ad0269bf the viability lines with ids NV, IC, IU, DC, DL, DG, DN, SS; 1ceaf49e6c
+  the connectives; 4713d03b3b the walker, its baseline and `scripts/stable-pick-ids-door.mjs`; 1d792721a7 the re-pointed
+  tests) and is in its proof and gates; NOT YET REPORTED.
+- THE CHAIR READ the source diff of steps 1 to 4 (six files, 151 lines added, 48 removed): nothing to rule against so far;
+  NOT yet read: the walker and its door (step 5), the re-pointed tests (step 6).
+- THE SECOND READER (agent a11860ef534ef1300; brief `prompts/START-READER-120.txt`; scratch `$S/reader8/`; not told the
+  chair's view) was started EARLY, on the tip 1d792721a7, to save the hour; it re-reads the log before it reports. Its
+  nine questions: the helper; the admitted sets unchanged; the ids and the walker; the bar by its own planted edits;
+  what moved; every surface printing the same line; repeats within a page; the re-pointed tests; anything unsaid.
+- WHEN BOTH REPORT: rule (G79 or later); cures by D13-120; then the landing helper (two local branches: D13's and
+  `lane/stack-120-owed-wip-2026-11-27` at 9c19f4723f).
