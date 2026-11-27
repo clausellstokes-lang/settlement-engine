@@ -801,8 +801,9 @@ describe('TRAD-4 UNIT 7 (1): the dead\'s event named by a hidden house\'s bare f
   });
   const deadRites = (s) => shownTraditionsOf(s, []).recs.filter((r) => r.coreMotif?.element === 'the-dead' && !(/\.0$/.test(String(r.id)) && r.foundedYear === 1));
   const readerTexts = (s) => JSON.stringify(deadRites(s).map((r) => describeTradition(r, s, { audience: 'reader' })?.text ?? ''));
-  const RECALL = 'in memory of the great fire, 2 years ago';
-  const recalls = (s) => sharedTraditionRowsOf(s).some((r) => r.text.includes(RECALL));
+  // any of the three dead frames (point 121: the frame is the rendezvous pick; the event and its year are what is recalled)
+  const RECALL = /in memory of the great fire(?: since then)?, 2 years ago/;
+  const recalls = (s) => sharedTraditionRowsOf(s).some((r) => RECALL.test(r.text));
 
   it('NOT VACUOUS: born towns of three tiers each hold a hideable house and a rite of the dead, and the plant keeps the house hideable', () => {
     expect(new Set(SPECS.map(([tier]) => tier)).size).toBe(3);

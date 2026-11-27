@@ -18,7 +18,7 @@ import { factsOf } from '../../src/domain/facts/factsOf.js';
 import { declarationAdmits, declarationOf } from '../../src/domain/facts/factVocabulary.js';
 import { ACT_LEADS, ELEMENT_GLOSS, CRISIS_SCOPED_ACTS, CRISIS_SCOPED_ELEMENTS } from '../../src/data/traditionDescriptionTable.js';
 import * as DESCRIPTION_TABLE from '../../src/data/traditionDescriptionTable.js';
-import { pickVariantMixed } from '../../src/kernel/proseHash.js';
+import { pickRendezvous } from '../../src/kernel/proseHash.js';
 
 /** The keeper's "too" wordings (TRAD-4 unit 10, the chair's 17:55 ruling): read off the table's namespace, {} before it. */
 const KEEPER_FRAMES_TOO = /** @type {Record<string, Array<{ text: string }>>} */ (DESCRIPTION_TABLE.KEEPER_FRAMES_TOO || {});
@@ -97,7 +97,7 @@ describe('describeTradition — what is done (the short form), and nothing inven
     const d = describeTradition(rite(2, 'long-sun', 'feast'), t, { audience: 'owner' });
     expect(d).not.toBeNull();
     expect(sentences(d.text)).toHaveLength(1);
-    expect(d.text).toMatch(/long days of high summer/);
+    expect(d.text).toMatch(/honours the long summer sun/); // point 121: the gloss this rite now draws (the rendezvous)
     expect(d.named).toEqual({ houses: [], persons: [], powers: [], events: [] });
   });
 
@@ -172,7 +172,7 @@ describe('describeTradition — a cause only on the two marked pairings (CTR2)',
       { name: 'The Purge', templateType: 'infiltration_fear', yearsAgo: 3 },
     ] } });
     const d = describeTradition(rite(1, 'the-dead', 'vigil'), t, { audience: 'owner' });
-    expect(d.text).toMatch(/the Flood, 12 years ago/);
+    expect(d.text).toMatch(/in memory of the Flood since then, 12 years ago/); // point 121: the dead frame this rite now draws
     // anchored: this arm asserts this same text carries the Flood by name and year
     expect(d.text).not.toMatch(/Purge|Great Fire/);
   });
@@ -626,7 +626,7 @@ describe('describeTradition — derived at render: pure, deterministic, writes n
     expect(byId.size).toBeGreaterThan(1);
   });
 
-  it('THE LEAF\'S PICK IS THE MIXED PICK (TRAD-4 unit 11 addendum; kernel/proseHash.js :: pickVariantMixed): a calm feast rite alone reads, over 24 town seeds, the lead pickVariantMixed takes on the leaf\'s key', () => {
+  it('THE LEAF\'S PICK IS THE RENDEZVOUS PICK (TRAD-4 unit 11 addendum; point 121, kernel/proseHash.js :: pickRendezvous): a calm feast rite alone reads, over 24 town seeds, the lead pickRendezvous takes on the leaf\'s key and each line\'s id', () => {
     const rec = rite(2, 'long-sun', 'feast');
     const domain = ACT_LEADS.feast.filter((l) => !l.twinOf);
     const off = [];
@@ -635,8 +635,8 @@ describe('describeTradition — derived at render: pure, deterministic, writes n
       const seed = `mixed-${i}`;
       const lead = s1OfText(describeTradition(rec, town({ _seed: seed }), { audience: 'owner' }).text);
       leads.add(lead);
-      const want = pickVariantMixed(domain, `${seed}::${rec.id}#done`).text;
-      if (lead !== want) off.push(`${seed}: read "${lead}", the mixed pick "${want}"`);
+      const want = pickRendezvous(domain, `${seed}::${rec.id}#done`, (l) => l.id)?.text;
+      if (lead !== want) off.push(`${seed}: read "${lead}", the rendezvous pick "${want}"`);
     }
     expect(leads.size).toBeGreaterThan(1); // not vacuous: the seeds reach more than one lead
     expect(off).toEqual([]);

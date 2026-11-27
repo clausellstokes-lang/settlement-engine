@@ -20,7 +20,8 @@
  * CAN HIDE: not only what it names, every word it CHOOSES. The reader's text is composed over `readerView` (below): the
  * record less every row of a class the gallery veil withholds whole or the reader's wall never names (by the class, never
  * by name, never by today's settings). THE CENSUS of the clauses that rank, count, choose or exclude, and their rows:
- *   S1 lead and gloss   CHOOSE a line: `pickVariantMixed` on the key (identity, not a row), then `drawDeclared`'s admission over
+ *   S1 lead and gloss   CHOOSE a line: the door's ranked mode on the key (identity, not a row) and each line's own id, the
+ *                       first line `drawDeclared` admits (or whose twin it admits) over
  *                       `factsOf(view)`. The table's needs read `market` and `institution: smith` (the view's live roster: no
  *                       hideable house), `navigable`/`river`/`coast` (geography) and the crisis families (the
  *                       stress record); none is a row the veil withholds once the view is taken. `market` reads a house's
@@ -69,15 +70,15 @@
  * reads exactly as before. THE READER'S SET (CTR11) is the drawn set (shownTraditions.js :: descriptionSetOf), never a
  * row a DM can hide, and the reader's rotation reads only the reader's own compositions of its rites.
  *
- * PURE, derived at render, nothing stored (CTR4): no draw (a frame is picked by kernel/proseHash.js :: pickVariantMixed on
- * a key of the settlement's identity and the record's stable id; TRAD-4 unit 11: the FNV hash mixed before the modulo, so
- * keys that differ only in their characters' high bits no longer take one line), no clock, no write, no new key on the
- * town. Genesis is not read here and not changed (CTR3): the record is the caller's, whichever set the surface shows.
+ * PURE, derived at render, nothing stored (CTR4): no draw (a frame is the rendezvous of a key of the settlement's identity
+ * and the record's stable id with each line's own id, point 121, TAIL-PICKS: kernel/proseHash.js :: rankRendezvous through
+ * the door's ranked mode; an edit to a pool moves only the places that printed, or now out-rank to, the edited line), no
+ * clock, no write, no new key on the town. Genesis is not read here and not changed (CTR3): the record is the caller's, whichever set the surface shows.
  * The record's `lastOutcome` and `lastHeldYear` are never read: the text never says what became of the rite this year
  * (TRAD-4 unit 5; tests/domain/traditionDescription.test.js holds it). Every pool the leaf draws, frames included, is a
  * table of declared lines (CTR10), drawn through the one `draw` below.
  */
-import { pickVariantMixed } from '../../kernel/proseHash.js';
+import { rankRendezvous } from '../../kernel/proseHash.js';
 import { powerNameInProse } from '../display/governanceAccount.js';
 import { institutionHouseLabel } from '../display/institutionDisplayName.js';
 import { houseSentenceName } from '../../data/houseSentenceName.js';
@@ -263,10 +264,10 @@ export function holdsAName(eventName, names) {
 const settlementSeedOf = (settlement) => String(settlement._seed ?? settlement.id ?? '');
 
 /**
- * THE ONE DRAW (CTR10): the composer's selector (`pickVariantMixed` on `seed::slot`, the settlement's identity then the
- * record's stable id and the slot) over the FULL pool, the drawn line resolved through `drawDeclared` against the facts of
- * the record the leaf was handed (a refused line moves to its twin, else the admitted argmax under the same key, else
- * nothing). Fail-closed as the house's draw is. `turned` (drawTurn's only): the line the rotation took in place of the pick.
+ * THE ONE DRAW (CTR10; point 121, TAIL-PICKS): the door's RANKED mode on `seed::slot` (the settlement's identity then the
+ * record's stable id and the slot) and each line's own `id`, over the FULL pool: the highest-ranked line the record the
+ * leaf was handed admits prints, or a refused line's admitted twin, else nothing. Fail-closed as the house's draw is.
+ * `turned` (drawTurn's only): the line the rotation took in place of the pick.
  * @template L
  * @param {ReadonlyArray<L>} pool @param {string} seed the settlement's identity (settlementSeedOf)
  * @param {string} slot the record's id and the slot @param {string} poolId @param {() => object|null} facts
@@ -274,7 +275,7 @@ const settlementSeedOf = (settlement) => String(settlement._seed ?? settlement.i
  */
 function draw(pool, seed, slot, poolId, facts, crisisScoped = false, turned = undefined) {
   const drawn = drawDeclared(pool, {
-    draw: (p) => (turned === undefined ? pickVariantMixed(p, `${seed}::${slot}`) : turned), facts, key: `${seed}::${slot}`,
+    ...(turned === undefined ? { rankKey: `${seed}::${slot}` } : { draw: () => turned }), facts, key: `${seed}::${slot}`,
     poolId: `traditionDescription:${poolId}`, surface: 'traditions', drawKind: 'H', crisisScoped,
   });
   const text = drawn.line == null ? null : lineText(drawn.line);
@@ -285,7 +286,7 @@ function draw(pool, seed, slot, poolId, facts, crisisScoped = false, turned = un
  * THE ROTATION (TRAD-4 unit 10): one frame slot's sentence, its wording taken by rotation inside the town's set. With no
  * sentence taken (a rite alone, or the first of its set) this is `render(draw(…))`, byte for byte. Otherwise, over a pool
  * of colour lines only (every frame table: a colour line is admitted everywhere, so the line taken is the line printed):
- * the first wording, going on from the pick (`pickVariantMixed` on the same key, the pool's own order, wrapping), then the
+ * the first wording down the rank (`rankRendezvous` on the same key and each line's id: the pick first), then the
  * `again` wordings in their order (a keeper's KEEPER_FRAMES_TOO: never in the pick's domain), whose sentence is not among
  * `taken`, drawn through the one draw (over the pool and its `again` lines, so the ledger's line id indexes both). Every
  * wording taken: null where `leaveOut` (the payer, and a keeper beyond its fifth: the sentence is left out), else the
@@ -300,16 +301,22 @@ function draw(pool, seed, slot, poolId, facts, crisisScoped = false, turned = un
 function drawTurn(pool, seed, slot, poolId, facts, render, taken, leaveOut = false, again = []) {
   const all = [...pool, ...again];
   if (taken && taken.size > 0 && all.length > 1 && all.every((l) => isColourLine(l))) {
-    const start = pool.indexOf(/** @type {L} */ (pickVariantMixed(pool, `${seed}::${slot}`)));
-    const free = [...pool.keys()].map((k) => pool[(start + k) % pool.length]).concat(again)
-      .find((l) => !taken.has(render(String(lineText(l)))));
+    const ranked = rankRendezvous(pool, `${seed}::${slot}`, ownIdOf);
+    const free = [...ranked, ...again].find((l) => !taken.has(render(String(lineText(l)))));
     if (free === undefined) {
       if (leaveOut) return null;
-    } else if (free !== pool[start]) {
+    } else if (free !== ranked[0]) {
       return render(draw(all, seed, slot, poolId, facts, false, free));
     }
   }
   return render(draw(pool, seed, slot, poolId, facts));
+}
+
+/** A table line's own id (data/traditionDescriptionTable.js), which the rank keys on. @param {unknown} l @returns {string} */
+function ownIdOf(l) {
+  const id = l && typeof l === 'object' ? /** @type {{ id?: unknown }} */ (l).id : undefined;
+  if (typeof id !== 'string') throw new TypeError('traditionDescription: a table line with no id');
+  return id;
 }
 
 /**
