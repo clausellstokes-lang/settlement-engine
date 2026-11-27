@@ -217,3 +217,23 @@ See section 4, newest last.
 - PUSHED AS TRANSPORT: `lane/stack-120-guard-wip-2026-11-27` at 30539f145.
 - WHO WORKS NOW: here: D13-120R (tests, proof), TAIL-121 (phase 2), R-MEASURE (C partly born, V not yet). Children: PRE120
   4/4, TAILCOST 1 to 3 of 3, READER 120R.
+
+## V9 (17:55 UTC on 2026-11-27): THE PRE-RUN WHOLE; THE RE-POINTED TESTS READ; POINT 121's COST IN AND RULED (121-2); THE READER'S TEST PUT TO THE OWNER
+- **PRE120 WHOLE (the whole suite on df0401af6, four children, about 50 minutes):** 43,864 tests, 86 failing: 61 ON THE LIST,
+  25 NOT: 24 stale line pins in ten `tests/domain` files and the lighting census. NO STORED FIGURE, GOLDEN OR REGISTER MOVED
+  BY STABLE PICKS; NOTHING OUTSIDE `tests/domain` WENT STALE. The sorted lists: `shards/results/PRE120-new.tsv`, `-on.tsv`.
+- D13-120R's STEP 6 (80b133cae, nine files, 53 lines, pushed), EVERY CHANGED LINE READ BY THE CHAIR: the oracle rows draw by
+  `pickRendezvous` on the same keys; `tailDefeconDisplayLines`' rows moved to places that draw the line they guard (DC2, DC4
+  three times, DC3); `close7Mirror` (d) prints C7 and F6 under stated other names ('Ashfield', 'Ashby') with the reason in
+  a comment; (c)'s K1 places re-read; no matcher loosened, no case dropped. THE CAUSE OF "N32 is eligible": a named-branch
+  line that names no house, drawn by hxd-hamlet-2 under the new pick: a different pick, as expected. The builder is on its
+  mutant table and the proof. THE READER was told of the commit by message (17:54 UTC).
+- **TAILCOST WHOLE (the eight directories on point 121's scratch build):** 32,804 tests, 86 failing, 42 on the list; of the 44
+  not on it, 25 are point 120's own; POINT 121's OWN ARE 19 (`shards/results/TAILCOST-own.tsv`): about 11 stale pins
+  (fortune 4, the ring note 5, the scope line 1, the tradition oracle 1) and three walkers (`domainAnyCastBaseline`: the
+  scratch's `any`; `drawDeclaredKeys.walker`: two callers without a `key`; `presumedThings` ARM 1: 4 undeclared literals
+  and 15 stale rows). NO STORED FIGURE OR GOLDEN MOVED. **RULED (121-2, by message):** the cost is accepted; each of the three
+  walkers must be green on the builder's tip WITH ITS REGISTER UNCHANGED (ids given in place where hoisting a literal would
+  change the key the walker reads); a unit that cannot be converted without the shrink-only register moving STOPS.
+- THE OWNER ASKED (about 17:45 UTC) "What are your expectations as a pure human reader after all of this is done?": ANSWERED
+  IN FULL, first. The reader's test COLD-READ-20 is on the list unless he says otherwise (`PRERELEASE-ADDED-ELEVENTH.md`).
