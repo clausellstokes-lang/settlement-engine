@@ -4,12 +4,18 @@
  *
  * WHY IT EXISTS. Point 120 prints, for each slot, the admitted line with the highest hash of (the slot's key, THE LINE'S
  * OWN ID) (`src/kernel/proseHash.js :: pickRendezvous`). So an id must never move: never renumbered, never reused; a
- * removed line's id is RETIRED. Two id families are held:
+ * removed line's id is RETIRED. Point 121 (TAIL-PICKS) put seven more view-time picks on a line's own id
+ * (`rankRendezvous`, `pickRendezvous`, the door's ranked mode in `src/domain/facts/drawDeclared.js`). Three id families
+ * are held:
  *   DAILY LIFE  the pool lines under `src/data/dailyLife/` (objects with an `id` and a `text`), read by IMPORT; a line's
  *               scope is its slot and branch (`<slot>|<branch>`); ids are unique within a scope.
  *   VIABILITY   the pairs `['SS1', `…sentence…`]` written inside `src/domain/display/dossierViewModel.js ::
  *               deriveViability`, read from SOURCE TEXT by a small lexer (one scope, `viability`: ids unique across all
  *               the function's pools).
+ *   IMPORTED POOLS  point 121's pools, named one by one in `IMPORTED_POOLS` (a module, an export, a scope, a layout:
+ *               a flat array, or a record whose values are arrays), read by IMPORT at run time; a row is an object
+ *               with a string `id` and its words: a `text`, or a `say` function (fingerprinted by its own source text,
+ *               `String(row.say)`, normalised as the text is).
  *
  * THE BASELINE (`tests/lint/stablePickIds.baseline.json`) holds, per scope, `present` (each id with a FINGERPRINT of
  * the line's words as banked) and `retired` (ids that once existed and are gone). The fingerprint's input: Daily Life,
@@ -30,14 +36,18 @@
  * double, backtick), at any depth, is counted as an id key, and the count of id keys must equal the count of rows read;
  * a row form it does not recognise, a function it cannot find or lex, is red. The Daily Life reader is fail-closed too:
  * every exported value of every pool file that holds an id-bearing object must sit at a slot this module names; every
- * slot it names is read exactly once; a pool file that holds no line is red.
+ * slot it names is read exactly once; a pool file that holds no line is red. The imported-pools reader is fail-closed:
+ * every module of its table must import; every named export must exist, have its layout, and yield at least one row;
+ * every row must carry a string `id` and its words; an export named twice in the table is red.
  *
  * WHAT IT IS FOR: an honest mistake.
  *   - an insertion that shifts the later ids;
  *   - a swap of two ids;
  *   - a reuse of a retired id;
  *   - a duplicate id;
- *   - a silent removal.
+ *   - a silent removal;
+ *   - all five in the imported pools as well: a frame re-worded in place or moved to another id is seen, a `say`
+ *     frame by its own source text.
  * WHAT IT DOES NOT CATCH (the deliberate kind; the reviewer of the change is the control):
  *   - a moved line whose words are also changed;
  *   - an id assembled by concatenation, or a row built outside `deriveViability`;
@@ -47,7 +57,11 @@
  *     their BRANCH NAME, not a line's id: a renamed branch re-deals that pick;
  *   - present ids deleted from the baseline by hand and then shifted in the tree (they are banked afresh);
  *   - `pickRendezvous` itself, handed a duplicate or a missing id or a falsy key, returns the first line in LIST ORDER
- *     (the guard is what keeps duplicates out; a nameless record's picks follow the pool's order, as the old pick's did).
+ *     (the guard is what keeps duplicates out; a nameless record's picks follow the pool's order, as the old pick's did);
+ *   - a `say` frame whose words are built from a value outside the function: it is fingerprinted by its source text,
+ *     not by what it prints (a re-worded outside value is not seen);
+ *   - a pool that is not in `IMPORTED_POOLS`: the table is the list of what is held, and a ranked pick added elsewhere
+ *     without a row here is not seen.
  */
 import { createHash } from 'node:crypto';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
@@ -79,6 +93,26 @@ export const DAILY_LIFE_EXPORTS = Object.freeze({
   UNSPOKEN_TOPICS: { slot: 'unspoken_topics' },
   RECENT_CHANGES: { slot: 'recent_changes' },
 });
+
+/**
+ * THE IMPORTED POOLS (point 121, TAIL-PICKS): every pool held by import, its scope, its layout and where its words are.
+ * `flat`: the export is an array of rows; `record`: an object whose values are arrays of rows (its keys are not scopes).
+ * @typedef {{ module: string, export: string, scope: string, layout: 'flat' | 'record', words: 'text' | 'say' }} ImportedPool
+ * @type {ReadonlyArray<ImportedPool>}
+ */
+export const IMPORTED_POOLS = Object.freeze([
+  { module: 'src/data/fortuneMeritLines.js', export: 'FORTUNE_MERIT_LINES', scope: 'fortune.merit', layout: 'flat', words: 'text' },
+  { module: 'src/data/fortuneLastingLines.js', export: 'FORTUNE_LASTING_LINES', scope: 'fortune.lasting', layout: 'flat', words: 'text' },
+  ...['ACT_LEADS', 'ELEMENT_GLOSS', 'HOUSE_FRAMES', 'POWER_FRAMES', 'OWNER_FRAMES', 'KEEPER_FRAMES_TOO', 'CAUSE_FRAMES', 'ECONOMY_FRAMES'].map((t) => ({
+    module: 'src/data/traditionDescriptionTable.js', export: t, scope: `traditionDescription.${t}`, layout: /** @type {'flat' | 'record'} */ (t === 'OWNER_FRAMES' ? 'flat' : 'record'), words: /** @type {'text'} */ ('text'),
+  })),
+  { module: 'src/domain/summary/tonightSheet.js', export: 'CAST_WANTS', scope: 'tonight.castWants', layout: 'record', words: 'text' },
+  { module: 'src/domain/display/defenseDisplay.js', export: 'ORGANIZED_RING_NOTES', scope: 'defense.organizedRing', layout: 'flat', words: 'text' },
+  { module: 'src/pdf/lib/headlines.js', export: 'OVERVIEW_HEADLINES', scope: 'pdf.headlines.overview', layout: 'flat', words: 'say' },
+  { module: 'src/pdf/lib/headlines.js', export: 'ECONOMICS_HEADLINES', scope: 'pdf.headlines.economics', layout: 'flat', words: 'say' },
+  { module: 'src/pdf/lib/headlines.js', export: 'NPCS_HEADLINES', scope: 'pdf.headlines.npcs', layout: 'flat', words: 'say' },
+  { module: 'src/domain/summary/settlementQuickGuide.js', export: 'SCOPE_LINE_FRAMES', scope: 'quickGuide.scopeLine', layout: 'flat', words: 'say' },
+].map((r) => Object.freeze(r)));
 
 /** An id's form: a prefix of letters and a number (`P3`, `SS1`; lower case counted too). */
 export const ID_FORM = /^[A-Za-z]{1,4}[0-9]+$/;
@@ -339,7 +373,77 @@ export function viabilityTreeOf(src) {
 export async function readTree(root = ROOT) {
   const daily = dailyLifeTreeOf(await importDailyLife(root), { whole: true });
   const via = viabilityTreeOf(readFileSync(join(root, VIABILITY_FILE_REL), 'utf8'));
-  return { scopes: new Map([...daily.scopes, ...via.scopes]), problems: [...daily.problems, ...via.problems] };
+  const imported = importedPoolsTreeOf(await importPoolModules(IMPORTED_POOLS, root), IMPORTED_POOLS);
+  return {
+    scopes: new Map([...daily.scopes, ...via.scopes, ...imported.scopes]),
+    problems: [...daily.problems, ...via.problems, ...imported.problems],
+  };
+}
+
+// ── THE IMPORTED-POOLS READER (point 121) ─────────────────────────────────────────────────────────────────────────────
+
+/** @typedef {{ exports: Record<string, unknown> } | { error: string }} PoolModule a module's exports, or why it would not import */
+/**
+ * Import every module the table names; a module that will not import is held as its error.
+ * @param {ReadonlyArray<ImportedPool>} table @param {string} root
+ * @returns {Promise<Record<string, PoolModule>>}
+ */
+export async function importPoolModules(table, root = ROOT) {
+  /** @type {Record<string, PoolModule>} */ const out = {};
+  for (const m of [...new Set(table.map((r) => r.module))]) {
+    try {
+      out[m] = { exports: { ...(await import(pathToFileURL(join(root, m)).href)) } };
+    } catch (e) {
+      out[m] = { error: /** @type {Error} */ (e).message };
+    }
+  }
+  return out;
+}
+
+/**
+ * THE IMPORTED-POOLS READER: each table row's export, read at run time (fail-closed).
+ * @param {Record<string, PoolModule>} modules module path → its exports (or its import error)
+ * @param {ReadonlyArray<ImportedPool>} table
+ * @returns {Tree}
+ */
+export function importedPoolsTreeOf(modules, table) {
+  /** @type {Map<string, TreeLine[]>} */ const scopes = new Map();
+  /** @type {string[]} */ const problems = [];
+  /** @type {Set<string>} */ const named = new Set();
+  for (const pool of table) {
+    const where = `${pool.module} :: ${pool.export}`;
+    if (named.has(where)) { problems.push(`${where}: named twice in IMPORTED_POOLS (read once)`); continue; }
+    named.add(where);
+    const mod = modules[pool.module];
+    if (!mod) { problems.push(`${pool.module}: not imported`); continue; }
+    if (!('exports' in mod)) { problems.push(`${pool.module}: will not import (${mod.error})`); continue; }
+    if (!Object.hasOwn(mod.exports, pool.export)) { problems.push(`${where}: no such export`); continue; }
+    const value = mod.exports[pool.export];
+    /** @type {Array<[string, unknown]>} */ const branches = [];
+    if (pool.layout === 'flat') {
+      if (!Array.isArray(value)) { problems.push(`${where}: not a flat array of rows`); continue; }
+      branches.push(['', value]);
+    } else {
+      if (!value || typeof value !== 'object' || Array.isArray(value)) { problems.push(`${where}: not a record of arrays`); continue; }
+      for (const [k, v] of Object.entries(value)) {
+        if (!Array.isArray(v)) { problems.push(`${where}.${k}: not an array of rows`); continue; }
+        branches.push([`.${k}`, v]);
+      }
+    }
+    if (scopes.has(pool.scope)) problems.push(`${where}: scope ${pool.scope} is read twice`);
+    /** @type {TreeLine[]} */ const lines = scopes.get(pool.scope) ?? [];
+    for (const [k, rows] of branches) {
+      /** @type {unknown[]} */ (rows).forEach((row, i) => {
+        const r = /** @type {{ id?: unknown, text?: unknown, say?: unknown } | null} */ (row);
+        const words = !r ? null : pool.words === 'text' ? (typeof r.text === 'string' ? r.text : null) : (typeof r.say === 'function' ? String(r.say) : null);
+        if (!r || typeof r.id !== 'string' || words === null) { problems.push(`${where}${k}[${i}]: a row without a string id and its ${pool.words === 'text' ? 'text' : '`say` function'}`); return; }
+        lines.push({ id: r.id, fp: fingerprintOf(words) });
+      });
+    }
+    if (lines.length === 0) problems.push(`${where}: no row read (an empty pool)`);
+    scopes.set(pool.scope, lines);
+  }
+  return { scopes, problems };
 }
 
 // ── THE BASELINE ──────────────────────────────────────────────────────────────────────────────────────────────────────
