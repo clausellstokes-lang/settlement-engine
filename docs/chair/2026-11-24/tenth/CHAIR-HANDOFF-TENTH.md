@@ -1704,3 +1704,4 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   the cure by D13-120 on its branch, merged by the helper after its gate (as at point 119).
 - `readerShapeResolver` "pulse-like" 264 against 256 is THE KNOWN LONG-TMPDIR ARTIFACT (the landing brief has said so since
   point 118): not a red of any unit.
+- LAND-120's agent: ad227fbdc9f50547d (continued by SendMessage with a ruling file `landing/RULING-120-4.txt` or later; its report comes as a message). D13-120 (a16f77d1000cac948) is finished and can be resumed for a cure.
