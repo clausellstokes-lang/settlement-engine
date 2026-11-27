@@ -13,6 +13,8 @@ import { describe, it, expect, afterEach } from 'vitest';
 import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 import { HistoryTab } from '../../src/components/new/tabs/HistoryTab.jsx';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { HISTORICAL_EVENTS_DATA } from '../../src/data/historyData.js';
+import { SCARCITY_STORED_LIVE, SCARCITY_STORED_PAST } from '../../src/domain/display/tensionDescriptionShown.js';
 
 const LONG_DESC =
   'Rights to the local iron deposits became the subject of a prolonged dispute between the settlement and a rival lord.';
@@ -290,6 +292,12 @@ describe('HistoryTab — the scarcity tension names the good the record holds sh
       expect(s.history.currentTensions[0].description).toBe(stored);
       cleanup();
     }
+  });
+  it('the helper\'s two held sentences equal the table\'s, word for word (RULING 122-A-1: the table is not imported)', () => {
+    const scarcity = HISTORICAL_EVENTS_DATA.find((e) => e.type === 'resource_scarcity');
+    expect(SCARCITY_STORED_PAST).toBe(scarcity.description);
+    expect(SCARCITY_STORED_LIVE).toBe(scarcity.byMemory.unanchored.description);
+    expect([PAST, LIVE]).toEqual([SCARCITY_STORED_PAST, SCARCITY_STORED_LIVE]);
   });
   it('where the record names no short good, the stored words print as they are', () => {
     render(<HistoryTab settlement={townWith(PAST, null)} />);

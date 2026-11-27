@@ -12,16 +12,24 @@
  *
  * ONE HELPER, called by every surface that prints a tension's description: the History tab's tension row (and the
  * search's), the Overview's tension list, and the PDF's view model.
+ *
+ * It names the good for a CURRENT tension only: a past event (`history.historicalEvents[]`) is not named, because the
+ * record's present shortfall does not say which good a past event was about (RULING 122-A-1, the eleventh chair).
+ *
+ * THE TWO STORED SENTENCES ARE HELD HERE, word for word, and `historyData.js` is NOT imported (RULING 122-A-1: the table
+ * would ride into the PDF's render worker, 31 KB). tests/components/historyTab.test.jsx asserts each equals the table's
+ * string, so a re-wording of the table reds until these follow.
  */
-import { HISTORICAL_EVENTS_DATA } from '../../data/historyData.js';
 import { criticalImportRow } from './stateProse/economyStateProse.js';
 
-const SCARCITY = HISTORICAL_EVENTS_DATA.find((e) => e.type === 'resource_scarcity');
+/** `HISTORICAL_EVENTS_DATA` resource_scarcity `description`, as stored. */
+export const SCARCITY_STORED_PAST = 'A critical resource became scarce, causing hoarding and price gouging';
+/** `HISTORICAL_EVENTS_DATA` resource_scarcity `byMemory.unanchored.description`, as stored. */
+export const SCARCITY_STORED_LIVE = 'A critical resource is running short, and some are hoarding it while others cannot pay the prices asked';
 const LEAD = 'A critical resource ';
 
 /** The two stored sentences, each led by "A critical resource ". @type {ReadonlySet<string>} */
-const STORED = new Set([SCARCITY?.description, SCARCITY?.byMemory?.unanchored?.description]
-  .filter(/** @returns {d is string} */ (d) => typeof d === 'string' && d.startsWith(LEAD)));
+const STORED = new Set([SCARCITY_STORED_PAST, SCARCITY_STORED_LIVE]);
 
 /**
  * @param {unknown} settlement the record (its `resourceAnalysis.imports` is read)
