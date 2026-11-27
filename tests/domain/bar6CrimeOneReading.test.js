@@ -160,10 +160,11 @@ describe('BAR6-CRIME: crime and the force that keeps order have one reading', ()
     // C8633 (8e.crime): the smuggling network listed under a siege takes its card's mark
     const s30 = town('bar0-city-under_siege+famine-rand-30');
     expect(criminalOpMark(s30, 'Smuggling Network')).toBe('Stopped by the siege.');
-    // C43177 (9a.wave): the ring's "keeps the streets quiet" is refused beside a crime wave; the table's note prints
+    // C43177 (9a.wave): the ring's "keeps the streets quiet" is refused beside a crime wave; the next vantage in rank
+    // prints (point 121: w28's rank heads with the streets vantage, RING-2 > RING-4 > RING-1 > RING-3)
     const w28 = town('bar0-city-wartime-rand-28');
     expect([crimeWaveStands(w28), criminalStructureKeyOf(w28)]).toEqual([true, 'organized']);
-    expect(deriveCriminalStructure(w28)?.note).toMatch(/^One criminal ring decides what crime is allowed here\./);
+    expect(deriveCriminalStructure(w28)?.note).toMatch(/^Ask who runs crime here and the answer is one ring\./);
   }, 600_000);
 
   test('(d) KEEP: where the fact does not refuse the line, the drawn line prints as drawn', () => {

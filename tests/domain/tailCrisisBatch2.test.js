@@ -47,9 +47,9 @@ beforeAll(async () => {
 /** [seed, clause that must NOT print, what the line prints in its place] (READ-ALL row ids in the comments) */
 const FALSE = [
   // estates: an elder's, a priest's or a council's rule, no lord and no landed power standing (09631 03978 09633 09630 09632 09626)
-  ['r2s-plague_onset-hamlet-1', 'run by its estates', 'Germanic-inspired: built in timber and stone.'],
+  ['r2s-plague_onset-hamlet-1', 'run by its estates', 'Germanic-inspired. Ask about the place and you are told it is built in timber and stone.'],
   ['r2r-village-21', 'run by its estates', 'built in timber and stone.'],
-  ['r2s-under_siege-metropolis-0', 'run by guild and estate', 'Germanic-inspired: built in timber and stone.'],
+  ['r2s-under_siege-metropolis-0', 'run by guild and estate', 'Germanic-inspired, and it shows: built in timber and stone.'],
   ['r2s-under_siege-city-3', 'run by guild and estate', 'built in timber and stone.'],
   ['r2r-thorp-45', 'run by its estates', 'built in timber and stone.'],
   // under an occupation: who holds the place (09628 B03858 18585 18583 18459 12540 10066 10049 10048)
@@ -58,12 +58,12 @@ const FALSE = [
   ['r2s-occupied-hamlet-0', 'held by clan and caravan', 'built on clan lines, held, for now, by another power.'], // TAIL-CRISIS-4 (K19): re-keyed by identity (no herds, no pasture)
   ['r2s-occupied-metropolis-2', 'held by clan and caravan', 'built on clan lines, held, for now, by another power.'],
   ['r2s-occupied-metropolis-3', 'under temple and guild', 'in quarters by trade, held, for now, by another power.'],
-  ['r2r-thorp-24', 'run by patronage and law', 'Latin-inspired, and it shows: held, for now, by another power.'],
+  ['r2r-thorp-24', 'run by patronage and law', 'Latin-inspired. Ask about the place and you are told it is held, for now, by another power.'],
   ['r2r-thorp-27', 'run by civic association', 'built on riverside ground, held, for now, by another power.'],
   ['r2s-occupied-metropolis-1', 'run by civic association', 'on hillside ground, held, for now, by another power.'],
   ['r2s-occupied-metropolis-0', 'run by civic association', 'in forest country, held, for now, by another power.'],
   // patronage and law under household consensus or elders: custom (12545 12542)
-  ['r2r-thorp-54', 'run by patronage and law', 'Latin-inspired: run by custom more than by law.'],
+  ['r2r-thorp-54', 'run by patronage and law', 'Latin-inspired; people here live in a place run by custom more than by law.'],
   ['r2s-religious_conversion-thorp-3', 'run by patronage and law', 'run by custom more than by law.'],
   // civic association under an elder, a headman or a household council (03984 10044 03987 10045 10072 10046)
   ['r2s-under_siege-thorp-2', 'run by civic association', 'built on hillside ground.'],
@@ -74,7 +74,7 @@ const FALSE = [
   ['r2s-politically_fractured-hamlet-3', 'run by civic association', 'built on the open plain.'],
   // the harbour with no docks (10071 10054)
   ['r2s-indebted-village-3', 'built around the harbour', 'built on the coast.'],
-  ['r2s-mass_migration-hamlet-1', 'built around the harbour', 'Greek-inspired, built on the coast.'],
+  ['r2s-mass_migration-hamlet-1', 'built around the harbour', 'Greek-inspired. Ask about the place and you are told it is built on the coast.'],
   // a hall that no roster holds (15013 03970 15016 15015 15026 03969)
   ['r2s-indebted-thorp-1', 'built around the hall', 'built on kin, oath and the assembly.'],
   ['r2s-recently_betrayed-thorp-1', 'built around the hall', 'built on kin, oath and the assembly.'],

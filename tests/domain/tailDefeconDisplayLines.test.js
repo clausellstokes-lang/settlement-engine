@@ -40,7 +40,7 @@ const GONE = [
   ['B13779', 'r2s-plague_onset-thorp-0', 'the sick are tended by their own families', "No healer's house stands here; the sick are tended by one of the place's own."],
   ['B02441', 'r2r-city-2', 'A criminal operation with a hold on part of the place or its trade.', 'A quarter given over to pleasure: a trade that runs at the edge of the law.'],
   ['B00162', 'r2s-occupied-town-1', 'criminal ring decides what crime is allowed', 'Crime here is run as a business: its money passes through shops that look honest, and whoever runs it keeps out of sight.'],
-  ['B11428', 'r2s-plague_onset-village-3', 'It keeps the streets quiet', 'One criminal ring decides what crime is allowed here.'],
+  ['B11428', 'r2s-plague_onset-village-3', 'It keeps the streets quiet', 'Ask who runs crime here and the answer is one ring.'], // point 121: the next vantage in rank (RING-2 > RING-4 > …)
   ['09264', 'r2s-plague_onset-thorp-0', 'for about two months at full rations', 'household stores would carry the thorp for about a month and a half at full rations'],
 ];
 /** [row, seed, a true sibling that must still print] */
@@ -50,7 +50,7 @@ const KEEP = [
   ['01134', 'r2r-town-17', 'keeps order and pays its way, but it has to buy food'],
   ['B13779', 'r2r-thorp-0', 'No healer is kept here; the sick are tended by their own families.'],
   ['B02441', 'r2r-city-2', 'Operates unlicensed gambling.'],
-  ['B00162', 'r2r-town-7', 'One criminal ring decides what crime is allowed here.'],
+  ['B00162', 'r2r-town-40', 'One criminal ring decides what crime is allowed here.'], // point 121: re-seated from r2r-town-7 (its rank now heads RING-4) to a town whose rank heads RING-1
   ['B11428', 'r2r-town-0', 'It keeps the streets quiet because trouble brings the law'],
   // the lit birth's value (THE FLIP, 2026-11-23, both birth laws lit): the granary's months moved (was "about five months")
   ['09264', 'r2r-town-0', 'the granary would carry the town for about six months at full rations'],

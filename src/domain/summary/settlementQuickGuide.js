@@ -23,7 +23,7 @@ import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { waterAccessKind } from '../tradeRouteSemantics.js';
 import { resolveTerrain } from '../resolveTerrain.js';
 import { populationBandOf } from '../facts/populationBand.js';
-import { pickVariant } from '../../kernel/proseHash.js';
+import { pickRendezvous } from '../../kernel/proseHash.js';
 import { foodBandOf, voicedLineOf } from './tonightSheet.js';
 
 const INFLUENCE_RANK = Object.freeze({
@@ -214,28 +214,31 @@ export function cultureScopeLine(settlement) {
   // THE SEED CHOOSES (WIRING-RULINGS §8(3)): the same town prints the same frame forever; a record
   // with no seed (every hand-built caller) gets frame 0, the line as it always read.
   const seed = cleanText(/** @type {{ _seed?: unknown }} */ (source)._seed);
-  // SCOPE_LINE_FRAMES is a frozen five-frame pool, so the pick is never the empty pool's undefined.
-  return sentence(/** @type {(label: string, phrase: string) => string} */ (pickVariant(SCOPE_LINE_FRAMES, seed ? `${seed}::culture-scope-line` : null))(label, phrase));
+  // SCOPE_LINE_FRAMES is a frozen five-row pool, so the pick is never the empty pool's undefined. The row of the highest
+  // rendezvous rank of (the key, its id) (point 121, TAIL-PICKS); a record with no seed takes the first ('plain').
+  const frame = /** @type {ScopeLineFrame} */ (pickRendezvous(SCOPE_LINE_FRAMES, seed ? `${seed}::culture-scope-line` : null, (f) => f.id));
+  return sentence(frame.say(label, phrase));
 }
 
+/** @typedef {{ id: string, say: (label: string, phrase: string) => string }} ScopeLineFrame */
 /**
  * THE IDENTITY LINE'S FRAMES (STYLE-2-SURFACES A·O2; STYLE-RULINGS-2 B2): five vantages over the
- * same two facts, the culture and its scope phrase as the record allows it. Five, not four: a
- * power-of-two pool aliases under the FNV pick (the origin pools' own pin). Index 0 is the line
- * as it always read. Every frame is FOR THE OWNER'S VETO.
- * @type {ReadonlyArray<(label: string, phrase: string) => string>}
+ * same two facts, the culture and its scope phrase as the record allows it (quickGuide.scopeLine).
+ * Rows by id, append-only (point 121, TAIL-PICKS: the pick is the rendezvous on the id). 'plain'
+ * is the line as it always read. Every frame is FOR THE OWNER'S VETO.
+ * @type {ReadonlyArray<ScopeLineFrame>}
  */
-const SCOPE_LINE_FRAMES = Object.freeze([
+export const SCOPE_LINE_FRAMES = Object.freeze([
   // [plain] the line as it always read
-  (label, phrase) => `${label}, ${phrase}`,
+  Object.freeze({ id: 'plain', say: (/** @type {string} */ label, /** @type {string} */ phrase) => `${label}, ${phrase}` }),
   // [traveller] what shows on arrival
-  (label, phrase) => `${label}, and it shows: ${phrase}`,
+  Object.freeze({ id: 'traveller', say: (/** @type {string} */ label, /** @type {string} */ phrase) => `${label}, and it shows: ${phrase}` }),
   // [local] where people live
-  (label, phrase) => `${label}; people here live in a place ${phrase}`,
+  Object.freeze({ id: 'local', say: (/** @type {string} */ label, /** @type {string} */ phrase) => `${label}; people here live in a place ${phrase}` }),
   // [newcomer] what you are told when you ask
-  (label, phrase) => `${label}. Ask about the place and you are told it is ${phrase}`,
+  Object.freeze({ id: 'newcomer', say: (/** @type {string} */ label, /** @type {string} */ phrase) => `${label}. Ask about the place and you are told it is ${phrase}` }),
   // [official] the plain description, headed
-  (label, phrase) => `${label}: ${phrase}`,
+  Object.freeze({ id: 'official', say: (/** @type {string} */ label, /** @type {string} */ phrase) => `${label}: ${phrase}` }),
 ]);
 
 /**
