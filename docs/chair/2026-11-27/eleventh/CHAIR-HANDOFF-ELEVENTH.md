@@ -404,3 +404,19 @@ See section 4, newest last.
   by the door's own `--write`; point 120's scopes must not change.
 - THE LANDING OF POINT 121, WHEN THE READER IS RULED: two local merges on the line (2ab62ef33 is already above the line's tip:
   a fast-forward in content; then the guard's branch), the doors, lint, build, sizes, the whole suite in four shards.
+
+## V17 (20:04 UTC on 2026-11-27): THE GUARD's THIRD FAMILY BUILT, READ AND ACCEPTED (E16); PUSHED; PUT TO THE READER OF POINT 121
+- GUARD-120R on ruling 121G-1 (5 minutes): `lane/stack-121-guard-wip-2026-11-27` (/home/user/wt/guard121) at cccda7569 on
+  2ab62ef33: 533413bd6 the table `IMPORTED_POOLS` and its import reader, floors (9 imported scopes, 100 imported ids) and
+  fixture self-tests, both head lists, the manifest row; cccda7569 the baseline BANKED BY THE DOOR ALONE ("+182 added | 0
+  retired | 0 re-worded"; point 120's 144 scopes unchanged: 262 lines inserted, 0 deleted). THE DOOR NOW SAYS "matches the
+  tree (160 scopes, 819 ids)". Import cost about 120 to 145 ms for the seven modules; no browser-only dependency.
+- ITS PLANTS: on ELEMENT_GLOSS a shifted insertion, a swap, a retired id reused, a duplicate: red and refused; a re-wording
+  re-banked; the scope line's frames swapped: red and refused; a cast want appended: added; an export un-exported: red and
+  refused.
+- THE CHAIR READ the reader (`importedPoolsTreeOf`): fail-closed as ruled (a module that will not import, a missing export,
+  a wrong layout, a row without id or words, an empty pool, an export named twice: each a problem). "DOES NOT CATCH" gains:
+  a `say` frame whose words come from a value outside the function; A POOL THAT IS NOT IN THE TABLE (a ranked pick added
+  elsewhere without a row is not seen).
+- **E16: ACCEPTED.** PUSHED AS TRANSPORT. READER 121 was sent it as a tenth question (by message): its own plants on the
+  imported pools, and WHETHER EVERY POOL ON THE RANKED PICK IS IN THE TABLE.
