@@ -1,0 +1,17 @@
+THE SECOND READER ON POINT 120's CURES, its report as received
+
+READER 120, the cures. Final tip 15adda3ee1 (landed as I worked; none after). Vitest through the mutex: the walker's file and every re-pointed file, 229 tests green unplanted, then plants (the six Daily Life files and M5 to M11 at cf061bca1a: unchanged since). Worktrees removed.
+
+FINDINGS, each CONFIRMED on 15adda3ee1 (green, red: vitest; (i): the walker's instruments by node)
+1. tests/lint/stablePickIds.shared.mjs :: boundLines reads a move only where the words are byte-equal. gathering_places|plain: P1 and P2 swapped, or a line inserted with P3..P11 shifted, each moved line given one trailing space: "re-worded", door --write exit 0, green. The page trims the space: on C 17 towns print the other line's words; the shift moves 100 of 190. Without the space the swap passes in three door runs (i).
+2. :: viabilityRowsIn, viabilityIdKeysIn see only single-quoted capital ids inside deriveViability. A second SS1 written ["SS1", ...]: green, door "matches the tree"; 96 towns print "... keeps itself." Green too: `SS1`, 'SS' + '1', 'ss9' twice, a row built outside the function.
+3. scripts/stable-pick-ids-door.mjs: the baseline emptied to a skeleton (file present): "+636 added | +22 added", exit 0; retired P9 reused, green.
+4. Honest work refused: a retired sentence added again under a new id (exit 2, "P21 holds the words banked as P9"). Walker red, no door cure ("23 keys against 22 rows"): a nested template, a comment naming 'SS4' (i), an `id:` key (i) in deriveViability.
+
+(a) My six plants all red; the door refuses the shift, the swap, the reuse, the second SS1, the missing baseline. New: 1 to 3; refusals: 4.
+(b) Every table row reds under my plant: M1 3 rows, M2 2, M3 1, M4 1, M5 1, M6 3, M7 3, M8 9 in six files, M9 1, M11 3. Cannot fail, as before: close7Mirror (c) "neither C7 nor K2" (no cell place holds fish).
+(c) Byte-equal: trees 29851f6e (src), 77fa1520 (tests) and composeStateProse.test.js.
+(d) Records moved 0, 0, 0. C: 21 tabs (957,732 lines), PDF, Foundry, projection, 10,725 picks identical. V, M: nine slots, verdict, both tabs, owner and player: 0 differ.
+(e) Unsaid: STABLE_PICK_IDS_BASELINE re-points walker and door (the swap green under it (i)); 15adda3ee1 says "any quoted row id ... is counted"; the manifest's "does not catch" misnames 1 as a removal and an addition; the door's header still says a renumbered line is banked.
+NOT RUN: the gates.
+Evidence: scratchpad/reader8/logs2

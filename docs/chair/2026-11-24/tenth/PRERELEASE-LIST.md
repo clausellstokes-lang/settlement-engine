@@ -222,3 +222,6 @@ a record of the shape written before 2026-11-03 (no food record): every line its
 - **P9c CLOSED** (G76 (E2)): no saved shape holds a non-numeric monster score (2,160 records). **OLD-SAVE CLOSED** (G76 (E1)): a save with no food record prints no line its page denies for that reason (0 of 300).
 
 - **R13, A ROLE TITLE WHERE A NAME BELONGS IN A TIE LINE** (G77, 05:01 UTC 2026-11-27; OWED-6's note: "Miller needs Innkeeper's silence"): measured with the whole-town items.
+
+- **VIABILITY-ROWS-AS-DATA** (G81, 08:08 UTC 2026-11-27): the id guard reads the viability rows from SOURCE TEXT because they are inline templates in `deriveViability`; a table of rows read at run time would make every reader's question moot. Its own unit, after the release unless the guard is found wrong again.
+- **A VACUOUS TEST ROW** (G81): `close7Mirror` (c) "neither C7 nor K2" cannot fail (no cell place holds fish), before point 120 and after. To be given a place that holds fish, with the whole-town items.
