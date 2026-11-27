@@ -37,6 +37,13 @@
  *                     the build's ruling.
  * The covert copy of a born place is decided by the twin's own rule (gallerySecondHomes.js :: withholdCovertCopies over the
  * stored copy and sentence, against the stored document, shareDm false), as um.probe.jsx decides it.
+ *   THE PATHS THE PIN NEVER RAN (U3R; the chair's RULING V28 (4)): the hand plant as a member in SNAPSHOT mode with a copy
+ *                     frozen by MASTER's client path (galleryPayloadFor at db832c892 = toPublicSafe alone: every covert tie
+ *                     dropped, the copy and the sentence kept) and with a copy frozen by this tree's galleryPayloadFor; a
+ *                     NARRATED member (the town in ai_data.aiSettlement, gallery_share_narrated); a MARKED member (a hand
+ *                     marker that HIDES the three criminal groupings). Each read on the map member and the map import against
+ *                     the party link's read of the same town: the same sends withheld, the two keys present or absent exactly
+ *                     as on the link. Their oracle is the plant as planted (its copy, its phrasing, its tags), never the rule.
  */
 import { describe, it, expect, beforeAll, vi } from 'vitest';
 import { PGlite } from '@electric-sql/pglite';
@@ -335,6 +342,61 @@ describe('MAP-COVERT: the map member and the map import serve no covert tie\'s c
       }
     }
     expect(bad, `${bad.length} sends`).toEqual([]);
+  }, ARM_TIMEOUT_MS);
+
+  // ── THE PATHS THE PIN NEVER RAN (U3R; V28 (4)) ──────────────────────────────────────────────────────────────────────
+  /** The four members: a master-made frozen copy, a tip-made frozen copy, a narrated member, a marked member (criminal groupings hidden). */
+  const EXTRA = ['snapshot-master', 'snapshot-tip', 'narrated', 'marked'];
+  /** One share of `town` as `kind` at Reveal off, on its own map; read by the link, the map member and the map import. */
+  async function readsOfExtra(kind, town) {
+    const k = `extra|${kind}|${town.name}`;
+    if (memo.has(k)) return memo.get(k);
+    seq += 1;
+    const slug = `mapcovx${seq}`;
+    const copy = kind === 'snapshot-master' ? (await import('../../src/domain/display/publicSafe.js')).toPublicSafe(clone(town), { full: false, memberOverrides: null })
+      : kind === 'snapshot-tip' ? veil.galleryPayloadFor(clone(town), { shareDm: false, memberOverrides: null }) : null;
+    const ov = copy ? veil.writeShareVeil({}, [], { mode: 'snapshot', at: HAND_AT.at, snapshot: copy })
+      : kind === 'marked' ? veil.writeShareVeil({}, HAND_OPEN.slice(0, 3).map((address) => ({ address, hidden: true })), HAND_AT) : {};
+    const narrated = kind === 'narrated';
+    const id = (await db.query(`insert into public.settlements (id,user_id,name,tier,data,is_public,public_slug,published_at,unlisted_slug,visibility,gallery_member_overrides,gallery_share_dm,gallery_importable,gallery_share_narrated,ai_data)
+      values (gen_random_uuid(), $1, $2, 'town', $3::jsonb, true, $4, now(), $5, 'unlisted', $6::jsonb, false, true, $7, $8::jsonb) returning id::text as id`,
+    [OWNER, town.name || 'x', JSON.stringify(narrated ? { name: town.name, tier: 'town', npcs: clone(town.npcs) } : town), slug, `${slug}-l`, JSON.stringify(ov), narrated, narrated ? JSON.stringify({ aiSettlement: town }) : null])).rows[0].id;
+    await db.query(`insert into public.saved_maps (id, user_id, name, map_data, is_public, public_slug, share_kind, gallery_share_campaign, gallery_importable, unlisted_slug, visibility)
+      values (gen_random_uuid(), $1, 'map', $2::jsonb, true, $3, 'map_with_campaign', true, true, $4, 'public')`, [OWNER, JSON.stringify({ campaign: { settlementIds: [id] } }), `${slug}-m`, `${slug}-mu`]);
+    await db.exec(`set test.uid = '';`);
+    const map = (await db.query(`select public.get_gallery_map($1) as x`, [`${slug}-m`])).rows[0]?.x;
+    const link = (await db.query(`select public.get_unlisted_dossier($1) -> 'dossier' as d`, [`${slug}-l`])).rows[0]?.d;
+    await db.exec(`set test.uid = '${READER}';`);
+    const mapImport = (await db.query(`select public.import_gallery_map($1) as x`, [`${slug}-m`])).rows[0]?.x;
+    await db.exec(`set test.uid = '';`);
+    const members = (m) => (isRec(m) && Array.isArray(m.members) ? m.members : []);
+    const out = { link, map: members(map)[0]?.settlement, mapImport: members(mapImport)[0]?.settlement, counts: { map: members(map).length, mapImport: members(mapImport).length } };
+    memo.set(k, out);
+    return out;
+  }
+
+  it('MAP-COVERT THE PATHS THE PIN NEVER RAN (V28 (4)): the hand plant as a SNAPSHOT member (a copy frozen by master\'s client path, and by this tree\'s), a NARRATED member and a MARKED member: the map member and the map import serve neither the covert copy nor its phrasing nor a tag of the covert tie, and the two keys present or absent exactly as on the party link of the same town, at Reveal off', async () => {
+    const town = PLANT(); const planted = { pr: true, ps: true }; // the oracle is the plant as planted
+    const bad = [];
+    for (const kind of EXTRA) {
+      const r = await readsOfExtra(kind, town);
+      bad.push(...sendsOf(`link | ${kind} | off`, r.link, town, planted, PLANT_TAGS, 'Mira Vane'));
+      for (const [door, label] of [['map', 'map member'], ['mapImport', 'map import']]) {
+        if (r.counts[door] !== 1) bad.push(`${label} | ${kind} | off: ${r.counts[door]} members`);
+        bad.push(...sendsOf(`${label} | ${kind} | off`, r[door], town, planted, PLANT_TAGS, 'Mira Vane'), ...keysAsLink(`${label} | ${kind} | off`, r[door], r.link));
+      }
+    }
+    expect(bad, `${bad.length} sends`).toEqual([]);
+  }, ARM_TIMEOUT_MS);
+
+  it('MAP-COVERT THE PATHS\' TOOTH: the no-covert hand town as a snapshot member (both copies), narrated and marked serves its prominentRelationship, as stored, on the link, the map member and the map import', async () => {
+    const town = TOOTH();
+    const bad = [];
+    for (const kind of EXTRA) {
+      const r = await readsOfExtra(`${kind}`, { ...town, name: `${town.name} ${kind}` });
+      for (const door of ['link', 'map', 'mapImport']) if (J(r[door]?.prominentRelationship) !== J(town.prominentRelationship)) bad.push(`${door} | ${kind}: prominentRelationship is ${JSON.stringify(r[door]?.prominentRelationship)}`);
+    }
+    expect(bad, `${bad.length} losses`).toEqual([]);
   }, ARM_TIMEOUT_MS);
 
   // ── REVEAL DM: RECORDED, NOT RULED ──────────────────────────────────────────────────────────────────────────────────

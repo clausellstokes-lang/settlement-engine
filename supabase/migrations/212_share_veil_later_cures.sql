@@ -275,6 +275,23 @@
 --       prominentRelationship and pressureSentence, the source being the narration or frozen copy it serves) and the
 --       link's veil (an unmarked member takes the default veil). Share-level Reveal DM never applies to it; no
 --       fallback to an unveiled projection. No function added, removed or re-signed.
+--   (40) NO RELATIONSHIPS KEY IS AN UNREAD TOWN (COVERT-UNREAD, VEIL-52; the chair's RULING V28 (1), Q1, FAIL CLOSED):
+--       _gallery_apply_member_overrides judged (24)'s covert copy and the sentence that tells it against the full town's
+--       own relationships[]; a full town that carries prominentRelationship or pressureSentence and NO relationships key
+--       gave it no tie to read, so on a public read (share-level Reveal DM off; the party link and the map member always)
+--       both were served. Where the ties cannot be checked the read now fails closed: such a town is `unread`, and both
+--       go (the existing `closed` path). Nothing else changes; twin: gallerySecondHomes.js :: withholdCovertCopies.
+--       No function added, removed or re-signed.
+--   (41) THE COVERT CHECK NEVER ASKS A PROJECTION WHICH TIES WERE COVERT (U3R, VEIL-56; the chair's RULING V28 (1), F1): in
+--       snapshot mode the gallery read's, the import's and the map member's source is the FROZEN COPY, and master's client
+--       froze a public projection (galleryPayloadFor as toPublicSafe alone), which holds no covert tie; (24)'s check found
+--       none to drop and served the covert tie's copy and the sentence that tells it where the party link withheld them. At
+--       the three doors that read a copy, (b) the LIVE stored row's covert ties (its relationships[] and its narration's,
+--       by the sanitiser's own condition) join the source's for the check (where the source's relationships[] is an array);
+--       and in _gallery_apply_member_overrides, on every public read, (c) THE ORPHAN RULE: a prominentRelationship that is
+--       the copy of NO tie the full town's relationships[] holds (neither the same two ends and type, nor its text) goes
+--       whole (unsure is closed). Twin, rule for rule: gallerySecondHomes.js :: withholdCovertCopies (its `live` rows).
+--       No function added, removed or re-signed.
 --   (10) A PERSON HIDDEN BY THE PER-PERSON SWITCH IS NOT SENT IN A ROSTER COPY EITHER (COHERENCE-VEIL-6; the fifth
 --       review's V5-4, ruled by the chair): _gallery_apply_member_overrides now reduces each roster copy
 --       (factions[].members[], powerStructure.factions[].members[]) of a person the share does not reveal to the
@@ -2980,8 +2997,8 @@ revoke execute on function public._gallery_veil_rekey_served(jsonb, jsonb, text)
 -- [212: RESTATED (211's statement, with the cure)] public._gallery_veil
 -- VEIL-21 (R2): 211's statement, and _gallery_veil_withhold_always run on every body it returns: last on the veiled body,
 -- and, where the share is unmarked (no veil: 211 returned no body and the reads served their projection as before), on
--- that projection, returned as `body`, so the gallery read, the import and the campaign map's member (whose member
--- expression takes `body` before its projection) send it too. Twin:
+-- that projection, returned as `body`, so the gallery read and the import send it too (the campaign map's member is the
+-- party link's read since (39): `link` true, so an unmarked member takes the default veil and never this path). Twin:
 -- galleryVeil.js :: projectShareVeil (the unmarked path) and applyVeil (last).
 -- R4-IDS (VR10; brief R4-IDS PART TWO, items 1, 5, 6): RESTATED VOLATILE. ONE salt a call (gen_random_uuid(), never
 -- shipped), the only function of the lane that draws; every person id of the body it returns re-keyed under it
@@ -3008,8 +3025,8 @@ begin
   if jsonb_typeof(ov) <> 'object' then ov := '{}'; end if;
   res := public._gallery_veil_resolve(pub, ov, link, people);
   -- VEIL-21 (R2): an unmarked listing is served as before (the reads take `body` where it is given), but for what no
-  -- non-owner read sends whatever the veil (_gallery_veil_withhold_always): the gallery read, the import and the campaign
-  -- map's member (get_gallery_map serves `body` where there is one), each its own projection less those rows
+  -- non-owner read sends whatever the veil (_gallery_veil_withhold_always): the gallery read and the import, each its own
+  -- projection less those rows (the campaign map's member takes the link's veil since (39), never this path)
   -- VEIL-22 (R3): and the roster choices before it (nothing is hidden whole there: VR31's shares alone can move)
   -- R4-IDS (item 5): and every person id re-keyed between the two, the marker's person keys with it (registry: people.rekey)
   if res is null then
@@ -3161,8 +3178,8 @@ create or replace function public._gallery_apply_member_overrides(
       case when not coalesce(settlement_share_dm, false)
                 and (jsonb_path_exists(sp.d, 'lax $.**.prominentRelationship') or jsonb_path_exists(sp.d, 'lax $.**.pressureSentence'))
            then '{}'::jsonb else sp.d end
-    when cv.closed or cv.pr_dropped or ws.ps_told
-      then sp.d - array_remove(array[case when cv.closed or cv.pr_dropped then 'prominentRelationship' end,
+    when cv.closed or cv.pr_dropped or cv.pr_orphan or ws.ps_told
+      then sp.d - array_remove(array[case when cv.closed or cv.pr_dropped or cv.pr_orphan then 'prominentRelationship' end,
                                      case when cv.closed or ws.ps_told then 'pressureSentence' end], null)
     else sp.d
   end
@@ -3199,11 +3216,13 @@ create or replace function public._gallery_apply_member_overrides(
   -- THE FULL TOWN IN ONE SPELLING: its own copy, its own sentence, its own ties. `pub`: a read the sanitiser projected
   -- (Reveal DM off; the party link always); `dropped`: on such a read, every tie of the full town the sanitiser removes by
   -- its own condition (an object of relationships[] whose `covert` is JSON true); `unread`: the full town or its ties
-  -- cannot be read
+  -- cannot be read, or (V28 (1), FAIL CLOSED) the full town carries the copy or the sentence and NO relationships key, so
+  -- the ties they might tell cannot be checked
   cross join lateral (
     select not coalesce(settlement_share_dm, false) as pub,
            jsonb_typeof(dm_full) is distinct from 'object'
-             or (dm_full ? 'relationships' and jsonb_typeof(dm_full -> 'relationships') is distinct from 'array') as unread,
+             or (dm_full ? 'relationships' and jsonb_typeof(dm_full -> 'relationships') is distinct from 'array')
+             or (jsonb_typeof(dm_full) = 'object' and not (dm_full ? 'relationships') and (dm_full ? 'prominentRelationship' or dm_full ? 'pressureSentence')) as unread,
            coalesce((select jsonb_agg(t) from jsonb_array_elements(case when jsonb_typeof(dm_full -> 'relationships') = 'array' then dm_full -> 'relationships' else '[]' end) t
                       where jsonb_typeof(t) = 'object' and (t -> 'covert') = 'true'::jsonb), '[]') as dropped,
            dm_full -> 'prominentRelationship' as pr,
@@ -3219,7 +3238,19 @@ create or replace function public._gallery_apply_member_overrides(
                           where (public._gallery_veil_str(t -> 'npc1Name') = public._gallery_veil_str(cw.pr -> 'npc1') and public._gallery_veil_str(t -> 'npc2Name') = public._gallery_veil_str(cw.pr -> 'npc2')
                                  and public._gallery_veil_str(t -> 'typeName') = public._gallery_veil_str(cw.pr -> 'type'))
                              or (public._gallery_veil_str(cw.pr -> 'full') <> '' and t -> 'description' = cw.pr -> 'full')
-                             or (public._gallery_veil_str(cw.pr -> 'tension') <> '' and t -> 'tension' = cw.pr -> 'tension')), false) as pr_dropped
+                             or (public._gallery_veil_str(cw.pr -> 'tension') <> '' and t -> 'tension' = cw.pr -> 'tension')), false) as pr_dropped,
+           -- U3R (V28 (1) (c), THE ORPHAN RULE): the full town's copy is the copy of NO tie its relationships[] holds (covert
+           -- or not; the same two ends and type, nor its text), so nothing can say it is not a dropped tie's: it goes whole.
+           -- A copy that is there and is not an object is the copy of no tie. (Its sentence waits for the chair's PS-RULE.)
+           cw.pub and coalesce(jsonb_typeof(cw.pr) is not null and jsonb_typeof(cw.pr) <> 'null'
+             and jsonb_typeof(dm_full -> 'relationships') = 'array'
+             and not (jsonb_typeof(cw.pr) = 'object'
+                      and exists (select 1 from jsonb_array_elements(dm_full -> 'relationships') t
+                                   where jsonb_typeof(t) = 'object'
+                                     and ((public._gallery_veil_str(t -> 'npc1Name') = public._gallery_veil_str(cw.pr -> 'npc1') and public._gallery_veil_str(t -> 'npc2Name') = public._gallery_veil_str(cw.pr -> 'npc2')
+                                           and public._gallery_veil_str(t -> 'typeName') = public._gallery_veil_str(cw.pr -> 'type'))
+                                          or (public._gallery_veil_str(cw.pr -> 'full') <> '' and t -> 'description' = cw.pr -> 'full')
+                                          or (public._gallery_veil_str(cw.pr -> 'tension') <> '' and t -> 'tension' = cw.pr -> 'tension')))), false) as pr_orphan
     offset 0
   ) cv
   -- `ps_told`: the full town's pressure sentence names both ends of a dropped tie, or holds its words, current or (with the
@@ -3334,11 +3365,24 @@ as $$
   -- 211: the editor's working state (decrees, dmLayer) never travels, Reveal DM or not (the third
   -- review's V3-1; the client's full mode strips both), nor the author's custom-content library (the fifth
   -- review's V5-3, ruled by the chair: customContentRoster, customContentProvenance, which no page shows)
+  -- U3R (V28 (1) (b)): THE LIVE STORED ROW's covert ties (its relationships[] and its narration's), by the sanitiser's own
+  -- condition (an object whose `covert` is JSON true), joined to the source's for the covert check alone: in snapshot mode
+  -- the source is the frozen copy, and master's client froze a public projection (toPublicSafe), which holds none
+  cross join lateral (
+    select coalesce((select jsonb_agg(t order by u.w, x.o)
+                       from unnest(array[s.data, s.ai_data -> 'aiSettlement']) with ordinality u(doc, w)
+                            cross join lateral jsonb_array_elements(case when jsonb_typeof(u.doc -> 'relationships') = 'array' then u.doc -> 'relationships' else '[]' end) with ordinality x(t, o)
+                      where jsonb_typeof(x.t) = 'object' and (x.t -> 'covert') = 'true'::jsonb), '[]') as ties
+    offset 0
+  ) lv
+  cross join lateral (select public._gallery_dm_full_json(src.j) as j offset 0) fj
   cross join lateral (
     select public._gallery_apply_member_overrides(
-      case when s.gallery_share_dm then public._gallery_dm_full_json(src.j) - array['decrees', 'dmLayer', 'customContentRoster', 'customContentProvenance']
+      case when s.gallery_share_dm then fj.j - array['decrees', 'dmLayer', 'customContentRoster', 'customContentProvenance']
            else public._gallery_sanitize_public_json(src.j) end,
-      public._gallery_dm_full_json(src.j),
+      -- U3R (V28 (1) (b)): the full town's ties and the live row's covert ties (where the full town's ties are an array; where
+      -- the key is absent or not an array the town is `unread` and both strings go)
+      case when jsonb_typeof(fj.j -> 'relationships') = 'array' then jsonb_set(fj.j, '{relationships}', (fj.j -> 'relationships') || lv.ties) else fj.j end,
       s.gallery_member_overrides, s.gallery_share_dm, s.gallery_importable, false
     ) as d
     offset 0
@@ -3461,11 +3505,24 @@ as $$
   -- 211: the editor's working state (decrees, dmLayer) never travels, Reveal DM or not (the third
   -- review's V3-1; the client's full mode strips both), nor the author's custom-content library (the fifth
   -- review's V5-3, ruled by the chair: customContentRoster, customContentProvenance, which no page shows)
+  -- U3R (V28 (1) (b)): THE LIVE STORED ROW's covert ties (its relationships[] and its narration's), by the sanitiser's own
+  -- condition (an object whose `covert` is JSON true), joined to the source's for the covert check alone: in snapshot mode
+  -- the source is the frozen copy, and master's client froze a public projection (toPublicSafe), which holds none
+  cross join lateral (
+    select coalesce((select jsonb_agg(t order by u.w, x.o)
+                       from unnest(array[s.data, s.ai_data -> 'aiSettlement']) with ordinality u(doc, w)
+                            cross join lateral jsonb_array_elements(case when jsonb_typeof(u.doc -> 'relationships') = 'array' then u.doc -> 'relationships' else '[]' end) with ordinality x(t, o)
+                      where jsonb_typeof(x.t) = 'object' and (x.t -> 'covert') = 'true'::jsonb), '[]') as ties
+    offset 0
+  ) lv
+  cross join lateral (select public._gallery_dm_full_json(src.j) as j offset 0) fj
   cross join lateral (
     select public._gallery_apply_member_overrides(
-      case when s.gallery_share_dm then public._gallery_dm_full_json(src.j) - array['decrees', 'dmLayer', 'customContentRoster', 'customContentProvenance']
+      case when s.gallery_share_dm then fj.j - array['decrees', 'dmLayer', 'customContentRoster', 'customContentProvenance']
            else public._gallery_sanitize_public_json(src.j) end,
-      public._gallery_dm_full_json(src.j),
+      -- U3R (V28 (1) (b)): the full town's ties and the live row's covert ties (where the full town's ties are an array; where
+      -- the key is absent or not an array the town is `unread` and both strings go)
+      case when jsonb_typeof(fj.j -> 'relationships') = 'array' then jsonb_set(fj.j, '{relationships}', (fj.j -> 'relationships') || lv.ties) else fj.j end,
       s.gallery_member_overrides, s.gallery_share_dm, s.gallery_importable, true
     ) as d
     offset 0
@@ -3531,7 +3588,7 @@ begin
     from public.settlements s
     -- 211: the member's own listing source (the review's F7): its narration when narrated, its frozen
     -- copy in snapshot mode (a copy past the bound is refused: the member is left out, never served
-    -- live), then the sanitizer and its own listing's veil
+    -- live), then the sanitizer; then (212, (39)) the link's splice and the link's veil, below
     cross join lateral (
       select case
         when s.gallery_share_narrated
@@ -3547,6 +3604,16 @@ begin
         from (select case when mv.v ->> 'mode' = 'snapshot' and jsonb_typeof(mv.v -> 'snapshot') = 'object' then mv.v -> 'snapshot' end as copy
                 from (select s.gallery_member_overrides -> '$veil' as v offset 0) mv) cp
     ) src
+    -- U3R (V28 (1) (b)): THE LIVE STORED ROW's covert ties (its relationships[] and its narration's), by the sanitiser's own
+    -- condition (an object whose `covert` is JSON true), joined to the source's for the covert check alone: in snapshot mode
+    -- the source is the frozen copy, and master's client froze a public projection (toPublicSafe), which holds none
+    cross join lateral (
+      select coalesce((select jsonb_agg(t order by u.w, x.o)
+                         from unnest(array[s.data, s.ai_data -> 'aiSettlement']) with ordinality u(doc, w)
+                              cross join lateral jsonb_array_elements(case when jsonb_typeof(u.doc -> 'relationships') = 'array' then u.doc -> 'relationships' else '[]' end) with ordinality x(t, o)
+                        where jsonb_typeof(x.t) = 'object' and (x.t -> 'covert') = 'true'::jsonb), '[]') as ties
+      offset 0
+    ) lv
     cross join lateral (select public._gallery_sanitize_public_json(src.j) as j offset 0) pub
     -- 212 (N84 (1), N95 (2); VEIL-13 ruling (5)): THE LINK'S SPLICE, as get_unlisted_dossier hands it: the projection,
     -- and for the covert check alone the source's own relationships[], prominentRelationship and pressureSentence
@@ -3556,7 +3623,8 @@ begin
       select public._gallery_apply_member_overrides(
         pub.j,
         case when jsonb_typeof(src.j) = 'object'
-             then pub.j || (select coalesce(jsonb_object_agg(k, src.j -> k), '{}'::jsonb)
+             then pub.j || (select coalesce(jsonb_object_agg(k, case when k = 'relationships' and jsonb_typeof(src.j -> k) = 'array'
+                                                                      then (src.j -> k) || lv.ties else src.j -> k end), '{}'::jsonb)
                               from unnest(array['relationships', 'prominentRelationship', 'pressureSentence']) k where src.j ? k)
              else pub.j end,
         s.gallery_member_overrides, false, s.gallery_importable, false

@@ -1824,6 +1824,14 @@
       "kind": "rationale",
       "ref": "pglite-executed"
     },
+    "tests/security/galleryCovertFrozen.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/galleryCovertUnread.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
     "tests/security/galleryReactions.pglite.test.js": {
       "kind": "rationale",
       "ref": "pglite-executed"

@@ -1180,8 +1180,15 @@ function withholdTiesOfTheSwept(s, hit) {
  *   pressureSentence, where the stored sentence names both ends of a dropped tie, each end found as written, or holds
  *     the words (embedsAny) of that tie's description or tension or, where the copy goes with it, the copy's stored
  *     wording (its full and tension);
- *   both, WHERE UNSURE: the stored town is not a record, its relationships[] is there and not an array, or a dropped
- *     tie's two ends do not both carry a name.
+ *   both, WHERE UNSURE: the stored town is not a record, its relationships[] is there and not an array, a dropped
+ *     tie's two ends do not both carry a name, or (V28 (1), FAIL CLOSED) it carries prominentRelationship or
+ *     pressureSentence and has NO relationships key (the ties they might tell cannot be checked).
+ * U3R (the chair's RULING V28 (1), F1: the check never asks a projection which ties were covert): `live`, the LIVE stored
+ * rows (`data`, and the narration where there is one), joins its covert ties to the town's for the check, wherever the
+ * town's relationships[] is an array: in snapshot mode `full` is the frozen copy, and master's client froze a public
+ * projection (toPublicSafe), which holds none. And THE ORPHAN RULE ((c)): prominentRelationship, WHOLE, where it is there
+ * and is the copy of NO tie of those relationships[] (covert or not; the same two ends and type, nor its text): nothing
+ * can say it is not a dropped tie's. (Its sentence waits for the chair's PS-RULE.)
  * Reveal DM keeps the tie in the projection, so it keeps the four strings. A projection that is not a record is returned
  * as it is (the public projection of any such value is already {}). The projection is not changed: a copy comes back
  * without the keys that go. SQL twin, rule for rule: migration 212 :: _gallery_apply_member_overrides (the CASE around
@@ -1189,23 +1196,33 @@ function withholdTiesOfTheSwept(s, hit) {
  * @param {unknown} pub the projection (galleryPayloadFor's toPublicSafe output)
  * @param {unknown} full the town as stored
  * @param {boolean} shareDm
+ * @param {unknown[]} [live] the live stored rows whose covert ties join the town's (U3R; V28 (1) (b))
  * @returns {unknown}
  */
-export function withholdCovertCopies(pub, full, shareDm) {
+export function withholdCovertCopies(pub, full, shareDm, live = []) {
   if (!isRec(pub) || shareDm) return pub;
-  const unread = !isRec(full) || (Object.prototype.hasOwnProperty.call(full, 'relationships') && !Array.isArray(full.relationships));
+  const unread = !isRec(full) || (Object.prototype.hasOwnProperty.call(full, 'relationships') && !Array.isArray(full.relationships))
+    || (isRec(full) && !Object.prototype.hasOwnProperty.call(full, 'relationships')
+      && (Object.prototype.hasOwnProperty.call(full, 'prominentRelationship') || Object.prototype.hasOwnProperty.call(full, 'pressureSentence')));
+  /** @type {unknown[] | null} the town's ties and the live rows' covert ties (U3R: V28 (1) (b)); null where not an array */
+  const ties = isRec(full) && Array.isArray(full.relationships)
+    ? [...full.relationships, ...(Array.isArray(live) ? live : []).flatMap((d) => (isRec(d) && Array.isArray(d.relationships)
+      ? d.relationships.filter((t) => isRec(t) && t.covert === true) : []))] : null;
   /** @type {Rec[]} */
-  const dropped = isRec(full) && Array.isArray(full.relationships)
-    ? full.relationships.filter(/** @returns {t is Rec} */ (t) => isRec(t) && t.covert === true) : [];
+  const dropped = ties ? ties.filter(/** @returns {t is Rec} */ (t) => isRec(t) && t.covert === true) : [];
   const closed = unread || dropped.some(t => str(t.npc1Name) === '' || str(t.npc2Name) === '');
   const pr = isRec(full) ? full.prominentRelationship : undefined;
-  const prDropped = isRec(pr) && dropped.some(t => (str(t.npc1Name) === str(pr.npc1) && str(t.npc2Name) === str(pr.npc2) && str(t.typeName) === str(pr.type))
-    || (str(pr.full) !== '' && t.description === pr.full) || (str(pr.tension) !== '' && t.tension === pr.tension));
+  /** @param {Rec} t @param {Rec} c */
+  const copies = (t, c) => (str(t.npc1Name) === str(c.npc1) && str(t.npc2Name) === str(c.npc2) && str(t.typeName) === str(c.type))
+    || (str(c.full) !== '' && t.description === c.full) || (str(c.tension) !== '' && t.tension === c.tension);
+  const prDropped = isRec(pr) && dropped.some(t => copies(t, pr));
+  // U3R (V28 (1) (c), THE ORPHAN RULE): there, and the copy of no tie of the town's relationships[]
+  const prOrphan = pr !== undefined && pr !== null && ties !== null && !(isRec(pr) && ties.some(t => isRec(t) && copies(t, pr)));
   const ps = isRec(full) ? full.pressureSentence : undefined;
   const psTold = typeof ps === 'string'
     && (dropped.some(t => str(t.npc1Name) !== '' && str(t.npc2Name) !== '' && ps.includes(str(t.npc1Name)) && ps.includes(str(t.npc2Name)))
       || embedsAny(ps, secondHomePieces([dropped.map(t => [t.description, t.tension]), prDropped && isRec(pr) ? [pr.full, pr.tension] : null])));
-  const prGoes = closed || prDropped;
+  const prGoes = closed || prDropped || prOrphan;
   const psGoes = closed || psTold;
   if (!(prGoes && 'prominentRelationship' in pub) && !(psGoes && 'pressureSentence' in pub)) return pub;
   const out = { ...pub };
