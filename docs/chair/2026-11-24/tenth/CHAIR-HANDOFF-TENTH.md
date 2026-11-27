@@ -1650,3 +1650,17 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
 - THE BUILDER WAS TOLD (SendMessage): name the refused command in its report; do not retry it; do not reach the same end
   another way; leave that step unfinished if it needs it. THE REFUSAL STANDS; NOBODY ROUTES ROUND IT. The owner was told.
 - When the builder reports: read which action it was BEFORE acting on anything else in the report.
+
+## T145 (06:33 UTC on 2026-11-27): THE CHAIR's READ OF POINT 120 IS WHOLE (steps 1 to 6); ONE HOLE SEEN IN THE WALKER, HELD UNTIL THE READER REPORTS
+
+- READ: the walker (`tests/lint/stablePickIds.shared.mjs`, its test, `scripts/stable-pick-ids-door.mjs`, the baseline of
+  ids) and the re-pointed tests (1d792721a7: no matcher loosened that the chair can see; `close7Mirror` (d) now asserts
+  C7 and F6 ADMITTED and the printed pick, with two new F6 places; `dailyLifeGathering` reads the branch from the printed
+  line's pool).
+- THE HOLE THE CHAIR SEES (not yet put to the builder: the reader is asked the same question and is not told this): THE
+  WALKER HOLDS THE SET OF IDS, NOT WHICH LINE AN ID BELONGS TO. A line inserted mid-pool with the later ids shifted by one
+  leaves every old id present and adds one new id: the door banks it, the walker is green, and every town that drew a
+  shifted line changes. Two ids swapped pass the same way. THE CURE THE CHAIR WILL RULE: the baseline keeps, beside each
+  id, a short fingerprint of the line's text as first banked; the walker reds when a banked fingerprint is found under
+  ANOTHER id (an id moved between lines); a re-wording in place (new text, same id) stays allowed and re-banks only by the door.
+- THE SAFETY FLAG (T144): the builder has not yet named the blocked action; it is in its gates (`tests/lint`).
