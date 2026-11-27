@@ -71,3 +71,20 @@ See section 4, newest last.
 - NEXT: read each builder's report and its diff WHOLE; the independent reader on the joined result; the landing helper;
   then, in the tenth chair's order: CI by name, TAIL-PICKS' measure (point 121, before the release), R1 to R13 measured
   then built, RENAME-REDEALS, the VOICES measure, the browser walk; then the share page resumes.
+
+## V2 (16:02 UTC on 2026-11-27): THE OWED ROWS' FOUR CURES REBUILT, READ BY THE CHAIR AND ACCEPTED; THE TAIL'S CENSUS STARTED
+- OWED-CURE-R finished: `lane/stack-120-owed-wip-2026-11-27` (local, /home/user/wt/owedcure) at c1dd12135 on 1f946c43f1:
+  bf1e97af1 the ledger's 26 rows (all 26 texts byte-equal to the accepted table `tenth/landing/120/OWED-LEDGER-26.tsv`,
+  so the verdicts read under G78 stand: 26 colour), 90675fcfd and 1361cdf37 the two stale tests read the pool's head (a
+  planted repeat still reds), c1dd12135 the `quiet` helper over six lines. THE CHAIR READ THE DIFF WHOLE: source one file,
+  seven lines, statements unchanged; tests three lines. ONE THING THE FIRST BUILD'S RECORD DOES NOT MENTION: the ledger head's
+  `lines` 306 to 332 (it counts the rows: 306 + 26); `declaring` left at 30 as G78 left it. ACCEPTED (E5); the wide gate
+  decides if anything pins the old figure. Records moved 0 of 300; both typechecks at their ceilings; `tests/data` whole: the
+  two listed rows of `dossierStateProseProjection.contract` only.
+- D13-120R: steps 1 and 2 committed (be58ebed1 the helper: mix32 over fnv1a32 of `<key>::<id>`, a tie to the smaller id,
+  a falsy key the first line; cf9ce97ca Daily Life and the eight headers), BOTH READ BY THE CHAIR: keys and ids unchanged; the
+  outsider second pick's id is the option's branch name (a rename of a branch would re-deal that pick: for the guard's
+  "does not catch" list or a scope of its own: put to GUARD-120R).
+- TAIL-CENSUS STARTED (brief `prompts/START-TAIL-CENSUS.txt`; read-only, no test runs; scratch `tail/`): the 18 and 7
+  town-page sites of point 121's candidate, each with its pool, its ids and a proposal.
+- BRIEFS WRITTEN AHEAD: `START-GUARD-120R.txt`, `START-READER-120R.txt`, `START-LAND-120R.txt`, `START-R-MEASURE.txt`.
