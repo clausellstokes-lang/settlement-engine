@@ -220,3 +220,5 @@ a record of the shape written before 2026-11-03 (no food record): every line its
 - **RENAME-REDEALS** (G76): Daily Life's picks are keyed by the town's name: does a rename re-deal the page; which key (`_seed`, `id`, name) survives a save, an import and the public projection. A measure; no change until the owner's page and the shared page are proven to agree under it.
 - **R12, A PAYS-ITS-WAY LINE BESIDE A DEBT HOOK OR A DEBT HISTORY** (G76 (E1)): 4 of 300 master-born V records ("owes no one" beside a hook about a debt owed to the partner settlement; two beside a history of a foreign debt called in). Which homes print a PRESENT debt of the place: measured with the whole-town items.
 - **P9c CLOSED** (G76 (E2)): no saved shape holds a non-numeric monster score (2,160 records). **OLD-SAVE CLOSED** (G76 (E1)): a save with no food record prints no line its page denies for that reason (0 of 300).
+
+- **R13, A ROLE TITLE WHERE A NAME BELONGS IN A TIE LINE** (G77, 05:01 UTC 2026-11-27; OWED-6's note: "Miller needs Innkeeper's silence"): measured with the whole-town items.
