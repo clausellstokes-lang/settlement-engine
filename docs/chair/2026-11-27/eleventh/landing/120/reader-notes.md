@@ -291,3 +291,11 @@ the tree I measured); `scripts/q8-mutants.mjs`: ONE planted change in product so
 `SECOND-READER-120R.txt` beside this file (498 words). Verdict: THE BAR HOLDS; 4 findings (3 in the id guard, 1 an unreachable edge of the helper);
 1 known item measured (the stored share stamp). Every number in it is from the scripts named above, kept in my scratch (`scripts/`, `out/`, `logs/`);
 the scratch is on my container only and goes with it.
+
+## AFTER THE REPORT (19:1x UTC)
+- The report was sent to the chair's session by `send_message` (delivered), its first line naming this branch at 885d929c7.
+- (6) REPEATED ON V, tip, 900 towns (`out/q6-V-tip.txt`): owner tab 900/900 (the owner-only line 221/221, never on the player view, the shared page
+  or the PDF); player view 900/900; fresh shared page: Daily Life 900/900, the Outlook's sentence 900/900 (stamp = owner's 900/900); PDF chapters
+  walked 900/900 and 900/900; Foundry 900/900; AI grounding 900/900. The same as C.
+- Every worktree I made is removed (`git worktree remove --force`: chair, base, reader120, guardp, r8) and the master archive deleted; the main
+  checkout is clean on `lane/reader-120r-2026-11-27`. Nothing of the two judged branches was changed; no branch but mine was pushed; no pull request.
