@@ -56,3 +56,9 @@ THE NEXT COMMAND: read each child's first report as it lands; relay the chair's 
   tests/ops/migrationRehearsal.test.js, tests/scripts/{implementationPackets,implementationSession,landingStageMeasure}.test.js,
   tests/soak-harness/soakRegister.test.js); none under src/ or supabase/. Told the chair. VEIL-53's branches sit on its old trial join
   (point 114, ba7460c33) and come in as merges.
+- 2026-11-27T23:29:18Z: V23/V26's HUNK READ BY ME, ONCE (cca234bc7's four lines of 212; c2d9cf8a6..d2316f101: the down file's eleven lines, the
+  rollback block's hosted compare, the owner's page): NO FAULT (PLAUSIBLE: read, not run). The down file's revoke-then-grant order rebuilds the
+  two access lists entry for entry ({=X, postgres, anon, authenticated, service_role} and {postgres, anon, authenticated, service_role}).
+  TWO NOTES FOR THE JOIN: (1) the block asserts no unexpected boot failure on the full chain and on the chain to 211 but not on the chain
+  to 210; (2) the owner's page says "after 211 and before 212": its numbers move with the renumbering. It is read again on the joined tree
+  with the second reader and the chair (the pause page's item 3).
