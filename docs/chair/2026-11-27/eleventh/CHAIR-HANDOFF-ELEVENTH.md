@@ -199,3 +199,21 @@ See section 4, newest last.
   ENVIRONMENT red (no local ref `review-fixes-2026-07-08`): THE CHAIR FETCHED THAT REF HERE at 17:22 UTC on 2026-11-27.
 - THE PRE-RUN (PRE120), three shards of four: 31,865 tests; every failing test not on the list is in `tests/domain` or is
   the lighting census (sorted by `shards/sort.py`, kept in scratch `shards/`). Shard 4 still runs.
+
+## V8 (17:27 UTC on 2026-11-27): THE INDEPENDENT READER OF POINT 120 STARTED IN ITS OWN CHILD SESSION; THE BUILDER TOLD TO USE THE PRE-RUN's LIST
+- THE OWNER ASKED (about 17:15 UTC) "Where are we at right now and what are your comprehensive thoughts?": ANSWERED IN FULL,
+  first. What the chair told him it intends, vetoable: the scope held where it is (new ideas to an after-release list unless
+  leaving them out would move saved towns twice); VOICES measured and brought to him as one number with a recommendation,
+  not assumed in; THE SHARE VEIL RESUMED ON CHILD MACHINES BESIDE THE TOWN CURES once 120 and 121 land (the live site hides
+  only in the browser today), unless he keeps the old order; the guess: five to six days if the scope holds.
+- READER 120R: session_01FE9mEvGeBq7canVFL3PMpz (the top tier, max effort; briefs `prompts/START-READER-120R-CHILD.txt`,
+  which governs, and `prompts/START-READER-120R.txt`): started EARLY on the source whole (df0401af6) and the guard
+  (30539f145); it pushes its report and notes to `lane/reader-120r-2026-11-27` and sends the report by message; a fault
+  that would stop the landing comes at once in a message of its own. OWED TO IT BY THE CHAIR: the builder's `repointed.tsv`
+  by message when D13-120R reports (its question (8)).
+- D13-120R TOLD (ruling 120R-1, by message): no further whole-directory runs; step 6's list is the pre-run's
+  (`shards/PRE120-new.tsv` in scratch: 20 rows from three shards, all `tests/domain` and the lighting census); no
+  `tests/lint` whole (the guard's builder ran it over the same source).
+- PUSHED AS TRANSPORT: `lane/stack-120-guard-wip-2026-11-27` at 30539f145.
+- WHO WORKS NOW: here: D13-120R (tests, proof), TAIL-121 (phase 2), R-MEASURE (C partly born, V not yet). Children: PRE120
+  4/4, TAILCOST 1 to 3 of 3, READER 120R.
