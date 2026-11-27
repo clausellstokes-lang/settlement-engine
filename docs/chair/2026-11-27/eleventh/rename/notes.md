@@ -7,3 +7,4 @@
 - (C) renames written from reading + greps; nameless probe pending (after D).
 - (D) running: work/D-C.jsonl then D-V.jsonl, first 300 of each plan (= thorps and hamlets only: the plans are ordered by size). Process peaks ~2.0 GB at chunk 75.
 - house = institution; its writer (institutionRename.js) has no UI caller; (D) uses the writer.
+- (C) done: nameless by JSON import CONFIRMED (N.jsonl). (E) scratch tree /tmp/rename/rekey (git archive of cccda7569 + 7 key edits, never committed); bundles e-base.mjs / e-rekey.mjs tested.
