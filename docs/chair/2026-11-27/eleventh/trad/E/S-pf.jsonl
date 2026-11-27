@@ -1,0 +1,2 @@
+{"seed":"dp-thorp-0","order":"power-first","powerSeen":[{"visit":1,"group":"Systems","atWalkMoment":[],"afterSettle":["Patron deity"]},{"visit":2,"group":"Systems","atWalkMoment":["Patron deity"],"afterSettle":["Patron deity"]}]}
+{"seed":"dp-thorp-1","order":"power-first","powerSeen":[{"visit":1,"group":"Systems","atWalkMoment":["Patron deity"],"afterSettle":["Patron deity"]},{"visit":2,"group":"Systems","atWalkMoment":["Patron deity"],"afterSettle":["Patron deity"]}]}

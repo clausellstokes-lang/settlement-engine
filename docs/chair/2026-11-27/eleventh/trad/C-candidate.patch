@@ -1,0 +1,102 @@
+diff --git a/src/data/traditionCorpus.js b/src/data/traditionCorpus.js
+index 31992ed..1b74b99 100644
+--- a/src/data/traditionCorpus.js
++++ b/src/data/traditionCorpus.js
+@@ -39,6 +39,7 @@
+  * @property {string}   noun     the display noun ("Feast")
+  * @property {boolean}  deityFit a devotional act (offering/vigil) — biases deity dedication
+  * @property {boolean}  grand    an act that tends to run the grander two-week window
++ * @property {ReadonlyArray<string>} [needs] the facts the act presumes (a fair: the market; NOLANE-2)
+  */
+ // CENSUS-3b unit 5 (the lane's Phase B 5; R6): the three water-keyed elements DECLARE the water
+ // they presume (`needs`, the vocabulary's water atoms: First Landing `navigable` — a coast, a river
+@@ -87,7 +88,7 @@ export const TRADITION_ACTS = Object.freeze([
+   { id: 'procession', noun: 'Procession', deityFit: false, grand: true  },
+   { id: 'vigil',      noun: 'Vigil',      deityFit: true,  grand: false },
+   { id: 'contest',    noun: 'Contest',    deityFit: false, grand: true  },
+-  { id: 'fair',       noun: 'Fair',       deityFit: false, grand: true  },
++  { id: 'fair',       noun: 'Fair',       deityFit: false, grand: true, needs: Object.freeze(['market']) },
+   { id: 'offering',   noun: 'Offering',   deityFit: true,  grand: false },
+ ]);
+ 
+diff --git a/src/domain/traditions/genesis.js b/src/domain/traditions/genesis.js
+index 8c2ff99..f7eecaf 100644
+--- a/src/domain/traditions/genesis.js
++++ b/src/domain/traditions/genesis.js
+@@ -194,6 +194,10 @@ const FIELD_ELEMENT = 'field';
+ // The engine that first carried the field rule (G72 (1)): a literal, never the build's GENERATOR_VERSION, so the next release keeps the rule for places 0.10.0 bore.
+ const FIELD_RITE_SINCE = '0.10.0';
+ 
++// TRAD-NEEDS (R9): the engine that first draws only rites the place can hold. A literal (as FIELD_RITE_SINCE): a place an
++// earlier engine bore keeps its whole drawn set, and the tab's view-time drop (shownTraditions.js) stands for it.
++const NEEDS_SINCE = '0.10.0';
++
+ /**
+  * B1(ii), NO TRADITION BLESSES FIELDS THE PLACE DOES NOT HAVE (the tenth chair's G64 (2), (3)): the place's own food record
+  * NAMES its sources (`economicState.foodSecurity.foodRecord.foodSources`, the native keys the generator writes, never a
+@@ -392,6 +396,13 @@ export function deriveFoundingTraditions(settlement) {
+ 
+   const foundingCandidates = TRADITION_ELEMENTS.filter((e) => e.foundingFit);
+   const refusesFieldRite = fieldRiteRefused(settlement); // B1(ii) (G64): false for a record an earlier engine bore
++  // TRAD-NEEDS (R9): THE DRAW KNOWS THE NEEDS. A motif whose element or act declares a fact (`needs`, the corpus; the
++  // tab's own rule, shownTraditions.js :: motifNeeds) the record does not hold is not taken; the next attempt's draw is.
++  const askNeeds = bornAtOrAfter(settlement, NEEDS_SINCE);
++  /** @type {any} */ let factsMemo = null;
++  /** @param {TraditionElement} e @param {TraditionAct} a @returns {boolean} the place holds every fact the motif declares */
++  const heldBy = (e, a) => !askNeeds || [...(e.needs || []), ...(a.needs || [])]
++    .every((x) => atomHolds(x, (factsMemo ||= /** @type {Parameters<typeof atomHolds>[1]} */ (factsOf(/** @type {Parameters<typeof factsOf>[0]} */ (settlement))))) === true);
+   const usedNames = new Set();
+   const usedMotifs = new Set();
+   /** @type {TraditionRec[]} */
+@@ -415,6 +426,12 @@ export function deriveFoundingTraditions(settlement) {
+         /** @type {TraditionAct[]} */ ([...TRADITION_ACTS]),
+         TRADITION_ACTS.map((a) => actWeight(a, el, id, true)),
+       );
++      // TRAD-NEEDS: a founding motif the place cannot hold takes the first held of ten further draws on forks of their own.
++      for (let k = 1; k <= 10 && !heldBy(el, act); k += 1) {
++        const e = rng.fork(`el:${k}`).weightedPick(/** @type {TraditionElement[]} */ (foundingCandidates), foundingCandidates.map((x) => foundingElementWeight(x, id)));
++        const a = rng.fork(`act:${k}`).weightedPick(/** @type {TraditionAct[]} */ ([...TRADITION_ACTS]), TRADITION_ACTS.map((x) => actWeight(x, e, id, true)));
++        if (heldBy(e, a)) [el, act] = [e, a];
++      }
+     } else {
+       /** @param {number} k @returns {[TraditionElement, TraditionAct]} attempt k's draw, on its own two forks */
+       const drawAt = (k) => {
+@@ -443,12 +460,14 @@ export function deriveFoundingTraditions(settlement) {
+       // attempts. It takes the first that is ADMITTED and whose motif the town has not used (the reroll's own test,
+       // `motifUnused`: the base never shows one town a motif twice), else the first admitted; if all ten draw a refused rite,
+       // the row keeps its first draw (never dropped). The chair's ruling on B1II-119's finding 1.
+-      if (refusesFieldRite && el.id === FIELD_ELEMENT) {
++      /** @param {TraditionElement} e @param {TraditionAct} a */
++      const admits = (e, a) => !(refusesFieldRite && e.id === FIELD_ELEMENT) && heldBy(e, a); // TRAD-NEEDS: and its needs held
++      if (!admits(el, act)) {
+         const first = Math.min(attempt, 4);
+         /** @type {[TraditionElement, TraditionAct] | null} */ let admitted = null;
+         for (let k = first + 1; k <= first + 10; k += 1) { // ten further attempts (G64 (1))
+           const [e, a] = drawAt(k);
+-          if (e.id === FIELD_ELEMENT) continue;
++          if (!admits(e, a)) continue;
+           if (motifUnused(e, a)) { admitted = [e, a]; break; }
+           admitted ||= [e, a];
+         }
+diff --git a/src/domain/traditions/shownTraditions.js b/src/domain/traditions/shownTraditions.js
+index 8c3834a..ba453c5 100644
+--- a/src/domain/traditions/shownTraditions.js
++++ b/src/domain/traditions/shownTraditions.js
+@@ -27,7 +27,7 @@ import { mergeCustomFoundingTraditions } from './customFounding.js';
+ import { describeTraditions, withoutFunction } from './traditionDescription.js';
+ import { liveInstitutions } from '../institutions/institutionRoster.js';
+ import { isHideableHouse } from '../people/cardVeil.js';
+-import { TRADITION_ELEMENTS } from '../../data/traditionCorpus.js';
++import { TRADITION_ELEMENTS, TRADITION_ACTS } from '../../data/traditionCorpus.js';
+ import { filterDeclared } from '../facts/drawDeclared.js';
+ import { factsOf } from '../facts/factsOf.js';
+ 
+@@ -53,7 +53,7 @@ const ELEMENT_NEEDS = new Map(TRADITION_ELEMENTS.filter((e) => Array.isArray(e.n
+  * act id → the facts it declares. A FAIR IS KEPT WHERE THERE IS A MARKET (NOLANE-2, BAR-169/170): the act `fair` presumes
+  * the market the Overview's market line reads (`market`, the vocabulary's market atom). Kind A, display only.
+  */
+-const ACT_NEEDS = new Map([['fair', ['market']]]);
++const ACT_NEEDS = new Map(TRADITION_ACTS.filter((a) => Array.isArray(a.needs) && a.needs.length).map((a) => [a.id, a.needs]));
+ 
+ /** The facts a generated tradition's motif declares: its element's, and its act's. @param {AnyRec|null|undefined} rec @returns {string[]} */
+ export function motifNeeds(rec) {
