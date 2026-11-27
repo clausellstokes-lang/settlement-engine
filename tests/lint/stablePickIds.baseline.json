@@ -1357,6 +1357,268 @@
         "SS5": "074cbc1c3219"
       },
       "retired": []
+    },
+    "fortune.merit": {
+      "present": {
+        "A": "5c93643f50ce",
+        "B": "0398c6316aa6",
+        "C": "b7f795df8a50"
+      },
+      "retired": []
+    },
+    "fortune.lasting": {
+      "present": {
+        "A": "9f71c8c9a568",
+        "B": "dea9a107e0de",
+        "C": "6a21795850e0",
+        "both": "945544cd2268"
+      },
+      "retired": []
+    },
+    "traditionDescription.ACT_LEADS": {
+      "present": {
+        "LEAD.feast.1": "9042291efcd2",
+        "LEAD.feast.2": "961f84d7fca5",
+        "LEAD.feast.3": "a5e23e28dc2a",
+        "LEAD.feast.4": "172b8481072c",
+        "LEAD.feast.5": "171543e61c24",
+        "LEAD.feast.6": "eb1fd8d16bae",
+        "LEAD.feast.7": "ebcaca7098e4",
+        "LEAD.feast.8": "b62ba9fec2f7",
+        "LEAD.procession.1": "f92f5f25c0cd",
+        "LEAD.procession.2": "d12e44f1ac9e",
+        "LEAD.procession.3": "f4b06df51ab7",
+        "LEAD.procession.4": "565cb90d7a45",
+        "LEAD.vigil.1": "ecd6a111d7f3",
+        "LEAD.vigil.2": "fedac5ccf828",
+        "LEAD.vigil.3": "5a9b1fde816e",
+        "LEAD.vigil.4": "db3ca9265b6b",
+        "LEAD.contest.1": "bff4b6d409fd",
+        "LEAD.contest.2": "3e7aa8c5182e",
+        "LEAD.contest.3": "ec4549774ded",
+        "LEAD.contest.4": "22c34c7ed8a8",
+        "LEAD.fair.1": "5142b5262745",
+        "LEAD.fair.2": "e72c4ce89431",
+        "LEAD.fair.3": "813a28a246a0",
+        "LEAD.fair.4": "9864bf0eaf74",
+        "LEAD.fair.5": "a83cf488a698",
+        "LEAD.fair.6": "10c5ae627685",
+        "LEAD.offering.1": "4b4fbd29c68a",
+        "LEAD.offering.2": "0ebe0ddc188f",
+        "LEAD.offering.3": "f8fd76d57276",
+        "LEAD.offering.4": "682a1a2db0db"
+      },
+      "retired": []
+    },
+    "traditionDescription.ELEMENT_GLOSS": {
+      "present": {
+        "GLOSS.founding.1": "215f3199569f",
+        "GLOSS.founding.2": "3dfcedb511ff",
+        "GLOSS.founding.3": "d705f43a6d19",
+        "GLOSS.first-landing.1": "de8287d57da5",
+        "GLOSS.first-landing.2": "c3fe502bbe2e",
+        "GLOSS.first-landing.3": "91972a11e860",
+        "GLOSS.charter.1": "c188bbb24bdd",
+        "GLOSS.charter.2": "bb063da55978",
+        "GLOSS.charter.3": "77b07fdb0803",
+        "GLOSS.hearth.1": "6e096752b27f",
+        "GLOSS.hearth.2": "ae628ff2cbfe",
+        "GLOSS.hearth.3": "e1bd3605f724",
+        "GLOSS.harvest.1": "e132072495e9",
+        "GLOSS.harvest.2": "b1bb6f0461f3",
+        "GLOSS.harvest.3": "f9f596d58651",
+        "GLOSS.harvest.4": "bea145d3bd36",
+        "GLOSS.harvest.5": "463d4825dffa",
+        "GLOSS.river.1": "4f87c3065ceb",
+        "GLOSS.river.2": "6ab8f4e9fdea",
+        "GLOSS.river.3": "4890f45b0fda",
+        "GLOSS.stone.1": "d93f306a1a24",
+        "GLOSS.stone.2": "6f57a97c8ac3",
+        "GLOSS.stone.3": "9d331bc3ea95",
+        "GLOSS.the-dead.1": "1d1a7d8206bd",
+        "GLOSS.the-dead.2": "8e02d9fcb521",
+        "GLOSS.the-dead.3": "90f8a53aadea",
+        "GLOSS.field.1": "9a24e422e0c2",
+        "GLOSS.field.2": "5ebe3e5d05a8",
+        "GLOSS.field.3": "5b75289016b0",
+        "GLOSS.forge.1": "888576e78bf5",
+        "GLOSS.forge.2": "03eb2c01edeb",
+        "GLOSS.forge.3": "f56ab93d13b5",
+        "GLOSS.market.1": "a222103814a6",
+        "GLOSS.market.2": "7c0a9f70ced4",
+        "GLOSS.market.3": "1fa59dc1b89d",
+        "GLOSS.hunt.1": "26b5c55e1971",
+        "GLOSS.hunt.2": "e65cbce3c7d0",
+        "GLOSS.hunt.3": "163d2280916c",
+        "GLOSS.long-sun.1": "984c75396dc7",
+        "GLOSS.long-sun.2": "f4dd48581724",
+        "GLOSS.long-sun.3": "c03a402bb155",
+        "GLOSS.tide.1": "694913312d2f",
+        "GLOSS.tide.2": "4ce4bb2e5f2a",
+        "GLOSS.tide.3": "0cb1775843ca",
+        "GLOSS.greening.1": "7b6c05625b32",
+        "GLOSS.greening.2": "df7022874a58",
+        "GLOSS.greening.3": "8f238c62be16",
+        "GLOSS.stars.1": "a5a763f849c4",
+        "GLOSS.stars.2": "b31ffd1696ed",
+        "GLOSS.stars.3": "cb9ea58c705c"
+      },
+      "retired": []
+    },
+    "traditionDescription.HOUSE_FRAMES": {
+      "present": {
+        "HOUSE.body.1": "a4582b2bbef8",
+        "HOUSE.body.2": "04a77056e096",
+        "HOUSE.body.3": "0bf6ea345457",
+        "HOUSE.bodyPerson.1": "f42c71f7305f",
+        "HOUSE.bodyPerson.2": "000b3b0e12e5",
+        "HOUSE.bodyPerson.3": "1f22b105215f",
+        "HOUSE.place.1": "8b0adc5d6548",
+        "HOUSE.place.2": "b9a849218b88",
+        "HOUSE.place.3": "2a47d98771a2",
+        "HOUSE.placePerson.1": "33f862ee4ffe",
+        "HOUSE.placePerson.2": "0966810c8fa9",
+        "HOUSE.placePerson.3": "2548afea7e86",
+        "HOUSE.placePower.1": "f92711207f7b",
+        "HOUSE.placePower.2": "5fedf7502223",
+        "HOUSE.placePower.3": "8b1f1d763ace"
+      },
+      "retired": []
+    },
+    "traditionDescription.POWER_FRAMES": {
+      "present": {
+        "POWER.seat.1": "59ad9e2a668d",
+        "POWER.seat.2": "1659f120aba9",
+        "POWER.seat.3": "c46cdedfb2eb",
+        "POWER.religious.1": "1659f120aba9",
+        "POWER.religious.2": "413e1ce26d15",
+        "POWER.religious.3": "6f824545e5c8",
+        "POWER.merchantry.1": "d344f7f097bf",
+        "POWER.merchantry.2": "f3edae27c4b5",
+        "POWER.merchantry.3": "037db54798cf"
+      },
+      "retired": []
+    },
+    "traditionDescription.OWNER_FRAMES": {
+      "present": {
+        "OWNER.owner.1": "102a72b0f1ac",
+        "OWNER.owner.2": "b4ba1b7467e0",
+        "OWNER.owner.3": "57189115e445"
+      },
+      "retired": []
+    },
+    "traditionDescription.KEEPER_FRAMES_TOO": {
+      "present": {
+        "TOO.body.1": "4b1a577c1a51",
+        "TOO.body.2": "dd282d597ecf",
+        "TOO.bodyPerson.1": "6bb56c279290",
+        "TOO.bodyPerson.2": "eb7645448b54",
+        "TOO.place.1": "8894dca20588",
+        "TOO.place.2": "245e6975b776",
+        "TOO.placePerson.1": "aa4fad937e50",
+        "TOO.placePerson.2": "c3a529bda1aa",
+        "TOO.placePower.1": "6a73fa9f0a8c",
+        "TOO.placePower.2": "cf144af65293",
+        "TOO.seat.1": "49b64bebbb0b",
+        "TOO.seat.2": "07ddb350396f",
+        "TOO.religious.1": "594c1584ad62",
+        "TOO.religious.2": "7825d55c537c",
+        "TOO.merchantry.1": "fe3e96637a16",
+        "TOO.merchantry.2": "a0db4d628abe",
+        "TOO.owner.1": "8bccadc110f3",
+        "TOO.owner.2": "5b78fe3c6c28"
+      },
+      "retired": []
+    },
+    "traditionDescription.CAUSE_FRAMES": {
+      "present": {
+        "CAUSE.founding.1": "c6d479b6501e",
+        "CAUSE.founding.2": "4cb7246a27ea",
+        "CAUSE.founding.3": "167b780a4a2d",
+        "CAUSE.foundingBare.1": "c33cff3b19f8",
+        "CAUSE.foundingBare.2": "a61fa9f4d506",
+        "CAUSE.foundingBare.3": "cfb9b21538ad",
+        "CAUSE.dead.1": "f4c8823201cf",
+        "CAUSE.dead.2": "f42a39a1e702",
+        "CAUSE.dead.3": "f790d4995d85"
+      },
+      "retired": []
+    },
+    "traditionDescription.ECONOMY_FRAMES": {
+      "present": {
+        "ECON.chief.1": "aed964c2cd29",
+        "ECON.chief.2": "748534fcf69b",
+        "ECON.chief.3": "2867d35d2fa4",
+        "ECON.lesser.1": "21fa4aab4a6c",
+        "ECON.lesser.2": "03ed50633e3f",
+        "ECON.lesser.3": "7e4939852eb5",
+        "ECON.only.1": "c2639b3396fe",
+        "ECON.only.2": "3862bfd50648",
+        "ECON.only.3": "aec9f00782ae"
+      },
+      "retired": []
+    },
+    "tonight.castWants": {
+      "present": {
+        "instigator.1": "e28b5f9fbb09",
+        "instigator.2": "aa51ddcc13e4",
+        "instigator.3": "32282dbd910c",
+        "brunt.1": "35618da7061e",
+        "brunt.2": "91b56847ec56",
+        "brunt.3": "ae25afd34bd5",
+        "lever.1": "943518fedcfe",
+        "lever.2": "e40e6d59ffa3",
+        "lever.3": "cc98060e37cf",
+        "exploiter.1": "af7af1e9c2cc",
+        "exploiter.2": "19cd607ca10b",
+        "defender.1": "e2f9cb565939",
+        "defender.2": "4f1169dc64b1"
+      },
+      "retired": []
+    },
+    "defense.organizedRing": {
+      "present": {
+        "RING-1": "916ab0e67ce4",
+        "RING-2": "8433eb8978cf",
+        "RING-3": "10a37910b16c",
+        "RING-4": "65706a91bafb"
+      },
+      "retired": []
+    },
+    "pdf.headlines.overview": {
+      "present": {
+        "traveller": "3996e26efc9e",
+        "local": "3033c77a3f05",
+        "official": "1203d23d18e9",
+        "newcomer": "ee071432cf47"
+      },
+      "retired": []
+    },
+    "pdf.headlines.economics": {
+      "present": {
+        "trade": "48f73d0e9372",
+        "local": "307360116bf0",
+        "official": "111445d652d0",
+        "traveller": "d2108c3fc583"
+      },
+      "retired": []
+    },
+    "pdf.headlines.npcs": {
+      "present": {
+        "official": "61e51e0e5dd7",
+        "newcomer": "e75789f204c0"
+      },
+      "retired": []
+    },
+    "quickGuide.scopeLine": {
+      "present": {
+        "plain": "4b589757d9d5",
+        "traveller": "3df1e6f915c0",
+        "local": "d8e1a940ece6",
+        "newcomer": "b3f38dc73c95",
+        "official": "0a16baa35fb6"
+      },
+      "retired": []
     }
   }
 }

@@ -15,8 +15,8 @@ import { describe, expect, test, beforeAll } from 'vitest';
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import {
-  BASELINE_REL, DAILY_LIFE_EXPORTS, ROOT, VIABILITY_SCOPE, baselineProblems, dailyLifeTreeOf, doorPlan, findings,
-  fingerprintOf, readBaseline, readTree, viabilityRowsIn, viabilityTreeOf,
+  BASELINE_REL, DAILY_LIFE_EXPORTS, IMPORTED_POOLS, ROOT, VIABILITY_SCOPE, baselineProblems, dailyLifeTreeOf, doorPlan,
+  findings, fingerprintOf, importedPoolsTreeOf, readBaseline, readTree, viabilityRowsIn, viabilityTreeOf,
 } from './stablePickIds.shared.mjs';
 
 /** @typedef {import('./stablePickIds.shared.mjs').Tree} Tree */
@@ -41,12 +41,17 @@ describe('the id guard of point 120: the tree against its baseline', () => {
 
   // TRUE FLOORS (RULING 120R-2, cure 1 (a)): a little over half the first baseline's counts (144 scopes; 615 + 22 ids), so a
   // reader that reads nothing or half reds, while honest retirements (any one scope: the largest holds 33 lines; several
-  // lines) leave room: 80 scopes, 350 Daily Life ids, 12 viability rows.
-  test('guard-the-guard: the reader is not vacuous (true floors: 80 scopes, 350 Daily Life ids, 12 viability rows)', () => {
+  // lines) leave room: 80 scopes, 350 Daily Life ids, 12 viability rows. THE IMPORTED POOLS (RULING 121G-1 (4)): the
+  // same rule over point 121's first banking (16 scopes, 182 ids; the largest, ELEMENT_GLOSS, holds 50): 9 scopes read,
+  // 100 ids.
+  test('guard-the-guard: the reader is not vacuous (true floors: 80 scopes, 350 Daily Life ids, 12 viability rows, 9 imported pools, 100 imported ids)', () => {
     expect(tree.scopes.size).toBeGreaterThanOrEqual(80);
-    const daily = [...tree.scopes].filter(([s]) => s !== VIABILITY_SCOPE).reduce((n, [, l]) => n + l.length, 0);
+    const daily = [...tree.scopes].filter(([s]) => s.includes('|')).reduce((n, [, l]) => n + l.length, 0);
     expect(daily).toBeGreaterThanOrEqual(350);
     expect(tree.scopes.get(VIABILITY_SCOPE)?.length ?? 0).toBeGreaterThanOrEqual(12);
+    const imported = IMPORTED_POOLS.map((p) => tree.scopes.get(p.scope)?.length ?? 0);
+    expect(imported.filter((n) => n > 0).length).toBeGreaterThanOrEqual(9);
+    expect(imported.reduce((a, b) => a + b, 0)).toBeGreaterThanOrEqual(100);
   });
 
   test('NO SILENT REMOVAL: every banked present id is in the tree (a removed line is retired by the door)', () => {
@@ -271,5 +276,75 @@ describe('guard-the-guard: the viability reader (fail-closed)', () => {
     expect(fp(FIXTURE)).toBe(fingerprintOf('${town} feeds itself.'));
     expect(fp(FIXTURE.replace(ROW, "    ['SS1', `${town}   FEEDS itself. `],\n"))).toBe(fp(FIXTURE));
     expect(fp(FIXTURE.replace(ROW, "    ['SS1', `${town} feeds itself well.`],\n"))).toBe(fingerprintOf('${town} feeds itself well.'));
+  });
+});
+
+// ── GUARD-THE-GUARD: the imported pools (point 121), over FIXTURE modules and a fixture table ───────────────────────────
+
+/** @typedef {import('./stablePickIds.shared.mjs').ImportedPool} ImportedPool */
+/** @type {ReadonlyArray<ImportedPool>} */
+const TABLE = [
+  { module: 'm/flat.js', export: 'FLAT', scope: 'x.flat', layout: 'flat', words: 'text' },
+  { module: 'm/flat.js', export: 'BY_ROLE', scope: 'x.byRole', layout: 'record', words: 'text' },
+  { module: 'm/say.js', export: 'FRAMES', scope: 'x.frames', layout: 'flat', words: 'say' },
+];
+const FRAME_A = (/** @type {string} */ l) => `${l}, plainly`;
+const FRAME_B = (/** @type {string} */ l) => `${l}: as you are told`;
+/** @param {{ flat?: unknown, byRole?: unknown, frames?: unknown }} [over] @returns {Record<string, import('./stablePickIds.shared.mjs').PoolModule>} */
+const mods = (over = {}) => ({
+  'm/flat.js': { exports: {
+    FLAT: 'flat' in over ? over.flat : [{ id: 'F.1', text: 'One.' }, { id: 'F.2', text: 'Two.' }, { id: 'F.3', text: 'Three.' }],
+    BY_ROLE: 'byRole' in over ? over.byRole : { a: [{ id: 'a.1', text: 'Want one.' }], b: [{ id: 'b.1', text: 'Want two.' }] },
+  } },
+  'm/say.js': { exports: { FRAMES: 'frames' in over ? over.frames : [{ id: 'plain', say: FRAME_A }, { id: 'told', say: FRAME_B }] } },
+});
+/** @param {Record<string, import('./stablePickIds.shared.mjs').PoolModule>} m */
+const poolTree = (m) => importedPoolsTreeOf(m, TABLE);
+const BANK = /** @type {Baseline} */ ({ scopes: Object.fromEntries([...poolTree(mods()).scopes].map(([s, l]) => [s, { present: Object.fromEntries(l.map((x) => [x.id, x.fp])), retired: [] }])) });
+
+describe('guard-the-guard: the imported pools (point 121)', () => {
+  test('the fixture is read whole: three scopes, the record\'s arrays into one scope, a `say` by its source', () => {
+    const t = poolTree(mods());
+    expect(t.problems).toEqual([]);
+    expect([...t.scopes].map(([s, l]) => `${s}:${l.map((x) => x.id).join(',')}`)).toEqual(['x.flat:F.1,F.2,F.3', 'x.byRole:a.1,b.1', 'x.frames:plain,told']);
+    expect(t.scopes.get('x.frames')?.[0].fp).toBe(fingerprintOf(String(FRAME_A)));
+    expect(kinds(t, BANK)).toEqual([]);
+  });
+
+  test('FAIL-CLOSED: a module that will not import, a missing export, a wrong layout, an empty pool, a row without an id or words, an export named twice', () => {
+    const p = (/** @type {Record<string, import('./stablePickIds.shared.mjs').PoolModule>} */ m, t = TABLE) => importedPoolsTreeOf(m, t).problems.join('\n');
+    expect(p({ ...mods(), 'm/say.js': { error: 'boom' } })).toMatch(/m\/say\.js: will not import \(boom\)/);
+    expect(p({ 'm/flat.js': mods()['m/flat.js'], 'm/say.js': { exports: {} } })).toMatch(/FRAMES: no such export/);
+    expect(p(mods({ flat: { a: [] } }))).toMatch(/FLAT: not a flat array/);
+    expect(p(mods({ byRole: [{ id: 'a.1', text: 'x' }] }))).toMatch(/BY_ROLE: not a record of arrays/);
+    expect(p(mods({ flat: [] }))).toMatch(/FLAT: no row read/);
+    expect(p(mods({ flat: [{ text: 'no id' }] }))).toMatch(/FLAT\[0\]: a row without a string id/);
+    expect(p(mods({ frames: [{ id: 'plain', text: 'not a function' }] }))).toMatch(/FRAMES\[0\]: a row without a string id and its `say` function/);
+    expect(p(mods(), [...TABLE, TABLE[0]])).toMatch(/FLAT: named twice/);
+  });
+
+  test('a shifted insertion and a swap are MOVES, red and refused; a duplicate is red; a retired id reused is red and refused', () => {
+    const shifted = poolTree(mods({ flat: [{ id: 'F.1', text: 'One.' }, { id: 'F.2', text: 'New.' }, { id: 'F.3', text: 'Two.' }, { id: 'F.4', text: 'Three.' }] }));
+    expect(kinds(shifted, BANK)).toEqual(['moved F.3', 'moved F.4', 'reworded F.2']);
+    expect(doorPlan(shifted, BANK).refusals.length).toBeGreaterThan(0);
+    const swapped = poolTree(mods({ frames: [{ id: 'told', say: FRAME_A }, { id: 'plain', say: FRAME_B }] }));
+    expect(kinds(swapped, BANK)).toEqual(['moved plain', 'moved told']);
+    expect(doorPlan(swapped, BANK).refusals).toHaveLength(2);
+    expect(kinds(poolTree(mods({ byRole: { a: [{ id: 'a.1', text: 'Want one.' }], b: [{ id: 'a.1', text: 'Want two.' }] } })), BANK)).toContain('duplicate a.1');
+    const retired = { scopes: { ...BANK.scopes, 'x.flat': { present: { 'F.1': fingerprintOf('One.'), 'F.2': fingerprintOf('Two.') }, retired: ['F.3'] } } };
+    const reuse = poolTree(mods({ flat: [{ id: 'F.1', text: 'One.' }, { id: 'F.2', text: 'Two.' }, { id: 'F.3', text: 'Another.' }] }));
+    expect(kinds(reuse, retired)).toEqual(['reused F.3']);
+    expect(doorPlan(reuse, retired).refusals).toHaveLength(1);
+  });
+
+  test('a `say` frame re-worded in place is red until the door re-banks it; a new pool scope is added by the door', () => {
+    const reworded = poolTree(mods({ frames: [{ id: 'plain', say: (/** @type {string} */ l) => `${l}, said plainly` }, { id: 'told', say: FRAME_B }] }));
+    expect(kinds(reworded, BANK)).toEqual(['reworded plain']);
+    const plan = doorPlan(reworded, BANK);
+    expect([plan.refusals, plan.reworded]).toEqual([[], ['x.frames plain']]);
+    expect(findings(reworded, /** @type {Baseline} */ (plan.next))).toEqual([]);
+    const onlyTwo = { scopes: { 'x.flat': BANK.scopes['x.flat'], 'x.byRole': BANK.scopes['x.byRole'] } };
+    const added = doorPlan(poolTree(mods()), onlyTwo);
+    expect([added.refusals, added.added]).toEqual([[], ['x.frames plain', 'x.frames told']]);
   });
 });
