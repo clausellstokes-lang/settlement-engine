@@ -261,3 +261,26 @@ See section 4, newest last.
 - THE READER (session_01FE9mEvGeBq7canVFL3PMpz) was sent the table and the render-order question (by message).
 - THE STACK QUESTION (E7): decided when the reader reports: if point 121 is built and its own reader is not yet ruled, POINT
   120 LANDS ALONE.
+
+## V11 (19:07 UTC on 2026-11-27): THE WHOLE-TOWN MEASURE IN AND RULED (E12); THREE CURE BUILDERS STARTED AS CHILDREN ON THE JOINED TIP OF POINT 120
+- R-MEASURE finished (2 h 55 min; 1,800 births, each page as the app renders it; `rmeasure/` beside this file with its tools):
+  THE COUNTS AND THE RULING OF EVERY ITEM: `landing/RULING-R.md` (E12). IN SHORT: R2, R3 on the dossier and R6's repeat came
+  from the RETIRED Summary tab the tenth chair's quick render had mounted: closed, no cure. CURED AT PRINT (no birth moves):
+  R1 (12 / 9 pages), R3 on the session sheet (892 / 893), R4 (12 / 6), R5 with R10 and R12, the hard pair (165 / 89), R6 the
+  unnamed good (12 / 14), R7 (94 / 78), R8 woods (0 / 19) and luxury (120 / 37), the Overview's seat line (872 / 879).
+  NOT A FAULT: "pays its way" beside the grade "Weak" alone (151 / 62): a margin and a shock; the owner may veto.
+  AT BIRTH: R13 (243 / 210: a bare role where a name belongs), built; R11 (the date palms, 14 of V), measured first.
+  TO THE SHARE LANE (A19): 39 shared pages of V deny a seat-holder in the seat box and name him in the next paragraph.
+  ITS OWN UNIT LATER (TRAD-NEEDS): R9; the chair's reading: no version bump needed (no production town carries 0.10.0).
+- LAND-120R: THE THREE MERGES ARE IN ON THE LINE's LOCAL TREE, NO CONFLICT (8e5d33b36 stable picks; 2422fde1d the guard;
+  42883b5c4 the owed cures; both typechecks at their ceilings after each); it is on the doors, the build and the sizes.
+- PUSHED AS TRANSPORT: `lane/stack-120-wip-2026-11-27` at 42883b5c4abd020b850eea9dc06ace074f1f2ab4 (the three merges; the
+  doors' commits follow on the line's tree): THE BASE OF THE CURE BUILDERS.
+- THREE CHILD BUILDERS (the middle tier, high effort; common rules `prompts/START-RCURES-COMMON.txt`):
+  R-CURES-A session_01FE9mEu1ow6pwTLRS8G9x5f (`prompts/START-RCURES-A.txt`; branch `lane/stack-122-rcures-a-wip-2026-11-27`:
+  R1, R3 session, R6, R7, the vacuous row); R-CURES-B session_01FE9mEv7yYJ4g5vAbdzBnwD (`START-RCURES-B.txt`;
+  `lane/stack-122-rcures-b-wip-2026-11-27`: R4, R5, R8 woods, R8 luxury); R-BIRTH session_01FE9mEvwwZLxUT1dypvNkrW
+  (`START-RBIRTH.txt`; `lane/stack-123-rbirth-wip-2026-11-27`: R13 built; R11 phase 1). Each pushes after every unit and
+  reports by message. OWED: D1 (the Overview's seat line) after point 121's page-frames unit; each cure branch gets the
+  chair's whole read and ONE independent reader over points 122 and 123 together before they land.
+- TAIL-121: the door's unit committed (39e0063c4); on its four units.
