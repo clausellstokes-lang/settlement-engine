@@ -3,10 +3,13 @@
  * NOLANE-2, BAR-169/170 — A FAIR IS PRINTED ONLY WHERE A MARKET STANDS. 65 of the 278 births that kept a "… Fair" printed
  * it on the Traditions tab beside the Overview's own "No market or fair stands". The ACT `fair` presumes the market the
  * Overview's market line reads (`market`, the vocabulary's market atom, facts/market.js), as the Market ELEMENT already
- * does (traditionsTabMarketRow.test.jsx). Display only: genesis reads no declaration, the record is untouched.
+ * does (traditionsTabMarketRow.test.jsx). The record is untouched.
  *
  * Arms: a fixture pair (no market / a market: the guard), and a collected arm over census births (SECOND-WAVE-CENSUS
  * dials): every birth whose founding set holds a fair prints it exactly where `factsOf(...).market` is true.
+ * RULING 122-T: a record stamped 0.10.0 or later is no longer DEALT a fair without a market (genesis reads the corpus
+ * needs), so the collected arm re-stamps its births 0.9.0 (the old draw, which the tab's drop still serves); a last arm
+ * pins that the same births at 0.10.0 draw no fair where no market stands.
  */
 import { afterEach, describe, expect, it } from 'vitest';
 import { cleanup, render, screen } from '@testing-library/react';
@@ -50,7 +53,8 @@ describe('births: a fair prints exactly where a market stands', () => {
     for (let i = 0; i < 40 && (withFairNoMarket < 3 || withFairMarket < 2); i++) {
       for (const settType of ['thorp', 'village', 'city']) {
         const seed = `r2r-${settType}-${i}`;
-        const town = generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...dials, settType }), null, { seed, customContent: {} });
+        const born = generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...dials, settType }), null, { seed, customContent: {} });
+        const town = { ...born, generatorVersion: '0.9.0' }; // RULING 122-T: the old draw, the drop's own case
         const fairs = deriveFoundingTraditions(town).filter((r) => r?.coreMotif?.act === 'fair');
         if (!fairs.length) continue;
         withFair++;
@@ -65,5 +69,32 @@ describe('births: a fair prints exactly where a market stands', () => {
     expect(withFair, 'anchored: the births keep fairs').toBeGreaterThan(2);
     expect(withFairMarket, 'the guard: a fair in a town with a market still prints').toBeGreaterThan(0);
     expect(withFairNoMarket, 'the arm: a fair in a town with no market').toBeGreaterThan(0);
+  }, 240000);
+
+  it('RULING 122-T: the same births stamped 0.10.0 draw no fair where no market stands', async () => {
+    const { generateSettlementPipeline } = await import('../../src/generators/generateSettlementPipeline.js');
+    const { birthConfig, loadGenerationLawPayloads } = await import('../../src/domain/density/densityCreateBoundary.js');
+    const { DEFAULT_CONFIG } = await import('../../src/store/configSlice.js');
+    await loadGenerationLawPayloads();
+    const dials = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true,
+      selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
+    let withFair = 0; let noMarket = 0; let oldFairNoMarket = 0;
+    for (let i = 0; i < 40; i++) {
+      for (const settType of ['thorp', 'village', 'city']) {
+        const seed = `r2r-${settType}-${i}`;
+        const born = generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...dials, settType }), null, { seed, customContent: {} });
+        const town = { ...born, generatorVersion: '0.10.0' };
+        const market = factsOf(town).market === true;
+        const fairs = deriveFoundingTraditions(town).filter((r) => r?.coreMotif?.act === 'fair');
+        if (fairs.length) withFair++;
+        if (market) continue;
+        noMarket++;
+        if (deriveFoundingTraditions({ ...born, generatorVersion: '0.9.0' }).some((r) => r?.coreMotif?.act === 'fair')) oldFairNoMarket++;
+        expect(fairs.map((f) => f.name), `${seed} (no market)`).toEqual([]);
+      }
+    }
+    expect(withFair, 'anchored: the births still keep fairs').toBeGreaterThan(2);
+    expect(noMarket, 'anchored: births with no market were asked').toBeGreaterThan(0);
+    expect(oldFairNoMarket, 'anchored: the old draw dealt some of them a fair').toBeGreaterThan(0);
   }, 240000);
 });
