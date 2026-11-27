@@ -7,6 +7,15 @@ judging anything. Every hour here is read from `date -u`.
 
 ## 1. WHERE THE LANE STANDS (my memory; current at this push, 2026-11-27T23:26:27Z)
 
+**NOW (2026-11-27T23:48:23Z): THE ACCOUNT's WEEKLY WINDOW IS AT ITS WARNING LEVEL (the chair; it resets 2026-12-04 about 09:00 UTC). THE CHAIR's
+ORDER: every seat pushes at every step boundary; AT MOST TWO BUILDERS WORK: U3R and U45; PG and MC finish the measure in hand, push a
+five-line state note and STOP until the chair says (then my "GO PG" / "GO MC"); no reader is started until a "TIP?" is truly ready; no long
+suite re-run speculatively (`galleryImportEqualsRead` only at the one pool proof). A SUCCESSOR RESUMES FROM ORIGIN ALONE: this section,
+the briefs in `v56/briefs/`, and each child's state file: U3R `u3r/U3R-PROOFS.md` (`-u3r-docs`, code `-door2-wip`), U45 `u45/MISSING.md`
+(`-u45-docs`, code `-u45-wip`), PG `pg/PG-REPORT.md` (`-pg-docs`, code `-pages-wip`), MC `mc/STATE.md` (`-mc-docs`). OPEN WITH THE CHAIR:
+V29's two findings from PG (the false band reaches five rows; re-derived keys wrong on master-born towns): see the log; PG builds nothing
+of V29 (1) before "BAND-RULE". RULED: V30 (unit 3's rule; relayed to U3R).**
+
 THE LANE IS RESUMED. THE TIP `lane/veil-56-2026-11-27-tip` = dbd4cd9e5 (units 2 and 1; nothing else merged). The line: 682667fe2 (point 120)
 at my start; ITS 211 IS THE GRANTS FIX, so the lane's 211 and 212 become 212 and 213 AT THE JOIN (in every file here "212" still means
 `212_share_veil_later_cures.sql`). RULINGS V1 TO V29 GOVERN. What is owed, in order: `v55/PAUSE-2026-11-25.md` section 3 (this branch).
@@ -88,3 +97,4 @@ THE NEXT COMMAND: read each child's first report as it lands; relay the chair's 
   unit 3's default veil (VR23) costs x4.1. (2) `mc/LOCK.md` f6d7212ca: V28 (8)'s LOCK IS REAL: 8 readers of one 20-member map finish in
   series (5.9 s to 50.9 s); with the view-count UPDATE moved after the read (a one-line local trial) 4 readers all in about 6.6 s, 8 in
   13.5 s (CPU-bound), the count still right; master's 088 has the same line first. Its cure goes into `mc/PROPOSAL.md` for the chair.
+- 2026-11-27T23:48:23Z: THE CHAIR's ORDER ON THE ALLOWANCE relayed to all four (U3R, U45: push at every step, a state section current; U3R's `galleryImportEqualsRead` struck from its proofs, taken at the pool proof; PG, MC: finish the measure in hand, state note, STOP).
