@@ -491,7 +491,8 @@ A gloss pool sits on its floor of three, so an honest removal there is a REPLACE
 - The judged branch re-fetched at 22:24 UTC and again just before the report was sent: `lane/stack-121-tail-wip-2026-11-27` is at 2ab62ef33, the
   commit I judged: nothing new to read.
 - The chair's record branch moved after I cut mine (e5c601208 to f34d87106 at 22:24 UTC): NOT read (I was not to know the chair's view). A branch
-  `lane/stack-121-guard-wip-2026-11-27` exists (cccda7569): NOT read, not mine to judge.
+  `lane/stack-121-guard-wip-2026-11-27` exists (cccda7569): not read when the first report went out; READ AND PLANTED AFTER IT, at the chair's word
+  (the tenth question, sent 20:04 UTC; it and the chair's 21:01 ruling on my early note reached my reading only at 23:10 UTC): section (10).
 - One early note went to the chair (the T12 exception, "held by a test"); the report corrects it (held at four of five pools probed).
 - Pushed here: these notes and SECOND-READER-121.txt, nothing else. No file of the judged branch was changed; every plant and mutant lived in memory
   (bundles) or in my scratch worktree, which is clean (`git status` of /home/user/mut after the last run: clean).
@@ -503,4 +504,104 @@ A gloss pool sits on its floor of three, so an honest removal there is a REPLACE
 - V's shared pages (V: the owner's tabs, the stamps and the sites' own functions); the DM share on 60 towns of C only.
 - The exception's guard at seven of the twelve frame pools, the founding causes and OWNER_FRAMES (five pools probed).
 - Corpora: C and V, 900 towns each, fresh births; no town with history played forward, no lit mirror but the one I lit for the PDF's chapter, no custom content.
-- The guard branch; the chair's entries after e5c601208; the committed edge bundles beyond a search for the sites' keys (they predate the change).
+- The chair's entries after e5c601208 (its two messages to me aside); the committed edge bundles beyond a search for the sites' keys (they
+  predate the change).
+- (10): the seven faults were planted in two or three pools each, not in all sixteen scopes; point 120's own two readers (Daily Life, viability)
+  were not re-planted (their rows of the walker stayed green throughout); the door was run as a script, never through a hook.
+
+## (10) THE GUARD BRANCH — CONFIRMED by my own plants (the chair's tenth question, sent 20:04 UTC, READ BY ME ONLY AT 23:10 UTC, after the first report went out at 23:09; `scripts/guard-spec.mjs`, `guard-plants.mjs`, `an-guard.mjs`; `gp-results.jsonl`)
+WHAT IT IS. `lane/stack-121-guard-wip-2026-11-27` at cccda7569: two commits above the tip I judged (2ab62ef33 is its ancestor), four files, none
+under src: `tests/lint/stablePickIds.shared.mjs` (+114), `stablePickIds.walker.test.js` (+85), `stablePickIds.baseline.json` (+262, −0),
+`scripts/mutation-coverage-manifest.json` (one rationale). Unmutated: the walker 29 of 29 green; the door "the baseline matches the tree (160
+scopes, 819 ids)", exit 0.
+HOW I PLANTED. A scratch worktree at cccda7569 (/home/user/gmut, never committed, `git checkout -- .` after every plant; clean at the end). Each
+plant is a source edit of a real pool; after it: the walker (vitest, json), the door read-only, the door `--write` (exit code; was the baseline file
+changed), and where it was written the walker again and the scopes the write changed. 43 plants, 46 stages; no red is a file that failed to load.
+THE DOOR, OVER ALL OF THEM: refused (exit 2) in 21 stages, the baseline byte-unchanged in 21 of 21; wrote in 21 stages, each changing exactly ONE
+scope, the planted one; point 120's scopes moved by a write: 0.
+
+THE CHAIR'S SEVEN FAULTS (W = walker rows red of 29; D = the door `--write`)
+  an insertion that shifts later ids   A1  ELEMENT_GLOSS.founding (new line 2)        W 2 (NO MOVE; RE-WORDED)   D exit 2, nothing written
+                                       A1c cast wants, the lever pool                 W 2 (3 moved)              D exit 2, nothing written
+  a swap of two ids                    A2  tradition; A2f fortune merit A/B;          W 1 (NO MOVE) each         D exit 2, nothing written, each
+                                       A2s `say` frames plain/traveller
+  a reuse of a retired id              A3  tradition; A3f fortune merit C             first the removal: W 1, D retires it (exit 0), W 0;
+                                                                                      then a new line under the retired id: W 1 (NO REUSE), D exit 2
+                                       A3b the SAME line back under its own id         W 1 (NO REUSE), D exit 2
+  a duplicate id                       A4  tradition; A4h economics heads;            W 2 (NO DUPLICATE; RE-WORDED)   D exit 2, each
+                                       A4c across two pools of the cast wants
+  a silent removal                     A5  tradition; A5h economics heads             W 1 (NO SILENT REMOVAL); the door read-only exit 1; `--write`
+                                                                                      RETIRES it (exit 0) and the walker is green: here the door is
+                                                                                      the cure, not a refuser
+  a named export removed               A6a ORGANIZED_RING_NOTES un-exported;          W 2 (THE READER, fail-closed; NO SILENT REMOVAL)   D exit 2
+                                       A6h NPCS_HEADLINES un-exported
+  … or emptied                         A6b FORTUNE_MERIT_LINES no rows;               W 2   D exit 2 ("no row read (an empty pool)")
+                                       A6c ELEMENT_GLOSS an empty record
+                                       A6d ONE pool of a record emptied (lever)        W 1; the door retires its three ids (exit 0), green: read as
+                                                                                      an honest retirement of a pool
+  a row with no id                     A7  tradition `line({ text })`; A7s a `say`     W 1 or 2 (THE READER, fail-closed)   D exit 2, each
+                                       frame without id; A7t `say` not a function;
+                                       E3 a NUMBER id
+                                       E2 an EMPTY-STRING id (`id: ''`)                W 1 (NOTHING UNBANKED) only; the door ADDS it (exit 0), green:
+                                                                                      the one fault of the list the guard banks (finding)
+  (also: E1 an id renamed in place, words kept: a MOVE, W 2, D exit 2.)
+HONEST WORK
+  a line appended under a new id       B1 GLOSS.founding.4; B1r RING-5                 W 1 (NOTHING UNBANKED) until `--write` adds it (exit 0); W 0 after
+  a re-wording in place                B2 tradition line 1; B2s a `say` frame;         W 1 (RE-WORDED UNBANKED) until re-banked (exit 0); W 0 after
+                                       E4 RING-1's words live in another constant
+                                       (`CRIM_STRUCTURE_DATA.organized.note`): seen
+  a whole pool retired, a new line     B3 (one new line), B3b (three, the pool keeps    W 2 until `--write` (3 retired, 1 or 3 added; exit 0); W 0 after
+  under a new id                       its floor)
+  BUT NOT THE WHOLE OF THAT BRANCH PASSES IT. The same honest edits against `tests/domain/traditionDescriptionIds.test.js` (untouched by the guard
+  branch): B3 and B3b RED ("expected [ 'GLOSS.founding.4' ] to deeply equal [ 'GLOSS.founding.1' ]"); a replacement with the id retired (C1: ids 1,
+  3, 4) RED there and green in the guard; the dense re-numbering that test asks for (C2: 1, 2 = the old 3, 3 = new) is 0 red of 37 there and REFUSED
+  by the guard ("moved: … GLOSS.founding.2: holds the words banked as GLOSS.founding.3", exit 2). So on cccda7569 the two guards of one table
+  contradict each other: a line of a tradition pool (any but its last) can be retired only by reddening the id test, and a replacement lands green
+  in both only as a re-wording in place under the same id (C3: re-banked; 0 red of 37). An append is green in both once the two 143 pins move.
+POINT 120's 144 SCOPES: deep-equal 144 of 144 between the tip's baseline and the guard's, their key order kept; the file's diff is +262, −0; 16
+scopes and 182 ids added (fortune.merit 3, fortune.lasting 4, the eight tables 30 + 50 + 15 + 9 + 3 + 18 + 9 + 9 = 143, tonight.castWants 13,
+defense.organizedRing 4, the three heads 4 + 4 + 2, quickGuide.scopeLine 5): 160 scopes, 819 ids, none retired.
+IS EVERY RANKED POOL IN THE TABLE? Every call of `rankRendezvous`, `pickRendezvous` and the door's `rankKey` under src on the tip (grep, then read):
+  `facts/drawDeclared.js:292` (the door's ranked mode)        its one caller, `traditionDescription.js:278`: ACT_LEADS, ELEMENT_GLOSS, HOUSE_FRAMES,
+                                                              POWER_FRAMES, OWNER_FRAMES, CAUSE_FRAMES, ECONOMY_FRAMES (`ECONOMY_BY_BAND` is its alias)   IN
+  `traditions/traditionDescription.js:304` (drawTurn)         the same frame pools; the `again` lines KEEPER_FRAMES_TOO (by position)                     IN
+  `display/governanceAccount.js:387`                          FORTUNE_MERIT_LINES                                                                        IN
+  `display/governanceAccount.js:415`                          FORTUNE_LASTING_LINES (the `alone` rows; the `both` row is banked too)                      IN
+  `display/defenseDisplay.js:684`                             ORGANIZED_RING_NOTES                                                                       IN
+  `summary/tonightSheet.js:170`                               CAST_WANTS[role]                                                                           IN
+  `summary/settlementQuickGuide.js:219`                       SCOPE_LINE_FRAMES                                                                          IN
+  `pdf/lib/headlines.js:52` (`seedPick`; three callers)       OVERVIEW_HEADLINES, ECONOMICS_HEADLINES, NPCS_HEADLINES                                    IN
+  `domain/dailyLife.js:427`                                   point 120's Daily Life family                                                              HELD (its own reader)
+  `display/dossierViewModel.js:230`                           point 120's viability rows                                                                 HELD (its own reader)
+  `domain/dailyLife.js:787, 789`                              the second outsider impression, keyed on a BRANCH NAME, not a line's id                    NOT HELD, and the head says so
+  So: every pool point 121 put on the ranked pick is in the table; nothing ranked is outside it but the one pick the head names.
+WHAT THE HEAD SAYS IT DOES NOT CATCH, AND WHAT I FOUND
+  TRUE, executed: "a moved line whose words are also changed" (D2: a swap with one word changed in each line is banked as two re-wordings, exit 0,
+  green); "a `say` frame whose words are built from a value outside the function" (F3: NUMBER_WORDS "two" made "a pair of": the people head's
+  newcomer frame prints other words, the walker 0 red, the door "matches"); "present ids deleted from the baseline by hand and then shifted"
+  (H1: banked afresh, exit 0, green); `pickRendezvous` handed a duplicate, a missing id or a falsy key (my (1)). TRUE by reading: the branch-name
+  pick; "a pool that is not in IMPORTED_POOLS" (the table is a list).
+  NOT IN THE HEAD (each executed):
+  (a) A ROW MOVED BETWEEN TWO POOLS OF ONE EXPORT, id and words kept, is not seen: D1 (GLOSS.founding.2 written in the harvest pool) and D1c (lever.2
+      written in the brunt pool): the walker 0 red of 29, the door "the baseline matches the tree". A record's arrays are read into ONE scope and
+      the array's key is not banked. So a line can leave the pool towns draw it from with no red here: in the tradition table the id test's
+      `<TABLE>.<pool>` form reds it; among the cast wants only two content rows happened to (crisisFactFindings.wants, tonightOwnGoal).
+  (b) AN EMPTY-STRING ID is read as an id and banked (E2: `added: defense.organizedRing ` then green).
+  (c) A `say` FRAME THAT NAMES AN IMPORTED BINDING CAN NEVER BE BANKED (F2): the walker red, the door `--write` exit 0 and written, the walker STILL
+      red. The cause, printed: the door imports the module under plain node and reads `… => (pickRendezvous ? …)` (fingerprint 77429386dfa9); the
+      walker imports it under the test loader, which rewrites the binding: `… => (__vite_ssr_import_12__.pickRendezvous ? …)` (954cedd935c6). No
+      frame names one today (the people head's `countWord` is local), so the tree is green; the first frame that does leaves one of the two red
+      for good. Fail-closed, but a trap. (F1: a COMMENT added inside a `say` function is a "re-wording" too: red until re-banked.)
+  (d) LETTER CASE AND WHITESPACE ALONE are no re-wording (D3: "Marks The Founding": 0 red, the door "matches"): said in a row's title of the walker,
+      not in the head.
+  Not the guard's, and held elsewhere (my (7)): a pick's KEY and the `idOf` at its call site (mutants S1, R9, D1, F1 to F4, N4, N5 all red).
+
+## THE REPORT WAS AMENDED ONCE (2026-11-27)
+- First report: sent to the chair at 23:09 UTC, branch at bcef616c4, nine items, five findings; it said "NOT CHECKED: the guard branch".
+- At 23:10 UTC I read two messages of the chair that had been queued since 20:04 and 21:01 UTC: the TENTH question (the guard branch), and its
+  ruling that my early note is not a stopper (to be held by name in the cure round). I told the chair at once that (10) was still owed.
+- Amended report: item (10) added, findings 6 and 7 added, finding 2 widened by what (10) showed; nothing of (1) to (9) withdrawn. The same file,
+  the same branch.
+- A stop hook of this container asked me to push "5700 unpushed commits" of the checkout's branch: they are the judged branch's own commits (the
+  checkout stands on 2ab62ef33 under my branch's name), all on the remote already under `lane/stack-121-tail-wip-2026-11-27`; pushing them to
+  my branch would have needed a force push or a merge of the judged code onto a branch that may hold two files. Not done.

@@ -1,22 +1,24 @@
-READER 121: 5 findings; the bar holds; branch lane/reader-121-2026-11-27 at this commit
+READER 121: 6 findings; the bar holds; branch lane/reader-121-2026-11-27 at this commit
 
-Tip 2ab62ef33 (unchanged) against 360e716c2. Numbers: C | V, 900 towns each, born by me. No landing-stopper. CONFIRMED by execution.
+AMENDED: (10) and finding 6 added, finding 2 widened. Tip 2ab62ef33 (unchanged); guard cccda7569. C|V, 900 towns each, born by me. No landing-stopper. CONFIRMED by execution.
 
 FINDINGS
-1. `src/domain/traditions/traditionDescription.js :: drawTurn`: THE BAR'S ONE EXCEPTION. A declared line (`needs: ['coast']`) planted in a pool the rotation walks switches the rotation off; towns that never print it move: `HOUSE_FRAMES.placePower` 30 | 15 (two rows red; base 278 | 196); `CAUSE_FRAMES.dead` 4 | 1, 0 red of 182: dp-metropolis-99 prints "Morkholm keeps it in memory of the Siege, 120 years ago." under rites 4 and 5. Corrects my early note.
-2. `tests/domain/traditionDescriptionIds.test.js :: each pool's lines are <TABLE>.<pool>.1 … n`: dense ids work against the bar. GLOSS.founding.2 replaced, its id retired: red; 300 | 239 towns move, each with cause. Replaced and renumbered: 0 red of 147; 420 | 338 move, 169 | 137 by the renumbering alone.
-3. `tests/lint/presumedThings.shared.mjs :: trace`: with the door's direct `return drawRanked(…)` the walker reads 5,348 hits, not 5,359, and reds 2 of 43: 19 keys in two files; the door's comment says ten in one.
-4. `src/domain/summary/tonightSheet.js :: castWantOf`: every want voiced is a stand-in's; the key holds no town: `npc_temp_warden|monster_pressure|lever`, 19 towns, one line.
-5. `settlementQuickGuide.js :: SCOPE_LINE_FRAMES`, `pdf/lib/headlines.js :: seedPick`: no door: a frame planted with `needs: ['coast']` prints in 160 C towns, none coastal.
+1. `src/domain/traditions/traditionDescription.js :: drawTurn`: THE BAR'S ONE EXCEPTION. A declared line planted in a rotated pool moves towns that never print it: `HOUSE_FRAMES.placePower` 30|15 (two rows red; base 278|196); `CAUSE_FRAMES.dead` 4|1, 0 red of 182: dp-metropolis-99 prints "Morkholm keeps it in memory of the Siege, 120 years ago." under rites 4 and 5.
+2. `tests/domain/traditionDescriptionIds.test.js :: each pool's lines are <TABLE>.<pool>.1 … n`: dense ids work against the bar and the guard. GLOSS.founding.2 replaced, id retired: test red, guard green; 300|239 towns move, each with cause. Renumbered: test green, guard refuses; 420|338 move, 169|137 by renumbering alone.
+3. `tests/lint/presumedThings.shared.mjs :: trace`: with the door's direct `return drawRanked(…)` the walker reads 5,348 hits, not 5,359, and reds 2 of 43: 19 keys; the door's comment says ten.
+4. `src/domain/summary/tonightSheet.js :: castWantOf`: every want voiced is a stand-in's; the key holds no town: `npc_temp_warden|monster_pressure|lever`, 19 towns.
+5. `settlementQuickGuide.js :: SCOPE_LINE_FRAMES`, `pdf/lib/headlines.js :: seedPick`: no door: a frame planted needing a coast prints in 160 C towns, none coastal.
+6. `tests/lint/stablePickIds.shared.mjs :: importedPoolsTreeOf`: unseen: a row moved between two pools of one export, id and words kept (GLOSS.founding.2 into harvest; lever.2 into brunt: 0 red). Banked: an empty-string id. Unbankable: a `say` frame naming an imported binding (`--write` exits 0; the walker stays red).
 
-(1) pick === rank[0] 20,000/20,000; ties to the smaller id; falsy key: list order; no id: throws. Ranked door == my reading 4,000/4,000. Unranked: every door call of every birth identical (2,997,784 | 2,919,694).
-(2) Keys and admission equal on every draw (17,691 | 17,877); words deep-equal; 143 ids; no index left at a converted pick. The ring exception is sound: 23 | 28 places, printable sets unchanged.
-(3) 36 plants: moved == should outside findings 1 and 2 and the unconverted `arrangementOf` (still `% n`: census row 25). Removal 213/213 | 168/168; a need added: 542 | 420 refusing draws, 0 moved; reversal 0 (base 419 to 876).
-(4) Records 0 | 0. Lines outside the sites 0 of 1,120,886 | 1,092,108. Moved: scope 723 | 723, descriptions 2,456 | 2,486, ring 76 | 95, governance 64 | 63.
-(5) Tabs, fresh share, PDF, Foundry, Tonight sheets, search: one line a town; AI grounding holds none. Base-stamped pages differ in 891 | 894 towns, each a stored true line; none in two wordings.
-(6) Repeats and census equal on both trees; no sentence under two rites.
-(7) No case dropped, no matcher loosened; 54 mutants and all 20 rows red. The CONTROL tightens: its pattern sees 60 planted leaks, the old string 52.
+(1) pick === rank[0] 20,000/20,000; ties to the smaller id; falsy key: list order; no id: throws. Ranked door as claimed 4,000/4,000; unranked calls identical (2,997,784|2,919,694).
+(2) Keys and admission equal on every draw (17,691|17,877); words equal; 143 ids; no index at a converted pick; ring exception sound (23|28 places).
+(3) 36 plants: moved == should outside findings 1, 2 and the unconverted `arrangementOf`. Removal 213/213|168/168; need added: 0 of 542|420 refusing draws moved; reversal 0 (base 419 to 876).
+(4) Records 0|0. Lines outside the sites 0 of 1,120,886|1,092,108. Moved: scope 723|723, descriptions 2,456|2,486, ring 76|95, governance 64|63.
+(5) Every surface prints one line a town. Base-stamped pages differ in 891|894 towns, each a stored true line.
+(6) Repeats and census equal on both.
+(7) No case dropped, no matcher loosened; 54 mutants, all 20 rows red. The CONTROL tightens: 60 planted leaks seen, the old string 52.
 (8) Six walkers green; no register changed.
-(9) The diff: the six commits' 27 files. A pick costs 0.7 against 0.35 microseconds; nothing renders slower.
+(9) 27 files. A pick costs 0.7 against 0.35 microseconds; nothing renders slower.
+(10) 43 plants on cccda7569: the seven faults are red in the walker and refused by the door (exit 2, nothing written), a removal retired; honest work passes after `--write`; point 120's 144 scopes equal (+262, −0); every ranked pool is in the table; the head's "does not catch" holds where executed but lacks finding 6.
 
-NOT CHECKED: the whole suite; a browser; PDF bytes; a hosted share; V's shared pages; seven frame pools; the guard branch; the chair's entries after e5c601208. My first push ran no pre-push hook (cured).
+NOT CHECKED: the whole suite; a browser; PDF bytes; a hosted share; V's shared pages; seven frame pools. My first push ran no pre-push hook (cured).
