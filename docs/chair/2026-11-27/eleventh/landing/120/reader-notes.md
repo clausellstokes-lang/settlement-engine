@@ -204,3 +204,90 @@ NOT IN THE HEAD'S LIST, FOUND:
 - a renamed BRANCH re-deals every LINE pick of that branch as well (the branch is in the key `<name>::dailyLife.<slot>::<branch>`); the door books it
   as n retired + n added, no refusal (by reading; X6 shows the cross-scope booking). The head names only the second pick.
 - ids removed before the first baseline (P12 of gathering_places|plain, and others) are not `retired` (the list is empty): they may be used again.
+
+## (5) the 360 master-born records — CONFIRMED (`scripts/q5-master.mjs`; a `git archive` of master db832c8926 at /home/user/master-tree, outside the
+repository; the first 60 keys a tier of V born there by my birth script, kept as JSON (a save's round trip))
+- Read by `normalizeSettlement` of the BASE and of the TIP: RECORDS MOVED 0 of 360 (sha256 of the normalised record). (The line's loader changes all
+  360 on reading, base and tip alike.)
+- Viewed on base and tip after the loader (`out/q2-M360.txt`): the tip draws only by pickRendezvous (4,125 + 305; index draws 0); Daily Life admitted
+  sets equal on 3,953 of 3,953 keys; second-pick options equal 360/360; one-sided keys 316, all explained by the second pick; viability verdict equal
+  360/360, candidates identical 276 + 29 where pickTrue filters first. Lines moved: Daily Life 2,465 (6.85 a town), viability 179 of 360. No throw.
+- Spread on these 360: one line stands at 3.01 times its share: gathering_places|named|N15, 13 draws against 4.3 (67 admit). The same names in V give
+  17 against 11.8; C gives 11 against 11.5: a fluctuation of this sample of names, not the hash (the brief's test is on C: none).
+SO (5) IN FULL: records moved C 0/900, V 0/900, master-born 0/360; lines outside the two families 0 (C rendered; V rendering).
+- PDF AS COMPONENTS (`scripts/q6-pdf.mjs`): `IdentityDailyLife` and `ViabilityAssessment` called as SettlementPDF mounts them, their element trees walked to every text leaf, 900 C towns, tip: every public Daily Life slot text printed, in the page's order, 900/900; the owner-only line 0; the tab's viability sentence 900/900; 0 threw.
+- V RENDERED TOO (900 dossiers a tree; wall tip 11.9 min, base 11.5 min; `out/q5-pages-V.txt`): printed lines 1,092,106 on both; views that differ
+  `World/Daily Life` 900, `Systems/Outlook` 469, no other; lines outside the two families 0; page-census rows gained 0, lost 0 (tables byte-equal);
+  a family line in two views 0 -> 0. So lines outside the families: C 0 of 1,120,878; V 0 of 1,092,106.
+- (1)/(4) THE FALSY KEY IN THE PRODUCT (`q4-nameless.mjs`): 900 C records with the name blanked, under my plant "the pool's lines in reverse order":
+  dawn_work moved in 358 of the 358 on that branch (the first eligible line prints); with `_seed`, `id` and `name` all gone the SS4/SS5 order swap
+  moved the viability line in 0 of 900. The bar is not held for a record with no name (as the old pick; whether a page can hold one: not checked).
+
+## (8) THE RE-POINTED TESTS — CONFIRMED (the d13 branch moved to 80b133cae "test: re-point the rows…" at 17:36 UTC; no table came by message, so
+the rows are found from the branch itself; my scratch worktree /home/user/r8 = 80b133cae merged with the guard 30539f145 (detached; src byte-equal to
+the tree I measured); `scripts/q8-mutants.mjs`: ONE planted change in product source a mutant, the named files by vitest, `git checkout -- .` after)
+- THE STALE ROWS: the base's versions of the nine files run on the tip's source: 24 red of 107 (close7Mirror 7, dailyLifeChild 1, dailyLifeDawn 1,
+  dailyLifeFoodResentments 1, dailyLifeGathering 2, dailyLifeNoRepeat 1, dailyLifeOutsiderUnspokenRecent 3, tailDefeconDisplayLines 6,
+  viabilitySelfSufficientDraw 2). The re-pointed files on the merged tip: 107 of 107 green (+ the helper's 8).
+- NO CASE DROPPED: 20, 5, 7, 16, 6, 7, 18, 19, 9 cases a file on the base and on the tip. `expect(` counts equal but two ADDED (close7Mirror,
+  dailyLifeGathering); the only matcher lines removed are the three `toBe(pickVariantMixed(…).text)`, replaced by `toBe(pickRendezvous(…).text)`;
+  no skip / todo / only.
+- EVERY ROW UNDER ITS MUTANT (RED = the row fails):
+  M1 DC4 back to "Much of what": #14073, #14072, #14075 RED (3/3).       M2 DC2 back to "and the difference arrives": #00628 RED.
+  M3 DC3's gate dropped: GONE #01134 (r2s-slave_revolt-town-5) RED.      M4 DC3 refused everywhere: KEEP #01134 (r2r-town-13) RED.
+  M5 a deriver that drops C7: (d) V dp-thorp-70 RED.                     M6 a deriver that drops F6: (d) V dp-thorp-70 and C dp-village-52 RED.
+  M7 a deriver that drops K1: (c) the three K1 places RED.               M7b K1 said wherever admitted: (c) C dp-hamlet-117, V dp-hamlet-139 RED.
+  M8 F6 admitted in the cell whatever it excludes: 3 (c) rows RED.       M9 C7 admitted whatever it needs: 2 (c) rows RED (so "(c) neither C7" can fail now).
+  M10a pickNameable back on the base's pick / M10b ranking by text / M10c key altered: the three "the pick is" rows and the oracle rows of
+       dailyLifeFoodResentments, dailyLifeNoRepeat, dailyLifeOutsiderUnspokenRecent RED (8, 9, 8 rows).
+  M11a the second pick back on the base's pick / M11b ranking by lens: the outsider oracle row RED.
+  M13a Gathering takes the named pool everywhere: "every place prints a line of its pool…" RED (and 2 more).
+  M14a SS4 "buys in what it cannot make": "no line says the place buys in all…" RED. M14b SS5 "needs is bought in" / M14c a sixth row: "the pool holds five…" RED.
+  M15 the helper takes the LOWEST hash: 18 RED: 3 of the helper's own tests, 8 of close7Mirror, 7 of tailDefecon. The six oracle files stay GREEN
+       under M15: they draw through the product's own `pickRendezvous` (as they drew through `pickVariantMixed` on the base): they hold the key, the
+       id and the eligible list, not the hash; the helper's own test and the seated rows hold the hash.
+- THE ONE MUTANT NO ROW REDS: M13b (Gathering's named branch on the atom alone, no nameable house asked): 0 red; it moves 0 of 900 C and 0 of 900 V
+  towns, so no test over births could see it (the conjunct is idle on born places); the base's row did not hold it either.
+- tailDefeconDisplayLines (the GONE rows) and close7Mirror (d): each sits on a place that DRAWS the line it guards (M1, M2, M3, M5, M6 above). (d) reads
+  the record under a stated other name ('Ashfield', 'Ashby'), as the builder's brief allowed; the town's own name draws C2 / F1.
+- dailyLifeGathering "N32 is eligible" (seen by running the base's test on the tip): hxd-hamlet-2 now draws N32, a named-branch line that names no
+  house, and the old row read the branch off "it cites a house". A different pick, as its brief required. The row now reads the line's own pool and
+  asserts the record holds a sacred house, market or inn atom.
+
+## (9) ANYTHING ELSE; THE TWO GATES; THE COST — CONFIRMED
+- Files changed above the base by the three branches' commits (d13 80b133cae; guard 30539f145): under src 11 (the helper; dailyLife.js; dossierViewModel.js;
+  8 pool headers, comment lines only); tests/kernel/pickRendezvous.test.js (new); 9 re-pointed files under tests/domain; the guard's 3 files under
+  tests/lint and its door; one row of scripts/mutation-coverage-manifest.json. Nothing under supabase/, api/, foundry-module/, mcp-server/, docs/.
+- Register files changed: none but the guard's own new baseline and the manifest's one row (name-only diff).
+- On the merged tip (/home/user/r8): `tests/lint/presumedThings.walker.test.js` 43/43 green, its ARM 3 (the strip ban) 8/8; `domainAnyCastBaseline`
+  19/19; the guard's walker 23/23; `mutationCoverageManifest` 10/10.
+- The guard's baseline against the tree BY MY OWN READING (import + acorn, my own fingerprint; `q3-baseline.mjs`): 144 scopes, 637 ids (615 + 22),
+  0 fingerprints differ, 0 ids on one side only, retired 0; ids written twice in a scope of the tree: 0.
+- What the messages do not say: nothing found in the source beyond them. Following from what they do say: where DC3 is refused, DC4 no longer takes
+  DC3's towns as well (V, DC without DC3, 100 towns: base DC4 43, DC1 28, DC2 29; tip 32, 33, 35). The base's viability pick was the UNMIXED
+  `pickVariant`; the two-line pools were split near evenly there too (C DN 78/90 -> 79/89).
+- The committed edge bundles are not rebuilt by these commits: `tests/edgeFunctions/aiGroundingBundle.freshness` + `edgeSharedBundleReproducibility`:
+  7 red of 49 on the base, the SAME 7 on the tip (aiGrounding, aiCharter, intentAtlas, aiOutputSchema and engine bundles stale since before this
+  point): no new red.
+- COST IN TIME (`q9-time.mjs`, nothing else running; 900 C records): `deriveDailyLife` (owner) base 3.31 and 3.07 ms a town, tip 3.11 and 3.38;
+  `deriveViability` base 0.65 / 0.56, tip 0.61 / 0.64; the Daily Life tab rendered (react-dom/server) base 8.0, tip 8.0 ms; the Outlook tab 3.6, 3.6.
+  The helper alone: 0.5 µs a call at 3 lines, 1.2 µs at 10, 6.3 µs at 28 (the old pick 0.1 µs): about a dozen picks a town. The whole dossier by the
+  page battery: C base 13.3 min, tip 13.5 min; V base 11.5, tip 11.9 (other jobs ran beside them). No cost that can be measured.
+
+## Before reporting
+- Fetched again at 19:03 UTC: d13 80b133cae (one commit above df0401af6: the re-pointing, read whole and executed in (8)); guard 30539f145 (unchanged).
+- The chair's record branch moved to 398fe5014 (two commits) after I cut mine at 87e8a9009; I did NOT read them (the chair's view of this change).
+- No message with `repointed.tsv` came; (8) is from the branch's own commit, as the child prompt says.
+
+## NOT CHECKED
+- The whole suite, or any whole test directory (not mine to run); tests/components, tests/generators, tests/pdf as wholes.
+- A real browser, a real PDF file's bytes (the PDF chapters are walked as components; Foundry's files read as built in memory).
+- The server-side AI grounding (the committed bundle is the base's, stale on both trees); the hosted database; a deployed share page.
+- Whether a page can hold a town with no name; RENAME-REDEALS (the key is the name; G76 put it outside this point).
+- The first build's reader reports (SECOND-READER-120-A/B): not read, by choice.
+- `lane/stack-120-owed-wip-2026-11-27` and the chair's commits after 87e8a9009: not read.
+
+## THE REPORT
+`SECOND-READER-120R.txt` beside this file (498 words). Verdict: THE BAR HOLDS; 4 findings (3 in the id guard, 1 an unreachable edge of the helper);
+1 known item measured (the stored share stamp). Every number in it is from the scripts named above, kept in my scratch (`scripts/`, `out/`, `logs/`);
+the scratch is on my container only and goes with it.

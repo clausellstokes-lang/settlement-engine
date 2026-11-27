@@ -1,0 +1,21 @@
+READER 120R: 4 findings; the bar holds; branch lane/reader-120r-2026-11-27
+Executed: base 1f946c43f1; d13 80b133cae + guard 30539f145. Product clean; no first-build fault repeated; this build's faults are in the guard.
+
+FINDINGS
+1. CONFIRMED. `tests/lint/stablePickIds.walker.test.js :: 'the reader is not vacuous'`: its floors (144 scopes, 615 + 22 ids) are the baseline's exact counts. gathering_places|plain P9 removed: door prints "retired: gathering_places|plain P9", walker stays RED (so DG3, P0). Same file, constant `SS1`: SS1 re-worded: door prints "re-worded: viability SS1", four guard-the-guard tests stay RED. No door cure.
+2. CONFIRMED. `tests/lint/stablePickIds.shared.mjs :: doorPlan`: a scope wholly retired never takes a line again: recent_changes|condition.boom K1 retired, then ZZ9: exit 2, "present is empty where the tree holds ids".
+3. CONFIRMED; not in the head's list. `stablePickIds.shared.mjs :: ID_FORM`: rows ['SELFS1',…], ['SS1b',…], ['SS_6',…] are unread: walker green, door "matches the tree (144 scopes, 637 ids)". Also: present ids hand-deleted, then shifted, are re-banked; a non-JSON baseline: door exit 1, not 2.
+4. CONFIRMED; unreachable today. `src/kernel/proseHash.js :: pickRendezvous`: a duplicate or missing id returns the first in list order (659/659; 704/704); a falsy key too: 358/358 nameless copies moved under an order-only plant. The tree holds 0 duplicate ids.
+KNOWN (G79 (6)): `publicProse.blocks['viewModel:viability']` saved on base, read on tip: shared Outlook differs from the owner's in 464/900; master holds no stamp.
+
+(1) My reference agrees 20,000/20,000; order-independent; tie to the smaller id (3 collisions); empty → undefined. C, 246 lines admitted by 50+ towns: starved 0, over 3x share 0. Pools on one key independent (worst chi-square 5.7, 1 df).
+(2) Index draws left: 0 of 10,725 (C), 10,942 (V). Keys equal. Admitted sets equal: 9,672/9,672, 9,770/9,770; viability 781/781, 756/756. Words: 615 lines, 24 sentences equal. stateProse diff: empty.
+(3) 16 faults RED and refused (exit 2, nothing written); silent removal RED, then retired; honest work passes except findings 1, 2; the head's list true (4 planted, 1 read), incomplete (3).
+(4) 18 plants; moved = should, extra 0. Tip [base]: undrawn removed 0 [15]; drawn removed 36 [316]; added 25 [327]; re-worded 35 [35]; narrowed 11 [66]; order reversed 0 [333]; second-pick option refused 70 [92]; viability 124 [210], 87 [261], 106 [98], 26 [51].
+(5) Records moved 0/900, 0/900, 0/360. Rendered lines outside the families: 0 of 1,120,878 (C), 0 of 1,092,106 (V). Moved: Daily Life 5,854 and 6,098 (6.5, 6.8 a town); viability 464, 469.
+(6) Same line 900/900: owner tab, player view, fresh shared page, PDF chapters, Foundry (viability), AI grounding (Daily Life). No surface holds its own pick.
+(7) Sentence twice: 0 to 0; page-census rows gained 0.
+(8) 24 stale rows, 9 files; 107 cases both sides; no matcher loosened. 21 mutants: every row reds; M13b (named branch, no nameable house) reds nothing, moves 0/1,800 towns.
+(9) presumedThings ARM 3 8/8, domainAnyCastBaseline 19/19; no register changed. deriveDailyLife 3.2 ms a town on both.
+
+NOT CHECKED: whole suite; browser; real PDF bytes; server-side grounding bundle (stale on both); whether a town can be nameless; chair's commits after 87e8a9009.
