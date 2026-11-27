@@ -207,3 +207,99 @@ NO TOWN MOVED THAT SHOULD NOT in 30 of the 31 plants; the one that does is T12.
   "gloss.founding: 2 < 3": every gloss pool is AT its floor of three, so no gloss line can be removed without adding one.)
 - H2b an honest append (GLOSS.founding.4 'keeps the founding day', pins to 144): the ids test and the count GREEN; RED only on the walker's style law
   ("no first sentence says 'kept' twice": my words, not the ids).
+
+## (4) LINES MOVED AT THIS CHANGE, BY SITE — CONFIRMED (the sites' own functions on every town, base against tip; C | V)
+- the scope line 723 | 723 towns; the ring note 76 | 95; the governance paragraph (a fortune sentence) 64 | 63; tradition descriptions 2,456 of 2,506 in
+  842 towns | 2,486 of 2,541 in 852 (the reader's rows 2,452 | 2,487); the PDF heads: overview 232 | 222, economics 730 | 632, people 381 | 380;
+  the Tonight sheet's cast want 26 | 36.
+- ON THE OWNER'S TABS (scope + ring + governance + descriptions): mean 3.69 | 3.74 lines a town; towns by count C 0:9 1:82 2:240 3:169 4:114 5:95 6:86
+  7:49 8:44 9:12; no town of either corpus has nothing moved on any surface.
+- The rendered pages (what differs OUTSIDE the sites): below, when the tip's pages are rendered.
+
+## (5) EVERY SURFACE — part 1, CONFIRMED on the tip, every town of C and V (`an-sites.mjs`; `tools/hX.jsx`, `out/x-C-tip`)
+Surfaces found by reading every caller of the seven sites' functions: the tabs (Overview's identity line; Power's governance paragraph; Defense's
+criminal structure; Traditions); the shared page (the four STAMPED blocks); the dossier search (`dossierSearch.js :: traditionsOf`, the same leaf); the
+PDF (`Overview`, `EconomicsTrade`, `NotableNPCs` heads; `PowerStructure`; `DefenseSecurity`; `IdentityDailyLife`; `Traditions`, mounted only with a lit
+mirror; `TonightAtTheTable`); Foundry (`journalPages.js`: the three heads, the Tonight page); `TonightSheet.jsx` under `TableView.jsx` and
+`SessionMode.jsx`. The campaign book and the world book print none of these lines (no caller). The committed edge bundles (`supabase/functions/_shared/
+engineBundle.js`, `aiGroundingBundle.js`, built 2026-11-19) hold none of the seven sites (0 matches of their keys and pools).
+- PDF chapters walked as element trees (each <Text> a line; `SettlementPDF` called as `utils/generateSettlementPDF.js` builds its props, canon phase):
+  PowerStructure holds the governance paragraph 900/900 | 900/900; IdentityDailyLife the scope line 900/900 | 900/900; DefenseSecurity the ring note
+  430/430 | 450/450; Overview / EconomicsTrade / NotableNPCs hold their head 900/900 each | 900/900 each; TonightAtTheTable the cast want 31/31 | 40/40.
+- Foundry (`buildFoundryModuleFiles`, markdown unescaped): the three heads 900/900 each | 900/900; the Tonight page the cast want 31/31 | 40/40.
+- `TonightSheet`, `TableView`, `SessionMode` rendered as components: the cast want 31/31 each | 40/40 each. The sheet's own coherence check
+  (`crisisFactFindings.js :: crisisCastSenseFindings`, which re-asks `castWantOf`): 0 findings on 900 C towns, tip and base.
+- THE STAMP a fresh save stores: 'overview:identity'.scope == the line 900/900 | 900/900; 'power:governance' == the player's paragraph 900/900 | 900/900
+  (and the player's fortune line == the owner's 900/900); 'defense:criminal'.ringNote == the tab's note 432/432 | 456/456; 'traditions' rows == the
+  reader's rows 843/843 | 853/853. A fresh share's public record holds no `_seed` (0/900): the stamp is what carries the seed-keyed lines.
+- THE SEARCH (`enumerateDossierObjects`): holds every description the tab prints: the owner's view 843/843, the owner's player view (the reader's
+  text) 843/843, the shared page (the stamp's rows) 843/843 (C).
+- THE PDF's TRADITIONS CHAPTER is not mounted on a fresh birth (no lit mirror: 900/900). With the mirror lit by me (the set the tab shows): the lit
+  record describes as the tab does 843/843 and the chapter holds every description 843/843 (C).
+- A DM SHARE (full), walked on 60 towns of C: the scope line 60/60, the ring note 60/60, the owner's governance paragraph 60/60, the stamp's (reader's)
+  tradition rows 60/60.
+- THE AI GROUNDING (`buildAiGroundingPayload`): holds none of the sites' sentences: 0 hits on 900 | 900 towns (scope line, each head, a description,
+  a want, the ring vantage, the governance paragraph searched as strings).
+- A PAGE STAMPED ON THE BASE, READ ON THE TIP (from the two trees' stamps): differs from the owner's tip page in 891 | 894 of 900 towns: scope 723 | 723,
+  governance 64 | 63, ring note 76 | 95, traditions 838 | 848 towns (2,452 of 2,506 | 2,487 of 2,541 rows). Rendered: below.
+
+## (6) WITHIN ONE PAGE — part 1, CONFIRMED
+- A whole sentence under two rites of one town (owner and reader): C base 0, tip 0; V base 0, tip 0.
+- The ring's "streets" vantage where the place cannot print it (a thorp, a hamlet, a crime wave, unquiet streets): 0 | 0 on the tip.
+- A tradition line the place refuses: on every ranked draw the printed line is one my own walk says the place admits, or the admitted twin of a
+  refused one (C 17,280, V 17,349 draws); a rotated draw prints a colour line (it declares nothing).
+- A cast want against the town's facts (`scripts/q6-wants.mjs`: 120,000 combinations of role, person, 15 crises, a house or none, the seat held or
+  empty): a held-seat want under an empty seat 0; a house line for a house-less person 0; "<plural noun> takes" 0; an unfilled slot 0; on tip and base.
+
+## (9) ANYTHING ELSE — part 1 (by reading and by hash)
+- The diff base..tip is exactly the six commits' 27 files (the merge added none; its one conflict, `tests/domain/tailDefeconDisplayLines.test.js`, keeps
+  both sides' rows). NOT CONVERTED, BYTE-EQUAL TO THE BASE (sha256): `dossier/hookLines.js`, `display/tensionCause.js` and `data/tensionCauses.js`
+  (no importer under src but themselves), the eight sites outside the line (`causeConjunctionContent`, `causeLifecycleVocabulary`, `heraldCausalGrammar`,
+  `marketPrices`, `settlementRumors`, `warAndRoadNames`, `traditions/prose`), the three LEAVE sites (`composeStateProse`, `stateProseKernel`, `foodways`),
+  and point 120's `dailyLife.js` and `dossierViewModel.js`.
+- 58 files under src call the door (42 `drawDeclared(`, 26 `filterDeclared(`, 15 `resolveDeclared(`, 38 `resolveSibling*(` call sites, the same counts
+  on base and tip); ONE passes `rankKey` (`traditionDescription.js`).
+- WHAT THE MESSAGES DO NOT SAY (each small):
+  * `drawDeclared.js`: `draw` is now OPTIONAL in the options' type, so a caller that passes neither `draw` nor `rankKey` type-checks and throws at
+    run time (the base's type required `draw`); the ranked mode silently ignores `registry` (no caller passes both); the file's head still
+    describes only the unranked resolution.
+  * `defenseDisplay.js :: ORGANIZED_RING_NOTES`: two comments still say a refused vantage "prints the table's own note" (the W2-C-LEAVES-9 paragraph and
+    the line above RING-2), and "Index 0 is the original": on the tip a refused vantage gives the NEXT row of the rank.
+  * `scripts/lib/table-pools.mjs` (the pool table of the census scripts, untouched): its `drawSite` for `tonightSheet.CAST_WANTS` still reads
+    "pool[floor(castHash(personId, crisis, role) * n)]".
+  * `KEEPER_FRAMES_TOO` rows carry ids (TOO.*) that no pick reads (they are walked by position).
+- The builder's stated ranks, by my own hash: bar0-city-wartime-rand-28 RING-2 > RING-4 > RING-1 > RING-3; guard-thorp-4 RING-2 > RING-3 > RING-4 >
+  RING-1; r2r-town-7 heads RING-4, r2r-town-40 heads RING-1; r2s-plague_onset-village-3 RING-2 > RING-4; the five scope anchors head newcomer,
+  newcomer, newcomer, traveller, local: all as its comments say.
+
+## (4) (5) (6) THE RENDERED PAGES, C — CONFIRMED (`tools/h121.jsx`, `scripts/an-pages.mjs`, `scripts/q6-census.mjs`; `out/an-pages-C.txt`)
+900 dossiers a tree, the real OutputContainer with every group, tab and disclosure walked: as its OWNER sees it, and as a FRESH SHARED PAGE (the
+stamp the save path composes, `projectShareVeil(toPublicSafe(stamped))`, readOnly + playerView); on the tip also THE BASE's STAMP on the same record.
+A difference is "explained" only if putting the site's tip line in place of its base line (from `an-sites.mjs`) makes the base's view equal the tip's.
+- RECORDS: recordHash equal 900/900; the born record's JSON byte-equal 900/900.
+- THE STAMP a save stores: differs base -> tip in 891 towns, and ONLY in the four blocks named: traditions 838, overview:identity 723,
+  defense:criminal 76, power:governance 64 (version 'pp-1' on both; no other block differs).
+- THE OWNER'S TABS: printed lines 1,120,886 on the base and 1,120,886 on the tip; views byte-equal 18,388 of 20,093; the views that differ are
+  World/Traditions 842, Summary/Overview 723, Systems/Defense 76, Systems/Power 64 and NO OTHER. LINES THAT DIFFER OUTSIDE THE CONVERTED SITES: 0
+  (towns with a difference the sites' own lines do not explain: 0 of 900). No lazily loaded panel is missing on either tree (the warm-up).
+- A FRESH SHARED PAGE: 952,071 lines on both; the same four views differ (838, 723, 76, 64); unexplained 0.
+- EACH SITE'S LINE ON THE TIP'S PAGES: the owner's Overview holds the scope line 900/900 and the fresh share the SAME line 900/900; the owner's Power tab
+  the governance paragraph 900/900, the share the player's 900/900; the owner's Traditions tab each description 2,506/2,506, the share each reader's
+  row 2,506/2,506; the owner's Defense tab the ring note 430/430, the share the same note 430/430.
+- A PAGE STAMPED ON THE BASE, READ ON THE TIP (rendered): prints another line than the tip's fresh page in 891 of 900 towns (scope 723, traditions
+  838, ring note 76, governance 64). EVERY difference is the base's stored line standing whole in place of the tip's (towns with any other
+  difference: 0): no half sentence, no mixed block; and the base's line is one the place can print (the admitted sets are equal). e.g. dp-city-64:
+  stale "Latin-inspired, built in masonry around a civic square, and run by patronage and law." beside the owner's "Latin-inspired; people here live
+  in a place built in masonry …"; stale ring note "Ask who runs crime here …" beside the owner's "Shopkeepers here pay one ring …".
+- WITHIN ONE PAGE: a line twice in one snapshot of a view: 42,679 on both trees; a sentence of six words or more in two lines of one view 1,613 and
+  1,613, of them a converted site's sentence 0 and 0; in two views of one dossier 9,440 and 9,440, of them inside a site's paragraph 298 and 298 (the
+  governance paragraph's vignette, also on the Overview: not a converted pick). A whole sentence under two rites: 0 and 0.
+- THE TREE'S OWN PAGE CENSUS (`pageCensusFindings`, 28 patterns, the tip's checker over both trees' pages): towns GAINING a row on the tip 0, losing
+  one 0; the table equal (P17 603, P18 419, P16three 348, P8any 60, P14 1, P5b 1).
+- TIME (mean ms a town, 4 processes): owner walk base 3,194, tip 3,076; share walk 2,804 and 2,694; birth 353 and 345 (my own scans ran beside the
+  base's run). No cost that can be seen in a page.
+
+## (2)/(9) THE PARAGRAPH'S OTHER PICKS — CONFIRMED by plant G1 (`governanceAccount.js :: arrangementOf`, NOT converted: census row 25, LEAVE)
+- A fourth wording added to `CONSEQUENCE.tense`: 59 towns of C move, 24 to the added wording and 35 NOT (re-dealt among the old three), the same on
+  the tip and on the base. The seat's arrangements, the four estranged-power sentences, the consequences and the fracture line pick by
+  `fnv(seed::slot) % n`: this is not in the claim's list of what was left on purpose; the census lists it as "a fixed list of orders … not a pool of wordings".
