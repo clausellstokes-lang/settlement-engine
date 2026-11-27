@@ -15,7 +15,10 @@
  *   IMPORTED POOLS  point 121's pools, named one by one in `IMPORTED_POOLS` (a module, an export, a scope, a layout:
  *               a flat array, or a record whose values are arrays), read by IMPORT at run time; a row is an object
  *               with a string `id` and its words: a `text`, or a `say` function (fingerprinted by its own source text,
- *               `String(row.say)`, normalised as the text is).
+ *               `String(row.say)`, normalised as the text is). ONE RUNTIME (RULING 121-6): the family is read under
+ *               PLAIN NODE on both sides: the door imports it itself; the walker takes it from a plain-node child,
+ *               `node scripts/stable-pick-ids-door.mjs --print-tree`, never from its own import under the test loader
+ *               (which rewrites an imported binding and adds semicolons inside a function's source).
  *
  * THE BASELINE (`tests/lint/stablePickIds.baseline.json`) holds, per scope, `present` (each id with a FINGERPRINT of
  * the line's words as banked) and `retired` (ids that once existed and are gone). The fingerprint's input: Daily Life,
@@ -38,7 +41,9 @@
  * every exported value of every pool file that holds an id-bearing object must sit at a slot this module names; every
  * slot it names is read exactly once; a pool file that holds no line is red. The imported-pools reader is fail-closed:
  * every module of its table must import; every named export must exist, have its layout, and yield at least one row;
- * every row must carry a string `id` and its words; an export named twice in the table is red.
+ * every row must carry a string `id` and its words; an export named twice in the table is red. IN EVERY FAMILY an id is a
+ * NON-EMPTY string with no space at either end and no line break (`idProblem`; the viability rows' id form already holds
+ * it); anything else is red, the row named, and the door refuses it.
  *
  * WHAT IT IS FOR: an honest mistake.
  *   - an insertion that shifts the later ids;
@@ -47,7 +52,10 @@
  *   - a duplicate id;
  *   - a silent removal;
  *   - all five in the imported pools as well: a frame re-worded in place or moved to another id is seen, a `say`
- *     frame by its own source text.
+ *     frame by its own source text;
+ *   - a `say` frame is fingerprinted by its source as PLAIN NODE prints it, the same in the door and the walker (the
+ *     walker's copy is read by a plain-node child; a child that fails, prints nothing or no JSON, or reads fewer
+ *     scopes than the table names is red, its stderr in the message).
  * WHAT IT DOES NOT CATCH (the deliberate kind; the reviewer of the change is the control):
  *   - a moved line whose words are also changed;
  *   - an id assembled by concatenation, or a row built outside `deriveViability`;
@@ -62,7 +70,13 @@
  *     not by what it prints (a re-worded outside value is not seen);
  *   - a pool that is not in `IMPORTED_POOLS`: the table is the list of what is held, and a ranked pick added elsewhere
  *     without a row here is not seen.
+ *   - a row moved between two pools of one export, its id and words kept: a record's arrays are read into ONE scope and
+ *     the array's key is not banked (the id's own form pins the pool where it carries one: the tradition table's and the
+ *     cast wants' tests);
+ *   - letter case and whitespace alone are no re-wording (the fingerprint collapses whitespace and lower-cases);
+ *   - a comment added inside a `say` function IS read as a re-wording (its source text is fingerprinted: red until re-banked).
  */
+import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
@@ -117,6 +131,16 @@ export const IMPORTED_POOLS = Object.freeze([
 /** An id's form: a prefix of letters and a number (`P3`, `SS1`; lower case counted too). */
 export const ID_FORM = /^[A-Za-z]{1,4}[0-9]+$/;
 
+/**
+ * AN ID IS a non-empty string with no space at either end and no line break (RULING 121-5 (b)), in EVERY family's reader:
+ * anything else is red in the walker and refused by the door, the row named.
+ * @param {unknown} id @returns {string | null} why the value is not an id, or null when it is one
+ */
+export const idProblem = (id) => (typeof id !== 'string' ? 'not a string'
+  : id === '' ? 'an empty string'
+    : /^\s|\s$/.test(id) ? 'a space at an end'
+      : /[\r\n\u2028\u2029]/.test(id) ? 'a line break' : null);
+
 /** @param {string} words @returns {string} the words as the fingerprint reads them */
 export const normaliseWords = (words) => words.replace(/\s+/g, ' ').trim().toLowerCase();
 
@@ -151,6 +175,8 @@ function readBranch(scopes, problems, scope, lines, where) {
   /** @type {TreeLine[]} */ const out = scopes.get(scope) ?? [];
   lines.forEach((l, i) => {
     if (!l || typeof l.id !== 'string' || typeof l.text !== 'string') { problems.push(`${where}[${i}]: a line without a string id and text`); return; }
+    const bad = idProblem(l.id);
+    if (bad) { problems.push(`${where}[${i}]: the id ${JSON.stringify(l.id)} is not an id (${bad}: an id is a non-empty string with no space at either end and no line break)`); return; }
     out.push({ id: l.id, fp: fingerprintOf(l.text) });
   });
   scopes.set(scope, out);
@@ -369,11 +395,16 @@ export function viabilityTreeOf(src) {
   return { scopes: new Map([[VIABILITY_SCOPE, rows.map((r) => ({ id: r.id, fp: fingerprintOf(r.src) }))]]), problems };
 }
 
-/** @param {string} root @returns {Promise<Tree>} both families, read from the tree at `root` */
-export async function readTree(root = ROOT) {
+/**
+ * @param {string} root @param {{ importedFromChild?: boolean }} [opts] `importedFromChild`: the imported pools are read by
+ * a plain-node child of the door (the walker), not by this process's own import (the door, itself under plain node)
+ * @returns {Promise<Tree>} every family, read from the tree at `root`
+ */
+export async function readTree(root = ROOT, { importedFromChild = false } = {}) {
   const daily = dailyLifeTreeOf(await importDailyLife(root), { whole: true });
   const via = viabilityTreeOf(readFileSync(join(root, VIABILITY_FILE_REL), 'utf8'));
-  const imported = importedPoolsTreeOf(await importPoolModules(IMPORTED_POOLS, root), IMPORTED_POOLS);
+  const imported = importedFromChild ? importedPoolsTreeFromChild(IMPORTED_POOLS, { root })
+    : importedPoolsTreeOf(await importPoolModules(IMPORTED_POOLS, root), IMPORTED_POOLS);
   return {
     scopes: new Map([...daily.scopes, ...via.scopes, ...imported.scopes]),
     problems: [...daily.problems, ...via.problems, ...imported.problems],
@@ -437,6 +468,8 @@ export function importedPoolsTreeOf(modules, table) {
         const r = /** @type {{ id?: unknown, text?: unknown, say?: unknown } | null} */ (row);
         const words = !r ? null : pool.words === 'text' ? (typeof r.text === 'string' ? r.text : null) : (typeof r.say === 'function' ? String(r.say) : null);
         if (!r || typeof r.id !== 'string' || words === null) { problems.push(`${where}${k}[${i}]: a row without a string id and its ${pool.words === 'text' ? 'text' : '`say` function'}`); return; }
+        const bad = idProblem(r.id);
+        if (bad) { problems.push(`${where}${k}[${i}]: the id ${JSON.stringify(r.id)} is not an id (${bad}: an id is a non-empty string with no space at either end and no line break)`); return; }
         lines.push({ id: r.id, fp: fingerprintOf(words) });
       });
     }
@@ -444,6 +477,41 @@ export function importedPoolsTreeOf(modules, table) {
     scopes.set(pool.scope, lines);
   }
   return { scopes, problems };
+}
+
+// ── ONE RUNTIME (RULING 121-6): the imported pools as a plain-node child of the door reads them ───────────────────────
+
+export const DOOR_REL = 'scripts/stable-pick-ids-door.mjs';
+export const PRINT_TREE_FLAG = '--print-tree';
+
+/** @param {Tree} tree @returns {string} the tree as the door's print mode writes it */
+export const treeJson = (tree) => JSON.stringify({ scopes: [...tree.scopes], problems: tree.problems });
+
+/**
+ * The imported pools read by a PLAIN-NODE child (`node <door> --print-tree [<module> <export>]`), fail-closed: a non-zero
+ * exit, empty output, output that is not the tree's JSON, or fewer scopes than the table names is a problem (the child's
+ * stderr in it).
+ * @param {ReadonlyArray<ImportedPool>} table the scopes the child must read
+ * @param {{ root?: string, args?: string[], door?: string }} [opts] `args`: a fixture's module and export; `door`: another
+ * script in the door's place (both for the self-test only)
+ * @returns {Tree}
+ */
+export function importedPoolsTreeFromChild(table, { root = ROOT, args = [], door = join(root, DOOR_REL) } = {}) {
+  const r = spawnSync(process.execPath, [door, PRINT_TREE_FLAG, ...args], { cwd: root, encoding: 'utf8', maxBuffer: 1 << 26 });
+  const err = `${r.error ? `${r.error.message}; ` : ''}stderr: ${(r.stderr || '').trim() || '(empty)'}`;
+  /** @param {string} why @returns {Tree} */
+  const red = (why) => ({ scopes: new Map(), problems: [`the imported pools' plain-node child (${DOOR_REL} ${PRINT_TREE_FLAG}): ${why} (${err})`] });
+  if (r.status !== 0) return red(`exited ${r.status ?? r.signal}`);
+  if (!(r.stdout || '').trim()) return red('printed nothing');
+  /** @type {{ scopes?: unknown, problems?: unknown }} */ let parsed;
+  try { parsed = JSON.parse(r.stdout); } catch (e) { return red(`printed no JSON (${/** @type {Error} */ (e).message})`); }
+  if (!parsed || !Array.isArray(parsed.scopes) || !Array.isArray(parsed.problems)) return red('printed JSON that is not a tree');
+  const scopes = new Map(/** @type {Array<[string, TreeLine[]]>} */ (parsed.scopes));
+  const want = new Set(table.map((p) => p.scope)).size;
+  if (scopes.size < want) {
+    return { scopes, problems: [...red(`read ${scopes.size} scopes where the table names ${want}`).problems, .../** @type {string[]} */ (parsed.problems)] };
+  }
+  return { scopes, problems: /** @type {string[]} */ (parsed.problems) };
 }
 
 // ── THE BASELINE ──────────────────────────────────────────────────────────────────────────────────────────────────────
