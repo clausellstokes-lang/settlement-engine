@@ -493,3 +493,37 @@ See section 4, newest last.
   `prompts/START-VOICES-MEASURE.txt` (the pools by angle; who could say each line, per town; the traits as the engine folds
   them; the person with a criminal tie; which past findings the frame dissolves; TEN TOWNS READ COLD BOTH WAYS). Each pushes
   its files to its own branch under `survey/` and reports by message.
+
+## V21 (22:51 UTC on 2026-11-27): CURES A AND B REPORTED, READ WHOLE AND RULED (122-A-1, 122-B-1); THE SURVEY's TWO MEASURES STARTED
+- THE SURVEY's MEASURE SEATS (child sessions, the middle tier, high effort): SURVEY-MEASURE session_01FE9mEvEaQPUo3rPA6Y8Rty
+  (branch `lane/survey-measure-2026-11-27`); VOICES-MEASURE session_01FE9mEv6htjVNTHdirzSH63
+  (`lane/voices-measure-2026-11-27`). Both on the line at 682667fe2.
+- **R-CURES-A** (`lane/stack-122-rcures-a-wip-2026-11-27` at 6bbeb9bef): proof on C and V 900 each: A1 12/8/12 and 9/6/9 to 0
+  (owner/share/PDF); A2 892 and 893 sheets to 0; A3 12 to 6 and 14 to 5; A4 94 and 78 to 0 (the pool still prints on 23 and 40
+  pages, each listing a contradiction by title); records moved 0; lines outside the units 0. THE FIVE SIZES: first paint
+  unmoved (raw 0); the worker +113 B (A1); THE PDF RENDER WORKER +31,183 B (A3's helper importing `historyData.js`; no budget
+  test holds that worker). **RULED 122-A-1 (by message):** the 31 KB comes out by the two stored sentences held as the leaf's
+  OWN CONSTANTS with a test that pins them equal to the table's (the exact match kept: the builder's type-and-lead shape
+  would re-word a DM's own sentence); THE A3 RESIDUE (6 and 5 pages) IS NOT A FAULT: it prints from a HISTORY EVENT, and the
+  record's present shortfall does not say which good a past event was about. THE TUNING INVENTORY's re-freeze accepted as
+  read. Its doors: the wiring census, the tuning inventory, writer-reach, the state-prose projection, observed-shape. NEW
+  SENTENCES FOR THE OWNER's VETO: "A critical resource, <good>, became scarce, causing hoarding and price gouging"; "A
+  critical resource, <good>, is running short, and some are hoarding it while others cannot pay the prices asked".
+- **R-CURES-B** (`lane/stack-122-rcures-b-wip-2026-11-27` at ad59993ce; proof on 300 births of C and of V): B1 7 and 3 pages to
+  0 BY THIRTEEN DECLARED EXCLUSIONS (`crisis: <kind>` on the imminent lines: ids and words unchanged); B2 the hard pair
+  60/33/25 and 37/22/11 to 13/0/0 and 10/0/0 (every residual a PERSON's debt in an NPC secret); B3 5 pages of V to 0; B4
+  built, then reverted (births). THE CHAIR READ ITS SOURCE WHOLE. **RULED 122-B-1 (by message):** B1 and B3 accepted; B2
+  accepted with ONE MEASURE OWED: its `owesDebtShown` reads ANY `outside_debt` event of the timeline, overturning G68's "a
+  past Debt Crisis is not the place owing": that stands only where THE PAGE prints a present-tense creditor line; else the
+  arm is keyed on what makes the page print it. THE STANDING-OF-LIVING SLOT SILENT on 2 and 5 pages: accepted as silence;
+  its proposed sentence not built (a new vid moves the shift register). `samenessHideable.existingReds.json`: ONE ROW
+  RE-KEYED BY SHA after the ruled word correction (96 rows before and after; no ceiling moved): accepted, NAMED FOR THE OWNER
+  as a re-key, not a widening. B2's code table `economyStateProse.js :: SOLVENT_LINES` is the first exclusion table between
+  claims in the code: THE SURVEY's design takes it in. RE-WORDED FOR THE OWNER's VETO: DS-POW-6 v2 "Debts run up in one
+  house here are collected in another, and the two are the same concern." (was "The town's debts start in one house…").
+  THE FIVE SIZES asked of it too. **B4 IS POINT 123's C3**, on `lane/stack-123-b4-wip-2026-11-27` by the same builder
+  (13 of 300 births move: the Annual fair's description; the one collapsing pair: the need "luxury goods" against the
+  commodity "luxury" of gemstone deposits and precious metals).
+- R-BIRTH is in its last gate run (not reported). READER 121 is rendering V (not reported beyond its early note).
+- A LESSON FOR THE NEXT CHAIR: `list_events` with kinds ["result"] on a child returns about 40,000 tokens of run metadata for
+  three sentences: use `list_sessions` with `children: true` (its `post_turn_summary`) and the branches.
