@@ -109,13 +109,54 @@ export function pickVariantMixed(pool, seed) {
 export function pickRendezvous(lines, slotKey, idOf) {
   if (!Array.isArray(lines) || lines.length === 0) return undefined;
   if (!slotKey) return lines[0];
-  let best = lines[0];
-  let bestId = String(idOf(best));
-  let bestH = mix32(fnv1a32(`${slotKey}::${bestId}`));
+  let best = rendezvousEntry(lines[0], slotKey, idOf);
   for (let i = 1; i < lines.length; i += 1) {
-    const id = String(idOf(lines[i]));
-    const h = mix32(fnv1a32(`${slotKey}::${id}`));
-    if (h > bestH || (h === bestH && id < bestId)) { best = lines[i]; bestId = id; bestH = h; }
+    const entry = rendezvousEntry(lines[i], slotKey, idOf);
+    if (rendezvousBefore(entry, best) < 0) best = entry;
   }
-  return best;
+  return best.line;
+}
+
+/**
+ * THE WHOLE LIST IN RENDEZVOUS RANK (point 121, TAIL-PICKS): highest `mix32(fnv1a32('<slotKey>::<id>'))` first, a tie
+ * to the SMALLER id (by string) — the one comparison `pickRendezvous` uses, so `pickRendezvous(l, k, f)` is always
+ * `rankRendezvous(l, k, f)[0]`. A walk down the rank is "the next line for the next one" with no position in it: the
+ * declaring door's ranked mode (`facts/drawDeclared.js`) and a slot that skips the lines it may not print read it.
+ * Contract: non-array or empty list → []; ANY falsy key → the list in its own order. Pure; a new array.
+ * @template T
+ * @param {readonly T[]} lines
+ * @param {string | number | null | undefined} slotKey
+ * @param {(line: T) => string} idOf
+ * @returns {T[]}
+ */
+export function rankRendezvous(lines, slotKey, idOf) {
+  if (!Array.isArray(lines) || lines.length === 0) return [];
+  if (!slotKey) return [...lines];
+  return lines.map((line) => rendezvousEntry(line, slotKey, idOf)).sort(rendezvousBefore).map((entry) => entry.line);
+}
+
+/**
+ * @template T
+ * @typedef {{ line: T, id: string, h: number }} RendezvousEntry
+ */
+
+/**
+ * @template T
+ * @param {T} line @param {string | number} slotKey @param {(line: T) => string} idOf
+ * @returns {RendezvousEntry<T>}
+ */
+function rendezvousEntry(line, slotKey, idOf) {
+  const id = String(idOf(line));
+  return { line, id, h: mix32(fnv1a32(`${slotKey}::${id}`)) };
+}
+
+/**
+ * The rank's one comparison: the higher hash first, a tie to the smaller id. Negative when `a` ranks before `b`.
+ * @template T
+ * @param {RendezvousEntry<T>} a @param {RendezvousEntry<T>} b
+ * @returns {number}
+ */
+function rendezvousBefore(a, b) {
+  if (a.h !== b.h) return b.h - a.h;
+  return a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
 }
