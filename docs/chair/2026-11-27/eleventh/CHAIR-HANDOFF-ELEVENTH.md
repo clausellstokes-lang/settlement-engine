@@ -176,3 +176,26 @@ See section 4, newest last.
   lists will hold that environment red: read by its message).
 - GUARD-120R has committed the guard (edad442d6) and holds the gate for `tests/lint` whole. D13-120R is in its test runs.
   R-MEASURE is rendering (its table is filling in `rmeasure/R-TABLE.tsv`).
+
+## V7 (17:22 UTC on 2026-11-27): THE ID GUARD REBUILT, READ BY THE CHAIR AND ACCEPTED (E10); THE PRE-RUN THREE QUARTERS IN
+- GUARD-120R finished (77 minutes, most of it waiting for the gate): `lane/stack-120-guard-wip-2026-11-27` (local,
+  /home/user/wt/guard; being pushed as transport) at 30539f145 on df0401af6: five test-side files, no file under src.
+  144 scopes, 637 ids: 615 Daily Life ids in 143 `<slot>|<branch>` scopes and 22 viability ids. THE FIRST BUILD's RECORD SAID
+  636 Daily Life ids; THE CHAIR COUNTED THE POOL FILES ITSELF (`id: '` in `src/data/dailyLife/*.js`): 615, as G76 (A) said:
+  the 636 is not explained and is not this build's.
+- ITS PROOFS, as reported (plants (a) to (h)): the shifted insertion and the swap red and refused, each also with a trailing
+  space; a retired id reused red and refused; a second SS1 over three lines, in double quotes, in backticks: each red; the
+  baseline moved away or emptied: refused; a re-wording in place re-banked by the door and green; an appended id, a retired
+  sentence under a new id, a comment naming an id: green; the unplanted tree green, the door "matches the tree".
+- THE CHAIR READ `tests/lint/stablePickIds.shared.mjs` WHOLE: Daily Life is read BY IMPORT and fail-closed (every id-bearing
+  export must be named; every named export read exactly once; an emptied pool file red: the builder's own addition, taken);
+  the viability rows by a small lexer (comments dropped, any quote style, id keys counted against rows); a move is matched
+  against present ids only; the door refuses a move, a reuse, a duplicate, a missing or emptied baseline. NO ENVIRONMENT
+  VARIABLE re-points the baseline (one fewer hole than the first build). "DOES NOT CATCH" carries five lines, the outsider
+  second pick's branch-name id among them. ONE HONEST CASE REFUSED, NAMED: a wholly retired branch that comes back.
+- **E10: ACCEPTED. THE GUARD IS CLOSED AGAIN (G81 stands):** the independent reader plants on it once; a finding of the
+  deliberate kind is recorded, not cured.
+- `tests/lint` whole on its tip: the base's four, the lighting census (the join's), and `ledgerCitationIntegrity`, an
+  ENVIRONMENT red (no local ref `review-fixes-2026-07-08`): THE CHAIR FETCHED THAT REF HERE at 17:22 UTC on 2026-11-27.
+- THE PRE-RUN (PRE120), three shards of four: 31,865 tests; every failing test not on the list is in `tests/domain` or is
+  the lighting census (sorted by `shards/sort.py`, kept in scratch `shards/`). Shard 4 still runs.
