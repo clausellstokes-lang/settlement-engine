@@ -1569,3 +1569,14 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   and P9c. IT STOPS AND REPORTS; the chair rules on the count (G63 (2)) before phase 2 is built.
 - STILL OWED BY THE CHAIR: CI's run on 1f946c43f1 read by name (the hourly check does it when the run has ended).
 - D13-120's agent: a16f77d1000cac948 (continued by SendMessage; its report comes as a message).
+
+## T139 (01:36 UTC on 2026-11-27): CI ON POINT 119 READ BY NAME: 73 FAILING ROWS, ALL ON THE LIST, NONE NEW
+
+- Run 45918016920 (number 1297) on 1f946c43f1: the test ratchet 53, build and dist 13, coverage floors 6, the golden master
+  under tr_TR 1; validation, the type ratchets and lint green; no listed row green. `ci/LINE-NOW.md` carries the bullet.
+- THE OWNER ASKED FOR ALL THE KNOWN FAILURES IN PLAIN WORDS: given as a table of the 75 by kind (34 stored copies and
+  counts, 25 stale packaged copies, 8 size limits, 2 stale recordings, 6 OWED A FIX). THE CHAIR PROMISED HIM: rows 1, 15,
+  16, 22, 27, 28 (`colourMarks4h`; `narrativeQualityCorpus` twice; `powerStructure` F31; `editCorpusRatchet` A3, A7: red
+  since points 83 and 84, "owed by the landing lane", their causes not re-traced by this chair) ARE EACH TRACED TO THEIR
+  CAUSE AND THE FIX GOES INTO A LANDING BEFORE THE END: a local builder's measure, after D13-120's phase 1 reports.
+- D13-120 (agent a16f77d1000cac948) is still in phase 1 (its own long test runs); not reported.
