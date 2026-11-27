@@ -76,7 +76,10 @@ const STABILITY_CAUSE = /[ ]*[(—;][\s\S]*$/;
  * _gallery_veil_withhold_always carries between its STANDING_FORMS markers, GENERATED, never written by hand
  * (`node scripts/veil/standingForms.mjs --print`, from scripts/veil/standingForms.data.json, whose header states the cut):
  * {id: {kind, re}}, each `re` a tail (it ends in $), no backslash. Compiled once, in id order, as the cut asks each row:
- * "(?:^| )(" + re + ")".
+ * "(?:^| )(" + re + ")$": THE END FORCED (N2, VETOABLE: 212's own reading, `'^(.*?)(?:^| )(' || re || ')$'`), so both engines
+ * read a match only as a TAIL; with every row ending in $, none with a top-level |, none able to open on a space
+ * (tests/lint/standingFormsTotality.walker.test.js arm 5), rows matching at one start span [that start, the end]: ONE span,
+ * so a different-span tie cannot arise and no runtime branch for it is written in either engine.
  * @type {ReadonlyArray<Readonly<{ id: string, re: RegExp }>>}
  */
 const STANDING_ROWS = Object.freeze(Object.entries(/** @type {Record<string, { kind: string, re: string }>} */ (JSON.parse(
@@ -201,7 +204,7 @@ const STANDING_ROWS = Object.freeze(Object.entries(/** @type {Record<string, { k
   "TG-pull": {"kind": "closed", "re": "They have more real pull than the military right now: officers on their payroll, and commanders who know better than to ask questions[.]$"}
 }`
   // STANDING_FORMS end
-))).sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0)).map(([id, r]) => Object.freeze({ id, re: new RegExp(`(?:^| )(${r.re})`) })));
+))).sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0)).map(([id, r]) => Object.freeze({ id, re: new RegExp(`(?:^| )(${r.re})$`) })));
 
 /**
  * R5-DESC (212 (36) (a)): a power's desc as THE STANDING CUT leaves it (scripts/veil/standingForms.mjs :: cutDesc, the
@@ -315,7 +318,7 @@ export function withholdAlways(s) {
   // (R5-DESC, 212 (36) (a), (b); E115, E121, E126, E129): (b) first, a HIDDEN row (its own `hidden` true) or a MASKED one
   // (its `faction` or `name` HIDDEN_POWER_MASK) is served with no `desc`, both lists (E115 (2)); (a) every other string
   // desc of both lists loses its standing tail by THE ONE TABLE (standingBase); a desc no row matches stays as it is. The
-  // page re-derives the standing (pageRederive.js :: rederiveStanding)
+  // page prints NO standing (RULING V15: phase 1 is the cut alone; pageRederive.js :: rederiveStanding writes nothing)
   /** @type {ReadonlyArray<unknown>} */
   const powerLists = [recAt(s, 'powerStructure')?.factions, s.factions];
   for (const list of powerLists) {

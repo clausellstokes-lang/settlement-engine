@@ -34,6 +34,12 @@
  *      one reading, counted apart as `same-span ties`), WRONG
  *      (the cut removes text the writer did not write). The counts are appended to STANDWALK_MEASURES (when set); UNCUT,
  *      DIFFERENT-SPAN TIE and WRONG must be 0, every case listed when not (the arm is never tuned to the pools).
+ *   5. THE DIFFERENT-SPAN TIE UNREACHABLE BY CONSTRUCTION (VEIL-51's N2, VETOABLE; rebuilt by VEIL-56's U45): every row ends
+ *      in $, holds no top-level |, and cannot open on a space (its first atom a literal other than a space, a class holding
+ *      none, or a group each of whose branches opens so); and BOTH engines read a row only as a tail: 212's base extraction forces the end
+ *      (`'^(.*?)(?:^| )(' || rre[ir] || ')$'`), and the twin (galleryWithholdAlways.js :: STANDING_ROWS) compiles the same.
+ *      So every row matching at a step's chosen start spans [that start, the end]: one span, at most a same-span tie (one
+ *      reading), and no runtime "withhold whole" branch is written for the different-span tie (it would be dead code).
  */
 import { describe, it, expect } from 'vitest';
 import { appendFileSync, readFileSync, readdirSync } from 'node:fs';
@@ -107,6 +113,59 @@ function tieOf(tied) {
   return spans.size === 1 ? 'same-span tie' : 'different-span tie';
 }
 
+/** The index of a | outside every group and class of a pattern, or -1. @param {string} re @returns {number} */
+function topLevelBar(re) {
+  let depth = 0;
+  let inClass = false;
+  for (let i = 0; i < re.length; i += 1) {
+    const c = re[i];
+    if (c === '\\') { i += 1; continue; }
+    if (inClass) { if (c === ']') inClass = false; continue; }
+    if (c === '[') inClass = true;
+    else if (c === '(') depth += 1;
+    else if (c === ')') depth -= 1;
+    else if (c === '|' && depth === 0) return i;
+  }
+  return -1;
+}
+/** The top-level branches of a pattern (split at each top-level |). @param {string} re @returns {string[]} */
+function branchesOf(re) {
+  const out = [];
+  let rest = re;
+  for (let i = topLevelBar(rest); i >= 0; i = topLevelBar(rest)) { out.push(rest.slice(0, i)); rest = rest.slice(i + 1); }
+  out.push(rest);
+  return out;
+}
+/** The index of the ) that closes the group opening at `re[0]`. @param {string} re @returns {number} */
+function groupEnd(re) {
+  let depth = 0;
+  let inClass = false;
+  for (let i = 0; i < re.length; i += 1) {
+    const c = re[i];
+    if (c === '\\') { i += 1; continue; }
+    if (inClass) { if (c === ']') inClass = false; continue; }
+    if (c === '[') inClass = true;
+    else if (c === '(') depth += 1;
+    else if (c === ')') { depth -= 1; if (depth === 0) return i; }
+  }
+  return -1;
+}
+/** Whether a quantifier at the head of `rest` lets the atom before it match nothing (?, *, {0,...}). @param {string} rest */
+const optional = (rest) => /^(?:[?*]|\{0[,}])/.test(rest);
+/** Whether a pattern's first atom cannot match a space: a literal character other than a space, a class that holds no space
+ * (not negated), or a (?: group every branch of which opens so; a first atom that may match nothing fails (unsure).
+ * @param {string} re @returns {boolean} */
+function opensOffSpace(re) {
+  if (re.startsWith('(?:')) {
+    const end = groupEnd(re);
+    if (end < 0 || optional(re.slice(end + 1))) return false;
+    return branchesOf(re.slice(3, end)).every(opensOffSpace);
+  }
+  const cls = /^\[(\^?)([^\]]*)\]/.exec(re);
+  if (cls) return cls[1] === '' && !cls[2].includes(' ') && !optional(re.slice(cls[0].length));
+  return re.length > 0 && !/^[\\\s()[\]{}|?*+.^$]/.test(re) && !optional(re.slice(1));
+}
+
 /** @param {string} hay @param {string} needle @returns {number} */
 const occurrences = (hay, needle) => hay.split(needle).length - 1;
 
@@ -165,6 +224,32 @@ describe('standing forms: the table is total over the writers (V14 (2)) and the 
     // the planted pair: one row stops before the end, so its span differs: withheld whole
     expect(tieOf(hitsOf([/(?:^| )(They play [A-Za-z ]+ against each other\.)$/, /(?:^| )(They play the Fishers)/]))).toBe('different-span tie');
     expect(tieOf(hitsOf([/(?:^| )(They play [A-Za-z ]+ against each other\.)$/]))).toBe('one');
+  });
+
+  it('5. THE DIFFERENT-SPAN TIE IS UNREACHABLE BY CONSTRUCTION (N2, VETOABLE): every row ends in $, holds no top-level |, cannot open on a space; both engines read a row only as a tail', () => {
+    // the judgment's own controls: a planted row of each kind reds
+    expect(topLevelBar('A(?:b|c)d[|]e$')).toBe(-1);
+    expect(topLevelBar('Ab|cd$')).toBe(2);
+    expect(opensOffSpace('(?:[A-Z][a-z]+|an unseen interest) more$')).toBe(true);
+    expect(opensOffSpace('(?:Five|Four) powers$')).toBe(true);
+    expect(opensOffSpace(' They keep$')).toBe(false);
+    expect(opensOffSpace('(?:Five| Four) powers$')).toBe(false);
+    expect(opensOffSpace('[A-Z ]x$')).toBe(false);
+    expect(opensOffSpace('(?:The )?council$')).toBe(false);
+    const table = readTable();
+    const faults = [];
+    for (const r of table.forms) {
+      if (!r.re.endsWith('$')) faults.push(`${r.id}: does not end in $`);
+      if (topLevelBar(r.re) >= 0) faults.push(`${r.id}: holds a top-level |`);
+      if (!opensOffSpace(r.re)) faults.push(`${r.id}: can open on a space (its first atom may match one, or nothing)`);
+    }
+    expect(table.forms.length, 'the table is not empty').toBeGreaterThan(100);
+    expect(faults).toEqual([]);
+    // both engines read a row only as a tail: 212's base extraction and the twin's compile force the end
+    const sql = readFileSync(join(ROOT, 'supabase/migrations/212_share_veil_later_cures.sql'), 'utf8');
+    expect(sql.includes("bs := (regexp_match(dt[ix], '^(.*?)(?:^| )(' || rre[ir] || ')$'))[1];"), '212 reads a row only as a tail').toBe(true);
+    const twin = readFileSync(join(ROOT, 'src/domain/display/galleryWithholdAlways.js'), 'utf8');
+    expect(twin.includes('re: new RegExp(`(?:^| )(${r.re})$`)'), 'the twin compiles each row with the end forced, as 212 reads it').toBe(true);
   });
 
   it.skipIf(!POOLS)('3. THE CENSUS OF STORED TAILS (a measure: runs only under STANDWALK_POOLS=<today>:<master>; skipped in the gate\'s default run): UNCUT, DIFFERENT-SPAN TIE and WRONG are 0 in both pools (same-span ties counted apart: one reading)', async () => {
