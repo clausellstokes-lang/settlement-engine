@@ -150,3 +150,29 @@ See section 4, newest last.
   starts three shards on it (the eight directories), then continues the builder with the failing names.
 - PLANNED WITH CHILDREN: the independent reader of point 120 in its own container (top tier, max effort) as soon as both
   of its branches are finished and pushed; the landing's wide gate in four shards.
+
+## V6 (17:09 UTC on 2026-11-27): POINT 121's PHASE 1 IN AND RULED (E9); ITS COST RUN ON THREE CHILDREN; PHASE 2 STARTED; THIS MACHINE UNSHALLOWED
+- TAIL-121's PHASE 1 (58 minutes; scratch `landing/121/tail/`): on 300 births of C and 300 of V, base against a scratch
+  build: RECORDS MOVED 0 and 0; lines outside the five units 0; lines moved: tradition description 826 and 832 (279 and 280
+  towns), PDF headlines 435 and 403, the quick guide's scope line 242 and 242, the ring vantage 24 and 34, fortune 23 and 19,
+  the cast wants 9 and 12, the hooks 0 and 2 (one town). FOUR OF THE SITES ARE ALSO STORED AT SAVE on the shared page's stamp
+  (`power:governance`, `traditions`, `defense:criminal.ringNote`, `overview:identity`): the A18 kind; no master save holds a
+  stamp. THE DOOR: `filterDeclared` notes every admitted line (it feeds the soak's declared share and pool dominance), so
+  the Daily Life route is refused at door sites; the unchanged door fails the bar (the chair's own read, V3); the builder's
+  scratch gives the door a RANKED MODE.
+- **E9, RULED (`landing/RULING-121-1.txt`):** (1) the ranked mode of `drawDeclared` (`rankKey`, `taken`;
+  `kernel/proseHash.js :: rankRendezvous`) ACCEPTED, built with no `any`, six tests of its own; (2) rows inside a door
+  `{ id, text, ...declaration }`, outside a door `{ id, say }`; (3) THE HOOKS ARE NOT CONVERTED: 1 town in 600 and 0 in 600
+  print one, and they carry the most machinery: `hookLines.js` byte-equal; written down as HOOKS-PICKS; (4) FOUR UNITS:
+  fortune, tradition description, tonight's cast wants, page frames (the ring vantage, the PDF's headlines, the scope
+  line); (5) the stored stamps are the share lane's A18: no version bump here; (6) an empty key picks the first row.
+  PHASE 2 STARTED BEFORE THE COST COUNT IS IN (the standard's rule 35: run to the default, vetoable): a stored figure or a
+  shrink-only door that reds STOPS its unit.
+- THE COST RUN "TAILCOST" (the eight directories on the scratch build c9ebf6b696, pushed as
+  `lane/scratch-121-costbuild-2026-11-27`, never merged), three shards: session_01FE9mEx65EbCgq1jyMNZZeq (1/3),
+  session_01FE9mEscgc4h5rEg42ku2E8 (2/3), session_01FE9mEtishfjiASjkBYWq31 (3/3). Their lists go to TAIL-121 by message.
+- THIS MACHINE's CLONE WAS SHALLOW (`domainAnyCastBaseline` red for that alone: "resolves to NO commit", found by D13-120R):
+  unshallowed at 17:09 UTC on 2026-11-27. THE SHARD RUNNER's TEMPLATE now unshallows its clone first; the four PRE120 children did NOT (their
+  lists will hold that environment red: read by its message).
+- GUARD-120R has committed the guard (edad442d6) and holds the gate for `tests/lint` whole. D13-120R is in its test runs.
+  R-MEASURE is rendering (its table is filling in `rmeasure/R-TABLE.tsv`).
