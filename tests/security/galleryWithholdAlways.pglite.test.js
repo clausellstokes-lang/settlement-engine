@@ -44,7 +44,7 @@ function valuesAt(doc, re) {
 }
 
 /**
- * THE ROWS THAT ARE PARTIAL BY RULE (R5-DESC, 212 (36); the arm judges a row by what that row does, VEIL-33's 96c777381
+ * THE ROWS THAT ARE PARTIAL BY RULE (R5-DESC, 212 (38); the arm judges a row by what that row does, VEIL-33's 96c777381
  * precedent; re-stated by VEIL-37's R5D-PAGE-A on the seat's find at 3ef7fb325): their path stays on a served document, so
  * ABSENCE is not their rule.
  *   power.desc                   no served desc still ends in a standing THE TABLE cuts (scripts/veil/standingForms.mjs ::

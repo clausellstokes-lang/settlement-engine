@@ -1733,7 +1733,7 @@ describe('COHERENCE-VEIL-10: the veil\'s design on rows written by hand (REVIEW-
       { faction: "MERCHANT GUILD", power: 8, desc: 'gp2 the same power upper-cased' },
       { power: 7, desc: 'gp3 an entry named as the hidden house' },
       { power: 6, desc: 'gp4 a longer name that holds the hidden one' },
-      // RE-STATED BY CAUSE (R5-DESC, 212 (36) (b); the chair's E115 (2): a hidden row's own desc leaves with the row; VEIL-37's
+      // RE-STATED BY CAUSE (R5-DESC, 212 (38) (b); the chair's E115 (2): a hidden row's own desc leaves with the row; VEIL-37's
       // R5D-PAGE-A on the seat's find at 3ef7fb325): the entry flagged hidden arrives with no desc
       { power: 3, hidden: true },
     ];

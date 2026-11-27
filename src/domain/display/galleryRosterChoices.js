@@ -166,7 +166,7 @@ export function applyRosterChoices(s, pub, idOf) {
     const rels0 = objectsOf(recAt(pub, 'powerStructure')?.factionRelationships).filter(unserved);
     const rels = ps.factionRelationships.filter(r => isRec(r) && !unserved(r) && !rels0.some(r0 => heldBy(r0, r)));
     ps.factionRelationships = rels;
-    // registry: power.relation.dmNote (R5-DESC, 212 (36) (d); E115 (3), E121 Q1): a served relation's `dmNote` that NAMES A
+    // registry: power.relation.dmNote (R5-DESC, 212 (38) (d); E115 (3), E121 Q1): a served relation's `dmNote` that NAMES A
     // WITHHELD POWER (withheldPowerNamer: the fold, the bare form, the id) leaves, THE KEY, per entry; the relation stays
     if (rels.some(r => isRec(r) && typeof r.dmNote === 'string')) {
       const namer = withheldPowerNamer(s, pub, ps);
@@ -434,10 +434,14 @@ function withholdPowerCopies(s, pub, ps) {
     s.simulationTrace = kept;
     if (kept.length < nt) renumberTrace(s);
   }
-  // R5-DESC, 212 (36) (e): power.desc's BELT (E121 (c)). The standing is cut on every read (row power.desc, withholdAlways,
+  // R5-DESC, 212 (38) (e): power.desc's BELT (E121 (c)). The standing is cut on every read (row power.desc, withholdAlways,
   // after this pass); a desc whose BASE, as that cut leaves it (standingBase), still names a withheld power leaves WHOLE,
-  // both lists. None is expected: every name the measures found sits in the standing. Asked only of a desc that names one
-  // whole (a base that names one is held in its desc). SQL twin: 212 :: _gallery_veil_roster_choices, the same rule
+  // both lists. ITS MEASURED REACH (RULING V25 (4), the measure on both stored pools after N2b, VEIL-51's table re-taken by
+  // VEIL-56's U45): after the cut a desc names another power of its place on 7 of 754 today-born descs and 8 of 765
+  // master-born; 12 of the 15 are a density rival's base copied from its host and naming it (class (i)), which this belt's
+  // withheld set (the powers of `pub` no served list names) misses where the projection dropped a hand-hidden host before
+  // the veil ran: RULING V27 (1)'s stored belt is that class's cure; the other 3 name the seat (class (ii), never withheld). Asked only of a desc that names one whole (a base
+  // that names one is held in its desc). SQL twin: 212 :: _gallery_veil_roster_choices, the same rule
   for (const holder of [ps, s]) {
     if (holder && Array.isArray(holder.factions)) {
       holder.factions = holder.factions.map(f => (isRec(f) && typeof f.desc === 'string' && named(f.desc) && named(standingBase(f.desc)) ? (({ desc: _d, ...rest }) => rest)(f) : f));

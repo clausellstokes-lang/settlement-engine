@@ -144,7 +144,7 @@ describe('every COMPOSED row of the registry names a host that exists in both en
   }
 });
 
-describe('R5-DESC\'s ROWS, walked by name (E115 (3), E121, E126, E129; 212 (36))', () => {
+describe('R5-DESC\'s ROWS, walked by name (E115 (3), E121, E126, E129; 212 (38))', () => {
   const rowOf = (id) => REGISTRY_ROWS.find((x) => x.id === id) ?? { id, inputs: ['(no such row)'], server: '', twin: '' };
   test('power.desc: not composed; withheld ALWAYS, the page re-deriving it (rederiveStanding), built on R2\'s always-host in both engines (hosts that exist)', () => {
     const r = rowOf('power.desc');

@@ -2,7 +2,7 @@
  * galleryVeilDesc.pglite.test.js — R5-DESC's PAGE HALF (VEIL-37's R5D-PAGE-A; docs/chair/2026-11-20/veil/briefs/R5D-PAGE-BRIEF.md
  * items 0 (c), 2, 3, 4 and 7; the chair's E115, E116, E121, E126, E128, E129, E134, each vetoable by the owner).
  *
- * THE RULE (212 (36); the twin galleryWithholdAlways.js :: withholdAlways and galleryRosterChoices.js :: applyRosterChoices): on
+ * THE RULE (212 (38); the twin galleryWithholdAlways.js :: withholdAlways and galleryRosterChoices.js :: applyRosterChoices): on
  * EVERY non-owner read of every place, both engines, (a) each `powerStructure.factions[].desc` and master's `factions[].desc`
  * loses its STANDING TAIL by ONE table (STANDING_FORMS), the base kept; (b) a row flagged `hidden` or served under the
  * projection's mask ('an unseen interest') is served with NO desc; (c) a current tension's party served as the mask leaves
@@ -267,7 +267,7 @@ function strings(v, p = '', out = []) {
  */
 function absenceFaults(stored, d, { born = false } = {}) {
   const out = [];
-  // THE SERVER'S WITHHELD (the rule 212 (36) (d) and the projection read): a stored power no served list names at all; a
+  // THE SERVER'S WITHHELD (the rule 212 (38) (d) and the projection read): a stored power no served list names at all; a
   // stamped row the DM door serves is NOT withheld from that reader (R5-RECENT's measure: the DM door serves it, unmasked)
   const served = new Set(listsOf(d).map(nameOf).filter(Boolean));
   const wh = listsOf(stored).map(nameOf).filter((n) => n && !served.has(n));

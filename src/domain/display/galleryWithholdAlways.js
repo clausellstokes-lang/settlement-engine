@@ -72,7 +72,7 @@ export function restampServedMemberships(doc) {
 const STABILITY_CAUSE = /[ ]*[(—;][\s\S]*$/;
 
 /**
- * R5-DESC (212 (36) (a); the chair's E121, E126, E129): THE STANDING FORMS, ONE TABLE, the same literal 212 ::
+ * R5-DESC (212 (38) (a); the chair's E121, E126, E129): THE STANDING FORMS, ONE TABLE, the same literal 212 ::
  * _gallery_veil_withhold_always carries between its STANDING_FORMS markers, GENERATED, never written by hand
  * (`node scripts/veil/standingForms.mjs --print`, from scripts/veil/standingForms.data.json, whose header states the cut):
  * {id: {kind, re}}, each `re` a tail (it ends in $), no backslash. Compiled once, in id order, as the cut asks each row:
@@ -207,7 +207,7 @@ const STANDING_ROWS = Object.freeze(Object.entries(/** @type {Record<string, { k
 ))).sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0)).map(([id, r]) => Object.freeze({ id, re: new RegExp(`(?:^| )(${r.re})$`) })));
 
 /**
- * R5-DESC (212 (36) (a)): a power's desc as THE STANDING CUT leaves it (scripts/veil/standingForms.mjs :: cutDesc, the
+ * R5-DESC (212 (38) (a)): a power's desc as THE STANDING CUT leaves it (scripts/veil/standingForms.mjs :: cutDesc, the
  * reference; 212 :: _gallery_veil_withhold_always, rule for rule): over every row, the match in what remains; the EARLIEST
  * start (a same-span tie is the smaller id's: the base is the same) removed with its joining space; REPEATED while a row
  * matches (a rank line and its rivalry notes, joined by one space). A desc no row matches is returned as it is (a base:
@@ -288,7 +288,7 @@ export function withholdAlways(s) {
   // registry: history.legacy
   // registry: history.siegeNarrative
   minusAt(s, ['history'], ['legacyAnnotations', 'siegeNarrative']);
-  // registry: history.tension.maskedParty (R5-DESC, 212 (36) (c); E121 Q4): a current tension's party served as the mask
+  // registry: history.tension.maskedParty (R5-DESC, 212 (38) (c); E121 Q4): a current tension's party served as the mask
   // (HIDDEN_POWER_MASK, act T's owner-hidden taker) leaves its list, entry by entry; the tension stays
   const hi = recAt(s, 'history');
   if (hi && Array.isArray(hi.currentTensions)) {
@@ -315,7 +315,7 @@ export function withholdAlways(s) {
   // registry: power.relation.ratio (power.relation.direction is DRAWN, VR37: it goes with its relation, per entry)
   eachMinusAt(s, ['powerStructure', 'factionRelationships'], ['ratio']);
   // registry: power.desc
-  // (R5-DESC, 212 (36) (a), (b); E115, E121, E126, E129): (b) first, a HIDDEN row (its own `hidden` true) or a MASKED one
+  // (R5-DESC, 212 (38) (a), (b); E115, E121, E126, E129): (b) first, a HIDDEN row (its own `hidden` true) or a MASKED one
   // (its `faction` or `name` HIDDEN_POWER_MASK) is served with no `desc`, both lists (E115 (2)); (a) every other string
   // desc of both lists loses its standing tail by THE ONE TABLE (standingBase); a desc no row matches stays as it is. The
   // page prints NO standing (RULING V15: phase 1 is the cut alone; pageRederive.js :: rederiveStanding writes nothing)
