@@ -1535,3 +1535,27 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   (merge the cures branch, typechecks, the named tests, lint, copy, build, sizes, PUSH `lane/stack-119-wip-2026-11-26`);
   the row and the gate paragraph; push the line; RED-AT-LINE.tsv and LINE-NOW.md; CI by name. Push 415 launched; NEXT PUSH
   NUMBER 416.
+
+## T137 (00:40 UTC on 2026-11-27): POINT 119 LANDED: THE LINE IS 1f946c43f1a351591a4da21f05d50f7e398a231d
+
+- **THE LINE MOVED AT 00:39 UTC ON 2026-11-27**, a fast-forward 9d22f040e4..1f946c43f1 (the row and "THE GATE OF POINT 119"
+  in `LANDINGS-SIXTH.md`; the landing itself its parent 439fc30c44, also `lane/stack-119-wip-2026-11-26`). The hook ran.
+- **WHAT LANDED:** the six units and four cures (G72 (1), (2), (5), (6)); cure (4) TAKEN OUT (G74: the chair's design read
+  lists the first tick rewrites). The reader's last table: false prints 0 of 2,800 on every viability line. The five new
+  reds of the wide gate were traced by the helper's bisect to B1(i)c-2's births and ruled stored figures (G75).
+- **THE RECORDS:** `ci/RED-AT-LINE.tsv` 75 rows (ten new, all the owner's one signing); `ci/LINE-NOW.md` at point 119, its CI
+  bullet NOT YET READ; rulings G72 to G75; `landing/RULING-119-1.txt`, `-2.txt`; the reader's `landing/119/SECOND-READER-119-D.txt`
+  and `-E.txt`; `gen/HAND-INS.md` (the cures' row).
+- **NOBODY WORKS NOW**: the helper, the builder and the reader are finished (their agents can be resumed by SendMessage:
+  LAND-119 a9b1370e53d44857a, CURE-119 aaa83c6f3c62f138b, the reader a5153b40fbcfac272). Worktrees left: /home/user/wt/cure119
+  (the cures branch, local, merged), /home/user/wt/b1ii (merged).
+- **NEXT, IN THIS ORDER:** (1) READ CI's RUN ON 1f946c43f1 BY NAME (the form in T-entries of point 118: `actions_list` on the
+  branch, `get_job_logs` failed_only, `ci-read-118.py` with the four job ids replaced) and write its bullet in LINE-NOW.md:
+  expected 75 rows or fewer, none new. (2) POINT 120 BY A LOCAL BUILDER (brief to write: `prompts/START-D13-120.txt`): D13
+  STABLE-PICKS (G63, its four conditions, the cost measured by a scratch build first) and the OLD-SAVE measure with P9c
+  (G68, G72 (3)). (3) the whole-town items R1 to R11 (pre-release list), each measured over the census first, then one
+  local builder. (4) the final browser walk; then the share page resumes.
+- **FOR THE OWNER, HIS HAND ONLY:** ten more stored figures to sign at the end (75 rows in all); vetoes on two new
+  sentences ("…are also the people who trade in it…"; "…being well placed for trade has not changed that."); the older
+  open items unchanged (security files and step 2's number; VEIL-51's refused push; storing picks at save: the chair says no).
+  Push 417 done; NEXT PUSH NUMBER 418.
