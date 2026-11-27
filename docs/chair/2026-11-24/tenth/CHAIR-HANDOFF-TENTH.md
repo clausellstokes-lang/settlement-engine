@@ -1664,3 +1664,19 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   id, a short fingerprint of the line's text as first banked; the walker reds when a banked fingerprint is found under
   ANOTHER id (an id moved between lines); a re-wording in place (new text, same id) stays allowed and re-banks only by the door.
 - THE SAFETY FLAG (T144): the builder has not yet named the blocked action; it is in its gates (`tests/lint`).
+
+## T146 (06:35 UTC on 2026-11-27): THE SECOND READER ON POINT 120 REPORTED; RULED IN G79; SIX CURES SENT TO THE BUILDER
+
+- THE READER (a11860ef534ef1300, finished; report `landing/120/SECOND-READER-120-A.txt`; evidence `$S/reader8/out`): THE BAR
+  HOLDS by its own planted edits; records moved 0; every surface prints the same line. SEVEN FINDINGS: the walker holds
+  ids not lines (the chair's own hole, confirmed with numbers: 100 of 190 towns move on an insert-and-shift, green); the
+  viability reader misses multi-line rows; the door makes a fresh baseline; two re-pointed tests cannot fail; the
+  connectives step is worse than the base and dormant (TAKEN OUT); the shared page's STORED verdict (A18, not a fault of
+  120); the chair's "a quarter of viability lines move" was low: about half (464 and 469 of 900).
+- `landing/RULING-120-2.txt` SENT to D13-120 (a16f77d1000cac948): it finishes its gates, makes the six cures, reports once,
+  and names the command the safety check refused. NOTE: the reader's own report says "a chained `sleep` was blocked": the
+  builder's flag may be the same harmless thing; NOT ASSUMED: read its line first.
+- WHEN IT REPORTS: the chair reads the cures' diff; the SAME reader re-reads them (SendMessage to a11860ef534ef1300: the
+  cure commits; questions: the two plants red and refused; a multi-line duplicate red; the door refuses without a
+  baseline; each re-pointed row reds under its mutant; the state-prose directory equal to the base). THEN the landing
+  helper as in the trigger's prompt. POINT 121's TAIL: text-keyed rendezvous WITHDRAWN (G79 (5)): written ids.
