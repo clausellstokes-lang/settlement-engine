@@ -237,3 +237,27 @@ See section 4, newest last.
   change the key the walker reads); a unit that cannot be converted without the shrink-only register moving STOPS.
 - THE OWNER ASKED (about 17:45 UTC) "What are your expectations as a pure human reader after all of this is done?": ANSWERED
   IN FULL, first. The reader's test COLD-READ-20 is on the list unless he says otherwise (`PRERELEASE-ADDED-ELEVENTH.md`).
+
+## V10 (18:54 UTC on 2026-11-27): D13-120R HANDED IN (tip 80b133cae), ACCEPTED BY THE CHAIR FOR THE JOIN (E11); THE LANDING HELPER STARTED; THE READER HAS THE MUTANT TABLE
+- D13-120R finished (three hours, most of it the machine's one gate): `lane/stack-120-d13-wip-2026-11-27` at 80b133cae
+  (pushed): be58ebed1 the helper, cf9ce97ca Daily Life and the headers, df0401af6 the viability rows, 80b133cae the
+  re-pointed tests. THE STATE-PROSE DIRECTORY EQUAL TO THE BASE AT EVERY COMMIT. No door re-taken; no refusal.
+- ITS PROOF, ON C, AGREES NUMBER FOR NUMBER WITH THE FIRST BUILD's AND THE FIRST READER's (G79, G80): Daily Life (dawn_work,
+  default): an undrawn line removed moves 0 towns [base 15]; a drawn line removed exactly its 35 drawers [328]; a line added
+  exactly the 29 it out-hashes, n 358 [327]. Viability (SS): 0 [0]; 124 of 124 [210]; 87 of 87, n 326 [261]. RECORDS MOVED
+  0 of 900 and 0 of 900. Lines moved: Daily Life 6.4 and 6.6 a town; viability 464 (C) and 469 (V). State prose 0. The
+  player view against the shared page, and the PDF against the tab, on 60 towns: 0 differ. No line starved (243 and 305
+  lines admitted in 50 towns or more, each drawn). 24 rows re-pointed in nine files, each red under its own mutant
+  (`landing/120/repointed.tsv`, filed here).
+- ONE THING NAMED, NOT OF THIS POINT: on C, 4 lines outside the families differ between base and tip: a "Patron deity" block
+  on the Power view of dp-thorp-0 and dp-thorp-1 that shows or not BY RENDER ORDER (the same on base and tip when rendered
+  in another order). Put to the reader to confirm or refute; if it stands it is a render-order fault of its own (R14: a
+  measure with the whole-town items).
+- **E11: ACCEPTED FOR THE JOIN.** All of its source was read by the chair (V1 to V3, V9). THE LINE DOES NOT MOVE before the
+  reader's report is ruled and the joined tip's whole suite is read by name.
+- LAND-120R STARTED (brief `prompts/START-LAND-120R.txt` with the start message's changes: three merges (80b133cae,
+  30539f145, c1dd12135), the doors, the typechecks, lint, build, `tests/build`, the five sizes, the sample town; NO wide
+  gate and no `tests/lint` whole: the chair runs the whole suite on the joined tip in four shards on children).
+- THE READER (session_01FE9mEvGeBq7canVFL3PMpz) was sent the table and the render-order question (by message).
+- THE STACK QUESTION (E7): decided when the reader reports: if point 121 is built and its own reader is not yet ruled, POINT
+  120 LANDS ALONE.
