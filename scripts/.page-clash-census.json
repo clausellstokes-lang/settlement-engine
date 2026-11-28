@@ -1,5 +1,5 @@
 {
- "_doc": "THE PAGE CLASH CENSUS'S REGISTER (SURVEY S-C; scripts/page-clash-census.mjs, its door --write). rows: per row of src/domain/facts/claimExclusions.js, the owner pages of the corpora C and V (1,800) that print both sides, BANKED: SHRINK-ONLY (the door refuses a rise and writes nothing); every row's bar is 0. unconfirmed: pages whose pair holds a note the census cannot confirm printed (a table row drawn at birth). sample: the rows each birth of the fixed sample carries, held exactly by tests/lint/pageClashCensus.walker.test.js.",
+ "_doc": "THE PAGE CLASH CENSUS'S REGISTER (SURVEY S-C; scripts/page-clash-census.mjs, its door --write). rows: per row of src/domain/facts/claimExclusions.js (and `empty solvency slot`, SURVEY S-B2: a page where one of the four solvency slots draws nothing), the owner pages of the corpora C and V (1,800) that print both sides, BANKED: SHRINK-ONLY (the door refuses a rise and writes nothing); every row's bar is 0. unconfirmed: pages whose pair holds a note the census cannot confirm printed (a table row drawn at birth). sample: the rows each birth of the fixed sample carries, held exactly by tests/lint/pageClashCensus.walker.test.js.",
  "pages": 1800,
  "rows": {
   "presence": {
@@ -116,6 +116,13 @@
    "towns": []
   },
   "beasts in force / beasts coming": {
+   "pages": 0,
+   "C": 0,
+   "V": 0,
+   "unconfirmed": 0,
+   "towns": []
+  },
+  "empty solvency slot": {
    "pages": 0,
    "C": 0,
    "V": 0,
