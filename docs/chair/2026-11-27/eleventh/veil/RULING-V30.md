@@ -63,3 +63,17 @@ re-saved or imported under this release (checked and said). (2) A STANDING ARM: 
 records born at this release (two a size), its own door; a reference record NAMED FOR THE OWNER's SIGNING at the close. NOT
 serving the stored values; NOT shipping master's writers. Three guards owed (two "Critical" badges and "Infrastructure
 condition" print a band from nothing): built with (A).
+
+**V34 (00:34 UTC on 2026-11-28): THE COST (MC; `mc/STATE.md` on `lane/veil-56-2026-11-27-mc-docs` 8410c8ecf).** "COUNTER IN":
+the view count's UPDATE moves after the read in `get_gallery_map`, inside U3R's hunk now (8 readers of one map 50.9 s to
+13.6 s; no served byte moves), proved by the concurrent-reader measure re-run on U3R's tree. The roster choices hoisted
+(minus 19 per cent) and the sanitiser skipping scalar children (minus 4 per cent) are ONE later hunk after units 3 and 4+5
+merge (each function cut once), the four-door differential's verdict first. VR23's veil on unmarked members is not skipped.
+Members served in pages is OUTSIDE this release's scope (the map): named for after the release with MC's figure (about 338 ms
+a member; a visitor's 3 s at about 8 members), unless the owner's count query shows public maps that large in real use.
+ALSO TAKEN (00:07 UTC, no ruling asked): unit 3's drift plant found that a covert tie DELETED from the live row leaves its
+copy in `prominentRelationship`, and every door, THE PARTY LINK AND LIVE MODE INCLUDED, then serves it at Reveal off (7 of 69
+covert towns): the orphan rule on every public read, the link included, is a CURE with its red and green at four doors.
+**E23 (the chair's, sent to VEIL-56 at 00:08 UTC):** D1 (the Overview's "Governed by <power>" gaining the seat's holder) is
+TAKEN OUT of the town points and given to the lane's A19 unit at the join: the line is stamped by the owner's browser for the
+shared page (`publicProse` 'overview:identity'), so it is cut once with `holderOf`'s readers and A18's `PUBLIC_PROSE_VERSION`.
