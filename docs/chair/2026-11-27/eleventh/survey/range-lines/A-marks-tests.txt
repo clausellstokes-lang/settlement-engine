@@ -1,0 +1,80 @@
+# The test lines that name today's five crisis marks (git grep on the stack tip 003fd3b07, tests/ only): 79 lines. For the builder of MARK_LINES' second wordings (the chair's ruling, 05:09 UTC: one wording a town, ranked on the town's key).
+tests/components/bar2ServicesRows.test.jsx:8: *     where the row lives on the same thing (the quarry "Stopped by the siege." beside an unmarked "Cut stone"; th
+tests/components/bar2ServicesRows.test.jsx:43:const SIEGE = 'Stopped by the siege.';
+tests/components/bar2ServicesRows.test.jsx:44:const OUTBREAK = 'Curtailed by the outbreak.';
+tests/components/bar2ServicesRows.test.jsx:45:const FAMINE = 'Scarce in the famine.';
+tests/components/bar3LabelWords2.test.jsx:94:// left unmarked) is now "Curtailed by the siege." (its timber came in by road: `houseInputAtHand.js ::
+tests/components/bar3LabelWords3.test.jsx:78:// house carries the siege's mark (the Fish market "Stopped by the siege.", the Salt works and the Cooper curtailed
+tests/components/bar3ServicesRows.test.jsx:23: *     reads "Stopped by the siege." on the Institutions tab, in the PDF's Institutions chapter or on the Journal'
+tests/components/bar3ServicesRows.test.jsx:24: *     not "Curtailed by the siege.";
+tests/components/bar3ServicesRows.test.jsx:26: *     own twins) stops reading "Stopped by the siege." (KEEP_STOPPED).
+tests/components/bar3ServicesRows.test.jsx:33: *     reads "Curtailed by the siege.";
+tests/components/bar3ServicesRows.test.jsx:35: *     "Stopped by the siege." and not "Curtailed by the siege.";
+tests/components/bar3ServicesRows.test.jsx:37: *     town's food record counts game reads "Stopped by the siege.", not "Curtailed by the siege.";
+tests/components/bar3ServicesRows.test.jsx:71:const SIEGE = 'Stopped by the siege.';
+tests/components/bar3ServicesRows.test.jsx:72:const MARKS = [SIEGE, 'Curtailed by the outbreak.', 'Scarce in the famine.', 'Short of'];
+tests/components/bar3ServicesRows.test.jsx:86:  ['bar0-city-under_siege+famine-rand-9', 'House wine by the jug or bottle.', 'Curtailed by the siege.'], // C2584
+tests/components/bar3ServicesRows.test.jsx:160:const CURTAILED = 'Curtailed by the siege.';
+tests/components/bar3ServicesRows.test.jsx:195:  test('CURTAILED: the house reads "Curtailed by the siege." on the tab, the PDF and the Journal; its free row pr
+tests/components/bar3ServicesRows.test.jsx:213:  test('KEEP_STOPPED: a house every row of which is stopped still reads "Stopped by the siege."', async () => {
+tests/components/bar3ServicesRows.test.jsx:252:  ['r2s-famine-village-0', 'farmland', 'Scarce in the famine.'],
+tests/components/bar3ServicesRows.test.jsx:254:  // SV8b: the record cannot tell (no chain on the water; no game on the food record): "Stopped by the siege." st
+tests/components/bar3ServicesRows.test.jsx:269:  test('FIELD: the house reads "Curtailed by the siege." on the tab, the PDF and the Journal, and its row on the 
+tests/components/bar3ServicesRows.test.jsx:289:  test('ON_OFFER: the coaching inn reads "Curtailed by the siege."; its Lodging twin prints on offer, no door wor
+tests/components/bar7EconTab.test.jsx:80:    // off (BR3 (c)): rand-44's weavers and fuller read "Curtailed by the siege."; the same claim on the same shape on 
+tests/components/bar7EconTab.test.jsx:159:  // siege the shipyard's timber is the stand beyond the walls or bought in, so its rows read "Curtailed by the siege.
+tests/components/bar7EconTab.test.jsx:171:    expect(row && rowMarkText(s, 'service', row), 'the shipyard works what timber it holds (its row curtailed)').toBe(
+tests/components/crisisStoppedRows.test.jsx:53:const SIEGE = 'Stopped by the siege.';
+tests/components/crisisStoppedRows.test.jsx:55:const SIEGE_PARTLY = 'Curtailed by the siege.';
+tests/components/crisisStoppedRows.test.jsx:56:const OUTBREAK = 'Curtailed by the outbreak.';
+tests/components/crisisStoppedRows.test.jsx:57:const FAMINE = 'Scarce in the famine.';
+tests/components/displayEconCrisisMarks.test.jsx:59:  ['r2r-town-37', 'Port Duties Import and export taxes', 'Port Duties Curtailed by the outbreak. Import and 
+tests/components/displayEconCrisisMarks.test.jsx:60:  ['r2r-town-37', 'Market Taxes Market day stall fees', 'Market Taxes Curtailed by the outbreak. Market day 
+tests/components/displayEconCrisisMarks.test.jsx:66:  ['r2s-famine-town-5', 'Grain Sales Grain purchased from farming regions', 'Grain Sales Scarce in the famin
+tests/components/displayEconCrisisMarks.test.jsx:67:  ['r2s-under_siege-town-2', 'Magical Trade Revenue Magical trade conduits generate modest fees', 'Magical T
+tests/components/displayEconCrisisMarks.test.jsx:68:  ['r2s-plague_onset-thorp-2', 'Toll Revenue Tolls taken on the roads', 'Toll Revenue Curtailed by the outbr
+tests/components/displayEconCrisisMarks.test.jsx:72:  // Iron & Metalwork share marked "Curtailed by the siege." and 16 print no such share; of the 150's 30, 16
+tests/components/displayEconCrisisMarks.test.jsx:74:  ['r2s-under_siege-city-0', 'Iron & Metalwork Metal is smelted or worked here.', 'Iron & Metalwork Curtaile
+tests/components/displayEconCrisisMarks.test.jsx:79:  ['r2r-hamlet-0', 'Toll Revenue Stopped by the siege.'], // a share the siege closes prints no description:
+tests/components/displayEconRelianceFoodWords.test.jsx:78:  ['r2s-under_siege-town-0', 'economics', 'Contributes to Entrepôt Trade - 11% of income', 'silent: t
+tests/components/displayEconRelianceFoodWords.test.jsx:87:  ['r2s-under_siege-metropolis-3', 'economics', 'Contributes to Iron & Metalwork - 2% of income', 'sil
+tests/domain/bar4MarkPromise.test.js:96:    ['r2r-metropolis-14', 'Iron refining', 'Curtailed by the siege.'], // C0341, C0543: the smelter's imported ore under
+tests/domain/bar4MarkPromise.test.js:98:    ['r2s-under_siege-city-2', 'Pottery and ceramics', 'Curtailed by the siege.'], // the potter's imported clay under a
+tests/domain/bar4MarkPromise.test.js:99:    ['r2s-under_siege-metropolis-0', 'Armed escort', 'Stopped by the siege.'], // C19622: an escort out past the besiege
+tests/domain/bar4MarkPromise.test.js:101:    ['r2s-famine-city-2', 'Street food', 'Scarce in the famine.'], // C6632: pies and roasted meats in a famine; B1(i) 
+tests/domain/bar4MarkPromise.test.js:102:    ['r2s-famine-village-2', 'Drink service', 'Scarce in the famine.'], // ale in a grain famine
+tests/domain/bar4MarkPromise.test.js:104:    ['r2s-famine-town-1', 'Grain storage', 'Scarce in the famine.'], // the granary's reserves in a grain famine
+tests/domain/bar4MarkPromise.test.js:151:    expect(incomeDescShown(town('r2s-under_siege-thorp-0'), besieged)).toBe('Stopped by the siege.');
+tests/domain/bar5MarksLaw2.test.js:101:    expect(rowMarkText(war, 'service', repairs)).toBe('Curtailed by the war.');
+tests/domain/bar5MarksLaw2.test.js:102:    expect(rowMarkText(war, 'service', hire)).toBe('Curtailed by the war.');
+tests/domain/bar6CrimeOneReading.test.js:162:    expect(criminalOpMark(s30, 'Smuggling Network')).toBe('Stopped by the siege.');
+tests/domain/bar6SeamEcon.test.js:48:    ['bar0-village-famine-rand-27', 'Pressed dates', 'Sacred wood'], // the crops failed (no source named): "Harvest Scarce
+tests/domain/bar8Marks2.test.js:8: *          "Curtailed by the siege.", and its rows with it; the shipyard, whose timber is the stand beyond the walls or bough
+tests/domain/bar8Marks2.test.js:66:const CURTAILED = 'Curtailed by the siege.';
+tests/domain/bar8Marks2.test.js:73:    ['r2s-under_siege-city-1', "Furrier's district", CURTAILED, '"Raw hides and animal products" on the imports; its furs cha
+tests/domain/bar8Marks2.test.js:74:    ['r2r-metropolis-14', "Furrier's district", CURTAILED, 'no hides on the imports: the one house of the furs chain, the tra
+tests/domain/bar8Marks2.test.js:165:  // the page's own stop beside it: "supplied by Access to a house of worship · Stopped by the siege." (the source `magicSo
+tests/domain/bar8Marks2.test.js:170:      expect(alike(town(seed), (r) => deriveMagicSupplyView(r)), seed).toEqual({ supply: 'Access to a house of worship · St
+tests/domain/leftMarks.test.js:27: *         town's own land reads, "Curtailed by the siege.", and so do the houses that work that material: over the
+tests/domain/leftMarks.test.js:179:  test('over the besieged towns of the 720 and the 150 no such house prints bare; the two cities\' houses read "Curtailed by 
+tests/domain/leftMarks.test.js:190:      for (const house of ['Carpenters (5-15)', 'Cooper', 'Sawmill (commercial)']) expect(markOf(town(seed), house), `${seed}
+tests/foundry/journalMarksCrisisRows.test.js:52:  ['r2s-famine-town-1', 'Economics & Trade', '- **Grain & Bread** *(impaired)*', '- **Grain & Bread** *(impaired
+tests/foundry/journalMarksCrisisRows.test.js:53:  ['r2s-plague_onset-town-0', 'Economics & Trade', '- **Caravan & Overland Trade** *(vulnerable)*', '- **Caravan
+tests/foundry/journalMarksCrisisRows.test.js:54:  // BAR3-SERVICES-2 SV7 (2026-11-15): re-keyed, a row of its own goes on (its "Meals and drink"): the inn reads
+tests/foundry/journalMarksCrisisRows.test.js:55:  ['r2s-under_siege-town-3', 'Institutions', '- **Inns**: Lodging for traveling merchants.', '- **Inns**: Curtai
+tests/foundry/journalMarksCrisisRows.test.js:56:  ['r2s-famine-town-1', 'Institutions', "- **Mills**: The town's grain is ground at a handful of sites.", "- **M
+tests/generators/bar8Scenes.test.js:11: *       "Curtailed by the war." in bar0-city-wartime-rand-45 (C7246, C7242); unmarked smiths (bar0-metropolis-calm-rand-
+tests/generators/bar8Scenes.test.js:225:  // page marks "Stopped by the siege." under the planted siege, so its stone is no longer at work there; the siege arm'
+tests/generators/bar8Scenes.test.js:227:  // siege curtails ("Curtailed by the siege.": it works what it holds), the rest of the record as born
+tests/generators/bar8Scenes.test.js:251:  // RE-KEYED BY IDENTITY 2026-11-18 (FAULTS-WATCH item 4 (a), BR25 (5)): rand-46's Stone quarry is "Stopped by the sieg
+tests/generators/faultsWatch.test.js:11://   4. `trade at work` UNDER A SIEGE (BR25 (5)): a house the page marks "Stopped by the siege." is not at work; the lea
+tests/generators/faultsWatch.test.js:172:  it('every house of the besieged towns: the leaf\'s verdict is the page\'s "Stopped by the siege."', () => {
+tests/generators/faultsWatch.test.js:195:      expect(rowStoppedBy(t, 'house', h), `premise: ${house} is "Stopped by the siege."`).toBe('under_siege');
+tests/generators/faultsWatch.test.js:207:      expect(rowStoppedBy(t, 'house', h), `premise: ${house} is "Curtailed by the siege."`).toBe('under_siege:curtailed
+tests/generators/houseInputReaches.test.js:71:// as in ordinary times, cut off by the siege ("Curtailed by the siege."); the claim, the input does not reach a t
+tests/helpers/pageLaws/law12K.mjs:6://                on the page carries a crisis mark ("Curtailed by the war.") (C7246, C7242; C7477 is the line that agrees)
+tests/helpers/pageLaws/law2.mjs:152:      // description ("Apothecary & Alchemy Curtailed by the siege. Remedies …", `economicsCrisisMarks.js :: incomeDescSho
+tests/helpers/pageLaws/law8.mjs:173:/** Income rows: { i, name, marked, line } (a row is "<name> <description>" or "<name> Stopped by the siege."). */
+tests/helpers/pageLaws/law8H.mjs:3:// nothing to work ("Short of wool.", "(short)") and a house the crisis stops or curtails ("Stopped by the siege.",
+tests/pdf/leftPdfReadsTheTabs.test.jsx:120:/** A leaf that reads as a mark set before this description ("Stopped by the siege. <desc>"). @param {string} l @para
+tests/pdf/tailExportsPdf2Batch2.test.jsx:88:  // BAR3-SERVICES-2 SV7 (2026-11-15): re-keyed, a row of its own goes on (its "Meals and drink"): the inn reads "Cu

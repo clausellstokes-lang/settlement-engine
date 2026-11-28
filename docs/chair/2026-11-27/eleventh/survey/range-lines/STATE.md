@@ -1,20 +1,13 @@
 # RANGE-LINES STATE (lane/range-lines-2026-11-28; documents only; nothing under src or tests changes)
-Updated 2026-11-28 05:09 UTC.
-- BUILT (A): `A-view-lines.tsv`: the six view-time keys of E-where's thirty (the seat sentence; CAPTURE_LINES.none;
-  PATRONAGE_LINES.open; MARK_LINES; DS-GEN-16 LEGACY-UNRESOLVED; DS-DEF-5 charter hall PRESENT), four new lines each (24),
-  with claims, needs, slots, and each line rendered on 60 births of plan-C (10 a size) on the stack tip 003fd3b07.
-- BUILT (B): `B-house-sample.tsv`: the ten most-printed house keys of E-where, four lines each (40), the three existing beside.
-- PROVEN: every needs is `none`; the walkers' matchers run on all 64 lines (A: one hit, `war`, answered by the mark's crisis;
-  B: goods/office/watch hits only, BOUND in the description file); every line rendered on the births that reach its key (MARK_LINES: no siege, famine or war
-  among the 60; fixed text, not rendered).
-- FOUND, FOR THE CHAIR (PLAUSIBLE, read in the code):
-  1. CAPTURE_LINES.none and PATRONAGE_LINES.open have NO DRAW: the variant is chosen by rule (patronage.js hallOf, :262,
-     :303; hallReceipt always 0). A new line prints only with a draw rule the chair sets.
-  2. MARK_LINES is not a pool: one line per crisis kind, printed on every row the kind touches. The four are one second
-     wording per kind (siege, outbreak, famine, war); a mark is a label, so a wording a TOWN, not a row, is advised.
-     35 test lines name today's mark texts.
-  3. The seat sentence's occupied twins share its index (OCCUPIED_SEAT 0-2): four new seat lines want four twins, or the
-     occupied branch keeps its three.
-  4. Ruling powers named for a person ("the Town Mayor", "the Feudal Appointee") read oddly after "the head of" / "those
-     who lead" (the existing none line does the same).
-- NEXT: WAITING for the chair's read of the sample (B). Then (C) on its word: the 72 keys of range/tools/size.mjs.
+Updated 2026-11-28 05:11 UTC.
+- BUILT (A): A-view-lines.tsv: six view-time keys of E-where's thirty, four lines each (24), rendered on 60 births of
+  plan-C on 003fd3b07; each capture/patronage line names its rule-branch; each seat line has its OCCUPIED_SEAT twin.
+  A-marks-tests.txt: the 79 test lines naming today's five crisis marks (my earlier "35" counted two of them).
+- BUILT (B): B-house-sample.tsv: the ten most-printed house keys, four lines each (40), the three existing beside.
+- RULED (chair, 05:09 UTC): the register is right; MARK_LINES one wording a town, ranked on its key; GO to (C), then (D).
+  For (C): a general judgment at most about one line in four of a key, never of THIS town; never restate the catalogue line.
+- PROVEN: every needs is none; the walkers' matchers run on every line and twin (A: "war", answered by the mark's crisis;
+  B: BOUND goods/office words only).
+- FOUND (PLAUSIBLE, code read): capture/patronage lines have no draw (rule-picked); MARK_LINES is one line a kind; a ruling
+  power named for a person ("the Town Mayor") reads oddly after "the head of".
+- NEXT: (C) C-range-lines.tsv: the 72 keys of range/tools/size.mjs, four lines each; then (D) D-read.md.
