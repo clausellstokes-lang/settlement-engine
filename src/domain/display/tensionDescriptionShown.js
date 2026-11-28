@@ -31,6 +31,7 @@
  */
 import { criticalImportRow, slashInProse } from './criticalImportRow.js'; // RULING 122-B-2 (F7): the leaf, not the desk
 import { foodStoresWords } from '../summary/tonightSheet.js';
+import { isEdited } from '../userEdits.js'; // RULING 122-A-3: the edits ledger's one reader (guardLineAsPrinted's)
 
 /** The one good the stores reader names: a granary's stores are "months of grain". */
 const STORES_GOOD = 'grain';
@@ -66,6 +67,9 @@ const STORED = new Set([SCARCITY_STORED_PAST, SCARCITY_STORED_LIVE]);
 export function tensionDescriptionShown(settlement, tension) {
   const description = /** @type {{ description?: unknown } | null | undefined} */ (tension)?.description;
   if (typeof description !== 'string' || !STORED.has(description)) return description;
+  // RULING 122-A-3: A DM's OWN WORDS ARE NEVER RE-ANSWERED. The description is a field the DM can edit
+  // (userEdits.js :: EDITABLE_FIELDS.currentTension); one the tension's ledger marks edited prints as the DM typed it.
+  if (isEdited(/** @type {Parameters<typeof isEdited>[0]} */ (tension), 'description')) return description;
   const imports = /** @type {{ resourceAnalysis?: { imports?: unknown } | null } | null | undefined} */ (settlement)?.resourceAnalysis?.imports;
   const good = criticalImportRow(/** @type {Parameters<typeof criticalImportRow>[0]} */ (imports))?.good;
   return good && !storesHold(settlement, good) ? `A critical resource, ${slashInProse(good)}, ${description.slice(LEAD.length)}` : description;
