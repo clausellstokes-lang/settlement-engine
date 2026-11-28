@@ -616,7 +616,7 @@ function buildDigest(d, campaignName, settlements, pageN) {
     // react-pdf lane already share, and it returns hooks sorted by priority —
     // so hooks[0] here is now the settlement's STRONGEST hook rather than
     // whichever one happened to sit first in an array nothing filled.
-    const hooks = collectPlotHooks(st_);
+    const hooks = collectPlotHooks(st_); // SURVEY S-A-2: `st_` is the record its caller gated (CampaignFolder.jsx :: printRecordOf)
     if (hooks.length > 0) {
       const hook = hooks[0].text || '';
       if (hook) {

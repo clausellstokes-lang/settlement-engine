@@ -13,8 +13,10 @@ const generateSettlementPDF = (...args) =>
 // W-Session: Foundry VTT module export (zip of journal JSON + manifest).
 // Same lazy doctrine — the builder chunk (view model + zip writer) loads on
 // the user's export click, never up front (tests/build/foundryLazy.test.js).
-const generateFoundryModule = (...args) =>
-  import('../foundry/generateFoundryModule.js').then(m => m.generateFoundryModule(...args));
+const generateFoundryModule = (settlement, ...rest) =>
+  // SURVEY S-A-2: the module is handed the record gated on this thread (it may not reach the tables)
+  Promise.all([import('../foundry/generateFoundryModule.js'), import('../domain/display/printRecord.js')])
+    .then(([m, g]) => m.generateFoundryModule(g.printRecordOf(settlement), ...rest));
 import { validateDossier } from '../domain/validation/consistency.js';
 import { flag } from '../lib/flags.js';
 // The shared export seam (campaign assembly + faith premium gate) — one

@@ -13,6 +13,7 @@ import { useMemo } from 'react';
 import { Empty } from '../Primitives';
 import { FS, swatch } from '../../theme.js';
 import { collectPlotHooks, groupPlotHooksBySourcePage, PLOT_HOOK_CATEGORIES } from '../../../domain/dossier/plotHooks.js';
+import { collectPlotHooksShown } from '../../../domain/dossier/storedHookShown.js';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 import { literaryTitle, nameOrTokenCase } from '../labelLadder.js';
@@ -145,7 +146,7 @@ export function PlotHookSourceCard({ source, hooks }) {
 }
 
 export default function PlotHooksTab({ settlement, publicDossier = false }) {
-  const groups = useMemo(() => groupPlotHooksBySourcePage(collectPlotHooks(settlement || {}, { reader: publicDossier === true })), [settlement, publicDossier]); // SURVEY S-A: a reader's page prints stored hooks as stored
+  const groups = useMemo(() => groupPlotHooksBySourcePage(publicDossier === true ? collectPlotHooks(settlement || {}) : collectPlotHooksShown(settlement || {})), [settlement, publicDossier]); // SURVEY S-A: the owner's page re-answers stored hooks; a reader's prints them as stored
 
   if (!groups.length) {
     return (

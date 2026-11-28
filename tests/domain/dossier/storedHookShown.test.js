@@ -13,6 +13,8 @@ import { birthConfig, loadGenerationLawPayloads } from '../../../src/domain/dens
 import { withPublicProse } from '../../../src/domain/display/publicProse.js';
 import { composePublicProse } from '../../../src/components/new/publicProseCompose.js';
 import { collectPlotHooks } from '../../../src/domain/dossier/plotHooks.js';
+import { collectPlotHooksShown } from '../../../src/domain/dossier/storedHookShown.js';
+import { printRecordOf } from '../../../src/domain/display/printRecord.js';
 import { buildViewModel } from '../../../src/pdf/lib/viewModel.js';
 import { factsOf } from '../../../src/domain/facts/factsOf.js';
 import { plotHookText } from '../../../src/lib/proseSeams.js';
@@ -43,25 +45,27 @@ describe('S-A site 2: a stored hook re-answered on the final record', () => {
   });
 
   it('THE OWNER\'s Plot Hooks: the guild hook is gone (every hook of its pool needs a guild), the loyalty hook takes the next admitted line', () => {
-    expect(texts(collectPlotHooks(hamlet))).not.toContain(GUILD_HOOK);
-    const shown = texts(collectPlotHooks(town));
+    expect(texts(collectPlotHooksShown(hamlet))).not.toContain(GUILD_HOOK);
+    const shown = texts(collectPlotHooksShown(town));
     expect(shown.some((t) => LOYALTY_HOOK.test(t))).toBe(false);
     const stored = town.npcs.flatMap((n) => (n.plotHooks || []).map(plotHookText));
     expect(shown.filter((t) => !stored.includes(t)).length).toBeGreaterThan(0); // the next admitted line stands in its place
   });
 
-  it('THE PDF reads the same collector: the refused hooks print in its hooks chapter neither', () => {
-    expect(JSON.stringify(buildViewModel({ settlement: hamlet }).hooks)).not.toContain(GUILD_HOOK);
-    expect(JSON.stringify(buildViewModel({ settlement: town }).hooks)).not.toMatch(LOYALTY_HOOK);
+  it('THE PDF, handed the gated record (S-A-2: printRecordOf on the caller\'s thread), prints the owner\'s hooks; handed the raw record it prints what it is given', () => {
+    expect(JSON.stringify(buildViewModel({ settlement: printRecordOf(hamlet) }).hooks)).not.toContain(GUILD_HOOK);
+    expect(JSON.stringify(buildViewModel({ settlement: printRecordOf(town) }).hooks)).not.toMatch(LOYALTY_HOOK);
+    expect(buildViewModel({ settlement: printRecordOf(hamlet) }).hooks.all.map((h) => h.hook)).toEqual(texts(collectPlotHooksShown(hamlet)));
+    expect(JSON.stringify(buildViewModel({ settlement: hamlet }).hooks)).toContain(GUILD_HOOK);
   });
 
-  it('THE SHARED PAGE (the collector\'s reader option) prints every stored hook as stored', () => {
-    expect(texts(collectPlotHooks(hamlet, { reader: true }))).toContain(GUILD_HOOK);
+  it('THE SHARED PAGE (the collector with no gate) prints every stored hook as stored', () => {
+    expect(texts(collectPlotHooks(hamlet))).toContain(GUILD_HOOK);
   });
 
   it('every other hook prints as before: only the refused ones move', () => {
-    const owner = texts(collectPlotHooks(hamlet));
-    const asStored = texts(collectPlotHooks(hamlet, { reader: true }));
+    const owner = texts(collectPlotHooksShown(hamlet));
+    const asStored = texts(collectPlotHooks(hamlet));
     expect(asStored.filter((t) => t !== GUILD_HOOK)).toEqual(owner);
   });
 

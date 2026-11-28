@@ -20,6 +20,9 @@ import { HISTORICAL_EVENTS_DATA } from '../../../src/data/historyData.js';
 import { NPC_FACTION_LOYALTY } from '../../../src/data/npcData.js';
 import { institutionDescShown } from '../../../src/domain/display/institutionDescShown.js';
 import { collectPlotHooks } from '../../../src/domain/dossier/plotHooks.js';
+import { collectPlotHooksShown } from '../../../src/domain/dossier/storedHookShown.js';
+import { printRecordOf } from '../../../src/domain/display/printRecord.js';
+import { buildViewModel } from '../../../src/pdf/lib/viewModel.js';
 import { factsOf } from '../../../src/domain/facts/factsOf.js';
 import { lineText } from '../../../src/domain/facts/drawDeclared.js';
 import { declarationAdmits, declarationOf } from '../../../src/domain/facts/factVocabulary.js';
@@ -68,15 +71,26 @@ describe('S-A census: the final record refuses no stored line the page prints (a
   }, 600000);
 
   it('NOT VACUOUS: over the STORED lines (what the base printed) the replay finds the measure\'s refusals', () => {
-    const stored = towns.flatMap(({ id, town }) => findings(town, (i) => (typeof i.desc === 'string' ? i.desc.trim() : ''), collectPlotHooks(town, { reader: true }).map((h) => h.text)).map((x) => `${id} ${x}`));
+    const stored = towns.flatMap(({ id, town }) => findings(town, (i) => (typeof i.desc === 'string' ? i.desc.trim() : ''), collectPlotHooks(town).map((h) => h.text)).map((x) => `${id} ${x}`));
     expect(stored.some((x) => x.startsWith('V:dp-metropolis-4 desc Customs house'))).toBe(true);
     expect(stored.some((x) => x.startsWith('V:dp-hamlet-12 desc Charcoal burner'))).toBe(true);
     expect(stored.some((x) => x.startsWith('C:dp-hamlet-26 hook: Someone is sabotaging both guilds'))).toBe(true);
     expect(stored.some((x) => x.startsWith('V:dp-town-107 hook: Three guards have gone missing'))).toBe(true);
   });
 
-  it('THE TARGET: 0 refused-and-printed lines on the owner\'s page and the PDF (they read the same leaves)', () => {
-    const printed = towns.flatMap(({ id, town }) => findings(town, (i) => institutionDescShown(i, town), collectPlotHooks(town).map((h) => h.text)).map((x) => `${id} ${x}`));
+  it('THE TARGET: 0 refused-and-printed lines on the owner\'s page', () => {
+    const printed = towns.flatMap(({ id, town }) => findings(town, (i) => institutionDescShown(i, town), collectPlotHooksShown(town).map((h) => h.text)).map((x) => `${id} ${x}`));
+    expect(printed).toEqual([]);
+  });
+
+  it('THE TARGET on the PDF (S-A-2: the view model of the gated record): 0, and its lines are the owner\'s', () => {
+    const printed = towns.flatMap(({ id, town }) => {
+      const vm = buildViewModel({ settlement: printRecordOf(town) });
+      const desc = new Map(vm.services.detailed.map((d, k) => [town.institutions[k], d.description]));
+      expect(vm.hooks.all.map((h) => h.hook), id).toEqual(collectPlotHooksShown(town).map((h) => h.text));
+      for (const inst of town.institutions || []) if (typeof inst.desc === 'string' && inst.desc.trim()) expect(desc.get(inst), `${id} ${inst.name}`).toBe(institutionDescShown(inst, town));
+      return findings(town, (i) => String(desc.get(i) || ''), vm.hooks.all.map((h) => h.hook)).map((x) => `${id} ${x}`);
+    });
     expect(printed).toEqual([]);
   });
 });

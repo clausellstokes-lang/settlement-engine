@@ -4,12 +4,16 @@ import {ChevronDown, ChevronRight, Edit3, Check, X, Map as MapIcon, FileText, Fo
 // Campaign PDF export pulls in jsPDF (~200KB) plus the campaign layout.
 // Lazy-load on user action so the Settlements first paint stays light —
 // users only need this code when they click "Export Campaign PDF".
-const generateCampaignPDF = (...args) =>
-  import('../../utils/generateCampaignPDF.js').then(m => m.generateCampaignPDF(...args));
+const generateCampaignPDF = (campaign, saves, ...rest) =>
+  // SURVEY S-A-2: each save's record gated on this thread (domain/display/printRecord.js); the book prints what it is handed
+  Promise.all([import('../../utils/generateCampaignPDF.js'), import('../../domain/display/printRecord.js')])
+    .then(([m, g]) => m.generateCampaignPDF(campaign, (saves || []).map((v) => (v && v.settlement ? { ...v, settlement: g.printRecordOf(v.settlement) } : v)), ...rest));
 // R-4 THE WORLD BOOK — the bound-book export (chronicle + dossiers + map + realm +
 // receipts). Same lazy jsPDF path, its own module; loaded only on user action.
-const generateWorldBook = (...args) =>
-  import('../../utils/generateWorldBook.js').then(m => m.generateWorldBook(...args));
+const generateWorldBook = (campaign, saves, ...rest) =>
+  // SURVEY S-A-2: each save's record gated on this thread, as the campaign book's
+  Promise.all([import('../../utils/generateWorldBook.js'), import('../../domain/display/printRecord.js')])
+    .then(([m, g]) => m.generateWorldBook(campaign, (saves || []).map((v) => (v && v.settlement ? { ...v, settlement: g.printRecordOf(v.settlement) } : v)), ...rest));
 // V-17 THE CAMPAIGN IMPORT — the paste/upload → review → commit surface. Lazy so
 // its schema wall + review UI stay off the Settlements first paint.
 const CampaignImportPanel = lazy(() => import('./CampaignImportPanel.jsx'));

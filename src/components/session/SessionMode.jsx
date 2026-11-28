@@ -40,7 +40,7 @@ import { composeTonightSheet, TONIGHT_COPY } from '../../domain/summary/tonightS
 import TonightSheet from '../TonightSheet.jsx';
 import EconomyFreshnessNote from '../new/EconomyFreshnessNote.jsx';
 import { nameOrTokenCase, tokenCase } from '../new/labelLadder.js';
-import { collectPlotHooks, PLOT_HOOK_CATEGORIES } from '../../domain/dossier/plotHooks.js';
+import { PLOT_HOOK_CATEGORIES } from '../../domain/dossier/plotHooks.js';
 import { settlementWarStatus, settlementWarExhaustion, warExhaustionBand } from '../../domain/display/warStatus.js';
 import { settlementMobilization } from '../../domain/display/mobilizationStatus.js';
 import { settlementOccupation, occupierHoldings } from '../../domain/display/occupationStatus.js';
@@ -198,12 +198,12 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
   const elevated = useStore(s => (typeof s.isElevated === 'function' ? s.isElevated() : false));
   const isPremium = tier === 'premium' || elevated;
 
-  const sheet = useMemo(() => composeTonightSheet(settlement), [settlement]);
+  const sheet = useMemo(() => composeTonightSheet(printRecordOf(settlement)), [settlement]); // SURVEY S-A-2: the stored lines as the final record admits them
   // ONE FACT, ONE PLACE ON THIS SCREEN: the panels below skip the people and hooks the
   // Tonight sheet already printed.
   const hooks = useMemo(() => {
     const shown = new Set(sheet.hooks.map((h) => h.text.replace(/[.!?]$/, '')));
-    return collectPlotHooks(settlement || {}).filter((h) => !shown.has(String(h.text || '').replace(/[.!?]$/, '')));
+    return collectPlotHooksShown(settlement || {}).filter((h) => !shown.has(String(h.text || '').replace(/[.!?]$/, ''))); // SURVEY S-A
   }, [settlement, sheet]);
   const npcs = useMemo(() => {
     const shown = new Set(sheet.people.map((p) => p.name));
@@ -450,3 +450,4 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
     </div>
   );
 }
+import { collectPlotHooksShown } from '../../domain/dossier/storedHookShown.js'; import { printRecordOf } from '../../domain/display/printRecord.js'; // SURVEY S-A-2: at the END, so no cited line moves

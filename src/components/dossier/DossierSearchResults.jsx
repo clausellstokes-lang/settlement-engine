@@ -23,6 +23,7 @@ import { literaryTitle } from '../new/labelLadder.js';
 import { useStore } from '../../store/index.js';
 import { useDossierEntities } from './DossierEntityContext.jsx';
 import { enumerateDossierObjects, rankDossierObjects, isSearchActive, SEARCH_RESULTS_ID, MATCH } from '../../domain/dossier/dossierSearch.js';
+import { printRecordOf } from '../../domain/display/printRecord.js';
 import { EntityFocusOverride } from './useEntityFocus.js';
 import { derivePowerStrata } from '../../domain/dossier/powerStrata.js';
 import { factionIdFromName } from '../../lib/entities.js';
@@ -194,7 +195,7 @@ export default function DossierSearchResults({ settlement, query, tabs, publicDo
   const customTraditions = useStore((s) => s.customContent?.traditions);
   const { navigateToEntity } = useDossierEntities();
   const enumeration = useMemo(
-    () => enumerateDossierObjects(settlement, { publicDossier, playerView }, { customTraditions }),
+    () => enumerateDossierObjects(publicDossier ? settlement : printRecordOf(settlement), { publicDossier, playerView }, { customTraditions }), // SURVEY S-A-2: the owner's search reads the lines the tabs print
     [settlement, publicDossier, playerView, customTraditions],
   );
   // The tabs array is rebuilt on every container render; the result keys on its id SET.

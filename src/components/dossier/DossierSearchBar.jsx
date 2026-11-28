@@ -20,6 +20,7 @@ import IconButton from '../primitives/IconButton.jsx';
 import { useStore } from '../../store/index.js';
 import { useDossierEntities } from './DossierEntityContext.jsx';
 import { searchDossier, isSearchActive, SEARCH_RESULTS_ID } from '../../domain/dossier/dossierSearch.js';
+import { printRecordOf } from '../../domain/display/printRecord.js';
 
 /**
  * @param {{
@@ -40,7 +41,7 @@ export default function DossierSearchBar({ query, onQueryChange, settlement, tab
   // Enter: the best object of the best group. An indexed entity lands on its own card (the
   // navigator switches tab, focuses and scrolls); anything else opens its owning tab.
   const openBest = () => {
-    const { groups } = searchDossier(settlement, query, { publicDossier, playerView },
+    const { groups } = searchDossier(publicDossier ? settlement : printRecordOf(settlement), query, { publicDossier, playerView }, // SURVEY S-A-2
       { tabs: (tabs || []).map((t) => t.id), customTraditions });
     const best = groups[0]?.objects[0];
     if (!best) return;

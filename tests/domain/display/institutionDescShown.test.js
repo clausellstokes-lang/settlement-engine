@@ -15,6 +15,7 @@ import { composePublicProse } from '../../../src/components/new/publicProseCompo
 import { institutionDescShown } from '../../../src/domain/display/institutionDescShown.js';
 import { institutionDescription } from '../../../src/components/new/tabs/InstitutionsTab.jsx';
 import { buildViewModel } from '../../../src/pdf/lib/viewModel.js';
+import { printRecordOf } from '../../../src/domain/display/printRecord.js';
 import { factsOf } from '../../../src/domain/facts/factsOf.js';
 
 /** @param {string} seed */
@@ -26,7 +27,7 @@ const bornTown = (seed) => {
 /** @param {any} town @param {string} name */
 const houseOf = (town, name) => town.institutions.find((i) => i.name === name);
 /** @param {any} town @param {string} name */
-const pdfDescOf = (town, name) => buildViewModel({ settlement: town }).services.detailed.find((i) => i.name === name || i.name?.includes(name))?.description;
+const pdfDescOf = (town, name) => buildViewModel({ settlement: printRecordOf(town) }).services.detailed.find((i) => i.name === name || i.name?.includes(name))?.description;
 
 describe('S-A site 1: a stored house description re-answered on the final record', () => {
   /** @type {Record<string, any>} */ const t = {};
@@ -52,7 +53,7 @@ describe('S-A site 1: a stored house description re-answered on the final record
     expect(institutionDescription(houseOf(t['dp-town-36'], 'Toll bridge'), t['dp-town-36'])).toBe(houseOf(t['dp-town-36'], 'Toll bridge').desc.trim()); // the control: unchanged
   });
 
-  it('THE PDF prints the same line as the tab', () => {
+  it('THE PDF, handed the record gated on the caller\'s thread (S-A-2), prints the same line as the tab', () => {
     for (const [seed, name] of [['dp-metropolis-4', 'Customs house'], ['dp-hamlet-12', 'Charcoal burner'], ['dp-town-36', 'Toll bridge']]) {
       expect(pdfDescOf(t[seed], name), `${seed} ${name}`).toBe(institutionDescription(houseOf(t[seed], name), t[seed]));
     }

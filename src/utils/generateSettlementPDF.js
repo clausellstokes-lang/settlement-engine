@@ -54,6 +54,7 @@ import { normalizeSettlement } from '../domain/normalizeSettlement.js';
 // keeps the first-paint closure that tests/build/vendorPdfLazy.test.js prices untouched —
 // this module is only ever reached by dynamic import().
 import { buildPrintProse } from '../domain/display/stateProse/printProse.js';
+import { printRecordOf } from '../domain/display/printRecord.js'; // SURVEY S-A-2
 import { governanceStressTypesOf } from '../domain/display/governanceAccount.js';
 import { resolvePrimaryStress } from '../generators/stressPriority.js';
 import { slugify } from '../kernel/slugify.js';
@@ -288,7 +289,9 @@ export async function generateSettlementPDF(settlement, options = {}) {
   // means every PDF chapter can rely on the canonical contract without
   // each section adding its own defensive guards. It also keeps the props
   // posted to the worker plain, structured-cloneable data.
-  const normalizedSettlement = normalizeSettlement(settlement);
+  // SURVEY S-A-2: the stored lines re-answered on the final record HERE, on the caller's thread (display/printRecord.js),
+  // so the worker is handed the gated record and carries no table.
+  const normalizedSettlement = printRecordOf(normalizeSettlement(settlement));
 
   const props = {
     settlement: normalizedSettlement,

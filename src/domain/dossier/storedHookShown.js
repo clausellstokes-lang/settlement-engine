@@ -10,8 +10,10 @@
  * twin, else the next admitted line of its own pool (never one the card or the town already carries), else nothing.
  * A hook no pool holds (a DM's own words, a line from another pool) prints as written. No birth moves.
  *
- * THE SHARED PAGE: the guild and the roster are what a DM can hide, so a reader's page prints every stored hook AS STORED
- * (the collector's `reader` option); the owner's surfaces re-answer.
+ * THE GATE IS INJECTED (S-A-2): `storedHookGate(record)` is handed to the collector by the screen's callers
+ * (`collectPlotHooksShown`), and `display/printRecord.js` applies it once on the caller's thread for the PDF, the
+ * Foundry module and the campaign book, so the worker carries no table. THE SHARED PAGE: the guild and the roster are
+ * what a DM can hide, so a reader's page passes no gate and every stored hook prints AS STORED.
  *
  * Pure: no randomness, no clock, no write.
  *
@@ -21,6 +23,9 @@ import { HISTORICAL_EVENTS_DATA } from '../../data/historyData.js';
 import { NPC_FACTION_LOYALTY } from '../../data/npcData.js';
 import { lineText } from '../facts/drawDeclared.js';
 import { lineOnFinal } from '../facts/lineOnFinal.js';
+import { factsOf } from '../facts/factsOf.js';
+import { plotHookText } from '../../lib/proseSeams.js';
+import { collectPlotHooks } from './plotHooks.js';
 
 /** each event template's hook pool, by the template's type (a stored event's own `type` is its category, not this key) */
 const EVENT_POOLS = HISTORICAL_EVENTS_DATA.filter((d) => Array.isArray(d.plotHooks) && d.plotHooks.length).map((d) => ({ type: d.type, pool: d.plotHooks }));
@@ -56,4 +61,29 @@ export function npcHookShown(text, settlement, facts, held) {
   const pool = LOYALTY_POOLS.find((p) => p.some((l) => lineText(l) === text));
   if (!pool) return text;
   return lineOnFinal(text, { pool, key: `${keyOf(settlement)}::npcData:NPC_FACTION_LOYALTY`, held }, facts);
+}
+
+/**
+ * THE GATE for one record (S-A-2): the final record's facts read once, and every hook the town stores held (a next
+ * admitted line is never one the town already carries).
+ * @param {any} settlement the final record
+ * @returns {(text: string, where: { kind: 'npc' } | { kind: 'event', type: unknown }) => string | null}
+ */
+export function storedHookGate(settlement) {
+  /** @type {any} */ let f = null;
+  const facts = () => (f ??= factsOf(settlement));
+  const held = new Set([
+    ...(settlement?.npcs || []).flatMap((/** @type {any} */ n) => (n?.plotHooks || []).map(plotHookText)),
+    ...(settlement?.history?.historicalEvents || []).flatMap((/** @type {any} */ e) => (e?.plotHooks || []).map(plotHookText)),
+  ].filter((t) => typeof t === 'string'));
+  return (text, where) => (where.kind === 'npc' ? npcHookShown(text, settlement, facts, held) : eventHookShown(text, where.type, settlement, facts, held));
+}
+
+/**
+ * The collector with the gate injected: the owner's screens (the Plot Hooks tab, the session sheet, the search).
+ * @param {Parameters<typeof collectPlotHooks>[0]} settlement @param {Parameters<typeof collectPlotHooks>[1]} [options]
+ * @returns {ReturnType<typeof collectPlotHooks>}
+ */
+export function collectPlotHooksShown(settlement, options = {}) {
+  return collectPlotHooks(settlement, { ...options, gate: storedHookGate(settlement) });
 }

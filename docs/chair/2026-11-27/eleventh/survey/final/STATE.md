@@ -1,8 +1,10 @@
 # SURVEY-FINAL STATE (S-A "THE FINAL RECORD"; branch lane/survey-final-wip-2026-11-28, cut at 777733a2a)
-- RULING S-A-1 followed: purse lines keep their own reader (0 move); the helper at the hooks and the descriptions.
-- BUILT, PUSHED: 1cc025537 (helper + descriptions + shared-page proof), ccbc2582b (hooks), e7972509d (an admitted
-  stored line stays; the census at 0), and the proof commit (PROOF.md).
-- PROVEN: records moved 0 of 1,800; lines moved 42 descriptions (41 towns) + 4 hook towns = 45 owner pages, 26 share,
-  45 PDF, 1 Tonight, controls 0. Sizes: first paint +17 B; THE PDF WORKER +171,326 B (named).
-- NAMED, NOT BUILT: the guard site; the self-check's band blind spot; the source cures; the PDF worker's weight.
-- NEXT: "SURVEY-FINAL TIP?" sent to the chair; wait for the chair's word.
+- S-A built and accepted (b93768295). S-A-3 (170b26cdd): a DM-edited description is never re-answered (walkUserEdits).
+- S-A-2: the stored lines are gated ONCE on the caller's thread (`display/printRecord.js :: printRecordOf`): the PDF
+  export, Foundry (SettlementDetail), the campaign and world books (CampaignFolder), the Tonight sheet and search on
+  screen; `collectPlotHooks` takes its gate injected (`collectPlotHooksShown`). Guard: tests/lint/finalLinesPrintGate.
+- PROVEN: 55 towns, owner tab = PDF = Foundry = campaign book (0 differ; 3,753 descriptions, 3,951 hooks); PDF worker
+  3,148,689 -> 3,148,821 B (+132); first paint +17 B; boot smoke PASS.
+- OPEN, NAMED: writerReach red since ccbc2582b (two identities become READ: a shrink by its --write door; not
+  re-recorded, the chair's word asked). verify:dist red on the base too.
+- NEXT: "TIP?" sent; wait for the chair's word.

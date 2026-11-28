@@ -14,7 +14,7 @@
  * THE SHARED PAGE (the chair's condition (3)): a reader's page re-answers ONLY a set whose every atom reads what no veil
  * address reaches (the config's terrain, the stress record's crisis: `SHARE_SAFE_DIMENSIONS`); a set that reads the
  * roster (the docks, the walls, a gate) prints there AS STORED, so no re-answer lets a reader count a hidden house.
- * Read by the Institutions tab and the PDF's services slice: one leaf.
+ * Read by the Institutions tab, and once for the whole-document surfaces by `printRecord.js` (S-A-2): one leaf.
  *
  * Pure: no randomness, no clock, no write.
  *
@@ -57,29 +57,6 @@ export function institutionDescShown(inst, settlement, options = {}) {
   const shown = lineOnFinal(own, { siblings: { [own]: set }, keep: true, speak: (t) => speakTierNoun(t, noun) },
     () => factsOf(/** @type {never} */ (settlement)));
   return typeof shown === 'string' ? shown.trim() : own;
-}
-
-/**
- * Every house's description as printed, by its position in `settlement.institutions` (the PDF's services slice).
- * @param {{ institutions?: unknown, tier?: unknown } | null | undefined} settlement @param {{ reader?: boolean }} [options]
- * @returns {string[]}
- */
-export function institutionDescsShown(settlement, options = {}) {
-  const roster = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
-  return roster.map((inst) => institutionDescShown(inst, settlement, options));
-}
-
-/**
- * The PDF's services slice with each house's description as printed (`detailed[k]` is the slice's row of
- * `settlement.institutions[k]`; a house that stores none keeps the slice's own reading).
- * @template {{ detailed?: Array<{ description?: unknown }> }} S
- * @param {S} slice @param {{ institutions?: unknown, tier?: unknown } | null | undefined} settlement
- * @returns {S}
- */
-export function withDescsShown(slice, settlement) {
-  if (!slice || !Array.isArray(slice.detailed)) return slice;
-  const shown = institutionDescsShown(settlement);
-  return { ...slice, detailed: slice.detailed.map((row, k) => (shown[k] ? { ...row, description: shown[k] } : row)) };
 }
 
 /** @type {WeakMap<object, Set<object>>} the record → the houses whose description the DM edited */

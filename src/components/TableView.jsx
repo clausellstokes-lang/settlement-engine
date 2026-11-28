@@ -24,6 +24,7 @@ import { formatCount } from '../domain/formatNumber.js';
 import { prosperityLabel } from '../domain/summary/tonightAtTheTable.js';
 import { prosperityInCrisisLine } from '../domain/display/prosperityInCrisis.js';
 import { composeTonightSheet, TONIGHT_COPY } from '../domain/summary/tonightSheet.js';
+import { printRecordOf } from '../domain/display/printRecord.js';
 import TonightSheet from './TonightSheet.jsx';
 import EconomyFreshnessNote from './new/EconomyFreshnessNote.jsx';
 import { FIELD_INK } from '../design/organic/ink.js';
@@ -98,7 +99,7 @@ export default function TableView({ settlement, onClose }) {
     };
   }, []);
 
-  const sheet = useMemo(() => composeTonightSheet(settlement), [settlement]);
+  const sheet = useMemo(() => composeTonightSheet(printRecordOf(settlement)), [settlement]); // SURVEY S-A-2: the stored lines as the final record admits them
   // components-dossier-library-3: prosperity is a STRING label, not a { tier }
   // object — the tolerant read is the SummaryTabV2 sibling.
   const prosperity = prosperityLabel(settlement?.economicState?.prosperity);
