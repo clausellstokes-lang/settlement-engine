@@ -18,7 +18,7 @@
  */
 import { describe, it, expect } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
-import { deriveFoundingTraditions } from '../../src/domain/traditions/genesis.js';
+import { deriveFoundingTraditions, fieldRiteRefused } from '../../src/domain/traditions/genesis.js';
 import { toPublicSafe } from '../../src/domain/display/publicSafe.js';
 import { projectShareVeil, writeShareVeil } from '../../src/domain/display/galleryVeil.js';
 import { describeTradition } from '../../src/domain/traditions/traditionDescription.js';
@@ -874,6 +874,66 @@ describe('RULING 122-T-2: at 0.10.0 THE DRAW ASKS THE FLOOR: the owner\'s set an
       const rows = JSON.stringify(sharedTraditionRowsOf(group[0]));
       for (const x of group.slice(1)) expect(JSON.stringify(sharedTraditionRowsOf(x)), label).toBe(rows);
     }
+  }, 120000);
+});
+
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+
+describe('RULING 122-T-5: the rite of the fields asks the FLOOR for its farmland: a hideable house named farmland reaches no rite', () => {
+  // genesis.js :: fieldRiteRefused (B1(ii), G64) answered its farmland atom over the FULL roster, so a CRIMINAL house named
+  // 'Farmland' (hideable whole), the town's only farmland, kept a rite of the fields the floor would refuse: the reader's
+  // rows moved between the house shown and hidden whole. The plant: that house in place of the town's own farmland houses,
+  // on born towns whose food record names no grain (each chosen because d8d05d4cc showed the difference). RED FIRST
+  // (d8d05d4cc): THE PROPERTY failed on all three towns.
+  const FARM = /\bfarmland\b|\bsubsistence farming\b/i; // facts/institutions.js :: INSTITUTION_KIND_PATTERNS.farmland
+  const HOUSE = { name: 'Farmland', category: 'Criminal', priorityCategory: 'criminal' };
+  const FIELDS = { name: 'Farmland', category: 'Economy' };
+  const TOWNS = [['village', 'latin', 'trad-farm-village-latin-26'], ['town', 'latin', 'trad-farm-town-latin-2'], ['city', 'latin', 'trad-farm-city-latin-4']]
+    .map(([tier, culture, seed]) => [seed, born(tier, culture, seed)]);
+  const SEEDS = TOWNS.map(([seed]) => seed);
+  const BORN = new Map(TOWNS);
+  const plantWith = (b, house) => ({ ...b, institutions: [...b.institutions.filter((i) => !FARM.test(String(i.name || ''))), { ...house }] });
+  const hideWhole = (t) => applyVeil(t, new Set([`card:institution:${CARD_KINDS.institution.idOf(HOUSE)}`]));
+  const farmlandNames = (t) => (t.institutions || []).filter((i) => FARM.test(String(i.name || ''))).map((i) => i.name);
+  const names = (recs) => (recs || []).map((r) => r.name);
+
+  it('NOT VACUOUS: births of this engine; the house is hideable whole, it is the only farmland, the food record names no grain, and the hide takes it', () => {
+    expect(isHideableHouse(HOUSE)).toBe(true);
+    const failures = collectSeedFailures(SEEDS, (seed) => {
+      const b = BORN.get(seed);
+      const t = plantWith(b, HOUSE);
+      expect(t.generatorVersion, seed).toBe('0.10.0');
+      expect(farmlandNames(t), seed).toEqual([HOUSE.name]);
+      const sources = t.economicState?.foodSecurity?.foodRecord?.foodSources;
+      expect(Array.isArray(sources) && sources.length > 0 && !sources.includes('grain'), seed).toBe(true);
+      expect(farmlandNames(hideWhole(t)), seed).toEqual([]);
+    });
+    expectNoSeedFailures(failures, 'the plant stands on every town');
+  }, 120000);
+
+  it('THE PROPERTY: the reader\'s rows are byte-identical with the house shown and hidden whole, hold no rite of the fields, and are the owner\'s set', () => {
+    const failures = collectSeedFailures(SEEDS, (seed) => {
+      const b = BORN.get(seed);
+      const t = plantWith(b, HOUSE);
+      const rows = sharedTraditionRowsOf(t);
+      expect(JSON.stringify(sharedTraditionRowsOf(hideWhole(t))), seed).toBe(JSON.stringify(rows));
+      expect((rows || []).filter((r) => r.element === 'field').map((r) => r.name), seed).toEqual([]);
+      expect(names(rows), seed).toEqual(names(shownTraditionsOf(t, []).recs));
+    });
+    expectNoSeedFailures(failures, 'a hideable house named farmland moves no row');
+  }, 120000);
+
+  it('CONTROL: a NON-hideable farmland house in its place lets the rite of the fields stand, on the owner\'s set and the reader\'s rows', () => {
+    expect(isHideableHouse(FIELDS)).toBe(false);
+    const failures = collectSeedFailures(SEEDS, (seed) => {
+      const b = BORN.get(seed);
+      const t = plantWith(b, FIELDS);
+      expect(fieldRiteRefused(t), seed).toBe(false);
+      const rows = sharedTraditionRowsOf(t);
+      expect((rows || []).filter((r) => r.element === 'field').length, seed).toBeGreaterThan(0);
+      expect(names(rows), seed).toEqual(names(shownTraditionsOf(t, []).recs));
+    });
+    expectNoSeedFailures(failures, 'farmland the floor holds admits the rite of the fields');
   }, 120000);
 });
 
