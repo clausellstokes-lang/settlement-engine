@@ -168,3 +168,19 @@ Each of the 240 sentences of (B): 6 to 22 words; no digit; no slot outside the f
 no tab or double quote. Number words: none as a count; "one" stands only as a pronoun or an idiom ("no one", "the last one",
 "the people one tells") and "first" only in "first pick", "say it first" (17 sentences; listed by the builder): the chair to
 rule if those too must go.
+
+## ADDENDUM AFTER THE CHAIR's RULINGS L-1 TO L-4 (2026-11-28, 02:50 to 03:20 UTC)
+- THE COUNT (L-1, then L-4): a person's own card draws the keeper lines of its house's family, and a power's own face has
+  3 lines of its own. `blades` merges into `watch`; graft into crime; succession into rule; mistrust into neighbours. FIVE
+  lines a state for the 19 commonest states (every ordinary institution family, the contender power, the rule, neighbours
+  and crime tensions, the feast, the fair), three elsewhere: **191 lines** in `C-said-lines.tsv`.
+- SILENT (L-1 and the (E) read): criminal houses and powers, `works`, `exotic`, failing ventures; and "Access to external
+  mill" and "Access to parish church" (no house in the place). "Listening post" moves to `watch`. "Almshouse" and
+  "Foundling home" are in `care` (the healer family renamed), not `temple`; "Brewery" and "Brewer" are in `workshop`.
+- THE SLOTS: `{seat}` (the seat's power, `powerNameInProse`) added, as an object only; `{good}` lines need a named good
+  (the engine picks another line otherwise); `{thing}` unused.
+- THE REGISTER (L-2, L-3, L-4): a remark overheard in passing, never to the surveyor; plain words; one short sentence the
+  norm; each of the four tempers notices a different thing (warm: people and kindnesses; counting the cost: what it takes,
+  who pays; guarded: what is not said or might go wrong; curt: one bare fact); a `seen` column on every line.
+- THE LIAR (L-1, the (E) read): office lies keyed also by the holder's house family (hall or watch, against temple, care or
+  learning); front lies by trading house or other.
