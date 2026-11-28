@@ -5,4 +5,4 @@
   `card-not: digs or grows its own`, each with its catalogue ids). classes re-run: no raw-text hit.
 - `OLD-REWORD-B.tsv`: ACCEPTED by the chair (all six). `INN-CARD-B.tsv`: the OLD inn versions needing a card word.
 - (E) `E2-read-B.md`, (M) `M2-check-B.md`: re-run on the fixed lines.
-- COMPLETE ("DONE 2"), pending the chair's read. Nothing under src or tests is touched; no pull request.
+- contest.4 W and C made to fit any contest (the chair, 13:40 UTC). DONE: ACCEPTED by the chair; the branch is held for the voices engine. Nothing under src or tests is touched; no pull request.
