@@ -217,8 +217,9 @@ export function deriveFoodBalance(settlement) {
  * ignores a food deficit — which is the contradiction this corrects.
  *
  * @param {DossierSettlementView | null | undefined} settlement
+ * @param {{ audience?: string }} [options] RULING 122-B-4: `audience: 'player'` for a reader's composition (no hook leg)
  */
-export function deriveViability(settlement) {
+export function deriveViability(settlement, options = {}) {
   /** @type {NonNullable<DossierSettlementView['economicViability']>} */
   const v = settlement?.economicViability || {};
   const rawSummary = v.summary || null;
@@ -250,7 +251,7 @@ export function deriveViability(settlement) {
 
   const food = deriveFoodBalance(settlement);
   const dependencyCount = Array.isArray(v.dependencies) ? v.dependencies.length : 0;
-  const town = name || 'The settlement'; const seen = outlookFactsOf(settlement); // UPKEEP-8 (#228 #253 #326 #379): the Outlook says only what the town's own pages say
+  const town = name || 'The settlement'; const seen = outlookFactsOf(settlement, options.audience); // RULING 122-B-4: the reader's audience // UPKEEP-8 (#228 #253 #326 #379): the Outlook says only what the town's own pages say
 
   if (food.deficit > 0) {
     // "Depends on imports" must match what the import channel actually is:
@@ -860,9 +861,10 @@ function pickTrue(pick, pool, ok, twin) {
  * (the food record's import share), and the imports its printed trade list marks as a necessity or as what the terrain
  * cannot produce (the Economics tab's own list and marks: `EconomicsTab.jsx :: shownImports`).
  * @param {DossierSettlementView | null | undefined} settlement
+ * @param {string} [audience] RULING 122-B-4: the reader's audience, handed to the debt reader
  * @returns {{ keepsOrder: boolean, paysItsWay: boolean, buysFood: boolean, buysIn: boolean, owesDebt: boolean, needsImports: boolean }}
  */
-function outlookFactsOf(settlement) {
+function outlookFactsOf(settlement, audience) {
   const town = /** @type {OutlookSettlement | null | undefined} */ (/** @type {unknown} */ (settlement));
   const eco = town?.economicState || {};
   // BAR5-BAND: the band the Foundations print (domain/display/foundationBandShown.js: one reading of the row on every tab)
@@ -880,14 +882,14 @@ function outlookFactsOf(settlement) {
     settlement, { side: 'imports', exports: Array.isArray(eco.primaryExports) ? [...eco.primaryExports] : [] })); // a copy read (tradeListWriters)
   return {
     keepsOrder: law !== 'critical' && law !== 'collapsed' && !OPEN_REVOLT.some((t) => stressTypes.includes(t)), // TAIL-DEFECON-D (#01134): not under open revolt
-    paysItsWay: !['Subsistence', ...PROSPERITY_LABELS.slice(0, PROSPERITY_LABELS.indexOf('Poor') + 1)].includes(String(eco.prosperity ?? '')) && !owesDebtShown(settlement), // VIABILITY-TRUE (G61): not beside the printed debt line; VIABILITY-TRUE-2 (G68 (V1)): every home that prints one
+    paysItsWay: !['Subsistence', ...PROSPERITY_LABELS.slice(0, PROSPERITY_LABELS.indexOf('Poor') + 1)].includes(String(eco.prosperity ?? '')) && !owesDebtShown(settlement, audience), // VIABILITY-TRUE (G61): not beside the printed debt line; VIABILITY-TRUE-2 (G68 (V1)): every home that prints one
     // VIABILITY-TRUE (the tenth chair's G61): the three gates read WHAT THE PAGE PRINTS: the food row's own pounds brought in
     // (`foodRowShown.js`, with the tab's carrier test; the record's rounded share read 0% beside "+ 1 imported"), a good on the
     // printed arriving list that is a food source's own good (`commoditiesShown.js :: isFoodSourceGood`), the
     // printed arriving list itself; and the debt line the page prints (the `indebted` stress's own sentence).
     buysFood: foodPoundsShown(settlement) > 0 || arrivingShown(settlement).some(isFoodSourceGood),
     buysIn: foodPoundsShown(settlement) > 0 || arrivingShown(settlement).length > 0,
-    owesDebt: owesDebtShown(settlement), // VIABILITY-TRUE-2 (G68 (V1)): the stress's debt line or the tension's
+    owesDebt: owesDebtShown(settlement, audience), // VIABILITY-TRUE-2 (G68 (V1)): the stress's debt line or the tension's
     needsImports: imports.some((imp) => necessity.some((n) => imp.includes(n)) || terrain.some((t) => imp.includes(t) || t.includes(imp))),
   };
 }
@@ -994,10 +996,10 @@ function foodPoundsShown(settlement) {
  * household's dues). ONE READER, here, for the three gates that need it (L1, L2, L4, L5 and the strained line).
  * RULING-R (the eleventh chair, 2026-11-27, R5) reads the timeline's `outside_debt` event ("The Debt Crisis") as the
  * place owing too: its printed description and hooks say the creditor is collecting now (`solvencyShown.js`).
- * @param {unknown} settlement @returns {boolean}
+ * @param {unknown} settlement @param {string} [audience] @returns {boolean}
  */
-function owesDebtShown(settlement) {
-  return placeOwesShown(settlement); // RULING-R (the eleventh chair, 2026-11-27), R5: the reader moved to `solvencyShown.js`, which the Economy desk reads too; it also reads the timeline's `outside_debt` event
+function owesDebtShown(settlement, audience) {
+  return placeOwesShown(settlement, { audience }); // RULING 122-B-4: a reader's Outlook asks without the hook leg // RULING-R (the eleventh chair, 2026-11-27), R5: the reader moved to `solvencyShown.js`, which the Economy desk reads too; it also reads the timeline's `outside_debt` event
 }
 /** VIABILITY-TRUE (G61): the Economics tab's printed arriving list. @param {unknown} settlement @returns {string[]} */
 function arrivingShown(settlement) {

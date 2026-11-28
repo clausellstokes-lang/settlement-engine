@@ -48,7 +48,7 @@ export function isolationDeskRead(settlement, options = {}) {
  * The reconciled viability verdict (§1f), gated: the owner's draw, or on a shared page the
  * summary shipped at `viewModel:viability` — and, unstamped, an EMPTY summary (silence), never
  * a re-draw of the seeded variant.
- * @param {any} settlement @param {{publicDossier?: boolean}} [options]
+ * @param {any} settlement @param {{publicDossier?: boolean, playerView?: boolean}} [options]
  * @returns {{summary: string}|null} null with no settlement
  */
 export function viabilityVerdictRead(settlement, options = {}) {
@@ -58,6 +58,6 @@ export function viabilityVerdictRead(settlement, options = {}) {
     const summary = shipped && typeof shipped === 'object' ? /** @type {Record<string, unknown>} */ (shipped).summary : null;
     return { summary: typeof summary === 'string' ? summary : '' };
   }
-  const verdict = deriveViability(settlement);
+  const verdict = deriveViability(settlement, { audience: options.playerView ? 'player' : 'dm' }); // RULING 122-B-4
   return { summary: String(verdict?.summary ?? '') };
 }

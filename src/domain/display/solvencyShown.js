@@ -21,9 +21,13 @@ import { economicSurvivalBandOf } from './defenseScoreBands.js';
 import { collectPlotHooks } from '../dossier/plotHooks.js';
 
 /**
- * @param {unknown} settlement @returns {boolean} the page says the place owes a debt now
+ * RULING 122-B-4 (the eleventh chair, 2026-11-28): THE HOOK LEG IS THE OWNER's EYE ONLY. A plot hook never travels on a
+ * player share, so for a READER (`audience: 'player'`: the shared page's stamp, `composePublicProse`, and the player view)
+ * the place owes by the stress and the tension alone; the owner's tabs, the PDF and Foundry (any other audience) keep the
+ * hook leg too.
+ * @param {unknown} settlement @param {{ audience?: unknown }} [options] @returns {boolean} the page says the place owes a debt now
  */
-export function owesDebtShown(settlement) {
+export function owesDebtShown(settlement, options = {}) {
   const s = /** @type {{ stress?: unknown, history?: { currentTensions?: unknown, historicalEvents?: unknown } | null } | null | undefined} */ (settlement);
   const stress = Array.isArray(s?.stress) ? s.stress : s?.stress ? [s.stress] : [];
   if (stress.some((e) => /** @type {{ type?: unknown } | null} */ (e)?.type === 'indebted')) return true;
@@ -33,7 +37,7 @@ export function owesDebtShown(settlement) {
   const debts = new Set((Array.isArray(events) ? events : [])
     .filter((e) => /** @type {{ templateType?: unknown } | null} */ (e)?.templateType === 'outside_debt')
     .map((e) => /** @type {{ name?: unknown }} */ (e).name).filter((n) => typeof n === 'string' && n !== ''));
-  if (!debts.size) return false;
+  if (!debts.size || options.audience === 'player') return false;
   return collectPlotHooks(/** @type {Parameters<typeof collectPlotHooks>[0]} */ (settlement)).some((h) => h.category === 'history'
     && (h.parties || []).some((p) => p.kind === 'history' && debts.has(String(/** @type {{ eventId?: unknown }} */ (p).eventId))));
 }
