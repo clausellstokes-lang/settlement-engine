@@ -740,7 +740,7 @@ import { failedFoodGoodsOf, commoditiesShown } from './commoditiesShown.js'; // 
 /**
  * THE CROP A SCARCE HARVEST DENIES IS NOT SENT OUT (SEAM-ECON item 1, LAW 8's 8c.export; the chair's BRIEF-BAR6-SEAM, 2026-11-17;
  * vetoable by the owner). The Economics tab printed "Harvest Scarce in the famine." on the income row and, beside it, an
- * Exports list carrying "Date harvest · Desert grain · Palm sugar" (bar0-village-famine-rand-27) or "Milled flour · Flour and
+ * Exports list carrying "Date harvest · Pressed dates · Palm sugar" (bar0-village-famine-rand-27) or "Milled flour · Flour and
  * meal" (bar0-village-famine-rand-38, where the herds failed and the mark reads the harvest's grain scarce with them). THE
  * ONE FACT is the page's own mark (`crisisStoppedRow.js :: rowStoppedBy` on an income share): the famine in force marks a
  * share that lives on the grain (`INCOME_DEPENDENCE`) where the food it failed (`FAMINE_FAILED_FOOD`) is the grain, or where
