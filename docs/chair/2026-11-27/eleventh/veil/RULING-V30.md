@@ -111,3 +111,11 @@ of 1,558 hideable houses of C are of this kind).**
   page's economy lines in 25 of 900 towns of C. CURED ON THE LINE FOR THAT LEG (ruling 122-B-4: the hook leg is the owner's
   eye only). OWED TO THE LANE: the same test for the other two legs where a DM hides the stress or the tension, and for
   every atom a stamped line leans on (READER SURVEY-1 is listing them: its report's findings on DM-only-by-class things).
+  A22, THE CHAIR's FIRST READING OF THE NUMBERS (by reading `src/kernel/prng.js :: generateSeed`, not executed): a minted
+  seed is `<base36 Date.now()><3-character sequence><6 characters of entropy>`: the only secret part is 36^6, about 2.2e9
+  (31 bits), once the mint's millisecond is known; the id is 64 bits of FNV over that string. So a reader who holds the
+  served id AND a timestamp close to the mint (does any served field carry one: a created-at, a generated-at, a receipt's
+  time?) can search the seed in seconds to hours; with no timestamp the search is a year's milliseconds times 2.2e9 and is
+  out of reach. A seed TYPED by a user is as weak as what was typed. The measure owes: every time-like field a share
+  serves, and what else a re-birth needs that is served (the config). TODAY's live site sends the hidden things anyway, so
+  this binds only once the veil hides on the server: it is the lane's, in its phase 1.
