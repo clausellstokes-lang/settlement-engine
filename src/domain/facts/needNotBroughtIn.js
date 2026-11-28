@@ -36,7 +36,6 @@ import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { idOfHouse, impliedGroundsOf, ventureOnPage } from './supplyStory.js'; // NEED-ATOM: two more of its names (no new module)
 import { chainPrintName } from '../display/chainPrintName.js';
 import { LUXURY_CLASS, NOT_A_GOOD } from '../../data/tradeListDeclarations.js'; // their home (imports nothing; FR13 (a))
-import { crisisOf } from './crisisKind.js'; // RULING-R (R8 luxury): the famine in force, as `chainStateShown.js :: failedGroundsOf` reads it
 import { RESOURCE_DISPLAY_LABELS } from '../display/resourceDisplayName.js'; // RULING-R (R8 luxury): the Resources tab's own labels
 import { filterDeclared, lineText } from './drawDeclared.js'; // the kernel's door the luxury pool is read through (FR15)
 
@@ -231,6 +230,24 @@ export const FAILED_FOOD_COPY = Object.freeze({
 });
 
 /**
+ * FIX-123 (the eleventh chair's ruling 123-J-1, STOP 1): THE FAMINE IN FORCE, in the record's own words. Its home is
+ * `facts/crisisKind.js :: crisisOf(record).has('famine')`, as `chainStateShown.js :: failedGroundsOf` reads it; that module is
+ * pinned lazy (coherence-lazy, `vite.config.js`), so an import from this eager leaf closed the chunk cycle engine-core ->
+ * coherence-lazy -> engine-core and the shell did not boot. `has('famine')` is the kind alone (no family is named famine, and
+ * the active conditions are reported, never folded): the stress container as `canonicalAccessors.js :: canonStressors` reads
+ * it (`stressors`, then `stress`, then `stresses`, the first array wins, a bare object is one entry), an entry whose type is the
+ * kind `famine` or its pulse type (`stressorPicker.js :: GEN_TO_PULSE_TYPE.famine`, the same word). The guard holds this reader
+ * EQUAL to `crisisOf`'s answer on every town it births and on a constructed record for each crisis kind and for none.
+ * @param {unknown} record @returns {boolean}
+ */
+export function famineInForceOf(record) {
+  const s = /** @type {{ stressors?: unknown, stress?: unknown, stresses?: unknown }} */ (record || {});
+  const container = Array.isArray(s.stressors) ? s.stressors : Array.isArray(s.stress) ? s.stress : Array.isArray(s.stresses) ? s.stresses
+    : s.stressors && typeof s.stressors === 'object' ? [s.stressors] : s.stress && typeof s.stress === 'object' ? [s.stress] : [];
+  return arr(container).some((e) => !!e && typeof e === 'object' && /** @type {{ type?: unknown }} */ (e).type === 'famine');
+}
+
+/**
  * THE PLACE'S OWN COMMODITIES (`tradeListDisplay.js :: ownCommodities`): the Resources tab's list (`commoditiesShown`), each
  * label the tab's own, the failed food left out (`FAILED_FOOD_COPY`).
  * @param {NeedRecord} record @param {Record<string, unknown>} eco @returns {string[]}
@@ -238,7 +255,7 @@ export const FAILED_FOOD_COPY = Object.freeze({
 function ownCommodities(record, eco) {
   const res = /** @type {{ availableResources?: unknown } | null | undefined} */ (record.resourceAnalysis);
   const source = /** @type {{ foodSecurity?: { foodRecord?: { failedSource?: unknown } | null } | null }} */ (eco).foodSecurity?.foodRecord?.failedSource;
-  const failed = crisisOf(/** @type {object} */ (record)).has('famine') && typeof source === 'string' && Object.hasOwn(FAILED_FOOD_COPY, source) ? FAILED_FOOD_COPY[source] : null;
+  const failed = famineInForceOf(record) && typeof source === 'string' && Object.hasOwn(FAILED_FOOD_COPY, source) ? FAILED_FOOD_COPY[source] : null;
   return strings(res?.availableResources).filter((k) => k && !(failed && (failed.grounds.includes(k) || failed.goods.includes(k.toLowerCase().replace(/_/g, ' ')))))
     .map((k) => (Object.hasOwn(RESOURCE_DISPLAY_LABELS, k) ? RESOURCE_DISPLAY_LABELS[/** @type {keyof typeof RESOURCE_DISPLAY_LABELS} */ (k)] : k.replace(/_/g, ' ')));
 }

@@ -26,7 +26,7 @@ import { beforeAll, describe, expect, it } from 'vitest';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { importsAsPrinted, needMetBy, NEED_DEALT_ROWS, MARKS } from '../../src/domain/display/tradeListDisplay.js';
-import { FAILED_FOOD_COPY, GOOD_HAD_COPY, HOUSE_STOCK_COPY, MARK_RES, NEED_DEALT_ROWS_COPY, NEED_KEYS, WORKING_CHAIN_STATUSES_COPY, goodNeededNotBroughtIn, needListOf, needNotBroughtInOf } from '../../src/domain/facts/needNotBroughtIn.js';
+import { FAILED_FOOD_COPY, GOOD_HAD_COPY, famineInForceOf, HOUSE_STOCK_COPY, MARK_RES, NEED_DEALT_ROWS_COPY, NEED_KEYS, WORKING_CHAIN_STATUSES_COPY, goodNeededNotBroughtIn, needListOf, needNotBroughtInOf } from '../../src/domain/facts/needNotBroughtIn.js';
 import { FACT_DIMENSIONS, atomHolds, declarationAdmits } from '../../src/domain/facts/factVocabulary.js';
 import { variantFactDeclaration } from '../../src/domain/display/stateProse/stateProseKernel.js';
 import { DOSSIER_STATE_PROSE_ECONOMY } from '../../src/data/dossierStateProse/economy.generated.js';
@@ -42,6 +42,8 @@ import { CHAIN_INPUTS } from '../../src/domain/facts/houseInputAtHand.js';
 import { RESOURCE_DATA } from '../../src/data/goods/identity.js';
 import { commoditiesShown } from '../../src/domain/display/commoditiesShown.js';
 import { FOOD_SOURCE_GROUND } from '../../src/domain/facts/tradeAtWork.js';
+import { CRISIS_KINDS, crisisOf } from '../../src/domain/facts/crisisKind.js';
+import { GEN_TO_PULSE_TYPE } from '../../src/domain/stressorPicker.js';
 
 /** The towns each item is held in, with the items each one holds (the controls beside them). */
 const TOWNS = Object.freeze({
@@ -191,6 +193,30 @@ describe('FAULTS-NEED item 1: the atom `need not brought in` (FR2) states the pa
       expect(commoditiesShown(rec).filter((c) => c.failed).map((c) => c.key).sort(), `${source}: the marked chips`)
         .toEqual(every.filter((k) => f.grounds.includes(k) || f.goods.includes(k.replace(/_/g, ' '))).sort());
     }
+  });
+  // FIX-123 (the eleventh chair's ruling 123-J-1, STOP 1): the leaf's famine in force is its home's (`crisisOf(record).has('famine')`),
+  // read in the record's words because that home is pinned lazy; held equal on a record for each crisis kind (as the record's
+  // kind and as its pulse type, in each carrier of the container), on records with none, and on every town this file births
+  it('its famine in force is `crisisOf`\'s answer: each crisis kind and none, and every town of the sample', () => {
+    const home = (/** @type {any} */ r) => crisisOf(r).has('famine');
+    /** @type {any[]} */
+    const records = [{}, { stress: [] }, { stressors: [], stress: [{ type: 'famine' }] }, { stressors: null, stress: null }, { activeConditions: [{ archetype: 'famine' }] }];
+    for (const kind of CRISIS_KINDS) {
+      for (const type of new Set([kind, /** @type {any} */ (GEN_TO_PULSE_TYPE)[kind] ?? kind])) {
+        records.push({ stressors: [{ type }], stress: [{ type }] }, { stress: [{ type }] }, { stresses: [{ type }] }, { stressors: { type } }, { stress: { type } },
+          { stressors: [{ type: 'wartime' }, { type }] });
+      }
+    }
+    const held = records.filter(home).length;
+    expect(held, 'the famine is among the kinds').toBeGreaterThan(0);
+    expect(records.length - held, 'and records without it beside').toBeGreaterThan(0);
+    for (const r of records) expect(famineInForceOf(r), JSON.stringify(r)).toBe(home(r));
+    expectNoSeedFailures(collectSeedFailures(Object.keys(TOWNS), (seed) => {
+      const s = BORN.get(seed);
+      expect(famineInForceOf(s), seed).toBe(home(s));
+    }));
+    expect(Object.keys(TOWNS).some((seed) => home(BORN.get(seed))), 'the sample holds a famine').toBe(true);
+    expect(Object.keys(TOWNS).some((seed) => !home(BORN.get(seed))), 'and a town without').toBe(true);
   });
   // NEED-ATOM: a butcher (its stock livestock), a fair's livestock auction, no house that proves a pasture: the page's mark decides
   const stockTown = (/** @type {Record<string, unknown>} */ over = {}, /** @type {Record<string, unknown>} */ eco = {}) => ({
