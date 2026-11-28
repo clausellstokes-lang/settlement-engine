@@ -1,0 +1,19 @@
+id	temper	old words	proposed words	why
+SAID.tension.arcane.2	welcoming	Some neighbours still stand up for those who work magic.	A few neighbours still stand up for those who work magic.	tension.arcane W: "Some" opens 2 of 5 (cap 1); the same thought, a plain opener
+SAID.tension.arcane.3	cautious	Nobody's sure what's causing all the bad luck.	What's causing all the bad luck isn't clear.	tension.arcane C: the hint opens 2 of 5 (cap 1)
+SAID.tension.calamity.1	welcoming	Everyone knows what to grab first if it comes.	Every family knows what to grab first if it comes.	tension.calamity W: the warm opener ("Everyone", "Neighbours") 2 of 5 (cap 1)
+SAID.tension.crime.6	cautious	Nobody's sure which officials can still be trusted.	It's hard to tell which officials can still be trusted.	tension.graft C: the hint 2 of 5 (cap 1)
+SAID.tension.faith.2	welcoming	Some still go to every rite, just to keep the peace.	A few still go to every rite, just to keep the peace.	tension.faith W: "Some" 2 of 5 (cap 1)
+SAID.tension.neighbours.6	cautious	Nobody's sure who might be passing on what's said.	Anyone might be passing on what's said.	tension.mistrust C: the hint 2 of 5 (cap 1)
+SAID.tension.rule.5	cautious	Some quiet meetings at night have the older people worried.	Quiet meetings at night have the older people worried.	tension.rule C: the hint 3 of 8 (cap 2); none of the three new lines uses it
+SAID.tension.threat.3	cautious	Nobody knows how close the danger really is.	The danger may be closer than it looks.	tension.threat C: the hint 2 of 5 (cap 1)
+SAID.tension.trade.2	welcoming	Some sellers still give the old price to old friends.	A few sellers still give the old price to old friends.	tension.trade W: "Some" 2 of 5 (cap 1)
+SAID.crisis.faith.2	cautious	Some who listen to the preachers go quiet at home.	Those who listen to the preachers often go quiet at home.	crisis.faith C: the hint 2 of 5 (cap 1); keeps its `preachers` need
+SAID.crisis.newcomers.3	welcoming	Some families have given the newcomers work, and it's working out.	A few families have given the newcomers work, and it's working out.	crisis.newcomers W: "Some" 2 of 5 (cap 1)
+SAID.crisis.newcomers.1	cautious	Nobody knows most of the new faces.	Most of the new faces are strangers to everyone.	crisis.newcomers C: the hint 3 of 5 (cap 1): two re-worded
+SAID.crisis.newcomers.3	cautious	Nobody's sure how long the newcomers mean to stay.	How long the newcomers mean to stay hasn't been said.	crisis.newcomers C (the second of two)
+SAID.crisis.raids.3	cautious	Some tracks near the houses are bigger than anyone likes.	The tracks near the houses are bigger than anyone likes.	crisis.raids C: "Some" 2 of 5 (cap 1)
+SAID.crisis.rising.2	cautious	Some doors only open to a known knock.	Doors only open to a known knock now.	crisis.rising C: the hint 3 of 5 (cap 1): two re-worded
+SAID.crisis.rising.3	cautious	Nobody says which side they're on, though most can guess.	Which side people are on goes unsaid, though most can guess.	crisis.rising C (the second of two)
+SAID.crisis.sickness.3	cautious	Some houses have gone very quiet.	A few houses have gone very quiet.	crisis.sickness C: "Some" 2 of 5 (cap 1)
+SAID.crisis.war.3	cautious	Some people are friendlier with the soldiers than they need to be.	A few people are friendlier with the soldiers than they need to be.	crisis.war C: "Some" 2 of 5 (cap 1); keeps its `soldiers` need
