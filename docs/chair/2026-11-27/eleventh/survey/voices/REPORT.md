@@ -1,6 +1,6 @@
 VOICES-MEASURE DONE: branch lane/voices-measure-2026-11-27 at 07a87bc5b (the six; this report follows)
 
-**Street lines** (CONFIRMED count; the class is scripted, about 7 in 10 right by hand check). 480 pools print prose, with 15,785 lines. Of these, 1,543 are STREET (PLAUSIBLY about 2,100), in 162 pools. 963 print: 317 gated, 646 colour. They print 22,650 times on C and 23,295 on V, about 25 a town. Top: OUTSIDER_IMPRESSIONS 3,797.
+**Street lines** (CONFIRMED count; the class is scripted, about 7 in 10 right by hand check). 480 pools print prose, with 15,785 lines. Of these, 1,543 are STREET (PLAUSIBLY about 2,100), in 162 pools. 963 print: 317 gated, 646 colour. They print 22,650 times on C and 23,295 on V. Top: OUTSIDER_IMPRESSIONS 3,797.
 
 | size (C / V) | named | speakers | unnamed, strict · loose | most lines, one person | towns, someone >2 on one tab |
 |---|---|---|---|---|---|
