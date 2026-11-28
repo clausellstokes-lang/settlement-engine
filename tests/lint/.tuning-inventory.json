@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "cdddc3b8b4981449b8aced0713ce825ec3dd0a26",
-  "measuredBy": "RULING 122-A-2 (the eleventh chair, unit A3)",
+  "measuredAtSha": "bd2a3fd200ceea63f3df4ac92170cd2db808329d",
+  "measuredBy": "RULING 122-B-2 (CURE-122B, unit 3)",
   "date": "2026-11-28",
-  "note": "A3 (RULING 122-A-2): src/domain/display/tensionDescriptionShown.js imports foodStoresWords from summary/tonightSheet.js, so the dependents of WANT_MAX_WORDS gain it; no value, leaf or digest moved",
+  "note": "unit 3 moved criticalImportRow and the bare-common and proper fills of economyStateProse.js to the leaf display/criticalImportRow.js; LEADER_FROM and SOLE_EARNER_FROM lose the dependent display/tensionDescriptionShown.js (it no longer imports the desk) and their lines move 453/454 -> 407/408; no value, leaf or digest moved",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -1248,14 +1248,13 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 453,
+      "line": 407,
       "spanDigest": "3812788e098c702a89d72a5b51c0007f969391069da9b98b2fdd4f2e789ff838",
       "leaves": {
         "value": 50
       },
       "dependents": [
-        "src/components/new/economyDeskRead.js",
-        "src/domain/display/tensionDescriptionShown.js"
+        "src/components/new/economyDeskRead.js"
       ],
       "namedDependents": []
     },
@@ -1263,14 +1262,13 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 454,
+      "line": 408,
       "spanDigest": "a6b1340215d65b0c4945f4b657854f6756ff2217a648606b9e467ee5ac00bbda",
       "leaves": {
         "value": 20
       },
       "dependents": [
-        "src/components/new/economyDeskRead.js",
-        "src/domain/display/tensionDescriptionShown.js"
+        "src/components/new/economyDeskRead.js"
       ],
       "namedDependents": []
     },
