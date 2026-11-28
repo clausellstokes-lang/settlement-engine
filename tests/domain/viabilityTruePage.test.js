@@ -310,3 +310,18 @@ describe('SURVEY S-B2: the solvency slots beside a place debt, and beside nothin
       { header: 'COMBINATION C3: the middle rungs#1', rung: 'MODERATE#4', survival: 'Economic Survival: ADEQUATE#2' }]);
   }, 120000);
 });
+
+// SURVEY S-B-3 (the chair's ruling of 2026-11-28, on the independent reader's fault): COMFORTABLE v6 said "keeps nothing back for a
+// bad one" beside the Economics tab's food line "…with some to put by against a bad year" on 94 of its 97 towns of C. It names
+// the money: "with no money set aside for a bad one". The id keeps its place (a correction in place, WORD_CORRECTIONS).
+describe('SURVEY S-B-3: the nothing-laid-by tile line names the money, so it cannot read against the food put by', () => {
+  test('COMFORTABLE v6 says no money is set aside, and never that nothing is kept back', () => {
+    const v6 = /** @type {any} */ (DOSSIER_STATE_PROSE_ECONOMY_SB)['DS-ECO-8'].pools.COMFORTABLE.find((/** @type {any} */ v) => v.vid === 6);
+    expect([v6.text, v6.marks]).toEqual(['The town lives comfortably from year to year, with no money set aside for a bad one.', ['nothing laid by']]);
+  });
+  test('C dp-thorp-3 (Khansaray), the reader\'s page: its tile prints the money line beside the food put by', () => {
+    const s = c('dp-thorp-3');
+    const rung = JSON.stringify(economyDeskRead(s).prosperityRung);
+    expect([/no money set aside for a bad one/.test(rung), /keeps nothing back/.test(rung)]).toEqual([true, false]);
+  }, 120000);
+});

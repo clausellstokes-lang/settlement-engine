@@ -1267,7 +1267,7 @@ contradict** it (R-DST-C).
 3. `[visitor · food: ≥ secure · stores: ≥ 3]` The town is plainly comfortable. The buildings are finished rather than patched, and the stores are more than the season needs.
 4. `[visitor · food: ≥ secure · stores: < 3]` The town is plainly comfortable. Its buildings are well kept, though nobody here keeps more in store than the coming season needs.
 5. `[visitor · place debt]` The town is comfortable to look at, and it owes money all the same.
-6. `[street · nothing laid by]` The town lives comfortably from year to year and keeps nothing back for a bad one.
+6. `[street · nothing laid by]` The town lives comfortably from year to year, with no money set aside for a bad one.
 
 **PROSPEROUS** — *surplus funds institutions and defenses*
 1. `[ledger · no crisis: indebted]` {settlement} has money to spend, and spends it on the town's buildings and their upkeep.

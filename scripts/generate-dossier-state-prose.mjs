@@ -592,6 +592,10 @@ const sha256 = (text) => createHash('sha256').update(text).digest('hex');
  * @type {ReadonlyArray<{pool: string, vid: number, from: string, to: string, ruling: string}>}
  */
 const WORD_CORRECTIONS = Object.freeze([
+  // SURVEY S-B-3 (the eleventh chair's ruling of 2026-11-28, on the independent reader's fault): DS-ECO-8 COMFORTABLE v6 (S-B2's line,
+  // released with no town yet) said "keeps nothing back for a bad one" beside the food line "…with some to put by against a bad
+  // year" (94 of its 97 towns of C); re-worded in place to name the money: "with no money set aside for a bad one"
+  { pool: 'DS-ECO-8 :: COMFORTABLE', vid: 6, from: '90226db5eb10ecf83278917fd73ad98eb798be0d3c33bd8042e4fbd49c34bb72', to: 'f631d7606f791c46373edf907e2a8ab043f45d70f14a74d18fe732167764ddbc', ruling: 'S-B-3, the eleventh chair, 2026-11-28' },
   // RULING-R (the eleventh chair, 2026-11-27), R10 (unit B2): DS-POW-6 'operation role unlicensed revenue' v2 said "The town's
   // debts" (the gambling house's debts read as the town owing, beside "money laid by"); re-worded in place so the debts are the gamblers', not the town's
   { pool: 'DS-POW-6 :: operation role unlicensed revenue', vid: 2, from: '2e380625627741894b4b92065daf750adc1313ab5bb0aa70b66bfd9b82e8fb42', to: 'df37236e7c07e23fb0146335aadc3abd8807fefa2e2043329113641b7f84b442', ruling: 'RULING-R, the eleventh chair, 2026-11-27' },
