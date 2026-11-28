@@ -1,6 +1,10 @@
 # THE TWELVE TOWNS AS TEXT, THEIR QUOTES ON THEIR CARDS (two a size; for the chair to read and show the owner)
 
-VOICES-ENGINE, 2026-11-28, on the leaf as built (39b8123bc). Each quoted card: its tab, the card, the card's own line (the surveyor's, shortened), then the quote and its signature as the slot prints it, the speaker's stored temper in brackets. The liar's DM note is shown as the owner's page shows it. Births by the record's plans (C, V); every quote CONFIRMED by the plan; the reading PLAUSIBLE (mine, below).
+VOICES-ENGINE, 2026-11-28, re-rendered on the leaf at 96cb62121: the chair's readings V-1 (a) and (b), the card words,
+the tension states, and the changed words of G1-3 and G1-4. Each quoted card shows its tab, the card, and the card's own
+line (the surveyor's, shortened). Below that come the quote and its signature as the slot prints it, with the speaker's
+stored temper in brackets. The liar's DM note is shown as the owner's page shows it. Births follow the record's plans (C,
+V). Every quote is CONFIRMED by the plan; the reading is PLAUSIBLE (mine, below).
 
 ### C dp-thorp-52, Linmiao (thorp, 1 people; in crisis: Wartime): 1 quotes
 - [World/History] external_threat — News of approaching danger divides the community on how to respond
@@ -11,8 +15,8 @@ VOICES-ENGINE, 2026-11-28, on the leaf as built (39b8123bc). Each quoted card: i
   “People grumble, but nobody would swap the Feudal Stewardship for anyone else.” — Theodelinde Wagner, the boat-master (welcoming)
 
 ### C dp-hamlet-12, Prabhakund (hamlet, 4 people; in crisis: Under Occupation): 1 quotes
-- [Systems/Power] Elder Council — the seat-doubted
-  “Taxes come in later every season.” — Satyajit Bhat, the occupying governor (transactional)
+- [Systems/Power] Occupation Authority — the lesser-contender
+  “We do more of the work, so we should have more say.” — Satyajit Bhat, the occupying governor (transactional)
 
 ### C dp-hamlet-85, Copanchihua (hamlet, 7 people): 1 quotes
 - [Systems/Power] Manor Household — the seat-secure
@@ -24,7 +28,7 @@ VOICES-ENGINE, 2026-11-28, on the leaf as built (39b8123bc). Each quoted card: i
 - [Systems/Power] Religious Authorities — the lesser-contender
   “Not everyone on our side wants to say so openly.” — Sevaste Chomatenos, the healer (cautious)
 - [World/NPCs] Nikolaos Chrysoberges — the steward
-  “An answer can take weeks, and nobody can say how many.” — Nikolaos Chrysoberges, the steward (cautious)
+  “Old records here have a way of going missing.” — Nikolaos Chrysoberges, the steward (cautious)
 - [World/NPCs] Romanos Chomatenos — the cartographer
   “Some people have gone very quiet lately.” — Romanos Chomatenos, the cartographer (cautious)
 - [World/Traditions] The Lesser Founding Feast — The Lesser Founding Feast
@@ -72,7 +76,7 @@ VOICES-ENGINE, 2026-11-28, on the leaf as built (39b8123bc). Each quoted card: i
 
 ### C dp-city-59, Grudko (city, 51 people): 9 quotes
 - [Systems/Institutions] Bardic college — Formal musical education. Amphitheater, dormitories.
-  “Carts before dawn beat the heat and the crowds, that's all.” — Olivija Kovačević, the college master (transactional)  [DM: in truth, the night traffic is the smugglers']
+  “Wages here barely cover the rent.” — Olivija Kovačević, the college master (transactional)  [DM: in truth, the holder is paid well by the criminal house on the side]
 - [Systems/Power] Merchant Guilds — the seat-contested
   “Rivals for the seat are meeting quietly, people say.” — Havel Kudryavtsev, the assayer (cautious)
 - [Systems/Power] Military/Guard — the lesser-contender
@@ -94,15 +98,15 @@ VOICES-ENGINE, 2026-11-28, on the leaf as built (39b8123bc). Each quoted card: i
 - [Summary/Crisis] Insurgency — A strong power in Ulfhammer has stopped obeying the government. Its people stall, its taxes go unpaid, and it waits.
   “With shutters closed all day, business happens at the back door.” — Thorvald Egilsson, the governor (transactional)
 - [Systems/Institutions] Bardic college — Music taught in the formal way, with an amphitheatre and dormitories.
-  “Carts before dawn beat the heat and the crowds, that's all.” — Hildr Þorkellsson, the college master (transactional)  [DM: in truth, the night traffic is the smugglers']
+  “Wages here barely cover the rent.” — Hildr Þorkellsson, the college master (transactional)  [DM: in truth, the holder is paid well by the criminal house on the side]
 - [Systems/Institutions] Customs house — Levies duties on goods entering and leaving by the main roads. Run by royal or municipal officials.
   “Every price here is argued down to the last coin.” — Rorik Kolbeinsson, the customs collector (transactional)
 - [Systems/Institutions] Multiple courthouses — Commercial, criminal, and ecclesiastical benches, each in its own house.
-  “Fines here fall hardest on those with least.” — Jokull Torvaldsson, the chief magistrate (transactional)
+  “The lights burn here long after dark, and someone pays for them.” — Jokull Torvaldsson, the chief magistrate (transactional)
 - [Systems/Power] Military/Guard — the lesser-contender
   “We'd get on fine with the Noble Governorship, given a fair share of the say.” — Knud Hrafnsson, the senior charter master (welcoming)
 - [World/NPCs] Vigdis Olafsson — the dean
-  “Some worries brought here have no easy answer.” — Vigdis Olafsson, the dean (cautious)
+  “Nobody likes to think about who might be next.” — Vigdis Olafsson, the dean (cautious)
 - [World/NPCs] Illugi Vagnsson — the luxury merchant
   “Keeping busy helps take the mind off it.” — Illugi Vagnsson, the luxury merchant (welcoming)
 - [World/Traditions] The Offering of the Founding — The Offering of the Founding
@@ -126,7 +130,7 @@ VOICES-ENGINE, 2026-11-28, on the leaf as built (39b8123bc). Each quoted card: i
 - [Systems/Power] The Guild Alliance — the lesser-standing
   “Fair taxes and no trouble. That's all we ask.” — Andrei Dmitriev, the banker (transactional)
 - [Systems/Power] Military/Guard — the seat-doubted
-  “Fewer turn up every time.” — Radmila Kovačević, the lodge master (dismissive)
+  “People sort out their own troubles now, without asking the people in charge.” — Lukas Kovalyov, the hospital's master (welcoming)
 - [World/NPCs] Iskra Stepanov — the watch commander
   “Nobody wants to pay for guards until there's trouble.” — Iskra Stepanov, the watch commander (transactional)
 - [World/Traditions] The Deep Fair — The Deep Fair
@@ -155,8 +159,13 @@ VOICES-ENGINE, 2026-11-28, on the leaf as built (39b8123bc). Each quoted card: i
   “Nobody's sure what the children will come home with.” — Sabir al-Iraqi, the senior guild master (cautious)
 
 ## MY READING (PLAUSIBLE)
-1. The small places carry one quote each, and in a thorp it is the floor's (ruling 6): the draw gave none. The one person speaks of whatever card the floor reached first by weight, so a thorp at war with no soldiers on the record (Linmiao) speaks of the coming danger, not the war: the war's lines all name the soldiers and the record refuses them.
-2. Prabhakund (occupied): "Taxes come in later every season." is signed by THE OCCUPYING GOVERNOR on the doubted seat's card. The rule ("anyone not of the power: the aggrieved") admits an occupier. A ruling for the chair: may an occupier, or any officer of another power holding the place, voice the seat's doubt?
-3. The liar reads as the brief meant it: "Nothing gets past the checks here without being seen." (a magistrate who waves the loads through). But in Grudko and Ulfhammer a college master speaks of carts before dawn: the house-kind group (smuggling) and the tie's-way group (front, other) are pooled and ranked together, so a line about loads can land on an arts college. Ranking the tie's way first would keep the lie on the holder's own trade.
-4. One offering line ("Children are taught to give something, however small.") prints in two towns of twelve: the offering pool holds three lines, and the rites are many. Not a fault on a page; a sameness across towns.
-5. The tension rows above show the record's type (my extractor's); the page prints the card's own label.
+1. The small places carry one quote each; in a thorp it is the floor's (ruling 6). Linmiao, at war with no soldiers on
+   the record, speaks of the coming danger, not the war: right as built (V-1 (c)).
+2. V-1 (a) HOLDS: in Prabhakund (occupied) the occupying governor no longer signs the doubted seat's card. He speaks on
+   his own power's card ("We do more of the work, so we should have more say."). That is the hamlet's one quote, the
+   floor's (ruling 6). The doubted seat's card is silent (its outcome: not drawn).
+3. V-1 (b) HOLDS: the two college masters (Grudko, Ulfhammer) now speak their own house's lie ("Wages here barely cover
+   the rent.": in truth, paid by the criminal house), not the smuggler's carts. The magistrate's "Nothing gets past the
+   checks here without being seen." stands.
+4. Still seen: one offering line ("Children are taught to give something, however small.") prints in three of the
+   twelve towns. The offering pool holds three lines and the rites are many: a sameness across towns, not a fault on a page.
