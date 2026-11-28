@@ -11,6 +11,25 @@
    rather than qualifiers: […] What are your thoughts?"
 3. (about 21:55 UTC) "Then I approve of all of this as planned and to be implemented prerelease"
 
+4. (about 01:00 UTC on 2026-11-28, after the chair told him the voices measure's cold read: "quoting everything does not
+   work") "Rather than quoting everything which includes the surveyor, think that the surveyor is inherently understood as
+   the author of everything except the quoted voices. The pages are his recordings, remarks, and anecdotes rather than
+   explicitly attributing everything to the surveyor as to quote him."
+
+## THE FRAME AS HIS FOURTH MESSAGE SETS IT (the chair's reading, said back to him the same minute; vetoable)
+- THE SURVEYOR IS NEVER QUOTED AND NEVER NAMED LINE BY LINE: every unmarked sentence is his by default; nothing says "the
+  surveyor notes". ONLY TOWNSPEOPLE ARE QUOTED, sparingly.
+- HIS PAGES HOLD THREE KINDS OF THING: what he RECORDED (counts, who holds what), what he REMARKS (his judgment of how things
+  stand), and ANECDOTES (something he saw or was told).
+- WHAT IT SOLVES: of the four kinds of line the voices measure found to break in a townsperson's mouth, three are simply HIS
+  (the visitor's-eye line, the thing nobody says aloud, the chronicle): they need no spoken variant. The fourth (a grievance in
+  the wrong mouth) is a rule of who may be quoted.
+- WHAT IT GIVES THE ENGINE (the chair's proposal for the design): the three kinds are the order of hardness between the
+  survey's own claims: a RECORDING matches the record exactly and stands; a REMARK is a judgment, stands unless ruled out,
+  yields to a recording; an ANECDOTE is colour, claims least, yields first.
+- TWO THINGS THE CHAIR WOULD ADD, HIS TO VETO: the frame is set ONCE, in one line at the head of the dossier or the PDF (in
+  the manner of "A survey of <town>, as recorded"); no "I": he is present in what he notices, not as a character.
+
 ## WHAT THE CHAIR TOLD HIM IT TAKES HIM TO HAVE APPROVED (said to him the same minute; vetoable in every part)
 1. THE FRAME: the document is a survey by ONE OBSERVER; quoted townspeople may see things differently.
 2. THE RULE: SAY IT UNLESS SOMETHING RULES IT OUT. Relationships are drawn between CLAIMS ("if this is true, that cannot be"),
