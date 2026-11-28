@@ -4,7 +4,7 @@
     "files": {
       "src/domain/display/stateProse/generalStateProse.js": "e18b83084fe8b7b3dad1853a55e746bd8e5605cccf4140941b01be082cbac677",
       "src/domain/display/stateProse/powerStateProse.js": "d169fbc542f074cb8303231a93df214aeb0653954bb2e829bee631c7b18adc78",
-      "src/domain/display/stateProse/economyStateProse.js": "9e0134ba99fadb67b3cb74005057f8d01b5780c9a71cc95721ed3a65a30527e0",
+      "src/domain/display/stateProse/economyStateProse.js": "3cd847be7b32ff8404a25213e65a3132bb1c3212fc0ab544eebe15fa999996d1",
       "src/domain/display/stateProse/defenseStateProse.js": "38e43f8ccbf0efd6a32da2b3eef4512863eead2a511f9d83d554cd24fd682e53",
       "src/domain/display/stateProse/stressorsStateProse.js": "e35010d5433bd9cdbde3f6b67c82302bef32d95f51f5b25cb58b0bb1a063d212",
       "src/domain/display/stateProse/warFaithStateProse.js": "e3c17afb8e07d402d4fb8b3a342d9d2c03bc958151b3bb3e0bcbe199eaedeac9",
