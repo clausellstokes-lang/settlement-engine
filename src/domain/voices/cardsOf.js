@@ -56,9 +56,11 @@ export const TENSION_GROUP = Object.freeze(/** @type {Record<string, string>} */
   outside_debt: 'money', market_crash: 'money', trade_collapse: 'money', economic_disparity: 'money',
   plague_years: 'calamity', great_fire: 'calamity', great_flood: 'calamity',
   religious_tension: 'faith', heresy_trial: 'faith', pilgrimage_surge: 'faith',
-  crime_wave: 'crime', corruption_scandal: 'crime',
+  // the chair's ruling G1-1 (3): a corruption scandal and a fear of infiltrators or an occupation's legacy are states of
+  // their own, keyed on the tension's type (the lines the writer wrote for them, `needs: type`)
+  crime_wave: 'crime', corruption_scandal: 'graft',
   generational_divide: 'neighbours', population_friction: 'neighbours', disputed_land: 'neighbours',
-  infiltration_fear: 'neighbours', occupation_legacy: 'neighbours',
+  infiltration_fear: 'mistrust', occupation_legacy: 'mistrust',
   external_threat: 'threat',
   magical_controversy: 'arcane', wild_magic: 'arcane',
 }));
@@ -132,6 +134,8 @@ export function isLawfulSpeaker(npc) {
  * @property {ReadonlyArray<string>} wrongedFit the house families ruling 3 prefers for a grievance
  * @property {Record<string, any> | null} npc a person card's own person
  * @property {string | null} keeperTier0 the keepers of a rite are the first tier (the line's "keeper of the rites")
+ * @property {string | null} catalogId the card's house's catalogue id (an institution's own; a person's house's): what
+ *   answers a line's card-level words (`cardWords.js`)
  */
 
 /**
@@ -159,12 +163,13 @@ export function cardsOf(settlement, options = {}) {
   const stopping = stoppingCrisesOf(s);
   const lever = new Set(crises.flatMap((c) => [...c.levers.map((l) => str(l.institution)), ...c.cast.filter((r) => r.kind === 'institution').map((r) => str(r.id))]));
   const stakes = new Set(crises.flatMap((c) => c.stakes.map((k) => str(k.factionId))));
+  const gainers = new Set(crises.flatMap((c) => c.stakes.filter((k) => k.stake === 'gains').map((k) => str(k.factionId))));
   /** @type {VoiceCard[]} */
   const cards = [];
   /** @param {Partial<VoiceCard> & { kind: VoiceCard['kind'], id: string, tab: string }} c */
   const push = (c) => cards.push(/** @type {VoiceCard} */ ({
     label: '', state: '', pools: [], weight: 'lesser', silent: null, tiers: [], house: null, power: null, exclude: new Set(),
-    fill: {}, wrongedFit: [], npc: null, keeperTier0: null, ...c,
+    fill: {}, wrongedFit: [], npc: null, keeperTier0: null, catalogId: null, ...c,
   }));
 
   // ── THE CRISIS (ruling 8: first) ──
@@ -201,7 +206,7 @@ export function cardsOf(settlement, options = {}) {
     push({
       kind: 'institution', id: institutionCardId(inst), tab: 'institutions', label: name, state: `${cond.family}-${cond.state}`,
       pools: cond.pools, silent: cond.silent, weight: WEIGHTY.institution({ crisisRole: lever.has(name), marked: cond.marked }) ? 'weighty' : 'lesser',
-      tiers: [face ? [face] : [], people], house: name, fill: cond.fill,
+      tiers: [face ? [face] : [], people], house: name, fill: cond.fill, catalogId: str(inst.catalogId) || null,
     });
   }
 
@@ -229,11 +234,15 @@ export function cardsOf(settlement, options = {}) {
     // captured seat; the rest of the town first for a contested one; its own members otherwise
     const tiers = ['seat-doubted', 'seat-captured'].includes(state) ? [others]
       : state === 'seat-contested' ? [others, members] : [members, others];
+    // THE CHAIR'S READING V-1 (a): the power a crisis says GAINS by it (the occupier) is the doubt's cause, not a party
+    // aggrieved by it: its members never voice a doubted or captured seat
+    const exclude = ['seat-doubted', 'seat-captured'].includes(state)
+      ? new Set(npcs.filter((n) => [...gainers].some((p) => holdsMembership(n, p))).map((n) => str(n.id))) : new Set();
     push({
       kind: 'power', id, tab: 'power', label: name, state, pools: criminal ? [] : [`power.${state}`],
       silent: criminal ? 'criminal-power' : null,
       weight: WEIGHTY.power({ ruler: isRuler, stake: stakes.has(name) || stakes.has(id) }) ? 'weighty' : 'lesser',
-      tiers, power: name, fill: fillSeat ? { seat: fillSeat } : {},
+      tiers, power: name, exclude, fill: fillSeat ? { seat: fillSeat } : {},
     });
   }
 
@@ -250,7 +259,7 @@ export function cardsOf(settlement, options = {}) {
     push({
       kind: 'person', id, tab: 'npcs', label: str(npc.name), state: cond ? `${cond.family}-${cond.state}` : powerFace ? 'powerface' : '',
       pools, silent, weight: WEIGHTY.person({ influence: str(npc.influence), inCast: castIds.has(id) }) ? 'weighty' : 'lesser',
-      tiers: [[npc]], house: house || null, npc, fill: cond ? cond.fill : {},
+      tiers: [[npc]], house: house || null, npc, fill: cond ? cond.fill : {}, catalogId: inst ? str(inst.catalogId) || null : null,
     });
   }
 

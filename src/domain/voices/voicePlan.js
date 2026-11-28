@@ -31,7 +31,8 @@
  *
  * THE LIAR (ruling 11): at most one a town, the one person with a criminal tie who sits in a lawful house
  * (`people/allegiance.js :: allegianceOf`), chosen explicitly by rank on the town's key; the false line by the tie's way
- * and the house's family, and by the criminal house's kind (`data/voices/liarLines.js`); it sits on the card of the
+ * and the house's family FIRST, the criminal house's kind only where those give none (the chair's reading V-1 (b))
+ * (`data/voices/liarLines.js`); it sits on the card of the
  * holder's own house, which speaks for it. It carries `liar: { inTruth }`: a surface that cannot show the DM's mark safely
  * shows nothing on that card (the plan does not decide the surface).
  *
@@ -52,6 +53,7 @@ import { LIAR_LINES } from '../../data/voices/liarLines.js';
 import { VOICES_TUNING } from './voicesTuning.js';
 import { VOICE_TABS, cardsOf, isLawfulSpeaker } from './cardsOf.js';
 import { houseFamilyOf } from './houseFamily.js';
+import { cardWordHolds } from './cardWords.js';
 import { cardHouseOf } from '../people/cardPowers.js';
 import { holdsMembership } from '../people/membership.js';
 import { allegianceOf } from '../people/allegiance.js';
@@ -215,15 +217,19 @@ export function liarOf(settlement, npcs, key, instByName) {
   const kind = /smuggl/i.test(h) ? 'smuggling' : /black market|bazaar/i.test(h) ? 'blackmarket' : /thie|rookery|fence/i.test(h) ? 'theft'
     : /whisper/i.test(h) ? 'secrets' : /assassin|killer/i.test(h) ? 'killing' : /gang|criminal factions/i.test(h) ? 'extortion'
       : /underground/i.test(h) ? 'tunnels' : null;
-  const lines = /** @type {Record<string, any>[]} */ ([...(way ? LIAR_LINES[/** @type {keyof typeof LIAR_LINES} */ (way)] || [] : []),
-    ...(kind ? LIAR_LINES[/** @type {keyof typeof LIAR_LINES} */ (kind)] || [] : [])]);
-  if (!lines.length) return null;
-  // the false line is asked of the record through the one door, as every line is (its note's nouns and its version's)
+  // THE CHAIR'S READING V-1 (b): the holder's own house first (the tie's way through it and the house's family); the
+  // criminal house's kind only where the holder's house has no line, so a smuggling line never lands on an arts college.
+  // Each asked of the record through the one door, as every line is (its note's nouns and its version's).
   const temper = temperOf(npc);
-  const domain = lines.map((l) => ({ id: str(l.id), text: str(l.versions[temper].text), line: l,
-    needs: [...(l.needs || []), ...(l.versions[temper].needs || [])], excludes: [...(l.excludes || []), ...(l.versions[temper].excludes || [])] }));
-  const drawn = drawDeclared(domain, { rankKey: `${key}::voices.liar.line`, facts: () => factsOf(settlement), poolId: 'voices.liar', surface: 'voices' });
-  return drawn.line ? { npc, house, line: drawn.line.line, text: drawn.line.text } : null;
+  for (const group of [way, kind]) {
+    const lines = /** @type {Record<string, any>[]} */ (group ? LIAR_LINES[/** @type {keyof typeof LIAR_LINES} */ (group)] || [] : []);
+    if (!lines.length) continue;
+    const domain = lines.map((l) => ({ id: str(l.id), text: str(l.versions[temper].text), line: l,
+      needs: [...(l.needs || []), ...(l.versions[temper].needs || [])], excludes: [...(l.excludes || []), ...(l.versions[temper].excludes || [])] }));
+    const drawn = drawDeclared(domain, { rankKey: `${key}::voices.liar.line`, facts: () => factsOf(settlement), poolId: 'voices.liar', surface: 'voices' });
+    if (drawn.line) return { npc, house, line: drawn.line.line, text: drawn.line.text };
+  }
+  return null;
 }
 
 /**
@@ -276,8 +282,11 @@ function composePlan(s, options) {
     const temper = temperOf(npc);
     const lines = /** @type {Record<string, any>[]} */ (card.pools.flatMap((p) => /** @type {Record<string, any>} */ (SAID_LINES)[p] || []));
     const domain = lines.flatMap((l) => {
-      if (l.ineligible || !speakerAdmits(l.speaker, npc, card, ctx, tier0)) return [];
+      if (!speakerAdmits(l.speaker, npc, card, ctx, tier0)) return [];
       const v = l.versions[temper];
+      // a version answered nowhere is out; a card-level word must hold for this card (ruling G1-1 (2)); a speaker never
+      // speaks out of temper: another LINE is taken
+      if (v.ineligible || (v.card || []).some((/** @type {string} */ w) => !cardWordHolds(w, card.catalogId))) return [];
       const text = filled(v.text, card.fill);
       if (text === null) return [];
       return [{ id: str(l.id), text, needs: v.needs || [], excludes: v.excludes || [] }];

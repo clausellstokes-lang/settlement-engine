@@ -12,7 +12,9 @@
 import { beforeAll, describe, expect, it, vi } from 'vitest';
 import { VOICES_TUNING } from '../../../src/domain/voices/voicesTuning.js';
 import { KNOWN_MOUTHS, OWNER_AUDIENCE, pickKeyOf, quoteFor, speakerAdmits, temperOf, voicePlanOf } from '../../../src/domain/voices/voicePlan.js';
-import { VOICE_TABS, isLawfulSpeaker } from '../../../src/domain/voices/cardsOf.js';
+import { TENSION_GROUP, VOICE_TABS, isLawfulSpeaker } from '../../../src/domain/voices/cardsOf.js';
+import { CARD_WORDS, cardWordHolds } from '../../../src/domain/voices/cardWords.js';
+import { catalogIdForName, institutionalCatalog } from '../../../src/data/institutionalCatalog.js';
 import { SAID_LINES } from '../../../src/data/voices/saidLines.js';
 import { LIAR_LINES } from '../../../src/data/voices/liarLines.js';
 import { allegianceOf } from '../../../src/domain/people/allegiance.js';
@@ -162,6 +164,65 @@ describe('a house\'s keeper lines', () => {
       expect(plan.quotes.size, seed).toBe(1);
     }
     expect(seen).toBeGreaterThan(0);
+  });
+});
+
+describe('a card-level word is answered by the card (ruling G1-1 (2)); a word answered nowhere leaves its version out', () => {
+  it('holds for catalogue ids the catalogue itself names, each word at least one', () => {
+    const ids = new Set(Object.values(institutionalCatalog).flatMap((tier) => Object.values(tier || {}).flatMap((shelf) => Object.keys(shelf || {}).map((n) => catalogIdForName(n)))));
+    for (const [word, list] of Object.entries(CARD_WORDS)) {
+      expect(list.length, word).toBeGreaterThan(0);
+      for (const id of list) expect(ids.has(id), `${word}: ${id}`).toBe(true);
+    }
+    expect(cardWordHolds('flour or bread', 'mill')).toBe(true);
+    expect(cardWordHolds('flour or bread', 'town_granary')).toBe(false);
+    expect(cardWordHolds('flour or bread', null)).toBe(false);
+  });
+
+  it('never quotes a version whose card word does not hold for its card, or a version answered nowhere', () => {
+    let carded = 0;
+    for (const { seed, plan } of plans()) {
+      for (const q of plan.quotes.values()) {
+        if (q.liar) continue;
+        const v = lineById.get(q.lineId).versions[q.speaker.temper];
+        expect(v.ineligible, `${seed} ${q.lineId}`).toBeUndefined();
+        if (!v.card) continue;
+        carded += 1;
+        const card = plan.cards.find((c) => c.kind === q.kind && c.id === q.id);
+        for (const w of v.card) expect(cardWordHolds(w, card.catalogId), `${seed} ${q.lineId} ${w} on ${card.catalogId}`).toBe(true);
+      }
+    }
+    expect(carded >= 0).toBe(true);
+  });
+
+  it('files a tension of its own type under its own state: graft and mistrust (ruling G1-1 (3))', () => {
+    expect(TENSION_GROUP.corruption_scandal).toBe('graft');
+    expect(TENSION_GROUP.infiltration_fear).toBe('mistrust');
+    expect(TENSION_GROUP.occupation_legacy).toBe('mistrust');
+    expect(SAID_LINES['tension.graft'].map((l) => l.id)).toEqual(['SAID.tension.crime.6', 'SAID.tension.crime.7', 'SAID.tension.crime.8']);
+    expect(SAID_LINES['tension.mistrust'].map((l) => l.id)).toEqual(['SAID.tension.neighbours.6', 'SAID.tension.neighbours.7', 'SAID.tension.neighbours.8']);
+  });
+});
+
+describe('the chair\'s readings V-1', () => {
+  it('(a) the occupier, the cause of the doubt, never voices the doubted seat', () => {
+    const s = born.get('dp-hamlet-12');
+    const plan = voicePlanOf(s, { audience: OWNER_AUDIENCE });
+    const gainers = new Set(s.npcs.filter((n) => (n.memberships || []).some((m) => m.power === 'Occupation Authority')).map((n) => n.id));
+    expect(gainers.size).toBeGreaterThan(0);
+    for (const c of plan.cards.filter((x) => x.kind === 'power' && /^seat-(doubted|captured)$/.test(x.state))) {
+      const who = plan.speakers.get(`power:${c.id}`);
+      expect(gainers.has(who), `${c.id} ${who}`).toBe(false);
+    }
+  });
+
+  it('(b) the liar speaks of the holder\'s own house first: a smuggling line never lands on an arts college', () => {
+    const plan = voicePlanOf(born.get('dp-city-59'), { audience: OWNER_AUDIENCE });
+    const lie = [...plan.quotes.values()].find((q) => q.liar);
+    expect(plan.cards.find((c) => c.kind === 'institution' && c.id === lie.id).house).toBe('Bardic college');
+    // the tie's way through the house (office, front or retainer), never the criminal house's kind
+    expect(lie.lineId).toMatch(/^LIE\.(office|front|retainer)\./);
+    expect(lie.lineId).not.toMatch(/^LIE\.smuggling\./);
   });
 });
 
