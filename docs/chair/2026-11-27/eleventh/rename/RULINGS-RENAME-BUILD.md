@@ -124,3 +124,12 @@ group, with the cause (K1b re-deals each 0.10.0 town's founding rites once; the 
 grand observance; soak-b does), the measure (`K1b-2`'s table) and BOTH patches kept for the owner
 (`rename/build/tools/k1b3-V2.patch` and V1's), so that at his soak redo he chooses the seating, and re-measures
 statecraft's band if he takes V2. A small call (it adds no rule; point 124's reader checks it).
+
+**13:48 UTC: K3-1 FAILS ITS OWN CONDITION (2); K3 IS HELD; POINT 124 GOES AHEAD WITHOUT IT.** The builder showed by execution
+(13:48 UTC) that the power-name classifiers run LIVE on the shared page from the served record (`rulerKindOfLabel`,
+`factionArchetype`, `familiesHeldOf`, `stressPowerRowOf`, the door-id mint), and a power's rename moves the shared page on
+40 of 60 towns: an owner-only `kindName` would split the owner's page from the reader's. Its proposal (the rename stores the
+KIND, not the old name: `kind: { ruler, families, archetype, face }`; it may travel; every classifier takes it first; the
+door id and the A15/A30 keys stay on the name and re-deal, named) is with the RULING READER (rule V37 (4)); the chair rules
+on its report. POINT 124 = K1, K1b and K2 (with K2-2, K-REG and K1b-4); its "TIP?" and its independent reader go ahead now;
+K3 becomes its own small point after the ruling.
