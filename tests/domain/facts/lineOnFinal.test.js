@@ -25,6 +25,13 @@ describe('lineOnFinal: a sibling set', () => {
   it('a stored twin whose original the final record admits prints the original', () => {
     expect(lineOnFinalOf('Duties by road.', { siblings: SET }, factsWith({ market: true }))).toEqual({ text: 'Duties by road or harbour.', found: true, moved: true });
   });
+  it('a stored twin its OWN declaration admits stays as stored, even where the original is admitted too', () => {
+    const BOTH = Object.freeze({ 'Ale by the barrel.': Object.freeze([
+      Object.freeze({ text: 'Ale by the barrel.', needs: ['market'] }),
+      Object.freeze({ text: 'Ale for the hall.', twinOf: 'Ale by the barrel.' }),
+    ]) });
+    expect(lineOnFinalOf('Ale for the hall.', { siblings: BOTH }, factsWith({ market: true }))).toEqual({ text: 'Ale for the hall.', found: true, moved: false });
+  });
   it('nothing admitted: nothing, or the stored text where the home keeps its slot', () => {
     expect(lineOnFinal('Duties by road.', { siblings: SET }, factsWith({}))).toBe(null);
     expect(lineOnFinal('Duties by road.', { siblings: SET, keep: true }, factsWith({}))).toBe('Duties by road.');

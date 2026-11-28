@@ -11,7 +11,8 @@
  *
  * THE DOOR's OWN RULE (`drawDeclared.js`), on the final facts:
  *   - the stored line is found in its home BY TEXT (as the home speaks it: the tier noun the draw spoke it in);
- *   - admitted: it prints as stored;
+ *   - admitted (by its OWN declaration: a stored twin the final record admits stays, even where its original is
+ *     admitted too): it prints as stored;
  *   - refused: a sibling set resolves from its ORIGINAL (the original if admitted, else its twin, else the set's first
  *     admitted member: `resolveDeclared`), so a stored twin whose original the final record admits gives the original
  *     back; a pool takes the refused line's twin (`twinOf`), else the next admitted line by the door's hash argmax
@@ -72,6 +73,8 @@ export function lineOnFinalOf(stored, home, facts) {
       if (!Array.isArray(set) || !set.some((l) => same(textOf(l)))) continue;
       const f = factsNow(facts);
       if (!f) return { text: stored, found: true, moved: false };
+      const own = set.find((l) => same(textOf(l)));
+      if (declarationAdmits(declarationOf(own), /** @type {any} */ (f)).admitted) return { text: stored, found: true, moved: false }; // admitted: as stored
       const r = resolveDeclared(/** @type {ReadonlyArray<unknown>} */ (set), { facts: f, poolId: 'lineOnFinal', drawKind: 'T' });
       return out(r.line == null ? null : textOf(r.line));
     }
