@@ -13,7 +13,7 @@
  * a pillar-tier death; the SuccessorPrompt UI consumes the ranked list.
  */
 
-import { NPC_UNAVAILABLE_STATUSES } from './npcs.js';
+import { NPC_UNAVAILABLE_STATUSES, membershipPowers } from './npcs.js';
 import { factionRefOf, resolveFactionRef } from '../factionRefs.js';
 
 /** @typedef {import('./npcs.js').NpcStructural} NpcStructural */
@@ -53,10 +53,10 @@ export function inferSuccessors({ outgoing, settlement, limit = 3 }) {
   const npcs = settlement.npcs || [];
   const outId = outgoing.id || outgoing.name;
   const outInst = new Set(outgoing.linkedInstitutionIds || []);
-  const factions = settlement.powerStructure?.factions?.length
-    ? settlement.powerStructure.factions
-    : (settlement.factions || []);
-  const outFac = canonicalFactionLinks(outgoing.linkedFactionIds, factions);
+  // PEOPLE-5B (M-7): the powers are the only faction roster (no grouping fallback), and a card's
+  // faction links are the powers it holds a membership in.
+  const factions = settlement.powerStructure?.factions || [];
+  const outFac = canonicalFactionLinks(membershipPowers(outgoing), factions);
 
   // Score each NPC for successor fitness. Higher score = better fit.
   const scored = npcs
@@ -107,7 +107,7 @@ function scoreCandidate(candidate, outInst, outFac, factions) {
   }
 
   // Faction overlap is the next strongest — political loyalty matters.
-  const candFac = canonicalFactionLinks(candidate.linkedFactionIds, factions);
+  const candFac = canonicalFactionLinks(membershipPowers(candidate), factions);
   let facOverlap = 0;
   for (const id of candFac) {
     if (outFac.has(id)) facOverlap += 25;

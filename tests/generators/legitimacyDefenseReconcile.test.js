@@ -52,7 +52,7 @@ describe('[generators-pipeline-6] faction powers agree with the patched legitima
     });
     expect(checked).toBeGreaterThan(0); // non-vacuous
     expectNoSeedFailures(failures, 'every settlement is self-consistent with its final legitimacy multipliers');
-  });
+  }, 120_000); // its own budget, carrying the measured figure (CI-FIT-3, CLOSE-5, 2026-11-23): 8.3 s lit in the final census at c1128c8f6; about 15.2 s on a CI runner (the measured factor), over three quarters of the default 20 s
 
   // Non-corpus terrains/routes with weaker defense readiness (isolated/none) are
   // the ones most likely to cross a band — exercise them too.

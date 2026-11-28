@@ -226,7 +226,6 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   const _clearAiSettlement = useStore(s => s.clearAiSettlement);
   const storeRegenerate = useStore(s => s.regenSection);
   const requestNarrative = useStore(s => s.requestNarrative);
-  const requestDailyLife = useStore(s => s.requestDailyLife);
   const getCost = useLiveAiCostResolver();
   const _creditBalance = useStore(s => s.creditBalance);
   const storeAiLoading = useStore(s => s.aiLoading);
@@ -273,15 +272,11 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   // Pricing-moment opener — the recovery CTA on the insufficient-credits AI
   // error surfaces the pricing moment through DossierSessionNotices. (B1.)
   const setActivePricingMoment = useStore(s => s.setActivePricingMoment);
-  // Phase 5 W4e — War & Faith tab presence inputs. Viewer tier + campaign
-  // membership decide whether the tab (war half + the GATED faith half) has
-  // anything to show. These gate PRESENCE, not content — they never read the live
-  // pantheon; faith content stays behind FaithSection's premium seam.
-  const viewerIsPremium = useStore(s => s.auth?.tier === 'premium' || (typeof s.isElevated === 'function' ? s.isElevated() : false));
   // The AUTHORING authority (premium / founder / elevated), read from the ONE
-  // spelling in src/lib/viewerAuthority.js — see npcAuthoringAllowed below. A
-  // DIFFERENT question from viewerIsPremium above, which gates War & Faith tab
-  // PRESENCE and deliberately omits the founder tier.
+  // spelling in src/lib/viewerAuthority.js — see npcAuthoringAllowed below.
+  // (TIER-PARITY-FIX, 2026-11-09: the `viewerIsPremium` presence read that sat here is
+  // DELETED — the War tone and Relationships truth key on the view (V1), the Faith tab's
+  // presence on the embed and the view (V2).)
   const viewerMayAuthor = useStore(viewerCanAuthor);
   const inCampaign = useStore(s => (saveId && typeof s.isSettlementClockBound === 'function') ? s.isSettlementClockBound(saveId) : false);
   // Lifecycle-stage input — top-level draft|canon phase enum. (A2.)
@@ -376,11 +371,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   // under Notes (spec §8 M3c relocation).
   const recentEvents = chronicle.slice(0, 8);
 
-  const executeAiAction = async (kind) => {
-    if (kind === 'dailyLife') {
-      if (isConfigured) await requestDailyLife(saveId);
-      return;
-    }
+  const executeAiAction = async (_kind) => {
     if (isConfigured) {
       await requestNarrative(saveId);
     } else {
@@ -463,7 +454,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   // The deity embed is read ONCE here (the observed-shape instrument banks this file's read of
   // `config.primaryDeitySnapshot`); the hook and the faith tab's presence below take the value.
   const deityEmbed = rawSettlement?.config?.primaryDeitySnapshot;
-  const teasers = useLaunchTones({ settlement: rawSettlement, deityEmbed, saveId, viewerIsPremium, playerView, publicDossier });
+  const teasers = useLaunchTones({ settlement: rawSettlement, deityEmbed, saveId, playerView, publicDossier });
   const launchTone = (teaser) => (teaser ? { tone: LAUNCH_TONE } : {});
   // NPC authoring is an explicit owner capability supplied by SettlementDetail,
   // not an inference from the process-wide editMode flag. Intersect it again
@@ -526,13 +517,11 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   });
   // §805 — the split presences. WAR is a campaign story: the tab registers only
   // for a clock-bound settlement (content self-gates to honest absence inside).
-  // FAITH keeps the old faith-half law exactly: it renders SOMETHING unless the
-  // viewer is premium/elevated with no deity embed (FaithSection's HIDDEN mode):
-  // an embed → the read-only panel for all; a non-premium owner → the generic
-  // teaser (names NO deity). Premium + deity-free ⇒ no tab; a public deity-free
-  // dossier stays clean. Presence is tier-gated the SAME way FaithSection's
-  // CONTENT is — it never leaks a name.
-  const hasFaithTab = !!(deityEmbed && typeof deityEmbed === 'object') || (!viewerIsPremium && !publicDossier);
+  // FAITH (TIER-PARITY-FIX V2, the owner's tier law, 2026-11-09): presence by the VIEW and
+  // the DATA, never the tier — an embed → the read-only panel for all; otherwise every owner
+  // view carries the engine-made faith line (names NO deity); a public deity-free dossier
+  // stays clean. FaithSection's HIDDEN mode, which withheld the line from premium, is retired.
+  const hasFaithTab = !!(deityEmbed && typeof deityEmbed === 'object') || !publicDossier;
   // THE CRISIS TAB (the owner, 2026-11-03: "the tab only appears when there is a crises"): registered
   // only while a stress entry is active, for the DM alone (its cast names who exploits and who is
   // blamed), painted with the criminal mark. The presence read stays inline: the page's composer
@@ -558,7 +547,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
     // TAB_GROUPS.world + renderTab but was never registered here, so the resolver
     // dropped it and only the narrower Neighbours tab rendered. Shown when the
     // settlement surfaces any relational content.
-    ...(rawSettlement?.relationships?.length || rawSettlement?.factions?.length
+    ...(rawSettlement?.relationships?.length || rawSettlement?.powerStructure?.factions?.length
       || rawSettlement?.neighbourNetwork?.length || rawSettlement?.neighborRelationship?.name
       // Reuses the already-bundled Users glyph (relationships = people/factions)
       // so registering the tab adds no new icon to the first-paint vendor-icons
@@ -707,11 +696,11 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       case 'plot_hooks': return <PlotHooksTab settlement={s} publicDossier={publicDossier} playerView={playerView} />;
       case 'chronicle':  return <ChronicleTab entries={chronicle} />;
       case 'versions':   return <VersionsTab save={liveSaveEntry} />;
-      case 'daily_life': return <DailyLifeTab settlement={s} aiSettlement={aiSettlement} saveId={saveId} onRequestDailyLife={() => requestAiAction('dailyLife')} publicDossier={publicDossier} playerView={playerView} />;
+      case 'daily_life': return <DailyLifeTab settlement={s} aiSettlement={aiSettlement} publicDossier={publicDossier} playerView={playerView} />;
       // Traditions — the founding-traditions register (THE TRADITIONS wave, T-1).
       // Preview mode (view-time deriveFoundingTraditions) until the T-2 mover writes
       // the settlement.traditions mirror; then this same tab renders the live state.
-      case 'traditions': return <TraditionsTab settlement={s} saveId={saveId} />;
+      case 'traditions': return <TraditionsTab settlement={s} saveId={saveId} publicDossier={publicDossier} playerView={playerView} />;
       // The first-dossier teaching callouts and the Table View trigger moved here when the
       // DM Summary tab, which carried both, was removed (X-5). The callouts self-gate inside.
       case 'overview':   return <>{!readOnly && <Suspense fallback={null}><FirstDossierCallouts /></Suspense>}<OverviewTab settlement={s} narrativeNote={null} onNavigateTab={setActiveTab} publicDossier={publicDossier} playerView={playerView} worldState={owningWorldState} onOpenTableView={flag('tableView') ? () => useStore.getState().setUserPref?.('tableViewOpen', true) : undefined} /></>;
@@ -751,13 +740,16 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
         onRerollNPCs={npcAuthoringAllowed && onRegenerate ? () => onRegenerate('npcs') : null} pinnedIds={pinnedIds}
         onTogglePin={onTogglePin} canAuthorNpc={npcAuthoringAllowed}
         saveId={saveId} playerView={playerView} publicDossier={publicDossier} />;
-      case 'history':    return <HistoryTab settlement={s} narrativeNote={null} recentEvents={recentEvents} onReroll={onRegenerate ? () => onRegenerate('history') : null} publicDossier={publicDossier} playerView={playerView} />;
+      // THE REGENERATION BOUNDARY (the owner, 2026-11-09: regenerating a SECTION of a generated
+      // settlement is post-generation editing, law (1)): the History reroll takes the NPC
+      // reroll's gate, the authoring authority. Whole-settlement rerolls stay generation.
+      case 'history':    return <HistoryTab settlement={s} narrativeNote={null} recentEvents={recentEvents} onReroll={npcAuthoringAllowed && onRegenerate ? () => onRegenerate('history') : null} publicDossier={publicDossier} playerView={playerView} />;
       case 'resources':  return <ResourcesTab settlement={s} narrativeNote={null} publicDossier={publicDossier} playerView={playerView} />;
       case 'viability':  return <ViabilityTab settlement={s} narrativeNote={null} publicDossier={publicDossier} playerView={playerView} />;
       case 'dm_compass': return <DMCompassTab settlement={compassSource || s} />;
       case 'dm_notes':   return <NotesTab saveId={saveId} notes={dossierNotes} section="dm" />;
       case 'ai_notes':   return <NotesTab saveId={saveId} notes={dossierNotes} section="ai" />;
-      case 'relationships': return <RelationshipsTab settlement={s} narrativeNote={null} saveId={saveId} viewerIsPremium={viewerIsPremium} playerView={playerView} publicDossier={publicDossier} />;
+      case 'relationships': return <RelationshipsTab settlement={s} narrativeNote={null} saveId={saveId} playerView={playerView} publicDossier={publicDossier} />;
       default:           return <div />;
     }
   };

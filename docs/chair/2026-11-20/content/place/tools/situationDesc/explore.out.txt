@@ -1,0 +1,48 @@
+
+== thorp: 67 medium
+lead export (record): 9× Grain surplus | 9× River fish | 9× Sacred wood | 7× Healing waters (bottled) | 6× Raw wool | 5× Reeds and thatch | 4× Mineral salts | 4× Salted fish | 4× (none) | 3× Medicinal herbs | 2× Transit trade | 2× Recovered artefacts
+lead export (printed): 9× Grain surplus | 9× River fish | 9× Sacred wood | 7× Healing waters (bottled) | 6× Raw wool | 5× (none) | 5× Reeds and thatch | 4× Mineral salts | 4× Salted fish | 3× Medicinal herbs | 2× Recovered artefacts | 2× Rock salt
+lead import (record): 37× Salt | 30× (none)
+lead import (printed): 37× Salt | 30× (none)
+route: 32× road | 20× river | 8× port | 7× crossroads · market: 67× false · guild: 67× false
+prosperity: 28× Moderate | 20× Comfortable | 16× Poor | 2× Prosperous | 1× Struggling · crisis: 61× false | 6× true
+
+== hamlet: 62 medium
+lead export (record): 10× Raw wool | 8× Salted fish | 6× Sacred wood | 6× River fish | 4× Transit trade | 4× Medicinal herbs | 3× Healing waters (bottled) | 3× Furs and pelts | 3× Water rights | 3× Grain surplus | 3× Reeds and thatch | 3× Hardwood beams
+lead export (printed): 10× Raw wool | 8× Salted fish | 6× Sacred wood | 6× River fish | 5× (none) | 4× Medicinal herbs | 3× Healing waters (bottled) | 3× Water rights | 3× Grain surplus | 3× Reeds and thatch | 3× Hardwood beams | 2× Furs and pelts
+lead import (record): 37× Salt | 17× Incense and votive candles | 5× Replacement arms and basic equipment | 2× Iron | 1× Cut stone and masonry
+lead import (printed): 37× Salt | 17× Incense and votive candles | 5× Replacement arms and basic equipment | 2× Iron | 1× Cut stone and masonry
+route: 27× road | 15× crossroads | 13× river | 7× port · market: 57× false | 5× true · guild: 59× false | 3× true
+prosperity: 28× Moderate | 21× Poor | 10× Comfortable | 3× Struggling · crisis: 53× false | 9× true
+
+== village: 68 medium
+lead export (record): 12× Sacred wood | 10× Raw wool | 7× River fish | 7× Salted fish | 4× Milled flour | 4× Grain surplus | 4× Medicinal herbs | 3× Draft camels | 3× Healing waters (bottled) | 2× Sea salt | 2× Milled timber | 2× Transit trade
+lead export (printed): 12× Sacred wood | 10× Raw wool | 7× River fish | 7× Salted fish | 4× Milled flour | 4× Grain surplus | 4× Medicinal herbs | 3× Draft camels | 3× Healing waters (bottled) | 2× Sea salt | 2× Milled timber | 1× (none)
+lead import (record): 33× Salt | 14× Incense and votive candles | 7× Warehousing and logistics services | 5× Replacement arms and basic equipment | 3× Cut stone and masonry | 3× Route maps and intelligence | 1× Rope, oakum, and rigging supplies | 1× Incense and ritual oil | 1× Cordage, canvas, and vessel-maintenance supplies
+lead import (printed): 33× Salt | 20× Incense and votive candles | 7× Replacement arms and basic equipment | 3× Cut stone and masonry | 2× Cordage, canvas, and vessel-maintenance supplies | 1× Rope, oakum, and rigging supplies | 1× Incense and ritual oil | 1× Parchment and wax tablets
+route: 27× road | 21× river | 12× crossroads | 8× port · market: 49× false | 19× true · guild: 50× false | 18× true
+prosperity: 32× Poor | 26× Moderate | 7× Comfortable | 2× Struggling | 1× Prosperous · crisis: 59× false | 9× true
+
+== town: 89 medium
+lead export (record): 12× Milled flour | 12× Raw wool | 12× Sacred wood | 8× Medicinal herbs | 6× River fish | 5× Salted fish | 5× Ship passage | 4× Reeds and thatch | 3× Rock salt | 3× Date harvest | 3× Transit trade | 3× Furs and pelts
+lead export (printed): 12× Milled flour | 12× Raw wool | 12× Sacred wood | 9× Medicinal herbs | 6× River fish | 5× Salted fish | 5× Ship passage | 4× Reeds and thatch | 3× Rock salt | 3× Date harvest | 3× Furs and pelts | 2× Healing waters (bottled)
+lead import (record): 39× Iron | 7× Iron ore (local iron mines exhausted) | 6× Grain | 6× Livestock | 5× Dressed stone (local quarry depleted) | 5× Bulk grain (local grain fields depleted) | 5× Grain (a little, beside its own harvest) | 4× Shipbuilding timber (local shipbuilding stands cleared) | 3× Wool | 3× Salt | 2× Timber (local managed woodland cleared) | 2× Timber
+lead import (printed): 39× Iron | 7× Iron ore (local iron mines exhausted) | 6× Grain | 6× Livestock | 5× Dressed stone (local quarry depleted) | 5× Bulk grain (local grain fields depleted) | 5× Grain (a little, beside its own harvest) | 4× Shipbuilding timber (local shipbuilding stands cleared) | 3× Wool | 3× Salt | 2× Timber (local managed woodland cleared) | 2× Timber
+route: 52× road | 15× river | 13× crossroads | 9× port · market: 89× true · guild: 89× true
+prosperity: 35× Comfortable | 24× Prosperous | 23× Moderate | 7× Poor · crisis: 70× false | 19× true
+
+== city: 89 medium
+lead export (record): 14× Milled flour | 7× Medicinal herbs | 7× Raw wool | 7× Transit trade | 6× Milled timber | 6× Sacred wood | 6× Ship passage | 5× Reeds and thatch | 5× Salted fish | 3× River fish | 3× Healing waters (bottled) | 3× Mineral salts
+lead export (printed): 14× Milled flour | 8× Medicinal herbs | 8× Raw wool | 6× Milled timber | 6× Sacred wood | 6× Ship passage | 5× Reeds and thatch | 5× Salted fish | 3× River fish | 3× Healing waters (bottled) | 3× Mineral salts | 2× Coal
+lead import (record): 14× Dressed stone (local quarry depleted) | 12× Iron | 10× Bulk grain (local grain fields depleted) | 8× Grain | 6× Precious metals | 6× Iron ore (local iron mines exhausted) | 6× Shipbuilding timber (local shipbuilding stands cleared) | 5× Herbs | 5× Timber (local managed woodland cleared) | 4× Wool | 4× Paper materials | 3× Livestock
+lead import (printed): 14× Dressed stone (local quarry depleted) | 12× Iron | 10× Bulk grain (local grain fields depleted) | 8× Grain | 6× Precious metals | 6× Iron ore (local iron mines exhausted) | 6× Shipbuilding timber (local shipbuilding stands cleared) | 5× Herbs | 5× Timber (local managed woodland cleared) | 4× Wool | 4× Paper materials | 3× Livestock
+route: 30× road | 28× river | 17× crossroads | 14× port · market: 89× true · guild: 89× true
+prosperity: 78× Prosperous | 11× Comfortable · crisis: 73× false | 16× true
+
+== metropolis: 85 medium
+lead export (record): 14× Sacred wood | 10× Milled flour | 8× Ship passage | 6× Mineral salts | 4× Furs and pelts | 4× Water rights | 4× Medicinal herbs | 3× Pine planks | 3× Raw wool | 3× Transit trade | 3× Reeds and thatch | 3× Healing waters (bottled)
+lead export (printed): 14× Sacred wood | 10× Milled flour | 8× Ship passage | 6× Mineral salts | 4× Furs and pelts | 4× Water rights | 4× Quarried stone | 4× Medicinal herbs | 3× Pine planks | 3× Raw wool | 3× Reeds and thatch | 3× Healing waters (bottled)
+lead import (record): 19× Bulk grain (local grain fields depleted) | 13× Dressed stone (local quarry depleted) | 12× Wool | 12× Iron | 8× Iron ore (local iron mines exhausted) | 4× Timber (local managed woodland cleared) | 4× Shipbuilding timber (local shipbuilding stands cleared) | 4× Paper materials | 3× Luxury materials | 3× Precious metals | 1× Timber | 1× Stone
+lead import (printed): 19× Bulk grain (local grain fields depleted) | 13× Dressed stone (local quarry depleted) | 12× Wool | 12× Iron | 8× Iron ore (local iron mines exhausted) | 4× Timber (local managed woodland cleared) | 4× Shipbuilding timber (local shipbuilding stands cleared) | 4× Paper materials | 3× Luxury materials | 3× Precious metals | 1× Timber | 1× Stone
+route: 46× road | 21× river | 10× port | 8× crossroads · market: 85× true · guild: 85× true
+prosperity: 75× Prosperous | 10× Comfortable · crisis: 67× false | 18× true

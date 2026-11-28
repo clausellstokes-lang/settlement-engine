@@ -32,7 +32,7 @@
  * NO `it.each` AND NO GENERATED TITLES: the each-family park ceiling has zero headroom, so
  * every arm is a plain `it` with its loop inside.
  */
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { mkdtempSync, readFileSync, readdirSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
@@ -52,6 +52,7 @@ import {
   PREVIEW_OVERLAY,
   READER_CORPUS_ROSTER,
   CONTROL_CAMPAIGN_ID,
+  READER_NOW,
   configFromRow,
   composeReaderRegion,
   advanceReaderCampaign,
@@ -316,7 +317,21 @@ describe('the reader corpus is composed from the golden key', () => {
     // counted: on the CI runner (2026-09-16) all four dossier PDFs differed between two renders
     // of one world while every local render pair agreed, and a hash alone cannot say where.
     const scratch = mkdtempSync(join(tmpdir(), 'reader-corpus-twice-'));
-    const renderOnce = async (pass) => {
+    // ⛔ THE ARM HOLDS THE CLOCK (WORDS-2 unit E12, the tenth chair's PRERELEASE-LIST E12). A producer on this path reads
+    // the wall clock's DATE, so two renders of one world differed when the run crossed midnight UTC (point 115's gate:
+    // the step started 23:59:28 and ran 58 s). Each pass renders with `Date` held at the corpus's own instant
+    // (READER_NOW, the instant the corpus already pins for the PDF's CreationDate), released after, timers untouched.
+    // AND THE ARM PROVES ITS OWN HOLD: the clock OUTSIDE the hold is set to one second before midnight for the first
+    // pass and one second after it for the second, so a hold removed reds here at any hour, not only at midnight.
+    /** THE RUN'S WALL CLOCK, simulated: `Date` faked at `outside` for the pass (timers untouched), restored after. */
+    const atWallClock = async (/** @type {string} */ outside, /** @type {() => Promise<any>} */ fn) => {
+      vi.useFakeTimers({ toFake: ['Date'] });
+      vi.setSystemTime(new Date(outside));
+      try { return await fn(); } finally { vi.useRealTimers(); }
+    };
+    /** THE HOLD: the pass renders at the corpus's own instant, whatever the wall clock says. */
+    const holdingTheClock = (/** @type {() => Promise<any>} */ fn) => { vi.setSystemTime(new Date(READER_NOW)); return fn(); };
+    const renderOnce = (pass, outside) => atWallClock(outside, () => holdingTheClock(async () => {
       const { campaign, saves } = composeReaderRegion(row);
       const advanced = await advanceReaderCampaign({ campaign, saves, years: 1, seed: String(row.seed) });
       const outDir = join(scratch, pass);
@@ -324,9 +339,9 @@ describe('the reader corpus is composed from the golden key', () => {
         campaign: advanced.campaign, saves: advanced.saves, yearly: advanced.yearly, outDir,
       });
       return { documents, worldHash: advanced.yearly[0].worldHash, outDir };
-    };
-    const first = await renderOnce('first');
-    const second = await renderOnce('second');
+    }));
+    const first = await renderOnce('first', '2026-11-24T23:59:59.000Z');
+    const second = await renderOnce('second', '2026-11-25T00:00:01.000Z');
 
     expect(first.worldHash).toBe(second.worldHash);
     const drift = [];

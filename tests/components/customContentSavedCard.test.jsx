@@ -250,7 +250,7 @@ describe('CustomContentManager — the saved-item card', () => {
     render(<CustomContentManager search="" />);
 
     fireEvent.click(screen.getByRole('button', {
-      name: /Factions/,
+      name: /Powers/,
       pressed: false,
     }));
 

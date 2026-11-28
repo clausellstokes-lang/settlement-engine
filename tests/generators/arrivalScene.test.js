@@ -16,6 +16,7 @@ import {
   ARRIVAL_MEMORIES, ARRIVAL_PEOPLE, ARRIVAL_SENSES, ARRIVAL_TENSIONS,
 } from '../../src/data/arrivalProse.js';
 import { ARRIVAL_SCENES, STRESS_DESCS } from '../../src/data/narrativeData.js';
+import { textOf } from '../../src/domain/facts/textOf.js';
 import { STRESS_TYPE_MAP } from '../../src/data/stressTypes.js';
 import { nativeSemanticNames } from '../../src/domain/content/customContentSemanticAuthority.js';
 import { HISTORICAL_EVENTS_DATA } from '../../src/data/historyData.js';
@@ -47,7 +48,7 @@ const LIVING_MEMORY_CUT = (() => {
 afterEach(() => clearActiveRng());
 
 const NAME = 'Ashford';
-const render = (pool) => (pool || []).map((line) => line(NAME));
+const render = (pool) => (pool || []).map((line) => textOf(line)(NAME));
 
 /** Every line of every pool, with where it lives. */
 const ALL_LINES = [
@@ -226,7 +227,7 @@ describe('the beats are anchored: drawn where the fact is, never where it is not
 
 describe('the hook names only structures the settlement holds (the Voice Program wave 4)', () => {
   const STRESSES = Object.keys(STRESS_TYPE_MAP);
-  const vignettesOf = (type) => STRESS_DESCS[type].map((line) => line(NAME));
+  const vignettesOf = (type) => STRESS_DESCS[type].map((line) => textOf(line)(NAME));
 
   it('every registered stress carries at least two structure-free vignettes, the floor the filter stands on', () => {
     expect(STRESSES.length, 'anti-vacuity').toBeGreaterThan(10);
@@ -336,7 +337,7 @@ describe('the scene on real settlements', () => {
       // A stressed row's hook names no structure the settlement lacks (wave 4).
       const names = nativeSemanticNames(s.institutions).map((n) => n.toLowerCase())
         .filter((n) => !/^(?:access to|traveling|travelling) /.test(n));
-      const vignette = Object.values(STRESS_DESCS).flat().map((line) => line(s.name)).find((line) => s.arrivalScene.startsWith(line));
+      const vignette = Object.values(STRESS_DESCS).flat().map((line) => textOf(line)(s.name)).find((line) => s.arrivalScene.startsWith(line));
       if (vignette) expect(unheldClaims(vignette, names), `${i}: ${vignette}`).toEqual([]);
       for (const retired of ['magelight lamp post', 'A proper village', 'A market town of substance', "region's great urban centre"]) {
         // anchored: the length assertion above proves the scene rendered
@@ -347,7 +348,7 @@ describe('the scene on real settlements', () => {
     // The place beats are live on real settlements: most scenes carry a sense line.
     const senseLines = ARRIVAL_SENSES.flatMap((s) => [...s.lines, ...s.dominant]);
     const withSense = scenes.filter((text) => senseLines.some((line) => {
-      const probe = line('\u0000').split('\u0000');
+      const probe = textOf(line)('\u0000').split('\u0000');
       return probe.every((part) => text.includes(part));
     }));
     expect(withSense.length / scenes.length).toBeGreaterThan(0.6);
@@ -363,7 +364,7 @@ describe('THE SIGHT AGREES WITH THE MARKET SENTENCE (chair ruling T1-12, 2026-10
     // The SIGHT is the culture's built detail here, so every market-worded detail of the culture is the
     // set it may not print. (The PEOPLE and SENSE beats are outside T1-12 and are reported, not pinned.)
     const { CULTURE_PROFILES } = await import('../../src/data/cultureProfiles.js');
-    const forbidden = [MARKET_SIGHT, ...(CULTURE_PROFILES[resolveCultureProfileKey('germanic')]?.architecturalDetails || [])]
+    const forbidden = [MARKET_SIGHT, ...(CULTURE_PROFILES[resolveCultureProfileKey('germanic')]?.architecturalDetails || []).map(textOf)]
       .filter((d) => WORD.test(d)).map((d) => d.toLowerCase());
     expect(forbidden.length).toBeGreaterThan(0);
     const town = base({ culturalIdentity: { architecturalDetail: MARKET_SIGHT }, institutions: [{ name: 'Smithy', category: 'Crafts' }] });
@@ -397,12 +398,16 @@ describe('THE SIGHT AGREES WITH THE MARKET SENTENCE (chair ruling T1-12, 2026-10
   it('the generator\'s market predicate IS DS-GEN-13\'s, over real generated towns and the ruin filter', async () => {
     const { holdsMarket } = await import('../../src/generators/narrative/arrivalScene.js');
     const { marketPoolKey } = await import('../../src/domain/display/stateProse/generalStateProse.js');
+    // CENSUS-1b unit A (d): the pair is homed TOGETHER on the market fact, so the equality is
+    // re-keyed to the home: each reader equals `marketOf`, and so they equal each other.
+    const { marketOf } = await import('../../src/domain/facts/market.js');
     const rosters = goldenCorpus().slice(0, 24).map((config) => generateSettlementPipeline(config, null, { seed: config._seed, customContent: {} }).institutions);
-    rosters.push([{ name: 'Grand bazaar', status: 'ruined' }], [{ name: 'Annual fair' }], [{ name: 'Shambles' }], []);
+    rosters.push([{ name: 'Grand bazaar', status: 'ruined' }], [{ name: 'Annual fair' }], [{ name: 'Shambles' }], [{ name: 'Black market' }], []);
     let held = 0;
     for (const institutions of rosters) {
       const desk = marketPoolKey({ institutions, tradeRouteAccess: 'road' }) !== 'NO-MARKET';
       expect(holdsMarket(institutions)).toBe(desk);
+      expect(desk).toBe(marketOf({ institutions }));
       if (desk) held += 1;
     }
     expect(held, 'no roster held a market, so the agreement is one-sided').toBeGreaterThan(0);
@@ -417,11 +422,11 @@ describe('MASS MIGRATION NAMES ONE DIRECTION (chair ruling 2, 2026-10-30; ODQ §
 
   it('no arrival vignette and no pressure line, on either economy arm, tells a departure', async () => {
     const { PRESSURE_SENTENCES } = await import('../../src/generators/narrativeText.js');
-    const vignettes = STRESS_DESCS.mass_migration.map((line) => line(NAME));
+    const vignettes = STRESS_DESCS.mass_migration.map((line) => textOf(line)(NAME));
     const pressure = [
       ...PRESSURE_SENTENCES.mass_migration({ name: NAME, govFaction: 'the council', compound: { economyOutput: 80 } }),
       ...PRESSURE_SENTENCES.mass_migration({ name: NAME, govFaction: 'the council', compound: { economyOutput: 20 } }),
-    ];
+    ].map(textOf);
     expect(vignettes.length).toBe(6);
     expect(pressure.length).toBe(6);
     const failures = collectSeedFailures([...vignettes, ...pressure], (line) => {

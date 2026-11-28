@@ -510,15 +510,21 @@ function traditionBeat(a) {
   // town itself, so a seat-owned observance needs no attribution beyond the town).
   const named = (rec.ownerKind === 'faction' || rec.ownerKind === 'institution') && typeof rec.ownerLabel === 'string' && rec.ownerLabel
     ? rec.ownerLabel : null;
-  const ownerBit = named ? ` It is kept by ${named}, who answer for its fortune.` : '';
+  // AN INSTITUTION IS NOT A "WHO" (SW-9, the grammar defect SW-3 found: "It is kept by Common grazing
+  // land, who answer for its fortune."). A power is people and answers for the observance; an
+  // institution is a place or a body the observance is held at, and answers for nothing.
+  const byPower = named && rec.ownerKind === 'faction';
+  const ownerBit = !named ? '' : byPower ? ` It is kept by ${named}, who answer for its fortune.` : ` It is held at ${named}.`;
+  const keeper = byPower ? `${named} keep it` : `it is held at ${named}`;
+  const answerer = byPower ? `${named}, who answer for it` : named;
   const outcomeId = `tradition.${outcome}.${sid}.${year}`;
   const { phrase, summary } = traditionBeatProse({ outcome, name: rec.name, town: townName, ownerBit, seed: outcomeId });
   const headline = outcome === TRADITION_OUTCOME.CANCELLED
     ? `${townName} sets aside ${rec.name}`
     : `${rec.name} ${phrase} in ${townName}`;
   const reason = outcome === TRADITION_OUTCOME.CANCELLED
-    ? `Set aside under hard stress or a lean season. No observance was held, at a mild cost to ${named ? `the town's standing, borne lightly since ${named} keep it` : "the seat's standing"}.`
-    : `The observance was held and its fortune weighed: it ${positive ? 'lifted' : 'weighed on'} the town's trade and the standing of ${named ? `${named}, who answer for it` : 'the seat'}.`;
+    ? `Set aside under hard stress or a lean season. No observance was held, at a mild cost to ${named ? `the town's standing, borne lightly since ${keeper}` : "the seat's standing"}.`
+    : `The observance was held and its fortune weighed: it ${positive ? 'lifted' : 'weighed on'} the town's trade and the standing of ${named ? answerer : 'the seat'}.`;
   return {
     id: `wizard_news.${tick}.tradition.${sid}.${rec.id}.${year}`,
     tick,

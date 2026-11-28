@@ -10,12 +10,12 @@
 
 import { chooseOrPin, registerStep } from '../pipeline.js';
 import { generateSettlementName } from '../npcGenerator.js';
-import { generateFactions, generateConflicts } from '../powerGenerator.js';
+import { generateConflicts } from '../powerGenerator.js'; import { resolveFactionLabelsAtClose } from '../power/factionLabelClose.js'; // CENSUS-1i R-AW (MERGE-CAR: CENSUS-4 R12's fitFactionRoster and the grouping's generateFactions retired)
 // F8: re-render stress summaries with the real settlement name. resolveStress
 // (step 3) rolled them 16 steps ago with an empty name and stashed the
 // rng-derived choice in each entry's `summaryRoll`; we re-render here now that
 // the name exists.
-import { renderStressSummary } from '../stressNarrative.js';
+import { renderStressSummary } from '../stressNarrative.js'; import { factsOf } from '../../domain/facts/factsOf.js'; import { resolveSibling } from '../../domain/facts/drawDeclared.js'; import { STRESS_TYPE_SIBLINGS } from '../../data/stressTypes.js'; // CENSUS-2c: one line, so no cited line moves (W2-FIX-DATA-7: the catalogue cells' declared sets join it)
 import { generatePressureSentence, generateArrivalScene, generateCoherence } from '../narrativeGenerator.js';
 import { generateDefenseProfile } from '../defenseGenerator.js';
 import { settleCrimeLinesToSignal } from '../safetyProfile.js';
@@ -23,6 +23,9 @@ import { settleCrimeLinesToSignal } from '../safetyProfile.js';
 // watch captain, etc.) for any faction archetype that lacks them. Runs
 // at assembly so existing pipeline NPCs are deduplicated against.
 import { ensureFactionStructuralNpcs } from '../factionRoles.js';
+import { drawTies } from '../people/ties.js';
+import { seatFacesFoldedByDualHat } from '../people/representatives.js';
+import { settleNarrativesToRoster, settleStandingToRoster, settleTensionsToRoster, standingForceOf, standingRosterOf } from '../power/rosterText.js';
 // ODQ §810's tier-gated density law: sizes the political roster to the tier's
 // faction band. Dormant (returns its input by reference, no draw) for any world
 // whose own config carries no density-law marker.
@@ -42,11 +45,15 @@ import {
   clearActiveRng,
   setActiveRng,
 } from '../../kernel/rngContext.js';
-import { culturalNotesFor } from '../../domain/cultureProfiles.js';
+import { culturalNotesFor } from '../../domain/cultureProfiles.js'; import { foodwaysLineOf } from '../../domain/foodways.js'; // URBAN-FIX C-1: one line, so no cited line moves
 import {
   buildGenerationCoherenceReceipt,
 } from '../generationCoherence.js';
-import { storeTrueHooksOnly } from '../../domain/coherence/hookTruthRecord.js';
+import { storeTrueHooksOnly } from '../../domain/coherence/hookTruthRecord.js'; import { fishTradeTwinned } from '../../data/fishTradeTwinLines.js'; // F11: one line, so no cited line moves
+import { truePersonHooks } from '../people/personHooks.js';
+import { takeAllegianceReceipts } from '../../domain/people/allegiance.js';
+import { recordTrace } from '../../domain/trace.js';
+import { resolveGenerationWorldLaw } from '../generationContext.js';
 import {
   assertPowerEconomyFreshness,
   reconcilePowerStructure,
@@ -88,7 +95,7 @@ const UNPINNED = Symbol('assembleSettlement:unpinned');
 registerStep('assembleSettlement', {
   // structuralValidationPass provides ctx.structural — the coherence receipt
   // for the FINAL roster (Wave 4b moved it out of assembleInstitutions).
-  deps: ['generateNarratives', 'generatePopulation', 'corruptionPass', 'structuralValidationPass'],
+  deps: ['generateNarratives', 'generatePopulation', 'structuralValidationPass'], // ALLEGIANCE-CAR1 (J-2): corruptionPass retired; its roll is the seam's (domain/people/allegiance.js)
   reads: ['availableServices', 'culture', 'culturalIdentity', 'economicState', 'economicViability', 'effectiveConfig', 'generationContext', 'generationRepairs', 'history', 'institutions', 'isolationSupport', 'neighbourProfile', 'npcs', 'population', 'powerIntent', 'powerStructure', 'rawNeighbour', 'relationships', 'resourceAnalysis', 'settlementReason', 'spatialLayout', 'stress', 'structural', 'tier'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
   // The terminal step bundles the FINAL value of every re-derived key. Declared rather than
   // assumed: 'it runs last' is a fact about today's order, and the contract now checks it.
@@ -98,7 +105,7 @@ registerStep('assembleSettlement', {
   // summary in place with the real name (resolveStress rolled them name-blind) and
   // deletes the transient summaryRoll token — a declared in-place write of `stress`
   // (A+ P1.7 contract).
-  mutates: ['powerStructure', 'stress'],
+  mutates: ['powerStructure', 'stress', 'relationships', 'npcs', 'institutions'], // institutions: FAULTS-ROWS (the chair's FR14) — the late re-read (readHouseDescsLate) stores a refused description's twin on institutions[].desc in place; relationships: PEOPLE-1 CAST — the coherence seam appends the `other` mints' ties (people/castPowers.js); npcs: BAR6-PEOPLE 10e-temper — the seam's rankPowers (people/castPowers.js) yields a card's temperament to its secret in place (data/npcData.js :: temperamentYieldsToSecret)
   phase: 'assembly',
 }, (ctx, rng) => {
   // The runner hands the pins through the context under its reserved key; absent pins mean
@@ -128,7 +135,7 @@ registerStep('assembleSettlement', {
     name: settlementName,
     tier,
     population,
-    institutions,
+    institutions: fishTradeTwinned(institutions, economicState), // F11: a fish trade with no fish of its own or bought in is the cart's (data/fishTradeTwinLines.js), draw-free
     structuralViolations: structural?.violations || [],
     structuralSuggestions: structural?.suggestions || [],
     neighborRelationship: neighbourProfile || (rawNeighbour ? {
@@ -136,7 +143,8 @@ registerStep('assembleSettlement', {
       tier: rawNeighbour.tier,
       relationshipType: config._neighbourRelType || 'neutral',
       npcs:    rawNeighbour.npcs    || [],
-      factions: rawNeighbour.factions || [],
+      // The partner's POWERS (PEOPLE-5A, M-2), never its NPC grouping.
+      powerStructure: { factions: rawNeighbour.powerStructure?.factions || [] },
     } : null),
     economicState,
     spatialLayout,
@@ -162,7 +170,7 @@ registerStep('assembleSettlement', {
     // the same local expression of the culture choice. culturalNotes keeps the
     // established PDF/AI compatibility field while the structured record gives
     // future engineers the seven explicit dimensions behind it.
-    culturalIdentity,
+    culturalIdentity: culturalIdentity && foodwaysLineOf({ institutions, economicState }) ? Object.freeze({ ...culturalIdentity, foodways: foodwaysLineOf({ institutions, economicState }) }) : culturalIdentity, // URBAN-FIX C-1 ONE HOME: where the food record exists the stored foodways line IS the record's composed line (domain/foodways.js), the one the page prints; draw-free
     culturalNotes: culturalNotesFor(culturalIdentity),
     // Tier 1.2 — dual-write the stress array under both the legacy
     // `stress` name AND the canonical `stressors` name. Consumers that
@@ -202,13 +210,33 @@ registerStep('assembleSettlement', {
   // (stress + stressors — same object refs) and both shapes (bare object vs
   // array). Entries WITHOUT an own summaryRoll (custom-authored stressors that
   // carry their own summary) are left untouched.
+  // TAIL-CRISIS-5 (the chair's ruling K21; ORDER-MEASURE-1's cure C1b): each entry's roll and its CATALOGUE hook and note
+  // (the text as resolveStress stored it, before this pass resolves it) are kept here, so that THE LATE RE-READ below,
+  // after the last roster write, renders the same roll and resolves the same originals against the SETTLED record.
+  // Kept in the closure, never on the record: nothing of it persists or enters the golden hash.
+  /** @type {Map<object, { roll: unknown, crisisHook: unknown, viabilityNote: unknown }>} */
+  const stressLateReads = new Map();
+  /** One entry's summary, hook and note, rendered from its roll and its originals against the record as it stands. */
+  const readStressEntry = (/** @type {any} */ e, /** @type {{ roll: unknown, crisisHook: unknown, viabilityNote: unknown }} */ kept) => {
+    const facts = factsOf(settlement);
+    e.summary = renderStressSummary(e.type, settlement.name, kept.roll, e.direction, facts); // WIRING-W0: the entry's own direction; CENSUS-2c: declared sentences resolve (stressNarrative.js :: STRESS_SUMMARY_SIBLINGS) — MERGE-R2: both
+    // W2-FIX-DATA-7 (CENSUS-2 kind a; brief 5's ruling: this function only): the catalogue's own hook and note, stored
+    // on the entry, resolve through their declared sets (stressTypes.js :: STRESS_TYPE_SIBLINGS), draw-free. A hook
+    // with no admitted twin is kept and noted (the template the cast fills); a note with none is left off (nothing
+    // false is printed in its place). The hook stays the template: a twin carries no holder's name.
+    const cellOpts = { facts, poolId: 'stressTypes:STRESS_TYPE_SIBLINGS', surface: 'crisis', drawKind: /** @type {'T'} */ ('T') };
+    if (typeof kept.crisisHook === 'string') e.crisisHook = resolveSibling(kept.crisisHook, STRESS_TYPE_SIBLINGS, cellOpts);
+    if (typeof kept.viabilityNote === 'string') { const note = resolveSibling(kept.viabilityNote, STRESS_TYPE_SIBLINGS, { ...cellOpts, dropRefused: true }); if (note == null) delete e.viabilityNote; else e.viabilityNote = note; }
+  };
   const rerenderStressSummary = (container) => {
     if (!container) return;
     const entries = Array.isArray(container) ? container : [container];
     for (const e of entries) {
       if (e && typeof e === 'object'
           && Object.prototype.hasOwnProperty.call(e, 'summaryRoll')) {
-        e.summary = renderStressSummary(e.type, settlement.name, e.summaryRoll);
+        const kept = { roll: e.summaryRoll, crisisHook: e.crisisHook, viabilityNote: e.viabilityNote };
+        stressLateReads.set(e, kept);
+        readStressEntry(e, kept);
         delete e.summaryRoll;
       }
     }
@@ -220,9 +248,11 @@ registerStep('assembleSettlement', {
   // named child stream (THE VOICE PROGRAM wave 2, 2026-10-02): their pools and beats can
   // grow or reorder without any fact moving, because no later draw reads the position
   // they leave behind. The defense profile takes no draw.
-  settlement.pressureSentence = inAssemblySubstream(rng, 'pressure-sentence', () => generatePressureSentence(settlement));
+  // THE PEOPLE CAR (PEOPLE-4 TIES, R-P7): `pressureSentence` is written BELOW, after the ties are
+  // drawn (its relationship branch reads them; it runs on its own named child, so the move shifts
+  // no other draw).
   settlement.arrivalScene     = inAssemblySubstream(rng, 'arrival-scene', () => generateArrivalScene(settlement));
-  settlement.defenseProfile   = generateDefenseProfile(settlement);
+  settlement.defenseProfile   = generateDefenseProfile(settlement, keepOfRecord(settlement.economicState)); settlement.economicState = withGuardPaidFromDefence(settlement); settlement.structuralViolations = settleFundingReasons(settlement.structuralViolations, settlement.defenseProfile?.economicGates?.military); // COHERENCE-UPKEEP-5 (R3): pay reads the standing label; COHERENCE-UPKEEP-6 (ruling A): the guard's purse clause from the profile just written; BAR2-LABELS-2 LB4 (the chair's grant LB7): the validator's funding reasons by the military gate
 
   // The final-economy pass already proved that power consumed the final
   // prosperity/safety/food tuple. Assert that proof before applying the one
@@ -238,7 +268,7 @@ registerStep('assembleSettlement', {
       settlement.powerStructure,
       settlement.economicState,
       ctx.powerIntent,
-      { defenseLabel: settlement.defenseProfile.readiness.label, pins },
+      { defenseLabel: settlement.defenseProfile.readiness.label, militaryGate: settlement.defenseProfile.economicGates?.military, pins, forces: factsOf(settlement).defence, sentenceInstitutions: settlement.institutions }, // BAR6-POWERS (10/g): the settled roster's defence atoms (`defenceOf`, through the fact home this file imports), for `militaryForceLine.js`; BIRTH-1 D3: the settled roster, the power step's sentence re-written over it (economyReconciliation.js)
     );
     refreshPowerGenerationTraces(
       ctx,
@@ -266,6 +296,8 @@ registerStep('assembleSettlement', {
   // Runs BEFORE generateCoherence below, which is where the dispersal reads the
   // roster. Version-gated: a world whose own config carries no density-law
   // marker gets its powerStructure back by reference, with no draw taken.
+  // COHERENCE-POWERS-3 (F2): the roster the power step's standing sentences were written on, before the resize
+  const standingRoster = standingRosterOf(settlement.powerStructure?.factions || []);
   const resized = resizePoliticalRoster({
     tier,
     // X-46 car 4: the population tilt (read only under Register VII; no draw).
@@ -276,11 +308,15 @@ registerStep('assembleSettlement', {
     economicState: settlement.economicState,
     // The roster the population step actually produced is the TRUE mass here,
     // so the seat ceiling (R17: a house the mass cannot crew must not exist) is
-    // computed against a fact rather than against a second mass roll.
-    massOverride: (settlement.npcs || []).length,
+    // computed against a fact rather than against a second mass roll. COHERENCE-POWERS-3 (F1): the leader's office
+    // and the leader's house count as two, as they did before the dual hat folded the office's face into the house's.
+    massOverride: (settlement.npcs || []).length + seatFacesFoldedByDualHat(settlement),
+    // COHERENCE-POWERS 2B: the fold reads the final houses (applyDensityLaw.js :: foldKin)
+    institutions: settlement.institutions,
     rng,
   });
-  if (resized.powerStructure !== settlement.powerStructure) {
+  const rosterResized = resized.powerStructure !== settlement.powerStructure; // COHERENCE-POWERS-3 (F2), read below
+  if (rosterResized) {
     settlement.powerStructure = resized.powerStructure;
   }
 
@@ -293,7 +329,7 @@ registerStep('assembleSettlement', {
   // LABEL, which this never touches).
   const settledEconomy = settleCrimeLinesToSignal(
     settlement.economicState,
-    { seats: settlement.powerStructure?.factions, estate: settlement.institutions },
+    { seats: settlement.powerStructure?.factions, estate: settlement.institutions, tensions: settlement.history?.currentTensions, services: settlement.availableServices },
   );
   if (settledEconomy !== settlement.economicState) settlement.economicState = settledEconomy;
 
@@ -303,9 +339,13 @@ registerStep('assembleSettlement', {
   const coherenceUpdates = inAssemblySubstream(
     rng,
     'canonical-coherence',
-    coherenceRng => generateCoherence(settlement, coherenceRng, pins),
+    // FIX-PUBLIC-VEIL (the second seat): the record's seed salts a veiled mint's opaque id at the cast seam
+    coherenceRng => generateCoherence(settlement, coherenceRng, pins, ctx._seed),
   );
   Object.assign(settlement, coherenceUpdates);
+  // ALLEGIANCE-CAR1 (2026-11-08): the hidden allegiances' receipts, left by the coherence seam, recorded on the
+  // run's deterministic clock under the step label `people-allegiance` (domain/edit/tracePartition.js).
+  for (const receipt of takeAllegianceReceipts(settlement)) recordTrace(ctx, /** @type {any} */ (receipt));
   // Rung 1 N1: faction power totals 100 on every path, the held-roster one included (whose
   // coherence tail skips the dispersal that conserves it). By reference for v1 and for a
   // roster already at 100; no draw. A HELD powerStructure is the DM's and is not rewritten.
@@ -314,6 +354,13 @@ registerStep('assembleSettlement', {
       config: settlement.config, powerStructure: settlement.powerStructure,
     });
     if (conserved !== settlement.powerStructure) settlement.powerStructure = conserved;
+    // COHERENCE-POWERS-3 (F2): every text that names a power reads the final roster (power/rosterText.js). Only where
+    // the density law moved the roster; the power's last write is the conservation just above.
+    if (rosterResized) {
+      settlement.powerStructure = settleStandingToRoster(settlement.powerStructure, standingRoster, standingForceOf(settlement.institutions));
+      settlement.powerStructure = settleNarrativesToRoster(settlement.powerStructure, standingRoster);
+      settlement.history = settleTensionsToRoster(settlement.history, settlement.powerStructure, standingRoster);
+    }
   }
 
   // Faction-to-NPC coupling. Walks every faction; for each archetype
@@ -329,12 +376,32 @@ registerStep('assembleSettlement', {
   // disagree about what "held" means. It takes NO draw at any tier, so skipping it consumes
   // nothing and moves no stream.
   if (chooseOrPin(pins, 'npcs', () => UNPINNED) === UNPINNED) {
+    const castIds = new Set((settlement.npcs || []).map((npc) => npc?.id));
     const withStructural = ensureFactionStructuralNpcs(
       settlement,
       ctx.generationContext,
     );
     Object.assign(settlement, withStructural);
+    // THE PEOPLE CAR (PEOPLE-4 TIES, R-P7): a card the PRE-LAW appender adds (a v1 world only;
+    // under the density law it appends nothing) arrives after the coherence seam drew the ties,
+    // so it draws its ONE outgoing tie here, over the whole roster, on its own keyed fork
+    // (`people-ties-late::people-ties::<card id>`), and so does a card the seam left untied
+    // because it was alone there. The cards tied at the seam cannot name a late card.
+    const ids = (settlement.npcs || []).map((npc) => npc?.id);
+    if (ids.some((id) => !castIds.has(id)) && chooseOrPin(pins, 'relationships', () => UNPINNED) === UNPINNED) {
+      const tied = new Set((settlement.relationships || []).map((tie) => tie?.from));
+      const late = new Set(ids.filter((id) => !tied.has(id)));
+      settlement.relationships = [
+        ...(settlement.relationships || []),
+        ...inAssemblySubstream(rng, 'people-ties-late', (lateRng) => drawTies(
+          settlement.npcs, { config: settlement.config || effectiveConfig, institutions: settlement.institutions || [], tier: settlement.tier, government: settlement.powerStructure?.government ?? null }, lateRng, { sources: late },
+        )),
+      ];
+    }
   }
+
+  // The pressure line, on its own 'pressure-sentence' child, now that the ties exist (PEOPLE-4 TIES).
+  settlement.pressureSentence = inAssemblySubstream(rng, 'pressure-sentence', () => generatePressureSentence(settleCrisisBodyLines(pins, settlement))); // BIRTH-1 D7: the power step's crisis sentence first reads the settled roster (settleCrisisBodyLines, at the END), no draw
 
   // ── GS-2 ONE FACTION SET (chair ruling on G-SEAMS S2, ODQ §934.101). The power factions are
   // the factions. `factions` groups the FINAL roster by each NPC's power affiliation and mints
@@ -344,11 +411,13 @@ registerStep('assembleSettlement', {
   // stream, so they move nothing generated after them, and a town with no crossing tie has no
   // conflict row. Under a held roster both re-derive from the held NPCs: a pure projection and
   // a seed-stable stream.
-  settlement.factions = generateFactions(settlement.npcs, settlement.powerStructure?.factions);
+  // PEOPLE-LAND (M-2, the shim out): the NPC grouping `settlement.factions` is no longer built; a
+  // card's powers are its memberships and the powers are `powerStructure.factions`. MERGE-CAR: CENSUS-4
+  // R12's roster fitter, which ran here before the grouping, is retired (the chair's SC-1 ruling).
   settlement.conflicts = inAssemblySubstream(
     rng,
     'faction-conflicts',
-    () => generateConflicts(settlement.factions, settlement.relationships || [], effectiveConfig, settlement.institutions || []),
+    () => generateConflicts(settlement.powerStructure?.factions || [], settlement.relationships || [], effectiveConfig, settlement.institutions || [], settlement.npcs || [], settlement.defenseProfile),
   );
   if (settlement.powerStructure) {
     settlement.powerStructure = { ...settlement.powerStructure, conflicts: settlement.conflicts };
@@ -365,9 +434,39 @@ registerStep('assembleSettlement', {
   // too, so the dual-written addresses stay one list.) A HELD ROSTER IS NOT RE-WRITTEN: under a
   // held `npcs` pin the NPCs' hooks are the held record's, gated on the same key and primitive
   // as the structural appender above (the conflicts are re-derived on every run, never held).
-  Object.assign(settlement, storeTrueHooksOnly(settlement, {
-    npcsHeld: chooseOrPin(pins, 'npcs', () => UNPINNED) !== UNPINNED,
-  }));
+  const npcsHeld = chooseOrPin(pins, 'npcs', () => UNPINNED) !== UNPINNED;
+  Object.assign(settlement, storeTrueHooksOnly(settlement, { npcsHeld }));
+  // ONE TRUE HOOK PER CARD (PEOPLE-3 HOOKS): a card whose one hook the check above refused takes
+  // the next true line of its own pool, draw-free (people/personHooks.js); a held roster is not
+  // re-written, under the same gate.
+  if (!npcsHeld) {
+    const npcs = truePersonHooks(settlement, resolveGenerationWorldLaw(ctx.generationContext, ctx.effectiveConfig || {}).portKind);
+    if (npcs !== settlement.npcs) settlement.npcs = npcs;
+  }
+  if (chooseOrPin(pins, 'powerStructure', () => UNPINNED) === UNPINNED) resolveFactionLabelsAtClose(settlement); // CENSUS-1i R-AW: a label whose fact settles late resolves here, against the final roster, after every roster writer (MERGE-CAR: after the people car's true-hook pass; the rename cascades through `memberships[].power` and a minted card's `institution.key`) (no roll); a HELD powerStructure is the DM's and is not renamed (EM-R3, LANDING-R2)
+  // ── THE LATE RE-READ (TAIL-CRISIS-5, the chair's ruling K21; ORDER-MEASURE-1 C1b, the cure-(b) shape of A6/A8/A12/A13).
+  // ⛔ AFTER THE LAST ROSTER WRITE (the resize, the reconcile, the label close above): each stress entry the name's pass (F8)
+  // rendered is rendered again from its KEPT roll, and its CATALOGUE hook and note (the originals, not the text the
+  // first pass left: a twin that is not itself a key, and a note the first pass dropped, are re-decided here) are resolved
+  // again, against the SETTLED record. Draw-free (the slot keeps its roll). A declaration whose needs read the powers
+  // (`rival power`, `shared power`, `ruling body`) is true here and nowhere earlier: the stored text is this pass's.
+  // THE WINDOW: between the first pass and this one (the arrival scene to the label close) the entry holds the first
+  // pass's text; no writer in that window reads a stress entry's summary, hook or note (TAIL-CRISIS-5, by grep), and
+  // whatever is added there must not, or must read it here. @enforced-by tests/generators/stressLateReRead.test.js
+  for (const [e, kept] of stressLateReads) readStressEntry(e, kept);
+  if (chooseOrPin(pins, 'institutions', () => UNPINNED) === UNPINNED) readHouseDescsLate(settlement); // TAIL-HOUSES-5 (H20): the late re-read reaches a house's description (below); a HELD roster is the DM's
+
+  // Propagate the in-pipeline causal trace onto the settlement so
+  // downstream consumers (PipelineRail, AI overlay, PDF) can read it.
+  // The trace is built up across the run by `recordTrace(ctx, ...)`
+  // calls inside individual steps; we copy it through here so the
+  // settlement carries the receipt of its own generation. ⛔ BEFORE THE RECEIPT
+  // (lane REVIEW-INTAKE-2 unit 6): the receipt's provenance reads the trace off the
+  // settlement, so a copy made after it reported "No step trace was persisted" on
+  // every world that carried one (tests/generators/receiptReadsPersistedTrace.test.js).
+  if (Array.isArray(ctx.simulationTrace) && ctx.simulationTrace.length) {
+    settlement.simulationTrace = ctx.simulationTrace;
+  }
 
   // A durable, seed-stable receipt over the FINAL player-facing dossier.
   // Repairs happen in their owning passes; this boundary proves that the
@@ -382,15 +481,6 @@ registerStep('assembleSettlement', {
       generationRepairs: ctx.generationRepairs,
     },
   );
-
-  // Propagate the in-pipeline causal trace onto the settlement so
-  // downstream consumers (PipelineRail, AI overlay, PDF) can read it.
-  // The trace is built up across the run by `recordTrace(ctx, ...)`
-  // calls inside individual steps; we copy it through here so the
-  // settlement carries the receipt of its own generation.
-  if (Array.isArray(ctx.simulationTrace) && ctx.simulationTrace.length) {
-    settlement.simulationTrace = ctx.simulationTrace;
-  }
 
   // Deterministic id: normalizeSettlement uses `_seed` to mint a stable
   // settlement id (idFromSeed). Without _seed on the object at the
@@ -415,5 +505,94 @@ registerStep('assembleSettlement', {
   // config + _config) that keeps a what-if regeneration from erasing what the
   // DM's events did. Order matters: re-promotion dedupes against the
   // GENERATION-stamped twins the stressor promotion just minted.
-  return { settlement: reapplyEventConditions(promoteStressorsToConditions(normalizeSettlement(settlement))) };
+  return { settlement: settleMeritsTail(pins, reapplyEventConditions(promoteStressorsToConditions(Object.assign(normalizeSettlement(settlement), { generatorVersion: GENERATOR_VERSION })))) }; // GUARD (R24j 2): a BIRTH stamps the engine over the load's legacy stamp, in that key's own place (a load never stamps the current). FORTUNE U5a (the chair's ruling (A), 18:38 UTC): the merits of rule, the step's TAIL (`settleMeritsTail`, at the END)
 });
+import { keepOfRecord } from '../../domain/facts/keep.js'; // at the END on purpose: this file's writes are cited by LINE (COHERENCE-UPKEEP)
+import { settleFundingReasons } from '../structuralValidator.js'; import { keptGuardLine, purseWordOfBand } from '../safetyProfile.js'; import { economicSurvivalBandOf } from '../../domain/display/defenseScoreBands.js'; import { standingLabelOf } from '../../domain/facts/keep.js'; // at the END for the same reason (COHERENCE-UPKEEP-6)
+
+/**
+ * THE GUARD ASSESSMENT SAYS WHAT THE TOWN CAN PAY FROM ONE HOME (COHERENCE-UPKEEP-6, the chair's ruling A on the
+ * third read): the Economic Survival band of the defence profile just written (`economicSurvivalBandOf`), so it is
+ * resolved here, after the profile. It reads defence; nothing defence reads is written by it (the power
+ * fingerprint reads the safety label, not this text). At the END of the file so no cited line moves.
+ * @param {any} settlement @returns {any} the economic state, its guard assessment resolved
+ */
+function withGuardPaidFromDefence(settlement) {
+  const es = settlement.economicState;
+  const safety = es?.safetyProfile;
+  if (!safety || typeof safety.guardEffectivenessDesc !== 'string') return es;
+  const pay = purseWordOfBand(economicSurvivalBandOf(settlement), standingLabelOf(es));
+  return { ...es, safetyProfile: { ...safety, guardEffectivenessDesc: keptGuardLine(safety.guardEffectivenessDesc, settlement.institutions || [], pay, { forceScore: settlement.defenseProfile?.scores?.military, tradeDependencies: es.tradeDependencies, militaryGate: settlement.defenseProfile?.economicGates?.military }) } }; // UPKEEP-8: the guard line's two readings of the record
+}
+
+// ── THE LATE RE-READ OF A HOUSE'S DESCRIPTION (TAIL-HOUSES-5, the chair's ruling H20; the pass K21 built, reached to the
+// houses). A description whose claim reads the powers is declared in `institutionDescVariants.js :: DESC_LATE_SIBLINGS`
+// (keyed by the whole description; the draw never reads it). Here, after the last roster write, a stored description that
+// is such a key (in the tier noun the draw spoke it in) resolves against the SETTLED record, and the twin is stored where
+// the original is refused. Draw-free; nothing declared, nothing written (byte-identical); a description a later writer
+// changed is no key and is left. @enforced-by tests/generators/houseDescLateReRead.test.js
+/** @param {any} settlement */
+function readHouseDescsLate(settlement) {
+  const keys = Object.keys(DESC_LATE_SIBLINGS);
+  if (!keys.length || !Array.isArray(settlement?.institutions)) return;
+  const noun = tierNounFor(settlement.tier);
+  const spoken = new Map(keys.map((k) => [speakTierNoun(k, noun), k]));
+  const facts = factsOf(settlement);
+  // FAULTS-ROWS (the chair's ruling FR20 (3)): the draw-time sibling sets FIRST, on the final facts. The draw reads only the
+  // FORCED crises (`assembleInstitutions.js :: settledStressTypes`: the confirm pass may drop an emergent one), so an emergent
+  // crisis that survived is read here, by the twins that exist (no new text); the first admitted member, as the draw resolves
+  // it (none admitted: kept and noted). Then the late table reads the result, as before.
+  const drawSpoken = new Map(Object.keys(DESC_VARIANT_SIBLINGS).map((k) => [speakTierNoun(k, noun), k]));
+  for (const inst of settlement.institutions) {
+    const drawKey = inst && typeof inst.desc === 'string' ? drawSpoken.get(inst.desc) : undefined;
+    if (drawKey !== undefined) {
+      const drawn = resolveSibling(drawKey, DESC_VARIANT_SIBLINGS, { facts, poolId: 'institutionDescVariants:DESC_VARIANT_SIBLINGS', surface: 'institutions', drawKind: 'H' });
+      if (typeof drawn === 'string' && drawn !== drawKey) inst.desc = speakTierNoun(drawn, noun);
+    }
+    const key = inst && typeof inst.desc === 'string' ? spoken.get(inst.desc) : undefined;
+    if (key === undefined) continue;
+    const text = resolveSibling(key, DESC_LATE_SIBLINGS, { facts, poolId: 'institutionDescVariants:DESC_LATE_SIBLINGS', surface: 'institutions', drawKind: 'H' });
+    if (typeof text === 'string' && text !== key) inst.desc = speakTierNoun(text, noun);
+  }
+}
+import { DESC_LATE_SIBLINGS, DESC_VARIANT_SIBLINGS } from '../../data/institutionDescVariants.js'; import { speakTierNoun } from '../../domain/display/stateProse/stateProseKernel.js'; import { tierNounFor } from '../../domain/display/stateProse/weaveBlock.js'; // TAIL-HOUSES-5 (H20): at the END, as above (this file's writes are cited by LINE)
+/**
+ * THE MERITS OF RULE, THE STEP'S TAIL (FORTUNE U5a, the chair's ruling (A) of 2026-11-20 18:38 UTC), written out of
+ * the step's `return` line by U5a-CURE (the chair's rule of 20:17 UTC), the same behaviour. It runs before
+ * resolveCrisisCast; law 2 only (law 1: `settleMeritsOfRule` returns the record untouched); a HELD powerStructure is
+ * the DM's and is not re-merited. At the END of the file so no cited line moves.
+ * @param {any} pins the step's pins
+ * @param {any} settlement the assembled record
+ * @returns {any} the record, its merits of rule settled
+ */
+function settleMeritsTail(pins, settlement) {
+  if (chooseOrPin(pins, 'powerStructure', () => UNPINNED) === UNPINNED) {
+    return settleMeritsOfRule(settlement, { bandFor: legitimacyBandFor, recapture: withCaptureRelations, restand: settleStandingToLegitimacy });
+  }
+  return settlement;
+}
+// FORTUNE U5a: at the END, as above (this file's writes are cited by LINE); one import a line (U5a-CURE)
+import { settleMeritsOfRule } from '../../domain/fortune/fortuneMerits.js';
+import { legitimacyBandFor, withCaptureRelations } from '../factionDynamics.js';
+import { settleStandingToLegitimacy } from '../power/rosterText.js';
+import { GENERATOR_VERSION } from '../../domain/settlement.schema.js'; // GUARD (R24j 2): at the END, as above (this file's writes are cited by LINE)
+/**
+ * THE CRISIS NAMES ONLY WHAT THE PLACE HOLDS (BIRTH-1 D7; the tenth chair's rulings G17, G18 of 2026-11-25). The power step
+ * writes its crisis sentence (`recentConflict`) before the roster is resized; a sentence that names the crisis's own body (the
+ * creditor's agent, a second congregation) resolves here, sentence by sentence, against the SETTLED roster
+ * (`data/powerSiblings.js :: CRISIS_BODY_SIBLINGS`, the atom `crisis body: <kind>`), before the pressure line reads the record.
+ * No roll. A HELD powerStructure is the DM's and is not re-worded. At the END of the file so no cited line moves.
+ * @param {any} pins the step's pins
+ * @param {any} settlement the assembled record
+ * @returns {any} the record, its crisis sentence true of its roster
+ */
+function settleCrisisBodyLines(pins, settlement) {
+  const power = settlement.powerStructure;
+  if (chooseOrPin(pins, 'powerStructure', () => UNPINNED) !== UNPINNED || typeof power?.recentConflict !== 'string') return settlement;
+  const opts = { facts: () => factsOf(settlement), poolId: 'powerSiblings:CRISIS_BODY_SIBLINGS', surface: 'power', drawKind: /** @type {const} */ ('T') };
+  // sentence by sentence (as `drawDeclared.js :: resolveSiblingSentences` splits), through the one door this step already calls
+  const line = power.recentConflict.split(/(?<=[.!?])(\s+)/).map((part) => resolveSibling(part, CRISIS_BODY_SIBLINGS, opts)).join('');
+  if (line !== power.recentConflict) settlement.powerStructure = { ...power, recentConflict: line };
+  return settlement;
+}
+import { CRISIS_BODY_SIBLINGS } from '../../data/powerSiblings.js'; // BIRTH-1 D7: at the END, as above (this file's writes are cited by LINE)

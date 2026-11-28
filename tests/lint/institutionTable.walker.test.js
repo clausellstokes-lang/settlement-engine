@@ -210,8 +210,36 @@ describe('the column census, measured across the estate', () => {
     // 37b1e746d rung1-pins → 1,908 · 6ca454d2b x46-3 I7 re-key → 1,890 · 11467ed57 rung1-pins final → 1,881 ·
     // 6d84aa834 rung1b-f6 budget floor → 1,925. The populations and the institution budget moved; the liveness
     // anchor is unchanged in kind.
-    expect(serviceRows, 'the header claims 1,925 instantiated service rows over these thirty')
-      .toBe(1925);
+    // ⭐ RE-MEASURED 2026-11-07 (the chair, at the integration merge lane/integration-2026-11-07): 1,925 → 1,853,
+    // ONE CAUSE, the review-intake lane (tip 63a7cd852; CONFIRMED red at the same figure on that lane's own tip and at the
+    // merged tip 262e8b255 alike): its unit 2 made the record true — a proxy is not a provider, the twelve former proxy
+    // hosts own their menus and `institutionServiceKeys.generated.js` was regenerated (69960e5d9) — so fewer rows are
+    // instantiated over the same thirty (PLAUSIBLE as the unit; the lane is the measured cause, not bisected by unit).
+    // The liveness anchor is unchanged in kind.
+    // ⭐ RE-MEASURED 2026-11-07 (LANDING-R2 seat C2, the pool census composed; ODQ §934.105): 1,925 → 1,920, ONE cause.
+    // Bisected over the census lineage's first-parent chain (bf263a78d 1,925 .. e36e4916f 1,920) by this walk's own sum:
+    // census-1f unit 1c (9eee701c0, "the per-definition service roll resolves through drawDeclared") 1,925 → 1,920
+    // (thorp-1, village-0, town-1, metropolis-0, metropolis-4 one row each). Rung 1's final tip 1bff51c6d reads 1,925
+    // and the composed tip 1,920 with the same per-settlement rows, so no interaction with rung 1.
+    // ⭐ RE-MEASURED 2026-11-07 (MERGE-R2, the integration merge of the rung-2 landing; re-keyed with its cause): the two
+    // parents read 1,853 (the integration side, the review-intake's unit 2 above: -72) and 1,920 (the rung-2 landing,
+    // census-1f unit 1c: -5) from the shared 1,925; the merged tip reads 1,849 = 1,925 - 72 - 5 + 1, the two causes
+    // composed and one row of INTERACTION (the census's declared service roll over the review-intake's regenerated
+    // service keys; PLAUSIBLE as attributed, not bisected per settlement). The liveness anchor is unchanged in kind.
+    // ⭐ RE-MEASURED 2026-11-13 (STYLE-2-MERGE point 47 (2026-11-13, the COHERENCE-AGREE merge 22cc9ef7d; a figure its drafted record names for the merge seat)): 1,849 -> 1,843, the draft's own
+    // figure exactly (the lane's tip reads 1843 from the same 1849); the liveness anchor is unchanged in kind.
+    // ⭐ RE-MEASURED 2026-11-12 (COHERENCE-UPKEEP, the chair's ruling (A) on the services STOP): 1,849 → 1,834, ONE
+    // cause, c19e96e23 — services are kept as far as the place can pay, by a draw-free roll after the seeded one, so the
+    // rule only takes rows away (0 added on the lane's 360). The liveness anchor is unchanged in kind.
+    // ⭐ RE-MEASURED 2026-11-13 (COHERENCE-UPKEEP-5, the review's F2): 1,834 → 1,837, ONE cause — a house's own
+    // service (its catalogue's guaranteed rows and every rite) is never held back by the upkeep roll, so 3 rows the
+    // roll had taken from standing houses here come back (0 removed). The liveness anchor is unchanged in kind.
+    // ⭐ RE-MEASURED 2026-11-14 (UPKEEP-10, THE MERGE of lane/integration-2026-11-07 at 976db5b19 into the defence
+    // lane): 1,837, MEASURED by this arm at the merged tree. The two sides: the line's 1,843 is the figure its base
+    // 69b53decd already measured (red there against 1,849): no cause of the line's since the base; the lane's tip
+    // f943c9772 measures 1,837 (its two causes above). The merge equals the lane's figure: no third cause.
+    expect(serviceRows, 'the header claims 1,837 instantiated service rows over these thirty')
+      .toBe(1837);
     expect(
       carriers,
       'a generation step began writing `settlement.services`. The schema declares the field and'
@@ -436,7 +464,10 @@ describe('THE HONESTY RULE — a column is `closed` only where every source the 
     // RE-MEASURED 2026-11-06 (LANDING-7 lane F): 23 → 21, bisected by stage — d4bf6431c (x46-2 thresholds) 23 → 22,
     // 90dc22f18 (x46-3 budget) 22 → 21; `(street gang)` left the dropped set at 1264a8152 (x46-train). Same seeds,
     // a re-generated world; the filter still drops real rows (the line below).
-    expect(orphans).toBe(21);
+    // RE-MEASURED 2026-11-07 (the chair, at the integration merge): 21 → 22, the review-intake lane (63a7cd852; the same
+    // figure on its own tip and at 262e8b255), the same re-generated world as the service-row move above; the filter
+    // still drops real rows (the line below).
+    expect(orphans).toBe(22);
     expect([...dropped].some((name) => /lawless|informal|street gang|arcane underground|smuggling/i.test(name))).toBe(true);
     // anchored: the line above proves the filter dropped real rows, so an empty leak list
     // cannot be an empty scan

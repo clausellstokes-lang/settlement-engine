@@ -22,7 +22,7 @@ export default function UnassignedLedger({
   allModifiers, onView, deleteId, setDeleteId, deleteConfirmed,
   campaigns, addToCampaign, removeFromCampaign,
   onReactivate, canReactivate, reactivatingId,
-  onCanonize, onAdvanceTime, onCreateCampaign, onNavigate,
+  onCanonize, onCreateCampaign, onNavigate,
   canManageCampaigns, selectMode, selectedIds, onToggleSelect,
 }) {
   const mobile = useIsMobile();
@@ -70,7 +70,6 @@ export default function UnassignedLedger({
                 canReactivate={canReactivate}
                 reactivatingId={reactivatingId}
                 onCanonize={onCanonize}
-                onAdvanceTime={onAdvanceTime}
                 onCreateCampaign={onCreateCampaign}
                 onNavigate={onNavigate}
                 canManageCampaigns={canManageCampaigns}

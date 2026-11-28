@@ -1,0 +1,74 @@
+[gate-tail] start:  03:00:07 up 20 min,  0 user,  load average: 4.71, 3.45, 1.71 · cores: 4
+houses no longer marked 1505
+ 137 Vintner unmarked beside "Needed, and not brought in: grapes" · r2r-town-18, r2r-town-22, r2r-town-33
+ 134 Weavers/Textile workers unmarked, the page silent of wool · r2r-town-8, r2r-town-14, r2r-town-17
+ 115 Cobbler's guild unmarked, the page silent of hides · r2r-town-6, r2r-town-14, r2r-town-15
+ 106 Fuller unmarked, the page silent of wool · r2r-village-14, r2r-village-26, r2r-village-28
+  92 Potter unmarked beside "Needed, and not brought in: clay" · r2r-village-16, r2r-village-48, r2r-village-49
+  85 Tanner unmarked, the page silent of hides · r2r-town-6, r2r-town-14, r2r-town-16
+  70 Brickmaker unmarked beside "Needed, and not brought in: clay" · r2r-village-6, r2r-town-16, r2r-town-28
+  63 Potter unmarked, the page silent of clay · r2r-village-4, r2r-village-27, r2r-town-14
+  61 Tanners unmarked, the page silent of hides · r2r-town-2, r2r-town-13, r2r-town-15
+  54 Brickmaker unmarked, the page silent of clay · r2r-town-10, r2r-town-33, r2r-town-34
+  40 Carpenters unmarked, the page silent of timber · r2r-town-5, r2r-town-22, r2r-town-31
+  39 Cooper unmarked, the page silent of timber · r2r-village-52, r2r-town-8, r2r-town-13
+  33 Sawmill unmarked, the page silent of timber · r2r-village-42, r2r-village-52, r2r-town-2
+  30 Sawmill unmarked beside "Needed, and not brought in: timber" · r2r-village-4, r2r-village-26, r2r-town-34
+  27 Apothecary unmarked, the page silent of herbs · r2r-city-21, r2r-city-35, r2r-metropolis-5
+  26 Cooper unmarked beside "Needed, and not brought in: timber" · r2r-village-26, r2r-town-53, r2r-city-7
+  26 Carpenters unmarked beside "Needed, and not brought in: timber" · r2r-town-34, r2r-town-55, r2r-city-7
+  24 Sawmill unmarked beside "Needed, and not brought in: mountain_timber" · r2r-village-6, r2r-village-14, r2r-village-15
+  22 Woodcarver unmarked beside "Needed, and not brought in: timber" · r2r-village-4, r2r-town-49, r2r-city-7
+  22 Carpenters unmarked beside "Needed, and not brought in: mountain_timber" · r2r-city-0, r2r-city-3, r2r-city-40
+  22 Furrier's district unmarked, the page silent of game · r2r-metropolis-7, r2r-metropolis-8, r2r-metropolis-12
+  20 Woodcarver unmarked, the page silent of timber · r2r-town-32, r2r-city-6, r2r-city-28
+  19 Cooper unmarked beside "Needed, and not brought in: mountain_timber" · r2r-village-15, r2r-city-3, r2r-metropolis-4
+  18 Chandler unmarked, the page silent of herbs · r2r-metropolis-6, r2r-metropolis-11, r2r-metropolis-16
+  15 Tailor unmarked, the page silent of livestock · r2r-village-20, r2r-city-3, r2r-metropolis-1
+  15 Dyer unmarked, the page silent of livestock · r2r-city-3, r2r-metropolis-1, r2r-metropolis-11
+  15 Woodcarver unmarked beside "Needed, and not brought in: mountain_timber" · r2r-city-3, r2r-metropolis-28, r2r-metropolis-41
+  14 Tailor's guild unmarked, the page silent of livestock · r2r-city-3, r2r-metropolis-1, r2r-metropolis-11
+  13 Blacksmiths unmarked, the page silent of iron · r2r-city-5, r2r-city-17, r2r-city-32
+  13 Specialized metalworkers unmarked, the page silent of iron · r2r-city-5, r2r-city-17, r2r-city-32
+  12 Glassblower unmarked beside "Needed, and not brought in: glass sand" · r2r-town-8, r2r-town-35, r2r-town-40
+  11 Blacksmith unmarked, the page silent of iron · r2r-village-4, r2r-village-16, r2r-village-22
+  10 Resident smith unmarked, the page silent of iron · r2r-hamlet-10, r2r-hamlet-19, r2r-hamlet-26
+  10 Carpenter unmarked, the page silent of timber · r2r-hamlet-17, r2r-hamlet-32, r2r-village-13
+   9 Carpenter unmarked beside "Needed, and not brought in: timber" · r2r-hamlet-45, r2r-hamlet-52, r2r-hamlet-57
+   7 Cobbler unmarked, the page silent of hides · r2r-village-27, r2r-village-37, r2r-village-44
+   7 Ropemaker unmarked, the page silent of reeds · r2r-metropolis-0, r2r-metropolis-8, r2r-metropolis-17
+   5 Cooper unmarked beside "Needed, and not brought in: Timber and building wood" · r2r-town-7, r2r-metropolis-19, r2s-indebted-metropolis-0
+   5 Carpenters unmarked beside "Needed, and not brought in: Timber and building wood" · r2r-metropolis-19, r2s-indebted-metropolis-0, r2s-succession_void-town-2
+   4 Resident smith unmarked beside "Needed, and not brought in: metals" · r2r-hamlet-30, r2r-hamlet-35, r2s-politically_fractured-hamlet-0
+   4 Fishmonger unmarked beside "Needed, and not brought in: fish" · r2r-village-49, r2r-village-57, r2s-succession_void-village-0
+   4 Sawmill unmarked beside "Needed, and not brought in: Timber and building wood" · r2r-metropolis-19, r2s-indebted-metropolis-0, r2s-monster_pressure-village-0
+   4 Woodcarver unmarked beside "Needed, and not brought in: Timber and building wood" · r2r-metropolis-19, r2s-indebted-metropolis-0, r2s-insurgency-village-3
+   3 Carpenter unmarked beside "Needed, and not brought in: mountain_timber" · r2r-hamlet-36, r2r-village-15, r2s-recently_betrayed-village-0
+   3 Tannery unmarked, the page silent of livestock or hides · r2r-village-9, r2s-infiltrated-village-0, r2s-monster_pressure-village-2
+   3 Tannery unmarked beside "Needed, and not brought in: animal hides" · r2r-village-14, r2s-religious_conversion-village-3, r2s-wartime-village-2
+   3 Blacksmith unmarked beside "Needed, and not brought in: metals" · r2r-village-26, r2s-wartime-village-0, r2s-mass_migration-village-1
+   3 Sawmill unmarked beside "Needed, and not brought in: timber (for large vessels)" · r2r-city-14, r2r-city-44, r2s-insurgency-city-3
+   2 Carpenter unmarked beside "Needed, and not brought in: timber (for large vessels)" · r2r-hamlet-3, r2r-village-53
+   2 Apothecary unmarked beside "Needed, and not brought in: medicinal herbs" · r2r-village-13, r2s-mass_migration-village-0
+   2 Butchers unmarked, the page silent of grain · r2r-town-49, r2s-insurgency-town-2
+   2 Alchemist shop unmarked beside "Needed, and not brought in: medicinal herbs" · r2r-town-51, r2s-insurgency-town-2
+   2 Chandler unmarked, the page silent of reeds · r2r-metropolis-8, r2r-metropolis-22
+   2 Smelter unmarked, the page silent of iron ore · r2r-metropolis-24, r2s-monster_pressure-metropolis-2
+   2 Carpenters unmarked beside "Needed, and not brought in: timber (for large vessels)" · r2s-insurgency-city-3, r2s-wartime-town-1
+   1 Bowyer & fletcher unmarked, the page silent of timber · r2r-village-22
+   1 Thatcher unmarked, the page silent of reeds · r2r-village-24
+   1 Smelter unmarked beside "Needed, and not brought in: gold/silver ore" · r2r-city-5
+   1 Smelter unmarked, the page silent of iron ore or copper ore or gold or silver ore · r2r-city-17
+   1 Smelter unmarked beside "Needed, and not brought in: metals" · r2r-city-36
+   1 Blacksmiths unmarked beside "Needed, and not brought in: metals" · r2r-city-36
+   1 Smelter unmarked beside "Needed, and not brought in: copper ore" · r2r-metropolis-33
+   1 Fishmonger unmarked, the page silent of fish · r2s-indebted-village-2
+   1 Blacksmiths unmarked beside "Needed, and not brought in: iron ore" · r2s-indebted-metropolis-0
+   1 Specialized metalworkers unmarked beside "Needed, and not brought in: iron ore" · r2s-indebted-metropolis-0
+   1 Carpenter unmarked beside "Needed, and not brought in: Timber and building wood" · r2s-monster_pressure-village-0
+   1 Cooper unmarked beside "Needed, and not brought in: timber (for large vessels)" · r2s-wartime-town-1
+   1 Brickmaker unmarked, the page silent of stone · r2s-wartime-metropolis-2
+   1 Smelter unmarked, the page silent of iron · r2s-mass_migration-metropolis-1
+[gate-tail] end:  03:00:13 up 20 min,  0 user,  load average: 4.81, 3.50, 1.73
+[gate-tail] full log: /tmp/gate-tail.4828.log
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)

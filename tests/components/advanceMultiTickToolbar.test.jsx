@@ -127,8 +127,8 @@ describe('WorldMapToolbar — Stage 4 multi-tick affordances', () => {
     const title = btn.closest('button').getAttribute('title') || btn.getAttribute('title')
       || btn.parentElement.getAttribute('title');
     expect(title).toMatch(/Undo the last realm advance \(1 year\)\./);
-    // The session-only caveat is preserved verbatim.
-    expect(title).toMatch(/available for the current session only/);
+    // The session-only caveat closes the title (STYLE-2 SW-12, ledger D·74: plain words, no "pre-pulse").
+    expect(title).toMatch(/Puts the world and every settlement back as they stood before it\. This undo lasts only for this session: after a page reload the advance stays\.$/);
   });
 
   test('(a) flag ON + single-tick (one_week) last advance: undo copy UNCHANGED', () => {

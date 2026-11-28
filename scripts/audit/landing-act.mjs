@@ -128,6 +128,8 @@ function transplant() {
         'the register and the record (precedent 29a4e541). The recorder identity does not move: this file is not one of',
         'MANIFEST_RECORDER_FILES.',
         '',
+        // signed (the chair's ruling of 2026-11-08, MERGE-CAR): the provenance sentence is part of the record's acts
+        `Owner-Signed: §934.105 (${cfg.record})`,
         `Seat: ${cfg.seat}`,
         'Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>',
         `Claude-Session: ${cfg.session}`,

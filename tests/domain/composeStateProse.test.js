@@ -63,6 +63,7 @@ import { warFaithStateProseCandidates } from '../../src/domain/display/statePros
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { driftRun } from '../helpers/dossierManifest.js';
 import { ROOT } from '../helpers/dossierCorpus.js';
+import { CALM_FACTS_ADMIT_ALL } from '../helpers/calmFactsDouble.js';
 
 /**
  * THE SHIPPED CORPUS, all six state leaves merged on block id — which is the shape a desk
@@ -99,6 +100,26 @@ function bagFor(pool) {
   const slots = {};
   for (const variant of pool) for (const slot of variant.slots || []) slots[slot] = 'Thornwall';
   return slots;
+}
+
+/**
+ * THE POOL'S OWN BRACE GROUP, the way the composer reads it (`composeStateProse.js :: poolReadOf`,
+ * CENSUS-1b wave 1): `poolMeta.declares` -> `poolDeclares`, `poolMeta.crisisScoped` -> `crisisScoped`.
+ * The composer draws a pool under the desk's read PLUS this brace; `readStateProse` takes it only
+ * from its caller. So the kernel side of an equality sweep is handed the same brace, and both sides
+ * the calm admit-all facts double (the 80d676864 idiom), or the sweep compares a gated read with an
+ * ungated one. Measured: the sweeps below drift 0 at db3ed88c1^ and first drift at db3ed88c1
+ * (census-2b item 2), whose brace groups put pool-level atoms on pools whose lines declare none.
+ * @param {string} blockId @param {string} poolKey
+ * @returns {{poolDeclares?: ReadonlyArray<string>, crisisScoped?: true, facts: object}}
+ */
+function poolBraceFor(blockId, poolKey) {
+  const meta = /** @type {{declares?: string[], crisisScoped?: boolean}} */ (CORPUS[blockId]?.poolMeta?.[poolKey] || {});
+  return {
+    facts: CALM_FACTS_ADMIT_ALL,
+    ...(Array.isArray(meta.declares) && meta.declares.length ? { poolDeclares: meta.declares } : {}),
+    ...(meta.crisisScoped === true ? { crisisScoped: true } : {}),
+  };
 }
 
 /** An answer for every dimension the pool partitions itself by (law 5). */
@@ -148,9 +169,22 @@ function composeFixture(corpus, options = {}) {
 describe('the composer — the corpus loads, and the merge is legal', () => {
   it('every block lives in exactly one leaf, and the sweep found the whole corpus', () => {
     expect(BLOCK_COLLISIONS, 'a block id emitted by two leaves').toEqual([]);
-    expect(Object.keys(CORPUS).length, 'blocks').toBe(68);
-    expect(SHIPPED_POOLS.length, 'pools').toBe(709);
-    expect(SHIPPED_POOLS.reduce((n, row) => n + row.pool.length, 0), 'variants').toBe(2310);
+    // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6 (+8 pools, +19 variants): 709 -> 717.
+    expect(Object.keys(CORPUS).length, 'blocks').toBe(69); // W2 DEF C3–C5 (DS-DEF-12, 2026-11-07): 68 -> 69 // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (68 -> 69) // MERGE-WAVE at the W3 POW merge: both lanes' deltas composed (68 -> 69) // MERGE-WAVE at the W4 PEOPLE merge: both lanes' deltas composed (68 -> 69) // MERGE-WAVE at the W5 HIS merge: both lanes' deltas composed (68 -> 69)
+    expect(SHIPPED_POOLS.length, 'pools').toBe(861); // CLOSE-DOORS-1A (2026-11-18, the close of 2026-11-18): 859 -> 861, re-measured at the frozen tree (70e557d5b): BAR6-ECON's two new pools (JOIN-17 point 7, 528c5dece), DS-ECO-11 EXPLOITATION: partiallyExploited, nothing exported and DS-SUP-3 A CATEGORY PRESENT BUT ITS HOUSE STOPPED. // BAR4-HISTORY 155c7e1af (2026-11-16, re-keyed by BAR4-CLOSE-SWEEP): DS-GEN-16's three `-MARKED` pools, DECLARED in its hand-back (856 + 3 -> 859). // STYLE-2 FIRST-IMPRESSIONS (B·#28, 2026-11-09): DS-GEN-11's zero pool leaves (857 -> 856). // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted). // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 711 -> 715 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 715 -> 718 // W2 DEF C8/C10 (DS-DEF-5 ARCANE pools, 2026-11-07): 718 -> 724 // W2 DEF C3–C5 (DS-DEF-12, 2026-11-07): 724 -> 729 // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 729 -> 733 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 733 -> 766 // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (709 -> 792) // MERGE-WAVE at the W3 POW merge: both lanes' deltas composed (709 -> 800) // W4 PEOPLE 2026-11-07: +7 pools/+18 variants, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants) // MERGE-WAVE at the W4 PEOPLE merge: both lanes' deltas composed (709 -> 852) // MERGE-WAVE at the W5 HIS merge: both lanes' deltas composed (709 -> 857)
+    // 2310 -> 2342, by cause (each measured on the six leaves, parent -> commit, 709 pools throughout):
+    // F12 unit 2 (e19e3e4cf) 2310 -> 2323; census-2b item 5 (70d05b25b) +4; census-5 unit 2
+    // (06b59812f) +1; census-3c unit 4 DS-ECO (e3295d168) +10; census-5b unit 3 (c00b30eb6) +4.
+    // 2342 -> 2343 at LANDING-R2 helper G (the chair's §934.105 ruling (1): DS-GEN-17 PROVISIONED v3, the hospital-only line) +1.
+    // 2343 -> 2344 at LANDING-R2 helper G2 (the chair's 06:5x DS-CND-1 boom line (ODQ §934.105, ruling (2)): ARCHETYPE: boom v4 `[street · crisis: any]`) +1.
+    // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6 (+8 pools, +19 variants): 2344 -> 2363.
+    // WIRING W3 second seat (2026-11-07), the owner's style law over DS-POW-1 (the #23 tier twins, Endorsed v5 and Legitimacy Crisis v5, +2 variants): 2363 -> 2365.
+    // W3 POW fourth seat (2026-11-08): DS-POW-1 governanceFractured `[newcomer]` v5 (STYLE-AUDIT §2a #24), +1: 2365 -> 2366.
+    // BAR4 (2026-11-16, re-keyed by BAR4-CLOSE-SWEEP at the joined line f19c3b28b), every move DECLARED in its seat's hand-back: BAR4-CORPUS-DEF
+    // 6f8081add +4 (DS-DEF-2 WEAK, DS-DEF-9 magicDependency false, DS-DEF-11 WALLED-QUIET +2), BAR4-CORPUS-ECO 7354471e5 +7 (DS-ECO-9's two FOOD
+    // SOURCES pools, +4 and +3), BAR4-HISTORY 155c7e1af +6 (DS-GEN-16's three `-MARKED` pools): 2959 + 4 + 7 + 6 -> 2976.
+    // BAR4-SCENES 187c46f61 (2026-11-16, at the merge of the ninth branch, re-keyed by BAR4-CLOSE-SWEEP): DS-GEN-13 `COMMERCE: a market, no guild` v6, the siege twin: 2976 + 1 -> 2977.
+    expect(SHIPPED_POOLS.reduce((n, row) => n + row.pool.length, 0), 'variants').toBe(3183); // C4-SECOND-LINE (G49 (5); CLOSE-11): 3182 -> 3183, DS-ECO-1 `COMBINATION C4` gains v8, the one cause; earlier: DISAGREE (PROSE-6, 2026-11-23; the chair's rulings of 03:45 and 03:55 UTC): 3176 -> 3182, DS-DEF-2 CHAIN: food trades failing +6 (F1-F6, v7-v12); W1-W3 withdrawn; WEAK v1 and v2 re-worded in place (no line added) // BUILD-1-FINISH + BUILD-1-CURE (2026-11-20, the chairs' rulings of 18:46 and 21:39 UTC, measured on lane/prose-3-2026-11-20-build1-cure against the base 87f03395b): 3054 -> 3176, BUILD-1's 140 new lines on 35 existing pools (3054 -> 3194, not re-keyed here by BUILD-1) less the 18 dm-only lines BUILD-1-CURE ADDENDUM 1 (c) parked (3194 -> 3176) // LASTCLOSE-DOORS (2026-11-19, the last close's whole check, C1 (a)): 3033 -> 3054, re-measured at f1d139667: 21 lines on 12 existing pools, additions only at the next vid of their pools (measured per pool and by vid against 0dee69e17), each pool laid to its landing in docs/content/prose-shift-register.json's variant-count note: DESKS-ECO/-DEF/-2 (points 51, 52, 59) +9, FAULTS-NEED (point 61) +1, FAULTS-DESKS (point 64) +1, LAST-VARIETY (point 70) +10 // CLOSE-DOORS-1A (2026-11-18, the close of 2026-11-18): 2977 -> 3033, re-measured at the frozen tree (70e557d5b): +8 BAR6-ECON's two new pools of four (JOIN-17 point 7); +48 lines and twins on 32 pools, each pool laid to its landings in docs/content/prose-shift-register.json's variant-count note (JOIN-16 points 2, 4, 5; JOIN-17 points 4, 7, 10, 11, 13, 18, 27, 31; the sixth chair's point 37) // TAIL-CLOSE-DOORS-3 (2026-11-15, the close of the tail round): 2956 -> 2959, the COMPOSED figure re-measured at the line's final tree (f76fe38fd; the corpus seats' variants joined, JOIN-9 point 3's kept side composed), under the owner's word of 06:00 UTC // TAIL-CORPUS-DEF-4 U2 (2026-11-15): DS-DEF-2 Beasts settled, defenses beyond the need v6, the occupied twin (defensePerimeterCalm): 2955 -> 2956 // TAIL-CORPUS-DEF-4 batch 6 (2026-11-15): DS-DEF-3 Safe v4 and Very Safe v5, the twins of the lines declared `guardPresence`: 2953 -> 2955 // TAIL-CORPUS-DEF-2 batch 2 (2026-11-15): DS-DEF-12 CAPACITY: ample v4 and DS-POW-5 autocrat v5, the twins of the two declared pools: 2951 -> 2953 // W2-WRITE-SIDE-14 (2026-11-14): 2950 -> 2951, DS-GEN-13 WAREHOUSES v5 (the siege twin: v2 takes `no crisis: under_siege`) // STYLE-2 FIRST-IMPRESSIONS (B·#28, 2026-11-09): DS-GEN-11's zero pool and its three lines leave (2764 -> 2761). // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted). // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 2348 -> 2356 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 2356 -> 2362 // W2 DEF C8/C10 (DS-DEF-5 ARCANE pools, 2026-11-07): 2362 -> 2374 // W2 DEF (FIXTURE: gates v3-v4, the referee's frame cure, 2026-11-07): 2374 -> 2376 // W2 DEF C3–C5 (DS-DEF-12, 2026-11-07): 2376 -> 2391 // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 2391 -> 2405 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 2405 -> 2504 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 2504 -> 2505 // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (2344 -> 2582) // MERGE-WAVE at the W3 POW merge: both lanes' deltas composed (2344 -> 2604) // W4 PEOPLE 2026-11-07: re-measured, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants); W4 PEOPLE second seat 2026-11-07: re-measured, DS-STR-1 the style law (+4 departures lines) // MERGE-WAVE at the W4 PEOPLE merge: both lanes' deltas composed (2344 -> 2754) // MERGE-WAVE at the W5 HIS merge: both lanes' deltas composed (2344 -> 2764) // STYLE-2-MERGE at the SW-B5 merge (2026-11-09): SW-B5 FRAMES' vantage variants composed over SW-B2's zero-pool exit (the lane re-keyed this pin from its own base): 2761 -> 2779 // W2-WRITE GEN-9 history events (2026-11-13): 2779 -> 2803 // W2-WRITE GEN-5/GEN-6 the river route on a coast (2026-11-13): 2803 -> 2812 // W2-WRITE GEN-3 readiness and the military score (2026-11-13): 2812 -> 2818 // W2-WRITE FTH-4 heresy without a church (2026-11-13): 2818 -> 2824 // W2-WRITE POW-6 the armed power without a garrison (2026-11-13): 2824 -> 2827 // W2-WRITE ECO-6 off-book trade with no guild (2026-11-13): 2827 -> 2830 // W2-WRITE DEF-3 districts in small places (2026-11-13): 2830 -> 2834 // W2-WRITE POW-5 no law where a watch stands (2026-11-13): 2834 -> 2835 // W2-WRITE ECO-12 faith's weight without a house (2026-11-13): 2835 -> 2838 // W2-WRITE the key-implied words declared (2026-11-13): 2838 -> 2841 // W2-WRITE round 1, the cold list's corpus variants (2026-11-13): 2841 -> 2887 // W2-WRITE stage 2, the first seat's lines read town by town (2026-11-13): 2887 -> 2888 // W2-WRITE stage 3, three lines for every case (layer 2) (2026-11-13): 2888 -> 2908 // W2-WRITE the walls-word mute: a no-walls line (2026-11-13): 2908 -> 2909 // W2-WRITE W2-WRITE-3 DEF-2 STRONG debt (2026-11-13): 2909 -> 2912 // W2-WRITE W2-WRITE-3 stage 3 crisis cases (2026-11-13): 2912 -> 2928 // W2-WRITE W2-WRITE-3 M3 no line and no force beside a watch (2026-11-13): 2928 -> 2932 // W2-WRITE W2-WRITE-3 M1 strong posture under a siege or a war (2026-11-13): 2932 -> 2936 // W2-WRITE W2-WRITE-3 R1 the streets held (2026-11-13): 2936 -> 2942 // W2-WRITE W2-WRITE-3 the leaves lane's empty RECOVERING case (2026-11-13): 2942 -> 2943 // W2-WRITE W2-WRITE-3 the round's three high lines (2026-11-13): 2943 -> 2948 // W2-WRITE W2-WRITE-3 the round's touched lines still false (2026-11-13): 2948 -> 2952 // W2-WRITE NO-MARKET under siege (2026-11-13): 2952 -> 2955 // W2-WRITE SECURE off a year of stores (2026-11-13): 2955 -> 2957 // W2-WRITE walls with NO force beside a hired company (2026-11-13): 2957 -> 2960 // W2-WRITE food trades working under a siege with famine (2026-11-13): 2960 -> 2962 // W2-WRITE Economic Survival STRONG speaks of the purse (2026-11-13): 2962 -> 2963 // W2-WRITE MARKET-OPEN under a plague (2026-11-13): 2963 -> 2964 // W2-WRITE item 0 (the chair's ruling: walls with NO force v8-v10 struck) (2026-11-13): 2964 -> 2961 // W2-WRITE A H2 (the read's H2 and H5: DS-DEF-2 neither walls nor force's threat twins under an arrived threat) (2026-11-13): 2961 -> 2959 // W2-WRITE A H2 (the read's H2 and H5: DS-DEF-2 neither walls nor force's threat twins under an arrived threat) (2026-11-13): 2959 -> 2960 // W2-WRITE A H5 (the read's H5 and M2: DS-DEF-5 garrison PRESENT v4, a pay line under every crisis, struck) (2026-11-13): 2960 -> 2959 // W2-WRITE A M6 (the read's M6 and M4 #451: DS-GEN-18 STALLED says what the chain model holds) (2026-11-13): 2959 -> 2961 // W2-WRITE W2-WRITE-6 B: five last rows the read proposed for strike, struck (2026-11-13): 2961 -> 2956 // W2-WRITE W2-WRITE-7 B: DS-DEF-11 WALLED-STRAINED v8 struck (last row); v6, v7 said without the {defwork} slot and off an occupation (2026-11-14): 2956 -> 2955 // W2-WRITE MERGE of lane/w2-write-side-rest-2026-11-13 at ddb7453e9 (W2-WRITE split): the sides' corpus deltas composed (2026-11-13): 2955 -> 2954 // W2-WRITE MERGE of lane/w2-write-side-eco-2026-11-13 at 4134b0882 (W2-WRITE split): the sides' corpus deltas composed (2026-11-13): 2954 -> 2948 // W2-WRITE W2-WRITE-12 BAR-0 #200: DS-POW-6 capture ADVANCING v3 v5 v9 off an occupation, v11 its twin (2026-11-13): 2948 -> 2949 // W2-WRITE W2-WRITE-12 BAR-0 #205: DS-DEF-2 Economic Survival STRONG v3 v9 v12 off an occupation, v9 off Struggling, v13 its twin (2026-11-13): 2949 -> 2950
   });
 });
 
@@ -170,8 +204,8 @@ describe('⭐ THE SEAM COMPOSES TO THE KERNEL — an empty candidate list moves 
       for (const audience of ['dm', 'player']) {
         for (const key of SWEEP_SEEDS) {
           checks += 1;
-          const read = { slots, seed: key, audience, dimensions };
-          const base = readStateProse(CORPUS, blockId, poolKey, read);
+          const read = { slots, seed: key, audience, dimensions, facts: CALM_FACTS_ADMIT_ALL };
+          const base = readStateProse(CORPUS, blockId, poolKey, { ...read, ...poolBraceFor(blockId, poolKey) });
           const unit = composeStateProse(CORPUS, blockId, {
             ...read, spineKey: poolKey, candidates: [], turns: [],
           });
@@ -196,7 +230,8 @@ describe('⭐ THE SEAM COMPOSES TO THE KERNEL — an empty candidate list moves 
     expect(drift.slice(0, 10), 'a pool where the composer and the kernel disagree').toEqual([]);
     expect(drift.length).toBe(0);
     // ANTI-VACUITY: an equality over an empty sweep is free.
-    expect(checks).toBe(709 * 2 * SWEEP_SEEDS.length);
+    // 709 -> 717 at WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6 (+8 pools): owed from the construction commit.
+    expect(checks).toBe(861 * 2 * SWEEP_SEEDS.length); // CLOSE-DOORS-1A (2026-11-18, the close of 2026-11-18): 859 -> 861 pools, re-measured at the frozen tree (70e557d5b): BAR6-ECON's two new pools (JOIN-17 point 7, 528c5dece), DS-ECO-11 EXPLOITATION: partiallyExploited, nothing exported and DS-SUP-3 A CATEGORY PRESENT BUT ITS HOUSE STOPPED. // BAR4-HISTORY 155c7e1af (2026-11-16, re-keyed by BAR4-CLOSE-SWEEP): DS-GEN-16's three `-MARKED` pools, DECLARED in its hand-back (856 + 3 -> 859). // STYLE-2 FIRST-IMPRESSIONS (B·#28, 2026-11-09): DS-GEN-11's zero pool leaves (857 -> 856). // W1 ECO construction (2026-11-07): 26 new pools. // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 711 -> 715 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 715 -> 718 // W2 DEF C8/C10 (DS-DEF-5 ARCANE pools, 2026-11-07): 718 -> 724 // W2 DEF C3–C5 (DS-DEF-12, 2026-11-07): 724 -> 729 // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 729 -> 733 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 733 -> 766 // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (709 -> 792) // MERGE-WAVE at the W3 POW merge: both lanes' deltas composed (709 -> 800) // W4 PEOPLE 2026-11-07: +7 pools/+18 variants, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants) // MERGE-WAVE at the W4 PEOPLE merge: both lanes' deltas composed (709 -> 852) // MERGE-WAVE at the W5 HIS merge: both lanes' deltas composed (709 -> 857)
     expect(composed, 'and most of the sweep really did compose a unit').toBeGreaterThan(6000);
   });
 
@@ -285,7 +320,7 @@ describe('⭐ THE BASE-SIDE SYNTHESIS — every recorded cell, against the compo
     process.stdout.write(`[compose] recorded cells whose authored vid and audible index differ:`
       + ` ${apart.length} of ${run.cells.length} · mixed pools in the corpus ${mixedPools.size}`
       + ` · reached by the DRIFT run ${reached.length} (${reached.join(' | ') || 'none'})\n`);
-    expect(mixedPools.size, 'the corpus really does hold mixed pools').toBe(12);
+    expect(mixedPools.size, 'the corpus really does hold mixed pools').toBe(13); // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 12 -> 13
     // PINNED IN BOTH DIRECTIONS, and no longer at zero. A fall back to 0 means the estate
     // lost the discrimination again and the arm above went blind; a rise means another pool's
     // player face started drawing past a covert variant, which is a draw movement somebody
@@ -309,7 +344,27 @@ describe('⭐ THE BASE-SIDE SYNTHESIS — every recorded cell, against the compo
     //     coordinates apart. The chair's ruling named this pool as the cause; the measurement
     //     moved the row to DS-POW-1, and the record says so.
     const DECLARED_APART = {
-      'DS-POW-1 :: governanceFractured true': { cells: 72, coordinates: ['vid 3 / index 2'] },
+      // W3 POW fourth seat (2026-11-08, STYLE-AUDIT §2a #24): the pool gained its player face's fourth vantage,
+      // `[newcomer]` v5 (vid 4); the same 72 player cells now draw it, at vid 4 / index 3 (was vid 3 / index 2).
+      // GREEN-TIP (2026-11-10, re-declared BY IDENTITY): 72 -> 60. MEASURED by an untracked probe of this arm at 8308f13f8
+      // and every first-parent stage of 8308f13f8..bf14617ca touching src/, the helpers or scripts: W3 POW's merge
+      // 1a160d599 moved the coordinate (vid 3 / index 2 -> vid 4 / index 3, the row above), and FIX-FOOD-ISOLATION's merge
+      // c6e8a4ad6 alone moved the count, 72 -> 60 (2482faa60 reads 72; the mover is bf718398e — reverting it alone on the
+      // merge restores 72, reverting 46459cb16 alone does not). The DRAW did not move; the REACH did: the food change lands
+      // the run on governanceFractured worlds less often. DS-DEF-8 and DS-ECO-6 are reached with 0 cells apart.
+      'DS-POW-1 :: governanceFractured true': { cells: 60, coordinates: ['vid 4 / index 3'] },
+      // W2-WRITE round 1, the cold list's corpus variants (2026-11-13), declared BY IDENTITY: the pool's player face, which
+      // was one canonical line, gains two lines for a town with organised crime (v4, v5 `organised crime`, appended
+      // after the three dm-only lines), so the cells where the run reaches such a town and draws v4 read vid 4 at
+      // player index 1. MEASURED by this arm's own measuredApart at the lane's tip: 171 cells, one coordinate.
+      // W2-WRITE-SIDE-ECO-2 D #1378 (2026-11-14), re-declared BY IDENTITY: the canonical v0 is declared off organised crime,
+      // a famine and a siege, so one more recorded cell reads vid 4 at player index 1 (the same coordinate). MEASURED by this arm: 171 -> 172.
+      // Carried into the main seat's MERGE of lane/w2-write-side-eco-2026-11-13 at 4134b0882 (W2-WRITE-9) from that side, by identity.
+      // CLOSE-DOORS-1A (2026-11-18, the close of 2026-11-18), re-declared BY IDENTITY: BAR6-ECON (JOIN-17 point 7, 528c5dece;
+      // its hand-back's row 9a.hands) declares v4 `crime: ≥ organized` where it read `organised crime`, so where a recorded
+      // cell's town has organised crime below that band v4 is refused and the draw reaches v5 (`[street · organised crime]`)
+      // at player index 2. The same 172 cells, one coordinate more. MEASURED by this arm at the frozen tree (70e557d5b).
+      'DS-ECO-6 :: TIER: minor shadow activity (≥3)': { cells: 172, coordinates: ['vid 4 / index 1', 'vid 5 / index 2'] },
     };
     /** @type {Record<string, { cells: number, coordinates: string[] }>} */
     const measuredApart = {};
@@ -353,9 +408,9 @@ describe('⭐ THE BASE-SIDE SYNTHESIS — every recorded cell, against the compo
     let pools = 0;
     for (const { blockId, poolKey, pool } of SHIPPED_POOLS) {
       const read = {
-        slots: bagFor(pool), audience: 'dm', dimensions: dimensionsFor(pool),
+        slots: bagFor(pool), audience: 'dm', dimensions: dimensionsFor(pool), facts: CALM_FACTS_ADMIT_ALL,
       };
-      const base = readStateProse(CORPUS, blockId, poolKey, { ...read, seed: '' });
+      const base = readStateProse(CORPUS, blockId, poolKey, { ...read, ...poolBraceFor(blockId, poolKey), seed: '' });
       const spellings = [undefined, null, ''].map((given) => composeStateProse(CORPUS, blockId, {
         ...read, seed: given, spineKey: poolKey, candidates: [], turns: [],
       }));
@@ -368,7 +423,8 @@ describe('⭐ THE BASE-SIDE SYNTHESIS — every recorded cell, against the compo
       }
     }
     expect(drift.slice(0, 5), 'a pool where an unseeded read is not the canonical one').toEqual([]);
-    expect(pools).toBe(709);
+    // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6 (+8 pools, +19 variants): 709 -> 717.
+    expect(pools).toBe(861); // CLOSE-DOORS-1A (2026-11-18, the close of 2026-11-18): 859 -> 861, re-measured at the frozen tree (70e557d5b): BAR6-ECON's two new pools (JOIN-17 point 7, 528c5dece), DS-ECO-11 EXPLOITATION: partiallyExploited, nothing exported and DS-SUP-3 A CATEGORY PRESENT BUT ITS HOUSE STOPPED. // BAR4-HISTORY 155c7e1af (2026-11-16, re-keyed by BAR4-CLOSE-SWEEP): DS-GEN-16's three `-MARKED` pools, DECLARED in its hand-back (856 + 3 -> 859). // STYLE-2 FIRST-IMPRESSIONS (B·#28, 2026-11-09): DS-GEN-11's zero pool leaves (857 -> 856). // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted). // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 711 -> 715 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 715 -> 718 // W2 DEF C8/C10 (DS-DEF-5 ARCANE pools, 2026-11-07): 718 -> 724 // W2 DEF C3–C5 (DS-DEF-12, 2026-11-07): 724 -> 729 // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 729 -> 733 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 733 -> 766 // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (709 -> 792) // MERGE-WAVE at the W3 POW merge: both lanes' deltas composed (709 -> 800) // W4 PEOPLE 2026-11-07: +7 pools/+18 variants, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants) // MERGE-WAVE at the W4 PEOPLE merge: both lanes' deltas composed (709 -> 852) // MERGE-WAVE at the W5 HIS merge: both lanes' deltas composed (709 -> 857)
   });
 });
 
@@ -1193,6 +1249,9 @@ describe('the composer — turns (ARCH §4.2 step 1, §5.3)', () => {
       seed: 'shipped-probe',
       audience: 'dm',
       dimensions: dimensionsFor(block.pool),
+      // CENSUS-5: the first shipped pool (DS-DEF-1 readiness STRONG) declares fact atoms and opts
+      // into the crisis dimension, so the read carries facts, as every desk's does.
+      facts: CALM_FACTS_ADMIT_ALL,
     });
     expect(unit.pieces.length, 'every sibling pool offered, and none of them seats').toBe(1);
   });
@@ -1302,9 +1361,10 @@ describe('the composer — what it must NOT do', () => {
       .toBe(true);
     // The paired positive: a SENTENCE mount keeps it, so the strip above is a rung class
     // rather than a function that blanks everything.
-    // (`overview.ground`, not `overview.systemsHealth`: that row GLANCES since owner order
-    // 2026-09-17, so it can no longer serve as the sentence-mount control.)
-    const kept = drawnAtMount('overview.ground', rung);
+    // (`overview.market`, not `overview.systemsHealth` nor `overview.ground`: those rows GLANCE since
+    // owner order 2026-09-17 and OWNER-WORDS-DOSSIER item 2, 2026-11-09, so neither can serve as the
+    // sentence-mount control.)
+    const kept = drawnAtMount('overview.market', rung);
     expect(kept.provenance.pieces.length, 'a sentence mount keeps the pieces').toBe(1);
   });
 });
@@ -1344,11 +1404,15 @@ describe('the six candidates leaves (ARCH §4.1, M-F7)', () => {
     const unit = composeStateProse(CORPUS, block.blockId, {
       spineKey: block.poolKey, candidates, turns: [], slots: bagFor(block.pool),
       seed: 'leaf-probe', audience: 'dm', dimensions: dimensionsFor(block.pool),
+      // db3ed88c1 (census-2b item 2): DS-GEN-3's first pool (scores.military: STRONG) is
+      // crisis-scoped, so the read carries facts, as every desk's does; the kernel the brace.
+      facts: CALM_FACTS_ADMIT_ALL,
     });
     const base = readStateProse(CORPUS, block.blockId, block.poolKey, {
       slots: bagFor(block.pool), seed: 'leaf-probe', audience: 'dm',
-      dimensions: dimensionsFor(block.pool),
+      dimensions: dimensionsFor(block.pool), ...poolBraceFor(block.blockId, block.poolKey),
     });
+    expect(unit, 'the probe composed nothing; the equality below would be vacuous').not.toBeNull();
     expect(unit.text).toBe(base.text);
     expect(unit.pieces.length).toBe(1);
   });

@@ -1,0 +1,23 @@
+Breitthal (critique-thorp-0) — a thorp, ruled by Household Council
+  Household Council (100): first Irene Weber, the eldest householder
+Shangcheng (critique-hamlet-5) — a hamlet, ruled by Headman's Authority
+  Headman's Authority (100): first Noriko Guo, the charter master and Headman
+Hutang (l2-famine-village-7) — a village, ruled by Headman's Authority, under famine
+  Grain Holders (51): It is no one body: it is every household and dealer with a full bin.
+  Headman's Authority (49): first Ying Liang, the miller and Headman · second Yue Hu, the cooper
+Albapagus (l2-occupied-village-0) — a village, ruled by Headman's Authority, under occupied
+  Occupation Authority (56): first Felicia Gallus, the occupying governor
+  Headman's Authority (44): first Vera Rufus, the mine captain and Headman · second Cato Gratus, the quarry master · third Sulpicia Corvinus, the stable keeper
+Montenovum (l2-plague_onset-hamlet-1) — a hamlet, ruled by Free Elder Council, under plague_onset
+  Free Elder Council (60): first Calvus Silanus, the boat-headman and Elder · second Cornelia Flavius, the head shepherd · third Decius Silanus, the dairy farmer
+  Quarantine Council (40): It has no one head: the households of each street keep the quarantine among themselves.
+Llandale (critique-city-17) — a city, ruled by City-State Council
+  City-State Council (24): first Nessa MacCormack, the senior guild master and First Councillor · second Kieran Kennedy, the chief magistrate · third Eithne O'Brien, the watch commander
+  Thieves' Guild (23): first Raghallach Clifford, the network's head (veiled) · second Donnchadh Gallagher, the whisper broker (veiled) · third Kilian O'Flaherty, the madam (veiled)
+  The Highborn Circle (19): first Erin O'Meara, the miller · second Declan Sweetman, the lanista · third Yves Tobin, the vintner
+  The Peerage (16): No one claimant has stepped forward yet: the old families press the claim together.
+  Merchant Guilds (9): first Nessa MacCormack, the senior guild master and First Councillor · second Liam MacCormack, the innkeeper · third Laoghaire O'Leary, the banker
+  Craft Guilds (9): first Uilleam MacCormack, the senior craft-guild master · second Tadhg MacSween, the tanner · third Fódla Fitzgerald, the smelt master
+Niederwiese (l2-famine-hamlet-6) — a hamlet, ruled by Feudal Stewardship, under famine
+  Feudal Stewardship (51): first Petra Bauer, the steward · second Mathilde Schulz, the head shepherd · third Kunizza Schäfer, the stable keeper
+  Thieves' Guild (49): first Guta Richter, the guildmaster (veiled)

@@ -9,7 +9,7 @@ import { generateSafetyProfile } from '../safetyProfile.js';
 import { TRADE_DEPENDENCY_NEEDS } from '../../data/goods/chains.js';
 import { computeActiveChains, deriveExportsFromChains, deriveImportsFromChains, deriveLocalProductionFromChains, deriveInstitutionalServices, deriveServiceExports } from '../computeActiveChains.js';
 import { generateTradeIncomeStreams } from './tradeGoods.js';
-import { computeBaseProsperity, deriveEconomicComplexity, deriveProsperityLabel, deriveEconomicSituationDesc } from './prosperity.js';
+import { computeBaseProsperity, deriveEconomicComplexity, deriveProsperityLabels, standingBaseProsperity, deriveEconomicSituationDesc } from './prosperity.js';
 import { nativeSemanticName } from '../../domain/content/customContentSemanticAuthority.js';
 import { resolveNativeEconomicInputs } from './nativeEconomicInputs.js';
 import { applyFinishedGoodsDemandWithOwnership, applySubsistenceTradeBoundary,
@@ -17,12 +17,18 @@ import { applyFinishedGoodsDemandWithOwnership, applySubsistenceTradeBoundary,
 import { resolveGenerationContentProfile } from '../../domain/generationContentProfile.js';
 import { hasWaterAccessInstitution } from '../../domain/spatial/seaLanes.js';
 import { resourceShortageImport } from '../../domain/resourceSemantics.js';
+import { dropExportsImportedShort } from './exportsImportedShort.js'; // BAR3-CLOSE-SWEEP-B (f): moved verbatim to its leaf
 import { resolveGenerationWorldLaw } from '../generationContext.js';
 import { applyNeighbourEconomicBias } from './neighbourEconomicBias.js';
 import { isTradeRouteDisconnected } from '../../domain/tradeRouteSemantics.js';
+import { minorRoutesReach } from '../../domain/facts/tradeReach.js'; // BAR6-RECORD (c): isolated with a minor route is a poor road
+/** BAR6-RECORD (c): the isolated need where a poor road still reaches (`minorRoutesReach`); read by `viability.js`'s Outlook line. */
+export const POOR_ROAD_SUPPLY_LINE = 'Poor road: supplies come in irregularly by minor routes.'; // under the Services row's 70-character clip
 import { hasLocalAgriculturalSupply } from './localSupplyEvidence.js';
-import { generateFoodSecurity } from '../foodGenerator.js'; import { defenseFactsOf } from '../../domain/defense/defenseFacts.js'; // F1: one line, the file sits at its line cap
+import { generateFoodSecurity } from '../foodGenerator.js'; import { defenseFactsOf } from '../../domain/defense/defenseFacts.js'; import { arcaneGuildHouseStands } from '../../domain/facts/magic.js'; import { namesSmugglingHouse } from '../../domain/crimeSignal.js'; // F1: one line, the file sits at its line cap
 import { goodsHeldByFoodRecord } from './foodBalance.js';
+import { liveMaterialFor } from './localMaterials.js'; import { hasMarketInstitution } from '../../domain/facts/market.js';
+import { GRAIN_OWN_FIELDS_LINE, GRAIN_SURPLUS_LINE, LOCAL_COAL_LINE, LOCAL_COAL_SOLD_LINE, FORGE_HOUSE_WORDS, ALCHEMY_TRADE_LINE, ALCHEMIST_SUPPLEMENTS_LINE, GRAIN_BOUGHT_LINE, WOOL_LOCAL_LINE, WOOL_BOUGHT_LINE, LOCAL_ORE_LINE, IRON_IMPORTED_LINE, FISH_EXPORT_LINE, QUARRY_LINE, MASONS_LINE, TIMBER_LINE, TIMBER_BOUGHT_LINE, trueIncomeDesc, houseOfWorkLine, keepRowsThePageBearsOut, shareIncomeRows, OWN_HARVEST_LINE, PILGRIM_HOUSE_WORDS } from './incomeLineSiblings.js'; import { offersFoodSurplus } from '../../domain/foodSurplus.js';
 
 
 export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggles = {}, config = {}) => {
@@ -65,11 +71,9 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
     safetyProfile = generateSafetyProfile(config, tier, institutions),
     incomeBuild = [];
   ['thorp', 'hamlet', 'village'].includes(tier)
-    ? incomeBuild.push({
-        source: 'Agricultural Rents',
-        percentage: 65,
-        desc: 'Payments in kind or coin from tenant farmers; the primary revenue at this scale.',
-      })
+    ? incomeBuild.push(hasInst("lord's steward", "lord's reeve") // TAIL-DEFECON-2 (D10): rents and tenants only where a lord's man stands
+      ? { source: 'Agricultural Rents', percentage: 65, desc: 'Payments in kind or coin from tenant farmers; the primary revenue at this scale.' }
+      : { source: 'Harvest', percentage: 65, desc: OWN_HARVEST_LINE })
     : tier === 'town' &&
       !hasInst('market square', 'weekly market', 'daily market') &&
       incomeBuild.push({
@@ -85,13 +89,16 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
   const SUBSISTENCE_TIERS_ECO = ['thorp', 'hamlet', 'village'];
   const isSubsistenceOnly = isIsolated && SUBSISTENCE_TIERS_ECO.includes(tier) && !isolatedMagicTrade;
   // ── Market taxes / magical trade revenue — scaled by market institution tier ──
-  if (!trulyIsolated && hasInst('district market', 'multiple market')) {
+  // COHERENCE-AGREE-3 (REVIEW-AGREE F9): whether a market stands is the market home's answer; the names below
+  // say only which kind of market it is (district, daily, weekly), and so the size of its revenue.
+  const hasMarketHome = hasMarketInstitution(institutions);
+  if (!trulyIsolated && hasMarketHome && hasInst('district market', 'multiple market')) {
     incomeBuild.push({
       source: isolatedMagicTrade ? 'Magical Trade Revenue' : 'Market Taxes',
       percentage: Math.round(45 * magicRevenueScale),
       desc: 'District-level duties on specialized goods; a major civic revenue stream across the urban districts.',
     });
-  } else if (!trulyIsolated && hasInst('daily market')) {
+  } else if (!trulyIsolated && hasMarketHome && hasInst('daily market')) {
     incomeBuild.push({
       source: isolatedMagicTrade ? 'Magical Trade Revenue' : 'Market Taxes',
       percentage: Math.round(35 * magicRevenueScale),
@@ -99,7 +106,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
         ? 'Trade flowing through teleportation channels generates modest fees and arcane duties.'
         : 'Daily market tolls, stall fees, and weights-and-measures inspections.',
     });
-  } else if (!trulyIsolated && hasInst('market square', 'weekly market', 'annual fair')) {
+  } else if (!trulyIsolated && hasMarketHome && hasInst('market square', 'weekly market', 'annual fair')) {
     incomeBuild.push({
       source: isolatedMagicTrade ? 'Magical Trade Revenue' : 'Market Taxes',
       percentage: Math.round(22 * magicRevenueScale),
@@ -174,7 +181,8 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
     });
   }
   // ── Court fees & fines ──
-  if (hasInst('courthouse', 'multiple court', 'city hall')) {
+  const defenceHome = defenseFactsOf({ institutions }); // COHERENCE-AGREE-3 (STOP 2 b): the court's and the gate's narrower facts
+  if (defenceHome.hasCourthouse) {
     incomeBuild.push({
       source: 'Court Fees & Fines',
       percentage: 10,
@@ -187,9 +195,9 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
     incomeBuild.push({
       source: 'Toll Revenue',
       percentage: 20,
-      desc: 'Passage tolls on all roads and bridges serving the crossroads position.',
+      desc: 'Tolls taken on the roads that meet here at the crossroads.',
     });
-  } else if (!trulyIsolated && tradeRoute === 'road' && hasInst('gate', 'town wall', 'city wall')) {
+  } else if (!trulyIsolated && tradeRoute === 'road' && defenceHome.hasTollGate) {
     incomeBuild.push({
       source: 'Gate Tolls',
       percentage: 10,
@@ -239,7 +247,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
         desc: 'Tithes, offerings, and fees for burial and sacramental services collected by resident clergy.',
       });
     }
-    if (ecoInstFlags.religionInfluence > 68 && (tradeRoute === 'crossroads' || tradeRoute === 'road')) {
+    if (ecoInstFlags.religionInfluence > 68 && (tradeRoute === 'crossroads' || tradeRoute === 'road') && hasInst(...PILGRIM_HOUSE_WORDS)) { // D14: pilgrims come to a house of pilgrimage
       incomeBuild.push({
         source: 'Pilgrim Trade',
         percentage: Math.round(ecoInstFlags.religionInfluence / 9),
@@ -274,8 +282,8 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
         percentage: pct,
         desc:
           magPri < 35
-            ? 'Herbal remedies, minor alchemical preparations, and potion sales. The local alchemist supplements conventional trade.'
-            : 'A thriving alchemical trade in reagents, preparations, and curative potions draws customers from surrounding settlements.',
+            ? ALCHEMIST_SUPPLEMENTS_LINE // UPKEEP-8: the originals print by their declared constants (incomeLineSiblings.js)
+            : ALCHEMY_TRADE_LINE,
       });
     }
 
@@ -289,7 +297,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
         desc:
           magPri < 60
             ? 'Fees for identification, minor enchanting, and divination. Adventurers and merchants both pay well for reliable magical services.'
-            : 'A busy market for spell services. Identification, augury, message sending, and contract-grade enchanting brings steady coin.',
+            : 'A busy market for spell services. Identification, augury, message sending, and contract-grade enchanting bring steady coin.', // #11426: four services, "bring"
       });
     }
 
@@ -302,7 +310,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
         percentage: pct,
         desc: ecoStressFlags.magicFillsVoid
           ? 'Magic has absorbed functions normally provided by conventional trade, government, and religion. Arcane licences, guild dues, and service fees constitute the primary revenue base.'
-          : "Enchanting contracts, magical research commissions, and the licensing of spellcasting practitioners. The mages' guild contributes meaningfully to civic revenue.",
+          : arcaneIndustryLineOf(hasInst), // UPKEEP-12 (#115): the guild's sentence only where a guild or an academy stands
       });
       // Bonus: enchanting multiplier boosts metalwork/crafts income when present
       // (represented as a cross-chain enhancement note in the existing income entries)
@@ -339,7 +347,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
       (inst) => inst.toLowerCase().includes('black market') || inst.toLowerCase().includes('underground')
     );
     const hasSmuggling = crimInsts.some(
-      (inst) => inst.toLowerCase().includes('smuggl') || inst.toLowerCase().includes('front')
+      namesSmugglingHouse, // TAIL-DEFECON-2 (B05884): a front business is not a smuggling house; TAIL-CLOSE-SRC-3: the crime home's reader
     );
     const label =
       hasGuild && hasMarket
@@ -351,13 +359,13 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
             : bmc >= 20
               ? 'Shadow Economy (untaxed)'
               : 'Black Market Revenue';
-    const desc = `An estimated ${bmc}% of economic activity flows through unofficial channels: ${
+    const desc = `${
       hasGuild
-        ? 'guild-organised fencing, extortion, and black market trade'
+        ? 'Guild-run fencing, extortion and black-market trade'
         : hasSmuggling
-          ? 'smuggling margins, contraband networks, and protection rackets'
-          : 'untaxed trade, fencing, and criminal margins'
-    }. This income stays in the settlement but flows to criminal actors, not the public treasury.`;
+          ? 'Smuggling, contraband and protection rackets'
+          : 'Untaxed trade, fencing and theft'
+    } bring money in here, ${crimInsts.length ? 'but it goes to the criminals who run them and the treasury sees none of it' : 'but none of it reaches the treasury'}.`; // TAIL-DEFECON-2: no criminal house, no "criminals who run them"
     incomeBuild.push({ source: label, percentage: bmc, desc, isCriminal: true });
   }
   if (incomeBuild.length === 0) {
@@ -404,14 +412,14 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
           return exp.includes('grain') || exp.includes('cereal');
         })) &&
       !hasIncomeSource('grain') &&
-      !hasIncomeSource('agricultural')
+      !hasIncomeSource('agricultural') && !hasIncomeSource('harvest') // D10: the rents row's harvest twin reads as the rents row did
     ) {
       incomeBuild.push({
         source: 'Grain Sales',
         percentage: Math.max(6, Math.round(ecoInstFlags.economyOutput / 9)),
-        desc: hasNearbyResource('grain_field', 'fertile_flood')
-          ? 'Surplus from local harvest sold to nearby settlements and passing merchants: steady income tied to the growing season.'
-          : 'Grain purchased from farming regions and resold or processed locally; margin depends on stable supply routes.',
+        desc: hasNearbyResource('grain_field', 'fertile_flood') // the surplus words read the food record below (F7)
+          ? GRAIN_SURPLUS_LINE
+          : GRAIN_BOUGHT_LINE,
       });
     }
     if (
@@ -429,8 +437,8 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
         source: 'Wool & Textile Trade',
         percentage: Math.max(8, Math.round(ecoInstFlags.economyOutput / 7)),
         desc: hasNearbyResource('grazing_land')
-          ? 'Local flocks provide raw wool; weavers and fullers convert it to cloth sold across the region.'
-          : 'Wool bought from pastoral regions and processed locally: value-add trade dependent on consistent supply.',
+          ? WOOL_LOCAL_LINE
+          : WOOL_BOUGHT_LINE,
       });
     }
     if (
@@ -448,9 +456,13 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
       incomeBuild.push({
         source: 'Iron & Metalwork',
         percentage: Math.max(8, Math.round(ecoInstFlags.economyOutput / 7)),
-        desc: hasNearbyResource('iron_deposit', 'coal_deposit', 'precious_metal')
-          ? 'Local ore feeds the smithy directly. Metalwork income is not trade-route dependent.'
-          : 'Iron imported from mining regions and worked locally; this income stream is vulnerable to supply disruption.',
+        // COHERENCE-AGREE: "local ore" only where the town has ore; coal fires the forges and is not ore. The smith's
+        // ore is iron, the material table's one answer (COHERENCE-AGREE-3, F3): gold or silver alone buys its iron in.
+        desc: liveMaterialFor('metals', nearbyResources)
+          ? LOCAL_ORE_LINE
+          : hasNearbyResource('coal_deposit')
+            ? (FORGE_HOUSE_WORDS.some((w) => hasInstNamed(w)) ? LOCAL_COAL_LINE : LOCAL_COAL_SOLD_LINE) // declared in incomeLineSiblings.js (F13; COHERENCE-AGREE-8 T3: the twin where no forge house stands)
+            : IRON_IMPORTED_LINE,
       });
     }
     // Timber income. Old needles 'forest_access'/'timber_rights' matched no
@@ -465,9 +477,9 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
       incomeBuild.push({
         source: 'Timber Trade',
         percentage: Math.max(7, Math.round(ecoInstFlags.economyOutput / 8)),
-        desc: hasNearbyResource('managed_forest', 'shipbuilding_timber', 'hunting_ground')
-          ? 'Local forest provides sustainable timber revenue; managed felling and sawmilling keep production consistent.'
-          : 'Timber sourced from more distant forests and resold or processed locally: trade route dependent.',
+        desc: (hasNearbyResource('managed_forest', 'shipbuilding_timber') || ['sawmill', 'lumber', 'timber', 'carpent', 'wood', 'forest'].some((w) => hasInstNamed(w))) // COHERENCE-AGREE-8 (T2): a managed or shipbuilding forest, or a wild stand a wood house works
+          ? TIMBER_LINE
+          : TIMBER_BOUGHT_LINE,
       });
     }
     if (
@@ -486,7 +498,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
           ? 'Fish & Maritime Produce'
           : 'Fish & Preserved Produce',
         percentage: Math.max(8, Math.round(ecoInstFlags.economyOutput / 8)),
-        desc: 'Catch landed and sold fresh or preserved; salt fish are a major regional export commodity.',
+        desc: FISH_EXPORT_LINE,
       });
     }
     if (
@@ -502,9 +514,9 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
       incomeBuild.push({
         source: 'Stone Quarrying',
         percentage: Math.max(6, Math.round(ecoInstFlags.economyOutput / 10)),
-        desc: hasNearbyResource('stone_quarry', 'gemstone')
-          ? 'Local quarry provides dressed stone to regional builders: reliable income with low transport overhead.'
-          : 'Stone masons work imported material; the quarrying income notation reflects processing margin only.',
+        desc: hasNearbyResource('stone_quarry') // COHERENCE-AGREE: a gem deposit is not a quarry of dressed stone
+          ? QUARRY_LINE
+          : MASONS_LINE,
       });
     }
     // Custom goods the caller has force-toggled on — one income line each.
@@ -529,24 +541,12 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
         }
       });
     }
-  } // ── Stage 3: Income normalization ───────────────────────────────────────────
+  } { const work = houseOfWorkLine(tier, incomeBuild, instNamesLower, (config.stressTypes || []).includes('under_siege')); if (work) incomeBuild.push(work); } // #93 (UPKEEP-8): a small place's house of work earns too. ── Stage 3: Income normalization ──
   const incomeMultiplier = priorityToMultiplier(ecoInstFlags.economyOutput);
   const incomeWeighted = incomeBuild.map((entry) => ({ ...entry, weight: entry.percentage * incomeMultiplier }));
-  const incomeTotalWeight = incomeWeighted.reduce((sum, entry) => sum + entry.weight, 0) || 1;
-  const incomeNormalized = incomeWeighted.map((entry) => ({
-    ...entry,
-    percentage: Math.round((entry.weight / incomeTotalWeight) * 100),
-    priorityNote: null,
-  }));
-  // (legacy alias block removed)
-  const percentageSum = incomeNormalized.reduce((sum, entry) => sum + entry.percentage, 0);
-  if (incomeNormalized.length > 0 && percentageSum !== 100) {
-    const largestIdx = incomeNormalized.reduce(
-      (bestIdx, entry, idx) => (entry.percentage > incomeNormalized[bestIdx].percentage ? idx : bestIdx),
-      0
-    );
-    incomeNormalized[largestIdx].percentage += 100 - percentageSum;
-  }
+  // ONE SHADOW FIGURE (TAIL-DEFECON-5, ruling R2): the criminal row is held at the capture it was pushed with (`shareIncomeRows`).
+  const incomeNormalized = incomeWeighted.map((entry) => ({ ...entry, priorityNote: null }));
+  shareIncomeRows(incomeNormalized, Math.max(0, Math.min(100, Math.round(incomeWeighted.find((entry) => 'isCriminal' in entry && entry.isCriminal)?.percentage ?? 0))));
   const stressTypes = config.stressTypes || [];
   // The pre-chain trade lists (necessity imports, the stress-shaped exports and imports, the goods toggles):
   // economy/primaryTradeLists.js, extracted verbatim for the cohesion ceiling (LANDING-3).
@@ -663,7 +663,11 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
       impact = isUnderStress
         ? 'Supply route severed. Operating at minimal capacity or shut down.'
         : isEffectivelyIsolated
-          ? 'No trade access: running on existing stockpiles only.'
+          // BAR6-RECORD (c) (9d.isolated, the chair's direction of BRIEF-BAR6; vetoable by the owner): an isolated village
+          // or larger is a poor road, not no trade: the food balance's minor routes reach it (`facts/tradeReach.js`), so
+          // its need comes in irregularly and stores carry the gaps; a thorp or a hamlet off every road runs on stores.
+          // SEAM-ECON item 2 (2026-11-17): the leaf is asked with this file's own wider reading of a siege (`isUnderStress`)
+          ? (minorRoutesReach({ route: tradeRoute, tier, siege: isUnderStress }) ? POOR_ROAD_SUPPLY_LINE : 'No trade access: running on existing stockpiles only.')
           : _hasMagicTradeForDeps && isIsolatedRoute
             ? 'Supplied via magical trade infrastructure: teleportation imports replace road access.'
             : 'Dependent on trade routes. Siege, road closure, or blockade would impair operations.';
@@ -684,6 +688,8 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
   // fork (food.cropFortune), so writing it earlier moves no other stream.
   const _foodSec = generateFoodSecurity(tier, institutions, { ...config, tradeRouteAccess: tradeRoute });
   const _foodRecord = _foodSec?.foodRecord ?? null;
+  // COHERENCE-AGREE-3 (F7): "surplus" only where the food record holds one; otherwise the declared twin.
+  for (const entry of incomeNormalized) if (entry.desc === GRAIN_SURPLUS_LINE && !offersFoodSurplus(_foodRecord)) entry.desc = GRAIN_OWN_FIELDS_LINE;
   const activeChainsList = computeActiveChains(
     institutions || [],
     nativeNearbyResources,
@@ -727,9 +733,11 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
     activeChainsList,
     nativeNearbyResources,
     depletedResources,
+    institutions || [], // TAIL-DEFECON-C (C1-A): the made list asks this town's own houses
+    config?.terrainType || null, // TAIL-DEFECON-C-3 (D30 (b)): a gathered good asks the record's own exploitation
   );
   const instServices = deriveInstitutionalServices(institutions || []);
-  const serviceExports = deriveServiceExports(instServices);
+  const serviceExports = deriveServiceExports(instServices, goodsOnlyRefusedChainsMake(activeChainsList)); // COHERENCE-AGREE-8 (F2's fifth writer): the services ask the leaf too
 
   // Depleted resources at town+ scale: settlement needs to import what it can no longer
   // produce in sufficient quantity — local exhaustion triggers trade dependency
@@ -750,7 +758,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
   } = applyFinishedGoodsDemandWithOwnership({
     tier, tradeRoute, institutions,
     nearbyResources: nativeAvailableResources,
-    chainExports, chainImports,
+    chainExports, chainImports, refusedOnly: goodsOnlyRefusedChainsMake(activeChainsList), // COHERENCE-AGREE-6 (F2): the export bonus reads the one predicate (domain/chainYield.js)
   });
   // Override heuristic arrays with chain-derived values (clean mutation — before return)
   primaryExports.length = 0;
@@ -797,7 +805,8 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
   // re-exports excepted). Runs after every writer above; economyReconcilePass
   // re-applies it after later passes append imports (factionCorrelationPass's
   // applySubsumption is INSTITUTION subsumption, not this).
-  normalizeFinalTradeLists(primaryExports, primaryImports, tradeStreams.localProduction);
+  normalizeFinalTradeLists(primaryExports, primaryImports, tradeStreams.localProduction); dropExportsImportedShort(primaryExports, primaryImports, depletedResources); // BAR3-DEFECON-2 (the chair's word, 21:27 UTC): no good both brought in as a shortage and sent out
+  sayHowLittleGrain(primaryImports, _foodSec?.foodRecord); // COHERENCE-AGREE: the import list tells the food record's story
   // Keep exact owners sparse so vanilla economies remain byte-identical.
   const earlyTradeOwnership = deriveEarlyTradeOwnership({
     primaryExports, primaryImports, nativeTradeCandidates,
@@ -806,7 +815,9 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
   // Sort income sources by percentage desc, then by CODEPOINT source order (NOT
   // localeCompare) — this list is persisted in the settlement, so the tiebreak
   // must resolve identically across devices/locales — must be LAST
+  keepRowsThePageBearsOut(incomeNormalized, { roster: instNamesLower, ground: nativeAvailableResources, exports: primaryExports }); // UPKEEP-16 (o re-ruled, D): an income row is borne out by the page
   incomeNormalized.sort((a, b) => b.percentage - a.percentage || compareCodepoint(a.source, b.source));
+  for (const entry of incomeNormalized) entry.desc = trueIncomeDesc(entry.desc, { roster: instNamesLower, besieged: stressArr.includes('under_siege'), imports: primaryImports, exports: primaryExports, chains: activeChainsList, top: entry === incomeNormalized[0], source: entry.source, managedForest: hasResource(['managed_forest']) || (hasResource(['shipbuilding_timber']) && hasInst('woodcutter')), grainFailed: _foodRecord?.failedSource === 'grain', fishFailed: _foodRecord?.failedSource === 'fish', fisheryExhausted: depletedResources.some((r) => /fish/.test(r)) && !hasResource(['fish']) }); // UPKEEP-8: each income line says only what the finished record holds
   const { label: baseProsperity } = computeBaseProsperity(
     tier,
     tradeRoute,
@@ -816,14 +827,30 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
     incomeNormalized,
     _foodSec,
   );
+  const { prosperity, prosperityStanding } = deriveProsperityLabels(baseProsperity, standingBaseProsperity(tier, tradeRoute, institutions, config, instNames, incomeNormalized), config, institutions); // COHERENCE-UPKEEP-5 (R3): beside the printed label, the label with no crisis in force, the one draw replayed
+  // TAIL-DEFECON-4 (03703, X9 03932): a trade that 'thrives' and 'draws customers from surrounding settlements' is not
+  // said of a place whose own label is Subsistence, Struggling or Poor; it keeps the alchemist's existing plain line.
+  // The label is derived AFTER trueIncomeDesc (above), and nothing between reads a desc. No draw.
+  if (['Subsistence', 'Struggling', 'Poor'].includes(prosperity)) for (const entry of incomeNormalized) if (entry.desc === ALCHEMY_TRADE_LINE) entry.desc = ALCHEMIST_SUPPLEMENTS_LINE;
+  // COHERENCE-UPKEEP (ruling 7): the guard assessment says what the place can pay for its hired force. Since
+  // COHERENCE-UPKEEP-6 (the chair's ruling A) that is written AFTER the defence profile, which it reads
+  // (steps/assembleSettlement.js, beside generateDefenseProfile): one home for pay on every surface.
+  // COHERENCE-UPKEEP (ruling 6): the stores are laid by at the label's share, at the stores' writer,
+  // AFTER prosperity (which read the full-granary record above and reads no months). The writer's
+  // only draw is a label-keyed fork, so this second call draws the same crop fortune and moves no
+  // stream; every storage field (the months, the note, the resilience) follows the kept months.
+  const _keptFoodSec = generateFoodSecurity(
+    tier, institutions, { ...config, tradeRouteAccess: tradeRoute }, boughtShare('stores', keepOf(prosperityStanding)), // R3: laid by at the standing label's share
+  );
   return {
       tier: tier,
-      prosperity: deriveProsperityLabel(baseProsperity, config, institutions),
+      prosperity, prosperityStanding, // R3: the standing label sits beside the printed one
       situationDesc: deriveEconomicSituationDesc(
         config,
         tier,
         institutions,
-        _foodSec,
+        _keptFoodSec,
+        prosperity, // COHERENCE-AGREE-3 (F11): the trade line reads the label printed beside it
       ),
       incomeSources: incomeNormalized,
       primaryExports: primaryExports,
@@ -840,15 +867,27 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
       tradeDependencies: tradeDependencies,
       institutionalServices: instServices,
       activeChains: activeChains,
-      foodSecurity: _foodSec,
+      foodSecurity: _keptFoodSec,
       economicComplexity: deriveEconomicComplexity(
         tier,
         incomeNormalized.length,
         primaryExports.length,
         hasInst('market', 'trading', 'merchant', 'guild'),
-        _foodSec?.foodRecord ?? null,
+        _foodSec?.foodRecord ?? null, incomeNormalized,
       ),
     };
 };
 import { speakTierNoun } from '../../domain/display/stateProse/stateProseKernel.js'; import { tierNounFor } from '../../domain/display/stateProse/weaveBlock.js'; // at the END on purpose: this file's writes are cited by LINE; the Gate Tolls line speaks the tier noun (lane TIER-NOUN-POOLS, tests/generators/tierNounPoolDraws.test.js)
-import { buildPrimaryTradeLists } from './primaryTradeLists.js'; // at the END for the same reason: the pre-chain trade lists, extracted for the cohesion ceiling (LANDING-3)
+import { buildPrimaryTradeLists, sayHowLittleGrain } from './primaryTradeLists.js'; // at the END for the same reason: the pre-chain trade lists, extracted for the cohesion ceiling (LANDING-3)
+import { keepOf, boughtShare } from '../../domain/facts/keep.js';
+import { goodsOnlyRefusedChainsMake } from '../../domain/chainYield.js'; // at the END for the same reason: COHERENCE-AGREE-6 (F2), the export bonus asks the one predicate
+
+// UPKEEP-12 (#115, the chair's step 3): an income line that names a house reads the roster. The Arcane Industry gate
+// admits a wizard's tower alone; the line's second sentence (the guild's) prints only where a mages' guild or an academy
+// stands, and a tower alone prints the first sentence of the same line. At the END of the file so no cited line moves.
+const ARCANE_INDUSTRY_LINE = "Enchanting contracts, magical research commissions, and the licensing of spellcasting practitioners. The mages' guild contributes meaningfully to civic revenue.";
+/** @param {(...names: string[]) => boolean} hasInst the roster's own name test @returns {string} */
+function arcaneIndustryLineOf(hasInst) {
+  return arcaneGuildHouseStands(hasInst) // TAIL-CLOSE-SRC-3: the magic home's arcane houses (`facts/magic.js`)
+    ? ARCANE_INDUSTRY_LINE : ARCANE_INDUSTRY_LINE.slice(0, ARCANE_INDUSTRY_LINE.indexOf('.') + 1);
+}

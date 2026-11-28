@@ -27,7 +27,7 @@
 import { describe, test, expect, beforeAll } from 'vitest';
 import React from 'react';
 
-import { buildPrintProse } from '../../src/domain/display/stateProse/printProse.js';
+import { buildPrintProse, PRINT_NATIVE_POSITIONS } from '../../src/domain/display/stateProse/printProse.js';
 import { buildViewModel } from '../../src/pdf/lib/viewModel.js';
 import { PDF_VARIANTS } from '../../src/pdf/variants.js';
 import { buildPdfLiveWorld } from '../../src/pdf/lib/liveWorld.js';
@@ -213,7 +213,7 @@ function screenProse(s, faithUnlocked = false) {
   const out = {};
   const set = (mount, p) => { if (p) out[mount] = p; };
 
-  set('overview.ground', screenWeave(s, general.overview.siteLines));
+  set('overview.market', screenWeave(s, general.overview.siteLines)); // the woven block's first speaking mount since the ground glances (OWNER-WORDS-DOSSIER item 2)
   set('overview.crisisBanners', screenParagraph(s, 'overview.crisisBanners', [st.crisisArity]));
   set('overview.stressorLifecycle', screenParagraph(s, 'overview.stressorLifecycle',
     [st.worldStressorLifecycle, st.worldStressorOrigin]));
@@ -265,10 +265,16 @@ function screenProse(s, faithUnlocked = false) {
     [magicWorksAt({ settlement: s }) === false ? null : defenseMagicDependencyProse(s, o).arcaneReliance]));
 
   set('economics.prosperityHeader', screenParagraph(s, 'economics.prosperityHeader', [eco.prosperityHeader]));
-  set('economics.foodSecurity', screenParagraph(s, 'economics.foodSecurity', [eco.foodSecurityRung]));
+  // W1 ECO construction (2026-11-07): each economy position carries the lenses the tab draws at
+  // it, in the tab's order (EconomicsTab.jsx's DeskLines at each mount); re-stated here from the
+  // screen, never from the builder (W1 ECO second seat: this arm reddened at 725b62eb5).
+  set('economics.foodSecurity', screenParagraph(s, 'economics.foodSecurity',
+    [eco.foodSecurityRung, eco.famineSource, eco.foodMeans, eco.foodSources]));
   set('economics.commercialProfile', screenParagraph(s, 'economics.commercialProfile',
-    [eco.incomeMix, eco.criminalLine])); // T2-4: the trade-profile lens cut on screen
-  set('economics.shadowEconomy', screenParagraph(s, 'economics.shadowEconomy', [eco.shadowEconomy]));
+    [eco.incomeMix, eco.criminalLine, eco.incomeWeight, eco.criticalImport])); // T2-4: the trade-profile lens cut on screen
+  set('economics.shadowEconomy', screenParagraph(s, 'economics.shadowEconomy',
+    [eco.shadowEconomy, eco.arcaneMarket, eco.theocraticEconomy, eco.hiddenHouse]));
+  set('economics.upstreamSupply', screenParagraph(s, 'economics.upstreamSupply', [eco.upstreamWeak]));
   set('economics.tradeFlow', screenParagraph(s, 'economics.tradeFlow', [eco.tradeFlow]));
   set('economics.exportPosture', screenParagraph(s, 'economics.exportPosture', [eco.exportPosture]));
   set('economics.craftReason', screenWeave(s, [general.economics.craftReasonLine]));
@@ -278,7 +284,8 @@ function screenProse(s, faithUnlocked = false) {
     // screen's strategic-value lens REPLACES the generator line; print keeps the DM-editable
     // generator line (ResourcesProduction's STRATEGIC VALUE callout) instead, so the printed
     // position carries the exploitation lens alone. One strategic-value sentence either way.
-    ['exploitation'].map((k) => eco[k])));
+    // W1 ECO construction: the resource-condition lens the tab draws after it (ResourcesTab.jsx).
+    ['exploitation', 'resourceCondition'].map((k) => eco[k])));
   // DS-SUP-3. Since 2026-09-19 the screen renders the catalog lens at the position and the
   // IMPAIRED-HOUSE lens under that house's own service row (the owner's order; the
   // `defense.threatAssessment` idiom). Print has no rows to join to, so the position is one
@@ -288,10 +295,12 @@ function screenProse(s, faithUnlocked = false) {
   // the catalog lens to NEITHER surface on a complete catalog (economyStateProse.js).
   set('services.catalogStanding', screenParagraph(s, 'services.catalogStanding',
     [eco.catalogStanding, eco.impairedService]));
-  set('daily_life.standingOfLiving', screenParagraph(s, 'daily_life.standingOfLiving', [eco.prosperityRung]));
+  set('daily_life.standingOfLiving', screenParagraph(s, 'daily_life.standingOfLiving',
+    [eco.prosperityRung, eco.foodOnProsperity])); // W1 ECO construction: DailyLifeTab.jsx's second DeskLines
 
   set('history.identity', screenWeave(s, general.history.identityLines));
   set('history.founded', screenWeave(s, [general.history.foundedLine, general.history.recordLine]));
+  set('history.legacy', screenWeave(s, general.history.legacyLines));
   set('plot_hooks.framing', screenWeave(s, general.hooks.framingLines.slice(0, 3)));
 
   // DS-REL-1. The screen renders each inner pair beside its own neighbour card and each
@@ -321,6 +330,9 @@ function screenProse(s, faithUnlocked = false) {
     ? screenParagraph(s, 'faith.teaser', [fa.faithTeaser])
     : screenWeave(s, [fm.line.join(' '), ...[fa.faithTeaser].map((rung) => drawnAtMount('faith.teaser', rung))
       .filter((drawn) => drawn && !deferredCell(drawn)).map((drawn) => drawn.sentence).filter(Boolean)]));
+  // SW-6 (R5): the DM's hint prints UNDER the teaser on the screen (FaithTab's `faith-hint` row), so print's
+  // `faith.hint` position is the screen's own row, never woven into the paragraph above it.
+  set('faith.hint', fm.hasEmbed ? '' : screenWeave(s, [fm.hint]));
   if (faithUnlocked) {
     set('faith.patronSeat', screenParagraph(s, 'faith.patronSeat', [
       fa.patronRank, fa.patronCults, fa.devotion, fa.pietyArc,
@@ -832,7 +844,11 @@ describe('the print desk reads the screen\'s own desks', () => {
 
   test('every printed key is a SENTENCE-rung position that the registry still mounts', () => {
     const printed = flat(buildPrintProse(full, {}));
-    const strangers = Object.keys(printed).filter((m) => !drawnAtMount(m, { sentence: 'x' })?.sentence);
+    // re-keyed by identity (SW-6 R5, the chair's ruling): the named print-native positions (`faith.hint`, the DM's
+    // note under the teaser) are not desk blocks; every other printed key is still held to the registry.
+    // The exemption is ONE named position; a second is a visible proposal, never a silent widening (the chair, 15:1x).
+    expect(PRINT_NATIVE_POSITIONS.length).toBe(1);
+    const strangers = Object.keys(printed).filter((m) => !PRINT_NATIVE_POSITIONS.includes(m) && !drawnAtMount(m, { sentence: 'x' })?.sentence);
     expect(strangers, 'a printed position the registry does not route at the sentence rung').toEqual([]);
   });
 });
@@ -892,7 +908,7 @@ describe('SILENCE — no corpus, no Callout', () => {
     expect(render({ stateProse: undefined, tab: 'overview' })).toBeNull();
     expect(render({ stateProse: {}, tab: 'overview' })).toBeNull();
     expect(render({ stateProse: { overview: {} }, tab: 'overview' })).toBeNull();
-    expect(render({ stateProse: { overview: { 'overview.ground': '' } }, tab: 'overview' })).toBeNull();
+    expect(render({ stateProse: { overview: { 'overview.market': '' } }, tab: 'overview' })).toBeNull();
     // A settlement with no corpus at all yields no tabs, so every chapter renders nothing.
     for (const tab of ['overview', 'power', 'defense', 'economics', 'history', 'faith', 'war']) {
       expect(render({ stateProse: buildPrintProse(null, {}), tab })).toBeNull();
@@ -901,7 +917,7 @@ describe('SILENCE — no corpus, no Callout', () => {
 
   test('NON-VACUITY: one paragraph renders exactly one Callout, kicker and all', () => {
     const el = render({
-      stateProse: { overview: { 'overview.ground': 'The village keeps to itself.' } },
+      stateProse: { overview: { 'overview.market': 'The village keeps to itself.' } },
       tab: 'overview',
     });
     expect(React.isValidElement(el)).toBe(true);
@@ -912,7 +928,8 @@ describe('SILENCE — no corpus, no Callout', () => {
     // typography lane, 2026-09-18). It is rendered as the Callout's first child rather than
     // through the `kicker` slot, whose `type.label` would upper-case it.
     const [kickerNode, proseNode] = React.Children.toArray(callouts[0].props.children);
-    // "The place" since the chair's ruling T1-2 (2026-10-30): the site lines are THE PLACE's.
+    // "The place" since the chair's ruling T1-2 (2026-10-30). OWNER-WORDS-DOSSIER item 2b proposed
+    // "Trade and the houses"; the owner vetoed it (2026-11-09 03:5x, "No."), so the prior label returns.
     expect(kickerNode.props.children).toBe('The place');
     expect(kickerNode.props.style.textTransform, 'the page would shout a heading the screen speaks')
       .toBe('none');
@@ -949,3 +966,26 @@ describe('THE CONSOLIDATION IN PRINT (chair rulings T1-2/T1-3/T1-6..T1-10, 2026-
     expect(Object.keys(hooks)).not.toContain('plot_hooks.framing'); // anchored: the overview half of the same build drew above
   });
 });
+
+describe('THE OWNER\'S VETOES OF 2026-11-09 03:5x in print (SW-9)', () => {
+  test('the governance Callout carries GOVERNANCE, never the vetoed "WHO RUNS IT" nor "RECENT EVENT"', async () => {
+    const { readFileSync } = await import('node:fs');
+    const src = readFileSync(new URL('../../src/pdf/sections/PowerStructure.jsx', import.meta.url), 'utf8');
+    expect(src).toContain('<Callout tone="warn" kicker="GOVERNANCE">');
+    expect(src).not.toContain('kicker="WHO RUNS IT"'); // anchored: src is asserted to carry the GOVERNANCE Callout on the line above
+    expect(src).not.toContain('kicker="RECENT EVENT"'); // anchored: src is asserted to carry the GOVERNANCE Callout two lines above
+  });
+});
+
+describe('the war-weary near-peace line, one sentence on two surfaces (SW-9; SW-4\'s routed FaithWar:54 + WarTab:187)', () => {
+  test('the PDF and the War tab print the same plain line; the "scar" figure is gone from both', async () => {
+    const { readFileSync } = await import('node:fs');
+    const LINE = 'The worst of the fighting is over; this realm leans toward peace.';
+    const pdf = readFileSync(new URL('../../src/pdf/sections/FaithWar.jsx', import.meta.url), 'utf8');
+    const web = readFileSync(new URL('../../src/components/new/tabs/WarTab.jsx', import.meta.url), 'utf8');
+    expect(pdf).toContain(`'near peace': '${LINE}'`);
+    expect(web).toContain(`. ${LINE}</span>`);
+    expect(pdf + web).not.toContain('The scar is healing'); // anchored: both files are asserted to carry the new line above
+  });
+});
+

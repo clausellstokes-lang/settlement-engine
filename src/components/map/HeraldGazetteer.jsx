@@ -115,12 +115,13 @@ function RegisterRow({ row, onHover, onLeave, showable }) {
 // metric is derivable (currentEffectiveStrength is a 0..100 capacity figure,
 // not a headcount — dividing it by population would be a unit fork), so the
 // column waits for a real ratio field rather than printing a false one.
-const WAR_CLAUSE_RANK = ['under siege', 'with its armies in the field', 'at peace'];
+const WAR_CLAUSE_RANK = ['under siege', 'with its armies in the field', 'at war', 'at peace']; // no clause ('') sorts last (COHERENCE-UPKEEP-7, 2b)
+const warRank = (w) => { const i = WAR_CLAUSE_RANK.indexOf(w); return i < 0 ? WAR_CLAUSE_RANK.length : i; };
 const TABLE_SORTS = {
   name: (a, b) => codepointCompare(a.name, b.name),
   tier: (a, b) => TIER_ORDER.indexOf(a.tier) - TIER_ORDER.indexOf(b.tier),
   prosperity: (a, b) => prosperityRank(a.prosperity) - prosperityRank(b.prosperity),
-  war: (a, b) => WAR_CLAUSE_RANK.indexOf(a.war) - WAR_CLAUSE_RANK.indexOf(b.war),
+  war: (a, b) => warRank(a.war) - warRank(b.war),
   threat: (a, b) => codepointCompare(a.threat || '', b.threat || ''),
   population: (a, b) => (a.population ?? 0) - (b.population ?? 0),
 };
@@ -172,7 +173,7 @@ function GazetteerTable({ rows, seesSecrets }) {
               </td>
               <td style={td}>{row.tier}</td>
               <td style={td}>{row.prosperity || EMPTY_VALUE}</td>
-              <td style={td}>{row.war}</td>
+              <td style={td}>{row.war || EMPTY_VALUE}</td>
               {seesSecrets && <td style={td}>{row.threat || EMPTY_VALUE}</td>}
               {seesSecrets && <td style={{ ...td, textAlign: 'right', fontVariantNumeric: 'tabular-nums' }}>{row.population ?? EMPTY_VALUE}</td>}
             </tr>

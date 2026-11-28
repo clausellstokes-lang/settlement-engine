@@ -38,5 +38,5 @@ describe('X-46 3a exception: Money changers is a live town row from 2,000 people
     expect(topOfBand, 'the corpus reaches the top of the band (non-vacuous)').toBeGreaterThan(0);
     expect(rolledTop).toBeGreaterThan(0);
     expect(below).toEqual([]);
-  });
+  }, 120_000); // its own budget, carrying the measured figure (the last close's whole check, 2026-11-19): 12.3 s here under load
 });

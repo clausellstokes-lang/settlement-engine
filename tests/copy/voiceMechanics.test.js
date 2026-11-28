@@ -201,6 +201,22 @@ function charScanStringContents(src) {
 }
 
 /**
+ * E10 · THE PATTERN CLASS (WORDS-2, the tenth chair's PRERELEASE-LIST E10; RULING V2's "named for later": a declared class
+ * for pattern literals in the walker). The em-dash and exclamation bans govern PROSE; a character inside a PATTERN (a
+ * `(?<!…)` lookbehind, a `[—-]` class) is never printed. Two shapes are patterns, not counted:
+ *   (1) STRUCTURAL: the first argument of `RegExp(…)` or `new RegExp(…)`: a string, a template's text (its `${}` holes are
+ *       still code and still scanned), or a `+` of those;
+ *   (2) DECLARED: the whole initializer of a `const` named below for its file, a constant whose strings are pattern text
+ *       handed to a RegExp elsewhere (a separator class, a lookaround table). ⛔ A ROW IS AN EXACT (file, const name) PAIR,
+ *       NEVER A PATH EXEMPTION, and it carries its reason; the honesty arm reds a row whose file or const is gone, or whose
+ *       initializer no longer holds a character either ban counts (a dead row is removed, not kept).
+ * Neither shape existed in the scanned trees at the class's birth (2026-11-25, measured: 0 RegExp arguments and 0 declared
+ * consts carried an em dash or a bang in src/data, src/domain, src/generators), so no baseline moved with it.
+ * @type {Readonly<Record<string, Readonly<Record<string, string>>>>}
+ */
+const PATTERN_LITERALS = Object.freeze({});
+
+/**
  * ⛔ THE CHAR TOKENIZER WAS A FALSE INSTRUMENT, and it lied in BOTH directions.
  * (Measured 2026-09-03, lane PARSER-3, against a real parser over the same files.)
  *
@@ -233,11 +249,14 @@ function charScanStringContents(src) {
  * The char scanner is kept as a FALLBACK rather than deleted: if a file ever fails
  * to parse, degraded counting beats a silent zero (the dormancy hazard).
  *
- * @param {string} src @returns {string[]}
+ * @param {string} src @param {string|null} [rel] the file's repo-relative path (for E10's declared patterns)
+ * @param {Readonly<Record<string, Readonly<Record<string, string>>>>} [patterns] E10's declared table (a test may plant one)
+ * @returns {string[]}
  */
-function stringLiteralContents(src) {
+function stringLiteralContents(src, rel = null, patterns = PATTERN_LITERALS) {
   /** @type {string[]} */
   const out = [];
+  const declared = rel ? patterns[rel] : undefined;
   /** @type {import('espree').Node} */
   let ast;
   try {
@@ -245,11 +264,27 @@ function stringLiteralContents(src) {
   } catch {
     return charScanStringContents(src);
   }
+  /** the literal parts of a pattern argument: a string, a template's text (its holes are code, visited), a `+` of those */
+  const skipPattern = (/** @type {any} */ arg) => {
+    if (!arg) return;
+    if (arg.type === 'Literal') return;
+    if (arg.type === 'TemplateLiteral') { arg.expressions.forEach(visit); return; }
+    if (arg.type === 'BinaryExpression' && arg.operator === '+') { skipPattern(arg.left); skipPattern(arg.right); return; }
+    visit(arg);
+  };
   /** @param {any} node */
   const visit = (node) => {
     if (!node || typeof node !== 'object') return;
     if (Array.isArray(node)) { node.forEach(visit); return; }
     if (!node.type) return;
+    // E10, THE PATTERN CLASS (structural): the first argument of `RegExp(…)` / `new RegExp(…)` is a pattern, never prose
+    if ((node.type === 'NewExpression' || node.type === 'CallExpression') && node.callee?.type === 'Identifier' && node.callee.name === 'RegExp' && node.arguments.length) {
+      skipPattern(node.arguments[0]);
+      node.arguments.slice(1).forEach(visit);
+      return;
+    }
+    // E10, THE PATTERN CLASS (declared): the initializer of a const this file declares in PATTERN_LITERALS holds patterns
+    if (declared && node.type === 'VariableDeclarator' && node.id?.type === 'Identifier' && Object.hasOwn(declared, node.id.name)) return;
     if (node.type === 'Literal' && typeof node.value === 'string') out.push(node.value);
     if (node.type === 'TemplateLiteral') {
       for (const q of node.quasis) out.push(String(q.value.cooked ?? q.value.raw));
@@ -309,14 +344,13 @@ function walkJs(dir, out = []) {
 const AUTHORED_VOCABULARY_ALLOWLIST = Object.freeze({
   'src/generators/power/governanceNarrative.js': Object.freeze({
     'Unstable — criminal governance': { count: 1, why: 'public-order band, deriveBaselineStability :250 — sibling values in the same return set spell the gloss with parentheses ("Enforced Order (authoritarian)", "Tense (external threat)").' },
-    'Critical (active siege — survival priority)': { count: 1, why: 'public-order band, applyStressStability :289 — the dash is INSIDE the parenthetical gloss.' },
     'Fractured — no stable governing authority': { count: 1, why: 'public-order band, applyStressStability :295 — the `politically_fractured` stressor override.' },
-    'Shaken — institutional trust collapsed': { count: 1, why: 'public-order band, applyStressStability :298 — the `recently_betrayed` stressor override.' },
+    'Shaken — nobody trusts those in charge': { count: 1, why: 'public-order band, applyStressStability :298 — the `recently_betrayed` stressor override.' },
     'Desperate — hunger is eroding order': { count: 1, why: 'public-order band, applyStressStability :301 — the `famine` stressor override.' },
-    'Anxious — disease is overriding normal authority': { count: 1, why: 'public-order band, applyStressStability :304 — the `plague_onset` stressor override.' },
+    'Anxious — people fear the sickness more than they heed orders': { count: 1, why: 'public-order band, applyStressStability :304 — the `plague_onset` stressor override.' },
     'Volatile — power is available to whoever moves first': { count: 1, why: 'public-order band, applyStressStability :307 — the `succession_void` stressor override.' },
-    'Strained — debt obligations constrain every decision': { count: 1, why: 'public-order band, applyStressStability :313 — the `indebted` stressor override, which yields to an Unstable baseline.' },
-    'Tense — regional monster threat': { count: 1, why: 'public-order band, annotateMonsterThreat :337 — the standalone form of the "; monster threat active" annotation.' },
+    'Strained — the creditors have a say in every decision': { count: 1, why: 'public-order band, applyStressStability :313 — the `indebted` stressor override, which yields to an Unstable baseline.' },
+    'Tense — regional monster threat': { count: 1, why: 'public-order band, annotateMonsterThreat :337 — the standalone form of the "; monsters on the roads" annotation.' },
   }),
   'src/generators/economy/prosperity.js': Object.freeze({
     'Highly diversified — multiple major revenue streams': { count: 1, why: 'economic-complexity band, deriveEconomicComplexity :296 — byte-identical to src/domain/display/labelBands.js COMPLEXITY_LABEL.HIGHLY_DIVERSIFIED, which transcribes this producer.' },
@@ -378,7 +412,7 @@ function isAllowedVocabulary(rel, text) {
 /** @param {string} abs @param {string} rel @returns {{ em: number, bang: number }} */
 function countFile(abs, rel) {
   let em = 0, bang = 0;
-  for (const text of stringLiteralContents(readFileSync(abs, 'utf8'))) {
+  for (const text of stringLiteralContents(readFileSync(abs, 'utf8'), rel)) {
     // The allowlist suppresses the EM DASH only; `!` is counted regardless.
     if (!isAllowedVocabulary(rel, text)) em += (text.match(/—/g) || []).length;
     bang += (text.match(/!/g) || []).length;
@@ -649,6 +683,40 @@ describe('E2 voiceMechanics — the copy registries carry no em dash and no excl
     expect(isDeclaredOwnerCopy({ path, text: `${row.text}!` }), 'one more bang').toBe(false);
     expect(isDeclaredOwnerCopy({ path, text: 'Something else entirely!' }), 'another sentence').toBe(false);
     expect(isDeclaredOwnerCopy({ path: `${path}x`, text: row.text }), 'another path').toBe(false);
+  });
+});
+
+describe('E10 voiceMechanics — a pattern is not prose (the declared pattern class)', () => {
+  it('the first argument of RegExp / new RegExp is not counted; the flags, the holes and every other literal are', () => {
+    const src = [
+      "const a = new RegExp('(?<![a-z0-9_])gates?(?![a-z0-9_])', 'g');",
+      "const b = RegExp(`[${SEP}\u2014-]+`);",
+      "const c = new RegExp('(?!' + 'x' + ')', 'i');",
+      "const d = 'A sentence that shouts!';",
+      "const e = new RegExp(`${pick('Hello there!')}`);",
+    ].join('\n');
+    expect(stringLiteralContents(src)).toEqual(['g', 'i', 'A sentence that shouts!', 'Hello there!']);
+  });
+  it('a declared const holds patterns in its own file only, and only that const', () => {
+    const src = "const DASH = '\u2014';\nconst LOOK = { re: '(?<!x)y' };\nconst LINE = 'Halt!';";
+    const planted = { 'src/planted.js': { DASH: 'a separator class', LOOK: 'a lookaround table' } };
+    expect(stringLiteralContents(src, 'src/planted.js', planted)).toEqual(['Halt!']);
+    expect(stringLiteralContents(src, 'src/other.js', planted)).toEqual(['\u2014', '(?<!x)y', 'Halt!']);
+    expect(stringLiteralContents(src, null, planted)).toEqual(['\u2014', '(?<!x)y', 'Halt!']);
+  });
+  it('honesty: every declared row names a live const whose initializer still holds a counted character', () => {
+    const problems = [];
+    for (const [rel, consts] of Object.entries(PATTERN_LITERALS)) {
+      if (!existsSync(join(ROOT, rel))) { problems.push(`${rel}: gone; remove its row`); continue; }
+      const src = readFileSync(join(ROOT, rel), 'utf8');
+      for (const name of Object.keys(consts)) {
+        const without = stringLiteralContents(src, rel, { [rel]: Object.freeze({ [name]: 'x' }) });
+        const all = stringLiteralContents(src, rel, {});
+        const counted = (/** @type {string[]} */ l) => l.join('').replace(/[^\u2014!]/g, '').length;
+        if (counted(all) === counted(without)) problems.push(`${rel} :: ${name}: holds no em dash or bang (or no such const); remove its row`);
+      }
+    }
+    expect(problems).toEqual([]);
   });
 });
 

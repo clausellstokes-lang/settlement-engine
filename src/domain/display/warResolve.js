@@ -138,7 +138,7 @@ function supplyNote({ storageMonths, bypassChannel, besieged }) {
   const months = storageMonths == null ? null : Math.round(storageMonths);
   if (besieged) {
     if (bypassChannel === 'teleport') return 'A teleportation circle runs beneath the siege lines. Supplies arrive, and the blockade cannot touch them.';
-    if (bypassChannel === 'airship') return 'Airships run the blockade at reduced throughput; the granary drains slowly rather than sharply.';
+    if (bypassChannel === 'airship') return 'Airships run the blockade with what they can carry, so the granary drains slowly.';
     if (months != null) return `The granary stands alone against the blockade: roughly ${months} month${months === 1 ? '' : 's'} before famine.`;
     return 'The granary stands alone against the blockade, and the roads are closed.';
   }

@@ -10,6 +10,30 @@
 
 import { settlementCaptureState } from './factionCapture.js';
 import { deityDisplayNameFromRef } from '../display/deityNames.js';
+// STYLE-2 C2 (SW-12): the realm and pantheon lines carry variants by vantage, chosen by the house
+// idiom — the zero-import selection kernel keyed on the entry's own stable id.
+import { pickLine } from './proseSelection.js';
+/** The slots a prose line fills (STYLE-2 SW-12). @typedef {Record<string, string>} RealmLineSlots */
+const COUNT_WORDS = Object.freeze(['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve']);
+/** @param {number} n */
+const countWord = (n) => COUNT_WORDS[n] || String(n);
+// The realm crisis summary: how many places share it (the places are held only as ids here).
+const REALM_STRESSOR_SUMMARY = Object.freeze([
+  (/** @type {RealmLineSlots} */ x) => `${x.Label} has taken hold in ${x.n} places at once.`,
+  (/** @type {RealmLineSlots} */ x) => `${x.Label} now reaches ${x.n} places across the realm.`,
+  (/** @type {RealmLineSlots} */ x) => `In ${x.n} places at once, people are living through ${x.label}.`,
+  (/** @type {RealmLineSlots} */ x) => `${x.Label} is no longer one place's trouble: ${x.n} places share it.`,
+]);
+const ASCENDANCY_REASON = Object.freeze([
+  (/** @type {RealmLineSlots} */ x) => `More places keep ${x.name}'s rite than any other god's.`,
+  (/** @type {RealmLineSlots} */ x) => `No other god is kept in as many places as ${x.name}.`,
+  (/** @type {RealmLineSlots} */ x) => `${x.name}'s rite is kept in more places than any rival's, and has been for some time.`,
+]);
+const TWILIGHT_REASON = Object.freeze([
+  (/** @type {RealmLineSlots} */ x) => `Few places still keep ${x.name}'s rite.`,
+  (/** @type {RealmLineSlots} */ x) => `${x.name}'s rite is kept in only a few places now.`,
+  (/** @type {RealmLineSlots} */ x) => `The places that kept ${x.name}'s rite have mostly turned to other gods.`,
+]);
 
 const REALM_STRESSOR_THRESHOLD = 3;
 
@@ -30,7 +54,7 @@ const COMPOUND_SIGNATURES = Object.freeze([
     summary: 'Hunger, plague, and a fracturing faith feed one another. Flagellants walk the streets, scapegoats are named from pulpits, and prophets nobody ordained gather the desperate.',
     hooks: [
       'A flagellant movement marches between the afflicted settlements.',
-      'A minority faction is being blamed from the pulpits.',
+      'A minority is being blamed from the pulpits.',
       'A false prophet is gathering the desperate.',
     ],
   },
@@ -50,7 +74,7 @@ const COMPOUND_SIGNATURES = Object.freeze([
     types: ['siege', 'famine'],
     summary: 'The blockade holds and the granaries empty. Surrender pressure mounts with every meal that does not come.',
     hooks: [
-      'A surrender faction is counting the remaining stores aloud.',
+      'Those who want to surrender are counting the remaining stores aloud.',
       'Smugglers name their price for a way through the lines.',
     ],
   },
@@ -69,7 +93,7 @@ const COMPOUND_SIGNATURES = Object.freeze([
     label: 'The Shadow Court',
     types: ['criminal_corridor', 'infiltration'],
     requiresCapture: true,
-    summary: 'The corridor moves the goods, the agents hold the offices, and the captured factions sign whatever is put in front of them.',
+    summary: 'The corridor moves the goods, the agents hold the offices, and the captured powers sign whatever is put in front of them.',
     hooks: [
       'Petitions to the council are answered faster through the guild.',
       'An honest clerk has a ledger that maps the whole arrangement.',
@@ -310,7 +334,7 @@ export function synthesizePantheonArcs({ changes = [], snapshot = null, tick = 0
         significance: 'major',
         score: Math.round(TWILIGHT_SCORE * g),
         headline: `The Last Altar of ${name}`,
-        summary: `No settlement in the realm still keeps ${name}'s rite. The last altar stands cold, the clergy have scattered to other doors, and what survives of the faith is memory rather than practice.`,
+        summary: `No place in the realm still keeps ${name}'s rite. The last altar is cold, and its priests have gone to other temples.`,
         kind: 'pantheon',
         impactKind: 'pantheon_extinction',
         channelType: null,
@@ -320,7 +344,7 @@ export function synthesizePantheonArcs({ changes = [], snapshot = null, tick = 0
         channelIds: [],
         reasons: [
           `${name} holds no seat anywhere in the realm.`,
-          'The last settlement that kept the rite now keeps another, and no tier remains for the creed to fall from.',
+          'The last place that kept the rite has turned to another god.',
         ],
         tags: ['world_pulse', 'pantheon', 'extinction', String(change.deityId)],
         createdAt: now,
@@ -341,10 +365,7 @@ export function synthesizePantheonArcs({ changes = [], snapshot = null, tick = 0
         settlementIds: [],
         impactIds: [],
         channelIds: [],
-        reasons: [
-          `${name} crossed into the major tier of the pantheon.`,
-          'A decisive lead in seats held has been sustained past the hysteresis dwell.',
-        ],
+        reasons: [pickLine(ASCENDANCY_REASON, `wizard_news.${tick}.pantheon.ascendancy.${stablePantheonPart(change.deityId)}`, { name })],
         tags: ['world_pulse', 'pantheon', 'ascendancy', String(change.deityId)],
         createdAt: now,
       });
@@ -364,10 +385,7 @@ export function synthesizePantheonArcs({ changes = [], snapshot = null, tick = 0
         settlementIds: [],
         impactIds: [],
         channelIds: [],
-        reasons: [
-          `${name} fell to the cult tier of the pantheon.`,
-          'Its seats held collapsed past the hysteresis dwell.',
-        ],
+        reasons: [pickLine(TWILIGHT_REASON, `wizard_news.${tick}.pantheon.twilight.${stablePantheonPart(change.deityId)}`, { name })],
         tags: ['world_pulse', 'pantheon', 'twilight', String(change.deityId)],
         createdAt: now,
       });
@@ -425,7 +443,9 @@ export function synthesizeRealmEvents({ worldState, tick = 0, now = null, region
   for (const [type, settlements] of byType) {
     if (settlements.size < REALM_STRESSOR_THRESHOLD) continue;
     const human = String(type).replace(/_/g, ' ');
-    const label = /** @type {Record<string, string>} */ (REALM_LABELS)[type] || `Realm-wide ${human}`;
+    // STYLE-2 C2 (SW-12): an unlabelled type spreads across the realm (never "Realm-wide X grips the realm").
+    const named = /** @type {Record<string, string>} */ (REALM_LABELS)[type] || null;
+    const Human = `${human.charAt(0).toUpperCase()}${human.slice(1)}`;
     const ids = [...settlements].sort();
     entries.push({
       id: `wizard_news.${tick}.realm.${type}`,
@@ -433,8 +453,10 @@ export function synthesizeRealmEvents({ worldState, tick = 0, now = null, region
       scope: 'realm',
       significance: 'major',
       score: 80 + settlements.size,
-      headline: `${label} grips the realm`,
-      summary: `${settlements.size} settlements are now caught in ${human}.`,
+      headline: named ? `${named} grips the realm` : `${Human} spreads across the realm`,
+      summary: pickLine(REALM_STRESSOR_SUMMARY, `wizard_news.${tick}.realm.${type}`, {
+        Label: named || Human, label: named ? named.replace(/^The /, 'the ') : human, n: countWord(settlements.size),
+      }),
       kind: 'realm',
       impactKind: `realm_${type}`,
       channelType: null,
@@ -442,10 +464,8 @@ export function synthesizeRealmEvents({ worldState, tick = 0, now = null, region
       settlementIds: ids,
       impactIds: [],
       channelIds: [],
-      reasons: [
-        `${settlements.size} settlements share an active ${human} stressor.`,
-        'Promoted from settlement scope to a realm-wide arc.',
-      ],
+      // The two receipts (the count, the scope promotion) restated the summary and the machinery: struck.
+      reasons: [],
       tags: ['world_pulse', 'realm', type],
       createdAt: now,
     });

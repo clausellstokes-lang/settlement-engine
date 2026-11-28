@@ -1,0 +1,8 @@
+# BUILD-HEAP: the production builder gets an explicit heap (2026-11-10)
+
+Seat BOOT-TIP, session `session_01FbPLbdzUMFRegg4kskMYG6`, reopened for B7 only on `lane/build-heap-2026-11-10`, cut from BOOT-TIP's named tip `ebf6fb0b6`. Roster `dated` 218 -> 219 for this record.
+1. `fad7e3215`: `vercel.json` `buildCommand` changes from `npm run build` to `NODE_OPTIONS=--max-old-space-size=4096 npm run build`. Only the production builder changes; package.json's `build` and every local command stay as they are.
+2. Heap measured with `vite build` and `--max-old-space-size`. At ecadf531a: 1,536 and 1,792 abort, 2,048 completes. At ebf6fb0b6: 1,792 aborts (exit 134), 2,048 completes. On master db832c892: 1,536 aborts, 2,048 completes. A second seat's smaller container aborted at its default of 2,096 under load.
+3. One pin quoted the command: `tests/docs/deployRunbookFreshness.test.js` "the build command it names is the one vercel.json actually runs". It was red on the vercel.json edit alone and was re-keyed by identity: `docs/DEPLOY.md` quotes the new command and nothing else changes. Its intent is that the runbook names vercel's real command, not that the command stays bare. With the deployConfig and ciCheckParity suites it is 26/26.
+4. CI's build job was left as it is, because its runner is larger. BOOT-TIP's PLAUSIBLE is closed: none of the PowerTab, plotHooks, tonightSheet, SettlementPDF or generateSettlementPDF chunks gained `coherence-lazy` as a new static import at the cured tip; each already imported it at e870d7ca9, read from the two builds' chunk import lists.
+5. Gates: tests/lint and tests/scripts, with the red set identical to ebf6fb0b6's; eslint 0 (no JS touched).

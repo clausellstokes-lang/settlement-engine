@@ -1,0 +1,304 @@
+{
+  "id": "tradeGoodsData.IMPORT_GOODS_BY_TIER",
+  "source": "src/data/tradeGoodsData.js :: IMPORT_GOODS_BY_TIER",
+  "drawKind": "T",
+  "pool": {
+    "declares": [],
+    "crisisScoped": false,
+    "colour": false,
+    "notes": "Tier-keyed import table (ingested as import goods by lib/customRegistry.js). Per the chair, an import declares its tier band and any terrain presumption, never the absent producer. No row here carries a terrain presumption.",
+    "needs": [],
+    "excludes": []
+  },
+  "rows": [
+    {
+      "id": "tradeGoodsData.IMPORT_GOODS_BY_TIER::thorp.basic[0]",
+      "text": "Salt: Food preservation",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "chair: salt import excludes nothing"
+    },
+    {
+      "id": "tradeGoodsData.IMPORT_GOODS_BY_TIER::thorp.basic[1]",
+      "text": "Metal tools: Simple implements",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.IMPORT_GOODS_BY_TIER::thorp.basic[2]",
+      "text": "Cloth: Basic textiles",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.IMPORT_GOODS_BY_TIER::hamlet.basic[0]",
+      "text": "Metal goods: Tools, nails, horseshoes",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.IMPORT_GOODS_BY_TIER::hamlet.basic[1]",
+      "text": "Salt: Food preservation",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "chair: salt import excludes nothing"
+    },
+    {
+      "id": "tradeGoodsData.IMPORT_GOODS_BY_TIER::hamlet.basic[2]",
+      "text": "Quality cloth: Better textiles",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "hamlet import \"Better textiles\": NOT put in the luxury class — the class band (>= village) would make this hamlet-keyed row undrawable everywhere"
+    },
+    {
+      "id": "tradeGoodsData.IMPORT_GOODS_BY_TIER::village.basic[0]",
+      "text": "Metal goods: Tools, nails, horseshoes",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.IMPORT_GOODS_BY_TIER::village.basic[1]",
+      "text": "Quality cloth and clothing: Finished garments",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.IMPORT_GOODS_BY_TIER::village.basic[2]",
+      "text": "Salt for preservation: Essential preservative",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.IMPORT_GOODS_BY_TIER::village.basic[3]",
+      "text": "Specialized tools: Advanced implements",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.IMPORT_GOODS_BY_TIER::village.fromHigher[0]",
+      "text": "Legal services: Contracts, court access",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.IMPORT_GOODS_BY_TIER::village.fromHigher[1]",
+      "text": "Advanced medical care: Skilled physicians",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.IMPORT_GOODS_BY_TIER::village.fromHigher[2]",
+      "text": "Manufactured goods: Wide variety of crafts",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.IMPORT_GOODS_BY_TIER::town.restricted[0]",
+      "text": "Enslaved persons: Slaves imported from war fronts, pirate suppliers, and distant slave-hol",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "unhomed: slave market; also a town EXPORT row (bothLists)"
+    },
+    {
+      "id": "tradeGoodsData.IMPORT_GOODS_BY_TIER::town.fromCityOrMetropolis[0]",
+      "text": "Luxury textiles: Fine cloth, silk",
+      "needs": [
+        "tier: >= village"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.IMPORT_GOODS_BY_TIER::town.fromCityOrMetropolis[1]",
+      "text": "Spices and exotic dyes: Imported rarities",
+      "needs": [
+        "tier: >= village"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.IMPORT_GOODS_BY_TIER::town.fromCityOrMetropolis[2]",
+      "text": "Banking services: Letters of credit",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "income",
+      "notes": "capital"
+    },
+    {
+      "id": "tradeGoodsData.IMPORT_GOODS_BY_TIER::town.fromCityOrMetropolis[3]",
+      "text": "Advanced legal expertise: Specialized law",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.IMPORT_GOODS_BY_TIER::town.fromCityOrMetropolis[4]",
+      "text": "Rare materials: Exotic goods",
+      "needs": [
+        "tier: >= village"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "desc \"Exotic goods\""
+    },
+    {
+      "id": "tradeGoodsData.IMPORT_GOODS_BY_TIER::town.fromHinterland[0]",
+      "text": "Food surplus: Agricultural hinterland",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.IMPORT_GOODS_BY_TIER::town.fromHinterland[1]",
+      "text": "Raw wool and hides: For processing",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.IMPORT_GOODS_BY_TIER::town.fromHinterland[2]",
+      "text": "Timber: Construction material",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.IMPORT_GOODS_BY_TIER::city.fromMetropolis[0]",
+      "text": "International banking: Global connections",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "income",
+      "notes": "capital"
+    },
+    {
+      "id": "tradeGoodsData.IMPORT_GOODS_BY_TIER::city.fromMetropolis[1]",
+      "text": "Highest luxury goods: Rarities and masterworks",
+      "needs": [
+        "tier: >= village"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.IMPORT_GOODS_BY_TIER::city.fromMetropolis[2]",
+      "text": "Political legitimacy: Royal/imperial connections",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "not a good (power/access); left to the chair"
+    },
+    {
+      "id": "tradeGoodsData.IMPORT_GOODS_BY_TIER::city.fromHinterland[0]",
+      "text": "Bulk food: Massive agricultural needs",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.IMPORT_GOODS_BY_TIER::city.fromHinterland[1]",
+      "text": "Raw materials: Ore, timber, wool",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.IMPORT_GOODS_BY_TIER::city.fromHinterland[2]",
+      "text": "Basic goods for resale: Market redistribution",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.IMPORT_GOODS_BY_TIER::metropolis.basic[0]",
+      "text": "Massive food requirements: Regional network",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.IMPORT_GOODS_BY_TIER::metropolis.basic[1]",
+      "text": "Raw materials: Entire regional supply",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.IMPORT_GOODS_BY_TIER::metropolis.basic[2]",
+      "text": "Luxury imports: From distant lands",
+      "needs": [
+        "tier: >= village"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    }
+  ]
+}

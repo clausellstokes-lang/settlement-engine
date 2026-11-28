@@ -30,7 +30,7 @@ import { join } from 'node:path';
 
 import { ROOT } from '../helpers/dossierCorpus.js';
 import { closureCost } from '../../scripts/lib/module-closure.mjs';
-import { compromisedSecurityInstitutions } from '../../src/domain/corruption.js';
+import { compromisedSecurityInstitutions } from '../../src/domain/corruptionLeash.js'; // moved by ALLEGIANCE-CAR3
 import { deskReturns } from '../../scripts/prose-rate-corpus.mjs';
 import {
   PAIRED_TOWN, securityInstitutionsOf, tasteTown, withCorruption,
@@ -90,11 +90,32 @@ describe('the corruption closure is re-measured, and refused above the precedent
   it('the DESK\'s closure is what actually ships, and the import adds the same six files to it', () => {
     const leafCost = closureCost(CANDIDATES_LEAF, CORRUPTION);
     const deskCost = closureCost(DEFENSE_DESK, CORRUPTION);
-    // The leaf is imported ONLY by its desk, so the two answers must agree: nothing new
-    // reaches a bundle through the leaf that would not reach it through the desk.
-    expect(deskCost.files.map((f) => f.replace(`${ROOT}/`, '')).sort())
-      .toEqual(leafCost.files.map((f) => f.replace(`${ROOT}/`, '')).sort());
-    expect(deskCost.bytes).toBe(leafCost.bytes);
+    // The leaf is imported ONLY by its desk, so nothing new reaches a bundle through the leaf
+    // that would not reach it through the desk: the desk's added set is the leaf's, LESS what the
+    // desk's own closure already ships. Equal until the census's fact homes reached the desk:
+    // census-1 wave 0 fact 1 (fda620b75, the crisis-kind home) brought settlement.schema.js into
+    // the desk's closure (desk adds 6 -> 5 at it, measured on archives), and census-3b(1)
+    // (0fab7c35a, the delegated getters) brought prosperityRank.js (5 -> 4). So the import costs
+    // the shipped desk 4 files / 65,983 B, not the leaf's 6 / 153,025 B. PULSE-SITES (2026-11-10, 0db374102) gave
+    // corruption.js :: npcHomeInstitution an import of people/membership.js, which the desk already ships: the
+    // leaf's added set gains it and the desk's does not (re-keyed by that cause; the byte arm above unmoved).
+    const desk = deskCost.files.map((f) => f.replace(`${ROOT}/`, '')).sort();
+    const leaf = leafCost.files.map((f) => f.replace(`${ROOT}/`, '')).sort();
+    expect(desk.filter((f) => !leaf.includes(f)), 'the desk adds nothing the leaf does not').toEqual([]);
+    // COHERENCE-AGREE-8 (2026-11-13) gave supplyChainState.js an import of display/chainPrintName.js (the toll's printed
+    // name), whose goods identity reaches data/entityTags.js, which the desk now ships: re-keyed by that cause.
+    // BAR4-CLOSE-DOORS-1 (2026-11-16, the close of the round BAR4, on the chair's word of 16:44 UTC): the desk now reaches the round's
+    // one fact src/domain/facts/houseInputAtHand.js (BAR4-SCENES-2 HW1 6dd18224a, "this house is short" read by the mark and the scene),
+    // which imports lib/entities.js :: institutionHasAnyTag (BAR4-RECORD R1 b7d3da983), so the desk ships lib/entities.js too: re-keyed
+    // by that cause (the byte arm above unmoved).
+    expect(leaf.filter((f) => !desk.includes(f)), 'what the desk already ships').toEqual([
+      'src/data/entityTags.js',
+      'src/domain/people/membership.js',
+      'src/domain/prosperityRank.js',
+      'src/domain/settlement.schema.js',
+      'src/lib/entities.js',
+    ]);
+    expect(deskCost.bytes).toBeLessThanOrEqual(leafCost.bytes);
     expect(deskCost.bytes).toBeLessThanOrEqual(PRECEDENT_BYTES);
   });
 });

@@ -1,0 +1,55 @@
+THE TRADITIONS DESCRIPTIONS, MEASURED — IN PLAIN WORDS
+Written 2026-11-20 16:36 UTC (TRAD-4, unit 6). "Before" is the measure taken before this lane's work (TRAD-3's hand-back). "After" is
+the same 432 towns (six sizes, twelve cultures, six seeds each), born the same way and read on the finished descriptions.
+Your page unless said otherwise. The full figures are in out-trad4/measure-owner.txt and out-trad4/measure-reader.txt.
+
+WHO KEEPS IT. The 432 towns print 1,232 rites. 633 of them (51.4%) name a house that keeps the rite, 474 (38.5%) name
+the town's ruling power, and 125 name no keeper. Before: 51.4% and 38.5%, the same. No rite here is kept "now" by a new
+owner: that only happens after play moves a rite, and these towns are newborn.
+
+WHERE IT COMES FROM. 432 rites of 1,232 (35.1%) say where the rite comes from: 387 go back to the town's founding, and 45
+rites of the dead are kept in memory of a great fire, flood, sickness or siege the town's own history holds (45 of its
+63 rites of the dead). Before: 35.1%, and 45 of 63. The same.
+
+WHO PAYS. 346 rites of 1,232 (28.1%) say what the town lives on, where an income fits the rite (the harvest, market
+taxes, port duties, fish). Before: 28.1%. The same.
+
+THE SHORT FORM. 107 rites of 1,232 (8.7%) are one sentence, what is done and nothing more, because the town holds
+nothing that fits a keeper or a cause. By size: thorp 10 of 81, hamlet 8 of 78, village 13 of 112, town 21 of 203,
+city 22 of 315, metropolis 33 of 443. In the two sizes below the village that is 18 of 159 rites: there the one
+sentence is the whole description of a small quiet place, not a gap. Before: 8.7% overall (no figure by size was taken).
+
+THE MOST REPEATED DESCRIPTION. Two descriptions are printed 3 times each: "A contest that marks the coming of spring."
+and "A common feast that welcomes the year's new growth.", each in 3 different towns of 432, fewer than one town in a
+hundred (0.7). Before, the most repeated was printed 5 times (1.2 towns in a hundred). Different descriptions: 1,213 of
+1,232 (before: 1,192). With the town's name hidden, the most repeated pattern is printed 4 times.
+
+IS ANY POOL DOMINATED BY ONE LINE? No. Each part of a description is drawn from three to eight lines. Of the pools drawn
+20 times or more, the most lopsided is the hunt's "marks the hunting season", printed 25 times of 49 (51%); next the
+hearth's "blesses hearth and home", 16 of 33 (48%); every other pool's commonest line holds 28% to 46%. Before, every
+"what is done" ending had a single line (the harvest's two), so it was always the same.
+One lean to know: before the crisis rule swaps anything, the feast picks "A common feast" 171 times of 309 (55%), and the
+procession picks "A procession" 90 of 203 (44%). The pick among four lines reads only part of what it is keyed on (a
+property of the shared hash, not changed here). As printed, "A common feast" stands in 114 of 309 (37%).
+
+"CALM" TOWNS ARE NOT ALL CALM. 146 of the 432 towns are born with a pressure of their own (famine in 19, plague in 15,
+and so on). There the lines that would jar with hardship are quietly swapped for plain ones ("A feast day", "A fair kept
+by custom", "is kept for the harvest"): 91 feast lines, 49 fair lines, 17 harvest lines. Nothing about the hardship is
+said. One wording to look at: where two swaps meet, "kept" is said twice ("A feast day kept by custom that is kept for
+what the fields give"), in 11 rites of 1,232 (23 under famine). Not changed here.
+
+THE READER'S PAGE shows the same 1,232 rites, and its counts match yours but two: 430 rites say where they come from (two
+rites of the dead whose event's name carries a name the town holds are not tied to it for the reader), and 347 say who
+pays.
+
+WHERE YOUR PAGE AND THE READER'S DIFFER BECAUSE OF CRIME. 45 of 432 towns hold a criminal income. On 17 of 1,232 rites
+your sentence about what the town lives on differs from the reader's, because you see the criminal income ranked among
+the others and the reader does not. For example, where the criminal income stands first of nine: yours, "Market taxes
+are one of the mainstays of [the town]."; the reader's, "Market taxes bring [the town] more than anything else."
+
+IN CRISIS. The same 432 seeds were born five more times, each with one crisis forced (famine, siege, occupation, war,
+plague). Every crisis town shows exactly the same rites as its calm twin (none of 6,160 missing). Of each crisis's 1,232
+rites, these read differently: famine 531, siege 541, occupation 401, war 434, plague 496. Two reasons: a line is swapped
+for its plain twin (218 feast lines, 91 fair lines, 31 harvest lines, the same in every crisis), or the town itself came
+out differently (another house or keeper, another income first, another memory: famine 302, siege 326, occupation 153,
+war 205, plague 266). No line speaks of the crisis.

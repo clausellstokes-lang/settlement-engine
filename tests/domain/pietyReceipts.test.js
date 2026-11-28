@@ -99,7 +99,8 @@ describe('piety receipts — amplified conversion outcome (integration)', () => 
     expect(flip.metadata.amplifiers).toEqual({ localMult: 1.5, realmMult: 1.1 });
     // legibility law: the reason chain is non-empty and mentions the devotion.
     expect(Array.isArray(flip.reasons) && flip.reasons.length).toBeGreaterThan(0);
-    expect(flip.reasons.some((r) => /devotion|piety/i.test(r))).toBe(true);
+    // SW-11: the devotion line names the town as devout ("… is a devout town, so …").
+    expect(flip.reasons.some((r) => /devotion|piety|devout/i.test(r))).toBe(true);
     // site #4: the amplified severity exceeds the un-amplified 0.5 base.
     expect(flip.severity).toBeGreaterThan(0.5);
   });

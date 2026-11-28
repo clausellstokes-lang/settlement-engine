@@ -251,8 +251,9 @@ describe('the exposure roster mirrors the affordance manifest (SB2 parity pin)',
   // the two rosters can never drift without a red here.
   const fx = {
     npcs: [
-      { id: 'npc.aldis', name: 'Aldis', corrupt: true },
-      { name: 'Berta', corrupt: true },           // no id — keys by name (findNpc resolves both)
+      // ALLEGIANCE-CAR1 (2026-11-08): the retired `corrupt` mark is the card's hidden `allegiance` (allegianceOf)
+      { id: 'npc.aldis', name: 'Aldis', allegiance: { power: null, house: 'The Guild', vector: 'greed', via: 'retainer', handler: null, share: 0.15, veiled: true, covert: true } },
+      { name: 'Berta', allegiance: { power: null, house: 'The Guild', vector: 'greed', via: 'retainer', handler: null, share: 0.15, veiled: true, covert: true } },           // no id — keys by name (findNpc resolves both)
       { id: 'npc.cato', name: 'Cato' },           // clean — never offered
     ],
     institutions: [

@@ -11,7 +11,7 @@
 import { describe, it, expect } from 'vitest';
 
 import {
-  newsBodyText, newsReaderSummary, newsReasonPhrases, BODY_POOLS,
+  newsBodyText, newsReaderSummary, newsReasonPhrases, BODY_POOLS, newsCardReasons, newsCardTooltip, newsStatusWord,
 } from '../../src/domain/display/newsBody.js';
 
 const TRANSITIONS = ['queued', 'ready', 'applied', 'resolved', 'ignored', 'expired'];
@@ -55,7 +55,7 @@ describe('newsBody — reasons recast into fiction', () => {
     };
     const phrases = newsReasonPhrases(entry);
     expect(phrases).toContain('a heavy blow');
-    expect(phrases).toContain('carried along a vital road');
+    expect(phrases).toContain('carried by a tie the town depends on');
     expect(phrases).toContain('spreading from town to town');
     // The engine receipt vocabulary is gone.
     for (const p of phrases) {
@@ -77,7 +77,7 @@ describe('newsBody — reasons recast into fiction', () => {
     })).toEqual([
       'a raid across the border',
       'a matter that cuts deep',
-      'unmapped reason',
+      // A1·13 (SW-11): an unregistered bare token prints no pill at all.
     ]);
   });
 
@@ -98,7 +98,7 @@ describe('newsBody — reasons recast into fiction', () => {
       'the reversal exacted a real political price',
     ]);
     expect(newsReaderSummary(entry)).toBe(
-      'The court held to the war too long; reversing course carried a real political price.',
+      'The court held to the war too long, and backing out of it now has cost its rulers dearly.',
     );
     // anchored: the exact reader summary above proves the kind-specific projection fired.
     expect(newsReaderSummary(entry)).not.toMatch(/\d|%|×|\b(?:stock|commitment|cliff)\b/i);
@@ -173,5 +173,53 @@ describe('newsBody — VIEW-TIME variety (CONTENT-VT-2)', () => {
     for (const [cell, pool] of Object.entries(BODY_POOLS)) {
       expect(seen[cell].size, `${cell} fully reachable`).toBe(pool.length);
     }
+  });
+});
+
+describe('newsBody — the body states the filed event (STYLE-RULINGS-2 C1)', () => {
+  it('a filed summary IS the body, at most two sentences; the title holds the rest only when cut', () => {
+    const one = { id: 'x1', kind: 'applied', summary: 'Aldmark sends forty more men to the army outside Brackwater.' };
+    expect(newsBodyText(one)).toBe(one.summary);
+    expect(newsCardTooltip(one)).toBe('');
+    const three = { id: 'x2', kind: 'applied', summary: 'Aldmark marches. Brackwater shuts its gates. The harvest rots.' };
+    expect(newsBodyText(three)).toBe('Aldmark marches. Brackwater shuts its gates.');
+    expect(newsCardTooltip(three)).toBe(three.summary);
+  });
+
+  it('the pills drop a reason the body already prints and the reach/lifecycle receipts of a filed event', () => {
+    const entry = {
+      id: 'x3', kind: 'queued',
+      summary: 'Aldmark is bound by its alliance to stand with Brackwater.',
+      reasons: ['Aldmark is bound by its alliance to stand with Brackwater.', 'chain propagation', 'multi-settlement scope', 'high severity'],
+    };
+    expect(newsCardReasons(entry)).toEqual(['a heavy blow']);
+    // A legacy entry with no summary keeps every reader phrase.
+    expect(newsCardReasons({ kind: 'queued', reasons: ['chain propagation'] })).toEqual(newsReasonPhrases({ reasons: ['chain propagation'] }));
+  });
+});
+
+describe('newsBody — the status pill is a plain word or nothing (STYLE-RULINGS-2 C1)', () => {
+  it('a travelling regional effect says coming / in effect / past; every other entry prints no pill', () => {
+    const travelling = (kind) => newsStatusWord({ kind, impactIds: ['impact.1'] });
+    expect(['queued', 'ready', 'applied', 'resolved', 'ignored', 'expired'].map(travelling))
+      .toEqual(['coming', 'coming', 'in effect', 'past', 'past', 'past']);
+    expect(newsStatusWord({ kind: 'applied', impactIds: [] })).toBe('');
+    expect(newsStatusWord({ kind: 'pantheon' })).toBe('');
+    expect(newsStatusWord(null)).toBe('');
+  });
+});
+
+describe('newsBody — the dateline names the place a body leaves unnamed (STYLE-RULINGS-2 C1)', () => {
+  const nameById = new Map([['s1', 'Kleinwalde'], ['s2', 'Bergburg']]);
+  it('leads with the entry\'s place only when the filed sentence names none', () => {
+    const unnamed = { id: 'd1', kind: 'applied', settlementIds: ['s1'], summary: 'Betrayal shock is over.' };
+    expect(newsBodyText(unnamed, { nameById })).toBe('Kleinwalde: Betrayal shock is over.');
+    const named = { id: 'd2', kind: 'applied', settlementIds: ['s1'], summary: 'Kleinwalde mobilizes.' };
+    expect(newsBodyText(named, { nameById })).toBe('Kleinwalde mobilizes.');
+    // A travelling effect is datelined at its destination, the last of its path.
+    const wave = { id: 'd3', kind: 'queued', impactIds: ['i'], settlementIds: ['s1', 's2'], summary: 'Word has come of unrest.' };
+    expect(newsBodyText(wave, { nameById })).toBe('Bergburg: Word has come of unrest.');
+    // Without the panel's name map the sentence prints as filed.
+    expect(newsBodyText(unnamed)).toBe('Betrayal shock is over.');
   });
 });

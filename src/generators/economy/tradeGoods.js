@@ -7,12 +7,13 @@ import { customDeps as _customDeps } from '../../lib/dependencyEngine.js';
 import { COMMODITY_CATEGORY_MAP, GOODS_CATEGORIES, GOODS_MODIFIERS_BY_TIER } from '../../data/goods/chains.js';
 import { RESOURCE_DATA } from '../../data/goods/identity.js';
 import { TIER_ORDER } from '../../data/constants.js';
-import { tradeRouteTier } from '../../domain/tradeRouteSemantics.js';
+import { tradeRouteTier, routeMakesEntrepot } from '../../domain/tradeRouteSemantics.js'; // B1(i)c: the entrepot route's one home
 import {
   nativeSemanticName,
   nativeSemanticNames,
 } from '../../domain/content/customContentSemanticAuthority.js';
 import { availableNativeResourceKeys } from '../../domain/resourceSemantics.js';
+import { ENTREPOT_LINE } from './incomeLineSiblings.js';
 
 
 // deriveLocalCommodities
@@ -91,7 +92,7 @@ const deriveIsEntrepot = (route, institutions = []) => {
   const instNames = nativeSemanticNames(institutions)
     .map(name => name.toLowerCase());
   return (
-    route === 'crossroads' ||
+    routeMakesEntrepot(route) ||
     (route === 'port' && instNames.some((name) => name.includes('international trade') || name.includes('warehouse district')))
   );
 };
@@ -140,7 +141,7 @@ export const generateTradeIncomeStreams = (tier, institutions = [], route = 'roa
     bonuses.push({
       source: 'Entrepôt Trade',
       percentage: tier === 'metropolis' ? 25 : tier === 'city' ? 20 : 18,
-      desc: 'Transit duties, warehouse fees, and re-export premiums from goods passing through the crossroads position.',
+      desc: ENTREPOT_LINE, // its twin where no house of transit stands: incomeLineSiblings.js :: trueIncomeDesc
     });
   if (
     route === 'port'

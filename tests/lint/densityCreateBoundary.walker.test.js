@@ -54,6 +54,17 @@ const MINT_SYMBOLS = [
   'birthConfig',
   'newSettlementDensityLaw',
   'newSettlementLivingContentLaw',
+  // ⭐ The seat law's mint (CS10, SEAT-1 U1), added in the act that wired it, for the reason
+  // above: its row lands WIRED, so the starred register arm does not watch it and these three
+  // per-caller arms are what hold where it may be named.
+  'newSettlementSeatLaw',
+  // ⭐ The fortune law's mint (FS5, FORTUNE-1 U1), added in the act that wired it, for the reason
+  // above: its row lands WIRED, so the starred register arm does not watch it and these three
+  // per-caller arms are what hold where it may be named.
+  'newSettlementFortuneLaw',
+  // ⭐ The trouble law's mint (lane KINDS-1, unit K1), added in the act that wired it: its row lands
+  // WIRED, so the starred register arm does not watch it and these three per-caller arms do.
+  'newSettlementTroubleLaw',
 ];
 
 /** The create-boundary module and the law module behind it legitimately NAME the
@@ -75,6 +86,15 @@ const MINT_HOMES = Object.freeze([
   // DECLARES the mint, which is the one legitimate way to name it outside the
   // boundary and its BIRTH callers.
   'src/domain/content/livingContentLaw.js',
+  // The seat law's own module (CS10, SEAT-1 U1), added with its mint symbol above: it DECLARES
+  // the mint, the one legitimate way to name it outside the boundary and its BIRTH callers.
+  'src/domain/seat/seatLaw.js',
+  // The fortune law's own module (FS5, FORTUNE-1 U1), added with its mint symbol above: it
+  // DECLARES the mint, the one legitimate way to name it outside the boundary and its BIRTH callers.
+  'src/domain/fortune/fortuneLaw.js',
+  // The trouble law's own module (lane KINDS-1, unit K1), added with its mint symbol above: it
+  // DECLARES the mint, the one legitimate way to name it outside the boundary and its BIRTH callers.
+  'src/domain/trouble/troubleLaw.js',
 ]);
 
 /**
@@ -942,12 +962,22 @@ describe('generation-law register (which LAW a birth mints)', () => {
     // can never tell them apart. These three facts are what actually keep a
     // regeneration from stamping a law onto a world that already exists, and
     // until now all three were prose in a header rather than assertions.
-    const rel = 'src/store/settlementSlice.js';
+    // ⭐ THE ADDRESS FOLLOWS THE CODE (ENGINE-5 unit 1): `regenSection`'s body was lifted out of
+    // the slice into `settlementRegenAction.js` (the lazy action idiom the birth action already
+    // took), so the re-derivation half is read THERE; the slice itself is still held to zero mints
+    // below, as is the lifted body.
+    const SLICE = 'src/store/settlementSlice.js';
+    const rel = 'src/store/settlementRegenAction.js';
     const code = stripCommentsAndStrings(readFileSync(join(process.cwd(), rel), 'utf-8'));
+    const sliceCode = stripCommentsAndStrings(readFileSync(join(process.cwd(), SLICE), 'utf-8'));
+    // The world's own config in EITHER stored shape comes before the form's (widened by KINDS-1
+    // K2, the chair's ruling of 2026-11-20 22:23 UTC): a legacy save with a `_config` echo but no
+    // `config` regenerated under the form's config, so a lit form re-rolled a law-1 place's history
+    // under law 2 (`tests/domain/trouble/troubleLawSavedTown.test.js` arm 5, shape 1).
     expect(
-      /settlement\.config \|\| config/.test(code),
-      `${rel}'s re-derivation must read the settlement's own config FIRST — that is `
-      + `what makes a markerless v1 world regenerate as v1 after the dial flips`,
+      /settlement\.config \|\| settlement\._config \|\| config/.test(code),
+      `${rel}'s re-derivation must read the settlement's own config FIRST (its config, then its `
+      + `_config echo) — that is what makes a markerless v1 world regenerate as v1 after the dial flips`,
     ).toBe(true);
     expect(
       /\bconfig \|\| settlement\.config/.test(code),
@@ -990,5 +1020,15 @@ describe('generation-law register (which LAW a birth mints)', () => {
       + `regenSection, so a mint here is a regeneration stamping a law onto a world that `
       + `already exists`,
     ).toBe(0);
+    expect(
+      (sliceCode.match(/\bbirthConfig\(/g) || []).length,
+      `${SLICE} mints a birth law; the birth action lives in ${MINT_HOME} and the slice only `
+      + `delegates its two engine actions, so a mint here is a law minted outside both lanes`,
+    ).toBe(0);
+    expect(
+      /\bregenSection:\s*\(section\)\s*=>\s*\n?\s*loadRegenLane\(\)\.then\(lane => lane\.regenSectionAction\(set, get, section\)\)/.test(sliceCode),
+      `${SLICE}'s regenSection must delegate to ${rel}, or the re-derivation half read above `
+      + `is not the one the store runs`,
+    ).toBe(true);
   });
 });

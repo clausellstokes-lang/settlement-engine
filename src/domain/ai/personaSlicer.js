@@ -20,6 +20,7 @@
 
 import { requiredManifestKeys, PERSON_FACET_KEYS } from './groundingManifest.js';
 import { nameOf } from '../rulingPower.js';
+import { firstPowerOf, powerOrderOf } from '../people/cardPowers.js';
 import { derivedAlignment } from '../npc/characterConsumers.js';
 
 /**
@@ -32,7 +33,7 @@ import { derivedAlignment } from '../npc/characterConsumers.js';
  *            personality?: PersonalityLite, goal?: { short?: string }|string,
  *            factionAffiliation?: unknown, factionLink?: unknown, factionArchetype?: unknown,
  *            blocs?: BlocLite[] }} EntityLite
- * @typedef {{ npc1Id?: string|number, npc2Id?: string|number, type?: string }} RelationshipLite
+ * @typedef {{ from?: string|number, to?: string|number, type?: string }} RelationshipLite
  * @typedef {{ prosperity?: unknown, foodSecurity?: unknown,
  *            primaryExports?: unknown[], primaryImports?: unknown[] }} EconomyLite
  * @typedef {{ id?: string|number, name?: string, _seed?: number,
@@ -147,18 +148,18 @@ export function buildPersonaSlice({
   // Same defect class and same cure as the npcLadder faction key (composite 25749ae5 /
   // dc0b6e2b) and the ChroniclePanel snapshot rows.
   //
-  // THREE SHAPES REACH THIS LINE, and nameOf is chosen precisely because it serves all
-  // three: powerStructure.factions (`.faction`); a settlement's TOP-LEVEL `.factions`,
-  // which is a DIFFERENT record type — the NPC grouping list, keys [name, members,
-  // dominantCategory, powerFaction*] — and legitimately carries `.name`; and a NEIGHBOUR's
-  // top-level `.factions`, which neighbourGenerator.js:180 fills with powerStructure-shaped
-  // records. The `typeof f === 'string'` arm is LOAD-BEARING and must stay: nameOf reads
-  // properties, so it returns '' for a bare string and `.filter(Boolean)` would drop it.
+  // ONE SHAPE REACHES THIS LINE since the people car (PEOPLE-5A, M-2): the powers,
+  // `powerStructure.factions` (`.faction`). The NPC grouping (top-level `.factions`) is no
+  // longer read, and a neighbour's own powers live on its `powerStructure` like any place.
+  // The `typeof f === 'string'` arm stays for a hand-built roster of bare names: nameOf
+  // reads properties, so it returns '' for a bare string and `.filter(Boolean)` would drop it.
+  // The entity's AFFILIATION is its FIRST-RANK power (its memberships, M-1b), never the
+  // shim's derived `factionAffiliation`; a world entity with no memberships keeps its link.
   // @enforced-by tests/domain/personaSlicerFactionRoster.test.js
   facets.push(facet('faction', entityId, 'Faction', safe(() => ({
-    affiliation: e.factionAffiliation ?? e.factionLink ?? null,
+    affiliation: firstPowerOf(e, powerOrderOf(home)) ?? e.factionLink ?? null,
     archetype: e.factionArchetype ?? null,
-    roster: (home?.powerStructure?.factions || home?.factions || []).map((f) => (typeof f === 'string' ? f : nameOf(f))).filter(Boolean).slice(0, 8),
+    roster: (home?.powerStructure?.factions || []).map((f) => (typeof f === 'string' ? f : nameOf(f))).filter(Boolean).slice(0, 8),
   }))));
 
   // (b) HEGEMONY through the entity's FOG — she ranks powers as her BELIEFS rank them
@@ -198,8 +199,11 @@ export function buildPersonaSlice({
   // (g) the NPC web — the entity's own patron/rival/kin/bloc edges (people-held travel here)
   facets.push(facet('npc_web', entityId, 'Ties', safe(() => ({
     ties: (home?.relationships || [])
-      .filter((r) => r && (String(r.npc1Id) === entityId || String(r.npc2Id) === entityId))
-      .map((r) => ({ type: r.type, with: String(r.npc1Id) === entityId ? r.npc2Id : r.npc1Id }))
+      // PEOPLE-4 TIES (R-P7): directed — the entity's own tie, then the ties naming it.
+      // TODO(PEOPLE-5): a v1 save's `npc1Id`/`npc2Id` pair is read as `from`/`to` by the migration.
+      .filter((r) => r && (String(r.from) === entityId || String(r.to) === entityId))
+      .sort((a, b) => Number(String(b.from) === entityId) - Number(String(a.from) === entityId))
+      .map((r) => ({ type: r.type, with: String(r.from) === entityId ? r.to : r.from }))
       .slice(0, 10),
     rivalries: (npcState?.rivalryTargets || []).slice(0, 6),
   }))));

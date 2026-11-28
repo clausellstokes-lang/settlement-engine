@@ -147,6 +147,7 @@ export function eventConsumes(event) {
       break;
     case 'ADD_NPC':
       for (const iid of p.linkedInstitutionIds || []) refs.push({ kind: 'institution', ref: iid });
+      // LEGACY (PULSE-SITES 2026-11-10): an older or external ADD_NPC payload's key, mirroring mutateEntities :: addNpc.
       for (const fid of p.linkedFactionIds || [])     refs.push({ kind: 'faction', ref: fid });
       break;
     case 'DEPLETE_RESOURCE':

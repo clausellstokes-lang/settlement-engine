@@ -21,6 +21,15 @@
  *      across migrations, i.e. 189's recreate) executes in pglite against the
  *      same fixture and strips identically, pinned field-for-field to the
  *      client twin (the gallerySanitize.pglite.test.js idiom).
+ *
+ * RE-KEYED (FIX-EXPORT-KEYS, 2026-11-07; cause: migration 205 and its client twin drop the
+ * people car's retired NPC grouping `settlement.factions` from the top-level allowlist, ODQ
+ * §934.105, PEOPLE-RULINGS M-1b/M-2). The grouping's `factions[].members[]` is now dropped
+ * WHOLE on both halves (hiding more), so the member reduction it pinned is pinned where the
+ * rule still bites — the deeper roster `powerStructure.factions[].members` — and the no-drift
+ * pin (a roster member projects to exactly NPC_PUBLIC_KEYS, the same set as npcs[]) moves there
+ * with ALDRIC added to that roster. Nothing is loosened: every sentinel is still asserted
+ * absent from the whole projection, on both halves, field for field.
  */
 
 import { describe, it, expect, beforeAll } from 'vitest';
@@ -86,13 +95,15 @@ const SETTLEMENT = {
   }],
   // A DEEPER roster under a 'factions' ancestor: the live generator emits no
   // powerStructure members today (breakdown rows only), but the ancestor rule
-  // ('factions' = any(path)) must cover any future roster fail-closed — parity
-  // on both halves is pinned here so the two predicates cannot drift.
+  // ('factions' = any(path)) must cover any roster a DM edit or a legacy record
+  // carries, fail-closed — parity on both halves is pinned here so the two
+  // predicates cannot drift. 205: ALDRIC (every allowlisted field) rides this
+  // roster too, so the no-drift pin lives where the rule still bites.
   powerStructure: {
     summary: 'a merchant council',
     factions: [{
       faction: 'The Salt Circle', category: 'economy', power: 60,
-      members: [{ name: 'Odo', role: 'factor', goal: { short: 'buy a bench seat' }, gender: 'male' }],
+      members: [ALDRIC, { name: 'Odo', role: 'factor', goal: { short: 'buy a bench seat' }, gender: 'male' }],
     }],
   },
 };
@@ -118,27 +129,26 @@ describe('_gallery_sanitize_public_json exists and carries the 189 member predic
   });
 });
 
-describe('CLIENT half — toPublicSafe reduces faction-roster members (189 twin)', () => {
-  it('strips goal/secret/plotHooks/relationships/gender/power from factions[].members[]', () => {
+describe('CLIENT half — toPublicSafe reduces roster members (189 twin, re-keyed at 205)', () => {
+  it('drops the retired grouping factions[] WHOLE (205); the cards and the powers stay', () => {
     const out = toPublicSafe(SETTLEMENT);
-    expect(out.factions).toHaveLength(1);
-    const members = out.factions[0].members;
-    expect(members, 'members must be reduced, never dropped').toHaveLength(2);
-    expect(members[0].name).toBe('Aldric');
-    expect(members[0].role).toBe('Mayor');
-    expect(members[0].influence).toBe('high');
-    for (const k of ['goal', 'secret', 'plotHooks', 'relationships', 'gender', 'power']) {
-      expect(members[0][k], `member "${k}" must not leak`).toBeUndefined();
-    }
-    // The sparse member survives as a key-filtered record.
-    expect(members[1]).toEqual({ name: 'Mara', role: 'clerk' });
+    expect(out.npcs[0].name, 'anchor: the cards stay public').toBe('Aldric');
+    expect(out.powerStructure.factions[0].faction, 'anchor: the powers stay public').toBe('The Salt Circle');
+    expect('factions' in out, "the retired grouping 'factions' must not be public").toBe(false);
   });
 
-  it('covers a deeper roster under a factions ancestor (powerStructure.factions[].members)', () => {
+  it('strips goal/secret/plotHooks/relationships/gender/power from a deeper roster (powerStructure.factions[].members)', () => {
     const out = toPublicSafe(SETTLEMENT);
     const deep = out.powerStructure.factions[0].members;
-    expect(deep).toHaveLength(1);
-    expect(deep[0]).toEqual({ name: 'Odo', role: 'factor' });
+    expect(deep, 'members must be reduced, never dropped').toHaveLength(2);
+    expect(deep[0].name).toBe('Aldric');
+    expect(deep[0].role).toBe('Mayor');
+    expect(deep[0].influence).toBe('high');
+    for (const k of ['goal', 'secret', 'plotHooks', 'relationships', 'gender', 'power', 'factionAffiliation', 'secondaryAffiliation']) {
+      expect(deep[0][k], `member "${k}" must not leak`).toBeUndefined();
+    }
+    // The sparse member survives as a key-filtered record.
+    expect(deep[1]).toEqual({ name: 'Odo', role: 'factor' });
   });
 
   it('projects a member to the SAME key set as the identical record in npcs[] (no-drift pin)', () => {
@@ -146,7 +156,7 @@ describe('CLIENT half — toPublicSafe reduces faction-roster members (189 twin)
     // exactly NPC_PUBLIC_KEYS — pinning NPC_PUBLIC_KEYS, publicNpc, and the
     // member reduction to one another behaviourally.
     const out = toPublicSafe(SETTLEMENT);
-    const memberKeys = Object.keys(out.factions[0].members[0]).sort();
+    const memberKeys = Object.keys(out.powerStructure.factions[0].members[0]).sort();
     const npcKeys = Object.keys(out.npcs[0]).filter((k) => out.npcs[0][k] !== undefined).sort();
     expect(memberKeys).toEqual(npcKeys);
     expect(memberKeys).toEqual([...NPC_PUBLIC_KEYS].sort());
@@ -183,22 +193,21 @@ describe.runIf(!!SANITIZER_SQL)('SERVER half — net-current sanitizer strips me
     serverOut = row.j;
   }, PGLITE_BOOT_TIMEOUT_MS);
 
-  it('strips goal/secret/plotHooks/relationships/gender/power from factions[].members[]', () => {
-    expect(serverOut.factions).toHaveLength(1);
-    const members = serverOut.factions[0].members;
-    expect(members, 'members must be reduced, never dropped').toHaveLength(2);
-    expect(members[0].name).toBe('Aldric');
-    expect(members[0].role).toBe('Mayor');
-    for (const k of ['goal', 'secret', 'plotHooks', 'relationships', 'gender', 'power']) {
-      expect(members[0][k], `member "${k}" must not leak server-side`).toBeUndefined();
-    }
-    expect(members[1]).toEqual({ name: 'Mara', role: 'clerk' });
+  it('drops the retired grouping factions[] WHOLE server-side (205); the cards and the powers stay', () => {
+    expect(serverOut.npcs[0].name, 'anchor: the cards stay public').toBe('Aldric');
+    expect(serverOut.powerStructure.factions[0].faction, 'anchor: the powers stay public').toBe('The Salt Circle');
+    expect('factions' in serverOut, "the retired grouping 'factions' must not be public").toBe(false);
   });
 
-  it('covers the deeper roster under a factions ancestor server-side', () => {
+  it('strips goal/secret/plotHooks/relationships/gender/power from the deeper roster server-side', () => {
     const deep = serverOut.powerStructure.factions[0].members;
-    expect(deep).toHaveLength(1);
-    expect(deep[0]).toEqual({ name: 'Odo', role: 'factor' });
+    expect(deep, 'members must be reduced, never dropped').toHaveLength(2);
+    expect(deep[0].name).toBe('Aldric');
+    expect(deep[0].role).toBe('Mayor');
+    for (const k of ['goal', 'secret', 'plotHooks', 'relationships', 'gender', 'power', 'factionAffiliation', 'secondaryAffiliation']) {
+      expect(deep[0][k], `member "${k}" must not leak server-side`).toBeUndefined();
+    }
+    expect(deep[1]).toEqual({ name: 'Odo', role: 'factor' });
   });
 
   it('no DM-private sentinel appears anywhere in the server projection', () => {

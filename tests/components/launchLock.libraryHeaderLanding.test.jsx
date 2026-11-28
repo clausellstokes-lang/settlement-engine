@@ -10,7 +10,9 @@
  * The controls this file holds, each rendered in the state that shows it:
  *   1. SaveQuotaMeter's free-tier Upgrade (its anon Sign in sibling stays live);
  *   2. SettlementCard's "Free a slot or Upgrade" recovery button on a frozen row;
- *   3. SettlementCard's kebab-menu row "Advance time and run campaigns. Upgrade";
+ *   3. SettlementCard's kebab-menu row "Run campaigns. Upgrade" (was "Advance time and run
+ *      campaigns. Upgrade" until the owner took advancing out of the Library, 2026-11-10:
+ *      "No longer does it advance time." The same row, re-keyed by its new words);
  *   4. the header's free-tier Upgrade, a row of the account menu on the painted arrow's
  *      blank plate (owner orders 2026-09-16: the header is the owner's painting, so
  *      credits, Upgrade and Admin moved into the plate's menu; App.jsx still decides the
@@ -214,7 +216,7 @@ async function headerUpgrade() {
   expect(row.closest('header'), 'the menu stays inside the header').toBeTruthy();
   return row;
 }
-const MENU_UPGRADE = 'Advance time and run campaigns. Upgrade';
+const MENU_UPGRADE = 'Run campaigns. Upgrade';
 
 describe('closed (the default build): every purchase control here is locked and wears the pill', () => {
   test('the gate is closed in this test env, so the arms below measure the real default', () => {
@@ -248,7 +250,7 @@ describe('closed (the default build): every purchase control here is locked and 
     expect(onNavigate).not.toHaveBeenCalled();
   });
 
-  test('SettlementCard: the free-tier menu row "Advance time and run campaigns. Upgrade" is disabled with the pill', () => {
+  test('SettlementCard: the free-tier menu row "Run campaigns. Upgrade" is disabled with the pill', () => {
     const onNavigate = vi.fn();
     renderCard({ s: draftSave, canManageCampaigns: false, onNavigate });
     fireEvent.click(screen.getByRole('button', { name: 'More actions' }));

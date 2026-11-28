@@ -65,7 +65,7 @@ const plainModeOf = (editor) =>
 // Renders a <tr>: both call sites (the unassigned pile + each CampaignFolder) wrap
 // it in a <table class ledger>, so a bare-mounted card is a <tr> under the test's
 // container (jsdom-tolerant; every query is by text/label/testid, not tag).
-export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId, deleteConfirmed, campaigns, addToCampaign, removeFromCampaign, currentCampaignId, regionalCounts, onReactivate, canReactivate, reactivatingId, onCanonize, worldState = null, regionalGraph = null, nameFor, onAdvanceTime, onCreateCampaign, onNavigate, canManageCampaigns = false, selectMode = false, selected = false, onToggleSelect }) {
+export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId, deleteConfirmed, campaigns, addToCampaign, removeFromCampaign, currentCampaignId, regionalCounts, onReactivate, canReactivate, reactivatingId, onCanonize, worldState = null, regionalGraph = null, nameFor, onCreateCampaign, onNavigate, canManageCampaigns = false, selectMode = false, selected = false, onToggleSelect }) {
   const mobile = useIsMobile();
   const [menuOpen, setMenuOpen] = useState(false);
   const [destroyOpen, setDestroyOpen] = useState(false);
@@ -286,7 +286,10 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
         {/* ── Settlement — medallion + name lead the row; the retained living-world
             detail stacks below (self-gating, byte-identical when dormant). */}
         <td style={selectMode ? LEDGER_CELL : { ...LEDGER_CELL, borderLeft: leadRail }}>
-          <div style={{ display:'flex', alignItems:'baseline', gap:SP.sm, minWidth:0 }}>
+          {/* On a phone the name line wraps, as the action cluster's does below (the row gets
+              taller, which is free): a folder card's "name · world" would not, so its table ran
+              44 px past the folder's box and cut Open, the menu and Delete at its right edge. */}
+          <div style={{ display:'flex', alignItems:'baseline', gap:SP.sm, minWidth:0, flexWrap: mobile ? 'wrap' : 'nowrap' }}>
             <span aria-hidden="true" style={{ flexShrink:0, lineHeight:0, alignSelf:'center' }} dangerouslySetInnerHTML={{ __html: medallion }} />
             {/* The name is a real heading so screen-reader users navigate row-by-row. */}
             <h3 style={{ margin:0, fontSize:FS.lg, fontWeight:700, color:INK, fontFamily:serif_, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap', minWidth:0 }}>{s.name}</h3>
@@ -519,7 +522,7 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
                 </Button>
               )}
 
-              {/* Overflow: campaign / canonize / advance — infrequent, disclosed. */}
+              {/* Overflow: campaign / canonize — infrequent, disclosed. */}
               {active && (
                 <div ref={menuRef} style={{ position:'relative' }}>
                   <IconButton
@@ -548,7 +551,7 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
                           <BookMarked size={12}/> Canon. Names locked
                         </div>
                       )}
-                      {/* Free tier (no campaign management): Advance Time + campaigns
+                      {/* Free tier (no campaign management): campaigns
                           are impossible, so collapse the inert stub + the path-less
                           "No campaigns yet" into ONE upgrade-preview row at the
                           moment of intent (limits → previews, no dead-end). */}
@@ -556,28 +559,13 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
                         <Button variant="ghost" fullWidth
                           disabled={!purchasesAreOpen}
                           onClick={() => { setMenuOpen(false); onNavigate?.('pricing'); }}
-                          icon={<Clock size={13} color={GOLD}/>}
+                          icon={<FolderOpen size={13} color={GOLD}/>}
                           style={{ justifyContent:'flex-start', textAlign:'left', padding:'6px 8px', gap:6, fontSize:FS.sm, color:GOLD_TXT, fontWeight:500, flexWrap: purchasesAreOpen ? undefined : 'wrap' }}>
-                          Advance time and run campaigns. Upgrade
+                          Run campaigns. Upgrade
                           {!purchasesAreOpen && <AvailableAtLaunchPill style={{ marginLeft: 6 }} />}
                         </Button>
                       ) : (
                         <>
-                          {/* Advance Time — in a campaign it deep-links the advance
-                              flow. Standalone (premium, has campaigns) it is a
-                              disabled-with-reason item — an honest dead-state rather
-                              than an enabled no-op. */}
-                          <Button variant="ghost" fullWidth
-                            disabled={!currentCampaignId}
-                            onClick={() => { setMenuOpen(false); onAdvanceTime?.(currentCampaignId); }}
-                            icon={<Clock size={13} color={GOLD}/>}
-                            title={currentCampaignId
-                              ? 'Advance the campaign world and open the post-advance results'
-                              : 'Add this settlement to a campaign below to advance its world.'}
-                            style={{ justifyContent:'flex-start', textAlign:'left', padding:'6px 8px', gap:6, fontSize:FS.sm, color:INK, fontWeight:500 }}>
-                            Advance Time
-                          </Button>
-
                           <div style={{ height:1, background:BORDER, margin:'2px 4px' }} />
 
                           {/* Constructive campaign membership — add / move. */}

@@ -59,6 +59,7 @@ import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { resolveLeash, isWilledLeash } from '../corruptionLeash.js';
 import { factionArchetype, FACTION_ARCHETYPES } from '../factionArchetypes.js';
 import { importanceWeight } from '../entities/npcs.js';
+import { firstRankMembershipOf, powerOrderOf } from '../people/membership.js';
 import { nameOf } from '../rulingPower.js';
 import {
   COMPROMISE_SOURCES,
@@ -706,7 +707,11 @@ export function vacatedSeatOf(settlement, npc) {
       }
     }
   }
-  for (const key of ['factionAffiliation', 'factionId', 'factionLink', 'faction', 'organizationId']) {
+  // The card's FIRST-RANK power (people/membership.js), re-pointed by PULSE-SITES (2026-11-10) from the retired
+  // `factionAffiliation` handle, which no current card carries (the migration maps it to a membership).
+  const first = firstRankMembershipOf(npc, powerOrderOf(settlement));
+  if (first) return { factionId: '', factionName: first.power };
+  for (const key of ['factionId', 'factionLink', 'faction', 'organizationId']) {
     const value = asObject(npc)[key];
     if (typeof value === 'string' && value) return { factionId: '', factionName: value };
   }

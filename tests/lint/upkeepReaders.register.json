@@ -1,0 +1,8 @@
+{
+  "_doc": "COHERENCE-UPKEEP (the chair's ruling of 2026-11-12 on item 4, ruling 1): every read of the economy's OUTPUT score used to gate upkeep, outside the one home (src/domain/facts/keep.js :: keepOf), counted by tests/lint/upkeepReaders.walker.test.js. SHRINK-ONLY from its first commit: a row retires the commit its read moves home; no row is ever added. Banked at the lane's base 65ce74ce6.",
+  "rows": {
+    "src/generators/services/serviceAvailability.js :: ? priorityToMultiplier(flags.economyOutput)": {
+      "reason": "HELD (the chair's ruling (A) on the services STOP, 2026-11-12). The commercial services' demand roll reads the economy's output for BOTH its threshold (rng() > output/50) and whether it draws at all (only below 1), as it did before this lane; it is kept so the services step's seeded stream does not move. What a place can keep up is the home's share, boughtShare('services', keepOf(prosperity)), applied after this roll by the draw-free upkeep roll in serviceRollMaterialization.js, so the rule only takes rows away. The single read (the threshold from the home with the draw pattern held) is a named debt for after the release."
+    }
+  }
+}

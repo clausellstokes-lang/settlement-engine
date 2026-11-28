@@ -1,0 +1,3 @@
+[gate-tail] start:  09:52:50 up  1:27,  0 user,  load average: 1.29, 1.36, 1.49 · cores: 4
+observed-shape execution INPUT changed since the last re-freeze (7 path(s): src/data/dossierRelations.generated.js, src/data/dossierStateProse/defense.generated.js, src/data/dossierStateProse/economy.generated.js, src/data/dossierStateProse/general.generated.js, src/data/dossierStateProse/power.generated.js, src/data/dossierStateProse/stressors.generated.js, src/data/dossierStateProse/warFaith.generated.js). These are generated/data inputs, not detector sources, so the shrink-only --write re-freeze may absorb them; the instrument is NOT darkened by them.
+[gate-tail] end:  09:52:54 up  1:27,  0 user,  load average: 1.27, 1.35, 1.49

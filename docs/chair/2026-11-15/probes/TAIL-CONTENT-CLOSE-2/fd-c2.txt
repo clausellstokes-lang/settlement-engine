@@ -1,0 +1,8 @@
+births compared 720 births moved 9
+{ '.powerStructure.factions': 13 }
+r2r-metropolis-10 .powerStructure.factions.6.desc: "Magical practitioners are consulted but not formally empowered. Their influence → "The arcane interest is consulted but not formally empowered. Its influence is a
+r2r-metropolis-10 .powerStructure.factions.7.desc: "Magical practitioners are consulted but not formally empowered. Their influence → "The arcane interest is consulted but not formally empowered. Its influence is a
+r2r-metropolis-13 .powerStructure.factions.4.desc: "Magical practitioners are consulted but not formally empowered. Their influence → "The arcane interest is consulted but not formally empowered. Its influence is a
+r2r-metropolis-15 .powerStructure.factions.6.desc: "Magical practitioners are consulted but not formally empowered. Their influence → "The arcane interest is consulted but not formally empowered. Its influence is a
+r2r-metropolis-15 .powerStructure.factions.7.desc: "Magical practitioners are consulted but not formally empowered. Their influence → "The arcane interest is consulted but not formally empowered. Its influence is a
+r2r-metropolis-26 .powerStructure.factions.5.desc: "Magical practitioners are consulted but not formally empowered. Their influence → "The arcane interest is consulted but not formally empowered. Its influence is a

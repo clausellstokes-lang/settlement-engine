@@ -1,0 +1,232 @@
+{
+ "_doc": "W2-B-DECLARE sixth seat, R2 (REVIEW-W2B third read, finding 3): the dossier prose manifest's drift rows MOVED against the one committed fixture (tests/fixtures/dossier-prose-manifest-golden.json, unchanged at every tree), re-measured by this seat with the reader's own probe (lane/review-w2b-2026-11-13 cc0dd4ed2 :: docs/chair/2026-11-13/probes/REVIEW-W2B-3/manifestmoved.mjs, run unchanged, TREE=<a detached worktree of each commit>). movedAt: the rows that differ from the fixture at each tree. changedBetween: the rows whose hash differs between consecutive trees. rows: the 30 keys whose hash differs between the record's base 1930cec6e and the lane's tip c3913f999, with each tree's hash (null = equal to the fixture). AGREES with the reader's results/manifest-moved-rows.json: the same 30 keys, every hash equal at 9d5d6e091 and at the tip.",
+ "movedAt": {
+  "1930cec6e": 954,
+  "9d5d6e091": 954,
+  "a51634ede": 954,
+  "aa41b1f25": 956,
+  "c3913f999": 956
+ },
+ "changedBetween": {
+  "1930cec6e..9d5d6e091": 0,
+  "9d5d6e091..a51634ede": 0,
+  "a51634ede..aa41b1f25": 30,
+  "aa41b1f25..c3913f999": 0
+ },
+ "newlyMoved": [
+  "town|germanic|mountain|random_trade|civilized|gm-seed-c::dm",
+  "town|germanic|mountain|random_trade|civilized|gm-seed-c::player"
+ ],
+ "rows": {
+  "hamlet|arabic|forest|isolated|civilized|golden-master-v3::dm": {
+   "1930cec6e": "ea1f47fffff4f06c49a0e3e50344f89d5723bfd4e5eaf3dd0145ec2b92ff92e4",
+   "9d5d6e091": "ea1f47fffff4f06c49a0e3e50344f89d5723bfd4e5eaf3dd0145ec2b92ff92e4",
+   "a51634ede": "ea1f47fffff4f06c49a0e3e50344f89d5723bfd4e5eaf3dd0145ec2b92ff92e4",
+   "aa41b1f25": "15bce9f2281f33eb802613e835a81fd80c0e20de33c65ff1fe3214739de13d46",
+   "c3913f999": "15bce9f2281f33eb802613e835a81fd80c0e20de33c65ff1fe3214739de13d46"
+  },
+  "hamlet|arabic|forest|isolated|civilized|golden-master-v3::player": {
+   "1930cec6e": "29f5e72c8b7b702c82846b67fa295648c353c2441cf6b11159d07463c5b37dfe",
+   "9d5d6e091": "29f5e72c8b7b702c82846b67fa295648c353c2441cf6b11159d07463c5b37dfe",
+   "a51634ede": "29f5e72c8b7b702c82846b67fa295648c353c2441cf6b11159d07463c5b37dfe",
+   "aa41b1f25": "883cf7f464ce88efdb1446ad45a306ae37ca6024648615b152c942dffa47fdf9",
+   "c3913f999": "883cf7f464ce88efdb1446ad45a306ae37ca6024648615b152c942dffa47fdf9"
+  },
+  "hamlet|celtic|forest|isolated|civilized|golden-master-v3::dm": {
+   "1930cec6e": "05a4c9786a024d5cd7efab55a6b23d528899d89d9e013eb25a8def35365187d3",
+   "9d5d6e091": "05a4c9786a024d5cd7efab55a6b23d528899d89d9e013eb25a8def35365187d3",
+   "a51634ede": "05a4c9786a024d5cd7efab55a6b23d528899d89d9e013eb25a8def35365187d3",
+   "aa41b1f25": "628d0f023a3f5695228ce8ac126535a299b9844da8cf3c1ab94d611a9a763fb8",
+   "c3913f999": "628d0f023a3f5695228ce8ac126535a299b9844da8cf3c1ab94d611a9a763fb8"
+  },
+  "hamlet|celtic|forest|isolated|civilized|golden-master-v3::player": {
+   "1930cec6e": "3ecf4b77bbf65478d694c545296d3587ee26226111e45f597d9a65d57eecaa5f",
+   "9d5d6e091": "3ecf4b77bbf65478d694c545296d3587ee26226111e45f597d9a65d57eecaa5f",
+   "a51634ede": "3ecf4b77bbf65478d694c545296d3587ee26226111e45f597d9a65d57eecaa5f",
+   "aa41b1f25": "e1542ed19e78a9cf2381f02182868cd726f8f774ffc7d18d4d2676c2be5ca86c",
+   "c3913f999": "e1542ed19e78a9cf2381f02182868cd726f8f774ffc7d18d4d2676c2be5ca86c"
+  },
+  "hamlet|east_asian|forest|isolated|civilized|golden-master-v3::dm": {
+   "1930cec6e": "41fc976a2996993ef4c9ca20375152e87879d17c409a267bea97f18a2c27ab74",
+   "9d5d6e091": "41fc976a2996993ef4c9ca20375152e87879d17c409a267bea97f18a2c27ab74",
+   "a51634ede": "41fc976a2996993ef4c9ca20375152e87879d17c409a267bea97f18a2c27ab74",
+   "aa41b1f25": "4bfe5842cb25ba990e0265cb2ec70e0ef8561ffbac02d5555c17f77ea878eeb1",
+   "c3913f999": "4bfe5842cb25ba990e0265cb2ec70e0ef8561ffbac02d5555c17f77ea878eeb1"
+  },
+  "hamlet|east_asian|forest|isolated|civilized|golden-master-v3::player": {
+   "1930cec6e": "2f3592b94539f2346c584e20d1c2ebcc6ef09906846ad98a8ea204bdd992d962",
+   "9d5d6e091": "2f3592b94539f2346c584e20d1c2ebcc6ef09906846ad98a8ea204bdd992d962",
+   "a51634ede": "2f3592b94539f2346c584e20d1c2ebcc6ef09906846ad98a8ea204bdd992d962",
+   "aa41b1f25": "d90cefbf392237e8b221b076c5ac15f105c734caef7ba97dd88b6ecd797fe817",
+   "c3913f999": "d90cefbf392237e8b221b076c5ac15f105c734caef7ba97dd88b6ecd797fe817"
+  },
+  "hamlet|germanic|forest|isolated|civilized|golden-master-v3::dm": {
+   "1930cec6e": "aafe18d92b5a2456e714180a55f1a9f713ea70c1079157be105170a2c9eb6d6e",
+   "9d5d6e091": "aafe18d92b5a2456e714180a55f1a9f713ea70c1079157be105170a2c9eb6d6e",
+   "a51634ede": "aafe18d92b5a2456e714180a55f1a9f713ea70c1079157be105170a2c9eb6d6e",
+   "aa41b1f25": "4756c0c102e5f283d619da021997958c63ad41408d21a984fb3a663989adb5c0",
+   "c3913f999": "4756c0c102e5f283d619da021997958c63ad41408d21a984fb3a663989adb5c0"
+  },
+  "hamlet|germanic|forest|isolated|civilized|golden-master-v3::player": {
+   "1930cec6e": "4c5f9079073ac7464dee4b96e788b1827783b47185499e82a6094afbec63a495",
+   "9d5d6e091": "4c5f9079073ac7464dee4b96e788b1827783b47185499e82a6094afbec63a495",
+   "a51634ede": "4c5f9079073ac7464dee4b96e788b1827783b47185499e82a6094afbec63a495",
+   "aa41b1f25": "c9b2d4f9e8310638c8f5b213fc716a14ca9d7f5004d76b3ceba3ced0d447792a",
+   "c3913f999": "c9b2d4f9e8310638c8f5b213fc716a14ca9d7f5004d76b3ceba3ced0d447792a"
+  },
+  "hamlet|greek|forest|isolated|civilized|golden-master-v3::dm": {
+   "1930cec6e": "dd8be58f1c4d9f4b23a158a0c80df572fad461c3302d0e46c2fe1f6f972b9e45",
+   "9d5d6e091": "dd8be58f1c4d9f4b23a158a0c80df572fad461c3302d0e46c2fe1f6f972b9e45",
+   "a51634ede": "dd8be58f1c4d9f4b23a158a0c80df572fad461c3302d0e46c2fe1f6f972b9e45",
+   "aa41b1f25": "6c2a02651de188d5a138dafdb64ab5683856627ccceeb6aa2d11892c2ed0f0e1",
+   "c3913f999": "6c2a02651de188d5a138dafdb64ab5683856627ccceeb6aa2d11892c2ed0f0e1"
+  },
+  "hamlet|greek|forest|isolated|civilized|golden-master-v3::player": {
+   "1930cec6e": "e0c8c757c22f9858ae941ce20c5c29f5ea6931438f9e9369d0d4b7253808594d",
+   "9d5d6e091": "e0c8c757c22f9858ae941ce20c5c29f5ea6931438f9e9369d0d4b7253808594d",
+   "a51634ede": "e0c8c757c22f9858ae941ce20c5c29f5ea6931438f9e9369d0d4b7253808594d",
+   "aa41b1f25": "7c095885df92804ced43c8ce0b19a0200c125c4f7ddc75231d16c1b0a42428b8",
+   "c3913f999": "7c095885df92804ced43c8ce0b19a0200c125c4f7ddc75231d16c1b0a42428b8"
+  },
+  "hamlet|latin|forest|isolated|civilized|golden-master-v3::dm": {
+   "1930cec6e": "fb60c4685db4850a9caeebc3979427b28eb87fabc8aae74838dc1e64fce7f4be",
+   "9d5d6e091": "fb60c4685db4850a9caeebc3979427b28eb87fabc8aae74838dc1e64fce7f4be",
+   "a51634ede": "fb60c4685db4850a9caeebc3979427b28eb87fabc8aae74838dc1e64fce7f4be",
+   "aa41b1f25": "422137ae26c9c4601136d753c74191d830a3e527397917009c90dfa9de0ad44c",
+   "c3913f999": "422137ae26c9c4601136d753c74191d830a3e527397917009c90dfa9de0ad44c"
+  },
+  "hamlet|latin|forest|isolated|civilized|golden-master-v3::player": {
+   "1930cec6e": "dfb1325edddb0e0470eae637959a18aac4a8c6d610767acdba079b279884dbae",
+   "9d5d6e091": "dfb1325edddb0e0470eae637959a18aac4a8c6d610767acdba079b279884dbae",
+   "a51634ede": "dfb1325edddb0e0470eae637959a18aac4a8c6d610767acdba079b279884dbae",
+   "aa41b1f25": "746e1e6715cc7eff930721e034a5b7133f4b49c338a4615dd6374c2e7c29cf40",
+   "c3913f999": "746e1e6715cc7eff930721e034a5b7133f4b49c338a4615dd6374c2e7c29cf40"
+  },
+  "hamlet|mediterranean|forest|isolated|civilized|golden-master-v3::dm": {
+   "1930cec6e": "60286d586d862933a5e30fbb48815554cdf55fcdfeb5751c1d40f5c256352056",
+   "9d5d6e091": "60286d586d862933a5e30fbb48815554cdf55fcdfeb5751c1d40f5c256352056",
+   "a51634ede": "60286d586d862933a5e30fbb48815554cdf55fcdfeb5751c1d40f5c256352056",
+   "aa41b1f25": "1ea98ccae3ed919c5c9a741d0d7ac302b7c6f5e5ab3df807f62aa9b770f89940",
+   "c3913f999": "1ea98ccae3ed919c5c9a741d0d7ac302b7c6f5e5ab3df807f62aa9b770f89940"
+  },
+  "hamlet|mediterranean|forest|isolated|civilized|golden-master-v3::player": {
+   "1930cec6e": "a846303c02b2285cb2f35de29b8466afa8d903a609d8b2c397f3bfe4b3b057b8",
+   "9d5d6e091": "a846303c02b2285cb2f35de29b8466afa8d903a609d8b2c397f3bfe4b3b057b8",
+   "a51634ede": "a846303c02b2285cb2f35de29b8466afa8d903a609d8b2c397f3bfe4b3b057b8",
+   "aa41b1f25": "83e3198d7771269d1d5552d434ba2fe32b85234d5ff3222780e5642e2503ddae",
+   "c3913f999": "83e3198d7771269d1d5552d434ba2fe32b85234d5ff3222780e5642e2503ddae"
+  },
+  "hamlet|mesoamerican|forest|isolated|civilized|golden-master-v3::dm": {
+   "1930cec6e": "bfb94cb37da0d29a877f34e14a4e61ede82895c9db7effd7b4f41ab67066947d",
+   "9d5d6e091": "bfb94cb37da0d29a877f34e14a4e61ede82895c9db7effd7b4f41ab67066947d",
+   "a51634ede": "bfb94cb37da0d29a877f34e14a4e61ede82895c9db7effd7b4f41ab67066947d",
+   "aa41b1f25": "8295ebe4541168082c5ea1d239f857a17841f7f8c054e836491902fc872447ee",
+   "c3913f999": "8295ebe4541168082c5ea1d239f857a17841f7f8c054e836491902fc872447ee"
+  },
+  "hamlet|mesoamerican|forest|isolated|civilized|golden-master-v3::player": {
+   "1930cec6e": "28d68bc8ea883e22466d7b5b3c282761797b86d3d10280f8444254c2decb1095",
+   "9d5d6e091": "28d68bc8ea883e22466d7b5b3c282761797b86d3d10280f8444254c2decb1095",
+   "a51634ede": "28d68bc8ea883e22466d7b5b3c282761797b86d3d10280f8444254c2decb1095",
+   "aa41b1f25": "aaf1c85eb0823288af994826596823ed4515eb05d7d91bf583f009d736c41002",
+   "c3913f999": "aaf1c85eb0823288af994826596823ed4515eb05d7d91bf583f009d736c41002"
+  },
+  "hamlet|norse|forest|isolated|civilized|golden-master-v3::dm": {
+   "1930cec6e": "eacda391f61555f7b809a7ef42bf086966081ac7c952618adb33c547ce6d370a",
+   "9d5d6e091": "eacda391f61555f7b809a7ef42bf086966081ac7c952618adb33c547ce6d370a",
+   "a51634ede": "eacda391f61555f7b809a7ef42bf086966081ac7c952618adb33c547ce6d370a",
+   "aa41b1f25": "b7d553db7b589f84540c2143853157490cd08e6c3ebf922a791d09ef9de98549",
+   "c3913f999": "b7d553db7b589f84540c2143853157490cd08e6c3ebf922a791d09ef9de98549"
+  },
+  "hamlet|norse|forest|isolated|civilized|golden-master-v3::player": {
+   "1930cec6e": "cee21dce53bbdd0e6062ea0a1ea2a2e1bd85d2c88e28994ad2269324c72d7b18",
+   "9d5d6e091": "cee21dce53bbdd0e6062ea0a1ea2a2e1bd85d2c88e28994ad2269324c72d7b18",
+   "a51634ede": "cee21dce53bbdd0e6062ea0a1ea2a2e1bd85d2c88e28994ad2269324c72d7b18",
+   "aa41b1f25": "de4097b628b68d98ad2b05f3477bd14927ced5cdaf9e8b71f6bdaa8f0bd94b6e",
+   "c3913f999": "de4097b628b68d98ad2b05f3477bd14927ced5cdaf9e8b71f6bdaa8f0bd94b6e"
+  },
+  "hamlet|slavic|forest|isolated|civilized|golden-master-v3::dm": {
+   "1930cec6e": "162fbfded76ecbfcbe6995137d92a3ba94a8e702511e9b0a64133741d5557bcf",
+   "9d5d6e091": "162fbfded76ecbfcbe6995137d92a3ba94a8e702511e9b0a64133741d5557bcf",
+   "a51634ede": "162fbfded76ecbfcbe6995137d92a3ba94a8e702511e9b0a64133741d5557bcf",
+   "aa41b1f25": "9a0e7a710bcbfb21b53d3753f94f0391346f80d85ef27f978fd02df4f6309038",
+   "c3913f999": "9a0e7a710bcbfb21b53d3753f94f0391346f80d85ef27f978fd02df4f6309038"
+  },
+  "hamlet|slavic|forest|isolated|civilized|golden-master-v3::player": {
+   "1930cec6e": "83695555093b929309e98ca811a0117933c7770f722cd86b5efbd13016b5aa20",
+   "9d5d6e091": "83695555093b929309e98ca811a0117933c7770f722cd86b5efbd13016b5aa20",
+   "a51634ede": "83695555093b929309e98ca811a0117933c7770f722cd86b5efbd13016b5aa20",
+   "aa41b1f25": "c1d3002d16f8e4f13dda84b00dba332dc22b2957a8705c5dc189e46aba50606c",
+   "c3913f999": "c1d3002d16f8e4f13dda84b00dba332dc22b2957a8705c5dc189e46aba50606c"
+  },
+  "hamlet|south_asian|forest|isolated|civilized|golden-master-v3::dm": {
+   "1930cec6e": "46e14201c94741f9b3547321b2121e02dbd8b4db60a3728644ae683394fd7a2a",
+   "9d5d6e091": "46e14201c94741f9b3547321b2121e02dbd8b4db60a3728644ae683394fd7a2a",
+   "a51634ede": "46e14201c94741f9b3547321b2121e02dbd8b4db60a3728644ae683394fd7a2a",
+   "aa41b1f25": "9b081807755acfe8b4e31657dcaa210a15e5fc391f3c64cf37b5117eb05e0d9f",
+   "c3913f999": "9b081807755acfe8b4e31657dcaa210a15e5fc391f3c64cf37b5117eb05e0d9f"
+  },
+  "hamlet|south_asian|forest|isolated|civilized|golden-master-v3::player": {
+   "1930cec6e": "ac9e1923ba07be4c079f046a47125874a710e40b4fd43114b4b9a5c8fafd1143",
+   "9d5d6e091": "ac9e1923ba07be4c079f046a47125874a710e40b4fd43114b4b9a5c8fafd1143",
+   "a51634ede": "ac9e1923ba07be4c079f046a47125874a710e40b4fd43114b4b9a5c8fafd1143",
+   "aa41b1f25": "f3d510e06c94ed7f244a95205ed7ac3e1e3734e4e4813dbdb0022474af061902",
+   "c3913f999": "f3d510e06c94ed7f244a95205ed7ac3e1e3734e4e4813dbdb0022474af061902"
+  },
+  "hamlet|steppe|forest|isolated|civilized|golden-master-v3::dm": {
+   "1930cec6e": "2e7889fa1771d0a12d2ec212a5a9f0b4a82c8d4cde0278fb33cb61c413a3ba22",
+   "9d5d6e091": "2e7889fa1771d0a12d2ec212a5a9f0b4a82c8d4cde0278fb33cb61c413a3ba22",
+   "a51634ede": "2e7889fa1771d0a12d2ec212a5a9f0b4a82c8d4cde0278fb33cb61c413a3ba22",
+   "aa41b1f25": "410e77ef6597da75fbe0f38aa9f9fe8559d8be5ee2dfdaadc171aeea803d9c43",
+   "c3913f999": "410e77ef6597da75fbe0f38aa9f9fe8559d8be5ee2dfdaadc171aeea803d9c43"
+  },
+  "hamlet|steppe|forest|isolated|civilized|golden-master-v3::player": {
+   "1930cec6e": "13b3ef221c15e5405112e51971b6d9a68f25022ee8e04edea33a0b3ddaedb978",
+   "9d5d6e091": "13b3ef221c15e5405112e51971b6d9a68f25022ee8e04edea33a0b3ddaedb978",
+   "a51634ede": "13b3ef221c15e5405112e51971b6d9a68f25022ee8e04edea33a0b3ddaedb978",
+   "aa41b1f25": "2eeb0aaf4bd0c8fc2215319c12be3a97edbad4295857d34e148f80235d1f6d76",
+   "c3913f999": "2eeb0aaf4bd0c8fc2215319c12be3a97edbad4295857d34e148f80235d1f6d76"
+  },
+  "town|germanic|auto|random_trade|civilized|gm-seed-c::dm": {
+   "1930cec6e": "605c4d9377eb4bce2ccad19d663d9bfc6aaed2078f1e583c01af8a8c19ba6716",
+   "9d5d6e091": "605c4d9377eb4bce2ccad19d663d9bfc6aaed2078f1e583c01af8a8c19ba6716",
+   "a51634ede": "605c4d9377eb4bce2ccad19d663d9bfc6aaed2078f1e583c01af8a8c19ba6716",
+   "aa41b1f25": "c450fb173f0723b8c279c07a0e9138f341f800bdbe4b38d7d034d0fdf4667bc0",
+   "c3913f999": "c450fb173f0723b8c279c07a0e9138f341f800bdbe4b38d7d034d0fdf4667bc0"
+  },
+  "town|germanic|auto|random_trade|civilized|gm-seed-c::player": {
+   "1930cec6e": "4977bffa8dcc2a67afd447c0c439741e3cfa9dbe7b9790bcea9610ce7ebcded2",
+   "9d5d6e091": "4977bffa8dcc2a67afd447c0c439741e3cfa9dbe7b9790bcea9610ce7ebcded2",
+   "a51634ede": "4977bffa8dcc2a67afd447c0c439741e3cfa9dbe7b9790bcea9610ce7ebcded2",
+   "aa41b1f25": "70c9bc9db2e367f071dd718066f8e0e43ea067cd0d1f70c210997cd333ceb544",
+   "c3913f999": "70c9bc9db2e367f071dd718066f8e0e43ea067cd0d1f70c210997cd333ceb544"
+  },
+  "town|germanic|mountain|random_trade|civilized|gm-seed-c::dm": {
+   "1930cec6e": null,
+   "9d5d6e091": null,
+   "a51634ede": null,
+   "aa41b1f25": "4c88ba24874ee8c533c1a7db0273e84b5188952b85c55c524b08e577919173ed",
+   "c3913f999": "4c88ba24874ee8c533c1a7db0273e84b5188952b85c55c524b08e577919173ed"
+  },
+  "town|germanic|mountain|random_trade|civilized|gm-seed-c::player": {
+   "1930cec6e": null,
+   "9d5d6e091": null,
+   "a51634ede": null,
+   "aa41b1f25": "9aef34717e232ccab3030078b1a74de3169994527311245d2824cbba32bf69e1",
+   "c3913f999": "9aef34717e232ccab3030078b1a74de3169994527311245d2824cbba32bf69e1"
+  },
+  "town|germanic|plains|road|civilized|gm-seed-c::dm": {
+   "1930cec6e": "0f0f9792fe1c1df751cb83b938449af8fc1288f94209f107a1e67d8bb3001673",
+   "9d5d6e091": "0f0f9792fe1c1df751cb83b938449af8fc1288f94209f107a1e67d8bb3001673",
+   "a51634ede": "0f0f9792fe1c1df751cb83b938449af8fc1288f94209f107a1e67d8bb3001673",
+   "aa41b1f25": "26c41049162a480509f5e8bc56534740bea681cb2bbc5c14e1a42123dd28caa0",
+   "c3913f999": "26c41049162a480509f5e8bc56534740bea681cb2bbc5c14e1a42123dd28caa0"
+  },
+  "town|germanic|plains|road|civilized|gm-seed-c::player": {
+   "1930cec6e": "dd9477570364add82a134fd10d38723b372674c7d6c49e5fe9e5df63fec55a82",
+   "9d5d6e091": "dd9477570364add82a134fd10d38723b372674c7d6c49e5fe9e5df63fec55a82",
+   "a51634ede": "dd9477570364add82a134fd10d38723b372674c7d6c49e5fe9e5df63fec55a82",
+   "aa41b1f25": "3d4d8fef3fa2a8f8db74d60d62a3a6bb3a053f1cbc40d495d9bee098764c931e",
+   "c3913f999": "3d4d8fef3fa2a8f8db74d60d62a3a6bb3a053f1cbc40d495d9bee098764c931e"
+  }
+ }
+}

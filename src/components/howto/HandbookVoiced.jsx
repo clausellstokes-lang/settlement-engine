@@ -38,7 +38,7 @@ export function VoicedConceptIntro() {
       </div>
       <p style={{ fontSize: FS.sm, color: swatch['#C8B098'], lineHeight: 1.7, margin: '0 0 8px' }}>
         Most generators roll on a table. This one keeps a world. Every institution, every guarded secret, every
-        faction&rsquo;s grudge and the reach of its trade is derived, not drawn from a hat, but settled by the
+        power&rsquo;s grudge and the reach of its trade is derived, not drawn from a hat, but settled by the
         same mechanical pressures that governed real towns. Nothing here is decoration.
       </p>
       <p style={{ fontSize: FS.sm, color: swatch['#C8B098'], lineHeight: 1.7, margin: '0 0 8px' }}>
@@ -57,7 +57,7 @@ export function VoicedConceptIntro() {
       <p style={{ fontSize: FS.sm, color: swatch['#C8B098'], lineHeight: 1.7, margin: '0 0 8px' }}>
         <strong style={{ color: GOLD }}>The Narrative Refinement Layer</strong> waits under a single button. The town
         itself is simulated, never written; but when you want table-ready prose, the layer gathers the whole simulated
-        state (the faction tensions, the strain on the purse, the character earned by its history, the texture
+        state (the power tensions, the strain on the purse, the character earned by its history, the texture
         of a working day) into one voice that says only what the engine already holds. It dresses the truth; it
         never replaces it.
       </p>

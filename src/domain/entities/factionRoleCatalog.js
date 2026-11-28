@@ -3,87 +3,17 @@
  *
  * MOVED HERE from src/generators/npc/factionRoleCatalog.js at the rung-1 landing (LANDING-2,
  * 2026-11-04; the domain -> generators boundary): the reader battery reads NOBLE_ROLES, and a
- * domain module may not import a generator. Moved verbatim; the old path re-exports it.
+ * domain module may not import a generator. Moved verbatim; the old path re-exports it. NOBLE_ROLES
+ * itself is the one table in src/data/nobleRoles.js (CENSUS-4's move, met at the rung-2 merge).
  *
  * These are immutable module data rather than per-generation allocations.
  * Eligibility remains the orchestrator's responsibility: tier, faction, guild,
  * route, and WorldLaw gates are applied before a candidate enters a draw pool.
  */
 
-export const NOBLE_ROLES = Object.freeze([
-  {
-    role: 'Lord/Lady of the Manor',
-    title: 'noble',
-    priority: 8,
-    minTier: 'village',
-    category: 'noble',
-    goalCategories: ['power', 'wealth'],
-  },
-  {
-    role: 'Baron/Baroness',
-    title: 'noble',
-    priority: 9,
-    minTier: 'town',
-    category: 'noble',
-    goalCategories: ['power', 'wealth'],
-  },
-  {
-    role: 'Court Advisor',
-    title: 'advisor',
-    priority: 7,
-    minTier: 'town',
-    category: 'noble',
-    goalCategories: ['power', 'knowledge'],
-  },
-  {
-    role: 'House Steward',
-    title: 'steward',
-    priority: 6,
-    minTier: 'village',
-    category: 'noble',
-    goalCategories: ['wealth', 'personal'],
-  },
-  {
-    role: 'Noble Heir',
-    title: 'noble',
-    priority: 5,
-    minTier: 'hamlet',
-    category: 'noble',
-    goalCategories: ['personal', 'power'],
-  },
-  {
-    role: 'Land Agent',
-    title: 'agent',
-    priority: 5,
-    minTier: 'village',
-    category: 'noble',
-    goalCategories: ['wealth', 'personal'],
-  },
-  {
-    role: 'Knight/Dame',
-    title: 'knight',
-    priority: 7,
-    minTier: 'village',
-    category: 'noble',
-    goalCategories: ['protection', 'personal'],
-  },
-  {
-    role: 'Duke/Duchess',
-    title: 'noble',
-    priority: 10,
-    minTier: 'metropolis',
-    category: 'noble',
-    goalCategories: ['power', 'wealth'],
-  },
-  {
-    role: 'Royal Chamberlain',
-    title: 'noble',
-    priority: 8,
-    minTier: 'city',
-    category: 'noble',
-    goalCategories: ['power', 'personal'],
-  },
-]);
+// NOBLE_ROLES lives in data/ (CENSUS-4, for the domain's role-class rule, src/domain/roles/roleClass.js);
+// re-exported here unchanged so the catalogue stays one import (LANDING-R2's merge: one table, not two).
+export { NOBLE_ROLES } from '../../data/nobleRoles.js';
 
 export const CRAFTS_ROLES = Object.freeze([
   {

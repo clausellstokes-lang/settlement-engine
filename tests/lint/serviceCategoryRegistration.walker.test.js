@@ -188,7 +188,6 @@ const REGISTERED_WITHOUT_PRODUCER = Object.freeze([
   "Mount hire (daily)",
   "Mule purchase",
   "Musical education",
-  "No law, bring coin",
   "Patrol and watch",
   "Peat fuel",
   "Performances (events)",
@@ -211,6 +210,7 @@ const REGISTERED_WITHOUT_PRODUCER = Object.freeze([
   "Training services",
   "Vessel hire",
   "Watch rotation",
+  "Weak law, bring coin",
 ]);
 
 /**

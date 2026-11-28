@@ -25,11 +25,16 @@ import { MentionText } from '../../ProseParagraph.jsx';
 import { FLUSH } from '../../../design/flush.js';
 
 // Extended event type colors (EVENT_COLORS only covers 5 types)
+// ⛔ A CATEGORY WORD NAMES THE EVENT'S OWN TEMPLATE (R3-TABS, round three's cut #1104). Each of these
+// two categories draws ONE template (historyPolicyData.js): `exile_return` → occupation_legacy ("The
+// Occupation", a previous occupation ended), `occupation_infiltration` → infiltration_fear ("The Purge",
+// enemy agents and denunciations). They printed "Exile & Return" and "Occupation" (385 and 443 events of
+// 884 births at aac79b808, every one); they now read the words TENSION_META below gives those templates.
 const ALL_EC = {
   ...EVENT_COLORS,
   demographic: {color:'#1a5a28',bg:'#f0faf2',border:'#a8d8b0',label:'Demographic'},
-  exile_return: {color:'#7a4010',bg:'#faf4ec',border:'#d8c090',label:'Exile & Return'},
-  occupation_infiltration: {color:'#3a1a6a',bg:'#f4f0fd',border:'#c0b0e0',label:'Occupation'},
+  exile_return: {color:'#7a4010',bg:'#faf4ec',border:'#d8c090',label:'Occupation Legacy'},
+  occupation_infiltration: {color:'#3a1a6a',bg:'#f4f0fd',border:'#c0b0e0',label:'Infiltration Fear'},
 };
 
 // Tension type colors + labels
@@ -74,14 +79,20 @@ export function TensionRow({t}) {
   const sevArr = Array.isArray(t.severity)?t.severity:[t.severity].filter(Boolean);
   const maxSev = sevArr.includes('catastrophic')?'catastrophic':sevArr.includes('major')?'major':'minor';
   const border = maxSev==='catastrophic'?'#8b1a1a':maxSev==='major'?'#b8860b':'#a0762a';
+  // ⛔ A RANGE IS NOT A RATING (the chair's ruling, R3-TABS second seat, round three's cut #486 #487 #592 #593
+  // #743 #744 #1422 #1423, the increment's #ww-466/467/468/530/531/569). A tension's record holds the template's
+  // list of severities copied whole (historyGenerator.js never resolves it for a tension), and the row printed
+  // one chip per member, run together ("minormajor"). Where the record holds more than one severity, NO word
+  // prints: nothing is chosen for the reader, neither the worst nor the least. One severity prints its word as
+  // before. The border colour above and the search's sort (dossierSearch.js :: severityRank) are untouched.
+  const sevWords = [...new Set(sevArr.filter(Boolean))];
+  const sevOne = sevWords.length===1&&SEV_COLORS[sevWords[0]] ? sevWords[0] : null;
   return (
     <div style={{border:`1px solid ${border}40`,borderLeft:`3px solid ${border}`,background:swatch['#FDF8E8'],padding:'12px 14px'}}>
       {/* Header */}
       <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:6,flexWrap:'wrap'}}>
         <span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:tm.color}}>{tm.label}</span>
-        {sevArr.filter(s=>s&&SEV_COLORS[s]).map((s,j)=>(
-          <span key={j} style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:SEV_COLORS[s]||'#6b5340',background:`${SEV_COLORS[s]||'#6b5340'}18`,padding:'0 5px',letterSpacing:'0.04em'}}>{s}</span>
-        ))}
+        {sevOne&&<span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:SEV_COLORS[sevOne]||'#6b5340',background:`${SEV_COLORS[sevOne]||'#6b5340'}18`,padding:'0 5px',letterSpacing:'0.04em'}}>{sevOne}</span>}
       </div>
       {/* Description. The tension's plot hooks live on the Plot Hooks tab (X-2). */}
       <p style={{fontSize:proseFontSize(FS.md, mobile),color:swatch.inkMag2,lineHeight:1.55,margin:'0 0 6px'}}><MentionText text={typeof t==='object'?t.description||t.issue||t.type:String(t)}/></p>
@@ -160,14 +171,14 @@ export function HistoryTab({settlement:r, narrativeNote, onReroll, publicDossier
   // `composeStateProse` rather than through a single kernel read, and the browser-side cost
   // is unmeasured. The result is a pure function of the settlement and the two view flags.
   const historyDesk = useMemo(
-    () => generalDeskLines(r, {publicDossier, playerView, tier: r?.tier}).history,
+    () => generalDeskLines(r, {publicDossier, playerView, publicSite: 'general:history', tier: r?.tier}).history,
     [r, publicDossier, playerView],
   );
   if (!r?.history) return <Empty message="No historical data available."/>;
   const h = r.history;
   // DS-GEN-9 (history.identity) and DS-GEN-16 (history.record) are GLANCE rows by chair
   // ruling (H3, H4): the founding line is the history desk's one sentence on this page.
-  const {foundedLine} = historyDesk;
+  const {foundedLine, legacyLines} = historyDesk;
   const {founding, historicalEvents=[], currentTensions=[], historicalCharacter, age, eventsTimeline=[]} = h;
 
   // Sort events most recent first
@@ -308,6 +319,10 @@ export function HistoryTab({settlement:r, narrativeNote, onReroll, publicDossier
         <div style={{display:'flex',flexDirection:'column',gap:10}}>
           {sortedEvents.map((evt,i)=><HistoryEventCard key={i} evt={evt} h={h} isExp={expandedEvent===i} onToggle={()=>setExpandedEvent(expandedEvent===i?null:i)}/>)}
         </div>
+        {/* ── DS-GEN-16 (history.legacy) — the recent blow in living memory and the record's
+            past-to-present link, UNDER the events they name (X-16). W5 construction 2026-11-07. */}
+        {legacyLines.length>0&&<ProseBlock lines={legacyLines} settlementName={r.name} tier={r.tier}
+          style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.6,margin:'10px 0 0',fontStyle:'italic'}}/>}
       </Collapsible>}
 
     </div>

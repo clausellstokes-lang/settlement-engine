@@ -72,7 +72,7 @@ describe('a place short of food sells no food surplus', () => {
     expect(short).toBeGreaterThan(10);
     expect(shortWithExports).toBeGreaterThan(5);
     expect(heldSurplus).toBeGreaterThan(0);
-  });
+  }, 120_000); // its own budget: a corpus walk at the edge of the 20 s default on a CI runner under coverage (measured 2026-11-18: ~23 s there)
 
   it('the writer reads the record: grain fields offer a surplus only to a place that grows more than it eats', () => {
     const offer = (record) => deriveExportsFromChains([], ['grain_fields'], 'village', 'road', [], {}, [], [{ name: 'Mill' }], null, record);

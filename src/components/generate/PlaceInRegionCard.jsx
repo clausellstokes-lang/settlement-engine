@@ -51,7 +51,7 @@ export default function PlaceInRegionCard() {
   };
   const heading = (
     <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
-      <span style={{ fontFamily: serif_, fontSize: FS.lg, fontWeight: 600, color: INK }}>Place in Region</span>
+      <span style={{ fontFamily: serif_, fontSize: FS.xl, fontWeight: 700, color: INK }}>Place in Region</span>
       {/* Subordinate qualifier pushed to the far right so the title is the
           unambiguous single focal point of the header. */}
       <span style={{ marginLeft: 'auto', fontSize: FS.xs, color: BODY }}>premium</span>

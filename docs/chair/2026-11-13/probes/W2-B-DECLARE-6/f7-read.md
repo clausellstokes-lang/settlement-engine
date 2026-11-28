@@ -1,0 +1,8 @@
+# Finding 7 (third read): `both` and the access row, read
+
+- The page list on the census's 720: 2,001 lines before and after; 0 left, 0 entered (pagediff.mjs over pagemeasure.mjs, instrument at 718fffc51 and here).
+- The FIRST cut (`both` beside every count word, a qualifier word allowed between) let in 2 lines, read 0 of 2 true, so it was narrowed before the commit:
+  - r2r-village-57 (village, 261; powers Merchant Guilds, Craft Guilds, Elected Reeve; roster Mill, Parish church, Weekly market): "Wants Get to whatever both Merchant Guilds and Elected Reeve want this season first." -- `both` joins two names; it counts no guilds. NOT FALSE.
+  - r2s-monster_pressure-village-2 (village, 242; powers Merchant Guilds, Household Council): "Wants Get to whatever both Merchant Guilds and Household Council want this season first." -- the same. NOT FALSE.
+- The cure as committed: `both` counts only the houses it governs, with no word between but "the" / "its" / "of the" / "of its", and no "and" after the noun. Planted: "Both granaries …" beside one Granary is a finding; beside "Granaries (2-4)" it is not; "Both the mills …" beside one Mill is; "both Merchant Guilds and Elected Reeve" and "Both granaries and mills" are not. "Two mills …" beside a Mill and "Access to external mill" is a finding (NOT_HERE); beside a Mill and a Grain mill it is not.
+- The walker's source arm newly sees ONE old line: src/data/historyData.js "Someone is sabotaging both guilds to destabilize the market for a third party" (a count of two guilds: a true presumption the line makes). It stood at c3913f999; banked through the door under `word` (`--bank word --base c3913f999 --thing housesCount`), 4,719 -> 4,720.

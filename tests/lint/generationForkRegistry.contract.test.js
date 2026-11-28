@@ -96,12 +96,12 @@ describe('EM-P2 — the generation fork register: totality, derivation, and Tier
     const pairs = registryPairs();
     // ANTI-VACUITY FIRST: an empty registry would make every equality below trivially true.
     expect(pairs.length, 'the live registry produced no pairs').toBeGreaterThan(70);
-    expect(getStepOrder().length, 'the live step order').toBe(23); // lane CRISIS (2026-11-03): resolveCrisisCast joins (22 -> 23)
+    expect(getStepOrder().length, 'the live step order').toBe(22); // ALLEGIANCE-CAR1 (2026-11-08): 23 -> 22, corruptionPass retired (J-2), measured; lane CRISIS (2026-11-03): resolveCrisisCast joins (22 -> 23)
 
     expect(GENERATION_TIER1.length, 'the register declares one row per live pair').toBe(pairs.length);
     // GS-2 one faction set (2026-10-31, ODQ §934.101): 75 -> 72; generatePopulation|factions, generatePopulation|conflicts
     // and corruptionPass|factions left with the keys (the groups and conflicts are derived at assembly).
-    expect(GENERATION_TIER1.length, 'the measured denominator at this base').toBe(74); // lane CRISIS (2026-11-03): resolveCrisisCast joins: two rows (72 -> 74)
+    expect(GENERATION_TIER1.length, 'the measured denominator at this base').toBe(78); // LASTCLOSE-DOORS (2026-11-19, the last close): 77 -> 78, assembleSettlement|institutions|mutates (FAULTS-ROWS, point 65, FR14: the late re-read's correction in place), pasted from the census arm's fresh literal at cc11c9504, measured; BAR8-FISH-ROWS (2026-11-17, BR24): 76 -> 77, generateNarratives|availableServices|mutates (the bought fish's catch rows, in place), measured; // DEBT-2 · D1 (2026-11-17, point 33): 74 -> 76, generateNarratives|economicState|mutates and assembleSettlement|npcs|mutates (BIRTH-3 declared two writes the line already made), measured; // ALLEGIANCE-CAR1 (2026-11-08): 75 -> 74, `corruptionPass|npcs|mutates` retired with the step (J-2), measured; 2026-11-07 PEOPLE-1 CAST: 74 -> 75, `assembleSettlement|relationships|mutates` (the seam's ties) // lane CRISIS (2026-11-03): resolveCrisisCast joins: two rows (72 -> 74)
 
     const declared = GENERATION_TIER1.map((row) => `${row.step}|${row.key}`);
     const live = pairs.map((pair) => `${pair.step}|${pair.key}`);
@@ -118,7 +118,7 @@ describe('EM-P2 — the generation fork register: totality, derivation, and Tier
     // The crisis cast (lane CRISIS, 2026-11-03): provides 55 -> 56 (resolveCrisisCast|crisisCast), mutates 17 -> 18
     // (resolveCrisisCast|settlement).
     expect(GENERATION_TIER1.filter((row) => row.via === 'provides').length, 'provides entries').toBe(56);
-    expect(GENERATION_TIER1.filter((row) => row.via === 'mutates').length, 'mutates-only entries').toBe(18);
+    expect(GENERATION_TIER1.filter((row) => row.via === 'mutates').length, 'mutates-only entries').toBe(22) /* LASTCLOSE-DOORS (2026-11-19): 21 -> 22, assembleSettlement|institutions|mutates (FAULTS-ROWS, point 65) */ /* BAR8-FISH-ROWS (2026-11-17): 20 -> 21, the same row */ /* DEBT-2 · D1 (2026-11-17): 18 -> 20, the same two rows */ /* ALLEGIANCE-CAR1 (2026-11-08): 19 -> 18, corruptionPass|npcs|mutates retired (J-2), measured; 18 -> 19, PEOPLE-1 CAST: assembleSettlement|relationships|mutates */;
 
     // The accessors: a miss is `null` and `[]`, never `undefined` and never `null`.
     expect(tier1For('resolveConfig', 'tier'), 'tier1For hit').toBe(GENERATION_TIER1[0]);
@@ -168,18 +168,24 @@ describe('EM-P2 — the generation fork register: totality, derivation, and Tier
     // 2026-10-01, the urban band (ODQ §934.86): drawn 28 -> 29, pure 46 -> 45. The register's re-measure (fc0e2205f)
     // flipped assembleInstitutions|generationRepairs pure -> drawn (2 of 63 rows), and this tally follows the register.
     // GS-2 one faction set (2026-10-31, ODQ §934.101): drawn 29 -> 26; the three retired rows were all drawn.
-    expect(tallyOf(GENERATION_TIER1, 'class'), 'the entropy tally').toEqual({ drawn: 27, label: 1, pure: 46 }); // LANDING-1 (2026-11-04): factionCorrelationPass measures drawn at the landed tip (6 of 63 rows draw); before that, lane CRISIS (2026-11-03): resolveCrisisCast joins: both its rows are pure (45 -> 47)
+    // PEOPLE-4 TIES (2026-11-07, R-P7): drawn 27 -> 26, pure 46 -> 47 — generatePopulation|relationships measures pure (the step
+    // provides `[]`; the ties are drawn at the coherence seam on their own family), the register's own re-measure.
+    // R2-CODE-B-4 (ROUND THREE item 4, 2026-11-14): drawn 25 -> 27, pure 48 -> 46 — the register's own re-measure (32438f8d1):
+    // resolveCrisisCast's two rows measure drawn (the cast's one temporary person, named on the step's own fork, 2 of 63 rows).
+    expect(tallyOf(GENERATION_TIER1, 'class'), 'the entropy tally').toEqual({ drawn: 27, label: 1, pure: 50 /* LASTCLOSE-DOORS (2026-11-19): 49 -> 50, assembleSettlement|institutions|mutates measures pure (keyMoves 0 of 63; FAULTS-ROWS, point 65); */ /* BAR8-FISH-ROWS (2026-11-17): 48 -> 49, the new row measures pure (keyMoves 0 of 63); */ /* DEBT-2 · D1 (2026-11-17): 46 -> 48, both new rows measure pure (keyMoves 0 of 63); */ /* ALLEGIANCE-CAR1 (2026-11-08): drawn 26 -> 25, the retired corruptionPass|npcs row was drawn (measured); */ /* MERGE-234 (one tie writer): 47 -> 48, assembleSettlement|relationships measures pure (the seam mint's `::tie` fork retired) */ }); // LANDING-1 (2026-11-04): factionCorrelationPass measures drawn at the landed tip (6 of 63 rows draw); before that, lane CRISIS (2026-11-03): resolveCrisisCast joins: both its rows are pure (45 -> 47)
     expect(GENERATION_TIER1.filter((row) => row.class === 'label').map((row) => `${row.step}|${row.key}`),
       'the single label row: a key that moves under a zero-draw step').toEqual(['generatePower|powerIntent']);
     // GS-2 (2026-10-31, ODQ §934.101): same 35 -> 34 and transformed 15 -> 13 in BOTH comparands below, the three
     // retired rows (generatePopulation|conflicts same; generatePopulation|factions and corruptionPass|factions transformed).
+    // PEOPLE-4 TIES (2026-11-07, R-P7): same 30 -> 29, transformed 13 -> 14 in BOTH comparands — generatePopulation|relationships
+    // is rewritten on the record by the coherence seam's tie draw (the step provides `[]`); the disagreement count is unmoved.
     expect(tallyOf(GENERATION_TIER1, 'onRecordClass'), 'the FINAL comparand tally')
-      .toEqual({ absent: 20, same: 30, transformed: 13, varies: 11 }); // LANDING-8 (2026-11-06): same 34 -> 30, varies 7 -> 11, the four stress rows under the copy-on-write crisis cast (lane D, 8befe5a0d). LANDING-1 (2026-11-04): one row same -> varies, re-measured by the census at the landed tip. lane CRISIS (2026-11-03): resolveCrisisCast joins: crisisCast absent, settlement same
+      .toEqual({ absent: 20, same: 28, transformed: 16, varies: 14 }); // LASTCLOSE-DOORS (2026-11-19): same 27 -> 28 (assembleSettlement|institutions|mutates, FAULTS-ROWS point 65); // BAR8-FISH-ROWS (2026-11-17): same 26 -> 27 (generateNarratives|availableServices); // DEBT-2 · D1 (2026-11-17): transformed 15 -> 16 (assembleSettlement|npcs), varies 13 -> 14 (generateNarratives|economicState); // 2026-11-15, THE CLOSE OF THE TAIL ROUND (TAIL-CLOSE-SWEEP-E; the register re-measured through its door by 1c088056b under the owner's word of 2026-11-15 06:00 UTC): same 28 -> 26, varies 11 -> 13: generateEconomy|economicState and economyReconcilePass|economicState (the economy reads off the town's own record) // STYLE-2-MERGE point 27 (2026-11-10), URBAN-FIX C-1 935c961fd: same 29 -> 28, transformed 14 -> 15, resolveConfig|culturalIdentity (the stored foodways takes the food record's line at assembly; measured by generationForkCensus A4) // ALLEGIANCE-CAR1 (2026-11-08): transformed 15 -> 14, the retired corruptionPass|npcs row (measured) // MERGE-234 (one tie writer): transformed 14 -> 15, assembleSettlement|relationships same -> transformed (the seam mint's `::tie` fork retired) // LANDING-8 (2026-11-06): same 34 -> 30, varies 7 -> 11, the four stress rows under the copy-on-write crisis cast (lane D, 8befe5a0d). LANDING-1 (2026-11-04): one row same -> varies, re-measured by the census at the landed tip. lane CRISIS (2026-11-03): resolveCrisisCast joins: crisisCast absent, settlement same
     // 2026-10-01, the urban band (ODQ §934.86): absent 27 -> 26, same 18 -> 19. The same re-measure moved two rows'
     // post-step comparand (generationRepairs absent -> varies; isolationSupport varies -> same), and both now agree
     // with their final comparand, so the disagreeing rows below go 18 -> 16 (generationForkCensus records the same).
     expect(tallyOf(GENERATION_TIER1, 'producedOnRecordClass'), 'the POST-STEP comparand tally')
-      .toEqual({ absent: 27, same: 17, transformed: 13, varies: 17 }); // LANDING-1 (2026-11-04): one row same -> varies, re-measured at the landed tip. lane CRISIS (2026-11-03): resolveCrisisCast joins; assembleSettlement|stress produced same -> varies
+      .toEqual({ absent: 27, same: 14, transformed: 16, varies: 21 }); // LASTCLOSE-DOORS (2026-11-19): same 13 -> 14, the same row, both comparands agree (the disagreement count unmoved at 14); // CLOSE-DOORS-1B (2026-11-18, the close; the register's A4 tallies re-taken at the frozen tree 70e557d5b): same 14 -> 13, varies 20 -> 21: economyReconcilePass|availableServices same -> varies after the step (BAR8-FISH-ROWS, the sixth chair's point 53, the patch its hand-back names); // BAR8-FISH-ROWS (2026-11-17): same 13 -> 14, the same row, both comparands agree (the disagreement count unmoved at 13); // DEBT-2 · D1 (2026-11-17): the same two rows, both comparands agree (the disagreement count unmoved at 13); // 2026-11-15, THE CLOSE OF THE TAIL ROUND (TAIL-CLOSE-SWEEP-E; the same re-measure, 1c088056b): same 15 -> 13, varies 17 -> 19: coherenceRepairPass|institutions and economyReconcilePass|economicState (the disagreement count below measures 13, unmoved: generateEconomy|economicState stops disagreeing, coherenceRepairPass|institutions starts) // STYLE-2-MERGE point 27 (2026-11-10), URBAN-FIX C-1 935c961fd: same 16 -> 15, transformed 14 -> 15, the same row // ALLEGIANCE-CAR1 (2026-11-08): transformed 15 -> 14, the same retired row (measured) // MERGE-234 (one tie writer): transformed 14 -> 15, the same row // LANDING-1 (2026-11-04): one row same -> varies, re-measured at the landed tip. lane CRISIS (2026-11-03): resolveCrisisCast joins; assembleSettlement|stress produced same -> varies
 
     // §6.2b: the register carries both comparands BECAUSE sixteen rows disagree, and every
     // one of them is a key a LATER step rewrites. The set is derived from the register itself.
@@ -187,7 +193,7 @@ describe('EM-P2 — the generation fork register: totality, derivation, and Tier
       .filter((row) => row.onRecordClass !== row.producedOnRecordClass)
       .map((row) => `${row.step}|${row.key}`);
     process.stdout.write(`\n[A3s] the two comparands disagree on ${disagreeing.length} rows: ${disagreeing.join(', ')}\n`);
-    expect(disagreeing.length, 'the disagreement count is the register\'s reason for carrying both').toBe(13); // LANDING-8 (2026-11-06): 17 -> 13, the four stress rows' two comparands agree under the copy-on-write crisis cast (8befe5a0d). lane CRISIS (2026-11-03): resolveCrisisCast joins: assembleSettlement|stress (16 -> 17)
+    expect(disagreeing.length, 'the disagreement count is the register\'s reason for carrying both').toBe(14); /* CLOSE-DOORS-1B (2026-11-18): 13 -> 14, economyReconcilePass|availableServices (BAR8-FISH-ROWS, point 53, the patch its hand-back names); MERGE-234 (one tie writer): 14 -> 13, the seam's tie retired; 13 -> 14, PEOPLE-1 CAST: the relationships row (the seam's ties) */ // LANDING-8 (2026-11-06): 17 -> 13, the four stress rows' two comparands agree under the copy-on-write crisis cast (8befe5a0d). lane CRISIS (2026-11-03): resolveCrisisCast joins: assembleSettlement|stress (16 -> 17)
     expect(GENERATION_TIER1.filter((row) => row.key === 'effectiveConfig'
       && row.onRecordClass === 'same' && row.producedOnRecordClass === 'absent').length,
     'the seven effectiveConfig rows: the config IS on the record, and no writer handed it there').toBe(7);
@@ -205,7 +211,7 @@ describe('EM-P2 — the generation fork register: totality, derivation, and Tier
 
     // ── GUARD THE GUARD, FIRST. Nothing below means anything until the resolver is proved.
     const steps = getStepMeta().map((entry) => entry.name);
-    expect(steps.length, 'anti-vacuity: the live step list').toBe(23); // lane CRISIS (2026-11-03): resolveCrisisCast joins
+    expect(steps.length, 'anti-vacuity: the live step list').toBe(22); // ALLEGIANCE-CAR1 (2026-11-08): 23 -> 22, corruptionPass retired (J-2), measured; lane CRISIS (2026-11-03): resolveCrisisCast joins
     const ourHits = [];
     const modelHits = [];
     for (const step of steps) {
@@ -213,7 +219,7 @@ describe('EM-P2 — the generation fork register: totality, derivation, and Tier
       if ((declaredSymbols(raw).get(step) || 0) === 1) ourHits.push(step);
       if ((modelDeclaredSymbols(raw).get(step) || 0) === 1) modelHits.push(step);
     }
-    expect(ourHits.length, 'every registered step is declared exactly once in its own step file').toBe(23); // lane CRISIS (2026-11-03): resolveCrisisCast joins
+    expect(ourHits.length, 'every registered step is declared exactly once in its own step file').toBe(22); // ALLEGIANCE-CAR1 (2026-11-08): 23 -> 22, corruptionPass retired (J-2), measured; lane CRISIS (2026-11-03): resolveCrisisCast joins
     expect(modelHits, 'the model\'s form set cannot name a registerStep host, which is why this resolver exists').toEqual([]);
     expect(sourceOf(CHOOSER_WALKER), `${CHOOSER_WALKER} no longer spells the form set this control quotes`)
       .toContain(MODEL_DECL_LINE);
@@ -269,7 +275,11 @@ describe('EM-P2 — the generation fork register: totality, derivation, and Tier
     expect(GENERATION_TIER2.map((row) => row.cardShape),
       'the rows are grouped by card shape, never interleaved')
       .toEqual(seenShapes.flatMap((shape) => GENERATION_TIER2.filter((row) => row.cardShape === shape).map(() => shape)));
+    // 2026-11-07 PEOPLE-1 CAST: 5 -> 7 — `npcs[].role` and `npcs[].status` are COMPUTED from the face registry and the
+    // ranks (M-1b: the role is the institution's title; the status follows the rank), no longer drawn by the step.
+    // 2026-11-08 ALLEGIANCE-CAR2 (the guild's push): 7 -> 6 — `npcs[].role` is `drawn` again (7/42 under the population
+    // step's perturbation; src/domain/generation/generationForkRegistry.js names the cause, 7f111daa7).
     expect(GENERATION_TIER2.filter((row) => row.origin === 'computed').length,
-      'five rows are computed, and all ten stay editable: origin is recorded, never a gate').toBe(5);
+      'six rows are computed, and all ten stay editable: origin is recorded, never a gate').toBe(6);
   });
 });

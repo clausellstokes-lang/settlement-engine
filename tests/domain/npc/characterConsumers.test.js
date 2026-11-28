@@ -51,6 +51,7 @@ import { CORRUPTION_VECTORS, corruptibility, npcCorruptibleFlaw, npcCorruptibleV
 import { npcTraitPlane, readClergyPlane, targetedFootholds } from '../../../src/domain/worldPulse/clergyTraitPlane.js';
 import { flawDistortion } from '../../../src/domain/worldPulse/espionage/espionageTap.js';
 import { buildPersonaSlice } from '../../../src/domain/ai/personaSlicer.js';
+import { migrateV1toV2 } from '../../../src/domain/settlementMigrations.js';
 
 const REPO_ROOT = join(dirname(fileURLToPath(import.meta.url)), '../../..');
 const L1_CATALOG = join(REPO_ROOT, 'src/domain/npc/paradigmAxisCatalog.js');
@@ -493,11 +494,19 @@ describe('THE RE-ROUTES — three ways each, because sameness alone proves nothi
   });
   const CHARTED_MINISTER = Object.freeze({ ...MINISTER, character: CHARTED_NPC.character });
   /** @param {object} npc */
-  const settlementOf = (npc) => ({
-    id: 's1',
-    powerStructure: { factions: [{ id: 'temple', archetype: 'religious' }] },
-    npcs: [{ ...npc, linkedFactionIds: ['temple'] }],
-  });
+  // GREEN-TIP (2026-11-10, re-keyed by cause 57b0de61e, people-5b step 2): the minister stands in the temple by a
+  // MEMBERSHIP (factionRefs.js :: entityLinksFaction reads `memberships`; the retired `linkedFactionIds` is read by
+  // nothing). Built in the v1 shape and handed through the product's own door, the save migration, which moves the
+  // link onto a membership in the power's display name (`.faction`, as every generated power carries it).
+  const settlementOf = (npc) => {
+    const { settlement } = migrateV1toV2({
+      id: 's1',
+      powerStructure: { factions: [{ id: 'temple', faction: 'Temple', archetype: 'religious' }] },
+      npcs: [{ ...npc, linkedFactionIds: ['temple'] }],
+    });
+    expect(settlement.npcs[0].memberships).toEqual([expect.objectContaining({ power: 'Temple' })]);
+    return settlement;
+  };
 
   test('npcTraitPlane: no lens and a DARK lens agree with each other, exactly', () => {
     expect(npcTraitPlane(/** @type {any} */ (MINISTER)))

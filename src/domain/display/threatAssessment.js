@@ -34,8 +34,60 @@
  * is byte-identical to its former home.
  */
 
-import { defenseFactsOf } from '../defense/defenseFacts.js';
-import { SCORE_BAND_CUTS } from './defenseScoreBands.js';
+import { defenseFactsOf } from '../defense/defenseFacts.js'; import { courtHoldersOf, defenceOf } from '../facts/defence.js'; // FR19 item 6: the Legal row's own court and live prison
+import { SCORE_BAND_CUTS, economicSurvivalBandOf, scoreBand } from './defenseScoreBands.js';
+import { laidByBeforeCrisis } from './prosperityInCrisis.js';
+import { standingDefenseForces } from '../institutions/defenseInstitutionBuckets.js';
+import { clergyHouseStands } from './clergyHouse.js';
+import { crisisOf } from '../facts/crisisKind.js';
+import { safetyShownOf } from './safetyShown.js'; // PAGE-1 SAFETY: the label's one reader (a reader's read: the label alone)
+
+/**
+ * A HOUSE WITH CLERGY STANDS (EXPORTS-B1, the chair's ruling C on EXPORTS-MEASURE-1 B1): its one home is
+ * `clergyHouse.js` (TAIL-DISPLAY-CIVIC-2 moved it there, verbatim, for the governing power's faith chip to read too).
+ * The economy compound's `hasChurch` counts a shrine and a neighbour's church, so the clergy line reads this, not it.
+ */
+const clergyStand = clergyHouseStands;
+
+/**
+ * A FORCE STANDS (UPKEEP-8, F3, the chair's ruling (a)): a garrison, a militia (a household levy is one), a watch or a
+ * contracted company, read from the lane's one projection and from no list of names of its own. A row's sentence that
+ * says no force stands prints only where none does.
+ * @param {{ institutions?: unknown } | null | undefined} r
+ * @returns {boolean}
+ */
+export const forceStands = (r) => {
+  const f = standingDefenseForces(r);
+  return f.garrison.present || f.militia.present || f.watch.present || f.mercenary.present;
+};
+
+/** Every band: a sentence that judges nothing is true under each. */
+const BANDS = Object.freeze(['STRONG', 'ADEQUATE', 'WEAK', 'CRITICAL']);
+
+/**
+ * The first of a branch's sentences whose words are true under the band its row prints, or '' (the band alone).
+ * @param {ReadonlyArray<[string, ReadonlyArray<string>]>} lines @param {string} band @returns {string}
+ */
+const trueUnder = (lines, band) => (lines.find(([, bands]) => bands.includes(band)) || [''])[0];
+
+/**
+ * C-L7: a threat bar's colour is the band its row prints (UPKEEP-8 for Economic Survival; UPKEEP-9 for Invasion & War
+ * and Internal Security, the chair's ruling of 2026-11-14): green where Strong, amber where Adequate, red below.
+ * @param {string | null} band @returns {string}
+ */
+const bandBarColor = (band) => (band === 'STRONG' ? '#1a4a2a' : band === 'ADEQUATE' ? '#7a5010' : '#8b1a1a');
+
+/**
+ * WHAT MONEY THE PLACE HAS TO MEET A CRISIS: the Economic Survival row's own band, read from its ONE home
+ * (`defenseScoreBands.js :: economicSurvivalBandOf`, COHERENCE-UPKEEP-6, the chair's ruling A), the band its
+ * badge, its colour, the screen's row and the guard's purse clauses read. Its score is paid at the standing label.
+ * @param {{ defenseProfile?: { scores?: { economic?: unknown } | null } | null } | null | undefined} r
+ * @returns {'long' | 'short' | 'late' | 'none'}
+ */
+const moneyRungOf = (r) => {
+  const band = economicSurvivalBandOf(r);
+  return band === 'STRONG' ? 'long' : band === 'ADEQUATE' ? 'short' : band === 'WEAK' ? 'late' : 'none';
+};
 
 /** The top of the Weak band: the highest a famine-struck place's disaster readiness may read. */
 export const FAMINE_DISASTER_CEILING = SCORE_BAND_CUTS.adequate - 1;
@@ -92,6 +144,53 @@ export function healerSubject(healerName) {
   return /monaster|friary|infirmar/i.test(String(healerName || '')) ? 'The monastic infirmary' : 'A healer';
 }
 
+/** The lead an outbreak in force gives the care sentence, and the clergy's sentence it keeps after it. */
+const OUTBREAK_LEAD = 'The outbreak has come.';
+const CLERGY_CARE = 'Clergy provide basic wound care: better than nothing, worse than a hospital.';
+
+/**
+ * ⭐ AN OUTBREAK IN FORCE IS NOT A HYPOTHESIS (TAIL-DISPLAY-CIVIC-2, READ-ALL-3 20491 26932 27231, the exports' read): the
+ * care sentence spoke of what "a plague would" do and what "an outbreak would" outrun in towns where the record's own
+ * crisis is the outbreak (`crisisOf(...).has('plague_onset')`, the one crisis reader). There the row says the outbreak has
+ * come and who tends it, from the same roster facts; elsewhere it reads as before. The clergy sentence, true under an
+ * outbreak, keeps its words after the outbreak's lead (a line is in its pool unless the town makes it false). Its
+ * no-house twin names houses, not people: the outbreak's own stand-in ("Tends the sick", `crisisCast.js`) is a person,
+ * and no house of care is kept.
+ * @param {{ hasHospital: boolean, hasHealer: boolean, healerName: string|null }} facts @param {boolean} clergy
+ * @param {boolean} outbreak @returns {string}
+ */
+export function careSentence(facts, clergy, outbreak) {
+  if (outbreak) {
+    return facts.hasHospital
+      ? 'The outbreak has come; the hospital is where the sick can be isolated.'
+      : facts.hasHealer
+        ? `The outbreak has come, and ${healerSubject(facts.healerName).replace(/^\w/, (ch) => ch.toLowerCase())} treats the sick one at a time.`
+        : clergy
+          ? `${OUTBREAK_LEAD} ${CLERGY_CARE}`
+          : 'The outbreak has come, and no house here is kept to treat the sick.';
+  }
+  return facts.hasHospital
+    ? 'The hospital can isolate the sick and keep an outbreak from spreading.'
+    : facts.hasHealer
+      ? healerSubject(facts.healerName) + ' treats the sick one at a time; an outbreak would outrun it.'
+      : clergy
+        ? CLERGY_CARE
+        : 'Nobody here treats the sick, and a plague would run until it burned out.';
+}
+
+/**
+ * ⭐ QUIET COUNTRY IS NOT SAID OF A PLACE UNDER ARMS (TAIL-DISPLAY-CIVIC-2, READ-ALL-3 22279 22277 22278 27635): the heartland
+ * lines call the country quiet and its threats internal; under a siege, an occupation or a war (the threat family's
+ * armed kinds and `wartime`) the danger is armed men from outside, and under a monster pressure creatures press even
+ * here. There the row takes one twin, true under every band; elsewhere the heartland lines read as before.
+ * @param {ReturnType<typeof crisisOf>} c @returns {string | null}
+ */
+function heartlandUnderArms(c) {
+  if (c.has('monster_pressure')) return 'Heartland country, but creatures are pressing on it now.';
+  if (c.has('under_siege') || c.has('occupied') || c.has('wartime')) return 'Few creatures trouble this country; the danger here now is not from beasts.';
+  return null;
+}
+
 /**
  * @param {any} r A settlement object (reads `defenseProfile`, `economicState`,
  *   and `config`; tolerant of missing fields via optional chaining).
@@ -106,13 +205,14 @@ export function healerSubject(healerName) {
 export function buildThreatAssessment(r) {
   const d = r?.defenseProfile || {};
   const scores = d.scores || {};
-  const sp = r?.economicState?.safetyProfile || {};
-  const f = r?.economicState?.compound?.inst || {};
+  // FR19 item 6: this assessment reads no stamped `compound.inst` flag (the internal line reads the live roster)
   const threat = r?.config?.monsterThreat || 'frontier';
   const facts = defenseFactsOf(r);
   const { hasWalls, hasGarrison, hasMilitia, hasCharter } = facts;
   // The enclosure by its own kind: a palisade is never called walls, stone walls never a palisade.
   const palisade = facts.wallKind === 'palisade';
+  const force = forceStands(r);
+  const crisis = crisisOf(r);
   const result = [];
 
   const monColor = threat === 'plagued'
@@ -120,113 +220,137 @@ export function buildThreatAssessment(r) {
     : threat === 'frontier'
       ? '#7a5010'
       : '#1a5a28';
-  let mon;
+  // F3 (UPKEEP-8, the chair's ruling (b)): each sentence is printed only under the bands its own words are true of.
+  // A branch offers its sentence and, where its contradicted cell held fifteen rows or more, ONE twin that says what
+  // the place holds and what its country asks; a row with no true sentence prints its band alone.
+  const monBand = beastsReadinessOf(r).grade; // P9 (G22): read against the need
+  const milBand = scoreBand(scores.military || 0);
+  const wallWord = palisade ? 'a palisade' : 'walls';
+  /** @type {Array<[string, ReadonlyArray<string>]>} */
+  let monLines = [];
   if (threat === 'plagued') {
     if (hasWalls && hasGarrison) {
-      mon = 'Embattled region: constant creature pressure. Walls and garrison have established a survivable posture. Defense is an ongoing operational necessity. '
+      monLines = [['Embattled region: constant creature pressure. Walls and garrison have established a survivable posture. Defense is an ongoing operational necessity. '
         + (hasCharter
           ? 'Charter hall coordinates specialist monster response.'
-          : 'No specialist monster hunters on retainer: the garrison handles everything.');
+          : 'No specialist monster hunters on retainer: the garrison handles everything.'), ['ADEQUATE', 'STRONG']]];
     } else if (hasWalls && hasMilitia) {
-      mon = (palisade ? 'Palisade' : 'Walls') + ' and citizen militia provide a viable but demanding posture in an embattled region. Watch rotations are thin. Simultaneous incursions will break coverage. '
+      monLines = [[(palisade ? 'Palisade' : 'Walls') + ' and citizen militia provide a viable but demanding posture in an embattled region. Watch rotations are thin. Simultaneous incursions will break coverage. '
         + (hasCharter
           ? 'Charter hall provides specialist backup.'
-          : 'No specialist monster hunters.');
-    } else if (hasCharter) {
-      mon = 'No perimeter, but the charter hall provides specialist response for coordinated threats. Creatures that get past initial response reach homes directly.';
-    } else if (hasWalls) {
-      mon = (palisade ? 'A palisade stands' : 'Walls exist')
+          : 'No specialist monster hunters.'), ['ADEQUATE', 'WEAK']],
+      [`An embattled region, and only ${wallWord} and a citizen militia to hold it.`, ['WEAK', 'CRITICAL']]];
+    } else if (hasCharter && !hasWalls) {
+      // UPKEEP-12 (H2, the chair's ruling (b)): NO PERIMETER reads the walls fact the page's own walls line reads.
+      monLines = [['No perimeter, but the charter hall provides specialist response for coordinated threats. Creatures that get past initial response reach homes directly.', ['ADEQUATE', 'WEAK']]];
+    } else if (hasWalls && !force) {
+      monLines = [[(palisade ? 'A palisade stands' : 'Walls exist')
         + ' but no organized force to sustain a watch rotation. The '
         + (palisade ? 'palisade' : 'wall')
-        + ' creates a chokepoint but holding it requires people, and there are not enough for sustained watch.';
+        + ' creates a chokepoint but holding it requires people, and there are not enough for sustained watch.', ['WEAK', 'CRITICAL']]];
     } else if (hasGarrison) {
-      mon = 'Military force present but no perimeter walls. The garrison engages in the open. Creatures can approach from any direction.';
-    } else {
-      mon = 'embattled region with no organized defense and no perimeter. Survival depends on terrain, luck, and the ability to flee. This settlement is in extreme danger.';
+      monLines = [['Military force present but no perimeter walls. The garrison engages in the open. Creatures can approach from any direction.', ['ADEQUATE', 'WEAK']]];
+    } else if (!force && !hasWalls) {
+      monLines = [['embattled region with no organized defense and no perimeter. Survival depends on terrain, luck, and the ability to flee. This settlement is in extreme danger.', ['CRITICAL']]];
     }
   } else if (threat === 'frontier') {
     if (hasWalls && hasGarrison) {
-      mon = 'Active frontier. Walls and garrison provide credible deterrence: most creature threats will not press a defended perimeter. '
+      monLines = [['Active frontier. Walls and garrison provide credible deterrence: most creature threats will not press a defended perimeter. '
         + (hasCharter
           ? 'Charter hall handles anything above the garrison usual remit. '
           : '')
-        + 'Adequate for the threat level.';
+        + 'Adequate for the threat level.', ['STRONG', 'ADEQUATE']]];
     } else if (hasWalls && hasMilitia) {
-      mon = (palisade ? 'Palisade' : 'Walls') + ' and militia are standard frontier resilience. Effective against most creature threats, strained by simultaneous incursions. '
+      monLines = [[(palisade ? 'A palisade' : 'Walls') + ' and a militia, as most frontier places have: enough for most creatures, not for several attacks at once.'
         + (hasCharter
-          ? 'Charter hall provides specialist backup. '
-          : '')
-        + 'Honest posture for a frontier settlement.';
+          ? ' The charter hall sends specialists when the militia is not enough.'
+          : ''), ['ADEQUATE']]];
     } else if (hasGarrison || hasMilitia) {
-      mon = 'Active frontier with '
-        + (hasGarrison ? 'a garrison' : 'a militia')
-        + ' but no perimeter. Defense is reactive. Attackers choose the point of engagement. Adequate for routine threats; exposed to anything coordinated.';
-    } else {
-      mon = 'Active frontier with no organized defense. Vulnerable to any monster of moderate capability.';
+      const held = hasGarrison ? 'a garrison' : 'a militia';
+      monLines = [['Active frontier with ' + held
+        + ' but no perimeter. Defense is reactive. Attackers choose the point of engagement. Adequate for routine threats; exposed to anything coordinated.', ['ADEQUATE', 'WEAK']],
+      [`Active frontier with ${held} but no perimeter, and too little to meet what the country sends.`, ['CRITICAL']]];
+    } else if (!force) {
+      monLines = [['Wild country all round and nobody organised to meet it; any creature of real size would get in.', ['WEAK', 'CRITICAL']]];
+    } else if (hasWalls && standingDefenseForces(r).watch.present) {
+      monLines = [[`Active frontier, with ${wallWord} and a watch to meet what comes.`, BANDS]];
     }
+  } else if (heartlandUnderArms(crisis)) {
+    monLines = [[/** @type {string} */ (heartlandUnderArms(crisis)), BANDS]];
   } else {
     if (hasWalls && hasGarrison) {
-      mon = 'Safe heartland: the existing defenses are substantially more than the threat level requires.';
-    } else if (hasWalls || hasGarrison || hasMilitia || hasCharter) {
-      mon = 'Safe heartland with minimal creature activity. Existing defenses are appropriate. The primary threats here are internal.';
+      monLines = [['Quiet country, and far more defences than it calls for.', ['STRONG']]];
+    } else if (hasWalls || force || hasCharter) {
+      monLines = [['Safe heartland with minimal creature activity. Existing defenses are appropriate. The primary threats here are internal.', ['ADEQUATE', 'STRONG']],
+        ['Quiet country, and little is kept against it.', ['WEAK', 'CRITICAL']]];
     } else {
-      mon = 'Safe heartland with no organized defense. Acceptable given the threat environment.';
+      monLines = [['Quiet country and no organised defence, which is all the country asks.', ['ADEQUATE', 'STRONG']],
+        ['Quiet country, and nothing organised is kept against it.', ['WEAK', 'CRITICAL']]];
     }
   }
+  const mon = trueUnder(monLines, monBand);
   result.push({
     label: 'Beasts & Monsters',
     color: monColor,
-    assess: mon,
+    assess: mon, // '' where no sentence is true of what stands under the band: the row prints its band alone
   });
 
-  const milScore = scores.military || 0;
-  const milColor = milScore >= 60
-    ? '#1a4a2a'
-    : milScore >= 35
-      ? '#7a5010'
-      : '#8b1a1a';
-  let mil;
+  // C-L7 (UPKEEP-9, the chair's ruling of 2026-11-14 01:30): the bar's colour reads the band its row prints, as the
+  // Economic Survival bar does, not cuts of its own (60/35 against the band's 65/40).
+  const milColor = bandBarColor(milBand);
+  /** @type {Array<[string, ReadonlyArray<string>]>} */
+  let milLines = [];
   if (hasWalls && hasGarrison) {
-    mil = (palisade ? 'A palisade and a professional garrison provide' : 'Walls and professional garrison provide')
-      + ' meaningful deterrence against raiding and conventional assault. Not rated for sustained siege without significant supply stockpiles.';
+    milLines = [[(palisade ? 'A palisade and a professional garrison provide' : 'Walls and professional garrison provide')
+      + ' meaningful deterrence against raiding and conventional assault. Not rated for sustained siege without significant supply stockpiles.', ['STRONG', 'ADEQUATE']]];
   } else if (hasWalls && hasMilitia) {
-    mil = (palisade ? 'A palisade with citizen militia' : 'Walls with citizen militia') + ': credible deterrence against raiders, inadequate against any professional force with siege capability.';
-  } else if (hasWalls) {
-    mil = palisade
+    milLines = [[(palisade ? 'A palisade' : 'Walls') + ' and armed townsfolk: enough to turn raiders away, not enough against an army that brings siege gear.', ['ADEQUATE', 'WEAK']],
+      [palisade ? 'A palisade and armed townsfolk who know how to hold it.' : 'Walls and armed townsfolk who know how to hold them.', ['STRONG']]];
+  } else if (hasWalls && !force) {
+    milLines = [[palisade
       ? 'A palisade but no organized military force to man it. A determined attacker is over it with ladders and time.'
-      : 'Walls present but no organized military force to man them. A determined attacker takes the walls if they have ladders and time.';
+      : 'Walls present but no organized military force to man them. A determined attacker takes the walls if they have ladders and time.', ['WEAK', 'CRITICAL']],
+    [palisade
+      ? 'A palisade and nobody organised to man it: enough to turn away a raid, not a determined attack.'
+      : 'Walls and nobody organised to man them: enough to turn away a raid, not a determined attack.', ['ADEQUATE']]];
+  } else if (hasWalls && standingDefenseForces(r).watch.present && !hasGarrison && !hasMilitia) {
+    milLines = [[palisade ? 'A palisade, and a watch to keep it.' : 'Walls, and a watch to keep them.', BANDS]];
   } else if (hasGarrison) {
-    mil = 'Professional garrison without perimeter walls. Effective against raiders; cannot hold against a siege.';
+    milLines = [['Professional garrison without perimeter walls. Effective against raiders; cannot hold against a siege.', ['ADEQUATE', 'WEAK']]];
   } else if (hasMilitia) {
-    mil = 'Armed citizens who know their ground. Effective against disorganized raiders. No counter to a disciplined military force.';
-  } else {
-    mil = 'No walls or garrison. Cannot resist organized military aggression. Survival depends entirely on distance, diplomacy, or irrelevance to the attacker.';
+    milLines = [['Armed citizens who know their ground. Effective against disorganized raiders. No counter to a disciplined military force.', ['ADEQUATE', 'WEAK']],
+      ['Armed citizens who know their ground, and no walls: too few to turn back any force that comes in earnest.', ['CRITICAL']]];
+  } else if (!hasWalls) {
+    milLines = [['No walls or garrison. Cannot resist organized military aggression. Survival depends entirely on distance, diplomacy, or irrelevance to the attacker.', ['WEAK', 'CRITICAL']],
+      ['No walls or garrison, but enough here to turn away raiders; nothing that could hold off an army.', ['ADEQUATE']]];
   }
+  const mil = trueUnder(milLines, milBand);
   result.push({
     label: 'Invasion & War',
     color: milColor,
     assess: mil,
   });
 
-  const intScore = scores.internal || 0;
-  const intColor = intScore >= 60
-    ? '#1a4a2a'
-    : intScore >= 35
-      ? '#7a5010'
-      : '#8b1a1a';
-  const sl = sp.safetyLabel || 'Moderate';
+  const intColor = bandBarColor(scoreBand(scores.internal || 0)); // C-L7 (UPKEEP-9): the band its row prints
+  const sl = safetyShownOf(r).label || 'Moderate';
   let intA = 'Internal security: ' + sl + '. ';
-  if (sl.includes('Dangerous')) {
-    intA += 'Active violence and organized crime make internal order the primary threat. ';
+  // TAIL-DISPLAY-CIVIC-2 (READ-ALL-3 29824): a plain "Dangerous" is the crime ratio's own band and names its danger; a
+  // label that names its cause after a dash ("Dangerous — Monster Threat", "— Plague Conditions") has named it, and
+  // "organised crime" beside it named another (the governance account's law, `governanceAccount.js :: adverseSafetyWord`).
+  if (sl.includes('Dangerous') && !/\s—\s/.test(sl)) {
+    intA += 'Violence and organised crime are the main danger here. ';
   }
-  if (f.hasCourtSystem && f.hasPrison) {
-    intA += 'Full legal infrastructure provides enforcement capacity.';
-  } else if (f.hasCourtSystem) {
-    intA += 'Courts prosecute but limited detention.';
-  } else if (f.hasPrison) {
-    intA += 'Detention without systematic prosecution.';
+  // TAIL-DISPLAY-CIVIC-2 (READ-ALL-3 28629): the court fact is a house that hears cases (a courthouse, or the town or
+  // city hall, or the assembly: `defenseFacts.js :: COURT_RE`), so the court-without-gaol line says cases are heard, not
+  // that "a court" stands where the roster lists a town hall.
+  const court = courtHoldersOf(r).length > 0, prison = defenceOf(r).prison; if (court && prison) { // FR19 item 6: the Legal row's court and live prison, not `compound.inst`
+    intA += 'Arrest, trial and gaol all work here.';
+  } else if (court) {
+    intA += 'Cases are heard here, but there is almost nowhere to hold anyone.';
+  } else if (prison) {
+    intA += 'People are locked up without trial.';
   } else {
-    intA += 'No legal infrastructure: order relies on force alone.';
+    intA += 'No court and no gaol; order rests on whoever is armed.';
   }
   result.push({
     label: 'Internal Security',
@@ -234,24 +358,29 @@ export function buildThreatAssessment(r) {
     assess: intA,
   });
 
-  const econScore = scores.economic || 0;
-  const econColor = econScore >= 60
-    ? '#1a4a2a'
-    : econScore >= 35
-      ? '#7a5010'
-      : '#8b1a1a';
+  // C-L7 (UPKEEP-8): the bar's colour reads the band its row prints (the Economic Survival band's ONE home), not cuts of its own.
+  const econBand = economicSurvivalBandOf(r);
+  const econColor = bandBarColor(econBand);
   let econA;
-  if (econScore >= 65) {
-    econA = 'Strong economic base can absorb a sustained crisis. Tax revenue funds emergency measures and '
-      + (hasGarrison ? 'sustains garrison pay' : 'keeps the defence paid')
-      + ' during prolonged engagement.';
-  } else if (econScore >= 40) {
-    econA = 'Adequate economic resilience for a short-term crisis. A prolonged siege will begin straining reserves within months.';
-  } else if (econScore >= 25) {
-    econA = 'Chronic underfunding limits emergency response. A sustained crisis will exhaust reserves and '
-      + (hasGarrison ? 'undermine garrison morale.' : 'wear down the people who defend the place.');
+  const money = moneyRungOf(r);
+  // Where the crisis has lowered the word the page prints, the money that can pay was laid by before it: one clause,
+  // the crisis named by the two-label sentence's own home (COHERENCE-UPKEEP-7, the third read's 1b-M3).
+  const laid = laidByBeforeCrisis(r);
+  const laidClause = laid ? `, ${laid}` : '';
+  if (money === 'long') {
+    econA = `Money enough to ride out a long crisis${laidClause}: emergency measures can be paid for, and `
+      + (hasGarrison ? 'the garrison kept paid' : force ? 'the defenders kept paid' : 'the place kept going')
+      + ' while it lasts.';
+  } else if (money === 'short') {
+    econA = `Money enough for a short crisis${laidClause}; a long one would start eating the reserves within months.`;
+  } else if (money === 'late' && !force) {
+    // EXPORTS-B1 (the chair's ruling C): where no force stands there are no defenders to pay late (new words: the owner's veto).
+    econA = 'Money is already short; a long crisis would empty the reserves.';
+  } else if (money === 'late') {
+    econA = 'The defenders are already paid late; a long crisis would empty the reserves and '
+      + (hasGarrison ? 'wear out the garrison\'s patience.' : 'wear down the people who defend the place.');
   } else {
-    econA = 'Economic base cannot support crisis response. Any sustained threat quickly overwhelms the capacity to respond.';
+    econA = 'There is no money to meet a crisis; any lasting trouble would find nothing to spend.';
   }
   result.push({
     label: 'Economic Survival',
@@ -263,13 +392,7 @@ export function buildThreatAssessment(r) {
   // "Do add storehouse months the economy tab."). Stored food is the Economy tab's, printed once
   // in months; this row speaks of who tends the sick, and of a famine by name (F9 unit 1).
   // Under an active famine the row's sentence names it first (F9 unit 1).
-  const care = facts.hasHospital
-    ? 'Hospital infrastructure enables disease containment and systematic quarantine.'
-    : facts.hasHealer
-      ? healerSubject(facts.healerName) + ' treats the sick one at a time; an outbreak would outrun it.'
-      : f.hasChurch
-        ? 'Clergy provide basic wound care: better than nothing, worse than a hospital.'
-        : 'No medical infrastructure. Plague spreads until it burns out.';
+  const care = careSentence(facts, clergyStand(r), crisis.has('plague_onset'));
   const disA = inActiveFamine(r) ? `${FAMINE_SENTENCE} ${care}` : care;
   result.push({
     label: 'Disasters & Famine',
@@ -279,3 +402,4 @@ export function buildThreatAssessment(r) {
 
   return result;
 }
+import { beastsReadinessOf } from '../facts/beastsReadiness.js'; // P9 (RULING G22): the beasts grade read against the need; at the end of the file, so no cited line moves

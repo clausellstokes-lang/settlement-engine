@@ -330,7 +330,8 @@ describe('D4 ATTEMPT — the escalation beat is REACHABLE, and a sampled corpus 
     // THE HERALD SPEAKS IN DEEDS (the owner, 2026-10-02): the escalation is under way, its applied twin done.
     expect(beat.headline).toMatch(/ is deepening$/);
     expect(beat.appliedHeadline).toMatch(/ deepens$/);
-    expect(beat.summary).toMatch(/has not broken/);
+    // STYLE-2 C2 (SW-12, A2·71): the escalation summary is re-keyed to its plain-words frame.
+    expect(beat.summary).toMatch(/is getting worse/);
     expect(beat.reasons.length).toBeGreaterThan(0);
   });
 

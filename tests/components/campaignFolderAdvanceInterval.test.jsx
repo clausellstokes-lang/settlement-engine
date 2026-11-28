@@ -1,18 +1,25 @@
 /** @vitest-environment jsdom */
 /**
- * campaignFolderAdvanceInterval.test.jsx
+ * campaignFolderAdvanceInterval.test.jsx — RE-KEYED (LIBRARY-SIMPLE, 2026-11-10).
  *
- * The Library campaign folder's "Advance Time" was hardcoded to one_month. It now
- * carries a Week/Month/Season/Year picker (mirroring the World Map toolbar) and
- * threads the chosen interval to onAdvanceTime(campaignId, interval).
+ * This file used to pin the Library folder's "Advance by" interval picker and its
+ * "Advance Time" button. The owner removed them (2026-11-10, verbatim): "I now want to
+ * simplify the library page. No longer does it advance time. That will only be
+ * accessible in isolated (not in campaign settlements) or the realm page." A campaign
+ * advances on the Realm alone (WorldMapToolbar's "Advance by" + "Advance Realm").
  *
- * Mounted collapsed so only the header (where the picker + button live) renders.
+ * The same identity — the folder header, a premium + canonized folder with a member,
+ * the state in which every advance control used to be live — now pins the NEGATIVE:
+ * no interval select, no Advance button, no auto-resolve switch. The keep-side is
+ * pinned too, so the negative cannot pass by the header failing to render.
  */
 import { afterEach, describe, expect, test, vi } from 'vitest';
-import { cleanup, fireEvent, render, screen } from '@testing-library/react';
+import { cleanup, render, screen } from '@testing-library/react';
 
 vi.mock('../../src/store/index.js', () => {
-  const state = { isAdvanceInFlight: () => false, isCampaignMutationLocked: () => false };
+  // The folder still reads the store (the faith seam); give it an empty state. The
+  // advance readers it used to need are gone with the controls they served.
+  const state = {};
   const useStore = (sel) => sel(state);
   useStore.getState = () => state;
   return { useStore };
@@ -23,42 +30,29 @@ import { CampaignFolder } from '../../src/components/settlements/CampaignFolder.
 
 afterEach(() => { cleanup(); vi.clearAllMocks(); });
 
-describe('CampaignFolder — advance interval picker', () => {
-  function renderFolder(onAdvanceTime) {
+describe('CampaignFolder — the Library advances nothing (owner, 2026-11-10)', () => {
+  function renderFolder() {
     render(
       <CampaignFolder
-        campaign={{ id: 'camp-1', name: 'Test Realm', collapsed: true }}
+        campaign={{ id: 'camp-1', name: 'Test Realm', collapsed: true, worldState: { canonizedAt: '2026-01-01T00:00:00Z' } }}
         settlements={[{ id: 's1', name: 'Ashford', settlement: {} }]}
-        worldCanonized
         canManageCampaigns
-        onAdvanceTime={onAdvanceTime}
         toggleCollapsed={() => {}}
       />,
     );
   }
 
-  test('exposes the four intervals and defaults to one_month', () => {
-    renderFolder(vi.fn());
-    const select = screen.getByLabelText('Advance interval');
-    expect(select.value).toBe('one_month');
-    const labels = Array.from(select.options).map(o => o.textContent);
-    expect(labels).toEqual(['Week', 'Month', 'Season', 'Year']);
-  });
-
-  test('advancing threads the chosen interval to onAdvanceTime', () => {
-    const onAdvanceTime = vi.fn();
-    renderFolder(onAdvanceTime);
-    const advanceBtn = screen.getByRole('button', { name: /Advance Time/i });
-
-    fireEvent.click(advanceBtn);
-    expect(onAdvanceTime).toHaveBeenLastCalledWith('camp-1', 'one_month');
-
-    fireEvent.change(screen.getByLabelText('Advance interval'), { target: { value: 'one_season' } });
-    fireEvent.click(advanceBtn);
-    expect(onAdvanceTime).toHaveBeenLastCalledWith('camp-1', 'one_season');
-
-    fireEvent.change(screen.getByLabelText('Advance interval'), { target: { value: 'one_year' } });
-    fireEvent.click(advanceBtn);
-    expect(onAdvanceTime).toHaveBeenLastCalledWith('camp-1', 'one_year');
+  test('a premium, canonized, populated folder renders no advance control', () => {
+    renderFolder();
+    // The keep-side: the header rendered (rename, delete, books and export).
+    expect(screen.getByRole('button', { name: 'Rename campaign' })).toBeTruthy();
+    expect(screen.getByRole('button', { name: 'Delete campaign' })).toBeTruthy();
+    expect(screen.getByRole('button', { name: /Books and export/ })).toBeTruthy();
+    // The negative, by each removed control's own anchor.
+    expect(screen.queryByLabelText('Advance interval')).toBeNull();
+    expect(screen.queryByRole('button', { name: /Advance Time/i })).toBeNull();
+    expect(screen.queryByText('Advance by')).toBeNull();
+    expect(screen.queryByLabelText('Auto-resolve every change')).toBeNull();
+    expect(screen.queryByText(/Advanc/i)).toBeNull();
   });
 });

@@ -83,6 +83,12 @@ function normalizeManifest(source) {
   const categories = source.categories.map((category) => {
     invariant(typeof category.key === 'string' && category.key, 'every category needs a key');
     invariant(typeof category.label === 'string' && category.label, `${category.key} needs a label`);
+    // `root` is the category's STORED read-path identity (the census's bucket limb,
+    // src/domain/prose/wiringCensus.js :: customReachable): lower-case, one word, never a label.
+    invariant(
+      typeof category.root === 'string' && /^[a-z][a-z0-9]*$/.test(category.root),
+      `${category.key} needs a stored root: one lower-case word, the read-path identity (never the display label)`,
+    );
     invariant(Array.isArray(category.fields), `${category.key}.fields must be an array`);
 
     const fieldKeys = new Set();
@@ -171,8 +177,17 @@ function normalizeManifest(source) {
         cardinality: field.single === true ? 'one' : 'many',
       }));
 
-    return { ...category, fields, dependencies };
+    // `root` is a CENSUS input, not runtime vocabulary: scripts/wiring-census.mjs reads it
+    // straight off the JSON source, like `surfaces` for the charset. Stripping it here keeps the
+    // runtime manifest artifacts byte-identical, so the stored identity costs no product bytes.
+    const runtimeCategory = { ...category };
+    delete runtimeCategory.root;
+    return { ...runtimeCategory, fields, dependencies };
   });
+  invariant(
+    new Set(source.categories.map((category) => category.root)).size === source.categories.length,
+    'category roots must be unique',
+  );
 
   const laneKeys = new Set();
   for (const lane of source.lanes || []) {

@@ -92,6 +92,34 @@ function settlementSave(id, name) {
   };
 }
 
+/**
+ * The vanilla content binding, exactly as e2e/realm-herald-gate.spec.js seeds it and for its
+ * measured reason: without it, pinLegacyCampaignContentBindings pins a legacy binding on load
+ * whose environment lands as a revoked Immer draft and the Realm's first advance fails
+ * ("Cannot perform 'getPrototypeOf' on a proxy that has been revoked"; a product defect
+ * recorded there, not fixed here). LIBRARY-SIMPLE needs it because this file's queued-impact
+ * journey now matures its delayed impact through the Realm's advance (see that test).
+ */
+const VANILLA_BINDING = Object.freeze({
+  schemaVersion: 1,
+  source: 'legacy-inferred',
+  environment: {
+    schemaVersion: 1,
+    environmentId: 'system:vanilla',
+    environmentRevisionId: 'system:vanilla:v1',
+    revisionNumber: 1,
+    source: 'vanilla',
+    packVersions: [],
+    directDefinitions: [],
+    tunables: {},
+    visualSelection: {},
+    environmentHash: 'aeb02a6f73cd182b45498535f24b7d7cc509799add744ce436d87a65f6c73bb3',
+    createdAt: null
+  },
+  resolvedDefinitions: [],
+  bindingHash: '9b58eb4b79284c5e56c8afddd99c656bd6ffb95b3357ab3ff0807a7283fd1a69'
+});
+
 function seededCampaign() {
   return {
     id: 'camp-regional',
@@ -101,6 +129,9 @@ function seededCampaign() {
     settlementIds: ['supplier', 'buyer'],
     collapsed: false,
     mapState: null,
+    contentBinding: VANILLA_BINDING,
+    contentBindingHistory: [],
+    contentBindingStatus: 'pinned',
     // THE HERALD WAITS FOR THE FIRST ADVANCE (owner order 2026-09-17): the Wizard News
     // arm below opens the Herald, so this realm's clock has moved (tick 2, the news
     // feed's own tick). Without it the toolbar offers no Herald toggle at all.
@@ -270,6 +301,8 @@ test.describe('regional causality campaign UI', () => {
   });
 
   test('applies and resolves a queued regional impact from the campaign folder', async ({ page }) => {
+    // The Realm's advance (one pulse on a cold dev server) is the slow step of this journey.
+    test.setTimeout(120_000);
     await page.goto('/settlements');
     await settleLibrary(page);
 
@@ -292,7 +325,43 @@ test.describe('regional causality campaign UI', () => {
     await expect(page.getByText('Target condition')).toBeVisible();
     await expect(page.getByText(/condition\.regional_import_shortage/)).toBeVisible();
 
-    await page.getByTitle('Advance regional impacts 1 tick').click();
+    // RE-KEYED BY IDENTITY (LIBRARY-SIMPLE, 2026-11-10). The delayed impact used to mature
+    // through the Library folder's "Advance regional impacts 1 tick". The owner removed every
+    // advance from the Library ("I now want to simplify the library page. No longer does it
+    // advance time. That will only be accessible in isolated (not in campaign settlements) or
+    // the realm page."), so the same act — one tick of this campaign's clock — is taken where
+    // it now lives: the Realm's own Advance Realm at one week (one kernel tick), whose pulse
+    // matures queued regional impacts every tick. Then back to the folder for the same
+    // assertion, at the same strength, and the same apply/resolve that follow it.
+    await page.goto('/realm');
+    await settleRoute(page);
+    const realmCampaign = page.locator('select').filter({
+      has: page.locator('option', { hasText: 'Trade Belt' }),
+    });
+    await expect(realmCampaign).toBeVisible({ timeout: 20_000 });
+    await realmCampaign.selectOption(
+      await realmCampaign.locator('option', { hasText: 'Trade Belt' }).getAttribute('value'),
+    );
+    await page.getByRole('combobox', { name: 'Realm advancement interval' }).selectOption('one_week');
+    await page.getByRole('button', { name: /Advance Realm/ }).click();
+    const advanceDialog = page.getByRole('dialog', { name: 'Advance the realm?' });
+    // This seed's world has never had its clock started (no canonizedAt), so the dialog
+    // offers "Start the World Clock" first, exactly as in e2e/realm-herald-gate.spec.js.
+    const startClock = advanceDialog.getByRole('button', { name: /Start the World Clock/i });
+    await startClock.click();
+    await expect(startClock).toHaveCount(0, { timeout: 20_000 });
+    await advanceDialog.getByRole('button', { name: 'Advance Realm', exact: true }).click();
+    // The advance has committed when the toolbar offers "Undo Advance". On this path (the
+    // clock started from the dialog) the confirm stays open after the pulse commits, at the
+    // base as here (measured, 2026-11-10; not this lane's), so it is closed by its own Cancel.
+    await expect(page.getByRole('button', { name: /Undo Advance/ })).toBeVisible({ timeout: 90_000 });
+    await advanceDialog.getByRole('button', { name: 'Cancel' }).click();
+    await expect(advanceDialog).toHaveCount(0);
+
+    // Back by the app's own Library link, NOT a page load: this file's beforeEach init script
+    // re-seeds storage on every document load, which would put the pre-advance world back.
+    await page.getByRole('button', { name: 'Library', exact: true }).first().click();
+    await settleLibrary(page);
     await expect(page.getByText(/2\/2 ready/)).toBeVisible();
 
     await page.getByTitle('Apply regional impact').first().click();

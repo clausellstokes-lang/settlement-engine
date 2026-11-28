@@ -1,0 +1,259 @@
+{
+  "id": "DS-POP-2",
+  "source": "src/data/dossierStateProse/general.generated.js",
+  "drawKind": "K",
+  "pools": [
+    {
+      "id": "DS-POP-2::BAND −2: has been emptying",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": true,
+      "notes": "key: trend band -2",
+      "lines": [
+        {
+          "id": "DS-POP-2::BAND −2: has been emptying::v1",
+          "text": "The town has been emptying over the recent readings, not all at once, and not from any sin",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-POP-2::BAND −2: has been emptying::v2",
+          "text": "{settlement} has lost a substantial share of itself across the last stretch of the record;",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-POP-2::BAND −2: has been emptying::v3",
+          "text": "The population has fallen hard over the recent window. Whatever the town is now, it is not",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-POP-2::BAND −1: has been thinning",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": true,
+      "notes": "key: trend band -1",
+      "lines": [
+        {
+          "id": "DS-POP-2::BAND −1: has been thinning::v1",
+          "text": "{settlement} has been thinning over the recent readings, steadily, mildly, and with nothin",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-POP-2::BAND −1: has been thinning::v2",
+          "text": "The town has been getting smaller. Not sharply; the kind of decline you only see by compar",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-POP-2::BAND −1: has been thinning::v3",
+          "text": "Numbers have been slipping over the recent window. It is the sort of trend that is easy to",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-POP-2::BAND 0: has held level",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": true,
+      "notes": "key: trend band 0",
+      "lines": [
+        {
+          "id": "DS-POP-2::BAND 0: has held level::v1",
+          "text": "The town's numbers have held level across the recent readings. Nothing has been gained, an",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-POP-2::BAND 0: has held level::v2",
+          "text": "{settlement} has been the same size for as long as the record covers: a stability worth no",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": "\"for as long as the record covers… unusual\" (soft)"
+        },
+        {
+          "id": "DS-POP-2::BAND 0: has held level::v3",
+          "text": "Population here has not moved. Whatever pressures the town is under, none of them have sho",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": "\"Whatever pressures the town is under\" — crisis-neutral"
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-POP-2::BAND +1: has been growing",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": true,
+      "notes": "key: trend band +1",
+      "lines": [
+        {
+          "id": "DS-POP-2::BAND +1: has been growing::v1",
+          "text": "{settlement} has been growing steadily over the recent readings, modestly, and consistentl",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-POP-2::BAND +1: has been growing::v2",
+          "text": "The town has been adding people across the window. It is not a boom; it is the ordinary ac",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-POP-2::BAND +1: has been growing::v3",
+          "text": "Numbers here have been rising gently. The town has begun building again, which is usually ",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-POP-2::BAND +2: has been swelling",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": true,
+      "notes": "key: trend band +2",
+      "lines": [
+        {
+          "id": "DS-POP-2::BAND +2: has been swelling::v1",
+          "text": "{settlement} has been swelling over the recent readings. The growth has outrun the town's ",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-POP-2::BAND +2: has been swelling::v2",
+          "text": "The town has gained a large share of itself in a short stretch of the record. Housing, wat",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-POP-2::BAND +2: has been swelling::v3",
+          "text": "Population here has climbed sharply. Whatever is drawing people, it is drawing them faster",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-POP-2::WINDOW under two readings",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": true,
+      "notes": "key: window under two readings",
+      "lines": [
+        {
+          "id": "DS-POP-2::WINDOW under two readings::v1",
+          "text": "The record is too short to say anything about the town's direction. What exists is a count",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-POP-2::WINDOW under two readings::v2",
+          "text": "{settlement} has not been measured often enough to have a shape yet. The population is wha",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-POP-2::WINDOW under two readings::v3",
+          "text": "There is no trend here, only a first reading. The town's direction is a question the recor",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-POP-2::NET MAGNITUDE, banded",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: net magnitude present — but each variant hard-codes ONE magnitude band",
+      "lines": [
+        {
+          "id": "DS-POP-2::NET MAGNITUDE, banded::v1",
+          "text": "The change across the window runs to several hundred, enough that the town's own estimate ",
+          "needs": [],
+          "excludes": [],
+          "colour": false,
+          "notes": "unhomed: net magnitude band (hard-codes \"several hundred\"); unhomed: realm"
+        },
+        {
+          "id": "DS-POP-2::NET MAGNITUDE, banded::v2",
+          "text": "The net movement is dozens either way; the town's shape is the same, and its edges have sh",
+          "needs": [],
+          "excludes": [],
+          "colour": false,
+          "notes": "unhomed: net magnitude band (hard-codes \"dozens\")"
+        },
+        {
+          "id": "DS-POP-2::NET MAGNITUDE, banded::v3",
+          "text": "The window's net change amounts to many hundreds, which is a different settlement rather t",
+          "needs": [],
+          "excludes": [],
+          "colour": false,
+          "notes": "unhomed: net magnitude band (hard-codes \"many hundreds\")"
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    }
+  ]
+}

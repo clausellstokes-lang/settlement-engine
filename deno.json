@@ -16,7 +16,8 @@
       "supabase/functions/_shared/analyticsEventsBundle.js",
       "supabase/functions/_shared/aiCharterBundle.js",
       "supabase/functions/_shared/intentAtlasBundle.js",
-      "supabase/functions/_shared/aiOutputSchemaBundle.js"
+      "supabase/functions/_shared/aiOutputSchemaBundle.js",
+      "supabase/functions/_shared/engineBundle.js"
     ]
   },
   "fmt": { "exclude": ["**/*"] }

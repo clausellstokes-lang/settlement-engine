@@ -64,7 +64,7 @@ export default function RealmIntrigue({ campaign, nameById = new Map() }) {
       <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
         {politics.length > 0 && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
-            <Subhead label="Factions & conspiracies" />
+            <Subhead label="Powers & conspiracies" />
             {politics.flatMap(p => p.blocs.map(b => (
               <Row
                 key={`${p.settlementId}-${b.id}`}

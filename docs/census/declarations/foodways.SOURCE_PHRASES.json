@@ -1,0 +1,119 @@
+{
+  "id": "foodways.SOURCE_PHRASES",
+  "source": "src/domain/foodways.js :: SOURCE_PHRASES",
+  "drawKind": "H",
+  "pool": {
+    "declares": [],
+    "crisisScoped": false,
+    "colour": false,
+    "notes": "Keyed by food source (the food record's foodSources), so each row's food-source atom is GUARANTEED by its key and noted, not declared. Drawn by FNV offset without replacement.",
+    "needs": [],
+    "excludes": []
+  },
+  "rows": [
+    {
+      "id": "foodways.SOURCE_PHRASES::grain.0",
+      "text": "bread from the home fields",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "key: food-source: grain."
+    },
+    {
+      "id": "foodways.SOURCE_PHRASES::grain.1",
+      "text": "the field grain",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "key: food-source: grain."
+    },
+    {
+      "id": "foodways.SOURCE_PHRASES::grain.2",
+      "text": "porridge and bread of the local grain",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "key: food-source: grain."
+    },
+    {
+      "id": "foodways.SOURCE_PHRASES::livestock.0",
+      "text": "meat and milk from the herds",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "key: food-source: livestock."
+    },
+    {
+      "id": "foodways.SOURCE_PHRASES::livestock.1",
+      "text": "cheese and smoked meat from the grazing herds",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "key: food-source: livestock."
+    },
+    {
+      "id": "foodways.SOURCE_PHRASES::livestock.2",
+      "text": "the herds' milk and mutton",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "key: food-source: livestock. mutton presumes sheep."
+    },
+    {
+      "id": "foodways.SOURCE_PHRASES::fish.0",
+      "text": "fish from the local waters",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "key: food-source: fish (fish presumes water; the source reader answers it)."
+    },
+    {
+      "id": "foodways.SOURCE_PHRASES::fish.1",
+      "text": "the day's catch",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "key: food-source: fish."
+    },
+    {
+      "id": "foodways.SOURCE_PHRASES::fish.2",
+      "text": "salted fish",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "key: food-source: fish. unhomed: salt supply."
+    },
+    {
+      "id": "foodways.SOURCE_PHRASES::mill.0",
+      "text": "flour from the mill",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "key: food-source: mill."
+    },
+    {
+      "id": "foodways.SOURCE_PHRASES::mill.1",
+      "text": "the mill's flour",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "key: food-source: mill."
+    },
+    {
+      "id": "foodways.SOURCE_PHRASES::game.0",
+      "text": "game from the woods",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "key: food-source: game. unhomed: woodland (terrain: forest too narrow; game occurs on hills/mountains)."
+    },
+    {
+      "id": "foodways.SOURCE_PHRASES::game.1",
+      "text": "the hunters' game",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "key: food-source: game."
+    }
+  ]
+}

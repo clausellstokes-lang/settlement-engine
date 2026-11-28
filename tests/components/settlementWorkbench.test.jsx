@@ -81,7 +81,8 @@ describe('Entity Inspector', () => {
       id: 'npc.mara',
       name: 'Mara',
       role: 'Guildmaster',
-      factionAffiliation: 'River Guild',
+      // PEOPLE-5A RE-KEYED (M-1b): a card's connections read its memberships, not the shim's field.
+      memberships: [{ power: 'River Guild', rank: 1 }],
     },
   };
 

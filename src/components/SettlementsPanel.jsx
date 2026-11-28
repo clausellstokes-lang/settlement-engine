@@ -40,7 +40,6 @@ import {
 import { SampleDashboard } from './settlements/SampleDashboard.jsx';
 import SaveQuotaMeter from './settlements/SaveQuotaMeter.jsx';
 import BulkActionBar from './settlements/BulkActionBar.jsx';
-import { useCampaignAdvance } from './settlements/useCampaignAdvance.js';
 import { useOwnerScopedSaves } from '../hooks/useOwnerScopedSaves.js';
 import Button from './primitives/Button.jsx';
 import RefusalNotice from './primitives/RefusalNotice.jsx';
@@ -95,16 +94,13 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   const removeFromCampaign = useStore(s => s.removeFromCampaign);
   const getCampaignMembershipBlock = useStore(s => s.getCampaignMembershipBlock);
   const getSettlementDeletionBlock = useStore(s => s.getSettlementDeletionBlock);
-  // W4a — Library living surface: canonize-from-list, per-campaign advance-time.
+  // W4a — Library living surface: canonize-from-list.
   const canonizeSavedSettlement = useStore(s => s.canonizeSavedSettlement);
-  const setActiveCampaign = useStore(s => s.setActiveCampaign);
-  const advanceCampaignWorld = useStore(s => s.advanceCampaignWorld);
   const discoverCampaignRegionalChannels = useStore(s => s.discoverCampaignRegionalChannels);
   const setRegionalChannelStatus = useStore(s => s.setRegionalChannelStatus);
   const applyQueuedRegionalImpact = useStore(s => s.applyQueuedRegionalImpact);
   const ignoreQueuedRegionalImpact = useStore(s => s.ignoreQueuedRegionalImpact);
   const resolveRegionalImpact = useStore(s => s.resolveRegionalImpact);
-  const advanceCampaignRegionalImpacts = useStore(s => s.advanceCampaignRegionalImpacts);
   const applyAllQueuedRegionalImpacts = useStore(s => s.applyAllQueuedRegionalImpacts);
   const ignoreAllQueuedRegionalImpacts = useStore(s => s.ignoreAllQueuedRegionalImpacts);
 
@@ -639,13 +635,6 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
     canonizeSavedSettlement(s.id);
   }, [canonizeSavedSettlement]);
 
-  // ── Advance Time (per campaign, from the list) ────────────────────────────
-  // Premium (Cartographer) gate lives on the card. The handler + its typed-refusal
-  // surface live in useCampaignAdvance (experience-product-fit-2).
-  const { advanceError, handleAdvanceCampaignTime } = useCampaignAdvance({
-    advanceCampaignWorld, setActiveCampaign, onNavigate,
-  });
-
   const handleApplyRegionalImpact = useCallback((campaignId, impactId) => {
     applyQueuedRegionalImpact(campaignId, impactId);
   }, [applyQueuedRegionalImpact]);
@@ -657,10 +646,6 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   const handleResolveRegionalImpact = useCallback((campaignId, impactId) => {
     resolveRegionalImpact(campaignId, impactId);
   }, [resolveRegionalImpact]);
-
-  const handleAdvanceRegionalImpacts = useCallback((campaignId, ticks) => {
-    advanceCampaignRegionalImpacts(campaignId, ticks);
-  }, [advanceCampaignRegionalImpacts]);
 
   const handleApplyAllRegionalImpacts = useCallback((campaignId) => {
     applyAllQueuedRegionalImpacts(campaignId);
@@ -760,7 +745,6 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
      <div style={{ display:'flex', flexDirection:'column', gap:SP.sm }}>
       {persistenceError && <div role="alert" style={alertStyle}><strong>Library:</strong> {persistenceError}</div>}
       {reactivationError && <div role="alert" style={alertStyle}><strong>Reactivation:</strong> {reactivationError}</div>}
-      {advanceError && <div role="alert" style={alertStyle}><strong>Advance:</strong> {advanceError}</div>}
 
       {/* Page header — the GM's own content owns the top of their own page; the
           SaveQuotaMeter is demoted to a slim strip below so the funnel frames
@@ -771,7 +755,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
       <PageHeader
         eyebrow="Your settlements"
         title="Library"
-        subtitle="Your saved settlements and campaigns. Reopen a town, advance its world, or export a dossier for the table."
+        subtitle="Your saved settlements and campaigns. Reopen a town or export a dossier for the table."
         actions={<Button variant="primary" size="md" icon={<Plus size={16}/>} onClick={() => onNavigate?.('generate')}>New settlement</Button>}
       />
 
@@ -826,7 +810,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
           ) : (
             <div style={{ display:'flex', flexDirection:'column', gap:2 }}>
               <Button variant="secondary" size="sm" onClick={() => setShowNewCampaign(true)} icon={<FolderPlus size={14}/>} style={{ alignSelf:'flex-start' }}>New campaign</Button>
-              <span style={{ fontSize:chromeFontSize(FS.xs, mobile), color:BODY, fontFamily:sans }}>Group towns into one world that advances together.</span>
+              <span style={{ fontSize:chromeFontSize(FS.xs, mobile), color:BODY, fontFamily:sans }}>Group towns into one world.</span>
             </div>
           )}
         </div>
@@ -889,7 +873,6 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
                 onApplyRegionalImpact={handleApplyRegionalImpact}
                 onIgnoreRegionalImpact={handleIgnoreRegionalImpact}
                 onResolveRegionalImpact={handleResolveRegionalImpact}
-                onAdvanceRegionalImpacts={handleAdvanceRegionalImpacts}
                 onApplyAllRegionalImpacts={handleApplyAllRegionalImpacts}
                 onIgnoreAllRegionalImpacts={handleIgnoreAllRegionalImpacts}
                 onReactivate={handleReactivateSave}
@@ -897,10 +880,8 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
                 reactivatingId={reactivatingId}
                 canManageCampaigns={canManageCampaigns}
                 onCanonize={handleCanonize}
-                onAdvanceTime={handleAdvanceCampaignTime}
                 onCreateCampaign={openCreateCampaign}
                 onNavigate={onNavigate}
-                worldCanonized={!!campaign.worldState?.canonizedAt}
                 selectMode={selectMode}
                 selectedIds={selectedIds}
                 onToggleSelect={toggleSelect}/>
@@ -922,7 +903,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
               deleteId={deleteId} setDeleteId={setDeleteId} deleteConfirmed={deleteConfirmed}
               campaigns={activeCampaigns} addToCampaign={addToCampaign} removeFromCampaign={removeFromCampaign}
               onReactivate={handleReactivateSave} canReactivate={canReactivateInactive} reactivatingId={reactivatingId}
-              onCanonize={handleCanonize} onAdvanceTime={handleAdvanceCampaignTime} onCreateCampaign={openCreateCampaign}
+              onCanonize={handleCanonize} onCreateCampaign={openCreateCampaign}
               onNavigate={onNavigate} canManageCampaigns={canManageCampaigns}
               selectMode={selectMode} selectedIds={selectedIds} onToggleSelect={toggleSelect} />
           )}

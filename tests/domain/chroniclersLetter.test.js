@@ -67,7 +67,7 @@ describe('V-2 — the diff, grouping, and priority', () => {
     };
     const projected = composeChroniclersLetter({ wizardNews: momentum, lastReadTick: 0 });
     const line = projected.sections.flatMap(section => section.lines)[0];
-    expect(line.summary).toBe('The court held to the war too long; reversing course carried a real political price.');
+    expect(line.summary).toBe('The court held to the war too long, and backing out of it now has cost its rulers dearly.');
     // anchored: the exact projected line above proves the letter included this beat.
     expect(letterToPlainText(projected)).not.toMatch(/3\.2|0\.62|×|\b(?:commitment|cliff)\b/i);
   });
@@ -245,7 +245,7 @@ describe('C2 — the cross-time recall (narrate, not log)', () => {
     ] }, lastReadTick: 10 });
     const mercy = l.sections.find((s) => s.id === 'mercy');
     expect(mercy.lines[0].recalls).toEqual({ headline: 'Grain reaches the starving of Ormsund', when: 'the spring of year 1' });
-    expect(letterToPlainText(l)).toContain('In this my earlier record returns, from the spring of year 1: Grain reaches the starving of Ormsund.');
+    expect(letterToPlainText(l)).toContain('This echoes what I wrote of the spring of year 1: Grain reaches the starving of Ormsund.');
   });
 
   it('no shared place or no pre-floor twin ⇒ no recall field at all (byte-inert)', () => {

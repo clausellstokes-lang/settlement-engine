@@ -5,12 +5,15 @@
  * spoken only where the record does not contradict them; and the catalog crisis hook's `{holder}`
  * slot, filled by name only where the sentence names a role the cast holds.
  */
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, beforeAll } from 'vitest';
 import {
-  CRISIS_HOOK_SLOTS, CRISIS_NOUN, crisisHooksOf, lineRoleHolderOf, slotCrisisHook,
+  CRISIS_HOOK_SLOTS, CRISIS_NOUN, crisisHookFor, crisisHooksOf, lineRoleHolderOf, slotCrisisHook,
 } from '../../src/domain/crisis/crisisHooks.js';
+import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
+import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { CAST_REASONS, CRISIS_NATURE, STAKE_REASONS } from '../../src/domain/crisis/crisisCast.js';
-import { STRESS_TYPE_MAP } from '../../src/data/stressTypes.js';
+import { STRESS_TYPE_MAP, STRESS_TYPE_SIBLINGS } from '../../src/data/stressTypes.js';
 import { hookTruthViolations, settlementHookFacts } from '../../src/domain/coherence/hookTruth.js';
 
 const npcRow = (role, id, name, reason) => ({ role, kind: 'npc', id, name, reason, temporary: false });
@@ -21,8 +24,8 @@ const cast = (roles, levers = [], stakes = []) => ({
 const town = (extra = {}) => ({
   tier: 'town',
   npcs: [
-    { id: 'n1', name: 'Mara Vell', role: 'Miller', factionAffiliation: 'Millers’ Guild' },
-    { id: 'n2', name: 'Oswin Hale', role: 'Mayor', factionAffiliation: 'Town Council' },
+    { id: 'n1', name: 'Mara Vell', role: 'Miller', memberships: [{ power: 'Millers’ Guild', rank: 1 }] },
+    { id: 'n2', name: 'Oswin Hale', role: 'Mayor', memberships: [{ power: 'Town Council', rank: 1 }] },
   ],
   ...extra,
 });
@@ -32,10 +35,19 @@ describe('crisisHooksOf: one hook bound to the cast, one bound to the lever', ()
     const entry = { type: 'famine', cast: cast([npcRow('brunt', 'n1', 'Mara Vell', CAST_REASONS.bruntBase.food_security)]) };
     const [hook] = crisisHooksOf(town(), entry);
     expect(hook).toEqual({
-      text: 'In the famine, the brunt falls on Mara Vell of Millers’ Guild: the hunger falls first on its people.',
+      text: 'In the famine, Mara Vell of Millers’ Guild takes the worst of it: the hunger falls first on its people.',
       bound: 'cast',
       link: { kind: 'npc', id: 'n1', label: 'Mara Vell' },
     });
+  });
+
+  it('a person in two powers is named of their FIRST-RANK power (PEOPLE-2 CAST-DERIVED: the card\'s best standing)', () => {
+    const entry = { type: 'famine', cast: cast([npcRow('brunt', 'n1', 'Mara Vell', CAST_REASONS.bruntBase.food_security)]) };
+    const s = town();
+    s.npcs[0] = { ...s.npcs[0], memberships: [{ power: 'Town Council', rank: 3 }, { power: 'Millers’ Guild', rank: 1 }] };
+    expect(crisisHooksOf(s, entry)[0].text).toBe('In the famine, Mara Vell of Millers’ Guild takes the worst of it: the hunger falls first on its people.');
+    s.npcs[0] = { ...s.npcs[0], memberships: [] };
+    expect(crisisHooksOf(s, entry)[0].text).toBe('In the famine, Mara Vell takes the worst of it: the hunger falls first on its people.');
   });
 
   it('the lever hook names the house the players can push, its holder, and the faction that loses with the reason', () => {
@@ -45,7 +57,7 @@ describe('crisisHooksOf: one hook bound to the cast, one bound to the lever', ()
         [{ factionId: 'Merchants', stake: 'gains', reason: STAKE_REASONS.gainsHolds }, { factionId: 'Town Council', stake: 'loses', reason: STAKE_REASONS.loses }]),
     };
     expect(crisisHooksOf(town(), entry)).toEqual([{
-      text: 'In the famine, the players can push on the Town granary, run by Mara Vell; Town Council loses most if it gives, because the crisis hits its base.',
+      text: 'The famine turns on the town granary, run by Mara Vell: if it gives way, Town Council loses most, because its own people feel the crisis first.',
       bound: 'lever',
       link: { kind: 'faction', id: 'Town Council', label: 'Town Council' },
     }]);
@@ -71,7 +83,8 @@ describe('crisisHooksOf: one hook bound to the cast, one bound to the lever', ()
     const fed = town({ economicState: { foodSecurity: { label: 'Secure' } } });
     const entry = { type: 'famine', cast: cast([npcRow('lever', 'n1', 'Mara Vell', CAST_REASONS.leverRuns)]) };
     const [hook] = crisisHooksOf(fed, entry);
-    expect(hook.text).toBe('In the crisis, the lever is held by Mara Vell of Millers’ Guild: holds the office the crisis turns on.');
+    // TAIL-CRISIS batch 3 (re-keyed by identity): a predicate reason is said of the holder, never after a colon
+    expect(hook.text).toBe('In the crisis, Mara Vell of Millers’ Guild, who runs the office that decides how the crisis goes, holds the key to it.');
     expect(hookTruthViolations(hook.text, settlementHookFacts(fed))).toEqual([]);
   });
 
@@ -79,7 +92,9 @@ describe('crisisHooksOf: one hook bound to the cast, one bound to the lever', ()
     const hamlet = town({ tier: 'hamlet' });
     const entry = { type: 'under_siege', cast: cast([{ role: 'defender', kind: 'institution', id: 'Watch house', name: 'Watch house', reason: CAST_REASONS.defenderInstitution, temporary: false }]) };
     const [hook] = crisisHooksOf(hamlet, entry);
-    expect(hook.text).toBe("In the siege, the defence is led by the Watch house: the hamlet's defence, with no one on the roster leading it.");
+    // re-keyed by identity (R2-CODE-B-4, ROUND THREE item 4, the chair's ruling): the hook names the house through houseInProse,
+    // so the catalogue's sentence-case "Watch house" reads lower-led mid-sentence; the same hook, the same holder and reason.
+    expect(hook.text).toBe("In the siege, the watch house leads the defence: the hamlet's defence, with no one on the roster leading it.");
     expect(hookTruthViolations(hook.text, settlementHookFacts(hamlet))).toEqual([]);
   });
 
@@ -92,16 +107,45 @@ describe('crisisHooksOf: one hook bound to the cast, one bound to the lever', ()
 describe('slotCrisisHook: the catalog sentence gains a {holder} slot only where it names a role the cast holds', () => {
   it('every slot\'s phrase occurs exactly once in its catalog sentence (a slot in the sentence, never a second sentence)', () => {
     for (const [kind, slots] of Object.entries(CRISIS_HOOK_SLOTS)) {
-      const text = STRESS_TYPE_MAP[kind].crisisHook;
-      for (const slot of slots) expect(text.split(slot.phrase).length - 1, `${kind}: ${slot.phrase}`).toBe(1);
+      // re-keyed at the landing (the chair, 13:38): a phrase stands once in the catalog sentence OR in one of its
+      // declared twins (STRESS_TYPE_SIBLINGS: the plague's slot-less twin where no healer stands), never twice in one.
+      const texts = [STRESS_TYPE_MAP[kind].crisisHook, ...(STRESS_TYPE_SIBLINGS[STRESS_TYPE_MAP[kind].crisisHook] || []).map((t) => t.text)];
+      for (const slot of slots) {
+        const counts = [...new Set(texts)].map((t) => t.split(slot.phrase).length - 1);
+        expect(counts.filter((c) => c === 1).length, `${kind}: ${slot.phrase}`).toBe(1);
+        expect(Math.max(...counts), `${kind}: ${slot.phrase}`).toBe(1);
+      }
     }
   });
 
   it('the plague\'s healer is named when the cast holds the lever in a person', () => {
     const c = cast([npcRow('lever', 'h1', 'Hesk Marrow', CAST_REASONS.leverRuns)]);
-    expect(slotCrisisHook('plague_onset', STRESS_TYPE_MAP.plague_onset.crisisHook, c)).toBe(
+    expect(slotCrisisHook('plague_onset', STRESS_TYPE_MAP.plague_onset.crisisHook, c, [{ id: 'h1', name: 'Hesk Marrow', role: 'Healer' }])).toBe(
       'Hesk Marrow, the healer who identified the outbreak first, has gone quiet. Their last message suggested the disease is not natural. Accessing them means navigating a quarantine that is not being enforced consistently.',
     );
+  });
+
+  // R2-CODE-B-9 (CENSUS-2 at the lane's tip, r2r-town-37): "Maisa ibn Battuta, the healer who identified the outbreak
+  // first, has gone quiet." of the dean of the parish churches. A line that names a role reads the roster: the slot
+  // fills only a holder whose own role is a healer's; any other holder leaves the sentence's own words.
+  it('the plague\'s slot reads its holder\'s role: a dean or a priest holding the lever leaves the sentence as written', () => {
+    const plague = STRESS_TYPE_MAP.plague_onset.crisisHook;
+    const c = cast([npcRow('lever', 'p1', 'Maisa ibn Battuta', CAST_REASONS.leverRuns)]);
+    for (const role of ['the dean', 'the priest', "the hospital's master"]) {
+      expect(slotCrisisHook('plague_onset', plague, c, [{ id: 'p1', name: 'Maisa ibn Battuta', role }]), role).toBe(plague);
+    }
+    expect(slotCrisisHook('plague_onset', plague, c), 'no roster card read: no healer is known').toBe(plague);
+    for (const role of ['the apothecary', 'the midwife', 'the hospitaller', 'the healer']) {
+      expect(slotCrisisHook('plague_onset', plague, c, [{ id: 'p1', name: 'Maisa ibn Battuta', role }]), role)
+        .toBe(plague.replace('The healer who identified the outbreak first', 'Maisa ibn Battuta, the healer who identified the outbreak first,'));
+    }
+  });
+
+  it('a slot that names a role passes over a holder of another role to the one whose role it names', () => {
+    const plague = STRESS_TYPE_MAP.plague_onset.crisisHook;
+    const c = cast([npcRow('lever', 'p1', 'Maisa ibn Battuta', CAST_REASONS.leverRuns), npcRow('lever', 'h1', 'Hesk Marrow', CAST_REASONS.leverRuns)]);
+    const roster = [{ id: 'p1', name: 'Maisa ibn Battuta', role: 'the dean' }, { id: 'h1', name: 'Hesk Marrow', role: 'the apothecary' }];
+    expect(slotCrisisHook('plague_onset', plague, c, roster)).toMatch(/^Hesk Marrow, the healer who identified the outbreak first, has gone quiet\./);
   });
 
   it('the siege names both the one who would treat and the defender, and one person never fills both slots', () => {
@@ -135,5 +179,104 @@ describe('slotCrisisHook: the catalog sentence gains a {holder} slot only where 
     const c = cast([npcRow('lever', 'n1', 'Mara Vell', 'r')]);
     expect(slotCrisisHook('mass_migration', STRESS_TYPE_MAP.mass_migration.crisisHook, c)).toBe(STRESS_TYPE_MAP.mass_migration.crisisHook);
     expect(slotCrisisHook('famine', 'The DM’s own words.', c)).toBe('The DM’s own words.');
+  });
+});
+
+// SW-6 CRISIS-SURFACES (W4 row 262; STYLE-RULINGS-2 B3): the garbled casting lines — "Occupation Authority
+// speaks for the occupier here: leads the occupying power" (soak1k-2), "leads the defence: leads the military"
+// (soak1k-5). The clause says the role; a reason that only echoes it is not printed after it.
+describe('crisisHooksOf: a cast hook never echoes its own clause', () => {
+  const occupier = { role: 'face', kind: 'faction', id: 'Occupation Authority', name: 'Occupation Authority', reason: CAST_REASONS.face, temporary: false };
+  it('the occupier\'s house as its own face reads as one plain sentence', () => {
+    const [hook] = crisisHooksOf(town(), { type: 'occupied', cast: { ...cast([occupier]), nature: 'external' } });
+    expect(hook.text).toBe('In the occupation, the occupier\'s orders come through Occupation Authority.');
+  });
+  it('a defender who leads the military is not told twice that they lead it', () => {
+    const [hook] = crisisHooksOf(town(), { type: 'wartime', cast: { ...cast([npcRow('defender', 'n2', 'Oswin Hale', CAST_REASONS.defenderMilitary)]), nature: 'external' } });
+    expect(hook.text).toBe('In the war, Oswin Hale of Town Council leads the defence.');
+  });
+});
+
+// SW-6 CRISIS-SURFACES (W4 rows 266, 267; STYLE-RULINGS-2 B3): "The raids turns on the Professional city watch …
+// decides how the raids goes" (soak1k-4); "The war turns on the Blacksmiths (3-10)" (soak1k-5); "the Inns and
+// taverns (district)" (soak1k-0). The verb agrees with the noun, and the house reads as prose.
+describe('crisisHooksOf: the lever hook in plain grammar', () => {
+  const lever = (institution, holderName = null) => ({ institution, holderId: holderName ? 'n2' : null, holderName });
+  it('a plural crisis noun takes a plural verb, and the catalogue\'s capital does not print mid-sentence', () => {
+    const hooks = crisisHooksOf(town(), { type: 'monster_pressure', cast: cast([], [lever('Professional city watch', 'Oswin Hale')]) });
+    expect(hooks.map((h) => h.text)).toEqual(['The raids turn on the professional city watch, run by Oswin Hale: whoever wins it over decides how the raids go.']);
+  });
+  it('the roster\'s count and district tags never print in the sentence', () => {
+    const loser = { factionId: 'Town Council', stake: 'loses', reason: STAKE_REASONS.loses };
+    const war = crisisHooksOf(town(), { type: 'wartime', cast: { ...cast([], [lever('Blacksmiths (3-10)', 'Oswin Hale')], [loser]), nature: 'external' } });
+    // anchored: the subject is the exact text or constant asserted positively beside it (SW-6), so it cannot have drifted away
+    expect(war.map((h) => h.text).join(' ')).not.toMatch(/\(|\)/);
+    expect(war[0].text).toMatch(/^The war turns on the blacksmiths, run by Oswin Hale: /);
+    const inns = crisisHooksOf(town(), { type: 'mass_migration', cast: cast([], [lever('Inns and taverns (district)')]) });
+    expect(inns[0].text).toBe('The migration turns on the inns and taverns: whoever wins it over decides how the migration goes.');
+  });
+});
+
+// SW-6 CRISIS-SURFACES (STYLE-RULINGS-2 B3): "Nawal al-Aziz of Guild Council takes the worst of it: it takes the
+// blame, and its good name pays for the crisis" (soak1k-3) — "it" for a person. The reason speaks of the house.
+describe('crisisHooksOf: a person is never "it"', () => {
+  it('the legitimacy brunt\'s reason names the house that takes the blame, for a person or the house alike', () => {
+    const [hook] = crisisHooksOf(town(), { type: 'famine', cast: cast([npcRow('brunt', 'n2', 'Oswin Hale', CAST_REASONS.bruntBase.public_legitimacy)]) });
+    expect(hook.text).toBe('In the famine, Oswin Hale of Town Council takes the worst of it: the blame falls on the house, and its good name pays for the crisis.');
+    // anchored: the subject is the exact text or constant asserted positively beside it (SW-6), so it cannot have drifted away
+    expect(hook.text).not.toMatch(/: it takes/);
+  });
+});
+
+// SW-6 CRISIS-SURFACES (STYLE-RULINGS-2 B3; C·P1, soak1k-7): "In the factional split, …" carried the retired word.
+describe('CRISIS_NOUN: no retired word', () => {
+  it('no crisis is spoken of with "faction"', () => {
+    // anchored: the subject is the exact text or constant asserted positively beside it (SW-6), so it cannot have drifted away
+    expect(Object.values(CRISIS_NOUN).join(' ')).not.toMatch(/faction/i);
+    // Re-keyed by identity at STYLE-2-MERGE point 24 (the chair's ruling of 2026-11-10 00:3x): SW-8 RENAME-POWERS' words
+    // stand on this line, the noun naming who is split.
+    expect(CRISIS_NOUN.politically_fractured).toBe('split between the powers');
+  });
+});
+
+// SW-6 (SW-10's referral, the chair 12:59): "if it gives way, Religious Authorities loses most, because … its …".
+describe('crisisHooksOf: a plural power agrees', () => {
+  it('a plural losing power takes "lose" and "their"; a singular one keeps "loses" and "its"', () => {
+    const lever = { institution: 'Temple', holderId: null, holderName: null };
+    const hookFor = (factionId) => crisisHooksOf(town(), { type: 'plague_onset', cast: cast([], [lever], [{ factionId, stake: 'loses', reason: STAKE_REASONS.loses }]) })[0].text;
+    expect(hookFor('Religious Authorities')).toMatch(/Religious Authorities lose most, because their own people feel the crisis first\.$/);
+    expect(hookFor('Town Council')).toMatch(/Town Council loses most, because its own people feel the crisis first\.$/);
+  });
+});
+
+// R2-CODE-B-9: the plague slot on the census's own births (CENSUS-2 seeds and dials): r2r-town-37's lever is the dean
+// of the parish churches (the red); r2s-plague_onset-thorp-0's is the temporary Healer and r2r-city-19's the
+// apothecary (the guards, whose levers ARE healers and keep their names).
+describe('the plague slot on born towns: the dean is not named the healer, the healers still are', () => {
+  const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
+  const born = (seed) => {
+    const m = seed.match(/^r2r-(\w+)-(\d+)$/); const f = seed.match(/^r2s-(\w+)-(thorp|hamlet|village|town|city|metropolis)-(\d+)$/);
+    const config = m ? birthConfig({ ...DEFAULT_CONFIG, ...DIALS, settType: m[1] })
+      : birthConfig({ ...DEFAULT_CONFIG, ...DIALS, selectedStresses: [f[1]], selectedStressesRandom: false, settType: f[2] });
+    return generateSettlementPipeline(config, null, { seed, customContent: {} });
+  };
+  const plagueHookOf = (s) => {
+    const entries = Array.isArray(s.stress) ? s.stress : [s.stress];
+    return crisisHookFor(s, entries.find((e) => e?.type === 'plague_onset'));
+  };
+  beforeAll(async () => { await loadGenerationLawPayloads(); }, 60_000);
+
+  it('r2r-town-37: the dean holds the lever and the sentence keeps its own words', () => {
+    const s = born('r2r-town-37');
+    const hook = plagueHookOf(s);
+    // re-keyed at the landing: town-37 keeps no healer, so it stores the data lane's twin (745c05a1f), its own words kept
+    expect(hook).toBe('The first person to name the outbreak has gone quiet. Their last message suggested the disease is not natural. Reaching them means crossing a quarantine that is not being enforced consistently.');
+  });
+
+  it('r2s-plague_onset-thorp-0 and r2r-city-19: a lever who is a healer is still named', () => {
+    // R2-CODE-B-12, ruling (c): thorp-0's lever is the minted stand-in ("Tends the sick"; no healer is kept there), named
+    // without the word (tests/domain/crisisStandInWords.test.js); the apothecary is a healer and keeps it.
+    expect(plagueHookOf(born('r2s-plague_onset-thorp-0'))).toMatch(/^Jiahao Wu, the first to name the outbreak, has gone quiet\./); // the twin, the stand-in named (the landing)
+    expect(plagueHookOf(born('r2r-city-19'))).toMatch(/^Una Murray, the healer who identified the outbreak first, has gone quiet\./);
   });
 });

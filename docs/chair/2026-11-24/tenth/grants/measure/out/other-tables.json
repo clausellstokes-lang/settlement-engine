@@ -1,0 +1,911 @@
+{
+ "settlements": [
+  {
+   "col": "name",
+   "verdict": "CHANGED",
+   "tries": [
+    "'probe-x'"
+   ]
+  },
+  {
+   "col": "tier",
+   "verdict": "CHANGED",
+   "tries": [
+    "'probe-x'"
+   ]
+  },
+  {
+   "col": "data",
+   "verdict": "CHANGED",
+   "tries": [
+    "'{\"probe\":1}'"
+   ]
+  },
+  {
+   "col": "config",
+   "verdict": "CHANGED",
+   "tries": [
+    "'{\"probe\":1}'"
+   ]
+  },
+  {
+   "col": "toggles",
+   "verdict": "CHANGED",
+   "tries": [
+    "'{\"probe\":1}'"
+   ]
+  },
+  {
+   "col": "seed",
+   "verdict": "CHANGED",
+   "tries": [
+    "'probe-x'"
+   ]
+  },
+  {
+   "col": "neighbour_links",
+   "verdict": "CHANGED",
+   "tries": [
+    "'{\"probe\":1}'"
+   ]
+  },
+  {
+   "col": "created_at",
+   "verdict": "blocked",
+   "tries": [
+    "null: null value in column \"created_at\" of relation \"settlements\" violates n"
+   ]
+  },
+  {
+   "col": "updated_at",
+   "verdict": "CHANGED",
+   "tries": [
+    "null"
+   ]
+  },
+  {
+   "col": "ai_data",
+   "verdict": "CHANGED",
+   "tries": [
+    "'{\"probe\":1}'"
+   ]
+  },
+  {
+   "col": "is_public",
+   "verdict": "CHANGED",
+   "tries": [
+    "true"
+   ]
+  },
+  {
+   "col": "public_slug",
+   "verdict": "CHANGED",
+   "tries": [
+    "'probe-x'"
+   ]
+  },
+  {
+   "col": "published_at",
+   "verdict": "CHANGED",
+   "tries": [
+    "now()"
+   ]
+  },
+  {
+   "col": "view_count",
+   "verdict": "CHANGED",
+   "tries": [
+    "coalesce(view_count,0)+1"
+   ]
+  },
+  {
+   "col": "is_curated",
+   "verdict": "CHANGED",
+   "tries": [
+    "true"
+   ]
+  },
+  {
+   "col": "curated_order",
+   "verdict": "CHANGED",
+   "tries": [
+    "coalesce(curated_order,0)+1"
+   ]
+  },
+  {
+   "col": "campaign_state",
+   "verdict": "CHANGED",
+   "tries": [
+    "'{\"probe\":1}'"
+   ]
+  },
+  {
+   "col": "version_history",
+   "verdict": "CHANGED",
+   "tries": [
+    "'{\"probe\":1}'"
+   ]
+  },
+  {
+   "col": "gallery_description",
+   "verdict": "CHANGED",
+   "tries": [
+    "'probe-x'"
+   ]
+  },
+  {
+   "col": "gallery_image_url",
+   "verdict": "blocked",
+   "tries": [
+    "'probe-x': new row for relation \"settlements\" violates check constraint \"settleme",
+    "null: unchanged(before=null)"
+   ]
+  },
+  {
+   "col": "gallery_image_alt",
+   "verdict": "CHANGED",
+   "tries": [
+    "'probe-x'"
+   ]
+  },
+  {
+   "col": "gallery_tags",
+   "verdict": "CHANGED",
+   "tries": [
+    "'{x}'"
+   ]
+  },
+  {
+   "col": "gallery_updated_at",
+   "verdict": "CHANGED",
+   "tries": [
+    "now()"
+   ]
+  },
+  {
+   "col": "access_state",
+   "verdict": "blocked",
+   "tries": [
+    "'probe-x': new row violates row-level security policy for table \"settlements\"",
+    "null: new row violates row-level security policy for table \"settlements\""
+   ]
+  },
+  {
+   "col": "inactive_reason",
+   "verdict": "CHANGED",
+   "tries": [
+    "'probe-x'"
+   ]
+  },
+  {
+   "col": "inactive_since",
+   "verdict": "CHANGED",
+   "tries": [
+    "now()"
+   ]
+  },
+  {
+   "col": "retention_expires_at",
+   "verdict": "CHANGED",
+   "tries": [
+    "now()"
+   ]
+  },
+  {
+   "col": "reactivated_free_at",
+   "verdict": "CHANGED",
+   "tries": [
+    "now()"
+   ]
+  },
+  {
+   "col": "gallery_share_narrated",
+   "verdict": "CHANGED",
+   "tries": [
+    "true"
+   ]
+  },
+  {
+   "col": "gallery_share_dm",
+   "verdict": "CHANGED",
+   "tries": [
+    "true"
+   ]
+  },
+  {
+   "col": "gallery_importable",
+   "verdict": "CHANGED",
+   "tries": [
+    "true"
+   ]
+  },
+  {
+   "col": "admin_deleted_at",
+   "verdict": "CHANGED",
+   "tries": [
+    "now()"
+   ]
+  },
+  {
+   "col": "gallery_facet_culture",
+   "verdict": "CHANGED",
+   "tries": [
+    "'probe-x'"
+   ]
+  },
+  {
+   "col": "gallery_facet_prosperity",
+   "verdict": "CHANGED",
+   "tries": [
+    "'probe-x'"
+   ]
+  },
+  {
+   "col": "gallery_facet_deity",
+   "verdict": "CHANGED",
+   "tries": [
+    "'probe-x'"
+   ]
+  },
+  {
+   "col": "gallery_facet_at_war",
+   "verdict": "CHANGED",
+   "tries": [
+    "true"
+   ]
+  },
+  {
+   "col": "gallery_realm_arc_summary",
+   "verdict": "CHANGED",
+   "tries": [
+    "'probe-x'"
+   ]
+  },
+  {
+   "col": "gallery_member_overrides",
+   "verdict": "CHANGED",
+   "tries": [
+    "'{\"probe\":1}'"
+   ]
+  },
+  {
+   "col": "gallery_title",
+   "verdict": "CHANGED",
+   "tries": [
+    "'probe-x'"
+   ]
+  },
+  {
+   "col": "gallery_facet_aliveness",
+   "verdict": "CHANGED",
+   "tries": [
+    "coalesce(gallery_facet_aliveness,0)+1"
+   ]
+  },
+  {
+   "col": "is_featured",
+   "verdict": "CHANGED",
+   "tries": [
+    "true"
+   ]
+  },
+  {
+   "col": "featured_order",
+   "verdict": "CHANGED",
+   "tries": [
+    "coalesce(featured_order,0)+1"
+   ]
+  },
+  {
+   "col": "visibility",
+   "verdict": "blocked",
+   "tries": [
+    "'probe-x': new row for relation \"settlements\" violates check constraint \"settleme",
+    "null: null value in column \"visibility\" of relation \"settlements\" violates n"
+   ]
+  },
+  {
+   "col": "unlisted_slug",
+   "verdict": "blocked",
+   "tries": [
+    "'probe-x': new row for relation \"settlements\" violates check constraint \"settleme",
+    "null: unchanged(before=null)"
+   ]
+  },
+  {
+   "col": "moderation_banned_at",
+   "verdict": "CHANGED",
+   "tries": [
+    "now()"
+   ]
+  },
+  {
+   "col": "moderation_banned_by",
+   "verdict": "CHANGED",
+   "tries": [
+    "null: unchanged(before=null)",
+    "gen_random_uuid()"
+   ]
+  },
+  {
+   "col": "moderation_ban_reason",
+   "verdict": "CHANGED",
+   "tries": [
+    "'probe-x'"
+   ]
+  }
+ ],
+ "saved_maps": [
+  {
+   "col": "name",
+   "verdict": "CHANGED",
+   "tries": [
+    "'probe-x'"
+   ]
+  },
+  {
+   "col": "map_seed",
+   "verdict": "CHANGED",
+   "tries": [
+    "'probe-x'"
+   ]
+  },
+  {
+   "col": "map_data",
+   "verdict": "CHANGED",
+   "tries": [
+    "'{\"probe\":1}'"
+   ]
+  },
+  {
+   "col": "burg_settlement_map",
+   "verdict": "CHANGED",
+   "tries": [
+    "'{\"probe\":1}'"
+   ]
+  },
+  {
+   "col": "supply_chain_config",
+   "verdict": "CHANGED",
+   "tries": [
+    "'{\"probe\":1}'"
+   ]
+  },
+  {
+   "col": "created_at",
+   "verdict": "blocked",
+   "tries": [
+    "null: null value in column \"created_at\" of relation \"saved_maps\" violates no"
+   ]
+  },
+  {
+   "col": "updated_at",
+   "verdict": "CHANGED",
+   "tries": [
+    "null"
+   ]
+  },
+  {
+   "col": "access_state",
+   "verdict": "blocked",
+   "tries": [
+    "'probe-x': new row violates row-level security policy for table \"saved_maps\"",
+    "null: new row violates row-level security policy for table \"saved_maps\""
+   ]
+  },
+  {
+   "col": "inactive_reason",
+   "verdict": "CHANGED",
+   "tries": [
+    "'probe-x'"
+   ]
+  },
+  {
+   "col": "inactive_since",
+   "verdict": "CHANGED",
+   "tries": [
+    "now()"
+   ]
+  },
+  {
+   "col": "retention_expires_at",
+   "verdict": "CHANGED",
+   "tries": [
+    "now()"
+   ]
+  },
+  {
+   "col": "is_public",
+   "verdict": "CHANGED",
+   "tries": [
+    "true"
+   ]
+  },
+  {
+   "col": "public_slug",
+   "verdict": "CHANGED",
+   "tries": [
+    "'probe-x'"
+   ]
+  },
+  {
+   "col": "published_at",
+   "verdict": "CHANGED",
+   "tries": [
+    "now()"
+   ]
+  },
+  {
+   "col": "view_count",
+   "verdict": "CHANGED",
+   "tries": [
+    "coalesce(view_count,0)+1"
+   ]
+  },
+  {
+   "col": "share_kind",
+   "verdict": "blocked",
+   "tries": [
+    "'probe-x': new row for relation \"saved_maps\" violates check constraint \"saved_map",
+    "null: null value in column \"share_kind\" of relation \"saved_maps\" violates no"
+   ]
+  },
+  {
+   "col": "gallery_share_campaign",
+   "verdict": "CHANGED",
+   "tries": [
+    "true"
+   ]
+  },
+  {
+   "col": "gallery_description",
+   "verdict": "CHANGED",
+   "tries": [
+    "'probe-x'"
+   ]
+  },
+  {
+   "col": "gallery_tags",
+   "verdict": "CHANGED",
+   "tries": [
+    "'{x}'"
+   ]
+  },
+  {
+   "col": "import_count",
+   "verdict": "CHANGED",
+   "tries": [
+    "coalesce(import_count,0)+1"
+   ]
+  },
+  {
+   "col": "gallery_importable",
+   "verdict": "CHANGED",
+   "tries": [
+    "true"
+   ]
+  },
+  {
+   "col": "gallery_image_url",
+   "verdict": "CHANGED",
+   "tries": [
+    "'probe-x'"
+   ]
+  },
+  {
+   "col": "gallery_image_alt",
+   "verdict": "CHANGED",
+   "tries": [
+    "'probe-x'"
+   ]
+  },
+  {
+   "col": "gallery_share_world",
+   "verdict": "CHANGED",
+   "tries": [
+    "true"
+   ]
+  },
+  {
+   "col": "gallery_world_sections",
+   "verdict": "CHANGED",
+   "tries": [
+    "'{\"probe\":1}'"
+   ]
+  },
+  {
+   "col": "gallery_world_snapshot",
+   "verdict": "blocked",
+   "tries": [
+    "'{\"probe\":1}': World snapshot is malformed or has an unsupported schemaVersion (expec"
+   ]
+  },
+  {
+   "col": "gallery_realm_arc_summary",
+   "verdict": "CHANGED",
+   "tries": [
+    "'probe-x'"
+   ]
+  },
+  {
+   "col": "gallery_facet_member_band",
+   "verdict": "CHANGED",
+   "tries": [
+    "'probe-x'"
+   ]
+  },
+  {
+   "col": "gallery_facet_at_war",
+   "verdict": "CHANGED",
+   "tries": [
+    "true"
+   ]
+  },
+  {
+   "col": "gallery_facet_dominant_culture",
+   "verdict": "CHANGED",
+   "tries": [
+    "'probe-x'"
+   ]
+  },
+  {
+   "col": "gallery_facet_tier_spread",
+   "verdict": "CHANGED",
+   "tries": [
+    "'probe-x'"
+   ]
+  },
+  {
+   "col": "gallery_facet_aliveness",
+   "verdict": "CHANGED",
+   "tries": [
+    "coalesce(gallery_facet_aliveness,0)+1"
+   ]
+  },
+  {
+   "col": "gallery_facet_world_age",
+   "verdict": "blocked",
+   "tries": [
+    "'probe-x': new row for relation \"saved_maps\" violates check constraint \"saved_map",
+    "null: unchanged(before=null)"
+   ]
+  },
+  {
+   "col": "is_featured",
+   "verdict": "CHANGED",
+   "tries": [
+    "true"
+   ]
+  },
+  {
+   "col": "featured_order",
+   "verdict": "CHANGED",
+   "tries": [
+    "coalesce(featured_order,0)+1"
+   ]
+  },
+  {
+   "col": "visibility",
+   "verdict": "blocked",
+   "tries": [
+    "'probe-x': new row for relation \"saved_maps\" violates check constraint \"saved_map",
+    "null: null value in column \"visibility\" of relation \"saved_maps\" violates no"
+   ]
+  },
+  {
+   "col": "unlisted_slug",
+   "verdict": "CHANGED",
+   "tries": [
+    "'probe-x'"
+   ]
+  },
+  {
+   "col": "moderation_banned_at",
+   "verdict": "CHANGED",
+   "tries": [
+    "now()"
+   ]
+  },
+  {
+   "col": "moderation_banned_by",
+   "verdict": "CHANGED",
+   "tries": [
+    "null: unchanged(before=null)",
+    "gen_random_uuid()"
+   ]
+  },
+  {
+   "col": "moderation_ban_reason",
+   "verdict": "CHANGED",
+   "tries": [
+    "'probe-x'"
+   ]
+  },
+  {
+   "col": "admin_deleted_at",
+   "verdict": "CHANGED",
+   "tries": [
+    "now()"
+   ]
+  }
+ ],
+ "gallery_comments": {
+  "seedError": "null value in column \"data\" of relation \"settlements\" violates not-null constraint",
+  "required": [
+   "settlement_id",
+   "user_id",
+   "body"
+  ]
+ },
+ "support_messages": [
+  {
+   "col": "email",
+   "verdict": "CHANGED",
+   "tries": [
+    "'probe-x'"
+   ]
+  },
+  {
+   "col": "subject",
+   "verdict": "CHANGED",
+   "tries": [
+    "'probe-x'"
+   ]
+  },
+  {
+   "col": "message",
+   "verdict": "CHANGED",
+   "tries": [
+    "'probe-x'"
+   ]
+  },
+  {
+   "col": "status",
+   "verdict": "blocked",
+   "tries": [
+    "'probe-x': new row violates row-level security policy for table \"support_messages",
+    "null: new row violates row-level security policy for table \"support_messages"
+   ]
+  },
+  {
+   "col": "created_at",
+   "verdict": "blocked",
+   "tries": [
+    "null: null value in column \"created_at\" of relation \"support_messages\" viola"
+   ]
+  },
+  {
+   "col": "ticket_number",
+   "verdict": "blocked",
+   "tries": [
+    "'probe-x': new row violates row-level security policy for table \"support_messages",
+    "null: new row violates row-level security policy for table \"support_messages"
+   ]
+  },
+  {
+   "col": "category",
+   "verdict": "blocked",
+   "tries": [
+    "'probe-x': new row for relation \"support_messages\" violates check constraint \"sup",
+    "null: null value in column \"category\" of relation \"support_messages\" violate"
+   ]
+  },
+  {
+   "col": "priority",
+   "verdict": "blocked",
+   "tries": [
+    "'probe-x': new row violates row-level security policy for table \"support_messages",
+    "null: new row violates row-level security policy for table \"support_messages"
+   ]
+  },
+  {
+   "col": "assignee",
+   "verdict": "blocked",
+   "tries": [
+    "null: unchanged(before=null)",
+    "gen_random_uuid(): new row violates row-level security policy for table \"support_messages"
+   ]
+  },
+  {
+   "col": "settlement_id",
+   "verdict": "CHANGED",
+   "tries": [
+    "null: unchanged(before=null)",
+    "gen_random_uuid()"
+   ]
+  },
+  {
+   "col": "campaign_id",
+   "verdict": "CHANGED",
+   "tries": [
+    "null: unchanged(before=null)",
+    "gen_random_uuid()"
+   ]
+  },
+  {
+   "col": "map_id",
+   "verdict": "CHANGED",
+   "tries": [
+    "null: unchanged(before=null)",
+    "gen_random_uuid()"
+   ]
+  },
+  {
+   "col": "payment_ref",
+   "verdict": "CHANGED",
+   "tries": [
+    "'probe-x'"
+   ]
+  },
+  {
+   "col": "pdf_ref",
+   "verdict": "CHANGED",
+   "tries": [
+    "'probe-x'"
+   ]
+  },
+  {
+   "col": "generation_ref",
+   "verdict": "CHANGED",
+   "tries": [
+    "'probe-x'"
+   ]
+  },
+  {
+   "col": "gallery_ref",
+   "verdict": "CHANGED",
+   "tries": [
+    "'probe-x'"
+   ]
+  },
+  {
+   "col": "linked_faq",
+   "verdict": "blocked",
+   "tries": [
+    "'probe-x': new row violates row-level security policy for table \"support_messages",
+    "null: unchanged(before=null)"
+   ]
+  },
+  {
+   "col": "metadata",
+   "verdict": "CHANGED",
+   "tries": [
+    "'{\"probe\":1}'"
+   ]
+  },
+  {
+   "col": "updated_at",
+   "verdict": "CHANGED",
+   "tries": [
+    "null"
+   ]
+  },
+  {
+   "col": "operator_message_id",
+   "verdict": "blocked",
+   "tries": [
+    "null: unchanged(before=null)",
+    "gen_random_uuid(): insert or update on table \"support_messages\" violates foreign key cons"
+   ]
+  }
+ ],
+ "founder_seats": [
+  {
+   "col": "seat_id",
+   "verdict": "blocked",
+   "tries": [
+    "coalesce(seat_id,0)+1: 0 rows"
+   ]
+  },
+  {
+   "col": "display_name_optin",
+   "verdict": "blocked",
+   "tries": [
+    "'probe-x': 0 rows",
+    "null: 0 rows"
+   ]
+  },
+  {
+   "col": "display_name_status",
+   "verdict": "blocked",
+   "tries": [
+    "'probe-x': 0 rows",
+    "null: 0 rows"
+   ]
+  },
+  {
+   "col": "gallery_author_slug",
+   "verdict": "blocked",
+   "tries": [
+    "'probe-x': 0 rows",
+    "null: 0 rows"
+   ]
+  },
+  {
+   "col": "held_since",
+   "verdict": "blocked",
+   "tries": [
+    "now(): 0 rows"
+   ]
+  },
+  {
+   "col": "claimed_at",
+   "verdict": "blocked",
+   "tries": [
+    "now(): 0 rows"
+   ]
+  },
+  {
+   "col": "original_purchase_at",
+   "verdict": "blocked",
+   "tries": [
+    "now(): 0 rows"
+   ]
+  },
+  {
+   "col": "acquired_via",
+   "verdict": "blocked",
+   "tries": [
+    "'probe-x': 0 rows",
+    "null: 0 rows"
+   ]
+  },
+  {
+   "col": "transfer_eligible_at",
+   "verdict": "blocked",
+   "tries": [
+    "now(): 0 rows"
+   ]
+  },
+  {
+   "col": "last_transfer_at",
+   "verdict": "blocked",
+   "tries": [
+    "now(): 0 rows"
+   ]
+  },
+  {
+   "col": "cooldown_until",
+   "verdict": "blocked",
+   "tries": [
+    "now(): 0 rows"
+   ]
+  },
+  {
+   "col": "security_status",
+   "verdict": "blocked",
+   "tries": [
+    "'probe-x': 0 rows",
+    "null: 0 rows"
+   ]
+  },
+  {
+   "col": "last_dormancy_nudge_at",
+   "verdict": "blocked",
+   "tries": [
+    "now(): 0 rows"
+   ]
+  },
+  {
+   "col": "abandonment_notice_started_at",
+   "verdict": "blocked",
+   "tries": [
+    "now(): 0 rows"
+   ]
+  },
+  {
+   "col": "abandonment_notice_count",
+   "verdict": "blocked",
+   "tries": [
+    "coalesce(abandonment_notice_count,0)+1: 0 rows"
+   ]
+  },
+  {
+   "col": "updated_at",
+   "verdict": "blocked",
+   "tries": [
+    "null: 0 rows"
+   ]
+  }
+ ]
+}

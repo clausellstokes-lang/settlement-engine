@@ -1,0 +1,2910 @@
+{
+ "towns": 150,
+ "byFamily": {
+  "10a": {
+   "towns": 1,
+   "instances": 3,
+   "distinct": 3,
+   "printedTowns": 1,
+   "printedInstances": 3,
+   "recordOnly": 0,
+   "top": [
+    {
+     "towns": 1,
+     "line": "Head · Sabir al-Ghazali, the council's fixer · answers to Corrupt Council through Rania al-Basri",
+     "seeds": [
+      "bar0-town-occupied-rand-27"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Hidden allegiance answers to Corrupt Council, through Rania al-Basri",
+     "seeds": [
+      "bar0-town-occupied-rand-27"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Partly in criminal hands. The head of Corrupt Council answers to Corrupt Council. Corrupt Council itself is run as a criminal concern.",
+     "seeds": [
+      "bar0-town-occupied-rand-27"
+     ]
+    }
+   ]
+  },
+  "10b": {
+   "towns": 1,
+   "instances": 1,
+   "distinct": 1,
+   "printedTowns": 1,
+   "printedInstances": 1,
+   "recordOnly": 0,
+   "top": [
+    {
+     "towns": 1,
+     "line": "The garrison chaplain and the commander are the same man. He's authorizing military action for reasons that sound theological.",
+     "seeds": [
+      "bar0-metropolis-calm-rand-36"
+     ]
+    }
+   ]
+  },
+  "10c": {
+   "towns": 7,
+   "instances": 14,
+   "distinct": 8,
+   "printedTowns": 7,
+   "printedInstances": 14,
+   "recordOnly": 0,
+   "top": [
+    {
+     "towns": 7,
+     "line": "Wharfinger",
+     "seeds": [
+      "bar0-city-wartime-rand-30",
+      "bar0-metropolis-calm-rand-29",
+      "bar0-metropolis-calm-rand-37",
+      "bar0-metropolis-calm-rand-39",
+      "bar0-town-calm-rand-27",
+      "bar0-town-occupied-rand-31"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Connection: Wharfinger Brigid Ward",
+     "seeds": [
+      "bar0-metropolis-calm-rand-37"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Connection: Wharfinger Drusus Nerva",
+     "seeds": [
+      "bar0-metropolis-calm-rand-39"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Connection: Wharfinger Luqman al-Nuri",
+     "seeds": [
+      "bar0-town-occupied-rand-31"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Connection: Wharfinger Madhuri Rao",
+     "seeds": [
+      "bar0-town-occupied-rand-40"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Connection: Wharfinger Narantuya Kiyad",
+     "seeds": [
+      "bar0-town-calm-rand-27"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Connection: Wharfinger Peng Wu",
+     "seeds": [
+      "bar0-city-wartime-rand-30"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Connection: Wharfinger Xiao Lin",
+     "seeds": [
+      "bar0-metropolis-calm-rand-29"
+     ]
+    }
+   ]
+  },
+  "10d": {
+   "towns": 2,
+   "instances": 3,
+   "distinct": 3,
+   "printedTowns": 2,
+   "printedInstances": 3,
+   "recordOnly": 0,
+   "top": [
+    {
+     "towns": 1,
+     "line": "Clíodhna O'Dwyer's treasury borrowed from Tlachtga O'Meara to cover a bad harvest and has borrowed every year since. The interest is paid before the wages.",
+     "seeds": [
+      "bar0-city-wartime-rand-36"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Jong Sun has asked for a seat on the council as a condition of the next loan. Dan Yoshida (the prison warden) has three weeks to answer.",
+     "seeds": [
+      "bar0-metropolis-calm-rand-29"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Tlachtga O'Meara has asked for a seat on the council as a condition of the next loan. Clíodhna O'Dwyer has three weeks to answer.",
+     "seeds": [
+      "bar0-city-wartime-rand-36"
+     ]
+    }
+   ]
+  },
+  "10e": {
+   "towns": 14,
+   "instances": 16,
+   "distinct": 12,
+   "printedTowns": 14,
+   "printedInstances": 16,
+   "recordOnly": 0,
+   "top": [
+    {
+     "towns": 3,
+     "line": "Temperament: forthright",
+     "seeds": [
+      "bar0-city-under_siege+famine-rand-39",
+      "bar0-city-wartime-rand-29",
+      "bar0-village-calm-rand-31"
+     ]
+    },
+    {
+     "towns": 2,
+     "line": "Secret: Keeps the night roster short and draws pay for names that never walk it",
+     "seeds": [
+      "bar0-village-calm-rand-28",
+      "bar0-village-calm-rand-34"
+     ]
+    },
+    {
+     "towns": 2,
+     "line": "Temperament: incorruptible",
+     "seeds": [
+      "bar0-city-under_siege+famine-rand-38",
+      "bar0-metropolis-calm-rand-31"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Flaw: cruel Temperament: incorruptible",
+     "seeds": [
+      "bar0-metropolis-calm-rand-36"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Flaw: lazy Temperament: plain-dealing",
+     "seeds": [
+      "bar0-metropolis-calm-rand-31"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Flaw: petty Temperament: forthright",
+     "seeds": [
+      "bar0-hamlet-calm-rand-28"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Flaw: petty Temperament: incorruptible",
+     "seeds": [
+      "bar0-city-wartime-rand-37"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Flaw: reckless Temperament: candid",
+     "seeds": [
+      "bar0-metropolis-calm-rand-39"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Flaw: vain Temperament: honest",
+     "seeds": [
+      "bar0-city-wartime-rand-34"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Flaw: vindictive Temperament: honest",
+     "seeds": [
+      "bar0-village-calm-rand-28"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Temperament: plain-dealing",
+     "seeds": [
+      "bar0-city-wartime-rand-32"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "The garrison and city watch are well paid, well equipped and patrol properly. They come when called, and though some take bribes, it is not the custom. A wrong done here goes before the court, and the guilty can be locked up for it. The garrison and city watch keep the gates, but smugglers have ways",
+     "seeds": [
+      "bar0-city-wartime-rand-31"
+     ]
+    }
+   ]
+  },
+  "10f": {
+   "towns": 26,
+   "instances": 47,
+   "distinct": 40,
+   "printedTowns": 26,
+   "printedInstances": 47,
+   "recordOnly": 0,
+   "top": [
+    {
+     "towns": 2,
+     "line": "A grand council of senior officials, guild masters, and appointed magnates governs the metropolis; the council is always split into camps, and real power shifts between blocs.",
+     "seeds": [
+      "bar0-metropolis-calm-rand-33",
+      "bar0-metropolis-calm-rand-39"
+     ]
+    },
+    {
+     "towns": 2,
+     "line": "Backs · Craft Guilds · Grand Guild Consortium",
+     "seeds": [
+      "bar0-metropolis-calm-rand-28",
+      "bar0-metropolis-calm-rand-37"
+     ]
+    },
+    {
+     "towns": 2,
+     "line": "Backs · Ecclesiastical Council · Grain Holders",
+     "seeds": [
+      "bar0-city-under_siege+famine-rand-33",
+      "bar0-city-under_siege+famine-rand-41"
+     ]
+    },
+    {
+     "towns": 2,
+     "line": "Backs · Grain Holders · Ecclesiastical Council",
+     "seeds": [
+      "bar0-city-under_siege+famine-rand-33",
+      "bar0-city-under_siege+famine-rand-41"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "A full council governs the city: aldermen, guild masters and appointed officials see to its taxes, its laws and its streets.",
+     "seeds": [
+      "bar0-city-under_siege+famine-rand-41"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "A small group of traders who come on market days; they speak up in small disputes but carry little weight beyond them.",
+     "seeds": [
+      "bar0-metropolis-calm-rand-35"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Backs · Arcane Senate · Merchant Guilds",
+     "seeds": [
+      "bar0-metropolis-calm-rand-32"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Backs · City-State Council · Merchant Guilds",
+     "seeds": [
+      "bar0-metropolis-calm-rand-36"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Backs · Corrupt City Council · Grain Holders",
+     "seeds": [
+      "bar0-city-under_siege+famine-rand-31"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Backs · Corrupt City Council · Merchant Guilds",
+     "seeds": [
+      "bar0-city-wartime-rand-35"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Backs · Craft Guilds · Guild Council",
+     "seeds": [
+      "bar0-town-calm-rand-27"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Backs · Craft Guilds · Merchant oligarchy",
+     "seeds": [
+      "bar0-town-calm-rand-38"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Backs · Democratic assembly · Grain Holders",
+     "seeds": [
+      "bar0-city-under_siege+famine-rand-35"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Backs · Democratic assembly · Merchant Guilds",
+     "seeds": [
+      "bar0-city-wartime-rand-38"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Backs · Ducal Governorship · Noble Houses",
+     "seeds": [
+      "bar0-metropolis-calm-rand-41"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Backs · Grain Holders · Corrupt City Council",
+     "seeds": [
+      "bar0-city-under_siege+famine-rand-31"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Backs · Grain Holders · Noble Governorship",
+     "seeds": [
+      "bar0-city-under_siege+famine-rand-29"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Backs · Grand Merchant Senate · Merchant Guilds",
+     "seeds": [
+      "bar0-metropolis-calm-rand-29"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Backs · Merchant City Council · Merchant Guilds",
+     "seeds": [
+      "bar0-city-wartime-rand-36"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Backs · Merchant Guild Council · Merchant Guilds",
+     "seeds": [
+      "bar0-city-wartime-rand-37"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Backs · Merchant Guilds · Arcane Senate",
+     "seeds": [
+      "bar0-metropolis-calm-rand-32"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Backs · Merchant Guilds · City-State Council",
+     "seeds": [
+      "bar0-metropolis-calm-rand-36"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Backs · Merchant Guilds · Corrupt City Council",
+     "seeds": [
+      "bar0-city-wartime-rand-35"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Backs · Merchant Guilds · Grand Merchant Senate",
+     "seeds": [
+      "bar0-metropolis-calm-rand-29"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Backs · Merchant Guilds · Merchant City Council",
+     "seeds": [
+      "bar0-city-wartime-rand-36"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Backs · Merchant Guilds · Merchant Guild Council",
+     "seeds": [
+      "bar0-city-wartime-rand-37"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Backs · Merchant Guilds · Military Council",
+     "seeds": [
+      "bar0-town-calm-rand-40"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Backs · Merchant Guilds · Royal Authority",
+     "seeds": [
+      "bar0-metropolis-calm-rand-34"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Backs · Merchant oligarchy · War Council",
+     "seeds": [
+      "bar0-city-under_siege+famine-rand-38"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Backs · Noble Governorship · Grain Holders",
+     "seeds": [
+      "bar0-city-under_siege+famine-rand-29"
+     ]
+    }
+   ]
+  },
+  "10g": {
+   "towns": 8,
+   "instances": 8,
+   "distinct": 8,
+   "printedTowns": 8,
+   "printedInstances": 8,
+   "recordOnly": 0,
+   "top": [
+    {
+     "towns": 1,
+     "line": "Ask about the town's present quarrels in Agiosakra and before long somebody brings up the migration. Much of what stands in Agiosakra now was built after the economic divide, and that legacy is older than anyone living.",
+     "seeds": [
+      "bar0-town-calm-rand-28"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "For 2 seasons a sickness worked through the settlement, emptying households and straining every institution past what it was built to bear",
+     "seeds": [
+      "bar0-metropolis-calm-rand-36"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Much of what stands in Albamunicipium now was built after the interregnum, and that legacy is a generation old.",
+     "seeds": [
+      "bar0-metropolis-calm-rand-39"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Much of what stands in Beloovo now was built after the economic divide, and that legacy is a generation old.",
+     "seeds": [
+      "bar0-town-calm-rand-41"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Much of what stands in Kaltenturm now was built after the economic divide, and that legacy is years old.",
+     "seeds": [
+      "bar0-city-wartime-rand-32"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Much of what stands in Neadgill now was built after the economic divide, and that legacy is older than anyone living.",
+     "seeds": [
+      "bar0-town-calm-rand-29"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Much of what stands in Sundhavn now was built after the interregnum, and that legacy is older than anyone living.",
+     "seeds": [
+      "bar0-metropolis-calm-rand-35"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "People in Tzulha still remember the succession crisis, and the memory weighs on the quarrels the town is having now. It came through the economic divide, and what the town built in answer still stands, a legacy that is older than all but the oldest alive.",
+     "seeds": [
+      "bar0-town-calm-rand-40"
+     ]
+    }
+   ]
+  },
+  "10h": {
+   "towns": 2,
+   "instances": 2,
+   "distinct": 2,
+   "printedTowns": 2,
+   "printedInstances": 2,
+   "recordOnly": 0,
+   "top": [
+    {
+     "towns": 1,
+     "line": "A ruling on authority over military conscription lists went Military/Guard's way, and Noble Governorship has simply carried on as though it did not.",
+     "seeds": [
+      "bar0-city-wartime-rand-40"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Military/Guard has posted guards on what it says is its own, and Merchant City Council says control of the remaining grain stores was never Military/Guard's to hold.",
+     "seeds": [
+      "bar0-city-under_siege+famine-rand-28"
+     ]
+    }
+   ]
+  }
+ },
+ "byRule": {
+  "10a": {
+   "towns": 1,
+   "instances": 3,
+   "distinct": 3,
+   "printedTowns": 1,
+   "printedInstances": 3,
+   "recordOnly": 0,
+   "top": [
+    {
+     "towns": 1,
+     "line": "Head · Sabir al-Ghazali, the council's fixer · answers to Corrupt Council through Rania al-Basri",
+     "seeds": [
+      "bar0-town-occupied-rand-27"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Hidden allegiance answers to Corrupt Council, through Rania al-Basri",
+     "seeds": [
+      "bar0-town-occupied-rand-27"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Partly in criminal hands. The head of Corrupt Council answers to Corrupt Council. Corrupt Council itself is run as a criminal concern.",
+     "seeds": [
+      "bar0-town-occupied-rand-27"
+     ]
+    }
+   ]
+  },
+  "10b": {
+   "towns": 1,
+   "instances": 1,
+   "distinct": 1,
+   "printedTowns": 1,
+   "printedInstances": 1,
+   "recordOnly": 0,
+   "top": [
+    {
+     "towns": 1,
+     "line": "The garrison chaplain and the commander are the same man. He's authorizing military action for reasons that sound theological.",
+     "seeds": [
+      "bar0-metropolis-calm-rand-36"
+     ]
+    }
+   ]
+  },
+  "10c": {
+   "towns": 7,
+   "instances": 14,
+   "distinct": 8,
+   "printedTowns": 7,
+   "printedInstances": 14,
+   "recordOnly": 0,
+   "top": [
+    {
+     "towns": 7,
+     "line": "Wharfinger",
+     "seeds": [
+      "bar0-city-wartime-rand-30",
+      "bar0-metropolis-calm-rand-29",
+      "bar0-metropolis-calm-rand-37",
+      "bar0-metropolis-calm-rand-39",
+      "bar0-town-calm-rand-27",
+      "bar0-town-occupied-rand-31"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Connection: Wharfinger Brigid Ward",
+     "seeds": [
+      "bar0-metropolis-calm-rand-37"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Connection: Wharfinger Drusus Nerva",
+     "seeds": [
+      "bar0-metropolis-calm-rand-39"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Connection: Wharfinger Luqman al-Nuri",
+     "seeds": [
+      "bar0-town-occupied-rand-31"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Connection: Wharfinger Madhuri Rao",
+     "seeds": [
+      "bar0-town-occupied-rand-40"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Connection: Wharfinger Narantuya Kiyad",
+     "seeds": [
+      "bar0-town-calm-rand-27"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Connection: Wharfinger Peng Wu",
+     "seeds": [
+      "bar0-city-wartime-rand-30"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Connection: Wharfinger Xiao Lin",
+     "seeds": [
+      "bar0-metropolis-calm-rand-29"
+     ]
+    }
+   ]
+  },
+  "10d-purse": {
+   "towns": 1,
+   "instances": 1,
+   "distinct": 1,
+   "printedTowns": 1,
+   "printedInstances": 1,
+   "recordOnly": 0,
+   "top": [
+    {
+     "towns": 1,
+     "line": "Clíodhna O'Dwyer's treasury borrowed from Tlachtga O'Meara to cover a bad harvest and has borrowed every year since. The interest is paid before the wages.",
+     "seeds": [
+      "bar0-city-wartime-rand-36"
+     ]
+    }
+   ]
+  },
+  "10d-seat": {
+   "towns": 2,
+   "instances": 2,
+   "distinct": 2,
+   "printedTowns": 2,
+   "printedInstances": 2,
+   "recordOnly": 0,
+   "top": [
+    {
+     "towns": 1,
+     "line": "Jong Sun has asked for a seat on the council as a condition of the next loan. Dan Yoshida (the prison warden) has three weeks to answer.",
+     "seeds": [
+      "bar0-metropolis-calm-rand-29"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Tlachtga O'Meara has asked for a seat on the council as a condition of the next loan. Clíodhna O'Dwyer has three weeks to answer.",
+     "seeds": [
+      "bar0-city-wartime-rand-36"
+     ]
+    }
+   ]
+  },
+  "10e-house": {
+   "towns": 2,
+   "instances": 2,
+   "distinct": 1,
+   "printedTowns": 2,
+   "printedInstances": 2,
+   "recordOnly": 0,
+   "top": [
+    {
+     "towns": 2,
+     "line": "Secret: Keeps the night roster short and draws pay for names that never walk it",
+     "seeds": [
+      "bar0-village-calm-rand-28",
+      "bar0-village-calm-rand-34"
+     ]
+    }
+   ]
+  },
+  "10e-pay": {
+   "towns": 1,
+   "instances": 1,
+   "distinct": 1,
+   "printedTowns": 1,
+   "printedInstances": 1,
+   "recordOnly": 0,
+   "top": [
+    {
+     "towns": 1,
+     "line": "The garrison and city watch are well paid, well equipped and patrol properly. They come when called, and though some take bribes, it is not the custom. A wrong done here goes before the court, and the guilty can be locked up for it. The garrison and city watch keep the gates, but smugglers have ways",
+     "seeds": [
+      "bar0-city-wartime-rand-31"
+     ]
+    }
+   ]
+  },
+  "10e-temper": {
+   "towns": 4,
+   "instances": 4,
+   "distinct": 3,
+   "printedTowns": 4,
+   "printedInstances": 4,
+   "recordOnly": 0,
+   "top": [
+    {
+     "towns": 2,
+     "line": "Temperament: incorruptible",
+     "seeds": [
+      "bar0-city-under_siege+famine-rand-38",
+      "bar0-metropolis-calm-rand-31"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Flaw: cruel Temperament: incorruptible",
+     "seeds": [
+      "bar0-metropolis-calm-rand-36"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Flaw: petty Temperament: incorruptible",
+     "seeds": [
+      "bar0-city-wartime-rand-37"
+     ]
+    }
+   ]
+  },
+  "10e-temper-honest": {
+   "towns": 4,
+   "instances": 4,
+   "distinct": 4,
+   "printedTowns": 4,
+   "printedInstances": 4,
+   "recordOnly": 0,
+   "top": [
+    {
+     "towns": 1,
+     "line": "Flaw: lazy Temperament: plain-dealing",
+     "seeds": [
+      "bar0-metropolis-calm-rand-31"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Flaw: vain Temperament: honest",
+     "seeds": [
+      "bar0-city-wartime-rand-34"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Flaw: vindictive Temperament: honest",
+     "seeds": [
+      "bar0-village-calm-rand-28"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Temperament: plain-dealing",
+     "seeds": [
+      "bar0-city-wartime-rand-32"
+     ]
+    }
+   ]
+  },
+  "10e-temper-manner": {
+   "towns": 5,
+   "instances": 5,
+   "distinct": 3,
+   "printedTowns": 5,
+   "printedInstances": 5,
+   "recordOnly": 0,
+   "top": [
+    {
+     "towns": 3,
+     "line": "Temperament: forthright",
+     "seeds": [
+      "bar0-city-under_siege+famine-rand-39",
+      "bar0-city-wartime-rand-29",
+      "bar0-village-calm-rand-31"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Flaw: petty Temperament: forthright",
+     "seeds": [
+      "bar0-hamlet-calm-rand-28"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Flaw: reckless Temperament: candid",
+     "seeds": [
+      "bar0-metropolis-calm-rand-39"
+     ]
+    }
+   ]
+  },
+  "10f-backs": {
+   "towns": 5,
+   "instances": 5,
+   "distinct": 4,
+   "printedTowns": 5,
+   "printedInstances": 5,
+   "recordOnly": 0,
+   "top": [
+    {
+     "towns": 2,
+     "line": "Backs · Craft Guilds · Grand Guild Consortium",
+     "seeds": [
+      "bar0-metropolis-calm-rand-28",
+      "bar0-metropolis-calm-rand-37"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Backs · Craft Guilds · Guild Council",
+     "seeds": [
+      "bar0-town-calm-rand-27"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Backs · Merchant Guild Council · Merchant Guilds",
+     "seeds": [
+      "bar0-city-wartime-rand-37"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Backs · Noble Houses · Ducal Governorship",
+     "seeds": [
+      "bar0-metropolis-calm-rand-41"
+     ]
+    }
+   ]
+  },
+  "10f-backs-wide": {
+   "towns": 20,
+   "instances": 37,
+   "distinct": 35,
+   "printedTowns": 20,
+   "printedInstances": 37,
+   "recordOnly": 0,
+   "top": [
+    {
+     "towns": 2,
+     "line": "Backs · Ecclesiastical Council · Grain Holders",
+     "seeds": [
+      "bar0-city-under_siege+famine-rand-33",
+      "bar0-city-under_siege+famine-rand-41"
+     ]
+    },
+    {
+     "towns": 2,
+     "line": "Backs · Grain Holders · Ecclesiastical Council",
+     "seeds": [
+      "bar0-city-under_siege+famine-rand-33",
+      "bar0-city-under_siege+famine-rand-41"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Backs · Arcane Senate · Merchant Guilds",
+     "seeds": [
+      "bar0-metropolis-calm-rand-32"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Backs · City-State Council · Merchant Guilds",
+     "seeds": [
+      "bar0-metropolis-calm-rand-36"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Backs · Corrupt City Council · Grain Holders",
+     "seeds": [
+      "bar0-city-under_siege+famine-rand-31"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Backs · Corrupt City Council · Merchant Guilds",
+     "seeds": [
+      "bar0-city-wartime-rand-35"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Backs · Craft Guilds · Guild Council",
+     "seeds": [
+      "bar0-town-calm-rand-27"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Backs · Craft Guilds · Merchant oligarchy",
+     "seeds": [
+      "bar0-town-calm-rand-38"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Backs · Democratic assembly · Grain Holders",
+     "seeds": [
+      "bar0-city-under_siege+famine-rand-35"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Backs · Democratic assembly · Merchant Guilds",
+     "seeds": [
+      "bar0-city-wartime-rand-38"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Backs · Ducal Governorship · Noble Houses",
+     "seeds": [
+      "bar0-metropolis-calm-rand-41"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Backs · Grain Holders · Corrupt City Council",
+     "seeds": [
+      "bar0-city-under_siege+famine-rand-31"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Backs · Grain Holders · Noble Governorship",
+     "seeds": [
+      "bar0-city-under_siege+famine-rand-29"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Backs · Grand Merchant Senate · Merchant Guilds",
+     "seeds": [
+      "bar0-metropolis-calm-rand-29"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Backs · Merchant City Council · Merchant Guilds",
+     "seeds": [
+      "bar0-city-wartime-rand-36"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Backs · Merchant Guild Council · Merchant Guilds",
+     "seeds": [
+      "bar0-city-wartime-rand-37"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Backs · Merchant Guilds · Arcane Senate",
+     "seeds": [
+      "bar0-metropolis-calm-rand-32"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Backs · Merchant Guilds · City-State Council",
+     "seeds": [
+      "bar0-metropolis-calm-rand-36"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Backs · Merchant Guilds · Corrupt City Council",
+     "seeds": [
+      "bar0-city-wartime-rand-35"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Backs · Merchant Guilds · Grand Merchant Senate",
+     "seeds": [
+      "bar0-metropolis-calm-rand-29"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Backs · Merchant Guilds · Merchant City Council",
+     "seeds": [
+      "bar0-city-wartime-rand-36"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Backs · Merchant Guilds · Merchant Guild Council",
+     "seeds": [
+      "bar0-city-wartime-rand-37"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Backs · Merchant Guilds · Military Council",
+     "seeds": [
+      "bar0-town-calm-rand-40"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Backs · Merchant Guilds · Royal Authority",
+     "seeds": [
+      "bar0-metropolis-calm-rand-34"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Backs · Merchant oligarchy · War Council",
+     "seeds": [
+      "bar0-city-under_siege+famine-rand-38"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Backs · Noble Governorship · Grain Holders",
+     "seeds": [
+      "bar0-city-under_siege+famine-rand-29"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Backs · Noble Houses · Ducal Governorship",
+     "seeds": [
+      "bar0-metropolis-calm-rand-41"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Backs · Priestly Guidance · Merchant Guilds",
+     "seeds": [
+      "bar0-village-calm-rand-39"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Backs · Religious Authorities · Royal Authority",
+     "seeds": [
+      "bar0-city-under_siege+famine-rand-36"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Backs · Royal Authority · Grain Holders",
+     "seeds": [
+      "bar0-city-under_siege+famine-rand-36"
+     ]
+    }
+   ]
+  },
+  "10f-kind": {
+   "towns": 3,
+   "instances": 3,
+   "distinct": 2,
+   "printedTowns": 3,
+   "printedInstances": 3,
+   "recordOnly": 0,
+   "top": [
+    {
+     "towns": 2,
+     "line": "A grand council of senior officials, guild masters, and appointed magnates governs the metropolis; the council is always split into camps, and real power shifts between blocs.",
+     "seeds": [
+      "bar0-metropolis-calm-rand-33",
+      "bar0-metropolis-calm-rand-39"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "A full council governs the city: aldermen, guild masters and appointed officials see to its taxes, its laws and its streets.",
+     "seeds": [
+      "bar0-city-under_siege+famine-rand-41"
+     ]
+    }
+   ]
+  },
+  "10f-tier": {
+   "towns": 1,
+   "instances": 1,
+   "distinct": 1,
+   "printedTowns": 1,
+   "printedInstances": 1,
+   "recordOnly": 0,
+   "top": [
+    {
+     "towns": 1,
+     "line": "A small group of traders who come on market days; they speak up in small disputes but carry little weight beyond them.",
+     "seeds": [
+      "bar0-metropolis-calm-rand-35"
+     ]
+    }
+   ]
+  },
+  "10f-weight": {
+   "towns": 1,
+   "instances": 1,
+   "distinct": 1,
+   "printedTowns": 1,
+   "printedInstances": 1,
+   "recordOnly": 0,
+   "top": [
+    {
+     "towns": 1,
+     "line": "Minor landed families with limited political reach; present in civic life but rarely decisive. The merchant guilds now have more say: the noble families keep their titles, their land and their precedence, but the money has moved.",
+     "seeds": [
+      "bar0-metropolis-calm-rand-30"
+     ]
+    }
+   ]
+  },
+  "10g-legacy": {
+   "towns": 6,
+   "instances": 6,
+   "distinct": 6,
+   "printedTowns": 6,
+   "printedInstances": 6,
+   "recordOnly": 0,
+   "top": [
+    {
+     "towns": 1,
+     "line": "Ask about the town's present quarrels in Agiosakra and before long somebody brings up the migration. Much of what stands in Agiosakra now was built after the economic divide, and that legacy is older than anyone living.",
+     "seeds": [
+      "bar0-town-calm-rand-28"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Much of what stands in Albamunicipium now was built after the interregnum, and that legacy is a generation old.",
+     "seeds": [
+      "bar0-metropolis-calm-rand-39"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Much of what stands in Beloovo now was built after the economic divide, and that legacy is a generation old.",
+     "seeds": [
+      "bar0-town-calm-rand-41"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Much of what stands in Kaltenturm now was built after the economic divide, and that legacy is years old.",
+     "seeds": [
+      "bar0-city-wartime-rand-32"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Much of what stands in Neadgill now was built after the economic divide, and that legacy is older than anyone living.",
+     "seeds": [
+      "bar0-town-calm-rand-29"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Much of what stands in Sundhavn now was built after the interregnum, and that legacy is older than anyone living.",
+     "seeds": [
+      "bar0-metropolis-calm-rand-35"
+     ]
+    }
+   ]
+  },
+  "10g-legacy-answer": {
+   "towns": 1,
+   "instances": 1,
+   "distinct": 1,
+   "printedTowns": 1,
+   "printedInstances": 1,
+   "recordOnly": 0,
+   "top": [
+    {
+     "towns": 1,
+     "line": "People in Tzulha still remember the succession crisis, and the memory weighs on the quarrels the town is having now. It came through the economic divide, and what the town built in answer still stands, a legacy that is older than all but the oldest alive.",
+     "seeds": [
+      "bar0-town-calm-rand-40"
+     ]
+    }
+   ]
+  },
+  "10g-span": {
+   "towns": 1,
+   "instances": 1,
+   "distinct": 1,
+   "printedTowns": 1,
+   "printedInstances": 1,
+   "recordOnly": 0,
+   "top": [
+    {
+     "towns": 1,
+     "line": "For 2 seasons a sickness worked through the settlement, emptying households and straining every institution past what it was built to bear",
+     "seeds": [
+      "bar0-metropolis-calm-rand-36"
+     ]
+    }
+   ]
+  },
+  "10h": {
+   "towns": 2,
+   "instances": 2,
+   "distinct": 2,
+   "printedTowns": 2,
+   "printedInstances": 2,
+   "recordOnly": 0,
+   "top": [
+    {
+     "towns": 1,
+     "line": "A ruling on authority over military conscription lists went Military/Guard's way, and Noble Governorship has simply carried on as though it did not.",
+     "seeds": [
+      "bar0-city-wartime-rand-40"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Military/Guard has posted guards on what it says is its own, and Merchant City Council says control of the remaining grain stores was never Military/Guard's to hold.",
+     "seeds": [
+      "bar0-city-under_siege+famine-rand-28"
+     ]
+    }
+   ]
+  }
+ },
+ "labelCensus": {
+  "Military/Guard": {
+   "prose": "The Guard",
+   "towns": 55,
+   "rowLines": 630,
+   "sentenceLines": 2,
+   "townsWithSentence": 2,
+   "townsPrintingProseForm": 55,
+   "sentences": [
+    [
+     "Military/Guard has posted guards on what it says is its own, and Merchant City Council says control of the remaining grain stores was never Military/Guard's to ",
+     1
+    ],
+    [
+     "A ruling on authority over military conscription lists went Military/Guard's way, and Noble Governorship has simply carried on as though it did not.",
+     1
+    ]
+   ]
+  }
+ },
+ "controls": [
+  {
+   "id": "C179090",
+   "rule": "10a",
+   "expect": "find",
+   "src": "wide6",
+   "town": "bar0-town-occupied-rand-27",
+   "verdict": "STANDS",
+   "text": "Head · Sabir al-Ghazali, the council's fixer · answers to Corrupt Council through Rania al-Basri",
+   "rendered": true,
+   "printed": true,
+   "found": true,
+   "foundAny": true,
+   "as": [
+    "10a"
+   ],
+   "pass": true
+  },
+  {
+   "id": "C179117",
+   "rule": "10a",
+   "expect": "find",
+   "src": "wide6",
+   "town": "bar0-town-occupied-rand-27",
+   "verdict": "STANDS",
+   "text": "The head of Corrupt Council answers to Corrupt Council.",
+   "rendered": true,
+   "printed": true,
+   "found": true,
+   "foundAny": true,
+   "as": [
+    "10a"
+   ],
+   "pass": true
+  },
+  {
+   "id": "C179288",
+   "rule": "10a",
+   "expect": "find",
+   "src": "wide6",
+   "town": "bar0-town-occupied-rand-27",
+   "verdict": "STANDS",
+   "text": "Hidden allegiance answers to Corrupt Council, through Rania al-Basri",
+   "rendered": true,
+   "printed": true,
+   "found": true,
+   "foundAny": true,
+   "as": [
+    "10a"
+   ],
+   "pass": true
+  },
+  {
+   "id": "C130353",
+   "rule": "10b",
+   "expect": "find",
+   "src": "wide6",
+   "town": "bar0-metropolis-calm-rand-36",
+   "verdict": "STANDS",
+   "text": "The garrison chaplain and the commander are the same man.",
+   "rendered": true,
+   "printed": true,
+   "found": true,
+   "foundAny": true,
+   "as": [
+    "10b"
+   ],
+   "pass": true
+  },
+  {
+   "id": "C130354",
+   "rule": "10b",
+   "expect": "find",
+   "src": "wide6",
+   "note": "second sentence of the same hook",
+   "town": "bar0-metropolis-calm-rand-36",
+   "verdict": "STANDS",
+   "text": "He's authorizing military action for reasons that sound theological.",
+   "rendered": true,
+   "printed": true,
+   "found": true,
+   "foundAny": true,
+   "as": [
+    "10b"
+   ],
+   "pass": true
+  },
+  {
+   "id": "C75413",
+   "rule": "-",
+   "expect": "none",
+   "src": "wide6",
+   "town": "bar0-city-wartime-rand-39",
+   "verdict": "EXPLAINED",
+   "text": "Secret: Prints whatever pays, including lies about a rival merchant that ruined him",
+   "rendered": true,
+   "printed": true,
+   "found": false,
+   "foundAny": false,
+   "as": [],
+   "pass": true
+  },
+  {
+   "id": "C196525",
+   "rule": "10c",
+   "expect": "find",
+   "src": "wide6",
+   "town": "bar0-town-occupied-rand-40",
+   "verdict": "STANDS",
+   "text": "Connection: Wharfinger Madhuri Rao",
+   "rendered": true,
+   "printed": true,
+   "found": true,
+   "foundAny": true,
+   "as": [
+    "10c"
+   ],
+   "pass": true
+  },
+  {
+   "id": "C66115",
+   "rule": "10d-seat",
+   "expect": "find",
+   "src": "wide6",
+   "town": "bar0-city-wartime-rand-36",
+   "verdict": "STANDS",
+   "text": "Tlachtga O'Meara has asked for a seat on the council as a condition of the next loan.",
+   "rendered": true,
+   "printed": true,
+   "found": true,
+   "foundAny": true,
+   "as": [
+    "10d-seat"
+   ],
+   "pass": true
+  },
+  {
+   "id": "C66113",
+   "rule": "10d-purse",
+   "expect": "find",
+   "src": "wide6",
+   "town": "bar0-city-wartime-rand-36",
+   "verdict": "STANDS",
+   "text": "Clíodhna O'Dwyer's treasury borrowed from Tlachtga O'Meara to cover a bad harvest and has borrowed every year since.",
+   "rendered": true,
+   "printed": true,
+   "found": true,
+   "foundAny": true,
+   "as": [
+    "10d-purse"
+   ],
+   "pass": true
+  },
+  {
+   "id": "C31450",
+   "rule": "10e-temper",
+   "expect": "find",
+   "src": "wide6",
+   "note": "the temperament line; the pair is placed on the secret line too",
+   "town": "bar0-city-under_siege+famine-rand-38",
+   "verdict": "STANDS",
+   "text": "Temperament: incorruptible",
+   "rendered": true,
+   "printed": true,
+   "found": true,
+   "foundAny": true,
+   "as": [
+    "10e-temper"
+   ],
+   "pass": true
+  },
+  {
+   "id": "C200774",
+   "rule": "10e-house",
+   "expect": "find",
+   "src": "wide6",
+   "town": "bar0-village-calm-rand-28",
+   "verdict": "STANDS",
+   "text": "Secret: Keeps the night roster short and draws pay for names that never walk it",
+   "rendered": true,
+   "printed": true,
+   "found": true,
+   "foundAny": true,
+   "as": [
+    "10e-house"
+   ],
+   "pass": true
+  },
+  {
+   "id": "C51048",
+   "rule": "10e-pay",
+   "expect": "find",
+   "src": "wide6",
+   "town": "bar0-city-wartime-rand-31",
+   "verdict": "STANDS",
+   "text": "The garrison and city watch are well paid, well equipped and patrol properly.",
+   "rendered": true,
+   "printed": true,
+   "found": true,
+   "foundAny": true,
+   "as": [
+    "10e-pay"
+   ],
+   "pass": true
+  },
+  {
+   "id": "C121364",
+   "rule": "10f-kind",
+   "expect": "find",
+   "src": "wide6",
+   "town": "bar0-metropolis-calm-rand-33",
+   "verdict": "STANDS",
+   "text": "A grand council of senior officials, guild masters, and appointed magnates governs the metropolis; the council is always split into camps, a",
+   "rendered": true,
+   "printed": true,
+   "found": true,
+   "foundAny": true,
+   "as": [
+    "10f-kind"
+   ],
+   "pass": true
+  },
+  {
+   "id": "C128237",
+   "rule": "10f-tier",
+   "expect": "find",
+   "src": "wide6",
+   "town": "bar0-metropolis-calm-rand-35",
+   "verdict": "STANDS",
+   "text": "A small group of traders who come on market days; they speak up in small disputes but carry little weight beyond them.",
+   "rendered": true,
+   "printed": true,
+   "found": true,
+   "foundAny": true,
+   "as": [
+    "10f-tier"
+   ],
+   "pass": true
+  },
+  {
+   "id": "C110252",
+   "rule": "10f-weight",
+   "expect": "find",
+   "src": "wide6",
+   "town": "bar0-metropolis-calm-rand-30",
+   "verdict": "STANDS",
+   "text": "The merchant guilds now have more say: the noble families keep their titles, their land and their precedence, but the money has moved.",
+   "rendered": true,
+   "printed": true,
+   "found": true,
+   "foundAny": true,
+   "as": [
+    "10f-weight"
+   ],
+   "pass": true
+  },
+  {
+   "id": "C102099",
+   "rule": "10f-backs",
+   "expect": "find",
+   "src": "wide6",
+   "town": "bar0-metropolis-calm-rand-28",
+   "verdict": "STANDS",
+   "text": "Backs · Craft Guilds · Grand Guild Consortium",
+   "rendered": true,
+   "printed": true,
+   "found": true,
+   "foundAny": true,
+   "as": [
+    "10f-backs"
+   ],
+   "pass": true
+  },
+  {
+   "id": "C133674",
+   "rule": "10g-span",
+   "expect": "find",
+   "src": "wide6",
+   "town": "bar0-metropolis-calm-rand-36",
+   "verdict": "STANDS",
+   "text": "For 2 seasons a sickness worked through the settlement, emptying households and straining every institution past what it was built to bear",
+   "rendered": true,
+   "printed": true,
+   "found": true,
+   "foundAny": true,
+   "as": [
+    "10g-span"
+   ],
+   "pass": true
+  },
+  {
+   "id": "C55011",
+   "rule": "10g-legacy",
+   "expect": "find",
+   "src": "wide6",
+   "town": "bar0-city-wartime-rand-32",
+   "verdict": "STANDS",
+   "text": "Much of what stands in Kaltenturm now was built after the economic divide, and that legacy is years old.",
+   "rendered": true,
+   "printed": true,
+   "found": true,
+   "foundAny": true,
+   "as": [
+    "10g-legacy"
+   ],
+   "pass": true
+  },
+  {
+   "id": "C24588",
+   "rule": "-",
+   "expect": "none",
+   "src": "wide6",
+   "town": "bar0-city-under_siege+famine-rand-35",
+   "verdict": "EXPLAINED",
+   "text": "The siege left a legacy of trouble in Haian that has never been fully put right, and that legacy is a generation old.",
+   "rendered": true,
+   "printed": true,
+   "found": false,
+   "foundAny": false,
+   "as": [],
+   "pass": true
+  },
+  {
+   "id": "C181033",
+   "rule": "-",
+   "expect": "none",
+   "src": "wide6",
+   "town": "bar0-town-occupied-rand-28",
+   "verdict": "EXPLAINED",
+   "text": "A previous occupation ended, but collaborators and resisters continued to live side by side, their history unresolved",
+   "rendered": true,
+   "printed": true,
+   "found": false,
+   "foundAny": false,
+   "as": [],
+   "pass": true
+  },
+  {
+   "id": "C184829",
+   "rule": "-",
+   "expect": "none",
+   "src": "wide6",
+   "town": "bar0-town-occupied-rand-31",
+   "verdict": "EXPLAINED",
+   "text": "An occupation had ended years before, yet those who collaborated and those who resisted still lived as neighbours, the reckoning never made",
+   "rendered": true,
+   "printed": true,
+   "found": false,
+   "foundAny": false,
+   "as": [],
+   "pass": true
+  },
+  {
+   "id": "C1980",
+   "rule": "10h",
+   "expect": "find",
+   "src": "wide6",
+   "town": "bar0-city-under_siege+famine-rand-28",
+   "verdict": "STANDS",
+   "text": "Military/Guard has posted guards on what it says is its own, and Merchant City Council says control of the remaining grain stores was never ",
+   "rendered": true,
+   "printed": true,
+   "found": true,
+   "foundAny": true,
+   "as": [
+    "10h"
+   ],
+   "pass": true
+  },
+  {
+   "id": "C76763",
+   "rule": "10h",
+   "expect": "find",
+   "src": "wide6",
+   "town": "bar0-city-wartime-rand-40",
+   "verdict": "STANDS",
+   "text": "A ruling on authority over military conscription lists went Military/Guard's way, and Noble Governorship has simply carried on as though it ",
+   "rendered": true,
+   "printed": true,
+   "found": true,
+   "foundAny": true,
+   "as": [
+    "10h"
+   ],
+   "pass": true
+  }
+ ],
+ "instances": [
+  {
+   "detector": "law10h",
+   "law": "L10",
+   "rule": "10h",
+   "town": "bar0-city-under_siege+famine-rand-28",
+   "tab": "Summary/Plot Hooks",
+   "line": "Military/Guard has posted guards on what it says is its own, and Merchant City Council says control of the remaining grain stores was never Military/Guard's to hold.",
+   "against": {
+    "record": "powerStructure.factions[\"Military/Guard\"] (the roster label)"
+   },
+   "why": "the roster label \"Military/Guard\" is used as a name (\"Military/Guard has posted guards on what…\"); its prose form is \"The Guard\""
+  },
+  {
+   "detector": "law10f",
+   "law": "L10",
+   "rule": "10f-backs-wide",
+   "town": "bar0-city-under_siege+famine-rand-29",
+   "tab": "Systems/Institutions",
+   "line": "Backs · Grain Holders · Noble Governorship",
+   "against": {
+    "record": "powerStructure.conflicts: Noble Governorship vs Grain Holders · high",
+    "line": "Printing house · Crafts · Impaired"
+   },
+   "why": "the house backs Noble Governorship, the ruler, and Grain Holders, the ruler's high rival"
+  },
+  {
+   "detector": "law10f",
+   "law": "L10",
+   "rule": "10f-backs-wide",
+   "town": "bar0-city-under_siege+famine-rand-29",
+   "tab": "Systems/Institutions",
+   "line": "Backs · Noble Governorship · Grain Holders",
+   "against": {
+    "record": "powerStructure.conflicts: Noble Governorship vs Grain Holders · high",
+    "line": "Weavers/Textile workers · Crafts · Impaired"
+   },
+   "why": "the house backs Noble Governorship, the ruler, and Grain Holders, the ruler's high rival"
+  },
+  {
+   "detector": "law10f",
+   "law": "L10",
+   "rule": "10f-backs-wide",
+   "town": "bar0-city-under_siege+famine-rand-31",
+   "tab": "Systems/Institutions",
+   "line": "Backs · Corrupt City Council · Grain Holders",
+   "against": {
+    "record": "powerStructure.conflicts: Corrupt City Council vs Grain Holders · high",
+    "line": "Weavers/Textile workers · Crafts"
+   },
+   "why": "the house backs Corrupt City Council, the ruler, and Grain Holders, the ruler's high rival"
+  },
+  {
+   "detector": "law10f",
+   "law": "L10",
+   "rule": "10f-backs-wide",
+   "town": "bar0-city-under_siege+famine-rand-31",
+   "tab": "Systems/Institutions",
+   "line": "Backs · Grain Holders · Corrupt City Council",
+   "against": {
+    "record": "powerStructure.conflicts: Corrupt City Council vs Grain Holders · high",
+    "line": "Theaters · Entertainment"
+   },
+   "why": "the house backs Corrupt City Council, the ruler, and Grain Holders, the ruler's high rival"
+  },
+  {
+   "detector": "law10f",
+   "law": "L10",
+   "rule": "10f-backs-wide",
+   "town": "bar0-city-under_siege+famine-rand-33",
+   "tab": "Systems/Institutions",
+   "line": "Backs · Grain Holders · Ecclesiastical Council",
+   "against": {
+    "record": "powerStructure.conflicts: Ecclesiastical Council vs Grain Holders · high",
+    "line": "Printing house · Crafts · Impaired"
+   },
+   "why": "the house backs Ecclesiastical Council, the ruler, and Grain Holders, the ruler's high rival"
+  },
+  {
+   "detector": "law10f",
+   "law": "L10",
+   "rule": "10f-backs-wide",
+   "town": "bar0-city-under_siege+famine-rand-33",
+   "tab": "Systems/Institutions",
+   "line": "Backs · Ecclesiastical Council · Grain Holders",
+   "against": {
+    "record": "powerStructure.conflicts: Ecclesiastical Council vs Grain Holders · high",
+    "line": "Weavers/Textile workers · Crafts · Impaired"
+   },
+   "why": "the house backs Ecclesiastical Council, the ruler, and Grain Holders, the ruler's high rival"
+  },
+  {
+   "detector": "law10f",
+   "law": "L10",
+   "rule": "10f-backs-wide",
+   "town": "bar0-city-under_siege+famine-rand-35",
+   "tab": "Systems/Institutions",
+   "line": "Backs · Democratic assembly · Grain Holders",
+   "against": {
+    "record": "powerStructure.conflicts: Democratic assembly vs Grain Holders · high",
+    "line": "Weavers/Textile workers · Crafts"
+   },
+   "why": "the house backs Democratic assembly, the ruler, and Grain Holders, the ruler's high rival"
+  },
+  {
+   "detector": "law10f",
+   "law": "L10",
+   "rule": "10f-backs-wide",
+   "town": "bar0-city-under_siege+famine-rand-36",
+   "tab": "Systems/Institutions",
+   "line": "Backs · War Council · Royal Authority",
+   "against": {
+    "record": "powerStructure.conflicts: Royal Authority vs War Council · high",
+    "line": "Multiple adventurers' guilds · Adventuring"
+   },
+   "why": "the house backs Royal Authority, the ruler, and War Council, the ruler's high rival"
+  },
+  {
+   "detector": "law10f",
+   "law": "L10",
+   "rule": "10f-backs-wide",
+   "town": "bar0-city-under_siege+famine-rand-36",
+   "tab": "Systems/Institutions",
+   "line": "Backs · Royal Authority · Religious Authorities",
+   "against": {
+    "record": "powerStructure.conflicts: Royal Authority vs Religious Authorities · high",
+    "line": "Sage's quarter · Adventuring · Impaired"
+   },
+   "why": "the house backs Royal Authority, the ruler, and Religious Authorities, the ruler's high rival"
+  },
+  {
+   "detector": "law10f",
+   "law": "L10",
+   "rule": "10f-backs-wide",
+   "town": "bar0-city-under_siege+famine-rand-36",
+   "tab": "Systems/Institutions",
+   "line": "Backs · Royal Authority · War Council",
+   "against": {
+    "record": "powerStructure.conflicts: Royal Authority vs War Council · high",
+    "line": "Bowyers & fletchers (guild) · Crafts"
+   },
+   "why": "the house backs Royal Authority, the ruler, and War Council, the ruler's high rival"
+  },
+  {
+   "detector": "law10f",
+   "law": "L10",
+   "rule": "10f-backs-wide",
+   "town": "bar0-city-under_siege+famine-rand-36",
+   "tab": "Systems/Institutions",
+   "line": "Backs · Royal Authority · Grain Holders",
+   "against": {
+    "record": "powerStructure.conflicts: Royal Authority vs Grain Holders · high",
+    "line": "Weavers/Textile workers · Crafts"
+   },
+   "why": "the house backs Royal Authority, the ruler, and Grain Holders, the ruler's high rival"
+  },
+  {
+   "detector": "law10f",
+   "law": "L10",
+   "rule": "10f-backs-wide",
+   "town": "bar0-city-under_siege+famine-rand-36",
+   "tab": "Systems/Institutions",
+   "line": "Backs · Religious Authorities · Royal Authority",
+   "against": {
+    "record": "powerStructure.conflicts: Royal Authority vs Religious Authorities · high",
+    "line": "Elder Grove Council · Religious"
+   },
+   "why": "the house backs Royal Authority, the ruler, and Religious Authorities, the ruler's high rival"
+  },
+  {
+   "detector": "law10e",
+   "law": "L10",
+   "rule": "10e-temper",
+   "town": "bar0-city-under_siege+famine-rand-38",
+   "tab": "World/NPCs",
+   "line": "Temperament: incorruptible",
+   "against": {
+    "record": "npcs[npc_merchant_guilds_15_40].personality.dominant \"incorruptible\" ↔ secret.what",
+    "tab": "World/NPCs",
+    "line": "Secret: Has documentation proving the famine was made worse by decisions taken by Religious Authorities, and has been paid to lose it"
+   },
+   "why": "Uinal Pech's card prints temperament \"incorruptible\" and a secret that denies it: \"Has documentation proving the famine was made worse by decisions taken by Religi\""
+  },
+  {
+   "detector": "law10f",
+   "law": "L10",
+   "rule": "10f-backs-wide",
+   "town": "bar0-city-under_siege+famine-rand-38",
+   "tab": "Systems/Institutions",
+   "line": "Backs · War Council · Merchant oligarchy",
+   "against": {
+    "record": "powerStructure.conflicts: Merchant oligarchy vs War Council · high",
+    "line": "Hired blades · Adventuring"
+   },
+   "why": "the house backs Merchant oligarchy, the ruler, and War Council, the ruler's high rival"
+  },
+  {
+   "detector": "law10f",
+   "law": "L10",
+   "rule": "10f-backs-wide",
+   "town": "bar0-city-under_siege+famine-rand-38",
+   "tab": "Systems/Institutions",
+   "line": "Backs · Merchant oligarchy · War Council",
+   "against": {
+    "record": "powerStructure.conflicts: Merchant oligarchy vs War Council · high",
+    "line": "Bowyers & fletchers (guild) · Crafts"
+   },
+   "why": "the house backs Merchant oligarchy, the ruler, and War Council, the ruler's high rival"
+  },
+  {
+   "detector": "law10e",
+   "law": "L10",
+   "rule": "10e-temper-manner",
+   "town": "bar0-city-under_siege+famine-rand-39",
+   "tab": "World/NPCs",
+   "line": "Temperament: forthright",
+   "against": {
+    "record": "npcs[npc_garrison].personality.dominant \"forthright\" ↔ secret.what",
+    "tab": "World/NPCs",
+    "line": "Secret: Their appointment was secured through forged credentials"
+   },
+   "why": "Christos Limniotes's card prints temperament \"forthright\" and a secret that denies it: \"Their appointment was secured through forged credentials\""
+  },
+  {
+   "detector": "law10f",
+   "law": "L10",
+   "rule": "10f-kind",
+   "town": "bar0-city-under_siege+famine-rand-41",
+   "tab": "Systems/Power",
+   "line": "A full council governs the city: aldermen, guild masters and appointed officials see to its taxes, its laws and its streets.",
+   "against": {
+    "record": "powerStructure.factions[Ecclesiastical Council] category religious (governing) · power 26 Significant · tier city"
+   },
+   "why": "the governing Ecclesiastical Council is a religious power; its card gives it a secular council's description"
+  },
+  {
+   "detector": "law10f",
+   "law": "L10",
+   "rule": "10f-backs-wide",
+   "town": "bar0-city-under_siege+famine-rand-41",
+   "tab": "Systems/Institutions",
+   "line": "Backs · Grain Holders · Ecclesiastical Council",
+   "against": {
+    "record": "powerStructure.conflicts: Ecclesiastical Council vs Grain Holders · high",
+    "line": "Printing house · Crafts · Impaired"
+   },
+   "why": "the house backs Ecclesiastical Council, the ruler, and Grain Holders, the ruler's high rival"
+  },
+  {
+   "detector": "law10f",
+   "law": "L10",
+   "rule": "10f-backs-wide",
+   "town": "bar0-city-under_siege+famine-rand-41",
+   "tab": "Systems/Institutions",
+   "line": "Backs · Ecclesiastical Council · Grain Holders",
+   "against": {
+    "record": "powerStructure.conflicts: Ecclesiastical Council vs Grain Holders · high",
+    "line": "Red light district · Entertainment"
+   },
+   "why": "the house backs Ecclesiastical Council, the ruler, and Grain Holders, the ruler's high rival"
+  },
+  {
+   "detector": "law10e",
+   "law": "L10",
+   "rule": "10e-temper-manner",
+   "town": "bar0-city-wartime-rand-29",
+   "tab": "World/NPCs",
+   "line": "Temperament: forthright",
+   "against": {
+    "record": "npcs[npc_city_granaries].personality.dominant \"forthright\" ↔ secret.what",
+    "tab": "World/NPCs",
+    "line": "Secret: Falsified the conscription rolls to keep their own household's men home, filling the quota with the names of the poor and the friendless"
+   },
+   "why": "Latifa al-Aziz's card prints temperament \"forthright\" and a secret that denies it: \"Falsified the conscription rolls to keep their own household's men home, filling\""
+  },
+  {
+   "detector": "law10c",
+   "law": "L10",
+   "rule": "10c",
+   "town": "bar0-city-wartime-rand-30",
+   "tab": "Systems/Institutions",
+   "line": "Connection: Wharfinger Peng Wu",
+   "against": {
+    "record": "npcs[npc_harbour_master_s_office].title \"the harbour master\"; Xia Wang: \"the wharfinger\""
+   },
+   "why": "the page calls Peng Wu \"Wharfinger\", the roster's title of Xia Wang; Peng Wu is the harbour master"
+  },
+  {
+   "detector": "law10c",
+   "law": "L10",
+   "rule": "10c",
+   "town": "bar0-city-wartime-rand-30",
+   "tab": "World/NPCs",
+   "line": "Wharfinger",
+   "against": {
+    "record": "npcs[npc_harbour_master_s_office].title \"the harbour master\"; Xia Wang: \"the wharfinger\""
+   },
+   "why": "the page calls Peng Wu \"Wharfinger\", the roster's title of Xia Wang; Peng Wu is the harbour master"
+  },
+  {
+   "detector": "law10e",
+   "law": "L10",
+   "rule": "10e-pay",
+   "town": "bar0-city-wartime-rand-31",
+   "tab": "Systems/Defense",
+   "line": "The garrison and city watch are well paid, well equipped and patrol properly. They come when called, and though some take bribes, it is not the custom. A wrong done here goes before the court, and the guilty can be locked up for it. The garrison and city watch keep the gates, but smugglers have ways in beneath the walls. Hired swords back the garrison when the purse allows.",
+   "against": {
+    "tab": "World/NPCs",
+    "line": "Keeps order while money is short, when trouble grows and the pay for stopping it shrinks."
+   },
+   "why": "the forces are printed well paid; another line says their pay is cut"
+  },
+  {
+   "detector": "law10e",
+   "law": "L10",
+   "rule": "10e-temper-honest",
+   "town": "bar0-city-wartime-rand-32",
+   "tab": "World/NPCs",
+   "line": "Temperament: plain-dealing",
+   "against": {
+    "record": "npcs[npc_inns_and_taverns_district].personality.dominant \"plain-dealing\" ↔ secret.what",
+    "tab": "World/NPCs",
+    "line": "Secret: Falsified the conscription rolls to keep their own household's men home, filling the quota with the names of the poor and the friendless"
+   },
+   "why": "Leupold Vogt's card prints temperament \"plain-dealing\" and a secret that denies it: \"Falsified the conscription rolls to keep their own household's men home, filling\""
+  },
+  {
+   "detector": "law10g",
+   "law": "L10",
+   "rule": "10g-legacy",
+   "town": "bar0-city-wartime-rand-32",
+   "tab": "World/History",
+   "line": "Much of what stands in Kaltenturm now was built after the economic divide, and that legacy is years old.",
+   "against": {
+    "record": "history.historicalEvents: The Economic Divide (economic, economic_disparity, minor, 5y)"
+   },
+   "why": "the line has the town built after \"economic divide\", an event that destroyed nothing"
+  },
+  {
+   "detector": "law10e",
+   "law": "L10",
+   "rule": "10e-temper-honest",
+   "town": "bar0-city-wartime-rand-34",
+   "tab": "World/NPCs",
+   "line": "Flaw: vain Temperament: honest",
+   "against": {
+    "record": "npcs[npc_veiled_7617dbf9d4f061a7].personality.dominant \"honest\" ↔ secret.what",
+    "tab": "World/NPCs",
+    "line": "Secret: Made up a piece of news that ruined a family, because someone paid for it"
+   },
+   "why": "Denis Ivanov's card prints temperament \"honest\" and a secret that denies it: \"Made up a piece of news that ruined a family, because someone paid for it\""
+  },
+  {
+   "detector": "law10f",
+   "law": "L10",
+   "rule": "10f-backs-wide",
+   "town": "bar0-city-wartime-rand-35",
+   "tab": "Systems/Institutions",
+   "line": "Backs · Corrupt City Council · Merchant Guilds",
+   "against": {
+    "record": "powerStructure.conflicts: Corrupt City Council vs Merchant Guilds · high",
+    "line": "Weavers/Textile workers · Crafts"
+   },
+   "why": "the house backs Corrupt City Council, the ruler, and Merchant Guilds, the ruler's high rival"
+  },
+  {
+   "detector": "law10f",
+   "law": "L10",
+   "rule": "10f-backs-wide",
+   "town": "bar0-city-wartime-rand-35",
+   "tab": "Systems/Institutions",
+   "line": "Backs · Merchant Guilds · Corrupt City Council",
+   "against": {
+    "record": "powerStructure.conflicts: Corrupt City Council vs Merchant Guilds · high",
+    "line": "Docks/port facilities · Economy · Vulnerable"
+   },
+   "why": "the house backs Corrupt City Council, the ruler, and Merchant Guilds, the ruler's high rival"
+  },
+  {
+   "detector": "law10d",
+   "law": "L10",
+   "rule": "10d-seat",
+   "town": "bar0-city-wartime-rand-36",
+   "tab": "World/Relationships",
+   "line": "Tlachtga O'Meara has asked for a seat on the council as a condition of the next loan. Clíodhna O'Dwyer has three weeks to answer.",
+   "against": {
+    "record": "npcs[npc_city_granaries].memberships: Merchant City Council (a member, not veiled)"
+   },
+   "why": "Tlachtga O'Meara asks for a seat on the council and already sits on Merchant City Council, the governing power"
+  },
+  {
+   "detector": "law10d",
+   "law": "L10",
+   "rule": "10d-purse",
+   "town": "bar0-city-wartime-rand-36",
+   "tab": "World/Relationships",
+   "line": "Clíodhna O'Dwyer's treasury borrowed from Tlachtga O'Meara to cover a bad harvest and has borrowed every year since. The interest is paid before the wages.",
+   "against": {
+    "tab": "Systems/Economics",
+    "line": "With a little left over each year, Eassike gets by on a broad base of trades, and every year people argue over how to spend it."
+   },
+   "why": "the tie says the treasury borrows every year or cannot meet its interest; the page says it runs a little ahead"
+  },
+  {
+   "detector": "law10f",
+   "law": "L10",
+   "rule": "10f-backs-wide",
+   "town": "bar0-city-wartime-rand-36",
+   "tab": "Systems/Institutions",
+   "line": "Backs · Merchant City Council · Merchant Guilds",
+   "against": {
+    "record": "powerStructure.conflicts: Merchant City Council vs Merchant Guilds · high",
+    "line": "Weavers/Textile workers · Crafts"
+   },
+   "why": "the house backs Merchant City Council, the ruler, and Merchant Guilds, the ruler's high rival"
+  },
+  {
+   "detector": "law10f",
+   "law": "L10",
+   "rule": "10f-backs-wide",
+   "town": "bar0-city-wartime-rand-36",
+   "tab": "Systems/Institutions",
+   "line": "Backs · Merchant Guilds · Merchant City Council",
+   "against": {
+    "record": "powerStructure.conflicts: Merchant City Council vs Merchant Guilds · high",
+    "line": "Mine · Economy"
+   },
+   "why": "the house backs Merchant City Council, the ruler, and Merchant Guilds, the ruler's high rival"
+  },
+  {
+   "detector": "law10e",
+   "law": "L10",
+   "rule": "10e-temper",
+   "town": "bar0-city-wartime-rand-37",
+   "tab": "World/NPCs",
+   "line": "Flaw: petty Temperament: incorruptible",
+   "against": {
+    "record": "npcs[npc_cooper].personality.dominant \"incorruptible\" ↔ secret.what",
+    "tab": "World/NPCs",
+    "line": "Secret: Has been feeding the enemy's quartermasters the same false supply figures they feed their own, playing both requisitions for the skim"
+   },
+   "why": "Rian Kelly's card prints temperament \"incorruptible\" and a secret that denies it: \"Has been feeding the enemy's quartermasters the same false supply figures they f\""
+  },
+  {
+   "detector": "law10f",
+   "law": "L10",
+   "rule": "10f-backs-wide",
+   "town": "bar0-city-wartime-rand-37",
+   "tab": "Systems/Institutions",
+   "line": "Backs · Merchant Guild Council · Merchant Guilds",
+   "against": {
+    "record": "powerStructure.conflicts: Merchant Guild Council vs Merchant Guilds · high",
+    "line": "Weavers/Textile workers · Crafts"
+   },
+   "why": "the house backs Merchant Guild Council, the ruler, and Merchant Guilds, the ruler's high rival"
+  },
+  {
+   "detector": "law10f",
+   "law": "L10",
+   "rule": "10f-backs-wide",
+   "town": "bar0-city-wartime-rand-37",
+   "tab": "Systems/Institutions",
+   "line": "Backs · Merchant Guilds · Merchant Guild Council",
+   "against": {
+    "record": "powerStructure.conflicts: Merchant Guild Council vs Merchant Guilds · high",
+    "line": "Theaters · Entertainment"
+   },
+   "why": "the house backs Merchant Guild Council, the ruler, and Merchant Guilds, the ruler's high rival"
+  },
+  {
+   "detector": "law10f",
+   "law": "L10",
+   "rule": "10f-backs",
+   "town": "bar0-city-wartime-rand-37",
+   "tab": "Systems/Institutions",
+   "line": "Backs · Merchant Guild Council · Merchant Guilds",
+   "against": {
+    "record": "powerStructure.conflicts: Merchant Guild Council vs Merchant Guilds · high",
+    "line": "Guild consortium · Government"
+   },
+   "why": "the house, the ruler's own seat, backs Merchant Guild Council, the ruler, and Merchant Guilds, the ruler's high rival"
+  },
+  {
+   "detector": "law10f",
+   "law": "L10",
+   "rule": "10f-backs-wide",
+   "town": "bar0-city-wartime-rand-38",
+   "tab": "Systems/Institutions",
+   "line": "Backs · Democratic assembly · Merchant Guilds",
+   "against": {
+    "record": "powerStructure.conflicts: Democratic assembly vs Merchant Guilds · high",
+    "line": "Weavers/Textile workers · Crafts · Vulnerable"
+   },
+   "why": "the house backs Democratic assembly, the ruler, and Merchant Guilds, the ruler's high rival"
+  },
+  {
+   "detector": "law10h",
+   "law": "L10",
+   "rule": "10h",
+   "town": "bar0-city-wartime-rand-40",
+   "tab": "Summary/Plot Hooks",
+   "line": "A ruling on authority over military conscription lists went Military/Guard's way, and Noble Governorship has simply carried on as though it did not.",
+   "against": {
+    "record": "powerStructure.factions[\"Military/Guard\"] (the roster label)"
+   },
+   "why": "the roster label \"Military/Guard\" is used as a name (\"Military/Guard's way, and Noble Governor…\"); its prose form is \"The Guard\""
+  },
+  {
+   "detector": "law10e",
+   "law": "L10",
+   "rule": "10e-temper-manner",
+   "town": "bar0-hamlet-calm-rand-28",
+   "tab": "World/NPCs",
+   "line": "Flaw: petty Temperament: forthright",
+   "against": {
+    "record": "npcs[npc_alehouse].personality.dominant \"forthright\" ↔ secret.what",
+    "tab": "World/NPCs",
+    "line": "Secret: Knows their celebrated family history is fabricated, and helped fabricate it"
+   },
+   "why": "Yax Hau's card prints temperament \"forthright\" and a secret that denies it: \"Knows their celebrated family history is fabricated, and helped fabricate it\""
+  },
+  {
+   "detector": "law10f",
+   "law": "L10",
+   "rule": "10f-backs",
+   "town": "bar0-metropolis-calm-rand-28",
+   "tab": "Systems/Institutions",
+   "line": "Backs · Craft Guilds · Grand Guild Consortium",
+   "against": {
+    "record": "powerStructure.conflicts: Grand Guild Consortium vs Craft Guilds · high",
+    "line": "Guild consortium · Government"
+   },
+   "why": "the house, the ruler's own seat, backs Grand Guild Consortium, the ruler, and Craft Guilds, the ruler's high rival"
+  },
+  {
+   "detector": "law10c",
+   "law": "L10",
+   "rule": "10c",
+   "town": "bar0-metropolis-calm-rand-29",
+   "tab": "Systems/Institutions",
+   "line": "Connection: Wharfinger Xiao Lin",
+   "against": {
+    "record": "npcs[npc_harbour_master_s_office].title \"the harbour master\"; Yu Ito: \"the wharfinger\""
+   },
+   "why": "the page calls Xiao Lin \"Wharfinger\", the roster's title of Yu Ito; Xiao Lin is the harbour master"
+  },
+  {
+   "detector": "law10c",
+   "law": "L10",
+   "rule": "10c",
+   "town": "bar0-metropolis-calm-rand-29",
+   "tab": "World/NPCs",
+   "line": "Wharfinger",
+   "against": {
+    "record": "npcs[npc_harbour_master_s_office].title \"the harbour master\"; Yu Ito: \"the wharfinger\""
+   },
+   "why": "the page calls Xiao Lin \"Wharfinger\", the roster's title of Yu Ito; Xiao Lin is the harbour master"
+  },
+  {
+   "detector": "law10d",
+   "law": "L10",
+   "rule": "10d-seat",
+   "town": "bar0-metropolis-calm-rand-29",
+   "tab": "World/Relationships",
+   "line": "Jong Sun has asked for a seat on the council as a condition of the next loan. Dan Yoshida (the prison warden) has three weeks to answer.",
+   "against": {
+    "record": "npcs[npc_mine].memberships: Grand Merchant Senate (a member, not veiled)"
+   },
+   "why": "Jong Sun asks for a seat on the council and already sits on Grand Merchant Senate, the governing power"
+  },
+  {
+   "detector": "law10f",
+   "law": "L10",
+   "rule": "10f-backs-wide",
+   "town": "bar0-metropolis-calm-rand-29",
+   "tab": "Systems/Institutions",
+   "line": "Backs · Merchant Guilds · Grand Merchant Senate",
+   "against": {
+    "record": "powerStructure.conflicts: Grand Merchant Senate vs Merchant Guilds · high",
+    "line": "Docks/port facilities · Economy"
+   },
+   "why": "the house backs Grand Merchant Senate, the ruler, and Merchant Guilds, the ruler's high rival"
+  },
+  {
+   "detector": "law10f",
+   "law": "L10",
+   "rule": "10f-backs-wide",
+   "town": "bar0-metropolis-calm-rand-29",
+   "tab": "Systems/Institutions",
+   "line": "Backs · Grand Merchant Senate · Merchant Guilds",
+   "against": {
+    "record": "powerStructure.conflicts: Grand Merchant Senate vs Merchant Guilds · high",
+    "line": "Colosseum/arena · Entertainment"
+   },
+   "why": "the house backs Grand Merchant Senate, the ruler, and Merchant Guilds, the ruler's high rival"
+  },
+  {
+   "detector": "law10f",
+   "law": "L10",
+   "rule": "10f-weight",
+   "town": "bar0-metropolis-calm-rand-30",
+   "tab": "Systems/Power",
+   "line": "Minor landed families with limited political reach; present in civic life but rarely decisive. The merchant guilds now have more say: the noble families keep their titles, their land and their precedence, but the money has moved.",
+   "against": {
+    "record": "Noble Houses power 7 (Suppressed) > Merchant Guilds power 7 (Suppressed)"
+   },
+   "why": "the card says The merchant guilds have more say; the page's own weights put Merchant Guilds below Noble Houses"
+  },
+  {
+   "detector": "law10e",
+   "law": "L10",
+   "rule": "10e-temper",
+   "town": "bar0-metropolis-calm-rand-31",
+   "tab": "World/NPCs",
+   "line": "Temperament: incorruptible",
+   "against": {
+    "record": "npcs[npc_post_relay_station].personality.dominant \"incorruptible\" ↔ secret.what",
+    "tab": "World/NPCs",
+    "line": "Secret: Charges for fast riders and sends the letters with the slow carts, keeping the difference"
+   },
+   "why": "Kaban Hau's card prints temperament \"incorruptible\" and a secret that denies it: \"Charges for fast riders and sends the letters with the slow carts, keeping the d\""
+  },
+  {
+   "detector": "law10e",
+   "law": "L10",
+   "rule": "10e-temper-honest",
+   "town": "bar0-metropolis-calm-rand-31",
+   "tab": "World/NPCs",
+   "line": "Flaw: lazy Temperament: plain-dealing",
+   "against": {
+    "record": "npcs[npc_parish_churches_50_100].personality.dominant \"plain-dealing\" ↔ secret.what",
+    "tab": "World/NPCs",
+    "line": "Secret: Has been systematically falsifying miracle reports for decades"
+   },
+   "why": "Owl Ku's card prints temperament \"plain-dealing\" and a secret that denies it: \"Has been systematically falsifying miracle reports for decades\""
+  },
+  {
+   "detector": "law10f",
+   "law": "L10",
+   "rule": "10f-backs-wide",
+   "town": "bar0-metropolis-calm-rand-32",
+   "tab": "Systems/Institutions",
+   "line": "Backs · Merchant Guilds · Arcane Senate",
+   "against": {
+    "record": "powerStructure.conflicts: Arcane Senate vs Merchant Guilds · high",
+    "line": "Docks/port facilities · Economy · Vulnerable"
+   },
+   "why": "the house backs Arcane Senate, the ruler, and Merchant Guilds, the ruler's high rival"
+  },
+  {
+   "detector": "law10f",
+   "law": "L10",
+   "rule": "10f-backs-wide",
+   "town": "bar0-metropolis-calm-rand-32",
+   "tab": "Systems/Institutions",
+   "line": "Backs · Arcane Senate · Merchant Guilds",
+   "against": {
+    "record": "powerStructure.conflicts: Arcane Senate vs Merchant Guilds · high",
+    "line": "Red light district · Entertainment"
+   },
+   "why": "the house backs Arcane Senate, the ruler, and Merchant Guilds, the ruler's high rival"
+  },
+  {
+   "detector": "law10f",
+   "law": "L10",
+   "rule": "10f-kind",
+   "town": "bar0-metropolis-calm-rand-33",
+   "tab": "Systems/Power",
+   "line": "A grand council of senior officials, guild masters, and appointed magnates governs the metropolis; the council is always split into camps, and real power shifts between blocs.",
+   "against": {
+    "record": "powerStructure.factions[High Theocratic Council] category religious (governing) · power 35 Strong · tier metropolis"
+   },
+   "why": "the governing High Theocratic Council is a religious power; its card gives it a secular council's description"
+  },
+  {
+   "detector": "law10f",
+   "law": "L10",
+   "rule": "10f-backs-wide",
+   "town": "bar0-metropolis-calm-rand-34",
+   "tab": "Systems/Institutions",
+   "line": "Backs · Royal Authority · Merchant Guilds",
+   "against": {
+    "record": "powerStructure.conflicts: Royal Authority vs Merchant Guilds · high",
+    "line": "Multiple adventurers' guilds · Adventuring"
+   },
+   "why": "the house backs Royal Authority, the ruler, and Merchant Guilds, the ruler's high rival"
+  },
+  {
+   "detector": "law10f",
+   "law": "L10",
+   "rule": "10f-backs-wide",
+   "town": "bar0-metropolis-calm-rand-34",
+   "tab": "Systems/Institutions",
+   "line": "Backs · Merchant Guilds · Royal Authority",
+   "against": {
+    "record": "powerStructure.conflicts: Royal Authority vs Merchant Guilds · high",
+    "line": "Mercenary quarter · Defense · Vulnerable"
+   },
+   "why": "the house backs Royal Authority, the ruler, and Merchant Guilds, the ruler's high rival"
+  },
+  {
+   "detector": "law10f",
+   "law": "L10",
+   "rule": "10f-tier",
+   "town": "bar0-metropolis-calm-rand-35",
+   "tab": "Systems/Power",
+   "line": "A small group of traders who come on market days; they speak up in small disputes but carry little weight beyond them.",
+   "against": {
+    "record": "powerStructure.factions[Merchant Guilds] category economy · power 6 Suppressed · tier metropolis"
+   },
+   "why": "a market-day traders' blurb for a power of a metropolis"
+  },
+  {
+   "detector": "law10g",
+   "law": "L10",
+   "rule": "10g-legacy",
+   "town": "bar0-metropolis-calm-rand-35",
+   "tab": "World/History",
+   "line": "Much of what stands in Sundhavn now was built after the interregnum, and that legacy is older than anyone living.",
+   "against": {
+    "record": "history.historicalEvents: The Interregnum (political, leadership_vacuum, catastrophic, 257y)"
+   },
+   "why": "the line has the town built after \"interregnum\", an event that destroyed nothing"
+  },
+  {
+   "detector": "law10b",
+   "law": "L10",
+   "rule": "10b",
+   "town": "bar0-metropolis-calm-rand-36",
+   "tab": "Summary/Plot Hooks",
+   "line": "The garrison chaplain and the commander are the same man. He's authorizing military action for reasons that sound theological.",
+   "against": {
+    "record": "economicState.safetyProfile.plotHooks ↔ npcs: Orlaith Kennedy (female), the garrison commander"
+   },
+   "why": "the hook's \"he/the same man\" is \"the commander\", and the roster's commander is female"
+  },
+  {
+   "detector": "law10e",
+   "law": "L10",
+   "rule": "10e-temper",
+   "town": "bar0-metropolis-calm-rand-36",
+   "tab": "World/NPCs",
+   "line": "Flaw: cruel Temperament: incorruptible",
+   "against": {
+    "record": "npcs[npc_major_monasteries_5_10].personality.dominant \"incorruptible\" ↔ secret.what",
+    "tab": "World/NPCs",
+    "line": "Secret: Has been embezzling from the organisation they oversee for three years"
+   },
+   "why": "Ian MacIntyre's card prints temperament \"incorruptible\" and a secret that denies it: \"Has been embezzling from the organisation they oversee for three years\""
+  },
+  {
+   "detector": "law10f",
+   "law": "L10",
+   "rule": "10f-backs-wide",
+   "town": "bar0-metropolis-calm-rand-36",
+   "tab": "Systems/Institutions",
+   "line": "Backs · Merchant Guilds · City-State Council",
+   "against": {
+    "record": "powerStructure.conflicts: City-State Council vs Merchant Guilds · high",
+    "line": "Mine · Economy"
+   },
+   "why": "the house backs City-State Council, the ruler, and Merchant Guilds, the ruler's high rival"
+  },
+  {
+   "detector": "law10f",
+   "law": "L10",
+   "rule": "10f-backs-wide",
+   "town": "bar0-metropolis-calm-rand-36",
+   "tab": "Systems/Institutions",
+   "line": "Backs · City-State Council · Merchant Guilds",
+   "against": {
+    "record": "powerStructure.conflicts: City-State Council vs Merchant Guilds · high",
+    "line": "Brothel (red light district) · Entertainment"
+   },
+   "why": "the house backs City-State Council, the ruler, and Merchant Guilds, the ruler's high rival"
+  },
+  {
+   "detector": "law10g",
+   "law": "L10",
+   "rule": "10g-span",
+   "town": "bar0-metropolis-calm-rand-36",
+   "tab": "World/History",
+   "line": "For 2 seasons a sickness worked through the settlement, emptying households and straining every institution past what it was built to bear",
+   "against": {
+    "tab": "World/History",
+    "line": "A sickness moved through the settlement for three seasons, thinning families and testing every institution to its limit",
+    "record": "history.historicalEvents / history.currentTensions · plague_years: 2 season vs 3 season"
+   },
+   "why": "the same plague_years is told twice on one tab, lasting 2 season and 3 season"
+  },
+  {
+   "detector": "law10c",
+   "law": "L10",
+   "rule": "10c",
+   "town": "bar0-metropolis-calm-rand-37",
+   "tab": "Systems/Institutions",
+   "line": "Connection: Wharfinger Brigid Ward",
+   "against": {
+    "record": "npcs[npc_harbour_master_s_office].title \"the harbour master\"; Ide MacGregor: \"the wharfinger\""
+   },
+   "why": "the page calls Brigid Ward \"Wharfinger\", the roster's title of Ide MacGregor; Brigid Ward is the harbour master"
+  },
+  {
+   "detector": "law10c",
+   "law": "L10",
+   "rule": "10c",
+   "town": "bar0-metropolis-calm-rand-37",
+   "tab": "World/NPCs",
+   "line": "Wharfinger",
+   "against": {
+    "record": "npcs[npc_harbour_master_s_office].title \"the harbour master\"; Ide MacGregor: \"the wharfinger\""
+   },
+   "why": "the page calls Brigid Ward \"Wharfinger\", the roster's title of Ide MacGregor; Brigid Ward is the harbour master"
+  },
+  {
+   "detector": "law10f",
+   "law": "L10",
+   "rule": "10f-backs",
+   "town": "bar0-metropolis-calm-rand-37",
+   "tab": "Systems/Institutions",
+   "line": "Backs · Craft Guilds · Grand Guild Consortium",
+   "against": {
+    "record": "powerStructure.conflicts: Grand Guild Consortium vs Craft Guilds · high",
+    "line": "Guild consortium · Government"
+   },
+   "why": "the house, the ruler's own seat, backs Grand Guild Consortium, the ruler, and Craft Guilds, the ruler's high rival"
+  },
+  {
+   "detector": "law10c",
+   "law": "L10",
+   "rule": "10c",
+   "town": "bar0-metropolis-calm-rand-39",
+   "tab": "Systems/Institutions",
+   "line": "Connection: Wharfinger Drusus Nerva",
+   "against": {
+    "record": "npcs[npc_harbour_master_s_office].title \"the harbour master\"; Scipio Falco: \"the wharfinger\""
+   },
+   "why": "the page calls Drusus Nerva \"Wharfinger\", the roster's title of Scipio Falco; Drusus Nerva is the harbour master"
+  },
+  {
+   "detector": "law10c",
+   "law": "L10",
+   "rule": "10c",
+   "town": "bar0-metropolis-calm-rand-39",
+   "tab": "World/NPCs",
+   "line": "Wharfinger",
+   "against": {
+    "record": "npcs[npc_harbour_master_s_office].title \"the harbour master\"; Scipio Falco: \"the wharfinger\""
+   },
+   "why": "the page calls Drusus Nerva \"Wharfinger\", the roster's title of Scipio Falco; Drusus Nerva is the harbour master"
+  },
+  {
+   "detector": "law10e",
+   "law": "L10",
+   "rule": "10e-temper-manner",
+   "town": "bar0-metropolis-calm-rand-39",
+   "tab": "World/NPCs",
+   "line": "Flaw: reckless Temperament: candid",
+   "against": {
+    "record": "npcs[npc_mages_district].personality.dominant \"candid\" ↔ secret.what",
+    "tab": "World/NPCs",
+    "line": "Secret: Their celebrated origin story is a fabrication they created to escape an intolerable past"
+   },
+   "why": "Crispus Maximus's card prints temperament \"candid\" and a secret that denies it: \"Their celebrated origin story is a fabrication they created to escape an intoler\""
+  },
+  {
+   "detector": "law10f",
+   "law": "L10",
+   "rule": "10f-kind",
+   "town": "bar0-metropolis-calm-rand-39",
+   "tab": "Systems/Power",
+   "line": "A grand council of senior officials, guild masters, and appointed magnates governs the metropolis; the council is always split into camps, and real power shifts between blocs.",
+   "against": {
+    "record": "powerStructure.factions[High Theocratic Council] category religious (governing) · power 37 Dominant · tier metropolis"
+   },
+   "why": "the governing High Theocratic Council is a religious power; its card gives it a secular council's description"
+  },
+  {
+   "detector": "law10g",
+   "law": "L10",
+   "rule": "10g-legacy",
+   "town": "bar0-metropolis-calm-rand-39",
+   "tab": "World/History",
+   "line": "Much of what stands in Albamunicipium now was built after the interregnum, and that legacy is a generation old.",
+   "against": {
+    "record": "history.historicalEvents: The Interregnum (political, leadership_vacuum, major, 57y)"
+   },
+   "why": "the line has the town built after \"interregnum\", an event that destroyed nothing"
+  },
+  {
+   "detector": "law10f",
+   "law": "L10",
+   "rule": "10f-backs-wide",
+   "town": "bar0-metropolis-calm-rand-41",
+   "tab": "Systems/Institutions",
+   "line": "Backs · Noble Houses · Ducal Governorship",
+   "against": {
+    "record": "powerStructure.conflicts: Ducal Governorship vs Noble Houses · high",
+    "line": "Bardic college · Entertainment"
+   },
+   "why": "the house backs Ducal Governorship, the ruler, and Noble Houses, the ruler's high rival"
+  },
+  {
+   "detector": "law10f",
+   "law": "L10",
+   "rule": "10f-backs-wide",
+   "town": "bar0-metropolis-calm-rand-41",
+   "tab": "Systems/Institutions",
+   "line": "Backs · Ducal Governorship · Noble Houses",
+   "against": {
+    "record": "powerStructure.conflicts: Ducal Governorship vs Noble Houses · high",
+    "line": "Colosseum/arena · Entertainment"
+   },
+   "why": "the house backs Ducal Governorship, the ruler, and Noble Houses, the ruler's high rival"
+  },
+  {
+   "detector": "law10f",
+   "law": "L10",
+   "rule": "10f-backs",
+   "town": "bar0-metropolis-calm-rand-41",
+   "tab": "Systems/Institutions",
+   "line": "Backs · Noble Houses · Ducal Governorship",
+   "against": {
+    "record": "powerStructure.conflicts: Ducal Governorship vs Noble Houses · high",
+    "line": "Noble governor · Government"
+   },
+   "why": "the house, the ruler's own seat, backs Ducal Governorship, the ruler, and Noble Houses, the ruler's high rival"
+  },
+  {
+   "detector": "law10c",
+   "law": "L10",
+   "rule": "10c",
+   "town": "bar0-town-calm-rand-27",
+   "tab": "Systems/Institutions",
+   "line": "Connection: Wharfinger Narantuya Kiyad",
+   "against": {
+    "record": "npcs[npc_harbour_master_s_office].title \"the harbour master\"; Narantuya Kereit: \"the wharfinger\""
+   },
+   "why": "the page calls Narantuya Kiyad \"Wharfinger\", the roster's title of Narantuya Kereit; Narantuya Kiyad is the harbour master"
+  },
+  {
+   "detector": "law10c",
+   "law": "L10",
+   "rule": "10c",
+   "town": "bar0-town-calm-rand-27",
+   "tab": "World/NPCs",
+   "line": "Wharfinger",
+   "against": {
+    "record": "npcs[npc_harbour_master_s_office].title \"the harbour master\"; Narantuya Kereit: \"the wharfinger\""
+   },
+   "why": "the page calls Narantuya Kiyad \"Wharfinger\", the roster's title of Narantuya Kereit; Narantuya Kiyad is the harbour master"
+  },
+  {
+   "detector": "law10f",
+   "law": "L10",
+   "rule": "10f-backs-wide",
+   "town": "bar0-town-calm-rand-27",
+   "tab": "Systems/Institutions",
+   "line": "Backs · Craft Guilds · Guild Council",
+   "against": {
+    "record": "powerStructure.conflicts: Guild Council vs Craft Guilds · high",
+    "line": "Bowyers & fletchers (guild) · Crafts"
+   },
+   "why": "the house backs Guild Council, the ruler, and Craft Guilds, the ruler's high rival"
+  },
+  {
+   "detector": "law10f",
+   "law": "L10",
+   "rule": "10f-backs",
+   "town": "bar0-town-calm-rand-27",
+   "tab": "Systems/Institutions",
+   "line": "Backs · Craft Guilds · Guild Council",
+   "against": {
+    "record": "powerStructure.conflicts: Guild Council vs Craft Guilds · high",
+    "line": "Guild governance · Government"
+   },
+   "why": "the house, the ruler's own seat, backs Guild Council, the ruler, and Craft Guilds, the ruler's high rival"
+  },
+  {
+   "detector": "law10g",
+   "law": "L10",
+   "rule": "10g-legacy",
+   "town": "bar0-town-calm-rand-28",
+   "tab": "World/History",
+   "line": "Ask about the town's present quarrels in Agiosakra and before long somebody brings up the migration. Much of what stands in Agiosakra now was built after the economic divide, and that legacy is older than anyone living.",
+   "against": {
+    "record": "history.historicalEvents: The Economic Divide (economic, economic_disparity, major, 221y)"
+   },
+   "why": "the line has the town built after \"economic divide\", an event that destroyed nothing"
+  },
+  {
+   "detector": "law10g",
+   "law": "L10",
+   "rule": "10g-legacy",
+   "town": "bar0-town-calm-rand-29",
+   "tab": "World/History",
+   "line": "Much of what stands in Neadgill now was built after the economic divide, and that legacy is older than anyone living.",
+   "against": {
+    "record": "history.historicalEvents: The Economic Divide (economic, economic_disparity, minor, 187y)"
+   },
+   "why": "the line has the town built after \"economic divide\", an event that destroyed nothing"
+  },
+  {
+   "detector": "law10f",
+   "law": "L10",
+   "rule": "10f-backs-wide",
+   "town": "bar0-town-calm-rand-38",
+   "tab": "Systems/Institutions",
+   "line": "Backs · Craft Guilds · Merchant oligarchy",
+   "against": {
+    "record": "powerStructure.conflicts: Merchant oligarchy vs Craft Guilds · high",
+    "line": "Bowyers & fletchers (guild) · Crafts"
+   },
+   "why": "the house backs Merchant oligarchy, the ruler, and Craft Guilds, the ruler's high rival"
+  },
+  {
+   "detector": "law10f",
+   "law": "L10",
+   "rule": "10f-backs-wide",
+   "town": "bar0-town-calm-rand-40",
+   "tab": "Systems/Institutions",
+   "line": "Backs · Merchant Guilds · Military Council",
+   "against": {
+    "record": "powerStructure.conflicts: Military Council vs Merchant Guilds · high",
+    "line": "Mine · Economy"
+   },
+   "why": "the house backs Military Council, the ruler, and Merchant Guilds, the ruler's high rival"
+  },
+  {
+   "detector": "law10g",
+   "law": "L10",
+   "rule": "10g-legacy-answer",
+   "town": "bar0-town-calm-rand-40",
+   "tab": "World/History",
+   "line": "People in Tzulha still remember the succession crisis, and the memory weighs on the quarrels the town is having now. It came through the economic divide, and what the town built in answer still stands, a legacy that is older than all but the oldest alive.",
+   "against": {
+    "record": "history.historicalEvents: The Economic Divide (economic, economic_disparity, minor, 68y)"
+   },
+   "why": "the line has the town built after \"economic divide\", an event that destroyed nothing"
+  },
+  {
+   "detector": "law10g",
+   "law": "L10",
+   "rule": "10g-legacy",
+   "town": "bar0-town-calm-rand-41",
+   "tab": "World/History",
+   "line": "Much of what stands in Beloovo now was built after the economic divide, and that legacy is a generation old.",
+   "against": {
+    "record": "history.historicalEvents: The Economic Divide (economic, economic_disparity, major, 52y)"
+   },
+   "why": "the line has the town built after \"economic divide\", an event that destroyed nothing"
+  },
+  {
+   "detector": "law10a",
+   "law": "L10",
+   "rule": "10a",
+   "town": "bar0-town-occupied-rand-27",
+   "tab": "Systems/Power",
+   "line": "Head · Sabir al-Ghazali, the council's fixer · answers to Corrupt Council through Rania al-Basri",
+   "against": {
+    "record": "npcs[npc_town_hall].memberships: Corrupt Council rank 1 (head) · allegiance.power Corrupt Council"
+   },
+   "why": "Sabir al-Ghazali heads Corrupt Council and is printed as answering to Corrupt Council, his or her own seat"
+  },
+  {
+   "detector": "law10a",
+   "law": "L10",
+   "rule": "10a",
+   "town": "bar0-town-occupied-rand-27",
+   "tab": "Systems/Power",
+   "line": "Partly in criminal hands. The head of Corrupt Council answers to Corrupt Council. Corrupt Council itself is run as a criminal concern.",
+   "against": {
+    "record": "npcs[npc_town_hall].memberships: Corrupt Council rank 1 (head) · allegiance.power Corrupt Council"
+   },
+   "why": "Sabir al-Ghazali heads Corrupt Council and is printed as answering to Corrupt Council, his or her own seat"
+  },
+  {
+   "detector": "law10a",
+   "law": "L10",
+   "rule": "10a",
+   "town": "bar0-town-occupied-rand-27",
+   "tab": "World/NPCs",
+   "line": "Hidden allegiance answers to Corrupt Council, through Rania al-Basri",
+   "against": {
+    "record": "npcs[npc_town_hall].memberships: Corrupt Council rank 1 (head) · allegiance.power Corrupt Council"
+   },
+   "why": "Sabir al-Ghazali heads Corrupt Council and is printed as answering to Corrupt Council, his or her own seat (on the person's own card)"
+  },
+  {
+   "detector": "law10c",
+   "law": "L10",
+   "rule": "10c",
+   "town": "bar0-town-occupied-rand-31",
+   "tab": "Systems/Institutions",
+   "line": "Connection: Wharfinger Luqman al-Nuri",
+   "against": {
+    "record": "npcs[npc_harbour_master_s_office].title \"the harbour master\"; Zakariya ibn Rushd: \"the wharfinger\""
+   },
+   "why": "the page calls Luqman al-Nuri \"Wharfinger\", the roster's title of Zakariya ibn Rushd; Luqman al-Nuri is the harbour master"
+  },
+  {
+   "detector": "law10c",
+   "law": "L10",
+   "rule": "10c",
+   "town": "bar0-town-occupied-rand-31",
+   "tab": "World/NPCs",
+   "line": "Wharfinger",
+   "against": {
+    "record": "npcs[npc_harbour_master_s_office].title \"the harbour master\"; Zakariya ibn Rushd: \"the wharfinger\""
+   },
+   "why": "the page calls Luqman al-Nuri \"Wharfinger\", the roster's title of Zakariya ibn Rushd; Luqman al-Nuri is the harbour master"
+  },
+  {
+   "detector": "law10c",
+   "law": "L10",
+   "rule": "10c",
+   "town": "bar0-town-occupied-rand-40",
+   "tab": "Systems/Institutions",
+   "line": "Connection: Wharfinger Madhuri Rao",
+   "against": {
+    "record": "npcs[npc_harbour_master_s_office].title \"the harbour master\"; Varun Mukherjee: \"the wharfinger\""
+   },
+   "why": "the page calls Madhuri Rao \"Wharfinger\", the roster's title of Varun Mukherjee; Madhuri Rao is the harbour master"
+  },
+  {
+   "detector": "law10c",
+   "law": "L10",
+   "rule": "10c",
+   "town": "bar0-town-occupied-rand-40",
+   "tab": "World/NPCs",
+   "line": "Wharfinger",
+   "against": {
+    "record": "npcs[npc_harbour_master_s_office].title \"the harbour master\"; Varun Mukherjee: \"the wharfinger\""
+   },
+   "why": "the page calls Madhuri Rao \"Wharfinger\", the roster's title of Varun Mukherjee; Madhuri Rao is the harbour master"
+  },
+  {
+   "detector": "law10e",
+   "law": "L10",
+   "rule": "10e-temper-honest",
+   "town": "bar0-village-calm-rand-28",
+   "tab": "World/NPCs",
+   "line": "Flaw: vindictive Temperament: honest",
+   "against": {
+    "record": "npcs[npc_parish_church].personality.dominant \"honest\" ↔ secret.what",
+    "tab": "World/NPCs",
+    "line": "Secret: Their celebrated origin story is a fabrication they created to escape an intolerable past"
+   },
+   "why": "Valdis Eriksson's card prints temperament \"honest\" and a secret that denies it: \"Their celebrated origin story is a fabrication they created to escape an intoler\""
+  },
+  {
+   "detector": "law10e",
+   "law": "L10",
+   "rule": "10e-house",
+   "town": "bar0-village-calm-rand-28",
+   "tab": "World/NPCs",
+   "line": "Secret: Keeps the night roster short and draws pay for names that never walk it",
+   "against": {
+    "tab": "Systems/Institutions",
+    "line": "Each household takes its turn walking the lanes after dark, a lantern kept burning at the crossroads and the alarm raised at the first sign of trouble. Nobody is paid, and the households hold the rota.",
+    "record": "npcs[npc_village_watch].institution Village watch"
+   },
+   "why": "Valdis Andersson's secret draws pay; the house card says nobody is paid"
+  },
+  {
+   "detector": "law10e",
+   "law": "L10",
+   "rule": "10e-temper-manner",
+   "town": "bar0-village-calm-rand-31",
+   "tab": "World/NPCs",
+   "line": "Temperament: forthright",
+   "against": {
+    "record": "npcs[npc_veteran_s_lodge].personality.dominant \"forthright\" ↔ secret.what",
+    "tab": "World/NPCs",
+    "line": "Secret: Lied about the battle that earned the lodge's honours, and the men who could say otherwise are almost all dead"
+   },
+   "why": "Iðunn Ingvarsson's card prints temperament \"forthright\" and a secret that denies it: \"Lied about the battle that earned the lodge's honours, and the men who could say\""
+  },
+  {
+   "detector": "law10e",
+   "law": "L10",
+   "rule": "10e-house",
+   "town": "bar0-village-calm-rand-34",
+   "tab": "World/NPCs",
+   "line": "Secret: Keeps the night roster short and draws pay for names that never walk it",
+   "against": {
+    "tab": "Systems/Institutions",
+    "line": "A rota of unpaid householders who walk the lanes by night, keep a lantern lit at the crossroads, and raise the alarm. Whose turn it is, the rota decides.",
+    "record": "npcs[npc_village_watch].institution Village watch"
+   },
+   "why": "Hyunji Zhao's secret draws pay; the house card says nobody is paid"
+  },
+  {
+   "detector": "law10f",
+   "law": "L10",
+   "rule": "10f-backs-wide",
+   "town": "bar0-village-calm-rand-39",
+   "tab": "Systems/Institutions",
+   "line": "Backs · Priestly Guidance · Merchant Guilds",
+   "against": {
+    "record": "powerStructure.conflicts: Priestly Guidance vs Merchant Guilds · high",
+    "line": "Shepherd · Economy"
+   },
+   "why": "the house backs Priestly Guidance, the ruler, and Merchant Guilds, the ruler's high rival"
+  }
+ ]
+}

@@ -1,0 +1,2 @@
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+[25] presume-town-25 — LIVENESS ANCHOR [presume-town-25: no smith]: the anchor sibling is missing from the collection, so the exclusion assertion below cannot distinguish "correctly excluded" from "the whole collection

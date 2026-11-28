@@ -33,6 +33,11 @@
  * enough for the control to convict M6 (the planted row supplies the second), but
  * a successor deleting the surveyor row would make it vacuous, which is exactly
  * why the victim list below is asserted by MEMBERSHIP rather than by count.
+ * ⚰ AT TIER-PARITY-FIX (2026-11-09; the owner: the Surveyor is "Premium only")
+ * `surveyor-stages` stopped being an equal-string row (free false, cartographer
+ * 'per task') and became the sixth CLAIMING row, driven through isSurveyorTier.
+ * The equal-string control now convicts M6 on its PLANTED row alone and asserts
+ * the real set EMPTY by membership (see the control).
  *
  * ⚰ WHAT TE-STRIP-5 TRIMMED HERE, AND WHY THIS FILE WAS TRIMMED RATHER THAN DELETED
  * (§725/§726, charter §11.2 STRIP-5). The owner's strip removed eight ladder rows and
@@ -89,6 +94,7 @@ import { ENTITLEMENT_LADDER, DEFERRED_LADDER_ROWS, VIEWING_PAYWALLS_PENDING_514 
 // zero-import data leaf, so reading it here adds no weight to this walker's closure.
 import { PDF_VARIANTS } from '../../src/pdf/variants.js';
 import { TIER_GATE } from '../../src/store/authSlice.js';
+import { isSurveyorTier } from '../../src/components/surveyor/surveyorGate.js';
 import { pricingPage } from '../../src/copy/pricingPage.js';
 
 const read = (rel) => readFileSync(resolve(process.cwd(), rel), 'utf-8');
@@ -110,6 +116,9 @@ const RESOLVERS = Object.freeze({
   'TIER_GATE.neighbour':     () => TIER_GATE.free.neighbour === false && TIER_GATE.premium.neighbour === true,
   'TIER_GATE.mapChains':     () => TIER_GATE.free.mapChains === false && TIER_GATE.premium.mapChains === true,
   'TIER_GATE.export':        () => TIER_GATE.free.export === false && TIER_GATE.premium.export === true,
+  // TIER-PARITY-FIX (2026-11-09; the owner: the Surveyor is "Premium only"): the
+  // surveyor-stages row became a CLAIMING row, enforced by THE Surveyor predicate, driven.
+  'isSurveyorTier':          () => isSurveyorTier({ tier: 'free' }) === false && isSurveyorTier({ tier: 'premium' }) === true,
 });
 
 /**
@@ -121,7 +130,9 @@ const PARITY_MARKERS = Object.freeze(new Set([
   // 'TOWN_MAP_STYLE_IDS' left with the `all-lenses` row at §725/§726: it was the
   // DERIVATION source for the advertised lens count, and both the count (LENS_COUNT)
   // and the row it fed are gone.
-  'parity', 'constitutional', 'TIER_GATE.free.maxTier', 'SURVEYOR_AI_COSTS',
+  // 'SURVEYOR_AI_COSTS' left at TIER-PARITY-FIX (2026-11-09): the surveyor-stages row it
+  // marked is a claiming row now (the Surveyor is premium only) and names 'isSurveyorTier'.
+  'parity', 'constitutional', 'TIER_GATE.free.maxTier',
 ]));
 
 describe('rule A — every row that CLAIMS a paywall names a symbol that RESOLVES', () => {
@@ -135,11 +146,13 @@ describe('rule A — every row that CLAIMS a paywall names a symbol that RESOLVE
     // tier's whole paid spine; parity lost the four map display rows (map-view,
     // provenance-hover, all-lenses, panorama). Nothing was added on either side, and
     // no surviving row changed cells — a removal moves memberships, never values.
+    // RE-RECORDED AT TIER-PARITY-FIX (2026-11-09): `surveyor-stages` moved from parity to
+    // claiming (the owner: the Surveyor is "Premium only"; free false, cartographer 'per task').
     expect(claiming).toEqual([
-      'saves', 'custom-content', 'living-realm', 'map-chains', 'export-bundle',
+      'saves', 'custom-content', 'living-realm', 'map-chains', 'export-bundle', 'surveyor-stages',
     ]);
     expect(parity).toEqual([
-      'every-size', 'gallery-viewing', 'same-engine', 'surveyor-stages',
+      'every-size', 'gallery-viewing', 'same-engine',
     ]);
     // GUARD THE GUARD: an empty claiming set would make every arm below vacuous.
     expect(claiming.length).toBeGreaterThan(0);
@@ -169,14 +182,13 @@ describe('rule A — every row that CLAIMS a paywall names a symbol that RESOLVE
     // equal-string rows with it.
     expect(planted.free !== true).toBe(true);
     const wrongPredicateVictims = ROWS.filter((r) => r.free !== true && !claims(r)).map((r) => r.id);
-    // ⚰ `all-lenses` left at §725/§726, so the real equal-string set is now this one row.
-    // Asserted by MEMBERSHIP, never by count: a successor who removed the last such row
-    // would leave the wrong predicate with no real victim to convict and this control
-    // would pass on an empty walk — which is the vacuity the header warns about.
-    expect(wrongPredicateVictims).toEqual(['surveyor-stages']);
-    expect(wrongPredicateVictims.length,
-      'no equal-string row survives — the wrong-predicate control has no real victim')
-      .toBeGreaterThan(0);
+    // ⚰ `all-lenses` left at §725/§726, and `surveyor-stages` — the last equal-string row —
+    // became a CLAIMING row at TIER-PARITY-FIX (2026-11-09; the Surveyor is premium only).
+    // The control's REAL victim is therefore gone, and it says so rather than pass on an
+    // empty walk: the convicting half stands on the PLANTED equal-string row above (the
+    // wrong predicate convicts it, the pair does not), and the real set is asserted EMPTY by
+    // membership, so a future equal-string row reds here and re-arms the real-victim arm.
+    expect(wrongPredicateVictims).toEqual([]);
   });
 });
 

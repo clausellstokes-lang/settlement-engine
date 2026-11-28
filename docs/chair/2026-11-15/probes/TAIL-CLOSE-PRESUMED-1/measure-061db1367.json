@@ -1,0 +1,36 @@
+{
+ "measuredAt": "d7baa0621a4b699d1ddf8ba7adb334037cbadaa0",
+ "base": "origin/master",
+ "births": 1080,
+ "rows": [
+  {
+   "file": "src/domain/facts/magic.js",
+   "thing": "house: academy",
+   "text": "academy of magic",
+   "hash": "8f8aa8b21d5ed32c",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "academy of magic"
+   ],
+   "leaf": "institutions.js :: liveInstitutionNames, or a power of the name (a house named academy); its atom `house: academy` waits for a factsOf getter",
+   "printed": 58,
+   "againstN": 0,
+   "printedSeeds": [
+    "presume-metropolis-3",
+    "presume-metropolis-7",
+    "presume-metropolis-8"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".npcs[].goal.long",
+    ".npcs[].goal.short",
+    ".economicViability.issues[].description",
+    ".publicProse.blocks.economy:services.impairedService.sentence"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  }
+ ]
+}

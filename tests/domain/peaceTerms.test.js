@@ -858,7 +858,9 @@ describe('GR-3B-ORIENT A5 — the counterforce: a war treaty is priced exactly a
  *  below hand-builds a negotiated record: a fixture written to the resolver's own shape
  *  would mirror the deriver it is meant to measure. */
 function mintPact({ fromId, toId, trigger, reciprocal = false, signTick = 10, worldState = null }) {
-  const sheet = draftPactSheet({ trigger, fromId, toId, reciprocal, tick: signTick - 4 });
+  // FIX-PULSE-DEFECTS (audit C1b·113): the receipt prints the NAMES the caller reads, never ids;
+  // this fixture's courts are named as their ids, so the direction pins below read unchanged.
+  const sheet = draftPactSheet({ trigger, fromId, toId, reciprocal, tick: signTick - 4, fromName: fromId, toName: toId });
   return signPactProposal({
     worldState: worldState || {
       rngSeed: 'gr3b-orient', simulationRules: { pactFormationEnabled: true },

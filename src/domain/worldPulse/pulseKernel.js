@@ -761,7 +761,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
         s = withActiveCondition(s, {
           archetype: 'council_schism',
           label: 'Council schism',
-          description: 'The ruling council is split: a faction reads the outside world differently from the seat.',
+          description: 'The ruling council is split: one of its powers sees the dangers abroad differently from the seat.',
           affectedSystems: ['public_legitimacy', 'faction_power', 'social_trust'],
           severity: schism.severity,
           triggeredAt: { tick: worldState.tick, sourceEventType: 'BELIEF_DISSENT', sourceEventTargetId: String(sid) },
@@ -769,8 +769,8 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
             source: `faction:${schism.factionKey}`,
             effect: 'council_schism',
             reason: schism.relFlip
-              ? `The ${schism.factionKey} faction reads ${schism.subjectId} on a different footing than the seat. A stance the ruling coalition has not accepted.`
-              : `The ${schism.factionKey} faction reads ${schism.subjectId}'s strength ${schism.bandGap} bands from the seat's; the council is split over which threat is real.`,
+              ? `The ${schism.factionKey} power reads ${schism.subjectId} on a different footing than the seat. A stance the ruling coalition has not accepted.`
+              : `The ${schism.factionKey} power reads ${schism.subjectId}'s strength ${schism.bandGap} bands from the seat's; the council is split over which threat is real.`,
           }],
         });
       }

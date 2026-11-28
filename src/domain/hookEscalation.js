@@ -35,6 +35,8 @@ import { deriveAllSupplyChainStates } from './supplyChainState.js';
 import { deriveAllFactionProfiles } from './factionProfile.js';
 import { retainHooks, retentionKey, editedHookTextKeys } from './dossier/hookRetention.js';
 import { themeOfText } from './hookThemes.js';
+import { resolveDeclared } from './facts/drawDeclared.js';
+import { factsOf } from './facts/factsOf.js';
 
 // ── Hook collection ─────────────────────────────────────────────────────
 // Walks every location the generator might have planted hooks and
@@ -193,18 +195,18 @@ const ORIGIN_CONSEQUENCES = Object.freeze({
   chain: {
     ifIgnored: [
       'Price hikes spread to dependent crafts and bakeries.',
-      'Smuggling fills the gap; criminal faction gains leverage.',
-      'Public legitimacy erodes as the council fails to stabilize supply.',
+      'Smugglers fill the gap, and the local criminals grow stronger on it.',
+      'People lose faith in the council as it fails to keep goods coming in.',
     ],
     possibleResolutions: [
       'Negotiate an emergency supply contract with a neighbouring settlement.',
-      'Expose hoarding and force the controller to release reserves.',
-      'Subsidize the chain through temple charity or council intervention.',
+      'Expose the hoarding and force whoever holds the stores to release them.',
+      'Pay to keep the trade going, through temple charity or the council\'s purse.',
     ],
   },
   factionConflict: {
     ifIgnored: [
-      'One faction makes a unilateral move; the others retaliate.',
+      'One power acts alone; the others strike back.',
       'Public order strains as the conflict spills into the streets.',
       'A weaker third party seizes the opening.',
     ],
@@ -216,20 +218,20 @@ const ORIGIN_CONSEQUENCES = Object.freeze({
   },
   institution: {
     ifIgnored: [
-      'The institution becomes impaired. Services it provides degrade.',
-      'Dependent factions / chains lose their anchor.',
+      'The institution stops working properly, and the people who rely on it go without.',
+      'The powers and trades that depend on it are left without support.',
       'A rival institution captures the vacated role.',
     ],
     possibleResolutions: [
       'Restore the institution\'s lost capacity (fund repair, replace leadership).',
       'Stand up an alternative institution to fill the role.',
-      'Accept the loss and let the dependent systems reorganize.',
+      'Accept the loss and let those who depended on it find other ways.',
     ],
   },
   npc: {
     ifIgnored: [
       'The NPC takes drastic action: defection, betrayal, departure, or death.',
-      'Their faction or institution loses leadership and capacity.',
+      'Their power or institution loses its leader and much of its strength.',
       'A power vacuum opens; opportunistic actors rush in.',
     ],
     possibleResolutions: [
@@ -252,9 +254,9 @@ const ORIGIN_CONSEQUENCES = Object.freeze({
   },
   pressure: {
     ifIgnored: [
-      'The pressure boils over into a discrete crisis (riot, strike, abandonment).',
-      'Stress markers propagate to adjacent subsystems.',
-      'Public legitimacy strains; faction realignment becomes likely.',
+      'The pressure boils over into open trouble: a riot, a strike, or people leaving.',
+      'The trouble spreads to the trades and offices around it.',
+      'People lose faith in their rulers, and the powers start changing sides.',
     ],
     possibleResolutions: [
       'Address the underlying need (food, justice, work).',
@@ -271,6 +273,55 @@ const ORIGIN_CONSEQUENCES = Object.freeze({
     ],
   },
 });
+
+/**
+ * THE DECLARED LINES OF THE CONSEQUENCE LISTS AND THE CLOCKS (CENSUS-2c unit 3;
+ * `docs/DESIGN_POOL_CENSUS.md` §3.1 / §3.3 kind A; the ledger
+ * `docs/census/declarations/HOOK_ESCALATION.json`). The lists print whole, so there is no draw to
+ * protect. A line that presumes a fact is a declared sibling set keyed by its own text (the
+ * originals stay strings where their string consumers read them, CENSUS-1c's shape): the original
+ * with its atoms, then its twin (`twinOf`), which takes the refused original's place IN PLACE, so
+ * a clock keeps its six stages. A refused line with no twin leaves the list. Each twin is the
+ * chair's ruling (R-G), recorded with its share in `docs/CENSUS_2_LANE_2026-11-04.md` "CENSUS-2c".
+ * `Pay to keep the trade going, through temple charity or the council's purse.` presumes a temple OR a
+ * council — a disjunction across dimensions, which no line may declare (§3.2) — so it stays
+ * undeclared and its drafted twin is not written.
+ * @type {Readonly<Record<string, ReadonlyArray<Readonly<{ text: string, needs?: string[], excludes?: string[], twinOf?: string }>>>>}
+ */
+export const HOOK_ESCALATION_SIBLINGS = Object.freeze(Object.fromEntries([
+  ['People lose faith in the council as it fails to keep goods coming in.', ['ruler: council'], 'People lose faith in those who rule as they fail to keep goods coming in.', ['ruler: council']],
+  ['Expose the hoarding and force whoever holds the stores to release them.', ['stores: > 0'], null, null],
+  ['Confront the external force directly (combat, diplomacy, magic).', ['magic'], 'Confront the external force directly, by arms or by talks.', ['magic']],
+  ['The temple opens emergency stores.', ['institution: temple', 'stores: > 0'], 'Households begin pooling what food they have.', null],
+  ['The council sends the watch to guard warehouses.', ['ruler: council', 'watch'], 'Those who hold the stores start sleeping beside them.', null],
+  ['Riot breaks out in the market.', ['market'], 'A crowd gathers where the food is handed out, and it turns ugly.', ['market']],
+  ['Watch makes a high-profile raid; smugglers shift routes.', ['watch'], '{controller} makes an example of one smuggler; the rest shift routes.', ['watch']],
+  ['Citizens grumble openly in markets.', ['market'], 'People grumble openly wherever they gather.', ['market']],
+  ['Tax collection slows; watch loses authority.', ['watch'], 'Tax collection slows; orders go unheeded.', ['watch']],
+].map(([text, needs, twin, twinExcludes]) => [text, Object.freeze([
+  Object.freeze({ text, needs }),
+  ...(twin ? [Object.freeze({ text: twin, twinOf: text, ...(twinExcludes ? { excludes: twinExcludes } : {}) })] : []),
+])])));
+
+/**
+ * A printed list as the record admits it: each line that is a key of HOOK_ESCALATION_SIBLINGS
+ * resolves (the original, else its twin, else it leaves the list); every other line is kept. No
+ * facts (a caller with no settlement in hand): every line is kept, byte-identical.
+ * @param {ReadonlyArray<string>} lines
+ * @param {object|null} facts `factsOf(settlement)`
+ * @param {string} [poolId]
+ * @returns {string[]}
+ */
+export function spokenEscalationLines(lines, facts, poolId = 'hookEscalation:HOOK_ESCALATION_SIBLINGS') {
+  if (!facts) return [...lines];
+  /** @type {string[]} */ const out = [];
+  for (const line of lines) {
+    const set = Object.prototype.hasOwnProperty.call(HOOK_ESCALATION_SIBLINGS, line) ? HOOK_ESCALATION_SIBLINGS[line] : [line];
+    const r = resolveDeclared(set, { facts, poolId, surface: 'plot_hooks', drawKind: 'A' });
+    if (typeof r.text === 'string') out.push(r.text);
+  }
+  return out;
+}
 
 // ── Composer ────────────────────────────────────────────────────────────
 
@@ -303,6 +354,7 @@ export function deriveStructuredHook(rawWrapper, settlement) {
   const severity = hookSeverityFrom(raw);
   const category = hookCategoryFrom(raw, origin);
   const consequences = ORIGIN_CONSEQUENCES[origin] || ORIGIN_CONSEQUENCES.other;
+  const facts = settlement ? factsOf(settlement) : null; // CENSUS-2c: the declared lines resolve against the record
 
   // Stable id: hash-ish of category + first 40 chars of text.
   const idTail = text.slice(0, 40).replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '').toLowerCase();
@@ -317,8 +369,8 @@ export function deriveStructuredHook(rawWrapper, settlement) {
     source,
     eventName: rawWrapper.eventName || null,
     npcName:   rawWrapper.npcName   || null,
-    ifIgnored:           [...consequences.ifIgnored],
-    possibleResolutions: [...consequences.possibleResolutions],
+    ifIgnored:           spokenEscalationLines(consequences.ifIgnored, facts),
+    possibleResolutions: spokenEscalationLines(consequences.possibleResolutions, facts),
     // Settlement reference is informational — not stored on the hook
     // (avoids circular references in serialization). Consumers needing
     // settlement context should query separately.
@@ -387,7 +439,7 @@ export const structuredHookKey = (text) => retentionKey(text);
 const CLOCK_TEMPLATES = Object.freeze({
   bread_riot: {
     label: 'Bread Riot Clock',
-    triggerDescription: 'Food supply chain is strained or worse.',
+    triggerDescription: 'The food supply is under strain, or failing.',
     stages: [
       'Flour prices rise.',
       'Bakers reduce loaves.',
@@ -399,22 +451,22 @@ const CLOCK_TEMPLATES = Object.freeze({
   },
   smuggling_rise: {
     label: 'Smuggling Rise Clock',
-    triggerDescription: 'Trade chain is strained or worse.',
+    triggerDescription: 'Trade is under strain, or failing.',
     stages: [
       'Legal imports slow.',
-      '{controller} loses revenue; tax base shrinks.',
+      '{controller} takes in less, and so does the tax collector.',
       'Black-market traders fill the gap quietly.',
       'Watch makes a high-profile raid; smugglers shift routes.',
-      'A criminal faction consolidates the new routes.',
-      'Public legitimacy of the governing faction collapses.',
+      'A criminal power takes over the new routes.',
+      'People stop accepting the ruling power\'s right to govern.',
     ],
   },
   legitimacy_crisis: {
     label: 'Legitimacy Crisis Clock',
-    triggerDescription: 'Governing faction has Contested or worse public legitimacy.',
+    triggerDescription: 'The ruling power\'s standing with the people is Contested or worse.',
     stages: [
       'Citizens grumble openly in markets.',
-      'A rival faction publicly questions {governing}.',
+      'A rival power publicly questions {governing}.',
       'Pamphlets / rumors spread accusations.',
       'Tax collection slows; watch loses authority.',
       'A successor positions themselves.',
@@ -422,8 +474,8 @@ const CLOCK_TEMPLATES = Object.freeze({
     ],
   },
   faction_split: {
-    label: 'Faction Split Clock',
-    triggerDescription: 'Two factions with overlapping power and conflicting wants.',
+    label: 'Power Split Clock',
+    triggerDescription: 'Two powers of near-equal strength want different things.',
     stages: [
       'A minor incident is exaggerated by both sides.',
       'Public statements harden.',
@@ -464,6 +516,7 @@ function fillStage(stage, vars) {
 export function deriveEscalationClocks(settlement) {
   if (!settlement) return [];
   const clocks = [];
+  const facts = factsOf(settlement); // CENSUS-2c: a refused stage takes its twin in place (HOOK_ESCALATION_SIBLINGS)
 
   // Food chain disruption → bread riot
   const chains = deriveAllSupplyChainStates(settlement);
@@ -478,7 +531,7 @@ export function deriveEscalationClocks(settlement) {
         triggerTargetId: chain.id,
         triggerSource: 'supply_chain',
         triggerStatus: chain.status,
-        stages: tmpl.stages.map(s => fillStage(s, { controller: chain.controller })),
+        stages: spokenEscalationLines(tmpl.stages, facts).map(s => fillStage(s, { controller: chain.controller })),
       });
     }
     if (chain.needKey === 'trade_entrepot') {
@@ -490,7 +543,7 @@ export function deriveEscalationClocks(settlement) {
         triggerTargetId: chain.id,
         triggerSource: 'supply_chain',
         triggerStatus: chain.status,
-        stages: tmpl.stages.map(s => fillStage(s, { controller: chain.controller })),
+        stages: spokenEscalationLines(tmpl.stages, facts).map(s => fillStage(s, { controller: chain.controller })),
       });
     }
   }
@@ -508,7 +561,7 @@ export function deriveEscalationClocks(settlement) {
       triggerTargetId: govName || 'governing',
       triggerSource: 'faction',
       triggerStatus: govLabel,
-      stages: tmpl.stages.map(s => fillStage(s, { governing: govName || 'the governing faction' })),
+      stages: spokenEscalationLines(tmpl.stages, facts).map(s => fillStage(s, { governing: govName || 'the ruling power' })),
     });
   }
 

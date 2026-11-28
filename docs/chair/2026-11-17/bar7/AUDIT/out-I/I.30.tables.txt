@@ -1,0 +1,120 @@
+== BAR7-AUDIT-I tables 30 (out30.json)
+
+# 10i.pair: counted 1 in 1 towns · apart 0 in 0
+    1 Sorcha MacDonald · Professional Rivalry · Nessa Lynch | Nessa Lynch · Pragmatic Alliance · Sorcha MacDonald
+
+# 5x.slash: counted 1 in 1 towns · apart 0 in 0
+    1 X's Weavers/Textile workers can offer less the longer its supplies stay short, and nobody is putting it right.
+
+# 5x.slash-list: counted 0 in 0 towns · apart 1 in 1
+    1 (apart) 5 institutions critically impaired by siege: Inns and taverns (district), Caravan masters' exchange, Mills, Weavers/Textile worker
+
+# 6e.no-higher: counted 1 in 1 towns · apart 0 in 0
+    1 Wants Satisfy the crown requisition order without stripping the settlement to the bone
+
+# 6e.realm-world: counted 0 in 0 towns · apart 12 in 12
+   12 (apart) What X has heard from the rest of the realm, true or not, as the news reaches it.
+
+# 7x.occupied-seat: counted 1 in 1 towns · apart 0 in 0
+    1 At X one audience with the Feudal Appointee gets a decision, good or bad, and it comes quickly.
+
+# 9a.order: counted 1 in 1 towns · apart 0 in 0
+    1 The garrison keeps order, and more harshly as the food runs down.
+
+# 9g.food: counted 1 in 1 towns · apart 0 in 0
+    1 Traders seldom reach X, and people there seldom miss them: the <tier> has more than enough to get through a hard year.
+
+# 9g.food-soft: counted 0 in 0 towns · apart 1 in 1
+    1 (apart) Even the outbuildings have new roofs, and nobody looks hungry.
+
+# 9g.margin: counted 2 in 1 towns · apart 0 in 0
+    1 X closes every year ahead.
+    1 The margin is not large and it is dependable, and there are reserves behind it.
+
+# 9g.margin-mild: counted 0 in 0 towns · apart 2 in 2
+    2 (apart) With a little left over each year, X gets by on a broad base of trades, and every year people argue over how to spend it.
+
+# 9g.margin-war: counted 0 in 0 towns · apart 3 in 1
+    1 (apart) With a little left over each year, X gets by on a broad base of trades, and every year people argue over how to spend it.
+    1 (apart) X closes every year ahead.
+    1 (apart) The margin is not large and it is dependable, and there are reserves behind it.
+
+# 9g.source: counted 1 in 1 towns · apart 0 in 0
+    1 X's own food comes first of all from its fishing, so one bad year for the fishing is felt across the whole <tier>.
+
+# 9g.stores: counted 1 in 1 towns · apart 0 in 0
+    1 The buildings are finished rather than patched, and the stores are more than the season needs.
+
+# 9g.subsistence: counted 1 in 1 towns · apart 0 in 0
+    1 The <tier> is plainly past subsistence.
+
+# 9h.entrepot: counted 1 in 1 towns · apart 0 in 0
+    1 X sells on goods it never made: some of what leaves the <tier> entered it as imports the same season.
+
+# 9h.no-exports: counted 1 in 1 towns · apart 0 in 0
+    1 No significant exports.
+
+# 9i.crews: counted 2 in 2 towns · apart 0 in 0
+    2 Rival crews at X are fighting over who runs the streets, and until one wins, people pay both the cut and the brawling.
+
+# design.outside: counted 0 in 0 towns · apart 13 in 6
+    5 (apart) One importer now brings in all the grain and has quadrupled the price; the locals are arguing over whether to pay, find another su
+    4 (apart) The settlement must decide what it can still afford to import, and the merchants are watching it decide.
+    3 (apart) The fishing failed here this year, and what food can still be bought from outside costs more every week.
+    1 (apart) The crops failed here this year, and what food can still be bought from outside costs more every week.
+
+# low.agree: counted 0 in 0 towns · apart 3 in 3
+    2 (apart) Weak defences is the reason.
+    1 (apart) Weak defences keeps X from more than tolerating the Elder Council.
+
+# low.doubled: counted 0 in 0 towns · apart 31 in 19
+    2 (apart) game meat · animal hides · Furs and pelts · medicinal herbs · honey · iron · metalwork · livestock · wool · dairy · Honey and bees
+    2 (apart) medicinal herbs · honey · Honey and beeswax · Foraged goods
+    2 (apart) Clay and raw materials · Grain · Iron ore (local iron mines exhausted) · Livestock and dairy (local grazing land depleted) · Luxur
+    2 (apart) Charcoal and fuel · Clay and raw materials · Grain · Luxury textiles and exotic goods · Paper · Paper materials · Preserved provis
+    2 (apart) Clay and raw materials · Grain · Luxury textiles and exotic goods · Paper · Paper materials · Precious metal veins · Preserved pro
+    2 (apart) medicinal herbs · honey · iron · metalwork · livestock · wool · dairy · Honey and beeswax · Foraged goods · Medical care (basic) ·
+    2 (apart) Needed, and not brought in: timber, stone, metals, luxury goods, timber, mountain timber, mineral hot springs.
+    1 (apart) Amber and beeswax · Beeswax candles · Gemstones (local gem deposits exhausted) · Grain · Incense, ritual oil, sacred texts, and ve
+
+# low.generation: counted 0 in 0 towns · apart 9 in 9
+    1 (apart) X came through the siege, and what the <tier> built in answer still stands, a legacy that is a generation old.
+    1 (apart) Nobody in X has finished putting right the legacy the heresy trials left, and that legacy is a generation old.
+    1 (apart) The succession crisis left a legacy of trouble in X that has never been fully put right, and that legacy is a generation old.
+    1 (apart) In the wake of the debt crisis, X settled into a shape that still holds, a legacy that is a generation old, though much has change
+    1 (apart) Nobody in X has finished putting right the legacy the tyranny left, and that legacy is a generation old.
+    1 (apart) Nobody in X has finished putting right the legacy the iron dispute left, and that legacy is a generation old.
+    1 (apart) X still keeps the shape the <tier> took after the shortage, and that shape is a generation old, though the times have moved on.
+    1 (apart) Nobody in X has finished putting right the legacy the shortage left, and that legacy is a generation old.
+
+# low.hook-party: counted 0 in 0 towns · apart 1 in 1
+    1 (apart) A letter found this year tells it this way: the corruption goes higher than anyone yet suspects; the reformers are being used
+
+## low.generation by age
+     6 in   6 towns · 55-60 years
+     2 in   2 towns · 40-49 years
+     1 in   1 towns · 50-54 years
+
+## low.doubled by kind and list
+    15 in  13 towns · within-word · Produced locally
+     9 in   6 towns · within-word · Imports
+     4 in   4 towns · within-word · Needed
+     2 in   2 towns · within-phrase · Imports
+     1 in   1 towns · exact · Needed
+
+## design.outside by case
+     8 in   4 towns · no siege · grain imported
+     5 in   2 towns · siege · imports by teleportation circle
+
+## 9i.crews by rings
+     1 in   1 towns · rival rings stand · other
+     1 in   1 towns · no rival rings: the key is a lone house's · crisis
+
+## 6e.no-higher by word
+     1 in   1 towns · the crown
+
+## 10i.pair by kinds
+     1 in   1 towns · rival/personal + ally/weak
+
+## 5x.slash by label
+     1 in   1 towns · Weavers/Textile workers

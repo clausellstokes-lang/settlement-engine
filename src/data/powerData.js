@@ -88,3 +88,34 @@ export const FACTION_DESCRIPTORS_EXTRA = Object.freeze({
   noble: ['The Noble Houses', 'The Landed Gentry', 'The Manor Bloc', 'The Aristocratic Circle', 'The Feudal Order', 'The Heritage Houses'],
   other: ['The Independent Circle', 'The Free League', 'The Common Union', 'The Neutral Bloc', 'The Popular Front', 'The Unaligned Bloc'],
 });
+
+// ── DECLARED SIBLINGS, CARRIED (CENSUS-5b unit 2, 2026-11-05; the chair's ruling R-C) ────────
+// A faction NAME that names a force or a house presumes it ("The Garrison Bloc" where no garrison
+// stands). The names stay strings above (the dedup pass, the arcane detector and the first-unused
+// reader all read strings); each is declared here, keyed by the name. NO CONSUMER READS THIS YET:
+// `generateFactions` draws through a draw-count-VARIABLE retry loop and `applyDensityLaw` and
+// `stressFactions :: firstUnusedPoolName` read by position — CENSUS-1d's R sites, never filtered
+// before the draw. No twin: a twin name is an addition that moves the R stream's births (R-G, the
+// chair's to price). Measured on the 1,000: "The Garrison Bloc" and "The Order of the Watch"
+// printed in 29 places each, false in none. The magic pools' names presume magic that works.
+/** @param {string} text @param {string[]} needs */
+const declaredName = (text, needs) => Object.freeze([Object.freeze({ text, needs: Object.freeze(needs) })]);
+export const FACTION_NAME_SIBLINGS = Object.freeze({
+  'The Garrison Bloc': declaredName('The Garrison Bloc', ['garrison']),
+  'The Order of the Watch': declaredName('The Order of the Watch', ['watch']),
+  'The Garrison Order': declaredName('The Garrison Order', ['garrison']),
+  "The Watchmen's Company": declaredName("The Watchmen's Company", ['watch']),
+  'The Mercenary Compact': declaredName('The Mercenary Compact', ['mercenary']),
+  "The Soldiers' League": declaredName("The Soldiers' League", ['soldiers']),
+  'The Temple Union': declaredName('The Temple Union', ['temple']),
+  'The Arcane Circle': declaredName('The Arcane Circle', ['magic']),
+  "The Mages' Compact": declaredName("The Mages' Compact", ['magic']),
+  'The Enlightened': declaredName('The Enlightened', ['magic']),
+  'The Tower Alliance': declaredName('The Tower Alliance', ['magic']),
+  "The Mages' Conclave": declaredName("The Mages' Conclave", ['magic']),
+  'The Arcane Order': declaredName('The Arcane Order', ['magic']),
+  "The Wizards' League": declaredName("The Wizards' League", ['magic']),
+  'The Tower Union': declaredName('The Tower Union', ['magic']),
+  "The Alchemists' Circle": declaredName("The Alchemists' Circle", ['magic']),
+  "The Sorcerers' Compact": declaredName("The Sorcerers' Compact", ['magic']),
+});

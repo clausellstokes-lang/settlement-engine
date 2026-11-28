@@ -1,0 +1,14 @@
+# COHERENCE-UPKEEP-6, ruling 3 measured. (1) crime6.mjs on 720 forced births (crime6-*): the order points the crime multiplier took, and the readiness it cost:
+#   famine: n 180, order points mean 4.17 (max 10); readiness mean 0.45, moved 65
+#   under_siege: n 180, order points mean 3.24 (max 12); readiness mean 0.44, moved 75
+#   wartime: n 180, order points mean 2.61 (max 11); readiness mean 0.49, moved 85
+#   succession_void: n 180, order points mean 0.11 (max 7); readiness mean 0.0, moved 0
+# (2) births6.mjs, 798a5719a against the ruling-3 build (3,036 + 720 fresh6):
+#   fields other than the ratings changed: 0
+#   moved? ('calm', False) 1323
+#   moved? ('famine/siege', False) 1195
+#   moved? ('other crisis', False) 687
+#   moved? ('wartime', False) 75
+#   moved? ('wartime', True) 476
+#   score change wartime n 476 mean 0.56 min 0 max 2
+#   band changes 11 {('wartime', 'Vulnerable', 'Lightly Defended'): 6, ('wartime', 'Undefended', 'Vulnerable'): 2, ('wartime', 'Lightly Defended', 'Defensible'): 1, ('wartime', 'Well-Defended', 'Fortress'): 2}

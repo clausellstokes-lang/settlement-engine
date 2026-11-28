@@ -1,0 +1,13 @@
+commit 460c108adfbae04ed228213e76d2e8a293d441a2
+Merge: bcad1a358 1ff581fd6
+Author: Claude <noreply@anthropic.com>
+Date:   Sat Nov 14 23:01:38 2026 +0000
+
+    join(JOIN-5 · P3): merge lane/w2-write-2026-11-13 at 1ff581fd6 — the chair's second point, final (the corpus)
+    
+    Read at 23:01 UTC: 1ff581fd6270a4b0e8af22c5cb23221b117e5b3c (equal to the lane's tip; last landed 9b08e5b69 (merge 3); merge base 9b08e5b69).
+    No conflict. Merged clean though both sides moved them (independent lines; both stand; LISTED for the close): docs/content/RECEIPT_POOLS_DOSSIER_STATE.md tests/domain/corpusCureGuards.test.js
+    Verify: 4 files the lane moved; 4 staged; every file the joined line had not moved equals the lane's blob.
+    
+    Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+    Claude-Session: https://claude.ai/code/session_01ACmDYazSdYC8v2Fj1WVnzT

@@ -5,7 +5,7 @@
  * (lane RULERS, 2026-11-03; root-cause trace failure 5).
  *
  *   - "Holds power" is the ruler's word alone; a challenger reads "Contests the seat".
- *   - "The faction that appears to govern is not the faction that governs" prints only
+ *   - "Holds the title; the decisions that matter are made by …" prints only
  *     when a rival outranks the governing faction on the power figures, and names it.
  *   - The vacant seat's row never reads "The seat The seat".
  * Seeds are the probe's (scratchpad probes/rulers/seat120.mjs) on the app's birth path.
@@ -21,11 +21,12 @@ import { governingFactionOf, nameOf } from '../../src/domain/rulingPower.js';
 
 afterEach(cleanup);
 
-const NOTE = 'The faction that appears to govern is not the faction that governs';
+// re-keyed by identity at W3 POW #189 (2026-11-08, the owner's style law: the crisis note says the one thing the banner does not).
+const NOTE = 'Holds the title, but the decisions that matter are made elsewhere';
 const born = (tier, i) => generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: tier }), null, { seed: `rulers-${tier}-${i}`, customContent: {} });
 const tab = (s) => render(<PowerTab powerStructure={s.powerStructure} settlement={s} narrativeNote={null} />).container;
 /** Open the governing faction's roster row (one row opens at a time) so its crisis note is on the page. */
-const openGoverning = (s) => fireEvent.click(screen.getByRole('button', { name: `${nameOf(governingFactionOf(s))} faction details` }));
+const openGoverning = (s) => fireEvent.click(screen.getByRole('button', { name: `${nameOf(governingFactionOf(s))} details` }));
 
 beforeAll(async () => { await loadGenerationLawPayloads(); });
 
@@ -34,8 +35,14 @@ describe('"Holds power" is the ruler\'s word alone', () => {
   // re-draws the thorp rosters to one faction in most draws, so thorp 1 holds no contender (first-parent
   // bisect: green at fb5edb7f5, red from 3420d01e3).
   // Scanned rulers-thorp-0..59 in order: 4 thorps hold a contender (12, 28, 33, 42); 12 is the first.
+  // Re-seated by identity thorp 12 -> thorp 28 (PEOPLE-LAND cure, 2026-11-07): lane 1 PEOPLE-1 CAST (dc655f712) re-draws
+  // thorp 12 to its Elder Council alone (100), so it holds no contender (green at 262e8b255, red from dc655f712).
+  // Re-scanned rulers-thorp-0..59 at the tip: 5 thorps hold a contender (28, 33, 42, 54, 57); 28 is the first.
+  // Re-seated by identity thorp 28 -> thorp 57 (COHERENCE-POWERS-3, 2026-11-12): the lane's not-built rule (902378261: a
+  // power of the roster's own that no house stands behind is not built) leaves thorp 28's roster with no contender (green at
+  // the line f72262c68, red at 1a32c200a). Re-scanned rulers-thorp-0..59 at the tip: 1 thorp holds a contender (57).
   it('a thorp with a ruler and contenders marks the ruler once and each contender "Contests the seat"', () => {
-    const s = born('thorp', 12);
+    const s = born('thorp', 57);
     const { powers } = derivePowerStrata(s);
     const contenders = powers.filter((p) => p.role === 'contender');
     expect(contenders.length, 'fixture premise: contenders press the seat').toBeGreaterThan(0);
@@ -57,26 +64,43 @@ describe('the governs note names the rival or goes', () => {
   // (first-parent bisect: green at fb5edb7f5, red from 3420d01e3).
   // Scanned rulers-thorp-0..59 in order: 2 thorps carry the note AND an outranking rival (12: Grain
   // Holders 56 over the Elder Council 44; 42: Religious Authorities 76 over 24); 12 is the first.
-  it('names the outranking rival when one outranks the governing faction (thorp 12: Grain Holders)', () => {
-    const s = born('thorp', 12);
+  // Re-seated by identity thorp 12 -> thorp 42 (PEOPLE-LAND cure, 2026-11-07): lane 1 PEOPLE-1 CAST (dc655f712) re-draws
+  // thorp 12 to its Elder Council alone, so no rival outranks it (green at 262e8b255, red from dc655f712).
+  // Re-scanned rulers-thorp-0..59 at the tip: 3 carry the note AND an outranking rival (42: Religious Authorities 76
+  // over the Elder Council 24; 54; 57); 42 is the first.
+  // Re-seated by identity thorp 42 -> thorp 57 (COHERENCE-POWERS-3, 2026-11-12): the lane's not-built rule (902378261)
+  // leaves thorp 42's Religious Authorities unbuilt (no religious house stands behind them; green at the line f72262c68, red
+  // at 1a32c200a). Re-scanned rulers-thorp-0..59 at the tip: 1 carries the note AND an outranking rival (57: People's
+  // Council 61 over the Elder Council 39).
+  // Re-seated by the premise thorp 57 -> thorp 35 (THE FLIP, CLOSE-6 F-FORTUNE, 2026-11-23): lit (2bc483fc8, the seat and
+  // fortune laws on), thorp 57's governing faction carries no crisis note. Re-scanned rulers-thorp-0..199 at the flipped
+  // tip for the premise (the note AND a rival outranking the governing faction on power): 35, 73, 96, 106, 109, 136; 35
+  // is the first (The Independent Bloc 78 over the Elder Council 22).
+  it('names the outranking rival when one outranks the governing faction (thorp 35: The Independent Bloc)', () => {
+    const s = born('thorp', 35);
     const gov = governingFactionOf(s);
     expect(String(gov.crisisNote), 'fixture premise: the generator wrote the note').toContain(NOTE);
-    const rival = (s.powerStructure.factions || []).find((f) => nameOf(f) === 'Grain Holders');
+    const rival = (s.powerStructure.factions || []).find((f) => nameOf(f) === 'The Independent Bloc');
     expect(rival?.power, 'fixture premise: the rival outranks the governing faction on power').toBeGreaterThan(gov.power);
     tab(s);
     openGoverning(s);
     const text = document.body.textContent;
-    expect(text).toContain(`${NOTE}; the real decisions rest with Grain Holders.`);
+    expect(text).toContain('Holds the title; the decisions that matter are made by The Independent Bloc.');
   });
 
-  it('drops the claim when no rival outranks the governing faction (thorp 13), keeping the fracture reading', () => {
-    const s = born('thorp', 13);
+  // The note carried "Governing authority is internally fractured." before #189; that reading now has one home, the
+  // legitimacy panel's banner (and DS-POW-1's fractured line), so the unnamed claim leaves and the note with it.
+  // Re-seated by the premise thorp 13 -> thorp 3 (THE FLIP, CLOSE-6 F-FORTUNE, 2026-11-23): lit (2bc483fc8), thorp 13's
+  // governing faction carries no crisis note. Re-scanned rulers-thorp-0..199 at the flipped tip for the premise (the note
+  // AND no rival outranking the governing faction): 3 is the first (its Elder Council alone, 100).
+  it('drops the claim when no rival outranks the governing faction (thorp 3); the fracture reading stays in the banner', () => {
+    const s = born('thorp', 3);
     expect(String(governingFactionOf(s).crisisNote), 'fixture premise: the generator wrote the note').toContain(NOTE);
     tab(s);
     openGoverning(s);
     const text = document.body.textContent;
-    expect(text).toContain('Governing authority is internally fractured.');
-    expect(text).not.toContain('appears to govern'); // anchored: the same note's first sentence is asserted on this render
+    expect(text).toContain('Governance fractured.');
+    expect(text).not.toContain('decisions that matter are made'); // anchored: the banner is asserted on this render
   });
 });
 
@@ -93,7 +117,8 @@ describe('the vacant seat reads once', () => {
     tab(s);
     const chain = screen.getByTestId('ruling-chain');
     const words = chain.innerText ?? chain.textContent;
-    expect(screen.getByTestId('ruling-chain-absence').textContent).toMatch(/^Stands empty; the succession is unsettled\.$/);
+    // Re-keyed by identity (COHERENCE-POWERS-3, F7: the seat row names who keeps the empty seat, in the caretaker's form)
+    expect(screen.getByTestId('ruling-chain-absence').textContent).toBe('Stands empty; the succession is unsettled. Acting Elder Karima al-Hassan keeps the seat meanwhile.');
     expect(words.replace(/\s+/g, ' ')).not.toMatch(/The seat ?The seat/); // anchored: the absence row is asserted on this render
   });
 

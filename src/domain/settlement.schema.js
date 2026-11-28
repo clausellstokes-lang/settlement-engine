@@ -44,9 +44,39 @@
 // that older saves wouldn't recompute identically. GENERATOR_VERSION is the
 // build-time stamp — useful for "this save was made by SettlementForge 1.2.3."
 
-export const SCHEMA_VERSION     = 1;
+export const SCHEMA_VERSION     = 3; // ALLEGIANCE-CAR1 (2026-11-08): 2 -> 3, the hidden allegiance (settlementMigrations.js :: migrateV2toV3); PEOPLE-5B (2026-11-07, M-7): 1 -> 2, the people car (migrateV1toV2)
 export const SIMULATION_VERSION = 1;
-export const GENERATOR_VERSION  = '0.9.0';
+export const GENERATOR_VERSION  = '0.10.0'; // GUARD (R24j 1, 2026-11-25): 0.9.0 -> 0.10.0, the engine whose births moved since master's release; a stored place is re-derived only by the engine that bore it (editSlice.js :: applyRosterDecreesAtTick)
+// The stamp a record that carries NONE is given on load (R24j 2): the last engine that bore records without
+// a stamp being checked, never the current one, so a load can never make an old place look new-born. The
+// current version is written at BIRTH alone (generators/steps/assembleSettlement.js).
+export const LEGACY_GENERATOR_VERSION = '0.9.0';
+/** A stamp the floor reader can compare: exactly three dot-separated whole numbers. */
+const THREE_NUMBER_STAMP = /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$/; // G74: no padded number (0.010.0 is malformed)
+/** @param {unknown} stamp @returns {number[] | null} */
+const stampNumbers = (stamp) => {
+  if (typeof stamp !== 'string') return null;
+  const m = THREE_NUMBER_STAMP.exec(stamp);
+  return m ? [Number(m[1]), Number(m[2]), Number(m[3])] : null;
+};
+/**
+ * THE FLOOR READER (B1(ii), the tenth chair's G64 (3) as cured by G72 (1)): WAS THIS RECORD BORN BY AN ENGINE AT OR AFTER
+ * `floor`? Both the record's `generatorVersion` and `floor` must be exactly three dot-separated whole numbers, compared
+ * number by number. No stamp, the legacy stamp below the floor, a malformed stamp ('0.10', '0.10.0-rc1', 'legacy', a
+ * number) or a malformed floor answers false. A rule added to how a place is READ asks it with the engine that FIRST
+ * carried the rule (a literal in the rule's own file), never this build's `GENERATOR_VERSION`: a later release keeps the
+ * rule for the places the earlier engine bore. (`store/editSlice.js :: applyRosterDecreesAtTick` keeps its own equality
+ * line: re-derivation is the bearing engine's alone.) A reader of the existing stamp: no stored field, no version moved.
+ * @param {unknown} record @param {string} floor @returns {boolean}
+ */
+export const bornAtOrAfter = (record, floor) => {
+  if (!record || typeof record !== 'object') return false;
+  const have = stampNumbers(/** @type {{ generatorVersion?: unknown }} */ (record).generatorVersion);
+  const need = stampNumbers(floor);
+  if (!have || !need) return false;
+  for (let i = 0; i < 3; i += 1) if (have[i] !== need[i]) return have[i] > need[i];
+  return true;
+};
 
 // ── Canonical field-name map ────────────────────────────────────────────────
 // When the legacy shape uses multiple names for the same concept, this map
@@ -308,7 +338,8 @@ export const FIELD_ALIASES = Object.freeze({
  * @property {Object} [power]
  *   Faction power distribution, public legitimacy ingredients, stability.
  *
- * @property {Faction[]} [factions]
+ * (PEOPLE-5B, schema 2, M-7: the NPC grouping `factions` left the record — the powers under
+ *  `power`/`powerStructure.factions` are the only faction roster.)
  * @property {Object} [population]
  * @property {NPC[]} [npcRoster]
  * @property {Threat[]} [threats]
@@ -384,7 +415,6 @@ export const FIELD_ALIASES = Object.freeze({
  *   economicViability?: any,
  *   thievesGuildStrength?: number,
  *   nearbyResourcesDepleted?: boolean|string[],
- *   factions?: SimFaction[],
  *   npcs?: SimNpc[],
  *   institutions?: SimInstitution[],
  *   stressors?: SimStressor[],
@@ -460,13 +490,14 @@ export const FIELD_ALIASES = Object.freeze({
  *   influence?: (string | number),
  *   power?: number,
  *   corrupt?: boolean,
+ *   allegiance?: { power: (string|null), house: string, vector: string, via: string, handler: (string|null), share: number, veiled: boolean, covert: boolean, leash?: Record<string, unknown>, foreignPatron?: string, revealed?: boolean, conspiracy?: string },
  *   ousted?: boolean,
  *   timesExposed?: number,
  *   dots?: number,
  *   factionId?: string,
  *   factionLink?: string,
- *   factionAffiliation?: string,
- *   secondaryAffiliation?: string,
+ *   memberships?: Array<{ power: string, rank: (1|2|3|null), share?: (number|null) }>,
+ *   institution?: ({ kind: ('house'|'power'), key: string, family?: (string|null), title?: (string|null), veiled?: boolean } | null),
  *   institutionId?: string,
  *   organizationId?: string,
  *   settlementId?: string,
@@ -481,7 +512,6 @@ export const FIELD_ALIASES = Object.freeze({
  *   corruptTies?: any,
  *   corruptionVector?: any,
  *   plotHooks?: any[],
- *   linkedFactionIds?: any[],
  *   linkedInstitutionIds?: any[]
  * } & Record<string, any>} SimNpc
  *
@@ -490,8 +520,18 @@ export const FIELD_ALIASES = Object.freeze({
  * `structuralRank` are unioned (string|number) because both forms appear across
  * legacy generator output. Nested prose/pointer fields (secret, goal, personality,
  * corruptTies …) stay loose until their own sub-shapes are enumerated.
- * `linkedFactionIds` currently stores id-first handles (`faction.id`, else the
- * generated seat's `.faction` / `.name`) pending the governed ID-only migration.
+ * SCHEMA 2 (PEOPLE-5B, M-7): a card's standing in the powers is `memberships`
+ * (ranked, each power ∈ powerStructure.factions) and its house is `institution`
+ * (`null` for the DM's card); `factionAffiliation`, `secondaryAffiliation`,
+ * `linkedFactionIds`, `factionGoal` and `densityRungRole` left the record, and the
+ * grouping `settlement.factions` with them. The simulation's reads of them (FPZ's,
+ * M-6) go through the loose `Record<string, any>` until FPZ rebuilds them.
+ * THE VEIL BIT (FIX-PUBLIC-VEIL, 2026-11-07): `institution.veiled` — true when the
+ * house is hideable (criminal, clandestine, an illegal brokerage) or the minted face's
+ * power is hidden or criminal — stamped at birth by every writer of `institution`
+ * from the ONE predicate (domain/people/cardVeil.js); the public sanitizer (migration
+ * 206) and publicSafe.js read it: `false` makes `institution`, `title`, `role` and
+ * `memberships` public, true or absent strips them (fail-closed).
  */
 
 /**
@@ -977,9 +1017,13 @@ export const FIELD_ALIASES = Object.freeze({
  * @property {string} [role]
  * @property {string} [factionId]
  * @property {string} [institutionId]
+ * @property {Array<{ power: string, rank: (1|2|3|null), share?: (number|null) }>} [memberships]
+ *   SCHEMA 2 (M-7): the powers the card stands in, ranked first/second/third where its house backs it.
+ * @property {({ kind: ('house'|'power'), key: string, family?: (string|null), title?: (string|null) } | null)} [institution]
+ *   SCHEMA 2 (M-7): the house (or, for a minted face, the power) the card is the face of; null for the DM's.
  *
  * Legacy compatibility note: today's generator produces NPC entries
- * with shape `{ id, name, role, category, factionAffiliation,
+ * with shape `{ id, name, role, title, category, institution, memberships,
  * structuralPosition, structuralRank, power, influence, personality,
  * physical, goal, secret, plotHooks, … }`. The Tier 4.5 structured
  * shape (NpcProfile below) is derived from this on demand via
@@ -1002,8 +1046,9 @@ export const FIELD_ALIASES = Object.freeze({
  * @property {string|null}   factionLink          Stable id of the linked faction.
  * @property {string|null}   publicReputation     What the town knows of them.
  * @property {string|null}   privateAgenda        The NPC's long-term goal.
- * @property {boolean|null}  corrupt              Tri-state: false is a generation verdict, null a legacy save the corruption pass never judged.
- * @property {string|null}   corruptionVector     How they are compromised (corruptionPass.js mirror).
+ * @property {boolean|null}  corrupt              LEGACY (simulation-only, ALLEGIANCE-CAR1): the retired mark; a v3 birth-era card carries `allegiance` instead (domain/people/allegiance.js :: allegianceOf).
+ * @property {string|null}   corruptionVector     LEGACY (simulation-only): the vector now lives on `allegiance.vector`.
+ * @property {Record<string, unknown>|null} [allegiance] The hidden allegiance (ALLEGIANCE-CAR1, DM-only, covert), read through domain/people/allegiance.js :: allegianceOf.
  * @property {number}        timesExposed         How many times their corruption has been surfaced.
  * @property {boolean}       ousted               Whether they have been removed from their seat.
  * @property {({ causeClass: string, family: string, stage: string, situation: string, role: string, originTick: number|null, resolvedTick: number|null, historicizedTick: number|null, exposedTick: number|null, ageBand: string|null })|null} [compromiseLifecycle]  W-C5 cause-resolution lifecycle RAW stamp (attributed cause + stage + situation + tick stamps + age band; the conjunction key W2 keys off). Null unless the world pulse touched this compromise; the lazy dossier card runs it through the generic content floor.

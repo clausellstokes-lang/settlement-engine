@@ -61,6 +61,10 @@ import { clamp01 } from '../region/contestMath.js';
 import { detIntPow } from '../../kernel/detMathDecay.js';
 import { detLog10 } from '../../kernel/detMath.js';
 import { stablePart } from './worldState.js';
+// STYLE-2 C2 (SW-12): the occupation lines' vantages, chosen by the house idiom — the zero-import
+// selection kernel keyed on the outcome's own stable id (no rng draw).
+import { pickLine } from './proseSelection.js';
+/** The slots a prose line fills (STYLE-2 SW-12). @typedef {Record<string, string|number|boolean>} OccupationLineSlots */
 // W-PEACE-2 occupation_hold: a peace that CEDES the occupation ("the garrison stays at
 // the walls") must actually keep it standing after the army marches home. Read from the
 // dependency-free treatyEnforcement leaf so this module never pulls the peace mover.
@@ -267,8 +271,54 @@ export function occupationBurdenWordFor(burden) {
  * @type {ReadonlyArray<string>}
  */
 export const OCCUPATION_YIELD_WORDS = Object.freeze([
-  'a thin tribute', 'a real tribute', 'everything conquest can ever return',
+  'a thin tribute', 'a real tribute', 'as much tribute as any conquest yields',
 ]);
+
+// STYLE-2 C2 (SW-12) — the occupation lines in plain words. Every slot is one the writers hold:
+// the occupier, the places it holds (named from the ledger), the occupied town, the burden,
+// yield and resistance words, and the occupation's rung (said as how firm the hold is).
+/** @param {string[]} names */
+const joinNames = (names) => (names.length <= 1 ? names[0] || 'its conquests'
+  : `${names.slice(0, -1).join(', ')} and ${names[names.length - 1]}`);
+const BURDEN_SUMMARY = Object.freeze([
+  (/** @type {OccupationLineSlots} */ x) => `${x.occ} has soldiers and clerks tied up holding ${x.held}, and fewer to spare at home.`,
+  (/** @type {OccupationLineSlots} */ x) => `Holding ${x.held} keeps ${x.occ}'s soldiers and officials busy far from home.`,
+  (/** @type {OccupationLineSlots} */ x) => `${x.occ}'s garrisons in ${x.held} need men, pay and food that home must find.`,
+  (/** @type {OccupationLineSlots} */ x) => `Every soldier ${x.occ} keeps in ${x.held} is one it cannot use elsewhere.`,
+]);
+const BURDEN_REASON = Object.freeze([
+  (/** @type {OccupationLineSlots} */ x) => `Holding ${x.held} weighs ${x.word} on ${x.occ}${x.more ? ', and each one more costs dearer' : ''}.`,
+  (/** @type {OccupationLineSlots} */ x) => `${x.held} ${x.more ? 'weigh' : 'weighs'} ${x.word} on ${x.occ}${x.more ? ', and each one more costs dearer' : ''}.`,
+  (/** @type {OccupationLineSlots} */ x) => `The cost of holding ${x.held} bears ${x.word} on ${x.occ}${x.more ? ', and grows with each place held' : ''}.`,
+]);
+const SPOILS_SUMMARY = Object.freeze([
+  (/** @type {OccupationLineSlots} */ x) => `Tribute, men and supplies from the places ${x.occ} holds keep its war going.`,
+  (/** @type {OccupationLineSlots} */ x) => `What ${x.occ} takes from ${x.held} helps pay for its war.`,
+  (/** @type {OccupationLineSlots} */ x) => `${x.held} now ${x.more ? 'send' : 'sends'} ${x.occ} tribute, men and supplies for the war.`,
+  (/** @type {OccupationLineSlots} */ x) => `${x.occ}'s war is fed in part by what ${x.held} must hand over.`,
+]);
+const SPOILS_REASON = Object.freeze([
+  (/** @type {OccupationLineSlots} */ x) => `The occupations return ${x.word}, and what comes in eases the weariness of the war at home.`,
+  (/** @type {OccupationLineSlots} */ x) => `${x.held} ${x.more ? 'yield' : 'yields'} ${x.word}, and the war weighs less at home for it.`,
+  (/** @type {OccupationLineSlots} */ x) => `With ${x.word} coming in from ${x.held}, ${x.occ}'s people tire of the war more slowly.`,
+]);
+const RESISTANCE_SUMMARY = Object.freeze([
+  (/** @type {OccupationLineSlots} */ x) => `In ${x.town} people break tools, hide stores and will not do as ${x.occ}'s soldiers say.`,
+  (/** @type {OccupationLineSlots} */ x) => `${x.occ}'s soldiers in ${x.town} find their orders ignored and their stores raided.`,
+  (/** @type {OccupationLineSlots} */ x) => `${x.town} has not accepted ${x.occ}'s rule, and its people make every day of it hard.`,
+  (/** @type {OccupationLineSlots} */ x) => `Those who hold ${x.town} for ${x.occ} cannot count on anyone there to obey.`,
+]);
+const RESISTANCE_REASON = Object.freeze([
+  (/** @type {OccupationLineSlots} */ x) => `The people of ${x.town} are ${x.word}, and ${x.occ}'s hold on it is ${x.hold}.`,
+  (/** @type {OccupationLineSlots} */ x) => `${x.occ}'s hold on ${x.town} is ${x.hold}, and the people there are ${x.word}.`,
+  (/** @type {OccupationLineSlots} */ x) => `Under ${x.occ}, whose hold is ${x.hold}, the people of ${x.town} are ${x.word}.`,
+]);
+// The occupation's rung, said as how firm the occupier's hold is.
+/** @type {Readonly<Record<string, string>>} */
+const HOLD_WORDS = Object.freeze({
+  contested: 'still in dispute', unstable: 'shaky', extractive: 'firm enough to take from it',
+  stabilized: 'settled', vassalized: 'that of an overlord',
+});
 
 /** What the occupations yield, as a word. @param {number} yield01 0..1 @returns {string} */
 export function occupationYieldWordFor(yield01) {
@@ -1098,7 +1148,7 @@ export function vassalizationOutcomes(occupations, snapshot, nameFor, tick, arri
       occupiedSaveId: String(occupiedId),
       severity: 0.5,
       headline: `${occupiedName} bends the knee to ${occupierName}`,
-      summary: `${occupierName}'s occupation of ${occupiedName} has stabilized into formal vassalage. The occupied settlement now serves as a client state.`,
+      summary: `${occupiedName} has accepted ${occupierName} as its overlord, and will pay and obey as its vassal.`,
       reasons: [`The occupation held long enough to become a compact; what resistance is left is ${resistanceWordFor(num(rec.resistance))}.`],
       relationshipPatch: { proposedRelationshipType: 'vassal', trajectory: 'transitioning' },
       proposalPayload: {
@@ -1427,8 +1477,8 @@ export function evaluateOccupations({ snapshot, worldState, graph, deployments =
         targetSaveId: occupiedId,
         severity: nextResistance,
         headline: `${occupiedName} resists its occupiers`,
-        summary: `Sabotage, noncompliance, and an organizing resistance harry ${occupierName}'s grip on ${occupiedName}.`,
-        reasons: [`The town is ${resistanceWordFor(nextResistance)}, and the occupation stands at ${advanced.state}.`],
+        summary: pickLine(RESISTANCE_SUMMARY, `world_outcome.occupation_resistance.${stablePart(occupiedId)}.${t}`, { town: occupiedName, occ: occupierName }),
+        reasons: [pickLine(RESISTANCE_REASON, `world_outcome.occupation_resistance.${stablePart(occupiedId)}.${t}:why`, { town: occupiedName, occ: occupierName, word: resistanceWordFor(nextResistance), hold: HOLD_WORDS[advanced.state] || 'uncertain' })],
         tick: t,
         sourceEventTargetId: String(rec.occupierId),
         causes: [{ source: occupiedId, effect: 'occupation_resistance', reason: `${occupiedName} resists ${occupierName}'s occupation.` }],
@@ -1511,6 +1561,7 @@ export function evaluateOccupations({ snapshot, worldState, graph, deployments =
     if (!snapshot?.byId?.has?.(occupierId)) continue;
     const occupierName = nameFor(occupierId);
     const occCount = Object.keys(occupations).filter(id => String(occupations[id]?.occupierId) === occupierId).length;
+    const heldNames = joinNames(Object.keys(occupations).filter(id => String(occupations[id]?.occupierId) === occupierId).sort(codepoint).map(nameFor));
 
     // WR-8 (N): the inherited famine is part of the garrison bill. Addend 0 while
     // dark or while nothing held is hungry ⇒ the pre-wire severity exactly.
@@ -1523,9 +1574,9 @@ export function evaluateOccupations({ snapshot, worldState, graph, deployments =
         targetSaveId: occupierId,
         severity: burdenSeverity,
         headline: `${occupierName} is stretched thin holding its conquests`,
-        summary: `Garrisons, administrators, and suppression tie down ${occupierName}'s strength across ${occCount} occupation${occCount === 1 ? '' : 's'}.`,
+        summary: pickLine(BURDEN_SUMMARY, `world_outcome.occupation_burden.${stablePart(occupierId)}.${t}`, { occ: occupierName, held: heldNames }),
         reasons: [
-          `${occCount} occupation${occCount === 1 ? '' : 's'} weigh ${occupationBurdenWordFor(burdenSeverity)} on the occupier, and each one held makes the next dearer.`,
+          pickLine(BURDEN_REASON, `world_outcome.occupation_burden.${stablePart(occupierId)}.${t}:why`, { occ: occupierName, held: heldNames, word: occupationBurdenWordFor(burdenSeverity), more: occCount > 1 }),
           // The counterforce is NAMED, not buried in a float. Absent while dark.
           ...(inheritedHere && inheritedHere.hunger > 0 ? [`The famine it annexed is part of the garrison bill: ${inheritedHere.receipt}`] : []),
         ],
@@ -1576,9 +1627,9 @@ export function evaluateOccupations({ snapshot, worldState, graph, deployments =
         targetSaveId: occupierId,
         severity: relief,
         headline: `${occupierName} draws strength from its occupations`,
-        summary: `Tribute, levies, and materiel from stabilized occupations sustain ${occupierName}'s war effort.`,
+        summary: pickLine(SPOILS_SUMMARY, `world_outcome.war_spoils.${stablePart(occupierId)}.${t}`, { occ: occupierName, held: heldNames, more: occCount > 1 }),
         reasons: [
-          `The occupations return ${occupationYieldWordFor(benefitYield)}, and what comes in eases the weariness of the war at home.`,
+          pickLine(SPOILS_REASON, `world_outcome.war_spoils.${stablePart(occupierId)}.${t}:why`, { occ: occupierName, held: heldNames, more: occCount > 1, word: occupationYieldWordFor(benefitYield) }),
           ...(inheritedHere && inheritedHere.hunger > 0
             ? [`Netted down by the famine it annexed: ${inheritedHere.receipt}`]
             : []),

@@ -1,0 +1,82 @@
+LAWS 12 TO 15 (seat K) over 720 towns: towns  277 · instances   478 · distinct lines  248
+  12a.house            towns    3 · instances     3 · distinct lines    2 · by crisis under_siege 3
+  12b.boom             towns    4 · instances     5 · distinct lines    2 · by crisis under_siege 2, wartime 3
+  12b.boom.mild        towns    2 · instances     2 · distinct lines    2 · by crisis under_siege 2
+  12c.calm             towns    2 · instances     4 · distinct lines    2 · by crisis plague_onset 2, wartime 2
+  12d.enough           towns   16 · instances    32 · distinct lines    2 · by crisis plague_onset 4, calm 10, monster_pressure 2, indebted 2, mass_migration 2, occupied 6, politically_fractured 4, wartime 2
+  12d.enough.wide      towns   21 · instances    42 · distinct lines    2 · by crisis politically_fractured+indebted 2, politically_fractured 2, calm 6, occupied 6, recently_betrayed 4, mass_migration 4, indebted 2, succession_void 4, monster_pressure 2, plague_onset 4, religious_conversion 2, slave_revolt 2, wartime 2
+  12f.magic            towns    3 · instances     3 · distinct lines    1 · by crisis under_siege 3
+  13a.court            towns    2 · instances     2 · distinct lines    1 · by crisis infiltrated 1, under_siege 1
+  13b.gaol             towns    5 · instances     5 · distinct lines    5 · by crisis calm 2, infiltrated 1, mass_migration 1, monster_pressure 1
+  13d.record           towns    4 · instances     4 · distinct lines    1 · by crisis calm 4
+  13e.hours            towns    4 · instances     4 · distinct lines    1 · by crisis calm 3, wartime 1
+  13f.rival            towns   22 · instances    22 · distinct lines    1 · by crisis calm 9, famine 2, insurgency 1, indebted 1, infiltrated 2, monster_pressure 2, occupied 1, recently_betrayed 1, religious_conversion 1, slave_revolt 1, under_siege 1
+  13g.tie              towns    5 · instances    10 · distinct lines    3 · by crisis calm 2, mass_migration 2, politically_fractured 2, recently_betrayed 2, wartime 2
+  14a.descCopy         towns   17 · instances    17 · distinct lines   11 · by crisis mass_migration 1, calm 1, famine 1, indebted 2, insurgency 2, monster_pressure 1, occupied 2, plague_onset 1, religious_conversion 1, slave_revolt 1, under_siege 2, wartime 2
+  14a.descCopy.generic towns   78 · instances    84 · distinct lines   39 · by crisis calm 19, plague_onset 4, indebted 5, mass_migration 3, infiltrated 5, politically_fractured 8, wartime 5, succession_void 5, famine 6, insurgency 5, monster_pressure 1, occupied 3, recently_betrayed 3, religious_conversion 4, slave_revolt 2, under_siege 6
+  14b.handler          towns   11 · instances    20 · distinct lines   20 · by crisis calm 7, mass_migration 2, occupied 4, plague_onset 2, succession_void 2, under_siege 3
+  14b.handler.cross    towns   56 · instances   106 · distinct lines  106 · by crisis calm 47, succession_void 6, mass_migration 4, under_siege 8, indebted 1, infiltrated 5, insurgency 1, monster_pressure 4, occupied 5, plague_onset 5, politically_fractured 2, recently_betrayed 1, slave_revolt 7, wartime 10
+  14c.whole            towns   45 · instances    45 · distinct lines    7 · by crisis calm 12, occupied 5, insurgency 4, infiltrated 2, famine 1, monster_pressure 1, recently_betrayed 2, indebted 2, plague_onset 5, politically_fractured 2, recently_betrayed+famine 1, religious_conversion 1, slave_revolt 1, succession_void 1, succession_void+famine 1, under_siege 1, wartime 1, wartime+famine 2
+  14d.noble            towns    8 · instances     8 · distinct lines    1 · by crisis calm 2, politically_fractured 1, succession_void 1, monster_pressure 1, plague_onset 1, religious_conversion 1, slave_revolt 1
+  14e.hookTrade        towns    4 · instances     4 · distinct lines    3 · by crisis indebted 2, famine 1, mass_migration 1
+  14f.secret.sortie    towns    1 · instances     1 · distinct lines    1 · by crisis under_siege 1
+  14f.secret.stores    towns    2 · instances     2 · distinct lines    1 · by crisis famine 2
+  14f.secret.supplies  towns    4 · instances     4 · distinct lines    1 · by crisis under_siege 4
+  14g.sexTitle         towns    3 · instances     4 · distinct lines    1 · by crisis under_siege 2, wartime 2
+  14h.winMore          towns   29 · instances    29 · distinct lines   29 · by crisis calm 6, religious_conversion 2, politically_fractured 2, famine 4, insurgency 2, mass_migration 2, monster_pressure 1, plague_onset 1, recently_betrayed 1, slave_revolt 4, succession_void 2, wartime 2
+  15a.endless          towns    4 · instances     4 · distinct lines    1 · by crisis indebted 1, calm 3
+  15b.grazing          towns    4 · instances     6 · distinct lines    1 · by crisis calm 4, infiltrated 2
+  15c.noneToSend       towns    2 · instances     2 · distinct lines    2 · by crisis indebted 1, succession_void 1
+  15d.bar              towns    2 · instances     2 · distinct lines    1 · by crisis calm 1, indebted 1
+  15e.newBuild         towns    2 · instances     2 · distinct lines    1 · by crisis indebted 1, slave_revolt 1
+BY WRITER (rule · instances · writer)
+      3 · 12a.house · src/data/crisisDependence.js (the crisis tables that mark a house; read by src/domain/display/crisisStoppedRow.js :: rowMarkText)
+      3 · 12b.boom · src/data/arrivalProse.js (needs trade at work: <trade>)
+      2 · 12b.boom · src/generators/narrativeText.js (the war's "right side" pool, needs institution: smith)
+      2 · 12b.boom.mild · src/data/arrivalProse.js (needs trade at work: <trade>)
+      4 · 12c.calm · src/generators/narrativeText.js (history.historicalCharacter pool: crisis: any)
+     32 · 12d.enough · src/data/dossierStateProse/economy.generated.js (pools > POOR: crisis: any)
+     42 · 12d.enough.wide · src/data/dossierStateProse/economy.generated.js (pools > POOR: crisis: any)
+      3 · 12f.magic · src/domain/display/dossierViewModel.js :: deriveMagicSupplyView (over magicSourceOf: no house mark read; printed by src/components/new/tabs/MagicTab.jsx)
+      2 · 13a.court · src/data/dossierStateProse/defense.generated.js (Internal Security: full legal chain: court, prison)
+      5 · 13b.gaol · src/data/people/handlerTieLines.js (handler_leverage_loved / the crewmate line: "held by the {body}")
+      4 · 13d.record · src/data/dossierStateProse/defense.generated.js (Internal Security: no legal infrastructure, beside Safe/Moderate "record of crimes": guardPresence)
+      4 · 13e.hours · src/generators/safetyProfile.js :: STANDARD_PATROL (#18: the patrol read off the standard, not the force's hours)
+     22 · 13f.rival · src/data/dossierStateProse/defense.generated.js (structure semi-organized: tier ≥ village, no rival rings)
+     10 · 13g.tie · src/generators/power/factionStanding.js (guard–thieves note by power alone; the relationship's type is not read)
+     17 · 14a.descCopy · src/generators/density/applyDensityLaw.js (the doubled niche's mint copies the host: `...host`, desc kept)
+     84 · 14a.descCopy.generic · src/generators/density/applyDensityLaw.js (the doubled niche's mint copies the host: `...host`, desc kept)
+     20 · 14b.handler · src/domain/people/allegiance.js :: assignHandlers (the deal goes round the criminal power's pool, not the house's own people; the record carries it; printed by src/domain/people/patronage.js :: dmPowerViewOf)
+    106 · 14b.handler.cross · src/domain/people/allegiance.js :: assignHandlers (the deal goes round the criminal power's pool, not the house's own people; the record carries it; printed by src/domain/people/patronage.js :: dmPowerViewOf)
+     45 · 14c.whole · src/data/dossierStateProse/power.generated.js (pools > council: no ruler: lord)
+      8 · 14d.noble · src/generators/power/rulingStructure.js (the Elected Reeve's desc)
+      4 · 14e.hookTrade · src/data/npcData.js (the plot-hook pool: needs market only; no holder test)
+      1 · 14f.secret.sortie · src/data/stressInstitutionEffects.js (the crisis pool's secret: needs other npc only; no holder test) via src/generators/npcGenerator.js
+      2 · 14f.secret.stores · src/data/stressInstitutionEffects.js (the crisis pool's secret: needs other npc only; no holder test) via src/generators/npcGenerator.js
+      4 · 14f.secret.supplies · src/data/stressInstitutionEffects.js (the crisis pool's secret: needs other npc only; no holder test) via src/generators/npcGenerator.js
+      4 · 14g.sexTitle · src/data/faceHonorifics.js (a culture's form given as one string, not { male, female })
+     29 · 14h.winMore · src/data/people/goalFamilies.js (the win-over goal: its count not read against the power's members)
+      4 · 15a.endless · src/data/arrivalProse.js (the workings pool: needs trade at work: stone; no tier)
+      6 · 15b.grazing · src/generators/power/governanceNarrative.js (powerStructure.recentConflict, the stock pool of src/data/powerSiblings.js)
+      2 · 15c.noneToSend · src/data/dossierStateProse/defense.generated.js (charter hall ABSENT: no declaration) / the chain's outputs (src/domain/display/tradeListDisplay.js :: chainOutputsShown)
+      2 · 15d.bar · src/domain/display/defenseDisplay.js (the bar's word off defenseProfile.scores.military) beside src/data/dossierStateProse/defense.generated.js (Invasion & War: neither walls nor force)
+      2 · 15e.newBuild · src/data/dossierStateProse/economy.generated.js (pools > POOR: crisis: any) beside src/data/people/titleSecretsPresentations.js (the brickmaker's "How they deal")
+THE STOCK RECENT-CONFLICT LINE (15b census): tier · towns · grazing+water line (with a grazing house or chain / without) · rotation+grazing line
+  thorp       120 ·   23 (7 / 16) · calm 33, of them the line 19 · 0
+  hamlet      120 ·   20 (20 / 0) · calm 43, of them the line 19 · 0
+  village     120 ·   15 (15 / 0) · calm 31, of them the line 12 · 2
+  town        120 ·    0 (0 / 0) · calm 45, of them the line 0 · 0
+  city        120 ·    0 (0 / 0) · calm 47, of them the line 0 · 0
+  metropolis  120 ·    0 (0 / 0) · calm 43, of them the line 0 · 0
+SECRET POOLS (static): the crisis pools 98 rows, 10 presume a command or an office, none with a holder test; the rare rows 194, 0 presume one, 0 of them with a holder test
+  crisis · under_siege: Secretly negotiating surrender terms with the besieging force, without the counc [needs []; excludes ["ruler: lord","ruler: occupier"]; holder test: none]
+  crisis · under_siege: The supplies they declared destroyed in a fire are actually hidden in a location [needs ["starving"]; excludes []; holder test: none]
+  crisis · under_siege: Authorised an illegal sortie that failed. Five people died and no record was kep [needs ["other npc"]; excludes []; holder test: none]
+  crisis · famine: Sold off the settlement's emergency stores three months ago and reported them de [needs []; excludes []; holder test: none]
+  crisis · indebted: The debt was not authorised by the council. They signed alone under pressure and [needs []; excludes ["ruler: lord","ruler: occupier"]; holder test: none]
+  crisis · indebted: Knows the debt contains a clause that transfers significant civic assets to the  [needs ["other npc"]; excludes []; holder test: none]
+  crisis · monster_pressure: The work they authorised six months ago disturbed a nesting site. The attacks st [needs []; excludes []; holder test: none]
+  crisis · mass_migration: Signed the order closing the settlement to further arrivals, then made a paid ex [needs ["migration: influx","other npc"]; excludes []; holder test: none]
+  crisis · wartime: Authorised the seizure of a rival's property as a 'war measure', on evidence the [needs []; excludes []; holder test: none]
+  crisis · slave_revolt: Knows the revolt began because of a specific atrocity the authorities ordered an [needs []; excludes []; holder test: none]
+RARE ROWS DEALT over this render: 273 (natures 85, masters 7, outsiders 11, ties 88, deeds 82); 5 with a holder test of role or office; 0 against their holder

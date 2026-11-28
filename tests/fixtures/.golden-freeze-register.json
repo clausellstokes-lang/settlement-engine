@@ -205,11 +205,11 @@
       "suite": "tests/domain/townCartographyCalibration.test.js",
       "recordEnv": "UPDATE_CARTOGRAPHY_CALIBRATION",
       "proofForm": null,
-      "sha256": "8b9f334a578b965bce1a19635ee82ae7a0b2e9b88e7fb7af4e7449e475265200",
+      "sha256": "54cb428d356fc9bca3c423bc18020bdcbf28fc54ed5d916f7da5205f5f6faca4",
       "rows": 504,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (RUNG 1 OF THE SOAK LADDER, recorded by the cloud chair, session 019yED1Rc3svZxTNcEJVRr77)",
+      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation to the cloud chair) and, for this signing, the owner's own word in the chair's chat (session_01ACmDYZrFEVXyZEUg1NDxxC) on 2026-11-15 at 20:27:16 UTC, verbatim \"Yes refresh the reference\", answering the chair's ask of 17:56 UTC (repeated 19:03 UTC) for the words \"Yes, refresh the reference files.\": for the three reference files left pending at the last close and this round's refresh of the reference corpus at the joined tree",
       "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
@@ -218,11 +218,11 @@
       "suite": "tests/property/chroniclersLetterGolden.test.js",
       "recordEnv": "UPDATE_LETTER_GOLDEN",
       "proofForm": null,
-      "sha256": "2009cf7f2e81f4e653e51544ce7124c8f50c4f43dcb7b887df339243c7e9c932",
+      "sha256": "98b4e6fa52272aa16e48d511621fa722b57c2ef456e112557725958bf143fa4b",
       "rows": 4,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§901",
+      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation of 2026-11-06 to the cloud chair; the style wave's merge STYLE-2-MERGE, 2026-11-09)",
       "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
@@ -288,11 +288,11 @@
         "PRE_COUPLING_CORPUS_SHA"
       ],
       "frozenConstants": null,
-      "sha256": "716347511d7cb0c8a66c81ce26d6ba2c50913536aea7d8bed1ffa9352b7f0ced",
+      "sha256": "279d73c594ab06d52c154d32bb7bf25753c09a2558301f96be24ba5438c0deed",
       "rows": null,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (RUNG 1 OF THE SOAK LADDER; the owner's delegation of 2026-11-06 to the cloud chair, session 01FE9mEvGxnFx6WTBkEC6ie9)",
+      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation to the cloud chair) and, for this signing, the owner's own word in the chair's chat (session_01FbPLbcLDSJzZFzb5B7EjxR) on 2026-11-18 at about 19:07 UTC, verbatim, \"Yes to both\": the refresh of the stored reference files again AND the golden door's signing, asked by the chair under the operating standard's rule 17 (a recorded approval is history, never a grant), for this last close only (docs/chair/2026-11-18/lastclose/BRIEF-LASTCLOSE.md on lane/chair-2026-11-08). The word never covers a merge to master, a deploy, a migration, or any touch of a hosted database or a production credential. The chair read this record at e0fed13df, announced the signing in that chat at 01:04 UTC on 2026-11-19 and gave this seat its line \"SIGN\" (2026-11-19 01:04 UTC, with its ruling on generationForkCensus.test.js: this seat writes only its GOLDEN_CONTROL_HASH line and dated note). It authorizes THIS close's signing, at this tree, ONCE; nothing after this close is covered",
       "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON.",
       "governance": "Charter §1.1 row 15 / §1.1a. Its header carries a hand-maintained enumeration of chartered movement windows which the freeze act retires into one sentence. Implementation-leave: the fence itself is not rebuilt."
     },
@@ -342,11 +342,11 @@
       "suite": "tests/property/generatorGoldenMaster.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": "e7e8a6ff2cec9ab63bf363335c2ea3563c9f984dfaddd32a643dcc1bda60b457",
+      "sha256": "079bfce6d67fa99cfdd9a52f81d3c4dd1070390a1e8f8073795f39d5d0aa05c7",
       "rows": 525,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (RUNG 1 OF THE SOAK LADDER; the owner's delegation of 2026-11-06 to the cloud chair, session 01FE9mEvGxnFx6WTBkEC6ie9)",
+      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation to the cloud chair) and, for this signing, the owner's own word in the chair's chat (session_01FbPLbcLDSJzZFzb5B7EjxR) on 2026-11-18 at about 19:07 UTC, verbatim, \"Yes to both\": the refresh of the stored reference files again AND the golden door's signing, asked by the chair under the operating standard's rule 17 (a recorded approval is history, never a grant), for this last close only (docs/chair/2026-11-18/lastclose/BRIEF-LASTCLOSE.md on lane/chair-2026-11-08). The word never covers a merge to master, a deploy, a migration, or any touch of a hosted database or a production credential. The chair read this record at e0fed13df, announced the signing in that chat at 01:04 UTC on 2026-11-19 and gave this seat its line \"SIGN\" (2026-11-19 01:04 UTC, with its ruling on generationForkCensus.test.js: this seat writes only its GOLDEN_CONTROL_HASH line and dated note). It authorizes THIS close's signing, at this tree, ONCE; nothing after this close is covered",
       "note": "RE-RECORDED THROUGH THE SIGNED DOOR at the genesis freeze 2026-09-16 (owner: 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); 525 rows moved since the em-dash wave e3f6029b2 (banked §901); the key set unchanged."
     },
     {
@@ -498,11 +498,11 @@
       "suite": "tests/pdf/goldenViewModel.test.js",
       "recordEnv": null,
       "proofForm": null,
-      "sha256": "4db1770ecf6aa63ca35dd0e5229f6ca9bf4fff5acb75b60ec86d066614723684",
+      "sha256": "fbdccdedaf7c6a0960c1882694ad69abc68bbe857f0675a7fbd0157276f335fe",
       "rows": null,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (RUNG 1 OF THE SOAK LADDER, recorded by the cloud chair, session 019yED1Rc3svZxTNcEJVRr77)",
+      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation to the cloud chair) and, for this signing, the owner's own word in the chair's chat on 2026-11-15 at 06:00 UTC, recorded in the chair's records 454, 456 and 457 on lane/chair-2026-11-08 (docs/chair/2026-11-14/CHAIR-HANDOFF-FIFTH.md, section 1); the chair's ruling GD1 of 2026-11-15 names the moved families",
       "governance": "THE WRITER IS VITEST ITSELF, NOT REPO SOURCE. This surface is a vitest toMatchSnapshot() file; its lawful re-record path is `vitest -u`. That path carries no env spelling and no writeFileSync, so no source scan can see it and THE DOOR CANNOT REFUSE IT. The walker can only CONVICT the result after the fact via the byte arm. This asymmetry is real and is written here rather than discovered at the freeze: for this one surface the machinery detects but does not prevent. Ruling on whether to convert it to a door-written manifest belongs to the freeze act.",
       "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON. Charter §1.1 row 6. The only __snapshots__ file in the estate."
     },
@@ -824,11 +824,11 @@
       "suite": "tests/property/dossierProseManifest.test.js",
       "recordEnv": null,
       "proofForm": null,
-      "sha256": "777e4b4b2968fab6b02a758435c7dcc8c779753942aeab77c4ae8c261e6d990e",
+      "sha256": "e4f5a46b18e3b4f6025f5f6c9d7268f48f9984c42faddc576c3dae2ec36b96d1",
       "rows": 2,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (RUNG 1 OF THE SOAK LADDER; the owner's delegation of 2026-11-06 to the cloud chair, session 01FE9mEvGxnFx6WTBkEC6ie9)",
+      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation to the cloud chair) and, for this signing, the owner's own word in the chair's chat (session_01FbPLbcLDSJzZFzb5B7EjxR) on 2026-11-18 at about 19:07 UTC, verbatim, \"Yes to both\": the refresh of the stored reference files again AND the golden door's signing, asked by the chair under the operating standard's rule 17 (a recorded approval is history, never a grant), for this last close only (docs/chair/2026-11-18/lastclose/BRIEF-LASTCLOSE.md on lane/chair-2026-11-08). The word never covers a merge to master, a deploy, a migration, or any touch of a hosted database or a production credential. The chair read this record at e0fed13df, announced the signing in that chat at 01:04 UTC on 2026-11-19 and gave this seat its line \"SIGN\" (2026-11-19 01:04 UTC, with its ruling on generationForkCensus.test.js: this seat writes only its GOLDEN_CONTROL_HASH line and dated note). It authorizes THIS close's signing, at this tree, ONCE; nothing after this close is covered",
       "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON. ENROLLED, NOT RECORDED, AND THE DIFFERENCE IS THE WHOLE ROW. The chair's enroll record, verbatim: \"ENROLL dossier-prose-manifest — chair Fable 5.1, 2026-09-08, ARCH-COMPOSED-PROSE-v2 §3.7 / MEASURE car 1: a new golden carrier for the dossier's composed text (DRIFT corpus 525 × 2 audiences); the generator golden master cannot see a dossier sentence; every later change to this carrier is a declared shift on the SHIFT REGISTER, signed per cell class by the classifier's print.\" WHY THE RECORD IS QUOTED HERE AND NOT CUT AS A FILE, and why no capture arm runs through the door today: this register is UNFROZEN, and two of its own arms refuse both acts. goldenFreeze.walker.test.js asserts that while frozenAt is null NO surface row carries a sha256, rows or ownerRow — and recordGolden writes exactly those three in the same act that writes the fixture — and it asserts that docs/shift-records/ holds no cut record at all before the freeze act's own genesis record. A capture arm routed through the door today would therefore poison this register and red two green arms. This row follows the preset-lighting-witness precedent verbatim in shape: tests/helpers/dossierManifest.js is the SINGLE WRITER of the measurement and is imported by the suite, by scripts/prose-manifest-cells.mjs and by scripts/prose-duplicate-units.mjs, so the recorded world and the asserted world cannot diverge; the fixture bytes are exactly manifestBytes(driftRun().rows) and the suite asserts that identity by sha on every run. The path is deliberately named `-golden` so arm 2's tests/fixtures/*golden*.json glob claims it: a carrier named outside that glob would be enrolled only by this lane's good faith, and a later deletion of this row would red nothing. Enrolled by lane MEASURE car 1 (seat Opus 5 — Fable-unvalidated) in the same commit that minted the surface. When the freeze act arms this register, its re-record path becomes the door like every other."
     },
     {
@@ -837,11 +837,11 @@
       "suite": "tests/simulation/presetLightingWitness.test.js",
       "recordEnv": null,
       "proofForm": null,
-      "sha256": "5033cae6d429106447148b6be4f317f08a193c53e966c42083947494f08b12cd",
+      "sha256": "2898fcfd7758ae844b457be043ec18ecb2984ef6f01c1fb383e283b59e4b87e0",
       "rows": 15,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (RUNG 1 OF THE SOAK LADDER; the owner's delegation of 2026-11-06 to the cloud chair, session 01FE9mEvGxnFx6WTBkEC6ie9)",
+      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation to the cloud chair) and, for this signing, the owner's own word in the chair's chat (session_01ACmDYZrFEVXyZEUg1NDxxC) on 2026-11-15 at 20:27:16 UTC, verbatim \"Yes refresh the reference\", answering the chair's ask of 17:56 UTC (repeated 19:03 UTC) for the words \"Yes, refresh the reference files.\": for the three reference files left pending at the last close and this round's refresh of the reference corpus at the joined tree",
       "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON. NO CAPTURE ARM EXISTS, AND THAT IS THE POINT. This is the estate's only bit-level witness of WHICH simulation preset a NEW CAMPAIGN is born with: every other pulse and dormancy golden drives literal rules, so lighting the shipped default — or silently re-darkening it later — is invisible to all of them. The manifest records, per preset plus a `__birth_default__` row born through the real birth door with no preset id, the resolved birth rules and the hashes of one simulated year (52 interior one-week ticks). It carries no env spelling and no writeFileSync: the door writes recorded values onto these rows, and every such value must stay null until the freeze act, so a capture arm routed through the door today would poison this register. Re-recorded BY HAND under the golden-shift discipline, from the recipe in the manifest's own _doc, which drives tests/simulation/presetLightingWitnessRun.js — the single writer of the measurement, imported by the suite so the recorded world and the asserted world cannot diverge. The path is deliberately named `-golden` so arm 2's tests/fixtures/*golden*.json glob claims it: a witness named outside that glob would be enrolled only by this lane's good faith, and a later deletion of this row would red nothing. Enrolled by lane LGT-P14-WITNESS (seat Opus 5 — Fable-unvalidated) in the same commit that minted the surface. When the freeze act arms this register, its re-record path becomes the door like every other."
     },
     {
@@ -850,11 +850,11 @@
       "suite": "tests/property/heraldKnowledgeDeskGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": "880e9d8e5a508870b6642c38fa2b83c40bbf0047e0e4ae53b78b68369e7aca1b",
-      "rows": 435,
+      "sha256": "82d8091e6c7df9a7530ffd81ea47ed7908cc543bbfe8876e682c2cafc90ab784",
+      "rows": 475,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (RUNG 1 OF THE SOAK LADDER, recorded by the cloud chair, session 019yED1Rc3svZxTNcEJVRr77)",
+      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation to the cloud chair) and, for this signing, the owner's own word in the chair's chat (session_01FbPLbcLDSJzZFzb5B7EjxR): on 2026-11-18 at 03:03:46 UTC, verbatim, the whole of the message, \"yes: refresh the stored reference files and open the pull request.\", answering the chair's message put in that chat at 02:47:31 UTC, which set out what a deploy needs (\"1. I refresh the stored reference figures (hours of work; needs your plain yes). 2. I run the full check until it is green. 3. I open the pull request. 4. You merge it and run the 7 database updates; the site then builds itself.\") and asked for one of two answers, the first of them, word for word, \"Yes: refresh the stored reference files and open the pull request.\", with the chair's gloss \"I freeze the working line after this merge and start the close at once. The work still with builders lands after the deploy, and a second, smaller close follows later.\" (\"the stored reference files\" is the chair's plain name, in its reports to the owner, for the stored figures of the close, the signed golden corpus of example towns among them). The chair announced the signing in that chat and gave this seat its line \"SIGN\" at 06:57 UTC on 2026-11-18. It authorizes THIS close's signing, at this tree, ONCE; nothing after this close is covered",
       "note": "ENROLLED 2026-09-24 by lane FP-I5 (IN-5) under the FP chair's dispatch, record docs/shift-records/2026-09-24-in5-herald-knowledge-desk.json (action enroll, chair-signed). THE NON-OMNISCIENT HERALD GOLDEN of the belief_misjudgment refile (J-INF-6), captured FIRST at the clean base 57b52b510 before the routing table moved: the reader corpus full_simulation row rr-fresh-full after one year, read through buildHeraldFeed campaign lens. Keys: <row>|contentSha256 (every item's content except its desk, sorted by id), <row>|itemCount, and <row>|section|<id> (the desk at capture). tests/property/heraldKnowledgeDeskGolden.test.js holds the digest and count byte-stable and asserts every desk equals its captured desk except the declared refile set, which reads the knowledge desk: the one-time shift, recorded. The single producer is tests/helpers/heraldDeskGolden.js, imported by the suite; the capture ran it byte-identical from outside the tree so the door's clean-tree refusal held."
     }
   ]

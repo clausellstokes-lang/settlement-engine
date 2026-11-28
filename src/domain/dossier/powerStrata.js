@@ -32,6 +32,9 @@
 import { coupContenders } from '../rulingPowerCoup.js';
 import { governingFactionOf, nameOf, num } from '../rulingPower.js';
 import { factionArchetype } from '../factionArchetypes.js';
+import { powerSentenceName } from '../display/powerSentenceName.js';
+import { seatsByHolder } from '../seat/seatLaw.js';
+import { holderOf } from '../seat/holderOfSeat.js';
 
 /** @typedef {import('../rulingPower.js').RulingPowerSettlement} RulingPowerSettlement */
 /** @typedef {import('../rulingPower.js').RulingFaction} RulingFaction */
@@ -42,6 +45,36 @@ import { factionArchetype } from '../factionArchetypes.js';
  * shared RulingFaction contract, so declared locally here).
  * @typedef {RulingFaction & { powerLabel?: string }} StrataFaction
  */
+
+/**
+ * THE AUDIENCE OF THESE READS (U7, CS13; SEAT-10's brief U7-PAGE): `'owner'` or `'reader'`. They serve shared and public
+ * pages, so a missing or unknown audience is the reader's (`seat/holderOfSeat.js :: holderOf`'s own fail-closed rule).
+ * @typedef {{ audience?: unknown }} StrataOptions
+ */
+
+/**
+ * THE HOLDER AS THE RULING HOUSE (U7, CS13). Under the seat law (`seat/seatLaw.js :: seatsByHolder`, the record's own
+ * marker) the governing row is the FORM, the office, and the power that holds it is read apart
+ * (`seat/holderOfSeat.js :: holderOf`). After a kept-form transfer the form row stays governing while the holder moves,
+ * so a read that took the governing row as the ruling house named the OLD house's person (the probe `u7probe/`: 6 of
+ * the 11 kept-form transfers on 160 lit births). This answers the holder's row where the reads must take it as the
+ * ruling house, or null where they read exactly as before: under law 1 (holderOf is then never asked); with no holder
+ * (the office holds itself, R4/R5, or an unattributed transfer); a holder that is the form's own row; a vacancy (the
+ * seat stands empty by the record's own fact, and the chain says so; no house is named beside it); and, for the
+ * reader, a hidden or criminal holder (`seat/seatTable.js :: isVeiledRow`, which `holderOf` refuses to the reader).
+ * @param {RulingPowerSettlement | null | undefined} settlement @param {StrataOptions} [options]
+ * @returns {{ holder: StrataFaction, person: import('./seatHolder.js').SeatNpc | null } | null}
+ */
+function rulingHouseApartOf(settlement, options) {
+  if (!settlement || !seatsByHolder(settlement)) return null;
+  const governing = governingFactionOf(settlement);
+  if (!governing || (Array.isArray(governing.modifiers) && governing.modifiers.includes('vacant'))) return null;
+  const audience = options?.audience === 'owner' ? 'owner' : 'reader';
+  const held = holderOf(/** @type {import('./seatHolder.js').SeatSettlement} */ (/** @type {unknown} */ (settlement)), { audience });
+  const holder = /** @type {StrataFaction | null} */ (held.holder);
+  if (!holder || holder === governing || nameOf(holder) === nameOf(governing)) return null;
+  return { holder, person: held.person };
+}
 
 /**
  * The settlement as the RULING CHAIN reads it (§815): the shared ruling-power
@@ -74,6 +107,9 @@ import { factionArchetype } from '../factionArchetypes.js';
  * @property {number}    [weight]       Coup weight (contenders only).
  * @property {boolean}   [gated]        Whether the ruler's amplified case re-enters the field (ruler only).
  * @property {number}    [contenderCount]  How many contenders press the seat (ruler only).
+ * @property {string}    [seatOf]       U7: the FORM whose seat the ruler holds, where the ruler is a holder apart from
+ *                                      it (ruler only; never for a holder veiled to the reader, who is then not the ruler).
+ * @property {boolean}   [bound]        D6: a contender the web shows bound to the ruler (`boundToRuler`; contenders only).
  */
 
 /**
@@ -86,7 +122,29 @@ import { factionArchetype } from '../factionArchetypes.js';
  * @property {string}  powerLabel        The faction's power-band label.
  * @property {boolean} isPower           True when this faction appears in THE POWERS.
  * @property {PowerRole | null} powerRole  'ruler' (holds the seat), 'contender' (contests it), or null.
+ * @property {boolean} [powerBound]      D6: a contender the web shows bound to the ruler (its marker's word).
  */
+
+/**
+ * THE TIES THAT BIND A POWER TO THE RULER (D6, WORDS-1; the tenth chair's ruling G7 of 2026-11-25, intake item 11): a
+ * contender whose tie with the printed ruler, or with the form whose seat that ruler holds, is one of these kinds is shown
+ * by the page itself as bound to the ruler, so it "could contend" and does not "contest" in the present tense. The word
+ * only: the list, its order, every standing and every tie are as before.
+ */
+export const BOUND_TO_RULER_KINDS = Object.freeze(['dependent', 'symbiotic', 'subordinate']);
+
+/**
+ * Whether `name` is bound to any of `rulers` by a tie of `BOUND_TO_RULER_KINDS` in the record's web.
+ * @param {unknown} relationships `powerStructure.factionRelationships` @param {string} name @param {string[]} rulers
+ * @returns {boolean}
+ */
+function boundToRuler(relationships, name, rulers) {
+  return (Array.isArray(relationships) ? relationships : []).some((r) => {
+    const pair = /** @type {{ pair?: unknown }} */ (r)?.pair; const type = /** @type {{ type?: unknown }} */ (r)?.type;
+    return Array.isArray(pair) && pair[0] !== pair[1] && pair.includes(name) && rulers.some((x) => pair.includes(x))
+      && typeof type === 'string' && BOUND_TO_RULER_KINDS.includes(type);
+  });
+}
 
 /**
  * Derive THE POWERS and THE FACTIONS strata from a settlement.
@@ -98,10 +156,15 @@ import { factionArchetype } from '../factionArchetypes.js';
  * (a seat + up to three challengers). THE FACTIONS = every faction in the
  * settlement's own order, each flagged `isPower` by membership in THE POWERS.
  *
+ * UNDER THE SEAT LAW (U7): where the holder stands apart from the form (`rulingHouseApartOf`), the ruler entry is
+ * the HOLDER's row, the power that holds the seat; the incumbent's case (`gated`, `contenderCount`) is the seat's, as
+ * before. `coupContenders` already takes the holder out of the field.
+ *
  * @param {RulingPowerSettlement | null | undefined} settlement
+ * @param {StrataOptions} [options] the audience (the reader's, unless the caller is the owner's own document)
  * @returns {{ powers: PowerEntry[], roster: RosterEntry[] }}
  */
-export function derivePowerStrata(settlement) {
+export function derivePowerStrata(settlement, options) {
   const ps = settlement?.powerStructure || {};
   const factions = /** @type {StrataFaction[]} */ (Array.isArray(ps.factions) ? ps.factions : []);
   const governing = /** @type {StrataFaction | null} */ (governingFactionOf(settlement));
@@ -127,13 +190,19 @@ export function derivePowerStrata(settlement) {
     powers.push(entry);
   };
 
-  if (governing) {
-    const name = nameOf(governing);
+  const apart = rulingHouseApartOf(settlement, options);
+  const ruler = apart?.holder || governing;
+  // D6: the ruler as printed, and the form whose seat it holds where it stands apart
+  const rulers = [ruler ? nameOf(ruler) : '', apart && governing ? nameOf(governing) : ''].filter(Boolean);
+  const web = /** @type {{ factionRelationships?: unknown }} */ (ps).factionRelationships;
+  if (ruler) {
+    const name = nameOf(ruler);
     pushPower({
+      ...(apart && governing ? { seatOf: nameOf(governing) } : {}),
       name,
-      archetype: factionArchetype(governing),
-      power: num(governing.power),
-      powerLabel: governing.powerLabel || '',
+      archetype: factionArchetype(ruler),
+      power: num(ruler.power),
+      powerLabel: ruler.powerLabel || '',
       role: 'ruler',
       gated: incumbent.gated,
       contenderCount: challengers.length,
@@ -148,6 +217,7 @@ export function derivePowerStrata(settlement) {
       powerLabel: f ? (f.powerLabel || '') : '',
       role: 'contender',
       weight: c.weight,
+      bound: boundToRuler(web, c.name, rulers),
     });
   }
 
@@ -161,8 +231,9 @@ export function derivePowerStrata(settlement) {
       power: num(f.power),
       powerLabel: f.powerLabel || '',
       isPower: !!name && powerNames.has(name),
-      // "Holds power" is the ruler's word alone; a contender contests the seat.
+      // "Holds power" is the ruler's word alone; a contender contests the seat (D6: or could, where the web binds it to the ruler).
       powerRole: (name && powerNames.get(name)) || null,
+      ...(name && powerNames.get(name) === 'contender' ? { powerBound: boundToRuler(web, name, rulers) } : {}),
     };
   });
 
@@ -259,6 +330,9 @@ export function groupRelationships(relationships) {
  * stand-ins, and the settlement-wide fallback is gone.
  */
 import { seatCandidatesOf, isOfficeStandIn } from './seatHolder.js';
+import { cardHatsOf } from '../people/cardPowers.js';
+import { seatKeeperLineOf } from '../people/seatKeeper.js';
+import { membersByRank } from '../people/membership.js';
 import { hasLadder, ladderRungsOf, ladderFactionKeyOf } from '../townMap/ladderRead.js';
 
 /**
@@ -300,7 +374,15 @@ export function liveSeatCandidatesOf(settlement) {
  *             pre-density line (§810.3 R12/R15 are not yet generation law;
  *             TE-DENSITY-1 is censusing the gap).
  *
+ * UNDER THE SEAT LAW (U7, CS13), where the holder stands apart from the form (`rulingHouseApartOf`): `power` stays
+ * the FORM (the office); `faction` is the HOLDER; `npc` is ONE FACT, the record's hat-wearer (`holderOf`'s person: the
+ * one who wears the office, less the ousted, and for the reader less a veiled face), named by both hats. No fall-back
+ * (the chair's E77): where nobody wears the hat, the absence line stands. After a kept-form transfer the hat is on the
+ * holder's first because the transfer moved it (`rulingPower.js :: transferRulingPower`, U5-STALE), never because the
+ * page chose another person. Elsewhere, not a byte moves.
+ *
  * @param {RulingChainSettlement | null | undefined} settlement
+ * @param {StrataOptions} [options] the audience (the reader's, unless the caller is the owner's own document)
  * @returns {{
  *   power: { name: string, archetype: string, powerLabel: string, government: string | null } | null,
  *   faction: { name: string, power: number, powerLabel: string, vacant: boolean } | null,
@@ -308,7 +390,7 @@ export function liveSeatCandidatesOf(settlement) {
  *   absence: { kind: 'missing_seat' | 'unrecorded', claimants: string[], line: string } | null,
  * }}
  */
-export function rulingChainOf(settlement) {
+export function rulingChainOf(settlement, options) {
   const ps = settlement?.powerStructure || {};
   const factions = Array.isArray(ps.factions) ? ps.factions : [];
   const governing = /** @type {StrataFaction | null} */ (governingFactionOf(settlement));
@@ -330,13 +412,19 @@ export function rulingChainOf(settlement) {
   // When R13's typed missing-seat stressor family lands, the view keys on THAT.
   const vacant = !!governing && Array.isArray(governing.modifiers) && governing.modifiers.includes('vacant');
   const claimants = vacant ? factions.map((f) => nameOf(f)).filter((n) => /claimant/i.test(n)) : [];
-  const faction = governing
-    ? { name: nameOf(governing), power: num(governing.power), powerLabel: governing.powerLabel || '', vacant }
+  // U7: under the seat law the ruling house is the holder where it stands apart from the form; else the governing row
+  const apart = rulingHouseApartOf(settlement, options);
+  const house = apart ? apart.holder : governing;
+  const faction = house
+    ? { name: nameOf(house), power: num(house.power), powerLabel: house.powerLabel || '', vacant }
     : null;
 
+  // (0) U7 (the chair's E77): where the holder stands apart, the record's hat-wearer, and nothing else.
+  const wearer = apart ? apart.person : null;
+  /** @type {{ name: string, role: string, via: 'ladder' | 'roster' } | null} */
+  let npc = wearer ? { name: String(wearer.name || ''), role: cardHatsOf(wearer), via: 'roster' } : null;
   // (1) The ladder-backed ruler — the governing faction's top rung.
-  let npc = null;
-  if (governing && hasLadder(settlement)) {
+  if (!apart && governing && hasLadder(settlement)) {
     const rungs = ladderRungsOf(settlement, ladderFactionKeyOf(governing));
     const roster = /** @type {unknown[]} */ (Array.isArray(settlement?.npcs) ? settlement.npcs : []);
     const top = rungs[0];
@@ -347,10 +435,11 @@ export function rulingChainOf(settlement) {
     }
   }
   // (2) The seat-holder (generation-time; never merely-senior, never a stand-in).
-  if (!npc && governing && !vacant) {
+  if (!apart && !npc && governing && !vacant) {
     const chosen = liveSeatCandidatesOf(settlement)[0] || null;
     if (chosen) {
-      npc = { name: String(chosen.name || ''), role: String(chosen.role || ''), via: /** @type {'roster'} */ ('roster') };
+      // COHERENCE-POWERS: the dual-hat leader is named by both hats ("the miller and Mayor"); any other holder by its role
+      npc = { name: String(chosen.name || ''), role: cardHatsOf(chosen), via: /** @type {'roster'} */ ('roster') };
     }
   }
 
@@ -360,15 +449,27 @@ export function rulingChainOf(settlement) {
     if (vacant) {
       // The row's own label is "The seat", so the line opens on the verb: the row
       // read "The seat The seat stands empty" while it opened on the noun.
-      const line = claimants.length === 0
+      // COHERENCE-POWERS-4 (F3): a claimant is a person (castPowers.js mints the claimant who faces the power), so the row
+      // names the person with the line it presses: "Theodelinde Roth for Noble Claimant (Senior Line)"
+      const roster = Array.isArray(settlement?.npcs) ? settlement.npcs : [];
+      const claimantWords = claimants.map((power) => {
+        const first = /** @type {{ name?: unknown, memberships?: unknown } | undefined} */ (membersByRank(roster, power)[0]);
+        const leads = !!first && Array.isArray(first.memberships)
+          && first.memberships.some((m) => !!m && typeof m === 'object' && m.power === power && m.rank === 1);
+        return leads && first?.name ? `${String(first.name)} for ${power}` : power;
+      });
+      const empty = claimants.length === 0
         ? 'Stands empty; the succession is unsettled.'
-        : `Stands empty; ${claimants.length === 1 ? 'a claimant circles' : `${claimants.length} claimants circle`}: ${claimants.join(', ')}.`;
+        : `Stands empty; ${claimants.length === 1 ? 'a claimant circles' : `${claimants.length} claimants circle`}: ${claimantWords.join(', ')}.`;
+      // COHERENCE-POWERS-3 (F7): who keeps the seat while it stands empty, in the caretaker's form the card prints
+      const keeper = seatKeeperLineOf(settlement);
+      const line = keeper ? `${empty} ${keeper}` : empty;
       absence = { kind: /** @type {'missing_seat'} */ ('missing_seat'), claimants, line };
     } else if (governing) {
       absence = {
         kind: /** @type {'unrecorded'} */ ('unrecorded'),
         claimants: [],
-        line: 'No named seat-holder stands in the record. The chain ends, honestly, at the faction.',
+        line: 'No named seat-holder stands in the record. The chain ends, honestly, at the power.',
       };
     }
   }
@@ -384,36 +485,32 @@ export function rulingChainOf(settlement) {
  * whenever public legitimacy falls below the contested cut. It names nobody, and
  * on the audit's 389 no stronger rival existed in 18 of 110 cases.
  */
-export const APPEARS_TO_GOVERN = 'The faction that appears to govern is not the faction that governs.';
+export const APPEARS_TO_GOVERN = 'Holds the title, but the decisions that matter are made elsewhere.';
 
 /**
  * The faction that outranks the governing faction on the power figures: the
  * strongest non-governing faction whose power is strictly greater, first in the
  * settlement's own order on a tie. Null when the governing faction is strongest,
- * or when there is no governing faction.
+ * or when there is no governing faction. U7: under the seat law, where the holder stands apart from the form, the
+ * holder is the ruling house: the floor is its power, and neither it nor the form (its office) is its rival.
  * @param {RulingPowerSettlement | null | undefined} settlement
+ * @param {StrataOptions} [options] the audience (the reader's, unless the caller is the owner's own document)
  * @returns {string | null}
  */
-export function outrankingRivalOf(settlement) {
+export function outrankingRivalOf(settlement, options) {
   const governing = governingFactionOf(settlement);
   if (!governing) return null;
   const factions = /** @type {StrataFaction[]} */ (Array.isArray(settlement?.powerStructure?.factions) ? settlement.powerStructure.factions : []);
-  const floor = num(governing.power);
+  const house = rulingHouseApartOf(settlement, options)?.holder || governing;
+  const floor = num(house.power);
   /** @type {StrataFaction | null} */
   let best = null;
   for (const f of factions) {
-    if (f === governing || nameOf(f) === nameOf(governing)) continue;
+    if (f === governing || nameOf(f) === nameOf(governing) || f === house || nameOf(f) === nameOf(house)) continue;
     if (num(f.power) > (best ? num(best.power) : floor)) best = f;
   }
   return best ? nameOf(best) || null : null;
 }
-
-/**
- * The sentence the Power tab's legitimacy panel prints after "Governance fractured." when
- * governance is fractured (PowerTab.jsx). The generator's crisis note on the governing
- * faction carries the same words (factionDynamics.js :: applyLegitimacyMultipliers).
- */
-export const FRACTURE_PANEL_LINE = 'Real decisions are being made informally.';
 
 /**
  * X-50 (BOILERPLATE ONCE): a note with every sentence the tab already prints elsewhere
@@ -430,6 +527,43 @@ export function withoutShownSentences(note, shown) {
 }
 
 /**
+ * BAR2-PEOPLE (PP2, the chair's ruling of 2026-11-15, vetoable by the owner): ONE HOME FOR WHO DECIDES. Under an
+ * occupation the power the occupation sent in decides (factionDynamics.js: the hall "carries out what" it "decides"),
+ * whatever the figures: the note named the strongest power ("made by Merchant Guilds" beside "The Guild Council carries
+ * out what Occupation Authority decides"). Elsewhere the decider is the outranking rival, the fact the relation line reads.
+ * An occupier is filed under the military category, so its name decides too (crisisCast.js :: isOccupier's rule, less its `garrison rule` alternative: no generated name carries it, and its defence word is the defence home's to read: BAR2-PEOPLE-3, the books, defenceFactReaders).
+ * U7: under the seat law, where the holder stands apart from the form, the holder is the ruling house: neither it nor
+ * the form is the occupier that decides for it.
+ * @param {RulingPowerSettlement | null | undefined} settlement
+ * @param {StrataOptions} [options] the audience (the reader's, unless the caller is the owner's own document)
+ * @returns {string | null}
+ */
+export function deciderOf(settlement, options) {
+  const governing = governingFactionOf(settlement);
+  if (!governing) return null;
+  const factions = /** @type {StrataFaction[]} */ (Array.isArray(settlement?.powerStructure?.factions) ? settlement.powerStructure.factions : []);
+  const house = rulingHouseApartOf(settlement, options)?.holder || governing;
+  const occupier = factions.find((f) => f !== governing && nameOf(f) !== nameOf(governing) && f !== house && nameOf(f) !== nameOf(house)
+    && (factionArchetype(f) === 'occupation' || /occupation|occupying|imperial\s+presence|annex/i.test(nameOf(f) || '')));
+  return occupier ? nameOf(occupier) || null : outrankingRivalOf(settlement, options);
+}
+
+/**
+ * Does a relation line of the record already say that `decider` decides for the governing power ("<gov> carries out what
+ * <decider> decides.", "<gov> keeps the title; <decider> makes the decisions that matter.")? Then the note is silent.
+ * @param {RulingPowerSettlement | null | undefined} settlement @param {StrataFaction | null} governing @param {string} decider
+ * @returns {boolean}
+ */
+function relationNamesDecider(settlement, governing, decider) {
+  const rows = /** @type {Array<{ pair?: unknown, narrative?: unknown }>} */ (Array.isArray(settlement?.powerStructure?.factionRelationships) ? settlement.powerStructure.factionRelationships : []);
+  const gov = governing ? nameOf(governing) : null;
+  // BAR3-PEOPLE (P2, C5598 C7553; the chair's word of 19:53): ANY relation row of the pair is the pair's one home ("tense":
+  // the two do not agree on who decides; "competitive": taxes bargained, not ordered; "dependent": each props up the
+  // other): the note claims no decider beside it (67 of the 91 printing towns at 59185b62a held such a row)
+  return rows.some((row) => Array.isArray(row?.pair) && row.pair.includes(gov) && row.pair.includes(decider));
+}
+
+/**
  * A faction's crisis note as the dossier prints it. The "appears to govern" claim
  * stays only on the governing faction and only when a rival outranks it, and then
  * it names that rival; otherwise the sentence is dropped and the rest of the note
@@ -442,7 +576,10 @@ export function crisisNoteFor(settlement, faction) {
   const note = typeof faction?.crisisNote === 'string' ? faction.crisisNote : '';
   if (!note.includes(APPEARS_TO_GOVERN)) return note;
   const governing = governingFactionOf(settlement);
-  const rival = governing && faction === governing ? outrankingRivalOf(settlement) : null;
-  const said = rival ? `${APPEARS_TO_GOVERN.slice(0, -1)}; the real decisions rest with ${rival}.` : '';
+  const rival = governing && faction === governing ? deciderOf(settlement) : null;
+  // POWERS-16 (the chair's ruling (r2)): the rival named in the sentence takes its prose form, from one leaf
+  // BAR2-PEOPLE (PP2): a relation line that already names the decider is its one home; the note is then silent
+  const said = rival && !relationNamesDecider(settlement, governing, rival)
+    ? `Holds the title; the decisions that matter are made by ${powerSentenceName(rival)}.` : '';
   return note.replace(APPEARS_TO_GOVERN, said).replace(/\s{2,}/g, ' ').trim();
 }

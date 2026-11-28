@@ -66,7 +66,12 @@ const TABS = [
   ['Power', (s) => <PowerTab powerStructure={s.powerStructure} settlement={s} />],
   ['PlotHooks', (s) => <PlotHooksTab settlement={s} />],
 ];
-const HEADER = /The roads into this \p{L}+ are busy and the \p{L}+ is poor/u;
+// W1 ECO (2026-11-07): DS-ECO-1 C4 v2 reworded under the owner's style law; W1-A0b (2026-11-08) drops its {access} slot, an A0b over-claim ("The way into {settlement} is busy and the town is poor").
+// SW-B6 (2026-11-09, STYLE-RULINGS-2 B6): C4 v2 rewritten again ("Plenty passes through {settlement}, and little of it
+// stops. The town is poor, and its people say so to anyone who asks."); the pin follows the same variant by identity.
+// BAR2-CLOSE-SWEEP-B (2026-11-15): BAR2-CORPUS batch 2 (42064c9d5, declared in its hand-back) reworded C4 v2 to "Little that
+// comes past {settlement} stops there. The town is poor, ..."; the old words matched nothing, so the pin follows v2 again.
+const HEADER = /stops there\. The \p{L}+ is poor/u;
 
 function expandAll(container) {
   for (let pass = 0; pass < 4; pass += 1) {
@@ -78,6 +83,15 @@ function expandAll(container) {
 
 /** @type {Array<{s: object, pages: Record<string, string>}>} */
 const PLACES = [];
+// RULING CURE-118-5 (9): G6 (merge 79fd56b248) put `no exports` on DS-ECO-1 C4 v2, and none of the 60 places above draws the
+// header line now. THE HEADER ARM GAINS NAMED PLACES THAT DO, by key: small places born with randomized dials (`HEADER_DIALS`),
+// keys `diag118b-<tier>-<i>` (tier = ['thorp', 'hamlet', 'village'][i % 3]) walked in order from i = 0, a place taken where it
+// prints no export and the header line prints on the screen or in the PDF; the first three found (the landing helper's
+// diagnostic): the thorps Fjordthorpe, Weiqiao and Haipo. Only the Economics tab is rendered for them.
+const HEADER_DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true };
+const HEADER_KEYS = /** @type {const} */ ([['thorp', 'diag118b-thorp-690'], ['thorp', 'diag118b-thorp-720'], ['thorp', 'diag118b-thorp-942']]);
+/** @type {Array<{s: object, pages: Record<string, string>}>} */
+const HEADER_PLACES = [];
 beforeAll(async () => {
   await loadGenerationLawPayloads();
   mocks.store = {
@@ -97,6 +111,13 @@ beforeAll(async () => {
       }
       PLACES.push({ s, pages });
     }
+  }
+  for (const [tier, seed] of HEADER_KEYS) {
+    const s = generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...HEADER_DIALS, settType: tier }), null, { seed, customContent: {} });
+    const { container } = render(<EconomicsTab economicState={s.economicState} settlement={s} />);
+    expandAll(container);
+    HEADER_PLACES.push({ s, pages: { Economics: container.textContent || '' } });
+    cleanup();
   }
 }, 600_000);
 afterEach(cleanup);
@@ -121,7 +142,7 @@ describe('the screen calls a small place by its own noun', () => {
   test('the Economics header reads the same noun on the screen as in the PDF', () => {
     let compared = 0;
     const disagreements = [];
-    for (const { s, pages } of PLACES) {
+    for (const { s, pages } of [...PLACES, ...HEADER_PLACES]) {
       const printed = JSON.stringify(buildPrintProse(s)).match(HEADER)?.[0] ?? null;
       const shown = pages.Economics.match(HEADER)?.[0] ?? null;
       if (!printed && !shown) continue;

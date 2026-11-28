@@ -1,0 +1,2407 @@
+{
+  "pool": {
+    "id": "npcStructure.T",
+    "file": "src/generators/npcStructure.js",
+    "drawKind": "T",
+    "drawSite": "npcStructure.js:424 T[cat__cond__rank] (registry; ids are `<category>__<condition>__<rank>.<field>`; condition keys: governance_fractured, corruption, food_crisis, economic_stress, contested, stable — see getPrimaryCondition; keyDeclares should record what each condition key guarantees, e.g. food_crisis → hunger family; corruption → crime)",
+    "colour": false,
+    "crisisScoped": false,
+    "keyDeclares": {
+      "*__governance_fractured__*": [],
+      "*__corruption__*": [
+        "organised crime"
+      ],
+      "*__food_crisis__*": [
+        "hunger"
+      ],
+      "*__economic_stress__*": [],
+      "*__contested__*": [],
+      "*__stable__*": [],
+      "criminal__*__*": [
+        "organised crime"
+      ],
+      "magic__*__*": [
+        "magic"
+      ]
+    },
+    "lines": 288,
+    "declaring": 35,
+    "note": "Condition is getPrimaryCondition's first hit: governance_fractured = publicLegitimacy.governanceFractured (legitimacy score < 30, NOT the politically_fractured stress kind; no atom); corruption = criminalCaptureState corrupted|capture (→ crime, no factsOf home); food_crisis = foodSecurity label famine|deficit (→ hunger per brief, BUT crisisKind.js counts a deficit toward hunger only while some crisis is active, so a deficit with no stress kind is not hunger to the reader); economic_stress = prosperity struggling|poor|subsist (no atom); contested = publicLegitimacy.isContested (no atom); stable = the residual — it does NOT exclude active crisis kinds (a siege with legitimacy and food intact lands here), so the stable lines that assert a stable/well-ordered/low-risk settlement are declared crisis \"calm\". The category key guarantees the NPC (criminal → crime; magic → magic, via worldLaw.allowsRole's magic gate). crafts__* lines are verbatim copies of economy__*. WRONG TODAY: other__{corruption,food_crisis,economic_stress,contested}__* are the other__stable__* text copied by the fill loop at npcStructure.js:387-391, so under a corruption/food/economic/contested condition they print \"in a stable settlement\" / \"in stable conditions\" — the calm declarations on 264-287 record that contradiction against their own key. Also: the subordinate texts never use reg()'s replace() fallback (every reg passes an explicit sub)."
+  },
+  "rows": [
+    {
+      "id": "government__governance_fractured__dominant.position",
+      "text": "Holds the seat in name, but fewer people come when called, and some orders go unanswered.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__governance_fractured__dominant.goal",
+      "text": "Get the seat obeyed again before the week is out, or find a quiet way out of it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__governance_fractured__dominant.constraint",
+      "text": "Cannot mend what is broken without bringing to light the quiet deals that keep the place running now.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__governance_fractured__subordinate.position",
+      "text": "Holds an office under a seat that fewer people now obey; the office is only as strong as the seat.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__governance_fractured__subordinate.goal",
+      "text": "Keep their office through the collapse without being seen with the failing seat or its rivals.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__governance_fractured__subordinate.constraint",
+      "text": "Moving to protect the office looks like a grab; standing still means falling with the seat.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__corruption__dominant.position",
+      "text": "Holds the seat while criminals pay for favours close to it; some orders that matter are settled elsewhere.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__corruption__dominant.goal",
+      "text": "Keep the seat running without crossing the people whose payments keep it running.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__corruption__dominant.constraint",
+      "text": "Cannot move against the criminals without cutting off the payments the seat now runs on.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__corruption__subordinate.position",
+      "text": "Holds an office among officials who take bribes; not one of the takers, but working beside them.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__corruption__subordinate.goal",
+      "text": "Show their own books are clean while the people above them take payments.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__corruption__subordinate.constraint",
+      "text": "Any honest inquiry needs the help of officials who are themselves on the take.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__food_crisis__dominant.position",
+      "text": "Holds the seat while the food runs short; how the hunger ends will decide whether the seat is kept.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__food_crisis__dominant.goal",
+      "text": "Get food to every door before a rival for the seat does it first.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__food_crisis__dominant.constraint",
+      "text": "Cannot hand out food that is not there, and cannot say how short it is without frightening people further.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__food_crisis__subordinate.position",
+      "text": "Holds an office that is blamed for the shortage but has little say over the food.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__food_crisis__subordinate.goal",
+      "text": "Be seen handing out what little there is, and let the blame for the rest go upward.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__food_crisis__subordinate.constraint",
+      "text": "Being seen to work hard while the food stays short only spreads the blame.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__economic_stress__dominant.position",
+      "text": "Holds the seat while money is short, and people judge the seat by what it can no longer pay for.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__economic_stress__dominant.goal",
+      "text": "Win the people back with things that cost nothing: fair hearings and quick answers.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__economic_stress__dominant.constraint",
+      "text": "Cannot pay for the repairs and relief people want without coin the place does not have.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__economic_stress__subordinate.position",
+      "text": "Holds an office whose purse shrinks with everyone else's.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__economic_stress__subordinate.goal",
+      "text": "Become the one person who signs off on every coin the seat still spends.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__economic_stress__subordinate.constraint",
+      "text": "Every office is after the same few coins; making this one needed means taking from the others.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__contested__dominant.position",
+      "text": "Holds the seat, but a rival claims it, and the matter is not settled.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__contested__dominant.goal",
+      "text": "Win the doubters back before the challenger to the seat wins them first.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__contested__dominant.constraint",
+      "text": "Every hard move wins the rival new supporters; every delay gives the rival time.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__contested__subordinate.position",
+      "text": "Holds an office that hangs on a seat someone else is trying to take.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__contested__subordinate.goal",
+      "text": "Stay off both sides of the fight for the seat until it is plain who wins.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__contested__subordinate.constraint",
+      "text": "Waiting to see who wins keeps the office safe today and earns no thanks from the winner.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__stable__dominant.position",
+      "text": "Holds the seat, and people accept it; there is room to act, not just to hold on.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__stable__dominant.goal",
+      "text": "Find and mend the seat's weak spot before a rival finds it first.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__stable__dominant.constraint",
+      "text": "With nothing pressing, it is hard to win support for mending the weak spots before they break.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__stable__subordinate.position",
+      "text": "Holds an office that runs from day to day, with no crisis to answer.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__stable__subordinate.goal",
+      "text": "Do every task the seat hands them so well that the seat cannot do without them.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__stable__subordinate.constraint",
+      "text": "Good work is expected and goes unnoticed; a mistake is remembered.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__governance_fractured__dominant.position",
+      "text": "Commands those under arms while the seat loses its hold; whoever gives the orders next will want them.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__governance_fractured__dominant.goal",
+      "text": "Keep the people under their command together, whoever ends up giving the orders.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__governance_fractured__dominant.constraint",
+      "text": "Cannot step in to keep order without taking a side in the fight over the seat.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__governance_fractured__subordinate.position",
+      "text": "Leads a squad that now takes orders from more than one master.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__governance_fractured__subordinate.goal",
+      "text": "Stop any faction buying their squad away from them while the seat is broken.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__governance_fractured__subordinate.constraint",
+      "text": "Keeping the squad in hand takes quiet favours that no one can be told about.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__corruption__dominant.position",
+      "text": "Commands those under arms while criminals pay some of the people in their ranks.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__corruption__dominant.goal",
+      "text": "Find out which of their own officers are on the take, before the payers notice.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__corruption__dominant.constraint",
+      "text": "Anyone sent to look into the payments is offered the same coin.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__corruption__subordinate.position",
+      "text": "Leads a squad in a force where some officers are known to take bribes.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__corruption__subordinate.goal",
+      "text": "Keep their own hands clean without catching the eye of the bribers or the inquiry.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__corruption__subordinate.constraint",
+      "text": "Going along too easily or pushing back too hard both draw notice the squad cannot afford.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__food_crisis__dominant.position",
+      "text": "Keeps order while the food runs short, when hungry crowds are quickest to riot.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__food_crisis__dominant.goal",
+      "text": "Keep the hungry from rioting without striking anyone the crowd will remember.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__food_crisis__dominant.constraint",
+      "text": "Enough force to stop a riot can be enough to start the next, and nobody knows beforehand how much is too much.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__food_crisis__subordinate.position",
+      "text": "Leads a squad that keeps order among people who are going hungry.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__food_crisis__subordinate.goal",
+      "text": "Hold their patch quiet with too few hands, and start no fight they cannot finish.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__food_crisis__subordinate.constraint",
+      "text": "Has too few hands for the work, and is judged as though it had enough.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__economic_stress__dominant.position",
+      "text": "Keeps order while money is short, when trouble grows and the pay for stopping it shrinks.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__economic_stress__dominant.goal",
+      "text": "Be seen enough to stop trouble, and not so much that people start to hate them.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__economic_stress__dominant.constraint",
+      "text": "The same lack of coin that stirs the trouble cuts the pay of those sent to stop it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__economic_stress__subordinate.position",
+      "text": "Leads a squad that is short of pay, gear and hands.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__economic_stress__subordinate.goal",
+      "text": "Hide how short of pay and gear their squad has become before someone tests it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__economic_stress__subordinate.constraint",
+      "text": "If anyone sees how thin the squad has worn, they will test it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__contested__dominant.position",
+      "text": "Commands those under arms while rivals fight over the seat, and each side wants them.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__contested__dominant.goal",
+      "text": "Keep everyone under their command out of the fight for the seat until it is settled.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__contested__dominant.constraint",
+      "text": "Keeping those under arms out of the fight takes quiet work that cannot be owned in public.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__contested__subordinate.position",
+      "text": "Leads a squad whose members are being pulled toward one side or the other in the fight for the seat.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__contested__subordinate.goal",
+      "text": "Stop their squad splitting into two camps before the fight for the seat is over.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__contested__subordinate.constraint",
+      "text": "Some of the squad have loyalties of their own, and they do not all point the same way.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__stable__dominant.position",
+      "text": "Commands those under arms in quiet times; the work is keeping trouble from starting.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__stable__dominant.goal",
+      "text": "Keep the drills, the patrols and the pay going, and the old hands in charge of them.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__stable__dominant.constraint",
+      "text": "It is hard to win the coin and the say that would be needed if worse trouble came.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__stable__subordinate.position",
+      "text": "Leads a squad in quiet times, where the work is routine and the risks are low.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__stable__subordinate.goal",
+      "text": "Get their squad noticed for doing the dull work well, and earn a patron by it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__stable__subordinate.constraint",
+      "text": "Steady work earns no notice; getting ahead takes a crisis or a patron.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__governance_fractured__dominant.position",
+      "text": "Heads the leading house in the trade while the seat fails; deals still get done where orders do not.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__governance_fractured__dominant.goal",
+      "text": "Get their trade's new freedoms written down before whoever takes the seat next takes them back.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__governance_fractured__dominant.constraint",
+      "text": "Taking new freedoms too openly makes whoever next holds the seat see the house as a threat.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__governance_fractured__subordinate.position",
+      "text": "Runs a smaller house behind the leading one in the trade while the seat fails.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__governance_fractured__subordinate.goal",
+      "text": "Take customers from the biggest house in the trade while the seat is too weak to care.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__governance_fractured__subordinate.constraint",
+      "text": "The disorder that lets the house get ahead can just as quickly knock it back.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__corruption__dominant.position",
+      "text": "Heads the leading house in the trade where criminals have deals with those who keep order; honest and protected business are hard to tell apart.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__corruption__dominant.goal",
+      "text": "Keep trading without paying the gangs, and without needing their protection either.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__corruption__dominant.constraint",
+      "text": "Some of the trade's own dealings lean on the same bought officials it must keep clear of.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__corruption__subordinate.position",
+      "text": "Runs a smaller house in a trade where many pay the criminals to be left alone.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__corruption__subordinate.goal",
+      "text": "Be known as the honest dealer without the crooks deciding to make an example of them.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__corruption__subordinate.constraint",
+      "text": "Standing apart from the crooked dealing draws the crooks' eye; going along makes it everyone's habit.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__food_crisis__dominant.position",
+      "text": "Heads the leading house in the trade while food is short; what it sells, and to whom, is now watched.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__food_crisis__dominant.goal",
+      "text": "Sell what food they hold at a price nobody will hold against them after the shortage.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__food_crisis__dominant.constraint",
+      "text": "Every price it sets during the shortage is taken as a side chosen, whatever was meant.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__food_crisis__subordinate.position",
+      "text": "Runs a smaller house in the trade while food is short, with no hand in who gets the food.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__food_crisis__subordinate.goal",
+      "text": "Find something else to sell while the food runs short and the big dealers hold it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__food_crisis__subordinate.constraint",
+      "text": "What can be sold now depends on what the shortage has pushed aside, and that can change overnight.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__economic_stress__dominant.position",
+      "text": "Heads the leading house in the trade while money is short; it holds on, but does not grow.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__economic_stress__dominant.goal",
+      "text": "Work out which buyers will still pay next year, and drop the rest before they drag them down.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__economic_stress__dominant.constraint",
+      "text": "Keeping the best buyers means dropping others in plain view, and rivals notice the gaps.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__economic_stress__subordinate.position",
+      "text": "Runs a smaller house while money is short and the bigger houses take more of the trade.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__economic_stress__subordinate.goal",
+      "text": "Find the small trade the big houses will not bother to fight them for.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__economic_stress__subordinate.constraint",
+      "text": "The work the big houses leave alone is the work that pays least.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__contested__dominant.position",
+      "text": "Heads the leading house in the trade while rivals fight over the seat; whoever wins can make or break it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__contested__dominant.goal",
+      "text": "Lend to both sides of the fight for the seat, so whoever wins owes them.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__contested__dominant.constraint",
+      "text": "Keeping friends on both sides means neither side fully trusts the house.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__contested__subordinate.position",
+      "text": "Runs a smaller house that sells to both sides in the fight for the seat.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__contested__subordinate.goal",
+      "text": "Keep selling to every faction without any of them treating their goods as its own.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__contested__subordinate.constraint",
+      "text": "To both sides, staying out of it looks like fear or scheming.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__stable__dominant.position",
+      "text": "Heads the leading house in the trade in quiet times; its hold is secure and its say is real.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__stable__dominant.goal",
+      "text": "Turn their hold on the trade into a charter, a seat at the table, or a monopoly.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__stable__dominant.constraint",
+      "text": "Every new privilege it gathers in plain sight draws the eye of the seat and of its rivals.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__stable__subordinate.position",
+      "text": "Runs a smaller house behind the leading one in quiet times.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__stable__subordinate.goal",
+      "text": "Win more custom without treading on the biggest house in the trade.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__stable__subordinate.constraint",
+      "text": "Growing into the leading house's trade invites a reply; staying out of it means staying small.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__governance_fractured__dominant.position",
+      "text": "Heads the leading house in the trade while the seat fails; deals still get done where orders do not.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__governance_fractured__dominant.goal",
+      "text": "Get their trade's new freedoms written down before whoever takes the seat next takes them back.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__governance_fractured__dominant.constraint",
+      "text": "Taking new freedoms too openly makes whoever next holds the seat see the house as a threat.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__governance_fractured__subordinate.position",
+      "text": "Runs a smaller house behind the leading one in the trade while the seat fails.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__governance_fractured__subordinate.goal",
+      "text": "Take customers from the biggest house in the trade while the seat is too weak to care.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__governance_fractured__subordinate.constraint",
+      "text": "The disorder that lets the house get ahead can just as quickly knock it back.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__corruption__dominant.position",
+      "text": "Heads the leading house in the trade where criminals have deals with those who keep order; honest and protected business are hard to tell apart.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__corruption__dominant.goal",
+      "text": "Keep trading without paying the gangs, and without needing their protection either.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__corruption__dominant.constraint",
+      "text": "Some of the trade's own dealings lean on the same bought officials it must keep clear of.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__corruption__subordinate.position",
+      "text": "Runs a smaller house in a trade where many pay the criminals to be left alone.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__corruption__subordinate.goal",
+      "text": "Be known as the honest dealer without the crooks deciding to make an example of them.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__corruption__subordinate.constraint",
+      "text": "Standing apart from the crooked dealing draws the crooks' eye; going along makes it everyone's habit.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__food_crisis__dominant.position",
+      "text": "Heads the leading house in the trade while food is short; what it sells, and to whom, is now watched.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__food_crisis__dominant.goal",
+      "text": "Sell what food they hold at a price nobody will hold against them after the shortage.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__food_crisis__dominant.constraint",
+      "text": "Every price it sets during the shortage is taken as a side chosen, whatever was meant.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__food_crisis__subordinate.position",
+      "text": "Runs a smaller house in the trade while food is short, with no hand in who gets the food.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__food_crisis__subordinate.goal",
+      "text": "Find something else to sell while the food runs short and the big dealers hold it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__food_crisis__subordinate.constraint",
+      "text": "What can be sold now depends on what the shortage has pushed aside, and that can change overnight.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__economic_stress__dominant.position",
+      "text": "Heads the leading house in the trade while money is short; it holds on, but does not grow.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__economic_stress__dominant.goal",
+      "text": "Work out which buyers will still pay next year, and drop the rest before they drag them down.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__economic_stress__dominant.constraint",
+      "text": "Keeping the best buyers means dropping others in plain view, and rivals notice the gaps.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__economic_stress__subordinate.position",
+      "text": "Runs a smaller house while money is short and the bigger houses take more of the trade.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__economic_stress__subordinate.goal",
+      "text": "Find the small trade the big houses will not bother to fight them for.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__economic_stress__subordinate.constraint",
+      "text": "The work the big houses leave alone is the work that pays least.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__contested__dominant.position",
+      "text": "Heads the leading house in the trade while rivals fight over the seat; whoever wins can make or break it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__contested__dominant.goal",
+      "text": "Lend to both sides of the fight for the seat, so whoever wins owes them.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__contested__dominant.constraint",
+      "text": "Keeping friends on both sides means neither side fully trusts the house.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__contested__subordinate.position",
+      "text": "Runs a smaller house that sells to both sides in the fight for the seat.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__contested__subordinate.goal",
+      "text": "Keep selling to every faction without any of them treating their goods as its own.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__contested__subordinate.constraint",
+      "text": "To both sides, staying out of it looks like fear or scheming.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__stable__dominant.position",
+      "text": "Heads the leading house in the trade in quiet times; its hold is secure and its say is real.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__stable__dominant.goal",
+      "text": "Turn their hold on the trade into a charter, a seat at the table, or a monopoly.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__stable__dominant.constraint",
+      "text": "Every new privilege it gathers in plain sight draws the eye of the seat and of its rivals.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__stable__subordinate.position",
+      "text": "Runs a smaller house behind the leading one in quiet times.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__stable__subordinate.goal",
+      "text": "Win more custom without treading on the biggest house in the trade.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__stable__subordinate.constraint",
+      "text": "Growing into the leading house's trade invites a reply; staying out of it means staying small.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__governance_fractured__dominant.position",
+      "text": "Leads the faith while the seat fails, and people bring it the quarrels the seat no longer settles.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__governance_fractured__dominant.goal",
+      "text": "Settle the disputes the seat has stopped settling, in the faith's name, and keep doing it afterwards.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__governance_fractured__dominant.constraint",
+      "text": "Whatever the faith takes on now, whoever next holds the seat firmly may resent and take back.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__governance_fractured__subordinate.position",
+      "text": "Serves the faith under its leaders while the seat fails around them.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__governance_fractured__subordinate.goal",
+      "text": "Keep marrying, burying and comforting their flock while the seat fails around them.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__governance_fractured__subordinate.constraint",
+      "text": "The flock's trust is easy to earn now, but it buys no say once someone holds the seat firmly again.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__corruption__dominant.position",
+      "text": "Leads the faith among officials who take bribes; its good name rests on keeping clear of them.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__corruption__dominant.goal",
+      "text": "Keep the faith's name clean while every other office in the place takes payments.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__corruption__dominant.constraint",
+      "text": "The faith still needs those same officials for its lands and its rights, so it cannot cut them off.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__corruption__subordinate.position",
+      "text": "Serves the faith among people who know their officials take bribes.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__corruption__subordinate.goal",
+      "text": "Earn their flock's trust face to face, so it outlasts their trust in the crooked seat.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__corruption__subordinate.constraint",
+      "text": "Trust won by standing against the crooked officials can fade once honest ones return.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__food_crisis__dominant.position",
+      "text": "Leads the faith while the food runs short, and its alms are among the few things holding people together.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__food_crisis__dominant.goal",
+      "text": "Feed the hungry from the faith's stores, and make sure everyone knows who fed them.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__food_crisis__dominant.constraint",
+      "text": "The faith's stores will run out; feeding its own first, or for show, would be a scandal remembered long after the hunger.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__food_crisis__subordinate.position",
+      "text": "Serves the faith with little of its own to give while the food runs short.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__food_crisis__subordinate.goal",
+      "text": "Get their own flock a share of whatever relief there is, and be thanked for it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__food_crisis__subordinate.constraint",
+      "text": "Its standing rests on the relief it passes on; if the relief fails, the blame falls on it too.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__economic_stress__dominant.position",
+      "text": "Leads the faith while money is short; its lands and alms are both a help and a target.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__economic_stress__dominant.goal",
+      "text": "Keep the faith's lands and coin intact without looking rich while the people go short.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__economic_stress__dominant.constraint",
+      "text": "Anything it does to guard its own wealth while people go short is seen by all.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__economic_stress__subordinate.position",
+      "text": "Serves the faith on shrinking alms while money is short.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__economic_stress__subordinate.goal",
+      "text": "Keep their small charge going on half the alms and none of the help.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__economic_stress__subordinate.constraint",
+      "text": "With less to give, there is less reason for the post to exist.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__contested__dominant.position",
+      "text": "Leads the faith while rivals fight over the seat, and both sides want its blessing.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__contested__dominant.goal",
+      "text": "Give no blessing to either claimant until it is plain which one will hold the seat.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__contested__dominant.constraint",
+      "text": "The longer it waits to bless one side, the less the blessing will be worth.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__contested__subordinate.position",
+      "text": "Serves the faith under its leaders while rivals fight over the seat.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__contested__subordinate.goal",
+      "text": "Back whichever claimant their superiors bless, and be seen to have waited for the word.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__contested__subordinate.constraint",
+      "text": "Following the leaders' choice means setting aside one's own judgment, and paying for it whether they chose well or not.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__stable__dominant.position",
+      "text": "Leads the faith in quiet times, whatever it thinks of the seat beside it.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__stable__dominant.goal",
+      "text": "Keep the faith at every naming, wedding and burial, and out of the seat's quarrels.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__stable__dominant.constraint",
+      "text": "With nothing pressing, it is easy to grow comfortable and hard to argue for growing.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__stable__subordinate.position",
+      "text": "Serves the faith under its leaders in quiet times.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__stable__subordinate.goal",
+      "text": "Serve their flock so faithfully that their superiors cannot pass them over again.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__stable__subordinate.constraint",
+      "text": "Doing the work well, the leaders' way, goes unnoticed; doing it another way brings trouble.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__governance_fractured__dominant.position",
+      "text": "Heads the leading crew while the seat fails; whatever the seat stops watching is there to take.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__governance_fractured__dominant.goal",
+      "text": "Take over whatever the seat has stopped watching, and dig in before it recovers.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__governance_fractured__dominant.constraint",
+      "text": "Growing too openly now may make the crew the first thing a recovered seat goes after.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__governance_fractured__subordinate.position",
+      "text": "Holds a place under the crew's boss while the seat fails.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__governance_fractured__subordinate.goal",
+      "text": "Climb over the boss's other lieutenants while nobody is enforcing anything.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__governance_fractured__subordinate.constraint",
+      "text": "Climbing means being worth more to the boss or being more of a danger, and the boss can see both.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__corruption__dominant.position",
+      "text": "Heads the crew that has bought some of those who keep order, and works freely while they stay bought.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__corruption__dominant.goal",
+      "text": "Keep the bribed officials paid and quiet, and keep proof of every payment in case they turn.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__corruption__dominant.constraint",
+      "text": "Too many people know about the payments; they hold the crew as much as they shield it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__corruption__subordinate.position",
+      "text": "Holds a place in a crew that has bought protection, without having arranged it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__corruption__subordinate.goal",
+      "text": "Use the bought protection while it lasts, and have a way out when it ends.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__corruption__subordinate.constraint",
+      "text": "Living off the bought protection while keeping clear of it is a balance the crew may not allow.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__food_crisis__dominant.position",
+      "text": "Heads the crew that moves goods on the side while food is short, and the shortage pays well.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__food_crisis__dominant.goal",
+      "text": "Sell food on the side at hungry prices, without becoming the face of the shortage.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__food_crisis__dominant.constraint",
+      "text": "Open profit from the hunger makes the crew a target even the bought officials cannot ignore.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__food_crisis__subordinate.position",
+      "text": "Holds a place in a crew that is moving into the black-market food trade.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__food_crisis__subordinate.goal",
+      "text": "Get a cut of the black-market food before the boss shuts everyone else out.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__food_crisis__subordinate.constraint",
+      "text": "A share of it means offering the boss something needed, or taking a small part and no say later.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__economic_stress__dominant.position",
+      "text": "Heads the crew while money is short, and desperate people are easy to recruit and use.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__economic_stress__dominant.goal",
+      "text": "Sign up the desperate while they are cheap, and keep them once times get better.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__economic_stress__dominant.constraint",
+      "text": "A crew built on desperation shrinks when times get better.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__economic_stress__subordinate.position",
+      "text": "Holds a place in a crew while money is short.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__economic_stress__subordinate.goal",
+      "text": "Make themselves worth keeping to the crew for reasons that will survive good times.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__economic_stress__subordinate.constraint",
+      "text": "Staying worth keeping means showing a value that will last, which is hard to show in the middle of hard times.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__contested__dominant.position",
+      "text": "Heads the crew while rivals fight over the seat and those who keep order look elsewhere.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__contested__dominant.goal",
+      "text": "Move into new rackets while the claimants to the seat are busy with each other.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__contested__dominant.constraint",
+      "text": "Either side may turn on the crew to hurt the other, so today's freedom could end without warning.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__contested__subordinate.position",
+      "text": "Holds a place in a crew that is pushing into new ground while the seat is fought over.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__contested__subordinate.goal",
+      "text": "Grab their own share of the crew's new ground, so they keep it if the push fails.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__contested__subordinate.constraint",
+      "text": "Ground taken in a push that fails is the first to be lost when the crew pulls back.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__stable__dominant.position",
+      "text": "Heads the crew in quiet times, working only where those who keep order choose not to look.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__stable__dominant.goal",
+      "text": "Keep the rackets small and steady enough that the law never bothers to look.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__stable__dominant.constraint",
+      "text": "Staying just under notice for too long draws the eye of anyone who looks for exactly that.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__stable__subordinate.position",
+      "text": "Holds a place in a crew in quiet times, with order well kept around it.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__stable__subordinate.goal",
+      "text": "Prove to the boss they can be trusted with more, without the law learning their name.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__stable__subordinate.constraint",
+      "text": "Getting ahead in the crew means showing what one can do, and showing it is how one gets noticed.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__governance_fractured__dominant.position",
+      "text": "Heads the casters while the seat fails; if the seat needs their spells, it now owes them.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__governance_fractured__dominant.goal",
+      "text": "Turn every favour the seat now begs of their spells into a right it cannot take back.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__governance_fractured__dominant.constraint",
+      "text": "Rights won from a weak seat are the first a recovered seat takes back.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__governance_fractured__subordinate.position",
+      "text": "Works spells under the senior casters while the seat fails.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__governance_fractured__subordinate.goal",
+      "text": "Keep working spells for anyone who pays while refusing to be counted on any side.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__governance_fractured__subordinate.constraint",
+      "text": "Staying on no side while everyone suffers is hard to do without looking like a calculation.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__corruption__dominant.position",
+      "text": "Heads the casters among bribe-taking officials, where spells that hide things buy favour and debt.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__corruption__dominant.goal",
+      "text": "Stop casting concealments for the crooks before the crooks own them outright.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__corruption__dominant.constraint",
+      "text": "Once their spells have hidden someone's dealings, getting free of those people is hard.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__corruption__subordinate.position",
+      "text": "Works spells under the senior casters, among officials who take bribes.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__corruption__subordinate.goal",
+      "text": "Take the spellwork their seniors turn down, and ask no questions about why it was refused.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__corruption__subordinate.constraint",
+      "text": "The work the seniors turn down is often turned down for a reason.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__food_crisis__dominant.position",
+      "text": "Heads the casters while food is short, and any spell that grows or keeps food is suddenly worth a great deal.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__food_crisis__dominant.goal",
+      "text": "Save what food magic can save, and make the seat pay for it in rights.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__food_crisis__dominant.constraint",
+      "text": "People fed by spells once will expect it again, and it cannot go on for ever.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__food_crisis__subordinate.position",
+      "text": "Works spells that could help with the shortage, but cannot use them without the seniors' leave.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__food_crisis__subordinate.goal",
+      "text": "Offer their spells for the shortage through their seniors, and see their own name on it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__food_crisis__subordinate.constraint",
+      "text": "Helping through the seniors limits both what the help can do and who gets the credit.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__economic_stress__dominant.position",
+      "text": "Heads the casters while money is short, and spellwork is among the first things people stop paying for.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__economic_stress__dominant.goal",
+      "text": "Work out which spells people will still pay for when the coin runs short, and keep those.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__economic_stress__dominant.constraint",
+      "text": "Proving the spells are needed may mean casting them so often that they lose their price.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__economic_stress__subordinate.position",
+      "text": "Works spells under the senior casters while money is short and patrons drop away.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__economic_stress__subordinate.goal",
+      "text": "Find the plain, needed spellwork that people buy even when they buy nothing else.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__economic_stress__subordinate.constraint",
+      "text": "The spells people still buy in hard times are the humble ones that pay least.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__contested__dominant.position",
+      "text": "Heads the casters while rivals fight over the seat, and both sides want their spells.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__contested__dominant.goal",
+      "text": "Refuse every claimant who wants their spells, so whoever takes the seat cannot call them traitors.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__contested__dominant.constraint",
+      "text": "Staying out of it means refusing both sides, and both will remember.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__contested__subordinate.position",
+      "text": "Works spells under the senior casters while rivals fight over the seat.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__contested__subordinate.goal",
+      "text": "Be useful to whoever wins the seat, and promise nothing to anyone before then.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__contested__subordinate.constraint",
+      "text": "Serving more than one side means keeping the work small enough that none of them sees a betrayal.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__stable__dominant.position",
+      "text": "Heads the casters in quiet times; their place is secure and their spells are in demand.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__stable__dominant.goal",
+      "text": "Win more of the seat's work for their spells, and more of everyone else's.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__stable__dominant.constraint",
+      "text": "In quiet times the seat slowly hems the casters in with rules; recognition comes with limits.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__stable__subordinate.position",
+      "text": "Works spells under the senior casters in quiet times.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__stable__subordinate.goal",
+      "text": "Become the caster people ask for by name, whatever their seniors think of them.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__stable__subordinate.constraint",
+      "text": "Skill without a senior post leaves the caster at the mercy of whoever decides who may cast.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__governance_fractured__dominant.position",
+      "text": "Heads an old family while the seat fails, and old names count for more when the seat counts for less.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__governance_fractured__dominant.goal",
+      "text": "Take back the old family rights the seat stripped away, while it is too weak to refuse.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__governance_fractured__dominant.constraint",
+      "text": "Old claims that would once have been laughed off are now watched by everyone looking for a grab at power.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__governance_fractured__subordinate.position",
+      "text": "Belongs to a lesser family behind the leading one while the seat fails.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__governance_fractured__subordinate.goal",
+      "text": "Catch up with the greater family while the seat is too busy to keep them apart.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__governance_fractured__subordinate.constraint",
+      "text": "Getting ahead of the greater family now will look like seizing a chance, not earning a place.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__stable__dominant.position",
+      "text": "Heads an old family while the seat's offices take up more of what the family once did.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__stable__dominant.goal",
+      "text": "Keep the family's name honoured at every feast while the new offices take its old work.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__stable__dominant.constraint",
+      "text": "The family's say slowly shrinks beside the offices that run things.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__stable__subordinate.position",
+      "text": "Belongs to a lesser old family, behind the leading one.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__stable__subordinate.goal",
+      "text": "Marry, lend or befriend their way into the offices that now run things.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__stable__subordinate.constraint",
+      "text": "The family has as much say as the offices find it useful to give, whatever its old claim.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__corruption__dominant.position",
+      "text": "Heads an old family while the seat's offices take up more of what the family once did.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__corruption__dominant.goal",
+      "text": "Keep the family's name honoured at every feast while the new offices take its old work.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__corruption__dominant.constraint",
+      "text": "The family's say slowly shrinks beside the offices that run things.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__corruption__subordinate.position",
+      "text": "Belongs to a lesser old family, behind the leading one.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__corruption__subordinate.goal",
+      "text": "Marry, lend or befriend their way into the offices that now run things.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__corruption__subordinate.constraint",
+      "text": "The family has as much say as the offices find it useful to give, whatever its old claim.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__food_crisis__dominant.position",
+      "text": "Heads an old family while the seat's offices take up more of what the family once did.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__food_crisis__dominant.goal",
+      "text": "Keep the family's name honoured at every feast while the new offices take its old work.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__food_crisis__dominant.constraint",
+      "text": "The family's say slowly shrinks beside the offices that run things.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__food_crisis__subordinate.position",
+      "text": "Belongs to a lesser old family, behind the leading one.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__food_crisis__subordinate.goal",
+      "text": "Marry, lend or befriend their way into the offices that now run things.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__food_crisis__subordinate.constraint",
+      "text": "The family has as much say as the offices find it useful to give, whatever its old claim.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__economic_stress__dominant.position",
+      "text": "Heads an old family while the seat's offices take up more of what the family once did.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__economic_stress__dominant.goal",
+      "text": "Keep the family's name honoured at every feast while the new offices take its old work.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__economic_stress__dominant.constraint",
+      "text": "The family's say slowly shrinks beside the offices that run things.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__economic_stress__subordinate.position",
+      "text": "Belongs to a lesser old family, behind the leading one.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__economic_stress__subordinate.goal",
+      "text": "Marry, lend or befriend their way into the offices that now run things.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__economic_stress__subordinate.constraint",
+      "text": "The family has as much say as the offices find it useful to give, whatever its old claim.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__contested__dominant.position",
+      "text": "Heads an old family while the seat's offices take up more of what the family once did.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__contested__dominant.goal",
+      "text": "Keep the family's name honoured at every feast while the new offices take its old work.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__contested__dominant.constraint",
+      "text": "The family's say slowly shrinks beside the offices that run things.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__contested__subordinate.position",
+      "text": "Belongs to a lesser old family, behind the leading one.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__contested__subordinate.goal",
+      "text": "Marry, lend or befriend their way into the offices that now run things.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__contested__subordinate.constraint",
+      "text": "The family has as much say as the offices find it useful to give, whatever its old claim.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    }
+  ]
+}

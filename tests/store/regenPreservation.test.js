@@ -101,8 +101,9 @@ describe('regenSection(\'npcs\') and user canon', () => {
 
     expect(ids.size).toBe(s.npcs.length);
     for (const rel of s.relationships || []) {
-      expect(ids.has(rel.npc1Id)).toBe(true);
-      expect(ids.has(rel.npc2Id)).toBe(true);
+      // RE-KEYED 2026-11-07 (PEOPLE-4 TIES, R-P7): a tie's ends are `from`/`to` (directed).
+      expect(ids.has(rel.from)).toBe(true);
+      expect(ids.has(rel.to)).toBe(true);
     }
     for (const faction of s.factions || []) {
       for (const member of faction.members || []) expect(ids.has(member.id)).toBe(true);

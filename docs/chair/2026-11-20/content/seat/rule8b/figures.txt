@@ -1,0 +1,8 @@
+rule 8 (a) at c61571627 (U6 + U7 + the line at point 98), build 15:02:11Z-15:03:07Z clean; VERIFY_DIST 61/66, the five build rows red (red on the line itself)
+figure            lane c61571627   line point 98 (c110dd85b)   delta     budget
+first paint raw   1,184,741        1,184,071                   +670      1,175,492
+first paint gzip    376,992          376,756                   +236        373,999
+first paint br      316,535          316,424                   +111        313,994
+worker            2,708,894        2,704,317                 +4,577      2,579,708
+engine chunk        932,367          929,672                 +2,695        909,928
+first paint's +670 raw: U5-STALE's own +661 (BU7, two builds) plus U7's page reads; for the owner's size signing beside who rules' 3,818 (raised by nobody)

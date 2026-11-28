@@ -778,11 +778,23 @@ describe('8. THE DARK FENCE — measured against HEAD, not recorded from the new
   // later mover; the other three have not moved since car 1. Both causes rebuild what the dark
   // ladder reads (the realm's bands, then the window), which is exactly what this fence was
   // built to see. Neither is a defect. The owner's bands are §934.105's; R-B1 is the chair's.
+  // ── RE-RECORDED 2026-11-09 BY STYLE-2 SW-12 (PULSE-LINES, second seat), TEXT ONLY ─────────
+  // tierResourceDynamics' tier receipts moved into plain words (the eligibility line leads with
+  // the town; the streak in words; the odds line struck), and the trace folds `reasons` and the
+  // worldState's `tierDrift.reason`. Proven as TE-HERALD-1 proved it: the trace re-run with
+  // every `summary`, `reasons` and `reason` leaf replaced by a constant gives the same four
+  // digests at the parent b9a4a45fa and at this cause (2bbd414e0cfcd336 · 25004edf0ad58216 ·
+  // 6fcd29a5cea02fc1 · 80926cd3018053ea), and the parent's un-neutralised run reproduced the
+  // four old values exactly. 0.45 and 0.70 fire no tier receipt and do not move.
+  // ── RE-RECORDED 2026-11-09 BY STYLE-2 SW-12 (the next cause), TEXT ONLY ───────────────────────
+  // populationDynamics' summary moved into plain words (people gained or lost, four vantages), and
+  // the trace folds `c.summary`. The same neutralised trace gives the same four digests at the parent
+  // and at this cause (2bbd414e0cfcd336 · 25004edf0ad58216 · 6fcd29a5cea02fc1 · 80926cd3018053ea).
   const FROZEN = Object.freeze({
-    0.15: '85cbc0cbb13d8b65',
-    0.45: 'a6accfbebd1def48',
-    0.70: 'acf81305f27626a0',
-    0.90: '4f3e5f8387da61b1',
+    0.15: '0653af9aba2b1d6d',
+    0.45: 'e317b8db2af916b4',
+    0.70: '23cc19a2d016da0b',
+    0.90: 'ccbe7826e1af4a19',
   });
   const REALM = Object.freeze([
     ['Ashford', 'town', 300, 900], ['Brack', 'hamlet', 380, 1200], ['Cairn', 'thorp', 40, 300],

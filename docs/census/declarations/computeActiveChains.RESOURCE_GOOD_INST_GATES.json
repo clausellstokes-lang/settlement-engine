@@ -1,0 +1,270 @@
+{
+  "id": "computeActiveChains.RESOURCE_GOOD_INST_GATES",
+  "source": "src/generators/computeActiveChains.js :: RESOURCE_GOOD_INST_GATES (read by deriveExportsFromChains step 1)",
+  "drawKind": "A",
+  "pool": {
+    "declares": [],
+    "crisisScoped": false,
+    "colour": false,
+    "notes": "The resource→good map (near :605–619): processed EXPORT goods a nearby resource yields only when a gate institution is present. Each row declares its producer (the gate institution) where a vocabulary kind exists; most gate words (sawmill, fuller, brickmaker, potter, carpenter, charcoal, alchemist, dairy, tannery, mason, mint, jewel, sage, wizard) have NO institution kind -> unhomed. The resource itself has no atom (unhomed: nearby resource <key>). Raw tradeGoods of a resource not in this map are exported ungated by processing (e.g. crossroads_position \"Transit trade\"/\"Toll revenue\": category errors that reach exports via this step; see summary). Matching is institutionMatchesGate (id-first / whole-name), not INSTITUTION_KIND_PATTERNS.",
+    "needs": [],
+    "excludes": []
+  },
+  "rows": [
+    {
+      "id": "computeActiveChains.RESOURCE_GOOD_INST_GATES::shipbuilding_timber.Milled lumber",
+      "text": "Milled lumber",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "producer: unhomed: sawmill (INSTITUTION_KIND_PATTERNS.mill deliberately excludes sawmill). resource unhomed."
+    },
+    {
+      "id": "computeActiveChains.RESOURCE_GOOD_INST_GATES::river_mills.Milled flour",
+      "text": "Milled flour",
+      "needs": [
+        "institution: mill",
+        "river",
+        "grain"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "river_mills presumes a river; flour presumes grain (own-food processed good: also gated by ownFoodGoodsHeldByFoodRecord)."
+    },
+    {
+      "id": "computeActiveChains.RESOURCE_GOOD_INST_GATES::river_mills.Processed grain",
+      "text": "Processed grain",
+      "needs": [
+        "institution: mill",
+        "river",
+        "grain"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "computeActiveChains.RESOURCE_GOOD_INST_GATES::river_mills.Fulled cloth",
+      "text": "Fulled cloth",
+      "needs": [
+        "river"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "producer: unhomed: fuller."
+    },
+    {
+      "id": "computeActiveChains.RESOURCE_GOOD_INST_GATES::river_clay.Fired brick",
+      "text": "Fired brick",
+      "needs": [
+        "river"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "producer: unhomed: brickmaker."
+    },
+    {
+      "id": "computeActiveChains.RESOURCE_GOOD_INST_GATES::river_clay.Pottery and ceramics",
+      "text": "Pottery and ceramics",
+      "needs": [
+        "river"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "producer: unhomed: potter."
+    },
+    {
+      "id": "computeActiveChains.RESOURCE_GOOD_INST_GATES::river_clay.Roof tiles",
+      "text": "Roof tiles",
+      "needs": [
+        "river"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "producer: unhomed: brickmaker."
+    },
+    {
+      "id": "computeActiveChains.RESOURCE_GOOD_INST_GATES::managed_forest.Milled timber",
+      "text": "Milled timber",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "producer: unhomed: sawmill; woodland unhomed (terrain: forest too narrow — managed_forest occurs off forest terrain)."
+    },
+    {
+      "id": "computeActiveChains.RESOURCE_GOOD_INST_GATES::managed_forest.Hardwood beams",
+      "text": "Hardwood beams",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "producer: unhomed: carpenter."
+    },
+    {
+      "id": "computeActiveChains.RESOURCE_GOOD_INST_GATES::managed_forest.Charcoal",
+      "text": "Charcoal",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "producer: unhomed: charcoal burner."
+    },
+    {
+      "id": "computeActiveChains.RESOURCE_GOOD_INST_GATES::foraging_areas.Alchemical reagents",
+      "text": "Alchemical reagents",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "producer: unhomed: alchemist."
+    },
+    {
+      "id": "computeActiveChains.RESOURCE_GOOD_INST_GATES::grain_fields.Milled flour",
+      "text": "Milled flour",
+      "needs": [
+        "institution: mill",
+        "grain"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "computeActiveChains.RESOURCE_GOOD_INST_GATES::grazing_land.Dairy products",
+      "text": "Dairy products",
+      "needs": [
+        "livestock"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "producer: unhomed: dairy. Own-food processed good (surplus-gated)."
+    },
+    {
+      "id": "computeActiveChains.RESOURCE_GOOD_INST_GATES::grazing_land.Leather goods",
+      "text": "Leather goods",
+      "needs": [
+        "livestock"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "producer: unhomed: tannery."
+    },
+    {
+      "id": "computeActiveChains.RESOURCE_GOOD_INST_GATES::iron_deposits.Basic metalwork",
+      "text": "Basic metalwork",
+      "needs": [
+        "institution: smith"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "gate 'blacksmith' ⊂ smith pattern. Extraction gate mine/smelter/blacksmith/forge also applies."
+    },
+    {
+      "id": "computeActiveChains.RESOURCE_GOOD_INST_GATES::iron_deposits.Weapons and armour",
+      "text": "Weapons and armour",
+      "needs": [
+        "institution: smith"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "computeActiveChains.RESOURCE_GOOD_INST_GATES::stone_quarry.Building materials",
+      "text": "Building materials",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "producer: unhomed: mason; extraction gate quarry/mason/stonemason/construction does not guarantee institution: quarry."
+    },
+    {
+      "id": "computeActiveChains.RESOURCE_GOOD_INST_GATES::precious_metals.Coin minting",
+      "text": "Coin minting",
+      "needs": [
+        "institution: mine"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "CATEGORY ERROR: minting is an activity/seigniorage, not a good (proposed home: income table). Extraction gate mine|smelter (mine declared). producer: unhomed: mint."
+    },
+    {
+      "id": "computeActiveChains.RESOURCE_GOOD_INST_GATES::precious_metals.Jewellery",
+      "text": "Jewellery",
+      "needs": [
+        "institution: mine"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "producer: unhomed: jeweller. Luxury-class (export; the tier rule is for imports)."
+    },
+    {
+      "id": "computeActiveChains.RESOURCE_GOOD_INST_GATES::gemstone_deposits.Cut gemstones",
+      "text": "Cut gemstones",
+      "needs": [
+        "institution: mine"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "extraction gate ['mine'] by substring (different reader). producer: unhomed: jeweller."
+    },
+    {
+      "id": "computeActiveChains.RESOURCE_GOOD_INST_GATES::gemstone_deposits.Luxury goods",
+      "text": "Luxury goods",
+      "needs": [
+        "institution: mine"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "producer: unhomed: jeweller."
+    },
+    {
+      "id": "computeActiveChains.RESOURCE_GOOD_INST_GATES::ancient_ruins.Rare texts",
+      "text": "Rare texts",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "producer: unhomed: sage."
+    },
+    {
+      "id": "computeActiveChains.RESOURCE_GOOD_INST_GATES::magical_node.Arcane reagents",
+      "text": "Arcane reagents",
+      "needs": [
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "producer: unhomed: alchemist."
+    },
+    {
+      "id": "computeActiveChains.RESOURCE_GOOD_INST_GATES::magical_node.Magical services",
+      "text": "Magical services",
+      "needs": [
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "producer: unhomed: wizard. A service in a goods map (mild category slip; services have their own map)."
+    }
+  ]
+}

@@ -152,3 +152,16 @@ describe('applyConditions behaviour (through real derivers)', () => {
     expect(drain.contributors.find(c => String(c.source).includes('war_drain'))?.effect).toBe('drain');
   });
 });
+
+describe('the faction_power condition tail prints in plain words (SW-8 RENAME-POWERS, the chair\'s ruling 18:4x)', () => {
+  it('a condition acting on the powers reads "<label> unsettles the balance between the powers."', () => {
+    // The tail reaches the Campaign State PDF's causal substrate when it is the first reason, so the
+    // retired word leaves it like every other printed line (a row added to the owner's map).
+    const s = town([{ archetype: 'faction_challenge', label: 'Challenge to the rulers', severity: 0.65, affectedSystems: ['faction_power'] }]);
+    s.powerStructure = { factions: [{ faction: 'Merchant Guild', power: 40 }, { faction: 'Town Watch', power: 35 }] };
+    const v = deriveSystemVariable('faction_power', s);
+    const reasons = v.contributors.map((c) => c.reason);
+    expect(reasons).toContain('Challenge to the rulers unsettles the balance between the powers.');
+    expect(reasons.some((r) => /\bfaction/i.test(String(r)))).toBe(false);
+  });
+});

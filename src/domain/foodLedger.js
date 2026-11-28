@@ -15,6 +15,8 @@
  * un-generated / partial settlement so callers never see undefined.
  */
 
+import { storesMonthsOf } from './facts/storesMonths.js';
+
 /**
  * @typedef {Object} FoodLedger
  * @property {number} dailyNeed
@@ -62,7 +64,7 @@ export function foodLedger(settlement) {
     foodRatio:        num(fs.foodRatio, 1),
     deficitPct:       num(fs.deficitPct, 0),
     surplusPct:       num(fs.surplusPct, 0),
-    storageMonths:    num(fs.storageMonths, 0),
+    storageMonths:    storesMonthsOf(settlement) ?? 0,
     importDependency: num(fs.importDependency, 0),
     magicSupplement:  num(fs.magicSupplement, 0),
     resilienceScore:  num(fs.resilienceScore, 50),

@@ -54,6 +54,9 @@ import { CAUSE_SIGNAL } from '../src/domain/worldPulse/causeVocabulary.js';
 import { CUSTOM_CONTENT_MANIFEST } from '../src/domain/content/customContentManifest.js';
 import { loadStateLeaves, ROOT, STATE_ANNEX } from '../tests/helpers/dossierCorpus.js';
 import { readAnnexDeclarations } from './lib/dossier-annex-grammar.mjs';
+import { annexDeclaredColumns, tablePoolRow } from './lib/census-declared.mjs';
+import { DECLARATION_CHANNELS, TABLE_POOLS } from './lib/table-pools.mjs';
+import { pathToFileURL } from 'node:url';
 import {
   COMPOSERS, composedFillByBlock, composedFillByKeyFunction, composerSources, fillSites,
   unrenderedFacts,
@@ -143,18 +146,25 @@ const ESPREE_OPTIONS = Object.freeze({ ecmaVersion: 2024, sourceType: 'module', 
  *
  * FAIL-CLOSED ON A PARSE FAILURE: the file contributes nothing and is NAMED, because a
  * silent fallback to the regex would put the shape this function exists to refuse back in.
+ *
+ * ⭐ EVERY WRITE CARRIES THE TOP-LEVEL DECLARATION IT SITS IN (`symbol`; '' for an anonymous
+ * default export or a bare statement), so a citation can name `path :: symbol` instead of a
+ * line that drifts (OPERATING_STANDARD rule 32; REVIEW-INTAKE-3 R8, after two holder
+ * citations into `viability.js` went stale by two lines).
  * @param {string} source
- * @returns {{writes: Array<{name: string, line: number}>,
+ * @returns {{writes: Array<{name: string, line: number, symbol: string}>,
  *   mentions: Array<{name: string, line: number}>, parsed: boolean}}
  */
 export function astTokens(source) {
-  /** @type {Array<{name: string, line: number}>} */
+  /** @type {Array<{name: string, line: number, symbol: string}>} */
   const writes = [];
   /** @type {Array<{name: string, line: number}>} */
   const mentions = [];
   /** @type {object} */
   let root;
   try { root = parse(String(source), ESPREE_OPTIONS); } catch { return { writes, mentions, parsed: false }; }
+  /** The top-level declaration the walk is inside; set per statement (per declarator) below. */
+  let symbol = '';
   /** @param {object|null} node @returns {string} */
   const nameOf = (node) => {
     if (!node) return '';
@@ -169,12 +179,12 @@ export function astTokens(source) {
     if (typeof row.type !== 'string') return;
     if (row.type === 'Property' && !row.computed && row.key && row.key.loc) {
       const name = nameOf(row.key);
-      if (name) writes.push({ name, line: row.key.loc.start.line });
+      if (name) writes.push({ name, line: row.key.loc.start.line, symbol });
     }
     if (row.type === 'AssignmentExpression' && row.left && row.left.type === 'MemberExpression'
       && !row.left.computed && row.left.property && row.left.property.loc) {
       const name = nameOf(row.left.property);
-      if (name) writes.push({ name, line: row.left.property.loc.start.line });
+      if (name) writes.push({ name, line: row.left.property.loc.start.line, symbol });
     }
     if (row.type === 'Identifier' && row.loc) mentions.push({ name: row.name, line: row.loc.start.line });
     const isFunction = row.type === 'FunctionDeclaration' || row.type === 'FunctionExpression'
@@ -185,7 +195,20 @@ export function astTokens(source) {
       walk(row[key]);
     }
   };
-  walk(root);
+  // The same walk as one `walk(root)`, statement by statement in source order, so each write
+  // learns its top-level declaration; a `const a = …, b = …` names each declarator apart.
+  for (const statement of /** @type {Array<Record<string, any>>} */ (/** @type {{body?: unknown}} */ (root).body)) {
+    const declaration = statement.declaration || statement;
+    if (declaration.type === 'VariableDeclaration') {
+      for (const declarator of declaration.declarations) {
+        symbol = declarator.id && declarator.id.type === 'Identifier' ? declarator.id.name : '';
+        walk(declarator);
+      }
+      continue;
+    }
+    symbol = declaration.id && declaration.id.type === 'Identifier' ? declaration.id.name : '';
+    walk(statement);
+  }
   return { writes, mentions, parsed: true };
 }
 
@@ -209,10 +232,21 @@ export function producerIndex() {
  * walker can re-derive every citation from the tree rather than believe the table: a row whose
  * `cite` has gone stale, or never existed, reds by name.
  *
+ * ⭐ TWO FORMS, ONE WALK (LANDING-R2, ODQ §934.105). Each write is cited at its `file:line`
+ * AND as `file :: declaration` (OPERATING_STANDARD rule 32), the top-level declaration that
+ * holds it, so a row may cite the SYMBOL and survive a move that shifts its line; a symbol that
+ * writes no such token reds exactly as a stale line does. The KEYS are unchanged, so
+ * `producerIndex` and everything the census computes from it are byte-identical.
+ *
  * ⛔ IT IS THE SAME SCAN AND NOT A SECOND ONE. Two walks over `src/generators/**` and
  * `src/domain/**` that could disagree would be two producer indexes, and the estate's rule is
  * one reader per fact: `producerIndex` is written in terms of this function so a divergence is
  * impossible rather than merely unlikely.
+ *
+ * ⭐ TWO FORMS PER WRITE, BOTH FROM THIS ONE PASS: `path:line`, and `path :: symbol` (the
+ * top-level declaration the write sits in, once per token and declaration). A citation that
+ * drifts is re-addressed to the symbol form, permanently (OPERATING_STANDARD rule 32); a
+ * declaration that does not write the token, or does not exist, resolves to nothing.
  * @returns {{cites: Map<string, string[]>, files: number, unparsed: string[]}}
  */
 export function producerCitations() {
@@ -228,10 +262,17 @@ export function producerCitations() {
     const rel = relative(ROOT, abs);
     const { writes, parsed } = astTokens(readFileSync(abs, 'utf8'));
     if (!parsed) { unparsed.push(rel); continue; }
+    /** @type {Set<string>} the symbol citations this file has already given, per token */
+    const symbolCited = new Set();
     for (const write of writes) {
-      const held = cites.get(write.name);
-      if (held) held.push(`${rel}:${write.line}`);
-      else cites.set(write.name, [`${rel}:${write.line}`]);
+      const held = cites.get(write.name) || [];
+      if (!cites.has(write.name)) cites.set(write.name, held);
+      held.push(`${rel}:${write.line}`);
+      const bySymbol = write.symbol ? `${rel} :: ${write.symbol}` : '';
+      if (bySymbol && !symbolCited.has(`${write.name}\u0000${bySymbol}`)) {
+        symbolCited.add(`${write.name}\u0000${bySymbol}`);
+        held.push(bySymbol);
+      }
     }
   }
   return { cites, files: files.length, unparsed };
@@ -908,6 +949,21 @@ export function grainFigures(rows, mounts, deskFacts) {
  */
 export async function buildCensus(options = {}) {
   const leaves = await loadStateLeaves();
+  // CENSUS-1g unit 5: the declared columns, read from the ANNEX through the projector's own parse.
+  const declaredCols = annexDeclaredColumns(readFileSync(STATE_ANNEX, 'utf8'));
+  const tablePools = [];
+  // CENSUS-1i unit 2: every declaration channel held beside a table, read for every table.
+  const channels = [];
+  for (const c of DECLARATION_CHANNELS) {
+    const mod = await import(pathToFileURL(join(ROOT, c.module)).href);
+    if (!(c.name in mod)) throw new Error(`tablePools: ${c.module} exports no ${c.name} (a declaration channel)`);
+    channels.push({ [c.kind]: mod[c.name] });
+  }
+  for (const entry of TABLE_POOLS) {
+    const mod = await import(pathToFileURL(join(ROOT, entry.module)).href);
+    if (!(entry.name in mod)) throw new Error(`tablePools: ${entry.module} exports no ${entry.name} (${entry.id})`);
+    tablePools.push(tablePoolRow(entry, mod[entry.name], channels));
+  }
   /** @type {Map<string, Map<string, Array<{text: string, slots: string[]}>>>} */
   const pools = new Map();
   for (const e of leaves) {
@@ -979,7 +1035,13 @@ export async function buildCensus(options = {}) {
     branch: grainFigures(spines, DOSSIER_MOUNTS, deskFacts),
     function: grainFigures(shadow, DOSSIER_MOUNTS, deskFacts),
   };
-  const custom = customReachable(spines, CUSTOM_CONTENT_MANIFEST.categories);
+  // The bucket limb reads each category's STORED read-path `root` off the manifest's JSON
+  // source (the generator strips it from the runtime artifacts, so it costs no product bytes);
+  // the display `singular` is never an identity (the chair's ruling (B), 2026-11-09).
+  const sourceRoots = new Map(JSON.parse(readFileSync(join(ROOT, 'schema/custom-content.manifest.json'), 'utf8'))
+    .categories.map((category) => [category.key, category.root]));
+  const custom = customReachable(spines, CUSTOM_CONTENT_MANIFEST.categories
+    .map((category) => ({ ...category, root: sourceRoots.get(category.key) })));
   const sources = sourceSummary(spines);
   const relations = relationTable();
   const rateRows = options.rates?.rows || [];
@@ -1062,8 +1124,16 @@ export async function buildCensus(options = {}) {
       // is measured over the SPINE rows, so `pools + modifierRows === rows.length` exactly and
       // nothing is hidden by the filter that keeps those integers stable.
       modifierRows: modifiers.length,
+      declaredColumnRows: census.rows.filter((r) => declaredCols.has(`${r.block} :: ${r.pool}`)).length,
+      tablePools: tablePools.length,
     },
-    rows: census.rows,
+    rows: census.rows.map((r) => {
+      const d = declaredCols.get(`${r.block} :: ${r.pool}`);
+      return d ? { ...r, ...d } : r;
+    }),
+    // ⭐ THE TABLE POOLS (CENSUS-1g unit 5): the off-census pools, the same four declared columns
+    // plus their draw kind and site (`scripts/lib/table-pools.mjs`).
+    tablePools,
     // ⭐ THE MODIFIER SECTION. A modifier pool is the estate's first non-spine, and it is
     // carried here so a reader meets it once, whole, rather than by grepping `rows` for a
     // `role`. `rung: 'annex'` on every one of them says the reading is AUTHOR-DECLARED and

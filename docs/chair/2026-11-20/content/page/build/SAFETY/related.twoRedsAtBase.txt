@@ -1,0 +1,42 @@
+ ❯ tests/domain/defenseStateProseDesk.test.js (102 tests | 1 failed) 27027ms
+     × REACHABILITY, MEASURED OVER GENERATED WORLDS rather than assumed 21290ms
+ ❯ tests/generators/coherenceAgreeCures.test.js (45 tests | 1 failed) 85481ms
+     × the old name lists and the home agree on every roster 34562ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/generators/coherenceAgreeCures.test.js > F9: the market readers follow the market home, and no answer moves > the old name lists and the home agree on every roster
+Error: Test timed out in 20000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ tests/generators/coherenceAgreeCures.test.js:127:7
+    125| describe('F9: the market readers follow the market home, and no answer…
+    126|   beforeAll(async () => { await loadGenerationLawPayloads(); });
+    127|   test('the old name lists and the home agree on every roster', async …
+       |       ^
+    128|     const { hasMarketInstitution } = await import('../../src/domain/fa…
+    129|     const { nativeSemanticNames } = await import('../../src/domain/con…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/domain/defenseStateProseDesk.test.js > DS-DEF-9 — magic dependency, and the slot filled from the right ROLE > REACHABILITY, MEASURED OVER GENERATED WORLDS rather than assumed
+Error: Test timed out in 20000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ tests/domain/defenseStateProseDesk.test.js:1910:5
+    1908|   });
+    1909|
+    1910|   it('REACHABILITY, MEASURED OVER GENERATED WORLDS rather than assumed…
+       |     ^
+    1911|     // The false pool is what every default world reads, and the desk …
+    1912|     // finding rather than as a silence.
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  2 failed | 145 passed (147)
+   Start at  12:37:40
+   Duration  128.90s (transform 9.08s, setup 142ms, import 15.76s, tests 112.51s, environment 0ms)
+
+[gate-tail] end:  12:39:49 up  1:45,  0 user,  load average: 17.99, 17.11, 15.69
+[gate-tail] full log: /tmp/gate-tail.2491.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

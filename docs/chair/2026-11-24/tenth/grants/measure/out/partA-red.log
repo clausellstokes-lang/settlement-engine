@@ -1,0 +1,384 @@
+
+ RUN  v4.1.8 /home/user/settlement-engine
+
+ ❯ tests/security/hostedDefaultGrants.pglite.test.js (13 tests | 5 failed) 3608ms
+     × no SERVER or NOBODY function is executable by anon 9ms
+     × no SERVER or NOBODY function is executable by authenticated 2ms
+     × anon cannot read the BYOK passphrase 2ms
+     × anon cannot downgrade another user 4ms
+     × a signed-in user cannot release a free narrative 2ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 5 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/security/hostedDefaultGrants.pglite.test.js > each class holds under the hosted default (migration 211 part A) > no SERVER or NOBODY function is executable by anon
+AssertionError: expected [ …(134) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "_assert_service_admin_actor(uuid)",
++   "_audit_action(uuid,uuid,text,jsonb,jsonb,text)",
++   "_buyback_payout_hold_days()",
++   "_consume_action_rate_limit(uuid,text,integer)",
++   "_founder_transfer_dial(text,integer)",
++   "_gallery_chronicle_entry(jsonb)",
++   "_gallery_chronicle_json(jsonb)",
++   "_gallery_public_tile_rows()",
++   "_gc_dim_sql(text)",
++   "_log_founder_transfer_event(uuid,text,text,jsonb)",
++   "_seat_buyback_cents()",
++   "_seat_holder_last_active(uuid)",
++   "_seat_stewardship_dial(text,integer)",
++   "_surveyor_byok_secret()",
++   "_trunc_unit(text)",
++   "add_internal_note(uuid,uuid,text)",
++   "admin_billing_summary(uuid,uuid)",
++   "admin_diagnostic_bundle(uuid,uuid,boolean,text)",
++   "admin_remove_gallery_item(uuid,uuid,text)",
++   "admin_remove_gallery_map(uuid,uuid,text)",
++   "admin_revoke_share_link(uuid,uuid,text)",
++   "admin_set_content_banned(uuid,text,uuid,boolean,text)",
++   "admin_soft_delete_map(uuid,uuid,boolean,text)",
++   "admin_soft_delete_settlement(uuid,uuid,boolean,text)",
++   "aggregate_ai_usage_stats(integer)",
++   "analytics_monthly_prune()",
++   "analytics_nightly_maintenance()",
++   "append_retention_cohorts(date)",
++   "apply_redemption(text)",
++   "attach_ai_spend_to_claim(uuid,text,uuid)",
++   "bind_redemption_session(uuid,text)",
++   "cancel_stale_auto_reload_attempts()",
++   "claim_ai_request(uuid,text,integer)",
++   "claim_auto_reload_payment_intent(uuid,uuid,text,integer,integer)",
++   "claim_dossier_purchase_by_session(text,uuid,uuid)",
++   "claim_due_buyback_payout()",
++   "claim_due_transfer_payout()",
++   "claim_founder_seat_buyback(uuid,text)",
++   "claim_free_narrative(uuid)",
++   "claim_next_founder_seat(uuid)",
++   "claim_ticket(uuid,uuid)",
++   "clawback_dossier_entitlement(text)",
++   "clawback_referral(text)",
++   "cleanup_ai_generate_rate_limits(integer)",
++   "cleanup_ai_spend_reservations(integer)",
++   "cleanup_dossier_verify_rate_limits(integer)",
++   "cleanup_email_rate_limits(integer)",
++   "cleanup_recovery_rate_limits(integer)",
++   "cleanup_token_buckets(integer)",
++   "cleanup_user_action_rate_limits(integer)",
++   "consume_ai_generate_rate_limit(uuid,integer,integer)",
++   "consume_dossier_verify_rate_limit(text,integer,integer)",
++   "consume_email_rate_limit(text,text,integer,integer,integer)",
++   "consume_recovery_rate_limit(text,text,integer,integer,integer)",
++   "consume_token_bucket(text,double precision,double precision,double precision)",
++   "email_has_active_transfer_lock(text)",
++   "expire_stale_transfer_cases()",
++   "grant_dossier_entitlement(uuid,uuid,text,text)",
++   "grant_referral(uuid,text,integer)",
++   "handle_premium_downgrade(uuid)",
++   "has_active_transfer_lock(uuid)",
++   "ingest_check_rate(text,integer,integer)",
++   "issue_buyback_challenge(uuid)",
++   "issue_transfer_challenge(uuid,text,text)",
++   "link_ticket_faq(uuid,uuid,text)",
++   "load_sim_metrics(jsonb)",
++   "mark_low_balance_notified(uuid,text)",
++   "market_k_min_campaigns()",
++   "market_k_min_users()",
++   "post_ticket_reply(uuid,uuid,text,text)",
++   "purge_analytics_for_user(uuid)",
++   "purge_dossier_purchases(integer)",
++   "purge_expired_plan_inactive_assets()",
++   "purge_expired_plan_inactive_settlements()",
++   "record_referral_grant_detail(uuid,text,text,text)",
++   "reelect_transfer_payout(uuid,uuid)",
++   "release_ai_spend_reservation(uuid)",
++   "release_founder_seat_on_clawback(uuid)",
++   "release_free_narrative(uuid)",
++   "report_ai_usage(date,date)",
++   "report_channel_funnel(date,date)",
++   "report_client_error_alert()",
++   "report_client_errors(date,date)",
++   "report_config_variance(text,date,date)",
++   "report_crosstab(text,text,date,date,integer)",
++   "report_distribution(text,date,date,text,integer)",
++   "report_edit_heatmap(date,date)",
++   "report_funnel(date,date)",
++   "report_market_archetype_popularity(date,date)",
++   "report_market_preset_adoption(date,date)",
++   "report_npc_distribution(text,date,date)",
++   "report_preferences(date,date)",
++   "report_proposal_decisions(date,date)",
++   "report_pulse_mutations(date,date)",
++   "report_referral_funnel(date,date)",
++   "report_regional_arcs(date,date)",
++   "report_regional_impacts(date,date)",
++   "report_regional_propagation(date,date)",
++   "report_retention()",
++   "report_stressor_genesis(date,date)",
++   "report_summary(date,date)",
++   "report_trend(text,text,date,date)",
++   "reserve_ai_spend(uuid,numeric)",
++   "reserve_redemption(text,uuid,text)",
++   "revert_redemption(text)",
++   "revoke_surveyor_entitlement(uuid,text)",
++   "revoke_surveyor_entitlement_by_subscription(text)",
++   "rollup_analytics_daily(date)",
++   "rollup_analytics_v2_daily(date)",
++   "rollup_intent_atlas_daily(date)",
++   "rollup_sim_metrics(text)",
++   "service_adjust_credits(uuid,uuid,integer,text)",
++   "set_account_disabled(uuid,uuid,boolean,text)",
++   "set_gallery_comment_hidden(uuid,boolean,text,uuid)",
++   "set_ticket_status(uuid,uuid,text,text)",
++   "surveyor_byok_get(uuid,text)",
++   "surveyor_byok_set_health(uuid,text,text,text,boolean)",
++   "surveyor_byok_set_probe_tier(uuid,text,text,text,text,jsonb)",
++   "surveyor_usage_precheck(uuid,text,text)",
++   "sweep_seat_abandonment()",
++   "sweep_seat_dormancy_nudges()",
++   "system_clawback_credits(text,text)",
++   "transfer_case_abort(uuid,text,text)",
++   "transfer_case_bind_nominee(uuid,uuid)",
++   "transfer_case_finalize(uuid)",
++   "transfer_case_mark_awaiting_payment(uuid,text)",
++   "transfer_case_mark_paid(uuid,text,integer)",
++   "transfer_case_open(smallint,uuid,text,text)",
++   "transfer_case_regress_awaiting_payment(text)",
++   "transfer_case_reverse(uuid,text)",
++   "verify_buyback_challenge(uuid,text)",
++   "verify_transfer_challenge(uuid,text,text,text)",
++   "write_ai_operation_log(uuid,text,text,text,text,text[],text[],text,text,text,boolean,numeric,integer,boolean,uuid,boolean,text,text)",
++   "write_audit(text,uuid,text,text,text,jsonb,jsonb,boolean,boolean,boolean,uuid)",
++ ]
+
+ ❯ tests/security/hostedDefaultGrants.pglite.test.js:67:73
+     65|   const cls = (f) => FUNCTION_CLASSES[f.sig];
+     66|   it('no SERVER or NOBODY function is executable by anon', () => {
+     67|     expect(bad((f) => ['SERVER', 'NOBODY'].includes(cls(f)) && f.anon)…
+       |                                                                         ^
+     68|   });
+     69|   it('no SERVER or NOBODY function is executable by authenticated', ()…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/5]⎯
+
+ FAIL  tests/security/hostedDefaultGrants.pglite.test.js > each class holds under the hosted default (migration 211 part A) > no SERVER or NOBODY function is executable by authenticated
+AssertionError: expected [ …(134) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "_assert_service_admin_actor(uuid)",
++   "_audit_action(uuid,uuid,text,jsonb,jsonb,text)",
++   "_buyback_payout_hold_days()",
++   "_consume_action_rate_limit(uuid,text,integer)",
++   "_founder_transfer_dial(text,integer)",
++   "_gallery_chronicle_entry(jsonb)",
++   "_gallery_chronicle_json(jsonb)",
++   "_gallery_public_tile_rows()",
++   "_gc_dim_sql(text)",
++   "_log_founder_transfer_event(uuid,text,text,jsonb)",
++   "_seat_buyback_cents()",
++   "_seat_holder_last_active(uuid)",
++   "_seat_stewardship_dial(text,integer)",
++   "_surveyor_byok_secret()",
++   "_trunc_unit(text)",
++   "add_internal_note(uuid,uuid,text)",
++   "admin_billing_summary(uuid,uuid)",
++   "admin_diagnostic_bundle(uuid,uuid,boolean,text)",
++   "admin_remove_gallery_item(uuid,uuid,text)",
++   "admin_remove_gallery_map(uuid,uuid,text)",
++   "admin_revoke_share_link(uuid,uuid,text)",
++   "admin_set_content_banned(uuid,text,uuid,boolean,text)",
++   "admin_soft_delete_map(uuid,uuid,boolean,text)",
++   "admin_soft_delete_settlement(uuid,uuid,boolean,text)",
++   "aggregate_ai_usage_stats(integer)",
++   "analytics_monthly_prune()",
++   "analytics_nightly_maintenance()",
++   "append_retention_cohorts(date)",
++   "apply_redemption(text)",
++   "attach_ai_spend_to_claim(uuid,text,uuid)",
++   "bind_redemption_session(uuid,text)",
++   "cancel_stale_auto_reload_attempts()",
++   "claim_ai_request(uuid,text,integer)",
++   "claim_auto_reload_payment_intent(uuid,uuid,text,integer,integer)",
++   "claim_dossier_purchase_by_session(text,uuid,uuid)",
++   "claim_due_buyback_payout()",
++   "claim_due_transfer_payout()",
++   "claim_founder_seat_buyback(uuid,text)",
++   "claim_free_narrative(uuid)",
++   "claim_next_founder_seat(uuid)",
++   "claim_ticket(uuid,uuid)",
++   "clawback_dossier_entitlement(text)",
++   "clawback_referral(text)",
++   "cleanup_ai_generate_rate_limits(integer)",
++   "cleanup_ai_spend_reservations(integer)",
++   "cleanup_dossier_verify_rate_limits(integer)",
++   "cleanup_email_rate_limits(integer)",
++   "cleanup_recovery_rate_limits(integer)",
++   "cleanup_token_buckets(integer)",
++   "cleanup_user_action_rate_limits(integer)",
++   "consume_ai_generate_rate_limit(uuid,integer,integer)",
++   "consume_dossier_verify_rate_limit(text,integer,integer)",
++   "consume_email_rate_limit(text,text,integer,integer,integer)",
++   "consume_recovery_rate_limit(text,text,integer,integer,integer)",
++   "consume_token_bucket(text,double precision,double precision,double precision)",
++   "email_has_active_transfer_lock(text)",
++   "expire_stale_transfer_cases()",
++   "grant_dossier_entitlement(uuid,uuid,text,text)",
++   "grant_referral(uuid,text,integer)",
++   "handle_premium_downgrade(uuid)",
++   "has_active_transfer_lock(uuid)",
++   "ingest_check_rate(text,integer,integer)",
++   "issue_buyback_challenge(uuid)",
++   "issue_transfer_challenge(uuid,text,text)",
++   "link_ticket_faq(uuid,uuid,text)",
++   "load_sim_metrics(jsonb)",
++   "mark_low_balance_notified(uuid,text)",
++   "market_k_min_campaigns()",
++   "market_k_min_users()",
++   "post_ticket_reply(uuid,uuid,text,text)",
++   "purge_analytics_for_user(uuid)",
++   "purge_dossier_purchases(integer)",
++   "purge_expired_plan_inactive_assets()",
++   "purge_expired_plan_inactive_settlements()",
++   "record_referral_grant_detail(uuid,text,text,text)",
++   "reelect_transfer_payout(uuid,uuid)",
++   "release_ai_spend_reservation(uuid)",
++   "release_founder_seat_on_clawback(uuid)",
++   "release_free_narrative(uuid)",
++   "report_ai_usage(date,date)",
++   "report_channel_funnel(date,date)",
++   "report_client_error_alert()",
++   "report_client_errors(date,date)",
++   "report_config_variance(text,date,date)",
++   "report_crosstab(text,text,date,date,integer)",
++   "report_distribution(text,date,date,text,integer)",
++   "report_edit_heatmap(date,date)",
++   "report_funnel(date,date)",
++   "report_market_archetype_popularity(date,date)",
++   "report_market_preset_adoption(date,date)",
++   "report_npc_distribution(text,date,date)",
++   "report_preferences(date,date)",
++   "report_proposal_decisions(date,date)",
++   "report_pulse_mutations(date,date)",
++   "report_referral_funnel(date,date)",
++   "report_regional_arcs(date,date)",
++   "report_regional_impacts(date,date)",
++   "report_regional_propagation(date,date)",
++   "report_retention()",
++   "report_stressor_genesis(date,date)",
++   "report_summary(date,date)",
++   "report_trend(text,text,date,date)",
++   "reserve_ai_spend(uuid,numeric)",
++   "reserve_redemption(text,uuid,text)",
++   "revert_redemption(text)",
++   "revoke_surveyor_entitlement(uuid,text)",
++   "revoke_surveyor_entitlement_by_subscription(text)",
++   "rollup_analytics_daily(date)",
++   "rollup_analytics_v2_daily(date)",
++   "rollup_intent_atlas_daily(date)",
++   "rollup_sim_metrics(text)",
++   "service_adjust_credits(uuid,uuid,integer,text)",
++   "set_account_disabled(uuid,uuid,boolean,text)",
++   "set_gallery_comment_hidden(uuid,boolean,text,uuid)",
++   "set_ticket_status(uuid,uuid,text,text)",
++   "surveyor_byok_get(uuid,text)",
++   "surveyor_byok_set_health(uuid,text,text,text,boolean)",
++   "surveyor_byok_set_probe_tier(uuid,text,text,text,text,jsonb)",
++   "surveyor_usage_precheck(uuid,text,text)",
++   "sweep_seat_abandonment()",
++   "sweep_seat_dormancy_nudges()",
++   "system_clawback_credits(text,text)",
++   "transfer_case_abort(uuid,text,text)",
++   "transfer_case_bind_nominee(uuid,uuid)",
++   "transfer_case_finalize(uuid)",
++   "transfer_case_mark_awaiting_payment(uuid,text)",
++   "transfer_case_mark_paid(uuid,text,integer)",
++   "transfer_case_open(smallint,uuid,text,text)",
++   "transfer_case_regress_awaiting_payment(text)",
++   "transfer_case_reverse(uuid,text)",
++   "verify_buyback_challenge(uuid,text)",
++   "verify_transfer_challenge(uuid,text,text,text)",
++   "write_ai_operation_log(uuid,text,text,text,text,text[],text[],text,text,text,boolean,numeric,integer,boolean,uuid,boolean,text,text)",
++   "write_audit(text,uuid,text,text,text,jsonb,jsonb,boolean,boolean,boolean,uuid)",
++ ]
+
+ ❯ tests/security/hostedDefaultGrants.pglite.test.js:70:74
+     68|   });
+     69|   it('no SERVER or NOBODY function is executable by authenticated', ()…
+     70|     expect(bad((f) => ['SERVER', 'NOBODY'].includes(cls(f)) && f.authd…
+       |                                                                          ^
+     71|   });
+     72|   it('every SERVER function stays executable by service_role', () => {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/5]⎯
+
+ FAIL  tests/security/hostedDefaultGrants.pglite.test.js > the three executed holes stay closed (CONFIRMED before 211 as anon / authenticated) > anon cannot read the BYOK passphrase
+AssertionError: expected 'BYOK is not configured (app.settings.…' to match /permission denied/
+
+- Expected:
+/permission denied/
+
++ Received:
+"BYOK is not configured (app.settings.byok_secret unset)"
+
+ ❯ tests/security/hostedDefaultGrants.pglite.test.js:103:75
+    101|   };
+    102|   it('anon cannot read the BYOK passphrase', async () => {
+    103|     expect(await callAs('anon', 'select public._surveyor_byok_secret()…
+       |                                                                           ^
+    104|   });
+    105|   it("anon cannot downgrade another user", async () => {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/5]⎯
+
+ FAIL  tests/security/hostedDefaultGrants.pglite.test.js > the three executed holes stay closed (CONFIRMED before 211 as anon / authenticated) > anon cannot downgrade another user
+AssertionError: expected 'executed' to match /permission denied/
+
+- Expected:
+/permission denied/
+
++ Received:
+"executed"
+
+ ❯ tests/security/hostedDefaultGrants.pglite.test.js:106:116
+    104|   });
+    105|   it("anon cannot downgrade another user", async () => {
+    106|     expect(await callAs('anon', "select public.handle_premium_downgrad…
+       |                                                                                                                    ^
+    107|   });
+    108|   it('a signed-in user cannot release a free narrative', async () => {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/5]⎯
+
+ FAIL  tests/security/hostedDefaultGrants.pglite.test.js > the three executed holes stay closed (CONFIRMED before 211 as anon / authenticated) > a signed-in user cannot release a free narrative
+AssertionError: expected 'executed' to match /permission denied/
+
+- Expected:
+/permission denied/
+
++ Received:
+"executed"
+
+ ❯ tests/security/hostedDefaultGrants.pglite.test.js:109:123
+    107|   });
+    108|   it('a signed-in user cannot release a free narrative', async () => {
+    109|     expect(await callAs('authenticated', "select public.release_free_n…
+       |                                                                                                                           ^
+    110|   });
+    111| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/5]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  5 failed | 8 passed (13)
+   Start at  15:40:02
+   Duration  3.88s (transform 56ms, setup 78ms, import 55ms, tests 3.61s, environment 0ms)
+
+exit 1

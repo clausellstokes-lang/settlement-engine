@@ -14,7 +14,8 @@ const NPC = () => ({
   personality: { dominant: 'stern', ambition: 'reclaim his house', ideal: 'order above all' },
   loyalty: 'the crown', fear: 'the mob',
 });
-const CORRUPT_NPC = () => ({ ...NPC(), corrupt: true, corruptTies: { criminalInstitution: 'The Coin Rats' }, secret: { what: 'skims the temple alms' } });
+// ALLEGIANCE-CAR1 (2026-11-08): the retired `corrupt` mark is the card's hidden `allegiance` (allegianceOf)
+const CORRUPT_NPC = () => ({ ...NPC(), allegiance: { power: null, house: 'The Coin Rats', vector: 'greed', via: 'retainer', handler: null, share: 0.15, veiled: true, covert: true }, secret: { what: 'skims the temple alms' } });
 // The engine sidecar: bonds/grudges (npcLadder) + credibility — DM truth by construction.
 const WORLD = () => ({
   spatialLedgers: {
@@ -27,11 +28,19 @@ const WORLD = () => ({
 });
 
 describe('npcInteriority — player-safe disposition & wants', () => {
-  it('composes wants (goal + ambition + ideal) and disposition (temperament + standing + loyalty + fear)', () => {
+  it('composes wants (goal + ambition + ideal) and disposition (temperament + loyalty + fear), and no standing word', () => {
     const view = npcInteriority({ npc: NPC() });
     expect(view.present).toBe(true);
     expect(view.wants).toEqual(['restore the old temple', 'reclaim his house', 'order above all']);
-    expect(view.disposition).toEqual(['stern', 'commanding', 'the crown', 'the mob']);
+    // A WORD IS PRINTED UNDER THE NAME OF WHAT IT MEASURES: the disposition list holds temperament, loyalty and fear.
+    // PAGE-1 CARD (F4, 2026-11-20): the read-model carries no standing word from the stored `influence` band (a keyword
+    // misread at birth); the card's Standing row is cardStandingRead.js's fact.
+    expect(view.disposition).toEqual(['stern', 'the crown', 'the mob']);
+    for (const influence of ['high', 'moderate', 'low']) {
+      const v = npcInteriority({ npc: { ...NPC(), influence } });
+      expect(Object.keys(v)).toEqual(['present', 'wants', 'disposition']);
+    }
+    expect(npcInteriority({ npc: { name: 'Bare', influence: 'high' } }), 'an influence alone makes no view').toBeNull();
     expect(view.groundTruth, 'no DM-truth block in the player view').toBeUndefined();
   });
 

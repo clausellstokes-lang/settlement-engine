@@ -22,7 +22,7 @@ function fixture() {
   const settlement = {
     id: 's1', name: 'Ashford',
     npcs: [{ id: 'n1', name: 'Mira', role: 'reeve', alignment: 'lawful_selfish', personality: { dominant: 'guarded' }, goal: { short: 'buy the mill' }, factionAffiliation: 'The Guildhall' }],
-    relationships: [{ npc1Id: 'n1', npc2Id: 'n9', type: 'rival', strength: 3 }],
+    relationships: [{ from: 'n1', to: 'n9', type: 'rival', strength: 3 }], // PEOPLE-4 TIES: the tie is directed (from/to)
     economicState: { prosperity: 'lean', foodSecurity: { storageMonths: 2 }, primaryExports: ['grain'] },
     config: { primaryDeitySnapshot: { name: 'Vael' }, cultDeitySnapshots: [] },
     powerStructure: { factions: [{ name: 'The Guildhall' }] },

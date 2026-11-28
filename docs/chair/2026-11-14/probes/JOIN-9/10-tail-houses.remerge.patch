@@ -1,0 +1,38 @@
+commit 329f324a000043dc84c4cf808851e216c504cc2e
+Merge: 92fcc4fc5 0907dccf2
+Author: Claude <noreply@anthropic.com>
+Date:   Sun Nov 15 06:04:55 2026 +0000
+
+    join(JOIN-9 · 10): merge lane/tail-houses-2026-11-14 at 0907dccf2
+    
+    Point 10 (JOIN-9), the tip read back at 06:03 UTC; merge base 3e482b329; 15 files outside docs/. A CODE CONFLICT IN ONE TEST FILE, a close seat's hunk against a builder's, resolved by the prompt's rule (plain: the builder's value inside the close seat's stronger form): tests/data/w2FixData6Rows.test.js, HANDBACK-6 row 4 (the town mine): close-tests-a (432b0330c, on the line) anchored the negative with the shaft positive above it; houses (61648f2a2, TAIL-HOUSES-5, re-keyed by identity) took "worked" out of the negative and added the hedge's positive. Composed: the shaft and the hedge positives first, then the anchored negative without "worked"; both stand. Measured: the file 2 red / 7 green, the same two as at the branch's own tip (row 4 itself green; at the line before the merge, 3 red with row 4 among them). Merged clean though both moved, measured green: tailHouses1Gaps.test.js, tailHouses4CoastCrown.test.js (5/5); the widened presumed register. Declared-move commits: 61648f2a2 99438070f 6510d746b 36bcb60b5 5d906f6e4: the golden moves with them, carried, the owner's door.
+    
+    Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+    Claude-Session: https://claude.ai/code/session_01ACmDYZ3iXADnu3zZoNowo9
+
+diff --git a/tests/data/w2FixData6Rows.test.js b/tests/data/w2FixData6Rows.test.js
+remerge CONFLICT (content): Merge conflict in tests/data/w2FixData6Rows.test.js
+index 168ea2d06..7f43a1cec 100644
+--- a/tests/data/w2FixData6Rows.test.js
++++ b/tests/data/w2FixData6Rows.test.js
+@@ -154,18 +154,13 @@ describe('W2-FIX-DATA-9: the census writers in the data lane\'s files (the ninth
+     const mine = (seed, tier) => String(generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...dials, settType: tier }), null, { seed, customContent: {} }).institutions.find((/** @type {any} */ i) => i.name === 'Mine').desc);
+     expectNoSeedFailures(collectSeedFailures(['r2r-town-11', 'r2r-town-12', 'r2r-town-45'], (seed) => {
+       const desc = mine(seed, 'town');
+-<<<<<<< 92fcc4fc5 (docs(JOIN-9): the hand-back after point 9)
+-      expect(desc, seed).toMatch(/shaft/);
+-      // anchored: the same description is shown directly above to name its shaft
+-      expect(desc, seed).not.toMatch(/hired crews|worked|go deep|run deep/i);
+-=======
+       // TAIL-HOUSES-5 (the chair's U2), RE-KEYED BY IDENTITY: TAIL-HOUSES-2's batch 3 (2c10ddefe; the chair's one hedge form) put the
+       // town mine's texts in the hedge that governs the verb ("worked whenever ore can be had"): no present work is claimed
+       // unhedged. The pin reads the hedge, and still refuses the old crews and depths.
+-      expect(desc, seed).not.toMatch(/hired crews|go deep|run deep/i); // anchored: the same desc must match the shaft and the hedge on the next two lines
+       expect(desc, seed).toMatch(/shaft/);
+       expect(desc, seed).toMatch(/worked whenever ore can be had/);
+->>>>>>> 0907dccf2 (docs(TAIL-HOUSES-5): the hand-back: batches 8-11 measured, U2 classed, H20 (2) named; handed back by time)
++      // anchored: the same description is shown directly above to name its shaft and its hedge
++      expect(desc, seed).not.toMatch(/hired crews|go deep|run deep/i);
+     }), 'no present work claimed of a mine whose deposits may be spent');
+     expect(mine('r2r-village-3', 'village')).toMatch(/^Ore, coal, or stone is won from a shaft/);
+   }, 240_000);

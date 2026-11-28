@@ -1,0 +1,98 @@
+ON	activeConditions.severity	1	33b12cbef
+ON	arrivalScene	1	8f222ff87 b61143029
+ON	availableServices.equipment	1	b75b08c35
+ON	availableServices.healing	1	b75b08c35
+ON	availableServices.legal	1	679e52b01
+ON	availableServices.transport	1	
+OFF	conflicts.desc	1	bea2a1298 474c5f966
+OFF	conflicts.intensity	1	
+OFF	conflicts.issue	1	bea2a1298
+OFF	conflicts.parties	1	bea2a1298
+OFF	conflicts.plotHooks	1	bea2a1298
+OFF	conflicts.stakes	1	bea2a1298
+OFF	culturalIdentity.architecturalDetail	1	8f222ff87
+OFF	culturalIdentity.foodways	1	8f222ff87
+OFF	defenseProfile.economicGates	5	33b12cbef b61143029
+OFF	defenseProfile.institutions	21	8f222ff87 33b12cbef 65dc92af9 f1537a8e4
+OFF	defenseProfile.readiness	5	33b12cbef 65dc92af9 b61143029
+ON	defenseProfile.scores	6	33b12cbef 65dc92af9 b61143029
+OFF	economicState.activeChains	1	8f222ff87 e9601b6b3
+OFF	economicState.compound	2	33b12cbef
+ON	economicState.economicComplexity	1	1b672cbe8
+ON	economicState.foodSecurity	4	8f222ff87 33b12cbef b61143029
+ON	economicState.incomeSources	5	33b12cbef b61143029 ec1a14f27
+OFF	economicState.institutionalServices	7	becdc010c
+ON	economicState.localProduction	1	f5c5d636e 390168d6b bc7ce511a 3e482b329
+ON	economicState.primaryExports	1	becdc010c 390168d6b
+OFF	economicState.prosperityStanding	1	33b12cbef b61143029
+ON	economicState.safetyProfile	6	33b12cbef 0537f92f3 d5c419393 679e52b01
+OFF	economicState.tradeDependencies	1	8f222ff87 e9601b6b3
+OFF	economicViability.metrics	4	26c3dc456
+OFF	generationCoherenceReceipt.judgments	7	bea2a1298 8f222ff87
+ON	history.currentTensions	8	8f222ff87 3f3d9c880 2824cad0a
+ON	history.eventsTimeline	2	8f222ff87
+ON	history.founding	3	866041da5 bd57eb02c 9d3d177a0
+ON	history.historicalEvents	6	77e480ac3 8f222ff87 7c12769c5 2824cad0a
+ON	history.legacyAnnotations	2	8f222ff87 2824cad0a
+ON	institutions.desc	1	8f222ff87 e7e1c2e8c 3b873a03a 96b4015f4 f1537a8e4 794a00cc5 d5ec9c7f3 329f324a0
+OFF	institutions.tags	1	e7e1c2e8c
+OFF	npcs	1	bea2a1298 33b12cbef 718985525 474c5f966 e20a60e0d e7de70116 d700bda44 5d1e3096b 00e8ba474
+OFF	npcs.activeConstraint	1	bea2a1298 33b12cbef 718985525
+OFF	npcs.allegiance	1	
+OFF	npcs.category	1	bea2a1298
+OFF	npcs.gender	1	bea2a1298
+ON	npcs.goal	14	bea2a1298 474c5f966
+OFF	npcs.id	1	bea2a1298
+OFF	npcs.importance	1	bea2a1298
+OFF	npcs.influence	1	bea2a1298
+OFF	npcs.institution	5	bea2a1298
+OFF	npcs.memberships	5	bea2a1298
+OFF	npcs.name	1	bea2a1298
+OFF	npcs.personality	5	bea2a1298
+OFF	npcs.physical	4	bea2a1298
+ON	npcs.plotHooks	1	e20a60e0d bea2a1298 e7de70116
+OFF	npcs.power	1	bea2a1298
+ON	npcs.presentation	3	bea2a1298 d700bda44
+OFF	npcs.role	1	bea2a1298 5d1e3096b
+ON	npcs.secret	2	bea2a1298 00e8ba474
+OFF	npcs.settlementCondition	1	bea2a1298 33b12cbef
+ON	npcs.structuralPosition	1	bea2a1298 33b12cbef 718985525
+OFF	npcs.structuralRank	1	bea2a1298
+ON	npcs.title	1	bea2a1298 5d1e3096b
+OFF	powerStructure.conflicts	6	bea2a1298 474c5f966
+ON	powerStructure.factionRelationships	8	33b12cbef c2c12792e fd5e0da52 470ff0a7a
+ON	powerStructure.factions	2	bea2a1298 33b12cbef 00e8ba474 fd5e0da52 6ad86c138 470ff0a7a
+OFF	powerStructure.publicLegitimacy	2	33b12cbef b61143029
+OFF	powerStructure.recentConflict	1	475506bf7
+OFF	prominentRelationship.full	1	bea2a1298 cf3a0352b 718985525
+OFF	prominentRelationship.npc1	1	bea2a1298
+OFF	prominentRelationship.npc2	1	bea2a1298
+OFF	prominentRelationship.phrasing	1	bea2a1298 cf3a0352b 718985525
+OFF	prominentRelationship.tension	1	bea2a1298 cf3a0352b 718985525
+OFF	prominentRelationship.type	1	bea2a1298
+OFF	relationships	1	bea2a1298 cf3a0352b 718985525 9ba7d6940 5d1e3096b e7de70116
+OFF	relationships.archetypeKey	1	bea2a1298
+OFF	relationships.covert	1	
+ON	relationships.description	1	bea2a1298 cf3a0352b 718985525 9ba7d6940
+OFF	relationships.from	1	bea2a1298
+OFF	relationships.handler	1	
+OFF	relationships.id	1	bea2a1298
+OFF	relationships.npc1Name	1	bea2a1298
+OFF	relationships.npc1Role	1	bea2a1298 5d1e3096b
+OFF	relationships.npc2Name	1	bea2a1298
+OFF	relationships.npc2Role	1	bea2a1298 5d1e3096b
+ON	relationships.proseVariant	1	bea2a1298 cf3a0352b 718985525
+OFF	relationships.strength	1	bea2a1298
+ON	relationships.tension	1	bea2a1298 cf3a0352b e7de70116 718985525 9ba7d6940
+OFF	relationships.to	1	bea2a1298
+OFF	relationships.type	1	bea2a1298
+OFF	relationships.typeName	1	bea2a1298
+OFF	resourceAnalysis.availableResources	1	3e482b329
+OFF	resourceAnalysis.exploitation	2	e7e1c2e8c
+ON	resourceAnalysis.exports	5	77e480ac3 c2c12792e e7e1c2e8c 131dfdbb6
+ON	resourceAnalysis.gaps	8	c2c12792e e7e1c2e8c f5ffbb650 4b19b7446
+ON	resourceAnalysis.strategicValue	1	
+ON	settlementReason	1	e20a60e0d e6a888e1f
+OFF	simulationTrace.causes	1	33b12cbef b61143029
+ON	stress.cast	1	33b12cbef 70d80f3e9
+ON	stressors.cast	1	33b12cbef 70d80f3e9

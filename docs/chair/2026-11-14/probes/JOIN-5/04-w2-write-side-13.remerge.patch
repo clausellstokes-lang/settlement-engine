@@ -1,0 +1,20 @@
+commit b4dad83e4de334a856541ac20d148a6b353e142e
+Merge: 3bfeea6db f2bf55f1e
+Author: Claude <noreply@anthropic.com>
+Date:   Sat Nov 14 16:01:06 2026 +0000
+
+    join(JOIN-5 · 4): merge lane/w2-write-side-13-2026-11-14 at f2bf55f1e — the corpus's side branch
+    
+    Tip read back from origin at 16:00 UTC: f2bf55f1e930f7d3b893324a5ad9f6ca00c9ce59
+    (not landed before; merge base 525541b42, the corpus's tip at JOIN-4 merge 6).
+    No conflict. Merged clean though both sides moved them (each pin moved by
+    ONE side at its own line, so each stands by (d); LISTED for the close):
+    docs/content/RECEIPT_POOLS_DOSSIER_STATE.md, tests/domain/corpusCureGuards.test.js,
+    tests/lint/proseComposed.walker.test.js (joined: relations 169; lane: corpus
+    2950 -> 2951), tests/lint/proseWiringCensus.walker.test.js (joined: the
+    resolved/unresolved and relation re-keys; lane: variants 2951 and the histogram).
+    Moved by the lane alone: src/data/dossierStateProse/general.generated.js (leaf; (g)).
+    Verify: 12 files changed; the 8 the joined line had not moved equal the lane's blob.
+    
+    Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+    Claude-Session: https://claude.ai/code/session_01ACmDYazSdYC8v2Fj1WVnzT

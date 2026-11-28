@@ -103,7 +103,12 @@ const BASE_SHA = Object.freeze({
   // 2026-10-02 (the Voice Program wave 1, ODQ §934.88: the Herald speaks in deeds): c0f7940a... -> 9bb0e6f4...,
   // TEXT ONLY, leaf-diffed against 8a6f6b9d3: every moved leaf is a headline, summary or applied headline of the
   // crime condition and the institution capture; no id, tick, severity or number moved.
-  pulse: '9bb0e6f4f68cec87853233fe02d752007f9dd90c7bb8a8e843a1c878c068827e',
+  // 2026-11-10 (STYLE-2-MERGE-4, found by point 23's governing run; red since point 18): 9bb0e6f4... -> 0fb27c5d...,
+  // TEXT ONLY, SW-12 PULSE-LINES' pulse lines (red on the lane's own tip 3f5cb1ff8 and unmoved since; green at
+  // bd07005b9 and at point 17). Leaf-diffed bd07005b9 -> the point-23 stage, dark: 122 string leaves moved (gates 87,
+  // reasons 25, summary 10), 271 array-tail elements dropped (struck reason and gate lines), 0 non-string leaves
+  // moved, 0 keys added; no id, tick, severity or number moved.
+  pulse: '0fb27c5dd27e358334ae32053da73f796436304f724690b06deeb306940c72b3',
 });
 
 const sha = (value) => createHash('sha256').update(JSON.stringify(value)).digest('hex');

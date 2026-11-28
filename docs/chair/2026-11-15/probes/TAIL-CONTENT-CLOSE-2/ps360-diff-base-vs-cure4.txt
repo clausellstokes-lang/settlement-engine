@@ -1,0 +1,4 @@
+86c86
+< presume-town-25 f4793ecb99 Being on the right side of it keeps the forges of Shankou running day and night, and the fish trade has never paid better, and the place now needs the war to go on to pay for what the war has already cost it.
+---
+> presume-town-25 f4793ecb99 Being on the right side of it, Shankou's fish trade has never paid better, and the place now needs the war to go on to pay for what the war has already cost it.

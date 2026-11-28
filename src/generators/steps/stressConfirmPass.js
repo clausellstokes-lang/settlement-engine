@@ -35,6 +35,7 @@ import { registerStep } from '../pipeline.js';
 import { buildStressContext } from '../stressGenerator.js';
 import { recordTrace } from '../../domain/trace.js';
 import { STRESS_TYPE_MAP } from '../../data/stressTypes.js';
+import { migrationDirectionOfStress } from '../../domain/migrationDirection.js';
 import {
   nativeSemanticName,
 } from '../../domain/content/customContentSemanticAuthority.js';
@@ -151,6 +152,15 @@ registerStep('stressConfirmPass', {
   const stressTypes = kept.map(e => e?.type).filter(t => t && STRESS_TYPE_MAP[t]);
   effectiveConfig.stressType  = stressTypes[0] || null;
   effectiveConfig.stressTypes = stressTypes;
+  // WIRING-W0 (2026-11-07, R-W7 e): the migration direction rides the same projection as the types,
+  // stamped from the confirmed container's own `stress[].direction` (written once, at the draw, by
+  // stressGenerator.js :: buildStressEntry), so the economy and power readers that hold only the
+  // config read the record's one fact (domain/migrationDirection.js). A derived key
+  // (DERIVED_CONFIG_KEYS); absent when no migration survived. Spelled as an object-literal write
+  // so the observed-shape instrument's gate 0 sees it (the schema-29 declaration names this file).
+  const migrationDirection = migrationDirectionOfStress(kept);
+  if (migrationDirection) Object.assign(effectiveConfig, { migrationDirection });
+  else delete effectiveConfig.migrationDirection;
 
   // Preserve generateStress's output shape convention: null / object / array.
   const stress = kept.length === 0 ? null : kept.length === 1 ? kept[0] : kept;

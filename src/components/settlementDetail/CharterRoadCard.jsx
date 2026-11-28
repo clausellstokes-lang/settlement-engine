@@ -29,7 +29,7 @@ const REACH_PROSE = Object.freeze({
   arduous: 'Hard country the whole way. This road will be earned, and it will cost to keep.',
 });
 
-const WATER_PROSE = 'A run of ships rather than a road: the water already carries this route.';
+const WATER_PROSE = 'This route goes by ship: the water already carries it.';
 
 const REFUSAL_PROSE = Object.freeze({
   realm_not_canonized: 'This realm has no map yet, so there is no ground for a road to cross. Canonize the realm first.',

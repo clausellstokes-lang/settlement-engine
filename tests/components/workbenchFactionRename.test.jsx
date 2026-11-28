@@ -88,8 +88,8 @@ describe('the rename control stages through the ONE queue spine', () => {
     setState(settlement);
     render(<WorkbenchFactionRename entry={factionEntry(settlement, 1)} />);
 
-    fireEvent.click(screen.getByRole('button', { name: 'Rename this faction' }));
-    fireEvent.change(screen.getByLabelText('New faction name'), {
+    fireEvent.click(screen.getByRole('button', { name: 'Rename this power' }));
+    fireEvent.change(screen.getByLabelText('New name for the power'), {
       target: { value: 'The Amber Concord' },
     });
     fireEvent.click(screen.getByRole('button', { name: 'Queue this name' }));
@@ -107,8 +107,8 @@ describe('the rename control stages through the ONE queue spine', () => {
     const settlement = fixtureSettlement();
     setState(settlement, { renameFaction: vi.fn() });
     render(<WorkbenchFactionRename entry={factionEntry(settlement)} />);
-    fireEvent.click(screen.getByRole('button', { name: 'Rename this faction' }));
-    fireEvent.change(screen.getByLabelText('New faction name'), { target: { value: 'X' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Rename this power' }));
+    fireEvent.change(screen.getByLabelText('New name for the power'), { target: { value: 'X' } });
     fireEvent.click(screen.getByRole('button', { name: 'Queue this name' }));
     expect(mocks.state.renameFaction).not.toHaveBeenCalled();
   });
@@ -118,8 +118,8 @@ describe('the rename control stages through the ONE queue spine', () => {
     setState(settlement, { queueEdit: vi.fn(() => Promise.resolve(null)) });
     render(<WorkbenchFactionRename entry={factionEntry(settlement)} />);
 
-    fireEvent.click(screen.getByRole('button', { name: 'Rename this faction' }));
-    fireEvent.change(screen.getByLabelText('New faction name'), { target: { value: 'X' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Rename this power' }));
+    fireEvent.change(screen.getByLabelText('New name for the power'), { target: { value: 'X' } });
     fireEvent.click(screen.getByRole('button', { name: 'Queue this name' }));
 
     expect(await screen.findByRole('alert')).toBeTruthy();
@@ -144,7 +144,7 @@ describe('identity resolution refuses to guess', () => {
     setState(settlement);
     render(<WorkbenchFactionRename entry={{ type: 'faction', currentName: 'Militia' }} />);
     expect(screen.getByRole('note').textContent).toMatch(/cannot be uniquely matched/);
-    expect(screen.queryByRole('button', { name: 'Rename this faction' })).toBeNull();
+    expect(screen.queryByRole('button', { name: 'Rename this power' })).toBeNull();
   });
 });
 
@@ -167,36 +167,36 @@ describe('the premium gate holds the door', () => {
 
   test('premium sees the rename control (the positive control)', async () => {
     renderMount({ auth: { tier: 'premium' } });
-    expect(await screen.findByRole('button', { name: 'Rename this faction' })).toBeTruthy();
+    expect(await screen.findByRole('button', { name: 'Rename this power' })).toBeTruthy();
   });
 
   test('free tier gets the read-only inspector and NO rename control', async () => {
     renderMount({ auth: { tier: 'free' } });
     expect(await screen.findByText('Entity Inspector', { exact: false })).toBeTruthy();
-    expect(screen.queryByRole('button', { name: 'Rename this faction' })).toBeNull();
+    expect(screen.queryByRole('button', { name: 'Rename this power' })).toBeNull();
   });
 
   test('anon (no auth state at all) fails closed the same way', async () => {
     renderMount({ auth: undefined });
     expect(await screen.findByText('Entity Inspector', { exact: false })).toBeTruthy();
-    expect(screen.queryByRole('button', { name: 'Rename this faction' })).toBeNull();
+    expect(screen.queryByRole('button', { name: 'Rename this power' })).toBeNull();
   });
 
   test('an elevated role holds the authority regardless of tier', async () => {
     renderMount({ auth: { tier: 'free' }, elevated: true });
-    expect(await screen.findByRole('button', { name: 'Rename this faction' })).toBeTruthy();
+    expect(await screen.findByRole('button', { name: 'Rename this power' })).toBeTruthy();
   });
 
   test('the upstream readOnly prop still wins for a premium viewer', async () => {
     renderMount({ readOnly: true, auth: { tier: 'premium' } });
     expect(await screen.findByText('Entity Inspector', { exact: false })).toBeTruthy();
-    expect(screen.queryByRole('button', { name: 'Rename this faction' })).toBeNull();
+    expect(screen.queryByRole('button', { name: 'Rename this power' })).toBeNull();
   });
 
   test('mobile keeps the door shut, matching the sibling authoring surfaces', async () => {
     mocks.mobile = true;
     renderMount({ auth: { tier: 'premium' } });
     expect(await screen.findByText('Entity Inspector', { exact: false })).toBeTruthy();
-    expect(screen.queryByRole('button', { name: 'Rename this faction' })).toBeNull();
+    expect(screen.queryByRole('button', { name: 'Rename this power' })).toBeNull();
   });
 });

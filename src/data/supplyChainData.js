@@ -762,7 +762,7 @@ export const SUPPLY_CHAIN_NEEDS = {
         exportable: true,
         entrepot: true,
         entrepotNote:
-          'Silk is not produced locally at any tier. Port cities control import; crossroads cities control inland distribution.',
+          'Silk is not produced locally anywhere. Port cities control import; crossroads cities control inland distribution.',
         minTier: 'city',
       },
       {
@@ -812,7 +812,7 @@ export const SUPPLY_CHAIN_NEEDS = {
         exportable: true,
         entrepot: true,
         entrepotNote:
-          'Furs originate in frontier/northern settlements and travel south through trading posts. Mid-route settlements profit from the trade.',
+          'Furs travel from the hunting grounds through trading posts, and the settlements along the route profit from the trade.', // BAR3-PLACES (H4, 2026-11-15): no northern origin claimed (a town hunting its own grounds printed it)
         minTier: 'hamlet',
       },
       {
@@ -867,10 +867,19 @@ export const SUPPLY_CHAIN_NEEDS = {
         exportable: false,
         entrepot: true,
         minTier: 'village',
+        // COHERENCE-AGREE-6 (REVIEW-AGREE-2 F1, the chair's ruling of 2026-11-12): the toll runs on every hub access,
+        // and its name says the access. Where the resource's own row (`RESOURCE_DATA.crossroads_position.requires`)
+        // refuses the town's access, the page prints the entry for that access instead
+        // (`domain/display/chainPrintName.js :: chainPrintName`); the record keeps the catalogue's strings.
+        namesByAccess: CHAIN_NAMES_BY_ACCESS.crossroads_trade, // data/chainAccessNames.js, the table's one home
       },
       {
         id: 'camel_caravan',
         label: 'Camel Caravan Trade',
+        // CENSUS-3b unit 3 (the vocabulary rulings §7; the lane's ruling 2): a camel chain presumes
+        // the desert, and no culture (culture resolution ignores terrain). Held by the resource gate
+        // (camel_herds is a desert resource) and by tests/domain/display/tradeListDisplay.test.js.
+        needs: ['terrain: desert'],
         resource: 'Camel Herds',
         rawInputs: ['Camel transport capacity', 'Desert routes'],
         processingInstitutions: [PACK_ANIMAL_TRADER, "Caravaneer's post", CARAVAN_MASTERS_EXCHANGE],
@@ -1209,7 +1218,7 @@ export const SUPPLY_CHAIN_NEEDS = {
         exportable: true,
         entrepot: true,
         entrepotNote:
-          'Planar goods are extreme-value entrepôt items. Only metropolis-level settlements can support the infrastructure.',
+          'Planar goods are extreme-value entrepôt items. Only a metropolis can support the infrastructure.',
         // Was 'city' — but 'Planar traders' carries its own minTier:'metropolis'
         // gate in the catalog and 'Planar embassy' lives in the metropolis
         // section, so no city settlement can generate a processor. metropolis
@@ -1304,7 +1313,7 @@ export const SUPPLY_CHAIN_NEEDS = {
         exportable: false,
         entrepot: false,
         minTier: 'hamlet',
-        note: 'Holy sites generate economic activity through pilgrim spending: effectively a non-trade income stream.',
+        note: 'Holy sites bring in money through what pilgrims spend: income that does not depend on trade.',
       },
     ],
   },
@@ -1406,7 +1415,7 @@ export const SUPPLY_CHAIN_NEEDS = {
         exportable: false,
         entrepot: true,
         entrepotNote:
-          'Smuggling is the dark entrepôt model. Goods that cannot be taxed or declared flow through criminal infrastructure.',
+          'Smuggling is the entrepôt trade run in the dark. Goods that cannot be taxed or declared flow through criminal networks.',
         minTier: 'thorp',
       },
       {
@@ -1493,3 +1502,4 @@ export const SUPPLY_CHAIN_NEEDS = {
 // chain's processingInstitutions and pays one seeded draw per boosted candidate, so
 // a reagent chain naming real magic institutions translates the stream and shifts a
 // golden. Measured, not assumed; the measurement is written up beside the spine.
+import { CHAIN_NAMES_BY_ACCESS } from './chainAccessNames.js'; // COHERENCE-AGREE-6 (F1): at the end, so no line above moves

@@ -21,7 +21,8 @@
  *   (b) the page starts on wood: row 0 is opaque across ROW0_OPAQUE and the shaft band is
  *       opaque; the hang and barb constants end exactly where the alpha ends;
  *   (c) bindings are cord and no painted-word region or the plate carries cord;
- *   (d) every cut has FE columns of plain wood on both sides, every wood run is plain and
+ *   (d) every cut has its own `fe` columns of plain wood on both sides (FE, or Compendium's 5;
+ *       FE at the compact join, with a CONTROL that FE at Compendium fails), every wood run is plain and
  *       maximal, and each word's ink lies inside its NAV_WORD extent (with a CONTROL showing
  *       the ink detector fires on a word);
  *   (e) the filler tiles seamlessly, is opaque through the shaft and matches its lighting, and
@@ -47,7 +48,7 @@ import { injectFile, webpCanvas, webpChunks } from '../../scripts/inject-ai-prov
 import {
   ARROW_FILLER_SRC, ARROW_STRIP_SRC, BAND_H, BARB_HANG_H, BINDINGS, COMPACT_JOIN, CUTS, FE,
   FEATHER_FROM, FEATHER_X1, FILLER_H, FILLER_W, GLOW_PAD, HANG_H, LOGO_PLATE, NAV_HIT, NAV_WORD,
-  PLATE, PLATE_RIVETS, ROW0_OPAQUE, SLIP, SLOT_TONE, SEAM_BAND_TO, SEAM_HANG_FROM, STRIP_H,
+  PLATE, PLATE_FILL_FE, PLATE_RIVETS, PLATE_SHIFT, ROW0_OPAQUE, SHADED_GAP, SLIP, SLOT_TONE, SEAM_BAND_TO, SEAM_HANG_FROM, STRIP_H,
   STRIP_W, WOOD_RUNS, WORD_ROWS,
 } from '../../src/components/nav/arrowGeometry.js';
 import { legacy } from '../../src/design/tokens.js';
@@ -273,12 +274,44 @@ describe('(c) bindings are cord; words and the plate are not', () => {
 });
 
 describe('(d) cuts, wood runs and words', () => {
-  it('every cut, and the compact join, has FE columns of plain wood on both sides', () => {
+  it('every cut has its own fe columns of plain wood on both sides, and the compact join FE', () => {
     const failures = [];
-    for (const x of [...CUTS.map((c) => c.x), COMPACT_JOIN.left, COMPACT_JOIN.right]) {
-      for (let c = x - FE; c < x + FE; c += 1) if (!plain(c)) failures.push(`cut ${x}: column ${c} is not plain wood`);
+    // The columns a join's crossfade shows: [x - fe, x + fe) at a cut; [x, x + fe) from the
+    // left and [x + drop - fe, x + drop) from the right at the plate's drop (2026-11-09). The
+    // plate's FIXED fill joins the shaded gap instead (the next arm).
+    for (const { x, fe, drop = 0 } of [...CUTS.filter((c) => !c.fixed), { x: COMPACT_JOIN.left, fe: FE }, { x: COMPACT_JOIN.right, fe: FE }]) {
+      const shown = drop ? [...columns({ x0: x, x1: x + fe }), ...columns({ x0: x + drop - fe, x1: x + drop })] : columns({ x0: x - fe, x1: x + fe });
+      for (const c of shown) if (!plain(c)) failures.push(`cut ${x}: column ${c} is not plain wood`);
     }
     expect(failures).toEqual([]);
+    expect(CUTS.filter((c) => c.fe !== FE).map((c) => [c.x, c.fe])).toEqual([[1032, 5], [1181, 5], [1881, PLATE_FILL_FE]]);
+  });
+
+  it('the plate\'s fixed fill joins the shaded gap: plain wood by its own light, between the plate\'s outline and the binding', () => {
+    // Measured 2026-11-09 (FIX-ARROW-PLAQUE): [1877, 1885) is the arrowhead's binding's shade,
+    // 12 to 21 pixels per column under half the SHAFT's row median, so not plain by the shaft's
+    // light. Against the GAP's own row median it is: no cord, and at most one pixel per column
+    // under half of it (the plain-wood rule, the median read over SHADED_GAP itself). The plate's
+    // outline (1872-1875) and the binding (from 1889) carry 2 or more by the same rule.
+    const [fill] = CUTS.filter((c) => c.fixed);
+    expect([fill.x - fill.fe, fill.x + fill.fe]).toEqual([SHADED_GAP.x0, SHADED_GAP.x1]);
+    expect(fill.fixed).toBe(PLATE_SHIFT);
+    const gap = columns(SHADED_GAP);
+    const gapMedian = Array.from({ length: 63 }, (_, y) => percentile(gap.map((x) => luma(px(strip, x, y))), 0.5));
+    const inked = (x) => { let n = 0; for (let y = 4; y < 63; y += 1) if (luma(px(strip, x, y)) < 0.5 * gapMedian[y]) n += 1; return n; };
+    expect(gap.filter((x) => cordCount(x) > 0 || inked(x) > 1)).toEqual([]);
+    expect(gap.every((x) => darkCount(x) >= 4)).toBe(true);
+    // CONTROL: the same rule convicts the plate's outline and the arrowhead's binding.
+    expect([1872, 1873, 1874, 1875, 1889, 1890].map(inked).every((n) => n >= 2)).toBe(true);
+  });
+
+  it("CONTROL: Compendium's gaps convict a cut there at the full FE (ink on both sides)", () => {
+    for (const x of [1032, 1181]) {
+      const ink = [];
+      for (let c = x - FE; c < x + FE; c += 1) if (!plain(c)) ink.push(c);
+      expect(ink.length, `cut ${x}`).toBeGreaterThan(0);
+      expect(ink.some((c) => c < x) && ink.some((c) => c > x), `cut ${x}`).toBe(true);
+    }
   });
 
   it('every wood run is plain and maximal', () => {
@@ -390,11 +423,16 @@ describe('(e) the filler tile', () => {
     for (let x = 0; x < FILLER_W; x += 1) for (let y = 6; y < 60; y += 1) tile.push(luma601(px(filler, x, y)));
     const sorted = [...tile].sort((a, b) => a - b);
     const median = (sorted[sorted.length / 2 - 1] + sorted[sorted.length / 2]) / 2;
-    const cuts = [...CUTS.map((c) => c.x), COMPACT_JOIN.left, COMPACT_JOIN.right];
+    // Every column a join's filler meets: a cut's own, the far side of the plate's drop (1608,
+    // 2026-11-09) and the compact join's two. The plate's fixed fill (1881) continues the
+    // plate's lit band, so its tone is measured over the run the plate's drop sits in, not over
+    // the shaded gap it joins (0.526 there; it read as a dark patch, the seat's screenshots).
+    const cuts = [...CUTS.flatMap((c) => (c.drop ? [c.x, c.x + c.drop] : [c.x])), COMPACT_JOIN.left, COMPACT_JOIN.right];
     expect(Object.keys(SLOT_TONE).map(Number).sort((a, b) => a - b)).toEqual([...new Set(cuts)].sort((a, b) => a - b));
     const failures = [];
     for (const x of cuts) {
-      const run = WOOD_RUNS.find((r) => r.x0 <= x && x < r.x1);
+      const at = CUTS.find((c) => c.x === x && c.fixed) ? CUTS.find((c) => c.drop).x : x;
+      const run = WOOD_RUNS.find((r) => r.x0 <= at && at < r.x1);
       let sum = 0;
       let n = 0;
       for (const col of columns(run)) for (let y = 6; y < 60; y += 1) { sum += luma601(px(strip, col, y)); n += 1; }
@@ -403,7 +441,7 @@ describe('(e) the filler tile', () => {
     }
     expect(failures).toEqual([]);
     // The table darkens toward the arrowhead the way the painting does.
-    expect(SLOT_TONE[1596]).toBeLessThan(SLOT_TONE[1516]);
+    expect(SLOT_TONE[1586]).toBeLessThan(SLOT_TONE[1516]);
     expect(SLOT_TONE[1516]).toBeLessThan(SLOT_TONE[558]);
   });
 });

@@ -86,7 +86,7 @@ describe('G1 — the weighted exclusive group', () => {
     for (const f of forms) expect(tally[f], `${f} governs at least one of 120 cities`).toBeGreaterThan(0);
     const top = Math.max(...Object.values(tally));
     expect(top, `no single form governs half of 120 cities (${JSON.stringify(tally)})`).toBeLessThan(60);
-  });
+  }, 120_000); // 2026-11-07 PEOPLE-1 CAST: an explicit budget — the city sweep births its cities with the cast (59 cards a city), past vitest's 20 s default under a loaded box
 
   it('a group still seats at most one member', () => {
     for (const s of settlements('city', 120)) {
@@ -109,7 +109,7 @@ describe('G2 — the row guards hold at generation', () => {
     const gated = towns.filter(s => names(s).has('Gates (if walled)'));
     expect(gated.length, 'anti-vacuity').toBeGreaterThan(0);
     for (const s of gated) expect(names(s).has('Town walls'), s.name).toBe(true);
-  });
+  }, 120_000); // its own budget, carrying the measured figure (CI-FIT-3, CLOSE-5, 2026-11-23): 10.5 s lit in the final census at c1128c8f6; about 19.3 s on a CI runner (the measured factor), over three quarters of the default 20 s
 
   it('no post relay station stands without a coaching inn, and relay stations exist', () => {
     const all = [...settlements('town', 80), ...settlements('city', 120)];
@@ -126,7 +126,7 @@ describe('G3 — the cumulative laws at generation', () => {
         .filter(s => (s.institutions || []).some(i => i.name === 'Beast trainers' && i.source === 'generated'));
       expect(native.length, `${tier}: native Beast trainers`).toBeGreaterThan(0);
     }
-  });
+  }, 120_000); // its own budget, carrying the measured figure (the ratchet's instruction; 2026-11-18): 21.7 s here under load; 20.9 s and 23.6 s on CI's ratchet runner (runs 44295605654, 44282875950)
 
   it('a metropolis carries its own scale rows and never a city\'s beside them', () => {
     const metros = settlements('metropolis', 60);
@@ -186,7 +186,7 @@ describe('G5 — a magic-free world certifies its own world-law magic check', ()
     }
     expect(druidRows, 'no faith row entered a magic-free world, so the certification proves nothing about them').toBeGreaterThan(5);
     expect(failed).toEqual([]);
-  });
+  }, 120_000); // its own budget, carrying the measured figure (CI-FIT point 75, 2026-11-20): 9.8 s in its shard here / 8.2 s in the last close's serial check; about 15.7 s on a CI runner (the measured factor), within three quarters of the default 20 s; the house's corpus-walk form
 });
 
 // The two magic-free readings the world law admits (generationContext `magicEnabled`: the
@@ -259,7 +259,7 @@ describe('G6 — a druid is a priest where magic does not work (J30)', () => {
     expect(rows, 'druid rows in magic-free worlds').toBeGreaterThan(40);
     expect(backed, 'druid rows in a settlement with a religious faction').toBeGreaterThan(20);
     expect(wrong).toEqual([]);
-  });
+  }, 120_000); // 2026-11-07 PEOPLE car: an explicit budget — this arm births the 144 magic-free settlements with the cast (12.6 s alone at base, 15.5 s at the tip; 52–57 s six-way on 4 cores), past vitest's 20 s default in the wide sweep
 
   it('in a magic world every druid institution keeps its authored pairing', () => {
     const wrong = [];
@@ -273,7 +273,7 @@ describe('G6 — a druid is a priest where magic does not work (J30)', () => {
     }
     expect(rows, 'druid rows in magic worlds').toBeGreaterThan(20);
     expect(wrong).toEqual([]);
-  });
+  }, 120_000); // its own budget, carrying the measured figure (the ratchet's instruction; 2026-11-18): 12.0 s here under load
 
   it('no druid or faith service in a magic-free world asserts working magic, and mundane healing stays', () => {
     const asserting = [];
@@ -419,7 +419,7 @@ describe("G7 — Warden's Lodge defends in every world, and divine defence needs
     }
     expect({ noMagic: divine.noMagic, deadDial: divine.deadDial }).toEqual({ noMagic: 0, deadDial: 0 });
     expect(divine.magic, 'the magic world is the control: divine defence still opens there').toBeGreaterThan(9);
-  });
+  }, 120_000); // its own budget, carrying the measured figure (the ratchet's instruction; 2026-11-18): 10.3 s here under load
 });
 
 describe("G8 — Warden's Lodge is no druid in a magic world either (J33)", () => {

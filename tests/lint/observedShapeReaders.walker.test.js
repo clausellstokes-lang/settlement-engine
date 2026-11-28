@@ -655,10 +655,52 @@ describe('reader-with-no-writer ratchet: the EXECUTED corpus', () => {
     // re-derived from the stamp bands (R-E8, 20c0139c5). This corpus lights every `*Enabled` flag, demographics included, so
     // the lit density walls re-deal the AO-0 year. One corpus build per tree: 989219706 (the ceilings' parent) reproduces the
     // frozen figures exactly, and 20c0139c5 alone measures the whole tip.
+    // 2026-11-07 (PEOPLE-1 CAST, the people car's lane 1, recorded at the schema-30 rung; docs/PEOPLE_1_CAST_2026-11-07.md):
+    // final 270 → 378, accumulated 1615 → 2394, unique 270 → 379, regional 86/86 → 80/80. ONE CAUSE: the cast replaces the
+    // rung roster (one card per face-bearing house, the seat always faced, the powers' first/second/third), so the corpus's
+    // twelve pulses run over a roster of a different size and shape and the AO-0 year is re-dealt. ⚠ NOT cross-recorded in
+    // news-voice, news-headline and prose-family here: those are listed in the lane's red list for the chair (M-3's door).
+    // 2026-11-07 (PEOPLE-2 CAST-DERIVED, the people car's lane 2; docs/PEOPLE_2_CAST_2026-11-07.md): final 378 → 399,
+    // accumulated 2394 → 2518, unique 379 → 400, regional 80/80 → 81/81. TWO CAUSES, MEASURED PER STEP (the corpus builder
+    // run at each of the lane's commits): step 1 0efc296fa (the crisis cast reads memberships) HOLDS 378/2394/379/80; step 2
+    // aafc99a54 (`npcInFaction` reads memberships — FPZ's shared membership match now sees a card's every power, not only
+    // its first — and the seat row is the governing power's rank-1 face) 417/2626/418/80; step 3 07e027b0c (structuralRank
+    // from the standing; the roster's order is the structural pass's relevance order, the powers' heads first)
+    // 399/2518/400/81. ⚠ NOT cross-recorded in news-voice, news-headline and prose-family (red at the base, lane 1's list).
+    // 2026-11-08 (MERGE-CAR, the people car merged into the integration branch, 8dff691f3; re-keyed by identity at the
+    // schema-32 rung): final 399 → 395, accumulated 2518 → 2511, unique 400 → 396; regional 81/81 HOLDS. The parents' own
+    // pins: the car 373a2947b 399/2518/400/81 (this pin), the integration side 7b3ffb6ee 266/1598/266/86 (MERGE-R2's, the
+    // census readers over the rung-2 landing). The merged tip keeps the car's re-dealt year (the cast, lanes 1-5B) and
+    // composes the integration side's census / WIRING-W0 / REVIEW-INTAKE lines into it, an INTERACTION of -4/-7/-4 (PLAUSIBLE
+    // as attributed; not bisected per step). c12c28af0 moved registers only, so the merge commit measures the same.
+    // 2026-11-09 (MERGE-TRAIN at the ALLEGIANCE-CAR1 merge, e5f88930b; re-keyed by identity at the schema-36 rung, one
+    // rung, two causes): final 390 → 396, accumulated 2486 → 2525, unique 391 → 396, regional 82/82 → 80/80. The car's
+    // own pins at 837adcf73 (its rung 35, over the same veil merge) read 396/2525/396/80 by TWO measured steps — cause 1,
+    // the hidden allegiance (5902f1a4a: dealt at the seam on its own keyed forks, the retired corruptionPass's draws gone
+    // from the step stream), 406/2561/407/80 at 888636ce8; cause 2, the J-19 cure (d131ab158: ensureNpcStates no longer
+    // re-rolls a v3 card's corruption), 396/2525/396/80. MEASURED at the merged tip by this arm's corpus build: equal to
+    // the car's own pins exactly (no interaction term measured at the merge).
+    // 2026-11-09 (MERGE-TRAIN at the ALLEGIANCE-CAR2 merge, f51058995; re-keyed by identity at the schema-37 rung, one
+    // cause): accumulated 2525 → 2535, regional 80/80 → 81/81; final 396 and unique 396 HOLD. The guild's push
+    // (bbb1a4abc, A3: castPowers.js weights hidden agents in the rank deal) re-deals the year — car 2's own pins at
+    // 7017f5096, measured there per sha (6694756af 396/2525/396/80 → bbb1a4abc = ce90cf16e = its tip 396/2535/396/81).
+    // MEASURED at the merged tip by this arm's corpus build: equal to car 2's pins exactly.
+    // 2026-11-09 (MERGE-TRAIN at the ALLEGIANCE-CAR3 merge, c6ded8e3a; re-keyed by identity at the schema-38 rung):
+    // final 396 → 394, accumulated 2535 → 2525, unique 396 → 395; regional 81/81 HOLDS. ONE cause, CONFIRMED BY BISECT:
+    // the dial e9070d614 (ALLEGIANCE_TUNING.organizedCrime 0.10 → 0.05: fewer agents dealt on their keyed forks) — a
+    // scratch tree of the merged tip with only that constant reverted measures the rung-37 pins 396/2535/396/81 exactly,
+    // so 8567f490d / 2f89aaeef (fence-only) move none of them. MEASURED at the merged tip, NOT taken from either side: car
+    // 3's own pins (18a315ee2, over car 1's year) read 394/2515/395/81; the merged tip is consistent with the guild's push (+10
+    // accumulated at rung 37) plus the dial's -10 (PLAUSIBLE arithmetic, not bisected): 2525; final 394 and unique 395 agree with car 3.
+    // ⭐ 2026-11-15 (THE CLOSE OF THE ROUND OF 2026-11-14/15, the schema-43 rung's act 2; the chair's ruling OR2, record
+    // 456; TAIL-CLOSE-REACH-2): final 410 → 415, accumulated 2619 → 2622, unique 411 → 417, regional 73/73 → 71/71. The
+    // round's lanes, joined on lane/join-2026-11-14 after the schema-42 freeze, re-deal the year the corpus executes
+    // (originCount 14835 → 15016, shapeCount 1732 → 1741). MEASURED by this arm's corpus build at the close, not bisected
+    // per cause: the close's ten full-tree scans went to the observed-shape erosion rows (the rung's review).
     expect(scalarCorpus.scalarMeta).toEqual({
       canonEventLogEntries: 1,
-      wizardNewsFinalEntries: 270,
-      wizardNewsAccumulatedEntries: 1615,
+      wizardNewsFinalEntries: 417, // CLOSE-DOORS-1B (2026-11-18, the close of 2026-11-18): 415 -> 417, MEASURED by this arm's corpus build at 238d030c2, the same move the news and prose-family contracts re-recorded in 73840c101 (two introductions into standing homes, applied|boom and applied|urban_fabric; no landing of 600b7683a..70e557d5b touches the corpus's paths; the year re-dealt); // ⭐ 410 -> 415 AT THE SCHEMA-43 RUNG (2026-11-15, THE CLOSE OF THE ROUND OF 2026-11-14/15, the chair's ruling OR2, record 456; act 2): MEASURED by this arm's corpus build at the close; the round's re-dealt year (its lanes' casts, seeds and war paths), not bisected per cause. BEFORE: STYLE-2-MERGE point 47 (2026-11-13, the COHERENCE-AGREE merge 22cc9ef7d, the schema-42 rung's act 2; MEASURED by this arm's corpus build and ATTRIBUTED: the line f572d12b7 with only the tier seed osr-tier-14 -> osr-tier-19 planted reads the line's figures exactly, so the seed moves none of it): the agreement lane's generation re-deals the corpus's year (401 → 410) // STYLE-2-MERGE point 46 (2026-11-13, the COHERENCE-POWERS merge 6aeaa4154, a measured figure its drafted record names for the merge seat): the dual hat re-deals the corpus's cast, so its year's news is re-dealt (394 → 401) // MERGE-TRAIN at the ALLEGIANCE-CAR3 merge (2026-11-09, rung 38): car 3's dial e9070d614 re-deals the year (396 → 394) // MERGE-TRAIN at the ALLEGIANCE-CAR1 merge (2026-11-09, rung 36): the hidden allegiance's year, then the J-19 re-deal (rung 35: 390)
+      wizardNewsAccumulatedEntries: 2627, // CLOSE-DOORS-1B (2026-11-18, the close of 2026-11-18): 2622 -> 2627, MEASURED by this arm's corpus build at 238d030c2, the same move the news and prose-family contracts re-recorded in 73840c101 (two introductions into standing homes, applied|boom and applied|urban_fabric; no landing of 600b7683a..70e557d5b touches the corpus's paths; the year re-dealt); // ⭐ 2619 -> 2622 AT THE SCHEMA-43 RUNG (2026-11-15, THE CLOSE OF THE ROUND OF 2026-11-14/15, the chair's ruling OR2, record 456; act 2): MEASURED by this arm's corpus build at the close; the round's re-dealt year (its lanes' casts, seeds and war paths), not bisected per cause. BEFORE: STYLE-2-MERGE point 47 (2026-11-13, the COHERENCE-AGREE merge 22cc9ef7d, the schema-42 rung's act 2; MEASURED by this arm's corpus build and ATTRIBUTED: the line f572d12b7 with only the tier seed osr-tier-14 -> osr-tier-19 planted reads the line's figures exactly, so the seed moves none of it): the agreement lane's generation re-deals the corpus's year (2582 → 2619) // STYLE-2-MERGE point 46 (2026-11-13, the COHERENCE-POWERS merge 6aeaa4154, a measured figure its drafted record names for the merge seat): the dual hat re-deals the corpus's cast, so its year's news is re-dealt (2525 → 2582) // MERGE-TRAIN at the ALLEGIANCE-CAR3 merge (2026-11-09, rung 38): car 3's dial e9070d614 re-deals the year (2535 → 2525) // MERGE-TRAIN at the ALLEGIANCE-CAR1 merge (2026-11-09, rung 36): the hidden allegiance's year, then the J-19 re-deal (rung 35: 2486) // MERGE-TRAIN at the ALLEGIANCE-CAR2 merge (2026-11-09, rung 37): the guild's push re-deals the year (bbb1a4abc) (2525 → 2535)
       // FP BATCH 4 (2026-09-24, the FP chair): wizardNewsFinalEntries 240 → 272 and wizardNewsAccumulatedEntries 1567 → 1604 —
       // the Herald lens U2 (32315e384, FP-31): the feed keeps its newest 52 weeks whole under the 240 cap, so the corpus's
       // twelve monthly pulses retire one entry instead of thirty-three; unique 273 HOLDS. Attributed by equality with the U2
@@ -668,7 +710,7 @@ describe('reader-with-no-writer ratchet: the EXECUTED corpus', () => {
       // (a peacetime suit retires when a war opens against its court; its feed reconcile mints the one id). Accumulated 1567
       // and final 240 DO NOT MOVE. Cross-recorded in the same act: news-voice (introductions 273), prose-family
       // (scalarRows 25549, pulseHistory 1055/5097), the OSR register --write at 98e0d8664 (exact, 1970 findings).
-      wizardNewsUnique: 270,
+      wizardNewsUnique: 419, // CLOSE-DOORS-1B (2026-11-18, the close of 2026-11-18): 417 -> 419, MEASURED by this arm's corpus build at 238d030c2, the same move the news and prose-family contracts re-recorded in 73840c101 (two introductions into standing homes, applied|boom and applied|urban_fabric; no landing of 600b7683a..70e557d5b touches the corpus's paths; the year re-dealt); // ⭐ 411 -> 417 AT THE SCHEMA-43 RUNG (2026-11-15, THE CLOSE OF THE ROUND OF 2026-11-14/15, the chair's ruling OR2, record 456; act 2): MEASURED by this arm's corpus build at the close; the round's re-dealt year (its lanes' casts, seeds and war paths), not bisected per cause. BEFORE: STYLE-2-MERGE point 47 (2026-11-13, the COHERENCE-AGREE merge 22cc9ef7d, the schema-42 rung's act 2; MEASURED by this arm's corpus build and ATTRIBUTED: the line f572d12b7 with only the tier seed osr-tier-14 -> osr-tier-19 planted reads the line's figures exactly, so the seed moves none of it): the agreement lane's generation re-deals the corpus's year (402 → 411) // STYLE-2-MERGE point 46 (2026-11-13, the COHERENCE-POWERS merge 6aeaa4154, a measured figure its drafted record names for the merge seat): the dual hat re-deals the corpus's cast, so its year's news is re-dealt (395 → 402) // MERGE-TRAIN at the ALLEGIANCE-CAR3 merge (2026-11-09, rung 38): car 3's dial e9070d614 re-deals the year (396 → 395) // MERGE-TRAIN at the ALLEGIANCE-CAR1 merge (2026-11-09, rung 36): the hidden allegiance's year, then the J-19 re-deal (rung 35: 391)
       pulseHistory: 12,
       // TE36 (ODQ §271): 109 → 73, one cause — the regional event log carries the pulse's
       // selected outcomes, and the retired bare-decline family was 36 of them. That mint's
@@ -676,11 +718,11 @@ describe('reader-with-no-writer ratchet: the EXECUTED corpus', () => {
       // OPPOSITE directions, and 73 → 74 here is the state lane picking up exactly what the
       // Chronicle put down. `wizardNewsFinalEntries` staying at 240 through both mints is
       // the control that keeps the two layers legibly apart.
-      regionalEventLog: 86,
+      regionalEventLog: 71, // ⭐ 73 -> 71 AT THE SCHEMA-43 RUNG (2026-11-15, THE CLOSE OF THE ROUND OF 2026-11-14/15, the chair's ruling OR2, record 456; act 2): MEASURED by this arm's corpus build at the close; the round's re-dealt year (its lanes' casts, seeds and war paths), not bisected per cause. BEFORE: STYLE-2-MERGE point 47 (2026-11-13, the COHERENCE-AGREE merge 22cc9ef7d, the schema-42 rung's act 2; MEASURED by this arm's corpus build and ATTRIBUTED: the line f572d12b7 with only the tier seed osr-tier-14 -> osr-tier-19 planted reads the line's figures exactly, so the seed moves none of it): the agreement lane's generation re-deals the corpus's year (81 → 73) // MERGE-TRAIN at the ALLEGIANCE-CAR2 merge (2026-11-09, rung 37): the guild's push re-deals the year (bbb1a4abc) (80 → 81) // 2026-11-07 PEOPLE-2 CAST-DERIVED step 3: 80 → 81 (see the note above); PEOPLE-1 CAST: 86 → 80 // MERGE-WAVE at the FIX-PUBLIC-VEIL merge (2026-11-08, rung 35): the veiled re-deal's year, the lane's own deltas composed // MERGE-TRAIN at the ALLEGIANCE-CAR1 merge (2026-11-09, rung 36): the hidden allegiance's year, then the J-19 re-deal (82 → 80)
       // 2026-11-05 (LANDING-5, the chair's addition (c)): 74 → 75, ONE cause — the residual outcome's id now carries
       // its tick (stressorsCore.js :: residualOutcome), so osr002's raider pressure, resolved twice, is two regional
       // records instead of one id minted twice. regionalEventLog holds at 75: no record was added, one stopped colliding.
-      regionalEventLogUnique: 86,
+      regionalEventLogUnique: 71, // ⭐ 73 -> 71 AT THE SCHEMA-43 RUNG (2026-11-15, THE CLOSE OF THE ROUND OF 2026-11-14/15, the chair's ruling OR2, record 456; act 2): MEASURED by this arm's corpus build at the close; the round's re-dealt year (its lanes' casts, seeds and war paths), not bisected per cause. BEFORE: STYLE-2-MERGE point 47 (2026-11-13, the COHERENCE-AGREE merge 22cc9ef7d, the schema-42 rung's act 2; MEASURED by this arm's corpus build and ATTRIBUTED: the line f572d12b7 with only the tier seed osr-tier-14 -> osr-tier-19 planted reads the line's figures exactly, so the seed moves none of it): the agreement lane's generation re-deals the corpus's year (81 → 73) // MERGE-TRAIN at the ALLEGIANCE-CAR1 merge (2026-11-09, rung 36): the hidden allegiance's year, then the J-19 re-deal (rung 35: 82) // MERGE-TRAIN at the ALLEGIANCE-CAR2 merge (2026-11-09, rung 37): the guild's push re-deals the year (bbb1a4abc) (80 → 81)
       aiChronicle: 1,
     });
     expect(Object.hasOwn(corpus, 'scalarObservations')).toBe(false);
@@ -754,7 +796,9 @@ describe('reader-with-no-writer ratchet: the EXECUTED corpus', () => {
     // SAME shape, travelling the same walk. Without it "the key is absent" and
     // "the shape drifted away and the census measured nothing" are the same
     // green — which is the exact vacuity this whole walker exists to refuse.
-    expectAbsentWithAnchor(corpus.shapes.factions.keys, 'id', 'name', 'TCD-1');
+    // Re-keyed by identity with its cause (PEOPLE-LAND, schema 31, 2026-11-07): the NPC grouping, whose items carried
+    // `name`, left the record at the v2 boundary (M-2, M-7); the `factions` shape is the POWERS now, named by `faction`.
+    expectAbsentWithAnchor(corpus.shapes.factions.keys, 'id', 'faction', 'TCD-1');
     expectAbsentWithAnchor(corpus.shapes.economicState.keys, 'exports', 'primaryExports', 'TCD-2');
     expectAbsentWithAnchor(corpus.shapes.settlement.keys, 'economy', 'economicState', 'TCD-2');
     expectAbsentWithAnchor(corpus.shapes.settlement.keys, 'trade', 'economicState', 'TCD-2');
@@ -1367,7 +1411,27 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
     // ⭐ 69 → 76 AT THE SCHEMA-27 RUNG (2026-11-04, LANDING-2b, the chair's ruling 2): the ROSTER
     // grows by three — the crisis cast's temporary person, `temporary`, `temporaryKind` and
     // `crisisIds on npcs` — whose five addresses carry seven reads. MEASURED off this scan.
-    expect(live.explainedWriters.banked).toBe(76);
+    // ⭐ 76 → 77 AT THE SCHEMA-29 RUNG (2026-11-07, WIRING-W0, the chair's ruling of 03:55 UTC):
+    // the ROSTER grows by one — `migrationDirection on config`, the migration direction's config
+    // projection — whose one address (src/domain/migrationDirection.js) carries one read.
+    // MEASURED off this scan.
+    // ⭐ 77 → 76 AT THE SCHEMA-32 CAR-MERGE RUNG (2026-11-08, MERGE-CAR, the chair's brief: the census
+    // readers' reads admitted by cause): the ROSTER does not move; one `stresses on settlement` address goes
+    // — src/domain/canonicalAccessors.js, whose read stands and which the detector stopped grounding at
+    // 7af3c6797 (census-3b(3); recorded in the rung's review as uncured instrument erosion, as MERGE-R2's
+    // schema-30 rung recorded it on the integration side). MEASURED off this scan.
+    // ⭐ 76 → 77 AT THE SCHEMA-40 RUNG (2026-11-09, SW-B7b, the chair's grant of 13:5x): the ROSTER grows
+    // by one — `publicProse on settlement`, the public prose projection the save path stamps — whose one
+    // address (src/domain/display/publicProse.js) carries one read. MEASURED off this scan.
+    // ⭐ 77 → 78 AT THE SCHEMA-41 RUNG (2026-11-11, STYLE-2-MERGE closing act 5, the chair's FINAL RULING of
+    // 2026-11-09 21:2x): the ROSTER grows by one, the first of a NEW class (played-worlds-writer) — `outcome on
+    // outcome`, the minted proposal's outcome — whose one address (src/domain/display/newsBody.js) carries one
+    // read. MEASURED off this scan.
+    // ⭐ 78 → 79 AT THE SCHEMA-46 RUNG (2026-11-20, FORTUNE U5a-CURE item 2, route B, the chair's ruling of 22:18 UTC
+    // 2026-11-20 on the fortune lane): the ROSTER grows by one — `merits on breakdown`, the fortune merits written only
+    // under the fortune law, which no corpus CONFIG carries — whose one address (src/domain/fortune/fortuneMerits.js)
+    // carries one read. MEASURED off this scan.
+    expect(live.explainedWriters.banked).toBe(79);
     expect(Object.entries(corpus.shapes)
       .filter(([, shape]) => shape.keys.includes('source'))
       .map(([name]) => name)).toEqual([
@@ -1384,8 +1448,18 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
       // window's first-parent commits, the shape is observed through 79c442330 and gone from 90dc22f18 on — the compose
       // of lane/x46-3-budget, whose density factor stops every corpus world rolling a militia row. A corpus movement,
       // not a lost writer; no frozen row depended on it (the erasure guard holds).
-      'institutions', 'leadingSources', 'magicDef', 'mercenary', 'site', 'stress', 'stressors',
-      'walls', 'watch',
+      // ⭐ `pulseHistory` and `warAuthorityVerdicts` JOIN AT THE SCHEMA-36 RUNG (2026-11-09, MERGE-TRAIN at the
+      // ALLEGIANCE-CAR1 merge): the hidden allegiance's re-dealt year (cause 1) observes both carrying a `source`, as the
+      // car's own scan at f0f7d6a3b (J-19's parent) measured, which also observed `autoApplied`; the J-19 re-deal's year
+      // (cause 2, d131ab158) no longer reaches `autoApplied`. A corpus movement, not a new writer; no frozen row
+      // depended on either (the erasure guard holds).
+      // ⛔ `leadingSources` LEFT AT THE SCHEMA-42 RUNG (2026-11-13, STYLE-2-MERGE point 47, the COHERENCE-AGREE merge 22cc9ef7d):
+      // the agreement lane's re-dealt year no longer reaches a recovery that names its sources (worldPulse/stressors.js, its
+      // writer, unchanged). MEASURED and ATTRIBUTED: the line f572d12b7 with only the tier seed osr-tier-19 planted still
+      // observes it, so the seed does not move it. A corpus movement, not a lost writer; the migration's reconciliation
+      // reads Gone 0 (no frozen row depended on it; the erasure guard holds).
+      'institutions', 'magicDef', 'mercenary', 'pulseHistory', 'site', 'stress', 'stressors',
+      'walls', 'warAuthorityVerdicts', 'watch',
     ]);
 
     // ⭐ EACH FILTER'S FOUNDING CASE, PRESENT RAW AND ABSENT FILTERED. Without
@@ -1436,8 +1510,16 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
       // declared, always.
       // ⭐ THE SCHEMA-23 RUNG'S OTHER DECLARATION: the phantom counterparty's discriminant.
       'kind on settlement',
+      // ⭐ THE SCHEMA-46 RUNG'S ONE (2026-11-20, the fortune merits; 22:18 UTC), alphabetical.
+      'merits on breakdown',
+      // ⭐ THE SCHEMA-29 RUNG'S ONE (the migration direction's config projection; WIRING-W0).
+      'migrationDirection on config',
       'narrativeSummary on eventLog',
       'neighbourNetwork on settlement',
+      // ⭐ THE SCHEMA-41 RUNG'S ONE (2026-11-11, the first played-worlds writer; 21:2x), alphabetical.
+      'outcome on outcome',
+      // ⭐ THE SCHEMA-40 RUNG'S ONE (the public prose projection; SW-B7b), alphabetical.
+      'publicProse on settlement',
       'stresses on settlement',
       // ⭐ THE SCHEMA-27 TRIO (the crisis cast's temporary person), alphabetical, not roster-ordered.
       'temporary on npcs',
@@ -1593,7 +1675,8 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
       // the register's from the frozen rowTags — so a re-freeze that moved one without the
       // other would still red here.
       'neighbourNetwork on settlement': { reads: 39, addresses: 26 },
-      'stresses on settlement': { reads: 4, addresses: 3 },
+      // ⭐ 4/3 → 3/2 at the schema-32 car-merge rung (MERGE-CAR): canonicalAccessors.js's address goes (7af3c6797).
+      'stresses on settlement': { reads: 3, addresses: 2 },
       'worldPulse on campaignState': { reads: 2, addresses: 2 },
       'appliedAt on eventLog': { reads: 1, addresses: 1 },
       'deltas on eventLog': { reads: 2, addresses: 1 },
@@ -1629,15 +1712,28 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
       'temporary on npcs': { reads: 3, addresses: 3 },
       'temporaryKind on npcs': { reads: 2, addresses: 1 },
       'crisisIds on npcs': { reads: 2, addresses: 1 },
+      // ⭐ THE SCHEMA-29 ONE: `migrationDirectionOfConfig`'s one read in src/domain/migrationDirection.js.
+      'migrationDirection on config': { reads: 1, addresses: 1 },
+      // ⭐ THE SCHEMA-40 ONE (SW-B7b): `publicProseOf`'s one read in src/domain/display/publicProse.js.
+      'publicProse on settlement': { reads: 1, addresses: 1 },
+      // ⭐ THE SCHEMA-41 ONE (2026-11-11, STYLE-2-MERGE closing act 5, 21:2x): `itemSettlementIds`'s one read in
+      // src/domain/display/newsBody.js, written by worldPulse/convergence.js's minted proposal.
+      'outcome on outcome': { reads: 1, addresses: 1 },
+      // ⭐ THE SCHEMA-46 ONE (2026-11-20, FORTUNE U5a-CURE item 2, route B, 22:18 UTC): `baseScoreOf`'s one read in
+      // src/domain/fortune/fortuneMerits.js, written by the same file's meritedLegitimacy under the fortune law only.
+      'merits on breakdown': { reads: 1, addresses: 1 },
     });
 
     // A7 guard mutant: the retired clear-outright behavior loses exactly the
     // bank and therefore cannot satisfy the live count asserted above.
     const bankedIdentities = new Set(live.explainedWriters.bankedIdentities);
     const clearOutright = live.findings.filter((finding) => !bankedIdentities.has(identityOf(finding)));
-    // − 69 from the schema-23 rung, − 76 from the schema-27 rung, moving with the banked figure
-    // pinned above rather than being a second hand-held copy of it.
-    expect(clearOutright).toHaveLength(live.findings.length - 76);
+    // − 69 from the schema-23 rung, − 76 from the schema-27 rung, − 77 from the schema-29 rung,
+    // moving with the banked figure pinned above rather than being a second hand-held copy of it.
+    // − 76 from the schema-32 car-merge rung (MERGE-CAR). − 77 from the schema-40 rung (SW-B7b).
+    // − 78 from the schema-41 rung (2026-11-11, STYLE-2-MERGE closing act 5, the played-worlds writer).
+    // − 79 from the schema-46 rung (2026-11-20, the fortune merits).
+    expect(clearOutright).toHaveLength(live.findings.length - 79);
     expect(inventoryOf(clearOutright)).not.toEqual(liveInventory);
   });
 
@@ -1818,7 +1914,36 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
       // come BACK. M6's code is unchanged but its INPUTS moved — theta 0.80 → 0.76 restores the `stressors` family, and
       // its member `selected` now carries `factionName` — so `factionName on stressors` ×4 at WorldPulseData.js re-enters
       // the CLEARED set (a GONE row of the rung's reconciliation): exactly +1 identity / +4 counts, the file count unmoved.
-      files: 1, identities: 18, counts: 48,
+      // ⭐ 1/18/48 → 1/17/44 AT THE SCHEMA-30 RUNG (2026-11-07, PEOPLE-1 CAST), RE-DERIVED AND NAMED: the schema-24 story
+      // again. No filter's CODE moved, its INPUT did: the cast re-deals the AO-0 year and the corpus's year raises no
+      // government challenge, so `factionName` left the `stressors` family the corpus observes; the four reads at
+      // src/components/map/WorldPulseData.js (`factionName on stressors` ×4) left the CLEARED set and are one of the 19
+      // ordinary rows the rung admitted (a NEW row of its reconciliation): exactly −1 identity / −4 counts, the file unmoved.
+      // ⭐ 1/17/44 → 1/19/49 AT THE SCHEMA-38 RUNG (2026-11-09, MERGE-TRAIN at the ALLEGIANCE-CAR3 merge), RE-DERIVED AND
+      // NAMED: no filter's CODE moved, its INPUT did — car 3's dial e9070d614 re-deals the year (CONFIRMED by the
+      // single-revert scratch tree, which measures 1/17/44), and the re-dealt year carries a writer for two more identities
+      // in the cohort's file (WorldPulseData.js: `factionName on stressors` ×4, `settlementIds on stressors` ×1), so the
+      // filters clear them; they are two of the rung's GONE rows. Car 3's own pin (18a315ee2) reads the same 1/19/49.
+      // ⭐ 1/19/49 → 0/18/47 AT COMPENDIUM-HUB (2026-11-10, the owner's word "Rather than a horizontal scroll … when
+      // one clicks on it they are taken to a different page"), RE-DERIVED AND NAMED: no filter's CODE moved, its INPUT
+      // did. The two raw reads M11 cleared in src/components/CompendiumPanel.jsx (`replaceState on history` ×2, the
+      // old in-panel tab jumps' hash writes) LEFT THE ESTATE with the tab row: section changes are now router pushes
+      // through navigate(). That file was raw-only, so the gap loses exactly 1 file / 1 identity / 2 counts; the
+      // filtered reading is unmoved. Measured: the base a116c2c52 passes this arm at 1/19/49.
+      // ⭐ 0/18/47 → 0/16/42 AT THE SCHEMA-43 RUNG (2026-11-15, THE CLOSE OF THE ROUND OF 2026-11-14/15, the chair's ruling
+      // OR2, record 456), RE-DERIVED AND NAMED: the schema-24/30 story again. No filter's CODE moved, its INPUT did: the
+      // round's re-dealt year no longer carries a writer of the two keys in the `stressors` family the corpus observes, so
+      // the four `factionName on stressors` reads and the one `settlementIds on stressors` read at
+      // src/components/map/WorldPulseData.js LEFT the CLEARED set and are two of the rung's NEW rows (dead fallbacks, admitted
+      // by cause): exactly −2 identities / −5 counts on the gap, the file count unmoved; the filtered cohort 129 → 131.
+      // ⭐ 0/16/42 → 0/18/47 AT THE CLOSE OF THE ROUND BAR3 (2026-11-15, BAR3-CLOSE-DOORS-1, measured at the joined tree
+      // 98363cb84), RE-DERIVED AND NAMED: the schema-38 story again. No filter's CODE moved, its INPUT did: the round's
+      // declared record moves (BAR3-PEOPLE-2's table of books names the cohort 131 → 129, 195 → 190; the walker corpus's
+      // shapes digest 0f7925ef → 2a3b4727) re-deal the year, which carries a writer of the two keys in the `stressors` family
+      // again, so the four `factionName on stressors` reads and the one `settlementIds on stressors` read at
+      // src/components/map/WorldPulseData.js RE-ENTER the CLEARED set: exactly +2 identities / +5 counts on the gap, the file
+      // count unmoved; the filtered cohort 131 → 129. No reader file of the cohort was touched by either round.
+      files: 0, identities: 18, counts: 47,
     });
     expect(UNREVIEWED_UI_COHORT.tag).toBe('UNREVIEWED-UI');
     expect(UNREVIEWED_UI_COHORT.scopes).toEqual([...EXACT_SCAN_EXCLUDED_SCOPE]);
@@ -1949,7 +2074,7 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
       + ' identity has come back; re-derive the join before touching the pin below')
       .toEqual(frozenWorklist);
 
-    // ⛔ THE PIN. Three rows, each a DELIBERATE STOP documented AT THE READ. If this
+    // ⛔ THE PIN. Four rows: three a DELIBERATE STOP documented AT THE READ, one (schema 42) admitted by the chair's ruling. If this
     // reds, the cure is NEVER to transcribe the new number: re-run the join, read the
     // disposition at each surviving read, and edit this list with the reason.
     expect(frozenWorklist, 'the class-(a) worklist moved — say WHICH row and WHY here,'
@@ -1965,6 +2090,15 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
       // anti-hallucination guard sitting on a PAID AI surface. The in-file note above
       // the two calls records the non-repair. A lane may not re-point this.
       { identity: 'hooks on settlement', file: 'src/domain/aiOverlayVerifier.js', count: 1 },
+      // ⭐ JOINS AT THE SCHEMA-42 RUNG (2026-11-13, STYLE-2-MERGE point 47): COHERENCE-AGREE-8's 88f942e96 adds a second
+      // READ SITE of the identity the row below banks — src/domain/aiGrounding.js :: groundingChains, the legacy fallback
+      // `economicState?.activeChains || economy?.activeChains || supplyChains` that aligns by position with
+      // supplyChainState.js :: deriveAllSupplyChainStates. ADMITTED ORDINARY by the chair's ruling (i) on STOP 47a
+      // (2026-11-13 10:55 UTC; the rung's review, docs/chair/2026-11-13/osr-rung42-agree-tier-seed-review.json): its writer
+      // is an old save's or custom content's shape, outside the corpus. Its disposition is the ruling, not a note at the
+      // read (the merge changes no src/ byte): whether the AI grounding still wants its two legacy fallbacks is a later
+      // seat's question on that file, not a merge's.
+      { identity: 'supplyChains on settlement', file: 'src/domain/aiGrounding.js', count: 1 },
       { identity: 'supplyChains on settlement', file: 'src/domain/aiOverlayVerifier.js', count: 1 },
     ]);
 

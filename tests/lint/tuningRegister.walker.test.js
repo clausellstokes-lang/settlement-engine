@@ -54,6 +54,7 @@ import { fileURLToPath } from 'node:url';
 import { execFileSync } from 'node:child_process';
 import { codeOnly } from '../helpers/codeOnlySource.js';
 import { gitResolvesCommit, UNRESOLVABLE_WELL_FORMED_SHA } from '../helpers/gitObjectStore.js';
+import { fixtureGit } from '../helpers/gitFixture.js';
 import {
   measureTree, discoverTables, tableSpan, flattenLeaves, spanDigest, astKeyNames,
   countBareDecimals, countUnregisteredNamed, resolveDependents,
@@ -85,7 +86,18 @@ const CEILINGS = Object.freeze({
   // population while crediting it as a win in the other, which is a finding about this instrument
   // and rides to §884. Raising a ceiling is not a LANE's act: this one is the CHAIR's, ruled at
   // §883.8, attributed here and declared owner-visible on §884.
-  UNREGISTERED_NAMED_CEILING: 535,
+  // RAISED 535 -> 536 (2026-11-07, PEOPLE-LAND) under the owner's delegation of 2026-11-06 to the chair (ODQ §934.105),
+  // as §883.8 raised it: ONE name, lane 4's SHARED_POWER_FACTOR = 3 in src/generators/people/ties.js (R-P7's ruled
+  // factor, 141383cd4), attributed by its DECLARED_GROWTH row; the name earns its register row when the owner signs.
+  // RAISED 536 -> 539 (2026-11-08, MERGE-WAVE at the W1 ECO merge point) under the owner's delegation (ODQ §934.105), as
+  // PEOPLE-LAND raised it: THREE names, W1 ECO's FAMINE_MOST_FROM = 50, BROUGHT_IN_FROM = 20, INFLUENCE_WEIGHS_FROM = 60 in
+  // src/domain/display/stateProse/economyStateProse.js (725b62eb5), attributed by their DECLARED_GROWTH row.
+  // RAISED 539 -> 541 (2026-11-15, TAIL-CLOSE-SRC-2) BY THE CHAIR'S RULING TU1, 2026-11-15, the close of the tail (vetoable by
+  // the owner); attributed: TWO names, each by its DECLARED_GROWTH row: SHADOW_CAPTURE_FLOOR = 11 in
+  // src/domain/display/shadowEconomyShown.js (63c3f2ae7 named it, 1f41c23dc set it: the capture share below which the
+  // shadow economy's block is silent) and INCOME_LEADER_FROM = 20 in src/generators/economy/prosperity.js (2ac50c55d: the
+  // income row share at or over which "Highly diversified" is not said). The names earn their register rows when the owner signs.
+  UNREGISTERED_NAMED_CEILING: 541,
   UNITLESS_TABLE_CEILING: 220,
   DECLARED_DIVERGENCE_CEILING: 5,
   PHANTOM_ALIAS_CEILING: 3,
@@ -100,7 +112,22 @@ const CEILINGS = Object.freeze({
   // recordBatteryFindings.js BATTERY_QUOTE_MAX (SELF-VOUCH b7a5f778e), threatAssessment.js 0.4 (RUNG1B-F9 26ed1b259),
   // densityRoll.js 0.5 (X-46 car 4 U2 1c527831a). This counts ATTRIBUTED rows, so it moves with them; the six
   // population ceilings above are not touched.
-  DECLARED_GROWTH_CEILING: 6,
+  // RAISED 6 -> 8 (2026-11-07, PEOPLE-LAND) under the owner's delegation of 2026-11-06 to the chair (ODQ §934.105), the
+  // LANDING-2 idiom ("write the DECLARED_GROWTH rows the ritual admits"): lane 4's src/generators/people/ties.js, the two
+  // values R-P7 rules (0.5 for a weight-0 house's target weight, SHARED_POWER_FACTOR = 3), cited to 141383cd4. This counts
+  // ATTRIBUTED rows, so it moves with them; the six population ceilings above are not touched.
+  // RAISED 8 -> 9 (2026-11-08, MERGE-WAVE at the W1 ECO merge point), the LANDING-2 idiom: W1 ECO's economyStateProse.js
+  // row (725b62eb5). This counts ATTRIBUTED rows, so it moves with them.
+  // RAISED 9 -> 10 (2026-11-08, MERGE-WAVE at the W4 PEOPLE merge point), the LANDING-2 idiom: W4 PEOPLE's
+  // warFaithStateProse.js bare decimal 0.5 (86a30fdf2). This counts ATTRIBUTED rows, so it moves with them.
+  // RAISED 10 -> 12 (2026-11-10, GREEN-TIP, the cloud chair's STOP-2 ruling, ODQ §934.105, the chair's act) on the condition
+  // proved in b46048140's body: the move is a RELOCATION and the estate's totals are conserved — foodLand.js's 7 bare
+  // decimals and 4 named constants are exactly foodGenerator.js's 48 -> 41 and its four constants, the same literals.
+  // Two ATTRIBUTED rows, each "relocation, net zero"; the six population ceilings above are not touched.
+  // RAISED 12 -> 14 (2026-11-15, TAIL-CLOSE-SRC-2) BY THE CHAIR'S RULING TU1, 2026-11-15, the close of the tail; attributed: the
+  // two DECLARED_GROWTH rows above (shadowEconomyShown.js 63c3f2ae7, prosperity.js 2ac50c55d). This counts ATTRIBUTED rows, so it
+  // moves with them; the other population ceilings are not touched.
+  DECLARED_GROWTH_CEILING: 14,
 });
 
 const register = loadTuningRegister(ROOT);
@@ -233,6 +260,22 @@ describe('tuning register — the detectors are honest', () => {
     expect(span.spanText.endsWith(')'), 'the span must reach the wrapper\'s own closing paren,'
       + ' not stop at the object\'s brace — a span ending at `}` is an unterminated call and'
       + ' every consumer that parses it reads the whole estate as unparseable').toBe(true);
+  });
+
+  test('a scalar roster home followed by a frozen table reads as its own one leaf', () => {
+    // MEASURED 2026-11-07 (LANDING-R2 seat I): the span machine looks for the first `{`/`[`
+    // after the `=` anywhere below, so a scalar sitting above `Object.freeze({` read as that
+    // table. foodGenerator.js#FAMINE_MONTHS_RUN and tonightSheet.js#WANT_MAX_WORDS were the first.
+    const source = 'export const SCALAR_DIAL = 12;\nexport const NEXT_TABLE = Object.freeze({\n  A: 1,\n  B: 2,\n});\n';
+    inTempTree({ 'src/domain/probe.js': source }, (dir) => {
+      const register = { homes: [{ kind: 'tables', file: 'src/domain/probe.js', exports: ['SCALAR_DIAL', 'NEXT_TABLE'] }] };
+      const { tables } = discoverTables(dir, register);
+      const scalar = tables.find((t) => t.export === 'SCALAR_DIAL');
+      expect(scalar.leaves, 'the scalar is its own one leaf, never its neighbour\'s keys').toEqual({ value: 12 });
+      expect(scalar.keys).toBe(1);
+      // anchored: the neighbour itself still spans to its own two keys through the same call.
+      expect(tables.find((t) => t.export === 'NEXT_TABLE').leaves).toEqual({ A: 1, B: 2 });
+    });
   });
 
   test('a shorthand aggregator leaf resolves one hop to its module const', () => {
@@ -1179,9 +1222,18 @@ describe('tuning register — the signature is a record, not a word', () => {
     // ninth signed row, or a digest that differs from the committed inventory's reds here.
     const RECORD_REL = 'docs/tuning-signatures/2026-11-06-v1.json';
     const record = JSON.parse(readFileSync(join(ROOT, RECORD_REL), 'utf8'));
-    expect(register.signatureVersion).toBe(1);
-    expect(register.signatures.map((entry) => entry.version), 'one signature, version 1').toEqual([1]);
-    const [signature] = register.signatures;
+    // Re-keyed with its cause (PEOPLE-LAND, 2026-11-07, M-5): Register VII v2 re-signed the same eight ids at
+    // version 2 by docs/tuning-signatures/2026-11-07-v2.json (the owner's charter words, ODQ §934.105) through the
+    // ritual (REFROZEN, "SIGNED at tuning-register v2: 8 ids"); densityBands.js byte-identical, so v2's digests
+    // equal v1's. Two signatures now, v1 kept as written; the signed rows carry version 2.
+    expect(register.signatureVersion).toBe(2);
+    expect(register.signatures.map((entry) => entry.version), 'two signatures, versions 1 and 2').toEqual([1, 2]);
+    const [signature, v2] = register.signatures;
+    const recordV2 = JSON.parse(readFileSync(join(ROOT, 'docs/tuning-signatures/2026-11-07-v2.json'), 'utf8'));
+    expect(v2.date).toBe('2026-11-07');
+    expect(v2.ownerWords, 'v2 carries the owner\'s charter words verbatim from its record').toBe(recordV2.ownerWords);
+    expect([...v2.ids].sort()).toEqual([...record.ids].sort());
+    for (const id of record.ids) expect(v2.digests[id], `${id}: v2's digest equals v1's (the file byte-identical)`).toBe(signature.digests[id]);
     expect(signature.odqRow).toBe('§934.105');
     expect(signature.date).toBe('2026-11-06');
     expect(signature.ownerWords, 'the entry carries the owner\'s words verbatim from the record').toBe(record.ownerWords);
@@ -1192,7 +1244,7 @@ describe('tuning register — the signature is a record, not a word', () => {
     const signed = Object.entries(register.tables).filter(([, row]) => row.status !== 'draft').map(([id]) => id).sort();
     expect(signed, 'the signed rows are exactly the ids the record names and never one more').toEqual([...record.ids].sort());
     for (const id of record.ids) {
-      expect(register.tables[id].signedAt, `${id} signed at version 1`).toBe(1);
+      expect(register.tables[id].signedAt, `${id} signed at version 2 (Register VII v2, M-5)`).toBe(2);
       expect(signature.digests[id], `${id}: the frozen digest is the committed inventory's`).toBe(committed.tables[id].spanDigest);
     }
   });
@@ -1208,10 +1260,10 @@ describe('tuning register — the signature is a record, not a word', () => {
     // first row is a DRAFT row carrying the register's version, 1 since the owner's record of
     // 2026-11-06; a SIGNED row reads signed through the same call.
     expect(real.status).toBe('draft');
-    expect(real.version).toBe(1);
+    expect(real.version).toBe(2); // the register's version, 2 since Register VII v2 (PEOPLE-LAND, M-5)
     const signedReal = signatureStateOf(register, 'src/domain/density/densityBands.js#DENSITY_BANDS');
     expect(signedReal.status, 'a signed row reads signed').toBe('signed');
-    expect(signedReal.signedAt).toBe(1);
+    expect(signedReal.signedAt).toBe(2); // Register VII v2 (PEOPLE-LAND, M-5)
   });
 
   test('each signature record in code reads as its register rows do: Register VII signed, the faith surface draft', () => {
@@ -1319,7 +1371,7 @@ describe('tuning register — the signature is a record, not a word', () => {
 
   test('the register fingerprint reports the version and both file digests', () => {
     const fingerprint = tuningRegisterFingerprint(ROOT);
-    expect(fingerprint.signatureVersion, 'v1 since the owner\'s record of 2026-11-06 (Register VII, ODQ §934.105)').toBe(1);
+    expect(fingerprint.signatureVersion, 'v2 since Register VII v2 of 2026-11-07 (M-5, ODQ §934.105)').toBe(2);
     expect(fingerprint.declaredSha256, 'the declared file must digest').toMatch(/^[0-9a-f]{64}$/);
     expect(fingerprint.inventorySha256, 'and so must the measured one').toMatch(/^[0-9a-f]{64}$/);
     expect(fingerprint.measuredAtSha, 'and the fingerprint names the sha the inventory was'
@@ -1540,6 +1592,11 @@ describe('tuning register — the refreeze ritual refuses', () => {
       version: 1, ids: ['src/domain/a.js#A_TUNING'], note: '',
     };
     if (signingRecordMalformations(wellFormed)) problems.push('a well-formed record was refused');
+    // GOLDEN-REHEARSAL finding 4: a bare numeral is refused as the golden door refuses it; words carrying a numeral pass.
+    for (const bare of ['1', ' 1 ', '42']) {
+      if (!signingRecordMalformations({ ...wellFormed, ownerWords: bare })) problems.push(`a bare numeral ${JSON.stringify(bare)} was accepted as the owner's words`);
+    }
+    if (signingRecordMalformations({ ...wellFormed, ownerWords: 'the 8 ids, as signed' })) problems.push('words carrying a numeral were refused');
     expect(problems, 'the blank template is a LIVE SUBJECT, not decoration: it ships blank so'
       + ' that this arm always has something real to refuse.').toEqual([]);
   });
@@ -1549,7 +1606,7 @@ describe('tuning register — the refreeze ritual refuses', () => {
     // whatever state the dock happens to be in when the gate runs.
     const dir = mkdtempSync(join(tmpdir(), 'tunereg-git-'));
     try {
-      execFileSync('git', ['init', '-q'], { cwd: dir });
+      fixtureGit(dir, ['init', '-q']);
       writeFileSync(join(dir, 'someone-elses-work.js'), 'export const x = 1;\n', 'utf8');
       const args = {
         root: dir,

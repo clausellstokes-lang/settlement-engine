@@ -49,6 +49,11 @@ import { DENSITY_LAW_CONFIG_KEY, REGISTER_VII_DENSITY_LAW_VERSION } from '../../
 import { isOffStage } from '../../src/domain/roads/state.js';
 import { npcId } from '../../src/domain/worldPulse/npcAgency.js';
 import { stablePart } from '../../src/domain/worldPulse/stablePart.js';
+// GREEN-TIP (2026-11-10, re-keyed with the writers and the lifecycle re-point): a card stands in a power by a MEMBERSHIP,
+// written through the product's one constructor (people/cardVeil.js :: membershipInPower, the v1 -> v2 migration's
+// shape); the retired `factionAffiliation` is read and written by nothing now.
+import { membershipInPower } from '../../src/domain/people/cardVeil.js';
+import { holdsMembership } from '../../src/domain/people/membership.js';
 
 const SID = 'ashford';
 const TICK = 4;
@@ -66,7 +71,7 @@ const CHANDLERS = Object.freeze({ id: 'fac.chandlers', name: 'The Chandlers', fa
 
 /** @param {string} id @param {string} house @param {Record<string, unknown>} [extra] */
 function member(id, house, extra = {}) {
-  return { id, name: `Factor of ${house}`, factionAffiliation: house, status: 'active', importance: 'notable', ...extra };
+  return { id, name: `Factor of ${house}`, memberships: [membershipInPower({ faction: house })], status: 'active', importance: 'notable', ...extra };
 }
 
 /**

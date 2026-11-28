@@ -170,7 +170,7 @@ function protectedIdsIn(list) {
  * hand-authored/locked entities + whether the campaign is canonized. The compiler flags any
  * op grazing these so the review UI raises a consent barrier. Pure.
  *
- * @param {{ npcs?: ProtectableLite[], institutions?: ProtectableLite[], factions?: ProtectableLite[] }|null} settlement
+ * @param {{ npcs?: ProtectableLite[], institutions?: ProtectableLite[], powerStructure?: { factions?: ProtectableLite[] } | null }|null} settlement
  * @param {string} [phase] the settlement's lifecycle phase ('draft' | 'canon')
  * @returns {{ protectedTargets: string[], identityLockedPhase: boolean }}
  */
@@ -179,7 +179,8 @@ export function buildProtectedContext(settlement, phase) {
   const protectedTargets = [
     ...protectedIdsIn(s.npcs),
     ...protectedIdsIn(s.institutions),
-    ...protectedIdsIn(s.factions),
+    // PEOPLE-5B (M-7): the powers are the only faction roster (the grouping left the record).
+    ...protectedIdsIn(s.powerStructure?.factions),
   ];
   return {
     protectedTargets: [...new Set(protectedTargets)],

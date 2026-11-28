@@ -195,7 +195,8 @@ describe('the three classes are strictly separated', () => {
     const reterrain = screen.getByTestId('reterrain-peak');
     expect(reterrain.textContent).toMatch(/regenerat/i);
     expect(reterrain.textContent).toMatch(/same-seed/i);
-    expect(reterrain.textContent).toMatch(/separate decision/i);
+    // STYLE-2 SW-12 (ledger D·93): the opt-out said plainly.
+    expect(reterrain.textContent).toMatch(/This button will not do it for you; choose it yourself\.$/);
     expect(reterrain.querySelector('input')).toBeNull();
 
     // THE PIN: confirming without touching the mismatch submits the safe class only.
@@ -224,7 +225,9 @@ describe('a canonized realm refuses out loud', () => {
   test('it states the lock and reaches no writer', async () => {
     store.campaigns = [{ id: 'camp-1', worldState: { canonizedAt: '2026-07-31T00:00:00.000Z' } }];
     render(<AutoplacementConsent saves={SAVES} onClose={() => {}} />);
-    expect(await screen.findByText(/canonized/i)).toBeTruthy();
+    const lock = await screen.findByText(/canonized/i);
+    // STYLE-2 SW-12 (ledger D·92): the lock states the fact and ends there (the aphorism struck).
+    expect(lock.textContent).toMatch(/no longer moves them\.\s*$/);
     expect(screen.queryByRole('button', { name: /Place \d+ settlement/i })).toBeNull();
     expect(store.applyAutoplacement).not.toHaveBeenCalled();
   });

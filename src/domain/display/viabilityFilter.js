@@ -64,3 +64,17 @@ export function trimViabilitySummary(text) {
     .replace(/,\s*but its survival depends on \d+ stable trade dependenc(?:y|ies) and protected routes\./i, '.')
     .trim();
 }
+
+/**
+ * THE SUMMARY DOES NOT OPEN WITH A MACHINE TOKEN (W7 HOOKS, 2026-11-08; the chair's ruling on W2's row): the
+ * record's summary opens with its verdict in capitals ("✗ NOT VIABLE: …", "△ VIABLE WITH PROVISIONING STRAIN:
+ * …", "VIABLE BUT STRAINED: …"), and a surface that already prints the verdict as its label printed it twice,
+ * the second time as a token. Display-only, as trimViabilitySummary: the record is untouched. The verdict
+ * label stays where the surface puts it.
+ * @param {string} text the record's or the view model's summary
+ * @returns {string}
+ */
+export function stripViabilityToken(text) {
+  const rest = String(text || '').replace(/^\s*[✗✓△]?\s*(?:NOT VIABLE|VIABLE(?: [A-Z][A-Z ]*)?)\s*:\s*/, '');
+  return rest ? rest.charAt(0).toUpperCase() + rest.slice(1) : rest;
+}

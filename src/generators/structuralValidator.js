@@ -5,11 +5,12 @@
  */
 
 import {getTradeRouteFeatures, pickRandom, tierAtLeast} from './helpers.js';
+import { textOf } from '../domain/facts/textOf.js';
 export { getBaseChance } from './institutionProbability.js';
 
 import {GOODS_MODIFIERS_BY_TIER} from '../data/goods/chains.js';
 import {GATE_FEATURES, INSTITUTION_SPATIAL, GOVERNMENT_INSTITUTIONS} from '../data/spatialData.js';
-import { RESOURCE_DATA } from '../data/goods/identity.js';
+import { RESOURCE_DATA } from '../data/goods/identity.js'; import { requiredTerrainRefusal } from '../domain/resourceTerrainCompatibility.js';
 import {
   nativeSemanticNames,
   nativeSemanticResourceKeys,
@@ -267,6 +268,10 @@ const _getTierConstraints = (text, instNames, tier, govOverride, magicWorks = tr
  * @param {number} _magicPriority
  */
 export const checkInstCompat = (institutions, tier, _magicPriority) => {
+  // CENSUS-2e unit 2 (ledger docs/census/declarations/CHECK_INST_COMPAT_LANDMARKS.json): a landmark
+  // that presumes a fact the name match does not guarantee declares it (`{ text, needs?, excludes? }`)
+  // and is read through `textOf` (R-C) until the arrival redraw (CENSUS-1f) draws it through
+  // `drawDeclared`. The cathedral, tower and university lines presume only their names: colour.
   // These landmarks are native catalog implications. A current custom
   // institution may render its own authored scene vocabulary elsewhere, but
   // its presentation-only display name cannot impersonate a cathedral,
@@ -288,16 +293,16 @@ export const checkInstCompat = (institutions, tier, _magicPriority) => {
     ]);
   }
   if (has('massive wall', 'citadel')) {
-    return pickRandom([
-      'The walls are serious. High stone, maintained, with watchtowers spaced to cover every angle.',
+    return textOf(pickRandom([
+      { text: 'The walls are serious. High stone, maintained, with watchtowers spaced to cover every angle.', needs: ['walls'] },
       'The citadel on the high ground makes clear that this settlement has been defended before and expects to be again.',
-    ]);
+    ]));
   }
   if (has('wall', 'gatehouse') && !has('massive')) {
-    return pickRandom([
-      'A wall circuit, unremarkable but intact.',
-      'The gatehouse arch frames the main road.',
-    ]);
+    return textOf(pickRandom([
+      { text: 'A wall circuit, unremarkable but intact.', needs: ['walls'], excludes: ['crisis: under_siege'] },
+      { text: 'The gatehouse arch frames the main road.', needs: ['gate'] },
+    ]));
   }
   if (has('wizard', 'mage') && has('tower')) {
     return pickRandom([
@@ -306,16 +311,16 @@ export const checkInstCompat = (institutions, tier, _magicPriority) => {
     ]);
   }
   if (has('major port')) {
-    return pickRandom([
-      'The harbour cranes are visible from the road: tall, necessary, industrial.',
-      'Half the settlement seems to be about the water.',
-    ]);
+    return textOf(pickRandom([
+      { text: 'The harbour cranes are visible from the road: tall, necessary, industrial.', needs: ['navigable'] },
+      { text: 'Half the settlement seems to be about the water.', needs: ['navigable'] },
+    ]));
   }
   if (has('palace', 'royal seat')) {
-    return pickRandom([
+    return textOf(pickRandom([
       'The palace complex sits on the highest point of the settlement and does not look apologetic about it.',
-      'Flags on the palace towers. Someone is in residence.',
-    ]);
+      { text: 'Flags on the palace towers. Someone is in residence.', excludes: ['crisis: succession'] },
+    ]));
   }
   if (has('university', 'academy of magic')) {
     return pickRandom([
@@ -378,7 +383,7 @@ export const checkStructuralValidity = (institutions, config = {}) => {
     magicExists,
     monsterThreat:  threat = 'frontier',
     priorityMagic:  magicPriority,
-    priorityMilitary: milPriority,
+    priorityMilitary: milPriority, terrainType, // COHERENCE-AGREE-7 (P4): the record's terrain, one line so the line-keyed rows below keep their addresses
   } = config;
 
   // Resolve effective magic level.
@@ -425,7 +430,7 @@ export const checkStructuralValidity = (institutions, config = {}) => {
         institution: instName,
         reason:      authoredReason(
           instName,
-          `${instName} requires ${gate.minTier} tier minimum. ${gate.reason}`,
+          `${instName} is found only in a ${gate.minTier} or larger; this is a ${tier}. ${gate.reason}`,
         ),
         severity:    authoredSeverity(instName, 'warning'),
       });
@@ -587,14 +592,14 @@ export const checkStructuralValidity = (institutions, config = {}) => {
         violations.push({
           type:        'survival_crisis',
           institution: 'Regional Threat',
-          reason:      `Embattled region: Military priority is ${resolvedMilPriority}/100. Infrastructure exists on paper but this level of underfunding means the defences are barely maintained and the garrison is skeletal. This settlement will fall.`,
+          reason:      'Embattled region. Infrastructure exists on paper, but the defences are so underfunded that they are barely maintained and the defenders are few. This settlement will fall.', // R3-CODE-C #325/#468: no slider figure on the page
           severity:    'error',
         });
       } else if (resolvedMilPriority < 40) {
         violations.push({
           type:        'survival_crisis',
           institution: 'Regional Threat',
-          reason:      `Embattled region: Military priority is ${resolvedMilPriority}/100. Fortification and forces are present but chronically underfunded: poor equipment, low morale, and thin reinforcement. A beleaguered outpost surviving on the edge.`,
+          reason:      `Embattled region. Fortification and forces are present but chronically underfunded: poor equipment, low morale, and thin reinforcement.${tierAtLeast(tier, 'city') ? '' : ' A beleaguered outpost surviving on the edge.'}`, // R3-CODE-C-2 (REVIEW-R3-STAGES C11): "outpost" is a size word, said only of a place small enough to be one
           severity:    'warning',
         });
       }
@@ -783,13 +788,22 @@ export const checkStructuralValidity = (institutions, config = {}) => {
   // ── Resource access violations ────────────────────────────────────────────
   nativeSemanticResourceKeys(config).forEach(resourceKey => {
     const data = RESOURCE_DATA[resourceKey];
-    if (data?.forbidden?.includes(route)) {
+    // COHERENCE-AGREE-3 (the chair's ruling of 2026-11-12): a row's required access is read as its forbidden list is,
+    // so a crossroads position forced on a road warns in the same words as one forced on a port.
+    if (data?.forbidden?.includes(route) || (Array.isArray(data?.requires) && !data.requires.includes(route))) {
       violations.push({
         type:        'resource_access_violation',
         institution: data.label,
         reason:      data.incompatibleReason || data.warning || `${data.label} is not compatible with ${route} access.`,
         severity:    'warning',
       });
+      return;
+    }
+    // COHERENCE-AGREE-7 (P4, REVIEW-AGREE-2 F5 (d)'s validator half): the terrain a row requires is read as its access
+    // is. The roll keeps no pass off the mountains (F5 (c)), so only a person's forced pass warns, in the wizard's words.
+    const terrainRefusal = data ? requiredTerrainRefusal(resourceKey, terrainType, { unknownRefuses: false }) : null;
+    if (terrainRefusal !== null) {
+      violations.push({ type: 'resource_access_violation', institution: data.label, reason: terrainRefusal, severity: 'warning' });
     }
   });
 
@@ -889,3 +903,35 @@ const PROFESSIONAL_CITY_WATCH_2 = 'professional city watch';
 const PROFESSIONAL_GUARD = 'professional guard';
 const SETTLEMENT_DEFENSE = 'Settlement Defense';
 const SETTLEMENT_REGIONAL_THREAT = 'Settlement (Regional Threat)';
+
+// ─── BAR2-LABELS-2 LB4 (the chair's ruling of 2026-11-15, vetoable by the owner): THE DEFENDERS' PAY HAS ONE HOME ───
+// The embattled region's two funding reasons above read the military dial (`resolvedMilPriority`), and this pass runs
+// before the defence profile exists. The fact of the pay is the profile's funded gate, `defenseProfile.economicGates.military`
+// (1 = fully funded; the page's own wages line, DS-DEF-11, falls below 1): read after it, a funding reason is admitted
+// only below 1, and at 1 takes its twin (the same violation, its severity kept). Measured on the 720 at f8042b61a:
+// "chronically underfunded" false in 26 of 54 (gate 1); "barely maintained" prints in none.
+/** The two funding reasons' leads (above), and the twin true at a gate of 1. */
+const UNDERFUNDED_LEADS = Object.freeze([
+  'Embattled region. Fortification and forces are present but chronically underfunded: poor equipment, low morale, and thin reinforcement.',
+  'Embattled region. Infrastructure exists on paper, but the defences are so underfunded that they are barely maintained and the defenders are few. This settlement will fall.',
+]);
+export const FUNDED_EMBATTLED = 'Embattled region. Fortification and forces are present and paid, but the pressure on them never lets up.';
+
+/**
+ * The record's violations with each funding reason read against the military gate. Draw-free; returns the input BY
+ * REFERENCE where no reason changes (a gate below 1, or none: no force).
+ * @template {{ reason?: unknown }} V
+ * @param {V[] | null | undefined} violations @param {unknown} militaryGate @returns {V[] | null | undefined}
+ */
+export function settleFundingReasons(violations, militaryGate) {
+  if (!Array.isArray(violations) || typeof militaryGate !== 'number' || !(militaryGate >= 1)) return violations;
+  let changed = false;
+  const out = violations.map((v) => {
+    const reason = typeof v?.reason === 'string' ? v.reason : '';
+    const lead = UNDERFUNDED_LEADS.find((l) => reason.startsWith(l));
+    if (!lead) return v;
+    changed = true;
+    return { ...v, reason: FUNDED_EMBATTLED + reason.slice(lead.length) };
+  });
+  return changed ? out : violations;
+}

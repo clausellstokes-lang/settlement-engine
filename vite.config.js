@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite';
+import { defineConfig, loadEnv } from 'vite';
 import react from '@vitejs/plugin-react';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { readFileSync, existsSync, statSync, readdirSync } from 'node:fs';
@@ -11,6 +11,62 @@ const analyze = process.env.ANALYZE === '1';
 
 const ROOT = dirname(fileURLToPath(import.meta.url));
 const SRC = resolve(ROOT, 'src');
+
+// ── THE PROTECTION STEP (docs/DESIGN_ENGINE_SERVICE.md "The client switch" (5)) ──
+// A build made with VITE_ENGINE_REMOTE='true' (closed unless exactly 'true', the
+// `engineRemote.js :: engineRemoteOpen` rule) generates through the engine service, so
+// it must not CARRY the generator. The local engine's one seam, src/lib/localEngine.js,
+// and the pipeline entry (the backstop for the three importers that reach it without
+// the seam) resolve to src/lib/localEngine.absent.js, which imports nothing: the
+// generator, its step registry, the generation core and the generation worker (whose
+// only `new Worker(new URL(...))` lives in the seam) then have no path into `dist/`.
+// The world pulse (src/domain/worldPulse/) is untouched: it stays in the browser for
+// this program (the chair's ruling, 2026-11-04). Flag off, the plugin resolves nothing
+// and the build is the build it was.
+// @guarded-by tests/build/engineAbsentWhenRemote.test.js
+const LOCAL_ENGINE_ABSENT = resolve(SRC, 'lib/localEngine.absent.js');
+const LOCAL_ENGINE_IDS = new Set([
+  resolve(SRC, 'lib/localEngine.js'),
+  resolve(SRC, 'lib/localPipeline.js'),
+  resolve(SRC, 'generators/generateSettlementPipeline.js'),
+]);
+
+/**
+ * The build's VITE_ENGINE_REMOTE, read the way the client reads it (.env files of the
+ * mode, then the process environment, which wins — Vercel's project variables arrive
+ * there). Exported for the build test.
+ * @param {string} [mode]
+ * @returns {boolean}
+ */
+export function engineRemoteBuild(mode = 'production') {
+  return loadEnv(mode, ROOT, 'VITE_ENGINE_REMOTE').VITE_ENGINE_REMOTE === 'true';
+}
+
+/** `vite build --mode <m>` names the mode; a plain `vite build` is 'production'. */
+function cliMode() {
+  const at = process.argv.indexOf('--mode');
+  if (at !== -1 && process.argv[at + 1]) return process.argv[at + 1];
+  const eq = process.argv.find((arg) => arg.startsWith('--mode='));
+  if (eq) return eq.slice('--mode='.length);
+  return process.argv.includes('build') ? 'production' : 'development';
+}
+const ENGINE_REMOTE_BUILD = engineRemoteBuild(cliMode());
+
+/**
+ * @param {boolean} on
+ * @returns {import('vite').Plugin}
+ */
+export function engineAbsentWhenRemote(on) {
+  return {
+    name: 'engine-absent-when-remote',
+    enforce: 'pre',
+    async resolveId(source, importer, options) {
+      if (!on || !/(?:^|\/)(?:localEngine|localPipeline|generateSettlementPipeline)(?:\.js)?$/.test(source)) return null;
+      const resolved = await this.resolve(source, importer, { ...options, skipSelf: true });
+      return resolved && LOCAL_ENGINE_IDS.has(resolved.id.split('?')[0]) ? LOCAL_ENGINE_ABSENT : null;
+    },
+  };
+}
 
 // ── Engine-shared domain vocabulary (for the engine-core chunk) ──────────────
 // generators and domain are mutually-dependent PEER engine layers: the
@@ -173,7 +229,7 @@ const ENGINE_SHARED_DOMAIN = computeEngineSharedDomain();
 export const ENGINE_SHARED_DOMAIN_EXCISIONS = [
   '/src/domain/cultureProfiles.js',
   '/src/domain/customCategories.js',
-  '/src/domain/magicFilter.js',
+  '/src/domain/magicFilter.js', '/src/domain/display/magicProvisionShown.js', '/src/domain/facts/magicSource.js', '/src/domain/facts/ironAtHand.js', // BAR2-LABELS-4 (2026-11-15): LB1's defenseDisplay.js import (safetyProfile -> defenseDisplay -> them) put both in EAGER engine-core, an engine-core -> coherence-lazy edge (engineCoreLazyEdge); excised, they route as at dcb069bff (unpinned). BAR2-CLOSE-SWEEP-A (2026-11-15): facts/ironAtHand.js (BAR2-PLACES VW2, new; its one importer facts/factsOf.js is generator-reached, so the derivation walked through it) rode EAGER engine-core, and its import of facts/crisisKind.js (crisisOf, the one siege reading; no eager reader of it exists) was an engine-core -> coherence-lazy edge (engineCoreLazyEdge, plain and flagged); excised, unpinned, as those two (routes measured: only this module moves, engine-core -> unpinned)
   // region/foldTradeCategories.js RETIRED 2026-09-20 (FIX-D9, ODQ §934.47 addendum 98) — its row here deleted nothing; docs/DEAD_CODE_DISPOSITION.md, Round-3. ⛔ ONE line replacing one, so no address below this point moves.
   '/src/domain/settlement.schema.js',
   '/src/domain/formatNumber.js',
@@ -248,6 +304,70 @@ export const ENGINE_SHARED_DOMAIN_EXCISIONS = [
   '/src/domain/priorityBands.js',
   '/src/domain/townMap/glyphAssign.js',
   '/src/domain/townScene/customBuildingPresentation.js',
+  // TAIL-TIES-8 (the chair's ruling T26: the first paint's SAFE TRIM, prepared, not landed; the owner's answer decides).
+  // The 16 riders NEW since the first-paint budget's record point 7dc7757f (docs/chair/2026-11-15/close/SIZE-BUDGETS-MEASURE.md
+  // §1, Trial 1): each sits in eager engine-core only because a generator imports it (the ESD derivation above); none is
+  // reached by a static import path from the entry chunk's own modules. Excised so they ride the lazy chunks with their
+  // readers, and four data tables leave first paint with them (faceHonorifics, stressPowerFaces, institutionLadders,
+  // holderTitleForms). The budget numbers are NOT touched (tests/build/vendorPdfLazy.test.js stays red by the remainder).
+  '/src/domain/display/labelBands.js',
+  '/src/domain/institutions/houseScale.js',
+  '/src/domain/facts/keep.js',
+  '/src/domain/people/seatKeeper.js',
+  '/src/domain/people/stressPowerFaces.js',
+  '/src/domain/summary/storesSpanWords.js',
+  '/src/domain/facts/founder.js',
+  '/src/domain/chainYield.js',
+  // BAR3-CLOSE-SWEEP-A (g), 2026-11-16: facts/sharedPower.js (a zero-import leaf) is NO LONGER EXCISED: it STAYS in
+  // engine-core on purpose, like facts/textOf.js (the FIRSTPAINT-2 note below). BAR3-PEOPLE batch 1 (aef83b4b5) made
+  // data/npcData.js (data-lazy) import it; excised, it rode coherence-lazy with factsOf.js, and coherence-lazy already
+  // imports data-lazy: the data-lazy <-> coherence-lazy chunk cycle boot-smoke's stage 1 refuses. In engine-core it is a
+  // sink (it imports nothing), so its three importers (people/ties.js, data/npcData.js, facts/factsOf.js) reach it
+  // with no edge back.
+  '/src/domain/facts/rivalPower.js',
+  '/src/domain/facts/rulingBody.js',
+  '/src/domain/facts/rulerKindLabel.js',
+  '/src/domain/facts/liveInstitutionNames.js',
+  '/src/domain/display/clergyHouse.js',
+  '/src/domain/display/pluralPowerName.js',
+  '/src/domain/display/powerSentenceName.js',
+  // FORTUNE U6 (2026-11-20, the chair's ruling of 19:44 UTC: probe C exactly): the fortune law leaves EAGER engine-core.
+  // NO first-paint module reaches src/domain/fortune/fortuneLaw.js (its seven importers, prosperity, factionDynamics,
+  // rulingStructure, densityCreateBoundary, economyStateProse, governanceAccount and fortuneMerits, all sit in lazy chunks); it rode engine-core only
+  // because ESD seeds every domain module a generator imports. A source cut changes nothing; this row does. Excised AND
+  // PINNED to its own `fortune-law` chunk (manualChunks below), the FP-G14 convention. ⛔ NEVER EXCISED WITHOUT THE PIN
+  // (probe B, measured): the orphan co-locates into the big lazy `engine` chunk and the densityCreateBoundary chunk gains
+  // a static edge to it, so the create/rederive boundary fetches the whole generator (the FP-G11 incident). ⛔ Nor pinned
+  // into a shared lazy list (coherence-lazy, engine-core-lazy; read, not probed): its lazy consumers outside coherence-lazy import neither
+  // today. ⚠ THIS LIST, not FIRSTPAINT2_LAZY_DOMAIN below (that one routes coherence-lazy). MEASURED (npm run build, the
+  // vendorPdfLazy closure walk): first paint raw 1,179,219 -> 1,177,726, gzip 375,228 -> 374,696, Brotli 314,955 ->
+  // 314,727; the generation worker unchanged (2,590,351).
+  // The measure: docs/chair/2026-11-20/content/fortune/measures/firstpaint/FIRSTPAINT-CHAIN.md.
+  // @guarded-by tests/build/engineChunkLazy.test.js (FORTUNE U6: the excision's row, the pinned chunk, no
+  //   densityCreateBoundary -> engine edge).
+  '/src/domain/fortune/fortuneLaw.js',
+  // FORTUNE U5c (2026-11-22, the chair's rulings of 03:50 and 04:51 UTC: U6's form, their own chunk): the merits leave EAGER
+  // engine-core. NO first-paint module reaches src/domain/fortune/fortuneMerits.js (U5a; its two importers,
+  // steps/assembleSettlement and display/governanceAccount, sit in the lazy `engine` and coherence-lazy chunks); it rode
+  // engine-core only because ESD seeds every domain module a generator imports, and its three static imports (the law,
+  // data/bandLadders.js :: LEGITIMACY_CUTS, data/legacyUnresolvedWordings.js) followed it into first paint, undoing U6's
+  // probe C. Excised AND PINNED to their own `fortune-merits` chunk (manualChunks below). ⛔ NEVER EXCISED WITHOUT
+  // THE PIN (probe B): the orphan co-locates into the big lazy `engine` chunk. ⛔ Nor pinned into `fortune-law` (measured):
+  // their data imports give that import-free chunk a data-lazy edge, and densityCreateBoundary's static closure goes
+  // 701,978 -> 2,642,547 B. MEASURED (npm run build, the vendorPdfLazy closure walk): first paint raw 1,186,120 ->
+  // 1,179,678, gzip 377,693 -> 375,202, Brotli 317,137 -> 315,132; the generation worker unchanged (2,676,534).
+  // The measure: docs/chair/2026-11-20/content/fortune/briefs/U5c-FIRSTPAINT.md.
+  // @guarded-by tests/build/engineChunkLazy.test.js (FORTUNE U5c: the excision's row, the pinned chunk, out of the
+  //   eager derivation, the chunk outside the entry closure and unpreloaded).
+  '/src/domain/fortune/fortuneMerits.js',
+  // KINDS-1 K1 (2026-11-20; the fortune lane's U6 exactly): the trouble law leaves EAGER engine-core. Its importers are
+  // historyGenerator (lazy engine) and densityCreateBoundary (lazy); it would ride engine-core only because ESD seeds
+  // every domain module a generator imports. Excised AND PINNED to its own `trouble-law` chunk (manualChunks below).
+  // ⛔ NEVER EXCISED WITHOUT THE PIN (the fortune lane's probe B): the orphan co-locates into the big lazy `engine`
+  // chunk and the densityCreateBoundary chunk gains a static edge to the whole generator.
+  // @guarded-by tests/build/engineChunkLazy.test.js (KINDS-1 K1: the excision's row, the pinned chunk, no
+  //   densityCreateBoundary -> engine edge).
+  '/src/domain/trouble/troubleLaw.js',
 ];
 // FIRSTPAINT-2 (LANDING-6, 2026-11-05; the chair's ruling on vendorPdfLazy x4, "a cure, not a rise"). The rung-1
 // window's lanes (CRISIS, the coherence findings of TRUTH / SELF-VOUCH / F1 / F3 / F9 / F10, PLACE-NOT-TIER's sea
@@ -279,12 +399,26 @@ export const FIRSTPAINT2_LAZY_DOMAIN = [
   '/src/domain/crisis/crisisHooks.js',
   '/src/domain/defense/defenseFacts.js',
   '/src/domain/dossier/faithReading.js',
+  // PEOPLE-LAND (2026-11-07): lane 1's castPowers.js reads houseBacksOf here, which made this display-side
+  // reader engine-shared and so a first-paint seed; its userEditLines import (pinned to this chunk) then made
+  // coherence-lazy, and data-lazy behind it, static first-paint chunks (+1.24 MB). Excised and pinned like the rest.
+  '/src/domain/dossier/powerSupport.js',
   '/src/domain/dossier/powerStrata.js',
   '/src/domain/dossier/seatHolder.js',
   '/src/domain/entities/factionRoleCatalog.js',
   '/src/domain/foodSurplus.js',
   '/src/domain/marketInstitution.js',
   '/src/domain/rulingPowerCoup.js',
+  // SEAT-1 train 1, U3 (the holder leaf, 2026-11-20; brief U3-HOLDER.md's CURE): seat/holderOfSeat.js will be reached
+  // from generators (factionStanding.js, castPowers.js through coupContenders, U4), so the derivation would put it in
+  // EAGER engine-core, where its static import of dossier/seatHolder.js (pinned here) would be an engine-core ->
+  // coherence-lazy edge. Pinned beside rulingPowerCoup.js, seatHolder.js and powerStrata.js before any generator reaches
+  // it; its other imports ride engine-core and data-lazy, which this chunk already imports. Never left unpinned (FP-G11).
+  '/src/domain/seat/holderOfSeat.js',
+  // SEAT-1 train 1, U4 (the contest's circumstances and its one dial, 2026-11-20; brief U4-CONTEST.md's CURE):
+  // seat/seatCircumstances.js joins engine-core like holderOfSeat.js (rulingPowerCoup.js reads it, and generators reach
+  // that). Pinned beside it before the derivation can place it; its imports ride engine-core. Never left unpinned (FP-G11).
+  '/src/domain/seat/seatCircumstances.js',
   '/src/domain/spatial/seaLanes.js',
   '/src/domain/spatial/spatialCost.js',
   '/src/domain/spatial/waterBodies.js',
@@ -292,6 +426,185 @@ export const FIRSTPAINT2_LAZY_DOMAIN = [
   '/src/domain/userEditLines.js',
   '/src/domain/viabilitySummary.js',
   '/src/domain/worldPulse/npcLadderFactionMembership.js',
+  // FIRSTPAINT-3 (LANDING-R2, 2026-11-07; helper seat J — verify:dist red at the rung-2 tip: bootSmoke "THE SHIPPED
+  // BUNDLE DOES NOT BOOT", cultureProfilesLazy, vendorPdfLazy FIX-B2 + ARCH car 2). THE SAME PREMISE, THE SAME
+  // MEASUREMENT. The pool census (CENSUS-1..5, the reader lanes, the compose) gave generators new domain imports —
+  // the fact homes (src/domain/facts/*), roles/roleClass, the war/defence display readers, factionRename — so the
+  // derived ESD grew 63 -> 104 members. 28 of the 41 new members are reached by NO module of the true first-paint
+  // source graph (main.jsx, lookups.js, kernel/**; MEASURED on Rollup's own resolved module graph, 1bff51c6d vs
+  // 8595768ac), and SEVEN of them statically import modules pinned lazy (defence.js / threatAssessment.js /
+  // defenseDisplay.js -> defense/defenseFacts.js, defenseDisplay.js -> crimeSignal.js, famine.js -> foodSurplus.js,
+  // factsOf.js -> dossier/faithReading.js, factionRename.js -> userEditLines.js + lib/narrativeMutations.js). Riding
+  // EAGER engine-core, those edges made engine-core import coherence-lazy and narrative-mutations: coherence-lazy and
+  // data-lazy (the culture corpus, the composed prose) entered first paint (closure 2,383,250 B vs the 1,042,033 B
+  // budget), and engine-core -> coherence-lazy -> data-lazy -> engine-core closed a chunk CYCLE whose TDZ throw
+  // stopped the shell mounting. These 27 ride coherence-lazy with the leaves they import; no module that stays in
+  // engine-core imports any of them (the closed set, measured), and none imports a module of the lazy `engine`
+  // chunk, so coherence-lazy gains no edge back into engine. The 28th, facts/textOf.js (a ~300 B zero-import leaf),
+  // STAYS in engine-core on purpose: data/cultureProfiles.js (data-lazy) imports it, and coherence-lazy already
+  // imports data-lazy, so pinning it here would mint a data-lazy <-> coherence-lazy cycle.
+  '/src/domain/crisis/migrationDirection.js',
+  '/src/domain/display/defenseDisplay.js',
+  '/src/domain/display/defenseScoreBands.js',
+  '/src/domain/display/numberWords.js',
+  '/src/domain/display/threatAssessment.js',
+  '/src/domain/display/warStatus.js',
+  '/src/domain/factionRename.js',
+  '/src/domain/facts/bareLine.js',
+  '/src/domain/facts/crisisKind.js',
+  '/src/domain/facts/defence.js',
+  '/src/domain/facts/factsOf.js',
+  '/src/domain/facts/famine.js',
+  '/src/domain/facts/guild.js',
+  '/src/domain/facts/institutions.js',
+  '/src/domain/facts/magic.js',
+  '/src/domain/facts/market.js',
+  '/src/domain/facts/migration.js',
+  '/src/domain/facts/otherNpc.js',
+  '/src/domain/facts/populationBand.js',
+  '/src/domain/facts/rulerKind.js',
+  '/src/domain/facts/terrain.js',
+  '/src/domain/facts/warState.js',
+  '/src/domain/facts/water.js',
+  '/src/domain/institutions/institutionCategory.js',
+  '/src/domain/resolveCulture.js',
+  '/src/domain/roles/roleClass.js',
+  '/src/domain/worldPulse/warFrontReads.js',
+  // FIRSTPAINT-4 (BOOT-TIP, 2026-11-10; the chair's bisect: the tip BOOTS at merge point 21 e870d7ca9 and FAILS
+  // from point 22 ac1442a3d, SW-6 CRISIS-SURFACES — bootSmoke "a CYCLE of 3 chunks", "Cannot access 'Jt' before
+  // initialization" at coherence-lazy; first paint 2,767,345 B raw vs the 1,104,215 budget). THE SAME PREMISE, THE
+  // SAME MEASUREMENT, ONE MEMBER. Point 22 gave crisis/crisisHooks.js (pinned here, but generator-reached, so the
+  // derivation walks through it before the .delete()) a static import of display/governanceAccount.js
+  // (pluralPowerName): the derived ESD went 86 -> 87 after excisions (raw 156 -> 157), governanceAccount.js the ONE
+  // member joined, and it rode EAGER engine-core. Its long-standing import of dossier/powerStrata.js (rulingChainOf,
+  // pinned here) then became THE ONLY engine-core -> coherence-lazy module edge on Rollup's resolved graph, and the
+  // pre-existing coherence-lazy -> data-lazy -> engine-core edges closed the cycle. MEASURED on Rollup's own resolved
+  // module graph (getModuleInfo().importedIds): NO module of the true first-paint graph (main.jsx, lookups.js,
+  // kernel/**) reaches it; its six static importers are all lazy (crisisHooks [here], summary/tonightSheet,
+  // dossier/hookLines, components/new/powerDeskRead, utils/generateSettlementPDF, pdf/sections/PowerStructure) and
+  // NONE stays in engine-core (the closed set); its one outward edge, powerStrata.js, already rides this chunk, so
+  // coherence-lazy gains no edge. Pinned here, never left unpinned (FP-G11).
+  // @guarded-by tests/architecture/engineCoreLazyEdge.test.js (the source-graph walker: no engine-core module
+  //   statically imports a lazily pinned one — red at ecadf531a, green at point 21) and tests/build/bootSmoke.test.js.
+  '/src/domain/display/governanceAccount.js',
+  // COHERENCE-UPKEEP-7 (2026-11-13; the money line's clause, "laid by before the famine"): threatAssessment.js
+  // (pinned here) now reads the two-label sentence's home, so display/prosperityInCrisis.js became generator-reached
+  // (safetyProfile -> defenseDisplay -> threatAssessment -> it) and the derivation put it in EAGER engine-core, where
+  // its static import of facts/crisisKind.js (pinned here) was an engine-core -> coherence-lazy edge
+  // (tests/architecture/engineCoreLazyEdge.test.js). Its other importers (the Overview, Economics glance, Summary,
+  // table view, the PDF view model, the Foundry journal, the realm register) read it as before, and before this
+  // commit it already imported crisisKind.js from their chunks; its one other import, crisis/crisisNoun.js, is a
+  // zero-import leaf, pinned here beside it: crisis/crisisHooks.js (pinned here) re-exports it, so it is generator-reached
+  // and, left unpinned, the derivation put it in EAGER engine-core (+130 B, measured). Pinned here, never left unpinned
+  // (FP-G11).
+  '/src/domain/display/prosperityInCrisis.js',
+  '/src/domain/crisis/crisisNoun.js',
+  // TAIL-TIES-10 (2026-11-15; the chair's ruling T29 (1), vetoable by the owner): the crime fact's leaf
+  // facts/criminalStructureKey.js (the key ladder moved verbatim out of display/defenseDisplay.js by T28, so that
+  // facts/factsOf.js no longer imports the display) is generator-reached (generators/safetyProfile.js ->
+  // defenseDisplay.js -> it), so the derivation put it in EAGER engine-core, where its static import of crimeSignal.js
+  // (pinned here) was an engine-core -> coherence-lazy edge (tests/architecture/engineCoreLazyEdge.test.js, plain and
+  // flagged). Its two importers, factsOf.js and defenseDisplay.js, are both pinned here; its other import, corruption.js
+  // (rivalRingsOf), rides engine-core, which defenseDisplay.js already imported it from, so coherence-lazy gains no edge.
+  // Before the cut its code rode this chunk inside defenseDisplay.js. MEASURED (npm run build, VERIFY_DIST=1
+  // vendorPdfLazy, the merge point b805b1de before, this pin after): first paint 1,164,962 -> 1,164,956 B raw, gzip
+  // 371,025 -> 371,019; Brotli 310,890 -> 311,052 is the minifier's renaming, not code (the entry chunk's raw bytes are
+  // identical, one mangled import name apart; engine-core 277,921 -> 277,915 B keeps its 425 exports and none of the
+  // key's strings); the engine chunk 860,445 -> 860,445 B. Pinned here, never left unpinned (FP-G11).
+  '/src/domain/facts/criminalStructureKey.js',
+  // BAR4-FIRSTPAINT (2026-11-16; the round's first-paint regression, BAR4-SCENES-2's hand-back item 1). THE SAME
+  // PREMISE, THE SAME MEASUREMENT. facts/houseInputAtHand.js (BAR4-RECORD's one reading of "an input is at hand") is
+  // generator-reached (resourceGenerator.js, computeActiveChains.js), so the derivation put it in EAGER engine-core; the
+  // chair's HW1 gave it a static import of data/crisisDependence.js (four small tables of the spent-ground reading), and
+  // that table imports data/institutionServices.js: both left data-lazy for the eager `data` chunk (+143,714 B), and the
+  // derivation walked through facts/factsOf.js (pinned here) into its new homes facts/timberAtHand.js,
+  // facts/tradeAtWork.js and facts/sceneSupply.js (engine-core +4,855 B). First paint 1,143,114 B raw at f19c3b28b,
+  // 1,291,683 at 7738e71be. NO module of the true first-paint graph reaches any of the four (measured on this file's own
+  // EAGER_FIRST_PAINT_MODULES: their only eager importers were each other, as derived-set seeds); their importers are
+  // facts/factsOf.js (pinned here), the lazy display leaves display/validationOnPage.js and display/crisisStoppedRow.js
+  // (which already import crisisKind.js and factsOf.js from this chunk) and the engine chunk's generators (which already
+  // import this chunk); their own imports ride engine-core and `data`, or data-lazy (crisisDependence.js), which this
+  // chunk already imports. So they ride coherence-lazy beside factsOf.js, the one door every reading of their atoms
+  // passes: a getter of factsOf.js runs only once this chunk has evaluated, and the four with it. No source line moves.
+  // MEASURED (npm run build, VERIFY_DIST=1 vendorPdfLazy): first paint 1,291,683 -> 1,138,376 B raw (gzip 409,511 ->
+  // 362,463; Brotli 340,927 -> 304,277), 4,738 under f19c3b28b's (houseInputAtHand.js's and timberAtHand.js's own code
+  // left with them); `data` 296,244 -> 152,530 (f19c3b28b's, to the byte); engine-core 282,468 -> 272,875;
+  // coherence-lazy 182,232 -> 191,805; the engine chunk 882,000 -> 881,999; the generation worker unchanged (2,355,901).
+  // @guarded-by tests/architecture/factHomesLazy.test.js (the eager graph holds none of the four, nor the two tables).
+  '/src/domain/facts/houseInputAtHand.js',
+  '/src/domain/facts/timberAtHand.js',
+  '/src/domain/facts/tradeAtWork.js',
+  '/src/domain/facts/sceneSupply.js',
+  // FIRSTPAINT-PIN (PAGE-7, 2026-11-20; the chair's ruling of 19:59, a rise is cured on the lane). THE SAME PREMISE,
+  // THE SAME MEASUREMENT, the BAR4-FIRSTPAINT block above line for line. The causes (CAUSES-DATA addenda 3 and 4,
+  // merged at 01c2bbb99) gave facts/factsOf.js (pinned here) two new leaves, facts/causeHouses.js (the group table and
+  // causeHouseStands) and facts/entrepot.js (isEntrepot, a zero-import leaf). factsOf.js is generator-reached, so the
+  // derivation walked through it before the .delete() and put both in EAGER engine-core, where causeHouseStands's call
+  // to liveInstitutionNames (excised above, it rides this chunk) was an engine-core -> coherence-lazy edge in dist/
+  // (`import{l as Ma}from"./coherence-lazy-…js"`): coherence-lazy, data-lazy and the FIX-B2 chunk narrative-mutations
+  // entered first paint. Their importers: facts/factsOf.js (pinned here) and display/tensionCauseHolds.js (imported by
+  // nothing yet); NO module of the true first-paint graph reaches either. Their imports: causeHouses.js reads
+  // facts/liveInstitutionNames.js, which already rides this chunk; entrepot.js imports nothing. So coherence-lazy gains
+  // no edge. No source line moves.
+  // MEASURED (npm run build, VERIFY_DIST=1 vendorPdfLazy + generationWorkerLazy; the lane tip 634bb257b before, this pin
+  // after): first paint 3,282,737 -> 1,177,993 B raw (gzip 941,766 -> 374,744; Brotli 768,543 -> 314,659), 325 B
+  // over PAGE-7's base f7f5986b5 (1,177,668);
+  // engine-core 309,740 -> 308,455; coherence-lazy 279,371 -> 280,570; the engine chunk 913,179 -> 913,178; the
+  // generation worker unchanged (2,589,546).
+  // @guarded-by tests/architecture/factHomesLazy.test.js (the eager graph holds neither) and
+  //   tests/build/vendorPdfLazy.test.js (the first-paint byte budget). Pinned here, never left unpinned (FP-G11).
+  '/src/domain/facts/causeHouses.js',
+  '/src/domain/facts/entrepot.js',
+  // DAILY-3 B3 L8 (the chair's E82 of 2026-11-22, item 1: "a NEW LAZY LEAF ... pinned lazy where the lazy pins are kept").
+  // THE SAME PREMISE as the FIRSTPAINT-PIN block above: facts/officeForms.js (the five `office:` atoms' map and reader) is a
+  // new leaf of facts/factsOf.js (pinned here), which is generator-reached, so the derivation would walk it into EAGER
+  // engine-core. Its importers: facts/factsOf.js alone. Its imports: rulingPower.js and seat/seatTable.js, both already in
+  // the eager graph, so coherence-lazy gains no edge back. Not measured by a build in this unit (the chair's at the close).
+  // @guarded-by tests/domain/dailyLifeOffice.test.js (e) (the eager graph does not hold it; it routes to coherence-lazy).
+  '/src/domain/facts/officeForms.js',
+  // R24-A1 (CLOSE-7, 2026-11-24; the chair's RULING-R24 and R24a). THE SAME PREMISE as the two blocks above: facts/sickCare.js
+  // (the one reading of `sick care`) is a new leaf of facts/factsOf.js (pinned here), which is generator-reached, so the
+  // derivation walked it into EAGER first paint, and with it data/institutionServices.js (the flagged rows' names), a table
+  // the BAR4-FIRSTPAINT block keeps out of first paint (tests/architecture/factHomesLazy.test.js (a) reddened on it).
+  // Its importers: facts/factsOf.js and coherence/pageCensusFindings.js, neither in the eager graph. Its imports:
+  // facts/defence.js and institutions/institutionRoster.js (eager), facts/liveInstitutionNames.js (this chunk) and
+  // data/institutionServices.js (data-lazy, which this chunk already reaches through facts/tradeAtWork.js). Not measured by
+  // a build in this unit (the chair's at the close).
+  // @guarded-by tests/architecture/factHomesLazy.test.js (a) and tests/domain/close7SickCare.test.js (e).
+  '/src/domain/facts/sickCare.js',
+  // SIZE-BACK (CLOSE-7, 2026-11-25; the chair's YES to LANDING-117 (5a)). THE SAME PREMISE as sickCare.js above, measured by
+  // two builds (point 116 ddca5c789 against 97c6bfc7a: first paint +11,165 raw, close-7/reports/TYPES.md):
+  //   - domain/landWithholding.js (B1(i)) is generator-reached (steps/assembleInstitutions.js, cascadeGenerator.js,
+  //     factionCorrelation.js, none in the eager graph), so the derivation made it an ESD seed, EAGER, and it carried the whole
+  //     of data/geographyData.js (TERRAIN_DATA, LAND_GIVERS; data-lazy until then: it was geographyData's ONLY eager importer)
+  //     into the eager `data` chunk (+10,146 raw). Its other importer, coherence/pageCensusFindings.js, ships in no chunk.
+  //     Its imports: data/geographyData.js (back to data-lazy, which this chunk already imports) and
+  //     data/institutionalCatalog.js (eager `data`).
+  //   - domain/facts/foodProduction.js (THE MIRROR, R24d) is a new zero-import leaf of facts/factsOf.js (pinned here): the
+  //     derivation walked it into EAGER engine-core. Its one importer is factsOf.js; its one reader, the vocabulary's
+  //     `food production` atom, reaches it only through the factsOf object (`f.foodProduction`), so it rides with factsOf.
+  // No eager module imports either file. @guarded-by tests/build/vendorPdfLazy.test.js (the first-paint byte budget) and
+  //   tests/build/engineChunkLazy.test.js (no first-paint-reachable excision is left unpinned).
+  '/src/domain/landWithholding.js',
+  '/src/domain/facts/foodProduction.js',
+  // D7-BYTES (CLOSE-8 cure 3c, 2026-11-25; the tenth chair's G24: SIZE-BACK's method). THE SAME PREMISE as foodProduction.js
+  // above: facts/crisisBody.js (BIRTH-1 D7, the one reader of `crisis body: <kind>`) is a new leaf of facts/factsOf.js (pinned
+  // here), which is generator-reached, so the derivation walked it into EAGER engine-core, and through its one import,
+  // people/stressPowerFaces.js (excised above, TAIL-TIES-8), the face table data/stressPowerFaces.js into the eager `data`
+  // chunk. Its one importer is factsOf.js; its one call site is factsOf's `crisisBody` getter, so it rides with factsOf.
+  // people/stressPowerFaces.js (the face table's one reader) is pinned beside it, never left an orphan (FP-G11): with only
+  // crisisBody.js pinned, Rollup already placed it here (measured), and the pin makes that placement the rule's, not a
+  // tie-break between its manual-chunk importers. Its importers: crisisBody.js (here), generators/people/castPowers.js and
+  // density/applyDensityLaw.js (`engine`, which imports this chunk) and components/new/tabs/power/PowerStrata.jsx (whose
+  // chunk imports this chunk). Its imports: rulingPower.js and people/membership.js (engine-core), data/stressPowerFaces.js
+  // (data-lazy, which this chunk imports). So no chunk gains an edge.
+  // MEASURED (npm run build, the vendorPdfLazy closure method; the join 0ef4d2a11 before, this after): first paint
+  // 1,195,718 -> 1,190,128 B raw (gzip 381,485 -> 379,761; Brotli 320,038 -> 318,957); `data` 168,098 -> 164,145;
+  // engine-core 318,322 -> 316,686; the generation worker unchanged (2,737,079, same hash); no chunk gains or loses an edge.
+  // No eager module imports either. @guarded-by tests/build/vendorPdfLazy.test.js (the first-paint byte budget) and
+  //   tests/build/engineChunkLazy.test.js (no first-paint-reachable excision is left unpinned).
+  '/src/domain/facts/crisisBody.js',
+  '/src/domain/people/stressPowerFaces.js',
 ];
 for (const frag of ENGINE_SHARED_DOMAIN_EXCISIONS) ENGINE_SHARED_DOMAIN.delete(frag);
 for (const frag of FIRSTPAINT2_LAZY_DOMAIN) ENGINE_SHARED_DOMAIN.delete(frag);
@@ -519,12 +832,16 @@ export default defineConfig({
       brotliSize: true,
       open: false,
     }),
+    engineAbsentWhenRemote(ENGINE_REMOTE_BUILD),
   ].filter(Boolean),
   // Every production worker is constructed with `{ type: 'module' }`. ES
   // output lets the TownScene worker code-split its canonical-map vocabulary
   // instead of parsing that graph before the first compile request.
   worker: {
     format: 'es',
+    // A worker bundle is built with ITS OWN plugin list, so the protection step is
+    // repeated here: the custom-content preview worker imports the pipeline entry.
+    plugins: () => [engineAbsentWhenRemote(ENGINE_REMOTE_BUILD)],
   },
   build: {
     outDir: 'dist',
@@ -971,7 +1288,7 @@ export default defineConfig({
             return 'engine-core-lazy';
 
           // ── FIRSTPAINT-2: the rung-1 window's lazy domain (its own chunk) ──
-          // The 27 modules excised from ESD above (FIRSTPAINT2_LAZY_DOMAIN): the coherence findings, the crisis
+          // The 27 + 27 (FIRSTPAINT-3) modules excised from ESD above (FIRSTPAINT2_LAZY_DOMAIN): the coherence findings, the crisis
           // cast and hooks, the dossier's power/faith/seat readings, the sea-lane trio. Their own chunk rather
           // than engine-core-lazy, whose contract is a small (<50 kB) presentation vocabulary
           // (tests/build/engineChunkLazy.test.js); pinned rather than orphaned (FP-G11). Its outward edges run
@@ -1008,6 +1325,29 @@ export default defineConfig({
           //   from the entry closure + present in a lazy chunk).
           if (id.includes('/src/domain/content/customContentCharset'))
             return 'custom-charset';
+
+          // ── The fortune law (LAZY LEAF, its own chunk; FORTUNE U6) ──
+          // Excised from ESD above and pinned here, BEFORE the engine-core
+          // grouping. A zero-import leaf whose readers are all lazy, so its own
+          // chunk drags nothing and no eager chunk imports it. ⛔ The pin is the
+          // half that is never dropped: excised without it (probe B), the law
+          // lands in the big lazy `engine` chunk and densityCreateBoundary
+          // statically imports the whole generator to read it.
+          // @enforced-by tests/build/engineChunkLazy.test.js (FORTUNE U6).
+          if (id.includes('/src/domain/fortune/fortuneLaw.js')) return 'fortune-law';
+          // FORTUNE U5c: the merits (fortuneMerits.js, a reader of the law)
+          // are excised above and pinned HERE, to a chunk of their own, never
+          // left an orphan (probe B). Not in `fortune-law`: their data imports
+          // would give the law's import-free chunk a data-lazy edge.
+          // @enforced-by tests/build/engineChunkLazy.test.js (FORTUNE U5c).
+          if (id.includes('/src/domain/fortune/fortuneMerits.js')) return 'fortune-merits';
+          // ── The trouble law (LAZY LEAF, its own chunk; KINDS-1 K1) ──
+          // Excised from ESD above and pinned here, BEFORE the engine-core
+          // grouping (the fortune lane's U6 shape). A zero-import leaf whose
+          // readers are all lazy, so its own chunk drags nothing and no eager
+          // chunk imports it. ⛔ The pin is the half that is never dropped.
+          // @enforced-by tests/build/engineChunkLazy.test.js (KINDS-1 K1).
+          if (id.includes('/src/domain/trouble/troubleLaw.js')) return 'trouble-law';
 
           // ── Engine-core (generator-shared domain vocabulary) ──────
           // This derived grouping prevents Rollup from folding shared domain
@@ -1181,7 +1521,7 @@ export default defineConfig({
     // every fc.assert runs a deterministic, REPRODUCIBLE case sequence instead of
     // a fresh random one per run. Only the seed is set (numRuns et al keep their
     // library defaults). Rotation is a deliberate per-wave act — see the header.
-    setupFiles: ['./tests/setup/fastCheckSeed.js'],
+    setupFiles: ['./tests/setup/gitEnvIsolation.js', './tests/setup/fastCheckSeed.js'],
     // Raise the per-test timeout above Vitest's 5000ms default. The
     // generation-heavy suites (e.g. tests/domain/distribution.test.js)
     // push 40–80 settlements through the FULL pipeline per test; in

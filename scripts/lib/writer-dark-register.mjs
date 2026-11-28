@@ -93,6 +93,13 @@ export const SIMULATION_FLAG_PATTERN = /^[a-z][A-Za-z0-9]*Enabled$/;
  * so the row is struck rather than kept alive on a constructed dial (dead stays dead), and the identity is now
  * judged normally.
  *
+ * ⭐ `archetypeKey on relationships` IS STRUCK BY CLAUSE S (2026-11-09, ALLEGIANCE-CAR3; the allegiance design §9, the chair's
+ * dispatch): the DM view "who really runs this town" (domain/people/patronage.js :: dmPowerViewOf, mounted by the Power
+ * tab's DM panel and the PDF's Power Structure chapter) reads a covert handler tie's archetype key and prints the tie's
+ * kind in plain words (HANDLER_TIE_WORDS: "a silent partnership", "held over them: a debt" …). The key now reaches a
+ * customer surface (the DM's), so the identity is LIT-NAME, not DARK; the row's premise ("never the key") has gone with it.
+ * The row's dark-cohort arithmetic follows: forty-two became forty-one.
+ *
  * ⭐ THE SIXTH ROW IS RETIRED BY CLAUSE S (2026-11-05, LANDING-5 under the cloud chair's ruling 3, ODQ §934.105),
  * with the cause as measured: the executed corpus's 327 proposals carry no `supersessionReason` at all, the writer
  * (proposalAdmission.js, last changed by CURE-PEACE-2 400e8e5a6 / d5eda0aa0) is unchanged, and the identity left
@@ -109,6 +116,15 @@ export const SIMULATION_FLAG_PATTERN = /^[a-z][A-Za-z0-9]*Enabled$/;
  * Rows 7 to 10 (2026-10-02, the Voice Program wave 1, ODQ §934.88) are `appliedHeadline` on candidates, selected,
  * autoApplied and outcome, engine-internal: every Herald producer now writes the deed DONE beside the deed UNDER
  * WAY (heraldDeeds.js), and the feed curation's appliedHeadlineFor is the one reader that prints it.
+ *
+ * The WIRING rows (2026-11-07, lane W6, the cloud chair's ruling R-W2 on the WIRING-0 inventory, ODQ §934.105)
+ * are the GENERATION-origin identities the inventory ruled INTERNAL that have a reader: each engine-internal, each
+ * with the consumer that reads the key named by file and line in its charter, added by section (ECO, DEF, POW,
+ * META; HIS and FTH convict none). Each charter says CONFIRMED where the consumer reads the stored record's key (or
+ * the identical object before it is stored) and PLAUSIBLE where it reads the key on the object the stored copy is
+ * spread from, or on a recomputed twin of the same producer. The INTERNAL identities with no reader, or whose
+ * writer or reader this register's clauses cannot see, stay in the shrink-only bank, reviewed, with their reasons in
+ * docs/WIRING_W6_2026-11-07.md.
  *
  * Rows 3 and 6 were Car 1's:
  * Car 0 adjudicated all six at C' (⟦G0-13⟧) and found rows 1–2 are Car 3's
@@ -137,28 +153,10 @@ export const WRITER_DARK_REGISTER = Object.freeze([
     charter: '§7 WRWALKER, the drafted register row 3, adjudicated DARK by Car 0 at C-prime',
   }),
   Object.freeze({
-    identity: 'archetypeKey on relationships',
-    key: 'archetypeKey',
-    shape: 'relationships',
-    writer: 'src/generators/npcGenerator.js',
-    reason: 'engine-internal',
-    consumer: Object.freeze({
-      file: 'src/generators/generateSettlementPipeline.js',
-      symbol: 'the rename path, which re-renders a tie\'s description and tension from its archetype key',
-    }),
-    why: 'The relationship archetype KEY is the seed of the tie\'s description and tension prose: the generator '
-      + 'writes it so the rename path can re-render both sentences for new names, and that read sits inside '
-      + 'src/generators, behind the closure STOP. Its one surface read was the Plot Hooks collector, which used it to '
-      + 'theme relationship-tension cards; the chair\'s ruling X-2 (2026-10-30, under the owner\'s delegation) moved '
-      + 'a tie\'s tension back to the Relationships tab beside its tie and dropped that card category, so what a '
-      + 'player is shown is the tension and type name the key produced, never the key.',
-    charter: 'ODQ §934.101 (the chair, 2026-10-30, ruling X-2 in docs/UX_CONSOLIDATION_2026-10-30.md), consumer CONFIRMED at generateSettlementPipeline.js:245',
-  }),
-  Object.freeze({
     identity: 'proseVariant on relationships',
     key: 'proseVariant',
     shape: 'relationships',
-    writer: 'src/generators/npcGenerator.js',
+    writer: 'src/generators/people/ties.js', // PEOPLE-4 TIES (2026-11-07, R-P7): the tie writer moved here; npcGenerator.js :: generateRelationships retired
     reason: 'engine-internal',
     consumer: Object.freeze({
       file: 'src/generators/generateSettlementPipeline.js',
@@ -170,56 +168,22 @@ export const WRITER_DARK_REGISTER = Object.freeze([
       + 'index it drew, and the rename path re-renders both sentences at that index for the new names; that read sits '
       + 'inside src/generators, behind the closure STOP. What a player is shown is the description and tension the '
       + 'index selected, never the index.',
-    charter: 'ODQ §934.101 (the chair, 2026-10-31, ruling GS-1 on G-SEAMS S1 and the G3 item-1 ruling), consumer CONFIRMED at generateSettlementPipeline.js:247',
+    charter: 'ODQ §934.101 (the chair, 2026-10-31, ruling GS-1 on G-SEAMS S1 and the G3 item-1 ruling), consumer CONFIRMED at generateSettlementPipeline.js:250',
   }),
-  Object.freeze({
-    identity: 'isolationSupport on settlement',
-    key: 'isolationSupport',
-    shape: 'settlement',
-    writer: 'src/generators/steps/assembleSettlement.js',
-    reason: 'pending-surface',
-    surface: 'web-display',
-    car: '§12 WRW-2, the owner row that rules whether the isolation-support finding is shown',
-    carArtifact: 'docs/GENERATION_CONTRACTS.md',
-    why: 'Every settlement carries a full isolation-support finding — whether the place can be supplied at all, by '
-      + 'which paths, at what tier, and what it would take to close the gap — and no component, display read model '
-      + 'or PDF reads the container. It is one of exactly three settlement-root facts that reach no customer '
-      + 'surface. This is not plumbing: it is a generated judgement about the settlement that a player would want, '
-      + 'and the owner rules whether it is shown and where. Until that ruling it is an owed car, not an exemption.',
-    charter: '§7 WRWALKER, the drafted register row 6, measured DARK by Car 0 at C-prime',
-  }),
-  Object.freeze({
-    identity: 'magicDependent on isolationSupport',
-    key: 'magicDependent',
-    shape: 'isolationSupport',
-    writer: 'src/generators/isolationSupport.js',
-    reason: 'pending-surface',
-    surface: 'web-display',
-    car: '§12 WRW-2, the owner row that rules whether the isolation-support finding is shown',
-    carArtifact: 'docs/GENERATION_CONTRACTS.md',
-    why: 'Whether a settlement depends on magic to stay supplied is a striking fact about the place, and it is one '
-      + 'of only two keys on the isolation-support shape that no surface reads even at name level — its seven '
-      + 'siblings all read LIT-NAME. That asymmetry is the evidence it was overlooked rather than declined: a '
-      + 'surface that shows the status and the tier is already in front of this fact and does not print it. The '
-      + 'owner rules it with the container it belongs to.',
-    charter: '§7 WRWALKER, the drafted register row 6, measured DARK by Car 0 at C-prime',
-  }),
-  Object.freeze({
-    identity: 'requiredCapacity on isolationSupport',
-    key: 'requiredCapacity',
-    shape: 'isolationSupport',
-    writer: 'src/generators/isolationSupport.js',
-    reason: 'pending-surface',
-    surface: 'web-display',
-    car: '§12 WRW-2, the owner row that rules whether the isolation-support finding is shown',
-    carArtifact: 'docs/GENERATION_CONTRACTS.md',
-    why: 'The capacity a settlement would REQUIRE to end its isolation is the actionable half of the finding — the '
-      + 'number that turns a status into something a player can plan against — and it reaches no surface, while the '
-      + 'deficit and capacity beside it read LIT-NAME. Showing a settlement it is isolated without showing what '
-      + 'would fix it is the half-told version of the fact, so this key rides with the container to the same owner '
-      + 'ruling rather than being banked as unreviewed.',
-    charter: '§7 WRWALKER, the drafted register row 6, measured DARK by Car 0 at C-prime',
-  }),
+  // TAIL-CLOSE-REACH-1 (2026-11-15, the close of the round): `situationDesc on economicState` LEFT this register by clause S
+  // (BANK THE WIN, the door's own text). The settlement quick guide reads the situation sentence (src/domain/summary/
+  // settlementQuickGuide.js :: composeMaterialTruth, `cleanText(economy.situationDesc)`), and EXPORTS-B24 · B2 (70047b61, the
+  // PDF's culture block) brought that FILE into the dossier-pdf closure: IdentityDailyLife.jsx imports its cultureScopeLine.
+  // The instrument's reach is file-grained, so the identity is LIT (dossier-pdf=R) and the engine-internal row is refused.
+  // MEASURED, AND SAID PLAINLY: cultureScopeLine does not call composeMaterialTruth, so no page prints the sentence today;
+  // the strike is the instrument's verdict, named in docs/chair/2026-11-15/close/TAIL-CLOSE-REACH-1-HANDBACK.md. The
+  // coherence battery's read is unchanged, and retiring the writer is still its own lane's act.
+  // W2 DEF (2026-11-07, construction C3–C5, the third seat): the three §12 WRW-2 pending-surface rows —
+  // `isolationSupport on settlement`, `magicDependent on isolationSupport`, `requiredCapacity on isolationSupport` —
+  // LEFT this register. WIRING-RULINGS R-W1 (ODQ §934.105) ruled the finding SAID, and the new block DS-DEF-12
+  // (`defenseStateProse.js :: defenseIsolationSupportProse`, mounted at `viability.isolationSupport`, drawn by
+  // ViabilityTab and the print chapter) reads all three, so each identity is LIT at web-display (clause P) and the
+  // pending-surface debt is paid. Retired with that cause; the HOLD line's debt clears with them.
   Object.freeze({
     identity: 'appliedHeadline on candidates',
     key: 'appliedHeadline',
@@ -287,6 +251,644 @@ export const WRITER_DARK_REGISTER = Object.freeze([
       + ' the stored outcome of a proposal as on every outcome they become. Its one reader is the feed curation, which prints it as the news'
       + ' entry headline once the outcome applies; what a player sees is that headline, LIT on the Herald.',
     charter: '§934.88 the Voice Program wave 1 (heraldDeeds.js), measured DARK by the walker at the program tip f33d28798',
+  }),
+  // R2-CODE-B-6 (2026-11-14): `gapPct on foodRecord` LEFT this register by clause S (BANK THE WIN). R2-CODE-B-3 item 2b
+  // (d94638185) made tonightSheet.js :: foodBandOf the food label's one home, and it reads the record's `gapPct` (a
+  // "Secure" band that leaves a share of the need unmet reads "Pressured") on the Tonight sheet and the Daily Life tile:
+  // the identity is LIT, and the row would be wrong about its own reason (engine-internal). Struck with that cause; the
+  // prosperity step's read (prosperity.js:83) is unchanged.
+  // MERGE-R2 (2026-11-07, the integration merge of the rung-2 landing): `growsMoreThanEats on foodRecord` LEFT this
+  // register. W6 (section ECO) convicted it engine-internal because its consumer, src/domain/foodSurplus.js, sat
+  // outside every surface closure; the rung-2 landing's chunk cure (computeActiveChains reads the food gate from
+  // domain/foodSurplus.js, LANDING-R2 phase 2 step 4) brought that file inside the dossier-pdf closure, so at the
+  // merged tip the identity is LIT and the row would be wrong about its own reason (clause E). Retired with that cause.
+  // W4 PEOPLE second seat (2026-11-07, DS-CND-1, the stress type in the pool key, STYLE-RULINGS §1a): `isSurplus on
+  // foodSecurity` LEFT this register. Its consumer, src/domain/conditionPromotion.js, entered the dossier-pdf closure when
+  // the condition desk (stressorsStateProse.js :: conditionCrisisKind) began reading `archetypeForStressor` to name the
+  // crisis a condition was promoted from; at this tip the identity is LIT and the row would be wrong about its own reason
+  // (clause E). Retired with that cause, as MERGE-R2 retired `growsMoreThanEats on foodRecord` above.
+  Object.freeze({
+    identity: 'effectiveAgriculture on foodSecurity',
+    key: 'effectiveAgriculture',
+    shape: 'foodSecurity',
+    writer: 'src/generators/foodGenerator.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/generators/economy/foodBalance.js',
+      symbol: 'the food record builder, which takes the land\'s effective farming multiplier as its agriculture '
+        + 'modifier',
+    }),
+    why: 'The multiplier the land\'s farming capacity actually produced food at: a raw input to the daily '
+      + 'production the food ledger prints. The food record builder reads it (foodBalance.js:609) inside '
+      + 'src/generators behind the closure STOP; what a player sees is the production and the band it yields, '
+      + 'never the multiplier.',
+    charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
+      + 'W6, section ECO), consumer CONFIRMED at src/generators/economy/foodBalance.js:609',
+  }),
+  Object.freeze({
+    identity: 'cascadeAdded on institutions',
+    key: 'cascadeAdded',
+    shape: 'institutions',
+    writer: 'src/generators/cascadeGenerator.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/domain/generationOwnership.js',
+      symbol: 'hasCascadeProvenance, the provenance law regeneration and the borrowed-seat clear read',
+    }),
+    why: 'The record\'s own account of how it arrived: true when a cascade second-chance roll added the '
+      + 'institution. The provenance law reads it (generationOwnership.js:119) so regeneration knows the row '
+      + 'is generated and the tier outcome can clear a borrowed seat; plumbing, not a fact about the town, '
+      + 'which is shown its roster.',
+    charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
+      + 'W6, section ECO), consumer CONFIRMED at src/domain/generationOwnership.js:119',
+  }),
+  Object.freeze({
+    identity: 'exclusiveGroupCoexists on institutions',
+    key: 'exclusiveGroupCoexists',
+    shape: 'institutions',
+    writer: 'src/data/institutionalCatalog.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/generators/structuralValidator.js',
+      symbol: 'the exclusive-group check, which exempts a row whose group may coexist (several monastic houses in a '
+        + 'city)',
+    }),
+    why: 'A catalog rule copied onto the row: this institution may share its exclusive group with siblings. '
+      + 'The structural validator reads it on the settlement\'s roster (structuralValidator.js:833) so a city '
+      + 'may keep several monasteries without a violation; what a player sees is the roster, never the rule.',
+    charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
+      + 'W6, section ECO), consumer CONFIRMED at src/generators/structuralValidator.js:833',
+  }),
+  Object.freeze({
+    identity: 'forbiddenResources on institutions',
+    key: 'forbiddenResources',
+    shape: 'institutions',
+    writer: 'src/data/institutionalCatalog.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/generators/steps/assembleInstitutions.js',
+      symbol: 'rowRoll, the assembler\'s eligibility roll, which reads the catalog rule before the row is admitted',
+    }),
+    why: 'A catalog eligibility rule, not a fact about the town: the institution catalog carries '
+      + '`forbiddenResources` on its row, and the row is spread onto the settlement\'s institutions record '
+      + 'whole. Its reader is the roster assembler\'s eligibility roll (rowRoll), which reads the rule on the '
+      + 'catalog row before that row is admitted and copied, inside src/generators behind the closure STOP. '
+      + 'What a player is shown is the roster the rule produced, never the rule; the stored copy itself is '
+      + 'not re-read.',
+    charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
+      + 'W6, section ECO), consumer PLAUSIBLE at src/generators/steps/assembleInstitutions.js:296',
+  }),
+  Object.freeze({
+    identity: 'forbiddenTradeRoutes on institutions',
+    key: 'forbiddenTradeRoutes',
+    shape: 'institutions',
+    writer: 'src/data/institutionalCatalog.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/generators/steps/assembleInstitutions.js',
+      symbol: 'rowRoll, the assembler\'s eligibility roll, which reads the catalog rule before the row is admitted',
+    }),
+    why: 'A catalog eligibility rule, not a fact about the town: the institution catalog carries '
+      + '`forbiddenTradeRoutes` on its row, and the row is spread onto the settlement\'s institutions record '
+      + 'whole. Its reader is the roster assembler\'s eligibility roll (rowRoll), which reads the rule on the '
+      + 'catalog row before that row is admitted and copied, inside src/generators behind the closure STOP. '
+      + 'What a player is shown is the roster the rule produced, never the rule; the stored copy itself is '
+      + 'not re-read.',
+    charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
+      + 'W6, section ECO), consumer PLAUSIBLE at src/generators/steps/assembleInstitutions.js:291',
+  }),
+  Object.freeze({
+    identity: 'terrainAccess on institutions',
+    key: 'terrainAccess',
+    shape: 'institutions',
+    writer: 'src/data/institutionalCatalog.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/generators/steps/assembleInstitutions.js',
+      symbol: 'rowRoll, the assembler\'s eligibility roll, which reads the catalog rule before the row is admitted',
+    }),
+    why: 'A catalog eligibility rule, not a fact about the town: the institution catalog carries '
+      + '`terrainAccess` on its row, and the row is spread onto the settlement\'s institutions record whole. '
+      + 'Its reader is the roster assembler\'s eligibility roll (rowRoll), which reads the rule on the catalog '
+      + 'row before that row is admitted and copied, inside src/generators behind the closure STOP. What a '
+      + 'player is shown is the roster the rule produced, never the rule; the stored copy itself is not '
+      + 're-read.',
+    charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
+      + 'W6, section ECO), consumer PLAUSIBLE at src/generators/steps/assembleInstitutions.js:288',
+  }),
+  Object.freeze({
+    identity: 'terrainRequired on institutions',
+    key: 'terrainRequired',
+    shape: 'institutions',
+    writer: 'src/data/institutionalCatalog.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/generators/steps/assembleInstitutions.js',
+      symbol: 'rowRoll, the assembler\'s eligibility roll, which reads the catalog rule before the row is admitted',
+    }),
+    why: 'A catalog eligibility rule, not a fact about the town: the institution catalog carries '
+      + '`terrainRequired` on its row, and the row is spread onto the settlement\'s institutions record whole. '
+      + 'Its reader is the roster assembler\'s eligibility roll (rowRoll), which reads the rule on the catalog '
+      + 'row before that row is admitted and copied, inside src/generators behind the closure STOP. What a '
+      + 'player is shown is the roster the rule produced, never the rule; the stored copy itself is not '
+      + 're-read.',
+    charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
+      + 'W6, section ECO), consumer PLAUSIBLE at src/generators/steps/assembleInstitutions.js:292',
+  }),
+  Object.freeze({
+    identity: 'tradeRouteRequired on institutions',
+    key: 'tradeRouteRequired',
+    shape: 'institutions',
+    writer: 'src/data/institutionalCatalog.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/generators/steps/assembleInstitutions.js',
+      symbol: 'rowRoll, the assembler\'s eligibility roll, which reads the catalog rule before the row is admitted',
+    }),
+    why: 'A catalog eligibility rule, not a fact about the town: the institution catalog carries '
+      + '`tradeRouteRequired` on its row, and the row is spread onto the settlement\'s institutions record '
+      + 'whole. Its reader is the roster assembler\'s eligibility roll (rowRoll), which reads the rule on the '
+      + 'catalog row before that row is admitted and copied, inside src/generators behind the closure STOP. '
+      + 'What a player is shown is the roster the rule produced, never the rule; the stored copy itself is '
+      + 'not re-read.',
+    charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
+      + 'W6, section ECO), consumer PLAUSIBLE at src/generators/steps/assembleInstitutions.js:286',
+  }),
+  // W7 HOOKS (2026-11-07, the owner's style law of 2026-11-07, WAVE-RULINGS item 1): `dependencyCount on metrics` LEFT
+  // this register. The PDF and Foundry viability headline (src/pdf/lib/headlines.js :: viabilityHeadline) now says the
+  // count in words ("Viable, as long as the two trade routes it depends on stay open"), so the identity is LIT on
+  // dossier-pdf, foundry and web-display (clause S: a row that outlives its darkness is struck). Retired with that cause.
+  Object.freeze({
+    identity: 'warningCount on metrics',
+    key: 'warningCount',
+    shape: 'metrics',
+    writer: 'src/generators/economy/viability.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/domain/edit/recordInvariants.js',
+      symbol: 'the V-WARNCOUNT invariant, which checks the stored count against the warning list it counts',
+    }),
+    why: 'A count of a list printed in its own right (the structural warnings). The record invariants read it '
+      + '(recordInvariants.js:338, V-WARNCOUNT) to prove the stored count still agrees with the list after an '
+      + 'edit; a consistency check, not a customer fact, since the warnings themselves are what a player '
+      + 'reads.',
+    charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
+      + 'W6, section ECO), consumer CONFIRMED at src/domain/edit/recordInvariants.js:338',
+  }),
+  // MERGE-R2 (2026-11-07): `randomDepletionEligible on resourceConditions` LEFT this register by clause S (BANK THE WIN):
+  // at the merged tip the identity is LIT-NAME — the rung-2 landing's closures reach a reader that names the key
+  // (its writer-reach row reads dossier-pdf=N foundry=N on that side, web-transitive=N alone on the integration side
+  // that registered it, W6 ECO ba1737b88). Struck with that cause (PLAUSIBLE: the surface that names it is the tool's).
+  // W2 DEF (2026-11-07, the third seat): `magicDependent on _isolationSupport` and `requiredCapacity on
+  // _isolationSupport` LEFT this register by clause S. W6 (section DEF) convicted them engine-internal (the
+  // structural validator reads the effective-config twin); once DS-DEF-12 read the settlement's own
+  // `isolationSupport.{magicDependent, requiredCapacity}` on the Viability tab, the same key names are read inside
+  // the web-display closure and both twins grade LIT-NAME, not DARK. Retired with that cause; the validator's read
+  // is unchanged.
+  Object.freeze({
+    identity: 'cascadeAdded on charter',
+    key: 'cascadeAdded',
+    shape: 'charter',
+    writer: 'src/generators/cascadeGenerator.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/domain/generationOwnership.js',
+      symbol: 'hasCascadeProvenance, the provenance law that reads the stamp on an institution record',
+    }),
+    why: 'The cascade provenance stamp, carried on the defence profile\'s charter bucket because that bucket '
+      + 'holds the institution rows themselves (defenseInstitutionBuckets.js filters the roster by '
+      + 'reference). Its reader is the provenance law hasCascadeProvenance, which reads the stamp on an '
+      + 'institution record so regeneration and the borrowed-seat clear know the row arrived by a cascade '
+      + 'roll. Plumbing, not a fact about the town; the bucket\'s own saved copy is not re-read.',
+    charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
+      + 'W6, section DEF), consumer PLAUSIBLE at src/domain/generationOwnership.js:119',
+  }),
+  Object.freeze({
+    identity: 'cascadeAdded on garrison',
+    key: 'cascadeAdded',
+    shape: 'garrison',
+    writer: 'src/generators/cascadeGenerator.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/domain/generationOwnership.js',
+      symbol: 'hasCascadeProvenance, the provenance law that reads the stamp on an institution record',
+    }),
+    why: 'The cascade provenance stamp, carried on the defence profile\'s garrison bucket because that bucket '
+      + 'holds the institution rows themselves (defenseInstitutionBuckets.js filters the roster by '
+      + 'reference). Its reader is the provenance law hasCascadeProvenance, which reads the stamp on an '
+      + 'institution record so regeneration and the borrowed-seat clear know the row arrived by a cascade '
+      + 'roll. Plumbing, not a fact about the town; the bucket\'s own saved copy is not re-read.',
+    charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
+      + 'W6, section DEF), consumer PLAUSIBLE at src/domain/generationOwnership.js:119',
+  }),
+  Object.freeze({
+    identity: 'cascadeAdded on magicDef',
+    key: 'cascadeAdded',
+    shape: 'magicDef',
+    writer: 'src/generators/cascadeGenerator.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/domain/generationOwnership.js',
+      symbol: 'hasCascadeProvenance, the provenance law that reads the stamp on an institution record',
+    }),
+    why: 'The cascade provenance stamp, carried on the defence profile\'s magicDef bucket because that bucket '
+      + 'holds the institution rows themselves (defenseInstitutionBuckets.js filters the roster by '
+      + 'reference). Its reader is the provenance law hasCascadeProvenance, which reads the stamp on an '
+      + 'institution record so regeneration and the borrowed-seat clear know the row arrived by a cascade '
+      + 'roll. Plumbing, not a fact about the town; the bucket\'s own saved copy is not re-read.',
+    charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
+      + 'W6, section DEF), consumer PLAUSIBLE at src/domain/generationOwnership.js:119',
+  }),
+  Object.freeze({
+    identity: 'cascadeAdded on walls',
+    key: 'cascadeAdded',
+    shape: 'walls',
+    writer: 'src/generators/cascadeGenerator.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/domain/generationOwnership.js',
+      symbol: 'hasCascadeProvenance, the provenance law that reads the stamp on an institution record',
+    }),
+    why: 'The cascade provenance stamp, carried on the defence profile\'s walls bucket because that bucket '
+      + 'holds the institution rows themselves (defenseInstitutionBuckets.js filters the roster by '
+      + 'reference). Its reader is the provenance law hasCascadeProvenance, which reads the stamp on an '
+      + 'institution record so regeneration and the borrowed-seat clear know the row arrived by a cascade '
+      + 'roll. Plumbing, not a fact about the town; the bucket\'s own saved copy is not re-read.',
+    charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
+      + 'W6, section DEF), consumer PLAUSIBLE at src/domain/generationOwnership.js:119',
+  }),
+  Object.freeze({
+    identity: 'cellA on gates',
+    key: 'cellA',
+    shape: 'gates',
+    writer: 'src/domain/spatial/spatialDigest.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/domain/worldPulse/demographicsLand.js',
+      symbol: 'the land-demographics reader, which takes the parent territory\'s own crossing cell from the gate',
+    }),
+    why: 'A map grid cell id: one side of the cheapest border crossing between two territories, built once at '
+      + 'the campaign\'s canonize. The land-demographics reader takes the parent\'s own crossing cell from the '
+      + 'gate (demographicsLand.js:223); grid ids are engine coordinates, and a player is shown the routes '
+      + 'and neighbours they produce, never a cell number.',
+    charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
+      + 'W6, section DEF), consumer CONFIRMED at src/domain/worldPulse/demographicsLand.js:223',
+  }),
+  Object.freeze({
+    identity: 'cellB on gates',
+    key: 'cellB',
+    shape: 'gates',
+    writer: 'src/domain/spatial/spatialDigest.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/domain/worldPulse/demographicsLand.js',
+      symbol: 'the land-demographics reader, which takes the parent territory\'s own crossing cell from the gate',
+    }),
+    why: 'A map grid cell id: one side of the cheapest border crossing between two territories, built once at '
+      + 'the campaign\'s canonize. The land-demographics reader takes the parent\'s own crossing cell from the '
+      + 'gate (demographicsLand.js:223); grid ids are engine coordinates, and a player is shown the routes '
+      + 'and neighbours they produce, never a cell number.',
+    charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
+      + 'W6, section DEF), consumer CONFIRMED at src/domain/worldPulse/demographicsLand.js:223',
+  }),
+  Object.freeze({
+    identity: 'forbiddenTradeRoutes on magicDef',
+    key: 'forbiddenTradeRoutes',
+    shape: 'magicDef',
+    writer: 'src/data/institutionalCatalog.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/generators/steps/assembleInstitutions.js',
+      symbol: 'rowRoll, the assembler\'s eligibility roll, which reads the catalog rule before the row is admitted',
+    }),
+    why: 'A catalog eligibility rule, not a fact about the town: the institution catalog carries '
+      + '`forbiddenTradeRoutes` on its row, and the row is spread onto the settlement\'s magical-defence '
+      + 'record whole. Its reader is the roster assembler\'s eligibility roll (rowRoll), which reads the rule '
+      + 'on the catalog row before that row is admitted and copied, inside src/generators behind the closure '
+      + 'STOP. What a player is shown is the roster the rule produced, never the rule; the stored copy itself '
+      + 'is not re-read.',
+    charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
+      + 'W6, section DEF), consumer PLAUSIBLE at src/generators/steps/assembleInstitutions.js:291',
+  }),
+  Object.freeze({
+    identity: 'locks on campaignState',
+    key: 'locks',
+    shape: 'campaignState',
+    writer: 'src/lib/saves.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/hooks/useReaderAudience.js',
+      symbol: 'the reader-audience hook, which asks whether any save carries a regeneration lock',
+    }),
+    why: 'The user\'s own "keep this" locks for regeneration: editor and regen plumbing, minted empty at save '
+      + 'birth. The reader-audience hook reads campaignState.locks across saves (useReaderAudience.js:173) '
+      + 'and the regen path preserves what they name; a lock is the user\'s instruction to the engine, not a '
+      + 'fact about the town.',
+    charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
+      + 'W6, section POW), consumer CONFIRMED at src/hooks/useReaderAudience.js:173',
+  }),
+  Object.freeze({
+    identity: 'generatedAs on npcs',
+    key: 'generatedAs',
+    shape: 'npcs',
+    writer: 'src/generators/factionRoles.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/domain/worldPulse/magicFormsPractitioner.js',
+      symbol: 'isMagicPractitioner, which reads the provenance marker before classifying a person by role',
+    }),
+    why: 'A provenance marker naming the generator path that minted the person (faction_structural, instant, '
+      + 'practitioner), written "for migration and debugging". The practitioner law reads it '
+      + '(magicFormsPractitioner.js:127) to recognise a person its own lane minted; the player is shown the '
+      + 'person, their role and their office, never the path that made them.',
+    charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
+      + 'W6, section POW), consumer CONFIRMED at src/domain/worldPulse/magicFormsPractitioner.js:127',
+  }),
+  // PEOPLE-5B (2026-11-07, M-7): `generatedAs on members` LEFT — the grouping's member copy (`factions[].members[]`)
+  // left the record, so no shape carries the identity; the marker on the card itself is `generatedAs on npcs` above.
+  Object.freeze({
+    identity: '_routeIntent on config',
+    key: '_routeIntent',
+    shape: 'config',
+    writer: 'src/generators/steps/resolveConfig.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/generators/structuralValidator.js',
+      symbol: 'the isolation check, which treats an explicitly chosen isolated route as the DM\'s intent',
+    }),
+    why: 'Provenance of the user\'s choice: whether the trade route was rolled at random or chosen. The '
+      + 'structural validator reads it (structuralValidator.js:699) so an isolation the DM chose is not '
+      + 'repaired away; the route itself is LIT, and the user already knows whether they chose it.',
+    charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
+      + 'W6, section META), consumer CONFIRMED at src/generators/structuralValidator.js:699',
+  }),
+  Object.freeze({
+    identity: 'nearbyResourceDefinitions on config',
+    key: 'nearbyResourceDefinitions',
+    shape: 'config',
+    writer: 'src/generators/steps/resolveResources.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/generators/foodLand.js',
+      symbol: 'the food writer\'s land reader (foodLand.js :: foodLandOf, moved from foodGenerator.js by GREEN-TIP '
+        + 'b46048140, the cycle cure), which reads the custom resource definitions to count the food a custom resource '
+        + 'yields',
+    }),
+    why: 'Content identity sidecars (refId and localUid) for custom nearby resources, so a custom resource '
+      + 'keeps its identity through regeneration and import. The food writer\'s land reader reads them on the config '
+      + '(foodLand.js :: foodLandOf); the resource NAMES are LIT through nearbyResources, and an identity sidecar '
+      + 'is not a fact a player reads.',
+    charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
+      + 'W6, section META), consumer CONFIRMED at src/generators/foodGenerator.js:85; the read moved verbatim to src/generators/foodLand.js :: foodLandOf (GREEN-TIP b46048140)',
+  }),
+  Object.freeze({
+    identity: 'nearbyResourceDefinitionsDepleted on config',
+    key: 'nearbyResourceDefinitionsDepleted',
+    shape: 'config',
+    writer: 'src/generators/steps/resolveResources.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/generators/foodLand.js',
+      symbol: 'the food writer\'s land reader (foodLand.js :: foodLandOf, moved from foodGenerator.js by GREEN-TIP '
+        + 'b46048140, the cycle cure), which reads the custom resource definitions to count the food a custom resource '
+        + 'yields',
+    }),
+    why: 'Content identity sidecars (refId and localUid) for custom nearby resources, so a custom resource '
+      + 'keeps its identity through regeneration and import. The food writer\'s land reader reads them on the config '
+      + '(foodLand.js :: foodLandOf); the resource NAMES are LIT through nearbyResources, and an identity sidecar '
+      + 'is not a fact a player reads.',
+    charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
+      + 'W6, section META), consumer CONFIRMED at src/generators/foodGenerator.js:90; the read moved verbatim to src/generators/foodLand.js :: foodLandOf (GREEN-TIP b46048140)',
+  }),
+  Object.freeze({
+    identity: 'slavery on contentBoundaries',
+    key: 'slavery',
+    shape: 'contentBoundaries',
+    writer: 'src/domain/generationContentProfile.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/generators/economy/economicState.js',
+      symbol: 'the slave-trade export gate, which may draw that trade only where both boundaries allow it',
+    }),
+    why: 'A generation content gate the user set in the configuration panel: whether this theme may appear in '
+      + 'generated content. The economy reads the resolved profile\'s boundary (economicState.js:600-601) '
+      + 'before it may draw a slave trade; the stored config copy is spread from that same profile '
+      + '(resolveConfig.js:208) and is not itself re-read. A permission is not a fact about the world.',
+    charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
+      + 'W6, section META), consumer PLAUSIBLE at src/generators/economy/economicState.js:600',
+  }),
+  Object.freeze({
+    identity: 'human_trafficking on contentBoundaries',
+    key: 'human_trafficking',
+    shape: 'contentBoundaries',
+    writer: 'src/domain/generationContentProfile.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/generators/economy/economicState.js',
+      symbol: 'the slave-trade export gate, which may draw that trade only where both boundaries allow it',
+    }),
+    why: 'A generation content gate the user set in the configuration panel: whether this theme may appear in '
+      + 'generated content. The economy reads the resolved profile\'s boundary (economicState.js:600-601) '
+      + 'before it may draw a slave trade; the stored config copy is spread from that same profile '
+      + '(resolveConfig.js:208) and is not itself re-read. A permission is not a fact about the world.',
+    charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
+      + 'W6, section META), consumer PLAUSIBLE at src/generators/economy/economicState.js:601',
+  }),
+  Object.freeze({
+    identity: 'anyActive on flags',
+    key: 'anyActive',
+    shape: 'flags',
+    writer: 'src/generators/priorityHelpers.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/generators/people/ties.js',
+      symbol: 'the one-tie draw (drawTies), which reads the compound-situation summary flag to mark a stress-born tie',
+    }),
+    why: 'A derived gate: the OR of the compound-situation flags beside it. getStressFlags writes it, and the '
+      + 'NPC tie draw reads it on its own call of the same producer (ties.js:111, :143; PEOPLE-4 TIES moved it from npcGenerator.js); '
+      + 'the stored copy on the safety profile is not itself re-read. The flags it summarises are the facts '
+      + '(W2, W34 say them); their OR is not.',
+    charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
+      + 'W6, section META), consumer PLAUSIBLE at src/generators/people/ties.js:143',
+  }),
+  Object.freeze({
+    identity: 'religion on raw',
+    key: 'religion',
+    shape: 'raw',
+    writer: 'src/generators/priorityHelpers.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/generators/priorityHelpers.js',
+      symbol: 'getInstFlags, which reads the religion slider into religionInfluence on the object it stores as raw',
+    }),
+    why: 'The raw religion priority slider, a copy of config.priorityReligion, which is LIT. getInstFlags '
+      + 'reads it (priorityHelpers.js:356, :422) to compute religionInfluence on the very object it then '
+      + 'stores as raw (:446); what drives the town is the computed influence, and the slider is the DM\'s own '
+      + 'input.',
+    charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
+      + 'W6, section META), consumer CONFIRMED at src/generators/priorityHelpers.js:422',
+  }),
+  Object.freeze({
+    identity: 'religion on priorities',
+    key: 'religion',
+    shape: 'priorities',
+    writer: 'src/generators/priorityHelpers.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/generators/economy/viability.js',
+      symbol: 'the viability expectation check, which reads the religion priority to expect a religious centre',
+    }),
+    why: 'The religion priority slider again, copied onto economicState.priorities by getPriorities; the LIT '
+      + 'fact is config.priorityReligion. The viability check reads the slider on its own getPriorities call '
+      + '(viability.js:208, :333) to expect a religious centre; the stored copy is not itself re-read.',
+    charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
+      + 'W6, section META), consumer PLAUSIBLE at src/generators/economy/viability.js:333',
+  }),
+  // TAIL-CLOSE-REACH-1 (2026-11-15, the close of the round; the chair's ruling WR1, record 455): the eight identities
+  // of the round's thirty-four newly DARK ones that HAVE an engine reader this register's clauses can verify (a
+  // write in a measured spelling, a code read outside every counting closure). The rest went to the bank through the
+  // one governed growth door, each named in docs/chair/2026-11-15/close/TAIL-CLOSE-REACH-1-HANDBACK.md.
+  Object.freeze({
+    identity: 'criminalPreStress on compound',
+    key: 'criminalPreStress',
+    shape: 'compound',
+    writer: 'src/generators/priorityHelpers.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/generators/defenseGenerator.js',
+      symbol: 'the defence profile\'s Crime part, which starts from the crime reading before the stress multiplier',
+    }),
+    why: 'The crime reading before the stress multiplier, stamped on the economy\'s institution flags '
+      + '(economicState.compound). The defence generator\'s Crime part reads it (defenseGenerator.js:243, '
+      + 'flags.criminalPreStress) and multiplies in each crisis row\'s crime effect; that read is on its own '
+      + 'getInstFlags call, the recomputed twin of the stored copy, inside src/generators behind the closure STOP. '
+      + 'What a player sees is the crime score the reading yields, never the reading.',
+    charter: '§934 the chair\'s ruling WR1 of 2026-11-15 (the close of the round; the chair\'s record 455), consumer '
+      + 'PLAUSIBLE at src/generators/defenseGenerator.js:243',
+  }),
+  Object.freeze({
+    identity: 'recallTargetId on metadata',
+    key: 'recallTargetId',
+    shape: 'metadata',
+    writer: 'src/domain/worldPulse/settlementStrategy.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/domain/worldPulse/applyWorldPulse.js',
+      symbol: 'the pulse applier, which stamps a deployment\'s recall when a return-home outcome applies',
+    }),
+    why: 'The save id of the war a strategy_return_home outcome calls its army home from. The settlement strategy '
+      + 'stamps it on the outcome\'s metadata (settlementStrategy.js:1152), and the pulse applier reads it '
+      + '(applyWorldPulse.js:928) to stamp the deployment\'s recall; that is the simulation, outside every counting '
+      + 'closure. What a player sees is the army coming home, never the id. On metadata: the metadata itself.',
+    charter: '§934 the chair\'s ruling WR1 of 2026-11-15 (the close of the round; the chair\'s record 455), consumer '
+      + 'CONFIRMED at src/domain/worldPulse/applyWorldPulse.js:928',
+  }),
+  Object.freeze({
+    identity: 'recallTargetId on selected',
+    key: 'recallTargetId',
+    shape: 'selected',
+    writer: 'src/domain/worldPulse/settlementStrategy.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/domain/worldPulse/applyWorldPulse.js',
+      symbol: 'the pulse applier, which stamps a deployment\'s recall when a return-home outcome applies',
+    }),
+    why: 'The save id of the war a strategy_return_home outcome calls its army home from. The settlement strategy '
+      + 'stamps it on the outcome\'s metadata (settlementStrategy.js:1152), and the pulse applier reads it '
+      + '(applyWorldPulse.js:928) to stamp the deployment\'s recall; that is the simulation, outside every counting '
+      + 'closure. What a player sees is the army coming home, never the id. On selected: the stored outcome that '
+      + 'carries the metadata the applier reads.',
+    charter: '§934 the chair\'s ruling WR1 of 2026-11-15 (the close of the round; the chair\'s record 455), consumer '
+      + 'PLAUSIBLE at src/domain/worldPulse/applyWorldPulse.js:928',
+  }),
+  Object.freeze({
+    identity: 'recallTargetId on autoApplied',
+    key: 'recallTargetId',
+    shape: 'autoApplied',
+    writer: 'src/domain/worldPulse/settlementStrategy.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/domain/worldPulse/applyWorldPulse.js',
+      symbol: 'the pulse applier, which stamps a deployment\'s recall when a return-home outcome applies',
+    }),
+    why: 'The save id of the war a strategy_return_home outcome calls its army home from. The settlement strategy '
+      + 'stamps it on the outcome\'s metadata (settlementStrategy.js:1152), and the pulse applier reads it '
+      + '(applyWorldPulse.js:928) to stamp the deployment\'s recall; that is the simulation, outside every counting '
+      + 'closure. What a player sees is the army coming home, never the id. On autoApplied: the stored outcome that '
+      + 'carries the metadata the applier reads.',
+    charter: '§934 the chair\'s ruling WR1 of 2026-11-15 (the close of the round; the chair\'s record 455), consumer '
+      + 'PLAUSIBLE at src/domain/worldPulse/applyWorldPulse.js:928',
+  }),
+  Object.freeze({
+    identity: 'rivalTriumphBand on warTerminationReads',
+    key: 'rivalTriumphBand',
+    shape: 'warTerminationReads',
+    writer: 'src/domain/worldPulse/warTermination.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/domain/worldPulse/warRulingsEvidence.js',
+      symbol: 'hasRivalTriumph, which asks whether a rival stands to profit before a peace is credited',
+    }),
+    why: 'The band (present, pressing, decisive) of a rival\'s chance to profit if a war ends now, copied from the '
+      + 'seat\'s books onto the war termination read (warTermination.js:930). The war rulings evidence reads it '
+      + '(warRulingsEvidence.js:51, hasRivalTriumph) to decide whether a peace was earned by the realm; that is the '
+      + 'simulation\'s ruling plumbing, outside every counting closure. What a player sees is the war\'s outcome, never'
+      + ' the band. On warTerminationReads: the read itself.',
+    charter: '§934 the chair\'s ruling WR1 of 2026-11-15 (the close of the round; the chair\'s record 455), consumer '
+      + 'CONFIRMED at src/domain/worldPulse/warRulingsEvidence.js:51',
+  }),
+  Object.freeze({
+    identity: 'rivalTriumphBand on metadata',
+    key: 'rivalTriumphBand',
+    shape: 'metadata',
+    writer: 'src/domain/worldPulse/warTermination.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/domain/worldPulse/warRulingsEvidence.js',
+      symbol: 'hasRivalTriumph, which asks whether a rival stands to profit before a peace is credited',
+    }),
+    why: 'The band (present, pressing, decisive) of a rival\'s chance to profit if a war ends now, copied from the '
+      + 'seat\'s books onto the war termination read (warTermination.js:930). The war rulings evidence reads it '
+      + '(warRulingsEvidence.js:51, hasRivalTriumph) to decide whether a peace was earned by the realm; that is the '
+      + 'simulation\'s ruling plumbing, outside every counting closure. What a player sees is the war\'s outcome, never'
+      + ' the band. On metadata: a stored copy of the read.',
+    charter: '§934 the chair\'s ruling WR1 of 2026-11-15 (the close of the round; the chair\'s record 455), consumer '
+      + 'PLAUSIBLE at src/domain/worldPulse/warRulingsEvidence.js:51',
+  }),
+  Object.freeze({
+    identity: 'rivalTriumphBand on pulseHistory',
+    key: 'rivalTriumphBand',
+    shape: 'pulseHistory',
+    writer: 'src/domain/worldPulse/warTermination.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/domain/worldPulse/warRulingsEvidence.js',
+      symbol: 'hasRivalTriumph, which asks whether a rival stands to profit before a peace is credited',
+    }),
+    why: 'The band (present, pressing, decisive) of a rival\'s chance to profit if a war ends now, copied from the '
+      + 'seat\'s books onto the war termination read (warTermination.js:930). The war rulings evidence reads it '
+      + '(warRulingsEvidence.js:51, hasRivalTriumph) to decide whether a peace was earned by the realm; that is the '
+      + 'simulation\'s ruling plumbing, outside every counting closure. What a player sees is the war\'s outcome, never'
+      + ' the band. On pulseHistory: a stored copy of the read.',
+    charter: '§934 the chair\'s ruling WR1 of 2026-11-15 (the close of the round; the chair\'s record 455), consumer '
+      + 'PLAUSIBLE at src/domain/worldPulse/warRulingsEvidence.js:51',
+  }),
+  Object.freeze({
+    identity: 'warReturnedSettlementIds on pulseHistory',
+    key: 'warReturnedSettlementIds',
+    shape: 'pulseHistory',
+    writer: 'src/domain/worldPulse/pulseKernel.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/domain/worldPulse/applyWorldPulse.js',
+      symbol: 'the pulse applier, which asks whether a besieger came home this tick',
+    }),
+    why: 'The save ids of the settlements whose armies came home on a pulse, stamped on the pulse\'s history record '
+      + '(pulseKernel.js:2930). The pulse applier reads the current tick\'s record (applyWorldPulse.js:435) to know '
+      + 'whether a besieger has gone home before it holds a coalition obligation; that is the simulation, outside '
+      + 'every counting closure. What a player sees is the homecoming, never the id list.',
+    charter: '§934 the chair\'s ruling WR1 of 2026-11-15 (the close of the round; the chair\'s record 455), consumer '
+      + 'CONFIRMED at src/domain/worldPulse/applyWorldPulse.js:435',
   }),
 ]);
 

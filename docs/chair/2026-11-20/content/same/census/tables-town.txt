@@ -1,0 +1,1241 @@
+# town: table (a) ONE A PLACE (sentences per place <= 1.5), by top share — 177 rows
+hold  dist  /plc    top share  seen  class       slot
+ 50     1   1.0  50/50 1.00 1.000 LABEL       web:Summary/Overview | COMPOSED@Tensions & Conflicts  [src/copy/sectionHelp.js]
+      top: Who is at odds with whom, and how badly.
+      why: the page's own words (sectionHelp.js)
+ 50     1   1.0  50/50 1.00 1.000 LABEL       web:Systems/Economics | COMPOSED@Economic Flows  [src/copy/sectionHelp.js]
+      top: What is made here and what it depends on.
+      why: the page's own words (sectionHelp.js)
+ 50     1   1.0  50/50 1.00 1.000 LABEL       web:World/Daily Life | COMPOSED@(none)  [src/components/new/tabs/DailyLifeTab.jsx]
+      top: Generate Daily Life: Narrative refinement
+      why: hand: DailyLifeTab.jsx: the tab's generate button and its caption
+ 50     1   1.0  50/50 1.00 1.000 LABEL       web:World/War | COMPOSED@(none)  [src/components/new/tabs/WarTab.jsx]
+      top: From here you raise #'s troops, send them out, call them home, and read what they report back.
+      why: hand: WarTab.jsx: the tab's fixed introduction
+ 50     1   1.0  50/50 1.00 1.000 LABEL       web:Notes/DM Notes | COMPOSED@(none)  [src/domain/display/guidanceRegistry.js]
+      top: Save this settlement to keep your notes with it.
+      why: hand: guidanceRegistry.js: a help line (save to keep notes)
+ 50     3   1.0  50/50 1.00 0.980 CATALOGUE   pdf:canon_dossier | availableServices.lodging[].desc  [unfound]
+      top: Quality varies by establishment.
+      why: availableServices.lodging[].desc: a house's or service's own definition
+ 50     1   1.0  50/50 1.00 1.000 LABEL       pdf:canon_dossier | COMPOSED@Timeline  [unfound]
+      top: What has happened here since your campaign began.
+      why: hand: the PDF timeline's caption
+ 50     3   1.0  50/50 1.00 0.980 CATALOGUE   pdf:draft_brief | availableServices.lodging[].desc  [unfound]
+      top: Quality varies by establishment.
+      why: availableServices.lodging[].desc: a house's or service's own definition
+ 50     1   1.0  50/50 1.00 1.000 LABEL       pdf:timeline_packet | COMPOSED@Timeline  [unfound]
+      top: What has happened here since your campaign began.
+      why: hand: the PDF timeline's caption
+ 47     1   1.0  47/47 1.00 1.000 LABEL       pdf:canon_dossier | npcs[].role  [src/data/faceHonorifics.js]
+      top: the senior craft-guild master
+      why: hand: faceHonorifics.js: a person's role title
+      paths: npcs[].role, npcs[].title, npcs[].institution.title, relationships[].npc1Role, relationships[].npc2Role
+ 47     1   1.0  47/47 1.00 1.000 LABEL       pdf:draft_brief | npcs[].role  [src/data/faceHonorifics.js]
+      top: the senior craft-guild master
+      why: hand: faceHonorifics.js: a person's role title
+      paths: npcs[].role, npcs[].title, npcs[].institution.title, relationships[].npc1Role, relationships[].npc2Role
+ 30     1   1.0  30/30 1.00 1.000 STATE       web:Systems/Outlook | publicProse.blocks.general:viability.verdictLines[]  [src/data/dossierStateProse/general.generated.js]
+      top: A handful of things about this town cannot all be true at once, and everyone here has their own explanation.
+      why: hand: printProse.js verdictLines: the viability verdict's band to its lines
+ 17     1   1.0  17/17 1.00 1.000 CATALOGUE   pdf:canon_dossier | availableServices.legal[].name  [src/data/crisisDependence.js]
+      top: Cargo loading and unloading
+      why: availableServices.legal[].name: a house's or service's own definition
+ 17     1   1.0  17/17 1.00 1.000 CATALOGUE   pdf:draft_brief | availableServices.legal[].name  [src/data/crisisDependence.js]
+      top: Cargo loading and unloading
+      why: availableServices.legal[].name: a house's or service's own definition
+ 11     1   1.0  11/11 1.00 1.000 CATALOGUE   web:Systems/Economics | economicState.primaryExports[]  [src/data/supplyChainData.js]
+      top: Rare spices and exotic dyes
+      why: hand: a good's name
+      paths: economicState.primaryExports[], economicState.activeChains[].outputs[], economicState.localProduction[]
+ 11     1   1.0  11/11 1.00 1.000 CATALOGUE   web:Systems/Defense | institutions[].name  [src/data/institutionBacking.js]
+      top: Adventurers' charter hall
+      why: hand: a house's name
+      paths: institutions[].name, npcs[].institution.key, npcs[].institution.family, npcs[].goal.intent.short.target.id, availableServices.information[].institution, economicState.activeChains[].processingInstitutions[], availableServices.employment[].institution, spatialLayout.quarters[].landmarks[], npcs[].goal.intent.long.target.id
+  6     1   1.0    6/6 1.00 1.000 CATALOGUE   web:Systems/Economics | economicState.activeChains[].outputs[]  [src/data/supplyChainData.js]
+      top: Rare spices and exotic dyes
+      why: hand: supplyChainData.js: a chain's goods
+  6     1   1.0    6/6 1.00 1.000 CATALOGUE   web:Systems/Services | availableServices.criminal[].name  [src/data/crisisDependence.js]
+      top: Arcane services (illicit)
+      why: availableServices.criminal[].name: a house's or service's own definition
+  6     1   1.0    6/6 1.00 1.000 CATALOGUE   pdf:canon_dossier | availableServices.criminal[].name  [src/data/crisisDependence.js]
+      top: Arcane services (illicit)
+      why: availableServices.criminal[].name: a house's or service's own definition
+  6     1   1.0    6/6 1.00 1.000 CATALOGUE   pdf:draft_brief | availableServices.criminal[].name  [src/data/crisisDependence.js]
+      top: Arcane services (illicit)
+      why: availableServices.criminal[].name: a house's or service's own definition
+ 47    15   1.4  43/47 0.91 0.691 NARRATIVE   web:World/NPCs | npcs[].secret.what  [unfound]
+      top: Neither has acknowledged the other was there
+      why: hand: npcData.js: a secret drawn from a pool
+ 50     3   1.0  45/50 0.90 0.813 LABEL       web:Systems/Economics | economicState.economicComplexity  [src/domain/display/labelBands.js]
+      top: Diversified market economy
+      why: hand: labelBands.js: the economy's band words
+      paths: economicState.economicComplexity, publicProse.blocks.economy:economics.prosperityHeader.detail[].value
+ 50     3   1.0  45/50 0.90 0.813 LABEL       pdf:canon_dossier | economicState.economicComplexity  [src/domain/display/labelBands.js]
+      top: Diversified market economy
+      why: hand: labelBands.js: the economy's band words
+      paths: economicState.economicComplexity, publicProse.blocks.economy:economics.prosperityHeader.detail[].value
+ 50     3   1.0  45/50 0.90 0.813 LABEL       pdf:draft_brief | economicState.economicComplexity  [src/domain/display/labelBands.js]
+      top: Diversified market economy
+      why: hand: labelBands.js: the economy's band words
+      paths: economicState.economicComplexity, publicProse.blocks.economy:economics.prosperityHeader.detail[].value
+  7     2   1.1    6/7 0.86 0.690 CATALOGUE   pdf:canon_dossier | economicState.activeChains[].outputs[]  [src/data/supplyChainData.js]
+      top: Rare spices and exotic dyes
+      why: hand: supplyChainData.js: a chain's goods
+  7     2   1.1    6/7 0.86 0.690 CATALOGUE   pdf:draft_brief | economicState.activeChains[].outputs[]  [src/data/supplyChainData.js]
+      top: Rare spices and exotic dyes
+      why: hand: supplyChainData.js: a chain's goods
+ 13     2   1.0  11/13 0.85 0.718 CATALOGUE   web:Systems/Economics | institutions[].name  [src/data/institutionBacking.js]
+      top: Adventurers' charter hall
+      why: hand: a house's name
+      paths: institutions[].name, npcs[].institution.key, npcs[].institution.family, npcs[].goal.intent.short.target.id, availableServices.information[].institution, economicState.activeChains[].processingInstitutions[], availableServices.employment[].institution, spatialLayout.quarters[].landmarks[], npcs[].goal.intent.long.target.id, availableServices.transport[].institution
+ 18     4   1.1  15/18 0.83 0.691 STATE       web:Systems/Defense | publicProse.blocks.defense:forces.arcane.sentence  [unfound]
+      top: Anything unseen that came at # would find nothing to meet it: the town keeps no wards or seers to notice it.
+      why: hand: DOSSIER_STATE_PROSE_DEFENSE: the band's pool; empty state where the place has none (the no-wards band)
+ 18     4   1.3  15/18 0.83 0.632 CATALOGUE   pdf:canon_dossier | availableServices.entertainment[].desc  [unfound]
+      top: The social event of the year.
+      why: availableServices.entertainment[].desc: a house's or service's own definition
+ 18     4   1.3  15/18 0.83 0.632 CATALOGUE   pdf:draft_brief | availableServices.entertainment[].desc  [unfound]
+      top: The social event of the year.
+      why: availableServices.entertainment[].desc: a house's or service's own definition
+ 10     3   1.2   8/10 0.80 0.578 CATALOGUE   web:Systems/Services | availableServices.magic[].desc  [src/data/institutionServices.js]
+      top: Healing potions, antidotes, and alchemical compounds on request.
+      why: availableServices.magic[].desc: a house's or service's own definition
+  5     3   1.2    4/5 0.80 0.600 STATE?      web:Systems/Defense | publicProse.blocks.defense:status.viability.sentence  [src/data/dossierStateProse/defense.generated.js]
+      top: Life in the town goes on through the crisis: people work, eat and sleep, and the defence makes do with what is left over.
+      why: composed by defense.generated.js, a state-to-words module, few sentences (3)
+ 31     5   1.2  24/31 0.77 0.569 CATALOGUE   pdf:canon_dossier | availableServices.employment[].desc  [unfound]
+      top: A share goes to the lord or municipality.
+      why: availableServices.employment[].desc: a house's or service's own definition
+ 31     5   1.2  24/31 0.77 0.569 CATALOGUE   pdf:draft_brief | availableServices.employment[].desc  [unfound]
+      top: A share goes to the lord or municipality.
+      why: availableServices.employment[].desc: a house's or service's own definition
+ 31     4   1.3  24/31 0.77 0.582 CATALOGUE   web:Systems/Power | institutions[].name  [src/data/institutionBacking.js]
+      top: Bowyers & fletchers (guild)
+      why: hand: a house's name
+      paths: institutions[].name, npcs[].institution.key, npcs[].institution.family, npcs[].goal.intent.short.target.id, availableServices.equipment[].institution, availableServices.information[].institution, economicState.activeChains[].processingInstitutions[], npcs[].goal.intent.long.target.id, availableServices.transport[].institution, availableServices.employment[].institution, availableServices.entertainment[].institution, spatialLayout.quarters[].landmarks[]
+ 22     5   1.0  17/22 0.77 0.593 LABEL       pdf:canon_dossier | COMPOSED@Moderate  [src/data/bandLadders.js]
+      top: Defense: Lightly Defended
+      why: hand: bandLadders.js: a field name and its band word
+ 22     5   1.0  17/22 0.77 0.593 LABEL       pdf:draft_brief | COMPOSED@Moderate  [src/data/bandLadders.js]
+      top: Defense: Lightly Defended
+      why: hand: bandLadders.js: a field name and its band word
+ 22     5   1.0  17/22 0.77 0.593 LABEL       pdf:timeline_packet | COMPOSED@Moderate  [src/data/bandLadders.js]
+      top: Defense: Lightly Defended
+      why: hand: bandLadders.js: a field name and its band word
+ 32     4   1.3  24/32 0.75 0.550 CATALOGUE   web:Systems/Services | institutions[].name  [src/data/institutionBacking.js]
+      top: Bowyers & fletchers (guild)
+      why: hand: a house's name
+      paths: institutions[].name, npcs[].institution.key, npcs[].institution.family, npcs[].goal.intent.short.target.id, availableServices.equipment[].institution, availableServices.information[].institution, economicState.activeChains[].processingInstitutions[], npcs[].goal.intent.long.target.id, availableServices.transport[].institution, availableServices.employment[].institution, availableServices.entertainment[].institution, spatialLayout.quarters[].landmarks[]
+ 32     4   1.3  24/32 0.75 0.550 CATALOGUE   pdf:canon_dossier | institutions[].name  [src/data/institutionBacking.js]
+      top: Bowyers & fletchers (guild)
+      why: hand: a house's name
+      paths: institutions[].name, npcs[].institution.key, npcs[].institution.family, npcs[].goal.intent.short.target.id, availableServices.equipment[].institution, availableServices.information[].institution, economicState.activeChains[].processingInstitutions[], availableServices.transport[].institution, npcs[].goal.intent.long.target.id, availableServices.employment[].institution, availableServices.entertainment[].institution, spatialLayout.quarters[].landmarks[]
+ 32     4   1.3  24/32 0.75 0.550 CATALOGUE   pdf:draft_brief | institutions[].name  [src/data/institutionBacking.js]
+      top: Bowyers & fletchers (guild)
+      why: hand: a house's name
+      paths: institutions[].name, npcs[].institution.key, npcs[].institution.family, npcs[].goal.intent.short.target.id, availableServices.equipment[].institution, availableServices.information[].institution, economicState.activeChains[].processingInstitutions[], availableServices.transport[].institution, npcs[].goal.intent.long.target.id, availableServices.employment[].institution, availableServices.entertainment[].institution, spatialLayout.quarters[].landmarks[]
+ 35     6   1.3  24/35 0.69 0.465 CATALOGUE   pdf:canon_dossier | availableServices.information[].desc  [unfound]
+      top: Consulted in inheritance disputes as often as in mourning.
+      why: availableServices.information[].desc: a house's or service's own definition
+ 35     6   1.3  24/35 0.69 0.465 CATALOGUE   pdf:draft_brief | availableServices.information[].desc  [unfound]
+      top: Consulted in inheritance disputes as often as in mourning.
+      why: availableServices.information[].desc: a house's or service's own definition
+ 16     2   1.1  11/16 0.69 0.552 LABEL       web:Systems/Resources | resourceAnalysis.exports[].reason  [src/generators/resourceGenerator.js]
+      top: Partial processing - worked only to semi-finished goods
+      why: hand: resourceGenerator.js: the processing band's words
+ 16     2   1.1  11/16 0.69 0.552 LABEL       pdf:canon_dossier | resourceAnalysis.exports[].reason  [src/generators/resourceGenerator.js]
+      top: Partial processing - worked only to semi-finished goods
+      why: hand: resourceGenerator.js: the processing band's words
+ 16     2   1.1  11/16 0.69 0.552 LABEL       pdf:draft_brief | resourceAnalysis.exports[].reason  [src/generators/resourceGenerator.js]
+      top: Partial processing - worked only to semi-finished goods
+      why: hand: resourceGenerator.js: the processing band's words
+ 50    12   1.3  34/50 0.68 0.455 STATE       session | COMPOSED@facts[].text  [src/domain/summary/tonightSheet.js]
+      top: Stores: a granary, about six months of grain.
+      why: hand: tonightSheet.js facts: the food and defence facts read off the record (empty state where no walls and no force)
+ 15     3   1.0  10/15 0.67 0.467 STATE       web:Systems/Economics | publicProse.blocks.economy:economics.foodMeans.sentence  [unfound]
+      top: # grows only part of what it eats; the rest comes in from the farms around it and from trade.
+      why: hand: DOSSIER_STATE_PROSE_ECONOMY: the food-means band's pool
+ 12     3   1.0   8/12 0.67 0.470 CATALOGUE   pdf:canon_dossier | availableServices.healing[].desc  [unfound]
+      top: Prevent infection where possible.
+      why: availableServices.healing[].desc: a house's or service's own definition
+ 12     3   1.0   8/12 0.67 0.470 CATALOGUE   pdf:draft_brief | availableServices.healing[].desc  [unfound]
+      top: Prevent infection where possible.
+      why: availableServices.healing[].desc: a house's or service's own definition
+ 12     4   1.0   8/12 0.67 0.439 STATE       web:Systems/Resources | publicProse.blocks.economy:economics.exploitation.sentence  [src/data/dossierStateProse/economy.generated.js]
+      top: The town takes the easy half of this trade and sells the rest of it to whoever will do the hard half.
+      why: hand: DOSSIER_STATE_PROSE_ECONOMY: the exploitation band's pool
+  9     4   1.0    6/9 0.67 0.417 NARRATIVE   session | economicViability.plotHooks[].hook  [src/generators/economy/outlookHookSiblings.js]
+      top: The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price that is not paid in coin.
+      why: hand: a viability hook drawn from a pool
+ 13     6   1.4   8/13 0.62 0.409 CATALOGUE   web:Systems/Economics | economicState.incomeSources[].desc  [unfound]
+      top: Metalwork income is not trade-route dependent.
+      why: hand: economicState.js: an income source's definition
+  7     3   1.0    4/7 0.57 0.333 STATE?      web:Systems/Defense | publicProse.blocks.defense:supporting.naval.sentence  [unfound]
+      top: The port is #'s living and its open door, and nothing at the water would stop a hostile ship coming through it.
+      why: few sentences (3) one a place: likely a band's sentence
+  7     2   1.0    4/7 0.57 0.429 LABEL       pdf:canon_dossier | economicViability.issues[].title  [src/generators/economy/foodBalance.js]
+      top: Crisis Cutting the Food Supply
+      why: hand: an issue's title
+  7     2   1.0    4/7 0.57 0.429 LABEL       pdf:draft_brief | economicViability.issues[].title  [src/generators/economy/foodBalance.js]
+      top: Crisis Cutting the Food Supply
+      why: hand: an issue's title
+  9     4   1.3    5/9 0.56 0.391 CATALOGUE   pdf:canon_dossier | economicState.localProduction[]  [src/data/supplyChainData.js]
+      top: Advanced weapons and armor
+      why: hand: a good's name
+      paths: economicState.localProduction[], economicState.activeChains[].outputs[]
+  9     4   1.3    5/9 0.56 0.391 CATALOGUE   pdf:draft_brief | economicState.localProduction[]  [src/data/supplyChainData.js]
+      top: Advanced weapons and armor
+      why: hand: a good's name
+      paths: economicState.localProduction[], economicState.activeChains[].outputs[]
+ 26     7   1.5  14/26 0.54 0.303 CATALOGUE   pdf:canon_dossier | economicState.activeChains[].label  [src/data/supplyChainData.js]
+      top: Leatherworking & Cordwaining
+      why: hand: supplyChainData.js: a chain's name
+ 26     7   1.5  14/26 0.54 0.303 CATALOGUE   pdf:draft_brief | economicState.activeChains[].label  [src/data/supplyChainData.js]
+      top: Leatherworking & Cordwaining
+      why: hand: supplyChainData.js: a chain's name
+ 15     5   1.3   8/15 0.53 0.379 NARRATIVE   web:World/NPCs | npcs[].presentation.behaviour  [unfound]
+      top: Remembers more than they show.
+      why: hand: npcData.js:1601: a behaviour drawn from a pool
+ 22     5   1.3  11/22 0.50 0.339 STATE       web:Systems/Defense | publicProse.blocks.defense:forces.charter.sentence  [unfound]
+      top: Whatever comes out of the country is met by whoever the town has, whether or not they are the right answer to it.
+      why: hand: DOSSIER_STATE_PROSE_DEFENSE: the band's pool; empty state where the place has none (the no-charter band)
+  6     2   1.0    3/6 0.50 0.400 LABEL       web:Systems/Outlook | economicViability.issues[].title  [src/generators/economy/foodBalance.js]
+      top: Crisis Adding Mouths to Feed
+      why: hand: an issue's title
+ 25    16   1.4  12/25 0.48 0.241 NARRATIVE   web:Summary/Plot Hooks | economicViability.plotHooks[].hook  [src/generators/economy/outlookHookSiblings.js]
+      top: The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price that is not paid in coin.
+      why: hand: a viability hook drawn from a pool
+ 25    16   1.4  12/25 0.48 0.241 NARRATIVE   pdf:canon_dossier | economicViability.plotHooks[].hook  [src/generators/economy/outlookHookSiblings.js]
+      top: The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price that is not paid in coin.
+      why: hand: a viability hook drawn from a pool
+ 25    16   1.4  12/25 0.48 0.241 NARRATIVE   pdf:draft_brief | economicViability.plotHooks[].hook  [src/generators/economy/outlookHookSiblings.js]
+      top: The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price that is not paid in coin.
+      why: hand: a viability hook drawn from a pool
+ 23     3   1.2  11/23 0.48 0.375 CATALOGUE   web:Systems/Economics | economicState.institutionalServices[].output  [src/generators/computeActiveChains.js]
+      top: Waterborne freight services
+      why: hand: economicsCrisisMarks.js: a house's service output name
+  7     5   1.1    3/7 0.43 0.190 STATE       web:Systems/Outlook | economicViability.issues[].message  [unfound]
+      top: Newcomers keep arriving, and every one of them has to be fed from the same fields and stores.
+      why: hand: foodBalance.js:215: the failed food source to a fixed line
+      paths: economicViability.issues[].message, history.currentTensions[].description, economicViability.issues[].description, history.currentTensions[].specificIssue
+ 45     6   1.0  19/45 0.42 0.315 STATE       web:Systems/Defense | publicProse.blocks.defense:forces.force.sentence  [unfound]
+      top: It answers what happens inside the town and is not built for what arrives from outside it.
+      why: hand: DOSSIER_STATE_PROSE_DEFENSE: the band's pool; empty state where the place has none (the no-force band)
+ 50     7   1.3  20/50 0.40 0.269 STATE       web:Systems/Magic | publicProse.blocks.magic.arcaneReliance.sentence  [unfound]
+      top: Whatever magic reaches #, the town does not rest on it: nothing it lives by would stop without it.
+      why: hand: empty state: the no-arcane-reliance band's line (defenseStateProse.js)
+ 15    15   1.4   6/15 0.40 0.081 STATE?      session | COMPOSED@crisis.line  [src/domain/summary/tonightSheet.js]
+      top: The worst of it falls on #.
+      why: hand: tonightSheet.js: the crisis line, by the crisis and its worst-hit person
+ 15    15   1.4   6/15 0.40 0.081 NARRATIVE?  session | COMPOSED@opening  [src/domain/summary/tonightSheet.js]
+      top: The worst of it falls on #.
+      why: composed by tonightSheet.js: a story or pool module
+ 10     3   1.0   4/10 0.40 0.267 STATE       web:Systems/Services | publicProse.blocks.economy:economics.catalogStanding.sentence  [unfound]
+      top: # lacks one house a place its size usually has.
+      why: hand: DOSSIER_STATE_PROSE_ECONOMY: the catalogue-standing band's pool
+  5     4   1.0    2/5 0.40 0.100 LABEL?      web:Systems/Resources | resourceAnalysis.exports[].product  [src/data/resourceChains.js]
+      top: medicines, restorative treatments, mineral salts
+      why: a name or a band word, not a sentence (no sentence end)
+  5     4   1.0    2/5 0.40 0.100 LABEL?      pdf:canon_dossier | resourceAnalysis.exports[].product  [src/data/resourceChains.js]
+      top: medicines, restorative treatments, mineral salts
+      why: a name or a band word, not a sentence (no sentence end)
+  5     4   1.0    2/5 0.40 0.100 LABEL?      pdf:draft_brief | resourceAnalysis.exports[].product  [src/data/resourceChains.js]
+      top: medicines, restorative treatments, mineral salts
+      why: a name or a band word, not a sentence (no sentence end)
+  5     5   1.2    2/5 0.40 0.100 STATE       web:Summary/Overview | economicViability.issues[].message  [src/generators/economy/foodBalance.js]
+      top: The levy has taken workers from the fields, and less will be harvested this year.
+      why: hand: foodBalance.js:215: the failed food source to a fixed line
+      paths: economicViability.issues[].message, history.currentTensions[].description, economicViability.issues[].description, history.currentTensions[].specificIssue
+  5     5   1.2    2/5 0.40 0.100 STATE       web:World/History | economicViability.issues[].message  [src/generators/economy/foodBalance.js]
+      top: The levy has taken workers from the fields, and less will be harvested this year.
+      why: hand: foodBalance.js:215: the failed food source to a fixed line
+      paths: economicViability.issues[].message, history.currentTensions[].description, economicViability.issues[].description, history.currentTensions[].specificIssue
+  5     5   1.2    2/5 0.40 0.100 STATE       pdf:canon_dossier | economicViability.issues[].message  [src/generators/economy/foodBalance.js]
+      top: The levy has taken workers from the fields, and less will be harvested this year.
+      why: hand: foodBalance.js:215: the failed food source to a fixed line
+      paths: economicViability.issues[].message, history.currentTensions[].description, economicViability.issues[].description, history.currentTensions[].specificIssue
+  5     5   1.2    2/5 0.40 0.100 STATE       pdf:draft_brief | economicViability.issues[].message  [src/generators/economy/foodBalance.js]
+      top: The levy has taken workers from the fields, and less will be harvested this year.
+      why: hand: foodBalance.js:215: the failed food source to a fixed line
+      paths: economicViability.issues[].message, history.currentTensions[].description, economicViability.issues[].description, history.currentTensions[].specificIssue
+ 50     5   1.0  19/50 0.38 0.273 STATE       pdf:canon_dossier | COMPOSED@Power Structure  [src/pdf/lib/headlines.js]
+      top: # governs, with # pressing close behind.
+      why: hand: headlines.js: the power headline by the count and standing of contenders
+ 50     5   1.0  19/50 0.38 0.273 STATE       pdf:draft_brief | COMPOSED@Power Structure  [src/pdf/lib/headlines.js]
+      top: # governs, with # pressing close behind.
+      why: hand: headlines.js: the power headline by the count and standing of contenders
+ 13     6   1.1   5/13 0.38 0.196 LABEL?      pdf:canon_dossier | resourceAnalysis.imports.critical[]  [src/data/geographyData.js]
+      top: Preserved provisions for winter
+      why: a name or a band word, not a sentence (no sentence end)
+ 13     6   1.1   5/13 0.38 0.196 LABEL?      pdf:draft_brief | resourceAnalysis.imports.critical[]  [src/data/geographyData.js]
+      top: Preserved provisions for winter
+      why: a name or a band word, not a sentence (no sentence end)
+  8     5   1.1    3/8 0.38 0.214 NARRATIVE   web:Summary/Plot Hooks | economicState.safetyProfile.plotHooks[]  [src/generators/safetyLineTruth.js]
+      top: A smuggled load went missing on the way in, and the people who paid for it are asking questions.
+      why: hand: safetyProfile.js: a hook drawn from a pool
+  8     5   1.1    3/8 0.38 0.214 NARRATIVE   pdf:canon_dossier | economicState.safetyProfile.plotHooks[]  [src/generators/safetyLineTruth.js]
+      top: A smuggled load went missing on the way in, and the people who paid for it are asking questions.
+      why: hand: safetyProfile.js: a hook drawn from a pool
+  8     5   1.1    3/8 0.38 0.214 NARRATIVE   pdf:draft_brief | economicState.safetyProfile.plotHooks[]  [src/generators/safetyLineTruth.js]
+      top: A smuggled load went missing on the way in, and the people who paid for it are asking questions.
+      why: hand: safetyProfile.js: a hook drawn from a pool
+ 50     9   1.0  18/50 0.36 0.222 STATE       web:Systems/Economics | publicProse.blocks.general:economics.craftReasonLine  [unfound]
+      top: Some of the work at # needs goods that nothing here makes.
+      why: hand: DOSSIER_STATE_PROSE_GENERAL: the craft-reason band's pool
+ 20    11   1.3   7/20 0.35 0.146 NARRATIVE   pdf:canon_dossier | npcs[].secret.what  [src/generators/npcGenerator.js]
+      top: Was present when # did something they've never accounted for publicly.
+      why: hand: npcData.js: a secret drawn from a pool
+ 20    11   1.3   7/20 0.35 0.146 NARRATIVE   pdf:draft_brief | npcs[].secret.what  [src/generators/npcGenerator.js]
+      top: Was present when # did something they've never accounted for publicly.
+      why: hand: npcData.js: a secret drawn from a pool
+ 50     5   1.0  17/50 0.34 0.296 STATE       web:Systems/Economics | publicProse.blocks.economy:economics.incomeMix.sentence  [src/domain/facts/registeredWords.js]
+      top: No one trade earns half of what # makes, so a bad year in any one of them would hurt without ruining it.
+      why: hand: DOSSIER_STATE_PROSE_ECONOMY: the income-mix band's pool
+ 50    10   1.0  17/50 0.34 0.191 STATE       web:Systems/Defense | publicProse.blocks.defense:threat.internal.sentence  [unfound]
+      top: #'s hearings can fine an offender and cannot hold one, so a fine binds only those who mean to stay.
+      why: hand: DOSSIER_STATE_PROSE_DEFENSE: the band's pool; empty state where the place has none (the no-court band)
+ 50     8   1.0  17/50 0.34 0.173 STATE       web:Systems/Defense | publicProse.blocks.defense:wall.rationale.sentence  [unfound]
+      top: #'s accounts show nothing spent on a wall: the money a place its size would put into stone goes to other needs, and the town stays open.
+      why: hand: DOSSIER_STATE_PROSE_DEFENSE: the band's pool; empty state where the place has none (the too-small-to-wall band)
+ 12    12   1.4   4/12 0.33 0.095 NARRATIVE   pdf:canon_dossier | npcs[].secret.stakes  [unfound]
+      top: Those they've sold out would not be forgiving
+      why: hand: npcData.js: a secret's stakes drawn from a pool
+ 12    12   1.4   4/12 0.33 0.095 NARRATIVE   pdf:draft_brief | npcs[].secret.stakes  [unfound]
+      top: Those they've sold out would not be forgiving
+      why: hand: npcData.js: a secret's stakes drawn from a pool
+  9     4   1.0    3/9 0.33 0.194 STATE?      web:World/Daily Life | publicProse.blocks.economy:economics.foodOnProsperity.sentence  [unfound]
+      top: A good part of what households at # earn goes on food, and that leaves the town a little poorer than its trades alone would make it.
+      why: few sentences (4) one a place: likely a band's sentence
+ 50     8   1.0  16/50 0.32 0.176 NARRATIVE   pdf:canon_dossier | history.founding.overcoming  [src/generators/narrativeGenerator.js]
+      top: with help from external allies at a critical moment
+      why: hand: historyGenerator: the founding's turn drawn from a pool
+ 50     8   1.0  16/50 0.32 0.176 NARRATIVE   pdf:draft_brief | history.founding.overcoming  [src/generators/narrativeGenerator.js]
+      top: with help from external allies at a critical moment
+      why: hand: historyGenerator: the founding's turn drawn from a pool
+ 38    19   1.2  12/38 0.32 0.137 STATE       web:Systems/Resources | publicProse.blocks.economy:economics.resourceCondition.sentence  [unfound]
+      top: Left alone, the ground will come back in time; until it does, the town buys what it used to take, or goes without.
+      why: hand: DOSSIER_STATE_PROSE_ECONOMY: the resource-condition band's pool
+ 50     5   1.0  15/50 0.30 0.214 NARRATIVE   pdf:canon_dossier | history.founding.foundedBy  [src/domain/facts/founder.js]
+      top: a merchant consortium that needed a waypoint and decided to own it
+      why: hand: historyGenerator: the founder drawn from a pool
+ 50     5   1.0  15/50 0.30 0.214 NARRATIVE   pdf:draft_brief | history.founding.foundedBy  [src/domain/facts/founder.js]
+      top: a merchant consortium that needed a waypoint and decided to own it
+      why: hand: historyGenerator: the founder drawn from a pool
+ 47     7   1.0  14/47 0.30 0.196 STATE       web:Systems/Defense | publicProse.blocks.defense:posture.posture.beside  [src/domain/display/stateProse/defenseStateProse.js]
+      top: # could deal with a brawl or a thief, but the town could not hold off a raid.
+      why: hand: DOSSIER_STATE_PROSE_DEFENSE DS-DEF-1: the readiness band's pool
+      paths: publicProse.blocks.defense:posture.posture.beside, publicProse.blocks.defense:posture.posture.rung.sentence
+  7     7   1.1    2/7 0.29 0.048 NARRATIVE   pdf:canon_dossier | history.currentTensions[].lastingEffects[]  [src/data/historyData.js]
+      top: Two rival congregations still divide the settlement's faithful
+      why: history.currentTensions[].lastingEffects[]: a story field of the place
+      paths: history.currentTensions[].lastingEffects[], history.historicalEvents[].lastingEffects[]
+  7     7   1.1    2/7 0.29 0.048 NARRATIVE   pdf:draft_brief | history.currentTensions[].lastingEffects[]  [src/data/historyData.js]
+      top: Two rival congregations still divide the settlement's faithful
+      why: history.currentTensions[].lastingEffects[]: a story field of the place
+      paths: history.currentTensions[].lastingEffects[], history.historicalEvents[].lastingEffects[]
+ 50    16   1.2  14/50 0.28 0.129 STATE       web:Systems/Economics | publicProse.blocks.economy:economics.prosperityHeader.sentence  [unfound]
+      top: With a little left over each year, # gets by on a market trade, and every year people argue over how to spend it.
+      why: hand: DOSSIER_STATE_PROSE_ECONOMY: the prosperity band's pool
+ 50     7   1.2  14/50 0.28 0.173 STATE       web:Systems/Resources | publicProse.blocks.economy:economics.strategicValue.sentence  [unfound]
+      top: The people of # know what their ground is worth to others, and know that is reason enough for someone to come for it.
+      why: hand: DOSSIER_STATE_PROSE_ECONOMY: the strategic-value band's pool
+ 49     6   1.2  13/49 0.27 0.193 STATE       web:Systems/Economics | publicProse.blocks.economy:economics.foodSecurityRung.sentence  [unfound]
+      top: # is fed, but what it keeps put by would not outlast a run of poor harvests.
+      why: hand: DOSSIER_STATE_PROSE_ECONOMY: the food-security rung's pool
+ 44    11   1.0  12/44 0.27 0.124 LABEL?      pdf:canon_dossier | history.founding.initialChallenge  [src/generators/narrativeGenerator.js]
+      top: harassment by a nearby lord
+      why: a name or a band word, not a sentence (no sentence end)
+ 44    11   1.0  12/44 0.27 0.124 LABEL?      pdf:draft_brief | history.founding.initialChallenge  [src/generators/narrativeGenerator.js]
+      top: harassment by a nearby lord
+      why: a name or a band word, not a sentence (no sentence end)
+ 22    10   1.0   6/22 0.27 0.108 STATE?      web:Systems/Power | publicProse.blocks.power:desk.operationReading.sentence  [unfound]
+      top: Some of the goods that reach # pay none of the dues owed on them.
+      why: hand: powerStateProse.js operationReading: the criminal operation's kind to its pool
+ 50     8   1.0  12/50 0.24 0.159 STATE       web:World/History | publicProse.blocks.general:history.foundedLine  [unfound]
+      top: Ask in # why it is here and people will tell you its first reason, though the place has long outgrown it.
+      why: hand: DOSSIER_STATE_PROSE_GENERAL: the founding-age band's pool
+ 25    13   1.0   6/25 0.24 0.073 STATE?      web:Systems/Economics | publicProse.blocks.economy:economics.foodSources.sentence  [src/domain/facts/leadingSourceSpent.js]
+      top: # leans first on its fishing for its food, so a bad season for the fishing is felt at every table.
+      why: hand: DOSSIER_STATE_PROSE_ECONOMY: the food-sources block, its sources named in order
+  9     8   1.0    2/9 0.22 0.028 LABEL?      pdf:canon_dossier | economicState.safetyProfile.safetyLabel  [src/components/compendium/CatalogTabs.jsx]
+      top: Volatile — Political Fracture
+      why: a name or a band word, not a sentence (no sentence end)
+      paths: economicState.safetyProfile.safetyLabel, publicProse.blocks.defense:state.publicOrder.rung.glance
+  9     8   1.0    2/9 0.22 0.028 LABEL?      pdf:draft_brief | economicState.safetyProfile.safetyLabel  [src/components/compendium/CatalogTabs.jsx]
+      top: Volatile — Political Fracture
+      why: a name or a band word, not a sentence (no sentence end)
+      paths: economicState.safetyProfile.safetyLabel, publicProse.blocks.defense:state.publicOrder.rung.glance
+  9     8   1.0    2/9 0.22 0.028 LABEL?      pdf:timeline_packet | economicState.safetyProfile.safetyLabel  [src/components/compendium/CatalogTabs.jsx]
+      top: Volatile — Political Fracture
+      why: a name or a band word, not a sentence (no sentence end)
+      paths: economicState.safetyProfile.safetyLabel, publicProse.blocks.defense:state.publicOrder.rung.glance
+ 50    12   1.2  10/50 0.20 0.124 STATE       web:Systems/Defense | publicProse.blocks.defense:threat.economic.sentence  [unfound]
+      top: #'s accounts have money in hand: the town can buy what a bad season needs without going begging.
+      why: hand: DOSSIER_STATE_PROSE_DEFENSE: the band's pool; empty state where the place has none (the no-paid-defence band)
+ 50    19   1.0  10/50 0.20 0.107 STATE       web:Systems/Defense | publicProse.blocks.defense:state.publicOrder.beside  [unfound]
+      top: # has people who keep order, and order holds about as well as anyone here expects.
+      why: hand: DOSSIER_STATE_PROSE_DEFENSE: the band's pool; empty state where the place has none (the no-gaol band)
+      paths: publicProse.blocks.defense:state.publicOrder.beside, publicProse.blocks.defense:state.publicOrder.rung.sentence
+ 50    11   1.0  10/50 0.20 0.108 STATE?      pdf:canon_dossier | resourceAnalysis.strategicValue  [src/data/geographyData.js]
+      top: High - a coastal position, within reach of the sea routes and naval access
+      why: few sentences (11) one a place: likely a band's sentence
+ 50    11   1.0  10/50 0.20 0.108 STATE?      pdf:draft_brief | resourceAnalysis.strategicValue  [src/data/geographyData.js]
+      top: High - a coastal position, within reach of the sea routes and naval access
+      why: few sentences (11) one a place: likely a band's sentence
+ 35    10   1.0   7/35 0.20 0.104 STATE       web:Systems/Power | publicProse.blocks.power:desk.rulingStructure.sentence  [unfound]
+      top: The people who run # are also the people it owes money to, and they do not keep the two apart.
+      why: hand: DOSSIER_STATE_PROSE_POWER: the ruling structure's band pool
+ 20    12   1.0   4/20 0.20 0.068 LABEL?      web:Systems/Power | powerStructure.stability  [src/domain/facts/monsterFrontier.js]
+      top: Tense — regional monster threat
+      why: a name or a band word, not a sentence (no sentence end)
+      paths: powerStructure.stability, publicProse.blocks.power:desk.stabilityHeader.glance
+ 20    12   1.0   4/20 0.20 0.068 LABEL?      pdf:canon_dossier | powerStructure.stability  [src/domain/facts/monsterFrontier.js]
+      top: Tense — regional monster threat
+      why: a name or a band word, not a sentence (no sentence end)
+      paths: powerStructure.stability, publicProse.blocks.power:desk.stabilityHeader.glance
+ 20    12   1.0   4/20 0.20 0.068 LABEL?      pdf:draft_brief | powerStructure.stability  [src/domain/facts/monsterFrontier.js]
+      top: Tense — regional monster threat
+      why: a name or a band word, not a sentence (no sentence end)
+      paths: powerStructure.stability, publicProse.blocks.power:desk.stabilityHeader.glance
+ 15    10   1.0   3/15 0.20 0.067 STATE       web:Summary/Crisis | stress.viabilityNote  [src/data/stressTypes.js]
+      top: Nothing gets decided, repairs are put off, and every problem is left for later.
+      why: hand: the crisis's own viability note, by the crisis
+ 15    10   1.0   3/15 0.20 0.067 STATE       web:Systems/Defense | stress.viabilityNote  [src/data/stressTypes.js]
+      top: Nothing gets decided, repairs are put off, and every problem is left for later.
+      why: hand: the crisis's own viability note, by the crisis
+ 15    10   1.0   3/15 0.20 0.067 STATE       pdf:canon_dossier | stress.viabilityNote  [src/data/stressTypes.js]
+      top: Nothing gets decided, repairs are put off, and every problem is left for later.
+      why: hand: the crisis's own viability note, by the crisis
+ 15    10   1.0   3/15 0.20 0.067 STATE       pdf:draft_brief | stress.viabilityNote  [src/data/stressTypes.js]
+      top: Nothing gets decided, repairs are put off, and every problem is left for later.
+      why: hand: the crisis's own viability note, by the crisis
+ 15    11   1.0   3/15 0.20 0.048 NARRATIVE   session | powerStructure.conflicts[].plotHooks[]  [src/generators/power/conflictIssues.js]
+      top: Bread went up twice this month, and one of the sellers says they were told to raise it.
+      why: powerStructure.conflicts[].plotHooks[]: a story field of the place
+  5     5   1.0    1/5 0.20 0.000 STATE       web:Systems/Defense | publicProse.blocks.defense:threat.beasts.sentence  [src/data/dossierStateProse/defense.generated.js]
+      top: The town takes the frontier seriously and has taken it seriously long enough that the arrangements are ordinary rather than anxious.
+      why: hand: DOSSIER_STATE_PROSE_DEFENSE: the beast-threat band's pool
+ 48    18   1.5   9/48 0.19 0.086 STATE       web:Systems/Defense | publicProse.blocks.defense:criminal.structure.sentence  [unfound]
+      top: Crime at # is opportunistic and unorganized: fences, bandits and small operators working for themselves, with nothing to threaten and nobody to buy.
+      why: hand: DOSSIER_STATE_PROSE_DEFENSE: the criminal-structure band's pool
+ 50    11   1.1   9/50 0.18 0.118 STATE       web:Systems/Economics | publicProse.blocks.economy:economics.exportPosture.sentence  [unfound]
+      top: Buyers from outside come to # for more than one thing.
+      why: hand: DOSSIER_STATE_PROSE_ECONOMY: the export-posture band's pool
+ 50    22   1.5   9/50 0.18 0.079 STATE       web:World/Daily Life | publicProse.blocks.economy:economics.prosperityRung.sentence  [unfound]
+      top: People here put things by, and can.
+      why: hand: DOSSIER_STATE_PROSE_ECONOMY: the prosperity rung's pool
+ 44    22   1.0   8/44 0.18 0.056 LABEL?      pdf:canon_dossier | history.founding.reason  [src/data/narrativeData.js]
+      top: grew as an agricultural market center
+      why: a name or a band word, not a sentence (no sentence end)
+ 44    22   1.0   8/44 0.18 0.056 LABEL?      pdf:draft_brief | history.founding.reason  [src/data/narrativeData.js]
+      top: grew as an agricultural market center
+      why: a name or a band word, not a sentence (no sentence end)
+  6     6   1.0    1/6 0.17 0.000 LABEL?      pdf:canon_dossier | COMPOSED@Comfortable  [src/data/supplyChainData.js]
+      top: Top export: Refined iron ingots
+      why: a name or a band word, not a sentence (no sentence end)
+  6     6   1.0    1/6 0.17 0.000 LABEL?      pdf:draft_brief | COMPOSED@Comfortable  [src/data/supplyChainData.js]
+      top: Top export: Refined iron ingots
+      why: a name or a band word, not a sentence (no sentence end)
+  6     6   1.0    1/6 0.17 0.000 LABEL?      pdf:timeline_packet | COMPOSED@Comfortable  [src/data/supplyChainData.js]
+      top: Top export: Refined iron ingots
+      why: a name or a band word, not a sentence (no sentence end)
+ 50    24   1.3   8/50 0.16 0.078 STATE       web:Systems/Economics | culturalIdentity.foodways  [src/domain/foodways.js]
+      top: Meals follow the season and what the household has put by.
+      why: hand: empty state: foodways.js NO_SOURCE_LINE, the fallback where no food source claims a line
+      paths: culturalIdentity.foodways, economicState.foodSecurity.foodRecord.foodwaysLine
+ 50    15   1.0   8/50 0.16 0.078 STATE       pdf:canon_dossier | spatialLayout.layout  [src/generators/spatialGenerator.js]
+      top: Hill town of stone houses climbing above the market quarter
+      why: hand: spatialGenerator.js:379: the size and terrain to a fixed layout line
+ 50    24   1.3   8/50 0.16 0.078 STATE       pdf:canon_dossier | culturalIdentity.foodways  [src/domain/foodways.js]
+      top: Meals follow the season and what the household has put by.
+      why: hand: empty state: foodways.js NO_SOURCE_LINE, the fallback where no food source claims a line
+      paths: culturalIdentity.foodways, economicState.foodSecurity.foodRecord.foodwaysLine
+ 50    15   1.0   8/50 0.16 0.078 STATE       pdf:draft_brief | spatialLayout.layout  [src/generators/spatialGenerator.js]
+      top: Hill town of stone houses climbing above the market quarter
+      why: hand: spatialGenerator.js:379: the size and terrain to a fixed layout line
+ 50    24   1.3   8/50 0.16 0.078 STATE       pdf:draft_brief | culturalIdentity.foodways  [src/domain/foodways.js]
+      top: Meals follow the season and what the household has put by.
+      why: hand: empty state: foodways.js NO_SOURCE_LINE, the fallback where no food source claims a line
+      paths: culturalIdentity.foodways, economicState.foodSecurity.foodRecord.foodwaysLine
+ 31    12   1.0   5/31 0.16 0.077 NARRATIVE?  pdf:canon_dossier | culturalIdentity.defensePattern  [src/data/cultureProfiles.js]
+      top: Where a place can pay for them, masonry defenses, watch posts, and road gates are kept as civic infrastructure.
+      why: composed by cultureProfiles.js: a story or pool module
+ 31    12   1.0   5/31 0.16 0.077 NARRATIVE?  pdf:draft_brief | culturalIdentity.defensePattern  [src/data/cultureProfiles.js]
+      top: Where a place can pay for them, masonry defenses, watch posts, and road gates are kept as civic infrastructure.
+      why: composed by cultureProfiles.js: a story or pool module
+ 46    18   1.0   7/46 0.15 0.060 STATE       web:Systems/Economics | publicProse.blocks.economy:economics.criticalImport.sentence  [unfound]
+      top: Some of #'s work cannot go on without grain, and the country around the town does not give enough of it, so the town buys from outside or that work stops.
+      why: hand: DOSSIER_STATE_PROSE_ECONOMY: the critical-import band's pool
+ 50    19   1.0   7/50 0.14 0.071 STATE       web:Summary/Overview | settlementReason[]  [src/generators/narrative/settlementOriginProse.js]
+      top: Sited on a route already worn deep before anyone built here; a road that old is not soon abandoned.
+      why: hand: narrativeGenerator.js:823: the size and food balance to a fixed reason line
+ 50    19   1.0   7/50 0.14 0.071 STATE       pdf:canon_dossier | settlementReason[]  [src/generators/narrative/settlementOriginProse.js]
+      top: Sited on a route already worn deep before anyone built here; a road that old is not soon abandoned.
+      why: hand: narrativeGenerator.js:823: the size and food balance to a fixed reason line
+ 50    19   1.0   7/50 0.14 0.071 STATE       pdf:draft_brief | settlementReason[]  [src/generators/narrative/settlementOriginProse.js]
+      top: Sited on a route already worn deep before anyone built here; a road that old is not soon abandoned.
+      why: hand: narrativeGenerator.js:823: the size and food balance to a fixed reason line
+ 36    17   1.2   5/36 0.14 0.063 LABEL?      web:Summary/Overview | powerStructure.conflicts[].issue  [src/generators/power/conflictIssues.js]
+      top: Who speaks for the place to outsiders
+      why: a name or a band word, not a sentence (no sentence end)
+ 36    17   1.2   5/36 0.14 0.063 LABEL?      pdf:canon_dossier | powerStructure.conflicts[].issue  [src/generators/power/conflictIssues.js]
+      top: Who speaks for the place to outsiders
+      why: a name or a band word, not a sentence (no sentence end)
+ 36    17   1.2   5/36 0.14 0.063 LABEL?      pdf:draft_brief | powerStructure.conflicts[].issue  [src/generators/power/conflictIssues.js]
+      top: Who speaks for the place to outsiders
+      why: a name or a band word, not a sentence (no sentence end)
+ 14    12   1.0   2/14 0.14 0.022 NARRATIVE?  web:Systems/Defense | publicProse.blocks.defense:status.override.sentence  [unfound]
+      top: More than one power at # claims to command its defence, and orders are given twice and obeyed once.
+      why: many sentences (12) composed per place; pool or story not proven
+ 46    16   1.0   6/46 0.13 0.062 NARRATIVE?  pdf:canon_dossier | culturalIdentity.sacredLife  [src/data/cultureProfiles.js]
+      top: Religious authority remains distributed between local ritual specialists and powerful patrons.
+      why: composed by cultureProfiles.js: a story or pool module
+ 46    16   1.0   6/46 0.13 0.062 NARRATIVE?  pdf:draft_brief | culturalIdentity.sacredLife  [src/data/cultureProfiles.js]
+      top: Religious authority remains distributed between local ritual specialists and powerful patrons.
+      why: composed by cultureProfiles.js: a story or pool module
+ 24    27   1.3   3/24 0.13 0.014 NARRATIVE   web:Summary/Overview | relationships[].tension  [src/data/npcData.js]
+      top: # and # both want the same office, and the alliance cannot survive one of them winning it.
+      why: hand: npcData.js: a relationship's tension drawn from its type's pool
+      paths: relationships[].tension, prominentRelationship.tension, prominentRelationship.phrasing
+ 15    14   1.0   2/15 0.13 0.010 NARRATIVE?  web:Summary/Overview | publicProse.blocks.stressors:overview.conditionDirection.sentence  [unfound]
+      top: More families reach # every week, and there are no more roofs or work to share among them.
+      why: many sentences (14) composed per place; pool or story not proven
+ 15    19   1.5   2/15 0.13 0.019 STATE       web:World/History | history.founding.stressNote  [src/data/narrativeData.js]
+      top: The people of the settlement no longer agree on what it is for, and nobody expects them to agree again soon.
+      why: hand: narrativeData.js:430: the crisis (famine) to its founding-stress line
+ 15    19   1.5   2/15 0.13 0.019 STATE       pdf:canon_dossier | history.founding.stressNote  [src/data/narrativeData.js]
+      top: The people of the settlement no longer agree on what it is for, and nobody expects them to agree again soon.
+      why: hand: narrativeData.js:430: the crisis (famine) to its founding-stress line
+ 15    19   1.5   2/15 0.13 0.019 STATE       pdf:draft_brief | history.founding.stressNote  [src/data/narrativeData.js]
+      top: The people of the settlement no longer agree on what it is for, and nobody expects them to agree again soon.
+      why: hand: narrativeData.js:430: the crisis (famine) to its founding-stress line
+ 50    15   1.0   6/50 0.12 0.060 LABEL       pdf:canon_dossier | COMPOSED@History & Founding  [src/pdf/lib/headlines.js]
+      top: Founded 0 years ago, with three events on record and two tensions still unresolved.
+      why: hand: headlines.js: a count headline (years, events, tensions)
+ 50    15   1.0   6/50 0.12 0.060 LABEL       pdf:draft_brief | COMPOSED@History & Founding  [src/pdf/lib/headlines.js]
+      top: Founded 0 years ago, with three events on record and two tensions still unresolved.
+      why: hand: headlines.js: a count headline (years, events, tensions)
+ 42    16   1.0   5/42 0.12 0.062 NARRATIVE?  pdf:canon_dossier | culturalIdentity.civicPattern  [src/data/cultureProfiles.js]
+      top: Household leaders and law speakers bargain in assembly beneath a chieftain or royal representative.
+      why: composed by cultureProfiles.js: a story or pool module
+ 42    16   1.0   5/42 0.12 0.062 NARRATIVE?  pdf:draft_brief | culturalIdentity.civicPattern  [src/data/cultureProfiles.js]
+      top: Household leaders and law speakers bargain in assembly beneath a chieftain or royal representative.
+      why: composed by cultureProfiles.js: a story or pool module
+ 37    29   1.4   4/37 0.11 0.037 NARRATIVE   web:Summary/Plot Hooks | powerStructure.conflicts[].plotHooks[]  [src/generators/power/conflictIssues.js]
+      top: Both sides have written to the same neighbour, and the letters say opposite things.
+      why: powerStructure.conflicts[].plotHooks[]: a story field of the place
+ 37    29   1.4   4/37 0.11 0.037 NARRATIVE   pdf:canon_dossier | powerStructure.conflicts[].plotHooks[]  [src/generators/power/conflictIssues.js]
+      top: Both sides have written to the same neighbour, and the letters say opposite things.
+      why: powerStructure.conflicts[].plotHooks[]: a story field of the place
+ 37    29   1.4   4/37 0.11 0.037 NARRATIVE   pdf:draft_brief | powerStructure.conflicts[].plotHooks[]  [src/generators/power/conflictIssues.js]
+      top: Both sides have written to the same neighbour, and the letters say opposite things.
+      why: powerStructure.conflicts[].plotHooks[]: a story field of the place
+ 40    17   1.0   4/40 0.10 0.045 NARRATIVE?  pdf:canon_dossier | culturalIdentity.exchangePattern  [src/data/cultureProfiles.js]
+      top: Guild-regulated craft production and overland fairs organize exchange.
+      why: composed by cultureProfiles.js: a story or pool module
+ 40    17   1.0   4/40 0.10 0.045 NARRATIVE?  pdf:draft_brief | culturalIdentity.exchangePattern  [src/data/cultureProfiles.js]
+      top: Guild-regulated craft production and overland fairs organize exchange.
+      why: composed by cultureProfiles.js: a story or pool module
+ 39    19   1.0   4/39 0.10 0.040 LABEL?      pdf:canon_dossier | culturalIdentity.architecturalDetail  [src/data/cultureProfiles.js]
+      top: half-timbered upper floors project above the busier lanes
+      why: a name or a band word, not a sentence (no sentence end)
+ 39    19   1.0   4/39 0.10 0.040 LABEL?      pdf:draft_brief | culturalIdentity.architecturalDetail  [src/data/cultureProfiles.js]
+      top: half-timbered upper floors project above the busier lanes
+      why: a name or a band word, not a sentence (no sentence end)
+ 50    50   1.3   4/50 0.08 0.011 NARRATIVE   pdf:canon_dossier | history.historicalCharacter  [unfound]
+      top: More complicated than it looks from the road.
+      why: history.historicalCharacter: a story field of the place
+ 50    50   1.3   4/50 0.08 0.011 NARRATIVE   pdf:draft_brief | history.historicalCharacter  [unfound]
+      top: More complicated than it looks from the road.
+      why: history.historicalCharacter: a story field of the place
+ 24    29   1.4   2/24 0.08 0.011 STATE       web:World/Relationships | pressureSentence  [src/data/npcData.js]
+      top: # has one favour left to call in, and is saving it.
+      why: hand: narrativeGenerator.js:839 generatePressureSentence: a stress's PRESSURE_SENTENCES draw, else recentConflict (deriveBaselineConflict, flags to a fixed line)
+      paths: pressureSentence, relationships[].tension, prominentRelationship.tension, prominentRelationship.phrasing
+ 44    40   1.0   2/44 0.05 0.005 NARRATIVE   web:World/History | publicProse.blocks.general:history.legacyLines[]  [src/domain/display/heraldCausalGrammar.js]
+      top: Nobody in # has finished putting right the legacy the religious conflict left, and that legacy is a generation old.
+      why: publicProse.blocks.general:history.legacyLines[]: a story field of the place
+ 50    39   1.0   2/50 0.04 0.009 NARRATIVE?  web:Summary/Overview | publicProse.blocks.overview:identity.scope  [src/domain/summary/settlementQuickGuide.js]
+      top: Norse-inspired, built around the Town hall and the water, on kin, oath and the assembly.
+      why: many sentences (39) composed per place; pool or story not proven
+ 50    39   1.0   2/50 0.04 0.009 NARRATIVE?  pdf:canon_dossier | publicProse.blocks.overview:identity.scope  [src/domain/summary/settlementQuickGuide.js]
+      top: Norse-inspired, built around the Town hall and the water, on kin, oath and the assembly.
+      why: composed by settlementQuickGuide.js: a story or pool module
+ 50    39   1.0   2/50 0.04 0.009 NARRATIVE?  pdf:draft_brief | publicProse.blocks.overview:identity.scope  [src/domain/summary/settlementQuickGuide.js]
+      top: Norse-inspired, built around the Town hall and the water, on kin, oath and the assembly.
+      why: composed by settlementQuickGuide.js: a story or pool module
+
+# town: table (b) MANY A PLACE, by SEEN — 156 rows
+hold  dist  /plc    top share  seen  class       slot
+ 50     2   2.0  50/50 1.00 1.000 LABEL       web:Summary/Overview | COMPOSED@Systems Health  [src/copy/sectionHelp.js]
+      top: Safety, viability and defense, read side by side.
+      why: the page's own words (sectionHelp.js)
+ 50     2   2.0  50/50 1.00 1.000 LABEL       web:World/Rumors & News | COMPOSED@(none)  [src/components/new/tabs/RumorsTab.jsx]
+      top: What # has heard from the rest of the realm, true or not, as the news reaches it.
+      why: hand: RumorsTab.jsx: the tab's fixed introduction
+ 50     5   5.0  50/50 1.00 1.000 LABEL?      web:Notes/AI Notes | COMPOSED@(none)  [unfound]
+      top: Woven into AI narration as established campaign flavor.
+      why: hand: a heading-less bag of a tab's lines (no module found) whose commonest is the page's furniture: a help line, a caption, a filter bar
+ 50     2   2.0  50/50 1.00 1.000 LABEL       pdf:canon_dossier | COMPOSED@NPC Quick Reference  [unfound]
+      top: Everyone named in the dossier, on one page; the number beside each name is how much power they hold, and the warmer its colour, the more.
+      why: hand: the PDF's NPC index caption
+ 50     2   2.0  50/50 1.00 1.000 LABEL       pdf:draft_brief | COMPOSED@NPC Quick Reference  [unfound]
+      top: Everyone named in the dossier, on one page; the number beside each name is how much power they hold, and the warmer its colour, the more.
+      why: hand: the PDF's NPC index caption
+ 50     7   3.7  50/50 1.00 0.886 CATALOGUE   web:Systems/Services | availableServices.lodging[].desc  [unfound]
+      top: Beds from dormitory to private room.
+      why: availableServices.lodging[].desc: a house's or service's own definition
+ 50     9   2.5  50/50 1.00 0.865 CATALOGUE   pdf:canon_dossier | availableServices.legal[].desc  [src/components/settlement/eventComposer/ApplyControls.jsx]
+      top: Buffers the settlement against poor harvests.
+      why: availableServices.legal[].desc: a house's or service's own definition
+ 50     9   2.5  50/50 1.00 0.865 CATALOGUE   pdf:draft_brief | availableServices.legal[].desc  [src/components/settlement/eventComposer/ApplyControls.jsx]
+      top: Buffers the settlement against poor harvests.
+      why: availableServices.legal[].desc: a house's or service's own definition
+ 50     7   3.9  50/50 1.00 0.840 LABEL       web:World/Faith | COMPOSED@(none)  [src/domain/dossier/faithReading.js]
+      top: The faith’s god and the church’s name are yours to set.
+      why: hand: empty state: faithReading.js FAITH_YOURS_LINE, where the faith is unnamed
+ 50    15   7.4  50/50 1.00 0.840 LABEL       pdf:canon_dossier | COMPOSED@Relationships  [src/data/npcData.js]
+      top: # and # · Mentor and Successor
+      why: hand: npcData.js: a relationship's type label beside two names
+ 50    15   7.4  50/50 1.00 0.840 LABEL       pdf:draft_brief | COMPOSED@Relationships  [src/data/npcData.js]
+      top: # and # · Mentor and Successor
+      why: hand: npcData.js: a relationship's type label beside two names
+ 50    14   4.7  50/50 1.00 0.827 LABEL       web:Systems/Magic | COMPOSED@(none)  [src/components/new/tabs/OverviewTab.jsx]
+      top: Reliance on magic, as judged at the first survey
+      why: hand: OverviewTab.jsx: the magic-reliance tile's caption
+ 10     3   1.9   9/10 0.90 0.800 STATE       web:Systems/Power | pressureSentence  [unfound]
+      top: The # has been debating market levies for three months.
+      why: hand: narrativeGenerator.js:839 generatePressureSentence: a stress's PRESSURE_SENTENCES draw, else recentConflict (deriveBaselineConflict, flags to a fixed line)
+      paths: pressureSentence, powerStructure.recentConflict, publicProse.blocks.power:governance.text
+ 50    27   1.6  49/50 0.98 0.780 LABEL       pdf:canon_dossier | COMPOSED@Plot Hooks & Quests  [src/pdf/lib/headlines.js]
+      top: 0 hooks to pull; most of them belong to the people (0).
+      why: hand: headlines.js: a count headline (hooks and whose they are)
+ 50    27   1.6  49/50 0.98 0.780 LABEL       pdf:draft_brief | COMPOSED@Plot Hooks & Quests  [src/pdf/lib/headlines.js]
+      top: 0 hooks to pull; most of them belong to the people (0).
+      why: hand: headlines.js: a count headline (hooks and whose they are)
+ 50    18   5.0  50/50 1.00 0.747 CATALOGUE   web:Systems/Services | availableServices.healing[].desc  [src/data/institutionServices.js]
+      top: Interment in the congregation's ground, with the rite that congregation keeps.
+      why: availableServices.healing[].desc: a house's or service's own definition
+ 50   154  29.2  50/50 1.00 0.728 LABEL       web:Systems/Power | COMPOSED@(none)  [src/copy/sectionHelp.js]
+      top: Who holds power and how firmly.
+      why: the page's own words (sectionHelp.js)
+ 50    50  13.5  50/50 1.00 0.647 CATALOGUE   web:Systems/Services | availableServices.legal[].desc  [unfound]
+      top: Municipal grain reserves.
+      why: availableServices.legal[].desc: a house's or service's own definition
+ 50    37  11.2  50/50 1.00 0.630 LABEL       web:Summary/Foundations | COMPOSED@(none)  [src/copy/sectionHelp.js]
+      top: What is holding up and what is under strain.
+      why: the page's own words (sectionHelp.js)
+ 50    20   6.3  50/50 1.00 0.618 CATALOGUE   web:Systems/Services | availableServices.food[].desc  [src/data/institutionServices.js]
+      top: Ale, wine, and spirits across multiple establishments.
+      why: availableServices.food[].desc: a house's or service's own definition
+ 50    24   2.1  50/50 1.00 0.517 LABEL       web:Systems/Outlook | COMPOSED@(none)  [src/components/new/tabs/ViabilityTab.jsx]
+      top: Judged at the first survey; not re-run since.
+      why: hand: ViabilityTab.jsx: the first-survey caption
+ 50    92   8.2  50/50 1.00 0.503 LABEL       pdf:canon_dossier | COMPOSED@Overview  [src/copy/sectionHelp.js]
+      top: As judged at the first survey · Food Security is re-judged as your campaign goes on.
+      why: the page's own words (sectionHelp.js)
+ 50    21   4.4  50/50 1.00 0.503 CATALOGUE   pdf:canon_dossier | availableServices.equipment[].desc  [unfound]
+      top: The economic heartbeat of the week.
+      why: availableServices.equipment[].desc: a house's or service's own definition
+ 50    92   8.2  50/50 1.00 0.503 LABEL       pdf:draft_brief | COMPOSED@Overview  [src/copy/sectionHelp.js]
+      top: As judged at the first survey · Food Security is re-judged as your campaign goes on.
+      why: the page's own words (sectionHelp.js)
+ 50    21   4.4  50/50 1.00 0.503 CATALOGUE   pdf:draft_brief | availableServices.equipment[].desc  [unfound]
+      top: The economic heartbeat of the week.
+      why: availableServices.equipment[].desc: a house's or service's own definition
+ 50   215  44.9  50/50 1.00 0.498 CATALOGUE   pdf:canon_dossier | COMPOSED@Institutions  [src/data/institutionServices.js]
+      top: : Births, marriages, and funerals across several congregations.
+      why: hand: institutionServices.js: a house's service definition
+ 50   215  44.9  50/50 1.00 0.498 CATALOGUE   pdf:draft_brief | COMPOSED@Institutions  [src/data/institutionServices.js]
+      top: : Births, marriages, and funerals across several congregations.
+      why: hand: institutionServices.js: a house's service definition
+ 50    37   7.0  50/50 1.00 0.483 CATALOGUE   pdf:canon_dossier | economicState.incomeSources[].desc  [src/generators/economy/economicState.js]
+      top: Market day stall fees and toll collection on goods entering the market.
+      why: hand: economicState.js: an income source's definition
+ 50    37   7.0  50/50 1.00 0.483 CATALOGUE   pdf:draft_brief | economicState.incomeSources[].desc  [src/generators/economy/economicState.js]
+      top: Market day stall fees and toll collection on goods entering the market.
+      why: hand: economicState.js: an income source's definition
+ 50    42   5.8  50/50 1.00 0.468 LABEL       web:Systems/Services | COMPOSED@(none)  [src/copy/sectionHelp.js]
+      top: What can be bought or hired here, and what is short.
+      why: the page's own words (sectionHelp.js)
+ 41     9   2.4  28/41 0.68 0.448 CATALOGUE   pdf:canon_dossier | availableServices.food[].desc  [unfound]
+      top: Quality ranges from pottage to roasted meats.
+      why: availableServices.food[].desc: a house's or service's own definition
+ 41     9   2.4  28/41 0.68 0.448 CATALOGUE   pdf:draft_brief | availableServices.food[].desc  [unfound]
+      top: Quality ranges from pottage to roasted meats.
+      why: availableServices.food[].desc: a house's or service's own definition
+ 26    10   3.5  18/26 0.69 0.446 CATALOGUE   web:Systems/Economics | economicState.activeChains[].entrepotNote  [unfound]
+      top: Produced in distant lands.
+      why: hand: supplyChainData.js: a chain's own trade note
+ 26    12   3.6  18/26 0.69 0.443 CATALOGUE   pdf:canon_dossier | economicState.activeChains[].entrepotNote  [unfound]
+      top: Produced in distant lands.
+      why: hand: supplyChainData.js: a chain's own trade note
+ 26    12   3.6  18/26 0.69 0.443 CATALOGUE   pdf:draft_brief | economicState.activeChains[].entrepotNote  [unfound]
+      top: Produced in distant lands.
+      why: hand: supplyChainData.js: a chain's own trade note
+ 50   126  18.4  50/50 1.00 0.442 LABEL       pdf:canon_dossier | COMPOSED@Defense & Security  [src/components/new/tabs/DefenseTab.jsx]
+      top: Each bar shows how ready the settlement is for that threat, as judged at the first survey; Disasters & Famine is re-judged as your campaign goes on.
+      why: hand: DefenseTab.jsx: the threat bars' help caption (printed on the PDF too)
+ 50   126  18.4  50/50 1.00 0.442 LABEL       pdf:draft_brief | COMPOSED@Defense & Security  [src/components/new/tabs/DefenseTab.jsx]
+      top: Each bar shows how ready the settlement is for that threat, as judged at the first survey; Disasters & Famine is re-judged as your campaign goes on.
+      why: hand: DefenseTab.jsx: the threat bars' help caption (printed on the PDF too)
+ 50    63  15.5  50/50 1.00 0.441 CATALOGUE   web:Systems/Services | availableServices.equipment[].desc  [src/data/supplyChainData.js]
+      top: Agricultural produce, household goods, livestock.
+      why: availableServices.equipment[].desc: a house's or service's own definition
+      paths: availableServices.equipment[].desc, generationCoherenceReceipt.judgments[].findings[].evidence
+ 50    58   2.6  50/50 1.00 0.439 LABEL       pdf:canon_dossier | COMPOSED@Resources & Production  [src/pdf/sections/ResourcesProduction.jsx]
+      top: · processed/refined in this settlement
+      why: hand: ResourcesProduction.jsx: a fixed annotation
+ 50    58   2.6  50/50 1.00 0.439 LABEL       pdf:draft_brief | COMPOSED@Resources & Production  [src/pdf/sections/ResourcesProduction.jsx]
+      top: · processed/refined in this settlement
+      why: hand: ResourcesProduction.jsx: a fixed annotation
+ 50    97  16.0  50/50 1.00 0.438 LABEL       web:Systems/Defense | COMPOSED@(none)  [src/components/new/tabs/DefenseTab.jsx]
+      top: Each bar shows how ready the settlement is for that threat, as judged at the first survey; Disasters & Famine is re-judged as your campaign goes on.
+      why: hand: DefenseTab.jsx: the tab's own words (the threat bars' caption; a capability tile's label run into its band)
+ 50   119   8.9  50/50 1.00 0.438 LABEL       pdf:canon_dossier | COMPOSED@Economics & Trade  [unfound]
+      top: ECONOMIC FLOWS · 0 CHAIN S
+      why: hand: the PDF's flows header with its count
+ 50   119   8.9  50/50 1.00 0.438 LABEL       pdf:draft_brief | COMPOSED@Economics & Trade  [unfound]
+      top: ECONOMIC FLOWS · 0 CHAIN S
+      why: hand: the PDF's flows header with its count
+ 50    22   3.0  36/50 0.72 0.437 STATE       web:Systems/Defense | economicState.safetyProfile.safetyDesc  [src/generators/safetyProfile.js]
+      top: A mix of safer and more exposed areas.
+      why: hand: safetyProfile.js: size and safety band to a fixed line (TINY_MODERATE_LINE and siblings)
+      paths: economicState.safetyProfile.safetyDesc, publicProse.blocks.defense:state.firstSurvey.field, publicProse.blocks.defense:state.publicOrder.field
+ 50   280  41.1  50/50 1.00 0.431 LABEL?      web:Systems/Institutions | COMPOSED@(none)  [unfound]
+      top: Each house: what it is, who it backs, what it offers.
+      why: hand: a heading-less bag of a tab's lines (no module found) whose commonest is the page's furniture: a help line, a caption, a filter bar
+ 50    34   3.2  50/50 1.00 0.406 LABEL       pdf:canon_dossier | COMPOSED@Viability Assessment  [src/components/new/tabs/ViabilityTab.jsx]
+      top: Judged at the first survey; not re-run since.
+      why: hand: ViabilityTab.jsx: the first-survey caption
+ 50    34   3.2  50/50 1.00 0.406 LABEL       pdf:draft_brief | COMPOSED@Viability Assessment  [src/components/new/tabs/ViabilityTab.jsx]
+      top: Judged at the first survey; not re-run since.
+      why: hand: ViabilityTab.jsx: the first-survey caption
+ 50   234  18.6  50/50 1.00 0.400 LABEL       pdf:canon_dossier | COMPOSED@Services  [src/pdf/sections/Services.jsx]
+      top: 0 buyable across 0 categories
+      why: hand: Services.jsx: a count headline
+ 50   234  18.6  50/50 1.00 0.400 LABEL       pdf:draft_brief | COMPOSED@Services  [src/pdf/sections/Services.jsx]
+      top: 0 buyable across 0 categories
+      why: hand: Services.jsx: a count headline
+ 35    25   2.2  22/35 0.63 0.395 STATE       web:Systems/Power | powerStructure.recentConflict  [unfound]
+      top: The # has been debating market levies for three months.
+      why: hand: governanceNarrative.js:397 deriveBaselineConflict: stress and institution flags to a fixed line, no roll (a stress narrative overrides)
+      paths: powerStructure.recentConflict, publicProse.blocks.power:governance.text
+ 35    25   2.2  22/35 0.63 0.395 STATE       pdf:canon_dossier | powerStructure.recentConflict  [unfound]
+      top: The # has been debating market levies for three months.
+      why: hand: governanceNarrative.js:397 deriveBaselineConflict: stress and institution flags to a fixed line, no roll (a stress narrative overrides)
+      paths: powerStructure.recentConflict, publicProse.blocks.power:governance.text
+ 35    25   2.2  22/35 0.63 0.395 STATE       pdf:draft_brief | powerStructure.recentConflict  [unfound]
+      top: The # has been debating market levies for three months.
+      why: hand: governanceNarrative.js:397 deriveBaselineConflict: stress and institution flags to a fixed line, no roll (a stress narrative overrides)
+      paths: powerStructure.recentConflict, publicProse.blocks.power:governance.text
+ 50     5   1.6  24/50 0.48 0.382 STATE       pdf:canon_dossier | COMPOSED@Identity & Daily Life  [unfound]
+      top: Production and need are in balance.
+      why: hand: IdentityDailyLife.jsx:277: the food balance's band to a fixed line
+ 50     5   1.6  24/50 0.48 0.382 STATE       pdf:draft_brief | COMPOSED@Identity & Daily Life  [unfound]
+      top: Production and need are in balance.
+      why: hand: IdentityDailyLife.jsx:277: the food balance's band to a fixed line
+ 50    62   9.3  40/50 0.80 0.379 STATE       web:Systems/Power | powerStructure.factions[].desc  [src/generators/power/rulingStructure.js]
+      top: Church institutions are well-embedded in civic life; their opinion on appointments, taxation, and law is sought and usually influential.
+      why: hand: rulingStructure.js:405: the government type ('Elder Council') to a fixed line
+ 50    62   9.3  40/50 0.80 0.379 STATE       pdf:canon_dossier | powerStructure.factions[].desc  [src/generators/power/rulingStructure.js]
+      top: Church institutions are well-embedded in civic life; their opinion on appointments, taxation, and law is sought and usually influential.
+      why: hand: rulingStructure.js:405: the government type ('Elder Council') to a fixed line
+ 50    62   9.3  40/50 0.80 0.379 STATE       pdf:draft_brief | powerStructure.factions[].desc  [src/generators/power/rulingStructure.js]
+      top: Church institutions are well-embedded in civic life; their opinion on appointments, taxation, and law is sought and usually influential.
+      why: hand: rulingStructure.js:405: the government type ('Elder Council') to a fixed line
+ 50    48   6.0  38/50 0.76 0.370 NARRATIVE   web:Systems/Power | powerStructure.factionRelationships[].narrative  [src/generators/factionDynamics.js]
+      top: The # needs the taxes and loans of the #, and the # need the # to enforce their contracts and keep the law.
+      why: hand: factionDynamics.js: the two powers' relation composed as a story
+ 50   240  31.9  35/50 0.70 0.368 NARRATIVE   web:World/Relationships | relationships[].tension  [src/data/npcData.js]
+      top: # has begun to act like someone who considers the debt paid.
+      why: hand: npcData.js: a relationship's tension drawn from its type's pool
+      paths: relationships[].tension, prominentRelationship.tension, prominentRelationship.phrasing
+ 50   240  31.9  35/50 0.70 0.368 NARRATIVE   pdf:canon_dossier | relationships[].tension  [src/data/npcData.js]
+      top: # has begun to act like someone who considers the debt paid.
+      why: hand: npcData.js: a relationship's tension drawn from its type's pool
+      paths: relationships[].tension, prominentRelationship.tension, prominentRelationship.phrasing
+ 50   240  31.9  35/50 0.70 0.368 NARRATIVE   pdf:draft_brief | relationships[].tension  [src/data/npcData.js]
+      top: # has begun to act like someone who considers the debt paid.
+      why: hand: npcData.js: a relationship's tension drawn from its type's pool
+      paths: relationships[].tension, prominentRelationship.tension, prominentRelationship.phrasing
+ 50   163  12.5  50/50 1.00 0.361 LABEL       pdf:canon_dossier | COMPOSED@(none)  [src/components/new/tabs/WhoRunsThisTownPanel.jsx]
+      top: Who really runs this town
+      why: hand: WhoRunsThisTownPanel.jsx: the panel's title
+ 50   163  12.5  50/50 1.00 0.361 LABEL       pdf:draft_brief | COMPOSED@(none)  [src/components/new/tabs/WhoRunsThisTownPanel.jsx]
+      top: Who really runs this town
+      why: hand: WhoRunsThisTownPanel.jsx: the panel's title
+ 50   264  36.4  35/50 0.70 0.357 NARRATIVE   web:World/Relationships | relationships[].description  [src/data/npcData.js]
+      top: # owes # a great deal, and neither has ever said so aloud.
+      why: hand: npcData.js: a relationship's line drawn from its type's pool
+ 50   264  36.4  35/50 0.70 0.357 NARRATIVE   pdf:canon_dossier | relationships[].description  [src/data/npcData.js]
+      top: # owes # a great deal, and neither has ever said so aloud.
+      why: hand: npcData.js: a relationship's line drawn from its type's pool
+ 50   264  36.4  35/50 0.70 0.357 NARRATIVE   pdf:draft_brief | relationships[].description  [src/data/npcData.js]
+      top: # owes # a great deal, and neither has ever said so aloud.
+      why: hand: npcData.js: a relationship's line drawn from its type's pool
+ 30     9   2.0  17/30 0.57 0.343 CATALOGUE   pdf:canon_dossier | availableServices.transport[].desc  [src/data/economicData.js]
+      top: Main revenue of port administration.
+      why: availableServices.transport[].desc: a house's or service's own definition
+ 30     9   2.0  17/30 0.57 0.343 CATALOGUE   pdf:draft_brief | availableServices.transport[].desc  [src/data/economicData.js]
+      top: Main revenue of port administration.
+      why: availableServices.transport[].desc: a house's or service's own definition
+ 50    37   4.7  33/50 0.66 0.331 STATE       web:World/NPCs | npcs[].structuralPosition  [src/generators/npcStructure.js]
+      top: Holds the seat, and people accept it; there is room to act, not just to hold on.
+      why: hand: npcStructure.js:207: the seat's tags (CALM_ONLY and others) to a fixed position line
+ 40    21   3.0  24/40 0.60 0.329 CATALOGUE   web:Systems/Services | availableServices.information[].desc  [unfound]
+      top: The sexton records who lies where.
+      why: availableServices.information[].desc: a house's or service's own definition
+ 15    55   9.2  15/15 1.00 0.327 LABEL       web:Summary/Crisis | COMPOSED@(none)  [src/domain/crisis/crisisPage.js]
+      top: What the players see first
+      why: hand: empty state: crisisPage.js noLevers, where no house holds what the crisis turns on
+ 50   547  46.4  50/50 1.00 0.326 LABEL       web:Systems/Economics | COMPOSED@(none)  [src/data/crisisDependence.js]
+      top: LodgingMeals and drinkStabling
+      why: hand: crisisDependence.js: service names run together (a list, not a sentence)
+ 41    11   2.0  24/41 0.59 0.313 CATALOGUE   pdf:canon_dossier | economicState.primaryExports[]  [src/generators/computeActiveChains.js]
+      top: Legal services (contracts, notarial)
+      why: hand: a good's name
+      paths: economicState.primaryExports[], economicState.institutionalServices[].exportLabel, economicState.activeChains[].outputs[], economicState.localProduction[]
+ 41    11   2.0  24/41 0.59 0.313 CATALOGUE   pdf:draft_brief | economicState.primaryExports[]  [src/generators/computeActiveChains.js]
+      top: Legal services (contracts, notarial)
+      why: hand: a good's name
+      paths: economicState.primaryExports[], economicState.institutionalServices[].exportLabel, economicState.activeChains[].outputs[], economicState.localProduction[]
+ 50    77   3.9  50/50 1.00 0.308 LABEL       web:World/History | COMPOSED@(none)  [src/components/new/tabs/HistoryTab.jsx]
+      top: Major Historical Events (0)▲
+      why: hand: HistoryTab.jsx: a disclosure's title and its count
+ 45    24   3.4  24/45 0.53 0.306 CATALOGUE   web:Systems/Services | availableServices.employment[].desc  [unfound]
+      top: Formal training under a master craftsperson.
+      why: availableServices.employment[].desc: a house's or service's own definition
+      paths: availableServices.employment[].desc, generationCoherenceReceipt.judgments[].findings[].evidence
+ 37     8   1.6  15/37 0.41 0.290 STATE       web:Systems/Defense | publicProse.blocks.defense:criminal.ringNote  [src/domain/display/defenseDisplay.js]
+      top: Thieves, fences and bandits each work for themselves; there is no boss to threaten or to bribe, which makes them harder to stamp out.
+      why: hand: DOSSIER_STATE_PROSE_DEFENSE: the criminal-structure band's pool
+ 37     8   1.6  15/37 0.41 0.290 STATE       pdf:canon_dossier | publicProse.blocks.defense:criminal.ringNote  [src/domain/display/defenseDisplay.js]
+      top: Thieves, fences and bandits each work for themselves; there is no boss to threaten or to bribe, which makes them harder to stamp out.
+      why: hand: DOSSIER_STATE_PROSE_DEFENSE: the criminal-structure band's pool
+ 37     8   1.6  15/37 0.41 0.290 STATE       pdf:draft_brief | publicProse.blocks.defense:criminal.ringNote  [src/domain/display/defenseDisplay.js]
+      top: Thieves, fences and bandits each work for themselves; there is no boss to threaten or to bribe, which makes them harder to stamp out.
+      why: hand: DOSSIER_STATE_PROSE_DEFENSE: the criminal-structure band's pool
+ 29    13   2.5  15/29 0.52 0.290 CATALOGUE   web:Systems/Services | availableServices.entertainment[].desc  [unfound]
+      top: Performers, contests, games, and spectacle.
+      why: availableServices.entertainment[].desc: a house's or service's own definition
+ 50   201   8.3  50/50 1.00 0.281 LABEL       pdf:canon_dossier | COMPOSED@Tonight  [src/domain/summary/tonightSheet.js]
+      top: What the players test first
+      why: hand: tonightSheet.js TONIGHT_COPY: a heading
+ 50   201   8.3  50/50 1.00 0.281 LABEL       pdf:draft_brief | COMPOSED@Tonight  [src/domain/summary/tonightSheet.js]
+      top: What the players test first
+      why: hand: tonightSheet.js TONIGHT_COPY: a heading
+ 50    96   4.5  50/50 1.00 0.266 LABEL?      web:World/Traditions | COMPOSED@(none)  [unfound]
+      top: The founding traditions of #.
+      why: hand: a heading-less bag of a tab's lines (no module found) whose commonest is the page's furniture: a help line, a caption, a filter bar
+ 49    29   4.8  25/49 0.51 0.260 CATALOGUE   web:Systems/Services | availableServices.transport[].desc  [src/data/institutionServices.js]
+      top: Horse care, feed, and overnight stabling.
+      why: availableServices.transport[].desc: a house's or service's own definition
+ 50   192  29.2  39/50 0.78 0.244 NARRATIVE   web:Summary/Plot Hooks | npcs[].plotHooks[]  [src/data/npcData.js]
+      top: Someone keeps paying off their small debts around the place before they can, and has left no name.
+      why: hand: npcData.js: a person's hook drawn from a pool
+ 50   192  29.2  39/50 0.78 0.244 NARRATIVE   pdf:canon_dossier | npcs[].plotHooks[]  [src/data/npcData.js]
+      top: Someone keeps paying off their small debts around the place before they can, and has left no name.
+      why: hand: npcData.js: a person's hook drawn from a pool
+ 50   192  29.2  39/50 0.78 0.244 NARRATIVE   pdf:draft_brief | npcs[].plotHooks[]  [src/data/npcData.js]
+      top: Someone keeps paying off their small debts around the place before they can, and has left no name.
+      why: hand: npcData.js: a person's hook drawn from a pool
+ 36    16   3.2  14/36 0.39 0.239 CATALOGUE   web:Systems/Services | availableServices.criminal[].desc  [src/generators/servicesGenerator.js]
+      top: Ask around at the right tavern.
+      why: availableServices.criminal[].desc: a house's or service's own definition
+ 50   955  51.2  50/50 1.00 0.225 LABEL       web:World/NPCs | COMPOSED@(none)  [src/copy/sectionHelp.js]
+      top: The people worth knowing and what each one holds.0 high influence · 0 moderate
+      why: the page's own words (sectionHelp.js)
+ 22    16   2.6   9/22 0.41 0.219 STATE       web:Systems/Defense | publicProse.blocks.defense:posture.prize.field  [src/domain/display/stateProse/tierVoice.js]
+      top: The town watch walks the usual rounds.
+      why: hand: DOSSIER_STATE_PROSE_DEFENSE: the band's pool; empty state where the place has none (the nobody-paid band)
+      paths: publicProse.blocks.defense:posture.prize.field, publicProse.blocks.defense:posture.posture.field, publicProse.blocks.defense:posture.terrain.field, economicState.safetyProfile.guardEffectivenessDesc
+ 22    16   2.6   9/22 0.41 0.219 STATE       pdf:canon_dossier | publicProse.blocks.defense:posture.prize.field  [src/domain/display/stateProse/tierVoice.js]
+      top: The town watch walks the usual rounds.
+      why: hand: DOSSIER_STATE_PROSE_DEFENSE: the band's pool; empty state where the place has none (the nobody-paid band)
+      paths: publicProse.blocks.defense:posture.prize.field, publicProse.blocks.defense:posture.posture.field, publicProse.blocks.defense:posture.terrain.field, economicState.safetyProfile.guardEffectivenessDesc
+ 22    16   2.6   9/22 0.41 0.219 STATE       pdf:draft_brief | publicProse.blocks.defense:posture.prize.field  [src/domain/display/stateProse/tierVoice.js]
+      top: The town watch walks the usual rounds.
+      why: hand: DOSSIER_STATE_PROSE_DEFENSE: the band's pool; empty state where the place has none (the nobody-paid band)
+      paths: publicProse.blocks.defense:posture.prize.field, publicProse.blocks.defense:posture.posture.field, publicProse.blocks.defense:posture.terrain.field, economicState.safetyProfile.guardEffectivenessDesc
+ 26    16   2.6   9/26 0.35 0.214 STATE       web:Systems/Defense | publicProse.blocks.defense:posture.posture.field  [src/generators/safetyProfile.js]
+      top: Effective against opportunistic crime; less effective against organized operations that can plan around patrol routes.
+      why: hand: DOSSIER_STATE_PROSE_DEFENSE: the band's pool; empty state where the place has none (the nobody-paid band)
+      paths: publicProse.blocks.defense:posture.posture.field, economicState.safetyProfile.guardEffectivenessDesc, publicProse.blocks.defense:posture.terrain.field
+ 26    16   2.6   9/26 0.35 0.214 STATE       pdf:canon_dossier | publicProse.blocks.defense:posture.posture.field  [src/generators/safetyProfile.js]
+      top: Effective against opportunistic crime; less effective against organized operations that can plan around patrol routes.
+      why: hand: DOSSIER_STATE_PROSE_DEFENSE: the band's pool; empty state where the place has none (the nobody-paid band)
+      paths: publicProse.blocks.defense:posture.posture.field, economicState.safetyProfile.guardEffectivenessDesc, publicProse.blocks.defense:posture.terrain.field
+ 26    16   2.6   9/26 0.35 0.214 STATE       pdf:draft_brief | publicProse.blocks.defense:posture.posture.field  [src/generators/safetyProfile.js]
+      top: Effective against opportunistic crime; less effective against organized operations that can plan around patrol routes.
+      why: hand: DOSSIER_STATE_PROSE_DEFENSE: the band's pool; empty state where the place has none (the nobody-paid band)
+      paths: publicProse.blocks.defense:posture.posture.field, economicState.safetyProfile.guardEffectivenessDesc, publicProse.blocks.defense:posture.terrain.field
+ 50   129   7.2  35/50 0.70 0.209 LABEL?      web:Summary/Overview | COMPOSED@(none)  [unfound]
+      top: The town keeps people under arms for its defence.
+      why: hand: a heading-less bag of a tab's lines (no module found) whose commonest is the page's furniture: a help line, a caption, a filter bar
+ 50    50   4.9  25/50 0.50 0.206 CATALOGUE   pdf:canon_dossier | economicState.primaryImports[]  [src/data/finishedGoodsCategory.js]
+      top: Incense, ritual oil, and vestment materials
+      why: hand: a good's name
+ 50    50   4.9  25/50 0.50 0.206 CATALOGUE   pdf:draft_brief | economicState.primaryImports[]  [src/data/finishedGoodsCategory.js]
+      top: Incense, ritual oil, and vestment materials
+      why: hand: a good's name
+ 50    40   4.1  25/50 0.50 0.198 LABEL       web:World/History | COMPOSED@Major Historical Events  [src/components/new/tabs/HistoryTab.jsx]
+      top: The PurgeInfiltration Fearmajor
+      why: hand: HistoryTab.jsx: an event's title, kind and weight run together
+ 50   568  19.5  44/50 0.88 0.181 LABEL       pdf:canon_dossier | COMPOSED@Notable NPCs  [src/data/npcData.js]
+      top: · # - called by · Outstanding Debt
+      why: hand: npcData.js: a tie's label beside a name
+ 50   568  19.5  44/50 0.88 0.181 LABEL       pdf:draft_brief | COMPOSED@Notable NPCs  [src/data/npcData.js]
+      top: · # - called by · Outstanding Debt
+      why: hand: npcData.js: a tie's label beside a name
+ 50  1048  57.1  44/50 0.88 0.180 LABEL       web:World/NPCs | COMPOSED@Unranked members  [src/data/npcData.js]
+      top: Called by# · Professional Rivalry
+      why: hand: npcData.js: a tie's label
+ 49    29   3.6  15/49 0.31 0.179 NARRATIVE   pdf:canon_dossier | history.historicalEvents[].lastingEffects[]  [src/data/historyData.js]
+      top: Succession now governed by a charter drafted in the aftermath
+      why: hand: historyData.js:1263: an event's lasting effect drawn from the event type's pool
+      paths: history.historicalEvents[].lastingEffects[], generationCoherenceReceipt.judgments[].findings[].evidence
+ 49    29   3.6  15/49 0.31 0.179 NARRATIVE   pdf:draft_brief | history.historicalEvents[].lastingEffects[]  [src/data/historyData.js]
+      top: Succession now governed by a charter drafted in the aftermath
+      why: hand: historyData.js:1263: an event's lasting effect drawn from the event type's pool
+      paths: history.historicalEvents[].lastingEffects[], generationCoherenceReceipt.judgments[].findings[].evidence
+ 50   457  42.1  33/50 0.66 0.178 CATALOGUE   web:Systems/Institutions | institutions[].desc  [unfound]
+      top: Guilds buy plots together so their members lie among their trade.
+      why: institutions[].desc: a house's or service's own definition
+      paths: institutions[].desc, generationCoherenceReceipt.judgments[].findings[].evidence
+ 50   457  42.1  33/50 0.66 0.178 CATALOGUE   pdf:canon_dossier | institutions[].desc  [unfound]
+      top: Guilds buy plots together so their members lie among their trade.
+      why: institutions[].desc: a house's or service's own definition
+      paths: institutions[].desc, generationCoherenceReceipt.judgments[].findings[].evidence
+ 50   457  42.1  33/50 0.66 0.178 CATALOGUE   pdf:draft_brief | institutions[].desc  [unfound]
+      top: Guilds buy plots together so their members lie among their trade.
+      why: institutions[].desc: a house's or service's own definition
+      paths: institutions[].desc, generationCoherenceReceipt.judgments[].findings[].evidence
+ 49    14   1.5  16/49 0.33 0.168 STATE       web:Systems/Power | publicProse.blocks.power:desk.successionRisk.sentence  [src/domain/display/stateProse/stateProseKernel.js]
+      top: The # outweighs everyone at # who wants its place, and the whole town knows who they are.
+      why: hand: DOSSIER_STATE_PROSE_POWER: the succession-risk band's pool
+ 28    41   3.4   9/28 0.32 0.159 CATALOGUE   web:Systems/Defense | economicState.safetyProfile.crimeTypes[].desc  [unfound]
+      top: A street gang controls part of the place, extorting local businesses and residents.
+      why: hand: safetyProfile.js: a crime type's own definition
+ 50    10   1.5  11/50 0.22 0.149 STATE       web:Systems/Defense | publicProse.blocks.defense:forces.fortification.sentence  [unfound]
+      top: The wall at # is entered by its gates, and the gate tolls are counted there; a gate left unwatched is a toll lost.
+      why: hand: DOSSIER_STATE_PROSE_DEFENSE: the band's pool; empty state where the place has none (the unwalled band)
+ 50    23   2.4  13/50 0.26 0.140 STATE?      web:Summary/Overview | publicProse.blocks.general:overview.siteLines[]  [unfound]
+      top: Visitors find #'s market without asking.
+      why: hand: printProse.js siteLines: the overview's site lines, by the place's standing powers
+  9    11   2.1    3/9 0.33 0.137 STATE       web:Systems/Defense | publicProse.blocks.defense:threat.invasion.sentence  [unfound]
+      top: You see armed fighters at # and no wall for them to stand behind, so any fight would happen wherever the attacker chooses.
+      why: hand: DOSSIER_STATE_PROSE_DEFENSE: the invasion-threat band's pool
+ 50    27   2.8  11/50 0.22 0.135 CATALOGUE   web:Systems/Defense | institutions[].desc  [src/data/institutionDescVariants.js]
+      top: Part-time guards who walk the night and hold the gates.
+      why: institutions[].desc: a house's or service's own definition
+ 50    50   3.9  16/50 0.32 0.135 NARRATIVE?  web:World/History | COMPOSED@Founding  [src/generators/narrativeGenerator.js]
+      top: How survived:with help from external allies at a critical moment
+      why: composed by narrativeGenerator.js: a story or pool module
+ 50    72   5.1  15/50 0.30 0.119 NARRATIVE   web:Summary/Plot Hooks | history.currentTensions[].plotHooks[]  [src/data/historyData.js]
+      top: A journeyman denied mastership has proof the exam was rigged
+      why: history.currentTensions[].plotHooks[]: a story field of the place
+      paths: history.currentTensions[].plotHooks[], history.historicalEvents[].plotHooks[]
+ 50    72   5.1  15/50 0.30 0.119 NARRATIVE   pdf:canon_dossier | history.currentTensions[].plotHooks[]  [src/data/historyData.js]
+      top: A journeyman denied mastership has proof the exam was rigged
+      why: history.currentTensions[].plotHooks[]: a story field of the place
+      paths: history.currentTensions[].plotHooks[], history.historicalEvents[].plotHooks[]
+ 50    72   5.1  15/50 0.30 0.119 NARRATIVE   pdf:draft_brief | history.currentTensions[].plotHooks[]  [src/data/historyData.js]
+      top: A journeyman denied mastership has proof the exam was rigged
+      why: history.currentTensions[].plotHooks[]: a story field of the place
+      paths: history.currentTensions[].plotHooks[], history.historicalEvents[].plotHooks[]
+ 50    66   4.5  12/50 0.24 0.104 NARRATIVE   web:World/History | history.historicalEvents[].description  [src/data/historyData.js]
+      top: The merchants are getting richer and the labourers are not, and the labourers have noticed
+      why: history.historicalEvents[].description: a story field of the place
+ 50    66   4.5  12/50 0.24 0.104 NARRATIVE   pdf:canon_dossier | history.historicalEvents[].description  [src/data/historyData.js]
+      top: The merchants are getting richer and the labourers are not, and the labourers have noticed
+      why: history.historicalEvents[].description: a story field of the place
+ 50    66   4.5  12/50 0.24 0.104 NARRATIVE   pdf:draft_brief | history.historicalEvents[].description  [src/data/historyData.js]
+      top: The merchants are getting richer and the labourers are not, and the labourers have noticed
+      why: history.historicalEvents[].description: a story field of the place
+ 50    33   1.6  13/50 0.26 0.100 NARRATIVE   web:Summary/Overview | history.currentTensions[].description  [src/data/historyData.js]
+      top: Guild and non-guild traders are fighting over who may sell what, and over a say in how the place is run
+      why: history.currentTensions[].description: a story field of the place
+ 50    33   1.6  13/50 0.26 0.100 NARRATIVE   web:World/History | history.currentTensions[].description  [src/data/historyData.js]
+      top: Guild and non-guild traders are fighting over who may sell what, and over a say in how the place is run
+      why: history.currentTensions[].description: a story field of the place
+ 50    33   1.6  13/50 0.26 0.100 NARRATIVE   pdf:canon_dossier | history.currentTensions[].description  [src/data/historyData.js]
+      top: Guild and non-guild traders are fighting over who may sell what, and over a say in how the place is run
+      why: history.currentTensions[].description: a story field of the place
+ 50    33   1.6  13/50 0.26 0.100 NARRATIVE   pdf:draft_brief | history.currentTensions[].description  [src/data/historyData.js]
+      top: Guild and non-guild traders are fighting over who may sell what, and over a say in how the place is run
+      why: history.currentTensions[].description: a story field of the place
+ 50    58   3.1  17/50 0.34 0.095 NARRATIVE   pdf:canon_dossier | npcs[].presentation.behaviour  [src/data/npcData.js]
+      top: Treats every question as a possible threat, and remembers who asked it.
+      why: hand: npcData.js:1601: a behaviour drawn from a pool
+ 50    58   3.1  17/50 0.34 0.095 NARRATIVE   pdf:draft_brief | npcs[].presentation.behaviour  [src/data/npcData.js]
+      top: Treats every question as a possible threat, and remembers who asked it.
+      why: hand: npcData.js:1601: a behaviour drawn from a pool
+ 14    26   2.6   7/14 0.50 0.092 LABEL       pdf:timeline_packet | COMPOSED@(none)  [src/data/bandLadders.js]
+      top: Defense: Lightly Defended
+      why: hand: bandLadders.js: a field name and its band word
+ 35    36   1.7   9/35 0.26 0.068 STATE       pdf:canon_dossier | pressureSentence  [unfound]
+      top: The # has been debating market levies for three months.
+      why: hand: narrativeGenerator.js:839 generatePressureSentence: a stress's PRESSURE_SENTENCES draw, else recentConflict (deriveBaselineConflict, flags to a fixed line)
+      paths: pressureSentence, relationships[].tension, powerStructure.recentConflict, publicProse.blocks.power:governance.text, prominentRelationship.tension, prominentRelationship.phrasing
+ 35    36   1.7   9/35 0.26 0.068 STATE       pdf:draft_brief | pressureSentence  [unfound]
+      top: The # has been debating market levies for three months.
+      why: hand: narrativeGenerator.js:839 generatePressureSentence: a stress's PRESSURE_SENTENCES draw, else recentConflict (deriveBaselineConflict, flags to a fixed line)
+      paths: pressureSentence, relationships[].tension, powerStructure.recentConflict, publicProse.blocks.power:governance.text, prominentRelationship.tension, prominentRelationship.phrasing
+ 35    36   1.7   9/35 0.26 0.068 STATE       session | pressureSentence  [unfound]
+      top: The # has been debating market levies for three months.
+      why: hand: narrativeGenerator.js:839 generatePressureSentence: a stress's PRESSURE_SENTENCES draw, else recentConflict (deriveBaselineConflict, flags to a fixed line)
+      paths: pressureSentence, relationships[].tension, powerStructure.recentConflict, publicProse.blocks.power:governance.text, prominentRelationship.tension, prominentRelationship.phrasing
+ 15    22   2.0   3/15 0.20 0.067 NARRATIVE   web:Summary/Crisis | stress.crisisHook  [src/domain/facts/registeredWords.js]
+      top: Something important (a resource, a prisoner, a decision) falls into the contested space between the powers.
+      why: stress.crisisHook: a story field of the place
+ 15    22   2.0   3/15 0.20 0.067 NARRATIVE   pdf:canon_dossier | stress.crisisHook  [src/domain/facts/registeredWords.js]
+      top: Something important (a resource, a prisoner, a decision) falls into the contested space between the powers.
+      why: stress.crisisHook: a story field of the place
+ 15    22   2.0   3/15 0.20 0.067 NARRATIVE   pdf:draft_brief | stress.crisisHook  [src/domain/facts/registeredWords.js]
+      top: Something important (a resource, a prisoner, a decision) falls into the contested space between the powers.
+      why: stress.crisisHook: a story field of the place
+ 50    68   3.1   9/50 0.18 0.063 NARRATIVE?  web:Systems/Power | publicProse.blocks.power:governance.text  [src/domain/display/governanceAccount.js]
+      top: Prosperity has earned the # the approval of #.
+      why: many sentences (68) composed per place; pool or story not proven
+ 50    68   3.1   9/50 0.18 0.063 NARRATIVE?  pdf:canon_dossier | publicProse.blocks.power:governance.text  [src/domain/display/governanceAccount.js]
+      top: Prosperity has earned the # the approval of #.
+      why: many sentences (68) composed per place; pool or story not proven
+ 50    68   3.1   9/50 0.18 0.063 NARRATIVE?  pdf:draft_brief | publicProse.blocks.power:governance.text  [src/domain/display/governanceAccount.js]
+      top: Prosperity has earned the # the approval of #.
+      why: many sentences (68) composed per place; pool or story not proven
+ 15    26   2.4   3/15 0.20 0.057 STATE       web:Summary/Crisis | stress.summary  [src/generators/stressNarrative.js]
+      top: Two or three powers each run part of #, and none will give way.
+      why: hand: the crisis's own summary line, by the crisis
+ 15    26   2.4   3/15 0.20 0.057 STATE       pdf:canon_dossier | stress.summary  [src/generators/stressNarrative.js]
+      top: Two or three powers each run part of #, and none will give way.
+      why: hand: the crisis's own summary line, by the crisis
+ 15    26   2.4   3/15 0.20 0.057 STATE       pdf:draft_brief | stress.summary  [src/generators/stressNarrative.js]
+      top: Two or three powers each run part of #, and none will give way.
+      why: hand: the crisis's own summary line, by the crisis
+ 50    36   1.9   8/50 0.16 0.047 NARRATIVE?  pdf:canon_dossier | culturalNotes  [src/data/cultureProfiles.js]
+      top: Farmsteads and craft yards form compact wards around a hall, church, or fortified manor.
+      why: composed by cultureProfiles.js: a story or pool module
+      paths: culturalNotes, culturalIdentity.socialTexture, culturalIdentity.builtForm
+ 50    36   1.9   8/50 0.16 0.047 NARRATIVE?  pdf:draft_brief | culturalNotes  [src/data/cultureProfiles.js]
+      top: Farmsteads and craft yards form compact wards around a hall, church, or fortified manor.
+      why: composed by cultureProfiles.js: a story or pool module
+      paths: culturalNotes, culturalIdentity.socialTexture, culturalIdentity.builtForm
+ 33   127   6.2   8/33 0.24 0.047 NARRATIVE?  web:World/NPCs | COMPOSED@In no power  [src/data/people/titleSecretsPresentations.js]
+      top: How they deal Speaks briefly and lets one of the others see you out.
+      why: composed by titleSecretsPresentations.js: a story or pool module
+ 49    83   3.0  11/49 0.22 0.046 NARRATIVE   web:Summary/Plot Hooks | history.historicalEvents[].plotHooks[]  [src/data/historyData.js]
+      top: A would-be heir approaches outsiders to investigate a rival's past
+      why: history.historicalEvents[].plotHooks[]: a story field of the place
+ 49    83   3.0  11/49 0.22 0.046 NARRATIVE   pdf:canon_dossier | history.historicalEvents[].plotHooks[]  [src/data/historyData.js]
+      top: A would-be heir approaches outsiders to investigate a rival's past
+      why: history.historicalEvents[].plotHooks[]: a story field of the place
+ 49    83   3.0  11/49 0.22 0.046 NARRATIVE   pdf:draft_brief | history.historicalEvents[].plotHooks[]  [src/data/historyData.js]
+      top: A would-be heir approaches outsiders to investigate a rival's past
+      why: history.historicalEvents[].plotHooks[]: a story field of the place
+ 50   197   6.3  12/50 0.24 0.045 LABEL?      web:Systems/Resources | COMPOSED@(none)  [unfound]
+      top: PartialTimbermedium value
+      why: hand: a heading-less bag of a tab's lines (no module found) whose commonest is the page's furniture: a help line, a caption, a filter bar
+ 50   136   4.7   9/50 0.18 0.039 NARRATIVE   web:Summary/Overview | arrivalScene  [src/generators/structuralValidator.js]
+      top: The gatehouse arch frames the main road.
+      why: arrivalScene: a story field of the place
+ 50    53   1.6   9/50 0.18 0.034 STATE       web:Summary/Overview | pressureSentence  [unfound]
+      top: The # has been debating market levies for three months.
+      why: hand: narrativeGenerator.js:839 generatePressureSentence: a stress's PRESSURE_SENTENCES draw, else recentConflict (deriveBaselineConflict, flags to a fixed line)
+      paths: pressureSentence, relationships[].tension, powerStructure.recentConflict, publicProse.blocks.power:governance.text, prominentRelationship.tension, prominentRelationship.phrasing
+ 49    75   2.6   5/49 0.10 0.028 NARRATIVE   session | npcs[].plotHooks[]  [src/data/npcData.js]
+      top: Their apprentice has been offered a partnership by a rival, on condition that the apprentice brings the recipes.
+      why: hand: npcData.js: a person's hook drawn from a pool
+ 15    25   2.0   3/15 0.20 0.026 NARRATIVE?  web:Summary/Plot Hooks | COMPOSED@(none)  [src/domain/crisis/crisisHooks.js]
+      top: The migration turns on the inns, run by #: whoever wins it over decides how the migration goes.
+      why: composed by crisisHooks.js: a story or pool module
+ 17    26   1.8   3/17 0.18 0.022 NARRATIVE?  session | COMPOSED@hooks[].text  [src/domain/crisis/crisisHooks.js]
+      top: The migration turns on the inns, run by #: whoever wins it over decides how the migration goes.
+      why: composed by crisisHooks.js: a story or pool module
+ 50  1207  26.3  26/50 0.52 0.017 LABEL?      web:World/Relationships | COMPOSED@(none)  [unfound]
+      top: All (0)Allies (0)Rivals (0)Enemies (0)Leverage (0)
+      why: hand: a heading-less bag of a tab's lines (no module found) whose commonest is the page's furniture: a help line, a caption, a filter bar
+ 25    34   1.6   3/25 0.12 0.013 NARRATIVE   web:World/Relationships | prominentRelationship.full  [unfound]
+      top: # and # signed a pact after their last quarrel cost them both.
+      why: prominentRelationship.full: a story field of the place
+      paths: prominentRelationship.full, relationships[].description
+ 25    34   1.6   3/25 0.12 0.013 NARRATIVE   pdf:canon_dossier | prominentRelationship.full  [unfound]
+      top: # and # signed a pact after their last quarrel cost them both.
+      why: prominentRelationship.full: a story field of the place
+      paths: prominentRelationship.full, relationships[].description
+ 25    34   1.6   3/25 0.12 0.013 NARRATIVE   pdf:draft_brief | prominentRelationship.full  [unfound]
+      top: # and # signed a pact after their last quarrel cost them both.
+      why: prominentRelationship.full: a story field of the place
+      paths: prominentRelationship.full, relationships[].description
+ 50    89   2.3   3/50 0.06 0.011 NARRATIVE?  session | COMPOSED@people[].line  [unfound]
+      top: win over one of #'s friends.
+      why: many sentences (89) composed per place; pool or story not proven
+
+# town: table (c) PRINTED TWICE INSIDE ONE PLACE (one family) — 38 rows
+ 50 places  web
+      slots: web:Summary/Overview | COMPOSED@(none)
+             web:World/History | COMPOSED@(none)
+      e.g.: "More complicated than it looks from the road.
+ 50 places  web
+      slots: web:Summary/Overview | history.currentTensions[].description
+             web:World/History | history.currentTensions[].description
+      e.g.: Crime is rising faster than those in charge can answer it, and some talk of taking the law into their own hands
+ 50 places  web
+      slots: web:Systems/Defense | institutions[].desc
+             web:Systems/Institutions | institutions[].desc
+      e.g.: Housing for guards or small garrison.
+ 50 places  web
+      slots: web:Notes/AI Notes | COMPOSED@(none)
+             web:Notes/DM Notes | COMPOSED@(none)
+      e.g.: Save this settlement to keep your notes with it.
+ 49 places  web
+      slots: web:World/NPCs | COMPOSED@(none)
+             web:World/NPCs | COMPOSED@Unranked members
+      e.g.: Called by# · Mentor and Successor
+ 24 places  web
+      slots: web:Summary/Overview | pressureSentence
+             web:World/Relationships | pressureSentence
+      e.g.: # has one favour left to call in, and is saving it.
+ 24 places  web
+      slots: web:Summary/Overview | relationships[].tension
+             web:World/Relationships | relationships[].tension
+      e.g.: # has begun to act like someone who considers the debt paid.
+ 24 places  web
+      slots: web:Systems/Power | institutions[].name
+             web:Systems/Services | institutions[].name
+      e.g.: Bowyers & fletchers (guild)
+ 15 places  web
+      slots: web:Summary/Crisis | COMPOSED@(none)
+             web:Systems/Economics | COMPOSED@(none)
+      e.g.: Stores: a granary, about six months of grain.
+ 15 places  web
+      slots: web:Summary/Crisis | stress.viabilityNote
+             web:Systems/Defense | stress.viabilityNote
+      e.g.: Big decisions wait for a new leader, and in the meantime the place gets by on old habit.
+ 15 places  pdf:canon_dossier
+      slots: pdf:canon_dossier | COMPOSED@Plot Hooks & Quests
+             pdf:canon_dossier | COMPOSED@Tonight
+      e.g.: In the succession crisis, # of # is stirring it: its power gains from the crisis.
+ 15 places  pdf:draft_brief
+      slots: pdf:draft_brief | COMPOSED@Plot Hooks & Quests
+             pdf:draft_brief | COMPOSED@Tonight
+      e.g.: In the succession crisis, # of # is stirring it: its power gains from the crisis.
+ 15 places  session
+      slots: session | COMPOSED@crisis.line
+             session | COMPOSED@opening
+      e.g.: The rivals for #'s empty seat each count their followers, and each fears the others will move first.
+ 13 places  web
+      slots: web:Summary/Overview | COMPOSED@(none)
+             web:Systems/Economics | COMPOSED@(none)
+      e.g.: Poor before the split between the powers; Struggling while it lasts.
+ 13 places  pdf:canon_dossier
+      slots: pdf:canon_dossier | COMPOSED@(none)
+             pdf:canon_dossier | COMPOSED@Economics & Trade
+             pdf:canon_dossier | COMPOSED@Overview
+      e.g.: Prosperity: Poor before the split between the powers; Struggling while it lasts.
+ 13 places  pdf:draft_brief
+      slots: pdf:draft_brief | COMPOSED@(none)
+             pdf:draft_brief | COMPOSED@Economics & Trade
+             pdf:draft_brief | COMPOSED@Overview
+      e.g.: Prosperity: Poor before the split between the powers; Struggling while it lasts.
+ 12 places  web
+      slots: web:World/NPCs | COMPOSED@(none)
+             web:World/NPCs | COMPOSED@In no power
+             web:World/NPCs | COMPOSED@Unranked members
+      e.g.: Wants Keep the friendship with # quiet, where it does the most good.
+ 11 places  web
+      slots: web:Systems/Defense | institutions[].name
+             web:Systems/Economics | institutions[].name
+             web:Systems/Power | institutions[].name
+             web:Systems/Services | institutions[].name
+      e.g.: Adventurers' charter hall
+ 10 places  web
+      slots: web:Summary/Overview | pressureSentence
+             web:Systems/Power | pressureSentence
+      e.g.: The # has been debating market levies for three months.
+  9 places  pdf:canon_dossier
+      slots: pdf:canon_dossier | COMPOSED@Defense & Security
+             pdf:canon_dossier | COMPOSED@Overview
+      e.g.: Strained — succession crisis
+  9 places  pdf:draft_brief
+      slots: pdf:draft_brief | COMPOSED@Defense & Security
+             pdf:draft_brief | COMPOSED@Overview
+      e.g.: Strained — succession crisis
+  8 places  web
+      slots: web:World/NPCs | COMPOSED@In no power
+             web:World/NPCs | COMPOSED@Unranked members
+      e.g.: Called by# · Mutual Leverage
+  8 places  web
+      slots: web:Systems/Institutions | COMPOSED@(none)
+             web:Systems/Services | COMPOSED@(none)
+      e.g.: A row marked short is what its house makes when supplied.
+  8 places  pdf:canon_dossier
+      slots: pdf:canon_dossier | COMPOSED@Institutions
+             pdf:canon_dossier | COMPOSED@Services
+      e.g.: A row marked short is what its house makes when supplied.
+  8 places  pdf:draft_brief
+      slots: pdf:draft_brief | COMPOSED@Institutions
+             pdf:draft_brief | COMPOSED@Services
+      e.g.: A row marked short is what its house makes when supplied.
+  6 places  web
+      slots: web:World/NPCs | COMPOSED@(none)
+             web:World/NPCs | COMPOSED@In no power
+      e.g.: Called by# · Mentor and Successor
+  5 places  web
+      slots: web:Summary/Overview | economicViability.issues[].message
+             web:Systems/Outlook | economicViability.issues[].message
+             web:World/History | economicViability.issues[].message
+      e.g.: Newcomers keep arriving, and every one of them has to be fed from the same fields and stores.
+  3 places  web
+      slots: web:Systems/Power | institutions[].name
+             web:Systems/Services | institutions[].name
+             web:World/NPCs | institutions[].name
+      e.g.: Charlatan fortune tellers
+  2 places  web
+      slots: web:Systems/Economics | COMPOSED@(none)
+             web:Systems/Institutions | COMPOSED@(none)
+             web:Systems/Services | COMPOSED@(none)
+      e.g.: The descriptions here are of ordinary times.
+  2 places  pdf:canon_dossier
+      slots: pdf:canon_dossier | COMPOSED@Economics & Trade
+             pdf:canon_dossier | COMPOSED@Institutions
+             pdf:canon_dossier | COMPOSED@Services
+      e.g.: The descriptions here are of ordinary times.
+  2 places  pdf:draft_brief
+      slots: pdf:draft_brief | COMPOSED@Economics & Trade
+             pdf:draft_brief | COMPOSED@Institutions
+             pdf:draft_brief | COMPOSED@Services
+      e.g.: The descriptions here are of ordinary times.
+  2 places  web
+      slots: web:Systems/Economics | institutions[].name
+             web:Systems/Power | institutions[].name
+             web:Systems/Services | institutions[].name
+      e.g.: Barge and river transport company
+  1 places  web
+      slots: web:Summary/Foundations | COMPOSED@(none)
+             web:Systems/Magic | COMPOSED@(none)
+      e.g.: Reliance on magic: Present
+  1 places  web
+      slots: web:Systems/Services | institutions[].name
+             web:World/NPCs | institutions[].name
+      e.g.: Charlatan fortune tellers
+  1 places  web
+      slots: web:Systems/Economics | COMPOSED@(none)
+             web:Systems/Institutions | COMPOSED@(none)
+             web:Systems/Services | COMPOSED@(none)
+             web:World/NPCs | COMPOSED@Unranked members
+      e.g.: Curtailed by the outbreak.
+  1 places  web
+      slots: web:Systems/Institutions | COMPOSED@(none)
+             web:Systems/Services | COMPOSED@(none)
+             web:World/NPCs | COMPOSED@Unranked members
+      e.g.: Short of medicinal herbs.
+  1 places  pdf:canon_dossier
+      slots: pdf:canon_dossier | COMPOSED@Economics & Trade
+             pdf:canon_dossier | COMPOSED@Institutions
+      e.g.: Short of medicinal herbs.
+  1 places  pdf:draft_brief
+      slots: pdf:draft_brief | COMPOSED@Economics & Trade
+             pdf:draft_brief | COMPOSED@Institutions
+      e.g.: Short of medicinal herbs.

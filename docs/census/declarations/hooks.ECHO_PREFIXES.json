@@ -1,0 +1,50 @@
+{
+ "id": "hooks.ECHO_PREFIXES",
+ "source": "src/domain/dossier/plotHooks.js :: ECHO_PREFIXES · src/generators/historyGenerator.js :: ECHO_PREFIXES",
+ "drawKind": "A",
+ "pool": {
+  "declares": [],
+  "crisisScoped": false,
+  "colour": true,
+  "notes": "connective prefixes; presume nothing",
+  "needs": [],
+  "excludes": []
+ },
+ "rows": [
+  {
+   "id": "hooks.ECHO_PREFIXES::0",
+   "text": "old records suggest ",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.ECHO_PREFIXES::1",
+   "text": "a recently surfaced document implies ",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.ECHO_PREFIXES::2",
+   "text": "family accounts passed down from the time claim ",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.ECHO_PREFIXES::3",
+   "text": "an archivist's notes from that period reveal ",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.ECHO_PREFIXES::4",
+   "text": "evidence that survived the years indicates ",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  }
+ ]
+}

@@ -309,7 +309,8 @@ describe('EM-A2a — the pool machinery and the eleven TABLE pools', () => {
     expect(sources.length, 'ten catalogue pools, plus the one owner-given literal').toBe(10);
     const drifted = sources.filter(([id, source]) => !sameSet(poolValues(id, TOWN), source)).map(([id]) => id);
     expect(drifted, 'every catalogue pool set-equals its live source, so a forked copy reds here').toEqual([]);
-    expect(poolValues('commodity', TOWN).length, 'the flattened commodity vocabulary, de-duplicated').toBe(34);
+    // RE-KEYED (TAIL-DEFECON-C-4, D34): 34 -> 33: "gems" left the precious-metal vein, the one resource that named it.
+    expect(poolValues('commodity', TOWN).length, 'the flattened commodity vocabulary, de-duplicated').toBe(33);
 
     const specifiers = importSpecifiers(readFileSync(join(ROOT, LEAF_REL), 'utf8'));
     expect(specifiers.length, 'the import scan really found the leaf imports, so the filters below are live').toBe(12);

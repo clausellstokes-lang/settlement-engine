@@ -20,7 +20,10 @@ export const generateSiegeCapability = (
 
   const recentEvents = historicalEvents
     .slice(0, 3)
-    .filter(event => event.yearsAgo < Math.max(30, age * 0.3));
+    // COHERENCE-PRESUME (the chair's ruling B): the line says "still present in living memory", so its
+    // event is inside sixty years (heraldCausalGrammar.js :: TIME_BANDS, "older than its bearers")
+    // however old the town is; thirty per cent of an old town's age reached ninety.
+    .filter(event => event.yearsAgo < Math.max(30, age * 0.3) && event.yearsAgo <= 60);
   if (!recentEvents.length) return currentTensions;
 
   const hasMilitaryHistory = recentEvents.some(

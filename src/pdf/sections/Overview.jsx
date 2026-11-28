@@ -5,7 +5,7 @@
  *   - Identity strip
  *   - Active crises (chips + per-crisis hook + summary)
  *   - Systems Health Dashboard (5 score bars, prosperity/safety, food)
- *   - Tensions & Conflicts list with descriptions and parties (their hooks: the Plot Hooks chapter, X-2)
+ *   - Tensions & Conflicts: label and parties (description: History, or here without it; hooks: Plot Hooks)
  *   - Situation prose (arrival scene + pressure sentence in AI mode)
  *   - Settlement origin
  *   - Prominent relationship
@@ -29,14 +29,18 @@ import { Callout } from '../primitives/Callout.jsx';
 import { type, palette, space, pt, swatch } from '../theme.js';
 import {
   cap, smart, label, noteText, hookText, finite, safePct, humanize, safe,
-  prominentPair, prominentType, prominentProse,
+  prominentPair, prominentType,
 } from '../lib/format.js';
 import { statusCase } from '../../domain/display/labelCase.js';
 import { resourceDisplayName } from '../../domain/display/resourceDisplayName.js';
 import { proseToPlainText } from '../primitives/ProseText.jsx';
 import { StateProse } from '../primitives/StateProse.jsx';
-
-export function Overview({ settlement, narrativeMode, vm, stateProse }) {
+import { factsOf } from '../../domain/facts/factsOf.js';
+import { safetyQualifierLed } from '../../domain/display/safetyShown.js'; import { prosperityInCrisisLed } from '../../domain/display/prosperityInCrisis.js'; // COHERENCE-UPKEEP-6 (ruling D(iii)): the sentence led by the word it explains
+export function Overview({ settlement, narrativeMode, vm, stateProse, historyPrinted = true }) {
+  // ONE HOME PER EXPORT (the chair's B4 ruling (2), 2026-11-09): with History in the variant, the tension
+  // descriptions and the historical character live there; without it (campaign_state), here in full.
+  const historyAt = 'History & Founding (17)';
   const o = vm.overview;
   const id = vm.identity;
 
@@ -97,6 +101,11 @@ export function Overview({ settlement, narrativeMode, vm, stateProse }) {
           { label: 'Stability',  value: statusCase(o.stability) },
         ]}
       />
+      {/* The Prosperity tile's label, where a crisis in force lowered it, says what the place is in
+          ordinary years (the chair's ruling 1(a), REVIEW-UPKEEP-2): the vm's one sentence. */}
+      {o.prosperityInCrisis && (
+        <Text style={{ ...type.italic, color: palette.second, fontSize: pt['9'], marginBottom: space.sm }}>{prosperityInCrisisLed(o.prosperityInCrisis)}</Text>
+      )}{o.safety && vm.safetyQualifier && <Text style={{ ...type.italic, color: palette.second, fontSize: pt['9'], marginBottom: space.sm }}>{safetyQualifierLed(vm.safetyQualifier)}</Text> /* PAGE-1 SAFETY: the Safety tile's owner's line, only in the DM's own document (vm.safetyQualifier); one line so the banked rows below keep their address */}
 
       {/* ── The mounted state prose (the screen's ProseBlock positions) ── */}
       <StateProse stateProse={stateProse} tab="overview" />
@@ -177,13 +186,13 @@ export function Overview({ settlement, narrativeMode, vm, stateProse }) {
             <View style={{ marginBottom: 6 }}>
               <Text style={{ ...type.label, fontSize: pt['8'], color: palette.ink }}>Enforcement ratio</Text>
               <Text style={{ ...type.body, fontSize: pt['9'], color: palette.second }}>
-                {smart(o.safetyRatio)} watch:pop
+                {enforcementWords(o.safetyRatio, settlement ? factsOf(settlement).guardPresence : true, settlement ? criminalsStandHere(settlement?.economicState?.safetyProfile) || factsOf(settlement).crime !== 'none' : true)}
               </Text>
             </View>
           )}
           {o.foodBalance && (o.foodBalance.production != null || o.foodBalance.deficit != null) && (
             <View style={{ marginBottom: 6 }}>
-              <FoodBalanceBar fb={o.foodBalance} />
+              <FoodBalanceBar fb={settlement ? foodBlockShown(settlement, o.foodBalance) : o.foodBalance} />{/* TAIL-EXPORTS-PDF batch 1 (ruling E1): the tab's food row (foodCarrier.js), as the Economics chapter's block */}
             </View>
           )}
           {o.viabilityVerdict && (
@@ -205,6 +214,8 @@ export function Overview({ settlement, narrativeMode, vm, stateProse }) {
           <Text style={{ ...type.label, color: palette.warn, fontSize: pt['8'], marginBottom: 3 }}>
             TENSIONS & CONFLICTS
           </Text>
+          {historyPrinted && o.tensions.some((t) => t.description) ? <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'], marginBottom: 3 }}>
+            {`Each tension in full: ${historyAt}.`}</Text> : null}
           {o.tensions.map((t, i) => (
             <View
               key={`t-${i}`}
@@ -231,11 +242,11 @@ export function Overview({ settlement, narrativeMode, vm, stateProse }) {
                   {humanize(t.label || t.type || 'Tension')}
                 </Text>
               </View>
-              {t.description && (
-                <Text style={{ ...type.body, fontSize: pt['9'], marginTop: 1 }}>
-                  {t.description}
-                </Text>
-              )}
+              {/* ⛔ THE KEEP-ON RULE (STYLE-0 §3; B4): the description prints once per export, on History
+                  where the variant has it, else here. tests/pdf/restoredSubsections.test.js (B4) */}
+              {!historyPrinted && t.description ? (
+                <Text style={{ ...type.body, fontSize: pt['9'], marginTop: 1 }}>{t.description}</Text>
+              ) : null}
               {t.parties?.length > 0 && (
                 <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'], marginTop: 1 }}>
                   {t.parties.map(label).filter(Boolean).join(' / ')}
@@ -293,23 +304,23 @@ export function Overview({ settlement, narrativeMode, vm, stateProse }) {
       )}
 
       {/* ── Character / origin ────────────────────────────────────── */}
-      {(o.character || o.history?.foundedBy || o.history?.origin) && (
+      {/* ⛔ THE KEEP-ON RULE (STYLE-0 §3; B4): the historical character prints once per export, on
+          the History lead where the variant has it (here, the label and the chapter), else here. */}
+      {(o.settlementReason || o.character) && (
         <View style={{ marginTop: space.sm }} wrap={false}>
           <HairRule />
           <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
+            {/* THE OWNER'S VETO 3 (2026-11-09, "No." to the ORIGIN heading): the prior label stands, whichever lines print under it. */}
             CHARACTER & ORIGIN
           </Text>
-          {o.character && (
-            <Text style={{ ...type.prose, fontSize: pt['9.5'] }}>
-              {o.character}
-            </Text>
-          )}
-          {o.settlementReason && (
-            <Text style={{ ...type.body, marginTop: 3, fontSize: pt['9'] }}>
-              <Text style={{ color: palette.muted }}>Reason settled: </Text>
-              {o.settlementReason}
-            </Text>
-          )}
+          {o.character && !historyPrinted ? <Text style={{ ...type.prose, fontSize: pt['9.5'] }}>{o.character}</Text> : null}
+          {o.character && historyPrinted ? (
+            <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'] }}>{`Historical character: ${historyAt}.`}</Text>
+          ) : null}
+          {o.settlementReason ? <Text style={{ ...type.body, fontSize: pt['9'], marginTop: 3 }}>
+            <Text style={{ color: palette.muted }}>Settlement Origin: </Text>{/* TAIL-EXPORTS-PDF-3 (ruling E23): the origin line says where, not why: the heading the Overview tab prints over it */}
+            {o.settlementReason}
+          </Text> : null}
         </View>
       )}
 
@@ -326,11 +337,7 @@ export function Overview({ settlement, narrativeMode, vm, stateProse }) {
             </Text>
             <Pill tone="cool">{prominentType(o.prominentRelationship) || 'linked'}</Pill>
           </View>
-          {prominentProse(o.prominentRelationship) && (
-            <Text style={{ ...type.body, fontSize: pt['9'] }}>
-              {prominentProse(o.prominentRelationship)}
-            </Text>
-          )}
+          {/* ⛔ THE KEEP-ON RULE (STYLE-0 §3; B4): the tie's own line prints in Relationships (14). */}
         </View>
       )}
 
@@ -557,3 +564,26 @@ function FoodBalanceBar({ fb }) {
 }
 
 export default Overview;
+
+/**
+ * The enforcement ratio in words (W7 HOOKS, the owner's style law of 2026-11-07). The figure is
+ * safetyProfile.js's order-keeping strength over criminal strength, not a watch-per-head count, so
+ * "0.2 watch:pop" was machinery AND wrong; the label above it stays.
+ * SW-9b-A (STYLE-2-CONTRADICTIONS §8, P9): where no force stands (`factsOf(record).guardPresence`, the
+ * fact the safety lines read since SW-B6's ba0dc7cf9), the line says so in the guard assessment's own
+ * words instead of setting "those who keep order" against the criminals.
+ * @param {number} ratio @param {boolean} [guarded] @param {boolean} [criminals] @returns {string}
+ */
+export function enforcementWords(ratio, guarded = true, criminals = true) {
+  if (!guarded) return 'There is no watch.';
+  // TAIL-EXPORTS-PDF batch 1: where the record names no one working against the law (no criminal house, no crime
+  // pattern, no shadow share the tab prints: shadowEconomyShown.js :: criminalsStandHere) the line sets no one against
+  // "the criminals"; it says so in the Defense desk's own denial.
+  if (!criminals) return 'No criminal infrastructure has been identified.';
+  if (!Number.isFinite(ratio)) return 'Not measured.';
+  if (ratio >= 2) return 'Those who keep order clearly outmatch the criminals.';
+  if (ratio >= 1) return 'Those who keep order roughly match the criminals.';
+  return 'The criminals outmatch those who keep order.';
+}
+import { criminalsStandHere } from '../../domain/display/shadowEconomyShown.js'; // TAIL-EXPORTS-PDF batch 1
+import { foodBlockShown } from '../../domain/display/foodCarrier.js'; // TAIL-EXPORTS-PDF batch 1 (ruling E1): one home for the food row

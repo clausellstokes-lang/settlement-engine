@@ -72,6 +72,14 @@ function world(settType, terrain, seed) {
 const CORPUS = TIER_ORDER.flatMap((settType) => Object.keys(TERRAIN_ROUTE)
   .map((terrain) => world(settType, terrain, `uc1-acc-${settType}-${terrain}`)));
 
+/** The fixed identities the HONEST FOUNDING arm's RAISES block re-rolls every roster-free birth
+ *  under (the device the MIDDLE-BAND and BOUNDARIES arms use). Re-founded 2026-11-13 by the
+ *  chair's ruling on AGREE-FOLLOW-UP: at the default identity the 42 held ONE PROSPERITY_BAND
+ *  witness (`uc1-acc-town-hills`), and A′'s re-deal at 6b932d3e8 drew it a Courthouse, lifting its
+ *  Destitute floor into the band so both extremes drew the same rung — the cause still live
+ *  through the very field it reads. Measured over these eight: the rung rises 8 times, never falls. */
+const LIVENESS_IDENTITIES = Object.freeze(Array.from({ length: 8 }, (_, n) => `s_pros_${n}`));
+
 /** The rung's index on UC-0's closed ladder. */
 const rungIndex = (s, opts) => SANITATION_LADDER.indexOf(deriveSewerLadder(s, opts).rung);
 
@@ -235,7 +243,13 @@ describe('MF-UC1 — the undercity sanitation ladder and its wells', () => {
       ['CALAMITY_REBUILD', (s) => ({ ...s, calamityHistory: [] }), (s) => ({ ...s, calamityHistory: stamps(9, 'x') })],
       ['HIGH_WATER_POPULATION', (s) => ({ ...s, config: { ...s.config, peakTier: undefined } }), (s) => ({ ...s, config: { ...s.config, peakTier: 'metropolis' } })],
     ];
-    const raiseDeltas = raise.map(([, lo, hi]) => free.map((s) => rungIndex(hi(s)) - rungIndex(lo(s))));
+    // Both claims run over every roster-free birth under each of the LIVENESS_IDENTITIES.
+    const freeIdentified = free.flatMap((s) => LIVENESS_IDENTITIES.map((id) => ({ ...s, id })));
+    const raiseDeltas = raise.map(([, lo, hi]) => freeIdentified.map((s) => rungIndex(hi(s)) - rungIndex(lo(s))));
+    // For HIGH_WATER the rung moves by the peak tier's floor (207 of 208 up-moves), so each weight's liveness is proved on its term.
+    // The tooth reads each cause's OWN term, not the total score: the calamity stamps' exodus also raises the high-water value on 7 of the 42.
+    const termOf = (s, cause) => deriveSewerLadder(s).causes.find((c) => c.cause === cause).contribution;
+    expect(raise.map(([cause, lo, hi]) => freeIdentified.some((s) => termOf(hi(s), cause) > termOf(lo(s), cause)))).toEqual([true, true, true, true]);
     expect(raiseDeltas.map((ds) => ds.filter((d) => d < 0).length)).toEqual([0, 0, 0, 0]);
     expect(raiseDeltas.map((ds) => ds.filter((d) => d > 0).length > 0)).toEqual([true, true, true, true]);
     // ⚠ THE TWO ROSTER READS TAKE DIFFERENT RUIN DISPOSITIONS, and both are pinned rather than

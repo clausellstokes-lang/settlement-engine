@@ -115,7 +115,7 @@ describe('complete Wizard News address and headline rewrite contract', () => {
     expect(overlapFields.consequenceOutcomes.filter(isStateOnlyOutcome)).toHaveLength(12);
   });
 
-  it('A2 freezes all 88 address rows and their canonical digest', () => {
+  it('A2 freezes all 80 address rows and their canonical digest', () => {
     expect(compareNewsAddressRows(addressRows, baseline.addressTotality.rows)).toBe(true);
     expect(addressRowsSha256(addressRows)).toBe(baseline.addressTotality.rowsSha256);
     // T8 · SHIFT (§858 + §860): 106 → 102 identities over 53 → 51 homes. The two homes that leave
@@ -138,7 +138,35 @@ describe('complete Wizard News address and headline rewrite contract', () => {
     // 42/2/84/0/84/365/506; ten homes out and seven in, named at news-voice-contract.mjs's RE-RECORDED block. Every row stays indicative.
     // 2026-11-06 (LANDING-7 R-E10, the density ceilings re-derived from the stamp bands, 20c0139c5 alone): 42/2/84/0/84/365/506 →
     // 44/2/88/0/88/372/540; one home out and three in, named at news-voice-contract.mjs's RE-RECORDED block. Every row stays indicative.
-    expect(baseline.addressTotality.totals).toEqual({ homes: 44, fields: 2, identities: 88, prospectiveIdentities: 0, indicativeIdentities: 88, distinctValues: 372, occurrences: 540 });
+    // 2026-11-07 (LANDING-R2 seat D2, the chair's 02:36 ruling, §934.105; re-taken at the tip 3d03dc723): 44/2/88/0/88/372/540 →
+    // 43/2/86/0/86/356/524; queued|npc_suppress leaves at census-1i unit 3 (597866207, inside rung 2's census-1b merge 0856c09d3),
+    // distinct/occurrences by step d35532850 −6/−6, 950b75014 −4/−4, 597866207 −4/−4, and −2/−2 interaction with rung 1, at
+    // news-headline-contract.mjs's ADDRESS_TOTALS. Every row stays indicative.
+    // 2026-11-07 (MERGE-R2, the integration merge of the rung-2 landing into lane/integration-2026-11-07; re-keyed by identity with
+    // its cause, measured at the merged tip 6c3e25661): 43/2/86/0/86/356/524 → 44/2/88/0/88/364/532; queued|npc_sabotage ARRIVES and
+    // no home leaves; applied|roads 41/41 → 45/45 and queued|strategy_sue_for_peace 2/2 → 1/1 (both fields), at
+    // news-headline-contract.mjs's ADDRESS_TOTALS. PLAUSIBLE (census steps × WIRING-W0 / REVIEW-INTAKE), not bisected. Every row stays indicative.
+    // 2026-11-07 (the people car's landing, PEOPLE-LAND second seat, §934.105; by first-parent point: lane 1 dc655f712 39/2/78/0/78/596/758,
+    // lane 2 3aa160a70 as now, lane 5B a725df7e4 four rows' counts and the digest only): 44/2/88/0/88/372/540 → 40/2/80/0/80/596/800; net seven homes
+    // out and three in, named at news-voice-contract.mjs's RE-RECORDED block. Every row stays indicative.
+    // 2026-11-08 (MERGE-CAR, the people car merged into the integration branch, 8dff691f3; re-keyed by identity with its cause, measured at
+    // the working tree, byte-equal to the merge): 40/2/80/0/80/596/800 → 40/2/80/0/80/588/792; no home in or out; applied|tradition 22/22 →
+    // 18/18 (both fields, the integration parent's own count), at news-headline-contract.mjs's ADDRESS_TOTALS. PLAUSIBLE, not bisected. Every row stays indicative.
+    // 2026-11-08 (MERGE-WAVE at the FIX-PUBLIC-VEIL merge, the veiled re-deal's year, at news-headline-contract.mjs's ADDRESS_TOTALS): one home arrives.
+    // 2026-11-09 (MERGE-TRAIN at the ALLEGIANCE-CAR1 merge, e5f88930b; car 1's re-dealt year — the hidden allegiance 5902f1a4a, then J-19 d131ab158 —
+    // at news-headline-contract.mjs's ADDRESS_TOTALS): 41/2/82/0/82/596/782 → 43/2/86/0/86/606/792; four homes in and two out. Every row stays indicative.
+    // 2026-11-09 (MERGE-TRAIN at the ALLEGIANCE-CAR2 merge, f51058995; the guild's push bbb1a4abc re-dealing the year, at news-headline-contract.mjs's
+    // ADDRESS_TOTALS): 43/2/86/0/86/606/792 → 44/2/88/0/88/606/792; applied|resource_depletion returns, none leaves. Every row stays indicative.
+    // 2026-11-09 (MERGE-TRAIN at the ALLEGIANCE-CAR3 merge, c6ded8e3a; e9070d614's organized-crime rate 0.10 → 0.05 re-dealing the year, at
+    // news-headline-contract.mjs's ADDRESS_TOTALS): 44/2/88/0/88/606/792 → 43/2/86/0/86/602/790; one home in, two out. Every row stays indicative.
+    // 43/86/602/790 → 44/88/623/790 at the style wave's final tip (STYLE-2-MERGE-7, closing act 4; the causes at news-headline-contract.mjs).
+    // 2026-11-15 (TAIL-CLOSE-SWEEP-A at the joined tip dc4bae117, six merge points' generator re-deals, at news-voice-contract.mjs's RE-RECORDED block):
+    // 44/2/88/0/88/623/790 → 42/2/84/0/84/659/834; two homes in, four out. Every row stays indicative.
+    // 2026-11-15 (BAR3-CLOSE-DOORS-1, the close of the round BAR3, the chair's ruling OC1, at news-headline-contract.mjs's ADDRESS_TOTALS):
+    // 42/2/84/0/84/659/834 → 42/2/84/0/84/660/834; no home or address in or out, four rows move a count. Every row stays indicative.
+    // 2026-11-18 (CLOSE-DOORS-1B, the close of 2026-11-18, at the frozen tree 70e557d5b, at news-headline-contract.mjs's ADDRESS_TOTALS):
+    // 42/2/84/0/84/660/834 → 42/2/84/0/84/664/838; no home or address in or out, four rows move a count (applied|boom, applied|urban_fabric). Every row stays indicative.
+    expect(baseline.addressTotality.totals).toEqual({ homes: 42, fields: 2, identities: 84, prospectiveIdentities: 0, indicativeIdentities: 84, distinctValues: 664, occurrences: 838 });
   });
 
   it('A3 freezes both raw lanes and all 26 exact rewrite counts', () => {

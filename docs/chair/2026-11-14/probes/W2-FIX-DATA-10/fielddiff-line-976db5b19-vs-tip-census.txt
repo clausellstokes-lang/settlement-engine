@@ -1,0 +1,85 @@
+births base 720 tip 720 missing 0; leaf diffs 7946; towns moved 713
+family institutions: 631 towns
+family history: 563 towns
+family culturalIdentity: 316 towns
+family economicState: 219 towns
+family availableServices: 209 towns
+family arrivalScene: 174 towns
+family generationCoherenceReceipt: 160 towns
+family defenseProfile: 111 towns
+family stress: 59 towns
+family stressors: 59 towns
+family culturalNotes: 28 towns
+  631	.institutions[].desc	 e.g. r2r-thorp-0
+  340	.history.historicalEvents[].description	 e.g. r2r-thorp-0
+  261	.history.historicalEvents[].lastingEffects[]	 e.g. r2r-thorp-0
+  219	.history.currentTensions[].plotHooks[]	 e.g. r2r-thorp-1
+  188	.economicState.foodSecurity.foodRecord.foodwaysLine	 e.g. r2r-thorp-1
+  188	.culturalIdentity.foodways	 e.g. r2r-thorp-1
+  187	.history.currentTensions[].description	 e.g. r2r-thorp-9
+  174	.arrivalScene	 e.g. r2r-thorp-1
+  173	.culturalIdentity.architecturalDetail	 e.g. r2r-thorp-1
+  164	.history.historicalEvents[].plotHooks[]	 e.g. r2r-thorp-0
+  122	.generationCoherenceReceipt.judgments[].evidence[].evidence	 e.g. r2r-thorp-1
+  98	.history.currentTensions[].type	 e.g. r2r-thorp-20
+  98	.history.currentTensions[].factions[]	 e.g. r2r-thorp-20
+  97	.availableServices.equipment[].desc	 e.g. r2r-town-11
+  89	.history.legacyAnnotations[].annotation	 e.g. r2r-thorp-0
+  83	.history.historicalEvents[].name	 e.g. r2r-thorp-0
+  83	.history.eventsTimeline[].name	 e.g. r2r-thorp-0
+  83	.history.currentTensions[].severity[]	 e.g. r2r-thorp-20
+  77	.history.historicalEvents[].templateType	 e.g. r2r-thorp-0
+  75	.history.currentTensions[].lastingEffects[]	 e.g. r2r-thorp-33
+  69	.history.legacyAnnotations[].eventName	 e.g. r2r-thorp-0
+  65	.defenseProfile.institutions.mercenary[].desc	 e.g. r2r-city-0
+  59	.history.eventsTimeline[].anchored	 e.g. r2r-thorp-1
+  58	.history.historicalEvents[].anchored (GONE KEY)	 e.g. r2r-thorp-1
+  55	.availableServices.transport[].desc	 e.g. r2r-village-2
+  51	.history.historicalEvents[].severity	 e.g. r2r-thorp-5
+  50	.history.historicalCharacter	 e.g. r2r-thorp-1
+  47	.availableServices.healing[].desc	 e.g. r2r-thorp-2
+  46	.defenseProfile.institutions.watch[].desc	 e.g. r2r-town-2
+  43	.economicState.tradeDependencies[].affectedServices[]	 e.g. r2r-city-1
+  43	.economicState.activeChains[].dependency.affectedServices[]	 e.g. r2r-city-1
+  40	.history.legacyAnnotations[].severity	 e.g. r2r-thorp-5
+  39	.generationCoherenceReceipt.judgments[].findings[]	 e.g. r2r-thorp-0
+  36	.history.currentTensions[]	 e.g. r2r-thorp-1
+  36	.generationCoherenceReceipt.judgments[].evidence[]	 e.g. r2r-thorp-1
+  35	.history.historicalEvents[].yearsAgo	 e.g. r2r-thorp-1
+  35	.history.eventsTimeline[].year	 e.g. r2r-thorp-1
+  35	.history.eventsTimeline[].yearsAgo	 e.g. r2r-thorp-1
+  35	.stress.crisisHook	 e.g. r2r-thorp-17
+  35	.stressors.crisisHook	 e.g. r2r-thorp-17
+  32	.history.siegeNarrative	 e.g. r2r-thorp-1
+  32	.history.currentTensions[].lastingEffects (GONE KEY)	 e.g. r2r-thorp-26
+  28	.culturalIdentity.builtForm	 e.g. r2r-thorp-27
+  28	.culturalNotes	 e.g. r2r-thorp-27
+  26	.history.historicalEvents[]	 e.g. r2r-thorp-1
+  26	.history.eventsTimeline[]	 e.g. r2r-thorp-1
+  25	.history.historicalEvents[].type	 e.g. r2r-thorp-1
+  25	.history.eventsTimeline[].type	 e.g. r2r-thorp-1
+  24	.history.currentTensions[].lastingEffects (NEW KEY)	 e.g. r2r-thorp-36
+  19	.history.legacyAnnotations[].yearsAgo	 e.g. r2r-thorp-34
+  18	.stress.viabilityNote	 e.g. r2r-thorp-41
+  18	.stressors.viabilityNote	 e.g. r2r-thorp-41
+  18	.generationCoherenceReceipt.judgments[].status	 e.g. r2r-thorp-53
+  16	.history.historicalEvents[].anchored (NEW KEY)	 e.g. r2r-thorp-1
+  16	.availableServices.food[].desc	 e.g. r2r-thorp-45
+  15	.history.historicalEvents[].templateType (NEW KEY)	 e.g. r2r-thorp-17
+  13	.history.historicalEvents[].anchored	 e.g. r2r-thorp-17
+  12	.history.historicalEvents[].templateType (GONE KEY)	 e.g. r2r-thorp-1
+  11	.generationCoherenceReceipt.judgments[].findings[].evidence	 e.g. r2r-hamlet-22
+  10	.stress[].crisisHook	 e.g. r2s-occupied-thorp-1
+  10	.stressors[].crisisHook	 e.g. r2s-occupied-thorp-1
+  9	.history.legacyAnnotations[].eventType	 e.g. r2r-thorp-34
+  8	.history.legacyAnnotations[]	 e.g. r2r-thorp-1
+  8	.availableServices.legal[].desc	 e.g. r2r-village-17
+  7	.stress.viabilityNote (GONE KEY)	 e.g. r2s-religious_conversion-thorp-0
+  7	.stressors.viabilityNote (GONE KEY)	 e.g. r2s-religious_conversion-thorp-0
+  6	.history.currentTensions[].specificIssue (GONE KEY)	 e.g. r2r-hamlet-24
+  6	.generationCoherenceReceipt.judgments[].findings[].detail	 e.g. r2r-town-33
+  6	.availableServices.lodging[].desc	 e.g. r2r-metropolis-14
+  5	.generationCoherenceReceipt.judgments[].evidence[].path	 e.g. r2s-under_siege-town-0
+  4	.history.currentTensions[].specificIssue (NEW KEY)	 e.g. r2r-thorp-54
+  3	.generationCoherenceReceipt.judgments[].findings[].path	 e.g. r2s-under_siege-village-2
+  1	.history.legacyAnnotations (GONE KEY)	 e.g. r2r-thorp-17

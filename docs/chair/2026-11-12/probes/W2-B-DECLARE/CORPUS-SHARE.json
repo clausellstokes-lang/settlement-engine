@@ -1,0 +1,658 @@
+{
+ "_doc": [
+  "W2-B-DECLARE item 2 — THE CORPUS'S SHARE of the page measure by vocabulary, handed to W2-WRITE (which alone edits docs/content/RECEIPT_POOLS_DOSSIER_STATE.md and runs its generator).",
+  "Each row: a corpus variant (block::pool, vid) that names a registered word (src/domain/facts/registeredWords.js) and carries no declaration that answers it. `disqualifier` lists the atoms any one of which, declared on the variant (its tag slot) or on the pool (its brace group), answers the word; a word ending in \":\" is any band of that dimension.",
+  "kind \"printed false on the 720\": the census's 720 owner-view dossiers printed it in a town the word is false for (towns = how many). kind \"unreached\": a pool no rendered page of the 720 asked for; the measure is static.",
+  "Measured at the lane base 1930cec6e (+ the walker change e0f2bd58e, tests only). Scripts: docs/chair/2026-11-12/probes/W2-B-DECLARE/."
+ ],
+ "rows": [
+  {
+   "kind": "printed false on the 720",
+   "pool": "DS-ECO-9::SECURE",
+   "vid": 3,
+   "word": "onlyJust",
+   "pattern": "1a",
+   "disqualifier": [],
+   "towns": 57,
+   "example": "Indrapat is fed, but only just.",
+   "text": "{settlement} is fed, but only just. A poor harvest is felt at every table; a good one means a little put by.",
+   "marks": [
+    "no hunger"
+   ]
+  },
+  {
+   "kind": "printed false on the 720",
+   "pool": "DS-ECO-12::INCOME WEIGHT: the religious houses",
+   "vid": 2,
+   "word": "religiousHouses",
+   "pattern": "8",
+   "disqualifier": [
+    "sacredHouse",
+    "temple",
+    "church",
+    "clergy",
+    "institution: temple",
+    "institution: monastery"
+   ],
+   "towns": 44,
+   "example": "The religious houses at Novapagus are among its biggest buyers and employers, and a bad year for them is a bad year for the thorp.",
+   "text": "The religious houses at {settlement} are among its biggest buyers and employers, and a bad year for them is a bad year for the town.",
+   "marks": [
+    "colour"
+   ]
+  },
+  {
+   "kind": "printed false on the 720",
+   "pool": "DS-DEF-9::magicDependency false",
+   "vid": 2,
+   "word": "practitioner",
+   "pattern": "3",
+   "disqualifier": [],
+   "towns": 122,
+   "example": "Losing every practitioner here would be a loss and not a collapse.",
+   "text": "There is magic at {settlement} and the town does not rest on it. Losing every practitioner here would be a loss and not a collapse.",
+   "marks": [
+    "magic"
+   ]
+  },
+  {
+   "kind": "printed false on the 720",
+   "pool": "DS-DEF-3::COMPOUND: insurgency",
+   "vid": 3,
+   "word": "quarters",
+   "pattern": "14c",
+   "disqualifier": [
+    "population:",
+    "tier:"
+   ],
+   "towns": 5,
+   "example": "Some districts of Kaanche are closed off now, and whatever happens there goes unrecorded and unpunished.",
+   "text": "Some districts of {settlement} are closed off now, and whatever happens there goes unrecorded and unpunished.",
+   "marks": [
+    "colour"
+   ]
+  },
+  {
+   "kind": "printed false on the 720",
+   "pool": "DS-ECO-11::EXPLOITATION: fullyExploited",
+   "vid": 1,
+   "word": "mill",
+   "pattern": "NEW-V3",
+   "disqualifier": [
+    "institution: mill"
+   ],
+   "towns": 8,
+   "example": "The grain in Obergasse's country is worked all the way through: the ground gives it, Mill finishes it, and it leaves as bread.",
+   "text": "The {resource} in {settlement}'s country is worked all the way through: the ground gives it, {institution} finishes it, and it leaves as {good}.",
+   "marks": []
+  },
+  {
+   "kind": "printed false on the 720",
+   "pool": "DS-DEF-3::COMPOUND: political fracture",
+   "vid": 1,
+   "word": "quarters",
+   "pattern": "14c",
+   "disqualifier": [
+    "population:",
+    "tier:"
+   ],
+   "towns": 6,
+   "example": "Which power holds a district of Gantulgaiin decides which rules apply there.",
+   "text": "Which power holds a district of {settlement} decides which rules apply there.",
+   "marks": []
+  },
+  {
+   "kind": "printed false on the 720",
+   "pool": "DS-ECO-12::INCOME WEIGHT: the practice of magic",
+   "vid": 2,
+   "word": "practitioner",
+   "pattern": "NEW-2",
+   "disqualifier": [],
+   "towns": 1,
+   "example": "The people who work magic at Staroka are among its biggest buyers and employers, and much of the village's trade turns on their custom.",
+   "text": "The people who work magic at {settlement} are among its biggest buyers and employers, and much of the town's trade turns on their custom.",
+   "marks": [
+    "colour"
+   ]
+  },
+  {
+   "kind": "printed false on the 720",
+   "pool": "DS-DEF-9::magicDependency true, with a NAMED dependent chain",
+   "vid": 2,
+   "word": "practitioner",
+   "pattern": "3",
+   "disqualifier": [],
+   "towns": 16,
+   "example": "Yurttala's trade in herbal remedies rests on a few practitioners, not on the land.",
+   "text": "{settlement}'s trade in {good} rests on a few practitioners, not on the land.",
+   "marks": []
+  },
+  {
+   "kind": "printed false on the 720",
+   "pool": "DS-DEF-9::magicDependency true",
+   "vid": 4,
+   "word": "practitioner",
+   "pattern": "3",
+   "disqualifier": [],
+   "towns": 11,
+   "example": "Skaldaker does better than its ground and roads would explain, and the reason is its few practitioners.",
+   "text": "{settlement} does better than its ground and roads would explain, and the reason is its few practitioners.",
+   "marks": []
+  },
+  {
+   "kind": "printed false on the 720",
+   "pool": "DS-DEF-9::magicDependency true",
+   "vid": 3,
+   "word": "practitioner",
+   "pattern": "3",
+   "disqualifier": [],
+   "towns": 8,
+   "example": "Drumdale leans on its practitioners;",
+   "text": "{settlement} leans on its practitioners; a hard season for them (a feud, a sickness, a falling-out with the hall) is a hard season for everyone.",
+   "marks": []
+  },
+  {
+   "kind": "printed false on the 720",
+   "pool": "DS-DEF-3::COMPOUND: political fracture",
+   "vid": 3,
+   "word": "quarters",
+   "pattern": "14c",
+   "disqualifier": [
+    "population:",
+    "tier:"
+   ],
+   "towns": 6,
+   "example": "Each power at Rossholme keeps its own list of offences, so a wrong punished in one district goes unpunished in the next.",
+   "text": "Each power at {settlement} keeps its own list of offences, so a wrong punished in one district goes unpunished in the next.",
+   "marks": []
+  },
+  {
+   "kind": "printed false on the 720",
+   "pool": "DS-DEF-9::magicDependency true",
+   "vid": 1,
+   "word": "practitioner",
+   "pattern": "3",
+   "disqualifier": [],
+   "towns": 4,
+   "example": "What the town produces, and in some measure what the town eats, depends on practitioners continuing to be here and continuing to be willing.",
+   "text": "{settlement} runs on arcane work. What the town produces, and in some measure what the town eats, depends on practitioners continuing to be here and continuing to be willing.",
+   "marks": []
+  },
+  {
+   "kind": "printed false on the 720",
+   "pool": "DS-ECO-12::INCOME WEIGHT: the practice of magic",
+   "vid": 1,
+   "word": "practitioner",
+   "pattern": "NEW-2",
+   "disqualifier": [],
+   "towns": 1,
+   "example": "What the town's practitioners charge for, and what they buy, is a large part of its business.",
+   "text": "Magic carries real weight in {settlement}'s money. What the town's practitioners charge for, and what they buy, is a large part of its business.",
+   "marks": [
+    "colour"
+   ]
+  },
+  {
+   "kind": "printed false on the 720",
+   "pool": "DS-ECO-9::SECURE",
+   "vid": 1,
+   "word": "smallMargin",
+   "pattern": "1b",
+   "disqualifier": [],
+   "towns": 64,
+   "example": "Goraka feeds itself with a small margin.",
+   "text": "{settlement} feeds itself with a small margin. The counts come out ahead by a little, every season, without much drama.",
+   "marks": [
+    "no hunger"
+   ]
+  },
+  {
+   "kind": "printed false on the 720",
+   "pool": "DS-DEF-3::COMPOUND: insurgency",
+   "vid": 1,
+   "word": "quarters",
+   "pattern": "14c",
+   "disqualifier": [
+    "population:",
+    "tier:"
+   ],
+   "towns": 2,
+   "example": "Patrols at Llanheath have changed their routes, and some districts are closed to anyone without business there.",
+   "text": "Patrols at {settlement} have changed their routes, and some districts are closed to anyone without business there.",
+   "marks": [
+    "guardPresence"
+   ]
+  },
+  {
+   "kind": "printed false on the 720",
+   "pool": "DS-POW-5::FLAG: crimeIsGovt",
+   "vid": 1,
+   "word": "law",
+   "pattern": "NEW-V9",
+   "disqualifier": [
+    "watch",
+    "garrison",
+    "guardPresence"
+   ],
+   "towns": 1,
+   "example": "There is no law at Schwarzsteig but what the gang bosses enforce.",
+   "text": "There is no law at {settlement} but what the gang bosses enforce. They keep a kind of order and charge for it, and whoever cannot pay goes unprotected.",
+   "marks": [
+    "colour"
+   ]
+  },
+  {
+   "kind": "unreached by the 720; names a registered word its declaration does not answer (read: key-implied unless shown otherwise)",
+   "pool": "DS-ECO-2::GRANARY: thin",
+   "vid": 3,
+   "word": "granary",
+   "disqualifier": [
+    "institution: granary"
+   ],
+   "layer": 4,
+   "text": "{settlement} is eating its stores faster than {season} will refill them. If nothing changes, the granary runs out before the next harvest."
+  },
+  {
+   "kind": "unreached by the 720; names a registered word its declaration does not answer (read: key-implied unless shown otherwise)",
+   "pool": "DS-ECO-8::FOOD AND PROSPERITY: full stores lift the town",
+   "vid": 1,
+   "word": "granary",
+   "disqualifier": [
+    "institution: granary"
+   ],
+   "layer": 2,
+   "text": "Full stores help {settlement}'s fortunes. With food to spare and a granary to keep it in, the town has more to trade and less to fear from a bad year."
+  },
+  {
+   "kind": "unreached by the 720; names a registered word its declaration does not answer (read: key-implied unless shown otherwise)",
+   "pool": "DS-ECO-8::FOOD AND PROSPERITY: full stores lift the town",
+   "vid": 2,
+   "word": "granary",
+   "disqualifier": [
+    "institution: granary"
+   ],
+   "layer": 2,
+   "text": "Nobody at {settlement} worries much about the next meal, and the spare food in the granary is part of why the town does as well as it does."
+  },
+  {
+   "kind": "unreached by the 720; names a registered word its declaration does not answer (read: key-implied unless shown otherwise)",
+   "pool": "DS-ECO-8::FOOD AND PROSPERITY: full stores lift the town",
+   "vid": 3,
+   "word": "granary",
+   "disqualifier": [
+    "institution: granary"
+   ],
+   "layer": 2,
+   "text": "With its granary full, {settlement} can meet a lean season without selling what it cannot spare."
+  },
+  {
+   "kind": "unreached by the 720; names a registered word its declaration does not answer (read: key-implied unless shown otherwise)",
+   "pool": "DS-DEF-2::Disasters & Famine: granary AND hospital",
+   "vid": 2,
+   "word": "granary",
+   "disqualifier": [
+    "institution: granary"
+   ],
+   "layer": 3,
+   "text": "People at {settlement} are glad of their granary for bad years and their hospital for the sick."
+  },
+  {
+   "kind": "unreached by the 720; names a registered word its declaration does not answer (read: key-implied unless shown otherwise)",
+   "pool": "DS-DEF-2::Disasters & Famine: granary AND parish care only",
+   "vid": 2,
+   "word": "plague",
+   "disqualifier": [
+    "crisis: plague_onset"
+   ],
+   "layer": 3,
+   "text": "The town can eat through a bad year. What it does about a plague is pray and nurse, in that order."
+  },
+  {
+   "kind": "unreached by the 720; names a registered word its declaration does not answer (read: key-implied unless shown otherwise)",
+   "pool": "DS-DEF-2::Disasters & Famine: granary, NO medical provision",
+   "vid": 2,
+   "word": "plague",
+   "disqualifier": [
+    "crisis: plague_onset"
+   ],
+   "layer": 3,
+   "text": "The stores will carry the town through hunger. Nothing here will carry it through a plague, and the town has not built anything that would."
+  },
+  {
+   "kind": "unreached by the 720; names a registered word its declaration does not answer (read: key-implied unless shown otherwise)",
+   "pool": "DS-DEF-2::Disasters & Famine: granary, NO medical provision",
+   "vid": 3,
+   "word": "famine",
+   "disqualifier": [
+    "crisis: famine",
+    "crisis: hunger",
+    "famine",
+    "starving",
+    "food:"
+   ],
+   "layer": 3,
+   "text": "People at {settlement} can outlast a hungry year but have no answer to a sick one, and they fear plague more than famine."
+  },
+  {
+   "kind": "unreached by the 720; names a registered word its declaration does not answer (read: key-implied unless shown otherwise)",
+   "pool": "DS-DEF-2::Disasters & Famine: granary, NO medical provision",
+   "vid": 3,
+   "word": "plague",
+   "disqualifier": [
+    "crisis: plague_onset"
+   ],
+   "layer": 3,
+   "text": "People at {settlement} can outlast a hungry year but have no answer to a sick one, and they fear plague more than famine."
+  },
+  {
+   "kind": "unreached by the 720; names a registered word its declaration does not answer (read: key-implied unless shown otherwise)",
+   "pool": "DS-DEF-2::Disasters & Famine: NO reserves, NO medical provision",
+   "vid": 1,
+   "word": "plague",
+   "disqualifier": [
+    "crisis: plague_onset"
+   ],
+   "layer": 3,
+   "text": "{settlement} has no granary and nobody to treat the sick; a failed harvest is hardship within the season here and a plague runs until it burns out."
+  },
+  {
+   "kind": "unreached by the 720; names a registered word its declaration does not answer (read: key-implied unless shown otherwise)",
+   "pool": "DS-DEF-2::Disasters & Famine: NO reserves, NO medical provision",
+   "vid": 3,
+   "word": "granary",
+   "disqualifier": [
+    "institution: granary"
+   ],
+   "layer": 3,
+   "text": "Ask for the granary or the sick-house at {settlement} and you are pointed to neither, because there is neither."
+  },
+  {
+   "kind": "unreached by the 720; names a registered word its declaration does not answer (read: key-implied unless shown otherwise)",
+   "pool": "DS-DEF-6::Legal Infrastructure: Court + Prison",
+   "vid": 3,
+   "word": "prison",
+   "disqualifier": [],
+   "layer": 2,
+   "text": "You can see the courthouse and the gaol at {settlement} from the street, and the town means you to."
+  },
+  {
+   "kind": "unreached by the 720; names a registered word its declaration does not answer (read: key-implied unless shown otherwise)",
+   "pool": "DS-DEF-6::Legal Infrastructure: Court + Prison",
+   "vid": 3,
+   "word": "court",
+   "disqualifier": [],
+   "layer": 2,
+   "text": "You can see the courthouse and the gaol at {settlement} from the street, and the town means you to."
+  },
+  {
+   "kind": "unreached by the 720; names a registered word its declaration does not answer (read: key-implied unless shown otherwise)",
+   "pool": "DS-DEF-6::Medical Readiness: None",
+   "vid": 1,
+   "word": "plague",
+   "disqualifier": [
+    "crisis: plague_onset"
+   ],
+   "layer": 2,
+   "text": "{settlement} has no dedicated healers. Wounds take what they take, and a plague here runs until it has finished."
+  },
+  {
+   "kind": "unreached by the 720; names a registered word its declaration does not answer (read: key-implied unless shown otherwise)",
+   "pool": "DS-DEF-6::Logistics & Supply: Granary + port",
+   "vid": 1,
+   "word": "docks",
+   "disqualifier": [
+    "docks",
+    "navigable",
+    "coast",
+    "river",
+    "port",
+    "institution: docks",
+    "route: port",
+    "route: river"
+   ],
+   "layer": 2,
+   "text": "{settlement}'s granary tally and its open harbour make it the hardest kind of place to starve out: a siege would need a fleet as well as an army."
+  },
+  {
+   "kind": "unreached by the 720; names a registered word its declaration does not answer (read: key-implied unless shown otherwise)",
+   "pool": "DS-DEF-6::Logistics & Supply: Granary + port",
+   "vid": 1,
+   "word": "granary",
+   "disqualifier": [
+    "institution: granary"
+   ],
+   "layer": 2,
+   "text": "{settlement}'s granary tally and its open harbour make it the hardest kind of place to starve out: a siege would need a fleet as well as an army."
+  },
+  {
+   "kind": "unreached by the 720; names a registered word its declaration does not answer (read: key-implied unless shown otherwise)",
+   "pool": "DS-DEF-6::Logistics & Supply: Granary in isolation",
+   "vid": 1,
+   "word": "granary",
+   "disqualifier": [
+    "institution: granary"
+   ],
+   "layer": 2,
+   "text": "{settlement} holds reserves and nothing else; endurance here is exactly the size of what is in the granary and not a day longer."
+  },
+  {
+   "kind": "unreached by the 720; names a registered word its declaration does not answer (read: key-implied unless shown otherwise)",
+   "pool": "DS-DEF-6::Logistics & Supply: Granary with road supply",
+   "vid": 1,
+   "word": "granary",
+   "disqualifier": [
+    "institution: granary"
+   ],
+   "layer": 2,
+   "text": "{settlement} keeps stores and is fed by the roads; the roads are the vulnerability, and the granary is what buys time to do something about them."
+  },
+  {
+   "kind": "unreached by the 720; names a registered word its declaration does not answer (read: key-implied unless shown otherwise)",
+   "pool": "DS-DEF-6::Logistics & Supply: Granary with road supply",
+   "vid": 3,
+   "word": "granary",
+   "disqualifier": [
+    "institution: granary"
+   ],
+   "layer": 2,
+   "text": "An interruption on the roads to {settlement} does not reach the table, and the granary is the reason rather than the roads."
+  },
+  {
+   "kind": "unreached by the 720; names a registered word its declaration does not answer (read: key-implied unless shown otherwise)",
+   "pool": "DS-DEF-6::Naval Defense: Naval force",
+   "vid": 2,
+   "word": "docks",
+   "disqualifier": [
+    "docks",
+    "navigable",
+    "coast",
+    "river",
+    "port",
+    "institution: docks",
+    "route: port",
+    "route: river"
+   ],
+   "layer": 2,
+   "text": "Arriving by sea at {settlement}, you are met by the town's own vessels well before the harbour."
+  },
+  {
+   "kind": "unreached by the 720; names a registered word its declaration does not answer (read: key-implied unless shown otherwise)",
+   "pool": "DS-DEF-6::Naval Defense: Under blockade",
+   "vid": 1,
+   "word": "docks",
+   "disqualifier": [
+    "docks",
+    "navigable",
+    "coast",
+    "river",
+    "port",
+    "institution: docks",
+    "route: port",
+    "route: river"
+   ],
+   "layer": 2,
+   "text": "A hostile fleet sits across {settlement}'s sea approaches: the harbour book records no ship in, and the goods the town lives on have stopped."
+  },
+  {
+   "kind": "unreached by the 720; names a registered word its declaration does not answer (read: key-implied unless shown otherwise)",
+   "pool": "DS-DEF-6::Naval Defense: Under blockade",
+   "vid": 2,
+   "word": "docks",
+   "disqualifier": [
+    "docks",
+    "navigable",
+    "coast",
+    "river",
+    "port",
+    "institution: docks",
+    "route: port",
+    "route: river"
+   ],
+   "layer": 2,
+   "text": "The harbour at {settlement} is full of vessels that cannot leave and empty of the ones that should be coming in."
+  },
+  {
+   "kind": "unreached by the 720; names a registered word its declaration does not answer (read: key-implied unless shown otherwise)",
+   "pool": "DS-GEN-7::power_stress: occupation against stated stability",
+   "vid": 1,
+   "word": "occupation",
+   "disqualifier": [
+    "crisis: occupied",
+    "crisis: threat",
+    "ruler: occupier"
+   ],
+   "layer": 2,
+   "text": "{settlement} is under occupation; the streets are quiet because soldiers hold them, not because the town is at peace."
+  },
+  {
+   "kind": "unreached by the 720; names a registered word its declaration does not answer (read: key-implied unless shown otherwise)",
+   "pool": "DS-GEN-7::power_stress: occupation against stated stability",
+   "vid": 3,
+   "word": "occupation",
+   "disqualifier": [
+    "crisis: occupied",
+    "crisis: threat",
+    "ruler: occupier"
+   ],
+   "layer": 2,
+   "text": "{settlement} is quiet under occupation: no unrest, and nobody doing anything they were not told to."
+  },
+  {
+   "kind": "unreached by the 720; names a registered word its declaration does not answer (read: key-implied unless shown otherwise)",
+   "pool": "DS-HK-1::clock faction_split",
+   "vid": 2,
+   "word": "powersCount",
+   "disqualifier": [],
+   "layer": "?",
+   "text": "Two powers in {settlement} want the same halls, offices and favours, and there are not enough to share."
+  },
+  {
+   "kind": "unreached by the 720; names a registered word its declaration does not answer (read: key-implied unless shown otherwise)",
+   "pool": "DS-STR-1::UNDER OCCUPATION",
+   "vid": 2,
+   "word": "occupation",
+   "disqualifier": [
+    "crisis: occupied",
+    "crisis: threat",
+    "ruler: occupier"
+   ],
+   "layer": 1,
+   "text": "{settlement}'s taxes go to the occupier before the town sees them, and its officials take their orders from outside."
+  },
+  {
+   "kind": "unreached by the 720; names a registered word its declaration does not answer (read: key-implied unless shown otherwise)",
+   "pool": "DS-STR-1::UNDER OCCUPATION",
+   "vid": 3,
+   "word": "garrison",
+   "disqualifier": [
+    "garrison",
+    "soldiers",
+    "commander"
+   ],
+   "layer": 1,
+   "text": "The garrison is quartered inside the walls, and the town's business is conducted around it."
+  },
+  {
+   "kind": "unreached by the 720; names a registered word its declaration does not answer (read: key-implied unless shown otherwise)",
+   "pool": "DS-STR-1::UNDER OCCUPATION",
+   "vid": 6,
+   "word": "occupation",
+   "disqualifier": [
+    "crisis: occupied",
+    "crisis: threat",
+    "ruler: occupier"
+   ],
+   "layer": 1,
+   "text": "{settlement} runs as before, but the occupier's officers sit in on its business and make no secret of it."
+  },
+  {
+   "kind": "unreached by the 720; names a registered word its declaration does not answer (read: key-implied unless shown otherwise)",
+   "pool": "DS-STR-1::UNDER OCCUPATION",
+   "vid": 7,
+   "word": "occupation",
+   "disqualifier": [
+    "crisis: occupied",
+    "crisis: threat",
+    "ruler: occupier"
+   ],
+   "layer": 1,
+   "text": "The occupiers are quartered inside the town, and the town's business is conducted around them."
+  },
+  {
+   "kind": "unreached by the 720; names a registered word its declaration does not answer (read: key-implied unless shown otherwise)",
+   "pool": "DS-STR-1::WARTIME",
+   "vid": 4,
+   "word": "war",
+   "disqualifier": [
+    "war: front",
+    "war: aggressor",
+    "war: at war",
+    "war: peace",
+    "crisis: wartime",
+    "crisis: under_siege",
+    "crisis: occupied"
+   ],
+   "layer": 1,
+   "text": "{settlement} is at war, and the war has reached the town as absence: the men, the carts, and the ordinary expectation of next year."
+  },
+  {
+   "kind": "unreached by the 720; names a registered word its declaration does not answer (read: key-implied unless shown otherwise)",
+   "pool": "DS-CND-1::FAMILY: occupation layer",
+   "vid": 1,
+   "word": "garrison",
+   "disqualifier": [
+    "garrison",
+    "soldiers",
+    "commander"
+   ],
+   "layer": 1,
+   "text": "Holding this place costs more than it returns. Garrisons, administrators and suppression tie down strength that was meant for elsewhere."
+  },
+  {
+   "kind": "unreached by the 720; names a registered word its declaration does not answer (read: key-implied unless shown otherwise)",
+   "pool": "DS-CND-1::FAMILY: occupation layer",
+   "vid": 2,
+   "word": "occupation",
+   "disqualifier": [
+    "crisis: occupied",
+    "crisis: threat",
+    "ruler: occupier"
+   ],
+   "layer": 1,
+   "text": "{settlement}'s occupier is stretched thin, and every season of sabotage costs it more to stay."
+  },
+  {
+   "kind": "unreached by the 720; names a registered word its declaration does not answer (read: key-implied unless shown otherwise)",
+   "pool": "DS-CND-1::FAMILY: occupation layer",
+   "vid": 3,
+   "word": "occupation",
+   "disqualifier": [
+    "crisis: occupied",
+    "crisis: threat",
+    "ruler: occupier"
+   ],
+   "layer": 1,
+   "text": "The occupier takes more from the town than it gives, but its own accounts never show what holding the town costs it in men and coin."
+  }
+ ]
+}

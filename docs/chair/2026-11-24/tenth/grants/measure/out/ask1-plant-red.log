@@ -1,0 +1,88 @@
+
+ RUN  v4.1.8 /home/user/settlement-engine
+
+ ❯ tests/security/serverOwnedColumns.pglite.test.js (16 tests | 4 failed) 3762ms
+     × settlements: the plain insert of saves.js :: supabaseSave succeeds as the signed-in owner 12ms
+     × saved_maps: the plain insert of campaigns.js :: rowForCampaign succeeds as the signed-in owner 3ms
+     × settlements: after the server counts and features a row, the page's upsert (owner columns only) succeeds and leaves the server's values 8ms
+     × saved_maps: after the server counts and features a row, the page's upsert (owner columns only) succeeds and leaves the server's values 5ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/security/serverOwnedColumns.pglite.test.js > positive control: the pages' own writes still succeed (an over-refusing guard reds here) > settlements: the plain insert of saves.js :: supabaseSave succeeds as the signed-in owner
+AssertionError: expected 'settlements.view_count is written by …' to be 1 // Object.is equality
+
+- Expected:
+1
+
++ Received:
+"settlements.view_count is written by the server alone (a new row carries its default)"
+
+ ❯ tests/security/serverOwnedColumns.pglite.test.js:262:42
+    260|   it("settlements: the plain insert of saves.js :: supabaseSave succee…
+    261|     const r = await asRole('authenticated', OWNER_ID, `insert into pub…
+    262|     expect(r.ok ? r.rows.length : r.err).toBe(1);
+       |                                          ^
+    263|   });
+    264|   it("saved_maps: the plain insert of campaigns.js :: rowForCampaign s…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  tests/security/serverOwnedColumns.pglite.test.js > positive control: the pages' own writes still succeed (an over-refusing guard reds here) > saved_maps: the plain insert of campaigns.js :: rowForCampaign succeeds as the signed-in owner
+AssertionError: expected 'saved_maps.view_count is written by t…' to be 1 // Object.is equality
+
+- Expected:
+1
+
++ Received:
+"saved_maps.view_count is written by the server alone (a new row carries its default)"
+
+ ❯ tests/security/serverOwnedColumns.pglite.test.js:266:42
+    264|   it("saved_maps: the plain insert of campaigns.js :: rowForCampaign s…
+    265|     const r = await asRole('authenticated', OWNER_ID, `insert into pub…
+    266|     expect(r.ok ? r.rows.length : r.err).toBe(1);
+       |                                          ^
+    267|   });
+    268|   it("settlements: after the server counts and features a row, the pag…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  tests/security/serverOwnedColumns.pglite.test.js > positive control: the pages' own writes still succeed (an over-refusing guard reds here) > settlements: after the server counts and features a row, the page's upsert (owner columns only) succeeds and leaves the server's values
+AssertionError: expected 'settlements.view_count is written by …' to be 'page upsert' // Object.is equality
+
+Expected: "page upsert"
+Received: "settlements.view_count is written by the server alone (a new row carries its default)"
+
+ ❯ tests/security/serverOwnedColumns.pglite.test.js:275:43
+    273|         toggles = excluded.toggles, seed = excluded.seed, neighbour_li…
+    274|         campaign_state = excluded.campaign_state, version_history = ex…
+    275|     expect(r.ok ? r.rows[0].name : r.err).toBe('page upsert');
+       |                                           ^
+    276|     const [row] = (await db.query(`select view_count, is_featured, fea…
+    277|     expect(row).toEqual({ view_count: 57, is_featured: true, featured_…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  tests/security/serverOwnedColumns.pglite.test.js > positive control: the pages' own writes still succeed (an over-refusing guard reds here) > saved_maps: after the server counts and features a row, the page's upsert (owner columns only) succeeds and leaves the server's values
+AssertionError: expected 'saved_maps.view_count is written by t…' to be 'page upsert' // Object.is equality
+
+Expected: "page upsert"
+Received: "saved_maps.view_count is written by the server alone (a new row carries its default)"
+
+ ❯ tests/security/serverOwnedColumns.pglite.test.js:285:43
+    283|       on conflict (id) do update set user_id = excluded.user_id, name …
+    284|         burg_settlement_map = excluded.burg_settlement_map, supply_cha…
+    285|     expect(r.ok ? r.rows[0].name : r.err).toBe('page upsert');
+       |                                           ^
+    286|     const [row] = (await db.query(`select view_count, import_count, is…
+    287|     expect(row).toEqual({ view_count: 57, import_count: 9, is_featured…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  4 failed | 12 passed (16)
+   Start at  18:25:01
+   Duration  4.11s (transform 88ms, setup 102ms, import 82ms, tests 3.76s, environment 0ms)
+
+exit 1

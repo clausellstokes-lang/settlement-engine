@@ -1,0 +1,73 @@
+diff --git a/src/pdf/lib/viewModel.js b/src/pdf/lib/viewModel.js
+index c54ccad0e..f8b77fff8 100644
+--- a/src/pdf/lib/viewModel.js
++++ b/src/pdf/lib/viewModel.js
+@@ -27,6 +27,7 @@ import { collectPlotHooks } from '../../domain/dossier/plotHooks.js';
+ import { crisisNoteFor } from '../../domain/dossier/powerStrata.js';
+ import { deriveFoodBalance, deriveProsperityPosture, deriveViability } from '../../domain/display/dossierViewModel.js';
+ import { isViabilityItem } from '../../domain/display/viabilityFilter.js';
++import { deriveDailyLife } from '../../domain/dailyLife.js';
+ // SEAM-PDF item 3 (2026-11-17; BAR6-ECON's C88465): the complexity label as the Economics tab prints it (no "Subsistence" beside a
+ // purse past survival), the one reading (`labelBands.js :: complexityLabelShown`), at every print of it below.
+ import { complexityLabelShown } from '../../domain/display/labelBands.js';
+@@ -177,7 +178,7 @@ export function buildViewModel({
+     // partial AI overlay from hiding or rewriting the culture/coherence receipt.
+     identity:      identitySlice(active, raw),
+     overview:      overviewSlice(active, ai, useAi),
+-    daily:         dailySlice(active, aiDailyLife),
++    daily:         dailySlice(active, aiDailyLife, settlement),
+     power:         powerSlice(active),
+     economics:     economicsSlice(active),
+     defense:       defenseSlice(active),
+@@ -452,7 +453,19 @@ function overviewSlice(active, ai, useAi) {
+   };
+ }
+ 
+-function dailySlice(active, aiDailyLife) {
++/** The page's public Daily Life lines, in the page's order (components/new/tabs/DailyLifeTab.jsx :: ENGINE_SLOTS). */
++const DAILY_LIFE_PAGE_SLOTS = ['dawn_work', 'gathering_places', 'child_warnings'];
++
++/** The lines the page prints, from the document the print is handed: a slot whose text is empty or "—" prints nothing. */
++function dailyLifeLinesOf(doc) {
++  if (!doc) return [];
++  const { slots } = deriveDailyLife(doc);
++  return DAILY_LIFE_PAGE_SLOTS
++    .map(key => (typeof slots[key]?.text === 'string' ? slots[key].text.trim() : ''))
++    .filter(line => line && line !== '—');
++}
++
++function dailySlice(active, aiDailyLife, doc) {
+   const passages = aiDailyLife
+     ? [
+         { time: 'Dawn',    text: aiDailyLife.dawn },
+@@ -463,6 +476,7 @@ function dailySlice(active, aiDailyLife) {
+       ].filter(p => p.text)
+     : [];
+   return {
++    lines:       dailyLifeLinesOf(doc),
+     hasPassages: passages.length > 0,
+     passages,
+     foodBalance: active?.economicViability?.metrics?.foodBalance || null,
+diff --git a/src/pdf/sections/IdentityDailyLife.jsx b/src/pdf/sections/IdentityDailyLife.jsx
+index 09149d859..04ebf785d 100644
+--- a/src/pdf/sections/IdentityDailyLife.jsx
++++ b/src/pdf/sections/IdentityDailyLife.jsx
+@@ -231,12 +231,17 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm, stateProse })
+           plat to read; no text surface prints a quarter's name. tests/pdf/quartersNotPrinted.test.jsx */}
+ 
+       {/* ── Daily Life ───────────────────────────────────────── */}
+-      {(d.hasPassages || d.foodBalance) && (
++      {(d.lines?.length > 0 || d.hasPassages || d.foodBalance) && (
+         <View style={{ marginTop: space.sm }}>
+           <HairRule />
+           <Text style={{ ...type.label, color: accent, fontSize: pt['8'], marginBottom: 3 }}>
+             DAILY LIFE
+           </Text>
++          {(d.lines || []).map((line, i) => (
++            <Text key={`dl-${i}`} style={{ ...type.prose, fontSize: pt['9.5'], marginBottom: space.xs }}>
++              {line}
++            </Text>
++          ))}
+           {d.hasPassages ? (
+             d.passages.map((p, i) => (
+               <View key={`p-${i}`} style={{ marginBottom: space.sm }} wrap={false}>

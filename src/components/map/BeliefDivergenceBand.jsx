@@ -9,11 +9,11 @@
  *
  * THE ASYMMETRY SEAM (mirrors RumorsTab / FaithSection). Beliefs are inherently DM
  * knowledge. The read-model follows the includeGroundTruth convention: the PLAYER
- * projection (the default, fail-closed) is EMPTY, and only a premium / elevated DM
- * view passes includeGroundTruth:true. This band is rendered ONLY inside the DM's
- * Realm Inspector (never a shared/public dossier or a free/anon PDF export), and it
- * additionally self-gates to nothing for a non-premium viewer — so a settlement's
- * internal model of the world, and any deity name it carries, never reaches a player.
+ * projection (the default, fail-closed) is EMPTY, and only the DM view passes
+ * includeGroundTruth:true. This band is rendered ONLY inside the DM's Realm Inspector
+ * (never a shared/public dossier or a PDF export), whose outer world-map gate carries
+ * the tier law — so a settlement's internal model of the world, and any deity name it
+ * carries, never reaches a player.
  *
  * Self-gates on hasBeliefMaps (a dormant / belief-inactive world carries no belief
  * ledger ⇒ the band renders nothing ⇒ byte-identical UI). Lazy: mounted inside the
@@ -30,7 +30,6 @@
 import { useMemo } from 'react';
 import { Eye } from 'lucide-react';
 
-import { useStore } from '../../store/index.js';
 import { settlementBeliefs, hasBeliefMaps } from '../../domain/display/settlementBeliefs.js';
 import { beliefTruthProvider } from '../../domain/display/beliefTruthBands.js';
 import { BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, GOLD_BG, INK, MUTED, SECOND, SP, sans } from '../theme.js';
@@ -94,11 +93,10 @@ function BeliefRow({ belief }) {
  */
 export default function BeliefDivergenceBand({ campaign, saves, nameById }) {
   const mobile = useIsMobile();
-  const tier = useStore(s => s.auth?.tier);
-  const elevated = useStore(s => (typeof s.isElevated === 'function' ? s.isElevated() : false));
-  // includeGroundTruth convention: beliefs are DM knowledge. Premium / elevated only;
-  // every other viewer gets the empty player projection (fail-closed).
-  const includeGroundTruth = tier === 'premium' || elevated;
+  // V1-map (the owner's tier law, 2026-11-09): the panel mounts only inside the world map's
+  // campaign Herald, whose outer gate carries law (6); the inner tier term mirrored it and is
+  // deleted. The data gate is the read's own (beliefs, ledgers) — no behaviour change.
+  const includeGroundTruth = true;
 
   const nameFor = useMemo(() => (/** @type {any} */ id) => nameById?.get(String(id)) || String(id), [nameById]);
   const worldState = campaign?.worldState || null;

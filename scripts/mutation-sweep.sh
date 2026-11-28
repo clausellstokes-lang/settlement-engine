@@ -133,6 +133,26 @@ MUTATED_FILES=(
   src/generators/foodGenerator.js
   src/generators/economy/foodBalance.js
   src/generators/economy/viability.js
+  src/generators/resourceGenerator.js
+  src/generators/steps/assembleSettlement.js
+  src/generators/hookVariety.js
+  src/components/settlements/CampaignFolder.jsx
+  src/domain/display/stateProse/generalStateProse.js
+  src/domain/facts/tradeAtWork.js
+  src/generators/people/rareSecrets.js
+  src/domain/display/validationOnPage.js
+  src/data/arrivalProse.js
+  src/generators/steps/generateNarratives.js
+  src/generators/economy/incomeLineSiblings.js
+  src/data/faceHonorifics.js
+  src/data/people/handlerTieLines.js
+  src/generators/power/rulingStructure.js
+  src/domain/facts/forceHours.js
+  src/generators/people/goals.js
+  src/generators/people/poolMap.js
+  src/data/institutionDescVariants.js
+  src/generators/servicesGenerator.js
+  src/generators/npcGenerator.js
 )
 if [ "${MUTATION_SWEEP_ALLOW_DIRTY:-}" != "1" ]; then
   dirty="$(git status --porcelain -- "${MUTATED_FILES[@]}" 2>/dev/null)"
@@ -1653,6 +1673,174 @@ check_caught "food/the record's surplus condition is grows-more-than-eats" src/g
 #      tests/generators/smallPlaceMarket.test.js must red.
 perl -0pi -e "s/return tags\.includes\('market'\) \|\| \(tags\.includes/return tags.length > 0 || tags.includes('market') || (tags.includes/" src/generators/economy/viability.js
 check_caught "size/the catalogue decides what is a market" src/generators/economy/viability.js "npx vitest run tests/generators/smallPlaceMarket.test.js --no-file-parallelism"
+
+# 119-123. THE REVIEW-INTAKE LANE'S FIVE CURE PINS (lane/review-intake-2026-11-06; plants landed
+#      2026-11-07 on lane/review-intake-plants-2026-11-07). Each plant is the inverse of its cure.
+# 119. A GAP SAYS WHICH KIND (f8f0afe0f). An imported input is classed missing again, so the
+#      "runs on imported" line is written as "lacks access"; gapSaysWhichKind must red.
+perl -0pi -e "s/  \) return 'imported';\n  return 'missing';/  ) return 'missing';\n  return 'missing';/" src/generators/resourceGenerator.js
+check_caught "review-intake/a gap says which kind" src/generators/resourceGenerator.js "npx vitest run tests/generators/gapSaysWhichKind.test.js --no-file-parallelism"
+
+# 120. THE RECEIPT READS THE TRACE IT PERSISTED (67cafec07). The trace copy moves back AFTER the
+#      receipt, so the receipt reports "No step trace was persisted" on a world that carries one.
+perl -0pi -e 's/(  if \(Array\.isArray\(ctx\.simulationTrace\) && ctx\.simulationTrace\.length\) \{\n    settlement\.simulationTrace = ctx\.simulationTrace;\n  \}\n)(.*?      generationRepairs: ctx\.generationRepairs,\n    \},\n  \);\n)/$2$1/s' src/generators/steps/assembleSettlement.js
+check_caught "review-intake/the receipt reads the trace it persisted" src/generators/steps/assembleSettlement.js "npx vitest run tests/generators/receiptReadsPersistedTrace.test.js --no-file-parallelism"
+
+# 121. NO ROSTER CARRIES ONE SECRET OR ONE GOAL TWICE (9ae0609e4). The draw-site primitive stops
+#      refusing what the roster holds, so the population draws repeat again over the 1,000 births.
+perl -0pi -e 's/    if \(!held \|\| held\.size === 0\) return pool\[start\];/    if (true) return pool[start];/' src/generators/hookVariety.js
+check_caught "review-intake/no roster carries one secret or one goal twice" src/generators/hookVariety.js "npx vitest run tests/generators/rosterDuplicateDraws.test.js --no-file-parallelism"
+
+# 122. WATER IS READ FROM THE RECORD (9f7867088). The record's water rows stop counting as a
+#      supply, so a hills town with Multiple water sources is told its Brewery lacks water.
+perl -0pi -e 's/  const hasWater = native\.some\(\(inst\) => WATER_ROW_NAMES\.has\(nativeSemanticName\(inst\)\)\)\n/  const hasWater = false\n/' src/generators/economy/viability.js
+check_caught "review-intake/water is read from the record" src/generators/economy/viability.js "npx vitest run tests/generators/waterDependencyFromRecord.test.js --no-file-parallelism"
+
+# 123. A HOLDER CITATION RESOLVES BY SYMBOL (0d4731d98). The producer index stops emitting the
+#      `path :: symbol` form, so the two symbol-cited holder rows resolve to nothing.
+perl -0pi -e 's/      const bySymbol = write\.symbol \? `\$\{rel\} :: \$\{write\.symbol\}` : .{2};/      const bySymbol = "";/' scripts/wiring-census.mjs
+check_caught "review-intake/a holder citation resolves by symbol" scripts/wiring-census.mjs "npx vitest run tests/lint/holderCitesBySymbol.test.js --no-file-parallelism"
+
+# 124. THE LIBRARY ADVANCES NOTHING (LIBRARY-SIMPLE, 2026-11-10; the owner: "No longer does it
+#      advance time."). The campaign folder reads the campaign advance again, so the Library is
+#      one wire away from an advance the owner took out of it.
+perl -0pi -e 's/(  const faithUnlocked = useStore\(resolveFaithUnlocked\);\n)/$1  const advanceCampaignWorld = useStore(s => s.advanceCampaignWorld);\n/' src/components/settlements/CampaignFolder.jsx
+check_caught "library-simple/the Library reads no campaign advance" src/components/settlements/CampaignFolder.jsx "npx vitest run tests/lint/libraryAdvancesNothing.walker.test.js --no-file-parallelism" "the Library advances nothing (owner, 2026-11-10) > no Library file reaches a campaign advance"
+
+# 125. THE FOUNDING IS TOLD ONCE, BY THE HISTORY (BAR5-WORLD (a), 2026-11-16). The road arm's origin row is put back
+#      to the words the guard was written against ("Founded roadside, ..."), so the Overview founds the town again above a
+#      History that names no road; tests/generators/bar5WorldLines.test.js must red (the pool arm by name, and the three
+#      towns the detector fired in at the base). Measured in a scratch worktree (CLOSE-WALKERS, 2026-11-18, base 70e557d5b):
+#      clean => 6 passed; planted => 2 red, 4 passed, title_matches=1; restored byte-identically => 6 passed.
+perl -0pi -e "s/'It stands roadside, where the day is measured in traffic/'Founded roadside, where the day is measured in traffic/" src/generators/narrative/settlementOriginProse.js
+check_caught "bar5-world/the road arm's origin row founds no town" src/generators/narrative/settlementOriginProse.js "npx vitest run tests/generators/bar5WorldLines.test.js --no-file-parallelism" "no row of the road arm founds the town; the row says where it stands"
+
+# 126. FORTY TO SIXTY YEARS IS TWO GENERATIONS (BAR7-LINES low.generation, 2026-11-17). `yearBand`'s two-generations
+#      reading is switched off, so forty-five years is "a generation old" again; tests/generators/bar7Lines.test.js must red.
+#      Measured in a scratch worktree (CLOSE-WALKERS, 2026-11-18): clean => 7 passed; planted => 1 red, 6 passed,
+#      title_matches=1; restored => 7 passed.
+perl -0pi -e "s/return generation\.id === 'a_generation' && years >= 40 \?/return false ?/" src/domain/display/stateProse/generalStateProse.js
+check_caught "bar7-lines/forty to sixty years is two generations" src/domain/display/stateProse/generalStateProse.js "npx vitest run tests/generators/bar7Lines.test.js --no-file-parallelism" "low.generation: forty to sixty years is two generations; the band keeps its id"
+
+# 127. THE KILNS ARE ANSWERED BY A HOUSE THAT FIRES A KILN (BAR7-SCENES item 1, 8k.trade, 2026-11-17). The generic
+#      `kilns` key reads every kiln-trade house again, so working Glassmakers answer "the kilns are lit" beside a short
+#      Potter, Brickmaker and Charcoal burner; tests/generators/bar7Scenes.test.js must red. Measured in a scratch worktree
+#      (CLOSE-WALKERS, 2026-11-18): clean => 14 passed; planted => 1 red, 13 passed, title_matches=1; restored => 14 passed.
+perl -0pi -e "s/const answering = key === 'kilns' \? kilnHousesAnswering\(houses\) : houses;/const answering = houses;/" src/domain/facts/tradeAtWork.js
+check_caught "bar7-scenes/the kilns are answered by a house that fires a kiln" src/domain/facts/tradeAtWork.js "npx vitest run tests/generators/bar7Scenes.test.js --no-file-parallelism" "rand-32's houses, planted: the Potter, the Brickmaker and the Charcoal burner all short beside working Glassmakers: no \"kilns are lit\""
+
+# 128. A MAGIC ROW STANDS ONLY WHERE MAGIC WORKS (SECRETS-1, 2026-11-17). The dealer's world-law filter stops reading a
+#      row's `magic` flag, so a world without magic is dealt magic rows; tests/generators/rareSecretsLaw.test.js must red.
+#      Measured in a scratch worktree (CLOSE-WALKERS, 2026-11-18): clean => 22 passed; planted => 1 red, 21 passed,
+#      title_matches=1; restored => 22 passed.
+perl -0pi -e 's/const lawful = rows\.filter\(\(r\) => \(!r\.magic \|\| place\.magic\) && /const lawful = rows.filter((r) => /' src/generators/people/rareSecrets.js
+check_caught "rare-secrets/a magic row stands only where magic works" src/generators/people/rareSecrets.js "npx vitest run tests/generators/rareSecretsLaw.test.js --no-file-parallelism" "a world without magic holds no magic row (planted, every row; and over a hundred seeds of a large roster)"
+
+# 129. ONE HOUSE, ONE MATERIAL, ONE GAP LINE (BAR8-J-ROWS G1, 2026-11-17). Both strikes of the told goods at print are
+#      reverted (`resourceGapLines`: the no-chain house's and the chained house's), so "No iron ore reaches the mine."
+#      prints beside "The mine is worked out ..."; tests/generators/bar8Rows.test.js must red. Measured in a scratch worktree
+#      (CLOSE-WALKERS, 2026-11-18): clean => 6 passed; planted => 3 red, 3 passed, title_matches=1; restored => 6 passed.
+perl -0pi -e 's/const left = goods\.filter\(\(x\) => !told\.nouns\.has\(x\.noun\)\);/const left = goods;/; s/const left = nouns\.filter\(\(n\) => !told\.nouns\.has\(n\)\);/const left = nouns;/' src/domain/display/validationOnPage.js
+check_caught "bar8-j-rows/one house, one material, one gap line" src/domain/display/validationOnPage.js "npx vitest run tests/generators/bar8Rows.test.js --no-file-parallelism" "no town prints the general line beside the story line of the same house; the story line still prints"
+
+# 130. "NOBODY LOOKS HUNGRY" WANTS THE FOOD BAND SECURE OR BETTER (BAR8-SCENES item 7, 9g.food-soft, 2026-11-17). The
+#      row's `food: >= secure` need is taken off, so a prosperous metropolis whose band is pressured is admitted it;
+#      tests/generators/bar8Scenes.test.js must red. Measured in a scratch worktree (CLOSE-WALKERS, 2026-11-18):
+#      clean => 25 passed; planted => 1 red, 24 passed, title_matches=1; restored => 25 passed.
+perl -0pi -e 's/(nobody looks hungry\.\x27, )needs: \[\x27food: [^\x27]*secure\x27\], /$1/' src/data/arrivalProse.js
+check_caught "bar8-scenes/nobody looks hungry wants the food band secure or better" src/data/arrivalProse.js "npx vitest run tests/generators/bar8Scenes.test.js --no-file-parallelism" "bar0-metropolis-calm-rand-29: a prosperous metropolis whose food band is pressured"
+
+# 131. WHERE THE FISH IS BOUGHT IN, THE CATCH ROW IS ITS INLAND ALTERNATIVE (BAR8-FISH-ROWS, BR24, 2026-11-17). The
+#      narratives step no longer calls `boughtFishRowsInPlace`, so a Fish market whose grounds are spent and whose fish is
+#      bought in sells "Fresh fish retail ... the morning catch" again; tests/generators/bar8FishRows.test.js must red.
+#      Measured in a scratch worktree (CLOSE-WALKERS, 2026-11-18): clean => 9 passed; planted => 4 red, 5 passed,
+#      title_matches=1; restored => 9 passed.
+perl -0pi -e 's/^  boughtFishRowsInPlace\(/  if (0) boughtFishRowsInPlace(/m' src/generators/steps/generateNarratives.js
+check_caught "bar8-fish-rows/where the fish is bought in the catch row is its inland alternative" src/generators/steps/generateNarratives.js "npx vitest run tests/generators/bar8FishRows.test.js --no-file-parallelism" "BOUGHT: the fish bought in, the Fish market sells its \"Preserved fish\" with its own words, and no morning catch"
+
+
+# 132. THE FISHED-OUT INCOME LINE ASKS THE FISH STORY FIRST (BAR8 J-INCOME-2 item 2, 11b, the sixth chair's point 54, 2026-11-17). The rites line
+#      is put back where every fishery is fished out, so "rites keep the catch coming, and it is landed and sold here" prints
+#      again; tests/generators/bar8Income.test.js must red.
+#      Measured in a scratch worktree (LASTCLOSE-SIGN, 2026-11-19, the tree of 319d75ac1): clean => 10 passed; planted => 2 red, 8 passed,
+#      title_matches=1; restored byte-identically => 10 passed.
+perl -0pi -e 's/if \(f\.fisheryExhausted\) return bought\(\/\\bsalt\(\?:ed\)\? fish\\b\/i\) \? FISH_BOUGHT_LINE : \x27\x27;/if (f.fisheryExhausted) return FISH_RITES_LINE;/' src/generators/economy/incomeLineSiblings.js
+check_caught "bar8-income/the fished-out income line asks the fish story first" src/generators/economy/incomeLineSiblings.js "npx vitest run tests/generators/bar8Income.test.js --no-file-parallelism" "a constructed record: bought in, the bought line; nothing bought, no sentence; a live fishery keeps its line"
+
+# 133. "EMIR" IS THE ARABIC LORD OF ONE SEX (BAR8 K-PEOPLE 14g, BR14, C36170, point 50). The woman's title is put back to "Emir";
+#      tests/generators/bar8People.test.js must red.
+#      Measured in a scratch worktree (LASTCLOSE-SIGN, 2026-11-19, the tree of 319d75ac1): clean => 12 passed; planted => 1 red, 11 passed,
+#      title_matches=1; restored byte-identically => 12 passed.
+perl -0pi -e 's/\{ male: "Emir", female: "Emira" \}/{ male: "Emir", female: "Emir" }/' src/data/faceHonorifics.js
+check_caught "bar8-people/the arabic lord of one sex" src/data/faceHonorifics.js "npx vitest run tests/generators/bar8People.test.js --no-file-parallelism" "a woman who holds the seat is Emira, a man Emir, on the resolver and on the card door"
+
+# 134. A TIE LINE THAT HOLDS SOMEONE INSIDE DECLARES THE PRISON, EACH LINE ALONE (BAR8 PEOPLE-2 13b, point 58). The held friend's
+#      description (C37891) loses its `needs: ['prison']`; tests/generators/bar8People2.test.js must red.
+#      Measured in a scratch worktree (LASTCLOSE-SIGN, 2026-11-19, the tree of 319d75ac1): clean => 6 passed; planted => 1 red, 5 passed,
+#      title_matches=1; restored byte-identically => 6 passed.
+perl -0pi -e 's/ needs: \[\x27prison\x27\] \}, (\/\/ BAR8 K-PEOPLE \(13b, C37891\))/ }, $1/' src/data/people/handlerTieLines.js
+check_caught "bar8-people-2/the held friend declares the prison" src/data/people/handlerTieLines.js "npx vitest run tests/generators/bar8People2.test.js --no-file-parallelism" "every line that holds someone inside declares \`prison\`; the three of them are found"
+
+# 135. THE ELECTED REEVE ANSWERS TO A NOBLE ONLY WHERE ONE STANDS (BAR8-K-POWERS 14d, C44634, point 49). Every reeve takes the
+#      "under noble oversight" line again; tests/generators/bar8Powers.test.js must red.
+#      Measured in a scratch worktree (LASTCLOSE-SIGN, 2026-11-19, the tree of 319d75ac1): clean => 5 passed; planted => 1 red, 4 passed,
+#      title_matches=1; restored byte-identically => 5 passed.
+perl -0pi -e 's/\x27Elected Reeve\x27: noblePower > \(tier === \x27town\x27 && !hasNobleInst \? 10 : 5\) \|\| hasNobleInst \?/\x27Elected Reeve\x27: true ?/' src/generators/power/rulingStructure.js
+check_caught "bar8-powers/the elected reeve answers to a noble only where one stands" src/generators/power/rulingStructure.js "npx vitest run tests/generators/bar8Powers.test.js --no-file-parallelism" "14d: the Elected Reeve answers to a noble only where one stands"
+
+# 136. THE WATCH ON ITS ROUNDS BY DAY ONLY WHERE THE FORCE WALKS BY DAY (BAR8-K-WATCH 13e, C42053, point 48). The atom stops
+#      reading the force's night-only text, so a night watch walks "most hours of the day" again; tests/generators/bar8Watch.test.js
+#      must red.
+#      Measured in a scratch worktree (LASTCLOSE-SIGN, 2026-11-19, the tree of 319d75ac1): clean => 10 passed; planted => 5 red, 5 passed,
+#      title_matches=1; restored byte-identically => 10 passed.
+perl -0pi -e 's/return houses\.some\(\(f\) => !nightOnlyText\(f\?\.desc\) && !mustersOnlyAtNeed\(f\?\.desc\)\);/return houses.some((f) => !mustersOnlyAtNeed(f?.desc));/' src/domain/facts/forceHours.js
+check_caught "bar8-watch/the watch on its rounds by day only where the force walks by day" src/domain/facts/forceHours.js "npx vitest run tests/generators/bar8Watch.test.js --no-file-parallelism" "the atom \`force walks by day\` reads the force's own text (constructed rosters)"
+
+# 137. A DEPENDENCY GOAL PRESUMES A SUPPLY ONLY OF A GOOD BROUGHT IN OR HAD (FAULTS-NEED item 2, 11e.wantBuy, point 61). The
+#      refusal where the need list names the good is taken off, so "Buy {resource} at the market" is dealt beside "Needed, and
+#      not brought in"; tests/generators/faultsNeed.test.js must red.
+#      Measured in a scratch worktree (LASTCLOSE-SIGN, 2026-11-19, the tree of 319d75ac1): clean => 11 passed; planted => 1 red, 10 passed,
+#      title_matches=1; restored byte-identically => 11 passed.
+perl -0pi -e 's/\.map\(\(c\) => \(unmet \? \{ \.\.\.c, refused: true \} : c\)\)\);/.map((c) => c));/' src/generators/people/goals.js
+check_caught "faults-need/a dependency goal presumes a supply only of a good brought in or had" src/generators/people/goals.js "npx vitest run tests/generators/faultsNeed.test.js --no-file-parallelism" "the towns of the sample: no card wants a supply of a good the page says is needed and not brought in; dependency goals still deal"
+
+# 138. THE FISHMONGER TALKS OF THE BOATS AND THE CATCH ONLY WHERE A CATCH IS LANDED (FAULTS-PEOPLE FR5, point 62). The settle step
+#      no longer prints the row's twin where its declaration refuses the row; tests/generators/faultsPeople.test.js must red.
+#      Measured in a scratch worktree (LASTCLOSE-SIGN, 2026-11-19, the tree of 319d75ac1): clean => 9 passed; planted => 2 red, 7 passed,
+#      title_matches=1; restored byte-identically => 9 passed.
+perl -0pi -e 's/if \(twin && card\.presentation\?\.behaviour === /if (0 && twin && card.presentation?.behaviour === /' src/generators/people/poolMap.js
+check_caught "faults-people/the fishmonger talks of the catch only where a catch is landed" src/generators/people/poolMap.js "npx vitest run tests/generators/faultsPeople.test.js --no-file-parallelism" "settleTitleLines on a constructed card: the twin in the slot where no catch is landed; the boats where it is"
+
+# 139. THE FAIR OFFERS NO LUXURY THE NEED LIST SAYS IS NOT BROUGHT IN (FAULTS-ROWS FR3, point 65). The fair's first line drops
+#      its `need not brought in: luxury` exclusion, so "Luxury goods available." prints beside "Needed, and not brought in:
+#      luxury goods."; tests/generators/faultsRows.test.js must red.
+#      Measured in a scratch worktree (LASTCLOSE-SIGN, 2026-11-19, the tree of 319d75ac1): clean => 15 passed; planted => 2 red, 13 passed,
+#      title_matches=1; restored byte-identically => 15 passed.
+perl -0pi -e 's/(\{ text: "Regional merchants\. Luxury goods available\.", excludes: Object\.freeze\(\[\x27crisis: under_siege\x27), \x27need not brought in: luxury\x27\]\)/$1])/' src/data/institutionDescVariants.js
+check_caught "faults-rows/the fair offers no luxury the need list says is not brought in" src/data/institutionDescVariants.js "npx vitest run tests/generators/faultsRows.test.js --no-file-parallelism" "UNMET: the twin prints in the line's place, beside the page's own \"Needed, and not brought in\" luxury"
+
+# 140. THE NAME SLOT CLAIMS NO FIELD (FAULTS-TOOLS item 1, the chair's ruling CL25, point 60). The matcher stops striking the name
+#      slots, so "{settlement}" claims the record's `settlement` field again; tests/generators/faultsTools.test.js must red.
+#      Measured in a scratch worktree (LASTCLOSE-SIGN, 2026-11-19, the tree of 319d75ac1): clean => 8 passed; planted => 3 red, 5 passed,
+#      title_matches=1; restored byte-identically => 8 passed.
+perl -0pi -e 's/const body = NAME_SLOTS\.reduce\(\(t, slot\) => t\.split\(`\{\$\{slot\}\}`\)\.join\(\x27 \x27\), String\(text \|\| \x27\x27\)\);/const body = String(text || \x27\x27);/' src/domain/prose/entryWalker.js
+check_caught "faults-tools/the name slot claims no field" src/domain/prose/entryWalker.js "npx vitest run tests/generators/faultsTools.test.js --no-file-parallelism" "the NAME SLOT claims no field; a slot naming a field, and the bare word, still do"
+
+# 141. THE HOLDING CELLS HOLD "PENDING TRIAL" ONLY WHERE A COURT SITS (FAULTS-WATCH item 7, FR22 (3), point 66). The twin
+#      "Short-term detention until a fine is paid." is no longer written where no court sits; tests/generators/faultsWatch.test.js
+#      must red.
+#      Measured in a scratch worktree (LASTCLOSE-SIGN, 2026-11-19, the tree of 319d75ac1): clean => 26 passed; planted => 2 red, 24 passed,
+#      title_matches=1; restored byte-identically => 26 passed.
+perl -0pi -e 's/if \(svc\?\.name === \x27Holding cells\x27 && svc\.desc === HOLDING_CELLS_PENDING_TRIAL\) svc\.desc = HOLDING_CELLS_UNTIL_FINE;/if (0) svc.desc = HOLDING_CELLS_UNTIL_FINE;/' src/generators/servicesGenerator.js
+check_caught "faults-watch/the holding cells hold pending trial only where a court sits" src/generators/servicesGenerator.js "npx vitest run tests/generators/faultsWatch.test.js --no-file-parallelism" "every town of the guard that holds the row: the twin exactly where no court sits, the original exactly where one does"
+
+# 142. A CRISIS STAKE'S VERB TAKES ITS POWER'S NUMBER (NAMES-3 item 3, NAMES-4 brief 2; the seventh chair's CV1 and CV4). The
+#      stakes' fill hands its power to the agreement form under the slot the four stakes no longer name, so every one of them
+#      prints the singular verb for a plural power ("the Merchant Guilds is about to"); tests/data/powerNumberAgreement.test.js must red.
+#      Measured in this checkout (NAMES-4, 2026-11-20): clean => 18 passed; planted => 1 red, 17 passed, title_matches=1;
+#      restored byte-identically => 18 passed.
+perl -0pi -e 's/fillAgreement\(effect\.stakes, \{ power: govFaction \}\)/fillAgreement(effect.stakes, { faction: govFaction })/' src/generators/npcGenerator.js
+check_caught "names/a crisis stake's verb takes its power's number" src/generators/npcGenerator.js "npx vitest run tests/data/powerNumberAgreement.test.js --no-file-parallelism" "NAMES-4: the secrets as generateCrimeLevel deals them (its own \`{has}\`), in both numbers, differ only by number, the right way round"
 
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"

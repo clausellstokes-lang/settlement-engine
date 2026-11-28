@@ -25,6 +25,7 @@ import { label, humanize, safe } from '../lib/format.js';
 import { EntityRef, anchorTarget } from '../primitives/EntityRef.jsx';
 import { ProseText } from '../primitives/ProseText.jsx';
 import { tokenCase } from '../../domain/display/labelCase.js';
+import { institutionHouseLabel } from '../../domain/display/institutionDisplayName.js';
 
 /**
  * TextRow — Label · prose value pair, but the value is rendered as plain
@@ -190,16 +191,25 @@ function FullCard({ npc, index }) {
           npc.race ? { label: 'Race', value: humanize(npc.race) } : null,
           npc.gender ? { label: 'Sex', value: humanize(npc.gender) } : null,
           npc.age ? { label: 'Age', value: npc.age } : null,
-          // 'INFL' is SPELLED OUT rather than re-cased: tokenCase('INFL') is 'Infl',
-          // which is not a word, and an abbreviation that reads as a typo in sentence
-          // case has to become the word it abbreviates or stay an abbreviation.
-          npc.influenceLabel ? { label: 'Influence', value: npc.influenceLabel } : null,
+          // PAGE-1 CARD (F4, 2026-11-20): the record's fact as the people card's Standing row prints it (the view row's
+          // `standingLine`, cardStandingRead.js), never the stored `influence` band ("Influence: low").
+          npc.standingLine ? { label: 'Standing', value: npc.standingLine } : null,
         ].filter(Boolean)}
       />
 
-      {npc.influenceDescription && (
-        <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'], marginTop: 2, fontStyle: 'italic' }}>
-          {safe(npc.influenceDescription)}
+      {/* PEOPLE-5A (M-1b): the card's house and its standing in each power by rank. */}
+      {(npc.house || npc.powerLine) && (
+        <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'], marginTop: 2 }}>
+          {/* ROUND THREE, ruling (a): the house by its label, as the page's NPC card door prints it. */}
+          {safe([npc.house ? institutionHouseLabel(npc.house) : '', npc.powerLine].filter(Boolean).join(' · '))}
+        </Text>
+      )}
+
+      {/* BAR7-CARDS item 2 (the chair's ruling CM1, 2026-11-17; vetoable by the owner): the house's mark, one line of its
+          own straight under the house line, said once, as the NPC tab's card prints it (`viewModel.js :: houseMark`). */}
+      {npc.houseMark && (
+        <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'], marginTop: 1, fontStyle: 'italic' }}>
+          {safe(npc.houseMark)}
         </Text>
       )}
 
@@ -216,6 +226,7 @@ function FullCard({ npc, index }) {
       <View style={{ marginTop: 4 }}>
         <TextRow label="PERSONALITY" value={npc.personality} multiline />
         <TextRow label="MOTIVATION"  value={npc.motivation}  multiline index={index} />
+        <TextRow label="HOW THEY DEAL" value={npc.dealing} multiline />
       </View>
 
       {/* Secrets */}
@@ -252,11 +263,11 @@ function FullCard({ npc, index }) {
           <Text style={{ ...type.label, color: palette.muted, fontSize: pt['7.5'], marginBottom: 1 }}>
             RELATIONSHIPS
           </Text>
+          {/* ⛔ B4 (2026-11-09): the tie's sentence prints once, in Relationships (14); the card names the person and the tie. */}
           {npc.relationships.map((r, ri) => (
             <Text key={`rel-${ri}`} style={{ ...type.caption, color: palette.second, fontSize: pt['8'] }}>
               · {label(r?.with || r?.target || r?.name)}
               {r?.type ? safe(` - ${r.type}`) : ''}
-              {r?.description ? safe(` - ${r.description}`) : ''}
             </Text>
           ))}
         </View>

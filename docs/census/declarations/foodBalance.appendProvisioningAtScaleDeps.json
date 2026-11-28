@@ -1,0 +1,115 @@
+{
+  "id": "foodBalance.appendProvisioningAtScaleDeps",
+  "source": "src/generators/economy/foodBalance.js :: appendProvisioningAtScaleDeps",
+  "drawKind": "T",
+  "pool": {
+    "declares": [
+      "tier: >= city"
+    ],
+    "crisisScoped": false,
+    "colour": false,
+    "notes": "DEPENDENCY warnings; tier >= city guaranteed (tierAtLeast, same comparator). Pool-wide: hasExternalSupply.",
+    "needs": [],
+    "excludes": []
+  },
+  "rows": [
+    {
+      "id": "foodBalance.appendProvisioningAtScaleDeps::staple.title",
+      "text": "Imports staple food at urban scale",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "foodBalance.appendProvisioningAtScaleDeps::staple.desc",
+      "text": "A ${tier} cannot grow its staples within its walls; it depends on a steady grain supply fr",
+      "needs": [
+        "walls"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "WALLS PRESUMED, unchecked: an unwalled city reads \"within its walls\". Needs a twin (excludes walls). unhomed: staple = grain."
+    },
+    {
+      "id": "foodBalance.appendProvisioningAtScaleDeps::staple.impact",
+      "text": "A disrupted supply line means hunger within days.",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "foodBalance.appendProvisioningAtScaleDeps::staple.fix.0",
+      "text": "Secure and protect the regional grain-supply network",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "foodBalance.appendProvisioningAtScaleDeps::bulk.title",
+      "text": "Imports bulk materials and fuel",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "foodBalance.appendProvisioningAtScaleDeps::bulk.desc",
+      "text": "A ${tier} consumes building materials and fuel faster than any local hinterland can supply",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "foodBalance.appendProvisioningAtScaleDeps::bulk.impact",
+      "text": "Construction and industry stall when material convoys are interrupted.",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "foodBalance.appendProvisioningAtScaleDeps::bulk.fix.0",
+      "text": "Diversify material supply routes and hold strategic reserves",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "foodBalance.appendProvisioningAtScaleDeps::luxury.title",
+      "text": "Imports finished goods and luxuries",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "Branch tier metropolis."
+    },
+    {
+      "id": "foodBalance.appendProvisioningAtScaleDeps::luxury.desc",
+      "text": "An imperial metropolis depends on a constant inflow of finished goods, textiles, and luxur",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "unhomed: imperial polity (\"imperial\" for every metropolis)."
+    },
+    {
+      "id": "foodBalance.appendProvisioningAtScaleDeps::luxury.impact",
+      "text": "Shortfalls drive price spikes, unrest, and loss of prestige.",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "foodBalance.appendProvisioningAtScaleDeps::luxury.fix.0",
+      "text": "Maintain long-haul trade relationships and bonded warehousing",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    }
+  ]
+}

@@ -64,7 +64,7 @@ const STRUCTURAL_DELTA_SPEC = Object.freeze({
  *
  * @typedef {{
  *   npcs?: PreviewNpc[],
- *   factions?: unknown[],
+ *   powerStructure?: { factions?: unknown[] } | null,
  *   _narrative?: unknown,
  *   aiSettlement?: unknown,
  *   narrativeNotes?: unknown,
@@ -419,8 +419,9 @@ export function previewCascade(settlement, queue) {
   preview.downstreamCounts.npcs = Array.isArray(settlement.npcs)
     ? settlement.npcs.length
     : 0;
-  preview.downstreamCounts.factions = Array.isArray(settlement.factions)
-    ? settlement.factions.length
+  // PEOPLE-5B (M-7): the powers are the only faction roster (the grouping left the record).
+  preview.downstreamCounts.factions = Array.isArray(settlement.powerStructure?.factions)
+    ? settlement.powerStructure.factions.length
     : 0;
   // ⚠ WAS ALWAYS ZERO. Both root addresses (`settlement.plotHooks`,
   // `settlement.hooks`) are writerless, so the preview told every user that an

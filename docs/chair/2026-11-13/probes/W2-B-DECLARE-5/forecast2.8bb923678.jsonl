@@ -1,0 +1,6 @@
+{"lane":"CONTROL","freshNew":0,"freshOld":0,"newKeyOnly":0,"newOnlyFiles":[]}
+{"lane":"w2-fix-data-2026-11-13","freshNew":37,"freshOld":37,"newKeyOnly":0,"newOnlyFiles":[]}
+{"lane":"w2-write-2026-11-13","freshNew":27,"freshOld":27,"newKeyOnly":0,"newOnlyFiles":[]}
+{"lane":"w2-a-leaves-2026-11-12","freshNew":17,"freshOld":16,"newKeyOnly":1,"newOnlyFiles":["src/domain/display/defenseDisplay.js"]}
+{"lane":"coherence-upkeep-2026-11-12","freshNew":24,"freshOld":24,"newKeyOnly":0,"newOnlyFiles":[]}
+{"lane":"integration-2026-11-07","freshNew":2,"freshOld":2,"newKeyOnly":0,"newOnlyFiles":[]}

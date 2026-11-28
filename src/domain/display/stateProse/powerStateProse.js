@@ -81,7 +81,11 @@ import { governanceLedger } from '../../governanceLedger.js';
 import { composeStateProse } from './composeStateProse.js';
 import { powerStateProseCandidates } from './powerStateProseCandidates.js';
 import { legibilityRung } from './legibilityRung.js';
+import { powerNameAfterArticle, powerNameWithArticle, powerSentenceName } from '../powerSentenceName.js';
 import { wallsAnswered } from '../../defense/defenseFacts.js';
+import { crisisAnswered } from '../../crisis/crisisFacts.js';
+import { factsAnswered } from '../../facts/factsAnswered.js';
+import { corpusAdmittingCrimeLines, crimeLineFactsOf } from './crimeLineDisqualifiers.js';
 
 /**
  * The desk's corpus, typed at the import boundary. The generated leaves stay PURE DATA
@@ -129,12 +133,13 @@ const CORPUS = /** @type {import('./stateProseKernel.js').StateProseCorpus} */ (
  * @property {unknown} [recentConflict]
  * @property {ReadonlyArray<RulingFactionView>|null} [factions]
  * @property {unknown} [criminalCaptureState]
+ * @property {ReadonlyArray<GmAdvisoryRelationView>|null} [factionRelationships]
  */
 /**
  * @typedef {object} PowerDeskSettlement
  * @property {string} [name]
  * @property {PowerStructureView|null} [powerStructure]
- * @property {{safetyProfile?: {criminalInstitutions?: unknown}|null}|null} [economicState]
+ * @property {{safetyProfile?: {criminalInstitutions?: unknown, flags?: StructureFlagsView|null}|null}|null} [economicState]
  */
 
 /**
@@ -188,6 +193,37 @@ function properFill(value) {
 /** @param {unknown} value @returns {string} */
 function text(value) {
   return typeof value === 'string' ? value.trim() : '';
+}
+
+/**
+ * A POWER NAMED IN A SENTENCE TAKES ITS FORM FROM THE ONE LEAF (TAIL-DISPLAY-CIVIC-3 V1, the chair's ruling of
+ * 2026-11-15; `display/powerSentenceName.js`): the roster's label ("Military/Guard") is a chip's, and a sentence reads
+ * its prose form ("The Guard"). `powerFill` for a slot with no article before it ({faction}, {counterpart}: none of the
+ * desk's pools sets one); `powerSeatFill` for {seat}, which every pool sets after its own article ("the {seat}", "The
+ * {seat} at {settlement}", "the present {seat}"), so its form strikes its own "The" ("the Guard", never "the The Guard").
+ * NAMES-1 (the seventh chair's ruling CN1 of 2026-11-20, vetoable by the owner): a power in a sentence takes its article, so
+ * `powerFill` gives the one leaf's article form ("the Royal Authority", "the Guard"; "no rival yet outweighs the Household
+ * Council"), the name still refused where its prose form is not a proper name; a sentence the fill opens takes "The"
+ * (`headed`, on the composed text: the pools write {faction} at a sentence's head 24 times and inside one 52).
+ * @param {unknown} value @returns {string|undefined}
+ */
+function powerFill(value) {
+  return properFill(powerSentenceName(text(value))) ? powerNameWithArticle(text(value)) : undefined;
+}
+/**
+ * NAMES-1 (CN1): a composed line whose sentence opens on an article fill ("the Royal Authority holds the hall") takes the
+ * capital ("The Royal Authority holds the hall"). The corpus opens no sentence on a lower-case "the" before a name of its
+ * own (the leaf has no sentence-initial lowercase seam, measured over its pools), so the only such opening is a fill.
+ * @template {{text?: unknown}|null} L @param {L} line @returns {L}
+ */
+function headed(line) {
+  if (!line || typeof line.text !== 'string') return line;
+  const said = line.text.replace(/(^|[.!?]["”’')]?\s+)the (?=\p{Lu})/gu, '$1The ');
+  return said === line.text ? line : /** @type {L} */ (Object.freeze({ ...line, text: said }));
+}
+/** @param {unknown} value @returns {string|undefined} */
+function powerSeatFill(value) {
+  return properFill(powerNameAfterArticle(text(value)));
 }
 
 /**
@@ -294,7 +330,7 @@ export function legitimacyLensPoolKey(legitimacy) {
  * existing worlds), and it is raised for the chair rather than patched here.
  *
  * ⚠ `siege matched` IS CHECKED BEFORE THE FIRST WORD, and it costs a pool. The only label
- * carrying either token is `Critical (active siege — survival priority)`, so exactly one of
+ * carrying either token is `Critical (under siege)`, so exactly one of
  * `siege matched` / `critical matched` can ever fire. The siege prose ("the walls have
  * settled it") is written for precisely that state and the critical prose is the general
  * case, so most-specific-wins takes siege — the same rule DS-POW-1's lens uses.
@@ -421,8 +457,12 @@ export function legitimacyReadingPoolKey(ledger, legitimacy) {
   if (!ledger?.present) return 'present: false (no legitimacy reading)';
   const b = legitimacy?.breakdown;
   if (!b) return null;
-  const flat = ['prosperity', 'safety', 'defense', 'food']
-    .every((f) => contribution(b[/** @type {keyof LegitimacyBreakdownView} */ (f)]) === 0);
+  // FORTUNE U5b (the seventh chair's ruling of 22:26 UTC 2026-11-20, item 3): the merit the fortune law adds
+  // (`breakdown.merits`, fortune/fortuneMerits.js) is a pull too, so a place it lifted with the four terms at 0 does not
+  // read "no strong opinion" beside its standing. Absent on every law-1 record, so no born page moves.
+  const terms = /** @type {Record<string, unknown>} */ (b);
+  const flat = ['prosperity', 'safety', 'defense', 'food', 'merits']
+    .every((f) => contribution(terms[f]) === 0);
   // Nothing pulling either way is exactly the state DS-POW-1's lens goes silent on, so the
   // two blocks tile the space instead of overlapping or leaving a hole in it.
   return flat ? 'neutral baseline (nothing pulling either way)' : null;
@@ -438,6 +478,10 @@ export function capturePoolKey(captureState, breakdown) {
   const state = text(captureState);
   if (state === 'capture') return 'capture reached a LEADER';
   if (state === 'corrupted') return 'capture reached an AGENT of a faction';
+  // 5a, RE-RULED (W2-A-LEAVES-2, 2026-11-13; REVIEW-W2A F3: "the blanket silence is withdrawn"). The first seat
+  // returned null here at 'none', and 288 lines left the page, most of them true. The pressure pools are drawn
+  // at every rung below `corrupted` again; each of their lines that presumes a bought official, or a grip on the
+  // hall, is struck where the town makes it false (`crimeLineDisqualifiers.js`, enforced at the draw below).
   if (!breakdown) return null;
   const safety = contribution(breakdown.safety);
   const prosperity = contribution(breakdown.prosperity);
@@ -510,6 +554,17 @@ const RISK_POOL_OF = Object.freeze({
 export function riskPoolKey(riskLabel) {
   const label = text(riskLabel);
   return label ? RISK_POOL_OF[label] || null : null;
+}
+
+/**
+ * Whether the governing row carries the `vacant` modifier — the same fact `powerStrata.js :: rulingChainOf` reads.
+ * @param {unknown} factions @returns {boolean}
+ */
+export function seatVacantOf(factions) {
+  if (!Array.isArray(factions)) return false;
+  const seat = factions.find((f) => f && typeof f === 'object' && /** @type {{isGoverning?: unknown}} */ (f).isGoverning === true);
+  const mods = seat ? /** @type {{modifiers?: unknown}} */ (seat).modifiers : null;
+  return Array.isArray(mods) && mods.includes('vacant');
 }
 
 /**
@@ -628,12 +683,14 @@ export function ladderPoolKey(rungs, instability) {
  * @returns {object|null}
  */
 export function powerLadderRung(settlement, reading = {}, options = {}) {
-  // F10: the walls dimension answered once, from the defence reader (stateProseKernel law 5).
-  options = wallsAnswered(settlement, options);
+  // F10 + F12: the walls and the five crisis dimensions answered once, from the defence and crisis readers (stateProseKernel law 5).
+  options = factsAnswered(settlement, crisisAnswered(settlement, wallsAnswered(settlement, options)));
   const key = ladderPoolKey(reading.rungs, reading.instability);
   if (!key) return null;
-  const faction = properFill(text(reading.factionName));
+  const faction = powerFill(reading.factionName);
   if (!faction) return null;
+  // the rung's glance is a label: the roster's prose form, no article (NAMES-1, CN1: only sentences change)
+  const glance = powerSentenceName(text(reading.factionName));
   const slots = {
     settlement: properFill(text(settlement?.name)),
     faction,
@@ -643,13 +700,13 @@ export function powerLadderRung(settlement, reading = {}, options = {}) {
   };
   // ⭐ ROUTED THROUGH THE COMPOSER (SEAM car 3e). The per-faction ladder's whole reading is
   // the one this entry point was handed, so that is what the candidates leaf is offered.
-  const line = composeStateProse(CORPUS, 'DS-POW-3', {
+  const line = headed(composeStateProse(CORPUS, 'DS-POW-3', {
     ...options,
     slots,
     spineKey: key,
     candidates: powerStateProseCandidates('DS-POW-3', reading),
-  });
-  return legibilityRung(faction, line, []);
+  }));
+  return legibilityRung(glance, line, []);
 }
 
 /**
@@ -717,6 +774,82 @@ export function rulingPowerPoolKey(lens) {
 
 /** The pool that narrates the governing body's own title. */
 const GOVERNING_NAME_POOL = 'governing body name: a SLOT, never a baked noun';
+
+/**
+ * ── WIRING W3 (2026-11-07): THE STRUCTURE FLAGS (DS-POW-5) AND THE GM ADVISORY (DS-POW-6) ──
+ *
+ * Five generation facts the safety profile has always carried and no surface said: the
+ * garrison as an extraction apparatus (`stateCrime`, banded by `stateCrimeIntensity`), crime
+ * as the government (`crimeIsGovt`), the merchant army, the merchant-criminal blur and secular
+ * brutalism. Each is a DESCRIPTION line under the ruling structure, said only when the flag is
+ * TRUE (the default says nothing). ONE flag speaks per page, in the order below — the gravest
+ * reading of who actually holds the force first — because the position is one sentence deep.
+ * The flags are read off `economicState.safetyProfile.flags` as the generator wrote them; this
+ * desk derives none of them (W0's R-W7 (b) computes them after the roster is final).
+ *
+ * The GM advisory is the `dmNote` the faction-dynamics writer attaches to two relationships —
+ * a competitive governing↔military pair, and a governing↔criminal pair whose capture state is
+ * past adversarial. It is DM-PRIVATE (`publicSafe` strips `dmNote`), and every variant of both
+ * pools is `dm-only`, so a player page draws the key and then silence.
+ */
+
+/**
+ * @typedef {object} StructureFlagsView
+ * @property {unknown} [stateCrime] @property {unknown} [stateCrimeIntensity]
+ * @property {unknown} [crimeIsGovt] @property {unknown} [merchantArmy]
+ * @property {unknown} [merchantCriminalBlur] @property {unknown} [secularBrutalism]
+ */
+/**
+ * @typedef {object} GmAdvisoryRelationView
+ * @property {unknown} [dmNote] @property {unknown} [type] @property {unknown} [captureState]
+ * @property {ReadonlyArray<unknown>} [pair]
+ */
+
+/** `stateCrimeIntensity` runs 0 to 1/3 at the producer; the upper half of that range is heavy. */
+const HEAVY_STATE_CRIME_FROM = 1 / 6;
+
+/**
+ * DS-POW-5's structure-flag pool key: the gravest TRUE flag, or null.
+ * @param {StructureFlagsView|null|undefined} flags `economicState.safetyProfile.flags`
+ * @returns {string|null}
+ */
+export function structureFlagPoolKey(flags) {
+  if (!flags || typeof flags !== 'object') return null;
+  if (flags.crimeIsGovt === true) return 'FLAG: crimeIsGovt';
+  if (flags.stateCrime === true) {
+    const intensity = typeof flags.stateCrimeIntensity === 'number' ? flags.stateCrimeIntensity : 0;
+    return intensity >= HEAVY_STATE_CRIME_FROM ? 'FLAG: stateCrime, heavy' : 'FLAG: stateCrime';
+  }
+  if (flags.merchantArmy === true) return 'FLAG: merchantArmy';
+  if (flags.merchantCriminalBlur === true) return 'FLAG: merchantCriminalBlur';
+  if (flags.secularBrutalism === true) return 'FLAG: secularBrutalism';
+  return null;
+}
+
+/**
+ * The relationship whose `dmNote` the advisory narrates: the first one carrying a note.
+ * @param {ReadonlyArray<GmAdvisoryRelationView>|null|undefined} relationships
+ * @returns {GmAdvisoryRelationView|null}
+ */
+function advisedRelationOf(relationships) {
+  if (!Array.isArray(relationships)) return null;
+  return relationships.find((rel) => rel && text(rel.dmNote)) || null;
+}
+
+/**
+ * DS-POW-6's GM-advisory pool key, read off the advised relationship's own typed fields.
+ * @param {ReadonlyArray<GmAdvisoryRelationView>|null|undefined} relationships
+ *   `powerStructure.factionRelationships`
+ * @returns {string|null}
+ */
+export function gmAdvisoryPoolKey(relationships) {
+  const rel = advisedRelationOf(relationships);
+  if (!rel) return null;
+  const capture = text(rel.captureState);
+  if (capture && capture !== 'none' && capture !== 'adversarial') return 'GM ADVISORY: officials with criminal arrangements';
+  if (!capture && rel.type === 'competitive') return 'GM ADVISORY: the commander is a political actor';
+  return null;
+}
 
 /**
  * ── DS-POW-7, THE BLOCS — the last block in the leaf, and the only one needing a data route ─
@@ -847,11 +980,11 @@ export function politicsEndPoolKey(projection) {
  *   stabilityHeader: object|null, stabilityLens: object|null, legitimacyReading: object|null,
  *   captureReading: object|null, operationReading: object|null, successionRisk: object|null,
  *   successionHold: object|null, rulingStructure: object|null, governingTitle: object|null,
- *   blocPresence: object|null, blocGlue: object|null, blocEnd: object|null}>}
+ *   structureFlag: object|null, gmAdvisory: object|null, blocPresence: object|null, blocGlue: object|null, blocEnd: object|null}>}
  */
 export function powerStateProse(settlement, readings = {}, options = {}) {
-  // F10: the walls dimension answered once, from the defence reader (stateProseKernel law 5).
-  options = wallsAnswered(settlement, options);
+  // F10 + F12: the walls and the five crisis dimensions answered once, from the defence and crisis readers (stateProseKernel law 5).
+  options = factsAnswered(settlement, crisisAnswered(settlement, wallsAnswered(settlement, options)));
   const power = settlement?.powerStructure || {};
   // A legacy numeric `publicLegitimacy` carries no label, breakdown or flag. Reading it as
   // an object would yield `undefined` at every field and silence at every pool, which is
@@ -862,7 +995,9 @@ export function powerStateProse(settlement, readings = {}, options = {}) {
 
   const town = properFill(text(settlement?.name));
   // The canonical "who governs" name, never a hand-rolled second spelling of it.
-  const governing = properFill(text(power.governingName));
+  const governing = powerFill(power.governingName);
+  // {seat} follows its pool's own article: the same name with its own "The" struck (powerSeatFill)
+  const governingSeat = powerSeatFill(power.governingName);
 
   // ⚠ TWO BAGS, BECAUSE {seat} CARRIES TWO INCOMPATIBLE ROLES ACROSS THESE BLOCKS, AND ONE
   // FILL CANNOT SATISFY BOTH. In DS-POW-1 every {seat} seam is the governing BODY — "The
@@ -877,7 +1012,7 @@ export function powerStateProse(settlement, readings = {}, options = {}) {
   // sentence and a dead pool are the alternatives, and both are worse.
   // This is a corpus-side slot-role ambiguity of the same KIND the annex records for
   // {band}, and it is raised for the chair rather than papered over with a second fill.
-  const slots = { settlement: town, seat: governing };
+  const slots = { settlement: town, seat: governingSeat };
   const stabilitySlots = { settlement: town, faction: governing };
 
   // ⭐ ROUTED THROUGH THE COMPOSER (SEAM car 3e), all six block helpers below. The spine key
@@ -885,7 +1020,7 @@ export function powerStateProse(settlement, readings = {}, options = {}) {
   // the modifier pools the state earned, and is EMPTY until car 9 authors them. An empty
   // list composes to the kernel's own draw, which is why the manifest cannot move here.
   /** @param {string|null} poolKey */
-  const line = (poolKey) => (poolKey
+  const line = (poolKey) => headed(poolKey
     ? composeStateProse(CORPUS, 'DS-POW-1', {
       ...options,
       slots,
@@ -894,7 +1029,7 @@ export function powerStateProse(settlement, readings = {}, options = {}) {
     })
     : null);
   /** @param {string|null} poolKey */
-  const line2 = (poolKey) => (poolKey
+  const line2 = (poolKey) => headed(poolKey
     ? composeStateProse(CORPUS, 'DS-POW-2', {
       ...options,
       slots: stabilitySlots,
@@ -908,10 +1043,10 @@ export function powerStateProse(settlement, readings = {}, options = {}) {
   // for the two variants each that name them. The counterpart is the challenger the
   // succession reading already resolved, so no second derivation is made for it.
   /** @param {string|null} poolKey */
-  const line7 = (poolKey) => (poolKey
+  const line7 = (poolKey) => headed(poolKey
     ? composeStateProse(CORPUS, 'DS-POW-7', {
       ...options,
-      slots: { settlement: town, seat: governing, faction: governing, counterpart: challenger },
+      slots: { settlement: town, seat: governingSeat, faction: governing, counterpart: challenger },
       spineKey: poolKey,
       candidates: powerStateProseCandidates('DS-POW-7', readings),
     })
@@ -920,10 +1055,10 @@ export function powerStateProse(settlement, readings = {}, options = {}) {
   // and {good} are deliberately absent — one variant each of forty, no producer, and
   // anchored liveness drops them without costing a pool.
   /** @param {string|null} poolKey */
-  const line5 = (poolKey) => (poolKey
+  const line5 = (poolKey) => headed(poolKey
     ? composeStateProse(CORPUS, 'DS-POW-5', {
       ...options,
-      slots: { settlement: town, seat: governing },
+      slots: { settlement: town, seat: governingSeat },
       spineKey: poolKey,
       candidates: powerStateProseCandidates('DS-POW-5', readings),
     })
@@ -952,19 +1087,22 @@ export function powerStateProse(settlement, readings = {}, options = {}) {
   //      coining exactly the mapping §0d exists to forbid.
   // MEASURED, not assumed — DESK-TIMEBAND 2026-09-05.
   /** @param {string|null} poolKey */
-  const line4 = (poolKey) => (poolKey
+  const line4 = (poolKey) => headed(poolKey
     ? composeStateProse(CORPUS, 'DS-POW-4', {
       ...options,
-      slots: { settlement: town, seat: governing, faction: governing, counterpart: challenger },
+      slots: { settlement: town, seat: governingSeat, faction: governing, counterpart: challenger },
       spineKey: poolKey,
       candidates: powerStateProseCandidates('DS-POW-4', readings),
     })
     : null);
+  // W2-A-LEAVES-2 (REVIEW-W2A F3): the crime desk's lines are drawn among those no declared disqualifier strikes
+  // for this town (an official in a criminal's pay, or none; the hall's stored rung).
+  const corpus6 = corpusAdmittingCrimeLines(CORPUS, 'DS-POW-6', crimeLineFactsOf(settlement, options.audience));
   /** @param {string|null} poolKey */
-  const line6 = (poolKey) => (poolKey
-    ? composeStateProse(CORPUS, 'DS-POW-6', {
+  const line6 = (poolKey) => headed(poolKey
+    ? composeStateProse(corpus6, 'DS-POW-6', {
       ...options,
-      slots: { settlement: town, seat: governing, faction: governing },
+      slots: { settlement: town, seat: governingSeat, faction: governing },
       spineKey: poolKey,
       candidates: powerStateProseCandidates('DS-POW-6', readings),
     })
@@ -994,14 +1132,26 @@ export function powerStateProse(settlement, readings = {}, options = {}) {
   // DS-POW-4. The risk label is the caller's reading; the hold is the band's own multiplier;
   // the lineage is the settlement's own record. {counterpart} is the top challenger — the
   // corpus's own reading of it ("{counterpart} now outweighs the {seat}").
-  const riskKey = riskPoolKey(readings.riskLabel);
+  // SW-7 POWER-SIDE (STYLE-2 B7, "the seat's vacancy first"): a governing row carrying `vacant` (the stressor's
+  // own mark) is said FIRST by the ruling chain above ("The seat · Stands empty; the succession is unsettled",
+  // powerStrata :: rulingChainOf). Every risk pool speaks of a HOLDER ("keeps the hall", "the {seat} is exposed"), and
+  // an empty seat has none, so the block is silent there rather than contradict the chain an inch above it.
+  const riskKey = seatVacantOf(power.factions) ? null : riskPoolKey(readings.riskLabel);
   const holdKey = legitimacyHoldPoolKey(legitimacy.govMultiplier);
-  const challenger = properFill(text(readings.contenders?.challengers?.[0]?.name));
+  const challenger = powerFill(readings.contenders?.challengers?.[0]?.name);
 
   // DS-POW-5. The lens is the caller's reading; both of its words are canonical vocabularies
   // and both mappers are total, so these two lenses answer on every generated world.
   const rulingKey = rulingPowerPoolKey(readings.structuralLens);
   const namedKey = governing ? GOVERNING_NAME_POOL : null;
+  // WIRING W3: the structure flag (DS-POW-5) and the GM advisory (DS-POW-6), both read off the
+  // generator's own record; the advisory's {faction} is the OTHER party of the advised pair.
+  const flagKey = structureFlagPoolKey(settlement?.economicState?.safetyProfile?.flags);
+  const advisoryKey = gmAdvisoryPoolKey(power.factionRelationships);
+  const advisedPair = advisedRelationOf(power.factionRelationships)?.pair;
+  const advisedParty = Array.isArray(advisedPair)
+    ? powerFill(advisedPair.find((name) => text(name) && text(name) !== text(power.governingName)))
+    : undefined;
 
   // DS-POW-7. The projection is the caller's `politicsRead` read; the ruling-power word comes
   // from the DS-POW-5 lens it already holds, so no second derivation is made here.
@@ -1026,6 +1176,15 @@ export function powerStateProse(settlement, readings = {}, options = {}) {
     successionHold: holdKey ? legibilityRung('', line4(holdKey), []) : null,
     rulingStructure: rulingKey ? legibilityRung(rulingKey, line5(rulingKey), []) : null,
     governingTitle: namedKey ? legibilityRung('', line5(namedKey), []) : null,
+    structureFlag: flagKey ? legibilityRung('', line5(flagKey), []) : null,
+    gmAdvisory: advisoryKey
+      ? legibilityRung('', headed(composeStateProse(CORPUS, 'DS-POW-6', {
+        ...options,
+        slots: { settlement: town, seat: governingSeat, faction: advisedParty },
+        spineKey: advisoryKey,
+        candidates: powerStateProseCandidates('DS-POW-6', readings),
+      })), [])
+      : null,
     blocPresence: presenceKey ? legibilityRung('', line7(presenceKey), []) : null,
     blocGlue: glueKey ? legibilityRung('', line7(glueKey), []) : null,
     blocEnd: endKey ? legibilityRung('', line7(endKey), []) : null,

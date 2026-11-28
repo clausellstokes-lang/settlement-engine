@@ -347,8 +347,8 @@ describe('the settlement-state readers', () => {
   test('the vacated seat is read from the membership list, then the affiliation handle', () => {
     const settlement = townWith({ prison: true });
     expect(vacatedSeatOf(settlement, settlement.npcs[0])).toEqual({ factionId: '', factionName: 'Town Council' });
-    // A settlement with no grouping roster still resolves through the handle.
-    expect(vacatedSeatOf({ npcs: [] }, { id: 'npc_9', factionAffiliation: 'Guild of Coopers' }))
+    // A settlement with no grouping roster still resolves through the card's first-rank membership.
+    expect(vacatedSeatOf({ npcs: [] }, { id: 'npc_9', memberships: [{ power: 'Guild of Coopers', rank: 1 }] }))
       .toEqual({ factionId: '', factionName: 'Guild of Coopers' });
     // Nobody holds a seat they never had.
     expect(vacatedSeatOf({ npcs: [] }, { id: 'npc_9' })).toEqual({ factionId: '', factionName: '' });

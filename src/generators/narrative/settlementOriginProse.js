@@ -48,6 +48,11 @@
  * within an arm the variants state the same fact in different voices, which is
  * what keeps the rung safe for the AI grounding payload.
  *
+ * TAIL-NARRATIVE-2 B3 (the chair's ruling (N6)): THE RUNG IS WHERE, NOT WHY. `settlementReason` is drawn BEFORE the
+ * founding reason (`steps/generateNarratives.js`) and cannot read it, so no row claims a cause of founding ("founded
+ * for", "because", "exists because", "on the reasoning that"); a shortfall with nothing brought in "must make do",
+ * never "gets by"; a channel is turned to, never said to meet or close the gap.
+ *
  * ── THE DM-EDIT BOUNDARY ────────────────────────────────────────────────────
  * `settlementReason` is DM-editable (src/domain/userEdits.js:91,
  * display/stateProse/dmFieldProjection.js:53). Selection happens HERE, on the
@@ -56,9 +61,31 @@
  */
 
 import { pickVariant } from '../../kernel/proseHash.js';
+import { noteDeclared } from '../../domain/facts/drawDeclared.js';
 
 /** The `{channels}` token the isolated-deficit pool splices the support list into. */
 export const CHANNELS_TOKEN = '{channels}';
+
+/** The `{holds}` token the no-channel isolated pools splice what the record holds into (#7, #215). */
+export const HOLDS_TOKEN = '{holds}';
+
+/** The `{ground}` token the `ground` arm splices the record's terrain into. */
+export const GROUND_TOKEN = '{ground}';
+
+/**
+ * The terrain the `ground` arm names, in plain words, keyed by the resolved terrain
+ * (`config.terrainType`). Riverside is not here: a riverside port with no docks takes the river
+ * arm. A terrain not listed (or none) keeps the road arm, as before.
+ * @type {Readonly<Record<string, string>>}
+ */
+export const GROUND_PHRASE = Object.freeze({
+  coastal: 'on the shore',
+  mountain: 'on the mountainside',
+  hills: 'in the hills',
+  forest: 'in the forest',
+  plains: 'out on the open plain',
+  desert: 'in the desert',
+});
 
 /**
  * The authored corpus, keyed by ARM. Index 0 of every pool is the exact
@@ -68,34 +95,45 @@ export const CHANNELS_TOKEN = '{channels}';
 export const ORIGIN_POOLS = Object.freeze({
   road: Object.freeze([
     'Established along a road route. Trade flows in, goods flow out, people pass through.',
-    'The road was here first. The settlement grew along its verge, and most of what it owns arrived on somebody else\'s cart.',
-    'Founded roadside, where the day is measured in traffic: what arrives before noon, what leaves before dusk, and what stops for the night.',
-    'A road settlement: it makes its living from other people\'s journeys, in stabling and meals and small repairs.',
-    'Sited on a route already worn deep before anyone built here, on the reasoning that a road a century old will not be abandoned in one.',
+    // BAR2-PLACES (the chair's ruling (PL2), 2026-11-15): the rung is drawn before the History and cannot read the town's age,
+    // so no row claims generations ("for generations" printed in a thorp twenty years old) nor gives the road an age in years.
+    'The road was here first. The settlement grew along its verge, and its news has always come on somebody else\'s cart.',
+    // BAR5-WORLD (2026-11-16; LAW 4's founding, 23 of the 720 and 9 of the fresh 300 at 9867b4b17): THE FOUNDING IS TOLD
+    // ONCE, BY THE HISTORY (`history.founding.reason`, drawn after this rung): this row said "Founded roadside" above a
+    // History that founds the town at a ford, a mill or a naval base. It says where the place stands, as its siblings do.
+    'It stands roadside, where the day is measured in traffic: what arrives before noon, what leaves before dusk, and what stops for the night.',
+    // BAR2-PLACES (PL2): it claims the road and the meal, not the living (the income is the economy's: a mineral town printed it)
+    'A road settlement: other people\'s journeys pass its doors, and some of them stop for a meal on the way.',
+    'Sited on a route already worn deep before anyone built here; a road that old is not soon abandoned.',
   ]),
 
   crossroads: Object.freeze([
-    'Positioned at a major crossroads. Trade flows through here by geography, not by choice.',
-    'Built where two roads refuse to avoid each other. Nobody chose this ground; the map did.',
-    'A crossroads settlement. The meeting of routes is the whole of its fortune and the whole of its exposure.',
-    'Founded at a junction on the oldest logic there is: whoever holds the meeting of roads holds what moves along them.',
-    'It exists because travellers had to stop somewhere, and the roads decided that somewhere was here.',
+    // STYLE-2 FIRST-IMPRESSIONS (A·O16): the aphorism "by geography, not by choice" became the plain fact.
+    'Built at a major crossroads, and trade comes in on every road.',
+    'Built where two busy roads cross, and laid out around the crossing.',
+    'A crossroads settlement: every road brings it trade, and any of them can bring it trouble.',
+    'Built at a junction, and the oldest logic there is applies: whoever holds the meeting of roads holds what moves along them.',
+    'It stands where the roads meet, on ground travellers stopped at long before anyone built here.',
   ]),
 
   river: Object.freeze([
     'Built along the river: water access shapes every economic decision.',
-    'Founded on the bank, where the current does the hauling; every trade here is priced against what the water carries for nothing.',
+    // BAR3-PLACES-2 (C30340, 2026-11-15; the form of b6a0c074c, N6): the line says where the place stands, not why it was
+    // founded: the rung is drawn before the History, whose founding reason is the soil, a grove, the herders' gathering or a
+    // ford in the 27 census towns that print it (bar0-town-occupied-rand-7: the soil).
+    'It stands on the bank, and the current does the hauling; every trade here is priced against what the water carries for nothing.',
     'A river settlement. The channel sets the calendar: what floods, what freezes, and what can be moved between the two.',
-    'Sited at the water\'s edge because the river was the only road worth having, and it has been the argument for staying ever since.',
-    'Established along the river for drinking, for milling, and for moving what the fields produce. All three still hold.',
+    'Sited at the water\'s edge, where the river was the only road worth having, and it has been the argument for staying ever since.',
+    // BAR2-PLACES (PL2): no mill is claimed (the roster's, unread here: "All three still hold" beside no mill) and no cause
+    'Built on the river: it gives the place its water, and carries what the fields produce, as it always has.',
   ]),
 
   'port.generic': Object.freeze([
     'A port settlement whose wharves and navigable water define its trade.',
-    'A port. The wharves are the reason the place exists, and everything inland of them is a consequence.',
+    'A port: the wharves are why the place exists, and everything else grew up behind them.',
     'Founded where the water runs deep enough to unload. That fact, and no other, put a settlement on this ground.',
-    'A working port: what it is worth is counted in berths, and what it fears is counted in the same.',
-    'Built around a landing. Trade arrives by hull rather than by axle, and the whole economy is shaped to that difference.',
+    'A working port: its wealth is the cargo it unloads, and its worry is a season when the cargo does not come.',
+    'Built around a landing: what it trades comes in by boat, and the place is laid out around the unloading.',
   ]),
 
   // ⚠️ EVERY VARIANT OF THIS ARM IS WORLD-LAW CONSTRAINED. An inland river port
@@ -110,26 +148,69 @@ export const ORIGIN_POOLS = Object.freeze({
   // tests/generators/settlementOriginProse.test.js against the REAL predicate.
   'port.riverside': Object.freeze([
     'A river port built around navigable inland water; barges, wharves, and seasonal river traffic shape its economy.',
-    'An inland river port: barges rather than hulls, and a working season that closes when the channel does.',
+    'An inland river port: barges, not ships, and a working season that closes when the channel does.',
     'A river port whose wharves face a moving current; the year is divided by what the channel will allow.',
     'A river port, founded where the water runs deep and steady enough to take a loaded barge. Rarer than it sounds, and worth more.',
-    'An inland river port: cargo changes between barges and carts here, and the changing is itself the trade.',
+    'An inland river port: cargo moves from barges to carts here, and the handling is its living.',
   ]),
 
   'port.coastal': Object.freeze([
     'A coastal seaport whose existence is inseparable from the sea.',
     'A seaport. The tide sets the working day, and the harbour is the only asset that finally matters.',
-    'Founded on the coast for the shelter of its anchorage. The sea gives the settlement its living and sets the terms of it.',
-    'A coastal settlement built to face the water. Most of what it eats, sells, and fears arrives the same way.',
-    'A seaport whose horizon is its market; what the land behind it produces matters less than what the hulls carry off.',
+    'Built on the coast around the shelter of its anchorage, and the sea has set the terms of its living ever since.',
+    'A coastal settlement built to face the water; most of its trade has always gone by sea.',
+    'A seaport that lives by its ships: what they carry off matters more here than anything the land behind it grows.',
+  ]),
+
+  // #10's GATE, FINALLY (STYLE-2-SURFACES A·O16; STYLE-RULINGS-2 B2): a port route whose roster
+  // holds no docks or wharf founds on the ground the record names, never on the road ("Founded
+  // roadside" printed under a port on a mountain, and under a port on the plains of a metropolis).
+  // `{ground}` is the terrain in the words of GROUND_PHRASE below. A new arm: no pre-widening sentence,
+  // so index 0 is its own.
+  // #237 (R2-CODE-A-4; the chair's ruling, vetoable): THE ROUTE IS THE HOME OF "THIS IS A PORT"; THE
+  // ROSTER IS THE HOME OF WHAT STANDS THERE. This arm is reached only on a port route, so no row denies
+  // a wharf or docks from the roster's silence ("ask for the docks and you are told there are none"
+  // beside a page that calls the place a port), and none names one as standing: each row states the
+  // terrain and that the place was founded to trade by water, nothing else (no present traffic, which a
+  // siege would make false; no "port", which the vocabulary reads as the docks house).
+  // TAIL-NARRATIVE-2 B3 (the chair's ruling (N6); READ-ALL 22375, B11462): THE ORIGIN LINE SAYS WHERE, NOT WHY. The founding
+  // cause is the History's (`history.founding.reason`, a fishers' camp or a naval base as often as a trading port), so no
+  // row here says what the founders meant: each states the terrain and that the place's trade has gone by water (the route).
+  ground: Object.freeze([
+    `Built ${GROUND_TOKEN}; its trade has always gone by water.`,
+    `The first families built ${GROUND_TOKEN}, and its trade has gone by water ever since.`,
+    `It stands ${GROUND_TOKEN}, and its trade has always gone by water.`,
+    `Founded ${GROUND_TOKEN}, it has always traded by water.`,
+    `It was built ${GROUND_TOKEN}, and what it trades has always gone by water.`,
   ]),
 
   'isolated.sustained': Object.freeze([
     'Isolated from major trade routes. Self-sufficiency is not an aspiration here; it is a constraint.',
     'Isolated from major trade routes. What the settlement needs, it makes; what it cannot make, it learns to do without.',
-    'Set apart from the trade roads. The distance is why it was founded and why it has stayed small and whole.',
-    'Isolated by geography rather than by preference. The place feeds itself, and that is both its security and its ceiling.',
+    'Set apart from the trade roads. The distance has kept it small and whole.',
+    'Isolated by the lie of the land. The place feeds itself, and it cannot grow past what its own fields give.',
     'Off the trade routes entirely. Nothing arrives that was not sent for, and little is sent for.',
+  ]),
+
+  // #7 (R2-CODE-A-4): an isolated shortfall where the FOOD RECORD brings nothing in (importCoverage 0: the
+  // page says "No food comes into X by trade") names no channel; it says what the record holds, what the
+  // town has in store and what it produces itself, in the words of `holdingsOf`. A new arm: index 0 is its own.
+  'isolated.unsupplied': Object.freeze([
+    `Isolated from major trade routes. The settlement cannot fully feed itself, and no food comes in from outside: it must make do with ${HOLDS_TOKEN}.`,
+    `Isolated from major trade routes, and short of what it eats. Nothing is brought in to close the gap; it must make do with ${HOLDS_TOKEN}.`,
+    `Set apart from the trade roads, on ground that does not fully feed it. No food reaches it from outside, and it must make do with ${HOLDS_TOKEN}.`,
+    `Isolated, and running a shortfall it cannot farm its way out of. Nothing comes in from outside; it must make do with ${HOLDS_TOKEN}.`,
+    `Off the trade routes and under-fed by its own land. Nothing is brought in, and every season it must make do with ${HOLDS_TOKEN}.`,
+  ]),
+
+  // #215 (round two; the chair's ruling): an isolated shortfall UNDER A SIEGE in force names no channel of
+  // trade as open; it says what the record holds (`holdingsOf`). A new arm: index 0 is its own.
+  'isolated.besieged': Object.freeze([
+    `Isolated from major trade routes, and now under siege. The settlement cannot fully feed itself, and nothing comes in by road: it must make do with ${HOLDS_TOKEN}.`,
+    `Isolated from major trade routes, and short of what it eats. With the siege closing the roads, it must make do with ${HOLDS_TOKEN}.`,
+    `Set apart from the trade roads, on ground that does not fully feed it, and now cut off by a siege. It must make do with ${HOLDS_TOKEN}.`,
+    `Isolated, and running a shortfall it cannot farm its way out of. The siege has closed the roads; it must make do with ${HOLDS_TOKEN}.`,
+    `Off the trade routes and under-fed by its own land, and now besieged: nothing comes in by road, and it must make do with ${HOLDS_TOKEN}.`,
   ]),
 
   'isolated.deficit': Object.freeze([
@@ -141,30 +222,169 @@ export const ORIGIN_POOLS = Object.freeze({
     // em-dash is the close the list's end needs — the same device index 0 uses
     // on both sides of its own splice. Any future variant that continues AFTER
     // the token must close it the same way; a bare comma cannot.
-    `Isolated from major trade routes, and short of what it eats. The gap is closed through ${CHANNELS_TOKEN} — at a price the settlement feels.`,
-    `Set apart from the trade roads, on ground that does not quite feed it. What is missing comes in through ${CHANNELS_TOKEN} — when it comes at all.`,
-    `Isolated, and running a shortfall it cannot farm its way out of. Survival here rests on ${CHANNELS_TOKEN} — every one of them fragile.`,
-    `Off the trade routes and under-fed by its own land. The shortfall is met through ${CHANNELS_TOKEN}, and the arrangement is renegotiated every season.`,
+    `Isolated from major trade routes, and short of what it eats. To close the gap it turns to ${CHANNELS_TOKEN} — at a price the settlement feels.`,
+    `Set apart from the trade roads, on ground that does not fully feed it. What is missing comes in through ${CHANNELS_TOKEN} — when it comes at all.`,
+    // R2-CODE-A-4 (#7): the list is the record's own and may hold one channel; the close reads for one or many.
+    `Isolated, and running a shortfall it cannot farm its way out of. Survival here rests on ${CHANNELS_TOKEN} — none of it certain.`,
+    `Off the trade routes and under-fed by its own land. For what it lacks it looks to ${CHANNELS_TOKEN}. Every season the terms are bargained again.`,
   ]),
 });
+
+/**
+ * THE CHANNELS AN ISOLATED SHORTFALL NAMES (R2-CODE-A-4: round three's #7, the increment's ww-3 and ww-29).
+ * The `{channels}` list is read from the record's own isolation receipt (`isolationSupport.js ::
+ * deriveIsolationSupport`, kept on the config as `_isolationSupport` by the coherence pass), one phrase for
+ * each path that carries food in from outside the place's own land, in this order. A path the receipt
+ * lacks is not named: no carriage by magic without the magical-transit path, no patron without the
+ * patronage path, no caravans without a caravan or pack-train house among the seasonal path's evidence.
+ * The local foodshed and the reserves are the place's own and are never channels.
+ * @type {ReadonlyArray<readonly [string, (path: { evidence?: readonly string[] }) => string]>}
+ */
+const CHANNEL_OF_PATH = Object.freeze([
+  ['magical_transit', () => 'carriage by magic'],
+  ['hinterland', () => 'carts from the country around it'],
+  // TAIL-NARRATIVE-2 B3 (18781): a caravan house on the seasonal path's evidence is not caravans that come (a page beside it
+  // says "No camels reach the caravanserai"); the seasonal path is named as the tracks in a good season, whatever stands.
+  ['seasonal_access', () => 'the tracks in a good season'],
+  ['patronage', () => 'the favour of a patron'],
+]);
+
+/**
+ * The `{channels}` list for an isolated shortfall, from the record's isolation receipt; null where the
+ * receipt names no outside path (the pool then keeps its token unfilled, which no arm but the
+ * isolated-deficit one carries, and that arm is reached only with a receipt).
+ * @param {{ paths?: ReadonlyArray<{ type?: string, evidence?: readonly string[] }> } | null | undefined} support
+ * @returns {string|null}
+ */
+export const supportChannelsOf = (support) => {
+  const paths = Array.isArray(support?.paths) ? support.paths : [];
+  const words = CHANNEL_OF_PATH
+    .map(([type, phrase]) => { const path = paths.find((p) => p?.type === type); return path ? phrase(path) : null; })
+    .filter((w) => typeof w === 'string');
+  if (!words.length) return null;
+  if (words.length === 1) return words[0];
+  return `${words.slice(0, -1).join(', ')}${words.length > 2 ? ',' : ''} or ${words[words.length - 1]}`;
+};
+
+/** The arms that splice what the record holds (`{holds}`). */
+const HOLDS_ARMS = new Set(['isolated.unsupplied', 'isolated.besieged']);
+
+/**
+ * What an isolated place with no outside supply holds (#7): its stores where the receipt counts a reserves
+ * path, what it produces itself where it counts a local foodshed; both, one, or "what little it has".
+ * @param {{ paths?: ReadonlyArray<{ type?: string }> } | null | undefined} support
+ * @returns {string}
+ */
+export const holdingsOf = (support) => {
+  const paths = Array.isArray(support?.paths) ? support.paths : [];
+  const stores = paths.some((p) => p?.type === 'reserves');
+  const own = paths.some((p) => p?.type === 'local_foodshed');
+  if (stores && own) return 'what it has in store and what it produces itself';
+  if (stores) return 'what it has in store';
+  if (own) return 'what it produces itself';
+  return 'what little it has';
+};
 
 /** Every arm key, frozen, so a pin can walk the corpus without hard-coding it. */
 export const ORIGIN_ARMS = Object.freeze(Object.keys(ORIGIN_POOLS));
 
+/** The sizes a "living from other people's journeys" is not said of. */
+const TRAVELLER_LIVING_REFUSED_TIERS = new Set(['city', 'metropolis']);
+
+/** @param {{ siege?: boolean }} state */
+const noSiege = (state) => state.siege !== true;
+
+/**
+ * THE ROWS DECLARED ON WHAT THEY PRESUME (LAST-DECLARE, 2026-11-18): the roadside row names the traffic a siege stops
+ * (`excludes: crisis: under_siege`), the atom of its `noSiege` test below. Keyed by the row's text and handed to
+ * `noteDeclared` where the pick is made: the admits table has already refused the row under a siege, so nothing moves;
+ * the note gives the birth self-check the row's atom to re-assert against the final record.
+ */
+export const ORIGIN_DECLARED = Object.freeze({
+  'It stands roadside, where the day is measured in traffic: what arrives before noon, what leaves before dusk, and what stops for the night.': Object.freeze([
+    Object.freeze({ text: 'It stands roadside, where the day is measured in traffic: what arrives before noon, what leaves before dusk, and what stops for the night.', excludes: Object.freeze(['crisis: under_siege']) }),
+  ]),
+});
+
+/**
+ * THE ROWS A FOUNDING STATE REFUSES (R2-CODE-A-4: round three's #154 and the increment's #ww-1227, the
+ * chair's rulings of 2026-11-13 20:33 and 21:14). A row listed here is said only where its test holds;
+ * a refused pick resolves DRAW-FREE to the next admitted row of the same pool (pickVariant's index,
+ * then onward, wrapping), so law 1 holds: no draw is added or moved. A pool or a row not listed is
+ * admitted everywhere, and a state that does not say (no `siege`, no `tier`, no traveller flag) is
+ * admitted, so a seedless or bare caller keeps the pre-RR sentence (law 2).
+ *   - Present traffic (trade flowing in, a day measured in traffic, a living from journeys, busy roads,
+ *     trade on every road) is refused while a siege is in force: nothing comes in by road.
+ *   - "A living from other people's journeys, in stabling and meals" needs a house that serves
+ *     travellers (an inn or a tavern: the vocabulary's `tavern` atom, read by the caller), and is not
+ *     said of a city or a metropolis, whose living is not other people's journeys.
+ * @type {Readonly<Record<string, Readonly<Record<number, (state: { siege?: boolean, tier?: string|null, hasTravellerHouse?: boolean }) => boolean>>>>}
+ */
+export const ORIGIN_ROW_ADMITS = Object.freeze({
+  road: Object.freeze({
+    0: noSiege,
+    2: noSiege,
+    3: (state) => noSiege(state)
+      && state.hasTravellerHouse !== false
+      && !TRAVELLER_LIVING_REFUSED_TIERS.has(String(state.tier || '')),
+  }),
+  crossroads: Object.freeze({ 0: noSiege, 1: noSiege, 2: noSiege }),
+  // BAR2-PLACES (PL2's class; the brief's siege law): the river rows that say the water carries trade now are refused
+  // under a siege, as the road's and the crossroads' are; rows 0, 2 and 3 stay admitted, so no state is left mute.
+  river: Object.freeze({ 1: noSiege, 4: noSiege }),
+});
+
+/**
+ * The index the founding state takes in its arm's pool: the hash's pick, or, where the state refuses
+ * that row, the next admitted row (draw-free). Where no row is admitted the pick stands.
+ * @param {string} arm
+ * @param {readonly string[]} pool
+ * @param {number} at the hash's pick
+ * @param {{ siege?: boolean, tier?: string|null, hasTravellerHouse?: boolean }} state
+ * @returns {number}
+ */
+const admittedIndex = (arm, pool, at, state) => {
+  const admits = ORIGIN_ROW_ADMITS[arm];
+  if (!admits) return at;
+  for (let k = 0; k < pool.length; k++) {
+    const i = (at + k) % pool.length;
+    const test = admits[i];
+    if (!test || test(state)) return i;
+  }
+  return at;
+};
+
 /**
  * Resolve the ARM for a founding state. This is the pre-RR branch structure
  * exactly: route, with the port terrain sub-arms and the isolated deficit split.
- * @param {{ route?: string, terrainType?: string|null, hasFoodDeficit?: boolean }} state
+ * @param {{ route?: string, terrainType?: string|null, hasFoodDeficit?: boolean, hasDocks?: boolean, hasFoodImport?: boolean, siege?: boolean }} state
  * @returns {string} an ORIGIN_POOLS key
  */
-export const originArmKey = ({ route, terrainType = null, hasFoodDeficit = false }) => {
+export const originArmKey = ({ route, terrainType = null, hasFoodDeficit = false, hasDocks, hasFoodImport, siege }) => {
   if (route === 'crossroads') return 'crossroads';
   if (route === 'river') return 'river';
+  // #10 (STYLE-RULINGS §1, W5 HIS 2026-11-07) — A RECORD DEFECT, NOT A WORDING: a port reason
+  // over a roster with no docks or wharf institution contradicted the record (a mountain thorp
+  // with no docks read "A port. The wharves are the reason the place exists"). `hasDocks` is the
+  // roster's port-infrastructure flag; an EXPLICIT false takes the arm the terrain gives (the
+  // river for a riverside town, else the road). An absent flag is a caller that did not say, and
+  // keeps the port arm exactly as before.
+  // STYLE-2 A·O16: with no docks the arm is the TERRAIN's — the river for a riverside town, the
+  // ground the record names for any other, the road only where the record names no terrain.
+  if (route === 'port' && hasDocks === false) {
+    if (terrainType === 'riverside') return 'river';
+    return terrainType && Object.hasOwn(GROUND_PHRASE, terrainType) ? 'ground' : 'road';
+  }
   if (route === 'port') {
     if (terrainType === 'riverside') return 'port.riverside';
     if (terrainType === 'coastal') return 'port.coastal';
     return 'port.generic';
   }
+  // #7: a shortfall the food record brings nothing in for (an explicit false; absent keeps the deficit arm)
+  // names no channel.
+  // #215: a shortfall under a siege in force names no channel as open, whatever the food record brings in.
+  if (route === 'isolated' && hasFoodDeficit && siege === true) return 'isolated.besieged';
+  if (route === 'isolated' && hasFoodDeficit && hasFoodImport === false) return 'isolated.unsupplied';
   if (route === 'isolated') return hasFoodDeficit ? 'isolated.deficit' : 'isolated.sustained';
   // Every other route (road, mountain_pass, none, unset…) founds on the road arm,
   // which is what the pre-RR `else` branch did.
@@ -196,16 +416,23 @@ export const originVariantKey = ({ seed, arm, terrainType = null, hasFoodDeficit
 /**
  * THE ONE ENTRY POINT. Returns the origin sentence for a founding state.
  *
- * @param {{ route?: string, terrainType?: string|null, hasFoodDeficit?: boolean,
+ * @param {{ route?: string, terrainType?: string|null, hasFoodDeficit?: boolean, hasDocks?: boolean,
  *           supportChannels?: string, specialResources?: readonly string[]|null,
- *           seed?: string|null }} state
+ *           seed?: string|null, siege?: boolean, tier?: string|null, hasTravellerHouse?: boolean,
+ *           hasFoodImport?: boolean, isolationSupport?: { paths?: ReadonlyArray<{ type?: string }> } | null }} state
  * @returns {string}
  */
 export const selectOriginBody = (state) => {
   const arm = originArmKey(state);
   const pool = ORIGIN_POOLS[arm];
-  const body = pickVariant(pool, originVariantKey({ ...state, arm }));
+  const hashed = pickVariant(pool, originVariantKey({ ...state, arm }));
+  const picked = pool[admittedIndex(arm, pool, pool.indexOf(hashed), state)];
+  noteDeclared(picked, ORIGIN_DECLARED, { poolId: 'settlementOriginProse:ORIGIN_DECLARED', surface: 'dossier', drawKind: 'H' });
+  const body = arm === 'ground'
+    ? picked.split(GROUND_TOKEN).join(GROUND_PHRASE[/** @type {string} */ (state.terrainType)])
+    : picked;
+  const held = HOLDS_ARMS.has(arm) ? body.split(HOLDS_TOKEN).join(holdingsOf(state.isolationSupport)) : body;
   return state.supportChannels
-    ? body.split(CHANNELS_TOKEN).join(state.supportChannels)
-    : body;
+    ? held.split(CHANNELS_TOKEN).join(state.supportChannels)
+    : held;
 };

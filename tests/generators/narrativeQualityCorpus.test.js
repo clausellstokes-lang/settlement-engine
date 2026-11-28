@@ -27,12 +27,14 @@ import { readEnvelope } from '../helpers/distributionEnvelope.js';
 import { HISTORICAL_EVENTS_DATA } from '../../src/data/historyData.js';
 import { generateHistory } from '../../src/generators/historyGenerator.js';
 import { renderHistoryTemplate } from '../../src/generators/historyTemplate.js';
-import {
-  generateNPCs,
-  generateRelationships,
-} from '../../src/generators/npcGenerator.js';
+import { generateNPCs } from '../../src/generators/npcGenerator.js';
+// RE-KEYED 2026-11-07 (PEOPLE-4 TIES, R-P7): the pair-saturation writer `generateRelationships` is
+// retired; the ties are ONE outgoing per card, `drawTies`, on its own stream, directed (`from`/`to`).
+import { drawTies } from '../../src/generators/people/ties.js';
 import { disambiguateNPCDisplayNames } from '../../src/generators/npcDisplayNames.js';
 import { STRESS_ECONOMIC_EFFECTS } from '../../src/data/npcData.js';
+import { declarationAdmits, declarationOf } from '../../src/domain/facts/factVocabulary.js';
+import { birthFactsOf } from '../../src/domain/facts/factsOf.js';
 import {
   genRelNarrative,
   genSuccessionNarr,
@@ -113,7 +115,9 @@ describe('history templates are total across the authored corpus', () => {
               tradeRouteAccess: route,
               magicExists: true,
             },
-            [],
+            // RE-KEYED BY CAUSE (W2-FIX-DATA-HISTORY item A): the crash, a token-bearing template, now needs a market, so
+            // the sweep's metropolis holds one; the sweep and both assertions are as they were.
+            [{ name: 'Market square', category: 'Economy', tags: ['market'] }],
             { issues: [], stability: 'Stable' },
             {
               primaryExports: ['Amber exports'],
@@ -177,12 +181,12 @@ describe('sentence boundaries and relationship rumors remain grammatical', () =>
   test.each([
     ['religious_tension', {}, /The town council has avoided/],
     ['guild_conflict', {}, /The merchant league has held/],
-    ['external_threat', {}, /The reeve knows the intelligence/],
+    ['external_threat', {}, /The reeve knows, and has told nobody/], // W3 POW (2026-11-08): the four anchors below re-keyed to the style law's words
     ['external_threat', { neighbor: 'Stoneford' }, /The town council and the town watch/],
     ['resource_scarcity', {}, /The merchant league knows.*The town council has/s],
-    ['resource_scarcity', { commodity: null }, /The town council controls the allocation/],
-    ['magical_controversy', {}, /The town council is being pressured/],
-    ['disputed_land', {}, /The town council has delayed ruling/],
+    ['resource_scarcity', { commodity: null }, /the town council decides who gets what is left/],
+    ['magical_controversy', {}, /The town council is being pushed to ban or license it/],
+    ['disputed_land', {}, /The town council keeps putting off a ruling/],
   ])('%s capitalizes values only when they open a sentence', (topTension, overrides, expected) => {
     const prose = genSuccessionNarr({
       ...baseContext,
@@ -233,13 +237,15 @@ describe('sentence boundaries and relationship rumors remain grammatical', () =>
       + `alpha ${emission.alpha}, ${emission.margin} sigma of power). A red here means the `
       + `emission RATE moved, not that a die rolled badly — the corpus is seeded.`,
     ).toBeGreaterThanOrEqual(emission.bound);
-    expect(phrasings.some(text => text.includes('best understood as outstanding debt'))).toBe(true);
+    // W3 POW (2026-11-08): rumour [2] glosses the archetype label in plain words (settlementNarrative :: TIE_GLOSS);
+    // the Outstanding Debt gloss is the live construct now, and the article scan below stays on it.
+    expect(phrasings.some(text => text.includes('are tied by a debt not yet paid'))).toBe(true);
     const corpus = phrasings.join(`\n`);
     // The derived-floor count above proves the corpus is populated; this proves the
     // "outstanding debt" phrase family is genuinely produced, so the malformed-article
     // scan below is a statement about a construct that actually occurs.
     expect(corpus, 'the outstanding-debt phrase family must be live to scan its article')
-      .toMatch(/\boutstanding debt\b/i);
+      .toMatch(/\ba debt not yet paid\b/i);
     // anchored: the derived-floor count and the phrase-family toMatch directly above are the liveness anchors.
     expect(corpus).not.toMatch(/\bthere is a outstanding\b/i);
   });
@@ -249,7 +255,9 @@ describe('safety prose agrees in number and respects settlement scale', () => {
   test('city district-market revenue never claims metropolis scale', () => {
     const economy = withSeed('city-market-scale', () => generateEconomicState(
       'city',
-      [{ name: 'District market' }],
+      // The city's own catalogue market for district-level duties. Whether a market stands is the market home's
+      // answer (COHERENCE-AGREE-3 F9, e373a7836), and it reads the catalogue: an invented name is no market.
+      [{ name: 'Multiple market squares' }],
       'road',
       {},
       {
@@ -317,8 +325,8 @@ describe('safety prose agrees in number and respects settlement scale', () => {
     // of the plural-form negative passing over prose that no longer exists.
     expectAbsentWithAnchor(
       occupiedGarrison.safetyDesc,
-      'garrison, now under occupier command, enforce curfew',
-      'The garrison, now under occupier command, enforces curfew',
+      'garrison, now under occupier command, enforce the curfew',
+      'The garrison, now under occupier command, enforces the curfew',
       'occupied garrison — singular predicate',
     );
 
@@ -327,7 +335,7 @@ describe('safety prose agrees in number and respects settlement scale', () => {
       'town',
       [],
     );
-    expect(occupiedOfficials.safetyDesc).toContain('Occupation authorities enforce curfew');
+    expect(occupiedOfficials.safetyDesc).toContain('Occupation authorities enforce the curfew');
   });
 
   test('state-control and religious-fraud branches retain subject agreement', () => {
@@ -432,7 +440,7 @@ describe('NPC display identity is unique without perturbing RNG', () => {
           );
           return {
             npcs: generatedNPCs,
-            relationships: generateRelationships(generatedNPCs, {}, institutions),
+            relationships: drawTies(generatedNPCs, { config: {}, institutions }, createPRNG(`${seed}::ties`)),
           };
         });
 
@@ -443,7 +451,7 @@ describe('NPC display identity is unique without perturbing RNG', () => {
         ).toBe(names.length);
 
         for (const relationship of relationships) {
-          if (relationship.npc1Id === relationship.npc2Id) continue;
+          if (relationship.from === relationship.to) continue;
           expect(
             normalize(relationship.npc1Name),
             `${tier}/${seed} relationship endpoints are visually ambiguous`,
@@ -469,12 +477,13 @@ describe('relationship tie prose is drawn without replacement per settlement (GS
   /** The line with both names masked: two ties sharing it share a template. */
   const templateOf = (text, nameA, nameB) =>
     longestFirst([nameA, nameB]).reduce((out, name) => out.split(name).join('X'), String(text));
-  /** How many distinct templates a field's pool renders, read index by index (the pool's own `size`). */
+  /** How many distinct templates a field's pool renders, read index by index over the pool's drawn head (`head`; G77: the
+   * tie RESERVE past a frozen head of eight is drawn only past the head, so a pool without one reads its whole `size`). */
   const poolSize = (key, field) => {
     const pool = STRESS_ECONOMIC_EFFECTS[key][field];
     const a = { name: 'Ravel Probe' };
     const b = { name: 'Sorn Probe' };
-    return new Set(Array.from({ length: pool.size }, (_, index) => templateOf(pool(a, b, index), a.name, b.name))).size;
+    return new Set(Array.from({ length: pool.head ?? pool.size }, (_, index) => templateOf(pool(a, b, index), a.name, b.name))).size;
   };
   const institutions = [
     { name: 'Town watch', category: 'Defense', tags: ['defense'] },
@@ -486,20 +495,37 @@ describe('relationship tie prose is drawn without replacement per settlement (GS
     for (let index = 0; index < 12; index++) {
       const seed = `tie-prose-draw-${tier}-${index}`;
       corpus.push(withSeed(seed, () => {
+        const powerStructure = { factions: [{ faction: 'the town council', category: 'government', isGoverning: true }] };
         const npcs = generateNPCs(
           {
             tier,
             institutions,
-            powerStructure: { factions: [{ faction: 'the town council', category: 'government', isGoverning: true }] },
+            powerStructure,
             economicState: { primaryExports: ['Grain sales'], prosperity: 'Modest' },
           },
           'germanic',
           { stressTypes: ['politically_fractured'], priorityMilitary: 60, priorityEconomy: 60 },
         );
-        return { seed, npcs, relationships: generateRelationships(npcs, {}, institutions) };
+        // The corpus hands the settled facts BOTH callers hand: at d422a8dbd (census-1f unit 1a, site 19) the tie
+        // draw resolves through drawDeclared, and with NO facts handed a declared index is refused fail-closed, so
+        // refused indices collapse onto the argmax and a page repeats a line. MERGE-CAR: the one tie writer is
+        // people/ties.js :: drawTies (PEOPLE-4 TIES, R-P7; the retired pair writer's callers), handed the same facts.
+        return { seed, npcs, relationships: drawTies(npcs, { config: {}, institutions, tier, government: powerStructure.government ?? null }, createPRNG(`${seed}::ties`)) };
       }));
     }
   }
+  // RE-KEYED 2026-11-07 (PEOPLE-4 TIES, R-P7): one outgoing tie per card draws about half the ties the
+  // pair saturation drew, so no roster above holds more ties of one archetype than its pool has
+  // variants and the cycle arm's liveness went dark. The pool-exhaustion case is kept live by ONE
+  // large town: the twelve metropolis rosters above as one cast (ids and names made unique), whose
+  // ~300 ties overflow every common archetype's pool. It feeds the cycle arm only; the claim is unchanged.
+  const metropolisCast = corpus.filter(row => row.seed.includes('metropolis'))
+    .flatMap((row, r) => row.npcs.map(npc => ({ ...npc, id: `${npc.id}_m${r}`, name: `${npc.name} of ${['Ash', 'Bree', 'Cole', 'Dun', 'Eld', 'Fenn', 'Gale', 'Holt', 'Ive', 'Jarl', 'Kell', 'Lorn'][r]}` })));
+  const overflowCorpus = [{
+    seed: 'tie-prose-draw-overflow',
+    npcs: metropolisCast,
+    relationships: drawTies(metropolisCast, { config: {}, institutions }, createPRNG('tie-prose-draw-overflow::ties')),
+  }];
 
   test('every tie stores the variant it drew, and that index renders its own lines', () => {
     // Collected, not asserted inline (seedLoopTotality, cure lane T13): the first bad tie would
@@ -513,8 +539,8 @@ describe('relationship tie prose is drawn without replacement per settlement (GS
         const archetype = STRESS_ECONOMIC_EFFECTS[rel.archetypeKey];
         if (!archetype) { misdrawn.push(`${seed}: ${rel.archetypeKey} is not a real archetype`); continue; }
         if (!Number.isInteger(rel.proseVariant)) { misdrawn.push(`${seed}: tie carries no integer proseVariant`); continue; }
-        const first = byId.get(rel.npc1Id);
-        const second = byId.get(rel.npc2Id);
+        const first = byId.get(rel.from);
+        const second = byId.get(rel.to);
         if (rel.tension !== archetype.tension(first, second, rel.proseVariant)) misdrawn.push(`${seed}: tension is not variant ${rel.proseVariant}`);
         if (rel.description !== archetype.desc(first, second, rel.proseVariant)) misdrawn.push(`${seed}: description is not variant ${rel.proseVariant}`);
       }
@@ -528,14 +554,24 @@ describe('relationship tie prose is drawn without replacement per settlement (GS
     const pool = STRESS_ECONOMIC_EFFECTS[key].tension;
     const a = { name: 'Ravel Probe' };
     const b = { name: 'Sorn Probe' };
-    return Array.from({ length: pool.size }, (_, index) => pool(a, b, index))
+    return Array.from({ length: pool.head ?? pool.size }, (_, index) => pool(a, b, index))
       .some(line => line.includes(a.name) && line.includes(b.name));
   };
 
   test('ties of one archetype never share a line until the pool is exhausted, then cycle', () => {
     let overflowing = 0;
     const offenders = [];
-    for (const { seed, relationships } of corpus) {
+    for (const { seed, npcs, relationships } of [...corpus, ...overflowCorpus]) {
+      // R2-CODE-A-14 (the chair's ruling (s1)): a line may refuse a PAIR (`shared power`), so for one tie the
+      // admitted pool can be smaller than the archetype's; a head repeat is a fault only where an index this tie's
+      // pair admits was still unprinted (the draw's own law: tieDrawUnprinted.test.js). The facts are drawTies's own.
+      const tier = /^tie-prose-draw-(city|metropolis)-/.exec(seed)?.[1];
+      const facts = birthFactsOf({ institutions, config: {}, tier, powerStructure: { government: null } });
+      const byId = new Map(npcs.map(npc => [npc.id, npc]));
+      const admits = (key, i, rel) => ['desc', 'tension'].every((f) => {
+        const lines = STRESS_ECONOMIC_EFFECTS[key][f].lines;
+        return declarationAdmits(declarationOf(lines[i % lines.length]), facts, { ctx: { pair: [byId.get(rel.from), byId.get(rel.to)] } }).admitted;
+      });
       const byKey = new Map();
       for (const rel of relationships) {
         if (!byKey.has(rel.archetypeKey)) byKey.set(rel.archetypeKey, []);
@@ -546,7 +582,10 @@ describe('relationship tie prose is drawn without replacement per settlement (GS
           const size = poolSize(key, field === 'tension' ? 'tension' : 'desc');
           const lines = ties.map(rel => templateOf(rel[field], rel.npc1Name, rel.npc2Name));
           const head = lines.slice(0, size);
-          if (new Set(head).size !== head.length) offenders.push({ seed, key, field, size, head });
+          const printed = ties.slice(0, size).map(rel => rel.proseVariant);
+          const open = head.some((line, t) => head.slice(0, t).includes(line)
+            && Array.from({ length: poolSize(key, 'tension') }, (_, i) => i).some(i => !printed.slice(0, t).includes(i) && admits(key, i, ties[t])));
+          if (open) offenders.push({ seed, key, field, size, head });
         }
         // THE CYCLE ARM: a tie past the pool's end reuses a template, never a sentence.
         const size = poolSize(key, 'tension');
@@ -583,7 +622,7 @@ describe('relationship archetype pools hold eight variants each (GS-1)', () => {
     for (const key of keys) {
       for (const field of ['desc', 'tension']) {
         const pool = STRESS_ECONOMIC_EFFECTS[key][field];
-        expect(pool.size, `${key}.${field} pool size`).toBe(8);
+        expect(pool.head ?? pool.size, `${key}.${field} pool size`).toBe(8);
         const lines = Array.from({ length: 8 }, (_, index) => masked(pool(A, B, index)));
         expect(new Set(lines).size, `${key}.${field} has a duplicated variant`).toBe(8);
       }

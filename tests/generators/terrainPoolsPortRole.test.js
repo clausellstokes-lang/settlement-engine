@@ -19,11 +19,11 @@ describe('the crafts roles\' port test', () => {
     const { s, roles } = await rolesOf(46);
     expect((s.institutions || []).map((x) => x.name)).toContain('Teleportation circle');
     expect(roles.length).toBeGreaterThan(0);
-    expect(roles).not.toContain('Harbor Master'); // anchored: the line above proves the roles are live
+    expect(roles).not.toContain('the harbour master'); // anchored: the line above proves the roles are live (2026-11-07 PEOPLE-1 CAST, M-1b: the harbour master's office's face)
   });
   it('soak1k-11, a Teleportation circle beside a real port row: the Harbor Master stays', async () => {
     const { s, roles } = await rolesOf(11);
     expect((s.institutions || []).some((x) => /\b(?:port|harbou?r|docks?)\b/i.test(x.name))).toBe(true);
-    expect(roles).toContain('Harbor Master');
+    expect(roles).toContain('the harbour master'); // 2026-11-07 PEOPLE-1 CAST (M-1b): the Harbour master's office rolls on the river port and its face is the harbour master
   });
 });

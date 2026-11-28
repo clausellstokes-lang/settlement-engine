@@ -101,10 +101,12 @@ const SENTINEL = 'EM-B2a3 SENTINEL LANTERNWRIGHT';
  * §0.S's OWN WATCH LIST, in its table's order: the record keys whose survival under a
  * record-built pin the packet measured. A5 asserts which of them are TOTAL and that the rest
  * are not; it asserts none of the individual short figures (a named STOP of §11).
+ * 2026-11-07 (PEOPLE-LAND, cause M-7: the v2 boundary): `factions`, the NPC grouping, leaves the record at the v2
+ * boundary (PEOPLE_5B_EDIT §1) and so leaves the list, 19 -> 18; measured, the remaining 18 are all keys of the record.
  */
 const WATCHED = [
   'institutions', 'economicState', 'availableServices', 'simulationTrace', 'economicViability',
-  'resourceAnalysis', 'npcs', 'factions', 'powerStructure', 'generationCoherenceReceipt',
+  'resourceAnalysis', 'npcs', 'powerStructure', 'generationCoherenceReceipt',
   'defenseProfile', 'relationships', 'conflicts', 'history', 'spatialLayout', 'isolationSupport',
   'stress', 'name', 'population',
 ];
@@ -413,7 +415,7 @@ describe('EM-B2a3 — the institution and power choosers consult the pin seam', 
 
     // The watch list is live: every key it names is a key of the record it is read from.
     const anyRecord = plainRun(probeRow(), []).context.settlement;
-    expect(WATCHED).toHaveLength(19);
+    expect(WATCHED).toHaveLength(18);
     expect(WATCHED.filter((key) => Object.hasOwn(anyRecord, key))).toEqual(WATCHED);
 
     // (a) `generatePower`'s record-built whole-`provides` pin reproduces the settlement TOTALLY.
@@ -453,21 +455,24 @@ describe('EM-B2a3 — the institution and power choosers consult the pin seam', 
     // write-through count stays 52, so the control is still not vacuous.
     const bareAssemble = writeThrough(ASSEMBLE, 'uncloned');
     const barePower = writeThrough(POWER, 'uncloned');
-    expect(bareAssemble.mutated).toBe(33); // 2026-11-05, records 12–26 (the rung-1 landing's signed shifts, ODQ §934.105; re-keyed at the landed tip by LANDING-5 under the chair's ruling 4): 52 -> 33, still not vacuous
+    expect(bareAssemble.mutated).toBe(32); // B1(i) (CLOSE-7 BATCH; R24e (2), "the three counts are re-stated with their cause"): 33 -> 32, the 24 desert rows of the golden corpus B1(i) moves (the withheld houses and what follows); 2026-11-05, records 12–26 (the rung-1 landing's signed shifts, ODQ §934.105; re-keyed at the landed tip by LANDING-5 under the chair's ruling 4): 52 -> 33, still not vacuous
     // 2026-11-05 (LANDING-5, the chair's ruling 4, re-keyed BY IDENTITY with its step, bisected over the
     // landing's first-parent stages): the uncloned bag is refused outright on ONE row again, from F6 BUDGET-FLOOR
     // (6d84aa834, record 22) — a later pass pushes into the frozen record's array. The member path above still
     // holds [0, 0], so the refusal is the control's, never the product's, and the control stays live.
     expect(bareAssemble.threw).toBe(1);
     expect(bareAssemble.messages).toEqual(['Cannot add property 0, object is not extensible']);
-    expect(barePower.mutated).toBe(26); // 2026-10-01, the urban band (ODQ §934.86): 30 -> 47; the druid rulings (2026-10-01, ODQ §934.86 addendum 2, J30–J33): 47 -> 46; re-measured; 2026-11-05, records 12–26 (ODQ §934.105, LANDING-5 under the chair's ruling 4): 46 -> 26
+    expect(barePower.mutated).toBe(50); // 2026-11-15, the close of the tail round (TAIL-CLOSE-DOORS-4, the owner's word, 2026-11-15 06:00 UTC, in the chair's chat; record docs/shift-records/2026-11-15-the-close-of-the-tail-round.json): 38 -> 50, the measured value of this arm's own run at the golden's tree 8c11f73ea (the round's re-drawn casts and powers: the later passes write through the uncloned structure on more rows; still not vacuous); STYLE-2-MERGE point 47 (2026-11-13, the COHERENCE-AGREE merge 22cc9ef7d; a figure its drafted record names for the merge seat): 37 -> 38 (the draft: the uncloned control 37 -> 38); // 2026-10-01, the urban band (ODQ §934.86): 30 -> 47; the druid rulings (2026-10-01, ODQ §934.86 addendum 2, J30–J33): 47 -> 46; re-measured; 2026-11-05, records 12–26 (ODQ §934.105, LANDING-5 under the chair's ruling 4): 46 -> 26; 2026-11-07 (LANDING-R2 seat C2, the pool census composed): 26 -> 37 at census-1i R-AW (ba7887862, the
+    // label resolved at the birth's close) with the replay's intent key reading the declared twin as the same bloc (this
+    // commit). Measured at the tip: R-AW's close call disabled, 26 / threw 0; R-AW alone, 23 / threw 14 (the replay's roster
+    // assert refusing the relabelled record); R-AW with the twin key, 37 / threw 0. Still not vacuous.
     expect(barePower.threw).toBe(0);
     expect(bareAssemble.rows).toBe(63);
   }, 300_000);
 
   it('A7 — the file list is two, and the three power helpers are untouched', () => {
     const roster = getStepMeta();
-    expect(roster).toHaveLength(23); // 22 -> 23: resolveCrisisCast (lane CRISIS, 2026-11-03)
+    expect(roster).toHaveLength(22); // ALLEGIANCE-CAR1 (2026-11-08): 23 -> 22, corruptionPass retired (J-2), measured; 22 -> 23: resolveCrisisCast (lane CRISIS, 2026-11-03)
     const helpers = {
       relationshipArchetypes: { computeRelTension },
       stressFactions: { applyStressEventFactions },

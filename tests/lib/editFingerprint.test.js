@@ -25,7 +25,7 @@ const active = [
 
 const cascade = {
   summaryLines: ['The cascade will ripple to the spymaster'],
-  downstreamCounts: { npcs: 3, hooks: 1, factions: 2, linkedSaves: 0 },
+  downstreamCounts: { npcs: 3, hooks: 1, factions: 2, linkedSaves: 0 }, // MERGE-5AB: the preview is the edit layer's (its count of the powers keeps the key `factions`)
   narrativeImpact: 'regenerate-needed',
 };
 

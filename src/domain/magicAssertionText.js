@@ -119,6 +119,9 @@ export const NEGATED_MAGIC_PATTERNS = Object.freeze([
   /\bnothing\s+magical(?:\s+(?:here|about\s+(?:it|this)))?\b/gi,
   /\brather than (?:any\s+)?(?:actual\s+|real\s+|functional\s+)?magic\b/gi,
   /\bwhere the alchemist deals in magical compounds? and acid, this trade does not\b/gi,
+  // 343c26791 (W2-FIX-DATA-8 row 4) reworded the village apothecary's denial above to this one and
+  // meant the world law to read it the same; without it a magic-free village convicted its own apothecary.
+  /\bmagical compounds? and acid are no part of this trade\b/gi,
   /\b(?:mere|only|purely)\s+stage magic\b/gi,
   /\bstage magic\b/gi,
 ]);

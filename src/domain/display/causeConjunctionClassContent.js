@@ -65,7 +65,7 @@ export const CLASS_CONTENT = Object.freeze({
       'The wagons roll again, but the back channel stayed open; what began as necessity is now simply preference.',
     ],
     'exposed-public': [
-      'It is known now: when the supply lines failed, the {role} bought from hands no office should touch, and the receipts are being read aloud.',
+      'It is known now: when the supply lines failed, the {role} bought from hands no office should touch, and the papers are being read aloud.',
       'The broken roads were the reason and the smugglers were the remedy; both are public now, and the {role} answers for the difference.',
     ],
     're-adjudicated': [

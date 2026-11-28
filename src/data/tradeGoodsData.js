@@ -529,7 +529,7 @@ export const GOODS_MODIFIERS_BY_TIER = {
       category: GOODS_CATEGORIES.SERVICES,
       p: 0.5,
       on: !0,
-      desc: "Mass-produced texts (if technology exists)",
+      desc: "Mass-produced texts",
     },
   },
 };

@@ -17,7 +17,10 @@
  *     (`textAssertsFunctionalMagic`, the leaf the generation world law reads).
  *   • DEPENDENTS — active supply chains that need magic (`chainNeedsMagic`, the very
  *     predicate the chain generator gates on) or that magic is holding up (a chain
- *     carrying a `magicNote`, which only the magic-substitution step writes).
+ *     carrying a `magicNote`, which only the magic-substitution step writes), and THE FOOD
+ *     SUPPLY where the food record's own provision makes up a share of the day's need
+ *     (`foodMagicShare`, the one reader the Economics tab's food row and the chain cards'
+ *     food notes read: TAIL-DISPLAY-ECON-2, the chair's ruling X10, 2026-11-15).
  *
  * ONE OF FOUR WORDS: none · present · relied-upon · integral.
  *   - none         nobody practises and nothing depends on magic (and always where magic
@@ -149,15 +152,35 @@ export function magicPractitioners(settlement) {
 }
 
 /**
- * The dependent census: active chains that need magic or that magic holds up.
+ * THE FOOD RECORD'S MAGIC SHARE, ONE READER (TAIL-DISPLAY-ECON, the chair's ruling X3; moved here by X10): the share of
+ * the day's need the food record's own provision makes up (`economicState.foodSecurity.magicOffset` over `.dailyNeed`,
+ * the figures the Economics tab's food row prints); 0 where the record holds none. `display/magicProvisionShown.js`
+ * re-exports it for the chain cards' food notes and the Magic tab; the reliance reading below counts it.
+ * @param {unknown} record the settlement record
+ * @returns {number}
+ */
+export function foodMagicShare(record) {
+  const fs = /** @type {{ economicState?: { foodSecurity?: { magicOffset?: unknown, dailyNeed?: unknown } | null } | null } | null} */ (record)?.economicState?.foodSecurity;
+  const magic = Number(fs?.magicOffset), need = Number(fs?.dailyNeed);
+  return Number.isFinite(magic) && magic > 0 && Number.isFinite(need) && need > 0 ? magic / need : 0;
+}
+
+/** The dependent the food record's provision is, as the census names it (never printed: the dependents are counted). */
+export const FOOD_SUPPLY_DEPENDENT = 'Food supply';
+
+/**
+ * The dependent census: active chains that need magic or that magic holds up, then the food supply where the food
+ * record's own provision feeds the town (`foodMagicShare`, X10: "Reliance on magic: None" beside a food record that
+ * holds a provision by magic was false in 52 of the census's 720 towns).
  * @param {MagicRelianceSource | null | undefined} settlement
  * @returns {string[]}
  */
 export function magicDependents(settlement) {
   const chains = settlement?.economicState?.activeChains;
-  return (Array.isArray(chains) ? chains : [])
+  const fed = foodMagicShare(settlement) > 0 ? [FOOD_SUPPLY_DEPENDENT] : [];
+  return [...(Array.isArray(chains) ? chains : [])
     .filter((c) => chainNeedsMagic(c) || str(asRecord(c).magicNote) !== '')
-    .map((c) => str(asRecord(c).label) || str(asRecord(c).chainId) || 'a supply chain');
+    .map((c) => str(asRecord(c).label) || str(asRecord(c).chainId) || 'a supply chain'), ...fed];
 }
 
 /**

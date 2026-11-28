@@ -1,0 +1,177 @@
+[
+ {
+  "file": "src/data/dossierStateProse/defense.generated.js",
+  "text": "Crime at {settlement} now outweighs the law outright, and nothing in the town is safe from it.",
+  "reason": "the threat it names is the crime the pool's own key states (the safety label Dangerous, `safetyProfile.safetyLabel`); no threat outside the label is presumed."
+ },
+ {
+  "file": "src/data/dossierStateProse/defense.generated.js",
+  "text": "{settlement}'s books record no gang, guild or racket: what wrongdoing the town has, people do on their own account.",
+  "reason": "\"guild\" is a criminal guild, and the line declares its absence (`no organised crime · no criminal income`): no good is named."
+ },
+ {
+  "file": "src/data/dossierStateProse/defense.generated.js",
+  "text": "Ask at {settlement} who runs things on the quiet and you get blank looks; either nobody does, or the town hides it very well.",
+  "reason": "\"runs things\" names no good; the line already speaks of appearances (ruling HK1's form), true beside a crime wave's coordinated hook."
+ },
+ {
+  "file": "src/data/dossierStateProse/defense.generated.js",
+  "text": "Few thefts at {settlement} are ever written into the town's books: a thieves' guild settles them first, and the losses go unrecorded.",
+  "reason": "bound to its fixture: the pool is keyed by the thieves' guild standing (`FIXTURE: thieves' guild`); \"guild\" names that house, no good."
+ },
+ {
+  "file": "src/data/dossierStateProse/defense.generated.js",
+  "text": "There is somewhere at {settlement} to take the problems that are not soldiers' problems, and the town uses it more than it admits.",
+  "reason": "bound to its key (`charter hall PRESENT`): \"soldiers\" is named only to say the problem is not theirs; no force is presumed."
+ },
+ {
+  "file": "src/data/dossierStateProse/defense.generated.js",
+  "text": "People at {settlement} know the town's defence does not end with its weapons.",
+  "reason": "bound to its key (`arcane defense PRESENT`): \"weapons\" is the town's own defence the pool's key stands on; no good is offered."
+ },
+ {
+  "file": "src/data/dossierStateProse/defense.generated.js",
+  "text": "Anything unseen that came at {settlement} would find nothing to meet it: the town keeps no wards or seers to notice it.",
+  "reason": "\"wards\" are magical wards, not a city's wards: no size is presumed."
+ },
+ {
+  "file": "src/data/dossierStateProse/defense.generated.js",
+  "text": "The mages at {settlement} keep the town's wards and answer hostile spells.",
+  "reason": "\"wards\" are magical wards (the pool is keyed by the mages' guild): no size is presumed."
+ },
+ {
+  "file": "src/data/dossierStateProse/defense.generated.js",
+  "text": "{settlement}'s wards are the mages' work, and they hold only as long as the mages keep them up.",
+  "reason": "\"wards\" are magical wards (the pool is keyed by the mages' guild): no size is presumed."
+ },
+ {
+  "file": "src/data/dossierStateProse/defense.generated.js",
+  "text": "{settlement}'s pay book runs late and the gear is worn; the defenders' patience will run out before their weapons do.",
+  "reason": "bound to its key (`Economic Backing: Underfunded`): the gear is the defenders' own, worn; no good is offered."
+ },
+ {
+  "file": "src/data/dossierStateProse/defense.generated.js",
+  "text": "{settlement}'s pay book for its defenders is empty: nobody is paid to stand guard, and whoever still does it does it for nothing.",
+  "reason": "bound to its key (`Economic Backing: Critical`): the line says no office is paid; it presumes none."
+ },
+ {
+  "file": "src/data/dossierStateProse/defense.generated.js",
+  "text": "The town has people it calls on for the things soldiers cannot do, and calls on them rarely enough that it still counts them as a favour.",
+  "reason": "bound to its key (`Arcane Support: Present`): \"soldiers\" is named only for what they cannot do; no force is presumed."
+ },
+ {
+  "file": "src/data/dossierStateProse/defense.generated.js",
+  "text": "The town eats what arrives and what households laid in, and a season of no arrivals would empty both.",
+  "reason": "bound to its key (`Logistics & Supply: No reserves, landlocked`): the line says there is no plenty; it presumes none."
+ },
+ {
+  "file": "src/data/dossierStateProse/defense.generated.js",
+  "text": "At {settlement} the people with weapons are watching their own neighbours, not the roads.",
+  "reason": "bound to its key (`override: REVOLT ACTIVE`): the weapons are the revolt's; no good is offered."
+ },
+ {
+  "file": "src/data/dossierStateProse/defense.generated.js",
+  "text": "The occupiers' troops at {settlement} protect it from everyone except the people who sent them.",
+  "reason": "bound to its key (`override: UNDER OCCUPATION`, the crisis record's occupation): the troops are the occupiers', which the key guarantees."
+ },
+ {
+  "file": "src/data/dossierStateProse/defense.generated.js",
+  "text": "{settlement} is closed against the sickness, not an army: the guards turn back travellers and traders alike.",
+  "reason": "bound to its key (`override: QUARANTINE ACTIVE`): the line says what does not come in; it presumes no outside trade."
+ },
+ {
+  "file": "src/data/dossierStateProse/defense.generated.js",
+  "text": "Nobody at {settlement} is paid to hold the quarantine, so households take turns at the edge of the place, turning travellers away.",
+  "reason": "bound to its key (`override: QUARANTINE ACTIVE`, with `no guardPresence`): it presumes no office and no outside trade."
+ },
+ {
+  "file": "src/data/dossierStateProse/defense.generated.js",
+  "text": "At {settlement} the usual work no longer yields enough {good}, and the trade that makes it now leans on help beyond ordinary work.",
+  "reason": "the opposite of ease: the line says a trade falls short; its {good} is now drawn from the chains the reliance row names (`defenseStateProse.js :: defenseMagicDependencyProse`)."
+ },
+ {
+  "file": "src/data/dossierStateProse/defense.generated.js",
+  "text": "Nobody at {settlement} casts, brews or wards for a living, and nothing in the town leans on magic.",
+  "reason": "\"wards\" is a verb of magic: no size is presumed."
+ },
+ {
+  "file": "src/data/dossierStateProse/defense.generated.js",
+  "text": "Arcane work at {settlement} answers to its military, and the practitioners' own books show it: defence work first, paying work after.",
+  "reason": "\"work\" names no good; the flag line is said only where the Military role holds a house (`magicRoleHeld`, a reading at print)."
+ },
+ {
+  "file": "src/data/dossierStateProse/defense.generated.js",
+  "text": "There are more people under arms at {settlement} than the season calls for, and the surplus is doing nothing except being paid.",
+  "reason": "DS-DEF-7 is declared dark (`defenseStateProse.js :: DEF7_DARK_POOLS`, a measured chunk cost and an unwired host): the line never prints; it is declared when the block is lit."
+ },
+ {
+  "file": "src/data/dossierStateProse/defense.generated.js",
+  "text": "You find {settlement}'s posts empty while its muster books are kept up to date.",
+  "reason": "DS-DEF-7 is declared dark (`defenseStateProse.js :: DEF7_DARK_POOLS`, a measured chunk cost and an unwired host): the line never prints; it is declared when the block is lit."
+ },
+ {
+  "file": "src/data/dossierStateProse/defense.generated.js",
+  "text": "You see serious defences at {settlement} and very few defenders: the works are kept up and the posts are empty, and it has been that way for a while.",
+  "reason": "DS-DEF-7 is declared dark (`defenseStateProse.js :: DEF7_DARK_POOLS`, a measured chunk cost and an unwired host): the line never prints; it is declared when the block is lit."
+ },
+ {
+  "file": "src/data/dossierStateProse/defense.generated.js",
+  "text": "{settlement}'s works are as good as ever, and each season there are fewer people to hold them.",
+  "reason": "DS-DEF-7 is declared dark (`defenseStateProse.js :: DEF7_DARK_POOLS`, a measured chunk cost and an unwired host): the line never prints; it is declared when the block is lit."
+ },
+ {
+  "file": "src/data/dossierStateProse/defense.generated.js",
+  "text": "The town has sent its soldiers to sit outside somebody else's walls, and is quieter and emptier and more exposed for it.",
+  "reason": "DS-DEF-7 is declared dark (`defenseStateProse.js :: DEF7_DARK_POOLS`, a measured chunk cost and an unwired host): the line never prints; it is declared when the block is lit."
+ },
+ {
+  "file": "src/data/dossierStateProse/defense.generated.js",
+  "text": "{settlement}'s accounts cover this with little to spare: a second blow before the first was dealt with would get through.",
+  "reason": "DS-DEF-10 is declared dark under the C3 law (`DEF10_DARK_POOLS`): the line never prints; it is declared when the block is lit."
+ },
+ {
+  "file": "src/data/dossierStateProse/defense.generated.js",
+  "text": "{counterpart}'s troops defend {settlement} against everyone except {counterpart}.",
+  "reason": "DS-DEF-10 is declared dark under the C3 law (`DEF10_DARK_POOLS`): the line never prints; it is declared when the block is lit."
+ },
+ {
+  "file": "src/data/dossierStateProse/defense.generated.js",
+  "text": "{settlement} is strongly held and cannot use its own defence: the troops in the town answer to {counterpart}.",
+  "reason": "DS-DEF-10 is declared dark under the C3 law (`DEF10_DARK_POOLS`): the line never prints; it is declared when the block is lit."
+ },
+ {
+  "file": "src/data/dossierStateProse/defense.generated.js",
+  "text": "The watch at {settlement} is walking streets that do not welcome it, and that is more dangerous to it than any ambush.",
+  "reason": "DS-DEF-10 is declared dark under the C3 law (`DEF10_DARK_POOLS`): the line never prints; it is declared when the block is lit."
+ },
+ {
+  "file": "src/domain/display/stateProse/defenseStateProse.js",
+  "text": "Invasion & War: walls AND professional garrison",
+  "reason": "a pool KEY of the desk (a string the composer matches), never printed: it presumes nothing of a town."
+ },
+ {
+  "file": "src/domain/display/stateProse/defenseStateProse.js",
+  "text": "Invasion & War: walls with citizen militia",
+  "reason": "a pool KEY of the desk (a string the composer matches), never printed: it presumes nothing of a town."
+ },
+ {
+  "file": "src/domain/display/stateProse/defenseStateProse.js",
+  "text": "Invasion & War: militia only",
+  "reason": "a pool KEY of the desk (a string the composer matches), never printed: it presumes nothing of a town."
+ },
+ {
+  "file": "src/domain/display/stateProse/defenseStateProse.js",
+  "text": "no walls, professional garrison",
+  "reason": "a pool KEY of the desk (a string the composer matches), never printed: it presumes nothing of a town."
+ },
+ {
+  "file": "src/domain/display/stateProse/defenseStateProse.js",
+  "text": "militia PRESENT (no garrison)",
+  "reason": "a pool KEY of the desk (a string the composer matches), never printed: it presumes nothing of a town."
+ },
+ {
+  "file": "src/domain/display/stateProse/defenseStateProse.js",
+  "text": "besiegingTargets present (the army is abroad)",
+  "reason": "a pool KEY of the desk (a string the composer matches), never printed: it presumes nothing of a town."
+ }
+]

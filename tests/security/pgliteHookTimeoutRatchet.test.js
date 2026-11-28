@@ -58,10 +58,17 @@
  *     to pick the file's first toucher; an exotic layout — a later describe's
  *     beforeEach outrunning an earlier describe's beforeAll — could flag a warm hook.
  *     A LOUD false positive, fixed by guarding the flagged hook.
- *   - Paren matching is string-naive: an unbalanced `)` inside a hook's string literal
- *     truncates that hook's extracted text. None exist today. A truncation before the
- *     boot marker hides the hook (silent); after it, the lost tail reds as unguarded
- *     (loud).
+ *   - (CURED 2026-11-25, WORDS-2 unit E11, the tenth chair's PRERELEASE-LIST E11.) Paren
+ *     and brace matching WAS string-naive: an escaped `\(` in a regex literal, or an
+ *     unbalanced `)` inside a string, was counted as code, so the hook's extracted text ran
+ *     past its own close (or stopped short of it) and a guarded hook read as unguarded (the
+ *     ninth chair's N-intake: a test file had to spell `\x28` to get past it). The matchers
+ *     now count delimiters over `codeMask(src)`: the source with every string, template
+ *     text, comment and regex-literal body blanked (same length, newlines kept), so the
+ *     slices are still taken from the real text. What still escapes: a regex literal the
+ *     mask's one-token look-behind reads as a division (a `/` after `)` or `]` that opens a
+ *     regex) is counted as code: none exist in the corpus; the guard-the-guard arm plants
+ *     the shapes the mask must read.
  *   - A timeout passed as an imported constant or an arithmetic expression does not
  *     resolve and counts as unguarded — a loud false positive, fixed by using the
  *     in-file constant shape every guarded suite already uses.
@@ -75,6 +82,7 @@ import { readdirSync, readFileSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { describe, expect, test } from 'vitest';
+import { parse } from 'espree';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const SCAN_DIR = 'tests/security';
@@ -86,12 +94,13 @@ const FLOOR_MS = 60_000;
  * A hook whose callback text matches this is standing up (or first-exec-booting)
  * PGlite. The alternation carries the LIVE boot-helper roster (2026-07-27 amendment):
  * makeDb (the common cross-file harness name), makeCreditLedgerDb
- * (creditLedgerHarness.js), and the local baseDb/buildDb/supportDb helpers. Add every
+ * (creditLedgerHarness.js), bootHostedChain (hostedDefaultHarness.js, GRANTS-1), and
+ * the local baseDb/buildDb/supportDb helpers. Add every
  * NEW harness name here when introducing one — the exec-aware rule in unguardedHooks
  * catches the common miss (a hook that also execs directly), but a pure
  * `await newHelper()` with no in-hook exec is invisible until listed.
  */
-const BOOT_MARKER_RE = /new\s+PGlite|\b(?:makeDb|makeCreditLedgerDb|baseDb|buildDb|supportDb|boot)\s*\(/;
+const BOOT_MARKER_RE = /new\s+PGlite|\b(?:makeDb|makeCreditLedgerDb|baseDb|buildDb|supportDb|bootHostedChain|boot)\s*\(/;
 
 /** A hook whose callback touches the db at all — the lazy-boot payment surface. */
 const EXEC_RE = /\.exec\s*\(|\.query\s*\(/;
@@ -102,22 +111,93 @@ const EXEC_RE = /\.exec\s*\(|\.query\s*\(/;
  */
 const TAIL_ARG_RE = /,\s*([0-9][0-9_]*|[A-Za-z_$][\w$]*)\s*(?:\/\*[\s\S]*?\*\/\s*)?\)$/;
 
-/** Every beforeAll/beforeEach call in a source, paren-matched to its own closing paren. */
+/**
+ * THE SOURCE WITH EVERY NON-CODE CHARACTER BLANKED (E11): the bodies of '…' and "…" strings, the text of `…` templates
+ * (a `${…}` hole is code again, to any depth), // and /* *\/ comments, and the bodies of regex literals (a `/` is a regex's
+ * opening where the last code token before it cannot end an expression: start, an operator or punctuator, or `return`,
+ * `typeof`, `case`, `in`, `of`, `void`, `delete`, `throw`, `new`, `do`, `else`, `yield`, `await`), each replaced by a space
+ * (a newline kept), so an index into the mask is an index into the source. The delimiters themselves stay, so a string is
+ * seen as one token and a regex `/\(/` keeps its slashes and loses its paren.
+ * @param {string} src @returns {string}
+ */
+function codeMask(src) {
+  const out = src.split('');
+  const n = src.length;
+  const blank = (/** @type {number} */ k) => { if (out[k] !== '\n') out[k] = ' '; };
+  /** the index of the last non-space code character written before i, or -1 */
+  const lastCode = (/** @type {number} */ i) => { let k = i - 1; while (k >= 0 && /\s/.test(out[k])) k -= 1; return k; };
+  const REGEX_AFTER_WORD = /(?:^|[^\w$])(?:return|typeof|case|in|of|void|delete|throw|new|do|else|yield|await)$/;
+  /** @type {Array<'tpl'|'hole'>} what each open `${` or template belongs to */
+  const stack = [];
+  let braces = 0; // `{` depth inside the innermost `${…}` hole
+  /** @type {number[]} */ const holeBraces = [];
+  let i = 0;
+  const scanTemplateText = () => { // at a char inside template text; stops after the closing ` or at a `${`
+    while (i < n) {
+      const c = src[i];
+      if (c === '\\') { blank(i); blank(i + 1); i += 2; continue; }
+      if (c === '`') { stack.pop(); i += 1; return; }
+      if (c === '$' && src[i + 1] === '{') { stack.push('hole'); holeBraces.push(braces); braces = 0; i += 2; return; }
+      blank(i); i += 1;
+    }
+  };
+  while (i < n) {
+    const c = src[i];
+    if (c === '/' && src[i + 1] === '/') { while (i < n && src[i] !== '\n') { blank(i); i += 1; } continue; }
+    if (c === '/' && src[i + 1] === '*') { const end = src.indexOf('*/', i + 2); const stop = end < 0 ? n : end + 2; while (i < stop) { blank(i); i += 1; } continue; }
+    if (c === "'" || c === '"') {
+      i += 1;
+      while (i < n && src[i] !== c && src[i] !== '\n') { if (src[i] === '\\') { blank(i); i += 1; } blank(i); i += 1; }
+      i += 1; continue;
+    }
+    if (c === '`') { stack.push('tpl'); i += 1; scanTemplateText(); continue; }
+    if (c === '{' && stack[stack.length - 1] === 'hole') { braces += 1; i += 1; continue; }
+    if (c === '}' && stack[stack.length - 1] === 'hole') {
+      if (braces > 0) { braces -= 1; i += 1; continue; }
+      stack.pop(); braces = holeBraces.pop() ?? 0; i += 1; scanTemplateText(); continue;
+    }
+    if (c === '/') {
+      const k = lastCode(i);
+      const prev = k < 0 ? '' : out[k];
+      const isRegex = k < 0 || /[(,=:[!&|?{};+\-*%<>~^]/.test(prev) || REGEX_AFTER_WORD.test(out.slice(Math.max(0, k - 8), k + 1).join(''));
+      if (isRegex) {
+        i += 1;
+        let inClass = false;
+        while (i < n && src[i] !== '\n') {
+          const d = src[i];
+          if (d === '\\') { blank(i); blank(i + 1); i += 2; continue; }
+          if (d === '[') inClass = true;
+          else if (d === ']') inClass = false;
+          else if (d === '/' && !inClass) break;
+          blank(i); i += 1;
+        }
+        i += 1; continue;
+      }
+    }
+    i += 1;
+  }
+  return out.join('');
+}
+
+/** Every beforeAll/beforeEach call in a source, paren-matched to its own closing paren (over `codeMask`, E11). */
 function extractHooks(src) {
   const hooks = [];
+  const code = codeMask(src);
   const re = /\b(beforeAll|beforeEach)\s*\(/g;
   let m;
-  while ((m = re.exec(src))) {
+  // the keyword is sought in CODE too: a `beforeAll (` in a comment or a string opens no hook
+  while ((m = re.exec(code))) {
     let i = re.lastIndex;
     let depth = 1;
     while (i < src.length && depth > 0) {
-      const ch = src[i];
+      const ch = code[i];
       if (ch === '(') depth += 1;
       else if (ch === ')') depth -= 1;
       i += 1;
     }
     hooks.push({
       kind: m[1],
+      start: m.index,
       text: src.slice(m.index, i),
       line: src.slice(0, m.index).split('\n').length,
     });
@@ -165,12 +245,13 @@ function unguardedHooks(src) {
   return bad;
 }
 
-/** Index just past the delimiter that closes the one opening at openIdx. */
+/** Index just past the delimiter that closes the one opening at openIdx (counted over `codeMask`, E11). */
 function matchedClose(src, openIdx, open, close) {
+  const code = codeMask(src);
   let i = openIdx;
   let depth = 0;
   do {
-    const ch = src[i];
+    const ch = code[i];
     if (ch === open) depth += 1;
     else if (ch === close) depth -= 1;
     i += 1;
@@ -190,8 +271,9 @@ function matchedClose(src, openIdx, open, close) {
  * Named functions whose body constructs PGlite. Shapes covered:
  * `function name(…) {…}` (destructured params included), `const name = (…) => {…}`,
  * `const name = (…) => new PGlite(…)`, `const name = function (…) {…}`.
- * String-naive like every walker in this file — a brace inside a body's string
- * or regex literal can desync the match; the fixture test pins the live shapes.
+ * Its brace and paren matching reads `codeMask(src)` (E11), so a brace or paren inside a
+ * body's string, template text, comment or regex literal no longer desyncs the match; the
+ * fixture test pins the live shapes.
  */
 function constructorHelperNames(src) {
   const names = new Set();
@@ -199,9 +281,10 @@ function constructorHelperNames(src) {
     /(?:async\s+)?function\s+([A-Za-z_$][\w$]*)\s*(?=\()/g,
     /const\s+([A-Za-z_$][\w$]*)\s*=\s*(?:async\s+)?(?:function\s*)?(?=\()/g,
   ];
+  const code = codeMask(src); // a head in a comment or a string declares nothing (E11)
   for (const re of heads) {
     let m;
-    while ((m = re.exec(src))) {
+    while ((m = re.exec(code))) {
       const afterParams = matchedClose(src, re.lastIndex, '(', ')');
       const tail = src.slice(afterParams);
       const arrow = tail.match(/^\s*=>\s*/);
@@ -505,6 +588,53 @@ describe('pglite hook-timeout ratchet (F4 class habitat removal)', () => {
 
     test('a warm exec hook after the guarded boot hook is out of scope (only the first toucher pays boot)', () => {
       expect(unguardedHooks(WARM_EXEC_AFTER_GUARDED_BOOT)).toEqual([]);
+    });
+
+    // E11 (WORDS-2, the tenth chair's PRERELEASE-LIST E11): the matcher counts delimiters in CODE only. Each plant is a
+    // guarded hook whose body carries a paren the old string-naive matcher counted: red on the base (read as unguarded),
+    // green over `codeMask`.
+    test('a guarded hook with an escaped paren in a regex literal reads guarded (E11)', () => {
+      const src = `const PGLITE_BOOT_TIMEOUT_MS = 180_000;\nbeforeAll(async () => { db = await makeDb(); const open = /\\(/; }, PGLITE_BOOT_TIMEOUT_MS);\nconst after = 1;`;
+      expect(unguardedHooks(src)).toEqual([]);
+    });
+
+    test('a guarded hook with a lone paren inside a string, a template and a comment reads guarded (E11)', () => {
+      const src = `beforeAll(async () => {\n  db = await makeDb(); // a stray ) in a comment\n  log(')'); log(\`(\${pad(1)}\`); /* ( */\n}, 180_000)`;
+      expect(unguardedHooks(src)).toEqual([]);
+      expect(extractHooks(src)[0].text.endsWith('180_000)')).toBe(true);
+    });
+
+    test('the mask keeps code and blanks only non-code, index for index (E11)', () => {
+      const src = `a = b / c; d = /\\)[)]/g.test(x) ? '(' : \`\${f(')')})\`; // )\nreturn /(/;`;
+      const code = codeMask(src);
+      expect(code.length).toBe(src.length);
+      expect(code.split('\n').length).toBe(src.split('\n').length);
+      // the division stays code; every paren left in the mask is a real call or group of the code
+      expect(code).toContain('b / c');
+      expect([...code].filter((ch) => ch === '(').length).toBe([...code].filter((ch) => ch === ')').length);
+      expect(code.replace(/[^()]/g, '')).toBe('()()');
+    });
+
+    test('over every file of the corpus the matcher finds exactly the hooks a parser finds, each to its own close (E11)', () => {
+      // THE ORACLE IS INDEPENDENT: espree's AST (every CallExpression whose callee is beforeAll or beforeEach), not the mask.
+      const problems = [];
+      let hooksSeen = 0;
+      for (const f of readdirSync(join(ROOT, SCAN_DIR)).filter((n) => n.endsWith('.test.js') && n !== 'pgliteHookTimeoutRatchet.test.js').sort()) {
+        const src = readFileSync(join(ROOT, SCAN_DIR, f), 'utf8');
+        /** @type {Array<[number, number]>} */ const parsed = [];
+        const visit = (/** @type {any} */ node) => {
+          if (!node || typeof node !== 'object') return;
+          if (Array.isArray(node)) { node.forEach(visit); return; }
+          if (node.type === 'CallExpression' && node.callee?.type === 'Identifier' && /^before(?:All|Each)$/.test(node.callee.name)) parsed.push(node.range);
+          for (const k of Object.keys(node)) if (k !== 'range' && k !== 'loc') visit(node[k]);
+        };
+        visit(parse(src, { ecmaVersion: 'latest', sourceType: 'module', range: true }));
+        const found = extractHooks(src).map((h) => [h.start, h.start + h.text.length]);
+        hooksSeen += parsed.length;
+        if (JSON.stringify(found) !== JSON.stringify(parsed)) problems.push(`${f}: matcher ${JSON.stringify(found)} parser ${JSON.stringify(parsed)}`);
+      }
+      expect(hooksSeen).toBeGreaterThan(50);
+      expect(problems).toEqual([]);
     });
 
     test('a beforeEach that boots per test is in scope (the paymentRefundObligations shape)', () => {

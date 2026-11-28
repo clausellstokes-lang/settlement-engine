@@ -134,13 +134,24 @@ describe('GS-2: one faction set, the power factions', () => {
     const ungrounded = [];
     for (const seed of GS2_SEEDS) {
       const s = gen(GS2_CFGS[0], seed);
-      const home = new Map((s.npcs || []).map((n) => [n.id, n.factionAffiliation]));
+      // RE-KEYED (MERGE-234: the union of lanes 3 and 4): a person's home is read as the conflicts read
+      // it (power/conflicts.js :: homePowerOf, PEOPLE-3 HOOKS: the power it ranks best in, memberships
+      // order on a tie, else the legacy affiliation). The shim's `factionAffiliation` breaks a tie by
+      // the governing seat and the roster instead, and lane 4's directed ties put a grounding tie on
+      // such a card in gs2-c and gs2-d (the two definitions are reported to the chair, not chosen here).
+      const homePowerOf = (n) => {
+        const ms = (n.memberships || []).filter((m) => m && typeof m.power === 'string');
+        if (!ms.length) return n.factionAffiliation;
+        const r = (m) => (Number.isInteger(m.rank) ? m.rank : Number.MAX_SAFE_INTEGER);
+        return [...ms].sort((x, y) => r(x) - r(y))[0].power;
+      };
+      const home = new Map((s.npcs || []).map((n) => [n.id, homePowerOf(n)]));
       for (const c of s.conflicts || []) {
         seen += 1;
         const [a, b] = c.parties;
         const tie = (s.relationships || []).some((r) => ['rival', 'enemy'].includes(r.type)
-          && ((home.get(r.npc1Id) === a && home.get(r.npc2Id) === b)
-            || (home.get(r.npc1Id) === b && home.get(r.npc2Id) === a)));
+          && ((home.get(r.from) === a && home.get(r.to) === b)
+            || (home.get(r.from) === b && home.get(r.to) === a)));
         if (a === b || !tie) ungrounded.push(`${seed} ${a} / ${b}`);
       }
     }
@@ -150,12 +161,18 @@ describe('GS-2: one faction set, the power factions', () => {
 });
 
 describe('GS-2: generateConflicts pairs power factions across a rival or enemy tie', () => {
-  // Three power-faction groups, as factionGrouping projects them. Ida and Jon share a faction.
-  const groups = () => [
-    { name: 'Town Council', dominantCategory: 'government', members: [{ id: 'a', name: 'Ada' }] },
-    { name: 'Merchant Guilds', dominantCategory: 'economy', members: [{ id: 'i', name: 'Ida' }, { id: 'j', name: 'Jon' }] },
-    { name: 'Military/Guard', dominantCategory: 'military', members: [{ id: 'm', name: 'Mara' }] },
+  // RE-KEYED (PEOPLE-3 HOOKS, 2026-11-07): the conflicts pair over the POWERS
+  // (`powerStructure.factions` rows), each person's home read from its memberships, never over
+  // the NPC grouping. Three powers; Ida and Jon share one (Jon also ranks second in the council,
+  // so his home is the power he ranks best in).
+  const powers = () => [{ faction: 'Town Council' }, { faction: 'Merchant Guilds' }, { faction: 'Military/Guard' }];
+  const cast = [
+    { id: 'a', name: 'Ada', memberships: [{ power: 'Town Council', rank: 1 }] },
+    { id: 'i', name: 'Ida', memberships: [{ power: 'Merchant Guilds', rank: 1 }] },
+    { id: 'j', name: 'Jon', memberships: [{ power: 'Town Council', rank: 2 }, { power: 'Merchant Guilds', rank: 1 }] },
+    { id: 'm', name: 'Mara', memberships: [{ power: 'Military/Guard', rank: 1 }] },
   ];
+  const groups = powers;
   const seeded = (seed, body) => {
     const previous = setActiveRng(createPRNG(seed));
     try { return body(); } finally { clearActiveRng(previous); }
@@ -163,24 +180,34 @@ describe('GS-2: generateConflicts pairs power factions across a rival or enemy t
 
   test('a town whose rivalries never cross two factions has no conflict row', () => {
     const rels = [
-      { npc1Id: 'i', npc2Id: 'j', type: 'rival' },
-      { npc1Id: 'a', npc2Id: 'm', type: 'ally' },
+      { from: 'i', to: 'j', type: 'rival' },
+      { from: 'a', to: 'm', type: 'ally' },
     ];
-    expect(seeded('gs2-none', () => generateConflicts(groups(), rels, {}, []))).toEqual([]);
+    expect(seeded('gs2-none', () => generateConflicts(groups(), rels, {}, [], cast))).toEqual([]);
   });
 
   test('the crossing pairs become the conflicts, strongest first, intensity from the tie count', () => {
     const rels = [
-      { npc1Id: 'i', npc2Id: 'm', type: 'rival' },
-      { npc1Id: 'j', npc2Id: 'm', type: 'enemy' },
-      { npc1Id: 'a', npc2Id: 'i', type: 'rival' },
+      { from: 'i', to: 'm', type: 'rival' },
+      { from: 'j', to: 'm', type: 'enemy' },
+      { from: 'a', to: 'i', type: 'rival' },
     ];
-    const conflicts = seeded('gs2-pairs', () => generateConflicts(groups(), rels, {}, []));
+    const conflicts = seeded('gs2-pairs', () => generateConflicts(groups(), rels, {}, [], cast));
     expect(conflicts.length).toBeGreaterThan(0);
     expect(conflicts[0].parties).toEqual(['Merchant Guilds', 'Military/Guard']);
     expect(conflicts[0].intensity).toBe('high');
     const seen = conflicts.map((c) => c.parties.join(' / '));
     expect(seen.every((p) => ['Merchant Guilds / Military/Guard', 'Town Council / Merchant Guilds'].includes(p))).toBe(true);
     expect(conflicts.find((c) => c.parties[0] === 'Town Council')?.intensity ?? 'moderate').toBe('moderate');
+  });
+
+  test('a grouping row is never a party: only a power on the roster pairs (PEOPLE-3 HOOKS)', () => {
+    // RE-KEYED (MERGE-234: the union of lanes 3 and 4): the ties are directed `from`/`to` (PEOPLE-4 TIES, R-P7)
+    const rels = [{ from: 'i', to: 'x', type: 'rival' }, { from: 'i', to: 'm', type: 'rival' }];
+    // 'x' belongs to a name no power row carries (a stale grouping's name): its tie grounds nothing
+    const withStranger = [...cast, { id: 'x', name: 'Xan', factionAffiliation: 'The Old Grouping' }];
+    const conflicts = seeded('gs2-powers', () => generateConflicts(groups(), rels, {}, [], withStranger));
+    // liveness: the real crossing still pairs
+    expect(conflicts.map((c) => c.parties.join(' / '))).toEqual(['Merchant Guilds / Military/Guard']);
   });
 });

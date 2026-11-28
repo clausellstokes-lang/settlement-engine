@@ -33,6 +33,8 @@ import { foodLedger } from '../foodLedger.js';
 import { healingLedger } from '../healingLedger.js';
 import { governanceLedger } from '../governanceLedger.js';
 import { coupContenders } from '../rulingPowerCoup.js';
+import { seatsByHolder } from '../seat/seatLaw.js';
+import { SEAT_CONTEST_LIT } from '../seat/seatCircumstances.js';
 import { canonicalRelationshipLabel } from '../region/graph.js';
 import { WAR_STRESSOR_TYPES } from './warStressorTypes.js';
 // M18: per-graph edge/channel indices so edgesTouching/incomingChannels are O(degree), not full
@@ -847,7 +849,7 @@ function interpretOriginContext(/** @type {any} */ type, /** @type {any} */ sett
     return {
       ...base,
       variant: 'popular_revolt',
-      reason: 'The streets rose on their own. No faction owns this yet.',
+      reason: 'The streets rose on their own. No power owns this yet.',
     };
   }
 
@@ -874,7 +876,13 @@ function interpretOriginContext(/** @type {any} */ type, /** @type {any} */ sett
     const entry = snapshot?.byId?.get?.(String(settlementId));
     const contest = coupContenders(entry?.settlement);
     const leading = contest.challengers[0] || null;
-    const variant = (leading && COUP_VARIANT_BY_ARCHETYPE[/** @type {keyof typeof COUP_VARIANT_BY_ARCHETYPE} */ (leading.archetype)]) || 'palace_coup';
+    // SEAT-1 U4 (RULINGS (9) 4): under the seat law with the contest's one dial lit, a craft contender's plot reads the
+    // guild cabal it narrates today (`merchant_cabal`), never a palace coup, until an authored craft row exists. Dark, or
+    // under the old law: today's read.
+    const variantKind = leading && leading.archetype === 'craft' && SEAT_CONTEST_LIT && seatsByHolder(entry?.settlement)
+      ? 'merchant'
+      : leading?.archetype;
+    const variant = (leading && COUP_VARIANT_BY_ARCHETYPE[/** @type {keyof typeof COUP_VARIANT_BY_ARCHETYPE} */ (variantKind)]) || 'palace_coup';
     // A hostile neighbor bankrolling the plot is sponsorship, not a separate
     // variant — the conspiracy's CHARACTER comes from who leads it.
     const hostiles = hostileNeighborsOf(snapshot, settlementId);

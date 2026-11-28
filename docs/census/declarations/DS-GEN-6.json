@@ -1,0 +1,470 @@
+{
+  "poolId": "DS-GEN-6",
+  "source": "src/data/dossierStateProse/general.generated.js (annex docs/content/RECEIPT_POOLS_DOSSIER_STATE.md)",
+  "drawKind": "K",
+  "drawSite": "generalStateProse → originLine(originRoutePoolKey | originTierPoolKey), deficit dimension = foodDeficitDimension(foodBalance) → composeStateProse → readStateProse → eligibleVariants → drawVariant",
+  "pools": [
+    {
+      "pool": "crossroads",
+      "keyGuarantees": [
+        "config.tradeRouteAccess crossroads"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Not scoped: structural origin prose; the food claims ride the deficit mark, translated to the deficit atom.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{settlement} is here because the roads are here; the town is what grew in the place where stopping made sense.",
+          "needs": [],
+          "excludes": [
+            "deficit"
+          ],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "Nobody chose {settlement}'s site. The geography chose it, and the town has been agreeing with the geography ever since.",
+          "needs": [],
+          "excludes": [
+            "deficit"
+          ],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "{settlement} sits where the roads meet and eats what the roads bring: the ground under the town was never the reason for the town.",
+          "needs": [
+            "deficit"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "vid:4",
+          "text": "A crossing feeds a town before its fields do, and {settlement} has never had it the other way round.",
+          "needs": [
+            "deficit"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "port",
+      "keyGuarantees": [
+        "config.tradeRouteAccess port (any terrain: riverside ports fold here too, so coast is NOT guaranteed)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Not scoped: structural origin prose.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{settlement} exists because of the water, and nothing about the town makes sense without it.",
+          "needs": [],
+          "excludes": [
+            "deficit"
+          ],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "{settlement}'s living comes off the quay; the fields behind it are a convenience the town could manage without.",
+          "needs": [],
+          "excludes": [
+            "deficit"
+          ],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "What {settlement} eats arrives by the same water that gives the town its trade, which makes the harbour the whole of the argument for the place.",
+          "needs": [
+            "deficit"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "vid:4",
+          "text": "{settlement} looks seaward for everything, including dinner.",
+          "needs": [
+            "coast",
+            "deficit"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "river",
+      "keyGuarantees": [
+        "config.tradeRouteAccess river (waterAccessKind river)"
+      ],
+      "poolNeeds": [
+        "river"
+      ],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Not scoped: structural origin prose.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{settlement} is built on its water because the water is the cheapest thing here to move goods on.",
+          "needs": [],
+          "excludes": [
+            "deficit"
+          ],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "Every decision {settlement} has ever made about where to put a building started with the river.",
+          "needs": [],
+          "excludes": [
+            "deficit"
+          ],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "{settlement}'s ground gives less than the town needs and the river makes up the rest, which is why the town is on the river and not on better ground.",
+          "needs": [
+            "deficit"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "vid:4",
+          "text": "A river town can be short of fields and long of custom, and {settlement} is both.",
+          "needs": [
+            "deficit"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "isolated",
+      "keyGuarantees": [
+        "config.tradeRouteAccess isolated"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Not scoped: structural origin prose.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{settlement} is out of reach of the trade roads, and self-sufficiency here is a constraint rather than an aspiration.",
+          "needs": [],
+          "excludes": [
+            "deficit"
+          ],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "{settlement} produces what {settlement} uses, because the alternative is a long journey for it.",
+          "needs": [],
+          "excludes": [
+            "deficit"
+          ],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "{settlement} is out of reach of the trade roads and cannot fully feed itself; what the land does not give arrives dearly (by sanctioned caravan, by seasonal access, by patronage, by ration), or it does not arrive.",
+          "needs": [
+            "deficit"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "vid:4",
+          "text": "The gap between what {settlement} grows and what {settlement} eats is closed at a price, and the price is visible in the market before anyone explains it.",
+          "needs": [
+            "market",
+            "deficit"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "road",
+      "keyGuarantees": [
+        "config.tradeRouteAccess road, mountain_pass, mountain_road, desert_road, or absent (originRoutePoolKey fallback)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Not scoped: structural origin prose.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{settlement} is on a road and lives off the road: goods in, goods out, people through.",
+          "needs": [],
+          "excludes": [
+            "deficit"
+          ],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "{settlement} is here because somebody, once, found this a reasonable distance from the last place.",
+          "needs": [],
+          "excludes": [
+            "deficit"
+          ],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "What {settlement} cannot grow, the road brings, and the road is therefore not a convenience for this town but a condition of it.",
+          "needs": [
+            "deficit"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "vid:4",
+          "text": "{settlement} is a road town that has outgrown its fields, and it is buying the difference.",
+          "needs": [
+            "deficit"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "tier overlay: metropolis",
+      "keyGuarantees": [
+        "tier metropolis"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Not scoped; colour: size prose the key owns.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{settlement} no longer serves an economic function for its region. It is the economic function.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "A place this size stops being a settlement in the country and becomes the thing the country is arranged around.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "Nobody in {settlement} thinks of the region as somewhere else.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "tier overlay: city",
+      "keyGuarantees": [
+        "tier city"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Not scoped: size prose; food claims ride the deficit mark.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{settlement} produces what it consumes and consumes what it produces; trade widens the margin rather than supplying it.",
+          "needs": [],
+          "excludes": [
+            "deficit"
+          ],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "{settlement} is large enough that its appetites outrun its fields: what the city eats, the city cannot fully grow.",
+          "needs": [
+            "deficit"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "{settlement} is big enough to have quarters that do not know each other.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "tier overlay: thorp / hamlet",
+      "keyGuarantees": [
+        "tier thorp or hamlet"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Not scoped; colour: size prose the key owns.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{settlement} is small enough that every household knows its purpose, and surplus, where there is any, is modest.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "{settlement} is a handful of roofs with a reason, and the reason is usually the ground.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "{settlement}'s whole economy fits on one page and always has room left.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "tier overlay: other tiers",
+      "keyGuarantees": [
+        "tier village, town or any other (TIER_OVERLAY_OF fallback)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Not scoped; colour: size prose the key owns.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{settlement} is the size that a place of this kind settles at, and it has settled there.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "{settlement} is neither small enough to be simple nor large enough to be complicated, and it manages both ways.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "{settlement} is a town, in the ordinary sense, and the ordinariness is accurate.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    }
+  ]
+}

@@ -147,8 +147,8 @@ export default function RealmDocket({ campaign }) {
       )}
 
       <p style={{ fontSize: proseFontSize(FS.xxs, mobile), color: MUTED, margin: '8px 0 0', fontStyle: 'italic', lineHeight: 1.5 }}>
-        Every entry stays editable (from its settlement&apos;s dossier) and cancelable until the tick consumes it.
-        Realm orders queue separately as pending proposals above.
+        Every entry stays editable (from its settlement&apos;s dossier) and can be cancelled until the next advance
+        carries it out. Realm orders wait separately, as proposals above.
       </p>
 
       {/* THE FORECAST (§10): two clone-runs of the SHARED pipeline over the

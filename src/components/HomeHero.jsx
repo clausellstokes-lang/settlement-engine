@@ -32,6 +32,7 @@ import Button from './primitives/Button.jsx';
 import { ClerkNote } from './generate/ClerkNote.jsx';
 import RefusalNotice from './primitives/RefusalNotice.jsx';
 import { raisedHere, REFUSAL_SURFACES } from '../lib/refusalReasons.js';
+import { engineRefusalOf } from '../lib/engineRefusal.js';
 import { recoverFromChunkError } from '../lib/staleDeploy.js';
 import useIsMobile from '../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../design/proseScale.js';
@@ -251,6 +252,10 @@ export default function HomeHero({ onSignIn, onNavigate, bare = false }) {
       }
     } catch (e) {
       console.error('[HomeHero] generate failed:', e);
+      // ⛔ THE ENGINE SERVICE'S NAMED FAILURES ARE THE LANE'S TO SAY (remote-path R3). The lane
+      // has recorded the service's limit, its absence or its retired version before rethrowing;
+      // an error here would win over that notice and tell a reader at a limit to try once more.
+      if (engineRefusalOf(e)) return;
       // A chunk of the previous build (this tab outlived a deploy): the recovery
       // confirms a new build is live and reloads or raises the notice; the message
       // says why a retry alone would not help. Anything else keeps forgeStart.

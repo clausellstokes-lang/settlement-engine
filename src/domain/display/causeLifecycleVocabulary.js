@@ -1,9 +1,9 @@
 /**
  * domain/display/causeLifecycleVocabulary.js — W-C5: the GENERIC CONTENT FLOOR for
  * the cause-resolution lifecycle. The side-car pattern (institutionVocabulary.js):
- * a PURE HEADLESS LEAF (imports only the shared ageBands helper), read only by the
- * lazy dossier card — so generation NEVER imports it and adding to it is byte-inert
- * to every golden.
+ * a PURE HEADLESS LEAF (imports only the shared ageBands helper and, since CENSUS-1d, the
+ * one draw function `facts/drawDeclared.js`, itself pure), read only by the lazy dossier card —
+ * so generation NEVER imports it and adding to it is byte-inert to every golden.
  *
  * THE CONTRACT (WC5 brief §6). Every lifecycle event carries a CONJUNCTION KEY —
  * {role, situation, causeClass, lifecycleStage}. W2 authors SPECIFIC
@@ -17,8 +17,8 @@
  * The lifecycleStage vocabulary is CLOSED: attributed, re-caused, reformed,
  * historicized, exposed-public, re-adjudicated.
  */
-
 import { HISTORICIZE_BAND } from '../ageBands.js';
+import { drawDeclared, lineText } from '../facts/drawDeclared.js';
 
 /** The closed lifecycle-stage vocabulary (the conjunction key's fourth dimension). */
 export const LIFECYCLE_STAGES = Object.freeze([
@@ -62,37 +62,37 @@ export const STAGE_TEMPLATES = Object.freeze({
     'What turned this {role} was that {cause}.',
   ],
   're-caused': [
-    'The old pressure eased, but the habit found a new home: now {cause}, and it sustains the arrangement.',
-    'Need became appetite. The compromise re-formed around a new reason: {cause}.',
-    'One cause closed and another opened; {cause}, and the {role} carries on.',
+    'The first reason passed, but then {cause}, and the {role} kept on dealing.',
+    'The first reason passed, but then {cause}, and that gave the {role} a new reason to carry on.',
+    'The {role} might have stopped when the first trouble ended, but then {cause}, and the dealing went on.',
   ],
   reformed: [
     'The pressure lifted and the {role} came clean; the compromise is over.',
-    'With the cause resolved, this {role} reformed. The arrangement is finished.',
-    'Sole-cause corruption, ended: the reason passed, and so did the compromise.',
+    'Once the trouble ended, this {role} stopped dealing and came clean.',
+    'The reason passed, and the dealing stopped with it.',
   ],
   historicized: [
-    'The compromise persists, but its origin is past now: {cause}, once, and the habit outlived the reason.',
-    'What began when {cause} endures out of habit; the ledger never closed.',
-    'The originating cause is history now; the corruption carries on regardless.',
+    'It began when {cause}. That trouble is over, but the {role} has not stopped.',
+    'That trouble has passed, but what began when {cause} goes on.',
+    'Whatever started it is over, but the {role} carries on dealing all the same.',
   ],
   'exposed-public': [
-    'The compromise is public now: {cause} was only the beginning; this is a scandal.',
-    'Once covert, now revealed: the arrangement that began when {cause} has broken into the open.',
-    'The quiet is over. What started when {cause} is a public reckoning.',
+    'It is public now: it began when {cause}, and now everyone knows.',
+    'What began when {cause} is out in the open now, and people are talking.',
+    'It is out: what started when {cause} is common talk now.',
   ],
   're-adjudicated': [
-    'The paymaster is gone; the compromise was re-judged from scratch, and now {cause}.',
-    'With the sustaining institution destroyed, the arrangement re-formed on a new footing: {cause}.',
-    'The old infrastructure fell, and the compromise was re-adjudicated around {cause}.',
+    'Whoever paid the {role} before is gone, but by then {cause}, and the dealing went on.',
+    'Whoever kept the {role} paid was destroyed, but by then {cause}, and that gave the dealing a new reason.',
+    'The deal lost the one who paid for it, but by then {cause}, and it carried on.',
   ],
 });
 
 /** The register-tuned historicize voice for the YEARS-PAST band (the constitution's
  *  PIN: "the lean years" language is impossible below years-past). */
 const HISTORICIZE_YEARS_PAST = Object.freeze([
-  'It began in the lean years ({cause}), and though that is long past, the habit endures. The ledger never closed.',
-  'Years ago, {cause}. The reason is history; the corruption is not.',
+  'It began in the lean years, when {cause}. That is long past, but the {role} has kept at it.',
+  'Years ago, {cause}. That trouble is over, but the dealing still goes on.',
 ]);
 
 /** Per-stage short BADGE label + tone for the dossier marker. `null` badge = the
@@ -135,23 +135,32 @@ function variantIndex(key, n) {
  * stage × causeClass. `ageBand` (an ageBands id) tunes the historicize register.
  * `variant` (0-based) selects a specific variant; omit for the deterministic default.
  *
+ * ⭐ CENSUS-1d unit 2 (Appendix B row 102, kind H): the template index is drawn over the FULL
+ * stage pool exactly as before and resolved through `drawDeclared` (noted as
+ * `CAUSE_LIFECYCLE.<stage>` / `CAUSE_LIFECYCLE.historicize-years-past`); `facts` answers a
+ * declared template, none = a declared template is refused (fail-closed).
  * @param {{ stage?: string, causeClass?: string, role?: string, ageBand?: string, variant?: number }} [key]
+ * @param {object|null|(() => object|null)} [facts]
  * @returns {string}
  */
-export function causeLifecyclePhrase({ stage, causeClass, role, ageBand, variant } = {}) {
+export function causeLifecyclePhrase({ stage, causeClass, role, ageBand, variant } = {}, facts = null) {
   const st = String(stage || '');
   const cc = String(causeClass || '');
   const cause = CAUSE_MECHANISM_PHRASE[cc] || (cc ? cc.replace(/-/g, ' ') : 'the pressure');
   let templates = STAGE_TEMPLATES[st];
-  if (st === 'historicized' && ageBand === HISTORICIZE_BAND) templates = HISTORICIZE_YEARS_PAST;
+  let poolId = `CAUSE_LIFECYCLE.${st}`;
+  if (st === 'historicized' && ageBand === HISTORICIZE_BAND) { templates = HISTORICIZE_YEARS_PAST; poolId = 'CAUSE_LIFECYCLE.historicize-years-past'; }
   if (!templates || !templates.length) {
     // Defensive floor-of-the-floor: an unknown stage still renders something honest.
-    return `This ${roleNoun(role)}'s compromise (${st || 'active'}) roots in ${cause}.`;
+    return `This ${roleNoun(role)} is compromised, and it began when ${cause}.`;
   }
-  const idx = Number.isInteger(variant)
-    ? ((/** @type {number} */ (variant) % templates.length) + templates.length) % templates.length
-    : variantIndex(`${st}|${cc}|${role || ''}`, templates.length);
-  return templates[idx].replace(/\{cause\}/g, cause).replace(/\{role\}/g, roleNoun(role));
+  const drawn = drawDeclared(templates, {
+    draw: (p) => p[Number.isInteger(variant)
+      ? ((/** @type {number} */ (variant) % p.length) + p.length) % p.length
+      : variantIndex(`${st}|${cc}|${role || ''}`, p.length)],
+    facts, key: `${st}|${cc}|${role || ''}`, poolId, surface: 'npcs', drawKind: 'H',
+  });
+  return String(lineText(drawn.line) ?? '').replace(/\{cause\}/g, cause).replace(/\{role\}/g, roleNoun(role));
 }
 
 /**

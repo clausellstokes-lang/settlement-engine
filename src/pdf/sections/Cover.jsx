@@ -17,6 +17,8 @@ import { HOUSE_MOTTO } from '../../design/organic/logo.js';
 import { BRAND_SEAL_PNG } from '../assets/brandSeal.js';
 import { humanize, num, stripZwnj, cap, label as toLabel } from '../lib/format.js';
 import { formatCount } from '../../domain/formatNumber.js';
+import { safetyQualifierLed } from '../../domain/display/safetyShown.js'; // PAGE-1 SAFETY: the owner's line, led by its word
+import { prosperityInCrisisLed } from '../../domain/display/prosperityInCrisis.js'; // COHERENCE-UPKEEP-6 (ruling D(iii)): the sentence led by the word it explains
 
 const TONE_COLOR = (key, fallback = palette.muted) => palette[key] || fallback;
 
@@ -152,7 +154,8 @@ export function Cover({ settlement, narrativeMode = false, vm, isFounder = false
   // §69.4: `num()` returns an UNGROUPED String(Math.round(n)), so the cover read
   // `8000` while Overview.jsx:39 in the SAME DOCUMENT read `8,000` via formatCount.
   const popValue = formatCount(ident.population);
-  const popSub = ident.tier ? `${ident.tier}-tier` : null;
+  // The tier word alone ("Thorpe"), one spelling everywhere (ODQ §934.63 F14); "-tier" was machinery.
+  const popSub = ident.tier || null;
 
   const prosperity = overview.prosperity || null;
   const prosperityTone = overview.prosperityTone || 'muted';
@@ -167,8 +170,15 @@ export function Cover({ settlement, narrativeMode = false, vm, isFounder = false
     : null;
   const govName = situation.power?.governingName || null;
 
-  const topExport = situation.economy?.topExport
-    || (overview.primaryExports?.[0] ? toLabel(overview.primaryExports[0]) : null);
+  // TAIL-EXPORTS-PDF-2 (the chair's ruling E15 (1)): the cover names the first export the tab's Exports print
+  // (tradeListDisplay.js :: tradeListsAsPrinted, the economics slice's `exportsShown`), with the mark that list keeps,
+  // and none where a siege stops trade: the record's raw first export ("Salted fish (naval route only)") printed on a
+  // village under siege that sends nothing out by any road. A view model without the slice reads as before.
+  const econ = vm?.economics;
+  const topExport = Array.isArray(econ?.exportsShown)
+    ? (!econ.tradeStopped && econ.exportsShown[0] ? toLabel(econ.exportsShown[0]) : null)
+    : (situation.economy?.topExport
+      || (overview.primaryExports?.[0] ? toLabel(overview.primaryExports[0]) : null));
 
   return (
     <Page size={pageGeo.A4.size} style={sheet.coverPage}>
@@ -185,8 +195,12 @@ export function Cover({ settlement, narrativeMode = false, vm, isFounder = false
           <View style={{ flexDirection: 'row', gap: 6 }}>
             {/* Founder Edition mark — small parchment-gold pill, sits
                 to the left of the AI badge when both are present so
-                "Founder + AI" reads naturally rather than stacking. */}
-            {isFounder && (
+                "Founder + AI" reads naturally rather than stacking.
+                ⛔ ONE TIER WORD PER COVER (STYLE-RULINGS-2 B1(d), 2026-11-09): an anonymous export
+                is the free preview, and a founder is a signed-in account, so the two never name
+                one export; where a caller passes both, the cover prints the preview's word and
+                not this pill. tests/pdf/restoredSubsections.test.js (B4) */}
+            {isFounder && !isAnonymous && (
               <View
                 style={{
                   paddingHorizontal: 10, paddingVertical: 4,
@@ -261,6 +275,20 @@ export function Cover({ settlement, narrativeMode = false, vm, isFounder = false
             />
           )}
         </View>
+        {/* The Prosperity cell's label, where a crisis in force lowered it, says what the place is in
+            ordinary years (the chair's ruling 1(a), REVIEW-UPKEEP-2): the vm's one sentence. */}
+        {prosperity && overview.prosperityInCrisis && (
+          <Text style={{ fontFamily: 'Lora', fontSize: pt['10'], color: palette.second, fontStyle: 'italic', marginTop: 6 }}>
+            {prosperityInCrisisLed(overview.prosperityInCrisis)}
+          </Text>
+        )}
+        {/* The Safety cell's label, where the law stands two or more steps away or the record holds what the label could
+            not see, carries the owner's line (PAGE-1 SAFETY): present only in the DM's own document (vm.safetyQualifier). */}
+        {safety && vm?.safetyQualifier && (
+          <Text style={{ fontFamily: 'Lora', fontSize: pt['10'], color: palette.second, fontStyle: 'italic', marginTop: 6 }}>
+            {safetyQualifierLed(vm.safetyQualifier)}
+          </Text>
+        )}
 
         {/* ── Power line ───────────────────────────────────────── */}
         {(govLabel || govName) && (

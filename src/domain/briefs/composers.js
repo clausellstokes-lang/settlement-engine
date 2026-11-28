@@ -156,7 +156,7 @@ export function settlementBrief({ settlement, worldState = null, tick = 0 } = {}
     sections: [
       section('table', 'At the table', SOURCE.NPC_TABLE, table),
       blocArr.length
-        ? section('blocs', 'Factions & conspiracies', SOURCE.POLITICS_COVERT, blocArr)
+        ? section('blocs', 'Powers & conspiracies', SOURCE.POLITICS_COVERT, blocArr)
         : null,
       cred ? section('credibility', 'Standing', SOURCE.CREDIBILITY, [cred]) : null,
       section('rumors', 'What they say (vs. what is)', SOURCE.RUMORS_TRUTH, rumors),
@@ -194,7 +194,7 @@ export function playerSafeBrief({ settlement, worldState = null, tick = 0 } = {}
         ? section('settlement', 'The settlement', SOURCE.SETTLEMENT_PUBLIC, [{ public: publicProjection }])
         : null,
       blocArr.length
-        ? section('blocs', 'Visible factions', SOURCE.POLITICS_PUBLIC, blocArr)
+        ? section('blocs', 'Powers in plain view', SOURCE.POLITICS_PUBLIC, blocArr)
         : null,
       cred ? section('credibility', 'Reputation', SOURCE.CREDIBILITY, [cred]) : null,
       section('rumors', 'Word on the street', SOURCE.RUMORS_PUBLIC, rumors),

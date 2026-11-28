@@ -63,7 +63,7 @@ import { goldenCorpus, keyOf } from '../helpers/goldenMasterCorpus.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import * as mergeModule from '../../src/domain/edit/mergeConsequence.js';
 import {
-  mergeConsequence, recomputeMirrors, recomputeReceipts, enclosingGroup, guardMergedRecord,
+  mergeConsequence, recomputeReceipts, enclosingGroup, guardMergedRecord,
 } from '../../src/domain/edit/mergeConsequence.js';
 import { mergeTree, newReceipts, __internals } from '../../src/domain/edit/recordMergeTree.js';
 
@@ -97,8 +97,6 @@ function rows() {
 const withChains = () => rows().filter(({ rec }) => (rec.economicState?.activeChains || []).length >= 2);
 const withFood = () => rows().filter(({ rec }) => (rec.availableServices?.food || []).length >= 2);
 const withIncome = () => rows().filter(({ rec }) => (rec.economicState?.incomeSources || []).length >= 2);
-const withMembers = () => rows().filter(({ rec }) => (rec.factions || [])
-  .some((faction) => (faction.members || []).length > 0));
 
 describe('EM-R0c — the merge: the consequence of an edit is the difference of two re-derivations', () => {
   it('A1 · identity and the write base: merge(record, X, X) returns the record byte-identical, unmutated, with no key lost', () => {
@@ -124,7 +122,7 @@ describe('EM-R0c — the merge: the consequence of an edit is the difference of 
     expect(mutated, 'no caller record is mutated: the merge clones on entry and writes only its own value').toEqual([]);
     expect(lost, 'THE WRITE BASE: no top-level key of the record is absent from the result').toEqual([]);
     expect(noisy, 'the identity carries no escalation and moves no reading').toEqual([]);
-  });
+  }, 120_000); // its own budget, carrying the measured figure (CI-FIT-3, CLOSE-5, 2026-11-23): 9.4 s lit in the final census at c1128c8f6; about 17.2 s on a CI runner (the measured factor), over three quarters of the default 20 s
 
   it('A2 · the group is the unit: a label never sits beside a flag that contradicts it', () => {
     const subjects = rows().filter(({ rec }) => rec.economicState?.foodSecurity?.label !== undefined
@@ -168,7 +166,12 @@ describe('EM-R0c — the merge: the consequence of an edit is the difference of 
     // 2026-10-30, the service re-map (RS-1..RS-13, ODQ §934.101; cure lane T12): 61 -> 63, re-measured by `withFood()`
     // at f39d5ae2^ (61) and f39d5ae2 (63). The two rows are the germanic road metropolises on mountain and desert, where
     // Fresh fish retail, Grain grinding and Wholesale trade are now filed under food; the stride is now 63 of 63.
-    expect(subjects.length, 'the rows carrying a food collection the two re-derivations can outgrow').toBe(63);
+    // 2026-11-08 (GREEN-BASE), re-measured by `withFood()` over the 63 at each tree: 63 -> 53 at REVIEW-INTAKE unit 2
+    // 69960e5d9 ("a proxy is not a provider": the twelve former proxy hosts own their menus, so the food entries they
+    // lent are gone; 10 rows fall to one food entry) -> 51 at the review-intake lane's merge of rung 1 696ea58b6 (the
+    // household-named housing menus). 51 at the integration tip and at each of the nine wave-lane tips, the same
+    // histogram (12 rows at one entry), so the wave does not move it.
+    expect(subjects.length, 'the rows carrying a food collection the two re-derivations can outgrow').toBe(51);
 
     const padded = [];
     const leaked = [];
@@ -194,7 +197,8 @@ describe('EM-R0c — the merge: the consequence of an edit is the difference of 
     const subjects = withFood();
     // 2026-10-01, the urban band (ODQ §934.86): 54 -> 61, the same re-measured denominator as A3's.
     // 2026-10-30, the service re-map (RS-1..RS-13, ODQ §934.101): 61 -> 63, A3's re-measured denominator again.
-    expect(subjects.length, 'the rows whose food collection has two entries to permute').toBe(63);
+    // 2026-11-08 (GREEN-BASE): 63 -> 51, A3's re-measured denominator again (69960e5d9, then 696ea58b6).
+    expect(subjects.length, 'the rows whose food collection has two entries to permute').toBe(51);
 
     const notJoined = [];
     const neighboursMoved = [];
@@ -222,7 +226,9 @@ describe('EM-R0c — the merge: the consequence of an edit is the difference of 
   it('A5 · a cross-entry total is atomic: incomeSources comes from R1 as one value', () => {
     const subjects = withIncome();
     // 2026-10-30, checked against the service re-map (ODQ §934.101): 61 at f39d5ae2^ and at f39d5ae2, unmoved.
-    expect(subjects.length, 'the rows whose income shares have two entries to re-cut').toBe(61);
+    // 2026-11-15, the close of the tail round (TAIL-CLOSE-DOORS-4, the owner's word, 2026-11-15 06:00 UTC, in the chair's chat; record docs/shift-records/2026-11-15-the-close-of-the-tail-round.json): 61 -> 50, the measured value of this arm's own
+    // run at the golden's tree 8c11f73ea: the round's declared economy moves (the income shares re-cut from the town's own record) leave 11 rows one entry.
+    expect(subjects.length, 'the rows whose income shares have two entries to re-cut').toBe(50);
 
     const notWhole = [];
     const survived = [];
@@ -259,7 +265,8 @@ describe('EM-R0c — the merge: the consequence of an edit is the difference of 
     // golden-master-v3) and U9 d207c8136 (the bottom end: the external mill is fabric) gives the two hamlets back. The row
     // that stays out is village|germanic|forest|isolated|civilized|golden-master-v3: the budget thins its optional draws
     // and it keeps one active chain where it kept seven at master a07ee4e0a.
-    expect(subjects.length, 'the rows whose active chains have an order to keep or to move').toBe(56);
+    // STYLE-2-MERGE point 47 (2026-11-13, the COHERENCE-AGREE merge 22cc9ef7d; a figure its drafted record names for the merge seat): 56 -> 61, the seventh seat's (c) re-deal (the draft: recordMerge A6 56 -> 61).
+    expect(subjects.length, 'the rows whose active chains have an order to keep or to move').toBe(61);
 
     const armOne = [];
     const armTwo = [];
@@ -283,31 +290,15 @@ describe('EM-R0c — the merge: the consequence of an edit is the difference of 
     expect(armTwo, 'the edit moved the order, so R1\'s order governs and the delta names the collection').toEqual([]);
   });
 
-  it('A7 · mirrors recomputed, the receipt recomputed and never taken', () => {
-    const subjects = withMembers();
-    expect(subjects.length, 'the rows whose factions carry the member chips the mirror is declared over').toBe(63);
+  // PEOPLE-5B (2026-11-07, M-7): the MIRROR half of this arm LEFT with the register's `factions[].members[]`
+  // row and `recomputeMirrors` (the grouping leaves the record); the receipt half is unchanged, over every row.
+  it('A7 · the receipt recomputed and never taken', () => {
+    const subjects = rows();
+    expect(subjects.length, 'the stride rows the receipt arm runs over').toBe(63);
 
-    const changed = [];
-    const idle = [];
-    const chipStale = [];
     const takenFromR1 = [];
     const receiptFrozen = [];
     for (const { key, rec } of subjects) {
-      const plain = cl(rec);
-      const before = h(plain);
-      const rewritten = recomputeMirrors(plain);
-      if (h(plain) !== before) changed.push(key);
-      if (rewritten === 0) idle.push(key);
-
-      const roleMoved = cl(rec);
-      const chip = roleMoved.factions.flatMap((faction) => faction.members || [])[0];
-      const npc = roleMoved.npcs.find((person) => String(person.id) === String(chip.id));
-      npc.role = 'PLANTED ROLE';
-      recomputeMirrors(roleMoved);
-      const followed = roleMoved.factions.flatMap((faction) => faction.members || [])
-        .find((member) => String(member.id) === String(chip.id));
-      if (followed.role !== 'PLANTED ROLE') chipStale.push(key);
-
       const R0 = cl(rec);
       const R1 = cl(rec);
       R1.economicState.prosperity = R0.economicState.prosperity === 'Moderate' ? 'Prosperous' : 'Moderate';
@@ -318,9 +309,6 @@ describe('EM-R0c — the merge: the consequence of an edit is the difference of 
       if (recomputeReceipts(cl(out.record)) !== false) receiptFrozen.push(key);
       if (digest === rec.powerStructure.economyInputFingerprint) receiptFrozen.push(`${key}: unmoved`);
     }
-    expect(changed, 'recomputeMirrors rewrites a plain record\'s chips to the values it already holds').toEqual([]);
-    expect(idle, 'and it really rewrote them, so the arm above is not a walk over nothing').toEqual([]);
-    expect(chipStale, 'after a role change the member chip follows the merged roster').toEqual([]);
     expect(takenFromR1, 'the declared receipt is never taken from R1, however R1 spells it').toEqual([]);
     expect(receiptFrozen, 'it is the value a recompute over the MERGED record produces, and here it moved').toEqual([]);
   });
@@ -344,12 +332,12 @@ describe('EM-R0c — the merge: the consequence of an edit is the difference of 
     expect(none.delta.orphaned, 'and an op with no orphans carries the empty list').toEqual([]);
 
     expect(Object.keys(mergeModule).sort(),
-      'FIVE exports, enumerated: there is no symbol here that accepts more than one edit').toEqual([
-      'enclosingGroup', 'guardMergedRecord', 'mergeConsequence', 'recomputeMirrors', 'recomputeReceipts',
+      'FOUR exports, enumerated (PEOPLE-5B: recomputeMirrors left): there is no symbol here that accepts more than one edit').toEqual([
+      'enclosingGroup', 'guardMergedRecord', 'mergeConsequence', 'recomputeReceipts',
     ]);
-    expect([mergeConsequence, recomputeMirrors, recomputeReceipts, enclosingGroup, guardMergedRecord]
+    expect([mergeConsequence, recomputeReceipts, enclosingGroup, guardMergedRecord]
       .map((symbol) => typeof symbol), 'and every one of them is a function').toEqual(
-      ['function', 'function', 'function', 'function', 'function'],
+      ['function', 'function', 'function', 'function'],
     );
     expect(mergeTree(cl(rec), cl(rec), cl(rec)).receipts.keptNodes > 0,
       'the tree merge the public surface is built on really ran over this record').toBe(true);

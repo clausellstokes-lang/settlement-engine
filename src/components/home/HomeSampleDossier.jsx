@@ -166,7 +166,7 @@ export default function HomeSampleDossier({ compact = false }) {
       }}>
         {t('sampleDossier.footer')}{' '}
         <span style={{ fontFamily: serif, fontStyle: 'normal', color: GOLD, fontWeight: 600 }}>
-          {SAMPLE_DOSSIER.npcs.length} NPCs · {SAMPLE_DOSSIER.plotHooks.length} hooks · {SAMPLE_DOSSIER.factions.length} factions
+          {SAMPLE_DOSSIER.npcs.length} NPCs · {SAMPLE_DOSSIER.plotHooks.length} hooks · {SAMPLE_DOSSIER.factions.length} powers
         </span>
       </footer>
     </section>

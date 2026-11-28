@@ -286,7 +286,10 @@ export function applyDocumentHead(view, params) {
   // whenever it re-runs (params identity churns each render). It still owns the
   // site-level bits below, and the canonical is already the entry path (viewToPath
   // handles params.entry).
-  const entryOwned = view === 'compendium' && !!(params && params.entry);
+  // A Compendium SECTION page (/compendium/<section-slug>) owns its head the same
+  // way (seoCompendium.compendiumSectionHead, baked by the prerender and applied by
+  // the lazy panel), so this eager pass leaves those fields alone there too.
+  const entryOwned = view === 'compendium' && !!(params && (params.entry || params.section));
 
   if (!entryOwned) {
     document.title = h.title;

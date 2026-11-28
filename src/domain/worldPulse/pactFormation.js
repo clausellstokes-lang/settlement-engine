@@ -351,12 +351,16 @@ function rungTermsFor(trigger, score01) {
  * `grantTermFor` and `termObligationOf` read. Inverting this expansion would quietly
  * reverse every negotiated clause in the world, so it is never "tidied".
  *
+ * The receipt PRINTS THE COURTS' NAMES (`fromName`/`toName`, the caller's read); an id never
+ * prints, and a caller without names reads "one court" / "the other court".
+ *
  * @param {{trigger: string, fromId: string, toId: string, reciprocal: boolean,
- *   tick: number, score01?: unknown}} input
+ *   tick: number, score01?: unknown, fromName?: unknown, toName?: unknown}} input
  * @returns {{terms: Array<Record<string, unknown>>, refusal: string}}
  */
-export function draftPactSheet({ trigger, fromId, toId, reciprocal, tick, score01 }) {
+export function draftPactSheet({ trigger, fromId, toId, reciprocal, tick, score01, fromName, toName }) {
   const types = rungTermsFor(trigger, score01);
+  const named = { [fromId]: text(fromName).trim() || 'one court', [toId]: text(toName).trim() || 'the other court' };
   if (!types.length) return { terms: [], refusal: 'no_draftable_family' };
   const terms = types.flatMap((type) => {
     const spec = TERM_CATALOG[type];
@@ -381,8 +385,8 @@ export function draftPactSheet({ trigger, fromId, toId, reciprocal, tick, score0
         // stacking cell is unchanged.
         beneficiary,
         receipt: beneficiary === 'both'
-          ? `${fromId} and ${toId} promise ${termLabel(type)} to each other for ${spec.baseYears} years.`
-          : `${beneficiary === fromId ? toId : fromId} promises ${termLabel(type)} to ${beneficiary}`
+          ? `${named[fromId]} and ${named[toId]} promise ${termLabel(type)} to each other for ${spec.baseYears} years.`
+          : `${named[beneficiary === fromId ? toId : fromId]} promises ${termLabel(type)} to ${named[beneficiary]}`
             + ` for ${spec.baseYears} years.`,
       };
       if (spec.stream) { term.deliveredToVictor = 0; term.extractedFromLoser = 0; }
@@ -842,8 +846,10 @@ function refusedWithinCooldown(worldState, keyOf, a, b, tick) {
 /** THE REFUSAL, REMEMBERED. A banded trust delta and a turning-point entry — no grievance,
  *  no casus, no ratchet toward war OR toward pacts (J-GR-7's asymmetry).
  *  @param {{worldState: Record<string, unknown>, keyOf: (a: string, b: string) => string|null,
- *   proposal: Record<string, unknown>, tick: number}} input @returns {Record<string, unknown>} */
-function rememberRefusal({ worldState, keyOf, proposal, tick }) {
+ *   proposal: Record<string, unknown>, tick: number, fromName?: string, toName?: string}} input
+ *  The turning point prints the courts' NAMES (the caller's read), never their ids.
+ *  @returns {Record<string, unknown>} */
+function rememberRefusal({ worldState, keyOf, proposal, tick, fromName = '', toName = '' }) {
   const states = recordOf(recordOf(worldState).relationshipStates);
   const { key, state } = relationshipRecordOf(worldState, keyOf, String(proposal.from), String(proposal.to));
   if (!Object.keys(state).length) return worldState;
@@ -858,7 +864,7 @@ function rememberRefusal({ worldState, keyOf, proposal, tick }) {
         turningPoints: appendRelationshipTurningPoint(state, {
           tick: Math.round(tick),
           kind: 'pact_refused',
-          summary: `${proposal.to} would not treat with ${proposal.from} over ${String(proposal.trigger).replace(/_/g, ' ')}.`,
+          summary: `${toName || 'One court'} would not treat with ${fromName || 'another'} over ${String(proposal.trigger).replace(/_/g, ' ')}.`,
         }),
       },
     },
@@ -1042,7 +1048,10 @@ export function advancePeacetimePacts({
       if (beat) newsEntries.push(beat);
       continue;
     }
-    state = rememberRefusal({ worldState: state, keyOf, proposal, tick });
+    state = rememberRefusal({
+      worldState: state, keyOf, proposal, tick,
+      fromName: courtNameOf(String(proposal.from)), toName: courtNameOf(String(proposal.to)),
+    });
     // BOTH verdicts settle the row `refused`: the question WAS answered, and which answer it
     // was lives on the ENDING. `expired` is reserved for the proposal nobody could answer.
     state = settlePactProposal({ worldState: state, id, state: 'refused' }).worldState;
@@ -1081,6 +1090,7 @@ export function advancePeacetimePacts({
         sheet: draftPactSheet({
           trigger: occasion.trigger, fromId, toId, tick, score01: occasion.score01,
           reciprocal: backs.some((back) => back.trigger === occasion.trigger),
+          fromName: courtNameOf(fromId), toName: courtNameOf(toId),
         }),
       }));
       const asked = drafts.findIndex((draft) => Boolean(draft.sheet.refusal)

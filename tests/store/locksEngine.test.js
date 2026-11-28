@@ -179,11 +179,22 @@ describe('REGEN — a stored id carries nobody, and follows an authored keeper a
       // keeper in npc_2 (the guard below fails as designed). Scanned -0..-60 under this file's
       // mint: 13 of 61 move the keeper; -3 is the first (npc_6 -> npc_8), the seed the sibling
       // pinnedNpcRegenRemap.test.js already carries.
-      null, { seed: 'pins-store-regen-3', customContent: {} },
+      // FIXTURE re-seated `-3`/npcs[2] to `-6`/npcs[14] on 2026-11-07 (PEOPLE-1 CAST dc655f712: ids are the houses'
+      // `npc_<slug>`, stable across a reroll, so a keeper moves only when chooseSlot lands it on another house; under this file's mint
+      // -6's crier npc_town_crier -> npc_mills_2_5 is the first move of -0..-60, then -10 [25] and -60 [20]).
+      // Re-keyed BY IDENTITY npcs[14] -> npcs[17] on 2026-11-12 (COHERENCE-POWERS-4): the same seed and the same crier, still the
+      // first move of -0..-60 under this mint (then -10 [24], -60 [19]), moved in the roster's order by the COHERENCE-POWERS lane's
+      // deal (rule A, 23a2015d4: 14 -> 17), measured at each commit.
+      // Re-keyed BY IDENTITY npcs[17] -> npcs[18] on 2026-11-13 (COHERENCE-POWERS-6 item 1, 9fae351e1: the town's Landed Gentry
+      // is faced by its minted lord, so the miller npc_mills_2_5, no longer its first, sits earlier in the cast's order, at 14,
+      // and the crier moves one place); the same seed and the same crier npc_town_crier, measured at 9fae351e1, 535b58fce,
+      // 7c6373e80 and the tip.
+      null, { seed: 'pins-store-regen-6', customContent: {} },
     )));
     // The survival ground is the ENTITY policy (a user-authored character), not the lock.
-    town.npcs[2]._authored = true;
-    const target = town.npcs[2];
+    expect(town.npcs[18].id, 'the fixture is the crier, by identity').toBe('npc_town_crier');
+    town.npcs[18]._authored = true;
+    const target = town.npcs[18];
     store.setState({ settlement: town, config: town.config, locks: { npcs: [String(target.id)] } });
 
     await store.getState().regenSection('npcs');

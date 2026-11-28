@@ -18,6 +18,10 @@
  *
  *   1. Stamps version fields if absent (schemaVersion, simulationVersion,
  *      generatorVersion). Existing values are preserved — never overwritten.
+ *      ⛔ A LOAD NEVER STAMPS THE CURRENT ENGINE (GUARD, R24j 2): a record with no
+ *      `generatorVersion` is given LEGACY_GENERATOR_VERSION, because the current
+ *      version is written at BIRTH alone (assembleSettlement.js) and a stored place
+ *      is re-derived only by the engine that bore it.
  *
  *   2. Stamps `id` if absent. Deterministic from `_seed` when available
  *      (so the same seed always produces the same id); falls back to a
@@ -48,7 +52,7 @@
 import {
   SCHEMA_VERSION,
   SIMULATION_VERSION,
-  GENERATOR_VERSION,
+  LEGACY_GENERATOR_VERSION,
   FIELD_ALIASES,
 } from './settlement.schema.js';
 import { migrateSettlementToLatest } from './settlementMigrations.js';
@@ -100,7 +104,7 @@ function structuralFingerprint(s) {
   return [
     len(holder?.npcs),
     len(holder?.institutions),
-    len(holder?.powerStructure?.factions ?? holder?.factions),
+    len(holder?.powerStructure?.factions),
     len(holder?.neighbourNetwork),
     len(holder?.history?.historicalEvents),
     len(holder?.config?.nearbyResources),
@@ -166,7 +170,7 @@ export function normalizeSettlement(settlement) {
     return {
       schemaVersion:     SCHEMA_VERSION,
       simulationVersion: SIMULATION_VERSION,
-      generatorVersion:  GENERATOR_VERSION,
+      generatorVersion:  LEGACY_GENERATOR_VERSION,
       id:                contentId(settlement),
       activeConditions:  [],
       simulationTrace:   [],
@@ -183,8 +187,10 @@ export function normalizeSettlement(settlement) {
   // every from:0 migration runs. The chain assigns the final schemaVersion in
   // step 5; stamping it here would make migrateSettlementToLatest skip all
   // migrations. simulation/generator versions are unrelated to migrations.
+  // GUARD (R24j 2): a stampless record is given the LEGACY engine, never the
+  // current one; only a birth (assembleSettlement.js) writes the current version.
   if (out.simulationVersion == null) out.simulationVersion = SIMULATION_VERSION;
-  if (out.generatorVersion  == null) out.generatorVersion  = GENERATOR_VERSION;
+  if (out.generatorVersion  == null) out.generatorVersion  = LEGACY_GENERATOR_VERSION;
 
   // ── 2. Stable id ──────────────────────────────────────────────────────
   if (!out.id) {

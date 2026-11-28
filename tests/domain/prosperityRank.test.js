@@ -190,6 +190,11 @@ describe('the habitat is gone', () => {
   // below: an exemption whose file stopped matching is a stale exemption and reds.
   const EXEMPT = Object.freeze([
     ['src/domain/prosperityRank.js', 'the leaf itself — this IS the one ladder'],
+    ['src/domain/facts/keep.js',
+      'COHERENCE-UPKEEP (d7d7f7787; the chair\'s ruling of 2026-11-12 on item 4): a DIFFERENT QUANTITY. '
+      + 'KEEP_TUNING maps the label to two upkeep SHARES (`bought`, what is bought outright; `funded`, '
+      + 'the funding of wages and works), DRAFT-registered for the owner to sign, not a 0..1 rank of the '
+      + 'label; it is the one home of what a place can keep up, read through keepOf alone'],
     ['src/domain/conditionPromotion.js',
       '⚠ THE FIFTH CONSUMER, found by this walker and NOT in §759.3\'s roster of four. It '
       + 'reads the same categorical but produces a DIFFERENT QUANTITY — a ±0.06 promotion '

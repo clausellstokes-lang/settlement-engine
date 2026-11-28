@@ -1,0 +1,114 @@
+# OWNER-WORDS-DOSSIER — the record (2026-11-09)
+
+**Seat:** OWNER-WORDS-DOSSIER (Claude Opus 5.5), child of the cloud chair (session `session_01FbPLbejcfwX5nii12VM673`). **Lane:** `lane/owner-words-dossier-2026-11-09`, cut from the integration branch `lane/integration-2026-11-07` at `a74715dda`. **Brief:** `docs/chair/2026-11-09/BRIEF-OWNER-WORDS-DOSSIER-2026-11-09.md` on `lane/chair-2026-11-08`, with the chair's amendment by message (the owner, minutes after the brief: "Actually rather than contact, I would say 'Connection:'"). Written 2026-11-09, from 01:07 UTC (read from `date`). Nothing here is signed: every golden movement is listed for MERGE-TRAIN's signing.
+
+**The owner's words (2026-11-09, verbatim):** "In the institution card, before each NPC, say 'Contact:'" (amended: "Connection:") — "In 'the place' the second paragraph seems redundant. The first was amazing." — "The governance description itself seemed disconnected and not to our standard wouldn't you agree?"
+
+## 1. The commits (each one cause, unsigned)
+
+| # | sha | cause | files |
+|---|---|---|---|
+| 1 | `4adb22fdc` | the institution card's face row opens on "Connection:" | `src/components/new/tabs/InstitutionsTab.jsx` · tests: `people6InstitutionFaceLinks`, `dossierPhoneFloorAllViews` |
+| 2a | `99415c4ed` | the ground lens (DS-GEN-12) glances: "The place" no longer re-introduces itself | `src/domain/display/stateProse/dossierMounts.js` (the door), `printProse.js`, `src/pdf/primitives/StateProse.jsx` · tests: `generalDeskTabFlow`, `generalStateProseDesk`, `composeStateProse`, `statePrintParity` |
+| 2b | `1edc73277` | "The place" ends on the arrival scene; the woven block moves below Systems Health | `src/components/new/tabs/OverviewTab.jsx`, `src/pdf/primitives/StateProse.jsx` · tests: `generalDeskTabFlow`, `statePrintParity` |
+| 3a | `984b08948` | the governance block is one paragraph read off the record | NEW `src/domain/display/governanceAccount.js`; `PowerTab.jsx` (governance lines only), `dossierMounts.js` (the door), `src/pdf/sections/PowerStructure.jsx` · tests: NEW `tests/domain/governanceAccount.test.js`, NEW `tests/components/powerGovernanceAccount.test.jsx`; re-keyed `powerStateProseDesk`, `powerTabSupport`, `dossierPhoneFloorAllViews`, `proseNumerics` + its baseline, `rawColorLiteral` |
+| 3b | `0baafc789` | the governance vignettes retire "faction" for "power" (a generator byte) | `src/generators/power/governanceNarrative.js` · tests: `governanceAccount` |
+
+## 2. The measures that came first (the soak 1,000, `soak1k-0..999`, at the base)
+
+**Item 1.** The face row is in `src/components/new/tabs/InstitutionsTab.jsx :: InstitutionCard` (testid `institution-face`, `cardDoor.js :: faceNameOf`), not `npcComponents.jsx` as the brief said (that file holds the NPC card's own honorific row). The PDF prints no face: `src/pdf/sections/Institutions.jsx` prints `inst.leader` as "Head", and no generator sets `inst.leader` — so the PDF has nothing to mirror. CONFIRMED by grep.
+
+**Item 2 — the lenses the general position draws** (`generalDeskRead.js :: siteLines`, the woven block), towns drawing each of 1,000:
+
+| lens (block · mount) | towns | pool families |
+|---|---|---|
+| the ground (DS-GEN-12 · `overview.ground`) — **STRUCK** | 995 | WATER-EDGE 301, HIGH-GROUND 276, DRY-GROUND 154, OPEN-GROUND 139, WOODLAND 125 |
+| the market (DS-GEN-13 · `overview.market`) | 995 | NO-MARKET 433, MARKET-OPEN 231, MARKET-NARROW 171, ENTREPOT 160 |
+| commerce (DS-GEN-13) | 562 | a bank 236, a merchant guild no bank 168, craft guilds no merchant guild 91, a market no guild 67 |
+| warehouses (DS-GEN-13) | 403 | WAREHOUSES 403 |
+| the roster (DS-GEN-17 · `overview.institutions`) | 995 | BARE 363, GARRISONED 339, ADMINISTERED 290, LETTERED 3 |
+| cathedral (DS-GEN-17) | 148 | GREAT HOUSE: cathedral |
+| monastery (DS-GEN-17) | 159 | GREAT HOUSE: monastery |
+
+Lines per town: 0 (5), 3 (433), 4 (141), 5 (247), 6 (59), 7 (115). No lens has another home on the web dossier; the PDF printed the same reader's lines under "The place" (`printProse.js`) and now prints them under the moved heading. **What deletion would lose** (the owner's veto option): 3,262 sentences on 995 towns after the strike — the market's terms (995), the house of credit and the guild order (562), the warehouses (403), what the roster says about how the place is kept (995), and the great house (307).
+
+**Item 3 — the writers and what the record holds.** The vignette is `powerStructure.recentConflict` (`src/generators/power/governanceNarrative.js :: buildGovernanceLabels`; the four stress vignettes in `governingStressVignettes.js`; `stressFactions.js` adds the fractured towns' blocs). The legitimacy reading is DS-POW-1 (banner + lens) and the hall line DS-POW-2, both through `powerStateProse.js`. The record: a seat named on 935 (65 vacant); legitimacy bands Crisis 592 · Contested 192 · Tolerated 149 · Approved 43 · Endorsed 24, each breakdown signed per cause; the ruler's relationships tense 403 · dependent 349 · subordinate 294 · competitive 246 · symbiotic 142 · corrupted 66 (capture 4). Estranged (tense, competitive or corrupted with the ruler) per town: 0 → 515, 1 → 305, 2 → 137, 3 → 36, 4 → 7. **Not held:** a named contradicted decision (no such field) — so the composer writes no such sentence. The fractured towns' stress-added blocs (`Third Bloc (Neutrals)`, a pool-named claimant) are factions but not relationships, so those towns take the vignette. "faction" appeared in 38 vignettes (every one the fractured line). The chair's quoted machinery phrases ("the gap widens", "does not occupy", "rather than being overthrown", "two of the three") matched 0 of 1,000 at the base — the base's DS-POW-1 lenses carry kin phrasing ("Whoever will settle a dispute is obeyed instead", 144 towns; "Nobody at {S} speaks for the whole place any more", 167).
+
+## 3. What moved, and the headings for the veto
+
+**Item 1.** The face row reads `Connection: <honorific> <name>`; the word sits in its own span outside the door, so the link's name stays the face's alone ("Go to Edda Marl").
+
+**Item 2.** (a) THE STRIKE, through its door: the `overview.ground` row in `dossierMounts.js` flips to `glance` (the DS-GEN-3 precedent: the block stays mounted, the desk and corpus untouched; restoring it is one word). The print key moves to `overview.market`, the woven block's first speaking mount (the law "every printed key is a sentence-rung position"). (b) THE MOVE: "The place" renders its title and the arrival scene alone; the rest of the woven block renders after the Systems Health section, at the page's block-prose size, under **"Trade and the houses" — a NEW HEADING PROPOSED FOR THE OWNER'S VETO, the DEFAULT; the alternative beside it for the owner's choice: "Trade and institutions"** (`labelLadder.js` holds styles, not words; no ladder heading fits). The PDF's kicker for the same paragraph carries the same heading.
+
+**Item 3.** ONE paragraph (`governanceAccount.js :: governanceAccountOf`, pure, zero-draw): the seat by name and title → the band with its one or two named causes (causes first) → the estranged powers named (corrupted, split by capture; competitive; tense; each power once, verbs agreeing) → the consequence from the gravest tie → the vignette only where no estranged power is named. The `power.legitimacyBanner` and `power.stabilityHeader` rows glance (one door, screen and print). The score, the band and the breakdown chips stay as data. The print chapter prints the same paragraph where it printed the vignette, under the kicker **"WHO RUNS IT" — PROPOSED FOR THE VETO**. The connective sentences are the owner's to veto: "{place} is governed by {ruler}, and {name}, {title}, holds its seat." · "{causes} have cost {ruler} its standing, and few in {place} still accept its right to rule." (and the four other bands) · "{power} has bought people inside the hall." · "{powers} no longer take its orders." · "{powers} are at odds with it." · "{power} decides what the hall decides." · consequences: "The hall keeps its title and its meetings, but not its decisions." / "The hall still sits, but its arrests and its offices are no longer its own to give." / "The hall still gives its orders, but it can no longer make them hold alone." / "Nothing large is settled in the hall without bargaining with them first." Cause words: poverty, crime, weak defences, hunger / prosperity, safety, strong defences, full stores.
+
+**PowerTab.jsx lines touched (at the base's numbering):** 20 (the import), 199 (the `recentConflict` destructure, removed), 260–263 (the composer's read beside the desk's draws, with the glance note), 358 (the DS-POW-1 glance note), 397–399 (the vignette line out of the Stability box; the DS-POW-2 glance note), 410 (the paragraph's block inserted after the Stability box). The underside panel (base 452 onward, `undersideLines` and its block) is NOT touched.
+
+**The STOP raised to the chair (default implemented, vetoable):** the ruling's "fallback only" reaches every vignette, not only the fractured pool line: on 470 of the 485 estranged towns a stress vignette no longer prints on the Power tab (famine 47, occupied 42, succession_void 41, slave_revolt 40, politically_fractured 38, under_siege 33, insurgency 32, wartime 31, plague_onset 30, recently_betrayed 28, mass_migration 25, religious_conversion 24, indebted 22, monster_pressure 21, infiltrated 16; 15 more lose a baseline vignette). The Overview's crisis card still carries each crisis. Recommended alternative for the veto: a stress vignette other than the fractured line closes the paragraph even when estranged powers are named.
+
+## 4. The governance block, before and after (three towns of the 1,000)
+
+**#3 Al-karez (town)** — BEFORE: "Almost nothing the Guild Council asks of Al-karez arrives. The clerks still keep the rolls, but they have stopped chasing what is missing. Newcomers to Al-karez are told early which door to knock on, and it is not the Guild Council's." · Stability "Desperate — hunger is eroding order; monsters on the roads" · "Food is short, and every quarrel in the settlement has grown sharper for it. Those with stocks are not advertising the fact. Those without are watching those with." · "Nobody at Al-karez argues about who governs any more. The hall does what little it can, and people look after themselves." — AFTER: "Al-karez is governed by the Guild Council, and Duha al-Yamani, the consortium speaker, holds its seat. Poverty and crime have cost the Guild Council its standing, and few in Al-karez still accept its right to rule. The Thieves' Guild has bought people inside the hall. The hall still sits, but its arrests and its offices are no longer its own to give."
+
+**#10 Olympambelos (city)** — BEFORE: "Each season fewer dues reach the Noble Governorship at Olympambelos on time. Nobody refuses outright; payments come late, and some never come. The Noble Governorship has lost Olympambelos's trust over crime. People who do not feel safe stop backing whoever is meant to protect them." · "Newcomers arrive faster than they can be housed, fed or given work. The old residents and the new are not yet one community. Noble Governorship is being asked to do something about it and cannot agree what." · "Anything official at Olympambelos goes to Noble Governorship, and people say little more than that." — AFTER: "Olympambelos is governed by the Noble Governorship, and Evdokia Kalojan, the governor, holds its seat. Crime and hunger have left the Noble Governorship's right to rule contested in Olympambelos. The Religious Authorities and the Noble Families are at odds with it. Nothing large is settled in the hall without bargaining with them first."
+
+**#305 Cerronovum (metropolis), fractured, no estranged power named** — BEFORE: "Each season fewer dues reach the High Theocratic Council at Cerronovum on time. … The High Theocratic Council has lost Cerronovum's trust over crime. …" · Stability "Fractured — no stable governing authority" · "Two factions have stopped coming to High Theocratic Council meetings. Each makes its own decisions now, and the others overturn them within days." · "Anything official at Cerronovum goes to High Theocratic Council, and people say little more than that." — AFTER: "Cerronovum is governed by the High Theocratic Council, and Drusilla Plancus, the chief administrator, holds its seat. Crime has left the High Theocratic Council's right to rule contested in Cerronovum. Two powers have stopped coming to High Theocratic Council meetings. Each makes its own decisions now, and the others overturn them within days."
+
+**The governance lines on the 1,000** (sentences with the town's name blanked): before 6,770 sentences, 1,167 distinct, repeated share 0.926, "faction" on 38 towns, tier noun ("the town" …) on 595, mean 92 words; after 4,458 sentences, 1,481 distinct, repeated share 0.731, "faction" 0, tier noun 94 (from the fallback vignettes; the composer's templates carry none), mean 60 words. The most repeated after: "Nothing large is settled in the hall without bargaining with them first." (212), "The hall still gives its orders, but it can no longer make them hold alone." (207).
+
+## 5. The screenshots (1440 × 900, kept in the seat's scratchpad, not committed)
+
+The dev server in local-data mode on each tree (base `a74715dda` on :5174, tip on :5173), a town forged at `/create` and replayed by its seed (`mw8jqjr3000i00000`, **Burjnagar**, town) on both. Measured text:
+- **Overview, before:** "The place" — the arrival scene, then "The fields start right where Burjnagar's last houses stop. Visitors find Burjnagar's market without asking. An outside trader at Burjnagar either accepts its merchant guild's terms or sells to the guild's members at their price. The town is visibly governed: a hall of justice, a gaol." **After:** "The place" — the arrival scene alone; below Systems Health, "Trade and the houses": "Visitors find Burjnagar's market without asking. An outside trader at Burjnagar either accepts its merchant guild's terms or sells to the guild's members at their price. The town is visibly governed: a hall of justice, a gaol."
+- **Institutions, before:** "Baker Ibtisam al-Jabbar", "Guildmaster Ibrahim ibn Khaldun" … **After:** "Connection: Baker Ibtisam al-Jabbar", "Connection: Guildmaster Ibrahim ibn Khaldun" …
+- **Power, before:** the figure (90 · Endorsed · Prosperity +20 · Safety +20), then "What the Merchant Council says at Burjnagar gets done, and nobody asks why. …", Stability "Fragile (private security, no public law)", "A guild's private soldiers arrested a rival's factor. …", "Merchant Council holds the hall at Burjnagar and the town's affairs run through it." **After:** the same figure and Stability tile, then one paragraph: "Burjnagar is governed by the Merchant Council, and Nabil al-Jazari, the head of Merchant Council, holds its seat. Prosperity and safety have won the Merchant Council the backing of Burjnagar. A guild's private soldiers arrested a rival's factor. The watch is refusing to intervene in what they call a 'merchant matter'."
+
+Noticed, not this seat's, for the intake: the arrival scene prints "Amerchant argues with a carter…" (a missing space in the arrival writer); `src/domain/hookEscalation.js` carries "Two factions with overlapping power and conflicting wants." on a hook surface.
+
+## 6. The deltas, stage to stage (`scripts/audit/landing-stage.sh build|measure`, each step's tree with the door paths carried, measured against the previous step's stage)
+
+| step | gm /525 | fence /360 | herald | prose /1,050 | witness | PDF snapshot |
+|---|---|---|---|---|---|---|
+| 1 `4adb22fdc` | 0 | 0 | 0 | 0 | 0 | 0 |
+| 2a `99415c4ed` | 0 | 0 | 0 | 0 | 0 | 0 |
+| 2b `1edc73277` | 0 | 0 | 0 | 0 | 0 | 0 |
+| 3a `984b08948` | 0 | 0 | 0 | 0 | 0 | 0 |
+| 3b `0baafc789` | 0 | **7** (village 1, town 1, city 1, metropolis 4; corpus `fe0dde0e…` → `91304dce…`) | 0 | 0 | 0 | 0 |
+
+**For MERGE-TRAIN's signing:** the fence's seven rows at 3b (the vignette's literal on the fractured and royal-succession towns of the fence corpus). No prose manifest cell moves (measured 0/1,050 at 2a and 3a; PLAUSIBLY because the manifest records the desks' draws and both cuts are at the registry's rung) — so the composed-prose manifest has nothing to sign for items 2 and 3. The PDF view-model snapshot does not move (the paragraph is composed in the chapter, not the view model); the rendered PDF does move: "The place" kicker → "Trade and the houses", the DS-POW-1/2 paragraphs gone, "RECENT EVENT" → "WHO RUNS IT" with the paragraph.
+
+## 7. The referee and the suites
+
+**The referee once on the 1,000** (`node scripts/audit/soak-review.mjs --count 1000 --workers 4`) at the base and at the tip: 766 → 766 findings, every class identical (info:battery-would-not-vouch 698, reader:tension-memory 61, A-09:behaviour-line-share 4, reader:hook-pools 3), `coh:tier-noun` 0 at both and on these lines; repetition: distinct sentences 40,893 → 40,829, sentences shared by 10% of towns 895 → 892, median share of a town in such sentences 0.483 → 0.487.
+
+**Red at the base and not this lane's** (each failure set identical at `a74715dda`, run in a clean worktree): the generator golden master, the espionage fence, `pipelinePinnedChoosers` A1, `powerEconomyFreshness` A4, `religionLegitimacyFactionKey`, `composeStateProse` "THE CELL ARM" (60 vs 72), the prose manifest arms, `dossierStateProseProjection`, `proseWiringCensus`, `worldFactRederive` A7, `readerValidationOnPage` soak1k-24. Green at the tip: the phone floors (re-keyed by cause), the Overview suites, the Power suites, `statePrintParity`, the mount registry walker, the prose-numerics and raw-colour ratchets (re-keyed by cause).
+
+## 8. CONFIRMED against PLAUSIBLE
+
+CONFIRMED (executed): every red-first red at its parent and green at its commit; the six deltas per step; the referee's identity; the before/after text of the three towns and of Burjnagar on both trees. PLAUSIBLE: that the paragraph's connective copy reads to the owner's standard (the owner's to judge); that no other surface reads `power.recentConflict` as the governance story (grep found only the PDF chapter, now moved).
+
+## 9. ADDENDUM — the chair's rulings of 2026-11-09 (00:33 and 01:09 UTC), applied (written from 01:52 UTC, read from `date`)
+
+**The commits after the first hand-back** (each one cause, unsigned):
+
+| # | sha | cause |
+|---|---|---|
+| 3c | `4fad57bfb` | a stress vignette closes the paragraph (the chair's ruling on the STOP): under a primary stress other than politically_fractured the vignette is the event sentence, whatever else is named; the fractured and unstressed lines stay the fallback |
+| 3d | `3083d7cbb` | condition (b): a vacant seat is the first fact — "No one holds the seat at {settlement}." — then the claimants the chain names ("… contend for it."), else "Until it is filled, {ruler} governs without a head." |
+| 3e | `237fbf05f` | condition (c): a fractured town NAMES the blocs its stress added (read by the description the record keeps for each, pinned against the generator's own writer); where a claimant or the reform bloc is named, the fractured line's own consequence follows and the unnamed line is not printed |
+| 3f | `aac5e42db` | condition (e): seed-chosen ARRANGEMENTS (FNV-1a of `<seed>::<slot>`, pure): the seat sentence three, each standing band with causes two, each estranged tie two, each consequence two or three, the fracture's consequence two — the same facts reordered, never ornament |
+| R | `e6921e515` | the writer-reach register re-frozen through its door (`check-writer-reach.mjs --write`, shrink-only, cohort 1353 → 1353): the paragraph's reads gain reach (captureState/type/pair on factionRelationships: web-display and dossier-pdf R); LIT 659 → 661, DARK unchanged |
+
+**Corrected out loud:** the writer-reach walker was RED at my first hand-back tip `bd3976e11` (from 3a, the composer's read of `captureState`) and I did not run it there; it is cured at `e6921e515`, green with the observed-shape suites (227 tests).
+
+**Condition (a), confirmed:** the band word and the breakdown chips stay visible as data — on the tab the figure tile prints the score, the band word and the moved chips (Burjnagar after: "90 · Endorsed · Prosperity +20 · Safety +20"), the Stability tile its label; in print `ScoreWithBreakdown` keeps score, band and breakdown. The glance rows silence only the DS-POW-1/2 sentences.
+
+**Item 2, what the strike loses and what still carries the terrain:** DS-GEN-12's five ground families (WATER-EDGE 301, HIGH-GROUND 276, DRY-GROUND 154, OPEN-GROUND 139, WOODLAND 125) on 995 towns. The terrain still prints: the identity strip's terrain chip on 1,000 of 1,000 (CONFIRMED, `resourceAnalysis.terrain`); the identity line names the ground on about 356 and the literary paragraph (the arrival scene) on about 390 (PLAUSIBLE: a keyword count of ground words — hill, river, coast, forest, plain, desert and kin).
+
+**The governance paragraph on the 1,000 at `aac5e42db`:** the vignette prints on 939 towns; of the 485 that name an estranged power, 433 keep their stress vignette (the rest are fractured-primary or unstressed, whose line the names replace); the fracture's blocs named on 35; a vacancy opens the paragraph on 65. "faction" on 1 town (#905 Milotsy: the record's own claimant name "Noble Claimant (Reform Faction)", written by the royal succession stress — a generator NAME, for the chair's intake, not rewritten here). Sentences 5,829; frames (names → @) 189 → 230 distinct; the most repeated frame 935 → 328 (the seat's three arrangements 328 / 308 / 299; the standing's two 242 / 234; the most repeated consequence 80); repeated-sentence share (the town's name blanked) 0.731 → 0.775 (the stress vignettes restored by 3c are generator lines shared across towns); mean 76.5 words.
+
+**The referee once more on the 1,000 at `aac5e42db`:** 766 findings, every class identical to the base; `coh:tier-noun` 0; the referee's top-20 most repeated frames: none raised and none new (60 listed at each); distinct sentences 40,893 → 40,930, shared by 10% of towns 895 → 889, median share 0.483 → 0.482.
+
+**The deltas at the new steps** (stage to stage from `0baafc789`): 3c, 3d, 3e, 3f each gm 0/525, fence 0/360, herald 0, prose 0/1,050, witness 0, PDF snapshot 0. **For MERGE-TRAIN's signing, the whole lane:** the fence's 7/360 at 3b, nothing else.
+
+**The suites at the tip:** the Power, Overview and Institutions suites, the phone floors, `statePrintParity`, `powerStateProseDesk`, the writer-reach and observed-shape walkers green; red and identical at the base: the golden master, the fence, `pipelinePinnedChoosers` A1, `powerEconomyFreshness` A4, `religionLegitimacyFactionKey`, `proseWiringCensus`, `readerValidationOnPage` soak1k-24, `layerBoundaries` dependency-cycle (foodGenerator ↔ isolationSupport).

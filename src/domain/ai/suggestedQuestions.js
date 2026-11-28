@@ -37,10 +37,10 @@ export function suggestedQuestions(anchor = {}, { settlement = null, worldState 
 
   if ((scope === 'settlement' || scope === 'map') && settlement) {
     const name = forName(settlement.name);
-    const factionList = settlement.factions || (settlement.powerStructure && settlement.powerStructure.factions);
+    const factionList = settlement.powerStructure && settlement.powerStructure.factions;
     const hasFactions = Array.isArray(factionList) && factionList.length > 0;
     const hasNpcs = Array.isArray(settlement.npcs) && settlement.npcs.length > 0;
-    if (hasFactions) push(`What factions hold sway in ${name}?`);
+    if (hasFactions) push(`Which powers hold sway in ${name}?`);
     push(`What is the state of ${name} this week?`);
     if (hasNpcs) push(`Who are the key figures in ${name}?`);
     push(`What can I tell the players about ${name}?`);

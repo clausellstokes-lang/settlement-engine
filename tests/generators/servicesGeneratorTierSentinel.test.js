@@ -50,13 +50,13 @@ describe('servicesGenerator — criminal-services tier gate resolves tier before
 
   it('a random-mode settlement with resolved tier=village does NOT get large-tier "Contraband"', () => {
     // settType is the 'random' sentinel; the RESOLVED tier (village) must win.
-    // 'No law, bring coin' is the small-tier criminal line this config DOES earn, so it
+    // 'Weak law, bring coin' is the small-tier criminal line this config DOES earn, so it
     // anchors the exclusion: a roster that stopped generating criminal services at all
     // would otherwise satisfy "no Contraband" while proving nothing about the gate.
     expectAbsentWithAnchor(
       criminalNames({ ...crimeConfig, settType: 'random', tier: 'village' }),
       'Contraband',
-      'No law, bring coin',
+      'Weak law, bring coin',
       'resolved village tier blocks the large-tier fallback',
     );
   });
@@ -65,7 +65,7 @@ describe('servicesGenerator — criminal-services tier gate resolves tier before
     expectAbsentWithAnchor(
       criminalNames({ ...crimeConfig, settType: 'random', tier: 'hamlet' }),
       'Contraband',
-      'No law, bring coin',
+      'Weak law, bring coin',
       'resolved hamlet tier blocks the large-tier fallback',
     );
   });

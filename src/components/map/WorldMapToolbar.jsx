@@ -49,7 +49,7 @@ const MULTI_TICK_INTERVAL_LABELS = Object.freeze({
   one_year: '1 year',
 });
 
-/** The base Undo title (the session-only caveat is preserved verbatim). When a
+/** The base Undo title (the session-only caveat always closes it). When a
  *  multi-tick interval is named, the lead sentence gains the interval so the GM
  *  reads what one undo reverts; otherwise the copy is byte-identical to before. */
 function undoTitleFor(interval) {
@@ -57,7 +57,7 @@ function undoTitleFor(interval) {
   const lead = label
     ? `Undo the last realm advance (${label}).`
     : 'Undo the last realm advance.';
-  return `${lead} Restores the pre-pulse world and every settlement. This undo is available for the current session only. The advance cannot be undone after the page reloads.`;
+  return `${lead} Puts the world and every settlement back as they stood before it. This undo lasts only for this session: after a page reload the advance stays.`;
 }
 
 /** A spacing-only group separator. Replaces the 1px hairline dividers — grouping
@@ -247,7 +247,7 @@ function ResumeChip({ pausedAdvance, onResume, disabled }) {
  *  panel cannot); its session-only caveat is repeated here for touch readers. */
 const MAP_CONTROL_HELP = Object.freeze([
   ['The realm', [
-    ['Advance Realm', 'Advances the living world by the interval you choose above (a week through a year). Each advance runs a pulse whose changes wait for your review.'],
+    ['Advance Realm', 'Moves the living world forward by the interval you choose above (a week through a year). What needs your word waits in the World Pulse panel.'],
     ['Undo Advance', 'Rolls the world back to just before the last advance. Available for the current session only; a page reload makes the advance permanent.'],
   ]],
   ['View', [
@@ -259,7 +259,7 @@ const MAP_CONTROL_HELP = Object.freeze([
     ['Save', 'Saves the current map to the active campaign. Auto-save keeps it current between manual saves.'],
   ]],
   ['More menu', [
-    ['Rules', 'Opens the simulation rules: the dials and engine waves that shape how the realm evolves.'],
+    ['Rules', 'Opens the simulation rules: the settings that decide how the realm changes.'],
     ['Quiet · Realistic · Dramatic', 'One-click presets that set how eventful the simulation runs.'],
     ['Import / Clear Image', 'Import Image drapes a picture of your own over the map; Clear Image returns to the generated terrain.'],
     ['Share to gallery', 'Opens the share editor to publish this map to the public gallery.'],

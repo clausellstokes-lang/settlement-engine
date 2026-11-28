@@ -340,6 +340,7 @@ export const TAX_PROFILE = Object.freeze({
  */
 export const INCOME_SOURCE_FORMS = Object.freeze({
   'Agricultural Rents': 'land_rents',
+  'Harvest': 'land_rents', // TAIL-DEFECON-2 (D10, by exception): the rents row's twin where no lord's man stands, the same home
   'Property Rents': 'land_rents',
   'Toll Revenue': 'market_tolls',
   'Gate Tolls': 'market_tolls',
@@ -358,6 +359,14 @@ export const INCOME_SOURCE_FORMS = Object.freeze({
   'Military Extraction': 'levy_extraction',
   'Enchanted Goods Premium': 'misc_trade',
   'Grain Sales': 'misc_trade',
+  // UPKEEP-16 (o re-ruled, D): a kept resource row with no house of its trade is titled by the good it sells
+  // (incomeLineSiblings.js :: GOOD_SOLD_TITLES); each is the misc_trade form its old title held, so no tax form moves.
+  'Building Stone Sales': 'misc_trade',
+  'Clay Sales': 'misc_trade',
+  'Coal Sales': 'misc_trade',
+  'Iron Ore Sales': 'misc_trade',
+  'Precious Metal Sales': 'misc_trade',
+  'Salt Sales': 'misc_trade',
   'Iron & Metalwork': 'misc_trade',
   'Security Contracts': 'misc_trade',
   'Stone Quarrying': 'misc_trade',

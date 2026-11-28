@@ -23,6 +23,26 @@
  * is rng-free, so the token is `null` for them and the draw order is byte-identical
  * to the old inline closures.
  */
+import { drawDeclared, resolveSiblingSentences } from '../domain/facts/drawDeclared.js';
+import { atomHolds } from '../domain/facts/factVocabulary.js';
+
+/**
+ * #8 (STYLE-RULINGS §1(b), WAVE-RULINGS item 8; W4 PEOPLE second seat 2026-11-07): the migration's crisis
+ * hook in TWO sets on W0's `stress[].direction`, never one for both. Kept here, beside the summary the
+ * same direction picks, and not in `data/stressTypes.js`: only the generator reads it, and the data file
+ * rides first paint. The type-level hook in STRESS_TYPE_MAP stays the catalogue's (it lists the kind).
+ */
+export const MIGRATION_HOOK_BY_DIRECTION = Object.freeze({
+  arrivals: 'Someone has offered to find the newcomers work and a roof, for a price, and those in charge must decide whether to pay it.',
+  departures: 'Someone is paying families to leave, and nobody yet knows who wants the houses they leave behind.',
+});
+
+/** mass_migration's food sentence, the key of its declared sibling set (STRESS_SUMMARY_SIBLINGS). */
+const MIGRATION_FOOD = 'Newcomers arrive faster than housing, food and work can be found for them.';
+/** wartime (loss)'s price sentence, the key of its declared sibling set (CENSUS-2d; the chair's answer 1, R-U). */
+const WARTIME_PRICES = 'Food prices have doubled.';
+/** plague_onset's healer sentence, the key of its declared sibling set. */
+const PLAGUE_HEALERS = 'Healers are overwhelmed.';
 
 /**
  * Roll the rng-derived choices for a stressor summary.
@@ -52,12 +72,52 @@ export function rollStressSummary(type, { rng } = {}) {
  * @param {string} type - key from STRESS_TYPE_MAP
  * @param {string} [name] - the real settlement name (empty/undefined at roll time)
  * @param {?Object} [roll] - token from rollStressSummary (only wartime uses it)
+ * @param {'arrivals'|'departures'} [direction] - the entry's own `direction` (mass_migration only;
+ *   WIRING-W0, domain/migrationDirection.js); absent reads as arrivals, the §934.101 default
+ * @param {object|null} [facts] - `factsOf(record)` at assembly (CENSUS-2c): a sentence of the
+ *   paragraph that is a key of STRESS_SUMMARY_SIBLINGS resolves through its declaration, after the
+ *   render and draw-free. Absent (the provisional roll-time render): every sentence is kept.
+ *   MERGE-R2: both kept — W0's direction (the one fact) and the census's declared sentences.
  * @returns {string|undefined}
  */
-export function renderStressSummary(type, name, roll) {
+export function renderStressSummary(type, name, roll, direction, facts = null) {
   const fn = RENDERERS[type];
-  return fn ? fn(name, roll) : undefined;
+  if (!fn) return undefined;
+  const text = fn(name, roll, facts, direction);
+  return facts ? resolveSiblingSentences(text, STRESS_SUMMARY_SIBLINGS, { facts, poolId: 'stressNarrative:STRESS_SUMMARY_SIBLINGS', surface: 'crisis', drawKind: 'T' }) : text;
 }
+
+/**
+ * THE DECLARED SENTENCES OF THE STRESS NARRATIVE (CENSUS-2c; `docs/DESIGN_POOL_CENSUS.md` §3.1, the
+ * chair's R-P 1). A sentence a renderer prints that presumes a fact the stressor alone does not
+ * guarantee is a declared sibling set keyed by its own text: the original with its atoms, and its
+ * twin (`twinOf`) — what the record DOES hold — reached only when the original is refused. A keyed
+ * renderer does not re-declare its own stressor (R-B1). Each twin is the chair's ruling (R-G),
+ * recorded in `docs/CENSUS_2_LANE_2026-11-04.md` "CENSUS-2c" with its share: a T cell, so a twin
+ * moves only the births whose original is refused.
+ * @type {Readonly<Record<string, ReadonlyArray<Readonly<{ text: string, crisis?: string[], needs?: string[], excludes?: string[], twinOf?: string }>>>>}
+ */
+export const STRESS_SUMMARY_SIBLINGS = Object.freeze({
+  // mass_migration: "faster than … food … can absorb them" needs the food record's deficit (the
+  // food record counts the influx at ×1.15, so a fed influx is FED: CENSUS-1c unit 7).
+  [MIGRATION_FOOD]: Object.freeze([
+    Object.freeze({ text: MIGRATION_FOOD, crisis: ['hunger'] }),
+    Object.freeze({ text: 'Newcomers arrive faster than housing and work can be found for them.', twinOf: MIGRATION_FOOD, excludes: ['crisis: hunger'] }),
+  ]),
+  // plague_onset: "Healers are overwhelmed" needs a healer, an infirmary or a monastic house
+  // (`factsOf(record).defence.healer`); most thorps and hamlets have none (Phase A's ledger).
+  [PLAGUE_HEALERS]: Object.freeze([
+    Object.freeze({ text: PLAGUE_HEALERS, needs: ['healer'] }),
+    Object.freeze({ text: 'The sick outnumber those who can tend them.', twinOf: PLAGUE_HEALERS, excludes: ['healer'] }),
+  ]),
+  // wartime (loss): a doubled price is the food deficit speaking (R-U; the chair's answer 1 to
+  // CENSUS-2c): the line needs `crisis: hunger`; a war fought on a secure food record takes what
+  // the war takes that is not grain (the twin, the chair's ruling R-G).
+  [WARTIME_PRICES]: Object.freeze([
+    Object.freeze({ text: WARTIME_PRICES, crisis: ['hunger'] }),
+    Object.freeze({ text: 'The army has the carts and the road, and the fields are short of hands.', twinOf: WARTIME_PRICES, excludes: ['crisis: hunger'] }),
+  ]),
+});
 
 /**
  * Legacy single-call shim. Any caller not yet migrated to the roll/render split
@@ -75,67 +135,98 @@ export function stressSummary(type, ctx = {}, { rng } = {}) {
 
 const RENDERERS = {
   under_siege: (name) =>
-    `${name} is under active siege. Land supply lines are cut or contested. Morale is fracturing under sustained pressure. Every decision carries the weight of survival.`,
+    `Enemies are camped around ${name}, and nothing comes in by road. Inside, people argue over whether to hold out or give in.`,
 
-  famine: (name) =>
-    `${name} is in its second failed harvest season. Rationing has begun. The wealthy are hoarding. Children are visibly hungry.`,
+  // famine: "lost its harvest" presumes the place grows grain (R2-CODE-B item 6; the cold list REVIEW-W2A-3
+  // #857: a fishing town whose food record holds `foodSources` ["fish"]). A line written in code is a pool of
+  // two checked at its print site: the vocabulary's `grain` atom (the food record's own source) read by
+  // `atomHolds`; where the record grows none, the twin says what the famine is. No draw; an unread record
+  // (no facts, or the atom unanswered) keeps the line as it always read.
+  famine: (name, _roll, facts) => {
+    const rest = ' Rationing has begun, the wealthy are hoarding, and the children are visibly hungry.';
+    const noGrain = facts ? atomHolds('grain', facts) === false : false;
+    return noGrain
+      ? `${name} has gone short of food for a second season.${rest}`
+      : `${name} has lost its harvest for a second season.${rest}`;
+  },
 
   occupied: (name) =>
-    `${name} is under the administrative control of an outside power. Locals comply outwardly. Resistance exists, distributed and careful.`,
+    `The forces of another power hold ${name}, and its own officials take their orders. Most people keep their heads down; a few fight back in secret.`,
 
   politically_fractured: (name) =>
-    `${name} has no stable governing authority. Two or three factions each control part of the settlement and none will yield. Daily life continues, but every interaction has a political valence.`,
+    `Two or three powers each run part of ${name}, and none will give way. Daily life goes on, but nothing is done without asking whose side it helps.`,
 
   indebted: (name) =>
-    `${name} owes a debt it cannot repay to an external power: a merchant house, a noble, a guild confederation, or something older. The debt is now a leash.`,
+    `${name} owes an outside power more than it can ever repay, and the debt now decides what it can and cannot do.`,
 
   recently_betrayed: (name) =>
-    `${name} was betrayed from within: recently enough that the wound hasn't closed. Someone trusted sold something important. The settlement knows it, but the full picture is not yet known.`,
+    `Someone trusted in ${name} sold something important, not long ago. Everyone knows it happened; nobody yet knows who, or how much was lost.`,
 
   infiltrated: (name) =>
-    `${name} has been quietly penetrated by an outside interest. Enemy agents, a cult, a merchant intelligence network. The settlement does not know. Key decisions are being subtly shaped.`,
+    `Agents of an outside power have worked their way into ${name}, close to the people who decide things, and nobody there knows it.`,
 
   plague_onset: (name) =>
-    `Something is spreading in ${name}. It is not yet a plague, but it will be if nothing changes. Healers are overwhelmed. The origin is disputed. Quarantine measures are being resisted.`,
+    `Something is spreading in ${name}. It is not yet a plague, but it will be if nothing changes. ${PLAGUE_HEALERS} The origin is disputed. Quarantine measures are being resisted.`,
 
   succession_void: (name) =>
-    `The last strong leader of ${name} died recently. No one has consolidated authority. Power is available to whoever moves first, and several parties are aware of this simultaneously.`,
+    `${name}'s last strong leader died recently with no clear heir, and several people are racing to take the seat first.`,
 
-  monster_pressure: () =>
-    "Something in the surrounding region has grown bolder. Caravans are disappearing. A farmstead burned last week. Whether wolves, raiders, or worse. The settlement's defences are adequate for normal times, but these are not normal times.",
+  // monster_pressure (TAIL-CRISIS K3; READ-ALL 18434 12078): "caravans go missing" presumes trade on the roads, and "Its
+  // defences were built for quieter times" presumes a defence. Each is a pool of two checked here, at its print site,
+  // from the vocabulary's own atoms: where the record brings nothing in (`imports` refused) the losses are the fields'
+  // beasts; where it keeps no wall, palisade, watch, militia or garrison (every one refused) the twin says so. No draw;
+  // an unread record (no facts, or an atom unanswered) keeps the line as it always read.
+  monster_pressure: (name, _roll, facts) => {
+    const place = name || 'the settlement';
+    const noTrade = facts ? atomHolds('imports', facts) === false : false;
+    const undefended = facts ? MONSTER_DEFENCES.every((a) => atomHolds(a, facts) === false) : false;
+    return `Something in the country around ${place} has grown bolder: ${noTrade ? 'beasts go missing from the fields' : 'caravans go missing'}, and a farmstead was lost to fire last week. ${undefended ? 'It has nothing built or kept to hold such things off.' : 'Its defences were built for quieter times.'}`;
+  },
 
   // insurgency: the old closure branched on `typeof getInstFlags == 'function'`
   // (ALWAYS FALSE under ESM) → only the else-branch ever rendered. data-schema.6:
   // dead branch removed; this is exactly that else-branch text.
-  insurgency: (name) => {
+  // TAIL-CRISIS K3 (READ-ALL 03091 12113, the reader's HIGH: "A strong power in Dioneia has stopped obeying the government"
+  // where the government is the only power on the record; at bcad1a358, 10 of the census's 37 insurgencies, every hamlet
+  // and six of the eight thorps). The plain line claims no more than every insurgency bears: some in the place, never "a
+  // power", and no singular "it" for them.
+  // TAIL-CRISIS-5 (the chair's ruling K21; K6's atom, K10's hazard answered): the strong line is a pool of two checked
+  // here, at its print site: it needs a rival of standing (`rival power`: a power other than the governing one at
+  // Significant or above, TRUE OF THE SETTLED RECORD ONLY). It is settled where the line is stored: the assembly's late
+  // re-read renders this again after the last roster write (assembleSettlement.js, THE LATE RE-READ). Anything else
+  // (refused, unanswered, no facts) keeps the plain line, true in every insurgency. No draw.
+  insurgency: (name, _roll, facts) => {
     const h = name || "the settlement";
-    return (
-      "A powerful faction in " +
-      h +
-      " has decided the current government is illegitimate. The challenge is quiet, institutional, and dangerous, not street fighting but the systematic withdrawal of cooperation."
-    );
+    return facts && atomHolds('rival power', facts) === true
+      ? "A strong power in " + h + " has stopped obeying the government. Its people stall, its taxes go unpaid, and it waits."
+      : "Some in " + h + " have stopped obeying the government. They stall, their taxes go unpaid, and they wait.";
   },
 
-  religious_conversion: (name) => {
+  // religious_conversion: three wordings, picked by the name's length (an H modulus). Variants 0
+  // and 1 presume the old religious house (`institution: temple`; Phase A's ledger): with facts in
+  // hand the pick runs through `drawDeclared` over the FULL list (the modulus unchanged), and a
+  // refused pick resolves to the admitted variant by the kernel's hash — variant 2, the one that
+  // presumes no building. No new wording. With no facts (the provisional render) the pick is kept.
+  religious_conversion: (name, _roll, facts) => {
     const s = name || "the settlement";
     const o = name ? name.length % 3 : 0;
-    return o === 0
-      ? "A new faith is gaining ground in " +
-          s +
-          ". The old religious institution still holds its buildings and its records, but it is losing the congregation. The priest gives a service on Sunday to a room that is quietly, consistently, slightly emptier than the week before."
-      : o === 1
-        ? "The religious community of " +
-          s +
-          " has fractured. Both factions claim the legitimate succession. Both hold services. Both have a priest who will not acknowledge the other. The congregation has been forced to choose, and some of them have chosen neither."
-        : "An outside authority is requiring " +
-          s +
-          " to convert. The governing faction has formally complied. The population's compliance is more varied, more private, and more complicated than the official record shows.";
+    const variants = RELIGIOUS_CONVERSION_VARIANTS(s);
+    if (!facts) return variants[o].text;
+    return drawDeclared(variants, { draw: (p) => p[o], facts, key: `stressNarrative:religious_conversion::${s}`, /* R-AT (CENSUS-1i unit 5): the settlement's name, not a constant */ poolId: 'stressNarrative:RELIGIOUS_CONVERSION', surface: 'crisis', drawKind: 'H', keepRefused: true }).text ?? variants[o].text; // R-AM: a kept beat is noted
   },
 
-  slave_revolt: (name) =>
+  // slave_revolt: presumes only what the key guarantees, enslaved people and their revolt (R-U; the
+  // chair's answer 2 to CENSUS-2c). "The slave market's holding facilities have been breached"
+  // presumed a slave market, which has no fact home (`institution: slave market` is listed under
+  // "needs a home" in docs/CENSUS_2_LANE_2026-11-04.md "CENSUS-2d").
+  // TAIL-CRISIS (READ-ALL 28958): "Whole work gangs" in a thorp or a hamlet (the vocabulary's `tier` band; every thorp
+  // and hamlet revolt of the census's 24 is below a village) presumes a workforce the place has not; there the twin.
+  slave_revolt: (name, _roll, facts) =>
     "The enslaved population of " +
     (name || "the settlement") +
-    " has organised. What began as work stoppages and passive resistance has moved into open defiance. The slave market's holding facilities have been breached. The governing authority's first response was inadequate. Its second response is still being decided.",
+    " has organised. What began as work stoppages and passive resistance has moved into open defiance. " +
+    (facts && atomHolds('tier: ≥ village', facts) === false ? "Those set to work have downed tools and will not take them up again." : "Whole work gangs have downed tools and will not take them up again.") +
+    " The governing authority's first response was inadequate. Its second response is still being decided.",
 
   // wartime: the profit text names no garrison (lane DEFENSE-2, 2026-11-03). It is rendered from
   // the stress type and the place's name alone, with no roster in reach, so it says only what
@@ -144,13 +235,32 @@ const RENDERERS = {
   // wartime: the only summary that draws from rng. rollStressSummary made the draw
   // (`rng() < 0.45` → roll.profit) at the pipeline's draw point; this pure render
   // just branches on that pre-rolled token (the draw is unchanged; the profit text is not).
-  wartime: (name, roll) => {
+  // R2-CODE-B item 6 (the cold list REVIEW-W2A-3 #670: "doing well out of it" for a city whose prosperity
+  // is Poor and whose Economics reads "The place earns less than it spends"): the profit text is true only
+  // at `prosperity: ≥ moderate` (the vocabulary's band, read by `atomHolds` at this print site); refused,
+  // the pick resolves to the next row, the loss text (no line added, the coin's draw unchanged). The loss
+  // text stands as it always did; an unread record keeps the coin's text.
+  // R2-CODE-B-5 (the chair's ruling, routed from round three's code lane: "merchants with the right friends are getting rich"
+  // in small places with no merchant, and "army contracts pay" in an isolated one): the profit text names merchants, so it
+  // needs a market or a merchant house on the live roster (`market`, facts/market.js: a house the catalogue tags 'market',
+  // or 'guild' and 'trade'); and an isolated place (`route: isolated`) is not said to do well on army contracts. Refused, the
+  // pick resolves as before to the loss text (no line added, the coin's draw unchanged).
+  // R2-CODE-B-6 item 0 (the chair's ruling): "Supply caravans pass through on crown requisition" is false of an isolated
+  // place (`route: isolated`, the record's own trade route): no caravans pass through it. No sentence is true there in
+  // its place, so the loss text leaves the clause out (silence, not a twin). No draw; an unread record keeps it.
+  // The same fault in the price line (the chair's ruling, R2-CODE-B-6): on a fed record (`crisis: hunger` refused)
+  // "Food prices have doubled." resolves to its CENSUS-2d twin "The army has the carts and the road, …", and an
+  // isolated place has no road; the resolver reaches one twin only, so where the place is isolated AND fed the line
+  // is left out here, before the declared resolution. Under hunger the price line prints as before.
+  wartime: (name, roll, facts) => {
     const s = name || "the settlement";
-    return roll?.profit
-      ? s +
-          " is in a kingdom at war and currently positioned to profit. Military contracts are flowing. Prices are high and merchants with the right connections are getting richer. The cost will come due (it always does), but for now the war is good for business."
-      : s +
-          " is in a kingdom fighting a war it may not win. Conscription has taken a third of the working-age men. Supply caravans pass through on crown requisition. Food prices have doubled. The governing authority is demanding sacrifice while certain families are quietly thriving on contracts.";
+    const isolated = facts ? atomHolds('route: isolated', facts) === true : false;
+    const fedIsolated = isolated && atomHolds('crisis: hunger', facts) === false;
+    const [profit, loss] = WARTIME_VARIANTS(s, isolated, fedIsolated);
+    const refused = facts
+      ? atomHolds('prosperity: ≥ moderate', facts) === false || atomHolds('market', facts) === false || isolated
+      : false;
+    return roll?.profit && !refused ? profit.text : loss.text;
   },
 
   // mass_migration: the old closure used `typeof getInstFlags == 'function'` (ALWAYS
@@ -159,11 +269,80 @@ const RENDERERS = {
   // and NEVER evaluated. data-schema.6: the dead getInstFlags branch is removed AND
   // the never-reached rng term is dropped, so `d` is always true. This preserves both
   // the rendered text AND the rng draw count (the old `_rng()` never ran here).
-  mass_migration: (name) => {
+  // WIRING-W0 (2026-11-07, R-W7 e): the text reads the entry's declared direction, never a score.
+  // Arrivals is the one direction a drawn migration carries at birth; the departures text is for a
+  // record that declares one (an authored entry, the campaign's ledger re-derive).
+  mass_migration: (name, _roll, _facts, direction) => { // MERGE-R2: the census's facts ride third, W0's direction fourth
     const l = name || "The settlement";
+    if (direction === "departures") {
+      return (
+        l +
+        " is losing people faster than it can replace them. Households leave by the season, and those who go are the ones who could afford to. Fields, shops and offices are worked by fewer hands than they were built for."
+      );
+    }
     return (
       l +
-      " is receiving more people than its infrastructure was built for. New arrivals come faster than housing, food, and employment can absorb them. The old residents and the new ones are not yet the same community."
+      " is taking in more people than it has houses or work for. " + MIGRATION_FOOD + " The old residents and the new ones keep apart."
     );
   },
 };
+
+/** wartime (loss)'s sacrifice sentence where the place is isolated: no contract reaches it (TAIL-CRISIS, READ-ALL 20648). */
+const WARTIME_SACRIFICE_ISOLATED = 'The governing authority is demanding sacrifice, and not every household gives it in equal measure.';
+
+/** The defences whose absence, every one, makes monster_pressure's "Its defences were built for quieter times" false. */
+const MONSTER_DEFENCES = Object.freeze(['walls', 'palisade', 'watch', 'militia', 'garrison']);
+
+/**
+ * HOW THE WAR GOES FOR THE TOWN, ONE FACT (BAR2-PLACES, the chair's ruling (PL6), 2026-11-15): the crisis summary decides it
+ * (its coin and its refusals, above), and every other line that says it reads it here, off the entry the summary was written
+ * to: true where the summary is the profit text, false where it is the loss text, null where no wartime summary stands (a
+ * caller then keeps its own reading). The Overview said "on the right side of it" beside a crisis page that said a war it may
+ * not win.
+ * @param {unknown} stress the record's `stress` (an entry or a list)
+ * @returns {boolean|null}
+ */
+export function wartimeGoesWell(stress) {
+  const entries = Array.isArray(stress) ? stress : stress ? [stress] : [];
+  const e = entries.find((x) => x && typeof x === 'object' && x.type === 'wartime' && typeof x.summary === 'string');
+  if (!e) return null;
+  return e.summary.endsWith(WARTIME_VARIANTS('')[0].text); // the profit text after the name (no name, so its tail)
+}
+
+/** wartime (loss)'s caravans sentence: printed only off an isolated route (R2-CODE-B-6 item 0). */
+const WARTIME_CARAVANS = 'Supply caravans pass through on army requisition. '; // BAR3-PLACES (H2, 2026-11-15): no crown, no kingdom: a city-state at war answers to no higher lord, so the line names the war's own officers (true wherever it prints).
+
+/**
+ * wartime's two texts for one place (`s` = the name, or "the settlement"): the profit text, true only
+ * where the place is at least of moderate prosperity (checked at the renderer), and the loss text,
+ * whose caravans sentence an isolated place does not carry, nor its price line where the place is also fed.
+ * @param {string} s
+ * @param {boolean} [isolated] - the record's trade route is `isolated` (read at the renderer)
+ * @param {boolean} [fedIsolated] - isolated, and the record refuses `crisis: hunger` (read at the renderer)
+ * @returns {ReadonlyArray<{ id: string, text: string }>}
+ */
+function WARTIME_VARIANTS(s, isolated = false, fedIsolated = false) {
+  return [
+    // BAR3-PLACES-2 (C36830, 2026-11-15): the profit text claims no merchants: where the war's economy is weak the merchant
+    // power's own description says requisition is "hurting the bottom line" (stressFactions.js), and the line printed beside
+    // it (r2s-wartime-village-0, bar0-city-wartime-rand-14): those with the right friends, true wherever it prints.
+    { id: 'profit', text: s + " is at war and doing well out of it: army contracts pay, prices are high, and those with the right friends are getting rich. The bill will come later." },
+    // TAIL-CRISIS (READ-ALL 20648): no army contract reaches an isolated place (the same route fact as the caravans').
+    { id: 'loss', text: s + " is fighting a war it may not win. Conscription has taken a third of the working-age men. " + (isolated ? '' : WARTIME_CARAVANS) + (fedIsolated ? '' : WARTIME_PRICES + ' ') + (isolated ? WARTIME_SACRIFICE_ISOLATED : "The governing authority is demanding sacrifice while certain families are quietly thriving on contracts.") },
+  ];
+}
+
+/**
+ * religious_conversion's three wordings for one place (`s` = the name, or "the settlement"), in
+ * the order the name's length picks them; ids are the old branch numbers. Variants 0 and 1 speak
+ * of the old institution's buildings and its priest, so they declare the temple (CENSUS-2c).
+ * @param {string} s
+ * @returns {ReadonlyArray<{ id: number, text: string, needs?: string[] }>}
+ */
+function RELIGIOUS_CONVERSION_VARIANTS(s) {
+  return [
+    { id: 0, needs: ['institution: temple'], text: "A new faith is gaining ground in " + s + ". The old house keeps its buildings and its records, but each week its priest preaches to fewer people." },
+    { id: 1, needs: ['institution: temple'], text: "The religious community of " + s + " has fractured. Both sides claim the legitimate succession. Both hold services. Both have a priest who will not acknowledge the other. The congregation has been forced to choose, and some of them have chosen neither." },
+    { id: 2, text: "An outside authority is requiring " + s + " to convert. The governing power has formally complied. The population's compliance is more varied, more private, and more complicated than the official record shows." },
+  ];
+}

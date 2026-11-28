@@ -12,6 +12,7 @@ import {
   factionCatalogArcaneTag,
   resolveArcaneIdentity,
 } from '../../domain/arcaneIdentity.js';
+import { boughtHallOldName } from '../../data/boughtHallNames.js';
 
 /** Tokens that mean arcane on their own — the unambiguous half of the old magic list. */
 const MAGIC_CERTAIN_KEYWORDS = [
@@ -146,7 +147,13 @@ const FACTION_CATEGORY_KEYWORDS = {
   ],
 };
 
+/** R24-C1 (CLOSE-7 BATCH; R24g (2)) and C1B (RULING-R24 R24r item 4): the bought hall's three birth names read AS THEIR OLD
+ *  NAMES READ, by exact name, through the one home (`data/boughtHallNames.js`): criminal, as "Corrupt Council", "Corrupt City
+ *  Council" and "Shadow Senate" are by their words (their own words say no crime, and 'Senate' as a word would take the
+ *  Arcane and Merchant senates with it); the old forms stay criminal by their own words. */
 export const inferFactionCategory = (factionName) => {
+  const oldName = boughtHallOldName(factionName);
+  if (oldName) return inferFactionCategory(oldName);
   const catalogTag = factionCatalogArcaneTag(factionName);
   for (const [cat, keywords] of Object.entries(FACTION_CATEGORY_KEYWORDS)) {
     // The magic bucket keeps its ORDERING slot (it is tested before economy, so an

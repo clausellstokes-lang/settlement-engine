@@ -118,7 +118,7 @@ describe('deriveMagicPosture (Wave 7 — MagicProfile surfaced)', () => {
     expect(m.cost).toBe('costly');
     expect(m.risk).toBeTruthy();
     // The posture WORD since the UX consolidation (T2-26): the four facets live in the envelope.
-    expect(m.display).toBe('Moderate');
+    expect(m.display).toBe('Medium'); // BAR2-LABELS LB1 (2026-11-15): the headline is the record's own level band, the availability in the envelope
   });
 
   it('emits the four role lines', () => {
@@ -203,24 +203,33 @@ describe('deriveViability — isolated import-channel wording matrix', () => {
   // per case. 'magical provision' must be gated on magicFoodOffset > 0 — an
   // isolated village in a magicExists:false world covered by minor caravan
   // routes must NOT be described as magically fed.
-  const isolated = (fb) => ({
+  // UPKEEP-12 (#216): magic is credited only where the RECORD's food home holds a magic supply as well (the food
+  // generator's `magicOffset`, the producer's own field); a viability offset alone (a divine provision the food record
+  // never counted) names no magic. The magic-fed cases carry the record's supply, as a born magic-fed town does.
+  const isolated = (fb, supply = (fb.magicFoodOffset || 0) > 0 ? fb.magicFoodOffset : 0) => ({
     economicViability: {
       viable: true,
       metrics: { foodBalance: { deficit: 500, dailyProduction: 1000, dailyNeed: 1500, ...fb } },
     },
+    economicState: { foodSecurity: { magicOffset: supply } },
     config: { tradeRouteAccess: 'isolated' },
   });
 
-  it('covered + channel + magic offset names the channel AND magical provision', () => {
+  it('covered + channel + magic offset names the channel AND the magic', () => {
     const r = deriveViability(isolated({ importCoverage: 300, importChannel: 'teleportation circle', magicFoodOffset: 200 }));
     expect(r.verdict).toBe('strained');
-    expect(r.summary).toMatch(/feeds itself through the teleportation circle, magical provision, and stored reserves/);
+    // #36 (W2 DEF, 2026-11-07): the verdict reads in plain words, from seeded variants; the FACTS held
+    // here are unchanged — the channel is named, magic is credited, the stores are named.
+    expect(r.summary).toMatch(/through the teleportation circle/);
+    expect(r.summary).toMatch(/magic/);
+    expect(r.summary).toMatch(/stores/);
   });
 
   it('covered + channel WITHOUT magic offset never claims magical provision', () => {
     const r = deriveViability(isolated({ importCoverage: 60, importChannel: 'minor routes and sanctioned caravans' }));
-    expect(r.summary).toMatch(/feeds itself through minor routes and sanctioned caravans and stored reserves/);
-    expect(r.summary).not.toMatch(/magical provision/);
+    expect(r.summary).toMatch(/by caravan/);
+    expect(r.summary).toMatch(/stores/);
+    expect(r.summary).not.toMatch(/magic/); // anchored: the channel and the stores are named on the lines above
   });
 
   it('legacy covered + no channel reads as generic trade imports, not "no import channel"', () => {
@@ -228,21 +237,30 @@ describe('deriveViability — isolated import-channel wording matrix', () => {
     // are real (EconomicsTab shows 'Trade covers N% of gap'), so the clause
     // must not deny them.
     const r = deriveViability(isolated({ importCoverage: 120 }));
-    expect(r.summary).toMatch(/feeds itself through trade imports and stored reserves/);
-    expect(r.summary).not.toMatch(/no meaningful import channel/);
-    expect(r.summary).not.toMatch(/magical provision/);
+    expect(r.summary).toMatch(/comes in from outside/);
+    // anchored: the summary names the import on the line above, so it does not deny it here
+    expect(r.summary).not.toMatch(/nothing from outside makes up|Nothing reliable reaches/);
+    expect(r.summary).not.toMatch(/magic/); // anchored: same summary
   });
 
   it('genuinely uncovered keeps the no-import-channel clause', () => {
     const r = deriveViability(isolated({}));
-    expect(r.summary).toMatch(/survives on local production and stored reserves: no meaningful import channel reaches it/);
+    expect(r.summary).toMatch(/nothing from outside makes up the difference|Nothing reliable reaches/);
+    expect(r.summary).toMatch(/stores|in store/);
+    expect(r.summary).not.toMatch(/magic/); // anchored: the denial and the stores are named above
   });
 
   it('uncovered but magic-fed credits magical provision alongside local production', () => {
     // Isolated hamlets can have importCoverage 0 with a druidic offset —
     // magic supplements local production without any import channel.
     const r = deriveViability(isolated({ magicFoodOffset: 200 }));
-    expect(r.summary).toMatch(/survives on local production, magical provision, and stored reserves: no meaningful import channel reaches it/);
+    expect(r.summary).toMatch(/nothing from outside makes up the difference|Nothing reliable reaches/);
+    expect(r.summary).toMatch(/magic/);
+    // the bar's #216 (bar0-hamlet-calm-rand-1): a viability offset the food record does not hold ("Reliance on magic:
+    // None") names no magic
+    const unheld = deriveViability(isolated({ magicFoodOffset: 1 }, 0));
+    expect(unheld.summary).toMatch(/nothing from outside makes up the difference|Nothing reliable reaches/);
+    expect(unheld.summary).not.toMatch(/magic/); // anchored: the denial is named on the line above
   });
 });
 

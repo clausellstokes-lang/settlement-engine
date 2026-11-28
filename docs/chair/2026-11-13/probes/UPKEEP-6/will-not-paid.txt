@@ -1,0 +1,8 @@
+fields other than the ratings changed: 5
+standing Struggling: 217 births, moved 88, mean 0.99, min 0, max 3
+standing Poor: 891 births, moved 302, mean 0.88, min 0, max 3
+standing Moderate: 549 births, moved 249, mean 0.51, min 0, max 2
+standing Comfortable: 854 births, moved 0
+standing Prosperous: 887 births, moved 0
+standing Wealthy: 358 births, moved 0
+band changes 35 {('Poor', 'Vulnerable', 'Lightly Defended'): 13, ('Struggling', 'Undefended', 'Vulnerable'): 3, ('Struggling', 'Lightly Defended', 'Defensible'): 3, ('Poor', 'Undefended', 'Vulnerable'): 4, ('Moderate', 'Lightly Defended', 'Defensible'): 3, ('Poor', 'Defensible', 'Well-Defended'): 1, ('Struggling', 'Vulnerable', 'Lightly Defended'): 2, ('Poor', 'Lightly Defended', 'Defensible'): 3, ('Moderate', 'Vulnerable', 'Lightly Defended'): 1, ('Moderate', 'Undefended', 'Vulnerable'): 1, ('Moderate', 'Defensible', 'Well-Defended'): 1}

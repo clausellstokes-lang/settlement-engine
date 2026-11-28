@@ -10,17 +10,33 @@
  * only — no store reads, no worldState, no leak surface.
  */
 
-import { deriveMagicPosture, deriveMagicRelianceView, magicRelianceDeskSettlement } from '../../../domain/display/dossierViewModel.js';
+import { deriveMagicPosture, deriveMagicRelianceView, deriveMagicSupplyView } from '../../../domain/display/dossierViewModel.js';
 import { describeDeityEffects } from '../../../domain/display/deityEffects.js';
 import { FS, INK, MUTED, BODY, BORDER, CARD, CARD_HDR, SLATE, sans, SP } from '../../theme.js';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 import NameColumns from '../../primitives/NameColumns.jsx';
-import { defenseMagicDependencyProse } from '../../../domain/display/stateProse/defenseStateProse.js';
+import { magicDeskRead } from '../magicDeskRead.js';
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
-import { tierNounFor } from '../../../domain/display/stateProse/weaveBlock.js';
-import { magicWorksAt } from '../../../domain/worldPulse/magicWorksAt.js';
 import { FLUSH } from '../../../design/flush.js';
+
+/**
+ * WHETHER A ROLE ROW CAN PRINT (W2-C-LEAVES-SIDE item 7, 2026-11-13; the cut's #1086 "Economic role: absent" beside an
+ * alchemical export, #1394 "Military role: absent"). The chair's ruling: a role row reads the home that speaks of that
+ * role: the economy's exports and income for the economic role (`facts/magic.js :: economyShowsMagic`), the defence's
+ * own tradition for the military role (`defenceHoldsArcane`); "absent" is never printed where that home shows the role,
+ * and a row that cannot be made true there is left out (no other band is invented). Measured on the census's 720 at
+ * 408c2e30c: 32 "Economic role: absent" rows out; military 0 (no "absent" beside the defence's tradition).
+ * @param {unknown} settlement @param {string} role @param {unknown} band
+ * @returns {boolean}
+ */
+function roleRowShown(settlement, role, band) {
+  if (band !== 'absent') return true;
+  // BAR2-LABELS LB1 (the chair's ruling of 2026-11-15): "absent" only where the record holds nothing of the role
+  // (`magicProvisionShown.js :: magicRoleHeld`: the economy's words, a made magical service, a printed chain note or food
+  // made by magic; a house of magic among the defences; a healing chain or note; arcane stone-shaping).
+  return !magicRoleHeld(settlement, role);
+}
 
 /**
  * DS-DEF-9's position — the registry's first CROSS-TAB row, now drawn HERE (UX consolidation
@@ -48,7 +64,7 @@ function Facet({ label, value }) {
       gap: SP.sm, padding: `${SP.xs}px 0`, borderBottom: `1px solid ${BORDER}`,
     }}>
       <span style={{ fontSize: FS.sm, fontWeight: 600, color: INK }}>{label}</span>
-      <span style={{ fontSize: FS.sm, fontWeight: 800, color: SLATE, textTransform: 'capitalize' }}>{value}</span>
+      <span style={{ fontSize: FS.sm, fontWeight: 800, color: SLATE, textTransform: typeof value === 'string' && value.includes(' outside ') ? 'none' : 'capitalize' }}>{typeof value === 'string' ? (value.includes(' outside ') ? value.charAt(0).toUpperCase() + value.slice(1) : value.replace(/_/g, ' ')) : value /* TAIL-DISPLAY-ECON-3 (11782): a stored key prints as words, "guild_controlled" -> "guild controlled" */}</span>
     </div>
   );
 }
@@ -73,8 +89,8 @@ export default function MagicTab({ settlement, publicDossier = false, playerView
 
   // ── MAGIC DEPENDENCE: ONE BLOCK, THE ROLES' FRAMING (T2-15 MERGE + MOVE, R2/R3) ──────────
   // The frozen `magicDependency` record (its title and its chain notes) and DS-DEF-9's reading
-  // are one idea. DS-DEF-9 REPLACES the static explanation where the desk speaks; the static
-  // explanation stands on public. The block draws on a FALSE flag too when DS-DEF-9 has its
+  // are one idea. DS-DEF-9 REPLACES the static explanation where the desk speaks (on a shared page, where the
+  // owner's draw speaks); the static explanation stands where it is silent. The block draws on a FALSE flag too when DS-DEF-9 has its
   // `magicDependency false` reading (a finding, not an absence). Where magic does not function
   // nothing here is true (T2-24), so the desk is not drawn and the block does not render.
   // The block carries the page's only first-survey stamp: `magicDependency` is a G5
@@ -88,13 +104,23 @@ export default function MagicTab({ settlement, publicDossier = false, playerView
   // reading (relied-upon or integral ⇒ true), and the block's own fallback reads the same.
   // The siege/famine/plague flag no longer decides anything on this tab.
   const reliance = deriveMagicRelianceView(settlement);
-  const magicProse = publicDossier || magicWorksAt({ settlement }) === false
-    ? Object.freeze({ arcaneReliance: null })
-    : defenseMagicDependencyProse(magicRelianceDeskSettlement(settlement), {
-      seed: String(settlement?._seed ?? settlement?.id ?? ''),
-      audience: playerView ? 'player' : 'dm',
-      tierNoun: tierNounFor(settlement.tier),
-    });
+  // ROW 3 (W2-A-LEAVES, 2026-11-12, the chair's ruling): the reliance line names where the magic comes from, read
+  // from the leaf (`facts/magicSource.js`); where nothing on the record supplies it, the line does not print.
+  const supply = deriveMagicSupplyView(settlement);
+  // L1b (BAR3-LABELS-2, the chair's direction of 2026-11-15; vetoable by the owner): the reliance line NAMES what relies
+  // on magic, from the one leaf that counts the dependents (`magicProvisionShown.js :: magicDependentChainsShown`,
+  // `foodAmongMagicDependents`): each chain under the name it prints through its leaf (`chainPrintName`), the food
+  // supply as the Economics tab's food row names it ("by divine provision"). Only where the word says magic is relied on.
+  // PAGE-1 MAGIC: the names are read from one leaf (`magicMeasuresApart.js :: magicRelyNames`), which the Overview's
+  // line under the reliance word reads too, so the two pages name what the town leans on in the same words.
+  // PAGE-4 MAGIC-AUDIENCE: through the one gate both read (`magicRelyNamesPrinted`, the gates this line already sits
+  // under), so the Overview never names what this tab does not print, for any audience.
+  const relyFor = spokenList(magicRelyNamesPrinted(settlement));
+  // PAGE-1 MAGIC (F3c): the headline word is the dial's band (the magic around the town), so a caption says so.
+  const headlineScope = magicHeadlineScope(settlement);
+  // THE PUBLIC BRANCH (STYLE-RULINGS-2 B10(a), SW-B7b): a shared page prints the lens the
+  // owner's player view drew, shipped at the save (`magic`); unstamped, SILENT (magicDeskRead.js).
+  const magicProse = magicDeskRead(settlement, { publicDossier, playerView });
   const magicLine = drawnAtMount(MAGIC_DEPENDENCY_MOUNT, magicProse.arcaneReliance)?.sentence || null;
   const magicFrozen = posture.magicExists && reliance.reliesOnMagic;
 
@@ -109,6 +135,7 @@ export default function MagicTab({ settlement, publicDossier = false, playerView
       <div style={{
         fontSize: FS.lg, fontWeight: 800, color: INK, marginBottom: 4,
       }}>Magic</div>
+      {posture.magicExists && headlineScope && <div data-testid="magic-headline-scope" style={{ fontSize: proseFontSize(FS.xs, mobile), color: MUTED, margin: '0 0 2px' }}>{headlineScope}</div>}
       <p style={{ fontSize: proseFontSize(FS.sm, mobile), color: BODY, lineHeight: 1.5, margin: '0 0 12px' }}>{posture.display}</p>
 
       {posture.magicExists ? (
@@ -128,7 +155,7 @@ export default function MagicTab({ settlement, publicDossier = false, playerView
                 of two is a caption with orphans under it. */}
             <NameColumns count={FACET_ORDER.length} style={{ padding: `0 ${SP.md}px` }}>
               {FACET_ORDER.map(key => (
-                <Facet key={key} label={FACET_LABEL[key]} value={posture[key]} />
+                <Facet key={key} label={FACET_LABEL[key]} value={key === 'religiousAcceptance' ? religiousAcceptanceShown(settlement, religiousAcceptanceUnderHeresy(settlement, posture[key])) : posture[key]} /> /* L1c: the word says what the hostility is toward (magicProvisionShown.js :: religiousAcceptanceShown); HR2 (BAR6-CULTURE): the faith's stance is the heresy flag's (facts/heresyStance.js) */
               ))}
             </NameColumns>
           </div>
@@ -142,12 +169,14 @@ export default function MagicTab({ settlement, publicDossier = false, playerView
               background: CARD_HDR, padding: `${SP.sm}px ${SP.md}px`, borderBottom: `1px solid ${BORDER}`,
             }}>Roles</div>
             <div style={{ padding: `${SP.xs}px ${SP.md}px` }} data-testid="magic-roles">
-              {reliance.shown && (
+              {reliance.shown && supply.statable && (
                 <div data-testid="magic-reliance" style={{ fontSize: proseFontSize(FS.sm, mobile), color: INK, fontWeight: 700, padding: `${SP.xs}px 0` }}>
                   Reliance on magic: {reliance.word}
+                  {relyFor && <span data-testid="magic-reliance-for" style={{ fontWeight: 400 }}> · for {relyFor}</span>}
+                  {supply.supply && <span data-testid="magic-reliance-source" style={{ fontWeight: 400 }}> · supplied by {supply.supply}</span>}
                 </div>
               )}
-              {posture.roleLines.map((line, i) => (
+              {posture.roleLines.map((line, i) => [line, Object.keys(posture.roles || {})[i]]).map(([line, role]) => [line.replace(/[a-z]+$/, String(magicRoleBandShown(settlement, role, posture.roles?.[role]))), role]).filter(([, role]) => roleRowShown(settlement, role, magicRoleBandShown(settlement, role, posture.roles?.[role]))).map(([line], i) => ( /* X32 and BAR3-LABELS L1: the band a role row prints, one reader (magicProvisionShown.js :: magicRoleBandShown) */
                 <div key={i} data-role-line style={{ fontSize: proseFontSize(FS.sm, mobile), color: BODY, padding: `${SP.xs}px 0` }}>{line}</div>
               ))}
             </div>
@@ -166,14 +195,13 @@ export default function MagicTab({ settlement, publicDossier = false, playerView
               {magicLine
                 ? <p style={{ fontSize: proseFontSize(FS.sm, mobile), color: BODY, lineHeight: 1.55, margin: 0, fontStyle: 'italic' }}>{magicLine}</p>
                 : magicFrozen && <p style={{ fontSize: proseFontSize(FS.sm, mobile), color: BODY, lineHeight: 1.5, margin: 0 }}>
-                  This settlement's resilience relies on active magical infrastructure. One or more supply
-                  chains are magically sustained, or stress conditions are being offset by arcane, divine,
-                  or druidic intervention. Losing those practitioners through conflict, plague, or
-                  political disruption would immediately expose critical vulnerabilities.
+                  This place leans on its spellcasters: some of what it eats or makes, or some of the
+                  trouble it keeps at bay, depends on their work. Lose them to war, plague or politics
+                  and the gap would show at once.
                 </p>}
-              {magicFrozen && (settlement.economicState?.activeChains || []).filter(c => c.magicNote).map((c, i) => (
+              {magicFrozen && (settlement.economicState?.activeChains || []).map(c => [c, magicNoteShown(c, settlement)]).filter(([, note]) => note).map(([c, note], i) => ( /* the card's own note (magicProvisionShown.js :: magicNoteShown), one home */
                 <div key={i} style={{ fontSize: proseFontSize(FS.xs, mobile), color: BODY, marginTop: 6, paddingLeft: 8, borderLeft: `2px solid ${BORDER}`, fontStyle: 'italic' }}>
-                  {c.label}: {c.magicNote}
+                  {chainPrintName(c, settlement).label}: {note}
                 </div>
               ))}
             </div>
@@ -200,3 +228,7 @@ export default function MagicTab({ settlement, publicDossier = false, playerView
     </div>
   );
 }
+import { chainPrintName } from '../../../domain/display/chainPrintName.js'; // COHERENCE-AGREE-6 (F1): what a chain prints under
+import { religiousAcceptanceUnderHeresy } from '../../../domain/facts/heresyStance.js'; // HR2 (BAR6-CULTURE): the row reads the heresy flag the Faith tab's line reads
+import { magicNoteShown, magicRoleBandShown, magicRoleHeld, religiousAcceptanceShown } from '../../../domain/display/magicProvisionShown.js'; // X3 (TAIL-DISPLAY-ECON): the card's own note, one home
+import { magicHeadlineScope, magicRelyNamesPrinted, spokenList } from '../../../domain/display/magicMeasuresApart.js'; // PAGE-1 MAGIC: the reliance names and the headline caption, one home

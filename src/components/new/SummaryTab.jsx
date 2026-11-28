@@ -6,7 +6,7 @@ import { serif } from './Primitives';
 import { BODY, FACTION_COLORS } from './tabConstants.js';
 import { entityAnchor, normalizeNpcTraits } from '../../domain/dossier/entityLinks.js';
 import { deriveFoodBalance } from '../../domain/display/dossierViewModel.js';
-import { scoreBand, scoreColor } from '../../domain/display/defenseScoreBands.js';
+import { scoreBand, scoreColor, avgScore } from '../../domain/display/defenseScoreBands.js';
 import { statusCase, tokenCase } from './labelLadder.js';
 import { stabilityBandOf, complexityBandOf } from '../../domain/display/labelBands.js';
 import EconomyFreshnessNote from './EconomyFreshnessNote.jsx'; // R-4: the ONE stale-window note leaf; taxonomy in domain/display/economyFreshness.js
@@ -16,6 +16,7 @@ import useIsMobile from '../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
 import { edged } from '../../design/edgedBox.js';
+import { governingModifierWordsOf } from '../../domain/display/governingModifierWords.js';
 
 // Tier 7.19 — `second` was the per-file body-copy alias for '#6b5340'.
 // Routing it through `BODY` from tabConstants centralises future contrast
@@ -27,15 +28,15 @@ function characterSentence(r) {
   const insts=(r.institutions||[]).map(i=>(i.name||'').toLowerCase());
   const hasArmed=insts.some(n=>['garrison','militia','watch','guard','mercenary'].some(k=>n.includes(k)));
   const hasCrim=insts.some(n=>['thieve','criminal','underworld','black market'].some(k=>n.includes(k)));
-  const {tier,config:h={},economicState:g={},powerStructure:w={},history:p={}}=r;
+  const {tier,config:h={},economicState:g={},powerStructure:ps={},history:p={}}=r;
   const tradeKey=h.tradeRouteAccess||'road';
   const threat=h.monsterThreat||'frontier';
   const sl=g.safetyProfile?.safetyLabel||'';
   const prosperity=g.prosperity||'Moderate';
-  const stability=w.stability||'Stable';
-  const ruling=w.factions?.[0]?.faction||((['thorp','hamlet'].includes(tier)?'the household heads':['village'].includes(tier)?'the village elders':'the local council'));
+  const stability=ps.stability||'Stable';
+  const ruling=ps.factions?.[0]?.faction||((['thorp','hamlet'].includes(tier)?'the household heads':['village'].includes(tier)?'the village elders':'the local council'));
   const age=p.age;
-  const recentConflict=w.recentConflict||'';
+  const recentConflict=ps.recentConflict||'';
   const tradeDesc={port:'coastal port',river:'river settlement',crossroads:'crossroads market',road:'road-side settlement',isolated:'isolated settlement'}[tradeKey]||'settlement';
   const tierDesc={thorp:'tiny hamlet',hamlet:'small hamlet',village:'village',town:'market town',city:'city',metropolis:'metropolis'}[tier]||tier;
   const threatNote=threat==='plagued'?' The surrounding region is plagued by monster activity.':threat==='frontier'?' It sits on an active frontier.':'';
@@ -45,7 +46,7 @@ function characterSentence(r) {
 }
 
 // ── Stacked faction power bar ─────────────────────────────────────────────────
-function FactionBar({ factions }) {
+function FactionBar({ powers: factions, governingWords = '' }) { // `powers`: the ruling powers (powerStructure.factions), not the NPC grouping
   // THE PHONE CHROME FLOOR — the modifier chips and the share figure, above the
   // empty-roster early return so the hook order is stable.
   const mobile = useIsMobile();
@@ -79,7 +80,9 @@ function FactionBar({ factions }) {
       <div style={{display:'flex',flexDirection:'column',gap:5}}>
         {factions.map((f,i)=>{
           const c=FACTION_COLORS[i%FACTION_COLORS.length];
-          const mods=(f.modifiers||[]).concat(f.modifier?[f.modifier]:[]);
+          // POWERS-15 (REVIEW-POWERS-5 A7; one reader for one fact on every surface): the ruling power's stored modifier
+          // key is never printed; its chip is the Power tab's own words (display/governingModifierWords.js), or none
+          const mods=(f.modifiers||[]).concat(f.modifier&&f.isGoverning&&governingWords?[governingWords]:[]);
           return <div id={entityAnchor('faction', { id:f.id || f.faction, name:f.faction })} key={i} style={{display:'flex',alignItems:'center',gap:7,scrollMarginTop:ANCHOR_OFFSET}}>
             <div style={{width:10,height:10,background:c,flexShrink:0}}/>
             {/* ODQ §934.23 — no clamp on dossier text: a faction name is generated and has no provable width, so the legend row wraps it rather than truncating the body it names. */}
@@ -119,7 +122,7 @@ function SummaryTab({ settlement:r }) {
   const isMobile = useIsMobile(); // reactive; hook must precede the early return (rules-of-hooks)
   if (!r) return null;
 
-  const {name,tier,population:pop,institutions:g=[],npcs:w=[],factions:_factionGroups=[],conflicts:allConflicts=[],economicState:eco={},spatialLayout:spatial,powerStructure:ps={},history:hist={},economicViability:via,settlementReason:reason,config:cfg={},stress:stressRaw,prominentRelationship:pr,coherenceNotes:_cn=[]}=r;
+  const {name,tier,population:pop,institutions:g=[],npcs:w=[],conflicts:allConflicts=[],economicState:eco={},spatialLayout:spatial,powerStructure:ps={},history:hist={},economicViability:via,settlementReason:reason,config:cfg={},stress:stressRaw,prominentRelationship:pr,coherenceNotes:_cn=[]}=r;
   const stresses=(Array.isArray(stressRaw)?stressRaw:stressRaw?[stressRaw]:[]).filter(Boolean);
   const allFactions=ps?.factions||[];
   const tradeAccess=(cfg.tradeRouteAccess||'road').replace(/_/g,' ');
@@ -128,6 +131,7 @@ function SummaryTab({ settlement:r }) {
   // Deficit % from the canonical display model (residual ÷ daily need), matching
   // the PDF — not the engine's gross deficitPercent. (A+ pdf.3.)
   const foodCanon=deriveFoodBalance(r);
+  const prosperityInCrisis=prosperityInCrisisLine(r); // ruling 1(a): the crisis-lowered label's ordinary-years sentence, or null
   const _topIssue=via?.issues?.[0];
   const topNPCs=[...(w||[])].sort((a,b)=>(b.power||0)-(a.power||0)).slice(0,6);
   const dp=r.defenseProfile||{};
@@ -150,7 +154,7 @@ function SummaryTab({ settlement:r }) {
       r.arrivalScene?`\n> ${r.arrivalScene}`:'',
       `\n**${characterSentence(r)}**`,
       `\n**Power:** ${allFactions.slice(0,3).map(f=>`${f.faction} (${f.power}%)`).join(', ')}. ${ps?.stability||''}`,
-      `**Economy:** ${eco.prosperity||'?'} - ${eco.economicComplexity||''}. Exports: ${eco.primaryExports?.join(', ')||'none'}.${foodCanon.deficit>0?` Food deficit ${foodCanon.deficitPct}%.`:''}`,
+      `**Economy:** ${eco.prosperity||'?'} - ${eco.economicComplexity||''}.${prosperityInCrisis?` ${prosperityInCrisis}`:''} Exports: ${eco.primaryExports?.join(', ')||'none'}.${foodCanon.deficit>0?` Food deficit ${foodCanon.deficitPct}%.`:''}`,
       `**Defense:** ${dp.readiness?.label||'Unknown'}`,
       `\n**Key NPCs:**`,...topNPCs.map(v=>{
         const traits=normalizeNpcTraits(v).filter(t=>t.visibility!=='gm').slice(0,4).map(t=>`${t.label}: ${t.value}`).join('; ');
@@ -171,7 +175,7 @@ function SummaryTab({ settlement:r }) {
   // number on the surface. It reads as the band word instead, off the shared
   // defenseScoreBands ladder (which also takes over the local 70/45/25 colour
   // twin, so the tile's colour and its word can never disagree).
-  const defScore=dp.scores?Math.round((dp.scores.military+dp.scores.monster+dp.scores.internal+dp.scores.economic+dp.scores.magical)/5):null;
+  const defScore=dp.scores?avgScore(scoresAsShown(r,dp.scores)):null; // P9b-2 (G68 (P1)): the mean of the scores as printed, the five other means' leaf
   const defColor=scoreColor(defScore);
 
   // Power stability color
@@ -240,12 +244,15 @@ function SummaryTab({ settlement:r }) {
           stale tile instead of reading as an ambient caveat over the whole
           dossier; the tighter margin pulls it under the tile row. Conditional on
           the reconciliationLog detector; absent trail ⇒ byte-identical tab. */}
+      {/* The Economy tile's label, where a crisis in force lowered it, says what the place is in
+          ordinary years (the chair's ruling 1(a), REVIEW-UPKEEP-2): the one sentence, under the row. */}
+      {prosperityInCrisis&&<p data-testid="summary-prosperity-in-crisis" style={{fontSize:proseFontSize(FS.xs, isMobile),color:muted,fontStyle:'italic',lineHeight:1.4,margin:'-6px 0 12px'}}>{prosperityInCrisis}</p>}
       <EconomyFreshnessNote settlement={r} variant="tallies" margin="-6px 0 12px" />
 
       {/* ── POWER + CONFLICTS ────────────────────────────────────────────── */}
       <div style={{background:swatch['#F4F6FD'],border:'1px solid #b8c8e8',borderLeft:'3px solid #2a3a7a',padding:'12px 14px',marginBottom:12}}>
         <div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:800,color:swatch.info,textTransform:'uppercase',letterSpacing:'0.07em',marginBottom:10}}>Power & Conflict</div>
-        <FactionBar factions={allFactions.slice(0,5)}/>
+        <FactionBar powers={allFactions.slice(0,5)} governingWords={governingModifierWordsOf(r)}/>
         {ps?.recentConflict&&<p style={{fontSize:proseFontSize(FS.xs, isMobile),color:swatch.danger,marginTop:8,lineHeight:1.4}}>{ps.recentConflict}</p>}
         {allConflicts.length>0&&<>
           <div style={{height:1,background:swatch['#C0CCE8'],margin:'10px 0'}}/>
@@ -411,3 +418,5 @@ export default React.memo(SummaryTab);
 // The crisis hook's {holder} is filled where it is read (the chair's ruling 4, HOOKS-UNDER-STRESS); the
 // import sits here, not at the head, so the line-keyed prose-numerics register's rows above stay put.
 import { crisisHookFor } from '../../domain/crisis/crisisHooks.js';
+import { prosperityInCrisisLine } from '../../domain/display/prosperityInCrisis.js';
+import { scoresAsShown } from '../../domain/facts/beastsReadiness.js'; // P9b-2 (G68 (P1)): the Defense tile's mean reads the scores as printed; at the end, so no line-keyed row moves

@@ -8,10 +8,12 @@
  * in the public orchestrator because they consume the completed bucket state.
  */
 
-import { random as rng } from '../../kernel/rngContext.js';
+import { random as rng, getActiveRng } from '../../kernel/rngContext.js';
 import { getInstFlags } from '../helpers.js';
 import { classifyService } from './serviceClassifier.js';
-import { getServiceTierInfo } from './serviceAvailability.js';
+import { getServiceTierInfo, serviceDomainOf } from './serviceAvailability.js';
+import { keepOf, boughtShare } from '../../domain/facts/keep.js';
+import { fnv1a32 } from '../../kernel/proseHash.js';
 import { getServicesForInstitution } from './institutionServices.js';
 import {
   clearCustomDefinitionIdentity,
@@ -22,8 +24,9 @@ import {
   isMaterializedCustomContent,
   nativeSemanticName,
 } from '../../domain/content/customContentSemanticAuthority.js';
-import { defenseFactsOf } from '../../domain/defense/defenseFacts.js';
-import { defenceTwinLine } from '../../data/defenceTwinLines.js';
+import { birthFactsOf } from '../../domain/facts/factsOf.js';
+import { courtHoldersOf, defenceOf } from '../../domain/facts/defence.js'; // BAR6-CRIME (e): the court and the gaol; BAR8-K-WATCH (13a): the court the Legal row prints
+import { drawDeclared, lineText } from '../../domain/facts/drawDeclared.js'; import { SERVICE_DESC_SIBLINGS } from '../../data/institutionServices.js';
 
 const CRIMINAL_INSTITUTION_KEYWORDS = Object.freeze([
   'thieves',
@@ -60,19 +63,86 @@ function isCriminalProvider(institution) {
 }
 
 /**
+ * Whether the roster holds a criminal house BY NAME (a keyword of the same list; a custom house never counts). The
+ * orchestrator's informal-crime fallback reads it over the whole roster (moved from `servicesGenerator.js`, whose copy
+ * of the keyword list was this one, word for word). Unlike `isCriminalProvider`, a house's `category` alone is no
+ * criminal house here: the fallback has always read names only.
+ *
+ * @param {ReadonlyArray<unknown>} institutions
+ * @returns {boolean}
+ */
+export function hasCriminalInstitution(institutions) {
+  return institutions.some((inst) => {
+    if (isMaterializedCustomContent(inst)) return false;
+    const name = nativeSemanticName(inst).toLowerCase();
+    return CRIMINAL_INSTITUTION_KEYWORDS.some((kw) => name.includes(kw));
+  });
+}
+
+// THE LAWLESS ROW'S DESCRIPTION (BAR8-K-WATCH-2, BR29: moved here from `servicesGenerator.js`; the row's NAME stays there,
+// spelled once beside the overlay's two push sites, which write `{ name, ...lawlessRow(...), institution }`: the same keys in
+// the same order).
+export const THERE_IS_NO_OFFICIAL_RECOURSE_HERE_DISPUTES_END_WITH_WHOEVER_CAN_APPLY_MORE_VIOLENCE_OR_PAY_MORE_FOR_PROTECTION = 'The law here is slow and easily outbid. Disputes end with whoever can apply more violence or pay more for protection.';
+// BAR6-CRIME (BRIEF-BAR6 (e), LAW 9's 9a.lawless; the wide read's C172465; vetoable by the owner): "easily outbid" and
+// "disputes end with whoever can apply more violence" are false where the town keeps its own court and its own gaol (the
+// defence home's `court` and `prison`, `facts/defence.js`), beside "A functioning court and prison mean crimes carry real
+// consequences". There the row keeps its draw, its place and its name (the name is the service's identity, declared in
+// `crisisDependence.js :: SERVICE_DEPENDENCE`) and takes its twin description: the law is slow, and coin buys it quicker.
+// BAR8-K-WATCH (13a, BAR8-AUDIT-K's 13a.court; C39616): "The court sits" is the LEGAL ROW'S court, the atom `court sits`
+// (`defence.js :: courtHoldersOf`: a courthouse, or a live house that drew a court service), not the `court` atom's name
+// test (every town hall): beside "Legal Infrastructure · Prison only / Detention without process." the line was false.
+// The drawn services are read as they stand when this row is added (the court services are the houses' own rolls,
+// materialised above), the same rows the record keeps; where no court sits the row takes its other description.
+export const SLOW_LAW_DESC = lineText({ text: 'The court sits and the gaol holds, but both are slow, and coin buys a quicker answer.', needs: ['court sits', 'prison'] });
+/** @param {Array<{ name?: unknown }>} institutions @param {Record<string, unknown[]>} drawn the services drawn so far @returns {{ desc: string }} */
+export const lawlessRow = (institutions, drawn) => {
+  const d = defenceOf({ institutions });
+  const courtSits = courtHoldersOf({ institutions, availableServices: drawn }).length > 0;
+  return { desc: courtSits && d.prison ? SLOW_LAW_DESC : THERE_IS_NO_OFFICIAL_RECOURSE_HERE_DISPUTES_END_WITH_WHOEVER_CAN_APPLY_MORE_VIOLENCE_OR_PAY_MORE_FOR_PROTECTION }; // the name is the caller's, said once (275ce166f made both branches one name)
+};
+
+/**
+ * THE PER-DEFINITION SERVICE ROLL, RESOLVED (CENSUS-1f unit 1c; Appendix B site 15, R). A service
+ * that SURVIVED its rolls (the catalogue roll in `getServicesForInstitution`, the two gates here —
+ * none moved, none added) is resolved through `drawDeclared` against the declarations CENSUS-4c
+ * placed on its definition (`institutionServices.js`, 49 rows, carried onto the row by the
+ * catalogue's `...rowDef`). Admitted: kept, byte-identical. Refused: its desc's walls twin
+ * (CENSUS-1c's `SERVICE_DESC_SIBLINGS`, the same resolution as before) when the record admits it;
+ * else the service is NOT materialized (a list printed whole: kind A's filter). A custom service
+ * declares nothing and is never touched.
+ * @param {Record<string, unknown>} service
+ * @param {object | (() => object) | null} facts the birth's facts at the roll
+ * @returns {Record<string, unknown> | null}
+ */
+export function resolveServiceRow(service, facts) {
+  if (service.custom === true || service.source === 'custom') return service;
+  const r = drawDeclared([service], {
+    draw: (p) => p[0],
+    facts,
+    poolId: `institutionServices:${String(service.svcKey ?? service.institution ?? '')}.${String(service.name ?? '')}`, key: `${getActiveRng()?.seed ?? ''}::institutionServices:${String(service.svcKey ?? service.institution ?? '')}.${String(service.name ?? '')}`, // R-AT (CENSUS-1i unit 5)
+    surface: 'services',
+    drawKind: 'R',
+    twin: (line) => {
+      const set = /** @type {Record<string, ReadonlyArray<any>>} */ (SERVICE_DESC_SIBLINGS)[String(line?.desc ?? '')];
+      const t = set ? set.find((l) => l && typeof l.twinOf === 'string') : null;
+      return t ? { ...line, desc: t.text, needs: [...(t.needs ?? [])], excludes: [...(t.excludes ?? [])], crisis: [...(t.crisis ?? [])] } : null;
+    },
+  });
+  return r.line ?? null;
+}
+
+/**
  * Project one catalog-resolution record into the persisted settlement shape
  * without dropping exact custom-definition identity.
  *
- * @param {Record<string, unknown>} service
+ * @param {Record<string, unknown>} service the RESOLVED row (`resolveServiceRow`)
  * @param {string} institutionName
- * @param {import('../../data/defenceTwinLines.js').DefenceTwinFacts} [defence] the place's
- *   defence facts: a desc that names walls the place lacks takes its twin (F10 unit 4)
  */
-function projectAvailableService(service, institutionName, defence) {
+function projectAvailableService(service, institutionName) {
   /** @type {Record<string, unknown>} */
   const projected = {
     name: service.name,
-    desc: defenceTwinLine(service.desc, defence),
+    desc: service.desc,
     institution: institutionName,
     ...projectCustomDefinitionIdentity(service),
   };
@@ -118,6 +188,41 @@ function availableServiceIdentityKey(service) {
 }
 
 /**
+ * COHERENCE-UPKEEP (the chair's ruling 4 of 2026-11-12): the service categories a place buys
+ * outright. With the commercial services (`serviceDomainOf` 'commercial'), each keeps
+ * `boughtShare('services', keepOf(prosperity))` of its rows — 0.82 at Struggling, the identity at
+ * Prosperous and Wealthy.
+ */
+const BOUGHT_CATEGORIES = new Set(['healing', 'lodging', 'food', 'equipment', 'transport']);
+
+/**
+ * COHERENCE-UPKEEP-5 (the review's F2; the proposal's §c.6 "never scaled: … a vocation"): A HOUSE'S
+ * OWN SERVICE IS NEVER SCALED. A burial ground buries, a market square holds its market, a temple
+ * keeps its rites; only what a house offers beyond its vocation is kept as far as the place can pay.
+ * Its own service is every row its catalogue GUARANTEES (`p >= 1`: offered at every tier, by the
+ * catalogue's own word) and every rite (`serviceDomainOf` 'religion').
+ * @param {any} service @param {string} institutionName @returns {boolean}
+ */
+const isOwnService = (service, institutionName) => Number(service.p) >= 1
+  || serviceDomainOf(service.name, institutionName) === 'religion';
+
+/**
+ * The draw-free upkeep roll, 0..1, keyed on the birth seed, the institution and the service (FNV-1a
+ * with an avalanche finalizer). It consumes NO PRNG draw, so the step's seeded stream and every
+ * roll above it are untouched.
+ * @param {string} seed @param {string} institutionName @param {string} serviceName @returns {number}
+ */
+function upkeepRoll(seed, institutionName, serviceName) {
+  let h = fnv1a32(`${seed}|upkeep|${institutionName}|${serviceName}`);
+  h ^= h >>> 16;
+  h = Math.imul(h, 0x85ebca6b);
+  h ^= h >>> 13;
+  h = Math.imul(h, 0xc2b2ae35);
+  h ^= h >>> 16;
+  return (h >>> 0) / 4294967296;
+}
+
+/**
  * @param {{
  *   buckets:Record<string, Array<Record<string, unknown>>>,
  *   tier:string,
@@ -130,6 +235,7 @@ function availableServiceIdentityKey(service) {
  *     allowsService:(service:unknown,provider?:unknown,category?:string)=>boolean,
  *     portKind?:'maritime'|'river'|'none',
  *   },
+ *   upkeep?:{ prosperity?:unknown, seed?:string }|null,
  * }} input
  * @returns {{criminalEffective:number,seen:Set<string>}}
  */
@@ -154,8 +260,13 @@ export function materializeInstitutionServiceRolls(input) {
   });
   const filteredInstitutions =
     institutions.filter(worldLaw.allowsInstitution);
-  // F10 unit 4: the roster's defence facts, read once, for the descs that name walls. Draw-free.
-  const defence = defenseFactsOf({ institutions });
+  // F10 unit 4, CENSUS-1f: the birth's facts at the roll (the roster, the tier, the config's
+  // terrain, the world law's water and magic law), read lazily, for the declared rows. Draw-free.
+  const facts = () => birthFactsOf({ institutions, config, tier }, worldLaw);
+
+  // COHERENCE-UPKEEP (ruling 4): what the place can pay for, from the one home.
+  const keep = keepOf(input.upkeep?.prosperity);
+  const upkeepSeed = String(input.upkeep?.seed || '');
 
   for (const institution of filteredInstitutions) {
     const services = getServicesForInstitution(
@@ -163,6 +274,37 @@ export function materializeInstitutionServiceRolls(input) {
       tier,
       mergedOpts,
     );
+    // The floor (ruling 4): a standing institution keeps at least one row. The first row the upkeep
+    // roll held back is kept for it if every other row of its own was held back too.
+    let placedRows = 0;
+    /** @type {{ row: any, category: string, identityKey: string, customService: boolean, service: any } | null} */
+    let heldBack = null;
+    /** @param {any} row @param {string} category @param {string} identityKey @param {boolean} customService @param {any} service */
+    const place = (row, category, identityKey, customService, service) => {
+      const projected = projectAvailableService(
+        row,
+        String(institution.name || ''),
+      );
+      buckets[category].push(projected);
+      materializedByIdentity.set(identityKey, [projected]);
+      placedRows += 1;
+
+      // Cross-list, do not move. Lodging provisions still prove the
+      // settlement has food, preventing a contradictory notable absence.
+      if (
+        !customService
+        && category === 'lodging'
+        && /food|drink|provision|meal/i.test(String(service.name || ''))
+      ) {
+        const foodProjection = projectAvailableService(
+          row,
+          String(institution.name || ''),
+        );
+        buckets.food.push(foodProjection);
+        const tracked = materializedByIdentity.get(identityKey);
+        if (tracked) tracked.push(foodProjection);
+      }
+    };
     for (const service of services) {
       if (!worldLaw.allowsService(
         service,
@@ -239,31 +381,23 @@ export function materializeInstitutionServiceRolls(input) {
         )
         && buckets[category]
       ) {
-        const projected = projectAvailableService(
-          service,
-          String(institution.name || ''),
-          defence,
-        );
-        buckets[category].push(projected);
-        materializedByIdentity.set(identityKey, [projected]);
-
-        // Cross-list, do not move. Lodging provisions still prove the
-        // settlement has food, preventing a contradictory notable absence.
-        if (
-          !customService
-          && category === 'lodging'
-          && /food|drink|provision|meal/i.test(String(service.name || ''))
-        ) {
-          const foodProjection = projectAvailableService(
-            service,
-            String(institution.name || ''),
-            defence,
-          );
-          buckets.food.push(foodProjection);
-          const tracked = materializedByIdentity.get(identityKey);
-          if (tracked) tracked.push(foodProjection);
+        // CENSUS-1f (site 15): resolved AFTER the rolls, so no roll moves.
+        const row = resolveServiceRow(service, facts);
+        if (!row) continue;
+        // COHERENCE-UPKEEP (ruling 4): a bought service is kept as far as the place can pay, by a
+        // draw-free roll; the seeded rolls above are untouched.
+        const bought = !customService && !isOwnService(service, String(institution.name || '')) && (BOUGHT_CATEGORIES.has(category)
+          || serviceDomainOf(service.name, institution.name) === 'commercial');
+        const share = bought ? boughtShare('services', keep) : 1;
+        if (share < 1 && upkeepRoll(upkeepSeed, String(institution.name || ''), String(service.name || '')) >= share) {
+          if (!heldBack) heldBack = { row, category, identityKey, customService, service };
+          continue;
         }
+        place(row, category, identityKey, customService, service);
       }
+    }
+    if (placedRows === 0 && heldBack) {
+      place(heldBack.row, heldBack.category, heldBack.identityKey, heldBack.customService, heldBack.service);
     }
   }
 

@@ -67,6 +67,11 @@ import { canonicalRelationshipSeed } from './relationshipEdgeSeed.js';
 // partnership that argues against cutting the tie. Absent flag or absent ledger ⇒ both
 // read 0 ⇒ byte-identical. One-directional: commercialReasons never imports this module.
 import { makeCommercialPressureRead } from './commercialReasons.js';
+// STYLE-2 C2 (SW-12): the intro lines below carry variants by vantage, chosen by the house
+// idiom — the zero-import selection kernel keyed on the outcome's own stable id (no rng
+// draw, so the contest's and the escalation's draws are untouched).
+import { pickLine } from './proseSelection.js';
+/** The slots a prose line fills (STYLE-2 SW-12). @typedef {Record<string, string>} TradeWarLineSlots */
 
 /**
  * Shared war/trade/occupation sim-shape typedefs (see ./pulseShapes.js).
@@ -102,6 +107,28 @@ const COMMERCIAL_PRESSURE_W = 0.25;
 
 /** @param {string} a @param {string} b @returns {number} */
 const codepoint = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
+
+// STYLE-2 C2 (SW-12) — the realignment and wind-down lines, said as what changed in the
+// market and for whom. Every slot is one the writer holds: the buyer, the new supplier,
+// the displaced one (or "its old supplier"), the good. Four vantages per intro pool.
+const REALIGN_SUMMARY = Object.freeze([
+  (/** @type {TradeWarLineSlots} */ x) => `${x.buyer}'s ${x.good} now comes from ${x.winner}; ${x.defeated} has lost the trade.`,
+  (/** @type {TradeWarLineSlots} */ x) => `${x.buyer}'s buyers have stopped dealing with ${x.defeated} and buy their ${x.good} from ${x.winner}.`,
+  (/** @type {TradeWarLineSlots} */ x) => `${x.buyer} has given its ${x.good} trade to ${x.winner}, and ${x.defeated} has lost a market.`,
+  (/** @type {TradeWarLineSlots} */ x) => `The ${x.good} on sale in ${x.buyer} now comes from ${x.winner}, not ${x.defeated}.`,
+]);
+const WINDDOWN_HEADLINE = Object.freeze([
+  (/** @type {TradeWarLineSlots} */ x) => `${x.defeated} loses its ${x.good} trade with ${x.buyer}`,
+  (/** @type {TradeWarLineSlots} */ x) => `${x.buyer} stops buying ${x.defeated}'s ${x.good}`,
+  (/** @type {TradeWarLineSlots} */ x) => `${x.defeated} loses ${x.buyer}'s ${x.good} trade to ${x.winner}`,
+  (/** @type {TradeWarLineSlots} */ x) => `${x.buyer} takes its ${x.good} trade away from ${x.defeated}`,
+]);
+const WINDDOWN_SUMMARY = Object.freeze([
+  (/** @type {TradeWarLineSlots} */ x) => `${x.defeated}'s ${x.good} no longer sells in ${x.buyer}; ${x.winner} has the trade now.`,
+  (/** @type {TradeWarLineSlots} */ x) => `${x.defeated}'s rulers have let ${x.buyer}'s ${x.good} market go without a fight.`,
+  (/** @type {TradeWarLineSlots} */ x) => `In ${x.defeated} the ${x.good} sellers have lost ${x.buyer}'s custom to ${x.winner}.`,
+  (/** @type {TradeWarLineSlots} */ x) => `${x.good[0].toUpperCase()}${x.good.slice(1)} from ${x.defeated} is no longer on sale in ${x.buyer}; ${x.winner}'s has taken its place.`,
+]);
 
 /**
  * Canonical good id for a label/object, or null.
@@ -363,6 +390,9 @@ export function evaluateTradeWar({ snapshot, worldState, rng, tick = 0, now = nu
     const good = normalizeGood(commodityId);
     return good?.label || good?.sourceLabel || commodityId;
   };
+  // The good as a word inside a sentence ("iron", "salted fish"); the headline that names
+  // it as a title keeps the label's own case.
+  const goodWordFor = (/** @type {unknown} */ commodityId) => String(commodityLabelFor(commodityId)).toLowerCase();
 
   // ── Enumerate contests deterministically: every buyer C (codepoint), every
   //    imported commodity K (codepoint). ──────────────────────────────────────
@@ -615,18 +645,27 @@ export function evaluateTradeWar({ snapshot, worldState, rng, tick = 0, now = nu
       // curtailment — name it in the receipt. Absent embargo ⇒ null ⇒ reasons byte-identical.
       const defeatedEmbargo = contenders.find(c => c.id === defeatedId)?.embargo;
       const embargoReason = defeatedEmbargo && defeatedEmbargo.worst
-        ? `Trade with ${nameFor(defeatedId)} curtailed: the plane objects to the ${String(defeatedEmbargo.worst).toLowerCase()}.`
+        ? `${nameFor(buyerId)} will no longer buy from ${nameFor(defeatedId)} while it keeps a ${String(defeatedEmbargo.worst).toLowerCase()}.`
         : null;
+      const tradeSlots = {
+        buyer: nameFor(buyerId),
+        winner: nameFor(winnerId),
+        defeated: defeatedId ? nameFor(defeatedId) : 'its old supplier',
+        good: goodWordFor(commodityId),
+      };
+      const flipReason = defeatedId
+        ? `${nameFor(defeatedId)} could not keep the trade against ${nameFor(winnerId)}.`
+        : `${nameFor(winnerId)} has won the trade.`;
       outcomes.push(conditionOutcome({
         id: dispositionSourceEventId,
         archetype: 'trade_realignment',
         targetSaveId: buyerId,
         severity: 0.4,
         headline: `${nameFor(buyerId)} turns to ${nameFor(winnerId)} for ${commodityLabelFor(commodityId)}`,
-        summary: `${nameFor(winnerId)} has displaced ${defeatedId ? nameFor(defeatedId) : 'the prior supplier'} as ${nameFor(buyerId)}'s primary source of ${commodityLabelFor(commodityId)}.`,
+        summary: pickLine(REALIGN_SUMMARY, `${dispositionSourceEventId}:summary`, tradeSlots),
         reasons: embargoReason
-          ? [`Primary ${commodityLabelFor(commodityId)} supplier flipped to ${nameFor(winnerId)}.`, embargoReason]
-          : [`Primary ${commodityLabelFor(commodityId)} supplier flipped to ${nameFor(winnerId)}.`],
+          ? [flipReason, embargoReason]
+          : [flipReason],
         tick,
         sourceEventTargetId: winnerId,
         causes: [
@@ -673,14 +712,14 @@ export function evaluateTradeWar({ snapshot, worldState, rng, tick = 0, now = nu
               archetype: 'war_pressure',
               targetSaveId: winnerId,
               severity: clamp01(0.4 + defeatedStrength * 0.2),
-              headline: `${nameFor(defeatedId)} answers lost trade with the sword`,
-              summary: `Defeated in the contest for ${nameFor(buyerId)}'s ${commodityLabelFor(commodityId)} trade, ${nameFor(defeatedId)} opens hostilities against ${nameFor(winnerId)}.`,
+              headline: `${nameFor(defeatedId)} turns hostile to ${nameFor(winnerId)} over the ${goodWordFor(commodityId)} trade`,
+              summary: `${nameFor(defeatedId)} has lost ${nameFor(buyerId)}'s ${goodWordFor(commodityId)} trade to ${nameFor(winnerId)} and means to take it back by force.`,
               // THE COUPLING'S RECEIPT FIELD (CPL-1.TRADE_TO_WAR.TR-1.severance_pressure).
               // When a commercial grievance moved the gate, the march says which one, in
               // the ledger's own authored words. Dark ⇒ the spread is empty ⇒ this array
               // is the pre-TR-1 array.
               reasons: [
-                'The beaten incumbent was still strong enough to answer with arms rather than accounts.',
+                `${nameFor(defeatedId)} is still strong enough to fight for the trade.`,
                 ...(severance?.receipt ? [severance.receipt] : []),
               ],
               tick,
@@ -715,9 +754,13 @@ export function evaluateTradeWar({ snapshot, worldState, rng, tick = 0, now = nu
             archetype: 'market_shock',
             targetSaveId: defeatedId,
             severity: 0.35,
-            headline: `${nameFor(defeatedId)} absorbs the loss of ${nameFor(buyerId)}'s market`,
-            summary: `${nameFor(defeatedId)} loses ${nameFor(buyerId)}'s ${commodityLabelFor(commodityId)} market and adjusts. This is a sober economic wind-down, not war.`,
-            reasons: ['The beaten incumbent lacked the strength to answer with arms, so it answered with accounts.'],
+            headline: pickLine(WINDDOWN_HEADLINE, `world_outcome.trade_war_winddown.${prizeId}.${tick}:headline`, tradeSlots),
+            summary: pickLine(WINDDOWN_SUMMARY, `world_outcome.trade_war_winddown.${prizeId}.${tick}:summary`, tradeSlots),
+            // The two ways a beaten supplier lets a market go, read from the gate above: too
+            // weak to fight, or strong enough and the roll said no.
+            reasons: [defeatedStrength < ESCALATION_CONFIDENCE
+              ? `${nameFor(defeatedId)} is not strong enough to fight for the trade.`
+              : `${nameFor(defeatedId)} could fight for the trade, and has chosen not to.`],
             tick,
             sourceEventTargetId: buyerId,
             causes: [{ source: buyerId, effect: 'market_shock', reason: `${nameFor(defeatedId)} lost a primary export market.` }],

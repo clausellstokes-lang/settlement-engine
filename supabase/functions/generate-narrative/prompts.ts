@@ -415,6 +415,25 @@ type PassSpec = {
   instruction: string;
 };
 
+/**
+ * THE NPC'S POWER FOR A PROMPT (FIX-PUBLIC-VEIL step 3, 2026-11-07). The people car retired the
+ * card's `factionAffiliation` (PEOPLE-RULINGS M-2; PEOPLE-5's v1 -> v2 save migration moves it into
+ * `memberships`), so the three extracts below read `faction: undefined` on every v2 record. A card's
+ * standing in the powers is its ranked `memberships: [{ power, rank: 1|2|3|null, share }]`; the
+ * prompt's `faction` is its BEST-ranked power (rank 1, then 2, then 3, then unranked; ties in
+ * written order), the same reading src/domain/people/cardPowers.js :: firstPowerOf gives the
+ * dossier — undefined for a card in no power, which JSON drops exactly as before. The edge payload
+ * is the DM's own record (these passes' outputs are DM-private: frictionPoints, connectionsMap and
+ * tabNotes are on the public sanitizer's denylist), so no veil applies here.
+ */
+function npcFactionOf(n: any): string | undefined {
+  const ms = (Array.isArray(n?.memberships) ? n.memberships : [])
+    .filter((m: any) => m && typeof m.power === 'string' && m.power);
+  if (!ms.length) return undefined;
+  const rankOf = (m: any) => (Number.isInteger(m.rank) ? m.rank : Number.MAX_SAFE_INTEGER);
+  return ms.reduce((best: any, m: any) => (rankOf(m) < rankOf(best) ? m : best)).power;
+}
+
 const REFINEMENT_PASSES: Record<string, PassSpec> = {
   // ── 1. Opening prose — the DM's first read: arrival, pressure, reason, history ──
   opening: {
@@ -859,7 +878,7 @@ Return JSON: { "items": ["<marker 1>", "<marker 2>", ...] }. One sentence each. 
     max_tokens: 800,
     extract: (s) => {
       const npcs = (s.npcs || []).slice(0, 6).map((n: any) => ({
-        name: n?.name, role: n?.role, faction: n?.factionAffiliation,
+        name: n?.name, role: n?.role, faction: npcFactionOf(n),
       })).filter((x: any) => x.name);
       const factions = (s.powerStructure?.factions || []).slice(0, 4).map((f: any) => ({
         name: f?.faction || f?.name, isGoverning: !!f?.isGoverning,
@@ -894,7 +913,7 @@ Return JSON: { "items": [{ "who": "<named party or parties>", "what": "<1 senten
     max_tokens: 1000,
     extract: (s) => {
       const npcs = (s.npcs || []).slice(0, 8).map((n: any) => ({
-        name: n?.name, role: n?.role, faction: n?.factionAffiliation,
+        name: n?.name, role: n?.role, faction: npcFactionOf(n),
       })).filter((x: any) => x.name);
       const factions = (s.powerStructure?.factions || []).slice(0, 6).map((f: any) => ({
         name: f?.faction || f?.name, isGoverning: !!f?.isGoverning,
@@ -1049,7 +1068,7 @@ No preamble, no markdown.`,
         name: f?.faction || f?.name, isGoverning: !!f?.isGoverning,
       })).filter((x: any) => x.name);
       const npcs = (s.npcs || []).slice(0, 4).map((n: any) => ({
-        name: n?.name, role: n?.role, faction: n?.factionAffiliation,
+        name: n?.name, role: n?.role, faction: npcFactionOf(n),
       })).filter((x: any) => x.name);
       const institutions = (s.institutions || []).slice(0, 5).map((i: any) => ({
         name: i?.name, category: i?.category,
@@ -1607,7 +1626,7 @@ Return ONLY the paragraph. No preamble, no markdown, no heading.`;
 export {
   stripGuidanceFences, buildThesisPrompt, buildRefinementPrompt, buildProgressionThesisPrompt,
   buildDailyLifePrompt, summarizeSettlement, augmentSummaryWithGrounding, overlayPriorRefinedProse,
-  sanitizeChronicleContext, sanitizeWarMoraleContext, preservationBlockFor,
+  sanitizeChronicleContext, sanitizeWarMoraleContext, preservationBlockFor, npcFactionOf,
   DAILY_LIFE_FIELDS, PRESERVATION_RULES, PROGRESSION_AFFECTED_FIELDS, REFINEMENT_PASSES,
 };
 export type { PassContext };

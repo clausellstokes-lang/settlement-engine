@@ -25,9 +25,9 @@
  * (corruption, clergy plane) — no religion-engine cycle.
  */
 
-import {
-  hasCorruptingDeity, compromisedSecurityInstitutions,
-} from '../corruption.js';
+import { hasCorruptingDeity } from '../corruption.js';
+// the bought watch on the LOCAL axis (ALLEGIANCE-CAR3): moved beside the allegiance reader, a lazy leaf
+import { compromisedSecurityInstitutions } from '../corruptionLeash.js';
 import { readClergyPlane } from './clergyTraitPlane.js';
 
 /** @typedef {'economic'|'war'|'faith'|'corruption'} CauseFamily */
@@ -38,28 +38,31 @@ import { readClergyPlane } from './clergyTraitPlane.js';
 /**
  * The closed cause vocabulary: 14 classes across 4 families. `class` is the stable
  * selector W2's content keys off (the conjunction key's causeClass), `family` the
- * coarse grouping, `label` a terse DM-facing mechanism name. NOTHING outside this
- * list is ever attributed.
+ * coarse grouping, `label` the cause as a plain noun phrase a reader understands — the
+ * lifecycle lines slot it verbatim mid-sentence ("because of {label}", "get through
+ * {label}"), so it is a NOUN, never a clause ("funds run short") or a mechanism word
+ * (STYLE-2-PULSE-FOLLOWUP A2·41, 2026-11-09; the class keys untouched). NOTHING outside
+ * this list is ever attributed.
  * @type {ReadonlyArray<{ class: string, family: CauseFamily, label: string }>}
  */
 export const CAUSE_CLASSES = Object.freeze([
   // ── economic ───────────────────────────────────────────────────────────────
-  { class: 'underfunded',     family: 'economic',   label: 'funds run short' },
-  { class: 'chain-starved',   family: 'economic',   label: 'a broken supply chain' },
-  { class: 'depleted',        family: 'economic',   label: 'stores run dry' },
-  { class: 'trade-strangled', family: 'economic',   label: 'trade choked off' },
+  { class: 'underfunded',     family: 'economic',   label: 'a shortage of money' },
+  { class: 'chain-starved',   family: 'economic',   label: 'supplies that stopped coming' },
+  { class: 'depleted',        family: 'economic',   label: 'empty storehouses' },
+  { class: 'trade-strangled', family: 'economic',   label: 'the loss of trade' },
   // ── war ──────────────────────────────────────────────────────────────────────
-  { class: 'levied-away',     family: 'war',        label: 'the strength levied away' },
-  { class: 'garrison-drained',family: 'war',        label: 'a hollowed-out garrison' },
-  { class: 'siege-scarred',   family: 'war',        label: 'the pressure of the war' },
-  { class: 'occupation',      family: 'war',        label: 'the occupier’s hand' },
+  { class: 'levied-away',     family: 'war',        label: 'the fighters taken for the levy' },
+  { class: 'garrison-drained',family: 'war',        label: 'a half-empty garrison' },
+  { class: 'siege-scarred',   family: 'war',        label: 'the hardship of the war' },
+  { class: 'occupation',      family: 'war',        label: 'the occupation' },
   // ── faith ─────────────────────────────────────────────────────────────────────
-  { class: 'conduct-drift',   family: 'faith',      label: 'a patron that rewards the deed' },
+  { class: 'conduct-drift',   family: 'faith',      label: 'a god that rewards wrongdoing' },
   { class: 'conversion-pressure', family: 'faith',  label: 'a rival faith pressing in' },
   { class: 'secularization',  family: 'faith',      label: 'the faith gone cold' },
   { class: 'clergy-scandal',  family: 'faith',      label: 'a tainted priesthood' },
   // ── corruption ─────────────────────────────────────────────────────────────────
-  { class: 'captured',        family: 'corruption', label: 'a captured institution' },
+  { class: 'captured',        family: 'corruption', label: 'an institution in criminal hands' },
   { class: 'scandal',         family: 'corruption', label: 'a corruption scandal' },
 ]);
 

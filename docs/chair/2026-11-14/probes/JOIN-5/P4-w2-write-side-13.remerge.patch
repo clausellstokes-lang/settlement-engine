@@ -1,0 +1,13 @@
+commit 0d5ab1539ebc6a34fb9b985d867316675e4f1023
+Merge: ccb49fe4c a2d7d78f3
+Author: Claude <noreply@anthropic.com>
+Date:   Sat Nov 14 23:05:14 2026 +0000
+
+    join(JOIN-5 · P4): merge lane/w2-write-side-13-2026-11-14 at a2d7d78f3 — the chair's second point, final (the corpus's side branch)
+    
+    Read at 23:05 UTC: a2d7d78f3c80e395ed8ee315ef546f8d3f1dcf00 (equal to the lane's tip; last landed f2bf55f1e (merge 4); merge base f2bf55f1e).
+    No conflict. Merged clean though both sides moved them (independent lines; both stand; LISTED for the close): docs/content/RECEIPT_POOLS_DOSSIER_STATE.md tests/domain/corpusCureGuards.test.js
+    Verify: 4 files the lane moved; 4 staged; every file the joined line had not moved equals the lane's blob.
+    
+    Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+    Claude-Session: https://claude.ai/code/session_01ACmDYazSdYC8v2Fj1WVnzT

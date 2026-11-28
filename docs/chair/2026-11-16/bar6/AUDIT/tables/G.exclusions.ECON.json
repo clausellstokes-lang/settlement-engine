@@ -1,0 +1,112 @@
+[
+  {
+    "file": "src/data/dossierStateProse/economy.generated.js",
+    "text": "The granary stands near its capacity going into {season}. The stores reach past the turn of the year with room to spare.",
+    "reason": "bound to its key: DS-ECO-2 draws it only on the granary outlook band 'well stocked' (deriveGranaryOutlook); the stores it names are the measured stores; prints in 0 of the 450 towns read at the base"
+  },
+  {
+    "file": "src/data/dossierStateProse/economy.generated.js",
+    "text": "Little moves on {settlement}'s roads and the books barely register it. The town buys and sells almost nothing beyond its own walls.",
+    "reason": "bound to its key: DS-ECO-3 SHORTAGE x not trade-dependent, a measured low throughput off the spatial ledger in a town the record says is not trade-dependent; prints in 0 of 450"
+  },
+  {
+    "file": "src/data/dossierStateProse/economy.generated.js",
+    "text": "Little moves on {settlement}'s roads and the books barely register it. The town buys and sells almost nothing beyond its own bounds.",
+    "reason": "bound to its key: DS-ECO-3 SHORTAGE x not trade-dependent, a measured low throughput off the spatial ledger in a town the record says is not trade-dependent; prints in 0 of 450"
+  },
+  {
+    "file": "src/data/dossierStateProse/economy.generated.js",
+    "text": "The people working the {chain} are not idle and are not comfortable. One bad month upstream would put them down.",
+    "reason": "a false positive of the lexicon: the ease word is negated ('not comfortable'); the line is DS-ECO-5's vulnerable chain's own state"
+  },
+  {
+    "file": "src/data/dossierStateProse/economy.generated.js",
+    "text": "The line from {resource} to {good} is unbroken: the workings feed {institution}, {institution} finishes the work, and the finished goods leave the town as trade.",
+    "reason": "bound to its key: DS-SUP-1 'COMPLETE LINE, output exported' is drawn only for a chain the record marks exportable with every stage present; prints in 0 of 450"
+  },
+  {
+    "file": "src/data/dossierStateProse/economy.generated.js",
+    "text": "{settlement} has the {resource} and not the {institution}. The line ends where the working should begin, and the raw goods go out raw or not at all.",
+    "reason": "bound to its key (a processing house missing from the roster) and hedged by its own words ('or not at all'): it presumes no export; prints in 0 of 450"
+  },
+  {
+    "file": "src/data/dossierStateProse/economy.generated.js",
+    "text": "Nothing in this {chain} is made at {settlement}. Goods arrive finished and go on again, and the town is paid for the handling.",
+    "reason": "a false positive of the lexicon: 'is paid' is a town paid for handling goods, no office; bound to DS-SUP-1's entrepot key"
+  },
+  {
+    "file": "src/data/dossierStateProse/economy.generated.js",
+    "text": "The workings above {settlement} sit idle. It is not that there is nothing in them; it is that nothing can be got away from them.",
+    "reason": "bound to its key: DS-SUP-1 'BLOCKED: nothing can be got away' is the blocked chain's own state; the idle workings are the state it names; prints in 0 of 450"
+  },
+  {
+    "file": "src/data/dossierStateProse/economy.generated.js",
+    "text": "The town has the {resource} and no use for it. Without a road out, the ground might as well be empty.",
+    "reason": "bound to its key: DS-SUP-1 'BLOCKED' names the missing road as its cause; prints in 0 of 450"
+  },
+  {
+    "file": "src/data/dossierStateProse/economy.generated.js",
+    "text": "Plenty of people at {settlement} have used its {institution}; few will say where it meets or who runs it.",
+    "reason": "a false positive of the lexicon: 'plenty of people' is a count of customers, no plenty of goods"
+  },
+  {
+    "file": "src/data/dossierStateProse/economy.generated.js",
+    "text": "Sellers at {settlement} give credit more often than they would like, and are paid late.",
+    "reason": "a false positive of the lexicon: 'are paid late' is sellers paid late, no office; the line is DS-ECO-8's Struggling rung"
+  },
+  {
+    "file": "src/data/dossierStateProse/economy.generated.js",
+    "text": "Everything on the {chain} goes through the same hands now, and those hands are paid before anyone else is.",
+    "reason": "a false positive of the lexicon: 'hands are paid' is a captured chain's takers, no office"
+  },
+  {
+    "file": "src/data/dossierStateProse/economy.generated.js",
+    "text": "Nothing more can be taken from the {resource} at {settlement}. Until somebody pays to open new workings, the hands that worked there are idle or gone elsewhere.",
+    "reason": "bound to its key: DS-ECO-11's resource condition 'worked out'; the idle hands are the state it names"
+  },
+  {
+    "file": "src/data/dossierStateProse/economy.generated.js",
+    "text": "Some of what leaves {settlement} as export was never the town's: it came in and went on again, and the town is paid for handling it.",
+    "reason": "a false positive of the lexicon: the town paid for handling transit goods, no office; bound to DS-ECO-12's isEntrepot key"
+  },
+  {
+    "file": "src/domain/display/labelBands.js",
+    "text": "Agricultural surplus with trade links",
+    "reason": "a producer label (prosperity.js :: deriveEconomicComplexity, named once in labelBands.js): the generator writes it only where its complexity reading finds the surplus"
+  },
+  {
+    "file": "src/domain/display/labelBands.js",
+    "text": "Subsistence with minor surplus",
+    "reason": "a producer label, as above: written only where the complexity reading finds the minor surplus"
+  },
+  {
+    "file": "src/domain/display/stateProse/economyStateProse.js",
+    "text": "TIER: a large share off the books (≥30)",
+    "reason": "not printed: a pool key (economyStateProse.js :: shadowEconomyPoolKey returns the annex pool title)"
+  },
+  {
+    "file": "src/domain/display/tradeListDisplay.js",
+    "text": "quality tools and weapons",
+    "reason": "not printed as written: a match key of tradeListDisplay.js's good tables (MADE_GOOD_ROWS, CARRIED_GOOD_ROWS) that bears an export out by its house; the printed word is the record's own"
+  },
+  {
+    "file": "src/domain/display/tradeListDisplay.js",
+    "text": "advanced weapons and armor",
+    "reason": "not printed as written: a match key of tradeListDisplay.js's good tables (MADE_GOOD_ROWS, CARRIED_GOOD_ROWS) that bears an export out by its house; the printed word is the record's own"
+  },
+  {
+    "file": "src/domain/display/tradeListDisplay.js",
+    "text": "fine metalwork and jewelry",
+    "reason": "not printed as written: a match key of tradeListDisplay.js's good tables (MADE_GOOD_ROWS, CARRIED_GOOD_ROWS) that bears an export out by its house; the printed word is the record's own"
+  },
+  {
+    "file": "src/domain/display/tradeListDisplay.js",
+    "text": "|\\bfishers?\\b|\\bchandler|render/], // a fish market sells the catch: it renders no oil (ruling 2b)",
+    "reason": "not printed: a regular expression of LAND_GOOD_ROWS (a fish market renders no oil)"
+  },
+  {
+    "file": "src/domain/display/tradeListDisplay.js",
+    "text": "rare spices and exotic dyes",
+    "reason": "not printed as written: a match key of tradeListDisplay.js's good tables (MADE_GOOD_ROWS, CARRIED_GOOD_ROWS) that bears an export out by its house; the printed word is the record's own"
+  }
+]

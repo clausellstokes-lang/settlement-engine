@@ -1,0 +1,212 @@
+{
+  "poolId": "DS-GEN-13",
+  "source": "src/data/dossierStateProse/general.generated.js (annex docs/content/RECEIPT_POOLS_DOSSIER_STATE.md)",
+  "drawKind": "K",
+  "drawSite": "marketPoolKey(liveInstitutions, tradeRouteAccess, isEntrepot) → readStateProse → eligibleVariants → drawVariant",
+  "pools": [
+    {
+      "pool": "MARKET-OPEN",
+      "keyGuarantees": [
+        "a standing market-class institution",
+        "an open trade approach (not isolated / mountain_pass / mountain_road)",
+        "not an entrepot"
+      ],
+      "poolNeeds": [
+        "market"
+      ],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Scoped: it renders under a crisis and line 1 says the roads bring the custom, which a siege contradicts.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "Market day is {settlement} at its truest: the roads bring the custom, and the custom is the argument for the stalls.",
+          "needs": [],
+          "excludes": [
+            "crisis: under_siege"
+          ],
+          "crisis": "any",
+          "colour": false,
+          "stop": [
+            "trade-route kind"
+          ]
+        },
+        {
+          "lineId": "vid:2",
+          "text": "{settlement}'s market lives off through-traffic; the town sells to the road as much as to itself.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": false,
+          "stop": [
+            "trade-route kind"
+          ]
+        },
+        {
+          "lineId": "vid:3",
+          "text": "A stranger finds {settlement}'s market without directions, because the busiest way through town leads there on its own.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:4",
+          "text": "The market was where the carts already stopped; the stalls came to the stopping, and {settlement} grew around the habit.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": false,
+          "stop": [
+            "history facts"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "MARKET-NARROW",
+      "keyGuarantees": [
+        "a standing market-class institution",
+        "a narrow approach (isolated / mountain_pass / mountain_road)",
+        "not an entrepot"
+      ],
+      "poolNeeds": [
+        "market"
+      ],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour, not scoped: a self-serving market asserts no calm.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{settlement}'s market serves the town itself; little passes through that was not always coming here.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "What {settlement} makes, {settlement} mostly buys from itself, and the market is the room where that happens.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "No great road feeds {settlement}'s market, and the market has made its peace with that: it is a town's exchange, not a region's.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "ENTREPOT",
+      "keyGuarantees": [
+        "a standing market-class institution",
+        "economicState.isEntrepot === true"
+      ],
+      "poolNeeds": [
+        "market"
+      ],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Scoped: lines 2-3 describe goods flowing through the stalls now, which a siege contradicts.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{settlement}'s market handles more than the town could ever use; the difference is the town's living.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "Half of what changes hands in {settlement} is only pausing here, and the town has built itself around the pause.",
+          "needs": [],
+          "excludes": [
+            "crisis: under_siege"
+          ],
+          "crisis": "any",
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "In {settlement} the {good} on the stalls has usually seen more of the world than the people selling it.",
+          "needs": [],
+          "excludes": [
+            "crisis: under_siege"
+          ],
+          "crisis": "any",
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "NO-MARKET",
+      "keyGuarantees": [
+        "no standing market-class institution"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [
+        "market"
+      ],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Not scoped (no calm); both lines presume a gate and an inn, so most market-less births would draw nothing: one twin added.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "No market or fair stands in {settlement}: what trade the town does is done at the gate, at the inn and on the road.",
+          "needs": [
+            "gate",
+            "institution: tavern"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "A stranger finds no market square in {settlement}, only trade done at the gate, at the inn and along the road.",
+          "needs": [
+            "gate",
+            "institution: tavern"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        }
+      ],
+      "twins": [
+        {
+          "text": "No market or fair stands in {settlement}: what trade the town does is done house to house and on the road.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "why": "Both pool lines need a gate and an inn; a small market-less town usually has neither, leaving the slot empty."
+        }
+      ]
+    }
+  ]
+}

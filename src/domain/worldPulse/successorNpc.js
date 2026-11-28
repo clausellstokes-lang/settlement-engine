@@ -34,7 +34,11 @@ export function successorNpc(ousted = {}, rng) {
     name: pick(FIRST_NAMES),
     role: ousted.role || ousted.category || '',
     category: ousted.category,
-    factionAffiliation: ousted.factionAffiliation,
+    // GREEN-TIP (2026-11-10): the successor inherits the seat's powers and house AS WRITTEN on the ousted card (its
+    // `memberships` and `institution`, the current vocabulary); it copied the retired `factionAffiliation`, so on a
+    // current card the successor stood in no power and no house — the seat it was minted to fill was lost.
+    memberships: Array.isArray(ousted.memberships) ? ousted.memberships.map((m) => ({ ...m })) : [],
+    institution: ousted.institution ?? null,
     factionLink: ousted.factionLink,
     institutionId: ousted.institutionId,
     importance: ousted.importance,
@@ -42,10 +46,10 @@ export function successorNpc(ousted = {}, rng) {
       dominant: pick(HONEST_DOMINANT),
       flaw: pick(HONEST_FLAW),
       modifier: ousted.personality?.modifier,
-      tell: ousted.personality?.tell,
+      tell: ousted.personality?.tell == null ? ousted.personality?.tell : heldCardLine(ousted.personality.tell), // E8b (G30): the held form, byte-equal to the base's
       speech: ousted.personality?.speech,
     },
-    goal: { short: SUCCESSOR_GOAL, long: ousted.goal?.long || '' },
+    goal: { short: SUCCESSOR_GOAL, long: heldCardLine(ousted.goal?.long || '') }, // E8b (G30): the held form
     corrupt: false,
     timesExposed: 0,
     replacedNpc: ousted.name || null,
@@ -95,3 +99,4 @@ export function replaceOustedNpcs(settlement, oustedNames, rng) {
   });
   return changed ? { ...settlement, npcs } : settlement;
 }
+import { heldCardLine } from '../../data/people/personMention.js'; // E8b (G30): the successor copies a bound line in its held form (here, below the cited lines)

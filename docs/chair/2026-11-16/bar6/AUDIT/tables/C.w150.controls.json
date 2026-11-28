@@ -1,0 +1,490 @@
+[
+ {
+  "rule": "7",
+  "kind": "stands",
+  "id": "C3247",
+  "town": "bar0-city-under_siege+famine-rand-28",
+  "section": "Systems/Defense",
+  "found": true,
+  "rules": "7b-defence",
+  "text": "To anyone arriving, Teotiha looks defended in the ordinary way: enough for the usual troub"
+ },
+ {
+  "rule": "7",
+  "kind": "stands",
+  "id": "C94460",
+  "town": "bar0-hamlet-under_siege-rand-36",
+  "section": "Summary/Overview",
+  "found": true,
+  "rules": "7d-traffic",
+  "text": "A work party heads out together, singing, with tools on their shoulders."
+ },
+ {
+  "rule": "7",
+  "kind": "stands",
+  "id": "C150831",
+  "town": "bar0-thorp-calm-rand-27",
+  "section": "Summary/Overview",
+  "found": true,
+  "rules": "7d-traffic",
+  "text": "Porters bent under loaded frames file past, and someone counts them in."
+ },
+ {
+  "rule": "7",
+  "kind": "stands",
+  "id": "C85036",
+  "town": "bar0-hamlet-calm-rand-33",
+  "section": "Systems/Defense",
+  "found": true,
+  "rules": "7a-nothreat",
+  "text": "Mingpo has no wall, and nothing threatens it now that a wall would keep out."
+ },
+ {
+  "rule": "7",
+  "kind": "stands",
+  "id": "C205552",
+  "town": "bar0-village-calm-rand-34",
+  "section": "Systems/Defense",
+  "found": true,
+  "rules": "7a-nothreat",
+  "text": "Beiyuan has no wall, and nothing threatens it now that a wall would keep out."
+ },
+ {
+  "rule": "7",
+  "kind": "stands",
+  "id": "C146255",
+  "town": "bar0-metropolis-calm-rand-40",
+  "section": "Systems/Defense",
+  "found": true,
+  "rules": "7a-nothreat",
+  "text": "Nothing presses Neaeia at present: its defences would make any attack costly, so raiders a"
+ },
+ {
+  "rule": "7",
+  "kind": "stands",
+  "id": "C157891",
+  "town": "bar0-town-calm-rand-27",
+  "section": "Systems/Economics",
+  "found": true,
+  "rules": "7c-plenty",
+  "text": "Nobody here talks about the price of bread."
+ },
+ {
+  "rule": "7",
+  "kind": "stands",
+  "id": "C26390",
+  "town": "bar0-city-under_siege+famine-rand-36",
+  "section": "Systems/Defense",
+  "found": true,
+  "rules": "7b-defence",
+  "text": "Fresh repairs show on Lagoorum's city walls and gates; the city keeps its defences in work"
+ },
+ {
+  "rule": "7",
+  "kind": "stands",
+  "id": "C217292",
+  "town": "bar0-village-famine-rand-37",
+  "section": "Summary/Overview",
+  "found": true,
+  "rules": "7c-plenty",
+  "text": "Kleinberg's market handles more than the village could ever use."
+ },
+ {
+  "rule": "7",
+  "kind": "stands",
+  "id": "C184150",
+  "town": "bar0-town-occupied-rand-31",
+  "section": "Systems/Economics",
+  "found": true,
+  "rules": "7c-plenty",
+  "text": "Its food comes from more than one source, the herds most of all, so a poor year in one doe"
+ },
+ {
+  "rule": "7",
+  "kind": "stands",
+  "id": "C40276",
+  "town": "bar0-village-calm-rand-25",
+  "found": null,
+  "note": "town not in this render"
+ },
+ {
+  "rule": "7",
+  "kind": "weak",
+  "id": "C0013",
+  "town": "bar0-city-under_siege+famine-rand-27",
+  "section": "Summary/Overview",
+  "found": false,
+  "rules": "",
+  "text": "A poet holds a small crowd by the well, and nobody hurries the telling along."
+ },
+ {
+  "rule": "7",
+  "kind": "weak",
+  "id": "C4592",
+  "town": "bar0-city-under_siege+famine-rand-29",
+  "section": "Summary/Overview",
+  "found": false,
+  "rules": "",
+  "text": "A craftsman shows off a finished piece in his doorway, and passers-by judge it out loud."
+ },
+ {
+  "rule": "7",
+  "kind": "weak",
+  "id": "C61115",
+  "town": "bar0-city-wartime-rand-35",
+  "section": "Summary/Overview",
+  "found": true,
+  "rules": "7w-tone",
+  "text": "Pilgrims crowd the road in, and every second stall sells candles, tokens or someone's bles"
+ },
+ {
+  "rule": "7",
+  "kind": "weak",
+  "id": "C79603",
+  "town": "bar0-city-wartime-rand-41",
+  "section": "Summary/Overview",
+  "found": true,
+  "rules": "7w-tone",
+  "text": "Pilgrims crowd the road in, and every second stall sells candles, tokens or someone's bles"
+ },
+ {
+  "rule": "7",
+  "kind": "weak",
+  "id": "C218186",
+  "town": "bar0-village-famine-rand-38",
+  "section": "Summary/Overview",
+  "found": true,
+  "rules": "7w-tone",
+  "text": "A work party heads out together, singing, with tools on their shoulders."
+ },
+ {
+  "rule": "7",
+  "kind": "weak",
+  "id": "C218926",
+  "town": "bar0-village-famine-rand-39",
+  "section": "Summary/Overview",
+  "found": true,
+  "rules": "7w-tone",
+  "text": "A work party heads out together, singing, with tools on their shoulders."
+ },
+ {
+  "rule": "7",
+  "kind": "explained",
+  "id": "C0343",
+  "town": "bar0-city-under_siege+famine-rand-27",
+  "section": "Systems/Institutions",
+  "found": false,
+  "rules": "",
+  "text": "Standing markets in more than one quarter, open every day."
+ },
+ {
+  "rule": "7",
+  "kind": "explained",
+  "id": "C182276",
+  "town": "bar0-town-occupied-rand-30",
+  "section": "Summary/Overview",
+  "found": false,
+  "rules": "",
+  "text": "Food is being handed out to anyone who asks, and the line is patient."
+ },
+ {
+  "rule": "7",
+  "kind": "stands_by_L2",
+  "id": "C43575",
+  "town": "bar0-village-famine-rand-26",
+  "found": null,
+  "note": "town not in this render"
+ },
+ {
+  "rule": "7",
+  "kind": "stands_by_L2",
+  "id": "C0350",
+  "town": "bar0-city-under_siege+famine-rand-24",
+  "found": null,
+  "note": "town not in this render"
+ },
+ {
+  "rule": "7",
+  "kind": "stands_by_L2",
+  "id": "C3223",
+  "town": "bar0-city-under_siege+famine-rand-25",
+  "found": null,
+  "note": "town not in this render"
+ },
+ {
+  "rule": "7",
+  "kind": "stands_by_L2",
+  "id": "C5452",
+  "town": "bar0-city-under_siege+famine-rand-26",
+  "found": null,
+  "note": "town not in this render"
+ },
+ {
+  "rule": "6a",
+  "kind": "stands",
+  "id": "C154042",
+  "town": "bar0-thorp-calm-rand-34",
+  "section": "Systems/Defense",
+  "found": true,
+  "rules": "6a-size",
+  "text": "Nobody at Loughshaw warns visitors about particular streets, because the warning would cov"
+ },
+ {
+  "rule": "6a",
+  "kind": "stands",
+  "id": "C209939",
+  "town": "bar0-village-calm-rand-41",
+  "section": "Summary/Overview",
+  "found": true,
+  "rules": "6a-size",
+  "text": "Causeways and managed water divide the settlement into organized neighborhoods."
+ },
+ {
+  "rule": "6a",
+  "kind": "weak",
+  "id": "C206170",
+  "town": "bar0-village-calm-rand-35",
+  "section": "Systems/Defense",
+  "found": true,
+  "rules": "6a-w",
+  "text": "Visitors to Qaryahdarya are told which few streets to avoid, and the advice turns out to b"
+ },
+ {
+  "rule": "6b",
+  "kind": "stands",
+  "id": "C39804",
+  "town": "bar0-city-wartime-rand-27",
+  "section": "Summary/Overview",
+  "found": true,
+  "rules": "6b-out",
+  "text": "Bolts of cloth and bales of wool fill the carts waiting on the road out."
+ },
+ {
+  "rule": "6b",
+  "kind": "stands",
+  "id": "C84094",
+  "town": "bar0-hamlet-calm-rand-32",
+  "section": "Summary/Overview",
+  "found": true,
+  "rules": "6b-denied",
+  "text": "The chink of chisels on stone carries on the wind."
+ },
+ {
+  "rule": "6b",
+  "kind": "stands",
+  "id": "C115374",
+  "town": "bar0-metropolis-calm-rand-32",
+  "section": "Summary/Overview",
+  "found": true,
+  "rules": "6b-out",
+  "text": "Crates of pots and glassware, packed in straw, wait for the carts on the road out."
+ },
+ {
+  "rule": "6b",
+  "kind": "stands",
+  "id": "C219863",
+  "town": "bar0-village-famine-rand-40",
+  "section": "Summary/Overview",
+  "found": true,
+  "rules": "6b-nomaker",
+  "text": "Someone is churning butter in a doorway, and the rhythm of it carries."
+ },
+ {
+  "rule": "6b",
+  "kind": "stands",
+  "id": "C15780",
+  "town": "bar0-city-under_siege+famine-rand-33",
+  "section": "Summary/Overview",
+  "found": true,
+  "rules": "6b-nomaker 7c-plenty",
+  "text": "Spice and drying herbs scent every lane, and the stalls are piled with them."
+ },
+ {
+  "rule": "6b",
+  "kind": "stands",
+  "id": "C15951",
+  "town": "bar0-hamlet-calm-rand-25",
+  "found": null,
+  "note": "town not in this render"
+ },
+ {
+  "rule": "6c",
+  "kind": "stands",
+  "id": "C86447",
+  "town": "bar0-hamlet-calm-rand-36",
+  "section": "Systems/Economics",
+  "found": true,
+  "rules": "6c-arms",
+  "text": "Grain surplus · Sacred wood · Ritual components · Quality tools and weapons · Advanced wea"
+ },
+ {
+  "rule": "6c",
+  "kind": "stands",
+  "id": "C86484",
+  "town": "bar0-hamlet-calm-rand-36",
+  "section": "Systems/Economics",
+  "found": true,
+  "rules": "6c-arms",
+  "text": "Quality tools and weapons · Advanced weapons and armor · Master-crafted weapons"
+ },
+ {
+  "rule": "6c",
+  "kind": "stands",
+  "id": "C88481",
+  "town": "bar0-hamlet-calm-rand-40",
+  "section": "Systems/Economics",
+  "found": true,
+  "rules": "6c-unsold",
+  "text": "Raw sand · Date harvest · Desert grain · Medicinal herbs · Wild honey · Coal · Palm sugar"
+ },
+ {
+  "rule": "6c",
+  "kind": "stands",
+  "id": "C204663",
+  "town": "bar0-village-calm-rand-33",
+  "section": "Systems/Resources",
+  "found": true,
+  "rules": "6c-unsold",
+  "text": "There is glass sand in Polaki's country worth real money elsewhere, and none of it leaves "
+ },
+ {
+  "rule": "6c",
+  "kind": "stands",
+  "id": "C171330",
+  "town": "bar0-town-calm-rand-37",
+  "section": "Systems/Resources",
+  "found": true,
+  "rules": "6c-halfway",
+  "text": "Work on the timber here stops half-way: no charcoal burner finishes it."
+ },
+ {
+  "rule": "6c",
+  "kind": "stands",
+  "id": "C158113",
+  "town": "bar0-town-calm-rand-27",
+  "section": "Systems/Resources",
+  "found": true,
+  "rules": "6c-unworked",
+  "text": "No one here works the stone near Gantulgakhurel."
+ },
+ {
+  "rule": "6c",
+  "kind": "stands",
+  "id": "C39608",
+  "town": "bar0-village-calm-rand-24",
+  "found": null,
+  "note": "town not in this render"
+ },
+ {
+  "rule": "6c",
+  "kind": "stands",
+  "id": "C37887",
+  "town": "bar0-town-occupied-rand-25",
+  "found": null,
+  "note": "town not in this render"
+ },
+ {
+  "rule": "6d",
+  "kind": "stands",
+  "id": "C161931",
+  "town": "bar0-town-calm-rand-30",
+  "section": "Summary/Overview",
+  "found": true,
+  "rules": "6d-court",
+  "text": "The town is visibly governed: a hall of justice, a gaol."
+ },
+ {
+  "rule": "6d",
+  "kind": "stands",
+  "id": "C203044",
+  "town": "bar0-village-calm-rand-31",
+  "section": "Systems/Defense",
+  "found": true,
+  "rules": "6d-paid",
+  "text": "Fortification and forces are present and paid, but the pressure on them never lets up."
+ },
+ {
+  "rule": "6d",
+  "kind": "stands",
+  "id": "C91256",
+  "town": "bar0-hamlet-under_siege-rand-30",
+  "section": "Systems/Power",
+  "found": true,
+  "rules": "6d-members",
+  "text": "The Headman's Authority at Drumwood has left obvious decisions untaken because its members"
+ },
+ {
+  "rule": "6d",
+  "kind": "stands",
+  "id": "C128237",
+  "town": "bar0-metropolis-calm-rand-35",
+  "section": "Systems/Power",
+  "found": true,
+  "rules": "6d-blurb",
+  "text": "A small group of traders who come on market days; they speak up in small disputes but carr"
+ },
+ {
+  "rule": "6d",
+  "kind": "stands",
+  "id": "C113231",
+  "town": "bar0-metropolis-calm-rand-31",
+  "section": "Systems/Economics",
+  "found": true,
+  "rules": "6d-fields",
+  "text": "Intensive plots, terraces, raised fields, and tribute redistribution support dense populat"
+ },
+ {
+  "rule": "6d",
+  "kind": "stands",
+  "id": "C43925",
+  "town": "bar0-village-famine-rand-26",
+  "found": null,
+  "note": "town not in this render"
+ },
+ {
+  "rule": "6d",
+  "kind": "stands",
+  "id": "C39734",
+  "town": "bar0-village-calm-rand-24",
+  "found": null,
+  "note": "town not in this render"
+ },
+ {
+  "rule": "6e",
+  "kind": "stands",
+  "id": "C42840",
+  "town": "bar0-village-famine-rand-25",
+  "found": null,
+  "note": "town not in this render"
+ },
+ {
+  "rule": "6e",
+  "kind": "explained",
+  "id": "C48148",
+  "town": "bar0-city-wartime-rand-30",
+  "section": "Systems/Power",
+  "found": false,
+  "rules": "",
+  "text": "Crown supply carts take what they need first, and local needs come second."
+ },
+ {
+  "rule": "6e",
+  "kind": "explained",
+  "id": "C48270",
+  "town": "bar0-city-wartime-rand-30",
+  "section": "Systems/Power",
+  "found": false,
+  "rules": "",
+  "text": "Crown authority over the war flows through military channels now."
+ },
+ {
+  "rule": "6e",
+  "kind": "explained",
+  "id": "C48442",
+  "town": "bar0-city-wartime-rand-30",
+  "section": "World/NPCs",
+  "found": false,
+  "rules": "",
+  "text": "Wants Satisfy the crown requisition order without stripping the settlement to the bone"
+ }
+]

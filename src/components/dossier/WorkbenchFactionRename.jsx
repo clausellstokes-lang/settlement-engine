@@ -99,7 +99,7 @@ export default function WorkbenchFactionRename({ entry }) {
       </h3>
       {factionIndex == null ? (
         <p role="note" style={{ margin: 0, color: MUTED, fontSize: proseFontSize(FS.xxs, mobile), lineHeight: 1.45 }}>
-          This faction cannot be uniquely matched to the live settlement, so
+          This power cannot be uniquely matched to the live settlement, so
           renaming is disabled rather than guessing.
         </p>
       ) : (
@@ -107,7 +107,7 @@ export default function WorkbenchFactionRename({ entry }) {
           <p style={{ margin: '0 0 7px', color: MUTED, fontSize: proseFontSize(FS.xxs, mobile), lineHeight: 1.45 }}>
             A new name is staged for review first. When you commit it, it carries
             through the roster, the governing seat, every member and every
-            neighbouring settlement that names this faction.
+            neighbouring settlement that names this power.
           </p>
           {!open && (
             <div style={{ display: 'flex', alignItems: 'baseline', gap: SP.sm, flexWrap: 'wrap' }}>
@@ -115,14 +115,14 @@ export default function WorkbenchFactionRename({ entry }) {
                 {currentName}
               </span>
               <Button variant="ghost" size="sm" onClick={beginRename}>
-                Rename this faction
+                Rename this power
               </Button>
             </div>
           )}
           {open && (
             <div>
               <input
-                aria-label="New faction name"
+                aria-label="New name for the power"
                 value={draft}
                 onChange={(event) => setDraft(event.target.value)}
                 style={{

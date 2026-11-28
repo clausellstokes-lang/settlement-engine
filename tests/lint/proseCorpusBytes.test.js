@@ -237,9 +237,25 @@ describe('the prose byte ratchet — the ceilings are re-derived, never trusted 
     const total = baseline.ceilingTotalRawNewLeaves;
     const basis = baseline.genesisBasisRawNewLeaves;
     expect(COMPOSER_LEAVES.reduce((n, rel) => n + genesis[rel].raw, 0), 'the new-leaf basis disagrees with the rows it sums').toBe(basis);
+    // A DECLARED TRANSFER moves headroom between the three leaves with the total standing (the chair's ruling of
+    // 2026-11-07 04:43 UTC under the owner's delegation, ODQ §934.105: re-apportion first, raise §10's total only
+    // when no leaf has the slack). Each transfer is applied on top of the genesis share; the sum below still lands
+    // on the total exactly, so a hand-edited ceiling is visible either way.
+    const transfers = baseline.ceilingTransfersNewLeaves ?? [];
+    const moved = Object.fromEntries(COMPOSER_LEAVES.map((rel) => [rel, 0]));
+    for (const [i, t] of transfers.entries()) {
+      expect(COMPOSER_LEAVES, `ceilingTransfersNewLeaves[${i}].from is not a composer leaf`).toContain(t.from);
+      expect(COMPOSER_LEAVES, `ceilingTransfersNewLeaves[${i}].to is not a composer leaf`).toContain(t.to);
+      expect(t.from, `ceilingTransfersNewLeaves[${i}] moves headroom to itself`).not.toBe(t.to);
+      expect(Number.isInteger(t.raw) && t.raw > 0, `ceilingTransfersNewLeaves[${i}].raw must be a positive integer`).toBe(true);
+      expect(typeof t.ruling === 'string' && t.ruling.trim().length > 0, `ceilingTransfersNewLeaves[${i}] names no ruling`).toBe(true);
+      moved[t.from] -= t.raw;
+      moved[t.to] += t.raw;
+    }
     const wrong = [];
     for (const rel of COMPOSER_LEAVES) {
-      const wantRaw = Math.round((total * genesis[rel].raw) / basis);
+      const wantRaw = Math.round((total * genesis[rel].raw) / basis) + moved[rel];
+      if (wantRaw < leaves[rel].raw) wrong.push(`${rel}: a transfer left its ceiling ${wantRaw} below its own bytes ${leaves[rel].raw}`);
       // §10's 4.5 : 1 is a CORPUS ratio; on a small payload gzip's fixed overhead dominates and
       // that ratio would set a ceiling the leaf breaches at birth (the connectives leaf
       // compresses at 1.72 : 1 and this arm's first run said so). The ceiling is therefore the

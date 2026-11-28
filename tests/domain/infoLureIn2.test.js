@@ -158,8 +158,14 @@ const digest = (text) => createHash('sha256').update(text).digest('hex');
  * THE PRE-IN-2 FOOTPRINT: this fixture's full processLies return, computed by the digest script
  * with the head as it stood at the base (bfe4830d0, the verified base archive) — the same fixture
  * text, read out of this file between its markers. Dark, the head must still answer exactly this.
+ *
+ * RE-KEYED BY ONE CAUSE (FIX-PULSE-DEFECTS, audit C2·25, 2026-11-09): the bought plant's
+ * reason printed its patron's raw key ("… bought by p."); a patron the faction ledger cannot
+ * name now reads "a power that paid in secret". Was 7d96b62a…3f373e1d. The control: with that
+ * fallback set back to the raw key, the head answers the old digest exactly (measured), so this
+ * one slot is the whole move.
  */
-const PRE_IN2_DARK_DIGEST = '7d96b62ae7142b0939642d4b3d2438a80e07b4778d973919715b17213f373e1d';
+const PRE_IN2_DARK_DIGEST = 'f9588cf1a6df8c0daef54c0197867f2f9ccfc95f53d6facbf15509e8721b8909';
 
 function walk(dir, out = []) {
   for (const entry of readdirSync(dir)) {

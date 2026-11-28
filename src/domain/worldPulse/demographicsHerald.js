@@ -117,6 +117,10 @@ function codepoint(a, b) {
   return a < b ? -1 : a > b ? 1 : 0;
 }
 
+/** A quantity phrase that OPENS a sentence takes a capital (the bands are lower-case, for
+ *  mid-sentence use). @param {string} phrase @returns {string} */
+const leadCase = (phrase) => phrase.charAt(0).toUpperCase() + phrase.slice(1);
+
 /**
  * SPEAK A COUNT WITHOUT WRITING ONE. Total: a nonpositive count reads as nobody, so a
  * caller can never produce "0 souls left".
@@ -417,10 +421,10 @@ export function demographicNewsEntries(input) {
       significance: departures >= HERALD_TUNING.MAJOR_DEPARTURE_FLOOR ? 'major' : 'notable',
       severity: refugee ? 0.7 : 0.45,
       score: departures >= HERALD_TUNING.MAJOR_DEPARTURE_FLOOR ? 78 : 58,
-      headline: `${quantityWords(departures || unplaced)} left ${origin}`,
+      headline: `${leadCase(quantityWords(departures || unplaced))} left ${origin}`,
       summary: departures > 0
-        ? `${quantityWords(departures)} left ${origin} ${road}.`
-        : `${quantityWords(unplaced)} would have left ${origin}, and the realm had nowhere to put them.`,
+        ? `${leadCase(quantityWords(departures))} left ${origin} ${road}.`
+        : `${leadCase(quantityWords(unplaced))} would have left ${origin}, and the realm had nowhere to put them.`,
       reasons,
     }));
   }

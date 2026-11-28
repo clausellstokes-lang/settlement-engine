@@ -71,18 +71,22 @@
  */
 import { DOSSIER_STATE_PROSE_GENERAL } from '../../../data/dossierStateProse/general.generated.js';
 import { scoreBand } from '../defenseScoreBands.js';
-import { liveInstitutions } from '../../institutions/institutionRoster.js';
 // FREE: `heraldCausalGrammar.js` is a ZERO-IMPORT display leaf, and it holds §0d's own
 // six-band duration table in its four print positions. ⚠ TWO SIBLING DESKS DECLINED
 // `{timeband_age}` FOR WANT OF A "duration former in the tree" (powerStateProse.js:900,
 // stressorsStateProse.js:78) — `timeBandOf`/`timeBandWord` ARE that former, and the
 // declination is stale at this tip rather than wrong when it was written. Measured here,
 // not assumed: see `yearBand` below.
-import { timeBandOf, timeBandWord } from '../heraldCausalGrammar.js';
+import { TIME_BANDS, timeBandOf, timeBandWord } from '../heraldCausalGrammar.js';
 import { composeStateProse } from './composeStateProse.js';
 import { generalStateProseCandidates } from './generalStateProseCandidates.js';
 import { legibilityRung } from './legibilityRung.js';
+import { powerSentenceName } from '../powerSentenceName.js';
 import { wallsAnswered } from '../../defense/defenseFacts.js';
+import { defenceOf } from '../../facts/defence.js';
+import { marketOf } from '../../facts/market.js';
+import { crisisAnswered } from '../../crisis/crisisFacts.js';
+import { factsAnswered } from '../../facts/factsAnswered.js'; import { shapeYieldingKey } from '../../facts/shapingEvent.js'; // BAR4-HISTORY T1-SHAPE
 
 /** @typedef {import('./legibilityRung.js').LegibilityRung} LegibilityRung */
 
@@ -445,8 +449,14 @@ function phraseFill(value) {
  * ⚠ THE LADDER TOPS OUT WELL BELOW THIS CHAPTER'S SUBJECT, AND THAT IS THE FINDING BELOW.
  * @param {number} years @returns {ReturnType<typeof timeBandOf>}
  */
-function yearBand(years) {
-  return timeBandOf(years, 52);
+export function yearBand(years) {
+  const band = timeBandOf(years, 52);
+  // COHERENCE-PRESUME (the chair's ruling B): the herald's ladder calls up to twenty-five years "a decade",
+  // and the page printed "a decade old" beside "23y ago". In years, past fifteen a span is a generation.
+  // BAR7-LINES (the LOW "a generation old" of 40 to 60 years, 100 towns of the 720): from forty years the generation band
+  // says two generations; it keeps its id, so a reader that asks which band it is reads what it read before
+  const generation = band.id === 'a_decade' && years > 15 ? (TIME_BANDS.find((b) => b.id === 'a_generation') ?? band) : band;
+  return generation.id === 'a_generation' && years >= 40 ? /** @type {typeof band} */ (/** @type {unknown} */ (Object.freeze({ ...generation, attributive: "two generations'", span: 'two generations', since: 'two generations on', predicate: 'two generations old' }))) : generation;
 }
 
 /**
@@ -564,15 +574,18 @@ function nearestEvent(list) {
 }
 
 /**
- * DS-GEN-9's demoted `anchor` dimension (kernel law 5). STRICTLY BOOLEAN, and `undefined` is
- * NOT "not anchored": measured over 202 generated events the field is a real boolean on most
- * rows and simply absent on others, and an absent flag is a record that has not answered the
- * question rather than one that answered no. An unanswered dimension reads as silence.
+ * DS-GEN-9's demoted `anchor` dimension (kernel law 5). An ABSENT flag is "not anchored" (the chair's ruling of
+ * 2026-11-13 to W2-B-DECLARE's second seat, on the writing lane's request): the generator sets `anchored: true` only
+ * on an event its anchor pass put in (`historyGenerator.js`, the anchor replacement), and its own timeline reads every
+ * other event as `anchored: e.anchored || false` — so an event with no flag is one the anchor pass did not place, not
+ * one whose answer is unknown. Measured on the census's 720 births: 70 towns' marker events carry no flag, and the
+ * pool fell silent in every one (law 5 silences a pool partitioned by a dimension the desk did not answer). A value
+ * that is neither a boolean nor absent answers nothing.
  * @param {unknown} anchored @returns {string|null} a value of STATE_MARK_DIMENSIONS.anchor
  */
 export function eventAnchorDimension(anchored) {
   if (anchored === true) return 'anchored';
-  if (anchored === false) return 'not anchored';
+  if (anchored === false || anchored === undefined) return 'not anchored';
   return null;
 }
 
@@ -666,6 +679,47 @@ export function eventRecordPoolKey(events) {
   return key && CORPUS['DS-GEN-16'].pools[key] ? key : null;
 }
 
+
+/**
+ * DS-GEN-16's LEGACY pool (W5 construction, 2026-11-07: "past-to-present link prose said").
+ * The record's own link from a past event to the present is `history.legacyAnnotations[]`,
+ * written once at birth by `legacyGenerator.js :: deriveLegacyAnnotations` and DATED there
+ * ("As of the founding survey, …", W0 cause 5). That text is machinery (it says
+ * "structurally embedded"), so this desk never prints it: it reads WHICH of the generator's
+ * three relationships the top annotation states — the generator's own fixed clauses,
+ * matched here verbatim (STYLE-2 SW-7, A11: the plain clauses of 2026-11-09, the old ones kept so a saved
+ * world's annotation still keys) — and says that relationship plainly. A row whose clause matches
+ * none of the three is still a link, and draws the plain LINKED line.
+ * @param {unknown} annotations @returns {{key: string, row: {eventName?: unknown, yearsAgo?: unknown}}|null}
+ */
+export function legacyPoolKey(annotations) {
+  const top = Array.isArray(annotations) ? annotations[0] : null;
+  const said = text(/** @type {{annotation?: unknown}} */ (top)?.annotation);
+  if (!top || !said) return null;
+  const key = / (?:left trouble that has never been put right|created pressure that has not been fully resolved): /.test(said) ? 'LEGACY-UNRESOLVED'
+    : / (?:hit the settlement hard, and it has since recovered|was a disruption the settlement has since moved through): /.test(said) ? 'LEGACY-RECOVERED'
+      : / (?:set up ways of doing things that have since changed|established conditions that have since shifted): /.test(said) ? 'LEGACY-SHIFTED'
+        : 'LEGACY-LINKED';
+  return CORPUS['DS-GEN-16'].pools[key] ? { key, row: top } : null;
+}
+
+/**
+ * DS-GEN-16's LIVING-MEMORY pool (W5 construction, 2026-11-07: "recent blow in living memory
+ * said"). `history.siegeNarrative` is the generator's frozen pairing of a recent political
+ * or disaster event with the town's first current tension
+ * (`siegeCapability.js :: generateSiegeCapability`); it exists only when recent history
+ * supports it. The event it names is read back from its own fixed opening, so the
+ * `{calamity}` slot and the pairing name the same blow; a town with no current tension is
+ * refused, because the line speaks of the quarrels the town is having now.
+ * @param {{siegeNarrative?: unknown, currentTensions?: unknown}} hist @returns {string|null}
+ */
+export function livingMemoryEventName(hist) {
+  const said = text(hist?.siegeNarrative);
+  const tensions = Array.isArray(hist?.currentTensions) ? hist.currentTensions : [];
+  const m = /^The (.+?) is still present in living memory: /.exec(said);
+  if (!m || tensions.length === 0 || !CORPUS['DS-GEN-16'].pools['LIVING-MEMORY']) return null;
+  return `The ${m[1]}`;
+}
 
 /**
  * The event DS-GEN-16's `{calamity}` names — the one the pool key was decided by, so the
@@ -792,7 +846,7 @@ export function notableConnectionPoolKey(prominentRelationship) {
  * because the mistake is the instructive part. A one-line grep for `flagDriven\s*[:=]`
  * found exactly ONE site — a READ in RelationshipsTab.jsx — so the lens looked like the
  * `economicBase: mixed` shape: a count that is always zero because nothing ever sets the
- * flag. It is not. `npcGenerator.js:1630` writes `flagDriven` on EVERY relationship row (re-addressed 2026-10-31 after GS-2 shortened the file); the
+ * flag. It is not. `people/ties.js:143` writes `flagDriven` on EVERY relationship row (re-addressed 2026-11-07: PEOPLE-4 TIES moved the tie writer out of npcGenerator.js); the
  * grep missed it only because the value is a multi-line boolean expression and the key sits
  * alone on its line. What is true is narrower and is a FINDING rather than a defect: the
  * flag is `stressFlags.anyActive && archetype ∈ {six stress-economic effects}`, and across
@@ -991,6 +1045,15 @@ export function originRoutePoolKey(tradeRouteAccess) {
 }
 
 /**
+ * SW-B1 (DS-GEN-6): the route pool key, or null where it is the port pool over a record whose
+ * institution flags say there are no docks.
+ * @param {string|null} key @param {unknown} inst @returns {string|null}
+ */
+export function portLineStruck(key, inst) {
+  return key === 'port' && /** @type {{ hasPort?: unknown } | null | undefined} */ (inst)?.hasPort === false ? null : key;
+}
+
+/**
  * DS-GEN-6's TIER OVERLAY pool — the second sentence, composed AFTER the route line and
  * never instead of it. This is the registry's one written exception to the one-fact-one-
  * sentence law: one mount renders two sentences from two POOLS of one block, which is one
@@ -1125,12 +1188,6 @@ export function groundPoolKey(terrainType) {
  */
 const NARROW_ACCESS = Object.freeze(['isolated', 'mountain_pass', 'mountain_road']);
 
-/**
- * The engine's own market NAME CLASS, from `glyphAssign.js`'s stall-rows rule. Read as a
- * NAME test rather than a category test because that is what the annex's receipt names and
- * because `institutions[].category` is `economy` for a great deal more than a market.
- */
-const MARKET_NAME = /\b(market|bazaar|exchange|shambles|stalls)\b/i;
 
 /**
  * DS-GEN-13's pool.
@@ -1160,8 +1217,12 @@ const MARKET_NAME = /\b(market|bazaar|exchange|shambles|stalls)\b/i;
  * @returns {string|null}
  */
 export function marketPoolKey(state) {
-  const rows = liveInstitutions(state);
-  const hasMarket = rows.some((row) => MARKET_NAME.test(text(row?.name)));
+  // CENSUS-1b unit A (d), the chair's ruling: the market is THE MARKET HOME's answer
+  // (`facts/market.js`: the catalogue's market tag on the live roster), homed together with
+  // `arrivalScene.holdsMarket` so chair ruling T1-12's equality holds by construction. The
+  // retired name regex (`/\b(market|bazaar|exchange|shambles|stalls)\b/i`, `glyphAssign.js`'s
+  // stall-rows rule) counted a black market. It moves pages, counted by cause.
+  const hasMarket = marketOf({ institutions: /** @type {{ institutions?: unknown } | null | undefined} */ (state)?.institutions });
   const key = !hasMarket
     ? 'NO-MARKET'
     : state?.isEntrepot === true
@@ -1170,6 +1231,31 @@ export function marketPoolKey(state) {
         ? 'MARKET-NARROW'
         : 'MARKET-OPEN';
   return CORPUS['DS-GEN-13'].pools[key] ? key : null;
+}
+
+/**
+ * DS-GEN-13's commerce lens (W1 ECO construction C13, 2026-11-07): the commercial houses the
+ * live roster's booleans name (`economicState.compound.inst`), the strongest one said. A bank
+ * outranks a merchant guild, a merchant guild outranks craft guilds alone, and a bare market
+ * speaks only with none of the three. No commercial house at all is silence (NO-MARKET says it).
+ * @param {{hasMarket?: unknown, hasGuild?: unknown, hasMerchantGuild?: unknown, hasBank?: unknown}|null|undefined} inst
+ * @returns {string|null}
+ */
+export function commercePoolKey(inst) {
+  if (inst?.hasBank === true) return 'COMMERCE: a bank';
+  if (inst?.hasMerchantGuild === true && inst?.hasGuild === true) return 'COMMERCE: a merchant guild, no bank';
+  if (inst?.hasGuild === true) return 'COMMERCE: craft guilds, no merchant guild';
+  if (inst?.hasMarket === true) return 'COMMERCE: a market, no guild';
+  return null;
+}
+
+/**
+ * DS-GEN-13's warehouses clause (R-W3: a customer fact gets a reader; one clause, only when true).
+ * @param {{hasWarehouse?: unknown}|null|undefined} inst
+ * @returns {string|null}
+ */
+export function warehousesPoolKey(inst) {
+  return inst?.hasWarehouse === true ? 'WAREHOUSES' : null;
 }
 
 // ── DS-GEN-17 · Overview/Power › The company the town keeps ─────────────────────────
@@ -1197,16 +1283,49 @@ export function marketPoolKey(state) {
  * @param {{hasCourtSystem?: unknown, hasPrison?: unknown, hasMilitaryInst?: unknown,
  *   hasNavy?: unknown, hasWatch?: unknown, hasMagicInst?: unknown, hasGranary?: unknown,
  *   hasHospital?: unknown}|null|undefined} inst
+ * @param {unknown} [record] the settlement, whose live roster answers the hospital atom
  * @returns {string|null}
  */
-export function institutionsPoolKey(inst) {
+export function institutionsPoolKey(inst, record = undefined) {
   if (!inst || typeof inst !== 'object') return null;
+  // CENSUS-1b unit A (b), the chair's ruling: given the record, PROVISIONED's hospital is the
+  // home's atom (`facts/defence.js`: the live roster, a hospital only), never the birth flag
+  // bag's hospital-or-monastery-or-healer-or-friary. It moves pages, counted by cause. A caller
+  // without the record keeps the flag (the partition tests read the function alone).
+  const hasHospital = record && typeof record === 'object'
+    ? defenceOf(/** @type {{ institutions?: unknown }} */ (record)).hospital
+    : inst.hasHospital === true;
+  // COHERENCE-AGREE (the chair's note of 2026-11-11): GARRISONED says "paid hands keep the town
+  // safe", so given the record it reads the defence home's paid forces — a garrison, a watch or a
+  // hired company — never the flag bag's military row, which counts walls and a militia too.
+  const defence = record && typeof record === 'object' ? defenceOf(/** @type {{ institutions?: unknown }} */ (record)) : null;
+  const paidHands = defence
+    ? defence.garrison || defence.watch || defence.mercenary || inst.hasNavy === true
+    : inst.hasMilitaryInst === true || inst.hasNavy === true || inst.hasWatch === true;
   const key = (inst.hasCourtSystem === true && inst.hasPrison === true) ? 'ADMINISTERED'
-    : (inst.hasMilitaryInst === true || inst.hasNavy === true || inst.hasWatch === true) ? 'GARRISONED'
+    : paidHands ? 'GARRISONED'
       : inst.hasMagicInst === true ? 'LETTERED'
-        : (inst.hasGranary === true || inst.hasHospital === true) ? 'PROVISIONED'
+        : (inst.hasGranary === true || hasHospital) ? 'PROVISIONED'
           : 'BARE';
   return CORPUS['DS-GEN-17'].pools[key] ? key : null;
+}
+
+/**
+ * DS-GEN-17's two GREAT HOUSE lenses (W4 PEOPLE, 2026-11-07; the wiring inventory's C5): the
+ * cathedral and the monastery the roster carries, each keyed on its own composition boolean
+ * (`compound.inst.hasCathedral`, `compound.inst.hasMonastery`) and null where it is false,
+ * which is R-DST-K. A town with both prints both: two houses, two facts.
+ * @param {unknown} hasCathedral @returns {string|null}
+ */
+export function cathedralPoolKey(hasCathedral) {
+  if (hasCathedral !== true) return null;
+  return CORPUS['DS-GEN-17'].pools['GREAT HOUSE: cathedral'] ? 'GREAT HOUSE: cathedral' : null;
+}
+
+/** @param {unknown} hasMonastery @returns {string|null} */
+export function monasteryPoolKey(hasMonastery) {
+  if (hasMonastery !== true) return null;
+  return CORPUS['DS-GEN-17'].pools['GREAT HOUSE: monastery'] ? 'GREAT HOUSE: monastery' : null;
 }
 
 // ── DS-GEN-18 · Economics › Why these workshops (the crafts explained by their feed) ──
@@ -1635,13 +1754,18 @@ export function populationDirectionPoolKey(trend, tradeRouteAccess) {
  *   warnings: ReadonlyArray<LegibilityRung|null>,
  *   ground: LegibilityRung|null,
  *   market: LegibilityRung|null,
+ *   commerce: LegibilityRung|null,
+ *   warehouses: LegibilityRung|null,
  *   institutions: LegibilityRung|null,
+ *   cathedral: LegibilityRung|null,
+ *   monastery: LegibilityRung|null,
  *   notableConnection: ReadonlyArray<LegibilityRung|null>,
  *   populationDirection: LegibilityRung|null,
  * }>, history: Readonly<{
  *   identity: ReadonlyArray<LegibilityRung|null>,
  *   founded: LegibilityRung|null,
  *   record: LegibilityRung|null,
+ *   legacy: ReadonlyArray<LegibilityRung|null>,
  * }>, viability: Readonly<{
  *   verdict: ReadonlyArray<LegibilityRung|null>,
  * }>, hooks: Readonly<{
@@ -1666,7 +1790,11 @@ export const GENERAL_STATE_PROSE_SILENT = Object.freeze({
     warnings: Object.freeze([]),
     ground: null,
     market: null,
+    commerce: null,
+    warehouses: null,
     institutions: null,
+    cathedral: null,
+    monastery: null,
     notableConnection: Object.freeze([]),
     populationDirection: null,
   }),
@@ -1674,6 +1802,7 @@ export const GENERAL_STATE_PROSE_SILENT = Object.freeze({
     identity: Object.freeze([]),
     founded: null,
     record: null,
+    legacy: Object.freeze([]),
   }),
   viability: Object.freeze({ verdict: Object.freeze([]) }),
   hooks: Object.freeze({ framing: Object.freeze([]) }),
@@ -1696,7 +1825,7 @@ export const GENERAL_STATE_PROSE_SILENT = Object.freeze({
  * @param {{scores?: Record<string, unknown>|null, prosperity?: unknown, safetyLabel?: unknown,
  *   viable?: unknown, readinessLabel?: unknown, foodSecurityLabel?: unknown,
  *   terrainType?: unknown, institutions?: unknown, tradeRouteAccess?: unknown,
- *   isEntrepot?: unknown, inst?: object|null, tier?: unknown, primaryStress?: unknown,
+ *   isEntrepot?: unknown, inst?: Record<string, unknown>|null, tier?: unknown, primaryStress?: unknown,
  *   foodBalance?: object|null,
  *   conflicts?: Array<{intensity?: unknown, parties?: unknown, issue?: unknown,
  *     stakes?: unknown}|null>|null,
@@ -1714,6 +1843,7 @@ export const GENERAL_STATE_PROSE_SILENT = Object.freeze({
  *   exploitation?: {fullyExploited?: unknown, partiallyExploited?: unknown,
  *     unexploited?: unknown}|null,
  *   history?: {age?: unknown, historicalCharacter?: unknown,
+ *     legacyAnnotations?: unknown, siegeNarrative?: unknown, currentTensions?: unknown,
  *     founding?: {foundedBy?: unknown, initialChallenge?: unknown}|null,
  *     historicalEvents?: Array<{type?: unknown, name?: unknown, yearsAgo?: unknown,
  *       anchored?: unknown, lastingEffects?: unknown}|null>|null}|null}} [readings]
@@ -1730,8 +1860,8 @@ export const GENERAL_STATE_PROSE_SILENT = Object.freeze({
  * @returns {typeof GENERAL_STATE_PROSE_SILENT}
  */
 export function generalStateProse(settlement, readings = {}, options = {}) {
-  // F10: the walls dimension answered once, from the defence reader (stateProseKernel law 5).
-  options = wallsAnswered(settlement, options);
+  // F10 + F12: the walls and the five crisis dimensions answered once, from the defence and crisis readers (stateProseKernel law 5).
+  options = factsAnswered(settlement, crisisAnswered(settlement, wallsAnswered(settlement, options)));
   const slots = { settlement: properFill(text(settlement?.name)) };
 
   // ⭐ ROUTED THROUGH THE COMPOSER (SEAM car 3g), at all eleven of this desk's call sites.
@@ -1771,7 +1901,13 @@ export function generalStateProse(settlement, readings = {}, options = {}) {
     }), [])
     : null);
   const origin = [
-    originLine(originRoutePoolKey(readings.tradeRouteAccess)),
+    // ⛔ THE PORT LINE READS THE DOCKS (SW-B1, STYLE-RULINGS-2 B1(b); DS-GEN-6, SW-B2's leftover by the
+    // chair's ruling of 02:5x): every port line says the town lives off its quay and harbour, and the
+    // route alone does not hold that (Albamunicipium, soak1k-0: a port route on a mountain thorp with no
+    // docks). The docks are the desk's `inst` reading (`economicState.compound.inst.hasPort`, the flag
+    // generateNarratives.js's #10 gate reads); with no docks the port line is struck and the tier line
+    // stands alone. An unasked record (no flag) reads as before.
+    originLine(portLineStruck(originRoutePoolKey(readings.tradeRouteAccess), readings.inst)),
     originLine(originTierPoolKey(readings.tier)),
   ].filter((line) => line && line.sentence);
 
@@ -1790,8 +1926,10 @@ export function generalStateProse(settlement, readings = {}, options = {}) {
         candidates: generalStateProseCandidates('DS-GEN-2', readings),
         slots: {
           ...slots,
-          faction: properFill(text(parties[0])),
-          faction2: properFill(text(parties[1])),
+          // TAIL-DISPLAY-CIVIC-3 V1: a power named in a sentence takes the one leaf's form ("Military/Guard" -> "The Guard",
+          // display/powerSentenceName.js); no pool of this desk sets an article before {faction} or {faction2}
+          faction: properFill(powerSentenceName(text(parties[0]))),
+          faction2: properFill(powerSentenceName(text(parties[1]))),
           issue: phraseFill(conflict?.issue),
           stakes: phraseFill(conflict?.stakes),
         },
@@ -1866,6 +2004,15 @@ export function generalStateProse(settlement, readings = {}, options = {}) {
   ].filter((l) => l && l.sentence));
 
   const calamityRow = recordCalamityEvent(events);
+  const legacy = legacyPoolKey(hist.legacyAnnotations);
+  const livingMemoryName = livingMemoryEventName(hist);
+  /** @param {string} key @param {Record<string, unknown>} extra */
+  const legacyLine = (key, extra) => legibilityRung('', composeStateProse(CORPUS, 'DS-GEN-16', {
+    ...options,
+    spineKey: key,
+    candidates: generalStateProseCandidates('DS-GEN-16', readings),
+    slots: { ...slots, ...extra },
+  }), []);
   const recordKey = events.length > 0 ? eventRecordPoolKey(events) : null;
 
   // ── DS-GEN-18 ──────────────────────────────────────────────────────────────────────
@@ -1979,7 +2126,7 @@ export function generalStateProse(settlement, readings = {}, options = {}) {
       const line = relLine(crossEngagementPoolKey(row), {
         ...slots,
         counterpart: properFill(text(/** @type {{partnerSettlement?: unknown}} */ (row)?.partnerSettlement)),
-        faction: properFill(text(/** @type {{factionName?: unknown}} */ (row)?.factionName)),
+        faction: properFill(powerSentenceName(text(/** @type {{factionName?: unknown}} */ (row)?.factionName))),
       });
       return line && line.sentence ? line : null;
     }));
@@ -2010,7 +2157,12 @@ export function generalStateProse(settlement, readings = {}, options = {}) {
       warnings,
       ground: rung('DS-GEN-12', groundPoolKey(readings.terrainType), ''),
       market: rung('DS-GEN-13', marketPoolKey(readings), ''),
-      institutions: rung('DS-GEN-17', institutionsPoolKey(readings.inst), ''),
+      commerce: rung('DS-GEN-13', commercePoolKey(readings.inst), ''),
+      warehouses: rung('DS-GEN-13', warehousesPoolKey(readings.inst), ''),
+      institutions: rung('DS-GEN-17', institutionsPoolKey(readings.inst, settlement), ''),
+      // DS-GEN-17's two GREAT HOUSE lenses (W4 PEOPLE, C5): the cathedral, the monastery.
+      cathedral: rung('DS-GEN-17', cathedralPoolKey(readings.inst?.hasCathedral), ''),
+      monastery: rung('DS-GEN-17', monasteryPoolKey(readings.inst?.hasMonastery), ''),
       // DS-REL-2's two lenses at ONE position: the tie the town names first, then how much
       // of its roll this town's own conditions made. The connection line leads because the
       // page prints its datum directly beneath.
@@ -2061,7 +2213,7 @@ export function generalStateProse(settlement, readings = {}, options = {}) {
       record: recordKey
         ? legibilityRung('', composeStateProse(CORPUS, 'DS-GEN-16', {
           ...options,
-          spineKey: recordKey,
+          spineKey: shapeYieldingKey(recordKey, calamityFill(calamityRow?.name), hist.historicalCharacter, CORPUS['DS-GEN-16'].pools), // BAR4-HISTORY T1-SHAPE (SH1b): one shaping event a page (facts/shapingEvent.js)
           candidates: generalStateProseCandidates('DS-GEN-16', readings),
           slots: {
             ...slots,
@@ -2070,6 +2222,15 @@ export function generalStateProse(settlement, readings = {}, options = {}) {
           },
         }), [])
         : null,
+      // W5 construction 2026-11-07: the past-to-present link and the recent blow in living
+      // memory, at DS-GEN-16's one speaking position (`history.legacy`).
+      legacy: Object.freeze([
+        livingMemoryName ? legacyLine('LIVING-MEMORY', { calamity: calamityFill(livingMemoryName) }) : null,
+        legacy ? legacyLine(/** @type {string} */ (shapeYieldingKey(legacy.key, calamityFill(legacy.row.eventName), hist.historicalCharacter, CORPUS['DS-GEN-16'].pools)), { // BAR4-HISTORY T1-SHAPE (SH1b)
+          calamity: calamityFill(text(legacy.row.eventName)),
+          timeband_age: timebandAgeFill(legacy.row.yearsAgo),
+        }) : null,
+      ].filter((line) => line && line.sentence)),
     }),
   });
 }

@@ -187,7 +187,7 @@ export function mobilizationEffects({ snapshot, events, tick, now = null, dismis
         archetype: 'war_mobilization',
         severity,
         triggeredAt: { tick, sourceEventType: 'WAR_LAYER_MOBILIZATION', sourceEventTargetId: id },
-        causes: [{ source: id, effect: 'war_mobilization', reason: `${name} is gearing for war (${ev.next}).` }],
+        causes: [{ source: id, effect: 'war_mobilization', reason: `${name} is gearing for war.` }],
       },
     });
 
@@ -206,7 +206,7 @@ export function mobilizationEffects({ snapshot, events, tick, now = null, dismis
         strength: clamp01(0.45 + severity * 0.4),
         confidence: 0.75,
         visibility,
-        explanation: `${name} is visibly mobilizing for war (${ev.next}).`,
+        explanation: `${name} is openly arming for war.`,
         relationshipKey: `mobilization_signal.${stablePart(id)}.${stablePart(neighbour.id)}`,
         source: 'war_layer_mobilization',
         now,

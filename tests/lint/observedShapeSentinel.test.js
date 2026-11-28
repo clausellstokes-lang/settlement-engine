@@ -50,6 +50,8 @@ import {
   RETIRED_ADVISORY_LOCKFILE_BASELINE_SCHEMA,
   RETIRED_FED_WORLD_BASELINE_SCHEMA,
   RETIRED_WINDOW_RUNG1_BASELINE_SCHEMA,
+  RETIRED_TIER_COVERAGE_BASELINE_SCHEMA,
+  RETIRED_MIGRATION_DIRECTION_BASELINE_SCHEMA,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
@@ -85,6 +87,24 @@ import {
   validateSchema26Baseline,
   validateSchema27Baseline,
   validateSchema28Baseline,
+  validateSchema29Baseline,
+  validateSchema30Baseline,
+  validateSchema31Baseline,
+  validateSchema32Baseline,
+  validateSchema33Baseline,
+  validateSchema34Baseline,
+  validateSchema35Baseline,
+  validateSchema36Baseline,
+  validateSchema37Baseline,
+  validateSchema38Baseline,
+  validateSchema39Baseline,
+  validateSchema40Baseline,
+  validateSchema41Baseline,
+  validateSchema42Baseline,
+  validateSchema43Baseline,
+  validateSchema44Baseline,
+  validateSchema45Baseline,
+  validateSchema46Baseline,
 } from '../../scripts/lib/observed-shape-baseline.mjs';
 import {
   artifactBaselineSchemaOf,
@@ -109,6 +129,24 @@ import {
   FED_WORLD_TARGET_SCHEMA,
   WINDOW_RUNG1_TARGET_SCHEMA,
   TIER_COVERAGE_TARGET_SCHEMA,
+  MIGRATION_DIRECTION_TARGET_SCHEMA,
+  PEOPLE_CAST_TARGET_SCHEMA,
+  PEOPLE_LANDING_TARGET_SCHEMA,
+  CAR_MERGE_TARGET_SCHEMA,
+  WAVE_W2_TARGET_SCHEMA,
+  WAVE_FOOD_TARGET_SCHEMA,
+  WAVE_VEIL_TARGET_SCHEMA,
+  TRAIN_CAR1_TARGET_SCHEMA,
+  TRAIN_CAR2_TARGET_SCHEMA,
+  TRAIN_CAR3_TARGET_SCHEMA,
+  TRAIN_CAR4_TARGET_SCHEMA,
+  PUBLIC_PROSE_TARGET_SCHEMA,
+  PLAYED_WORLDS_TARGET_SCHEMA,
+  AGREE_TIER_SEED_TARGET_SCHEMA,
+  CLOSE_ROUND_TARGET_SCHEMA,
+  FINAL_PASS_TARGET_SCHEMA,
+  LAST_CLOSE_TARGET_SCHEMA,
+  FORTUNE_MERITS_TARGET_SCHEMA,
 } from '../../scripts/migrate-observed-shape-readers.mjs';
 
 const HASH_A = 'a'.repeat(64);
@@ -1155,6 +1193,23 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
       'temporary on npcs',
       'temporaryKind on npcs',
       'crisisIds on npcs',
+      // ⭐⭐ THE FOURTEENTH, DECLARED AT THE SCHEMA-29 RUNG (the chair's ruling of 2026-11-07
+      // 03:55 UTC, ODQ §934.105, lane WIRING-W0): the migration direction's config projection,
+      // stamped by generators/steps/stressConfirmPass.js only when a mass migration survives,
+      // which no corpus world draws — the fifth class again.
+      'migrationDirection on config',
+      // ⭐⭐ THE FIFTEENTH, DECLARED AT THE SCHEMA-40 RUNG (SW-B7b PROJECTION, the chair's grant of
+      // 2026-11-09 13:5x): the public prose projection, stamped by lib/saves.js at every cloud save,
+      // which the corpus never runs — the save-time-writer class, the `decrees` precedent.
+      'publicProse on settlement',
+      // ⭐⭐ THE SIXTEENTH, DECLARED AT THE SCHEMA-41 RUNG (STYLE-2-MERGE closing act 5, the chair's FINAL
+      // RULING of 2026-11-09 21:2x), and the FIRST of the sixth class: the minted proposal's outcome,
+      // written by worldPulse/convergence.js only in campaign time — the played-worlds writer.
+      'outcome on outcome',
+      // ⭐⭐ THE SEVENTEENTH, DECLARED AT THE SCHEMA-46 RUNG (FORTUNE U5a-CURE item 2, route B, the chair's ruling
+      // of 2026-11-20 22:18 UTC): the fortune merits, written by fortune/fortuneMerits.js only under the fortune
+      // law, which no corpus CONFIG carries — the fifth class again.
+      'merits on breakdown',
     ]);
     // ⚠ INDEX-ALIGNED WITH THE ROSTER ABOVE, one entry per line so a removal cannot
     // silently re-pair the survivors. The retired `factions on locks` was the OTHER
@@ -1173,6 +1228,10 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
       'conditional-generator-branch', // temporary on npcs
       'conditional-generator-branch', // temporaryKind on npcs
       'conditional-generator-branch', // crisisIds on npcs
+      'conditional-generator-branch', // migrationDirection on config
+      'save-time-writer', // publicProse on settlement
+      'played-worlds-writer', // outcome on outcome
+      'conditional-generator-branch', // merits on breakdown
     ]);
     expect(EXPLAINED_WRITER_EXEMPTIONS.map(({ writer }) => writer)).toEqual([
       'src/generators/economy/economicState.js',
@@ -1199,6 +1258,15 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
       'src/generators/steps/resolveCrisisCast.js',
       'src/generators/steps/resolveCrisisCast.js',
       'src/generators/steps/resolveCrisisCast.js',
+      // The confirm pass's projection, re-spelled at the schema-29 rung as the object-literal
+      // write `Object.assign(effectiveConfig, { migrationDirection })` so gate 0 sees it.
+      'src/generators/steps/stressConfirmPass.js',
+      // The cloud row builder's stamp (SW-B7b): `withPublicProse`'s object-literal key.
+      'src/lib/saves.js',
+      // The minted proposal (21:2x): `mintedProposals.push({ … outcome, … })`, the shorthand key.
+      'src/domain/worldPulse/convergence.js',
+      // The fortune merits (22:18): `meritedLegitimacy`'s `breakdown: { ...terms, merits: added }`, the property key.
+      'src/domain/fortune/fortuneMerits.js',
     ]);
     // ⚠ THE M9 eventLog BANK NAMES ONE RULING, AND THE SAME ONE FOR ALL FOUR.
     // At genesis this exact string is stamped into every tagged row's `reason`,
@@ -1297,6 +1365,14 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
       'temporary on npcs',
       'temporaryKind on npcs',
       'crisisIds on npcs',
+      // ⭐ THE SCHEMA-29 ONE, re-proved out of the scanned stressConfirmPass.js on every scan.
+      'migrationDirection on config',
+      // ⭐ THE SCHEMA-40 ONE (SW-B7b), re-proved out of the scanned saves.js on every scan.
+      'publicProse on settlement',
+      // ⭐ THE SCHEMA-41 ONE (21:2x), re-proved out of the scanned convergence.js on every scan.
+      'outcome on outcome',
+      // ⭐ THE SCHEMA-46 ONE (22:18), re-proved out of the scanned fortuneMerits.js on every scan.
+      'merits on breakdown',
     ]);
     expect(evidence.map(({ key }) => key)).toEqual([
       'isCriminal',
@@ -1304,6 +1380,10 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
       'appliedAt', 'deltas', 'event', 'narrativeSummary',
       'decrees', 'kind',
       'temporary', 'temporaryKind', 'crisisIds',
+      'migrationDirection',
+      'publicProse',
+      'outcome',
+      'merits',
     ]);
     // ⚠ THE M9 SPLIT IS MACHINE-DRAWN, NOT ARGUED. The same probe that admits
     // the four banked keys on `applyEvent.js` REFUSES the two nearest
@@ -1575,7 +1655,38 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     expect(declaredBankOf(WINDOW_RUNG1_TARGET_SCHEMA)).toEqual({ bankedReads: 76, taggedRows: 50 });
     // ⭐ AND 28 HOLDS IT: the tier-coverage rung moves no row, so the pair stays 76/50.
     expect(declaredBankOf(TIER_COVERAGE_TARGET_SCHEMA)).toEqual({ bankedReads: 76, taggedRows: 50 });
-    expect(declaredBankOf(BASELINE_SCHEMA)).toEqual(declaredBankOf(TIER_COVERAGE_TARGET_SCHEMA));
+    // ⭐ AND 29 GROWS IT BY ONE: one declaration (the migration direction's config projection),
+    // one address, one read, so the pair goes 76/50 -> 77/51. MEASURED off the live scan.
+    expect(declaredBankOf(MIGRATION_DIRECTION_TARGET_SCHEMA)).toEqual({ bankedReads: 77, taggedRows: 51 });
+    // ⭐ AND 30 HOLDS IT: the people car's cast admits ordinary rows, none on a declared identity.
+    expect(declaredBankOf(PEOPLE_CAST_TARGET_SCHEMA)).toEqual({ bankedReads: 77, taggedRows: 51 });
+    // ⭐ AND 31 HOLDS IT; 32 (MERGE-CAR) shrinks it by the census readers' one banked gone row.
+    expect(declaredBankOf(PEOPLE_LANDING_TARGET_SCHEMA)).toEqual({ bankedReads: 77, taggedRows: 51 });
+    expect(declaredBankOf(CAR_MERGE_TARGET_SCHEMA)).toEqual({ bankedReads: 76, taggedRows: 50 });
+    // ⭐ AND 33 (MERGE-WAVE, W2 DEF) HOLDS IT: one ordinary admitted row.
+    expect(declaredBankOf(WAVE_W2_TARGET_SCHEMA)).toEqual({ bankedReads: 76, taggedRows: 50 });
+    expect(declaredBankOf(WAVE_FOOD_TARGET_SCHEMA)).toEqual({ bankedReads: 76, taggedRows: 50 });
+    expect(declaredBankOf(WAVE_VEIL_TARGET_SCHEMA)).toEqual({ bankedReads: 76, taggedRows: 50 });
+    expect(declaredBankOf(TRAIN_CAR1_TARGET_SCHEMA)).toEqual({ bankedReads: 76, taggedRows: 50 });
+    expect(declaredBankOf(TRAIN_CAR2_TARGET_SCHEMA)).toEqual({ bankedReads: 76, taggedRows: 50 });
+    expect(declaredBankOf(TRAIN_CAR3_TARGET_SCHEMA)).toEqual({ bankedReads: 76, taggedRows: 50 });
+    expect(declaredBankOf(TRAIN_CAR4_TARGET_SCHEMA)).toEqual({ bankedReads: 76, taggedRows: 50 });
+    // ⭐ AND 40 GROWS IT BY ONE (SW-B7b): one declaration (the public prose projection), one address,
+    // one read, so the pair goes 76/50 -> 77/51. MEASURED off the live scan.
+    expect(declaredBankOf(PUBLIC_PROSE_TARGET_SCHEMA)).toEqual({ bankedReads: 77, taggedRows: 51 });
+    // ⭐ AND 41 GROWS IT BY ONE (STYLE-2-MERGE closing act 5, 21:2x): the first played-worlds writer, one address,
+    // one read, so the pair goes 77/51 -> 78/52. MEASURED off the live scan.
+    expect(declaredBankOf(PLAYED_WORLDS_TARGET_SCHEMA)).toEqual({ bankedReads: 78, taggedRows: 52 });
+    expect(declaredBankOf(AGREE_TIER_SEED_TARGET_SCHEMA)).toEqual({ bankedReads: 78, taggedRows: 52 });
+    expect(declaredBankOf(CLOSE_ROUND_TARGET_SCHEMA)).toEqual({ bankedReads: 78, taggedRows: 52 });
+    expect(declaredBankOf(FINAL_PASS_TARGET_SCHEMA)).toEqual({ bankedReads: 78, taggedRows: 52 });
+    expect(declaredBankOf(LAST_CLOSE_TARGET_SCHEMA)).toEqual({ bankedReads: 78, taggedRows: 52 });
+    // ⭐ AND 46 GROWS IT BY ONE (FORTUNE U5a-CURE item 2, route B): one declaration (the fortune merits), one address,
+    // one read, so the pair goes 78/52 -> 79/53. MEASURED off the live scan.
+    expect(declaredBankOf(FORTUNE_MERITS_TARGET_SCHEMA)).toEqual({ bankedReads: 79, taggedRows: 53 });
+    expect(declaredBankOf(BASELINE_SCHEMA)).toEqual(declaredBankOf(FORTUNE_MERITS_TARGET_SCHEMA));
+    expect(declaredBankOf(RETIRED_MIGRATION_DIRECTION_BASELINE_SCHEMA)).toEqual({ bankedReads: 77, taggedRows: 51 });
+    expect(declaredBankOf(RETIRED_TIER_COVERAGE_BASELINE_SCHEMA)).toEqual({ bankedReads: 76, taggedRows: 50 });
     expect(declaredBankOf(RETIRED_WINDOW_RUNG1_BASELINE_SCHEMA)).toEqual({ bankedReads: 76, taggedRows: 50 });
     expect(declaredBankOf(RETIRED_FED_WORLD_BASELINE_SCHEMA)).toEqual({ bankedReads: 69, taggedRows: 45 });
     expect(declaredBankOf(RETIRED_ADVISORY_LOCKFILE_BASELINE_SCHEMA)).toEqual({ bankedReads: 69, taggedRows: 45 });
@@ -1604,7 +1715,7 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // for `notability`, which is how its founding case was refuted.
     expect(authoredInputHistoryCommits('zzzNoSuchObservedShapeKeyEverzzz')).toEqual([]);
     expect(() => authoredInputHistoryCommits('two words')).toThrow(/whitespace-free key/);
-  });
+  }, 120_000); // its own budget, carrying the measured figure (CI-FIT point 75, 2026-11-20): 9.0 s in the last close's serial check; about 16.7 s on a CI runner (the measured factor), within three quarters of the default 20 s; the house's corpus-walk form
 
   /**
    * ⭐⭐ THE SCHEMA-4 / SCHEMA-5 SPLIT. One envelope law, two numbers. Sharing the
@@ -1663,7 +1774,14 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // ⭐ SCHEMA 26: THE FED WORLD (the chair's ruling (i) on lane OSR-RUNG's STOP, 2026-11-03, ODQ §934.104): a famine topology pass in the corpus and 22 admitted rows the self-feeding worlds no longer resolve; four rows go, two shrink, the bank holds at 69/45.
     // ⭐ SCHEMA 27: THE RUNG-1 WINDOW (the chair's rulings on lane LANDING-2b's STOP, 2026-11-04): the shape-family theta 0.80 -> 0.76, a topology pass that cures the window's `facets`/`issues` erosion, three crisis declarations (the roster 10 -> 13, the bank 76/50) and the window's rows admitted with attribution.
     // ⭐ SCHEMA 28: THE TIER-CHANGE COVERAGE PASS (the chair's corpus-coverage ruling of 2026-11-06, the militia precedent): schema 27's envelope, tag law, roster and register UNCHANGED, re-governed to a corpus builder whose producer 2b pulses one town generated over the city cut so the stamp law mints the tier candidate R-B1 took from producer 2; its reconciliation must be, and measurably is, EMPTY.
-    expect(BASELINE_SCHEMA).toBe(28);
+    // ⭐ SCHEMA 29: THE MIGRATION-DIRECTION DECLARATION (the chair's ruling of 2026-11-07 03:55 UTC, ODQ §934.105, lane WIRING-W0): schema 28's envelope, tag law, corpus and register re-governed to ONE declaration of the fifth class, `migrationDirection on config` (the roster 13 -> 14, the bank 77/51); its one new row is admitted tagged and nothing else moves.
+    // ⭐ SCHEMA 30: THE PEOPLE CAR'S CAST (the owner's charter, ODQ §934.105; lane PEOPLE-1 CAST, 2026-11-07): schema 29's envelope, tag law, roster and corpus definition UNCHANGED, re-governed to a register that admits 19 ordinary rows the cast's year exposes and lets 0 go; nothing declared, the bank 77/51.
+    // ⭐ SCHEMA 40: THE PUBLIC PROSE WRITER'S ADMISSION (SW-B7b PROJECTION, the chair's grant of 2026-11-09 13:5x): ONE save-time-writer declaration, `publicProse on settlement` (the roster 14 -> 15, the bank 77/51); its one new row is admitted tagged and nothing else moves.
+    // ⭐ SCHEMA 41: THE PLAYED-WORLDS WRITER'S ADMISSION (STYLE-2-MERGE closing act 5, the chair's FINAL RULING of 2026-11-09 21:2x): a NEW writer class, played-worlds-writer, and its first declaration, `outcome on outcome` (the roster 15 -> 16, the bank 78/52); its one row is tagged and nothing else moves.
+    // ⭐ SCHEMA 46: THE FORTUNE MERITS WRITER'S ADMISSION (FORTUNE U5a-CURE item 2, route B, the chair's ruling of 2026-11-20 22:18 UTC): ONE conditional-generator-branch declaration, `merits on breakdown` (the roster 16 -> 17, the bank 79/53); its one new row is admitted tagged and nothing else moves.
+    expect(BASELINE_SCHEMA).toBe(46); // the fortune-merits rung, 2026-11-20 (the chair's ruling of 22:18 UTC)
+    expect(RETIRED_MIGRATION_DIRECTION_BASELINE_SCHEMA).toBe(29);
+    expect(RETIRED_TIER_COVERAGE_BASELINE_SCHEMA).toBe(28);
     expect(RETIRED_WINDOW_RUNG1_BASELINE_SCHEMA).toBe(27);
     expect(RETIRED_FED_WORLD_BASELINE_SCHEMA).toBe(26);
     expect(RETIRED_ADVISORY_LOCKFILE_BASELINE_SCHEMA).toBe(25);
@@ -1690,7 +1808,25 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // ⭐ 15 retired at §893.4, 16 at the stress-topology rung, 17 at the lineage-reanchor
     // rung, 18 at the exemption-retirement rung, 19 at the bank-fence rung; the LIVE
     // envelope is validated by 20 now.
-    expect(validateSchema28Baseline(live)).toBe(live);
+    expect(validateSchema46Baseline(live)).toBe(live); // the fortune-merits rung (46), 2026-11-20 (the chair's ruling of 22:18 UTC)
+    expect(() => validateSchema45Baseline(live)).toThrow(/is not schema 45/);
+    expect(() => validateSchema44Baseline(live)).toThrow(/is not schema 44/);
+    expect(() => validateSchema43Baseline(live)).toThrow(/is not schema 43/);
+    expect(() => validateSchema42Baseline(live)).toThrow(/is not schema 42/);
+    expect(() => validateSchema41Baseline(live)).toThrow(/is not schema 41/);
+    expect(() => validateSchema40Baseline(live)).toThrow(/is not schema 40/);
+    expect(() => validateSchema39Baseline(live)).toThrow(/is not schema 39/);
+    expect(() => validateSchema38Baseline(live)).toThrow(/is not schema 38/);
+    expect(() => validateSchema37Baseline(live)).toThrow(/is not schema 37/);
+    expect(() => validateSchema36Baseline(live)).toThrow(/is not schema 36/);
+    expect(() => validateSchema35Baseline(live)).toThrow(/is not schema 35/);
+    expect(() => validateSchema34Baseline(live)).toThrow(/is not schema 34/);
+    expect(() => validateSchema33Baseline(live)).toThrow(/is not schema 33/);
+    expect(() => validateSchema32Baseline(live)).toThrow(/is not schema 32/);
+    expect(() => validateSchema31Baseline(live)).toThrow(/is not schema 31/);
+    expect(() => validateSchema30Baseline(live)).toThrow(/is not schema 30/);
+    expect(() => validateSchema29Baseline(live)).toThrow(/is not schema 29/);
+    expect(() => validateSchema28Baseline(live)).toThrow(/is not schema 28/);
     expect(() => validateSchema27Baseline(live)).toThrow(/is not schema 27/);
     expect(() => validateSchema26Baseline(live)).toThrow(/is not schema 26/);
     // … and 18, 19, 20, 21 and 22 keep their own literals, so each refuses the live envelope
@@ -1836,7 +1972,7 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // `artifactBaselineSchemaOf` exists to prevent.
     expect(artifactBaselineSchemaOf('legacy-leaf')).toBe(2);
     expect(artifactBaselineSchemaOf('exact-origin')).toBe(3);
-    expect(BASELINE_SCHEMA).toBe(28);
+    expect(BASELINE_SCHEMA).toBe(46); // the fortune-merits rung, 2026-11-20 (the chair's ruling of 22:18 UTC)
     expect(() => artifactBaselineSchemaOf('heuristic')).toThrow(/scan mode is unsupported/);
   });
 

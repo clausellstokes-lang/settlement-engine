@@ -225,10 +225,10 @@ describe('deriveAllFactionProfiles()', () => {
     expect(deriveAllFactionProfiles(null)).toEqual([]);
   });
 
-  it('reads from the legacy `factions` top-level field too', () => {
-    const profiles = deriveAllFactionProfiles({
-      factions: [{ faction: 'Merchant Guilds', power: 10 }],
-    });
+  // PEOPLE-5A RE-KEYED (M-2): the legacy top-level grouping fallback is deleted — the powers only.
+  it('does not read the legacy `factions` top-level field (the powers are the only roster)', () => {
+    expect(deriveAllFactionProfiles({ factions: [{ faction: 'Merchant Guilds', power: 10 }] })).toEqual([]);
+    const profiles = deriveAllFactionProfiles({ powerStructure: { factions: [{ faction: 'Merchant Guilds', power: 10 }] } });
     expect(profiles).toHaveLength(1);
     expect(profiles[0].archetype).toBe('merchant');
   });

@@ -210,8 +210,13 @@ describe('THE SHORTHAND/LONGHAND CLASS — a varying shorthand never sits beside
     // TRIM-2 compose 71541a9e6 (X-51, one Tonight sheet: TableView's quick-guide and session blocks cut), 190 at the
     // WIRING-2 compose 420d93004, which carries TRIM-2 R5 (1f37f1d21, the dead SummaryTabV2 retired, its styled blocks
     // with it). The shape and the parser are unchanged.
+    // 190 -> 186 (2026-11-07, LANDING-R2, the pool census composed; the measured figure at the tip): SURFACES REMOVED BY
+    // RULING once more, NOT A RELAXATION. All four from reader-r1 unit 2 (d3b9280f6, "validation text leaves the DM
+    // surfaces; one critical list", the chair's rulings 1-4), measured by this walk's pair count on that commit and its
+    // parent: OverviewTab.jsx 8 -> 6, ResourcesTab.jsx 7 -> 6, ViabilityTab.jsx 5 -> 4; every other src file unmoved
+    // between rung 1's final tip 1bff51c6d and the composed tip. The shape and the parser are unchanged.
     expect(SCAN.pairs, 'the walk found almost no shorthand/longhand pairs — the shape it looks for changed')
-      .toBeGreaterThanOrEqual(190);
+      .toBeGreaterThanOrEqual(186);
   });
 
   test('no file outside the owed register writes a varying shorthand beside a longhand', () => {

@@ -1,0 +1,5 @@
+[
+  { "file": "src/domain/display/crisisStoppedRow.js", "text": "The descriptions here are of ordinary times. While … lasts, a row it touches is marked.", "reason": "ordinaryTimesLine prints only where a stopping crisis is in force (it names that crisis in the slot) or a row is marked short: it declares by its own gate that the times are not ordinary; it presumes no ease." },
+  { "file": "src/domain/display/crisisStoppedRow.js", "text": "The descriptions here are of ordinary times. While … last, a row they touch is marked.", "reason": "the same line for two crises or more: printed only under them." },
+  { "file": "src/domain/facts/houseInputAtHand.js", "text": "gold or silver ore", "reason": "CHAIN_INPUTS's noun of the precious-metals chain: a slot word of the short mark ('Short of its materials.' past two words) and of the DM's need sentence, printed only where the record says the house lacks it; no line of its own." }
+]

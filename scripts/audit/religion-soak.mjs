@@ -1,3 +1,6 @@
+// FIX-PUBLIC-VEIL step 3 (2026-11-07): the fixtures' NPCs name their power by `memberships` (the people car's
+// card, M-7) -- the clergy plane reads it through factionRefs.js :: entityLinksFaction; the retired
+// `linkedFactionIds` linked these NPCs to nothing since PEOPLE-5B.
 /**
  * religion-soak.mjs — LIVE-loop balance soak for the religion system. Unlike the
  * probe (which freezes legitimacy), this runs the FULL per-settlement pulse
@@ -29,19 +32,19 @@ const isEvil = (snap) => snap && snap.alignmentAxis === 'evil';
 function rulership(kind) {
   if (kind === 'clean') return {
     powerStructure: { governingName: 'Council', publicLegitimacy: { score: 70 }, factions: [{ id: 'f.gov', name: 'Council', archetype: 'government', power: 65 }] },
-    npcs: [{ id: 'n.c', name: 'Steward', importance: 'pillar', linkedFactionIds: ['f.gov'], personality: { dominant: 'principled' } }],
+    npcs: [{ id: 'n.c', name: 'Steward', importance: 'pillar', memberships: [{ power: 'f.gov', rank: 1, share: 1 }], personality: { dominant: 'principled' } }],
     institutions: [{ id: 'i.temple', name: 'Temple', category: 'religious', status: 'active' }],
     economicState: { prosperity: 'prosperous', primaryExports: [], primaryImports: [] },
   };
   if (kind === 'corrupt') return {
     powerStructure: { governingName: 'The Ring', publicLegitimacy: { score: 40 }, factions: [{ id: 'f.crime', name: 'The Ring', archetype: 'criminal', power: 60 }] },
-    npcs: [{ id: 'n.b', name: 'Boss', importance: 'key', linkedFactionIds: ['f.crime'], personality: { dominant: 'greedy', flaw: 'greedy' }, flaw: 'greedy' }],
+    npcs: [{ id: 'n.b', name: 'Boss', importance: 'key', memberships: [{ power: 'f.crime', rank: 1, share: 1 }], personality: { dominant: 'greedy', flaw: 'greedy' }, flaw: 'greedy' }],
     institutions: [{ id: 'i.thieves', name: 'Thieves Guild', category: 'criminal', status: 'active' }],
     economicState: { prosperity: 'average', primaryExports: [], primaryImports: [] },
   };
   return { // deep
     powerStructure: { governingName: 'The Syndicate', publicLegitimacy: { score: 20 }, factions: [{ id: 'f.crime', name: 'The Syndicate', archetype: 'criminal', power: 80 }] },
-    npcs: [{ id: 'n.k', name: 'Kingpin', importance: 'pillar', linkedFactionIds: ['f.crime'], personality: { dominant: 'ruthless', flaw: 'ruthless' }, flaw: 'ruthless' }],
+    npcs: [{ id: 'n.k', name: 'Kingpin', importance: 'pillar', memberships: [{ power: 'f.crime', rank: 1, share: 1 }], personality: { dominant: 'ruthless', flaw: 'ruthless' }, flaw: 'ruthless' }],
     institutions: [{ id: 'i.thieves', name: 'Thieves Guild', category: 'criminal', status: 'active' }, { id: 'i.smug', name: 'Smugglers', category: 'criminal', status: 'active' }],
     economicState: { prosperity: 'struggling', primaryExports: [], primaryImports: [] },
   };

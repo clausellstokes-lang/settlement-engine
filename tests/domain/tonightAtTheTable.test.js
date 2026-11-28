@@ -96,7 +96,7 @@ describe('tonightAtTheTable', () => {
     const out = tonightAtTheTable(set);
     const red = out.find(e => e.kind === 'RED');
     expect(red?.title).toBe("Don't mention Salt");
-    expect(red?.body).toContain('NPCs go cold');
+    expect(red?.body).toContain('People go quiet'); // SW-5: the red flag re-worded (STYLE-RULINGS-2 A4)
   });
 
   it('caps total entries at 6', () => {

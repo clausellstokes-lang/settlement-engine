@@ -1,0 +1,12 @@
+base files 59 tests 657 failed 11 | cure files 60 tests 658 failed 11
+BOTH  tests/domain/generalStateProseDesk.test.js :: DS-GEN-7 — the record disagreeing with itself, and five pools the producer cannot reach ⛔ THE PRODUCER MEASUREMENT: two coherence notes are dead by thresh
+BOTH  tests/domain/worldFactRederive.test.js :: EM-B2b — world facts by consequence: the route, the refusals and the stated radius A7 — THE GOLDENS CANNOT SEE ANY OF IT: both fixtures are byte-identical and
+BOTH  tests/generators/powerStructure.test.js :: F31: powerGenerator split structure no power/ module packs more statements onto shared lines than its ceiling (shrink-only)
+BOTH  tests/generators/rosterFinalUnderHeldRoster.test.js :: EM-R2 — the roster is final inside enrichNpcCoherence under a held roster A1 — inert with no pins: the golden corpus and the coherence tail are b
+BOTH  tests/lint/proseWiringCensus.walker.test.js :: the wiring census — TOTALITY over the corpus the VARIANT column closes, and reproduces the histogram the owner's ruling sizes
+BOTH  tests/lint/proseWiringCensus.walker.test.js :: THE MAP READ THE OTHER WAY — fact → text, and the three tiers the tiers name the block, the field, the reading function and the COUNT
+BOTH  tests/lint/proseWiringCensus.walker.test.js :: car 0f — the ALIAS DRAFT: measured, nothing ratified, no leaf written the draft over the SHIPPED endpoints and read paths, with its evidence and its debt
+BOTH  tests/lint/proseWiringCensus.walker.test.js :: SEAM car 5b — THE HOLDER CENSUS: the source of each construction (SITTING §Q) ⭐ THE DRY READ: both modes, and the one that writes is not among them
+BOTH  tests/lint/proseWiringCensus.walker.test.js :: car 0 — the committed JSON and its interlock the committed census is byte-identical to a fresh build, and the stamp is live
+BOTH  tests/property/espionageDormancyFence.test.js :: FENCE 1 (REPLACED) — the driven byte-identity golden, and the chain that terminates THE DRIVEN GOLDEN: 360 settlements at this tip hash to the PRE-COUP
+BOTH  tests/property/generatorGoldenMaster.test.js :: generator golden master (cross-build output stability) every config produces byte-identical output to the golden master

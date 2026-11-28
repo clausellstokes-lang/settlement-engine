@@ -472,12 +472,14 @@ export function razingDeterrenceFor({
  *
  * @param {{ worldState?: unknown, snapshot?: unknown, razerId?: unknown,
  *   victimId?: unknown, tick?: unknown, siegeWon?: unknown,
- *   strengthFor?: unknown }} args
+ *   strengthFor?: unknown, razerName?: unknown, victimName?: unknown }} args
+ *   `razerName`/`victimName` are the PRINTED names the verdict's receipt speaks with; the ids
+ *   never print (absent names, the gate's own "The victor" / "the defeated").
  * @returns {RazingDecision}
  */
 export function razingDecisionFor({
   worldState = null, snapshot = null, razerId = '', victimId = '', tick = 0, siegeWon = false,
-  strengthFor = null,
+  strengthFor = null, razerName = '', victimName = '',
 } = {}) {
   const razer = String(razerId || '');
   const victim = String(victimId || '');
@@ -516,8 +518,8 @@ export function razingDecisionFor({
     extremity,
     alignmentBand,
     licenseHeld: license != null,
-    actorId: razer,
-    victimId: victim,
+    actorId: text(razerName),
+    victimId: text(victimName),
     deterred: deterrence.deters,
     deterrenceReceipt: deterrence.receipt,
   });
@@ -1089,7 +1091,7 @@ export function razingSiegeEmission({
   const razer = String(razerId || '');
   const victim = String(victimId || '');
   const decision = razingDecisionFor({
-    worldState, snapshot, razerId: razer, victimId: victim, tick, siegeWon: true,
+    worldState, snapshot, razerId: razer, victimId: victim, tick, siegeWon: true, razerName, victimName,
     // THE DETERRENT rides the mouth's OWN strength lookup — the same one the
     // siege verdict and the coalition census read, so "how strong is that court"
     // has one answer per tick.

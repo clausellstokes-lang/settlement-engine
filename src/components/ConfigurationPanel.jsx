@@ -137,7 +137,7 @@ export function NearbyResourcesPanel({config,updateConfig}){
   const terrain=config.terrainOverride&&config.terrainOverride!=='auto'?config.terrainOverride:null;
   const allResources=useMemo(()=>{try{return getCompatibleResources(route,terrain);}catch{return[];}},[route,terrain]);
   const compatible=allResources.filter(r=>{
-    if(!r.compatible&&!(terrain&&r.terrain===terrain))return false;
+    if(!r.offered&&!(terrain&&r.terrain===terrain))return false; // COHERENCE-AGREE-3: the wizard's answer (a required access counts)
     if(config.magicExists===false&&r.key==='magical_node')return false;
     // If terrain override set, show terrain-specific resources even if route-incompatible
     if(terrain&&r.terrain&&r.terrain!==terrain)return false;
@@ -184,7 +184,7 @@ export function NearbyResourcesPanel({config,updateConfig}){
         <div style={{display:'flex',flexWrap:'wrap',gap:5}}>
           {resources.map(r=>{
             // Incompatible with current route/terrain — still clickable but visually dimmed
-            if(!r.compatible && !selected.includes(r.key) && !isRandom) {
+            if(!r.offered && !selected.includes(r.key) && !isRandom) {
               const incompatTip = (r.incompatibleReason||'Not compatible with current access') + '. Click to force include anyway';
               return(
                 <Button key={r.key} variant="ghost" size="sm"
@@ -300,7 +300,7 @@ export default function ConfigurationPanel({ showFineTune = true } = {}){
           <label htmlFor="useCustomContent" style={{display:'flex',alignItems:'center',gap:8,cursor:'pointer',padding:'8px 10px',marginBottom:12,border:`1px solid ${on?swatch.magic:BORDER2}`,background:on?'rgba(124,58,237,0.06)':CARD}}>
             <input id="useCustomContent" aria-label="Use my custom content" type="checkbox" checked={on} onChange={e=>updateConfig({useCustomContent:e.target.checked})} style={{accentColor:swatch.magic,width:15,height:15,flexShrink:0}}/>
             <span style={{fontSize:FS.sm,fontWeight:700,color:on?swatch.magic:SECOND,fontFamily:sans}}>Use my custom content</span>
-            <span style={{fontSize:FS.xxs,color:MUTED,marginLeft:'auto',textAlign:'right',lineHeight:1.3}}>{customCount} item{customCount===1?'':'s'} · institutions, services, resources, trade, factions, stressors &amp; chains</span>
+            <span style={{fontSize:FS.xxs,color:MUTED,marginLeft:'auto',textAlign:'right',lineHeight:1.3}}>{customCount} item{customCount===1?'':'s'} · institutions, services, resources, trade, powers, stressors &amp; chains</span>
           </label>
         );
       })()}

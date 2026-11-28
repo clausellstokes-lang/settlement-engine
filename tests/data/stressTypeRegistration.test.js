@@ -47,7 +47,18 @@ const EXEMPTIONS = {
   // registered type — it graduated to the full-coverage `importedTables` set below.
   // Deliberately the 5 newer types only (an override layer). (npcGenerator.js)
   STRESS_GOAL_OVERRIDES: 'new-types override layer by design',
+  // RE-KEYED BY CAUSE (ALLEGIANCE-CAR4, 2026-11-09, 03ff59084 THE GOALS REBUILT): the per-stress
+  // birth templates of `generateNPCGoal` retired with the role-goal draw (design §6.1: "Today's
+  // pools retire: NPC_FACTION_GOALS and the stress templates of generateNPCGoal (STRESS_GOALS)").
+  // A card's goal is drawn at A9 (people/goals.js) from the families its record supports; the
+  // CRISIS family keeps STRESS_GOAL_OVERRIDES and the SIEGE rows only. So STRESS_GOALS, kept as
+  // `SIEGE_GOALS`'s inner table, is siege-only BY DESIGN: it left the every-type scan below and
+  // its exact key set is pinned instead (the siege-rows pin), so it can neither grow a stress row
+  // nor lose the siege row silently.
+  STRESS_GOALS: 'the siege rows only (SIEGE_GOALS), by design since the goals rebuilt',
 };
+// The exact key set of the retired-to-siege table (the siege-rows pin, ALLEGIANCE-CAR4).
+const SIEGE_ONLY_STRESS_GOALS = ['under_siege'];
 
 function read(rel) {
   return readFileSync(resolve(process.cwd(), rel), 'utf-8');
@@ -135,7 +146,8 @@ describe('stress-type registration manifest (structural prevention)', () => {
     'STRESS_SECRET_BOOSTS',
     'STRESS_TO_CATEGORY',
     'STRESS_MANDATORY_ROLES',
-    'STRESS_GOALS',
+    // 'STRESS_GOALS' left this list by cause (ALLEGIANCE-CAR4): siege-only by design, its exact
+    // key set pinned below (see EXEMPTIONS.STRESS_GOALS).
   ];
 
   /** Every .js file under the scan roots. */
@@ -176,6 +188,21 @@ describe('stress-type registration manifest (structural prevention)', () => {
       expect(failures, failures.join('\n  ')).toEqual([]);
     });
   }
+
+  // RE-KEYED BY CAUSE (ALLEGIANCE-CAR4, 03ff59084): the same definition-site discovery, the same
+  // brace-matched block, now an EXACT key set — every definition site of STRESS_GOALS holds the
+  // siege row and nothing else, and every key it holds is a registered stress type.
+  it('STRESS_GOALS holds exactly the siege rows at every definition site (the goals rebuilt)', () => {
+    const sites = definitionSitesOf('STRESS_GOALS');
+    expect(sites, 'the siege rows live in SIEGE_GOALS (npcGenerator.js)').toEqual(['src/generators/npcGenerator.js']);
+    for (const file of sites) {
+      const block = tableBlock(read(file), 'STRESS_GOALS');
+      expect(block, `${file}: could not brace-match STRESS_GOALS`).toBeTruthy();
+      const present = TYPES.filter((t) => new RegExp(`\\b${t}:`).test(block));
+      expect(present, `${file}: STRESS_GOALS keys`).toEqual(SIEGE_ONLY_STRESS_GOALS);
+    }
+    for (const t of SIEGE_ONLY_STRESS_GOALS) expect(TYPES, `${t} is a registered stress type`).toContain(t);
+  });
 
   // ── buildStressContext probability coupling — presence per registered type ───
   it('buildStressContext references every registered stress type (probability coupling)', () => {

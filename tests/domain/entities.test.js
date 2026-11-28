@@ -103,7 +103,7 @@ describe('killNpc', () => {
     const npc = createNpc({
       name: 'Watch Captain', importance: 'key',
       linkedInstitutionIds: ['inst.watch'],
-      linkedFactionIds: ['faction.militia'],
+      memberships: [{ power: 'Militia', rank: 1, share: 1 }], // PEOPLE-5B (M-7): the card's powers, not linkedFactionIds
     });
     const result = killNpc(npc, 'e1');
     expect(result.npc.status).toBe('dead');

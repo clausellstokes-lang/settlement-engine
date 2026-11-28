@@ -1,0 +1,10 @@
+RISE src/data/dossierStateProse/defense.generated.js branch 234545 disk 262544 | line=234445 data=236425 corpus=262582 leaves=234445 defence=234445 r2a=234445 powers=234445
+RISE src/data/dossierStateProse/economy.generated.js branch 170255 disk 184022 | line=170255 data=173631 corpus=184067 leaves=170255 defence=170255 r2a=170255 powers=170255
+RISE src/data/dossierStateProse/general.generated.js branch 279568 disk 297282 | line=279568 data=292870 corpus=297282 leaves=279568 defence=279568 r2a=279568 powers=279568
+RISE src/data/dossierStateProse/power.generated.js branch 124251 disk 130008 | line=124251 data=125953 corpus=130008 leaves=124251 defence=124251 r2a=124251 powers=124251
+RISE src/data/dossierStateProse/stressors.generated.js branch 147483 disk 147666 | line=147483 data=147733 corpus=147666 leaves=147483 defence=147483 r2a=147483 powers=147483
+RISE src/data/dossierStateProse/warFaith.generated.js branch 178226 disk 180300 | line=178226 data=180372 corpus=180300 leaves=178226 defence=178226 r2a=178226 powers=178226
+same src/data/dossierCausalProse.generated.js branch 200017 disk 200017 | line=200017 data=200017 corpus=200017 leaves=200017 defence=200017 r2a=200017 powers=200017
+same src/data/dossierConnectives.generated.js branch 2732 disk 2732 | line=2732 data=2732 corpus=2732 leaves=2732 defence=2732 r2a=2732 powers=2732
+same src/data/proseNorms.generated.js branch 19872 disk 19872 | line=19872 data=19872 corpus=19872 leaves=19872 defence=19872 r2a=19872 powers=19872
+RISE src/data/dossierRelations.generated.js branch 28249 disk 28926 | line=28249 data=28249 corpus=28249 leaves=28249 defence=28249 r2a=28249 powers=28249

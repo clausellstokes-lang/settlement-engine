@@ -265,6 +265,14 @@ const CENSUS = (() => {
  * ⭐ BUILD-T3 (dossier consolidation, 2026-10-30): chair-ruled CUTS in the World group remove floored lines with their blocks, never a site that stopped being floored. U2+U3 (NPCs footer, per-group tally; Relationships intros, slider sentence, crossConns, Known Contacts, conflict desc/hooks): /create 750 -> 738, /settlements 991 -> 979, /gallery 794 -> 782. U4 (History count span, Recent Events, banner, legend mark, inline hooks): 738 -> 727, 979 -> 968, 782 -> 771. U5 (Rumors second sentence, Daily Life marketing line, Traditions footer and placeholders): 727 -> 725, 968 -> 966, 771 -> 769. U6 Faith (the patron-seat block and the niche block merged into FaithSection's patron line and one creed list): 725 -> 719, 966 -> 960, 769 -> 763. U6c War ROSE by one: the army's condition line moved into the units-abroad entry as its own floored row (W6): 719 -> 720, 960 -> 961, 763 -> 764. Glance rows (DS-REL-1 network line render removed): 720 -> 719, 961 -> 960, 764 -> 763.
  */
 const ROUTE_BASELINE = Object.freeze({
+  // RE-MEASURED 2026-11-20 (PAGE-1 OUTPUT, F3b), out of this census's own red run: the Economics header's Output chip
+  // (EconomicsGlance.jsx, its `chromeFontSize` label) leaves with its "n/100": /create 621 -> 620, /settlements 864 -> 863,
+  // /gallery 666 -> 665; `bare` holds. A surface only shrank.
+  // ⭐ RE-MEASURED 2026-11-09 (SW-B7b fourth seat; the cause is f913f8b28, the faith desk's public branch): the
+  // public prose composer (reached from the save path's lazy edge in the shell) imports the faith desk's one
+  // caller, `tabs/WarFaithDesk.jsx`, whose two floored sites (`proseFontSize`, `chromeFontSize`) now count on
+  // every route whose closure holds the shell: floored +2 on (shell) and 18 routes; `bare` and `files` hold. The
+  // dossier routes already held the file. Measured at f913f8b28 against its parent ad98f7f02 in a clean worktree.
   // ⛔ lane 28 (the create page, the tier picker, the landing and the header nav)
   // owns these three surfaces in its own branch. Every site counted here is in
   // src/components/generate, src/components/home, src/components/pricing or the
@@ -315,8 +323,60 @@ const ROUTE_BASELINE = Object.freeze({
   // 2026-11-04, the rung-1 landing (LANDING-1 door 10): lane CRISIS's Crisis tab (src/components/new/tabs/CrisisTab.jsx,
   // five `chromeFontSize` and one `proseFontSize` site, 0 bare) is in the dossier closure: /create 609 -> 615,
   // /settlements 855 -> 861, /gallery 653 -> 659; `bare` holds on all three.
-  '/create':                { roots: 1, files: 162, floored: 615, ruled: 5, bare: 97, owner: 'lane 28 — the create page + the tier picker' },
-  '/home':                  { roots: 1, files: 19, floored: 6, ruled: 4, bare: 19, owner: 'lane 28 — the landing' },
+  // 2026-11-07, the pool census composed (LANDING-R2 seat C2, measured out of this test's own red run, attributed per commit
+  // by this census's own `censusOfSource` over the dossier tabs): reader-r1 unit 2 (d3b9280f6, the chair's rulings 1-4:
+  // validation text leaves the DM surfaces) cuts three floored sites (OverviewTab 14 -> 12, ResourcesTab 29 -> 28), and
+  // census-3c revenues (9e4283eb5, R-P 2: the income table prints the revenues) adds one (EconomicsTab 54 -> 55):
+  // /create 615 -> 613, /settlements 861 -> 859, /gallery 659 -> 657; `bare` holds on all three.
+  // 2026-11-07, PEOPLE-6 LINKS: the Institutions card's face row (one `proseFontSize` site, 0 bare) — +1; the
+  // other +1 is red at the base bc4b6423 (the people car's lanes; /admin and /world's +1 there are left red, the base's).
+  // PEOPLE-6 LINKS step 2: +1, the NPC card's role row (one `chromeFontSize` site, 0 bare).
+  // 2026-11-09, MERGE-TRAIN at the OWNER-WORDS-DOSSIER point: ALLEGIANCE-CAR3's WhoRunsThisTownPanel (mounted on the Power tab)
+  // brought two sub-floor chrome sizes (`bare` +2 on /create, /settlements and /gallery from car 3's merge point, c6ded8e3a);
+  // both floored through `chromeFontSize` in the panel — `bare` back to its pins, `floored` +2 on the three: 618 -> 620, 864 -> 866, 662 -> 664.
+  // 2026-11-09, MERGE-TRAIN at the final tip (the phone floors' one re-measure): ALLEGIANCE-CAR1's NPC-card badge line ("answers to
+  // {guild}, through {handler}", npcComponents.jsx, 4e55421ea) printed 12px PROSE at phone width (dossierPhoneFloorAllViews' floors arm);
+  // floored through `proseFontSize` — `floored` +1 on the three rows: 620 -> 621, 866 -> 867, 664 -> 665; `bare` unmoved.
+  // 2026-11-09, STYLE-2-MERGE (found at TIER-PARITY-FIX's point, bisected by stage to SW-B7a PARTY-LINK's merge 21f4b031f):
+  // the party-link components' change (ShareToGallery/UnlistedShareBar/PartyLinkView; the exact site not isolated) — `floored` -1 on
+  // /create and /settlements, 621 -> 620, 867 -> 866; `bare` unmoved; re-measured by this census.
+  // 2026-11-09, STYLE-2-MERGE-3 at SW-6 CRISIS-SURFACES' point (point 22): SW-6's R5 faith hint (one `proseFontSize` row) — the lane's
+  // +2 on /create, /settlements, /gallery was FaithSection's hint row and FaithTab's; FaithTab's fell with the honest-absence block
+  // TIER-PARITY-FIX V2 retired (642e76af8), so the composed tree measures +1 on each: 620 -> 621, 866 -> 867, 665 -> 666; `bare` unmoved.
+  // 2026-11-12, COHERENCE-POWERS-2 item 3: PowerStrata.jsx's FactionRow gains the leaderless line of a power a stress brings
+  // (one `chromeFontSize` and one `proseFontSize` row, both floored) — `floored` +2 on /create, /settlements, /gallery,
+  // 621 -> 623, 864 -> 866, 666 -> 668; `bare` unmoved; re-measured by this census.
+  // 2026-11-13, R3-TABS (ruling b1): DefenseTab.jsx's ForceCard loses its provenance badge (one `chromeFontSize` row) —
+  // `floored` -1 on /create, /settlements, /gallery, 623 -> 622, 866 -> 865, 668 -> 667; `bare` unmoved; re-measured by this census.
+  // 2026-11-14, JOIN-3 (THE TRUE JOIN, lane/join-2026-11-14): RE-MEASURED BY THIS CENSUS at the joined tree and re-keyed by cause:
+  // `floored` 614 · 857 · 659 on /create, /settlements, /gallery (the branch side's 622 · 865 · 667 was R3-TABS' alone). The line
+  // 976db5b19 measures 623 · 866 · 668, and each lane's merged tip measures its own row green: R3-TABS b1 (the ForceCard badge) -1;
+  // POWERS-10 (PowerTab's legitimacy Breakdown, a59796dda) -2; W2-C-LEAVES-8 (NeedsNotMet +1, the food card's machinery row -3, the
+  // magic note's recovery chip -1) -3; R2-CODE-B item 1 (the chain-depth chip) -1 and R2-CODE-B-SIDE items 1-2 (ChainRow's
+  // upstream note and imported pill) -2. The four lanes' sites are in four different files; nothing else moves; `bare` unmoved;
+  // /compendium 203 is R2-CODE-B-SIDE's and stands. A surface only shrank.
+  // 2026-11-20, PAGE-1 CARD (F4): two floored `chromeFontSize` rows leave the dossier closure, the people card's influence
+  // dots (npcComponents.jsx) and the NPCs tab's influence tally (NPCsTab.jsx), both the stored band misread at birth:
+  // `floored` -2 on /create, /settlements, /gallery, 621 -> 619, 864 -> 862, 666 -> 664; `bare` unmoved; re-measured by this
+  // census. A surface only shrank.
+  // 2026-11-20, PAGE-1 MAGIC (F3c): MagicTab.jsx's headline caption ("Magic in the world at large, not the town's own:", one
+  // `chromeFontSize` site) — `floored` +1 on /create, /settlements, /gallery, 621 -> 622, 864 -> 865, 666 -> 667; `bare`
+  // unmoved; re-measured by this census at the build's tip.
+  // 2026-11-20, PAGE-4's merge of CARD and MAGIC: -2 and +1 composed, 621 -> 620, 864 -> 863, 666 -> 665; re-measured by this
+  // census at the merged tree, never a sum. Then PAGE-4's merge of OUTPUT (-1, its Output chip): 620 -> 619, re-measured.
+  // 2026-11-22, DAILY-PAGE-1 (the owner's order: the Daily Life button goes): DailyLifeTab.jsx loses the offer line's
+  // `proseFontSize`, the error box's and the regenerate overlay's `chromeFontSize` (-3) and gains the engine lines'
+  // `proseFontSize` (+1): `floored` -2 on /create, /settlements, /gallery, 620 -> 618, 863 -> 861, 665 -> 663; `bare`
+  // unmoved; re-measured by this census at the lane's tree.
+  // 2026-11-22, DAILY-4 unit P (the chair's E110: the page prints all its lines): DailyLifeTab.jsx gains the owner-only
+  // mark's muted line (`chromeFontSize`, the "For the DM only." line of WhoRunsThisTownPanel.jsx) (+1); the eight lines
+  // share the one `proseFontSize` site: `floored` +1 on /create, /settlements, /gallery, 618 -> 619, 861 -> 862,
+  // 663 -> 664; `bare` unmoved; re-measured by this census at the builder's tree. THE WORKING LINE moved the same three
+  // rows +1 at points 98 to 102 (618 -> 619, 861 -> 862, 663 -> 664, with no comment of its own); at DAILY-4's merge of
+  // point 102 both are composed and the figures below are RE-MEASURED by this census at the merged tree, never a sum: 619 -> 620,
+  // 862 -> 863, 664 -> 665.
+  '/create':                { roots: 1, files: 162, floored: 620, ruled: 5, bare: 97, owner: 'lane 28 — the create page + the tier picker' },
+  '/home':                  { roots: 1, files: 19, floored: 8, ruled: 4, bare: 19, owner: 'lane 28 — the landing' },
   // The Realm lazily mounts the create flow's ClerkNote for its one advisory
   // line, so lane 28's file lands on a route it does not own. One site.
   // ⭐ RE-MEASURED AT THE TRAIN TIP (2026-09-23, the chair; U25): /realm and /map floored 484 -> 485 —
@@ -330,8 +390,8 @@ const ROUTE_BASELINE = Object.freeze({
   // one edge brings the toolbar's ALREADY-FLOORED sites (8) and its two written rulings into
   // the map's closure. `bare` holds at 0 on both rows — nothing sub-floor shipped, and not one
   // fontSize was written, moved or ruled by this unit.
-  '/realm':                 { roots: 2, files: 153, floored: 493, ruled: 3, bare: 0, owner: 'lane 28 — generate/ClerkNote.jsx, mounted here' },
-  '/map':                   { roots: 2, files: 153, floored: 493, ruled: 3, bare: 0, owner: 'lane 28 — generate/ClerkNote.jsx, mounted here' },
+  '/realm':                 { roots: 2, files: 153, floored: 495, ruled: 3, bare: 0, owner: 'lane 28 — generate/ClerkNote.jsx, mounted here' },
+  '/map':                   { roots: 2, files: 153, floored: 495, ruled: 3, bare: 0, owner: 'lane 28 — generate/ClerkNote.jsx, mounted here' },
 
   // floored 991 -> 992 (review wave 2 car 3, 2026-09-19): the Library's sample fork used to
   // answer EVERY null with the purchase modal, so it now renders the estate's refusal notice
@@ -357,37 +417,82 @@ const ROUTE_BASELINE = Object.freeze({
   // and unreported, and now they are on `proseFontSize` and still uncounted. That half of
   // the cure is pinned in tests/components/publicChromeFloor.census.test.js, which grew a
   // PROSE-floor arm over a named pricing roster for exactly this gap.
-  '/pricing':               { roots: 1, files: 14, floored: 17, ruled: 3, bare: 0 },
+  '/pricing':               { roots: 1, files: 14, floored: 19, ruled: 3, bare: 0 },
+  // floored 858 → 860 (2026-11-02, X-45): the same two floored lines of the Institutions card. 861 -> 859 (2026-11-07): see /create.
   // floored 858 → 860 (2026-11-02, X-45): the same two floored lines of the Institutions card.
-  '/settlements':           { roots: 1, files: 206, floored: 861, ruled: 4, bare: 0 },
+  // 2026-11-07, PEOPLE-6 LINKS: the Institutions card's face row (one `proseFontSize` site, 0 bare) — +1; the
+  // other +1 is red at the base bc4b6423 (the people car's lanes; /admin and /world's +1 there are left red, the base's).
+  // PEOPLE-6 LINKS step 2: +1, the NPC card's role row (one `chromeFontSize` site, 0 bare).
+  // 2026-11-10, LIBRARY-SIMPLE (owner: "No longer does it advance time."): floored 867 -> 864, the
+  // campaign folder's three advance sites left with their controls — the "Advance by" micro-label,
+  // the auto-resolve switch's label and the interval select, one `chromeFontSize` each; 0 bare.
+  // 2026-11-13, R3-TABS (ruling b1): DefenseTab.jsx's ForceCard loses its provenance badge (one `chromeFontSize` row) —
+  // `floored` -1 on /create, /settlements, /gallery, 623 -> 622, 866 -> 865, 668 -> 667; `bare` unmoved; re-measured by this census.
+  // 2026-11-20, PAGE-1 MAGIC (F3c): MagicTab.jsx's headline caption (one `chromeFontSize` site) — `floored` 864 -> 865; `bare`
+  // unmoved; re-measured by this census at the build's tip.
+  // 2026-11-20, PAGE-4's merge of CARD (-2) and MAGIC (+1): 864 -> 863, re-measured by this census at the merged tree.
+  // 2026-11-20, PAGE-4's merge of OUTPUT (-1, its Output chip): 863 -> 862, re-measured by this census at the merged tree.
+  '/settlements':           { roots: 1, files: 206, floored: 863, ruled: 4, bare: 0 },
   // /compendium files 51 -> 50 with the same T6 cut: the size grid's one helper module left the
   // compendium's import closure when ConfigurationPanel stopped importing it; floored 211 -> 206.
-  '/compendium':            { roots: 1, files: 50, floored: 206, ruled: 3, bare: 0 },
-  '/about/what-this-is':    { roots: 1, files: 16, floored: 5, ruled: 1, bare: 0 },
-  '/about/guide':           { roots: 1, files: 12, floored: 11, ruled: 3, bare: 0 },
-  '/account':               { roots: 1, files: 46, floored: 105, ruled: 5, bare: 0 },
-  '/admin':                 { roots: 2, files: 29, floored: 86, ruled: 1, bare: 0 },
+  // floored 208 -> 206 (2026-11-10, COMPENDIUM-HUB H1, the owner's word "Rather than a horizontal
+  // scroll … boxes that are flush to each other"): the retired tab row's button label and the retired
+  // mode toggle's count badge were the panel's two `chromeFontSize` sites; the landing grid's one
+  // `proseFontSize` line replaces the retired Overview card's one. Re-recorded by the row's ritual.
+  // floored 206 -> 207 (2026-11-10, COMPENDIUM-INSTITUTIONS H7, the owner: "the institution page should
+  // show ALL institutions with their native power backing and services and flows"): the institution
+  // card's one fact line (`proseFontSize`, label + registry value). Re-recorded by the row's ritual.
+  // floored 207 -> 206 (2026-11-10, COMPENDIUM-INSTITUTIONS-2 c: a floor does not rise): the fact line
+  // now sits at FS.sm (12 px, at or above the phone floor at every width), an existing token, so it needs
+  // no floor call. Re-recorded by the row's ritual.
+  // floored 206 -> 205 (2026-11-10, COMPENDIUM-INSTITUTIONS-2 a2, the chair: "a card's description is never
+  // smaller than its fact lines"): the institution card's description now asks proseFontSize for FS.sm
+  // (12 px, not below the chrome floor, so the census no longer counts it as floored); it still renders 14 px
+  // on a phone and 12 px on desktop, never smaller than the 12 px fact lines. A fall, said here.
+  '/compendium':            { roots: 1, files: 50, floored: 203, ruled: 3, bare: 0 },
+  '/about/what-this-is':    { roots: 1, files: 16, floored: 7, ruled: 1, bare: 0 },
+  '/about/guide':           { roots: 1, files: 12, floored: 13, ruled: 3, bare: 0 },
+  '/account':               { roots: 1, files: 46, floored: 107, ruled: 5, bare: 0 },
+  // floored 86 -> 87 (GREEN-BASE, 2026-11-08, re-measured; red at the base 262e8b255 and on every wave lane): ENGINE-5's
+  // engine-cost dashboard line (4b2310b44, AdminAnalyticsPanel.jsx, one floored site, 0 bare).
+  '/admin':                 { roots: 2, files: 29, floored: 89, ruled: 1, bare: 0 },
+  // floored 655 → 657 (2026-11-02, X-45): the same two floored lines of the Institutions card. 659 -> 657 (2026-11-07): see /create.
   // floored 655 → 657 (2026-11-02, X-45): the same two floored lines of the Institutions card.
-  '/gallery':               { roots: 1, files: 151, floored: 659, ruled: 4, bare: 0 },
-  '/founders':              { roots: 1, files: 13, floored: 6, ruled: 1, bare: 0 },
+  // 2026-11-07, PEOPLE-6 LINKS: the Institutions card's face row (one `proseFontSize` site, 0 bare) — +1; the
+  // other +1 is red at the base bc4b6423 (the people car's lanes; /admin and /world's +1 there are left red, the base's).
+  // PEOPLE-6 LINKS step 2: +1, the NPC card's role row (one `chromeFontSize` site, 0 bare).
+  // 2026-11-13, R3-TABS (ruling b1): DefenseTab.jsx's ForceCard loses its provenance badge (one `chromeFontSize` row) —
+  // `floored` -1 on /create, /settlements, /gallery, 623 -> 622, 866 -> 865, 668 -> 667; `bare` unmoved; re-measured by this census.
+  // 2026-11-18, CLOSE-DOORS-1B (the close of 2026-11-18): `floored` +3 on /create, /settlements, /gallery, 618 -> 621, 861 -> 864,
+  // 663 -> 666; `bare` unmoved; re-measured by this census at 70e557d5b: one floored site each in npcComponents.jsx (BAR7-CARDS,
+  // JOIN-17 point 20), DefenseTab.jsx (BAR6-CRIME, point 3) and ResourcesTab.jsx (BIRTH-3, the sixth chair's point 33).
+  // 2026-11-20, PAGE-1 MAGIC (F3c): MagicTab.jsx's headline caption (one `chromeFontSize` site) — `floored` 666 -> 667; `bare`
+  // unmoved; re-measured by this census at the build's tip.
+  // 2026-11-20, PAGE-4's merge of CARD (-2) and MAGIC (+1): 666 -> 665, re-measured by this census at the merged tree.
+  // 2026-11-20, PAGE-4's merge of OUTPUT (-1, its Output chip): 665 -> 664, re-measured by this census at the merged tree.
+  '/gallery':               { roots: 1, files: 151, floored: 665, ruled: 4, bare: 0 },
+  '/founders':              { roots: 1, files: 13, floored: 8, ruled: 1, bare: 0 },
   '/first-hundred':         { roots: 1, files: 6, floored: 4, ruled: 1, bare: 0 },
   '/roadmap':               { roots: 1, files: 6, floored: 3, ruled: 1, bare: 0 },
-  '/world':                 { roots: 1, files: 4, floored: 5, ruled: 1, bare: 0 },
+  // files 4 -> 7, floored 5 -> 6 (GREEN-BASE, 2026-11-08, re-measured; red at the base 262e8b255 and on every wave lane):
+  // ENGINE-5 unit 2 (fc8a82704) — WorldPage says a build without an engine, importing the launch pill
+  // (primitives/AvailableAtLaunchPill.jsx -> Pill.jsx, one floored site) and the export gate; 0 bare.
+  '/world':                 { roots: 1, files: 7, floored: 8, ruled: 1, bare: 0 },
   '/terms':                 { roots: 1, files: 5, floored: 2, ruled: 0, bare: 0 },
   '/privacy':               { roots: 1, files: 5, floored: 2, ruled: 0, bare: 0 },
   '/refunds':               { roots: 1, files: 5, floored: 2, ruled: 0, bare: 0 },
   '/covenant':              { roots: 1, files: 5, floored: 2, ruled: 0, bare: 0 },
   '/bounty':                { roots: 1, files: 5, floored: 2, ruled: 0, bare: 0 },
-  '/screen':                { roots: 1, files: 14, floored: 31, ruled: 3, bare: 0 },
+  '/screen':                { roots: 1, files: 14, floored: 33, ruled: 3, bare: 0 },
     // ⭐ floored 4 -> 5 on 2026-09-20 (REVIEW-P F10): the sign-in surface now raises the
     // guarded route's reason through primitives/RefusalNotice.jsx, and ClerkNote's rubric
     // is a chrome line that takes the phone floor. A NEW floored line, not a cured bare one.
-  '/signin':                { roots: 1, files: 11, floored: 5, ruled: 1, bare: 0 },
-  '/register':              { roots: 1, files: 11, floored: 4, ruled: 1, bare: 0 },
-  '/reset-password':        { roots: 1, files: 11, floored: 4, ruled: 1, bare: 0 },
-  '/set-new-password':      { roots: 1, files: 7, floored: 3, ruled: 1, bare: 0 },
-  '/verify-email':          { roots: 1, files: 7, floored: 3, ruled: 1, bare: 0 },
-  '/confirm-email':         { roots: 1, files: 7, floored: 3, ruled: 1, bare: 0 },
+  '/signin':                { roots: 1, files: 11, floored: 7, ruled: 1, bare: 0 },
+  '/register':              { roots: 1, files: 11, floored: 6, ruled: 1, bare: 0 },
+  '/reset-password':        { roots: 1, files: 11, floored: 6, ruled: 1, bare: 0 },
+  '/set-new-password':      { roots: 1, files: 7, floored: 5, ruled: 1, bare: 0 },
+  '/verify-email':          { roots: 1, files: 7, floored: 5, ruled: 1, bare: 0 },
+  '/confirm-email':         { roots: 1, files: 7, floored: 5, ruled: 1, bare: 0 },
   '/checkout/success':      { roots: 1, files: 6, floored: 4, ruled: 1, bare: 0 },
 
   // The retired redirect surfaces. Their ROUTES entries exist so old links still
@@ -439,7 +544,7 @@ const ROUTE_BASELINE = Object.freeze({
   // (shell) floored 128 -> 135 (W2-SURVEYOR, the chair's ruling: the Interview keeps a way in
   // BY PHRASE, so the door mounts InterviewPanel again and its SEVEN floored sites return; the
   // U1 note's "eight" counted the shell's retired route hint with them). `bare` holds.
-  '(shell)':                { roots: 1, files: 61, floored: 135, ruled: 3, bare: 0 },
+  '(shell)':                { roots: 1, files: 61, floored: 137, ruled: 3, bare: 0 },
 });
 
 /**

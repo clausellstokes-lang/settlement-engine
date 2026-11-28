@@ -57,6 +57,15 @@ describe('the food-surplus residue', () => {
     const text = textLines(container);
     expect(text).toMatch(/^Food$/m); // the row is on the tab
     expect(text).not.toMatch(/^Food\nSurplus$/m); // anchored: the line above pins the Food row on the tab, and the next pins its Adequate grade
-    expect(text).toMatch(/^Food\nAdequate$/m);
+    // RE-KEYED BY IDENTITY (R3-TABS, round three's cut #494/#1317, the chair's ruling (c)): the Food row
+    // now prints the food record's own word, the Overview's (`economicState.foodSecurity.label`), so this
+    // food-short place reads its record's "Secure" where the causal ladder's capped "Adequate" stood. The
+    // pin's point stands: not Surplus.
+    // RE-KEYED BY IDENTITY AGAIN (SURFACES-2 item 1, the chair's ruling (r2) of 2026-11-14): the food word has one
+    // home on every surface, the food band (domain/display/foodWordShown.js), so this place, which grows less than
+    // it eats and leaves a share of its need unmet, reads the band's "Pressured" where its stored "Secure" stood.
+    expect(s.economicState.foodSecurity.label).toBe('Secure');
+    expect(s.economicState.foodSecurity.foodRecord.gapPct).toBeGreaterThan(0);
+    expect(text).toMatch(/^Food\nPressured$/m);
   });
 });

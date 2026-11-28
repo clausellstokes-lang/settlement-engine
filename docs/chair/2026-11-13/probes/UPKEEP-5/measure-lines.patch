@@ -1,0 +1,38 @@
+diff --git a/src/generators/economy/economicState.js b/src/generators/economy/economicState.js
+index a086a9606..8f45210e9 100644
+--- a/src/generators/economy/economicState.js
++++ b/src/generators/economy/economicState.js
+@@ -829,7 +829,19 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
+     incomeNormalized,
+     _foodSec,
+   );
++  globalThis.__U5_sub = undefined; globalThis.__U5_replay = false;
+   const prosperity = deriveProsperityLabel(baseProsperity, config, institutions);
++  { // UPKEEP-5 MEASURE ONLY: the label with no crisis at all (no famine food cap, no label cap, the small-place floor kept), the draw replayed
++    const _cfgNS = { ...config, stressTypes: [], stressType: undefined, intendedStressTypes: [] };
++    const _fsNS = generateFoodSecurity(tier, institutions, { ..._cfgNS, tradeRouteAccess: tradeRoute });
++    const { label: _baseNS } = computeBaseProsperity(tier, tradeRoute, institutions, _cfgNS, instNames, incomeNormalized, _fsNS);
++    globalThis.__U5_replay = true;
++    const _pre = deriveProsperityLabel(_baseNS, _cfgNS, institutions);
++    globalThis.__U5_replay = false;
++    const _fsPre = generateFoodSecurity(tier, institutions, { ...config, tradeRouteAccess: tradeRoute }, boughtShare('stores', keepOf(_pre)));
++    const _fsFull = generateFoodSecurity(tier, institutions, { ...config, tradeRouteAccess: tradeRoute }, 1);
++    (globalThis.__U5_log ||= []).push({ prosperity, pre: _pre, monthsPre: _fsPre.storageMonths, monthsFull: _fsFull.storageMonths });
++  }
+   // COHERENCE-UPKEEP (ruling 7): the guard assessment says what the place can pay for its hired force.
+   safetyProfile.guardEffectivenessDesc = keptGuardLine(safetyProfile.guardEffectivenessDesc, institutions, prosperity, config.stressTypes || []);
+   // COHERENCE-UPKEEP (ruling 6): the stores are laid by at the label's share, at the stores' writer,
+diff --git a/src/generators/economy/prosperity.js b/src/generators/economy/prosperity.js
+index bcf0e36b9..92f7a1f82 100644
+--- a/src/generators/economy/prosperity.js
++++ b/src/generators/economy/prosperity.js
+@@ -182,7 +182,8 @@ export const deriveProsperityLabel = (prosperity, config = {}, institutions = []
+   let idx = BASE[prosperity] !== undefined ? BASE[prosperity] : 2;
+   // Subsistence isolated settlements can still struggle further — 35% chance of Struggling
+   if (prosperity === 'Subsistence') {
+-    idx = _rng() < 0.4 ? 0 : _rng() < 0.5 ? 1 : 2; // 40% Struggling, 30% Poor, 30% luckier
++    idx = (globalThis.__U5_sub !== undefined && globalThis.__U5_replay) ? globalThis.__U5_sub : (_rng() < 0.4 ? 0 : _rng() < 0.5 ? 1 : 2); // UPKEEP-5 MEASURE: replay the draw
++    if (!globalThis.__U5_replay) globalThis.__U5_sub = idx;
+     idx = Math.max(0, Math.min(1, idx)); // cap at Poor — subsistence can never be Moderate+
+   }
+   // Economy output adjustments — calibrated for truly random sliders (5-95 uniform)

@@ -805,6 +805,16 @@ function armD(entry, ground, out) {
   }
 }
 
+/** The verbs a predicate field's name opens on (`hasGranary`); never a claim word on their own. */
+const PREDICATE_VERBS = new Set(['has']);
+
+/**
+ * The NAME SLOTS: a slot the composer fills with a proper name (`{settlement}` is
+ * `properFill(settlement.name)`), never with a reading of the record. A line may always say the
+ * town's name, so the slot claims no field (the chair's ruling CL25).
+ */
+const NAME_SLOTS = Object.freeze(['settlement']);
+
 /**
  * The words that CLAIM a field, derived from the field's own path.
  *
@@ -819,8 +829,12 @@ export function claimTokensOf(field) {
   const path = String(field || '').split('.').filter(Boolean);
   const leaf = path.length ? path[path.length - 1] : '';
   if (leaf === '') return [];
-  const words = leaf.replace(/([a-z0-9])([A-Z])/g, '$1 $2').toLowerCase().split(/[\s_]+/)
-    .filter((word) => word.length > 2);
+  const split = leaf.replace(/([a-z0-9])([A-Z])/g, '$1 $2').toLowerCase().split(/[\s_]+/);
+  // ⛔ THE BARE VERB IS NOT A CLAIM (FAULTS-TOOLS, the chair's ruling CL25). A predicate field's
+  // name opens on its verb (`hasGranary`, `hasWatch`): "has" is the field's grammar, not its
+  // subject, and a line that says "has no court sitting" says nothing of a granary or a watch.
+  // The head verb of a camel-cased leaf is dropped; the leaf's own words still claim it.
+  const words = split.filter((word, i) => word.length > 2 && !(i === 0 && split.length > 1 && PREDICATE_VERBS.has(word)));
   /** @type {string[]} */
   const tokens = [];
   for (const word of [leaf.toLowerCase(), ...words]) {
@@ -841,7 +855,9 @@ export function claimTokensOf(field) {
  * @returns {string} the token that claimed it, or `''`
  */
 export function claimsField(text, field, vocabulary = {}) {
-  const body = String(text || '');
+  // ⛔ A NAME SLOT IS STRUCK BEFORE ANY TEST (FAULTS-TOOLS, CL25): `{settlement}` is the town's
+  // name, not the record's `settlement` field, and the word test would read it through its braces.
+  const body = NAME_SLOTS.reduce((t, slot) => t.split(`{${slot}}`).join(' '), String(text || ''));
   const lower = body.toLowerCase();
   const extra = vocabulary[field] || [];
   const tokens = [...claimTokensOf(field), ...extra.map((word) => String(word).toLowerCase())];

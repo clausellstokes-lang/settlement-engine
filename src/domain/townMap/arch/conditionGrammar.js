@@ -90,7 +90,7 @@ export const WAR_SCAR_CUTS = Object.freeze([0.20, 0.45, 0.60]);
 /**
  * CORRUPTION_CUTS -- the REVEALED-corruption decay band edges. corruptionRevealed only (covert is 0).
  * PARITY: 2D corruption reveal is CATEGORICAL, not numeric -- compromisedSecurityInstitutions splits on
- * `imp.covert !== true` (corruption.js:599/615), and a covert mark must never read as a public scandal
+ * `imp.covert !== true` (corruptionLeash.js :: compromisedSecurityInstitutions), and a covert mark must never read as a public scandal
  * (the same invariant params.js fail-closes on). No 2D numeric cut exists; pinned here for the reveal
  * intensity -> weathering overlay.
  * @type {ReadonlyArray<number>}

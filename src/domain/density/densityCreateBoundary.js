@@ -62,8 +62,9 @@
  *   3. `geographyLockedConfig` cannot smuggle the marker across: it overlays
  *      ONLY the geography keys from the previous settlement.
  *   4. The true regeneration path already reads the world's own law —
- *      `regenSection` takes `settlement.config || config`, settlement first, so
- *      a markerless v1 world regenerates as v1.
+ *      `regenSection` takes `settlement.config || settlement._config || config`
+ *      (settlementRegenAction.js), the world's own config first in either stored
+ *      shape, so a markerless v1 world regenerates as v1.
  *
  * ⚠ AND A STALE COMMENT THAT WOULD HAVE MISLED THE NEXT READER, MEASURED:
  * generateSettlementPipeline's docblock says `config._seed` "is how a saved
@@ -101,6 +102,24 @@ import { LIVING_CONTENT_LAW_CONFIG_KEY } from '../content/livingContentLawVersio
 // answered in one file. The seam is engine-side already (the pipeline imports it
 // statically), so this edge adds no module to any closure.
 import { loadLivingContentRoster } from '../content/livingContentSeam.js';
+// ⭐ THE THIRD GENERATION LAW, THE SEAT LAW (CS10, SEAT-1 train 1 unit U1), WIRED HERE AND
+// NOWHERE ELSE, AND DARK. Its module is a dependency-free leaf that declares the key, the dial,
+// the reader and the mint in one file, so this one edge brings all four and nothing behind them;
+// it lands on whichever side of first paint this module does (the lazy side, per the
+// living-content row below). Its dial sits at the default, so the mint is `{}` and a birth's
+// config is byte-identical; lighting it is the owner's word (U8).
+import { SEAT_LAW_CONFIG_KEY, newSettlementSeatLaw } from '../seat/seatLaw.js';
+// ⭐ THE FOURTH GENERATION LAW, THE FORTUNE LAW (FS5, FORTUNE-1 unit U1), WIRED HERE AND
+// NOWHERE ELSE, AND DARK. Its module is a dependency-free leaf that declares the key, the dial,
+// the reader and the mint in one file, so this one edge brings all four and nothing behind them.
+// Its dial sits at the default, so the mint is `{}` and a birth's config is byte-identical;
+// lighting it is the owner's word, never before the seat's law.
+import { FORTUNE_LAW_CONFIG_KEY, newSettlementFortuneLaw } from '../fortune/fortuneLaw.js';
+// ⭐ THE TROUBLE LAW (lane KINDS-1, unit K1), WIRED HERE AND NOWHERE ELSE, AND DARK. Its module is a
+// zero-import leaf that declares the key, the dial, the reader and the mint in one file, so this one
+// edge brings all four and nothing behind them. Its dial sits at the default, so the mint is `{}` and a
+// birth's config is byte-identical; lighting it is the owner's word.
+import { TROUBLE_LAW_CONFIG_KEY, newSettlementTroubleLaw } from '../trouble/troubleLaw.js';
 
 /**
  * How a module that can reach `generateSettlementPipeline` is classified.
@@ -228,6 +247,18 @@ export const PIPELINE_REACHERS = Object.freeze({
       + 'would otherwise throw out of the pipeline rather than reproduce that world.',
     payloadAwaitedBy: Object.freeze(['src/store/settlementRederiveAction.js']),
   }),
+  'src/engine/serviceEntry.js': Object.freeze({
+    class: 'BIRTH',
+    why: 'the engine service\'s one entry re-exports the pipeline and the mint, unwrapped, for the '
+      + 'bundle the engine-generate edge function imports; that function\'s generate op treats a '
+      + 'request as the app\'s Generate does, a brand-new town born under birthConfig, so naming the '
+      + 'mint here is the service minting it. Its derive op (the re-derivation and the surveyor '
+      + 'preview, ENGINE-4) runs the pipeline WITHOUT the mint, exactly as those client callers do, '
+      + 'so no existing world is re-born. Nothing in the client imports this module.',
+    // The module is a re-export list and awaits nothing itself; the edge function that runs the
+    // bundle awaits the payload inside its handler, before the generation call.
+    payloadAwaitedBy: Object.freeze(['supabase/functions/engine-generate/index.ts']),
+  }),
 });
 
 /**
@@ -268,6 +299,21 @@ export const PIPELINE_REACHERS = Object.freeze({
  * default this writes not one config byte, because the key is simply absent from
  * every config the product produces.
  *
+ * ⛔ THE SEAT LAW'S MARKER IS CLAMPED THE SAME WAY, FOR THE SAME REASON (CS10, U1). Its dial
+ * sat at the dormant default, so its mint was `{}` and deleted nothing: without its own
+ * destructure, an imported seat-law world's configuration loaded through the Library and
+ * regenerated would have birthed a NEW world under the seat law on a build whose dial was dark.
+ *
+ * ⛔ THE FORTUNE LAW'S MARKER IS CLAMPED THE SAME WAY, FOR THE SAME REASON (FS5, FORTUNE-1 U1).
+ * Its dial sat at the dormant default, so its mint was `{}` and deleted nothing: without its own
+ * destructure, an imported fortune-law world's configuration loaded through the Library and
+ * regenerated would have birthed a NEW world under the fortune law on a build whose dial was dark.
+ *
+ * ⛔ THE TROUBLE LAW'S MARKER IS CLAMPED THE SAME WAY, FOR THE SAME REASON (KINDS-1 K1). Its dial
+ * sits at the dark default, so its mint is `{}` and deletes nothing: without its own destructure, a
+ * weighted-trouble world's configuration loaded through the Library and regenerated would birth a NEW
+ * world under the weighted law on a build whose dial is dark.
+ *
  * @template {Record<string, unknown>} C
  * @param {C} config the config a birth is about to generate from
  * @returns {C} the same shape, carrying the laws a NEW world is born under
@@ -277,12 +323,18 @@ export function birthConfig(config) {
     // The underscore-prefixed binding IS the clamp (see the note above); the lint
     // config admits that name shape, so no disable directive is wanted here.
     [LIVING_CONTENT_LAW_CONFIG_KEY]: _incomingLivingContentLaw,
+    [SEAT_LAW_CONFIG_KEY]: _incomingSeatLaw,
+    [FORTUNE_LAW_CONFIG_KEY]: _incomingFortuneLaw,
+    [TROUBLE_LAW_CONFIG_KEY]: _incomingTroubleLaw,
     ...carried
   } = /** @type {Record<string, unknown>} */ ({ ...(config || {}) });
   return /** @type {C} */ ({
     ...carried,
     ...newSettlementDensityLaw(),
     ...newSettlementLivingContentLaw(),
+    ...newSettlementSeatLaw(),
+    ...newSettlementFortuneLaw(),
+    ...newSettlementTroubleLaw(),
   });
 }
 
@@ -321,7 +373,7 @@ export function birthConfig(config) {
  * with no dial moving at all (the Library's "Apply Saved Configuration &
  * Regenerate" hydrates the wizard form from a saved `settlement._config`, and
  * `updateConfig` admits the underscore family by prefix). A PREVIEW or an
- * EXECUTOR can therefore meet a lit config on a build whose dial is dark. Every
+ * EXECUTOR could therefore meet a lit config on a build whose dial was dark. Every
  * row of `PIPELINE_REACHERS` names, in `payloadAwaitedBy`, the module that
  * awaits this on its behalf, and `tests/lint/densityCreateBoundary.walker.test.js`
  * holds those names to the tree.
@@ -513,5 +565,57 @@ export const GENERATION_LAWS = Object.freeze({
       + 'every classified BIRTH and no other byte of the world moves with it: measured on the '
       + 'golden 525 and the RATE 768, zero movers. This row read "the dial stays at the dormant '
       + 'default, so the mint still writes not one config byte" until that day.',
+  }),
+  seat: Object.freeze({
+    mint: 'newSettlementSeatLaw',
+    module: 'src/domain/seat/seatLaw.js',
+    dial: 'NEW_SETTLEMENT_SEAT_LAW_VERSION',
+    configKey: '_seatLawVersion',
+    wiring: 'WIRED',
+    why: 'the seat law (CS10: the form of government, the holder of the seat and the person in '
+      + 'it read apart), spread by birthConfig beside the other two, with its incoming marker '
+      + 'clamped off, so every classified BIRTH mints it and no PREVIEW or re-derivation can. THE '
+      + 'DIAL IS LIT since 2026-11-23 (the first deploy\'s finish line, which the owner left to the '
+      + 'chair on 2026-11-22: both laws landed and lit; E30), so the mint writes _seatLawVersion: 2 '
+      + 'on every classified BIRTH and a new place reads its form of government, the holder of its '
+      + 'seat and the person in it apart; a saved place keeps the law it was born under. This row '
+      + 'read "THE DIAL IS DARK, and that is the chair\'s ruling (a) of 2026-11-20, not an omission" '
+      + 'until that day. Its module is a zero-import leaf, so the edge brings nothing behind it.',
+  }),
+  fortune: Object.freeze({
+    mint: 'newSettlementFortuneLaw',
+    module: 'src/domain/fortune/fortuneLaw.js',
+    dial: 'NEW_SETTLEMENT_FORTUNE_LAW_VERSION',
+    configKey: '_fortuneLawVersion',
+    wiring: 'WIRED',
+    why: 'the fortune law (FS5: a place\'s fortune and its public standing read against its own '
+      + 'size), spread by birthConfig beside the others, with its incoming marker clamped off, so '
+      + 'every classified BIRTH mints it and no PREVIEW or re-derivation can. THE DIAL IS LIT since '
+      + '2026-11-23 (the first deploy\'s finish line, which the owner left to the chair on '
+      + '2026-11-22: both laws landed and lit; E30), in the same commit as the seat\'s law and never '
+      + 'before it (the chair\'s ruling 3), so the mint writes _fortuneLawVersion: 2 on every '
+      + 'classified BIRTH and a new place\'s fortune and public standing are read against places of '
+      + 'its own size; a saved place keeps the law it was born under. This row read "THE DIAL IS '
+      + 'DARK, and that is the chair\'s ruling of 2026-11-20 10:33 UTC, not an omission" until that '
+      + 'day. Its module is a zero-import leaf, so the edge brings nothing behind it.',
+  }),
+  trouble: Object.freeze({
+    mint: 'newSettlementTroubleLaw',
+    module: 'src/domain/trouble/troubleLaw.js',
+    dial: 'NEW_SETTLEMENT_TROUBLE_LAW_VERSION',
+    configKey: '_troubleLawVersion',
+    wiring: 'WIRED',
+    why: 'the trouble law (lane KINDS-1: which troubles a place is born with, the three fixed numbers '
+      + 'of buildHistoricalEvent turned into weights that read how much of the thing the place holds), '
+      + 'spread by birthConfig beside the others, with its incoming marker clamped off, so every '
+      + 'classified BIRTH mints it and no PREVIEW or re-derivation can. THE DIAL IS LIT AT POINT 116 ON '
+      + '2026-11-25 BY THE TENTH CHAIR\'S DECISION, THE OWNER HAVING DEFERRED THE QUESTION TO IT; ITS '
+      + 'NUMBERS (TROUBLE_WEIGHT_TUNING) STAY DRAFTS UNTIL THE OWNER\'S TUNING SIGNATURE. So the mint '
+      + 'writes _troubleLawVersion: 2 on every classified BIRTH and a new place\'s crime wave and guild '
+      + 'quarrel are weighed by what it holds. A saved '
+      + 'place keeps the law it was born under: the history regen re-keys its pass to the record\'s '
+      + 'law (withRecordTroubleLaw), never the form\'s. Its module is a zero-import leaf pinned to its '
+      + 'own chunk (trouble-law), read by the create boundary, the history generator and the '
+      + 'history regen pass, so the edge brings nothing behind it and nothing enters first paint.',
   }),
 });

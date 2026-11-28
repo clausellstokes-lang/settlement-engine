@@ -17,6 +17,11 @@ describe('A-11 sea words, the instrument', () => {
     expect(seaWordSentence(list, IMPORTS_FISH)).toBeUndefined();
     expect(seaWordSentence(list, {})).toBe('Animal hides Clay Fish Livestock Metals Mountain timber Salt');
   });
+  it('READER-R1: a house-voice lack line is licensed as the generator\'s was (F5), and nothing else in that shape', () => {
+    expect(seaWordSentence(['No fish reaches the fishmonger.'], {})).toBeUndefined();
+    expect(seaWordSentence(['Fish: Fishmonger exists but lacks access to fish'], {})).toBeUndefined();
+    expect(seaWordSentence(['No fish reaches the harbour.'], {})).toBe('No fish reaches the harbour.'); // the house itself is a sea word
+  });
   it('still finds the harbour, the catch and the ships', () => {
     for (const line of ['Built around the agora and the harbour.', 'Racks of drying fish line the way in.', 'Timber → lumber → planks → furniture → ships']) {
       expect(seaWordSentence([line], IMPORTS_FISH)).toBe(line);

@@ -1,0 +1,130 @@
+LAWS 12 TO 15 (seat K) over 30 towns: towns   26 · instances    52 · distinct lines   43
+  12a.house            towns    1 · instances     1 · distinct lines    1 · by crisis under_siege+famine 1
+  12b.boom             towns    1 · instances     2 · distinct lines    2 · by crisis wartime 2
+  12c.calm             towns    1 · instances     2 · distinct lines    1 · by crisis occupied 2
+  12d.enough           towns    1 · instances     2 · distinct lines    2 · by crisis occupied 2
+  12e.noRising         towns    1 · instances     1 · distinct lines    1 · by crisis calm 1
+  12f.magic            towns    1 · instances     1 · distinct lines    1 · by crisis under_siege 1
+  13a.court            towns    2 · instances     3 · distinct lines    2 · by crisis calm 1, occupied 2
+  13b.gaol             towns    1 · instances     1 · distinct lines    1 · by crisis occupied 1
+  13d.record           towns    1 · instances     1 · distinct lines    1 · by crisis calm 1
+  13e.hours            towns    1 · instances     1 · distinct lines    1 · by crisis calm 1
+  13f.rival            towns    2 · instances     2 · distinct lines    1 · by crisis under_siege+famine 1, wartime 1
+  13g.tie              towns    1 · instances     2 · distinct lines    2 · by crisis calm 2
+  14a.descCopy         towns    4 · instances     4 · distinct lines    4 · by crisis under_siege+famine 3, wartime 1
+  14a.descCopy.generic towns    2 · instances     2 · distinct lines    2 · by crisis wartime 1, calm 1
+  14b.handler          towns    2 · instances     4 · distinct lines    4 · by crisis under_siege+famine 2, wartime 2
+  14b.handler.cross    towns    2 · instances     2 · distinct lines    2 · by crisis under_siege+famine 1, calm 1
+  14c.whole            towns    3 · instances     3 · distinct lines    3 · by crisis calm 3
+  14d.noble            towns    4 · instances     4 · distinct lines    1 · by crisis calm 2, famine 2
+  14e.hookTrade        towns    1 · instances     1 · distinct lines    1 · by crisis under_siege+famine 1
+  14f.secret.sortie    towns    2 · instances     2 · distinct lines    1 · by crisis under_siege+famine 2
+  14f.secret.supplies  towns    1 · instances     1 · distinct lines    1 · by crisis under_siege 1
+  14g.sexTitle         towns    1 · instances     1 · distinct lines    1 · by crisis calm 1
+  14h.winMore          towns    2 · instances     2 · distinct lines    2 · by crisis wartime 1, calm 1
+  15a.endless          towns    2 · instances     2 · distinct lines    1 · by crisis calm 2
+  15b.grazing          towns    1 · instances     2 · distinct lines    1 · by crisis calm 2
+  15c.noneToSend       towns    1 · instances     1 · distinct lines    1 · by crisis calm 1
+  15d.bar              towns    1 · instances     1 · distinct lines    1 · by crisis under_siege 1
+  15e.newBuild         towns    1 · instances     1 · distinct lines    1 · by crisis occupied 1
+BY WRITER (rule · instances · writer)
+      1 · 12a.house · src/data/crisisDependence.js (the crisis tables that mark a house; read by src/domain/display/crisisStoppedRow.js :: rowMarkText)
+      1 · 12b.boom · src/data/arrivalProse.js (needs trade at work: <trade>)
+      1 · 12b.boom · src/generators/narrativeText.js (the war's "right side" pool, needs institution: smith)
+      2 · 12c.calm · src/generators/narrativeText.js (history.historicalCharacter pool: crisis: any)
+      2 · 12d.enough · src/data/dossierStateProse/economy.generated.js (pools > POOR: crisis: any)
+      1 · 12e.noRising · src/data/dossierStateProse/power.generated.js (pools > riskLabel: Stable: succession settled, no unrest)
+      1 · 12f.magic · src/domain/display/dossierViewModel.js :: deriveMagicSupplyView (over magicSourceOf: no house mark read; printed by src/components/new/tabs/MagicTab.jsx)
+      2 · 13a.court · src/data/dossierStateProse/defense.generated.js (Internal Security: full legal chain: court, prison)
+      1 · 13a.court · src/generators/servicesGenerator.js :: SLOW_LAW_DESC (needs court, prison)
+      1 · 13b.gaol · src/data/people/handlerTieLines.js (handler_leverage_loved / the crewmate line: "held by the {body}")
+      1 · 13d.record · src/data/dossierStateProse/defense.generated.js (Internal Security: no legal infrastructure, beside Safe/Moderate "record of crimes": guardPresence)
+      1 · 13e.hours · src/generators/safetyProfile.js :: STANDARD_PATROL (#18: the patrol read off the standard, not the force's hours)
+      2 · 13f.rival · src/data/dossierStateProse/defense.generated.js (structure semi-organized: tier ≥ village, no rival rings)
+      2 · 13g.tie · src/generators/power/factionStanding.js (guard–thieves note by power alone; the relationship's type is not read)
+      4 · 14a.descCopy · src/generators/density/applyDensityLaw.js (the doubled niche's mint copies the host: `...host`, desc kept)
+      2 · 14a.descCopy.generic · src/generators/density/applyDensityLaw.js (the doubled niche's mint copies the host: `...host`, desc kept)
+      4 · 14b.handler · src/domain/people/allegiance.js :: assignHandlers (the deal goes round the criminal power's pool, not the house's own people; the record carries it; printed by src/domain/people/patronage.js :: dmPowerViewOf)
+      2 · 14b.handler.cross · src/domain/people/allegiance.js :: assignHandlers (the deal goes round the criminal power's pool, not the house's own people; the record carries it; printed by src/domain/people/patronage.js :: dmPowerViewOf)
+      3 · 14c.whole · src/data/dossierStateProse/power.generated.js (pools > council: no ruler: lord)
+      4 · 14d.noble · src/generators/power/rulingStructure.js (the Elected Reeve's desc)
+      1 · 14e.hookTrade · src/data/npcData.js (the plot-hook pool: needs market only; no holder test)
+      2 · 14f.secret.sortie · src/data/stressInstitutionEffects.js (the crisis pool's secret: needs other npc only; no holder test) via src/generators/npcGenerator.js
+      1 · 14f.secret.supplies · src/data/stressInstitutionEffects.js (the crisis pool's secret: needs other npc only; no holder test) via src/generators/npcGenerator.js
+      1 · 14g.sexTitle · src/data/faceHonorifics.js (a culture's form given as one string, not { male, female })
+      2 · 14h.winMore · src/data/people/goalFamilies.js (the win-over goal: its count not read against the power's members)
+      2 · 15a.endless · src/data/arrivalProse.js (the workings pool: needs trade at work: stone; no tier)
+      2 · 15b.grazing · src/generators/power/governanceNarrative.js (powerStructure.recentConflict, the stock pool of src/data/powerSiblings.js)
+      1 · 15c.noneToSend · src/data/dossierStateProse/defense.generated.js (charter hall ABSENT: no declaration) / the chain's outputs (src/domain/display/tradeListDisplay.js :: chainOutputsShown)
+      1 · 15d.bar · src/domain/display/defenseDisplay.js (the bar's word off defenseProfile.scores.military) beside src/data/dossierStateProse/defense.generated.js (Invasion & War: neither walls nor force)
+      1 · 15e.newBuild · src/data/dossierStateProse/economy.generated.js (pools > POOR: crisis: any) beside src/data/people/titleSecretsPresentations.js (the brickmaker's "How they deal")
+THE STOCK RECENT-CONFLICT LINE (15b census): tier · towns · grazing+water line (with a grazing house or chain / without) · rotation+grazing line
+  thorp         3 ·    3 (0 / 3) · calm 3, of them the line 3 · 0
+  hamlet        6 ·    3 (3 / 0) · calm 3, of them the line 3 · 0
+  village       6 ·    1 (1 / 0) · calm 3, of them the line 1 · 0
+  town          6 ·    0 (0 / 0) · calm 3, of them the line 0 · 0
+  city          6 ·    0 (0 / 0) · calm 0, of them the line 0 · 0
+  metropolis    3 ·    0 (0 / 0) · calm 3, of them the line 0 · 0
+SECRET POOLS (static): the crisis pools 98 rows, 10 presume a command or an office, none with a holder test; the rare rows 194, 0 presume one, 0 of them with a holder test
+  crisis · under_siege: Secretly negotiating surrender terms with the besieging force, without the counc [needs []; excludes ["ruler: lord","ruler: occupier"]; holder test: none]
+  crisis · under_siege: The supplies they declared destroyed in a fire are actually hidden in a location [needs ["starving"]; excludes []; holder test: none]
+  crisis · under_siege: Authorised an illegal sortie that failed. Five people died and no record was kep [needs ["other npc"]; excludes []; holder test: none]
+  crisis · famine: Sold off the settlement's emergency stores three months ago and reported them de [needs []; excludes []; holder test: none]
+  crisis · indebted: The debt was not authorised by the council. They signed alone under pressure and [needs []; excludes ["ruler: lord","ruler: occupier"]; holder test: none]
+  crisis · indebted: Knows the debt contains a clause that transfers significant civic assets to the  [needs ["other npc"]; excludes []; holder test: none]
+  crisis · monster_pressure: The work they authorised six months ago disturbed a nesting site. The attacks st [needs []; excludes []; holder test: none]
+  crisis · mass_migration: Signed the order closing the settlement to further arrivals, then made a paid ex [needs ["migration: influx","other npc"]; excludes []; holder test: none]
+  crisis · wartime: Authorised the seizure of a rival's property as a 'war measure', on evidence the [needs []; excludes []; holder test: none]
+  crisis · slave_revolt: Knows the revolt began because of a specific atrocity the authorities ordered an [needs []; excludes []; holder test: none]
+RARE ROWS DEALT over this render: 8 (ties 3, deeds 3, natures 2); 0 with a holder test of role or office; 0 against their holder
+CONTROLS (stands must be FOUND; explained must be clear of every rule of the seat; weak apart)
+  12  STANDS    C0476     FOUND 12a.house          Services · Repair and refit · Ship construction
+  12  STANDS    C7246     FOUND 12b.boom           Being on the right side of it keeps the forges of Eisenmark running day and night on the a
+  12  STANDS    C7477     clear                    War has taken the iron: the metal suppliers sell to the armies first, and the smiths have 
+  12  STANDS    C7242     FOUND 12b.boom           Racks of new ironwork stand outside the workshops, waiting for the carts.
+  12  STANDS    C36585    FOUND 12c.calm           "The Succession Crisis aside, the history here is long and steady, and travellers remember
+  12  STANDS    C39124    FOUND 12d.enough         Ulaanabad covers what it must and nothing beyond.
+  12  STANDS    C16668    FOUND 12e.noRising       People at Khutulunnuur may grumble, but nobody in the hamlet stands ready to lead them aga
+  12  STANDS    C19407    FOUND 12f.magic          Reliance on magic: Relied upon · for food (magical provision) · supplied by Access to a ho
+  12  EXPLAINED C17589    clear                    Services · Grain milling (a day away)
+  12  EXPLAINED C18383    clear                    Services · Grain milling (a day away)
+  12  EXPLAINED C6738     clear                    How they deal Will sell from the stores at the agreed price; wants it written down and pai
+  12  EXPLAINED C5934     clear                    What it puts on the table itself is the mill's flour.
+  13  STANDS    C39616    FOUND 13a.court          The court sits and the gaol holds, but both are slow, and coin buys a quicker answer.
+  13  STANDS    C40154    FOUND 13a.court          Offenders at Nandanand are arrested, heard and held, and each case is written down, so peo
+  13  STANDS    C34395    FOUND 13a.court          Offenders at Drumbeck are arrested, heard and held, and each case is written down, so peop
+  13  STANDS    C16222    FOUND 13d.record         Ravenland keeps no court and no gaol, and no wrong done there is written down; order is ke
+  13  STANDS    C37891    FOUND 13b.gaol           An old friend of Xenophon Gregoraios's is held by the watch, and Ariadne Chrysoberges is t
+  13  STANDS    C42053    FOUND 13e.hours          You will see the local watch on the rounds most hours of the day; it catches the careless 
+  13  STANDS    C3863     FOUND 13f.rival          Whatever crime is organised at Svetoko has no rival, and no crew is contesting the streets
+  13  STANDS    C8647     FOUND 13f.rival          Whatever crime is organised at Eisenmark has no rival, and no crew is contesting the stree
+  13  STANDS    C21547    FOUND 13g.tie            A slow war with the guild: arrests are made, the gangs rebuild, deals are struck and quiet
+  13  WEAK      C6290     clear                    Offenders at Vedatala are arrested, heard and held, and each case is written down, so peop
+  13  EXPLAINED C5328     clear                    A business rival has offered them a partnership with terms so good it must be a trap.
+  13  EXPLAINED C5358     clear                    A buyer has paid them in advance for a whole season of goods, far above the price, and wil
+  14  STANDS    C14226    FOUND 14a.descCopy       Crown-appointed emergency body with powers over requisition, conscription, and price contr
+  14  STANDS    C6183     FOUND 14b.handler        handled by Durga Khanna, the gang boss (Rival gangs)
+  14  STANDS    C16666    FOUND 14c.whole          At Khutulunnuur the hamlet's business goes to the whole Headman's Authority, and everybody
+  14  STANDS    C44634    FOUND 14d.noble          A reeve elected from the peasantry manages labour and mediates disputes under noble oversi
+  14  STANDS    C5296     FOUND 14e.hookTrade      They have evidence of price-fixing across the whole market.
+  14  STANDS    C6865     FOUND 14f.secret.sortie  Secret: Authorised an illegal sortie that failed.
+  14  STANDS    C36170    FOUND 14g.sexTitle       Emir
+  14  STANDS    C14564    FOUND 14h.winMore        Wants Win two more people in The Martial Alliance over to their side before Itzam Cohuoh n
+  15  STANDS    C15891    FOUND 15a.endless        Laden carts from the workings grind along the road in a line that never seems to end.
+  15  WEAK      C16854    FOUND 15a.endless        Laden carts from the workings grind along the road in a line that never seems to end.
+  15  STANDS    C31732    FOUND 15b.grazing        A dispute over grazing rights and water access has run for two seasons, and those on each 
+  15  STANDS    C36003    FOUND 15c.noneToSend     The town knows it needs specialists against the creatures, and has none of its own to send
+  15  STANDS    C18613    FOUND 15d.bar            Llanham has no line and no force, and danger is close at hand.
+  15  STANDS    C40806    FOUND 15e.newBuild       In Nandanand the old buildings are patched and kept standing, and nothing new goes up.
+  15  EXPLAINED C16138    clear                    A dispute over grazing rights and water access has run for two seasons, and the families o
+  15  EXPLAINED C16460    clear                    A dispute over grazing rights and water access has run for two seasons, and the families o
+  15  EXPLAINED C16877    clear                    A dispute over grazing rights and water access has run for two seasons, and the families o
+  15  EXPLAINED C30951    clear                    A dispute over grazing rights and water access has run for two seasons, and those on each 
+  15  EXPLAINED C31349    clear                    A dispute over grazing rights and water access has run for two seasons, and those on each 
+  15  EXPLAINED C18612    clear                    Adequate▼
+  15  EXPLAINED C31464    clear                    Xochikin's food comes from more than one source, the fishing most of all, so a poor year i
+  15  EXPLAINED C31480    clear                    ✓ Fully exploited · Fish · medium value
+  15  EXPLAINED C17347    clear                    The trade the settlement was founded to serve failed within its first few years, and the w
+  15  WEAK      C18264    clear                    The road was here first.
+  15  WEAK      C18575    clear                    Áine MacDonald is third in Feudal Stewardship and holds a half share in War Council, and c
+controls: 49 of 49 as expected

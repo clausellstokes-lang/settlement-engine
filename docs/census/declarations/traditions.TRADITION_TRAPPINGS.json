@@ -1,0 +1,210 @@
+{
+ "id": "traditions.TRADITION_TRAPPINGS",
+ "source": "src/data/traditionCorpus.js :: TRADITION_TRAPPINGS",
+ "drawKind": "R",
+ "pool": {
+  "declares": [
+   "act (the key)"
+  ],
+  "crisisScoped": false,
+  "colour": false,
+  "notes": "genesis.js :: pickTrappings shuffles the act's list (pool length - 1 rolls on a forked PRNG): phase B must resolve after the shuffle, never filter before it (design §3.3 R)",
+  "needs": [],
+  "excludes": []
+ },
+ "rows": [
+  {
+   "id": "traditions.TRADITION_TRAPPINGS::feast#0",
+   "text": "long tables set in the square",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_TRAPPINGS::feast#1",
+   "text": "shared bread and the common cup",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_TRAPPINGS::feast#2",
+   "text": "the guild ovens working through the night",
+   "needs": [
+    "tier: >= town"
+   ],
+   "excludes": [],
+   "colour": false,
+   "notes": "unhomed: guild (\"the guild ovens\"); a guild presumes a town at least"
+  },
+  {
+   "id": "traditions.TRADITION_TRAPPINGS::feast#3",
+   "text": "a whole ox turned on the spit",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_TRAPPINGS::procession#0",
+   "text": "masked walkers and carried effigies",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_TRAPPINGS::procession#1",
+   "text": "the banners of every quarter",
+   "needs": [
+    "tier: >= town"
+   ],
+   "excludes": [],
+   "colour": false,
+   "notes": "\"every quarter\": quarters exist from a town up (safetyProfile.js crimeTurf ruling)"
+  },
+  {
+   "id": "traditions.TRADITION_TRAPPINGS::procession#2",
+   "text": "the old road walked end to end",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_TRAPPINGS::procession#3",
+   "text": "drums and the ringing of the bells",
+   "needs": [],
+   "excludes": [],
+   "colour": true,
+   "notes": "bells: presumes a bell tower; institution: temple not declared (a bell can hang anywhere)"
+  },
+  {
+   "id": "traditions.TRADITION_TRAPPINGS::vigil#0",
+   "text": "candles kept through the dark hours",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_TRAPPINGS::vigil#1",
+   "text": "lantern-boats set adrift on the water",
+   "needs": [
+    "navigable"
+   ],
+   "excludes": [],
+   "colour": false,
+   "notes": "\"lantern-boats set adrift on the water\" (Appendix C P17-10)"
+  },
+  {
+   "id": "traditions.TRADITION_TRAPPINGS::vigil#2",
+   "text": "the long silence before dawn",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_TRAPPINGS::vigil#3",
+   "text": "the old names read aloud from the rolls",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_TRAPPINGS::contest#0",
+   "text": "the roped lists and the champions' ring",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_TRAPPINGS::contest#1",
+   "text": "wagers laid on the favourites",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_TRAPPINGS::contest#2",
+   "text": "the victor's garland of oak",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_TRAPPINGS::contest#3",
+   "text": "trials of arm and wind",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_TRAPPINGS::fair#0",
+   "text": "stalls crowding the high street",
+   "needs": [
+    "tier: >= village"
+   ],
+   "excludes": [],
+   "colour": false,
+   "notes": "\"the high street\""
+  },
+  {
+   "id": "traditions.TRADITION_TRAPPINGS::fair#1",
+   "text": "travelling players and their booths",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_TRAPPINGS::fair#2",
+   "text": "the toll-gate thrown open to all",
+   "needs": [
+    "gate"
+   ],
+   "excludes": [],
+   "colour": false,
+   "notes": "\"the toll-gate\": factsOf.defence.gate (a palisade is no gate)"
+  },
+  {
+   "id": "traditions.TRADITION_TRAPPINGS::fair#3",
+   "text": "beasts and goods driven in from the hinterland",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_TRAPPINGS::offering#0",
+   "text": "first-fruits laid on the altar",
+   "needs": [
+    "institution: temple"
+   ],
+   "excludes": [],
+   "colour": false,
+   "notes": "\"the altar\""
+  },
+  {
+   "id": "traditions.TRADITION_TRAPPINGS::offering#1",
+   "text": "the smoke of the censer",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_TRAPPINGS::offering#2",
+   "text": "tithes carried up the temple steps",
+   "needs": [
+    "institution: temple"
+   ],
+   "excludes": [],
+   "colour": false,
+   "notes": "\"the temple steps\""
+  },
+  {
+   "id": "traditions.TRADITION_TRAPPINGS::offering#3",
+   "text": "a garland left at the shrine",
+   "needs": [
+    "institution: temple"
+   ],
+   "excludes": [],
+   "colour": false,
+   "notes": "\"the shrine\" (the temple kind matches shrine)"
+  }
+ ]
+}

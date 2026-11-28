@@ -114,7 +114,7 @@ describe('ruling 2 — one reliance reading, printed in one word on three tabs',
       }
     }
     expect(disagree).toEqual([]);
-  });
+  }, 120_000); // its own budget: a corpus walk at the edge of the 20 s default on a CI runner under coverage (measured 2026-11-18: ~12 s there)
 
   test('"integral" anywhere on the Magic tab implies at least one practitioner AND one dependent, in 60 of 60', () => {
     const unearned = [];

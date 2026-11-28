@@ -1,0 +1,212 @@
+[
+ {
+  "fam": "8f",
+  "grp": "stands",
+  "id": "C8021",
+  "town": "bar0-city-under_siege+famine-rand-44",
+  "found": true,
+  "rules": "8f.short",
+  "cause": "short",
+  "text": "Wool & Textile Trade Cloth is woven or finished here."
+ },
+ {
+  "fam": "8f",
+  "grp": "stands",
+  "id": "C40674",
+  "town": "bar0-town-occupied-rand-44",
+  "found": true,
+  "rules": "8f.short",
+  "cause": "short",
+  "text": "Wool & Textile Trade Cloth is woven or finished here."
+ },
+ {
+  "fam": "8f",
+  "grp": "stands",
+  "id": "C41826",
+  "town": "bar0-village-calm-rand-42",
+  "found": true,
+  "rules": "8f.short",
+  "cause": "short",
+  "text": "Iron & Metalwork Metal is smelted or worked here."
+ },
+ {
+  "fam": "8f",
+  "grp": "stands",
+  "id": "C41825",
+  "town": "bar0-village-calm-rand-42",
+  "found": true,
+  "rules": "8f.short",
+  "cause": "short",
+  "text": "8%"
+ },
+ {
+  "fam": "8f",
+  "grp": "stands",
+  "id": "C33921",
+  "town": "bar0-town-calm-rand-42",
+  "found": true,
+  "rules": "8f.short",
+  "cause": "short",
+  "text": "Apothecary & Alchemy An alchemical trade in reagents, preparations, and curative potions d"
+ },
+ {
+  "fam": "8f",
+  "grp": "stands",
+  "id": "C4828",
+  "town": "bar0-city-under_siege+famine-rand-43",
+  "found": true,
+  "rules": "8f.chain",
+  "cause": "crisis",
+  "text": "Timber Trade Local forest provides sustainable timber revenue; managed felling and sawmill"
+ },
+ {
+  "fam": "8g",
+  "grp": "stands",
+  "id": "C39519",
+  "town": "bar0-town-occupied-rand-43",
+  "found": true,
+  "rules": "8g.export",
+  "cause": "short",
+  "text": "Alchemical Trade · Service · Export○ Operational"
+ },
+ {
+  "fam": "8h",
+  "grp": "stands",
+  "id": "C2524",
+  "town": "bar0-city-under_siege+famine-rand-42",
+  "found": true,
+  "rules": "8h.deal",
+  "cause": "crisis",
+  "text": "How they deal Takes the toll and lifts the gate; heavy carts pay more, and so do people in"
+ },
+ {
+  "fam": "8h",
+  "grp": "stands",
+  "id": "C8842",
+  "town": "bar0-city-under_siege+famine-rand-44",
+  "found": true,
+  "rules": "8h.deal",
+  "cause": "crisis",
+  "text": "How they deal Talks horses with anyone; knows every rider who has come and gone this month"
+ },
+ {
+  "fam": "8h",
+  "grp": "stands",
+  "id": "C43844",
+  "town": "bar0-village-calm-rand-44",
+  "found": true,
+  "rules": "8h.deal",
+  "cause": "short",
+  "text": "How they deal Shouts the price over the noise and turns back to the logs."
+ },
+ {
+  "fam": "8h",
+  "grp": "explained",
+  "id": "C37251",
+  "town": "bar0-town-calm-rand-44",
+  "found": false,
+  "rules": "",
+  "cause": "",
+  "text": "Sells by the sack and the cart; the price goes up before winter."
+ },
+ {
+  "fam": "8i",
+  "grp": "stands",
+  "id": "C7539",
+  "town": "bar0-city-under_siege+famine-rand-44",
+  "found": true,
+  "rules": "8i.chainStopped",
+  "cause": "crisis",
+  "text": "Services · Repair and refit · Ship construction"
+ },
+ {
+  "fam": "8i",
+  "grp": "stands",
+  "id": "C20104",
+  "town": "bar0-hamlet-under_siege-rand-43",
+  "found": true,
+  "rules": "8i.surplus",
+  "cause": "crisis",
+  "text": "Maltster · Crafts"
+ },
+ {
+  "fam": "8i",
+  "grp": "stands",
+  "id": "C20287",
+  "town": "bar0-hamlet-under_siege-rand-43",
+  "found": true,
+  "rules": "8i.resource",
+  "cause": "crisis",
+  "text": "✓ Fully exploited · Fish · medium value"
+ },
+ {
+  "fam": "8i",
+  "grp": "explained",
+  "id": "C19589",
+  "town": "bar0-hamlet-under_siege-rand-42",
+  "found": false,
+  "rules": "",
+  "cause": "",
+  "text": "Services · Grain milling (a day away)"
+ },
+ {
+  "fam": "8i",
+  "grp": "explained",
+  "id": "C4179",
+  "town": "bar0-city-under_siege+famine-rand-43",
+  "found": false,
+  "rules": "",
+  "cause": "",
+  "text": "Services · Fresh produce"
+ },
+ {
+  "fam": "8j",
+  "grp": "stands",
+  "id": "C44447",
+  "town": "bar0-village-famine-rand-42",
+  "found": true,
+  "rules": "8j.outputs",
+  "cause": "short",
+  "text": "Flour and meal · Milled lumber"
+ },
+ {
+  "fam": "8k",
+  "grp": "stands",
+  "id": "C12508",
+  "town": "bar0-city-wartime-rand-43",
+  "found": true,
+  "rules": "8k.trade",
+  "cause": "short",
+  "text": "The clatter of looms follows you through Quirigich, from one shutter to the next."
+ },
+ {
+  "fam": "8k",
+  "grp": "stands",
+  "id": "C45015",
+  "town": "bar0-village-famine-rand-43",
+  "found": true,
+  "rules": "8k.market",
+  "cause": "crisis",
+  "text": "Outsiders see a busy market; the people who live here know the stories behind it.\""
+ },
+ {
+  "fam": "8k",
+  "grp": "explained",
+  "id": "C37728",
+  "town": "bar0-town-occupied-rand-42",
+  "found": false,
+  "rules": "",
+  "cause": "",
+  "text": "Market day is when Mahakund fills: the roads bring buyers."
+ },
+ {
+  "fam": "8k",
+  "grp": "explained",
+  "id": "C9756",
+  "town": "bar0-city-wartime-rand-42",
+  "found": false,
+  "rules": "",
+  "cause": "",
+  "text": "Pilgrims crowd the road in, and every second stall sells candles, tokens or someone's bles"
+ }
+]

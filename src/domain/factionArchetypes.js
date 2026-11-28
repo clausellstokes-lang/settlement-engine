@@ -29,6 +29,7 @@ import {
   factionCatalogArcaneTag,
   resolveArcaneIdentity,
 } from './arcaneIdentity.js';
+import { boughtHallOldName, boughtHallOldNameOfRow } from '../data/boughtHallNames.js';
 
 /** Canonical faction archetypes. Frozen so a typo'd key is `undefined`, not a silent miss. */
 export const FACTION_ARCHETYPES = Object.freeze({
@@ -100,23 +101,32 @@ function normCategory(value) {
  * @param {Object|string|null|undefined} faction
  * @returns {string} one of FACTION_ARCHETYPES.*
  */
-export function factionArchetype(faction) {
+// R24-C1 (CLOSE-7 BATCH; R24g (2)) and C1B (RULING-R24 R24r item 4): the bought hall's three birth names
+// (`data/boughtHallNames.js`, the one home) read AS THEIR OLD NAMES READ, by exact name: "Senate" is criminal as "Shadow
+// Senate" is by its word 'shadow'; the town and city halls read as a council, as their old forms do. A bare string by its
+// exact name; a row with no recognised category by its name in `rulingPower.nameOf`'s precedence, never a row the record
+// marks as the user's own (`boughtHallOldNameOfRow`). A recognised category still wins.
+export function factionArchetype(/** @type {Object|string|null|undefined} */ faction) {
   if (!faction) return A.OTHER;
   if (typeof faction === 'string') {
-    return inferFromText(faction, factionCatalogArcaneTag(faction));
+    const read = boughtHallOldName(faction) ?? faction;
+    return inferFromText(read, factionCatalogArcaneTag(read));
   }
   const f = /** @type {any} */ (faction);
 
   const cat = /** @type {keyof typeof CATEGORY_MAP} */ (normCategory(f.category));
   if (cat && CATEGORY_MAP[cat]) return CATEGORY_MAP[cat];
 
+  const oldName = boughtHallOldNameOfRow(faction);
+  const born = String(f.faction || f.name || '').trim();
+  const asRead = (/** @type {unknown} */ x) => (oldName && String(x || '').trim() === born ? oldName : String(x || ''));
   const text = [f.name, f.faction, f.label, f.type, f.description]
-    .map((x) => String(x || '')).join(' ');
+    .map(asRead).join(' ');
   // The catalog identity is keyed on the NAME alone — a description is prose, not an
   // authored identity, and letting it reach the index would let one word of flavour
   // borrow another faction's authored tag. Read in rulingPower.nameOf's precedence
   // (`.faction` first; `.name` is the legacy alias addFaction also mints).
-  const catalogTag = factionCatalogArcaneTag(f.faction || f.name || f.label || '');
+  const catalogTag = factionCatalogArcaneTag(oldName ?? (f.faction || f.name || f.label || ''));
   return inferFromText(text, catalogTag);
 }
 

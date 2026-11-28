@@ -15,7 +15,9 @@
  * seed (`${seed}::tradition:genesis`), with `.fork(label)` for every sub-draw, so
  * the same settlement yields the same set forever, on any device. Reads ONLY stable
  * settlement fields (seed, tier, terrain, culture, economic character, patron-deity
- * alignment axes) — never live campaign state. Zero settlement-object writes.
+ * alignment axes) — never live campaign state. Zero settlement-object writes. ONE RULE reads the finished record
+ * (B1(ii), the tenth chair's G64: `fieldRiteRefused`, the food record's sources and farmland on the roster), and only for
+ * a record this engine bore; it moves no draw, only which attempt's draw a refused row takes.
  *
  * GENESIS STATE SHAPE: every record leaves the campaign-time fields null/empty —
  * ownerKey/ownerKind (assigned by T-3 politics), lastHeldYear/lastOutcome (stamped
@@ -30,6 +32,10 @@
 import { createPRNG } from '../../kernel/prng.js';
 import { slugify } from '../../kernel/slugify.js';
 import { resolveTerrain } from '../resolveTerrain.js';
+import { waterAccessKind } from '../tradeRouteSemantics.js';
+import { bornAtOrAfter } from '../settlement.schema.js'; // B1(ii) (G64 (3), G72 (1)): the floor reader of the engine's stamp
+import { factsOf } from '../facts/factsOf.js'; // B1(ii): farmland on the roster, through its atom's own reader
+import { atomHolds } from '../facts/factVocabulary.js'; // B1(ii)
 import { evil01, chaos01 } from '../worldPulse/deityAxes.js';
 import { seasonForTick } from '../worldPulse/worldState.js';
 import { popToTier, TIER_ORDER } from '../../data/constants.js';
@@ -182,7 +188,37 @@ function readIdentity(settlement) {
   };
 }
 
+/** The element of the fields (TRADITION_ELEMENTS 'field', glyph ▦): no founding candidate, so only an addition draws it. */
+const FIELD_ELEMENT = 'field';
+
+// The engine that first carried the field rule (G72 (1)): a literal, never the build's GENERATOR_VERSION, so the next release keeps the rule for places 0.10.0 bore.
+const FIELD_RITE_SINCE = '0.10.0';
+
+/**
+ * B1(ii), NO TRADITION BLESSES FIELDS THE PLACE DOES NOT HAVE (the tenth chair's G64 (2), (3)): the place's own food record
+ * NAMES its sources (`economicState.foodSecurity.foodRecord.foodSources`, the native keys the generator writes, never a
+ * user's good by name) and `grain` is not among them, and no farmland stands on the roster (the atom `institution:
+ * farmland`, through its own reader: FARMLAND ADMITS THE RITE). An empty or absent source list is unanswered, and so is an
+ * unanswered farmland atom: the rite stands. ASKED ONLY OF A RECORD BORN AT OR AFTER THE ENGINE THAT FIRST CARRIED THE RULE
+ * (`settlement.schema.js :: bornAtOrAfter`, `FIELD_RITE_SINCE`; G72 (1)): a place an earlier engine bore keeps its whole set.
+ * @param {unknown} settlement @returns {boolean}
+ */
+export function fieldRiteRefused(settlement) {
+  if (!bornAtOrAfter(settlement, FIELD_RITE_SINCE)) return false;
+  const sources = /** @type {{ economicState?: { foodSecurity?: { foodRecord?: { foodSources?: unknown } | null } | null } | null }} */ (settlement)
+    .economicState?.foodSecurity?.foodRecord?.foodSources;
+  if (!Array.isArray(sources) || sources.length === 0 || sources.includes('grain')) return false;
+  const facts = /** @type {Parameters<typeof atomHolds>[1]} */ (factsOf(/** @type {Parameters<typeof factsOf>[0]} */ (settlement)));
+  return atomHolds('institution: farmland', facts) === false;
+}
+
 /** @typedef {ReturnType<typeof readIdentity>} TraditionIdentity */
+
+/**
+ * The water-keyed elements (CENSUS-1c unit 6): each weighs 0 where the water home answers 'none'
+ * (`tradeRouteSemantics.js :: waterAccessKind`), for a founding or an addition alike.
+ */
+const WATER_ELEMENTS = Object.freeze(['first-landing', 'river', 'tide']);
 
 /** Economic characters that read as "market" for act weighting. */
 const MARKET_ECON = Object.freeze(['crossroads', 'port', 'road']);
@@ -192,6 +228,9 @@ const MARKET_ECON = Object.freeze(['crossroads', 'port', 'road']);
  * @param {TraditionElement} el @param {TraditionIdentity} id @returns {number}
  */
 function elementWeight(el, id) {
+  // CENSUS-1 wave 0, fact 4, extended by CENSUS-1c unit 6 (the vocabulary rulings §6): as in
+  // `foundingElementWeight`, no water-keyed element (first landing, river, tide) without water.
+  if (WATER_ELEMENTS.includes(el.id) && waterAccessKind(id.terrain, id.econ) === 'none') return 0;
   let w = el.foundingFit ? 0.25 : 1; // origin elements rarely recur as additions
   if (id.terrain && el.terrains.includes(id.terrain)) w += 3;
   if (id.econ && el.econ.includes(id.econ)) w += 2;
@@ -206,10 +245,12 @@ function elementWeight(el, id) {
 function foundingElementWeight(el, id) {
   // The singular origin leans hardest on `founding`; a coastal/river settlement's
   // origin is its first landing, a crossroads market town's its charter.
+  // CENSUS-1 wave 0, fact 4: a first landing needs water to land from — the water home
+  // (`tradeRouteSemantics.js :: waterAccessKind`: coast, river or port), else the element
+  // weighs 0 (it was 1.5 inland, the cause of reader:traditions-water).
+  if (WATER_ELEMENTS.includes(el.id) && waterAccessKind(id.terrain, id.econ) === 'none') return 0;
   let w = el.id === 'founding' ? 3 : el.id === 'first-landing' ? 1.5 : 1;
-  const coastalish = id.terrain === 'coastal' || id.terrain === 'riverside';
-  const waterEcon = id.econ === 'port' || id.econ === 'river';
-  if (el.id === 'first-landing' && (coastalish || waterEcon)) w += 3;
+  if (el.id === 'first-landing') w += 3;
   if (el.id === 'charter' && id.econ === 'crossroads') w += 1.5;
   return w;
 }
@@ -350,6 +391,7 @@ export function deriveFoundingTraditions(settlement) {
   );
 
   const foundingCandidates = TRADITION_ELEMENTS.filter((e) => e.foundingFit);
+  const refusesFieldRite = fieldRiteRefused(settlement); // B1(ii) (G64): false for a record an earlier engine bore
   const usedNames = new Set();
   const usedMotifs = new Set();
   /** @type {TraditionRec[]} */
@@ -374,19 +416,43 @@ export function deriveFoundingTraditions(settlement) {
         TRADITION_ACTS.map((a) => actWeight(a, el, id, true)),
       );
     } else {
+      /** @param {number} k @returns {[TraditionElement, TraditionAct]} attempt k's draw, on its own two forks */
+      const drawAt = (k) => {
+        const e = rng.fork(`el:${k}`).weightedPick(
+          /** @type {TraditionElement[]} */ ([...TRADITION_ELEMENTS]),
+          TRADITION_ELEMENTS.map((x) => elementWeight(x, id)),
+        );
+        const a = rng.fork(`act:${k}`).weightedPick(
+          /** @type {TraditionAct[]} */ ([...TRADITION_ACTS]),
+          TRADITION_ACTS.map((x) => actWeight(x, e, id, false)),
+        );
+        return [e, a];
+      };
+      /** the motif reroll's one test: the town holds no tradition of this (element, act) yet @param {TraditionElement} e @param {TraditionAct} a */
+      const motifUnused = (e, a) => !usedMotifs.has(`${e.id}|${a.id}`);
       // Reroll a few times to avoid an identical (element,act) motif already present.
       el = TRADITION_ELEMENTS[0];
       act = TRADITION_ACTS[0];
-      for (let attempt = 0; attempt < 5; attempt += 1) {
-        el = rng.fork(`el:${attempt}`).weightedPick(
-          /** @type {TraditionElement[]} */ ([...TRADITION_ELEMENTS]),
-          TRADITION_ELEMENTS.map((e) => elementWeight(e, id)),
-        );
-        act = rng.fork(`act:${attempt}`).weightedPick(
-          /** @type {TraditionAct[]} */ ([...TRADITION_ACTS]),
-          TRADITION_ACTS.map((a) => actWeight(a, el, id, false)),
-        );
-        if (!usedMotifs.has(`${el.id}|${act.id}`)) break;
+      let attempt = 0;
+      for (; attempt < 5; attempt += 1) {
+        [el, act] = drawAt(attempt);
+        if (motifUnused(el, act)) break;
+      }
+      // B1(ii) (G64 (1)): THE DRAW AS BEFORE, THE RULE AFTER. A drawn rite of the fields the place refuses takes the NEXT
+      // attempt's draw (the motif reroll's own forks: no weight changes, so no other row's draw moves), up to ten further
+      // attempts. It takes the first that is ADMITTED and whose motif the town has not used (the reroll's own test,
+      // `motifUnused`: the base never shows one town a motif twice), else the first admitted; if all ten draw a refused rite,
+      // the row keeps its first draw (never dropped). The chair's ruling on B1II-119's finding 1.
+      if (refusesFieldRite && el.id === FIELD_ELEMENT) {
+        const first = Math.min(attempt, 4);
+        /** @type {[TraditionElement, TraditionAct] | null} */ let admitted = null;
+        for (let k = first + 1; k <= first + 10; k += 1) { // ten further attempts (G64 (1))
+          const [e, a] = drawAt(k);
+          if (e.id === FIELD_ELEMENT) continue;
+          if (motifUnused(e, a)) { admitted = [e, a]; break; }
+          admitted ||= [e, a];
+        }
+        if (admitted) [el, act] = admitted;
       }
     }
     usedMotifs.add(`${el.id}|${act.id}`);

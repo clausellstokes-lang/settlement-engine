@@ -1,0 +1,30 @@
+served-hxd.jsonl vs late-hxd.jsonl (ruled: ruled-hxd.jsonl), 600 towns
+  towns the step moved (score differs from the ruled birth): late 33, end 64
+  score                differs late vs end in 34 towns: hxd-thorp-2 hxd-thorp-23 hxd-thorp-64 hxd-thorp-68 hxd-thorp-84 hxd-thorp-86 hxd-hamlet-0 hxd-hamlet-54 ...
+  band                 differs late vs end in 32 towns: hxd-thorp-2 hxd-thorp-23 hxd-thorp-64 hxd-thorp-68 hxd-thorp-84 hxd-thorp-86 hxd-hamlet-54 hxd-hamlet-57 ...
+  merits               differs late vs end in 34 towns: hxd-thorp-2 hxd-thorp-23 hxd-thorp-64 hxd-thorp-68 hxd-thorp-84 hxd-thorp-86 hxd-hamlet-0 hxd-hamlet-54 ...
+  capture rung         differs late vs end in 0 towns
+  incumbent protected  differs late vs end in 0 towns
+  crisis-born          differs late vs end in 0 towns
+  ruler                differs late vs end in 0 towns
+  history              differs late vs end in 0 towns
+served-hxr.jsonl vs late-hxr.jsonl (ruled: ruled-hxr.jsonl), 600 towns
+  towns the step moved (score differs from the ruled birth): late 31, end 45
+  score                differs late vs end in 23 towns: hxr-thorp-13 hxr-thorp-44 hxr-thorp-49 hxr-hamlet-16 hxr-hamlet-63 hxr-village-13 hxr-village-22 hxr-village-72 ...
+  band                 differs late vs end in 15 towns: hxr-thorp-13 hxr-thorp-44 hxr-thorp-49 hxr-hamlet-16 hxr-village-22 hxr-village-72 hxr-town-34 hxr-town-42 ...
+  merits               differs late vs end in 23 towns: hxr-thorp-13 hxr-thorp-44 hxr-thorp-49 hxr-hamlet-16 hxr-hamlet-63 hxr-village-13 hxr-village-22 hxr-village-72 ...
+  capture rung         differs late vs end in 0 towns
+  incumbent protected  differs late vs end in 0 towns
+  crisis-born          differs late vs end in 0 towns
+  ruler                differs late vs end in 0 towns
+  history              differs late vs end in 0 towns
+served-hxu.jsonl vs late-hxu.jsonl (ruled: ruled-hxu.jsonl), 1200 towns
+  towns the step moved (score differs from the ruled birth): late 63, end 91
+  score                differs late vs end in 44 towns: hxu-thorp-17 hxu-thorp-59 hxu-thorp-60 hxu-thorp-90 hxu-thorp-133 hxu-thorp-174 hxu-hamlet-3 hxu-hamlet-21 ...
+  band                 differs late vs end in 40 towns: hxu-thorp-17 hxu-thorp-59 hxu-thorp-90 hxu-thorp-174 hxu-hamlet-3 hxu-hamlet-21 hxu-hamlet-57 hxu-hamlet-89 ...
+  merits               differs late vs end in 44 towns: hxu-thorp-17 hxu-thorp-59 hxu-thorp-60 hxu-thorp-90 hxu-thorp-133 hxu-thorp-174 hxu-hamlet-3 hxu-hamlet-21 ...
+  capture rung         differs late vs end in 0 towns
+  incumbent protected  differs late vs end in 0 towns
+  crisis-born          differs late vs end in 0 towns
+  ruler                differs late vs end in 0 towns
+  history              differs late vs end in 0 towns

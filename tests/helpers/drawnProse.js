@@ -103,6 +103,11 @@ export const STATE_LEAVES = Object.freeze({
  *   sibling that names others
  * @property {Record<string, string>} [dimensions] the demoted STATE dimensions this pool
  *   partitions itself by (kernel law 5) — `severity`, `deficit`, `anchor`
+ * @property {object|null} [facts] `factsOf(fixture)` — EXACTLY what the desk hands the kernel
+ *   at its entry (`factsAnswered.js`: `facts: factsOf(settlement)`). A pool whose variants or
+ *   whose brace group declare fact atoms, or that opted into the crisis dimension, is
+ *   UNREADABLE without it (kernel law 5 generalised, CENSUS-1b wave 1: fail-closed). Absent
+ *   reads as `null`, which is what the desk would hand a pool that declares nothing.
  */
 
 /** @param {DrawnProseSpec} spec @param {string} fn @returns {Record<string, any>} */
@@ -147,6 +152,29 @@ function optionsOf(spec) {
     seed: typeof spec.seed === 'string' ? spec.seed : '',
     audience: spec.audience === 'player' ? 'player' : 'dm',
     dimensions: spec.dimensions || {},
+    facts: spec.facts && typeof spec.facts === 'object' ? spec.facts : null,
+  };
+}
+
+/**
+ * The kernel-grain read with the POOL'S OWN BRACE GROUP added — `poolMeta.declares` as
+ * `poolDeclares`, `poolMeta.crisisScoped` as `crisisScoped` — the same hand-off
+ * `composeStateProse.js :: poolReadOf` makes before it draws a pool (CENSUS-1b wave 1). Without
+ * it the kernel grain would read a declared or crisis-scoped pool under a looser gate than the
+ * composer, and the two read paths this helper drives would disagree on what is eligible. Not
+ * a re-implementation of the draw: it hands the kernel two fields and filters nothing itself.
+ * @param {Record<string, any>} corpus @param {DrawnProseSpec} spec
+ */
+function kernelReadOf(corpus, spec) {
+  const read = optionsOf(spec);
+  const map = corpus[spec.blockId] ? corpus[spec.blockId].poolMeta : undefined;
+  const meta = map && typeof map === 'object' && map[spec.poolKey] && typeof map[spec.poolKey] === 'object'
+    ? map[spec.poolKey] : {};
+  const poolDeclares = Array.isArray(meta.declares) && meta.declares.length ? meta.declares : null;
+  return {
+    ...read,
+    ...(poolDeclares ? { poolDeclares } : {}),
+    ...(meta.crisisScoped === true ? { crisisScoped: true } : {}),
   };
 }
 
@@ -156,7 +184,8 @@ function describeSpec(spec) {
   return `${spec.blockId} :: ${spec.poolKey} · seed ${JSON.stringify(read.seed)}`
     + ` · audience ${read.audience}`
     + ` · slots {${Object.keys(read.slots).join(', ')}}`
-    + (Object.keys(read.dimensions).length ? ` · dimensions ${JSON.stringify(read.dimensions)}` : '');
+    + (Object.keys(read.dimensions).length ? ` · dimensions ${JSON.stringify(read.dimensions)}` : '')
+    + (read.facts ? ' · facts given' : ' · no facts');
 }
 
 /**
@@ -166,8 +195,9 @@ function describeSpec(spec) {
  * A `null` read is a HARD ERROR rather than an empty string, and that is the whole liveness
  * discipline moved one step earlier: an anchor that silently became `''` would make every
  * `toContain` downstream pass vacuously, which is the exact defect
- * `tests/helpers/anchoredNegatives.js` exists to prevent. The message names the four things
- * that make a read null so the next seat repairs the SPEC rather than deleting the anchor.
+ * `tests/helpers/anchoredNegatives.js` exists to prevent. The message names the five things
+ * that make a read null (the fifth, a missing `facts`, since the census) so the next seat
+ * repairs the SPEC rather than deleting the anchor.
  *
  * @param {DrawnProseSpec} spec
  * @returns {string} the composed unit's text — what the desk puts on the page
@@ -176,20 +206,25 @@ export function drawnMember(spec) {
   const corpus = corpusOf(spec, 'drawnMember');
   poolOf(spec, 'drawnMember');
   const read = optionsOf(spec);
-  // The kernel grain: the spine sentence alone, exactly as `drawPiece` reads it.
-  const spine = readStateProse(corpus, spec.blockId, spec.poolKey, read);
+  // The kernel grain: the spine sentence alone, exactly as `drawPiece` reads it — under the
+  // pool's own brace group, as the composer hands it (`kernelReadOf`).
+  const kernelRead = kernelReadOf(corpus, spec);
+  const spine = readStateProse(corpus, spec.blockId, spec.poolKey, kernelRead);
   if (!spine || !spine.text) {
     const pool = poolOf(spec, 'drawnMember');
-    const eligible = eligibleVariants(pool, read);
+    const eligible = eligibleVariants(pool, kernelRead);
     throw new Error(
       `drawnMember: NOTHING DRAWS at ${describeSpec(spec)}. The pool holds ${pool.length}`
-      + ` variant(s) and ${eligible.length} are eligible for this read. A null read has four`
+      + ` variant(s) and ${eligible.length} are eligible for this read. A null read has five`
       + ` causes and each is repaired in the SPEC, never by deleting the anchor: (1) a slot the`
       + ` drawn variant names has no fill — pass the WHOLE bag the desk passes, not only the`
       + ` slots today's member happens to name; (2) the pool partitions itself by a demoted`
       + ` STATE dimension (severity / deficit / anchor) this spec did not answer (kernel law 5);`
       + ` (3) the audience is 'player' and every eligible member is dm-only (kernel law 2 —`
-      + ` fail-closed, and correct); (4) the pool key is not this block's.`,
+      + ` fail-closed, and correct); (4) the pool key is not this block's; (5) the pool's`
+      + ` variants or its brace group declare fact atoms (or it is crisis-scoped) and this spec`
+      + ` passed no \`facts\` — pass \`factsOf(fixture)\`, exactly what the desk hands in at its`
+      + ` entry (\`factsAnswered.js\`), never a hand-made answer.`,
     );
   }
   // The desk's own grain: every rung in the estate is built by `composeStateProse`, and an

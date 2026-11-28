@@ -20,6 +20,7 @@ import {
   accountRuntimeBinding,
 } from './campaignContentBindingModel.js';
 import { campaigns as campaignService } from '../lib/campaigns.js';
+import { ENGINE_LOCAL_ABSENT, isEngineLocalAbsent } from '../lib/engineAbsentPaths.js';
 import {
   cloneJson,
   findActiveCampaign,
@@ -75,9 +76,19 @@ export async function previewCampaignContentBindingMigrationSession({
     }
     targetBinding = accountTarget.binding;
   }
-  const { generateSettlementPipeline } = await import(
-    '../generators/generateSettlementPipeline.js'
-  );
+  // Through the local engine seam's pipeline door (ENGINE-3 unit 2), left out of a VITE_ENGINE_REMOTE build.
+  // There the door refuses with the typed `engine_local_absent`, and the sample is not one the
+  // engine service forges (two content runtimes over one seed), so the review answers that
+  // refusal as a typed result its caller reads, instead of a rejection nothing catches
+  // (ENGINE-5 unit 2, path a; lib/engineAbsentPaths.js).
+  const { loadLocalPipeline } = await import('../lib/localPipeline.js');
+  let generateSettlementPipeline;
+  try {
+    ({ generateSettlementPipeline } = await loadLocalPipeline());
+  } catch (error) {
+    if (isEngineLocalAbsent(error)) return { ok: false, reason: ENGINE_LOCAL_ABSENT };
+    throw error;
+  }
   // THE CREATE BOUNDARY'S ASYNC EDGE. This session is a PREVIEW and mints no
   // law, but the sample is forged from an EXISTING world's config, so it carries
   // whatever law that world was born under — and the pipeline throws rather than

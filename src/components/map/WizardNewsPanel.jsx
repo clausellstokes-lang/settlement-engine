@@ -1,8 +1,8 @@
 import { AlertTriangle, CheckCircle2, Clock3, Megaphone, Newspaper, RadioTower, ShieldAlert, Sparkles } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
 
-import { newsBodyText, newsReaderSummary, newsReasonPhrases } from '../../domain/display/newsBody.js';
-import { humanizeToken, tickCalendarDetailLabel } from '../../domain/display/humanizeEngineTokens.js';
+import { newsCardFace } from '../../domain/display/newsBody.js';
+import { tickCalendarDetailLabel } from '../../domain/display/humanizeEngineTokens.js';
 import { newsVoiceLine } from '../../domain/display/newsVoice.js';
 import { summarizeWizardNews, WIZARD_NEWS_SIGNIFICANCE } from '../../domain/region/index.js';
 import { requestCampaignChronicle } from '../../lib/campaignChronicle.js';
@@ -83,7 +83,7 @@ function MetaPill({ children, tone = 'neutral', wrap = false }) {
   );
 }
 
-function NewsEntry({ entry, compact = false }) {
+function NewsEntry({ entry, compact = false, nameById = null }) {
   const mobile = useIsMobile();
   const major = entry.significance === WIZARD_NEWS_SIGNIFICANCE.MAJOR;
   const color = statusColor(entry.kind, major);
@@ -109,13 +109,13 @@ function NewsEntry({ entry, compact = false }) {
   // null for out-of-scope news, so the quote only shows when it has something
   // to say.
   const voiceLine = newsVoiceLine(entry);
-  // The card body, re-composed in the house voice from the entry's structured
-  // fields (transition/scope/severity). Regional composers now also store an
-  // authored summary; the tooltip keeps that durable chronicle sentence available
-  // while the card body carries its shorter transition telling. (content-immersion-5)
-  const bodyText = newsBodyText(entry);
-  const reasonPhrases = newsReasonPhrases(entry);
-  const summaryTooltip = newsReaderSummary(entry);
+  // The card body STATES THE EVENT (STYLE-RULINGS-2 C1): the filed reader summary —
+  // the event, the people, the consequence — in at most two sentences; the title
+  // holds the rest only when the body was cut, and the reason pills drop what the
+  // body already says. A legacy entry with no summary falls back to its lifecycle line.
+  // The status pill says where a travelling effect stands in a plain word, or nothing
+  // where the body says it; never the pipeline's state token.
+  const { headline, body: bodyText, tooltip: summaryTooltip, status: statusWord, reasons: reasonPhrases } = newsCardFace(entry, { nameById });
 
   return (
     <article style={{
@@ -156,7 +156,7 @@ function NewsEntry({ entry, compact = false }) {
             fontWeight: 900,
             overflowWrap: 'anywhere',
           }}>
-            {entry.headline}
+            {headline}
           </h4>
           <MetaPill tone={major ? 'major' : 'neutral'}>{scopeLabel(entry.scope)}</MetaPill>
         </div>
@@ -217,9 +217,9 @@ function NewsEntry({ entry, compact = false }) {
             </span>
           )}
           <MetaPill>{tickCalendarDetailLabel(entry.tick)}</MetaPill>
-          <MetaPill>{humanizeToken(entry.kind)}</MetaPill>
+          {statusWord && <MetaPill>{statusWord}</MetaPill>}
           <MetaPill>Severity {severityBand(entry)}</MetaPill>
-          {reasonPhrases.slice(0, 3).map(reason => (
+          {reasonPhrases.map(reason => (
             <MetaPill key={reason} tone={major ? 'major' : 'neutral'} wrap>{reason}</MetaPill>
           ))}
         </div>
@@ -487,7 +487,7 @@ export default function WizardNewsPanel({ campaign }) {
           busy={chronicleBusy}
           onClick={generateChronicle}
           disabled={chronicleBusy || total === 0}
-          title="Turn this tick's grounded news into a two-credit campaign chronicle"
+          title="Write this advance's news up as a campaign chronicle (two credits)"
           style={{ marginLeft: 'auto' }}
         >
           {chronicleBusy ? 'Writing' : 'Chronicle'}

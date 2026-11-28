@@ -1,0 +1,29 @@
+row | base | tip | verdict | reader
+1a food verdict "only just" vs grows more | 57 | 57 | OLD | SECOND
+1b "small margin" vs ≥25% imported | 64 | 64 | OLD | SECOND
+2 two store durations | 561 | 561 | OLD | CROSS
+3 magic tab vs Arcane None | 188 | 188 | OLD | CROSS
+4 "almost level" vs leader far ahead | 94 | 94 | OLD | SECOND
+5a hall free vs criminal money | 289 | 289 | OLD | SECOND
+5b Diffuse vs criminal power | 1 | 1 | OLD | SECOND
+6 gap vs imports | 302 | 302 | OLD | CROSS
+7a two founders | 128 | 128 | OLD | GLANCE
+7b no wharf vs port origin | 27 | 27 | OLD | CROSS
+8 no church vs worship economy | 220 | 220 | OLD | CROSS
+9 Critical over reassuring text | 148 | 148 | OLD | GLANCE
+10 hold the gates, no walls | 18 | 18 | OLD | SECOND
+11 flow source town lacks | 396 | 396 | OLD | CROSS
+F4 income line, no working | 274 | 274 | OLD | CROSS
+13 "…and go on." doubled | 173 | 173 | OLD | GLANCE
+14 size words in small places | 166 | 166 | OLD | SECOND
+15 burial under Healing | 720 | 720 | OLD | SECOND
+16a "ruling three" lists fewer | 184 | 184 | OLD | GLANCE
+16b two "Powers (n)" counts | 282 | 282 | OLD | GLANCE
+17 non-goods produced locally | 681 | 681 | OLD | GLANCE
+18 count ranges as names | 360 | 360 | OLD | GLANCE
+19 debug text as tension | 7 | 7 | OLD | GLANCE
+20 siege text, no siege | 689 | 689 | OLD | SECOND
+NEW-1 governance vs Defense | 10 | 10 | OLD | SECOND
+NEW-2 magic income, no practitioner | 3 | 3 | OLD | CROSS
+towns 720 GLANCE base 713 tip 713 | GLANCE excl 17,18 base 576 tip 576
+median rows/town base [ 8, 8, 8.391666666666667 ] tip [ 8, 8, 8.391666666666667 ]

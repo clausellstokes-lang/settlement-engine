@@ -17,7 +17,7 @@
  * Instant World premium card was earlier unmounted the same way (C1r-d).
  */
 
-import { BORDER, GOLD, INK, BODY, sans, serif_, SP, FS, LANDING_MAX } from '../theme.js';
+import { BORDER, CARD, GOLD, INK, BODY, sans, serif_, SP, FS, LANDING_MAX } from '../theme.js';
 import HomeHero from '../HomeHero.jsx';
 import { ModeSelector } from './ModeSelector.jsx';
 import PageHeader from '../primitives/PageHeader.jsx';
@@ -78,12 +78,16 @@ export function WizardEmptyState({
       ) : showHomeHero ? (
         <HomeHero onSignIn={onSignIn} onNavigate={onNavigate} />
       ) : (
-        <PageHeader
-          eyebrow="Forge a settlement"
-          title="Create a settlement"
-          subtitle="Choose a generation mode to get started."
-          size="lg"
-        />
+        // The same plate as the configuration's opening block (GenerateWizard): no
+        // header text bare on the painted page.
+        <div style={{ background: CARD, border: `1px solid ${BORDER}`, padding: `${SP.lg}px ${SP.lg}px 0` }}>
+          <PageHeader
+            eyebrow="Forge a settlement"
+            title="Create a settlement"
+            subtitle="Choose a generation mode to get started."
+            size="lg"
+          />
+        </div>
       )}
     </div>
   );

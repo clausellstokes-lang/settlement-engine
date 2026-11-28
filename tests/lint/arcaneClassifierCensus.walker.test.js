@@ -176,13 +176,18 @@ const KNOWN_UNCONVERTED = Object.freeze({
   // rot, not a new site — exactly the 57 → 58 case recorded below. ⚠ These two rows are
   // a SEVENTH arcane spelling living in this file, name-based and untouched by the tag
   // split; the split moved neither their tokens nor their verdicts.
-  'src/domain/npcProfile.js:334':
+  // ALLEGIANCE-CAR1 (2026-11-08): 335 -> 336 and 381 -> 382, a line move (one import added above, the allegianceOf
+  // reader); the pattern is byte-identical at its new line, measured.
+  'src/domain/npcProfile.js:336':
     'TRUE MEMBER. NPC workplace venue → domain; tower/college/library/laboratory decide alone.',
-  'src/domain/npcProfile.js:375':
+  'src/domain/npcProfile.js:382':
     'TRUE MEMBER. The second copy of the same table in the same file — a fork of a fork.',
   'src/domain/contradictions.js:222':
     'CONTEXTUALLY SCOPED, not the class — but only just. ARCANE_INST is selected by `p.archetype === \'arcane\'`, so it searches for an already-arcane faction\'s seat rather than deciding arcane-ness. It is entirely ambiguous tokens, though, so it will happily accept a masonry tower as an arcane order\'s home and report no contradiction. A real (small) false negative, recorded rather than fixed: the fix is the same conversion the TRUE MEMBERS need.',
-  'src/domain/worldPulse/stressorDynamics.js:53':
+  // RE-POINTED 53 → 55 on 2026-11-20 (SEAT-1 train 1, U4 THE CONTEST, merged by SEAT-5): the pattern text is
+  // byte-identical; U4 added exactly two imports (`seatsByHolder`, `SEAT_CONTEST_LIT`) above the table. Address rot,
+  // not a new site.
+  'src/domain/worldPulse/stressorDynamics.js:55':
     'TRUE MEMBER, and the sharpest: the arcane row is ENTIRELY ambiguous (sanctum|college|conclave|circle|enclave|atheneum|spire) with no unambiguous token at all, so every match it makes is a guess.',
   'src/domain/worldPulse/tierOutcomeApply.js:143':
     'TRUE MEMBER. A ruined settlement\'s institution fate: academy|library|sage|college|school route to "abandoned" beside the real arcane tokens.',
@@ -197,7 +202,7 @@ const KNOWN_UNCONVERTED = Object.freeze({
   // and "the recorded site is no longer at :58" — which is the walker working: a
   // line-addressed register cannot tell a move from a birth without being told, and
   // being told is cheaper than the alternative. Third address re-point on this row.
-  'src/generators/factionRoles.js:59':
+  'src/generators/factionRoles.js:60':
     'CONTEXTUALLY SCOPED, not the class. The Archmagister\'s `linkToInst` runs only INSIDE the already-classified `arcane:` bucket, so tower|academy|college is searching an arcane faction\'s own building, not deciding whether one is arcane. Listed for completeness so a future audit does not re-find it as a defect.',
   'src/generators/isolationGenerator.js:97':
     'CONTEXTUALLY SCOPED, not the class. "Does this settlement already have an arcane maintainer?" runs inside the magic-forcing arm and searches the Magic-category catalog, where "academy" means "Academy of magic".',

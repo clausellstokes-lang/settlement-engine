@@ -91,9 +91,10 @@ describe('pdf-3 — by-design contradictions are plot seeds, not garbled violati
   });
 
   test('the by-design item is EXCLUDED from structuralViolations (no double-print)', () => {
-    const vios = vm.viability.structuralViolations;
-    expect(vios.every(v => v.severity !== 'by_design')).toBe(true);
-    expect(vios.map(v => v.institution)).toEqual(['Palisade']);
+    // READER-R1 ruling 1 (2026-11-05): the DM document prints no structural violation at all
+    // (validator rule text); the by-design item is still the plot seed above, once.
+    expect(vm.viability.structuralViolations).toEqual([]);
+    expect(vm.viability.byDesignContradictions.length).toBeGreaterThan(0);
   });
 });
 
@@ -245,7 +246,8 @@ describe('osr-prominent-relationship — writer/reader key parity', () => {
 });
 
 describe('the PDF crisis note reads the Power tab\'s one reading (powerStrata.crisisNoteFor)', () => {
-  const CLAIM = 'The faction that appears to govern is not the faction that governs.';
+  // re-keyed by identity at W3 POW #189 (2026-11-08, the owner's style law: the crisis note says the one thing the banner does not).
+  const CLAIM = 'Holds the title, but the decisions that matter are made elsewhere.';
   const settlementWith = (rivalPower) => ({
     powerStructure: {
       factions: [
@@ -258,7 +260,7 @@ describe('the PDF crisis note reads the Power tab\'s one reading (powerStrata.cr
 
   test('a rival outranks the governing faction: the PDF names that rival', () => {
     expect(noteOf(settlementWith(60), 'Town Council'))
-      .toBe('The faction that appears to govern is not the faction that governs; the real decisions rest with Merchant League. The council splits on the levy.');
+      .toBe('Holds the title; the decisions that matter are made by Merchant League. The council splits on the levy.');
   });
 
   test('no rival outranks it: the unnamed claim is dropped and the rest of the note stands', () => {

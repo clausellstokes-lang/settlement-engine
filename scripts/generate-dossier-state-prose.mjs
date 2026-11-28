@@ -38,14 +38,15 @@ import { ECONOMY_FRESHNESS_SENTENCES } from '../src/domain/display/economyFreshn
 import { isCovertPath } from '../src/domain/prose/wiringCensus.js';
 import { parseSlotShapes, mergeSlotShapes, assertSlotShapesTotal } from './lib/dossier-slot-shapes.mjs';
 import {
-  CONNECTIVES_HEADING_RE, FACE_ROW_RE, GRAMMAR_TAG_RE, applyDeclaration, assertCensusCurrent,
-  assertFaces, assertNoAuthoringMarker, assertPoolDeclaration, isDeclarationLine, kinSpines,
-  parseConnectives, readDeclarations, seatMeta, seatOf, vidsOf,
+  CONNECTIVES_HEADING_RE, FACE_ROW_RE, assertCensusCurrent, assertFaces, assertNoAuthoringMarker, assertPoolDeclaration, kinSpines, parseConnectives, seatMeta, seatOf, vidsOf,
 } from './lib/dossier-annex-grammar.mjs';
 // ⭐ THE ESTATE'S ONE STOP LIST, read HERE and never in the composer (ARCH §4.1 refuses a
 // `src/domain/prose/` import there; `kinSpines`'s docblock carries the measurement). A script
 // is outside `src/`, so the island fence — which scans `src/` alone — is untouched.
 import { contentWords } from '../src/domain/prose/composedWalker.js';
+import {
+  VARIANT_RE, CANONICAL_RE, COMPACT_BOLD_BRACES_RE, COMPACT_BULLET_RE, COMPACT_BOLD_RE, COMPACT_VARIANT_RE, slotsOn, parseAnnex, STATE_HEADER,
+} from './lib/dossier-annex-parse.mjs';
 
 const ROOT = path.resolve(path.dirname(url.fileURLToPath(import.meta.url)), '..');
 const checkOnly = process.argv.includes('--check');
@@ -219,347 +220,8 @@ function assertLiveStringsBound(files) {
   }
 }
 
-/**
- * A variant line: `1. \`[street · dm-only]\` The market runs thin...`
- * A SECOND bracketed tag is lawful and load-bearing — R-DOS-G lets a causal variant
- * carry its audience separately (`6. \`[counterforce · seat]\` \`[dm-only]\` …`). Both
- * tags fold into the variant's marks; missing the second would publish dm-only prose.
- */
-const VARIANT_RE = /^(\d+)\.\s+`\[([^\]]+)\]`\s+(?:`\[([^\]]+)\]`\s+)?(.*)$/;
-/** The canonical-at-zero row: `0. *(canonical)* <the live engine string>` */
-const CANONICAL_RE = /^0\.\s+\*\(([^)]*canonical[^)]*)\)\*\s+(.*)$/;
-/**
- * A pool label. Either a standalone bold line (`**COMBINATION C1 — ...**`) or a bold
- * label carrying an em-dash gloss (`**SUBSISTENCE** — *bare survival, no cushion*`).
- * A bold lead-in followed by ordinary prose (`**STATE-KEY.** The closed ladder ...`)
- * is deliberately NOT a label — the remainder must be empty or a gloss opener.
- */
-const BOLD_LINE_RE = /^\*\*((?:(?!\*\*).)+)\*\*(\s*(?:[—–·,:(-]\s*.*|\*.*)?)$/;
-/** A trailing italic authoring note. */
-const TRAILING_NOTE_RE = /\s*\*\([^*]*\)\*\s*$/;
-/**
- * WRITER-4's COMPACT ROW — a whole pool on one bullet line:
- *   `- \`STRONG\` — 1. \`[visitor]\` text · 2. \`[ledger]\` text · 3. \`[street]\` text`
- * The row key sits between the bullet and the first em dash; the variants are
- * interpunct-separated. Five blocks (DS-GEN-3/4/5/6/10) are authored this way and are
- * invisible to the one-variant-per-line grammar — 225 variants that would have gone
- * missing silently if the drop check did not count them.
- */
-const COMPACT_BULLET_RE = /^-\s+(.+?)\s+—\s+(1\.\s+`\[.*)$/;
-/** The same shape carrying its OWN bold label rather than nesting under a group. */
-const COMPACT_BOLD_RE = /^\*\*((?:(?!\*\*).)+)\*\*\s*(?:\*\([^*]*\)\*\s*)?—\s+(1\.\s+`\[.*)$/;
-/** A leading second tag on a variant body, e.g. `` `[dm-only]` the sentence ``. */
-const LEADING_TAG_RE = /^`\[([^\]]+)\]`\s+/;
-const COMPACT_VARIANT_RE = /(\d+)\.\s+`\[([^\]]+)\]`\s+(.*?)(?=\s+·\s+\d+\.\s+`\[|$)/g;
-
-/** The reserved key of a block whose variants carry no pool label at all. */
-const SOLE_POOL = '*';
-
-/**
- * A pool label is a short state-shape name (`Endorsed`, `ARITY — no banner`,
- * `intensity: low`). The annexes also carry bold-led RULE paragraphs whose bold span
- * happens to be followed by a gloss opener — `**Fence (from the sibling family):**
- * **there is no believed-solvency axis.** …` — and taking one of those as a label
- * splits a family's pool in two, which is how three causal families lost their
- * variants to a metadata heading in the first pass. A label therefore never ends in a
- * colon and never carries a sentence break.
- * @param {string} label
- */
-function isPoolLabel(label, remainder) {
-  const s = label.trim();
-  // A colon-terminated bold span is a rule heading in both annexes, never a state
-  // value — JF-CPL-12a's FENCE HONOURED heading split that family's pool until this.
-  if (s.endsWith(':')) return false;
-  if (remainder.trim() === '') {
-    // A whole-line bold is a label unless it is plainly a sentence. Engine values can
-    // carry a stop (`riskLabel: Critical. The seat could fall`), so length decides.
-    return !(s.length > 70 && (/\.\s/.test(s) || s.endsWith('.')));
-  }
-  // A bold span followed by a gloss: labels are short noun phrases, rule headings
-  // are colon-led or sentence-shaped.
-  if (s.endsWith(':')) return false;
-  if (/\.\s/.test(s)) return false;
-  return !(s.endsWith('.') && s.length > 40);
-}
-
-/** @param {string} s */
-function stripInlineCode(s) {
-  return s.replace(/`/g, '').trim();
-}
-
-/** @param {string} s the raw bold label @returns {string} a stable pool key */
-function poolKeyOf(s) {
-  return stripInlineCode(s)
-    .replace(TRAILING_NOTE_RE, '')
-    .replace(/^\*\*|\*\*$/g, '')
-    .replace(/\s+/g, ' ')
-    .trim();
-}
-
-/**
- * Strip the trailing italic authoring note — an aside to the chair, never prose.
- * A regex cannot do this: several notes contain their own `**bold**`, so an
- * asterisk-free body is not a safe delimiter. The note is the LAST ` *(` whose
- * remainder is a balanced italic parenthetical running to end of line.
- * @param {string} text @returns {string}
- */
-function cleanText(text) {
-  const out = text.trim();
-  if (!out.endsWith('*')) return out;
-  // Two note openers are in use: ` *(…)*` (the parenthetical aside) and ` *— …*`
-  // (the slot-requirement note DS-FTH-3 carries). Both run to end of line.
-  const at = Math.max(out.lastIndexOf(' *('), out.lastIndexOf(' *—'));
-  if (at <= 0) return out;
-  const body = out.slice(0, at).trim();
-  return body.length > 0 ? body : out;
-}
-
-/**
- * Split an angle tag into its parts: `street · dm-only` / `ledger · cut`.
- *
- * ⛔ AND ROUTE `grammar: Vn` AWAY FROM `marks` (GRAMMAR_TAG_CONTRACT, moveGrammar.js:151-157).
- * The tag rides the same bracket slot as an audience mark, and left in `marks` it would put
- * eight new words into a vocabulary the kernel treats as CLOSED: `STATE_MARK_DIMENSIONS`'s own
- * contract arm reds on an unclassified mark, because an unclassified word is a state dimension
- * the kernel cannot see. The tag is a per-variant DATUM — nothing reads it at the draw — so it
- * takes its own field and moves no index.
- * @param {string} tag
- * @returns {{angle: string, marks: string[], grammar: string|null}}
- */
-function parseTag(tag) {
-  const parts = tag.split('·').map((p) => p.trim()).filter(Boolean);
-  const grammars = parts.map((part) => part.match(GRAMMAR_TAG_RE)).filter(Boolean);
-  const rest = parts.filter((part) => !GRAMMAR_TAG_RE.test(part));
-  if (grammars.length > 1) {
-    throw new Error(`a variant carries ${grammars.length} \`grammar:\` tags; a variant realises ONE order`);
-  }
-  return {
-    angle: rest[0] || '',
-    marks: rest.slice(1),
-    grammar: grammars.length ? grammars[0][1] : null,
-  };
-}
-
-/**
- * A second bracketed tag, folded in. The grammar tag may stand in EITHER bracket, so both are
- * asked; an angle-less second tag contributes its first part as a mark.
- * @param {{angle: string, marks: string[], grammar: string|null}} first
- * @param {{angle: string, marks: string[], grammar: string|null}|null} extra
- * @returns {{marks: string[], grammar: string|null}}
- */
-function foldTags(first, extra) {
-  if (!extra) return { marks: first.marks, grammar: first.grammar };
-  if (first.grammar && extra.grammar) {
-    throw new Error('a variant carries two `grammar:` tags; a variant realises ONE order');
-  }
-  return {
-    marks: [...first.marks, extra.angle, ...extra.marks].filter(Boolean),
-    grammar: first.grammar || extra.grammar,
-  };
-}
-
-/** @param {string} line @returns {string[]} every `{slot}` named on a line */
-function slotsOn(line) {
-  return [...line.matchAll(/\{([a-zA-Z_][a-zA-Z0-9_]*)\}/g)].map((m) => m[1]);
-}
-
-/**
- * Parse one annex into blocks.
- * @param {string} src the markdown
- * @param {RegExp} headerRe matches a block header, capture 1 = block id
- * @param {string} label for error messages
- */
-function parseAnnex(src, headerRe, label, options = {}) {
-  const lines = src.split('\n');
-  /** @type {Array<{id:string,title:string,sectionTarget:string[],sectionTargetRaw:string|null,arms:string[],slots:string[],pools:Array<{key:string,variants:Array<object>,declared:Record<string,unknown>}>}>} */
-  const blocks = [];
-  let block = null;
-  let pool = null;
-  let lastBold = null;
-  let lastIndex = -1;
-  let skipping = false;
-
-  const openPool = (key) => {
-    if (block === null) throw new Error(`${label}: pool "${key}" outside any block`);
-    pool = { key, variants: [], declared: {} };
-    block.pools.push(pool);
-    lastIndex = -1;
-  };
-
-  for (let i = 0; i < lines.length; i++) {
-    const raw = lines[i];
-    const line = raw.trimEnd();
-
-    const header = line.match(headerRe);
-    if (header) {
-      // A FOLDED block is an id kept for the record with its content moved elsewhere.
-      skipping = /FOLDED INTO/i.test(line);
-      block = skipping ? null : {
-        id: header[1],
-        title: line.replace(/^###\s+/, '').trim(),
-        sectionTarget: [],
-        sectionTargetRaw: null,
-        arms: [],
-        slots: [],
-        pools: [],
-      };
-      if (block) blocks.push(block);
-      pool = null;
-      lastBold = null;
-      lastIndex = -1;
-      continue;
-    }
-    // ⛔ THE BLOCK REGION ENDS AT A NAMED ANNEX SECTION. `## §7b THE STATE CONNECTIVES` sits
-    // after the last block, and without this the last block would go on consuming its rows: a
-    // bold cell would be read as a pool label and a numbered row as a variant. Passed in per
-    // annex rather than derived, because the CAUSAL annex carries `## §2`…`## §7` headings
-    // BETWEEN its families and closing the region on those would move that leaf's parse.
-    if (options.regionEnd && options.regionEnd.test(line)) {
-      skipping = true;
-      block = null;
-      pool = null;
-      lastBold = null;
-      continue;
-    }
-    if (skipping || !block) continue;
-
-    if (isDeclarationLine(line)) {
-      // ⛔ A PENDING LABEL ALWAYS OPENS ITS POOL HERE (TASTE car M-2). The guard was
-      // `pool === null && lastBold !== null`, which is only true for the FIRST pool of a
-      // block: on the second and every later one a pending bold label was ignored and the
-      // typed lines were folded into the PREVIOUS pool's declarations — a modifier's ROLE,
-      // READS and ATTACH landing silently on the spine above it. It has never fired because
-      // the annex carried no typed line at all until this car, and it would have fired on the
-      // first one authored after a block's opening pool. The plant is in the projection
-      // contract: two declared pools in one block, and the second's READS must be its own.
-      if (lastBold !== null) { openPool(poolKeyOf(lastBold)); lastBold = null; }
-      if (pool === null) throw new Error(`${label} ${block.id}: a typed line stands outside any pool (line ${i + 1})`);
-      for (const decl of readDeclarations(line)) {
-        applyDeclaration(decl, pool.declared, `${label} ${block.id} :: ${pool.key}`);
-      }
-      continue;
-    }
-
-    const face = line.match(FACE_ROW_RE);
-    if (face) {
-      const last = pool && pool.variants.length ? pool.variants[pool.variants.length - 1] : null;
-      if (!last) throw new Error(`${label} ${block.id}: a \`[face]\` row stands before any variant (line ${i + 1})`);
-      last.wordings.push(cleanText(face[1]));
-      continue;
-    }
-
-    if (/^\*\*SLOTS[:.]\*\*/.test(line)) {
-      block.slots = [...new Set(slotsOn(line))];
-      continue;
-    }
-    if (/^\*\*SECTION-TARGET[:.]\*\*/.test(line)) {
-      // BACKTICKED TOKENS ONLY, which is the shape the ARMS extractor below has always
-      // used. The rule this replaces split the declaration on `,` as well as the intended
-      // `·`, so `` `economy` (economic resilience, prosperity, food) `` projected as the
-      // three fragments `economy (economic resilience`, `prosperity` and `food)`, and 26
-      // of the 45 declaring state blocks carried at least one string outside the eight.
-      // Prose on this line is an aside to the reader, never a target; assertSectionTargets
-      // below judges what lands, and the raw line is kept so it can quote the row.
-      block.sectionTargetRaw = line.replace(/^\*\*SECTION-TARGET[:.]\*\*/, '');
-      block.sectionTarget = [...block.sectionTargetRaw.matchAll(/`([a-z][a-z0-9_-]*)`/g)]
-        .map((m) => m[1]);
-      continue;
-    }
-    if (/^\*\*ARMS[:.]\*\*/.test(line)) {
-      // Hyphens are lawful in an arm name (`broker-town`); an underscore-only class
-      // silently dropped that arm and orphaned the two variants tagged with it.
-      block.arms = [...line.matchAll(/`([a-z][a-z0-9_-]*)`/g)].map((m) => m[1]);
-      continue;
-    }
-
-    const bulletRow = line.match(COMPACT_BULLET_RE);
-    const boldRow = bulletRow ? null : line.match(COMPACT_BOLD_RE);
-    const compact = bulletRow || boldRow;
-    if (compact) {
-      const rowKey = poolKeyOf(compact[1]);
-      // A bulleted row NESTS under the bold group heading above it; a row carrying its
-      // own bold label IS the pool and takes no prefix (and clears the pending label,
-      // so a following bullet cannot inherit a heading that was never a group).
-      const group = bulletRow && lastBold !== null ? poolKeyOf(lastBold) : '';
-      if (boldRow) lastBold = null;
-      // THE JOIN IS A COLON, NOT AN EM DASH (VOICE-1b, §854). A group-plus-row key is
-      // the label/title separator VOICE_AND_TONE §6 sends to a colon, and the separator
-      // this line MINTS is the one em dash in a pool key no author can reach: it is not
-      // in either annex, so 56 of the corpus's 299 key em dashes could only be burned
-      // here. The key is hashed into the draw (stateProseKernel.js `drawVariant`), so
-      // this separator is renameable only while the corpus is dark.
-      openPool(group ? `${group}: ${rowKey}` : rowKey);
-      for (const m of compact[2].matchAll(COMPACT_VARIANT_RE)) {
-        const first = parseTag(m[2]);
-        const lead = m[3].match(LEADING_TAG_RE);
-        const folded = foldTags(first, lead ? parseTag(lead[1]) : null);
-        pool.variants.push({
-          index: Number(m[1]),
-          angle: first.angle,
-          marks: folded.marks,
-          grammar: folded.grammar,
-          wordings: [],
-          text: cleanText(lead ? m[3].slice(lead[0].length) : m[3]),
-        });
-      }
-      if (pool.variants.length === 0) {
-        throw new Error(`${label} ${block.id}: compact row "${rowKey}" parsed to zero variants (line ${i + 1})`);
-      }
-      // The row is self-contained; the next row re-opens under the same group label.
-      lastIndex = -1;
-      continue;
-    }
-
-    const bold = line.match(BOLD_LINE_RE);
-    if (bold && isPoolLabel(bold[1], bold[2] || "")) { lastBold = bold[1]; continue; }
-
-    const canonical = line.match(CANONICAL_RE);
-    if (canonical) {
-      if (lastBold !== null) { openPool(poolKeyOf(lastBold)); lastBold = null; }
-      // A block whose variants carry no label at all has ONE pool (every causal
-      // family, and the few single-state blocks); '*' is its reserved key.
-      if (!pool) openPool(SOLE_POOL);
-      pool.variants.push({
-        index: 0, angle: 'canonical', marks: [], grammar: null, wordings: [], text: cleanText(canonical[2]),
-      });
-      lastIndex = 0;
-      continue;
-    }
-
-    const variant = line.match(VARIANT_RE);
-    if (variant) {
-      const n = Number(variant[1]);
-      if (lastBold !== null) { openPool(poolKeyOf(lastBold)); lastBold = null; }
-      if (!pool) openPool(SOLE_POOL);
-      // A restart of the numbering with no new label would silently merge two pools.
-      if (n <= lastIndex) {
-        throw new Error(
-          `${label} ${block.id}: variant numbering restarted at ${n} inside pool "${pool.key}"`
-          + ` (line ${i + 1}) — the pool label is missing or is not a standalone bold line.`,
-        );
-      }
-      lastIndex = n;
-      const first = parseTag(variant[2]);
-      const folded = foldTags(first, variant[3] ? parseTag(variant[3]) : null);
-      pool.variants.push({
-        index: n,
-        angle: first.angle,
-        marks: folded.marks,
-        grammar: folded.grammar,
-        wordings: [],
-        text: cleanText(variant[4]),
-      });
-      continue;
-    }
-
-    // A pending label is STICKY across the note paragraph several pools carry
-    // between their heading and their first variant (DS-STR-1's gated ARITY pool is
-    // the case that forced this). A later label overwrites it, so the pool a variant
-    // lands in is always the NEAREST PRECEDING label — never an earlier one.
-  }
-  return blocks;
-}
-
+// The annex parse (VARIANT_RE … parseAnnex) lives in ./lib/dossier-annex-parse.mjs (CENSUS-1g unit 5),
+// moved verbatim so the wiring census reads declarations through this projector's own parse.
 /**
  * Every `[angle]`-tagged pool line inside a block region must land in a pool.
  * @param {string} src @param {RegExp} headerRe @param {Array<object>} blocks @param {string} label
@@ -578,7 +240,8 @@ function assertNothingDropped(src, headerRe, blocks, label, options = {}) {
     // A FACE is not a numbered row, so the numbering guard never sees it and the drop check
     // has to count it separately or a wording set could go missing exactly as a variant could.
     if (FACE_ROW_RE.test(line)) { faceRows += 1; continue; }
-    const compact = line.match(COMPACT_BULLET_RE) || line.match(COMPACT_BOLD_RE);
+    const braced = line.match(COMPACT_BOLD_BRACES_RE);
+    const compact = line.match(COMPACT_BULLET_RE) || (braced ? `${braced[1]} ${braced[3]}` : line).match(COMPACT_BOLD_RE);
     if (compact) tagged += [...compact[2].matchAll(COMPACT_VARIANT_RE)].length;
   }
   const captured = blocks.reduce(
@@ -852,6 +515,11 @@ function projectBlocks(blocks, options = {}) {
             });
             return kin.length ? { kin } : {};
           })(),
+          // CENSUS-1b wave 1: the pool's brace group, emitted only where the annex wrote one, so
+          // no leaf byte moves until a pool declares (`docs/DESIGN_POOL_CENSUS.md` §3.1, §3.5).
+          ...(p.braces && p.braces.declares.length ? { declares: p.braces.declares } : {}),
+          ...(p.braces && p.braces.crisisScoped ? { crisisScoped: true } : {}),
+          ...(p.braces && p.braces.colour ? { colour: true } : {}),
           ...(p.declared.explains ? { explains: p.declared.explains } : {}),
           ...(p.declared.spines ? { spines: p.declared.spines } : {}),
           ...(p.declared.covers ? { covers: p.declared.covers } : {}),
@@ -887,11 +555,207 @@ function emit(name, data, note, outPath) {
 const stateSrc = await readFile(STATE_DOC, 'utf8');
 const causalSrc = await readFile(CAUSAL_DOC, 'utf8');
 
-const STATE_HEADER = /^###\s+(DS-[A-Z]+-\d+)\b/;
 const CAUSAL_HEADER = /^###\s+(JF-[A-Za-z0-9_-]+)\b/;
 
 /** @param {string} text @returns {string} */
 const sha256 = (text) => createHash('sha256').update(text).digest('hex');
+
+// ═══════════════════════════════════════════════════════════════════════════════════
+// ⭐⭐ THE NUMBERING GUARD, BY TEXT (FR7, the chair's CL19 debt; FAULTS-DESKS, 2026-11-18)
+//
+// A vid is the annex ROW NUMBER (`vidsOf`, ARCH §2.6): it names a variant across a rewrite and the draw is
+// keyed by it. `vidsOf` refuses a numbering that runs backwards or repeats inside one run, but `projectBlocks`
+// hands it no frozen vids, and a frozen-vids check compares POSITIONS: a line INSERTED before older ones, every
+// later row renumbered, passes it. That is how BAR6-DEFDESK (be3585040) renumbered 14 lines of seven DS-DEF pools
+// unrefused (the shift register's `vids` row; that row's digest stands as it is, this guard re-takes nothing).
+//
+// So the projection compares BY TEXT against THE BASELINE: the state leaves AS COMMITTED, read off disk before
+// this run writes (the last projection; the numbering as it stands, the fourteen renumbered lines included).
+// No second stored list of words: the leaf is the list. Per pool of the baseline it refuses:
+//   RENUMBERED  a text that stood under vid a now stands under another vid b, and no longer under a;
+//   RE-USED     a vid now names a text other than its own while its own text stands under another vid, or
+//               while the text it now names stood under another vid (the number handed to another line);
+//   DROPPED     a vid of the baseline (or a whole pool) is gone: nothing is ever removed (NEVER TRIM, §2.6);
+//   REWORDED    a vid's words changed in place (its old text gone, its new text never numbered in the pool).
+//               The draw is keyed by the number, so a correction in place moves no draw, and it passes ONLY
+//               through its row of WORD_CORRECTIONS below (the pool, the number, the old and the new text's
+//               sha256, the ruling): never by default.
+// A new line at the NEXT number and a new pool pass. It runs BEFORE the projection's other refusals, so its
+// message is the one a renumbering meets. ⛔ FAIL-CLOSED ON ABSENCE: a desk leaf that cannot be read is no
+// baseline, and the run refuses.
+// ═══════════════════════════════════════════════════════════════════════════════════
+
+/**
+ * THE NAMED ALLOWANCE: each correction of a line's words in place, by the ruling that made it. A row is inert
+ * once its correction is projected (the baseline then holds the new text). Hashes: sha256 of the text as the
+ * leaf holds it (hex).
+ * @type {ReadonlyArray<{pool: string, vid: number, from: string, to: string, ruling: string}>}
+ */
+const WORD_CORRECTIONS = Object.freeze([
+  // FR18 (1), the chair's ruling of 2026-11-18: DS-DEF-3 Unsafe v4's words (the twin of b86d8122d), corrected in place
+  { pool: 'DS-DEF-3 :: Unsafe', vid: 4, from: '4bad941347dd4b9259d2aae2873bb678fd6f48a7ddf73bf3a28411dd9f6033d2', to: '214b6eabc4403e1c31abbc03fe102943eb6136d844aaa15445777c78b4aff6a3', ruling: 'FR18' },
+  // LR6 (1), the chair's ruling of 2026-11-18 (after READ-LAST): DS-DEF-3 Moderate v9 (LAST-VARIETY's line) said the safety
+  // profile's own sentence beside it again ("what trouble there is, everyone soon hears of"); its words corrected in place
+  { pool: 'DS-DEF-3 :: Moderate', vid: 9, from: '97ee2d2bfed958aed1424ef8ae564f85f32108a781cb3ac9a0089b02d637e338', to: 'e9b1763b01cb54eb3f5380b090a6ad4d92a016d8821e61ff2a97ee1c48ac0e74', ruling: 'LR6' },
+  // LR6 (2): DS-DEF-3 Unsafe v6 (LAST-VARIETY's line) repeated the safety profile's travellers' advice and the guard line's
+  // "There is no watch"; its words corrected in place
+  { pool: 'DS-DEF-3 :: Unsafe', vid: 6, from: '2ab8fa180378f08d13e1fa047c7d8df733c1ea70fe18f996ed526428850200ed', to: '87c78172c08ce1e0a54bb926c8ea0cdd9cb1676156ab2783767d0de5ae258e3d', ruling: 'LR6' },
+  { pool: 'DS-POW-2 :: recentConflict present', vid: 1, from: 'b9c7576493170bf4b61ba47e4f30b6485372953aff2b0ed5441021b41f8c329f', to: '5f631039f93489f9a1b9bbddfe2a307bc26decd9f4097240d716e40035ea48b4', ruling: 'CHAIR-2026-11-20-17:38' },
+  // POINT89-CHAIR-2026-11-22 (the chair's rulings on LINES-FOR-THE-CHAIR, point 89's own reds): five of BUILD-1's appended members corrected in
+  // place: DS-GEN-13 NO-MARKET v9 and v12 to the pool's contract; DS-ECO-8 PROSPEROUS v7 no longer presumes halls and
+  // defences; DS-ECO-11 worked-out v4 off the plural-resource fault; DS-ECO-12 land-cannot-give v4 a shortfall, not an absence
+  { pool: 'DS-ECO-11 :: RESOURCE CONDITION: worked out, recovers in time', vid: 4, from: '199350795cb8021b65417d8b1d01b242386b3d201063c815687fa243fb6825f7', to: 'db6bf3aa7c38940bdba811c6fb1cf40d0213df93ca7f3fa4679c2ce0c01a112a', ruling: 'POINT89-CHAIR-2026-11-22' },
+  { pool: 'DS-ECO-12 :: CRITICAL IMPORT: the land cannot give it', vid: 4, from: '088efe12e309b545361cd9de64179993f36e07a41c77b1865c89163deae7bf11', to: 'ded9eebe20cde9e321e795c28f2164fbc8b39d35edb621e8853319fed433bb11', ruling: 'POINT89-CHAIR-2026-11-22' },
+  { pool: 'DS-ECO-8 :: PROSPEROUS', vid: 7, from: '68d8269711c72f99fab0db5311cdcbfdebef5531c3bceca53d09c74aa9687ea0', to: 'a6db5e16c25ce8870a9a1699e8801e2d473be6f487d862e3740dde2204c74397', ruling: 'POINT89-CHAIR-2026-11-22' },
+  { pool: 'DS-GEN-13 :: NO-MARKET', vid: 12, from: 'aa699fd8f0ba666bb491464d98ba96f23f8b4d68a80f0e4c0084933a5108b7d6', to: '895382b92022c26a53aaabed4b71ffd26279f589338925cf7e06199fc894dd25', ruling: 'POINT89-CHAIR-2026-11-22' },
+  { pool: 'DS-GEN-13 :: NO-MARKET', vid: 9, from: 'ed9b87202d6238bfa3ea617f4cd0a3021c32b99fefc78f8cdd50588b12098cf1', to: 'a45295d9e4755046ed06108e8441ccf11d43ec2b14341d85babc74403d1db582', ruling: 'POINT89-CHAIR-2026-11-22' },
+  // POINT89-CHAIR-2026-11-22-V6 (the chair's ruling with v6's whole text in hand): DS-ECO-11 worked-out v6, the same plural-resource fault
+  { pool: 'DS-ECO-11 :: RESOURCE CONDITION: worked out, recovers in time', vid: 6, from: 'f745a2b64d58f148a15563dcdfdf61ca42ec3a4f2817aba09771fea9930fd8cc', to: '380eb0312783557f003986a31072e8bd7ea0566e8e4d343f00464e683cebdf29', ruling: 'POINT89-CHAIR-2026-11-22-V6' },
+  // CHAIR-2026-11-23-03:45 (DISAGREE, PROSE-6; the chair's GO on the builder's stops): DS-DEF-2 Economic Survival: WEAK v2 said
+  // "no money to pay them" beside GEN-17 GARRISONED v2's "pays wages for its defense"; re-worded in place, on its own marks
+  { pool: 'DS-DEF-2 :: Economic Survival: WEAK', vid: 2, from: 'a757b74778ece2e2f23b5f5b9fae504d37b3b40cdf4b5bc4310bf10c6645b7ba', to: 'f81f0b3a2608bf34fc5f667ba0849b091267f6d048293016d8470ea395b4cceb', ruling: 'CHAIR-2026-11-23-03:45' },
+  // CHAIR-2026-11-23-03:55 (DISAGREE, PROSE-6; the chair's word on the builder's stop at addendum 1 item 4): DS-DEF-2 Economic
+  // Survival: WEAK v1 said "always short of money for its defence" beside GEN-17 GARRISONED v2 (dz-town-2); re-worded in place
+  { pool: 'DS-DEF-2 :: Economic Survival: WEAK', vid: 1, from: 'b782767dfd38e3998769b6c74b43f313fb795f203fe1c2b0170b11183c71170c', to: '99ffc2d6bd7fa5d6f172e071d0e25cd03085c606fe88e1d199fae6faa5da4a8e', ruling: 'CHAIR-2026-11-23-03:55' },
+  // CHAIR-2026-11-23-N70 (PROSE-E, PROSE-6; the lines FINAL at 24d8edf83): GEN-13 NO-MARKET v10, cut by the site mount to
+  // "goes as far as neighbours can carry it", denied trade beyond the neighbours beside ECO-10 `POSTURE: established`;
+  // re-worded in place to the market institution's absence, on its own marks
+  { pool: 'DS-GEN-13 :: NO-MARKET', vid: 10, from: '6ab96482b14b28a785b1d4312217d49e7a889032f42073b271e7b58fb08cf9b4', to: '907d0e57ea8f24942d9816e9ba09d625c5f9d12f59558344409956224283b715', ruling: 'CHAIR-2026-11-23-N70' },
+  // CHAIR-2026-11-23-N70: DS-DEF-2 Internal Security: full legal chain v1 and v2 said every wrong is reliably dealt with,
+  // beside DS-DEF-3 Unsafe's crime outrunning the watch; re-worded in place to what the court does with the cases that reach it
+  { pool: 'DS-DEF-2 :: Internal Security: full legal chain (court AND prison)', vid: 1, from: '105c6bbe69c29bcfcf3b5a9bc53d499b0ffb3a87707bde88732c7be3d86ff88c', to: '1fbce63b9b973c060b7e4701cdd707ce579235121b2617b8fd2c29cd0346764e', ruling: 'CHAIR-2026-11-23-N70' },
+  { pool: 'DS-DEF-2 :: Internal Security: full legal chain (court AND prison)', vid: 2, from: 'ecc6aeaf24b17c74a5184d53935cdc392f15cf5cde9c6e772458bfd3ba6f0eb3', to: '11896bafb817bbc9425a423ad544850233a40ece1476a66973e146d7fc772468', ruling: 'CHAIR-2026-11-23-N70' },
+  // CHAIR-2026-11-23-N70: DS-DEF-2 CHAIN: food trades working v1 said the town "would not run short at once" beside
+  // DS-ECO-9 PRESSURED v1's shortfall every season (dz-city-50); re-worded in place
+  { pool: 'DS-DEF-2 :: CHAIN: food trades working', vid: 1, from: '6dc700253ac610253da5a3d683e6c8fd95439f542a6fcb9074dfc49e4bd1e839', to: 'a548e9235f68bc3ad800f5c77ceb4ffa080283322edba627695d7c80576a6cac', ruling: 'CHAIR-2026-11-23-N70' },
+  // CHAIR-2026-11-23-N70: DS-DEF-2 Economic Survival: CRITICAL v1 said the town "cannot fund a response to anything" beside
+  // DS-GEN-17 GARRISONED v1's people under arms (dz-village-7); re-worded in place
+  { pool: 'DS-DEF-2 :: Economic Survival: CRITICAL', vid: 1, from: '241d7d7ffb3cdd7e9da1f23faf6f334094d789268e9da77cc056a7e77df95903', to: '35865f5965dd6be471f4d8172eb644b624b107c252094089643bea7322eaa192', ruling: 'CHAIR-2026-11-23-N70' },
+  // WORDS-2 E9 (the tenth chair's PRERELEASE-LIST E9; the ninth chair's intake): DS-GEN-17 GARRISONED v2's tail "and the
+  // money is found every season" printed on no page (the place's trim, `generalDeskRead.js :: siteClause`, cuts it), so
+  // the source now says what the page prints; re-worded in place
+  { pool: 'DS-GEN-17 :: GARRISONED', vid: 2, from: 'c79be9f74b113a7a991921a860891bdd50d602a2841edaa578f3deb4007266b2', to: 'cbaf147b509073657dbdc1ebd1c2fc722d5629427656a855901588e5619eb923', ruling: 'TENTH-CHAIR-E9' },
+  // WORDS-2 E4, the tenth chair's RULING G3 (a): DS-ECO-1 COMBINATION C4 v6 said "There is no market at {settlement}" a third
+  // time on its pages (GEN-13 NO-MARKET and the yield line already say it); re-worded in place, its closing clause kept (C4 is
+  // a low rung: `economyStateProse.js :: prosperityHeaderPoolKey`, rank <= LOW_RUNG_TO, Subsistence/Struggling/Poor)
+  { pool: 'DS-ECO-1 :: COMBINATION C4: a low rung on a working approach', vid: 6, from: 'e284cf5f1f6d43f5c199642c081a0f6f4ac6d78bc417b75ed3ffe9879493023e', to: 'e6244f4fc36979daaf0fc289bf29a5a0b3e006fd4150a6d00083c632d669dd35', ruling: 'TENTH-CHAIR-G3' },
+  // VIABILITY-TRUE (the tenth chair's G61 (2)): DS-GEN-18 BOUGHT-IN v2 said the place buys in what it cannot make beside the
+  // page's own "Needed, and not brought in" (9 of 10 prints on V's small places); its words take "some of", corrected in place
+  { pool: 'DS-GEN-18 :: BOUGHT-IN', vid: 2, from: '354d370b49e159b5d19d38ee84a13b7b455b07ebdd9d399aa34d3c3a5079ffde', to: 'e463113d4cf56b027fe83e7bfafb339769612e435bec7cb0480eb38ff9e09136', ruling: 'G61' },
+  // CURE-119 (the tenth chair's G72 (2)): DS-POW-5 merchant_league v2 (street, no mark) said the rulers are "the people it owes
+  // money to", a debt no fact of the record holds, on any merchant-league place; its words say trade instead, corrected in place
+  { pool: 'DS-POW-5 :: merchant_league', vid: 2, from: '10c498483048964bff9990379caf15de7f12d1f6ca1a4dd1a177c627c6f279a1', to: '2b8da301096da05faf441e389407f30783a9fe09b3b8c2473c1b1e097289d28c', ruling: 'G72' },
+  // CURE-119 (the tenth chair's G72 (5), replacing G70's wording): DS-ECO-1 COMBINATION C4 v8 said "being easy to reach" beside
+  // "the roads are dangerous"; the gate knows a working trade route, not a safe road: "being well placed for trade", in place
+  { pool: 'DS-ECO-1 :: COMBINATION C4: a low rung on a working approach', vid: 8, from: 'f67d750251eee21153a3aef8117a04529bc3019fb68ffa7dfca93f772fd8421c', to: 'ac6b5ec285eeb33f75a7693a2f414f1f1d764eb01957c421487c31a10c37cc13', ruling: 'G72' },
+]);
+
+async function readNumberingBaseline() {
+  /** @type {Map<string, Array<{vid: number, text: string}>>} */
+  const byPool = new Map();
+  for (const desk of DESKS) {
+    const leafPath = path.join(STATE_OUT_DIR, `${desk.file}.generated.js`);
+    let leaf;
+    try {
+      leaf = (await import(url.pathToFileURL(leafPath).href))[desk.constant];
+    } catch (e) {
+      throw new Error(`the numbering guard (FR7): ${path.relative(ROOT, leafPath)} cannot be read as the`
+        + ` baseline (${e.message}); restore it from the commit before projecting.`, { cause: e });
+    }
+    if (!leaf || typeof leaf !== 'object') {
+      throw new Error(`the numbering guard (FR7): ${path.relative(ROOT, leafPath)} exports no ${desk.constant}.`);
+    }
+    for (const [blockId, block] of Object.entries(leaf)) {
+      for (const [key, variants] of Object.entries(block.pools || {})) {
+        byPool.set(`${blockId} :: ${key}`, variants.map((v) => ({ vid: v.vid, text: v.text })));
+      }
+    }
+  }
+  return byPool;
+}
+
+/**
+ * @param {string} label `${block} :: ${pool}`
+ * @param {ReadonlyArray<{vid: number, text: string}>} before the baseline's rows
+ * @param {ReadonlyArray<{vid: number, text: string}>} after this run's rows
+ * @returns {string[]} the refusals, one a line
+ */
+function numberingRefusals(label, before, after) {
+  /** @param {ReadonlyArray<{vid: number, text: string}>} rows */
+  const index = (rows) => {
+    const textOf = new Map(rows.map((r) => [r.vid, r.text]));
+    /** @type {Map<string, number[]>} */
+    const vidsOfText = new Map();
+    for (const r of rows) vidsOfText.set(r.text, [...(vidsOfText.get(r.text) || []), r.vid]);
+    return { textOf, vidsOfText };
+  };
+  const was = index(before);
+  const now = index(after);
+  const quote = (t) => `"${t.length > 72 ? `${t.slice(0, 69)}...` : t}"`;
+  const out = [];
+  for (const { vid, text } of before) {
+    if (now.textOf.get(vid) === text) continue;
+    if (!now.textOf.has(vid)) out.push(`${label}: DROPPED: v${vid} ${quote(text)} stood at the baseline and is gone`);
+    for (const moved of (now.vidsOfText.get(text) || []).filter((v) => !(was.vidsOfText.get(text) || []).includes(v))) {
+      out.push(`${label}: RENUMBERED: the text ${quote(text)} stood at v${vid} at the baseline and would take v${moved}`);
+    }
+  }
+  for (const { vid, text } of after) {
+    const old = was.textOf.get(vid);
+    if (old === undefined || old === text) continue;
+    const stoodAt = (was.vidsOfText.get(text) || []).filter((v) => v !== vid);
+    const oldStandsAt = (now.vidsOfText.get(old) || []).filter((v) => v !== vid);
+    if (stoodAt.length || oldStandsAt.length) {
+      out.push(`${label}: RE-USED: v${vid} named ${quote(old)} at the baseline and would name ${quote(text)}`
+        + (stoodAt.length ? `, the baseline's v${stoodAt.join(', v')}` : '')
+        + (oldStandsAt.length ? `; its own text would stand at v${oldStandsAt.join(', v')}` : ''));
+      continue;
+    }
+    const from = sha256(old);
+    const to = sha256(text);
+    const rows = WORD_CORRECTIONS.filter((r) => r.pool === label && r.vid === vid);
+    if (!rows.some((r) => r.from === from && r.to === to && r.ruling)) {
+      // Say what is true (FR18 (3)): no row at all, or a row whose hashes or ruling do not answer these words.
+      const why = rows.length === 0
+        ? 'with no row of WORD_CORRECTIONS'
+        : `and its row of WORD_CORRECTIONS does not answer them (${rows.map((r) => [
+          r.from !== from ? 'the row\'s old-text hash is not the baseline\'s words' : '',
+          r.to !== to ? 'the row\'s new-text hash does not match the new words' : '',
+          r.ruling ? '' : 'the row names no ruling',
+        ].filter(Boolean).join(', ')).join('; ')})`;
+      out.push(`${label}: REWORDED: v${vid} would change its words in place, from ${quote(old)} to ${quote(text)},`
+        + ` ${why}; the row these words need: { pool: '${label}', vid: ${vid}, from: '${from}', to: '${to}', ruling: <the ruling> }`);
+    }
+  }
+  return out;
+}
+
+{
+  // The annex parsed once more, here, so the guard answers before the census interlock and every other refusal
+  // (the projection's own parse below is the one it emits from; the two read the same bytes).
+  const stateBlocks = parseAnnex(stateSrc, STATE_HEADER, 'DOSSIER_STATE', { regionEnd: CONNECTIVES_HEADING_RE, closedMarks: true });
+  const baseline = await readNumberingBaseline();
+  /** @type {Map<string, Array<{vid: number, text: string}>>} */
+  const projected = new Map();
+  for (const b of stateBlocks) {
+    for (const p of b.pools) projected.set(`${b.id} :: ${p.key}`, p.variants.map((v) => ({ vid: v.index, text: v.text })));
+  }
+  const refusals = [];
+  for (const [label, before] of baseline) {
+    const after = projected.get(label);
+    if (!after) {
+      refusals.push(`${label}: DROPPED: the pool stood at the baseline (v${before.map((r) => r.vid).join(', v')}) and is gone`);
+      continue;
+    }
+    refusals.push(...numberingRefusals(label, before, after));
+  }
+  if (refusals.length) {
+    throw new Error(`the numbering guard (FR7) refuses ${refusals.length} move(s) against the baseline (the state`
+      + ' leaves as committed), compared by text:\n  ' + refusals.join('\n  ')
+      + '\n  A new line takes the NEXT number; nothing is renumbered, no number is re-used or dropped, and words'
+      + ' change in place only through their row of WORD_CORRECTIONS (§2.6; the shift register\'s `vids` row).');
+  }
+}
 
 /**
  * ⭐⭐ THE SHA INTERLOCK (ARCH §3.5, §12 row 4). The census records the sha256 of every file it
@@ -976,7 +840,7 @@ const CLAUSE_OPENERS = Object.values(connectives.lists)
   .map((joint) => joint.trim().split(/\s+/)[0].toLowerCase().replace(/[^a-z]/g, ''))
   .filter(Boolean);
 
-const stateBlocks = parseAnnex(stateSrc, STATE_HEADER, 'DOSSIER_STATE', { regionEnd: CONNECTIVES_HEADING_RE });
+const stateBlocks = parseAnnex(stateSrc, STATE_HEADER, 'DOSSIER_STATE', { regionEnd: CONNECTIVES_HEADING_RE, closedMarks: true });
 const causalBlocks = parseAnnex(causalSrc, CAUSAL_HEADER, 'CAUSAL_DOSSIER');
 
 const stateDrop = assertNothingDropped(stateSrc, STATE_HEADER, stateBlocks, 'DOSSIER_STATE', { regionEnd: CONNECTIVES_HEADING_RE });
@@ -1108,6 +972,19 @@ function emitLeaf(name, data, noteLines) {
     + `export const ${name} = /* #__PURE__ */ Object.freeze(${JSON.stringify(data, null, 2)});\n`;
 }
 
+/**
+ * CENSUS-1h unit 7 (R-AQ): the POSITION-KEYED declarations, parallel to each phrase list
+ * (`[i]` = the tag array of joint i, or null). The draw never reads them: the composer draws by
+ * the modulus over the full list, then `resolveDeclaredPosition` checks the drawn position.
+ * @param {Record<string, Record<string, Array<string[]|null>>>} declarations
+ */
+function connectiveDeclarationsLeaf(declarations) {
+  return '\n// THE POSITION-KEYED DECLARATIONS (CENSUS-1h unit 7, the chair\'s R-AQ): parallel to each list\n'
+    + '// above, [i] = the atoms joint i declares (null = silence). Never a draw key.\n'
+    + '/** @type {Readonly<Record<string, Readonly<Record<string, ReadonlyArray<ReadonlyArray<string>|null>>>>>} */\n'
+    + `export const DOSSIER_CONNECTIVE_DECLARATIONS = /* #__PURE__ */ Object.freeze(${JSON.stringify(declarations, null, 2)});\n`;
+}
+
 const connectivePins = connectives.pins
   .map((r) => `${r.relation}.${r.seat} ${r.pin}${r.owed ? ` (floor ${r.floor}, OWED)` : ''}`)
   .join(' · ');
@@ -1129,7 +1006,7 @@ emitted.push({
     'engine relation row joins two fields a desk reads (car 0 F1), so `seatOf` answers',
     '`not-consequence` on all 708 pools and the composer cannot reach either list. What the',
     'floors buy is that the day a licence exists the writers are not also inventing the joinery.',
-  ]),
+  ]) + connectiveDeclarationsLeaf(connectives.declarations),
   label: `${connectives.pins.length} (relation, seat) lists, `
     + `${connectives.pins.reduce((n, r) => n + r.pin, 0)} joints, `
     + `${connectives.pins.filter((r) => r.owed).length} OWED against their floors`,

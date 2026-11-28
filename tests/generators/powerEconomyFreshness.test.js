@@ -348,7 +348,7 @@ describe('bounded final economy -> power reconciliation', () => {
         expect(first.powerIntent).toBeUndefined();
       }
     }
-  });
+  }, 180_000); // its own budget, carrying the measured figure (CI-FIT-3, CLOSE-5, 2026-11-23): 8.2 s lit in the final census at c1128c8f6; about 15.1 s on a CI runner (the measured factor), over three quarters of the default 20 s
 
   test('the freshness assertion fails closed on changed or missing economic input', () => {
     const settlement = generate(
@@ -628,7 +628,16 @@ describe('EM-R3 — the power structure is final under a held pin', () => {
     // (reverse-applied: 31; 8e92c0440, 5f6d243b2 move 0). One row, thorp|germanic|coastal|port: under the desert
     // change its 2 lb of 32 now read 6% from the rounded pounds (5% before), so foodLabel Secure -> Pressured and
     // prosperity Moderate -> Poor, and the held coastal receipt is stale at the closeout. Still live.
-    expect(staleAtCloseout).toHaveLength(32);
+    // 32 -> 31 (2026-11-07, FIX-FOOD-ISOLATION, measured base a3d3c31b vs the fix): one row,
+    // town|germanic|forest|isolated. An isolated town is fed from outside only as far as its support
+    // receipt carries, so its forest world already reads the uncovered deficit the desert change used
+    // to open; the economy the fingerprint reads no longer moves under the change. Still live.
+    // 31 -> 32 (2026-11-15, the close of the tail round (TAIL-CLOSE-DOORS-4, the owner's word, 2026-11-15 06:00 UTC, in the chair's chat; record docs/shift-records/2026-11-15-the-close-of-the-tail-round.json)): measured by
+    // this arm's own run at the golden's tree 8c11f73ea; the round's declared economy and cast moves (the economy read off
+    // the town's own record, a face for every seat of power) leave one more held receipt stale at the closeout. Still live.
+    // 32 -> 29 (B1(i), CLOSE-7 BATCH; R24e (2), "the three counts are re-stated with their cause"): the 24 desert rows of the golden
+    // corpus B1(i) moves, their withheld houses and what follows. Still live.
+    expect(staleAtCloseout).toHaveLength(29);
     expect(staleWitness, 'no stale row was captured, so the refusal below proves nothing')
       .not.toBeNull();
     expect(() => assertPowerEconomyFreshness(
@@ -773,7 +782,11 @@ describe('EM-R3 — the power structure is final under a held pin', () => {
     // 27 rung-1 pins 37b1e746d; 31 F2 272af44f3; 28 F6 6d84aa834.
     // 28 -> 29 (2026-11-06, LANDING-9-POWER, A3's same cause and row): R-H5 66b1407bd at lane H's step 18fd6b442,
     // thorp|germanic|coastal|port — the desert world's food reads Pressured, so the unpinned replay recomputes it.
-    expect(refreshedAway).toHaveLength(29);
+    // 29 -> 28 (2026-11-07, FIX-FOOD-ISOLATION, A3's same cause and row, measured): town|germanic|forest|isolated.
+    // 28 -> 29 (2026-11-15, the close of the tail round, TAIL-CLOSE-DOORS-4, A3's same cause, measured by this arm's own run
+    // at the golden's tree 8c11f73ea): the unpinned replay recomputes one more receipt.
+    // 29 -> 26 (B1(i), CLOSE-7 BATCH; R24e (2)): A3's same cause, the 24 desert golden rows B1(i) moves.
+    expect(refreshedAway).toHaveLength(26);
 
     // ANTI-VACUITY (2): the refresher is not inert in general — skip it on an UNPINNED run and
     // the record moves, so the identity above is a property of the HELD path.

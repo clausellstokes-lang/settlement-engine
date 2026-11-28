@@ -1,0 +1,16 @@
+{
+  "_doc": "W1 ECO CONSTRUCTION, ONE SIGNED RE-RECORD OF THE SURFACE 'dossier-prose-manifest' OF THE CONSTRUCTION-AND-WIRING WAVE'S ECONOMY LANE, ODQ §934.105 (the cloud chair signs by the owner's delegation of 2026-11-06, vetoable; a successor chair does not inherit this signature; the chair's rulings R-W1, R-W3, R-W9 of docs/chair/2026-11-07/WIRING-RULINGS-2026-11-07.md and WAVE-RULINGS item 10). THE CAUSE, ONE (commit 725b62eb5 on lane/w1-eco-2026-11-07): the construction of the economy section's fourteen generation facts — each authored in docs/content/RECEIPT_POOLS_DOSSIER_STATE.md with its key function on its desk and drawn at its block's mount, said only when the record holds it: DS-ECO-6 the arcane black market, the theocratic economy and the hidden house (dm-only); DS-ECO-9 the failed famine source, how the need is met and the food sources; DS-ECO-8 food's grip on prosperity; DS-ECO-11 a worked-out resource and how it recovers; DS-ECO-12 a critical import and its reason, the weight of faith or magic in the town's money; DS-SUP-2 mounted at economics.upstreamSupply (an upstream chain failing); DS-GEN-13 the commercial houses and the warehouses. One record for the section's construction rather than one per block: the fourteen facts land in one commit whose shared registers (census, shift register, bytes, writer reach, pins) cannot be staged per block without seven partial trees; the style pass that follows re-records once per block. THE MOVE, MEASURED at the tip before the write: 1,040 of the 1,050 rows move, none added or removed; cells 67,730 -> 71,470 on golden-master-v3 (gm-seed a/b/c 372/364/358 -> 400/386/382); one more mount recorded (43); 158 more dm-only positions (36 -> 194, the DS-ECO-6 lenses). Nothing moves on the generator golden master: no writer is changed.",
+  "ownerWords": "I also now give all permissions required now and in the future. I also defer all judgement to you. · Deploy after the construction and wiring. · Regarding construction, I only meant for the facts from generation only. Nothing from advance time or simulation as that has to wait until after we build FPZ.",
+  "ownerDate": "2026-11-07",
+  "odqRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation of 2026-11-06 to the cloud chair, session 01FE9mEvGxnFx6WTBkEC6ie9; the construction-and-wiring wave of 2026-11-07, the chair's rulings R-W1, R-W3, R-W9)",
+  "cause": "construction — the economy section's fourteen generation facts said in DS-ECO-6, DS-ECO-8, DS-ECO-9, DS-ECO-11, DS-ECO-12, DS-SUP-2 (mounted) and DS-GEN-13 (commit 725b62eb5)",
+  "seat": "W1 ECO (Opus 5.5) under the cloud chair (Fable 5.1), session 01FE9mEvGxnFx6WTBkEC6ie9, at the tip 725b62eb5",
+  "surfaces": [
+    {
+      "surface": "dossier-prose-manifest",
+      "action": "re-record",
+      "predictedRows": 2,
+      "proofForm": "derived-artefact"
+    }
+  ]
+}

@@ -13,20 +13,11 @@
  */
 
 /*
- * §69.3 PROSE-LEAK ALLOWANCE — DM-TOOL TIER, recorded in-file as the ruling requires.
- * The deployment row states the tick an army left, which is the number the DM
- * counts forward from when deciding whether to recall it.
- *
- * §69.3 splits the tiers: a raw engine tick counter is ALLOWED on a DM-facing
- * instrument, where the number is the control the DM operates, and FORBIDDEN on
- * player, public and PDF surfaces, which cure to the calendar phrase
- * (src/domain/display/humanizeEngineTokens.js).
- *
- * This record is LOAD-BEARING, not decorative: tests/copy/proseLeak.test.js parses
- * the line below, exempts exactly that many hits of that class in this file, and
- * reds both ways — if the file grows one more, and if the allowance outlives the
- * sites it was granted for.
- * prose-leak-allowance: tick 1
+ * §69.3 — NO ALLOWANCE NOW. The deployment row once printed the raw tick an army
+ * left (a sanctioned DM-tool counter); STYLE-2 SW-12 (ledger D·5, 2026-11-09)
+ * cured it to the calendar's week phrase (tickCalendarDetailLabel), which keeps
+ * the week the DM counts forward from, so the allowance line is struck
+ * (tests/copy/proseLeak.test.js reds a grant that outlives its site).
  */
 
 import { Swords, Flag, ArrowLeftRight } from 'lucide-react';
@@ -41,6 +32,7 @@ import {
   REALM_CONTEST_RECORD_HELP,
   REALM_CONTEST_RECORD_LABEL,
 } from '../../domain/display/warStatus.js';
+import { tickCalendarDetailLabel } from '../../domain/display/humanizeEngineTokens.js';
 import { liveBlockades, hasLiveBlockades } from '../../domain/display/navalDisplay.js';
 import { BLUE, BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, INK, MUTED, RED, sans, swatch } from '../theme.js';
 import WarCausalBrief from './WarCausalBrief.jsx';
@@ -169,7 +161,7 @@ export default function LiveWarStatus({ campaign, nameById = new Map() }) {
                 key={`deploy-${dep.homeId}`}
                 addressIds={[dep.homeId, dep.targetId]}
                 heading={`${nameFor(nameById, dep.homeId)}'s army is committed against ${nameFor(nameById, dep.targetId)}`}
-                detail={`Deployed since tick ${dep.sinceTick}; home garrison thinned, war chest bleeding.`}
+                detail={`In the field since ${tickCalendarDetailLabel(dep.sinceTick)}. Fewer guards stand at home, and the war is costing ${nameFor(nameById, dep.homeId)} its savings.`}
               />
             ))}
           </div>

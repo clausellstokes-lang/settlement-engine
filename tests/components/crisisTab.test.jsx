@@ -11,6 +11,9 @@
  *   3. TRUST THE DM: the cast is edited here, on the crisis entry (X-45's idiom), ✎ YOU where the DM
  *      spoke, "As the engine has it" reverts.
  *   4. ONE HOME: the Overview's crisis block is a one-line pointer to the tab.
+ *   5. ONE HOME FOR THE NOTE (WORDS-2, the tenth chair's RULING G6 #10): the crisis's "if nothing is done" note prints on the
+ *      Crisis tab, and the Defense tab's military box leaves it there on the owner's view; a player view (no Crisis tab)
+ *      keeps it in the box.
  */
 import { afterEach, describe, expect, test, vi } from 'vitest';
 import { cleanup, fireEvent, render, screen, within } from '@testing-library/react';
@@ -94,7 +97,16 @@ describe('the Crisis page', () => {
       const rows = q.queryAllByTestId('crisis-cast-row');
       expect(rows.map((r) => r.getAttribute('data-role'))).toEqual(entry.cast.roles.map((r) => r.role));
       entry.cast.roles.forEach((r, j) => { expect(rows[j].textContent).toContain(r.name); expect(rows[j].textContent).toContain(r.reason); });
-      expect(q.queryAllByTestId('crisis-stake').length).toBe(entry.cast.stakes.length);
+      // re-keyed by identity (TAIL-CRISIS-6, K25 (c)): a row per stake the record holds, but none for a power the crisis has
+      // not touched (the record's split "it could side with either camp" with no quarrel and no seat: silence is true)
+      const stakeRows = q.queryAllByTestId('crisis-stake').length;
+      expect(stakeRows).toBeGreaterThanOrEqual(entry.cast.stakes.filter((k) => k.reason !== 'it could side with either camp').length);
+      expect(stakeRows).toBeLessThanOrEqual(entry.cast.stakes.length);
+      const stakeText = q.queryAllByTestId('crisis-stake').map((r) => r.textContent).join(' ');
+      // TAIL-CLOSE-TESTS-C: the liveness anchor: every stake the record gives a row prints its reason in the rows read here
+      entry.cast.stakes.filter((k) => k.reason !== 'it could side with either camp').forEach((k) => expect(stakeText).toContain(k.reason));
+      // anchored: the line above shows the stake rows' text is live (each held stake's reason prints in it)
+      expect(stakeText).not.toMatch(/no stake yet/);
       expect(q.queryAllByTestId('crisis-lever').length).toBe(entry.cast.levers.length);
       expect(q.getAllByTestId('crisis-see-first').length).toBeGreaterThan(0);
       expect(q.getByTestId('crisis-if-nothing').textContent).toBe(entry.viabilityNote);
@@ -178,3 +190,22 @@ function hexToRgb(hex) {
   const n = parseInt(hex.slice(1), 16);
   return `rgb(${(n >> 16) & 255}, ${(n >> 8) & 255}, ${n & 255})`;
 }
+
+describe('the crisis note has one home (G6 #10)', () => {
+  test('the Defense box leaves the note to the Crisis tab on the owner\'s view; a player view keeps it', async () => {
+    installMatchMedia(false);
+    const { DefenseTab } = await import('../../src/components/new/tabs/DefenseTab.jsx');
+    const s = crisisTown();
+    const notes = [s.stress].flat().map((e) => e?.viabilityNote).filter((n) => typeof n === 'string' && n.length > 20);
+    expect(notes.length).toBeGreaterThan(0);
+    const owner = render(<DefenseTab settlement={s} narrativeNote={null} />);
+    const ownerText = owner.container.textContent;
+    owner.unmount();
+    const player = render(<DefenseTab settlement={s} narrativeNote={null} playerView />);
+    const playerText = player.container.textContent;
+    // the player's box prints a note of the crisis (the control that the box renders at all) ...
+    expect(notes.some((n) => playerText.includes(n))).toBe(true);
+    // ... and the owner's prints none of them, the Crisis tab holding each
+    expect(notes.filter((n) => ownerText.includes(n))).toEqual([]);
+  }, 120_000);
+});

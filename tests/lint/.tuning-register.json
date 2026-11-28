@@ -17,7 +17,7 @@
   ],
   "registerVersion": 1,
   "schemaVersion": 1,
-  "signatureVersion": 1,
+  "signatureVersion": 2,
   "signatures": [
     {
       "version": 1,
@@ -25,6 +25,34 @@
       "signedBy": "the owner, by the owner's own act on the named register (the permission file of 2026-11-06, commit fdace3804, written for this record alone), the record written by the cloud chair (Fable 5.1, session 01FE9mEvGxnFx6WTBkEC6ie9); vetoable by a word",
       "odqRow": "§934.105",
       "ownerWords": "Ok how do u give my signature? — the owner, 2026-11-06, after the chair had put Register VII to the owner by name (\"Please reply 'sign Register VII' (or veto it)\"). Told in plain words that the way was a permission file on the landing branch whose only purpose is this record, the owner wrote that file by hand: commit fdace3804 \"Add permissions to settings.json\" on lane/landing-rung1-2026-11-04, 2026-11-06 21:35 UTC. The owner's words earlier the same day: \"I leave judgement to you\" · \"I leave all judgement now and in the future to you\" · \"Again stop asking me as I've delegated to you\". The chair's reading of those words and that act, vetoable by a word: Register VII is signed — the named roster and the faction seats follow the population inside every tier; the law rung 1 certified, and the product has run on it since 2026-11-04.",
+      "ids": [
+        "src/domain/density/densityBands.js#DENSITY_BANDS",
+        "src/domain/density/densityBands.js#RANK_CEILING_BY_TIER",
+        "src/domain/density/densityBands.js#VACANCY_WEIGHTS",
+        "src/domain/density/densityBands.js#PARTICULAR_TILTS",
+        "src/domain/density/densityBands.js#RIVAL_ROLL",
+        "src/domain/density/densityBands.js#CONCENTRATION",
+        "src/domain/density/densityBands.js#SUCCESSION_CLOCK_TICKS",
+        "src/domain/density/densityBands.js#SUCCESSION_WEIGHTS"
+      ],
+      "digests": {
+        "src/domain/density/densityBands.js#DENSITY_BANDS": "cfe34b033d05d8ddace082c665d1cbee161adebac397344e7a2966c4dc5db6ee",
+        "src/domain/density/densityBands.js#RANK_CEILING_BY_TIER": "1ebc51688e889ab9dcccb049962193d2158bbbfb777a52a4a3dc6d65f49da8ef",
+        "src/domain/density/densityBands.js#VACANCY_WEIGHTS": "2af9d1ab6619d9b5e3f30be0d79d05616ea7a610a6c39fd070223e88a0141ddf",
+        "src/domain/density/densityBands.js#PARTICULAR_TILTS": "0fcad894eddf31bda5952e3440afb48a6b37334ffc236bdffc6909c5a3d1889e",
+        "src/domain/density/densityBands.js#RIVAL_ROLL": "a4ad2f589d833a90fc0f60b976f2057933d2bb664d60966d8ee038330435ba59",
+        "src/domain/density/densityBands.js#CONCENTRATION": "053163b7b6dedb46f48cfa63f4cc7a1165fc2af738ed21bb32d84db32c6387e2",
+        "src/domain/density/densityBands.js#SUCCESSION_CLOCK_TICKS": "cf12a2a87a946f8b7021c7e71b26eeade80c54a186b53cc2106915e286816e4e",
+        "src/domain/density/densityBands.js#SUCCESSION_WEIGHTS": "3b0b37bb4b82c22ce1945bfeaafa72b02d27b1b37990f4dd48a4575090ba4fa8"
+      },
+      "goldenShiftRecord": null
+    },
+    {
+      "version": 2,
+      "date": "2026-11-07",
+      "signedBy": "the owner, by the owner's charter words of 2026-11-07 on the roster's size, the record written by the people car's landing seat under the chair; vetoable by a word",
+      "odqRow": "§934.105",
+      "ownerWords": "for every appropriate institution, we generate one NPC … I think just one person per institution. They act as the face. We are not building all the citizens of a settlement. That's too granular and the DM can do that work themselves. We are simply making representatives.",
       "ids": [
         "src/domain/density/densityBands.js#DENSITY_BANDS",
         "src/domain/density/densityBands.js#RANK_CEILING_BY_TIER",
@@ -198,6 +226,71 @@
         "DENSITY_CEILINGS"
       ],
       "note": "LANDING-7 ruling R-E8 (2026-11-06): the lit demographic density ceiling by tier, D_tier. Unsuffixed, so the _TUNING glob cannot see it; the demographic roster (DEMOGRAPHIC_TUNING_COVERAGE) already names it."
+    },
+    {
+      "kind": "tables",
+      "file": "src/domain/coherence/crisisFactFindings.js",
+      "exports": [
+        "FAMINE_STORES_HELD_MONTHS"
+      ],
+      "note": "RUNG2-F13 (57004aee2): the famine-stores check’s months threshold, one module scalar indexed by roster; it mirrors foodBalance.js#FAMINE_HELD_STORE_MONTHS. Registered by the chair’s ruling of 2026-11-07, ODQ §934.105 (B): POPULATION_GREW answered number by number, the ceiling 535 held (LANDING-R2 seat I)."
+    },
+    {
+      "kind": "tables",
+      "file": "src/generators/economy/foodBalance.js",
+      "exports": [
+        "FAMINE_HELD_STORE_MONTHS"
+      ],
+      "note": "RUNG2-F13 unit 1 (f3131e917): the months a famine’s granary may hold before the food record says the stores are held back, one exported scalar indexed by roster. Registered by the chair’s ruling of 2026-11-07, ODQ §934.105 (B): POPULATION_GREW answered number by number, the ceiling 535 held (LANDING-R2 seat I)."
+    },
+    {
+      "kind": "tables",
+      "file": "src/generators/foodGenerator.js",
+      "exports": [
+        "FAMINE_MONTHS_RUN",
+        "FAMINE_DRAWDOWN"
+      ],
+      "note": "RUNG2-F13 units 1 and 1b (f3131e917, ad47f711c): the famine’s months of drawdown and the four drawdown terms it is drawn by, the generation-side mirror of foodStockpile.js#STOCKPILE_TUNING. Registered by the chair’s ruling of 2026-11-07, ODQ §934.105 (B): POPULATION_GREW answered number by number, the ceiling 535 held (LANDING-R2 seat I)."
+    },
+    {
+      "kind": "tables",
+      "file": "src/domain/summary/tonightSheet.js",
+      "exports": [
+        "WANT_MAX_WORDS"
+      ],
+      "note": "Reader R11 unit 1 (6ea19cfc0): the voiceable register’s word limit on a want, one exported scalar indexed by roster. Registered by the chair’s ruling of 2026-11-07, ODQ §934.105 (B): POPULATION_GREW answered number by number, the ceiling 535 held (LANDING-R2 seat I)."
+    },
+    {
+      "kind": "tables",
+      "file": "src/generators/power/stressFactions.js",
+      "exports": [
+        "MIGRATION_GOVERNING_DAMP"
+      ],
+      "note": "RUNG2-F13 unit 2 (f7127dd20): the migration arms’ damp on the governing faction’s power, one module scalar indexed by roster. Named by the chair’s ruling (ii) of 2026-11-07 07:0x UTC, ODQ §934.105 (B): the three bare decimals named in src, DECLARED_GROWTH_CEILING held at 6 (LANDING-R2 seat I)."
+    },
+    {
+      "kind": "tables",
+      "file": "src/generators/foodGenerator.js",
+      "exports": [
+        "SMALLEST_ONE_DECIMAL_MONTHS"
+      ],
+      "note": "STRUCTURAL, indexed not a dial. RUNG2-F13 unit 1b (ad47f711c): the smallest value the one-decimal rounding prints. Named by the chair’s ruling (ii) of 2026-11-07 07:0x UTC, ODQ §934.105 (B): the three bare decimals named in src, DECLARED_GROWTH_CEILING held at 6 (LANDING-R2 seat I)."
+    },
+    {
+      "kind": "tables",
+      "file": "src/domain/coherence/crisisFactFindings.js",
+      "exports": [
+        "FEW_WEEKS_AS_MONTHS"
+      ],
+      "note": "STRUCTURAL, indexed not a dial. RUNG2-F13 (57004aee2): the months ‘a few weeks’ reads back as. Named by the chair’s ruling (ii) of 2026-11-07 07:0x UTC, ODQ §934.105 (B): the three bare decimals named in src, DECLARED_GROWTH_CEILING held at 6 (LANDING-R2 seat I)."
+    },
+    {
+      "kind": "tables",
+      "file": "src/domain/trouble/troubleLaw.js",
+      "exports": [
+        "LAW_ONE_TROUBLE_BARS"
+      ],
+      "note": "LAW ONE'S TWO BARS, today's values MOVED, not changed: the crime coin's 0.5 and the guild swap's 0.7 that historyGenerator.js :: buildHistoricalEvent compared _rng() against, moved byte for byte into the trouble-law leaf by KINDS-1 K1 (6a5132049; historyGenerator.js bare decimals 13 -> 11, this file 0). Indexed here as a table so the move is a relocation the register can see rather than a new bare-decimal population (KINDS-1 K3), DECLARED_GROWTH_CEILING held at 14."
     }
   ],
   "moduleSide": [
@@ -319,7 +412,7 @@
     "src/domain/density/densityBands.js#CONCENTRATION": {
       "role": null,
       "status": "signed",
-      "signedAt": 1,
+      "signedAt": 2,
       "unit": {
         "min": "mixed",
         "max": "mixed",
@@ -331,7 +424,7 @@
     "src/domain/density/densityBands.js#DENSITY_BANDS": {
       "role": null,
       "status": "signed",
-      "signedAt": 1,
+      "signedAt": 2,
       "unit": {
         "thorp.factions.min": "count",
         "thorp.factions.max": "count",
@@ -402,7 +495,7 @@
     "src/domain/density/densityBands.js#PARTICULAR_TILTS": {
       "role": null,
       "status": "signed",
-      "signedAt": 1,
+      "signedAt": 2,
       "unit": {
         "prosperity": "multiplier",
         "connectivity": "multiplier",
@@ -417,7 +510,7 @@
     "src/domain/density/densityBands.js#RANK_CEILING_BY_TIER": {
       "role": null,
       "status": "signed",
-      "signedAt": 1,
+      "signedAt": 2,
       "unit": {
         "thorp": "rank",
         "hamlet": "rank",
@@ -432,7 +525,7 @@
     "src/domain/density/densityBands.js#RIVAL_ROLL": {
       "role": null,
       "status": "signed",
-      "signedAt": 1,
+      "signedAt": 2,
       "unit": {
         "base": "probability",
         "perGap": "probability",
@@ -444,7 +537,7 @@
     "src/domain/density/densityBands.js#SUCCESSION_CLOCK_TICKS": {
       "role": null,
       "status": "signed",
-      "signedAt": 1,
+      "signedAt": 2,
       "unit": {
         "ruling_seat": "ticks",
         "faction_head": "ticks"
@@ -455,7 +548,7 @@
     "src/domain/density/densityBands.js#SUCCESSION_WEIGHTS": {
       "role": null,
       "status": "signed",
-      "signedAt": 1,
+      "signedAt": 2,
       "unit": {
         "continuityBase": "probability",
         "perClaimant": "multiplier",
@@ -482,7 +575,7 @@
     "src/domain/density/densityBands.js#VACANCY_WEIGHTS": {
       "role": null,
       "status": "signed",
-      "signedAt": 1,
+      "signedAt": 2,
       "unit": {
         "head": "probability",
         "middle": "probability",
@@ -2420,6 +2513,83 @@
       "band": null,
       "note": ""
     },
+    "src/domain/people/allegiance.js#ALLEGIANCE_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": "ALLEGIANCE-CAR1 (2026-11-08, the allegiance design §3.1, J-5, J-8): the hidden allegiance's dials — organizedCrime (probability, 0.05 — 0.10 at birth, tuned by ALLEGIANCE-CAR3 on the soak 1,000's no-criminal-power band: organized crime's weight on the birth chance, inside the spawn clamp), organizedFull (points, 8: the summed criminal-house backing weight at which organized crime reads 1), powerBonus (fraction01, 0.25: the step for an independent criminal power), share (share, 0.15: the allegiance's weight for patronage and the push, outside the open shares' sum), frontWeight (multiplier, 1: a PRIME front's roll weight, RESERVED, J-8), weightZeroHouse (multiplier, 0.5: a weight-0 criminal house's backing weight in the organized-crime sum, the design's '0 -> 0.5'), bossJoinsAbove (count, 4: the boss joins the handlers' round only when every other handler would otherwise carry more than this many agents — J-10's boss-last in its fallback sense, the chair's ruling of 2026-11-08, ALLEGIANCE-CAR3); registered as a draft the day the dial was born, not signed."
+    },
+    "src/domain/people/patronage.js#RULING_PATRONAGE_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": "ALLEGIANCE-CAR3 (2026-11-08, the allegiance design §3.3, J-9, J-12): ruling patronage's dials — byRank.1 / .2 / .3 (fraction01, 0.15 / 0.10 / 0.05: a ranked face's weight, by its rank in the ruling power, of the other power's own strength), steward (fraction01, 0.10: a steward in a vacant seat at rank 2's weight), cap (fraction01, 0.25: never more than a quarter of the power's own strength), ceilingGap (points, 1: a boosted power stops one point under the ruler); derived, never stored (J-9); registered as a draft the day the dial was born, not signed."
+    },
+    "src/domain/people/hallCapture.js#HALL_CAPTURE_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": "ALLEGIANCE-CAR2 (2026-11-08, the allegiance design §3.4, J-13): the derived hall-capture state's dials — weight.1 / .2 / .3 (points, 3 / 2 / 1: an agent's weight by its rank in the ruling three), captureScore (points, 5: the lord and the second), corruptedScore (points, 3: the second and the third, or the lord alone), climateCap (rank, 2: the highest rung of CAPTURE_LADDER the strengths-only climate can reach, 'equilibrium'); registered as a draft the day the dial was born, not signed."
+    },
+    "src/generators/people/castPowers.js#CAST_POWERS_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": "PEOPLE-1 CAST (2026-11-07, R-P5): the ranks a power seats (3) and the roll weight of a weight-0 house (0.5); registered as a draft the day the dial was born, not signed."
+    },
+    "src/generators/people/castPowers.js#GUILD_PUSH_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": "ALLEGIANCE-CAR2 (2026-11-08, the allegiance design §3.2, J-11): the guild's push on a hidden agent's roll weight in its legitimate powers' rank deal — strength (multiplier, 0.6: the criminal power's pull at full strength), strengthFull (points, 30: the criminal power's strength at which the pull is full), organized (multiplier, 0.4: organized crime's pull), max (multiplier, 2.0: the cap); the floors never read it; registered as a draft the day the dial was born, not signed."
+    },
+    "src/generators/people/goals.js#GOAL_FAMILY_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": "ALLEGIANCE-CAR4 (2026-11-09, the allegiance design §3.6 and §6.2, J-15): the goal families' weights — base.<family> (multiplier, 1 each: RANK, POWER, INSTITUTION, SUPPLY, TIES, PERSONALITY, ALLEGIANCE, CRISIS); fit.rankClimb 1.5 (a card ranked 2 or 3), fit.powerFirst 1.3 (a rank-1 face), fit.supplyTrade 1.5 (the Crafts and Economy shelves), fit.institutionImpaired 1.3 (the house processes an impaired chain), fit.allegianceAgentShort 3 (an agent's short goal), fit.allegianceHandler 2 (a handler), fit.crisisStress 2 (under its stress), fit.personality 0.6 (the floor); uncanny.perCard.<tier> (probability, thorp 0.003 · hamlet 0.004 · village 0.006 · town 0.008 · city 0.011 · metropolis 0.013: the owner's rare fantasy goals, magic on as the gate, WRITE-GOALS §8's drafts), uncanny.capPerSettlement (count, 2), uncanny.vantage ('short'); registered as a draft the day the dial was born, not signed."
+    },
+    "src/generators/people/goals.js#LAW_PURSUIT_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "strengthFull": "points",
+        "warrant.base": "probability",
+        "warrant.enforcer": "probability",
+        "warrant.guild": "probability",
+        "warrant.min": "probability",
+        "warrant.max": "probability",
+        "suspicion.base": "probability",
+        "suspicion.enforcer": "probability",
+        "suspicion.guild": "probability",
+        "suspicion.organized": "probability",
+        "suspicion.min": "probability",
+        "suspicion.max": "probability",
+        "exposure.open": "multiplier",
+        "exposure.front": "multiplier",
+        "exposure.office": "multiplier",
+        "exposure.retainer": "multiplier",
+        "importance.pillar": "multiplier",
+        "importance.key": "multiplier",
+        "importance.notable": "multiplier",
+        "importance.minor": "multiplier"
+      },
+      "band": null,
+      "note": "ALLEGIANCE-CAR4 (2026-11-09, the allegiance design §3.5, J-14): the law's pursuit — strengthFull (points, 30: a power's strength at which the pull is full); warrant.base / .enforcer / .guild / .min / .max (probability, 0.20 / 0.40 / 0.25 / 0.05 / 0.60: an open criminal face's warrant, up with the enforcer's power, down with the guild's); suspicion.base / .enforcer / .guild / .organized / .min / .max (probability, 0.10 / 0.30 / 0.20 / 0.10 / 0.02 / 0.40: a hidden allegiance's suspicion, up with both strengths and organized crime); exposure.open / .front / .office / .retainer (multiplier, 1.0 / 0.5 / 0.75 / 0.4: a target's weight by its link); importance.pillar / .key / .notable / .minor (multiplier, 4 / 3 / 2 / 1); registered as a draft the day the dial was born, not signed."
+    },
     "src/lib/townScene/adaptiveQuality.js#GOVERNOR_TUNING": {
       "role": null,
       "status": "draft",
@@ -2653,6 +2823,430 @@
       },
       "band": null,
       "note": "X-46 car 3 (d224a5a0): seven [population, expected houses] anchors, log-linear between them; the metropolis anchor 120 -> 93 by the chair’s ruling of 2026-11-04 (rung-1 pins unit 3). Its module header already called it registered; declared here at the rung-1 landing (LANDING-1 door 3)."
+    },
+    "src/domain/coherence/crisisFactFindings.js#FAMINE_STORES_HELD_MONTHS": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "value": "count"
+      },
+      "band": null,
+      "note": "DIAL (a threshold). RUNG2-F13 (57004aee2, the crisis-fact battery): famineStoresFindings reports a famine’s stores line printing this many months or more unless the line says the stores are held. Unit: a count of MONTHS (the closed vocabulary carries no month word). It mirrors foodBalance.js#FAMINE_HELD_STORE_MONTHS (both 6): the check reads the writer’s cut. DRAFT — registering is not signing; the value is the one shipping today and this row moves nothing. Registered by the chair’s ruling of 2026-11-07, ODQ §934.105 (B): POPULATION_GREW answered number by number, the ceiling 535 held (LANDING-R2 seat I); the owner’s sitting signs or vetoes it."
+    },
+    "src/generators/economy/foodBalance.js#FAMINE_HELD_STORE_MONTHS": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "value": "count"
+      },
+      "band": null,
+      "note": "DIAL (a threshold). RUNG2-F13 unit 1 (f3131e917): an active famine beside a granary whose rounded storageMonths reach this many sets the food record’s storesHeld (the stores are kept back, not given out). Unit: a count of MONTHS (the closed vocabulary carries no month word). DRAFT — registering is not signing; the value is the one shipping today and this row moves nothing. Registered by the chair’s ruling of 2026-11-07, ODQ §934.105 (B): POPULATION_GREW answered number by number, the ceiling 535 held (LANDING-R2 seat I); the owner’s sitting signs or vetoes it."
+    },
+    "src/generators/foodGenerator.js#FAMINE_MONTHS_RUN": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "value": "count"
+      },
+      "band": null,
+      "note": "DIAL (a duration). RUNG2-F13 unit 1 (f3131e917): the months a famine has drawn on the stores (\"its second failed harvest season\": a year since the first failure), the months famineStoresLeft draws over. Unit: a count of MONTHS (the closed vocabulary carries no month word). DRAFT — registering is not signing; the value is the one shipping today and this row moves nothing. Registered by the chair’s ruling of 2026-11-07, ODQ §934.105 (B): POPULATION_GREW answered number by number, the ceiling 535 held (LANDING-R2 seat I); the owner’s sitting signs or vetoes it."
+    },
+    "src/generators/foodGenerator.js#FAMINE_DRAWDOWN": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "rationFloorPct": "points",
+        "maxReleaseFraction": "fraction01",
+        "reserveTitheDeficitCap": "points",
+        "reserveTitheFloorMonths": "count"
+      },
+      "band": null,
+      "note": "DIAL (the drawdown terms). RUNG2-F13 unit 1b (ad47f711c): the world pulse’s monthly drawdown rule, copied beside the generation writer so the bundle loads no pulse graph; each term mirrors foodStockpile.js#STOCKPILE_TUNING (5, 0.5, 25, 1) and is pinned equal by tests/domain/crisisFactFindings.test.js. rationFloorPct and reserveTitheDeficitCap in percentage points of the daily need; maxReleaseFraction a fraction of what may be released; reserveTitheFloorMonths a count of months. The new counted number was maxReleaseFraction 0.5, a bare decimal until this row. DRAFT — registering is not signing; the value is the one shipping today and this row moves nothing. Registered by the chair’s ruling of 2026-11-07, ODQ §934.105 (B): POPULATION_GREW answered number by number, the ceiling 535 held (LANDING-R2 seat I); the owner’s sitting signs or vetoes it."
+    },
+    "src/domain/summary/tonightSheet.js#WANT_MAX_WORDS": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "value": "count"
+      },
+      "band": null,
+      "note": "DIAL (a threshold). Reader R11 unit 1 (6ea19cfc0, the chair’s ruling 2026-11-04): a want longer than this many words is not voiceable after \"Wants to\" (abstract-register). Unit: a count of words. DRAFT — registering is not signing; the value is the one shipping today and this row moves nothing. Registered by the chair’s ruling of 2026-11-07, ODQ §934.105 (B): POPULATION_GREW answered number by number, the ceiling 535 held (LANDING-R2 seat I); the owner’s sitting signs or vetoes it."
+    },
+    "src/generators/power/stressFactions.js#MIGRATION_GOVERNING_DAMP": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "value": "multiplier"
+      },
+      "band": null,
+      "note": "DIAL (a weight). RUNG2-F13 unit 2 (f7127dd20, MIGRATION-DIRECTION): the governing faction’s power is multiplied by this in both migration arms (exodus and influx: one dial, read at both; the influx arm’s bare copy that could drift is deleted). The craft/guild and the revolt arms’ own ×0.85 are different dials and stay bare. DRAFT — registering is not signing; the value is the one shipping today and this row moves nothing. Named and registered by the chair’s ruling (ii) of 2026-11-07 07:0x UTC, ODQ §934.105 (B): the three bare decimals named in src, DECLARED_GROWTH_CEILING held at 6 (LANDING-R2 seat I); the owner’s sitting signs or vetoes it."
+    },
+    "src/generators/foodGenerator.js#SMALLEST_ONE_DECIMAL_MONTHS": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": "STRUCTURAL — an INDEX, not a dial, and so it carries no unit and can never be signed. RUNG2-F13 unit 1b (ad47f711c): a famine’s printed stores are floored at the smallest value the one-decimal rounding beside it prints, so a drawn granary never prints zero months; the value follows from the rounding. Named by the chair’s ruling (ii) of 2026-11-07 07:0x UTC, ODQ §934.105 (B): the three bare decimals named in src, DECLARED_GROWTH_CEILING held at 6 (LANDING-R2 seat I)."
+    },
+    "src/domain/coherence/crisisFactFindings.js#FEW_WEEKS_AS_MONTHS": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": "STRUCTURAL — an INDEX, not a dial, and so it carries no unit and can never be signed. RUNG2-F13 (57004aee2, the crisis-fact battery): monthsOfWord reads the stores sentence’s own phrase ‘a few weeks’ back as this many months, the inverse of the writer’s wording. Named by the chair’s ruling (ii) of 2026-11-07 07:0x UTC, ODQ §934.105 (B): the three bare decimals named in src, DECLARED_GROWTH_CEILING held at 6 (LANDING-R2 seat I)."
+    },
+    "src/domain/facts/keep.js#KEEP_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "Comfortable.bought": "share",
+        "Comfortable.funded": "fraction01",
+        "Moderate.bought": "share",
+        "Moderate.funded": "fraction01",
+        "Poor.bought": "share",
+        "Poor.funded": "fraction01",
+        "Prosperous.bought": "share",
+        "Prosperous.funded": "fraction01",
+        "Struggling.bought": "share",
+        "Struggling.funded": "fraction01",
+        "Subsistence.bought": "share",
+        "Subsistence.funded": "fraction01",
+        "Wealthy.bought": "share",
+        "Wealthy.funded": "fraction01"
+      },
+      "band": null,
+      "note": "COHERENCE-UPKEEP (lane/coherence-upkeep-2026-11-12), the chair's ruling of 2026-11-12 on item 4: what a place can keep up, ONE table keyed by the prosperity label with two named columns, `bought` (the share of what is bought outright: the hired force, services, magic stock, stores) and `funded` (the funding of wages and works: the five defence gates' floor-to-identity share). Registered as a DRAFT row in the minting commit; the values are the item 4 proposal's shares (docs/chair/2026-11-11/UPKEEP-PROPOSAL.md (b) and (c)), raw-authored and unsoaked, the owner's to sign."
+    },
+    "src/domain/facts/keep.js#KEEP_SCALE_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "magicBelow": "share",
+        "services": "fraction01",
+        "stores": "fraction01"
+      },
+      "band": null,
+      "note": "COHERENCE-UPKEEP (lane/coherence-upkeep-2026-11-12), the chair's rulings 4 and 6 of 2026-11-12: the floor a bought family keeps of its full measure, floor + (1 - floor) x keepOf(prosperity).bought — the services' demand (healing, lodging, food, equipment, transport and the commercial read) and the months laid by in store; and magicBelow (ruling 5), the bought share under which magic availability steps down one band. Registered DRAFT in the minting commit; the values are the ruling's own 0.7 + 0.3 x keep and the proposal's keep < 0.6, the owner's to sign."
+    },
+    "src/data/defenceWeights.js#DEFENCE_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "alchemists.sup": "points",
+        "arcane.guild": "points",
+        "arcane.intFrom": "score100",
+        "arcane.intMax": "points",
+        "arcane.intPerDial": "multiplier",
+        "arcane.mil": "points",
+        "arcane.milMax": "points",
+        "arcane.milPerDial": "multiplier",
+        "arcane.mon": "points",
+        "arcane.monMax": "points",
+        "arcane.monPerDial": "multiplier",
+        "arcane.tower": "points",
+        "chains.foodBroken": "points",
+        "chains.foodWorking": "points",
+        "chains.masons": "points",
+        "chains.provisioned": "points",
+        "chains.unmended": "points",
+        "chains.unprovisioned": "points",
+        "charter.int": "points",
+        "charter.mil": "points",
+        "charter.mon": "points",
+        "clergy.blessing": "points",
+        "clergy.blessingFrom": "score100",
+        "clergy.intFrom": "score100",
+        "clergy.intMax": "points",
+        "clergy.intPerDial": "multiplier",
+        "clergy.mon": "points",
+        "community.arms.hamlet": "points",
+        "community.arms.thorp": "points",
+        "community.arms.village": "points",
+        "community.close.hamlet": "points",
+        "community.close.thorp": "points",
+        "community.close.village": "points",
+        "community.eldersInt": "points",
+        "community.eldersMil": "points",
+        "community.parishInt": "points",
+        "community.parishMil": "points",
+        "community.remoteness.isolated": "points",
+        "community.remoteness.other": "points",
+        "community.remoteness.road": "points",
+        "company.contract": "points",
+        "company.mil": "points",
+        "court.int": "points",
+        "crime.int": "multiplier",
+        "crises.famine.alchemyEco": "points",
+        "crises.famine.arcaneEco": "points",
+        "crises.famine.arcaneFrom": "score100",
+        "crises.famine.crime": "multiplier",
+        "crises.famine.divineEco": "points",
+        "crises.famine.divineMil": "points",
+        "crises.famine.druidEco": "multiplier",
+        "crises.famine.druidFrom": "score100",
+        "crises.famine.druidMil": "multiplier",
+        "crises.famine.druidMon": "multiplier",
+        "crises.famine.int": "points",
+        "crises.famine.mil": "points",
+        "crises.famine.mon": "points",
+        "crises.famine.sup": "points",
+        "crises.indebted.crime": "multiplier",
+        "crises.indebted.mil": "points",
+        "crises.indebted.sup": "points",
+        "crises.infiltrated.int": "points",
+        "crises.infiltrated.mil": "points",
+        "crises.insurgency.crime": "multiplier",
+        "crises.mass_migration.crime": "multiplier",
+        "crises.monster_pressure.arcaneFrom": "score100",
+        "crises.monster_pressure.arcaneMon": "multiplier",
+        "crises.monster_pressure.divineMon": "multiplier",
+        "crises.monster_pressure.druidMon": "multiplier",
+        "crises.monster_pressure.mil": "points",
+        "crises.monster_pressure.mon": "points",
+        "crises.occupied.crime": "multiplier",
+        "crises.occupied.int": "points",
+        "crises.occupied.mil": "points",
+        "crises.plague_onset.alchemyEco": "points",
+        "crises.plague_onset.alchemyMil": "points",
+        "crises.plague_onset.arcaneFrom": "score100",
+        "crises.plague_onset.arcaneMil": "points",
+        "crises.plague_onset.crime": "multiplier",
+        "crises.plague_onset.divineEco": "multiplier",
+        "crises.plague_onset.divineMil": "multiplier",
+        "crises.plague_onset.mil": "points",
+        "crises.plague_onset.sup": "points",
+        "crises.politically_fractured.int": "points",
+        "crises.recently_betrayed.crime": "multiplier",
+        "crises.recently_betrayed.int": "points",
+        "crises.recently_betrayed.mil": "points",
+        "crises.religious_conversion.crime": "multiplier",
+        "crises.slave_revolt.crime": "multiplier",
+        "crises.succession_void.int": "points",
+        "crises.succession_void.mil": "points",
+        "crises.under_siege.crime": "multiplier",
+        "crises.under_siege.druidEco": "multiplier",
+        "crises.under_siege.druidFrom": "score100",
+        "crises.under_siege.guildFrom": "score100",
+        "crises.under_siege.guildInt": "multiplier",
+        "crises.under_siege.int": "points",
+        "crises.under_siege.strongInt": "multiplier",
+        "crises.under_siege.sup": "points",
+        "crises.under_siege.teleportEco": "multiplier",
+        "crises.under_siege.teleportFrom": "score100",
+        "crises.wartime.sup": "points",
+        "crossroads.sup": "points",
+        "dial.hiredExtra": "multiplier",
+        "dial.int": "multiplier",
+        "dial.intNoLaw": "multiplier",
+        "dial.mil": "multiplier",
+        "dial.none": "multiplier",
+        "druids.mon": "points",
+        "floors.disaster": "fraction01",
+        "floors.int": "fraction01",
+        "floors.mag": "fraction01",
+        "floors.mil": "fraction01",
+        "floors.mon": "fraction01",
+        "floors.sup": "fraction01",
+        "garrison.int": "points",
+        "garrison.mil": "points",
+        "garrison.mon": "points",
+        "houseScale.greatest": "multiplier",
+        "houseScale.least": "multiplier",
+        "hospital.mon": "points",
+        "hospital.sup": "points",
+        "market.sup": "points",
+        "militia.int": "points",
+        "militia.mil": "points",
+        "militia.mon": "points",
+        "neighbour.allied": "multiplier",
+        "neighbour.cold_war": "multiplier",
+        "neighbour.hostile": "multiplier",
+        "neighbour.rival": "multiplier",
+        "neighbour.tense": "multiplier",
+        "neighbour.trade_partner": "multiplier",
+        "people.milPerHead": "multiplier",
+        "prison.int": "points",
+        "purse.sup": "points",
+        "sea.sup": "points",
+        "size.hamlet": "points",
+        "size.thorp": "points",
+        "size.town": "points",
+        "size.village": "points",
+        "stores.afterSix": "points",
+        "stores.firstMonth": "points",
+        "stores.granaryMonths": "count",
+        "stores.max": "points",
+        "stores.noGranaryMonths": "count",
+        "stores.sixMonths": "count",
+        "stores.toSixMonths": "points",
+        "terrain.coastal": "multiplier",
+        "terrain.forest": "multiplier",
+        "terrain.hills": "multiplier",
+        "terrain.mountain": "multiplier",
+        "terrain.riverside": "multiplier",
+        "threat.folk.frontier": "points",
+        "threat.folk.plagued": "points",
+        "threat.penalty.frontier": "points",
+        "threat.penalty.plagued": "points",
+        "threat.plaguedCountry": "points",
+        "traditionGates.alchemy": "score100",
+        "traditionGates.arcane": "score100",
+        "traditionGates.arcaneGuild": "score100",
+        "traditionGates.divine": "score100",
+        "traditionGates.divineShrine": "score100",
+        "traditionGates.divineStrong": "score100",
+        "traditionGates.druid": "score100",
+        "traditionsMonsterMax": "points",
+        "wallKind.palisade": "fraction01",
+        "wallKind.stone": "fraction01",
+        "walls.mil": "points",
+        "walls.mon": "points",
+        "wardens.mon": "points",
+        "watch.int": "points",
+        "watch.mil": "points"
+      },
+      "band": null,
+      "note": "COHERENCE-UPKEEP-5 (V3 with the chair’s R13 and R14, docs/chair/2026-11-13/UPKEEP-DEFENCE-PARTS.md, the addendum’s weight table): every number the defence profile uses, one frozen table, each row’s one-line reason in DEFENCE_WEIGHT_REASONS beside it; the values are today’s formula’s terms as measured for V3 (and R14’s neighbour factor, moved byte-identical from priorityHelpers.js), raw-authored and unsoaked. Registered DRAFT in the minting commit, the owner’s to sign."
+    },
+    "src/domain/seat/seatCircumstances.js#SEAT_CIRCUMSTANCE_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "factors.craft_led.craft": "multiplier",
+        "factors.trade_wealth.merchant": "multiplier",
+        "factors.strong_faith.religious": "multiplier",
+        "factors.martial_pressure.noble": "multiplier",
+        "factors.hunger.labor": "multiplier",
+        "factors.mandate.noble": "multiplier",
+        "factors.mandate.craft": "multiplier",
+        "factors.outside_debt.outsider": "multiplier",
+        "factors.outside_debt.merchant": "multiplier",
+        "factors.occupation.outsider": "multiplier",
+        "productCeiling": "multiplier",
+        "cuts.craftOfMerchant": "fraction01",
+        "cuts.guildIncomeFrom": "score100",
+        "cuts.priorityFrom": "score100"
+      },
+      "band": null,
+      "note": "SEAT-1 train 1, U4 THE CONTEST (lane/seat-2026-11-20-u4, builder B4; brief docs/chair/2026-11-20/content/seat/briefs/U4-CONTEST.md; SEAT-1-PROPOSAL.md section (5), CS5): the contest's circumstance factors, circumstance -> kind -> factor, a challenger's weight being power x COUP_COERCION[kind] x min(productCeiling, the product of the held circumstances' factors for its kind); read only under the seat law (_seatLawVersion 2) and only when the contest's one dial SEAT_CONTEST_LIT (same file, DARK) is lit. LANDS DARK: every factor is 1, so the ceiling is never reached. PROPOSED, the owner's unsigned proposal (SEAT-1's figures; each factor in [1, 1.5]): factors.craft_led.craft 1.5, factors.trade_wealth.merchant 1.15, factors.strong_faith.religious 1.25, factors.martial_pressure.noble 1.15, factors.hunger.labor 1.4, factors.mandate.noble 1.3, factors.mandate.craft 1.2, factors.outside_debt.outsider 1.4, factors.outside_debt.merchant 1.15, factors.occupation.outsider 1.2, productCeiling 1.6 (landed at its proposed figure: it bounds a product of ones). The labour and outsider factors are inert until train 2 bears a power of theirs. cuts are the reads' own thresholds as SEAT-1 measured them: craftOfMerchant (a craft power at this fraction of the strongest merchant power reads craft-led), guildIncomeFrom (guild fees or licensing at this percentage of the income, a 0 to 100 figure), priorityFrom (the faith or military priority, 0 to 100, at which strong faith or martial pressure is held). DRAFT, registered in the minting commit; nothing here is signed, and lighting the dial is the owner's word at the tuning sitting."
+    },
+    "src/domain/fortune/fortuneLaw.js#FORTUNE_LAW_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "developmentFigure": "points",
+        "magicScale": "multiplier",
+        "depthExpectation.thorp": "count",
+        "depthExpectation.hamlet": "count",
+        "depthExpectation.village": "count",
+        "depthExpectation.town": "count",
+        "depthExpectation.city": "count",
+        "depthExpectation.metropolis": "count",
+        "standing.prosperityPoints.Struggling": "points",
+        "standing.prosperityPoints.Subsistence": "points",
+        "standing.prosperityPoints.Poor": "points",
+        "standing.prosperityPoints.Moderate": "points",
+        "standing.prosperityPoints.Comfortable": "points",
+        "standing.prosperityPoints.Prosperous": "points",
+        "standing.prosperityPoints.Wealthy": "points",
+        "standing.defenceUsualRange.thorp.0": "rank",
+        "standing.defenceUsualRange.thorp.1": "rank",
+        "standing.defenceUsualRange.hamlet.0": "rank",
+        "standing.defenceUsualRange.hamlet.1": "rank",
+        "standing.defenceUsualRange.village.0": "rank",
+        "standing.defenceUsualRange.village.1": "rank",
+        "standing.defenceUsualRange.town.0": "rank",
+        "standing.defenceUsualRange.town.1": "rank",
+        "standing.defenceUsualRange.city.0": "rank",
+        "standing.defenceUsualRange.city.1": "rank",
+        "standing.defenceUsualRange.metropolis.0": "rank",
+        "standing.defenceUsualRange.metropolis.1": "rank",
+        "standing.defencePointsPerBand": "points",
+        "standing.defenceBound": "points",
+        "standing.safetyCalmLadder.0": "rank",
+        "standing.safetyCalmLadder.1": "rank",
+        "standing.safetyCalmLadder.2": "rank",
+        "standing.safetyCalmLadder.3": "rank",
+        "standing.safetyCalmLadder.4": "rank",
+        "standing.safetyUsualRange.thorp.0": "rank",
+        "standing.safetyUsualRange.thorp.1": "rank",
+        "standing.safetyUsualRange.hamlet.0": "rank",
+        "standing.safetyUsualRange.hamlet.1": "rank",
+        "standing.safetyUsualRange.village.0": "rank",
+        "standing.safetyUsualRange.village.1": "rank",
+        "standing.safetyUsualRange.town.0": "rank",
+        "standing.safetyUsualRange.town.1": "rank",
+        "standing.safetyUsualRange.city.0": "rank",
+        "standing.safetyUsualRange.city.1": "rank",
+        "standing.safetyUsualRange.metropolis.0": "rank",
+        "standing.safetyUsualRange.metropolis.1": "rank",
+        "standing.meritPoints": "points",
+        "standing.weatheredWithinYears": "years",
+        "standing.endorsedMinReasons": "count",
+        "standing.lastingAgeBySize.thorp": "years",
+        "standing.lastingAgeBySize.hamlet": "years",
+        "standing.lastingAgeBySize.village": "years",
+        "standing.lastingAgeBySize.town": "years",
+        "standing.lastingAgeBySize.city": "years",
+        "standing.lastingAgeBySize.metropolis": "years",
+        "standing.weatheredSeverity": "rank",
+        "standing.rulerTroubleKinds.0": "rank",
+        "standing.rulerTroubleKinds.1": "rank",
+        "standing.rulerTroubleKinds.2": "rank",
+        "standing.rulerTroubleKinds.3": "rank",
+        "standing.rulerTroubleKinds.4": "rank",
+        "standing.rulerTroubleKinds.5": "rank"
+      },
+      "band": null,
+      "note": "FORTUNE-1 U1 (FS5, the chair's rulings of 2026-11-20 10:33 UTC): the fortune law's one table, read only under _fortuneLawVersion 2 and DARK while its dial is at the default. developmentFigure replaces the tier bonus 0,0,0,1,1,2 (the pooled mean of the removed terms, seeds hxe); magicScale replaces the magic tier scale 0,0,0.3,0.6,1.0,1.4 (the town's); depthExpectation is each size's measured median count of trades (hxe); standing.prosperityPoints equal today's PROSPERITY_CONTRIB on purpose (the chair's second column, Prosperous 24, changes here); standing.defenceUsualRange is p10 to p90 of each size's defence band (hxe), four points a band outside it within plus or minus ten; standing.safetyCalmLadder is the calm safety labels lowest first (safetyProfile.js's five base labels, vocabulary the rule reads) and standing.safetyUsualRange is p10 to p90 of each size's band of it (hxe; FORTUNE-3 U5s, the chair's ruling of 15:58 UTC, U5-PROPOSAL section 3), a label outside it worth its own points less the nearest band's.; standing.meritPoints (10 a counted merit, only upward, only at Tolerated or better), standing.weatheredWithinYears (40, a generation) and standing.endorsedMinReasons (2) are the merits of rule (FORTUNE-3 U5a, U5-PROPOSAL section 10, the chair's rulings of 2026-11-20 15:30 to 19:38 UTC), with their vocabulary standing.weatheredSeverity and standing.rulerTroubleKinds (read, not chosen). standing.lastingAgeBySize is the second merit, a place that has lasted (FORTUNE-7 U7, the chair's decision E32 of 2026-11-22 04:51 UTC): each size's p90 of history.age (nearest rank, ceil(0.9*150) - 1, 150 visitor births a size; BANDS.md, re-measured unchanged in AGES.md), thorp 269, hamlet 108, village 225, town 276, city 441, metropolis 731; DRAFT, for the owner's signing. In plain words: a hamlet's lasting age (108) is below a thorp's (269) because the age table draws a hamlet's age from 30 to 120 years and a thorp's from 15 to 300 (src/data/historyData.js :: AGE_BY_TIER); that is a property of the age's own generator, told to the chair, not cured in this unit. The proposal's sections 10 and 15. Registered DRAFT in the minting commit, signed by none, the owner's to sign."
+    },
+    "src/domain/trouble/troubleLaw.js#TROUBLE_WEIGHT_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "crimeWave.read": "rank",
+        "crimeWave.floor": "probability",
+        "crimeWave.ceiling": "probability",
+        "crimeWave.readLow": "points",
+        "crimeWave.readHigh": "points",
+        "guildConflict.read": "rank",
+        "guildConflict.floor": "probability",
+        "guildConflict.ceiling": "probability",
+        "guildConflict.readLow": "count",
+        "guildConflict.readHigh": "count",
+        "smallPlaceCrime.read": "rank",
+        "smallPlaceCrime.floor": "probability",
+        "smallPlaceCrime.ceiling": "probability",
+        "smallPlaceCrime.readLow": "points",
+        "smallPlaceCrime.readHigh": "points"
+      },
+      "band": null,
+      "note": "KINDS-1 K1 (6a5132049), its crime row re-set by K3 to the chair's choice B50 of 2026-11-20 22:10 UTC: the trouble law's one table, read only under _troubleLawVersion 2, which its dial (NEW_SETTLEMENT_TROUBLE_LAW_VERSION) mints on every new birth: LIT AT POINT 116 ON 2026-11-25 BY THE TENTH CHAIR'S DECISION, THE OWNER HAVING DEFERRED THE QUESTION TO IT; ITS NUMBERS STAY DRAFTS UNTIL THE OWNER'S TUNING SIGNATURE (this note read \"DARK while its dial is at the default\" until that day). A row's chance runs from its floor at readLow to its ceiling at readHigh, straight between, flat beyond, the midpoint for an absent read; under law 2 each replaces one of today's fixed numbers in historyGenerator.js :: buildHistoricalEvent. crimeWave: the crime coin's chance (today 0.5) from 0.05 at a crime strength (economicState.compound.criminalEffective) of 20 to 0.50 at 90. guildConflict: the guild swap's chance per fill pick (today 0.3) from 0.05 at 1 economy power on the roster to 0.25 at 4. smallPlaceCrime: a thorp, hamlet or village's crime wave where a fence, smuggler, bandit or outlaw house stands (today always) from 0.50 at a crime strength of 15 to 0.90 at 60. Each read leaf names what its row reads (vocabulary, not chosen). FOR THE OWNER'S SIGNING: docs/chair/2026-11-20/content/kinds/FOR-THE-OWNER.md (the measured table, with the alternatives A and B). Registered DRAFT, signed by none."
+    },
+    "src/domain/trouble/troubleLaw.js#LAW_ONE_TROUBLE_BARS": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "crimeWave": "probability",
+        "guildSwap": "probability"
+      },
+      "band": null,
+      "note": "Law one's two bars, today's values, moved from historyGenerator.js :: buildHistoricalEvent by KINDS-1 K1 (6a5132049), not changed: crimeWave 0.5 (a place with a criminal house draws a crime wave first where _rng() > 0.5) and guildSwap 0.7 (a fill pick is swapped for a guild conflict where _rng() > 0.7). The law-1 (dark default) values, byte for byte; registered DRAFT by KINDS-1 K3, signed by none."
     }
   },
   "roles": {
@@ -2813,9 +3407,39 @@
         "sites": 1,
         "introducedAt": "b7a5f778e355c38d439cace06939967f22a8cf8d",
         "cause": "SELF-VOUCH (the eighth formal judgment, record_coherence_battery): the receipt clips a battery finding's quoted evidence at BATTERY_QUOTE_MAX = 160 characters instead of a bare 160; the register scores the act it exists to encourage, as the T13 Car P' and X-51 rows did; the name earns its register row when the owner signs the estate (LANDING-2, the cloud chair's ruling under ODQ §934.105)"
+      },
+      "src/generators/people/ties.js": {
+        "sites": 1,
+        "introducedAt": "141383cd47d2ef8e32be24a01dbd1ad400943e00",
+        "cause": "PEOPLE-4 TIES (R-P7, the chair's one-tie target rule, PEOPLE-RULINGS §1): the target weight is the house's X-45 weight, 0.5 for a weight-0 house, x SHARED_POWER_FACTOR = 3 when the two share a power; the ruled values written where they are read. Attributed by PEOPLE-LAND (2026-11-07) at the landing, the lane having banked neither; the names earn their register row when the owner signs the estate (SHARED_POWER_FACTOR = 3)"
+      },
+      "src/domain/display/stateProse/economyStateProse.js": {
+        "sites": 3,
+        "introducedAt": "725b62eb50599f0a1f1d4bda8328a20130e02296",
+        "cause": "W1 ECO construction (725b62eb5, WIRING-RULINGS R-W1, the fourteen generation facts said in the economy section): the three share thresholds at which a desk key is spoken, FAMINE_MOST_FROM = 50, BROUGHT_IN_FROM = 20 and INFLUENCE_WEIGHS_FROM = 60, named where they are read. Display-side pool-key gates, no generated byte. Attributed by MERGE-WAVE (2026-11-08) at the W1 ECO merge point, the lane having banked none; the names earn their register row when the owner signs the estate"
+      },
+      "src/generators/foodLand.js": {
+        "sites": 4,
+        "introducedAt": "b46048140467b9a597b66259d93cfb54507524d0",
+        "cause": "GREEN-TIP (2026-11-10, b46048140, the foodGenerator <-> isolationSupport import-cycle cure; the chair's STOP-2 ruling, ODQ \u00a7934.105): RELOCATION, NET ZERO. The four custom-content food constants CUSTOM_PRODUCER_CAPACITY_PER_ITEM 0.15, CUSTOM_PRODUCER_CAPACITY_CAP 0.6, CUSTOM_CONSUMER_NEED_PER_ITEM 0.1 and CUSTOM_CONSUMER_NEED_CAP 0.5 moved byte-for-byte with foodLandOf from src/generators/foodGenerator.js into the new leaf (the moved 168-line block is cmp-identical to the lines removed); foodGenerator loses exactly these four. No tuning figure enters the product."
+      },
+      "src/domain/display/shadowEconomyShown.js": {
+        "sites": 1,
+        "introducedAt": "63c3f2ae73a7ea8af74950580e3b50f20fba5631",
+        "cause": "TAIL-EXPORTS-PDF batch 1 (63c3f2ae7, the chair's ruling E1: the export prints what the tab prints, through the tab's own leaf) named the Economics tab's Shadow Economy floor SHADOW_CAPTURE_FLOOR instead of the tab's inline bare 3; TAIL-DISPLAY-ECON-5 (1f41c23dc, the chair's ruling X30) set it to 11, the record's own floor for its criminal income share (economicState.js: blackMarketCapture > 10, a whole number). No tuning constant says it: the 10 in economicState.js is a bare integer. The name earns its register row when the owner signs (TAIL-CLOSE-SRC-2, the owner's veto list)."
+      },
+      "src/generators/economy/prosperity.js": {
+        "sites": 1,
+        "introducedAt": "2ac50c55dd0ef292df64b9ac76b2cad18e35f7be",
+        "cause": "TAIL-DEFECON-3 batch 3 (2ac50c55d, D2, #10700: one home for the income mix's spread): INCOME_LEADER_FROM = 20, the income row share at or over which 'Highly diversified' is not said, the same number as LEADER_FROM in display/stateProse/economyStateProse.js (pinned equal by tests/generators/tailDefeconBatch3Lines.test.js); the prose desk stays out of the generators' first-paint graph, so neither file may import the other's. The name earns its register row when the owner signs (TAIL-CLOSE-SRC-2, the owner's veto list)."
       }
     },
     "bareDecimals": {
+      "src/generators/foodLand.js": {
+        "sites": 7,
+        "introducedAt": "b46048140467b9a597b66259d93cfb54507524d0",
+        "cause": "GREEN-TIP (2026-11-10, b46048140, the foodGenerator <-> isolationSupport import-cycle cure; the chair's STOP-2 ruling, ODQ \u00a7934.105): RELOCATION, NET ZERO. foodLandOf's seven bare decimals 0.25, 0.10, 0.10, 0.09, 0.08, 0.5 and 2.0 moved byte-for-byte with the function from src/generators/foodGenerator.js (48 -> 41, the same seven) into the new leaf (the moved 168-line block is cmp-identical to the lines removed). No tuning figure enters the product."
+      },
       "src/domain/worldPulse/thievesGuild.js": {
         "sites": 2,
         "introducedAt": "754856b125828dc555359d6df0e0632be9636a09",
@@ -2830,6 +3454,16 @@
         "sites": 1,
         "introducedAt": "1c527831aae8f745de94b7c9d87f0e7a59806a8a",
         "cause": "X-46 car 4 U2 (the population tilt): the settlement's place inside its population band is centred at 0.5 before PARTICULAR_TILTS.population scales it, so a place at the middle of its band tilts by zero; the 0.5 is the band's midpoint, not a tuning value (LANDING-2, ODQ §934.105)"
+      },
+      "src/generators/people/ties.js": {
+        "sites": 1,
+        "introducedAt": "141383cd47d2ef8e32be24a01dbd1ad400943e00",
+        "cause": "PEOPLE-4 TIES (R-P7, the chair's one-tie target rule, PEOPLE-RULINGS §1): the target weight is the house's X-45 weight, 0.5 for a weight-0 house, x SHARED_POWER_FACTOR = 3 when the two share a power; the ruled values written where they are read. Attributed by PEOPLE-LAND (2026-11-07) at the landing, the lane having banked neither; the names earn their register row when the owner signs the estate (the bare 0.5)"
+      },
+      "src/domain/display/stateProse/warFaithStateProse.js": {
+        "sites": 1,
+        "introducedAt": "86a30fdf270fffa1f1bfe2542c45a48bfcf531d0",
+        "cause": "W4 PEOPLE construction (86a30fdf2, WIRING-RULINGS R-W1, the faith and great-house construction C1-C5): the heresy pool's band, `heresyIntensity >= 0.5` (at or above one half the church hunts, below it preaches), written where it is read; a display-side pool-key gate, no generated byte. Attributed by MERGE-WAVE (2026-11-08) at the W4 PEOPLE merge point, the lane having banked none; the value earns its register row when the owner signs the estate"
       }
     }
   },

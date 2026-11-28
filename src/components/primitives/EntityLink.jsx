@@ -1,6 +1,7 @@
 import { swatch, FS } from '../theme.js';
 import { useDossierEntities } from '../dossier/DossierEntityContext.jsx';
 import { isMentionAllowed } from '../../domain/dossier/linkMentions.js';
+import { institutionHouseLabel } from '../../domain/display/institutionDisplayName.js';
 
 /**
  * EntityLink — an inline, in-dossier cross-reference. Renders an entity's
@@ -38,6 +39,7 @@ import { isMentionAllowed } from '../../domain/dossier/linkMentions.js';
  * @param {boolean} [props.verbatim] Render `fallback` verbatim (a pronoun link)
  *                                   rather than the resolved current name.
  * @param {object} [props.style]     Extra inline style merged onto the link.
+ * @param {import('react').Key} [props.key]  A list key; React consumes it, the link never reads it.
  */
 export default function EntityLink({ id, type, fallback = '', verbatim = false, style }) {
   const { index, navigateToEntity, scope } = useDossierEntities();
@@ -46,8 +48,13 @@ export default function EntityLink({ id, type, fallback = '', verbatim = false, 
   // Broken, unresolved, or identity-ambiguous references stay plain text. An
   // imported collision must never turn "first record wins" into navigation, and
   // an object this viewer may not open is never a door (X-20 (d)).
+  // ROUND THREE, ruling (a): a door to a HOUSE prints the house's label, the one display leaf (no
+  // catalogue count range, household range, gate or condition). The index keeps the raw name, which
+  // the lookups and the mention linker match on; only the printed word is the label.
+  const house = (entry?.type || type) === 'institution';
+  const printed = (/** @type {string} */ t) => (house && t ? institutionHouseLabel(t) : t);
   if (!entry || !isMentionAllowed(scope, entry)) {
-    const text = fallback || '';
+    const text = printed(fallback || '');
     return text ? (
       <span
         data-entity-type={type}
@@ -59,7 +66,7 @@ export default function EntityLink({ id, type, fallback = '', verbatim = false, 
   }
 
   // A pronoun link keeps the wrapped word; a name link resolves the live name.
-  const destination = entry.currentName || fallback || entry.label || '';
+  const destination = printed(entry.currentName || fallback || entry.label || '');
   const label = verbatim ? fallback : destination;
 
   const activate = (e) => {

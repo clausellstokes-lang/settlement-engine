@@ -1,0 +1,217 @@
+diff --git a/src/data/arrivalProse.js b/src/data/arrivalProse.js
+index ebbea5275..dfbb99c56 100644
+--- a/src/data/arrivalProse.js
++++ b/src/data/arrivalProse.js
+@@ -86,7 +86,7 @@ export const ARRIVAL_SENSES = Object.freeze([
+     trade: ['baked goods', 'milled flour', 'flour', 'bread', 'grain surplus'],
+     lines: [
+       { text: () => 'The smell of fresh bread meets you on the road in.', colour: true }, // R-AO (CENSUS-2f): read; presumes nothing
+-      { text: () => 'Someone has been baking since before dawn, and the air still carries it.', colour: true },
++      { text: () => 'Someone has been baking since before dawn, and the air still carries it.', colour: true, excludes: ['crisis: hunger'] }, // TAIL-HISTORY batch 1 (the chair's Y4; READ-ALL 18339): no bread offered where the food failed
+       { text: () => 'A mill wheel turns somewhere close, and flour dust drifts on the breeze.', needs: ['institution: mill'] },
+       { text: () => 'The warm smell of an oven reaches you before the first doorway does.', colour: true },
+     ],
+@@ -133,14 +133,14 @@ export const ARRIVAL_SENSES = Object.freeze([
+       { text: () => "Gulls quarrel over the fish stalls, and the air smells of the morning's catch.", needs: ['market', 'navigable', 'fish'] },
+       { text: () => 'A fishmonger shouts a price over the slap of wet baskets.', needs: ['fish', 'market'] }, // W2-FIX-DATA: a price is shouted at a market (c05)
+       { text: () => 'Nets hang drying on poles, and the smell of the catch follows you.', needs: ['fish'] },
+-      { text: () => 'A basket of fish, still flapping, is carried past at a run.', needs: ['fish'] },
++      { text: () => 'A basket of fish, still flapping, is carried past at a run.', needs: ['fish'], excludes: ['crisis: hunger'] }, // TAIL-HISTORY batch 1 (the chair's Y4; READ-ALL 02382): no fresh catch under a siege or where the food failed
+     ],
+     dominant: [
+       // CENSUS-2f, R-AP amended: the dominant pool is picked by the exports' fish trade, which guarantees the trade and no
+       // catch; the racks of catch and the gutting declare `fish`, the gulls' water `navigable`, both where both.
+       { text: () => 'Racks of drying fish line the way in, and the smell of salt and catch is everywhere.', needs: ['navigable', 'fish'] },
+       { text: (n) => `Half of ${n} seems to be gutting, salting or selling fish.`, needs: ['fish'] },
+-      { text: () => 'Barrels of salt fish stand stacked for the carts, and the gulls have opinions about every one.', needs: ['navigable'] },
++      { text: () => 'Barrels of salt fish stand stacked by the water, and the gulls have opinions about every one.', needs: ['navigable'] }, // TAIL-HISTORY batch 1 (the chair's Y4; READ-ALL 04287): "stacked for the carts" printed under a siege, when no cart leaves; reworded to name no carts, so no condition and no new line in the pool (VETOABLE wording, the owner's)
+     ] },
+   { key: 'cloth',
+     institutions: ['weaver', 'weavers', 'textile', 'fuller', 'dyer', 'tailor', 'clothier', 'draper'],
+@@ -295,7 +295,7 @@ export const ARRIVAL_PEOPLE = Object.freeze({
+     () => 'An apprentice hurries past on an errand, a master\'s mark stitched on his sleeve.',
+     () => 'Two neighbours argue over a boundary stone, each quoting what their grandfathers agreed.',
+     () => 'A craftsman shows off a finished piece in his doorway, and passers-by judge it out loud.',
+-    { text: () => 'A notice of the next fair is nailed up beside a doorway, and someone is reading it aloud for the others.', needs: ['market'] },
++    { text: () => 'A notice of the next fair is nailed up beside a doorway, and someone is reading it aloud for the others.', needs: ['market'], excludes: ['crisis: under_siege'] }, // TAIL-HISTORY batch 1 (the chair's Y4; READ-ALL 02866 HIGH): no fair is drawn under a siege
+   ],
+   latin: [
+     { text: () => 'A patron moves through the crowd with clients at their heels, greeting people by name.', needs: ['tier: ≥ town'], crisis: ['any'] }, // W2-FIX-DATA: a crowd and a patron's clients (c09 at 33)
+@@ -310,7 +310,7 @@ export const ARRIVAL_PEOPLE = Object.freeze({
+     { text: () => 'An old judge listens to two neighbours by a gate and says nothing until both are finished.', crisis: ['any'] },
+   ],
+   arabic: [
+-    () => 'A broker sits in the shade, matching buyers to goods from routes you have never travelled.',
++    { text: () => 'A broker sits in the shade, matching buyers to goods from routes you have never travelled.', excludes: ['crisis: under_siege'] }, // TAIL-HISTORY batch 1 (the chair's Y4; READ-ALL 02414): no goods come by road under a siege
+     { text: () => 'Travellers are offered water before anyone asks their business.', excludes: ['crisis: under_siege'] }, // W2-FIX-DATA: no traveller reaches a besieged gate (c12)
+     () => 'Two partners go over their accounts in a courtyard with a mediator sitting between them.',
+     { text: () => 'A merchant swears an oath on his scales, and the buyer watches the scales anyway.', needs: ['market'] }, // W2-FIX-DATA-HISTORY item F (CENSUS-2 kind a): the same
+@@ -328,13 +328,13 @@ export const ARRIVAL_PEOPLE = Object.freeze({
+     { text: () => 'A work party heads out together, singing, with tools on their shoulders.', crisis: ['any'] },
+   ],
+   east_asian: [
+-    () => 'A clerk records every cartload that passes in a careful ledger.',
++    { text: () => 'A clerk records every cartload that passes in a careful ledger.', excludes: ['crisis: under_siege'] }, // TAIL-HISTORY batch 1 (the chair's Y4; READ-ALL 02470): no cartload passes under a siege
+     () => 'An elder settles a quarrel in a quiet voice before it can grow loud enough to need anyone else.',
+     { text: () => 'Tea is poured for a merchant before the bargaining begins, and the bargaining waits for it.', needs: ['market'] }, // W2-FIX-DATA-HISTORY item F (CENSUS-2 kind a): a merchant bargains where a market stands
+     { text: () => 'Each lane seems to keep to its own trade, and each trade to its own lane.', needs: ['tier: ≥ town'] }, // W2-FIX-DATA-HISTORY item F (ww-541): lanes of trades are a town's (a hamlet of 31 has a handful of houses)
+   ],
+   mesoamerican: [
+-    () => 'Porters bent under loaded frames file past, and someone counts them in.',
++    { text: () => 'Porters bent under loaded frames file past, and someone counts them in.', excludes: ['crisis: under_siege'] }, // TAIL-HISTORY batch 1 (the chair's Y4; READ-ALL 15806): nothing is carried in under a siege
+     () => 'The neighbours turn out together to sweep and mend their own street.',
+     () => 'Festival banners hang above the doors, faded from one year and waiting for the next.',
+     { text: () => 'Craftspeople sit in rows, each row a different trade, each worker deep in their own work.', needs: ['market'] }, // W2-FIX-DATA-3 (REVIEW-W2A-3 #2): rows to each trade are a market's (a thorp of twelve printed it)
+@@ -342,7 +342,7 @@ export const ARRIVAL_PEOPLE = Object.freeze({
+   south_asian: [
+     () => 'A moneylender sits at a low table with a queue of familiar faces waiting.',
+     () => 'People draw water in an order nobody needs to explain.',
+-    () => 'Food is being handed out to anyone who asks, and the line is patient.',
++    { text: () => 'Food is being handed out to anyone who asks, and the line is patient.', excludes: ['crisis: hunger'] }, // TAIL-HISTORY batch 1 (the chair's Y4; READ-ALL 09279 HIGH): no food offered where the food failed
+     { text: () => 'Each lane of stalls has someone who speaks for it, and they are all speaking at once.', needs: ['market'] },
+   ],
+   steppe: [
+diff --git a/src/data/historyData.js b/src/data/historyData.js
+index e1495c6de..09eb88e08 100644
+--- a/src/data/historyData.js
++++ b/src/data/historyData.js
+@@ -1196,8 +1196,8 @@ export const HISTORICAL_EVENTS_DATA = [
+       'A standing levy roster kept ready in the town archive',
+     ],
+     plotHooks: [
+-      'The threat is being exaggerated by someone who profits from wartime contracts',
+-      'A diplomatic channel exists that the war party is suppressing',
++      { text: 'The threat is being exaggerated by someone who profits from wartime contracts', excludes: ['war: peace'] }, // TAIL-HISTORY batch 1 (the chair's Y1; READ-ALL 22261, 02538, B02462): a war's words, where a war is in force
++      { text: 'A diplomatic channel exists that the war party is suppressing', excludes: ['war: peace'] }, // TAIL-HISTORY batch 1 (the chair's Y1; READ-ALL 22261, 02538, B02462): a war's words, where a war is in force
+       'The threat has an agent already inside the settlement',
+     ],
+     severity: ['major', 'catastrophic'],
+diff --git a/src/data/stressTypes.js b/src/data/stressTypes.js
+index f85ee28bb..9e937f92d 100644
+--- a/src/data/stressTypes.js
++++ b/src/data/stressTypes.js
+@@ -110,8 +110,11 @@ export const STRESS_TYPE_MAP = {
+     probability: 0.03,
+     requiresTier: null,
+     crisisHook:
+-      "Three different powers have approached the players for support, each believing they represent the legitimate or best claim. All three are partly right.",
+-    viabilityNote: "Big decisions wait for a new leader, and in the meantime each office does as it sees fit.",
++      // TAIL-HISTORY batch 1 (the chair's Y2; READ-ALL 00169 HIGH, 04385): "three different powers" and "each office"
++      // printed in a thorp of one power and no office; the words now claim no plurality of powers and no office (no
++      // atom counts the powers or the offices: a reword, no draw). VETOABLE wording (the owner's).
++      "The would-be successors have each approached the players for support, each believing theirs is the legitimate or best claim. Each of them is partly right.",
++    viabilityNote: "Big decisions wait for a new leader, and in the meantime the place gets by on old habit.",
+     historyColour: "political",
+   },
+   monster_pressure: {
+@@ -132,8 +135,10 @@ export const STRESS_TYPE_MAP = {
+     requiresTier: null,
+     crisisHook:
+       "The governing power knows what is happening but cannot admit it publicly without legitimising the insurgency. They need something done that cannot be official.",
++    // TAIL-HISTORY batch 1 (the chair's Y2; READ-ALL 18890): "some offices" printed in a hamlet of one headman; the
++    // households pay or refuse in every place. VETOABLE wording (the owner's).
+     viabilityNote:
+-      "Taxes are disputed, some offices no longer send their revenue on, and the government runs on habit.",
++      "Taxes are disputed, some households no longer pay at all, and the government runs on habit.",
+     historyColour: "political",
+   },
+   religious_conversion: {
+diff --git a/tests/data/tailHistoryBatch1.test.js b/tests/data/tailHistoryBatch1.test.js
+new file mode 100644
+index 000000000..e28dc7c7a
+--- /dev/null
++++ b/tests/data/tailHistoryBatch1.test.js
+@@ -0,0 +1,93 @@
++/**
++ * TAIL-HISTORY batch 1 (2026-11-14; the chair's rulings Y1, Y2, Y4 over READ-ALL's HISTORY worklist): each row was
++ * verified false by the census record in the towns named here (`r2r-<size>-<i>` every dial random; `r2s-<crisis>-<size>-<i>`
++ * the crisis forced), and cured at its table.
++ *
++ * THIS FILE REDS WHEN a town prints one of those lines again where its record makes it false, or when a town it is true
++ * in loses it (each KEEP names the sibling that still prints).
++ */
++import { beforeAll, describe, expect, test } from 'vitest';
++import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
++
++import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
++import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
++import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
++
++const dials = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
++
++/** A census town, as its births script makes it. */
++const bornCensus = (/** @type {string} */ seed) => {
++  const forced = /^r2s-(.+)-(thorp|hamlet|village|town|city|metropolis)-\d+$/.exec(seed);
++  const calm = /^r2r-(thorp|hamlet|village|town|city|metropolis)-\d+$/.exec(seed);
++  const tier = forced ? forced[2] : /** @type {RegExpExecArray} */ (calm)[1];
++  const cfg = forced ? { ...DEFAULT_CONFIG, ...dials, settType: tier, selectedStressesRandom: false, selectedStresses: [forced[1]] } : { ...DEFAULT_CONFIG, ...dials, settType: tier };
++  return generateSettlementPipeline(birthConfig(cfg), null, { seed, customContent: {} });
++};
++
++/** @param {any} town */
++const crises = (town) => [town.stress].flat().filter(Boolean).map((/** @type {any} */ c) => String(c.type));
++/** @param {any} town */
++const historyText = (town) => JSON.stringify(town.history || {});
++/** @param {any} town */
++const arrivalText = (town) => JSON.stringify(town.arrivalScene || {});
++/** @param {any} town */
++const crisisText = (town) => JSON.stringify([town.stress, town.stressors].flat().filter(Boolean).map((/** @type {any} */ c) => [c.crisisHook, c.viabilityNote]));
++
++const WAR_HOOKS = /wartime contracts|the war party is suppressing/;
++
++describe('TAIL-HISTORY batch 1: the rows cured at the history group\'s tables', () => {
++  beforeAll(async () => { await loadGenerationLawPayloads(); }, 120_000);
++
++  // Y1 (READ-ALL 22261, 02538, B02462): the external threat's war hooks printed where no war is in force (a beast and
++  // raider threat, or no crisis at all): 74, 79 and 17 towns. They now need a war (`war: peace` excluded).
++  test('Y1: no war hook of the external threat where no war is in force', () => {
++    expectNoSeedFailures(collectSeedFailures(['r2r-city-17', 'r2r-city-22', 'r2r-hamlet-14', 'r2r-hamlet-25'], (seed) => {
++      const town = bornCensus(seed);
++      expect(crises(town).filter((c) => ['wartime', 'occupied', 'under_siege'].includes(c)), seed).toEqual([]);
++      expect(historyText(town).match(WAR_HOOKS), seed).toBe(null);
++    }), 'no war hook in peace');
++  }, 240_000);
++  test('Y1 KEEP: the war hooks still print where a war is in force', () => {
++    expectNoSeedFailures(collectSeedFailures(['r2r-hamlet-5', 'r2r-metropolis-4'], (seed) => {
++      const town = bornCensus(seed);
++      expect(WAR_HOOKS.test(historyText(town)), `${seed} keeps a war hook`).toBe(true);
++    }), 'the war hooks at war');
++  }, 240_000);
++
++  // Y2 (READ-ALL 00169 HIGH, 04385, 18890): "three different powers", "each office" and "some offices" printed in
++  // thorps and hamlets of one power and no office (12, 15 and 19 towns). Reworded: no plurality of powers, no office.
++  test('Y2: the succession void and the insurgency name no powers or offices a small place lacks', () => {
++    expectNoSeedFailures(collectSeedFailures(['r2s-succession_void-hamlet-1', 'r2s-succession_void-hamlet-2', 'r2r-thorp-22'], (seed) => {
++      const town = bornCensus(seed);
++      const text = crisisText(town);
++      expect(text, seed).not.toMatch(/Three different powers|each office does|some offices no longer/);
++      expect(/would-be successors have each|gets by on old habit|some households no longer pay/.test(text), `${seed} prints its crisis's reworded line`).toBe(true);
++    }), 'the reworded crisis texts');
++  }, 240_000);
++
++  // Y4 (READ-ALL 02866 HIGH, 09279 HIGH, 15806, 04287, 02414, 02470, 02382, 18339): arrival lines of traffic by road or
++  // water under a siege, and of food offered where the food failed (a siege or a famine).
++  test('Y4: no arrival line of traffic under a siege, nor of food offered under a siege or a famine', () => {
++    expectNoSeedFailures(collectSeedFailures([
++      'r2s-under_siege-hamlet-3', 'r2s-under_siege-metropolis-0', 'r2s-under_siege-village-0', 'r2s-under_siege-thorp-0',
++      'r2s-under_siege-metropolis-2', 'r2s-under_siege-thorp-3', 'r2s-famine-hamlet-1', 'r2r-metropolis-14',
++      'r2s-famine-thorp-0', 'r2s-under_siege-hamlet-2', 'r2r-village-58',
++    ], (seed) => {
++      const town = bornCensus(seed);
++      const text = arrivalText(town);
++      expect(crises(town).some((c) => c === 'under_siege' || c === 'famine'), `${seed} is under a siege or a famine`).toBe(true);
++      expect(text, seed).not.toMatch(/notice of the next fair|Porters bent under loaded frames|goods from routes you have never travelled|records every cartload|still flapping|handed out to anyone who asks|baking since before dawn/);
++    }), 'no traffic or offered food under the siege or the famine');
++  }, 600_000);
++  test('Y4 KEEP: the same lines still print where no siege or famine stands', () => {
++    expectNoSeedFailures(collectSeedFailures(['r2r-metropolis-16', 'r2r-city-16', 'r2r-city-13', 'r2r-hamlet-17'], (seed) => {
++      const town = bornCensus(seed);
++      expect(/notice of the next fair|Porters bent under loaded frames|handed out to anyone who asks|stacked by the water/.test(arrivalText(town)), `${seed} keeps its arrival line`).toBe(true);
++    }), 'the arrival lines in peace');
++  }, 240_000);
++  test('Y4: the salt fish name no carts, in a siege or out of one', () => {
++    expectNoSeedFailures(collectSeedFailures(['r2r-thorp-58', 'r2s-under_siege-hamlet-0', 'r2r-hamlet-17'], (seed) => {
++      expect(arrivalText(bornCensus(seed)), seed).not.toMatch(/salt fish stand stacked for the carts/);
++    }), 'the salt fish wait for no carts');
++  }, 240_000);
++});

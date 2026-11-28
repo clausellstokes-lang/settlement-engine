@@ -52,7 +52,8 @@ describe('PIN 1 — factionRoles: the structural-NPC write/read join', () => {
     for (const npc of npcs) {
       expect(npc.id).toMatch(/^npc\.merchant_guild_/);
       expect(npc.id).not.toContain('stale_alias');
-      expect(npc.linkedFactionIds).toEqual(['faction.stable']);
+      // PEOPLE-LAND re-key (M-2): the placeholder's power is its membership, named by the CANONICAL name.
+      expect(npc.memberships).toEqual([{ power: nameOf(divergent()), rank: 1, share: 1 }]);
     }
   });
 
@@ -61,7 +62,7 @@ describe('PIN 1 — factionRoles: the structural-NPC write/read join', () => {
     // The index exactly as ensureFactionStructuralNpcs builds it.
     const seatByName = new Map([[String(seat.faction || seat.name || '').toLowerCase(), seat]]);
     const [npc] = generateFactionStructuralNpcs(seat, []);
-    expect(seatByName.has(String(npc.factionAffiliation).toLowerCase())).toBe(true);
+    expect(seatByName.has(String(npc.memberships[0].power).toLowerCase())).toBe(true); // PEOPLE-LAND: the membership (M-2)
   });
 });
 

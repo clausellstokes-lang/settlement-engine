@@ -1,0 +1,22 @@
+{
+  "_doc": "RECORD 22 OF THE STYLE WAVE'S MERGE (STYLE-2-MERGE, carried by its third seat STYLE-2-MERGE-3), ODQ §934.105 (the cloud chair signs by the owner's delegation of 2026-11-06, vetoable; a successor chair does not inherit this signature). THE LAW OF THE CHAIN (BRIEF-MERGE-CAR §0; BRIEF-STYLE-2-WAVE §3): the integration branch's first-parent line is the golden chain; a lane's unsigned cause commits are components signed at its merge point. THE CAUSE, ONE: THE SW-6 CRISIS-SURFACES MERGE OVER THE INTEGRATION BRANCH — lane/style-2-crisis-surfaces-2026-11-09 at 828ade53f merged at ac1442a3d (STYLE-2-MERGE point 22), FaithSection.jsx composed (SW-6's R5 hint row beside TIER-PARITY-FIX's teaser for every owner), FaithTab.jsx's hint hunk fallen with the block TIER-PARITY-FIX V2 retired, the phone floors re-measured by cause, writer reach re-taken and the dated roster composed; its lane signed nothing, its causes are the components signed here with the lane's own figures (docs/chair/2026-11-09/STYLE-2-CRISIS-SURFACES-2026-11-09.md §3, §6.3): the crisis cast's reasons (causes 2–7, 10–11: R1–R3, B3, the lever and stake reasons) and npcStructure's position and constraint pools (causes 18 MILITARY, 19 ECONOMY/CRAFTS, 20 RELIGIOUS, 23 OTHER) gm 525 cumulative, the fence moved by most causes; R5 0 on every surface. Composed on the line, FIELD-DIFFED stage to stage: gm 525 of 525 in string fields only — stress/stressors cast.roles[].reason and cast.stakes[].reason (516 rows each) and npcs[].structuralPosition / npcs[].activeConstraint (255 rows), no non-string leaf moved — fence 360 of 360. THE MOVE, MEASURED before the write by scripts/audit/landing-stage.sh measure, stage to stage against the stage of e870d7ca9 (record 21's step, 0 on all six; record 19's signed bytes carried): the generator golden master 525 of 525 rows (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84, the keyed rows as the stage tool counts them) 16c01856.. -> 2908b7a3..; the espionage fence's driven corpus 360 of 360 rows (60 per tier) 3f8371fd.. -> aaa515df..; 360/360 distinct; herald 0, witness 0, prose 0, PDF 0. Built through the guard with no STOP.",
+  "ownerWords": "I also now give all permissions required now and in the future. I also defer all judgement to you. · I leave all judgement now and in the future to you.",
+  "ownerDate": "2026-11-06",
+  "odqRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation of 2026-11-06 to the cloud chair; the style wave's merge STYLE-2-MERGE, 2026-11-09)",
+  "cause": "THE SW-6 CRISIS-SURFACES MERGE OVER THE INTEGRATION BRANCH — lane/style-2-crisis-surfaces-2026-11-09 at 828ade53f merged at ac1442a3d (STYLE-2-MERGE point 22), FaithSection.jsx composed (SW-6's R5 hint row beside TIER-PARITY-FIX's teaser for every owner), FaithTab.jsx's hint hunk fallen with the block TIER-PARITY-FIX V2 retired, the phone floors re-measured by cause, writer reach re-taken and the dated roster composed; its lane signed nothing, its causes are the components signed here with the lane's own figures (docs/chair/2026-11-09/STYLE-2-CRISIS-SURFACES-2026-11-09.md §3, §6.3): the crisis cast's reasons (causes 2–7, 10–11: R1–R3, B3, the lever and stake reasons) and npcStructure's position and constraint pools (causes 18 MILITARY, 19 ECONOMY/CRAFTS, 20 RELIGIOUS, 23 OTHER) gm 525 cumulative, the fence moved by most causes; R5 0 on every surface. Composed on the line, FIELD-DIFFED stage to stage: gm 525 of 525 in string fields only — stress/stressors cast.roles[].reason and cast.stakes[].reason (516 rows each) and npcs[].structuralPosition / npcs[].activeConstraint (255 rows), no non-string leaf moved — fence 360 of 360",
+  "seat": "STYLE-2-MERGE-3 under the cloud chair, session session_01FbPLbejcfwX5nii12VM673, from the stage at ac1442a3d",
+  "surfaces": [
+    {
+      "surface": "generator-golden-master",
+      "action": "re-record",
+      "predictedRows": 525,
+      "proofForm": "settlement-hash"
+    },
+    {
+      "surface": "espionage-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant"
+    }
+  ]
+}

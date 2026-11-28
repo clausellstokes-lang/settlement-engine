@@ -1,0 +1,214 @@
+diff --git a/src/domain/facts/birthKinds.js b/src/domain/facts/birthKinds.js
+new file mode 100644
+index 000000000..d5d2ff77e
+--- /dev/null
++++ b/src/domain/facts/birthKinds.js
+@@ -0,0 +1,33 @@
++/**
++ * PROTOTYPE (BIRTH-AUDIT, scratch only; never pushed under src/): the kind of a house by catalogue id, and the rule switch.
++ * BIRTH_RULE (environment, a comma list): R1 the reader's rule everywhere; R1p the reader's rule at print only; R2 the
++ * import written at the birth; R3a the source house gated at its draw (the draw skipped); R3b gated, the draw kept;
++ * R4 the source house read as worked out; R5 the salt works on a coast. NOOP_<site> runs the site's code and changes nothing.
++ * Import-free leaf.
++ */
++const ENV = (typeof process !== 'undefined' && process.env && process.env.BIRTH_RULE) || '';
++export const RULE = new Set(ENV.split(',').map((x) => x.trim()).filter(Boolean));
++/** (i) BUYS AND WORKS: catalogue ids (kinds.mjs). */
++export const BUYS_AND_WORKS = new Set([
++  'blacksmith', 'blacksmiths_3_10', 'resident_smith_part_time', 'specialized_metalworkers', 'smelter',
++  'brewer', 'brewery', 'maltster', 'mill', 'mills_2_5', 'bakers_5_15', 'alehouse', 'butchers_3_8',
++  'carpenter', 'carpenter_part_time', 'carpenters_5_15', 'cooper', 'woodcarver', 'shipyard', 'river_boatyard', 'bowyer_fletcher', 'thatcher',
++  'sawmill', 'sawmill_commercial',
++  'cobbler', 'cobbler_s_guild', 'tanner_established', 'tanners', 'tannery', 'furrier_s_district',
++  'fuller', 'weavers_textile_workers', 'tailor', 'tailor_s_guild', 'dyer', 'ropemaker', 'chandler',
++  'potter', 'brickmaker', 'vintner', 'glassblower', 'glassmakers', 'apothecary', 'alchemist_shop', 'luxury_goods_quarter',
++  'fish_market', 'fishmonger',
++]);
++/** (ii) IS THE SOURCE, gated at the draw by R3 (the four the census marks by a gap): id -> the grounds that give it. */
++export const SOURCE_GROUNDS = Object.freeze({
++  stone_quarry: ['stone_quarry'],
++  charcoal_burner: ['managed_forest', 'mountain_timber', 'shipbuilding_timber'],
++  dairy_farmer: ['grazing_land', 'alpine_pasture', 'fertile_floodplain', 'camel_herds'],
++  salt_works: ['salt_flats', 'desert_salt', 'fishing_grounds'],
++});
++/** R2: the imports list's own words for a chain key's good. */
++export const IMPORT_WORD = Object.freeze({
++  wool: 'Wool', alpineWool: 'Wool', timber: 'Timber', mountainTimber: 'Timber', ironOre: 'Iron ore', copperOre: 'Iron ore', preciousMetals: 'Iron ore',
++  hides: 'Raw hides and animal products', grain: 'Grain', clay: 'Clay and raw materials', grapes: 'Grapes and must',
++  livestock: 'Livestock', sand: 'Glass sand', desertGlass: 'Glass sand', herbs: 'Medicinal herbs', fish: 'Salted fish',
++});
+diff --git a/src/domain/facts/houseInputAtHand.js b/src/domain/facts/houseInputAtHand.js
+index e74df09fc..74cb78594 100644
+--- a/src/domain/facts/houseInputAtHand.js
++++ b/src/domain/facts/houseInputAtHand.js
+@@ -41,6 +41,7 @@ import { canonStressors } from '../canonicalAccessors.js'; // EG1: the war read
+ import { institutionMatchesKeyword } from '../institutions/institutionCategory.js';
+ import { catalogIdForName } from '../../data/institutionalCatalog.js';
+ import { resourceShortageImport } from '../resourceSemantics.js';
++import { RULE, BUYS_AND_WORKS } from './birthKinds.js'; // BIRTH-AUDIT prototype
+ import { SPENT_GROUND_YIELD, SPENT_GROUND_WORKERS, GROUNDS_WORKED_OFF_CHAIN, INPUT_GAP_HELD_EVERYWHERE, HOUSE_TRADE_INPUT } from '../../data/crisisDependence.js';
+ 
+ /**
+@@ -165,8 +166,11 @@ export function localProducerSupplies(requirement, institutions) {
+  * @param {{ name?: unknown, [key: string]: unknown } | null | undefined} house the house asked about
+  * @returns {'local' | 'route' | 'imported' | 'missing'}
+  */
+-export function houseInputAtHand(record, chainKey, house, chain) {
++export function houseInputAtHand(record, chainKey, house, chain, opts) {
+   const spec = CHAIN_INPUTS[chainKey];
++  const houseId = String((house && typeof house.catalogId === 'string' && house.catalogId) || catalogIdForName(str(house?.name)) || '');
++  const rule1 = RULE.has('R1') || (RULE.has('R1p') && !opts?.atBirth);
++  if (RULE.has('NOOP_read')) void (BUYS_AND_WORKS.has(houseId) && rule1);
+   const raw = str(chain?.rawResource);
+   const config = record?.config || {};
+   const es = record?.economicState || {};
+@@ -177,6 +181,8 @@ export function houseInputAtHand(record, chainKey, house, chain) {
+   const native = [...keys, ...keys.flatMap((k) => arr(/** @type {Record<string, { commodities?: unknown } | undefined>} */ (RESOURCE_DATA)[k]?.commodities))].map(str).map(norm).join('|');
+   const rawNames = [raw, ...terrainSynonymsFor(raw)];
+   if (words.some((w) => holds(native, w)) || rawNames.some((n) => holds(native, n))) return 'local';
++  // BIRTH-AUDIT R5: on a coast the sea is the salt works' brine
++  if (RULE.has('R5') && chainKey === 'desertSalt' && (str(config.tradeRouteAccess) === 'port' || str(config.terrainOverride) === 'coastal')) return 'local';
+   // What the town makes names the RAW good itself (never the chain's product).
+   if (arr(es.localProduction).some((e) => rawNames.some((n) => wholeTokens(str(e), n)))) return 'local';
+   // HW1 (BAR4-SCENES-2): a house on a ground wholly spent is not its own producer, and a house that works the ground itself
+@@ -197,7 +203,7 @@ export function houseInputAtHand(record, chainKey, house, chain) {
+   const names = [raw, spec?.raw, spec?.noun, ...terrainSynonymsFor(raw)].filter((x) => typeof x === 'string' && x !== '');
+   const routeHouse = institutionHasAnyTag(house || {}, [...ROUTE_HOUSE_TAGS]);
+   if (!besieged && hasTradeRouteConnection(str(config.tradeRouteAccess))
+-    && (routeHouse || (spec?.route && !needListNames(record, /** @type {string[]} */ (names))))) return 'route';
++    && (routeHouse || (spec?.route && !needListNames(record, /** @type {string[]} */ (names))) || (rule1 && BUYS_AND_WORKS.has(houseId)))) return 'route';
+ 
+   // The imports bring the raw good; the food record names the source or imports the staple.
+   if (imports.some((imp) => !WORKED_GOOD.test(imp.replace(/\([^)]*\)/g, ' ')) && names.some((n) => wholeTokens(imp, /** @type {string} */ (n))))) return 'imported';
+@@ -255,6 +261,8 @@ export function housesOnSpentGround(settlement) {
+     const tradeId = String(catalogIdForName(house) ?? '');
+     if (Object.prototype.hasOwnProperty.call(HOUSE_TRADE_INPUT, tradeId) && !SPENT_READ_HELD.includes(tradeId)) continue;
+     const works = SPENT_GROUND_WORKERS.includes(String(catalogIdForName(house) ?? '')); // an import feeds a buyer, never the work on the ground
++    // BIRTH-AUDIT R1: a buyer on a spent ground is fed by a connected road no siege shuts
++    if ((RULE.has('R1') || RULE.has('R1p')) && !works && BUYS_AND_WORKS.has(tradeId) && hasTradeRouteConnection(String(/** @type {any} */ (s).config?.tradeRouteAccess ?? '')) && !arr(/** @type {any} */ (s).config?.stressTypes).includes('under_siege')) continue;
+     const allSpent = own.every((c) => spent.has(/** @type {string} */ (c.resourceKey)) && c.status !== 'magically_sustained'
+       && (works || !imports.has(String(resourceShortageImport(/** @type {string} */ (c.resourceKey)) ?? ''))));
+     if (!allSpent) continue;
+diff --git a/src/generators/cascadeGenerator.js b/src/generators/cascadeGenerator.js
+index 61c16ac49..e05b0b10b 100644
+--- a/src/generators/cascadeGenerator.js
++++ b/src/generators/cascadeGenerator.js
+@@ -3,6 +3,8 @@
+ // Shared cascade helpers for the settlement generation pipeline.
+ 
+ import { random as _rng } from '../kernel/rngContext.js';
++import { RULE as BIRTH_RULE, SOURCE_GROUNDS } from '../domain/facts/birthKinds.js'; // BIRTH-AUDIT prototype
++import { catalogIdForName as birthIdForName } from '../data/institutionalCatalog.js';
+ import { institutionalCatalog, institutionRowGuardsPass } from '../data/institutionalCatalog.js';
+ import { densityFactor, isDensityExempt, scaleChance } from '../data/institutionBudget.js';
+ import { institutionToggleFor } from './institutionToggleReader.js';
+@@ -201,7 +203,12 @@ function applyCascadeInstitutions(institutions, tier, opts = {}) {
+         const baseChance   = d === 1 ? (data.baseChance || 0) : scaleChance(data.baseChance || 0, d);
+         // Cap: cascade gives a second chance but can't guarantee appearances
+         // Lower cap means cascades supplement rather than dominate generation
+-        const cascadeChance = Math.min(baseChance * boost, 0.45);
++        // BIRTH-AUDIT R3 (prototype): the cascade draws no source house where the land does not give its material
++        const birthGrounds = SOURCE_GROUNDS[String(birthIdForName(name) || '')];
++        const birthBarren = !!birthGrounds && (BIRTH_RULE.has('R3a') || BIRTH_RULE.has('R3b')) && !birthGrounds.some((k) => (opts.nearbyResources || []).includes(k))
++          && !(BIRTH_RULE.has('R5') && String(birthIdForName(name)) === 'salt_works' && (tradeRoute === 'port' || terrainType === 'coastal'));
++        if (birthBarren && BIRTH_RULE.has('R3a')) return;
++        const cascadeChance = birthBarren ? 0 : Math.min(baseChance * boost, 0.45);
+         if (added.length >= cascadeCap) return; // cap reached
+         if (_rng() < cascadeChance) {
+           // Carry the full catalog def (desc/tags/priorityCategory/...) like
+diff --git a/src/generators/resourceGenerator.js b/src/generators/resourceGenerator.js
+index 41a788cbb..df5aba4c7 100644
+--- a/src/generators/resourceGenerator.js
++++ b/src/generators/resourceGenerator.js
+@@ -15,7 +15,11 @@ import {
+   nativeSemanticResourceKeys,
+ } from '../domain/content/customContentSemanticAuthority.js';
+ import { availableNativeResourceKeys, nativeResourceConditionRecords } from '../domain/resourceSemantics.js';
+-import { waterAccessKind } from '../domain/tradeRouteSemantics.js';
++import { waterAccessKind, hasTradeRouteConnection } from '../domain/tradeRouteSemantics.js';
++import { RULE, BUYS_AND_WORKS, IMPORT_WORD } from '../domain/facts/birthKinds.js'; // BIRTH-AUDIT prototype
++import { CHAIN_INPUTS, CHAIN_RAW_INPUT, chainsOfHouse } from '../domain/facts/houseInputAtHand.js';
++import { HOUSE_TRADE_INPUT } from '../data/crisisDependence.js';
++import { catalogIdForName } from '../data/institutionalCatalog.js';
+ import { MATERIAL_RESOURCE_KEYS, liveMaterialFor } from './economy/localMaterials.js';
+ import { houseHead, houseInputAtHand, houseRunsChain, localProducerSupplies, terrainSynonymsFor, tradeFinisherIn } from '../domain/facts/houseInputAtHand.js';
+ 
+@@ -464,7 +468,7 @@ const evaluateInstitutionDeps = (exploitation, institutions = [], gaps = [], res
+ // split in 67 rows of the census's 720 (a caravanserai on a connected road "lacked camels"; a sawmill the page called
+ // answered by the grove's "Sacred wood").
+ const supplyOfInput = (chainKey, institution, institutions, evidence = {}) =>
+-  houseInputAtHand({ ...evidence, institutions }, chainKey, institution, RESOURCE_CHAINS[chainKey]);
++  houseInputAtHand({ ...evidence, institutions }, chainKey, institution, RESOURCE_CHAINS[chainKey], { atBirth: true });
+ 
+ // Does another of this house's chains feed it? Worked here (fully or partly exploited), or its input held locally or
+ // bought in. M-S, read by evaluateInstitutionChain's lacks-access row.
+@@ -621,6 +625,24 @@ export const generateResourceAnalysis = (
+     nativeInstitutions,
+     nearbyResources,
+   );
++  // BIRTH-AUDIT R2 (prototype): the input of a house that buys and works joins the imports where nothing here answers it
++  if ((RULE.has('R2') || RULE.has('NOOP_import')) && economicState && hasTradeRouteConnection(String(config.tradeRouteAccess ?? ''))
++    && !(Array.isArray(config.stressTypes) ? config.stressTypes : []).includes('under_siege')) {
++    const rec = { config, economicState, resourceAnalysis: { imports }, institutions: nativeInstitutions };
++    const add = [];
++    for (const inst of nativeInstitutions) {
++      const id = String(inst.catalogId || catalogIdForName(inst.name) || '');
++      if (!BUYS_AND_WORKS.has(id)) continue;
++      const trade = HOUSE_TRADE_INPUT[id];
++      const ks = (trade && trade !== 'luxury' ? [trade] : chainsOfHouse(inst.name, RESOURCE_CHAINS).map(([k]) => k)).filter((k) => CHAIN_INPUTS[k]);
++      if (!ks.length) continue;
++      if (ks.some((k) => houseInputAtHand(rec, k, inst, RESOURCE_CHAINS[k] || { rawResource: CHAIN_RAW_INPUT[k] }, { atBirth: true }) !== 'missing')) continue;
++      const w = IMPORT_WORD[ks[0]];
++      if (w && !add.includes(w)) add.push(w);
++    }
++    const have = Array.isArray(economicState.primaryImports) ? economicState.primaryImports : [];
++    if (RULE.has('R2') && add.length) economicState.primaryImports = [...have, ...add.filter((w) => !have.includes(w))];
++  }
+   const gaps           = evaluateInstitutionChain(
+     exploitation,
+     nativeInstitutions,
+diff --git a/src/generators/steps/assembleInstitutions.js b/src/generators/steps/assembleInstitutions.js
+index 936ac238f..d6ab48163 100644
+--- a/src/generators/steps/assembleInstitutions.js
++++ b/src/generators/steps/assembleInstitutions.js
+@@ -44,6 +44,8 @@ import { isCategoryEnabled as sharedIsCategoryEnabled } from '../categoryToggleR
+ import { institutionToggleFor } from '../institutionToggleReader.js';
+ import { threatDefensePlan } from '../threatDefensePolicy.js';
+ import { UPGRADE_CHAINS } from '../../data/institutionLadders.js';
++import { RULE as BIRTH_RULE, SOURCE_GROUNDS } from '../../domain/facts/birthKinds.js'; // BIRTH-AUDIT prototype
++import { catalogIdForName as birthIdForName } from '../../data/institutionalCatalog.js';
+ /** A description that says a settlement builds, sells or supplies ships, or sells the day's catch (A-11). */
+ const SHIP_WORD = /\bships?\b|\bday's catch\b|\bfish (?:doesn't|does not|will not) wait\b|\bkeeps no better than a day\b/i;
+ 
+@@ -301,6 +303,11 @@ function rowRoll(env, category, name, inst, institutions, d) {
+     population,
+     presentNames: new Set(institutions.map(i => i.name)),
+   })) return null;
++  // BIRTH-AUDIT R3 (prototype): a house that IS the source of its material is not drawn where the land does not give it
++  const birthGrounds = (BIRTH_RULE.has('R3a') || BIRTH_RULE.has('R3b') || BIRTH_RULE.has('NOOP_draw')) ? SOURCE_GROUNDS[String(birthIdForName(name) || '')] : null;
++  const birthBarren = !!birthGrounds && !birthGrounds.some((k) => nativeNearbyResources.includes(k))
++    && !(BIRTH_RULE.has('R5') && String(birthIdForName(name)) === 'salt_works' && (tradeRoute === 'port' || terrainType === 'coastal'));
++  if (birthBarren && BIRTH_RULE.has('R3a')) return null;
+   const baseChance = getBaseChance(
+     d === 1 ? inst.baseChance : scaleChance(inst.baseChance, d), category, name, effectiveConfig, neighbour, goodsToggles
+   );
+@@ -316,6 +323,7 @@ function rowRoll(env, category, name, inst, institutions, d) {
+   const drawn = d === 1
+     ? baseChance * resourceMult > 0
+     : getBaseChance(inst.baseChance, category, name, effectiveConfig, neighbour, goodsToggles) * resourceMult > 0;
++  if (birthBarren && BIRTH_RULE.has('R3b')) return { baseChance: 0, resourceMult, p: 0, drawn };
+   return { baseChance, resourceMult, p: Math.min(1, baseChance * resourceMult), drawn };
+ }
+ 
+diff --git a/src/generators/steps/cascadePass.js b/src/generators/steps/cascadePass.js
+index 8ca7f7a4b..cb3ecea10 100644
+--- a/src/generators/steps/cascadePass.js
++++ b/src/generators/steps/cascadePass.js
+@@ -50,6 +50,7 @@ registerStep('cascadePass', {
+     population: typeof population === 'number' ? population : null,
+     // THE ONE DENSITY FACTOR (RUNG1B-F6): the settlement's own, read as assembleInstitutions reads it.
+     density: settlementDensity(ctx),
++    nearbyResources: Array.isArray(ctx.nearbyResources) ? ctx.nearbyResources : [], // BIRTH-AUDIT prototype (R3)
+   });
+   if (cascadeAdditions.length > 0) {
+     // A-11 (chair ruling, round 3, 3b): an added row takes its ship-free text inland.

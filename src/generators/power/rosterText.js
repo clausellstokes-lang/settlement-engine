@@ -1,0 +1,236 @@
+/**
+ * power/rosterText.js — EVERY TEXT THAT NAMES A POWER READS THE FINAL ROSTER (COHERENCE-POWERS-3, F2; REVIEW-POWERS
+ * F2). The density law sizes the roster at assembly (density/applyDensityLaw.js :: resizePoliticalRoster: the seats,
+ * the fold, the power with no house), after the power step wrote each power's standing sentence
+ * (power/factionStanding.js :: annotateFactionStanding) and the history step wrote its tensions' parties. A sentence
+ * that names a power the page no longer shows, or ranks a power against powers the page does not show, is written
+ * again from the final roster; a tension's party that left is pruned, or, where it was folded into the ruler of its
+ * own kind, re-pointed to that ruler (the party is still in the quarrel, under the ruler's name). No draw: the
+ * standing is the factionStanding table's own sentence for the final roster, and every other line is left as it
+ * was born.
+ */
+import { annotateFactionStanding } from './factionStanding.js';
+import { MERCHANT_CRAFT_VOTE } from '../factionDynamics.js';
+import { legitimacyHeldTensions } from '../../data/historyData.js'; // BAR4-HISTORY C26792
+import { inferFactionCategory } from './factionCategories.js';
+import { backingArchetypeOf, RULER_KINDS } from '../../domain/dossier/powerSupport.js';
+import { defenseFactsOf, forceWordsOf } from '../../domain/defense/defenseFacts.js';
+import { isMaterializedCustomContent } from '../../domain/content/customContentSemanticAuthority.js';
+
+/** @typedef {{ faction: string, power?: number, isGoverning?: boolean, desc?: string }} RosterSeat */
+
+/**
+ * The roster as the standing sentences read it: by power, the strongest first, ties in the roster's order (the order
+ * the power step annotates on: factionDynamics.js :: applyLegitimacyMultipliers's re-sort), each seat a copy with no
+ * description.
+ * @param {ReadonlyArray<Record<string, any>>} factions @returns {RosterSeat[]}
+ */
+export function standingRosterOf(factions) {
+  return (Array.isArray(factions) ? factions : [])
+    .map((f) => ({ faction: String(f?.faction || ''), power: Number(f?.power) || 0, isGoverning: f?.isGoverning === true, desc: '' }))
+    .filter((f) => f.faction)
+    .sort((a, b) => b.power - a.power);
+}
+
+/**
+ * The force the standing sentences name, as the power step reads it (rulingStructure.js :: generatePowerStructure: the
+ * native roster's defence words).
+ * @param {unknown} institutions @returns {{ body: string }}
+ */
+export function standingForceOf(institutions) {
+  const native = (Array.isArray(institutions) ? institutions : []).filter((house) => !isMaterializedCustomContent(house));
+  return forceWordsOf(defenseFactsOf({ institutions: native }));
+}
+
+/**
+ * Each power's standing sentence on a roster, by name, and its rank there.
+ * @param {RosterSeat[]} roster the standing roster (standingRosterOf) @param {{ body: string }} force @param {{ publicLegitimacy?: unknown, factionRelationships?: unknown } | null} [seat] its seat's legitimacy, for the coup reading (C14176); the record's relation rows, where a settle hands them (13G)
+ * @returns {Map<string, { standing: string, rank: number }>}
+ */
+function standingsOf(roster, force, seat = null) {
+  const seats = roster.map((f) => ({ ...f, desc: '' }));
+  annotateFactionStanding(seats, force, seat); // BAR4-HISTORY C14176 (the chair's FS2): the seat's legitimacy, for the rank-1 line's coup reading
+  return new Map(seats.map((f, rank) => [f.faction, { standing: String(f.desc || ''), rank }]));
+}
+
+/**
+ * The power each name that left the roster folded into, where it did: a power of the ruler's own kind goes into the
+ * ruler (power/rulerKin.js :: settleHouselessPowers, the fold); any other power that left was trimmed or not built.
+ * @param {string[]} gone @param {RosterSeat[]} finalRoster @returns {Map<string, string>}
+ */
+function foldedInto(gone, finalRoster) {
+  const ruler = finalRoster.find((f) => f.isGoverning) || null;
+  const kindOf = (/** @type {string} */ name) => backingArchetypeOf({ faction: name, category: inferFactionCategory(name) });
+  const rulerKind = ruler ? kindOf(ruler.faction) : null;
+  const out = new Map();
+  if (!ruler || !RULER_KINDS.includes(rulerKind)) return out;
+  for (const name of gone) if (kindOf(name) === rulerKind) out.set(name, ruler.faction);
+  return out;
+}
+
+/**
+ * The descriptions' standing sentences settled to the final roster. `annotated` is the roster the power step's
+ * standing sentences were written on (standingRosterOf, taken before the resize). A power whose sentence the final
+ * roster no longer gives it (it names a power that left, or was written for a rank or figures it no longer holds;
+ * COHERENCE-POWERS-7) takes the sentence the final roster gives it, in place of the old one at its description's end. A power whose description does not end in the old sentence (a
+ * description another step rewrote) is left as it is. Returns the same object where nothing moves.
+ * @template {{ factions?: Array<Record<string, any>> }} P
+ * @param {P} powerStructure the final roster @param {RosterSeat[]} annotated @param {{ body: string }} force
+ * @returns {P}
+ */
+export function settleStandingToRoster(powerStructure, annotated, force) {
+  const factions = Array.isArray(powerStructure?.factions) ? powerStructure.factions : null;
+  if (!factions || !annotated.length) return powerStructure;
+  const finalRoster = standingRosterOf(factions);
+  const before = standingsOf(annotated, force, { publicLegitimacy: /** @type {{ publicLegitimacy?: unknown }} */ (powerStructure)?.publicLegitimacy }); // BAR4-HISTORY C14176
+  const after = standingsOf(finalRoster, force, { publicLegitimacy: /** @type {{ publicLegitimacy?: unknown }} */ (powerStructure)?.publicLegitimacy, factionRelationships: /** @type {{ factionRelationships?: unknown }} */ (powerStructure)?.factionRelationships }); // 13G (N97): the AFTER read carries the record's rows (the tie read bought at the coherence seam), the BEFORE read the power step's
+  let moved = false;
+  const next = factions.map((f) => {
+    const name = String(f?.faction || '');
+    // COHERENCE-POWERS-7 (#291): a density-law rival is minted as a copy of its host, its host's standing sentence included;
+    // a power new to the roster whose description ends in another power's old sentence settles from it (POWERS-11: by desc)
+    const host = before.get(name) ? null : hostByStanding(String(f?.desc || ''), before);
+    const old = before.get(name) || (host ? before.get(host) : undefined);
+    const now = after.get(name);
+    if (!old || !now || old.standing === now.standing) return f;
+    // COHERENCE-POWERS-7 (cold list REVIEW-W2A-3 #109 #713): a sentence the final roster no longer gives is settled
+    // whether or not the rank moved — the figures moved under it ("a slow war with the guild" after the guild left)
+    const desc = String(f.desc || '');
+    const base = !old.standing ? desc : desc === old.standing ? '' : desc.endsWith(` ${old.standing}`) ? desc.slice(0, -old.standing.length - 1) : null; // FAULTS-WATCH item 3 (BR30 (3)): a power with NO old standing (13g) takes the final roster's sentence at its end
+    if (base === null) return f;
+    moved = true;
+    return { ...f, desc: base && now.standing ? `${base} ${now.standing}` : (base || now.standing) };
+  });
+  return moved ? { ...powerStructure, factions: next } : powerStructure;
+}
+
+/**
+ * The tensions' parties settled to the final roster: a party that left is pruned, or re-pointed to the ruler it folded
+ * into (once). `annotated` names the roster before the resize, so a party that was never a power (the hoarders, the
+ * desperate poor) is never touched. Returns the same object where nothing moves.
+ * @template {{ currentTensions?: Array<Record<string, any>> }} H
+ * @param {H} history @param {{ factions?: Array<Record<string, any>> }} powerStructure @param {RosterSeat[]} annotated
+ * @returns {H}
+ */
+export function settleTensionsToRoster(history, powerStructure, annotated) {
+  history = legitimacyToSeat(history, powerStructure); // BAR4-HISTORY C26792: first, the legitimacy read against the seat
+  const tensions = Array.isArray(history?.currentTensions) ? history.currentTensions : null;
+  if (!tensions || !annotated.length) return history;
+  const finalRoster = standingRosterOf(powerStructure?.factions || []);
+  const onPage = new Set(finalRoster.map((f) => f.faction));
+  const gone = new Set(annotated.map((f) => f.faction).filter((name) => !onPage.has(name)));
+  if (!gone.size) return history;
+  const into = foldedInto([...gone], finalRoster);
+  let moved = false;
+  const next = tensions.map((t) => {
+    const parties = Array.isArray(t?.factions) ? t.factions : null;
+    if (!parties || !parties.some((p) => gone.has(String(p)))) return t;
+    moved = true;
+    /** @type {string[]} */
+    const settled = [];
+    for (const p of parties) {
+      const name = gone.has(String(p)) ? into.get(String(p)) : String(p);
+      if (name && !settled.includes(name)) settled.push(name);
+    }
+    return { ...t, factions: settled };
+  });
+  return moved ? { ...history, currentTensions: next } : history;
+}
+
+/**
+ * BAR4-HISTORY C26792 (the chair's grant, 2026-11-16): the legitimacy tension read against the record's final legitimacy:
+ * where the seat is approved or endorsed, its "openly and widely questioned" takes its twin, and where it is not, its own
+ * form (historyData.js :: legitimacyHeldTensions, which the history step and its section regeneration read too). Draw-free.
+ * Returns the same object where nothing moves.
+ * @template {{ currentTensions?: Array<Record<string, any>> }} H
+ * @param {H} history @param {{ factions?: Array<Record<string, any>>, publicLegitimacy?: { isApproved?: boolean } }} powerStructure @returns {H}
+ */
+function legitimacyToSeat(history, powerStructure) {
+  const tensions = Array.isArray(history?.currentTensions) ? history.currentTensions : null;
+  const next = tensions ? legitimacyHeldTensions(tensions, powerStructure) : tensions;
+  return next === tensions ? history : { ...history, currentTensions: next };
+}
+
+/**
+ * The relationships' narratives settled to the final roster: the merchants' and craftsmen's vote names the landholding
+ * power and needs it (factionDynamics.js :: MERCHANT_CRAFT_VOTE, a declared pair); where that power left, the row takes
+ * the pair's sibling, which names none (the refused-winner rule: no roll). Returns the same object where nothing moves.
+ * @template {{ factions?: Array<Record<string, any>>, factionRelationships?: Array<Record<string, any>> }} P
+ * @param {P} powerStructure @param {RosterSeat[]} annotated @returns {P}
+ */
+export function settleNarrativesToRoster(powerStructure, annotated) {
+  const rows = Array.isArray(powerStructure?.factionRelationships) ? powerStructure.factionRelationships : null;
+  if (!rows || !annotated.length) return powerStructure;
+  const onPage = new Set(standingRosterOf(powerStructure?.factions || []).map((f) => f.faction));
+  const gone = annotated.map((f) => f.faction).filter((name) => !onPage.has(name));
+  if (!gone.length) return powerStructure;
+  let moved = false;
+  const next = rows.map((row) => {
+    const [merchants, craft] = Array.isArray(row?.pair) ? row.pair.map(String) : [];
+    if (!merchants || !craft) return row;
+    if (!gone.some((name) => row.narrative === MERCHANT_CRAFT_VOTE.against(merchants, craft, name))) return row;
+    moved = true;
+    return { ...row, narrative: MERCHANT_CRAFT_VOTE.sibling(merchants, craft) };
+  });
+  return moved ? { ...powerStructure, factionRelationships: next } : powerStructure;
+}
+
+/**
+ * The power whose old standing sentence a description ends in (or consists of): the host a density-law rival was minted
+ * from, read from the rival's own description, the settle's own test for a sentence at a description's end. Where
+ * several old sentences end it (two merchant powers share a closing sentence), the longest, the whole tail it carries.
+ * @param {string} desc @param {Map<string, { standing: string, rank: number }>} before @returns {string | null}
+ */
+function hostByStanding(desc, before) {
+  let host = null;
+  let best = 0;
+  for (const [name, { standing }] of before) {
+    if (standing && standing.length > best && (desc === standing || desc.endsWith(` ${standing}`))) { host = name; best = standing.length; }
+  }
+  return host;
+}
+
+/**
+ * FORTUNE U5a (the census's W2, the chair's ruling (3) of 2026-11-20 16:45 UTC): the descriptions' standing sentences
+ * settled to a MOVED LEGITIMACY, on the same roster. The merits of rule (domain/fortune/fortuneMerits.js) re-band the
+ * seat's standing after the sentences were written at the birth's band, and the rank-1 line's coup reading reads the
+ * band's multiplier; so each power's sentence is computed at the previous legitimacy and at the stored one, and where
+ * they differ the old sentence at a description's end gives way to the new, exactly as `settleStandingToRoster` swaps
+ * it. At the END of the file so no line the faction-reader register cites moves. Draw-free and pure (the input is
+ * never mutated); returns the same object where nothing moves, so a second run (the stored legitimacy on both sides)
+ * moves nothing.
+ * @template {{ factions?: Array<Record<string, any>>, publicLegitimacy?: unknown }} P
+ * @param {P} powerStructure the roster, carrying the stored legitimacy @param {unknown} previousLegitimacy the
+ * legitimacy the sentences were written at @param {{ institutions?: unknown } | null | undefined} record the record,
+ * for its houses (`standingForceOf`, as `steps/assembleSettlement.js` reads them for `settleStandingToRoster`)
+ * @returns {P}
+ */
+export function settleStandingToLegitimacy(powerStructure, previousLegitimacy, record) {
+  const factions = Array.isArray(powerStructure?.factions) ? powerStructure.factions : null;
+  if (!factions || previousLegitimacy === powerStructure?.publicLegitimacy) return powerStructure;
+  const roster = standingRosterOf(factions);
+  const force = standingForceOf(record?.institutions);
+  const before = standingsOf(roster, force, { publicLegitimacy: previousLegitimacy, factionRelationships: /** @type {{ factionRelationships?: unknown }} */ (powerStructure)?.factionRelationships }); // 13G (N97): BOTH reads carry the record's rows (the roster's settle already read them)
+  const after = standingsOf(roster, force, { publicLegitimacy: powerStructure?.publicLegitimacy, factionRelationships: /** @type {{ factionRelationships?: unknown }} */ (powerStructure)?.factionRelationships });
+  let moved = false;
+  const next = factions.map((f) => {
+    const name = String(f?.faction || '');
+    const old = before.get(name);
+    const now = after.get(name);
+    if (!old || !now || old.standing === now.standing) return f;
+    const desc = String(f.desc || '');
+    /** @type {string | null} */
+    let base = null;
+    if (!old.standing) {
+      base = desc;
+    } else if (desc === old.standing) {
+      base = '';
+    } else if (desc.endsWith(` ${old.standing}`)) {
+      base = desc.slice(0, -old.standing.length - 1);
+    }
+    if (base === null) return f;
+    moved = true;
+    return { ...f, desc: base && now.standing ? `${base} ${now.standing}` : (base || now.standing) };
+  });
+  return moved ? { ...powerStructure, factions: next } : powerStructure;
+}

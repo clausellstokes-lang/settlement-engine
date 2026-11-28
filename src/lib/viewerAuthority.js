@@ -53,8 +53,9 @@
  * DOCUMENT the divergence because closing it changes which users see the NPC
  * authoring levers — paid-surface behaviour. With the owner's word it consults
  * this predicate, so the Create flow's levers and the Workbench Change Dock now
- * open and close together. OutputContainer keeps a census row for a SEPARATE
- * read (`viewerIsPremium`, War & Faith tab presence) under 'content-visibility'.
+ * open and close together. OutputContainer is now a plain consumer: TIER-PARITY-FIX
+ * V2 (2026-11-09) deleted its separate `viewerIsPremium` read (War & Faith tab
+ * presence) and struck its census row with it.
  */
 
 /** The account tiers that hold dossier-authoring authority on their own. */

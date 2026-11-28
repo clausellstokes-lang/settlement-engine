@@ -506,7 +506,7 @@ function politicalFractureGate(snapshot, pressure) {
   const coupEcho = echoStrengthAt(snapshot, sid, 'coup_detat');
   return gateResult([
     legitimacy < 30
-      ? { mult: 1.6, reason: 'Legitimacy is in open crisis; every ruling claim is contestable.' }
+      ? { mult: 1.6, reason: 'Hardly anyone here still accepts the rulers\' right to rule.' }
       : legitimacy < 45 && { mult: 1.3, reason: 'The rulers are merely tolerated, and barely that.' },
     here.has('succession_void') && { mult: 1.4, reason: 'An empty seat invites rival claims to law itself.' },
     coupEcho > 0.15 && { mult: 1.3, reason: 'The recent coup left the constitution in splinters.' },
@@ -750,7 +750,13 @@ function rebellionGate(snapshot, pressure) {
       ? { mult: 1.7, reason: 'The rulers have lost the streets.' }
       : legitimacy < 45 && { mult: 1.3, reason: 'Public patience with the rulers is spent.' },
     (here.has('famine') || here.has('indebtedness'))
-      && { mult: 1.3, reason: 'Bread and debt: the oldest fuel of uprisings.' },
+      && {
+        mult: 1.3,
+        // STYLE-2 C2 (SW-12): the line says only which of the two the gate read.
+        reason: here.has('famine') && here.has('indebtedness')
+          ? 'People here are going hungry, and are deep in debt besides.'
+          : here.has('famine') ? 'People here are going hungry.' : 'People here are deep in debt.',
+      },
     here.has('wartime') && { mult: 1.25, reason: 'War taxes grind the commons toward revolt.' },
     // W-SEAT D4 (SEAT-2b). No occupied arm is needed here: this gate already returns null
     // under occupation, by its own two-lines-up rule that insurgency models the resistance.
@@ -817,7 +823,7 @@ function marketShockGate(snapshot, pressure) {
     links === 0 && { mult: 0.3, reason: 'A near-closed economy has little market to shock.' },
     isEntrepot(entry.settlement) && { mult: 1.3, reason: 'An entrepôt lives and dies by the flow of goods.' },
     near.has('market_shock') && { mult: 1.4, reason: 'The panic is already spreading along the trade roads.' },
-    here.has('indebtedness') && { mult: 1.3, reason: 'Leveraged ledgers amplify every tremor.' },
+    here.has('indebtedness') && { mult: 1.3, reason: 'Debts already weigh on this place, so a fall in trade hits it all the harder.' },
     nativeInstitutionClassValue(entry.settlement, 'finance') >= 1
       && { mult: 0.8, reason: 'Established finance houses can absorb a run.' },
   ]);
@@ -888,7 +894,7 @@ function magicDeadzoneGate(snapshot, pressure) {
     instabilityEcho > 0.15
       && { mult: 1.5, reason: 'The burned-out surge left dead ground behind it.' },
     signals.length >= 2
-      && { mult: 1.3, reason: `Magic is load-bearing here: ${signals.slice(0, 2).join('; ')}.` },
+      && { mult: 1.3, reason: `This place leans on magic: ${signals.slice(0, 2).join('; ')}.` },
     nativeInstitutionClassValue(entry.settlement, 'arcane') >= 1
       && { mult: 0.8, reason: 'Standing wards resist the silence, for now.' },
   ], [
@@ -1016,7 +1022,7 @@ function coupSpawnGate(snapshot, pressure) {
     reasons: [
       'Legitimacy is openly contested; the seat stands exposed.',
       `Governing authority ${authority < 30 ? 'is crumbling' : authority < 50 ? 'is strained' : 'still holds'}.`,
-      `Factions with the power to move: ${challengers.map(c => c.name).join(', ')}.`,
+      `Powers strong enough to move: ${challengers.map(c => c.name).join(', ')}.`,
     ],
   };
 }

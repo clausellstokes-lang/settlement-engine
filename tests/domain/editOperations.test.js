@@ -802,8 +802,9 @@ describe('EM-B1a — the op vocabulary, the fourteen home ops, and the world hal
     // cannot tell a sentence from an assignment proves neither.)
     // 5, then 13 at RUNG1B-F7: the crisis cast's roles[].name and levers[].holderName at its
     // four homes (src/domain/factionRename.js :: CRISIS_CAST_HOMES).
-    expect(NPC_RENAME_SURFACES.length, 'the thirteen declared join surfaces are live, or the scan'
-      + ' below measures nothing').toBe(13);
+    // 13 -> 12 at PEOPLE-5B (M-7): the grouping's member copy `factions[].members[].name` left with the grouping.
+    expect(NPC_RENAME_SURFACES.length, 'the twelve declared join surfaces are live, or the scan'
+      + ' below measures nothing').toBe(12);
     const surfaceHits = (text) => NPC_RENAME_SURFACES.map((s) => s.path).filter((p) => text.includes(p));
     const plantedWrite = `${leafCode}\nconst planted = { '${NPC_RENAME_SURFACES[0].path}': 'X' };\n`;
     expect(surfaceHits(plantedWrite), 'the matcher is proved LIVE on a planted ASSIGNMENT to'

@@ -158,7 +158,9 @@ describe('RegenerationDeltaCard — broken dependencies', () => {
     });
     render(<RegenerationDeltaCard delta={delta} />);
     expect(screen.getByText(/Broken dependencies:/)).toBeTruthy();
-    expect(screen.getByText(/supplyChain\.iron · faction\.silver/)).toBeTruthy();
+    // VISIBLE-BUGS item 4 (2026-11-12): the row names the kind, never the raw id
+    // (no removedEntities label here, so each entry reads as its kind in words).
+    expect(screen.getByText(/a supply chain · a faction/)).toBeTruthy();
   });
 
   test('the row carries role=alert for screen readers', () => {

@@ -1,0 +1,173 @@
+{
+  "id": "computeActiveChains.deriveImportsFromChains",
+  "source": "src/generators/computeActiveChains.js :: deriveImportsFromChains (UPSTREAM_IMPORT_LABELS + tier structural imports)",
+  "drawKind": "T",
+  "pool": {
+    "declares": [],
+    "crisisScoped": false,
+    "colour": false,
+    "notes": "IMPORT labels written by this function (the chain.dependency.resource labels and necessityImports pass through from data/other writers and are not literal here). Pool-wide guarantee: not (route none, or isolated subsistence tier) unless hasMagicTrade. Upstream rows are keyed by the missing upstream chain id (branch-guaranteed absence of that chain; the producer atom is declared as excludes only where a vocabulary atom exists). ABSTRACT_IMPORTS is a filter set (not printed).",
+    "needs": [],
+    "excludes": []
+  },
+  "rows": [
+    {
+      "id": "computeActiveChains.deriveImportsFromChains::UPSTREAM.iron",
+      "text": "Iron ore",
+      "needs": [],
+      "excludes": [
+        "institution: mine"
+      ],
+      "colour": false,
+      "kind": "import",
+      "notes": "Branch: iron chain upstream missing (chain roster, not the institution reader; declared)."
+    },
+    {
+      "id": "computeActiveChains.deriveImportsFromChains::UPSTREAM.fuel",
+      "text": "Charcoal and fuel",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "unhomed: charcoal burner / woodland."
+    },
+    {
+      "id": "computeActiveChains.deriveImportsFromChains::UPSTREAM.grain",
+      "text": "Grain and malt",
+      "needs": [],
+      "excludes": [
+        "grain"
+      ],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "computeActiveChains.deriveImportsFromChains::UPSTREAM.livestock",
+      "text": "Raw hides and animal products",
+      "needs": [],
+      "excludes": [
+        "livestock"
+      ],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "computeActiveChains.deriveImportsFromChains::UPSTREAM.textiles",
+      "text": "Raw cloth",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "unhomed: weaver."
+    },
+    {
+      "id": "computeActiveChains.deriveImportsFromChains::UPSTREAM.clay",
+      "text": "Clay and raw materials",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "unhomed: clay pit (river_clay resource)."
+    },
+    {
+      "id": "computeActiveChains.deriveImportsFromChains::UPSTREAM.food_processing",
+      "text": "Preserved provisions",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "computeActiveChains.deriveImportsFromChains::UPSTREAM.smelting",
+      "text": "Refined iron and metalwork",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "unhomed: smelter."
+    },
+    {
+      "id": "computeActiveChains.deriveImportsFromChains::UPSTREAM.warehouse_logistics",
+      "text": "Warehousing and logistics services",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "CATEGORY ERROR: a service, not an importable good (proposed home: income table / institutional services)."
+    },
+    {
+      "id": "computeActiveChains.deriveImportsFromChains::UPSTREAM.cartography",
+      "text": "Route maps and intelligence",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "CATEGORY ERROR: information service, not a good (proposed home: income table / institutional services)."
+    },
+    {
+      "id": "computeActiveChains.deriveImportsFromChains::UPSTREAM.hunting",
+      "text": "Raw furs and pelts",
+      "needs": [],
+      "excludes": [
+        "game"
+      ],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "computeActiveChains.deriveImportsFromChains::UPSTREAM.precious_metals_mining",
+      "text": "Precious metals and bullion",
+      "needs": [],
+      "excludes": [
+        "institution: mine"
+      ],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "computeActiveChains.deriveImportsFromChains::UPSTREAM.stone",
+      "text": "Cut stone and masonry",
+      "needs": [],
+      "excludes": [
+        "institution: quarry"
+      ],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "computeActiveChains.deriveImportsFromChains::STRUCTURAL.bulk_grain",
+      "text": "Bulk grain and foodstuffs",
+      "needs": [],
+      "excludes": [
+        "grain"
+      ],
+      "colour": false,
+      "kind": "import",
+      "notes": "Branch: tier town+ (guaranteed) and no nearby resource containing 'grain'/'floodplain' (resource substring; declared via the food record's reader)."
+    },
+    {
+      "id": "computeActiveChains.deriveImportsFromChains::STRUCTURAL.luxury_textiles",
+      "text": "Luxury textiles and exotic goods",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed (branch tier city+)."
+    },
+    {
+      "id": "computeActiveChains.deriveImportsFromChains::STRUCTURAL.bulk_raw",
+      "text": "Bulk raw materials and agricultural goods",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "Branch tier metropolis."
+    }
+  ]
+}

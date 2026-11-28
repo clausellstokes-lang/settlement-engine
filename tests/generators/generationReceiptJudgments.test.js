@@ -77,7 +77,8 @@ describe('formal generation receipt judgments', () => {
 
   it('rejects a broken final NPC reference after all producers have run', () => {
     const settlement = generate({}, 'receipt-broken-reference');
-    settlement.relationships[0].npc1Id = 'missing-final-npc';
+    // RE-KEYED 2026-11-07 (PEOPLE-4 TIES, R-P7): the tie's first end is `from` (directed).
+    settlement.relationships[0].from = 'missing-final-npc';
 
     const receipt = recertify(settlement);
 
@@ -86,7 +87,7 @@ describe('formal generation receipt judgments', () => {
       status: 'fail',
       findings: expect.arrayContaining([
         expect.objectContaining({
-          path: 'relationships[0].npc1Id',
+          path: 'relationships[0].from',
         }),
       ]),
     });
@@ -96,10 +97,10 @@ describe('formal generation receipt judgments', () => {
 
   it('rejects broken faction joins and unconserved income directly', () => {
     const settlement = generate({}, 'receipt-final-graph-edges');
-    settlement.factions[0].members[0] = {
-      ...settlement.factions[0].members[0],
-      id: 'missing-faction-member',
-    };
+    // PEOPLE-5A RE-KEYED (M-2): the grouping's member check is dropped; a membership naming no
+    // power is the broken join now (each membership ∈ the powers).
+    const holder = settlement.npcs.findIndex((n) => Array.isArray(n.memberships) && n.memberships.length);
+    settlement.npcs[holder].memberships[0] = { ...settlement.npcs[holder].memberships[0], power: 'Missing power' };
     settlement.conflicts[0].parties[0] = 'Missing narrative faction';
     settlement.economicState.incomeSources[0].percentage += 1;
     settlement.population = Number.POSITIVE_INFINITY;
@@ -109,7 +110,7 @@ describe('formal generation receipt judgments', () => {
     expect(check(receipt, 'final_graph').findings).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
-          path: 'factions[0].members[0].id',
+          path: `npcs[${holder}].memberships[0].power`,
         }),
         expect.objectContaining({
           path: 'conflicts[0].parties[0]',

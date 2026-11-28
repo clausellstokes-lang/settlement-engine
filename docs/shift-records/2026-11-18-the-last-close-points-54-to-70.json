@@ -1,0 +1,118 @@
+{
+  "_doc": "THE LAST CLOSE BEFORE THE DEPLOY (points 54 to 70 of docs/chair/2026-11-17/sixth/LANDINGS-SIXTH.md): ONE signed record for this close and for it only (a later seat reads it as history, never as a grant; the first close's record, docs/shift-records/2026-11-18-the-close-of-the-rounds-bar5-to-bar8.json, and every earlier record stay untouched). It signs the re-take, at lane/landing-pieces-2026-11-18's cc11c9504 (the landings' tip, points 54 to 70, LASTCLOSE-SIGN's base; the golden reads only src/, which the close's other seat LASTCLOSE-DOORS does not touch), of the reference surfaces the landed points moved, each through its own door, one commit a family. THE BASE OF THE MEASURE: 0dee69e17, the first close's tip (lane/landing-close-2026-11-18), the first parent of point 54; it reproduces all 525 stored golden hashes, the fence's committed cd67a3c1... and all 1,050 rows of the dossier prose manifest, and the stored fixtures are byte-equal from it to the base. THE FAMILY CHECK (LASTCLOSE-SIGN, before any write): every one of the 525 golden configurations (and the fence's 360, and the manifest's per-cell table) born at 0dee69e17, at each of the seventeen first-parent landing commits that touch src/ (f71a1b04b 5c09b5511 f9f12bef4 ed176ed08 e713baeb3 ae4f90835 d56326fec 3ae86a8b3 93ce93f99 5eb9f6add f4e195512 b6c14e8cb 2de8d3bd0 98369dd42 a55b38cbd 37c70d9ea 8380df4de) and at the base, hashed whole and by leaf family: EACH ROW LAID TO THE LANDED POINT THAT MOVED IT. THE GOLDEN: 222 of 525 move (thorp 12, hamlet 12, village 48, town 101, city 25, metropolis 24); by point, each equal to its seat's declared count: 54 J-INCOME-2 36 (economicState.incomeSources[].desc); 48/49/57 K-WATCH and K-POWERS 129 (economicState.safetyProfile.guardEffectivenessDesc 93; powerStructure.factions[].desc 24, .recentConflict 12); 50/58 K-PEOPLE 16 (relationships 7, npcs[].goal 9); 61 FAULTS-NEED 13 (npcs[].goal); 62 FAULTS-PEOPLE 48 (npcs[].presentation.behaviour); 66 FAULTS-WATCH 3 (guardEffectivenessDesc 2, availableServices.legal 1); 67 FR25 3 (relationships, prominentRelationship 1); 68 FAULTS-BIRTH's follow-ups 36 (resourceAnalysis.imports 36, .gaps 12); 69 LAST-DECLARE 3 (npcs[].secret); 70 LAST-VARIETY 13 (npcs[].goal: the same 13 rows as point 61, the SUPPLY family's want lines dealt where the need is unmet); points 55, 56, 51/52/59, 60, 63, 64, 65 none of the 525; the union is 222: no row unexplained. No person, house, tie or name enters or leaves any of the 525: the only array lengths that move are resourceAnalysis.imports.critical (36) and resourceAnalysis.gaps (12). THE ESPIONAGE FENCE (the first close's CL5, the last closes' EF1, vetoable): every other arm green at the base; 116 of 360 rows move (thorp 11, hamlet 12, village 32, town 28, city 21, metropolis 12), every moved family a landed point's declared kind: 48/49/57 recentConflict 11 with pressureSentence 9 (the same sentence) and factions[].desc 9; 50/58 K-PEOPLE 42 (npcs[].secret, presentation, goal, one handler swap with its tie and trace line, relationships 3); 56 MARKS-2 3 (economicState.primaryImports: salted fish); 61 and 70 12 each (npcs[].goal); 62 2 (npcs[].plotHooks, 14e); 63 FAULTS-BIRTH 17 and 68 22 (resourceAnalysis.gaps and imports, economicState.primaryImports); 65 FAULTS-ROWS 9 (institutions[].desc); 66 10 (guardEffectivenessDesc 6, availableServices.legal 4: the holding cells' twin); 67 11 (relationships 7, factionRelationships[].narrative 4); 69 9 (npcs[].secret). THE DOSSIER PROSE MANIFEST (the last closes' MP1): the mixed-pool audience arm green before the write; the drift arm 832 of 1,050 rows (416 configurations, both audiences; 73,800 cells, none in or out): 51/52/59 the desks 510 rows (DS-POW-5 council's seat-members declaration, DESKS-DEF 14c: 168 cells to v5, 258 v1 cells re-anchored; DS-ECO-8 POOR 94; DS-DEF-2's internal row by the Legal row's court 8, DESKS-2 A7; DS-ECO-12 critical import 6); 64 FAULTS-DESKS 54 (its declared 54: DS-DEF-3 Unsafe v4's arrival re-anchors v0); 68 24 (DS-ECO-12's pool follows the declared need-list move of point 68 in 12 villages); 70 LAST-VARIETY 432 (DS-DEF-3 Moderate v5 to the new v9 in 216 small places); and THE PROVENANCE ARM: the recorder tests/helpers/dossierManifest.js moved by DESKS-2's A2 (95ffd9734, ruling BR32 (2)), re-taken with the drift arm's re-record. THE HERALD KNOWLEDGE-DESK GOLDEN: scripts/audit/herald-stage.mjs at the base writes the committed fixture byte for byte (475 rows): NOT re-recorded, not in this record. A VETO of any change on the veto list reverts that change and re-records these surfaces again through this door under a new record.",
+  "ownerWords": "\"Yes to both\" (2026-11-18, about 19:07 UTC, in the chair's chat: the refresh of the stored reference files again, and the golden door's signing, for this last close only)",
+  "ownerDate": "2026-11-18",
+  "odqRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation to the cloud chair) and, for this signing, the owner's own word in the chair's chat (session_01FbPLbcLDSJzZFzb5B7EjxR) on 2026-11-18 at about 19:07 UTC, verbatim, \"Yes to both\": the refresh of the stored reference files again AND the golden door's signing, asked by the chair under the operating standard's rule 17 (a recorded approval is history, never a grant), for this last close only (docs/chair/2026-11-18/lastclose/BRIEF-LASTCLOSE.md on lane/chair-2026-11-08). The word never covers a merge to master, a deploy, a migration, or any touch of a hosted database or a production credential. The chair read this record at e0fed13df, announced the signing in that chat at 01:04 UTC on 2026-11-19 and gave this seat its line \"SIGN\" (2026-11-19 01:04 UTC, with its ruling on generationForkCensus.test.js: this seat writes only its GOLDEN_CONTROL_HASH line and dated note). It authorizes THIS close's signing, at this tree, ONCE; nothing after this close is covered",
+  "cause": "THE DECLARED CURES OF THE POINTS LANDED OVER THE FIRST CLOSE'S TIP 0dee69e17 (git log --first-parent 0dee69e17..cc11c9504 on lane/landing-pieces-2026-11-18; docs/chair/2026-11-17/sixth/LANDINGS-SIXTH.md, points 54 to 70), by their seats: J-INCOME-2 (54: the income lines' leaf, the rites line; economicState.incomeSources); K-WATCH, K-POWERS and K-WATCH-2 (48, 49, 57: the watch's line by the hours it keeps, the Elected Reeve's twin, the stock quarrel's no-grazing twin; economicState.safetyProfile, powerStructure.factions, powerStructure.recentConflict and the pressure sentence that repeats it); K-PEOPLE and PEOPLE-2 (50, 58: the prison declaration, the holder refusals, the handlers' swap cured; relationships, npcs[].goal, secret, presentation, allegiance); MARKS-2 (56: salted fish on the imports; the fence only); DESKS-ECO, DESKS-DEF and DESKS-2 (51, 52, 59: desk lines declared with their twins; the dossier prose only, and its recorder); FAULTS-NEED (61: a goal that presumed a bought supply refused; npcs[].goal); FAULTS-PEOPLE (62: the fishmonger's twin where no fish is taken; npcs[].presentation, a hook); FAULTS-BIRTH (63) and its follow-ups (68: the second ring, the proven pasture, wool and hides; resourceAnalysis.gaps and imports, economicState.primaryImports); FAULTS-DESKS (64: the Unsafe pool's twin v4; the dossier prose only); FAULTS-ROWS (65: the late re-read; institutions[].desc in the fence only); FAULTS-WATCH (66: the gate's hours, the holding cells' twin; guardEffectivenessDesc, availableServices.legal) and its FR25 (67: the judge's tie, the power standing's twin; relationships, prominentRelationship, factionRelationships); LAST-DECLARE (69: the sawyer's secret; npcs[].secret); LAST-VARIETY (70: the SUPPLY goals' want lines; the safety pools' new lines; npcs[].goal, the dossier prose). PDF-2b (55) and FAULTS-TOOLS (60) move nothing generated.",
+  "seat": "LASTCLOSE-SIGN under the chair session_01FbPLbcLDSJzZFzb5B7EjxR, on branch lane/lastclose-sign-2026-11-18 (BASE cc11c950479e218c08f47462978a1d538d26c3fe, lane/landing-pieces-2026-11-18 at points 54 to 70)",
+  "surfaces": [
+    {
+      "surface": "generator-golden-master",
+      "action": "re-record",
+      "predictedRows": 525,
+      "proofForm": "settlement-hash"
+    },
+    {
+      "surface": "espionage-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant"
+    },
+    {
+      "surface": "dossier-prose-manifest",
+      "action": "re-record",
+      "predictedRows": 2,
+      "proofForm": "derived-artefact"
+    }
+  ],
+  "familyCheck": [
+    {
+      "family": "economicState.safetyProfile.guardEffectivenessDesc",
+      "rowsOf525": 95,
+      "declaredBy": [
+        "K-WATCH docs/chair/2026-11-17/bar8/BAR8-K-WATCH-HANDBACK.md:96 (93)",
+        "FAULTS-WATCH docs/chair/2026-11-18/faults/FAULTS-WATCH-HANDBACK.md:134-135 (2)"
+      ]
+    },
+    {
+      "family": "npcs[].presentation.behaviour",
+      "rowsOf525": 48,
+      "declaredBy": [
+        "FAULTS-PEOPLE docs/chair/2026-11-18/faults/FAULTS-PEOPLE-HANDBACK.md:139-141 (48)"
+      ]
+    },
+    {
+      "family": "economicState.incomeSources[].desc",
+      "rowsOf525": 36,
+      "declaredBy": [
+        "J-INCOME-2 docs/chair/2026-11-17/bar8/BAR8-J-INCOME-HANDBACK.md:64-66 (36)"
+      ]
+    },
+    {
+      "family": "resourceAnalysis.imports (critical, entries in; reasons)",
+      "rowsOf525": 36,
+      "declaredBy": [
+        "FAULTS-BIRTH (FR24) docs/chair/2026-11-18/faults/FAULTS-BIRTH-HANDBACK.md:521-523 (36)"
+      ]
+    },
+    {
+      "family": "resourceAnalysis.gaps (entries in)",
+      "rowsOf525": 12,
+      "declaredBy": [
+        "FAULTS-BIRTH (FR24) docs/chair/2026-11-18/faults/FAULTS-BIRTH-HANDBACK.md:521-523 (12)"
+      ]
+    },
+    {
+      "family": "powerStructure.factions[].desc",
+      "rowsOf525": 24,
+      "declaredBy": [
+        "K-POWERS docs/chair/2026-11-17/bar8/BAR8-K-POWERS-HANDBACK.md:114-115 (24, 14d)"
+      ]
+    },
+    {
+      "family": "powerStructure.recentConflict",
+      "rowsOf525": 12,
+      "declaredBy": [
+        "K-POWERS docs/chair/2026-11-17/bar8/BAR8-K-POWERS-HANDBACK.md:114-115 (12, 15b)"
+      ]
+    },
+    {
+      "family": "npcs[].goal",
+      "rowsOf525": 22,
+      "declaredBy": [
+        "K-PEOPLE docs/chair/2026-11-17/bar8/BAR8-K-PEOPLE-HANDBACK.md:101-102 (9, 14h); PEOPLE-2 docs/chair/2026-11-17/bar8/BAR8-PEOPLE-2-HANDBACK.md:111-112",
+        "FAULTS-NEED docs/chair/2026-11-18/faults/FAULTS-NEED-HANDBACK.md:189-191 (13, named)",
+        "LAST-VARIETY docs/chair/2026-11-18/last/LAST-VARIETY-HANDBACK.md:115-116 (13, the same rows)"
+      ]
+    },
+    {
+      "family": "relationships[] description / tension / proseVariant",
+      "rowsOf525": 10,
+      "declaredBy": [
+        "K-PEOPLE docs/chair/2026-11-17/bar8/BAR8-K-PEOPLE-HANDBACK.md:101-102 (7)",
+        "FAULTS-WATCH FR25 docs/chair/2026-11-18/faults/FAULTS-WATCH-HANDBACK.md:302-304 (3)"
+      ]
+    },
+    {
+      "family": "prominentRelationship",
+      "rowsOf525": 1,
+      "declaredBy": [
+        "FAULTS-WATCH FR25 docs/chair/2026-11-18/faults/FAULTS-WATCH-HANDBACK.md:302-304 (1)"
+      ]
+    },
+    {
+      "family": "npcs[].secret",
+      "rowsOf525": 3,
+      "declaredBy": [
+        "LAST-DECLARE docs/chair/2026-11-18/last/LAST-DECLARE-HANDBACK.md:116-118 (3)"
+      ]
+    },
+    {
+      "family": "availableServices.legal[].desc",
+      "rowsOf525": 1,
+      "declaredBy": [
+        "FAULTS-WATCH docs/chair/2026-11-18/faults/FAULTS-WATCH-HANDBACK.md:243-244 (1)"
+      ]
+    }
+  ]
+}

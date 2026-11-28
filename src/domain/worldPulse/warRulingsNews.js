@@ -62,7 +62,7 @@ const REASON = Object.freeze({
   ruler_books_compromised: "The exact ruling seat is recorded as serving a foreign patron's interest.",
   war_party_overturns_peacemaker: 'A named war party organized around the recorded peace decision and took the seat.',
   peace_party_overturns_warmonger: 'A named peace party organized around the recorded war decision and took the seat.',
-  succession_demand_inherited: 'The installing faction wrote its war demand into the recorded succession.',
+  succession_demand_inherited: 'The power that installed the ruler wrote its war demand into the succession.',
   successor_repudiates_war: 'A recorded authority change broke the old course and the successor chose peace.',
   successor_escalates_war: 'A recorded authority change broke the old course and the successor chose war.',
   war_dissolved_by_verdict: 'The recorded verdict removed the officeholder who owned the quarrel, dissolved the live cause, and recalled that court\'s deployment.',

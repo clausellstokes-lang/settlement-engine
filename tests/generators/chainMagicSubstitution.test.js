@@ -47,7 +47,7 @@ describe('applyMagicSubstitution (producer)', () => {
     const chains = [grainChain()];
     applyMagicSubstitution(chains, { divine: true }, 50, 'village');
     expect(chains[0].status).toBe('vulnerable');
-    expect(chains[0].magicNote).toBe('Temple granaries blessed; divine provision fills the gap');
+    expect(chains[0].magicNote).toBe('Blessed stores; divine provision fills the gap');
   });
 
   it('no tradition leaves the impaired chain untouched', () => {

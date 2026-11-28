@@ -1,0 +1,66 @@
+commit 0a30642d48e598dd696903f5e6fc2c7ed40c5d8e
+Merge: c090179c1 0711a6a39
+Author: Claude <noreply@anthropic.com>
+Date:   Sun Nov 15 07:25:09 2026 +0000
+
+    Merge lane/tail-close-pools-2026-11-15 at 0711a6a39 (JOIN-10 point 11)
+    
+    The chair's LAND word: one point, --no-ff at the full hash 0711a6a39dfac49c6da5f7ddc8e84b3ee5fd6bb6 read back from origin at 07:24 UTC.
+    Merge base(s): 0b1248dbf. Files staged outside docs/: 4.
+    Merged clean though both sides moved (outside docs/): tests/domain/coherence/crisisBlindProse.test.js.
+    Conflicts: `crisisBlindProse.test.js` (test), close-pools against crisis: the joined side whole by ruling C31, the branch's edit dropped; 8/8 green (§3).
+    
+    Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+    Claude-Session: https://claude.ai/code/session_01ACmDYXQJDGxfuGa1swK6Az
+
+diff --git a/tests/domain/coherence/crisisBlindProse.test.js b/tests/domain/coherence/crisisBlindProse.test.js
+remerge CONFLICT (content): Merge conflict in tests/domain/coherence/crisisBlindProse.test.js
+index 706a723a9..c5e3332bb 100644
+--- a/tests/domain/coherence/crisisBlindProse.test.js
++++ b/tests/domain/coherence/crisisBlindProse.test.js
+@@ -30,22 +30,8 @@ const nothingPresses = speakTierNoun(variantByVid({
+   leaf: 'defense', blockId: 'DS-DEF-1', poolKey: 'readiness STRONG', vid: 4, slots: { settlement: 'Rundfeld' },
+ }), 'city');
+ 
+-<<<<<<< c090179c1 (JOIN-10 hand-back: point 10 (ties) in the table)
+ /** DS-POW-4 `riskLabel: Stable (no challengers)` v1 (soak1k-4800 printed it; reworded at 51217c0e). */
+ const noRival = speakTierNoun(variantByVid({
+-=======
+-/**
+- * DS-POW-4 `riskLabel: Stable (no challengers)` v1, as soak1k-4800 printed it: THE RETIRED WORDS. RETIRED BY NAME
+- * (TAIL-CLOSE-POOLS-1, the chair's seventh, 2026-11-15, on the owner's veto list): TAIL-CORPUS-DEF-2 batch 3 (51217c0e5)
+- * reworded v1 off "nobody … is asking who comes next" (false in 41 of 52 census towns) and named this pattern dead; no
+- * line of the corpus makes the claim now, so no town can print it. As `seatSafetyUnrest.test.js` does for v3, the
+- * instrument's liveness is shown on the retired words, planted (they are no corpus line's any more), and its silence
+- * on the line's new words (`v1Now`).
+- */
+-const noRival = speakTierNoun("Nobody at Grudets is in a position to take Headman's Authority's place; it has no rival, and nobody in the town is asking who comes next.", 'thorp');
+-/** DS-POW-4 `riskLabel: Stable (no challengers)` v1 as the corpus writes it now. */
+-const v1Now = speakTierNoun(variantByVid({
+->>>>>>> 0711a6a39 (test(TAIL-CLOSE-POOLS-1 · the seventh): F12's soak1k-4800 case retired by name to the words 51217c0e5 retired)
+   leaf: 'power', blockId: 'DS-POW-4', poolKey: 'riskLabel: Stable (no challengers)', vid: 1,
+   slots: { settlement: 'Grudets', seat: 'headman', faction: "Headman's Authority" },
+ }), 'thorp');
+@@ -77,7 +63,6 @@ describe('F12 · coh:crisis-blind-prose, the instrument', () => {
+     expect(crisisBlindFindings(placeUnder('under_siege'), { overview: siegeNamed })).toEqual([]);
+   });
+ 
+-<<<<<<< c090179c1 (JOIN-10 hand-back: point 10 (ties) in the table)
+   // RETIRED BY NAME (TAIL-CRISIS-8, on the chair's word of 2026-11-15; listed for the owner's veto): the case
+   // 'soak1k-4800: "the succession question is not a live one" in a succession void is a finding' can find nothing any
+   // more. TAIL-CORPUS-DEF-2 batch 3 (51217c0e, landed at 31a6f72e, JOIN-7 · 29) CURED THE LINE AT THE SOURCE: DS-POW-4
+@@ -88,14 +73,6 @@ describe('F12 · coh:crisis-blind-prose, the instrument', () => {
+   // succession rows read (npcStructure.js, government and other `stable`) are tagged CALM_ONLY, so none prints under
+   // a crisis. The family stays covered live by crisisBlindWidened's soak1k-3005 (the governor's want under a
+   // succession void). `noRival` stays below as the famine case's calm line.
+-=======
+-  it('soak1k-4800: "the succession question is not a live one" in a succession void is a finding', () => {
+-    const found = crisisBlindFindings(placeUnder('succession_void'), { power: noRival });
+-    expect(found.map((f) => f.family)).toEqual(['succession']);
+-    // anchored: the instrument found the claim in the retired words just above; the line's new words make no claim
+-    expect(crisisBlindFindings(placeUnder('succession_void'), { power: v1Now })).toEqual([]);
+-  });
+->>>>>>> 0711a6a39 (test(TAIL-CLOSE-POOLS-1 · the seventh): F12's soak1k-4800 case retired by name to the words 51217c0e5 retired)
+ 
+   it('soak1k-0: families leaving under a mass-migration influx is a finding (counted; the cure is the migration lane\'s)', () => {
+     const found = crisisBlindFindings(placeUnder('mass_migration'), { power: 'Three families left this week. Two more last week.' });

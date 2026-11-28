@@ -4,7 +4,7 @@ import { evaluateRelationshipRules } from './relationshipEvolution.js';
 import { evaluateSettlementStrategyRules } from './settlementStrategy.js';
 import { evaluateBrokerageServiceRules } from './brokerageServicesRules.js';
 import { evaluateMobilizationReactions } from './mobilizationReactions.js';
-import { evaluateStressorRules, stressorCandidateForPressure } from './stressors.js';
+import { evaluateStressorRules, readerPressureReasons, stressorCandidateForPressure } from './stressors.js';
 import { deriveFlowCandidates } from './flows.js';
 import { normalizeSimulationRules, politicalAutonomyOf } from './simulationRules.js';
 import { governBirth, computeLowestPendingClass, dramaClassOf } from './narrativeTempo.js';
@@ -12,7 +12,9 @@ import { authorityFor } from './changeAuthorityPolicy.js';
 import { applyForeignPrimacy } from './foreignPrimacy.js';
 import { applyAnticipatedReactions } from './anticipatedReactions.js';
 import { classifyRecurringConditionCandidate } from './conditionRefreshRecordMode.js';
-import { CONDITION_DEEDS } from './heraldDeeds.js';
+import { CONDITION_DEEDS, CONDITION_FACT_SIBLINGS } from './heraldDeeds.js';
+import { resolveDeclared } from '../facts/drawDeclared.js';
+import { factsOf } from '../facts/factsOf.js';
 import {
   admitGuaranteedProposalOutcomes,
   buildProposalDocket,
@@ -240,7 +242,39 @@ export function supersedeLegacyRecordModeProposals(worldState, context = {}) {
     : worldState, context), context);
 }
 
-function pressureConditionCandidate(/** @type {any} */ pressure, /** @type {any} */ tick, /** @type {Record<string, unknown> | null} */ rules = null) {
+// STYLE-2 C2 (SW-12, A2·76): the food ceiling's receipt in plain words (the legibility law: a
+// lowered pressure says so); it keeps the "granary books" its pin reads.
+const GRANARY_BOOKS_REASON = 'The granary books show less of a shortage than the talk says.';
+
+/**
+ * The snapshot as the condition's fact reads it: a town's record by id (the shape ledgerCorroboratedPressure reads).
+ * @typedef {{ byId?: { get?: (id: string) => ({ settlement?: unknown }|undefined) } }|null|undefined} ConditionFactSnapshot
+ */
+
+/**
+ * The condition's in-world fact, resolved where it is drawn (TAIL-CONTENT-CLOSE-1, 2026-11-15): a kind whose fact
+ * names a thing (heraldDeeds.js :: CONDITION_FACT_SIBLINGS) is read against the town's own record in the snapshot,
+ * and its twin prints where the thing is absent or the record is unanswered. Every other kind prints its `fact`.
+ * @param {{ fact: (n: string) => string }} voice the kind's CONDITION_DEEDS row
+ * @param {{ kind?: string, settlementName: string, settlementId?: string|number }} pressure
+ * @param {ConditionFactSnapshot} snapshot
+ * @returns {string}
+ */
+function conditionFactOf(voice, pressure, snapshot) {
+  const set = CONDITION_FACT_SIBLINGS[/** @type {keyof typeof CONDITION_FACT_SIBLINGS} */ (pressure.kind)];
+  if (!set) return voice.fact(pressure.settlementName);
+  const item = snapshot?.byId?.get?.(String(pressure.settlementId));
+  const settlement = item?.settlement || item || null;
+  const r = resolveDeclared(set, {
+    facts: settlement ? () => factsOf(settlement) : null,
+    twin: (line) => set.find((l) => l !== line && typeof l.twinOf === 'string') ?? null,
+    poolId: `heraldDeeds:CONDITION_FACT_SIBLINGS.${pressure.kind}`, surface: 'herald',
+  });
+  const text = r.line ? r.line.text : voice.fact;
+  return text(pressure.settlementName);
+}
+
+function pressureConditionCandidate(/** @type {any} */ pressure, /** @type {any} */ tick, /** @type {Record<string, unknown> | null} */ rules = null, /** @type {ConditionFactSnapshot} */ snapshot = null) {
   if (!pressure || pressure.score < 0.5) return null;
   const archetypeByKind = {
     food: 'famine',
@@ -284,10 +318,15 @@ function pressureConditionCandidate(/** @type {any} */ pressure, /** @type {any}
     // SEASONS-A: pressureModel stamps a seasonNote on flag-on winter food
     // pressures ("stores run low…"); its presence IS the gate — absent
     // flag-off, so the legacy summary bytes are untouched.
-    summary: `${voice.fact(pressure.settlementName)}${pressure.seasonNote ? ` ${pressure.seasonNote}` : ''}`,
+    summary: `${conditionFactOf(voice, pressure, snapshot)}${pressure.seasonNote ? ` ${pressure.seasonNote}` : ''}`,
+    // STYLE-2 C2 (SW-12, A2·75): the gate's rule text ("Organic settlement drift is conservative:
+    // pressure must pass a gate before it can roll.") is the engine's, not the town's: struck.
+    // A2·74: the pressure row's bookkeeping phrases through the stressors' reader map (evidence
+    // only: a phrase with no reader sentence is dropped, never printed raw).
+    // The granary-books ceiling (A2·76) is already a reader sentence and is carried through.
     reasons: [
-      ...pressure.reasons,
-      'Organic settlement drift is conservative: pressure must pass a gate before it can roll.',
+      ...readerPressureReasons(pressure, { fallback: false }),
+      ...((pressure.reasons || []).includes(GRANARY_BOOKS_REASON) ? [GRANARY_BOOKS_REASON] : []),
     ],
     condition: {
       archetype,
@@ -356,7 +395,7 @@ function ledgerCorroboratedPressure(pressure, snapshot, rules) {
     score: ceiling,
     reasons: [
       ...(Array.isArray(pressure.reasons) ? pressure.reasons : []),
-      'the settlement\'s own granary books do not carry a shortage this deep',
+      GRANARY_BOOKS_REASON,
     ],
   };
 }
@@ -512,7 +551,7 @@ export function evaluateWorldPulseRules(/** @type {any} */ snapshot, /** @type {
     candidates.push(
       ...pressures
         .map((/** @type {any} */ pressure) => pressureConditionCandidate(
-          ledgerCorroboratedPressure(pressure, snapshot, rules), tick, rules,
+          ledgerCorroboratedPressure(pressure, snapshot, rules), tick, rules, snapshot,
         ))
         .filter(Boolean),
     );

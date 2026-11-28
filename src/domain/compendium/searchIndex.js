@@ -25,13 +25,15 @@
 import { COMPENDIUM_DATA as CD } from './generated/compendiumData.generated.js';
 import { compareCodepoint } from '../deterministicSort.js';
 
-// Valid destination tabs — must mirror the TABS ids in CompendiumPanel EXACTLY.
-// Pinned by tests/domain/compendiumSearch.test.js, which source-scans the panel's
-// TABS block so a new tab (like 'living', added 2026-07-16 — the global index had
-// drifted: the Living World tab was in the panel but not here, so a search could
-// never route to it) reds this until it is added (domain-region-dossier-guidance-5).
+// Valid destination tabs — must mirror the catalog sections of lib/compendiumSections.js
+// EXACTLY (every section but My Custom Content, which is per-reader and not indexed).
+// Pinned by tests/domain/compendiumSearch.test.js, so a new section (like 'living',
+// added 2026-07-16 — the global index had drifted: the Living World tab was in the
+// panel but not here, so a search could never route to it) reds this until it is
+// added (domain-region-dossier-guidance-5). The owner's word of 2026-11-10 retired the
+// Overview tab (the landing grid replaced it), so 'overview' left this list with it.
 export const COMPENDIUM_TABS = Object.freeze([
-  'overview', 'tiers', 'economy', 'power', 'institutions', 'operations', 'arcane',
+  'tiers', 'economy', 'power', 'institutions', 'operations', 'arcane',
   'living', 'stress', 'calamity', 'neighbour', 'az',
 ]);
 
@@ -68,8 +70,8 @@ const TIER_KW = {
   hamlet: 'local subsistence minimal trade',
   village: 'surplus weekly market guilds begin',
   town: 'specialization guilds form',
-  city: 'institutional diversity factional politics',
-  metropolis: 'largest all systems active complex factions',
+  city: 'institutional diversity factional politics powers',
+  metropolis: 'largest all systems active complex factions powers',
 };
 const TIER_ENTRIES = CD.tiers.map((t) => ({
   id: `tier-${slug(t.label)}`, term: t.label, category: 'Tier', tab: 'tiers', anchor: 'tiers',
@@ -123,7 +125,7 @@ const STRESS_ENTRIES = [
   ['Famine', 'food supply failure grain exports collapse'],
   ['Plague', 'disease population loss social trust collapsed'],
   ['Siege', 'military encirclement imports cut defense'],
-  ['Political Fracture', 'governance contested factions legitimacy'],
+  ['Political Fracture', 'governance contested factions powers legitimacy'],
 ].map(([term, kw]) => ({
   id: `stress-${slug(term)}`, term, category: 'Stress', tab: 'stress', anchor: 'stress', keywords: kw,
 }));
@@ -131,7 +133,7 @@ const STRESS_ENTRIES = [
 const CROSS_SETTLEMENT_ENTRIES = [
   ['NPC Contacts', 'named npcs paired category relationship'],
   ['Cross-Settlement Conflicts', 'disputes market contests border incursions intelligence'],
-  ['Bidirectional Cascade', 'rename npc faction propagates linked partner'],
+  ['Bidirectional Cascade', 'rename npc faction power propagates linked partner'],
   ['Delink Cleanup', 'removing link removes contacts conflicts'],
 ].map(([term, kw]) => ({
   id: `xset-${slug(term)}`, term, category: 'Neighbour System', tab: 'neighbour', anchor: 'neighbours', keywords: kw,

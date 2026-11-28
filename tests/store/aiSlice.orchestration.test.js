@@ -2,7 +2,8 @@
  * tests/store/aiSlice.orchestration.test.js
  *
  * The failure-handling half of the paid-AI feature, at the store level. These
- * exercise requestNarrative / requestDailyLife against a mocked transport
+ * exercise requestNarrative against a mocked transport (requestDailyLife was
+ * retired by DAILY-3 U4b, its arms with it)
  * (generateNarrative) so we can drive stalls, supersessions, partial-then-fail
  * streams, and refund notices deterministically.
  *
@@ -162,22 +163,6 @@ describe('F20 — first-time failure clears progressive partials', () => {
     expect(s.aiLoading).toBe(false);
     expect(s.lifetimeNarrateCount).toBe(0);
     expect(s.aiError).toMatch(/completion marker|truncat/i);
-  });
-
-  it('daily life: aiDailyLife is null after a partial-then-failed first run', async () => {
-    const store = makeStore();
-    generateNarrative.mockImplementation(async (_t, _s, _id, opts) => {
-      opts.onField('dawn', 'grey light');
-      expect(store.getState().aiDailyLife).not.toBeNull();
-      throw new Error('daily life failed');
-    });
-
-    await store.getState().requestDailyLife(SAVE_ID);
-
-    const s = store.getState();
-    expect(s.aiDailyLife).toBeNull();
-    expect(s.aiLoading).toBe(false);
-    expect(s.aiError).toMatch(/daily life failed/i);
   });
 
   it('regenerate failure keeps the prior narrative intact', async () => {
@@ -340,33 +325,5 @@ describe('hydrateAiFromSave — resets every ai-identity field', () => {
     expect(s.aiSettlement).toBeNull();
     expect(s.aiViolations).toBeNull();
     expect(s.showNarrative).toBe(false);
-  });
-});
-
-// ─────────────────────────────────────────────────────────────────────
-// store-3 — requestDailyLife double-click cannot double-charge
-// ─────────────────────────────────────────────────────────────────────
-describe('store-3 — requestDailyLife double-click cannot double-charge', () => {
-  it('two SYNCHRONOUS clicks fire the paid transport exactly once (the second is blocked by the sync lock)', async () => {
-    const store = makeStore();
-    const { resolve } = deferredGen();
-
-    // Fire two clicks back-to-back with NO await between them. The fix makes the whole
-    // prefix — credit check, F18/F19 token/abort stamp, set(aiLoading:true) — run
-    // SYNCHRONOUSLY: the buildDailyLifeRelationshipMemory await moved PAST the lock, so
-    // the second click hits `if (aiLoading) return` and never reaches the transport.
-    // (Pre-fix, the memory-build await ran BEFORE the lock, so the second click slipped
-    // through and both fired paid generateNarrative requests — the double-charge.)
-    const p1 = store.getState().requestDailyLife(SAVE_ID);
-    const p2 = store.getState().requestDailyLife(SAVE_ID);
-
-    // Let p1 progress through its awaits (loadAiLib + the null relationship-memory build)
-    // to the deferred transport; p2 already returned at the aiLoading guard.
-    await new Promise(r => setTimeout(r, 30));
-    expect(generateNarrative).toHaveBeenCalledTimes(1);
-
-    resolve({ result: { dawn: 'x' }, creditsRemaining: 4 });
-    await Promise.all([p1, p2]);
-    expect(generateNarrative).toHaveBeenCalledTimes(1);
   });
 });

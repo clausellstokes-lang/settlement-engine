@@ -233,6 +233,14 @@
     font-family: 'Lora', 'Crimson Text', Georgia, serif;
   }
 }
+/* A ONE-LETTER FIRST WORD ("A merchant…", "I…"): the space after the raised initial collapses
+   at the line's start, so the initial runs into the next word ("Amerchant"; measured 0.0 px against
+   5.0 px after "The"). OverviewTab adds --lone when the text opens on one letter and a space; the
+   initial then carries a word-space of its own on both paths. */
+.oc-dropcap-prose--lone::first-letter { margin-right: 0.3em; }
+@supports not (initial-letter: 2) {
+  .oc-dropcap-prose--lone::first-letter { margin-right: 0.25em; }
+}
 /* Narrow panes: the initial steps down to normal so a short prose block on a
    phone-width pane isn't dominated by one glyph (graceful degradation). */
 @media (max-width: 520px) {

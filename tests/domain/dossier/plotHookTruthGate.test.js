@@ -21,6 +21,7 @@ import { describe, expect, test } from 'vitest';
 import { HOOK_LINE_POOLS } from '../../../src/domain/dossier/hookLines.js';
 import { FOOD_SECURITY_BANDS } from '../../../src/data/bandLadders.js';
 import { collectPlotHooks } from '../../../src/domain/dossier/plotHooks.js';
+import { textOf } from '../../../src/domain/facts/textOf.js';
 
 /**
  * One settlement record carrying exactly the facts a hook could lie about.
@@ -92,7 +93,7 @@ describe('the plot hooks check the place before they speak — food', () => {
     const food = hooks.filter((h) => h.category === 'economics');
     expect(food).toHaveLength(1);
     expect(food[0].text).not.toMatch(/starving|banditry/i); // anchored: `food` has exactly one member by the assertion above
-    expect(HOOK_LINE_POOLS.foodGap).toContain(food[0].text);
+    expect(HOOK_LINE_POOLS.foodGap.map(textOf)).toContain(food[0].text); // CENSUS-2c: a declared row reads through textOf
   });
 
   test('"N days of reserves" prints the stored months, converted', () => {

@@ -266,3 +266,10 @@ not a product funnel), **diagnostic** (health/latency/failure taxonomy), and
   the determinism-replay click). The landing leg of the funnel already measured
   transitively by the homepage/anon-generation metrics; promote to a named
   landing-conversion metric when the documentation wave's four pages ship.
+- `engine_generate` — **diagnostic** (ENGINE-SERVICE, `EVENTS_REV` 14): the engine
+  service's cost log, ONE server-side row per metered call written by the
+  engine-generate edge function (op, outcome, engine_version, caller class, a keyed
+  caller hash; never an IP). It is an operations ledger read by
+  `report_engine_generations()` (migration 204) for the admin panel's one engine line
+  (today and this month, by op and outcome), not a product funnel; promote it to a
+  named cost metric if the service's spend becomes a standing question.

@@ -48,6 +48,7 @@ import {
   legitimacyBandOf, readinessBandOf, foodSecurityBandOf,
   FOOD_SECURITY_BANDS, LEGITIMACY_BANDS,
 } from '../../data/bandLadders.js';
+import { defenceHeldOf } from '../institutions/defenseInstitutionBuckets.js';
 import { FLAGS_EVER_TRUE, FLAG_FIELDS } from './recordInvariantFlags.js';
 import { CHECK_META, CHECK_IDS } from './recordInvariantMeta.js';
 
@@ -89,6 +90,8 @@ const LEGITIMACY = 'powerStructure.publicLegitimacy';
 const VIABILITY = 'economicViability';
 const ISOLATION = 'isolationSupport';
 const READINESS = 'defenseProfile.readiness';
+/** The defence partition the profile stored beside its label (UPKEEP-12, ruling (a)): the label's floor reads it. */
+const DEFENCE_PARTITION = 'defenseProfile.institutions';
 const POWER = 'powerStructure';
 const DEFENCE = 'defenseProfile';
 const SCORES = 'defenseProfile.scores';
@@ -260,9 +263,12 @@ const conditionBands = (/** @type {unknown} */ rows) => {
   return judged.length === 0 ? undefined : judged.every((e) => severityBand(e.severity) === e.severityBand);
 };
 
-/** @returns {Reading} The readiness card's label against its own producer's ladder. */
-const readinessBand = (/** @type {RecordCard} */ card) => (
-  isNum(card.score) ? bandIs(card.label, readinessBandOf(card.score).label) : undefined);
+/**
+ * @returns {Reading} The readiness card's label against its own producer's ladder, which reads the
+ * roster the profile stored beside it (UPKEEP-12, ruling (a): walls or a force are never "Undefended").
+ */
+const readinessBand = (/** @type {RecordCard} */ card, /** @type {unknown} */ held) => (
+  isNum(card.score) ? bandIs(card.label, readinessBandOf(card.score, defenceHeldOf(held)).label) : undefined);
 
 /** @returns {Reading} The legitimacy card's label against its own producer's ladder. */
 const legitimacyBand = (/** @type {RecordCard} */ card) => (
@@ -349,13 +355,13 @@ const CHECKS = Object.freeze({
   'V-BAND-FOODSEC': (s) => say(foodBandAdmits(cardAt(s, FOOD_CARD)), 'the food card\'s label is not one the producer\'s own ladder admits for its published shares'),
   'V-ISOLATION': (s) => say(leftOver(cardAt(s, ISOLATION).deficit, [cardAt(s, ISOLATION).requiredCapacity, cardAt(s, ISOLATION).capacity], true), 'the isolation support deficit is not its required capacity less its capacity'),
   'V-COND-BAND': (s) => say(conditionBands(s.activeConditions), 'an active condition\'s band is not the one the producer\'s own ladder gives its severity'),
-  'V-BAND-READINESS': (s) => say(readinessBand(cardAt(s, READINESS)), 'the defence readiness label is not the one the producer\'s own ladder gives its score'),
+  'V-BAND-READINESS': (s) => say(readinessBand(cardAt(s, READINESS), readPath(s, DEFENCE_PARTITION)), 'the defence readiness label is not the one the producer\'s own ladder gives its score'),
   'V-INCOME-100': (s) => say(sharesWhole(cardAt(s, 'economicState').incomeSources, 'percentage'), 'the income sources\' published shares do not sum to the whole'),
-  'V-POWER-100': (s) => say(sharesWhole(cardAt(s, POWER).factions, 'power'), 'the factions\' published power shares do not sum to the whole'),
+  'V-POWER-100': (s) => say(sharesWhole(cardAt(s, POWER).factions, 'power'), 'the powers\' published shares do not add up to the whole'),
   'V-LEGIT-SUM': (s) => say(legitimacySum(cardAt(s, LEGITIMACY)), 'the public legitimacy score is not its neutral base plus its own breakdown'),
   'V-LEGIT-FLAGS': (s) => say(ownFlag(cardAt(s, LEGITIMACY), 'powerStructure', legitimacyKeyOf(cardAt(s, LEGITIMACY).label)), 'the public legitimacy band is not carried by the flag of its own name'),
   'V-BAND-LEGITIMACY': (s) => say(legitimacyBand(cardAt(s, LEGITIMACY)), 'the public legitimacy label is not the one the producer\'s own ladder gives its score'),
-  'V-GOVERNING': (s) => say(governingSeated(cardAt(s, POWER)), 'the named governing body is not the faction the roster seats'),
+  'V-GOVERNING': (s) => say(governingSeated(cardAt(s, POWER)), 'the named governing body is not the power the roster seats'),
   'V-FLAGVEC': (s) => strayArm(cardAt(s, FOOD_CARD), cardAt(s, LEGITIMACY)),
   'V-EVIDENCE-ROSTER': (s) => say(rosterCited(s), 'the receipt\'s graph evidence names roster sizes the record\'s own rosters do not carry'),
   'V-EVIDENCE-EVENTS': (s) => say(states(evidenceAt(s, 'narrative')?.evidence, EVENTS_RE, cardAt(s, 'history').historicalEvents), 'the receipt\'s narrative evidence names an event count the history does not carry'),

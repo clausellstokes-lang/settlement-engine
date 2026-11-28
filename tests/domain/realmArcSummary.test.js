@@ -66,3 +66,24 @@ describe('realm-arc summary (§S4)', () => {
     expect(realmArcLines({ worldState, regionalGraph: hiddenGraph, settlements: SETTLEMENTS })).toEqual([]);
   });
 });
+
+describe('ONE WRITER for the realm-arc sentences (SW-9, STYLE-RULINGS-2 A11)', () => {
+  test('the five sentence frames are spelled in realmArcSentences.js alone; both projections read it', async () => {
+    const { readFileSync } = await import('node:fs');
+    const read = (f) => readFileSync(new URL(`../../src/domain/display/${f}`, import.meta.url), 'utf8');
+    const FRAMES = ['The Ascendancy of ${', 'The Twilight of ${', 'besiege the walls.', 'lays siege.', 'Trade War, where ${'];
+    const writer = read('realmArcSentences.js');
+    for (const f of FRAMES) expect(writer, f).toContain(f);
+    for (const file of ['realmArcSummary.js', 'worldSnapshotPublic.js']) {
+      const src = read(file);
+      expect(src, `${file} reads the one writer`).toContain("from './realmArcSentences.js'");
+      for (const f of FRAMES) expect(src.includes(f), `${file} spells "${f}" itself`).toBe(false);
+    }
+  });
+  test('a siege with no named besieger reads "an army", never an empty slot', async () => {
+    const { siegeArc } = await import('../../src/domain/display/realmArcSentences.js');
+    expect(siegeArc('Hobb', [])).toBe('The War of Hobb, where an army lays siege.');
+    expect(siegeArc('Hobb', ['Ash', 'Bree', 'Cole'])).toBe('The War of Hobb, where a coalition of Ash, Bree +1 besiege the walls.');
+  });
+});
+

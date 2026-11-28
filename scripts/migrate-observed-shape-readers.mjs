@@ -197,12 +197,115 @@
  *     roster 10 -> 13, the bank 69/45 -> 76/50), and ADMITS the window's other rows with
  *     attribution. Its full rationale lives beside `WINDOW_RUNG1_TARGET_SCHEMA` (RETIRED).
  *
- *   schema 27 -> 28 (LIVE)   the same tagged numeric reconciliation, and THE SECOND CORPUS-COVERAGE
+ *   schema 45 -> 46 (LIVE)   THE FORTUNE MERITS WRITER'S ADMISSION (the chair's ruling of 22:18 UTC 2026-11-20 on the fortune lane; FORTUNE
+ *     U5a-CURE item 2, route B): one rung, ONE declaration of the conditional-generator-branch class, `merits on
+ *     breakdown` (writer fortune/fortuneMerits.js, which writes the key only under the fortune law, which the corpus's
+ *     CONFIGS never carry); the roster 16 -> 17, the bank 78/52 -> 79/53, and the one new row admitted TAGGED;
+ *     topology and tag law unchanged, nothing else moves. Its full rationale lives beside
+ *     `FORTUNE_MERITS_TARGET_SCHEMA`.
+ *
+ *   schema 44 -> 45 (RETIRED) THE LAST CLOSE (the chair's ruling CL26 of 2026-11-18, carried from the first close): one rung,
+ *     eleven new reads since the register was last frozen (e56e112e2), each ADMITTED BY CAUSE with its class and
+ *     landing; nothing declared, nothing gone; topology, tag law, roster and bank (78/52) unchanged. Its full
+ *     rationale lives beside `LAST_CLOSE_TARGET_SCHEMA`.
+ *
+ *   schema 43 -> 44 (RETIRED) THE CLOSE'S FINAL PASS (the chair's ruling OR2 of 2026-11-15, its law carried to the FINAL PASS at f76fe38fd): one rung, two rows, each with its cause — the
+ *     quick guide's dead culture fallback struck at its root (WR2, d8b08402f) retires as a lawful shrink, and the
+ *     liveness predicate's `_worldPulseInactive` read, lost by the detector when SR5 (9cade66ce) passed the defence
+ *     buckets' entries to it, is RECORDED AS UNCURED INSTRUMENT EROSION; topology, tag law, roster and bank (78/52)
+ *     unchanged. Its full rationale lives beside `FINAL_PASS_TARGET_SCHEMA`.
+ *
+ *   schema 42 -> 43 (RETIRED) THE CLOSE OF THE ROUND OF 2026-11-14/15 (the chair's ruling OR2 of 2026-11-15; the
+ *     chair's record 456): one rung, the round's causes, every moved row with one — the lawful shrinks retire with
+ *     cause, the rows the detector lost while their reads still stand are RECORDED AS UNCURED INSTRUMENT EROSION,
+ *     and the round's new reads are ADMITTED BY CAUSE with class and lane; topology, tag law, roster and bank
+ *     (78/52) unchanged. Its full rationale lives beside `CLOSE_ROUND_TARGET_SCHEMA`.
+ *
+ *   schema 41 -> 42 (RETIRED) THE AGREEMENT LANE'S TIER SEED (STYLE-2-MERGE point 47, the chair's ruling on STOP
+ *     47a): one rung, one cause — producer 2b's tier seed re-searched by its own rule (osr-tier-14 -> osr-tier-19)
+ *     after COHERENCE-AGREE moved osr-tier-14's town out of the overlap; topology, tag law, roster and bank
+ *     (78/52) unchanged. Its full rationale lives beside `AGREE_TIER_SEED_TARGET_SCHEMA`.
+ *
+ *   schema 40 -> 41 (RETIRED) THE PLAYED-WORLDS WRITER'S ADMISSION (STYLE-2-MERGE closing act 5, the chair's FINAL
+ *     RULING of 2026-11-09 21:2x): one rung, one cause — a NEW writer class, `played-worlds-writer` (a writer that
+ *     runs only in campaign time and is dormant in the birth corpus), and its first declaration, `outcome on
+ *     outcome` (writer worldPulse/convergence.js), its one row tagged; the roster 15 -> 16, the bank 77/51 ->
+ *     78/52. Its full rationale lives beside `PLAYED_WORLDS_TARGET_SCHEMA`.
+ *
+ *   schema 39 -> 40 (RETIRED) THE PUBLIC PROSE WRITER'S ADMISSION (lane SW-B7b PROJECTION, the chair's grant of
+ *     2026-11-09 13:5x): one rung, one cause — ONE save-time-writer declaration, `publicProse on settlement`
+ *     (writer lib/saves.js), its one row admitted tagged; the roster 14 -> 15, the bank 76/50 -> 77/51. Its
+ *     full rationale lives beside `PUBLIC_PROSE_TARGET_SCHEMA`.
+ *
+ *   schema 38 -> 39 (RETIRED) MERGE-TRAIN AT THE ALLEGIANCE-CAR4 MERGE (824a8ce2f): one rung, two causes — the
+ *     goals rebuilt (03ff59084: 7 admitted, 4 repaired, 16 uncured instrument erosion) and the fingerprint
+ *     re-based (0a18ff311: 1 admitted); none declared, the bank 76/50. Its full rationale lives beside
+ *     `TRAIN_CAR4_TARGET_SCHEMA`.
+ *
+ *   schema 37 -> 38 (RETIRED) MERGE-TRAIN AT THE ALLEGIANCE-CAR3 MERGE (c6ded8e3a): one rung, two causes — the
+ *     dial e9070d614 re-deals the year (13 admitted, 5 gone) and the bought watch a63effa93 (1 gone); none
+ *     declared, the bank 76/50. Its full rationale lives beside `TRAIN_CAR3_TARGET_SCHEMA`.
+ *
+ *   schema 36 -> 37 (RETIRED) MERGE-TRAIN AT THE ALLEGIANCE-CAR2 MERGE (f51058995): one rung, one cause — the
+ *     guild's push (bbb1a4abc, A3) re-deals the year: 13 gone, none new; none declared, the bank 76/50. Its full
+ *     rationale lives beside `TRAIN_CAR2_TARGET_SCHEMA`.
+ *
+ *   schema 35 -> 36 (RETIRED) MERGE-TRAIN AT THE ALLEGIANCE-CAR1 MERGE (e5f88930b; the chair's ruling, the
+ *     option-B idiom): one rung, two causes — the hidden allegiance (5902f1a4a: 11 admitted, 17 gone, 1
+ *     increased) and the J-19 re-deal (d131ab158: 13 admitted); the car's own 33 (the veil merge) is 35
+ *     here and is not re-minted; none declared, the bank 76/50. Its full rationale lives beside
+ *     `TRAIN_CAR1_TARGET_SCHEMA`.
+ *
+ *   schema 34 -> 35 (RETIRED) MERGE-WAVE AT THE FIX-PUBLIC-VEIL MERGE (7e65c7bec; the chair's option B): one rung,
+ *     two causes — the corpus builder's producer 1b′ (no row moves) and the veiled re-deal (4 admitted, 13
+ *     gone); none declared, the bank 76/50. Its full rationale lives beside `WAVE_VEIL_TARGET_SCHEMA`.
+ *
+ *   schema 33 -> 34 (RETIRED) the same tagged numeric reconciliation, and MERGE-WAVE AT THE FIX-FOOD-ISOLATION
+ *     MERGE (c6e8a4ad6; one rung per cause): ONE row ADMITTED by cause, `nearbyResourcesState on config` at
+ *     foodGenerator.js (its own existing read, newly observed on the receipt's call path); nothing goes,
+ *     none declared, the bank 76/50. Its full rationale lives beside `WAVE_FOOD_TARGET_SCHEMA`.
+ *
+ *   schema 32 -> 33 (RETIRED) the same tagged numeric reconciliation, and MERGE-WAVE AT THE W2 DEF MERGE
+ *     (82a4e2856; the chair's ruling of 2026-11-08: one rung per cause): ONE row ADMITTED by cause,
+ *     `direction on stress` at migrationDirection.js (grounded by the W2 composition; the writer is
+ *     W0-1's draw); nothing goes, none declared, the bank 76/50. Its full rationale lives beside
+ *     `WAVE_W2_TARGET_SCHEMA`.
+ *
+ *   schema 31 -> 32 (RETIRED) the same tagged numeric reconciliation, and MERGE-CAR: the people car
+ *     merged into the integration branch over the rung-2 landing (the chair's brief, 2026-11-08). The
+ *     car's genesis at 31 STANDS; the integration side's schema-30 reads (R2's census readers) are
+ *     ADMITTED at this rung by cause, the rows they retired go with cause: 15 new, 12 gone, none
+ *     declared; the bank 77/51 -> 76/50 (the census readers' `stresses on settlement` erosion). Its
+ *     full rationale lives beside `CAR_MERGE_TARGET_SCHEMA`.
+ *
+ *   schema 30 -> 31 (RETIRED) the same tagged numeric reconciliation, and THE PEOPLE CAR'S LANDING
+ *     (ODQ §934.105; the landing seat PEOPLE-LAND, 2026-11-07): the NPC grouping and the per-NPC
+ *     faction fields leave the record at the v2 boundary (M-2, M-7). A NEW GENESIS from a restored
+ *     consistent schema-30 predecessor. 90 new rows ADMITTED with attribution by lane cause, 9 go,
+ *     2 decrease; nothing is declared and the bank holds at 77/51. Its full rationale lives beside
+ *     `PEOPLE_LANDING_TARGET_SCHEMA`.
+ *
+ *   schema 29 -> 30 (RETIRED) the same tagged numeric reconciliation, and THE PEOPLE CAR'S CAST (the
+ *     owner's charter, ODQ §934.105; lane PEOPLE-1 CAST, 2026-11-07): one face per face-bearing house
+ *     with house-keyed ids, `institution`, `title`, `memberships` and a rank-placed `importance`, the
+ *     named roster and the rung stamps retired from birth. The corpus's year over the new cast fires
+ *     different simulation branches, so 19 ordinary rows are ADMITTED with attribution (the
+ *     schema-24 shape), 0 go; nothing is declared and the bank holds at 77/51. Its full
+ *     rationale lives beside `PEOPLE_CAST_TARGET_SCHEMA`.
+ *
+ *   schema 28 -> 29 (RETIRED) the same tagged numeric reconciliation, and ONE DECLARATION of the fifth
+ *     class (the chair's ruling of 2026-11-07 03:55 UTC, ODQ §934.105, lane WIRING-W0): the migration
+ *     direction's config projection, `migrationDirection on config` (writer
+ *     generators/steps/stressConfirmPass.js), whose writer never runs in the corpus because no corpus
+ *     world draws a `mass_migration`. The roster 13 -> 14, the bank 76/50 -> 77/51, the one new row
+ *     admitted tagged. Its full rationale lives beside `MIGRATION_DIRECTION_TARGET_SCHEMA`.
+ *
+ *   schema 27 -> 28 (RETIRED) the same tagged numeric reconciliation, and THE SECOND CORPUS-COVERAGE
  *     RUNG CUT FOR A PULSE SHAPE: R-B1 (2168ffdba, the promotion window reads the stamp cut) left
  *     producer 2's pulse no tier candidate, so the corpus builder gains producer 2b (its own one-save
  *     pulse over `osr-tier-14`, a town generated over the city cut; a bounded view of its tier
  *     candidates, roots only). Verdict-only like 25: the reconciliation is EMPTY, nothing is declared,
- *     the bank holds at 76/50. Its full rationale lives beside `TIER_COVERAGE_TARGET_SCHEMA`.
+ *     the bank holds at 76/50. Its full rationale lives beside `TIER_COVERAGE_TARGET_SCHEMA` (RETIRED).
  *
  *   schema 25 -> 26 (RETIRED) the same tagged numeric reconciliation, and THE FIRST RUNG THAT IS BOTH
  *     OF ITS PRECEDENTS AT ONCE: the schema-17 corpus-coverage shape (a famine TOPOLOGY pass that
@@ -290,6 +393,24 @@ import {
   validateSchema25Baseline,
   validateSchema26Baseline,
   validateSchema27Baseline,
+  validateSchema28Baseline,
+  validateSchema29Baseline,
+  validateSchema30Baseline,
+  validateSchema31Baseline,
+  validateSchema32Baseline,
+  validateSchema33Baseline,
+  validateSchema34Baseline,
+  validateSchema35Baseline,
+  validateSchema36Baseline,
+  validateSchema37Baseline,
+  validateSchema38Baseline,
+  validateSchema39Baseline,
+  validateSchema40Baseline,
+  validateSchema41Baseline,
+  validateSchema42Baseline,
+  validateSchema43Baseline,
+  validateSchema44Baseline,
+  validateSchema45Baseline,
 } from './lib/observed-shape-baseline.mjs';
 
 export const MIGRATION_REPORT_SCHEMA = 2;
@@ -1208,6 +1329,590 @@ export const WINDOW_RUNG1_TARGET_SCHEMA = 27;
  *  ratchet-red, and its re-freeze lands next. */
 export const TIER_COVERAGE_TARGET_SCHEMA = 28;
 
+/* ⭐⭐ THE SCHEMA 28 → 29 RUNG — THE MIGRATION-DIRECTION DECLARATION
+ *
+ *  The chair's ruling of 2026-11-07 03:55 UTC (ODQ §934.105) on lane WIRING-W0's record (under the
+ *  owner's full delegation of 2026-11-06, vetoable): "the observed-shape walker's two arms on
+ *  `migrationDirection on config` are cured by the instrument's own remedy — the explained-writer
+ *  exemption of the declared fifth class `conditional-generator-branch` — a governed instrument
+ *  migration, the chair's act, hereby ruled; the reason: no corpus world draws a `mass_migration`,
+ *  so the writer `stressConfirmPass.js` never runs in the corpus and the read has no observed writer
+ *  by construction, not by defect."
+ *
+ *  THE ROW, MEASURED. WIRING-W0's cause 1 (R-W7 (e), 343bd4eec) declared a mass migration's
+ *  direction once, on `stress[].direction`, and projects it onto the resolved config in
+ *  `generators/steps/stressConfirmPass.js` beside `config.stressTypes`, for the economy and power
+ *  readers that hold only the config. Their one shared accessor, `migrationDirectionOfConfig` in
+ *  `src/domain/migrationDirection.js`, makes ONE guarded read of `config.migrationDirection`. At
+ *  4f7ac80a9 the checker reported exactly one NEW row — `migrationDirection on config`, 1 read, in
+ *  that file — and nothing else: the projection is stamped only when a `mass_migration` entry
+ *  survives the confirm pass, and no corpus world draws one.
+ *
+ *  ⭐ THE DECLARATION, AND GATE 0. One entry of the fifth class, writer stressConfirmPass.js. The
+ *  writer as first spelled (`effectiveConfig.migrationDirection = migrationDirection`) is a member
+ *  assignment gate 0's four spellings do not see — the blindness that kept `_userEdits on stress`
+ *  ordinary at schema 27 — so this rung re-spells it, behaviour-identical, as
+ *  `Object.assign(effectiveConfig, { migrationDirection })`: the probe now finds the real write
+ *  (shorthand), not a comment or a type. Gate 1 (`git log --all -S"migrationDirection:" -- src/`)
+ *  returns one commit, 343bd4eec itself (narrativeGenerator.js's context literal), so an
+ *  authored-input story is not refuted; none is claimed — the class is the generator branch.
+ *
+ *  ⭐ THE BANK MOVES 76/50 → 77/51: the one declared identity reaches one address and one read.
+ *  ⛔ AND THE RECONCILIATION IS EXACTLY THAT ONE ROW: New 1 (tagged), Gone 0, Increased 0,
+ *  Decreased 0. Any other moved row at the mint means the declaration was not the whole cause and
+ *  the mint STOPS.
+ *
+ *  Its delta is the three bookkeeping paths (the declaration lives in the checker). The writer's
+ *  re-spelling is a SUBJECT file, scanned rather than scanning. See
+ *  `MIGRATION_DIRECTION_SCANNER_DELTA_PATHS`. The commit pair holds as at every rung: this rung
+ *  lands ratchet-red, and its re-freeze lands next. */
+export const MIGRATION_DIRECTION_TARGET_SCHEMA = 29;
+
+/* ⭐⭐ THE SCHEMA 29 → 30 RUNG — THE PEOPLE CAR'S CAST
+ *
+ *  The owner's charter (ODQ §934.105; the people car, lane PEOPLE-1 CAST, 2026-11-07,
+ *  docs/PEOPLE_1_CAST_2026-11-07.md): "for every appropriate institution, we generate one NPC …
+ *  They act as the face. We are not building all the citizens of a settlement … We are simply
+ *  making representatives." The cast is the roster's faces now (one card per face-bearing house,
+ *  the seat always faced, the powers' first, second and third from the backing catalogue), with
+ *  ids keyed by the house (`npc_<house slug>`), `institution`, `title` and `memberships` on every
+ *  card, and `importance` placed from the rank. The named-NPC roster and the density law's rung
+ *  stamps are retired from birth; `densityRungRole`, `factionGoal` and `linkedFactionIds` are no
+ *  longer written by the generator (the shim derives the two affiliation fields from the ranks).
+ *
+ *  WHAT MOVED, AND IT IS THE CORPUS'S OWN CONTENT, NOT THE DETECTOR OR THE CORPUS DEFINITION (the
+ *  schema-24 shape): the same seeds, configs and twelve pulses generate a different world — a
+ *  cast of a different size and shape, so the simulation's year over it fires different branches
+ *  (its proposals, its impairments, its stressor outcomes), and the heuristic observes shapes it
+ *  bound differently before. Reads of keys those shapes lack become findings.
+ *
+ *  ⛔ THE ROWS ARE ADMITTED AS ORDINARY DEBT, NOT DECLARED (the schema-24 posture), each row's
+ *  class in its own review note:
+ *    • RARE-BRANCH WRITERS of the simulation (FPZ's, M-6: nothing under worldPulse/ is rewritten
+ *      by the car): `proposalPayload` and `outcome` keys the challenge and faction-roster passes
+ *      write on a branch this year does not take, `covert` on the impairments the corruption
+ *      pass writes, `factionName`/`archetype` on stressor outcomes;
+ *    • THE RETIRED GENERATOR'S TRANSIENT CONFIG: `generateNPCGoal`'s reads of `config._dominantFaction`,
+ *      `config._tradeCommodity` and `config.tradeCommodity` — the goal pools' tokens, written on the
+ *      transient `npcConfig` the representative generator builds (people/representatives.js and
+ *      people/castPowers.js, the same object-literal spelling `generateNPCs` used) and never on a
+ *      record the corpus histograms; the retired roster's run was the corpus's observation of them.
+ *  Declaring ~19 identities under `conditional-generator-branch` was refused for the reason
+ *  schema 24 gave: that class is a one-off admission whose typed door is TE-GUARDS-1's question.
+ *  The one reader-with-no-writer the car itself introduced (`settlement.culture` in castPowers.js)
+ *  was CURED, not admitted, at 8d45d8308.
+ *
+ *  ⛔ THE RECONCILIATION, MEASURED at ⟨BASE⟩ 8fbe270a1 through `--scan-only
+ *  --scan-mode=legacy-leaf`, against the committed schema-29 register:
+ *
+ *      reads 2,045 → 2,068 · identities 1,451 → 1,470 · files 401 → 403
+ *      NEW 19 · GONE 0 · INCREASED 0 · DECREASED 0 · SAME 1,451
+ *
+ *  A different figure at the mint means the tip moved under the measurement and the mint STOPS.
+ *
+ *  ⭐ THE BANK DOES NOT MOVE: 77 banked reads across 51 tagged addresses, measured off the live
+ *  scan (no moving row is on a declared identity), so the literal module stands still.
+ *
+ *  Its delta is the THREE bookkeeping paths every rung moves. See `PEOPLE_CAST_SCANNER_DELTA_PATHS`.
+ *  The commit pair holds as at every rung: this rung lands ratchet-red, and its re-freeze lands
+ *  next. */
+export const PEOPLE_CAST_TARGET_SCHEMA = 30;
+
+/* ⭐⭐ THE SCHEMA 30 → 31 RUNG — THE PEOPLE CAR'S LANDING
+ *
+ *  The owner's charter (ODQ §934.105, quoted in PEOPLE-RULINGS §0): "removing factions entirely" —
+ *  the NPC grouping `settlement.factions` and the per-NPC faction fields go; the POWERS
+ *  (`powerStructure.factions`) stay. Lanes 2-5B of the people car landed on lane 1's cast; lane 5B's
+ *  v2 boundary (`normalizeSettlement`, schema 2, M-7) strips the grouping and `factionAffiliation`,
+ *  `secondaryAffiliation`, `linkedFactionIds`, `factionGoal`, `densityRungRole` from every returned
+ *  record, and its migration moves a v1 save's fields once.
+ *
+ *  ⛔ WHY A NEW GENESIS AND NOT A SCHEMA-30 RE-FREEZE (MERGE-5AB's STOP, ruled by the chair):
+ *  MERGE-234's final merge (c7d552370) resolved the register textually and it was never re-derived;
+ *  `validateBaselineHistory` re-validates every committed schema-30 register on the ancestry path,
+ *  and c7d552370's fails `assertManifest` (executionTree manifest digest mismatch). Only a rung
+ *  escapes: its walk reads schema-31 descendants of its own genesis. The predecessor is the last
+ *  register written through the door, 8dd30106b's bytes, restored and committed first (db5dbb001).
+ *
+ *  WHAT MOVED: the corpus's record shape (the grouping's items, which carried `name` and `members`,
+ *  and the shim's fields no longer observed), so reads of those keys elsewhere become findings.
+ *  MEASURED, at the subject, through `--scan-only --scan-mode=legacy-leaf` against the predecessor:
+ *
+ *      reads 2,068 → 2,200 · identities 1,470 → 1,551 · files 403 → 426
+ *      NEW 90 · GONE 9 · INCREASED 0 · DECREASED 2 · SAME 1,459
+ *
+ *  Scanned at the lane tips (the 234 tip c7d552370, 5A 3d76fb058, 5B f24623a9f): 86 of the 90 rows
+ *  first appear at 5B's tip (the v2 boundary), 2 at 5A's (its display reads), 2 only in the union.
+ *
+ *  ⛔ THE ROWS ARE ADMITTED WITH ATTRIBUTION BY LANE CAUSE (the schema-24 posture), not declared:
+ *    • FPZ's (M-6, broken by design): the simulation's readers of the grouping and the five fields,
+ *      each attributed to `fpz-list.json`'s reason; they read nothing on a v2 record;
+ *    • v1-migration-reads (ONE class): "the migration reads the five legacy fields once, by design,
+ *      to move them" — `settlementMigrations.js`, 5B's;
+ *    • lane 1 (the card's `institution`, `title`, `memberships`); lane 3 (the hook parties);
+ *      5A (the display reads); 5B (the edit layer, and the grouping's builders, retired by M-2);
+ *    • lanes 2 and 4: none measured.
+ *  The 9 GONE and 2 DECREASED are the grouping's readers the boundary and 5A's re-points retired.
+ *
+ *  ⭐ THE BANK DOES NOT MOVE: 77 banked reads across 51 tagged addresses (no moving row is on a
+ *  declared identity). Its delta is the THREE bookkeeping paths every rung moves. This rung lands
+ *  ratchet-red; its re-freeze lands next. */
+export const PEOPLE_LANDING_TARGET_SCHEMA = 31;
+
+/* ⭐⭐ THE SCHEMA 31 → 32 RUNG — MERGE-CAR: THE PEOPLE CAR MERGED INTO THE INTEGRATION BRANCH
+ *
+ *  The merge commit 8dff691f3 merged the people car (lane/people-land-2026-11-07, 373a2947b) into
+ *  the integration branch (7b3ffb6ee). Both sides had cut their own rung: the car its NEW GENESIS
+ *  at 31 (PEOPLE-LAND, aaa15f224 / b61029f4d), the integration side its 30, THE CENSUS READERS
+ *  (MERGE-R2, f7bc53623 / a709af16d). At the merge the car's side of the tooling, suites and
+ *  register was taken. THE CHAIR'S BRIEF (MERGE-CAR, 2026-11-08): "the car's genesis at schema 31
+ *  STANDS; the integration side's schema-30 reads — R2's census readers — admitted at a new rung by
+ *  cause, none declared". This is that rung.
+ *
+ *  THE REFUSAL, MEASURED at the merged tip c12c28af0 through `--scan-only --scan-mode=legacy-leaf`
+ *  against the car's schema-31 register (frozen at 147fa6c3f):
+ *
+ *      findings 2,193 → 2,202 · identities 1,545 → 1,548
+ *      NEW 15 · GONE 12 · INCREASED 0 · DECREASED 0 · SAME 1,533
+ *
+ *  The scanner transition modifies exactly the three bookkeeping paths; the unscanned movement is
+ *  the eight regenerated execution inputs (src/data/dossierConnectives.generated.js, the six
+ *  src/data/dossierStateProse/*.generated.js, src/domain/data/intentAtlas.distillate.json), changed
+ *  since the car's freeze and verified fresh at this tree (`gen:dossier-prose --check` green):
+ *  regenerated inputs the write absorbs, not detector sources.
+ *
+ *  THE MIGRATION REVIEW — every moved row, its cause, its disposition:
+ *   (A) R2'S CENSUS READERS (the rung-2 landing; MERGE-R2's schema-30 review is the source of every
+ *       cause), the same 21 rows R2 measured, row for row:
+ *     NEW (10 rows), each ADMITTED as ordinary debt:
+ *      • display/tradeListDisplay.js `name on incomeSources` x1 — 9e4283eb5 (census-3c R-P 2).
+ *      • facts/drawDeclared.js `id` x3, `text` x2, `twinOf` x2 `on merchant` — 8d5b704a9, surfaced
+ *        at f739d37c6 (census-1e unit 2: the `merchant` override's binding carried into it);
+ *        `colour on merchant` x1 — d59b8a37a (census compose, R-AO).
+ *      • facts/factVocabulary.js `crisis`, `excludes`, `needs` x1, `tags` x2 `on merchant` —
+ *        c84bd6a29, surfaced at f739d37c6 by the same binding.
+ *      • roles/roleClass.js `contestsNiche on factions` x1 — A MOVE: 596cb8b1b (census-4 R3) re-homed
+ *        `seatFactions` from coherence/readerBattery.js.
+ *     GONE (11 rows), each RETIRED with its cause:
+ *      • coherence/readerBattery.js `contestsNiche on factions` x1 — moved by 596cb8b1b.
+ *      • generators/npcGenerator.js `note` x2, `short` x1 `on merchant` — f739d37c6 (the binding
+ *        moved into drawDeclared.js / factVocabulary.js).
+ *      • domain/canonicalAccessors.js `stresses on settlement` x1 (a BANKED row: the bank 77/51 ->
+ *        76/50) and domain/magicLedger.js `magicLevel on settlement` x1 — 7af3c6797 (census-3b(3)):
+ *        UNCURED INSTRUMENT EROSION, recorded as such, not as a repair.
+ *      • pdf/lib/viewModel.js `criticalIssues` x1, `structuralSuggestions` x1, `stressConsequences`
+ *        x2 `on economicViability`; pdf/lib/viewModelBodySlices.js `priorityNotes on
+ *        economicViability` x1, `structuralGaps on resourceAnalysis` x1, `structuralGaps on
+ *        settlement` x1 — d3b9280f6 (reader-r1 unit 2): the reads are gone, a lawful repair.
+ *   (B) THE CENSUS READERS UNDER THE CAR'S RECORD (the composition): the rung-2 landing's readers of
+ *       the powers keep a `f.faction ?? f.name` fallback; on the integration side the corpus's
+ *       `factions` shape still carried the NPC grouping's `name`, and at the car's v2 boundary (M-2,
+ *       M-7) the observed `factions` shape is the powers alone, named by `faction`. The fallback
+ *       becomes a finding — a dead fallback, not a lost writer. NEW (4 rows), ADMITTED:
+ *      • roles/roleClass.js `name on factions` x2 — A MOVE: `seatFactions`, re-homed by 596cb8b1b
+ *        from coherence/readerBattery.js, whose `name on factions` x2 the car's register held
+ *        (GONE below; readerBattery's faction-role-fit now reads memberships via people/membership.js,
+ *        MERGE-CAR, M-1b, and moves no row).
+ *      • coherence/crisisFactFindings.js `name on factions` x2 — the rung-2 crisis-cast reader
+ *        (`governing?.name`, `x?.name`); MERGE-CAR's composition there (memberships) moves no row.
+ *      • generators/power/factionLabelClose.js `name on factions` x1 — the rung-2 close-label pass.
+ *      • facts/guild.js `name on factions` x1 — MERGE-CAR's composition: `guildOf` reads the powers
+ *        alone now that the grouping is no longer built (M-2); its `f?.name` fallback is on the powers.
+ *     GONE (1 row), RETIRED: coherence/readerBattery.js `name on factions` x2 — moved by 596cb8b1b.
+ *   (C) THE CENSUS READERS UNDER THE CAR'S CORPUS: generators/npcGenerator.js `_government on
+ *       config` x3 (NEW, ADMITTED) — CENSUS-1i unit 6 / CENSUS-4d's `birthFactsOf` reads of
+ *       `config._government` (the integration side). Its writer is the npcConfig literal in the same
+ *       file; the car's corpus does not ground that derived config, so the read joins the car's own
+ *       admitted siblings `_dominantFaction on config` / `_tradeCommodity on config` there.
+ *  MEASURED, NOT EXPECTED: no row moves at people/ties.js, people/representatives.js or in
+ *  readerBattery's faction-role-fit — the composition's reads there are grounded.
+ *
+ *  Nothing is declared (the roster stays fourteen; thirteen bank). The identity rows move by exactly
+ *  the review's delta, 1545 + 15 - 12 = 1548. ⛔ The reconciliation must be EXACTLY those 27 rows;
+ *  any other moved row at the mint means the review was not the whole cause and the mint STOPS.
+ *  Its delta is the three bookkeeping paths; see `CAR_MERGE_SCANNER_DELTA_PATHS`. The commit pair
+ *  holds as at every rung: this rung lands ratchet-red, and its re-freeze lands next. */
+export const CAR_MERGE_TARGET_SCHEMA = 32;
+
+/* ⭐⭐ THE SCHEMA 32 → 33 RUNG — MERGE-WAVE AT THE W2 DEF MERGE (one rung per cause)
+ *
+ *  The merge commit 82a4e2856 merged lane/w2-def-2026-11-07 (091b23bb3, cut at ee3b7a168, before the
+ *  car) into the integration branch after W1 ECO's merge. THE CHAIR'S BRIEF (MERGE-WAVE §1): "the
+ *  registers through their doors AFTER the merge commit (observed-shape `--write` admitting the lane's
+ *  reads by cause, none declared)"; THE CHAIR'S RULING (2026-11-08): one rung per cause. This is
+ *  W2 DEF's rung.
+ *
+ *  THE REFUSAL, MEASURED at the merged tip (ded92e94e's content, the W2 merge point's registers in)
+ *  through `--write` (shrink-only) and `--scan-only --scan-mode=legacy-leaf` against the schema-32
+ *  register re-frozen at the W1 ECO merge point (18a3daf5b):
+ *
+ *      NEW 1 · GONE 0 · INCREASED 0 · DECREASED 0
+ *
+ *  THE ROW: src/domain/migrationDirection.js `direction on stress` x1 (`row.direction`, the reader
+ *  under the one direction fact). The file is unchanged since W0 (343bd4eec / eb4c508e1). At the W1
+ *  ECO merge point the same scan leaves that receiver ungrounded (no finding); at the W2 composition
+ *  the receiver grounds to the `stress` shape — W2 DEF's stress-type desks (DS-DEF-3/-8) read
+ *  settlement.stress entries inline. The WRITER IS REAL: W0-1 (343bd4eec) writes stress[].direction
+ *  on the mass_migration entry at the draw; no osr corpus seed draws a mass migration (the corpus's
+ *  `stress` shape: 138 rows, no `direction`, measured at both points). ADMITTED as ordinary debt
+ *  with this attribution; a corpus stimulus that draws a migration would retire it.
+ *
+ *  Nothing is declared (the roster stays fourteen; thirteen bank, 76/50). ⛔ The reconciliation must
+ *  be EXACTLY that one row; any other moved row at the mint means the review was not the whole cause
+ *  and the mint STOPS. Its delta is the three bookkeeping paths; see `WAVE_W2_SCANNER_DELTA_PATHS`.
+ *  The commit pair holds as at every rung: this rung lands ratchet-red, and its re-freeze lands next. */
+export const WAVE_W2_TARGET_SCHEMA = 33;
+
+/* ⭐⭐ THE SCHEMA 33 → 34 RUNG — MERGE-WAVE AT THE FIX-FOOD-ISOLATION MERGE (one rung per cause)
+ *
+ *  The merge commit c6e8a4ad6 merged lane/fix-food-isolation-2026-11-07 (7b489f21e, cut at a3d3c31b6) into
+ *  the integration branch after W7. THE CHAIR'S BRIEF (MERGE-WAVE §0.6): "at its merge point your
+ *  observed-shape rung ADMITS the one row its §S4 names — `nearbyResourcesState on config`,
+ *  foodGenerator.js, one read — with the §S4 sentence as the cause, none declared, nothing exempted";
+ *  THE CHAIR'S RULING (2026-11-08): its OWN rung, never folded with another cause. This is that rung.
+ *
+ *  THE REFUSAL, MEASURED at the merged tip through `--write` (shrink-only) against the schema-33 register:
+ *
+ *      NEW 1 · GONE 0 · INCREASED 0 · DECREASED 0
+ *
+ *  THE ROW AND ITS CAUSE, the lane's §S4 sentence verbatim: "FIX-FOOD-ISOLATION: the receipt reads the
+ *  land through foodLandOf; the depletion arm's read of the effective config is foodGenerator's own,
+ *  observed on the receipt's call path." — src/generators/foodGenerator.js `nearbyResourcesState on
+ *  config` x1 (`Object.entries(config.nearbyResourcesState || {})`), ADMITTED with that attribution.
+ *
+ *  Nothing is declared (the roster stays fourteen; thirteen bank, 76/50). ⛔ The reconciliation must be
+ *  EXACTLY that one row; any other moved row at the mint means the review was not the whole cause and the
+ *  mint STOPS. Its delta is the three bookkeeping paths; see `WAVE_FOOD_SCANNER_DELTA_PATHS`. */
+export const WAVE_FOOD_TARGET_SCHEMA = 34;
+
+/* ⭐⭐ THE SCHEMA 34 → 35 RUNG — MERGE-WAVE AT THE FIX-PUBLIC-VEIL MERGE (one rung, two causes: the chair's
+ *  option B of 2026-11-08)
+ *
+ *  The merge commit 7e65c7bec merged lane/fix-public-veil-2026-11-07 (eb18cb458, cut from the car branch)
+ *  into the integration branch. The lane carried two rungs of its own: its 32 (the corpus's infiltrated
+ *  topology, producer 1b′ in scripts/lib/observed-shape-corpus.mjs) and its 33 (the veiled re-deal). The
+ *  corpus builder auto-merged; at the merged tip both causes stand in one tree, so the ritual cannot
+ *  measure them apart. THE CHAIR'S RULING (option B): ONE rung on the merged tip, predecessor 34, its
+ *  transition carrying the corpus builder path as CAUSE 1 and its review attributing every moved row to
+ *  CAUSE 2, both causes named per row; every row has exactly one cause.
+ *
+ *  CAUSE 1 — the corpus definition: producer 1b′, CONFIGS[0] × the four seeds with stressTypes
+ *  ['infiltrated'], entering `roots` (topology only). It moves NO row: the lane's own rung-32
+ *  measurement, NEW 0 · GONE 0 · SAME 1,545, is the evidence (docs/FIX_PUBLIC_VEIL_2026-11-07.md §2).
+ *  CAUSE 2 — the veiled re-deal (the lane's 48bcc1f3e: a veiled face's opaque id keys its forks), MEASURED
+ *  at the merged tip against the schema-34 register: NEW 4 · GONE 13 · INCREASED 0 · DECREASED 0.
+ *    NEW, ADMITTED with attribution — `covert on impairments` x1 in src/domain/corruption.js,
+ *      src/domain/worldPulse/beliefMap.js, src/domain/entities/status.js and
+ *      src/domain/worldPulse/institutionStatusLifecycle.js (the re-dealt year no longer reaches the
+ *      covert-corruption writer; the lane's rung-33 rows).
+ *    GONE, retired with that cause — `nearbyResourcesState on config` in affordanceManifest.js,
+ *      mutateWorld.js (4), targetRosters.js, resourceSemantics.js, deriveSystemState.js,
+ *      institutionLifecycleResourceRead.js, resourceDynamicsKernel.js, tierResourceDynamics.js (2),
+ *      foodGenerator.js (FIX-FOOD-ISOLATION's row admitted at 34) and resolveResources.js (3);
+ *      `resourceHistory on settlement` in rosterProvenance.js, resourceDynamicsKernel.js (2) and
+ *      tierResourceDynamics.js (2): the re-dealt year now observes both keys.
+ *
+ *  Nothing is declared (the roster stays fourteen; thirteen bank, 76/50). ⛔ The reconciliation must be
+ *  EXACTLY those seventeen rows; any other moved row means the review was not the whole cause and the
+ *  mint STOPS. The delta is FOUR paths: the corpus builder (cause 1) and the three bookkeeping paths. */
+export const WAVE_VEIL_TARGET_SCHEMA = 35;
+
+/* ⭐⭐ THE SCHEMA 35 → 36 RUNG — MERGE-TRAIN AT THE ALLEGIANCE-CAR1 MERGE (one rung, two causes: the chair's
+ *  ruling of 2026-11-09, the public-veil option-B idiom)
+ *
+ *  The merge commit e5f88930b merged lane/allegiance-car1-2026-11-08 (7395b5dab) into the integration
+ *  branch. After schema 32 the car minted three rungs of its own: its 33 (the veil merge), its 34 (the
+ *  hidden allegiance, cause commit 5902f1a4a) and its 35 (the J-19 cure, cause commit d131ab158), while this
+ *  line minted 33 (W2 DEF), 34 (FIX-FOOD-ISOLATION) and 35 (FIX-PUBLIC-VEIL). At the merge commit this
+ *  line's tooling, register and suites were taken whole. THE CHAIR'S RULING: the car's 33 IS the veil merge
+ *  this line already minted as 35 — it is NOT re-minted. The car's 34 and 35 are re-minted as ONE rung on
+ *  the merged tip, predecessor 35, two causes, every moved row assigned to exactly one; the review names
+ *  each row's cause. The corpus DEFINITION is unchanged (no corpus-builder path in the delta).
+ *
+ *  MEASURED at the merged tip against the schema-35 register (scan vs inventory): NEW 24 · GONE 17 ·
+ *  INCREASED 1 · DECREASED 0 · SAME 1,523.
+ *  CAUSE 1 — the hidden allegiance (5902f1a4a; the car's rung-34 review,
+ *    docs/allegiance/osr-rung34-allegiance-review.json, classes A/B/C): 29 rows.
+ *    NEW, ADMITTED with attribution (11) — class A, the allegiance's simulation sub-fields read on the
+ *      allegiance: `conspiracy` / `criminalInstitution` / `foreignPatron` / `leash on allegiance` in
+ *      src/domain/corruptionLeash.js, `leash on allegiance` in src/domain/people/allegiance.js; class B, the
+ *      retired mark's readers: `corruptTies on npcs` in corruptionLeash.js, settlementMigrations.js,
+ *      worldPulse/causeLifecycle.js, worldPulse/clergyTraitPlane.js and worldPulse/npcAgency.js, and
+ *      `ousted on npcs` in settlementMigrations.js.
+ *    GONE, retired with that cause (17) — class A, the same sub-fields on corruptTies: `conspiracy` /
+ *      `foreignPatron` / `leash on corruptTies` in corruptionLeash.js, `leash on corruptTies` in npcAgency.js,
+ *      `revealed on corruptTies` in causeLifecycle.js, clergyTraitPlane.js and npcGrowthKernel.js; class C,
+ *      the year over the new cast: `factionAffiliation on npcs` in corruption.js, density/factionLifecycle.js,
+ *      events/registry.js, settlementMigrations.js, worldPulse/houseLedger.js and worldPulse/successorNpc.js,
+ *      `factionLink` / `institutionId on npcs` in corruption.js and successorNpc.js.
+ *    INCREASED (1) — class B: `migrationReports on settlement` in settlementMigrations.js, 2 -> 4 (the v2 -> v3
+ *      migration's report).
+ *    The car's other class-C rows (the proposalPayload / outcome / stressors rows its rung 34 retired) do
+ *      NOT move here: its rung 35 re-admitted them and this line's register already holds them.
+ *  CAUSE 2 — the J-19 cure (d131ab158: npcAgency.js :: ensureNpcStates no longer re-rolls a v3 card's
+ *    corruption, so the corpus's year re-deals; the car's rung-35 review,
+ *    docs/allegiance/osr-rung35-j19-pulse-review.json, class J): 13 rows, all NEW, ADMITTED with
+ *    attribution — `nearbyResourcesState on config` in events/affordanceManifest.js, events/mutateWorld.js
+ *    (4), events/targetRosters.js, resourceSemantics.js, state/deriveSystemState.js,
+ *    worldPulse/institutionLifecycleResourceRead.js, worldPulse/resourceDynamicsKernel.js,
+ *    worldPulse/tierResourceDynamics.js (2), generators/steps/resolveResources.js (3) and
+ *    generators/foodGenerator.js; `resourceHistory on settlement` in provenance/rosterProvenance.js,
+ *    resourceDynamicsKernel.js (2) and tierResourceDynamics.js (2). The foodGenerator.js row is the one row
+ *    the car's review does not name (FIX-FOOD-ISOLATION's row, admitted at 34 on this line, retired at 35 by
+ *    the veiled re-deal); it is plainly the same re-dealt-year class (the same key, the same writer no longer
+ *    reached) and is assigned to cause 2 by that class.
+ *
+ *  Nothing is declared (the roster stays fourteen; thirteen bank, 76/50). ⛔ The reconciliation must be
+ *  EXACTLY those forty-two rows; any other moved row means the review was not the whole cause and the mint
+ *  STOPS. The delta is the THREE bookkeeping paths; see `TRAIN_CAR1_SCANNER_DELTA_PATHS`. */
+export const TRAIN_CAR1_TARGET_SCHEMA = 36;
+
+/* ⭐⭐ THE SCHEMA 36 → 37 RUNG — MERGE-TRAIN AT THE ALLEGIANCE-CAR2 MERGE (one rung, one cause: the chair's
+ *  ruling of 2026-11-09)
+ *
+ *  The merge commit f51058995 merged lane/allegiance-car2-2026-11-08 (46715e751, cut from car 1's 7395b5dab)
+ *  into the integration branch; this line's observed-shape tooling, register and suites were taken whole
+ *  (rung 36 live). The car minted ONE rung of its own after car 1's 35 — its 36 (7017f5096 / 45c9e64c6, review
+ *  docs/allegiance/osr-rung36-guild-push-review.json): NEW 0 · GONE 12, all bisected to the guild's push
+ *  bbb1a4abc (A3: generators/people/castPowers.js weights hidden agents in the rank deal, so the corpus's
+ *  simulated year re-deals); A6 (ce90cf16e, the hall-capture state) measured on the lane to equal bbb1a4abc
+ *  exactly, and the capture rows (aca93cbc5, after the lane's rung) left the car's register unchanged to its
+ *  tip. It is re-minted here as rung 37 on the merged tip, predecessor 36, ONE cause. The corpus DEFINITION is unchanged (no corpus-builder path in the delta).
+ *
+ *  MEASURED at the merged tip against the schema-36 register (scan vs inventory): NEW 0 · GONE 13 ·
+ *  INCREASED 0 · DECREASED 0 · SAME 1,535. Every GONE row is the re-dealt year reaching its writer again,
+ *  RETIRED WITH CAUSE (class G): `nearbyResourcesState on config` in events/affordanceManifest.js,
+ *  events/mutateWorld.js (4), events/targetRosters.js, resourceSemantics.js, state/deriveSystemState.js,
+ *  worldPulse/institutionLifecycleResourceRead.js, worldPulse/resourceDynamicsKernel.js,
+ *  worldPulse/tierResourceDynamics.js (2), generators/steps/resolveResources.js (3) and
+ *  generators/foodGenerator.js; `resourceHistory on settlement` in provenance/rosterProvenance.js,
+ *  resourceDynamicsKernel.js (2) and tierResourceDynamics.js (2). Twelve are the car's own rung-36 rows; the
+ *  thirteenth, foodGenerator.js, the car's review cannot name (FIX-FOOD-ISOLATION's row on this line, which
+ *  rung 36 admitted by class with J-19's): it is plainly the same re-dealt-year class (the same key, the same
+ *  writer reached again) and is assigned to this cause by that class. Neither A6 nor the capture rows are
+ *  needed as a second cause.
+ *
+ *  Nothing is declared (the roster stays fourteen; thirteen bank, 76/50). ⛔ The reconciliation must be
+ *  EXACTLY those thirteen rows; any other moved row means the review was not the whole cause and the mint
+ *  STOPS. The delta is the THREE bookkeeping paths; see `TRAIN_CAR2_SCANNER_DELTA_PATHS`. */
+export const TRAIN_CAR2_TARGET_SCHEMA = 37;
+
+/* ⭐⭐ THE SCHEMA 37 → 38 RUNG — MERGE-TRAIN AT THE ALLEGIANCE-CAR3 MERGE (one rung, two causes, every moved
+ *  row with exactly one: the chair's ruling of 2026-11-09)
+ *
+ *  The merge commit c6ded8e3a merged lane/allegiance-car3-2026-11-08 (6ea8fb318, cut from car 1's 7395b5dab)
+ *  into the integration branch; this line's observed-shape tooling, register and walker were taken whole
+ *  (rung 37 live). The car took NO rung on its lane: a governed --write shrink (1a522aaf4: 2,203 / 1,546 ->
+ *  2,194 / 1,540, six identities gone) and the walker's pins re-keyed (18a315ee2), its year re-dealt by its
+ *  generator causes (e9070d614, 8567f490d, 2f89aaeef; the split there PLAUSIBLE, not bisected). Minted here
+ *  as rung 38 on the merged tip, predecessor 37. The corpus DEFINITION is unchanged.
+ *
+ *  MEASURED at the merged tip against the schema-37 register (scan vs inventory): NEW 13 · GONE 6 ·
+ *  INCREASED 0 · DECREASED 0 · SAME 1,529.
+ *  CAUSE 1 — the dial e9070d614 (ALLEGIANCE_TUNING.organizedCrime 0.10 -> 0.05: fewer agents dealt on
+ *    their keyed forks, so the corpus's year re-deals): 18 rows. BISECTED, CONFIRMED: a scratch tree of the
+ *    merged tip with that one constant reverted to 0.10 scans NEW 0 · GONE 1 against the schema-37 register
+ *    (only cause 2's row moves) and its corpus year equals the rung-37 pins, so 8567f490d and 2f89aaeef
+ *    (fence-only) move no row here.
+ *    NEW, ADMITTED with attribution (13) — the re-dealt year no longer reaches the writers rung 37 saw:
+ *      `nearbyResourcesState on config` in events/affordanceManifest.js, events/mutateWorld.js (4),
+ *      events/targetRosters.js, resourceSemantics.js, state/deriveSystemState.js,
+ *      worldPulse/institutionLifecycleResourceRead.js, worldPulse/resourceDynamicsKernel.js,
+ *      worldPulse/tierResourceDynamics.js (2), generators/steps/resolveResources.js (3) and
+ *      generators/foodGenerator.js; `resourceHistory on settlement` in provenance/rosterProvenance.js,
+ *      resourceDynamicsKernel.js (2) and tierResourceDynamics.js (2).
+ *    GONE, retired with that cause (5) — the re-dealt year reaches their writers (the car's own shrink rows):
+ *      `factionName on stressors` (4) and `settlementIds on stressors` in components/map/WorldPulseData.js,
+ *      `targetId on outcome` in worldPulse/proposalAdmission.js, `attackerId` / `targetId on outcome` in
+ *      worldPulse/warCoalitionEvidence.js.
+ *  CAUSE 2 — the bought watch a63effa93: 1 row GONE, `ousted on npcs` in src/domain/corruption.js — the read
+ *    left the file (the person arm now reads it through corruptionLeash.js :: isOustedNpc, where the
+ *    detector binds no npcs shape); it moves with the dial reverted too.
+ *
+ *  Nothing is declared (the roster stays fourteen; thirteen bank, 76/50). ⛔ The reconciliation must be
+ *  EXACTLY those nineteen rows; any other moved row means the review was not the whole cause and the mint
+ *  STOPS. The delta is the THREE bookkeeping paths; see `TRAIN_CAR3_SCANNER_DELTA_PATHS`. */
+export const TRAIN_CAR3_TARGET_SCHEMA = 38;
+
+/* ⭐⭐ THE SCHEMA 38 → 39 RUNG — MERGE-TRAIN AT THE ALLEGIANCE-CAR4 MERGE (one rung, two causes, every moved
+ *  row with exactly one cause and its class: the chair's ruling of 2026-11-09)
+ *
+ *  The merge commit 824a8ce2f merged lane/allegiance-car4-2026-11-08 (ea012f42d; cut from car 2's 46715e751,
+ *  write-goals 82796628e and write-people-3 5ee39a56c merged first) into the integration branch, after points
+ *  4–8; this line's observed-shape tooling, register and walker were taken whole (rung 38 live). The car minted
+ *  its own rung 37 (ce9b067ca / 622f80120, review docs/allegiance/osr-rung37-goals-review.json): New 8, Gone 19,
+ *  Decreased 1. It is re-minted here as rung 39 on the merged tip, predecessor 38. The corpus DEFINITION is
+ *  unchanged. Item 15 (eabc93dfe, the title-secret draw) is not needed: the car's scan at it equals 03ff59084.
+ *
+ *  MEASURED at the merged tip against the schema-38 register (scan vs inventory): NEW 8 · GONE 19 ·
+ *  INCREASED 0 · DECREASED 1 · SAME 1,522 — every row the car's review names, by file and identity.
+ *  CAUSE 1 — the goals rebuilt (03ff59084, A9: goals by families at the seam's end, the keyed intent): 27 rows.
+ *    class I, ADMITTED with attribution (7) — the envoy encounter's own intent record now grounds by the
+ *      name's single home to the card's goal intent: `intentId` / `kind` / `privateGoal on intent` (3 each),
+ *      `plantEligible` / `plantLineageId` / `plantTargetErrandId on intent` (2 each), `privateGoals on intent`
+ *      (4), all in src/domain/worldPulse/envoyEncounter.js.
+ *    class R, retired by REPAIR (4) — npcGenerator.js's goal draw leaves the birth record: `_dominantFaction`,
+ *      `_tradeCommodity`, `tradeCommodity on config` gone; `_government on config` DECREASED 3 -> 1 (the census
+ *      birth-facts read stands).
+ *    class E, GONE AS UNCURED INSTRUMENT EROSION (16), recorded as such, NOT a repair (the rung-32 precedent,
+ *      ACCEPTED by the chair): the reads still stand in source; the bindings that grounded them are re-homed
+ *      and the byte-frozen detector no longer resolves them — `good` / `law` / `lawfulness` / `lawfulness01` /
+ *      `malice` / `malice01` / `morality` / `order on facets` in worldPulse/warSeatBooks.js; `colour` / `id` /
+ *      `text` / `twinOf on merchant` in facts/drawDeclared.js; `crisis` / `excludes` / `needs` / `tags on
+ *      merchant` in facts/factVocabulary.js. ⚠ `text on merchant` was 2 on the car's side; FIX-HOOK-OBJECT's
+ *      governed --write (34ec91fea, drawDeclared.js :: lineText) already lowered it to 1 on this line, so it
+ *      goes 1 -> 0 here. A cure is a corpus-topology or detector act, not this rung.
+ *  CAUSE 2 — the structural fingerprint re-based (0a18ff311: intentFamilyDist reads
+ *    `n?.goal?.intent?.[v]?.family`): 1 row, class I, ADMITTED — `family on intent` in
+ *    src/lib/structuralFingerprint.js.
+ *
+ *  Nothing is declared (the roster stays fourteen; thirteen bank, 76/50). ⛔ The reconciliation must be
+ *  EXACTLY those twenty-eight rows; any other moved row means the review was not the whole cause and the mint
+ *  STOPS. The delta is the THREE bookkeeping paths; see `TRAIN_CAR4_SCANNER_DELTA_PATHS`. */
+export const TRAIN_CAR4_TARGET_SCHEMA = 39;
+
+/* ⭐⭐ THE SCHEMA 39 → 40 RUNG — THE PUBLIC PROSE WRITER'S ADMISSION (lane SW-B7b PROJECTION, STYLE-RULINGS-2
+ *  B10(a); the chair's grant of 2026-11-09 13:5x on the lane's STOP 2: "the M9 save-time-writer admission,
+ *  through the GOVERNED door only: the OSR migration in two acts")
+ *
+ *  The shared dossier (the gallery page, the players' link) prints the owner's player-view desk text, which
+ *  the save path composes owner-side and stamps onto the record as `data.publicProse` (src/lib/saves.js ::
+ *  withPublicProse, inside mutationRow and supabaseSave; docs/chair/2026-11-09/STYLE-2-PROJECTION-2026-11-09.md
+ *  §1, §6, §7). The leaf src/domain/display/publicProse.js :: publicProseOf reads `settlement?.publicProse`
+ *  once. The corpus executes generation and the domain pulse and never the save path, so no generated world
+ *  carries the key: the save-time-writer class, the `decrees on settlement` precedent (EM-C4b).
+ *
+ *  MEASURED at the subject against the schema-39 register (scan vs inventory): NEW 1 · GONE 0 · INCREASED 0 ·
+ *  DECREASED 0 — the one row `publicProse on settlement` at src/domain/display/publicProse.js (1 read).
+ *  CAUSE 1 (the only one) — the leaf's read, ADMITTED TAGGED under ONE declaration (the roster 14 -> 15).
+ *
+ *  ⭐ THE BANK MOVES 76/50 → 77/51, MEASURED: the one declaration reaches one address and one read.
+ *  ⛔ The reconciliation must be EXACTLY that one row; any other moved row means the tip moved under the
+ *  measurement and the mint STOPS. The delta is the THREE bookkeeping paths; see
+ *  `PUBLIC_PROSE_SCANNER_DELTA_PATHS`. The commit pair holds as at every rung: this rung lands
+ *  walker-red, and its re-freeze lands next. */
+export const PUBLIC_PROSE_TARGET_SCHEMA = 40;
+
+/* ⭐⭐ THE SCHEMA 40 → 41 RUNG — THE PLAYED-WORLDS WRITER'S ADMISSION (STYLE-2-MERGE closing act 5; the chair's
+ *  FINAL RULING of 2026-11-09 21:2x: "a TRUE schema change, admitted by the ONE rung at the final tip. Schema 40
+ *  → 41 admits a new writer class, "played-worlds writer" (a writer that runs only in campaign time and is
+ *  dormant in the birth corpus). Its first entry is convergence.js:1101's minted-proposal `outcome`, as the
+ *  writer behind `newsBody.js :: itemSettlementIds`'s read of `item.outcome?.affectedSettlementIds`. Gate-0
+ *  evidence: the shorthand spelling probe."; docs/INTEGRATION_STYLE_2_2026-11-09.md §3 and §2d act 5)
+ *
+ *  SW-11's leaf src/domain/display/newsBody.js :: itemSettlementIds (969077590, STYLE-2-MERGE point 12) reads
+ *  `item.outcome?.affectedSettlementIds` once; the writer is the proposal record src/domain/worldPulse/
+ *  convergence.js mints behind interventionActive (`mintedProposals.push({ … outcome, … })`, now at :1104-1107),
+ *  which runs only in campaign time. Point 17 measured the remedies the chair ruled before this one: the
+ *  detector cure (20:5x) does not apply (the live scan walks executed run objects by container name and the
+ *  reader scanner is byte-frozen); the virtual-dormant door (21:0x) is shape-scoped (`writeShapesOnShapeIn`: the
+ *  key inside an `outcome = {` / `outcome: {` literal) and the push literal is neither, so it is UNVERIFIABLE.
+ *  The class is therefore NEW: not a save-time writer (the corpus runs the domain pulse), not a conditional
+ *  generator branch (the writer is no generator step), and its declaration carries the chair's own words.
+ *
+ *  MEASURED at the subject against the schema-40 register (re-minted at d8d7ceee4, where the row was admitted
+ *  ordinary): SAME everywhere — the one row `outcome on outcome` at src/domain/display/newsBody.js (1 read)
+ *  keeps its count and gains its tag. CAUSE 1 (the only one) — the declaration (the roster 15 -> 16).
+ *
+ *  ⭐ THE BANK MOVES 77/51 → 78/52, MEASURED: the one declaration reaches one address and one read.
+ *  ⛔ The reconciliation must be ALL SAME; any moved row means the tip moved under the measurement and the mint
+ *  STOPS. The delta is the THREE bookkeeping paths; see `PLAYED_WORLDS_SCANNER_DELTA_PATHS`. The commit pair
+ *  holds as at every rung: this rung lands walker-red, and its re-freeze lands next. */
+export const PLAYED_WORLDS_TARGET_SCHEMA = 41;
+
+/* ⭐⭐ THE SCHEMA 41 → 42 RUNG — THE AGREEMENT LANE'S TIER SEED (STYLE-2-MERGE point 47, COHERENCE-AGREE; the
+ *  chair's ruling on STOP 47a, 2026-11-13 10:20 UTC: "(B), MIGRATE NOW", one package, a row and not a branch).
+ *
+ *  THE CAUSE: the agreement lane's generation moved the tier seed's town out of the overlap. Producer 2b's
+ *  `osr-tier-14` under CONFIGS[0] no longer lands in the town/city overlap, so its pulse minted no tier candidate
+ *  in twelve intervals and the corpus builder THREW (observedShapeReaders, writerReach and proseFamilyContract
+ *  failed at load). Re-searched by producer 2b's own rule over `osr-tier-0..39` under CONFIGS[0]: the minters are
+ *  osr-tier-19 (pop 2477, interval 5), -25 (2394) and -28 (2282); the lowest, osr-tier-19, is taken. The corpus
+ *  builder is a DETECTOR SOURCE, so the seed is re-governed here: schema 41's topology, tag law, roster and bank
+ *  UNCHANGED; the reconciliation (every moved row classed WITNESSED / BINDING LOST, read by the chair before the
+ *  re-freeze) is recorded in the re-freeze commit. The delta is FOUR paths — the corpus builder and the three
+ *  bookkeeping paths; see `AGREE_TIER_SEED_SCANNER_DELTA_PATHS`. The commit pair holds as at every rung: this
+ *  rung lands walker-red, and its re-freeze lands next. */
+export const AGREE_TIER_SEED_TARGET_SCHEMA = 42;
+
+/* ⭐⭐ THE SCHEMA 42 → 43 RUNG — THE CLOSE OF THE ROUND OF 2026-11-14/15 (the chair's ruling OR2 of 2026-11-15,
+ *  vetoable by the owner; the chair's record 456), made by TAIL-CLOSE-REACH-2 on TAIL-CLOSE-REACH-1's measurement.
+ *
+ *  THE CAUSE: the round's lanes, joined on lane/join-2026-11-14 after schema 42 was frozen at f5622ab8, moved the
+ *  read side and the executed corpus (originCount 14835 -> 15016, shapeCount 1732 -> 1741; seven generated
+ *  execution inputs regenerated by their own doors). No detector source moved. ONE rung re-governs the register to
+ *  the close of the round, every moved row with its cause and its class:
+ *    · the LAWFUL SHRINKS retire with cause (the read is gone from its file, or the read gained a writer);
+ *    · the rows the detector LOST while their reads still stand (the erasure guard's INSTRUMENT EROSION) are
+ *      RECORDED AS UNCURED INSTRUMENT EROSION, each named with its key, shape, site and the bisected cause or the
+ *      honest bound — never as a repair (the schema-39 precedent); none is a class-(a) identity (measured against
+ *      CLASS_A_PROTECTED_IDENTITIES);
+ *    · the round's NEW reads are ADMITTED BY CAUSE, each with its class in the instrument's vocabulary and the lane
+ *      that wrote it; a read that prints wrong or empty on a page would be a defect, not an admission (none found).
+ *  Schema 42's topology, tag law, roster and bank (78/52) UNCHANGED; the delta is the THREE bookkeeping paths; see
+ *  `CLOSE_ROUND_SCANNER_DELTA_PATHS`. The reconciliation is recorded row by row in the re-freeze commit's review
+ *  (docs/chair/2026-11-15/). The commit pair holds as at every rung: this rung lands walker-red, and its re-freeze
+ *  lands next. */
+export const CLOSE_ROUND_TARGET_SCHEMA = 43;
+
+/* ⭐⭐ THE SCHEMA 43 → 44 RUNG — THE CLOSE'S FINAL PASS (the chair's ruling OR2 of 2026-11-15, its law carried to the FINAL PASS at f76fe38fd), made by TAIL-CLOSE-REACH-2: "a second small
+ *  rung only if the first's law requires it for the new drift". It does: one of the two moved rows is a read the
+ *  detector LOST while it still stands, and a plain shrink-only --write would bank that loss as a repair.
+ *
+ *  THE CAUSES (the executed corpus did NOT move: its meta equals the schema-43 mint's exactly):
+ *    · `culture on settlement` in src/domain/summary/settlementQuickGuide.js — class R, a LAWFUL SHRINK: the read is
+ *      gone from the file, struck at its root by TAIL-CLOSE-SRC-4 · WR2 (d8b08402f, the chair's ruling WR2);
+ *    · `_worldPulseInactive on institutions` in src/domain/institutions/institutionRoster.js — class E, UNCURED
+ *      INSTRUMENT EROSION, recorded as such: the read still stands (:40, isLiveInstitution) and the file is unchanged;
+ *      TAIL-CLOSE-SRC-5 · SR5 (b) (9cade66ce) passes the defence buckets' entries to isLiveInstitution, the
+ *      parameter now binds a second shape and the ambiguity guard drops the finding (CONFIRMED: the merged tip with
+ *      only that call undone scans the row back). Not class-(a); a cure is a detector act.
+ *  Schema 43's topology, tag law, roster and bank (78/52) UNCHANGED; the delta is the THREE bookkeeping paths. */
+export const FINAL_PASS_TARGET_SCHEMA = 44;
+
+/* ⭐⭐ THE SCHEMA 44 → 45 RUNG — THE LAST CLOSE (the chair's ruling CL26 of 2026-11-18 05:23 UTC, on the owner's word of
+ *  05:13: "ONE RUNG THERE, under a ruling of its own"; made at the last close by LASTCLOSE-DOORS under the owner's word
+ *  "Yes to both", 2026-11-18 about 19:07 UTC; the chair's brief BRIEF-LASTCLOSE.md, the ruled ones).
+ *
+ *  THE CAUSE: the rounds landed on the working line after the register was last frozen at e56e112e2 (2026-11-16; the
+ *  first close admitted nothing, CL26: "THE OBSERVED SHAPES' IDENTITIES ARE NOT ADMITTED AT THIS CLOSE") moved the read side
+ *  and the executed corpus (originCount 15031 -> 15106, shapeCount 1741 -> 1748; the generated execution inputs
+ *  regenerated by their own doors). No detector source moved. ELEVEN identities moved, every one NEW, none gone
+ *  (reads 2200 -> 2214, identities 1542 -> 1552), each admitted by cause with its class (CL20's table, the first close):
+ *    · W (a writer in another layer than the birth): `institution on institutions` (display/crisisStoppedRow.js, JOIN-17
+ *      point 8); `_worldPulseInactive`, `isCustom`, `customDefinitionCategory`, `customDefinitionId on institutions`
+ *      (facts/sovereign.js, JOIN-17 point 2); `_userEdits on settlement` 2 -> 4 (userEdits.js, JOIN-16 point 2);
+ *    · C (a copy of a banked original): `name on factions` (stateProse/magicFlagTruth.js, JOIN-17 point 4;
+ *      facts/seatMembers.js, point 11; people/personHooks.js, FAULTS-PEOPLE, the sixth chair's point 62);
+ *      `custom on institutions` (facts/sovereign.js, point 2); `name on inst` (facts/supplyStory.js, point 33).
+ *  The two dead reads of CL20's table (class N, tradeListDisplay.js) were struck at the source by CLOSE-SWEEP before
+ *  this rung. NOTHING IS DECLARED: `EXPLAINED_WRITER_EXEMPTIONS` is untouched, so schema 44's topology, tag law, roster
+ *  and bank (78/52) stand UNCHANGED; the delta is the THREE bookkeeping paths (`LAST_CLOSE_SCANNER_DELTA_PATHS`). The
+ *  review (docs/chair/2026-11-18/lastclose/) records every row. The commit pair holds as at every rung: this rung lands
+ *  walker-red, and its re-freeze lands next. */
+export const LAST_CLOSE_TARGET_SCHEMA = 45;
+
+/* ⭐⭐ THE SCHEMA 45 → 46 RUNG — THE FORTUNE MERITS WRITER'S ADMISSION (the chair's ruling of 22:18 UTC 2026-11-20 on the fortune lane
+ *  (FORTUNE U5a-CURE item 2, route B; confirmed 22:21 UTC): "ONE schema rung for ONE explained-writer row, made by the instrument's own
+ *  migration door"; the bank's other declarations and the tag law unchanged). The schema-29 one-declaration rung's
+ *  form (`MIGRATION_DIRECTION_TARGET_SCHEMA`), the same fifth class.
+ *
+ *  THE CAUSE: the fortune lane's merits (src/domain/fortune/fortuneMerits.js) read `legitimacy.breakdown?.merits`
+ *  (baseScoreOf, the birth's own score less the merits it carries), and the walker's live scan reports exactly ONE NEW
+ *  row, `merits on breakdown` x1 in that file (reads 2214 -> 2215, identities 1552 -> 1553, files 444 -> 445), and
+ *  nothing else. Its one writer is the same file's `meritedLegitimacy` (`breakdown: { ...terms, merits: added }`),
+ *  called by `settleMeritsOfRule` at the tail of the assembly step (steps/assembleSettlement.js), which the corpus RUNS;
+ *  but the write is reached only under the fortune law (`_fortuneLawVersion: 2`, resolveFortuneLawVersion), and the
+ *  corpus builder's Producer 1 births CONFIGS that carry no marker, so every corpus world reads law 1, which writes no
+ *  byte (FS5). Route (A), a corpus writer, is impossible while the law is dark; route (B), ruled: ONE declaration of
+ *  the conditional-generator-branch class (a generator branch gated on conditions the corpus's seed × config matrix
+ *  does not satisfy), `merits on breakdown`, writer fortuneMerits.js; gate 0 reads the object-literal key
+ *  `merits: added`. The roster 16 -> 17; the one new row admitted TAGGED; the bank 78/52 -> 79/53 by that one row
+ *  alone (no other declaration moves). The delta is the THREE bookkeeping paths
+ *  (`FORTUNE_MERITS_SCANNER_DELTA_PATHS`); the review (docs/chair/2026-11-20/content/fortune/) records every row. The
+ *  commit pair holds as at every rung: this rung lands walker-red, and its re-freeze lands next. */
+export const FORTUNE_MERITS_TARGET_SCHEMA = 46;
+
 export const DECLARED_BANK_BY_TARGET = Object.freeze({
   [EXEMPTION_RETIREMENT_TARGET_SCHEMA]: Object.freeze({ bankedReads: 60, taggedRows: 39 }),
   [BANK_FENCE_TARGET_SCHEMA]: Object.freeze({ bankedReads: 60, taggedRows: 39 }),
@@ -1254,6 +1959,49 @@ export const DECLARED_BANK_BY_TARGET = Object.freeze({
   // walker's literal), and a verdict-only rung moves no row, so the pair cannot move. The write
   // refuses if the live measurement disagrees with this pair or with the walker's hand-owned literal.
   [TIER_COVERAGE_TARGET_SCHEMA]: Object.freeze({ bankedReads: 76, taggedRows: 50 }),
+  // MEASURED off the live scan at the subject, never predicted from the delta: `bankOf` over the
+  // committed schema-28 register derives 76 reads across 50 addresses, and the one identity this
+  // rung DECLARES reaches one address and one read (`migrationDirection on config` x1 at
+  // src/domain/migrationDirection.js). The write refuses if the measurement disagrees with this pair
+  // or with the walker's hand-owned literal.
+  [MIGRATION_DIRECTION_TARGET_SCHEMA]: Object.freeze({ bankedReads: 77, taggedRows: 51 }),
+  // MEASURED off the committed schema-29 register (`bankOf` → 77 reads across 51 addresses) and the
+  // live scan at the subject: none of the admitted or gone rows is on a declared identity, so the
+  // pair cannot move. The write refuses if the measurement disagrees with this pair or with the
+  // walker's hand-owned literal.
+  [PEOPLE_CAST_TARGET_SCHEMA]: Object.freeze({ bankedReads: 77, taggedRows: 51 }),
+  // MEASURED off the restored schema-30 predecessor and the live scan at the subject: no admitted,
+  // gone or decreased row is on a declared identity, so the pair cannot move.
+  [PEOPLE_LANDING_TARGET_SCHEMA]: Object.freeze({ bankedReads: 77, taggedRows: 51 }),
+  // MEASURED off the car's schema-31 register (77/51) and the live scan at the merged tip (76 reads
+  // across 13 of 14 declared identities): ONE gone row is on a declared identity — the census
+  // readers' `stresses on settlement` at canonicalAccessors.js (uncured erosion, 7af3c6797) — so the
+  // pair moves 77/51 -> 76/50, the integration side's schema-30 figure. The bank does not grow.
+  [CAR_MERGE_TARGET_SCHEMA]: Object.freeze({ bankedReads: 76, taggedRows: 50 }),
+  // HELD at 33 (MERGE-WAVE, W2 DEF): the one admitted row is ordinary debt, on no declared identity.
+  [WAVE_W2_TARGET_SCHEMA]: Object.freeze({ bankedReads: 76, taggedRows: 50 }),
+  // HELD at 34 (MERGE-WAVE, FIX-FOOD-ISOLATION): the one admitted row is ordinary debt, on no declared identity.
+  [WAVE_FOOD_TARGET_SCHEMA]: Object.freeze({ bankedReads: 76, taggedRows: 50 }),
+  // HELD at 35 (MERGE-WAVE, FIX-PUBLIC-VEIL): no moved row is on a declared identity.
+  [WAVE_VEIL_TARGET_SCHEMA]: Object.freeze({ bankedReads: 76, taggedRows: 50 }),
+  // HELD at 36 (MERGE-TRAIN, ALLEGIANCE-CAR1): no moved row is on a declared identity.
+  [TRAIN_CAR1_TARGET_SCHEMA]: Object.freeze({ bankedReads: 76, taggedRows: 50 }),
+  // HELD at 37 (MERGE-TRAIN, ALLEGIANCE-CAR2): no moved row is on a declared identity.
+  [TRAIN_CAR2_TARGET_SCHEMA]: Object.freeze({ bankedReads: 76, taggedRows: 50 }),
+  // HELD at 38 (MERGE-TRAIN, ALLEGIANCE-CAR3): no moved row is on a declared identity.
+  [TRAIN_CAR3_TARGET_SCHEMA]: Object.freeze({ bankedReads: 76, taggedRows: 50 }),
+  // HELD at 39 (MERGE-TRAIN, ALLEGIANCE-CAR4): no moved row is on a declared identity.
+  [TRAIN_CAR4_TARGET_SCHEMA]: Object.freeze({ bankedReads: 76, taggedRows: 50 }),
+  // GROWN at 40 (SW-B7b): one declaration, `publicProse on settlement`, one address and one read.
+  [PUBLIC_PROSE_TARGET_SCHEMA]: Object.freeze({ bankedReads: 77, taggedRows: 51 }),
+  // GROWN at 41 (STYLE-2-MERGE closing act 5, 21:2x): one declaration of the new played-worlds-writer class,
+  // `outcome on outcome`, one address (newsBody.js) and one read.
+  [PLAYED_WORLDS_TARGET_SCHEMA]: Object.freeze({ bankedReads: 78, taggedRows: 52 }),
+  [AGREE_TIER_SEED_TARGET_SCHEMA]: Object.freeze({ bankedReads: 78, taggedRows: 52 }),
+  [CLOSE_ROUND_TARGET_SCHEMA]: Object.freeze({ bankedReads: 78, taggedRows: 52 }),
+  [FINAL_PASS_TARGET_SCHEMA]: Object.freeze({ bankedReads: 78, taggedRows: 52 }),
+  [LAST_CLOSE_TARGET_SCHEMA]: Object.freeze({ bankedReads: 78, taggedRows: 52 }),
+  [FORTUNE_MERITS_TARGET_SCHEMA]: Object.freeze({ bankedReads: 79, taggedRows: 53 }),
 });
 
 /** The declared post-bank of a target, or `null` for a rung that predates the law. */
@@ -1775,6 +2523,172 @@ export const TIER_COVERAGE_SCANNER_DELTA_PATHS = Object.freeze([
   'scripts/migrate-observed-shape-readers.mjs',
 ]);
 
+/**
+ * The schema-28 → 29 delta — the bookkeeping set, THREE paths (the schema-23 shape, the last rung
+ * that declared without a corpus move):
+ *   • `scripts/check-observed-shape-readers.mjs` — THE SUBJECT: the one declaration, plus the
+ *     live-validator binding, `_doc` and schema index;
+ *   • `scripts/lib/observed-shape-baseline.mjs` — the 28 → 29 bump and the retired-28 validator;
+ *   • `scripts/migrate-observed-shape-readers.mjs` — this rung and its declared post-bank.
+ * ⛔ THE CORPUS BUILDER DID NOT MOVE. `src/generators/steps/stressConfirmPass.js` (the writer's
+ * re-spelling) is a SUBJECT file, scanned rather than scanning; it moves `sourceTreeDigest` and
+ * `scanTreeDigest`, which the transition records on its own. The bank literal is test-side.
+ */
+export const MIGRATION_DIRECTION_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
+/**
+ * The schema-29 → 30 delta — the same bookkeeping set, THREE paths:
+ *   • `scripts/check-observed-shape-readers.mjs` — the live-validator binding moving from
+ *     `validateSchema29Baseline` to `validateSchema30Baseline`, the register's `_doc` header and
+ *     the schema index; NO declaration (the roster stays fourteen);
+ *   • `scripts/lib/observed-shape-baseline.mjs` — the 29 → 30 bump, the retired-29 constant and its
+ *     re-bound validator;
+ *   • `scripts/migrate-observed-shape-readers.mjs` — this rung and its declared post-bank.
+ * ⛔ THE SUBJECT FILES THE CAST MOVED ARE NOT IN IT: the people car's generator files are scanned,
+ * not scanning, and they move `sourceTreeDigest` and `scanTreeDigest`, which the transition records
+ * on its own.
+ */
+export const PEOPLE_CAST_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
+/** The schema-30 → 31 delta: the same THREE bookkeeping paths (the live validator moving to
+ *  `validateSchema31Baseline`, the 30 → 31 bump with the retired-30 constant, this rung). */
+export const PEOPLE_LANDING_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
+/** The schema-31 → 32 delta: the same THREE bookkeeping paths (the live validator moving to
+ *  `validateSchema32Baseline`, the 31 → 32 bump with the retired-31 constant, this rung). */
+export const CAR_MERGE_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
+/** The schema-32 → 33 delta: the same THREE bookkeeping paths (the live validator moving to
+ *  `validateSchema33Baseline`, the 32 → 33 bump with the retired-32 constant, this rung). */
+export const WAVE_W2_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
+/** The schema-33 → 34 delta: the same THREE bookkeeping paths. */
+export const WAVE_FOOD_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
+/** The schema-34 → 35 delta: FOUR paths — the corpus builder (cause 1, producer 1b′) and the three
+ *  bookkeeping paths. */
+export const WAVE_VEIL_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/lib/observed-shape-corpus.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
+/** The schema-35 → 36 delta: the THREE bookkeeping paths (the corpus definition is unchanged; both causes
+ *  move the corpus's year, not its builder). */
+export const TRAIN_CAR1_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
+/** The schema-36 → 37 delta: the THREE bookkeeping paths (the corpus definition is unchanged; the guild's
+ *  push moves the corpus's year, not its builder). */
+export const TRAIN_CAR2_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
+/** The schema-37 → 38 delta: the THREE bookkeeping paths (the corpus definition is unchanged; car 3's dial
+ *  moves the corpus's year, not its builder). */
+export const TRAIN_CAR3_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
+/** The schema-38 → 39 delta: the THREE bookkeeping paths (the corpus definition is unchanged). */
+export const TRAIN_CAR4_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
+/** The schema-39 → 40 delta: the THREE bookkeeping paths (the corpus definition is unchanged) and, MEASURED
+ *  at the style wave's final tip (STYLE-2-MERGE closing act 5, 2026-11-11), `package.json`: CI-FIT's
+ *  001fc7e00 (merged at STYLE-2-MERGE point 40, 4ca5cee57) gave `build` its own heap — a build-script edit
+ *  that moves no scanned or executed source — while the register's ordinary `--write` stood refused on the
+ *  `outcome on outcome` row (point 12), so the drift reached this rung un-absorbed. Act 2 was cut at the
+ *  SW-B7b tip with three paths; at the final tip the transition is these four, or the door refuses. */
+export const PUBLIC_PROSE_SCANNER_DELTA_PATHS = Object.freeze([
+  'package.json',
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
+/** The schema-40 → 41 delta: the THREE bookkeeping paths (the corpus definition is unchanged; package.json and
+ *  the eight generated execution inputs were absorbed by rung 40's act 2 at d8d7ceee4). */
+export const PLAYED_WORLDS_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
+/** The schema-41 → 42 delta: FOUR paths — the corpus builder (producer 2b's tier seed) and the three bookkeeping paths. */
+export const AGREE_TIER_SEED_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/lib/observed-shape-corpus.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
+
+/** The schema-42 → 43 delta: the THREE bookkeeping paths (no detector source moved in the round; the generated
+ *  execution inputs the round regenerated are the transition's reviewable unscanned movement). */
+export const CLOSE_ROUND_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
+/** The schema-43 → 44 delta: the THREE bookkeeping paths (no detector source moved at the final pass). */
+export const FINAL_PASS_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
+/** The schema-44 → 45 delta: the THREE bookkeeping paths (no detector source moved at the last close). */
+export const LAST_CLOSE_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
+/** The schema-45 → 46 delta: the THREE bookkeeping paths (the declaration is the checker's; no other detector
+ *  source moved). */
+export const FORTUNE_MERITS_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
 export const BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS = Object.freeze([
   'package-lock.json',
   'package.json',
@@ -1827,6 +2741,42 @@ const WINDOW_RUNG1_SCANNER_TRANSITION_POLICY =
   'schema-26-to-27-exact-scanner-transition-v1';
 const TIER_COVERAGE_SCANNER_TRANSITION_POLICY =
   'schema-27-to-28-exact-scanner-transition-v1';
+const MIGRATION_DIRECTION_SCANNER_TRANSITION_POLICY =
+  'schema-28-to-29-exact-scanner-transition-v1';
+const PEOPLE_CAST_SCANNER_TRANSITION_POLICY =
+  'schema-29-to-30-exact-scanner-transition-v1';
+const PEOPLE_LANDING_SCANNER_TRANSITION_POLICY =
+  'schema-30-to-31-exact-scanner-transition-v1';
+const CAR_MERGE_SCANNER_TRANSITION_POLICY =
+  'schema-31-to-32-exact-scanner-transition-v1';
+const WAVE_W2_SCANNER_TRANSITION_POLICY =
+  'schema-32-to-33-exact-scanner-transition-v1';
+const WAVE_FOOD_SCANNER_TRANSITION_POLICY =
+  'schema-33-to-34-exact-scanner-transition-v1';
+const WAVE_VEIL_SCANNER_TRANSITION_POLICY =
+  'schema-34-to-35-infiltrated-topology-and-veiled-redeal-v1';
+const TRAIN_CAR1_SCANNER_TRANSITION_POLICY =
+  'schema-35-to-36-hidden-allegiance-and-j19-redeal-v1';
+const TRAIN_CAR2_SCANNER_TRANSITION_POLICY =
+  'schema-36-to-37-guild-push-redeal-v1';
+const TRAIN_CAR3_SCANNER_TRANSITION_POLICY =
+  'schema-37-to-38-car3-redeal-v1';
+const TRAIN_CAR4_SCANNER_TRANSITION_POLICY =
+  'schema-38-to-39-goals-v1';
+const PUBLIC_PROSE_SCANNER_TRANSITION_POLICY =
+  'schema-39-to-40-public-prose-writer-v1';
+const PLAYED_WORLDS_SCANNER_TRANSITION_POLICY =
+  'schema-40-to-41-played-worlds-writer-v1';
+const AGREE_TIER_SEED_SCANNER_TRANSITION_POLICY =
+  'schema-41-to-42-tier-seed-v1';
+const CLOSE_ROUND_SCANNER_TRANSITION_POLICY =
+  'schema-42-to-43-close-of-round-v1';
+const FINAL_PASS_SCANNER_TRANSITION_POLICY =
+  'schema-43-to-44-final-pass-v1';
+const LAST_CLOSE_SCANNER_TRANSITION_POLICY =
+  'schema-44-to-45-last-close-v1';
+const FORTUNE_MERITS_SCANNER_TRANSITION_POLICY =
+  'schema-45-to-46-fortune-merits-writer-v1';
 const CORPUS_COVERAGE_SCANNER_TRANSITION_POLICY =
   'schema-7-to-8-exact-scanner-transition-v1';
 const EPOCH_DARK_CORPUS_SCANNER_TRANSITION_POLICY =
@@ -1873,6 +2823,24 @@ export const LEAF_MIGRATION_PREDECESSOR = Object.freeze({
   [FED_WORLD_TARGET_SCHEMA]: ADVISORY_LOCKFILE_TARGET_SCHEMA,
   [WINDOW_RUNG1_TARGET_SCHEMA]: FED_WORLD_TARGET_SCHEMA,
   [TIER_COVERAGE_TARGET_SCHEMA]: WINDOW_RUNG1_TARGET_SCHEMA,
+  [MIGRATION_DIRECTION_TARGET_SCHEMA]: TIER_COVERAGE_TARGET_SCHEMA,
+  [PEOPLE_CAST_TARGET_SCHEMA]: MIGRATION_DIRECTION_TARGET_SCHEMA,
+  [PEOPLE_LANDING_TARGET_SCHEMA]: PEOPLE_CAST_TARGET_SCHEMA,
+  [CAR_MERGE_TARGET_SCHEMA]: PEOPLE_LANDING_TARGET_SCHEMA,
+  [WAVE_W2_TARGET_SCHEMA]: CAR_MERGE_TARGET_SCHEMA,
+  [WAVE_FOOD_TARGET_SCHEMA]: WAVE_W2_TARGET_SCHEMA,
+  [WAVE_VEIL_TARGET_SCHEMA]: WAVE_FOOD_TARGET_SCHEMA,
+  [TRAIN_CAR1_TARGET_SCHEMA]: WAVE_VEIL_TARGET_SCHEMA,
+  [TRAIN_CAR2_TARGET_SCHEMA]: TRAIN_CAR1_TARGET_SCHEMA,
+  [TRAIN_CAR3_TARGET_SCHEMA]: TRAIN_CAR2_TARGET_SCHEMA,
+  [TRAIN_CAR4_TARGET_SCHEMA]: TRAIN_CAR3_TARGET_SCHEMA,
+  [PUBLIC_PROSE_TARGET_SCHEMA]: TRAIN_CAR4_TARGET_SCHEMA,
+  [PLAYED_WORLDS_TARGET_SCHEMA]: PUBLIC_PROSE_TARGET_SCHEMA,
+  [AGREE_TIER_SEED_TARGET_SCHEMA]: PLAYED_WORLDS_TARGET_SCHEMA,
+  [CLOSE_ROUND_TARGET_SCHEMA]: AGREE_TIER_SEED_TARGET_SCHEMA,
+  [FINAL_PASS_TARGET_SCHEMA]: CLOSE_ROUND_TARGET_SCHEMA,
+  [LAST_CLOSE_TARGET_SCHEMA]: FINAL_PASS_TARGET_SCHEMA,
+  [FORTUNE_MERITS_TARGET_SCHEMA]: LAST_CLOSE_TARGET_SCHEMA,
 });
 
 /**
@@ -1955,6 +2923,46 @@ const LEAF_PREDECESSOR_VALIDATOR = Object.freeze({
   // RETIRED literal from this rung onward, so this entry keeps validating schema 27
   // as schema 27 after the live number moves past it.
   [WINDOW_RUNG1_TARGET_SCHEMA]: validateSchema27Baseline,
+  // The schema-29 rung's own predecessor. `validateSchema28Baseline` is bound to the
+  // RETIRED literal from this rung onward, so this entry keeps validating schema 28
+  // as schema 28 after the live number moves past it.
+  [TIER_COVERAGE_TARGET_SCHEMA]: validateSchema28Baseline,
+  // The schema-30 rung's own predecessor. `validateSchema29Baseline` is bound to the
+  // RETIRED literal from this rung onward, so this entry keeps validating schema 29
+  // as schema 29 after the live number moves past it.
+  [MIGRATION_DIRECTION_TARGET_SCHEMA]: validateSchema29Baseline,
+  // The schema-31 rung's own predecessor, validated as schema 30 by its retired literal.
+  [PEOPLE_CAST_TARGET_SCHEMA]: validateSchema30Baseline,
+  // The schema-32 rung's own predecessor (the car's genesis), validated as schema 31 by its
+  // retired literal.
+  [PEOPLE_LANDING_TARGET_SCHEMA]: validateSchema31Baseline,
+  // The schema-33 rung's own predecessor (MERGE-CAR), validated as schema 32 by its retired literal.
+  [CAR_MERGE_TARGET_SCHEMA]: validateSchema32Baseline,
+  // The schema-34 rung's own predecessor (MERGE-WAVE, W2 DEF), validated as schema 33 by its retired literal.
+  [WAVE_W2_TARGET_SCHEMA]: validateSchema33Baseline,
+  // The schema-35 rung's own predecessor (MERGE-WAVE, FIX-FOOD-ISOLATION), validated as schema 34.
+  [WAVE_FOOD_TARGET_SCHEMA]: validateSchema34Baseline,
+  // The schema-36 rung's own predecessor (MERGE-WAVE, FIX-PUBLIC-VEIL), validated as schema 35.
+  [WAVE_VEIL_TARGET_SCHEMA]: validateSchema35Baseline,
+  // The schema-37 rung's own predecessor (MERGE-TRAIN, ALLEGIANCE-CAR1), validated as schema 36.
+  [TRAIN_CAR1_TARGET_SCHEMA]: validateSchema36Baseline,
+  // The schema-38 rung's own predecessor (MERGE-TRAIN, ALLEGIANCE-CAR2), validated as schema 37.
+  [TRAIN_CAR2_TARGET_SCHEMA]: validateSchema37Baseline,
+  // The schema-39 rung's own predecessor (MERGE-TRAIN, ALLEGIANCE-CAR3), validated as schema 38.
+  [TRAIN_CAR3_TARGET_SCHEMA]: validateSchema38Baseline,
+  // The schema-40 rung's own predecessor (MERGE-TRAIN, ALLEGIANCE-CAR4), validated as schema 39.
+  [TRAIN_CAR4_TARGET_SCHEMA]: validateSchema39Baseline,
+  // The schema-41 rung's own predecessor (SW-B7b, the public prose writer), validated as schema 40.
+  [PUBLIC_PROSE_TARGET_SCHEMA]: validateSchema40Baseline,
+  [PLAYED_WORLDS_TARGET_SCHEMA]: validateSchema41Baseline,
+  // The schema-43 rung's own predecessor (STYLE-2-MERGE point 47, the tier seed), validated as schema 42.
+  [AGREE_TIER_SEED_TARGET_SCHEMA]: validateSchema42Baseline,
+  // The schema-44 rung's own predecessor (the close of the round, OR2), validated as schema 43.
+  [CLOSE_ROUND_TARGET_SCHEMA]: validateSchema43Baseline,
+  // The schema-45 rung's own predecessor (the close's final pass), validated as schema 44.
+  [FINAL_PASS_TARGET_SCHEMA]: validateSchema44Baseline,
+  // The schema-46 rung's own predecessor (the last close), validated as schema 45.
+  [LAST_CLOSE_TARGET_SCHEMA]: validateSchema45Baseline,
 });
 
 const RETIRED_EXACT_MIGRATION_KIND = `observed-shape-schema-2-to-${RETIRED_EXACT_TARGET_SCHEMA}-migration`;
@@ -2478,6 +3486,127 @@ const SCANNER_TRANSITION_BY_TARGET = new Map([
     // governed execution inputs (the dossier-state prose, the institution service keys, the prose
     // norms, …) by their documented commands after the predecessor was frozen, and the report
     // records that movement for the review's decision.
+    reviewableUnscannedMovement: true,
+  })],
+  [FORTUNE_MERITS_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: FORTUNE_MERITS_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: FORTUNE_MERITS_SCANNER_TRANSITION_POLICY,
+    reviewableUnscannedMovement: true,
+  })],
+  [LAST_CLOSE_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: LAST_CLOSE_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: LAST_CLOSE_SCANNER_TRANSITION_POLICY,
+    reviewableUnscannedMovement: true,
+  })],
+  [FINAL_PASS_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: FINAL_PASS_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: FINAL_PASS_SCANNER_TRANSITION_POLICY,
+    reviewableUnscannedMovement: true,
+  })],
+  [CLOSE_ROUND_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: CLOSE_ROUND_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: CLOSE_ROUND_SCANNER_TRANSITION_POLICY,
+    // TRUE: the round regenerated governed execution inputs by their own doors after schema 42 was frozen,
+    // and the report records that movement for the review's decision.
+    reviewableUnscannedMovement: true,
+  })],
+  [AGREE_TIER_SEED_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: AGREE_TIER_SEED_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: AGREE_TIER_SEED_SCANNER_TRANSITION_POLICY,
+    reviewableUnscannedMovement: true,
+  })],
+  [PLAYED_WORLDS_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: PLAYED_WORLDS_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: PLAYED_WORLDS_SCANNER_TRANSITION_POLICY,
+    reviewableUnscannedMovement: true,
+  })],
+  [PUBLIC_PROSE_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: PUBLIC_PROSE_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: PUBLIC_PROSE_SCANNER_TRANSITION_POLICY,
+    reviewableUnscannedMovement: true,
+  })],
+  [TRAIN_CAR4_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: TRAIN_CAR4_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: TRAIN_CAR4_SCANNER_TRANSITION_POLICY,
+    reviewableUnscannedMovement: true,
+  })],
+  [TRAIN_CAR3_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: TRAIN_CAR3_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: TRAIN_CAR3_SCANNER_TRANSITION_POLICY,
+    reviewableUnscannedMovement: true,
+  })],
+  [TRAIN_CAR2_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: TRAIN_CAR2_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: TRAIN_CAR2_SCANNER_TRANSITION_POLICY,
+    reviewableUnscannedMovement: true,
+  })],
+  [TRAIN_CAR1_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: TRAIN_CAR1_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: TRAIN_CAR1_SCANNER_TRANSITION_POLICY,
+    reviewableUnscannedMovement: true,
+  })],
+  [WAVE_VEIL_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: WAVE_VEIL_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: WAVE_VEIL_SCANNER_TRANSITION_POLICY,
+    reviewableUnscannedMovement: true,
+  })],
+  [WAVE_FOOD_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: WAVE_FOOD_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: WAVE_FOOD_SCANNER_TRANSITION_POLICY,
+    reviewableUnscannedMovement: true,
+  })],
+  [WAVE_W2_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: WAVE_W2_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: WAVE_W2_SCANNER_TRANSITION_POLICY,
+    // TRUE, matching every rung since 8→9: the dossier-prose leaves regenerated by their documented
+    // command since the schema-32 freeze are recorded for the review's decision.
+    reviewableUnscannedMovement: true,
+  })],
+  [CAR_MERGE_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: CAR_MERGE_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: CAR_MERGE_SCANNER_TRANSITION_POLICY,
+    // TRUE, matching every rung since 8→9 — and THIS rung exercises it: the eight dossier-prose /
+    // intent-atlas execution inputs were regenerated by their documented commands since the
+    // schema-31 freeze, and the report records that movement for the review's decision.
+    reviewableUnscannedMovement: true,
+  })],
+  [PEOPLE_LANDING_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: PEOPLE_LANDING_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: PEOPLE_LANDING_SCANNER_TRANSITION_POLICY,
+    // TRUE, matching every rung since 8→9: any governed execution input regenerated by its
+    // documented command since the schema-30 freeze is recorded for the review's decision.
+    reviewableUnscannedMovement: true,
+  })],
+  [PEOPLE_CAST_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: PEOPLE_CAST_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: PEOPLE_CAST_SCANNER_TRANSITION_POLICY,
+    // TRUE, matching every rung since 8→9: any governed execution input regenerated by its
+    // documented command since the schema-29 freeze is recorded for the review's decision.
+    reviewableUnscannedMovement: true,
+  })],
+  [MIGRATION_DIRECTION_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: MIGRATION_DIRECTION_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: MIGRATION_DIRECTION_SCANNER_TRANSITION_POLICY,
+    // TRUE, matching every rung since 8→9: any governed execution input regenerated by its
+    // documented command since the schema-28 freeze is recorded for the review's decision.
     reviewableUnscannedMovement: true,
   })],
   [TIER_COVERAGE_TARGET_SCHEMA, Object.freeze({
@@ -3590,7 +4719,7 @@ export function run(argv = process.argv.slice(2)) {
   // any mismatch into a refusal rather than a silent mode switch.
   const targetSchema = command.targetSchema
     ? Number(command.targetSchema)
-    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : TIER_COVERAGE_TARGET_SCHEMA);
+    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : FORTUNE_MERITS_TARGET_SCHEMA);
   if (![RETIRED_EXACT_TARGET_SCHEMA, HEURISTIC_TARGET_SCHEMA, FILTERED_TARGET_SCHEMA,
     SURFACE_FILTERED_TARGET_SCHEMA, BANKED_EXPLAINED_WRITER_TARGET_SCHEMA,
     CORPUS_COVERAGE_TARGET_SCHEMA, EPOCH_DARK_CORPUS_TARGET_SCHEMA,
@@ -3602,8 +4731,32 @@ export function run(argv = process.argv.slice(2)) {
     BANK_FENCE_TARGET_SCHEMA, RELATIONSHIPS_MOUNT_TARGET_SCHEMA,
     DOMAIN_READER_TARGET_SCHEMA, EDIT_MODE_READERS_TARGET_SCHEMA,
     CORPUS_REDEAL_TARGET_SCHEMA, ADVISORY_LOCKFILE_TARGET_SCHEMA,
-    FED_WORLD_TARGET_SCHEMA, WINDOW_RUNG1_TARGET_SCHEMA, TIER_COVERAGE_TARGET_SCHEMA].includes(targetSchema)) {
-    throw new Error(`observed-shape --target-schema must be ${TIER_COVERAGE_TARGET_SCHEMA} (live tier-coverage leaf),`
+    FED_WORLD_TARGET_SCHEMA, WINDOW_RUNG1_TARGET_SCHEMA, TIER_COVERAGE_TARGET_SCHEMA,
+    MIGRATION_DIRECTION_TARGET_SCHEMA, PEOPLE_CAST_TARGET_SCHEMA,
+    PEOPLE_LANDING_TARGET_SCHEMA, CAR_MERGE_TARGET_SCHEMA, WAVE_W2_TARGET_SCHEMA, WAVE_FOOD_TARGET_SCHEMA, WAVE_VEIL_TARGET_SCHEMA,
+    TRAIN_CAR1_TARGET_SCHEMA, TRAIN_CAR2_TARGET_SCHEMA, TRAIN_CAR3_TARGET_SCHEMA,
+    TRAIN_CAR4_TARGET_SCHEMA, PUBLIC_PROSE_TARGET_SCHEMA, PLAYED_WORLDS_TARGET_SCHEMA,
+    AGREE_TIER_SEED_TARGET_SCHEMA, CLOSE_ROUND_TARGET_SCHEMA, FINAL_PASS_TARGET_SCHEMA,
+    LAST_CLOSE_TARGET_SCHEMA, FORTUNE_MERITS_TARGET_SCHEMA].includes(targetSchema)) {
+    throw new Error(`observed-shape --target-schema must be ${FORTUNE_MERITS_TARGET_SCHEMA} (live fortune-merits leaf),`
+      + ` ${LAST_CLOSE_TARGET_SCHEMA} (retired last-close leaf),`
+      + ` ${FINAL_PASS_TARGET_SCHEMA} (retired final-pass leaf),`
+      + ` ${CLOSE_ROUND_TARGET_SCHEMA} (retired close-of-round leaf),`
+      + ` ${AGREE_TIER_SEED_TARGET_SCHEMA} (retired tier-seed leaf),`
+      + ` ${PLAYED_WORLDS_TARGET_SCHEMA} (retired played-worlds leaf),`
+      + ` ${PUBLIC_PROSE_TARGET_SCHEMA} (retired public-prose leaf),`
+      + ` ${TRAIN_CAR4_TARGET_SCHEMA} (retired allegiance-car4 leaf),`
+      + ` ${TRAIN_CAR3_TARGET_SCHEMA} (retired allegiance-car3 leaf),`
+      + ` ${TRAIN_CAR2_TARGET_SCHEMA} (retired allegiance-car2 leaf),`
+      + ` ${TRAIN_CAR1_TARGET_SCHEMA} (retired allegiance-car1 leaf),`
+      + ` ${WAVE_VEIL_TARGET_SCHEMA} (retired public-veil leaf),`
+      + ` ${WAVE_FOOD_TARGET_SCHEMA} (retired food-isolation leaf),`
+      + ` ${WAVE_W2_TARGET_SCHEMA} (retired W2-merge leaf),`
+      + ` ${CAR_MERGE_TARGET_SCHEMA} (retired car-merge leaf),`
+      + ` ${PEOPLE_LANDING_TARGET_SCHEMA} (retired people-landing leaf),`
+      + ` ${PEOPLE_CAST_TARGET_SCHEMA} (retired people-cast leaf),`
+      + ` ${MIGRATION_DIRECTION_TARGET_SCHEMA} (retired migration-direction leaf),`
+      + ` ${TIER_COVERAGE_TARGET_SCHEMA} (retired tier-coverage leaf),`
       + ` ${WINDOW_RUNG1_TARGET_SCHEMA} (retired rung-1-window leaf),`
       + ` ${FED_WORLD_TARGET_SCHEMA} (retired fed-world leaf),`
       + ` ${ADVISORY_LOCKFILE_TARGET_SCHEMA} (retired advisory-lockfile leaf),`

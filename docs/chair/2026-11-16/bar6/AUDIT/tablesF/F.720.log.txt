@@ -1,0 +1,51 @@
+[gate-tail] start:  19:43:33 up 53 min,  0 user,  load average: 0.69, 1.39, 1.73 · cores: 4
+LAW 10 · towns 720 · instances 395
+  10b                towns    2 · instances     2 · distinct    1 · printed in 2 towns (2) · record only 0
+  10c                towns   36 · instances    72 · distinct   37 · printed in 36 towns (72) · record only 0
+  10d-purse          towns    2 · instances     2 · distinct    2 · printed in 2 towns (2) · record only 0
+  10d-seat           towns    6 · instances     6 · distinct    6 · printed in 6 towns (6) · record only 0
+  10e-temper         towns   15 · instances    15 · distinct   10 · printed in 15 towns (15) · record only 0
+  10e-temper-honest  towns   11 · instances    11 · distinct    8 · printed in 11 towns (11) · record only 0
+  10e-temper-manner  towns   14 · instances    14 · distinct   11 · printed in 14 towns (14) · record only 0
+  10f-backs          towns   28 · instances    28 · distinct   10 · printed in 28 towns (28) · record only 0
+  10f-backs-wide     towns  115 · instances   195 · distinct  112 · printed in 115 towns (195) · record only 0
+  10f-kind           towns    8 · instances     8 · distinct    2 · printed in 8 towns (8) · record only 0
+  10f-tier           towns    2 · instances     2 · distinct    1 · printed in 2 towns (2) · record only 0
+  10f-weight         towns    1 · instances     1 · distinct    1 · printed in 1 towns (1) · record only 0
+  10g-legacy         towns   24 · instances    24 · distinct   24 · printed in 24 towns (24) · record only 0
+  10g-legacy-answer  towns    4 · instances     4 · distinct    4 · printed in 4 towns (4) · record only 0
+  10g-legacy-ruin    towns    6 · instances     6 · distinct    6 · printed in 6 towns (6) · record only 0
+  10h                towns    5 · instances     5 · distinct    5 · printed in 5 towns (5) · record only 0
+  10h census · "Military/Guard" (prose form "The Guard"): 248 towns hold it · in a sentence on 5 (5 lines) · as a row or chip 3208 lines · prose form printed in 248
+  10h census · "Crown Creditors (Noble Coalition)" (prose form "Crown Creditors"): 2 towns hold it · in a sentence on 0 (0 lines) · as a row or chip 18 lines · prose form printed in 2
+  10h census · "Third Bloc (Neutrals)" (prose form "The Neutrals"): 4 towns hold it · in a sentence on 0 (0 lines) · as a row or chip 16 lines · prose form printed in 4
+  10h census · "Noble Claimant (Senior Line)" (prose form "The Senior Line"): 1 towns hold it · in a sentence on 0 (0 lines) · as a row or chip 16 lines · prose form printed in 1
+  10h census · "Noble Claimant (Reform Line)" (prose form "The Reform Line"): 1 towns hold it · in a sentence on 0 (0 lines) · as a row or chip 10 lines · prose form printed in 1
+  10h census · "Monster Hunters / Adventurers" (prose form "Monster Hunters"): 1 towns hold it · in a sentence on 0 (0 lines) · as a row or chip 4 lines · prose form printed in 1
+  not-here C179090 STANDS want:find rule:10a as: NOT-PRINTED :: Head · Sabir al-Ghazali, the council's fixer · answers to Corrupt Coun
+  not-here C179117 STANDS want:find rule:10a as: NOT-PRINTED :: The head of Corrupt Council answers to Corrupt Council.
+  not-here C179288 STANDS want:find rule:10a as: NOT-PRINTED :: Hidden allegiance answers to Corrupt Council, through Rania al-Basri
+  not-here C130353 STANDS want:find rule:10b as: NOT-PRINTED :: The garrison chaplain and the commander are the same man.
+  not-here C130354 STANDS want:find rule:10b as: NOT-PRINTED :: He's authorizing military action for reasons that sound theological.
+  not-here C75413 EXPLAINED want:none rule:- as: NOT-PRINTED :: Secret: Prints whatever pays, including lies about a rival merchant th
+  not-here C196525 STANDS want:find rule:10c as: NOT-PRINTED :: Connection: Wharfinger Madhuri Rao
+  not-here C66115 STANDS want:find rule:10d-seat as: NOT-PRINTED :: Tlachtga O'Meara has asked for a seat on the council as a condition of
+  not-here C66113 STANDS want:find rule:10d-purse as: NOT-PRINTED :: Clíodhna O'Dwyer's treasury borrowed from Tlachtga O'Meara to cover a 
+  not-here C31450 STANDS want:find rule:10e-temper as: NOT-PRINTED :: Temperament: incorruptible
+  not-here C200774 STANDS want:find rule:10e-house as: NOT-PRINTED :: Secret: Keeps the night roster short and draws pay for names that neve
+  not-here C51048 STANDS want:find rule:10e-pay as: NOT-PRINTED :: The garrison and city watch are well paid, well equipped and patrol pr
+  not-here C121364 STANDS want:find rule:10f-kind as: NOT-PRINTED :: A grand council of senior officials, guild masters, and appointed magn
+  not-here C128237 STANDS want:find rule:10f-tier as: NOT-PRINTED :: A small group of traders who come on market days; they speak up in sma
+  not-here C110252 STANDS want:find rule:10f-weight as: NOT-PRINTED :: The merchant guilds now have more say: the noble families keep their t
+  not-here C102099 STANDS want:find rule:10f-backs as: NOT-PRINTED :: Backs · Craft Guilds · Grand Guild Consortium
+  not-here C133674 STANDS want:find rule:10g-span as: NOT-PRINTED :: For 2 seasons a sickness worked through the settlement, emptying house
+  not-here C55011 STANDS want:find rule:10g-legacy as: NOT-PRINTED :: Much of what stands in Kaltenturm now was built after the economic div
+  not-here C24588 EXPLAINED want:none rule:- as: NOT-PRINTED :: The siege left a legacy of trouble in Haian that has never been fully 
+  not-here C181033 EXPLAINED want:none rule:- as: NOT-PRINTED :: A previous occupation ended, but collaborators and resisters continued
+  not-here C184829 EXPLAINED want:none rule:- as: NOT-PRINTED :: An occupation had ended years before, yet those who collaborated and t
+  not-here C1980 STANDS want:find rule:10h as: NOT-PRINTED :: Military/Guard has posted guards on what it says is its own, and Merch
+  not-here C76763 STANDS want:find rule:10h as: NOT-PRINTED :: A ruling on authority over military conscription lists went Military/G
+  controls here 0 · pass 0 · fail 0
+[gate-tail] end:  19:43:38 up 53 min,  0 user,  load average: 0.71, 1.39, 1.72
+[gate-tail] full log: /tmp/claude-0/-home-user-settlement-engine/1f4f4b63-3afd-5555-a806-42243edb7f49/scratchpad/tmp/gate-tail.10514.log
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)

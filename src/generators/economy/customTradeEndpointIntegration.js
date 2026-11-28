@@ -21,6 +21,7 @@ import { computeFinishedGoodsDemand } from './finishedGoodsDemand.js';
  *   nearbyResources:string[],
  *   chainExports:string[],
  *   chainImports:string[],
+ *   refusedOnly?:Set<string>,
  * }} input
  */
 export function applyFinishedGoodsDemandWithOwnership(input) {
@@ -35,6 +36,7 @@ export function applyFinishedGoodsDemandWithOwnership(input) {
     input.nearbyResources,
     input.chainExports,
     input.chainImports,
+    input.refusedOnly,
   );
   nativeTradeCandidates.exports.push(
     ...customDemandProjection.nativeExportsAdded,

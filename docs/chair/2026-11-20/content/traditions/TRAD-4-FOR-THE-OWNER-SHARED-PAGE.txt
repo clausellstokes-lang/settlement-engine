@@ -1,0 +1,13 @@
+WHAT A SHARED PAGE'S TRADITION DESCRIPTIONS NO LONGER SAY (for the owner; TRAD-4, written 2026-11-20 13:33 UTC)
+
+Your own page is unchanged: every description there still says everything the town's record holds. A page you share
+(the public view or the party link) shows the same traditions, but each one's description is written so that
+nothing you might hide later can slip out through it, so it leaves out three things. It never says who founded the
+town: where your page reads, for example, "kept since the town was founded by the river guild, 276 years ago", the shared page reads
+"kept since the town was founded, 276 years ago". It never gives a remembered disaster its own name: where your page
+says, for example, "in memory of the Burning of Lowgate", the shared page says "in memory of the great fire" (likewise "the siege",
+"the flood", "the years of sickness"). And it leaves off a tradition that stands only on a market or other house whose
+use you set yourself, or on a house of a kind you can hide whole (a criminal or clandestine one): the shared page
+lists only the traditions it can stand behind without them. In the 432 sample towns the engine makes on its own, that
+last rule removed nothing: 0 of 432 towns show a shorter list of traditions on the shared page than on yours. It only
+bites on a town you have edited by hand.

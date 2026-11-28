@@ -22,11 +22,13 @@ const settlement = (name, seedTag) => ({
     { name: `${name} Factor`, role: 'Trade Factor', category: 'economy' },
     { name: `${name} Fence`, role: 'Fence', category: 'criminal' },
   ],
-  factions: [
-    { name: `${name} Council`, category: 'government' },
-    { name: `${name} Syndicate`, category: 'criminal' },
-    { name: `${name} League`, category: 'economy' },
-  ],
+  // PEOPLE-5A RE-KEYED (M-2): a settlement engages with its POWERS (`powerStructure.factions`),
+  // never a top-level NPC grouping.
+  powerStructure: { factions: [
+    { faction: `${name} Council`, category: 'government' },
+    { faction: `${name} Syndicate`, category: 'criminal' },
+    { faction: `${name} League`, category: 'economy' },
+  ] },
 });
 
 const gen = (relType) => generateCrossSettlementConflicts(

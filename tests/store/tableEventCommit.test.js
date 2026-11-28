@@ -56,7 +56,7 @@ function canonFixture() {
     stressors: [{ type: 'famine', name: 'famine', label: 'A failing harvest', severity: 0.6, status: 'active' }],
     // Corrupt, so EXPOSE_CORRUPTION has something to act on (the exposure kind
     // vetoes target_not_found on a clean NPC — pre-existing engine behavior).
-    npcs: [{ id: 'npc.aldis', name: 'Aldis', role: 'Guildmaster', corrupt: true }],
+    npcs: [{ id: 'npc.aldis', name: 'Aldis', role: 'Guildmaster', allegiance: { power: null, house: 'The Guild', vector: 'greed', via: 'retainer', handler: null, share: 0.15, veiled: true, covert: true } }], // ALLEGIANCE-CAR1 (2026-11-08): the retired `corrupt` mark is the card's hidden `allegiance` (allegianceOf)
     history: { historicalEvents: [], currentTensions: [] },
   };
 }

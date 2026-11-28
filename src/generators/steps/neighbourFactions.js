@@ -99,7 +99,7 @@ registerStep('neighbourFactions', {
           causes: [{
             source: `neighbour.${neighbourProfile.name}`,
             effect: `${fType} influence`,
-            reason: `Influence from ${neighbourProfile.name} (${relType.replace(/_/g, ' ')}) seeded a mirror ${fType} faction here.`,
+            reason: `Influence from ${neighbourProfile.name} (${relType.replace(/_/g, ' ')}) seeded a mirror ${fType} power here.`,
           }],
           downstreamEffects: [
             { target: 'powerStructure.factions', effect: 'count +1' },
@@ -137,7 +137,7 @@ registerStep('neighbourFactions', {
           causes: [{
             source: `neighbour.${neighbourProfile.name}`,
             effect: `${fType} reaction`,
-            reason: `Resistance to ${neighbourProfile.name}'s influence (${relType.replace(/_/g, ' ')}) spawned an opposition ${fType} faction.`,
+            reason: `Resistance to ${neighbourProfile.name}'s influence (${relType.replace(/_/g, ' ')}) spawned an opposition ${fType} power.`,
           }],
           downstreamEffects: [
             { target: 'powerStructure.factions', effect: 'count +1' },

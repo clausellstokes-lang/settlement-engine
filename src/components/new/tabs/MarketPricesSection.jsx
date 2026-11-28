@@ -116,7 +116,7 @@ export default function MarketPricesSection({ prices }) {
         )}
       </div>
       <p style={{fontSize:proseFontSize(FS.xxs, mobile),color:MUTED,fontStyle:'italic',margin:'8px 0 0',lineHeight:1.4}}>
-        Reckoned against this settlement&rsquo;s own usual prices, off the founding trade profile and the live scarcity of the roads. The coin itself is yours to set at the table.
+        Dear or cheap against what things usually cost here, given what the roads are bringing in now. What a coin is worth is yours to set at the table.
       </p>
     </Section>
   );

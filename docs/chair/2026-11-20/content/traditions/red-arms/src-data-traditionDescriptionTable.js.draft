@@ -1,0 +1,153 @@
+/**
+ * traditionDescriptionTable.js — TRAD-1 (the seventh chair, 2026-11-20): THE TABLE OF WHAT FITS WHAT for the description
+ * under each tradition, and its closed set of sentence frames. A PURE DATA leaf (src/data): frozen tables only, zero
+ * behaviour, no imports; the composer is `domain/traditions/traditionDescription.js` (the traditionCorpus/genesis split).
+ *
+ * THE OWNER (2026-11-20): "give appropriate descriptions per tradition that draws from coherently the history, power,
+ * economy, institutions" — and the same day: "Don't invent drama … Sometimes a calm place is precisely what's needed."
+ * So every row here is a FIT, never a fact: a sentence is composed only where the town's own record holds the fact the
+ * row names, and where nothing fits the description is shorter (what is done, and nothing else).
+ *
+ * THE CAUSE LAW (CTR2). Only the frames under CAUSE_FRAMES may assert a cause, and the composer reaches them on exactly
+ * two pairings: the founding core (genesis's index 0, foundedYear 1) with the founding the record holds; a rite of the
+ * dead with the most recent siege, fire, flood or plague the record holds (DEAD_EVENT_TYPES), by its name and year, never
+ * who won or what it cost. tests/lint/traditionDescriptionFrames.walker.test.js holds the set, the cause words and the
+ * level words (the owner's calm rule, CTR6).
+ *
+ * Everything here is taste-adjacent and vetoable by the owner.
+ */
+
+/** @typedef {'body'|'place'} TraditionHouseKind  a BODY keeps a rite; a PLACE holds it */
+/**
+ * @typedef {Object} TraditionHouseRow
+ * @property {string} match   a case-insensitive pattern over the house's raw catalogue name
+ * @property {string|null} prose  the house in a sentence, with its article; null = "the " + its display label
+ * @property {TraditionHouseKind} kind
+ */
+/** @typedef {{ source: string, prose: string, plural: boolean }} TraditionIncomeRow */
+/** @typedef {{ lead: string, plural: boolean }} TraditionActFrame */
+
+/** WHAT IS DONE: the element's gloss, true by the element's own meaning: [after a singular lead, after a plural lead]. */
+export const ELEMENT_GLOSS = Object.freeze({
+  founding: Object.freeze(['marks the founding', 'mark the founding']),
+  'first-landing': Object.freeze(['marks the first landing', 'mark the first landing']),
+  charter: Object.freeze(['honours the charter', 'honour the charter']),
+  hearth: Object.freeze(['honours hearth and household', 'honour hearth and household']),
+  harvest: Object.freeze(['gives thanks for the harvest', 'give thanks for the harvest']),
+  river: Object.freeze(['honours the river', 'honour the river']),
+  stone: Object.freeze(['honours the standing stones', 'honour the standing stones']),
+  'the-dead': Object.freeze(['remembers the dead', 'remember the dead']),
+  field: Object.freeze(['blesses the fields', 'bless the fields']),
+  forge: Object.freeze(['honours the forge', 'honour the forge']),
+  market: Object.freeze(['celebrates the market', 'celebrate the market']),
+  hunt: Object.freeze(['honours the hunt', 'honour the hunt']),
+  'long-sun': Object.freeze(['marks the long days of high summer', 'mark the long days of high summer']),
+  tide: Object.freeze(['honours the tide', 'honour the tide']),
+  greening: Object.freeze(["welcomes the year's new growth", "welcome the year's new growth"]),
+  stars: Object.freeze(['is kept under the stars', 'are made under the stars']),
+});
+
+/** WHAT IS DONE: the act's lead, two frames an act. @type {Readonly<Record<string, ReadonlyArray<TraditionActFrame>>>} */
+export const ACT_FRAMES = Object.freeze({
+  feast: Object.freeze([{ lead: 'A common feast', plural: false }, { lead: 'A feast eaten in common', plural: false }]),
+  procession: Object.freeze([{ lead: 'A procession', plural: false }, { lead: 'A walking procession', plural: false }]),
+  vigil: Object.freeze([{ lead: 'A vigil', plural: false }, { lead: "A night's vigil", plural: false }]),
+  contest: Object.freeze([{ lead: 'A day of contests', plural: false }, { lead: 'Contests', plural: true }]),
+  fair: Object.freeze([{ lead: 'A fair', plural: false }, { lead: 'A fair of stalls and trading', plural: false }]),
+  offering: Object.freeze([{ lead: 'Offerings', plural: true }, { lead: 'A day of offerings', plural: false }]),
+});
+
+/** @param {string} match @param {string|null} prose @returns {TraditionHouseRow} */
+const body = (match, prose = null) => Object.freeze({ match, prose, kind: /** @type {const} */ ('body') });
+/** @param {string} match @param {string|null} prose @returns {TraditionHouseRow} */
+const place = (match, prose = null) => Object.freeze({ match, prose, kind: /** @type {const} */ ('place') });
+
+const RELIGIOUS_HOUSES = Object.freeze([
+  body('^great cathedral$'), body('^cathedral\\b', 'the cathedral'), body('^(major |multiple )?monasteries', 'the monasteries'),
+  body('^monastery or friary$', 'the monastery'), body('^parish church'), body('^priest \\(resident\\)$', 'the resident priest'),
+  place('^wayside shrine$'),
+]);
+const MARKET_PLACES = Object.freeze([
+  place('^weekly market$'), place('^market square$'), place('^multiple market squares$', 'the market squares'),
+  place('^daily markets$'), place('^district markets', 'the district markets'), place('^periodic market$'),
+]);
+
+/**
+ * WHO KEEPS IT: the kinds of house that fit, by element first, then by act. Rows in preference order. The table holds
+ * no kind the gallery veil may hide whole (criminal, clandestine, illegal brokerage: people/cardVeil.js ::
+ * isHideableHouse): no rite is given to a house the town keeps quiet about. The founding elements (and every founding
+ * core) take no house: the seat keeps them. Hearth, stone, long-sun and field have no house of their own.
+ * @type {Readonly<{ element: Readonly<Record<string, ReadonlyArray<TraditionHouseRow>>>, act: Readonly<Record<string, ReadonlyArray<TraditionHouseRow>>> }>}
+ */
+export const KEEPER_HOUSES = Object.freeze({
+  element: Object.freeze({
+    'the-dead': Object.freeze([...RELIGIOUS_HOUSES, place('burial|graveyard|cemetery|charnel')]),
+    stars: RELIGIOUS_HOUSES,
+    greening: Object.freeze([body('^elder grove council$'), body('^druid circle$')]),
+    harvest: Object.freeze([place('granar'), place('^communal root cellar$'), place('^mills?\\b')]),
+    river: Object.freeze([body('^river ferry$'), body('^barge and river transport company$'), place('^river boatyard$')]),
+    tide: Object.freeze([body("^harbour master's office$"), body('^fishing community$'), place("^fisher's landing$")]),
+    forge: Object.freeze([body('^blacksmiths?\\b'), body('^resident smith'), body('^specialized metalworkers$')]),
+    market: MARKET_PLACES,
+    hunt: Object.freeze([body("^hunter's lodge$"), body('^wildfowler$'), place("^furrier's district$")]),
+  }),
+  act: Object.freeze({
+    offering: RELIGIOUS_HOUSES,
+    vigil: RELIGIOUS_HOUSES,
+    fair: MARKET_PLACES,
+    contest: Object.freeze([place('^colosseum/arena$', 'the arena'), body('^gladiatorial school$')]),
+  }),
+});
+
+/** WHO KEEPS IT, a house: by kind, with a presiding person (the house card's own title) or a power for a place. */
+export const HOUSE_FRAMES = Object.freeze({
+  body: Object.freeze(['It is kept by {house}.', 'Its keeping falls to {house}.']),
+  bodyPerson: Object.freeze(['It is kept by {house}, and {person}, {title}, presides.', 'Its keeping falls to {house}; {person}, {title}, presides.']),
+  place: Object.freeze(['It is held at {house}.', 'It is kept at {house}.']),
+  placePerson: Object.freeze(['It is held at {house}, where {person}, {title}, presides.', 'It is kept at {house}, where {person}, {title}, presides.']),
+  placePower: Object.freeze(['It is held at {house}, in the keeping of {power}.', 'It is kept at {house} and falls to {power}.']),
+});
+
+/** WHO KEEPS IT, a power: by the engine's own owner archetype (politics.js :: desiredArchetype, design §6). */
+export const POWER_FRAMES = Object.freeze({
+  seat: Object.freeze(['It is overseen by {power}.', 'It falls to {power}.']),
+  religious: Object.freeze(['It falls to {power}.', 'It is in the keeping of {power}.']),
+  merchantry: Object.freeze(['Its cost is met by {power}.', 'It is paid for by {power}.']),
+  military: Object.freeze(['It is overseen by {power}.', 'It falls to {power}.']),
+});
+
+/** WHO KEEPS IT, in play: the record's own owner (ownerKind, ownerLabel), and nothing beside it. */
+export const OWNER_FRAMES = Object.freeze(['It is kept now by {owner}.', 'Its keeping falls now to {owner}.']);
+
+/** WHERE IT COMES FROM: the only frames that assert a cause (CTR2). */
+export const CAUSE_FRAMES = Object.freeze({
+  founding: Object.freeze(['It has been kept since {town} was founded by {foundedBy}, {age} years ago.', '{Town} has kept it since its founding by {foundedBy}, {age} years ago.']),
+  foundingBare: Object.freeze(['It has been kept since {town} was founded, {age} years ago.', '{Town} has kept it since its founding, {age} years ago.']),
+  dead: Object.freeze(['It is kept in memory of {event}, {when}.', '{Town} keeps it in memory of {event}, {when}.']),
+});
+
+/** The history event kinds a rite of the dead may be kept in memory of (the chair's marked pairing). */
+export const DEAD_EVENT_TYPES = Object.freeze(['great_fire', 'great_flood', 'plague_years', 'external_threat']);
+
+/** @param {string} source @param {string} prose @param {boolean} plural @returns {TraditionIncomeRow} */
+const income = (source, prose, plural) => Object.freeze({ source, prose, plural });
+const LAND_INCOMES = Object.freeze([income('Harvest', 'the harvest', false), income('Grain Sales', 'grain sales', true), income('Agricultural Rents', 'farm rents', true)]);
+const MARKET_INCOMES = Object.freeze([income('Market Taxes', 'market taxes', true)]);
+
+/** WHO PAYS: the economy the town lives on, by element (or act): income sources, with their prose forms. */
+export const ECONOMY_FIT = Object.freeze({
+  harvest: LAND_INCOMES,
+  field: LAND_INCOMES,
+  river: Object.freeze([income('River Tolls', 'river tolls', true)]),
+  tide: Object.freeze([income('Fish & Maritime Produce', 'fish and maritime produce', false), income('Fish & Preserved Produce', 'fish and preserved produce', false), income('Port Duties', 'port duties', true)]),
+  'first-landing': Object.freeze([income('Port Duties', 'port duties', true), income('River Tolls', 'river tolls', true)]),
+  forge: Object.freeze([income('Iron & Metalwork', 'iron and metalwork', false), income('Coal Sales', 'coal sales', true)]),
+  market: MARKET_INCOMES,
+  fair: MARKET_INCOMES,
+});
+
+/** The rank words of the town's three largest incomes (`incomeSources` is sorted by share). */
+export const INCOME_RANK_WORDS = Object.freeze(['chief', 'second', 'third']);
+/** WHO PAYS: states the rank the record holds; never that the rite pays for or earns it. */
+export const ECONOMY_FRAMES = Object.freeze(["{Income} {is} {town}'s {rank} income.", "{Income} {is} the {rank} of {town}'s incomes."]);
+export const ECONOMY_ONLY_FRAMES = Object.freeze(["{Income} {is} {town}'s only income."]);

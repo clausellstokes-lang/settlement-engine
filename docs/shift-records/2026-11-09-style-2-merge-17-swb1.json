@@ -1,0 +1,22 @@
+{
+  "_doc": "RECORD 17 OF THE STYLE WAVE'S MERGE (STYLE-2-MERGE, carried by its second seat STYLE-2-MERGE-2), ODQ §934.105 (the cloud chair signs by the owner's delegation of 2026-11-06, vetoable; a successor chair does not inherit this signature). THE LAW OF THE CHAIN (BRIEF-MERGE-CAR §0; BRIEF-STYLE-2-WAVE §3): the integration branch's first-parent line is the golden chain; a lane's unsigned cause commits are components signed at its merge point. THE CAUSE, ONE: THE SW-B1 CONTRADICTIONS MERGE OVER THE INTEGRATION BRANCH — lane/style-2-contradictions-2026-11-09 at 8c650338d merged at 0f2cb865c (STYLE-2-MERGE point 17), factionStanding.js composed line by line (SW-B1's three isGoverning condition lines beside SW-7's standing strings), the wiring census and writer reach re-taken through their doors and the dated roster composed; its lane signed nothing, its causes are the components signed here with the lane's own figures (docs/chair/2026-11-09/STYLE-2-CONTRADICTIONS-2026-11-09.md §6): P50/P51/powerSiblings (the power cards read the powers they speak of) gm 447, fence 266; P71 (the food import channel says 'by sea' only over docks) gm 29, fence 13; DS-GEN-6 (the origin port line reads the docks) fence 6 and the prose manifest's 72 rows, render-only, signed ONCE at the final tip; every other commit 0. Composed on the line, FIELD-DIFFED stage to stage: gm 464 of 525 in two string fields only — powerStructure.factions[].desc 447 rows and economicViability.metrics.foodBalance.importChannel 29 rows (no non-string leaf moved) — fence 272 of 360. THE MOVE, MEASURED before the write by scripts/audit/landing-stage.sh measure, stage to stage against the stage of fe55408b9 (record 16's post-state with the three zero-move hygiene commits d3760f77f, 266256671, fe55408b9 after it, measured 0 on all six against the stage of a52f7b8f3): the generator golden master 464 of 525 rows (thorp 65, hamlet 84, village 84, town 63, city 84, metropolis 84) 25824515.. -> 21b50e30..; the espionage fence's driven corpus 272 of 360 rows (thorp 19, hamlet 41, village 47, town 46, city 59, metropolis 60) 22134e2a.. -> 03fc50e3..; 360/360 distinct; herald 0, witness 0, PDF 0; the prose manifest's 72 rows signed ONCE at the final tip. Built through the guard with no STOP.",
+  "ownerWords": "I also now give all permissions required now and in the future. I also defer all judgement to you. · I leave all judgement now and in the future to you.",
+  "ownerDate": "2026-11-06",
+  "odqRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation of 2026-11-06 to the cloud chair; the style wave's merge STYLE-2-MERGE, 2026-11-09)",
+  "cause": "THE SW-B1 CONTRADICTIONS MERGE OVER THE INTEGRATION BRANCH — lane/style-2-contradictions-2026-11-09 at 8c650338d merged at 0f2cb865c (STYLE-2-MERGE point 17), factionStanding.js composed line by line (SW-B1's three isGoverning condition lines beside SW-7's standing strings), the wiring census and writer reach re-taken through their doors and the dated roster composed; its lane signed nothing, its causes are the components signed here with the lane's own figures (docs/chair/2026-11-09/STYLE-2-CONTRADICTIONS-2026-11-09.md §6): P50/P51/powerSiblings (the power cards read the powers they speak of) gm 447, fence 266; P71 (the food import channel says 'by sea' only over docks) gm 29, fence 13; DS-GEN-6 (the origin port line reads the docks) fence 6 and the prose manifest's 72 rows, render-only, signed ONCE at the final tip; every other commit 0. Composed on the line, FIELD-DIFFED stage to stage: gm 464 of 525 in two string fields only — powerStructure.factions[].desc 447 rows and economicViability.metrics.foodBalance.importChannel 29 rows (no non-string leaf moved) — fence 272 of 360",
+  "seat": "STYLE-2-MERGE-2 under the cloud chair, session session_01FbPLbejcfwX5nii12VM673, from the stage at 0f2cb865c",
+  "surfaces": [
+    {
+      "surface": "generator-golden-master",
+      "action": "re-record",
+      "predictedRows": 525,
+      "proofForm": "settlement-hash"
+    },
+    {
+      "surface": "espionage-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant"
+    }
+  ]
+}

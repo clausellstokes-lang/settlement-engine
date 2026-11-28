@@ -403,16 +403,25 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
         {/* Instructional intro — the canonical PageHeader idiom (eyebrow + serif
             title + italic subtitle). The only saturated-gold mass on this page is
             the Generate button (P4 one-focal-point). as="h2": the app chrome owns
-            the page h1. Mode-specific guidance rides the subtitle. */}
-        <PageHeader
-          as="h2"
-          size="sm"
-          eyebrow={t('generate.introEyebrow')}
-          title={t('generate.introTitle')}
-          subtitle={wizardMode === 'advanced'
-            ? t('generate.introSubtitleAdvanced')
-            : t('generate.introSubtitleBasic')}
-        />
+            the page h1. Mode-specific guidance rides the subtitle.
+            ⛔ ON A PLATE, NEVER BARE ON THE PAINTING (the owner, 2026-11-10: "The section
+            headers for the configuration before generating a settlement are hard to
+            read"). The page wears `.page-bg.is-flow`, a painting under a thin veil; the
+            kicker read 1.8–3.7:1 and the lead 3.2–6.9:1 over its trees. CARD, not PARCH:
+            the kicker's GOLD_DEEP passes on CARD (4.6:1) and not on PARCH (4.3:1).
+            PageHeader's own bottom margin is the plate's bottom padding.
+            @enforced-by tests/components/createHeadersOnPlates.test.jsx */}
+        <div data-testid="create-intro-plate" style={{ background: CARD, border: `1px solid ${BORDER}`, padding: `${SP.lg}px ${SP.lg}px 0` }}>
+          <PageHeader
+            as="h2"
+            size="sm"
+            eyebrow={t('generate.introEyebrow')}
+            title={t('generate.introTitle')}
+            subtitle={wizardMode === 'advanced'
+              ? t('generate.introSubtitleAdvanced')
+              : t('generate.introSubtitleBasic')}
+          />
+        </div>
 
         {/* THE LEAF (C1r-c1 — the FORGE commissioning-desk composition, docs/
             DESIGN_DEEP_CRAFT_PAGES.md: "Advanced unfolds a second leaf"). The

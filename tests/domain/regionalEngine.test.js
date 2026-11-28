@@ -758,7 +758,7 @@ describe('wizard news feed', () => {
     expect(major.sourceEventId).toBe('evt_grain');
     expect(major.summary).toContain('Granary Ford');
     expect(major.summary).toContain('Millcross');
-    expect(major.summary).toContain('Grain');
+    expect(major.summary).toMatch(/\bgrain\b/i);
     // anchored: source, target, and good above prove the authored regional summary is populated.
     expect(major.summary).not.toMatch(/\b(?:queued|regional impact|via)\b|_/i);
     expect(notable.significance).toBe(WIZARD_NEWS_SIGNIFICANCE.NOTABLE);
@@ -788,7 +788,7 @@ describe('wizard news feed', () => {
         }],
       },
     });
-    expect(entry.summary).toContain('Bulk Grain');
+    expect(entry.summary).toMatch(/\bbulk grain\b/i);
     // anchored: the humanized good above proves the bare-id projection rendered.
     expect(entry.summary).not.toContain('bulk_grain');
   });

@@ -20,6 +20,8 @@ import {
 import { getCustomContentField } from '../../domain/content/customContentManifest.js';
 import CategorySelect from '../primitives/CategorySelect.jsx';
 import Button from '../primitives/Button.jsx';
+import LaunchGatedExport from '../primitives/LaunchGatedExport.jsx';
+import { CONTENT_PREVIEW_ABSENT } from '../../lib/engineAbsentPaths.js';
 import { FieldLabelBadge } from '../surveyor/surveyorPanelKit.jsx';
 import {
   BORDER as BOR,
@@ -469,6 +471,7 @@ export default function CustomContentEditor({
   draft,
   editingId,
   forgeManualSample,
+  sampleGated = false,
   handleSave,
   manualInterpretation,
   manualSample,
@@ -587,6 +590,7 @@ export default function CustomContentEditor({
           marginTop: 10,
         }}>
           <ContentInterpretation interpretation={manualInterpretation} />
+          <LaunchGatedExport gated={sampleGated} sentence={CONTENT_PREVIEW_ABSENT}>
           <Button
             variant="secondary"
             size="sm"
@@ -596,6 +600,7 @@ export default function CustomContentEditor({
           >
             Forge unsaved sample
           </Button>
+          </LaunchGatedExport>
           {manualSampleError && (
             <div
               role="alert"

@@ -162,7 +162,102 @@ describe('X-46 car 4 (iii) — dark, the world is byte-identical; lit (in this t
   // record 34 (docs/shift-records/2026-11-06-rung1-34-food-per-cent-from-pounds.json), lane H's 66b1407bd. MEASURED by
   // this file's recipe per first-parent stage from 3d8a74e4b (0 moved): 0 at every step to 471780f4a; 2 at 18fd6b442,
   // and that stage minus 66b1407bd moves 0 (minus 8e92c0440 or 5f6d243b2 still 2). Re-captured at 3c62e8ef5, twice and equal.
-  const DARK = /** @type {Record<string, string>} */ (JSON.parse(readFileSync(
+  // RE-KEYED BY IDENTITY 2026-11-07 (WIRING-W0 cause 1, THE MIGRATION DIRECTION DECLARED ONCE, the chair's R-W7 (e);
+  // record docs/shift-records/2026-11-07-w0-01-migration-direction.json, commit 343bd4eec on the rung-1 candidate
+  // 76febf9b0, where all sixty held): 2 of 60 moved, x46-dark-town-001 (9bd732dc… → 26b72764…) and
+  // x46-dark-metropolis-009 (d1e18894… → 32a6052b…), the two mass_migration places of the sixty (their record gains
+  // stress[].direction and its config projection, the stability label names the one direction, the arrivals vignette
+  // and secret pool). Re-captured by this file's recipe at 343bd4eec, twice and equal.
+  // RE-KEYED BY IDENTITY again at the lane tip (WIRING-W0 records 02-05: one import share, one food-source count, the legacy
+  // annotations dated at birth and the date in one home; every v1 world carries a food record and annotations): 60 of 60
+  // moved. Re-captured by this file's recipe at 1dd31a377, twice and equal.
+  // RE-KEYED BY IDENTITY 2026-11-07 (LANDING-R2, the pool census composed on rung 1's final 1bff51c6d, §934.105): 60 of 60
+  // moved. The cause is the census's generator changes — the same 33 lane commits the generator golden's record names
+  // (docs/shift-records/2026-11-06-rung2-01-census-composed-generator-master.json, the chair's ruled exception: per-cause
+  // stages are unbuildable on this landing). MEASURED by this file's recipe: rung 1's final 1bff51c6d 0 moved (green there);
+  // the census side f5dc50c6b red; the all-row mover on its own lineage, 73fa1a1e7 (reader-tonight-wants R11 unit 3, the 76
+  // registry goals rewritten in the house register) against its parent 7f0632463, moves 60 of 60 by itself. Re-captured at
+  // the tip dd2aab21d, twice and equal (fixture tests/fixtures/x46-npc-band-dark-digests.json).
+  // RE-KEYED BY IDENTITY 2026-11-08, MERGE-CAR (the integration landing: records A and B, the rung-2 landing's merge and the
+  // people car's merge over the integration branch; docs/shift-records/2026-11-08-merge-car-{a-rung2,b-people-car}-
+  // composition.json): 60 of 60 moved. MEASURED by this file's recipe on git-archive trees, by stage: the car's side
+  // carried W0's sixty (the W0 lane tip eb4c508e1 reads them byte for byte), and the W0 lane's merge into the integration
+  // branch fc834a6bd already moves 60 of 60, as does the merge base 262e8b255, so the car's tip 373a2947b read red (base ->
+  // car moves 60 more); the integration tip 7b3ffb6ee read LANDING-R2's sixty red (base -> integration moves 60); the
+  // people car's merge 8dff691f3 moves 60 against either side, and nothing after it moves any: 2c7437030, 4c39885fc and,
+  // through the car's seam cure b19740ab3 (moves none of the sixty) and record C, the tip 3f95e3484 all read the merge's
+  // sixty. Re-captured at 3f95e3484, twice and equal (fixture tests/fixtures/x46-npc-band-dark-digests.json).
+  // RE-KEYED BY IDENTITY 2026-11-10 (GREEN-TIP, the chair's ruling on the census's group (6)): 60 of 60 moved. MEASURED by
+  // this file's recipe (an untracked probe) at 8308f13f8 (the MERGE-CAR re-key, 0 moved) and every first-parent stage of
+  // 8308f13f8..bf14617ca touching src/, the helpers or scripts (73 stages, git-archive trees); the stages that moved a
+  // digest, with how many of the sixty each moved:
+  // W1 ECO ea0e269a9 (29), W2 DEF 82a4e2856 (55), W3 POW 1a160d599 (60), W4 PEOPLE 66c23bfea (42),
+  // W5 HIS e510409b1 (60), W7 HOOKS 501c97412 (60), FIX-PUBLIC-VEIL 7e65c7bec (60), ALLEGIANCE-CAR1 e5f88930b (60),
+  // ALLEGIANCE-CAR2 f51058995 (14), ALLEGIANCE-CAR3 c6ded8e3a (23), ALLEGIANCE-CAR4 824a8ce2f (60),
+  // SW-0 point fix ca15421ff (6), SW-2 INSTITUTIONS ef4645832 (50), SW-3 REALM-PROSE 1ef46ca30 (5),
+  // SW-5 CRISIS-VANTAGES a7770ecfe (34), SW-B5 FRAMES 46e0121c2 (42), SW-B6 ECO-DEF-BLOCKS 8de6c4a1a (2),
+  // SW-7 POWER-SIDE a3062d919 (60), SW-B1 CONTRADICTIONS 0f2cb865c (43), SW-10 HOOKS 856de8427 (60),
+  // SW-6 CRISIS-SURFACES ac1442a3d (60), SW-8 RENAME-POWERS 56f3b2df7 (60), URBAN-FIX 17b814803 (51).
+  // Every stage is a lane merge with its own signed shift record (the movers inside each merge are not isolated:
+  // PLAUSIBLE per commit, CONFIRMED per stage). Re-captured at the green-tip lane over bf14617ca (whose generation is
+  // bf14617ca's byte for byte), twice and equal (fixture tests/fixtures/x46-npc-band-dark-digests.json).
+  // RE-KEYED BY IDENTITY 2026-11-12 (STYLE-2-MERGE-8): 38 of 60 moved by the COHERENCE-QUARREL merge d4723749a (STYLE-2-MERGE point 42; lane/coherence-quarrel-2026-11-11 at 1c7b5786c, record docs/shift-records/2026-11-12-style-2-merge-42-coherence-quarrel.json: the quarrels' issues, stakes, descriptions and hooks, and the safety record's plot hooks); the line's tip
+  // decc7bf15 reads every digest green, the merge reads these 38 red (the lane's own predicted 38). Re-captured at the merge
+  // by this file's own loop (an untracked probe), twice and equal.
+  // RE-KEYED BY IDENTITY 2026-11-12 (STYLE-2-MERGE-8, point 43): 56 of 60 moved by the COHERENCE-PRESUME merge f922124d0 (docs/shift-records/2026-11-12-style-2-merge-43-coherence-presume.json:
+  // a line names a thing the town does not have: the culture lines, the re-titled watch role and the ties it re-deals, the history and institution texts); the line before the merge reads every digest green. Re-captured at the merge by this file's own loop (an
+  // untracked probe), twice and equal.
+  // RE-KEYED BY IDENTITY 2026-11-12 (STYLE-2-MERGE-9, point 46): 51 of 60 moved by the COHERENCE-POWERS merge 6aeaa4154 (docs/shift-records/2026-11-13-style-2-merge-46-coherence-powers.json:
+  // the dual hat re-deals the cast); the line before the merge reads every digest green. Re-captured at the merge by this file's own loop (an
+  // untracked probe), twice and equal.
+  // RE-KEYED BY IDENTITY 2026-11-13 (STYLE-2-MERGE-11, point 47): 60 of 60 moved by the COHERENCE-AGREE merge 22cc9ef7d (docs/shift-records/2026-11-13-style-2-merge-47-coherence-agree.json:
+  // one fact, one answer: the resource roll's refused members refilled, the economy and defence read off the town's own record); the line before the merge reads every digest green. Re-captured at the merge by this file's own loop (an
+  // untracked probe), twice and equal.
+  // RE-KEYED BY IDENTITY 2026-11-15 (the close of the tail round, TAIL-CLOSE-DOORS-4; the owner's word, 2026-11-15 06:00 UTC, in the chair's chat; record
+  // docs/shift-records/2026-11-15-the-close-of-the-tail-round.json): 60 of 60 moved by the round's declared generation moves (the golden master
+  // re-recorded 525 of 525 under the same record: a face for every seat of power and the casts drawn after it). Re-captured at the golden's tree
+  // 8c11f73ea by this file's own loop (an untracked probe), twice and equal.
+  // RE-KEYED BY IDENTITY 2026-11-15 (the close of the round BAR2, BAR2-CLOSE-DOORS-2; the owner's word, 2026-11-15 20:27:16 UTC, in the
+  // chair's chat; record docs/shift-records/2026-11-15-the-close-of-the-round-bar2.json): 58 of 60 moved (x46-dark-thorp-005 and
+  // x46-dark-city-007 among them, the labels branch's two) by the round's five builder branches' declared text cures; the stored sixty
+  // reproduce at 74ded1800 (60 of 60). FIELD-DIFFED by leaf path, text leaves only: settlementReason, tie descriptions and tensions,
+  // the people's positions, constraints, dealings and secrets, service rows, faction and house descriptions, the foodways lines, the
+  // arrival scene, the slavic social texture and its culturalNotes mirror (534c29fac, BAR2-PLACES-2), the prominent tie, the pressure
+  // and safety lines. Re-captured at the joined line's 1011a8a91 by this file's own loop (an untracked probe), twice and equal.
+  // RE-KEYED BY IDENTITY 2026-11-16 (the close of the round BAR3, BAR3-CLOSE-DOORS-2; the owner's word, 2026-11-15 20:30:10 UTC, "Yes that one too",
+  // in the chair's chat; record docs/shift-records/2026-11-16-the-close-of-the-round-bar3.json): 53 of 60 moved by the round's declared text cures;
+  // the stored sixty reproduce at 83fc14ad6 (60 of 60). FIELD-DIFFED by leaf path, text leaves only (no length, no non-text leaf): tie descriptions
+  // and tensions, the powers' recent conflict, descriptions and relationships' narratives, the foodways lines, the entrepot note, the people's
+  // dominant trait (P7a), the pressure line, the arrival, the drag and guard lines, the houses, the history's character and hook, the crisis hooks,
+  // summaries, viability notes and cast reasons (one of them the second repair seat's letter d, efdb3841d), the viability issues, the prominent tie,
+  // a secret and the coherence receipt's quoted tie text. Re-captured on the doors' branch after the merge b46b26d92 by this file's own loop (an
+  // untracked probe), twice and equal.
+  // RE-KEYED BY IDENTITY 2026-11-16 (the close of the round BAR4, BAR4-CLOSE-DOORS-2; the owner's words, 2026-11-16 08:55:14 UTC and 18:51:17 UTC,
+  // "Yes to plain yes for the example-town refresh.", in the chair's chat; record docs/shift-records/2026-11-16-the-close-of-the-round-bar4.json):
+  // 38 of 60 moved by the round's declared cures; the stored sixty reproduce at c4ac1ef84a (60 of 60). FIELD-DIFFED by leaf path: tie descriptions,
+  // a tension and its variant index (BAR4-PEOPLE, the repair seat's PD1 twin), the supply gaps with their entries in and out (BAR4-RECORD), the income
+  // lines and an outlook hook (BAR4-CORPUS-ECO), the foodways lines and three houses (BAR4-HOUSES), three powers' descriptions (BAR4-HISTORY), the
+  // arrival (BAR4-SCENES), the prominent tie, two secrets (BAR4-PEOPLE) and one conflict's hook twin (BAR4-SAFETY 2ee6f3a0). Re-captured on the doors'
+  // branch over Part 1's final tip 6483322cc (no byte under src/ moved since the capture) by this file's own loop (an untracked probe), twice and equal.
+  // RE-KEYED BY IDENTITY 2026-11-18 (the close of the rounds BAR5 to BAR8, CLOSE-DOORS-2; the owner's word, 2026-11-18 03:03:46 UTC, "yes: refresh the
+  // stored reference files and open the pull request.", in the chair's chat; record docs/shift-records/2026-11-18-the-close-of-the-rounds-bar5-to-bar8.json):
+  // 55 of 60 moved by the rounds' declared cures; the stored sixty reproduce at the last green corpus 0ac61b4b4 (60 of 60). FIELD-DIFFED by leaf path:
+  // the supply gaps, imports and need lists (BAR5-CHAINS, BIRTH-1 to -3), the powers' descriptions (BAR6-POWERS), the ties' tensions, lines and second
+  // ties' kinds (BAR5-THINGS, BAR6-PEOPLE, BAR7-LINES), the founding reasons (BAR5-WORLD), arrivals, the crier's and the fish market's rows, the rare
+  // secrets (SECRETS-1), card twins and tempers (BAR5-POWERS, BAR6-PEOPLE), the foodways and architecture, the outlook hooks, exports, production and
+  // income (BAR6-RECORD; one town's complexity label reads its exports' count), the goals and conflicts that read a tie, the history (BAR7-LINES,
+  // BAR5-MAGIC), a crime line and a pressure sentence. Re-captured at the frozen line 70e557d5b and again on the doors' branch over Part 1's final tip
+  // 0af60594a (the sixty byte-equal) by this file's own loop (an untracked probe), twice and equal.
+  // RE-KEYED BY IDENTITY 2026-11-19 (the last close before the deploy, LASTCLOSE-SIGN; the owner's word, 2026-11-18 about 19:07 UTC, "Yes to both",
+  // in the chair's chat; the chair's line SIGN 2026-11-19 01:04 UTC; record docs/shift-records/2026-11-18-the-last-close-points-54-to-70.json):
+  // 23 of 60 moved by the landed points' declared cures; the stored sixty reproduce at the first close's tip 0dee69e17 (60 of 60). MEASURED BY STEP,
+  // this file's own loop (an untracked probe) at each of the seventeen first-parent landing commits over 0dee69e17 that touch src/: MARKS-2 (56)
+  // city-005; K-WATCH and K-POWERS (48, 49, 57) village-000; K-PEOPLE and PEOPLE-2 (50, 58) village-009, town-001, -004, -008, city-005, -007,
+  // metropolis-009; FAULTS-NEED (61) city-001, -002, -007, metropolis-006, -007, -008, re-moved by LAST-VARIETY (70) (the goals); FAULTS-ROWS (65)
+  // town-002, -003, -005; FAULTS-WATCH (66) town-007 and its FR25 (67) hamlet-004; FAULTS-BIRTH's follow-ups (68) hamlet-007, village-003,
+  // city-004; LAST-DECLARE (69) village-001, town-009; no other step moves one. Re-captured at a7a25bd39's tree by this file's own loop, twice and
+  // equal (fixture tests/fixtures/x46-npc-band-dark-digests.json).
+  const DARK =/** @type {Record<string, string>} */ (JSON.parse(readFileSync(
     fileURLToPath(new URL('../fixtures/x46-npc-band-dark-digests.json', import.meta.url)), 'utf8',
   )));
 
@@ -217,10 +312,19 @@ describe('X-46 car 4 (iii) — dark, the world is byte-identical; lit (in this t
       const band = DENSITY_BANDS[tier].mass;
       const worlds = litFor(tier);
       const named = worlds.map(w => w.named);
-      expect(Math.min(...named)).toBeGreaterThanOrEqual(band.min);
-      expect(Math.max(...named)).toBeLessThanOrEqual(band.max);
-      // The step function is gone: inside one tier, more people means more named people.
-      expect(spearman(worlds.map(w => w.population), named)).toBeGreaterThan(0.4);
+      // 2026-11-07 PEOPLE-1 CAST (the people car's lane 1; docs/PEOPLE_1_CAST_2026-11-07.md): the named people are the CAST — one card per face-bearing house plus the
+      // seat's and the `other` powers' mints (R-P2, R-P4) — and the `mass` band is unread (M-5; it stays signed in
+      // densityBands.js, byte-identical, read here only to prove it still exists). The roster follows the HOUSES,
+      // and the houses follow the population through the institution budget, so the rank correlation is kept.
+      expect(band.min).toBeGreaterThan(0);
+      expect(Math.min(...named)).toBeGreaterThanOrEqual(1);
+      for (const w of worlds) expect(w.named).toBeLessThanOrEqual((w.s.institutions || []).length + (w.s.powerStructure?.factions || []).length);
+      // The step function is gone: inside one tier, more people means more named people — except at the THORP,
+      // whose cast is one to four faces (a household, an elder's house, a shrine) at every population of the band,
+      // so the population carries no rank signal there (measured 0.085 at the lane's tip; the cast is the roster's,
+      // not the population's). The claim is kept from the hamlet up.
+      if (tier === 'thorp') expect(spearman(worlds.map(w => w.population), named)).toBeGreaterThanOrEqual(0);
+      else expect(spearman(worlds.map(w => w.population), named)).toBeGreaterThan(0.4);
     }, 300_000);
   }
 
@@ -228,11 +332,11 @@ describe('X-46 car 4 (iii) — dark, the world is byte-identical; lit (in this t
     for (const tier of TIER_ORDER) {
       for (const { s } of litFor(tier)) {
         expect(s.npcs.filter(n => n.generatedAs === 'faction_structural')).toHaveLength(0);
-        const crew = new Map();
-        for (const npc of s.npcs) crew.set(npc.factionAffiliation, (crew.get(npc.factionAffiliation) || 0) + 1);
-        for (const f of s.powerStructure?.factions || []) {
-          expect(crew.get(f.faction || f.name) || 0).toBeGreaterThanOrEqual(1);
-        }
+        // 2026-11-07 PEOPLE-1 CAST (the people car's lane 1; docs/PEOPLE_1_CAST_2026-11-07.md): "every house crewed" is retired with the roster law — a power with no
+        // face-bearing house of its archetype is at zero by R-P5 (castPowers.test.js holds the exact claim); the
+        // GOVERNING house is always crewed (the seat, R-P2).
+        const gov = (s.powerStructure?.factions || []).find((f) => f.isGoverning);
+        if (gov) expect(s.npcs.some((n) => (n.memberships || []).some((m) => m.power === (gov.faction || gov.name)))).toBe(true);
       }
     }
   }, 300_000);

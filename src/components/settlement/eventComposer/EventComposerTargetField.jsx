@@ -83,14 +83,14 @@ export function EventComposerTargetField({
     return (
       <Field label="New ruling power" hint={spec?.targetPrompt}>
         <select value={target} onChange={e => setTarget(e.target.value)} style={selectStyle(mobile)}>
-          <option value="">Pick a faction</option>
+          <option value="">Pick a power</option>
           {rulingPowerOptions.map(o => (
             <option key={o.id} value={o.id}>{o.name}</option>
           ))}
         </select>
         {rulingPowerOptions.length === 0 && (
           <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), fontStyle: 'italic', color: MUTED, opacity: 0.8 }}>
-            No other faction holds power here. Add a faction first.
+            No other power is present here. Add a power first.
           </span>
         )}
       </Field>
@@ -109,9 +109,9 @@ export function EventComposerTargetField({
       if (custom?.description) setDesc(custom.description);
     };
     return (
-      <Field label="Faction" hint="Choose a faction that isn't here yet">
-        <select value={target} onChange={e => pickFaction(e.target.value)} aria-label="Faction" style={selectStyle(mobile)}>
-          <option value="">Select a faction</option>
+      <Field label="Power" hint="Choose a power that isn't here yet">
+        <select value={target} onChange={e => pickFaction(e.target.value)} aria-label="Power" style={selectStyle(mobile)}>
+          <option value="">Select a power</option>
           {factionGroups.map(g => (
             <optgroup key={g.category} label={g.label}>
               {g.options.map(o => <option key={o.name} value={o.name}>{o.name}</option>)}
@@ -120,7 +120,7 @@ export function EventComposerTargetField({
         </select>
         {factionGroups.length === 0 && (
           <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), fontStyle: 'italic', color: MUTED, opacity: 0.8 }}>
-            Every catalogued faction is already present. Author a new one in your Compendium and it appears here.
+            Every catalogued power is already present. Author a new one in your Compendium and it appears here.
           </span>
         )}
       </Field>
@@ -196,7 +196,7 @@ export function EventComposerTargetField({
         </Field>
         <Field
           label={type === 'PROMOTE_NPC' ? 'Displaces' : 'Displaced by'}
-          hint="Same faction: the two swap standing"
+          hint="Same power: the two swap standing"
         >
           <select
             value={swapWithNpcId}

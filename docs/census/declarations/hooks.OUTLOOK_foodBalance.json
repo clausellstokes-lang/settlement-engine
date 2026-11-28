@@ -1,0 +1,100 @@
+{
+ "id": "hooks.OUTLOOK_foodBalance",
+ "source": "src/generators/economy/foodBalance.js :: (economicViability.plotHooks writers)",
+ "drawKind": "T",
+ "pool": {
+  "declares": [],
+  "crisisScoped": false,
+  "colour": false,
+  "notes": "inline T branches; stored on economicViability.plotHooks; storeTrueHooksOnly drops the false ones today (hook-truth classifier: famine, defence, crime). Phase B: the self-check re-asserts these declarations on the stored hooks (R5).",
+  "needs": [],
+  "excludes": []
+ },
+ "rows": [
+  {
+   "id": "hooks.OUTLOOK_foodBalance::route-cut",
+   "text": "The {route} trade route is cut off by bandits, war, or weather. The settlement has {n} days of food left. F...",
+   "needs": [],
+   "excludes": [],
+   "colour": true,
+   "notes": "key: a trade-dependent food balance on a route; hook-truth refuses its famine words on a fed place"
+  },
+  {
+   "id": "hooks.OUTLOOK_foodBalance::grain-price",
+   "text": "A poor harvest somewhere else has spiked the price of grain. The settlement must decide what it can still a...",
+   "needs": [],
+   "excludes": [],
+   "colour": true,
+   "notes": "key: food imports"
+  },
+  {
+   "id": "hooks.OUTLOOK_foodBalance::starving",
+   "text": "The settlement is starving. Villagers are turning to banditry, and a merchant has offered to supply food at...",
+   "needs": [
+    "food: ≤ deficit",
+    "tier: <= village"
+   ],
+   "excludes": [],
+   "colour": false,
+   "notes": "\"Villagers\": a small place; hook-truth already refuses the starving words on a fed place (famine rule)"
+  },
+  {
+   "id": "hooks.OUTLOOK_foodBalance::guild-monopoly",
+   "text": "A single importer controls the grain coming in and has raised prices 300%...",
+   "needs": [],
+   "excludes": [],
+   "colour": false,
+   "notes": "CENSUS-3e (answer 2): reworded from 'A single merchant guild controls grain imports'. R-V measured: guild at the economy step differs from the final record on 25 of 1,000 births (4 of 377 printing). Declares nothing: the branch guarantees the deficit and a traded route (CENSUS-3d's food: ≤ deficit was a wrong presumption, 63 of 82 refused)."
+  },
+  {
+   "id": "hooks.OUTLOOK_foodBalance::dam",
+   "text": "Upstream settlement builds dam or diverts river. Threatens water access AND grain shipments. Diplomacy or war?",
+   "needs": [
+    "river"
+   ],
+   "excludes": [],
+   "colour": false,
+   "notes": "key: route river (guaranteed); declared because the key is the ROUTE, not the water home"
+  },
+  {
+   "id": "hooks.OUTLOOK_foodBalance::blockade",
+   "text": "An enemy fleet or a pirate squadron blockades the port. The settlement has {n} days of reserves...",
+   "needs": [
+    "coast"
+   ],
+   "excludes": [],
+   "colour": false,
+   "notes": "key: route port AND terrain coastal (guaranteed)"
+  },
+  {
+   "id": "hooks.OUTLOOK_foodBalance::bandits",
+   "text": "Bandits are taking the food caravans, and the settlement has posted a bounty for clearing the trade road...",
+   "needs": [
+    "route: road"
+   ],
+   "excludes": [],
+   "colour": false,
+   "notes": "key: route road (guaranteed)"
+  },
+  {
+   "id": "hooks.OUTLOOK_foodBalance::timber",
+   "text": "Something is killing the forest the timber comes from, and the settlement's building and shipbuilding trade...",
+   "needs": [
+    "navigable"
+   ],
+   "excludes": [],
+   "colour": false,
+   "notes": "\"shipbuilding trades\": presumes boats can be built and floated (the reader:hook-pools [sea] class on plains/desert roads). A shipyard is no institution kind (docks matches docks/harbour/wharf/quay/port), so the water home answers. TWIN OWED: the same sentence without \"and shipbuilding\" (excludes: water: navigable) — the chair's ruling, recorded in the lane doc"
+  },
+  {
+   "id": "hooks.OUTLOOK_foodBalance::iron",
+   "text": "War breaks out. Metal suppliers prioritize military contracts. Blacksmiths cannot get iron for tools/repair...",
+   "needs": [
+    "institution: smith"
+   ],
+   "excludes": [],
+   "colour": false,
+   "notes": "\"Blacksmiths\": key is hasImportProcessor(iron), which reads the raw roster at generation; declared so the live roster answers"
+  }
+ ]
+}

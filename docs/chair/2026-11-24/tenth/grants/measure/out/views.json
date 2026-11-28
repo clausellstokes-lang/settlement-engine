@@ -1,0 +1,18 @@
+[
+ {
+  "viewname": "v_funnel_first_gen",
+  "definition": " SELECT (created_at)::date AS day,\n    count(*) FILTER (WHERE (event = 'homepage_view'::text)) AS homepage,\n    count(*) FILTER (WHERE (event = 'anonymous_generation_started'::text)) AS gen_started,\n    count(*) FILTER (WHERE (event = 'anonymous_generation_completed'::text)) AS gen_completed,\n    count(*) FILTER (WHERE (event = 'signup_gate_seen'::text)) AS gate_seen,\n    count(*) FILTER (WHERE (event = 'signup_after_anon'::text)) AS signup_after_anon,\n    count(*) FILTER (WHERE (event = 'paid_after_anon'::text)) AS paid_after_anon,\n    count(DISTINCT actor_id) FILTER (WHERE (event = 'anonymous_generation_completed'::text)) AS gen_actors\n   FROM analytics_events\n  GROUP BY ((created_at)::date);"
+ },
+ {
+  "viewname": "v_settlement_preferences",
+  "definition": " SELECT (created_at)::date AS day,\n    capture_point,\n    tier,\n    population_band,\n    prosperity,\n    count(*) AS n,\n    avg(legitimacy) AS avg_legitimacy,\n    avg(food_resilience) AS avg_food_resilience\n   FROM settlement_snapshots\n  GROUP BY ((created_at)::date), capture_point, tier, population_band, prosperity;"
+ },
+ {
+  "viewname": "v_edit_heatmap",
+  "definition": " SELECT (created_at)::date AS day,\n    kind,\n    target_kind,\n    count(*) AS edits,\n    count(*) FILTER (WHERE reverted) AS reverts\n   FROM edit_events\n  GROUP BY ((created_at)::date), kind, target_kind;"
+ },
+ {
+  "viewname": "v_ai_usage",
+  "definition": " SELECT (created_at)::date AS day,\n    count(*) FILTER (WHERE (event = 'ai_generation_started'::text)) AS ai_started,\n    count(*) FILTER (WHERE (event = 'ai_generation_completed'::text)) AS ai_completed,\n    count(*) FILTER (WHERE (event = 'ai_generation_failed'::text)) AS ai_failed,\n    count(*) FILTER (WHERE (event = 'credits_spent'::text)) AS credit_spends\n   FROM analytics_events\n  GROUP BY ((created_at)::date);"
+ }
+]

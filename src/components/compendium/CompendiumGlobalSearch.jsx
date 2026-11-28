@@ -18,7 +18,8 @@ import IconButton from '../primitives/IconButton.jsx';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import { GOLD, INK, BODY, BORDER as BOR, CARD, PARCH, sans, FS, swatch } from '../theme.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
-import { searchCompendium } from '../../domain/compendium/searchIndex.js';
+// H6: the institutions join the search as targets (not as per-entry pages).
+import { compendiumGlobalSearchIndex } from './institutionSearchEntries.js';
 import { chromeFontSize } from '../../design/proseScale.js';
 
 // Category → swatch. Kept as a variable map (not inline literals) so the
@@ -42,6 +43,31 @@ const CAT_COLOR = Object.freeze({
   'Neighbour Relationship': '#1a5a28',
 });
 
+/**
+ * THE SEARCH FILTERS BY STRING MATCHING (the owner, 2026-11-10: "The search bar acts as a
+ * search bar that filters based on string matching"). An entry matches when the text its row
+ * shows — its name and its category — CONTAINS the typed string, case-insensitive; no fuzzy
+ * ranking, no prefix-only rule. Every match is listed (the list scrolls), names that match
+ * before category-only matches, then the earlier match, the shorter name, the name.
+ * Exported for the pin.
+ * @param {string} query
+ * @param {ReadonlyArray<{ term: string, category: string }>} index
+ */
+export function matchCompendium(query, index) {
+  const q = String(query || '').trim().toLowerCase();
+  if (!q) return [];
+  const hits = [];
+  for (const e of index) {
+    const term = e.term.toLowerCase();
+    const at = term.indexOf(q);
+    if (at !== -1) hits.push({ e, rank: 0, at });
+    else if (String(e.category || '').toLowerCase().includes(q)) hits.push({ e, rank: 1, at: 0 });
+  }
+  hits.sort((a, b) => (a.rank - b.rank) || (a.at - b.at) || (a.e.term.length - b.e.term.length)
+    || (a.e.term < b.e.term ? -1 : a.e.term > b.e.term ? 1 : 0));
+  return hits.map((h) => h.e);
+}
+
 export default function CompendiumGlobalSearch({ onSelect }) {
   const mobile = useIsMobile();
   const [query, setQuery] = useState('');
@@ -57,7 +83,7 @@ export default function CompendiumGlobalSearch({ onSelect }) {
   const dropdownMaxHeight = isMobile ? 'min(320px, 45vh)' : 320;
 
   const q = query.trim();
-  const results = useMemo(() => (q ? searchCompendium(q, { limit: 8 }) : []), [q]);
+  const results = useMemo(() => (q ? matchCompendium(q, compendiumGlobalSearchIndex()) : []), [q]);
 
   // Close on click-outside.
   useEffect(() => {

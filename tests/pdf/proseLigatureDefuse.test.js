@@ -140,6 +140,10 @@ describe('NotableNPCs — body prose renders verbatim (FullCard)', () => {
     expect(text).not.toContain(ZWNJ);
     expect(text).toContain('Fiercely efficient');
     expect(text).toContain('falsified the fief ledgers');
-    expect(text).toContain('fickle, shifting truce');
+    // The relationship row reaches the leaf verbatim by its name and its tie ("affiliate" carries the
+    // ffi cluster). Its sentence's one home is the Relationships chapter (STYLE-RULINGS-2 B4,
+    // 2026-11-09), so the card no longer prints it.
+    expect(text).toContain('The Guild - affiliate');
+    expect(text).not.toContain('fickle, shifting truce'); // anchored: the relationship row is on this render, one line above
   });
 });

@@ -28,11 +28,12 @@ import { exportsOpenFor, selectExportStaff } from './exportLaunchGate.js';
 import { useStore } from '../../store/index.js';
 
 /**
- * @param {{ gated?: boolean, gallery?: boolean, block?: boolean, children: import('react').ReactElement }} props
+ * @param {{ gated?: boolean, gallery?: boolean, block?: boolean, sentence?: string, children: import('react').ReactElement }} props
  *   gated: overrides the gate's answer; gallery: the export is the gallery's own (never gated);
- *   block: the control fills its row
+ *   block: the control fills its row; sentence: the dialog's sentence when the control is not an
+ *   export (the dialog's own export sentence otherwise)
  */
-export default function LaunchGatedExport({ gated: gatedOverride, gallery = false, block = false, children }) {
+export default function LaunchGatedExport({ gated: gatedOverride, gallery = false, block = false, sentence, children }) {
   const staff = useStore(selectExportStaff);
   const gated = typeof gatedOverride === 'boolean' ? gatedOverride : !exportsOpenFor({ staff, gallery });
   const pillId = useId();
@@ -88,7 +89,7 @@ export default function LaunchGatedExport({ gated: gatedOverride, gallery = fals
       >
         <AvailableAtLaunchPill />
       </span>
-      <AvailableAtLaunchDialog open={open} onClose={() => setOpen(false)} />
+      <AvailableAtLaunchDialog open={open} onClose={() => setOpen(false)} {...(sentence ? { sentence } : {})} />
     </span>
   );
 }

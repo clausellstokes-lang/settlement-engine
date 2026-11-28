@@ -41,8 +41,10 @@ import { FOOD_SECURITY_BANDS } from '../../data/bandLadders.js';
 import { defenseFactsOf } from '../defense/defenseFacts.js';
 import { speakTierNoun } from '../display/stateProse/tierVoice.js';
 import { foodLedger } from '../foodLedger.js';
+import { famineOf } from '../facts/famine.js';
 import { tierNounFor } from '../display/stateProse/weaveBlock.js';
 import { magicWorksAt } from '../worldPulse/magicWorksAt.js';
+import { RULED_BY_A_BODY, ruledByBodyOfLabel } from '../facts/rulingBody.js'; // TAIL-TIES (T5): the ruling-body rule's home
 
 /**
  * The bands that license a famine sentence, and the bands that are a real gap short of
@@ -98,7 +100,8 @@ const VILLAGER_TIERS = new Set(['thorp', 'hamlet', 'village']);
  * @property {boolean} hasSoldiers a garrison or a hired company exists: what "soldiers" needs
  * @property {boolean} hasGarrison a standing garrison exists
  * @property {boolean} hasWalls settlement fortification exists
- * @property {boolean} hasWatch a watch or militia exists
+ * @property {boolean} hasWatch a watch exists (CENSUS-1 fact 3: watch and militia are two atoms)
+ * @property {boolean} hasMilitia a militia exists
  * @property {boolean} hasHospital a real hospital exists
  * @property {boolean} defenseKnown does the record carry a defence roster at all?
  * @property {boolean} magicFunctions does magic function in this world?
@@ -109,7 +112,30 @@ const VILLAGER_TIERS = new Set(['thorp', 'hamlet', 'village']);
  *   `measured` and records a producer that feeds neither pool. Measured by running
  *   `node scripts/wiring-census.mjs` with each spelling.
  * @property {boolean} speaksOfVillagers may a hook call the residents villagers?
+ * @property {boolean} ruledByCouncil a council governs the place, not one ruler (see RULED_BY_A_BODY)
+ * @property {boolean} rosterKnown does the record carry an institution roster at all?
+ * @property {boolean} hasPhysician a healer, an infirmary, a monastic house or a hospital tends the sick
  */
+
+/**
+ * A COUNCIL, NOT ONE RULER (R3-CODE-C-3, ROUND-3-CUT-INCREMENT #ww-868, rww-thorp-plague_onset-1:
+ * "An old story from that time: someone is poisoning the ruler slowly, and the physician knows" in a
+ * thorp governed by an Elder Council of two). The row carries `excludes: ['ruler: council']`
+ * (historyData.js, the data lane's) and still printed, and THIS IS WHY: the ruler-kind home
+ * (`facts/rulerKind.js`) sorts a government by WHO holds it, so an Elder Council, a Household Council
+ * and a Free Elder Council read `elder` (beside the one-person Headman's Authority), and an
+ * Ecclesiastical, Church or High Theocratic Council reads `priest` (beside the one-person Priestly
+ * Guidance): `ruler: council` holds only for the councils of no other kind. Measured on the 720 and the
+ * 240 at the lane's tip: of 146 towns storing a hook about "the ruler", 87 are governed by a council
+ * and none of them reads `ruler: council`. The vocabulary has no council-presence atom (powerSiblings.js
+ * waits for one too), so this gate reads the form of government itself: the kind `council`, or an
+ * elder or priestly government whose own label names a council. A headman, a priest-king, a lord, a
+ * mayor or an occupier is one ruler and is not refused. An absent government licenses nothing.
+ * @type {RegExp}
+ */
+// TAIL-TIES, the chair's ruling (T5) of 2026-11-14: the rule MOVED to its home (`facts/rulingBody.js`, the vocabulary's
+// atom `ruling body`) and is re-exported here, so the hook gate and the atom are one reading.
+export { RULED_BY_A_BODY, ruledByBodyOfLabel };
 
 /**
  * Read the facts a hook can contradict out of one settlement record.
@@ -144,8 +170,9 @@ export function settlementHookFacts(settlement) {
   // A FAMINE SENTENCE NEEDS BOTH HALVES: the band says the food has failed, and the
   // granaries agree. An unknown band licenses the sentence rather than refusing it,
   // because this classifier may only speak where the record contradicts the hook.
+  // CENSUS-1 wave 0, fact 6: the band half is the famine home's one rule (`facts/famine.js`).
   const famineLicensed = !foodKnown
-    || (CRISIS_BANDS.has(foodBand)
+    || (famineOf(settlement).starvingAllowed
       // "AND THE STORED MONTHS ARE LOW" (the chair's ruling 1), spoken in the engine's own
       // rungs rather than in a new tunable: `src/generators/foodGenerator.js` calls two
       // months the bottom rung it will still name ("seasonal buffer only"), and
@@ -161,6 +188,8 @@ export function settlementHookFacts(settlement) {
     record.defenseProfile?.institutions && typeof record.defenseProfile.institutions === 'object',
   );
   const defense = defenseFactsOf(/** @type {Parameters<typeof defenseFactsOf>[0]} */ (settlement));
+  const government = /** @type {{ powerStructure?: { government?: unknown } }} */ (record).powerStructure?.government;
+  const ruledByCouncil = ruledByBodyOfLabel(government); // TAIL-TIES (T5): the moved rule, one reading
 
   return Object.freeze({
     tier,
@@ -178,7 +207,10 @@ export function settlementHookFacts(settlement) {
     // record stops storing a hook the check then convicts (11 of the 1,000 soak settlements).
     hasSoldiers: defense.hasGarrison || defense.hasMercenary,
     hasWalls: defense.hasWalls,
-    hasWatch: defense.hasWatch || defense.hasMilitia,
+    // CENSUS-1 wave 0, fact 3: "watch or militia" is two atoms (`domain/facts/defence.js`); the
+    // watch word's licence below still takes either.
+    hasWatch: defense.hasWatch,
+    hasMilitia: defense.hasMilitia,
     hasHospital: defense.hasHospital,
     defenseKnown,
     // ⚠ PASSED AS THE WRAPPED ITEM (`{ settlement }`), WHICH IS THE SHAPE `magicWorksAt`'s
@@ -191,6 +223,11 @@ export function settlementHookFacts(settlement) {
     // is passing, so the predicate's own tolerance is not read as a defect.
     magicFunctions: magicWorksAt({ settlement }),
     speaksOfVillagers: tier === '' || VILLAGER_TIERS.has(tier),
+    ruledByCouncil,
+    // An unknown roster refuses nothing (the `defenseKnown` rule): a fixture with no institutions
+    // cannot say the physician is missing.
+    rosterKnown: Array.isArray(record.institutions) && record.institutions.length > 0,
+    hasPhysician: defense.hasHealer || defense.hasHospital,
   });
 }
 
@@ -200,10 +237,18 @@ export function settlementHookFacts(settlement) {
  *   - FAMINE: the measured sentence's own two words.
  *   - ARMED_FORCE: a standing force. "guard captain" is NOT here — a watch captain is a
  *     person, not a garrison, and the criminal-network hooks that name one are true.
- *   - WALLS: settlement fortification only. Bare "walls" is deliberately excluded: the
- *     measured corpus prints "Something was sealed inside the walls during construction"
- *     for a thorp, and those are a BUILDING's walls. Gating on it would delete a true hook.
+ *   - WALLS: settlement fortification. A bare "walls" is still not read, but "inside (or
+ *     within) the walls" with no "of …" after it is the place's walls, and so is a claim of
+ *     walls: the chair's ruling of 2026-11-13 (record 386: "a hook that names walls reads the
+ *     roster") on ROUND-3-CUT-INCREMENT #ww-4, where the reader found "Something was sealed
+ *     inside the walls during construction, deliberately" (historyGenerator.js, The Great
+ *     Construction) printed in a thorp whose page says "Unfortified. No perimeter walls."
+ *     This module's earlier reading (a building's walls) is retired by that ruling. "inside
+ *     the walls of the temple" names its building and is not read.
  *   - HOSPITAL / MAGIC / VILLAGERS as named in the rulings.
+ *   - RULER: "the ruler" (or "the ailing ruler") is one person; refused where a council governs
+ *     (RULED_BY_A_BODY above). PHYSICIAN: "the physician" is a role, read against the roster's care
+ *     houses (record 386: a line that names a role reads the roster). Both #ww-868.
  * @type {Readonly<Record<string, RegExp>>}
  */
 const WORDS = Object.freeze({
@@ -211,11 +256,13 @@ const WORDS = Object.freeze({
   armedForce: /\bmen[- ]at[- ]arms\b/i,
   garrison: /\bgarrisons?\b|\bbarracks\b/i,
   soldiers: /\bsoldiers?\b/i,
-  walls: /\b(?:town|city|settlement|curtain) walls?\b|\bthe walls of the (?:town|city|settlement)\b|\bramparts?\b|\bbattlements?\b|\bgatehouse\b|\bpalisade\b/i,
+  walls: /\b(?:inside|within) the walls\b(?! of\b)|\b(?:town|city|settlement|curtain) walls?\b|\bthe walls of the (?:town|city|settlement)\b|\bramparts?\b|\bbattlements?\b|\bgatehouse\b|\bpalisade\b/i,
   watch: /\bthe (?:city |town )?watch\b|\bwatchmen\b|\bwatchman\b/i,
   hospital: /\bhospitals?\b/i,
   magic: /\bmagic(?:al|s)?\b|\bmages?\b|\bwizards?\b|\bspell(?:s|caster|casters)?\b|\barcane\b|\bsorcer\w*\b|\benchant\w*\b|\bconjur\w*\b|\bthaumat\w*\b/i,
   villagers: /\bvillagers?\b/i,
+  ruler: /\bthe (?:ailing )?ruler\b/i,
+  physician: /\bthe physician\b/i,
 });
 
 /** "N days of food left" / "N days of reserves" — the figure and its noun. */
@@ -277,7 +324,7 @@ export function hookTruthViolations(text, facts) {
   if (facts.defenseKnown && WORDS.walls.test(line) && !facts.hasWalls) {
     add('walls_without_walls', 'no fortification on the defence roster');
   }
-  if (facts.defenseKnown && WORDS.watch.test(line) && !facts.hasWatch) {
+  if (facts.defenseKnown && WORDS.watch.test(line) && !facts.hasWatch && !facts.hasMilitia) {
     add('watch_without_a_watch', 'no watch or militia on the defence roster');
   }
   if (WORDS.hospital.test(line) && !facts.hasHospital) {
@@ -292,9 +339,68 @@ export function hookTruthViolations(text, facts) {
   if (facts.tierNoun !== null && facts.tierNoun !== 'town' && TOWN_NOUN.test(line)) {
     add('town_for_a_place_that_is_not_one', `the place is a ${facts.tierNoun}`);
   }
+  if (facts.ruledByCouncil && WORDS.ruler.test(line)) {
+    add('one_ruler_where_a_council_governs', 'a council governs the place, not one ruler');
+  }
+  if (facts.rosterKnown && WORDS.physician.test(line) && !facts.hasPhysician) {
+    add('physician_without_a_healer', 'no healer, infirmary, monastic house or hospital on the roster');
+  }
   return out;
 }
 
+
+/**
+ * A hook's PARTY — who or what the hook is between (the people car, PEOPLE-3 HOOKS; the owner:
+ * "it doesn't mean that hooks are between specific individual people it could be between powers,
+ * groups, or historical").
+ * @typedef {{ kind: 'person', id: string }
+ *   | { kind: 'power', name: string }
+ *   | { kind: 'group', name: string }
+ *   | { kind: 'history', eventId: string | null }
+ *   | { kind: 'place' }} HookParty
+ */
+
+/**
+ * The roster a hook's parties are checked against: the people on the record (by id) and the
+ * powers that exist (`powerStructure.factions`, by name). Pure.
+ * @param {unknown} settlement
+ * @returns {{ rosterPersonIds: Set<string> | null, rosterPowerNames: Set<string> | null }} null: the record carries no such roster
+ */
+export function hookPartyRosterOf(settlement) {
+  const record = /** @type {{ npcs?: Array<{ id?: unknown, name?: unknown } | null>, powerStructure?: { factions?: Array<{ faction?: unknown, name?: unknown } | null> } }} */ (
+    settlement && typeof settlement === 'object' ? settlement : {}
+  );
+  // AN UNKNOWN ROSTER REFUSES NOTHING (the defence half's `defenseKnown` rule): a record that
+  // carries no people, or no power roster, cannot say a party is missing from it.
+  const npcs = Array.isArray(record.npcs) && record.npcs.length ? record.npcs : null;
+  const powers = Array.isArray(record.powerStructure?.factions) && record.powerStructure.factions.length ? record.powerStructure.factions : null;
+  return {
+    rosterPersonIds: npcs ? new Set(npcs.map((n) => String(n?.id ?? n?.name ?? '')).filter(Boolean)) : null,
+    rosterPowerNames: powers ? new Set(powers.map((f) => String(f?.faction || f?.name || '').trim()).filter(Boolean)) : null,
+  };
+}
+
+/**
+ * THE GATE'S PARTY ARM (PEOPLE-3 HOOKS): a party is a fact. A hook naming a person who is not on
+ * the roster, or a power that does not exist, is REFUSED — the display may not print a hook
+ * about someone the record does not hold. Groups, history and the place are not roster facts.
+ * @param {ReadonlyArray<HookParty> | null | undefined} parties
+ * @param {{ rosterPersonIds: Set<string> | null, rosterPowerNames: Set<string> | null }} roster from `hookPartyRosterOf`
+ * @returns {HookTruthFinding[]}
+ */
+export function hookPartyViolations(parties, roster) {
+  /** @type {HookTruthFinding[]} */
+  const out = [];
+  for (const party of Array.isArray(parties) ? parties : []) {
+    if (party?.kind === 'person' && roster.rosterPersonIds && !roster.rosterPersonIds.has(String(party.id))) {
+      out.push({ code: 'party_not_on_the_roster', text: '', detail: `no person ${String(party.id)} on the roster` });
+    }
+    if (party?.kind === 'power' && roster.rosterPowerNames && !roster.rosterPowerNames.has(String(party.name))) {
+      out.push({ code: 'power_that_does_not_exist', text: '', detail: `no power ${String(party.name)} on the power roster` });
+    }
+  }
+  return out;
+}
 
 /**
  * THE TWO REWRITES. Two of the measured defects are a sentence that is RIGHT about its

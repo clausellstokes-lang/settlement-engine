@@ -30,6 +30,8 @@ import { nativeSemanticName } from '../content/customContentSemanticAuthority.js
 import { standingDefenseForces } from '../institutions/defenseInstitutionBuckets.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { SIEGE_PRODUCTION_KEPT } from '../../data/foodImportRates.js';
+import { storesMonthsOf } from '../facts/storesMonths.js';
+import { INSTITUTION_KIND_PATTERNS } from '../facts/institutions.js';
 
 /**
  * @typedef {object} DefenseFacts
@@ -45,11 +47,27 @@ import { SIEGE_PRODUCTION_KEPT } from '../../data/foodImportRates.js';
  * @property {boolean} hasCharter an adventurers' charter hall or guild stands
  * @property {string|null} forceName the roster name of the force that holds the place (garrison, then watch, militia, hired company, charter hall), or null
  * @property {ReadonlyArray<string>} defenceNames the roster names of every standing defence the defence purse pays for (enclosures and forces)
+ * @property {boolean} hasCourt a court sits (a courthouse, or a hall a magistrate hears cases in)
+ * @property {boolean} hasCourthouse a court building stands that keeps the court's fees: a courthouse, the
+ *   multiple courts, or a city hall (the narrower fact the Court Fees line reads; a town hall's magistrate sits,
+ *   and is `hasCourt`, but keeps no fee office)
+ * @property {boolean} hasTollGate a named gate a toll is taken at: a gate row, or town or city walls (the
+ *   narrower fact the Gate Tolls line reads; `hasGate` also counts other stone walls, which keep gates no
+ *   toll is named for)
+ * @property {boolean} hasPrison somewhere to hold the guilty stands: a prison, the stocks, a gaol or a jail
  * @property {boolean} hasHospital a real hospital stands
  * @property {boolean} hasHealer a healer, an infirmary or a monastic house tends the sick
  * @property {string|null} healerName the roster name of the healer, infirmary or monastic house, or null
  * @property {number|null} storedFoodMonths the engine's months of stored food, or null when the record carries none
  */
+
+/**
+ * A court sits: a courthouse, the court buildings, or a hall a magistrate hears cases in (the town and
+ * city halls' own service rows: "Dispute arbitration … before a magistrate", "Appeals court") or an
+ * assembly that judges (COHERENCE-AGREE, 2026-11-12: the names `priorityHelpers.js` read off the raw
+ * roster, read here off the live one, so the court fact has one reader).
+ */
+const COURT_RE = /courthouse|court buildings|democratic assembly|city hall|town hall/i;
 
 /** @param {unknown} inst @returns {string} */
 const nameOf = (inst) => String(nativeSemanticName(inst) || '');
@@ -57,14 +75,31 @@ const nameOf = (inst) => String(nativeSemanticName(inst) || '');
 /** @param {ReadonlyArray<string>} names @param {RegExp} re @returns {string|null} */
 const firstMatching = (names, re) => names.find((n) => re.test(n)) ?? null;
 
-const HOSPITAL_RE = /\bhospital/i;
-const HEALER_RE = /\bhealer\b|\binfirmar|\bmonaster|\bfriary\b/i;
+// The institution-presence home's patterns (CENSUS-1 wave 0, fact 11): one table. A healer here
+// is the healer OR monastery union this reader always meant.
+const HOSPITAL_RE = INSTITUTION_KIND_PATTERNS.hospital;
+const HEALER_RE = new RegExp(`${INSTITUTION_KIND_PATTERNS.healer.source}|${INSTITUTION_KIND_PATTERNS.monastery.source}`, 'i');
 const TIMBER_ENCLOSURE_RE = /palisade|earthwork/i;
 // The town free company is a hired company the bucket vocabulary does not spell
 // (`DEFENSE_BUCKET_KEYWORDS.mercenary`; F1, 2026-11-04). The bucket table is persisted
 // generator output, so the reader counts the row here and the table stays byte-identical.
 const FREE_COMPANY_RE = /\bfree company\b/i;
 const GATE_RE = /\bgates?\b/i;
+/**
+ * THE NARROWER FACTS (COHERENCE-AGREE-3, the chair's ruling on STOP 2 (b), 2026-11-12): "a court sits here" and
+ * "a courthouse takes fees" are two facts, and so are "the place has a gate" and "a named gate takes a toll".
+ * The economy's Court Fees and Gate Tolls lines asked the narrower question with private name lists; the lists
+ * move here, once, and the lines read the home.
+ */
+const COURTHOUSE_RE = /courthouse|multiple court|city hall/i;
+/**
+ * A PRISON STANDS (COHERENCE-AGREE-4, 2026-11-12, the chair's ruling on STOP 3): somewhere to hold the guilty — a
+ * prison of any size or the stocks (the catalogue's "Small prison/stocks", "Large prison", "Massive prison"), or a
+ * gaol or a jail by those names. The words `priorityHelpers.js :: hasPrison` reads off the raw roster, read here
+ * off the live one, so the vocabulary's `prison` atom has a home.
+ */
+const PRISON_RE = /prison|stocks|\bgaol|\bjail/i;
+const TOLL_GATE_RE = /gate|town wall|city wall/i;
 
 /**
  * THE ONE ANSWER to "what defends this place, who tends its sick, how long can it eat".
@@ -97,10 +132,8 @@ export function defenseFactsOf(settlement) {
   ])];
 
   const healerName = firstMatching(roster, HEALER_RE);
-  const economicState = /** @type {{ foodSecurity?: { storageMonths?: unknown } } | null | undefined} */ (
-    settlement?.economicState
-  );
-  const months = economicState?.foodSecurity?.storageMonths;
+  // The stores-months home (CENSUS-1 wave 0, fact 2): one number, the same one foodEnduranceOf reads.
+  const months = storesMonthsOf(settlement);
 
   return Object.freeze({
     hasWalls,
@@ -115,10 +148,14 @@ export function defenseFactsOf(settlement) {
     hasCharter: forces.charter.present,
     forceName,
     defenceNames: Object.freeze(defenceNames),
+    hasCourt: roster.some((n) => COURT_RE.test(n)),
+    hasCourthouse: roster.some((n) => COURTHOUSE_RE.test(n)),
+    hasPrison: roster.some((n) => PRISON_RE.test(n)),
+    hasTollGate: roster.some((n) => TOLL_GATE_RE.test(n)),
     hasHospital: roster.some((n) => HOSPITAL_RE.test(n)),
     hasHealer: healerName !== null,
     healerName,
-    storedFoodMonths: typeof months === 'number' && Number.isFinite(months) ? months : null,
+    storedFoodMonths: months,
   });
 }
 
@@ -226,9 +263,20 @@ export function defenceRoleGate(settlement) {
 // this file reads it and spells no copy, so the record and this reading cannot drift.
 
 /**
+ * The stores words' one home for a HELD granary (the rung-2 window, the chair's ruling on F13
+ * FAMINE-STORES): under an active famine a granary still holding six months or more is held
+ * shut (`foodBalance.js :: deriveFoodRecord`, `foodRecord.storesHeld`). The Economy row
+ * (`tonightSheet.js :: foodStoresWords`, "Stores: a granary of N months that the hall will not
+ * open.") and the Food endurance line (`defenseDisplay.js :: foodEnduranceLine`) speak this
+ * one clause.
+ */
+export const HELD_STORES_WORDS = 'the hall will not open';
+
+/**
  * @typedef {object} FoodEndurance
  * @property {number} storedMonths the record's months in store (`foodRecord.storageMonths`)
  * @property {boolean} hasGranary a real granary stands (`foodRecord.hasGranary`)
+ * @property {boolean} storesHeld an active famine holds the granary shut (`foodRecord.storesHeld`)
  * @property {boolean} besieged the record was written under a siege, so its harvest is already the siege harvest
  * @property {number} keptShare the share of the daily need the place still grows once besieged
  * @property {number|null} fullRationMonths months the stores last at full rations, or null when what is still grown feeds the place
@@ -247,11 +295,12 @@ export function defenceRoleGate(settlement) {
  * @returns {Readonly<FoodEndurance> | null} null when the place carries no food record with months in store
  */
 export function foodEnduranceOf(settlement) {
-  const foodSecurity = /** @type {{ hasSiege?: unknown, foodRecord?: { storageMonths?: unknown, hasGranary?: unknown, grownPct?: unknown } } | null | undefined} */ (
+  const foodSecurity = /** @type {{ hasSiege?: unknown, foodRecord?: { storageMonths?: unknown, hasGranary?: unknown, grownPct?: unknown, storesHeld?: unknown } } | null | undefined} */ (
     /** @type {{ foodSecurity?: unknown } | null | undefined} */ (settlement?.economicState)?.foodSecurity
   );
   const record = foodSecurity?.foodRecord;
-  const stored = record?.storageMonths;
+  // The stores-months home: the live figure, never the food record's birth copy alone.
+  const stored = record ? storesMonthsOf(settlement) : null;
   if (typeof stored !== 'number' || !Number.isFinite(stored) || stored <= 0) return null;
   const grown = typeof record?.grownPct === 'number' && Number.isFinite(record.grownPct) ? Math.max(0, record.grownPct) : 0;
   const besieged = foodSecurity?.hasSiege === true;
@@ -261,6 +310,7 @@ export function foodEnduranceOf(settlement) {
   return Object.freeze({
     storedMonths: stored,
     hasGranary: record?.hasGranary === true,
+    storesHeld: record?.hasGranary === true && record?.storesHeld === true,
     besieged,
     keptShare,
     fullRationMonths: keptShare < 1 ? stored / (1 - keptShare) : null,

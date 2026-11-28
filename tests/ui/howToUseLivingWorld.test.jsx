@@ -103,7 +103,7 @@ describe('The Practical Guide — the de-collapsed Keeper\'s Handbook (/about/gu
     // The Power User section's slider + neighbour claims (the ones
     // handbookClaimsParity holds to the live engine) stayed on the guide.
     expect(text).toContain('the five sliders compete for institutional probability');
-    expect(text).toContain('cold war seeds clandestine intelligence factions');
+    expect(text).toContain('cold war seeds clandestine intelligence powers');
   });
 });
 

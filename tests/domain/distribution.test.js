@@ -82,7 +82,7 @@ describe('tier scaling — population grows with tier', () => {
     const towns    = generateMany({ settType: 'town',    culture: 'germanic' });
     expect(averageOf(towns, s => s.institutions.length))
       .toBeGreaterThan(averageOf(villages, s => s.institutions.length));
-  });
+  }, 120_000); // its own budget, carrying the measured figure (CI-FIT-2, the eighth chair, 2026-11-22): 8.7 s in a serial run of this file at point 102; about 16.0 s on a CI runner (the measured factor), within three quarters of the default 20 s
 
   it('cities average a higher population than towns', () => {
     // We deliberately don't assert `cities have more institutions than
@@ -95,7 +95,7 @@ describe('tier scaling — population grows with tier', () => {
     const cities = generateMany({ settType: 'city',  culture: 'germanic' });
     expect(averageOf(cities, s => s.population))
       .toBeGreaterThan(averageOf(towns, s => s.population));
-  });
+  }, 120_000); // its own budget, carrying the measured figure (the last close's whole check, 2026-11-19): 11.0 s here under load
 
   it('city institutions are not fewer than village institutions', () => {
     // Even with the dedup collapse, a city should still carry more
@@ -105,7 +105,7 @@ describe('tier scaling — population grows with tier', () => {
     const cities   = generateMany({ settType: 'city',    culture: 'germanic' });
     expect(averageOf(cities, s => s.institutions.length))
       .toBeGreaterThan(averageOf(villages, s => s.institutions.length));
-  });
+  }, 120_000); // its own budget, carrying the measured figure (CI-FIT point 75, 2026-11-20): 9.3 s in the last close's serial check; about 17.1 s on a CI runner (the measured factor), within three quarters of the default 20 s; the house's corpus-walk form
 });
 
 // ── Enforcement frequency ─────────────────────────────────────────────────
@@ -132,7 +132,7 @@ describe('enforcement institution prevalence', () => {
       s.institutions.some(i => hasAnyTag(i, TAG_GROUPS.ENFORCEMENT))
     );
     expect(withEnforcement.length).toBe(cities.length);
-  });
+  }, 120_000); // its own budget, carrying the measured figure (CI-FIT-2, the eighth chair, 2026-11-22): 12.9 s in a serial run of this file at point 102; about 23.7 s on a CI runner (the measured factor), over the default 20 s; IT TIMED OUT at 20.4 s on CI's run 45058186820 (point 102)
 });
 
 // ── Trade-route gating ───────────────────────────────────────────────────
@@ -234,7 +234,7 @@ describe('faction prevalence and archetype coverage', () => {
       return Array.isArray(ps.factions) && ps.factions.length >= 2;
     });
     expect(multi.length).toBe(cities.length);
-  });
+  }, 120_000); // its own budget, carrying the measured figure (CI-FIT-2, the eighth chair, 2026-11-22): 13.4 s in a serial run of this file at point 102; about 24.7 s on a CI runner (the measured factor), over the default 20 s
 
   it('every faction across the sample resolves to a known archetype', () => {
     const towns = generateMany({ settType: 'town', culture: 'germanic' });
@@ -292,7 +292,7 @@ describe('supply-chain prevalence and status distribution', () => {
     const villageAvg = averageOf(villages, s => deriveAllSupplyChainStates(s).length);
     const cityAvg    = averageOf(cities,   s => deriveAllSupplyChainStates(s).length);
     expect(cityAvg).toBeGreaterThan(villageAvg);
-  });
+  }, 120_000); // its own budget, carrying the measured figure (CI-FIT point 75, 2026-11-20): 8.5 s in the last close's serial check; about 15.7 s on a CI runner (the measured factor), within three quarters of the default 20 s; the house's corpus-walk form
 
   it('on healthy generation, at least half of chains are stable', () => {
     // Status remap: legacy 'operational' / 'running' / 'entrepot' all
@@ -311,7 +311,7 @@ describe('supply-chain prevalence and status distribution', () => {
     }
     expect(totalChains).toBeGreaterThan(0);
     expect(totalStable / totalChains).toBeGreaterThanOrEqual(0.50);
-  });
+  }, 120_000); // its own budget, carrying the measured figure (CI-FIT-2, the eighth chair, 2026-11-22): 11.5 s in a serial run of this file at point 102; about 21.2 s on a CI runner (the measured factor), over the default 20 s
 
   it('every supply-chain status is one of the canonical values', () => {
     const cities = generateMany({ settType: 'city', culture: 'germanic' });
@@ -324,7 +324,7 @@ describe('supply-chain prevalence and status distribution', () => {
         expect(canonical.has(c.status), `unexpected status: ${c.status}`).toBe(true);
       }
     }
-  });
+  }, 120_000); // its own budget, carrying the measured figure (CI-FIT-2, the eighth chair, 2026-11-22): 11.5 s in a serial run of this file at point 102; about 21.2 s on a CI runner (the measured factor), over the default 20 s
 
   it('every chain declares a non-empty failureConsequences and at least one beneficiary', () => {
     const towns = generateMany({ settType: 'town', culture: 'germanic' });
@@ -351,7 +351,7 @@ describe('hook + escalation clock prevalence', () => {
     // historical surfaces. If even one falls through, something has
     // regressed in the hook generators.
     expect(withHooks.length).toBe(cities.length);
-  });
+  }, 120_000); // its own budget, carrying the measured figure (CI-FIT-2, the eighth chair, 2026-11-22): 11.4 s in a serial run of this file at point 102; about 21.0 s on a CI runner (the measured factor), over the default 20 s
 
   it('every structured hook resolves to a canonical origin', () => {
     const towns = generateMany({ settType: 'town', culture: 'germanic' });
@@ -376,7 +376,7 @@ describe('hook + escalation clock prevalence', () => {
         expect(clock.triggerDescription.length).toBeGreaterThan(0);
       }
     }
-  });
+  }, 120_000); // its own budget, carrying the measured figure (CI-FIT-2, the eighth chair, 2026-11-22): 10.4 s in a serial run of this file at point 102; about 19.1 s on a CI runner (the measured factor), within three quarters of the default 20 s
 
   it('disrupted-food-chain settlements produce a Bread Riot Clock', () => {
     const cities = generateMany({ settType: 'city', culture: 'germanic' });
@@ -393,7 +393,7 @@ describe('hook + escalation clock prevalence', () => {
       deriveEscalationClocks(s).some(c => c.label === 'Bread Riot Clock')
     );
     expect(withBreadClock.length).toBeGreaterThan(0);
-  });
+  }, 120_000); // its own budget, carrying the measured figure (CI-FIT-2, the eighth chair, 2026-11-22): 10.7 s in a serial run of this file at point 102; about 19.7 s on a CI runner (the measured factor), within three quarters of the default 20 s
 });
 
 // ── History beat prevalence (Tier 4.7) ─────────────────────────────────
@@ -436,7 +436,7 @@ describe('history beat prevalence', () => {
     const cities = generateMany({ settType: 'city', culture: 'germanic' });
     const withCrisis = cities.filter(s => deriveHistoryBeats(s).definingCrisis != null);
     expect(withCrisis.length / cities.length).toBeGreaterThanOrEqual(0.80);
-  });
+  }, 120_000); // its own budget, carrying the measured figure (CI-FIT-2, the eighth chair, 2026-11-22): 11.4 s in a serial run of this file at point 102; about 21.0 s on a CI runner (the measured factor), over the default 20 s; IT TIMED OUT at 20.6 s on CI's run 45058186820 (point 102)
 
   it('every history beat carries label + text + source', () => {
     const towns = generateMany({ settType: 'town', culture: 'germanic' });
@@ -477,7 +477,7 @@ describe('NPC profile prevalence and structural integrity', () => {
         expect(canonical.has(p.archetype), `unexpected archetype: ${p.archetype}`).toBe(true);
       }
     }
-  });
+  }, 120_000); // its own budget, carrying the measured figure (CI-FIT-2, the eighth chair, 2026-11-22): 11.2 s in a serial run of this file at point 102; about 20.6 s on a CI runner (the measured factor), over the default 20 s
 
   it('cities average at least three distinct NPC archetypes', () => {
     // Larger settlements should produce a more diverse NPC roster.
@@ -489,7 +489,7 @@ describe('NPC profile prevalence and structural integrity', () => {
       totalDistinct += distinct;
     }
     expect(totalDistinct / cities.length).toBeGreaterThanOrEqual(3);
-  });
+  }, 120_000); // its own budget, carrying the measured figure (CI-FIT-2, the eighth chair, 2026-11-22): 12.3 s in a serial run of this file at point 102; about 22.6 s on a CI runner (the measured factor), over the default 20 s
 
   it('every dominant-rank NPC produces a non-trivial removal consequence', () => {
     const cities = generateMany({ settType: 'city', culture: 'germanic' });
@@ -500,7 +500,7 @@ describe('NPC profile prevalence and structural integrity', () => {
           .toBeGreaterThanOrEqual(1);
       }
     }
-  });
+  }, 120_000); // its own budget, carrying the measured figure (CI-FIT-2, the eighth chair, 2026-11-22): 10.5 s in a serial run of this file at point 102; about 19.3 s on a CI runner (the measured factor), within three quarters of the default 20 s
 
   it('cities accumulate enough dominant-NPC removal-impact lines to drive a forecast', () => {
     // Compounding check: across N cities, the dominantNpcRemovalImpact
@@ -513,20 +513,23 @@ describe('NPC profile prevalence and structural integrity', () => {
       totalLines += dominantNpcRemovalImpact(s).length;
     }
     expect(totalLines / cities.length).toBeGreaterThanOrEqual(3);
-  });
+  }, 120_000); // its own budget, carrying the measured figure (CI-FIT-2, the eighth chair, 2026-11-22): 10.5 s in a serial run of this file at point 102; about 19.3 s on a CI runner (the measured factor), within three quarters of the default 20 s
 
-  it('every NPC with a factionAffiliation carries a factionLink', () => {
+  // PEOPLE-5A RE-KEYED (M-1b, M-2): the link is derived from the card's FIRST-RANK membership, not
+  // the shim's `factionAffiliation`; a pre-law structural placeholder (factionRoles.js, PEOPLE-1's
+  // retired path) carries the old field and no membership, so it links nowhere.
+  it('every NPC holding a membership carries a factionLink', () => {
     const cities = generateMany({ settType: 'city', culture: 'germanic' });
+    let linked = 0;
     for (const s of cities) {
       for (const p of deriveAllNpcProfiles(s)) {
-        // factionAffiliation is the legacy source; factionLink is the
-        // canonical id. The derivation guarantees: when the legacy
-        // field is present and non-empty, the link is non-null.
         const npc = s.npcs.find(n => n.id === p.id);
-        if (typeof npc?.factionAffiliation === 'string' && npc.factionAffiliation) {
+        if (Array.isArray(npc?.memberships) && npc.memberships.some(m => m && m.power)) {
           expect(p.factionLink, `${p.name} missing factionLink`).toBeTruthy();
+          linked += 1;
         }
       }
     }
-  });
+    expect(linked, 'liveness: some card holds a membership').toBeGreaterThan(0);
+  }, 120_000); // its own budget, carrying the measured figure (CI-FIT-2, the eighth chair, 2026-11-22): 11.1 s in a serial run of this file at point 102; about 20.4 s on a CI runner (the measured factor), over the default 20 s
 });

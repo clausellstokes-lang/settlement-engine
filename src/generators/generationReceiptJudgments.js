@@ -11,6 +11,8 @@
  * instead of trusting producer receipts, so a broken relationship or faction
  * reference cannot certify itself. They never repair or re-interpret the world.
  */
+import { membershipsOf } from '../domain/people/membership.js';
+import { cardHouseOf } from '../domain/people/cardPowers.js';
 
 const EPSILON = 0.001;
 
@@ -88,20 +90,22 @@ export function finalGraphFindings(settlement) {
   for (const [index, relationship] of (
     settlement?.relationships || []
   ).entries()) {
-    const first = npcById.get(relationship?.npc1Id);
-    const second = npcById.get(relationship?.npc2Id);
+    // PEOPLE-4 TIES (R-P7): a tie is directed, `from` → `to`. TODO(PEOPLE-5): a v1 save's
+    // `npc1Id`/`npc2Id` pair is read as `from`/`to` by the migration.
+    const first = npcById.get(relationship?.from);
+    const second = npcById.get(relationship?.to);
     if (!first) {
       findings.push(finding(
-        `relationships[${index}].npc1Id`,
+        `relationships[${index}].from`,
         'Relationship references a missing first NPC.',
-        relationship?.npc1Id,
+        relationship?.from,
       ));
     }
     if (!second) {
       findings.push(finding(
-        `relationships[${index}].npc2Id`,
+        `relationships[${index}].to`,
         'Relationship references a missing second NPC.',
-        relationship?.npc2Id,
+        relationship?.to,
       ));
     }
     if (
@@ -152,45 +156,41 @@ export function finalGraphFindings(settlement) {
     'power-faction identity',
   ));
   const powerFactionSet = new Set(powerFactionNames);
+  // THE PEOPLE CAR (PEOPLE-5A, M-2): every membership a card holds names a power on the roster,
+  // and a face-bearing house has ONE face (the owner's charter: one person per institution). The
+  // NPC grouping's identity and member checks are dropped with the grouping.
+  /** @type {Map<string, number>} */
+  const houseFace = new Map();
   for (const [index, npc] of npcs.entries()) {
-    if (
-      npc?.factionAffiliation
-      && !powerFactionSet.has(npc.factionAffiliation)
-    ) {
+    for (const [mIndex, membership] of membershipsOf(npc).entries()) {
+      if (powerFactionSet.has(membership.power)) continue;
       findings.push(finding(
-        `npcs[${index}].factionAffiliation`,
+        `npcs[${index}].memberships[${mIndex}].power`,
         'NPC references a missing power faction.',
-        npc.factionAffiliation,
+        membership.power,
       ));
+    }
+    const house = cardHouseOf(npc);
+    if (!house) continue;
+    if (houseFace.has(house)) {
+      findings.push(finding(
+        `npcs[${index}].institution`,
+        'A house carries more than one face.',
+        `${house} / npcs[${houseFace.get(house)}]`,
+      ));
+    } else {
+      houseFace.set(house, index);
     }
   }
 
-  const factions = settlement?.factions || [];
-  const factionNames = factions.map(faction => faction?.name).filter(Boolean);
-  findings.push(...duplicateFindings(
-    factionNames,
-    'factions',
-    'narrative-faction identity',
-  ));
-  const factionSet = new Set(factionNames);
-  for (const [factionIndex, faction] of factions.entries()) {
-    for (const [memberIndex, member] of (faction?.members || []).entries()) {
-      if (npcById.has(member?.id)) continue;
-      findings.push(finding(
-        `factions[${factionIndex}].members[${memberIndex}].id`,
-        'Narrative faction references a missing NPC member.',
-        member?.id,
-      ));
-    }
-  }
   for (const [conflictIndex, conflict] of (
     settlement?.conflicts || []
   ).entries()) {
     for (const [partyIndex, party] of (conflict?.parties || []).entries()) {
-      if (factionSet.has(party)) continue;
+      if (powerFactionSet.has(party)) continue;
       findings.push(finding(
         `conflicts[${conflictIndex}].parties[${partyIndex}]`,
-        'Conflict references a missing narrative faction.',
+        'Conflict references a missing power faction.',
         party,
       ));
     }
@@ -580,10 +580,11 @@ export function repetitionFindings(settlement) {
     ),
   ];
   const relationshipPairs = (settlement?.relationships || []).map(entry => (
-    [entry?.npc1Id, entry?.npc2Id]
+    // DIRECTED (PEOPLE-4 TIES, R-P7): A → B and B → A are two ties, each its card's own; a
+    // duplicate is the same directed pair twice.
+    [entry?.from, entry?.to]
       .filter(Boolean)
-      .sort()
-      .join('::')
+      .join('>')
   ));
   findings.push(...duplicateFindings(
     relationshipPairs,

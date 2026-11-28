@@ -83,13 +83,17 @@ describe('shell — suggested questions are zero-cost (PIN 2)', () => {
   });
 
   it('a settlement anchor yields 3-4 read-model-derived questions (naming the settlement)', () => {
-    const settlement = { id: 's1', name: 'Ashford', factions: [{ id: 'f1' }], npcs: [{ id: 'n1' }] };
+    // PEOPLE-5A RE-KEYED (M-2): the factions are the powers (`powerStructure.factions`), never the grouping.
+    const settlement = { id: 's1', name: 'Ashford', powerStructure: { factions: [{ id: 'f1' }] }, npcs: [{ id: 'n1' }] };
     const anchor = deriveAnchor({ view: 'settlements', params: { id: 's1' }, settlement });
     const qs = suggestedQuestions(anchor, { settlement });
     expect(qs.length).toBeGreaterThanOrEqual(3);
     expect(qs.length).toBeLessThanOrEqual(4);
     expect(qs.some((q) => q.includes('Ashford'))).toBe(true);        // derived from the anchor
-    expect(qs.some((q) => /faction/i.test(q))).toBe(true);           // derived from its factions
+    // Re-keyed by identity 2026-11-09 (SW-8 RENAME-POWERS, C7 0da9265f9, the owner's map Part B6): the
+    // question derived from its factions now reads "Which powers hold sway in …"; the retired word is gone.
+    expect(qs.some((q) => /powers hold sway/i.test(q))).toBe(true);  // derived from its factions
+    expect(qs.some((q) => /faction/i.test(q))).toBe(false);
     expect(new Set(qs).size).toBe(qs.length);                        // no duplicates
   });
 

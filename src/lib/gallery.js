@@ -15,7 +15,7 @@
 
 import { supabase, isConfigured } from './supabase.js';
 import { toPublicSafe, veilPublicPayload } from '../domain/display/publicSafe.js';
-import { projectShareVeil, clampVeilDeltas, clampShareMode, readShareMode, VEIL_OVERRIDE_KEY, VEIL_VERSION } from '../domain/display/galleryVeil.js';
+import { projectShareVeil, clampVeilDeltas, clampShareMode, readShareMode, readShareVeil, writeShareVeil, VEIL_OVERRIDE_KEY, VEIL_VERSION } from '../domain/display/galleryVeil.js';
 import { sanitizeGalleryHtml } from './sanitizeGalleryHtml.js';
 import { getDeviceToken } from './deviceToken.js';
 import { track, EVENTS } from './analytics.js';
@@ -479,8 +479,21 @@ export async function fetchPublicDossier(slug) {
         public_slug: unlisted.slug,
         data: unlisted.dossier,
         author_name: unlisted.author_name,
-      }),
+        // The veil reaches the players (SW-B7 row (d), migration 208): the read returns
+        // the per-member overrides (the veil's deltas ride their reserved key), so the
+        // veil hides on the link what it hides on the gallery page. THE PARTY LINK
+        // NEVER WIDENS (VEIL-FIX R1, 2026-11-10): this branch is ALWAYS the player view
+        // — no full mode by "Reveal DM content", no per-member revealDm restore — so
+        // the server's gallery_share_dm is not read here at all.
+        gallery_member_overrides: unlisted.gallery_member_overrides,
+      }, { partyLink: true }),
       unlisted: true,
+      // The players' page names who shared the town (SW-B7 row (b)); the author's
+      // public identity leaves through the one veil seam like every public field.
+      // The owner's redirect (SW-B7 row (f)): the server says whether the viewer owns
+      // the settlement behind the link (migration 208's is_owner; false for anon).
+      isOwner: unlisted.is_owner === true,
+      authorName: veilPublicPayload({ authorName: typeof unlisted.author_name === 'string' ? unlisted.author_name : '' }).authorName || '',
     };
   }
 
@@ -805,7 +818,14 @@ function sanitizeChronicle(entries) {
   return entries.map(sanitizeChronicleEntry).filter(Boolean).slice(-CHRONICLE_LIMIT);
 }
 
-function sanitizeDossier(row) {
+/**
+ * @param {any} row
+ * @param {{ partyLink?: boolean }} [options] `partyLink`: the players' link (VEIL-FIX R1) —
+ *   always the player view: everything that HIDES applies (the projection, the veil's
+ *   deltas), nothing that REVEALS (no full mode, no per-member revealDm restore).
+ */
+function sanitizeDossier(row, { partyLink = false } = {}) {
+  const dmFull = !partyLink && row.gallery_share_dm === true;
   const overrides = (row.gallery_member_overrides && typeof row.gallery_member_overrides === 'object' && !Array.isArray(row.gallery_member_overrides))
     ? row.gallery_member_overrides : null;
   // X-24 SNAPSHOT OR LIVE (galleryVeil.js): a snapshot share renders the public copy frozen at
@@ -814,6 +834,14 @@ function sanitizeDossier(row) {
   // runs through the same projection and the same veil as the row (defence in depth: the copy
   // is owner-written). ⚠ CLIENT MIRROR: until the owner's migration serves the copy from its
   // own column, get_gallery_dossier still returns the saved row beside it.
+  // R4 (VEIL-FIX, 2026-11-10): THE VEIL FAILS CLOSED ON THE PARTY LINK. Only the gallery export
+  // writes the veil marker, so a town shared by link alone carried none; with no marker the link
+  // takes the DEFAULT veil, built by the export's own writer (writeShareVeil with no deltas, which
+  // marks the share so the one default set applies). The gallery read keeps an unmarked listed
+  // page as it was (the owner rules on the pre-veil pages: the lane's STOP).
+  const veilOverrides = partyLink && !readShareVeil(row.gallery_member_overrides).marked
+    ? writeShareVeil(row.gallery_member_overrides, [])
+    : row.gallery_member_overrides;
   const share = readShareMode(overrides);
   const source = share.mode === 'snapshot' && share.snapshot ? share.snapshot : row.data;
   return veilPublicPayload({
@@ -835,9 +863,9 @@ function sanitizeDossier(row) {
     // migration and the owner's hand; until it lands the stored payload still carries the
     // veiled facts, and this projection is what keeps them off the page.
     settlement:   projectShareVeil(toPublicSafe(source, {
-      full: row.gallery_share_dm === true,
-      memberOverrides: overrides,
-    }), row.gallery_member_overrides),
+      full: dmFull,
+      memberOverrides: partyLink ? null : overrides,
+    }), veilOverrides),
     // Which mode the page is in, and when its frozen copy was taken (null for live).
     galleryMode:  share.mode || 'live',
     snapshotAt:   share.mode === 'snapshot' && share.snapshot ? share.at : null,
@@ -847,7 +875,7 @@ function sanitizeDossier(row) {
     // Owner opted to reveal DM-private content — the public viewer must render in
     // DM mode (not player view), or the DM tabs/secrets stay hidden despite the
     // data being present. See PublicDossierView.
-    shareDm:      row.gallery_share_dm === true,
+    shareDm:      dmFull,
     // Owner opt-in: gates the "Import" affordance on the detail page (the
     // import_gallery_dossier RPC is the server-authoritative gate; this only
     // decides whether to SHOW the button). get_gallery_dossier returns this flag

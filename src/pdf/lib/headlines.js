@@ -11,27 +11,167 @@
  */
 import { cap, humanize, label as labelOf } from './format.js';
 import { coverageRatioPct } from './foodCoverage.js';
+import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
+import { plotHookSourcePage } from '../../domain/dossier/plotHooks.js';
+import { withPowerSentenceNames, powerSentenceName } from '../../domain/display/powerSentenceName.js';
+import { pickRendezvous } from '../../kernel/proseHash.js';
+
+// ── Shared plain-word helpers (the owner's style law of 2026-11-07: the label stays as the
+// first word, the machinery leaves, the town's own nouns fill the slots) ──────────────────
+const NUMBER_WORDS = ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve'];
+/** @param {number} n @returns {string} a count in words up to twelve, digits above */
+const countWord = (n) => (n >= 0 && n < NUMBER_WORDS.length ? NUMBER_WORDS[n] : String(n));
+/** @param {string} w @returns {string} */
+const capFirst = (w) => (w ? w.charAt(0).toUpperCase() + w.slice(1) : w);
+/** A catalogue name in running prose: no "(3-10)" / "(district)" suffix, first letter lowered. */
+const plainName = (name) => {
+  const bare = String(name || '').replace(/\s*\([^)]*\)\s*/g, ' ').replace(/\s+/g, ' ').trim();
+  return bare && !/^[A-Z]{2}/.test(bare) ? bare.charAt(0).toLowerCase() + bare.slice(1) : bare;
+};
+/** "a palisade" / "an earthwork" / "massive walls and fortifications" (a plural takes no article). */
+const withArticle = (phrase) => {
+  if (!phrase) return phrase;
+  if (/s$/i.test(phrase.split(/\s+and\s+/)[0]) && !/ss$/i.test(phrase)) return phrase;
+  return `${/^[aeiou]/i.test(phrase) ? 'an' : 'a'} ${phrase}`;
+};
+/** "a", "a and b", "a, b and c" */
+const listOf = (items) => (items.length <= 1 ? items.join('') : `${items.slice(0, -1).join(', ')} and ${items[items.length - 1]}`);
+/** A label in sentence case: "Lightly Defended" → "Lightly defended", "Well-Defended" → "Well-defended". */
+const sentenceCase = (labelText) => {
+  const t = String(labelText || '').toLowerCase();
+  return t.charAt(0).toUpperCase() + t.slice(1);
+};
+/**
+ * THE SEED CHOOSES (WIRING-RULINGS §8(3); point 121, TAIL-PICKS): one stable row per town, from a string the town always
+ * carries: the row of the highest rendezvous rank of (that string, the row's own id), so an edit to a chapter's rows moves
+ * only the towns that printed, or now out-rank to, the edited row. An EMPTY key takes the FIRST row (the helper's
+ * contract; the old FNV modulus took the second of four on an empty key).
+ * @template {{ id: string }} T @param {string} key @param {ReadonlyArray<T>} rows @returns {T}
+ */
+function seedPick(key, rows) {
+  return /** @type {T} */ (pickRendezvous(rows, String(key || ''), (r) => r.id));
+}
+
+/** @typedef {{ where: string, what: string, after: string, seen: string | null, single: boolean }} OverviewHeadlineSlots */
+/**
+ * THE OVERVIEW HEAD'S ROWS (pdf.headlines.overview): four vantages on the town and its trouble, by id, append-only.
+ * @type {ReadonlyArray<{ id: string, say: (s: OverviewHeadlineSlots) => string }>}
+ */
+export const OVERVIEW_HEADLINES = Object.freeze([
+  // [traveller · S] what you walk into
+  Object.freeze({ id: 'traveller', say: (/** @type {OverviewHeadlineSlots} */ s) => (s.single && s.seen
+    ? `You reach ${s.where} and it shows at once: ${s.seen}`
+    : `You reach ${s.where} in the middle of ${s.what}${s.after}`) }),
+  // [local · S] what every house talks about
+  Object.freeze({ id: 'local', say: (/** @type {OverviewHeadlineSlots} */ s) => `In ${s.where} the talk is all of ${s.what}${s.after}` }),
+  // [official · S] what those in charge have to deal with
+  Object.freeze({ id: 'official', say: (/** @type {OverviewHeadlineSlots} */ s) => `Those in charge of ${s.where} have ${s.what} on their hands${s.after}` }),
+  // [newcomer · S] what you hear when you ask
+  Object.freeze({ id: 'newcomer', say: (/** @type {OverviewHeadlineSlots} */ s) => `Ask in ${s.where} what is wrong and you hear of ${s.what}${s.after}` }),
+]);
+
+/**
+ * THE ECONOMICS HEAD'S ROWS (pdf.headlines.economics), by id, append-only. Keyed on the top export and the prosperity: NO
+ * TOWN in the key (named for RENAME-REDEALS, not changed).
+ * @type {ReadonlyArray<{ id: string, say: (s: { topExport: string }) => string }>}
+ */
+export const ECONOMICS_HEADLINES = Object.freeze([
+  // [trade · S] what it sells
+  Object.freeze({ id: 'trade', say: (/** @type {{ topExport: string }} */ s) => `Most of what it sells is ${s.topExport}` }),
+  // [local · S] what households live on
+  Object.freeze({ id: 'local', say: (/** @type {{ topExport: string }} */ s) => `Its people make their living from ${s.topExport}` }),
+  // [official · S] what the purse rests on
+  Object.freeze({ id: 'official', say: (/** @type {{ topExport: string }} */ s) => `Its income rests on ${s.topExport}` }),
+  // [traveller · S] what you see going out
+  Object.freeze({ id: 'traveller', say: (/** @type {{ topExport: string }} */ s) => `What goes out of here is mostly ${s.topExport}` }),
+]);
+
+/** @typedef {{ count: string, total: number, named: string }} NpcsHeadlineSlots */
+/**
+ * THE PEOPLE HEAD'S ROWS (pdf.headlines.npcs), by id, append-only.
+ * @type {ReadonlyArray<{ id: string, say: (s: NpcsHeadlineSlots) => string }>}
+ */
+export const NPCS_HEADLINES = Object.freeze([
+  // [official · S] who carries the weight
+  Object.freeze({ id: 'official', say: (/** @type {NpcsHeadlineSlots} */ s) => `${s.count} people worth knowing; ${s.named} carries the most weight.` }),
+  // [newcomer · S] what you hear when you ask
+  Object.freeze({ id: 'newcomer', say: (/** @type {NpcsHeadlineSlots} */ s) => `Ask who matters here and you hear ${countWord(s.total)} names; ${s.named} comes first.` }),
+]);
+/** How much of a food gap imports close, in words (the per cent stays in the section's table). */
+function coverageWords(pct) {
+  if (!(pct > 0)) return null;
+  if (pct >= 90) return 'nearly all';
+  if (pct >= 60) return 'most';
+  if (pct >= 40) return 'about half';
+  return 'some';
+}
 
 // ── Overview ────────────────────────────────────────────────────────────────
+/**
+ * THE CRISIS AS A THING SEEN, NEVER A KEY (STYLE-2-SURFACES D·P5 / D·F1; STYLE-RULINGS-2 B2).
+ * The lead printed the crisis LABEL dropped in as a noun ("you hear of one thing: recently
+ * betrayed"). Each crisis the slice names by its label (`o.stress[].label`, the stressTypes
+ * label) now has a plain noun for the list and one clause of what a visitor sees or hears.
+ * Every clause states only what the crisis kind itself guarantees — the discipline of
+ * `crisisSummaryVantage.js`: no walls, gates, garrison or market (facts of their own), no hunger
+ * outside a famine, a war line true for a town that gains by the war and one that pays for it,
+ * a migration line true for arrivals and departures alike (the slice keeps no direction).
+ * A label this table does not know (an authored custom crisis) is "the crisis", with no clause.
+ * Every line is FOR THE OWNER'S VETO (docs/chair/2026-11-09/STYLE-2-FIRST-IMPRESSIONS-2026-11-09.md).
+ * @type {Readonly<Record<string, Readonly<{ noun: string, seen: string }>>>}
+ */
+const CRISIS_SEEN = Object.freeze({
+  'under siege': Object.freeze({ noun: 'the siege', seen: 'nothing comes in by road without the besiegers\' leave' }),
+  famine: Object.freeze({ noun: 'the famine', seen: 'people queue for what food is handed out, and every meal is smaller than the last' }),
+  'under occupation': Object.freeze({ noun: 'the occupation', seen: 'foreign officials give the orders, and the locals say as little as they can' }),
+  'politically fractured': Object.freeze({ noun: 'the quarrel over who rules', seen: 'no order is obeyed by everyone, and each side has its own following' }),
+  'indebted to outside power': Object.freeze({ noun: 'the debt to outsiders', seen: 'what is owed abroad is paid before anything the people here need' }),
+  'recently betrayed': Object.freeze({ noun: 'the betrayal', seen: 'someone they trusted sold them out, and neighbours watch each other' }),
+  infiltrated: Object.freeze({ noun: 'the spies among them', seen: 'people lower their voices and wonder who is listening' }),
+  'disease outbreak': Object.freeze({ noun: 'the sickness', seen: 'the sick are kept indoors, and people keep their distance from each other' }),
+  'succession void': Object.freeze({ noun: 'the empty seat', seen: 'no one holds the seat of power, and those who want it are counting their friends' }),
+  'beast & raider threat': Object.freeze({ noun: 'the beasts and raiders', seen: 'no one travels the roads alone or after dark' }),
+  insurgency: Object.freeze({ noun: 'the rising', seen: 'armed bands defy those in charge, and people are careful whom they are seen with' }),
+  'religious conversion': Object.freeze({ noun: 'the change of faith', seen: 'more people take up the new gods every week, and families argue over which to keep' }),
+  'slave revolt': Object.freeze({ noun: 'the revolt', seen: 'the enslaved have risen against their masters, and no one knows how far it will spread' }),
+  wartime: Object.freeze({ noun: 'the war', seen: 'everyone has a view on what the fighting costs and who gains by it' }),
+  'mass migration': Object.freeze({ noun: 'the families on the move', seen: 'carts piled with bundles crowd the roads' }),
+});
+
 export function overviewHeadline(o, identity) {
   if (!o) return null;
-  const parts = [];
-  // Dominant feature: prosperity + safety in plain English
-  if (o.prosperity && o.safety) {
-    parts.push(`A ${o.prosperity.toLowerCase()}, ${o.safety.toLowerCase()} ${(identity?.tier || 'settlement').toLowerCase()}`);
-  } else if (identity?.tier) {
-    parts.push(`A ${identity.tier.toLowerCase()}`);
+  // THE LABEL FIRST ("Struggling."), then the town, its size and the trouble it is in as a thing
+  // seen (CRISIS_SEEN above). The safety label and the chip count were machinery (STYLE-AUDIT §2a
+  // #1). No clause judges the season: "Comfortable … in a hard season" set the lead against its own
+  // label (D·P5), so the prosperity label is the one judgment the line makes.
+  const name = identity?.name || null;
+  // "Thorpe" on every reader surface (ODQ §934.63 F14): the tier LABEL, never the token.
+  const tierWord = (identity?.tier || identity?.tierKey || '').toLowerCase() || null;
+  const pop = Number(identity?.population);
+  const place = tierWord
+    ? `${name ? `${name}, ` : ''}a ${tierWord}${Number.isFinite(pop) && pop > 0 ? ` of ${pop.toLocaleString('en-US')}` : ''}${name ? ',' : ''}`
+    : (name || null);
+  if (!place && !o.prosperity) return null;
+  const lead = o.prosperity ? `${cap(String(o.prosperity).toLowerCase())}. ` : '';
+  const crises = (o.stress || [])
+    .map((x) => String(x?.label || '').trim().toLowerCase())
+    .filter(Boolean)
+    .map((key) => (Object.hasOwn(CRISIS_SEEN, key) ? CRISIS_SEEN[key] : { noun: 'the crisis', seen: null }))
+    .filter((c, i, all) => all.findIndex((d) => d.noun === c.noun) === i);
+  const where = place || 'the place';
+  let body;
+  if (crises.length) {
+    const what = listOf(crises.map((c) => c.noun));
+    const seen = crises[0].seen;
+    // One crisis: the clause follows a colon. Several: the nouns are listed and the first crisis's
+    // clause is its own sentence, so the colon never pins one crisis's evidence on the list.
+    const after = seen ? (crises.length === 1 ? `: ${seen}` : `. ${capFirst(seen)}`) : '';
+    body = seedPick(name || tierWord || '', OVERVIEW_HEADLINES).say({ where, what, after, seen, single: crises.length === 1 });
+  } else {
+    body = `${capFirst(where)} has no crisis on its hands this season`;
   }
-  // Stress overlay
-  if (o.stress?.length) {
-    parts.push(`under active strain (${o.stress.length} crisis chip${o.stress.length === 1 ? '' : 's'})`);
-  }
-  // Viability flag if explicit
-  if (o.viability === false) {
-    parts.push('with viability flagged as marginal or worse');
-  }
-  if (!parts.length) return null;
-  return parts.join(' ') + '.';
+  const tail = o.viability === false ? ' It may not survive as it stands.' : '';
+  return `${lead}${body}.${tail}`;
 }
 
 export function overviewTone(o) {
@@ -53,15 +193,24 @@ export function powerHeadline(power, _identity) {
   const bits = [];
   // powerSlice factions expose `.name` (mapped from f.faction); the old `.faction`
   // reads were always undefined so the headline never named the governing body.
-  if (top?.name) bits.push(`${top.name}${govType ? ` (${govType.toLowerCase()})` : ''} governs`);
+  // TAIL-EXPORTS-PDF batch 1 (ruling E2): a power named in the sentence takes its prose form (powerSentenceName.js), and
+  // A POWER'S STANDING IN A SENTENCE READS THE POWER'S OWN STRENGTH: where the strongest rival outweighs the governing
+  // power, the line says so ("holds the seat, but more weight lies with …"), never "pressing close behind".
+  const topName = top?.name ? powerSentenceName(top.name) : null;
+  const chName = challenger?.name ? powerSentenceName(challenger.name) : null;
+  const outweighed = !!(topName && chName && challenger?.power && top?.power && challenger.power > top.power);
+  if (topName && outweighed) bits.push(`${topName}${govType ? ` (${govType.toLowerCase()})` : ''} holds the seat, but more weight lies with ${chName}`);
+  else if (topName) bits.push(`${topName}${govType ? ` (${govType.toLowerCase()})` : ''} governs`);
   else if (govType) bits.push(`${govType} rule`);
   // The ', with …' continuation weaves onto a LEAD clause — only add it when a lead
   // exists, or a nameless governing faction with no governmentType (no lead pushed)
   // would make the comma clause the first and only element, opening the headline on a comma.
-  if (bits.length && challenger?.name && challenger?.power && top?.power && challenger.power >= top.power * 0.7) {
-    bits.push(`, with ${challenger.name} pressing close behind`);
+  if (outweighed) {
+    // the order is said in the lead clause
+  } else if (bits.length && challenger?.name && challenger?.power && top?.power && challenger.power >= top.power * 0.7) {
+    bits.push(`, with ${chName} pressing close behind`);
   } else if (bits.length && factions.length > 2) {
-    bits.push(`, with ${factions.length - 1} other faction${factions.length - 1 === 1 ? '' : 's'} competing for influence`);
+    bits.push(`, with ${factions.length - 1} other power${factions.length - 1 === 1 ? '' : 's'} competing for influence`);
   }
   if (!bits.length) return null;
   return bits.join('') + '.';
@@ -78,22 +227,34 @@ export function powerTone(power) {
 // ── Economics ───────────────────────────────────────────────────────────────
 export function economicsHeadline(eco) {
   if (!eco) return null;
-  const prosperity = eco.prosperity ? cap(eco.prosperity) : null;
-  const complexity = eco.economicComplexity ? humanize(eco.economicComplexity) : null;
-  const topExport = eco.primaryExports?.[0] ? labelOf(eco.primaryExports[0]) : null;
+  // THE LABEL FIRST ("Struggling."), then what the place lives on and whether it feeds itself,
+  // in words. The complexity gloss doubled "economy economy" and the per cent was machinery
+  // (STYLE-AUDIT §2a #2); both stay in the section's own rows.
+  const lead = eco.prosperity ? `${cap(String(eco.prosperity).toLowerCase())}.` : null;
+  // TAIL-EXPORTS-PDF batch 1 (ruling E1; the law of a siege): what it sells as the tab's Exports print it
+  // (`exportsShown`, tradeListsAsPrinted), and nothing named as going out where a siege stops trade.
+  const exportList = Array.isArray(eco.exportsShown) ? eco.exportsShown : (eco.primaryExports || []);
+  const topExport = !eco.tradeStopped && exportList[0] ? plainName(labelOf(exportList[0])).toLowerCase() : null;
   const fb = eco.foodBalance || {};
-  const bits = [];
-  if (prosperity && complexity) bits.push(`${prosperity}, ${complexity.toLowerCase()} economy`);
-  else if (prosperity) bits.push(`${prosperity} economy`);
-  if (topExport) bits.push(`anchored on ${topExport.toLowerCase()}`);
+  let food = null;
   if (fb?.deficit > 0) {
-    // Shared coverage formula (foodCoverage); the headline rounds and shows 0 when
-    // imports cover nothing.
-    const pct = Math.round(coverageRatioPct(fb.importCoverage, fb.rawDeficit) ?? 0);
-    bits.push(`food deficit: imports cover ${pct}% of the gap`);
-  } else if (fb?.surplus > 0) bits.push(`food surplus`);
-  if (!bits.length) return null;
-  return bits.join(' · ') + '.';
+    // Shared coverage formula (foodCoverage), banded into words.
+    const shareWords = coverageWords(coverageRatioPct(fb.importCoverage, fb.rawDeficit) ?? 0);
+    food = shareWords
+      ? `it grows less food than it eats, and imports make up ${shareWords} of the gap`
+      : 'it grows less food than it eats, and nothing comes in to make up the gap';
+  } else if (fb?.surplus > 0) {
+    food = 'it grows more food than it eats';
+  }
+  let body = null;
+  if (topExport) {
+    body = seedPick(`${topExport}|${eco.prosperity || ''}`, ECONOMICS_HEADLINES).say({ topExport });
+    if (food) body += `; ${food}`;
+  } else if (food) {
+    body = capFirst(food);
+  }
+  if (!lead && !body) return null;
+  return [lead, body ? `${body}.` : null].filter(Boolean).join(' ');
 }
 
 export function economicsTone(eco) {
@@ -109,17 +270,31 @@ export function economicsTone(eco) {
 }
 
 // ── Defense ────────────────────────────────────────────────────────────────
-export function defenseHeadline(def, identity) {
+export function defenseHeadline(def, _identity) {
   if (!def) return null;
-  const readiness = def.readiness?.label || def.readiness || null;
+  // THE LABEL FIRST ("Lightly defended"), the score in plain figures, then what stands: the
+  // enclosure and the force by their roster names (READS `defenseProfile.institutions`, the
+  // buckets the defence purse pays for). "Defense for a thorpe:" and "avg defense" were
+  // machinery (STYLE-AUDIT §2a #3).
+  const readiness = def.readiness?.label || (typeof def.readiness === 'string' ? def.readiness : null);
   const avg = def.scoreAvg ?? null;
-  const tier = identity?.tier ? identity.tier.toLowerCase() : 'settlement';
   if (!readiness && avg == null) return null;
-  const bits = [];
-  if (readiness) bits.push(`${typeof readiness === 'string' ? cap(readiness) : readiness} readiness`);
-  if (avg != null) bits.push(`avg defense ${avg}/100`);
-  if (def.magicDependency) bits.push('magic-dependent');
-  return `Defense for a ${tier}: ${bits.join(' · ')}.`;
+  const inst = def.institutions || {};
+  const wallName = plainName(institutionDisplayName(inst.walls?.[0] || '')) || null;
+  const forceRow = [inst.garrison, inst.watch, inst.militia, inst.mercenary, inst.charter]
+    .map((rows) => institutionDisplayName(rows?.[0] || '')).find(Boolean);
+  const force = forceRow ? `the ${plainName(forceRow)}` : null;
+  const wall = wallName ? withArticle(wallName) : null;
+  let what;
+  if (wall && force) what = `${wall}, held by ${force}`;
+  else if (wall) what = `${wall}, and no one trained to hold it`;
+  else if (force) what = `no walls; ${force} is all that stands guard`;
+  else what = 'no walls and no organized force'; // TAIL-EXPORTS-PDF batch 1: the Defense tab's words (noForceLine.js), beside its "armed citizens"
+  // The readiness label carries the grade; the 0-100 mean stays in the section's bars (a digit
+  // in prose is the machinery the owner struck).
+  const head = readiness ? sentenceCase(readiness) : 'Defences';
+  const magic = def.magicDependency ? ' It leans on magic to hold.' : '';
+  return `${head}: ${what}.${magic}`;
 }
 
 export function defenseTone(def) {
@@ -131,42 +306,87 @@ export function defenseTone(def) {
 }
 
 // ── Services ───────────────────────────────────────────────────────────────
+const CATEGORY_WORDS = Object.freeze({
+  economy: 'trade and farming', crafts: 'crafts', religious: 'faith', government: 'government',
+  infrastructure: 'infrastructure', defense: 'defence', adventuring: 'adventuring', criminal: 'crime',
+  entertainment: 'entertainment', magic: 'magic', exotic: 'the exotic',
+});
 export function servicesHeadline(services) {
   if (!services) return null;
   const list = services.detailed || [];
   const total = list.length;
   if (!total) return null;
-  // Tally by category
+  // SLOTTED FROM THE ROSTER ONLY (STYLE-RULINGS §1, #6): a small place names its houses; a
+  // large one names its two largest groups with their counts. "On the books" and "heaviest in"
+  // were machinery.
+  if (total <= 8) {
+    // Each house by its display name, through the one institution label seam.
+    const names = [...new Set(list.map((inst) => plainName(institutionDisplayName(inst))).filter(Boolean))];
+    return `${capFirst(countWord(total))} institution${total === 1 ? '' : 's'}: ${listOf(names)}.`;
+  }
   const byCat = {};
   for (const inst of list) {
-    const c = inst?.category || 'other';
+    const c = String(inst?.category || 'other').toLowerCase();
     byCat[c] = (byCat[c] || 0) + 1;
   }
   const sorted = Object.entries(byCat).sort((a, b) => b[1] - a[1]);
-  const top2 = sorted.slice(0, 2).map(([c, n]) => `${n} ${humanize(c).toLowerCase()}`).join(', ');
-  return `${total} institution${total === 1 ? '' : 's'} on the books, heaviest in ${top2}.`;
+  const groups = sorted.slice(0, 2).map(([c, n]) => `${CATEGORY_WORDS[c] || humanize(c).toLowerCase()} (${n})`);
+  return `${capFirst(countWord(total))} institutions; the largest groups are ${listOf(groups)}.`;
 }
 
 // ── Resources ──────────────────────────────────────────────────────────────
 export function resourcesHeadline(resources) {
   if (!resources) return null;
-  // The resources slice exposes exportPotential + nearbyDepleted, not the
-  // primaryExports/primaryImports that live on the economics slice.
+  // The resources slice exposes exportPotential ({ product, chain, value }) + nearbyDepleted
+  // (resource keys). The old read took `labelOf` of the export row, which has no label, and
+  // printed "Exports , ;" (STYLE-AUDIT §2b-6).
   const exports = resources.exportPotential || resources.primaryExports || [];
   const depleted = resources.nearbyDepleted || [];
-  if (!exports.length && !depleted.length) return null;
+  const goods = [...new Set(exports.slice(0, 2)
+    .map((e) => (typeof e === 'string' ? e : e?.product || labelOf(e)))
+    .flatMap((g) => String(g || '').replace(/_/g, ' ').split(/\s*,\s*/))
+    .map((g) => plainName(g).toLowerCase())
+    .filter(Boolean))].slice(0, 4);
+  const spent = depleted.map((k) => humanize(String(k)).toLowerCase()).filter(Boolean);
   const bits = [];
-  if (exports.length) bits.push(`Exports ${exports.slice(0, 2).map(e => labelOf(e).toLowerCase()).join(', ')}`);
-  if (depleted.length) bits.push(`${depleted.length} depleted resource${depleted.length === 1 ? '' : 's'}`);
-  return bits.join('; ') + '.';
+  if (goods.length) bits.push(`It sends out ${listOf(goods)}`);
+  if (spent.length) {
+    const plural = spent.length > 1 || /s$/.test(spent[0]);
+    bits.push(spent.length > 2
+      ? `${capFirst(countWord(spent.length))} nearby resources are used up: ${listOf(spent)}`
+      : `The nearby ${listOf(spent)} ${plural ? 'are' : 'is'} used up`);
+  }
+  if (!bits.length) return null;
+  return bits.join('. ') + '.';
 }
 
 // ── Viability ──────────────────────────────────────────────────────────────
 export function viabilityHeadline(viability) {
   if (!viability) return null;
-  const verdict = viability.verdict || (viability.viable === false ? 'Not viable' : viability.viable === true ? 'Viable' : null);
-  if (!verdict) return null;
-  return `${verdict}. ${viability.summary || ''}`.trim();
+  // THE VERDICT FIRST ("Viable,"), then the ONE reason in plain words, from the record's own
+  // food balance, dependency count and first critical issue. The lowercase enum ("viable.") and
+  // the verdict printed twice were machinery (STYLE-AUDIT §2a #4); the chapter keeps the summary.
+  const notViable = viability.viable === false || viability.verdict === 'notViable';
+  if (notViable) {
+    const issues = viability.criticalIssues || [];
+    const first = String(issues[0]?.description || issues[0]?.message || '').trim().replace(/\.$/, '');
+    const more = issues.length > 1 ? ` ${capFirst(countWord(issues.length - 1))} more problem${issues.length - 1 === 1 ? '' : 's'} as grave stand${issues.length - 1 === 1 ? 's' : ''} behind it.` : '';
+    return first ? `Not viable. ${capFirst(first)}.${more}` : 'Not viable: it cannot last as it stands.';
+  }
+  if (viability.viable !== true && !viability.verdict) return null;
+  const fb = viability.metrics?.foodBalance || {};
+  const deps = viability.metrics?.dependencyCount || 0;
+  if (fb.deficit > 0) {
+    const shareWords = coverageWords(coverageRatioPct(fb.importCoverage, fb.rawDeficit) ?? 0);
+    const channel = fb.importChannel ? plainName(fb.importChannel) : 'trade';
+    return shareWords
+      ? `Viable, but it cannot feed itself: ${shareWords} of the food it lacks comes in by ${channel}.`
+      : 'Viable, but it cannot feed itself, and nothing comes in to close the gap; it lives on its stores.';
+  }
+  if (deps > 0) {
+    return `Viable, as long as the ${countWord(deps)} trade ${deps === 1 ? 'route it depends on stays' : 'routes it depends on stay'} open.`;
+  }
+  return 'Viable: it feeds itself and needs no outside trade to survive.';
 }
 
 export function viabilityTone(viability) {
@@ -179,19 +399,17 @@ export function viabilityTone(viability) {
 // ── History ────────────────────────────────────────────────────────────────
 export function historyHeadline(history) {
   if (!history) return null;
+  // The age, the events and the open tensions, counted in words. The historical character is
+  // NOT repeated here: it prints as the chapter's lead two lines below (STYLE-AUDIT §3).
   const age = history.age;
-  const character = history.historicalCharacter;
   const events = (history.events || []).length;
   const tensions = (history.tensions || []).length;
-  const bits = [];
-  if (age) bits.push(`${age} years old`);
-  if (character) bits.push(character);
-  if (events) bits.push(`${events} recorded event${events === 1 ? '' : 's'}`);
-  if (tensions) bits.push(`${tensions} live tension${tensions === 1 ? '' : 's'}`);
-  if (!bits.length) return null;
-  // Capitalise first character
-  const out = bits.join(' · ');
-  return out.charAt(0).toUpperCase() + out.slice(1) + '.';
+  const counts = [];
+  if (events) counts.push(`${countWord(events)} event${events === 1 ? '' : 's'} on record`);
+  if (tensions) counts.push(`${countWord(tensions)} tension${tensions === 1 ? '' : 's'} still unresolved`);
+  if (!age && !counts.length) return null;
+  if (!age) return `${capFirst(listOf(counts))}.`;
+  return `Founded ${age} year${age === 1 ? '' : 's'} ago${counts.length ? `, with ${listOf(counts)}` : ''}.`;
 }
 
 // ── NPCs ───────────────────────────────────────────────────────────────────
@@ -203,22 +421,45 @@ export function npcsHeadline(npcs) {
   const top = sorted[0];
   const total = list.length;
   if (!top) return null;
-  return `${total} named figure${total === 1 ? '' : 's'}: ${top.name}${top.title ? `, ${top.title}` : ''}, the most powerful (power ${top.power}).`;
+  // W7 HOOKS (the owner's style law of 2026-11-07; STYLE-RULINGS §1 #7): the people by name, TITLE and RANK
+  // (the people car's card: `title` is the house's title, `powerLine` the rank in its power, "first of Elder
+  // Council"); "(power N)" was machinery, and the struck variant's "the fisherman" is never written — the
+  // card's own title is.
+  // the first rank only: a card backed by two powers prints "first of A · member of B"; the headline keeps the first.
+  // POWERS-16 (the chair's ruling (r2)): the rank line set in this sentence names its power in the prose form, from one leaf
+  const who = [top.title, withPowerSentenceNames(String(top.powerLine || '').split(' · ')[0])].filter(Boolean).join(', ');
+  const named = `${top.name}${who ? `, ${who},` : ''}`;
+  if (total === 1) return `One person worth knowing: ${named.replace(/,$/, '')}.`;
+  const count = capFirst(countWord(total));
+  return seedPick(String(top.name || ''), NPCS_HEADLINES).say({ count, total, named });
 }
 
 // ── Hooks ──────────────────────────────────────────────────────────────────
+/** The group a reader knows, by the page the chapter prints the hook under (plotHooks.js :: PLOT_HOOK_SOURCE_PAGES). */
+const HOOK_GROUP_PLAIN = Object.freeze({
+  npcs: 'the people', relationships: 'the town\'s ties', history: 'its history and its tensions',
+  traditions: 'its traditions', viability: 'its outlook', defense: 'its defence',
+});
 export function hooksHeadline(hooks) {
   if (!hooks) return null;
   const all = hooks.all || [];
   if (!all.length) return null;
-  // Tally by source
-  const bySrc = {};
+  // W7 HOOKS (the owner's style law of 2026-11-07; STYLE-RULINGS §1 #5): tallied by the GROUP THE CHAPTER
+  // PRINTS (the source page), never by the collector's category key ("heaviest from tension" named a group
+  // the page does not print). One hook per card since the people car, so the people's group is the cast.
+  const byPage = {};
   for (const h of all) {
-    const k = h?.source || 'other';
-    bySrc[k] = (bySrc[k] || 0) + 1;
+    const id = plotHookSourcePage({ category: h?.category, source: h?.sourceName ?? h?.source }).id;
+    byPage[id] = (byPage[id] || 0) + 1;
   }
-  const top = Object.entries(bySrc).sort((a, b) => b[1] - a[1])[0];
-  return `${all.length} plot hook${all.length === 1 ? '' : 's'} surfaced, heaviest from ${humanize(top[0]).toLowerCase()} (${top[1]}).`;
+  const [topId, topCount] = Object.entries(byPage).sort((a, b) => b[1] - a[1])[0];
+  const where = HOOK_GROUP_PLAIN[topId] || 'the town';
+  const total = all.length;
+  const count = total <= 12 ? capFirst(countWord(total)) : String(total);
+  if (topCount === total) return `${count} hook${total === 1 ? '' : 's'} to pull, all of them belonging to ${where}.`;
+  return topCount * 2 > total
+    ? `${count} hooks to pull; most of them belong to ${where} (${topCount}).`
+    : `${count} hooks to pull; the largest group belongs to ${where} (${topCount}).`;
 }
 
 // ── Relationships ──────────────────────────────────────────────────────────
@@ -226,12 +467,14 @@ export function relationshipsHeadline(rel) {
   if (!rel) return null;
   // The relationships slice exposes `neighbours` (external) + `internal`, not the
   // `all`/`relationships` the old code read.
-  const neighbours = rel.neighbours || [];
-  const internal = rel.internal || rel.relationships || rel.all || [];
+  const neighbours = rel.neighbours || rel.all || [];
+  const internal = rel.internal || rel.relationships || [];
   const total = neighbours.length + internal.length;
   if (!total) return null;
+  // W7 HOOKS (the owner's style law of 2026-11-07): the ties in words; "links … on file" was machinery.
+  // Since the people car each card holds ONE outgoing tie (R-P7), so the internal count is the people's ties.
   const bits = [];
-  if (neighbours.length) bits.push(`${neighbours.length} neighbour link${neighbours.length === 1 ? '' : 's'}`);
-  if (internal.length) bits.push(`${internal.length} internal tie${internal.length === 1 ? '' : 's'}`);
-  return bits.join(', ') + ' on file.';
+  if (neighbours.length) bits.push(`ties to ${countWord(neighbours.length)} neighbouring place${neighbours.length === 1 ? '' : 's'}`);
+  if (internal.length) bits.push(`${countWord(internal.length)} tie${internal.length === 1 ? '' : 's'} among its own people`);
+  return `${capFirst(listOf(bits))}.`;
 }

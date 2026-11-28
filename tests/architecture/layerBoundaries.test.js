@@ -313,6 +313,9 @@ const PDF_ALLOWED_TREES = Object.freeze({
   copy:   'the one Systems Health vintage sentence shared with the screen (sectionHelp.js :: SYSTEMS_HEALTH_VINTAGE)',
   data:   'engine data tables — supplyChainData\'s chain definitions',
   design: 'the shared token + ornament tree the PDF theme derives from (logo, emblemPaths, tokens)',
+  // RULED at point 121 (the eleventh chair, 2026-11-28): the kernel is the lowest headless layer (no React, no store);
+  // the chapter heads pick by a line's own id, as every other view-time pick does (pdf/lib/headlines.js :: seedPick).
+  kernel: 'the determinism primitives: proseHash.js :: pickRendezvous, for the chapter heads\' ranked pick (point 121)',
 });
 
 describe('the print surface may not reach into the screen (src/pdf boundary)', () => {

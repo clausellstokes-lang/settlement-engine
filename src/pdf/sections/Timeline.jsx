@@ -25,7 +25,7 @@ export function Timeline({ settlement, narrativeMode, vm }) {
         sub={`${log.length} event${log.length === 1 ? '' : 's'}`}
       />
       <ChapterHeadline tone="gold">
-        In-world history this settlement has acquired since canonization.
+        What has happened here since your campaign began.
       </ChapterHeadline>
 
       {log.length === 0 && (

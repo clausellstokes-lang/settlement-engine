@@ -241,8 +241,8 @@ export default function RealmVerbComposer({ campaign }) {
       )}
 
       <p style={{ fontSize: proseFontSize(FS.xxs, mobile), color: MUTED, margin: '8px 0 0', fontStyle: 'italic', lineHeight: 1.5 }}>
-        Every order stages as a pending proposal and applies through the world&apos;s own machinery on approval:
-        the walls hold even under force, and a refused order says why.
+        Every order waits as a proposal until you approve it. Even a forced order must keep to the
+        realm&apos;s own limits, and an order the realm refuses says why.
       </p>
     </div>
   );

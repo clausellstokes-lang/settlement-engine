@@ -367,6 +367,8 @@ export function mintDmId(seed, kind, n) {
  * @typedef {{ declarationsFor: (cardType: string) => readonly { field: string,
  *             outputKey?: string }[] }} DeclarationSet
  * @typedef {'step_not_pinnable'|'unknown_key'} RederiveUnappliedReason
+ * @typedef {'engine_mismatch'|'unknown_key'} AppendUnappliedReason
+ * @typedef {RederiveUnappliedReason|AppendUnappliedReason} UnappliedReason the row type: the union of the two closed sets
  */
 
 /**
@@ -392,6 +394,22 @@ export function mintDmId(seed, kind, n) {
  * @type {readonly RederiveUnappliedReason[]}
  */
 export const REDERIVE_UNAPPLIED_REASONS = Object.freeze(['step_not_pinnable', 'unknown_key']);
+
+/**
+ * (4b) THE APPEND PATH'S CLOSED SET (GUARD-2; the chair's ruling R24n (1)): what `appendMinted` can
+ * hand back unapplied. TWO members, frozen, in codepoint order, EXPORTED so a test asserts it in both
+ * directions. It is its OWN set because the pin bag refuses nothing new: `REDERIVE_UNAPPLIED_REASONS`
+ * above stays the pin bag's, byte-identical (the packets EM-R1b and EM-R1c pin that line verbatim).
+ *
+ * ⭐ `engine_mismatch` IS GUARD'S (CLOSE-7; the chair's ruling R24j 4): a stored place is re-derived
+ * only by the engine that bore it, so on another engine's place the layer's newcomers are APPENDED
+ * (`appendMinted`) and the engine is not run. A WORLD-FACT root enters a world only as `config′`, which
+ * needs the engine, so on such a place it is said and not done: it comes back with this reason and
+ * nothing of it is half-applied. `unknown_key` is the same word the pin bag uses: a newcomer whose card
+ * writes no collection the record holds.
+ * @type {readonly AppendUnappliedReason[]}
+ */
+export const APPEND_UNAPPLIED_REASONS = Object.freeze(['engine_mismatch', 'unknown_key']);
 
 /** Codepoint order, the estate's own comparison, spelled locally so this leaf imports nothing. */
 const byCodepoint = (/** @type {string} */ a, /** @type {string} */ b) => (a < b ? -1 : (a > b ? 1 : 0));
@@ -570,6 +588,109 @@ function writeDeclared(/** @type {unknown} */ bag, /** @type {string} */ collect
 }
 
 /**
+ * One root key's declaration row, read through the consult exactly as `pinsFrom`'s PASS 1 reads it,
+ * so the pin path and the append path can never disagree about which roots are WORLD FACTS.
+ * @param {DeclarationSet|null} consult @param {string} key
+ * @returns {{ coords: { cardType: string, entityId: string, field: string }|null, row: object|undefined }}
+ */
+function rootDeclaration(consult, key) {
+  const coords = consult === null ? null : coordsOf(key);
+  /** @type {unknown} */
+  let declared;
+  try { declared = coords === null ? null : (consult?.declarationsFor(coords.cardType) ?? null); } catch { declared = null; }
+  const row = (Array.isArray(declared) ? declared.filter(isPlainObject) : [])
+    .find((r) => /** @type {{ field: unknown }} */ (r).field === coords?.field);
+  return { coords, row };
+}
+
+/**
+ * The layer's NEWCOMERS, each resolved to the row a roster entry carries and the collection its card
+ * writes, in codepoint order on the id. ONE reading for both paths (EM-E8 B; GUARD R24j 3): the
+ * re-derivation appends these rows to the pinned clone (`pinsFrom`), and the guard's append path
+ * (`appendMinted`) to the stored record, so the two paths add THE SAME PEOPLE.
+ *
+ * ⛔ THE RECORD'S ROW CARRIES ITS `id` AND NOT THE LAYER'S `kind`: the map key is the identity a
+ * roster entry is expected to hold, and the card is the collection it landed in. The DM's typed
+ * values win over every default, which can only fill what was absent. A card whose declarations
+ * name no `outputKey` resolves `collection: null`, which each caller reports as `unknown_key`.
+ * @param {Record<string, object>} minted @param {DeclarationSet|null} consult @param {unknown} declarations
+ * @returns {Array<{ id: string, stored: unknown, row: object, collection: string|null, leaf: string }>}
+ */
+function resolveNewcomers(minted, consult, declarations) {
+  const defaultsFor = mintedDefaultsOf(declarations);
+  return Object.keys(minted).sort(byCodepoint).map((id) => {
+    const stored = minted[id];
+    const card = isPlainObject(stored) ? /** @type {{ kind?: unknown }} */ (stored).kind : undefined;
+    const cardType = isFilled(card) ? /** @type {string} */ (card) : '';
+    /** @type {unknown} */
+    let declared;
+    try {
+      declared = consult === null || cardType === '' ? null : consult.declarationsFor(cardType);
+    } catch { declared = null; }
+    const rows = Array.isArray(declared) ? declared.filter(isPlainObject) : [];
+    const split = rows
+      .map((r) => splitOutputKey(/** @type {{ outputKey?: unknown }} */ (r).outputKey))
+      .find((found) => found !== null) ?? null;
+    const { kind: _card, ...typed } = isPlainObject(stored) ? /** @type {Record<string, unknown>} */ (stored) : {};
+    const filled = defaultsFor === null || split === null ? {} : defaultsFor(cardType);
+    return { id, stored, row: { ...filled, id, ...typed }, collection: split === null ? null : split[0], leaf: split === null ? '' : split[1] };
+  });
+}
+
+/**
+ * ⭐ (5b) THE APPEND, FOR A PLACE ANOTHER ENGINE BORE (GUARD; the chair's ruling R24j 3 and 4). Pure
+ * with respect to its arguments; ⛔ THE ENGINE IS NOT RUN, and nothing here can reach it.
+ *
+ * A stored place is re-derived only by the engine that bore it. For any other place the layer's
+ * NEWCOMERS are appended to the stored record through the SAME declared-append semantics the
+ * re-derivation uses (`resolveNewcomers` then `appendDeclared`, onto a clone of the one collection
+ * each card writes), and NOTHING ELSE MOVES: every other key of the record is carried by reference.
+ *
+ * ⛔ A WORLD-FACT ROOT IS SAID, NOT DONE. It enters a world only as `config′`, which needs the
+ * engine, so each comes back in `unapplied` with the closed reason `engine_mismatch` and the
+ * record's config is untouched. Every OTHER root is already on the stored record (the plain-edit
+ * writer wrote it there when the DM made it), so it is neither re-applied nor reported.
+ *
+ * @param {unknown} record the stored place @param {unknown} layer the layer to append FROM; the
+ *   caller hands only the newcomers THIS tick minted (U111)
+ * @param {unknown} declarations the INJECTED declaration set
+ * @returns {{ record: Record<string, unknown>,
+ *            unapplied: Array<{ key: string, value: unknown, reason: AppendUnappliedReason }> }}
+ *   `record` is a NEW object; `unapplied` ASCII-ascending on key and deduplicated. THROWS NEVER.
+ */
+export function appendMinted(record, layer, declarations) {
+  const source = isPlainObject(record) ? /** @type {Record<string, unknown>} */ (record) : {};
+  const consult = usableDeclarations(declarations);
+  const { roots, minted } = normalizeLayer(layer);
+  /** @type {Array<{ key: string, value: unknown, reason: AppendUnappliedReason }>} */
+  const unapplied = [];
+  for (const key of Object.keys(roots).sort(byCodepoint)) {
+    const { row } = rootDeclaration(consult, key);
+    if (row !== undefined && /** @type {{ provenance?: unknown }} */ (row).provenance === 'world-fact') {
+      unapplied.push({ key, value: roots[key], reason: 'engine_mismatch' });
+    }
+  }
+  /** @type {Record<string, unknown>} */
+  const out = { ...source };
+  /** @type {Set<string>} */
+  const cloned = new Set();
+  for (const entry of resolveNewcomers(minted, consult, declarations)) {
+    if (entry.collection === null || !Object.hasOwn(source, entry.collection)) {
+      unapplied.push({ key: entry.id, value: entry.stored, reason: 'unknown_key' });
+      continue;
+    }
+    if (!cloned.has(entry.collection)) {
+      out[entry.collection] = structuredClone(source[entry.collection]);
+      cloned.add(entry.collection);
+    }
+    if (!appendDeclared(out[entry.collection], entry.leaf, structuredClone(entry.row))) {
+      unapplied.push({ key: entry.id, value: entry.row, reason: 'unknown_key' });
+    }
+  }
+  return { record: out, unapplied: dedupeByKey(unapplied) };
+}
+
+/**
  * (5) THE CHOOSER ROSTER, READ FROM ITS PRODUCER, WITH THE DM'S OVERRIDES MERGED IN.
  *
  * ⛔ THE PINNABILITY RULE IS NOT A PER-STEP READ. The bag is keyed by the RECORD PATH a chooser
@@ -647,12 +768,7 @@ export function pinsFrom(record, layer, declarations, engine) {
   const routed = [];
   for (const key of Object.keys(roots).sort(byCodepoint)) {
     const value = roots[key];
-    const coords = consult === null ? null : coordsOf(key);
-    /** @type {unknown} */
-    let declared;
-    try { declared = coords === null ? null : (consult?.declarationsFor(coords.cardType) ?? null); } catch { declared = null; }
-    const row = (Array.isArray(declared) ? declared.filter(isPlainObject) : [])
-      .find((r) => /** @type {{ field: unknown }} */ (r).field === coords?.field);
+    const { coords, row } = rootDeclaration(consult, key);
     // ⭐ THE ROUTE, BY PROVENANCE, AND IT IS TAKEN BEFORE THE OUTPUT KEY IS EVEN SPLIT. A world
     // fact's `outputKey` addresses `config`, which NO step provides, so the landed path below
     // reports it `unknown_key` — measured 63/63 over the census corpus, for all five facts. It is
@@ -684,32 +800,14 @@ export function pinsFrom(record, layer, declarations, engine) {
   // `powerStructure`, and a card whose declarations address `config` — a world fact — names a
   // key no step provides and is reported rather than guessed at. Codepoint order on the id, so
   // two runs over one layer append in one order.
-  const defaultsFor = mintedDefaultsOf(declarations);
   /** @type {Array<{ id: string, row: object, collection: string, leaf: string }>} */
   const newcomers = [];
-  for (const id of Object.keys(minted).sort(byCodepoint)) {
-    const stored = minted[id];
-    const card = isPlainObject(stored) ? /** @type {{ kind?: unknown }} */ (stored).kind : undefined;
-    const cardType = isFilled(card) ? /** @type {string} */ (card) : '';
-    /** @type {unknown} */
-    let declared;
-    try {
-      declared = consult === null || cardType === '' ? null : consult.declarationsFor(cardType);
-    } catch { declared = null; }
-    const rows = Array.isArray(declared) ? declared.filter(isPlainObject) : [];
-    const split = rows
-      .map((r) => splitOutputKey(/** @type {{ outputKey?: unknown }} */ (r).outputKey))
-      .find((found) => found !== null) ?? null;
-    if (split === null || providersOf(split[0]).length === 0) {
-      unapplied.push({ key: id, value: stored, reason: 'unknown_key' });
+  for (const entry of resolveNewcomers(minted, consult, declarations)) {
+    if (entry.collection === null || providersOf(entry.collection).length === 0) {
+      unapplied.push({ key: entry.id, value: entry.stored, reason: 'unknown_key' });
       continue;
     }
-    // ⛔ THE RECORD'S ROW CARRIES ITS `id` AND NOT THE LAYER'S `kind`: the map key is the
-    // identity a roster entry is expected to hold, and the card is the collection it landed
-    // in. The DM's typed values win over every default, which can only fill what was absent.
-    const { kind: _card, ...typed } = /** @type {Record<string, unknown>} */ (stored);
-    const filled = defaultsFor === null ? {} : defaultsFor(cardType);
-    newcomers.push({ id, row: { ...filled, id, ...typed }, collection: split[0], leaf: split[1] });
+    newcomers.push({ id: entry.id, row: entry.row, collection: entry.collection, leaf: entry.leaf });
   }
 
   // PASS 2 — THE PIN CLOSURE, and it is the whole reason an edit can be pinned at all. The

@@ -1,0 +1,459 @@
+/**
+ * domain/coherence/pageCensusFindings.js — THE RENDERED-DOSSIER ARM's checks (W2-A-LEAVES, 2026-11-12; the
+ * second wave's charter §0 item 6 and the amendment of record 287: "the arm is born from the census's own
+ * counter").
+ *
+ * One check per pattern of the second wave's census (`docs/chair/2026-11-12/SECOND-WAVE-CENSUS-2026-11-12.md`),
+ * each the census counter's own test (`probes/SECOND-WAVE-CENSUS/count.mjs` on lane/second-wave-census-2026-11-12),
+ * read over ONE rendered dossier: the owner's view, every group and sub-tab, every disclosure opened, one line
+ * per block element per view (`views`: `'Systems/Economics'` → its lines). Two patterns are not rows: 15 (the
+ * owner's recorded design: burials under Healing) and 21 (a style rule's text a browser never shows). A row the
+ * chair re-defines is RETIRED BY NAME with its reason (`RETIRED_PAGE_CENSUS_ROWS`) beside the row that replaces it.
+ *
+ * The counter's regex vocabulary was the union of two trees' pools; this arm reads the counted tree's own
+ * pools, so it counts the lines this tree can print. Every row's bar is ZERO; the register
+ * (`scripts/census/page-census.register.json`) holds each row's two census columns and its count today,
+ * shrink-only on the way to the bar.
+ *
+ * Pure: no randomness, no clock, no write. A row that throws is reported as a finding of its own.
+ */
+import { DOSSIER_STATE_PROSE_POWER } from '../../data/dossierStateProse/power.generated.js';
+import { DOSSIER_STATE_PROSE_DEFENSE } from '../../data/dossierStateProse/defense.generated.js';
+import { DOSSIER_STATE_PROSE_ECONOMY } from '../../data/dossierStateProse/economy.generated.js';
+import { NOT_A_GOOD } from '../../data/tradeListDeclarations.js';
+import { institutionDisplayName } from '../display/institutionDisplayName.js';
+import { liveInstitutions } from '../institutions/institutionRoster.js';
+import { importsAsPrinted } from '../display/tradeListDisplay.js';
+import { resourceDisplayName } from '../display/resourceDisplayName.js';
+import { CRIME_LINE_DISQUALIFIERS, CRIME_LINE_FACTS, crimeLineFactsOf } from '../display/stateProse/crimeLineDisqualifiers.js';
+import { OUTSIDER_IMPRESSIONS } from '../../data/dailyLife/outsiderImpressions.js'; // R24-A1 (CLOSE-7): the five lines of row NOHEAL
+import { residentSickCareOf, sickCareOf } from '../facts/sickCare.js'; // R24-A1 (CLOSE-7): the one reading of sick care
+import { FOOD_CULTURE } from '../../data/dailyLife/foodCulture.js'; // R24-A2 (CLOSE-7): the shortage lines of row FOODSEC
+import { COMMONER_RESENTMENTS } from '../../data/dailyLife/commonerResentments.js'; // R24-A2
+import { DAWN_WORK } from '../../data/dailyLife/dawnWork.js'; // R24-A2 (R24c (c)): Dawn Work's food branch
+import { famineOf } from '../facts/famine.js'; // R24-A2: the food band the page prints (`shownBand`)
+import { landWithholdsHouse } from '../landWithholding.js';
+import { nativeSemanticResourceKeys } from '../content/customContentSemanticAuthority.js';
+import { fieldRiteRefused, motifGlyph } from '../traditions/genesis.js'; // B1(ii) (G64): the furrows rule and the field element's printed glyph
+
+/** @typedef {Record<string, unknown>} Rec */
+/** @typedef {Readonly<Record<string, ReadonlyArray<string>>>} Views */
+/** @typedef {{ row: string, quote: string, detail: string }} CensusFinding */
+
+/** @param {unknown} v @returns {Rec} */
+const obj = (v) => (v && typeof v === 'object' && !Array.isArray(v) ? /** @type {Rec} */ (v) : {});
+/** @param {unknown} v @returns {unknown[]} */
+const arr = (v) => (Array.isArray(v) ? v : []);
+/** @param {unknown} v @returns {string} */
+const s = (v) => (typeof v === 'string' ? v : v == null ? '' : String(v));
+
+/**
+ * THE ROWS: id → [the pattern, the reader's class]. Every row's bar is zero.
+ * @type {Readonly<Record<string, readonly [string, 'GLANCE'|'SECOND'|'CROSS']>>}
+ */
+export const PAGE_CENSUS_ROWS = Object.freeze({
+  P2siege: ['2 a siege figure in the indicative outside a siege', 'SECOND'],
+  P3source: ['3 reliance on magic stated with neither a practitioner nor a named source, or a source printed with a catalogue range or condition, or one house named twice', 'CROSS'],
+  P4: ['4 "three powers stand almost level" beside a leader far ahead', 'SECOND'],
+  P5false: ['5a a crime line the town\'s facts make false: bought officials where none is in pay, none bought where one is, a grip on a hall no agent holds', 'SECOND'],
+  P5b: ['5b "Diffuse, no gang" beside a criminal power', 'SECOND'],
+  P6need: ['6 an import printed beside its own unmet need', 'CROSS'],
+  P7a: ['7a two founders', 'GLANCE'],
+  P7b: ['7b a harbour origin where no wharf stands', 'CROSS'],
+  P8any: ['8 no church, and worship in the economy', 'CROSS'],
+  P9: ['9 a weak beasts grade over settled-country text', 'GLANCE'],
+  P10: ['10 "hold the gates" with no walls', 'SECOND'],
+  P11: ['11 a flow card naming a resource the town lacks', 'CROSS'],
+  F4: ['F4 an income line naming a working the roster lacks', 'CROSS'],
+  P13: ['13 "… and go on." doubled', 'GLANCE'],
+  P14: ['14 size words in small places', 'SECOND'],
+  P16three: ['16a "the ruling three" over fewer', 'GLANCE'],
+  P16powers: ['16b two "The Powers (n)" counts', 'GLANCE'],
+  P17: ['17 non-goods produced locally', 'GLANCE'],
+  P18: ['18 catalogue count ranges printed as names', 'GLANCE'],
+  P19: ['19 a diagnostic printed as a tension', 'GLANCE'],
+  P20: ['20 siege words outside a siege', 'SECOND'],
+  NEW1: ['NEW-1 the governance label against the Defense verdict', 'SECOND'],
+  NEW2: ['NEW-2 magic income, and no practitioner on the rolls', 'CROSS'],
+  // R24-A1 (CLOSE-7; the chair's RULING-R24 and R24a of 2026-11-24): a line that says no healer stands here (H2, H3, H7, H8, H9
+  // of the Daily Life visitor lines) on a page whose record holds sick care at hand (`facts/sickCare.js`)
+  NOHEAL: ['NOHEAL a no-healer line beside resident sick care', 'CROSS'],
+  // R24-A2 (CLOSE-7; the chair's RULING-R24, R24a and R24c of 2026-11-24): a Daily Life line that says people go short (the
+  // fare's strained, critical and collapsed lines; the food grievances but the price-only three; the food visitor lens's F1
+  // and F2: CHAIN-1-LISTS (c), "your classing stands"; Dawn Work's food branch, R24c (c)) on a page whose Food Security
+  // prints Secure or Surplus (`famineOf().shownBand`)
+  FOODSEC: ['FOODSEC a shortage line on a page whose food ledger reads Secure', 'CROSS'],
+  // CLOSE-7 THE MIRROR (the chair's RULING-R24 R24d of 2026-11-24, "a pattern at a bar of zero"): a Daily Life fare line of a
+  // fed band (the fare's `surplus`, `surplus.wanting` and `adequate` lines: the branches the printed band's bound gives only a
+  // page that prints Pressured or better) on a page whose Food Security prints Deficit or Famine (`famineOf().shownBand`)
+  // (the chair's words are "a line of plenty"; the label says it without the plenty class's word, which the presumption-classes
+  // walker reads in this file's literals and its door never banks)
+  FEDFARE: ['FEDFARE a fare line of a fed band beside a printed Deficit or Famine', 'CROSS'],
+  B1land: ['B1(i) a house the land withholds standing in the desert with nothing that gives its thing (RULING-R24, R24b)', 'CROSS'],
+  // B1(ii) (the tenth chair's G64): a tradition of the fields (its element's glyph on the Traditions tab) on a page whose record
+  // this engine bore names its food sources, none of them grain, and holds no farmland (`genesis.js :: fieldRiteRefused`)
+  B1furrow: ['B1(ii) a tradition of the fields where the food record names no grain and no farmland stands (G64)', 'CROSS'],
+});
+
+/**
+ * THE RETIRED ROWS, each BY NAME with its reason (never a silent zero: the register keeps its counts beside the
+ * row that replaced it). id → [the pattern, the reason, the row that replaced it].
+ * @type {Readonly<Record<string, readonly [string, string, string|null]>>}
+ */
+export const RETIRED_PAGE_CENSUS_ROWS = Object.freeze({
+  P2: ['2 the stores stated as two durations',
+    'two true quantities, by the owner\'s design: the Economy tab states what the stores hold at peace; the Defense line states what a siege would leave, and links to the stores row rather than restating its figure (lane DEFENSE-3; the chair\'s ruling of 2026-11-12)',
+    'P2siege'],
+  P3any: ['3 magic relied upon or common, and no practitioner on the rolls',
+    'it counted the words, not the explanation: a town whose temples or alchemists supply the magic it relies on has no arcane practitioner on its rolls and is no fault, and an envelope that reads magic common states no reliance (the chair\'s ruling of 2026-11-12)',
+    'P3source'],
+  P6: ['6 a gap naming what the imports bring',
+    'it read the true half as the fault: every gap it counted carries the record\'s own gap kind `missing`, and the good the Imports line printed beside it came from the terrain\'s list of needs, not from trade (REVIEW-W2A F1, 29 of 30 read true; the chair\'s ruling of 2026-11-13)',
+    'P6need'],
+  P5a: ['5a the hall "free of the criminals" beside criminal money reaching the officials',
+    'it counted every capture-pressure line beside a free hall, the true with the false: "each season it gets easier to buy an official" presumes no buyer, and at the stored state none 41 of the census\'s 585 towns hold an official who answers to a criminal house through their office, so the hall\'s rung cannot decide a line about officials (REVIEW-W2A F3; the chair\'s ruling of 2026-11-13)',
+    'P5false'],
+  // RETIRED WITH NO REPLACEMENT (the chair's ruling V13 of 2026-11-15, vetoable by the owner): a row whose sentence the
+  // corpus no longer prints, where the cure made its falsehood impossible, is a dead guard; the row's job went with the
+  // line. `null` names that no row replaces it.
+  P1a: ['1a the food verdict "only just" beside "grows more than it eats"',
+    'no line of the corpus says "only just" any more: DS-ECO-9 SECURE v3 was re-said "is fed, but what it keeps put by is not deep" (W2-WRITE-SIDE-ECO-3, e056fbfb), a claim of the stores only, its premise declared on the line (`stores: < 12`), which a surplus does not deny (the chair\'s ruling of 2026-11-15, V13)',
+    null],
+  P1b: ['1b "a small margin" beside a quarter or more bought in',
+    'no line of the corpus says "a small margin" any more: DS-ECO-9 SECURE v1 was re-said "has enough to eat, or near enough" (W2-WRITE-SIDE-ECO-3, e056fbfb), true across the band and of what the town eats, bought or grown (the chair\'s ruling of 2026-11-15, V13)',
+    null],
+});
+
+// ── the tree's own pools, as the counter reads them ──────────────────────────────────────────
+/** @param {string} t @returns {RegExp} */
+const toRe = (t) => new RegExp(t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/\\\{[a-z]+\\\}/g, '.+?').replace(/\btown\b/g, '(?:thorp|hamlet|village|town|city|metropolis)'));
+/**
+ * @param {unknown} corpus a corpus leaf (block id → block) @param {(key: string) => boolean} want
+ * @returns {Array<{ key: string, re: RegExp }>}
+ */
+function poolsOf(corpus, want) {
+  /** @type {Array<{ key: string, re: RegExp }>} */ const out = [];
+  for (const block of Object.values(obj(corpus))) {
+    for (const [key, variants] of Object.entries(obj(obj(block).pools))) {
+      if (want(key)) for (const v of arr(variants)) out.push({ key, re: toRe(s(obj(v).text)) });
+    }
+  }
+  return out;
+}
+/** @type {Array<{ re: RegExp, falseWhere: keyof typeof CRIME_LINE_FACTS }> | null} */ let crimeLines = null;
+/** Each declared crime line's printed form, and the fact that makes it false. */
+const declaredCrimeLines = () => {
+  if (crimeLines) return crimeLines;
+  /** @type {Record<string, unknown>} */ const corpora = { 'DS-POW-6': DOSSIER_STATE_PROSE_POWER, 'DS-DEF-4': DOSSIER_STATE_PROSE_DEFENSE };
+  crimeLines = [];
+  for (const [key, byVid] of Object.entries(CRIME_LINE_DISQUALIFIERS)) {
+    const blockId = key.slice(0, key.indexOf('::')); const pool = key.slice(key.indexOf('::') + 2);
+    const variants = arr(obj(obj(obj(corpora[blockId])[blockId]).pools)[pool]);
+    for (const [vid, d] of Object.entries(byVid)) {
+      const v = variants.find((x) => obj(x).vid === Number(vid));
+      if (v) crimeLines.push({ re: toRe(s(obj(v).text)), falseWhere: d.falseWhere });
+    }
+  }
+  return crimeLines;
+};
+/** The organised ring's note naming the officials it pays (`defenseDisplay.js :: ORGANIZED_RING_NOTES`). */
+const RING_BOUGHT = /bought officials|the officials it pays|pays officials in turn|bribed officials/;
+/** @type {Array<{ key: string, re: RegExp }> | null} */ let capturePools = null;
+/** @type {Array<{ key: string, re: RegExp }> | null} */ let beastPools = null;
+/** @type {Array<{ key: string, re: RegExp }> | null} */ let magicIncomePools = null;
+/** @type {Array<{ key: string, re: RegExp }> | null} */ let houseIncomePools = null;
+const pools = () => {
+  capturePools ??= poolsOf(DOSSIER_STATE_PROSE_POWER, (k) => /^capture pressure/.test(k));
+  beastPools ??= poolsOf(DOSSIER_STATE_PROSE_DEFENSE, (k) => /^Beasts & Monsters: /.test(k));
+  magicIncomePools ??= poolsOf(DOSSIER_STATE_PROSE_ECONOMY, (k) => k === 'INCOME WEIGHT: the practice of magic');
+  houseIncomePools ??= poolsOf(DOSSIER_STATE_PROSE_ECONOMY, (k) => k === 'INCOME WEIGHT: the religious houses');
+  return { capturePools, beastPools, magicIncomePools, houseIncomePools };
+};
+
+// ── the counter's readings ───────────────────────────────────────────────────────────────────
+/**
+ * The census's page phrases that name a defence thing, held in one table: they match PRINTED sentences, never the
+ * roster, so they are no reader of the defence facts (the defence-reader walker counts a name test written on its
+ * call line).
+ */
+const PAGE_PHRASES = Object.freeze({
+  holdTheGates: /hold the gates/,
+  noPerimeterWalls: /No perimeter walls/,
+  militaryFounder: /military|soldier|veteran|garrison|command|war\b/,
+});
+const FOUNDER = /^(was founded by|was settled by|was established by|was founded as|grew because a healer|grew because a famous navigator|was founded by religious|was built around a single family)/;
+/** @param {string} t */
+const founderKind = (t) => (PAGE_PHRASES.militaryFounder.test(t) ? 'military'
+  : /religious|hermit|monk|priest|church|temple/.test(t) ? 'religious' : /healer/.test(t) ? 'healer'
+    : /navigator|merchant|trade|consortium|coalition/.test(t) ? 'merchant' : /family|mill/.test(t) ? 'family'
+      : /noble|lord|crown|royal|imperial|decree/.test(t) ? 'noble' : 'other');
+const SMALL = new Set(['thorp', 'hamlet', 'village']);
+/** R24-A1: the visitor lines that say no healer stands here, by their ids in the pool the ruling names (their words are the pool's). */
+const NO_HEALER_IDS = Object.freeze(['H2', 'H3', 'H7', 'H8', 'H9']);
+/** @type {ReadonlyArray<Rec> | null} */ let noHealerLines = null;
+const noHealer = () => (noHealerLines ??= arr(OUTSIDER_IMPRESSIONS['services.healing']).map(obj).filter((l) => NO_HEALER_IDS.includes(s(l.id))));
+/** R24-A2: the lines that say people go short, by their pools and ids (the classing of CHAIN-1-LISTS (c), ruled in R24a;
+ * Dawn Work's food branch by R24c (c)); the words are the pools', a slot (`{market}`) read as any name. */
+/** @type {ReadonlyArray<Rec> | null} */ let shortageLines = null;
+/** @type {Map<string, RegExp>} */ const SHORT_RE = new Map();
+/** A line's printed form (its slots read as any name), compiled once. @param {string} t @returns {RegExp} */
+const printedForm = (t) => SHORT_RE.get(t) ?? SHORT_RE.set(t, toRe(t)).get(t) ?? toRe(t);
+const shortage = () => (shortageLines ??= [
+  ...['strained', 'critical', 'collapsed'].flatMap((b) => arr(obj(FOOD_CULTURE)[b]).map(obj)),
+  ...arr(COMMONER_RESENTMENTS.food).map(obj).filter((l) => !PRICE_LINES.includes(s(l.id))),
+  ...arr(OUTSIDER_IMPRESSIONS['services.food_production']).map(obj).filter((l) => ['F1', 'F2'].includes(s(l.id))),
+  ...arr(obj(DAWN_WORK).food).map(obj),
+]);
+/** THE MIRROR (R24d): the fare's lines of a fed band, by their pools (the words are the pools', a slot read as any name). */
+/** @type {ReadonlyArray<Rec> | null} */ let fedFareLines = null;
+const fedFare = () => (fedFareLines ??= ['surplus', 'surplus.wanting', 'adequate'].flatMap((b) => arr(obj(FOOD_CULTURE)[b]).map(obj)));
+/** The printed food bands a line of plenty may not stand beside (R24d). */
+const UNFED = new Set(['deficit', 'famine']);
+/** The food grievances that say food is dear and nobody goes short (CHAIN-1-LISTS (c): NEITHER). */
+const PRICE_LINES = Object.freeze(['F0', 'F6', 'F8']);
+/** The printed food bands that say the place is fed. */
+const FED = new Set(['secure', 'surplus']);
+const F4_TESTS = /** @type {const} */ ([
+  ['ore', 'Local ore feeds the smithy', /smith|forge|foundr|smelt|metal|armou?r|weapon/],
+  ['coal', 'Local coal fires the forges, ', /smith|forge|foundr|smelt|metal|armou?r|weapon/],
+  ['quarry', 'Local quarry provides dressed stone', /quarr|mason|stone/],
+  ['saw', 'managed felling and sawmilling', /sawmill|lumber|timber|carpent|wood|forest/],
+]);
+
+/**
+ * Every census row this dossier carries.
+ * @param {unknown} settlement the generated record
+ * @param {Views} views the rendered dossier: `'Group/Tab'` → its lines, in order
+ * @returns {CensusFinding[]}
+ */
+export function pageCensusFindings(settlement, views) {
+  const rec = obj(settlement);
+  const V = (/** @type {string} */ name) => views[name] || [];
+  const E = V('Systems/Economics'); const D = V('Systems/Defense'); const PW = V('Systems/Power'); const M = V('Systems/Magic');
+  const H = V('World/History'); const OV = V('Summary/Overview'); const NP = V('World/NPCs');
+  const all = Object.values(views).flat();
+  const econ = obj(rec.economicState);
+  const { capturePools: cap, beastPools: beast, magicIncomePools: mag, houseIncomePools: houses } = pools();
+  /** @type {CensusFinding[]} */ const out = [];
+  /** @param {string} row @param {() => readonly [unknown, unknown] | null | undefined | false} test */
+  const run = (row, test) => {
+    try {
+      const hit = test();
+      if (hit) out.push({ row, quote: s(hit[0]).slice(0, 230), detail: s(hit[1]).slice(0, 230) });
+    } catch (error) {
+      out.push({ row, quote: '', detail: `instrument threw: ${s(error instanceof Error ? error.message : error)}` });
+    }
+  };
+  const noArcane = D.some((l) => /No arcane practitioners on the rolls/.test(l));
+  // the live roster (a ruin is no working house; a birth carries none, so the census's counter reads the same)
+  const live = liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (rec));
+  const roster = live.map((i) => s(obj(i).name).toLowerCase());
+
+  run('P2siege', () => {
+    // the Food endurance line states what a siege does to the stores: outside a siege that is a condition, so a
+    // verb of the siege figure in the indicative (are lost, carries, feeds, stands) is the fault
+    const fe = D.find((l) => /^Food endurance:/.test(l));
+    if (!fe || obj(econ.foodSecurity).hasSiege) return null;
+    const verb = fe.match(/(?<!would )\b(?:are lost|carries|carry|feeds|stands|stand)\b/);
+    return verb ? [fe.slice(0, 160), `"${verb[0]}", not besieged`] : null;
+  });
+  run('P3source', () => {
+    // the Magic tab states a reliance; the Defense tab's rolls hold no practitioner; the reliance line names no source
+    const relLine = M.find((l) => /^Reliance on magic: (?:Relied upon|Integral)/.test(l));
+    if (!relLine) return null;
+    const at = relLine.indexOf(' · supplied by ');
+    if (at < 0) return noArcane ? [relLine, 'No arcane practitioners on the rolls'] : null;
+    // REVIEW-W2A F2: the source is named through the display seam, once, with no catalogue range or condition
+    const source = relLine.slice(at + 15);
+    if (/\(/.test(source)) return [relLine, 'a catalogue range or condition in the source'];
+    const names = source.replace(/ and /g, ', ').split(', ').map((n) => n.trim().toLowerCase()).filter(Boolean);
+    return new Set(names).size !== names.length ? [relLine, 'a house named twice in the source'] : null;
+  });
+  run('P4', () => {
+    const level = PW.find((l) => /Three powers stand almost level/.test(l));
+    if (!level) return null;
+    const f = arr(obj(rec.powerStructure).factions).map((x) => Number(obj(x).power)).sort((a, b) => b - a);
+    return f.length >= 3 && f[0] - f[2] > 10 ? [level.slice(level.indexOf('Three')).slice(0, 90), `powers ${f.join('/')}`] : null;
+  });
+  run('P5false', () => {
+    // a line of the crime desk (Power, Defense) whose declared fact this town makes false (crimeLineDisqualifiers.js),
+    // or the organised ring's note naming bought officials where the cast holds none
+    const facts = crimeLineFactsOf(/** @type {Parameters<typeof crimeLineFactsOf>[0]} */ (rec), 'dm'); // the owner's page: the DM's facts
+    const lines = [...PW, ...D];
+    for (const l of lines) {
+      const hit = declaredCrimeLines().find((c) => c.re.test(l) && CRIME_LINE_FACTS[c.falseWhere](facts));
+      if (hit) return [l, `${hit.falseWhere} (officials in pay ${facts.officialsInPay}, hall ${facts.captureState || 'absent'})`];
+      if (RING_BOUGHT.test(l) && CRIME_LINE_FACTS['no official in pay'](facts)) return [l, 'no official in pay'];
+    }
+    return null;
+  });
+  run('P5b', () => {
+    const diffuse = D.find((l) => /Criminal structure: Diffuse/i.test(l) || /books record no gang, guild or racket/.test(l));
+    const gangPower = PW.find((l) => /^Thieves' Guild|^Rival gangs|^Street gang|Thieves' Guild \(\d+\)|CriminalDominant|CriminalStrong|CriminalMinor|CriminalMajor/.test(l));
+    const gangDefense = D.find((l) => /^Underworld: /.test(l));
+    return diffuse && (gangPower || gangDefense) ? [diffuse, `Power: ${gangPower || ''} / Defense: ${gangDefense || ''}`] : null;
+  });
+  run('P6need', () => {
+    // the Imports line prints a good the record NEEDS and no trade brings (the terrain's need list, never an
+    // arrival: `importsAsPrinted(record).needed`), by the label the pills print
+    const at = E.indexOf('Imports'); const line = at >= 0 ? E[at + 1] || '' : '';
+    if (!line) return null;
+    const { needed } = importsAsPrinted(/** @type {Parameters<typeof importsAsPrinted>[0]} */ (rec));
+    const hit = needed.find((n) => line.toLowerCase().includes(resourceDisplayName(n).toLowerCase()));
+    return hit ? [`Imports: ${line}`, `${resourceDisplayName(hit)}: needed, and no trade brings it`] : null;
+  });
+  const origin = (H.find((l) => /^Origin:/.test(l)) || '').replace('Origin:', '');
+  run('P7a', () => {
+    const by = (H.find((l) => /^Founded by:/.test(l)) || '').replace('Founded by:', '');
+    return origin && by && FOUNDER.test(origin) && !/^was founded as/.test(origin) && founderKind(origin) !== founderKind(by) ? [`Origin: ${origin}`, `Founded by: ${by}`] : null;
+  });
+  run('P7b', () => {
+    const first = OV[OV.indexOf('Settlement Origin▲') + 1] || '';
+    return /wharf/.test(first) && /trading port|maritime hub|naval base|natural harbour|shipwright/.test(origin) ? [first, `Origin: ${origin}`] : null;
+  });
+  run('P8any', () => {
+    const noChurch = all.find((l) => /has no church of its own/.test(l));
+    if (!noChurch) return null;
+    const income = E.find((l) => houses.some((p) => p.re.test(l)));
+    const at = E.findIndex((l) => /^Faith & Worship/.test(l));
+    const flow = at >= 0 && /Running|Operational/.test(E[at]) ? `${E[at]} · ${E[at + 2] || ''}` : null;
+    return income || flow ? [income || flow, noChurch] : null;
+  });
+  run('P9', () => {
+    const at = D.indexOf('Beasts & Monsters');
+    if (at < 0) return null;
+    const rating = (D[at + 1] || '').replace(/[▲▼]/g, ''); const text = D[at + 2] || ''; const p = beast.find((x) => x.re.test(text));
+    return p && /settled/.test(p.key) && /Critical|Weak/.test(rating) ? [`Beasts & Monsters: ${rating}`, `[${p.key}] ${text}`] : null;
+  });
+  run('P10', () => {
+    const gates = all.find((l) => PAGE_PHRASES.holdTheGates.test(l));
+    const unwalled = all.some((l) => PAGE_PHRASES.noPerimeterWalls.test(l));
+    return gates && unwalled ? [gates, 'Unfortified. No perimeter walls.'] : null;
+  });
+  run('P11', () => {
+    const near = new Set(arr(obj(rec.config).nearbyResources).map(s));
+    for (const chain of arr(econ.activeChains).map(obj)) {
+      const resource = s(chain.resource); const key = s(chain.resourceKey);
+      if (!resource || !key || near.has(key)) continue;
+      const l = E.find((x) => x === resource || x.startsWith(`${resource} ·`) || x.startsWith(`${resource} (`));
+      if (l) return [`${s(chain.label)}: From ${l}`, `nearbyResources: ${[...near].join(', ')}`];
+    }
+    return null;
+  });
+  run('F4', () => {
+    for (const [kind, needle, re] of F4_TESTS) {
+      const l = E.find((x) => x.includes(needle));
+      if (l && !roster.some((n) => re.test(n))) return [l.slice(0, 120), `${kind}: the roster has none matching ${re}`];
+    }
+    return null;
+  });
+  run('P13', () => {
+    const l = all.find((x) => /more slowly and less comfortably and go on\./.test(x));
+    return l ? [l, ''] : null;
+  });
+  run('P14', () => {
+    if (!SMALL.has(s(rec.tier))) return null;
+    const words = all.find((l) => /urban food supply|dense populations/.test(l));
+    const districts = all.find((l) => l !== OV[1] && /\bdistricts?\b|whole quarters/i.test(l) && !/\(district\)/.test(l));
+    return words || districts ? [words || districts, `tier ${s(rec.tier)}`] : null;
+  });
+  run('P16three', () => {
+    const at = PW.findIndex((l) => /^The ruling three of/.test(l));
+    if (at < 0) return null;
+    const n = ['Head ·', 'Second ·', 'Third ·'].filter((h, i) => (PW[at + 1 + i] || '').startsWith(h)).length;
+    return n < 3 ? [PW[at], PW.slice(at + 1, at + 4).join(' | ')] : null;
+  });
+  run('P16powers', () => {
+    const counts = PW.filter((l) => /^The Powers \(\d+\)/.test(l));
+    return counts.length >= 2 && new Set(counts).size > 1 ? [counts[0], counts[1]] : null;
+  });
+  run('P17', () => {
+    const at = E.indexOf('Produced locally'); const produced = at >= 0 ? E[at + 1] || '' : '';
+    const named = NOT_A_GOOD.map((x) => s(x).toLowerCase()).filter((x) => produced.toLowerCase().includes(x));
+    const access = produced.match(/[a-z ]*access|[A-Z][a-z]+ services/g) || [];
+    return named.length || access.length ? [`Produced locally: ${produced}`, [...new Set([...named, ...access])].join(', ')] : null;
+  });
+  run('P18', () => {
+    const npc = NP.find((l) => /\((\d+)-(\d+)\)/.test(l));
+    if (npc) return [npc, 'a count range on the people page'];
+    for (const chain of arr(econ.activeChains).map(obj)) {
+      if (arr(chain.processingInstitutions).some((p) => /\(\d+-\d+\)/.test(institutionDisplayName(/** @type {string} */ (p))))) return [s(chain.label), 'a count range through the display name'];
+    }
+    return null;
+  });
+  run('P19', () => {
+    const l = all.find((x) => /operating on stockpiles only/.test(x));
+    return l ? [l, ''] : null;
+  });
+  run('P20', () => {
+    const l = D.find((x) => /under siege the outlying fields are lost/i.test(x));
+    return l && !obj(econ.foodSecurity).hasSiege ? [l.slice(0, 120), 'not besieged'] : null;
+  });
+  run('NEW1', () => {
+    const head = OV[1] || ''; const at = OV.indexOf('Defense'); const verdict = at >= 0 ? OV[at + 1] || '' : '';
+    if (/underdefended/.test(head) && /^(Defensible|Well-defended|Fortress)$/.test(verdict)) return [head.slice(head.lastIndexOf('·')), `Defense ${verdict}`];
+    if (/strong military presence/.test(head) && /^(Undefended|Lightly defended|Vulnerable)$/.test(verdict)) return [head.slice(head.lastIndexOf('·')), `Defense ${verdict}`];
+    return null;
+  });
+  run('NEW2', () => {
+    const l = E.find((x) => mag.some((p) => p.re.test(x)));
+    return l && noArcane ? [l, 'No arcane practitioners on the rolls'] : null;
+  });
+  run('NOHEAL', () => {
+    // R24-A1: the page says no one tends the sick, and the record holds sick care at hand (the one reading)
+    const said = all.find((l) => noHealer().some((line) => l.includes(s(line.text))));
+    if (!said || !sickCareOf(/** @type {import('../facts/sickCare.js').SickCareRecord} */ (rec))) return null;
+    const care = residentSickCareOf(/** @type {import('../facts/sickCare.js').SickCareRecord} */ (rec));
+    return [said, care.length ? care.map((row) => `${row.name} @ ${row.institution}`).join('; ') : 'a sick house by name'];
+  });
+  run('FOODSEC', () => {
+    // R24-A2: the page says people go short, and its own Food Security prints the place fed
+    const printed = s(famineOf(/** @type {Parameters<typeof famineOf>[0]} */ (rec)).shownBand);
+    if (!FED.has(printed)) return null;
+    const said = all.find((l) => shortage().some((line) => printedForm(s(line.text)).test(l)));
+    return said ? [said, `Food Security prints ${printed}`] : null;
+  });
+  run('FEDFARE', () => {
+    // THE MIRROR (R24d): the fare says the place is fed, and its own Food Security prints Deficit or Famine
+    const printed = s(famineOf(/** @type {Parameters<typeof famineOf>[0]} */ (rec)).shownBand);
+    if (!UNFED.has(printed)) return null;
+    const said = all.find((l) => fedFare().some((line) => printedForm(s(line.text)).test(l)));
+    return said ? [said, `Food Security prints ${printed}`] : null;
+  });
+  run('B1land', () => {
+    // a house printed on the page that the land withholds here (domain/landWithholding.js: the desert withholds fish, timber,
+    // game and furs; a port or river route, an entrepot route (furs) or a native nearby resource gives them back). A house the
+    // USER forced (`source: 'forced'`) is the user's to keep: never reported (B1(i)c, G52)
+    const config = obj(rec.config);
+    const land = { terrainType: s(config.terrainType), tradeRoute: s(config.tradeRouteAccess), nearbyResources: nativeSemanticResourceKeys(config) };
+    for (const house of live) {
+      const name = s(obj(house).name);
+      if (obj(house).source === 'forced') continue;
+      if (!name || !landWithholdsHouse(land, /** @type {Parameters<typeof landWithholdsHouse>[1]} */ (house))) continue;
+      const l = all.find((x) => x.includes(name));
+      if (l) return [l, `${name}: ${land.terrainType}, route ${land.tradeRoute || 'none'}, resources ${land.nearbyResources.join(', ') || 'none'}`];
+    }
+    return null;
+  });
+  run('B1furrow', () => {
+    // B1(ii) (G64): the Traditions tab prints a field tradition (its glyph on its own line) where the rule refuses one: a
+    // record this engine bore, its food record naming its sources and none of them grain, no farmland on the roster
+    if (!fieldRiteRefused(rec)) return null;
+    const glyph = motifGlyph('field');
+    const l = V('World/Traditions').find((x) => x === glyph);
+    return l ? [l, 'a tradition of the fields: no grain among the food sources, no farmland'] : null;
+  });
+  return out;
+}
+
+/**
+ * The rendered dossier's views from a battery's surfaces: a surface whose id is `'Group/Tab'` is one view
+ * (its text split into lines); every other surface is not a view and is not read here.
+ * @param {Readonly<Record<string, string>>} surfaces
+ * @returns {Views}
+ */
+export function viewsOfSurfaces(surfaces) {
+  /** @type {Record<string, string[]>} */ const out = {};
+  for (const [id, text] of Object.entries(surfaces || {})) if (id.includes('/')) out[id] = s(text).split('\n');
+  return out;
+}

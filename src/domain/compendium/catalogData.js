@@ -56,7 +56,7 @@ export const ARCHETYPES = [
   { cat:'Criminal', name:'Merchant-Criminal Blur',cond:'Economy ≥65, Criminal ≥58',                  desc:'Legitimate and criminal commerce are indistinguishable. Guilds run protection.' },
   { cat:'Criminal', name:'Lawless Frontier',      cond:'Criminal ≥60, Military ≤30',                 desc:'Beyond the reach of law. Survival is personal.' },
   { cat:'Balanced', name:'Safe Province Capital', cond:'All sliders 40-65, threat: heartland',            desc:'Stable, diverse, prosperous. The baseline of successful governance.' },
-  { cat:'Balanced', name:'Balanced',              cond:'No slider exceeds 60',                        desc:'No dominant faction. Power distributed. Politics negotiated.' },
+  { cat:'Balanced', name:'Balanced',              cond:'No slider exceeds 60',                        desc:'No one power dominates. Strength is spread; politics is negotiated.' },
   { cat:'Balanced', name:'Merchant Hunters Lodge',cond:'Military ≥60, threat: plagued',            desc:'Organized monster hunters are a significant institution.' },
   { cat:'Balanced', name:'Mining Colony',         cond:'Resource: ore or stone nearby, isolated',    desc:'Exists to extract a resource. Company-town dynamics.' },
   { cat:'Balanced', name:'Plague of Beasts',      cond:'Stress: Beast & Raider Threat active',              desc:'Under active monster pressure. Civilian life constrained to fortified areas.' },

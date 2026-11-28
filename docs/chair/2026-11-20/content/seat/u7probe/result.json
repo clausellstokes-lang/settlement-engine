@@ -1,0 +1,114 @@
+{
+ "SEAT_CONTEST_LIT": true,
+ "pool": "germanic village/town/city/metropolis x 40, seeds u7p-<size>-<i>, birthConfig (lit)",
+ "roads": {
+  "dm": {
+   "births": 160,
+   "lawTwo": 160,
+   "transfers": 155,
+   "keptForm": 10,
+   "chainNamesPerson": 10,
+   "chainPersonOldHouse": 6,
+   "chainPersonNewHouse": 4,
+   "chainPersonNeither": 0,
+   "strataGoverningIsForm": 0
+  },
+  "coup": {
+   "births": 160,
+   "lawTwo": 160,
+   "transfers": 155,
+   "keptForm": 1,
+   "chainNamesPerson": 1,
+   "chainPersonOldHouse": 0,
+   "chainPersonNewHouse": 1,
+   "chainPersonNeither": 0,
+   "strataGoverningIsForm": 0
+  }
+ },
+ "examples": [
+  {
+   "seed": "u7p-village-18",
+   "road": "dm",
+   "form": "Elder Council",
+   "holderBefore": null,
+   "holderAfter": "Merchant Guilds",
+   "chainPower": "Elder Council",
+   "chainPerson": "Ortlieb Lange",
+   "chainRole": "the head shepherd and Elder",
+   "personHouses": [
+    "Elder Council",
+    "Merchant Guilds"
+   ]
+  },
+  {
+   "seed": "u7p-village-18",
+   "road": "coup",
+   "form": "Elder Council",
+   "holderBefore": null,
+   "holderAfter": "Merchant Guilds",
+   "chainPower": "Elder Council",
+   "chainPerson": "Ortlieb Lange",
+   "chainRole": "the head shepherd and Elder",
+   "personHouses": [
+    "Elder Council",
+    "Merchant Guilds"
+   ]
+  },
+  {
+   "seed": "u7p-town-1",
+   "road": "dm",
+   "form": "Town Council",
+   "holderBefore": null,
+   "holderAfter": "Merchant Guilds",
+   "chainPower": "Town Council",
+   "chainPerson": "Konrad Berger",
+   "chainRole": "the mine captain and Mayor",
+   "personHouses": [
+    "Merchant Guilds",
+    "Town Council"
+   ]
+  },
+  {
+   "seed": "u7p-town-3",
+   "road": "dm",
+   "form": "Town Council",
+   "holderBefore": null,
+   "holderAfter": "Merchant Guilds",
+   "chainPower": "Town Council",
+   "chainPerson": "Diemut Forster",
+   "chainRole": "the mine captain and Mayor",
+   "personHouses": [
+    "Merchant Guilds",
+    "Town Council"
+   ]
+  },
+  {
+   "seed": "u7p-town-8",
+   "road": "dm",
+   "form": "Town Mayor",
+   "holderBefore": "Craft Guilds",
+   "holderAfter": "Merchant Guilds",
+   "chainPower": "Town Mayor",
+   "chainPerson": "Judith Weber",
+   "chainRole": "the smelt master and Mayor",
+   "personHouses": [
+    "Craft Guilds",
+    "Town Mayor"
+   ]
+  },
+  {
+   "seed": "u7p-town-21",
+   "road": "dm",
+   "form": "Town Council",
+   "holderBefore": null,
+   "holderAfter": "Merchant Guilds",
+   "chainPower": "Town Council",
+   "chainPerson": "Heinrich Schäfer",
+   "chainRole": "the mine captain and Mayor",
+   "personHouses": [
+    "Merchant Guilds",
+    "Town Council"
+   ]
+  }
+ ]
+}

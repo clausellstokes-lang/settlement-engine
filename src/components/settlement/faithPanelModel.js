@@ -26,7 +26,7 @@ import { faithDeepeningOf } from '../../domain/display/faithDeepening.js';
 // LANE FAITH (2026-11-03) — ONE FAITH READING: the church generation wrote (houses, the
 // religious faction, the senior cleric, the tithe, the dial), derived once in the domain leaf
 // and carried on this model, so every faith surface reads the same record.
-import { faithLinesOf, faithReadingOf } from '../../domain/dossier/faithReading.js';
+import { faithHintOf, faithLinesOf, faithReadingOf } from '../../domain/dossier/faithReading.js';
 import { tierNounFor } from '../../domain/display/stateProse/weaveBlock.js';
 
 /** @param {unknown} x @param {number} [fallback] @returns {number} */
@@ -94,14 +94,14 @@ export function pietyTrend(local01, target) {
 // The faithProfile.piety.causes[] name the drivers; W-F6 renders them as prose.
 // The three STRUCTURAL inputs (authority / institutions / devotion) render as
 // bars, not sentences; these are the ARC drivers — why devotion is moving.
-const CAUSE_SENTENCE = Object.freeze({
+export const CAUSE_SENTENCE = Object.freeze({
   conduct_drift: 'The town no longer lives like its god. Devotion is ebbing.',
   conduct_alignment: 'The town lives by its god’s creed. Devotion runs deep.',
   clergy_distortion: 'A compromised priesthood distorts the faith’s reach. The god arrives through bad priests.',
   opposed_rivals: 'The patron’s word is muted. An opposed rival presses close behind the seat.',
 });
 const STRUCTURAL_SOURCES = new Set(['religious_authority', 'institutions', 'devotion']);
-const STRUCTURAL_LABEL = Object.freeze({
+export const STRUCTURAL_LABEL = Object.freeze({
   religious_authority: 'Religious authority',
   institutions: 'Temples & orders',
   devotion: 'Patron devotion',
@@ -181,12 +181,14 @@ function pietyModel(piety) {
 }
 
 /**
- * Build the faith display model for a settlement. Returns `{ hasEmbed: false, reading, line }`
+ * Build the faith display model for a settlement. Returns `{ hasEmbed: false, reading, line, hint }`
  * when the settlement carries no active patron (the deity-free case, which is every generated
  * settlement: the gods are the DM's custom content). `reading` is the ONE FAITH READING
  * (domain/dossier/faithReading.js :: faithReadingOf) and `line` is what the page says about the
  * faith that exists (faithLinesOf): the church beside a church, the walk to the neighbour's
- * church where there is only access, the quiet observances where there is nothing. Otherwise a
+ * church where there is only access, the quiet observances where there is nothing; `hint` is the
+ * DM's note that the god and the church's name are theirs to set (faithHintOf), printed UNDER the
+ * line by every reader, never joined into it (SW-6, R5), and null where there is no church. Otherwise a
  * full model: the patron + cults (static, always), plus the LIVE fields (ranks, piety,
  * unaffiliated, legitimacy, mandate) when a faithProfile has been projected, and the same
  * `reading` with the embed as its deity.
@@ -198,7 +200,7 @@ export function faithPanelModel(settlement) {
   const patronSnap = config.primaryDeitySnapshot || null;
   if (!patronSnap || typeof patronSnap !== 'object') {
     const reading = faithReadingOf(settlement);
-    return { hasEmbed: false, reading, line: faithLinesOf(reading, { tierNoun: tierNounFor(settlement?.tier) }) };
+    return { hasEmbed: false, reading, line: faithLinesOf(reading, { tierNoun: tierNounFor(settlement?.tier) }), hint: faithHintOf(reading) };
   }
 
   const cultsSnap = Array.isArray(config.cultDeitySnapshots) ? config.cultDeitySnapshots : [];

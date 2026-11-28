@@ -1,0 +1,18 @@
+ FAIL  tests/build/engineBundleReplay.test.js > engine bundle replay — the bundle generates what the app generates > every golden-corpus config: the committed bundle's settlement JSON equals the in-process pipeline's, byte for byte
+ FAIL  tests/build/engineBundleReplay.test.js > engine bundle replay — the bundle generates what the app generates > the espionage fence's 360-settlement driven corpus: bundle equals in-process byte for byte, and its hash meets the fence constant (known-stale rule)
+ FAIL  tests/build/engineBundleReplay.test.js > engine bundle replay — the bundle generates what the app generates > the engine-generate birth: for the three service cases, the bundle's stamped birth equals the in-process birth under the STORE's runtime
+ FAIL  tests/generators/foodDiversity.test.js > FOOD-3 — food diversity > every listed source traces to a firing pairing, and every firing pairing is listed, over 120 seeds
+ FAIL  tests/lint/factLayers.walker.test.js > the layer table covers every leaf and every pool > every vocabulary dimension's home and every factsOf getter has a leaf row
+ FAIL  tests/lint/factLayers.walker.test.js > nothing reads at or above its own layer (shrink-only) > READERS: every file reads exactly its banked LINES (by content, each with its reason), and no file reads outside the register
+ FAIL  tests/lint/observedShapeReaders.walker.test.js > reader-with-no-writer ratchet: the EXECUTED corpus > the producers ran and the corpus is not empty
+ FAIL  tests/lint/observedShapeReaders.walker.test.js > reader-with-no-writer ratchet: the live scan > SHRINK-ONLY: no file exceeds its frozen ceiling, and no row has vanished
+ FAIL  tests/lint/observedShapeReaders.walker.test.js > reader-with-no-writer ratchet: the live scan > THE ERASURE GUARD: no frozen row has vanished from the DETECTOR while its read still stands
+ FAIL  tests/lint/observedShapeReaders.walker.test.js > reader-with-no-writer ratchet: the live scan > A1/A7: schema-7 filters narrow ordinary noise while explained writers stay banked live
+ FAIL  tests/lint/observedShapeReaders.walker.test.js > reader-with-no-writer ratchet: the live scan > the UNREVIEWED-UI cohort is ENFORCED, banked, and exactly its measured size
+ FAIL  tests/lint/siteCoherenceRatchet.test.js > site-coherence contradiction ratchet (Wave 0 — inventory freezing, never correctness) > C1 — the live row set equals the frozen baseline in both directions
+ FAIL  tests/domain/famineStoresOneRounding.test.js > rung 2D · the held granary and the stores line read one rounding > soak1k-1582, -2452, -2962: a famine granary printed as six months is held, and the page says so
+ FAIL  tests/domain/townCartographyCalibration.test.js > W2 the frozen measurement is re-measured live > every sampled row reproduces its manifest record exactly
+ FAIL  tests/domain/townCartographyCalibration.test.js > W8 the drawn corpus does not repeat itself > LIVE: each tier's argmax row re-measures at ZERO stacked buildings, and matches its record
+ FAIL  tests/domain/worldFactRederive.test.js > EM-B2b — world facts by consequence: the route, the refusals and the stated radius > A7 — THE GOLDENS CANNOT SEE ANY OF IT: both fixtures are byte-identical and a no-layer re-derivation is still the committed golden
+ Test Files  8 failed | 537 passed | 1 skipped (546)
+      Tests  16 failed | 5992 passed | 9 skipped (6017)

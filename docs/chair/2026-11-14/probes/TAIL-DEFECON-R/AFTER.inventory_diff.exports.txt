@@ -1,0 +1,9 @@
+sentences: before 35781 after 35781 · gone 0 · new 0 · in fewer towns 3 · in more towns 0 · moved 0
+ GONE (widest):
+ IN FEWER TOWNS (largest loss):
+    184 ->   11  No grapes reach the vintner.
+    487 ->  418  GAPS & OPPORTUNITIES
+     13 ->    1  No glass sand reaches the glassblower.
+ NEW (widest):
+ IN MORE TOWNS (largest gain):
+ THE INHERITORS (print now, and did not, in a town that lost a sentence): 0 sentences

@@ -48,14 +48,14 @@ describe('divine food tradition requires a world where magic functions (Wave 5 #
   it('control: in a magic world the blessed-granaries supplement fires and is visible', () => {
     const grain = depletedGrainVillage(50).find(c => c.chainId === 'grain');
     expect(grain).toBeTruthy();
-    expect(grain.magicNote).toBe('Temple granaries blessed; divine provision fills the gap');
+    expect(grain.magicNote).toBe('Blessed stores; divine provision fills the gap');
     expect(grain.magicRecovery).toBe(0.40);
     expect(grain.exportable).toBe(false); // supplement feeds locals, never exports
   });
 
   it('the divine supplement fires at ANY magic-enabled dial (>= 1) — no behavior change for magic worlds', () => {
     const grain = depletedGrainVillage(1).find(c => c.chainId === 'grain');
-    expect(grain.magicNote).toBe('Temple granaries blessed; divine provision fills the gap');
+    expect(grain.magicNote).toBe('Blessed stores; divine provision fills the gap');
   });
 
   it('dead-magic world (dial 0): religion stays, divine provision does not', () => {
@@ -147,7 +147,7 @@ describe('generation-level pins (Wave 5 #3)', () => {
     // ids inside this exact payload so a truncated or short-circuited serialization
     // reds here rather than passing all three leak scans below.
     expect(json).toContain(`"chainId":"${chains[0].chainId}"`);
-    expect(json).not.toMatch(/Temple granaries blessed/i); // anchored: chain-id pin above
+    expect(json).not.toMatch(/Blessed stores; divine provision/i); // anchored: chain-id pin above (COHERENCE-PRESUME re-keyed the note by identity)
     expect(json).not.toMatch(/magically.sustained/i); // anchored: chain-id pin above
     expect(json).not.toMatch(/divine provision/i); // anchored: chain-id pin above
   });

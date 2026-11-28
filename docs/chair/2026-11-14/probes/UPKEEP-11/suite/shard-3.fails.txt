@@ -1,0 +1,8 @@
+ FAIL  tests/edgeFunctions/aiGroundingBundle.freshness.test.js > Tier 6.8 — aiGrounding bundle is fresh > the current source tree matches the recorded hash (regenerate via npm run build:edge-shared)
+ FAIL  tests/generators/captureBirthScale.test.js > birth-scale distribution sweep > overwhelming criminal presence reads contested/influenced at birth
+ FAIL  tests/lint/mutationCoverageManifest.test.js > mutation-coverage manifest — the totality contract (E-A) > TOTALITY: every enumerated invariant file has a manifest entry
+ FAIL  tests/lint/rawColorLiteral.test.js > raw-color-literal occurrence budget (A+ design-a11y.1) > raw-color literals match the committed budget exactly
+ FAIL  tests/lint/seedLoopTotality.walker.test.js > seed-loop totality walker (habitat removal) > no NEW bare seed loop anywhere in the test corpus
+ FAIL  tests/lint/seedLoopTotality.walker.test.js > seed-loop totality walker (habitat removal) > the generation-facing quarantine is EXACT (a new, grown or unbanked offender reds)
+ Test Files  5 failed | 541 passed (546)
+      Tests  6 failed | 5724 passed | 15 skipped (5745)

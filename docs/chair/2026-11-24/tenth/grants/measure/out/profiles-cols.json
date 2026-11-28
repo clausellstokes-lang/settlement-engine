@@ -1,0 +1,232 @@
+[
+ {
+  "col": "tier",
+  "type": "text",
+  "verdict": "blocked",
+  "tries": [
+   "'premium' -> new row violates row-level security policy for table \"profiles\"",
+   "'probe-x' -> new row violates row-level security policy for table \"profiles\"",
+   "null -> new row violates row-level security policy for table \"profiles\""
+  ]
+ },
+ {
+  "col": "credits",
+  "type": "integer",
+  "verdict": "blocked",
+  "tries": [
+   "coalesce(credits,0)+1 -> new row violates row-level security policy for table \"profiles\"",
+   "0 -> new row violates row-level security policy for table \"profiles\"",
+   "null -> new row violates row-level security policy for table \"profiles\""
+  ]
+ },
+ {
+  "col": "created_at",
+  "type": "timestamp with time zone",
+  "verdict": "CHANGED",
+  "tries": [
+   "null -> null value in column \"created_at\" of relation \"profiles\" violates not-null constraint",
+   "now() + interval '1 day' -> ok"
+  ]
+ },
+ {
+  "col": "updated_at",
+  "type": "timestamp with time zone",
+  "verdict": "CHANGED",
+  "tries": [
+   "null -> ok"
+  ]
+ },
+ {
+  "col": "role",
+  "type": "text",
+  "verdict": "blocked",
+  "tries": [
+   "'support' -> new row violates row-level security policy for table \"profiles\"",
+   "'developer' -> new row violates row-level security policy for table \"profiles\"",
+   "'admin' -> new row violates row-level security policy for table \"profiles\"",
+   "'probe-x' -> new row violates row-level security policy for table \"profiles\"",
+   "null -> new row violates row-level security policy for table \"profiles\""
+  ]
+ },
+ {
+  "col": "display_name",
+  "type": "text",
+  "verdict": "CHANGED",
+  "tries": [
+   "'probe-x' -> ok"
+  ]
+ },
+ {
+  "col": "email",
+  "type": "text",
+  "verdict": "blocked",
+  "tries": [
+   "'probe-x' -> new row violates row-level security policy for table \"profiles\"",
+   "null -> new row violates row-level security policy for table \"profiles\""
+  ]
+ },
+ {
+  "col": "is_founder",
+  "type": "boolean",
+  "verdict": "blocked",
+  "tries": [
+   "true -> new row violates row-level security policy for table \"profiles\""
+  ]
+ },
+ {
+  "col": "avatar_url",
+  "type": "text",
+  "verdict": "CHANGED",
+  "tries": [
+   "'probe-x' -> ok"
+  ]
+ },
+ {
+  "col": "email_notifications",
+  "type": "boolean",
+  "verdict": "CHANGED",
+  "tries": [
+   "false -> ok"
+  ]
+ },
+ {
+  "col": "model_preference",
+  "type": "text",
+  "verdict": "CHANGED",
+  "tries": [
+   "'anthropic_claude_sonnet_4_6' -> ok"
+  ]
+ },
+ {
+  "col": "stripe_customer_id",
+  "type": "text",
+  "verdict": "blocked",
+  "tries": [
+   "'probe-x' -> new row violates row-level security policy for table \"profiles\"",
+   "'probe' -> new row violates row-level security policy for table \"profiles\""
+  ]
+ },
+ {
+  "col": "premium_downgraded_at",
+  "type": "timestamp with time zone",
+  "verdict": "CHANGED",
+  "tries": [
+   "now() -> ok"
+  ]
+ },
+ {
+  "col": "premium_retention_expires_at",
+  "type": "timestamp with time zone",
+  "verdict": "CHANGED",
+  "tries": [
+   "now() -> ok"
+  ]
+ },
+ {
+  "col": "telemetry_consent",
+  "type": "jsonb",
+  "verdict": "CHANGED",
+  "tries": [
+   "'{\"probe\":1}' -> ok"
+  ]
+ },
+ {
+  "col": "disabled_at",
+  "type": "timestamp with time zone",
+  "verdict": "blocked",
+  "tries": [
+   "now() -> new row violates row-level security policy for table \"profiles\""
+  ]
+ },
+ {
+  "col": "banned_at",
+  "type": "timestamp with time zone",
+  "verdict": "blocked",
+  "tries": [
+   "now() -> new row violates row-level security policy for table \"profiles\""
+  ]
+ },
+ {
+  "col": "deleted_at",
+  "type": "timestamp with time zone",
+  "verdict": "blocked",
+  "tries": [
+   "now() -> new row violates row-level security policy for table \"profiles\""
+  ]
+ },
+ {
+  "col": "account_number",
+  "type": "text",
+  "verdict": "blocked",
+  "tries": [
+   "'probe-x' -> new row violates row-level security policy for table \"profiles\"",
+   "null -> new row violates row-level security policy for table \"profiles\""
+  ]
+ },
+ {
+  "col": "external_name",
+  "type": "text",
+  "verdict": "blocked",
+  "tries": [
+   "'probe-x' -> new row violates row-level security policy for table \"profiles\"",
+   "null -> new row violates row-level security policy for table \"profiles\""
+  ]
+ },
+ {
+  "col": "first_name",
+  "type": "text",
+  "verdict": "CHANGED",
+  "tries": [
+   "'probe-x' -> ok"
+  ]
+ },
+ {
+  "col": "last_name",
+  "type": "text",
+  "verdict": "CHANGED",
+  "tries": [
+   "'probe-x' -> ok"
+  ]
+ },
+ {
+  "col": "preferred_name",
+  "type": "text",
+  "verdict": "CHANGED",
+  "tries": [
+   "'probe-x' -> ok"
+  ]
+ },
+ {
+  "col": "stripe_subscription_id",
+  "type": "text",
+  "verdict": "blocked",
+  "tries": [
+   "'probe-x' -> new row violates row-level security policy for table \"profiles\"",
+   "'probe' -> new row violates row-level security policy for table \"profiles\""
+  ]
+ },
+ {
+  "col": "free_narrative_claimed_at",
+  "type": "timestamp with time zone",
+  "verdict": "CHANGED",
+  "tries": [
+   "null -> ok"
+  ]
+ },
+ {
+  "col": "founder_credit_listed",
+  "type": "boolean",
+  "verdict": "CHANGED",
+  "tries": [
+   "true -> ok"
+  ]
+ },
+ {
+  "col": "public_identity_opt_in",
+  "type": "boolean",
+  "verdict": "CHANGED",
+  "tries": [
+   "true -> ok"
+  ]
+ }
+]

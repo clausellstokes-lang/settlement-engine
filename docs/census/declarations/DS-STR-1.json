@@ -1,0 +1,1494 @@
+{
+ "poolId": "DS-STR-1",
+ "source": "src/data/dossierStateProse/stressors.generated.js (annex docs/content/RECEIPT_POOLS_DOSSIER_STATE.md)",
+ "drawKind": "K",
+ "drawSite": "crisisBannerRung (per banner) / stressorsStateProse (arity, framing) → composeStateProse → readStateProse → eligibleVariants → drawVariant (src/domain/display/stateProse/stressorsStateProse.js)",
+ "pools": [
+  {
+   "pool": "UNDER SIEGE",
+   "keyGuarantees": "stress[].type === \"under_siege\" (banner UNDER SIEGE) is on the record: crisis under_siege is active (threat and hunger families both on).",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": [
+    "under_siege"
+   ],
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Keyed on crisis under_siege: opted in with poolCrisis; lines inherit it and declare only what they presume beyond the key.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "Nothing moves through the gates. {settlement} lives on what is already inside the walls, and counts it daily.",
+     "needs": [
+      "walls",
+      "gate"
+     ],
+     "excludes": [
+      "crisis: mass_migration"
+     ],
+     "crisis": [
+      "under_siege"
+     ],
+     "colour": false,
+     "stop": [],
+     "note": "\"through the gates\"; \"nothing moves\" denies arrivals"
+    },
+    {
+     "lineId": "vid:2",
+     "text": "The walls are held from outside; the fields beyond them have not been worked since the lines closed.",
+     "needs": [
+      "walls"
+     ],
+     "excludes": [],
+     "crisis": [
+      "under_siege"
+     ],
+     "colour": false,
+     "stop": [
+      "food sources (fields worked / harvest)"
+     ]
+    },
+    {
+     "lineId": "vid:3",
+     "text": "Trade stops at the gate rather than the market now. The siege decides what the town eats.",
+     "needs": [
+      "gate",
+      "market"
+     ],
+     "excludes": [],
+     "crisis": [
+      "under_siege"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "vid:4",
+     "text": "{settlement} is shut, and the shutting is not the town's decision; every arrangement inside the walls has been rebuilt around the gates staying closed.",
+     "needs": [
+      "walls",
+      "gate"
+     ],
+     "excludes": [],
+     "crisis": [
+      "under_siege"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "vid:5",
+     "text": "{settlement}'s stores are being counted daily and issued against a list, and the list is shorter than the town.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "under_siege"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:6",
+     "text": "Nobody goes in or out of {settlement}, and the walls have people on them at hours walls do not normally have people on them.",
+     "needs": [
+      "walls"
+     ],
+     "excludes": [
+      "crisis: mass_migration"
+     ],
+     "crisis": [
+      "under_siege"
+     ],
+     "colour": false,
+     "stop": [],
+     "note": "\"nobody goes in or out\" denies arrivals"
+    },
+    {
+     "lineId": "vid:7",
+     "text": "Nothing moves on the roads. {settlement} lives on what is already inside the town, and counts it daily.",
+     "needs": [],
+     "excludes": [
+      "walls",
+      "crisis: mass_migration"
+     ],
+     "crisis": [
+      "under_siege"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "vid:8",
+     "text": "The town is held from outside; the fields beyond it have not been worked since the lines closed.",
+     "needs": [],
+     "excludes": [
+      "walls"
+     ],
+     "crisis": [
+      "under_siege"
+     ],
+     "colour": false,
+     "stop": [
+      "food sources (fields worked / harvest)"
+     ]
+    },
+    {
+     "lineId": "vid:9",
+     "text": "{settlement} is shut, and the shutting is not the town's decision; every arrangement inside the town has been rebuilt around the roads staying closed.",
+     "needs": [],
+     "excludes": [
+      "walls"
+     ],
+     "crisis": [
+      "under_siege"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "vid:10",
+     "text": "Nobody goes in or out of {settlement}, and the edges of the town are kept at hours nobody normally keeps them.",
+     "needs": [],
+     "excludes": [
+      "walls",
+      "crisis: mass_migration"
+     ],
+     "crisis": [
+      "under_siege"
+     ],
+     "colour": false,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "FAMINE",
+   "keyGuarantees": "stress[].type === \"famine\" (banner FAMINE) is on the record: crisis famine is active (hunger family on).",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": [
+    "famine"
+   ],
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Keyed on crisis famine: opted in with poolCrisis; lines inherit it and declare only what they presume beyond the key.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "There is not enough to eat, and the shortfall is public now rather than private. The granary answers fewer hands each week.",
+     "needs": [
+      "institution: granary"
+     ],
+     "excludes": [],
+     "crisis": [
+      "famine"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "Hunger has moved from the poorest streets into the ordinary ones; what the fields returned does not reach the table.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "famine"
+     ],
+     "colour": false,
+     "stop": [
+      "food sources (fields worked / harvest)"
+     ]
+    },
+    {
+     "lineId": "vid:3",
+     "text": "The market has grain, and the price of it has become a kind of politics; families are eating stores meant for {season}.",
+     "needs": [
+      "market"
+     ],
+     "excludes": [],
+     "crisis": [
+      "famine"
+     ],
+     "colour": false,
+     "stop": [
+      "food sources (grain)",
+      "climate and season (ruling 8)"
+     ],
+     "note": "{season} is deliberately unfilled: anchored liveness drops this line today"
+    },
+    {
+     "lineId": "vid:4",
+     "text": "There is not enough food in {settlement} and there is no longer a polite way to discuss it.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "famine"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:5",
+     "text": "What {settlement}'s granary holds is being issued by rule rather than by price, and the rule is being tested.",
+     "needs": [
+      "institution: granary"
+     ],
+     "excludes": [],
+     "crisis": [
+      "famine"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "vid:6",
+     "text": "{settlement}'s market is open and thin, and the thinness is not seasonal.",
+     "needs": [
+      "market"
+     ],
+     "excludes": [],
+     "crisis": [
+      "famine"
+     ],
+     "colour": false,
+     "stop": [
+      "climate and season (ruling 8)"
+     ]
+    }
+   ]
+  },
+  {
+   "pool": "UNDER OCCUPATION",
+   "keyGuarantees": "stress[].type === \"occupied\" (banner UNDER OCCUPATION) is on the record: crisis occupied is active (threat family on).",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": [
+    "occupied"
+   ],
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Keyed on crisis occupied: opted in with poolCrisis; lines inherit it and declare only what they presume beyond the key.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "Another power's writ runs here. The offices are the same offices; the authority behind them is not.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "occupied"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "Revenue leaves before it is spent: {settlement} is administered, and the administration is not its own.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "occupied"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "The garrison is quartered inside the walls, and the town's business is conducted around it.",
+     "needs": [
+      "walls"
+     ],
+     "excludes": [],
+     "crisis": [
+      "occupied"
+     ],
+     "colour": false,
+     "stop": [
+      "soldiers / commander (the occupier's garrison: defence.garrison reads the town's own)"
+     ],
+     "note": "\"the garrison\" is the occupier's, so the garrison atom is NOT declared"
+    },
+    {
+     "lineId": "vid:4",
+     "text": "{settlement} is held by somebody it did not choose, and the town's own hall now advises rather than decides.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "occupied"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:5",
+     "text": "Every licence, levy and permission in {settlement} passes a hand that is not the town's before it takes effect.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "occupied"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:6",
+     "text": "{settlement} functions and it functions under supervision, and the supervision is not disguised.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "occupied"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:7",
+     "text": "The occupiers are quartered inside the town, and the town's business is conducted around them.",
+     "needs": [],
+     "excludes": [
+      "walls"
+     ],
+     "crisis": [
+      "occupied"
+     ],
+     "colour": false,
+     "stop": [
+      "soldiers / commander"
+     ]
+    }
+   ]
+  },
+  {
+   "pool": "POLITICALLY FRACTURED",
+   "keyGuarantees": "stress[].type === \"politically_fractured\" (banner POLITICALLY FRACTURED) is on the record: crisis politically_fractured is active (succession family on).",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": [
+    "politically_fractured"
+   ],
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Keyed on crisis politically_fractured: opted in with poolCrisis; lines inherit it and declare only what they presume beyond the key.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "Nothing is decided. The factions each hold enough to block and none hold enough to rule, so the work of governing sits unattended.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "politically_fractured"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "Authority here is divided past the point of use. Repairs, judgments and appointments all wait on a consensus that does not arrive.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "politically_fractured"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "The town is governed in pieces, and the pieces do not agree; deferral has become the only policy anyone can pass.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "politically_fractured"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:4",
+     "text": "{settlement} has no single answer to anything, because there is no longer anyone entitled to give one.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "politically_fractured"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:5",
+     "text": "Two sets of instructions circulate in {settlement} and the clerks have quietly decided which to obey.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "politically_fractured"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:6",
+     "text": "Asking {settlement} a simple question gets a careful one back, because the answer depends on who is asking for whom.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "politically_fractured"
+     ],
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "INDEBTED TO AN OUTSIDE POWER",
+   "keyGuarantees": "stress[].type === \"indebted\" (banner INDEBTED TO AN OUTSIDE POWER) is on the record: crisis indebted is active.",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": [
+    "indebted"
+   ],
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Keyed on crisis indebted: opted in with poolCrisis; lines inherit it and declare only what they presume beyond the key.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "A share of everything {settlement} earns leaves for a creditor beyond the walls, and the share is not small.",
+     "needs": [
+      "walls"
+     ],
+     "excludes": [],
+     "crisis": [
+      "indebted"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "The books balance only because nothing is being built. The debt is served first and the town second.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "indebted"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "The obligation is outside and the payment is here; coin that would have gone to the works goes to the collector.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "indebted"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:4",
+     "text": "{settlement}'s obligations exceed what its year produces, and the shortfall is being met by promising against the next one.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "indebted"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:5",
+     "text": "What {settlement} owes is the first thing paid and the last thing discussed.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "indebted"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:6",
+     "text": "{settlement} looks like it is working hard for somebody, and the somebody is not in the town.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "indebted"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:7",
+     "text": "A share of everything {settlement} earns leaves for a creditor far from here, and the share is not small.",
+     "needs": [],
+     "excludes": [
+      "walls"
+     ],
+     "crisis": [
+      "indebted"
+     ],
+     "colour": false,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "RECENTLY BETRAYED",
+   "keyGuarantees": "stress[].type === \"recently_betrayed\" (banner RECENTLY BETRAYED) is on the record: crisis recently_betrayed is active.",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": [
+    "recently_betrayed"
+   ],
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Keyed on crisis recently_betrayed: opted in with poolCrisis; lines inherit it and declare only what they presume beyond the key.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "Trust here is a shorter commodity than it was. Institutions run at partial strength because too few people will vouch for one another.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "recently_betrayed"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "The betrayal is over and its consequences are not. Offices that once shared information now keep it.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "recently_betrayed"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "{settlement} works, but it works suspiciously; the arrangements that depended on good faith have quietly lapsed.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "recently_betrayed"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:4",
+     "text": "{settlement} was let down by somebody it had reason to trust, and the town has grown careful in a way that reaches past the person responsible.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "recently_betrayed"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:5",
+     "text": "Agreements at {settlement} are being written longer than they used to be written, and the length is the town's answer.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "recently_betrayed"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:6",
+     "text": "{settlement} deals fairly with a stranger and slowly, and the slowness is deliberate.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "recently_betrayed"
+     ],
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "INFILTRATED",
+   "keyGuarantees": "stress[].type === \"infiltrated\" (banner INFILTRATED) is on the record: crisis infiltrated is active.",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": [
+    "infiltrated"
+   ],
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Keyed on crisis infiltrated: opted in with poolCrisis; lines inherit it and declare only what they presume beyond the key.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "Nothing here looks wrong. Decisions land slightly askew, and information reaches the wrong hands slightly too often.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "infiltrated"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "The economy is untouched and the intelligence is not. Someone else's interest is being served inside the town's own rooms.",
+     "needs": [],
+     "excludes": [
+      "crisis: hunger",
+      "crisis: indebted"
+     ],
+     "crisis": [
+      "infiltrated"
+     ],
+     "colour": false,
+     "stop": [],
+     "note": "\"The economy is untouched\" is false beside a famine, a siege or a debt"
+    },
+    {
+     "lineId": "vid:3",
+     "text": "The crisis is out of sight. The pattern is legible only to whoever is counting the coincidences.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "infiltrated"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:4",
+     "text": "Somebody in {settlement} answers elsewhere, and the town knows it without knowing who.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "infiltrated"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:5",
+     "text": "What {settlement}'s hall discusses and what {settlement}'s hall records have come apart.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "infiltrated"
+     ],
+     "colour": true,
+     "stop": [],
+     "kernelMarks": [
+      "dm-only"
+     ]
+    },
+    {
+     "lineId": "vid:6",
+     "text": "Conversation in {settlement} stops when it should not and resumes carefully.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "infiltrated"
+     ],
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "DISEASE OUTBREAK",
+   "keyGuarantees": "stress[].type === \"plague_onset\" (banner DISEASE OUTBREAK) is on the record: crisis plague_onset is active.",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": [
+    "plague_onset"
+   ],
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Keyed on crisis plague_onset: opted in with poolCrisis; lines inherit it and declare only what they presume beyond the key.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "Illness is loose in the town. The market thins as people keep to their own doors, and travel is discouraged rather than forbidden.",
+     "needs": [
+      "market"
+     ],
+     "excludes": [
+      "crisis: under_siege"
+     ],
+     "crisis": [
+      "plague_onset"
+     ],
+     "colour": false,
+     "stop": [],
+     "note": "\"travel is discouraged rather than forbidden\" is false under a siege"
+    },
+    {
+     "lineId": "vid:2",
+     "text": "The sick outnumber the hands that can tend them, and the quarantine is observed unevenly, street by street.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "plague_onset"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "{settlement} has stopped moving at its ordinary speed: supply arrives late, work goes undone, and the healers are the busiest people here.",
+     "needs": [
+      "healer"
+     ],
+     "excludes": [],
+     "crisis": [
+      "plague_onset"
+     ],
+     "colour": false,
+     "stop": [],
+     "note": "\"the healers are the busiest people here\""
+    },
+    {
+     "lineId": "vid:4",
+     "text": "Sickness has come into {settlement}, and the town has begun organising itself around containment rather than around work.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "plague_onset"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:5",
+     "text": "{settlement} is keeping two lists now (the sick and the exposed), and neither list is shrinking.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "plague_onset"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:6",
+     "text": "Doors in {settlement} are marked, and the marking is recent enough that people still look at it.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "plague_onset"
+     ],
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "SUCCESSION VOID",
+   "keyGuarantees": "stress[].type === \"succession_void\" (banner SUCCESSION VOID) is on the record: crisis succession_void is active (succession family on).",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": [
+    "succession_void"
+   ],
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Keyed on crisis succession_void: opted in with poolCrisis; lines inherit it and declare only what they presume beyond the key.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "The seat is empty and no claim has settled. Major decisions are deferred; the institutions carry on under their own momentum.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "succession_void"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "There is no one to sign, so nothing is signed. Several offices have simply begun deciding for themselves.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "succession_void"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "Authority here has no undisputed heir, and the vacancy is being filled unofficially by whoever stands nearest the work.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "succession_void"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:4",
+     "text": "The seat at {settlement} is empty and nobody has been able to say for certain who should fill it.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "succession_void"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:5",
+     "text": "Instructions from {settlement}'s hall have stopped being signed, because there is nobody with the standing to sign them.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "succession_void"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:6",
+     "text": "{settlement} answers questions about its own governance in the past tense.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "succession_void"
+     ],
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "BEAST & RAIDER THREAT",
+   "keyGuarantees": "stress[].type === \"monster_pressure\" (banner BEAST & RAIDER THREAT) is on the record: crisis monster_pressure is active (threat family on).",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": [
+    "monster_pressure"
+   ],
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Keyed on crisis monster_pressure: opted in with poolCrisis; lines inherit it and declare only what they presume beyond the key.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "The roads outside are not safe. Trade arrives thinner and later, and what the town does not spend on defense it does not have.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "monster_pressure"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "Attacks on the outlying holdings have become regular enough to plan around, and the plans cost coin the town was spending elsewhere.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "monster_pressure"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "{settlement} keeps more watch than it can afford; the country beyond the walls has stopped being ordinary country.",
+     "needs": [
+      "walls",
+      "watch"
+     ],
+     "excludes": [],
+     "crisis": [
+      "monster_pressure"
+     ],
+     "colour": false,
+     "stop": [],
+     "note": "\"keeps more watch than it can afford\""
+    },
+    {
+     "lineId": "vid:4",
+     "text": "Something in the country around {settlement} has made the outlying work dangerous, and the outlying work is not optional.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "monster_pressure"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:5",
+     "text": "{settlement} has pulled its stock and its people inward, and the ground it has given up is on the rolls as abandoned.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "monster_pressure"
+     ],
+     "colour": false,
+     "stop": [
+      "food sources (livestock)"
+     ]
+    },
+    {
+     "lineId": "vid:6",
+     "text": "The fields furthest from {settlement} are standing untended, and nothing about the season explains it.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "monster_pressure"
+     ],
+     "colour": false,
+     "stop": [
+      "food sources (fields worked / harvest)",
+      "climate and season (ruling 8)"
+     ]
+    },
+    {
+     "lineId": "vid:7",
+     "text": "{settlement} keeps more watch than it can afford; the country beyond the last houses has stopped being ordinary country.",
+     "needs": [
+      "watch"
+     ],
+     "excludes": [
+      "walls"
+     ],
+     "crisis": [
+      "monster_pressure"
+     ],
+     "colour": false,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "INSURGENCY",
+   "keyGuarantees": "stress[].type === \"insurgency\" (banner INSURGENCY) is on the record: crisis insurgency is active (unrest family on).",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": [
+    "insurgency"
+   ],
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Keyed on crisis insurgency: opted in with poolCrisis; lines inherit it and declare only what they presume beyond the key.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "An armed movement operates inside the town's own population, and the town cannot tell it from the town.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "insurgency"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "Order here is enforced rather than kept. The authority that answers force with force is losing the argument that matters.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "insurgency"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "Parts of {settlement} are governed by the consent of people who hold no office; the rest is governed nervously.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "insurgency"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:4",
+     "text": "Part of {settlement} is fighting the rest of it and neither part wears a badge.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "insurgency"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:5",
+     "text": "The watch's patrols at {settlement} have been rewritten, and the routes now avoid places rather than cover them.",
+     "needs": [
+      "watch"
+     ],
+     "excludes": [],
+     "crisis": [
+      "insurgency"
+     ],
+     "colour": false,
+     "stop": [],
+     "note": "\"The watch's patrols\""
+    },
+    {
+     "lineId": "vid:6",
+     "text": "{settlement} is calm in a way that a stranger will not be able to trust for long.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "insurgency"
+     ],
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "RELIGIOUS CRISIS",
+   "keyGuarantees": "stress[].type === \"religious_conversion\" (banner RELIGIOUS CRISIS) is on the record: crisis religious_conversion is active.",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": [
+    "religious_conversion"
+   ],
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Keyed on crisis religious_conversion: opted in with poolCrisis; lines inherit it and declare only what they presume beyond the key.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "The town's creed is contested from within. Congregations that once shared a calendar now keep separate ones.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "religious_conversion"
+     ],
+     "colour": false,
+     "stop": [
+      "priest / faith presence beyond institution: temple"
+     ]
+    },
+    {
+     "lineId": "vid:2",
+     "text": "A rival observance has taken root deep enough to divide households. The old rite still holds the buildings and no longer holds the street.",
+     "needs": [
+      "institution: temple"
+     ],
+     "excludes": [],
+     "crisis": [
+      "religious_conversion"
+     ],
+     "colour": false,
+     "stop": [],
+     "note": "\"the old rite still holds the buildings\""
+    },
+    {
+     "lineId": "vid:3",
+     "text": "Faith here has become a question of allegiance rather than habit, and the question is being asked out loud.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "religious_conversion"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:4",
+     "text": "What {settlement} keeps has changed, and the households have not all changed at the same rate.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "religious_conversion"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:5",
+     "text": "{settlement}'s observances are being kept twice (in the new form publicly, in the old form otherwise), and the clerks record only one of them.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "religious_conversion"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:6",
+     "text": "The altars in {settlement} are tended and the tending is new, which is visible in the stonework.",
+     "needs": [
+      "institution: temple"
+     ],
+     "excludes": [],
+     "crisis": [
+      "religious_conversion"
+     ],
+     "colour": false,
+     "stop": [],
+     "note": "\"The altars ... visible in the stonework\""
+    }
+   ]
+  },
+  {
+   "pool": "SLAVE REVOLT",
+   "keyGuarantees": "stress[].type === \"slave_revolt\" (banner SLAVE REVOLT) is on the record: crisis slave_revolt is active (unrest family on).",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": [
+    "slave_revolt"
+   ],
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Keyed on crisis slave_revolt: opted in with poolCrisis; lines inherit it and declare only what they presume beyond the key.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "The bound labour of {settlement} has stopped being reliable, and the settlement was built on its reliability.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "slave_revolt"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "The work is not being done and the refusal is organized. What held the arrangement together was never consent.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "slave_revolt"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "The overseers keep order in the daylight hours; what happens after them is no longer theirs to decide.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "slave_revolt"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:4",
+     "text": "The people {settlement} held have stopped being held, and the town has no arrangement for what follows.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "slave_revolt"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:5",
+     "text": "{settlement}'s rolls are wrong in a way the clerks cannot correct: the names are there and the people are not where the names say.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "slave_revolt"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:6",
+     "text": "{settlement} is a town with two populations and one of them has stopped pretending.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "slave_revolt"
+     ],
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "WARTIME",
+   "keyGuarantees": "stress[].type === \"wartime\" (banner WARTIME) is on the record: crisis wartime is active (unrest family on).",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": [
+    "wartime"
+   ],
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Keyed on crisis wartime: opted in with poolCrisis; lines inherit it and declare only what they presume beyond the key.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "The town is on a war footing. Grain, iron and men are counted against a campaign rather than a season.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "wartime"
+     ],
+     "colour": false,
+     "stop": [
+      "imports / exports (grain, iron counted)"
+     ]
+    },
+    {
+     "lineId": "vid:2",
+     "text": "{settlement} lives at the rhythm of a war it is part of. Everything ordinary is scheduled around the levy.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "wartime"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "The trades that matter here now are the ones that supply an army; the rest have been asked to wait.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "wartime"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:4",
+     "text": "{settlement} is at war, and the war has reached the town as absence: the men, the carts, and the ordinary expectation of next year.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "wartime"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:5",
+     "text": "{settlement}'s levies and requisitions have become the largest single line in the year, and they are not negotiable.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "wartime"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:6",
+     "text": "{settlement} is short of the kind of people a town this size should be full of.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "wartime"
+     ],
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "MASS MIGRATION",
+   "keyGuarantees": "stress[].type === \"mass_migration\" (banner MASS MIGRATION) is on the record: crisis mass_migration is active; its direction is always influx (stressTypes.js, ruling 2 of 2026-10-30).",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": [
+    "mass_migration"
+   ],
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Keyed on crisis mass_migration: opted in with poolCrisis; lines inherit it and declare only what they presume beyond the key.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "People are arriving faster than the town can house them. The camps outside the wall are becoming a second settlement.",
+     "needs": [
+      "walls"
+     ],
+     "excludes": [
+      "crisis: under_siege"
+     ],
+     "crisis": [
+      "mass_migration"
+     ],
+     "colour": false,
+     "stop": [],
+     "note": "\"are arriving faster\" is false while nothing moves through the lines"
+    },
+    {
+     "lineId": "vid:2",
+     "text": "{settlement} has more mouths than arrangements. The administration is improvising, and the improvisation is visible.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "mass_migration"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "The newcomers came from somewhere worse, and their arrival is reshaping what the town can afford.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "mass_migration"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:4",
+     "text": "People have come into {settlement} in numbers the town did not plan for, and the planning is happening after the fact.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "mass_migration"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:5",
+     "text": "{settlement}'s rolls have grown by {band} and its housing has not grown at all.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "mass_migration"
+     ],
+     "colour": true,
+     "stop": [],
+     "note": "{band} is RESERVED and unfilled: anchored liveness drops this line today"
+    },
+    {
+     "lineId": "vid:6",
+     "text": "There are more people in {settlement} than there is {settlement}, and the overflow is visible at the edges.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "mass_migration"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:7",
+     "text": "People are arriving faster than the town can house them. The camps at the edge of the town are becoming a second settlement.",
+     "needs": [],
+     "excludes": [
+      "walls",
+      "crisis: under_siege"
+     ],
+     "crisis": [
+      "mass_migration"
+     ],
+     "colour": false,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "ARITY: several banners standing at once",
+   "keyGuarantees": "crisisArityPoolKey: the banner reading holds MORE THAN ONE stress[] entry, so at least two crises are active.",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": [
+    "crisis"
+   ],
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Keyed on two or more standing crises: opted in with poolCrisis [\"crisis\"]; no line denies a family.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "{settlement} is carrying more than one crisis at once, and they are not independent. Each makes the others harder to end.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "crisis"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "No single emergency explains the state of the town; the troubles here compound, and the compounding is the real condition.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "crisis"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "The town has run out of the slack it would need to solve any one of its problems, because it is solving several.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "crisis"
+     ],
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "Overview's own section framing",
+   "keyGuarantees": "crisisFramingPoolKey: the banner reading is a real, EMPTY stress[] list (the annex's \"ARITY — no banner\"); composed and never rendered on the Overview (R-DST-K).",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Every line asserts no crisis; stress[] empty does not rule out a pulse stressor folded in by crisisOf, so the pool opts in and every line is calm. Not empty for most births: the key already selects banner-less places.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "{settlement} carries no emergency. What troubles it are the ordinary troubles, and they are being handled at the ordinary pace.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "calm",
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "Nothing here is urgent. The town's difficulties are chronic rather than acute, and it has the room to work on them.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "calm",
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "There is no crisis on the books. Whatever strain the settlement carries, it carries at a weight it can hold.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "calm",
+     "colour": false,
+     "stop": []
+    }
+   ]
+  }
+ ]
+}

@@ -79,6 +79,7 @@ import { simulateCampaignWorldInterval } from '../../src/domain/worldPulse/advan
 import { stage, withdraw } from '../../src/domain/edit/registry.js';
 import { OP_TYPES } from '../../src/domain/edit/operations.js';
 import { poolValues } from '../../src/domain/edit/pools.js';
+import { GENERATOR_VERSION } from '../../src/domain/settlement.schema.js';
 import { decreeCataloguesForSaves } from '../../src/store/campaignAdvanceSession.js';
 import { createCampaignSlice } from '../../src/store/campaignSlice.js';
 import { createCampaignWorldPulseSlice } from '../../src/store/campaignWorldPulseSlice.js';
@@ -441,6 +442,10 @@ const seededSave = (/** @type {string} */ id, /** @type {string[]} */ roles, /**
     settlement: {
       ...save.settlement,
       _seed: U108_SEED,
+      // GUARD (CLOSE-7; R24j 3): a stored place is re-derived only by the engine that bore it, and
+      // this arm's premise IS the tick's re-derivation, so the fixture names THIS engine; a stampless
+      // place would take the newcomer by append and the vocabulary would not move.
+      generatorVersion: GENERATOR_VERSION,
       npcs: [{ id: 'npc.varn', name: 'Lord Varn', role: 'Reeve', status: 'active' }],
     },
   };

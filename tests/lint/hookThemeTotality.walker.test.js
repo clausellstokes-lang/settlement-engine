@@ -47,9 +47,10 @@ import {
   themeOfText,
   themeOfRelArchetype,
 } from '../../src/domain/hookThemes.js';
+import { lineText } from '../../src/domain/facts/drawDeclared.js';
 
-/** Every authored loyalty template the generator can draw, in pool order. */
-const livePoolTemplates = Object.values(NPC_FACTION_LOYALTY).flat();
+/** Every authored loyalty template the generator can draw, in pool order (CENSUS-3e: a declared row is `{ text, needs }`; its text is the template). */
+const livePoolTemplates = Object.values(NPC_FACTION_LOYALTY).flat().map(lineText);
 /** Every relationship archetype the generator can stamp. */
 const liveArchetypeKeys = Object.keys(STRESS_ECONOMIC_EFFECTS);
 

@@ -1,5 +1,14 @@
 /**
- * instantWorld/factionDedup.js — WORLD-SCOPED faction-name de-duplication.
+ * instantWorld/factionDedup.js — the faction-name DE-CLUNK GUARD (the candidate space).
+ *
+ * THE DEDUP IS DELETED (the people car, PEOPLE-5A, 2026-11-07; the chair's ruling M-2): the
+ * world-scoped pass renamed the NPC grouping's minted names (`settlement.factions[].name`), and
+ * since GS-2 every group was named for one of its own powers — which the pass never renamed — so
+ * on every composed world it was a no-op; the grouping itself leaves with the landing. The powers'
+ * names are fixed archetype labels every town may share. What stays is the de-clunk guard over the
+ * candidate space (candidateNames, hasBannedStack), which the arcane identity reads.
+ *
+ * HISTORY (the pass as it was):
  *
  * The survey's worst content-thinness surface: FACTION_DESCRIPTORS dedup is
  * settlement-LOCAL only (factionGrouping.js builds usedNames from one settlement's own
@@ -24,8 +33,6 @@
  */
 
 import { FACTION_DESCRIPTORS, FACTION_DESCRIPTORS_EXTRA } from '../../data/powerData.js';
-import { fnv1a32 } from '../../kernel/proseHash.js';
-import { compareCodepoint } from '../../domain/deterministicSort.js';
 
 // ── AMENDMENT A — THE FACTION DE-CLUNK RULE ──────────────────────────────────
 // The old strategy stacked a collective-noun SUFFIX onto a reused base descriptor
@@ -112,116 +119,3 @@ export function candidateNames(category) {
   return out;
 }
 
-/**
- * Pick a world-unique name for a collided faction: fnv-hash a stable seed to a start
- * index, then probe deterministically for the first candidate not yet used world-wide.
- * The candidate ORDER (clean bases, then modifier combos) makes a descriptor SWAP win
- * over any suffix/modifier form whenever a clean base is free. Numeric disambiguator only
- * if the whole (bases × modifiers) space is exhausted — impossible for any realistic
- * realm. Pure (no rng). @param {string} category @param {Set<string>} used @param {string} seed
- */
-function pickUniqueName(category, used, seed) {
-  const bases = basePool(category);
-  // Hash to a start index WITHIN the clean-base band so the swap is seed-varied but
-  // still always prefers a whole distinct base before any modifier form.
-  const baseStart = fnv1a32(seed) % bases.length;
-  for (let i = 0; i < bases.length; i += 1) {
-    const name = bases[(baseStart + i) % bases.length];
-    if (!used.has(name)) return name;
-  }
-  // All clean bases used world-wide → walk the guard-clean modifier combos (built lazily,
-  // only when the whole clean-base pool is spent — the rare last-resort path).
-  const cands = candidateNames(category);
-  const modStart = fnv1a32(`${seed}::mod`) % cands.length;
-  for (let i = 0; i < cands.length; i += 1) {
-    const name = cands[(modStart + i) % cands.length];
-    if (!used.has(name)) return name;
-  }
-  let n = 2;
-  let name;
-  do { name = `${bases[baseStart]} ${n}`; n += 1; } while (used.has(name));
-  return name;
-}
-
-/** Exact-phrase substring replace in a string leaf, applying every (old→new) in the map. */
-const replacePhrase = (s, renameMap) => {
-  if (typeof s !== 'string') return s;
-  let out = s;
-  for (const [oldName, newName] of renameMap) if (out.includes(oldName)) out = out.split(oldName).join(newName);
-  return out;
-};
-
-/**
- * Apply a settlement's (oldName → newName) rename map to its conflict references — the
- * ONLY fields besides factions[].name that hold a FACTION_DESCRIPTORS name (parties exact,
- * desc/plotHooks embedded), both top-level and the powerStructure mirror. Targeted rather
- * than a deep walk: the settlement carries frozen leaves (deity refs) a blind walk would
- * choke on, and the dossier PROSE uses the shared power-ROLE archetype names, never these.
- * Replaces the holder objects (not their frozen properties) so it is safe over frozen
- * sub-trees. @param {any} settlement @param {Map<string,string>} renameMap
- */
-function applyConflictRenames(settlement, renameMap) {
-  if (!settlement || typeof settlement !== 'object' || renameMap.size === 0) return;
-  const renameConflicts = (conflicts) => (Array.isArray(conflicts)
-    ? conflicts.map((c) => {
-      if (!c || typeof c !== 'object') return c;
-      return {
-        ...c,
-        parties: Array.isArray(c.parties) ? c.parties.map((p) => renameMap.get(p) ?? p) : c.parties,
-        desc: replacePhrase(c.desc, renameMap),
-        plotHooks: Array.isArray(c.plotHooks) ? c.plotHooks.map((h) => replacePhrase(h, renameMap)) : c.plotHooks,
-      };
-    })
-    : conflicts);
-  if (settlement.conflicts) settlement.conflicts = renameConflicts(settlement.conflicts);
-  if (settlement.powerStructure && settlement.powerStructure.conflicts) {
-    settlement.powerStructure = { ...settlement.powerStructure, conflicts: renameConflicts(settlement.powerStructure.conflicts) };
-  }
-}
-
-/**
- * De-duplicate faction names across the members of a composed world, in place. The first
- * settlement (by stable order) to use a name keeps it; every later collision is renamed to
- * a world-unique, same-category descriptor. Returns the rename ledger (for tests / trace).
- * @param {Array<{ id?: any, _slot?: number, settlement?: any }>} members
- * @returns {Array<{ member: any, from: string, to: string }>}
- */
-export function dedupeWorldFactionNames(members) {
-  if (!Array.isArray(members) || members.length === 0) return [];
-  const ordered = [...members].sort(
-    // _slot is the primary order (composeInstantWorld stamps a unique _slot per site,
-    // so the tie-break is normally dead); the id tie-break uses codepoint order — never
-    // localeCompare — so a rename decision can never depend on host locale. Byte-identical
-    // on the live path (unique slots ⇒ tie-break never fires), removes the armed hazard.
-    (a, b) => (a?._slot ?? 0) - (b?._slot ?? 0) || compareCodepoint(a?.id, b?.id),
-  );
-  const used = new Set();
-  const renames = [];
-  for (const m of ordered) {
-    const s = m?.settlement;
-    if (!s || !Array.isArray(s.factions)) continue;
-    // Rename by IDENTITY (per array position), not by name-match: a settlement can carry
-    // two factions with the SAME local name (local dedup caps out), and a name-match rename
-    // would collapse both to one string. The index in the seed guarantees two same-named
-    // factions get DIFFERENT new names; pickUniqueName's `used` probe keeps them world-unique.
-    const renameMap = new Map();
-    // GS-2 (ODQ §934.101): a group named for one of the settlement's own POWER factions is that
-    // faction, and a power faction's name is a fixed label every town may share ("Merchant
-    // Guilds"). Renaming it here would mint the second vocabulary GS-2 removed, so it is never
-    // renamed and never claims a world-wide slot. Only a legacy save's minted name dedupes.
-    const powerNames = new Set((s.powerStructure?.factions || []).map((pf) => pf?.faction || pf?.name).filter(Boolean));
-    s.factions = s.factions.map((f, i) => {
-      if (!f || typeof f.name !== 'string' || !f.name) return f;
-      if (powerNames.has(f.name)) return f;
-      if (!used.has(f.name)) { used.add(f.name); return f; }
-      const category = f.category || f.dominantCategory || 'other';
-      const newName = pickUniqueName(category, used, `${m.id}:${m._slot}:${i}:${f.name}:${category}`);
-      used.add(newName);
-      renameMap.set(f.name, newName); // for conflict refs (last wins on the rare intra-dup)
-      renames.push({ member: m.id, from: f.name, to: newName });
-      return { ...f, name: newName };
-    });
-    applyConflictRenames(s, renameMap);
-  }
-  return renames;
-}

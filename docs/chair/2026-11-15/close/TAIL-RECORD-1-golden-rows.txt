@@ -1,0 +1,28 @@
+# TAIL-RECORD-1 · the generator golden master's rows each cure moves (tests/fixtures/generator-golden-master.json keys; hashed by the test's own hashFor at the base and at each cure; NOT re-taken)
+
+## R1 (c1b): 23 of 525
+city|germanic|forest|isolated|civilized|golden-master-v3
+city|latin|forest|isolated|civilized|golden-master-v3
+city|celtic|forest|isolated|civilized|golden-master-v3
+city|arabic|forest|isolated|civilized|golden-master-v3
+city|norse|forest|isolated|civilized|golden-master-v3
+city|slavic|forest|isolated|civilized|golden-master-v3
+city|east_asian|forest|isolated|civilized|golden-master-v3
+city|mesoamerican|forest|isolated|civilized|golden-master-v3
+city|south_asian|forest|isolated|civilized|golden-master-v3
+city|steppe|forest|isolated|civilized|golden-master-v3
+city|greek|forest|isolated|civilized|golden-master-v3
+city|mediterranean|forest|isolated|civilized|golden-master-v3
+metropolis|germanic|forest|isolated|civilized|golden-master-v3
+metropolis|latin|forest|isolated|civilized|golden-master-v3
+metropolis|celtic|forest|isolated|civilized|golden-master-v3
+metropolis|arabic|forest|isolated|civilized|golden-master-v3
+metropolis|norse|forest|isolated|civilized|golden-master-v3
+metropolis|slavic|forest|isolated|civilized|golden-master-v3
+metropolis|east_asian|forest|isolated|civilized|golden-master-v3
+metropolis|mesoamerican|forest|isolated|civilized|golden-master-v3
+metropolis|steppe|forest|isolated|civilized|golden-master-v3
+metropolis|greek|forest|isolated|civilized|golden-master-v3
+metropolis|mediterranean|forest|isolated|civilized|golden-master-v3
+
+## R4 (c4a): 0 of 525

@@ -31,7 +31,7 @@ function militaryCaptain(over = {}) {
     name: 'Beatrix Becker',
     role: 'Guard Captain',
     category: 'military',
-    factionAffiliation: 'Military/Guard',
+    memberships: [{ power: 'Military/Guard', rank: 1 }], // PEOPLE-5A re-keyed (M-1b): the link reads the first-rank membership
     structuralPosition: 'Commands enforcement capacity where civilian governance is failing.',
     structuralRank: 'dominant',
     influence: 'high',
@@ -58,7 +58,7 @@ function templeHighPriest(over = {}) {
     name: 'Sister Vaela',
     role: 'High Priestess',
     category: 'religious',
-    factionAffiliation: 'Religious Authorities',
+    memberships: [{ power: 'Religious Authorities', rank: 1 }], // PEOPLE-5A re-keyed (M-1b)
     structuralRank: 'dominant',
     influence: 'high',
     power: 8,
@@ -75,7 +75,7 @@ function minorTraderNpc(over = {}) {
     name: 'Oren the Quiet',
     role: 'Stall Keeper',
     category: 'economy',
-    factionAffiliation: 'Merchant Guilds',
+    memberships: [{ power: 'Merchant Guilds', rank: 1 }], // PEOPLE-5A re-keyed (M-1b)
     structuralRank: 'minor',
     influence: 'low',
     power: 3,
@@ -151,10 +151,12 @@ describe('deriveNpcProfile()', () => {
     expect(deriveNpcProfile({ id: 'x', name: 'X', category: 'unknown' }).archetype).toBe('other');
   });
 
-  it('factionLink derives a stable id from factionAffiliation', () => {
+  it('factionLink derives a stable id from the first-rank membership (PEOPLE-5A re-keyed)', () => {
     expect(deriveNpcProfile(militaryCaptain()).factionLink).toBe('faction.military_guard');
     expect(deriveNpcProfile(templeHighPriest()).factionLink).toBe('faction.religious_authorities');
-    expect(deriveNpcProfile({ id: 'x', name: 'X', factionAffiliation: '' }).factionLink).toBeNull();
+    expect(deriveNpcProfile({ id: 'x', name: 'X', memberships: [] }).factionLink).toBeNull();
+    // the shim's derived field alone links nowhere (the memberships are the source)
+    expect(deriveNpcProfile({ id: 'x', name: 'X', factionAffiliation: 'Military/Guard' }).factionLink).toBeNull();
   });
 
   it('inferences institutionLink from settlement institutions when available', () => {
@@ -251,12 +253,15 @@ describe('deriveNpcProfile()', () => {
 // never reach the public-safe projection (the npc allowlist excludes them).
 
 describe('corruption truth fields', () => {
-  it('carries corrupt / corruptionVector / timesExposed / ousted from the raw NPC', () => {
+  // ALLEGIANCE-CAR1 (2026-11-08): the retired `corrupt` mark is the card's hidden `allegiance`; the profile reads it
+  // through allegianceOf — `corrupt` true for an agent, `corruptionVector` the allegiance's, `allegiance` the record.
+  it('carries corrupt / corruptionVector / allegiance / timesExposed / ousted from the raw NPC', () => {
     const profile = deriveNpcProfile(militaryCaptain({
-      corrupt: true, corruptionVector: 'greed', timesExposed: 2, ousted: true,
+      allegiance: { power: "Thieves' Guild", house: 'Thieves den', vector: 'greed', via: 'office', handler: 'npc_fence', share: 0.15, veiled: true, covert: true }, timesExposed: 2, ousted: true,
     }));
     expect(profile.corrupt).toBe(true);
     expect(profile.corruptionVector).toBe('greed');
+    expect(profile.allegiance).toMatchObject({ house: 'Thieves den', vector: 'greed', handler: 'npc_fence', covert: true });
     expect(profile.timesExposed).toBe(2);
     expect(profile.ousted).toBe(true);
   });
@@ -269,20 +274,22 @@ describe('corruption truth fields', () => {
     expect(profile.ousted).toBe(false);
   });
 
-  it('a legacy save the corruption pass never judged stays tri-state null', () => {
+  // ALLEGIANCE-CAR1 (2026-11-08): the tri-state retired with the mark — the absence of an allegiance IS the clean state
+  it('a card with no allegiance reads clean (the retired tri-state null is gone with the mark)', () => {
     const profile = deriveNpcProfile(militaryCaptain()); // fixture carries no corruption fields
-    expect(profile.corrupt).toBeNull();
+    expect(profile.corrupt).toBe(false);
     expect(profile.corruptionVector).toBeNull();
+    expect(profile.allegiance).toBeNull();
     expect(profile.timesExposed).toBe(0);
     expect(profile.ousted).toBe(false);
   });
 
   it('publicSafe: raw corruption fields never reach the public npc allowlist', () => {
     const out = toPublicSafe({
-      npcs: [militaryCaptain({ corrupt: true, corruptionVector: 'greed', timesExposed: 2, ousted: true })],
+      npcs: [militaryCaptain({ corrupt: true, corruptionVector: 'greed', allegiance: { power: "Thieves' Guild", house: 'Thieves den', vector: 'greed', via: 'office', handler: 'npc_fence', share: 0.15, veiled: true, covert: true }, timesExposed: 2, ousted: true })],
     });
     expect(out.npcs).toHaveLength(1);
-    for (const k of ['corrupt', 'corruptionVector', 'timesExposed', 'ousted']) {
+    for (const k of ['corrupt', 'corruptionVector', 'allegiance', 'timesExposed', 'ousted']) {
       expect(out.npcs[0][k]).toBeUndefined();
     }
   });
@@ -368,8 +375,11 @@ describe('primaryRelationship', () => {
       typeName: 'Pragmatic Alliance',
       description: 'They work together because the alternative is worse.',
       tension: 'A third party is destabilizing the calculation.',
-      npc1Id: 'npc_2', npc2Id: 'npc_3',
-      npc1N: 'Beatrix Becker', npc2N: 'Sister Vaela',
+      // RE-KEYED 2026-11-07 (PEOPLE-4 TIES, R-P7): the tie is directed (`from` → `to`; the
+      // undirected npc1Id/npc2Id pair is not written), and its names are the producer's own
+      // `npc1Name`/`npc2Name` (the `npc1N`/`npc2N` arm read a key no producer writes: cut).
+      from: 'npc_2', to: 'npc_3',
+      npc1Name: 'Beatrix Becker', npc2Name: 'Sister Vaela',
     },
   ];
 

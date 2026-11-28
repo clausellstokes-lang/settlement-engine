@@ -95,6 +95,8 @@ import { planDensityCadence } from '../density/densityCadence.js';
 import { importanceForRung } from '../density/densityRungs.js';
 import { seatKey } from '../density/seatKey.js';
 import { createNpc } from '../entities/npcs.js';
+import { membershipInPower } from '../people/cardVeil.js';
+import { holdsMembership, membershipsOf } from '../people/membership.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { slugify } from '../../kernel/slugify.js';
 import { advanceNpcGrowthWithFabricAndConsequenceAndLadderAndTraditionsAndRoadsAndCommonsAndAssize } from './assizeKernel.js';
@@ -474,21 +476,23 @@ function cadenceReady(powerStructure, tick) {
  * until then the estate's own shipped answer to "a house mints with a member" is used
  * rather than a lesser private one.
  *
- * @param {{sid: string, tier: string|null|undefined, house: string, tick: number}} a
+ * @param {{sid: string, tier: string|null|undefined, house: string, tick: number, powerRow: unknown}} a
  * @returns {Record<string, unknown>}
  */
-function foundingMemberForEmergence({ sid, tier, house, tick }) {
+function foundingMemberForEmergence({ sid, tier, house, tick, powerRow }) {
   const npc = createNpc({
     name: `The ${house} Founder`,
     role: 'Head',
     importance: /** @type {import('../entities/npcs.js').NpcImportance} */ (
       importanceForRung('head', tier)
     ),
-    factionAffiliation: house,
-    linkedFactionIds: [factionIdFor(house)],
+    // GREEN-TIP (2026-11-10, the chair's STOP-1/STOP-3 ruling): the founder belongs to the risen house by a
+    // MEMBERSHIP through the one constructor the v1 -> v2 migration writes a moved link with (people/cardVeil.js ::
+    // membershipInPower: unranked, no share, the veil bit of the risen power's own row). It wrote the retired
+    // `factionAffiliation` / `linkedFactionIds`, which no reader reads on a current card.
+    memberships: [membershipInPower(powerRow)],
     _idSeed: `density-emergence:${sid}:${tick}:${slugify(house, { sep: '_' })}`,
   });
-  npc.factionAffiliation = house;
   return npc;
 }
 
@@ -595,7 +599,23 @@ function applyCadence(fresh, ctx) {
 
   if (step.step === 'thicken' && step.emergence) {
     const house = String(step.emergence.name || step.emergence.key);
-    const founder = foundingMemberForEmergence({ sid: ctx.sid, tier, house, tick: ctx.tick });
+    const risen = {
+      id: factionIdFor(house),
+      name: house,
+      faction: house,
+      status: 'active',
+      category: String(step.emergence.category || 'other'),
+      power: 1,
+      impairments: [],
+      internalSeats: {},
+      description: '',
+      memberNpcIds: /** @type {string[]} */ ([]),
+      // Provenance the chronicle can read without re-deriving it.
+      materializedBy: 'density_cadence',
+      materializedAtTick: ctx.tick,
+    };
+    const founder = foundingMemberForEmergence({ sid: ctx.sid, tier, house, tick: ctx.tick, powerRow: risen });
+    risen.memberNpcIds = [String(founder.id)];
     return {
       settlement: {
         ...fresh,
@@ -603,21 +623,7 @@ function applyCadence(fresh, ctx) {
         powerStructure: {
           ...ps,
           [CADENCE_CLOCK]: ctx.tick,
-          factions: [...seats, {
-            id: factionIdFor(house),
-            name: house,
-            faction: house,
-            status: 'active',
-            category: String(step.emergence.category || 'other'),
-            power: 1,
-            impairments: [],
-            internalSeats: {},
-            description: '',
-            memberNpcIds: [founder.id],
-            // Provenance the chronicle can read without re-deriving it.
-            materializedBy: 'density_cadence',
-            materializedAtTick: ctx.tick,
-          }],
+          factions: [...seats, risen],
         },
       },
       beats: [emergenceBeat({ sid: ctx.sid, townName, houseName: house, tick: ctx.tick, now: ctx.now })],
@@ -637,9 +643,20 @@ function applyCadence(fresh, ctx) {
     let moved = 0;
     const nextNpcs = npcs.map((raw) => {
       const npc = asObject(raw);
-      if (String(npc.factionAffiliation || '') !== folding) return raw;
+      // GREEN-TIP (2026-11-10, the chair's STOP-3 ruling): a folded member's MEMBERSHIP moves to the absorbing house
+      // (it rewrote the retired `factionAffiliation`, which no current card carries, so the fold moved nobody). The
+      // moved membership is written through the migration's one constructor (people/cardVeil.js ::
+      // membershipInPower): UNRANKED in the absorbing house — the cast ranks a power's first three uniquely (R-P5;
+      // 0 of 216 born powers hold two first-rank members), so the absorbing house keeps its own head and ranks, and
+      // the folded head enters as a member. A card already in the absorbing house keeps that membership and the
+      // folded one is dropped (the migration's dedupe).
+      if (!holdsMembership(npc, folding)) return raw;
       moved += 1;
-      return { ...npc, factionAffiliation: intoName };
+      const held = membershipsOf(npc);
+      const already = held.some((m) => m.power === intoName);
+      /** @typedef {import('../people/membership.js').Membership | ReturnType<typeof membershipInPower>} FoldedMembership */
+      const memberships = held.flatMap((m) => /** @type {FoldedMembership[]} */ (m.power !== folding ? [m] : already ? [] : [membershipInPower(into)]));
+      return { ...npc, memberships };
     });
     return {
       settlement: {

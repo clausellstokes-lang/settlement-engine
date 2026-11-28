@@ -1,0 +1,10 @@
+ FAIL  tests/lint/newsVoiceContract.walker.test.js > cross-home Wizard News voice contract
+ FAIL  tests/edgeFunctions/aiOutputSchemaBundle.freshness.test.js > aiOutputSchema bundle is fresh > the current source tree matches the recorded hash (regenerate via npm run build:edge-shared)
+ FAIL  tests/generators/institutionBudgetPromise.test.js > X-46 car 3 — the promise: the factor at 1.0 is the tip before the budget > every one of sixty seeds is byte-identical with the density factor forced to 1.0
+ FAIL  tests/generators/x46NpcBand.test.js > X-46 car 4 (iii) — dark, the world is byte-identical; lit (in this test only), the roster follows the people > sixty seeds (ten a tier) generate byte-identically to the dark digests captured at the window tip (2026-11-04)
+ FAIL  tests/domain/editWorldFactResources.test.js > EM-B2b2 — the DM's nearby-resources word survives resolveResources > A2 — THE NO-EDIT PATH IS UNMOVED: a dormant re-derivation is byte-identical to the PRE-CHANGE step's own output
+ FAIL  tests/domain/editWorldFactResources.test.js > EM-B2b2 — the DM's nearby-resources word survives resolveResources > A6 — THE MARK IS NOT THE ECHO: the step's own resolved write-back, handed back in as a generation input, resolves exactly as before
+ FAIL  tests/lint/negativeAssertionAnchor.walker.test.js > negative-assertion anchor walker (habitat removal) > no NEW un-anchored negative assertion anywhere in the test corpus
+ FAIL  tests/lint/negativeAssertionAnchor.walker.test.js > negative-assertion anchor walker (habitat removal) > the generation-facing quarantine is EXACT (a new, grown or unbanked offender reds)
+ Test Files  6 failed | 539 passed | 1 skipped (546)
+      Tests  7 failed | 6720 passed | 16 skipped (6743)

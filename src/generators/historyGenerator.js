@@ -13,16 +13,19 @@ import { resolvePrimaryStress } from './stressPriority.js';
 import { deriveTradeCommodity } from './tradeCommodity.js';
 import { buildCurrentTensionTokens, renderHistoryTemplate } from './historyTemplate.js';
 import { pick, random01, randInt } from './helpers.js';
-import { random as _rng } from '../kernel/rngContext.js';
+import { random as _rng, getActiveRng } from '../kernel/rngContext.js';
 
 import { genArrivalDetail } from './narrativeGenerator.js';
-import { AGE_BY_TIER, HISTORICAL_EVENTS_DATA, EVENT_TYPE_NAMES, historyDescription } from '../data/historyData.js';
+import { AGE_BY_TIER, HISTORICAL_EVENTS_DATA, EVENT_TYPE_NAMES, historyDescription, historyDescVariantsOf, tensionWording, HISTORY_QUARTER_WORDS, HISTORY_DESC_SIBLINGS, tensionHeldByTimeline, placedTensionTokens, legitimacyHeldTensions, livelihoodLead, sizedResourceEvent } from '../data/historyData.js';
 import { resolveGenerationWorldLaw } from './generationContext.js'; import { defenseFactsOf } from '../domain/defense/defenseFacts.js'; import { crimeSignalOf } from '../domain/crimeSignal.js'; // R6 (and F4 unit 3b): one line, so no cited line moves
 import {
   STRESS_TO_TENSION,
   TIMELINE_CATEGORY_TYPES,
 } from './history/historyPolicyData.js';
-import { deriveHistoryRouteContext } from './history/historyRouteContext.js';
+import { deriveHistoryRouteContext, smallPlaceWordsOf } from './history/historyRouteContext.js';
+import { drawDeclared, filterDeclared, lineText, resolveSibling } from '../domain/facts/drawDeclared.js';
+import { factsOf } from '../domain/facts/factsOf.js';
+import { nativeSemanticResourceKeys } from '../domain/content/customContentSemanticAuthority.js';
 import { generateSafetyNarrative2, generateTradeNarrative2 } from './history/historyEventStrands.js';
 export {
   STRESS_TO_TENSION,
@@ -72,7 +75,7 @@ const buildHistoryContext = (
 
   // Determine primary trade commodity — unified scan (tradeCommodity.js); the
   // strict variant (null fallback) because history prose interpolates it.
-  const exports = economicState?.primaryExports || [];
+  const exports = (economicState?.primaryExports || []).map((e) => (typeof e === 'string' ? e.replace(/(?:\s*\((?:transit|naval route only|taxed by occupation)\))+\s*$/i, '') : e)); // BAR3-PLACES (H3): history names the good, never its trade mark (tradeListDisplay.js :: tradeMarkOf's three)
   const tradeCommodity = deriveTradeCommodity(economicState);
 
   // Determine dominant guild
@@ -93,7 +96,7 @@ const buildHistoryContext = (
   })();
 
   // Power structure context
-  const dominantFaction = powerStructure?.factions?.[0]?.faction || 'the governing council';
+  const dominantFaction = powersStrongestFirst(powerStructure?.factions)[0]?.faction || 'the governing council'; // D4 (RULING G4): the strongest, not the first stored row
   const stability = powerStructure?.stability || 'Stable';
   const recentConflict = powerStructure?.recentConflict || null;
 
@@ -153,7 +156,11 @@ const buildHistoryContext = (
     monsterThreat: threat || 'frontier',
     // resolveResources writes the resolved resource list back to config.nearbyResources;
     // surface it so the resource-anchored history events below are reachable.
-    nearbyResources: config.nearbyResources || [],
+    // BAR3-CLOSE-SWEEP-B (2026-11-16, letter a): the NATIVE members only (`nativeSemanticResourceKeys`, the roster's
+    // identity), never a custom label. The resource-anchored rolls below match keys by substring, so a custom resource
+    // named "grain_fields …" took an extra roll and shifted the stream the tensions draw from; since BAR3-DEFECON-2
+    // (decd2a1f8) the crime-wave tension settles the safety profile's lines at assembly, so a rename moved mechanics.
+    nearbyResources: nativeSemanticResourceKeys(config),
     primaryExports: exports,
     incomeSources: (economicState?.incomeSources || []).map(s => s.source),
     prosperity: economicState?.prosperity || 'Modest',
@@ -178,16 +185,35 @@ const buildHistoryContext = (
 };
 
 
+/**
+ * THE TIMELINE HOOK'S RESOLUTION (CENSUS-1f unit 3). `drawDeclared` over the drawn row and the
+ * template's other rows not yet printed (the rows still in the roll's domain, less those an earlier
+ * resolution printed); the drawn row is returned unless it is refused or already printed.
+ * @param {any} drawnRow @param {any} eventTemplate @param {any[]} remaining @param {Set<unknown>} taken
+ * @param {string[]} printed @param {object | (() => object) | null} facts
+ */
+const resolveTimelineHook = (drawnRow, eventTemplate, remaining, taken, printed, facts) => {
+  const domain = [drawnRow, ...remaining.filter((row) => !taken.has(row) && !printed.includes(lineText(row)))];
+  const already = taken.has(drawnRow); const noted = notedSoFar(); // W2-FIX-DATA-3 item 6: the notes made below are keyed by the row's own index in the template (noteByTemplateRow)
+  const r = drawDeclared(domain, {
+    draw: () => drawnRow, facts, poolId: `historyData:HISTORICAL_EVENTS_DATA.plotHooks:${eventTemplate?.type ?? ''}`,
+    surface: 'history', drawKind: 'R', key: `${getActiveRng()?.seed ?? ''}::${eventTemplate?.type ?? ''}::${lineText(drawnRow)}`, // R-AT (CENSUS-1i unit 5): the settlement's identity leads the key
+  });
+  if (!already) return noteByTemplateRow(noted, domain, eventTemplate, r.line);
+  noteByTemplateRow(noted, domain, eventTemplate, null); const others = domain.slice(1); const notedOthers = notedSoFar();
+  return others.length ? noteByTemplateRow(notedOthers, others, eventTemplate, drawDeclared(others, { draw: (p) => p[0], facts, poolId: `historyData:HISTORICAL_EVENTS_DATA.plotHooks:${eventTemplate?.type ?? ''}`, key: `${getActiveRng()?.seed ?? ''}::${eventTemplate?.type ?? ''}::taken`, surface: 'history', drawKind: 'R' }).line) : null;
+};
+
 // ─── generateEventNarrative ───────────────────────────────────────────────────
 /**
  * Render a historical event at a specific point in time, substituting template
  * variables and selecting effects/hooks appropriate to the event severity.
  */
 
-const generateEventNarrative = (eventTemplate, yearsAgo, extraTokens = {}, descSeed = null) => {
+const generateEventNarrative = (eventTemplate, yearsAgo, extraTokens = {}, descSeed = null, hookFacts = null) => {
   // Template variable substitutions (can be overridden by extraTokens)
   const defaultTokens = {
-    '{quarter}': pick(['the market quarter', 'the residential district', 'the waterfront', 'the temple district']),
+    '{quarter}': drawDeclared(HISTORY_QUARTER_WORDS, { draw: (p) => pick(p), facts: hookFacts, poolId: 'historyData:HISTORY_QUARTER_WORDS', surface: 'history', drawKind: 'R', key: `${getActiveRng()?.seed ?? ''}::historyData:HISTORY_QUARTER_WORDS` }).text, // W2-FIX-DATA-2 item 1: the one pick kept; a refused word resolves through the declared door
     '{building_type}': pick(['wooden buildings', 'warehouses', 'housing', 'commercial buildings']),
     '{percent}': randInt(15, 60),
     '{duration}': randInt(1, 5),
@@ -240,7 +266,7 @@ const generateEventNarrative = (eventTemplate, yearsAgo, extraTokens = {}, descS
   // (historyData.historyDescription). The draw count remains fixed:
   // defaultTokens builds every pick regardless of which tokens the chosen
   // variant references, then the renderer resolves every occurrence.
-  const description = renderHistoryTemplate(historyDescription(eventTemplate, descSeed), defaultTokens);
+  const description = renderHistoryTemplate(sizedHistoryText(historyDescription(eventTemplate, descSeed), hookFacts), defaultTokens); // W2-FIX-DATA-5 (#331): a text's small-place twin, draw-free
 
   // Select lasting effects based on severity
   const severity = pick(eventTemplate.severity || ['major']);
@@ -259,29 +285,47 @@ const generateEventNarrative = (eventTemplate, yearsAgo, extraTokens = {}, descS
   if (yearsAgo <= 80) {
     const hookCount = severity === 'catastrophic' ? 3 : severity === 'major' && _rng() < 0.5 ? 2 : 1;
     const availableHooks = [...(eventTemplate.plotHooks || [])];
+    /** @type {Set<unknown>} rows already printed by a resolution, never printed twice */
+    const taken = new Set();
     for (let i = 0; i < Math.min(hookCount, availableHooks.length); i++) {
       const idx = randInt(0, availableHooks.length - 1);
-      let hook = availableHooks.splice(idx, 1)[0];
+      // CENSUS-1f unit 3 (Appendix B item 12, R): the roll and its splice are unchanged (the drawn row
+      // leaves the domain, so every later roll's range is as before, and the loop's length too). The
+      // drawn row is then RESOLVED through `drawDeclared` against CENSUS-3d's declarations: refused
+      // (or already printed by an earlier resolution), it gives way to the hash argmax over the
+      // template's admitted, unprinted rows; none → this roll prints nothing. The ECHO roll below is
+      // keyed on the DRAWN row's tense, so the roll count never depends on the resolution.
+      const drawnRow = availableHooks.splice(idx, 1)[0];
+      const resolvedRow = resolveTimelineHook(drawnRow, eventTemplate, availableHooks, taken, selectedHooks, hookFacts);
+      const drawnText = lineText(drawnRow);
+      let hook = resolvedRow == null ? null : lineText(resolvedRow);
+      if (resolvedRow != null && resolvedRow !== drawnRow) taken.add(resolvedRow);
       // For older events (last century: 30–80y), reframe present-tense hooks as
       // historical discoveries — things uncovered now, not things actively happening.
-      if (yearsAgo > 30 && hook) {
+      if (yearsAgo > 30 && drawnText) {
+        // W5 HIS (2026-11-07, the owner's style law): each prefix is a TELLING, so the present-tense hook after it
+        // reads as the story told then, not as a document's machinery.
+        // {colour} (CENSUS-2e, R-R and R-AD; ledger ECHO_PREFIXES_DOSSIER.json): each prefix frames a past
+        // discovery (old records, a document, an archivist's notes from that period); none asserts what the
+        // place holds now, so none is a roster claim.
         const ECHO_PREFIXES = [
-          'Old records suggest ',
-          'A recently surfaced document implies ',
-          'Family accounts passed down from the time claim ',
-          "An archivist's notes from that period reveal ",
-          'Evidence that survived the years indicates ',
+          'An old story from that time: ',
+          'A letter found this year tells it this way: ',
+          'Families who lived through it tell it this way: ',
+          'The records of that time say: ',
+          'What survives from that time says: ',
         ];
         // Only prefix hooks that read as present-tense (contain present-tense signals)
         const presentTenseSignals = [' is ', ' are ', ' has ', ' have ', ' exists', ' exist', ' being '];
-        const needsReframe = presentTenseSignals.some(sig => hook.toLowerCase().includes(sig));
+        const needsReframe = presentTenseSignals.some(sig => drawnText.toLowerCase().includes(sig));
         if (needsReframe) {
-          const prefix = ECHO_PREFIXES[Math.floor(_rng() * ECHO_PREFIXES.length)];
-          // Lowercase the first letter of the hook when adding prefix
-          hook = prefix + hook.charAt(0).toLowerCase() + hook.slice(1);
+          const prefix = ((p) => (yearsAgo > 60 && p === ECHO_PREFIXES[2] ? 'Family accounts passed down from that time tell it this way: ' : p))(ECHO_PREFIXES[Math.floor(_rng() * ECHO_PREFIXES.length)]); // COHERENCE-PRESUME (ruling B): past sixty years (TIME_BANDS: older than its bearers) no family lived through it; the twin, chosen by age after the same roll
+          // Lowercase the first letter of the hook when adding prefix (CENSUS-1f: a resolved row that
+          // does not read as present tense keeps its own words; the roll was the drawn row's)
+          if (hook && presentTenseSignals.some(sig => hook.toLowerCase().includes(sig))) hook = prefix + hook.charAt(0).toLowerCase() + hook.slice(1);
         }
       }
-      selectedHooks.push(hook);
+      if (hook) selectedHooks.push(hook);
     }
   }
 
@@ -291,12 +335,37 @@ const generateEventNarrative = (eventTemplate, yearsAgo, extraTokens = {}, descS
     name: eventTemplate.name || EVENT_TYPE_NAMES[eventTemplate.type] || 'The Event',
     description,
     severity,
-    lastingEffects: selectedEffects,
+    lastingEffects: sizedLastingEffects(selectedEffects, hookFacts), // W2-FIX-DATA-13: an effect that names a district or a quarter is a town's (draw-free)
     plotHooks: selectedHooks,
   };
 };
 
 // ─── buildHistoricalEvent ─────────────────────────────────────────────────────
+
+/**
+ * THE TENSION TEMPLATES' DECLARATIONS (R-AL, CENSUS-1g unit 4), read at the selection: a template
+ * that presumes a fact declares it beside the table (never on the template object, which is spread
+ * into the record). `demographic_pressure` presumes a live migration — `crisis: migration` (R-I:
+ * "one of K must be active" is THE spelling; a bare `migration` is no atom). A refused template
+ * is set aside and the selection's own fallback draws the next one (no draw moved, R-Q).
+ * @type {Readonly<Record<string, Readonly<{ crisis?: ReadonlyArray<string> }>>>}
+ */
+export const TENSION_TEMPLATE_DECLARATIONS = Object.freeze({
+  demographic_pressure: Object.freeze({ crisis: Object.freeze(['migration']) }),
+});
+
+/**
+ * Is a selected tension template admitted by the birth so far (noted in the ledger when it declares)?
+ * @param {{ type: string }} tmpl @param {any} facts the history's `hookFacts` thunk
+ */
+const tensionAdmitted = (tmpl, facts) => {
+  const decl = TENSION_TEMPLATE_DECLARATIONS[tmpl.type];
+  if (!decl) return true;
+  const line = Object.freeze({ text: tmpl.type, ...decl });
+  return drawDeclared([line], {
+    draw: (p) => p[0], facts, poolId: 'historyData:HISTORICAL_EVENTS_DATA.tension', surface: 'history', drawKind: 'R', key: `${getActiveRng()?.seed ?? ''}::historyData:HISTORICAL_EVENTS_DATA.tension`, // R-AT (CENSUS-1i unit 5)
+  }).line !== null;
+};
 /**
  * Select and personalise a set of current tensions for this settlement.
  * Uses institution presence, economic state, stress type, and neighbor
@@ -311,6 +380,7 @@ const buildHistoricalEvent = (
   factions = [],
   context = {},
   worldLaw,
+  hookFacts = null, timeline = [], // URBAN-FIX D-1: the timeline, built before the tensions, so a tension's words follow its own event's age
 ) => {
   // Resolve active stress type
   const stresses = config.stressTypes?.length ? config.stressTypes : config.stressType ? [config.stressType] : [];
@@ -318,8 +388,8 @@ const buildHistoricalEvent = (
 
   // Resolve faction names for text substitution
   const govFaction = factions.find(f => f.isGoverning)?.faction || 'the governing authority';
-  const secFaction = (factions.find(f => !f.isGoverning) || factions[1])?.faction || 'the merchant class';
-  const altFaction = factions[1]?.faction || 'the merchant class';
+  const secFaction = (powersStrongestFirst(factions).find(f => !f.isGoverning) || powersStrongestFirst(factions)[1])?.faction || 'the merchant class'; // D4 (RULING G4): a regenerated history reads a stored roster, not always strongest-first
+  const altFaction = powersStrongestFirst(factions)[1]?.faction || 'the merchant class';
   const crimeFaction =
     factions.find(f => f.faction?.toLowerCase().includes('thieves') || f.faction?.toLowerCase().includes('criminal'))
       ?.faction || null;
@@ -368,7 +438,7 @@ const buildHistoricalEvent = (
     if ((economicViability.issues?.length || 0) > 0) {
       const tmpl = HISTORICAL_EVENTS_DATA.find(e => e.type === 'resource_scarcity');
       if (tmpl && _rng() > 0.4) {
-        const commodity = deriveTradeCommodity(economicState) || 'key goods';
+        const commodity = deriveTradeCommodity(economicState); // SW-B5: no 'key goods' fallback; no commodity, no clause
         // Viability issues carry `.description` canonically; only stress-derived ones
         // also set `.message`. Reading `.message` alone interpolated the literal
         // 'undefined' into dossier/PDF/AI-grounding prose for every description-only
@@ -377,10 +447,13 @@ const buildHistoricalEvent = (
         // neither is present rather than emitting a dangling clause.
         const topIssue = economicViability.issues[0];
         const issueText = topIssue?.message ?? topIssue?.description ?? '';
-        const lead = `The supply of ${commodity} (the settlement's economic backbone) is under pressure.`;
+        // W1 ECO second seat (the owner's style law, 2026-11-07): the lead names what the place lives
+        // by (its first export) and says that trade is strained; the top issue that follows is the
+        // evidence (on a migration it is the ARRIVALS food note; a departures record writes none).
+        const lead = livelihoodLead(commodity, economicState?.incomeSources); // W2-FIX-DATA-HISTORY item L (the first cut's #267): the lead reads the income shares
         selected.push({
           ...tmpl,
-          description: issueText ? `${lead} ${issueText}` : lead,
+          description: [lead, issueText].filter(Boolean).join(' ') || tmpl.description,
           specificIssue: issueText,
         });
         usedTypes.add('resource_scarcity');
@@ -393,7 +466,7 @@ const buildHistoricalEvent = (
         usedTypes.add('succession_crisis');
       }
     }
-    if (hasCriminal && !usedTypes.has('crime_wave') && _rng() > 0.5) {
+    if (hasCriminal && !usedTypes.has('crime_wave') && _rng() > crimeWaveBar(config, economicState)) { // KINDS-1 K1 (a): law 1's 0.5, or law 2's weight (troubleLaw.js), on the same draw
       const tmpl = HISTORICAL_EVENTS_DATA.find(e => e.type === 'crime_wave');
       if (tmpl) {
         selected.push({ ...tmpl });
@@ -405,7 +478,7 @@ const buildHistoricalEvent = (
   // Priority-add: neighbor tension
   if (neighborTension && !usedTypes.has(neighborTension)) {
     const tmpl = HISTORICAL_EVENTS_DATA.find(e => e.type === neighborTension);
-    if (tmpl) {
+    if (tmpl && trueToRecordAt(tmpl, hookFacts, true)) { // W2-FIX-DATA-HISTORY item A: a trade dispute that touches every merchant needs the market it names
       selected.push({ ...tmpl });
       usedTypes.add(neighborTension);
     }
@@ -417,7 +490,7 @@ const buildHistoricalEvent = (
       const n = (i.name || '').toLowerCase();
       return n.includes('fence') || n.includes('smuggl') || n.includes('bandit') || n.includes('outlaw');
     });
-    if (hasCrimInst) {
+    if (hasCrimInst && (!isWeightedTrouble(config) || _rng() < smallPlaceCrimeChance(economicState?.compound?.criminalEffective))) { // KINDS-1 K1 (c): law 1 always; law 2 its ONE coin, only here
       const tmpl = HISTORICAL_EVENTS_DATA.find(e => e.type === 'crime_wave');
       if (tmpl) {
         selected.push({
@@ -436,8 +509,14 @@ const buildHistoricalEvent = (
     const tensionType = STRESS_TO_TENSION[primaryStress];
     if (tensionType && !usedTypes.has(tensionType)) {
       const tmpl = HISTORICAL_EVENTS_DATA.find(e => e.type === tensionType);
-      if (tmpl) {
+      if (tmpl && tensionAdmitted(tmpl, hookFacts) && trueToRecordAt(tmpl, hookFacts, true, context.stability, context.prosperity) && tensionHeldByTimeline(tmpl, timeline)) { // W2-FIX-DATA-2 item 2; W2-FIX-DATA-HISTORY item C: a legacy needs its own past on the timeline
         selected.push({ ...tmpl });
+        usedTypes.add(tensionType);
+      } else if (tmpl && HISTORY_TEMPLATE_RECORD_DECLARATIONS[tensionType]) {
+        // W2-FIX-DATA-5 item 1 (ROUND-3 #1003): a crisis's own template that its declaration refuses (the occupation's
+        // legacy under an occupation in force) leaves the fill's pool too, so the fill draws exactly as it did when the
+        // template took the slot, and only the slot it leaves is filled by the loop's next pick: no other tension of
+        // the town is re-dealt.
         usedTypes.add(tensionType);
       }
     }
@@ -451,11 +530,10 @@ const buildHistoricalEvent = (
   while (selected.length < targetCount && pool.length > 0) {
     let candidate = pick(pool);
     // Bias toward guild conflict if guilds present
-    if (hasGuild && candidate.type !== 'guild_conflict' && _rng() > 0.7) {
+    if (hasGuild && candidate.type !== 'guild_conflict' && _rng() > guildSwapBar(config, factions)) { // KINDS-1 K1 (b): law 1's 0.7, or law 2's weight on the pre-trim roster, on the same draw
       const guildTmpl = pool.find(e => e.type === 'guild_conflict');
       if (guildTmpl) candidate = guildTmpl;
     }
-    pool.splice(pool.indexOf(candidate), 1);
     // ⛔ NO CRIME WAVE WITHOUT CRIME (lane RUNG1B-F4 unit 3b, 2026-11-04;
     // docs/F4_CRIME_SIGNAL_2026-11-04.md). The fill drew `crime_wave` in places with no criminal
     // faction and no criminal house, and its "the criminal network" and "A guard captain is on
@@ -464,7 +542,20 @@ const buildHistoricalEvent = (
     // template is set aside and the loop draws again, so only those places' streams move. The
     // roster here is the pre-trim one; the density law's trim only removes a criminal faction,
     // never adds one, so "none here" is "none on the final record".
+    // W2-FIX-DATA-3 (2026-11-13): a drawn candidate leaves the pool, SELECTED or set aside, so a later pick
+    // cannot draw it again. The second seat's cure commit (dde3b1277) dropped this splice when it added the
+    // set-aside `continue`s below, which let the same template be selected twice: 28 of the census's 720 towns
+    // printed a repeated tension type (r2r-town-51 guild_conflict+guild_conflict). The splice before the guards
+    // is the original shape; a set-aside candidate still leaves and the loop draws the next from the reduced pool.
+    pool.splice(pool.indexOf(candidate), 1);
     if (candidate.type === 'crime_wave' && !crimeSignalOf({ seats: factions, estate: institutions }).present) continue;
+    if (!tensionAdmitted(candidate, hookFacts)) continue; // R-AL: a template that presumes a fact declares it
+    // ⛔ W2-FIX-DATA-2 items 2 and 3 (the REVIEW-W2B cold list, rows 31, 300, 40, 314): NOR A TENSION THE RECORD
+    // ITSELF MAKES FALSE — a leadership vacuum under a power the record calls settled, a collapse of fortunes where
+    // the record says the place ends the year with money to spare, a guild war where no guild stands. Set aside
+    // exactly as the crime signal's own above (R-Q: the template leaves the pool and the loop draws again; no draw is
+    // added or re-mapped), so only those places' streams move.
+    if (!trueToRecordAt(candidate, hookFacts, true, context.stability, context.prosperity) || !tensionHeldByTimeline(candidate, timeline)) continue; // W2-FIX-DATA-HISTORY item C
     selected.push({ ...candidate });
     usedTypes.add(candidate.type);
   }
@@ -489,13 +580,17 @@ const buildHistoricalEvent = (
   const tensionTokens = buildCurrentTensionTokens(context);
   return selected
     .filter(worldLaw.allowsHistoryEvent)
-    .map(tension => ({
+    .map((tmpl) => tensionByMemory(tmpl, timeline)).map(({ descriptionByDirection, ...tension }) => ({ // #20: the direction table is the template's, never the record's; URBAN-FIX D-1: so is the memory table
       ...tension,
-      description: renderHistoryTemplate(
-        substituteNames(tension.description),
-        tensionTokens,
-      ),
+      description: apartFromOwnEvent(renderHistoryTemplate(
+        substituteNames(sizedHistoryText(tensionWording({ ...tension, descriptionByDirection }, config), hookFacts)), // #20: the migration's own direction; PAGE-2 T1: or a spare; W2-FIX-DATA-5 (#331): its small-place twin
+        placedTensionTokens(tensionTokens, tension.type, timeline), // BAR4-HISTORY T1 (C24951): ONE EVENT, ONE PLACE (historyData.js); COHERENCE-PRESUME: never its own past event's sentence, word for word (apartFromOwnEvent)
+      ), tension.type, timeline, (text) => renderHistoryTemplate(substituteNames(sizedHistoryText(text, hookFacts)), placedTensionTokens(tensionTokens, tension.type, timeline))),
       factions: (tension.factions || []).map(substituteNames),
+      // CENSUS-3d unit 6: a tension prints its template's whole hook list (kind A), so the list is
+      // filtered by the record (a refused row leaves it) and stored as text; a list that declares
+      // nothing is copied unchanged.
+      ...(Array.isArray(tension.plotHooks) ? { plotHooks: troubleHooksOf(tension.type, hookFacts, config?._seed) ?? filterDeclared(tension.plotHooks, { facts: hookFacts, poolId: `historyData:HISTORICAL_EVENTS_DATA.plotHooks:${tension.type}`, surface: 'history', drawKind: 'A' }).map(lineText) } : {}), ...(Array.isArray(tension.lastingEffects) ? { lastingEffects: sizedLastingEffects(tension.lastingEffects, hookFacts) } : {}), // W2-FIX-DATA-13: the whole list, a district's or a quarter's effect left out below a town; HOOKS-BUILD: the eight kinds' three from their pool (history/troubleHooksOf.js)
     }))
     .filter(worldLaw.allowsHistoryEvent);
 };
@@ -515,7 +610,7 @@ const buildHistoricalEvent = (
 // tyranny/wild_magic types deepen the pools so city/metropolis can reach 12/20.
 // Stress → tension-template mapping (hoisted from buildHistoricalEvent so the
 // registration walker can verify every target is a real HISTORICAL_EVENTS_DATA type).
-const generateRelationshipEvent = (age, tier, config, context, worldLaw) => {
+const generateRelationshipEvent = (age, tier, config, context, worldLaw, hookFacts = null) => {
   // Number of history events (scaled by age)
   const _ageFraction = age / 100;
   // Scale event count by age — each tier gets appropriate depth
@@ -579,7 +674,11 @@ const generateRelationshipEvent = (age, tier, config, context, worldLaw) => {
       ),
     );
     if (!pool.length) continue;
-    const tmpl = pool[Math.floor(_rng() * pool.length)];
+    // W2-FIX-DATA-2 item 3: the roll is unchanged; the drawn template, where the record makes it false (a guild war
+    // with no guild), gives way DRAW-FREE to the next admitted template of this same pool. None → the slot is skipped,
+    // as an exhausted category is.
+    const tmpl = admittedTimelineTemplate(pool, Math.floor(_rng() * pool.length), hookFacts);
+    if (!tmpl) continue;
     // Track the exact template so it is not emitted twice this timeline.
     const tmplName = tmpl.name || tmpl.type || '';
     usedNames.add(tmplName);
@@ -598,7 +697,7 @@ const generateRelationshipEvent = (age, tier, config, context, worldLaw) => {
     // Build context tokens
     const contextTokens = context ? generateTradeNarrative2(cat, context) : {};
 
-    const event = generateEventNarrative(tmpl, yearsAgo, contextTokens, `${config?._seed ?? ''}::histEvent::${i}::${tmpl.type}`);
+    const event = collapseAtFounding(generateEventNarrative(tmpl, yearsAgo, contextTokens, `${config?._seed ?? ''}::histEvent::${i}::${tmpl.type}`, hookFacts), tmpl.type, age);
     event.type = cat;
     // Preserve the stable template id alongside the display category. The final
     // dedup keys on templateType (not category), so two distinct arcs in the same
@@ -644,10 +743,11 @@ const generateRelationshipEvent = (age, tier, config, context, worldLaw) => {
         ? HISTORICAL_EVENTS_DATA.find(event => (
             event.type === anchorType
             && worldLaw.allowsHistoryEvent(event)
+            && trueToRecordAt(event, hookFacts, false) // W2-FIX-DATA-2 item 3: an anchor the record makes false is no anchor (the event keeps its own words)
           ))
         : null;
       if (!tmpl) return; // no settlement-appropriate anchor — keep the original event
-      const replacement = generateEventNarrative(tmpl, event.yearsAgo, contextTokens, `${config?._seed ?? ''}::histAnchor::${cat}::${tmpl.type}`);
+      const replacement = collapseAtFounding(generateEventNarrative(tmpl, event.yearsAgo, contextTokens, `${config?._seed ?? ''}::histAnchor::${cat}::${tmpl.type}`, hookFacts), tmpl.type, age);
       if (replacement) {
         replacement.type = cat;
         replacement.templateType = tmpl.type; // thread the anchor's template id for the dedup
@@ -690,13 +790,13 @@ const generateRelationshipEvent = (age, tier, config, context, worldLaw) => {
     resourceEvents.push({
       name: 'The Great Harvest Compact',
       description:
-        'After years of disputed grain prices, the major farming families and the merchant guilds negotiated a formal compact regulating grain sale and storage. It held for a generation.',
+        'After years of disputed grain prices, the major farming families and the guilds negotiated a formal compact regulating grain sale and storage. It held for a generation.',
       lastingEffects: [
         'Grain price regulation persists in modified form',
-        "Compact signatories' families still hold preferential market positions",
+        "Compact signatories' families still hold first call on the grain sales",
       ],
       plotHooks: [
-        'A clause in the compact entitles certain families to first refusal on grain sales, and the current shortage makes that clause valuable',
+        'A clause in the compact entitles certain families to first refusal on grain sales, and in a lean year that clause is worth fighting over', // BAR3-PLACES-3 (C54896): it claimed "the current shortage" in towns whose food record holds none (16 of 19 on the 720); a lean year, never a claim of now (VETOABLE wording)
         'The original compact was signed under duress; someone wants that history exposed',
       ],
       severity: ['minor', 'major'],
@@ -757,14 +857,14 @@ const generateRelationshipEvent = (age, tier, config, context, worldLaw) => {
   }
 
   if (resourceEvents.length > 0 && events.length < 7) {
-    const chosen = resourceEvents[Math.floor(_rng() * resourceEvents.length)];
+    const chosen = admittedResourceEvent(resourceEvents, Math.floor(_rng() * resourceEvents.length), hookFacts); // W2-FIX-DATA-5 (ww-25): a refused pick resolves draw-free to the next admitted event
     // Resource events are authored with an array severity (like a template); collapse
     // it to a single rendered string so downstream consumers (e.g. historyBeats
     // severityScore) see the same shape as generateEventNarrative output.
     if (Array.isArray(chosen.severity)) chosen.severity = pick(chosen.severity);
     // Strip plot hooks from ancient resource events (same ≤80y rule)
     if ((chosen.yearsAgo || 0) > 80) chosen.plotHooks = [];
-    events.push(chosen);
+    if (resourceEventAdmitted(chosen, hookFacts)) events.push(sizedResourceEvent(chosen, hookFacts)); // W2-FIX-DATA-5 (ww-25): none admitted, none written (the draws above are kept); W2-FIX-DATA-HISTORY item E: its texts resolved
     events.sort((a, b) => (b.yearsAgo || 0) - (a.yearsAgo || 0));
   }
 
@@ -856,9 +956,18 @@ export const generateHistory = (
   const founding = genArrivalDetail(config, context, worldLaw);
   founding.age = age;
 
+  // CENSUS-3d unit 6: the facts a declared history hook is checked against — the birth so far
+  // (roster, config, tier, the power structure), read lazily and once. The birth self-check
+  // (`cert:false-presumption`) re-asserts every declared hook against the FINAL record.
+  let heldHookFacts = null;
+  const hookFacts = () => (heldHookFacts ??= factsOf(
+    { institutions, config, tier, powerStructure, stress: Array.isArray(config?.stressTypes) ? config.stressTypes.map((type) => ({ type })) : [] },
+    worldLaw?.portKind ? { waterKind: worldLaw.portKind } : {},
+  ));
+  if (context) Object.assign(context, smallPlaceWordsOf(context, hookFacts)); // W2-FIX-DATA-2 item 1: a place of village size or smaller takes its small-place word (draw-free)
   // Historical timeline
   const timeline = age > 0
-    ? generateRelationshipEvent(age, tier, config, context, worldLaw)
+    ? generateRelationshipEvent(age, tier, config, context, worldLaw, hookFacts) // CENSUS-1f: the timeline hooks resolve against the birth so far
     : [];
 
   // Current tensions
@@ -868,7 +977,7 @@ export const generateHistory = (
     tier,
     economicState,
     config,
-    powerStructure?.factions || [], context, worldLaw,
+    powerStructure?.factions || [], context, worldLaw, hookFacts, timeline,
   );
 
   // Derive historical character from event pattern
@@ -915,7 +1024,7 @@ export const generateHistory = (
     age,
     founding: speakFounding(founding, noun),
     historicalEvents: spokenTimeline,
-    currentTensions: Array.isArray(tensions) ? tensions.map((t) => speakRecord(t, noun)) : tensions,
+    currentTensions: Array.isArray(tensions) ? legitimacyHeldTensions(tensions.map((t) => speakRecord(t, noun)), powerStructure) : tensions, // BAR4-HISTORY C26792: an accepted seat's legitimacy tension in its twin (historyData.js)
     historicalCharacter,
     ...(ancientRuin ? { ancientRuin } : {}),
     eventsTimeline: spokenTimeline.map(e => ({
@@ -979,3 +1088,160 @@ function speakFounding(founding, noun) {
   for (const [key, value] of Object.entries(out)) out[key] = speakStored(value, noun);
   return out;
 }
+
+// ─── URBAN-FIX D-1: `tensionByMemory` (a tension's words follow what the timeline holds of its own event) lives in
+// `./history/tensionByMemory.js`, moved verbatim by KINDS-1 K1 to make room under the file's size ceiling (draw-free).
+import { tensionByMemory } from './history/tensionByMemory.js';
+
+// ─── COHERENCE-PRESUME (the chair's ruling B, 2026-11-11): a current tension is not its past event, word for word ──
+// The tension and the timeline are drawn from one table, and an event that draws its template's canonical sentence
+// printed it again as the town's CURRENT tension (38 tensions in 37 of the 360 corpus towns). Where that happens the
+// tension takes the first of its template's authored variants whose words differ. Draw-free: nothing is rolled.
+
+/**
+ * @param {string} description the tension's rendered sentence
+ * @param {string} type its template type
+ * @param {ReadonlyArray<any>} timeline the history's events, built before the tensions
+ * @param {(text: string) => string} render the tension's own renderer
+ * @returns {string}
+ */
+function apartFromOwnEvent(description, type, timeline, render) {
+  const own = (Array.isArray(timeline) ? timeline : []).find((e) => e?.templateType === type);
+  if (!own || own.description !== description) return description;
+  return historyDescVariantsOf(type).map(render).find((text) => text !== own.description) ?? description;
+}
+
+// ─── W2-FIX-DATA-2 items 2 and 3 (2026-11-13; the REVIEW-W2B cold list, rows 31, 300, 40, 314): A TEMPLATE THE RECORD MAKES FALSE ──
+// The record's own tension said "the last strong leader died or left, and no one has yet consolidated their position"
+// beside a settled power, and "a speculative frenzy … collapsed … ruining fortunes" in a city with money to spare; the
+// timeline told of rival guilds at war in a hamlet that has none. Each template now declares what makes it false, read
+// through its home: the prosperity band and the guild through the vocabulary (`factsOf.js :: prosperity`, `guild`), the
+// power's settledness through the stability band (`labelBands.js :: stabilityBandOf`; the vocabulary has no atom for it).
+// A refused pick resolves DRAW-FREE to the next admitted template of the same pool: no roll is added or moved.
+// At the end of the file on purpose: the prose wiring census cites this file's producer writes by line.
+import { stabilityBandOf } from '../domain/display/labelBands.js';
+import { prosperityLabelOf } from '../domain/prosperityRank.js';
+import { declarationAdmits, declarationOf } from '../domain/facts/factVocabulary.js';
+
+/**
+ * WHAT MAKES A TEMPLATE FALSE, declared beside the selection (never on the template object, which is spread into the
+ * record). `needs` are vocabulary atoms, read through the birth's facts; `excludes`, atoms the record must NOT hold
+ * (the vocabulary's own `excludes` arm: a crisis atom refuses under that crisis in force); `timeline`: the past event
+ * too (a guild war is a war between guilds whenever it was fought), else the current tension only.
+ * W2-FIX-DATA-5 item 1 (ROUND-3 #1003, R2 #1036): the occupation's legacy speaks of an occupation that is OVER (its
+ * description, both memory forms, its factions and its hooks), and the occupation's crisis maps to it
+ * (`historyPolicyData.js :: STRESS_TO_TENSION`): under an occupation in force it is no tension of the town. The past
+ * event keeps its account: a town may have been occupied before.
+ * W2-FIX-DATA-HISTORY item A (ROUND-3-CUT-INCREMENT ww-543, ww-572, ww-1524; CENSUS-2's economic_disparity writer): the
+ * Economic Divide is merchants against labourers (its description and both variants that name them, its hook of a
+ * merchant funding both sides, its merchant quarter walled apart), told of hamlets with no market; and the trade dispute
+ * "touched every merchant and every purse in town" where no market stands. Each needs the market home's answer
+ * (`facts/market.js`); the divide as a past event too (a refused pick resolves draw-free to the pool's next template, an
+ * anchor keeps the event's own words), the dispute as the current tension, at the neighbour's add as at the fill. The
+ * crash ("a speculative frenzy in {resource} and property collapsed") is the economic pool's next template where the
+ * divide gives way, and speaks of a market as surely: it needs one too, past and present.
+ * @type {Readonly<Record<string, Readonly<{ needs?: ReadonlyArray<string>, excludes?: ReadonlyArray<string>, timeline: boolean }>>>}
+ */
+export const HISTORY_TEMPLATE_RECORD_DECLARATIONS = Object.freeze({
+  guild_conflict: Object.freeze({ needs: Object.freeze(['guild']), timeline: true }),
+  occupation_legacy: Object.freeze({ excludes: Object.freeze(['crisis: occupied']), timeline: false }),
+  economic_disparity: Object.freeze({ needs: Object.freeze(['market']), timeline: true }), // W2-FIX-DATA-HISTORY item A: merchants against labourers, where a market stands
+  trade_dispute: Object.freeze({ needs: Object.freeze(['market']), timeline: false }), // W2-FIX-DATA-HISTORY item A: "every merchant and every purse", where a market stands
+  market_crash: Object.freeze({ needs: Object.freeze(['market']), timeline: true }), // W2-FIX-DATA-HISTORY item A: a speculative frenzy in goods and property, where a market stands
+  infiltration_fear: Object.freeze({ excludes: Object.freeze(['crisis: infiltrated']), timeline: false }), // W2-FIX-DATA-HISTORY item G (ww-1261): an open hunt for agents, not while the agents go unseen
+  pilgrimage_surge: Object.freeze({ needs: Object.freeze(['institution: temple']), timeline: false }), // W2-FIX-DATA-HISTORY item G (CENSUS-2): the temple's beneficiaries, where a temple stands
+});
+
+/** The stability bands that say the power is settled: a leadership vacuum is false under them (`labelBands.js`). */
+export const SETTLED_STABILITY_BANDS = Object.freeze(['Stable', 'Ordered', 'Enforced Order', 'Rigid']);
+
+/** The tension templates a settled power makes false (`powerStructure.stability`, banded). */
+export const TENSIONS_FALSE_UNDER_A_SETTLED_POWER = Object.freeze(['leadership_vacuum']);
+
+/**
+ * THE PROSPERITY A TENSION DENIES. A tension that says the fortunes are ruined and the wealth drained away is false
+ * where the record says the place ends its year with money to spare. The band is read through its own home
+ * (`prosperityRank.js :: prosperityLabelOf`, the reader the facts delegate to); the economy's record is not among the
+ * birth facts the history holds, so the band is handed in from the history's own context (`buildHistoryContext`'s
+ * `prosperity`, measured equal to the final record's on 720 of 720 births).
+ * Row 40 of the cold list is the crash; the trade collapse prints the same claim in the same towns.
+ */
+export const TENSIONS_FALSE_WHERE_THE_PLACE_IS_RICH = Object.freeze(['market_crash', 'trade_collapse']);
+
+/** The prosperity bands that say the money is there (`prosperityRank.js :: PROSPERITY_LABELS`, the top two). */
+export const RICH_PROSPERITY_BANDS = Object.freeze(['Prosperous', 'Wealthy']);
+
+/**
+ * Is this template true to the record? Draw-free; reads the history's facts and the power's stability.
+ * `tension`: the current tension (a leadership vacuum is false under a settled power); false: a past event.
+ * @param {{ type?: string }} tmpl @param {any} facts the history's `hookFacts` thunk
+ * @param {boolean} tension @param {unknown} [stability] `powerStructure.stability`, as the context carries it
+ * @param {unknown} [prosperity] `economicState.prosperity`, as the context carries it
+ * @returns {boolean}
+ */
+export function trueToRecordAt(tmpl, facts, tension, stability = null, prosperity = null) {
+  return trueToRecord(tmpl, facts, { tension, stability, prosperity });
+}
+
+/**
+ * @param {{ type?: string }} tmpl @param {any} facts
+ * @param {{ tension: boolean, stability?: unknown, prosperity?: unknown }} at
+ */
+function trueToRecord(tmpl, facts, at) {
+  const type = String(tmpl?.type);
+  if (at.tension && TENSIONS_FALSE_UNDER_A_SETTLED_POWER.includes(type)
+    && SETTLED_STABILITY_BANDS.includes(String(stabilityBandOf(typeof at.stability === 'string' ? at.stability : '')))) return false;
+  if (at.tension && TENSIONS_FALSE_WHERE_THE_PLACE_IS_RICH.includes(type)
+    && RICH_PROSPERITY_BANDS.includes(prosperityLabelOf(at.prosperity))) return false;
+  const decl = HISTORY_TEMPLATE_RECORD_DECLARATIONS[type];
+  if (!decl || (!at.tension && !decl.timeline)) return true;
+  return declarationAdmits(declarationOf({ text: type, needs: decl.needs, excludes: decl.excludes }), typeof facts === 'function' ? facts() : facts).admitted;
+}
+
+/**
+ * The timeline's pick, resolved: the drawn template if the record admits it, else the next admitted template of the
+ * same pool (wrapping); null when none is (the slot is skipped, as an exhausted category is).
+ * @template T @param {T[]} pool @param {number} i the drawn index @param {any} facts @returns {T | null}
+ */
+function admittedTimelineTemplate(pool, i, facts) {
+  for (let k = 0; k < pool.length; k++) {
+    const row = pool[(i + k) % pool.length];
+    if (trueToRecord(/** @type {any} */ (row), facts, { tension: false })) return row;
+  }
+  return null;
+}
+
+// ─── W2-FIX-DATA-5 (2026-11-13; ROUND-3-CUT #331): A HISTORY TEXT TAKES ITS SMALL-PLACE TWIN ─────────────────────
+// The great fire "spread through barges, warehouses, and wharf infrastructure across entire districts" in a village of
+// 172. A description that presumes a place's districts and quarters declares its size (`historyData.js ::
+// HISTORY_DESC_SIBLINGS`); in a place of village size or smaller its twin, which names neither, prints. The pick is
+// kept (the hash over the same texts), and the refused text resolves draw-free through the declared door.
+// At the end of the file on purpose: the prose wiring census cites this file's producer writes by line.
+
+/**
+ * @param {string} text a history template's raw text (its tokens unrendered)
+ * @param {object | (() => object) | null} facts the history's facts (`hookFacts`)
+ * @returns {string}
+ */
+function sizedHistoryText(text, facts) {
+  return resolveSibling(text, HISTORY_DESC_SIBLINGS, { facts, poolId: 'historyData:HISTORY_DESC_SIBLINGS', surface: 'history', drawKind: 'T' });
+}
+
+// ─── W2-FIX-DATA-5 (2026-11-13; ROUND-3-CUT-INCREMENT ww-25, HIGH): a resource event declares its size; the leaf holds why.
+import { admittedResourceEvent, resourceEventAdmitted } from './history/resourceEventAdmission.js';
+
+// W2-FIX-DATA-13 (the chair's 12:11 ruling): a lasting effect that names a district or a quarter is a town's (draw-free).
+import { sizedLastingEffects } from './history/sizedLastingEffects.js';
+// HOOKS-BUILD: a trouble's hooks from its kind's pool. HOOKS-CURES B: the timeline hook's note re-keying (W2-FIX-DATA-3 item 6) lives in the leaf.
+import { notedSoFar, noteByTemplateRow, troubleHooksOf } from './history/troubleHooksOf.js';
+
+// KINDS-1 K1, THE TROUBLE LAW (a zero-import leaf; DARK, its light the owner's word): at the end of the file so no cited
+// line moves. `buildHistoricalEvent`'s three fixed numbers change in place to these calls; every weight is the leaf's.
+import { crimeWaveBar, guildSwapBar, isWeightedTrouble, smallPlaceCrimeChance } from '../domain/trouble/troubleLaw.js';
+
+// BAR3-PLACES (H3, 2026-11-15): a trade collapse within five years of the town's age (4 of 88 on the census's 720) failed no
+// trade "the settlement was built upon": it takes the founding twin, draw-free (event, year and every draw unmoved).
+export const TRADE_COLLAPSE_AT_FOUNDING = 'The trade the settlement was founded to serve failed within its first few years, and the wealth it was meant to carry never came';
+/** @param {any} event @param {unknown} templateType @param {number} age */
+const collapseAtFounding = (event, templateType, age) => { if (event && templateType === 'trade_collapse' && typeof event.yearsAgo === 'number' && event.yearsAgo >= age - 5) event.description = TRADE_COLLAPSE_AT_FOUNDING; return event; };
+import { powersStrongestFirst } from '../domain/display/powersStrongestFirst.js'; // D4 (RULING G4): at the file's end, so no cited line moves

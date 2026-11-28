@@ -10,10 +10,13 @@
 import { registerStep } from '../pipeline.js';
 import { applyCascadeInstitutions } from '../cascadeGenerator.js';
 import { applySubsumption } from './subsumptionPass.js';
-import { collapseUpgradeChains, settlementDensity, shipFreeDesc } from './assembleInstitutions.js';
+import { collapseUpgradeChains, settlementDensity, settledStressTypes, shipFreeDesc } from './assembleInstitutions.js';
+import { drawInstitutionDesc } from './institutionDescDraw.js';
+import { birthFactsOf } from '../../domain/facts/factsOf.js';
 import { recordTrace } from '../../domain/trace.js';
 import {
   nativeSemanticName,
+  nativeSemanticResourceKeys,
 } from '../../domain/content/customContentSemanticAuthority.js';
 
 function instId(name) {
@@ -48,6 +51,8 @@ registerStep('cascadePass', {
     population: typeof population === 'number' ? population : null,
     // THE ONE DENSITY FACTOR (RUNG1B-F6): the settlement's own, read as assembleInstitutions reads it.
     density: settlementDensity(ctx),
+    // B1(i) (RULING-R24, R24b): the native nearby resources the draw reads, so the cascade asks the land as the draw does.
+    nearbyResources: nativeSemanticResourceKeys(ctx.effectiveConfig || {}, ctx.nearbyResources),
   });
   if (cascadeAdditions.length > 0) {
     // A-11 (chair ruling, round 3, 3b): an added row takes its ship-free text inland.
@@ -120,7 +125,7 @@ registerStep('cascadePass', {
         desc: 'Airship-era dock facilities handling both aerial and surface freight.',
         tags: ['port','trade'], priorityCategory: 'economy', baseChance: 0.75 },
       { category: 'Economy', name: "Harbour master's office",
-        desc: 'Regulates port and airship traffic, assigns berths, collects anchorage fees.',
+        desc: 'Regulates airship traffic, assigns mooring berths, collects anchorage fees.', // TAIL-DEFECON-3 (#16403, X9 11882): added only off the water (no port, no river): it regulates no port
         tags: ['law_enforcement','port'], priorityCategory: 'military', baseChance: 0.65 },
     ];
     const existingNames = new Set(
@@ -143,6 +148,22 @@ registerStep('cascadePass', {
         });
       }
     });
+  }
+
+  // W2-FIX-DATA-4 item 3 (REVIEW-W2-FIX-DATA F2; REVIEW-W2A-3 #502): A ROW THE CASCADE ADDS MEETS THE DECLARED DRAW.
+  // The cascade's rows kept their catalogue text and never met the description draw's resolution, so a line the
+  // record makes false printed as written: a customs house "via the port" in a road town with no docks, a river
+  // boatyard's "river craft" in a coastal port with no river. Each addition still on the roster is resolved here,
+  // at the step's end (after the airship override, which can add docks), through the same resolution the
+  // assembler's rows take (`institutionDescDraw.js`): over a pool of one text the hash pick is that text, a refused
+  // line takes its declared twin where the record admits it, else it stays. Draw-free: no rng is read.
+  if (cascadeAdditions.length > 0) {
+    let held = null;
+    const facts = () => (held ??= birthFactsOf({ institutions, config: { ...(ctx.config || {}), stressTypes: settledStressTypes(ctx.effectiveConfig || {}, ctx.config || {}) }, tier }, worldLaw));
+    for (const add of cascadeAdditions) {
+      if (!institutions.includes(add) || typeof add.desc !== 'string') continue;
+      add.desc = drawInstitutionDesc([add.desc], `${ctx._seed}:${add.name}`, facts, `${tier}|${add.category}|${add.name}`) ?? add.desc;
+    }
   }
 
   return {};

@@ -112,16 +112,16 @@ const FIXED = Object.freeze([0, 21, 42]);
  */
 const PRE_CHANGE = Object.freeze({
   0: Object.freeze({
-    derived: '93cf79d258df160c71f84512bf9769a9510f4e5c25ada5ffc25c1c26b64dd3bf',
-    replay: '468d7c2a0ee2cbd9106f767027b9756b0b65c5b86bf2cab48b8c36d515a70333',
+    derived: '5559e3157478abe38f899f9d5f7e7c187ae364f28fec015221cbc949b8386879',
+    replay: 'd4c0f4e9e347f19c070811c0232b8f49a5523fdbe3e4ade050511c31b2d99ed8',
   }),
   21: Object.freeze({
-    derived: '0dfd25bc67d146684b685d585b162936ea90ca3144d960deac86985ac97679c0',
-    replay: '44d813b2a2fc9f16c6d4b7a00ad81c476080bb1fe476327e87b5aa0d8941a7cd',
+    derived: '71ea4d5f28843f3a8027fe9ec2e23824d13c585a2df7b742cb4e000b01f65d4e',
+    replay: 'c45eaea50e57a9f9f117ee888fad277ebc7932cc18760e5e3f77d15bed4547ac',
   }),
   42: Object.freeze({
-    derived: '68d98fa01de5d341d10b35c20a83aa7eaa4ba6e4988dcc222c355a91b0f3f15c',
-    replay: 'f47ae41ccb25b361374d79aa88159f8892a974334d910eb233aeae865f2c7b6a',
+    derived: '8ff7bc4882f09a98c985e04c4d19918d0ba132da738fe61f13f7df4a17f7b547',
+    replay: 'ba5c465c307f64bc4db336cd9450f47dcaeb69d5837db70b251d5986b112fbc7',
   }),
 });
 // ── RE-CAPTURED 2026-10-01, the urban band (ODQ §934.86), BY THE SAME PLANT AND NEVER FROM THE LIVE STEP ALONE ─────
@@ -199,6 +199,127 @@ describe('EM-B2b2 — the DM\'s nearby-resources word survives resolveResources'
 // worktree, never this checkout), and the planted step and the live step produced the SAME six digests, so EM-B2b2
 // still moves no byte of the no-edit path; on every row the fresh generation equals the dormant re-derivation. Row 21's
 // `derived` (0dfd25bc) is the landed golden's control row.
+// ── RE-CAPTURED 2026-11-07, the pool census composed on rung 1's final 1bff51c6d (LANDING-R2, ODQ §934.105), BY THE SAME
+// PLANT ── All six digests moved. Rung 1's final reads the block above (this file green there); the census side f5dc50c6b
+// red. The cause is the census's generator changes, the same 33 lane commits the generator golden's record names
+// (docs/shift-records/2026-11-06-rung2-01-census-composed-generator-master.json, the chair's ruled exception: per-cause
+// stages are unbuildable on this landing); MEASURED on its own lineage, 73fa1a1e7 (reader-tonight-wants R11 unit 3, the
+// all-525 golden mover) moves all six against its parent 7f0632463, whose six digests equal the block above byte for
+// byte. Re-captured: the pre-EM-B2b2 step (12c437de4, sha256 62e16d59...) planted over a COPY of the tip dd2aab21d (a
+// scratch archive, never this checkout) and the live step produced the SAME six digests, so EM-B2b2 still moves no byte
+// of the no-edit path; on every row the fresh generation equals the dormant re-derivation. Row 21's `derived`
+// (b933a9c0) is the re-recorded golden's control row.
+
+// ── RE-CAPTURED 2026-11-07, the wiring wave's writer lane W0 (ODQ §934.105, R-W7), BY THE SAME PLANT ─────────────────
+// All six digests moved with the lane's records 02-05 (one import share, one food-source count, the legacy annotations
+// dated at birth and the date in one home; record 01 moves none of the three rows, which draw no migration). Row 21's
+// `derived` is the golden control row, traced record by record in generationForkCensus.test.js (0dfd25bc -> 27d34617);
+// rows 0 and 42 measured at the lane tip. Re-captured as above: the pre-EM-B2b2 step (12c437de4, sha256 62e16d59...)
+// planted over a COPY of this tree at 1dd31a377 (a detached probe worktree, never this checkout), and the planted step
+// and the live step produced the SAME six digests, so EM-B2b2 still moves no byte of the no-edit path; on every row the
+// fresh generation equals the dormant re-derivation.
+// ── RE-CAPTURED 2026-11-08, MERGE-CAR (the integration landing: records A and B, the rung-2 landing's merge and the people
+// car's merge over the integration branch; docs/shift-records/2026-11-08-merge-car-{a-rung2,b-people-car}-composition.json),
+// BY THE SAME PLANT ── All six digests moved. MEASURED by stage on git-archive trees: the W0 lane tip eb4c508e1 reads the
+// W0 block's six byte for byte; the W0 lane's merge into the integration branch fc834a6bd moves all six, as does the merge
+// base 262e8b255, so the car's tip 373a2947b (which carried W0's six) and the integration tip 7b3ffb6ee (which carried
+// LANDING-R2's) each read red, every digest moving on each side; the people car's merge 8dff691f3 moves all six against
+// either side, and the merged tip 2c7437030 equals the merge. Re-captured: the pre-EM-B2b2 step (12c437de4, sha256
+// 62e16d59...) planted over a COPY of 2c7437030 (a scratch archive, never this checkout) and the live step produced the
+// SAME six digests, so EM-B2b2 still moves no byte of the no-edit path; on every row the fresh generation equals the
+// dormant re-derivation (twice and equal). Row 21's `derived` (882e592f) is record B's golden control row
+// (generationForkCensus GOLDEN_CONTROL_HASH).
+// ── RE-CAPTURED 2026-11-10, the merge wave and the lanes after it (GREEN-TIP), BY THE SAME PLANT ──────────────────────────
+// All three rows moved (six digests). MEASURED by an untracked probe of A2/A6 at 8308f13f8 (0 drift) and at every first-
+// parent stage of 8308f13f8..bf14617ca touching src/, the helpers or scripts (73 stages, git-archive trees); the stages
+// that moved a row's digests:
+// W2 DEF 82a4e2856 (rows 0), W3 POW 1a160d599 (rows 0, 21, 42), W4 PEOPLE 66c23bfea (rows 0, 21, 42),
+// W5 HIS e510409b1 (rows 0, 21, 42), W7 HOOKS 501c97412 (rows 0, 21, 42),
+// FIX-PUBLIC-VEIL 7e65c7bec (rows 0, 21, 42), ALLEGIANCE-CAR1 e5f88930b (rows 0, 21, 42),
+// ALLEGIANCE-CAR4 824a8ce2f (rows 0, 21, 42), SW-2 INSTITUTIONS ef4645832 (rows 21, 42),
+// SW-B5 FRAMES 46e0121c2 (rows 0, 21, 42), SW-7 POWER-SIDE a3062d919 (rows 0, 21, 42),
+// SW-B1 CONTRADICTIONS 0f2cb865c (rows 21, 42), SW-10 HOOKS 856de8427 (rows 0, 21, 42),
+// SW-6 CRISIS-SURFACES ac1442a3d (rows 0, 21, 42), SW-8 RENAME-POWERS 56f3b2df7 (rows 0, 21, 42),
+// URBAN-FIX 17b814803 (rows 0, 21, 42).
+// Each is a lane merge with its own signed shift record; the first mover inside W2 DEF's merge is 979f45857 (safetyProfile.js,
+// measured by reverting it alone on the merge); the movers inside the later merges are not isolated (PLAUSIBLE per commit,
+// CONFIRMED per stage). At every stage the fresh digest equals the dormant re-derivation. Re-captured as above: the
+// pre-EM-B2b2 step (`git show dde845c15^:src/generators/steps/resolveResources.js`, sha256 62e16d59...) planted over a
+// COPY of this lane's tree (a detached probe worktree at 5af109812, never this checkout, removed afterwards), and the
+// planted step and the live step produced the SAME six digests (cmp-equal), so EM-B2b2 still moves no byte of the
+// no-edit path.
+// ── RE-CAPTURED 2026-11-12, STYLE-2-MERGE point 42 (STYLE-2-MERGE-8), BY THE SAME PLANT ── Rows 0 and 42 moved (four digests;
+// row 21, the golden control row, unmoved) by the COHERENCE-QUARREL merge d4723749a (lane/coherence-quarrel-2026-11-11 at
+// 1c7b5786c, record docs/shift-records/2026-11-12-style-2-merge-42-coherence-quarrel.json: the quarrels' issues, stakes,
+// descriptions and hooks, the safety record's plot hooks); the line's tip decc7bf15 reads all six green. Re-captured: the
+// pre-EM-B2b2 step (12c437de4, sha256 62e16d59...) planted over a COPY of the merged tree (a detached probe worktree, never
+// this checkout) and the live step produced the SAME six digests (cmp-equal, the live run twice and equal), so EM-B2b2
+// still moves no byte of the no-edit path; on every row the fresh generation equals the dormant re-derivation.
+
+// ── RE-CAPTURED 2026-11-12, STYLE-2-MERGE point 43 (STYLE-2-MERGE-8), BY THE SAME PLANT ── Rows 0, 21, 42 moved by the COHERENCE-PRESUME
+// merge f922124d0 (docs/shift-records/2026-11-12-style-2-merge-43-coherence-presume.json: a line names a thing the town does not have: the culture lines, the re-titled watch role and the ties it re-deals, the history and institution texts); the line before the merge reads all six green. Re-captured: the pre-EM-B2b2 step (12c437de4,
+// sha256 62e16d59...) planted over a COPY of the merged tree and the live step produced the SAME six digests (cmp-equal,
+// the live run twice and equal); on every row the fresh generation equals the dormant re-derivation.
+
+// ── RE-CAPTURED 2026-11-12, STYLE-2-MERGE point 46 (STYLE-2-MERGE-9), BY THE SAME PLANT ── Rows 0, 21, 42 moved by the COHERENCE-POWERS
+// merge 6aeaa4154 (docs/shift-records/2026-11-13-style-2-merge-46-coherence-powers.json: the dual hat re-deals the cast); the line before the merge reads all six green. Re-captured: the pre-EM-B2b2 step (12c437de4,
+// sha256 62e16d59...) planted over a COPY of the merged tree and the live step produced the SAME six digests (cmp-equal,
+// the live run twice and equal); on every row the fresh generation equals the dormant re-derivation.
+
+// ── RE-CAPTURED 2026-11-13, STYLE-2-MERGE point 47 (STYLE-2-MERGE-11), BY THE SAME PLANT ── Rows 0, 21, 42 moved by the COHERENCE-AGREE
+// merge 22cc9ef7d (docs/shift-records/2026-11-13-style-2-merge-47-coherence-agree.json: one fact, one answer: the resource roll's refused members refilled, the economy and defence read off the town's own record); the line before the merge reads all six green. Re-captured: THE LANE-ERA pre-EM-B2b2 step (the live
+// resolveResources.js less EM-B2b2's own 31 lines, sha256 adfd3ba4...; the same removal on the line's file reproduces 12c437de4's
+// blob, sha256 62e16d59..., byte for byte; COHERENCE-AGREE rewrote the step, so 12c437de4's copy would revert the lane) planted over a COPY of the merged tree and the live step produced the SAME six digests (cmp-equal,
+// the live run twice and equal); on every row the fresh generation equals the dormant re-derivation.
+
+// ── RE-CAPTURED 2026-11-15, THE CLOSE OF THE TAIL ROUND (TAIL-CLOSE-DOORS-3), BY THE SAME PLANT ── Rows 0, 21, 42 moved by the round's
+// declared moves (docs/shift-records/2026-11-15-the-close-of-the-tail-round.json; among them the resource generator's 9a3239ae7, R3-CODE-C-2),
+// re-captured at the line's final tree (f76fe38fd, the doors at 752d74a15) with the golden master in the same commit. Re-captured: THE LANE-ERA
+// pre-EM-B2b2 step (the live resolveResources.js less EM-B2b2's own 31 lines, sha256 adfd3ba4..., unchanged since point 47) planted over a COPY
+// of the tree and the live step produced the SAME six digests (cmp-equal); on every row the fresh generation equals the dormant re-derivation.
+// Row 21's `derived` is the re-recorded golden's control row (7ae63229, town|germanic|plains|road|civilized).
+
+// ── RE-CAPTURED 2026-11-15, THE CLOSE OF THE ROUND BAR2 (BAR2-CLOSE-DOORS-2), BY THE SAME PLANT ── Rows 0, 21, 42 moved (six digests) by
+// the round's declared text cures (docs/shift-records/2026-11-15-the-close-of-the-round-bar2.json; the owner's word 2026-11-15 20:27:16 UTC:
+// the places' house, origin and foodways rows, the people's tie descriptions), re-captured at the joined line's 1011a8a91 with the golden
+// master in the same commit. Re-captured: THE LANE-ERA pre-EM-B2b2 step (the live resolveResources.js less EM-B2b2's own 31 lines, sha256
+// adfd3ba4..., the step unchanged since point 47) planted over a COPY of the tree and the live step produced the SAME six digests (cmp-equal,
+// the live run twice and equal); on every row the fresh generation equals the dormant re-derivation.
+// Row 21's `derived` is the re-recorded golden's control row (b05d0766, town|germanic|plains|road|civilized).
+
+// ── RE-CAPTURED 2026-11-16, THE CLOSE OF THE ROUND BAR3 (BAR3-CLOSE-DOORS-2), BY THE SAME PLANT ── Rows 0, 21, 42 moved (six digests) by
+// the round's declared text cures (docs/shift-records/2026-11-16-the-close-of-the-round-bar3.json; the owner's word 2026-11-15 20:30:10 UTC:
+// "Yes that one too"), re-captured at the doors' branch over fb59da43e and the second repair seat's merge (b46b26d92) with the golden master in
+// the same commit. Re-captured: THE LANE-ERA pre-EM-B2b2 step (the live resolveResources.js less EM-B2b2's own 31 lines, sha256 adfd3ba4...,
+// the step unchanged since point 47) planted over a COPY of the tree and the live step produced the SAME six digests (cmp-equal, the live run
+// twice and equal, at fb59da43e and again at the merged tree); the same probe reproduces the stored six at 83fc14ad6; on every row the fresh
+// generation equals the dormant re-derivation. Row 21's `derived` is the re-recorded golden's control row (c42b5f20, town|germanic|plains|road|civilized).
+
+// ── RE-CAPTURED 2026-11-16, THE CLOSE OF THE ROUND BAR4 (BAR4-CLOSE-DOORS-2), BY THE SAME PLANT ── Rows 0 and 21 moved (four digests); row 42
+// did not. By the round's declared cures (docs/shift-records/2026-11-16-the-close-of-the-round-bar4.json; the owner's words 2026-11-16 08:55:14 and
+// 18:51:17 UTC: "Yes to plain yes for the example-town refresh."), re-captured at the doors' branch e942f648 (it holds Part 1's final tip 6483322cc)
+// after the golden master (1581ed12). Re-captured: THE LANE-ERA pre-EM-B2b2 step (the live resolveResources.js less EM-B2b2's own 31 lines, sha256
+// adfd3ba4..., the step unchanged since c4ac1ef84a) planted over a COPY of the tree (a detached worktree) and the live step produced the SAME six
+// digests (cmp-equal, the live run twice and equal); the same probe reproduces the stored six at c4ac1ef84a; on every row the fresh generation
+// equals the dormant re-derivation. Row 21's `derived` is the re-recorded golden's control row (5437998b, town|germanic|plains|road|civilized).
+
+// ── RE-CAPTURED 2026-11-18, THE CLOSE OF THE ROUNDS BAR5 TO BAR8 (CLOSE-DOORS-2), BY THE SAME PLANT ── Row 21 moved (both digests); rows 0 and 42
+// did not. By the rounds' declared cures (docs/shift-records/2026-11-18-the-close-of-the-rounds-bar5-to-bar8.json; the owner's word 2026-11-18 03:03:46
+// UTC: "yes: refresh the stored reference files and open the pull request."), measured at the frozen line 70e557d5b and re-proved at the doors'
+// branch 2f4eb8acf (it holds Part 1's final tip 0af60594a; the 525 byte-equal), after the golden master (b3cfdbcc3). Re-captured: THE LANE-ERA
+// pre-EM-B2b2 step (the live resolveResources.js less EM-B2b2's own 31 lines, sha256 adfd3ba4..., the step unchanged since 0ac61b4b4) planted over a
+// COPY of the tree (a detached worktree) and the live step produced the SAME six digests (cmp-equal, the live run twice and equal); the same probe
+// reproduces the stored six at the last green corpus 0ac61b4b4; on every row the fresh generation equals the dormant re-derivation. Row 21's
+// `derived` is the re-recorded golden's control row (8bb20e96, town|germanic|plains|road|civilized).
+
+// ── RE-CAPTURED 2026-11-19, THE LAST CLOSE BEFORE THE DEPLOY (LASTCLOSE-SIGN), BY THE SAME PLANT ── Row 21 moved (both digests); rows 0 and 42
+// did not. By K-WATCH's declared cure (points 48, 49, 57: the watch's line by the hours it keeps, the control row's guardEffectivenessDesc; no other
+// landed point moves the row; record docs/shift-records/2026-11-18-the-last-close-points-54-to-70.json; the owner's word 2026-11-18 about 19:07 UTC,
+// "Yes to both"; the chair's line SIGN 2026-11-19 01:04 UTC), after the golden master (a7a25bd39). Re-captured: THE LANE-ERA pre-EM-B2b2 step (the
+// live resolveResources.js less EM-B2b2's own 31 lines, sha256 adfd3ba4..., the step unchanged since 0dee69e17) planted over a COPY of the tree (a
+// detached worktree at c9a0b1c14) and the live step produced the SAME six digests (cmp-equal, the live run twice and equal); A2 and A6 read the stored
+// six green at the first close's tip 0dee69e17; on every row the fresh generation equals the dormant re-derivation. Row 21's `derived` is the
+// re-recorded golden's control row (71ea4d5f, town|germanic|plains|road|civilized).
 
     const layer = layerOf([[ROOT_KEY, [...DM_ROSTER]]]);
 

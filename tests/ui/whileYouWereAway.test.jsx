@@ -70,6 +70,8 @@ describe('WhileYouWereAway digest banner', () => {
     // C2 (misc): the register sentence and the raw diagnostic are now SEPARATE —
     // the sentence stays in the world's voice, the detail is still never swallowed.
     expect(text).toMatch(/stopped early/i);
+    // STYLE-2 SW-12 (ledger D·100): no "the record" in the stop sentence.
+    expect(text).toMatch(/before it had covered all the time that passed\. Advance the realm to resume\./);
     expect(text).toMatch(/kernel exploded/);
     expect(text).not.toMatch(/stopped early[^.]*kernel exploded/i); // never spliced mid-sentence
   });

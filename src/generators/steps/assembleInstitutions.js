@@ -17,13 +17,13 @@ import {
   isFabricRow,
 } from '../../data/institutionalCatalog.js';
 import { densityFactor, isDensityExempt, scaleChance } from '../../data/institutionBudget.js';
-import { INSTITUTION_DESC_VARIANTS } from '../../data/institutionDescVariants.js';
-import { INLAND_DESCRIPTIONS } from '../../data/inlandDescriptions.js'; import { defenceTwinLine } from '../../data/defenceTwinLines.js'; import { defenseFactsOf } from '../../domain/defense/defenseFacts.js'; // F10: one line, so no cited line moves
+import { INSTITUTION_DESC_VARIANTS, DESC_VARIANT_SIBLINGS } from '../../data/institutionDescVariants.js';
+import { INLAND_DESCRIPTIONS } from '../../data/inlandDescriptions.js'; import { resolveSibling } from '../../domain/facts/drawDeclared.js'; import { factsOf, birthFactsOf } from '../../domain/facts/factsOf.js'; import { drawInstitutionDesc } from './institutionDescDraw.js'; // F10, CENSUS-1c, CENSUS-1f: one line, so no cited line moves
 import { pickVariant } from '../../kernel/proseHash.js';
 import { TERRAIN_DATA } from '../../data/geographyData.js';
 import { RESOURCE_DATA } from '../../data/goods/identity.js';
 import { getBaseChance } from '../structuralValidator.js';
-import { getTerrainType } from '../terrainHelpers.js';
+import { getTerrainType } from '../terrainHelpers.js'; import { landWithholdsHouse } from '../../domain/landWithholding.js'; // B1(i) R24b: one line, so no cited line moves
 import { recordTrace } from '../../domain/trace.js';
 import { customDeps } from '../../lib/dependencyEngine.js';
 import { passesTierGate } from '../../domain/customContentSchema.js';
@@ -448,7 +448,7 @@ registerStep('assembleInstitutions', {
    * Can this non-required catalog row roll here, and at what chance? (`rowRoll`, at this row's density.)
    * @returns {{ baseChance: number, resourceMult: number, p: number, drawn: boolean } | null}
    */
-  const rollFor = (category, name, inst) => rowRoll(rowEnv, category, name, inst, institutions, densityFor(name));
+  const rollFor = (category, name, inst) => rowRoll(rowEnv, category, name, inst, institutions, densityFor(name)); const withheld = (name) => landWithholdsHouse({ terrainType: rowEnv.terrainType, tradeRoute: /** @type {string | null} */ (rowEnv.tradeRoute), nearbyResources: rowEnv.nativeNearbyResources }, name); // B1(i) R24b: THE LAND WITHHOLDS A HOUSE AFTER ITS DRAW: the roll is made exactly as before (the same draw, the same chance); a house this land withholds here (domain/landWithholding.js) is then not taken, so no other draw shifts (one line, so no cited line moves)
 
   // THE WEIGHTED EXCLUSIVE GROUP (2026-09-30). A group used to go to whichever member the
   // catalog happened to list first: the first roll that succeeded took it and every later
@@ -578,7 +578,7 @@ registerStep('assembleInstitutions', {
             remaining -= member.roll.p;
             if (remaining < 0) { winner = member; break; }
           }
-          exclusiveGroups[group] = winner.name;
+          if (withheld(winner.name)) return; exclusiveGroups[group] = winner.name; // B1(i) R24b: a withheld winner is not taken
           institutions.push({ category: winner.category, name: winner.name, ...winner.inst, source: 'generated' });
           recordTrace(ctx, {
             targetType: 'institution',
@@ -628,7 +628,7 @@ registerStep('assembleInstitutions', {
         if (!roll) return;
         const { baseChance, resourceMult } = roll;
 
-        if (drawRng.chance(baseChance * resourceMult)) {
+        if (drawRng.chance(baseChance * resourceMult) && !withheld(name)) {
           // A coexisting row does NOT take the group over: the holder stays whoever won
           // it first, so a third member of the same group is blocked exactly as it was
           // before this affordance existed.
@@ -1001,7 +1001,7 @@ registerStep('assembleInstitutions', {
       const pool = [inst.desc, ...variants];
       const dry = worldLaw.portKind === 'none' ? pool.filter((desc) => !SHIP_WORD.test(desc)) : pool;
       const inland = dry.length ? null : INLAND_DESCRIPTIONS[`${tier}|${inst.category}|${inst.name}`];
-      inst.desc = speakTierNoun(defenceTwinLine(inland || pickVariant(dry.length ? dry : pool, `${ctx._seed}:${inst.name}`), defenseFactsOf({ institutions })), tierNounFor(tier)); // F10: a desc that names walls the roster lacks takes its twin (data/defenceTwinLines.js), draw-free
+      inst.desc = speakTierNoun(inland ? resolveSibling(inland, DESC_VARIANT_SIBLINGS, { facts: () => factsOf({ institutions }), poolId: 'institutionDescVariants:DESC_VARIANT_SIBLINGS', surface: 'institutions', drawKind: 'H' }) : drawInstitutionDesc(dry.length ? dry : pool, `${ctx._seed}:${inst.name}`, () => birthFactsOf({ institutions, config: { ...config, stressTypes: settledStressTypes(effectiveConfig, config) }, tier }, worldLaw), `${tier}|${inst.category}|${inst.name}`), tierNounFor(tier)); // F10, CENSUS-1c, CENSUS-1f (site 18): the same pick, resolved through drawDeclared against the declaration column and the walls siblings (steps/institutionDescDraw.js), draw-free; W2-FIX-DATA-3 (REVIEW-W2-FIX-DATA F1): the crisis is the one the birth has settled (`settledStressTypes`, below), not the caller's raw config (the app's selectedStresses shape carries no stressTypes)
     }
   }
 
@@ -1023,3 +1023,24 @@ registerStep('assembleInstitutions', {
 // draws, and no pool byte moves. @enforced-by tests/generators/tierNounPoolDraws.test.js
 import { speakTierNoun } from '../../domain/display/stateProse/stateProseKernel.js';
 import { tierNounFor } from '../../domain/display/stateProse/weaveBlock.js';
+
+/**
+ * THE CRISES A DESCRIPTION DRAWN HERE MAY READ (W2-FIX-DATA-3, REVIEW-W2-FIX-DATA F1). The draw above
+ * runs before `stressConfirmPass`, which may still DROP an emergent crisis against the real roster (a
+ * granary halves a famine's odds, walls cut a siege's). So the draw reads only the crises resolveStress
+ * threaded into `effectiveConfig` that the confirm pass can never drop: its own forced set (the
+ * caller's `stressTypes`/`stressType` as `intendedStressTypes`, the panel's `selectedStresses` with
+ * random off, an editor's `stressorEdits.added`; `stressConfirmPass.js`). Measured on the census's 720:
+ * handing the draw every threaded crisis printed a famine or siege twin in four towns whose crisis the
+ * confirm pass then dropped. An emergent crisis that survives is read by no description drawn here.
+ * @param {Record<string, any>} effectiveConfig @param {Record<string, any>} config
+ * @returns {string[]}
+ */
+export function settledStressTypes(effectiveConfig, config) {
+  const forced = new Set([
+    ...(effectiveConfig.intendedStressTypes || []),
+    ...(config.selectedStressesRandom === false ? (config.selectedStresses || []) : []),
+    ...((config.stressorEdits?.added || []).map((/** @type {any} */ e) => e?.type).filter(Boolean)),
+  ]);
+  return (effectiveConfig.stressTypes || []).filter((/** @type {string} */ type) => forced.has(type));
+}

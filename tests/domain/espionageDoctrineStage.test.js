@@ -372,6 +372,9 @@ describe('ES-5 — §3.9’s licensed order prose, and the two hazards it rides'
       institutions: [
         { catalogId: 'courthouse', name: 'The Courthouse' },
         { catalogId: 'watch_barracks', name: 'Watch Barracks' },
+        // SW-5 (STYLE-RULINGS-2 A4): the deriver no longer speaks its raw scores, so the one
+        // figure left on offer is the law-house count, which needs two law houses to print
+        { name: 'The Gaol' },
       ],
       economicState: { safetyProfile: { blackMarketCapture: 40 } },
     },

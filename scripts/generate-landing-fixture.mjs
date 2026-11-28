@@ -9,6 +9,8 @@
  *      seed + the store's DEFAULT_CONFIG (settType capped at village/town — the
  *      anon tier ceiling, owner adjustment: the artifact must be exactly what an
  *      anonymous visitor could forge, so the seed tag doubles as a promise).
+ *      Every birth goes through the create boundary's `birthConfig`, exactly as
+ *      the store's lane does (see birthOnTheButtonsRoad).
  *   2. Generates neighbor settlements, wires a small regional graph, and
  *      advances K REAL one-week ticks through advanceCampaignWorld.
  *   3. Captures, all REAL:
@@ -62,8 +64,21 @@ import { deriveCausalState, compareCausalState } from '../src/domain/causalState
 import { chronicleTimeline } from '../src/domain/display/chronicleTimeline.js';
 import { tickCalendarLabel } from '../src/domain/display/humanizeEngineTokens.js';
 import { DEFAULT_CONFIG } from '../src/store/configSlice.js';
+import { birthConfig, loadGenerationLawPayloads } from '../src/domain/density/densityCreateBoundary.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
+
+// ⛔ THE CREATE BOUNDARY'S ASYNC EDGE, AWAITED ONCE, HERE, AT THE SCRIPT'S ENTRY (BRIEF
+// CLOSE-FIXTURE, the chair's ruling E55; written 2026-11-22 08:28 UTC, read from `date -u`).
+// Every birth below goes through `birthConfig`, and a lit living-content law THROWS out of the
+// pipeline when its roster payload was never loaded. `buildRegion` / `analyze` / `buildFixture`
+// are synchronous seams with importers this file does not own (the realm-capture e2e spec and
+// several tests), so the payload is loaded by this module's own evaluation: whoever imports the
+// seams, or runs the CLI, gets an armed seam before the first birth. This is the call the
+// store's lane makes (`settlementGenerateAction.js` awaits `loadGenerationLawPayloads()`, which
+// awaits `loadLivingContentRoster()`). The boundary's "never at module load" fence is about a
+// BUNDLED chunk's startup bytes; a node script is never bundled.
+await loadGenerationLawPayloads();
 
 export const MODULE_PATH = join(__dirname, '..', 'src', 'components', 'home', 'landingFixture.js');
 
@@ -98,6 +113,34 @@ export const storeConfigFor = (settType) => Object.freeze({ ...DEFAULT_CONFIG, s
  */
 export const forgeConfigFor = (settType) => Object.freeze({ ...storeConfigFor(settType), _randomizePriorities: true });
 
+/**
+ * ⭐ THE ONE BIRTH THIS SCRIPT MAKES, ON THE BUTTON'S ROAD (BRIEF CLOSE-FIXTURE, ruling E55).
+ *
+ * The landing's "Forge this exact town" button replays `{ seed, config }` through the store's
+ * generation lane (`src/store/settlementGenerateAction.js :: generateSettlementAction`), and that
+ * lane births THROUGH `birthConfig` with the four Deep-constraints bags beside the config (each
+ * EMPTY for a reader who forces nothing, which is the landing's audience). This script used to
+ * hand the pipeline the bare config: the same town while every law sat dark, and a DIFFERENT
+ * town (economy, power, NPCs, history, arrival, defence, trace) once the seat and fortune laws
+ * were lit (CLOSE-1, `close/measures/LANDING-FIXTURE-PROBE.md`). So every birth here (the town
+ * AND each neighbour) is the store's: the recorded inputs (`storeConfigFor` / `forgeConfigFor`)
+ * stay what the fixture records, and this wraps them. The transport's `engineVersion` stamp is
+ * NOT written: it is a record stamp the lane adds outside the pipeline, never part of the town.
+ * `tests/build/landingFixtureForgeRoad.test.js` holds the two births equal, whole, dark and lit.
+ * @param {Record<string, unknown>} config the recorded generation inputs
+ * @param {string} seed
+ */
+export function birthOnTheButtonsRoad(config, seed) {
+  const born = birthConfig({
+    ...config,
+    _institutionToggles: {},
+    _categoryToggles: {},
+    _goodsToggles: {},
+    _servicesToggles: {},
+  });
+  return generateSettlementPipeline(born, null, { seed, customContent: {} });
+}
+
 // Rival warlike major deities stamped on two neighbors (simulate-religion's
 // pattern) so the region has live faith + conflict pressure to move bands.
 export const DEITIES = Object.freeze([
@@ -125,11 +168,11 @@ export const REGION_EDGES = Object.freeze([
  * @param {{ settType?: string }} [opts]
  */
 export function buildRegion(seed, { settType = DEFAULT_SETT_TYPE } = {}) {
-  const town = generateSettlementPipeline(forgeConfigFor(settType), null, { seed, customContent: {} });
+  const town = birthOnTheButtonsRoad(forgeConfigFor(settType), seed);
   // Neighbors may exceed the cap (the cap binds the FIXTURE town only).
   const nTiers = ['town', 'city', 'town', 'village'];
   const neighbors = nTiers.map((tier, i) => {
-    const s = generateSettlementPipeline({ ...DEFAULT_CONFIG, settType: tier }, null, { seed: `${seed}-n${i}`, customContent: {} });
+    const s = birthOnTheButtonsRoad({ ...DEFAULT_CONFIG, settType: tier }, `${seed}-n${i}`);
     if (i < 2) {
       s.config = { ...s.config, primaryDeityRef: DEITIES[i]._deityRef, primaryDeitySnapshot: DEITIES[i] };
       s.powerStructure = { ...s.powerStructure, publicLegitimacy: { score: 28, label: 'Contested' } };
@@ -303,8 +346,88 @@ export function advanceTimelineFor(news, townId = 't', limit = ADVANCE_ENTRIES) 
  * conditions the place lacks, and the pressure sentence is Hector Gallagher's unreported mistake that
  * Inghean MacCarthy is bound to report. The inn clause and the old favour are DELETED; each of the four
  * sentences below is traceable to the receipts, the hooks and the pressure sentence of the same run.
+ *
+ * ⚠ RE-GROUNDED 2026-11-07 (the rung-2 landing, LANDING-R2 seat J; an OWNER VETO POINT). The pool census
+ * re-worded two of the run's fields (measured: --check green at 1bff51c6d, STALE at f5dc50c6b and at the
+ * tip; the four receipts, the conflict and the advance timeline did not move): the mayor's goal is now to
+ * win the people back with things that cost nothing, fair hearings and quick answers, and the pressure
+ * sentence is that Hector Gallagher and Inghean MacCarthy are about to be on opposite sides of a
+ * significant decision. The mistake-and-report sentence, no longer derived, is DELETED; the third and
+ * fourth sentences are redrafted from those two fields, the first two are unchanged.
+ *
+ * SW-6 CRISIS-SURFACES (2026-11-09; STYLE-RULINGS-2 A1 R6, WAVE-RULINGS item 13; an OWNER VETO POINT): the
+ * fourth sentence's "bound by something neither speaks of" was an aphorism no field holds (the census law);
+ * struck. The sentence keeps only the pressure sentence's fact: the two are about to be on opposite sides of
+ * a significant decision.
+ *
+ * ⚠ RE-GROUNDED 2026-11-10 (FOUNDING-WORLDS; the chair's ruling N1; an OWNER VETO POINT). Measured at
+ * ecadf531a and f0f98d883: the run derives no conflict, no figure named Odhrán MacCarthy, Hector Gallagher or
+ * Inghean MacCarthy, and its pressure sentence is now Étaín Sullivan's and Lasair Hayes's rival proposals, so
+ * the second, third and fourth sentences had held nothing since the 2026-11-07 re-emit (7e3ba7547). They are
+ * DELETED. The narration now narrates exactly the card's three receipts: the first sentence is unchanged (the
+ * route pool and the cleared stands); the second is the chair's words for the institution receipt
+ * ("blacksmith · selected (Base chance 4% lifted by ×2.50 from nearby resources + terrain.)").
+ * tests/copy/landingNarrationGrounding.test.js now holds every name and figure here to a derived field.
  */
-const STOCK_NARRATION = 'The road made Cnocby by a coin’s width, three chances of it against two of nothing, and the mountain stands are being cleared faster than they grow back. The Elder Council and the Religious Authorities are at odds over conscripting the guilds’ apprentices, and a neutral name is being pressed to choose a side before the council next sits. The mayor, Odhrán MacCarthy, means to prove the office is worth having by means that do not wait on money the town does not have. Hector Gallagher has made a mistake that Inghean MacCarthy is bound to report, and Inghean MacCarthy has not reported it.';
+const STOCK_NARRATION = 'The road made Cnocby by a coin’s width, three chances of it against two of nothing, and the mountain stands are being cleared faster than they grow back. The village keeps a smith on four chances in a hundred, more than doubled by the mountain and by what lies near it.';
+
+/**
+ * ── THE CHRONICLE TAG IS THE EVENT'S OWN CATEGORY ────────────────────────────
+ *
+ * ⛔ A SLOT IS NOT A CATEGORY (VISIBLE-BUGS item 2, 2026-11-12). The chronicle
+ * picks one beat per SLOT (faith, stressor, trade/economy) by id pattern, and it
+ * used to print the slot's name as the beat's tag. The trade slot's pattern also
+ * takes `condition.crime`, so a crime beat ("Thieves and racketeers are working
+ * Cnocby's streets in the open.") shipped under a TRADE chip. Measured on seeds
+ * lf-001..040: 27 of 120 chronicle entries were `trade` over a `crime_pressure`
+ * event; no other slot contradicted its event.
+ *
+ * The tag is now decided HERE, from the event's own `impactKind`, for every kind
+ * the landing has a chip for. A kind this table does not name keeps its slot's
+ * tag (a religious-pact betrayal is honestly both faith and stressor, and is
+ * left as its slot reads). Which beats SHIP is unchanged — the slot patterns are
+ * the chair's call (the `townFirst` note above).
+ * @enforced-by tests/build/landingChronicleTagCategory.test.js
+ */
+export const CHRONICLE_TAG_OF_IMPACT = Object.freeze({
+  crime_pressure: Object.freeze({ kind: 'crime', tone: 'danger' }),
+  trade_pressure: Object.freeze({ kind: 'trade', tone: 'economic' }),
+  trade_route_disruption: Object.freeze({ kind: 'trade', tone: 'economic' }),
+  conflict_pressure: Object.freeze({ kind: 'stressor', tone: 'war' }),
+  stressor_birth_monster_raider_pressure: Object.freeze({ kind: 'stressor', tone: 'war' }),
+  stressor_birth_betrayal: Object.freeze({ kind: 'stressor', tone: 'war' }),
+  stressor_birth_wartime: Object.freeze({ kind: 'stressor', tone: 'war' }),
+  stressor_birth_siege: Object.freeze({ kind: 'stressor', tone: 'war' }),
+  stressor_birth_religious_conversion_fracture: Object.freeze({ kind: 'faith', tone: 'faith' }),
+});
+
+/**
+ * One chronicle entry's tag: the event's own category where the table names it,
+ * else the slot's.
+ * @param {any} entry an applied wizardNews entry
+ * @param {{ kind: string, tone: string }} slot
+ * @returns {{ kind: string, tone: string }}
+ */
+export function chronicleTagFor(entry, slot) {
+  const own = CHRONICLE_TAG_OF_IMPACT[/** @type {keyof typeof CHRONICLE_TAG_OF_IMPACT} */ (String(entry?.impactKind ?? ''))];
+  return own ? { kind: own.kind, tone: own.tone } : { kind: slot.kind, tone: slot.tone };
+}
+
+/**
+ * The chronicle's picks WITH their events, so a guard can hold each tag against
+ * its own event. buildFixture prints exactly these, minus the event.
+ * @param {any[]} newsEntries the campaign's wizardNews entries
+ */
+export function chroniclePicksFor(newsEntries) {
+  const news = (newsEntries || []).filter(e => e?.kind === 'applied');
+  const findNews = (re) => news.filter(e => re.test(e.id || '')).sort((x, y) => (x.tick || 0) - (y.tick || 0))[0];
+  const townFirst = (base) => findNews(new RegExp(`${base}[^]*\\.t\\b`)) || findNews(new RegExp(base));
+  return [
+    { entry: townFirst('religious_conversion_fracture|conversion|deity|faith'), kind: 'faith', tone: 'faith' },
+    { entry: townFirst('stressor\\.(monster_raider_pressure|betrayal|wartime|siege)|condition\\.conflict'), kind: 'stressor', tone: 'war' },
+    { entry: townFirst('condition\\.trade|trade_route|blockade|condition\\.crime'), kind: 'trade', tone: 'economic' },
+  ].filter(p => p.entry).map(p => ({ entry: p.entry, ...chronicleTagFor(p.entry, p) }));
+}
 
 /**
  * The frozen fixture object for one seed — every selection COMPUTED from engine
@@ -412,12 +535,9 @@ export function buildFixture(seed, { weeks = DEFAULT_WEEKS, settType = DEFAULT_S
   // which three beats ship, and that is the chair's call, not a lane's.
   const news = a.news.filter(e => e?.kind === 'applied');
   const findNews = (re) => news.filter(e => re.test(e.id || '')).sort((x, y) => (x.tick || 0) - (y.tick || 0))[0];
-  const townFirst = (base) => findNews(new RegExp(`${base}[^]*\\.t\\b`)) || findNews(new RegExp(base));
-  const chronPicks = [
-    { entry: townFirst('religious_conversion_fracture|conversion|deity|faith'), kind: 'faith', tone: 'faith' },
-    { entry: townFirst('stressor\\.(monster_raider_pressure|betrayal|wartime|siege)|condition\\.conflict'), kind: 'stressor', tone: 'war' },
-    { entry: townFirst('condition\\.trade|trade_route|blockade|condition\\.crime'), kind: 'trade', tone: 'economic' },
-  ].filter(p => p.entry).map(p => ({
+  // The picks and their tags come from chroniclePicksFor (the one place a
+  // chronicle tag is decided: the event's own category, VISIBLE-BUGS item 2).
+  const chronPicks = chroniclePicksFor(a.news).map(p => ({
     kind: p.kind, tone: p.tone, week: `Week ${p.entry.tick}`, text: p.entry.summary || p.entry.headline,
   }));
 

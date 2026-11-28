@@ -13,7 +13,7 @@
  *
  * Provenance: seed `lf-033`, 12 one-week ticks of advanceCampaignWorld
  * over a 5-settlement region (fixture town + 4 neighbors), engine
- * generatorVersion 0.9.0 / simulationVersion 1.
+ * generatorVersion 0.10.0 / simulationVersion 1.
  * The town is a village — within the anon tier ceiling by design: the
  * "Forge this exact town" button replays { seed, config } through the SAME
  * store forge action as every other generation, so the artifact is a promise
@@ -34,7 +34,7 @@ export const fixture = {
   "seed": "lf-033",
   "weeks": 12,
   "engine": {
-    "generatorVersion": "0.9.0",
+    "generatorVersion": "0.10.0",
     "simulationVersion": 1
   },
   "forge": {
@@ -76,31 +76,28 @@ export const fixture = {
     "population": 82,
     "tier": "village",
     "eyebrow": "road village · mountain",
-    "prose": "The first person you meet on the road into Cnocby wants to know your business, and the second already knows it. Earth-banked enclosures and older rounded foundations remain visible between newer halls.",
-    "pressure": "Hector Gallagher and Inghean MacCarthy are connected by something neither discusses openly: Hector Gallagher has made a mistake that Inghean MacCarthy is bound to report. Inghean MacCarthy has not reported it.",
+    "prose": "Cnocby has no one thing to look at as you come in, only a great many small ones: a mended fence, a painted door, a bench beside a house. Earth-banked enclosures and older rounded foundations remain visible between newer halls.",
+    "pressure": "A dispute over water access has run for two seasons, and those on each side of it no longer speak to one another.",
     "hooks": [
       {
         "kind": "NPC",
         "tone": "success",
         "tag": "derived · npcs",
-        "lead": "Odhrán MacCarthy, mayor",
-        "rest": " · goal: demonstrate governance value through means that do not depend on economic conditions the settlement currently lacks."
+        "lead": "Fearghus O'Brien, elder",
+        "rest": " · goal: get the mill through the season without borrowing."
       },
       {
-        "kind": "Hook",
-        "tone": "warning",
-        "tag": "derived · factions",
-        "text": "A neutral figure is being pressured by both Elder Council and Religious Authorities to take a side before the next council session."
+        "kind": "NPC",
+        "tone": "success",
+        "tag": "derived · npcs",
+        "lead": "Étaín Sullivan, the priest",
+        "rest": " · goal: have the old rights of the house of worship read out and recognised before anyone challenges them."
       }
     ],
-    "hooksMore": 7
+    "hooksMore": 3
   },
   "voice": {
     "receipts": [
-      {
-        "label": "conflict",
-        "text": "Elder Council × Religious Authorities · military conscription of guild apprentices · stakes: labor control"
-      },
       {
         "label": "route",
         "text": "road · Picked from coherence-safe pool: road, road, road, isolated, isolated."
@@ -114,7 +111,7 @@ export const fixture = {
         "text": "blacksmith · selected (Base chance 4% lifted by ×2.50 from nearby resources + terrain.)"
       }
     ],
-    "narrated": "The road made Cnocby by a coin’s width, three chances of it against two of nothing, and the mountain stands are being cleared faster than they grow back. The Elder Council and the Religious Authorities are at odds over conscripting the guilds’ apprentices, and a neutral name is being pressed to choose a side before the council next sits. The mayor, Odhrán MacCarthy, means to prove the office is worth having by means that do not wait on money the town does not have. Hector Gallagher has made a mistake that Inghean MacCarthy is bound to report, and Inghean MacCarthy has not reported it."
+    "narrated": "The road made Cnocby by a coin’s width, three chances of it against two of nothing, and the mountain stands are being cleared faster than they grow back. The village keeps a smith on four chances in a hundred, more than doubled by the mountain and by what lies near it."
   },
   "realm": {
     "whyTrace": [
@@ -130,52 +127,52 @@ export const fixture = {
         "from": "adequate",
         "to": "surplus",
         "tone": "success",
-        "reason": "Vael (major) anchors religious authority (piety ×1.40). Religious Authorities carries power 30."
+        "reason": "Vael (major) gives the priesthood its standing. Religious Authorities carries power 24."
       },
       {
-        "axis": "Faction power",
+        "axis": "Social trust",
         "from": "adequate",
         "to": "strained",
         "tone": "warning",
-        "reason": "Legitimacy challenge destabilizes the faction system. Top faction holds 67% of power."
+        "reason": "Criminal pressure erodes communal trust. Public legitimacy 33 colors trust."
       }
     ],
     "advance": [
       {
+        "week": "Week 1",
+        "season": "the spring of year 1",
+        "headline": "Cnocby turns to the faith of Vael",
+        "text": "After a long contest of devotion, Vael has become the patron creed of Cnocby."
+      },
+      {
         "week": "Week 3",
         "season": "the spring of year 1",
-        "headline": "Cnocby's rulers face an open challenge",
-        "text": "Cnocby's people are openly questioning who should rule them."
+        "headline": "Cnocby goes onto a war footing",
+        "text": "Cnocby is mustering its levies and doubling its watch."
       },
       {
         "week": "Week 4",
         "season": "the spring of year 1",
-        "headline": "Monster or raider pressure deepens",
-        "text": "Monster or raider pressure has not broken, and the forces feeding it are still gathering."
+        "headline": "The split between the faiths is over",
+        "text": "Religious conversion fracture is over, but it leaves sectarian memory, temple debt, ritual disputes behind."
       },
       {
-        "week": "Week 8",
+        "week": "Week 10",
         "season": "the spring of year 1",
-        "headline": "Inghean MacCarthy pushes through reforms",
-        "text": "Inghean MacCarthy is out to come through the crisis."
+        "headline": "Uathach O'Neill shields their people",
+        "text": "Uathach O'Neill means to come through the crisis, and shielding their people is the road they have taken."
       },
       {
-        "week": "Week 8",
+        "week": "Week 10",
         "season": "the spring of year 1",
-        "headline": "Monster or raider pressure has passed",
-        "text": "Monster or raider pressure is over, but it leaves abandoned roads, militia burden, fearful hamlets. It will be remembered for a while yet."
-      },
-      {
-        "week": "Week 9",
-        "season": "the spring of year 1",
-        "headline": "Elder Council captures an institution",
-        "text": "Elder Council sees an opening to press council rule interests."
+        "headline": "Crime takes hold of Cnocby",
+        "text": "Thieves and racketeers are working Cnocby's streets in the open."
       },
       {
         "week": "Week 12",
         "season": "the spring of year 1",
         "headline": "Cnocby's trade routes break down",
-        "text": "Caravans are passing Cnocby by, and its market stalls stand half empty."
+        "text": "Caravans are passing Cnocby by, and its traders have little to sell."
       }
     ],
     "chronicle": [
@@ -188,14 +185,14 @@ export const fixture = {
       {
         "kind": "stressor",
         "tone": "war",
-        "week": "Week 2",
-        "text": "Betrayal shock is beginning to take root in Keshigordu."
+        "week": "Week 3",
+        "text": "Cnocby is mustering its levies and doubling its watch."
       },
       {
-        "kind": "trade",
-        "tone": "economic",
-        "week": "Week 6",
-        "text": "Trade pressure disrupts routes and introduces resentment or leverage."
+        "kind": "crime",
+        "tone": "danger",
+        "week": "Week 10",
+        "text": "Thieves and racketeers are working Cnocby's streets in the open."
       }
     ],
     "relationships": [
@@ -210,7 +207,7 @@ export const fixture = {
         "to": "Cnocby",
         "type": "border incident",
         "tone": "danger",
-        "week": "Week 4"
+        "week": "Week 6"
       }
     ],
     "pins": [
@@ -223,12 +220,6 @@ export const fixture = {
         "dotTone": "danger",
         "tag": "Border incident",
         "tagTone": "danger"
-      },
-      {
-        "name": "Keshigordu",
-        "dotTone": "warning",
-        "tag": "Criminal pressure",
-        "tagTone": "warning"
       }
     ],
     "neighbors": [

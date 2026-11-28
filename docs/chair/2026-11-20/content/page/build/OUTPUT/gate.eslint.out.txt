@@ -1,0 +1,9 @@
+  18:20  warning  'num' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+✖ 38 problems (0 errors, 38 warnings)
+  0 errors and 1 warning potentially fixable with the `--fix` option.
+
+[gate-tail] end:  14:09:43 up  3:15,  0 user,  load average: 4.88, 5.84, 9.64
+[gate-tail] full log: /tmp/claude-0/-home-user-settlement-engine/e39601df-bea0-5bb7-a071-cd1164f3a939/scratchpad/gate-tail.10599.log
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)
+exit 0

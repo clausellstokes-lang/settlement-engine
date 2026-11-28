@@ -57,9 +57,13 @@ afterEach(() => { cleanup(); vi.clearAllMocks(); });
 beforeEach(() => { storeState = {}; });
 
 describe('NpcTrailSection — ⛔ the fail-closed gate', () => {
-  test('a viewer WITHOUT ground truth gets nothing at all — there is no player form of this page', () => {
+  // RE-KEYED BY CAUSE (lane TIER-PARITY-FIX V1-map, 2026-11-09, the owner's tier law): the
+  // panel's inner tier term only mirrored the world map's outer gate (law (6):
+  // useWorldMapCampaignModel hands a viewer without the world map NO campaign), so it was
+  // deleted. What stays closed is what the outer gate hands this page: no campaign, nothing.
+  test('a viewer the world map hands no campaign gets nothing at all — there is no player form of this page', () => {
     asPlayer();
-    const { container } = render(<NpcTrailSection campaign={campaign()} />);
+    const { container } = render(<NpcTrailSection campaign={null} />);
     expect(container.innerHTML).toBe('');
   });
 
@@ -94,6 +98,10 @@ describe('NpcTrailSection — legibility and the empty state', () => {
     expect(container.textContent).not.toContain('ash:');
     // anchored: same live page as the calendar assertions two lines up; a blank render would have failed there first.
     expect(container.textContent).not.toMatch(/faction_challenge|seatTransitions|contest\./);
+    // STYLE-2 SW-12 (ledger D·88): the footnote names no ladder, rung or record key.
+    expect(container.textContent).toMatch(/Every line is a challenge for a seat, or a seat that changed hands\. Someone who no longer\s+holds or seeks any seat drops off this list/);
+    // anchored: the same live page matched the new footnote on the line above.
+    expect(container.textContent).not.toMatch(/contest the ladder opened|left every rung|record key/);
   });
 
   test('a realm whose ladder recorded nothing renders NOTHING', () => {

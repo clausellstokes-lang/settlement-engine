@@ -829,6 +829,13 @@ describe('WR-6 pairwise peace', () => {
     expect(treaty.separateExit).toBe(true);
     expect(treaty.coalitionScope).toBeUndefined();
     expect(treaty.fracture).toMatchObject({ deserter: 'member', abandoned: ['root'] });
+    // FIX-PULSE-DEFECTS (audit C1b·115): the coalition arm's summary hung the TERMS off the
+    // abandoned fronts ("…, leaving the allied fronts standing under reparations."); the terms
+    // are what the departing court settled on, and the fronts simply stand.
+    const signed = (result.newsEntries || []).find((entry) => entry.kind === 'treaty_signed');
+    expect(signed?.summary).toMatch(/ settles only its own edge with .+ on terms of .+, leaving the allied fronts standing\.$/);
+    // anchored: the same summary is matched on the line above, so it is present and live.
+    expect(signed?.summary).not.toMatch(/standing under/);
     expect(result.coalitionEvidence).toHaveLength(1);
     expect(result.coalitionEvidence[0]).toMatchObject({
       kind: 'coalition_separate_peace', settlementId: 'member', counterpartId: 'root', thirdPartyId: 'enemy',

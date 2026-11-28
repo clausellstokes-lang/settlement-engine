@@ -8,7 +8,7 @@
  * rng, no clock; the same record gives the same findings. Measured cost on 120 generations:
  * 8.9–9.3% of generation time (the chair's line is 10%).
  */
-import { RECORD_BATTERY_CHECKS, recordBattery } from '../domain/coherence/recordBattery.js';
+import { RECORD_BATTERY_CHECKS, recordBattery } from '../domain/coherence/recordBattery.js'; import { foodwaysLineOf } from '../domain/foodways.js'; // URBAN-FIX C-1: one line
 
 /** Keys whose strings are not the dossier's own words: the request, the receipt, the trace. */
 const RECORD_TEXT_SKIPPED_KEYS = new Set([
@@ -32,6 +32,9 @@ export function recordTextSurfaces(settlement) {
   const rest = [];
   const town = new Set();
   const seen = new Set();
+  // URBAN-FIX C-1: the path `culturalIdentity.foodways` is SUPERSEDED where the food record carries its line
+  // (the line the page prints; a record stored before the one-home cure kept the culture's raw sentence there).
+  const superseded = foodwaysLineOf(settlement) ? settlement.culturalIdentity : null;
   const walk = (value) => {
     if (typeof value === 'string') {
       if (!/\s/.test(value.trim())) return;
@@ -46,7 +49,7 @@ export function recordTextSurfaces(settlement) {
       return;
     }
     for (const [key, entry] of Object.entries(value)) {
-      if (key.startsWith('_') || RECORD_TEXT_SKIPPED_KEYS.has(key)) continue;
+      if (key.startsWith('_') || RECORD_TEXT_SKIPPED_KEYS.has(key) || (key === 'foodways' && value === superseded)) continue;
       walk(entry);
     }
   };
@@ -54,8 +57,12 @@ export function recordTextSurfaces(settlement) {
   return { all: [...rest, ...town].join('\n'), town: [...town].join('\n') };
 }
 
-/** A placeholder faction name ("Claimant Bloc A", "Rival Faction B", "Unknown Faction"), the soak's A-10 reading. */
-const PLACEHOLDER_FACTION = /\b(?:Bloc|Faction) [A-Z]\b|Unknown Faction/;
+/**
+ * A placeholder faction name ("Claimant Bloc A", "Rival Faction B", "Unknown Faction"), the soak's A-10
+ * reading; and the stand-in the owner's rename map gave them all (SW-8 RENAME-POWERS, 2026-11-09):
+ * "Unnamed power" (with or without a trailing number). The old spellings stay matched for saved towns.
+ */
+const PLACEHOLDER_FACTION = /\b(?:Bloc|Faction) [A-Z]\b|Unknown Faction|^Unnamed power(?: \d+)?$/;
 /** A role standing where a name should be ("The Guildmaster"), the soak's A-10 reading. */
 const ROLE_ONLY_NAME = /^The [A-Z]/;
 
@@ -71,11 +78,9 @@ function unnamedFindings(settlement) {
   const person = (Array.isArray(settlement.npcs) ? settlement.npcs : [])
     .find(npc => ROLE_ONLY_NAME.test(String(npc?.name || '')));
   if (person) out.push({ check: 'unnamed', quote: String(person.name), detail: `a role-only person (${String(person.role || '')})` });
-  // Two record types, each read by its own key (tests/lint/factionNamePrecedenceScan.test.js):
-  // the top-level NPC grouping list is keyed by `.name`; a `powerStructure.factions[]` record's
-  // display name is `.faction`, with `.name` its legacy alias (rulingPower.js :: nameOf).
+  // The powers only (PEOPLE-5A: the NPC grouping's check dropped): a `powerStructure.factions[]`
+  // record's display name is `.faction`, with `.name` its legacy alias (rulingPower.js :: nameOf).
   const factions = [
-    ...(Array.isArray(settlement.factions) ? settlement.factions : []).map(f => String(f?.name ?? '')),
     ...(Array.isArray(settlement.powerStructure?.factions) ? settlement.powerStructure.factions : [])
       .map(f => String(f?.faction ?? f?.name ?? '')),
   ];
@@ -119,10 +124,10 @@ export function recordBatteryJudgment(settlement) {
   const findings = Object.freeze(recordBatteryFindings(settlement));
   return Object.freeze({
     id: 'record_coherence_battery',
-    label: 'The record does not contradict itself',
+    label: 'The dossier\'s lines agree with each other',
     status: findings.length ? 'needs_review' : 'pass',
     scope: 'single_settlement',
-    summary: 'A stored sentence the record contradicts is a defect; the page may not vouch for a record this judgment does not pass.',
+    summary: 'Where one line in this dossier disagrees with another, check both before play; the dossier does not vouch for itself until they agree.',
     findings,
     evidence: Object.freeze([Object.freeze({
       path: 'coherenceBattery',

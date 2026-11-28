@@ -1,0 +1,17 @@
+{
+  "rootStatus": 200,
+  "rootMs": 1499,
+  "afterCtaUrl": "http://localhost:4173/create",
+  "forgeButton": "Forge a town →",
+  "dossierMs": 11170,
+  "dossierMeta": "TOWN · POP. 845",
+  "url": "http://localhost:4173/create",
+  "consoleErrors": [],
+  "pageErrors": [],
+  "failedRequests": [
+    "http://localhost:4173/media/journey-legs/bg/leg-1-desk-to-thorp.mp4 net::ERR_ABORTED",
+    "http://localhost:4173/media/journey-legs/bg/leg-2-thorp-to-hamlet.mp4 net::ERR_ABORTED",
+    "http://localhost:4173/videos/realm-journey.mp4 net::ERR_ABORTED",
+    "http://localhost:4173/videos/realm-journey.mp4 net::ERR_ABORTED"
+  ]
+}

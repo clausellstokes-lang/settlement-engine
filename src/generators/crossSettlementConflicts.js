@@ -14,6 +14,7 @@
  */
 
 import { createPRNG } from '../kernel/prng.js';
+import { powerNameAfterArticle, powerNameWithArticle, powerPossessive, powerSentenceName } from '../domain/display/powerSentenceName.js';
 
 // Which NPC categories create friction per relationship type
 const CONFLICT_CATS = {
@@ -75,24 +76,97 @@ const CONFLICT_NATURE = {
   },
 };
 
+/**
+ * THE PLAIN WORDS FOR EACH CONFLICT NATURE (STYLE-2 SW-4, ruling A7, 2026-11-09). The keys above are
+ * the stored vocabulary (`conflictNature` on every conflict row, read by the Relationships tab and
+ * desk) and never move; the description prints the plain words instead of the jargon key. Every
+ * phrase takes the templates' own article ("a …", "an active …", "open …"), so each starts on a
+ * consonant sound. A key missing here prints as itself (the pin in crossSettlementConflicts.test.js
+ * holds that every key IS mapped).
+ * @type {Readonly<Record<string, string>>}
+ */
+export const CONFLICT_NATURE_PLAIN = Object.freeze({
+  'market boundary dispute': 'quarrel over where one market ends and the other begins',
+  'pricing agreement breakdown': 'broken agreement on prices',
+  'export quota conflict': 'dispute over how much each side may sell abroad',
+  'merchant route rivalry': 'rivalry between merchants over the same road',
+  'command hierarchy dispute': 'dispute over who gives the orders',
+  'troop deployment disagreement': 'disagreement over where the soldiers are sent',
+  'border patrol overlap': 'dispute over who patrols the border',
+  'trade preference dispute': 'dispute over whose goods come first',
+  'supply priority conflict': 'dispute over who is supplied first',
+  'garrison obligation dispute': 'dispute over who must man the garrison',
+  'tribute enforcement standoff': 'standoff over collecting the tribute',
+  'tribute levy disagreement': 'disagreement over how much tribute is owed',
+  'resource extraction claim': 'dispute over who may take what the land yields',
+  'administrative jurisdiction conflict': 'dispute over whose officials have the say',
+  'policy enforcement dispute': 'dispute over whose rules are enforced',
+  'debt renegotiation': 'dispute over the terms of a debt',
+  'supply chain dependency tension': 'grievance over how much one side depends on the other for its goods',
+  'political autonomy dispute': 'dispute over how far each side may run its own affairs',
+  'representation grievance': 'grievance over who speaks for whom',
+  'market domination contest': 'contest over who controls the market',
+  'trade route blockade': 'blockade of a trade road',
+  'price war': 'price war',
+  'export undercutting': 'contest to sell cheaper than the other abroad',
+  'border incursion': 'border crossing by armed men',
+  'arms buildup standoff': 'standoff as both sides arm themselves',
+  'mercenary recruitment competition': 'contest to hire the same sellswords',
+  'smuggling territory dispute': 'dispute over who smuggles where',
+  'protection racket boundary war': 'fight over who collects protection money where',
+  'intelligence operation exposure': 'spying operation that was found out',
+  'proxy force skirmish': 'skirmish fought by hired hands',
+  'defection incident': 'defection to the other side',
+  'spy network compromise': 'betrayal of a spy ring',
+  'asset elimination contract': 'contract to kill an agent',
+  'double-agent suspicion': 'suspicion that a spy serves both sides',
+  'diplomatic envoy incident': 'quarrel over the treatment of an envoy',
+  'propaganda escalation': 'campaign of slander',
+  'treaty violation allegation': 'charge that a treaty was broken',
+  'open border skirmish': 'skirmish on the border',
+  'raid and reprisal cycle': 'run of raids and reprisals',
+  'siege posture standoff': 'standoff with soldiers ready for a siege',
+  'sabotage operation': 'campaign of sabotage',
+  'assassination contract': 'contract for a killing',
+  'destabilization campaign': 'campaign to stir up trouble',
+  'levy obligation dispute': 'dispute over how many fighters must be sent',
+  'garrison quartering grievance': 'grievance over soldiers quartered in homes',
+  'muster quota standoff': 'standoff over how many must answer the muster',
+  'tribute assessment dispute': 'dispute over how the tribute is reckoned',
+  'harvest levy conflict': 'dispute over the share of the harvest owed',
+  'charter rights dispute': 'dispute over the rights the charter grants',
+  'homage renewal grievance': 'grievance over renewing the oath of homage',
+  'contraband route dispute': 'dispute over a smuggling road',
+  'fence territory disagreement': 'dispute over who sells stolen goods where',
+  'exposed informant incident': 'paid informer who was found out',
+  'smuggled goods pricing conflict': 'quarrel over the price of smuggled goods',
+  'front operation ownership dispute': 'dispute over who owns a business that fronts for them',
+  'tariff dispute': 'dispute over tolls and duties',
+  'waypoint access disagreement': 'dispute over the use of a stopping place on the road',
+  'jurisdictional dispute': 'dispute over whose say it is',
+});
+
+/** @param {string} nature @returns {string} */
+export const plainConflictNature = (nature) => CONFLICT_NATURE_PLAIN[nature] || nature;
+
 // Generate a conflict description given two NPCs and context
 function buildConflictDesc(npcA, npcB, settA, settB, relType, nature, rng) {
   const templates = {
     trade_partner: [
-      `${npcA.name} (${npcA.role}) and ${npcB.name} (${npcB.role}) of ${settB.name} are locked in a ${nature}. Both claim the right to set terms for the shared corridor.`,
+      `${npcA.name} (${npcA.role}) and ${npcB.name} (${npcB.role}) of ${settB.name} are locked in a ${nature}. Both claim the right to set the terms of trade between them.`,
       `A ${nature} between ${npcA.name} and ${npcB.name} of ${settB.name} has stalled the trade agreement renewal for two seasons.`,
     ],
     allied: [
       `${npcA.name} and ${npcB.name} of ${settB.name} have reached an impasse over a ${nature}. The alliance holds, but with open tension.`,
-      `The ${nature} between ${npcA.name} and ${settB.name}'s ${npcB.name} risks destabilizing the mutual defense pact.`,
+      `The ${nature} between ${npcA.name} and ${settB.name}'s ${npcB.name} could break the pact that binds the two places to defend each other.`,
     ],
     patron: [
-      `${npcB.name} of ${settB.name} is pressing ${npcA.name} on a ${nature}, invoking the patronage agreement to compel compliance.`,
+      `${npcB.name} of ${settB.name} is pressing ${npcA.name} on a ${nature}, and holding them to the patronage between the two places.`,
       `A ${nature} has put ${npcA.name} in direct conflict with ${settB.name}'s ${npcB.name}, who represents the patron's interests.`,
     ],
     client: [
       `${npcA.name} is negotiating with ${settB.name}'s ${npcB.name} over a ${nature}, and the client settlement needs better terms.`,
-      `Tension over a ${nature} has led ${npcA.name} to consider breaking with ${npcB.name}'s faction in ${settB.name}.`,
+      `Tension over a ${nature} has led ${npcA.name} to consider breaking with ${npcB.name} and those they speak for in ${settB.name}.`,
     ],
     rival: [
       `${npcA.name} and ${settB.name}'s ${npcB.name} are engaged in open ${nature}, with neither willing to concede ground.`,
@@ -104,7 +178,7 @@ function buildConflictDesc(npcA, npcB, settA, settB, relType, nature, rng) {
       `A ${nature} involving ${npcA.name} and ${npcB.name} of ${settB.name} has both sides operating through intermediaries.`,
     ],
     hostile: [
-      `${npcA.name} and ${settB.name}'s ${npcB.name} are on opposite sides of an active ${nature}. Formal violence is a matter of timing.`,
+      `${npcA.name} and ${settB.name}'s ${npcB.name} are on opposite sides of an active ${nature}. Fighting between them is only a matter of time.`,
       `The ${nature} between ${npcA.name} and ${npcB.name} of ${settB.name} has claimed blood on both sides.`,
     ],
     vassal: [
@@ -123,37 +197,45 @@ function buildConflictDesc(npcA, npcB, settA, settB, relType, nature, rng) {
   return rng.pick(pool);
 }
 
-// Faction engagement description
+// Faction engagement description. NAMES-1 (CN1, the seventh chair's ruling of 2026-11-20, vetoable by the owner): A POWER IN A
+// SENTENCE TAKES ITS ARTICLE ("The Elder Council of Ashford and the Merchant Guilds of Brindle"), from the one helper; after a
+// place's possessive ("Brindle's Merchant Guilds") it takes none, so never "Brindle's the Guard".
 function buildFactionDesc(facA, facB, settA, settB, relType, rng) {
+  /** @param {{ name: string }} f @param {boolean} [start] the name opens its sentence */
+  const the = (f, start = false) => powerNameWithArticle(f.name, start);
+  /** @param {{ name: string }} f the name after a place's possessive */
+  const own = (f) => powerNameAfterArticle(f.name);
+  /** @param {{ name: string }} f the article form's possessive, by the one possessive rule ("the Merchant Guilds'") */
+  const of = (f) => `${the(f)}${powerPossessive(f.name).slice(powerSentenceName(f.name).length)}`;
   const templates = {
     rival: [
-      `The ${facA.name} of ${settA.name} and the ${facB.name} of ${settB.name} are in direct competition for the same economic territory. Both are escalating.`,
-      `${facA.name} has been systematically undercutting ${facB.name}'s influence in ${settB.name}. Retaliation is expected.`,
+      `${the(facA, true)} of ${settA.name} and ${the(facB)} of ${settB.name} are competing for the same trade, and neither will back down.`,
+      `${the(facA, true)} has been systematically undercutting ${of(facB)} influence in ${settB.name}. Retaliation is expected.`,
     ],
     cold_war: [
-      `${facA.name} and ${settB.name}'s ${facB.name} are running parallel intelligence operations, and each knows the other knows.`,
-      `The ${facA.name} has placed assets inside ${facB.name} of ${settB.name}. The infiltration goes both ways.`,
+      `${the(facA, true)} and ${settB.name}'s ${own(facB)} are spying on each other, and each knows the other knows.`,
+      `${the(facA, true)} has agents inside ${the(facB)} of ${settB.name}, and it has agents of theirs inside it in turn.`,
     ],
     hostile: [
-      `${facA.name} and ${settB.name}'s ${facB.name} are in open conflict. Casualties have occurred on both sides.`,
+      `${the(facA, true)} and ${settB.name}'s ${own(facB)} are in open conflict. People have died on both sides.`,
     ],
     allied: [
-      `${facA.name} and ${settB.name}'s ${facB.name} maintain a formal cooperation agreement, though it strains under individual interests.`,
+      `${the(facA, true)} and ${settB.name}'s ${own(facB)} have a formal agreement to work together, though each keeps putting its own interests first.`,
     ],
     patron: [
-      `${facB.name} of ${settB.name} exercises de facto oversight of ${facA.name}'s operations through the patronage arrangement.`,
+      `${the(facB, true)} of ${settB.name} keeps a close watch on everything ${the(facA)} does, through the patronage between the two places.`,
     ],
     trade_partner: [
-      `${facA.name} and ${settB.name}'s ${facB.name} share a market agreement, but competition still flares at the edges.`,
+      `${the(facA, true)} and ${settB.name}'s ${own(facB)} share a market agreement, but competition still flares at the edges.`,
     ],
     vassal: [
-      `${facB.name} of ${settB.name} presses feudal claims on ${facA.name}, which complies in public and resists in private.`,
+      `${the(facB, true)} of ${settB.name} presses feudal claims on ${the(facA)}, which complies in public and resists in private.`,
     ],
     criminal_network: [
-      `${facA.name} and ${settB.name}'s ${facB.name} share routes and fences. The partnership is profitable, and neither side trusts it.`,
+      `${the(facA, true)} and ${settB.name}'s ${own(facB)} share routes and fences. The partnership is profitable, and neither side trusts it.`,
     ],
     neutral: [
-      `${facA.name} and ${settB.name}'s ${facB.name} maintain careful distance, neither allied nor opposed.`,
+      `${the(facA, true)} and ${settB.name}'s ${own(facB)} maintain careful distance, neither allied nor opposed.`,
     ],
   };
   const pool = templates[relType] || templates.neutral;
@@ -162,22 +244,19 @@ function buildFactionDesc(facA, facB, settA, settB, relType, rng) {
 
 /**
  * The factions a settlement engages with (GS-2, ODQ §934.101): its POWER factions, the set the
- * simulation runs and every other surface names, strongest first. A shape with no power roster
- * (the generator's own neighbour summary, a pre-pipeline save) falls back to its top-level
- * `factions`, which since GS-2 is itself a projection of the power set. A legacy save's minted
- * group names therefore never reach a new engagement when its power roster is present.
+ * simulation runs and every other surface names, strongest first. The NPC grouping is never read
+ * (PEOPLE-5A, M-2): a shape with no power roster engages with none. A neighbour summary carries
+ * its partner's powers under `powerStructure.factions` like any place.
  * @param {any} settlement
- * @returns {Array<{ name: string, dominantCategory: string }>}
+ * @returns {Array<{ name: string, category: string }>}
  */
 function engagingFactions(settlement) {
   const roster = settlement?.powerStructure?.factions;
-  if (Array.isArray(roster) && roster.length) {
-    return [...roster]
-      .sort((a, b) => (b?.power || 0) - (a?.power || 0))
-      .map((f) => ({ name: f?.faction || f?.name, dominantCategory: f?.category || 'other' }))
-      .filter((f) => f.name);
-  }
-  return Array.isArray(settlement?.factions) ? settlement.factions : [];
+  if (!Array.isArray(roster)) return [];
+  return [...roster]
+    .sort((a, b) => (b?.power || 0) - (a?.power || 0))
+    .map((f) => ({ name: f?.faction || f?.name, category: f?.category || 'other' }))
+    .filter((f) => f.name);
 }
 
 /**
@@ -233,8 +312,9 @@ export function generateCrossSettlementConflicts(settlementA, settlementB, relTy
 
     const natures = CONFLICT_NATURE[relType]?.[cat] || ['jurisdictional dispute'];
     const nature  = rng.pick(natures);
-    const desc    = buildConflictDesc(npcA, npcB, settlementA, settlementB, relType, nature, rng);
-    const descB   = buildConflictDesc(npcB, npcA, settlementB, settlementA, relType, nature, rng);
+    const plain   = plainConflictNature(nature); // the description prints plain words; the stored key stays
+    const desc    = buildConflictDesc(npcA, npcB, settlementA, settlementB, relType, plain, rng);
+    const descB   = buildConflictDesc(npcB, npcA, settlementB, settlementA, relType, plain, rng);
 
     const base = { linkId, type: 'conflict', conflictNature: nature, relType };
     forA.push({
@@ -265,9 +345,9 @@ export function generateCrossSettlementConflicts(settlementA, settlementB, relTy
     let bestA = null, bestB = null;
     outer: for (const cat of cats) {
       for (const fa of factionsA) {
-        if (fa.dominantCategory !== cat) continue;
+        if (fa.category !== cat) continue;
         for (const fb of factionsB) {
-          if (fb.dominantCategory === cat) { bestA = fa; bestB = fb; break outer; }
+          if (fb.category === cat) { bestA = fa; bestB = fb; break outer; }
         }
       }
     }
@@ -281,15 +361,15 @@ export function generateCrossSettlementConflicts(settlementA, settlementB, relTy
       const base  = { linkId, type: 'faction_engagement', relType };
       forA.push({
         ...base,
-        factionName: bestA.name, factionCategory: bestA.dominantCategory,
-        partnerFactionName: bestB.name, partnerFactionCategory: bestB.dominantCategory,
+        factionName: bestA.name, factionCategory: bestA.category,
+        partnerFactionName: bestB.name, partnerFactionCategory: bestB.category,
         partnerSettlement: settlementB.name,
         description: desc,
       });
       forB.push({
         ...base,
-        factionName: bestB.name, factionCategory: bestB.dominantCategory,
-        partnerFactionName: bestA.name, partnerFactionCategory: bestA.dominantCategory,
+        factionName: bestB.name, factionCategory: bestB.category,
+        partnerFactionName: bestA.name, partnerFactionCategory: bestA.category,
         partnerSettlement: settlementA.name,
         description: descB,
       });

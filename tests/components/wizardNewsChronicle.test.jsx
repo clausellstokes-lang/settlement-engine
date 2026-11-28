@@ -33,6 +33,7 @@ vi.mock('../../src/store/index.js', () => {
 });
 
 import WizardNewsPanel from '../../src/components/map/WizardNewsPanel.jsx';
+import { newsReaderSummary } from '../../src/domain/display/newsBody.js';
 
 function campaignWith(feed) {
   return { id: 'camp-1', name: 'Realm', settlementIds: [], wizardNews: feed };
@@ -112,8 +113,10 @@ describe('WizardNewsPanel chronicle', () => {
     expect(prose).toContain('the reversal exacted a real political price');
     // anchored: both fixed climb-down reason phrases above prove the card projection is live.
     expect(prose).not.toMatch(/3\.2|0\.62|38%|\bstock\b/i);
-    const body = container.querySelector('p[title]');
-    expect(body?.getAttribute('title')).toBe('The court held to the war too long; reversing course carried a real political price.');
+    // STYLE-RULINGS-2 C1 (SW-11): the closed reader summary IS the card body now, printed
+    // once; no hover title repeats it. Keyed by the reader's own projection, not its words.
+    expect(prose).toContain(newsReaderSummary(feed.entries[0]));
+    expect(container.querySelector('p[title]')).toBeNull();
   });
 
   it('grounds the chronicle on the latest entry tick, not the skewed feed clock', async () => {

@@ -227,25 +227,19 @@ describe('NPC rename — the INDEPENDENT denominator', () => {
 });
 
 describe('NPC rename — the second home (the regression this pin exists for)', () => {
-  test('a saved-and-reloaded character is renamed at BOTH homes', () => {
+  // PEOPLE-5B (2026-11-07, M-7): the grouping's member copy LEFT the record, and with it the second home;
+  // the arm now proves the one home on a reloaded save and that no `factions[].members[]` surface is touched.
+  test('a saved-and-reloaded character is renamed at its ONE home (the second home left with the grouping)', () => {
     const settlement = reloaded(base);
-    const members = (settlement.factions || []).flatMap(group => group.members || []);
-    // Anchored: the fixture provably carries a SEPARATE member copy of this
-    // character, so the assertion below cannot pass by the copy being absent.
-    const held = members.filter(m => m?.name === leadName);
-    expect(held.length, `no faction group member carries "${leadName}" on this seed`).toBeGreaterThan(0);
-    expect(members.some(m => m === settlement.npcs?.[0]), 'members must be separate objects after reload')
-      .toBe(false);
-
+    expect('factions' in settlement, 'a v2 record carries no grouping').toBe(false);
+    const held = settlement.npcs.filter(n => n?.name === leadName);
+    expect(held.length, `no card carries "${leadName}" on this seed`).toBeGreaterThan(0);
     const result = applyNpcRenameToSettlement(settlement, leadName, NEW_NAME);
     expect(result.changed).toBe(true);
-    expect(result.touched).toContain('factions[].members[].name');
-
-    const stillStale = (settlement.factions || [])
-      .flatMap(group => group.members || [])
-      .filter(m => m?.name === leadName);
-    expect(stillStale, `${stillStale.length} member copies kept the dead name`).toEqual([]);
-    expect(members.filter(m => m?.name === NEW_NAME).length).toBe(held.length);
+    expect(result.touched).toContain('npcs[].name');
+    expect(result.touched.some(t => t.startsWith('factions[]')), 'no grouping surface exists to touch').toBe(false);
+    expect(settlement.npcs.filter(n => n?.name === leadName)).toEqual([]);
+    expect(settlement.npcs.filter(n => n?.name === NEW_NAME).length).toBe(held.length);
   });
 
   test('the relationship edges are joined by NAME and follow the rename', () => {

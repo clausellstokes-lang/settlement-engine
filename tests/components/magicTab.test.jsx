@@ -92,7 +92,7 @@ describe('MagicTab — the dependence block arrives as the Roles framing (UX con
     expect(block.textContent).toContain('Reliance on magic, as judged at the first survey');
     expect(block.textContent).toContain('Grain: Druids keep the blight off.');
     // Public: no corpus line, so the static explanation of the frozen record stands.
-    expect(block.textContent).toContain('relies on active magical infrastructure');
+    expect(block.textContent).toContain('This place leans on its spellcasters');
     const roles = container.querySelector('[data-testid="magic-roles"]');
     // BUILD-W2-BLOCKLAW U4: the facts (the role lines) come first, the passage that frames
     // them after; prose never sits above the fact it explains.

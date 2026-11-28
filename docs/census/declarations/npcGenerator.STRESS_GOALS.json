@@ -1,0 +1,723 @@
+{
+  "pool": {
+    "id": "npcGenerator.STRESS_GOALS",
+    "file": "src/generators/npcGenerator.js",
+    "drawKind": "R",
+    "drawSite": "npcGenerator.js:608 pickFromArray over all active stresses' goals (keyed by stress kind)",
+    "colour": false,
+    "crisisScoped": false,
+    "keyDeclares": {
+      "under_siege": [
+        "under_siege"
+      ],
+      "famine": [
+        "starving"
+      ],
+      "occupied": [
+        "occupied"
+      ],
+      "indebted": [
+        "indebted"
+      ],
+      "recently_betrayed": [
+        "recently_betrayed"
+      ],
+      "plague_onset": [
+        "plague_onset"
+      ],
+      "succession_void": [
+        "succession_void"
+      ],
+      "monster_pressure": [
+        "monster_pressure"
+      ],
+      "politically_fractured": [
+        "politically_fractured"
+      ],
+      "infiltrated": [
+        "infiltrated"
+      ],
+      "insurgency": [
+        "insurgency"
+      ],
+      "mass_migration": [
+        "mass_migration"
+      ],
+      "wartime": [
+        "wartime"
+      ],
+      "religious_conversion": [
+        "religious_conversion"
+      ],
+      "slave_revolt": [
+        "slave_revolt"
+      ]
+    },
+    "lines": 80,
+    "declaring": 9,
+    "note": "Each key is an active stress kind of the record (the draw flattens every active stress's list), so the kind is key-guaranteed. under_siege#2.short ('inside the walls') has a defence-free twin in data/defenceTwinLines.js applied after the draw. mass_migration does NOT fix the direction (migration.js: the entry may be an exodus), so the lines about arrivals/newcomers/admission need migration: influx. famine#1.short, indebted#1.short and slave_revolt#2.short name 'the council' acting as this place's authority → ruler: council (judgement; a lord-ruled place with an advisory council would be a false negative). monster_pressure#0.short presumes NO garrison ('without the garrison they were supposed to have') and has no twin, yet monster_pressure mandates a Garrison Commander wherever a garrison stands. Unexpressed: occupied#1.short a resistance; religious_conversion#1.short the old faith's endowments/properties (temple not named, not declared); wartime#2.short a conscription quota. {commodity}/{topFaction} slots carry renderer fallbacks: not atoms."
+  },
+  "rows": [
+    {
+      "id": "under_siege#0.short",
+      "text": "Secure enough {commodity || 'food'} reserves to outlast the blockade",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "under_siege#0.long",
+      "text": "Survive this: everything else can wait",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "under_siege#1.short",
+      "text": "Decide whether to negotiate terms or hold out for relief",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "under_siege#1.long",
+      "text": "Keep the settlement intact whatever the cost to themselves",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "under_siege#2.short",
+      "text": "Identify the person inside the walls who is communicating with the besiegers",
+      "needs": [
+        "walls"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "under_siege#2.long",
+      "text": "End this siege in a way the settlement can recover from",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "famine#0.short",
+      "text": "Control the {commodity || 'grain'} supply before a competing faction corners it",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "famine#0.long",
+      "text": "Be the person who kept people fed, or profit from the fact that others weren't",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "famine#1.short",
+      "text": "Find out where the hoarded reserves are before the council does",
+      "needs": [],
+      "excludes": [
+        "ruler: lord",
+        "ruler: occupier"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "famine#1.long",
+      "text": "Come out of this with more than they went in with",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "famine#2.short",
+      "text": "Distribute what little exists fairly enough to prevent a riot",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "famine#2.long",
+      "text": "Build the kind of trust that only a crisis can create",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "occupied#0.short",
+      "text": "Navigate the occupation without losing position or principles: ideally both",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "occupied#0.long",
+      "text": "Be remembered as someone who preserved what could be preserved",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "occupied#1.short",
+      "text": "Pass information to the resistance without being identified as a collaborator's informant",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "occupied#1.long",
+      "text": "Outlast the occupation and be on the right side when it ends",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "occupied#2.short",
+      "text": "Satisfy the occupiers' demands while protecting the people they're demanding from",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "occupied#2.long",
+      "text": "Find the line between pragmatism and betrayal, and stay on the right side of it",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "indebted#0.short",
+      "text": "Renegotiate the debt terms before the {topFaction || 'creditor'} sends another representative",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "indebted#0.long",
+      "text": "Find an exit from this obligation that doesn't require giving up more than it cost to fix",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "indebted#1.short",
+      "text": "Identify which members of the council have already made private terms with the creditor",
+      "needs": [],
+      "excludes": [
+        "ruler: lord",
+        "ruler: occupier"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "indebted#1.long",
+      "text": "Repudiate the debt on grounds that would survive legal challenge",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "recently_betrayed#0.short",
+      "text": "Identify who the betrayer was before they do further damage",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "recently_betrayed#0.long",
+      "text": "Restore enough trust that the settlement can function again",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "recently_betrayed#1.short",
+      "text": "Find out what was sold and whether the damage is recoverable",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "recently_betrayed#1.long",
+      "text": "Build a system that makes the next betrayal harder",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "plague_onset#0.short",
+      "text": "Identify the source of the outbreak before it becomes uncontrollable",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "plague_onset#0.long",
+      "text": "Keep the settlement functioning through what might be a very bad few months",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "plague_onset#1.short",
+      "text": "Enforce quarantine measures against people who have reasons to resist them",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "plague_onset#1.long",
+      "text": "Get through this without the settlement losing faith in its institutions",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "succession_void#0.short",
+      "text": "Position themselves before {topFaction || 'a rival faction'} moves first",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "succession_void#0.long",
+      "text": "Secure authority through the right means, not just the fastest",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "succession_void#1.short",
+      "text": "Find a candidate they can support who owes them something for the support",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "succession_void#1.long",
+      "text": "End the uncertainty on terms they can live with",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "monster_pressure#0.short",
+      "text": "Organise a response to the attacks without the garrison they were supposed to have",
+      "needs": [],
+      "excludes": [
+        "garrison"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "monster_pressure#0.long",
+      "text": "Make this settlement safe enough that people stop leaving",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "monster_pressure#1.short",
+      "text": "Identify whether the attacks are opportunistic or directed",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "monster_pressure#1.long",
+      "text": "Be the person who solved the problem rather than the person who reported it",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "politically_fractured#0.short",
+      "text": "Keep the settlement functioning while the factions fight over who controls it",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "politically_fractured#0.long",
+      "text": "Be the one still standing when the fracture finally resolves",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "politically_fractured#1.short",
+      "text": "Position their own faction to win the split outright",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "politically_fractured#1.long",
+      "text": "Turn the paralysis into a permanent advantage for their side",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "politically_fractured#2.short",
+      "text": "Broker between the factions without being seen to take a side",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "politically_fractured#2.long",
+      "text": "Become indispensable to whichever side finally prevails",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "infiltrated#0.short",
+      "text": "Identify the infiltrator before the damage becomes irreversible",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "infiltrated#0.long",
+      "text": "Restore the settlement to a state where trust is possible again",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "infiltrated#1.short",
+      "text": "Exploit the climate of suspicion to remove a rival under cover of the hunt",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "infiltrated#1.long",
+      "text": "Come out of the paranoia with more power than they went into it with",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "infiltrated#2.short",
+      "text": "Protect someone already suspected before the accusation hardens into a verdict",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "infiltrated#2.long",
+      "text": "Keep the search for real infiltrators from curdling into a purge",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "insurgency#0.short",
+      "text": "Restore the authority to collect and govern without provoking open revolt",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "insurgency#0.long",
+      "text": "Hold the settlement together long enough to be seen as the one who held it",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "insurgency#1.short",
+      "text": "Identify who inside the institutions is feeding the insurgency",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "insurgency#1.long",
+      "text": "End the rising in a way that leaves the current order standing",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "insurgency#2.short",
+      "text": "Position themselves to survive whichever side prevails",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "insurgency#2.long",
+      "text": "Come out of this with their office (or a better one) intact",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "mass_migration#0.short",
+      "text": "Absorb the new arrivals into the labour market before resentment turns to violence",
+      "needs": [
+        "migration: influx"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "mass_migration#0.long",
+      "text": "Make the changed settlement work rather than merely survive the change",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "mass_migration#1.short",
+      "text": "Corner the {commodity || 'grain'} and housing the newcomers cannot do without",
+      "needs": [
+        "migration: influx"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "mass_migration#1.long",
+      "text": "Turn the churn of people into a lasting private advantage",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "mass_migration#2.short",
+      "text": "Decide who is admitted and who is turned away, and be owed for each choice",
+      "needs": [
+        "migration: influx"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "mass_migration#2.long",
+      "text": "Become the person every arrival and every old family must go through",
+      "needs": [
+        "migration: influx"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "wartime#0.short",
+      "text": "Meet the requisition for {commodity || 'supplies'} without stripping the settlement bare",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "wartime#0.long",
+      "text": "Keep the settlement standing until the war that is draining it ends",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "wartime#1.short",
+      "text": "Secure the war contracts before a rival does",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "wartime#1.long",
+      "text": "Come out of the war richer than the peace could ever have made them",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "wartime#2.short",
+      "text": "Fill the conscription quota while keeping the people who matter to them out of it",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "wartime#2.long",
+      "text": "Protect their own through a war that spares no one else",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious_conversion#0.short",
+      "text": "Settle the contest between the faiths before it splits every institution in two",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious_conversion#0.long",
+      "text": "Be remembered as the one who chose right when the faith itself was in question",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious_conversion#1.short",
+      "text": "Secure the endowments and properties of the old faith before they are lost in the confusion",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious_conversion#1.long",
+      "text": "Turn a crisis of belief into a permanent hold on what the belief once owned",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious_conversion#2.short",
+      "text": "Protect the adherents of the losing faith from the reprisals now beginning",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious_conversion#2.long",
+      "text": "Keep their conscience and their position, and refuse to choose between them",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "slave_revolt#0.short",
+      "text": "End the revolt without a suppression the settlement cannot recover from",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "slave_revolt#0.long",
+      "text": "Preserve the settlement, and, if possible, their own soul along with it",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "slave_revolt#1.short",
+      "text": "Restore the labour the {topFaction || 'ruling faction'} depends on, by force or by terms",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "slave_revolt#1.long",
+      "text": "Put the old order back together before anyone questions whether it should be",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "slave_revolt#2.short",
+      "text": "Reach the revolt’s leaders with a settlement the council has forbidden them to offer",
+      "needs": [],
+      "excludes": [
+        "ruler: lord",
+        "ruler: occupier"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "slave_revolt#2.long",
+      "text": "Stop the killing on both sides, whatever it costs them personally",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    }
+  ]
+}

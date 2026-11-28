@@ -39,6 +39,9 @@ describe('V-25f — the world-map tour matches the real toolbar', () => {
     expect(sels).toContain('history');
     expect(sels).toContain('controls');
     expect(sels).toContain('inspector');
+    // STYLE-2 SW-12 (ledger D·96): the History step says "exactly as it was", not "byte-exact".
+    expect(WORLD_MAP_TOUR_STEPS.find((s) => s.sel === 'history').body)
+      .toBe('Every advance is remembered. Open History to go back to any earlier point in the campaign, exactly as it was.');
   });
 
   it('the stale "Wizard News" step is gone — the inspector step names the inspector', () => {

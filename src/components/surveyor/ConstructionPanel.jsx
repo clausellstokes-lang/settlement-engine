@@ -28,6 +28,19 @@ const DIMENSION_LABEL = {
 };
 const BAND_TONE = { low: 'muted', moderate: 'info', high: 'warning' };
 const MAX_REVISE_ROUNDS = 2;
+/** The realm preview's plain sentence in a build that carries no engine (ENGINE-4 unit 1). */
+const REALM_PREVIEW_ABSENT = 'Realm previews are not available in this build. Settlement previews still are.';
+
+/**
+ * Whether this build generates through the engine service: `engineRemote.js :: engineRemoteOpen`'s
+ * rule (closed unless VITE_ENGINE_REMOTE is exactly 'true'), spelled here as the generation
+ * client spells it so the panel fetches no service chunk with the flag off.
+ * @returns {boolean}
+ */
+function engineServiceBuild() {
+  const env = /** @type {{ VITE_ENGINE_REMOTE?: unknown } | undefined} */ (import.meta.env);
+  return Boolean(env) && env?.VITE_ENGINE_REMOTE === 'true';
+}
 
 const newSeed = () => `surveyor-${Math.random().toString(36).slice(2, 10)}`;
 
@@ -87,14 +100,28 @@ export default function ConstructionPanel({ initialPrompt = '', initialScope }) 
       // is re-exported from, so the realm branch pays no second fetch.
       const { loadGenerationLawPayloads } = await import('../../lib/instantWorld/composeInstantWorld.js');
       await loadGenerationLawPayloads();
-      if (scope === 'realm') {
+      if (scope === 'realm' && engineServiceBuild()) {
+        // The realm composer is synchronous and runs the whole pipeline per member; a build
+        // that carries no engine has none to run it with (ENGINE-4 unit 1). Said, not crashed.
+        setGenerated({ error: REALM_PREVIEW_ABSENT });
+      } else if (scope === 'realm') {
         const { composeInstantWorld } = await import('../../lib/instantWorld/composeInstantWorld.js');
         const { settlements } = composeInstantWorld({ seed, basicConfig: config });
         const deviations = cmp.compareRealmToConstraints(settlements, constraints);
         setGenerated({ deviations, count: Array.isArray(settlements) ? settlements.length : 0, kind: 'realm' });
       } else {
-        const { generateSettlementPipeline } = await import('../../generators/generateSettlementPipeline.js');
-        const dossier = generateSettlementPipeline(config, null, { seed });
+        // Through the local engine seam's pipeline door (ENGINE-3 unit 2), left out of a
+        // VITE_ENGINE_REMOTE build; there the engine service's `derive` op runs this very call
+        // (no birthConfig, no custom content) and answers the same dossier (ENGINE-4 unit 1).
+        let dossier;
+        if (engineServiceBuild()) {
+          const { runRemoteDerive } = await import('../../lib/engineRemote.js');
+          dossier = await runRemoteDerive({ seed, config });
+        } else {
+          const { loadLocalPipeline } = await import('../../lib/localPipeline.js');
+          const { generateSettlementPipeline } = await loadLocalPipeline();
+          dossier = generateSettlementPipeline(config, null, { seed });
+        }
         const deviations = cmp.compareResultToConstraints(dossier, constraints);
         setGenerated({ deviations, dossier, config, kind: 'settlement' });
       }

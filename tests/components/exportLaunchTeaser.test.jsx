@@ -82,7 +82,7 @@ function owner(staff) {
 const CONTROLS = {
   'SettlementCard :: frozen Export PDF': () => {
     const save = { id: 'f1', name: 'Stoneford', accessState: 'inactive_plan', settlement: SETTLEMENT, campaignState: { phase: 'canon', eventLog: [], locks: {} }, savedAt: 1 };
-    render(<table><tbody><SettlementCard s={save} allModifiers={new Map()} onView={() => {}} deleteId={null} setDeleteId={() => {}} deleteConfirmed={() => {}} campaigns={[]} addToCampaign={() => {}} removeFromCampaign={() => {}} currentCampaignId={null} regionalCounts={{}} onReactivate={() => {}} canReactivate reactivatingId={null} onCanonize={() => {}} nameFor={String} onAdvanceTime={() => {}} onCreateCampaign={() => {}} onNavigate={() => {}} canManageCampaigns /></tbody></table>);
+    render(<table><tbody><SettlementCard s={save} allModifiers={new Map()} onView={() => {}} deleteId={null} setDeleteId={() => {}} deleteConfirmed={() => {}} campaigns={[]} addToCampaign={() => {}} removeFromCampaign={() => {}} currentCampaignId={null} regionalCounts={{}} onReactivate={() => {}} canReactivate reactivatingId={null} onCanonize={() => {}} nameFor={String} onCreateCampaign={() => {}} onNavigate={() => {}} canManageCampaigns /></tbody></table>);
     return { control: screen.getByRole('button', { name: /^Export PDF/ }), label: 'Export PDF', fired: () => track.mock.calls.length };
   },
   'BulkActionBar :: Export JSON': () => {
@@ -91,7 +91,7 @@ const CONTROLS = {
     return { control: screen.getByRole('button', { name: /^Export JSON/ }), label: 'Export JSON', fired: () => exportBulk.mock.calls.length };
   },
   ...Object.fromEntries(['World Book', 'Player Book', 'Campaign PDF'].map((name) => [`CampaignFolder :: ${name}`, () => {
-    render(<CampaignFolder campaign={{ id: 'c1', name: 'Realm', collapsed: true }} settlements={[{ id: 's1', name: 'A', settlement: SETTLEMENT }]} worldCanonized canManageCampaigns onAdvanceTime={() => {}} toggleCollapsed={() => {}} />);
+    render(<CampaignFolder campaign={{ id: 'c1', name: 'Realm', collapsed: true }} settlements={[{ id: 's1', name: 'A', settlement: SETTLEMENT }]} canManageCampaigns toggleCollapsed={() => {}} />);
     fireEvent.click(screen.getByRole('button', { name: /Books and export/ }));
     return { control: screen.getByRole('menuitem', { name: new RegExp(`^${name}`) }), label: name, fired: () => track.mock.calls.length };
   }])),

@@ -73,6 +73,10 @@ describe('RealmVerbComposer — schema translation without value mutation', () =
       />,
     );
 
+    // STYLE-2 SW-12 (ledger D·77): the composer's footnote names no "machinery" and no "stages".
+    expect(container.textContent).toMatch(/Every order waits as a proposal until you approve it\. Even a forced order must keep to the\s+realm's own limits, and an order the realm refuses says why\./);
+    expect(container.textContent).not.toMatch(/own machinery|stages as a pending proposal/); // anchored: the same live container matched the footnote on the line above
+
     fireEvent.click(screen.getByRole('button', { name: 'Test order' }));
 
     const reason = screen.getByRole('combobox', { name: 'war reason type' });

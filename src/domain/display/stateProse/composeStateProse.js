@@ -75,6 +75,8 @@ import {
   eligibleVariants,
   fillSlots,
   hashKey,
+  noteDrawnVariant,
+  resolveDeclaredPosition,
   variantIsAudible,
   speakTierNoun,
 } from './stateProseKernel.js';
@@ -84,7 +86,7 @@ import {
 // `scripts/lib/module-closure.mjs`: the closure moves 2 files / 74,847 B to 3 files / 76,893 B,
 // so the edge costs ONE file and 2,046 bytes, against the four files and 150,231 bytes a
 // lexicon import was priced at and refused at car 8a-4. The leaf imports nothing itself.
-import { DOSSIER_CONNECTIVES } from '../../../data/dossierConnectives.generated.js';
+import { DOSSIER_CONNECTIVES, DOSSIER_CONNECTIVE_DECLARATIONS } from '../../../data/dossierConnectives.generated.js';
 
 /**
  * One piece of a composed unit — the provenance row a manifest cell carries.
@@ -140,6 +142,10 @@ import { DOSSIER_CONNECTIVES } from '../../../data/dossierConnectives.generated.
  *   it did before this car.
  * @property {ReadonlyArray<string>} [spines] turn only
  * @property {ReadonlyArray<string>} [covers] turn only
+ * @property {ReadonlyArray<string>} [declares] the pool's brace group (CENSUS-1b wave 1), emitted
+ *   only where the annex wrote one; read by `poolReadOf`
+ * @property {true} [crisisScoped] the pool opted into the crisis dimension (CENSUS-1b wave 1)
+ * @property {true} [colour] the pool is a colour pool (`{colour}`, CENSUS-2e); noted with the draw
  */
 /**
  * A modifier candidate as a desk hands it over.
@@ -319,6 +325,24 @@ function leavesOf(given) {
 const DEFAULT_POOL_META = Object.freeze({ role: 'spine' });
 
 /**
+ * The read one pool is drawn under: the desk's read plus the pool's own brace group (CENSUS-1b
+ * wave 1: `poolMeta.declares`, `poolMeta.crisisScoped`), so the kernel gates the pool-level atoms
+ * and the inverse crisis default. A pool with neither reads under the desk's read unchanged.
+ * @param {{poolMeta?: Record<string, PoolMeta>}|undefined} block
+ * @param {string} poolKey
+ * @param {{slots: Record<string, unknown>, seed: string, audience: string,
+ *   dimensions: Record<string, string>}} read
+ * @returns {{slots: Record<string, unknown>, seed: string, audience: string,
+ *   dimensions: Record<string, string>, poolDeclares?: ReadonlyArray<string>, crisisScoped?: true}}
+ */
+function poolReadOf(block, poolKey, read) {
+  const meta = poolMetaOf(block, poolKey);
+  const poolDeclares = Array.isArray(meta.declares) && meta.declares.length ? meta.declares : null;
+  if (!poolDeclares && meta.crisisScoped !== true) return read;
+  return { ...read, ...(poolDeclares ? { poolDeclares } : {}), ...(meta.crisisScoped === true ? { crisisScoped: true } : {}) };
+}
+
+/**
  * A pool's frozen metadata, or the default. Read from the block's SIBLING map, never from
  * the pool array: `drawVariant` reads `blockId` and `poolKey` and never a pool's fields, so
  * a `poolMeta` edit cannot move a draw BY CONSTRUCTION (ARCH §2.1).
@@ -386,7 +410,8 @@ export function composedPieceOf(pool, variant, poolKey, options) {
  * Draw one pool: the variant, its face, its filled text and its piece. `null` when the pool
  * is absent, when nothing is eligible, or when the fill fails — the caller DROPS a candidate
  * that answers `null` and walks on, which changes no modulus of any pool it already drew.
- * @param {{pools?: Record<string, ReadonlyArray<import('./stateProseKernel.js').StateProseVariant>>}} block
+ * @param {{pools?: Record<string, ReadonlyArray<import('./stateProseKernel.js').StateProseVariant>>,
+ *   poolMeta?: Record<string, PoolMeta>}} block
  * @param {string} blockId
  * @param {string} poolKey
  * @param {'spine'|'modifier'|'turn'} role
@@ -399,9 +424,12 @@ export function composedPieceOf(pool, variant, poolKey, options) {
 function drawPiece(block, blockId, poolKey, role, read, typing = {}) {
   const pool = block.pools ? block.pools[poolKey] : undefined;
   if (!Array.isArray(pool) || pool.length === 0) return null;
-  const eligible = eligibleVariants(pool, read);
+  const poolRead = poolReadOf(block, poolKey, read);
+  const eligible = eligibleVariants(pool, poolRead);
   const variant = drawVariant(eligible, blockId, poolKey, read.seed);
   if (!variant) return null;
+  // CENSUS-1b wave 1: the drawn line is noted in the open presumption ledger (no-op otherwise).
+  noteDrawnVariant(variant, { blockId, poolKey, crisisScoped: poolRead.crisisScoped === true, poolDeclares: poolRead.poolDeclares, colour: poolMetaOf(block, poolKey).colour === true });
   const face = drawFace(variant, blockId, poolKey, read.seed);
   const wordings = variant.wordings;
   const source = face === 0 || !Array.isArray(wordings) ? variant.text : wordings[face - 1];
@@ -441,7 +469,7 @@ function seatedTurn(block, spineKey, turns, read) {
     if (!Array.isArray(meta.spines) || !meta.spines.includes(spineKey)) continue;
     const pool = block.pools ? block.pools[key] : undefined;
     if (!Array.isArray(pool) || pool.length === 0) continue;
-    if (eligibleVariants(pool, read).length === 0) continue;
+    if (eligibleVariants(pool, poolReadOf(block, key, read)).length === 0) continue;
     return { key, covers: Array.isArray(meta.covers) ? meta.covers : [] };
   }
   return null;
@@ -476,7 +504,7 @@ function admissibleCandidates(block, spineKey, candidates, covered, read) {
     seen.add(key);
     const pool = block.pools ? block.pools[key] : undefined;
     if (!Array.isArray(pool) || pool.length === 0) continue;
-    if (eligibleVariants(pool, read).length === 0) continue;
+    if (eligibleVariants(pool, poolReadOf(block, key, read)).length === 0) continue;
     const meta = poolMetaOf(block, key);
     if (meta.role !== 'modifier') continue;
     if (!Array.isArray(meta.attach) || !meta.attach.includes(spineKey)) continue;
@@ -714,15 +742,21 @@ function factBudget(spineMeta) {
  * @param {string} spineKey
  * @param {string} modifierKey
  * @param {string} seed
- * @returns {string|null} the phrase (possibly the empty opener), or null when the list is empty
+ * @param {object|null} [facts] `factsOf(record)` for the position-keyed channel (R-AQ)
+ * @returns {string|null} the phrase (possibly the empty opener), or null when the list is empty or
+ *   its drawn joint is refused with no admitted position
  */
-function drawConnective(connectives, relation, seat, blockId, spineKey, modifierKey, seed) {
+function drawConnective(connectives, relation, seat, blockId, spineKey, modifierKey, seed, facts = null) {
   const bySeat = connectives[relation];
   const list = bySeat ? bySeat[seat] : undefined;
   if (!Array.isArray(list) || list.length === 0) return null;
-  if (list.length === 1) return list[0];
-  if (!seed) return list[0];
-  return list[hashKey(`${seed}::${blockId}::${spineKey}::joint::${modifierKey}`) % list.length];
+  const key = `${seed}::${blockId}::${spineKey}::joint::${modifierKey}`;
+  const drawn = list.length === 1 || !seed ? 0 : hashKey(key) % list.length;
+  // CENSUS-1h unit 7 (R-AQ): the position-keyed channel, checked AFTER the modulus draw; a list
+  // with no declaration (all four today, `{colour}` by CENSUS-2e) returns the drawn position.
+  const declared = connectives === CONNECTIVES ? DOSSIER_CONNECTIVE_DECLARATIONS[relation]?.[seat] : undefined;
+  const at = resolveDeclaredPosition(declared, drawn, facts, key, { pool: `connective::${relation}.${seat}` });
+  return at < 0 ? null : list[at];
 }
 
 /**
@@ -787,7 +821,7 @@ function arrange(spineText, modifier) {
  * @param {string} blockId
  * @param {{spineKey?: string|null, candidates?: ReadonlyArray<StateProseCandidate>,
  *   turns?: ReadonlyArray<{key: string}>, slots?: Record<string, unknown>,
- *   seed?: string|null, audience?: string, dimensions?: Record<string, string>,
+ *   seed?: string|null, audience?: string, dimensions?: Record<string, string>, facts?: object|null,
  *   tierNoun?: string|null, leaves?: ProseLeaves}} [options] `leaves` defaults to the three
  *   floors above; `tierNoun` is the settlement's own noun, already resolved by `tierNounFor`
  *   at the call site — see the note at the substitution below.
@@ -805,6 +839,8 @@ export function composeStateProse(corpus, blockId, options = {}) {
     seed: typeof options.seed === 'string' ? options.seed : '',
     audience: audienceOf(options.audience),
     dimensions: options.dimensions || {},
+    // CENSUS-1b wave 1: `factsOf(record)`, which every desk hands in at its entry (`factsAnswered`).
+    facts: options.facts && typeof options.facts === 'object' ? options.facts : null,
   };
   // ⭐ THE SETTLEMENT'S OWN NOUN IS THE DESK'S TO SPEAK (ODQ §934.22 addendum). The corpus
   // writes 'the town' generically about a settlement of ANY size, and `tierVoice.js` carries
@@ -846,7 +882,7 @@ export function composeStateProse(corpus, blockId, options = {}) {
     if (!seats[seat]) continue;
     if (seat === CLAUSE_SEAT && !clauseFits(text)) continue;
     const phrase = drawConnective(
-      leaves.connectives, relation, seat, blockId, spineKey, row.key, read.seed,
+      leaves.connectives, relation, seat, blockId, spineKey, row.key, read.seed, read.facts,
     );
     if (phrase === null) continue;
     const drawn = drawPiece(block, blockId, row.key, 'modifier', read, { relation, seat });
@@ -899,7 +935,7 @@ export function composeStateProse(corpus, blockId, options = {}) {
  * @param {ReadonlyArray<{spineKey?: string|null, candidates?: ReadonlyArray<StateProseCandidate>,
  *   turns?: ReadonlyArray<{key: string}>}>} rungs in the desk's own order, which is preserved
  * @param {{slots?: Record<string, unknown>, seed?: string|null, audience?: string,
- *   dimensions?: Record<string, string>, limit?: number, tierNoun?: string|null,
+ *   dimensions?: Record<string, string>, facts?: object|null, limit?: number, tierNoun?: string|null,
  *   leaves?: ProseLeaves}} [options] `limit` defaults to
  *   `COMPOSITION_BOUNDS.modifierBearingRungs`; `tierNoun` rides through to every rung
  * @returns {Array<ComposedUnit|null>} one entry per rung, in the rungs' own order
@@ -916,6 +952,8 @@ export function composeStateProseMount(corpus, blockId, rungs, options = {}) {
     seed: typeof options.seed === 'string' ? options.seed : '',
     audience: audienceOf(options.audience),
     dimensions: options.dimensions || {},
+    // CENSUS-1b wave 1: `factsOf(record)`, which every desk hands in at its entry (`factsAnswered`).
+    facts: options.facts && typeof options.facts === 'object' ? options.facts : null,
   };
 
   const ranked = rows.map((rung, at) => {

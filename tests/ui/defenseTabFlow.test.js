@@ -42,6 +42,9 @@ import { buildPrintProse } from '../../src/domain/display/stateProse/printProse.
 import { collectPlotHooks } from '../../src/domain/dossier/plotHooks.js';
 import { toPublicSafe } from '../../src/domain/display/publicSafe.js';
 import { projectShareVeil, writeShareVeil, isVeiled } from '../../src/domain/display/galleryVeil.js';
+import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
+import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { magicWorksAt } from '../../src/domain/worldPulse/magicWorksAt.js';
 
 const e = React.createElement;
 const HERE = dirname(fileURLToPath(import.meta.url));
@@ -180,7 +183,7 @@ describe('DS-DEF-9 at viability.magicDependency — the registry\'s first cross-
     // The frozen record's static explanation is correctly absent (the flag is false), and the
     // corpus line is present anyway — a finding, not an absence.
     // anchored: the assertion two lines above proves `text` carries the rendered sentence,
-    expect(text).not.toContain('relies on active magical infrastructure'); // so the container is live
+    expect(text).not.toContain('This place leans on its spellcasters'); // so the container is live
   });
 
   test('THE PUBLIC GATE: the magic tab stays silent for an anonymous viewer', () => {
@@ -255,7 +258,7 @@ describe('DS-DEF-2 at defense.threatAssessment — each sentence under ITS OWN b
     const drawn = defenseThreatProse(port, opts(port));
     const { container } = render(e(DefenseTab, { settlement: port, narrativeNote: null }));
     const caption = [...container.querySelectorAll('div')]
-      .find((el) => el.textContent.startsWith('Bars show the settlement'));
+      .find((el) => el.textContent.startsWith('Each bar shows how ready the settlement'));
     expect(caption, 'the Threat Assessment caption is gone').toBeTruthy();
     // STRUCTURAL: the caption is followed IMMEDIATELY by the bar list. The retired stack was
     // the element in between, so its return moves this sibling and reds here.
@@ -330,9 +333,9 @@ describe('UX consolidation — Defense (T2-20..T2-23)', () => {
     const crim = port.powerStructure.factions.find((f) => f.category === 'criminal');
     expect(crim, 'fixture premise: a criminal faction').toBeTruthy();
     const text = dmText(port);
-    expect(text).toContain(`Criminal faction: ${crim.faction}`);
+    expect(text).toContain(`Underworld: ${crim.faction}`);
     if (crim.desc) expect(text).not.toContain(crim.desc); // anchored: the faction line is asserted on this render above
-    expect(text).not.toMatch(/Criminal faction: power \d/); // anchored: same render
+    expect(text).not.toMatch(/Underworld: power \d/); // anchored: same render
   });
 
   test('T2-21: no terrain or strategic-value chips in the posture header', () => {
@@ -398,11 +401,26 @@ describe('T2-24 — magic does not function: no arcane provision, no magic-depen
     expect(container.querySelector('[data-testid="magic-dependence"]')).toBeNull();
   });
 
-  test('STOP-2: no "Arcane defense" force group (screen or print) in a dead-magic world, alchemist or not', () => {
-    const s = deadMagicTown();
-    expect(s.defenseProfile.institutions.magicDef.length, 'fixture premise: the roster files an alchemist as arcane defense').toBeGreaterThan(0);
+  // TAIL-CORPUS-DEF-5, RE-KEYED BY IDENTITY (the chair's C25): 83883baaa (UPKEEP-CAPACITY C6, the chair's G5, a DECLARED
+  // MOVE) took 'alchemist' out of DEFENSE_BUCKET_KEYWORDS.magicDef: the alchemist's shop and quarter are a trade, not
+  // retained casters. The dead-magic city above holds an alchemist and nothing the roster files as arcane defence now,
+  // and no dead-magic birth read for this seat does (nomagic-a..z; r2r-town/city/metropolis-0..19 with the magic dial
+  // off). So the premise is a house the roster STILL files as arcane defence: r2r-city-0 of the 720's configuration (a
+  // Scroll scribe and an Enchanter's shop), read in a world where magic does not function (its own record, the magic
+  // dial off: `magicWorksAt` false). Its live record is the anchor: there the group prints.
+  test('STOP-2: no "Arcane defense" force group (screen or print) in a dead-magic world, alchemist or not', async () => {
+    await loadGenerationLawPayloads();
+    const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
+    const live = generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...DIALS, settType: 'city' }), null, { seed: 'r2r-city-0', customContent: {} });
+    const s = { ...live, config: { ...live.config, magicExists: false } };
+    expect(s.defenseProfile.institutions.magicDef.length, 'fixture premise: the roster files a house as arcane defense').toBeGreaterThan(0);
+    expect([magicWorksAt(live), magicWorksAt(s)], 'fixture premise: magic works in the live record, not in the dead one').toEqual([true, false]);
+    expect(deriveArmedForces(live).arcane.length, 'anchored: the live record reads the group').toBeGreaterThan(0);
     expect(deriveArmedForces(s).arcane, 'the PDF Defense chapter reads this group').toEqual([]);
+    const liveText = render(e(DefenseTab, { settlement: live, narrativeNote: null })).container.textContent;
+    cleanup();
     const { container } = render(e(DefenseTab, { settlement: s, narrativeNote: null }));
+    expectPresentThenAbsent(liveText, container.textContent, 'Arcane defense', 'the arcane force group where magic does not function');
     const toggle = [...container.querySelectorAll('button')].find((b) => /Armed Forces & Fortifications/.test(b.textContent));
     expect(toggle.textContent).toContain('Armed Forces & Fortifications');
     expect(toggle.textContent).not.toMatch(/\d+ arcane/); // anchored: the forces header is on this render
@@ -443,7 +461,7 @@ describe('F11 / X-2 — Defense prints no plot-hook text', () => {
 // only been hidden, 298 still classifying, and 323 still naming the criminal faction. The
 // block reads the grouping list beside the copy and stands down whole; Public order stays.
 describe('DefenseTab — a veiled criminal architecture says nothing (W2-VEIL-B)', () => {
-  const CRIME_RE = /Criminal structure:|No organized criminal infrastructure|Criminal faction:|Active criminal operations|Active crime patterns/;
+  const CRIME_RE = /Criminal structure:|No organized criminal infrastructure|Underworld:|Active criminal operations|Active crime patterns/;
   const openCriminal = (view) => {
     const head = view.queryAllByText('Criminal Architecture & Public Order')[0];
     if (head && !CRIME_RE.test(view.container.textContent)) fireEvent.click(head);

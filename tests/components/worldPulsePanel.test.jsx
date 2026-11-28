@@ -115,6 +115,12 @@ describe('WorldPulsePanel', () => {
     expect(screen.getByText('World Pulse')).toBeTruthy();
     expect(screen.getByText('Famine pressure may take hold')).toBeTruthy();
     expect(screen.getByText('Disease outbreak resolved')).toBeTruthy();
+    // STYLE-2 SW-12 (ledger D·22, D·24): the pulse's counts and a lifted trouble's
+    // odds read in plain words; no engine noun, no raw roll on the card face.
+    expect(screen.getByText('1 change took hold on its own, 1 waits for your word, 4 were weighed this advance.')).toBeTruthy();
+    expect(screen.getByText('It had about an even chance to lift this advance, and it did.')).toBeTruthy();
+    expect(screen.getByText('ran its course')).toBeTruthy();
+    expect(screen.queryByText(/drift item|Resolution roll|time bounded stressor/)).toBeNull();
     expect(screen.getByText('Ashford population may fall')).toBeTruthy();
     expect(screen.getByText('Impact Digest')).toBeTruthy();
     expect(screen.getByText('Briarwatch faces import shortage')).toBeTruthy();
@@ -174,19 +180,24 @@ describe('WorldPulsePanel', () => {
 
     render(<WorldPulsePanel campaign={campaign} />);
 
-    expect(screen.getByText('Active Stressors & Echoes')).toBeTruthy();
+    expect(screen.getByText('Troubles now, and troubles remembered')).toBeTruthy();
     // The active siege card: severity, counterforce explanation, entanglement,
     // origin variant, and the DM-named attacker force.
     expect(screen.getByText('Siege pressure')).toBeTruthy();
-    expect(screen.getByText(/resilience 31%/)).toBeTruthy();
-    expect(screen.getByText(/a pillar is missing/)).toBeTruthy();
+    // STYLE-2 SW-12 (ledger D·31): how the place copes, in words — no per cent, no "pillar".
+    expect(screen.getByText('not recovering')).toBeTruthy();
+    expect(screen.getByText('missing something it needs to recover')).toBeTruthy();
+    expect(screen.queryByText(/resilience \d+%|a pillar is missing/)).toBeNull();
     expect(screen.getByText(/entangled with famine/)).toBeTruthy();
     expect(screen.getByText('The Red Fang warband')).toBeTruthy();
     // The echo card: living-memory framing with fading strength.
     // LINEAGE NOTE (master merge W6): RF's echo row joins with the em-dash house
     // style ('Market shock — in living memory'); master used a comma.
     expect(screen.getByText('Market shock, in living memory')).toBeTruthy();
-    expect(screen.getByText(/memory 34%/)).toBeTruthy();
+    // STYLE-2 SW-12 (ledger D·19, D·20): the echo's memory is a band, not a per cent.
+    expect(screen.getByText('memory: fading')).toBeTruthy();
+    expect(screen.getByText('It is over, but people still speak of it, and while the memory is fresh it can flare up again.')).toBeTruthy();
+    expect(screen.queryByText(/memory 34%|re-ignite while warm/)).toBeNull();
   });
 
   test('a war stressor with no named force shows the attacker as unnamed', () => {

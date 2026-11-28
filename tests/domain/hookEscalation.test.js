@@ -290,7 +290,7 @@ describe('deriveEscalationClocks()', () => {
     expect(crisis.stages.some(s => s.includes('Mayor and Council'))).toBe(true);
   });
 
-  it('emits a Faction Split Clock when two top factions are close in power and different archetypes', () => {
+  it('emits a Power Split Clock when two top factions are close in power and different archetypes', () => {
     const clocks = deriveEscalationClocks({
       powerStructure: {
         publicLegitimacy: { score: 65, label: 'Approved' },
@@ -301,11 +301,11 @@ describe('deriveEscalationClocks()', () => {
         ],
       },
     });
-    const split = clocks.find(c => c.label === 'Faction Split Clock');
+    const split = clocks.find(c => c.label === 'Power Split Clock');
     expect(split).toBeTruthy();
   });
 
-  it('does NOT emit a Faction Split Clock when archetypes are the same', () => {
+  it('does NOT emit a Power Split Clock when archetypes are the same', () => {
     const clocks = deriveEscalationClocks({
       powerStructure: {
         publicLegitimacy: { score: 65, label: 'Approved' },
@@ -316,7 +316,7 @@ describe('deriveEscalationClocks()', () => {
         ],
       },
     });
-    const split = clocks.find(c => c.label === 'Faction Split Clock');
+    const split = clocks.find(c => c.label === 'Power Split Clock');
     expect(split).toBeFalsy();
   });
 

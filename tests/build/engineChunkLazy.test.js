@@ -14,8 +14,9 @@
  *      pre-fetch it on first paint — while the EAGER engine-core chunk KEEPS
  *      its hint. Stripping an eager chunk's hint cannot make it lazy; it only
  *      serializes that chunk's fetch behind the entry's download and parse.
- *   3. settlementSlice reaches the heavy generators via dynamic import()
- *      (loadEngine), not a top-level static import.
+ *   3. settlementSlice reaches the heavy generators via dynamic import() only
+ *      (its regeneration lane, then the local engine seam localPipeline.js),
+ *      never a top-level static import.
  *   4. Pipeline receipt metadata is a small independent lazy chunk. Generation
  *      acquires it through the same memoized loader, and the lazy PipelineRail
  *      can read it without fetching the complete generation engine.
@@ -258,10 +259,29 @@ describe('engine chunk — no first-paint-reachable excision is left unpinned', 
 });
 
 describe('engine chunk — source uses dynamic import for the heavy generators', () => {
-  it('settlementSlice loadEngine() dynamic-imports generateSettlementPipeline (not a static top-level import)', () => {
+  // ⭐ RE-ANCHORED, NOT PATCHED (ENGINE-MERGE-2, 2026-11-07). This arm pinned the dynamic
+  // `import()` of the pipeline on the SLICE's own loadEngine(). The engine service lanes
+  // moved it: ENGINE-5 lifted section regeneration into settlementRegenAction.js (the slice
+  // reaches that lane by its own dynamic import), and ENGINE-3 moved the pipeline's one
+  // main-thread `import()` into the local engine seam src/lib/localPipeline.js ::
+  // loadLocalPipeline, the module a VITE_ENGINE_REMOTE build resolves away
+  // (vite.config.js :: engineAbsentWhenRemote). The CLAIM is unchanged — the slice never
+  // carries the generator in its static graph, and the pipeline is reached only through a
+  // dynamic boundary — and is now read where the boundary lives. The presence regex is
+  // anchored at a `return import(` statement on the RAW source, so the seam's own
+  // `@returns {Promise<typeof import(...)>}` docblock cannot satisfy it.
+  it('the pipeline is reached only through a dynamic import — the seam localPipeline.js imports it lazily, and settlementSlice never statically', () => {
     const src = readFileSync(resolve(process.cwd(), 'src/store/settlementSlice.js'), 'utf-8');
-    expect(src).toMatch(/import\(['"][^'"]*generateSettlementPipeline[^'"]*['"]\)/);
+    const seam = readFileSync(resolve(process.cwd(), 'src/lib/localPipeline.js'), 'utf-8');
+    const regenLane = readFileSync(resolve(process.cwd(), 'src/store/settlementRegenAction.js'), 'utf-8');
+    expect(seam).toMatch(/^\s*return import\(['"]\.\.\/generators\/generateSettlementPipeline\.js['"]\);/m);
+    expect(src).toMatch(/import\(['"]\.\/settlementRegenAction\.js['"]\)/);
+    expect(regenLane).toMatch(/import\(['"]\.\.\/lib\/localPipeline\.js['"]\)/);
     expect(src).not.toMatch(/^import\s.*from\s+['"][^'"]*generators\/generateSettlementPipeline[^'"]*['"]/m);
+    // anchored: the slice's positive regen-lane edge above proves this file was read, so its lack of a static seam import cannot be vacuous.
+    expect(src).not.toMatch(/^import\s.*from\s+['"][^'"]*localPipeline[^'"]*['"]/m);
+    // anchored: the regen lane's positive localPipeline import() above proves the file was read, so its lack of a static pipeline import cannot be vacuous.
+    expect(regenLane).not.toMatch(/^import\s.*from\s+['"][^'"]*generators\/generateSettlementPipeline[^'"]*['"]/m);
   });
 
   // ⭐ RE-ANCHORED, NOT PATCHED. This arm used to pin four regexes on the SLICE:
@@ -465,5 +485,229 @@ describe('FIX-B2 — the anchored leaves are PLACED, not co-located', () => {
     // Non-vacuity for the scanner: the HTML was really read and really contains hints.
     expect(html.length).toBeGreaterThan(500);
     expect((html.match(/rel="modulepreload"/g) || []).length).toBeGreaterThan(0);
+  });
+});
+
+// ── FORTUNE U6 (2026-11-20): the fortune law is EXCISED AND PINNED to its own lazy chunk ──
+// src/domain/fortune/fortuneLaw.js rode EAGER engine-core only because ESD seeds it (three
+// generators import it); no first-paint module reaches it (the measure:
+// docs/chair/2026-11-20/content/fortune/measures/firstpaint/FIRSTPAINT-CHAIN.md, probe C).
+// The excision's row and the pinned chunk, read from the config itself (executed
+// manualChunks, the eager derivation) and then from the dist. The last arm is why the pin
+// exists: excised WITHOUT it (probe B), Rollup co-locates the law into the big lazy `engine`
+// chunk and the densityCreateBoundary chunk gains a static edge to the whole generator.
+// Written as filters and booleans, never a bare negated matcher (the walker's frozen count).
+describe('FORTUNE U6 — the fortune law leaves the first-paint closure for its own chunk', () => {
+  const { manualChunks } = viteConfig.build.rollupOptions.output;
+  const ROOT = process.cwd();
+  const LAW = '/src/domain/fortune/fortuneLaw.js';
+  const lawPath = join(ROOT, LAW.slice(1));
+  const FORTUNE_LAW_CHUNK_RE = /^fortune-law-[A-Za-z0-9_-]+\.js$/;
+
+  it('the law exists and is a row of ENGINE_SHARED_DOMAIN_EXCISIONS', () => {
+    expect(existsSync(lawPath), `${LAW} is gone — this block now proves nothing`).toBe(true);
+    expect(ENGINE_SHARED_DOMAIN_EXCISIONS.filter(frag => frag === LAW)).toEqual([LAW]);
+  });
+
+  it('manualChunks places the law in its own `fortune-law` chunk (a control generator still routes to the engine)', () => {
+    expect(manualChunks(lawPath)).toBe('fortune-law');
+    expect(manualChunks(join(ROOT, 'src/generators/economy/prosperity.js'))).toBe('engine');
+  });
+
+  it('the law is out of vite\'s own eager first-paint derivation', () => {
+    expect(EAGER_FIRST_PAINT_MODULES.size).toBeGreaterThan(100);
+    expect(EAGER_FIRST_PAINT_MODULES.has(lawPath), 'fortuneLaw.js is in the first-paint closure').toBe(false);
+  });
+
+  // The emitted graph: the vendorPdfLazy closure walk (static edges only; import() is lazy).
+  const staticDeps = (file) => {
+    const code = readFileSync(join(assetsDir, file), 'utf-8');
+    const specs = new Set();
+    for (const m of code.matchAll(/\bfrom\s*["']\.\/([^"']+\.js)["']/g)) {
+      specs.add(m[1]);
+    }
+    for (const m of code.matchAll(/(?:^|[;}])import\s*["']\.\/([^"']+\.js)["']/g)) {
+      specs.add(m[1]);
+    }
+    return [...specs];
+  };
+  const entryClosure = () => {
+    const html = readFileSync(join(distDir, 'index.html'), 'utf-8');
+    const entry = html.match(/<script[^>]*type="module"[^>]*src="\/assets\/([^"]+)"/)[1];
+    const seen = new Set([entry]);
+    const queue = [entry];
+    while (queue.length) {
+      for (const dep of staticDeps(queue.shift())) {
+        if (!seen.has(dep)) {
+          seen.add(dep);
+          queue.push(dep);
+        }
+      }
+    }
+    return seen;
+  };
+
+  it.skipIf(!requireDist)('the dist emits exactly one `fortune-law` chunk, outside the entry closure and unpreloaded', () => {
+    const chunks = readdirSync(assetsDir).filter(f => FORTUNE_LAW_CHUNK_RE.test(f));
+    expect(chunks, 'fortuneLaw.js is not in its own chunk').toHaveLength(1);
+    const closure = entryClosure();
+    expect(closure.size, 'the entry closure walked nothing').toBeGreaterThan(3);
+    expect([...closure].filter(f => FORTUNE_LAW_CHUNK_RE.test(f) || /^engine-(?!core-)/.test(f))).toEqual([]);
+    expect(staticDeps(chunks[0]), 'the law chunk imports nothing').toEqual([]);
+    const html = readFileSync(join(distDir, 'index.html'), 'utf-8');
+    expect(/<link[^>]*rel="modulepreload"[^>]*href="[^"]*fortune-law-/.test(html)).toBe(false);
+  });
+
+  it.skipIf(!requireDist)('the densityCreateBoundary chunk takes no static edge to the engine (probe B, excision without the pin)', () => {
+    const boundary = readdirSync(assetsDir).filter(f => /^densityCreateBoundary-[A-Za-z0-9_-]+\.js$/.test(f));
+    expect(boundary).toHaveLength(1);
+    expect(staticDeps(boundary[0]).filter(dep => ENGINE_CHUNK_RE.test(dep))).toEqual([]);
+  });
+});
+
+// ── FORTUNE U5c (2026-11-22): the merits are EXCISED AND PINNED to their own lazy chunk, U6's form ──
+// src/domain/fortune/fortuneMerits.js (U5a) rode EAGER engine-core only because ESD seeds it (its two
+// importers: generators/steps/assembleSettlement.js, and display/governanceAccount.js, which a generator
+// imports); both are lazy, and no first-paint surface computes or prints a merit. Riding engine-core,
+// its three static imports (the law, data/bandLadders.js, data/legacyUnresolvedWordings.js) followed it
+// into first paint and undid U6's probe C. The rulings (the chair, 03:50 and 04:51 UTC): its excision
+// row AND a pin to its own `fortune-merits` chunk; never the row without the pin (probe B: the orphan
+// co-locates into the big lazy `engine` chunk), and not into `fortune-law` (that import-free chunk would
+// gain a data-lazy edge). The measure: docs/chair/2026-11-20/content/fortune/briefs/U5c-FIRSTPAINT.md.
+// Written as filters and booleans, never a bare negated matcher (the walker's frozen count).
+describe('FORTUNE U5c — the fortune merits leave the first-paint closure for their own chunk', () => {
+  const { manualChunks } = viteConfig.build.rollupOptions.output;
+  const ROOT = process.cwd();
+  const MERITS = '/src/domain/fortune/fortuneMerits.js';
+  const meritsPath = join(ROOT, MERITS.slice(1));
+  const FORTUNE_MERITS_CHUNK_RE = /^fortune-merits-[A-Za-z0-9_-]+\.js$/;
+
+  it('the merits exist and are a row of ENGINE_SHARED_DOMAIN_EXCISIONS', () => {
+    expect(existsSync(meritsPath), `${MERITS} is gone — this block now proves nothing`).toBe(true);
+    expect(ENGINE_SHARED_DOMAIN_EXCISIONS.filter(frag => frag === MERITS)).toEqual([MERITS]);
+  });
+
+  it('manualChunks places the merits in their own `fortune-merits` chunk (a control generator still routes to the engine)', () => {
+    expect(manualChunks(meritsPath)).toBe('fortune-merits');
+    expect(manualChunks(join(ROOT, 'src/generators/steps/assembleSettlement.js'))).toBe('engine');
+  });
+
+  it('the merits are out of vite\'s own eager first-paint derivation', () => {
+    expect(EAGER_FIRST_PAINT_MODULES.size).toBeGreaterThan(100);
+    expect(EAGER_FIRST_PAINT_MODULES.has(meritsPath), 'fortuneMerits.js is in the first-paint closure').toBe(false);
+  });
+
+  // The emitted graph: the vendorPdfLazy closure walk (static edges only; import() is lazy).
+  const staticDeps = (file) => {
+    const code = readFileSync(join(assetsDir, file), 'utf-8');
+    const specs = new Set();
+    for (const m of code.matchAll(/\bfrom\s*["']\.\/([^"']+\.js)["']/g)) {
+      specs.add(m[1]);
+    }
+    for (const m of code.matchAll(/(?:^|[;}])import\s*["']\.\/([^"']+\.js)["']/g)) {
+      specs.add(m[1]);
+    }
+    return [...specs];
+  };
+  const entryClosure = () => {
+    const html = readFileSync(join(distDir, 'index.html'), 'utf-8');
+    const entry = html.match(/<script[^>]*type="module"[^>]*src="\/assets\/([^"]+)"/)[1];
+    const seen = new Set([entry]);
+    const queue = [entry];
+    while (queue.length) {
+      for (const dep of staticDeps(queue.shift())) {
+        if (!seen.has(dep)) {
+          seen.add(dep);
+          queue.push(dep);
+        }
+      }
+    }
+    return seen;
+  };
+
+  it.skipIf(!requireDist)('the `fortune-merits` chunk is outside the entry closure and unpreloaded', () => {
+    const chunks = readdirSync(assetsDir).filter(f => FORTUNE_MERITS_CHUNK_RE.test(f));
+    expect(chunks, 'the merits are not in one `fortune-merits` chunk').toHaveLength(1);
+    const closure = entryClosure();
+    expect(closure.size, 'the entry closure walked nothing').toBeGreaterThan(3);
+    expect([...closure].filter(f => FORTUNE_MERITS_CHUNK_RE.test(f) || /^fortune-law-/.test(f) || /^engine-(?!core-)/.test(f))).toEqual([]);
+    const html = readFileSync(join(distDir, 'index.html'), 'utf-8');
+    expect(/<link[^>]*rel="modulepreload"[^>]*href="[^"]*fortune-merits-/.test(html)).toBe(false);
+  });
+});
+
+// ── KINDS-1 K1 (2026-11-20): the trouble law is EXCISED AND PINNED to its own lazy chunk ──
+// src/domain/trouble/troubleLaw.js is imported by a generator (historyGenerator) and by the
+// create boundary, so ESD would seed it into EAGER engine-core; no first-paint module reaches it.
+// Exactly the fortune lane's U6 arms: the excision's row and the pinned chunk, read from the
+// config itself (executed manualChunks, the eager derivation) and then from the dist. The last
+// arm is why the pin exists: excised WITHOUT it, Rollup co-locates the law into the big lazy
+// `engine` chunk and the densityCreateBoundary chunk gains a static edge to the whole generator.
+// Written as filters and booleans, never a bare negated matcher (the walker's frozen count).
+describe('KINDS-1 K1 — the trouble law leaves the first-paint closure for its own chunk', () => {
+  const { manualChunks } = viteConfig.build.rollupOptions.output;
+  const ROOT = process.cwd();
+  const LAW = '/src/domain/trouble/troubleLaw.js';
+  const lawPath = join(ROOT, LAW.slice(1));
+  const TROUBLE_LAW_CHUNK_RE = /^trouble-law-[A-Za-z0-9_-]+\.js$/;
+
+  it('the law exists and is a row of ENGINE_SHARED_DOMAIN_EXCISIONS', () => {
+    expect(existsSync(lawPath), `${LAW} is gone — this block now proves nothing`).toBe(true);
+    expect(ENGINE_SHARED_DOMAIN_EXCISIONS.filter(frag => frag === LAW)).toEqual([LAW]);
+  });
+
+  it('manualChunks places the law in its own `trouble-law` chunk (a control generator still routes to the engine)', () => {
+    expect(manualChunks(lawPath)).toBe('trouble-law');
+    expect(manualChunks(join(ROOT, 'src/generators/historyGenerator.js'))).toBe('engine');
+  });
+
+  it('the law is out of vite\'s own eager first-paint derivation', () => {
+    expect(EAGER_FIRST_PAINT_MODULES.size).toBeGreaterThan(100);
+    expect(EAGER_FIRST_PAINT_MODULES.has(lawPath), 'troubleLaw.js is in the first-paint closure').toBe(false);
+  });
+
+  // The emitted graph: the vendorPdfLazy closure walk (static edges only; import() is lazy).
+  const staticDeps = (file) => {
+    const code = readFileSync(join(assetsDir, file), 'utf-8');
+    const specs = new Set();
+    for (const m of code.matchAll(/\bfrom\s*["']\.\/([^"']+\.js)["']/g)) {
+      specs.add(m[1]);
+    }
+    for (const m of code.matchAll(/(?:^|[;}])import\s*["']\.\/([^"']+\.js)["']/g)) {
+      specs.add(m[1]);
+    }
+    return [...specs];
+  };
+  const entryClosure = () => {
+    const html = readFileSync(join(distDir, 'index.html'), 'utf-8');
+    const entry = html.match(/<script[^>]*type="module"[^>]*src="\/assets\/([^"]+)"/)[1];
+    const seen = new Set([entry]);
+    const queue = [entry];
+    while (queue.length) {
+      for (const dep of staticDeps(queue.shift())) {
+        if (!seen.has(dep)) {
+          seen.add(dep);
+          queue.push(dep);
+        }
+      }
+    }
+    return seen;
+  };
+
+  it.skipIf(!requireDist)('the dist emits exactly one `trouble-law` chunk, outside the entry closure and unpreloaded', () => {
+    const chunks = readdirSync(assetsDir).filter(f => TROUBLE_LAW_CHUNK_RE.test(f));
+    expect(chunks, 'troubleLaw.js is not in its own chunk').toHaveLength(1);
+    const closure = entryClosure();
+    expect(closure.size, 'the entry closure walked nothing').toBeGreaterThan(3);
+    expect([...closure].filter(f => TROUBLE_LAW_CHUNK_RE.test(f) || /^engine-(?!core-)/.test(f))).toEqual([]);
+    expect(staticDeps(chunks[0]), 'the law chunk imports nothing').toEqual([]);
+    const html = readFileSync(join(distDir, 'index.html'), 'utf-8');
+    expect(/<link[^>]*rel="modulepreload"[^>]*href="[^"]*trouble-law-/.test(html)).toBe(false);
+  });
+
+  it.skipIf(!requireDist)('the densityCreateBoundary chunk takes no static edge to the engine (excision without the pin)', () => {
+    const boundary = readdirSync(assetsDir).filter(f => /^densityCreateBoundary-[A-Za-z0-9_-]+\.js$/.test(f));
+    expect(boundary).toHaveLength(1);
+    expect(staticDeps(boundary[0]).filter(dep => ENGINE_CHUNK_RE.test(dep))).toEqual([]);
   });
 });

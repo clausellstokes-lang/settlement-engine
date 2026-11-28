@@ -1,0 +1,8416 @@
+{
+ "meta": {
+  "instrument": "docs/chair/2026-11-20/content/seat/sim/sim-cs3.mjs",
+  "tree": "/home/user/settlement-engine",
+  "arm": "A",
+  "patched": false,
+  "regions": 12,
+  "towns": 14,
+  "seeds": 2,
+  "ticks": 52,
+  "legit": "25",
+  "rules": {
+   "stressorsEnabled": true,
+   "factionCompetitionEnabled": true,
+   "majorChangesRequireProposal": false
+  },
+  "draftSha256": "dd27bb339c6ee0a639adca7b0085cc87cb39dbc07e52a8d99b818b4d6d55c31c",
+  "coupLeafSha256": "5f1ecbc2feb66e11929c466ee222746e90fd9faa0f47a52f82fc855a4d3b9b3a",
+  "birthErrors": [],
+  "bornTowns": 168,
+  "birthFingerprint": "3f88fa342c40c7e3",
+  "birthLegitDecades": {
+   "0": 10,
+   "10": 9,
+   "20": 14,
+   "30": 28,
+   "40": 31,
+   "50": 37,
+   "60": 15,
+   "70": 24
+  },
+  "seconds": 396,
+  "cs3": null
+ },
+ "totals": {
+  "ranTicks": 1248,
+  "throws": [],
+  "adjudicated": 6233,
+  "coupIdsNew": 37,
+  "coupCandidates": 2430,
+  "coupBorn": 37,
+  "resolved": 37,
+  "directed": 0,
+  "verdicts": 37,
+  "fell": 29,
+  "held": 8,
+  "collapsedNoChallengers": 0,
+  "ungatedFalls": 3,
+  "verdictOutcomesQueuedAsProposal": 0,
+  "winnerContestKind": {
+   "merchant": 10,
+   "military": 10,
+   "religious": 7,
+   "government": 1,
+   "noble": 1
+  },
+  "winnerFactionArchetype": {
+   "merchant": 10,
+   "military": 10,
+   "religious": 7,
+   "government": 1,
+   "noble": 1
+  },
+  "winnerWasHolder": 9,
+  "winnerHolderUnknown": 0,
+  "holderInChallengersAtVerdict": 25,
+  "holderRuleAtVerdict": {
+   "R2": 21,
+   "R4": 10,
+   "R3": 5,
+   "R1": 1
+  },
+  "govChanges": 450,
+  "gateOpenTownTicks": 11125,
+  "holderContendsTownTicks": 10159,
+  "holderExistsTownTicks": 11738
+ },
+ "proposalTypes": {
+  "?": 6233
+ },
+ "townsWithGateOpen": [
+  "sim-cs3-world-r0-s0/r0t00",
+  "sim-cs3-world-r0-s0/r0t01",
+  "sim-cs3-world-r0-s0/r0t02",
+  "sim-cs3-world-r0-s0/r0t03",
+  "sim-cs3-world-r0-s0/r0t04",
+  "sim-cs3-world-r0-s0/r0t05",
+  "sim-cs3-world-r0-s0/r0t06",
+  "sim-cs3-world-r0-s0/r0t07",
+  "sim-cs3-world-r0-s0/r0t08",
+  "sim-cs3-world-r0-s0/r0t09",
+  "sim-cs3-world-r0-s0/r0t10",
+  "sim-cs3-world-r0-s0/r0t11",
+  "sim-cs3-world-r0-s0/r0t13",
+  "sim-cs3-world-r0-s1/r0t00",
+  "sim-cs3-world-r0-s1/r0t01",
+  "sim-cs3-world-r0-s1/r0t02",
+  "sim-cs3-world-r0-s1/r0t03",
+  "sim-cs3-world-r0-s1/r0t04",
+  "sim-cs3-world-r0-s1/r0t05",
+  "sim-cs3-world-r0-s1/r0t06",
+  "sim-cs3-world-r0-s1/r0t07",
+  "sim-cs3-world-r0-s1/r0t08",
+  "sim-cs3-world-r0-s1/r0t09",
+  "sim-cs3-world-r0-s1/r0t10",
+  "sim-cs3-world-r0-s1/r0t11",
+  "sim-cs3-world-r0-s1/r0t13",
+  "sim-cs3-world-r1-s0/r1t02",
+  "sim-cs3-world-r1-s0/r1t03",
+  "sim-cs3-world-r1-s0/r1t04",
+  "sim-cs3-world-r1-s0/r1t05",
+  "sim-cs3-world-r1-s0/r1t06",
+  "sim-cs3-world-r1-s0/r1t07",
+  "sim-cs3-world-r1-s0/r1t08",
+  "sim-cs3-world-r1-s0/r1t09",
+  "sim-cs3-world-r1-s0/r1t10",
+  "sim-cs3-world-r1-s0/r1t11",
+  "sim-cs3-world-r1-s0/r1t13",
+  "sim-cs3-world-r1-s1/r1t02",
+  "sim-cs3-world-r1-s1/r1t03",
+  "sim-cs3-world-r1-s1/r1t04",
+  "sim-cs3-world-r1-s1/r1t05",
+  "sim-cs3-world-r1-s1/r1t06",
+  "sim-cs3-world-r1-s1/r1t07",
+  "sim-cs3-world-r1-s1/r1t08",
+  "sim-cs3-world-r1-s1/r1t09",
+  "sim-cs3-world-r1-s1/r1t10",
+  "sim-cs3-world-r1-s1/r1t11",
+  "sim-cs3-world-r1-s1/r1t13",
+  "sim-cs3-world-r10-s0/r10t02",
+  "sim-cs3-world-r10-s0/r10t03",
+  "sim-cs3-world-r10-s0/r10t04",
+  "sim-cs3-world-r10-s0/r10t05",
+  "sim-cs3-world-r10-s0/r10t06",
+  "sim-cs3-world-r10-s0/r10t07",
+  "sim-cs3-world-r10-s0/r10t08",
+  "sim-cs3-world-r10-s0/r10t09",
+  "sim-cs3-world-r10-s0/r10t10",
+  "sim-cs3-world-r10-s0/r10t11",
+  "sim-cs3-world-r10-s0/r10t13",
+  "sim-cs3-world-r10-s1/r10t02",
+  "sim-cs3-world-r10-s1/r10t03",
+  "sim-cs3-world-r10-s1/r10t04",
+  "sim-cs3-world-r10-s1/r10t05",
+  "sim-cs3-world-r10-s1/r10t06",
+  "sim-cs3-world-r10-s1/r10t07",
+  "sim-cs3-world-r10-s1/r10t08",
+  "sim-cs3-world-r10-s1/r10t09",
+  "sim-cs3-world-r10-s1/r10t10",
+  "sim-cs3-world-r10-s1/r10t11",
+  "sim-cs3-world-r10-s1/r10t13",
+  "sim-cs3-world-r11-s0/r11t01",
+  "sim-cs3-world-r11-s0/r11t02",
+  "sim-cs3-world-r11-s0/r11t03",
+  "sim-cs3-world-r11-s0/r11t04",
+  "sim-cs3-world-r11-s0/r11t05",
+  "sim-cs3-world-r11-s0/r11t06",
+  "sim-cs3-world-r11-s0/r11t07",
+  "sim-cs3-world-r11-s0/r11t08",
+  "sim-cs3-world-r11-s0/r11t09",
+  "sim-cs3-world-r11-s0/r11t10",
+  "sim-cs3-world-r11-s0/r11t11",
+  "sim-cs3-world-r11-s0/r11t12",
+  "sim-cs3-world-r11-s0/r11t13",
+  "sim-cs3-world-r11-s1/r11t01",
+  "sim-cs3-world-r11-s1/r11t02",
+  "sim-cs3-world-r11-s1/r11t03",
+  "sim-cs3-world-r11-s1/r11t04",
+  "sim-cs3-world-r11-s1/r11t05",
+  "sim-cs3-world-r11-s1/r11t06",
+  "sim-cs3-world-r11-s1/r11t07",
+  "sim-cs3-world-r11-s1/r11t08",
+  "sim-cs3-world-r11-s1/r11t09",
+  "sim-cs3-world-r11-s1/r11t10",
+  "sim-cs3-world-r11-s1/r11t11",
+  "sim-cs3-world-r11-s1/r11t12",
+  "sim-cs3-world-r11-s1/r11t13",
+  "sim-cs3-world-r2-s0/r2t01",
+  "sim-cs3-world-r2-s0/r2t02",
+  "sim-cs3-world-r2-s0/r2t03",
+  "sim-cs3-world-r2-s0/r2t04",
+  "sim-cs3-world-r2-s0/r2t05",
+  "sim-cs3-world-r2-s0/r2t06",
+  "sim-cs3-world-r2-s0/r2t07",
+  "sim-cs3-world-r2-s0/r2t08",
+  "sim-cs3-world-r2-s0/r2t09",
+  "sim-cs3-world-r2-s0/r2t10",
+  "sim-cs3-world-r2-s0/r2t11",
+  "sim-cs3-world-r2-s0/r2t13",
+  "sim-cs3-world-r2-s1/r2t01",
+  "sim-cs3-world-r2-s1/r2t02",
+  "sim-cs3-world-r2-s1/r2t03",
+  "sim-cs3-world-r2-s1/r2t04",
+  "sim-cs3-world-r2-s1/r2t05",
+  "sim-cs3-world-r2-s1/r2t06",
+  "sim-cs3-world-r2-s1/r2t07",
+  "sim-cs3-world-r2-s1/r2t08",
+  "sim-cs3-world-r2-s1/r2t09",
+  "sim-cs3-world-r2-s1/r2t10",
+  "sim-cs3-world-r2-s1/r2t11",
+  "sim-cs3-world-r2-s1/r2t13",
+  "sim-cs3-world-r3-s0/r3t02",
+  "sim-cs3-world-r3-s0/r3t03",
+  "sim-cs3-world-r3-s0/r3t04",
+  "sim-cs3-world-r3-s0/r3t05",
+  "sim-cs3-world-r3-s0/r3t06",
+  "sim-cs3-world-r3-s0/r3t07",
+  "sim-cs3-world-r3-s0/r3t08",
+  "sim-cs3-world-r3-s0/r3t09",
+  "sim-cs3-world-r3-s0/r3t10",
+  "sim-cs3-world-r3-s0/r3t11",
+  "sim-cs3-world-r3-s0/r3t12",
+  "sim-cs3-world-r3-s0/r3t13",
+  "sim-cs3-world-r3-s1/r3t02",
+  "sim-cs3-world-r3-s1/r3t03",
+  "sim-cs3-world-r3-s1/r3t04",
+  "sim-cs3-world-r3-s1/r3t05",
+  "sim-cs3-world-r3-s1/r3t06",
+  "sim-cs3-world-r3-s1/r3t07",
+  "sim-cs3-world-r3-s1/r3t08",
+  "sim-cs3-world-r3-s1/r3t09",
+  "sim-cs3-world-r3-s1/r3t10",
+  "sim-cs3-world-r3-s1/r3t11",
+  "sim-cs3-world-r3-s1/r3t12",
+  "sim-cs3-world-r3-s1/r3t13",
+  "sim-cs3-world-r4-s0/r4t02",
+  "sim-cs3-world-r4-s0/r4t03",
+  "sim-cs3-world-r4-s0/r4t04",
+  "sim-cs3-world-r4-s0/r4t05",
+  "sim-cs3-world-r4-s0/r4t06",
+  "sim-cs3-world-r4-s0/r4t07",
+  "sim-cs3-world-r4-s0/r4t08",
+  "sim-cs3-world-r4-s0/r4t09",
+  "sim-cs3-world-r4-s0/r4t10",
+  "sim-cs3-world-r4-s0/r4t11",
+  "sim-cs3-world-r4-s0/r4t13",
+  "sim-cs3-world-r4-s1/r4t02",
+  "sim-cs3-world-r4-s1/r4t03",
+  "sim-cs3-world-r4-s1/r4t04",
+  "sim-cs3-world-r4-s1/r4t05",
+  "sim-cs3-world-r4-s1/r4t06",
+  "sim-cs3-world-r4-s1/r4t07",
+  "sim-cs3-world-r4-s1/r4t08",
+  "sim-cs3-world-r4-s1/r4t09",
+  "sim-cs3-world-r4-s1/r4t10",
+  "sim-cs3-world-r4-s1/r4t11",
+  "sim-cs3-world-r4-s1/r4t13",
+  "sim-cs3-world-r5-s0/r5t02",
+  "sim-cs3-world-r5-s0/r5t03",
+  "sim-cs3-world-r5-s0/r5t04",
+  "sim-cs3-world-r5-s0/r5t05",
+  "sim-cs3-world-r5-s0/r5t06",
+  "sim-cs3-world-r5-s0/r5t07",
+  "sim-cs3-world-r5-s0/r5t08",
+  "sim-cs3-world-r5-s0/r5t09",
+  "sim-cs3-world-r5-s0/r5t10",
+  "sim-cs3-world-r5-s0/r5t11",
+  "sim-cs3-world-r5-s0/r5t13",
+  "sim-cs3-world-r5-s1/r5t02",
+  "sim-cs3-world-r5-s1/r5t03",
+  "sim-cs3-world-r5-s1/r5t04",
+  "sim-cs3-world-r5-s1/r5t05",
+  "sim-cs3-world-r5-s1/r5t06",
+  "sim-cs3-world-r5-s1/r5t07",
+  "sim-cs3-world-r5-s1/r5t08",
+  "sim-cs3-world-r5-s1/r5t09",
+  "sim-cs3-world-r5-s1/r5t10",
+  "sim-cs3-world-r5-s1/r5t11",
+  "sim-cs3-world-r5-s1/r5t13",
+  "sim-cs3-world-r6-s0/r6t02",
+  "sim-cs3-world-r6-s0/r6t03",
+  "sim-cs3-world-r6-s0/r6t04",
+  "sim-cs3-world-r6-s0/r6t05",
+  "sim-cs3-world-r6-s0/r6t06",
+  "sim-cs3-world-r6-s0/r6t07",
+  "sim-cs3-world-r6-s0/r6t08",
+  "sim-cs3-world-r6-s0/r6t09",
+  "sim-cs3-world-r6-s0/r6t10",
+  "sim-cs3-world-r6-s0/r6t11",
+  "sim-cs3-world-r6-s0/r6t13",
+  "sim-cs3-world-r6-s1/r6t02",
+  "sim-cs3-world-r6-s1/r6t03",
+  "sim-cs3-world-r6-s1/r6t04",
+  "sim-cs3-world-r6-s1/r6t05",
+  "sim-cs3-world-r6-s1/r6t06",
+  "sim-cs3-world-r6-s1/r6t07",
+  "sim-cs3-world-r6-s1/r6t08",
+  "sim-cs3-world-r6-s1/r6t09",
+  "sim-cs3-world-r6-s1/r6t10",
+  "sim-cs3-world-r6-s1/r6t11",
+  "sim-cs3-world-r7-s0/r7t02",
+  "sim-cs3-world-r7-s0/r7t03",
+  "sim-cs3-world-r7-s0/r7t04",
+  "sim-cs3-world-r7-s0/r7t05",
+  "sim-cs3-world-r7-s0/r7t06",
+  "sim-cs3-world-r7-s0/r7t07",
+  "sim-cs3-world-r7-s0/r7t08",
+  "sim-cs3-world-r7-s0/r7t09",
+  "sim-cs3-world-r7-s0/r7t10",
+  "sim-cs3-world-r7-s0/r7t11",
+  "sim-cs3-world-r7-s0/r7t12",
+  "sim-cs3-world-r7-s0/r7t13",
+  "sim-cs3-world-r7-s1/r7t02",
+  "sim-cs3-world-r7-s1/r7t03",
+  "sim-cs3-world-r7-s1/r7t04",
+  "sim-cs3-world-r7-s1/r7t05",
+  "sim-cs3-world-r7-s1/r7t06",
+  "sim-cs3-world-r7-s1/r7t07",
+  "sim-cs3-world-r7-s1/r7t08",
+  "sim-cs3-world-r7-s1/r7t09",
+  "sim-cs3-world-r7-s1/r7t10",
+  "sim-cs3-world-r7-s1/r7t11",
+  "sim-cs3-world-r7-s1/r7t12",
+  "sim-cs3-world-r7-s1/r7t13",
+  "sim-cs3-world-r8-s0/r8t02",
+  "sim-cs3-world-r8-s0/r8t03",
+  "sim-cs3-world-r8-s0/r8t04",
+  "sim-cs3-world-r8-s0/r8t05",
+  "sim-cs3-world-r8-s0/r8t06",
+  "sim-cs3-world-r8-s0/r8t07",
+  "sim-cs3-world-r8-s0/r8t08",
+  "sim-cs3-world-r8-s0/r8t09",
+  "sim-cs3-world-r8-s0/r8t10",
+  "sim-cs3-world-r8-s0/r8t11",
+  "sim-cs3-world-r8-s0/r8t13",
+  "sim-cs3-world-r8-s1/r8t02",
+  "sim-cs3-world-r8-s1/r8t03",
+  "sim-cs3-world-r8-s1/r8t04",
+  "sim-cs3-world-r8-s1/r8t05",
+  "sim-cs3-world-r8-s1/r8t06",
+  "sim-cs3-world-r8-s1/r8t07",
+  "sim-cs3-world-r8-s1/r8t08",
+  "sim-cs3-world-r8-s1/r8t09",
+  "sim-cs3-world-r8-s1/r8t10",
+  "sim-cs3-world-r8-s1/r8t11",
+  "sim-cs3-world-r8-s1/r8t13",
+  "sim-cs3-world-r9-s0/r9t02",
+  "sim-cs3-world-r9-s0/r9t03",
+  "sim-cs3-world-r9-s0/r9t04",
+  "sim-cs3-world-r9-s0/r9t05",
+  "sim-cs3-world-r9-s0/r9t06",
+  "sim-cs3-world-r9-s0/r9t07",
+  "sim-cs3-world-r9-s0/r9t08",
+  "sim-cs3-world-r9-s0/r9t09",
+  "sim-cs3-world-r9-s0/r9t10",
+  "sim-cs3-world-r9-s0/r9t11",
+  "sim-cs3-world-r9-s0/r9t13",
+  "sim-cs3-world-r9-s1/r9t02",
+  "sim-cs3-world-r9-s1/r9t03",
+  "sim-cs3-world-r9-s1/r9t04",
+  "sim-cs3-world-r9-s1/r9t05",
+  "sim-cs3-world-r9-s1/r9t06",
+  "sim-cs3-world-r9-s1/r9t07",
+  "sim-cs3-world-r9-s1/r9t08",
+  "sim-cs3-world-r9-s1/r9t09",
+  "sim-cs3-world-r9-s1/r9t10",
+  "sim-cs3-world-r9-s1/r9t11",
+  "sim-cs3-world-r9-s1/r9t13"
+ ],
+ "townsWithCoupCandidate": [
+  "sim-cs3-world-r0-s0/r0t01",
+  "sim-cs3-world-r0-s0/r0t04",
+  "sim-cs3-world-r0-s0/r0t05",
+  "sim-cs3-world-r0-s0/r0t06",
+  "sim-cs3-world-r0-s0/r0t07",
+  "sim-cs3-world-r0-s0/r0t08",
+  "sim-cs3-world-r0-s0/r0t09",
+  "sim-cs3-world-r0-s0/r0t10",
+  "sim-cs3-world-r0-s0/r0t11",
+  "sim-cs3-world-r0-s0/r0t13",
+  "sim-cs3-world-r0-s1/r0t01",
+  "sim-cs3-world-r0-s1/r0t04",
+  "sim-cs3-world-r0-s1/r0t05",
+  "sim-cs3-world-r0-s1/r0t06",
+  "sim-cs3-world-r0-s1/r0t07",
+  "sim-cs3-world-r0-s1/r0t08",
+  "sim-cs3-world-r0-s1/r0t09",
+  "sim-cs3-world-r0-s1/r0t10",
+  "sim-cs3-world-r0-s1/r0t11",
+  "sim-cs3-world-r0-s1/r0t13",
+  "sim-cs3-world-r1-s0/r1t02",
+  "sim-cs3-world-r1-s0/r1t03",
+  "sim-cs3-world-r1-s0/r1t04",
+  "sim-cs3-world-r1-s0/r1t05",
+  "sim-cs3-world-r1-s0/r1t06",
+  "sim-cs3-world-r1-s0/r1t07",
+  "sim-cs3-world-r1-s0/r1t08",
+  "sim-cs3-world-r1-s0/r1t09",
+  "sim-cs3-world-r1-s0/r1t10",
+  "sim-cs3-world-r1-s0/r1t11",
+  "sim-cs3-world-r1-s1/r1t02",
+  "sim-cs3-world-r1-s1/r1t04",
+  "sim-cs3-world-r1-s1/r1t05",
+  "sim-cs3-world-r1-s1/r1t06",
+  "sim-cs3-world-r1-s1/r1t07",
+  "sim-cs3-world-r1-s1/r1t08",
+  "sim-cs3-world-r1-s1/r1t09",
+  "sim-cs3-world-r1-s1/r1t10",
+  "sim-cs3-world-r1-s1/r1t11",
+  "sim-cs3-world-r1-s1/r1t13",
+  "sim-cs3-world-r10-s0/r10t02",
+  "sim-cs3-world-r10-s0/r10t04",
+  "sim-cs3-world-r10-s0/r10t05",
+  "sim-cs3-world-r10-s0/r10t07",
+  "sim-cs3-world-r10-s0/r10t09",
+  "sim-cs3-world-r10-s0/r10t11",
+  "sim-cs3-world-r10-s0/r10t13",
+  "sim-cs3-world-r10-s1/r10t02",
+  "sim-cs3-world-r10-s1/r10t03",
+  "sim-cs3-world-r10-s1/r10t04",
+  "sim-cs3-world-r10-s1/r10t05",
+  "sim-cs3-world-r10-s1/r10t07",
+  "sim-cs3-world-r10-s1/r10t09",
+  "sim-cs3-world-r10-s1/r10t11",
+  "sim-cs3-world-r10-s1/r10t13",
+  "sim-cs3-world-r11-s0/r11t02",
+  "sim-cs3-world-r11-s0/r11t03",
+  "sim-cs3-world-r11-s0/r11t04",
+  "sim-cs3-world-r11-s0/r11t05",
+  "sim-cs3-world-r11-s0/r11t06",
+  "sim-cs3-world-r11-s0/r11t08",
+  "sim-cs3-world-r11-s0/r11t09",
+  "sim-cs3-world-r11-s0/r11t10",
+  "sim-cs3-world-r11-s0/r11t11",
+  "sim-cs3-world-r11-s0/r11t12",
+  "sim-cs3-world-r11-s0/r11t13",
+  "sim-cs3-world-r11-s1/r11t02",
+  "sim-cs3-world-r11-s1/r11t03",
+  "sim-cs3-world-r11-s1/r11t04",
+  "sim-cs3-world-r11-s1/r11t05",
+  "sim-cs3-world-r11-s1/r11t06",
+  "sim-cs3-world-r11-s1/r11t08",
+  "sim-cs3-world-r11-s1/r11t09",
+  "sim-cs3-world-r11-s1/r11t10",
+  "sim-cs3-world-r11-s1/r11t11",
+  "sim-cs3-world-r11-s1/r11t12",
+  "sim-cs3-world-r11-s1/r11t13",
+  "sim-cs3-world-r2-s0/r2t01",
+  "sim-cs3-world-r2-s0/r2t02",
+  "sim-cs3-world-r2-s0/r2t03",
+  "sim-cs3-world-r2-s0/r2t04",
+  "sim-cs3-world-r2-s0/r2t05",
+  "sim-cs3-world-r2-s0/r2t07",
+  "sim-cs3-world-r2-s0/r2t08",
+  "sim-cs3-world-r2-s0/r2t09",
+  "sim-cs3-world-r2-s0/r2t10",
+  "sim-cs3-world-r2-s0/r2t13",
+  "sim-cs3-world-r2-s1/r2t01",
+  "sim-cs3-world-r2-s1/r2t02",
+  "sim-cs3-world-r2-s1/r2t03",
+  "sim-cs3-world-r2-s1/r2t04",
+  "sim-cs3-world-r2-s1/r2t05",
+  "sim-cs3-world-r2-s1/r2t07",
+  "sim-cs3-world-r2-s1/r2t08",
+  "sim-cs3-world-r2-s1/r2t09",
+  "sim-cs3-world-r2-s1/r2t10",
+  "sim-cs3-world-r2-s1/r2t11",
+  "sim-cs3-world-r2-s1/r2t13",
+  "sim-cs3-world-r3-s0/r3t02",
+  "sim-cs3-world-r3-s0/r3t03",
+  "sim-cs3-world-r3-s0/r3t04",
+  "sim-cs3-world-r3-s0/r3t05",
+  "sim-cs3-world-r3-s0/r3t06",
+  "sim-cs3-world-r3-s0/r3t07",
+  "sim-cs3-world-r3-s0/r3t08",
+  "sim-cs3-world-r3-s0/r3t09",
+  "sim-cs3-world-r3-s0/r3t10",
+  "sim-cs3-world-r3-s0/r3t11",
+  "sim-cs3-world-r3-s0/r3t12",
+  "sim-cs3-world-r3-s0/r3t13",
+  "sim-cs3-world-r3-s1/r3t02",
+  "sim-cs3-world-r3-s1/r3t03",
+  "sim-cs3-world-r3-s1/r3t04",
+  "sim-cs3-world-r3-s1/r3t05",
+  "sim-cs3-world-r3-s1/r3t06",
+  "sim-cs3-world-r3-s1/r3t07",
+  "sim-cs3-world-r3-s1/r3t08",
+  "sim-cs3-world-r3-s1/r3t09",
+  "sim-cs3-world-r3-s1/r3t11",
+  "sim-cs3-world-r3-s1/r3t12",
+  "sim-cs3-world-r3-s1/r3t13",
+  "sim-cs3-world-r4-s0/r4t03",
+  "sim-cs3-world-r4-s0/r4t04",
+  "sim-cs3-world-r4-s0/r4t06",
+  "sim-cs3-world-r4-s0/r4t07",
+  "sim-cs3-world-r4-s0/r4t08",
+  "sim-cs3-world-r4-s0/r4t10",
+  "sim-cs3-world-r4-s0/r4t11",
+  "sim-cs3-world-r4-s1/r4t03",
+  "sim-cs3-world-r4-s1/r4t04",
+  "sim-cs3-world-r4-s1/r4t06",
+  "sim-cs3-world-r4-s1/r4t07",
+  "sim-cs3-world-r4-s1/r4t08",
+  "sim-cs3-world-r4-s1/r4t10",
+  "sim-cs3-world-r4-s1/r4t11",
+  "sim-cs3-world-r5-s0/r5t02",
+  "sim-cs3-world-r5-s0/r5t05",
+  "sim-cs3-world-r5-s0/r5t06",
+  "sim-cs3-world-r5-s0/r5t07",
+  "sim-cs3-world-r5-s0/r5t08",
+  "sim-cs3-world-r5-s0/r5t09",
+  "sim-cs3-world-r5-s0/r5t10",
+  "sim-cs3-world-r5-s0/r5t11",
+  "sim-cs3-world-r5-s1/r5t02",
+  "sim-cs3-world-r5-s1/r5t05",
+  "sim-cs3-world-r5-s1/r5t06",
+  "sim-cs3-world-r5-s1/r5t07",
+  "sim-cs3-world-r5-s1/r5t08",
+  "sim-cs3-world-r5-s1/r5t09",
+  "sim-cs3-world-r5-s1/r5t10",
+  "sim-cs3-world-r5-s1/r5t11",
+  "sim-cs3-world-r6-s0/r6t02",
+  "sim-cs3-world-r6-s0/r6t03",
+  "sim-cs3-world-r6-s0/r6t04",
+  "sim-cs3-world-r6-s0/r6t05",
+  "sim-cs3-world-r6-s0/r6t06",
+  "sim-cs3-world-r6-s0/r6t07",
+  "sim-cs3-world-r6-s0/r6t08",
+  "sim-cs3-world-r6-s0/r6t09",
+  "sim-cs3-world-r6-s0/r6t10",
+  "sim-cs3-world-r6-s0/r6t11",
+  "sim-cs3-world-r6-s1/r6t02",
+  "sim-cs3-world-r6-s1/r6t03",
+  "sim-cs3-world-r6-s1/r6t04",
+  "sim-cs3-world-r6-s1/r6t05",
+  "sim-cs3-world-r6-s1/r6t06",
+  "sim-cs3-world-r6-s1/r6t07",
+  "sim-cs3-world-r6-s1/r6t08",
+  "sim-cs3-world-r6-s1/r6t09",
+  "sim-cs3-world-r6-s1/r6t10",
+  "sim-cs3-world-r6-s1/r6t11",
+  "sim-cs3-world-r7-s0/r7t02",
+  "sim-cs3-world-r7-s0/r7t03",
+  "sim-cs3-world-r7-s0/r7t04",
+  "sim-cs3-world-r7-s0/r7t05",
+  "sim-cs3-world-r7-s0/r7t06",
+  "sim-cs3-world-r7-s0/r7t07",
+  "sim-cs3-world-r7-s0/r7t08",
+  "sim-cs3-world-r7-s0/r7t10",
+  "sim-cs3-world-r7-s0/r7t11",
+  "sim-cs3-world-r7-s0/r7t12",
+  "sim-cs3-world-r7-s1/r7t02",
+  "sim-cs3-world-r7-s1/r7t03",
+  "sim-cs3-world-r7-s1/r7t04",
+  "sim-cs3-world-r7-s1/r7t05",
+  "sim-cs3-world-r7-s1/r7t06",
+  "sim-cs3-world-r7-s1/r7t07",
+  "sim-cs3-world-r7-s1/r7t08",
+  "sim-cs3-world-r7-s1/r7t10",
+  "sim-cs3-world-r7-s1/r7t11",
+  "sim-cs3-world-r7-s1/r7t12",
+  "sim-cs3-world-r8-s0/r8t02",
+  "sim-cs3-world-r8-s0/r8t03",
+  "sim-cs3-world-r8-s0/r8t04",
+  "sim-cs3-world-r8-s0/r8t05",
+  "sim-cs3-world-r8-s0/r8t06",
+  "sim-cs3-world-r8-s0/r8t07",
+  "sim-cs3-world-r8-s0/r8t08",
+  "sim-cs3-world-r8-s0/r8t09",
+  "sim-cs3-world-r8-s0/r8t10",
+  "sim-cs3-world-r8-s0/r8t11",
+  "sim-cs3-world-r8-s1/r8t02",
+  "sim-cs3-world-r8-s1/r8t03",
+  "sim-cs3-world-r8-s1/r8t04",
+  "sim-cs3-world-r8-s1/r8t05",
+  "sim-cs3-world-r8-s1/r8t06",
+  "sim-cs3-world-r8-s1/r8t07",
+  "sim-cs3-world-r8-s1/r8t08",
+  "sim-cs3-world-r8-s1/r8t09",
+  "sim-cs3-world-r8-s1/r8t10",
+  "sim-cs3-world-r8-s1/r8t11",
+  "sim-cs3-world-r9-s0/r9t02",
+  "sim-cs3-world-r9-s0/r9t03",
+  "sim-cs3-world-r9-s0/r9t04",
+  "sim-cs3-world-r9-s0/r9t06",
+  "sim-cs3-world-r9-s0/r9t09",
+  "sim-cs3-world-r9-s0/r9t10",
+  "sim-cs3-world-r9-s0/r9t11",
+  "sim-cs3-world-r9-s0/r9t13",
+  "sim-cs3-world-r9-s1/r9t02",
+  "sim-cs3-world-r9-s1/r9t04",
+  "sim-cs3-world-r9-s1/r9t05",
+  "sim-cs3-world-r9-s1/r9t06",
+  "sim-cs3-world-r9-s1/r9t07",
+  "sim-cs3-world-r9-s1/r9t09",
+  "sim-cs3-world-r9-s1/r9t10",
+  "sim-cs3-world-r9-s1/r9t11",
+  "sim-cs3-world-r9-s1/r9t13"
+ ],
+ "townsWithCoupBorn": [
+  "sim-cs3-world-r1-s0/r1t02",
+  "sim-cs3-world-r1-s0/r1t07",
+  "sim-cs3-world-r1-s1/r1t08",
+  "sim-cs3-world-r1-s1/r1t13",
+  "sim-cs3-world-r10-s0/r10t02",
+  "sim-cs3-world-r10-s0/r10t04",
+  "sim-cs3-world-r10-s0/r10t11",
+  "sim-cs3-world-r10-s1/r10t02",
+  "sim-cs3-world-r11-s1/r11t02",
+  "sim-cs3-world-r11-s1/r11t05",
+  "sim-cs3-world-r2-s0/r2t01",
+  "sim-cs3-world-r2-s0/r2t02",
+  "sim-cs3-world-r2-s0/r2t03",
+  "sim-cs3-world-r2-s0/r2t08",
+  "sim-cs3-world-r2-s0/r2t10",
+  "sim-cs3-world-r2-s1/r2t02",
+  "sim-cs3-world-r2-s1/r2t03",
+  "sim-cs3-world-r2-s1/r2t07",
+  "sim-cs3-world-r2-s1/r2t10",
+  "sim-cs3-world-r3-s0/r3t05",
+  "sim-cs3-world-r3-s0/r3t11",
+  "sim-cs3-world-r3-s1/r3t04",
+  "sim-cs3-world-r3-s1/r3t13",
+  "sim-cs3-world-r5-s1/r5t05",
+  "sim-cs3-world-r5-s1/r5t08",
+  "sim-cs3-world-r7-s0/r7t05",
+  "sim-cs3-world-r7-s0/r7t10",
+  "sim-cs3-world-r7-s1/r7t05",
+  "sim-cs3-world-r8-s0/r8t02",
+  "sim-cs3-world-r8-s0/r8t06",
+  "sim-cs3-world-r8-s0/r8t07",
+  "sim-cs3-world-r8-s0/r8t08",
+  "sim-cs3-world-r8-s0/r8t09",
+  "sim-cs3-world-r8-s1/r8t04",
+  "sim-cs3-world-r8-s1/r8t05",
+  "sim-cs3-world-r8-s1/r8t06",
+  "sim-cs3-world-r8-s1/r8t08"
+ ],
+ "eventsFingerprint": "44b030cb255015ce",
+ "events": [
+  [
+   "gov",
+   "sim-cs3-world-r0-s0",
+   0,
+   "r0t02",
+   "Elder Council",
+   "Elder Council Ascendant"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r0-s0",
+   0,
+   "r0t03",
+   "Elected Reeve",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r0-s0",
+   7,
+   "r0t03",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r0-s0",
+   24,
+   "r0t10",
+   "Merchant oligarchy",
+   "Grand Military Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r0-s0",
+   31,
+   "r0t10",
+   "Grand Military Council",
+   "Garrison Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r0-s0",
+   35,
+   "r0t10",
+   "Garrison Command",
+   "Grand Military Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r0-s0",
+   37,
+   "r0t06",
+   "Feudal Appointee",
+   "Merchant City Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r0-s0",
+   38,
+   "r0t10",
+   "Grand Military Council",
+   "Garrison Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r0-s0",
+   41,
+   "r0t10",
+   "Garrison Command",
+   "Grand Military Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r0-s0",
+   46,
+   "r0t10",
+   "Grand Military Council",
+   "Garrison Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r0-s0",
+   48,
+   "r0t10",
+   "Garrison Command",
+   "Grand Military Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r0-s0",
+   50,
+   "r0t10",
+   "Grand Military Council",
+   "Garrison Command"
+  ],
+  [
+   "endWorld",
+   "sim-cs3-world-r0-s0",
+   "7922bf9693085aec"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r0-s1",
+   5,
+   "r0t03",
+   "Elected Reeve",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r0-s1",
+   7,
+   "r0t02",
+   "Elder Council",
+   "Elder Council Ascendant"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r0-s1",
+   11,
+   "r0t03",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r0-s1",
+   13,
+   "r0t03",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r0-s1",
+   15,
+   "r0t03",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r0-s1",
+   17,
+   "r0t03",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r0-s1",
+   25,
+   "r0t10",
+   "Merchant oligarchy",
+   "Grand Military Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r0-s1",
+   27,
+   "r0t03",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r0-s1",
+   28,
+   "r0t10",
+   "Grand Military Council",
+   "Garrison Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r0-s1",
+   29,
+   "r0t03",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r0-s1",
+   32,
+   "r0t10",
+   "Garrison Command",
+   "Grand Military Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r0-s1",
+   33,
+   "r0t03",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r0-s1",
+   35,
+   "r0t03",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r0-s1",
+   39,
+   "r0t03",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r0-s1",
+   45,
+   "r0t03",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r0-s1",
+   48,
+   "r0t03",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r0-s1",
+   50,
+   "r0t03",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r0-s1",
+   51,
+   "r0t06",
+   "Feudal Appointee",
+   "Merchant City Council"
+  ],
+  [
+   "endWorld",
+   "sim-cs3-world-r0-s1",
+   "64f823c7176a3c91"
+  ],
+  [
+   "born",
+   "sim-cs3-world-r1-s0",
+   1,
+   "r1t02",
+   "candidate.stressor.coup_detat.r1t02.2"
+  ],
+  [
+   "fell",
+   "sim-cs3-world-r1-s0",
+   3,
+   "r1t02",
+   "Merchant Guilds",
+   0.36,
+   0.65
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s0",
+   3,
+   "r1t02",
+   "Elder Council",
+   "Merchant Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s0",
+   3,
+   "r1t03",
+   "Headman's Authority",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s0",
+   4,
+   "r1t13",
+   "Elected Reeve",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s0",
+   6,
+   "r1t03",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s0",
+   6,
+   "r1t13",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "born",
+   "sim-cs3-world-r1-s0",
+   8,
+   "r1t07",
+   "candidate.stressor.coup_detat.r1t07.9"
+  ],
+  [
+   "fell",
+   "sim-cs3-world-r1-s0",
+   10,
+   "r1t07",
+   "Military/Guard",
+   0.26,
+   0.37
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s0",
+   10,
+   "r1t03",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s0",
+   10,
+   "r1t07",
+   "Town Mayor",
+   "Military Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s0",
+   11,
+   "r1t13",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s0",
+   12,
+   "r1t03",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s0",
+   14,
+   "r1t03",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s0",
+   19,
+   "r1t13",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s0",
+   21,
+   "r1t13",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s0",
+   23,
+   "r1t03",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s0",
+   25,
+   "r1t13",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s0",
+   26,
+   "r1t03",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s0",
+   28,
+   "r1t13",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s0",
+   33,
+   "r1t03",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s0",
+   35,
+   "r1t03",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s0",
+   36,
+   "r1t03",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s0",
+   38,
+   "r1t13",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s0",
+   40,
+   "r1t13",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s0",
+   41,
+   "r1t13",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s0",
+   45,
+   "r1t13",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s0",
+   46,
+   "r1t03",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s0",
+   47,
+   "r1t03",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s0",
+   48,
+   "r1t13",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s0",
+   49,
+   "r1t13",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s0",
+   50,
+   "r1t03",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s0",
+   51,
+   "r1t13",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "endWorld",
+   "sim-cs3-world-r1-s0",
+   "dcf50a0ca5d93ca7"
+  ],
+  [
+   "born",
+   "sim-cs3-world-r1-s1",
+   1,
+   "r1t08",
+   "candidate.stressor.coup_detat.r1t08.2"
+  ],
+  [
+   "born",
+   "sim-cs3-world-r1-s1",
+   1,
+   "r1t13",
+   "candidate.stressor.coup_detat.r1t13.2"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s1",
+   2,
+   "r1t03",
+   "Headman's Authority",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s1",
+   2,
+   "r1t13",
+   "Elected Reeve",
+   "Church Council"
+  ],
+  [
+   "fell",
+   "sim-cs3-world-r1-s1",
+   3,
+   "r1t08",
+   "Noble Families",
+   0.34,
+   0.67
+  ],
+  [
+   "fell",
+   "sim-cs3-world-r1-s1",
+   3,
+   "r1t13",
+   "Elected Reeve",
+   0.12,
+   0.13
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s1",
+   3,
+   "r1t08",
+   "Noble Governorship",
+   "Royal Authority"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s1",
+   3,
+   "r1t13",
+   "Church Council",
+   "Elder Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s1",
+   6,
+   "r1t03",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s1",
+   8,
+   "r1t13",
+   "Elder Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s1",
+   11,
+   "r1t03",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s1",
+   12,
+   "r1t13",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s1",
+   13,
+   "r1t03",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s1",
+   15,
+   "r1t13",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s1",
+   17,
+   "r1t03",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s1",
+   19,
+   "r1t03",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s1",
+   20,
+   "r1t13",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s1",
+   22,
+   "r1t13",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s1",
+   25,
+   "r1t03",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s1",
+   25,
+   "r1t13",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s1",
+   28,
+   "r1t03",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s1",
+   29,
+   "r1t13",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s1",
+   31,
+   "r1t03",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s1",
+   33,
+   "r1t03",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s1",
+   35,
+   "r1t13",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s1",
+   36,
+   "r1t03",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s1",
+   39,
+   "r1t13",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s1",
+   41,
+   "r1t13",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s1",
+   42,
+   "r1t13",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s1",
+   44,
+   "r1t03",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s1",
+   45,
+   "r1t03",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s1",
+   46,
+   "r1t03",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s1",
+   47,
+   "r1t03",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s1",
+   48,
+   "r1t03",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s1",
+   49,
+   "r1t13",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s1",
+   50,
+   "r1t13",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r1-s1",
+   51,
+   "r1t03",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "endWorld",
+   "sim-cs3-world-r1-s1",
+   "2fe2f558024514a9"
+  ],
+  [
+   "born",
+   "sim-cs3-world-r2-s0",
+   0,
+   "r2t10",
+   "candidate.stressor.coup_detat.r2t10.1"
+  ],
+  [
+   "born",
+   "sim-cs3-world-r2-s0",
+   0,
+   "r2t01",
+   "candidate.stressor.coup_detat.r2t01.1"
+  ],
+  [
+   "born",
+   "sim-cs3-world-r2-s0",
+   0,
+   "r2t08",
+   "candidate.stressor.coup_detat.r2t08.1"
+  ],
+  [
+   "born",
+   "sim-cs3-world-r2-s0",
+   1,
+   "r2t02",
+   "candidate.stressor.coup_detat.r2t02.2"
+  ],
+  [
+   "fell",
+   "sim-cs3-world-r2-s0",
+   1,
+   "r2t01",
+   "Military/Guard",
+   0.55,
+   0.81
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r2-s0",
+   1,
+   "r2t01",
+   "Free Elder Council",
+   "Militia Command"
+  ],
+  [
+   "fell",
+   "sim-cs3-world-r2-s0",
+   2,
+   "r2t10",
+   "War Council",
+   0.08,
+   0.82
+  ],
+  [
+   "fell",
+   "sim-cs3-world-r2-s0",
+   2,
+   "r2t08",
+   "Merchant Guilds",
+   0.37,
+   0.94
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r2-s0",
+   2,
+   "r2t08",
+   "City Council",
+   "Grand Merchant Senate"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r2-s0",
+   2,
+   "r2t10",
+   "Merchant Guild Council",
+   "Grand Military Council"
+  ],
+  [
+   "fell",
+   "sim-cs3-world-r2-s0",
+   3,
+   "r2t02",
+   "Merchant Guilds",
+   0.36,
+   0.47
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r2-s0",
+   3,
+   "r2t02",
+   "Elder Council",
+   "Merchant Council"
+  ],
+  [
+   "born",
+   "sim-cs3-world-r2-s0",
+   6,
+   "r2t03",
+   "candidate.stressor.coup_detat.r2t03.7"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r2-s0",
+   7,
+   "r2t06",
+   "Town Council",
+   "Corrupt City Council"
+  ],
+  [
+   "fell",
+   "sim-cs3-world-r2-s0",
+   8,
+   "r2t03",
+   "Religious Authorities",
+   0.28,
+   0.35
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r2-s0",
+   8,
+   "r2t03",
+   "Elder Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r2-s0",
+   11,
+   "r2t06",
+   "Corrupt City Council",
+   "Corrupt City Council Ascendant"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r2-s0",
+   26,
+   "r2t02",
+   "Merchant Council",
+   "Merchant oligarchy"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r2-s0",
+   28,
+   "r2t02",
+   "Merchant oligarchy",
+   "Merchant Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r2-s0",
+   31,
+   "r2t02",
+   "Merchant Council",
+   "Merchant oligarchy"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r2-s0",
+   33,
+   "r2t02",
+   "Merchant oligarchy",
+   "Merchant Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r2-s0",
+   35,
+   "r2t02",
+   "Merchant Council",
+   "Merchant oligarchy"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r2-s0",
+   38,
+   "r2t02",
+   "Merchant oligarchy",
+   "Merchant Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r2-s0",
+   41,
+   "r2t02",
+   "Merchant Council",
+   "Merchant oligarchy"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r2-s0",
+   44,
+   "r2t02",
+   "Merchant oligarchy",
+   "Merchant Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r2-s0",
+   46,
+   "r2t02",
+   "Merchant Council",
+   "Merchant oligarchy"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r2-s0",
+   48,
+   "r2t02",
+   "Merchant oligarchy",
+   "Merchant Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r2-s0",
+   49,
+   "r2t02",
+   "Merchant Council",
+   "Merchant oligarchy"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r2-s0",
+   50,
+   "r2t02",
+   "Merchant oligarchy",
+   "Merchant Council"
+  ],
+  [
+   "endWorld",
+   "sim-cs3-world-r2-s0",
+   "eb9094be8a3c7976"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r2-s1",
+   0,
+   "r2t06",
+   "Town Council",
+   "Theocratic Council"
+  ],
+  [
+   "born",
+   "sim-cs3-world-r2-s1",
+   1,
+   "r2t10",
+   "candidate.stressor.coup_detat.r2t10.2"
+  ],
+  [
+   "born",
+   "sim-cs3-world-r2-s1",
+   1,
+   "r2t03",
+   "candidate.stressor.coup_detat.r2t03.2"
+  ],
+  [
+   "born",
+   "sim-cs3-world-r2-s1",
+   1,
+   "r2t07",
+   "candidate.stressor.coup_detat.r2t07.2"
+  ],
+  [
+   "born",
+   "sim-cs3-world-r2-s1",
+   2,
+   "r2t02",
+   "candidate.stressor.coup_detat.r2t02.3"
+  ],
+  [
+   "fell",
+   "sim-cs3-world-r2-s1",
+   2,
+   "r2t10",
+   "Military/Guard",
+   0.08,
+   0.28
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r2-s1",
+   2,
+   "r2t10",
+   "Merchant Guild Council",
+   "Grand Military Council"
+  ],
+  [
+   "fell",
+   "sim-cs3-world-r2-s1",
+   3,
+   "r2t07",
+   "Military/Guard",
+   0.26,
+   0.53
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r2-s1",
+   3,
+   "r2t07",
+   "Town Mayor",
+   "Military Council"
+  ],
+  [
+   "fell",
+   "sim-cs3-world-r2-s1",
+   4,
+   "r2t03",
+   "Religious Authorities",
+   0.36,
+   0.94
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r2-s1",
+   4,
+   "r2t03",
+   "Elder Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r2-s1",
+   4,
+   "r2t06",
+   "Theocratic Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r2-s1",
+   5,
+   "r2t06",
+   "Ecclesiastical Council",
+   "Corrupt City Council"
+  ],
+  [
+   "held",
+   "sim-cs3-world-r2-s1",
+   6,
+   "r2t02",
+   1,
+   0.36,
+   0.25
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r2-s1",
+   10,
+   "r2t06",
+   "Corrupt City Council",
+   "Corrupt City Council Ascendant"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r2-s1",
+   22,
+   "r2t13",
+   "Elder Council",
+   "Merchant Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r2-s1",
+   24,
+   "r2t03",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r2-s1",
+   26,
+   "r2t03",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r2-s1",
+   35,
+   "r2t03",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r2-s1",
+   36,
+   "r2t01",
+   "Free Elder Council",
+   "Militia Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r2-s1",
+   37,
+   "r2t03",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r2-s1",
+   41,
+   "r2t03",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r2-s1",
+   50,
+   "r2t03",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "endWorld",
+   "sim-cs3-world-r2-s1",
+   "9e672d4537e82aa8"
+  ],
+  [
+   "born",
+   "sim-cs3-world-r3-s0",
+   2,
+   "r3t05",
+   "candidate.stressor.coup_detat.r3t05.3"
+  ],
+  [
+   "born",
+   "sim-cs3-world-r3-s0",
+   2,
+   "r3t11",
+   "candidate.stressor.coup_detat.r3t11.3"
+  ],
+  [
+   "held",
+   "sim-cs3-world-r3-s0",
+   4,
+   "r3t05",
+   2,
+   0.37,
+   0.03
+  ],
+  [
+   "fell",
+   "sim-cs3-world-r3-s0",
+   4,
+   "r3t11",
+   "Military/Guard",
+   0.35,
+   0.89
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r3-s0",
+   4,
+   "r3t11",
+   "Ducal Governorship",
+   "Grand Military Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r3-s0",
+   5,
+   "r3t08",
+   "Royal Authority",
+   "Grand Military Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r3-s0",
+   11,
+   "r3t03",
+   "Elder Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r3-s0",
+   20,
+   "r3t12",
+   "Headman's Authority",
+   "Militia Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r3-s0",
+   25,
+   "r3t13",
+   "Elder Council",
+   "Theocratic Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r3-s0",
+   29,
+   "r3t12",
+   "Militia Command",
+   "Garrison Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r3-s0",
+   30,
+   "r3t02",
+   "Elder Council",
+   "Theocratic Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r3-s0",
+   32,
+   "r3t02",
+   "Theocratic Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r3-s0",
+   34,
+   "r3t02",
+   "Ecclesiastical Council",
+   "Theocratic Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r3-s0",
+   35,
+   "r3t10",
+   "Noble Governorship",
+   "Grand Military Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r3-s0",
+   38,
+   "r3t10",
+   "Grand Military Council",
+   "Garrison Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r3-s0",
+   41,
+   "r3t10",
+   "Garrison Command",
+   "Grand Military Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r3-s0",
+   42,
+   "r3t02",
+   "Theocratic Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r3-s0",
+   43,
+   "r3t05",
+   "Town Mayor",
+   "Merchant City Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r3-s0",
+   44,
+   "r3t02",
+   "Ecclesiastical Council",
+   "Theocratic Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r3-s0",
+   45,
+   "r3t10",
+   "Grand Military Council",
+   "Garrison Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r3-s0",
+   46,
+   "r3t02",
+   "Theocratic Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r3-s0",
+   47,
+   "r3t05",
+   "Merchant City Council",
+   "Merchant oligarchy"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r3-s0",
+   48,
+   "r3t02",
+   "Ecclesiastical Council",
+   "Theocratic Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r3-s0",
+   49,
+   "r3t05",
+   "Merchant oligarchy",
+   "Merchant City Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r3-s0",
+   51,
+   "r3t05",
+   "Merchant City Council",
+   "Merchant oligarchy"
+  ],
+  [
+   "endWorld",
+   "sim-cs3-world-r3-s0",
+   "96ecee95872c5e78"
+  ],
+  [
+   "born",
+   "sim-cs3-world-r3-s1",
+   2,
+   "r3t13",
+   "candidate.stressor.coup_detat.r3t13.3"
+  ],
+  [
+   "held",
+   "sim-cs3-world-r3-s1",
+   3,
+   "r3t13",
+   1,
+   0.36,
+   0.1
+  ],
+  [
+   "born",
+   "sim-cs3-world-r3-s1",
+   4,
+   "r3t04",
+   "candidate.stressor.coup_detat.r3t04.5"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r3-s1",
+   4,
+   "r3t13",
+   "Elder Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r3-s1",
+   6,
+   "r3t08",
+   "Royal Authority",
+   "Grand Military Council"
+  ],
+  [
+   "held",
+   "sim-cs3-world-r3-s1",
+   7,
+   "r3t04",
+   3,
+   0.25,
+   0.17
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r3-s1",
+   26,
+   "r3t02",
+   "Elder Council",
+   "Theocratic Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r3-s1",
+   29,
+   "r3t10",
+   "Noble Governorship",
+   "Grand Military Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r3-s1",
+   30,
+   "r3t12",
+   "Headman's Authority",
+   "Militia Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r3-s1",
+   31,
+   "r3t03",
+   "Elder Council",
+   "Militia Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r3-s1",
+   31,
+   "r3t10",
+   "Grand Military Council",
+   "Garrison Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r3-s1",
+   32,
+   "r3t07",
+   "Town Council",
+   "Merchant City Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r3-s1",
+   33,
+   "r3t10",
+   "Garrison Command",
+   "Grand Military Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r3-s1",
+   35,
+   "r3t05",
+   "Town Mayor",
+   "Merchant City Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r3-s1",
+   36,
+   "r3t02",
+   "Theocratic Council",
+   "Merchant City Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r3-s1",
+   37,
+   "r3t02",
+   "Merchant City Council",
+   "Theocratic Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r3-s1",
+   39,
+   "r3t02",
+   "Theocratic Council",
+   "Merchant City Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r3-s1",
+   40,
+   "r3t10",
+   "Grand Military Council",
+   "Garrison Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r3-s1",
+   41,
+   "r3t02",
+   "Merchant City Council",
+   "Merchant oligarchy"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r3-s1",
+   44,
+   "r3t10",
+   "Garrison Command",
+   "Grand Military Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r3-s1",
+   48,
+   "r3t02",
+   "Merchant oligarchy",
+   "Merchant City Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r3-s1",
+   49,
+   "r3t10",
+   "Grand Military Council",
+   "Garrison Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r3-s1",
+   50,
+   "r3t02",
+   "Merchant City Council",
+   "Merchant oligarchy"
+  ],
+  [
+   "endWorld",
+   "sim-cs3-world-r3-s1",
+   "de825ba50a1fd716"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r4-s0",
+   7,
+   "r4t02",
+   "Elder Council",
+   "Merchant Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r4-s0",
+   9,
+   "r4t02",
+   "Merchant Council",
+   "Merchant oligarchy"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r4-s0",
+   12,
+   "r4t02",
+   "Merchant oligarchy",
+   "Merchant Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r4-s0",
+   15,
+   "r4t02",
+   "Merchant Council",
+   "Merchant oligarchy"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r4-s0",
+   19,
+   "r4t02",
+   "Merchant oligarchy",
+   "Merchant Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r4-s0",
+   21,
+   "r4t02",
+   "Merchant Council",
+   "Merchant oligarchy"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r4-s0",
+   23,
+   "r4t13",
+   "Elder Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r4-s0",
+   24,
+   "r4t02",
+   "Merchant oligarchy",
+   "Merchant Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r4-s0",
+   25,
+   "r4t13",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r4-s0",
+   28,
+   "r4t13",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r4-s0",
+   29,
+   "r4t02",
+   "Merchant Council",
+   "Merchant oligarchy"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r4-s0",
+   31,
+   "r4t02",
+   "Merchant oligarchy",
+   "Merchant Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r4-s0",
+   33,
+   "r4t13",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r4-s0",
+   35,
+   "r4t13",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r4-s0",
+   36,
+   "r4t05",
+   "Town Mayor",
+   "Merchant City Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r4-s0",
+   37,
+   "r4t13",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r4-s0",
+   38,
+   "r4t05",
+   "Merchant City Council",
+   "Merchant oligarchy"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r4-s0",
+   44,
+   "r4t13",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r4-s0",
+   45,
+   "r4t05",
+   "Merchant oligarchy",
+   "Merchant City Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r4-s0",
+   47,
+   "r4t13",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r4-s0",
+   50,
+   "r4t13",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "endWorld",
+   "sim-cs3-world-r4-s0",
+   "6056263cd715bd28"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r4-s1",
+   1,
+   "r4t02",
+   "Elder Council",
+   "Merchant Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r4-s1",
+   5,
+   "r4t02",
+   "Merchant Council",
+   "Merchant oligarchy"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r4-s1",
+   14,
+   "r4t02",
+   "Merchant oligarchy",
+   "Merchant Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r4-s1",
+   17,
+   "r4t02",
+   "Merchant Council",
+   "Merchant oligarchy"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r4-s1",
+   19,
+   "r4t02",
+   "Merchant oligarchy",
+   "Merchant Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r4-s1",
+   21,
+   "r4t02",
+   "Merchant Council",
+   "Merchant oligarchy"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r4-s1",
+   23,
+   "r4t02",
+   "Merchant oligarchy",
+   "Merchant Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r4-s1",
+   25,
+   "r4t13",
+   "Elder Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r4-s1",
+   26,
+   "r4t02",
+   "Merchant Council",
+   "Merchant oligarchy"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r4-s1",
+   27,
+   "r4t13",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r4-s1",
+   31,
+   "r4t13",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r4-s1",
+   34,
+   "r4t13",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r4-s1",
+   36,
+   "r4t13",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r4-s1",
+   38,
+   "r4t02",
+   "Merchant oligarchy",
+   "Merchant Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r4-s1",
+   44,
+   "r4t02",
+   "Merchant Council",
+   "Merchant oligarchy"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r4-s1",
+   45,
+   "r4t13",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r4-s1",
+   47,
+   "r4t02",
+   "Merchant oligarchy",
+   "Merchant Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r4-s1",
+   47,
+   "r4t13",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r4-s1",
+   49,
+   "r4t13",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r4-s1",
+   51,
+   "r4t13",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "endWorld",
+   "sim-cs3-world-r4-s1",
+   "2a1932e2b02e10f2"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r5-s0",
+   2,
+   "r5t03",
+   "Elder Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r5-s0",
+   4,
+   "r5t04",
+   "Town Mayor",
+   "Theocratic Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r5-s0",
+   6,
+   "r5t13",
+   "Elder Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r5-s0",
+   23,
+   "r5t07",
+   "Merchant oligarchy",
+   "Corrupt City Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r5-s0",
+   25,
+   "r5t07",
+   "Corrupt City Council",
+   "Corrupt City Council Ascendant"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r5-s0",
+   26,
+   "r5t13",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r5-s0",
+   30,
+   "r5t13",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r5-s0",
+   35,
+   "r5t11",
+   "Royal Authority",
+   "Shadow Senate"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r5-s0",
+   37,
+   "r5t11",
+   "Shadow Senate",
+   "Shadow Senate Ascendant"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r5-s0",
+   38,
+   "r5t13",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r5-s0",
+   40,
+   "r5t13",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r5-s0",
+   42,
+   "r5t13",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r5-s0",
+   49,
+   "r5t13",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r5-s0",
+   51,
+   "r5t13",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "endWorld",
+   "sim-cs3-world-r5-s0",
+   "760d393db25039ce"
+  ],
+  [
+   "born",
+   "sim-cs3-world-r5-s1",
+   3,
+   "r5t05",
+   "candidate.stressor.coup_detat.r5t05.4"
+  ],
+  [
+   "born",
+   "sim-cs3-world-r5-s1",
+   3,
+   "r5t08",
+   "candidate.stressor.coup_detat.r5t08.4"
+  ],
+  [
+   "fell",
+   "sim-cs3-world-r5-s1",
+   5,
+   "r5t05",
+   "Religious Authorities",
+   0.27,
+   0.85
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r5-s1",
+   5,
+   "r5t05",
+   "Town Mayor",
+   "Theocratic Council"
+  ],
+  [
+   "fell",
+   "sim-cs3-world-r5-s1",
+   6,
+   "r5t08",
+   "Merchant Guilds",
+   0.41,
+   0.74
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r5-s1",
+   6,
+   "r5t08",
+   "Merchant oligarchy",
+   "Grand Merchant Senate"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r5-s1",
+   16,
+   "r5t13",
+   "Elder Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r5-s1",
+   18,
+   "r5t13",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r5-s1",
+   24,
+   "r5t07",
+   "Merchant oligarchy",
+   "Corrupt City Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r5-s1",
+   26,
+   "r5t07",
+   "Corrupt City Council",
+   "Corrupt City Council Ascendant"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r5-s1",
+   31,
+   "r5t11",
+   "Royal Authority",
+   "Shadow Senate"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r5-s1",
+   38,
+   "r5t13",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r5-s1",
+   39,
+   "r5t02",
+   "Elected Reeve",
+   "Merchant Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r5-s1",
+   40,
+   "r5t13",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r5-s1",
+   43,
+   "r5t13",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r5-s1",
+   46,
+   "r5t13",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r5-s1",
+   48,
+   "r5t13",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r5-s1",
+   49,
+   "r5t02",
+   "Merchant Council",
+   "Merchant oligarchy"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r5-s1",
+   51,
+   "r5t02",
+   "Merchant oligarchy",
+   "Merchant Council"
+  ],
+  [
+   "endWorld",
+   "sim-cs3-world-r5-s1",
+   "7ecc1706ba3c7f04"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r6-s0",
+   27,
+   "r6t09",
+   "Noble Governorship",
+   "Shadow Senate"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r6-s0",
+   29,
+   "r6t09",
+   "Shadow Senate",
+   "Shadow Senate Ascendant"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r6-s0",
+   30,
+   "r6t08",
+   "City Council",
+   "Grand Military Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r6-s0",
+   32,
+   "r6t08",
+   "Grand Military Council",
+   "Garrison Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r6-s0",
+   35,
+   "r6t08",
+   "Garrison Command",
+   "Grand Military Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r6-s0",
+   37,
+   "r6t08",
+   "Grand Military Council",
+   "Garrison Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r6-s0",
+   38,
+   "r6t02",
+   "Elder Council",
+   "Merchant Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r6-s0",
+   42,
+   "r6t05",
+   "Merchant oligarchy",
+   "Merchant City Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r6-s0",
+   43,
+   "r6t08",
+   "Garrison Command",
+   "Grand Military Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r6-s0",
+   44,
+   "r6t05",
+   "Merchant City Council",
+   "Merchant City Council Ascendant"
+  ],
+  [
+   "endWorld",
+   "sim-cs3-world-r6-s0",
+   "f4d43209106e249f"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r6-s1",
+   22,
+   "r6t08",
+   "City Council",
+   "Grand Military Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r6-s1",
+   24,
+   "r6t08",
+   "Grand Military Council",
+   "Garrison Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r6-s1",
+   26,
+   "r6t08",
+   "Garrison Command",
+   "Grand Military Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r6-s1",
+   28,
+   "r6t08",
+   "Grand Military Council",
+   "Garrison Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r6-s1",
+   30,
+   "r6t09",
+   "Noble Governorship",
+   "Shadow Senate"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r6-s1",
+   31,
+   "r6t02",
+   "Elder Council",
+   "Merchant Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r6-s1",
+   34,
+   "r6t08",
+   "Garrison Command",
+   "Grand Military Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r6-s1",
+   36,
+   "r6t08",
+   "Grand Military Council",
+   "Garrison Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r6-s1",
+   38,
+   "r6t09",
+   "Shadow Senate",
+   "Shadow Senate Ascendant"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r6-s1",
+   41,
+   "r6t08",
+   "Garrison Command",
+   "Grand Military Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r6-s1",
+   42,
+   "r6t03",
+   "Elected Reeve",
+   "Merchant City Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r6-s1",
+   43,
+   "r6t08",
+   "Grand Military Council",
+   "Garrison Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r6-s1",
+   44,
+   "r6t04",
+   "Town Council",
+   "Merchant City Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r6-s1",
+   46,
+   "r6t04",
+   "Merchant City Council",
+   "Merchant oligarchy"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r6-s1",
+   49,
+   "r6t04",
+   "Merchant oligarchy",
+   "Merchant City Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r6-s1",
+   51,
+   "r6t08",
+   "Garrison Command",
+   "Grand Military Council"
+  ],
+  [
+   "endWorld",
+   "sim-cs3-world-r6-s1",
+   "b7b917ba4bb6b2f9"
+  ],
+  [
+   "born",
+   "sim-cs3-world-r7-s0",
+   2,
+   "r7t05",
+   "candidate.stressor.coup_detat.r7t05.3"
+  ],
+  [
+   "fell",
+   "sim-cs3-world-r7-s0",
+   4,
+   "r7t05",
+   "Religious Authorities",
+   0.31,
+   0.59
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r7-s0",
+   4,
+   "r7t04",
+   "Town Mayor",
+   "Military Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r7-s0",
+   4,
+   "r7t05",
+   "Guild Council",
+   "Theocratic Council"
+  ],
+  [
+   "born",
+   "sim-cs3-world-r7-s0",
+   5,
+   "r7t10",
+   "candidate.stressor.coup_detat.r7t10.6"
+  ],
+  [
+   "fell",
+   "sim-cs3-world-r7-s0",
+   8,
+   "r7t10",
+   "Military/Guard",
+   0.35,
+   0.81
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r7-s0",
+   8,
+   "r7t10",
+   "Merchant oligarchy",
+   "Grand Military Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r7-s0",
+   9,
+   "r7t13",
+   "Elected Reeve",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r7-s0",
+   11,
+   "r7t13",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r7-s0",
+   12,
+   "r7t04",
+   "Military Council",
+   "Garrison Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r7-s0",
+   14,
+   "r7t04",
+   "Garrison Command",
+   "Military Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r7-s0",
+   16,
+   "r7t04",
+   "Military Council",
+   "Militia Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r7-s0",
+   18,
+   "r7t04",
+   "Militia Command",
+   "Garrison Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r7-s0",
+   21,
+   "r7t04",
+   "Garrison Command",
+   "Militia Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r7-s0",
+   24,
+   "r7t09",
+   "Merchant Guild Council",
+   "Grand Military Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r7-s0",
+   25,
+   "r7t04",
+   "Militia Command",
+   "Militia Command Ascendant"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r7-s0",
+   26,
+   "r7t09",
+   "Grand Military Council",
+   "Garrison Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r7-s0",
+   27,
+   "r7t09",
+   "Garrison Command",
+   "Grand Military Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r7-s0",
+   31,
+   "r7t09",
+   "Grand Military Council",
+   "Garrison Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r7-s0",
+   32,
+   "r7t09",
+   "Garrison Command",
+   "Grand Military Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r7-s0",
+   33,
+   "r7t09",
+   "Grand Military Council",
+   "Garrison Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r7-s0",
+   34,
+   "r7t09",
+   "Garrison Command",
+   "Grand Military Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r7-s0",
+   36,
+   "r7t04",
+   "Militia Command Ascendant",
+   "Garrison Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r7-s0",
+   38,
+   "r7t09",
+   "Grand Military Council",
+   "Garrison Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r7-s0",
+   40,
+   "r7t09",
+   "Garrison Command",
+   "Grand Military Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r7-s0",
+   42,
+   "r7t09",
+   "Grand Military Council",
+   "Garrison Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r7-s0",
+   44,
+   "r7t09",
+   "Garrison Command",
+   "Grand Military Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r7-s0",
+   45,
+   "r7t09",
+   "Grand Military Council",
+   "Garrison Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r7-s0",
+   46,
+   "r7t04",
+   "Garrison Command",
+   "Militia Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r7-s0",
+   47,
+   "r7t09",
+   "Garrison Command",
+   "Grand Military Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r7-s0",
+   50,
+   "r7t09",
+   "Grand Military Council",
+   "Garrison Command"
+  ],
+  [
+   "endWorld",
+   "sim-cs3-world-r7-s0",
+   "1130c352f03a32d1"
+  ],
+  [
+   "born",
+   "sim-cs3-world-r7-s1",
+   2,
+   "r7t05",
+   "candidate.stressor.coup_detat.r7t05.3"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r7-s1",
+   2,
+   "r7t13",
+   "Elected Reeve",
+   "Church Council"
+  ],
+  [
+   "fell",
+   "sim-cs3-world-r7-s1",
+   4,
+   "r7t05",
+   "Military/Guard",
+   0.3,
+   0.59
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r7-s1",
+   4,
+   "r7t05",
+   "Guild Council",
+   "Military Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r7-s1",
+   5,
+   "r7t13",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r7-s1",
+   6,
+   "r7t04",
+   "Town Mayor",
+   "Military Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r7-s1",
+   8,
+   "r7t13",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r7-s1",
+   11,
+   "r7t13",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r7-s1",
+   14,
+   "r7t13",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r7-s1",
+   18,
+   "r7t13",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r7-s1",
+   20,
+   "r7t13",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r7-s1",
+   22,
+   "r7t13",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r7-s1",
+   23,
+   "r7t09",
+   "Merchant Guild Council",
+   "Grand Military Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r7-s1",
+   25,
+   "r7t04",
+   "Military Council",
+   "Militia Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r7-s1",
+   26,
+   "r7t13",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r7-s1",
+   36,
+   "r7t13",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r7-s1",
+   42,
+   "r7t13",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r7-s1",
+   44,
+   "r7t04",
+   "Militia Command",
+   "Garrison Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r7-s1",
+   45,
+   "r7t13",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r7-s1",
+   47,
+   "r7t04",
+   "Garrison Command",
+   "Militia Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r7-s1",
+   50,
+   "r7t04",
+   "Militia Command",
+   "Garrison Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r7-s1",
+   51,
+   "r7t13",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "endWorld",
+   "sim-cs3-world-r7-s1",
+   "9ee11688638c7835"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r8-s0",
+   0,
+   "r8t13",
+   "Elder Council",
+   "Church Council"
+  ],
+  [
+   "born",
+   "sim-cs3-world-r8-s0",
+   1,
+   "r8t02",
+   "candidate.stressor.coup_detat.r8t02.2"
+  ],
+  [
+   "born",
+   "sim-cs3-world-r8-s0",
+   1,
+   "r8t06",
+   "candidate.stressor.coup_detat.r8t06.2"
+  ],
+  [
+   "born",
+   "sim-cs3-world-r8-s0",
+   1,
+   "r8t08",
+   "candidate.stressor.coup_detat.r8t08.2"
+  ],
+  [
+   "born",
+   "sim-cs3-world-r8-s0",
+   2,
+   "r8t07",
+   "candidate.stressor.coup_detat.r8t07.3"
+  ],
+  [
+   "born",
+   "sim-cs3-world-r8-s0",
+   2,
+   "r8t09",
+   "candidate.stressor.coup_detat.r8t09.3"
+  ],
+  [
+   "held",
+   "sim-cs3-world-r8-s0",
+   2,
+   "r8t06",
+   3,
+   0.27,
+   0.16
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r8-s0",
+   3,
+   "r8t13",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "fell",
+   "sim-cs3-world-r8-s0",
+   4,
+   "r8t02",
+   "Merchant Guilds",
+   0.3,
+   0.89
+  ],
+  [
+   "fell",
+   "sim-cs3-world-r8-s0",
+   4,
+   "r8t09",
+   "Merchant Guilds",
+   0.42,
+   0.58
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r8-s0",
+   4,
+   "r8t02",
+   "Elder Council",
+   "Merchant Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r8-s0",
+   4,
+   "r8t09",
+   "Merchant oligarchy",
+   "Grand Merchant Senate"
+  ],
+  [
+   "fell",
+   "sim-cs3-world-r8-s0",
+   5,
+   "r8t08",
+   "Merchant Guilds",
+   0.3,
+   0.99
+  ],
+  [
+   "fell",
+   "sim-cs3-world-r8-s0",
+   5,
+   "r8t07",
+   "Merchant Guilds",
+   0.29,
+   0.65
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r8-s0",
+   5,
+   "r8t07",
+   "Feudal Appointee",
+   "Merchant City Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r8-s0",
+   5,
+   "r8t08",
+   "City Council",
+   "Grand Merchant Senate"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r8-s0",
+   6,
+   "r8t13",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r8-s0",
+   8,
+   "r8t13",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r8-s0",
+   13,
+   "r8t13",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r8-s0",
+   15,
+   "r8t13",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r8-s0",
+   17,
+   "r8t13",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r8-s0",
+   21,
+   "r8t13",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r8-s0",
+   24,
+   "r8t13",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r8-s0",
+   25,
+   "r8t13",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r8-s0",
+   28,
+   "r8t13",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r8-s0",
+   33,
+   "r8t13",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r8-s0",
+   37,
+   "r8t08",
+   "Grand Merchant Senate",
+   "Grand Military Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r8-s0",
+   40,
+   "r8t13",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r8-s0",
+   42,
+   "r8t13",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r8-s0",
+   44,
+   "r8t13",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r8-s0",
+   45,
+   "r8t13",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r8-s0",
+   48,
+   "r8t13",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r8-s0",
+   49,
+   "r8t13",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r8-s0",
+   51,
+   "r8t08",
+   "Grand Military Council",
+   "Garrison Command"
+  ],
+  [
+   "endWorld",
+   "sim-cs3-world-r8-s0",
+   "e6c4330d5bb5edb8"
+  ],
+  [
+   "born",
+   "sim-cs3-world-r8-s1",
+   0,
+   "r8t06",
+   "candidate.stressor.coup_detat.r8t06.1"
+  ],
+  [
+   "born",
+   "sim-cs3-world-r8-s1",
+   1,
+   "r8t08",
+   "candidate.stressor.coup_detat.r8t08.2"
+  ],
+  [
+   "born",
+   "sim-cs3-world-r8-s1",
+   2,
+   "r8t04",
+   "candidate.stressor.coup_detat.r8t04.3"
+  ],
+  [
+   "born",
+   "sim-cs3-world-r8-s1",
+   2,
+   "r8t05",
+   "candidate.stressor.coup_detat.r8t05.3"
+  ],
+  [
+   "held",
+   "sim-cs3-world-r8-s1",
+   3,
+   "r8t08",
+   3,
+   0.3,
+   0.14
+  ],
+  [
+   "fell",
+   "sim-cs3-world-r8-s1",
+   3,
+   "r8t04",
+   "Military/Guard",
+   0.08,
+   0.64
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r8-s1",
+   3,
+   "r8t04",
+   "Town Council",
+   "Military Council"
+  ],
+  [
+   "fell",
+   "sim-cs3-world-r8-s1",
+   4,
+   "r8t06",
+   "Merchant Guilds",
+   0.27,
+   0.89
+  ],
+  [
+   "held",
+   "sim-cs3-world-r8-s1",
+   4,
+   "r8t05",
+   2,
+   0.36,
+   0.01
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r8-s1",
+   4,
+   "r8t06",
+   "Town Council",
+   "Merchant City Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r8-s1",
+   4,
+   "r8t13",
+   "Elder Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r8-s1",
+   6,
+   "r8t13",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r8-s1",
+   8,
+   "r8t13",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r8-s1",
+   11,
+   "r8t13",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r8-s1",
+   13,
+   "r8t13",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r8-s1",
+   17,
+   "r8t13",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r8-s1",
+   19,
+   "r8t13",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r8-s1",
+   23,
+   "r8t13",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r8-s1",
+   27,
+   "r8t13",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r8-s1",
+   28,
+   "r8t13",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r8-s1",
+   30,
+   "r8t13",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r8-s1",
+   37,
+   "r8t13",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r8-s1",
+   38,
+   "r8t13",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r8-s1",
+   41,
+   "r8t13",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r8-s1",
+   43,
+   "r8t13",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r8-s1",
+   45,
+   "r8t02",
+   "Elder Council",
+   "Merchant Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r8-s1",
+   47,
+   "r8t13",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r8-s1",
+   48,
+   "r8t13",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "endWorld",
+   "sim-cs3-world-r8-s1",
+   "fef33cf9759873af"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r9-s0",
+   4,
+   "r9t03",
+   "Elder Council",
+   "Militia Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r9-s0",
+   5,
+   "r9t05",
+   "Town Mayor",
+   "Theocratic Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r9-s0",
+   5,
+   "r9t07",
+   "Town Mayor",
+   "Military Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r9-s0",
+   7,
+   "r9t03",
+   "Militia Command",
+   "Garrison Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r9-s0",
+   8,
+   "r9t05",
+   "Theocratic Council",
+   "Corrupt City Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r9-s0",
+   12,
+   "r9t05",
+   "Corrupt City Council",
+   "Corrupt City Council Ascendant"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r9-s0",
+   14,
+   "r9t03",
+   "Garrison Command",
+   "Militia Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r9-s0",
+   17,
+   "r9t03",
+   "Militia Command",
+   "Garrison Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r9-s0",
+   19,
+   "r9t03",
+   "Garrison Command",
+   "Militia Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r9-s0",
+   33,
+   "r9t11",
+   "Ducal Governorship",
+   "Grand Military Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r9-s0",
+   49,
+   "r9t11",
+   "Grand Military Council",
+   "Garrison Command"
+  ],
+  [
+   "endWorld",
+   "sim-cs3-world-r9-s0",
+   "f7bceea8121cbec7"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r9-s1",
+   4,
+   "r9t03",
+   "Elder Council",
+   "Militia Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r9-s1",
+   6,
+   "r9t03",
+   "Militia Command",
+   "Garrison Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r9-s1",
+   11,
+   "r9t03",
+   "Garrison Command",
+   "Militia Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r9-s1",
+   14,
+   "r9t03",
+   "Militia Command",
+   "Garrison Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r9-s1",
+   16,
+   "r9t03",
+   "Garrison Command",
+   "Militia Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r9-s1",
+   17,
+   "r9t07",
+   "Town Mayor",
+   "Military Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r9-s1",
+   20,
+   "r9t05",
+   "Town Mayor",
+   "Corrupt City Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r9-s1",
+   21,
+   "r9t03",
+   "Militia Command",
+   "Garrison Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r9-s1",
+   23,
+   "r9t03",
+   "Garrison Command",
+   "Militia Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r9-s1",
+   25,
+   "r9t03",
+   "Militia Command",
+   "Garrison Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r9-s1",
+   35,
+   "r9t03",
+   "Garrison Command",
+   "Militia Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r9-s1",
+   37,
+   "r9t03",
+   "Militia Command",
+   "Garrison Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r9-s1",
+   38,
+   "r9t03",
+   "Garrison Command",
+   "Militia Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r9-s1",
+   40,
+   "r9t03",
+   "Militia Command",
+   "Garrison Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r9-s1",
+   41,
+   "r9t03",
+   "Garrison Command",
+   "Militia Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r9-s1",
+   42,
+   "r9t03",
+   "Militia Command",
+   "Garrison Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r9-s1",
+   44,
+   "r9t03",
+   "Garrison Command",
+   "Militia Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r9-s1",
+   47,
+   "r9t03",
+   "Militia Command",
+   "Garrison Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r9-s1",
+   48,
+   "r9t03",
+   "Garrison Command",
+   "Militia Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r9-s1",
+   49,
+   "r9t03",
+   "Militia Command",
+   "Garrison Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r9-s1",
+   50,
+   "r9t03",
+   "Garrison Command",
+   "Militia Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r9-s1",
+   51,
+   "r9t03",
+   "Militia Command",
+   "Garrison Command"
+  ],
+  [
+   "endWorld",
+   "sim-cs3-world-r9-s1",
+   "059f01216ae30671"
+  ],
+  [
+   "born",
+   "sim-cs3-world-r10-s0",
+   3,
+   "r10t02",
+   "candidate.stressor.coup_detat.r10t02.4"
+  ],
+  [
+   "held",
+   "sim-cs3-world-r10-s0",
+   4,
+   "r10t02",
+   1,
+   0.36,
+   0.05
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r10-s0",
+   6,
+   "r10t02",
+   "Elder Council",
+   "Church Council"
+  ],
+  [
+   "born",
+   "sim-cs3-world-r10-s0",
+   8,
+   "r10t04",
+   "candidate.stressor.coup_detat.r10t04.9"
+  ],
+  [
+   "born",
+   "sim-cs3-world-r10-s0",
+   8,
+   "r10t11",
+   "candidate.stressor.coup_detat.r10t11.9"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r10-s0",
+   8,
+   "r10t03",
+   "Elder Council",
+   "Militia Command"
+  ],
+  [
+   "fell",
+   "sim-cs3-world-r10-s0",
+   10,
+   "r10t04",
+   "Merchant Guilds",
+   0.38,
+   0.91
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r10-s0",
+   10,
+   "r10t04",
+   "Town Mayor",
+   "Merchant City Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r10-s0",
+   11,
+   "r10t03",
+   "Militia Command",
+   "Garrison Command"
+  ],
+  [
+   "fell",
+   "sim-cs3-world-r10-s0",
+   12,
+   "r10t11",
+   "Military/Guard",
+   0.16,
+   0.95
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r10-s0",
+   12,
+   "r10t11",
+   "Royal Authority",
+   "Grand Military Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r10-s0",
+   13,
+   "r10t03",
+   "Garrison Command",
+   "Militia Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r10-s0",
+   16,
+   "r10t03",
+   "Militia Command",
+   "Garrison Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r10-s0",
+   18,
+   "r10t03",
+   "Garrison Command",
+   "Militia Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r10-s0",
+   20,
+   "r10t03",
+   "Militia Command",
+   "Garrison Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r10-s0",
+   23,
+   "r10t06",
+   "Guild Council",
+   "Corrupt City Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r10-s0",
+   25,
+   "r10t03",
+   "Garrison Command",
+   "Militia Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r10-s0",
+   26,
+   "r10t06",
+   "Corrupt City Council",
+   "Corrupt City Council Ascendant"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r10-s0",
+   29,
+   "r10t03",
+   "Militia Command",
+   "Garrison Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r10-s0",
+   37,
+   "r10t03",
+   "Garrison Command",
+   "Militia Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r10-s0",
+   39,
+   "r10t03",
+   "Militia Command",
+   "Garrison Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r10-s0",
+   42,
+   "r10t03",
+   "Garrison Command",
+   "Militia Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r10-s0",
+   44,
+   "r10t13",
+   "Elected Reeve",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r10-s0",
+   46,
+   "r10t07",
+   "Town Mayor",
+   "Merchant City Council"
+  ],
+  [
+   "endWorld",
+   "sim-cs3-world-r10-s0",
+   "11e76de11e41f320"
+  ],
+  [
+   "born",
+   "sim-cs3-world-r10-s1",
+   3,
+   "r10t02",
+   "candidate.stressor.coup_detat.r10t02.4"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r10-s1",
+   3,
+   "r10t06",
+   "Guild Council",
+   "Corrupt City Council"
+  ],
+  [
+   "fell",
+   "sim-cs3-world-r10-s1",
+   5,
+   "r10t02",
+   "Religious Authorities",
+   0.36,
+   0.42
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r10-s1",
+   5,
+   "r10t02",
+   "Elder Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r10-s1",
+   15,
+   "r10t06",
+   "Corrupt City Council",
+   "Corrupt City Council Ascendant"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r10-s1",
+   17,
+   "r10t03",
+   "Elder Council",
+   "Militia Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r10-s1",
+   19,
+   "r10t03",
+   "Militia Command",
+   "Garrison Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r10-s1",
+   21,
+   "r10t03",
+   "Garrison Command",
+   "Militia Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r10-s1",
+   26,
+   "r10t03",
+   "Militia Command",
+   "Garrison Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r10-s1",
+   27,
+   "r10t02",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r10-s1",
+   28,
+   "r10t03",
+   "Garrison Command",
+   "Militia Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r10-s1",
+   31,
+   "r10t03",
+   "Militia Command",
+   "Garrison Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r10-s1",
+   39,
+   "r10t02",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r10-s1",
+   45,
+   "r10t03",
+   "Garrison Command",
+   "Militia Command"
+  ],
+  [
+   "endWorld",
+   "sim-cs3-world-r10-s1",
+   "1a81f0ddad788a9d"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r11-s0",
+   2,
+   "r11t01",
+   "Free Elder Council",
+   "Elder Council Ascendant"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r11-s0",
+   3,
+   "r11t07",
+   "Feudal Appointee",
+   "Ducal Governorship"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r11-s0",
+   6,
+   "r11t07",
+   "Ducal Governorship",
+   "Noble Regency"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r11-s0",
+   11,
+   "r11t13",
+   "Elder Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r11-s0",
+   13,
+   "r11t10",
+   "City Council",
+   "Grand Military Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r11-s0",
+   15,
+   "r11t10",
+   "Grand Military Council",
+   "Garrison Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r11-s0",
+   18,
+   "r11t10",
+   "Garrison Command",
+   "Grand Military Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r11-s0",
+   21,
+   "r11t10",
+   "Grand Military Council",
+   "Garrison Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r11-s0",
+   23,
+   "r11t10",
+   "Garrison Command",
+   "Grand Military Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r11-s0",
+   27,
+   "r11t10",
+   "Grand Military Council",
+   "Garrison Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r11-s0",
+   29,
+   "r11t10",
+   "Garrison Command",
+   "Grand Military Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r11-s0",
+   30,
+   "r11t10",
+   "Grand Military Council",
+   "Garrison Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r11-s0",
+   32,
+   "r11t13",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r11-s0",
+   35,
+   "r11t13",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r11-s0",
+   38,
+   "r11t13",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r11-s0",
+   42,
+   "r11t13",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r11-s0",
+   45,
+   "r11t13",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r11-s0",
+   47,
+   "r11t10",
+   "Garrison Command",
+   "Grand Military Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r11-s0",
+   49,
+   "r11t13",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r11-s0",
+   50,
+   "r11t03",
+   "Elder Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r11-s0",
+   51,
+   "r11t10",
+   "Grand Military Council",
+   "Garrison Command"
+  ],
+  [
+   "endWorld",
+   "sim-cs3-world-r11-s0",
+   "32080c579de5be60"
+  ],
+  [
+   "born",
+   "sim-cs3-world-r11-s1",
+   1,
+   "r11t05",
+   "candidate.stressor.coup_detat.r11t05.2"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r11-s1",
+   2,
+   "r11t01",
+   "Free Elder Council",
+   "Elder Council Ascendant"
+  ],
+  [
+   "fell",
+   "sim-cs3-world-r11-s1",
+   3,
+   "r11t05",
+   "Religious Authorities",
+   0.28,
+   0.69
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r11-s1",
+   3,
+   "r11t05",
+   "Guild Council",
+   "Theocratic Council"
+  ],
+  [
+   "born",
+   "sim-cs3-world-r11-s1",
+   6,
+   "r11t02",
+   "candidate.stressor.coup_detat.r11t02.7"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r11-s1",
+   6,
+   "r11t13",
+   "Elder Council",
+   "Church Council"
+  ],
+  [
+   "fell",
+   "sim-cs3-world-r11-s1",
+   9,
+   "r11t02",
+   "Religious Authorities",
+   0.26,
+   0.69
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r11-s1",
+   9,
+   "r11t02",
+   "Elder Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r11-s1",
+   10,
+   "r11t02",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r11-s1",
+   16,
+   "r11t03",
+   "Elder Council",
+   "Church Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r11-s1",
+   23,
+   "r11t10",
+   "City Council",
+   "Grand Military Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r11-s1",
+   28,
+   "r11t10",
+   "Grand Military Council",
+   "Garrison Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r11-s1",
+   29,
+   "r11t10",
+   "Garrison Command",
+   "Grand Military Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r11-s1",
+   31,
+   "r11t03",
+   "Church Council",
+   "Ecclesiastical Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r11-s1",
+   32,
+   "r11t10",
+   "Grand Military Council",
+   "Garrison Command"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r11-s1",
+   36,
+   "r11t10",
+   "Garrison Command",
+   "Grand Military Council"
+  ],
+  [
+   "gov",
+   "sim-cs3-world-r11-s1",
+   44,
+   "r11t03",
+   "Ecclesiastical Council",
+   "Church Council"
+  ],
+  [
+   "endWorld",
+   "sim-cs3-world-r11-s1",
+   "7ff7bd3d764a429c"
+  ]
+ ],
+ "townLog": {
+  "sim-cs3-world-r0-s0/r0t00": {
+   "gateOpenTicks": 1,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r0-s0/r0t01": {
+   "gateOpenTicks": 52,
+   "candidates": 8,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r0-s0/r0t02": {
+   "gateOpenTicks": 49,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r0-s0/r0t03": {
+   "gateOpenTicks": 1,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r0-s0/r0t04": {
+   "gateOpenTicks": 52,
+   "candidates": 7,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r0-s0/r0t05": {
+   "gateOpenTicks": 52,
+   "candidates": 11,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r0-s0/r0t06": {
+   "gateOpenTicks": 38,
+   "candidates": 1,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r0-s0/r0t07": {
+   "gateOpenTicks": 52,
+   "candidates": 3,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r0-s0/r0t08": {
+   "gateOpenTicks": 52,
+   "candidates": 14,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r0-s0/r0t09": {
+   "gateOpenTicks": 52,
+   "candidates": 9,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r0-s0/r0t10": {
+   "gateOpenTicks": 25,
+   "candidates": 3,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r0-s0/r0t11": {
+   "gateOpenTicks": 52,
+   "candidates": 14,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r0-s0/r0t12": {
+   "gateOpenTicks": 0,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r0-s0/r0t13": {
+   "gateOpenTicks": 52,
+   "candidates": 14,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r0-s1/r0t00": {
+   "gateOpenTicks": 1,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r0-s1/r0t01": {
+   "gateOpenTicks": 52,
+   "candidates": 7,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r0-s1/r0t02": {
+   "gateOpenTicks": 49,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r0-s1/r0t03": {
+   "gateOpenTicks": 6,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r0-s1/r0t04": {
+   "gateOpenTicks": 52,
+   "candidates": 4,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r0-s1/r0t05": {
+   "gateOpenTicks": 52,
+   "candidates": 25,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r0-s1/r0t06": {
+   "gateOpenTicks": 52,
+   "candidates": 2,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r0-s1/r0t07": {
+   "gateOpenTicks": 52,
+   "candidates": 4,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r0-s1/r0t08": {
+   "gateOpenTicks": 52,
+   "candidates": 23,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r0-s1/r0t09": {
+   "gateOpenTicks": 52,
+   "candidates": 12,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r0-s1/r0t10": {
+   "gateOpenTicks": 26,
+   "candidates": 3,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r0-s1/r0t11": {
+   "gateOpenTicks": 52,
+   "candidates": 5,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r0-s1/r0t12": {
+   "gateOpenTicks": 0,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r0-s1/r0t13": {
+   "gateOpenTicks": 52,
+   "candidates": 21,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r1-s0/r1t00": {
+   "gateOpenTicks": 0,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r1-s0/r1t01": {
+   "gateOpenTicks": 0,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r1-s0/r1t02": {
+   "gateOpenTicks": 52,
+   "candidates": 21,
+   "born": 1,
+   "fell": 1,
+   "held": 0,
+   "collapsed": 0,
+   "winners": [
+    {
+     "tick": 3,
+     "winner": "Merchant Guilds",
+     "contestKind": "merchant",
+     "factionArchetype": "merchant",
+     "holder": "Merchant Guilds",
+     "holderRule": "R2",
+     "incumbent": "Elder Council",
+     "gated": true,
+     "challengers": [
+      "Merchant Guilds"
+     ]
+    }
+   ]
+  },
+  "sim-cs3-world-r1-s0/r1t03": {
+   "gateOpenTicks": 4,
+   "candidates": 1,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r1-s0/r1t04": {
+   "gateOpenTicks": 52,
+   "candidates": 10,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r1-s0/r1t05": {
+   "gateOpenTicks": 52,
+   "candidates": 13,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r1-s0/r1t06": {
+   "gateOpenTicks": 52,
+   "candidates": 10,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r1-s0/r1t07": {
+   "gateOpenTicks": 12,
+   "candidates": 10,
+   "born": 1,
+   "fell": 1,
+   "held": 0,
+   "collapsed": 0,
+   "winners": [
+    {
+     "tick": 10,
+     "winner": "Military/Guard",
+     "contestKind": "military",
+     "factionArchetype": "military",
+     "holder": "Merchant Guilds",
+     "holderRule": "R2",
+     "incumbent": "Town Mayor",
+     "gated": true,
+     "challengers": [
+      "Merchant Guilds",
+      "Religious Authorities",
+      "Military/Guard"
+     ]
+    }
+   ]
+  },
+  "sim-cs3-world-r1-s0/r1t08": {
+   "gateOpenTicks": 52,
+   "candidates": 13,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r1-s0/r1t09": {
+   "gateOpenTicks": 52,
+   "candidates": 6,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r1-s0/r1t10": {
+   "gateOpenTicks": 52,
+   "candidates": 10,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r1-s0/r1t11": {
+   "gateOpenTicks": 52,
+   "candidates": 1,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r1-s0/r1t12": {
+   "gateOpenTicks": 0,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r1-s0/r1t13": {
+   "gateOpenTicks": 13,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r1-s1/r1t00": {
+   "gateOpenTicks": 0,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r1-s1/r1t01": {
+   "gateOpenTicks": 0,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r1-s1/r1t02": {
+   "gateOpenTicks": 52,
+   "candidates": 14,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r1-s1/r1t03": {
+   "gateOpenTicks": 3,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r1-s1/r1t04": {
+   "gateOpenTicks": 52,
+   "candidates": 4,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r1-s1/r1t05": {
+   "gateOpenTicks": 52,
+   "candidates": 29,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r1-s1/r1t06": {
+   "gateOpenTicks": 52,
+   "candidates": 25,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r1-s1/r1t07": {
+   "gateOpenTicks": 52,
+   "candidates": 22,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r1-s1/r1t08": {
+   "gateOpenTicks": 52,
+   "candidates": 7,
+   "born": 1,
+   "fell": 1,
+   "held": 0,
+   "collapsed": 0,
+   "winners": [
+    {
+     "tick": 3,
+     "winner": "Noble Families",
+     "contestKind": "noble",
+     "factionArchetype": "noble",
+     "holder": "Noble Families",
+     "holderRule": "R2",
+     "incumbent": "Noble Governorship",
+     "gated": true,
+     "challengers": [
+      "Noble Families",
+      "Military/Guard",
+      "Merchant Guilds"
+     ]
+    }
+   ]
+  },
+  "sim-cs3-world-r1-s1/r1t09": {
+   "gateOpenTicks": 52,
+   "candidates": 6,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r1-s1/r1t10": {
+   "gateOpenTicks": 52,
+   "candidates": 17,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r1-s1/r1t11": {
+   "gateOpenTicks": 52,
+   "candidates": 2,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r1-s1/r1t12": {
+   "gateOpenTicks": 0,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r1-s1/r1t13": {
+   "gateOpenTicks": 16,
+   "candidates": 1,
+   "born": 1,
+   "fell": 1,
+   "held": 0,
+   "collapsed": 0,
+   "winners": [
+    {
+     "tick": 3,
+     "winner": "Elected Reeve",
+     "contestKind": "government",
+     "factionArchetype": "government",
+     "holder": "Religious Authorities",
+     "holderRule": "R1",
+     "incumbent": "Church Council",
+     "gated": true,
+     "challengers": [
+      "Religious Authorities",
+      "Elected Reeve"
+     ]
+    }
+   ]
+  },
+  "sim-cs3-world-r2-s0/r2t00": {
+   "gateOpenTicks": 0,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r2-s0/r2t01": {
+   "gateOpenTicks": 3,
+   "candidates": 2,
+   "born": 1,
+   "fell": 1,
+   "held": 0,
+   "collapsed": 0,
+   "winners": [
+    {
+     "tick": 1,
+     "winner": "Military/Guard",
+     "contestKind": "military",
+     "factionArchetype": "military",
+     "holder": null,
+     "holderRule": "R4",
+     "incumbent": "Free Elder Council",
+     "gated": true,
+     "challengers": [
+      "Military/Guard"
+     ]
+    }
+   ]
+  },
+  "sim-cs3-world-r2-s0/r2t02": {
+   "gateOpenTicks": 27,
+   "candidates": 16,
+   "born": 1,
+   "fell": 1,
+   "held": 0,
+   "collapsed": 0,
+   "winners": [
+    {
+     "tick": 3,
+     "winner": "Merchant Guilds",
+     "contestKind": "merchant",
+     "factionArchetype": "merchant",
+     "holder": "Merchant Guilds",
+     "holderRule": "R2",
+     "incumbent": "Elder Council",
+     "gated": true,
+     "challengers": [
+      "Merchant Guilds"
+     ]
+    }
+   ]
+  },
+  "sim-cs3-world-r2-s0/r2t03": {
+   "gateOpenTicks": 9,
+   "candidates": 8,
+   "born": 1,
+   "fell": 1,
+   "held": 0,
+   "collapsed": 0,
+   "winners": [
+    {
+     "tick": 8,
+     "winner": "Religious Authorities",
+     "contestKind": "religious",
+     "factionArchetype": "religious",
+     "holder": null,
+     "holderRule": "R4",
+     "incumbent": "Elder Council",
+     "gated": true,
+     "challengers": [
+      "Religious Authorities"
+     ]
+    }
+   ]
+  },
+  "sim-cs3-world-r2-s0/r2t04": {
+   "gateOpenTicks": 52,
+   "candidates": 10,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r2-s0/r2t05": {
+   "gateOpenTicks": 52,
+   "candidates": 16,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r2-s0/r2t06": {
+   "gateOpenTicks": 8,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r2-s0/r2t07": {
+   "gateOpenTicks": 52,
+   "candidates": 5,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r2-s0/r2t08": {
+   "gateOpenTicks": 52,
+   "candidates": 21,
+   "born": 1,
+   "fell": 1,
+   "held": 0,
+   "collapsed": 0,
+   "winners": [
+    {
+     "tick": 2,
+     "winner": "Merchant Guilds",
+     "contestKind": "merchant",
+     "factionArchetype": "merchant",
+     "holder": "Merchant Guilds",
+     "holderRule": "R2",
+     "incumbent": "City Council",
+     "gated": true,
+     "challengers": [
+      "Military/Guard",
+      "Merchant Guilds",
+      "Religious Authorities"
+     ]
+    }
+   ]
+  },
+  "sim-cs3-world-r2-s0/r2t09": {
+   "gateOpenTicks": 52,
+   "candidates": 10,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r2-s0/r2t10": {
+   "gateOpenTicks": 4,
+   "candidates": 2,
+   "born": 1,
+   "fell": 1,
+   "held": 0,
+   "collapsed": 0,
+   "winners": [
+    {
+     "tick": 2,
+     "winner": "War Council",
+     "contestKind": "military",
+     "factionArchetype": "military",
+     "holder": null,
+     "holderRule": "R4",
+     "incumbent": "Merchant Guild Council",
+     "gated": false,
+     "challengers": [
+      "Military/Guard",
+      "War Council",
+      "Religious Authorities"
+     ]
+    }
+   ]
+  },
+  "sim-cs3-world-r2-s0/r2t11": {
+   "gateOpenTicks": 52,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r2-s0/r2t12": {
+   "gateOpenTicks": 0,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r2-s0/r2t13": {
+   "gateOpenTicks": 52,
+   "candidates": 13,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r2-s1/r2t00": {
+   "gateOpenTicks": 0,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r2-s1/r2t01": {
+   "gateOpenTicks": 37,
+   "candidates": 8,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r2-s1/r2t02": {
+   "gateOpenTicks": 27,
+   "candidates": 12,
+   "born": 1,
+   "fell": 0,
+   "held": 1,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r2-s1/r2t03": {
+   "gateOpenTicks": 5,
+   "candidates": 2,
+   "born": 1,
+   "fell": 1,
+   "held": 0,
+   "collapsed": 0,
+   "winners": [
+    {
+     "tick": 4,
+     "winner": "Religious Authorities",
+     "contestKind": "religious",
+     "factionArchetype": "religious",
+     "holder": null,
+     "holderRule": "R4",
+     "incumbent": "Elder Council",
+     "gated": true,
+     "challengers": [
+      "Religious Authorities"
+     ]
+    }
+   ]
+  },
+  "sim-cs3-world-r2-s1/r2t04": {
+   "gateOpenTicks": 52,
+   "candidates": 5,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r2-s1/r2t05": {
+   "gateOpenTicks": 52,
+   "candidates": 17,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r2-s1/r2t06": {
+   "gateOpenTicks": 2,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r2-s1/r2t07": {
+   "gateOpenTicks": 5,
+   "candidates": 3,
+   "born": 1,
+   "fell": 1,
+   "held": 0,
+   "collapsed": 0,
+   "winners": [
+    {
+     "tick": 3,
+     "winner": "Military/Guard",
+     "contestKind": "military",
+     "factionArchetype": "military",
+     "holder": "Merchant Guilds",
+     "holderRule": "R2",
+     "incumbent": "Town Mayor",
+     "gated": true,
+     "challengers": [
+      "Merchant Guilds",
+      "Religious Authorities",
+      "Military/Guard"
+     ]
+    }
+   ]
+  },
+  "sim-cs3-world-r2-s1/r2t08": {
+   "gateOpenTicks": 52,
+   "candidates": 8,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r2-s1/r2t09": {
+   "gateOpenTicks": 52,
+   "candidates": 8,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r2-s1/r2t10": {
+   "gateOpenTicks": 4,
+   "candidates": 3,
+   "born": 1,
+   "fell": 1,
+   "held": 0,
+   "collapsed": 0,
+   "winners": [
+    {
+     "tick": 2,
+     "winner": "Military/Guard",
+     "contestKind": "military",
+     "factionArchetype": "military",
+     "holder": null,
+     "holderRule": "R4",
+     "incumbent": "Merchant Guild Council",
+     "gated": false,
+     "challengers": [
+      "Military/Guard",
+      "War Council",
+      "Religious Authorities"
+     ]
+    }
+   ]
+  },
+  "sim-cs3-world-r2-s1/r2t11": {
+   "gateOpenTicks": 52,
+   "candidates": 5,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r2-s1/r2t12": {
+   "gateOpenTicks": 0,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r2-s1/r2t13": {
+   "gateOpenTicks": 23,
+   "candidates": 6,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r3-s0/r3t00": {
+   "gateOpenTicks": 0,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r3-s0/r3t01": {
+   "gateOpenTicks": 0,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r3-s0/r3t02": {
+   "gateOpenTicks": 31,
+   "candidates": 15,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r3-s0/r3t03": {
+   "gateOpenTicks": 12,
+   "candidates": 8,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r3-s0/r3t04": {
+   "gateOpenTicks": 52,
+   "candidates": 15,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r3-s0/r3t05": {
+   "gateOpenTicks": 48,
+   "candidates": 17,
+   "born": 1,
+   "fell": 0,
+   "held": 1,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r3-s0/r3t06": {
+   "gateOpenTicks": 52,
+   "candidates": 28,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r3-s0/r3t07": {
+   "gateOpenTicks": 52,
+   "candidates": 7,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r3-s0/r3t08": {
+   "gateOpenTicks": 6,
+   "candidates": 1,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r3-s0/r3t09": {
+   "gateOpenTicks": 52,
+   "candidates": 7,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r3-s0/r3t10": {
+   "gateOpenTicks": 36,
+   "candidates": 1,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r3-s0/r3t11": {
+   "gateOpenTicks": 6,
+   "candidates": 4,
+   "born": 1,
+   "fell": 1,
+   "held": 0,
+   "collapsed": 0,
+   "winners": [
+    {
+     "tick": 4,
+     "winner": "Military/Guard",
+     "contestKind": "military",
+     "factionArchetype": "military",
+     "holder": "Noble Houses",
+     "holderRule": "R2",
+     "incumbent": "Ducal Governorship",
+     "gated": true,
+     "challengers": [
+      "Noble Houses",
+      "Military/Guard",
+      "Merchant Guilds"
+     ]
+    }
+   ]
+  },
+  "sim-cs3-world-r3-s0/r3t12": {
+   "gateOpenTicks": 21,
+   "candidates": 8,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r3-s0/r3t13": {
+   "gateOpenTicks": 26,
+   "candidates": 15,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r3-s1/r3t00": {
+   "gateOpenTicks": 0,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r3-s1/r3t01": {
+   "gateOpenTicks": 0,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r3-s1/r3t02": {
+   "gateOpenTicks": 27,
+   "candidates": 10,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r3-s1/r3t03": {
+   "gateOpenTicks": 32,
+   "candidates": 8,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r3-s1/r3t04": {
+   "gateOpenTicks": 28,
+   "candidates": 14,
+   "born": 1,
+   "fell": 0,
+   "held": 1,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r3-s1/r3t05": {
+   "gateOpenTicks": 50,
+   "candidates": 5,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r3-s1/r3t06": {
+   "gateOpenTicks": 52,
+   "candidates": 30,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r3-s1/r3t07": {
+   "gateOpenTicks": 33,
+   "candidates": 8,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r3-s1/r3t08": {
+   "gateOpenTicks": 7,
+   "candidates": 1,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r3-s1/r3t09": {
+   "gateOpenTicks": 52,
+   "candidates": 11,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r3-s1/r3t10": {
+   "gateOpenTicks": 30,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r3-s1/r3t11": {
+   "gateOpenTicks": 52,
+   "candidates": 11,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r3-s1/r3t12": {
+   "gateOpenTicks": 31,
+   "candidates": 18,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r3-s1/r3t13": {
+   "gateOpenTicks": 5,
+   "candidates": 5,
+   "born": 1,
+   "fell": 0,
+   "held": 1,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r4-s0/r4t00": {
+   "gateOpenTicks": 0,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r4-s0/r4t01": {
+   "gateOpenTicks": 0,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r4-s0/r4t02": {
+   "gateOpenTicks": 8,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r4-s0/r4t03": {
+   "gateOpenTicks": 52,
+   "candidates": 20,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r4-s0/r4t04": {
+   "gateOpenTicks": 52,
+   "candidates": 10,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r4-s0/r4t05": {
+   "gateOpenTicks": 47,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r4-s0/r4t06": {
+   "gateOpenTicks": 52,
+   "candidates": 18,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r4-s0/r4t07": {
+   "gateOpenTicks": 52,
+   "candidates": 15,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r4-s0/r4t08": {
+   "gateOpenTicks": 52,
+   "candidates": 13,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r4-s0/r4t09": {
+   "gateOpenTicks": 52,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r4-s0/r4t10": {
+   "gateOpenTicks": 52,
+   "candidates": 5,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r4-s0/r4t11": {
+   "gateOpenTicks": 52,
+   "candidates": 10,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r4-s0/r4t12": {
+   "gateOpenTicks": 0,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r4-s0/r4t13": {
+   "gateOpenTicks": 24,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r4-s1/r4t00": {
+   "gateOpenTicks": 0,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r4-s1/r4t01": {
+   "gateOpenTicks": 0,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r4-s1/r4t02": {
+   "gateOpenTicks": 2,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r4-s1/r4t03": {
+   "gateOpenTicks": 52,
+   "candidates": 13,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r4-s1/r4t04": {
+   "gateOpenTicks": 52,
+   "candidates": 13,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r4-s1/r4t05": {
+   "gateOpenTicks": 52,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r4-s1/r4t06": {
+   "gateOpenTicks": 52,
+   "candidates": 8,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r4-s1/r4t07": {
+   "gateOpenTicks": 52,
+   "candidates": 11,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r4-s1/r4t08": {
+   "gateOpenTicks": 52,
+   "candidates": 11,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r4-s1/r4t09": {
+   "gateOpenTicks": 52,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r4-s1/r4t10": {
+   "gateOpenTicks": 52,
+   "candidates": 11,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r4-s1/r4t11": {
+   "gateOpenTicks": 52,
+   "candidates": 12,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r4-s1/r4t12": {
+   "gateOpenTicks": 0,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r4-s1/r4t13": {
+   "gateOpenTicks": 26,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r5-s0/r5t00": {
+   "gateOpenTicks": 0,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r5-s0/r5t01": {
+   "gateOpenTicks": 0,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r5-s0/r5t02": {
+   "gateOpenTicks": 52,
+   "candidates": 11,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r5-s0/r5t03": {
+   "gateOpenTicks": 3,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r5-s0/r5t04": {
+   "gateOpenTicks": 5,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r5-s0/r5t05": {
+   "gateOpenTicks": 52,
+   "candidates": 9,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r5-s0/r5t06": {
+   "gateOpenTicks": 52,
+   "candidates": 13,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r5-s0/r5t07": {
+   "gateOpenTicks": 24,
+   "candidates": 3,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r5-s0/r5t08": {
+   "gateOpenTicks": 52,
+   "candidates": 22,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r5-s0/r5t09": {
+   "gateOpenTicks": 52,
+   "candidates": 10,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r5-s0/r5t10": {
+   "gateOpenTicks": 52,
+   "candidates": 5,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r5-s0/r5t11": {
+   "gateOpenTicks": 36,
+   "candidates": 1,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r5-s0/r5t12": {
+   "gateOpenTicks": 0,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r5-s0/r5t13": {
+   "gateOpenTicks": 7,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r5-s1/r5t00": {
+   "gateOpenTicks": 0,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r5-s1/r5t01": {
+   "gateOpenTicks": 0,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r5-s1/r5t02": {
+   "gateOpenTicks": 41,
+   "candidates": 19,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r5-s1/r5t03": {
+   "gateOpenTicks": 52,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r5-s1/r5t04": {
+   "gateOpenTicks": 52,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r5-s1/r5t05": {
+   "gateOpenTicks": 52,
+   "candidates": 30,
+   "born": 1,
+   "fell": 1,
+   "held": 0,
+   "collapsed": 0,
+   "winners": [
+    {
+     "tick": 5,
+     "winner": "Religious Authorities",
+     "contestKind": "religious",
+     "factionArchetype": "religious",
+     "holder": null,
+     "holderRule": "R4",
+     "incumbent": "Town Mayor",
+     "gated": true,
+     "challengers": [
+      "Religious Authorities",
+      "Merchant Guilds",
+      "Military/Guard"
+     ]
+    }
+   ]
+  },
+  "sim-cs3-world-r5-s1/r5t06": {
+   "gateOpenTicks": 52,
+   "candidates": 7,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r5-s1/r5t07": {
+   "gateOpenTicks": 25,
+   "candidates": 3,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r5-s1/r5t08": {
+   "gateOpenTicks": 52,
+   "candidates": 12,
+   "born": 1,
+   "fell": 1,
+   "held": 0,
+   "collapsed": 0,
+   "winners": [
+    {
+     "tick": 6,
+     "winner": "Merchant Guilds",
+     "contestKind": "merchant",
+     "factionArchetype": "merchant",
+     "holder": "Merchant Guilds",
+     "holderRule": "R3",
+     "incumbent": "Merchant oligarchy",
+     "gated": true,
+     "challengers": [
+      "Merchant Guilds",
+      "Military/Guard",
+      "Religious Authorities"
+     ]
+    }
+   ]
+  },
+  "sim-cs3-world-r5-s1/r5t09": {
+   "gateOpenTicks": 52,
+   "candidates": 12,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r5-s1/r5t10": {
+   "gateOpenTicks": 52,
+   "candidates": 4,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r5-s1/r5t11": {
+   "gateOpenTicks": 32,
+   "candidates": 1,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r5-s1/r5t12": {
+   "gateOpenTicks": 0,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r5-s1/r5t13": {
+   "gateOpenTicks": 17,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r6-s0/r6t00": {
+   "gateOpenTicks": 0,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r6-s0/r6t01": {
+   "gateOpenTicks": 0,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r6-s0/r6t02": {
+   "gateOpenTicks": 39,
+   "candidates": 7,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r6-s0/r6t03": {
+   "gateOpenTicks": 52,
+   "candidates": 24,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r6-s0/r6t04": {
+   "gateOpenTicks": 52,
+   "candidates": 9,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r6-s0/r6t05": {
+   "gateOpenTicks": 48,
+   "candidates": 7,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r6-s0/r6t06": {
+   "gateOpenTicks": 52,
+   "candidates": 15,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r6-s0/r6t07": {
+   "gateOpenTicks": 52,
+   "candidates": 8,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r6-s0/r6t08": {
+   "gateOpenTicks": 31,
+   "candidates": 2,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r6-s0/r6t09": {
+   "gateOpenTicks": 28,
+   "candidates": 1,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r6-s0/r6t10": {
+   "gateOpenTicks": 52,
+   "candidates": 22,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r6-s0/r6t11": {
+   "gateOpenTicks": 52,
+   "candidates": 9,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r6-s0/r6t12": {
+   "gateOpenTicks": 0,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r6-s0/r6t13": {
+   "gateOpenTicks": 39,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r6-s1/r6t00": {
+   "gateOpenTicks": 0,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r6-s1/r6t01": {
+   "gateOpenTicks": 0,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r6-s1/r6t02": {
+   "gateOpenTicks": 32,
+   "candidates": 9,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r6-s1/r6t03": {
+   "gateOpenTicks": 43,
+   "candidates": 16,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r6-s1/r6t04": {
+   "gateOpenTicks": 48,
+   "candidates": 6,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r6-s1/r6t05": {
+   "gateOpenTicks": 52,
+   "candidates": 23,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r6-s1/r6t06": {
+   "gateOpenTicks": 52,
+   "candidates": 9,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r6-s1/r6t07": {
+   "gateOpenTicks": 52,
+   "candidates": 18,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r6-s1/r6t08": {
+   "gateOpenTicks": 23,
+   "candidates": 1,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r6-s1/r6t09": {
+   "gateOpenTicks": 31,
+   "candidates": 1,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r6-s1/r6t10": {
+   "gateOpenTicks": 52,
+   "candidates": 17,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r6-s1/r6t11": {
+   "gateOpenTicks": 52,
+   "candidates": 13,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r6-s1/r6t12": {
+   "gateOpenTicks": 0,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r6-s1/r6t13": {
+   "gateOpenTicks": 0,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r7-s0/r7t00": {
+   "gateOpenTicks": 0,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r7-s0/r7t01": {
+   "gateOpenTicks": 0,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r7-s0/r7t02": {
+   "gateOpenTicks": 52,
+   "candidates": 16,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r7-s0/r7t03": {
+   "gateOpenTicks": 52,
+   "candidates": 6,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r7-s0/r7t04": {
+   "gateOpenTicks": 8,
+   "candidates": 1,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r7-s0/r7t05": {
+   "gateOpenTicks": 52,
+   "candidates": 19,
+   "born": 1,
+   "fell": 1,
+   "held": 0,
+   "collapsed": 0,
+   "winners": [
+    {
+     "tick": 4,
+     "winner": "Religious Authorities",
+     "contestKind": "religious",
+     "factionArchetype": "religious",
+     "holder": "Merchant Guilds",
+     "holderRule": "R2",
+     "incumbent": "Guild Council",
+     "gated": true,
+     "challengers": [
+      "Military/Guard",
+      "Merchant Guilds",
+      "Religious Authorities"
+     ]
+    }
+   ]
+  },
+  "sim-cs3-world-r7-s0/r7t06": {
+   "gateOpenTicks": 52,
+   "candidates": 21,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r7-s0/r7t07": {
+   "gateOpenTicks": 52,
+   "candidates": 4,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r7-s0/r7t08": {
+   "gateOpenTicks": 52,
+   "candidates": 6,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r7-s0/r7t09": {
+   "gateOpenTicks": 25,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r7-s0/r7t10": {
+   "gateOpenTicks": 10,
+   "candidates": 7,
+   "born": 1,
+   "fell": 1,
+   "held": 0,
+   "collapsed": 0,
+   "winners": [
+    {
+     "tick": 8,
+     "winner": "Military/Guard",
+     "contestKind": "military",
+     "factionArchetype": "military",
+     "holder": "Merchant Guilds",
+     "holderRule": "R3",
+     "incumbent": "Merchant oligarchy",
+     "gated": true,
+     "challengers": [
+      "Merchant Guilds",
+      "Military/Guard",
+      "Religious Authorities"
+     ]
+    }
+   ]
+  },
+  "sim-cs3-world-r7-s0/r7t11": {
+   "gateOpenTicks": 52,
+   "candidates": 10,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r7-s0/r7t12": {
+   "gateOpenTicks": 52,
+   "candidates": 13,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r7-s0/r7t13": {
+   "gateOpenTicks": 10,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r7-s1/r7t00": {
+   "gateOpenTicks": 0,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r7-s1/r7t01": {
+   "gateOpenTicks": 0,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r7-s1/r7t02": {
+   "gateOpenTicks": 52,
+   "candidates": 12,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r7-s1/r7t03": {
+   "gateOpenTicks": 52,
+   "candidates": 13,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r7-s1/r7t04": {
+   "gateOpenTicks": 11,
+   "candidates": 1,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r7-s1/r7t05": {
+   "gateOpenTicks": 6,
+   "candidates": 4,
+   "born": 1,
+   "fell": 1,
+   "held": 0,
+   "collapsed": 0,
+   "winners": [
+    {
+     "tick": 4,
+     "winner": "Military/Guard",
+     "contestKind": "military",
+     "factionArchetype": "military",
+     "holder": "Merchant Guilds",
+     "holderRule": "R2",
+     "incumbent": "Guild Council",
+     "gated": true,
+     "challengers": [
+      "Military/Guard",
+      "Merchant Guilds",
+      "Religious Authorities"
+     ]
+    }
+   ]
+  },
+  "sim-cs3-world-r7-s1/r7t06": {
+   "gateOpenTicks": 52,
+   "candidates": 15,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r7-s1/r7t07": {
+   "gateOpenTicks": 52,
+   "candidates": 8,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r7-s1/r7t08": {
+   "gateOpenTicks": 52,
+   "candidates": 11,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r7-s1/r7t09": {
+   "gateOpenTicks": 24,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r7-s1/r7t10": {
+   "gateOpenTicks": 52,
+   "candidates": 11,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r7-s1/r7t11": {
+   "gateOpenTicks": 52,
+   "candidates": 16,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r7-s1/r7t12": {
+   "gateOpenTicks": 52,
+   "candidates": 11,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r7-s1/r7t13": {
+   "gateOpenTicks": 3,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r8-s0/r8t00": {
+   "gateOpenTicks": 0,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r8-s0/r8t01": {
+   "gateOpenTicks": 0,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r8-s0/r8t02": {
+   "gateOpenTicks": 52,
+   "candidates": 15,
+   "born": 1,
+   "fell": 1,
+   "held": 0,
+   "collapsed": 0,
+   "winners": [
+    {
+     "tick": 4,
+     "winner": "Merchant Guilds",
+     "contestKind": "merchant",
+     "factionArchetype": "merchant",
+     "holder": "Merchant Guilds",
+     "holderRule": "R2",
+     "incumbent": "Elder Council",
+     "gated": true,
+     "challengers": [
+      "Merchant Guilds",
+      "Religious Authorities"
+     ]
+    }
+   ]
+  },
+  "sim-cs3-world-r8-s0/r8t03": {
+   "gateOpenTicks": 52,
+   "candidates": 18,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r8-s0/r8t04": {
+   "gateOpenTicks": 52,
+   "candidates": 1,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r8-s0/r8t05": {
+   "gateOpenTicks": 52,
+   "candidates": 15,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r8-s0/r8t06": {
+   "gateOpenTicks": 31,
+   "candidates": 13,
+   "born": 1,
+   "fell": 0,
+   "held": 1,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r8-s0/r8t07": {
+   "gateOpenTicks": 52,
+   "candidates": 27,
+   "born": 1,
+   "fell": 1,
+   "held": 0,
+   "collapsed": 0,
+   "winners": [
+    {
+     "tick": 5,
+     "winner": "Merchant Guilds",
+     "contestKind": "merchant",
+     "factionArchetype": "merchant",
+     "holder": "Landed Gentry",
+     "holderRule": "R2",
+     "incumbent": "Feudal Appointee",
+     "gated": true,
+     "challengers": [
+      "Landed Gentry",
+      "Merchant Guilds"
+     ]
+    }
+   ]
+  },
+  "sim-cs3-world-r8-s0/r8t08": {
+   "gateOpenTicks": 38,
+   "candidates": 5,
+   "born": 1,
+   "fell": 1,
+   "held": 0,
+   "collapsed": 0,
+   "winners": [
+    {
+     "tick": 5,
+     "winner": "Merchant Guilds",
+     "contestKind": "merchant",
+     "factionArchetype": "merchant",
+     "holder": "Merchant Guilds",
+     "holderRule": "R2",
+     "incumbent": "City Council",
+     "gated": true,
+     "challengers": [
+      "Military/Guard",
+      "Merchant Guilds",
+      "Religious Authorities"
+     ]
+    }
+   ]
+  },
+  "sim-cs3-world-r8-s0/r8t09": {
+   "gateOpenTicks": 52,
+   "candidates": 18,
+   "born": 1,
+   "fell": 1,
+   "held": 0,
+   "collapsed": 0,
+   "winners": [
+    {
+     "tick": 4,
+     "winner": "Merchant Guilds",
+     "contestKind": "merchant",
+     "factionArchetype": "merchant",
+     "holder": "Merchant Guilds",
+     "holderRule": "R3",
+     "incumbent": "Merchant oligarchy",
+     "gated": true,
+     "challengers": [
+      "Merchant Guilds",
+      "Military/Guard",
+      "The Merchant Bloc"
+     ]
+    }
+   ]
+  },
+  "sim-cs3-world-r8-s0/r8t10": {
+   "gateOpenTicks": 52,
+   "candidates": 12,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r8-s0/r8t11": {
+   "gateOpenTicks": 52,
+   "candidates": 3,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r8-s0/r8t12": {
+   "gateOpenTicks": 0,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r8-s0/r8t13": {
+   "gateOpenTicks": 1,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r8-s1/r8t00": {
+   "gateOpenTicks": 0,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r8-s1/r8t01": {
+   "gateOpenTicks": 0,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r8-s1/r8t02": {
+   "gateOpenTicks": 46,
+   "candidates": 16,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r8-s1/r8t03": {
+   "gateOpenTicks": 52,
+   "candidates": 18,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r8-s1/r8t04": {
+   "gateOpenTicks": 4,
+   "candidates": 2,
+   "born": 1,
+   "fell": 1,
+   "held": 0,
+   "collapsed": 0,
+   "winners": [
+    {
+     "tick": 3,
+     "winner": "Military/Guard",
+     "contestKind": "military",
+     "factionArchetype": "military",
+     "holder": "Merchant Guilds",
+     "holderRule": "R2",
+     "incumbent": "Town Council",
+     "gated": false,
+     "challengers": [
+      "Religious Authorities",
+      "Military/Guard",
+      "Merchant Guilds"
+     ]
+    }
+   ]
+  },
+  "sim-cs3-world-r8-s1/r8t05": {
+   "gateOpenTicks": 51,
+   "candidates": 13,
+   "born": 1,
+   "fell": 0,
+   "held": 1,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r8-s1/r8t06": {
+   "gateOpenTicks": 52,
+   "candidates": 16,
+   "born": 1,
+   "fell": 1,
+   "held": 0,
+   "collapsed": 0,
+   "winners": [
+    {
+     "tick": 4,
+     "winner": "Merchant Guilds",
+     "contestKind": "merchant",
+     "factionArchetype": "merchant",
+     "holder": "Craft Guilds",
+     "holderRule": "R2",
+     "incumbent": "Town Council",
+     "gated": true,
+     "challengers": [
+      "Religious Authorities",
+      "Merchant Guilds",
+      "Military/Guard"
+     ]
+    }
+   ]
+  },
+  "sim-cs3-world-r8-s1/r8t07": {
+   "gateOpenTicks": 52,
+   "candidates": 21,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r8-s1/r8t08": {
+   "gateOpenTicks": 52,
+   "candidates": 10,
+   "born": 1,
+   "fell": 0,
+   "held": 1,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r8-s1/r8t09": {
+   "gateOpenTicks": 52,
+   "candidates": 3,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r8-s1/r8t10": {
+   "gateOpenTicks": 52,
+   "candidates": 22,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r8-s1/r8t11": {
+   "gateOpenTicks": 52,
+   "candidates": 5,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r8-s1/r8t12": {
+   "gateOpenTicks": 0,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r8-s1/r8t13": {
+   "gateOpenTicks": 5,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r9-s0/r9t00": {
+   "gateOpenTicks": 0,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r9-s0/r9t01": {
+   "gateOpenTicks": 0,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r9-s0/r9t02": {
+   "gateOpenTicks": 52,
+   "candidates": 10,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r9-s0/r9t03": {
+   "gateOpenTicks": 5,
+   "candidates": 1,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r9-s0/r9t04": {
+   "gateOpenTicks": 52,
+   "candidates": 10,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r9-s0/r9t05": {
+   "gateOpenTicks": 10,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r9-s0/r9t06": {
+   "gateOpenTicks": 52,
+   "candidates": 12,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r9-s0/r9t07": {
+   "gateOpenTicks": 6,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r9-s0/r9t08": {
+   "gateOpenTicks": 52,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r9-s0/r9t09": {
+   "gateOpenTicks": 52,
+   "candidates": 23,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r9-s0/r9t10": {
+   "gateOpenTicks": 52,
+   "candidates": 11,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r9-s0/r9t11": {
+   "gateOpenTicks": 34,
+   "candidates": 1,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r9-s0/r9t12": {
+   "gateOpenTicks": 0,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r9-s0/r9t13": {
+   "gateOpenTicks": 52,
+   "candidates": 22,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r9-s1/r9t00": {
+   "gateOpenTicks": 0,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r9-s1/r9t01": {
+   "gateOpenTicks": 0,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r9-s1/r9t02": {
+   "gateOpenTicks": 52,
+   "candidates": 6,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r9-s1/r9t03": {
+   "gateOpenTicks": 5,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r9-s1/r9t04": {
+   "gateOpenTicks": 52,
+   "candidates": 6,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r9-s1/r9t05": {
+   "gateOpenTicks": 21,
+   "candidates": 1,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r9-s1/r9t06": {
+   "gateOpenTicks": 52,
+   "candidates": 16,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r9-s1/r9t07": {
+   "gateOpenTicks": 18,
+   "candidates": 1,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r9-s1/r9t08": {
+   "gateOpenTicks": 52,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r9-s1/r9t09": {
+   "gateOpenTicks": 52,
+   "candidates": 8,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r9-s1/r9t10": {
+   "gateOpenTicks": 52,
+   "candidates": 11,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r9-s1/r9t11": {
+   "gateOpenTicks": 52,
+   "candidates": 1,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r9-s1/r9t12": {
+   "gateOpenTicks": 0,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r9-s1/r9t13": {
+   "gateOpenTicks": 52,
+   "candidates": 10,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r10-s0/r10t00": {
+   "gateOpenTicks": 0,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r10-s0/r10t01": {
+   "gateOpenTicks": 0,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r10-s0/r10t02": {
+   "gateOpenTicks": 7,
+   "candidates": 6,
+   "born": 1,
+   "fell": 0,
+   "held": 1,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r10-s0/r10t03": {
+   "gateOpenTicks": 9,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r10-s0/r10t04": {
+   "gateOpenTicks": 52,
+   "candidates": 33,
+   "born": 1,
+   "fell": 1,
+   "held": 0,
+   "collapsed": 0,
+   "winners": [
+    {
+     "tick": 10,
+     "winner": "Merchant Guilds",
+     "contestKind": "merchant",
+     "factionArchetype": "merchant",
+     "holder": "Merchant Guilds",
+     "holderRule": "R2",
+     "incumbent": "Town Mayor",
+     "gated": true,
+     "challengers": [
+      "Military/Guard",
+      "Merchant Guilds"
+     ]
+    }
+   ]
+  },
+  "sim-cs3-world-r10-s0/r10t05": {
+   "gateOpenTicks": 52,
+   "candidates": 1,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r10-s0/r10t06": {
+   "gateOpenTicks": 24,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r10-s0/r10t07": {
+   "gateOpenTicks": 48,
+   "candidates": 10,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r10-s0/r10t08": {
+   "gateOpenTicks": 52,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r10-s0/r10t09": {
+   "gateOpenTicks": 52,
+   "candidates": 12,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r10-s0/r10t10": {
+   "gateOpenTicks": 52,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r10-s0/r10t11": {
+   "gateOpenTicks": 13,
+   "candidates": 10,
+   "born": 1,
+   "fell": 1,
+   "held": 0,
+   "collapsed": 0,
+   "winners": [
+    {
+     "tick": 12,
+     "winner": "Military/Guard",
+     "contestKind": "military",
+     "factionArchetype": "military",
+     "holder": "Noble Houses",
+     "holderRule": "R3",
+     "incumbent": "Royal Authority",
+     "gated": true,
+     "challengers": [
+      "Military/Guard",
+      "Merchant Guilds",
+      "Noble Houses"
+     ]
+    }
+   ]
+  },
+  "sim-cs3-world-r10-s0/r10t12": {
+   "gateOpenTicks": 0,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r10-s0/r10t13": {
+   "gateOpenTicks": 45,
+   "candidates": 9,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r10-s1/r10t00": {
+   "gateOpenTicks": 0,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r10-s1/r10t01": {
+   "gateOpenTicks": 0,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r10-s1/r10t02": {
+   "gateOpenTicks": 28,
+   "candidates": 18,
+   "born": 1,
+   "fell": 1,
+   "held": 0,
+   "collapsed": 0,
+   "winners": [
+    {
+     "tick": 5,
+     "winner": "Religious Authorities",
+     "contestKind": "religious",
+     "factionArchetype": "religious",
+     "holder": null,
+     "holderRule": "R4",
+     "incumbent": "Elder Council",
+     "gated": true,
+     "challengers": [
+      "Religious Authorities"
+     ]
+    }
+   ]
+  },
+  "sim-cs3-world-r10-s1/r10t03": {
+   "gateOpenTicks": 19,
+   "candidates": 1,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r10-s1/r10t04": {
+   "gateOpenTicks": 52,
+   "candidates": 5,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r10-s1/r10t05": {
+   "gateOpenTicks": 52,
+   "candidates": 2,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r10-s1/r10t06": {
+   "gateOpenTicks": 4,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r10-s1/r10t07": {
+   "gateOpenTicks": 52,
+   "candidates": 5,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r10-s1/r10t08": {
+   "gateOpenTicks": 52,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r10-s1/r10t09": {
+   "gateOpenTicks": 52,
+   "candidates": 9,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r10-s1/r10t10": {
+   "gateOpenTicks": 52,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r10-s1/r10t11": {
+   "gateOpenTicks": 52,
+   "candidates": 7,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r10-s1/r10t12": {
+   "gateOpenTicks": 0,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r10-s1/r10t13": {
+   "gateOpenTicks": 52,
+   "candidates": 30,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r11-s0/r11t00": {
+   "gateOpenTicks": 0,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r11-s0/r11t01": {
+   "gateOpenTicks": 49,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r11-s0/r11t02": {
+   "gateOpenTicks": 52,
+   "candidates": 23,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r11-s0/r11t03": {
+   "gateOpenTicks": 51,
+   "candidates": 17,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r11-s0/r11t04": {
+   "gateOpenTicks": 52,
+   "candidates": 9,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r11-s0/r11t05": {
+   "gateOpenTicks": 52,
+   "candidates": 21,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r11-s0/r11t06": {
+   "gateOpenTicks": 52,
+   "candidates": 8,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r11-s0/r11t07": {
+   "gateOpenTicks": 49,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r11-s0/r11t08": {
+   "gateOpenTicks": 52,
+   "candidates": 8,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r11-s0/r11t09": {
+   "gateOpenTicks": 52,
+   "candidates": 10,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r11-s0/r11t10": {
+   "gateOpenTicks": 14,
+   "candidates": 2,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r11-s0/r11t11": {
+   "gateOpenTicks": 52,
+   "candidates": 11,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r11-s0/r11t12": {
+   "gateOpenTicks": 52,
+   "candidates": 20,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r11-s0/r11t13": {
+   "gateOpenTicks": 12,
+   "candidates": 8,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r11-s1/r11t00": {
+   "gateOpenTicks": 0,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r11-s1/r11t01": {
+   "gateOpenTicks": 49,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r11-s1/r11t02": {
+   "gateOpenTicks": 10,
+   "candidates": 8,
+   "born": 1,
+   "fell": 1,
+   "held": 0,
+   "collapsed": 0,
+   "winners": [
+    {
+     "tick": 9,
+     "winner": "Religious Authorities",
+     "contestKind": "religious",
+     "factionArchetype": "religious",
+     "holder": null,
+     "holderRule": "R4",
+     "incumbent": "Elder Council",
+     "gated": true,
+     "challengers": [
+      "Religious Authorities"
+     ]
+    }
+   ]
+  },
+  "sim-cs3-world-r11-s1/r11t03": {
+   "gateOpenTicks": 17,
+   "candidates": 13,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r11-s1/r11t04": {
+   "gateOpenTicks": 52,
+   "candidates": 9,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r11-s1/r11t05": {
+   "gateOpenTicks": 52,
+   "candidates": 15,
+   "born": 1,
+   "fell": 1,
+   "held": 0,
+   "collapsed": 0,
+   "winners": [
+    {
+     "tick": 3,
+     "winner": "Religious Authorities",
+     "contestKind": "religious",
+     "factionArchetype": "religious",
+     "holder": "Merchant Guilds",
+     "holderRule": "R3",
+     "incumbent": "Guild Council",
+     "gated": true,
+     "challengers": [
+      "Religious Authorities",
+      "Merchant Guilds",
+      "Military/Guard"
+     ]
+    }
+   ]
+  },
+  "sim-cs3-world-r11-s1/r11t06": {
+   "gateOpenTicks": 52,
+   "candidates": 25,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r11-s1/r11t07": {
+   "gateOpenTicks": 52,
+   "candidates": 0,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r11-s1/r11t08": {
+   "gateOpenTicks": 52,
+   "candidates": 17,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r11-s1/r11t09": {
+   "gateOpenTicks": 52,
+   "candidates": 9,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r11-s1/r11t10": {
+   "gateOpenTicks": 24,
+   "candidates": 1,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r11-s1/r11t11": {
+   "gateOpenTicks": 52,
+   "candidates": 12,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r11-s1/r11t12": {
+   "gateOpenTicks": 52,
+   "candidates": 25,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  },
+  "sim-cs3-world-r11-s1/r11t13": {
+   "gateOpenTicks": 7,
+   "candidates": 5,
+   "born": 0,
+   "fell": 0,
+   "held": 0,
+   "collapsed": 0,
+   "winners": []
+  }
+ }
+}

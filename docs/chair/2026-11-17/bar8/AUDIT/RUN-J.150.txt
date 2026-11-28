@@ -1,0 +1,63 @@
+LAW 11 (seat J) over 150 towns: towns   47 · instances    88 · distinct lines   44
+  11a.imported     towns    5 · instances     5 · distinct lines    4
+    by story siege 3 · bought 2
+    by material ironOre 3 · livestock 2
+  11b              towns    7 · instances    12 · distinct lines    8
+    by story bought 10 · idle 2
+    by material fish 6 · grain 2 · ironOre 2 · wool 2
+    by line kind service 5 · chip 2 · tick 2 · card 2 · scene 1
+      11b.fish         towns    2 · instances     3 · distinct lines    2
+      11b.fishTitle    towns    2 · instances     3 · distinct lines    2
+      11b.ironOre      towns    2 · instances     2 · distinct lines    1
+      11b.landOffers   towns    2 · instances     2 · distinct lines    1
+      11b.wool         towns    1 · instances     2 · distinct lines    2
+  11c.idle         towns    1 · instances     1 · distinct lines    1
+    by story idle 1
+    by material livestock 1
+  11c.needed       towns    3 · instances     3 · distinct lines    3
+    by story needed 3
+    by material grapes 1 · copper ore 1 · hides 1
+  11c.noImport     towns   10 · instances    10 · distinct lines    1
+    by story none 10
+    by material fish 10
+  11d.warIron      towns    3 · instances    21 · distinct lines   11
+    by story warHook 21
+    by material ironOre 21
+  11e.offer        towns    5 · instances     5 · distinct lines    4
+    by story calm 4 · siege 1
+    by material spices 2 · livestock 2 · metals 1
+  11e.siegeBought  towns    7 · instances    14 · distinct lines    5
+    by story siege 14
+    by material wool 13 · hides 1
+  11g.gapLine      towns   17 · instances    17 · distinct lines    7
+    by story workedOut 14 · venture 3
+    by material stone 7 · iron ore 5 · game 1 · coal 1 · clay 1 · livestock 1 · timber 1
+THE ROOTS (the record alone)
+  gapImportedNoImport    towns    5 · rows    5 · by material livestock 4 · hides 1
+  warIronOutsideWar      towns    9 · rows    9 · under a siege 6 · by crises under_siege+famine 5 · occupied 3 · under_siege 1 · with an iron import 9
+DISTINCT LINES (top 25 by towns; all in J150.forms.json)
+  11c.noImport   10t    10 Systems/Institutions Salted, smoked and dried fish come in by cart whenever fish can be had, sold by weight and inspected for rot.
+  11g.gapLine    7t     7 Systems/Resources    No stone reaches the stone quarry.
+  11e.siegeBought    6t     6 Systems/Institutions Services · Dyed cloth
+  11e.siegeBought    5t     5 Systems/Institutions Services · Livery and uniforms
+  11g.gapLine    5t     5 Systems/Resources    No iron ore reaches the mine.
+  11d.warIron    3t     3 Systems/Institutions Short of iron. Charcoal furnaces for reducing raw ore to refined metal whenever ore can be had, cast in bars for whoever
+  11d.warIron    3t     3 Systems/Institutions Services · Iron refining (short)
+  11d.warIron    3t     3 Systems/Services     Short of iron. Smelt raw ore into pig iron and refined ingots ready for smithing.
+  11d.warIron    3t     4 World/NPCs           Short of iron.
+  11a.imported    2t     2 Systems/Economics    Needed, and not brought in: livestock.
+  11b       2t     2 Systems/Services     Fresh fish retail
+  11b       2t     2 Systems/Services     Fish sold daily from the morning catch.
+  11b       2t     2 Systems/Resources    ✓Agriculture
+  11b       2t     2 Systems/Institutions The industrial step from what the mine yields to what the smith uses.
+  11d.warIron    2t     2 Summary/Plot Hooks   War has taken the iron: the metal suppliers sell to the armies first, and the iron for tools and repairs stops arriving.
+  11e.offer    2t     2 Systems/Institutions The trade in silk, spice, and precious things.
+  11a.imported    1t     1 Systems/Economics    Needed, and not brought in: stone (for major construction), iron ore, copper ore.
+  11a.imported    1t     1 Systems/Economics    Needed, and not brought in: preserved provisions for winter, iron ore, copper ore.
+  11a.imported    1t     1 Systems/Economics    Needed, and not brought in: metals, iron ore, copper ore, gold and silver ore.
+  11b       1t     1 Systems/Institutions Services · Fresh fish retail
+  11b       1t     1 Summary/Overview     Half of <name> seems to be gutting, salting or selling fish.
+  11b       1t     1 Systems/Institutions Services · Wool shearing · Livestock management
+  11b       1t     1 Systems/Services     Wool shearing
+  11c.idle    1t     1 Systems/Economics    Almost everyone's living at <name> depends on one source of income, whether or not they earn from it directly. Faith car
+  11c.needed    1t     1 Systems/Economics    Ask what <name> lives on and you will hear more than one trade named. Magic carries real weight at <name>: what it can d

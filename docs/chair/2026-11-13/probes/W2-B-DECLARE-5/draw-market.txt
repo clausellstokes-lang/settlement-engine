@@ -1,0 +1,41 @@
+word market: 26 findings, 15 distinct (town, sentence), 15 towns; salt "w2b5-f7-market-2026-11-13"
+
+1. r2s-plague_onset-village-0 · Summary/Crisis · names
+   "Fewer people come to market, travel is discouraged, and some goods stop arriving."
+   {"tier":"village","pop":110,"crisis":"plague_onset","market":false,"roster":"","rosterSize":12,"magic":true}
+
+2. r2s-plague_onset-thorp-3 · Summary/Crisis · names
+   "Fewer people come to market, travel is discouraged, and some goods stop arriving."
+   {"tier":"thorp","pop":15,"crisis":"plague_onset","market":false,"roster":"","rosterSize":7,"magic":true}
+
+3. r2r-hamlet-23 · Systems/Power · names
+   "Free Elder Council has been debating market levies for three months."
+   {"tier":"hamlet","pop":96,"crisis":"calm","market":false,"roster":"","rosterSize":12,"magic":true}
+
+4. r2r-village-50 · Summary/Crisis · names
+   "Fewer people come to market, travel is discouraged, and some goods stop arriving."
+   {"tier":"village","pop":386,"crisis":"plague_onset","market":false,"roster":"Apothecary","rosterSize":14,"magic":true}
+
+5. r2r-thorp-41 · Summary/Crisis · names
+   "Fewer people come to market, travel is discouraged, and some goods stop arriving."
+   {"tier":"thorp","pop":22,"crisis":"plague_onset","market":false,"roster":"","rosterSize":12,"magic":true}
+
+6. r2s-plague_onset-village-2 · Summary/Crisis · names
+   "Fewer people come to market, travel is discouraged, and some goods stop arriving."
+   {"tier":"village","pop":141,"crisis":"plague_onset","market":false,"roster":"Apothecary","rosterSize":12,"magic":true}
+
+7. r2s-plague_onset-hamlet-0 · Summary/Crisis · names
+   "Fewer people come to market, travel is discouraged, and some goods stop arriving."
+   {"tier":"hamlet","pop":25,"crisis":"plague_onset","market":false,"roster":"","rosterSize":8,"magic":true}
+
+8. r2s-plague_onset-hamlet-3 · Summary/Crisis · names
+   "Fewer people come to market, travel is discouraged, and some goods stop arriving."
+   {"tier":"hamlet","pop":97,"crisis":"plague_onset","market":false,"roster":"","rosterSize":10,"magic":true}
+
+9. r2s-plague_onset-thorp-2 · Summary/Crisis · names
+   "Fewer people come to market, travel is discouraged, and some goods stop arriving."
+   {"tier":"thorp","pop":9,"crisis":"plague_onset","market":false,"roster":"","rosterSize":8,"magic":true}
+
+10. r2s-plague_onset-thorp-1 · Summary/Crisis · names
+   "Fewer people come to market, travel is discouraged, and some goods stop arriving."
+   {"tier":"thorp","pop":25,"crisis":"plague_onset","market":false,"roster":"","rosterSize":10,"magic":true}

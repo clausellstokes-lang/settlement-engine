@@ -27,7 +27,8 @@ const npcInput = fc.record({
   importance,
   status,
   linkedInstitutionIds: fc.array(fc.string({ minLength: 1, maxLength: 12 }), { maxLength: 4 }),
-  linkedFactionIds:     fc.array(fc.string({ minLength: 1, maxLength: 12 }), { maxLength: 4 }),
+  // PEOPLE-5B (M-7): the card's powers are `memberships` (linkedFactionIds left the card).
+  memberships:          fc.array(fc.record({ power: fc.string({ minLength: 1, maxLength: 12 }), rank: fc.constantFrom(1, 2, 3, null), share: fc.constant(null) }), { maxLength: 4 }),
 }, { requiredKeys: ['name'] });
 
 describe('npcs (property-based)', () => {
@@ -44,7 +45,8 @@ describe('npcs (property-based)', () => {
       expect(['minor', 'notable', 'key', 'pillar']).toContain(npc.importance);
       expect(['active', 'dead', 'exiled', 'jailed', 'missing', 'removed', 'retired']).toContain(npc.status);
       expect(Array.isArray(npc.linkedInstitutionIds)).toBe(true);
-      expect(Array.isArray(npc.linkedFactionIds)).toBe(true);
+      expect(Array.isArray(npc.memberships)).toBe(true);
+      expect('institution' in npc, 'a card born here names its house, null for the DM\'s').toBe(true);
       expect(Array.isArray(npc.serviceContribution)).toBe(true);
       expect(Array.isArray(npc.potentialSuccessors)).toBe(true);
     }), { numRuns: 60 });
@@ -79,7 +81,7 @@ describe('npcs (property-based)', () => {
           name: 'Test',
           role:  'X',
           linkedInstitutionIds: instIds,
-          linkedFactionIds:     factionIds,
+          memberships:          factionIds.map((power) => ({ power, rank: null, share: null })),
         });
 
         // Snapshot the input so we can detect mutation. JSON round-trip

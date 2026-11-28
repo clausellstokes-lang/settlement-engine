@@ -146,7 +146,7 @@ function requestFor(cardType, entityId, field, value) {
 function renameSurfaceValues(settlement) {
   return {
     'npcs[].name': settlement.npcs[0].name,
-    'factions[].members[].name': settlement.factions[0].members[0].name,
+    // PEOPLE-5B (M-7): `factions[].members[].name` left NPC_RENAME_SURFACES with the grouping.
     'relationships[].npc1Name': settlement.relationships[0].npc1Name,
     'relationships[].npc2Name': settlement.relationships[0].npc2Name,
     'interSettlementRelationships[].npcName': settlement.interSettlementRelationships[0].npcName,
@@ -207,7 +207,6 @@ describe('EM-C4a — the store plain-edit half', () => {
       .toEqual(Object.keys(after).sort(compareCodepoint));
     expect(after).toEqual({
       'npcs[].name': 'Lady Varn',
-      'factions[].members[].name': 'Lady Varn',
       'relationships[].npc1Name': 'Lady Varn',
       'relationships[].npc2Name': 'Mira',
       'interSettlementRelationships[].npcName': 'Lady Varn',
@@ -216,7 +215,7 @@ describe('EM-C4a — the store plain-edit half', () => {
       'stressors[].cast.roles[].name': 'Lady Varn',
       'stressors[].cast.levers[].holderName': 'Lady Varn',
     });
-    expect(before['factions[].members[].name']).toBe('Lord Varn');
+    expect(before['npcs[].name']).toBe('Lord Varn');
     // The layer still records the override at exactly ONE root key.
     expect(store.getState().settlement.dmLayer.roots)
       .toEqual({ [rootKeyFor('npc', NPC_ID, 'name').key]: 'Lady Varn' });
@@ -228,7 +227,8 @@ describe('EM-C4a — the store plain-edit half', () => {
       .map((hit) => hit[1]);
     // anchored: both scans are LIVE — the import scan sees the four modules this file
     // really imports, and the assignment scan sees the two layer writes it really makes.
-    expect(imported.length).toBe(6);
+    // GUARD (CLOSE-7; R24j 3) adds the seventh: the engine's own version, from the import-free schema file.
+    expect(imported.length).toBe(7);
     expect(assigned.filter((target) => target === 'state.settlement.dmLayer').length).toBe(2);
     expect(imported.filter((specifier) => /factionRename|RenameHelpers|pendingEdits/.test(specifier))).toEqual([]);
     expect(assigned.filter((target) => /npcs|factions|relationships/.test(target))).toEqual([]);

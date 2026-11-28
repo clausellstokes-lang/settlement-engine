@@ -9,6 +9,7 @@ import { serif, Empty } from '../Primitives';
 // "NPC Relationships" fold was a truncated copy of that page's list (same card, same
 // strings, 100% superset), so it is cut and every tie stays reachable there.
 import {NPCCategoryGroup} from '../npcComponents';
+import { groupCardsByFirstPower, powersOf, powerNameOf } from '../../../domain/people/cardPowers.js';
 
 import {NarrativeNote} from '../NarrativeNote';
 // W-H4 §6c — the LOCAL half of the wanderer register. A static child of this
@@ -35,7 +36,6 @@ export function NPCsTab({
 }) {
   const mobile = useIsMobile();
   const [search, setSearch] = useState('');
-  const [impFilter, setImpFilter] = useState('all');
   const pinnedCount = pinnedIds instanceof Set ? pinnedIds.size : 0;
 
   // The unaffiliates are people the WORLD ledger holds against this place, not roster
@@ -53,39 +53,18 @@ export function NPCsTab({
   if (!npcs?.length) {
     return (
       <div>
-        <Empty message="No NPCs generated. Generate a settlement to see key figures."/>
+        <Empty message="No key figures are recorded for this settlement."/>
         {unaffiliates}
       </div>
     );
   }
 
-  const highCount = npcs.filter(n=>n.influence==='high').length;
-  const modCount  = npcs.filter(n=>n.influence==='moderate').length;
-
-  // Group by power faction name (factionAffiliation), ordered by faction power rank
-  const powerFactions = settlement?.powerStructure?.factions || [];
-  const factionOrder  = powerFactions.map(f => f.faction);
-  // Map faction name → its category (for color coding)
+  // Group by FIRST-RANK power (PEOPLE-5A, M-1b): a card ranked in a power stands under its
+  // best-ranked power; the unranked members and the cards in no power get their own groups.
+  // Read from the memberships and the powers, never the shim's derived fields.
   const factionCategory = {};
-  powerFactions.forEach(f => { factionCategory[f.faction] = f.category || 'other'; });
-
-  const byFaction = {};
-  npcs.forEach(n => {
-    const key = n.factionAffiliation || 'Unaffiliated';
-    (byFaction[key] = byFaction[key] || []).push(n);
-  });
-
-  // Sort faction groups: power-ranked factions first, then unaffiliated
-  const presentFactions = Object.keys(byFaction).sort((a, b) => {
-    const ia = factionOrder.indexOf(a);
-    const ib = factionOrder.indexOf(b);
-    if (a === 'Unaffiliated') return 1;
-    if (b === 'Unaffiliated') return -1;
-    if (ia === -1 && ib === -1) return a.localeCompare(b);
-    if (ia === -1) return 1;
-    if (ib === -1) return -1;
-    return ia - ib;
-  });
+  powersOf(settlement).forEach(f => { factionCategory[powerNameOf(f)] = f.category || 'other'; });
+  const groups = groupCardsByFirstPower(npcs, settlement);
 
   const q = search.trim().toLowerCase();
 
@@ -96,9 +75,8 @@ export function NPCsTab({
       <div style={{display:'flex',alignItems:'center',gap:10,flexWrap:'wrap',...FLUSH_RULED}}>
         <div style={{flex:1}}>
           <span style={{...serif,fontSize:FS.xl,fontWeight:600,color:swatch.inkMag}}>{npcs.length} Key Figures</span><InfoPill text={SECTION_HELP.npcs} />
-          <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:MUTED,marginLeft:8}}>
-            {highCount>0&&`${highCount} high influence · `}{modCount>0&&`${modCount} moderate`}
-          </span>
+          {/* ⛔ NO INFLUENCE TALLY (PAGE-1 CARD, F4, 2026-11-20): "N high influence · M moderate" counted the stored
+              `influence` band, a keyword misread at birth; the card's Standing row says each person's fact. */}
         </div>
         {pinnedCount > 0 && (
           <span
@@ -119,42 +97,32 @@ export function NPCsTab({
         )}
       </div>
 
-      {/* ── SEARCH + FILTER ─────────────────────────────────────────────── */}
+      {/* ── SEARCH ──────────────────────────────────────────────────────── */}
       <div style={{display:'flex',gap:8,flexWrap:'wrap',...FLUSH_RULED}}>
         <div style={{position:'relative',flex:1,minWidth:140}}>
           <span style={{position:'absolute',left:9,top:'50%',transform:'translateY(-50%)',display:'inline-flex',color:MUTED,pointerEvents:'none'}}><Search size={14}/></span>
           <input value={search} onChange={e=>setSearch(e.target.value)}
-            aria-label="Filter by name, role, or faction"
-            placeholder="Filter by name, role, or faction…"
+            aria-label="Filter by name, role, or power"
+            placeholder="Filter by name, role, or power…"
             style={{width:'100%',padding:'7px 28px 7px 28px',border:'1px solid #c8b89a',fontSize:FS.sm,fontFamily:'Nunito,sans-serif',color:swatch.inkMag,background:swatch['#FAF8F4'],boxSizing:'border-box'}}/>
           {search&&<span style={{position:'absolute',right:8,top:'50%',transform:'translateY(-50%)',display:'inline-flex'}}><IconButton Icon={X} label="Clear filter" onClick={()=>setSearch('')} tone="ghost" size="sm" /></span>}
         </div>
-        {[
-          {key:'all',   label:'All'},
-          {key:'high',  label:'●●● High'},
-          {key:'moderate', label:'●● Moderate'},
-          {key:'low',   label:'● Low'},
-        ].map(f=>(
-          <Button key={f.key} onClick={()=>setImpFilter(f.key)}
-            variant={impFilter===f.key?'primary':'secondary'} size="sm"
-            aria-pressed={impFilter===f.key} style={{flexShrink:0}}>
-            {f.label}
-          </Button>
-        ))}
+        {/* ⛔ NO INFLUENCE FILTER (PAGE-1 CARD, F4, 2026-11-20): "●●● High / ●● Moderate / ● Low" filtered by the stored
+            `influence` band, a keyword misread at birth, which no card prints now. */}
       </div>
 
       {/* ── NPC GROUPS by power faction ────────────────────────────────── */}
-      {presentFactions.map(factionName => (
+      {groups.map(({ key, cards }) => (
         <NPCCategoryGroup
-          key={factionName}
-          category={factionCategory[factionName] || 'other'}
-          label={factionName}
-          group={byFaction[factionName]}
-          impFilter={impFilter}
+          key={key}
+          category={factionCategory[key] || 'other'}
+          label={key}
+          group={cards}
           search={q}
           pinnedIds={pinnedIds}
           onTogglePin={onTogglePin}
           canAuthorNpc={canAuthorNpc}
+          settlement={settlement}
         />
       ))}
 

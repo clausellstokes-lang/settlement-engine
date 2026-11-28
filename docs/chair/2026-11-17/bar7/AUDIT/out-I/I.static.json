@@ -1,0 +1,1344 @@
+{
+ "desk": [
+  {
+   "rule": "9g.stores",
+   "desk": "defense",
+   "block": "DS-DEF-2",
+   "pool": "Disasters & Famine: granary AND parish care only",
+   "vid": 1,
+   "marks": [],
+   "text": "There is food stored at {settlement} and there are clergy who tend the sick: reserves against hunger, and against disease something better than nothing and well short of a hospital.",
+   "admits": [
+    "stores under three months (no granary, household stores)"
+   ],
+   "why": "declares []; admits stores under three months (no granary, household stores)"
+  },
+  {
+   "rule": "9g.money",
+   "desk": "defense",
+   "block": "DS-DEF-6",
+   "pool": "Economic Backing: Well-funded",
+   "vid": 1,
+   "marks": [
+    "colour"
+   ],
+   "text": "{settlement} pays its defense in full and on time, keeps the equipment maintained and holds something in reserve; every other arrangement in the town's defense is worth more for it.",
+   "admits": [
+    "a war (the war takes most of the money; the seat cannot afford its requisition)",
+    "a debt",
+    "a siege or an occupation"
+   ],
+   "why": "declares [\"colour\"]; admits a war (the war takes most of the money; the seat cannot afford its requisition); a debt; a siege or an occupation"
+  },
+  {
+   "rule": "9g.food",
+   "desk": "defense",
+   "block": "DS-DEF-12",
+   "pool": "CAPACITY: ample",
+   "vid": 1,
+   "marks": [
+    "food: ≥ pressured"
+   ],
+   "text": "No dependable road, river or port reaches {settlement}, and the town does not need one: it keeps itself supplied with room to spare, even in a bad year.",
+   "admits": [
+    "food word Pressured or lower, or a food gap",
+    "a siege or a famine"
+   ],
+   "why": "declares [\"food: ≥ pressured\"]; admits food word Pressured or lower, or a food gap; a siege or a famine"
+  },
+  {
+   "rule": "9g.food",
+   "desk": "defense",
+   "block": "DS-DEF-12",
+   "pool": "CAPACITY: ample",
+   "vid": 3,
+   "marks": [
+    "food: ≥ pressured"
+   ],
+   "text": "Traders seldom reach {settlement}, and people there seldom miss them: the town has more than enough to get through a hard year.",
+   "admits": [
+    "food word Pressured or lower, or a food gap",
+    "a siege or a famine"
+   ],
+   "why": "declares [\"food: ≥ pressured\"]; admits food word Pressured or lower, or a food gap; a siege or a famine"
+  },
+  {
+   "rule": "9g.money",
+   "desk": "economy",
+   "block": "DS-ECO-1",
+   "pool": "COMBINATION C1: a high rung on a working approach",
+   "vid": 2,
+   "marks": [
+    "crisis: any",
+    "no crisis: indebted"
+   ],
+   "text": "{settlement} lives on a {complexity} and ends each year with money to spare.",
+   "admits": [
+    "a war (the war takes most of the money; the seat cannot afford its requisition)",
+    "a siege or an occupation"
+   ],
+   "why": "declares [\"crisis: any\",\"no crisis: indebted\"]; admits a war (the war takes most of the money; the seat cannot afford its requisition); a siege or an occupation"
+  },
+  {
+   "rule": "9g.stores",
+   "desk": "economy",
+   "block": "DS-ECO-1",
+   "pool": "COMBINATION C2: a high rung on a narrow approach (isolated / mountain_pass)",
+   "vid": 1,
+   "marks": [
+    "stores: >= 6"
+   ],
+   "text": "{settlement} is richer than its road suggests. Nothing reaches it easily, yet its stores are deep and its halls are finished.",
+   "admits": [],
+   "why": "shut"
+  },
+  {
+   "rule": "9g.money",
+   "desk": "economy",
+   "block": "DS-ECO-1",
+   "pool": "COMBINATION C3: the middle rungs",
+   "vid": 1,
+   "marks": [
+    "crisis: any"
+   ],
+   "text": "With a little left over each year, {settlement} gets by on a {complexity}, and every year people argue over how to spend it.",
+   "admits": [
+    "a war (the war takes most of the money; the seat cannot afford its requisition)",
+    "a debt",
+    "a siege or an occupation"
+   ],
+   "why": "declares [\"crisis: any\"]; admits a war (the war takes most of the money; the seat cannot afford its requisition); a debt; a siege or an occupation"
+  },
+  {
+   "rule": "9g.food",
+   "desk": "economy",
+   "block": "DS-ECO-2",
+   "pool": "FOOD: surplus",
+   "vid": 1,
+   "marks": [
+    "crisis: any"
+   ],
+   "text": "{settlement} eats well below what it raises. The excess is counted, stored, and argued over rather than needed.",
+   "admits": [
+    "a siege or a famine"
+   ],
+   "why": "declares [\"crisis: any\"]; admits a siege or a famine"
+  },
+  {
+   "rule": "9g.stores",
+   "desk": "economy",
+   "block": "DS-ECO-2",
+   "pool": "GRANARY: well stocked",
+   "vid": 1,
+   "marks": [
+    "institution: granary",
+    "crisis: any"
+   ],
+   "text": "The granary stands near its capacity going into {season}. The stores reach past the turn of the year with room to spare.",
+   "admits": [],
+   "why": "shut"
+  },
+  {
+   "rule": "9g.stores",
+   "desk": "economy",
+   "block": "DS-ECO-2",
+   "pool": "GRANARY: well stocked",
+   "vid": 5,
+   "marks": [
+    "no hunger",
+    "no institution: granary"
+   ],
+   "text": "The stores go into {season} deep, and they reach past the turn of the year with room to spare.",
+   "admits": [
+    "stores under three months (no granary, household stores)"
+   ],
+   "why": "declares [\"no hunger\",\"no institution: granary\"]; admits stores under three months (no granary, household stores)"
+  },
+  {
+   "rule": "9g.food",
+   "desk": "economy",
+   "block": "DS-ECO-3",
+   "pool": "SURPLUS × not trade-dependent",
+   "vid": 2,
+   "marks": [
+    "no crisis: under_siege"
+   ],
+   "text": "Plenty passes here. Not much of it stops.",
+   "admits": [
+    "food word Pressured or lower, or a food gap"
+   ],
+   "why": "declares [\"no crisis: under_siege\"]; admits food word Pressured or lower, or a food gap"
+  },
+  {
+   "rule": "9g.money",
+   "desk": "economy",
+   "block": "DS-ECO-8",
+   "pool": "MODERATE",
+   "vid": 3,
+   "marks": [
+    "no crisis"
+   ],
+   "text": "Nothing about {settlement}'s condition asks to be remarked on. The town pays its own way and has a little in hand.",
+   "admits": [],
+   "why": "shut"
+  },
+  {
+   "rule": "9g.money",
+   "desk": "economy",
+   "block": "DS-ECO-8",
+   "pool": "COMFORTABLE",
+   "vid": 1,
+   "marks": [
+    "no crisis: indebted"
+   ],
+   "text": "{settlement} closes every year ahead. The margin is not large and it is dependable, and there are reserves behind it.",
+   "admits": [
+    "a war (the war takes most of the money; the seat cannot afford its requisition)",
+    "a siege or an occupation"
+   ],
+   "why": "declares [\"no crisis: indebted\"]; admits a war (the war takes most of the money; the seat cannot afford its requisition); a siege or an occupation"
+  },
+  {
+   "rule": "9g.subsistence",
+   "desk": "economy",
+   "block": "DS-ECO-8",
+   "pool": "COMFORTABLE",
+   "vid": 3,
+   "marks": [
+    "food: ≥ secure"
+   ],
+   "text": "The town is plainly past subsistence. The buildings are finished rather than patched, and the stores are more than the season needs.",
+   "admits": [
+    "economy label Subsistence (the economy desk's own complexity rung)"
+   ],
+   "why": "declares [\"food: ≥ secure\"]; admits economy label Subsistence (the economy desk's own complexity rung)"
+  },
+  {
+   "rule": "9g.stores",
+   "desk": "economy",
+   "block": "DS-ECO-8",
+   "pool": "WEALTHY",
+   "vid": 1,
+   "marks": [
+    "crisis: any",
+    "stores: ≥ 3"
+   ],
+   "text": "{settlement} has reserves deep enough to ride out most of what could happen to it.",
+   "admits": [],
+   "why": "shut"
+  },
+  {
+   "rule": "9g.food",
+   "desk": "economy",
+   "block": "DS-ECO-8",
+   "pool": "FOOD AND PROSPERITY: full stores lift the town",
+   "vid": 1,
+   "marks": [
+    "institution: granary",
+    "no crisis: famine"
+   ],
+   "text": "Full stores help {settlement}'s fortunes. With food to spare and a granary to keep it in, the town has more to trade and less to fear from a bad year.",
+   "admits": [
+    "food word Pressured or lower, or a food gap"
+   ],
+   "why": "declares [\"institution: granary\",\"no crisis: famine\"]; admits food word Pressured or lower, or a food gap"
+  },
+  {
+   "rule": "9g.food",
+   "desk": "economy",
+   "block": "DS-ECO-8",
+   "pool": "FOOD AND PROSPERITY: full stores lift the town",
+   "vid": 4,
+   "marks": [
+    "no crisis: famine",
+    "no crisis: under_siege"
+   ],
+   "text": "{settlement} grows more food than it eats, and what it sells of the surplus brings coin in every season.",
+   "admits": [
+    "food word Pressured or lower, or a food gap"
+   ],
+   "why": "declares [\"no crisis: famine\",\"no crisis: under_siege\"]; admits food word Pressured or lower, or a food gap"
+  },
+  {
+   "rule": "9g.food",
+   "desk": "general",
+   "block": "DS-GEN-3",
+   "pool": "prosperity: Moderate / Modest",
+   "vid": 3,
+   "marks": [
+    "no crisis: hunger",
+    "crisis: any"
+   ],
+   "text": "{settlement} eats well enough and does not talk about it.",
+   "admits": [
+    "food word Pressured or lower, or a food gap"
+   ],
+   "why": "declares [\"no crisis: hunger\",\"crisis: any\"]; admits food word Pressured or lower, or a food gap"
+  },
+  {
+   "rule": "9g.money",
+   "desk": "general",
+   "block": "DS-GEN-3",
+   "pool": "prosperity: Comfortable / Prosperous",
+   "vid": 2,
+   "marks": [],
+   "text": "The surplus at {settlement} is real and gets spent on the town rather than out of it.",
+   "admits": [
+    "a war (the war takes most of the money; the seat cannot afford its requisition)",
+    "a debt",
+    "a siege or an occupation"
+   ],
+   "why": "declares []; admits a war (the war takes most of the money; the seat cannot afford its requisition); a debt; a siege or an occupation"
+  },
+  {
+   "rule": "9g.food",
+   "desk": "general",
+   "block": "DS-GEN-3",
+   "pool": "foodSecurity.label: Import-Dependent",
+   "vid": 4,
+   "marks": [
+    "no crisis: hunger",
+    "crisis: any"
+   ],
+   "text": "{settlement} eats well, but on food grown elsewhere; if the carts stop, so do the meals.",
+   "admits": [
+    "food word Pressured or lower, or a food gap"
+   ],
+   "why": "declares [\"no crisis: hunger\",\"crisis: any\"]; admits food word Pressured or lower, or a food gap"
+  },
+  {
+   "rule": "9i.crews",
+   "desk": "defense",
+   "block": "DS-DEF-4",
+   "pool": "structure semi-organized",
+   "vid": 3,
+   "marks": [
+    "tier: ≥ village"
+   ],
+   "text": "Rival crews at {settlement} are fighting over who runs the streets, and until one wins, people pay both the cut and the brawling.",
+   "admits": [
+    "Safety Safe or Very Safe (\"walk anywhere at any hour\")",
+    "an occupation's curfew (\"Thieves are scarce now\")"
+   ],
+   "why": "declares [\"tier: ≥ village\"]"
+  },
+  {
+   "rule": "9a.order",
+   "desk": "defense",
+   "block": "DS-DEF-2",
+   "pool": "Invasion & War: neither walls nor force",
+   "vid": 7,
+   "marks": [
+    "watch",
+    "no threat",
+    "crisis: any",
+    "no mercenary",
+    "tier: ≥ village"
+   ],
+   "text": "{settlement} has no wall and no soldiers; its watch keeps the peace in the streets and would be no answer to an army.",
+   "admits": [
+    "Law & order · Collapsed"
+   ],
+   "why": "declares [\"watch\",\"no threat\",\"crisis: any\",\"no mercenary\",\"tier: ≥ village\"]"
+  },
+  {
+   "rule": "9a.order",
+   "desk": "defense",
+   "block": "DS-DEF-3",
+   "pool": "Moderate",
+   "vid": 7,
+   "marks": [
+    "guardPresence"
+   ],
+   "text": "{settlement} has people who keep order, and order holds about as well as anyone here expects.",
+   "admits": [
+    "Law & order · Collapsed"
+   ],
+   "why": "declares [\"guardPresence\"]"
+  },
+  {
+   "rule": "9a.order",
+   "desk": "defense",
+   "block": "DS-DEF-6",
+   "pool": "Legal Infrastructure: None",
+   "vid": 1,
+   "marks": [],
+   "text": "{settlement} keeps no court and no gaol, so no complaint is ever written down and order holds only where someone armed is standing.",
+   "admits": [
+    "Law & order · Collapsed"
+   ],
+   "why": "declares []"
+  },
+  {
+   "rule": "9a.order",
+   "desk": "power",
+   "block": "DS-POW-5",
+   "pool": "FLAG: merchantArmy",
+   "vid": 1,
+   "marks": [
+    "no crisis: occupied"
+   ],
+   "text": "The trading houses at {settlement} pay for their own armed guards, a private army that keeps order wherever the houses do business. Where the guards and the {seat} disagree, the guards usually win.",
+   "admits": [
+    "Law & order · Collapsed"
+   ],
+   "why": "declares [\"no crisis: occupied\"]"
+  },
+  {
+   "rule": "7x.occupied-seat",
+   "desk": "power",
+   "block": "DS-POW-1",
+   "pool": "Approved",
+   "vid": 1,
+   "marks": [],
+   "text": "{settlement} thinks well enough of the {seat}, not warmly, but well enough that what it decides carries in most quarters without an argument first.",
+   "admits": [
+    "an occupation (\"nothing it decides stands without the occupiers' approval\")"
+   ],
+   "why": "declares []"
+  },
+  {
+   "rule": "7x.occupied-seat",
+   "desk": "power",
+   "block": "DS-POW-1",
+   "pool": "Approved",
+   "vid": 4,
+   "marks": [],
+   "text": "The {seat} is liked well enough at {settlement} that it can make an unpopular decision and still be obeyed.",
+   "admits": [
+    "an occupation (\"nothing it decides stands without the occupiers' approval\")"
+   ],
+   "why": "declares []"
+  },
+  {
+   "rule": "7x.occupied-seat",
+   "desk": "power",
+   "block": "DS-POW-2",
+   "pool": "stable matched",
+   "vid": 3,
+   "marks": [],
+   "text": "Anyone doing business at {settlement} needs one name, {faction}'s, and can plan a season ahead on its word.",
+   "admits": [
+    "an occupation (\"nothing it decides stands without the occupiers' approval\")"
+   ],
+   "why": "declares []"
+  },
+  {
+   "rule": "7x.occupied-seat",
+   "desk": "power",
+   "block": "DS-POW-2",
+   "pool": "stable matched",
+   "vid": 4,
+   "marks": [],
+   "text": "Everyone at {settlement} knows who decides, and nobody expects that to change this season.",
+   "admits": [
+    "an occupation (\"nothing it decides stands without the occupiers' approval\")"
+   ],
+   "why": "declares []"
+  },
+  {
+   "rule": "7x.occupied-seat",
+   "desk": "power",
+   "block": "DS-POW-2",
+   "pool": "no token matched: unclassified (the plain-description floor)",
+   "vid": 5,
+   "marks": [],
+   "text": "Every decision about {settlement} is taken by {faction}, and every answer comes from there.",
+   "admits": [
+    "an occupation (\"nothing it decides stands without the occupiers' approval\")"
+   ],
+   "why": "declares []"
+  },
+  {
+   "rule": "7x.occupied-seat",
+   "desk": "power",
+   "block": "DS-POW-3",
+   "pool": "shallow ladder (few rungs recorded)",
+   "vid": 3,
+   "marks": [],
+   "text": "Deal with {faction} at {settlement} and there is nobody else to be sent to. {npc} decides, and the others are people {npc} knows.",
+   "admits": [
+    "an occupation (\"nothing it decides stands without the occupiers' approval\")"
+   ],
+   "why": "declares []"
+  },
+  {
+   "rule": "7x.occupied-seat",
+   "desk": "power",
+   "block": "DS-POW-5",
+   "pool": "autocrat",
+   "vid": 2,
+   "marks": [
+    "no crisis: succession"
+   ],
+   "text": "At {settlement} the answer comes quickly, and asking again seldom gets a different one.",
+   "admits": [
+    "an occupation (\"nothing it decides stands without the occupiers' approval\")"
+   ],
+   "why": "declares [\"no crisis: succession\"]"
+  },
+  {
+   "rule": "7x.occupied-seat",
+   "desk": "power",
+   "block": "DS-POW-5",
+   "pool": "autocrat",
+   "vid": 4,
+   "marks": [
+    "no crisis: succession"
+   ],
+   "text": "At {settlement} one audience with the {seat} gets a decision, good or bad, and it comes quickly.",
+   "admits": [
+    "an occupation (\"nothing it decides stands without the occupiers' approval\")"
+   ],
+   "why": "declares [\"no crisis: succession\"]"
+  },
+  {
+   "rule": "7x.occupied-seat",
+   "desk": "power",
+   "block": "DS-POW-5",
+   "pool": "theocracy",
+   "vid": 1,
+   "marks": [],
+   "text": "The {seat} at {settlement} rules by its faith: every decision is checked against doctrine first, and only then against what the town needs.",
+   "admits": [
+    "an occupation (\"nothing it decides stands without the occupiers' approval\")"
+   ],
+   "why": "declares []"
+  },
+  {
+   "rule": "7x.occupied-seat",
+   "desk": "power",
+   "block": "DS-POW-5",
+   "pool": "merchant_league",
+   "vid": 1,
+   "marks": [],
+   "text": "The {seat} at {settlement} is run by the houses that keep the account books, and it decides things the way a business does: by what pays.",
+   "admits": [
+    "an occupation (\"nothing it decides stands without the occupiers' approval\")"
+   ],
+   "why": "declares []"
+  },
+  {
+   "rule": "7x.occupied-seat",
+   "desk": "power",
+   "block": "DS-POW-5",
+   "pool": "FLAG: secularBrutalism",
+   "vid": 1,
+   "marks": [
+    "garrison",
+    "no sacredHouse"
+   ],
+   "text": "{settlement} is ruled by force. Soldiers carry out the {seat}'s orders, and no temple or priest stands between the town and the punishment.",
+   "admits": [
+    "an occupation (\"nothing it decides stands without the occupiers' approval\")"
+   ],
+   "why": "declares [\"garrison\",\"no sacredHouse\"]"
+  },
+  {
+   "rule": "7x.occupied-seat",
+   "desk": "power",
+   "block": "DS-POW-7",
+   "pool": "a RULING bloc, consolidated",
+   "vid": 1,
+   "marks": [],
+   "text": "A working majority sits at {settlement} with the {seat} inside it; what the hall decides is decided by that combination and announced by the {seat}.",
+   "admits": [
+    "an occupation (\"nothing it decides stands without the occupiers' approval\")"
+   ],
+   "why": "declares []"
+  }
+ ],
+ "crown": [
+  {
+   "rule": "6e.crown",
+   "file": "src/data/cultureProfiles.js",
+   "line": 239,
+   "text": "Household leaders and law speakers bargain in assembly beneath a chieftain or royal representative.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/data/faceHonorifics.js",
+   "line": 217,
+   "text": "the royal governor",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/data/faceHonorifics.js",
+   "line": 295,
+   "text": "the royal governor",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/data/foundingSeeds.js",
+   "line": 89,
+   "text": "The Crown That Will Not Hold",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/data/institutionDescColour.js",
+   "line": 234,
+   "text": "Turns refined precious metal into standard coin. It runs only under noble or royal charter, and earns the granting authority no small revenue.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/data/institutionDescColour.js",
+   "line": 235,
+   "text": "Coin of uniform standard struck from refined precious metal. A noble or royal charter is required, and the grant brings its holder considerable revenue.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/data/institutionDescColour.js",
+   "line": 387,
+   "text": "A governor appointed by king or duke holds sway, and the city runs as a noble fief.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/data/institutionDescColour.js",
+   "line": 388,
+   "text": "Rule falls to a royal or ducal appointee, the city being worked as a noble's fief.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/data/institutionDescColour.js",
+   "line": 399,
+   "text": "The crown governs the city from here, in person or through a royal governor. The standing is high, and so is the scrutiny.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/data/institutionDescColour.js",
+   "line": 400,
+   "text": "The crown governs here at first hand, whether the monarch sits in it or a viceroy does. Great prestige, and no less watchfulness.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/data/institutionDescVariants.js",
+   "line": 307,
+   "text": "A weekly sale of local goods. A charter from crown or lord is required.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/data/institutionDescVariants.js",
+   "line": 594,
+   "text": "Duties are taken here on goods passing through the port or the main roads. Royal or municipal officers run it.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/data/institutionDescVariants.js",
+   "line": 595,
+   "text": "Levies charged on all trade in and out by road or harbour, collected by officials of crown or town.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/data/institutionDescVariants.js",
+   "line": 622,
+   "text": "Turns refined precious metal into standard coin. It runs only under noble or royal charter, and earns the granting authority no small revenue.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/data/institutionDescVariants.js",
+   "line": 623,
+   "text": "Coin of uniform standard struck from refined precious metal. A noble or royal charter is required, and the grant brings its holder considerable revenue.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/data/institutionDescVariants.js",
+   "line": 1063,
+   "text": "A governor appointed by king or duke holds sway, and the city runs as a noble fief.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/data/institutionDescVariants.js",
+   "line": 1064,
+   "text": "Rule falls to a royal or ducal appointee, the city being worked as a noble's fief.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/data/institutionDescVariants.js",
+   "line": 1087,
+   "text": "The crown governs the city from here, in person or through a royal governor. The standing is high, and so is the scrutiny.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/data/institutionDescVariants.js",
+   "line": 1088,
+   "text": "The crown governs here at first hand, whether the monarch sits in it or a viceroy does. Great prestige, and no less watchfulness.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/data/institutionDescVariants.js",
+   "line": 1360,
+   "text": "Speaking Stones, paired and linked into a network, each station priced like a merchant's house and held only by the crown or the great guilds.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/data/institutionDescVariants.js",
+   "line": 1983,
+   "text": "Levies duties on goods entering and leaving via the port or main roads. Run by royal or municipal officials.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/data/institutionDescVariants.js",
+   "line": 1984,
+   "text": "Levies duties on goods entering and leaving via the port or main roads. Run by royal or municipal officials.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/data/institutionDescVariants.js",
+   "line": 1985,
+   "text": "Levies duties on goods entering and leaving by the main roads. Run by royal or municipal officials.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/data/institutionDescVariants.js",
+   "line": 1985,
+   "text": "Levies duties on goods entering and leaving via the port or main roads. Run by royal or municipal officials.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/data/institutionDescVariants.js",
+   "line": 1987,
+   "text": "Duties are taken here on goods passing through the port or the main roads. Royal or municipal officers run it.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/data/institutionDescVariants.js",
+   "line": 1988,
+   "text": "Duties are taken here on goods passing through the port or the main roads. Royal or municipal officers run it.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/data/institutionDescVariants.js",
+   "line": 1989,
+   "text": "Duties are taken here on goods passing along the main roads. Royal or municipal officers run it.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/data/institutionDescVariants.js",
+   "line": 1989,
+   "text": "Duties are taken here on goods passing through the port or the main roads. Royal or municipal officers run it.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/data/institutionDescVariants.js",
+   "line": 1991,
+   "text": "Levies charged on all trade in and out by road or harbour, collected by officials of crown or town.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/data/institutionDescVariants.js",
+   "line": 1992,
+   "text": "Levies charged on all trade in and out by road or harbour, collected by officials of crown or town.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/data/institutionDescVariants.js",
+   "line": 1993,
+   "text": "Levies charged on all trade in and out by road, collected by officials of crown or town.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/data/institutionDescVariants.js",
+   "line": 1993,
+   "text": "Levies charged on all trade in and out by road or harbour, collected by officials of crown or town.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/data/institutionDescVariants.js",
+   "line": 2226,
+   "text": "Duties are taken here on goods passing through the port or the main roads. Royal or municipal officers run it.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/data/institutionDescVariants.js",
+   "line": 2227,
+   "text": "Levies charged on all trade in and out by road or harbour, collected by officials of crown or town.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/data/institutionDescVariants.js",
+   "line": 2286,
+   "text": "Levies duties on goods entering and leaving by the main roads. Run by royal or municipal officials.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/data/institutionDescVariants.js",
+   "line": 2287,
+   "text": "Levies duties on goods entering and leaving by the main roads. Run by royal or municipal officials.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/data/institutionDescVariants.js",
+   "line": 2288,
+   "text": "Levies duties on goods entering and leaving by road. Run by royal or municipal officials.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/data/institutionDescVariants.js",
+   "line": 2288,
+   "text": "Levies duties on goods entering and leaving by the main roads. Run by royal or municipal officials.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/data/institutionDescVariants.js",
+   "line": 2290,
+   "text": "Duties are taken here on goods passing along the main roads. Royal or municipal officers run it.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/data/institutionDescVariants.js",
+   "line": 2291,
+   "text": "Duties are taken here on goods passing along the main roads. Royal or municipal officers run it.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/data/institutionDescVariants.js",
+   "line": 2292,
+   "text": "Duties are taken here on goods passing along the road. Royal or municipal officers run it.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/data/institutionDescVariants.js",
+   "line": 2292,
+   "text": "Duties are taken here on goods passing along the main roads. Royal or municipal officers run it.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/data/institutionDescVariants.js",
+   "line": 2391,
+   "text": "A weekly sale of local goods. A charter from crown or lord is required.",
+   "declared": true
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/data/institutionDescVariants.js",
+   "line": 2392,
+   "text": "A weekly sale of local goods. A charter from crown or lord is required.",
+   "declared": true
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/data/institutionDescVariants.js",
+   "line": 2393,
+   "text": "A weekly sale of local goods. A charter from crown or lord is required.",
+   "declared": true
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/data/institutionDescVariants.js",
+   "line": 2395,
+   "text": "Speaking Stones, paired and linked into a network, each station priced like a merchant's house and held only by the crown or the great guilds.",
+   "declared": true
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/data/institutionDescVariants.js",
+   "line": 2396,
+   "text": "Speaking Stones, paired and linked into a network, each station priced like a merchant's house and held only by the crown or the great guilds.",
+   "declared": true
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/data/institutionDescVariants.js",
+   "line": 2397,
+   "text": "Speaking Stones, paired and linked into a network, each station priced like a merchant's house and held only by the crown or the great guilds.",
+   "declared": true
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/data/institutionServices.js",
+   "line": 1183,
+   "text": "Govern in the name of the crown or great noble house.",
+   "declared": true
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/data/institutionServices.js",
+   "line": 1268,
+   "text": "Centre of royal administration and decision-making.",
+   "declared": true
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/data/institutionServices.js",
+   "line": 1355,
+   "text": "Proclaim laws, royal decrees, and official notices to the public.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/data/institutionalCatalog.js",
+   "line": 504,
+   "text": "Levies duties on goods entering and leaving via the port or main roads. Run by royal or municipal officials.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/data/institutionalCatalog.js",
+   "line": 1056,
+   "text": "A royal or ducal appointee governs; the city operates as a noble fief.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/data/institutionalCatalog.js",
+   "line": 1128,
+   "text": "The crown's own seat of government, held by the monarch or by a governor in the crown's name. High status, high scrutiny.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/data/npcData.js",
+   "line": 48,
+   "text": "Uses the formal royal 'we' (old habit from a previous station)",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/data/npcData.js",
+   "line": 490,
+   "text": "Become indispensable to the crown: irreplaceable, never exposed",
+   "declared": true
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/data/people/powerSentenceName.js",
+   "line": 26,
+   "text": "Crown Creditors (Noble Coalition)",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/data/spatialData.js",
+   "line": 122,
+   "text": "In a village the market square is the cleared ground where the weekly market meets. A town gets a formal paved square with a royal charter.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/data/stressPowerFaces.js",
+   "line": 48,
+   "text": "No one house speaks for it: the lords who back the crown act together.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/data/stressPowerFaces.js",
+   "line": 75,
+   "text": "Crown Creditors (Noble Coalition)",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/data/stressPowerFaces.js",
+   "line": 76,
+   "text": "No one lord speaks for it: the houses that hold the crown\\'s debt act together.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/generators/narrative/foundingRowAdmits.js",
+   "line": 117,
+   "text": "a noble granted lands by the crown and obligated to populate them",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/generators/narrative/foundingRowAdmits.js",
+   "line": 117,
+   "text": "a noble granted lands by the crown with the resources to develop them",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/generators/narrativeGenerator.js",
+   "line": 329,
+   "text": "a noble granted lands by the crown and obligated to populate them",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/generators/narrativeGenerator.js",
+   "line": 335,
+   "text": "a noble granted lands by the crown with the resources to develop them",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/generators/narrativeGenerator.js",
+   "line": 344,
+   "text": "royal decree and a century of forced investment",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/generators/npcGenerator.js",
+   "line": 401,
+   "text": "Satisfy the crown requisition order without stripping the settlement to the bone",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/generators/npcGenerator.js",
+   "line": 402,
+   "text": "Since the war began, every decision here comes back to the army, and the crown's requisition order asks for what the settlement itself needs to live.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/generators/people/mintTitles.js",
+   "line": 40,
+   "text": "the royal governor",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/generators/power/governanceNarrative.js",
+   "line": 465,
+   "text": "The crown has called in military levies from the noble houses. Two houses have complied. One has not, and has not explained why.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/generators/power/governanceNarrative.js",
+   "line": 468,
+   "text": "A noble house has begun recruiting its own soldiers beyond its traditional levy obligation. The crown has noticed and has not yet decided what to say about it.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/generators/power/governanceNarrative.js",
+   "line": 470,
+   "text": "The crown's last order took six weeks to get through the noble houses that were meant to pass it on. The crown and the nobles bargain over everything now, and e",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/generators/power/governanceNarrative.js",
+   "line": 548,
+   "text": "A noble house passed intelligence to a rival power. The crown knows. The house denies it. The crown cannot yet afford to act. It needs their levies.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/generators/power/governanceNarrative.js",
+   "line": 616,
+   "text": "The crown owes the noble houses more than it can repay. Three of its decisions this year were reversed after private meetings with the lords it owes, and nobody",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/generators/power/governingStressVignettes.js",
+   "line": 71,
+   "text": "The garrison has doubled and the crown pays its bills, so contracts for grain, leather and ironwork go to anyone who can fill them. ",
+   "declared": true
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/generators/power/governingStressVignettes.js",
+   "line": 77,
+   "text": "Conscription has taken the workers, and every household is short-handed. Crown supply carts take what they need first, and local needs come second. Prices have ",
+   "declared": true
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/generators/power/rulingStructure.js",
+   "line": 354,
+   "text": "A duke or duchess governs the metropolis by royal appointment; the city is the administrative capital of a large territory.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/generators/power/rulingStructure.js",
+   "line": 383,
+   "text": "A noble governor rules by hereditary or royal appointment; the settlement has little self-governance.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/generators/power/rulingStructure.js",
+   "line": 391,
+   "text": "The crown rules here directly. How far its word carries depends on the monarch\\'s strength and on whether the nobles stay loyal.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/generators/power/rulingStructure.js",
+   "line": 515,
+   "text": "Landed families increasingly outpaced by merchant capital; they compete for council seats, marriage alliances, and royal appointments to maintain relevance.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/generators/power/rulingStructure.js",
+   "line": 520,
+   "text": "The great noble houses are the crown's military and fiscal foundation, and they know it. Royal policy is negotiated with them as much as decreed over them.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/generators/power/rulingStructure.js",
+   "line": 522,
+   "text": "Hereditary landowners whose cooperation the crown depends on for levies, taxes, and regional order. Not powerful enough to dictate, but essential enough to cour",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/generators/power/rulingStructure.js",
+   "line": 523,
+   "text": "Noble families nominally loyal to the crown, but watching which way the political wind is blowing before committing resources.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/generators/power/stressFactions.js",
+   "line": 111,
+   "text": "Noble houses backing the current crown line; their support is conditional on continued royal favour and land grants.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/generators/power/stressFactions.js",
+   "line": 125,
+   "text": "Crown Creditors (Noble Coalition)",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/generators/power/stressFactions.js",
+   "line": 129,
+   "text": "A coalition of noble houses that hold the crown's debt. They are owed money, military obligations, and political appointments. They are in no hurry to be repaid",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/generators/power/stressFactions.js",
+   "line": 139,
+   "text": " Several of these houses hold crown debt and are positioning accordingly.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/generators/power/stressFactions.js",
+   "line": 318,
+   "text": " Wartime has turned this power from a civic institution into an arm of the war. Crown authority over the war flows through military channels now.",
+   "declared": true
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/generators/power/stressFactions.js",
+   "line": 346,
+   "text": "Crown-appointed emergency body coordinating supply, conscription, and military contracting. While the war goes well, few people ask what it does.",
+   "declared": true
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/generators/power/stressFactions.js",
+   "line": 347,
+   "text": "Crown-appointed emergency body with powers over requisition, conscription, and price controls. Unpopular. Accused of favouritism in contract awards. Probably co",
+   "declared": true
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/generators/power/stressFactions.js",
+   "line": 402,
+   "text": "External or crown-appointed body with authority to verify compliance with the conversion order. Uses informants. Its definition of compliance is stricter than t",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/generators/spatialGenerator.js",
+   "line": 275,
+   "text": "Mountain capital in a high valley: tiered city climbing from the river floor to the fortress crown",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/domain/display/governanceAccount.js",
+   "line": 243,
+   "text": "${n} ${pl ? 'back' : 'backs'} the crown for as long as its favours last.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/domain/display/institutionVocabulary.js",
+   "line": 120,
+   "text": "A chartered works that strikes refined metal into standard coin. A licence from the crown or a lord and a steady source of revenue.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/domain/display/institutionVocabulary.js",
+   "line": 165,
+   "text": "Professional soldiers kept under a noble or royal banner, stationed to hold a place against real armies.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/domain/display/institutionVocabulary.js",
+   "line": 205,
+   "text": "The office that levies duties on goods moving through the port and roads, run by royal or civic officials.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/domain/display/institutionVocabulary.js",
+   "line": 269,
+   "text": "A royal or ducal appointee governing the city as a noble fief.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/domain/display/institutionVocabulary.js",
+   "line": 273,
+   "text": "A city administered directly for the crown by a governor or viceroy. High status and high scrutiny.",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/domain/display/settlementRumors.js",
+   "line": 361,
+   "text": "wages the crown cannot pay",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/domain/display/settlementRumors.js",
+   "line": 499,
+   "text": "a crown passing to another hand",
+   "declared": true
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/domain/display/stateProse/stateProseKernel.js",
+   "line": 725,
+   "text": "crown or town",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/domain/display/stateProse/stateProseKernel.js",
+   "line": 725,
+   "text": "the state or the municipality, not the tier: the customs-house variant in data/institutionDescVariants.js, whose canonical says \"royal or municipal officials\" (",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/domain/display/warAndRoadNames.js",
+   "line": 151,
+   "text": "the War of the Unsteady Crown",
+   "declared": false
+  },
+  {
+   "rule": "6e.crown",
+   "file": "src/domain/display/warAndRoadNames.js",
+   "line": 154,
+   "text": "the Hungry Crown War",
+   "declared": false
+  }
+ ],
+ "slash": [
+  {
+   "rule": "5x.label",
+   "file": "src/data/economicData.js",
+   "label": "Livestock / game"
+  },
+  {
+   "rule": "5x.label",
+   "file": "src/data/economicData.js",
+   "label": "Wool / flax"
+  },
+  {
+   "rule": "5x.label",
+   "file": "src/data/geographyData.js",
+   "label": "Desert/Arid"
+  },
+  {
+   "rule": "5x.label",
+   "file": "src/generators/steps/cascadePass.js",
+   "label": "Docks/port facilities"
+  },
+  {
+   "rule": "5x.label",
+   "file": "src/data/institutionalCatalog.js",
+   "label": "Weavers/Textile workers"
+  },
+  {
+   "rule": "5x.label",
+   "file": "src/data/institutionalCatalog.js",
+   "label": "Palace/government complex"
+  },
+  {
+   "rule": "5x.label",
+   "file": "src/data/institutionalCatalog.js",
+   "label": "Small prison/stocks"
+  },
+  {
+   "rule": "5x.label",
+   "file": "src/data/institutionalCatalog.js",
+   "label": "Colosseum/arena"
+  },
+  {
+   "rule": "5x.label",
+   "file": "src/data/resourceData.js",
+   "label": "Hot Springs / Healing Waters"
+  },
+  {
+   "rule": "5x.label",
+   "file": "src/data/resourceData.js",
+   "label": "Sage/library"
+  },
+  {
+   "rule": "5x.label",
+   "file": "src/data/resourceData.js",
+   "label": "Spa/healing house"
+  },
+  {
+   "rule": "5x.label",
+   "file": "src/generators/power/stressFactions.js",
+   "label": "Monster Hunters / Adventurers"
+  }
+ ],
+ "slotLines": 135
+}

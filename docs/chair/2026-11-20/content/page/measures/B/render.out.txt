@@ -1,0 +1,2 @@
+page-B render: 60 towns, exit codes 0,0,0,0
+exit 0

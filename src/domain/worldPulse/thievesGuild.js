@@ -16,8 +16,17 @@ import { stablePart } from './worldState.js';
 import { GUILD_TUNING } from '../corruption.js';
 import { detExp } from '../../kernel/detMath.js';
 import { clamp01 } from '../../kernel/math.js';
+import { boughtHallOldNameOfCriminalRow } from '../../data/boughtHallNames.js';
 
 const CRIMINAL_NAME_RE = /thieves|criminal|gang|smuggl|fence|black\s*market|underworld|assassin|syndicate|racket|shadow|hidden\s*hand/i;
+/** C1B (RULING-R24 R24r item 4; the owner's line: advance time does not change for a new place): the guild reads a bought
+ *  hall's birth name AS ITS OLD NAME READ, through the one home (`data/boughtHallNames.js`), so a new metropolis's "Senate"
+ *  is floored and capped as an old "Shadow Senate" was (the two council halls' old names never matched, and their new names
+ *  do not); STRICT (RULING C1B-2 (1)): only a row whose own category is criminal, never one the record marks as the user's own. @param {{ faction?: unknown, name?: unknown }} f @returns {boolean} */
+const isGuildRow = (f) => {
+  const oldName = boughtHallOldNameOfCriminalRow(f);
+  return CRIMINAL_NAME_RE.test(String(f.faction || f.name || '')) || (oldName !== null && CRIMINAL_NAME_RE.test(oldName));
+};
 const CAPTURED = new Set(['corrupted', 'capture']);
 
 /**
@@ -93,7 +102,7 @@ export function applyGuildToSettlement(settlement, strength) {
     const floor = GUILD_TUNING.powerFloorBase + s * GUILD_TUNING.powerFloorRange;
     let changed = false;
     const mapped = facs.map((f) => {
-      if (!CRIMINAL_NAME_RE.test(String(f.faction || f.name || ''))) return f;
+      if (!isGuildRow(f)) return f;
       const power = Math.max(Number(f.power) || 0, floor);
       const legitimacy = Math.min(Number.isFinite(f.legitimacy) ? f.legitimacy : 50, GUILD_TUNING.legitimacyCap);
       if (power === f.power && legitimacy === f.legitimacy) return f;

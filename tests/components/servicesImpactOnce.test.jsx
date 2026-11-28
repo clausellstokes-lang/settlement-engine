@@ -6,8 +6,13 @@
  * Services: every impaired row printed its dependency's impact sentence, and generation gives
  * every dependency of a settlement one impact (economicState.js :: generateEconomicState), so
  * "No trade access: running on existing stockpiles only." printed once per severed chain. Each
- * distinct impact now prints once, on the first row that carries it, followed by the chains it
- * covers; every row keeps its own "Needs {resource}" (TRIM-2's Economics pattern).
+ * distinct impact now prints once, on the first row that carries it; every row keeps its own
+ * "Needs {resource}" (TRIM-2's Economics pattern).
+ *
+ * RE-KEYED (R2-CODE-B item 1, 2026-11-13; the chair's ruling: the page states facts and never the
+ * machinery; the cold list REVIEW-W2A-3 #865): the "· covers Timber, Trade access + grain, …" tail
+ * that followed the impact listed the dependency keys the sentence was grouped over. It no longer
+ * prints. The identity this pin holds is unchanged: one impact, printed once, every row its need.
  */
 import { afterEach, beforeAll, describe, expect, test } from 'vitest';
 import { cleanup, render } from '@testing-library/react';
@@ -50,8 +55,8 @@ beforeAll(() => {
 }, 600000);
 afterEach(cleanup);
 
-describe('X-50: the Services impact line prints once, followed by the chains it covers', () => {
-  test('a Services tab with two or more severed chains prints each impact once, with every chain named after it', () => {
+describe('X-50: the Services impact line prints once, and no list of dependency keys follows it', () => {
+  test('a Services tab with two or more severed chains prints each impact once, with no covers list after it', () => {
     const offenders = [];
     let multi = 0;
     for (const { seed, text, impacts, needLines } of SERVICES) {
@@ -61,12 +66,10 @@ describe('X-50: the Services impact line prints once, followed by the chains it 
         multi += 1;
         const n = countOf(text, impact);
         if (n !== 1) { offenders.push(`${seed}: printed ${n}x: ${impact}`); continue; }
-        // every severed chain the line covers is named after it, on the one row that prints it
-        const chains = [...new Set(carriers.map((l) => l.slice('Needs '.length).split(impact)[0].trim()))];
+        // the one row that prints the impact ends with it: no "· covers …" machinery after it
         const head = needLines.find((l) => l.includes(impact)) || '';
         const after = head.slice(head.indexOf(impact) + impact.length);
-        const missing = chains.filter((c) => !after.includes(c));
-        if (missing.length) offenders.push(`${seed}: the line names no ${missing.join(', ')} after it: ${head}`);
+        if (/covers/.test(after)) offenders.push(`${seed}: a covers list follows the impact: ${head}`);
       }
     }
     expect(multi, 'no rendered Services tab had two rows under one impact').toBeGreaterThan(5);

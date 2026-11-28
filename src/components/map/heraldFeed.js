@@ -228,7 +228,7 @@ export function buildHeraldFeed(campaign, opts = {}) {
       const label = labelOf(stressor);
       file(toHeraldItem({
         ...stressor,
-        headline: label ? `${label} has lifted` : 'A recorded pressure has lifted',
+        headline: label ? `${label} has lifted` : 'A trouble in the realm has passed',
       }));
     }
   }
@@ -264,7 +264,7 @@ export function buildHeraldFeed(campaign, opts = {}) {
         stressor,
         headline: label
           ? `${label}, in living memory`
-          : 'A past pressure remains in living memory',
+          : 'An old trouble is still talked of',
       }));
     } else if (ACTIVE_UI_STAGES.has(stage)) {
       file(toHeraldItem({

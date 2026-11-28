@@ -109,11 +109,17 @@ export function SettlementPDF({
   // caller — the campaign book, the foundry module, every hand-built test document —
   // byte-identical, because each chapter renders nothing for an absent map.
   stateProse = null,
+  // The governance paragraph's primary stress, ranked by the CALLER (generators/stressPriority.js), as stateProse is:
+  // src/pdf may not reach src/generators (the print boundary) and the domain may not either (MERGE-TRAIN, 2026-11-09).
+  // Null: the paragraph takes the record's first stress.
+  primaryStress = null,
 }) {
   const safe = settlement || {};
   const vm = buildViewModel({
     settlement, aiSettlement, aiDailyLife, narrativeMode,
     systemState, eventLog, phase, campaign,
+    // the DM's own dossier carries the DM view (Power Structure's last block; design §9)
+    dmView: true,
   });
   const useAi = vm.narrativeMode;
   const variantSpec = PDF_VARIANTS[variant] || PDF_VARIANTS.canon_dossier;
@@ -182,7 +188,10 @@ export function SettlementPDF({
     >
       {inc('cover')               && <Cover                settlement={safe} narrativeMode={useAi} vm={vm} isFounder={isFounder} isAnonymous={isAnonymous} now={now} />}
       {inc('toc')                 && <TableOfContents      settlement={safe} narrativeMode={useAi} entries={tocEntries} />}
-      {inc('overview')            && <Overview             settlement={safe} narrativeMode={useAi} vm={vm} stateProse={stateProse} />}
+      {/* ⛔ ONE HOME PER EXPORT (STYLE-RULINGS-2 B4, the chair's ruling (2) of 2026-11-09): a variant
+          without History (campaign_state) prints the tension descriptions and the historical
+          character on the Overview in full; with it, the Overview carries their labels. */}
+      {inc('overview')            && <Overview             settlement={safe} narrativeMode={useAi} vm={vm} stateProse={stateProse} historyPrinted={inc('historyFounding')} />}
       {inc('tonightAtTheTable')   && <TonightAtTheTable    settlement={safe} narrativeMode={useAi} vm={vm} />}
       {showState                  && <SystemStateSnapshot  settlement={safe} narrativeMode={useAi} vm={vm} causalDetail={stateCausalDetail} />}
       {inc('plotHooks')           && <PlotHooks            settlement={safe} narrativeMode={useAi} vm={vm} stateProse={stateProse} />}
@@ -190,7 +199,7 @@ export function SettlementPDF({
       {inc('institutions')        && <Institutions         settlement={safe} narrativeMode={useAi} vm={vm} />}
       {inc('economicsTrade')      && <EconomicsTrade       settlement={safe} narrativeMode={useAi} vm={vm} stateProse={stateProse} />}
       {inc('resourcesProduction') && <ResourcesProduction  settlement={safe} narrativeMode={useAi} vm={vm} stateProse={stateProse} />}
-      {inc('powerStructure')      && <PowerStructure       settlement={safe} narrativeMode={useAi} vm={vm} stateProse={stateProse} />}
+      {inc('powerStructure')      && <PowerStructure       settlement={safe} narrativeMode={useAi} vm={vm} stateProse={stateProse} primaryStress={primaryStress} />}
       {inc('defenseSecurity')     && <DefenseSecurity      settlement={safe} narrativeMode={useAi} vm={vm} stateProse={stateProse} />}
       {inc('viabilityAssessment') && <ViabilityAssessment  settlement={safe} narrativeMode={useAi} vm={vm} stateProse={stateProse} />}
       {inc('npcQuickRef')         && <NPCQuickRef          settlement={safe} narrativeMode={useAi} vm={vm} />}

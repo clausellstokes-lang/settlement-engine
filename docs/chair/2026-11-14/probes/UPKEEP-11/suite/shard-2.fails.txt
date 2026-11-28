@@ -1,0 +1,11 @@
+ FAIL  tests/lint/newsHeadlineContract.walker.test.js > complete Wizard News address and headline rewrite contract
+ FAIL  tests/build/landingFixtureFreshness.test.js > the landing fixture is the engine at the committed seed > a fresh derivation reproduces the committed module BYTE FOR BYTE
+ FAIL  tests/build/landingFixtureFreshness.test.js > the landing fixture is the engine at the committed seed > the script's own --check arm agrees, and is wired to say how to fix it
+ FAIL  tests/generators/nameHeldThroughAssembly.test.js > EM-R4 — the settlement name is held through assembly > A1 — EM-R4: inert with no pins: the golden corpus and an empty bag leave every byte where it was
+ FAIL  tests/property/editCorpusRatchet.test.js > the edit corpus ratchet: the re-entry seam and the merge over the 63-row corpus > A3 no merged object mixes a taken leaf with a settled leaf outside a declared consistency group
+ FAIL  tests/property/editCorpusRatchet.test.js > the edit corpus ratchet: the re-entry seam and the merge over the 63-row corpus > A4 the town keeps its invariants, the layer channel escalates nothing, and the config channel is named
+ FAIL  tests/property/editCorpusRatchet.test.js > the edit corpus ratchet: the re-entry seam and the merge over the 63-row corpus > A5 a chain is deterministic, undo then re-edit reproduces the town, and the ordered pairs are counted
+ FAIL  tests/property/editCorpusRatchet.test.js > the edit corpus ratchet: the re-entry seam and the merge over the 63-row corpus > A8 the family declared instruments hold at this seam
+ FAIL  tests/ui/defenseTabFlow.test.js > T2-24 — magic does not function: no arcane provision, no magic-dependence reading > STOP-2: no "Arcane defense" force group (screen or print) in a dead-magic world, alchemist or not
+ Test Files  5 failed | 541 passed (546)
+      Tests  8 failed | 6944 passed | 36 skipped (6988)

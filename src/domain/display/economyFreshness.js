@@ -115,6 +115,8 @@
  */
 
 import { RERUN_KEYS_FOR_EVENT } from '../events/registryRerunKeys.js';
+import { speakTierNoun } from './stateProse/stateProseKernel.js';
+import { tierNounFor } from './stateProse/weaveBlock.js';
 
 /** The derived economy read-models the stale window leaves ungrown. */
 const ECONOMY_READMODEL_KEYS = ['services', 'activeChains', 'economicState'];
@@ -186,8 +188,8 @@ export function economyShiftSinceSurvey(settlement) {
  * @type {Readonly<Record<'tallies'|'catalog', string>>}
  */
 export const ECONOMY_FRESHNESS_SENTENCES = Object.freeze({
-  tallies: "Events recorded after this settlement's last survey may not be fully counted in these tallies yet.",
-  catalog: "Events recorded after this settlement's last survey may not be fully counted in this catalog yet.",
+  tallies: "Something has changed in this town since these tallies were taken, and it may not show in them yet.",
+  catalog: "Something has changed in this town since this list of houses and services was drawn up, and it may not show on it yet.",
 });
 
 /**
@@ -200,5 +202,8 @@ export const ECONOMY_FRESHNESS_SENTENCES = Object.freeze({
  */
 export function economyFreshnessNote(settlement, variant = 'tallies') {
   if (!economyShiftSinceSurvey(settlement).shifted) return null;
-  return ECONOMY_FRESHNESS_SENTENCES[variant] || ECONOMY_FRESHNESS_SENTENCES.tallies;
+  // THE TIER NOUN (SW-9, the audit's A11 row): "this town" printed in a thorp. The constant keeps the
+  // corpus's own noun (the annex's canonical rows resolve to these bytes); the reader speaks the tier's.
+  const tier = settlement && typeof settlement === 'object' ? /** @type {{ tier?: unknown }} */ (settlement).tier : null;
+  return speakTierNoun(ECONOMY_FRESHNESS_SENTENCES[variant] || ECONOMY_FRESHNESS_SENTENCES.tallies, tierNounFor(tier));
 }

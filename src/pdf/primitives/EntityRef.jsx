@@ -39,6 +39,7 @@
 import { Link, Text } from '@react-pdf/renderer';
 import { palette } from '../theme.js';
 import { safe } from '../lib/format.js';
+import { institutionHouseLabel } from '../../domain/display/institutionDisplayName.js';
 
 // Gold-accent link styling — mirrors EntityLink's on-screen treatment (the
 // `palette.gold` accent, bold weight) so a printed cross-reference reads as the
@@ -66,17 +67,21 @@ export function anchorTarget(index, id) {
   return entry?.anchor || undefined;
 }
 
-export function EntityRef({ id, index, type: _type, fallback = '', verbatim = false, style }) {
+export function EntityRef({ id, index, type, fallback = '', verbatim = false, style }) {
   const entry = id && index?.resolve ? index.resolve(id) : null;
+  // ROUND THREE, ruling (a): a reference to a HOUSE prints the house's label, the one display leaf
+  // the page's EntityLink reads too (no catalogue count range, household range, gate or condition).
+  const house = (entry?.type || type) === 'institution';
+  const printed = (/** @type {string} */ t) => (house && t ? institutionHouseLabel(t) : t);
 
   // Broken / unresolved id -> plain text, never a dead anchor.
   if (!entry) {
-    const text = safe(fallback);
+    const text = safe(printed(fallback));
     return text ? <Text style={style}>{text}</Text> : null;
   }
 
   // A pronoun link keeps the wrapped word; a name link resolves the live name.
-  const label = safe(verbatim ? fallback : (entry.currentName || fallback || entry.label || ''));
+  const label = safe(verbatim ? fallback : printed(entry.currentName || fallback || entry.label || ''));
   return (
     <Link src={`#${entry.anchor}`} style={{ ...LINK_STYLE, ...style }}>
       {label}

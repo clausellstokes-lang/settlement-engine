@@ -328,9 +328,9 @@ offered by default; the second is where a section composer may also draw.
 1. `[street · cut]` The market at {settlement} runs thin; the routes turned elsewhere when the {route} closed with the war, and they have not come back. *(the owner's DOSSIER calibration sentence, slotted per R-DOS-C. ONE recorded alteration: the owner's "turned **east**" renders here as "turned **elsewhere**" — the family's records carry that the houses took their custom away, and carry no direction, so a compass word would assert a fact no member receipt holds. Recorded rather than quietly paraphrased; a chair who reads the direction as flavour rather than assertion can restore it in one edit.)*
 2. `[ledger · cut]` The {good} in {settlement}'s stores is counted every week now and the count goes one way; nothing has come up the {route} out of {counterpart} but rumour {timeband_since}.
 3. `[visitor · closer]` {settlement}'s warehouses are fuller than a town this size should manage, and the fullness is not the harvest: what {counterpart} was owed was taken on the {route} and entered here as lawful seizure.
-4. `[elder · closer]` {settlement} keeps the {route} shut against {counterpart} for {reason}, and the closing is {timeband_age}; the clerks who file the gate returns have never filed anything else.
-5. `[unfolding · closer]` What {settlement} could not carry off the field it is taking in {term} instead: {counterpart} delivers the {good} by the season, and the deliveries are the war's bill, still being paid.
-6. `[counterforce · closer]` The {route} to {counterpart} is closed and {settlement}'s market does not show it; the tie was never worth the closing, and both towns' ledgers say the same thing about it.
+4. `[elder · closer]` {settlement} has kept the {route} shut against {counterpart} for {reason}, and the closing is {timeband_age}: nobody now working the gate has seen it open.
+5. `[unfolding · closer]` {settlement} could not win the war outright, so it takes payment under {term} instead: {counterpart} delivers the {good} every season, and the deliveries will keep coming until the war is paid for.
+6. `[counterforce · closer]` The {route} to {counterpart} is closed and {settlement}'s market does not miss it: the stalls carry the same goods at the same prices, because little ever came down that road.
 
 ---
 
@@ -342,10 +342,10 @@ offered by default; the second is where a section composer may also draw.
 **SLOTS:** `{settlement}` `{counterpart}` `{house}` `{band}` `{good}` `{route}`
 
 1. `[ledger · aggrieved]` {settlement}'s embargo against {counterpart} stands and has cost the town {band} of its own custom; the hall is still being asked to say why it was worth it.
-2. `[street · aggrieved]` The town holds that {counterpart} means to take the {good} trade whole and speaks of little else; {house}'s books at {settlement} say otherwise, and the books are not what the street is reading.
+2. `[street · aggrieved]` The talk in {settlement} is that {counterpart} means to take the whole {good} trade; {house}'s books say otherwise, but nobody in the market has asked to see them.
 3. `[visitor · aggrieved]` {settlement} keeps soldiers at a crossing that has no fort and never wanted one: the {good} lane changed hands there, and the town answered a matter of tolls with banners.
 4. `[elder · aggrieved]` {settlement}'s quarrel with {counterpart} has outlasted its own subject: it was born of one contested crossing on the {route}, and nobody here can now name the season it stopped being about the road.
-5. `[counterforce · aggrieved]` {settlement} has a cause against {counterpart} that it will not press: too much of what the town eats comes down that road, and the seat has entered its reason for the restraint every season the question was raised.
+5. `[counterforce · aggrieved]` {settlement} has a grievance against {counterpart} and will not press it: too much of what the town eats comes down that road, and the hall says so every season the question is raised.
 6. `[unfolding · aggrieved]` The embargo {settlement} laid on {counterpart} is doing what the hall meant it to do and something else besides: the custom it costs this town is being made up on other roads, and {house}, which found those roads, is in no hurry to see the quarrel end.
 
 ---
@@ -358,11 +358,11 @@ offered by default; the second is where a section composer may also draw.
 **SLOTS:** `{settlement}` `{counterpart}` `{creed}` `{rival_creed}` `{timeband_since}` `{timeband_age}`
 
 1. `[street · occupied]` The rite kept at {settlement} is the soldiers' rite; it came in with {counterpart}'s garrison, and the altar was raised before the walls were mended.
-2. `[ledger · occupied]` {settlement}'s seat keeps the town and not its good name: the change of observance was imposed, and the market has never once stopped saying by whose order.
-3. `[visitor · occupied]` A stranger at {settlement} finds {creed}'s house on the main street and {rival_creed}'s feasts on a narrower one; the arrangement is {timeband_age} and dates from the winter the column stayed.
+2. `[ledger · occupied]` {settlement}'s rulers still hold the town but not its respect: the change of observance was imposed, and the market still says whose order it was.
+3. `[visitor · occupied]` {creed}'s house stands on {settlement}'s main street and {rival_creed}'s feasts are kept on a narrower one; the arrangement is {timeband_age} and dates from the winter the column stayed.
 4. `[elder · occupied]` The young at {settlement} have no memory of the older observance, though it was the town's own {timeband_since}; the garrison brought what replaced it and stayed long enough for the replacing to take.
-5. `[unfolding · occupied]` {settlement}'s seat is still paying for the welcome it gave that winter. The standing it lost when the rite changed has not come back, and every season it does not is entered.
-6. `[counterforce · occupier]` {settlement}'s own altars stand as they stood, for all that the town took the field and took {counterpart}: no banner ever proved a god, and nothing at all was taken from {creed}.
+5. `[unfolding · occupied]` {settlement}'s rulers are still paying for the welcome they gave that winter: they lost the town's trust when the rite changed, and they have not won it back.
+6. `[counterforce · occupier]` {settlement} won its war with {counterpart} and kept its own altars: nobody changed the rite, and {creed} lost nothing to the victory.
 
 ---
 
@@ -374,11 +374,11 @@ offered by default; the second is where a section composer may also draw.
 **SLOTS:** `{settlement}` `{counterpart}` `{faction}` `{temple}` `{reason}` `{term}` `{timeband_span}`
 
 1. `[street · claimant]` {settlement} counts {counterpart} heretic rather than merely foreign and the muster is called on the counting; the quarrel dates from the split at {temple}, when one creed became two.
-2. `[ledger · claimant]` The claim {settlement} holds against {counterpart} is good and the {term} is better: the town may abhor its neighbour's rite and may not march on it while the pact stands, and the refusal is entered each time it is asked for.
+2. `[ledger · claimant]` {settlement} has a real grievance against {counterpart}'s rite but cannot march while the {term} stands, and the hall refuses each time it is asked.
 3. `[visitor · claimant]` {settlement} is a town at muster with no enemy at its gate; the enemy is a rite kept at {counterpart}, which {temple} preached against and {faction} took up.
-4. `[counterforce · claimant]` No claim stands entered at {settlement} against anybody, for {reason}: the town cannot agree at its own altars, and what will not hold a rite together will not carry a banner out.
-5. `[elder · claimant]` The rite at {settlement} and the rite at {counterpart} have been one rite through {timeband_span}; nothing sacred has ever stood between the two towns to be pressed, and the older hands here take that as a fact of the place rather than a decision anyone made.
-6. `[counterforce · claimant]` {settlement}'s register names no patron, and {counterpart}'s names none either; the claim that turns a rite into a muster has never had a rite here to start from, and neither town has found a quarrel in the blank.
+4. `[counterforce · claimant]` {settlement} has made no holy claim against anyone, for {reason}: its own congregations cannot agree on a rite, so they cannot agree on a war either.
+5. `[elder · claimant]` {settlement} and {counterpart} have kept the same rite through {timeband_span}, and no holy quarrel has ever stood between them.
+6. `[counterforce · claimant]` Neither {settlement} nor {counterpart} keeps a patron god, so there is no holy cause for either town to march on.
 
 ---
 
@@ -392,9 +392,9 @@ offered by default; the second is where a section composer may also draw.
 1. `[ledger · emptied]` {settlement} is {band} smaller than it was and not one soul is unaccounted for; the register has them taken, fled, or entered in the dead, all of it from the season the column came.
 2. `[street · emptied]` The quarter nearest the {route} at {settlement} stands empty and is not being rebuilt; what left it went out in columns the season of the sack, and the register names where every one of them went.
 3. `[visitor · receiving]` A quarter of {settlement} is called by another town's name; the people in it came out of {counterpart} {timeband_since} with the column behind them, and nobody has changed the name back.
-4. `[elder · receiving]` {settlement} has been short of both quiet and bread since it took in what came off the {route} that year; those who arrived had chosen the town for the first of them.
+4. `[elder · receiving]` {settlement} has been short of bread and short of peace since it took in the people who came off the {route} that year; peace was what they came here for.
 5. `[unfolding · emptied]` The towns down the {route} still tell the version of what happened at {settlement} that the road gave them; the story got there ahead of any clerk, and nothing written since has caught it up.
-6. `[counterforce · emptied]` The roll of {settlement}'s named people is unchanged for all that the town was put to the sack: scattered to {band} roads, every one of them still somewhere, and the register says so.
+6. `[counterforce · emptied]` {settlement} was sacked and lost none of its people for good: they scattered down {band} roads, and every family can say where its own went.
 
 ---
 
@@ -405,12 +405,12 @@ offered by default; the second is where a section composer may also draw.
 **ARMS:** `pressed` (the lean town) · `target`
 **SLOTS:** `{settlement}` `{counterpart}` `{reason}` `{timeband_since}`
 
-1. `[ledger · pressed]` {settlement}'s court has entered land and grain as its reason against {counterpart} and the reason stands on the record in those words; the survey the court did not read puts the pressure lower.
-2. `[street · pressed]` The talk at {settlement} is that the realm has run out of room and {counterpart}'s fields are the answer; the pressure the town would march on was believed and not measured, and the receipt says so in plain words.
+1. `[ledger · pressed]` {settlement}'s court says it needs {counterpart}'s land and grain; nobody at court has read the survey, which puts the need lower.
+2. `[street · pressed]` The talk in {settlement} is that the realm has run out of room and {counterpart}'s fields are the answer; nobody has counted either the fields or the mouths.
 3. `[visitor · pressed]` {settlement} wants a war it cannot pay for: the same lean years that made the appetite took the muster with them, and the seat holds a grievance with nothing behind it.
-4. `[elder · pressed]` {settlement} has carried the grievance against {counterpart} {timeband_since} without ever spending it, and a grievance with nothing behind it has a way of being remembered longer than one that got spent.
-5. `[unfolding · pressed]` The lean years turned {settlement}'s court toward {counterpart}'s valley and have not turned it back; what carries the argument is the court's own picture of that plenty, and the picture is wrong.
-6. `[counterforce · pressed]` {settlement} is as lean as it has ever been and holds no cause against anybody for it: the pressure sits on the rolls and in the granary and has never once reached the court's reasons, and the court's own entry gives {reason} and names no enemy.
+4. `[elder · pressed]` {settlement} has held its grudge against {counterpart} {timeband_since} and never acted on it, and an unspent grudge is remembered longer than a spent one.
+5. `[unfolding · pressed]` The lean years turned {settlement}'s court toward {counterpart}'s valley, and it still talks of the plenty there; the valley is not as rich as the court believes.
+6. `[counterforce · pressed]` {settlement} is as hungry as it has ever been and blames nobody for it; the court gives {reason} and names no enemy.
 
 ---
 
@@ -421,12 +421,12 @@ offered by default; the second is where a section composer may also draw.
 **ARMS:** `discounted` (the town caught out) · `neighbour`
 **SLOTS:** `{settlement}` `{counterpart}` `{route}` `{timeband_age}`
 
-1. `[ledger · discounted]` Nothing {settlement} says at a table is banked at face any more; the garrison it claimed proved thinner than the claim, and the walls held where the credit did not.
+1. `[ledger · discounted]` Nobody takes {settlement}'s word at a table any more: it claimed a garrison it did not have, and its neighbours found out.
 2. `[street · discounted]` Nobody at {settlement} expects the war to end at a table, and the reason is not one the town enjoys saying aloud: both courts have been caught in a lie, and neither will take the other's word now even where the word is good.
 3. `[visitor · discounted]` What {settlement} knows of {counterpart} is {timeband_age} and comes in with whoever still risks the crossing; the front has had the {route} closed since the season turned.
-4. `[unfolding · discounted]` Every offer {settlement} has made since the bluff was called is read at a discount, and the discount has outlasted the reason for it; the town negotiates against its own record.
+4. `[unfolding · discounted]` Since its bluff was called, {settlement}'s neighbours check every offer it makes twice, and its envoys come home with worse terms than the town's strength deserves.
 5. `[street · neighbour]` The season's news at {settlement} is whatever the army left in the taprooms it drank at coming down the {route}; half of it is wrong, and the wrong half is the half that gets repeated.
-6. `[counterforce · discounted]` {settlement} is taken at its word at every table it sits at, for all that it is at war: nothing it has ever claimed about its own strength proved thinner than the claim, and the discount its neighbours carry does not attach here.
+6. `[counterforce · discounted]` {settlement} is at war and its word is still good at every table: it has never claimed more strength than it had.
 
 ---
 
@@ -437,12 +437,12 @@ offered by default; the second is where a section composer may also draw.
 **ARMS:** `marching` (the town that acted on the belief) · `target`
 **SLOTS:** `{settlement}` `{counterpart}` `{npc}` `{house}`
 
-1. `[ledger · marching]` {settlement}'s war against {counterpart} rests on a fact that is in nobody's record: the word that reached the court was shaped before it left, and the whole picture of the affront was built on it.
+1. `[ledger · marching]` {settlement} went to war with {counterpart} over an affront nobody can now show: the report that reached the court was shaped before it was sent.
 2. `[street · marching]` The column is on the road and {settlement} believes the walls at {counterpart} are thin; the walls are not, and the belief is the only thing the march was ever built on.
-3. `[unfolding · marching]` What {settlement} carries out of the season is an enemy it did not have before and an account of the choosing it cannot now unsay; the wall it was told was thin was not thin.
-4. `[counterforce · marching]` No column has left {settlement} over this and none will: the town's own people had walked the same ground the tale described, their account was on hand before the tale was, and the {house} that placed it is out of pocket for the trouble.
+3. `[unfolding · marching]` {settlement} has come out of the season with a new enemy and nothing to show for it: the wall it was told was thin held.
+4. `[counterforce · marching]` No column has left {settlement} over the tale: the town's own people had walked that ground and said otherwise first, and {house}, which paid to spread the tale, is out of pocket.
 5. `[elder · marching]` `[dm-only]` {settlement} is short the soldiers it spent on a weakness at {counterpart} that was never there; the sale sits on the record with {npc}'s name against it, and the town has never been told.
-6. `[visitor · marching]` A stranger at {settlement} finds a town at war and nobody in it who can say plainly what the affront was: the court holds a picture of it, the picture arrived already shaped, and there is no record underneath that carries the fact.
+6. `[visitor · marching]` {settlement} is at war and nobody in it can say plainly what the affront was: the court has a story, the story came from outside already shaped, and nobody has checked it.
 
 ---
 
@@ -454,11 +454,11 @@ offered by default; the second is where a section composer may also draw.
 **SLOTS:** `{settlement}` `{counterpart}` `{war}` `{term}` `{timeband_span}` `{timeband_since}`
 
 1. `[ledger · payer]` {settlement}'s granary stands half-empty: the bill of the tribute year, still being paid. *(the owner's DOSSIER calibration sentence, slotted per R-DOS-C)*
-2. `[street · payer]` The tribute goes out of {settlement} on a schedule the town had no hand in setting and has through {timeband_span}; the clerks who file the receipts stopped noting anything unusual about the arrangement long ago.
-3. `[visitor · victor]` {counterpart} has been delivering to {settlement} {timeband_since} what {settlement} could not take on the field, and delivers it under {term}; the document that left that room is the only instrument standing between the two towns.
-4. `[ledger · victor]` {settlement} holds terms cut to the margin it believed it held, and the belief is written on the document beside them; nobody has since asked whether the margin was real.
+2. `[street · payer]` The tribute leaves {settlement} on a schedule the town had no say in and has through {timeband_span}; it goes out on the same day each season and nobody remarks on it now.
+3. `[visitor · victor]` {counterpart} has delivered to {settlement} {timeband_since} under {term}, payment for a war {settlement} could not win outright, and that paper is all that keeps the two towns from fighting again.
+4. `[ledger · victor]` {settlement} signed terms on the strength it thought it had, and nobody has since checked whether it had it.
 5. `[counterforce · victor]` {settlement} keeps no term with {counterpart} and owes it nothing for all that the {war} is over: neither side could show a clear win, so there is no tribute, no passage and nothing to keep.
-6. `[elder · payer]` The old hands at {settlement} measure a full granary against a year none of them chose: the tribute has gone out through {timeband_span}, and nobody under a certain age here has seen the stores as they stood before the terms.
+6. `[elder · payer]` The tribute has gone out of {settlement} through {timeband_span}, and nobody under a certain age has ever seen the granary full.
 
 ---
 
@@ -469,10 +469,10 @@ offered by default; the second is where a section composer may also draw.
 **ARMS:** `bound` (the town the term binds) · `holder`
 **SLOTS:** `{settlement}` `{counterpart}` `{faction}` `{term}` `{timeband_span}`
 
-1. `[ledger · bound]` {settlement} has the grievance and the muster and cannot move: the {term} {counterpart} holds forbids it while it stands, and every refusal is on the record with the term that made it.
+1. `[ledger · bound]` {settlement} has the grievance and the muster and cannot march: the {term} with {counterpart} forbids it, and the hall says so each time the question is raised.
 2. `[street · bound]` The war party at {settlement} is made of the paying. The town has delivered to {counterpart} through {timeband_span}, and {faction}, which grew out of that strain, now holds the hall.
 3. `[visitor · bound]` {settlement} keeps a muster it never uses and a quarrel it never presses; the two towns have been at each other's throats through {timeband_span} and have not once come to arms.
-4. `[unfolding · holder]` {settlement} has entered {counterpart}'s missed delivery as cause, and a defaulted peace angers here exactly as a broken one would; the delivery refused is the one the {term} was built on.
+4. `[unfolding · holder]` {counterpart} missed a delivery under the {term}, and {settlement} is as angry as if the peace had been broken outright: that delivery was the one the whole {term} rested on.
 5. `[elder · bound]` The older hands at {settlement} note that nobody ever released the town from anything. The {term} simply ran out its week, and what it had forbidden became possible again without a word said.
 6. `[counterforce · bound]` {settlement} keeps a {term} with {counterpart} that costs it nothing to keep: the deliveries are made, the hall has never been asked for more than it agreed to, and no party at {settlement} has grown out of the paying.
 
@@ -485,12 +485,12 @@ offered by default; the second is where a section composer may also draw.
 **ARMS:** `home` (the town whose seat is at stake)
 **SLOTS:** `{settlement}` `{counterpart}` `{npc}` `{faction}` `{timeband_since}`
 
-1. `[ledger · home]` The seat at {settlement} is paying for the war out of its own standing: the reinforcements sent to {counterpart}'s front were charged against it, and the hall counts heads differently than it did {timeband_since}.
+1. `[ledger · home]` The hall at {settlement} sent reinforcements to {counterpart}'s front and the town blames it for every one; its support has been falling {timeband_since}.
 2. `[street · home]` Another levy has gone out of {settlement} for a war the town is not winning, and the hall will not hear the war spoken of kindly; when {faction} moves, the war is the thing it will move on.
 3. `[visitor · home]` {settlement}'s assembly is arguing about a climb-down rather than a defeat: the seat took the terms at {counterpart}'s gate rather than spend another season, and the town read that as the loss.
-4. `[counterforce · home]` {settlement}'s seat has lost the room and not the hall: the war it is prosecuting is spoken of badly in every quarter of the town, and {faction}, which carries the anger, has never held what it would take to turn anger into a vote.
-5. `[unfolding · home]` {npc} holds the seat at {settlement} by a war and not by a following: the seat was weak when it was taken, {counterpart} is the answer to a question nobody here had asked, and the answer is still being paid for.
-6. `[elder · home]` The hall at {settlement} has not spoken well of a war {timeband_since}, and the caution belongs to the room rather than to the seat in it: the last one cost the seat that fought it, and every seat since has counted heads before it counted enemies.
+4. `[counterforce · home]` {settlement}'s rulers are hated for the war in every quarter, but {faction}, which carries the anger, has never had the votes to bring them down.
+5. `[unfolding · home]` {npc} holds {settlement}'s seat because of the war, not a following: the seat was weak when {npc} took it, the war with {counterpart} made it look strong, and the town is still paying for the war.
+6. `[elder · home]` The hall at {settlement} has not spoken well of a war {timeband_since}: the last war cost its ruler the seat, and every ruler since has counted votes before counting enemies.
 
 ---
 
@@ -501,7 +501,7 @@ offered by default; the second is where a section composer may also draw.
 **ARMS:** `home` (the town whose hall changed hands)
 **SLOTS:** `{settlement}` `{counterpart}` `{npc}` `{faction}` `{house}` `{reason}` `{route}` `{term}` `{timeband_span}`
 
-1. `[ledger · home]` {settlement} now offers what it refused before the hall changed hands: the new seat read the war with {counterpart} again, and {reason} stands on the entry.
+1. `[ledger · home]` {settlement} now offers {counterpart} the terms it refused before the hall changed hands; the new ruler looked at the war again and gives {reason}.
 2. `[street · home]` The people at {settlement} pressing hardest for the war are the town's own and not {counterpart}'s: {faction} grew out of what the {term} costs here, and the hall long ago stopped calling that a foreign quarrel.
 3. `[visitor · home]` Nobody arriving at {settlement} would guess the seat here ever argued against this war; it has prosecuted the thing through {timeband_span}, having lost the hall on the question in its first season.
 4. `[counterforce · home]` {settlement} is at war and the peace {npc} carried home is dead in its own hall: the bloc that took the vote had never wanted it, and entered its reasons on the record rather than let the thing pass quietly.
@@ -518,11 +518,11 @@ offered by default; the second is where a section composer may also draw.
 **SLOTS:** `{settlement}` `{house}` `{temple}` `{reason}` `{good}` `{route}` `{creed}` `{timeband_span}`
 
 1. `[street · receiving]` {creed} keeps a house at {settlement} and nobody was sent to plant it; it came the way everything comes here: down the {route} with the {good}, in the hands of carters.
-2. `[ledger · funding]` {house} carries a fortune and a stain on the same page: it bought cheap while {settlement} went hungry, gave a share to {temple}, and the reckoning entered against it has not been struck off.
+2. `[ledger · funding]` {house} grew rich buying cheap while {settlement} went hungry, then gave a share to {temple}; the town has not forgiven it.
 3. `[visitor · receiving]` The newer observance at {settlement} has the wide street and the older one keeps its feasts on a narrower; the change took {timeband_span} and came in with the {good} trade rather than with any preaching.
 4. `[street · funding]` {temple} at {settlement} thanks {house} from the altar for the grain of the hungry season, which was rather the point; the market has not once stopped saying how the grain was afforded.
 5. `[counterforce · funding]` {temple} at {settlement} carries no endowment from {house} and owes it nothing: the offer went back down the road it came up, for {reason}, and the chapter is said to have voted it twice.
-6. `[counterforce · receiving]` {temple}'s house at {settlement} stands on money the town has never had an account of, and nothing is held against it on that score; the reckoning that would do the holding was never entered, and no reckoning enters itself.
+6. `[counterforce · receiving]` {temple}'s house at {settlement} was built with money nobody has accounted for, and nobody has asked.
 
 ---
 
@@ -537,7 +537,7 @@ offered by default; the second is where a section composer may also draw.
 2. `[street · principled]` The {good} still moves at {settlement}, thinly, by people who do not discuss it; the trade with {counterpart} fell to what conscience would bear when {temple} entered its abhorrence.
 3. `[visitor · principled]` The {good} that moves openly at {counterpart}'s gate is searched for at {settlement}'s, and the seizure book here has filled faster than the trade it was written to stop.
 4. `[unfolding · principled]` The houses that used to carry the {good} honestly at {settlement} are carrying something else now; the embargo pushed the run onto the smugglers' lanes and has kept it there.
-5. `[counterforce · principled]` {settlement}'s trade with {counterpart} has fallen as far as it is going to fall and has not fallen to nothing; conscience priced the {good} and never got the last word over what the town eats, and the ledger shows plainly where the two of them settled.
+5. `[counterforce · principled]` {settlement}'s trade with {counterpart} has shrunk but not stopped: people object to the house there, but they still need the {good}.
 6. `[elder · principled]` The carts run to {counterpart} again and no envoy, term or ceremony brought them back: the house {settlement} had objected to closed, the abhorrence had nothing left to price, and {timeband_since} the lane is simply a lane.
 
 ---
@@ -549,12 +549,12 @@ offered by default; the second is where a section composer may also draw.
 **ARMS:** `hungry` (the town the road fed) · `surplus`
 **SLOTS:** `{settlement}` `{band}` `{route}` `{timeband_since}`
 
-1. `[ledger · hungry]` {settlement} is burying more than it births and the reason entered on the roll is bread and not sickness; the import fell a band when the {route} was taken, and then another.
+1. `[ledger · hungry]` {settlement} is burying more than it births, and the burial register gives hunger, not sickness, as the cause: the grain coming in fell when the {route} was taken, and has fallen again since.
 2. `[street · hungry]` Every question at {settlement} this season ends at the granary door, and it ends there because the {route} that fed the town is cut and nothing has taken its place.
 3. `[visitor · surplus]` {settlement} has a surplus and a road, and {band} have walked to it {timeband_since}; the town took in what it had room for and turned the rest back at the landing, each with the reason written down and given to them.
-4. `[elder · hungry]` The gap in {settlement}'s register is the granary arithmetic told again in burials, season by season and in the same hand.
-5. `[counterforce · hungry]` {settlement}'s gate still writes down arrivals it cannot account for, with the {route} shut and no house owning the run; what comes in fits in the margin of the page, and it has never once been nothing.
-6. `[unfolding · hungry]` {settlement} is still burying at the rate the cut {route} set and the rate has not turned with the season: what the import fell by is what the roll falls by, a band behind, and the granary word is still the word that binds.
+4. `[elder · hungry]` The gap in {settlement}'s register follows the empty granary: the burials rise each season the grain runs short.
+5. `[counterforce · hungry]` Even with the {route} shut, a few strangers still turn up at {settlement}'s gate, and the gate writes each one down.
+6. `[unfolding · hungry]` {settlement} is still burying at the rate the cut {route} set: the grain that stopped coming is counted in graves a season later.
 
 ---
 
@@ -565,12 +565,12 @@ offered by default; the second is where a section composer may also draw.
 **ARMS:** `growing` · `emptied`
 **SLOTS:** `{settlement}` `{band}` `{reason}` `{good}` `{route}` `{timeband_span}`
 
-1. `[ledger · growing]` {settlement} has {band} more mouths than its last count and the {good} carts come oftener than the road was built for; the column that came up the {route} is entered as a trade flow now: the same feet, in a different book.
+1. `[ledger · growing]` {settlement} has {band} more mouths than its last count and the {good} carts come oftener than the road was built for; the people who came up the {route} now work the trade.
 2. `[street · growing]` The talk at {settlement} has stopped calling the {good} run a novelty and calls it the trade; the arrivals wanted more of it than the old road had ever been asked to carry, and the carriers who answered inside {timeband_span} have not gone home.
-3. `[visitor · growing]` A stranger at {settlement} looks for the reason a town stands here and does not find it in the ground; the carts were stopping at this meeting of roads before there was anything to stop for, and the town filled in around them.
-4. `[unfolding · growing]` {settlement} is emptying on the very reckoning that filled it, and the emptying has not slowed; the granary was the true ceiling of the boom, and the roads have been slow to learn it.
+3. `[visitor · growing]` Nothing in {settlement}'s ground explains why a town stands here: the carts were stopping at this crossroads before there was anything to stop for, and the town grew up around them.
+4. `[unfolding · growing]` {settlement} is emptying as fast as it filled: the granary could never feed the crowd the roads brought, and people are only now learning it.
 5. `[elder · emptied]` The market at {settlement} runs thin and the routes turned elsewhere; the town was wiped out by the {reason} that followed the hungry year, and the trade withered with it. *(the tail of the owner's TELLING-register exemplar, re-anchored to the standing condition per the dossier register; the sibling annex holds the narrated form)*
-6. `[counterforce · growing]` {settlement} has a plenty that is real and smaller than the road's account of it, and a column at the gate that came on the account; those who came late are entered as unplaced, with the reason given to them honestly.
+6. `[counterforce · growing]` {settlement} has plenty, but less than the stories on the road say, and a crowd at the gate that came on those stories; the late-comers are told plainly there is no room.
 
 ---
 
@@ -583,10 +583,10 @@ offered by default; the second is where a section composer may also draw.
 
 1. `[ledger · knowing]` What {settlement} knows of {counterpart} came in with the {good} and is exactly as old as the journey; the brokers price it accordingly and say so on the stamp.
 2. `[street · knowing]` Nobody at {settlement} still says {counterpart}'s harvest failed; the carts came in carrying grain and contradiction together, and the say did not outlive them.
-3. `[visitor · knowing]` A stranger asking at {settlement} for word off the {route} is given something {timeband_age} and told plainly that it is; the town has had nothing newer since the season turned, and does not wait for it.
-4. `[unfolding · knowing]` {house} at {settlement} acted on a letter that was current when it left {counterpart} and old when it arrived, and is paying for the difference still; the town has learned what a hop costs.
+3. `[visitor · knowing]` Ask in {settlement} for word off the {route} and you get news {timeband_age}, and are told so; nothing newer has come since the season turned.
+4. `[unfolding · knowing]` {house} at {settlement} acted on a letter from {counterpart} that was out of date by the time it arrived, and is still paying for it.
 5. `[counterforce · knowing]` {settlement}'s gate keeps the arrivals off the {route} in a list, and the list is why the town never moved on the report about {counterpart}: {band} separate carriers were asked the same question at the same gate, and not one told the story the way it had arrived.
-6. `[elder · knowing]` The old brokers at {settlement} price a report by the road it came up before they price it by the hand that wrote it: the town has been wrong about {counterpart} often enough to have learned exactly what a journey costs a fact.
+6. `[elder · knowing]` {settlement}'s old brokers ask which road a report came by before they ask who wrote it: the town has been wrong about {counterpart} often enough.
 
 ---
 
@@ -601,8 +601,8 @@ offered by default; the second is where a section composer may also draw.
 2. `[street · market]` The carts out of {settlement} have all turned east on a saying that the {good} is dear there; nothing in the town's own book supports it, and the carts went anyway.
 3. `[visitor · market]` {house}'s doors at {settlement} are shut and the books were sound: the word ran that the house was over-extended, the depositors came for their credit at once, and it could not pay what it never owed.
 4. `[counterforce · market]` The stalls at {settlement} are quoting {house} at the terms they quoted last season: the rumour ran its course in the taverns and never reached the book that sets the price.
-5. `[unfolding · market]` `[dm-only]` {faction}'s stamp at {settlement} costs it more each season than the {good} it was meant to move: the shortage it announced never appeared on a single manifest.
-6. `[elder · market]` `[dm-only]` {settlement}'s book carries the buying before the saying and each entry proper on its own page: {npc} had the {good} up before the word came, and the word came on schedule.
+5. `[unfolding · market]` `[dm-only]` {faction} at {settlement} announced that the {good} was running short, though no cargo list ever showed it, and each season people trust its word less.
+6. `[elder · market]` `[dm-only]` {settlement}'s market books show {npc} bought up the {good} before the talk of a shortage began; the talk came right on time, and the town has been paying shortage prices for a shortage that never came.
 
 ---
 
@@ -613,12 +613,12 @@ offered by default; the second is where a section composer may also draw.
 **ARMS:** `proposer` · `counterparty`
 **SLOTS:** `{settlement}` `{counterpart}` `{reason}` `{good}`
 
-1. `[ledger · proposer]` {settlement} sends {good} to {counterpart} and receives its own in return, written into one document with a direction on every line; the want crossed the line the clerks watch, and the seat sent on the strength of it.
+1. `[ledger · proposer]` {settlement} and {counterpart} trade {good} under one written agreement; {settlement} needed it badly enough to ask, and its rulers signed.
 2. `[street · proposer]` {settlement} and {counterpart} are at peace and mean to stay so, and this town's carters have arranged their year around it; {settlement} came to that court with a draft instead of a grievance, for {reason}.
-3. `[visitor · proposer]` A stranger who reads {settlement}'s standing instrument with {counterpart} finds no war anywhere behind it; the want of {good} on one side and the surplus of it on the other are the whole of the reason, and both courts were at peace when they wrote.
-4. `[counterforce · proposer]` The draft {settlement} and {counterpart} exchanged is filed at both ends and signed at neither; each court priced the thing for itself, neither price met the other's, and the two valuations sit in the record where the pact would have been.
-5. `[counterforce · proposer]` {settlement} and {counterpart} keep one instrument between them and it carries the {good} term only; the security clause the same want argued for could not stand beside what was already written, and the clerks entered why rather than letting it fall out of the record.
-6. `[unfolding · proposer]` The pact {settlement} proposed to {counterpart} is signed and this town's carters have already arranged their year around it; what crossed the clerks' line was a want, and the want has not gone away because a document answered it.
+3. `[visitor · proposer]` {settlement}'s agreement with {counterpart} has no war behind it: one town lacked {good}, the other had too much, and both were at peace when they signed.
+4. `[counterforce · proposer]` The agreement {settlement} and {counterpart} drafted is signed by neither: each court wanted a better price than the other would give.
+5. `[counterforce · proposer]` {settlement} and {counterpart} share one agreement and it covers the {good} only; a defence clause was dropped because it clashed with promises already made.
+6. `[unfolding · proposer]` The pact {settlement} proposed to {counterpart} is signed and the carters have already planned their year around it; the town still needs what it asked for as much as it did.
 
 ---
 
@@ -632,7 +632,7 @@ offered by default; the second is where a section composer may also draw.
 1. `[ledger · bound]` {settlement}'s outbound entries for the {good} are written before the season opens, because a term settles what leaves and the clerks have only to date it; the town's whole trade in it reads as a schedule rather than a market.
 2. `[street · owed]` {settlement} speaks of {counterpart} now the way it would speak of a town that broke a peace; the deliveries simply stopped, and a term broken over cargo cuts here exactly as one broken over a border would.
 3. `[visitor · bound]` The stalls at {settlement} are thin and the town is not hungry: the {good} goes out under a term that never reaches past the reserve, and the reserve is the whole reason nobody here goes without.
-4. `[unfolding · owed]` {counterpart}'s default stands at {settlement} as compliance, because nobody was watching the crossing; the town is the poorer for a fiction that suits everybody who could correct it.
+4. `[unfolding · owed]` {counterpart} has stopped delivering and {settlement} still counts it as paid, because nobody was watching the crossing; the town is poorer for it, and nobody who could correct it wants to.
 5. `[elder · bound]` The {good} no longer comes to {settlement} out of {counterpart} and no quarrel took it away: the term ran its full course through {timeband_span} and expired on its week, the carts kept the lane out of habit, and {timeband_since} the carters go where the terms are.
 6. `[counterforce · bound]` {settlement} owes the {good} under a term and has never once been short of it: what the clause takes sits well above the town's own floor, and no season yet has brought the two figures near each other.
 
@@ -651,12 +651,12 @@ house bought the office or owns the road — the wealth is the named cause on a
 contest the house won, and "purchase" appears only as the crowd's own word for
 a ledgered credit, attributed as such.
 
-1. `[ledger · seated]` The hall at {settlement} seats a merchant and the books show the order plainly and lawfully: the {good} fortune first, the credit extended to the seat second, the contest {house} won third. Each entry proper on its own page, one hand behind all of them.
-2. `[street · seated]` The hall at {settlement} is a founding in the clerks' book and a purchase in the town's mouth, and {house}'s season in the {good} trade stands behind the seating either way.
+1. `[ledger · seated]` A merchant sits in {settlement}'s hall, and the hall's account books show how: {house} made a fortune in the {good} trade, lent to the town's rulers, then won the contest for the seat.
+2. `[street · seated]` The clerks call {house}'s place in {settlement}'s hall lawful; the town says it was bought with a season's profit in the {good} trade.
 3. `[visitor · seated]` There is no vote worth the calling at {settlement} that {house} has not already counted; the takings off the {route} are what put it in a position to count them.
-4. `[unfolding · seated]` The grievance entered at {settlement} is the bill for a hall that answers to {house}, and {faction} has been asking {timeband_since} who is to answer for a founding.
-5. `[counterforce · seated]` There is nothing in {settlement}'s hall record to point at, which is the shape the thing takes here: {house} asks for nothing openly and is refused nothing.
-6. `[elder · seated]` The seat of {settlement} carries a grievance without the creditor that earned it: what ruined {house} did not spare the hall that had leaned on it, and {timeband_since} the second half of that arrangement is all the town has.
+4. `[unfolding · seated]` {settlement}'s hall answers to {house}, and {faction} has been asking {timeband_since} who gave the house that power.
+5. `[counterforce · seated]` Nothing in {settlement}'s hall records points to {house}: it asks for nothing openly and is never refused.
+6. `[elder · seated]` {settlement}'s ruler leaned on {house}'s money, and when {house} was ruined the debts stayed with the hall; {timeband_since} the town has had the grievance and no creditor to blame.
 
 ---
 
@@ -667,11 +667,11 @@ a ledgered credit, attributed as such.
 **ARMS:** `court` (the town with the troubled seat)
 **SLOTS:** `{settlement}` `{counterpart}` `{faction}` `{house}` `{good}`
 
-1. `[ledger · court]` {house} has marked its appetite for {settlement} down a band with the hall's standing written in as the reason; the {good} goes to {counterpart} instead, and the clerks here have an entry for the pricing and none at all for what did not come.
+1. `[ledger · court]` {house} has cut back its dealings with {settlement} because of the trouble in the hall; the {good} now goes to {counterpart} instead.
 2. `[street · court]` The terms at {settlement} are worse this season and nothing was refused to make them so; everyone trading here knows which quarrel did it.
-3. `[visitor · court]` Credit closes early at {settlement} and the price is the harder one: the bill for a court in crisis, charged by houses that read the hall before they read the road.
-4. `[elder · court]` It is the oldest counterweight a town has: the crowd's grievance against the seat is also the countinghouse's discount, scored off one page by two readers; {faction} calls it prudence and the hall calls it desertion, and both are reading the same line.
-5. `[unfolding · court]` The seat at {settlement} keeps two books and read the wrong one aloud; {house} keeps a third, and it is the third that decides whether the {good} moves at all.
+3. `[visitor · court]` Credit closes early at {settlement} and costs more: lenders have heard about the trouble in the hall and charge for it.
+4. `[elder · court]` The crowd's anger at the hall is also why the lenders are pulling back; {faction} calls it prudence and the hall calls it desertion.
+5. `[unfolding · court]` {settlement}'s rulers have told the town one thing and their books say another; {house} keeps its own count, and that count decides whether the {good} moves at all.
 6. `[counterforce · court]` The hall at {settlement} is in the worst trouble it has been in and the {good} still comes at the ordinary price: {house} reads the road here and not the hall, and its books carry no entry for the quarrel at all.
 
 ---
@@ -688,9 +688,9 @@ no creed ever orders a column. Population moves on push, pull and flight physics
 only, and no variant below has anyone commanding a departure.
 
 1. `[ledger · emptying]` {settlement} has its quiet, and it has {band} shuttered houses on the temple street; the rite was put down here, the keeping of it cost more than the leaving, and the congregation walked.
-2. `[street · emptying]` Nothing in {settlement}'s record orders the departure and no column stands anywhere in it; the households went one at a time on the ordinary physics of leaving, and only the tax roll noticed the street had emptied.
+2. `[street · emptying]` No one was told to leave {settlement}: the households went one at a time, and only the tax collector noticed the street had emptied.
 3. `[visitor · receiving]` {settlement} carries a grudge it had no part in earning, along with the households and the trades that brought it: the town took in the persecuted out of {counterpart}.
-4. `[street · receiving]` The shrine road at {settlement} fills for the feast and empties after it: the season is two economies wearing one road, and this town counts the beds while {counterpart} counts the offerings.
+4. `[street · receiving]` The shrine road at {settlement} fills for the feast and empties after it: this town earns from the beds, {counterpart} from the offerings.
 5. `[unfolding · emptying]` The temple street at {settlement} has not refilled {timeband_since}, and the tax roll is where the town first learned it would not.
 6. `[counterforce · emptying]` {settlement} keeps a full tax roll and an unemptied temple street for all that the rite was put down here: the households that kept it stayed, and the cost of leaving stood higher than the cost of keeping quiet.
 
@@ -703,12 +703,12 @@ only, and no variant below has anyone commanding a departure.
 **ARMS:** `adopting` (the town whose calendar changed)
 **SLOTS:** `{settlement}` `{counterpart}` `{temple}` `{reason}` `{timeband_span}` `{timeband_since}`
 
-1. `[ledger · adopting]` {settlement} keeps a feast that is not its own: the households out of {counterpart} brought it, and the clerks have entered where it came from honestly and in the same hand as the rest.
+1. `[ledger · adopting]` {settlement} keeps a feast that is not its own: the families from {counterpart} brought it, and the town calendar says so.
 2. `[street · adopting]` The rite the newcomers carried stands on {settlement}'s calendar beside the old ones {timeband_since}; they came for the grain and stayed for want of anywhere better.
-3. `[visitor · adopting]` {settlement} keeps days it no longer sorts into its own and other people's; it never converted, it stopped remarking which rite it was keeping, and a stranger cannot now tell which of the days on the calendar the town brought with it.
-4. `[unfolding · adopting]` The pews at {settlement} are where the {reason} left them and nobody decided it: the danger emptied the market and filled {temple}, the danger passed and the comfort did what comfort does, and neither motion was anybody's.
-5. `[counterforce · adopting]` A trickle plants nothing: it took {timeband_span} of arrivals out of one place before {settlement}'s calendar would carry their day, and the households that first asked for it had been paying the town's tithes a long while by then.
-6. `[elder · adopting]` Nobody at {settlement} under a certain age can say which of the town's feasts came in with the newcomers: the calendar took them {timeband_since}, the clerks entered where each of them came from, and that entry is the only place the difference still lives.
+3. `[visitor · adopting]` {settlement} keeps its newcomers' holy days alongside its own and no longer remembers which are which.
+4. `[unfolding · adopting]` The pews at {settlement} are still as full as the {reason} left them: fear emptied the market and filled {temple}, and when the danger passed the people kept coming.
+5. `[counterforce · adopting]` It took {timeband_span} of arrivals before {settlement}'s calendar would carry the newcomers' feast, and by then they had been paying the town's tithes for years.
+6. `[elder · adopting]` Nobody young in {settlement} can say which feasts came with the newcomers, though the calendar took them {timeband_since}; only the old calendar book still records where each came from.
 
 ---
 
@@ -726,10 +726,10 @@ attributed as belief is always the OTHER end's picture, and the asymmetry is
 deliberate — dramatic irony is the product.
 
 1. `[ledger · misread]` {counterpart} still writes {settlement} down as devout and the picture is {timeband_age}; the town changed its patron in a quiet season and announced it to nobody.
-2. `[street · misread]` Every courtesy that comes to {settlement} out of {counterpart} is addressed to the place the old altar made, and nobody here has thought it worth a letter.
+2. `[street · misread]` Letters from {counterpart} still greet {settlement} as a devout town, and nobody here has written to say the old altar is gone.
 3. `[visitor · reader]` {counterpart} sits in {settlement}'s books as a house of the faithful, on the strength of a report that said so and has not been renewed; it was honest when it was written, is stale now, and will be acted on regardless.
 4. `[elder · misread]` {settlement}'s shrine is shut and stands in {counterpart}'s books as full: the report that said so was honest and is {timeband_age}, and the doors closed after it was written.
-5. `[unfolding · reader]` Belief about a neighbour's gods decays here like belief about anything else: {settlement} is not wrong about {counterpart}, it is late, and the lateness is what the next decision will be made on.
+5. `[unfolding · reader]` {settlement} still thinks of {counterpart}'s faith as it used to be; the picture is out of date, and the next decision will be made on it.
 6. `[counterforce · misread]` {counterpart} has {settlement} written down exactly as {settlement} is: a party came through after the patron changed, wrote what it found at {temple}, and the picture on that side has not had time to go stale.
 
 ---
@@ -747,11 +747,11 @@ dossier shows both; no variant below joins them as fact, and the ledger charges
 the reader.
 
 1. `[street · reading]` {temple} at {settlement} reads the hunger as wrath and the town believed the reading through {timeband_span}; the granaries emptied all the same, and the harvest that followed was ordinary.
-2. `[ledger · reading]` {settlement}'s record carries the {reason} in one entry and the reading of the {reason} in another, side by side and separately attributed; the clerks keep them apart deliberately.
-3. `[unfolding · reading]` The reading has cost {temple} more standing at {settlement} than the calamity ever cost the fields, and it is costing still; the ledger charges the reader, and never the god.
+2. `[ledger · reading]` {settlement}'s chronicle notes the {reason} as it happened and, separately, what {temple} said it meant, so anyone who reads it can see where the priests' telling parts from the season itself.
+3. `[unfolding · reading]` The reading has cost {temple} more respect at {settlement} than the calamity cost the fields, and it is costing still.
 4. `[elder · reading]` Nothing {temple} said that year has been revisited at {settlement}, though the rain came when the temple said it would not; the town has gone on keeping the feast.
 5. `[counterforce · unlensed]` {settlement} keeps no altar and reads no omen: the bad season is entered here as weather, and the town was neither comforted nor charged for it.
-6. `[visitor · reading]` A stranger at {settlement} is told what the hunger meant before being told how bad it was: the reading is {temple}'s and the town offers it as the town's own, and the entry recording the season says only that the season was bad.
+6. `[visitor · reading]` Visitors to {settlement} are told what the hunger meant before they are told how bad it was: the reading is {temple}'s, though the town tells it as its own.
 
 ---
 
@@ -764,7 +764,7 @@ the reader.
 
 1. `[ledger · party]` The peace {settlement} keeps with {counterpart} was drafted in neither hall: {temple} stood between them, and the terms are in a hand that answers to no court.
 2. `[street · party]` Nobody at {settlement} calls it a treaty. The two towns keep the same feast, and the road between them has been quiet for as long as the feast has been shared.
-3. `[visitor · broker-town]` A stranger notices {settlement}'s chapter house before its guardhouse; the brothers who carry terms down the road to {counterpart} are the busiest men in the place, and nobody here thinks that strange.
+3. `[visitor · broker-town]` {settlement}'s chapter house is busier than its guardhouse: the brothers who carry terms down the road to {counterpart} are the busiest men in the place.
 4. `[elder · party]` The old hands at {settlement} remember when a shared rite was only a shared rite; it has been the working part of the peace with {counterpart} for {timeband_span}, and the two halls have not needed to speak directly in all of it.
 5. `[counterforce · party]` {settlement} and {counterpart} keep the same {creed} from opposite sides of a schism, and that is precisely why nothing is signed: the one thing the two towns hold in common is the thing neither can bring to a table.
 6. `[unfolding · broker-town]` The pilgrimage right {settlement} granted is being honoured and the honouring has changed the town. The road fills at the same week each year now, and the inns along it were built after the fact.
@@ -780,10 +780,10 @@ the reader.
 
 1. `[ledger · granting]` The chapter house on {settlement}'s east road is open by term and not by welcome; the town signed the access away at the war's end, and the door stands open because a clause says so.
 2. `[street · granting]` {creed} is preached at {settlement} lawfully and heard by almost nobody. It arrived with a signature rather than with a conviction, and the town has never stopped knowing the difference.
-3. `[visitor · granting]` A stranger at {settlement} is told twice, unprompted, that the new observance was a condition of peace: the town will keep the term and will not be mistaken for having chosen it.
+3. `[visitor · granting]` Visitors to {settlement} are told twice, unprompted, that the new observance was a condition of peace: the town keeps the term and will not have it said that it chose it.
 4. `[unfolding · granting]` What {settlement} took from {temple} is back in {temple}'s hands, complete and entered, and the hall still describes the restitution as a debt rather than as a repair; the terms that required it were accepted and have not been forgiven since.
 5. `[elder · granted]` The tolerance guarantee {settlement} holds is {timeband_age} and nobody alive here remembers arguing about it. What was extracted from a beaten town has become simply how the town is.
-6. `[counterforce · granted]` {settlement} holds its access at {counterpart} and holds nothing else: the pews there fill at the rate they always did, and the term bought a door rather than a believer.
+6. `[counterforce · granted]` {settlement} won the right to worship at {counterpart} and nothing more: the pews there fill no faster than before.
 
 ---
 
@@ -795,11 +795,11 @@ the reader.
 **SLOTS:** `{settlement}` `{temple}` `{reason}` `{timeband_since}`
 
 1. `[street · patron]` The seat at {settlement} rules with the temple behind it, and it shows in how little argument it needs; instruction that would be debated elsewhere is simply carried out.
-2. `[ledger · patron]` {settlement}'s hall is spending standing it did not have to spend. It set itself against {temple} over {reason}, and every week of the quarrel costs it in the one account it cannot borrow against.
-3. `[visitor · patron]` A stranger works out {settlement}'s order of things quickly: announcements are made at the temple door and the seat stands beside them rather than in front.
+2. `[ledger · patron]` {settlement}'s hall has set itself against {temple} over {reason}, and every week of the quarrel costs it support it does not have to spare.
+3. `[visitor · patron]` In {settlement}, announcements are made at the temple door, and the ruler stands beside the priests, not in front of them.
 4. `[elder · patron]` {settlement} has unseated a ruler over an altar before, and the hall has never quite stopped behaving as though it could happen again. The caution belongs to the town, not to this seat.
 5. `[counterforce · secular]` {settlement} keeps no patron and the temple's favour moves nothing here: the hall neither borrows standing from the altar nor loses any to it, and a quarrel between them would be a quarrel between strangers.
-6. `[unfolding · patron]` The mandate at {settlement} has been sliding {timeband_since} and the seat is holding on by arithmetic rather than by consent; the succession question is being asked aloud now, which is the part that does not go back.
+6. `[unfolding · patron]` Support for {settlement}'s ruler has been sliding {timeband_since}, and people now ask aloud who comes next.
 
 ---
 
@@ -812,10 +812,10 @@ the reader.
 
 1. `[street · home]` There are two congregations at {settlement} and one of them meets in a barn; the seat went after the tithe {timeband_since}, and a quarrel about money finished as a quarrel about doctrine.
 2. `[ledger · home]` {temple}'s books at {settlement} are {band} lighter than they were, and the shortfall has a domestic cause: the hall took the tithe rights to a contest and won a part of them.
-3. `[visitor · home]` A stranger at {settlement} asking where to make an offering gets two answers and a pause; the town has not agreed on which house speaks for {creed} since the seat pressed the question.
+3. `[visitor · home]` Ask in {settlement} where to make an offering and you get two answers and a pause: since the ruler pressed the tithe question, the town cannot agree which house speaks for {creed}.
 4. `[elder · home]` The old hands at {settlement} can name the season the argument stopped being about revenue. It has been {timeband_span}, and the two halves still keep separate feasts, which is how the town knows the split took.
-5. `[counterforce · home]` The tithe at {settlement} stands where it stood and {temple} keeps one congregation: the hall leaned and the temple did not break, and the seat spent standing to learn what it could have counted.
-6. `[unfolding · home]` The stain the church quarrel left on {settlement}'s seat is fading, slowly and on its own schedule, and the faction that lost the contest is waiting it out rather than conceding it.
+5. `[counterforce · home]` The tithe at {settlement} is where it was and {temple} still has one congregation: the hall pushed, the temple held, and the hall lost support for nothing.
+6. `[unfolding · home]` The stain the church quarrel left on {settlement}'s seat is fading, slowly and on its own schedule, and the power that lost the contest is waiting it out rather than conceding it.
 
 ---
 
@@ -829,7 +829,7 @@ the reader.
 1. `[street · learning]` News reaches {settlement} the way everything else does: behind the column, up the {route}, and a size larger than it left.
 2. `[ledger · learning]` {settlement} learns what has happened at {counterpart} from the people leaving it, which means the hall works from an account that arrived with an interest in being believed.
 3. `[visitor · learning]` A traveller at {settlement}'s gate is asked for news before being asked for a name; the town sits far enough down the {route} that arrivals are its only fast channel, and everybody here knows it.
-4. `[elder · learning]` The old hands at {settlement} discount by habit: a {band} departure out of {counterpart} was told here as an exodus, and the town has learned to halve whatever comes in on foot.
+4. `[elder · learning]` {settlement}'s old hands discount by habit: a {band} departure from {counterpart} was told here as an exodus, and they halve whatever comes in on foot.
 5. `[counterforce · learning]` Nothing has come up the {route} from {counterpart} in {timeband_span} (not people, and therefore not word), and {settlement}'s picture of its neighbour is exactly as old as the silence.
 6. `[unfolding · learning]` The column that passed {settlement} {timeband_since} left a story behind it that has grown at every hand since, and the town is still repeating a version nobody who walked it would recognise.
 
@@ -858,11 +858,11 @@ the reader.
 **ARMS:** `crowded` (the town proposing) · `destination`
 **SLOTS:** `{settlement}` `{counterpart}` `{band}`
 
-1. `[ledger · crowded]` {settlement} has {band} more hands than work and has taken the matter to a table rather than to the road: the labor compact with {counterpart} is this town exporting a pressure before it becomes a crisis.
+1. `[ledger · crowded]` {settlement} has {band} more hands than work, so its rulers have signed a labour agreement to send them to {counterpart} before they take to the road.
 2. `[street · crowded]` Half the young at {settlement} have somewhere lawful to go, which is new; the crowding got bad enough that the hall went and negotiated a door.
-3. `[visitor · crowded]` A stranger finds the compact posted at {settlement} where the levy notices used to be. The town treats a signed right of passage as its own business now, not as foreign business.
+3. `[visitor · crowded]` The labour agreement is posted in {settlement} where the levy notices used to hang.
 4. `[counterforce · crowded]` {settlement} is crowded and holds no compact for it: a draft sits unsigned in the hall, the town wanted the room and did not want to need {counterpart} for it, and the same crowding that opened the talks is what closed them.
-5. `[counterforce · crowded]` {settlement} has no settlement provision and not for want of asking: the terms were reachable at the table and the road that would carry anybody there is not, so the thing was refused on the ground rather than on the argument.
+5. `[counterforce · crowded]` {settlement} has no resettlement agreement, though it asked: the terms could be had, but there is no safe road to take the people there.
 6. `[elder · crowded]` The old hands at {settlement} remember when leaving was a private decision. It has been a matter of terms since the crowding, and the hall counts departures the way it counts grain.
 
 ---
@@ -875,8 +875,8 @@ the reader.
 **SLOTS:** `{settlement}` `{counterpart}` `{route}` `{timeband_span}`
 
 1. `[street · receiving]` Half {settlement}'s new quarter is here on paper before it is here on foot: a settlement provision signed with {counterpart}, and the {route} has been delivering against it ever since.
-2. `[ledger · receiving]` {settlement}'s intake is a contracted figure now: departures, arrivals, the ones turned back and the ones still walking all reconcile against a term, and the hall audits the road the way it audits a granary.
-3. `[visitor · receiving]` A newcomer at {settlement} is asked for a permit rather than for a reason; the town charters entry under the compact, and the grade on the paper answers before anyone speaks.
+2. `[ledger · receiving]` {settlement} takes in a fixed number of newcomers under its agreement, and the hall counts arrivals, departures and those turned back as closely as it counts grain.
+3. `[visitor · receiving]` Newcomers at {settlement} are asked for a permit, not a reason: entry is by agreement, and the paper decides before anyone speaks.
 4. `[counterforce · receiving]` The compact promises {settlement} hands it has not received. The terms are being honoured and the road is empty anyway. Nobody walks that far for so little better, and no clause can make them.
 5. `[elder · receiving]` {settlement} has been taking people in under signature for {timeband_span}, and the accent in the lower town is the compact's rather than the country's.
 6. `[unfolding · receiving]` The quarter the compact built at {settlement} is full and asking for a voice, and the hall has not decided whether a chartered arrival is a townsman: the term settled the coming and said nothing about the staying.
@@ -891,11 +891,11 @@ the reader.
 **SLOTS:** `{settlement}` `{reason}` `{timeband_since}`
 
 1. `[ledger · home]` There is a petition standing at {settlement}'s hall and a crowd standing behind it; the seat's own conduct is what put it there, and the paper names the conduct.
-2. `[street · home]` {settlement}'s square fills and empties again without anything happening. The grievance is real, and the town is still on the polite rung of it.
-3. `[visitor · home]` A stranger arriving at {settlement} at the wrong hour finds the market closed and the hall doors shut; the town has been gathering rather than trading since the seat stopped answering.
-4. `[counterforce · home]` {settlement} has a grievance and no petition, because the hall answered the first one: the seat gave less than was asked and gave it early, and the ladder never went past its bottom rung.
+2. `[street · home]` {settlement}'s square fills with people and empties again without anything happening; the grievance is real, and so far it is still polite.
+3. `[visitor · home]` Arrive at {settlement} at the wrong hour and the market is shut and the hall doors closed: the town has been gathering instead of trading since the hall stopped answering.
+4. `[counterforce · home]` {settlement} has a grievance and no petition, because the hall answered the first one early, and gave less than was asked.
 5. `[counterforce · home]` {settlement}'s hall is legitimate, its books are clean, and prosperity by itself has never brought anybody to its door. A crowd here needs a reason, and it does not have one.
-6. `[unfolding · home]` The gathering at {settlement} has stopped being about {reason} and started being about the refusal to hear it; the town is a rung higher than it was {timeband_since}, and the step down is longer than the step up was.
+6. `[unfolding · home]` The crowd at {settlement} has stopped being about {reason} and started being about the hall's refusal to hear it, and it has grown angrier {timeband_since}.
 
 ---
 
@@ -907,11 +907,11 @@ the reader.
 **SLOTS:** `{settlement}` `{counterpart}` `{timeband_since}`
 
 1. `[ledger · home]` {settlement}'s hall is a levy short and holds the refusal in writing: the quarter did not come when it was called, and the entry carries the seat's own reason on it, which is the part the hall cannot argue with.
-2. `[street · home]` Nobody petitions at {settlement} any more. The hall stopped answering {timeband_since}, and the grievance leaves now instead of gathering. The departure rate is the only complaint the seat still receives.
-3. `[visitor · home]` A stranger at {settlement} notices the works begun and abandoned: the seat proposed them, the town refused the labour, and the half-built thing has stood there since.
-4. `[counterforce · home]` {settlement} charters nothing at present. The grade its permit reads sits below the founding bar, and the institution the hall wanted has no lane to be founded in.
+2. `[street · home]` Nobody petitions at {settlement} any more: the hall stopped answering {timeband_since}, and people leave instead of complaining.
+3. `[visitor · home]` Half-built works stand around {settlement}: the hall proposed them, the town refused the labour, and nobody has touched them since.
+4. `[counterforce · home]` {settlement} can found nothing new at present: it lacks the standing to charter it, and what the hall wanted to build sits unbuilt.
 5. `[elder · receiving]` The ones who left {counterpart} in the refusal year are remembered at {settlement} as well as there; the memory travels, and their old town's name is spoken cautiously at this end of the road for reasons this end had forgotten.
-6. `[counterforce · home]` {settlement}'s seat has never learned what a refused levy costs: it pressed one on a town with nothing standing to refuse with, the levy was simply paid, and the hall has no entry to read.
+6. `[counterforce · home]` {settlement}'s hall has never had a levy refused: the town has never been strong enough to refuse one, so it pays.
 
 ---
 
@@ -922,9 +922,9 @@ the reader.
 **ARMS:** `bought` (the town that signed on a false picture) · `seller`
 **SLOTS:** `{settlement}` `{counterpart}` `{timeband_age}`
 
-1. `[ledger · bought]` The terms {settlement} signed sit heavier than the war ever did: the margin entered on the record is not the margin that existed, and the paper still says what the town believed on the day.
+1. `[ledger · bought]` The terms {settlement} signed weigh heavier than the war did: its envoys signed believing the town weaker than it was, and the paper still says so.
 2. `[street · bought]` {settlement} knows it was had and cannot say by how much, only that what was given up would not have been given up by anybody who had seen {counterpart}'s true strength.
-3. `[visitor · bought]` A stranger reading the treaty on {settlement}'s wall finds a clause that makes no sense against the town standing around it; that clause is the price of something the hall was told and did not check.
+3. `[visitor · bought]` The treaty on {settlement}'s wall has a clause that makes no sense for a town this strong: the hall was told something about its enemy and never checked it.
 4. `[counterforce · bought]` The pact {settlement} keeps with {counterpart} is the honest one and the lie that nearly bought a worse sits on the record beside it: the town was told, checked in time, and the terms were re-priced before anybody signed. The coin spent on the telling bought nothing.
 5. `[elder · bought]` The signature is {timeband_age} and the discount is permanent: {settlement} has never again taken {counterpart}'s word at face value, and the slowness is priced into every table since.
 6. `[unfolding · bought]` The deception has been exposed and the treaty has not been reopened; {settlement} is paying terms everybody now agrees were bought, and the argument in the hall is whether saying so aloud costs more than paying.
@@ -940,7 +940,7 @@ the reader.
 
 1. `[ledger · negotiating]` {settlement} negotiates on a picture of {counterpart} that is always one errand out of date; the terms are current, the knowledge behind them is not, and the hall signs knowing it.
 2. `[street · negotiating]` The parlay road is the fastest thing {settlement} has. What the town knows of the wider world mostly arrived in an envoy's saddlebag with a treaty draft under it.
-3. `[visitor · negotiating]` A stranger is struck by how much of {settlement}'s business is spent on whom to send; the town puts two on every table now, and the second one is not there to negotiate.
+3. `[visitor · negotiating]` {settlement} puts two envoys on every table now, and the second one is there to watch the first.
 4. `[counterforce · negotiating]` {settlement} sends one envoy, as it always has, and checks the account he brings against nothing: the town has no way to know whether it was told the truth, and it is not troubled by that.
 5. `[elder · negotiating]` The hall at {settlement} is suspicious of a clean report and has been since {npc} came back from a parlay with an account that matched nobody else's; the matching account was the compromised one.
 6. `[unfolding · negotiating]` Terms were agreed at {settlement} for a place that had already changed hands, and the correction is still walking. The town will honour a clause about a town that no longer answers to the party that promised it.
@@ -956,10 +956,10 @@ the reader.
 
 1. `[ledger · split]` {settlement}'s council is split over which threat is the real one and has been {timeband_since}; both halves are reading the same reports, and neither will move first.
 2. `[street · split]` Two answers come back to any question at {settlement} about {counterpart}, depending on which door it was asked at; the hall has not been of one mind since the reports stopped agreeing.
-3. `[visitor · split]` A stranger at {settlement} is asked, carefully, what they saw on the road, and then asked again by somebody else; the town is short of trusted eyes and both factions are recruiting them.
+3. `[visitor · split]` Travellers at {settlement} are asked, carefully, what they saw on the road, and then asked again by someone else: both powers want eyes they can trust.
 4. `[ledger · split]` {house} is finished at {settlement} and the seat that acted on its account is not much better off: the exposure charged the buyer as heavily as the maker, and both entries are still on the books.
-5. `[counterforce · split]` Nothing at {settlement} has moved on what the council knew was coming: the knowing is on the record and so is the sitting still, nothing was decided, and the not-deciding is the entry the season carries.
-6. `[unfolding · split]` The faction shouted down at {settlement} was right, and events have been paying it back in standing ever since; the seat that overruled it is discovering that being wrong in public compounds.
+5. `[counterforce · split]` {settlement}'s council knew what was coming and did nothing: the warning was heard, and nothing was decided.
+6. `[unfolding · split]` The power shouted down at {settlement} was right, and it has gained support with every event since; the ruler who overruled it is losing it.
 
 ---
 
@@ -971,9 +971,9 @@ the reader.
 **SLOTS:** `{settlement}` `{counterpart}`
 
 1. `[street · sweeping]` Strangers are asked their business twice at {settlement} now: the seat went looking for {counterpart}'s ear inside its own hall and found one, and the habit has outlasted the search.
-2. `[ledger · sweeping]` {settlement} stands lower at both courts than its size accounts for. The sweep found a real asset, and the finding of it was an accusation the hall had to pay for making.
+2. `[ledger · sweeping]` {settlement} is less trusted by both courts than its size would suggest: its hall found a real spy, and the accusation cost it all the same.
 3. `[visitor · watched]` A traveller passes through {settlement} unremarked; the town watches its own gates loosely and always has, because what its seat fears comes from the field rather than from the road.
-4. `[counterforce · sweeping]` {settlement} has never swept its own hall and the ear is still in it: the seat looks outward for its enemies, which is where it has always looked, and the record shows nothing found because nothing was sought.
+4. `[counterforce · sweeping]` {settlement} has never searched its own hall, and the spy is still in it: the hall looks for its enemies outside.
 5. `[elder · sweeping]` The old hands date the change at {settlement} to the season of the sweep; the town was an easy place for a stranger before it and has not been one since.
 6. `[unfolding · sweeping]` The watch {settlement}'s seat raised against foreigners is now its most reliable instrument, and the hall is discovering how well it works on people who are not foreign at all: a use nobody voted for and nobody has yet forbidden.
 
@@ -988,7 +988,7 @@ the reader.
 
 1. `[ledger · payer]` {settlement}'s hall is poorer than {settlement}'s country is, and the difference has a signature on it: what the fields make leaves under a term the seat agreed to.
 2. `[street · payer]` Everybody at {settlement} can name the reason the town is thin. What it grows goes out under a clause, and what stays behind is whatever the clause did not ask for.
-3. `[visitor · payer]` A stranger sees a prosperous countryside at {settlement} and a thin market and cannot reconcile them; the reconciliation is a term, and it sends the {good} to {counterpart} before any of it is sold.
+3. `[visitor · payer]` The countryside around {settlement} is rich and the market is thin: under a treaty term the {good} goes to {counterpart} before any of it is sold.
 4. `[unfolding · payer]` The drain at {settlement} has stopped being blamed on {counterpart} and started being blamed on the hall that signed for it; the town has learned to read a treaty, and that is the change the seat cannot undo.
 5. `[counterforce · payer]` {settlement} pays a tribute it can afford: the term is real, the payment is made every season, and the town has never once felt it, which is why the seat that signed is still sitting.
 6. `[elder · payer]` The old hands at {settlement} measure years by the payment. It has been made for {timeband_span}, and the town's ordinary sense of what a granary should hold was set by a war it did not fight in.
@@ -1004,9 +1004,9 @@ the reader.
 
 1. `[ledger · successor]` {settlement} keeps a treaty its present seat never swore; the signature belongs to the government before this one, and nobody has yet said aloud whether that matters.
 2. `[street · successor]` The hall at {settlement} is in new hands and the terms are in the old ones. What the seat before this one promised {counterpart} is still being delivered, by people who describe it as somebody else's promise.
-3. `[visitor · successor]` A stranger reading the treaty at {settlement} finds a name on it that appears nowhere else in the town; the place has outlived the faction that signed for it and kept the paper.
+3. `[visitor · successor]` The treaty displayed at {settlement} bears a name found nowhere else in town: the power that signed it is long gone, and the town kept the paper.
 4. `[unfolding · successor]` {settlement}'s new hall read the inherited compact, kept it, and has been earning off the keeping ever since. The credibility that came back is worth more than the clause it honoured.
-5. `[counterforce · successor]` {settlement} keeps every term it kept before its seat fell and rose again: succession voids nothing by itself, the oath stands until somebody chooses, and nobody has chosen.
+5. `[counterforce · successor]` {settlement} still keeps every treaty term from before its ruler fell: no new ruler has chosen to break them.
 6. `[elder · successor]` {settlement}'s repudiation is {timeband_age} and it still costs. The town disavowed a dead government's signature, was understood for it, and has been quietly paying a smaller price at every table since.
 
 ---
@@ -1027,7 +1027,7 @@ the reader.
 
 1. `[ledger · payer]` {settlement} pays {counterpart} to stay away and the hall budgets for it now: each payment settled a season and taught the asking, and the figure has risen every time it was met.
 2. `[street · payer]` {counterpart} comes back. Everybody at {settlement} knows it comes back. The paying has never once been the end of it, only the shape the year takes before it starts again.
-3. `[visitor · payer]` A stranger is surprised by how undefended {settlement} looks for a town that is threatened every year; the place bought its peace instead of building it, and the walls show the choice.
+3. `[visitor · payer]` {settlement} looks undefended for a town threatened every year: it buys its peace instead of building walls.
 4. `[elder · payer]` The first payment is remembered at {settlement} as a clever escape. It has been {timeband_span} and nobody calls it that now, though nobody can name the year the description changed.
 5. `[counterforce · payer]` {settlement} pays nobody and is not troubled for it: a demand was made once and answered no, and {counterpart} took its appetite to a town that had already said yes.
 6. `[unfolding · payer]` The tribute at {settlement} is now large enough that the hall is arguing about fighting instead, and the argument is being had from a position the paying itself made weaker.
@@ -1043,7 +1043,7 @@ the reader.
 
 1. `[ledger · contributor]` {settlement} still pays into a defence it helped found, and the terms have been rewritten more than once since: what went in as a share comes out as a due.
 2. `[street · contributor]` Nobody at {settlement} can remember being asked. The contribution arrives as a figure rather than as a request, and the change happened slowly enough that no season is to blame for it.
-3. `[visitor · contributor]` A stranger is told, with some pride, that {settlement} was one of the founding towns; the pride and the payment are both true and they no longer sit comfortably in one sentence.
+3. `[visitor · contributor]` People in {settlement} tell visitors, with pride, that it was a founding town of the league; they say less about what it pays now.
 4. `[counterforce · contributor]` {settlement}'s share of the league is smaller than it was and went down at a table: the league needed this town more than this town needed the league, and the terms have said so ever since.
 5. `[elder · contributor]` The compact {settlement} signed is {timeband_age}. The old hands describe an alliance and the young describe a landlord, and both are reading the same document.
 6. `[unfolding · contributor]` {settlement} has begun asking what leaving would cost and the asking is being noticed; the answer arriving from {counterpart} is the reason nobody at the hall has asked twice.
@@ -1059,10 +1059,10 @@ the reader.
 
 1. `[ledger · recognised]` {settlement} signed with {counterpart} as an equal, and that is the whole of the offence: {third_party} has never accepted that there was anybody here to sign with.
 2. `[street · recognised]` {settlement} got a trade and a war out of the same week. One signature did both, and nobody in the town thought the second half was part of the bargain.
-3. `[visitor · recogniser]` A stranger finds {settlement}'s treaty with {counterpart} displayed more prominently than its size would justify; the document is the argument, and its existing is the claim.
-4. `[counterforce · recogniser]` {settlement} deals with {counterpart} steadily and has never put a name to it: the trade runs, and the grievance has not minted, because nothing was signed for {third_party} to read.
+3. `[visitor · recogniser]` {settlement}'s treaty with {counterpart} hangs where everyone sees it: being signed as an equal is the town's whole claim to be one.
+4. `[counterforce · recogniser]` {settlement} trades with {counterpart} steadily and has never signed anything, so {third_party} has nothing to take offence at.
 5. `[elder · recognised]` The old hands at {settlement} defend the signature and will not defend what came of it. The town recognised a neighbour it believed had a right to be recognised, and has been in the resulting quarrel since.
-6. `[unfolding · recognised]` {third_party}'s grievance against {settlement} is standing and unspent: it has not been acted on, it has not decayed, and the hall reads the quiet as a decision that has not been made yet.
+6. `[unfolding · recognised]` {third_party} still holds its grievance against {settlement} and has not acted on it; the hall takes the quiet as a decision not yet made.
 
 ---
 
@@ -1075,10 +1075,10 @@ the reader.
 
 1. `[ledger · neutral]` {settlement} is in nobody's war and holds a grievance out of one anyway: its {good} was taken off the {route} because the cargo beside it belonged to somebody's enemy.
 2. `[street · neutral]` {settlement}'s factors will not take the coast road now. It is not that the town is at war, it is that the town's goods are treated as though it were.
-3. `[visitor · neutral]` A stranger arriving at {settlement} with a laden cart is warned before the gate about which stretch of the {route} is being searched; the town has learned the map of a war it is not in.
-4. `[counterforce · neutral]` {settlement}'s caravans cross a blockaded lane every season and have never been stopped: the seizure right is real and has not been exercised here, and the grievance that would follow has had no cause to mint from.
+3. `[visitor · neutral]` Carters arriving at {settlement} are warned before the gate which stretch of the {route} is being searched; the town has learned the map of a war it is not in.
+4. `[counterforce · neutral]` {settlement}'s caravans cross a blockaded road every season and have never been stopped, so the town has no grievance against anyone.
 5. `[elder · neutral]` The old hands measure {settlement}'s standing by that seizure. The town was small enough to rob without consequence once, and the whole of its foreign dealing since has been about not being that again.
-6. `[unfolding · neutral]` The grievance at {settlement} has ripened past complaining, and the town is being courted by the side it has cause against the other for; the courting is the war arriving by a different door.
+6. `[unfolding · neutral]` {settlement}'s grievance has grown past complaint, and one side in the war is now courting the town; if it says yes, the war comes to it.
 
 ---
 
@@ -1091,7 +1091,7 @@ the reader.
 
 1. `[ledger · embargoed]` {settlement} is embargoed by {counterpart} and has never gone short of {good}: it costs {band} more and it comes through {third_party}, but it comes.
 2. `[street · embargoed]` Everybody at {settlement} knows where the {good} is really from and nobody says so at the weighhouse; the exclusion is between two towns and the market is between more than two.
-3. `[visitor · embargoed]` A stranger notices that the busiest road out of {settlement} is not the one on the map. The embargo made a second route worth walking, and it has been walked into a real one.
+3. `[visitor · embargoed]` The busiest road out of {settlement} is not the one on the map: the embargo made a second route worth walking, and now it is a real road.
 4. `[counterforce · embargoed]` The embargo on {settlement} is holding and there is no way round it: no third market to buy through, no road that would reach one, and a shortage exactly as severe as the term intended.
 5. `[ledger · embargoed]` {house} makes its living at {settlement} on the difference now; the margin between the barred price and the delivered one is the town's most reliable income, and it depends entirely on the quarrel continuing.
 6. `[unfolding · embargoed]` {counterpart} has begun leaning on {third_party} to close the gap, which is how an exclusion between two towns becomes a quarrel among several, and {settlement} is the reason without being a party.
@@ -1107,8 +1107,8 @@ the reader.
 
 1. `[ledger · host]` {settlement} keeps a claimant to {counterpart}'s seat as a guest, and the guest is why the town's war has a name it can say out loud.
 2. `[street · host]` There is a household in {settlement}'s upper town that everybody treats as a court; it has no town to be a court of, which is the point of keeping it.
-3. `[visitor · host]` A stranger at {settlement} is introduced to {npc} by a title that matches no hall in this settlement. The town has been housing the title, and the title is the argument.
-4. `[counterforce · host]` {settlement} shelters a losing side it has never used: the claim has sat in a guest room through {timeband_span} with no war built on it, because a grievance kept is not a grievance spent.
+3. `[visitor · host]` Visitors to {settlement} are introduced to {npc} by a title that matches no hall in this town: the town shelters a claimant, and the title is its case for war.
+4. `[counterforce · host]` {settlement} has sheltered a losing claimant through {timeband_span} and never gone to war for the claim.
 5. `[unfolding · host]` The seat {settlement} restored at {counterpart} is now the seat disputing {settlement}'s terms; the restoring bought a gratitude that is spent and a rival that is not.
 6. `[elder · host]` The old hands remember which families came to {settlement} with the exiles and stayed; the upper town still speaks with {counterpart}'s vowels, and the quarrel has outlived the reason anybody came.
 
@@ -1123,8 +1123,8 @@ the reader.
 
 1. `[ledger · extracted]` {settlement} trades with {counterpart} on terms {settlement} did not write; the quarrel began over a cargo the hall would not name and finished with a signature the town has never accepted.
 2. `[street · extracted]` The price of {good} at {settlement} is set somewhere else. That is not a market condition, it is a clause, and everybody knows which war it came out of.
-3. `[visitor · extracted]` A stranger is surprised to find {counterpart}'s factors working openly in a town that speaks of them the way {settlement} does; the access is a term, and the feeling about it is not.
-4. `[elder · extracted]` The terms {settlement} carries are {timeband_age} and the resentment under them has not aged at all. The town teaches that war to people who were not born for it, which is how a grudge outlives the hands that made it.
+3. `[visitor · extracted]` {counterpart}'s factors work openly in {settlement}, though the town speaks of them with contempt: their access is a treaty term.
+4. `[elder · extracted]` The terms {settlement} lives under are {timeband_age} and the resentment has not faded: the town teaches that war to children born long after it.
 5. `[counterforce · extracted]` {settlement} carries terms it can live under out of a quarrel it lost: what followed the losing was survivable, and the town has kept the memory small enough to set down.
 6. `[unfolding · extracted]` The extraction at {settlement} is still being paid and the paying has become the argument for ending it; the hall is asked every season why a clause from a finished war still governs a living market.
 
@@ -1140,10 +1140,10 @@ the reader.
 
 1. `[ledger · home]` The temple's backing is not being given at {settlement}, and the seat is finding out what it was worth: {temple} withdrew over {reason}, and the standing has been falling on its own since.
 2. `[street · home]` The bells at {settlement} keep the hours and nothing else. {temple} has stopped lending the hall its blessing, and the ordinary business that used to open with one now opens with a silence everybody hears.
-3. `[visitor · home]` A stranger at {settlement} notices that nobody from the temple stands at the hall's announcements, and that the town is noticing it too.
-4. `[counterforce · home]` {settlement}'s seat keeps no patron, and the temple's disfavour reaches it through no lane at all: the withdrawal was real, was public, and moved nothing the hall depends on.
+3. `[visitor · home]` Nobody from {temple} stands beside {settlement}'s rulers at the hall's announcements any more, and the whole town has noticed.
+4. `[counterforce · home]` {settlement}'s ruler keeps no patron, so the temple's disfavour changed nothing: it was public, and the hall lost no support by it.
 5. `[elder · home]` This has happened at {settlement} before and the seat it happened to did not last; the old hands are not predicting anything, they are counting, and the counting is public.
-6. `[unfolding · home]` The standing at {settlement} has crossed the floor it was holding above and the factions that were waiting have stopped waiting; the withdrawal unseated nobody, and it made the unseating cheap.
+6. `[unfolding · home]` Support for {settlement}'s ruler has fallen low enough that the powers who were waiting have stopped waiting; the temple's withdrawal unseated nobody, but it made the unseating easy.
 
 ---
 
@@ -1156,10 +1156,10 @@ the reader.
 
 1. `[ledger · home]` {settlement} lost the war and has been settling accounts at home ever since; the blame went looking for a door inside the walls and found one.
 2. `[street · home]` The story at {settlement} is that the war was lost at home rather than at the front. It is a story, it is told everywhere, and it has been costing people their standing since it started.
-3. `[visitor · home]` A stranger learns quickly not to ask about the war at {settlement}: the question is not painful here, it is contested, and answering it wrongly puts you on a side.
+3. `[visitor · home]` Do not ask about the war at {settlement}: the question is not painful here, it is contested, and the wrong answer puts you on a side.
 4. `[counterforce · home]` {settlement} carries a bad defeat and no accused: the hall published what it had done and what it could not do, and that accounting is why the seat is still in it.
-5. `[ledger · home]` {faction} has taken {band} of the standing {settlement} lost in the defeat and moved it onto somebody else's account; the transfer is legible in the record even where the accusation is not provable.
-6. `[unfolding · home]` The search at {settlement} has outlived any evidence it began with, and the town is now accusing people who were children in the war year; the story has become the mechanism, and it is still running.
+5. `[ledger · home]` {faction} has turned the blame for {settlement}'s defeat onto others and gained the support the hall lost; none of the accusations can be proved.
+6. `[unfolding · home]` The hunt for traitors at {settlement} has outlived any evidence it began with: the town now accuses people who were children in the war year.
 
 ---
 
@@ -1171,12 +1171,12 @@ the reader.
 **ARMS:** `called` (a town inside the aligned web) · `named` (the town the claims point at)
 **SLOTS:** `{settlement}` `{counterpart}` `{band}` `{route}` `{timeband_span}`
 
-1. `[ledger · called]` {settlement} is at war with {counterpart} and so is every town it shares an altar with; nobody summoned it. The claims came due together, and the alignment was already there to be read.
+1. `[ledger · called]` {settlement} is at war with {counterpart}, and so is every town that shares its altar; nobody called them out, the claims simply came due together.
 2. `[street · called]` {settlement} says it was called. What stands on the record is that a sacred claim was pressed in the same season by several places that pray alike, and that this town was one of them.
 3. `[visitor · called]` A stranger meets men on {settlement}'s {route} travelling toward a war that is theirs by no border; they give the same reason at every crossing, and they are not lying about believing it.
-4. `[counterforce · called]` {settlement} shares the claim and has not moved: the road to it runs through a town this one cannot afford to cross, and a calling that cannot be walked to stays a sermon.
+4. `[counterforce · called]` {settlement} shares the holy claim but has not marched: the road runs through a town it cannot afford to cross.
 5. `[elder · called]` The old hands at {settlement} remember the last one and describe the coming back rather than the going; the town sent {band} of its young down that road {timeband_span} ago and has been a smaller place since.
-6. `[unfolding · called]` The web is holding and the season is turning, and {settlement} is learning the cost of a war chosen by agreement rather than by need. Nobody here can end it alone, because nobody here started it alone.
+6. `[unfolding · called]` The alliance is holding and the season is turning, and {settlement} is learning what a war chosen with others costs: it cannot end it alone.
 
 ---
 
@@ -1190,8 +1190,8 @@ the reader.
 
 1. `[ledger · refuser]` Nothing stands between {settlement} and {counterpart} but an offer that was refused, entered as a turning point rather than a quarrel and still the first thing either chancery reads.
 2. `[street · refuser]` {settlement} keeps the terms it would not take: what {counterpart} put on the table is common knowledge here, and so is the standing grievance that was named in the answer.
-3. `[visitor · refuser]` Strangers at {settlement} are told about the refusal before they are told about the market; the town would rather be known for what it declined than for what it kept.
-4. `[elder · refuser]` The old hands can still recite what was offered, and {timeband_since} the arithmetic has not changed and neither has the answer.
+3. `[visitor · refuser]` Visitors to {settlement} hear about the refusal before they hear about the market: the town would rather be known for what it turned down.
+4. `[elder · refuser]` The old hands can still recite what was offered, and {timeband_since} neither the offer nor the answer has changed.
 5. `[unfolding · refuser]` The cheap ending sits in the record beside the refusal where anyone may set the two side by side, and {settlement} has never asked for the comparison to be taken down.
 6. `[counterforce · refuser]` {settlement} is bound to terms it took against every grudge it holds, and the hall carried them; nobody here likes the arrangement, and nobody here proposes undoing it.
 
@@ -1211,12 +1211,12 @@ the reader.
 **SLOTS:** `{settlement}` `{temple}` `{timeband_since}`
 **Fence (from the sibling family):** the rival rite's presence is a **receipted arrival**, never an assumption — no variant may render a creed appearing locally. The split held **above the remnant floor**; suppression is the other branch and is a different family's sentence.
 
-1. `[ledger · split]` The seat's revenue at {settlement} is up and its standing among the neighbouring halls is down, and the tithe contest it won against {temple} is the one entry both movements hang from.
+1. `[ledger · split]` {settlement}'s rulers won the tithe from {temple}: their income is up, and the neighbouring halls think less of them for it.
 2. `[street · split]` Two congregations here keep the same calendar and will not keep it in the same room, and {timeband_since} the quarrel has not been about the render at all.
 3. `[visitor · split]` Ask for the rite at {settlement} and you will be asked which one: the old observance in the nave, the newer in the crypt, one roof and no agreement about the roof.
 4. `[elder · split]` Those who sat in the hall date the change from an argument over books, and will tell you the altar was an afterthought that arrived late and stayed.
 5. `[unfolding · split]` {settlement} still collects what it won and is paying for it in neighbours who will not eat at its table, and that bill has no last instalment written anywhere on it.
-6. `[counterforce · split]` {settlement} keeps one congregation and one long argument about books: the dispute went to the assize instead and was buried there, on the same books and in one honest hearing. A burial is a term like any other, and the town knows what can be done to terms.
+6. `[counterforce · split]` {settlement} keeps one congregation: the dispute over books went to the court and was settled there in one honest hearing, though a settled case can be reopened.
 
 ---
 
@@ -1228,12 +1228,12 @@ the reader.
 **SLOTS:** `{settlement}` `{counterpart}` `{route}` `{timeband_since}`
 **Fence (from the sibling family):** the road towns' pass-through take is **deferred and unreceipted** — no variant prices it. The interdictor acts on a **believed** picture of the web and every variant carries the attribution. The counterforce is the pact that reopens the road, never a toll.
 
-1. `[ledger · interdictor]` The {route} out of {settlement} is shut, and it is shut on two ledgers at once: a grievance in the war book and a sacred tension on the faith axis, scored separately and both standing.
+1. `[ledger · interdictor]` The {route} out of {settlement} is shut for two reasons at once, a quarrel with its neighbour and a holy one, and either would keep it closed.
 2. `[street · severed]` The pilgrim season does not come through {settlement} any more; {counterpart} closed the {route} and wrote its reasons down, and the innkeepers who lived on that season can recite them.
-3. `[visitor · interdictor]` The shrine road out of {settlement} is empty when it should be crowded: the town read the {route} as {counterpart}'s artery and closed it, and the picture it read from is filed beside the closing.
+3. `[visitor · interdictor]` The shrine road out of {settlement} is empty when it should be crowded: the town closed the {route}, believing it fed {counterpart}'s army.
 4. `[elder · severed]` The older hands remember the column that was stopped on the {route}, and remember being told the road would be a line in the peace before it was a line in anything else.
 5. `[unfolding · severed]` Nothing comes down the {route} to {settlement} in the season that used to fill it, and {timeband_since} the terms that would reopen it are still unsigned.
-6. `[counterforce · interdictor]` The {route} runs open past {settlement} in the pilgrim season and always has: the artery reading was weighed and not acted on, and the two towns' ledgers carry nothing between them.
+6. `[counterforce · interdictor]` The {route} past {settlement} stays open in the pilgrim season, as it always has: the town talked of closing it and did not.
 
 ---
 
@@ -1265,8 +1265,8 @@ the reader.
 1. `[ledger · refounded]` The obligations in {settlement}'s book run to households at {counterpart}, generation upon generation of them, and the silver that raised these walls came down that column.
 2. `[street · refounded]` Half the roofs of {settlement} were paid for out of {counterpart}, and the people under them will tell you their grandfathers left in a bad season and named where they were going as they went.
 3. `[visitor · refounded]` {settlement} is new work standing on old foundations, raised again by the descendants of the people who emptied it.
-4. `[elder · refounded]` The memory was written at both ends and has not finished decaying at {counterpart}; the elders of {settlement} count that, and not the harvest, as the reason there was money at all.
-5. `[unfolding · refounded]` A claim stands filed out of {settlement}, sworn on a memory {timeband_age} and priced no differently for its age: the grudge came home with the silver and is entered beside it.
+4. `[elder · refounded]` The families at {counterpart} still remember {settlement} as home, and its elders know that memory, not the harvest, is where the money came from.
+5. `[unfolding · refounded]` A claim has gone out of {settlement} on a memory {timeband_age}: the grudge came home with the money.
 6. `[counterforce · refounded]` The old site of {settlement} is a ruin still: the households at {counterpart} took up the host's rites and stopped entering it as home, and the funding stopped when the entering did.
 
 ---
@@ -1279,12 +1279,12 @@ the reader.
 **SLOTS:** `{settlement}` `{counterpart}` `{house}` `{temple}` `{timeband_since}`
 **Fence (from the sibling family):** the house act set is **closed and no verb endows a temple** — credit extended, relief granted, a faction propped. **{house} sits at {counterpart} by construction**, since the covert leash admits foreign patrons only. **Exposed state only:** no variant gestures at an unexposed leash.
 
-1. `[ledger · cornered]` {temple}'s new chapter stands on credit and the credit came out of the hungry season here; there is no gift anywhere in the house's book, which is what makes the entry legible.
+1. `[ledger · cornered]` {temple}'s new chapter was built on credit from the hungry season, and the lender's book shows a loan, not a gift: {temple} owes its new walls to {house}.
 2. `[street · cornered]` The town has worked out whose money seated its minister, and the anger has gone to the altar rather than to the merchant.
 3. `[visitor · cornered]` The chapter house is the newest building in {settlement} and the one people here are least willing to discuss.
 4. `[elder · cornered]` Those who queued that winter remember who was selling into the gap, and remember that {house} keeps its books a town over at {counterpart}, where nobody from {settlement} can read them.
 5. `[unfolding · cornered]` {timeband_since}, {temple} is still answering for the provenance, and every reading out of that pulpit is weighed against a ledger before it is weighed against anything else.
-6. `[counterforce · cornered]` {temple}'s chapter owes nobody and carries no stain: the credit was refused at the door on the same provenance the stain would have ridden, and the corner still happened here regardless.
+6. `[counterforce · cornered]` {temple}'s chapter owes nobody: it turned the merchant's credit away, and the grain was still cornered here that winter.
 
 ---
 
@@ -1296,12 +1296,12 @@ the reader.
 **SLOTS:** `{settlement}` `{timeband_since}`
 **Fence (from the sibling family):** the turn-back arm routes through the existing `returned` accounting — **there is no camp and no variant renders one.** No variant may cite a treaty default over migration, the compliance slice being deferred. The dissolution is receipted with its deciding term named.
 
-1. `[ledger · mover]` The war {settlement} fought over a creek nobody at its court had seen is closed, and its own opening receipt names a misjudgment as the deciding term; no clerk has softened it since.
-2. `[street · strike]` People here still argue about how big the strike was. The find was real and small, and what moved the columns was scored off the third telling and not the first.
+1. `[ledger · mover]` {settlement} fought a war over a creek nobody at its court had seen; it is over now, and the town admits it was a mistake.
+2. `[street · strike]` People here still argue about how big the strike was: the find was real and small, and the columns came on the third retelling of it.
 3. `[visitor · strike]` The workings above {settlement} are modest and the works below them are not, which is the shortest account of what has happened here that anyone will give you.
-4. `[elder · strike]` The old hands say the creek grew in every mouth it passed through, and they are right. The record keeps the drift relay by relay, which is rarer than being right.
-5. `[unfolding · strike]` The arrivals who were turned back are counted home again and {settlement} carries the crowding of the ones who landed; {timeband_since} the roll is still settling.
-6. `[counterforce · mover]` {settlement} is at peace and no clerk had to soften the reason: the letters home corrected the belief, the reckonings ground together, and the receipt names which of the two closed the war.
+4. `[elder · strike]` The old hands say the creek grew in every mouth it passed through, and the chronicle records each telling.
+5. `[unfolding · strike]` Those turned back have gone home, and {settlement} is left crowded with the ones who stayed; {timeband_since} the town has not found room for them all.
+6. `[counterforce · mover]` {settlement} is at peace: the letters home told the truth about the strike, and the war ended on it.
 
 ---
 
@@ -1320,12 +1320,12 @@ the reader.
 **Frequency:** the one **routine** family in this quarter — it fires wherever a war stands. Six variants sits at the low end of the routine floor and is **flagged for deepening before wiring**, which is maintenance and not new design under the frequency-scaled floor's own words.
 **Fence (from the sibling family):** the reasons pinned at the open are **the ones standing that week**, never rewritten. A grievance decays if nothing feeds it, and the feeding is on the record. No variant renders a victory where the receipt names dissolution.
 
-1. `[ledger · opener]` {settlement} is at war with {counterpart} on reasons pinned the week it opened (a seizure, a refusal, a border reading), and those are the reasons the book still carries, whatever has been shouted since.
+1. `[ledger · opener]` {settlement} is at war with {counterpart} for the reasons given the week it began (a seizure, a refusal, a border dispute), whatever has been shouted since.
 2. `[street · opener]` Ask in the market why the war and you get a better story than the ledger's; ask at the hall and you get the entries, in the order they landed.
-3. `[visitor · opener]` The gates are watched and the {route} is a soldier's road, and not one of the entries that brought {settlement} to this was a war on its own.
-4. `[elder · opener]` The old men date it from the incident on the {route}, and {timeband_since} it is a named reason in the war ledger rather than a story about a bad afternoon.
-5. `[unfolding · answered]` Each reason pinned against {settlement} is set against the live fold at every re-read, and when the last of them goes out of the fold this war will have nothing left to be about.
-6. `[counterforce · opener]` The entries against {counterpart} are all still in {settlement}'s book and {timeband_since} nothing has fed them; the fold has not crossed its bar, and the two towns go on trading across it.
+3. `[visitor · opener]` The gates are watched and the {route} is a soldiers' road now, though none of the quarrels that brought {settlement} here was worth a war by itself.
+4. `[elder · opener]` The old men date the war from the fight on the {route}; {timeband_since} it has been the reason the town gives.
+5. `[unfolding · answered]` Each reason {settlement} gives for the war weighs less each season, and when the last one is gone the war will have nothing left to be about.
+6. `[counterforce · opener]` {settlement}'s grievances against {counterpart} are all remembered and nothing new has fed them {timeband_since}; they have not come to war, and the two towns still trade.
 
 ---
 
@@ -1337,11 +1337,11 @@ the reader.
 **SLOTS:** `{settlement}` `{counterpart}` `{third_party}` `{band}`
 **Fence (from the sibling family):** the crossing runs through the **ordinary join read** — no teleported entry. The betrayal casus is derivable from the unsettled obligation and from nothing else, and no variant invents one.
 
-1. `[ledger · turncoat]` {settlement} sits in the enemy's council and pays for the chair in every join read that follows: the obligation it walked away from is entered at the severity a betrayal carries.
+1. `[ledger · turncoat]` {settlement} now sits on its old enemy's council, and its old ally treats the switch as a betrayal in every dealing since.
 2. `[street · turncoat]` The town does not pretend the switch did not happen. It argues instead about whether the tie was worth keeping, and the tie had worn {band} thin before it broke.
-3. `[visitor · turncoat]` Envoys are received at {settlement} warily and in daylight, and whatever the town offers is priced against one entry no season has taken out of the book.
+3. `[visitor · turncoat]` Envoys are received at {settlement} warily and only by daylight, and every offer it makes is weighed against the betrayal nobody has forgotten.
 4. `[elder · abandoned]` Those at {settlement} who remember the coalition remember the defaults that came before the leaving, default after default, and say the break surprised nobody who kept accounts.
-5. `[unfolding · turncoat]` {counterpart} may bury the row and {third_party} will not: it was never party to that peace, holds its entry untouched and reads it at the join, so the bar {settlement} must clear never quite comes back down.
+5. `[unfolding · turncoat]` {counterpart} may forgive the switch, but {third_party} will not: it was never party to that peace, and {settlement} is still paying for it there.
 6. `[counterforce · turncoat]` {settlement} and {counterpart} still sit at one table with nothing on the record between them; the obligation has never been called hard enough to find out what it would bear.
 
 ---
@@ -1354,12 +1354,12 @@ the reader.
 **SLOTS:** `{settlement}` `{temple}` `{third_party}` `{band}` `{timeband_since}`
 **Fence (from the sibling family):** the named of the razed town are **not in the arithmetic** — the roll that counts the dead does not count the departed and was never meant to. **No named death and no resolved fate** (Law One). The license mints nothing back.
 
-1. `[ledger · razer]` Every neighbour {settlement} meant to quiet is armed, and the one license the burning minted is held elsewhere and unspent. Spending it mints nothing back.
-2. `[street · razer]` {timeband_since}, {settlement} is still living inside an arithmetic its captains did the night of the burning: they priced the web that would answer, and marched regardless.
+1. `[ledger · razer]` Every neighbour {settlement} meant to frighten into quiet is arming instead, and one of them now has cause to strike.
+2. `[street · razer]` {timeband_since}, {settlement} has lived with what its captains chose the night of the burning: they knew the neighbours would answer, and marched anyway.
 3. `[visitor · razer]` Nobody comes to {settlement} to trade without an escort, and nobody here finds that surprising.
-4. `[elder · razer]` One road took the lesson and keeps {band} caution to this day and the next hall over entered the ash as a reason to arm; the elders can tell you which did which, and why the {temple} between them keeps a third account.
-5. `[unfolding · razer]` The claim against {settlement} is filed and the answer to it has not come: {third_party}'s own quarrel had already reached the same extreme, which is why the license went there rather than somewhere it might have sat unused.
-6. `[counterforce · razed]` {settlement} is a shell the clerks still list by name. The tier fell because the truth of the place fell, the institutions stand empty under their old headings, and the people went out down the roads the column came in on.
+4. `[elder · razer]` One neighbour learned caution from the burning and keeps it; the next town over took it as a reason to arm; the elders can tell you which did which, and {temple} between them remembers it differently again.
+5. `[unfolding · razer]` The claim against {settlement} has been made and not yet answered: {third_party} already had its own quarrel at the same pitch, and the right to strike went to it.
+6. `[counterforce · razed]` {settlement} is a shell that still keeps its name: the institutions stand empty, and the people left down the roads the column came in on.
 
 ---
 
@@ -1376,7 +1376,7 @@ the reader.
 3. `[visitor · gouged]` The wardens count the granary in the open and let you watch them do it, and the town has reasons for wanting that seen.
 4. `[elder · gouged]` The old carters date things from that winter, before and after, and the chronicle keeps it under {house}'s name because no clerk has ever moved it.
 5. `[unfolding · gouged]` {timeband_since}, the children of the people who queued that winter will not deal with {house} and cannot always say why, and {house} is counting the difference yet.
-6. `[counterforce · gouged]` The granary door at {settlement} is on its hinges and the price is off its peak: the dear band advertised itself down every road out, carters who had never worked this market came in off the {route}, and the corner broke on arrivals rather than on stones.
+6. `[counterforce · gouged]` The granary door at {settlement} is back on its hinges and the price is down: word of high prices spread down every road, carters came in off the {route}, and the corner broke on their arrivals, not on stones.
 
 ---
 
@@ -1388,11 +1388,11 @@ the reader.
 **SLOTS:** `{settlement}` `{counterpart}` `{reason}` `{good}` `{timeband_since}`
 **Fence (from the sibling family):** a commercial betrayal is a **casus commercii and stays in the commerce ledger.** No variant renders a war reason out of it, and none implies the seat could make one.
 
-1. `[ledger · creditor]` {settlement} holds a betrayal-class severance against {counterpart} with {reason} on the record: credit extended in a good season, called in a bad one, entered where commerce entries live.
+1. `[ledger · creditor]` {settlement} has cut ties with {counterpart} as a betrayal, for {reason}: credit given in a good season was called in during a bad one.
 2. `[street · creditor]` The wharf at {settlement} waits for nothing out of {counterpart} and stopped waiting in the autumn, and the {good} that was owed is a thing the town says out loud to strangers.
-3. `[visitor · creditor]` Bargains at {settlement} are asked for in writing, and {timeband_since} the entry that made that the custom is still open.
-4. `[elder · creditor]` The guild's older hands remember the relief that came first (granaries opened in a lean month at no profit, entered as a loss) and remember that both towns were reading the same entry and reading it differently the moment the seat came asking again.
-5. `[counterforce · creditor]` A merchant's broken word buys no march: {settlement} has nothing in the war book to set beside the grievance, and no clerk in either town can make one out of what is there.
+3. `[visitor · creditor]` Merchants at {settlement} have asked for every bargain in writing {timeband_since}, since the credit that was called in when the town could least pay.
+4. `[elder · creditor]` The guild's older hands remember the relief that came first, granaries opened at no profit in a lean month, and that each town read that gift differently the moment the ruler came asking again.
+5. `[counterforce · creditor]` A merchant's broken word is no cause for war: {settlement} has a grievance and nothing to march on.
 6. `[unfolding · defaulter]` {timeband_since} the debt is discharged and the entry is not. Factors who once took {settlement}'s word ask for it in writing, nobody has accused the town of anything, and nobody takes its word without a clerk in the room.
 
 ---
@@ -1405,12 +1405,12 @@ the reader.
 **SLOTS:** `{settlement}` `{faction}` `{house}` `{reason}` `{route}` `{timeband_since}`
 **Fence (from the sibling family):** the stake stood **above the house's own standing practice** with {reason} entered — the ruin is a recorded overreach and not bad luck alone. No named person's fate resolves with the books.
 
-1. `[ledger · seat]` {house}'s interests at {settlement} are struck out one by one and the books close at the bottom band; the stake that did it stood above the house's own standing practice, with {reason} entered beside it.
+1. `[ledger · seat]` {house}'s holdings at {settlement} are being sold off one by one: it staked more than it could afford on one venture, for {reason}, and lost.
 2. `[street · seat]` The quay at {settlement} talks about one loading and no other: half the town came out to watch those wagons go, and the news came back before the season did, and came back alone.
 3. `[visitor · seat]` The counting-house on the quay carries {faction}'s mark; {house} kept its books there until the venture failed on the {route}, and the sign was changed without ceremony.
 4. `[elder · seat]` {timeband_since}, the old partners are on other tarpaulins, and the carters can pick an employer again, which is new here, and is spoken of as though it were weather.
 5. `[unfolding · seat]` The family outlives the books: every bargain the name asks for on this coast is priced against one voyage that did not come back, and will be until somebody's grandchildren are asking.
-6. `[counterforce · seat]` {house} keeps its quay and its bands at {settlement} because somebody read the second stage and declined it; there is nothing here for the ballad-makers, which is the point.
+6. `[counterforce · seat]` {house} keeps its quay and its crews at {settlement} because someone saw the risk and refused the venture's second stage; there is nothing here for the ballad-makers.
 
 ---
 
@@ -1422,10 +1422,10 @@ the reader.
 **SLOTS:** `{settlement}` `{temple}` `{creed}` `{timeband_since}`
 **Fence (from the sibling family):** **Law One** — no god acts in any variant; the render, the dispute and the reading are human and receipted. The **capacity floor** is the whole difference between a schism and a suppression, and the record says which fired.
 
-1. `[ledger · split]` {temple}'s take is up and its congregation is down, and {settlement}'s roster carries a second congregation the ledger noticed a good while before the pulpit did.
+1. `[ledger · split]` {temple} takes in more and has fewer at its services: {settlement}'s tithe lists already show a second congregation, and the priests are still preaching to pews that have emptied.
 2. `[street · split]` The old rite keeps the nave and the newer keeps the crypt; both halves claim {creed}, both send to the same chapter house, and neither will call itself the new thing.
 3. `[visitor · split]` You will be asked which observance you want before you are told where to find it.
-4. `[elder · split]` The parish here remembers a render forgiven once, in a worse year than this, and has never let it go, which is why the argument went to the altar instead of to the steward, and why arithmetic could not settle it.
+4. `[elder · split]` The parish here once had its tithe forgiven in a worse year than this and has never let it go, which is why the quarrel went to the altar instead of to the steward.
 5. `[unfolding · split]` {timeband_since}, the register carries two entries under one name, under a clerk's note nobody has ever settled and nobody is in a hurry to.
 6. `[counterforce · split]` {settlement} keeps one rite and did not choose to: there was no room here for a second, the weaker congregation was gone before the next observance, {temple} absorbed what was left, and nobody here calls that a reconciliation.
 
@@ -1439,12 +1439,12 @@ the reader.
 **SLOTS:** `{settlement}` `{creed}` `{timeband_since}`
 **⚠ SELECTION RULE (fail-closed, J-CPL-5) — the sibling family's truncation note, restated because it changes what the DOSSIER may offer.** The middle of this chain is covert. Variants 1–5 select **only** on a chain carrying a public surfacing, exposure or restoration receipt; on a still-covert chain the page offers nothing from this family at all — no stub, no gap, no line a reader could take for concealment. Variant 6 is `[dm-only]` per R-DOS-G and never reaches a player-projected page.
 
-1. `[ledger · suppressor]` The roster at {settlement} restores {creed} to standing directly beneath the entry calling it extinguished; the earlier entry is uncorrected, and nobody has proposed correcting it.
+1. `[ledger · suppressor]` {settlement}'s parish register still lists {creed} as stamped out, with a newer line beneath it restoring the faith; nobody has struck the first, so any clerk who reads only that line treats its believers as outlaws.
 2. `[street · suppressor]` Nobody in this parish is a stranger to the ministers who came forward when the suppression lifted.
 3. `[visitor · suppressor]` {settlement} will tell you it put {creed} down; the pews have been telling you otherwise since the doors opened again.
 4. `[elder · suppressor]` The elders here call the purge the mistake and say it twice over, for being thorough and for being public: the watching crowd went home knowing more of {creed} than it had come with.
-5. `[unfolding · suppressor]` {creed}'s share here has risen since the making of the example, and {timeband_since} the seat has made no further examples of anything.
-6. `[counterforce · suppressor]` `[dm-only]` The roster at {settlement} shows {creed} thinning with no constable anywhere in the entry: nobody here ever stopped them keeping the rite, and so fewer and fewer did.
+5. `[unfolding · suppressor]` More people keep {creed} here since the public example was made, and {timeband_since} the ruler has made no more examples.
+6. `[counterforce · suppressor]` `[dm-only]` Fewer in {settlement} keep {creed} each year, and nobody forbade it: no one stopped them, and fewer and fewer bothered.
 
 ---
 
@@ -1456,12 +1456,12 @@ the reader.
 **SLOTS:** `{settlement}` `{temple}` `{rival_creed}` `{calamity}` `{timeband_since}`
 **Fence (from the sibling family):** **Law One holds absolutely here.** No variant confirms a wrath, a judgment or a lifting; the reading is the parish's, the naming is the pulpit's, and the ledger's verdict is about a **promise** and never about a god. The charge lands on the namer and not on the weather.
 
-1. `[ledger · charged]` {temple}'s standing at {settlement} sits below where it stood before the {calamity}, and the ledger closes the reading failed. The entry is against the namer, not against the season.
+1. `[ledger · charged]` {temple} stands lower at {settlement} than before the {calamity}: it named the season the trouble would end, and it was wrong.
 2. `[street · charged]` The parish here remembers being told which season it would lift, and paid the penance for the telling. The season came, and went, and the pulpit has stopped mentioning it.
 3. `[visitor · charged]` Nobody in {settlement} will read you an omen without being asked twice.
 4. `[elder · charged]` The older parishioners point out that nobody here asked whether the harvest failed for weather; they asked whose fault it was, and were answered.
 5. `[unfolding · charged]` The next reading out of that pulpit is weighed against this one before it is finished, and {rival_creed}'s ministers preach against a promise they never had to make.
-6. `[counterforce · held]` {temple}'s standing at {settlement} sits where it stood or better, and the same {calamity} crossed this parish and the next on one wind; here it was called patience, the ledger closed the reading fulfilled, and {timeband_since} the sceptics have had nothing cheap to say.
+6. `[counterforce · held]` {temple} stands as high at {settlement} as ever: the same {calamity} crossed this parish and the next, the priests here preached patience and were proved right, and {timeband_since} the doubters have had little to say.
 
 ---
 
@@ -1478,7 +1478,7 @@ the reader.
 3. `[visitor · origin]` The {route} out of {settlement} runs quiet where it used to run full.
 4. `[elder · origin]` The elders at {settlement} can still point to where the voice stood that emptied the road: it named {counterpart} once, nobody here had seen that town's {good}, and nobody doubted it either.
 5. `[unfolding · origin]` {timeband_since}, {settlement} still hears the name {counterpart} as a warning rather than as a place.
-6. `[counterforce · destination]` The stores at {settlement} are counted at the gate and the count refused the column that came for them; the gate was held by men who had to look at them while they held it, and {band} were back on the {route} before the market day came round.
+6. `[counterforce · destination]` {settlement}'s stores are counted at the gate, and when a column came for them the guards turned it away face to face; {band} were back on the {route} before market day.
 
 ---
 
@@ -1493,9 +1493,9 @@ the reader.
 1. `[ledger · petitioned]` {settlement} is still counting what that night cost and the paper that asked first cost nothing at all; the petition over {reason} sits in the book directly above the refusal.
 2. `[street · petitioned]` The square is a market again, and was not, in the season the seat's answer failed to come.
 3. `[visitor · petitioned]` The granary gates at {settlement} are new and the granary is not.
-4. `[elder · petitioned]` The elders here can name the rungs in order: it was a ladder and every one of them was climbed, and they will point out how little was actually carried away.
+4. `[elder · petitioned]` The elders here can tell you every step from petition to riot, and how little was carried away at the end.
 5. `[unfolding · petitioned]` Nothing was settled and the streets are quiet; the memory does the work the crowd did, and {timeband_since} the seat still weighs a call twice before it makes one.
-6. `[counterforce · petitioned]` {settlement} carries a grievance that closed in the hall where it opened: the seat answered at the first rung, the ledger shows what the answering drained, and it is cheaper by every reckoning than the granary gate.
+6. `[counterforce · petitioned]` {settlement}'s grievance was settled in the hall where it started: the ruler answered the first petition, and it cost less than a broken granary gate would have.
 
 ---
 
@@ -1507,12 +1507,12 @@ the reader.
 **SLOTS:** `{settlement}` `{counterpart}` `{temple}` `{band}` `{route}` `{timeband_since}`
 **Fence (from the sibling family):** the pull is **kin and not wages** — no variant prices the return. Departure memory decays generationally at both ends, and the counterforce arm is the decay having finished, which is as receipted as the return.
 
-1. `[ledger · origin]` {settlement}'s roll carries {band} of arrivals out of {counterpart} and no clerk here had to ask where from: the tie the departure wrote is the same one the road runs back along.
+1. `[ledger · origin]` {band} of {settlement}'s people came from {counterpart}, and everyone knows it: they still travel the same road home.
 2. `[street · origin]` The street version at {settlement} is that the people were sent and not lost, and that {counterpart} owes for the sending; nobody here has decided when to present the bill.
-3. `[visitor · origin]` New work sits on old foundations here, because the old ones were the shape somebody still had.
+3. `[visitor · origin]` New houses stand on old foundations here: the returning families built where their grandparents had lived.
 4. `[elder · origin]` The {temple} at {settlement} still reads the roll of the ones who took the {route} at the turning of the season, and a house that lost its people to {counterpart} will not lend to {counterpart}.
-5. `[unfolding · origin]` The road fills along an entry rather than along a wage, which is why the clerks never have to ask where from, and {timeband_since} the band between the two towns has not thinned.
-6. `[counterforce · origin]` The rows for {counterpart} are all still in {settlement}'s book and nothing reads them: the names stopped being said at the turning of the season, the band crossed to none, and nothing will read them again.
+5. `[unfolding · origin]` People travel this road for family, not wages, and {timeband_since} the traffic between the two towns has not thinned.
+6. `[counterforce · origin]` The families who left for {counterpart} are still in {settlement}'s register, but nobody speaks their names any more, and nobody travels that road.
 
 ---
 
@@ -1528,8 +1528,8 @@ the reader.
 2. `[street · mark]` The muster at {settlement} is stood down and the town has not decided yet whether that is a relief or a humiliation; the story it was raised on broke first.
 3. `[visitor · target]` {settlement} keeps a heavy watch on the {route} road against a muster that has already stood down: the count that raised it was sold to {faction}, and it has been contradicted since.
 4. `[elder · mark]` Nobody in the council can say even now who brought the count in. The older hands hold that this was the tell, and hold it only in hindsight.
-5. `[counterforce · mark]` The tale is still in circulation at {settlement} and still unused: the captains had it and had better word off two roads besides, the live muster showed an equal host, the march was refused on the count, and the coin that paid for the telling is not coming back.
-6. `[unfolding · mark]` `[dm-only]` The weakness {settlement} moves on was bought for it: coin crossed a table here and a telling about {counterpart} went out under {house}'s seal, and the commission stands discharged in full.
+5. `[counterforce · mark]` The bought tale is still told at {settlement} and nobody acts on it: the captains had better word from two other roads, and the march was called off.
+6. `[unfolding · mark]` `[dm-only]` The weakness {settlement} is marching on was invented and paid for: coin changed hands here, a story about {counterpart} went out under {house}'s seal, and the job is done.
 
 ---
 
@@ -1543,10 +1543,10 @@ the reader.
 
 1. `[ledger · author]` {house}'s stamp out of {settlement} is worth {band} less with {reason} written beside it in every counting-house that keeps one; two tellings out of it could not both be true, and both were on paper.
 2. `[street · author]` The market that sold the story is wearing it: {settlement} kept the coin and lost the custom, and can tell you to the quay which custom.
-3. `[visitor · author]` Word out of {settlement} arrives later than it used to, and nothing out of it arrives alone.
-4. `[elder · author]` The bill is not paid at once and never stops being paid; the older factors take {house}'s word in writing where they once took it across a table.
-5. `[unfolding · author]` {timeband_since}, the thing travels on its own, and the note recording who made it travels in the same packet, so every fresh use of it is a fresh airing of {house}'s name.
-6. `[counterforce · misled]` Nothing in {settlement}'s books carries a mark from the bought story: it arrived at a court already better served off two roads, agreed with neither, and thinned and stopped. {house} was paid all the same, because the coin bought a telling and could not buy a believing.
+3. `[visitor · author]` News from {settlement} now arrives late and is checked against other reports before anyone believes it.
+4. `[elder · author]` The older merchants now take {house}'s word only in writing, where they once took it across a table.
+5. `[unfolding · author]` {timeband_since}, the false story still travels, and the note of who paid for it travels with it, so every retelling names {house}.
+6. `[counterforce · misled]` The bought story left no mark on {settlement}: the court already had better word from two roads, and the story died out. {house} was paid all the same.
 
 ---
 
@@ -1559,12 +1559,12 @@ the reader.
 **⚠ SELECTION RULE (fail-closed) — the sibling family's truncation note, restated for this register.** The turning and the send-two read are covert. Variants 1–5 render only the **public** facts: that two accounts arrived, that they disagree, and what the seat did about it. **Why they diverge is not public, and no public variant names a detour or gestures at one.** Variant 6 is `[dm-only]` per R-DOS-G.
 **Fence:** a false accusation is entered as **reputation and as nothing else** — no fate is written against it anywhere in the book, and no variant resolves one (Law One).
 
-1. `[ledger · seat]` Both tellings are filed together at {settlement}, the false one first and the true one beneath it, and the gap between the ruling and the clearing word is in the record and has been left there.
+1. `[ledger · seat]` {settlement} keeps both reports together, the false one on top, and anyone can see the hall ruled before the true one arrived.
 2. `[street · seat]` The seat is asking which road it paid for: two accounts of one parlay came in by two roads and did not agree, and that is the whole of what anybody here can say.
 3. `[visitor · seat]` {settlement} sends two now, and reads them together, and pays for both.
-4. `[elder · seat]` The town goes on living beside both families: the sweep caught what sweeps catch (some of it the channel, some of it a neighbour with a grudge and a name to offer), and the false accusation stands as reputation and as nothing more.
+4. `[elder · seat]` The town still lives beside both families: the hunt for the traitor caught the real channel and an innocent neighbour too, and the neighbour's name has never recovered.
 5. `[unfolding · seat]` The seat acted on {reason} and learned better, and the acting cannot be taken back. No one lied here; the road was simply faster with one telling than with the other.
-6. `[counterforce · seat]` `[dm-only]` The channel {faction} trusts at {settlement} is {house}'s and was theirs before the errand was: {npc} carries the cargo off the {route} road to {house} first and to {counterpart} after, and the divergence sits exactly where the detour is.
+6. `[counterforce · seat]` `[dm-only]` The messenger {faction} trusts at {settlement} works for {house}: {npc} takes the reports off the {route} to {house} first and to {counterpart} after.
 
 ---
 
@@ -1576,11 +1576,11 @@ the reader.
 **SLOTS:** `{settlement}` `{counterpart}` `{route}` `{term}` `{timeband_span}` `{timeband_age}`
 **Fence (from the sibling family):** the compact ended **by the calendar and not by anger** — no variant renders a breach, a repudiation or a grievance. Short wagons weighed against a promise are an arithmetic, and the ledger not closing is the receipt.
 
-1. `[ledger · signatory]` Nothing written stands between {settlement} and {counterpart}: the {term} reached its date and the clerks struck it, and the book is the only place it was mourned.
+1. `[ledger · signatory]` No agreement stands between {settlement} and {counterpart} now: the {term} ran out and nobody renewed it.
 2. `[street · signatory]` Nobody at {settlement} calls it a breach and nobody ever had to: the wagons came a little short and then a little shorter, through {timeband_span}, and the clerks weighed what arrived against what was promised until the ledger would not close.
 3. `[visitor · signatory]` The {route} is open again, to anything at all; where a treaty stood there is distance and custom now, and custom binds nobody.
 4. `[elder · signatory]` The {term} is {timeband_age} and no hand that signed it still holds a seat; the market cannot name one of them.
-5. `[unfolding · signatory]` There is nothing left to renew and nobody moving to renew it: the window opened, the chancery let the season pass, and the clerks entered that as a decision because there was nothing else to enter it as.
+5. `[unfolding · signatory]` Nobody is moving to renew the agreement: the time to do it came and went, and the chancery let it pass.
 6. `[counterforce · signatory]` The {term} between {settlement} and {counterpart} still stands, re-cut rather than let go: a mediator sat the two courts down over a pact neither had broken, and the terms {settlement} argued itself hoarse over are the ones it keeps.
 
 ---
@@ -1610,12 +1610,12 @@ the reader.
 **SLOTS:** `{settlement}` `{counterpart}` `{npc}` `{reason}` `{burden}`
 **⚠ THE ENTAILMENT THAT DEFINES THIS FAMILY (from the sibling family, and the reason for every hedge below).** The strain→fall link is **belief-side**: `attributed_pressure` records the burden and records the standing and **joins neither** — the hall does the joining. Variants 1, 2, 3 and 5 therefore state the two columns and attribute the join to the hall, and **none asserts a causal edge the engine deliberately does not carry.** Variant 4's cost clause is warranted by the `paid_and_fell` ending token, which states the cost itself; variant 6's named cause is warranted by `pressure_named_cause`, which is exactly the receipt that does name one. A variant that quietly joins the two columns turns the volume's sharpest honesty receipt into a lie.
 
-1. `[ledger · payer]` {settlement}'s book carries two columns and joins neither: the instalments to {counterpart} left on time, every time, and the standing of the seat that sent them fell over the very same seasons.
-2. `[street · payer]` {burden} stands on {settlement} and the standing of the seat that pays has fallen over the same seasons, and it is the hall that has joined the two: the book carries the columns and no line between them, and the book is what was read out at the verdict.
-3. `[visitor · payer]` A stranger at {settlement} will hear several accounts of what the town pays {counterpart} and no two alike; the terms are sealed, and the town has filled the gap with its own arithmetic.
+1. `[ledger · payer]` {settlement} paid {counterpart} every instalment on time, and over the same years its ruler lost the town's support.
+2. `[street · payer]` {burden} weighs on {settlement} and its ruler has lost support for paying it; the hall blamed the ruler for the payments, and that was the case read out at the verdict.
+3. `[visitor · payer]` Ask in {settlement} what the town pays {counterpart} and you hear several answers: the terms are sealed, and everyone guesses.
 4. `[elder · payer]` The older hands hold that the bill was another court's and say so without expecting to be believed: {npc} paid what a treaty required {settlement} to pay, and it cost {npc} the seat.
 5. `[unfolding · payer]` The hall at {settlement} has been quiet for as long as the muster has been full, and the quiet is not agreement; the men who would have carried a motion against the seat are carrying spears, and nobody has had to find out yet what they would have said.
-6. `[counterforce · payer]` Here the fall has a named cause and the clerks can point to the week: the seat lost standing for {reason}, exposed and entered, and the tribute and the war stood exactly where they had stood.
+6. `[counterforce · payer]` Here the ruler's fall has a plain cause the clerks can date: the seat lost support for {reason}, and the tribute and the war had nothing to do with it.
 
 ---
 
@@ -1627,12 +1627,12 @@ the reader.
 **SLOTS:** `{settlement}` `{counterpart}` `{faction}` `{temple}` `{band}` `{wound}` `{timeband_since}`
 **Fence (from the sibling family):** a burial closes **the burying hall's own reads and nothing else** — it binds no third party and does not close {counterpart}'s books until {counterpart} answers in kind. The price is what binds it, and where the granary could not answer the price there was no peace but only a declaration.
 
-1. `[ledger · burier]` The rows against {counterpart} are in {settlement}'s book and are not counted when the hall counts {counterpart}: the war party can read them and cannot cite them, and the standing grievance reads {band} lighter for it.
+1. `[ledger · burier]` {settlement}'s old grievances against {counterpart} were buried by decree: the war party remembers them and is not allowed to cite them.
 2. `[street · burier]` The town has never stopped arguing about which cost more, the grain or the pride: the price was read out in the square before witnesses who will outlive the seat that swore it.
 3. `[visitor · burier]` {settlement} will tell you the quarrel is buried. {counterpart} has buried nothing, and a decree binds only the hall that made it.
-4. `[elder · burier]` {faction} has waited in the open since the decree was read, and the elders here know the difference between a grudge that is closed and one that is merely uncited.
-5. `[unfolding · counterparty]` A later hall at {counterpart} cited the rows anyway, word for word, and {timeband_since} the old {wound} is back in {settlement}'s book with a new one on top of it for the revoking.
-6. `[counterforce · burier]` {counterpart} keeps its quarrel and {settlement} keeps the receipt: the price was paid in full against the wrong account (the carts went and were taken and thanked for), and the {temple} that witnessed the swearing has been asked about it twice since.
+4. `[elder · burier]` {faction} has waited openly since the decree was read, and the elders know a buried grudge is not a closed one.
+5. `[unfolding · counterparty]` A later hall at {counterpart} raised the old grievances anyway, and {timeband_since} the old {wound} is back between {counterpart} and {settlement}, with a new one for the broken decree.
+6. `[counterforce · burier]` {counterpart} keeps its quarrel and {settlement} keeps the proof it paid: the carts went, were taken and thanked for, and {temple}, which witnessed the oath, has been asked about it twice since.
 
 ---
 

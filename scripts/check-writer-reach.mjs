@@ -129,8 +129,14 @@ export async function measure({
     dialGated = dialGatedOf(litShapes, [controlShapes, observed.shapes], judged.knownShapes, dialConfigKeys);
   }
 
+  // ⚠ THE INDEX STAYS HERE. It is every source file's parsed AST (~720 MB retained in a
+  // vitest worker, 2026-11-15) and nothing reads it once the scan above has run. Returned,
+  // it lived as long as the walker's `live` while the walker's OSR cross-join and mutant
+  // pass each parsed the tree AGAIN, and the worker peaked at 2,064 MB retained against
+  // Node's 2,096 MB default heap (1,863 MB at master; 1,346 MB with the index released).
+  // TAIL-CLOSE-HEAP-1, docs/chair/2026-11-15/close/TAIL-CLOSE-HEAP-1-HANDBACK.md.
   return {
-    root, corpus: observed, index, edgesByFile, closures, web, liveComponents, union,
+    root, corpus: observed, edgesByFile, closures, web, liveComponents, union,
     reads, scanStats: stats, allowlist, litShapes, controlShapes, dialConfigKeys, dialGated, ...judged,
   };
 }
@@ -399,7 +405,8 @@ export async function run(argv = [], overrides = {}) {
   }
 
   if (flags.reportTo) {
-    const plan = planExternalArtifactOutputs({ root, outputs: [flags.reportTo] });
+    // One output, one plan: planExternalArtifactOutputs returns a plan PER output (WIRING-W0, R-W7 g).
+    const [plan] = planExternalArtifactOutputs({ root, outputs: [flags.reportTo] });
     publishJsonExclusive(plan, report);
     log(`writer-reach report → ${flags.reportTo}`);
   }

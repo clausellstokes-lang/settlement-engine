@@ -1,0 +1,32 @@
+page-census: rendering 720 dossiers (2 workers) into /tmp/page-census-LVBeVY
+row        master integ banked  now  bar
+P1a             0    57     57   57    0  r2r-hamlet-1 r2r-hamlet-13 r2r-hamlet-15
+P1b            64    64     64   64    0  r2r-city-0 r2r-city-13 r2r-city-25
+P2siege         —     —      0    0    0    (new row; 689 at the base)
+P3source        —     —      0    0    0    (new row; 74 at the base)
+P4              0   106     96   96    0  r2r-city-1 r2r-city-14 r2r-city-16
+P5false         —     —      0    0    0    (new row; 306 at the base)
+P5b             0     2      0    0    0  
+P6need          —     —    641  641    0  r2r-city-0 r2r-city-1 r2r-city-10  (new row; 642 at the base)
+P7a           128   127    125  125    0  r2r-city-0 r2r-city-16 r2r-city-17
+P7b             0    27     27   27    0  r2r-hamlet-10 r2r-hamlet-13 r2r-hamlet-19
+P8any           0   220    221  221    0  r2r-hamlet-0 r2r-hamlet-1 r2r-hamlet-10
+P9            148   149    148  148    0  r2r-hamlet-1 r2r-hamlet-12 r2r-hamlet-14
+P10            18    17     17   17    0  r2r-town-21 r2r-town-30 r2r-town-33
+P11           396   411    448  448    0  r2r-city-0 r2r-city-1 r2r-city-10
+F4            274   245    202  202    0  r2r-city-10 r2r-city-14 r2r-city-29
+P13           173   172    172  172    0  r2r-city-0 r2r-city-10 r2r-city-25
+P14           183   167    167  167    0  r2r-hamlet-14 r2r-hamlet-16 r2r-hamlet-17
+P16three        0   331    179  179    0  r2r-city-10 r2r-city-14 r2r-city-16
+P16powers       0   291    281  281    0  r2r-city-0 r2r-city-1 r2r-city-10
+P17           681   680    671  671    0  r2r-city-0 r2r-city-1 r2r-city-10
+P18           337   360    360  360    0  r2r-city-0 r2r-city-1 r2r-city-10
+P19             5     7      7    7    0  r2r-hamlet-34 r2r-town-9 r2r-village-23
+P20           689   689      0    0    0  
+NEW1           10    11     11   11    0  r2r-city-32 r2r-city-41 r2r-hamlet-11
+NEW2            0     3      6    6    0  r2r-town-29 r2r-village-2 r2s-indebted-hamlet-0
+P2            568   569    569  RETIRED → P2siege: two true quantities, by the owner's design
+P3any         172   190    190  RETIRED → P3source: it counted the words, not the explanation
+P6            463   296    296  RETIRED → P6need: it read the true half as the fault
+P5a             0   288    288  RETIRED → P5false: it counted every capture-pressure line beside a free hall, the true with the false
+page-census: the banked corpus reads at or under the register

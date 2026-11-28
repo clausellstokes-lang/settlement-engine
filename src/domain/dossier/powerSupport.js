@@ -47,12 +47,14 @@
  * reads before letting the catalogue feed the power figures) are all read off it.
  */
 
-import { institutionBackingFactionName } from '../display/institutionProfile.js';
+import { institutionBackingFactionName } from '../display/institutionBackingFaction.js';
 import { factionArchetype, FACTION_ARCHETYPES as A } from '../factionArchetypes.js';
 import { governingFactionOf, nameOf } from '../rulingPower.js';
 import { walkUserEdits } from '../userEdits.js';
+import { isCriminalInstitution } from '../corruption.js';
 import { BACKS_SEPARATOR, formatBacksValue, parseBacksValue } from '../userEditLines.js';
 import { backingRowFor } from '../../data/institutionBacking.js';
+import { FACE_SEAT, faceOfInstitution, familyOfInstitution, isFabricInstitution } from '../../data/institutionalCatalog.js';
 
 /**
  * The four reasons a house stands behind a power:
@@ -83,7 +85,7 @@ import { backingRowFor } from '../../data/institutionBacking.js';
 // so the line names the shared domain. Frozen: a typo key reads `undefined` and
 // falls to OTHER, never a silent miss.
 /** @type {Readonly<Record<string, string>>} */
-const ALIGNED_BASIS = Object.freeze({
+export const ALIGNED_BASIS = Object.freeze({
   [A.MERCHANT]:   'A commercial house of this power',
   [A.MILITARY]:   'In the service of this command',
   [A.RELIGIOUS]:  'A house of this faith',
@@ -146,7 +148,7 @@ const alignedWhy = (arch) => ALIGNED_BASIS[arch] || ALIGNED_BASIS[A.OTHER];
  * hand every craft house to the merchants; and a civic faction is the seat for backing.
  * @param {SupportFaction} faction @returns {string}
  */
-function backingArchetypeOf(faction) {
+export function backingArchetypeOf(faction) {
   if (/craft|artisan/i.test(nameOf(faction) || '')) return A.CRAFT;
   const arch = factionArchetype(faction);
   return arch === A.CIVIC ? A.GOVERNMENT : arch;
@@ -268,12 +270,171 @@ export function houseBacksOf(settlement) {
       const backer = institutionBackingFactionName(inst, settlement);
       if (backer) add(backer, 'aligned', alignedWhy(archOf(backer)), 1);
     }
-    // THE DEFAULT: nothing landed, so the house answers to the seat at no weight.
-    if (list.length === 0 && ruler) list.push({ faction: ruler, basis: 'default', why: DEFAULT_BASIS, share: 0, weight });
+    // THE DEFAULT: nothing landed, so the house answers to the seat at no weight. COHERENCE-POWERS-7 (cold list
+    // REVIEW-W2A-3 #636): never a criminal house (corruption.js's one detector) — with no criminal power to land on it
+    // works outside the seat's law, not under it (a criminal ruler takes its houses above, as its kind's leader).
+    if (list.length === 0 && ruler && !isCriminalInstitution(inst)) list.push({ faction: ruler, basis: 'default', why: DEFAULT_BASIS, share: 0, weight });
     list.sort((x, y) => y.share - x.share || BASIS_RANK[x.basis] - BASIS_RANK[y.basis]);
     byHouse.set(key, list);
   }
   return byHouse;
+}
+
+/**
+ * THE POWERS EACH HOUSE STANDS BEHIND, AS THE PAGE PRINTS THEM (BAR6-POWERS, LAW 10f-backs, the audit's C102099; the brief
+ * BAR6's fact (d), a reading at print, NARROWED by the chair's ruling of 2026-11-16 to the fault it counted): `houseBacksOf`
+ * with ONE reading more, THE RULER'S OWN SEAT DOES NOT BACK THE RULER'S HIGH RIVAL. The seat's house (`seatHouseName`, the
+ * Government shelf's first) lands its catalogue shares on the ruler AND on the leader of each other archetype its row
+ * names, so the page printed "Backs · Craft Guilds · Grand Guild Consortium" beside the two powers' HIGH quarrel (28 towns
+ * of the census's 720 at 600b7683a). Here a power the ruler is in high conflict with (`powerStructure.conflicts`, the
+ * quarrel the page prints) leaves the seat's list, its share to the ruler's own landing. A second power with NO such quarrel
+ * stays (a hall partly in another's pocket is true, and the line's interest); the DM's word and a founding mark stand.
+ * ⛔ PRINT ONLY. `houseBacksOf` stays the birth's arithmetic: `generators/people/castPowers.js` (the memberships) and
+ * `generators/power/rulerKin.js` deal the cast from it, so a change there re-draws people and ties (measured on the wide
+ * read's 150: 50 towns moved). The page's readers read this one.
+ * @param {SupportSettlement} settlement
+ * @returns {Map<string, HouseBack[]>}
+ */
+export function houseBacksShownOf(settlement) {
+  const byHouse = houseBacksOf(settlement);
+  const institutions = settlement?.institutions;
+  const ruler = Array.isArray(settlement?.powerStructure?.factions) ? powerIndex(settlement).ruler : null;
+  const seat = ruler && Array.isArray(institutions) ? seatHouseName(institutions) : null;
+  const list = seat ? byHouse.get(seat) : undefined;
+  const own = list ? list.find((b) => b.faction === ruler) : undefined;
+  if (!list || !own || list.some((b) => b.basis === 'authored' || b.basis === 'founded')) return byHouse;
+  const conflicts = /** @type {{ powerStructure?: { conflicts?: unknown } }} */ (settlement).powerStructure?.conflicts;
+  const rivals = new Set((Array.isArray(conflicts) ? conflicts : [])
+    .filter((c) => !!c && String(c.intensity).toLowerCase() === 'high' && Array.isArray(c.parties) && c.parties.includes(ruler))
+    .flatMap((c) => c.parties.filter((/** @type {unknown} */ p) => p !== ruler)));
+  const refused = list.filter((b) => rivals.has(b.faction));
+  if (!refused.length) return byHouse;
+  const moved = refused.reduce((sum, b) => sum + b.share, 0);
+  byHouse.set(/** @type {string} */ (seat), list.filter((b) => !rivals.has(b.faction)).map((b) => (b === own ? { ...b, share: b.share + moved } : b)));
+  return byHouse;
+}
+
+/**
+ * The seat's own house on a roster: the highest-weight Government-shelf house (the crier
+ * excluded), else the first hall or palace — the roster read people/representatives.js ::
+ * seatHouseOf makes, repeated here on the registry alone so this domain module imports no
+ * generator. Null where no house carries the seat (the minted seat's case).
+ * @param {SupportInstitution[]} institutions
+ * @returns {string | null}
+ */
+export function seatHouseName(institutions) {
+  let government = null;
+  let hall = null;
+  for (const inst of institutions) {
+    if (!inst || isFabricInstitution(inst)) continue;
+    const face = faceOfInstitution(inst);
+    const family = familyOfInstitution(inst);
+    if (face === FACE_SEAT) { if (!hall) hall = String(inst.name || ''); continue; }
+    if (!face || !family || family.shelf !== 'Government' || family.key === 'Town crier') continue;
+    const weight = backingRowFor(inst.name)?.weight ?? 1;
+    if (!government || weight > government.weight) government = { name: String(inst.name || ''), weight };
+  }
+  return government ? government.name : hall;
+}
+
+/**
+ * THE KINDS A RULER CLAIMS (COHERENCE-POWERS, rule A; the chair's ruling of 2026-11-11 on the owner's
+ * word "they come from an institution, and are elevated yet still tied to an institution"): a ruler
+ * of one of these kinds is that kind's first claimant in the deal below, beside any power of its kind.
+ * A criminal ruler is not (the veil: its houses are hidden). The raw landing (`houseBacksOf`) is
+ * unchanged: a ruler still takes its own kind's share whole only where no other power of it is seated.
+ */
+export const RULER_KINDS = /** @type {readonly string[]} */ (Object.freeze([A.RELIGIOUS, A.MILITARY, A.MERCHANT, A.ARCANE, A.NOBLE, A.CRAFT]));
+
+/**
+ * THE SNAKE DEAL FOR A DOUBLED NICHE (the people car, PEOPLE-1 CAST, 2026-11-07; the chair's
+ * ruling R-P3 in docs/chair/2026-11-07/PEOPLE-RULINGS-2026-11-07.md §1). The arithmetic above
+ * lands a share on the LEADING power of its archetype, so a doubled archetype's second claimant
+ * (the density law's `doubledNiches` at city and metropolis, or any roster that seats two
+ * powers of one archetype) backs nothing — PEOPLE-0 measured 264 of 313 zero-face powers in
+ * cities and 307 of 381 in metropolises as the second of their archetype. The ruling: the
+ * houses whose LARGEST share is the archetype are dealt between the claimants, in house-weight
+ * order descending (ties in roster order), alternately, the higher-figure power picking first
+ * — the first keeps the citadel, the second gets the barracks. The whole landing the leader
+ * held for that house moves to the dealt claimant: no share is counted twice, a house lands on
+ * exactly one claimant, and every other landing (a founded mark, the DM's word, a fallback
+ * share on another archetype) is untouched. Borrowing is refused by construction: a claimant
+ * with no dealt house keeps nothing.
+ *
+ * Pure: reads the settlement's powers and the per-house map `houseBacksOf` built, returns a NEW
+ * map with new list objects for the houses it moved (the input is never mutated), no draw.
+ * THE RULER IS A CLAIMANT OF THE GOVERNMENT ARCHETYPE: the government share lands on the seat
+ * by rule, so a second government-archetype power (a People's Council, a Quarantine Council,
+ * the stress-born civic blocs — measured 49 of the 1,000's zero-face powers) is the second
+ * claimant of a doubled niche with the ruler first, and the government houses are dealt
+ * between them — except the SEAT'S OWN HOUSE, which is the ruler's whatever the deal says
+ * (floor 1: the governing power's first is the seat's face). For every other archetype the
+ * ruler is not a claimant: it competes for its own kind only when no other power of it is
+ * seated, which is not a doubling.
+ *
+ * @param {SupportSettlement} settlement
+ * @param {Map<string, HouseBack[]>} byHouse the map `houseBacksOf` built for this settlement
+ * @returns {Map<string, HouseBack[]>}
+ */
+
+export function dealDoubledNiches(settlement, byHouse) {
+  const factions = Array.isArray(settlement?.powerStructure?.factions) ? settlement.powerStructure.factions : [];
+  const institutions = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
+  const rulerEntry = governingFactionOf(settlement);
+  const ruler = nameOf(rulerEntry) || null;
+  /** @type {Map<string, Array<{ name: string, power: number, at: number }>>} archetype -> the claimants */
+  const claimantsByArch = new Map();
+  factions.forEach((f, at) => {
+    const name = nameOf(f);
+    if (!name) return;
+    // the ruler claims the government archetype (its share lands on the seat by rule) and its OWN KIND
+    // (COHERENCE-POWERS, rule A), first in both; a criminal ruler claims no kind (the veil)
+    const own = backingArchetypeOf(f);
+    const archs = name === ruler ? [A.GOVERNMENT, ...(RULER_KINDS.includes(own) ? [own] : [])] : [own];
+    for (const arch of archs) {
+      const list = claimantsByArch.get(arch) || [];
+      if (!list.some((c) => c.name === name)) list.push({ name, power: name === ruler ? Infinity : (Number(f.power) || 0), at });
+      claimantsByArch.set(arch, list);
+    }
+  });
+  const seatHouse = seatHouseName(institutions);
+  /** @type {Map<string, HouseBack[]>} */
+  const out = new Map(byHouse);
+  for (const [arch, claimants] of claimantsByArch) {
+    if (claimants.length < 2) continue;
+    claimants.sort((x, y) => (y.power - x.power) || (x.at - y.at));
+    // the claimant the arithmetic above landed the archetype on: the ruler for the government; for
+    // any other archetype its strongest non-ruling power (powerIndex), even where the ruler deals first
+    const leader = arch === A.GOVERNMENT ? claimants[0].name : (claimants.find((c) => c.name !== ruler) || claimants[0]).name;
+    // the houses whose largest share is this archetype and whose landing sits on the leader
+    /** @type {Array<{ key: string, weight: number, at: number, list: HouseBack[], landing: HouseBack }>} */
+    const dealt = [];
+    institutions.forEach((inst, at) => {
+      const key = String(inst?.name || '');
+      const row = key ? backingRowFor(key) : null;
+      if (!row || key === seatHouse) return;
+      const largest = Object.entries(row.shares).sort((x, y) => y[1] - x[1])[0];
+      if (!largest || largest[0] !== arch) return;
+      const list = out.get(key);
+      const landing = list?.find((b) => b.faction === leader && b.basis === 'aligned');
+      if (!landing) return;
+      // `landing` was found IN `list`, so `list` is present here (the guard above).
+      dealt.push({ key, weight: row.weight, at, list: /** @type {HouseBack[]} */ (list), landing });
+    });
+    dealt.sort((x, y) => (y.weight - x.weight) || (x.at - y.at));
+    dealt.forEach((house, i) => {
+      const to = claimants[i % claimants.length].name;
+      if (to === leader) return;
+      // a house the ruler already holds a share of (the seat's government share beside the kind's) merges
+      // the dealt share into that one landing, the larger keeping its phrase, as `houseBacksOf` merges
+      const held = house.list.find((b) => b !== house.landing && b.faction === to);
+      out.set(house.key, held
+        ? house.list.filter((b) => b !== house.landing).map((b) => (b === held ? { ...(held.share >= house.landing.share ? b : { ...house.landing, faction: to }), share: b.share + house.landing.share } : b))
+          .sort((x, y) => y.share - x.share)
+        : house.list.map((b) => (b === house.landing ? { ...b, faction: to } : b)));
+    });
+  }
+  return out;
 }
 
 /**
@@ -389,7 +550,7 @@ export function deriveFactionSupport(settlement) {
     const key = nameOf(f);
     if (key && !byFaction.has(key)) byFaction.set(key, []);
   }
-  const backs = houseBacksOf(settlement);
+  const backs = houseBacksShownOf(settlement); // BAR6-POWERS (10f-backs): the page's reading
   for (const inst of institutions) {
     const name = String(inst?.name || '');
     for (const back of backs.get(name) || []) {
@@ -416,7 +577,7 @@ export function deriveFactionSupport(settlement) {
 export function institutionBackers(settlement) {
   /** @type {Map<string, string[]>} */
   const byInstitution = new Map();
-  for (const [name, list] of houseBacksOf(settlement)) {
+  for (const [name, list] of houseBacksShownOf(settlement)) { // BAR6-POWERS (10f-backs): the page's reading
     if (list.length) byInstitution.set(name, list.map((b) => b.faction));
   }
   return byInstitution;

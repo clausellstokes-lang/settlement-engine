@@ -18,7 +18,7 @@ const FIXTURE_LABELS = Object.freeze({
   resources: 'Resource',
   services: 'Service',
   deities: 'Deity',
-  factions: 'Faction',
+  factions: 'Power',
   stressors: 'Stressor',
   traditions: 'Tradition',
 });
@@ -88,7 +88,7 @@ function FixtureResult({ fixture }) {
   if (fixture.kind === 'faction-event') {
     return (
       <div style={{ fontSize: chromeFontSize(FS.xs, mobile), color: BODY, fontFamily: sans }}>
-        <strong>Faction · unsaved ADD_FACTION:</strong>{' '}
+        <strong>Power · not yet saved:</strong>{' '}
         {fixture.result?.present ? fixture.name : `${fixture.name} was not introduced`}
       </div>
     );

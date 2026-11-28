@@ -106,7 +106,9 @@ export const GOOD_CATALOG = Object.freeze({
     kind: 'good',
     category: 'raw_material',
     criticality: 0.72,
-    aliases: ['iron', 'iron ore', 'refined iron', 'iron ore (local mines exhausted)', 'basic metalwork', 'refined iron and metalwork', 'metal ore', 'metal goods'],
+    // COHERENCE-AGREE-3 (the chair's ruling of 2026-11-12): the shortage label names its own land now; the old
+    // spelling stays an alias because saved records carry it and subsumption re-runs over their lists.
+    aliases: ['iron', 'iron ore', 'refined iron', 'iron ore (local iron mines exhausted)', 'iron ore (local mines exhausted)', 'basic metalwork', 'refined iron and metalwork', 'metal ore', 'metal goods'],
   },
   fuel: {
     id: 'fuel',

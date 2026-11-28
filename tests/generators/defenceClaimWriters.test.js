@@ -45,7 +45,7 @@ const WRITERS = [
   ['narrativeData.js :: arrival "There are soldiers on the streets" with no force (soak1k-212)', 212, /There are soldiers on/],
   ['rulingStructure.js :: the wartime faith desc "soldiers praying" with no soldiers (soak1k-380)', 380, /soldiers praying/],
   ['institutionalCatalog.js :: the charter hall desc "when the garrison falls short" (soak1k-205)', 205, /garrison falls short|garrison cannot/],
-  ['factionDynamics.js :: "Merchants fund churches, endow hospitals" with no hospital (soak1k-88)', 88, /endow hospitals/],
+  ['factionDynamics.js :: "Merchants pay for churches, hospitals" with no hospital (soak1k-88; re-keyed with cause, W3 POW third seat #44: was "fund churches, endow hospitals")', 88, /pay for churches, hospitals/],
   ['rulingStructure.js :: "Land grants, hospital networks" with no hospital (soak1k-4)', 4, /hospital networks/],
   ['factionStanding.js :: "The garrison handles bodies" with a militia only (soak1k-20)', 20, /garrison handles bodies|garrison can arrest|garrison outweighs/],
 ];

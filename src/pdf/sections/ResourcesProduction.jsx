@@ -21,9 +21,11 @@ import { Pill } from '../primitives/Pill.jsx';
 import { Callout } from '../primitives/Callout.jsx';
 import { EditableText, EditableProse } from '../primitives/Editable.jsx';
 import { type, palette, space, pt, swatch, factionColors } from '../theme.js';
-import { resourceDisplayName } from '../../domain/display/resourceDisplayName.js';
+import { resourceDisplayName, RESOURCE_DISPLAY_LABELS } from '../../domain/display/resourceDisplayName.js';
 import { cap, label, humanize } from '../lib/format.js';
 import { StateProse } from '../primitives/StateProse.jsx';
+import { criticalImportsShown } from '../../domain/display/criticalImportsShown.js'; // TAIL-EXPORTS-PDF batch 1 (ruling E1)
+import { tradeStoppedHere } from '../../domain/display/chainStateShown.js'; // SURFACES-3 item 2 (r4): the tab's siege reader
 
 const _STATUS_TONE = { full: 'good', partial: 'warn', unexploited: 'bad' };
 const VALUE_TONE  = { 'very high': 'good', high: 'good', medium: 'warn', low: 'muted' };
@@ -36,8 +38,11 @@ export function ResourcesProduction({ settlement, narrativeMode, vm, stateProse 
   const fullRows      = r.chainRows.filter(c => c.status === 'full');
   const partialRows   = r.chainRows.filter(c => c.status === 'partial');
   const unexpRows     = r.chainRows.filter(c => c.status === 'unexploited');
+  // V2 (TAIL-DISPLAY-CIVIC-3): the food a famine in force failed, as the tab prints it (validationOnPage.js :: famineFailedResourceOf)
+  const failedRows    = r.chainRows.filter(c => c.status === 'failed');
 
-  const importsCritical    = r.imports?.critical || [];
+  // TAIL-EXPORTS-PDF batch 1 (ruling E1): the critical goods the tab prints, not the terrain's need list raw
+  const importsCritical    = settlement ? criticalImportsShown(settlement) : (r.imports?.critical || []);
   const importsRecommended = r.imports?.recommended || [];
 
   return (
@@ -120,7 +125,7 @@ export function ResourcesProduction({ settlement, narrativeMode, vm, stateProse 
       {r.economicStrengths.length > 0 && (
         <View style={{ marginBottom: space.sm }}>
           <Text style={{ ...type.label, color: palette.good, fontSize: pt['8'], marginBottom: 3 }}>
-            ECONOMIC STRENGTHS
+            WHAT THE LAND OFFERS
           </Text>
           <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 4 }}>
             {r.economicStrengths.map((s, i) => (
@@ -146,16 +151,32 @@ export function ResourcesProduction({ settlement, narrativeMode, vm, stateProse 
           {unexpRows.length > 0 && (
             <ChainGroup title="Unexploited" tone="bad" rows={unexpRows} />
           )}
+          {failedRows.length > 0 && (
+            <ChainGroup title="Failed this year" tone="bad" rows={failedRows} />
+          )}
         </View>
       )}
 
       {/* ── Nearby resources ───────────────────────────────────── */}
-      {(r.nearbyAbundant?.length > 0 || r.nearbyDepleted?.length > 0 || r.availableCommodities?.length > 0) && (
+      {(r.nearbyAbundant?.length > 0 || r.nearbyProven?.length > 0 || r.nearbyDepleted?.length > 0 || r.availableCommodities?.length > 0) && (
         <View style={{ marginBottom: space.sm }} wrap={false}>
           <HairRule />
           <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
             NEARBY RESOURCES
           </Text>
+          {/* SURFACES-3 item 2 (r4): under a siege in force the grounds print first and unlabelled, never as "Abundant":
+              the tab's reader (chainStateShown.js :: tradeStoppedHere, ResourcesTab.jsx's Nearby Resources). */}
+          {tradeStoppedHere(settlement) && r.nearbyAbundant?.length > 0 && (
+            <ResourceRow kicker={null} tone="muted" items={r.nearbyAbundant} customNames={r.nearbyCustom} />
+          )}
+          {/* PDF-2 item 2 (BRIEF-BAR8, 2026-11-17; vetoable by the owner; LEFT-PDF's L19 left by name): THE GROUND A HOUSE
+              PROVES (the view row's `nearbyProven`: `houseInputAtHand.js :: impliedGroundsOnPage`, the grounds the stored
+              list does not hold) prints under the section's own title with no word of plenty, where the Resources tab
+              prints it (after the besieged grounds, before "Depleted") and as the journal's "Nearby resources" row names
+              it. 134 towns of the census's 720 held one the chapter did not print. */}
+          {r.nearbyProven?.length > 0 && (
+            <ResourceRow kicker={null} tone="good" items={r.nearbyProven} customNames={r.nearbyCustom} />
+          )}
           {r.nearbyDepleted?.length > 0 && (
             <ResourceRow
               kicker="Depleted"
@@ -164,7 +185,7 @@ export function ResourcesProduction({ settlement, narrativeMode, vm, stateProse 
               customNames={r.nearbyCustom}
             />
           )}
-          {r.nearbyAbundant?.length > 0 && (
+          {!tradeStoppedHere(settlement) && r.nearbyAbundant?.length > 0 && (
             <ResourceRow
               kicker="Abundant"
               tone="good"
@@ -443,7 +464,7 @@ function ResourceRow({ kicker, hint, tone, items, customNames = [] }) {
               </View>
             );
           }
-          return <Tag key={`r-${kicker}-${i}`} tone={tone}>{humanize(label(it))}</Tag>;
+          return <Tag key={`r-${kicker}-${i}`} tone={tone}>{Object.hasOwn(RESOURCE_DISPLAY_LABELS, it) ? RESOURCE_DISPLAY_LABELS[it] : humanize(label(it))}</Tag>; // TAIL-DISPLAY-CIVIC-4 (V11): the catalogue's label, as the tab prints it
         })}
       </View>
     </View>

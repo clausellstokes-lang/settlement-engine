@@ -1,0 +1,28 @@
+{
+  "_doc": "RECORD 2 OF THE TRAIN (MERGE-TRAIN), ODQ §934.105 (the cloud chair signs by the owner's delegation of 2026-11-06, vetoable; a successor chair does not inherit this signature). THE LAW OF THE CHAIN (BRIEF-MERGE-CAR §0; BRIEF-MERGE-TRAIN §0.1): the integration branch's first-parent line is the golden chain; a lane's unsigned cause commits are components signed at its merge point. THE CAUSE, ONE: THE ALLEGIANCE-CAR2 MERGE OVER THE INTEGRATION BRANCH — lane/allegiance-car2-2026-11-08 at 46715e751 merged at f51058995 (MERGE-TRAIN point 2), the conflicts composed; its lane signed nothing, its three UNSIGNED causes are the components signed here with the lane's own figures (docs/allegiance/ALLEGIANCE_CAR2_2026-11-08.md §4): bbb1a4abc A3, the guild's push in the rank deal, gm 105 · fence 70 · herald 450 -> 448 (2 moved, 2 removed) · prose 66; ce90cf16e A6, the hall-capture state derived by ONE writer, gm 15 · fence 22; aca93cbc5 the capture rows read the one state, gm 15 · fence 21: what the merge moved beyond record 1's post-state (the stage of e5f88930b). THE MOVE, MEASURED before the write by scripts/audit/landing-stage.sh measure, stage to stage against record 1's post-state (the stage of e5f88930b): the generator golden master 101 of 525 rows (city 32, metropolis 69) -> 38229dd6..; the espionage fence's driven corpus 80 of 360 rows -> 76bb033d..; 360/360 distinct; the herald knowledge desk 2 moved, +0/-2 keys (450 -> 448); the PDF snapshot 0 and the witness 0. The prose manifest's movement at this point (74 of 1,050 rows) is NOT written here: it is signed ONCE at the train's final tip, this point named in its cause list. Built through the guard with no STOP.",
+  "ownerWords": "I also now give all permissions required now and in the future. I also defer all judgement to you. · I leave all judgement now and in the future to you.",
+  "ownerDate": "2026-11-06",
+  "odqRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation of 2026-11-06 to the cloud chair; the train MERGE-TRAIN, 2026-11-09)",
+  "cause": "THE ALLEGIANCE-CAR2 MERGE OVER THE INTEGRATION BRANCH — lane/allegiance-car2-2026-11-08 at 46715e751 merged at f51058995 (MERGE-TRAIN point 2), the conflicts composed; its lane signed nothing, its three UNSIGNED causes are the components signed here with the lane's own figures (docs/allegiance/ALLEGIANCE_CAR2_2026-11-08.md §4): bbb1a4abc A3, the guild's push in the rank deal, gm 105 · fence 70 · herald 450 -> 448 (2 moved, 2 removed) · prose 66; ce90cf16e A6, the hall-capture state derived by ONE writer, gm 15 · fence 22; aca93cbc5 the capture rows read the one state, gm 15 · fence 21: what the merge moved beyond record 1's post-state (the stage of e5f88930b)",
+  "seat": "MERGE-TRAIN (Opus 5.5) under the cloud chair, session session_01FbPLbejcfwX5nii12VM673, from the stage at f51058995",
+  "surfaces": [
+    {
+      "surface": "generator-golden-master",
+      "action": "re-record",
+      "predictedRows": 525,
+      "proofForm": "settlement-hash"
+    },
+    {
+      "surface": "espionage-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant"
+    },
+    {
+      "surface": "herald-knowledge-desk-golden",
+      "action": "re-record",
+      "predictedRows": 448,
+      "proofForm": "derived-artefact"
+    }
+  ]
+}

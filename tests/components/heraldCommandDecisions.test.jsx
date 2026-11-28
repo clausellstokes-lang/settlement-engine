@@ -145,7 +145,7 @@ describe('flagged Herald Decisions', () => {
       expect(store.applyWorldPulseProposal)
         .toHaveBeenCalledWith('campaign-1', 'proposal-visible');
       expect(screen.getByRole('status').textContent)
-        .toContain('authoritative proposal is recorded as applied');
+        .toContain('”. It is now part of the realm\'s story.'); // STYLE-2 SW-12 (ledger D·33)
     });
     expect(screen.getAllByRole('status')).toHaveLength(1);
 
@@ -166,7 +166,7 @@ describe('flagged Herald Decisions', () => {
 
     await waitFor(() => {
       expect(screen.getByRole('status').textContent)
-        .toContain('upgrade made this proposal obsolete');
+        .toContain('was set aside: a newer version of it took its place.'); // STYLE-2 SW-12 (ledger D·33)
     });
     fireEvent.click(screen.getAllByTitle('This decision was already recorded.')[0]);
     expect(store.applyWorldPulseProposal).toHaveBeenCalledTimes(1);
@@ -185,7 +185,7 @@ describe('flagged Herald Decisions', () => {
       expect(store.dismissWorldPulseProposal)
         .toHaveBeenCalledWith('campaign-1', 'proposal-visible');
       expect(screen.getByRole('status').textContent)
-        .toContain('authoritative proposal is recorded as dismissed');
+        .toContain('”. It will not happen.'); // STYLE-2 SW-12 (ledger D·33)
     });
   });
 
@@ -253,6 +253,7 @@ describe('flagged Herald Decisions', () => {
     expect(pending?.textContent).toContain('No decision awaits you');
     const log = screen.getByTestId('adjudication-resolved');
     expect(log.textContent).toContain(superseded.headline);
-    expect(log.textContent).toContain('superseded by upgrade');
+    // STYLE-2 SW-12 (ledger D·35): one vocabulary for the resolved log.
+    expect(log.textContent).toContain('replaced by a newer version');
   });
 });

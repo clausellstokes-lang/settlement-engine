@@ -40,21 +40,22 @@ describe('site #6 — rank→religious_authority × localMult', () => {
     const v = deriveSystemVariable('religious_authority', withDeity({ rankAxis: 'major' }));
     const c = contrib(v, 'deity_patronage');
     expect(c.delta).toBe(RANK.major);
-    expect(c.reason).toBe('Test God (major) anchors religious authority.');
+    expect(c.reason).toBe('Test God (major) gives the priesthood its standing.');
   });
 
   it('a present record with localMult exactly 1.0 ⇒ identical to no record', () => {
     const v = deriveSystemVariable('religious_authority', withDeity({ rankAxis: 'major', piety: { localMult: 1 } }));
     const c = contrib(v, 'deity_patronage');
     expect(c.delta).toBe(RANK.major);
-    expect(c.reason).toBe('Test God (major) anchors religious authority.');
+    expect(c.reason).toBe('Test God (major) gives the priesthood its standing.');
   });
 
-  it('a devout record scales the lift and names the amplifier', () => {
+  it('a devout record scales the lift (the amplifier in the delta, never in the sentence)', () => {
     const v = deriveSystemVariable('religious_authority', withDeity({ rankAxis: 'major', piety: { localMult: 1.5 } }));
     const c = contrib(v, 'deity_patronage');
     expect(c.delta).toBe(Math.round(RANK.major * 1.5)); // 27
-    expect(c.reason).toContain('(piety ×1.50)');
+    // SW-5 (STYLE-RULINGS-2 A4): the amplifier lives in the delta; the sentence names no multiplier
+    expect(c.reason).toBe('Test God (major) gives the priesthood its standing.');
   });
 
   it('a low-piety record shrinks the lift below baseline', () => {
@@ -69,14 +70,15 @@ describe('site #9 — deity→law_order × localMult × megaphoneLaw', () => {
     const v = deriveSystemVariable('law_order', withDeity({ lawAxis: 'lawful' }));
     const c = contrib(v, 'lawful_patron');
     expect(c.delta).toBe(SWING);
-    expect(c.reason).toBe('Test God (lawful) strengthens law & order.');
+    expect(c.reason).toBe('Test God (lawful) stands behind the law.');
   });
 
   it('a devout record with no opposed law rival scales the swing', () => {
     const v = deriveSystemVariable('law_order', withDeity({ lawAxis: 'lawful', piety: { localMult: 1.5, dampener: { megaphoneLaw: 1 } } }));
     const c = contrib(v, 'lawful_patron');
     expect(c.delta).toBe(Math.round(SWING * 1.5)); // 12
-    expect(c.reason).toContain('(piety ×1.50)');
+    // SW-5 (STYLE-RULINGS-2 A4): the amplifier lives in the delta; the sentence names no multiplier
+    expect(c.reason).toBe('Test God (lawful) stands behind the law.');
   });
 
   it('a LAW-opposed runner-up dampens the swing on the law channel only', () => {
@@ -90,6 +92,6 @@ describe('site #9 — deity→law_order × localMult × megaphoneLaw', () => {
     const v = deriveSystemVariable('law_order', withDeity({ lawAxis: 'chaotic', piety: { localMult: 1.5, dampener: { megaphoneLaw: 1 } } }));
     const c = contrib(v, 'chaotic_patron');
     expect(c.delta).toBe(Math.round(-SWING * 1.5)); // -12
-    expect(c.reason).toContain('erodes order and tolerates corruption');
+    expect(c.reason).toBe('Test God (chaotic) turns a blind eye to crime and corruption.');
   });
 });

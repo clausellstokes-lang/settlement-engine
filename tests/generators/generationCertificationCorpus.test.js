@@ -56,67 +56,69 @@ const ADVISORY_STATUS = new Map();
  *    ff4448d2e (the rung-1 TRUTH compose)            religious-river-village-dun
  *    11467ed57 (the rung-1 PINS compose)              isolated-arcane-town-alder
  *    5e9ffb220 (the F1 DEFENCE-WORDS compose)         criminal-crossroads-town-dun,
- *                                                     isolated-arcane-town-cinder, mundane-river-port-city-bracken */
+ *                                                     isolated-arcane-town-cinder, mundane-river-port-city-bracken
+ *  RE-KEYED 2026-11-07 (LANDING-R2, the pool census composed): 60 -> 59 of 65. ONE SPECIMEN STOPPED FAILING,
+ *  nothing started: isolated-arcane-town-dun, at 1abf16d8d (census-4d unit 2c, R-W: the bowyers' "Military
+ *  supply" presumes a guard, not garrison AND militia). Bisected by a probe copy of this pin: rung 1's final
+ *  1bff51c6d and the merge base bf263a78d fail it; the compose's census-1b merge 0856c09d3 does not; inside
+ *  census-1b's first-parent line the flip is the census-4 merge fe7bb1d4a, and on census-4's side
+ *  fa39513d3 fails it, 1abf16d8d does not. */
+/* RE-KEYED 2026-11-07 (PEOPLE-1 CAST, the people car's lane 1): 60 -> 59 of 65, MEASURED at the lane's tip. The cast
+ * replaces the rung roster and the battery over the stored record reads a different cast: criminal-crossroads-town-alder,
+ * -cinder, isolated-arcane-town-ember, mercantile-seaport-town-cinder and religious-river-village-cinder STOPPED
+ * failing; criminal-crossroads-town-dun, isolated-arcane-town-alder and -cinder and religious-river-village-dun STARTED
+ * (the advisory judgment, not the overall status: every specimen still certifies). Not bisected per specimen: one
+ * cause, the cast (R-P2) with its mints born beside it (R-P4), the mundane draw of a magic-category face where magic
+ * does not function, and the pressure line's noun without its article (M-1b) — the battery reads that prose. */
+/* RE-KEYED 2026-11-09 (ALLEGIANCE-CAR4, 03ff59084 THE GOALS REBUILT): 59 -> 52 of 65, MEASURED at the car's tip.
+ * SEVEN SPECIMENS STOPPED FAILING, nothing started: criminal-crossroads-town-dun, isolated-arcane-town-alder, -bracken,
+ * -cinder, mercantile-seaport-town-bracken, -dun, plagued-martial-city-ember. Read at the base f6209c0c5, each one's
+ * ONLY battery finding was the same `battery.defense-words` "hospital without a hospital" on the goal line "Found an
+ * institution (a hospital, a school) that will outlast them by centuries" — a row of the retired role pool
+ * (npcData.js :: NPC_FACTION_GOALS); A9 draws every card's goal from the families its record supports, so the line is no
+ * longer printed. The direction the ladder drives this list. */
+/* RE-KEYED 2026-11-09 (URBAN-FIX B-P1, 1b3436acd, the "old town" licence row): 52 -> 34 of 65, MEASURED at the cause's
+ * tree. EIGHTEEN SPECIMENS STOPPED FAILING, nothing started: every commercial-metropolis, grim-seaport-metropolis,
+ * mundane-river-port-city and plagued-martial-city specimen on the list. Their tier-noun finding was the Shadows
+ * District's "Old town or slums", the instrument's false positive (URBAN-AUDIT §2, B-1). */
+/* RE-KEYED 2026-11-09 (URBAN-FIX C-1, 935c961fd, the foodways line's one home): 34 -> 30 of 65, MEASURED at the cause's
+ * tree. FOUR SPECIMENS STOPPED FAILING, nothing started: subsistence-thorp-alder, population-14999, -15000, -2249. Their
+ * finding was the culture's raw foodways sentence naming a staple the place does not hold, a line no page prints;
+ * the record now stores the food record's own line (URBAN-AUDIT §3). */
+/* RE-KEYED 2026-11-13 (STYLE-2-MERGE point 47, the COHERENCE-AGREE merge 22cc9ef7d; a figure its drafted record names for the merge
+ * seat): 30 -> 31 of 65, MEASURED at the signed tree. ONE SPECIMEN STARTED FAILING, nothing stopped: plagued-martial-city-bracken,
+ * the seventh seat's P3 re-dealt role-only person (the draft: "generationCertificationCorpus's battery pin gains
+ * certification-v1-plagued-martial-city-bracken"). Re-keyed by identity; the advisory direction (toward empty) is the ladder's. */
+/* RE-KEYED 2026-11-15 (TAIL-CLOSE-PEOPLE-1, red 7): 31 -> 30 of 65, MEASURED at the joined line 0b1248db. ONE SPECIMEN
+ * STOPPED FAILING, nothing started: subsistence-thorp-dun, at ce69ac52 (TAIL-NARRATIVE-4 FB, ruling N17: a founder resolves
+ * draw-free to one the Origin row agrees with), merged at bd57eb02 (JOIN-8 point 21; that merge's only code commit). Bisected
+ * first-parent over the joined line from d817736d8: 796c49ef fails it, bd57eb02 does not. Read at 796c49ef, its ONLY battery
+ * finding was `battery.defense-words` "soldiers without a garrison or a hired company" on the founder line "a discharged
+ * soldier who liked the view and had nowhere better to be"; the founder the Origin agrees with is no soldier. A win, the
+ * direction the ladder drives this list. */
 const ADVISORY_FAILING = Object.freeze([
-  'certification-v1-commercial-metropolis-alder',
-  'certification-v1-commercial-metropolis-bracken',
-  'certification-v1-commercial-metropolis-cinder',
-  'certification-v1-commercial-metropolis-dun',
-  'certification-v1-commercial-metropolis-ember',
-  'certification-v1-criminal-crossroads-town-alder',
   'certification-v1-criminal-crossroads-town-bracken',
-  'certification-v1-criminal-crossroads-town-cinder',
-  'certification-v1-criminal-crossroads-town-ember',
   'certification-v1-frontier-hamlet-alder',
   'certification-v1-frontier-hamlet-bracken',
   'certification-v1-frontier-hamlet-cinder',
   'certification-v1-frontier-hamlet-dun',
   'certification-v1-frontier-hamlet-ember',
-  'certification-v1-grim-seaport-metropolis-alder',
-  'certification-v1-grim-seaport-metropolis-bracken',
-  'certification-v1-grim-seaport-metropolis-cinder',
-  'certification-v1-grim-seaport-metropolis-dun',
-  'certification-v1-grim-seaport-metropolis-ember',
-  'certification-v1-isolated-arcane-town-bracken',
-  'certification-v1-isolated-arcane-town-dun',
-  'certification-v1-isolated-arcane-town-ember',
   'certification-v1-magical-desert-village-alder',
-  'certification-v1-magical-desert-village-bracken',
-  'certification-v1-magical-desert-village-cinder',
   'certification-v1-magical-desert-village-dun',
   'certification-v1-magical-desert-village-ember',
-  'certification-v1-mercantile-seaport-town-alder',
-  'certification-v1-mercantile-seaport-town-bracken',
-  'certification-v1-mercantile-seaport-town-cinder',
-  'certification-v1-mercantile-seaport-town-dun',
-  'certification-v1-mercantile-seaport-town-ember',
-  'certification-v1-mundane-river-port-city-alder',
-  'certification-v1-mundane-river-port-city-cinder',
-  'certification-v1-mundane-river-port-city-dun',
-  'certification-v1-mundane-river-port-city-ember',
-  'certification-v1-plagued-martial-city-alder',
   'certification-v1-plagued-martial-city-bracken',
-  'certification-v1-plagued-martial-city-cinder',
-  'certification-v1-plagued-martial-city-dun',
-  'certification-v1-plagued-martial-city-ember',
   'certification-v1-religious-river-village-alder',
   'certification-v1-religious-river-village-bracken',
-  'certification-v1-religious-river-village-cinder',
+  'certification-v1-religious-river-village-dun',
   'certification-v1-religious-river-village-ember',
-  'certification-v1-subsistence-thorp-alder',
   'certification-v1-subsistence-thorp-bracken',
   'certification-v1-subsistence-thorp-cinder',
-  'certification-v1-subsistence-thorp-dun',
   'certification-v1-subsistence-thorp-ember',
-  'population-14999',
-  'population-15000',
-  'population-2249',
   'population-2250',
   'population-24',
   'population-25',
   'population-349',
   'population-350',
-  'population-87',
   'population-88',
 ]);
 
@@ -331,8 +333,9 @@ function expectIndependentIntegrity(settlement, label) {
   for (const [index, relationship] of (
     settlement.relationships || []
   ).entries()) {
-    const first = npcById.get(relationship?.npc1Id);
-    const second = npcById.get(relationship?.npc2Id);
+    // RE-KEYED 2026-11-07 (PEOPLE-4 TIES, R-P7): a tie's ends are `from`/`to` (directed).
+    const first = npcById.get(relationship?.from);
+    const second = npcById.get(relationship?.to);
     expect(first, `${label} relationship[${index}] has no first NPC`).toBeTruthy();
     expect(second, `${label} relationship[${index}] has no second NPC`).toBeTruthy();
     expect(
@@ -376,38 +379,27 @@ function expectIndependentIntegrity(settlement, label) {
     ).toBe(100);
   }
 
+  // PEOPLE-LAND re-key, cause M-7 (the v2 boundary, PEOPLE_5B_EDIT §9 item 1), as
+  // scripts/audit/generation-certification-soak.mjs already reads it: a card's power is a MEMBERSHIP naming a
+  // power on the roster (the per-NPC `factionAffiliation` left the record), and a conflict is fought between
+  // POWER factions (GS-2, ODQ §934.101), so its parties are checked against `powerStructure.factions`. The
+  // grouping (`settlement.factions`) left the record at v2, so its member check has no subject and left with it.
   const powerFactionSet = new Set(powerFactionNames);
   for (const npc of npcs) {
-    if (!npc?.factionAffiliation) continue;
-    expect(
-      powerFactionSet.has(npc.factionAffiliation),
-      `${label} NPC ${npc.id} references a missing power faction`,
-    ).toBe(true);
-  }
-
-  const narrativeFactions = settlement.factions || [];
-  const narrativeFactionNames = narrativeFactions
-    .map(faction => faction?.name)
-    .filter(Boolean);
-  expect(
-    new Set(narrativeFactionNames).size,
-    `${label} contains duplicate narrative factions`,
-  ).toBe(narrativeFactionNames.length);
-
-  const narrativeFactionSet = new Set(narrativeFactionNames);
-  for (const [index, faction] of narrativeFactions.entries()) {
-    for (const member of faction?.members || []) {
+    for (const membership of Array.isArray(npc?.memberships) ? npc.memberships : []) {
+      if (!membership?.power) continue;
       expect(
-        npcById.has(member?.id),
-        `${label} faction[${index}] references a missing NPC`,
+        powerFactionSet.has(membership.power),
+        `${label} NPC ${npc.id} membership references a missing power faction`,
       ).toBe(true);
     }
   }
+  expect(Object.hasOwn(settlement, 'factions'), `${label} still carries the retired NPC grouping`).toBe(false);
   for (const [index, conflict] of (settlement.conflicts || []).entries()) {
     for (const party of conflict?.parties || []) {
       expect(
-        narrativeFactionSet.has(party),
-        `${label} conflict[${index}] references a missing narrative faction`,
+        powerFactionSet.has(party),
+        `${label} conflict[${index}] references a missing power faction`,
       ).toBe(true);
     }
   }

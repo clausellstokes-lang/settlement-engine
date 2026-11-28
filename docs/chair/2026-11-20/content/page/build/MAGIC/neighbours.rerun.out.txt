@@ -1,0 +1,42 @@
+    563|   test('over a generated corpus, neither tab ever pairs the word with …
+       |   ^
+    564|     const offenders = [];
+    565|     let nones = 0;
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/domain/defenseStateProseDesk.test.js > DS-DEF-9 — magic dependency, and the slot filled from the right ROLE > REACHABILITY, MEASURED OVER GENERATED WORLDS rather than assumed
+Error: Test timed out in 20000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ tests/domain/defenseStateProseDesk.test.js:1910:5
+    1908|   });
+    1909|
+    1910|   it('REACHABILITY, MEASURED OVER GENERATED WORLDS rather than assumed…
+       |     ^
+    1911|     // The false pool is what every default world reads, and the desk …
+    1912|     // finding rather than as a silence.
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/domain/generalStateProseDesk.test.js > DS-GEN-8 — the remnant, the fallen city and the steadings (a lawful DARK mount) > ⛔ DORMANT AT BIRTH, AND DORMANT IS A TRUE STATEMENT — nothing defaults
+Error: Test timed out in 20000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ tests/domain/generalStateProseDesk.test.js:1829:5
+    1827|   });
+    1828|
+    1829|   it('⛔ DORMANT AT BIRTH, AND DORMANT IS A TRUE STATEMENT — nothing de…
+       |     ^
+    1830|     // Every one of the three antecedents is ABSENT on a freshly gener…
+    1831|     // the block renders NOTHING rather than an else-arm. This is the …
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  3 failed | 4 passed (7)
+      Tests  3 failed | 205 passed (208)
+   Start at  12:11:32
+   Duration  458.02s (transform 38.23s, setup 904ms, import 102.90s, tests 1165.40s, environment 8.62s)
+
+[gate-tail] end:  12:19:11 up  1:24,  0 user,  load average: 17.25, 15.28, 14.07
+[gate-tail] full log: /tmp/gate-tail.25386.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

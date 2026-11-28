@@ -119,16 +119,21 @@ describe('reconcile — identity when nothing moves', () => {
   it('refreshes terrain production even when no runnable chain changes', () => {
     const s = smithTown(['grain_fields']);
     const eco = s.economicState;
-    // gemstone_deposits with no lapidary institution activates no chain, but
-    // its terrain commodity is still a canonical regional-production change.
+    // precious_metals with no mine activates no chain, but its terrain
+    // commodity is still a canonical regional-production change.
+    // TAIL-DEFECON-C (C2-A) re-keyed by identity: gemstone_deposits' only commodity is the category key
+    // "luxury", which the made list no longer holds (a category is not a good), so its arrival changed no
+    // production; precious_metals' "gems" is the good this anchor needs ("luxury" stays off the list beside it).
+    // RE-KEYED BY IDENTITY (TAIL-DEFECON-C-4, D34): a precious-metal vein gives no gems now, so its arrival changes no
+    // production; the anchor is the salt flats' salt (no gate; no chain without a salt works).
     const out = reconcileProductionAfterResourceChange(eco, {
-      settlement: { ...s, config: { ...s.config, nearbyResources: ['grain_fields', 'gemstone_deposits'] } },
-      oldResources: ['grain_fields'], newResources: ['grain_fields', 'gemstone_deposits'],
+      settlement: { ...s, config: { ...s.config, nearbyResources: ['grain_fields', 'salt_flats'] } },
+      oldResources: ['grain_fields'], newResources: ['grain_fields', 'salt_flats'],
       oldDepleted: [], newDepleted: [],
     });
     expect(out).not.toBe(eco);
     expect(out.activeChains).toEqual([]);
-    expect(out.localProduction).toEqual(['grain', 'flour', 'luxury']);
+    expect(out.localProduction).toEqual(['grain', 'flour', 'salt']);
   });
 });
 

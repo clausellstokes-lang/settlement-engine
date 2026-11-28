@@ -50,7 +50,8 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { ROUTES } from '../src/lib/routes.js';
 import { headForView, siteGraph } from '../src/lib/seo.js';
-import { compendiumEntryHead } from '../src/lib/seoCompendium.js';
+import { compendiumEntryHead, compendiumSectionHead } from '../src/lib/seoCompendium.js';
+import { COMPENDIUM_SECTIONS } from '../src/lib/compendiumSections.js';
 import { COMPENDIUM_INDEX } from '../src/domain/compendium/searchIndex.js';
 import { GALLERY_HUBS } from '../src/lib/galleryHubs.js';
 import { injectGalleryMeta, SITE_NAME } from '../api/_galleryMeta.js';
@@ -214,6 +215,32 @@ function renderEntry(baseHtml, entry) {
 }
 
 /**
+ * Render a Compendium SECTION page (/compendium/<slug>; the owner, 2026-11-10). The
+ * head is compendiumSectionHead — the same projection the lazy panel applies at
+ * runtime — and the noscript links back to the compendium landing.
+ */
+function renderSection(baseHtml, slug) {
+  const h = compendiumSectionHead(slug);
+  let html = injectGalleryMeta(baseHtml, {
+    title: h.title,
+    description: h.description,
+    url: h.canonical,
+    type: h.ogType,
+  });
+  html = upsertCanonical(html, h.canonical);
+  html = upsertJsonLd(html, 'ld-site', siteGraph());
+  html = injectNoscript(html, noscriptSummary({
+    heading: h.title,
+    description: h.description,
+    extraHtml: '<p><a href="/compendium">Back to the Compendium</a></p>',
+  }));
+  return html;
+}
+
+/** The catalog section pages that are prerendered (My Custom Content is per-reader). */
+const PRERENDERED_SECTION_SLUGS = COMPENDIUM_SECTIONS.filter((s) => s.tab !== 'custom').map((s) => s.slug);
+
+/**
  * Render a gallery FACET HUB (SB4 — see the header). The head is EXACTLY the
  * projection setGalleryHubMeta applies at runtime (title `${hub.title} · SITE`,
  * description = blurb, canonical = the hub's own path, a CollectionPage JSON-LD
@@ -269,18 +296,22 @@ function main() {
     writeHtml(`/compendium/${entry.id}`, renderEntry(baseHtml, entry));
     written++;
   }
+  for (const slug of PRERENDERED_SECTION_SLUGS) {
+    writeHtml(`/compendium/${slug}`, renderSection(baseHtml, slug));
+    written++;
+  }
 
   console.log(
     `[prerender] wrote ${written} static route documents ` +
     `(${statics.length} views + ${GALLERY_HUBS.length} gallery hubs + ` +
-    `${COMPENDIUM_INDEX.length} compendium entries) under dist/`,
+    `${COMPENDIUM_INDEX.length} compendium entries + ${PRERENDERED_SECTION_SLUGS.length} compendium sections) under dist/`,
   );
 }
 
 // Exported for the prerender pins (tests/build/prerenderRoutes.test.js).
 export {
   ORIGIN, DYNAMIC_VIEWS, staticRouteViews, distFileForPath,
-  renderStatic, renderEntry, renderHub, upsertCanonical, upsertJsonLd, noscriptSummary,
+  renderStatic, renderEntry, renderSection, PRERENDERED_SECTION_SLUGS, renderHub, upsertCanonical, upsertJsonLd, noscriptSummary,
 };
 
 if (import.meta.url === `file://${process.argv[1]}`) {

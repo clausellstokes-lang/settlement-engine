@@ -1,0 +1,4105 @@
+[
+ {
+  "law": "L2",
+  "rule": "L2.siege.abroad",
+  "town": "bar0-city-under_siege+famine-rand-101",
+  "tab": "Systems/Institutions",
+  "i": 18,
+  "line": "Guild bowyers and fletchers selling arrows by the sheaf, special broadheads, and composite bows to order, supplying the watch, the garrison, and the caravans.",
+  "against": {
+   "tab": "Summary/Crisis",
+   "i": 1,
+   "line": "Enemies are camped around Jalalnuur, and nothing comes in by road."
+  },
+  "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionDescVariants.js :: PAIRS",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.cutgood",
+  "town": "bar0-city-under_siege+famine-rand-101",
+  "tab": "Systems/Economics",
+  "i": 37,
+  "line": "Apothecary & Alchemy Remedies and preparations are made here, but few, while the herbs and reagents they need run short.",
+  "against": {
+   "tab": "Systems/Economics",
+   "i": 100,
+   "line": "Healing, surgical care and long-term recovery here depend on medicinal herbs from outside, which the siege has cut off."
+  },
+  "why": "the page says this good comes from outside and the siege has cut it off; this unmarked row offers it",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/generators/economy/incomeLineSiblings.js :: REMEDIES_SHORT_LINE",
+  "factWriter": "src/domain/display/chainNeedShown.js :: chainNeedLine"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.outputs",
+  "town": "bar0-city-under_siege+famine-rand-101",
+  "tab": "Systems/Economics",
+  "i": 211,
+  "line": "Armed escort · Monster hunting services · Dungeon clearance",
+  "against": {
+   "tab": "Systems/Institutions",
+   "i": 148,
+   "line": "Services · Armed escort (stopped)"
+  },
+  "why": "chain Adventuring & Escort is printed ○ Operational and lists \"armed escort\", which the page marks stopped",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "(untraced)"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.failedFood",
+  "town": "bar0-city-under_siege+famine-rand-101",
+  "tab": "Systems/Resources",
+  "i": 15,
+  "line": "Fishing Grounds · fish · salt · Coastal Timber · timber · Magical Ley Line Node · medicinal herbs · Deep Natural Harbour · maritime access",
+  "against": {
+   "tab": "Systems/Resources",
+   "i": 8,
+   "line": "✗ Failed this year · Fish"
+  },
+  "why": "the page says fish failed this year; the commodities available list it unmarked",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/resourceData.js :: RESOURCE_DATA.magical_node",
+  "factWriter": "src/components/new/tabs/ResourcesTab.jsx :: ResourceChainCard"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.abroad",
+  "town": "bar0-city-under_siege+famine-rand-102",
+  "tab": "Systems/Institutions",
+  "i": 23,
+  "line": "Supplies the watch, the garrison, and the caravans.",
+  "against": {
+   "tab": "Summary/Crisis",
+   "i": 1,
+   "line": "Enemies are camped around Bayansaray, and nothing comes in by road."
+  },
+  "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionalCatalog.js :: INSTITUTION_FAMILIES.shared",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.abroad",
+  "town": "bar0-city-under_siege+famine-rand-102",
+  "tab": "Systems/Services",
+  "i": 19,
+  "line": "Personal protection for merchants, officials, and travelers.",
+  "against": {
+   "tab": "Summary/Crisis",
+   "i": 1,
+   "line": "Enemies are camped around Bayansaray, and nothing comes in by road."
+  },
+  "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Bodyguard service",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.outputs",
+  "town": "bar0-city-under_siege+famine-rand-102",
+  "tab": "Systems/Economics",
+  "i": 195,
+  "line": "Armed escort · Monster hunting services · Dungeon clearance",
+  "against": {
+   "tab": "Systems/Institutions",
+   "i": 6,
+   "line": "Services · Bodyguard service · Escort (stopped)"
+  },
+  "why": "chain Adventuring & Escort is printed ○ Operational and lists \"escort\", which the page marks stopped",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Gladiator hire"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.abroad",
+  "town": "bar0-city-under_siege+famine-rand-103",
+  "tab": "Systems/Institutions",
+  "i": 33,
+  "line": "Guild bowyers and fletchers selling arrows by the sheaf, special broadheads, and composite bows to order, supplying the watch, the garrison, and the caravans.",
+  "against": {
+   "tab": "Summary/Crisis",
+   "i": 1,
+   "line": "Enemies are camped around Zhongan, and nothing comes in by road."
+  },
+  "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionDescVariants.js :: PAIRS",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.famine.meat",
+  "town": "bar0-city-under_siege+famine-rand-103",
+  "tab": "Systems/Institutions",
+  "i": 51,
+  "line": "Services · Fresh meat",
+  "against": {
+   "tab": "Summary/Plot Hooks",
+   "i": 135,
+   "line": "No food comes in by trade now, and what is left here is in a few hands; those who hold it have quadrupled the price, and the locals are arguing over whether to pay, wait it out, or take it."
+  },
+  "why": "the herds failed (or the town has none and nothing comes in); this unmarked row offers meat or dairy (chips: Fresh meat)",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "(untraced)",
+  "factWriter": "src/generators/economy/foodBalance.js :: grownShareOf"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.famine.meat",
+  "town": "bar0-city-under_siege+famine-rand-103",
+  "tab": "Systems/Services",
+  "i": 155,
+  "line": "Fresh meat",
+  "against": {
+   "tab": "Summary/Plot Hooks",
+   "i": 135,
+   "line": "No food comes in by trade now, and what is left here is in a few hands; those who hold it have quadrupled the price, and the locals are arguing over whether to pay, wait it out, or take it."
+  },
+  "why": "the herds failed (or the town has none and nothing comes in); this unmarked row offers meat or dairy",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "(untraced)",
+  "factWriter": "src/generators/economy/foodBalance.js :: grownShareOf"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.abroad",
+  "town": "bar0-city-under_siege+famine-rand-105",
+  "tab": "Systems/Institutions",
+  "i": 18,
+  "line": "A cluster of apothecaries pressed close enough that competition drives them apart in trade, some to surgery, some to herb-work, some to medicines brought from abroad.",
+  "against": {
+   "tab": "Summary/Crisis",
+   "i": 1,
+   "line": "Enemies are camped around Xinjin, and nothing comes in by road."
+  },
+  "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionDescColour.js :: DESC_VARIANT_COLOUR_DECLARATIONS",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.cutgood",
+  "town": "bar0-city-under_siege+famine-rand-105",
+  "tab": "Systems/Institutions",
+  "i": 18,
+  "line": "A cluster of apothecaries pressed close enough that competition drives them apart in trade, some to surgery, some to herb-work, some to medicines brought from abroad.",
+  "against": {
+   "tab": "Systems/Economics",
+   "i": 50,
+   "line": "Healing, surgical care and long-term recovery here depend on medicinal herbs from outside, which the siege has cut off."
+  },
+  "why": "the page says this good comes from outside and the siege has cut it off; this unmarked row offers it",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionDescColour.js :: DESC_VARIANT_COLOUR_DECLARATIONS",
+  "factWriter": "src/domain/display/chainNeedShown.js :: chainNeedLine"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.cutgood",
+  "town": "bar0-city-under_siege+famine-rand-105",
+  "tab": "Systems/Institutions",
+  "i": 21,
+  "line": "Services · Herbal remedies · Specialist compounds",
+  "against": {
+   "tab": "Systems/Economics",
+   "i": 50,
+   "line": "Healing, surgical care and long-term recovery here depend on medicinal herbs from outside, which the siege has cut off."
+  },
+  "why": "the page says this good comes from outside and the siege has cut it off; this unmarked row offers it (chips: Herbal remedies)",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Specialist compounds",
+  "factWriter": "src/domain/display/chainNeedShown.js :: chainNeedLine"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.cutgood",
+  "town": "bar0-city-under_siege+famine-rand-105",
+  "tab": "Systems/Services",
+  "i": 145,
+  "line": "Herbal remedies",
+  "against": {
+   "tab": "Systems/Economics",
+   "i": 50,
+   "line": "Healing, surgical care and long-term recovery here depend on medicinal herbs from outside, which the siege has cut off."
+  },
+  "why": "the page says this good comes from outside and the siege has cut it off; this unmarked row offers it",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Herbal remedies",
+  "factWriter": "src/domain/display/chainNeedShown.js :: chainNeedLine"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.cutgood",
+  "town": "bar0-city-under_siege+famine-rand-105",
+  "tab": "Systems/Services",
+  "i": 152,
+  "line": "Rare medications and treatments available through district-wide sourcing.",
+  "against": {
+   "tab": "Systems/Economics",
+   "i": 50,
+   "line": "Healing, surgical care and long-term recovery here depend on medicinal herbs from outside, which the siege has cut off."
+  },
+  "why": "the page says this good comes from outside and the siege has cut it off; this unmarked row offers it",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Specialist compounds",
+  "factWriter": "src/domain/display/chainNeedShown.js :: chainNeedLine"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.abroad",
+  "town": "bar0-city-under_siege+famine-rand-106",
+  "tab": "Systems/Institutions",
+  "i": 23,
+  "line": "A cluster of apothecaries pressed close enough that competition drives them apart in trade, some to surgery, some to herb-work, some to medicines brought from abroad.",
+  "against": {
+   "tab": "Summary/Crisis",
+   "i": 1,
+   "line": "Enemies are camped around Ulaanbash, and nothing comes in by road."
+  },
+  "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionDescColour.js :: DESC_VARIANT_COLOUR_DECLARATIONS",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.abroad",
+  "town": "bar0-city-under_siege+famine-rand-106",
+  "tab": "Systems/Institutions",
+  "i": 38,
+  "line": "The watch, the garrison, and the caravans buy here.",
+  "against": {
+   "tab": "Summary/Crisis",
+   "i": 1,
+   "line": "Enemies are camped around Ulaanbash, and nothing comes in by road."
+  },
+  "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionDescVariants.js :: PAIRS",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.abroad",
+  "town": "bar0-city-under_siege+famine-rand-106",
+  "tab": "Systems/Institutions",
+  "i": 266,
+  "line": "Stabling, horse-dealing, and farriery gathered in one quarter, serving merchants, soldiers, and travellers in want of a fresh mount.",
+  "against": {
+   "tab": "Summary/Crisis",
+   "i": 1,
+   "line": "Enemies are camped around Ulaanbash, and nothing comes in by road."
+  },
+  "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionDescColour.js :: DESC_VARIANT_COLOUR_DECLARATIONS",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.abroad",
+  "town": "bar0-city-under_siege+famine-rand-106",
+  "tab": "Systems/Services",
+  "i": 25,
+  "line": "Personal protection for merchants, officials, and travelers.",
+  "against": {
+   "tab": "Summary/Crisis",
+   "i": 1,
+   "line": "Enemies are camped around Ulaanbash, and nothing comes in by road."
+  },
+  "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Bodyguard service",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.cutgood",
+  "town": "bar0-city-under_siege+famine-rand-106",
+  "tab": "Systems/Institutions",
+  "i": 23,
+  "line": "A cluster of apothecaries pressed close enough that competition drives them apart in trade, some to surgery, some to herb-work, some to medicines brought from abroad.",
+  "against": {
+   "tab": "Systems/Economics",
+   "i": 117,
+   "line": "Healing, surgical care and long-term recovery here depend on medicinal herbs from outside, which the siege has cut off."
+  },
+  "why": "the page says this good comes from outside and the siege has cut it off; this unmarked row offers it",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionDescColour.js :: DESC_VARIANT_COLOUR_DECLARATIONS",
+  "factWriter": "src/domain/display/chainNeedShown.js :: chainNeedLine"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.cutgood",
+  "town": "bar0-city-under_siege+famine-rand-106",
+  "tab": "Systems/Institutions",
+  "i": 26,
+  "line": "Services · Herbal remedies",
+  "against": {
+   "tab": "Systems/Economics",
+   "i": 117,
+   "line": "Healing, surgical care and long-term recovery here depend on medicinal herbs from outside, which the siege has cut off."
+  },
+  "why": "the page says this good comes from outside and the siege has cut it off; this unmarked row offers it (chips: Herbal remedies)",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Herbal remedies",
+  "factWriter": "src/domain/display/chainNeedShown.js :: chainNeedLine"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.cutgood",
+  "town": "bar0-city-under_siege+famine-rand-106",
+  "tab": "Systems/Services",
+  "i": 232,
+  "line": "Herbal remedies",
+  "against": {
+   "tab": "Systems/Economics",
+   "i": 117,
+   "line": "Healing, surgical care and long-term recovery here depend on medicinal herbs from outside, which the siege has cut off."
+  },
+  "why": "the page says this good comes from outside and the siege has cut it off; this unmarked row offers it",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Herbal remedies",
+  "factWriter": "src/domain/display/chainNeedShown.js :: chainNeedLine"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.cutgood",
+  "town": "bar0-city-under_siege+famine-rand-106",
+  "tab": "Systems/Economics",
+  "i": 39,
+  "line": "Apothecary & Alchemy Remedies and simple preparations, made and sold here: a modest trade.",
+  "against": {
+   "tab": "Systems/Economics",
+   "i": 117,
+   "line": "Healing, surgical care and long-term recovery here depend on medicinal herbs from outside, which the siege has cut off."
+  },
+  "why": "the page says this good comes from outside and the siege has cut it off; this unmarked row offers it",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/generators/economy/incomeLineSiblings.js :: REMEDIES_LINE",
+  "factWriter": "src/domain/display/chainNeedShown.js :: chainNeedLine"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.abroad",
+  "town": "bar0-city-under_siege+famine-rand-107",
+  "tab": "Systems/Institutions",
+  "i": 38,
+  "line": "Guild bowyers and fletchers selling arrows by the sheaf, special broadheads, and composite bows to order, supplying the watch, the garrison, and the caravans.",
+  "against": {
+   "tab": "Summary/Crisis",
+   "i": 1,
+   "line": "Enemies are camped around Miloovo, and nothing comes in by road."
+  },
+  "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionDescVariants.js :: PAIRS",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.abroad",
+  "town": "bar0-city-under_siege+famine-rand-107",
+  "tab": "Systems/Services",
+  "i": 39,
+  "line": "Personal protection for merchants, officials, and travelers.",
+  "against": {
+   "tab": "Summary/Crisis",
+   "i": 1,
+   "line": "Enemies are camped around Miloovo, and nothing comes in by road."
+  },
+  "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Bodyguard service",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.outputs",
+  "town": "bar0-city-under_siege+famine-rand-107",
+  "tab": "Systems/Economics",
+  "i": 180,
+  "line": "Armed escort · Mercenary hire · Training services",
+  "against": {
+   "tab": "Systems/Institutions",
+   "i": 11,
+   "line": "Services · Bodyguard service · Escort (stopped)"
+  },
+  "why": "chain Mercenary Forces is printed ○ Operational and lists \"escort\", which the page marks stopped",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Gladiator hire"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.outputs",
+  "town": "bar0-city-under_siege+famine-rand-107",
+  "tab": "Systems/Economics",
+  "i": 185,
+  "line": "Armed escort · Monster hunting services · Dungeon clearance",
+  "against": {
+   "tab": "Systems/Institutions",
+   "i": 11,
+   "line": "Services · Bodyguard service · Escort (stopped)"
+  },
+  "why": "chain Adventuring & Escort is printed ○ Operational and lists \"escort\", which the page marks stopped",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Gladiator hire"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.abroad",
+  "town": "bar0-city-under_siege+famine-rand-108",
+  "tab": "Systems/Institutions",
+  "i": 23,
+  "line": "A cluster of apothecaries pressed close enough that competition drives them apart in trade, some to surgery, some to herb-work, some to medicines brought from abroad.",
+  "against": {
+   "tab": "Summary/Crisis",
+   "i": 1,
+   "line": "Enemies are camped around Agiospolis, and nothing comes in by road."
+  },
+  "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionDescColour.js :: DESC_VARIANT_COLOUR_DECLARATIONS",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.abroad",
+  "town": "bar0-city-under_siege+famine-rand-108",
+  "tab": "Systems/Institutions",
+  "i": 238,
+  "line": "Serves merchants, military, and travelers needing fresh mounts.",
+  "against": {
+   "tab": "Summary/Crisis",
+   "i": 1,
+   "line": "Enemies are camped around Agiospolis, and nothing comes in by road."
+  },
+  "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionalCatalog.js :: INSTITUTION_FAMILIES.shared",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.failedFood",
+  "town": "bar0-city-under_siege+famine-rand-108",
+  "tab": "Systems/Resources",
+  "i": 12,
+  "line": "Open Grazing Land · livestock · wool · dairy · animal hides · Strategic Crossroads · trade access",
+  "against": {
+   "tab": "Systems/Resources",
+   "i": 5,
+   "line": "✗ Failed this year · Livestock"
+  },
+  "why": "the page says livestock failed this year; the commodities available list it unmarked",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/resourceData.js :: RESOURCE_DATA.crossroads_position",
+  "factWriter": "src/components/new/tabs/ResourcesTab.jsx :: ResourceChainCard"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.abroad",
+  "town": "bar0-city-under_siege+famine-rand-109",
+  "tab": "Systems/Institutions",
+  "i": 38,
+  "line": "Guild bowyers and fletchers selling arrows by the sheaf, special broadheads, and composite bows to order, supplying the watch, the garrison, and the caravans.",
+  "against": {
+   "tab": "Summary/Crisis",
+   "i": 1,
+   "line": "Enemies are camped around Ulffoss, and nothing comes in by road."
+  },
+  "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionDescVariants.js :: PAIRS",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.abroad",
+  "town": "bar0-city-under_siege+famine-rand-110",
+  "tab": "Systems/Institutions",
+  "i": 33,
+  "line": "Guild bowyers and fletchers selling arrows by the sheaf, special broadheads, and composite bows to order, supplying the watch, the garrison, and the caravans.",
+  "against": {
+   "tab": "Summary/Crisis",
+   "i": 1,
+   "line": "Enemies are camped around Nikephcastron, and nothing comes in by road."
+  },
+  "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionDescVariants.js :: PAIRS",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.outputs",
+  "town": "bar0-city-under_siege+famine-rand-110",
+  "tab": "Systems/Economics",
+  "i": 192,
+  "line": "Armed escort · Monster hunting services · Dungeon clearance",
+  "against": {
+   "tab": "Systems/Institutions",
+   "i": 197,
+   "line": "Services · Armed escort (stopped)"
+  },
+  "why": "chain Adventuring & Escort is printed ○ Operational and lists \"armed escort\", which the page marks stopped",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "(untraced)"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.failedFood",
+  "town": "bar0-city-under_siege+famine-rand-110",
+  "tab": "Systems/Resources",
+  "i": 15,
+  "line": "Deep Natural Harbour · maritime access · Coastal Timber · timber · Fishing Grounds · fish · salt",
+  "against": {
+   "tab": "Systems/Resources",
+   "i": 8,
+   "line": "✗ Failed this year · Fish"
+  },
+  "why": "the page says fish failed this year; the commodities available list it unmarked",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/resourceData.js :: RESOURCE_DATA.deep_harbour",
+  "factWriter": "src/components/new/tabs/ResourcesTab.jsx :: ResourceChainCard"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.failedFood",
+  "town": "bar0-city-under_siege+famine-rand-111",
+  "tab": "Systems/Resources",
+  "i": 12,
+  "line": "Fishing Grounds · fish · salt · Salt Flats · Magical Ley Line Node · medicinal herbs · Deep Natural Harbour · maritime access",
+  "against": {
+   "tab": "Systems/Resources",
+   "i": 5,
+   "line": "✗ Failed this year · Fish"
+  },
+  "why": "the page says fish failed this year; the commodities available list it unmarked",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/resourceData.js :: RESOURCE_DATA.magical_node",
+  "factWriter": "src/components/new/tabs/ResourcesTab.jsx :: ResourceChainCard"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.abroad",
+  "town": "bar0-city-under_siege+famine-rand-113",
+  "tab": "Systems/Institutions",
+  "i": 33,
+  "line": "Supplies the watch, the garrison, and the caravans.",
+  "against": {
+   "tab": "Summary/Crisis",
+   "i": 1,
+   "line": "Enemies are camped around Megalchorion, and nothing comes in by road."
+  },
+  "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionalCatalog.js :: INSTITUTION_FAMILIES.shared",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.abroad",
+  "town": "bar0-city-under_siege+famine-rand-113",
+  "tab": "Systems/Institutions",
+  "i": 279,
+  "line": "Stabling, horse-dealing, and farriery gathered in one quarter, serving merchants, soldiers, and travellers in want of a fresh mount.",
+  "against": {
+   "tab": "Summary/Crisis",
+   "i": 1,
+   "line": "Enemies are camped around Megalchorion, and nothing comes in by road."
+  },
+  "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionDescColour.js :: DESC_VARIANT_COLOUR_DECLARATIONS",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.abroad",
+  "town": "bar0-city-under_siege+famine-rand-113",
+  "tab": "Systems/Services",
+  "i": 30,
+  "line": "Personal protection for merchants, officials, and travelers.",
+  "against": {
+   "tab": "Summary/Crisis",
+   "i": 1,
+   "line": "Enemies are camped around Megalchorion, and nothing comes in by road."
+  },
+  "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Bodyguard service",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.cutgood",
+  "town": "bar0-city-under_siege+famine-rand-113",
+  "tab": "Systems/Institutions",
+  "i": 18,
+  "line": "Some focus on chirurgery, others on herbal preparations, others on imported medicines.",
+  "against": {
+   "tab": "Systems/Economics",
+   "i": 106,
+   "line": "Healing, surgical care and long-term recovery here depend on medicinal herbs from outside, which the siege has cut off."
+  },
+  "why": "the page says this good comes from outside and the siege has cut it off; this unmarked row offers it",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionalCatalog.js :: INSTITUTION_FAMILIES.shared",
+  "factWriter": "src/domain/display/chainNeedShown.js :: chainNeedLine"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.cutgood",
+  "town": "bar0-city-under_siege+famine-rand-113",
+  "tab": "Systems/Institutions",
+  "i": 21,
+  "line": "Services · Herbal remedies · Specialist compounds",
+  "against": {
+   "tab": "Systems/Economics",
+   "i": 106,
+   "line": "Healing, surgical care and long-term recovery here depend on medicinal herbs from outside, which the siege has cut off."
+  },
+  "why": "the page says this good comes from outside and the siege has cut it off; this unmarked row offers it (chips: Herbal remedies)",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Specialist compounds",
+  "factWriter": "src/domain/display/chainNeedShown.js :: chainNeedLine"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.cutgood",
+  "town": "bar0-city-under_siege+famine-rand-113",
+  "tab": "Systems/Services",
+  "i": 235,
+  "line": "Herbal remedies",
+  "against": {
+   "tab": "Systems/Economics",
+   "i": 106,
+   "line": "Healing, surgical care and long-term recovery here depend on medicinal herbs from outside, which the siege has cut off."
+  },
+  "why": "the page says this good comes from outside and the siege has cut it off; this unmarked row offers it",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Herbal remedies",
+  "factWriter": "src/domain/display/chainNeedShown.js :: chainNeedLine"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.cutgood",
+  "town": "bar0-city-under_siege+famine-rand-113",
+  "tab": "Systems/Services",
+  "i": 242,
+  "line": "Rare medications and treatments available through district-wide sourcing.",
+  "against": {
+   "tab": "Systems/Economics",
+   "i": 106,
+   "line": "Healing, surgical care and long-term recovery here depend on medicinal herbs from outside, which the siege has cut off."
+  },
+  "why": "the page says this good comes from outside and the siege has cut it off; this unmarked row offers it",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Specialist compounds",
+  "factWriter": "src/domain/display/chainNeedShown.js :: chainNeedLine"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.cutgood",
+  "town": "bar0-city-under_siege+famine-rand-113",
+  "tab": "Systems/Economics",
+  "i": 33,
+  "line": "Apothecary & Alchemy Remedies and simple preparations, made and sold here: a modest trade.",
+  "against": {
+   "tab": "Systems/Economics",
+   "i": 106,
+   "line": "Healing, surgical care and long-term recovery here depend on medicinal herbs from outside, which the siege has cut off."
+  },
+  "why": "the page says this good comes from outside and the siege has cut it off; this unmarked row offers it",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/generators/economy/incomeLineSiblings.js :: REMEDIES_LINE",
+  "factWriter": "src/domain/display/chainNeedShown.js :: chainNeedLine"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.outputs",
+  "town": "bar0-city-under_siege+famine-rand-113",
+  "tab": "Systems/Economics",
+  "i": 165,
+  "line": "Armed escort · Monster hunting services · Dungeon clearance",
+  "against": {
+   "tab": "Systems/Institutions",
+   "i": 185,
+   "line": "Services · Armed escort (stopped)"
+  },
+  "why": "chain Adventuring & Escort is printed ○ Operational and lists \"armed escort\", which the page marks stopped",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "(untraced)"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.abroad",
+  "town": "bar0-city-under_siege+famine-rand-115",
+  "tab": "Systems/Institutions",
+  "i": 23,
+  "line": "A cluster of apothecaries pressed close enough that competition drives them apart in trade, some to surgery, some to herb-work, some to medicines brought from abroad.",
+  "against": {
+   "tab": "Summary/Crisis",
+   "i": 1,
+   "line": "Enemies are camped around Purivalli, and nothing comes in by road."
+  },
+  "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionDescColour.js :: DESC_VARIANT_COLOUR_DECLARATIONS",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.abroad",
+  "town": "bar0-city-under_siege+famine-rand-115",
+  "tab": "Systems/Institutions",
+  "i": 38,
+  "line": "Supplies the watch, the garrison, and the caravans.",
+  "against": {
+   "tab": "Summary/Crisis",
+   "i": 1,
+   "line": "Enemies are camped around Purivalli, and nothing comes in by road."
+  },
+  "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionalCatalog.js :: INSTITUTION_FAMILIES.shared",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.failedFood",
+  "town": "bar0-city-under_siege+famine-rand-115",
+  "tab": "Systems/Resources",
+  "i": 12,
+  "line": "River Fisheries · fish · Marshlands · peat · honey · medicinal herbs · Hot Springs / Healing Waters · Iron Ore Deposits · iron · metalwork · Coal or Peat Deposits · coal · Open Grazing Land · livestock · wool · dairy · animal hides · Mill Sites · flour · processed textiles",
+  "against": {
+   "tab": "Systems/Resources",
+   "i": 7,
+   "line": "✗ Failed this year · Livestock"
+  },
+  "why": "the page says livestock failed this year; the commodities available list it unmarked",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/resourceData.js :: RESOURCE_DATA.hot_springs",
+  "factWriter": "src/components/new/tabs/ResourcesTab.jsx :: ResourceChainCard"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.abroad",
+  "town": "bar0-city-under_siege+famine-rand-116",
+  "tab": "Systems/Institutions",
+  "i": 33,
+  "line": "The watch, the garrison, and the caravans buy here.",
+  "against": {
+   "tab": "Summary/Crisis",
+   "i": 1,
+   "line": "Enemies are camped around Balmere, and nothing comes in by road."
+  },
+  "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionDescVariants.js :: PAIRS",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.outputs",
+  "town": "bar0-city-under_siege+famine-rand-116",
+  "tab": "Systems/Economics",
+  "i": 121,
+  "line": "Armed escort · Mercenary hire · Training services",
+  "against": {
+   "tab": "Systems/Institutions",
+   "i": 168,
+   "line": "Services · Armed escort (stopped)"
+  },
+  "why": "chain Mercenary Forces is printed ○ Operational and lists \"armed escort\", which the page marks stopped",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "(untraced)"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.outputs",
+  "town": "bar0-city-under_siege+famine-rand-116",
+  "tab": "Systems/Economics",
+  "i": 126,
+  "line": "Armed escort · Monster hunting services · Dungeon clearance",
+  "against": {
+   "tab": "Systems/Institutions",
+   "i": 168,
+   "line": "Services · Armed escort (stopped)"
+  },
+  "why": "chain Adventuring & Escort is printed ○ Operational and lists \"armed escort\", which the page marks stopped",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "(untraced)"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.failedFood",
+  "town": "bar0-city-under_siege+famine-rand-116",
+  "tab": "Systems/Resources",
+  "i": 13,
+  "line": "Wild Foraging Areas · honey · medicinal herbs · Ancient Grove · Managed Woodland · timber · Extensive Grain Fields · grain · flour",
+  "against": {
+   "tab": "Systems/Resources",
+   "i": 6,
+   "line": "✗ Failed this year · Grain"
+  },
+  "why": "the page says grain failed this year; the commodities available list it unmarked",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/resourceData.js :: RESOURCE_DATA.grain_fields",
+  "factWriter": "src/components/new/tabs/ResourcesTab.jsx :: ResourceChainCard"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.abroad",
+  "town": "bar0-city-under_siege+famine-rand-117",
+  "tab": "Systems/Institutions",
+  "i": 43,
+  "line": "The watch, the garrison, and the caravans buy here.",
+  "against": {
+   "tab": "Summary/Crisis",
+   "i": 1,
+   "line": "Enemies are camped around Zoltanbulag, and nothing comes in by road."
+  },
+  "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionDescVariants.js :: PAIRS",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.abroad",
+  "town": "bar0-city-under_siege+famine-rand-117",
+  "tab": "Systems/Institutions",
+  "i": 268,
+  "line": "Serves merchants, military, and travelers needing fresh mounts.",
+  "against": {
+   "tab": "Summary/Crisis",
+   "i": 1,
+   "line": "Enemies are camped around Zoltanbulag, and nothing comes in by road."
+  },
+  "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionalCatalog.js :: INSTITUTION_FAMILIES.shared",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.abroad",
+  "town": "bar0-city-under_siege+famine-rand-117",
+  "tab": "Systems/Services",
+  "i": 42,
+  "line": "Personal protection for merchants, officials, and travelers.",
+  "against": {
+   "tab": "Summary/Crisis",
+   "i": 1,
+   "line": "Enemies are camped around Zoltanbulag, and nothing comes in by road."
+  },
+  "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Bodyguard service",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.cutgood",
+  "town": "bar0-city-under_siege+famine-rand-117",
+  "tab": "Systems/Institutions",
+  "i": 28,
+  "line": "Some focus on chirurgery, others on herbal preparations, others on imported medicines.",
+  "against": {
+   "tab": "Systems/Economics",
+   "i": 131,
+   "line": "Healing, surgical care and long-term recovery here depend on medicinal herbs from outside, which the siege has cut off."
+  },
+  "why": "the page says this good comes from outside and the siege has cut it off; this unmarked row offers it",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionalCatalog.js :: INSTITUTION_FAMILIES.shared",
+  "factWriter": "src/domain/display/chainNeedShown.js :: chainNeedLine"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.cutgood",
+  "town": "bar0-city-under_siege+famine-rand-117",
+  "tab": "Systems/Institutions",
+  "i": 31,
+  "line": "Services · Herbal remedies",
+  "against": {
+   "tab": "Systems/Economics",
+   "i": 131,
+   "line": "Healing, surgical care and long-term recovery here depend on medicinal herbs from outside, which the siege has cut off."
+  },
+  "why": "the page says this good comes from outside and the siege has cut it off; this unmarked row offers it (chips: Herbal remedies)",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Herbal remedies",
+  "factWriter": "src/domain/display/chainNeedShown.js :: chainNeedLine"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.cutgood",
+  "town": "bar0-city-under_siege+famine-rand-117",
+  "tab": "Systems/Services",
+  "i": 237,
+  "line": "Herbal remedies",
+  "against": {
+   "tab": "Systems/Economics",
+   "i": 131,
+   "line": "Healing, surgical care and long-term recovery here depend on medicinal herbs from outside, which the siege has cut off."
+  },
+  "why": "the page says this good comes from outside and the siege has cut it off; this unmarked row offers it",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Herbal remedies",
+  "factWriter": "src/domain/display/chainNeedShown.js :: chainNeedLine"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.outputs",
+  "town": "bar0-city-under_siege+famine-rand-117",
+  "tab": "Systems/Economics",
+  "i": 190,
+  "line": "Armed escort · Monster hunting services · Dungeon clearance",
+  "against": {
+   "tab": "Systems/Institutions",
+   "i": 11,
+   "line": "Services · Bodyguard service · Escort (stopped)"
+  },
+  "why": "chain Adventuring & Escort is printed ○ Operational and lists \"escort\", which the page marks stopped",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Gladiator hire"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.abroad",
+  "town": "bar0-city-under_siege+famine-rand-118",
+  "tab": "Systems/Institutions",
+  "i": 13,
+  "line": "A cluster of apothecaries pressed close enough that competition drives them apart in trade, some to surgery, some to herb-work, some to medicines brought from abroad.",
+  "against": {
+   "tab": "Summary/Crisis",
+   "i": 1,
+   "line": "Enemies are camped around Huaji, and nothing comes in by road."
+  },
+  "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionDescColour.js :: DESC_VARIANT_COLOUR_DECLARATIONS",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.outputs",
+  "town": "bar0-city-under_siege+famine-rand-118",
+  "tab": "Systems/Economics",
+  "i": 244,
+  "line": "Armed escort · Monster hunting services · Dungeon clearance",
+  "against": {
+   "tab": "Systems/Institutions",
+   "i": 168,
+   "line": "Services · Armed escort (stopped)"
+  },
+  "why": "chain Adventuring & Escort is printed ○ Operational and lists \"armed escort\", which the page marks stopped",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "(untraced)"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.abroad",
+  "town": "bar0-city-under_siege+famine-rand-119",
+  "tab": "Systems/Institutions",
+  "i": 28,
+  "line": "A cluster of apothecaries pressed close enough that competition drives them apart in trade, some to surgery, some to herb-work, some to medicines brought from abroad.",
+  "against": {
+   "tab": "Summary/Crisis",
+   "i": 1,
+   "line": "Enemies are camped around Ingimo, and nothing comes in by road."
+  },
+  "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionDescColour.js :: DESC_VARIANT_COLOUR_DECLARATIONS",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.abroad",
+  "town": "bar0-city-under_siege+famine-rand-119",
+  "tab": "Systems/Institutions",
+  "i": 43,
+  "line": "Guild bowyers and fletchers selling arrows by the sheaf, special broadheads, and composite bows to order, supplying the watch, the garrison, and the caravans.",
+  "against": {
+   "tab": "Summary/Crisis",
+   "i": 1,
+   "line": "Enemies are camped around Ingimo, and nothing comes in by road."
+  },
+  "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionDescVariants.js :: PAIRS",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.abroad",
+  "town": "bar0-city-under_siege+famine-rand-119",
+  "tab": "Systems/Services",
+  "i": 45,
+  "line": "Personal protection for merchants, officials, and travelers.",
+  "against": {
+   "tab": "Summary/Crisis",
+   "i": 1,
+   "line": "Enemies are camped around Ingimo, and nothing comes in by road."
+  },
+  "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Bodyguard service",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.outputs",
+  "town": "bar0-city-under_siege+famine-rand-119",
+  "tab": "Systems/Economics",
+  "i": 203,
+  "line": "Armed escort · Monster hunting services · Dungeon clearance",
+  "against": {
+   "tab": "Systems/Institutions",
+   "i": 11,
+   "line": "Services · Bodyguard service · Escort (stopped)"
+  },
+  "why": "chain Adventuring & Escort is printed ○ Operational and lists \"escort\", which the page marks stopped",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Gladiator hire"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.failedFood",
+  "town": "bar0-city-under_siege+famine-rand-119",
+  "tab": "Systems/Resources",
+  "i": 13,
+  "line": "Deep Natural Harbour · maritime access · Salt Flats · salt · Ancient Ruins · trade access · Fishing Grounds · fish · Coastal Timber · timber",
+  "against": {
+   "tab": "Systems/Resources",
+   "i": 8,
+   "line": "✗ Failed this year · Fish"
+  },
+  "why": "the page says fish failed this year; the commodities available list it unmarked",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/resourceData.js :: RESOURCE_DATA.deep_harbour",
+  "factWriter": "src/components/new/tabs/ResourcesTab.jsx :: ResourceChainCard"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.abroad",
+  "town": "bar0-city-under_siege+famine-rand-120",
+  "tab": "Systems/Institutions",
+  "i": 28,
+  "line": "Supplies the watch, the garrison, and the caravans.",
+  "against": {
+   "tab": "Summary/Crisis",
+   "i": 1,
+   "line": "Enemies are camped around Aryapeta, and nothing comes in by road."
+  },
+  "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionalCatalog.js :: INSTITUTION_FAMILIES.shared",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.famine.meat",
+  "town": "bar0-city-under_siege+famine-rand-120",
+  "tab": "Systems/Institutions",
+  "i": 41,
+  "line": "Services · Fresh meat",
+  "against": {
+   "tab": "Summary/Plot Hooks",
+   "i": 152,
+   "line": "No food comes in by trade now, and what is left here is in a few hands; those who hold it have quadrupled the price, and the locals are arguing over whether to pay, wait it out, or take it."
+  },
+  "why": "the herds failed (or the town has none and nothing comes in); this unmarked row offers meat or dairy (chips: Fresh meat)",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "(untraced)",
+  "factWriter": "src/generators/economy/foodBalance.js :: grownShareOf"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.famine.meat",
+  "town": "bar0-city-under_siege+famine-rand-120",
+  "tab": "Systems/Services",
+  "i": 156,
+  "line": "Fresh meat",
+  "against": {
+   "tab": "Summary/Plot Hooks",
+   "i": 152,
+   "line": "No food comes in by trade now, and what is left here is in a few hands; those who hold it have quadrupled the price, and the locals are arguing over whether to pay, wait it out, or take it."
+  },
+  "why": "the herds failed (or the town has none and nothing comes in); this unmarked row offers meat or dairy",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "(untraced)",
+  "factWriter": "src/generators/economy/foodBalance.js :: grownShareOf"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.failedFood",
+  "town": "bar0-city-under_siege+famine-rand-120",
+  "tab": "Systems/Resources",
+  "i": 15,
+  "line": "Hunting Grounds · game meat · animal hides · furs · Strategic Crossroads · trade access · Iron Ore Deposits · iron · metalwork · Extensive Grain Fields · grain · flour",
+  "against": {
+   "tab": "Systems/Resources",
+   "i": 8,
+   "line": "✗ Failed this year · Grain"
+  },
+  "why": "the page says grain failed this year; the commodities available list it unmarked",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/resourceData.js :: RESOURCE_DATA.grain_fields",
+  "factWriter": "src/components/new/tabs/ResourcesTab.jsx :: ResourceChainCard"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.abroad",
+  "town": "bar0-city-under_siege+famine-rand-121",
+  "tab": "Systems/Institutions",
+  "i": 38,
+  "line": "Guild bowyers and fletchers selling arrows by the sheaf, special broadheads, and composite bows to order, supplying the watch, the garrison, and the caravans.",
+  "against": {
+   "tab": "Summary/Crisis",
+   "i": 1,
+   "line": "Enemies are camped around Monteminus, and nothing comes in by road."
+  },
+  "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionDescVariants.js :: PAIRS",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.abroad",
+  "town": "bar0-city-under_siege+famine-rand-121",
+  "tab": "Systems/Institutions",
+  "i": 273,
+  "line": "Stabling, horse-dealing, and farriery gathered in one quarter, serving merchants, soldiers, and travellers in want of a fresh mount.",
+  "against": {
+   "tab": "Summary/Crisis",
+   "i": 1,
+   "line": "Enemies are camped around Monteminus, and nothing comes in by road."
+  },
+  "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionDescColour.js :: DESC_VARIANT_COLOUR_DECLARATIONS",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.abroad",
+  "town": "bar0-city-under_siege+famine-rand-121",
+  "tab": "Systems/Services",
+  "i": 40,
+  "line": "Personal protection for merchants, officials, and travelers.",
+  "against": {
+   "tab": "Summary/Crisis",
+   "i": 1,
+   "line": "Enemies are camped around Monteminus, and nothing comes in by road."
+  },
+  "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Bodyguard service",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.abroad",
+  "town": "bar0-city-under_siege+famine-rand-122",
+  "tab": "Systems/Institutions",
+  "i": 18,
+  "line": "A cluster of apothecaries pressed close enough that competition drives them apart in trade, some to surgery, some to herb-work, some to medicines brought from abroad.",
+  "against": {
+   "tab": "Summary/Crisis",
+   "i": 1,
+   "line": "Enemies are camped around Weiguan, and nothing comes in by road."
+  },
+  "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionDescColour.js :: DESC_VARIANT_COLOUR_DECLARATIONS",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.abroad",
+  "town": "bar0-city-under_siege+famine-rand-122",
+  "tab": "Systems/Institutions",
+  "i": 33,
+  "line": "Supplies the watch, the garrison, and the caravans.",
+  "against": {
+   "tab": "Summary/Crisis",
+   "i": 1,
+   "line": "Enemies are camped around Weiguan, and nothing comes in by road."
+  },
+  "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionalCatalog.js :: INSTITUTION_FAMILIES.shared",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.abroad",
+  "town": "bar0-city-under_siege+famine-rand-122",
+  "tab": "Systems/Services",
+  "i": 33,
+  "line": "Personal protection for merchants, officials, and travelers.",
+  "against": {
+   "tab": "Summary/Crisis",
+   "i": 1,
+   "line": "Enemies are camped around Weiguan, and nothing comes in by road."
+  },
+  "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Bodyguard service",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.outputs",
+  "town": "bar0-city-under_siege+famine-rand-122",
+  "tab": "Systems/Economics",
+  "i": 106,
+  "line": "Armed escort · Monster hunting services · Dungeon clearance",
+  "against": {
+   "tab": "Systems/Institutions",
+   "i": 6,
+   "line": "Services · Bodyguard service · Escort (stopped)"
+  },
+  "why": "chain Adventuring & Escort is printed ○ Operational and lists \"escort\", which the page marks stopped",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Gladiator hire"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.abroad",
+  "town": "bar0-city-under_siege+famine-rand-123",
+  "tab": "Systems/Institutions",
+  "i": 28,
+  "line": "Guild bowyers and fletchers selling arrows by the sheaf, special broadheads, and composite bows to order, supplying the watch, the garrison, and the caravans.",
+  "against": {
+   "tab": "Summary/Crisis",
+   "i": 1,
+   "line": "Enemies are camped around Nikephambelos, and nothing comes in by road."
+  },
+  "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionDescVariants.js :: PAIRS",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.abroad",
+  "town": "bar0-city-under_siege+famine-rand-123",
+  "tab": "Systems/Institutions",
+  "i": 232,
+  "line": "Serves merchants, military, and travelers needing fresh mounts.",
+  "against": {
+   "tab": "Summary/Crisis",
+   "i": 1,
+   "line": "Enemies are camped around Nikephambelos, and nothing comes in by road."
+  },
+  "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionalCatalog.js :: INSTITUTION_FAMILIES.shared",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.famine.meat",
+  "town": "bar0-city-under_siege+famine-rand-124",
+  "tab": "Systems/Institutions",
+  "i": 6,
+  "line": "Services · Fresh meat",
+  "against": {
+   "tab": "Systems/Economics",
+   "i": 40,
+   "line": "No food comes into Qasrnagar by trade. Most households go short, and hunger is already here."
+  },
+  "why": "the herds failed (or the town has none and nothing comes in); this unmarked row offers meat or dairy (chips: Fresh meat)",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "(untraced)",
+  "factWriter": "src/components/new/tabs/EconomicsTab.jsx :: shortWords"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.famine.meat",
+  "town": "bar0-city-under_siege+famine-rand-124",
+  "tab": "Systems/Services",
+  "i": 65,
+  "line": "Fresh meat",
+  "against": {
+   "tab": "Systems/Economics",
+   "i": 40,
+   "line": "No food comes into Qasrnagar by trade. Most households go short, and hunger is already here."
+  },
+  "why": "the herds failed (or the town has none and nothing comes in); this unmarked row offers meat or dairy",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "(untraced)",
+  "factWriter": "src/components/new/tabs/EconomicsTab.jsx :: shortWords"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.abroad",
+  "town": "bar0-city-under_siege+famine-rand-125",
+  "tab": "Systems/Institutions",
+  "i": 23,
+  "line": "A cluster of apothecaries pressed close enough that competition drives them apart in trade, some to surgery, some to herb-work, some to medicines brought from abroad.",
+  "against": {
+   "tab": "Summary/Crisis",
+   "i": 1,
+   "line": "Enemies are camped around Nanfeng, and nothing comes in by road."
+  },
+  "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionDescColour.js :: DESC_VARIANT_COLOUR_DECLARATIONS",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.abroad",
+  "town": "bar0-city-under_siege+famine-rand-125",
+  "tab": "Systems/Institutions",
+  "i": 38,
+  "line": "The watch, the garrison, and the caravans buy here.",
+  "against": {
+   "tab": "Summary/Crisis",
+   "i": 1,
+   "line": "Enemies are camped around Nanfeng, and nothing comes in by road."
+  },
+  "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionDescVariants.js :: PAIRS",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.abroad",
+  "town": "bar0-city-under_siege+famine-rand-125",
+  "tab": "Systems/Services",
+  "i": 34,
+  "line": "Personal protection for merchants, officials, and travelers.",
+  "against": {
+   "tab": "Summary/Crisis",
+   "i": 1,
+   "line": "Enemies are camped around Nanfeng, and nothing comes in by road."
+  },
+  "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Bodyguard service",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.famine.meat",
+  "town": "bar0-city-under_siege+famine-rand-125",
+  "tab": "Systems/Institutions",
+  "i": 56,
+  "line": "Services · Fresh meat",
+  "against": {
+   "tab": "Systems/Economics",
+   "i": 48,
+   "line": "No food comes into Nanfeng by trade. Most households go short, and hunger is already here."
+  },
+  "why": "the herds failed (or the town has none and nothing comes in); this unmarked row offers meat or dairy (chips: Fresh meat)",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "(untraced)",
+  "factWriter": "src/components/new/tabs/EconomicsTab.jsx :: shortWords"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.famine.meat",
+  "town": "bar0-city-under_siege+famine-rand-125",
+  "tab": "Systems/Services",
+  "i": 198,
+  "line": "Fresh meat",
+  "against": {
+   "tab": "Systems/Economics",
+   "i": 48,
+   "line": "No food comes into Nanfeng by trade. Most households go short, and hunger is already here."
+  },
+  "why": "the herds failed (or the town has none and nothing comes in); this unmarked row offers meat or dairy",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "(untraced)",
+  "factWriter": "src/components/new/tabs/EconomicsTab.jsx :: shortWords"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.outputs",
+  "town": "bar0-city-under_siege+famine-rand-125",
+  "tab": "Systems/Economics",
+  "i": 181,
+  "line": "Armed escort · Mercenary hire · Training services",
+  "against": {
+   "tab": "Systems/Institutions",
+   "i": 182,
+   "line": "Services · Defence services · Mercenary hire (stopped)"
+  },
+  "why": "chain Mercenary Forces is printed ○ Operational and lists \"mercenary hire\", which the page marks stopped",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Defence services"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.outputs",
+  "town": "bar0-city-under_siege+famine-rand-125",
+  "tab": "Systems/Economics",
+  "i": 186,
+  "line": "Armed escort · Monster hunting services · Dungeon clearance",
+  "against": {
+   "tab": "Systems/Institutions",
+   "i": 197,
+   "line": "Services · Armed escort (stopped)"
+  },
+  "why": "chain Adventuring & Escort is printed ○ Operational and lists \"armed escort\", which the page marks stopped",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "(untraced)"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.abroad",
+  "town": "bar0-city-under_siege+famine-rand-126",
+  "tab": "Systems/Institutions",
+  "i": 8,
+  "line": "A cluster of apothecaries pressed close enough that competition drives them apart in trade, some to surgery, some to herb-work, some to medicines brought from abroad.",
+  "against": {
+   "tab": "Summary/Crisis",
+   "i": 1,
+   "line": "Enemies are camped around Hadithamela, and nothing comes in by road."
+  },
+  "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionDescColour.js :: DESC_VARIANT_COLOUR_DECLARATIONS",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.abroad",
+  "town": "bar0-city-under_siege+famine-rand-126",
+  "tab": "Systems/Institutions",
+  "i": 23,
+  "line": "Supplies the watch, the garrison, and the caravans.",
+  "against": {
+   "tab": "Summary/Crisis",
+   "i": 1,
+   "line": "Enemies are camped around Hadithamela, and nothing comes in by road."
+  },
+  "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionalCatalog.js :: INSTITUTION_FAMILIES.shared",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.failedFood",
+  "town": "bar0-city-under_siege+famine-rand-126",
+  "tab": "Systems/Resources",
+  "i": 14,
+  "line": "Ancient Grove · medicinal herbs · honey · Iron Ore Deposits · iron · metalwork · Extensive Grain Fields · grain · flour",
+  "against": {
+   "tab": "Systems/Resources",
+   "i": 7,
+   "line": "✗ Failed this year · Grain"
+  },
+  "why": "the page says grain failed this year; the commodities available list it unmarked",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/resourceData.js :: RESOURCE_DATA.grain_fields",
+  "factWriter": "src/components/new/tabs/ResourcesTab.jsx :: ResourceChainCard"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.abroad",
+  "town": "bar0-city-under_siege+famine-rand-127",
+  "tab": "Systems/Institutions",
+  "i": 43,
+  "line": "Supplies the watch, the garrison, and the caravans.",
+  "against": {
+   "tab": "Summary/Crisis",
+   "i": 1,
+   "line": "Enemies are camped around Shangzhen, and nothing comes in by road."
+  },
+  "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionalCatalog.js :: INSTITUTION_FAMILIES.shared",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.abroad",
+  "town": "bar0-city-under_siege+famine-rand-127",
+  "tab": "Systems/Institutions",
+  "i": 279,
+  "line": "Serves merchants, military, and travelers needing fresh mounts.",
+  "against": {
+   "tab": "Summary/Crisis",
+   "i": 1,
+   "line": "Enemies are camped around Shangzhen, and nothing comes in by road."
+  },
+  "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionalCatalog.js :: INSTITUTION_FAMILIES.shared",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.abroad",
+  "town": "bar0-city-under_siege+famine-rand-127",
+  "tab": "Systems/Services",
+  "i": 11,
+  "line": "Personal protection for merchants, officials, and travelers.",
+  "against": {
+   "tab": "Summary/Crisis",
+   "i": 1,
+   "line": "Enemies are camped around Shangzhen, and nothing comes in by road."
+  },
+  "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Bodyguard service",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.outputs",
+  "town": "bar0-city-under_siege+famine-rand-127",
+  "tab": "Systems/Economics",
+  "i": 197,
+  "line": "Armed escort · Monster hunting services · Dungeon clearance",
+  "against": {
+   "tab": "Systems/Institutions",
+   "i": 11,
+   "line": "Services · Bodyguard service · Escort (stopped)"
+  },
+  "why": "chain Adventuring & Escort is printed ○ Operational and lists \"escort\", which the page marks stopped",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Gladiator hire"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.abroad",
+  "town": "bar0-city-under_siege+famine-rand-128",
+  "tab": "Systems/Institutions",
+  "i": 43,
+  "line": "The watch, the garrison, and the caravans buy here.",
+  "against": {
+   "tab": "Summary/Crisis",
+   "i": 1,
+   "line": "Enemies are camped around Eleftchorio, and nothing comes in by road."
+  },
+  "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionDescVariants.js :: PAIRS",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.abroad",
+  "town": "bar0-city-under_siege+famine-rand-128",
+  "tab": "Systems/Services",
+  "i": 7,
+  "line": "Personal protection for merchants, officials, and travelers.",
+  "against": {
+   "tab": "Summary/Crisis",
+   "i": 1,
+   "line": "Enemies are camped around Eleftchorio, and nothing comes in by road."
+  },
+  "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Bodyguard service",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.outputs",
+  "town": "bar0-city-under_siege+famine-rand-128",
+  "tab": "Systems/Economics",
+  "i": 205,
+  "line": "Armed escort · Monster hunting services · Dungeon clearance",
+  "against": {
+   "tab": "Systems/Institutions",
+   "i": 11,
+   "line": "Services · Bodyguard service · Escort (stopped)"
+  },
+  "why": "chain Adventuring & Escort is printed ○ Operational and lists \"escort\", which the page marks stopped",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Gladiator hire"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.abroad",
+  "town": "bar0-city-under_siege+famine-rand-129",
+  "tab": "Systems/Institutions",
+  "i": 18,
+  "line": "A cluster of apothecaries pressed close enough that competition drives them apart in trade, some to surgery, some to herb-work, some to medicines brought from abroad.",
+  "against": {
+   "tab": "Summary/Crisis",
+   "i": 1,
+   "line": "Enemies are camped around Karakmahal, and nothing comes in by road."
+  },
+  "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionDescColour.js :: DESC_VARIANT_COLOUR_DECLARATIONS",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.abroad",
+  "town": "bar0-city-under_siege+famine-rand-129",
+  "tab": "Systems/Institutions",
+  "i": 33,
+  "line": "The watch, the garrison, and the caravans buy here.",
+  "against": {
+   "tab": "Summary/Crisis",
+   "i": 1,
+   "line": "Enemies are camped around Karakmahal, and nothing comes in by road."
+  },
+  "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionDescVariants.js :: PAIRS",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.abroad",
+  "town": "bar0-city-under_siege+famine-rand-129",
+  "tab": "Systems/Institutions",
+  "i": 284,
+  "line": "Serves merchants, military, and travelers needing fresh mounts.",
+  "against": {
+   "tab": "Summary/Crisis",
+   "i": 1,
+   "line": "Enemies are camped around Karakmahal, and nothing comes in by road."
+  },
+  "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionalCatalog.js :: INSTITUTION_FAMILIES.shared",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.failedFood",
+  "town": "bar0-city-under_siege+famine-rand-129",
+  "tab": "Systems/Resources",
+  "i": 15,
+  "line": "Managed Woodland · timber · Ancient Grove · medicinal herbs · honey · Coal or Peat Deposits · coal · Extensive Grain Fields · grain · flour",
+  "against": {
+   "tab": "Systems/Resources",
+   "i": 8,
+   "line": "✗ Failed this year · Grain"
+  },
+  "why": "the page says grain failed this year; the commodities available list it unmarked",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/resourceData.js :: RESOURCE_DATA.grain_fields",
+  "factWriter": "src/components/new/tabs/ResourcesTab.jsx :: ResourceChainCard"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.abroad",
+  "town": "bar0-city-under_siege+famine-rand-130",
+  "tab": "Systems/Institutions",
+  "i": 38,
+  "line": "Supplies the watch, the garrison, and the caravans.",
+  "against": {
+   "tab": "Summary/Crisis",
+   "i": 1,
+   "line": "Enemies are camped around Radhavaram, and nothing comes in by road."
+  },
+  "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionalCatalog.js :: INSTITUTION_FAMILIES.shared",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.abroad",
+  "town": "bar0-city-under_siege+famine-rand-130",
+  "tab": "Systems/Institutions",
+  "i": 298,
+  "line": "Stabling, horse-dealing, and farriery gathered in one quarter, serving merchants, soldiers, and travellers in want of a fresh mount.",
+  "against": {
+   "tab": "Summary/Crisis",
+   "i": 1,
+   "line": "Enemies are camped around Radhavaram, and nothing comes in by road."
+  },
+  "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/institutionDescColour.js :: DESC_VARIANT_COLOUR_DECLARATIONS",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.outputs",
+  "town": "bar0-city-under_siege+famine-rand-130",
+  "tab": "Systems/Economics",
+  "i": 221,
+  "line": "Armed escort · Mercenary hire · Training services",
+  "against": {
+   "tab": "Systems/Institutions",
+   "i": 199,
+   "line": "Services · Armed escort (stopped)"
+  },
+  "why": "chain Mercenary Forces is printed ○ Operational and lists \"armed escort\", which the page marks stopped",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "(untraced)"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.outputs",
+  "town": "bar0-city-under_siege+famine-rand-130",
+  "tab": "Systems/Economics",
+  "i": 226,
+  "line": "Armed escort · Monster hunting services · Dungeon clearance",
+  "against": {
+   "tab": "Systems/Institutions",
+   "i": 199,
+   "line": "Services · Armed escort (stopped)"
+  },
+  "why": "chain Adventuring & Escort is printed ○ Operational and lists \"armed escort\", which the page marks stopped",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "(untraced)"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.failedFood",
+  "town": "bar0-city-under_siege+famine-rand-130",
+  "tab": "Systems/Resources",
+  "i": 10,
+  "line": "River Fisheries · fish · Wild Foraging Areas · honey · medicinal herbs · Strategic Crossroads · trade access · Iron Ore Deposits · iron · metalwork",
+  "against": {
+   "tab": "Systems/Resources",
+   "i": 3,
+   "line": "✗ Failed this year · Fish"
+  },
+  "why": "the page says fish failed this year; the commodities available list it unmarked",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/resourceData.js :: RESOURCE_DATA.crossroads_position",
+  "factWriter": "src/components/new/tabs/ResourcesTab.jsx :: ResourceChainCard"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.failedFood",
+  "town": "bar0-city-under_siege+famine-rand-130",
+  "tab": "Systems/Economics",
+  "i": 43,
+  "line": "iron · metalwork · Salted fish · Smoked seafood · Freshwater catch · Quality tools and weapons · Advanced weapons and armor · Refined iron ingots · Pig iron",
+  "against": {
+   "tab": "Systems/Resources",
+   "i": 3,
+   "line": "✗ Failed this year · Fish"
+  },
+  "why": "the page says fish failed this year; \"Produced locally\" lists it unmarked",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/data/supplyChainData.js :: ADVANCED_WEAPONS_AND_ARMOR",
+  "factWriter": "src/components/new/tabs/ResourcesTab.jsx :: ResourceChainCard"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.war.iron",
+  "town": "bar0-city-wartime-rand-101",
+  "tab": "Systems/Institutions",
+  "i": 36,
+  "line": "Services · Repairs · Tool manufacture · Weapon smithing",
+  "against": {
+   "tab": "Summary/Plot Hooks",
+   "i": 178,
+   "line": "War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tools with."
+  },
+  "why": "the page says war has taken the iron and the smiths have nothing to mend tools with; this unmarked smith row offers ironwork (chips: Repairs, Tool manufacture, Weapon smithing; card Blacksmiths)",
+  "crises": [
+   "wartime"
+  ],
+  "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Tool manufacture",
+  "factWriter": "src/generators/economy/outlookHookSiblings.js :: WAR_IRON_HOOK"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.war.iron",
+  "town": "bar0-city-wartime-rand-101",
+  "tab": "Systems/Services",
+  "i": 165,
+  "line": "Reforge broken tools, re-edge blades, mend ironwork.",
+  "against": {
+   "tab": "Summary/Plot Hooks",
+   "i": 178,
+   "line": "War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tools with."
+  },
+  "why": "the page says war has taken the iron and the smiths have nothing to mend tools with; this unmarked smith row offers ironwork",
+  "crises": [
+   "wartime"
+  ],
+  "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Repairs",
+  "factWriter": "src/generators/economy/outlookHookSiblings.js :: WAR_IRON_HOOK"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.war.iron",
+  "town": "bar0-city-wartime-rand-103",
+  "tab": "Systems/Institutions",
+  "i": 36,
+  "line": "Services · Horseshoeing · Repairs · Tool manufacture",
+  "against": {
+   "tab": "Summary/Plot Hooks",
+   "i": 157,
+   "line": "War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tools with."
+  },
+  "why": "the page says war has taken the iron and the smiths have nothing to mend tools with; this unmarked smith row offers ironwork (chips: Repairs, Tool manufacture; card Blacksmiths)",
+  "crises": [
+   "wartime"
+  ],
+  "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Tool manufacture",
+  "factWriter": "src/generators/economy/outlookHookSiblings.js :: WAR_IRON_HOOK"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.war.iron",
+  "town": "bar0-city-wartime-rand-103",
+  "tab": "Systems/Services",
+  "i": 143,
+  "line": "Repairs",
+  "against": {
+   "tab": "Summary/Plot Hooks",
+   "i": 157,
+   "line": "War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tools with."
+  },
+  "why": "the page says war has taken the iron and the smiths have nothing to mend tools with; this unmarked smith row offers ironwork (entry Repairs @ Blacksmiths)",
+  "crises": [
+   "wartime"
+  ],
+  "writer": "(untraced)",
+  "factWriter": "src/generators/economy/outlookHookSiblings.js :: WAR_IRON_HOOK"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.war.iron",
+  "town": "bar0-city-wartime-rand-103",
+  "tab": "Systems/Services",
+  "i": 167,
+  "line": "Tool manufacture",
+  "against": {
+   "tab": "Summary/Plot Hooks",
+   "i": 157,
+   "line": "War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tools with."
+  },
+  "why": "the page says war has taken the iron and the smiths have nothing to mend tools with; this unmarked smith row offers ironwork (entry Tool manufacture @ Blacksmiths)",
+  "crises": [
+   "wartime"
+  ],
+  "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Tool manufacture",
+  "factWriter": "src/generators/economy/outlookHookSiblings.js :: WAR_IRON_HOOK"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.war.iron",
+  "town": "bar0-city-wartime-rand-104",
+  "tab": "Systems/Institutions",
+  "i": 26,
+  "line": "Services · Horseshoeing · Repairs · Tool manufacture",
+  "against": {
+   "tab": "Summary/Plot Hooks",
+   "i": 141,
+   "line": "War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tools with."
+  },
+  "why": "the page says war has taken the iron and the smiths have nothing to mend tools with; this unmarked smith row offers ironwork (chips: Repairs, Tool manufacture; card Blacksmiths)",
+  "crises": [
+   "wartime"
+  ],
+  "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Tool manufacture",
+  "factWriter": "src/generators/economy/outlookHookSiblings.js :: WAR_IRON_HOOK"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.war.iron",
+  "town": "bar0-city-wartime-rand-104",
+  "tab": "Systems/Services",
+  "i": 114,
+  "line": "Reforge broken tools, re-edge blades, mend ironwork.",
+  "against": {
+   "tab": "Summary/Plot Hooks",
+   "i": 141,
+   "line": "War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tools with."
+  },
+  "why": "the page says war has taken the iron and the smiths have nothing to mend tools with; this unmarked smith row offers ironwork",
+  "crises": [
+   "wartime"
+  ],
+  "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Repairs",
+  "factWriter": "src/generators/economy/outlookHookSiblings.js :: WAR_IRON_HOOK"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.halfway",
+  "town": "bar0-city-wartime-rand-105",
+  "tab": "Systems/Economics",
+  "i": 120,
+  "line": "Processed textiles · Guild-manufactured goods · Dyed cloth",
+  "against": {
+   "tab": "Systems/Resources",
+   "i": 5,
+   "line": "Partial · Wool · high value | Partial processing - worked only to semi-finished goods"
+  },
+  "why": "the page says work on wool stops half-way (no Fulling mill); chain Textiles & Cloth prints finished goods of the missing house",
+  "crises": [
+   "wartime"
+  ],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "(untraced)"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.halfway",
+  "town": "bar0-city-wartime-rand-105",
+  "tab": "Systems/Economics",
+  "i": 134,
+  "line": "Finished clothing · Dyed cloth · Tailored garments",
+  "against": {
+   "tab": "Systems/Resources",
+   "i": 5,
+   "line": "Partial · Wool · high value | Partial processing - worked only to semi-finished goods"
+  },
+  "why": "the page says work on wool stops half-way (no Fulling mill); chain Cloth Finishing & Clothing prints finished goods of the missing house",
+  "crises": [
+   "wartime"
+  ],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "(untraced)"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.war.iron",
+  "town": "bar0-city-wartime-rand-108",
+  "tab": "Systems/Institutions",
+  "i": 36,
+  "line": "Services · Horseshoeing · Repairs · Tool manufacture · Weapon smithing",
+  "against": {
+   "tab": "Summary/Plot Hooks",
+   "i": 184,
+   "line": "War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tools with."
+  },
+  "why": "the page says war has taken the iron and the smiths have nothing to mend tools with; this unmarked smith row offers ironwork (chips: Repairs, Tool manufacture, Weapon smithing; card Blacksmiths)",
+  "crises": [
+   "wartime"
+  ],
+  "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Tool manufacture",
+  "factWriter": "src/generators/economy/outlookHookSiblings.js :: WAR_IRON_HOOK"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.war.iron",
+  "town": "bar0-city-wartime-rand-108",
+  "tab": "Systems/Services",
+  "i": 160,
+  "line": "Reforge broken tools, re-edge blades, mend ironwork.",
+  "against": {
+   "tab": "Summary/Plot Hooks",
+   "i": 184,
+   "line": "War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tools with."
+  },
+  "why": "the page says war has taken the iron and the smiths have nothing to mend tools with; this unmarked smith row offers ironwork",
+  "crises": [
+   "wartime"
+  ],
+  "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Repairs",
+  "factWriter": "src/generators/economy/outlookHookSiblings.js :: WAR_IRON_HOOK"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.war.iron",
+  "town": "bar0-city-wartime-rand-110",
+  "tab": "Systems/Institutions",
+  "i": 35,
+  "line": "Services · Horseshoeing · Repairs · Tool manufacture · Weapon smithing",
+  "against": {
+   "tab": "Summary/Plot Hooks",
+   "i": 158,
+   "line": "War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tools with."
+  },
+  "why": "the page says war has taken the iron and the smiths have nothing to mend tools with; this unmarked smith row offers ironwork (chips: Repairs, Tool manufacture, Weapon smithing; card Blacksmiths)",
+  "crises": [
+   "wartime"
+  ],
+  "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Tool manufacture",
+  "factWriter": "src/generators/economy/outlookHookSiblings.js :: WAR_IRON_HOOK"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.war.iron",
+  "town": "bar0-city-wartime-rand-110",
+  "tab": "Systems/Services",
+  "i": 139,
+  "line": "Reforge broken tools, re-edge blades, mend ironwork.",
+  "against": {
+   "tab": "Summary/Plot Hooks",
+   "i": 158,
+   "line": "War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tools with."
+  },
+  "why": "the page says war has taken the iron and the smiths have nothing to mend tools with; this unmarked smith row offers ironwork",
+  "crises": [
+   "wartime"
+  ],
+  "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Repairs",
+  "factWriter": "src/generators/economy/outlookHookSiblings.js :: WAR_IRON_HOOK"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.war.iron",
+  "town": "bar0-city-wartime-rand-115",
+  "tab": "Systems/Institutions",
+  "i": 31,
+  "line": "Services · Repairs · Tool manufacture · Weapon smithing",
+  "against": {
+   "tab": "Summary/Plot Hooks",
+   "i": 189,
+   "line": "War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tools with."
+  },
+  "why": "the page says war has taken the iron and the smiths have nothing to mend tools with; this unmarked smith row offers ironwork (chips: Repairs, Tool manufacture, Weapon smithing; card Blacksmiths)",
+  "crises": [
+   "wartime"
+  ],
+  "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Tool manufacture",
+  "factWriter": "src/generators/economy/outlookHookSiblings.js :: WAR_IRON_HOOK"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.war.iron",
+  "town": "bar0-city-wartime-rand-115",
+  "tab": "Systems/Services",
+  "i": 179,
+  "line": "Repairs",
+  "against": {
+   "tab": "Summary/Plot Hooks",
+   "i": 189,
+   "line": "War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tools with."
+  },
+  "why": "the page says war has taken the iron and the smiths have nothing to mend tools with; this unmarked smith row offers ironwork (entry Repairs @ Blacksmiths)",
+  "crises": [
+   "wartime"
+  ],
+  "writer": "(untraced)",
+  "factWriter": "src/generators/economy/outlookHookSiblings.js :: WAR_IRON_HOOK"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.war.iron",
+  "town": "bar0-city-wartime-rand-115",
+  "tab": "Systems/Services",
+  "i": 203,
+  "line": "Tool manufacture",
+  "against": {
+   "tab": "Summary/Plot Hooks",
+   "i": 189,
+   "line": "War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tools with."
+  },
+  "why": "the page says war has taken the iron and the smiths have nothing to mend tools with; this unmarked smith row offers ironwork (entry Tool manufacture @ Blacksmiths)",
+  "crises": [
+   "wartime"
+  ],
+  "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Tool manufacture",
+  "factWriter": "src/generators/economy/outlookHookSiblings.js :: WAR_IRON_HOOK"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.war.iron",
+  "town": "bar0-city-wartime-rand-115",
+  "tab": "Systems/Services",
+  "i": 209,
+  "line": "Weapon smithing",
+  "against": {
+   "tab": "Summary/Plot Hooks",
+   "i": 189,
+   "line": "War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tools with."
+  },
+  "why": "the page says war has taken the iron and the smiths have nothing to mend tools with; this unmarked smith row offers ironwork (entry Weapon smithing @ Blacksmiths)",
+  "crises": [
+   "wartime"
+  ],
+  "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Weapon smithing",
+  "factWriter": "src/generators/economy/outlookHookSiblings.js :: WAR_IRON_HOOK"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.war.animals",
+  "town": "bar0-city-wartime-rand-115",
+  "tab": "Systems/Institutions",
+  "i": 317,
+  "line": "Services · Horse hire · Livery and boarding",
+  "against": {
+   "tab": "Summary/Overview",
+   "i": 6,
+   "line": "The horses in Xifeng's paddocks are old, or lame, or foals."
+  },
+  "why": "the page says the army holds every sound working animal and the carts; this unmarked line hires them out (chips: Horse hire; card Stable district)",
+  "crises": [
+   "wartime"
+  ],
+  "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Livery and boarding",
+  "factWriter": "src/data/narrativeData.js :: STRESS_DESCS.wartime"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.war.animals",
+  "town": "bar0-city-wartime-rand-115",
+  "tab": "Systems/Services",
+  "i": 438,
+  "line": "Horse hire",
+  "against": {
+   "tab": "Summary/Overview",
+   "i": 6,
+   "line": "The horses in Xifeng's paddocks are old, or lame, or foals."
+  },
+  "why": "the page says the army holds every sound working animal and the carts; this unmarked line hires them out (entry Horse hire @ Stable district)",
+  "crises": [
+   "wartime"
+  ],
+  "writer": "(untraced)",
+  "factWriter": "src/data/narrativeData.js :: STRESS_DESCS.wartime"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.needed",
+  "town": "bar0-city-wartime-rand-115",
+  "tab": "Systems/Institutions",
+  "i": 151,
+  "line": "Vintner · Crafts / A cellar of presses and casks for wine, from grapes grown near or must brought in, whenever either can be had. Such wine as it holds goes by the barrel, and by the bottle to the rich.",
+  "against": {
+   "tab": "Systems/Economics",
+   "i": 42,
+   "line": "Needed, and not brought in: grapes, copper ore, gold and silver ore. | Ask what Xifeng lives on and you will hear more than one trade named. Nobody at Xifeng names its biggest trade aloud, because naming it would get someone hurt. A good part of the grapes Xifeng's work uses must come from elsewhere; when none comes, that work stands idle."
+  },
+  "why": "the page says grapes is needed and not brought in, and that the work stands idle; this house works grapes with no mark",
+  "crises": [
+   "wartime"
+  ],
+  "writer": "src/data/institutionDescVariants.js :: PAIRS",
+  "factWriter": "src/foundry/journalPages.js :: resourcesPage"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.halfway",
+  "town": "bar0-city-wartime-rand-115",
+  "tab": "Systems/Economics",
+  "i": 153,
+  "line": "Processed textiles · Guild-manufactured goods · Dyed cloth",
+  "against": {
+   "tab": "Systems/Resources",
+   "i": 8,
+   "line": "Partial · Wool · high value | Partial processing - worked only to semi-finished goods"
+  },
+  "why": "the page says work on wool stops half-way (no Fulling mill); chain Textiles & Cloth prints finished goods of the missing house",
+  "crises": [
+   "wartime"
+  ],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "(untraced)"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.halfway",
+  "town": "bar0-city-wartime-rand-115",
+  "tab": "Systems/Economics",
+  "i": 160,
+  "line": "Finished clothing · Dyed cloth · Tailored garments",
+  "against": {
+   "tab": "Systems/Resources",
+   "i": 8,
+   "line": "Partial · Wool · high value | Partial processing - worked only to semi-finished goods"
+  },
+  "why": "the page says work on wool stops half-way (no Fulling mill); chain Cloth Finishing & Clothing prints finished goods of the missing house",
+  "crises": [
+   "wartime"
+  ],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "(untraced)"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.war.iron",
+  "town": "bar0-city-wartime-rand-121",
+  "tab": "Systems/Institutions",
+  "i": 15,
+  "line": "Services · Horseshoeing · Repairs · Tool manufacture",
+  "against": {
+   "tab": "Summary/Plot Hooks",
+   "i": 90,
+   "line": "War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tools with."
+  },
+  "why": "the page says war has taken the iron and the smiths have nothing to mend tools with; this unmarked smith row offers ironwork (chips: Repairs, Tool manufacture; card Blacksmiths)",
+  "crises": [
+   "wartime"
+  ],
+  "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Tool manufacture",
+  "factWriter": "src/generators/economy/outlookHookSiblings.js :: WAR_IRON_HOOK"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.war.iron",
+  "town": "bar0-city-wartime-rand-121",
+  "tab": "Systems/Services",
+  "i": 65,
+  "line": "Reforge broken tools, re-edge blades, mend ironwork.",
+  "against": {
+   "tab": "Summary/Plot Hooks",
+   "i": 90,
+   "line": "War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tools with."
+  },
+  "why": "the page says war has taken the iron and the smiths have nothing to mend tools with; this unmarked smith row offers ironwork",
+  "crises": [
+   "wartime"
+  ],
+  "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Repairs",
+  "factWriter": "src/generators/economy/outlookHookSiblings.js :: WAR_IRON_HOOK"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.halfway",
+  "town": "bar0-city-wartime-rand-123",
+  "tab": "Systems/Economics",
+  "i": 129,
+  "line": "Processed textiles · Guild-manufactured goods · Dyed cloth",
+  "against": {
+   "tab": "Systems/Resources",
+   "i": 8,
+   "line": "Partial · Wool · high value | Partial processing - worked only to semi-finished goods"
+  },
+  "why": "the page says work on wool stops half-way (no Fulling mill); chain Textiles & Cloth prints finished goods of the missing house",
+  "crises": [
+   "wartime"
+  ],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "(untraced)"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.halfway",
+  "town": "bar0-city-wartime-rand-123",
+  "tab": "Systems/Economics",
+  "i": 141,
+  "line": "Finished clothing · Dyed cloth · Tailored garments",
+  "against": {
+   "tab": "Systems/Resources",
+   "i": 8,
+   "line": "Partial · Wool · high value | Partial processing - worked only to semi-finished goods"
+  },
+  "why": "the page says work on wool stops half-way (no Fulling mill); chain Cloth Finishing & Clothing prints finished goods of the missing house",
+  "crises": [
+   "wartime"
+  ],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "(untraced)"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.war.iron",
+  "town": "bar0-city-wartime-rand-125",
+  "tab": "Systems/Institutions",
+  "i": 31,
+  "line": "Services · Horseshoeing · Repairs · Tool manufacture · Weapon smithing",
+  "against": {
+   "tab": "Summary/Plot Hooks",
+   "i": 177,
+   "line": "War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tools with."
+  },
+  "why": "the page says war has taken the iron and the smiths have nothing to mend tools with; this unmarked smith row offers ironwork (chips: Repairs, Tool manufacture, Weapon smithing; card Blacksmiths)",
+  "crises": [
+   "wartime"
+  ],
+  "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Tool manufacture",
+  "factWriter": "src/generators/economy/outlookHookSiblings.js :: WAR_IRON_HOOK"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.war.iron",
+  "town": "bar0-city-wartime-rand-125",
+  "tab": "Systems/Services",
+  "i": 141,
+  "line": "Reforge broken tools, re-edge blades, mend ironwork.",
+  "against": {
+   "tab": "Summary/Plot Hooks",
+   "i": 177,
+   "line": "War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tools with."
+  },
+  "why": "the page says war has taken the iron and the smiths have nothing to mend tools with; this unmarked smith row offers ironwork",
+  "crises": [
+   "wartime"
+  ],
+  "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Repairs",
+  "factWriter": "src/generators/economy/outlookHookSiblings.js :: WAR_IRON_HOOK"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.war.iron",
+  "town": "bar0-city-wartime-rand-126",
+  "tab": "Systems/Institutions",
+  "i": 25,
+  "line": "Services · Repairs · Tool manufacture · Weapon smithing",
+  "against": {
+   "tab": "Summary/Plot Hooks",
+   "i": 137,
+   "line": "War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tools with."
+  },
+  "why": "the page says war has taken the iron and the smiths have nothing to mend tools with; this unmarked smith row offers ironwork (chips: Repairs, Tool manufacture, Weapon smithing; card Blacksmiths)",
+  "crises": [
+   "wartime"
+  ],
+  "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Tool manufacture",
+  "factWriter": "src/generators/economy/outlookHookSiblings.js :: WAR_IRON_HOOK"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.war.iron",
+  "town": "bar0-city-wartime-rand-126",
+  "tab": "Systems/Services",
+  "i": 88,
+  "line": "Repairs",
+  "against": {
+   "tab": "Summary/Plot Hooks",
+   "i": 137,
+   "line": "War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tools with."
+  },
+  "why": "the page says war has taken the iron and the smiths have nothing to mend tools with; this unmarked smith row offers ironwork (entry Repairs @ Blacksmiths)",
+  "crises": [
+   "wartime"
+  ],
+  "writer": "(untraced)",
+  "factWriter": "src/generators/economy/outlookHookSiblings.js :: WAR_IRON_HOOK"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.war.iron",
+  "town": "bar0-city-wartime-rand-126",
+  "tab": "Systems/Services",
+  "i": 106,
+  "line": "Tool manufacture",
+  "against": {
+   "tab": "Summary/Plot Hooks",
+   "i": 137,
+   "line": "War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tools with."
+  },
+  "why": "the page says war has taken the iron and the smiths have nothing to mend tools with; this unmarked smith row offers ironwork (entry Tool manufacture @ Blacksmiths)",
+  "crises": [
+   "wartime"
+  ],
+  "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Tool manufacture",
+  "factWriter": "src/generators/economy/outlookHookSiblings.js :: WAR_IRON_HOOK"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.war.iron",
+  "town": "bar0-city-wartime-rand-126",
+  "tab": "Systems/Services",
+  "i": 109,
+  "line": "Weapon smithing",
+  "against": {
+   "tab": "Summary/Plot Hooks",
+   "i": 137,
+   "line": "War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tools with."
+  },
+  "why": "the page says war has taken the iron and the smiths have nothing to mend tools with; this unmarked smith row offers ironwork (entry Weapon smithing @ Blacksmiths)",
+  "crises": [
+   "wartime"
+  ],
+  "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Weapon smithing",
+  "factWriter": "src/generators/economy/outlookHookSiblings.js :: WAR_IRON_HOOK"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.war.iron",
+  "town": "bar0-city-wartime-rand-130",
+  "tab": "Systems/Institutions",
+  "i": 30,
+  "line": "Services · Repairs · Tool manufacture",
+  "against": {
+   "tab": "Summary/Plot Hooks",
+   "i": 155,
+   "line": "War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tools with."
+  },
+  "why": "the page says war has taken the iron and the smiths have nothing to mend tools with; this unmarked smith row offers ironwork (chips: Repairs, Tool manufacture; card Blacksmiths)",
+  "crises": [
+   "wartime"
+  ],
+  "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Tool manufacture",
+  "factWriter": "src/generators/economy/outlookHookSiblings.js :: WAR_IRON_HOOK"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.war.iron",
+  "town": "bar0-city-wartime-rand-130",
+  "tab": "Systems/Services",
+  "i": 114,
+  "line": "Reforge broken tools, re-edge blades, mend ironwork.",
+  "against": {
+   "tab": "Summary/Plot Hooks",
+   "i": 155,
+   "line": "War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tools with."
+  },
+  "why": "the page says war has taken the iron and the smiths have nothing to mend tools with; this unmarked smith row offers ironwork",
+  "crises": [
+   "wartime"
+  ],
+  "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Repairs",
+  "factWriter": "src/generators/economy/outlookHookSiblings.js :: WAR_IRON_HOOK"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.needed",
+  "town": "bar0-city-wartime-rand-130",
+  "tab": "Systems/Institutions",
+  "i": 126,
+  "line": "Vintner · Crafts / A cellar of presses and casks for wine, from grapes grown near or must brought in, whenever either can be had. Such wine as it holds goes by the barrel, and by the bottle to the rich.",
+  "against": {
+   "tab": "Systems/Economics",
+   "i": 42,
+   "line": "Needed, and not brought in: grapes, copper ore. | Katoakra's biggest trade earns a real portion of its living, but none of its trades could carry the place alone. Some of Katoakra's money is made by people who keep it off the tax lists, so the city collects nothing on it and honest traders carry the tax alone. Faith carries real weight at Katoakra: what the religious houses say is heard in the city's dealings, whatever their own share of its money. A good part of the grapes Katoakra's work uses must come from elsewhere; when none comes, that work stands idle."
+  },
+  "why": "the page says grapes is needed and not brought in, and that the work stands idle; this house works grapes with no mark",
+  "crises": [
+   "wartime"
+  ],
+  "writer": "src/data/institutionDescVariants.js :: PAIRS",
+  "factWriter": "(untraced)"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.law.collapsed",
+  "town": "bar0-hamlet-under_siege-rand-102",
+  "tab": "Systems/Defense",
+  "i": 3,
+  "line": "A thief is known by name within a day, and everyone shuns them until they make it right.",
+  "against": {
+   "tab": "Summary/Foundations",
+   "i": 6,
+   "line": "Law & order · Collapsed"
+  },
+  "why": "the page says law and order has collapsed; this unmarked line says theft is answered",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/generators/safetyProfile.js :: NO_WATCH_SMALL",
+  "factWriter": "(untraced)"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.chainOverStopped",
+  "town": "bar0-hamlet-under_siege-rand-102",
+  "tab": "Systems/Economics",
+  "i": 40,
+  "line": "Faith & Worship · Religion & civic○ Operational",
+  "against": {
+   "tab": "Systems/Institutions",
+   "i": 31,
+   "line": "Access to a house of worship · Religious / Stopped by the siege. The nearest house of worship is the village's, usually a few miles off."
+  },
+  "why": "chain Faith & Worship is printed ○ Operational over houses (Access to a house of worship, Wayside shrine) whose every service the page marks stopped",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "src/data/institutionDescColour.js :: DESC_VARIANT_COLOUR_DECLARATIONS"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.law.collapsed",
+  "town": "bar0-hamlet-under_siege-rand-103",
+  "tab": "Systems/Defense",
+  "i": 3,
+  "line": "A thief is known by name within a day, and everyone shuns them until they make it right.",
+  "against": {
+   "tab": "Summary/Foundations",
+   "i": 5,
+   "line": "Law & order · Collapsed"
+  },
+  "why": "the page says law and order has collapsed; this unmarked line says theft is answered",
+  "crises": [
+   "under_siege"
+  ],
+  "writer": "src/generators/safetyProfile.js :: NO_WATCH_SMALL",
+  "factWriter": "(untraced)"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.outputs",
+  "town": "bar0-hamlet-under_siege-rand-104",
+  "tab": "Systems/Economics",
+  "i": 58,
+  "line": "Lodging · Meals and drink",
+  "against": {
+   "tab": "Systems/Institutions",
+   "i": 6,
+   "line": "Services · Lodging (stopped) · Meals and drink · Hiring hall"
+  },
+  "why": "chain Taverns & Social Life is printed ○ Operational and lists \"lodging\", which the page marks stopped",
+  "crises": [
+   "under_siege"
+  ],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Meals and drink"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.chainOverStopped",
+  "town": "bar0-hamlet-under_siege-rand-104",
+  "tab": "Systems/Economics",
+  "i": 51,
+  "line": "Faith & Worship · Religion & civic✓ Running",
+  "against": {
+   "tab": "Systems/Institutions",
+   "i": 36,
+   "line": "Access to a house of worship · Religious / Stopped by the siege. None of its own; the village's lies usually a few miles away."
+  },
+  "why": "chain Faith & Worship is printed ✓ Running over houses (Access to a house of worship, Wayside shrine) whose every service the page marks stopped",
+  "crises": [
+   "under_siege"
+  ],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "src/data/institutionDescColour.js :: DESC_VARIANT_COLOUR_DECLARATIONS"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.law.collapsed",
+  "town": "bar0-hamlet-under_siege-rand-106",
+  "tab": "Systems/Defense",
+  "i": 3,
+  "line": "A thief is known by name within a day, and everyone shuns them until they make it right.",
+  "against": {
+   "tab": "Summary/Foundations",
+   "i": 5,
+   "line": "Law & order · Collapsed"
+  },
+  "why": "the page says law and order has collapsed; this unmarked line says theft is answered",
+  "crises": [
+   "under_siege"
+  ],
+  "writer": "src/generators/safetyProfile.js :: NO_WATCH_SMALL",
+  "factWriter": "(untraced)"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.abroad",
+  "town": "bar0-hamlet-under_siege-rand-108",
+  "tab": "Systems/Institutions",
+  "i": 25,
+  "line": "Rents animals to travellers and merchants who need load-carrying capacity for the road.",
+  "against": {
+   "tab": "Summary/Crisis",
+   "i": 1,
+   "line": "Enemies are camped around Buyancaravansarai, and nothing comes in by road."
+  },
+  "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+  "crises": [
+   "under_siege"
+  ],
+  "writer": "src/data/institutionalCatalog.js :: INSTITUTION_FAMILIES.shared",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.outputs",
+  "town": "bar0-hamlet-under_siege-rand-111",
+  "tab": "Systems/Economics",
+  "i": 49,
+  "line": "Lodging · Meals and drink",
+  "against": {
+   "tab": "Systems/Institutions",
+   "i": 19,
+   "line": "Services · Lodging (stopped) · Meals and drink · Message relay (stopped)"
+  },
+  "why": "chain Taverns & Social Life is printed ○ Operational and lists \"lodging\", which the page marks stopped",
+  "crises": [
+   "under_siege"
+  ],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Meals and drink"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.chainOverStopped",
+  "town": "bar0-hamlet-under_siege-rand-111",
+  "tab": "Systems/Economics",
+  "i": 45,
+  "line": "Taverns & Social Life · Entertainment & culture○ Operational",
+  "against": {
+   "tab": "Systems/Institutions",
+   "i": 64,
+   "line": "Access to a house of worship · Religious / Stopped by the siege. Services mean the walk to the village house of worship, usually a few miles off."
+  },
+  "why": "chain Taverns & Social Life is printed ○ Operational over houses (Access to a house of worship) whose every service the page marks stopped",
+  "crises": [
+   "under_siege"
+  ],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "src/data/institutionalCatalog.js :: INSTITUTION_FAMILIES.hamlet"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.abroad",
+  "town": "bar0-hamlet-under_siege-rand-113",
+  "tab": "Systems/Institutions",
+  "i": 35,
+  "line": "Rents animals to travellers and merchants who need load-carrying capacity for the road.",
+  "against": {
+   "tab": "Summary/Crisis",
+   "i": 1,
+   "line": "Enemies are camped around Kilworth, and nothing comes in by road."
+  },
+  "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+  "crises": [
+   "under_siege"
+  ],
+  "writer": "src/data/institutionalCatalog.js :: INSTITUTION_FAMILIES.shared",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.law.collapsed",
+  "town": "bar0-hamlet-under_siege-rand-114",
+  "tab": "Systems/Defense",
+  "i": 3,
+  "line": "A thief is known by name within a day, and everyone shuns them until they make it right.",
+  "against": {
+   "tab": "Summary/Foundations",
+   "i": 5,
+   "line": "Law & order · Collapsed"
+  },
+  "why": "the page says law and order has collapsed; this unmarked line says theft is answered",
+  "crises": [
+   "under_siege"
+  ],
+  "writer": "src/generators/safetyProfile.js :: NO_WATCH_SMALL",
+  "factWriter": "(untraced)"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.chainOverStopped",
+  "town": "bar0-hamlet-under_siege-rand-116",
+  "tab": "Systems/Economics",
+  "i": 47,
+  "line": "Faith & Worship · Religion & civic✓ Running",
+  "against": {
+   "tab": "Systems/Institutions",
+   "i": 34,
+   "line": "Access to a house of worship · Religious / Stopped by the siege. Services mean the walk to the village house of worship, usually a few miles off."
+  },
+  "why": "chain Faith & Worship is printed ✓ Running over houses (Access to a house of worship, Wayside shrine) whose every service the page marks stopped",
+  "crises": [
+   "under_siege"
+  ],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "src/data/institutionalCatalog.js :: INSTITUTION_FAMILIES.hamlet"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.siege.abroad",
+  "town": "bar0-hamlet-under_siege-rand-117",
+  "tab": "Systems/Institutions",
+  "i": 20,
+  "line": "Rents animals to travellers and merchants who need load-carrying capacity for the road.",
+  "against": {
+   "tab": "Summary/Crisis",
+   "i": 1,
+   "line": "Enemies are camped around Padmakota, and nothing comes in by road."
+  },
+  "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+  "crises": [
+   "under_siege"
+  ],
+  "writer": "src/data/institutionalCatalog.js :: INSTITUTION_FAMILIES.shared",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.law.collapsed",
+  "town": "bar0-hamlet-under_siege-rand-117",
+  "tab": "Systems/Defense",
+  "i": 3,
+  "line": "A thief is known by name within a day, and everyone shuns them until they make it right.",
+  "against": {
+   "tab": "Summary/Foundations",
+   "i": 5,
+   "line": "Law & order · Collapsed"
+  },
+  "why": "the page says law and order has collapsed; this unmarked line says theft is answered",
+  "crises": [
+   "under_siege"
+  ],
+  "writer": "src/generators/safetyProfile.js :: NO_WATCH_SMALL",
+  "factWriter": "(untraced)"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.outputs",
+  "town": "bar0-hamlet-under_siege-rand-117",
+  "tab": "Systems/Economics",
+  "i": 42,
+  "line": "Lodging · Meals and drink · Stabling",
+  "against": {
+   "tab": "Systems/Institutions",
+   "i": 9,
+   "line": "Services · Lodging (stopped) · Meals and drink · Message relay (stopped)"
+  },
+  "why": "chain Taverns & Social Life is printed ○ Operational and lists \"lodging\", which the page marks stopped",
+  "crises": [
+   "under_siege"
+  ],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Meals and drink"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.foodLineStopped",
+  "town": "bar0-hamlet-under_siege-rand-120",
+  "tab": "Systems/Economics",
+  "i": 24,
+  "line": "What each holding grows goes to its own table; beyond that, what it puts on the table itself is fish from the local waters.",
+  "against": {
+   "tab": "Systems/Institutions",
+   "i": 10,
+   "line": "Services · Fresh fish (stopped)"
+  },
+  "why": "the food line puts the catch on the table; the page marks the fishing stopped",
+  "crises": [
+   "under_siege"
+  ],
+  "writer": "src/domain/foodways.js :: FRAMES",
+  "factWriter": "(untraced)"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.law.collapsed",
+  "town": "bar0-hamlet-under_siege-rand-121",
+  "tab": "Systems/Defense",
+  "i": 3,
+  "line": "A thief is known by name within a day, and everyone shuns them until they make it right.",
+  "against": {
+   "tab": "Summary/Foundations",
+   "i": 5,
+   "line": "Law & order · Collapsed"
+  },
+  "why": "the page says law and order has collapsed; this unmarked line says theft is answered",
+  "crises": [
+   "under_siege"
+  ],
+  "writer": "src/generators/safetyProfile.js :: NO_WATCH_SMALL",
+  "factWriter": "(untraced)"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.chainOverStopped",
+  "town": "bar0-hamlet-under_siege-rand-121",
+  "tab": "Systems/Economics",
+  "i": 61,
+  "line": "Faith & Worship · Religion & civic✓ Running",
+  "against": {
+   "tab": "Systems/Institutions",
+   "i": 54,
+   "line": "Access to a house of worship · Religious / Stopped by the siege. The nearest house of worship is the village's, usually a few miles off."
+  },
+  "why": "chain Faith & Worship is printed ✓ Running over houses (Access to a house of worship, Wayside shrine) whose every service the page marks stopped",
+  "crises": [
+   "under_siege"
+  ],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "src/data/institutionDescColour.js :: DESC_VARIANT_COLOUR_DECLARATIONS"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.law.collapsed",
+  "town": "bar0-hamlet-under_siege-rand-124",
+  "tab": "Systems/Defense",
+  "i": 3,
+  "line": "A thief is known by name within a day, and everyone shuns them until they make it right.",
+  "against": {
+   "tab": "Summary/Foundations",
+   "i": 5,
+   "line": "Law & order · Collapsed"
+  },
+  "why": "the page says law and order has collapsed; this unmarked line says theft is answered",
+  "crises": [
+   "under_siege"
+  ],
+  "writer": "src/generators/safetyProfile.js :: NO_WATCH_SMALL",
+  "factWriter": "(untraced)"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.law.collapsed",
+  "town": "bar0-hamlet-under_siege-rand-125",
+  "tab": "Systems/Defense",
+  "i": 3,
+  "line": "A thief is known by name within a day, and everyone shuns them until they make it right.",
+  "against": {
+   "tab": "Summary/Foundations",
+   "i": 5,
+   "line": "Law & order · Collapsed"
+  },
+  "why": "the page says law and order has collapsed; this unmarked line says theft is answered",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/generators/safetyProfile.js :: NO_WATCH_SMALL",
+  "factWriter": "(untraced)"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.law.collapsed",
+  "town": "bar0-hamlet-under_siege-rand-127",
+  "tab": "Systems/Defense",
+  "i": 3,
+  "line": "A thief is known by name within a day, and everyone shuns them until they make it right.",
+  "against": {
+   "tab": "Summary/Foundations",
+   "i": 4,
+   "line": "Law & order · Collapsed"
+  },
+  "why": "the page says law and order has collapsed; this unmarked line says theft is answered",
+  "crises": [
+   "under_siege"
+  ],
+  "writer": "src/generators/safetyProfile.js :: NO_WATCH_SMALL",
+  "factWriter": "(untraced)"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.chainOverStopped",
+  "town": "bar0-hamlet-under_siege-rand-128",
+  "tab": "Systems/Economics",
+  "i": 65,
+  "line": "Faith & Worship · Religion & civic○ Operational",
+  "against": {
+   "tab": "Systems/Institutions",
+   "i": 51,
+   "line": "Access to a house of worship · Religious / Stopped by the siege. The nearest house of worship is the village's, usually a few miles off."
+  },
+  "why": "chain Faith & Worship is printed ○ Operational over houses (Access to a house of worship, Wayside shrine) whose every service the page marks stopped",
+  "crises": [
+   "under_siege"
+  ],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "src/data/institutionDescColour.js :: DESC_VARIANT_COLOUR_DECLARATIONS"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.chainOverStopped",
+  "town": "bar0-hamlet-under_siege-rand-130",
+  "tab": "Systems/Economics",
+  "i": 40,
+  "line": "Black market · Criminal economy○ Operational",
+  "against": {
+   "tab": "Systems/Institutions",
+   "i": 26,
+   "line": "Access to a house of worship · Religious / Stopped by the siege. None of its own; the village's lies usually a few miles away."
+  },
+  "why": "chain Black market is printed ○ Operational over houses (Access to a house of worship) whose every service the page marks stopped",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "src/data/institutionDescColour.js :: DESC_VARIANT_COLOUR_DECLARATIONS"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.needed",
+  "town": "bar0-metropolis-calm-rand-106",
+  "tab": "Systems/Institutions",
+  "i": 147,
+  "line": "Vintner · Crafts / Presses and ages wine from local grapes or imported must, in any year that either reaches the cellar. What it makes is sold in bulk, and by the bottle to wealthy clients.",
+  "against": {
+   "tab": "Systems/Economics",
+   "i": 42,
+   "line": "Needed, and not brought in: timber, grapes, copper ore, mountain timber. | No one trade earns half of what Ripamonte makes, so a bad year in any one of them would hurt without ruining it. Faith carries real weight at Ripamonte: what the religious houses say is heard in the metropolis's dealings, whatever their own share of its money. A good part of the grapes Ripamonte's work uses must come from elsewhere; when none comes, that work stands idle."
+  },
+  "why": "the page says grapes is needed and not brought in, and that the work stands idle; this house works grapes with no mark",
+  "crises": [],
+  "writer": "src/data/institutionalCatalog.js :: INSTITUTION_FAMILIES.shared",
+  "factWriter": "src/data/supplyChainData.js :: SUPPLY_CHAIN_NEEDS.resourceSubstitutes"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.needed",
+  "town": "bar0-metropolis-calm-rand-115",
+  "tab": "Systems/Institutions",
+  "i": 152,
+  "line": "Vintner · Crafts / Presses and ages wine from local grapes or imported must, in any year that either reaches the cellar. What it makes is sold in bulk, and by the bottle to wealthy clients.",
+  "against": {
+   "tab": "Systems/Economics",
+   "i": 39,
+   "line": "Needed, and not brought in: timber, luxury goods, grapes, copper ore. | No one trade earns half of what Khānkarez makes, so a bad year in any one of them would hurt without ruining it. Magic carries real weight at Khānkarez: what it can do is reckoned with in the metropolis's dealings, whatever its own share of the metropolis's money. A good part of the grapes Khānkarez's work uses must come from elsewhere; when none comes, that work stands idle."
+  },
+  "why": "the page says grapes is needed and not brought in, and that the work stands idle; this house works grapes with no mark",
+  "crises": [],
+  "writer": "src/data/institutionalCatalog.js :: INSTITUTION_FAMILIES.shared",
+  "factWriter": "(untraced)"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.needed",
+  "town": "bar0-metropolis-calm-rand-118",
+  "tab": "Systems/Institutions",
+  "i": 137,
+  "line": "Vintner · Crafts / Presses and ages wine from local grapes or imported must, in any year that either reaches the cellar. What it makes is sold in bulk, and by the bottle to wealthy clients.",
+  "against": {
+   "tab": "Systems/Economics",
+   "i": 39,
+   "line": "Needed, and not brought in: luxury goods, grapes, copper ore, gold and silver ore. | Damiao's biggest trade earns a real portion of its living, but none of its trades could carry the place alone. The biggest money at Damiao is made outside the law, and every honest trade is undersold by it. Magic is reckoned with in Damiao's dealings, whatever it earns. A good part of the grapes Damiao's work uses must come from elsewhere; when none comes, that work stands idle."
+  },
+  "why": "the page says grapes is needed and not brought in, and that the work stands idle; this house works grapes with no mark",
+  "crises": [],
+  "writer": "src/data/institutionalCatalog.js :: INSTITUTION_FAMILIES.shared",
+  "factWriter": "src/foundry/journalPages.js :: resourcesPage"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.halfway",
+  "town": "bar0-metropolis-calm-rand-120",
+  "tab": "Systems/Economics",
+  "i": 181,
+  "line": "Processed textiles · Guild-manufactured goods · Dyed cloth",
+  "against": {
+   "tab": "Systems/Resources",
+   "i": 8,
+   "line": "Partial · Wool · high value | Partial processing - worked only to semi-finished goods"
+  },
+  "why": "the page says work on wool stops half-way (no Fulling mill); chain Textiles & Cloth prints finished goods of the missing house",
+  "crises": [],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "(untraced)"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.halfway",
+  "town": "bar0-metropolis-calm-rand-120",
+  "tab": "Systems/Economics",
+  "i": 195,
+  "line": "Finished clothing · Dyed cloth · Tailored garments",
+  "against": {
+   "tab": "Systems/Resources",
+   "i": 8,
+   "line": "Partial · Wool · high value | Partial processing - worked only to semi-finished goods"
+  },
+  "why": "the page says work on wool stops half-way (no Fulling mill); chain Cloth Finishing & Clothing prints finished goods of the missing house",
+  "crises": [],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "(untraced)"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.halfway",
+  "town": "bar0-metropolis-calm-rand-120",
+  "tab": "Systems/Economics",
+  "i": 188,
+  "line": "Leather goods · Guild-manufactured goods",
+  "against": {
+   "tab": "Systems/Resources",
+   "i": 5,
+   "line": "Partial · Animal hides · high value | Partial processing - worked only to semi-finished goods"
+  },
+  "why": "the page says work on animal hides stops half-way (no Leatherworkers' guild); chain Leather & Hides prints finished goods of the missing house",
+  "crises": [],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "(untraced)"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.halfway",
+  "town": "bar0-metropolis-calm-rand-120",
+  "tab": "Systems/Economics",
+  "i": 202,
+  "line": "Boots and shoes · Saddles and harness · Leather armour",
+  "against": {
+   "tab": "Systems/Resources",
+   "i": 5,
+   "line": "Partial · Animal hides · high value | Partial processing - worked only to semi-finished goods"
+  },
+  "why": "the page says work on animal hides stops half-way (no Leatherworkers' guild); chain Leatherworking & Cordwaining prints finished goods of the missing house",
+  "crises": [],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "(untraced)"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.needed",
+  "town": "bar0-metropolis-calm-rand-124",
+  "tab": "Systems/Institutions",
+  "i": 147,
+  "line": "Vintner · Crafts / Presses and ages wine from local grapes or imported must, in any year that either reaches the cellar. What it makes is sold in bulk, and by the bottle to wealthy clients.",
+  "against": {
+   "tab": "Systems/Economics",
+   "i": 38,
+   "line": "Needed, and not brought in: timber, grapes, copper ore, mountain timber. | Schwarzhain's biggest trade earns a real portion of its living, but none of its trades could carry the place alone. Faith carries real weight at Schwarzhain: what the religious houses say is heard in the metropolis's dealings, whatever their own share of its money. A good part of the grapes Schwarzhain's work uses must come from elsewhere; when none comes, that work stands idle."
+  },
+  "why": "the page says grapes is needed and not brought in, and that the work stands idle; this house works grapes with no mark",
+  "crises": [],
+  "writer": "src/data/institutionalCatalog.js :: INSTITUTION_FAMILIES.shared",
+  "factWriter": "src/data/supplyChainData.js :: SUPPLY_CHAIN_NEEDS.resourceSubstitutes"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.needed",
+  "town": "bar0-metropolis-calm-rand-126",
+  "tab": "Systems/Institutions",
+  "i": 142,
+  "line": "Vintner · Crafts / A cellar of presses and casks for wine, from grapes grown near or must brought in, whenever either can be had. Such wine as it holds goes by the barrel, and by the bottle to the rich.",
+  "against": {
+   "tab": "Systems/Economics",
+   "i": 35,
+   "line": "Needed, and not brought in: grapes, copper ore, gold and silver ore. | No one trade earns half of what Chernoburg makes, so a bad year in any one of them would hurt without ruining it. A good part of the grapes Chernoburg's work uses must come from elsewhere; when none comes, that work stands idle."
+  },
+  "why": "the page says grapes is needed and not brought in, and that the work stands idle; this house works grapes with no mark",
+  "crises": [],
+  "writer": "src/data/institutionDescVariants.js :: PAIRS",
+  "factWriter": "src/foundry/journalPages.js :: resourcesPage"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.halfway",
+  "town": "bar0-town-calm-rand-109",
+  "tab": "Systems/Economics",
+  "i": 70,
+  "line": "Boots and shoes · Saddles and harness · Leather armour",
+  "against": {
+   "tab": "Systems/Resources",
+   "i": 5,
+   "line": "Partial · Animal hides · high value | Partial processing - worked only to semi-finished goods"
+  },
+  "why": "the page says work on animal hides stops half-way (no Leatherworkers' guild); chain Leatherworking & Cordwaining prints finished goods of the missing house",
+  "crises": [],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "(untraced)"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.halfway",
+  "town": "bar0-town-calm-rand-109",
+  "tab": "Systems/Economics",
+  "i": 112,
+  "line": "Leather goods · Guild-manufactured goods",
+  "against": {
+   "tab": "Systems/Resources",
+   "i": 5,
+   "line": "Partial · Animal hides · high value | Partial processing - worked only to semi-finished goods"
+  },
+  "why": "the page says work on animal hides stops half-way (no Leatherworkers' guild); chain Leather & Hides prints finished goods of the missing house",
+  "crises": [],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "(untraced)"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.halfway",
+  "town": "bar0-town-calm-rand-125",
+  "tab": "Systems/Economics",
+  "i": 43,
+  "line": "Boots and shoes · Saddles and harness · Leather armour",
+  "against": {
+   "tab": "Systems/Resources",
+   "i": 15,
+   "line": "Work on the animal hides here stops half-way: no leatherworkers' guild finishes it."
+  },
+  "why": "the page says work on animal hides stops half-way (no Leatherworkers' guild); chain Leatherworking & Cordwaining prints finished goods of the missing house",
+  "crises": [],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "(untraced)"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.halfway",
+  "town": "bar0-town-calm-rand-130",
+  "tab": "Systems/Economics",
+  "i": 86,
+  "line": "Processed textiles · Guild-manufactured goods · Dyed cloth",
+  "against": {
+   "tab": "Systems/Resources",
+   "i": 8,
+   "line": "Partial · Wool · high value | Partial processing - worked only to semi-finished goods"
+  },
+  "why": "the page says work on wool stops half-way (no Dyers' guild, Fulling mill); chain Textiles & Cloth prints finished goods of the missing house",
+  "crises": [],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "(untraced)"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.halfway",
+  "town": "bar0-town-occupied-rand-101",
+  "tab": "Systems/Economics",
+  "i": 91,
+  "line": "Processed textiles · Guild-manufactured goods · Dyed cloth",
+  "against": {
+   "tab": "Systems/Resources",
+   "i": 8,
+   "line": "Partial · Wool · high value | Partial processing - worked only to semi-finished goods"
+  },
+  "why": "the page says work on wool stops half-way (no Dyers' guild, Fulling mill); chain Textiles & Cloth prints finished goods of the missing house",
+  "crises": [
+   "occupied"
+  ],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "(untraced)"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.halfway",
+  "town": "bar0-town-occupied-rand-104",
+  "tab": "Systems/Economics",
+  "i": 79,
+  "line": "Processed textiles · Guild-manufactured goods · Dyed cloth",
+  "against": {
+   "tab": "Systems/Resources",
+   "i": 8,
+   "line": "Partial · Wool · high value | Partial processing - worked only to semi-finished goods"
+  },
+  "why": "the page says work on wool stops half-way (no Dyers' guild, Fulling mill); chain Textiles & Cloth prints finished goods of the missing house",
+  "crises": [
+   "occupied"
+  ],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "(untraced)"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.needed",
+  "town": "bar0-town-occupied-rand-106",
+  "tab": "Systems/Institutions",
+  "i": 56,
+  "line": "Smelter · Crafts / Converts raw ore to refined metal using charcoal-fueled furnaces, whenever ore can be had.",
+  "against": {
+   "tab": "Systems/Economics",
+   "i": 32,
+   "line": "Needed, and not brought in: timber, luxury goods, copper ore. | Ormoy's biggest trade earns a real portion of its living, but none of its trades could carry the place alone. Some of the money in Ormoy is made outside the law, and the people who earn theirs honestly do not know who is making it. A good part of the copper ore Ormoy's work uses must come from elsewhere; when none comes, that work stands idle."
+  },
+  "why": "the page says copper ore is needed and not brought in, and that the work stands idle; this house works copper ore with no mark",
+  "crises": [
+   "occupied"
+  ],
+  "writer": "src/data/institutionalCatalog.js :: INSTITUTION_FAMILIES.shared",
+  "factWriter": "(untraced)"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.halfway",
+  "town": "bar0-town-occupied-rand-106",
+  "tab": "Systems/Economics",
+  "i": 80,
+  "line": "Processed textiles · Guild-manufactured goods · Dyed cloth",
+  "against": {
+   "tab": "Systems/Resources",
+   "i": 8,
+   "line": "Partial · Wool · high value | Partial processing - worked only to semi-finished goods"
+  },
+  "why": "the page says work on wool stops half-way (no Dyers' guild, Fulling mill); chain Textiles & Cloth prints finished goods of the missing house",
+  "crises": [
+   "occupied"
+  ],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "(untraced)"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.halfway",
+  "town": "bar0-town-occupied-rand-106",
+  "tab": "Systems/Economics",
+  "i": 94,
+  "line": "Finished clothing · Dyed cloth",
+  "against": {
+   "tab": "Systems/Resources",
+   "i": 8,
+   "line": "Partial · Wool · high value | Partial processing - worked only to semi-finished goods"
+  },
+  "why": "the page says work on wool stops half-way (no Dyers' guild, Fulling mill); chain Cloth Finishing & Clothing prints finished goods of the missing house",
+  "crises": [
+   "occupied"
+  ],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "(untraced)"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.needed",
+  "town": "bar0-town-occupied-rand-109",
+  "tab": "Systems/Institutions",
+  "i": 51,
+  "line": "Vintner · Crafts / Presses and ages wine from local grapes or imported must, in any year that either reaches the cellar. What it makes is sold in bulk, and by the bottle to wealthy clients.",
+  "against": {
+   "tab": "Systems/Economics",
+   "i": 33,
+   "line": "Needed, and not brought in: timber (for large vessels), grapes. | Ask what Filopchori lives on and you will hear more than one trade named. A good part of the grapes Filopchori's work uses must come from elsewhere; when none comes, that work stands idle."
+  },
+  "why": "the page says grapes is needed and not brought in, and that the work stands idle; this house works grapes with no mark",
+  "crises": [
+   "occupied"
+  ],
+  "writer": "src/data/institutionalCatalog.js :: INSTITUTION_FAMILIES.shared",
+  "factWriter": "src/data/geographyData.js :: TERRAIN_DATA.mustImport"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.halfway",
+  "town": "bar0-town-occupied-rand-115",
+  "tab": "Systems/Economics",
+  "i": 85,
+  "line": "Quality tools and weapons · Advanced weapons and armor · Master-crafted weapons",
+  "against": {
+   "tab": "Systems/Resources",
+   "i": 20,
+   "line": "Work on the iron ore here stops half-way: no smelter finishes it."
+  },
+  "why": "the page says work on iron ore stops half-way (no Smelter); chain Weapons & Armor prints finished goods of the missing house",
+  "crises": [
+   "occupied"
+  ],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "(untraced)"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.halfway",
+  "town": "bar0-town-occupied-rand-115",
+  "tab": "Systems/Economics",
+  "i": 99,
+  "line": "Quality tools and weapons · Advanced weapons and armor · Master-crafted weapons",
+  "against": {
+   "tab": "Systems/Resources",
+   "i": 20,
+   "line": "Work on the iron ore here stops half-way: no smelter finishes it."
+  },
+  "why": "the page says work on iron ore stops half-way (no Smelter); chain Iron & Metalwork prints finished goods of the missing house",
+  "crises": [
+   "occupied"
+  ],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "(untraced)"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.needed",
+  "town": "bar0-town-occupied-rand-121",
+  "tab": "Systems/Institutions",
+  "i": 57,
+  "line": "Smelter · Crafts / Charcoal furnaces for reducing raw ore to refined metal whenever ore can be had, cast in bars for whoever will buy them.",
+  "against": {
+   "tab": "Systems/Economics",
+   "i": 35,
+   "line": "Needed, and not brought in: stone (for major construction), copper ore, gold and silver ore, mountain timber. | Uxmaltzal lives on many trades, and no one of them carries the town. Some of the money in Uxmaltzal is made outside the law, and the people who earn theirs honestly do not know who is making it. A good part of the copper ore Uxmaltzal's work uses must come from elsewhere; when none comes, that work stands idle."
+  },
+  "why": "the page says copper ore is needed and not brought in, and that the work stands idle; this house works copper ore with no mark",
+  "crises": [
+   "occupied"
+  ],
+  "writer": "src/data/institutionDescVariants.js :: DESC_VARIANT_SIBLINGS",
+  "factWriter": "src/data/geographyData.js :: TERRAIN_DATA.mustImport"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.halfway",
+  "town": "bar0-town-occupied-rand-123",
+  "tab": "Systems/Economics",
+  "i": 57,
+  "line": "Quality tools and weapons · Advanced weapons and armor · Master-crafted weapons",
+  "against": {
+   "tab": "Systems/Resources",
+   "i": 24,
+   "line": "Work on the iron ore here stops half-way: no smelter finishes it."
+  },
+  "why": "the page says work on iron ore stops half-way (no Smelter); chain Weapons & Armor prints finished goods of the missing house",
+  "crises": [
+   "occupied"
+  ],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "(untraced)"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.halfway",
+  "town": "bar0-town-occupied-rand-123",
+  "tab": "Systems/Economics",
+  "i": 69,
+  "line": "Quality tools and weapons · Advanced weapons and armor · Master-crafted weapons",
+  "against": {
+   "tab": "Systems/Resources",
+   "i": 24,
+   "line": "Work on the iron ore here stops half-way: no smelter finishes it."
+  },
+  "why": "the page says work on iron ore stops half-way (no Smelter); chain Iron & Metalwork prints finished goods of the missing house",
+  "crises": [
+   "occupied"
+  ],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "(untraced)"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.halfway",
+  "town": "bar0-town-occupied-rand-126",
+  "tab": "Systems/Economics",
+  "i": 68,
+  "line": "Quality tools and weapons · Advanced weapons and armor · Master-crafted weapons",
+  "against": {
+   "tab": "Systems/Resources",
+   "i": 17,
+   "line": "Work on the iron ore here stops half-way: no smelter finishes it."
+  },
+  "why": "the page says work on iron ore stops half-way (no Smelter); chain Weapons & Armor prints finished goods of the missing house",
+  "crises": [
+   "occupied"
+  ],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "(untraced)"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.halfway",
+  "town": "bar0-town-occupied-rand-126",
+  "tab": "Systems/Economics",
+  "i": 75,
+  "line": "Quality tools and weapons · Advanced weapons and armor · Master-crafted weapons",
+  "against": {
+   "tab": "Systems/Resources",
+   "i": 17,
+   "line": "Work on the iron ore here stops half-way: no smelter finishes it."
+  },
+  "why": "the page says work on iron ore stops half-way (no Smelter); chain Iron & Metalwork prints finished goods of the missing house",
+  "crises": [
+   "occupied"
+  ],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "(untraced)"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.law.collapsed",
+  "town": "bar0-village-calm-rand-115",
+  "tab": "Systems/Defense",
+  "i": 3,
+  "line": "A thief is known by name within a day, and everyone shuns them until they make it right.",
+  "against": {
+   "tab": "Summary/Foundations",
+   "i": 4,
+   "line": "Law & order · Collapsed"
+  },
+  "why": "the page says law and order has collapsed; this unmarked line says theft is answered",
+  "crises": [],
+  "writer": "src/generators/safetyProfile.js :: NO_WATCH_SMALL",
+  "factWriter": "(untraced)"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.halfway",
+  "town": "bar0-village-calm-rand-121",
+  "tab": "Systems/Economics",
+  "i": 65,
+  "line": "Quality tools and weapons · Advanced weapons and armor · Master-crafted weapons",
+  "against": {
+   "tab": "Systems/Resources",
+   "i": 5,
+   "line": "Partial · Iron ore · very high value | Partial processing - worked only to semi-finished goods"
+  },
+  "why": "the page says work on iron ore stops half-way (no Smelter); chain Iron & Metalwork prints finished goods of the missing house",
+  "crises": [],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "(untraced)"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.foodModel",
+  "town": "bar0-village-calm-rand-125",
+  "tab": "Systems/Economics",
+  "i": 29,
+  "line": "What it puts on the table itself is fish from the local waters. Fermentation, careful use of water, and intensive garden plots shape the food supply.",
+  "against": {
+   "tab": "Systems/Institutions",
+   "i": 28,
+   "line": "Farmland · Economy / Services · Grain at harvest"
+  },
+  "why": "the food line names another food as the table's own, beside a farmland house that sells its own grain",
+  "crises": [],
+  "writer": "src/domain/foodways.js :: FRAMES",
+  "factWriter": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Grain at harvest"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.foodModel",
+  "town": "bar0-village-calm-rand-126",
+  "tab": "Systems/Economics",
+  "i": 26,
+  "line": "What it puts on the table itself is the day's catch.",
+  "against": {
+   "tab": "Systems/Institutions",
+   "i": 13,
+   "line": "Farmland · Economy / Services · Grain at harvest"
+  },
+  "why": "the food line names another food as the table's own, beside a farmland house that sells its own grain",
+  "crises": [],
+  "writer": "src/domain/foodways.js :: FRAMES",
+  "factWriter": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Grain at harvest"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.halfway",
+  "town": "bar0-village-calm-rand-129",
+  "tab": "Systems/Economics",
+  "i": 60,
+  "line": "Boots and shoes · Saddles and harness · Leather armour",
+  "against": {
+   "tab": "Systems/Resources",
+   "i": 20,
+   "line": "Work on the animal hides here stops half-way: no leatherworkers' guild finishes it."
+  },
+  "why": "the page says work on animal hides stops half-way (no Leatherworkers' guild); chain Leatherworking & Cordwaining prints finished goods of the missing house",
+  "crises": [],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "(untraced)"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.failedFood",
+  "town": "bar0-village-famine-rand-102",
+  "tab": "Systems/Resources",
+  "i": 16,
+  "line": "River Fisheries · fish · Ancient Grove · medicinal herbs · honey · Stone quarry · stone · Iron Ore Deposits · iron · metalwork",
+  "against": {
+   "tab": "Systems/Resources",
+   "i": 8,
+   "line": "✗ Failed this year · Fish"
+  },
+  "why": "the page says fish failed this year; the commodities available list it unmarked",
+  "crises": [
+   "famine"
+  ],
+  "writer": "src/data/resourceData.js :: RESOURCE_DATA.iron_deposits",
+  "factWriter": "src/components/new/tabs/ResourcesTab.jsx :: ResourceChainCard"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.failedFood",
+  "town": "bar0-village-famine-rand-102",
+  "tab": "Systems/Economics",
+  "i": 26,
+  "line": "stone · Salted fish · Smoked seafood · Freshwater catch · Religious services · Education (basic)",
+  "against": {
+   "tab": "Systems/Resources",
+   "i": 8,
+   "line": "✗ Failed this year · Fish"
+  },
+  "why": "the page says fish failed this year; \"Produced locally\" lists it unmarked",
+  "crises": [
+   "famine"
+  ],
+  "writer": "src/data/supplyChainData.js :: RELIGIOUS_SERVICES",
+  "factWriter": "src/components/new/tabs/ResourcesTab.jsx :: ResourceChainCard"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.failedFood",
+  "town": "bar0-village-famine-rand-103",
+  "tab": "Systems/Resources",
+  "i": 11,
+  "line": "Fishing Grounds · fish · salt · Hunting Grounds · game meat · animal hides · furs · Ancient Grove · medicinal herbs · honey · Iron Ore Deposits · iron · metalwork · Hot Springs / Healing Waters",
+  "against": {
+   "tab": "Systems/Resources",
+   "i": 5,
+   "line": "✗ Failed this year · Fish"
+  },
+  "why": "the page says fish failed this year; the commodities available list it unmarked",
+  "crises": [
+   "famine"
+  ],
+  "writer": "src/data/resourceData.js :: RESOURCE_DATA.hot_springs",
+  "factWriter": "src/components/new/tabs/ResourcesTab.jsx :: ResourceChainCard"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.failedFood",
+  "town": "bar0-village-famine-rand-104",
+  "tab": "Systems/Resources",
+  "i": 17,
+  "line": "Wild Foraging Areas · honey · medicinal herbs · Strategic Crossroads · trade access · Gemstone Deposits · luxury · Open Grazing Land · livestock · wool · dairy · animal hides",
+  "against": {
+   "tab": "Systems/Resources",
+   "i": 11,
+   "line": "✗ Failed this year · Livestock"
+  },
+  "why": "the page says livestock failed this year; the commodities available list it unmarked",
+  "crises": [
+   "famine"
+  ],
+  "writer": "src/data/resourceData.js :: RESOURCE_DATA.crossroads_position",
+  "factWriter": "src/components/new/tabs/ResourcesTab.jsx :: ResourceChainCard"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.failedFood",
+  "town": "bar0-village-famine-rand-106",
+  "tab": "Systems/Resources",
+  "i": 13,
+  "line": "Extensive Grain Fields · grain · flour · Strategic Crossroads · trade access · Gemstone Deposits · luxury",
+  "against": {
+   "tab": "Systems/Resources",
+   "i": 5,
+   "line": "✗ Failed this year · Grain"
+  },
+  "why": "the page says grain failed this year; the commodities available list it unmarked",
+  "crises": [
+   "famine"
+  ],
+  "writer": "src/data/resourceData.js :: RESOURCE_DATA.grain_fields",
+  "factWriter": "src/components/new/tabs/ResourcesTab.jsx :: ResourceChainCard"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.failedFood",
+  "town": "bar0-village-famine-rand-107",
+  "tab": "Systems/Resources",
+  "i": 11,
+  "line": "Fishing Grounds · fish · salt · Salt Flats · Ancient Ruins · trade access · Deep Natural Harbour · maritime access",
+  "against": {
+   "tab": "Systems/Resources",
+   "i": 5,
+   "line": "✗ Failed this year · Fish"
+  },
+  "why": "the page says fish failed this year; the commodities available list it unmarked",
+  "crises": [
+   "famine"
+  ],
+  "writer": "src/data/resourceData.js :: RESOURCE_DATA.deep_harbour",
+  "factWriter": "src/components/new/tabs/ResourcesTab.jsx :: ResourceChainCard"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.halfway",
+  "town": "bar0-village-famine-rand-110",
+  "tab": "Systems/Economics",
+  "i": 46,
+  "line": "Herbal remedies · Potions and elixirs",
+  "against": {
+   "tab": "Systems/Resources",
+   "i": 5,
+   "line": "Partial · Medicinal herbs · very high value | Partial processing - worked only to semi-finished goods"
+  },
+  "why": "the page says work on medicinal herbs stops half-way (no Alchemist shop); chain Herbalism & Remedies prints finished goods of the missing house",
+  "crises": [
+   "famine"
+  ],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "src/data/resourceChains.js :: RESOURCE_CHAINS.herbs"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.failedFood",
+  "town": "bar0-village-famine-rand-112",
+  "tab": "Systems/Resources",
+  "i": 13,
+  "line": "Fishing Grounds · fish · salt · Magical Ley Line Node · medicinal herbs",
+  "against": {
+   "tab": "Systems/Resources",
+   "i": 5,
+   "line": "✗ Failed this year · Fish"
+  },
+  "why": "the page says fish failed this year; the commodities available list it unmarked",
+  "crises": [
+   "famine"
+  ],
+  "writer": "src/data/resourceData.js :: RESOURCE_DATA.magical_node",
+  "factWriter": "src/components/new/tabs/ResourcesTab.jsx :: ResourceChainCard"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.failedFood",
+  "town": "bar0-village-famine-rand-115",
+  "tab": "Systems/Resources",
+  "i": 19,
+  "line": "Open Grazing Land · livestock · wool · dairy · animal hides · Strategic Crossroads · trade access",
+  "against": {
+   "tab": "Systems/Resources",
+   "i": 11,
+   "line": "✗ Failed this year · Livestock"
+  },
+  "why": "the page says livestock failed this year; the commodities available list it unmarked",
+  "crises": [
+   "famine"
+  ],
+  "writer": "src/data/resourceData.js :: RESOURCE_DATA.crossroads_position",
+  "factWriter": "src/components/new/tabs/ResourcesTab.jsx :: ResourceChainCard"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.law.collapsed",
+  "town": "bar0-village-famine-rand-117",
+  "tab": "Systems/Defense",
+  "i": 3,
+  "line": "A thief is known by name within a day, and everyone shuns them until they make it right.",
+  "against": {
+   "tab": "Summary/Foundations",
+   "i": 5,
+   "line": "Law & order · Collapsed"
+  },
+  "why": "the page says law and order has collapsed; this unmarked line says theft is answered",
+  "crises": [
+   "famine"
+  ],
+  "writer": "src/generators/safetyProfile.js :: NO_WATCH_SMALL",
+  "factWriter": "(untraced)"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.failedFood",
+  "town": "bar0-village-famine-rand-117",
+  "tab": "Systems/Resources",
+  "i": 15,
+  "line": "Deep Natural Harbour · maritime access · Coastal Timber · timber · Magical Ley Line Node · medicinal herbs · Fishing Grounds · fish · salt",
+  "against": {
+   "tab": "Systems/Resources",
+   "i": 9,
+   "line": "✗ Failed this year · Fish"
+  },
+  "why": "the page says fish failed this year; the commodities available list it unmarked",
+  "crises": [
+   "famine"
+  ],
+  "writer": "src/data/resourceData.js :: RESOURCE_DATA.magical_node",
+  "factWriter": "src/components/new/tabs/ResourcesTab.jsx :: ResourceChainCard"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.failedFood",
+  "town": "bar0-village-famine-rand-119",
+  "tab": "Systems/Resources",
+  "i": 16,
+  "line": "Fishing Grounds · fish · salt · Coastal Timber · timber · Deep Natural Harbour · maritime access",
+  "against": {
+   "tab": "Systems/Resources",
+   "i": 8,
+   "line": "✗ Failed this year · Fish"
+  },
+  "why": "the page says fish failed this year; the commodities available list it unmarked",
+  "crises": [
+   "famine"
+  ],
+  "writer": "src/data/resourceData.js :: RESOURCE_DATA.deep_harbour",
+  "factWriter": "src/components/new/tabs/ResourcesTab.jsx :: ResourceChainCard"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.failedFood",
+  "town": "bar0-village-famine-rand-123",
+  "tab": "Systems/Resources",
+  "i": 19,
+  "line": "Open Grazing Land · livestock · wool · dairy · animal hides · Stone quarry · stone",
+  "against": {
+   "tab": "Systems/Resources",
+   "i": 11,
+   "line": "✗ Failed this year · Livestock"
+  },
+  "why": "the page says livestock failed this year; the commodities available list it unmarked",
+  "crises": [
+   "famine"
+  ],
+  "writer": "src/data/resourceData.js :: RESOURCE_DATA.grazing_land",
+  "factWriter": "src/components/new/tabs/ResourcesTab.jsx :: ResourceChainCard"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.law.collapsed",
+  "town": "bar0-village-famine-rand-127",
+  "tab": "Systems/Defense",
+  "i": 3,
+  "line": "A thief is known by name within a day, and everyone shuns them until they make it right.",
+  "against": {
+   "tab": "Summary/Foundations",
+   "i": 4,
+   "line": "Law & order · Collapsed"
+  },
+  "why": "the page says law and order has collapsed; this unmarked line says theft is answered",
+  "crises": [
+   "famine"
+  ],
+  "writer": "src/generators/safetyProfile.js :: NO_WATCH_SMALL",
+  "factWriter": "(untraced)"
+ },
+ {
+  "law": "L3",
+  "rule": "L3.failedFood",
+  "town": "bar0-village-famine-rand-127",
+  "tab": "Systems/Resources",
+  "i": 11,
+  "line": "Extensive Grain Fields · grain · flour · Strategic Crossroads · trade access · Stone quarry · stone · Coal or Peat Deposits · coal",
+  "against": {
+   "tab": "Systems/Resources",
+   "i": 5,
+   "line": "✗ Failed this year · Grain"
+  },
+  "why": "the page says grain failed this year; the commodities available list it unmarked",
+  "crises": [
+   "famine"
+  ],
+  "writer": "src/data/resourceData.js :: RESOURCE_DATA.grain_fields",
+  "factWriter": "src/components/new/tabs/ResourcesTab.jsx :: ResourceChainCard"
+ },
+ {
+  "law": "L2",
+  "rule": "L2.law.collapsed",
+  "town": "bar0-village-famine-rand-128",
+  "tab": "Systems/Defense",
+  "i": 3,
+  "line": "A thief is known by name within a day, and everyone shuns them until they make it right.",
+  "against": {
+   "tab": "Summary/Foundations",
+   "i": 4,
+   "line": "Law & order · Collapsed"
+  },
+  "why": "the page says law and order has collapsed; this unmarked line says theft is answered",
+  "crises": [
+   "famine"
+  ],
+  "writer": "src/generators/safetyProfile.js :: NO_WATCH_SMALL",
+  "factWriter": "(untraced)"
+ }
+]
