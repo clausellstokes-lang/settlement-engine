@@ -44,6 +44,7 @@ import { describeTraditions } from '../traditions/traditionDescription.js';
 import { legitimacyCrisisOf } from '../facts/legitimacyCrisis.js';
 import { powerNameWithArticle } from '../display/powerSentenceName.js';
 import { crisisCardId, institutionCardId, personCardId, powerCardId, tensionCardId, traditionCardId } from './cardIds.js';
+import { factionArchetype } from '../factionArchetypes.js';
 
 /** The tabs a quote can sit on, in the plan's order (ruling 8: the crisis card first, then tab order). */
 export const VOICE_TABS = Object.freeze(['crisis', 'institutions', 'power', 'npcs', 'traditions', 'history']);
@@ -136,6 +137,8 @@ export function isLawfulSpeaker(npc) {
  * @property {string | null} keeperTier0 the keepers of a rite are the first tier (the line's "keeper of the rites")
  * @property {string | null} catalogId the card's house's catalogue id (an institution's own; a person's house's): what
  *   answers a line's card-level words (`cardWords.js`)
+ * @property {string | null} archetype a power card's kind (`factionArchetype`, the stored category first): what answers a
+ *   line's power-kind words (`cardWords.js :: POWER_WORDS`); null on every other card
  */
 
 /**
@@ -169,7 +172,7 @@ export function cardsOf(settlement, options = {}) {
   /** @param {Partial<VoiceCard> & { kind: VoiceCard['kind'], id: string, tab: string }} c */
   const push = (c) => cards.push(/** @type {VoiceCard} */ ({
     label: '', state: '', pools: [], weight: 'lesser', silent: null, tiers: [], house: null, power: null, exclude: new Set(),
-    fill: {}, wrongedFit: [], npc: null, keeperTier0: null, catalogId: null, ...c,
+    fill: {}, wrongedFit: [], npc: null, keeperTier0: null, catalogId: null, archetype: null, ...c,
   }));
 
   // ── THE CRISIS (ruling 8: first) ──
@@ -243,6 +246,8 @@ export function cardsOf(settlement, options = {}) {
       silent: criminal ? 'criminal-power' : null,
       weight: WEIGHTY.power({ ruler: isRuler, stake: stakes.has(name) || stakes.has(id) }) ? 'weighty' : 'lesser',
       tiers, power: name, exclude, fill: fillSeat ? { seat: fillSeat } : {},
+      // the power's KIND, read as its card-kind words read it (G1-9; `cardWords.js :: POWER_WORDS`): the stored category first
+      archetype: factionArchetype(r.faction || name),
     });
   }
 
