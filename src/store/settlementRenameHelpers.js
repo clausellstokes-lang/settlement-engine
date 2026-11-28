@@ -79,7 +79,7 @@ export function renameSettlementImpl(get, set, id, newName) {
   if (!trimmed) return false;
   const now = new Date().toISOString();
   let recorded = false;
-  let persist = null; let renamed = null; // K2 (K2-1): the AI narrative follows, as the person's and the power's renames do
+  let persist = null; let renamed = /** @type {{ saveId: string, oldName: string } | null} */ (null); // K2 (K2-1): the AI narrative follows, as the person's and the power's renames do
   set(state => {
     const idx = state.savedSettlements.findIndex(s => String(s.id) === String(id));
     const isActive = String(state.activeSaveId || '') === String(id);
