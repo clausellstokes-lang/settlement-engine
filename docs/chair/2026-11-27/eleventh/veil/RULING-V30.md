@@ -95,3 +95,19 @@ of 1,558 hideable houses of C are of this kind).**
   'Farmland', the only farmland: the reader's rows differ shown against hidden in 55 of 900; 269 with the food record's
   sources set to no grain): CURED IN POINT 122 BY RULING 122-T-5 (the same floor helper; in work at the time of writing):
   recorded here so the lane's proof counts it.
+
+**A22 AND A23, NAMED FOR THE LANE's RESUMPTION (09:36 UTC on 2026-11-28):**
+- **A22: THE SERVED `id` IS A FAST HASH OF THE SEED** (`src/domain/normalizeSettlement.js :: idFromSeed`: two rounds of
+  32-bit FNV-1a, "not cryptographically strong"; minted at birth; RENAME-BUILD confirmed by execution that it is unchanged
+  at save, cloud admit, JSON import, share and gallery import). `toPublicSafe` strips `_seed` because the seed lets a
+  reader re-bear the whole town, hidden things included; the id still travels on every share, and from point 124 the
+  view-time picks and (K1b) the traditions' draw of a 0.10.0 record are keyed on it. OWED, A MEASURE FIRST: the seed's space
+  as the product mints it (its length and alphabet at every door: the generator form, a fork, an import); whether a reader
+  holding a served id can recover the seed by search in practical time; if so, the cure (a served identity that is not a
+  function of the seed alone, or a slow keyed hash, with every reader of the id counted first). UNDER THE RELEASE's BAR R3
+  ("not inferable") THIS IS A CANDIDATE STOPPER UNTIL MEASURED.
+- **A23: THE STAMPED READER PROSE IS COMPOSED ON THE FULL RECORD** (known: A18, V30 to V34), and the survey's reader showed
+  one live tell of it: `solvencyShown.js :: owesDebtShown`'s hook leg (a plot hook is the DM's by class) changed the shared
+  page's economy lines in 25 of 900 towns of C. CURED ON THE LINE FOR THAT LEG (ruling 122-B-4: the hook leg is the owner's
+  eye only). OWED TO THE LANE: the same test for the other two legs where a DM hides the stress or the tension, and for
+  every atom a stamped line leans on (READER SURVEY-1 is listing them: its report's findings on DM-only-by-class things).
