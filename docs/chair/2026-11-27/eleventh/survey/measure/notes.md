@@ -26,3 +26,9 @@
 - births sweep (tools3/sweep.jsx, bundle4): 1,800 births, 0 errors. 10 atoms answer UNKNOWN on a final record: 7 context atoms (by construction) and 3 UNKNOWN BY DESIGN (clay kilns, charcoal kilns, critical import brought in: undefined silences line and twin). Every other atom answers on all 1,800.
 - D readings of the 43 (against the printed prosperity): TRUE 33, FALSE 5, CANNOT TELL 5.
 - V run log: React warned of two children with the same key `Thieves' Guild` (one metropolis-tier chunk, 793..868): a page lists one Thieves' Guild twice (not chased: out of the seven).
+
+## E (2026-11-28 01:40 UTC)
+- an/e-ledger2.mjs supersedes an/e-ledger.mjs: it adds band dimensions whose declared ranges do not meet. The first run read `<`/`>` as `=` and found false disjoints (stores < 3 beside < 12), fixed before counting.
+- 40 owner pages carry a declared-exclusion pair: prosperity band 23 (all 23 print both: an/eband.mjs), guild 9, under_siege 7, terrain: forest 1.
+- R-PAIRS with sweep names: any pair 755 owner pages, hard 295. Savings against debt: 103 owner pages (76 against no savings). Pays its way against a debt in force: 18.
+- The loose debt class and the hook class were read from their commonest 40 / 20 sentence templates (an/esent.mjs): loose is a person or interface text; hook is about 2/3 an NPC secret and 1/3 the outside_debt trouble's hooks.
