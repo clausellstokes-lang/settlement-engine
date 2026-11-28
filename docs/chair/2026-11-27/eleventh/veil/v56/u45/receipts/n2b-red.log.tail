@@ -1,0 +1,7 @@
+ ❯ tests/lint/standingFormsTotality.walker.test.js (5 tests | 1 failed | 4 skipped) 2014ms
+     × 3. THE CENSUS OF STORED TAILS (a measure: runs only under STANDWALK_POOLS=<today>:<master>; skipped in the gate's default run): UNCUT, DIFFERENT-SPAN TIE and WRONG are 0 in both pools (same-span ties counted apar
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+ ❯ tests/lint/standingFormsTotality.walker.test.js:382:83
+ Test Files  1 failed (1)
+      Tests  1 failed | 4 skipped (5)
+rc=1 2026-11-27T23:42:40Z

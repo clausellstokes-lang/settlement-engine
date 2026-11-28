@@ -1,0 +1,10 @@
+ ❯ tests/lint/rosterChoiceComposedHosts.walker.test.js (10 tests | 1 failed) 14ms
+     × power.desc: not composed; withheld ALWAYS, NOT DRAWN by the page (RULING V15: the shared page prints no standing), built on R2's always-host in both engines (hosts that exist) 7ms
+ ❯ tests/lint/standingReaders.walker.test.js (5 tests | 1 failed) 199ms
+     × THE TAIL NEVER SHIPS: both always-hosts cut the standing and drop a hidden or masked row's desc; the registry row power.desc is withheld always, NOT DRAWN by the page (RULING V15), built 7ms
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+ ❯ tests/lint/rosterChoiceComposedHosts.walker.test.js:152:74
+ ❯ tests/lint/standingReaders.walker.test.js:163:17
+ Test Files  2 failed (2)
+      Tests  2 failed | 13 passed (15)
+rc=1 2026-11-27T23:44:51Z

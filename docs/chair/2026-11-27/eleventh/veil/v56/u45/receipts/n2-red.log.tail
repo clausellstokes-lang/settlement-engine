@@ -1,0 +1,7 @@
+ ❯ tests/lint/standingFormsTotality.walker.test.js (5 tests | 1 failed | 1 skipped) 84ms
+     × 5. THE DIFFERENT-SPAN TIE IS UNREACHABLE BY CONSTRUCTION (N2, VETOABLE): every row ends in $, holds no top-level |, cannot open on a space; both engines read a row only as a tail 9ms
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+ ❯ tests/lint/standingFormsTotality.walker.test.js:252:133
+ Test Files  1 failed (1)
+      Tests  1 failed | 3 passed | 1 skipped (5)
+rc=1 2026-11-27T23:39:26Z

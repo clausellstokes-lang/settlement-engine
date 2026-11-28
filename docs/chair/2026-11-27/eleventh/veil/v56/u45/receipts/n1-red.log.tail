@@ -1,0 +1,9 @@
+ ❯ tests/lint/standingReaders.walker.test.js (5 tests | 2 failed) 197ms
+     × every site is registered with its count; none is stale; each owner-only, veil and not-a-read site gives its reason 189ms
+     × THE ONE READER exists, CALLS NO WRITER (V15: the page prints no standing), cuts each SERVED ROSTER row's desc by the twin's table, and is wired at both doors: rederiveForPage and the import's save (authoritative)
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+ ❯ tests/lint/standingReaders.walker.test.js:121:56
+ ❯ tests/lint/standingReaders.walker.test.js:148:17
+ Test Files  1 failed | 1 passed (2)
+      Tests  2 failed | 13 passed (15)
+rc=1 2026-11-27T23:38:55Z

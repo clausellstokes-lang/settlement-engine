@@ -1,0 +1,11 @@
+POOL /var/tmp/v51/out/p1/stored-today: places 140, descs 754, descs whose cut base names ANOTHER power of the place 7 (6 places)
+  class: a density rival naming its own host: 4
+  class: other: 3
+  e.g. r3m-city-infiltrated-1-112 The Landed Bloc [a density rival naming its own host] names ["Noble Families"]: "Noble families with hereditary land rights and traditional privileges; active in civic politics and competitive with merchant capital."
+  e.g. r3m-city-none-0-37 The Trade Compact [a density rival naming its own host] names ["Craft Guilds"]: "Craft guilds regulating production and apprenticeships; a reliable secondary presence in civic life."
+  e.g. r3m-city-none-1-101 Noble Families [other] names ["Royal Authority"]: "Hereditary landowners behind the Royal Authority; military levies, land rents, and judicial rights all flow through noble title. Their word is law within their "
+POOL /var/tmp/v51/out/p1/stored-master: places 140, descs 765, descs whose cut base names ANOTHER power of the place 8 (8 places)
+  class: a density rival naming its own host: 8
+  e.g. r3m-city-infiltrated-0-32 The Guild Alliance [a density rival naming its own host] names ["Craft Guilds"]: "Well-organised craft guilds with established trade monopolies; a persistent civic voice that merchant houses must negotiate with, not ignore."
+  e.g. r3m-city-none-0-37 The Trade Compact [a density rival naming its own host] names ["Craft Guilds"]: "Craft guilds regulating production and apprenticeships; a reliable secondary presence in civic life."
+  e.g. r3m-city-none-1-113 The Merchant Bloc [a density rival naming its own host] names ["Craft Guilds"]: "Well-organised craft guilds with established trade monopolies; a persistent civic voice that merchant houses must negotiate with, not ignore."

@@ -1,0 +1,7 @@
+ ❯ tests/lint/standingReaders.walker.test.js (5 tests | 1 failed) 230ms
+     × every site is registered with its count; none is stale; each owner-only, veil and not-a-read site gives its reason 218ms
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+ ❯ tests/lint/standingReaders.walker.test.js:121:56
+ Test Files  1 failed | 10 passed (11)
+      Tests  1 failed | 65 passed | 1 skipped (67)
+rc=1 2026-11-28T00:21:18Z

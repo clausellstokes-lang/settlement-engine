@@ -1,0 +1,11 @@
+ ❯ tests/lint/rosterChoiceComposedHosts.walker.test.js (11 tests | 3 failed) 12ms
+     × the census is not vacuous: the registry holds composed rows, walked in its own order from the first; power.recentConflict is not among them (E97 (5): the pin re-taken, the row having left the composed form) 6ms
+     × THE PINS RE-TAKEN BY CAUSE (R5D-SQL moved power.desc, power.label, power.relation.dmNote): of the composed rows, exactly the 23 prose.* rows sit on R5's planned host (CHAIN C's worklist, E134 (2)); no other row d
+     × power.label: OFF THE COMPOSED FORM, a plain diffuse row (its census 0 hits: R5DESC-MEASURE; the page arm counts again) 1ms
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+ ❯ tests/lint/rosterChoiceComposedHosts.walker.test.js:109:29
+ ❯ tests/lint/rosterChoiceComposedHosts.walker.test.js:159:28
+ ❯ tests/lint/rosterChoiceComposedHosts.walker.test.js:167:106
+ Test Files  1 failed (1)
+      Tests  3 failed | 8 passed (11)
+rc=1 2026-11-27T23:38:56Z

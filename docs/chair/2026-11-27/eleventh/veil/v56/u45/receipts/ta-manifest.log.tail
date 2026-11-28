@@ -1,0 +1,7 @@
+ ❯ tests/lint/veilDoorsPassStored.walker.test.js (6 tests | 1 failed) 16ms
+     × get_gallery_map: every call passes five arguments, the fifth its stored row (RED BY DESIGN until unit 3 restates 211's map door) 8ms
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+ ❯ tests/lint/veilDoorsPassStored.walker.test.js:124:77
+ Test Files  1 failed | 1 passed (2)
+      Tests  1 failed | 15 passed (16)
+rc=1 2026-11-28T00:21:20Z

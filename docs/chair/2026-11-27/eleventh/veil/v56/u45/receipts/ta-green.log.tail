@@ -1,0 +1,22 @@
+ ❯ tests/lint/moduleScopeCwdRatchet.test.js (6 tests | 1 failed) 11ms
+     × A4 — NO GUARDED DIRECTORY CARRIES MORE MODULE-SCOPE WORKING-DIRECTORY ROOTS THAN BANKED 6ms
+ ❯ tests/lint/negativeAssertionAnchor.walker.test.js (9 tests | 1 failed) 16ms
+     × no NEW un-anchored negative assertion anywhere in the test corpus 11ms
+ ❯ tests/lint/mutationCoverageManifest.test.js (10 tests | 1 failed) 31ms
+     × TOTALITY: every enumerated invariant file has a manifest entry 13ms
+ ❯ tests/lint/veilDoorsPassStored.walker.test.js (6 tests | 1 failed) 9ms
+     × get_gallery_map: every call passes five arguments, the fifth its stored row (RED BY DESIGN until unit 3 restates 211's map door) 5ms
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+ ❯ tests/lint/moduleScopeCwdRatchet.test.js:267:7
+Invariant test file(s) with NO mutation-coverage entry. For each: plant a regression in scripts/mutation-sweep.sh proving it reds (preferred), or add a rationale entry to scripts/mutation-coverage-manifest.json with a wr
+ ❯ tests/lint/mutationCoverageManifest.test.js:99:7
++   "tests/domain/display/criminalVeilSwitch.test.js: 2 un-anchored negative assertion(s) at line(s) 230, 231 (frozen ceiling 0). A bare not.toContain/not.toMatch/not.toHaveProperty passes just as happily when the COLLEC
++   "tests/lint/veilCopySites.walker.test.js: 1 un-anchored negative assertion(s) at line(s) 244 (frozen ceiling 0). A bare not.toContain/not.toMatch/not.toHaveProperty passes just as happily when the COLLECTION drifted 
++   "tests/security/criminalSwitchSalt.test.js: 2 un-anchored negative assertion(s) at line(s) 123, 131 (frozen ceiling 0). A bare not.toContain/not.toMatch/not.toHaveProperty passes just as happily when the COLLECTION d
++   "tests/security/galleryRosterChoices.pglite.test.js: 1 un-anchored negative assertion(s) at line(s) 746 (frozen ceiling 0). A bare not.toContain/not.toMatch/not.toHaveProperty passes just as happily when the COLLECTI
++   "tests/security/galleryVeilSignalCopies.pglite.test.js: 1 un-anchored negative assertion(s) at line(s) 269 (frozen ceiling 0). A bare not.toContain/not.toMatch/not.toHaveProperty passes just as happily when the COLLE
+ ❯ tests/lint/negativeAssertionAnchor.walker.test.js:850:24
+ ❯ tests/lint/veilDoorsPassStored.walker.test.js:124:77
+ Test Files  4 failed | 1 passed (5)
+      Tests  4 failed | 33 passed (37)
+rc=1 2026-11-28T00:20:46Z

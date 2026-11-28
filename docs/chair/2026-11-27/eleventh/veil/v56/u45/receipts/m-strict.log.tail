@@ -1,0 +1,4 @@
+[domain-strict] strict-type regressions in the domain kernel (fix or annotate; do not widen the baseline):
+Domain strict-error ceiling is 1113. New/worsened files must be strict-clean.
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
+rc=1

@@ -1,0 +1,2 @@
+stored=null|The Trade Compact|Craft guilds regulating production and a
+stored=row|The Trade Compact|WITHHELD

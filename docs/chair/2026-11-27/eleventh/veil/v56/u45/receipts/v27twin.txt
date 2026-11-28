@@ -1,0 +1,4 @@
+dm=false stored=false: Trade Compact desc "Craft guilds regulating production and a"; served Merchant oligarchy, Merchant Guilds, The Trade Compact, The Merchant Bloc
+dm=false stored=true: Trade Compact desc WITHHELD; served Merchant oligarchy, Merchant Guilds, The Trade Compact(-desc), The Merchant Bloc
+dm=true stored=false: Trade Compact desc "Craft guilds regulating production and a"; served Merchant oligarchy, Merchant Guilds, Craft Guilds(-desc), The Trade Compact, The Merchant Bloc
+dm=true stored=true: Trade Compact desc "Craft guilds regulating production and a"; served Merchant oligarchy, Merchant Guilds, Craft Guilds(-desc), The Trade Compact, The Merchant Bloc

@@ -1,0 +1,15 @@
+ ❯ tests/lint/veilDoorsPassStored.walker.test.js (6 tests | 5 failed) 16ms
+     × every live function that calls the veil is the wrapper or a registered door; the wrapper passes NULL to the five-argument form 6ms
+     × get_gallery_dossier: every call passes five arguments, the fifth its stored row 2ms
+     × get_unlisted_dossier: every call passes five arguments, the fifth its stored row 1ms
+     × import_gallery_dossier: every call passes five arguments, the fifth its stored row 1ms
+     × get_gallery_map: every call passes five arguments, the fifth its stored row (RED BY DESIGN until unit 3 restates 211's map door) 1ms
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 5 ⎯⎯⎯⎯⎯⎯⎯
+ ❯ tests/lint/veilDoorsPassStored.walker.test.js:114:91
+ ❯ tests/lint/veilDoorsPassStored.walker.test.js:124:77
+ ❯ tests/lint/veilDoorsPassStored.walker.test.js:124:77
+ ❯ tests/lint/veilDoorsPassStored.walker.test.js:124:77
+ ❯ tests/lint/veilDoorsPassStored.walker.test.js:124:77
+ Test Files  1 failed (1)
+      Tests  5 failed | 1 passed (6)
+rc=1 2026-11-28T00:21:53Z
