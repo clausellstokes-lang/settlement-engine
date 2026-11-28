@@ -1,0 +1,2 @@
+C births 900 errors 0 A {"homes":1784,"fieldMoved":0,"valueMoved":0,"originalWrong":0,"revertWrong":0,"revertOld":0,"engineHeldName":1135} B {"nameFieldsMoved":0,"otherNameCountMoved":0,"homesDiffer":0,"oldLeftInHomes":0}
+V births 900 errors 0 A {"homes":1795,"fieldMoved":0,"valueMoved":0,"originalWrong":0,"revertWrong":0,"revertOld":0,"engineHeldName":1176} B {"nameFieldsMoved":0,"otherNameCountMoved":0,"homesDiffer":0,"oldLeftInHomes":0}

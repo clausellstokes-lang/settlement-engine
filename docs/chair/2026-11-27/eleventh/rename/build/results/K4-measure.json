@@ -1,0 +1,202 @@
+== C {
+ "births": 900,
+ "errors": 0,
+ "idsHeld": {
+  "npc": 27391,
+  "institution": 34407,
+  "faction": 3468,
+  "event": 4765,
+  "tension": 1542,
+  "conflict": 805,
+  "relationship": 26237
+ },
+ "withIdOf": {
+  "npc": [
+   27391,
+   27391
+  ],
+  "institution": [
+   0,
+   34407
+  ],
+  "faction": [
+   0,
+   3468
+  ]
+ },
+ "paths": {
+  "F": {
+   "renamed": 900,
+   "townsReKeyed": 900,
+   "lostByKind": {
+    "faction": {
+     "towns": 900,
+     "ids": 900
+    },
+    "conflict": {
+     "towns": 415,
+     "ids": 587
+    }
+   },
+   "hide": {
+    "tested": 900,
+    "hiddenBefore": 900,
+    "liftedAfter": 900
+   },
+   "liftedBySize": {
+    "thorp": 150,
+    "hamlet": 150,
+    "village": 150,
+    "town": 150,
+    "city": 150,
+    "metropolis": 150
+   }
+  },
+  "P": {
+   "renamed": 900,
+   "townsReKeyed": 0,
+   "lostByKind": {},
+   "hide": {
+    "tested": 0,
+    "hiddenBefore": 0,
+    "liftedAfter": 0
+   },
+   "liftedBySize": {}
+  },
+  "H": {
+   "renamed": 900,
+   "townsReKeyed": 900,
+   "lostByKind": {
+    "institution": {
+     "towns": 900,
+     "ids": 900
+    }
+   },
+   "hide": {
+    "tested": 900,
+    "hiddenBefore": 900,
+    "liftedAfter": 900
+   },
+   "liftedBySize": {
+    "thorp": 150,
+    "hamlet": 150,
+    "village": 150,
+    "town": 150,
+    "city": 150,
+    "metropolis": 150
+   }
+  },
+  "T": {
+   "renamed": 900,
+   "townsReKeyed": 0,
+   "lostByKind": {},
+   "hide": {
+    "tested": 0,
+    "hiddenBefore": 0,
+    "liftedAfter": 0
+   },
+   "liftedBySize": {}
+  }
+ }
+}
+== V {
+ "births": 900,
+ "errors": 0,
+ "idsHeld": {
+  "npc": 26218,
+  "institution": 33099,
+  "faction": 3202,
+  "event": 4675,
+  "tension": 1530,
+  "conflict": 759,
+  "relationship": 25008
+ },
+ "withIdOf": {
+  "npc": [
+   26218,
+   26218
+  ],
+  "institution": [
+   0,
+   33099
+  ],
+  "faction": [
+   0,
+   3202
+  ]
+ },
+ "paths": {
+  "F": {
+   "renamed": 900,
+   "townsReKeyed": 900,
+   "lostByKind": {
+    "faction": {
+     "towns": 900,
+     "ids": 900
+    },
+    "conflict": {
+     "towns": 399,
+     "ids": 586
+    }
+   },
+   "hide": {
+    "tested": 900,
+    "hiddenBefore": 900,
+    "liftedAfter": 861
+   },
+   "liftedBySize": {
+    "thorp": 150,
+    "hamlet": 150,
+    "village": 150,
+    "town": 132,
+    "city": 136,
+    "metropolis": 143
+   }
+  },
+  "P": {
+   "renamed": 900,
+   "townsReKeyed": 0,
+   "lostByKind": {},
+   "hide": {
+    "tested": 0,
+    "hiddenBefore": 0,
+    "liftedAfter": 0
+   },
+   "liftedBySize": {}
+  },
+  "H": {
+   "renamed": 900,
+   "townsReKeyed": 900,
+   "lostByKind": {
+    "institution": {
+     "towns": 900,
+     "ids": 900
+    }
+   },
+   "hide": {
+    "tested": 900,
+    "hiddenBefore": 900,
+    "liftedAfter": 900
+   },
+   "liftedBySize": {
+    "thorp": 150,
+    "hamlet": 150,
+    "village": 150,
+    "town": 150,
+    "city": 150,
+    "metropolis": 150
+   }
+  },
+  "T": {
+   "renamed": 900,
+   "townsReKeyed": 0,
+   "lostByKind": {},
+   "hide": {
+    "tested": 0,
+    "hiddenBefore": 0,
+    "liftedAfter": 0
+   },
+   "liftedBySize": {}
+  }
+ }
+}

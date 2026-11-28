@@ -59,3 +59,24 @@ RENAME-BUILD, 2026-11-28. Base: 5ad631588 (with K1).
 - (iv) a DM-typed note or an edited description is not rewritten;
 - the saved town, the unsaved town and the detail copy (born towns of every size);
 - the AI narrative handed to `applyCosmeticRename` once, and not for a no-op.
+
+## K2-3: point 124's cure (the reader's landing-stopper; the chair's ruling K2-3)
+
+**The commits**
+- 61446b672: the red tests, through the store's own actions (3 of 3 red), plus townRename's DM-typed case re-pointed to edit through `applyUserEdit` (red).
+- 0e0ca449c, (A): an edited home is not rewritten; its ledger's `originalValue` follows, through `userEdits.js :: rekeyUserEditOriginal`.
+- 864b6e493, (B): the AI copy takes the record's rule (`townRename.js :: townNameRewrite`, read by `narrativeMutations.js :: applyTownRenameToAiData`).
+
+**The proof on every birth** (`tools/k23-harness.jsx`, `results/K2-3-proof.txt`; CONFIRMED). Both homes are edited through `applyUserEdit`, the town is renamed by its writer, then each edit is reverted. An AI copy (the record itself) is renamed by the slice's own town rule.
+
+| | C (900) | V (900) |
+|---|---|---|
+| edited homes | 1,784 (1,135 of whose engine sentences hold the name) | 1,795 (1,176) |
+| (A) the field moved / the ledger's value moved | **0 / 0** | **0 / 0** |
+| (A) the ledger's original not the engine's sentence renamed | **0** | **0** |
+| (A) a revert not that sentence / a revert holding the old name | **0 / 0** | **0 / 0** |
+| (B) the AI copy's name fields (people, houses, powers) moved | **0** | **0** |
+| (B) another stored name's count moved in the AI copy | **0** | **0** |
+| (B) the AI copy's homes differ from the record's cascade | **0** | **0** |
+
+K2's page proof (300 + 300) and F3 are re-run on the cured tree: see below.
