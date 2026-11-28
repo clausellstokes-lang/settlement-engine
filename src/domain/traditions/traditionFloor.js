@@ -3,14 +3,15 @@
  *
  * The record with every live house NOT of the hideable class (people/cardVeil.js :: isHideableHouse, read on the house
  * whole, before the strip: a house a DM can hide whole counts as absent), each less its function-eye fields
- * (traditionDescription.js :: withoutFunction: a house's NAME against the catalogue's tags). No veil state can move a
+ * (functionEye.js :: withoutFunction, the floor's copy of traditionDescription.js's, held equal to the veil's function eye by
+ * tests/security/functionEyeCopy.test.js: a house's NAME against the catalogue's tags). No veil state can move a
  * fact read over it. Read by the shared page's drawn set (shownTraditions.js :: drawnSetOf) and by genesis's draw
  * (genesis.js :: deriveFoundingTraditions, NEEDS_SINCE): one spelling, so the draw and the drawn set agree.
  * A leaf: it imports neither genesis.js nor shownTraditions.js. Pure: no draw, no clock, no write.
  */
 import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { isHideableHouse } from '../people/cardVeil.js';
-import { withoutFunction } from './traditionDescription.js';
+import { withoutFunction } from './functionEye.js'; // RULING 122-B-3: the floor's own leaf, held equal to the veil's eye
 
 /**
  * @template T
