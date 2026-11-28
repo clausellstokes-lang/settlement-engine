@@ -10,8 +10,12 @@
  *   1. a PRONOUN from that person's own `gender` ('male' / 'female'), where no other person the sentence names shares
  *      that gender;
  *   2. else the ROLE as the card states it ("the gang boss": it tells a DM who the person is), where no other person
- *      the sentence names holds it (the chair's order, 2026-11-20);
- *   3. else the SURNAME (the name's last word), where no other person the sentence names carries it;
+ *      the sentence names holds it (the chair's order, 2026-11-20), and only where the role reads as a description, with
+ *      its article ("the miller"); a bare title with no article ("Elder", "Mayor") takes 3-5 (R13, RULING-R, the
+ *      eleventh chair, 2026-11-27);
+ *   3. else the SURNAME (the name's last word, a bracket qualifier set aside), where no other person the sentence names
+ *      carries it; a stand-in's name that is itself a description ("The Veteran Soldier") has none and is printed whole,
+ *      its article in the sentence's case (R13);
  *   4. else the GIVEN NAME (the name's first word), where no other person the sentence names carries it;
  *   5. else the full name, as before (two cards of one name and one role: nothing shorter tells them apart).
  * A card with no gender (an older stored town's card) takes 2-5.
@@ -163,6 +167,12 @@ const esc = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 /** @param {string} s @returns {string} */
 const capFirst = (s) => (s ? s[0].toUpperCase() + s.slice(1) : s);
 
+/** a name's words, its bracket qualifier set aside ("Chac Chel Koh (the senior guild master)": its surname is "Koh") @param {string} name */
+const bareWords = (name) => name.replace(/\s+\([^()]+\)$/, '').split(/\s+/);
+
+/** a role that reads as a description in a sentence: it carries its article ("the miller"); a bare title ("Elder") does not (R13) */
+const ROLE_AS_DESCRIPTION = /^the\s/;
+
 /**
  * The mention a later occurrence takes, without its case: a pronoun's gender, or the word that stands for the person.
  * @param {{ name: string, gender: string, role: string }} p @param {Array<{ name: string, gender: string, role: string }>} named
@@ -172,11 +182,12 @@ const capFirst = (s) => (s ? s[0].toUpperCase() + s.slice(1) : s);
 function mentionOf(p, named, noPronoun = false) {
   const others = named.filter((q) => q !== p);
   if (!noPronoun && (p.gender === 'female' || p.gender === 'male') && !others.some((q) => q.gender === p.gender)) return { pronoun: p.gender };
-  if (p.role && !others.some((q) => q.role.toLowerCase() === p.role.toLowerCase())) return { word: p.role };
-  const words = p.name.split(/\s+/);
+  if (ROLE_AS_DESCRIPTION.test(p.role) && !others.some((q) => q.role.toLowerCase() === p.role.toLowerCase())) return { word: p.role };
+  if (/^The\s/.test(p.name)) return { word: `the${p.name.slice(3)}` }; // a name that is a description ("The Veteran Soldier") has no surname
+  const words = bareWords(p.name);
   const surname = words[words.length - 1];
-  if (words.length > 1 && !others.some((q) => q.name.split(/\s+/).includes(surname))) return { word: surname };
-  if (words.length > 1 && !others.some((q) => q.name.split(/\s+/).includes(words[0]))) return { word: words[0] };
+  if (words.length > 1 && !others.some((q) => bareWords(q.name).includes(surname))) return { word: surname };
+  if (words.length > 1 && !others.some((q) => bareWords(q.name).includes(words[0]))) return { word: words[0] };
   return null;
 }
 

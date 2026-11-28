@@ -67,6 +67,37 @@ describe('secondMentions: the first mention keeps the full name; a later one in 
       .toBe('Ana Ruiz needs Bea Ruiz\'s seal, and Bea needs Ana\'s silence.');
   });
 
+  it('R13 (RULING-R, the eleventh chair, 2026-11-27): a bare title with no article is no description; the later mention takes the next rung', () => {
+    // the measure's worked example (C dp-thorp-87): npcData.js's "has a hold on ... too" line, two men, one card titled bare
+    const held = [M('Eirik Ragnarsson', 'Elder'), M('Brynjar Eriksson', 'the occupying governor')];
+    expect(secondMentions('Someone else has learned what favour Eirik Ragnarsson owes Brynjar Eriksson, and now has a hold on Eirik Ragnarsson too.', held))
+      .toBe('Someone else has learned what favour Eirik Ragnarsson owes Brynjar Eriksson, and now has a hold on Ragnarsson too.');
+    // the role with its article still stands for its card
+    expect(secondMentions('Eirik Ragnarsson wants Brynjar Eriksson\'s position, and Brynjar Eriksson wants Eirik Ragnarsson\'s reputation.', held))
+      .toBe('Eirik Ragnarsson wants Brynjar Eriksson\'s position, and the occupying governor wants Ragnarsson\'s reputation.');
+    // a bound they-form skips the pronoun; a bare title there takes the surname, then the given name where the surname is shared
+    expect(secondMentions('Rhona Ashby has asked Silas Brent for an introduction Silas Brent would rather keep to themselves.', [F('Rhona Ashby'), M('Silas Brent', 'Mayor')]))
+      .toBe('Rhona Ashby has asked Silas Brent for an introduction Brent would rather keep to themselves.');
+    expect(secondMentions('Ana Ruiz needs Bea Ruiz\'s seal, and Bea Ruiz needs Ana Ruiz\'s silence.', [F('Ana Ruiz', 'Alderman'), F('Bea Ruiz', 'Lord Mayor')]))
+      .toBe('Ana Ruiz needs Bea Ruiz\'s seal, and Bea needs Ana\'s silence.');
+    // a name qualified by its bracket (npcDisplayNames.js) gives its surname from the bare name, never "master)" (V dp-city-78)
+    const koh = 'Chac Chel Koh (the senior guild master)';
+    expect(secondMentions(`${koh} once spoke up for Ahulane Ek when it cost ${koh} something to do it.`, [M(koh, 'Master of the Guilds'), M('Ahulane Ek', 'the wizard')]))
+      .toBe(`${koh} once spoke up for Ahulane Ek when it cost Koh something to do it.`);
+    // a stand-in card whose name is itself a description ("The Veteran Soldier", its role bare) has no surname: the name, its
+    // article in the sentence's case (the golden's hamlet|latin|forest|isolated|civilized row)
+    expect(secondMentions('The Veteran Soldier wants Vibius Aurelius\'s position, and Vibius Aurelius wants The Veteran Soldier\'s reputation.', [{ name: 'The Veteran Soldier', role: 'Veteran Soldier' }, M('Vibius Aurelius', 'the steward')]))
+      .toBe('The Veteran Soldier wants Vibius Aurelius\'s position, and he wants the Veteran Soldier\'s reputation.');
+  });
+
+  it('R13: a name that is itself a role word is never changed (a place, a person, a power)', () => {
+    const cards = [M('John Miller', 'Elder'), M('Erik Holt', 'Reeve')];
+    expect(secondMentions('John Miller owes Erik Holt a favour from the Elder Creek flood, and Erik Holt has not let John Miller forget it.', cards))
+      .toBe('John Miller owes Erik Holt a favour from the Elder Creek flood, and Holt has not let Miller forget it.');
+    expect(secondMentions('Erik Holt sits on the Elder Council beside John Miller, and the Elder Council hears John Miller first.', cards))
+      .toBe('Erik Holt sits on the Elder Council beside John Miller, and the Elder Council hears Miller first.');
+  });
+
   it('a card with no gender (an older stored town\'s) takes the surname', () => {
     expect(secondMentions('Mord Bjarnarson pays, and Dag Magnusson takes Mord Bjarnarson\'s orders.', [{ name: 'Mord Bjarnarson' }, { name: 'Dag Magnusson' }]))
       .toBe('Mord Bjarnarson pays, and Dag Magnusson takes Bjarnarson\'s orders.');

@@ -129,3 +129,36 @@ describe('D34: the coast\'s salt is made only where a salt works stands', () => 
     }), 'D34: every coast with a Salt works still lists salt');
   });
 });
+
+/**
+ * R11 (RULING-R, the eleventh chair, 2026-11-27; its ruling 123-1): THE DATE PALMS GIVE DATES, NOT GRAIN. The catalogue
+ * bundled grain with the palms (commodities grain and dates, the trade good "Desert grain"), so a place whose food record
+ * names no grain listed grain among what it makes and exported "Desert grain" (V dp-thorp-22 of the whole-town measure).
+ * The palms give dates, and their third trade good is "Pressed dates" in the grain good's place, so no export list changes
+ * its length. A palm place beside grain fields still makes grain.
+ */
+const GONE_PALMS = ['r2r-thorp-4', 'r2r-thorp-95']; // date palms, no grain among the food sources
+const KEEP_PALMS = ['r2r-hamlet-14'];               // date palms beside grain fields
+
+describe('R11: the date palms give dates, not grain', () => {
+  test('the data: the palms give dates and no grain; their trade goods name dates, never grain', () => {
+    expectAbsentWithAnchor(commoditiesOf('date_palms'), 'grain', 'dates', 'date_palms: no grain, beside the dates it gives');
+    expect(/** @type {any} */ (RESOURCE_DATA).date_palms.tradeGoods).toEqual(['Date harvest', 'Dried fruit', 'Pressed dates']);
+  });
+  test('each palm town with no grain source lists no grain and exports no "Desert grain"; it still makes dates (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(GONE_PALMS, (seed) => {
+      const t = town(seed);
+      expect(t.config.nearbyResources, `${seed}: among the date palms`).toContain('date_palms');
+      // anchored: the KEEP row below reads this same list on a palm town and finds its grain, so the path cannot go empty unseen
+      expect(t.economicState.foodSecurity.foodRecord.foodSources, `${seed}: its food record names no grain`).not.toContain('grain');
+      expectAbsentWithAnchor(madeIn(seed), 'grain', 'dates', `${seed}: no grain the land does not give, beside the dates it makes`);
+      expectAbsentWithAnchor(t.economicState.primaryExports, 'Desert grain', 'Pressed dates', `${seed}: the palms' good, in the grain good's place`);
+    }), 'R11: no palm town without a grain source makes or exports grain, and each still makes dates');
+  });
+  test('a palm town beside grain fields still makes grain (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(KEEP_PALMS, (seed) => {
+      expect(town(seed).economicState.foodSecurity.foodRecord.foodSources, `${seed}: its grain fields`).toContain('grain');
+      expect(madeIn(seed), `${seed} still lists "grain"`).toContain('grain');
+    }), 'R11: a palm town with grain fields still makes grain');
+  });
+});
