@@ -139,13 +139,15 @@ export const VERSION_KEYS = Object.freeze(['welcoming', 'transactional', 'cautio
 export const VERSIONS_JOIN = ' ¦ ';
 
 /**
- * A `versions` row's words: its four versions in `VERSION_KEYS` order, joined; null unless all four are non-empty strings.
+ * A `versions` row's words: its four versions in `VERSION_KEYS` order, joined; null unless all four are non-empty strings
+ * (a version written `{ text, … }` is read by its `text`).
  * @param {unknown} versions @returns {string | null}
  */
 export function versionsWordsOf(versions) {
   if (!versions || typeof versions !== 'object' || Array.isArray(versions)) return null;
   const v = /** @type {Record<string, unknown>} */ (versions);
-  const words = VERSION_KEYS.map((k) => v[k]);
+  // a version is its words, or a row `{ text, needs, excludes }` around them (the voices' lines declare per version)
+  const words = VERSION_KEYS.map((k) => (v[k] && typeof v[k] === 'object' ? /** @type {{ text?: unknown }} */ (v[k]).text : v[k]));
   return words.every((w) => typeof w === 'string' && w.trim() !== '') ? words.join(VERSIONS_JOIN) : null;
 }
 

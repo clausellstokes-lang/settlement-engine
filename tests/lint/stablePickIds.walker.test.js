@@ -383,6 +383,14 @@ describe('guard-the-guard: a `versions` row is fingerprinted by all four of its 
     expect(kinds(swapped, VBANK)).toEqual(['moved V.a.1', 'moved V.a.2']);
   });
 
+  test('a version written as a row `{ text, needs }` is read by its text: the same words, the same fingerprint', () => {
+    const rows = (/** @type {string} */ w) => Object.fromEntries(Object.entries(four(w)).map(([k, t]) => [k, { text: t, needs: ['market'] }]));
+    const t = vTree({ 'a.one': [{ id: 'V.a.1', versions: rows('One') }, { id: 'V.a.2', versions: four('Two') }], 'b.two': base['b.two'] });
+    expect(t.problems).toEqual([]);
+    expect(kinds(t, VBANK)).toEqual([]);
+    expect(vTree({ 'a.one': [{ id: 'V.a.1', versions: { ...rows('One'), cautious: { needs: [] } } }] }).problems.join('\n')).toMatch(/a row without a string id and its four versions/);
+  });
+
   test('FAIL-CLOSED: a row missing a version, an empty or non-string version, or no versions at all is red', () => {
     const { dismissive: _d, ...three } = four('One');
     for (const versions of [three, { ...four('One'), cautious: '' }, { ...four('One'), welcoming: 7 }, undefined, 'One.']) {
