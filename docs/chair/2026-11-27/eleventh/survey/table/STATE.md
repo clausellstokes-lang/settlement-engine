@@ -17,4 +17,5 @@
   the atom its reader reads; the two `≤ comfortable` lines too, one new band atom only if none exists); money REAL: C1#2,
   MODERATE#4 exclude place debt; WEALTHY#3, PROSPEROUS#1/#3 exclude nothing laid by (chair's two fill lines if a tile empties);
   STRUGGLING#5 needs place debt; SOFT no cure; A HOOK IS A SEED: no hook declares. BUILT ONLY ON THE MERGED TREE.
-- NEXT: measure DS-GEN-3/7/11's glance mount and the PDF (ruled first); then wait for the tip of 122 and 123.
+- DS-GEN-3/7/11 MEASURED (S-D-MONEY.md §5, 6d695cfaf): drawn on up to 474 towns, printed on 0 screens and 0 PDFs of 1,800.
+- NEXT: wait for the chair's tip of 122 and 123; then build S-D on the merged tree, measured first.
