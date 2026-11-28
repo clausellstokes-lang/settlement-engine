@@ -23,6 +23,7 @@ import { economyDeskRead } from '../../src/components/new/economyDeskRead.js';
 import { DOSSIER_STATE_PROSE_POWER } from '../../src/data/dossierStateProse/power.generated.js';
 import { safetyLineSaidOnce } from '../../src/domain/display/guardLineUnderTheLaw.js';
 import { owesDebtShown, nothingLaidByShown } from '../../src/domain/display/solvencyShown.js';
+import { economicSurvivalBandOf } from '../../src/domain/display/defenseScoreBands.js';
 import { DOSSIER_STATE_PROSE_ECONOMY } from '../../src/data/dossierStateProse/economy.generated.js';
 import { variantByVid } from '../helpers/drawnProse.js';
 import { birth as soakBirth, ensureLaws } from '../../scripts/audit/soak-review/corpus.mjs';
@@ -161,6 +162,12 @@ describe('RULING-R B2: no savings or pays-its-way line beside a present place de
     ['dp-thorp-42', 'the timeline\'s outside_debt event; Economic Survival Weak', [['DS-ECO-8', 'COMFORTABLE', 2], ['DS-ECO-1', 'COMBINATION C3: the middle rungs', 2]]],
     ['dp-thorp-99', 'the outside_debt tension', [['DS-ECO-1', 'COMBINATION C3: the middle rungs', 2]]],
     ['dp-village-141', 'the outside_debt tension', [['DS-ECO-8', 'COMFORTABLE', 1]]],
+    // RULING 122-B-2 (F6, UNIT 2 (c)): the MODERATE row and the CRITICAL band, each held by a town its removal moves (the
+    // measure at this tip: without the MODERATE row these print v3, "pays its own way and has a little in hand"; with
+    // CRITICAL not counted as nothing laid by, dp-thorp-107 prints COMFORTABLE v2, "put things by")
+    ['dp-hamlet-14', 'Economic Survival Weak (the MODERATE row)', [['DS-ECO-8', 'MODERATE', 3]]],
+    ['dp-village-45', 'a place debt in force (the MODERATE row)', [['DS-ECO-8', 'MODERATE', 3]]],
+    ['dp-thorp-107', 'Economic Survival Critical', [['DS-ECO-8', 'COMFORTABLE', 1], ['DS-ECO-8', 'COMFORTABLE', 2]]],
   ]);
   for (const [seed, side, lines] of NAMED) {
     test(`C ${seed} (${side}): the savings and pays-its-way lines stand down, and the rung still speaks`, () => {
@@ -170,6 +177,10 @@ describe('RULING-R B2: no savings or pays-its-way line beside a present place de
       expect(economyDeskRead(s).prosperityRung).toBeTruthy(); // another line of the rung prints in its place
     }, 120000);
   }
+  test('C dp-thorp-107: its Economic Survival row reads Critical, and that is "nothing laid by"', () => {
+    const s = c('dp-thorp-107');
+    expect([economicSurvivalBandOf(s), owesDebtShown(s), nothingLaidByShown(s)]).toEqual(['CRITICAL', false, true]);
+  }, 120000);
   test('C dp-thorp-42 (the outside_debt event alone): the Outlook says no "pays its way"', () => {
     const s = c('dp-thorp-42');
     expect((s.history.historicalEvents || []).map((/** @type {any} */ e) => e.templateType)).toContain('outside_debt');
