@@ -25,6 +25,7 @@ import { safetyLineSaidOnce } from '../../src/domain/display/guardLineUnderTheLa
 import { owesDebtShown, nothingLaidByShown } from '../../src/domain/display/solvencyShown.js';
 import { economicSurvivalBandOf } from '../../src/domain/display/defenseScoreBands.js';
 import { composePublicProse } from '../../src/components/new/publicProseCompose.js';
+import { collectPlotHooks } from '../../src/domain/dossier/plotHooks.js';
 import { DOSSIER_STATE_PROSE_ECONOMY } from '../../src/data/dossierStateProse/economy.generated.js';
 import { variantByVid } from '../helpers/drawnProse.js';
 import { birth as soakBirth, ensureLaws } from '../../scripts/audit/soak-review/corpus.mjs';
@@ -152,15 +153,23 @@ describe('G72 (6): no feeds-itself line beside an arriving "Preserved provisions
 // or OWES NO ONE (DS-ECO-1 C3 v2; the Outlook's L1, L2, L4, L5) stands down on the debt alone (beside the Weak grade alone it
 // is ruled no fault). The forbidden words are computed from the pools (never a literal anchor). The named places are the
 // measure's own (rmeasure/R-REPORT.md, R5): each printed the savings or pays-its-way line beside the other side at 42883b5c4.
+/** @param {any} s the record with every hook of its outside_debt events taken off */
+const withoutDebtHooks = (s) => {
+  const t = structuredClone(s);
+  for (const e of t.history?.historicalEvents || []) if (e?.templateType === 'outside_debt') e.plotHooks = [];
+  return t;
+};
 describe('RULING-R B2: no savings or pays-its-way line beside a present place debt or nothing laid by', () => {
   /** @param {string} blockId @param {string} poolKey @param {number} vid @param {any} s */
   const words = (blockId, poolKey, vid, s) => variantByVid({ leaf: 'economy', blockId, poolKey, vid, slots: { settlement: String(s.name) } }).split('. ')[0];
   /** @param {any} s @returns {string} every economy desk line the owner's page draws, and the Outlook's verdict */
-  const printed = (s) => `${JSON.stringify(economyDeskRead(s))} ${deriveViability(s, { audience: 'dm' }).summary}`; // the owner's page (RULING 122-B-4: the hook leg by name)
+  const printed = (s) => `${JSON.stringify(economyDeskRead(s))} ${deriveViability(s).summary}`;
   const NAMED = /** @type {Array<[string, string, Array<[string, string, number]>]>} */ ([
     // [seed, the other side the record holds, the lines it printed beside it]
     ['dp-thorp-3', 'Economic Survival Weak', [['DS-ECO-8', 'COMFORTABLE', 1]]],
-    ['dp-thorp-42', 'the timeline\'s outside_debt event; Economic Survival Weak', [['DS-ECO-8', 'COMFORTABLE', 2], ['DS-ECO-1', 'COMBINATION C3: the middle rungs', 2]]],
+    // RE-POINTED by RULING 122-B-5: its timeline's outside_debt event is the town's past, not a debt in force, so only its
+    // Weak Economic Survival row stands the savings line down; its pays-its-way line may print again
+    ['dp-thorp-42', 'Economic Survival Weak (a past Debt Crisis is not owing)', [['DS-ECO-8', 'COMFORTABLE', 2]]],
     ['dp-thorp-99', 'the outside_debt tension', [['DS-ECO-1', 'COMBINATION C3: the middle rungs', 2]]],
     ['dp-village-141', 'the outside_debt tension', [['DS-ECO-8', 'COMFORTABLE', 1]]],
     // RULING 122-B-2 (F6, UNIT 2 (c)): the MODERATE row and the CRITICAL band, each held by a town its removal moves (the
@@ -182,11 +191,25 @@ describe('RULING-R B2: no savings or pays-its-way line beside a present place de
     const s = c('dp-thorp-107');
     expect([economicSurvivalBandOf(s), owesDebtShown(s), nothingLaidByShown(s)]).toEqual(['CRITICAL', false, true]);
   }, 120000);
-  test('C dp-thorp-42 (the outside_debt event alone): the Outlook says no "pays its way"', () => {
+  // RE-POINTED by RULING 122-B-5 (the chair, 2026-11-28, overturning 122-B-1 (i) in that part): THE PLACE OWES WHERE THE
+  // RECORD HOLDS THE DEBT IN FORCE, the indebted stress or the outside_debt tension; a past event never makes a present
+  // debt, whether or not its hook prints. dp-thorp-42's Debt Crisis (its hook printed) leaves the Outlook as it reads with
+  // the event's hooks taken off.
+  test('C dp-thorp-42 (the outside_debt event alone): not owing; the Outlook reads as with the event\'s hooks off', () => {
     const s = c('dp-thorp-42');
     expect((s.history.historicalEvents || []).map((/** @type {any} */ e) => e.templateType)).toContain('outside_debt');
-    expect(String(deriveViability(s, { audience: 'dm' }).summary)).toMatch(/^VIABLE/); // the owner's Outlook (RULING 122-B-4)
-    expect(/pays its (own )?way|owes no one|what it spends it earns/.test(String(deriveViability(s, { audience: 'dm' }).summary))).toBe(false);
+    expect(owesDebtShown(s)).toBe(false);
+    expect(String(deriveViability(s).summary)).toMatch(/^VIABLE/);
+    expect(String(deriveViability(s).summary)).toBe(String(deriveViability(withoutDebtHooks(s)).summary));
+  }, 120000);
+  test('C dp-thorp-105 (a Debt Crisis 64 years back whose hook prints): not owing; its solvent header line prints again', () => {
+    const s = c('dp-thorp-105');
+    const ev = (s.history.historicalEvents || []).filter((/** @type {any} */ e) => e.templateType === 'outside_debt');
+    expect(ev.map((/** @type {any} */ e) => e.yearsAgo)).toContain(64);
+    expect(collectPlotHooks(s).some((h) => h.category === 'history' && (h.parties || []).some((p) => p.kind === 'history' && ev.some((e) => e.name === String(/** @type {any} */ (p).eventId)))), 'the premise: its hook prints').toBe(true);
+    expect(owesDebtShown(s)).toBe(false);
+    const header = economyDeskRead(s).prosperityHeader;
+    expect([header?.provenance?.poolKey, typeof header?.sentence === 'string' && header.sentence.length > 0]).toEqual(['COMBINATION C3: the middle rungs', true]);
   }, 120000);
   // RULING 122-B-1 (i), the chair, 2026-11-27: the timeline's outside_debt event is the place owing only where its page says
   // the creditor is collecting NOW, its hook printed on the Plot Hooks tab (`collectPlotHooks`). An old Debt Crisis whose
@@ -272,19 +295,21 @@ describe('RULING 122-B-4: the shared page does not learn the hook', () => {
     const blocks = /** @type {Record<string, unknown>} */ (composePublicProse(s)?.blocks || {});
     return JSON.stringify(Object.entries(blocks).filter(([k]) => k.startsWith('economy:') || k === 'viewModel:viability'));
   };
-  // THE HOOK LEG FAILS CLOSED (the chair's last step on 122-B-4): it is asked for BY NAME, the owner's audience ('dm', the
-  // desks' own token); a call that states no audience answers from the stress and the tension alone.
-  test('C dp-thorp-8: the debt reader with no audience does not read the hook; the owner\'s audience does', () => {
+  // RE-POINTED by RULING 122-B-5: the hook leg is withdrawn for every audience (a past event is no debt in force), so the
+  // reader takes no audience and dp-thorp-8, whose Debt Crisis hook prints, does not owe for anyone.
+  test('C dp-thorp-8: the debt reader reads no past event, for any caller', () => {
     const s = c('dp-thorp-8');
-    expect([owesDebtShown(s), owesDebtShown(s, { audience: 'player' }), owesDebtShown(s, { audience: 'dm' })]).toEqual([false, false, true]);
+    expect([owesDebtShown(s), owesDebtShown(s, { audience: 'player' }), owesDebtShown(s, { audience: 'dm' })]).toEqual([false, false, false]);
   }, 120000);
   for (const seed of ['dp-thorp-8', 'dp-town-48']) {
-    test(`C ${seed} (owes by the hook alone): the stamp is byte-equal with the hook on and off; the owner's desk is not`, () => {
+    // THE GUARD STAYS (RULING 122-B-5): the stamp is byte-equal with the Debt Crisis hook on and off, now by construction;
+    // RE-POINTED: the owner's desk is byte-equal too, the hook no longer counting for the owner either.
+    test(`C ${seed} (a past Debt Crisis whose hook prints): the stamp and the owner's desk are byte-equal with the hook on and off`, () => {
       const s = c(seed);
       const off = unhooked(s);
-      expect([owesDebtShown(s, { audience: 'dm' }), owesDebtShown(off, { audience: 'dm' })], 'the premise: the hook alone makes the place owe').toEqual([true, false]);
+      expect(collectPlotHooks(s).length > collectPlotHooks(off).length, 'the premise: the record holds a printing debt hook').toBe(true);
       expect(stamped(s)).toBe(stamped(off));
-      expect(JSON.stringify(economyDeskRead(s)) === JSON.stringify(economyDeskRead(off)), 'the owner\'s eye keeps the leg').toBe(false);
+      expect(JSON.stringify(economyDeskRead(s))).toBe(JSON.stringify(economyDeskRead(off)));
     }, 120000);
   }
 });
