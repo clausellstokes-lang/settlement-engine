@@ -133,3 +133,36 @@ S-B-3's neighbour table ruled. Each verdict is my reading.
   Debt". This is what the trade-dispute hook does today on 60 pages. Unless those hooks declare `place debt` too, the
   merge's re-measure will show these towns move, and the census's `place debt` row cannot see them, because the hook is
   no side. **This is for the chair before the merge.**
+
+## 5. DS-GEN-3, 7 AND 11: THE GLANCE MOUNT AND THE PDF, MEASURED (the chair's ruling at 13:45)
+
+**METHOD.** Each of the 1,800 births of C and V was re-born on a518d4244 and stamped with its public prose. Then
+`generalDeskLines(town)` (the screen's general desk) and `buildPrintProse(town)` (the PDF's state prose,
+`generateSettlementPDF.js:318`) were called with the presumption ledger open. **DRAWN** means the kernel noted the line
+drawn. **SCREEN** and **PDF** mean one of the line's fixed fragments is in that output. This was a scratch instrument; it
+was removed and never committed.
+
+| the reader's line | drawn C\|V | screen | PDF |
+|---|---|---|---|
+| DS-GEN-3 scores.economic STRONG#1, STRONG#3 | 112\|98, 114\|94 | 0 | 0 |
+| DS-GEN-3 scores.economic ADEQUATE#1, ADEQUATE#2 | 45\|100, 28\|54 | 0 | 0 |
+| DS-GEN-3 prosperity Struggling/Poor#2 | 14\|90 | 0 | 0 |
+| DS-GEN-3 prosperity Moderate#1, Moderate#2 | 18\|40, 105\|90 | 0 | 0 |
+| DS-GEN-3 prosperity Comfortable#1, Comfortable#2 | 204\|108, 206\|118 | 0 | 0 |
+| DS-GEN-3 prosperity Wealthy#2 | 0\|28 | 0 | 0 |
+| DS-GEN-3 prosperity Poverty#2 | 0\|0 | 0 | 0 |
+| DS-GEN-7 siege #1, #4 | 2\|1, 2\|0 | 0 | 0 |
+| DS-GEN-7 recovery #2, #4 | 0\|0 | 0 | 0 |
+| DS-GEN-11 viable#3 "The town works, and pays its way." | 240\|234 | 0 | 0 |
+
+**THE RESULT.**
+- The lines ARE DRAWN at their mounts: DS-GEN-3 systemsHealth and DS-GEN-7 warnings are glance mounts, and DS-GEN-11's
+  viable lens is drawn but unshown.
+- **They print nowhere.** `drawnAtMount` strips the sentence at a glance mount, and the print desk routes through it
+  (`printProse.js:75`). The viability verdict shows only the `criticalIssueCount` lens on screen (`generalDeskRead.js:389`)
+  and in the PDF (`printProse.js:579`).
+- No page, screen or PDF, prints any of them beside a debt. They need no declaration until a registry act gives these
+  blocks a speaking position. The ledger does note their draws, so they stand on no census side that prints.
+- **Two other hits, unread.** The PDF holds two fragments of OTHER lines of these blocks: DS-GEN-3 scores.monster CRITICAL#1
+  on 208 towns, and DS-GEN-7 structuralSuggestions#2 on 42. Neither is a money line. They are probably a fragment shared
+  with another printed sentence. I did not read them further.
