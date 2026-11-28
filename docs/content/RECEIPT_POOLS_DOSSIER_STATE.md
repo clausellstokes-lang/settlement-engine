@@ -824,9 +824,11 @@ the access.
 3. `[counterforce · colour]` A narrow way in has not kept {settlement} poor. Little comes in by the road, and the people there are comfortable all the same.
 
 **COMBINATION C3: the middle rungs** {crisis-scoped}
-1. `[street · crisis: any]` With a little left over each year, {settlement} gets by on a {complexity}, and every year people argue over how to spend it.
+1. `[street · crisis: any · no place debt]` With a little left over each year, {settlement} gets by on a {complexity}, and every year people argue over how to spend it.
 2. `[ledger · no place debt]` {settlement} pays its way from year to year, and nobody here calls the town poor.
 3. `[visitor · no crisis · market]` Nothing about {settlement} looks rich or poor: the {access} is busy enough, the market is open, and nobody is building or selling up.
+4. `[ledger · crisis: any · place debt]` {settlement} is neither rich nor poor, but it owes money, and the debt takes what a good year leaves over.
+5. `[street · crisis: any · place debt]` {settlement} earns a middling living, and what is left at the year's end goes to pay what it owes.
 
 **COMBINATION C4: a low rung on a working approach**
 1. `[ledger · no crisis: under_siege · no crisis: plague_onset]` {settlement} sits on its {access} and stays poor all the same.
@@ -1253,16 +1255,19 @@ contradict** it (R-DST-C).
 6. `[ledger · crisis: any · food: ≥ secure · need not brought in: any]` {settlement} feeds itself and has nothing to spare. Some of what its work needs does not reach it, and there is no line for anything else.
 
 **MODERATE** — *steady, thin margin* {crisis-scoped}
-1. `[ledger · crisis: any]` {settlement}'s treasury takes in a little more than it pays out each year. It is enough, and no more.
+1. `[ledger · crisis: any · no place debt]` {settlement}'s treasury takes in a little more than it pays out each year. It is enough, and no more.
 2. `[street · no crisis]` Money at {settlement} is neither comfortable nor tight, and that is what people here expect of it.
 3. `[visitor · no crisis · no place debt · no nothing laid by]` Nothing about {settlement}'s condition asks to be remarked on. The town pays its own way and has a little in hand.
-4. `[visitor · crisis · crisis: any]` {settlement}'s accounts still balance, and that is the one thing about the town the crisis has not yet reached.
+4. `[visitor · crisis · crisis: any · no crisis: indebted]` {settlement}'s accounts still balance, and that is the one thing about the town the crisis has not yet reached.
+5. `[ledger · crisis: any · place debt]` {settlement}'s treasury meets the year's costs. It does not meet the debt.
 
 **COMFORTABLE** — *reliable surplus, reserves exist*
 1. `[ledger · no crisis: indebted · no place debt · no nothing laid by]` {settlement}'s purse closes every year ahead. The margin is not large but it is dependable, and there is money laid by behind it.
 2. `[street · no place debt · no nothing laid by]` People here put things by, and can. That is the difference between this town and a poorer one.
 3. `[visitor · food: ≥ secure · stores: ≥ 3]` The town is plainly comfortable. The buildings are finished rather than patched, and the stores are more than the season needs.
 4. `[visitor · food: ≥ secure · stores: < 3]` The town is plainly comfortable. Its buildings are well kept, though nobody here keeps more in store than the coming season needs.
+5. `[visitor · place debt]` The town is comfortable to look at, and it owes money all the same.
+6. `[street · nothing laid by · food: < secure]` The town lives comfortably from year to year and keeps nothing back for a bad one.
 
 **PROSPEROUS** — *surplus funds institutions and defenses*
 1. `[ledger · no crisis: indebted]` {settlement} has money to spend, and spends it on the town's buildings and their upkeep.
@@ -3040,19 +3045,20 @@ supplies the ancestry.
 7. `[ledger]` {settlement} spends nothing on judgement: it pays no one to hear a case and keeps nowhere to hold an offender.
 
 **`Economic Survival`: `STRONG`**
-1. `[ledger · no crisis: debt · no crisis: famine · prosperity: ≥ moderate]` {settlement}'s accounts have money in hand: the town can buy what a bad season needs without going begging.
+1. `[ledger · no crisis: debt · no crisis: famine · prosperity: ≥ moderate · no place debt]` {settlement}'s accounts have money in hand: the town can buy what a bad season needs without going begging.
 2. `[street · no crisis]` The town could go through a bad season with its arrangements intact, and the people who would have to be paid through one know it.
-3. `[counterforce · crisis · no crisis: debt · no crisis: occupied]` {settlement} had money laid by before this trouble began, and the trouble is still being paid for from it.
-4. `[ledger · crisis: famine]` The famine is costing the town dearly, and the town is paying: its money is going on food, and so far there is money enough.
+3. `[counterforce · crisis · no crisis: debt · no crisis: occupied · no place debt]` {settlement} had money laid by before this trouble began, and the trouble is still being paid for from it.
+4. `[ledger · crisis: famine · no place debt]` The famine is costing the town dearly, and the town is paying: its money is going on food, and so far there is money enough.
 5. `[ledger · crisis: debt]` The debt takes much of what {settlement} earns, but what is left still keeps the town's own business running.
 6. `[street · crisis: debt]` People in {settlement} complain of what the creditor takes, but the town still meets its payments.
 7. `[unfolding · crisis: debt]` {settlement} cannot pay off what it owes, but it can carry the debt, and for now it does.
-8. `[street · no crisis · food: ≥ secure]` Nobody in {settlement} lies awake over a lean year: there is enough in hand to see the town through one.
-9. `[ledger · crisis · no crisis: debt · no crisis: famine · no crisis: occupied · prosperity: ≥ poor]` Whatever the present trouble costs {settlement}, the town is paying it from money it had put by.
-10. `[street · crisis: famine]` Hunger has come to the town, but its money has not run out: what food can be bought, it buys.
-11. `[visitor · crisis: famine]` Food is dear and hard to find here, but whatever food reaches the town is bought: the money is there for it.
-12. `[street · crisis · no crisis: debt · no crisis: famine · no crisis: occupied]` The town went into this trouble with money in hand, and so far the money has held.
+8. `[street · no crisis · food: ≥ secure · no place debt]` Nobody in {settlement} lies awake over a lean year: there is enough in hand to see the town through one.
+9. `[ledger · crisis · no crisis: debt · no crisis: famine · no crisis: occupied · prosperity: ≥ poor · no place debt]` Whatever the present trouble costs {settlement}, the town is paying it from money it had put by.
+10. `[street · crisis: famine · no place debt]` Hunger has come to the town, but its money has not run out: what food can be bought, it buys.
+11. `[visitor · crisis: famine · no place debt]` Food is dear and hard to find here, but whatever food reaches the town is bought: the money is there for it.
+12. `[street · crisis · no crisis: debt · no crisis: famine · no crisis: occupied · no place debt]` The town went into this trouble with money in hand, and so far the money has held.
 13. `[ledger · crisis: occupied]` {settlement} had money laid by when the occupiers came; what the town earns now goes to them.
+14. `[ledger · crisis · no crisis: debt · place debt]` {settlement} has money in hand, but it is owed elsewhere: a hard season and the debt would have to be met from the same purse.
 
 **`Economic Survival`: `ADEQUATE`** {colour}
 1. `[ledger]` {settlement} can fund a short crisis. A long one begins eating reserves within a few months, and the reserves are not deep enough to hide that from anybody.

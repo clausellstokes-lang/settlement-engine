@@ -33,6 +33,8 @@ import { FACT_DIMENSIONS, atomHolds, parseAtom } from '../../src/domain/facts/fa
 import { factsOf } from '../../src/domain/facts/factsOf.js';
 import { factsAnswered } from '../../src/domain/facts/factsAnswered.js';
 import { owesDebtShown, nothingLaidByShown } from '../../src/domain/display/solvencyShown.js';
+import { withPresumptionLedger } from '../../src/domain/facts/presumptionLedger.js'; // SURVEY S-B2: the slots' vids, read from the ledger
+import { defenseDeskRead } from '../../src/components/new/defenseDeskRead.js';
 
 /** C's birth (`birthConfig({ settType })`, the close's make-plan.mjs) @param {string} seed */
 const c = (seed) => generateSettlementPipeline(birthConfig({ settType: seed.split('-')[1] }), null, { seed, customContent: {} });
@@ -264,3 +266,47 @@ function placeDebtDeclaredOffTheDoor(planted) {
   const code = (t) => t.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '').replace(/\s\/\/ .*$/gm, '');
   return Object.entries(files).filter(([p, s]) => !DOOR.test(p) && /['"`](?:no\s+)?place debt['"`]/.test(code(s))).map(([p]) => p).sort();
 }
+
+// SURVEY S-B2 (the eleventh chair's message of 2026-11-28 06:05 UTC; RULING 122-B-2 F2, F3): BESIDE A PLACE DEBT NO LINE CLAIMS
+// MONEY IN HAND, A YEARLY SURPLUS, A BALANCE UNTOUCHED BY THE CRISIS OR FREEDOM FROM DEBT, AND NO SOLVENCY SLOT IS LEFT EMPTY.
+// The four slots (the header DS-ECO-1, the standing-of-living and treasury tiles' one draw DS-ECO-8, the Defense desk's Economic
+// Survival row DS-DEF-2), read by the vid each draws (the presumption ledger around the two desks). The towns are the measure's
+// (`docs/chair/2026-11-27/eleventh/survey/table/S-B2-slots.tsv`).
+describe('SURVEY S-B2: the solvency slots beside a place debt, and beside nothing laid by alone', () => {
+  /** @param {string} key `C:<seed>` or `V:<seed>` */
+  const born = (key) => {
+    const [corpus, seed] = key.split(':'); const size = seed.split('-')[1];
+    return generateSettlementPipeline(birthConfig(corpus === 'C' ? { settType: size } : { ...DEFAULT_CONFIG, settType: size, _randomizePriorities: true }), null, { seed, customContent: {} });
+  };
+  const RUNGS = /^DS-ECO-8::(SUBSISTENCE|STRUGGLING|POOR|MODERATE|COMFORTABLE|PROSPEROUS|WEALTHY)$/;
+  /** @param {any} s @returns {{ header: string, rung: string, survival: string }} each slot's `<pool key>#<vid>`, or EMPTY */
+  const slots = (s) => {
+    const { ledger } = withPresumptionLedger(() => { economyDeskRead(s); defenseDeskRead(s); });
+    const k = ledger.filter((n) => n.drawKind === 'K');
+    /** @param {RegExp} re */
+    const at = (re) => { const n = k.find((x) => re.test(x.pool)); return n ? `${n.pool.split('::').slice(1).join('::')}#${n.lineId}` : 'EMPTY'; };
+    return { header: at(/^DS-ECO-1::/), rung: at(RUNGS), survival: at(/^DS-DEF-2::Economic Survival: /) };
+  };
+  const SOLVENT = new Set(['COMBINATION C3: the middle rungs#1', 'COMBINATION C3: the middle rungs#2', 'MODERATE#1', 'MODERATE#3', 'COMFORTABLE#1', 'COMFORTABLE#2',
+    ...[1, 3, 4, 8, 9, 10, 11, 12].map((v) => `Economic Survival: STRONG#${v}`)]);
+  test('a place that owes prints no solvency claim in any of the four slots, and none of them is empty', () => {
+    const OWE = ['C:dp-thorp-0', 'C:dp-thorp-8', 'C:dp-thorp-29', 'C:dp-town-48', 'C:dp-town-83', 'C:dp-town-133', 'V:dp-village-6', 'V:dp-city-2'];
+    const got = OWE.map((key) => { const s = born(key); const r = slots(s); return [key, owesDebtShown(s), Object.values(r).filter((v) => SOLVENT.has(v) || v === 'EMPTY')]; });
+    expect(got).toEqual(OWE.map((key) => [key, true, []]));
+  }, 240000);
+  test('where the debt is the crisis in force, the treasury tile does not say the accounts still balance', () => {
+    const got = ['C:dp-thorp-0', 'C:dp-thorp-34'].map((key) => { const s = born(key); return [key, atomHolds('crisis: indebted', factsAnswered(s, {}).facts), slots(s).rung]; });
+    expect(got.map(([key, debt, rung]) => [key, debt, rung === 'MODERATE#4'])).toEqual([['C:dp-thorp-0', true, false], ['C:dp-thorp-34', true, false]]);
+  }, 120000);
+  test('the comfortable towns whose standing tile was EMPTY now speak (their rung is drawn)', () => {
+    const EMPTIED = ['C:dp-village-5', 'C:dp-village-13', 'V:dp-thorp-107', 'V:dp-thorp-129', 'V:dp-village-6', 'V:dp-city-2'];
+    expect(EMPTIED.map((key) => { const r = slots(born(key)).rung; return [key, /^COMFORTABLE#/.test(r)]; })).toEqual(EMPTIED.map((key) => [key, true]));
+  }, 240000);
+  test('THE EDGE: nothing laid by ALONE may still print the margin line (MODERATE v1); a town with neither prints what it printed', () => {
+    const edge = born('C:dp-thorp-19');
+    expect([owesDebtShown(edge), nothingLaidByShown(edge), slots(edge).rung]).toEqual([false, true, 'MODERATE#1']);
+    const innocent = born('C:dp-hamlet-84');
+    expect([owesDebtShown(innocent), nothingLaidByShown(innocent), slots(innocent)]).toEqual([false, false,
+      { header: 'COMBINATION C3: the middle rungs#1', rung: 'MODERATE#4', survival: 'Economic Survival: ADEQUATE#2' }]);
+  }, 120000);
+});

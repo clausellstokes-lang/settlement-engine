@@ -87,6 +87,13 @@ const excludesPresence = (variant) => variantFactDeclaration(variant).excludes.s
  * or none — `stores: >= 6` and `war: peace` it does answer, and those stay in); the calm reference sets it aside, as it
  * sets aside a crisis-needing variant above.
  */
+/**
+ * SURVEY S-B2 (2026-11-28): a variant that NEEDS a presence the double answers FALSE (a TROUBLE a calm place has none of: S-B's
+ * `place debt` and `nothing laid by`, which S-B2's new lines need) is refused by the calm double; the calm reference sets it
+ * aside, as it sets aside a crisis-needing variant above, read on the double itself as `needsCategorical` below is.
+ */
+const needsTrouble = (variant) => variantFactDeclaration(variant).needs.some((a) => !/^crisis\b/.test(a) && !/:/.test(a)
+  && declarationAdmits({ needs: [a], excludes: [], crisis: [] }, CALM_FACTS_ADMIT_ALL).refused.length > 0);
 const needsCategorical = (variant) => variantFactDeclaration(variant).needs.some((a) => /^(?!institution\b|crisis\b)[a-z ]+:/.test(a)
   && declarationAdmits({ needs: [a], excludes: [], crisis: [] }, CALM_FACTS_ADMIT_ALL).refused.length > 0);
 
@@ -483,7 +490,7 @@ describe('the state-prose reader — law 5, and the darkness of it', () => {
       const slots = bagFor(pool);
       for (const audience of [AUDIENCE_DM, AUDIENCE_PLAYER]) {
         const reference = pool.filter(
-          (variant) => variantIsAudible(variant, audience) && variantIsAnchored(variant, slots) && !needsCrisis(variant) && !excludesPresence(variant) && !needsCategorical(variant),
+          (variant) => variantIsAudible(variant, audience) && variantIsAnchored(variant, slots) && !needsCrisis(variant) && !excludesPresence(variant) && !needsCategorical(variant) && !needsTrouble(variant),
         );
         // CENSUS-5: a pool whose lines declare fact atoms reads against `facts`; the calm
         // admit-all double keeps this the pre-cure comparison (`tests/helpers/calmFactsDouble.js`).
@@ -985,7 +992,7 @@ describe('the state-prose reader — law 6, the index-stable draw', () => {
     // The critical value for every n the corpus holds, against the standard table (p = 0.001).
     expect(Object.fromEntries(N_ASC.map((n) => [n, chi2Bound(n).toFixed(3)])), 'the critical value per n').toEqual({
       3: '13.816', 4: '16.266', 5: '18.467', 6: '20.515', 7: '22.458', 8: '24.322', 9: '26.124', 10: '27.877',
-      11: '29.588', 12: '31.264', 13: '32.909',
+      11: '29.588', 12: '31.264', 13: '32.909', 14: '34.528', // SURVEY S-B2: DS-DEF-2 STRONG is the first pool of 14 (df 13, the standard table's 34.528)
     });
   });
 
@@ -1047,10 +1054,11 @@ describe('the state-prose reader — law 6, the index-stable draw', () => {
     // …and the groups too small for it, NAMED (measured at 6581c349c; a group that grows into the test leaves this list).
     // C4-SECOND-LINE (G49 (5); CLOSE-11): ONE pool moved, DS-ECO-1 `COMBINATION C4`, n=7 -> n=8 (v8 appended), so n=7 35 -> 34 and n=8 8 -> 9.
     // DISAGREE (PROSE-6, 2026-11-23; the chair's rulings of 03:45 and 03:55 UTC), re-measured after the withdrawal: ONE pool moved, DS-DEF-2 `CHAIN: food trades failing`, n=6 -> n=12 (F1-F6 appended as v7-v12), so n=6 40 -> 39 and n=12 1 -> 2; DS-DEF-2 `Economic Survival: WEAK` stays at n=6 (W1-W3 withdrawn; v1, v2 re-worded in place).
+    // SURVEY S-B2 (2026-11-28, the chair's message of 06:05 UTC): FOUR pools moved, by the six new lines: DS-ECO-1 `COMBINATION C3` n=3 -> n=5, DS-ECO-8 `MODERATE` n=4 -> n=5, `COMFORTABLE` n=4 -> n=6, DS-DEF-2 `Economic Survival: STRONG` n=13 -> n=14 (the first pool of 14): so n=5 43 -> 45, n=6 39 -> 40, n=13 2 -> 1, n=14 0 -> 1.
     expect(rows.filter((r) => !departureTestable(r.n, r.pools)).map((r) => `n=${r.n}: ${r.pools} pools`),
       'the groups too small to test the departure at p = 0.001').toEqual([
-      'n=5: 43 pools', 'n=6: 39 pools', 'n=7: 34 pools', 'n=8: 9 pools', 'n=9: 7 pools', 'n=10: 6 pools',
-      'n=11: 3 pools', 'n=12: 2 pools', 'n=13: 2 pools',
+      'n=5: 45 pools', 'n=6: 40 pools', 'n=7: 34 pools', 'n=8: 9 pools', 'n=9: 7 pools', 'n=10: 6 pools',
+      'n=11: 3 pools', 'n=12: 2 pools', 'n=13: 1 pools', 'n=14: 1 pools',
     ]);
     // The per-pool ceiling and the slot reach, every pool of every group.
     const worst = rows.reduce((a, b) => (b.maxZ > a.maxZ ? b : a));
@@ -1146,9 +1154,10 @@ describe('the state-prose reader — law 6, the index-stable draw', () => {
     'a group outside its append band').toEqual([]);
     // …and the groups too small for it, NAMED (measured at 6581c349c).
     // DISAGREE (PROSE-6, 2026-11-23; the chair's rulings of 03:45 and 03:55 UTC), re-measured after the withdrawal: ONE pool moved, DS-DEF-2 `CHAIN: food trades failing`, n=6 -> n=12 (F1-F6 appended as v7-v12), so n=6 40 -> 39 and n=12 1 -> 2; DS-DEF-2 `Economic Survival: WEAK` stays at n=6 (W1-W3 withdrawn; v1, v2 re-worded in place) (n=6 is large enough for this test, so only n=12 moves here).
+    // SURVEY S-B2 (2026-11-28, the chair's message of 06:05 UTC): FOUR pools moved, by the six new lines: DS-ECO-1 `COMBINATION C3` n=3 -> n=5, DS-ECO-8 `MODERATE` n=4 -> n=5, `COMFORTABLE` n=4 -> n=6, DS-DEF-2 `Economic Survival: STRONG` n=13 -> n=14 (the first pool of 14): so n=13 2 -> 1 and n=14 0 -> 1 here (n=5 and n=6 are large enough for this test).
     expect(rows.filter((r) => !appendTestable(r.n, r.reads)).map((r) => `n=${r.n}: ${r.pools} pools`),
       'the groups too small to test the append share at p = 0.001').toEqual([
-      'n=9: 7 pools', 'n=10: 6 pools', 'n=11: 3 pools', 'n=12: 2 pools', 'n=13: 2 pools',
+      'n=9: 7 pools', 'n=10: 6 pools', 'n=11: 3 pools', 'n=12: 2 pools', 'n=13: 1 pools', 'n=14: 1 pools',
     ]);
     // And the contrast the row rests on, the n = 3 case, where its constants were measured: the modulus
     // moves about three quarters of the reads and only a third of THOSE land on the newcomer.

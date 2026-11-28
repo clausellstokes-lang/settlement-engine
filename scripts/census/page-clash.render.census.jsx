@@ -7,7 +7,8 @@
  * and the stamp's notes), rendered through the real OutputContainer as the owner sees it with a tap on the ledger open across the
  * render and the whole walk (the owner's notes), walked (tests/components/pageCensusWalk.shared.mjs), and read by the census
  * (`page-clash.shared.mjs`) against the table (`src/domain/facts/claimExclusions.js`) on the final record's desk facts
- * (`facts/factsAnswered.js :: deskFactsOf`). Writes `<out>/<seed>.json`.
+ * (`facts/factsAnswered.js :: deskFactsOf`); and, beside the clashes, the four solvency slots left EMPTY (SURVEY S-B2). Writes
+ * `<out>/<seed>.json`.
  */
 import { afterEach, expect, test, vi } from 'vitest';
 import { cleanup, fireEvent, render, waitFor } from '@testing-library/react';
@@ -78,6 +79,14 @@ import { DOSSIER_STATE_PROSE_POWER } from '../../src/data/dossierStateProse/powe
 import { DOSSIER_STATE_PROSE_STRESSORS } from '../../src/data/dossierStateProse/stressors.generated.js';
 import { DOSSIER_STATE_PROSE_WAR_FAITH } from '../../src/data/dossierStateProse/warFaith.generated.js';
 import { kernelTexts, noteClaims, pageClashes } from './page-clash.shared.mjs';
+// SURVEY S-B2 (the chair's 06:05 message, (c)): THE FOUR SOLVENCY SLOTS, read at the function level on the same record: the
+// header (DS-ECO-1 C3), the standing-of-living and treasury tiles' one draw (DS-ECO-8 COMFORTABLE, MODERATE) and the Defense
+// desk's Economic Survival row (DS-DEF-2 STRONG). A slot is EMPTY when its desk asks that pool and draws no line of it.
+import { economyDeskRead } from '../../src/components/new/economyDeskRead.js';
+import { defenseDeskRead } from '../../src/components/new/defenseDeskRead.js';
+import { prosperityHeaderPoolKey } from '../../src/domain/display/stateProse/economyStateProse.js';
+import { prosperityRank } from '../../src/data/constants.js';
+import { economicSurvivalBandOf } from '../../src/domain/display/defenseScoreBands.js';
 
 const OUT = process.env.PAGE_CLASH_OUT;
 const PLAN = JSON.parse(readFileSync(String(process.env.PAGE_CLASH_PLAN), 'utf8'));
@@ -103,10 +112,21 @@ for (const row of PLAN) {
       views = await walkDossier(container, { fireEvent, waitFor, expect });
     } finally { mocks.tap = null; }
     const pageText = Object.values(views).flat().join('\n');
+    const asked = {
+      header: prosperityHeaderPoolKey(prosperityRank(town.economicState?.prosperity), String(town.economicState?.tradeAccess ?? town.economicViability?.metrics?.tradeAccess ?? '')),
+      rung: String(town.economicState?.prosperity ?? '').toUpperCase(),
+      survival: `Economic Survival: ${economicSurvivalBandOf(town)}`,
+    };
+    const drew = withPresumptionLedger(() => { economyDeskRead(town); defenseDeskRead(town); }).ledger.filter((n) => n.drawKind === 'K').map((n) => n.pool);
+    const empty = [
+      asked.header === 'COMBINATION C3: the middle rungs' && !drew.includes(`DS-ECO-1::${asked.header}`) ? 'header (DS-ECO-1 C3)' : null,
+      ['COMFORTABLE', 'MODERATE'].includes(asked.rung) && !drew.includes(`DS-ECO-8::${asked.rung}`) ? `the standing and treasury tiles (DS-ECO-8 ${asked.rung})` : null,
+      asked.survival === 'Economic Survival: STRONG' && !drew.includes(`DS-DEF-2::${asked.survival}`) ? 'the Economic Survival row (DS-DEF-2 STRONG)' : null,
+    ].filter(Boolean);
     const facts = deskFactsOf(town);
     const noted = noteClaims([...birth, ...stamp, ...owner], pageText, TEXTS, V);
     const clashes = pageClashes(CLAIM_EXCLUSIONS, noted, (atom) => V.atomHolds(atom.replace(/^no\s+/i, ''), facts) === undefined ? undefined
       : /^no\s+/i.test(atom) ? !V.atomHolds(atom.replace(/^no\s+/i, ''), facts) : V.atomHolds(atom, facts), V);
-    writeFileSync(`${OUT}/${row.corpus}-${row.seed}.json`, JSON.stringify({ corpus: row.corpus, seed: row.seed, size: row.size, recordHash, pageHash: sha(views), notes: noted.length, clashes }));
+    writeFileSync(`${OUT}/${row.corpus}-${row.seed}.json`, JSON.stringify({ corpus: row.corpus, seed: row.seed, size: row.size, recordHash, pageHash: sha(views), notes: noted.length, clashes, empty }));
   }, 600000);
 }

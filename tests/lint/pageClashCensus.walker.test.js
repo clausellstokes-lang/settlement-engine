@@ -19,6 +19,7 @@ import { readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { CLAIM_EXCLUSIONS } from '../../src/domain/facts/claimExclusions.js';
+import { registerRowIds } from '../../scripts/page-clash-census.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const REGISTER = JSON.parse(readFileSync(join(ROOT, 'scripts/.page-clash-census.json'), 'utf8'));
@@ -26,7 +27,7 @@ const REGISTER = JSON.parse(readFileSync(join(ROOT, 'scripts/.page-clash-census.
 describe('the page clash census holds its register', () => {
   test('every row of the table has its register row, banked on the 1,800, each with its towns', () => {
     expect(REGISTER.pages).toBe(1800);
-    expect(Object.keys(REGISTER.rows).sort()).toEqual(CLAIM_EXCLUSIONS.map((r) => r.id).sort());
+    expect(Object.keys(REGISTER.rows).sort()).toEqual(registerRowIds(CLAIM_EXCLUSIONS).sort()); // SURVEY S-B2: and the empty solvency slots
     for (const [id, row] of Object.entries(REGISTER.rows)) {
       expect(row.towns.length, id).toBe(row.pages);
       expect(row.C + row.V, id).toBe(row.pages);

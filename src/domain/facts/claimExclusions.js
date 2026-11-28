@@ -46,9 +46,9 @@ export const CLAIM_EXCLUSIONS = Object.freeze([
 
   // ── S-B's two atoms against the claims they rule out ──
   Object.freeze({ id: 'place debt', a: 'place debt', b: 'no place debt', recorded: Object.freeze(/** @type {const} */ (['a'])),
-    said: Object.freeze({ b: 'pays its (own )?way|purse closes every year ahead|money laid by|put things by|owes no(body| one)' }),
-    why: 'Where the page says the place owes a debt now, no line may say it pays its way, has money laid by or owes no one.',
-    source: 'E-clashes rows 11 and 12 (27 and 18 owner pages on 682667fe2); SURVEY S-B, RULING S-B-1' }),
+    said: Object.freeze({ b: 'pays its (own )?way|purse closes every year ahead|money laid by|put things by|owes no(body| one)|money in hand|enough in hand|left over each year|takes in a little more than it pays out|money it had put by|there is money enough|money has not run out|the money is there' }),
+    why: 'Where the page says the place owes a debt now, no line may say it pays its way, has money laid by or in hand, has a little left over each year, or owes no one.',
+    source: 'E-clashes rows 11 and 12 (27 and 18 owner pages on 682667fe2); SURVEY S-B, RULING S-B-1; S-B2 (RULING 122-B-2 F2: a yearly surplus is the same claim as "pays its way")' }),
   Object.freeze({ id: 'nothing laid by', a: 'nothing laid by', b: 'no nothing laid by', recorded: Object.freeze(/** @type {const} */ (['a'])),
     said: Object.freeze({ a: 'nothing laid by|would have to borrow', b: 'money laid by|put things by|a little in hand' }),
     why: 'Where the Economic Survival row reads Weak or Critical (nothing laid by), no line may say there is money laid by.',

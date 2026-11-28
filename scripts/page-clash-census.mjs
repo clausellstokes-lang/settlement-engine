@@ -80,9 +80,19 @@ export function countRows(read) {
     const row = (out[id] ||= { pages: 0, C: 0, V: 0, unconfirmed: 0, towns: [] });
     row.pages += 1; row[/** @type {'C'|'V'} */ (r.corpus)] += 1; if (!hit.confirmed) row.unconfirmed += 1; row.towns.push(`${r.corpus}:${r.seed}`);
   }
+  for (const r of read) if (Array.isArray(r.empty) && r.empty.length) {
+    const row = (out[EMPTY_ROW] ||= { pages: 0, C: 0, V: 0, unconfirmed: 0, towns: [] });
+    row.pages += 1; row[/** @type {'C'|'V'} */ (r.corpus)] += 1; row.towns.push(`${r.corpus}:${r.seed}`);
+  }
   for (const row of Object.values(out)) row.towns.sort();
   return out;
 }
+
+/** SURVEY S-B2 (the chair's 06:05 message, (c)): the pages where one of the four solvency slots is EMPTY, a row of the register
+ * beside the table's own (its bar 0; shrink-only like them). */
+export const EMPTY_ROW = 'empty solvency slot';
+/** @param {ReadonlyArray<{ id: string }>} table @returns {string[]} the register's rows: the table's and the empty slots' */
+export const registerRowIds = (table) => [...table.map((r) => r.id), EMPTY_ROW];
 
 const isMain = process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1];
 if (isMain) {
@@ -102,14 +112,14 @@ if (isMain) {
   const reg = existsSync(REGISTER) ? JSON.parse(readFileSync(REGISTER, 'utf8')) : null;
   /** @type {string[]} */ const rose = [];
   console.log('row                                            banked  now  (C  V)  unconfirmed  bar 0');
-  for (const row of CLAIM_EXCLUSIONS) {
+  for (const row of registerRowIds(CLAIM_EXCLUSIONS).map((id) => ({ id }))) {
     const now = counts[row.id] || { pages: 0, C: 0, V: 0, unconfirmed: 0, towns: [] };
     const banked = reg?.rows?.[row.id]?.pages;
     if (!sampleOnly && !only && banked != null && now.pages > banked) rose.push(row.id);
     console.log(`${row.id.padEnd(46)} ${String(banked ?? '—').padStart(6)} ${String(now.pages).padStart(4)}  (${now.C} ${now.V})  ${String(now.unconfirmed).padStart(5)}  ${now.towns.slice(0, 4).join(' ')}`);
   }
-  for (const id of Object.keys(counts)) if (!CLAIM_EXCLUSIONS.some((r) => r.id === id)) rose.push(`${id} (no row)`);
-  const sample = Object.fromEntries(read.filter((r) => SAMPLE.includes(`${r.corpus}:${r.seed}`)).map((r) => [`${r.corpus}:${r.seed}`, Object.keys(r.clashes).sort()]));
+  for (const id of Object.keys(counts)) if (!registerRowIds(CLAIM_EXCLUSIONS).includes(id)) rose.push(`${id} (no row)`);
+  const sample = Object.fromEntries(read.filter((r) => SAMPLE.includes(`${r.corpus}:${r.seed}`)).map((r) => [`${r.corpus}:${r.seed}`, [...Object.keys(r.clashes), ...(r.empty?.length ? [EMPTY_ROW] : [])].sort()]));
   if (sampleOnly) {
     const drift = SAMPLE.filter((k) => JSON.stringify(sample[k] || []) !== JSON.stringify(reg?.sample?.[k] || []));
     for (const k of drift) console.log(`SAMPLE ${k}: register ${JSON.stringify(reg?.sample?.[k] || [])}, now ${JSON.stringify(sample[k] || [])}`);
@@ -119,9 +129,9 @@ if (isMain) {
   writeFileSync(join(out, 'counts.json'), JSON.stringify({ pages: read.length, counts, sample }, null, 1));
   if (rose.length) { console.log(`page-clash-census: ROSE on ${rose.join(', ')}: the register is shrink-only${write ? '; nothing written' : ''}`); process.exit(1); }
   if (write) {
-    const rows = Object.fromEntries(CLAIM_EXCLUSIONS.map((r) => [r.id, counts[r.id] || { pages: 0, C: 0, V: 0, unconfirmed: 0, towns: [] }]));
+    const rows = Object.fromEntries(registerRowIds(CLAIM_EXCLUSIONS).map((id) => [id, counts[id] || { pages: 0, C: 0, V: 0, unconfirmed: 0, towns: [] }]));
     writeFileSync(REGISTER, `${JSON.stringify({
-      _doc: 'THE PAGE CLASH CENSUS\'S REGISTER (SURVEY S-C; scripts/page-clash-census.mjs, its door --write). rows: per row of src/domain/facts/claimExclusions.js, the owner pages of the corpora C and V (1,800) that print both sides, BANKED: SHRINK-ONLY (the door refuses a rise and writes nothing); every row\'s bar is 0. unconfirmed: pages whose pair holds a note the census cannot confirm printed (a table row drawn at birth). sample: the rows each birth of the fixed sample carries, held exactly by tests/lint/pageClashCensus.walker.test.js.',
+      _doc: 'THE PAGE CLASH CENSUS\'S REGISTER (SURVEY S-C; scripts/page-clash-census.mjs, its door --write). rows: per row of src/domain/facts/claimExclusions.js (and `empty solvency slot`, SURVEY S-B2: a page where one of the four solvency slots draws nothing), the owner pages of the corpora C and V (1,800) that print both sides, BANKED: SHRINK-ONLY (the door refuses a rise and writes nothing); every row\'s bar is 0. unconfirmed: pages whose pair holds a note the census cannot confirm printed (a table row drawn at birth). sample: the rows each birth of the fixed sample carries, held exactly by tests/lint/pageClashCensus.walker.test.js.',
       pages: read.length, rows, sample,
     }, null, 1)}\n`);
     console.log(`page-clash-census: written ${REGISTER}`);

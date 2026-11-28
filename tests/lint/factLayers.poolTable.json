@@ -482,8 +482,8 @@
    "src": "map:measured"
   },
   "DS-DEF-2::Economic Survival: STRONG": {
-   "layer": 4,
-   "src": "map:measured"
+   "layer": 6,
+   "src": "placed: SURVEY S-B2 (the chair's message of 2026-11-28 06:05 UTC): its money-in-hand lines declare `no place debt` and its new line needs it (layer 5); the desk draws at view time; was map:measured 4"
   },
   "DS-DEF-2::Economic Survival: WEAK": {
    "layer": 4,
