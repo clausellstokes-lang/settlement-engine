@@ -122,7 +122,7 @@ export const PUBLIC_PROSE_SITES = Object.freeze(/** @type {PublicProseSite[]} */
   ['viability', (s, publicDossier) => isolationDeskRead(s, { publicDossier, playerView: true })],
   // `deriveViability`'s SEEDED verdict (viabilitySeed), shipped as `{summary}` text; behind
   // canonicalViewModel exactly as ViabilityTab reads it (off, the tab prints the record's datum).
-  ['viewModel:viability', (s, publicDossier) => (flag('canonicalViewModel') ? viabilityVerdictRead(s, { publicDossier, playerView: true }) : null)], // RULING 122-B-4: composed for a reader
+  ['viewModel:viability', (s, publicDossier) => (flag('canonicalViewModel') ? viabilityVerdictRead(s, { publicDossier }) : null)],
   // THE TRADITIONS TAB (TRAD-1, CTR9): the set the owner's tab shows (the lit mirror, else genesis's founding preview,
   // which reads the seed and so can only be drawn here) as a LIST of text rows: name, element, chip, calendar line and
   // THE READER'S description (shownTraditions.js :: sharedTraditionRowsOf). A list, as `power:ladder` is, so no row's

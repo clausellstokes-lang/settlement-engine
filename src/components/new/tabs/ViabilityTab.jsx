@@ -87,7 +87,7 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
   // this tab supplies its own coherence badge.
   // The verdict's variant is SEEDED (viabilitySeed): a shared page prints the summary the owner's
   // view drew, shipped at the save (`viewModel:viability`), and an unstamped record is silent.
-  const vmViability = flag('canonicalViewModel') ? viabilityVerdictRead(s, { publicDossier, playerView }) : null; // RULING 122-B-4: the player view is a reader
+  const vmViability = flag('canonicalViewModel') ? viabilityVerdictRead(s, { publicDossier }) : null;
   const summaryClean = trimViabilitySummary(vmViability
     ? vmViability.summary.replace(/^[^:]+:\s*/, '').trim()
     : (v.summary||'').replace(/^[✗✓]\s*(NOT VIABLE:|VIABLE:)\s*/i, '').trim());
