@@ -39,6 +39,7 @@ import {
 import { drawnMember, poolMemberTexts } from '../helpers/drawnProse.js';
 import { factsOf } from '../../src/domain/facts/factsOf.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { pickKeyOf } from '../../src/domain/display/pickKey.js'; // point 124: the desk's draw key
 
 afterEach(cleanup);
 
@@ -105,7 +106,8 @@ function settlement() {
  */
 function drawnPair(s) {
   const shared = {
-    leaf: 'economy', blockId: 'DS-SUP-3', seed: SEED, audience: 'dm',
+    // point 124: drawn on the desk's own key, the town's pick key (its id `settlement.impairburg`; SEED where none)
+    leaf: 'economy', blockId: 'DS-SUP-3', seed: pickKeyOf(s, SEED), audience: 'dm',
     slots: { settlement: TOWN, institution: HOUSE },
     facts: factsOf(s),
   };
