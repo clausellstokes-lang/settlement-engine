@@ -22,6 +22,7 @@
  * Deterministic: the same two TSVs write the same two files, byte for byte.
  */
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { REGISTERED_WORDS, newWordsNamedIn, thingsNamedIn } from '../src/domain/facts/registeredWords.js';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -48,6 +49,57 @@ export const NEEDS_ATOM = Object.freeze({
   'charms sold': 'enchanting',
   'a hearing': 'court sits',
 });
+
+/**
+ * THE NOUNS A VERSION NAMES (the design's §4: "a SAID line … declares its NOUNS like any line"): the generator asks the
+ * rule book (`facts/registeredWords.js`, the presumed-things walker's) which registered things each version's text and
+ * each liar line's DM note name, and declares the answer the rule book gives that thing, by this map alone. A thing the
+ * map does not name stops the generator (a new noun is a ruling, never a guess). Each entry is an atom or band of the
+ * vocabulary the rule book itself lists for the thing.
+ */
+export const NOUN_DECLARATION = Object.freeze(/** @type {Record<string, { needs?: string[], excludes?: string[], byWord?: Record<string, string[]> }>} */ ({
+  watch: { needs: ['watch'] },
+  // a line that names the SOLDIERS declares the soldiers (the rule book's own sufficient atom, and the office class's):
+  // the war's lines ("war and occupation both guarantee soldiers"); any other armed force, a standing guard
+  armedForce: { needs: ['guardPresence'], byWord: { soldiers: ['soldiers'] } },
+  streets: { needs: ['tier: ≥ village'] },
+  openTrade: { excludes: ['crisis: under_siege'] },
+  market: { needs: ['market'] },
+  'house: smuggling': { needs: ['house: smuggling'] },
+}));
+
+/**
+ * THE SPEAKER RULES AS KEYS (the writer's words for a mouth, each to the one key the plan reads). A mouth the map does not
+ * name stops the generator.
+ */
+export const SPEAKER_KEY = Object.freeze(/** @type {Record<string, string>} */ ({
+  anyone: 'anyone', keeper: 'keeper', 'one who works there': 'works-there', 'an officer of the watch': 'watch-officer',
+  'a member of the power': 'member', 'anyone not of the power': 'not-member', 'anyone not of the power (the aggrieved)': 'not-member',
+  "anyone not of the seat's power": 'not-seat', "anyone (never a member of the seat's power)": 'not-seat',
+  'one it has wronged': 'wronged', 'one it has wronged (never an officer of the watch or of the seat)': 'wronged-not-officer',
+  'one who works at the market': 'market-worker', 'the keeper of the rites': 'rite-keeper',
+  "the card's own person (a power's own face)": 'own-person', 'one who depends on it': 'depends',
+}));
+
+/**
+ * The declaration the nouns of one text call for, through `NOUN_DECLARATION`.
+ * @param {string} text @param {string} where @returns {{ needs: string[], excludes: string[] }}
+ */
+export function nounDeclarationOf(text, where) {
+  /** @type {string[]} */ const needs = []; /** @type {string[]} */ const excludes = [];
+  for (const id of [...thingsNamedIn(text), ...newWordsNamedIn(text)]) {
+    if (!Object.hasOwn(REGISTERED_WORDS, id)) continue;
+    const d = Object.hasOwn(NOUN_DECLARATION, id) ? NOUN_DECLARATION[id] : null;
+    if (!d) throw new Error(`gen-voices-lines: ${where} names the registered thing '${id}', which NOUN_DECLARATION does not answer: "${text}"`);
+    const word = Object.keys(d.byWord || {}).find((w) => new RegExp(`\\b${w}\\b`, 'i').test(text));
+    for (const a of word ? /** @type {Record<string, string[]>} */ (d.byWord)[word] : d.needs || []) if (!needs.includes(a)) needs.push(a);
+    for (const a of d.excludes || []) if (!excludes.includes(a)) excludes.push(a);
+  }
+  return { needs, excludes };
+}
+
+/** @param {string} text @param {string[]} needs @param {string[]} excludes @returns {{ text: string, needs?: string[], excludes?: string[] }} */
+const versionOf = (text, needs, excludes) => ({ text, ...(needs.length ? { needs } : {}), ...(excludes.length ? { excludes } : {}) });
 
 /** @param {string} path @returns {string[][]} the rows under the header */
 function readTsv(path) {
@@ -92,9 +144,12 @@ function slotsOf(cell) {
   return [...String(cell || '').matchAll(/\{(\w+)\}/g)].map((m) => m[1]);
 }
 
-/** @param {string} cell @returns {string[]} a speaker rule's mouths, in the writer's order */
-export function speakerTokensOf(cell) {
-  return String(cell || '').split(';').map((s) => s.trim()).filter(Boolean);
+/** @param {string} cell @param {string} where @returns {string[]} a speaker rule's mouths, in the writer's order, as keys */
+export function speakerTokensOf(cell, where = '') {
+  return String(cell || '').split(';').map((x) => x.trim()).filter(Boolean).map((m) => {
+    if (!Object.hasOwn(SPEAKER_KEY, m)) throw new Error(`gen-voices-lines: ${where} names a mouth SPEAKER_KEY does not know: '${m}'`);
+    return SPEAKER_KEY[m];
+  });
 }
 
 /** @param {string} kind @param {string} state @returns {string} the pool key a line is filed under */
@@ -105,22 +160,27 @@ function saidLineOf(r) {
   const [id, kind, state, speaker, , w, t, c, d, slots, , , needsCell] = r;
   /** @type {string[]} */ const needs = [];
   /** @type {Record<string, string[]>} */ const versionNeeds = {};
-  /** @type {string[]} */ const words = [];
   /** @type {string[]} */ const missing = [];
   for (const term of needsTermsOf(needsCell)) {
-    words.push(term.word);
     const atom = Object.hasOwn(NEEDS_ATOM, term.word) ? NEEDS_ATOM[/** @type {keyof typeof NEEDS_ATOM} */ (term.word)] : null;
-    if (!atom) { missing.push(term.word); continue; }
+    if (!atom) { missing.push(term.word.replace(/\s+/g, '-')); continue; }
     if (!term.tempers) { if (!needs.includes(atom)) needs.push(atom); continue; }
     for (const tp of term.tempers) (versionNeeds[tp] ||= []).includes(atom) || versionNeeds[tp].push(atom);
   }
+  const texts = { welcoming: w.trim(), transactional: t.trim(), cautious: c.trim(), dismissive: d.trim() };
+  /** @type {Record<string, object>} */ const versions = {};
+  for (const tp of TEMPERS) {
+    const own = nounDeclarationOf(texts[/** @type {'welcoming'} */ (tp)], `${id} ${tp}`);
+    const vn = [...needs, ...(versionNeeds[tp] || [])];
+    for (const a of own.needs) if (!vn.includes(a)) vn.push(a);
+    versions[tp] = versionOf(texts[/** @type {'welcoming'} */ (tp)], vn, own.excludes);
+  }
   const sl = slotsOf(slots);
   return {
-    id, kind, state, speaker: speakerTokensOf(speaker),
-    ...(sl.length ? { slots: sl } : {}), ...(words.length ? { needsWords: words } : {}), ...(needs.length ? { needs } : {}),
-    ...(Object.keys(versionNeeds).length ? { versionNeeds } : {}),
-    ...(missing.length ? { ineligible: missing.map((x) => `${x}: no atom`).join('; ') } : {}),
-    versions: { welcoming: w.trim(), transactional: t.trim(), cautious: c.trim(), dismissive: d.trim() },
+    id, kind, state, speaker: speakerTokensOf(speaker, id),
+    ...(sl.length ? { slots: sl } : {}),
+    ...(missing.length ? { ineligible: missing } : {}),
+    versions,
   };
 }
 
@@ -130,14 +190,17 @@ export function liarGroupOf(id) {
   return parts.slice(1, -1).join('.');
 }
 
-/** @param {string[]} r @returns {object} one liar line, as data */
+/** @param {string[]} r @returns {object} one liar line, as data (the writer's notes, `touches`, `fits` and the false claim, stay in the TSV) */
 function liarLineOf(r) {
-  const [id, touches, fits, , , w, t, c, d, falseClaim, inTruth] = r;
-  return {
-    id, group: liarGroupOf(id), touches: touches.trim(), fits: fits.trim(),
-    versions: { welcoming: w.trim(), transactional: t.trim(), cautious: c.trim(), dismissive: d.trim() },
-    falseClaim: falseClaim.trim(), inTruth: inTruth.trim(),
-  };
+  const [id, , , , , w, t, c, d, , inTruth] = r;
+  const note = nounDeclarationOf(inTruth.trim(), `${id} inTruth`);
+  const texts = { welcoming: w.trim(), transactional: t.trim(), cautious: c.trim(), dismissive: d.trim() };
+  /** @type {Record<string, object>} */ const versions = {};
+  for (const tp of TEMPERS) {
+    const own = nounDeclarationOf(texts[/** @type {'welcoming'} */ (tp)], `${id} ${tp}`);
+    versions[tp] = versionOf(texts[/** @type {'welcoming'} */ (tp)], own.needs, own.excludes);
+  }
+  return { id, group: liarGroupOf(id), inTruth: inTruth.trim(), ...(note.needs.length ? { needs: note.needs } : {}), ...(note.excludes.length ? { excludes: note.excludes } : {}), versions };
 }
 
 /** @param {unknown} v @returns {string} a JS literal of a plain value (frozen whole by the file's own \`deepFreeze\`) */
@@ -155,7 +218,7 @@ function lit(v) {
 
 /** @param {object} row @returns {string} one line of a pool, its versions on a line each */
 function rowOf(row) {
-  const { versions } = /** @type {{ versions: Record<string, string> }} */ (row);
+  const { versions } = /** @type {{ versions: Record<string, object> }} */ (row);
   // the pool's key carries the kind, the state and the group: a row does not repeat them
   const rest = Object.fromEntries(Object.entries(row).filter(([k]) => !['versions', 'kind', 'state', 'group'].includes(k)));
   const head = lit(rest).replace(/ }$/, '');
@@ -182,11 +245,11 @@ const SAID_HEAD = `/**
  * (\`tests/lint/stablePickIds.shared.mjs :: IMPORTED_POOLS\`, words \`versions\`) and banked by its own door.
  *
  * Filed by pool, \`<card kind>.<state>\` (the keys of \`survey/lines/A-keys.md\` as ruled L-1 to L-4). Each line: its \`id\`; its
- * speaker rule (\`speaker\`: its mouths, in the writer's order); and, only where the writer gave one: its \`slots\`, the
- * writer's \`needsWords\`, its \`needs\` (atoms every version needs) and \`versionNeeds\` (atoms one version needs alone),
- * mapped from the words by the generator's \`NEEDS_ATOM\`, and \`ineligible\` (a needs word with no atom: the line is kept and
- * never drawn, ruling 10); and its four \`versions\`, keyed on the speaker's stored disposition
- * (\`npc.presentation.disposition\`). An absent field is empty.
+ * speaker rule (\`speaker\`: its mouths in the writer's order, as the generator's \`SPEAKER_KEY\` keys them); its \`slots\`
+ * where it has any; \`ineligible\` (the writer's needs words that have no atom: the line is kept and never drawn, ruling 10);
+ * and its four \`versions\`, keyed on the speaker's stored disposition (\`npc.presentation.disposition\`), each
+ * \`{ text, needs, excludes }\`: the atoms that version presumes, asked of the record through the one door (the writer's
+ * needs words through \`NEEDS_ATOM\`, and the nouns the text names through \`NOUN_DECLARATION\`). An absent field is empty.
  *
  * Pure data, no logic. Read by \`domain/voices/voicePlan.js\` alone (lazily, with the tab: never on the first paint).
  */
@@ -197,10 +260,11 @@ const LIAR_HEAD = `/**
  * \`node scripts/gen-voices-lines.mjs <C-said-lines.tsv> <D-liar-lines.tsv>\`; after that load this file is the lines' home,
  * fingerprinted and banked as the said lines are.
  *
- * Filed by group: the tie's way through the holder's own house and its family (\`office.hall\`, \`office.faith\`,
+ * Each line: its \`id\`; \`inTruth\`; the \`needs\` and \`excludes\` its DM note presumes; and its four versions, each
+ * \`{ text, needs, excludes }\` as the said lines'. Filed by group: the tie's way through the holder's own house and its family (\`office.hall\`, \`office.faith\`,
  * \`front.trade\`, \`front.other\`, \`retainer\`) and the criminal house's kind (\`smuggling\`, \`blackmarket\`, \`theft\`,
- * \`secrets\`, \`killing\`, \`extortion\`, \`tunnels\`). Each line: its \`id\`, what it \`touches\`, what tie it \`fits\`, its four
- * \`versions\`, the false claim, and \`inTruth\`: THE DM'S NOTE, shown only on the owner's own page, never to a reader.
+ * \`secrets\`, \`killing\`, \`extortion\`, \`tunnels\`). \`inTruth\` is THE DM'S NOTE, shown only on the owner's own page,
+ * never to a reader. What each line touches and what tie it fits are the writer's notes, kept in the TSV.
  *
  * Pure data, no logic. Read by \`domain/voices/voicePlan.js\` alone.
  */
@@ -211,7 +275,7 @@ export function generate(saidTsv, liarTsv) {
   /** @type {Map<string, object[]>} */ const said = new Map();
   let ineligible = 0;
   for (const r of readTsv(saidTsv)) {
-    const line = /** @type {{ kind: string, state: string, ineligible?: string }} */ (saidLineOf(r));
+    const line = /** @type {{ kind: string, state: string, ineligible?: string[] }} */ (saidLineOf(r));
     if (line.ineligible) ineligible += 1;
     const k = poolKeyOf(line.kind, line.state);
     if (!said.has(k)) said.set(k, []);

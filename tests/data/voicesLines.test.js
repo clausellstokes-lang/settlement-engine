@@ -10,7 +10,7 @@ import { describe, expect, it } from 'vitest';
 import { SAID_LINES } from '../../src/data/voices/saidLines.js';
 import { LIAR_LINES } from '../../src/data/voices/liarLines.js';
 import { assertDeclarable } from '../../src/domain/facts/factVocabulary.js';
-import { NEEDS_ATOM, TEMPERS, needsTermsOf, liarGroupOf } from '../../scripts/gen-voices-lines.mjs';
+import { NEEDS_ATOM, NOUN_DECLARATION, SPEAKER_KEY, TEMPERS, needsTermsOf, liarGroupOf, nounDeclarationOf } from '../../scripts/gen-voices-lines.mjs';
 
 const said = Object.entries(SAID_LINES).flatMap(([pool, rows]) => rows.map((row) => ({ pool, row })));
 const liar = Object.entries(LIAR_LINES).flatMap(([group, rows]) => rows.map((row) => ({ group, row })));
@@ -30,32 +30,41 @@ describe('the said lines (the first load: 197 lines, 51 pools)', () => {
   it('gives every line four non-empty versions, one a stored disposition, and a speaker rule', () => {
     for (const { row } of said) {
       expect(Object.keys(row.versions)).toEqual([...TEMPERS]);
-      for (const t of TEMPERS) expect(row.versions[t].trim().length, `${row.id} ${t}`).toBeGreaterThan(0);
+      for (const t of TEMPERS) expect(row.versions[t].text.trim().length, `${row.id} ${t}`).toBeGreaterThan(0);
       expect(row.speaker.length, row.id).toBeGreaterThan(0);
+      for (const k of row.speaker) expect(Object.values(SPEAKER_KEY), `${row.id} ${k}`).toContain(k);
       expect(Object.isFrozen(row) && Object.isFrozen(row.versions)).toBe(true);
     }
   });
 
-  it('declares only atoms of the vocabulary that have a reader', () => {
-    for (const { row } of said) {
-      for (const a of row.needs || []) expect(() => assertDeclarable(a), `${row.id} ${a}`).not.toThrow();
-      for (const [t, atoms] of Object.entries(row.versionNeeds || {})) {
-        expect(TEMPERS).toContain(t);
-        for (const a of atoms) expect(() => assertDeclarable(a), `${row.id} ${t} ${a}`).not.toThrow();
+  it('declares only atoms of the vocabulary that have a reader, on each version (the carrier the door reads)', () => {
+    for (const { row } of [...said, ...liar]) {
+      for (const a of [...(row.needs || []), ...(row.excludes || [])]) expect(() => assertDeclarable(a), `${row.id} ${a}`).not.toThrow();
+      for (const t of TEMPERS) {
+        for (const a of [...(row.versions[t].needs || []), ...(row.versions[t].excludes || [])]) expect(() => assertDeclarable(a), `${row.id} ${t} ${a}`).not.toThrow();
       }
     }
     for (const a of Object.values(NEEDS_ATOM)) expect(() => assertDeclarable(a), a).not.toThrow();
+    for (const d of Object.values(NOUN_DECLARATION)) for (const a of [...(d.needs || []), ...(d.excludes || []), ...Object.values(d.byWord || {}).flat()]) expect(() => assertDeclarable(a), a).not.toThrow();
   });
 
-  it('makes a line whose needs word has no atom INELIGIBLE, and no other line', () => {
-    for (const { row } of said) {
-      const unmapped = (row.needsWords || []).filter((w) => !Object.hasOwn(NEEDS_ATOM, w));
-      expect(row.ineligible !== undefined, row.id).toBe(unmapped.length > 0);
-      for (const w of unmapped) expect(row.ineligible).toContain(`${w}: no atom`);
+  it('declares on every version the nouns its own words name (the rule book\'s answer), and the writer\'s needs', () => {
+    for (const { row } of [...said, ...liar]) {
+      for (const t of TEMPERS) {
+        const own = nounDeclarationOf(row.versions[t].text, row.id);
+        for (const a of own.needs) expect(row.versions[t].needs || [], `${row.id} ${t}`).toContain(a);
+        for (const a of own.excludes) expect(row.versions[t].excludes || [], `${row.id} ${t}`).toContain(a);
+      }
     }
+    const streets = said.find(({ row }) => row.id === 'SAID.tension.crime.2').row;
+    expect(streets.versions.welcoming.needs).toEqual(['tier: ≥ village']);
+    expect(streets.versions.transactional.needs).toBeUndefined();
+  });
+
+  it('makes a line whose needs word has no atom INELIGIBLE, and no other line (19 of the first load, listed for the chair)', () => {
     const ineligible = said.filter(({ row }) => row.ineligible).map(({ row }) => row.id);
-    expect(ineligible.length).toBeGreaterThan(0);
-    expect(ineligible.length).toBeLessThan(30);
+    expect(ineligible).toHaveLength(19);
+    for (const { row } of said) if (row.ineligible) for (const w of row.ineligible) expect(Object.keys(NEEDS_ATOM)).not.toContain(w);
   });
 
   it('reads the writer\'s needs cell: a word, its gloss, and the tempers that need it', () => {
@@ -78,7 +87,7 @@ describe('the liar\'s lines (the first load: 40 lines)', () => {
     for (const { group, row } of liar) {
       expect(group).toBe(liarGroupOf(row.id));
       expect(Object.keys(row.versions)).toEqual([...TEMPERS]);
-      for (const t of TEMPERS) expect(row.versions[t].trim().length, `${row.id} ${t}`).toBeGreaterThan(0);
+      for (const t of TEMPERS) expect(row.versions[t].text.trim().length, `${row.id} ${t}`).toBeGreaterThan(0);
       expect(row.inTruth.trim().length, row.id).toBeGreaterThan(0);
     }
     expect(Object.keys(LIAR_LINES).sort()).toEqual(['blackmarket', 'extortion', 'front.other', 'front.trade', 'killing',
