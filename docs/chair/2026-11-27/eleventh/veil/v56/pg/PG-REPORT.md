@@ -1,5 +1,12 @@
 # PG (VEIL-56's builder seat): FAIL-CLOSED PAGES' ARM UNDER RULING V29
 
+## STATE NOTE (2026-11-28T00:01:53Z, `date -u`): STOPPED until "GO PG"
+1. BRANCHES: code `lane/veil-56-2026-11-27-pages-wip` = 04fa8d60e, unchanged, nothing to push (origin has no ref of that name; no commit of mine). Docs `lane/veil-56-2026-11-27-pg-docs` = this push.
+2. CONFIRMED: the predecessor's red (1ffb2328b) and green (04fa8d60e, 17/17); both pools of 140; V29 (1) and (2)(a)(b)(c) measured; M1 (the interval test: 0 wrong, 37 / 30 rows lost); M2 (the cause is the ENGINE between master and this tree; the owner's page prints the stored values: the veil's fault).
+3. NOT BEGUN: M3 (V29 (2)'s totality arm and its plant guards); V29 (1)'s build (waits for the chair's BAND-RULE).
+4. NEXT COMMAND on "GO PG": the branch the chair names. For the interval rule: red first in `tests/components/failClosedSharedPage.test.jsx`, the cure in `foundationBandShown.js` and `pageRederive.js`.
+5. The machine: pools at /var/tmp/v56/stored-{today,master}; master worktree /home/user/master56; recipe in section 3.
+
 ## 1. WHERE THIS SEAT STANDS (written 2026-11-27T23:41:40Z by `date -u`)
 - Code branch `lane/veil-56-2026-11-27-pages-wip`: AT 04fa8d60e (the predecessor's tip). NOTHING CHANGED YET. NOT PUSHED (no commit to send).
 - Docs branch `lane/veil-56-2026-11-27-pg-docs` (this file): on `origin/lane/veil-56-2026-11-27` ad35ca29d.
@@ -67,6 +74,41 @@ Strained|Critical 10 / 5, Surplus|Adequate 2 / 0, Critical|Collapsed 0 / 1.
 AGAINST THE OTHER TWO RULES (rows lost per pool): the two named rows 89-92 / 64-65, and they leave wrong rows; every reading
 row 374-377 / 349-350; THE INTERVAL TEST 37 / 30, with 0 wrong. V31 (A)'s condition holds on both pools: 0 wrong, a clean interval
 for every band.
+
+### M2 (V31 (B)): THE CAUSE BY KEY, master-born, a share that hides nothing (CONFIRMED; `probe/cause2.probe.jsx`, `logs/c2-an-*.txt`)
+Towns out of 140 that differ from the stored value, by test:
+- A: the page as built.
+- B: the same with the RECORD'S OWN config whole before the re-derive (cure E's way).
+- C: TODAY'S ENGINE over the owner's FULL raw record, only the re-derived keys removed, nothing veiled.
+- D: MASTER'S OWN writers (db832c892) over the same record, as `rederiveForPage` calls them (towns equal to stored).
+| key | A | B (laws) | C (today's engine, full record) | D master's engine = stored | the writer that moved, and its commits since db832c892 (`git log db832c892..04fa8d60e`) |
+|---|---|---|---|---|---|
+| scores.military / internal / economic / magical / monster / disaster | 133 / 132 / 122 / 114 / 112 / 98 | same | same | 140 / 140 each | `defenseGenerator.js :: generateDefenseProfile` (33 commits, from 0b5dc10b5 2026-11-12 "a hired force is worth what the place can pay" to b8a82cf4f "Economic Survival ... capped by the prosperity word") |
+| readiness.score | 133 (63 of them absent) | same | same | 140 | the same (it is drawn from the scores) |
+| economicGates | 98 | same | same | 140 | the same |
+| crimeTypes | 76 | same | same | 140 | `safetyProfile.js :: generateSafetyProfile` / `settleCrimeLinesToSignal` (67 commits, from 7cc5a8608 2026-11-04; the crime lines re-worded) |
+| recentConflict | 124 | same | same | 140 | `power/rulingStructure.js :: generatePowerStructure` through `governanceNarrative.js` (56 + 29 commits, from f7127dd20 2026-11-04; the same event in new words) |
+| economyOutput | 0 | 0 | 0 | 140 | none |
+SO: (1) THE LAWS ARE NOT THE CAUSE. The served config carries the record's own markers as stored (140 of 140: density 2,
+living-content 2, no seat or fortune marker), and handing the record's config changes no count. (2) NO SERVED INPUT IS MISSING.
+Today's engine gives the same wrong values over the owner's full record (C = A), and master's own writers give the stored value
+on 140 of 140 (D). The cause is THE ENGINE: the writers changed between master and this tree, and no generation law gates those
+changes. I did not bisect to the single commit, given the bound. The control, today-born: A = B = C = 0, except readiness 2
+(absent outside the label's band, by design). Master's writers over today-born records give the stored value on only 4 to 62
+of 140: the engines differ both ways.
+THE CHAIR'S QUESTION (whose fault): THE OWNER'S PAGE PRINTS THE STORED VALUE. It re-derives nothing: the generators' only callers
+outside `src/generators` are `pageRederive.js` and `importRederive.js`. Executed: the owner's Defense, Overview and Summary tabs
+were rendered on the raw master-born record, and again with today's values in place of the stored ones. The text changes on
+117 towns for the defence keys (Defense 109, Overview 86, Summary 37), on 65 for the crime list (Defense) and on 124 for the
+recent conflict (Summary). So the owner's page is right and the shared page is wrong: THE VEIL'S FAULT (its re-derive), not a
+town fault for the line.
+A SERVED FIELD THAT TELLS THEM APART: yes, three on these pools, and none of them names the engine.
+- The config's `_seatLawVersion` / `_fortuneLawVersion`: present (2) on today-born, absent on master-born; served as stored.
+- `publicProse`: served on 140 of 140 today-born, 0 of 140 master-born.
+- `schemaVersion`: 3 against 1, in `publicSafe.js :: PUBLIC_TOPLEVEL_KEYS` (PLAUSIBLE served: read in the allowlist, not
+  executed on the page).
+`generatorVersion` reads 0.9.0 on both. A record born between db832c892 and this tree could carry the markers and still carry
+an older writer's values, so none of the three can tell the page which engine wrote a record.
 
 ### (2)(a) PRESENCE: every key `rederiveForPage` puts back, where the owner's record holds it and the page holds its parent
 At every marker on both pools: scores (6), gates, economyOutput, recentConflict and every condition's severity are PRESENT (0 absent).

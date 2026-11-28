@@ -1,0 +1,32 @@
+POOL /var/tmp/v56/stored-master towns 140; master writers loaded: def,ps,safe,settle,flags,adv; towns with a master-writer error: 0
+key | A page differs | B with the record's own config | C today's engine over the FULL record | D master's engine equals stored
+defenseProfile.scores.disaster | 98 | 98 | 98 | 140/140
+defenseProfile.scores.economic | 122 | 122 | 122 | 140/140
+defenseProfile.scores.internal | 132 | 132 | 132 | 140/140
+defenseProfile.scores.magical | 114 | 114 | 114 | 140/140
+defenseProfile.scores.military | 133 | 133 | 133 | 140/140
+defenseProfile.scores.monster | 112 | 112 | 112 | 140/140
+defenseProfile.readiness.score | 133 | 133 | 133 | 140/140
+defenseProfile.economicGates | 98 | 98 | 98 | 140/140
+economicState.compound.economyOutput | 0 | 0 | 0 | 140/140
+economicState.safetyProfile.crimeTypes | 76 | 76 | 76 | 140/140
+powerStructure.recentConflict | 124 | 124 | 124 | 140/140
+examples (C):
+  defenseProfile.scores.disaster: r3m-city-indebted-0-36: stored 67 today's engine 76
+  defenseProfile.scores.economic: r3m-city-indebted-0-36: stored 61 today's engine 89
+  defenseProfile.scores.internal: r3m-city-indebted-0-36: stored 60 today's engine 78
+  defenseProfile.scores.magical: r3m-city-indebted-0-46: stored 66 today's engine 67
+  defenseProfile.scores.military: r3m-city-indebted-0-36: stored 75 today's engine 100
+  defenseProfile.scores.monster: r3m-city-indebted-0-36: stored 57 today's engine 62
+  defenseProfile.readiness.score: r3m-city-indebted-0-36: stored 62 today's engine undefined
+  defenseProfile.economicGates: r3m-city-indebted-0-36: stored {"military":0.9,"monster":0.92,"internal":0.91,"economic":0.86,"disaster":0.88} today's engine {"military":1,"monster":1,"internal":1,"economic":1,"disaster":1}
+  economicState.safetyProfile.crimeTypes: r3m-city-indebted-0-46: stored [{"type":"Survival crime","desc":"Hunger-driven theft of food, livestock, and stored goods. Enforcement struggles to dis today's engine [{"type":"Survival crime","desc":"Theft of food, livestock, and stored goods by people with too little. Enforcement stru
+  powerStructure.recentConflict: r3m-city-indebted-0-36: stored "The creditor's representative blocked the infrastructure repair budget. Publicly they cited fiscal responsibility. Priv today's engine "The creditor's agent has blocked the money for repairs. In public they talk of prudence; in private they point to a cla
+E, the owner's page with today's values in place of the stored ones (towns whose tab text changes):
+  defence: values equal on 0; changes Defense 109, Overview 86, Summary 37; any 117
+  economyOutput: values equal on 140; changes Defense 0, Overview 0, Summary 0; any 0
+  crimeTypes: values equal on 64; changes Defense 65, Overview 0, Summary 0; any 65
+  recentConflict: values equal on 16; changes Defense 0, Overview 0, Summary 124; any 124
+F, the law markers on the SERVED config:
+  140x {"_densityLawVersion":2,"_livingContentLawVersion":2,"_seatLawVersion":null,"_fortuneLawVersion":null} (= stored)
+F, publicProse served: 0 of 140

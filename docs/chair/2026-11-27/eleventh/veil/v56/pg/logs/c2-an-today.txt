@@ -1,0 +1,23 @@
+POOL /var/tmp/v56/stored-today towns 140; master writers loaded: def,ps,safe,settle,flags,adv; towns with a master-writer error: 0
+key | A page differs | B with the record's own config | C today's engine over the FULL record | D master's engine equals stored
+defenseProfile.scores.disaster | 0 | 0 | 0 | 47/140
+defenseProfile.scores.economic | 0 | 0 | 0 | 15/140
+defenseProfile.scores.internal | 0 | 0 | 0 | 5/140
+defenseProfile.scores.magical | 0 | 0 | 0 | 25/140
+defenseProfile.scores.military | 0 | 0 | 0 | 12/140
+defenseProfile.scores.monster | 0 | 0 | 0 | 32/140
+defenseProfile.readiness.score | 2 | 2 | 2 | 4/140
+defenseProfile.economicGates | 0 | 0 | 0 | 46/140
+economicState.compound.economyOutput | 0 | 0 | 0 | 140/140
+economicState.safetyProfile.crimeTypes | 0 | 0 | 0 | 62/140
+powerStructure.recentConflict | 0 | 0 | 0 | 15/140
+examples (C):
+  defenseProfile.readiness.score: r3m-town-occupied-1-85: stored 11 today's engine undefined
+E, the owner's page with today's values in place of the stored ones (towns whose tab text changes):
+  defence: values equal on 138; changes Defense 0, Overview 0, Summary 0; any 0
+  economyOutput: values equal on 140; changes Defense 0, Overview 0, Summary 0; any 0
+  crimeTypes: values equal on 140; changes Defense 0, Overview 0, Summary 0; any 0
+  recentConflict: values equal on 140; changes Defense 0, Overview 0, Summary 0; any 0
+F, the law markers on the SERVED config:
+  140x {"_densityLawVersion":2,"_livingContentLawVersion":2,"_seatLawVersion":2,"_fortuneLawVersion":2} (= stored)
+F, publicProse served: 140 of 140
