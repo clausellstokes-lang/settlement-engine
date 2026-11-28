@@ -70,6 +70,16 @@ describe('S-A site 1: a stored house description re-answered on the final record
     expect(institutionDescShown({ name: 'Customs house', desc: 'Our own words.' }, t['dp-metropolis-4'])).toBe('Our own words.');
   });
 
+  it('S-A-3: A DM\'s WORDS ARE NEVER RE-ANSWERED: a table line the DM typed verbatim, for a house the final record refuses, prints as the DM wrote it', () => {
+    const m = t['dp-metropolis-4'];
+    const typed = 'Levies charged on all trade in and out by road, collected by officials of crown or town.'; // the docks-less twin, verbatim
+    const edited = { ...m, institutions: m.institutions.map((i) => (i.name === 'Customs house' ? { ...i, desc: typed, _userEdits: { desc: { originalValue: i.desc, editedAt: '2026-11-28T00:00:00Z' } } } : i)) };
+    const house = houseOf(edited, 'Customs house');
+    expect(institutionDescShown({ ...house, _userEdits: undefined }, edited)).not.toBe(typed); // CONTROL: unmarked, the final record re-answers it
+    expect(institutionDescShown(house, edited)).toBe(typed);
+    expect(institutionDescription(house, edited)).toBe(typed);
+  });
+
   it('NO BIRTH MOVES: the records are untouched by the print', () => {
     for (const seed of Object.keys(t)) expect(JSON.stringify(t[seed]), seed).toBe(before[seed]);
   });

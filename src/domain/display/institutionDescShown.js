@@ -8,8 +8,8 @@
  * (`institutionDescVariants.js :: DESC_VARIANT_SIBLINGS`, the table the draw and the close-time re-read
  * `assembleSettlement.js :: readHouseDescsLate` resolve) is re-answered on the FINAL record, by the door's own rule
  * (`facts/lineOnFinal.js`): the original where the record admits it, else its twin; nothing admitted keeps the stored
- * line (the slot is never emptied, as at the draw). A description the tables do not know prints as written: a DM's own
- * words (an edited description is the DM's text, which no table holds) and a custom house's. No birth moves.
+ * line (the slot is never emptied, as at the draw). A description the DM edited (the edits ledger's institution record
+ * at `desc`, S-A-3) and one the tables do not know (a custom house's) print as written. No birth moves.
  *
  * THE SHARED PAGE (the chair's condition (3)): a reader's page re-answers ONLY a set whose every atom reads what no veil
  * address reaches (the config's terrain, the stress record's crisis: `SHARE_SAFE_DIMENSIONS`); a set that reads the
@@ -25,6 +25,7 @@ import { atomsOf, declarationOf, parseAtom } from '../facts/factVocabulary.js';
 import { factsOf } from '../facts/factsOf.js';
 import { lineOnFinal } from '../facts/lineOnFinal.js';
 import { lineText } from '../facts/drawDeclared.js';
+import { walkUserEdits } from '../userEdits.js';
 import { speakTierNoun } from './stateProse/stateProseKernel.js';
 import { tierNounFor } from './stateProse/weaveBlock.js';
 
@@ -49,7 +50,7 @@ const SHARE_SAFE_SIBLINGS = Object.freeze(Object.fromEntries(Object.entries(DESC
  */
 export function institutionDescShown(inst, settlement, options = {}) {
   const own = typeof inst?.desc === 'string' ? inst.desc.trim() : '';
-  if (!own || !settlement || typeof settlement !== 'object') return own;
+  if (!own || !settlement || typeof settlement !== 'object' || editedDescsOf(settlement).has(/** @type {object} */ (inst))) return own; // S-A-3: a DM's words are never re-answered
   const noun = tierNounFor(/** @type {never} */ (settlement.tier)) ?? '';
   const set = indexOf(options.reader === true ? SHARE_SAFE_SIBLINGS : DESC_VARIANT_SIBLINGS, noun).get(own);
   if (!set) return own;
@@ -79,6 +80,22 @@ export function withDescsShown(slice, settlement) {
   if (!slice || !Array.isArray(slice.detailed)) return slice;
   const shown = institutionDescsShown(settlement);
   return { ...slice, detailed: slice.detailed.map((row, k) => (shown[k] ? { ...row, description: shown[k] } : row)) };
+}
+
+/** @type {WeakMap<object, Set<object>>} the record → the houses whose description the DM edited */
+const EDITED = new WeakMap();
+
+/**
+ * The houses whose description the DM edited, by the edits ledger's own walk (`userEdits.js :: walkUserEdits`, the
+ * institution record at path `desc`): never a second reading of the ledger. @param {object} settlement @returns {Set<object>}
+ */
+function editedDescsOf(settlement) {
+  let set = EDITED.get(settlement);
+  if (!set) {
+    set = new Set(walkUserEdits(/** @type {never} */ (settlement)).filter((r) => r.kind === 'institution' && r.path === 'desc').map((r) => /** @type {object} */ (r.entity)));
+    EDITED.set(settlement, set);
+  }
+  return set;
 }
 
 /** @type {WeakMap<object, Map<string, Map<string, ReadonlyArray<unknown>>>>} table → tier noun → spoken line → its set */
