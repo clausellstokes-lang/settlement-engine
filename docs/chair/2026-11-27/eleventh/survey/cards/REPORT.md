@@ -1,41 +1,42 @@
 VOICES-CARDS DONE: branch lane/voices-cards-measure-2026-11-28 at 95708399d (the six; this report follows)
 
-C and V, 1,800 towns rendered as the app renders them (owner and share), 0 errors. The mounted cards equal the record's
-own count on 1,800 of 1,800. Counts CONFIRMED; readings PLAUSIBLE.
+C and V: 1,800 towns rendered as the app renders them (owner and share), 0 errors. Mounted cards equal the record's count
+on 1,800 of 1,800. Counts CONFIRMED, readings PLAUSIBLE.
 
-**Card kinds, a town (mean, C · V; full table in A):**
-
-| kind | thorp | village | town | metropolis | identity | slot (keeps height class) |
+| kind (mean a town, C) | thorp | village | town | metropolis | identity | slot |
 |---|---|---|---|---|---|---|
-| institution | 8.4 · 8.1 | 14.6 · 14.9 | 33 · 32 | 93 · 89 | slug(name): **no id** | under the description |
-| power (roster row) | 1.1 | 2.4 | 4.0 | 8.0 | name: **no id** | under the members line |
-| person | 1.3 | 8.0 | 25 | 84 · 80 | npc.id | visible face (collapsed card) |
-| tradition | 1.5 | 2.0 | 3.0 | 6.0 | index into a view-time draw | under the description |
-| tension | 1.0 | 1.6 | 1.6 | 2.5 | type (unique a town) | under the description |
-| crisis | in a third of towns | | | | crisis.\<type\> | under the summary |
+| institution | 8.4 | 14.6 | 33 | 93 | name, no id | under description |
+| power | 1.1 | 2.4 | 4.0 | 8.0 | name, no id | under members line |
+| person | 1.3 | 8.0 | 25 | 84 | npc.id | visible face |
+| tradition | 1.5 | 2.0 | 3.0 | 6.0 | draw index | under description |
+| tension | 1.0 | 1.6 | 1.6 | 2.5 | type | under description |
+| crisis | 0.3 | 0.4 | 0.4 | 0.3 | crisis.type | under summary |
 
-All six have a fitting slot (flexible columns; phone only lifts font sizes). No card component is shared: about 12 sites
-(6 screen, 5 PDF, 1 session) would use one slot component. A seat power has two cards on the Power tab, and a tension
-appears on both Overview and History. **The PDF prints no tradition for a born town**, and most people there are name
-rows. The shared page has no Crisis tab.
+V is within a few percent of C.
 
-**Quotes a tab under the ruled odds (3 in 4 weighty, 1 in 4 lesser, size factor, one a person):** Institutions 6 to 20
-and NPCs 5 to 16 in towns and up. A tab exceeds three in 137 to 150 of 150 towns from the town size up. **With a tab
-budget (2 weighty, 1 lesser) a page holds 6 to 7 quotes,** a tab exceeds three in 30 to 55 of 150, and thorps hold 0.8.
+**Slots and surfaces.** All six kinds have a slot that keeps their flexible height. The phone only enlarges type. They
+share no component, so one slot component would serve about 12 sites. A seat power has two cards on one tab. A tension
+appears on both Overview and History. The PDF prints no tradition for a born town, and most people there are only name
+rows. The share has no Crisis tab.
 
-**No lawful speaker:** tensions 73 to 93% (their parties are words, not powers), institutions 67 to 83% in thorps and
-hamlets (the fabric of the place) and 16 to 44% above. A crisis lacks one in 2 to 46% of cases, and some person is the only
-speaker of two or more cards in 107 to 150 of 150 towns. The one reader function is `people/cardPowers.js :: isHousePublic`.
+**Quotes under the ruled odds.** In towns and up, Institutions would carry 6 to 20 quotes and NPCs 5 to 16. A tab
+exceeds three in 137 to 150 of 150 towns. With a tab budget (2 weighty, 1 lesser) a page holds 6 to 7 quotes, and a tab
+exceeds three in 30 to 55 of 150. A thorp carries 0.8.
 
-**States (E):** most institutions are standing (85%) or Vulnerable (15%). Powers are mostly bound, none or contender ×
-Minor. Founding is 25% of traditions, a third of them under a crisis. The four dispositions are nearly even.
+**No lawful speaker.** Tensions lack one in 73 to 93% of cases, because their parties are words, not powers.
+Institutions lack one in 67 to 83% of thorp and hamlet cases and 16 to 44% above. The crisis lacks one in 2 to 46%. In
+107 to 150 of 150 towns, one person is the only speaker for two or more cards. The reader test is
+`cardPowers.js :: isHousePublic`.
 
-**Proposal (F):** `voicePlanOf(settlement, {audience})`, memoised, which `quoteFor` reads. It decides in three seeded
-steps: speaks, then who (rank, unspent, isHousePublic), then which line. It uses stable keys (catalogId, element+act,
-type). One `CardVoice` component plus a react-pdf twin renders nothing when silent. `VOICES_TUNING` is a P1 table and
-SAID_LINES gets an IMPORTED_POOLS row (`say`). The share is fail-closed, and must be: `_seed` is stripped, so
-VOICES-ON-SHARE has to stamp quotes at publish.
+**States.** Houses are standing (85%) or Vulnerable (15%). Powers are mostly Minor. Founding rites are 25% of all rites.
+The four dispositions are nearly even.
 
-**Could not measure:** how a quoted line reads (no lines exist). Height and pagination on the real PDF (view models only).
-The phone at real width (jsdom). Whether a DM rename re-deals in saved towns (read, not run). Ten React duplicate-key
-warnings ("Thieves' Guild") in V's render, which I did not attribute to a component.
+**Proposal.**
+1. A memoised `voicePlanOf`, read by `quoteFor`, decides in seeded order: speaks, who, line.
+2. Cards are keyed by catalogId, element plus act, or type, all stable.
+3. One `CardVoice` component and its PDF twin render nothing when silent.
+4. A `VOICES_TUNING` table, plus an `IMPORTED_POOLS` row.
+5. The share is fail-closed of necessity: `_seed` is stripped, so quotes must be stamped at publish.
+
+**Not measured.** How the lines read (none exist yet), real PDF pagination, a real phone width, and re-deals in saved
+towns. Ten duplicate-key warnings ("Thieves' Guild") from V's render are not attributed to a component.
