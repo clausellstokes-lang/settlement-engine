@@ -74,7 +74,7 @@ export function lineOnFinalOf(stored, home, facts) {
       const f = factsNow(facts);
       if (!f) return { text: stored, found: true, moved: false };
       const own = set.find((l) => same(textOf(l)));
-      if (declarationAdmits(declarationOf(own), /** @type {any} */ (f)).admitted) return { text: stored, found: true, moved: false }; // admitted: as stored
+      if (declarationAdmits(declarationOf(own), /** @type {import('./factVocabulary.js').FactsLike} */ (f)).admitted) return { text: stored, found: true, moved: false }; // admitted: as stored
       const r = resolveDeclared(/** @type {ReadonlyArray<unknown>} */ (set), { facts: f, poolId: 'lineOnFinal', drawKind: 'T' });
       return out(r.line == null ? null : textOf(r.line));
     }
@@ -85,7 +85,7 @@ export function lineOnFinalOf(stored, home, facts) {
     if (at < 0) return { text: stored, found: false, moved: false };
     const f = factsNow(facts);
     if (!f) return { text: stored, found: true, moved: false };
-    const admits = (/** @type {unknown} */ l) => declarationAdmits(declarationOf(l), /** @type {any} */ (f)).admitted;
+    const admits = (/** @type {unknown} */ l) => declarationAdmits(declarationOf(l), /** @type {import('./factVocabulary.js').FactsLike} */ (f)).admitted;
     const own = pool[at];
     if (admits(own)) return { text: stored, found: true, moved: false };
     const twin = pool.find((l) => isTwin(l) && /** @type {{ twinOf: string }} */ (l).twinOf === textOf(own));

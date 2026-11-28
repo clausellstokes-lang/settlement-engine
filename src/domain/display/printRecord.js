@@ -35,23 +35,24 @@ export function printRecordOf(settlement) {
   if (!settlement || typeof settlement !== 'object') return settlement;
   const held = MEMO.get(/** @type {object} */ (settlement));
   if (held) return /** @type {T} */ (held);
-  const s = /** @type {any} */ (settlement);
-  const gate = storedHookGate(s);
+  /** @typedef {Record<string, unknown> & { desc?: unknown, plotHooks?: unknown, type?: unknown }} Row */
+  const s = /** @type {{ institutions?: unknown, npcs?: unknown, history?: { historicalEvents?: unknown } | null } & Record<string, unknown>} */ (/** @type {unknown} */ (settlement));
+  const gate = storedHookGate(/** @type {Parameters<typeof storedHookGate>[0]} */ (/** @type {unknown} */ (s)));
   const hooksOf = (/** @type {unknown} */ hooks, /** @type {{ kind: 'npc' } | { kind: 'event', type: unknown }} */ where) => {
     if (!Array.isArray(hooks)) return hooks;
     const out = hooks.map((h) => (typeof h === 'string' ? rehook(h, gate(plotHookText(h), where)) : h)).filter((h) => h !== null);
     return out.length === hooks.length && out.every((h, i) => h === hooks[i]) ? hooks : out;
   };
   const institutions = Array.isArray(s.institutions)
-    ? s.institutions.map((/** @type {any} */ inst) => {
+    ? s.institutions.map((/** @type {Row} */ inst) => {
       const own = typeof inst?.desc === 'string' ? inst.desc.trim() : '';
-      const shown = own ? institutionDescShown(inst, s) : own;
+      const shown = own ? institutionDescShown(inst, /** @type {Parameters<typeof institutionDescShown>[1]} */ (s)) : own;
       return own && shown !== own ? { ...inst, desc: shown } : inst;
     })
     : s.institutions;
-  const npcs = Array.isArray(s.npcs) ? s.npcs.map((/** @type {any} */ n) => { const h = hooksOf(n?.plotHooks, { kind: 'npc' }); return h === n?.plotHooks ? n : { ...n, plotHooks: h }; }) : s.npcs;
+  const npcs = Array.isArray(s.npcs) ? s.npcs.map((/** @type {Row} */ n) => { const h = hooksOf(n?.plotHooks, { kind: 'npc' }); return h === n?.plotHooks ? n : { ...n, plotHooks: h }; }) : s.npcs;
   const events = s.history?.historicalEvents;
-  const historicalEvents = Array.isArray(events) ? events.map((/** @type {any} */ e) => { const h = hooksOf(e?.plotHooks, { kind: 'event', type: e?.type }); return h === e?.plotHooks ? e : { ...e, plotHooks: h }; }) : events;
+  const historicalEvents = Array.isArray(events) ? events.map((/** @type {Row} */ e) => { const h = hooksOf(e?.plotHooks, { kind: 'event', type: e?.type }); return h === e?.plotHooks ? e : { ...e, plotHooks: h }; }) : events;
   const out = {
     ...s,
     ...(Array.isArray(s.institutions) ? { institutions } : {}),

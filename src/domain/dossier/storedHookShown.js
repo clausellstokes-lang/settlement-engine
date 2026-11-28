@@ -64,17 +64,22 @@ export function npcHookShown(text, settlement, facts, held) {
 }
 
 /**
+ * @typedef {{ plotHooks?: ReadonlyArray<unknown> } | null | undefined} HookCarrier
+ * @typedef {{ npcs?: ReadonlyArray<HookCarrier>, history?: { historicalEvents?: ReadonlyArray<HookCarrier> } | null }} HookRecord
+ */
+
+/**
  * THE GATE for one record (S-A-2): the final record's facts read once, and every hook the town stores held (a next
  * admitted line is never one the town already carries).
- * @param {any} settlement the final record
+ * @param {HookRecord | null | undefined} settlement the final record
  * @returns {(text: string, where: { kind: 'npc' } | { kind: 'event', type: unknown }) => string | null}
  */
 export function storedHookGate(settlement) {
-  /** @type {any} */ let f = null;
-  const facts = () => (f ??= factsOf(settlement));
+  /** @type {ReturnType<typeof factsOf> | null} */ let f = null;
+  const facts = () => (f ??= factsOf(/** @type {Parameters<typeof factsOf>[0]} */ (settlement)));
   const held = new Set([
-    ...(settlement?.npcs || []).flatMap((/** @type {any} */ n) => (n?.plotHooks || []).map(plotHookText)),
-    ...(settlement?.history?.historicalEvents || []).flatMap((/** @type {any} */ e) => (e?.plotHooks || []).map(plotHookText)),
+    ...(settlement?.npcs || []).flatMap((n) => (n?.plotHooks || []).map(plotHookText)),
+    ...(settlement?.history?.historicalEvents || []).flatMap((e) => (e?.plotHooks || []).map(plotHookText)),
   ].filter((t) => typeof t === 'string'));
   return (text, where) => (where.kind === 'npc' ? npcHookShown(text, settlement, facts, held) : eventHookShown(text, where.type, settlement, facts, held));
 }
