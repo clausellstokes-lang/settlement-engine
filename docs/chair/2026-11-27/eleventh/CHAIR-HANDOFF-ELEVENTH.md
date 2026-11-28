@@ -1017,3 +1017,38 @@ See section 4, newest last.
   already sent). Every seat's rulings go in ONE FILE on the record as they are given, and every brief tells the seat to
   end its turn at least hourly.
 - **THE ACCOUNT:** `allowed_warning`, no overage, at 08:39 UTC.
+
+## V35 (10:31 UTC on 2026-11-28): THE SURVEY's READER HAS SENT FOUR AT-ONCE FINDINGS, ALL RULED (122-B-4, S-A-4, S-B-3, **122-B-5: THE HOOK LEG WITHDRAWN**); CURE-122B's ROUNDS 2 AND 3 ACCEPTED, ITS LAST UNIT (122-B-5) BUILDING; THE VOICES ENGINE's READER STARTED
+- **CURE-122B (local agent aab064d54c282b400; `/home/user/wt/line`; NOT pushed):** rounds 2 and 3 ACCEPTED at 5c8f2fa8b
+  (122-B-3: the advance worker's real bundle 3,054,904 to 3,007,071; unit 4b: 46 pages of V; 123-C2-1: the 21 saved palm
+  towns print as at 777733a2a, the reader `localProductionAsPrinted`; 122-A-3: `isEdited(tension,'description')`; 122-B-4:
+  an audience on `owesDebtShown`; the phone-floor pins re-recorded by the test's own instruction). THEN OVERTURNED IN PART:
+  **122-B-5** (third addendum of `landing/RULING-122-B-2.txt`): the survey's reader showed the hook leg read HISTORY (the
+  debt crisis 5 to 79 years back in the 25 | 18 towns that owed by it alone): A PAST EVENT NEVER MAKES A PRESENT DEBT; the
+  place owes by the stress or the tension only; the chair's 122-B-1 is overturned in that part and 122-B-4's plumbing comes
+  out. The builder is on it (it was told to stop a fail-closed step that the ruling made moot). THEN: the chair reads the
+  diff, pushes `lane/stack-123-wip-2026-11-28` ONCE, READER 122-123's delta, the landing.
+- **READER SURVEY-1's four at-once notes (its report still owed):** (1) the hook leg on the shared page (122-B-4, now
+  122-B-5); (2) FINAL: the search's house card on a reader's page re-answers by the owner's rule (16 towns of V; a tell by
+  plant) and the Defense tab's force card prints a house's description raw: **S-A-4** (the audience from the tab's own
+  source, THE DEFAULT FAILS CLOSED, one reader for a house's description everywhere, guards): given to SURVEY-FINAL, on top
+  of 35faf3361; (3) TABLE: THE CHAIR's OWN SENTENCE `COMFORTABLE#6` ("keeps nothing back for a bad one") beside the food
+  line "some to put by against a bad year" in 94 of 97 towns of C: **S-B-3**: it becomes "…with no money set aside for a
+  bad one."; all six new lines checked against their neighbours (`survey/table/S-B2-NEIGHBOURS.tsv`): given to
+  SURVEY-TABLE, on top of 2a474aaf9; (4) the hook leg reads the past (122-B-5): TABLE's atom takes it at its merge (place
+  debt on 63 | 61 towns, not 88 | 79). Also from it: eleven of the table's twelve rows cannot fail; the census does not see
+  the guild row or a flipped declaration; 26 more desk lines claim money or a surplus undeclared. BOTH SURVEY BRANCHES WILL
+  NEED ITS DELTA READ.
+- **VOICES-ENGINE:** "TIP? 56cb9876c" (code 96cb62121) ACCEPTED AS BUILT (the voice scope, V-1, the changed words, the
+  draft tuning row; records 0, lines outside the quotes 0, share quotes 0). THE CHAIR READ ALL TWELVE TOWNS. **READER
+  VOICES STARTED** (session_01FE9mEvfWM77zpPcUGf5FSK; brief `prompts/START-READER-VOICES.txt`; on 96cb62121 against
+  003fd3b07). ON TOP: **G1-5** (the PDF worker carries no lines), **G1-6** (a sameness table), **G1-7** (the Tonight sheet
+  holds no quote in print: the PDF's crisis card, which prints only in the Tonight chapter, prints none). All in
+  `survey/RULINGS-VOICES-ENGINE.md`.
+- **RENAME-BUILD:** K1b committed at b9a150801 (the security file 63 of 63 with its ledger `rename/build/K1b-REKEYS.md`);
+  **K1b-2** (the soak's fixture: measure the soak's other hosts; the host choice only, or red and named); K2 built, its
+  proof in; K3's measure next; then "TIP?" and THE READER OF POINT 124 (NOT YET BRIEFED).
+- **NAMED SINCE V34 (prerelease list):** the Ö-named towns' lost desk lines (four desks refuse a non-ASCII capital: a small
+  cure of its own); hooks of old events worded as happening now.
+- **FOUR TOP-TIER READERS HAVE RUN OR RUN NOW** (122-123 holding for its delta; SURVEY-1; VOICES); the account read
+  `allowed_warning` at 08:39; read it again before point 124's reader.
