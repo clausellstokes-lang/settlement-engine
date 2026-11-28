@@ -10,8 +10,8 @@
  *
  * THE RULES (the hazards, each a test in tests/domain/townRename.test.js):
  *   - only the homes above, and case-sensitive: no other field is touched, and a lower-case common word never is;
- *   - an occurrence of the old name INSIDE another stored proper name of the record (a person, a house, a power, a quarter,
- *     a neighbour: "Ana Ford", "Ford Abbey") is masked and left as it is;
+ *   - an occurrence of the old name INSIDE another stored proper name of the record (a person, a house, a power, a quarter:
+ *     "Ana Ford", "Ford Abbey") is masked and left as it is;
  *   - where the old name IS another stored name (a house called what the town is called), nothing but `name` is
  *     rewritten: the sentence cannot say which it means, and the rename does not guess.
  * A rename back restores the record byte for byte where the new name was in none of the homes before.
@@ -28,8 +28,9 @@ export const TOWN_NAME_CRISIS_KEYS = Object.freeze(['stress', 'stressors']);
 const text = (v) => (typeof v === 'string' ? v.trim() : '');
 
 /**
- * Every other proper name the record stores: its people, houses, powers, quarters and neighbours.
- * @param {{ npcs?: unknown, institutions?: unknown, factions?: unknown, powerStructure?: { factions?: unknown } | null, spatialLayout?: { quarters?: unknown } | null, neighbourNetwork?: unknown, interSettlementRelationships?: unknown }} s @returns {string[]}
+ * Every other proper name the record stores: its people, houses, powers and quarters (the keys a born record carries:
+ * `scripts/check-observed-shape-readers.mjs`; the legacy top-level `factions` is not read, PEOPLE-5's FPZ).
+ * @param {{ npcs?: unknown, institutions?: unknown, powerStructure?: { factions?: unknown } | null, spatialLayout?: { quarters?: unknown } | null }} s @returns {string[]}
  */
 function otherNamesOf(s) {
   /** @type {string[]} */
@@ -41,11 +42,8 @@ function otherNamesOf(s) {
   };
   take(s.npcs, ['name']);
   take(s.institutions, ['name']);
-  take(s.factions, ['name', 'faction']);
   take(s.powerStructure?.factions, ['name', 'faction']);
   take(s.spatialLayout?.quarters, ['name']);
-  take(s.neighbourNetwork, ['name']);
-  take(s.interSettlementRelationships, ['name', 'settlementName']);
   return out;
 }
 
@@ -89,12 +87,11 @@ export function renameTownInRecord(settlement, oldName, newName) {
   /** @param {unknown} v */
   const said = (v) => (typeof v === 'string' ? rewrite(v, from, to, shields) : v);
   for (const k of TOWN_NAME_SENTENCE_KEYS) if (typeof out[k] === 'string') out[k] = said(out[k]);
-  for (const k of TOWN_NAME_CRISIS_KEYS) {
-    const v = out[k];
-    /** @param {unknown} e */
-    const entry = (e) => { const r = /** @type {Record<string, unknown>} */ (e && typeof e === 'object' ? e : {}); return typeof r.summary === 'string' ? { ...r, summary: said(r.summary) } : e; };
-    if (Array.isArray(v)) out[k] = v.map(entry);
-    else if (v && typeof v === 'object') out[k] = entry(v);
-  }
+  /** @param {{ summary?: unknown } | null | undefined} e @returns {unknown} a crisis entry, its `summary` said under the new name */
+  const entry = (e) => (e && typeof e === 'object' && typeof e.summary === 'string' ? { ...e, summary: said(e.summary) } : e);
+  /** @param {unknown} v a crisis container: one entry or a list (TOWN_NAME_CRISIS_KEYS) */
+  const crisis = (v) => (Array.isArray(v) ? v.map(entry) : v && typeof v === 'object' ? entry(v) : v);
+  if ('stress' in out) out.stress = crisis(out.stress);
+  if ('stressors' in out) out.stressors = crisis(out.stressors);
   return /** @type {T} */ (out);
 }
