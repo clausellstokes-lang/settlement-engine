@@ -1,0 +1,140 @@
+{
+ "_doc": "THE PAGE CLASH CENSUS'S REGISTER (SURVEY S-C; scripts/page-clash-census.mjs, its door --write). rows: per row of src/domain/facts/claimExclusions.js, the owner pages of the corpora C and V (1,800) that print both sides, BANKED: SHRINK-ONLY (the door refuses a rise and writes nothing); every row's bar is 0. unconfirmed: pages whose pair holds a note the census cannot confirm printed (a table row drawn at birth). sample: the rows each birth of the fixed sample carries, held exactly by tests/lint/pageClashCensus.walker.test.js.",
+ "pages": 1800,
+ "rows": {
+  "presence": {
+   "pages": 1,
+   "C": 0,
+   "V": 1,
+   "unconfirmed": 1,
+   "towns": [
+    "V:dp-metropolis-136"
+   ]
+  },
+  "band": {
+   "pages": 0,
+   "C": 0,
+   "V": 0,
+   "unconfirmed": 0,
+   "towns": []
+  },
+  "crisis": {
+   "pages": 0,
+   "C": 0,
+   "V": 0,
+   "unconfirmed": 0,
+   "towns": []
+  },
+  "place debt": {
+   "pages": 0,
+   "C": 0,
+   "V": 0,
+   "unconfirmed": 0,
+   "towns": []
+  },
+  "nothing laid by": {
+   "pages": 0,
+   "C": 0,
+   "V": 0,
+   "unconfirmed": 0,
+   "towns": []
+  },
+  "the indebted crisis is a place debt": {
+   "pages": 0,
+   "C": 0,
+   "V": 0,
+   "unconfirmed": 0,
+   "towns": []
+  },
+  "prosperity": {
+   "pages": 29,
+   "C": 23,
+   "V": 6,
+   "unconfirmed": 0,
+   "towns": [
+    "C:dp-hamlet-10",
+    "C:dp-hamlet-104",
+    "C:dp-hamlet-112",
+    "C:dp-hamlet-13",
+    "C:dp-hamlet-135",
+    "C:dp-hamlet-139",
+    "C:dp-hamlet-17",
+    "C:dp-hamlet-2",
+    "C:dp-hamlet-3",
+    "C:dp-hamlet-33",
+    "C:dp-hamlet-49",
+    "C:dp-hamlet-5",
+    "C:dp-hamlet-73",
+    "C:dp-hamlet-74",
+    "C:dp-hamlet-79",
+    "C:dp-hamlet-81",
+    "C:dp-hamlet-93",
+    "C:dp-hamlet-96",
+    "C:dp-village-103",
+    "C:dp-village-16",
+    "C:dp-village-23",
+    "C:dp-village-50",
+    "C:dp-village-69",
+    "V:dp-hamlet-130",
+    "V:dp-hamlet-70",
+    "V:dp-hamlet-73",
+    "V:dp-hamlet-74",
+    "V:dp-village-29",
+    "V:dp-village-79"
+   ]
+  },
+  "guild": {
+   "pages": 3,
+   "C": 1,
+   "V": 2,
+   "unconfirmed": 0,
+   "towns": [
+    "C:dp-hamlet-26",
+    "V:dp-hamlet-106",
+    "V:dp-hamlet-84"
+   ]
+  },
+  "plague in force / plague coming": {
+   "pages": 0,
+   "C": 0,
+   "V": 0,
+   "unconfirmed": 0,
+   "towns": []
+  },
+  "famine in force / famine coming": {
+   "pages": 0,
+   "C": 0,
+   "V": 0,
+   "unconfirmed": 0,
+   "towns": []
+  },
+  "siege in force / siege coming": {
+   "pages": 0,
+   "C": 0,
+   "V": 0,
+   "unconfirmed": 0,
+   "towns": []
+  },
+  "beasts in force / beasts coming": {
+   "pages": 0,
+   "C": 0,
+   "V": 0,
+   "unconfirmed": 0,
+   "towns": []
+  }
+ },
+ "sample": {
+  "C:dp-thorp-3": [],
+  "C:dp-thorp-99": [],
+  "C:dp-thorp-120": [],
+  "C:dp-hamlet-26": [
+   "guild"
+  ],
+  "C:dp-hamlet-33": [
+   "prosperity"
+  ],
+  "C:dp-village-141": [],
+  "V:dp-town-7": [],
+  "V:dp-city-12": []
+ }
+}
