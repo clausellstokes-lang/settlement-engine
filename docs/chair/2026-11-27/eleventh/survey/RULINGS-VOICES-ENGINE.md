@@ -96,3 +96,16 @@ THEN: the walker, the id guard by its door, the measures again (quotes a page; t
 share: 0; THE SAMENESS TABLE AGAIN, each pool's top share, the target being one town in ten or fewer for the eight-line
 pools; the twelve towns re-rendered), a real build with the sizes, and "TIP?". The reader of the voices will be sent the
 delta.
+
+**"TIP? d3caec7df" (code d54b266ab; received 15:50 UTC): ACCEPTED AS BUILT (15:51 UTC).** G1-8 and G1-9 as ruled (310 said lines, 53
+liar, 0 ineligible; the card words; 24 re-wordings; any-short.2's negated card word). Records moved 0; lines outside the quotes
+0; share quotes 0; the caps held; the most-printed sentence 6.2% to 3.4% (C) and 4.8% to 2.9% (V); the eight-line pools'
+median top share 8.8% | 8.4%. NAMED, NOT CHASED NOW: the five-line pools' median is 15.1% | 14.3% (41 | 43 of 58 pools still
+over one town in ten); more lines wait on the owner's sample (if he finds repeats, the writers add). The lines ride the lazy
+data chunk (+125,924 B): the owner's size signing.
+**V-2 (the same rule as V-1 (a), made general): THE CAUSE OF A CRISIS NEVER VOICES IT AS ONE WHO SUFFERS IT.** Prabhakund's
+occupying governor now signs the occupation's CRISIS card ("There's no spare time or coin for anything but getting by."). A
+person of the power that CAUSES the crisis on the record (the occupier for an occupation; the power that stopped obeying for
+an insurgency or a rising) does not voice that crisis card; the floor takes the next speaker or the card is silent. Red first
+with Prabhakund; its own small commit after d54b266ab; the measures where they move. THE READER (Opus, max) starts now on
+d54b266ab and reads V-2 as a delta.
