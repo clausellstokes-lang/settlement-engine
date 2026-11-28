@@ -57,6 +57,7 @@ for await (const l of rl) {
   if (j.error) { R.errors++; continue; }
   R.births++;
   const basePicks = j.picks.map((p) => p.split('\t'));
+  if (!j.vars) continue;
   for (const [k, v] of Object.entries(j.vars)) {
     const S = R.byVar[k];
     if (v.skip) { S.skipped++; continue; }
