@@ -55,3 +55,24 @@ describe('a need an import meets under another name is not a need left unmet (it
     expect(town.needed).toContain('mountain_timber');
   }, 120000);
 });
+
+// RULING-R (the eleventh chair, 2026-11-27), R8 luxury (unit B4): a need the place's OWN resources supply (a commodity the
+// Resources tab lists for it, `commoditiesShown.js :: commoditiesShown`, not marked failed) is not printed under "Needed, and
+// not brought in", matched as an import is (`needMetBy`). The one pair that collapses over the measure's C and V: "luxury
+// goods" beside the chip "luxury" of gemstone deposits or precious-metal veins (the chair reads the list). The measure's
+// worked example: C dp-village-2 printed "Needed, and not brought in: stone, luxury goods." beside its "luxury" chip.
+describe('a need the place\'s own resources supply is not a need left unmet (RULING-R, R8 luxury)', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  test('C dp-village-2: its gemstones\' "luxury" leaves "luxury goods" off the need list; its stone need stays', async () => {
+    const { commoditiesShown } = await import('../../../src/domain/display/commoditiesShown.js');
+    const s = generateSettlementPipeline(birthConfig({ settType: 'village' }), null, { seed: 'dp-village-2', customContent: {} });
+    expect(s.config.nearbyResources).toContain('gemstone_deposits');
+    expect(commoditiesShown(s).filter((c) => !c.failed).map((c) => c.label)).toContain('luxury');
+    expect(importsAsPrinted(s).needed).toEqual(['stone']);
+  }, 120000);
+  test('the same village without its own "luxury" keeps the need (the chip, not the place, answers it)', () => {
+    const s = generateSettlementPipeline(birthConfig({ settType: 'village' }), null, { seed: 'dp-village-2', customContent: {} });
+    const bare = { ...s, resourceAnalysis: { ...s.resourceAnalysis, availableResources: s.resourceAnalysis.availableResources.filter((/** @type {string} */ k) => k !== 'luxury') } };
+    expect(importsAsPrinted(bare).needed).toEqual(['stone', 'luxury goods']);
+  }, 120000);
+});

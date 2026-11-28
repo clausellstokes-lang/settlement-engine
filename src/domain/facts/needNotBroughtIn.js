@@ -36,6 +36,8 @@ import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { idOfHouse, impliedGroundsOf, ventureOnPage } from './supplyStory.js'; // NEED-ATOM: two more of its names (no new module)
 import { chainPrintName } from '../display/chainPrintName.js';
 import { LUXURY_CLASS, NOT_A_GOOD } from '../../data/tradeListDeclarations.js'; // their home (imports nothing; FR13 (a))
+import { crisisOf } from './crisisKind.js'; // RULING-R (R8 luxury): the famine in force, as `chainStateShown.js :: failedGroundsOf` reads it
+import { RESOURCE_DISPLAY_LABELS } from '../display/resourceDisplayName.js'; // RULING-R (R8 luxury): the Resources tab's own labels
 import { filterDeclared, lineText } from './drawDeclared.js'; // the kernel's door the luxury pool is read through (FR15)
 
 /**
@@ -214,6 +216,34 @@ function dealtInHere(record, gaps, critical, eco) {
 }
 
 /**
+ * RULING-R (the eleventh chair, 2026-11-27), R8 luxury: THE FAILED FOOD, a COPY of `commoditiesShown.js`'s reading (its
+ * `FAILED_GOODS`, and `facts/tradeAtWork.js :: FOOD_SOURCE_GROUND` as `chainStateShown.js :: failedGroundsOf` reads it; those
+ * modules reach the lazy `chainWorking.js`, so they are not imported here): under a famine in force, the grounds and the
+ * goods of the failed source. Held equal to its homes by the guard.
+ * @type {Readonly<Record<string, Readonly<{ grounds: ReadonlyArray<string>, goods: ReadonlyArray<string> }>>>}
+ */
+export const FAILED_FOOD_COPY = Object.freeze({
+  grain: Object.freeze({ grounds: Object.freeze(['grain_fields', 'fertile_floodplain']), goods: Object.freeze(['grain', 'flour']) }),
+  livestock: Object.freeze({ grounds: Object.freeze(['grazing_land']), goods: Object.freeze(['livestock', 'dairy']) }),
+  fish: Object.freeze({ grounds: Object.freeze(['fishing_grounds', 'river_fish']), goods: Object.freeze(['fish', 'seafood', 'catch']) }),
+  mill: Object.freeze({ grounds: Object.freeze(['river_mills']), goods: Object.freeze(['flour']) }),
+  game: Object.freeze({ grounds: Object.freeze(['hunting_grounds']), goods: Object.freeze(['game meat']) }),
+});
+
+/**
+ * THE PLACE'S OWN COMMODITIES (`tradeListDisplay.js :: ownCommodities`): the Resources tab's list (`commoditiesShown`), each
+ * label the tab's own, the failed food left out (`FAILED_FOOD_COPY`).
+ * @param {NeedRecord} record @param {Record<string, unknown>} eco @returns {string[]}
+ */
+function ownCommodities(record, eco) {
+  const res = /** @type {{ availableResources?: unknown } | null | undefined} */ (record.resourceAnalysis);
+  const source = /** @type {{ foodSecurity?: { foodRecord?: { failedSource?: unknown } | null } | null }} */ (eco).foodSecurity?.foodRecord?.failedSource;
+  const failed = crisisOf(/** @type {object} */ (record)).has('famine') && typeof source === 'string' && Object.hasOwn(FAILED_FOOD_COPY, source) ? FAILED_FOOD_COPY[source] : null;
+  return strings(res?.availableResources).filter((k) => k && !(failed && (failed.grounds.includes(k) || failed.goods.includes(k.toLowerCase().replace(/_/g, ' ')))))
+    .map((k) => (Object.hasOwn(RESOURCE_DISPLAY_LABELS, k) ? RESOURCE_DISPLAY_LABELS[/** @type {keyof typeof RESOURCE_DISPLAY_LABELS} */ (k)] : k.replace(/_/g, ' ')));
+}
+
+/**
  * THE NEED LIST, label by label (`importsAsPrinted(record).needed`).
  * @param {unknown} record the settlement record
  * @returns {string[]} the raw items, in the record's order
@@ -233,9 +263,10 @@ export function needListOf(record) {
   const gaps = arr(res?.gaps);
   const gapGoods = importedByGapRow(gaps);
   const dealt = dealtInHere(r, gaps, critical, eco);
+  const own = ownCommodities(r, eco);
   return keptOnImports(terrain, r, eco.primaryExports).filter((x) => !fromTrade.has(x)
     && !arriving.some((imp) => meets(x, imp)) && !made.some((m) => meets(x, m))
-    && !gapGoods.some((g) => meets(x, g)) && !dealt.some((g) => meets(x, g)));
+    && !gapGoods.some((g) => meets(x, g)) && !dealt.some((g) => meets(x, g)) && !own.some((c) => meets(x, c)));
 }
 
 /**
