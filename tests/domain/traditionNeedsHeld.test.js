@@ -21,6 +21,10 @@ import { deriveFoundingTraditions } from '../../src/domain/traditions/genesis.js
 import { motifNeeds, shownTraditionsOf } from '../../src/domain/traditions/shownTraditions.js';
 import { factsOf } from '../../src/domain/facts/factsOf.js';
 import { atomHolds } from '../../src/domain/facts/factVocabulary.js';
+import { traditionFloorOf } from '../../src/domain/traditions/traditionFloor.js';
+import { TRADITION_ELEMENTS, TRADITION_ACTS } from '../../src/data/traditionCorpus.js';
+import { applyVeil, CARD_KINDS, curateModelFor, resolveVeil } from '../../src/domain/display/galleryVeil.js';
+import { toPublicSafe } from '../../src/domain/display/publicSafe.js';
 
 const SIZES = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
 /** The seeds that drop at least one drawn row on the base (B-count's keys). */
@@ -108,4 +112,50 @@ describe('RULING 122-T: a 0.10.0 birth draws only what the place holds', () => {
       expect(fairs, seed).toEqual([]);
     }
   });
+});
+
+/*
+ * RULING 122-T-2: THE FLOOR IS A FLOOR. The draw asks its needs of `traditionFloorOf` (traditionFloor.js); no veil state of
+ * the record may move an answer there. On the sixty births: every address the curate model offers (on the record and on
+ * its public projection: groupings, switches, whole-house cards, card eyes), every institution eye and class switch, and
+ * every house hidden whole in turn, each alone, then all at once: every atom the corpus declares answers as unveiled.
+ * No cap: every address of every town is walked.
+ */
+describe('RULING 122-T-2: the floor the draw asks is the same under every veil', () => {
+  const ATOMS = [...new Set([...TRADITION_ELEMENTS, ...TRADITION_ACTS].flatMap((x) => /** @type {any} */ (x).needs || []))].sort();
+  /** @param {any} rec */
+  const answers = (rec) => {
+    const facts = /** @type {any} */ (factsOf(traditionFloorOf(rec)));
+    return Object.fromEntries(ATOMS.map((a) => [a, atomHolds(a, facts) ?? null]));
+  };
+  /** @param {any} rec @returns {string[]} */
+  const addressesOf = (rec) => {
+    const model = (/** @type {any} */ doc) => curateModelFor(doc, []).sections.flatMap((/** @type {any} */ sec) => [
+      ...sec.groupings.map((/** @type {any} */ g) => g.address), ...sec.switches.map((/** @type {any} */ w) => w.address),
+      ...sec.cards.flatMap((/** @type {any} */ c) => [...(c.whole ? [c.whole.address] : []), ...c.eyes.map((/** @type {any} */ e) => e.address)]),
+    ]);
+    const eyes = Object.keys(CARD_KINDS.institution.fields);
+    const houses = (rec.institutions || []).flatMap((/** @type {any} */ i) => {
+      const id = CARD_KINDS.institution.idOf(i);
+      return [`card:institution:${id}`, ...eyes.map((f) => `field:institution:${id}:${f}`)];
+    });
+    return [...new Set([...model(rec), ...model(toPublicSafe(rec)), ...houses, ...eyes.map((f) => `class:institution:${f}`)])];
+  };
+
+  test('every declared atom answers at the floor as unveiled, each address alone and all at once', () => {
+    expect(ATOMS, 'the atoms the corpus declares').toEqual(expect.arrayContaining(['market', 'institution: smith', 'navigable', 'river', 'coast']));
+    let runs = 0; let houseHides = 0;
+    for (const [seed, town] of born) {
+      const base = answers(town);
+      const all = addressesOf(town);
+      for (const a of all) {
+        runs += 1;
+        if (a.startsWith('card:institution:')) houseHides += 1;
+        expect(answers(applyVeil(town, new Set([a]))), `${seed}: ${a}`).toEqual(base);
+      }
+      expect(answers(applyVeil(town, resolveVeil(null, all.map((address) => ({ address, hidden: true }))))), `${seed}: all at once`).toEqual(base);
+    }
+    expect(houseHides, 'anchored: every house of every town was hidden in turn').toBeGreaterThan(born.size);
+    expect(runs).toBeGreaterThan(houseHides);
+  }, 600000);
 });
