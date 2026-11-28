@@ -946,3 +946,36 @@ See section 4, newest last.
   pair and the empty slots at 0; it merges the line when 122 and 123 land and carries the two new refusals as declarations.
 - **STILL OWED TO THE CHAIR:** the reader's report on point 123; VOICES-ENGINE's split of the walker's classes (G1-2);
   the "TIP?"s of SURVEY-TABLE (S-C, S-B2), SURVEY-FINAL (S-A), RENAME-BUILD (K1 to K3), VOICES-ENGINE.
+
+## V33 (07:41 UTC on 2026-11-28): THE READER's FINAL REPORT ON 122 AND 123 FILED AND RULED ("122 does not stand; 123 stands"); CURE-122B's FIRST ROUND IN, ITS SECOND RUNNING; THE SURVEY's FIRST HALF BUILT (S-A, S-B, S-C), S-B2 AND TWO SMALL RULINGS BUILDING
+- **THE READER (07:39 UTC; `landing/122/SECOND-READER-122-123.txt`, `reader-notes.md`, 598 lines):** nine findings. POINT 123:
+  births moved 261 | 226, every value borne by one item, no item 0; 18 of 18 mutants red; build and boot clean; BUT NOT ONLY
+  AT BIRTH: C3 reaches saved towns at print (the need list loses "luxury goods" in 120 | 37: RULED RIGHT, the landing record
+  says "at birth and at print"); 13 saved palm towns of V lose "grain" from the made-here list though the record holds it:
+  **RULING 123-C2-1: a stored item of the record's own list is not dropped on the catalogue's word** (given to CURE-122B).
+  C2's three unnamed keys (a critical grain import in 6 towns, "Grain Sales" gone in 3, one gap row) are its own consequence.
+- **CURE-122B, round 1 (tip c517a9adf on the join's tree, NOT pushed):** unit 1 the debt rule (innocents 0, records 0;
+  header to vid 3 in 17 | 7, to nothing in 45 | 23; treasury tile to vid 2 1 | 5, to vid 4 16 | 4); unit 2 every missing test,
+  each red on its mutant; unit 3a the critical-import reader a leaf (PDF worker 13 modules anew to 4; real build 3,150,639 to
+  3,149,937; boot smoke green); unit 4 "gold or silver ore". Registers by their doors. `tests/lint` at its four known reds.
+  ROUND 2 (running): **122-B-3** the floor's own copy of the function-eye names in a leaf, held equal to the veil's
+  declaration by a guard (the advance worker); unit 4b the slash at two more sites; 123-C2-1.
+  THE EMPTY SLOTS (45 | 23 headers, 2 | 18 tiles) ARE A RELEASE BLOCKER BY NAME until S-B2 lands (prerelease list).
+- **THEN:** the chair pushes `lane/stack-123-wip-2026-11-28`, the reader makes ONE SHORT DELTA READ (asked; it holds its
+  machine), then 122 and 123 land as V31 says (the two rows and gate paragraphs; RED-AT-LINE gains the herald golden's row;
+  `tests/lint` whole and the touched files were re-run by the builder; the whole suite in four shards ran at b693c4605:
+  the chair decides at the landing whether the cure's size asks a second whole run: its src changes are three small files
+  and two leaves, so the plan is touched files, `tests/lint`, `tests/architecture`, `tests/security`, `tests/pdf` and the
+  build, not four shards again).
+- **THE SURVEY:** SURVEY-TABLE "TIP? S-C 6d0a1b973" ACCEPTED AS BUILT (the page clash census opens at 33: prosperity 29,
+  guild 3, presence 1); its S-B2 measured (place debt 88 | 79 towns; nothing laid by alone 388 | 321) and its plan approved
+  with ruling **S-B-2: a declaration says what the sentence leans on and nothing else** (two gap-filler gates taken out).
+  SURVEY-FINAL "TIP? b93768295" ACCEPTED AS BUILT (0 records; 42 descriptions, 4 hook towns); **S-A-2** (the re-answer on
+  the caller's thread: the PDF worker carries no table; it had gained 171,326 B) and **S-A-3** (a description the record
+  marks DM-edited is never re-answered) building. THE INDEPENDENT READER OF THE SURVEY's FIRST HALF starts when S-B2 and
+  S-A-2/3 are in (top tier, max; read the account's window first).
+- **VOICES-ENGINE (06:13):** six screen sites, the PDF twin, the session card, the share plant (no quote on a shared page)
+  built and green alone; the draft tuning row ruled (its values the owner's); THE CLASS SPLIT STILL OWED before the
+  voice-scope rule; C and V running. PDF worker +103,516 B (the lines): asked what a lazy fetch would cost.
+- **RENAME-BUILD (06:14):** K1 cured at d1ad508bf, 30 test files re-pointed (ledger `rename/build/K1-REPOINTS.md`), the
+  wider 345 files and the corpora running.
