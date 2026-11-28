@@ -63,11 +63,12 @@ describe("TAIL-POWERS-2 · P4: under an occupation the seat does not govern; it 
     }, 120_000);
   }
   // KEEP: where no occupation stands, the seat's own line and "governs <town>" print as before
-  it('r2r-metropolis-15 (no occupation): "A duke or duchess governs" and "governs Nandamala." still print', () => {
+  it('r2r-metropolis-15 (no occupation): "A duke or duchess governs" and "Nandamala is governed by" still print', () => {
     const s = born('r2r-metropolis-15');
     const gov = s.powerStructure.factions.find((/** @type {any} */ f) => f.isGoverning);
     expect(gov.desc).toContain('A duke or duchess governs the metropolis by royal appointment');
-    expect(governanceAccountOf(s)?.text || '').toContain('The Ducal Governorship governs Nandamala.');
+    // point 124 (the arrangement keys on the town's id): the same fact in the arrangement the id draws (it read "The Ducal Governorship governs Nandamala.")
+    expect(governanceAccountOf(s)?.text || '').toContain('Nandamala is governed by the Ducal Governorship.');
   }, 120_000);
   it('r2r-city-44 (no occupation): a power that broke with the hall still "takes its orders no longer"', () => {
     expect(governanceAccountOf(born('r2r-city-44'))?.text || '').toMatch(/takes its orders no longer\.|no longer takes its orders\./);

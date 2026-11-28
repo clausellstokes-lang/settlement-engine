@@ -25,7 +25,7 @@ const account = (s) => governanceAccountOf(s, { primaryStress: resolvePrimaryStr
 const CURED = [
   ['r2r-city-56', "The Thieves' Guild is at odds with it.", 'The Merchant Guild Council governs Spitzgate.'],
   ['r2r-metropolis-44', "The Thieves' Guild is at odds with it.", 'The Grand Guild Consortium governs Tallchowk.'],
-  ['r2r-metropolis-59', "The Thieves' Guild is at odds with it.", 'Dongcheng is governed by the Democratic assembly.'],
+  ['r2r-metropolis-59', "The Thieves' Guild is at odds with it.", 'The Democratic assembly governs Dongcheng.'], // point 124: the arrangement the town's id draws
 ];
 const KEPT = [['r2r-thorp-27', 'The Occupation Authority is at odds with it.']];
 const TEXT = new Map();

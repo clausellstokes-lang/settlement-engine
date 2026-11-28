@@ -57,7 +57,7 @@ const CENSUS_720 = [
   ...STRESSES.flatMap((st) => SIZES.flatMap((size) => [0, 1, 2, 3].map((i) => `r2s-${st}-${size}-${i}`))),
 ];
 /** The read towns of REVIEW-BAR-4's six rows (not among the 720). */
-const READ = ['bar0-village-calm-rand-22', 'bar0-city-under_siege+famine-rand-21', 'bar0-hamlet-under_siege-rand-23', 'bar0-village-famine-rand-21', 'bar0-city-under_siege+famine-rand-23'];
+const READ = ['bar0-village-calm-rand-22', 'bar0-city-under_siege+famine-rand-2', 'bar0-hamlet-under_siege-rand-0', 'bar0-village-famine-rand-21', 'bar0-city-under_siege+famine-rand-23'];
 const SAMPLE = [...CENSUS_720, ...READ];
 /**
  * The covert-service-only town (r2r-village-12) was OWED at e52d55824: the survival line was settled where the services were not
@@ -98,7 +98,10 @@ describe('BAR4-SAFETY: the three kinds read one settled fact each', () => {
     const rota = linesOf(town('bar0-village-calm-rand-22')).guard;
     expect(guardPayOf(town('bar0-village-calm-rand-22')), 'C44796: the village watch is an unpaid rota').toBe('unpaid');
     expect(rota.join(' '), 'C44796: the drawn line\'s rota twin prints (no wage, no kit the gate denies)').toContain('The local watch is unpaid, but walks the rounds properly.');
-    for (const [seed, name] of [['bar0-city-under_siege+famine-rand-21', 'Qingkou'], ['bar0-hamlet-under_siege-rand-23', 'Darhankul']]) {
+    // RE-KEYED BY IDENTITY (point 124: Tonight's vantage column keys on the town's id): bar0-city-under_siege+famine-rand-21 (Qingkou) no
+    // longer draws the column the advancing twin stands in; -2 (Evangeopolis) is the lowest of its family (probed 0..79) that does;
+    // likewise bar0-hamlet-under_siege-rand-23 (Darhankul) -> -0 (Madinatkot)
+    for (const [seed, name] of [['bar0-city-under_siege+famine-rand-2', 'Evangeopolis'], ['bar0-hamlet-under_siege-rand-0', 'Madinatkot']]) {
       expect(siegeMotionOf(town(seed)), `${seed}: the siege advances`).toBe('advancing');
       expect(linesOf(town(seed)).tonight.join(' '), `${seed}: the advancing twin prints`).toContain(`The besiegers around ${name} tighten their lines each week`);
     }

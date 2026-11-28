@@ -150,7 +150,7 @@ const SPEAKING = {
   // this seed. Since car 8a-13 both anchors are COMPUTED from this seed through the shipped
   // read path (`tests/helpers/drawnProse.js`), so the seed is no longer load-bearing and the
   // next draw change moves the member and the anchor together. `id` and `saveId` stay
-  // `forge_town` — only `_seed` reaches the draw.
+  // `forge_town`; since point 124 the draw keys on the id first (`pickKeyOf`), and the anchors are drawn on that same key.
   id: 'forge_town', name: 'Forge Town', _seed: 'forge_town-b', tier: 'town',
   economicState: {
     prosperity: 'Comfortable', economicComplexity: 'a market town', tradeAccess: 'road',
@@ -188,7 +188,7 @@ const { HEADER_SENTENCE, FOOD_SENTENCE } = drawnMembers({
   // which the kernel reads against `facts` fail-closed — so the spec hands in `factsOf(SPEAKING)`,
   // exactly what the desk hands in at its entry (`economyStateProse.js` → `factsAnswered`).
 }, {
-  leaf: 'economy', seed: SPEAKING._seed, slots: ECO_SLOTS,
+  leaf: 'economy', seed: pickKeyOf(SPEAKING, SPEAKING._seed), slots: ECO_SLOTS,
   dimensions: crisisDimensionsOf(SPEAKING), facts: factsOf(SPEAKING),
 });
 
@@ -523,6 +523,7 @@ import { tierNounFor, weaveBlock } from '../../src/domain/display/stateProse/wea
 import { speakTierNoun } from '../../src/domain/display/stateProse/tierVoice.js';
 import { legibilityRung } from '../../src/domain/display/stateProse/legibilityRung.js';
 import { SILENT_ECONOMY_DESK } from '../../src/components/new/economyDeskRead.js';
+import { pickKeyOf } from '../../src/domain/display/pickKey.js'; // point 124: every anchor is drawn on the desk's own key
 
 /**
  * THE FIXTURE CARRIES NO `_seed` AND NO `id`, so every draw is CANONICAL-AT-ZERO (kernel law

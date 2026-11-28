@@ -93,7 +93,10 @@ describe("(ii) the review's specimens, by text (each anchor computed from the DM
   });
 
   it("the second path: a veiled governing face's title and role never reach the shipped paragraph; the DM view keeps them", () => {
-    const owner = structuredClone(town(15));
+    // RE-KEYED BY IDENTITY (point 124: the arrangement keys on the town's id): soak1k-15's DM paragraph no longer opens on its seat-holder;
+    // soak1k-12 is the lowest town of the sweep (probed 0..199) whose paragraph does and whose veiled face is still named, so it
+    // holds the specimen's case
+    const owner = structuredClone(town(12));
     const governing = owner.powerStructure.factions.find((f) => f.isGoverning)?.faction;
     const dmBefore = governanceAccountRead(owner, {}).text;
     const face = owner.npcs.find((n) => n.name && dmBefore.startsWith(`${n.name}, `));

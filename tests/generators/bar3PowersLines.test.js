@@ -67,7 +67,7 @@ const KEEP = /** @type {Array<[string, string, (t: any) => string, string]>} */ 
   ['C11669', 'r2s-monster_pressure-town-0', (t) => descOf(t, /military|guard/i), 'Undermanned and underfunded; unable to enforce law consistently and aware of it.'],
   ['C27440', 'r2r-town-20', conflictOf, 'The merchants have stopped attending the sessions.'],
   ['C36418', 'r2s-famine-village-0', conflictOf, 'The last harvest failed badly.'],
-  ['C31100', 'r2r-city-10', accountOf, 'without bargaining with them first.'],
+  ['C31100', 'r2r-city-10', accountOf, 'Without bargaining with them first, the hall settles nothing large.'], // point 124: the same clause, in the arrangement the town's id draws
   ['C21481', 'r2r-village-7', (t) => relationOf(t, 'Elder Council', 'Religious Authorities'), 'Each props up the other.'],
 ]);
 

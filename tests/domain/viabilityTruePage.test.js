@@ -177,12 +177,15 @@ describe('RULING-R B2: no savings or pays-its-way line beside a present place de
   // RULING 122-B-1 (i), the chair, 2026-11-27: the timeline's outside_debt event is the place owing only where its page says
   // the creditor is collecting NOW, its hook printed on the Plot Hooks tab (`collectPlotHooks`). An old Debt Crisis whose
   // event carries no hook prints only its past in the History timeline: there "pays its way" still prints.
-  test('C dp-thorp-4 and dp-town-120 (an old Debt Crisis, no hook printed): "pays its way" still prints', () => {
+  test('C dp-thorp-4 and dp-town-99 (an old Debt Crisis, no hook printed): "pays its way" still prints', () => {
     const thorp = c('dp-thorp-4');
     const ev = (thorp.history.historicalEvents || []).filter((/** @type {any} */ e) => e.templateType === 'outside_debt');
     expect(ev.map((/** @type {any} */ e) => [e.yearsAgo, (e.plotHooks || []).length])).toEqual([[83, 0]]);
-    expect(String(deriveViability(thorp).summary)).toMatch(/feeds itself and pays its own way\./);
-    const town = c('dp-town-120');
+    // point 124 (the keyed draw stands on the town's id): the pays-its-way row drawn is now SS5 (gate `paysItsWay` as SS1's), not SS1
+    expect(String(deriveViability(thorp).summary)).toMatch(/what it spends it earns; some of what it uses is bought in\./);
+    // point 124 (the desk keys on the town's id): dp-town-120 no longer draws C3 v2; dp-town-99 (an old Debt Crisis 178 years ago,
+    // no hook) is the first C town of the case that does (probed dp-town-0..149)
+    const town = c('dp-town-99');
     expect(printed(town).includes(words('DS-ECO-1', 'COMBINATION C3: the middle rungs', 2, town))).toBe(true);
   }, 120000);
   test('DS-POW-6 "operation role unlicensed revenue" v2 no longer says the town owes (re-worded in place, its vid kept)', () => {

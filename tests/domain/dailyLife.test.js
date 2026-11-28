@@ -382,7 +382,8 @@ describe('recent_changes behavior', () => {
     expect([town.stress].flat().map((e) => e?.type)).toContain('plague_onset');
     const text = deriveDailyLife(town, { audience: 'owner' }).slots.recent_changes.text;
     expect(IMMINENT_OF('plague').filter((t) => text.includes(t))).toEqual([]);
-    expect(text).toBe('A fever has begun to go round, and people are keeping their distance.');
+    // point 124 (the pick keys on the town's id): the in-force plague line is now K1 of the same pool (it was K2 under the name)
+    expect(text).toBe('Sickness has broken out in the place, and more people are falling ill.');
   });
 });
 

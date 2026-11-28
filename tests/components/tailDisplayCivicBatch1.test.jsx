@@ -52,11 +52,11 @@ const ACCOUNT_CURED = [
   ['r2s-occupied-thorp-1', 'The Elder Council governs Amarkota.', 'The Elder Council answers to the occupiers of Amarkota.'],
   ['r2s-occupied-metropolis-0', 'Chrissopetra is governed by the Grand Guild Consortium.', 'The Grand Guild Consortium answers to the occupiers of Chrissopetra.'],
   ['r2r-thorp-24', 'The Household Council governs Sanctaminus.', 'The Household Council answers to the occupiers of Sanctaminus.'],
-  ['r2s-mass_migration-town-0', 'Crime is the reason.', 'Insecurity is the reason.'],
+  ['r2s-mass_migration-town-0', 'Crime has left the Church Council', 'Insecurity has left the Church Council'], // point 124: the pair in the arrangement the town's id draws (was 'Crime is the reason.' / 'Insecurity is the reason.')
   // the lit birth's value (THE FLIP, 2026-11-23): r2r-city-3's seat stands Contested lit (Tolerated before), so the slot's
   // sentence is the Contested one; it names insecurity, not crime (was 'Crime is the reason.' / 'Insecurity is the reason.')
   ['r2r-city-3', 'Crime has left the City-State Council\'s right to rule contested in Androntopia.', 'Insecurity has left the City-State Council\'s right to rule contested in Androntopia.'],
-  ['r2s-occupied-thorp-1', 'Poverty and crime have cost the Elder Council its standing.', 'Poverty and insecurity have cost the Elder Council its standing.'],
+  ['r2s-occupied-thorp-1', 'Poverty and crime have cost it its standing.', 'Poverty and insecurity have cost it its standing.'], // point 124: the arrangement the town's id draws names the council in the sentence before
   ['r2r-thorp-24', 'Poverty and crime are the reason.', 'Poverty and the curfew are the reason.'],
 ];
 // [seed, the true sibling that must still print]

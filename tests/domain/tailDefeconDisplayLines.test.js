@@ -34,26 +34,26 @@ const GONE = [
     'gets through the year on its own land and trades, and goes without what they do not provide.'],
   // D13 STABLE-PICKS (point 120): each viability row below sits on a place that DRAWS the line it guards under the rendezvous
   // (DC2 for #00628; DC4 for #14073, #14072, #14075; DC3 out-hashing the rest but refused for #01134), so the old words red it
-  ['00628', 'r2s-plague_onset-thorp-1', 'and the difference arrives', 'grows less than it eats, and part of the difference arrives'],
+  ['00628', 'r2s-plague_onset-thorp-9', 'and the difference arrives', 'grows less than it eats, and part of the difference arrives'], // point 124 (the keys stand on the town's id): re-keyed by identity from r2s-plague_onset-thorp-1, probed
   ['14073', 'r2s-plague_onset-hamlet-5', 'Much of what', 'eats is brought in by road; its own land does not produce enough.'],
-  ['14072', 'r2s-slave_revolt-village-7', 'Much of what', 'eats is brought in by river; its own land does not produce enough.'],
-  ['14075', 'r2s-plague_onset-village-11', 'Much of what', 'eats is brought in from outside; its own land does not produce enough.'],
+  ['14072', 'r2s-slave_revolt-village-12', 'Much of what', 'eats is brought in by river; its own land does not produce enough.'], // point 124 (the keys stand on the town's id): re-keyed by identity from r2s-slave_revolt-village-7, probed
+  ['14075', 'r2s-plague_onset-village-28', 'Much of what', 'eats is brought in from outside; its own land does not produce enough.'], // point 124 (the keys stand on the town's id): re-keyed by identity from r2s-plague_onset-village-11, probed
   ['01134', 'r2s-slave_revolt-town-5', 'keeps order and pays its way', 'eats is brought in by road; its own land does not produce enough.'],
   ['B13779', 'r2s-plague_onset-thorp-0', 'the sick are tended by their own families', "No healer's house stands here; the sick are tended by one of the place's own."],
   ['B02441', 'r2r-city-2', 'A criminal operation with a hold on part of the place or its trade.', 'A quarter given over to pleasure: a trade that runs at the edge of the law.'],
   ['B00162', 'r2s-occupied-town-1', 'criminal ring decides what crime is allowed', 'Crime here is run as a business: its money passes through shops that look honest, and whoever runs it keeps out of sight.'],
-  ['B11428', 'r2s-plague_onset-village-3', 'It keeps the streets quiet', 'Ask who runs crime here and the answer is one ring.'], // point 121: the next vantage in rank (RING-2 > RING-4 > …)
+  ['B11428', 'r2s-plague_onset-village-3', 'It keeps the streets quiet', 'One criminal ring decides what crime is allowed here.'], // point 121: the next vantage in rank (RING-2 > RING-4 > …) // point 124: under the id RING-2 still heads the rank (refused: streets not quiet) and the next is RING-1 (it was RING-4)
   ['09264', 'r2s-plague_onset-thorp-0', 'for about two months at full rations', 'household stores would carry the thorp for about a month and a half at full rations'],
 ];
 /** [row, seed, a true sibling that must still print] */
 const KEEP = [
   ['00585', 'r2r-thorp-6', 'buying in some of what its own land and trades do not provide'], // VIABILITY-TRUE (G61)
-  ['00628', 'r2r-thorp-16', 'cannot feed itself: part of its food comes in by road.'],
+  ['00628', 'r2r-thorp-4', 'cannot feed itself: part of its food comes in by road.'], // point 124 (the keys stand on the town's id): re-keyed by identity from r2r-thorp-16, probed
   ['01134', 'r2r-town-13', 'keeps order and pays its way, but it has to buy food'], // D13: a DC3 drawer
   ['B13779', 'r2r-thorp-0', 'No healer is kept here; the sick are tended by their own families.'],
   ['B02441', 'r2r-city-2', 'Operates unlicensed gambling.'],
-  ['B00162', 'r2r-town-40', 'One criminal ring decides what crime is allowed here.'], // point 121: re-seated from r2r-town-7 (its rank now heads RING-4) to a town whose rank heads RING-1
-  ['B11428', 'r2r-town-0', 'It keeps the streets quiet because trouble brings the law'],
+  ['B00162', 'r2r-town-7', 'One criminal ring decides what crime is allowed here.'], // point 121: re-seated from r2r-town-7 (its rank now heads RING-4) to a town whose rank heads RING-1 // point 124 (the keys stand on the town's id): re-keyed by identity from r2r-town-40, probed
+  ['B11428', 'r2r-town-35', 'It keeps the streets quiet because trouble brings the law'], // point 124 (the keys stand on the town's id): re-keyed by identity from r2r-town-0, probed
   // the lit birth's value (THE FLIP, 2026-11-23, both birth laws lit): the granary's months moved (was "about five months")
   ['09264', 'r2r-town-0', 'the granary would carry the town for about six months at full rations'],
 ];

@@ -89,7 +89,9 @@ const PLACES = [];
 // prints no export and the header line prints on the screen or in the PDF; the first three found (the landing helper's
 // diagnostic): the thorps Fjordthorpe, Weiqiao and Haipo. Only the Economics tab is rendered for them.
 const HEADER_DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true };
-const HEADER_KEYS = /** @type {const} */ ([['thorp', 'diag118b-thorp-690'], ['thorp', 'diag118b-thorp-720'], ['thorp', 'diag118b-thorp-942']]);
+// RE-WALKED (point 124, 2026-11-28: the desk keys on the town's id): the same walk from i = 0 finds the first three now at 1307, 1661
+// and 1692 (they were the thorps 690, 720 and 942, which no longer draw the line)
+const HEADER_KEYS = /** @type {const} */ ([['village', 'diag118b-village-1307'], ['village', 'diag118b-village-1661'], ['thorp', 'diag118b-thorp-1692']]);
 /** @type {Array<{s: object, pages: Record<string, string>}>} */
 const HEADER_PLACES = [];
 beforeAll(async () => {

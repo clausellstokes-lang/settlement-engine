@@ -76,14 +76,18 @@ const CURED = [
   // Lit, r2r-city-37 no longer prints it, nor any r2r-city of 200; r2r-town-7 is the lowest census r2r seed that prints the
   // pair (town 7, 111, 188; metropolis 69 ...). The original pair kept (was r2r-city-37)
   ['r2r-town-7', 'The hall is at odds with the Military/Guard.', 'The hall is at odds with the Guard.'],
-  ['r2r-village-50', 'The hall is at odds with the Military/Guard and the Religious Authorities.', 'The hall is at odds with the Guard and the Religious Authorities.'],
-  ['r2r-town-27', POW6('Military/Guard'), POW6(powerNameWithArticle('Military/Guard'))], // NAMES-1 (CN1): the article
+  // point 124 (the arrangement keys on the town's id): r2r-village-50 now names its two estranged powers as the subject; the pair
+  // in that arrangement (was 'The hall is at odds with the Military/Guard and the Religious Authorities.' / '... the Guard and ...')
+  ['r2r-village-50', 'The Military/Guard and the Religious Authorities are at odds with it.', 'The Guard and the Religious Authorities are at odds with it.'],
+  // point 124: r2r-town-27 and r2r-hamlet-128 swapped DS-POW-6's two forms under the id key; each row keeps its own form and moves
+  // to the town that prints it (was r2r-town-27 here, r2r-hamlet-128 in the "answers to" row below)
+  ['r2r-hamlet-128', POW6('Military/Guard'), POW6(powerNameWithArticle('Military/Guard'))], // NAMES-1 (CN1): the article
   ['r2r-city-37', POW4('Military/Guard'), POW4(powerNameWithArticle('Military/Guard'))], // NAMES-1 (CN1): the article
   ['r2r-metropolis-50', POW4C('Military/Guard'), POW4C(powerNameWithArticle('Military/Guard'))], // NAMES-1 (CN1): the article
   // RE-PICKED BY THE PREMISE (THE FLIP, CLOSE-6 F-FORTUNE-2, 2026-11-23; CLOSE-6's ruling): the case is the sentence-start
   // "answers to" form. Lit, r2r-hamlet-27's Guard no longer answers to the hall; r2r-hamlet-128 is the lowest r2r-hamlet of 200
   // that prints it (128, 143), its hall the Feudal Stewardship (was r2r-hamlet-27, 'Military/Guard answers to the Elder Council')
-  ['r2r-hamlet-128', POW6A('Military/Guard', 'Feudal Stewardship'), POW6A(powerSentenceName('Military/Guard'), 'Feudal Stewardship')], // the leaf's sentence-start form: the power leads
+  ['r2r-town-27', POW6A('Military/Guard', 'Feudal Appointee'), POW6A(powerSentenceName('Military/Guard'), 'Feudal Appointee')], // the leaf's sentence-start form: the power leads (point 124: was r2r-hamlet-128, its hall the Feudal Stewardship)
   ['r2r-metropolis-8', 'Noble Claimant (Senior Line) and Noble Claimant (Reform Line) contend for it.', 'The Senior Line and the Reform Line contend for it.'],
   ['r2r-metropolis-39', 'Bloc will back whichever side meets its price.', 'The Neutrals will back whichever side meets their price.'],
 ];

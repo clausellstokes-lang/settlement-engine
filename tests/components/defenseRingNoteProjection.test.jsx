@@ -40,9 +40,11 @@ function paragraphs(element) {
 }
 
 describe('the organized-ring note: the shared Defense tab prints the owner\'s seeded variant', () => {
-  it('soak1k-10, soak1k-11 and soak1k-41: each prints its seeded variant on the shared tab, three variants in all', () => {
+  // RE-KEYED BY IDENTITY (point 124, 2026-11-28: the vantage keys on the town's id): soak1k-41 now draws RING-1, as soak1k-10 does;
+  // soak1k-35 is the lowest town of the sweep (0..199, probed) that draws a third vantage (RING-4) and prints it, owner and shared
+  it('soak1k-10, soak1k-11 and soak1k-35: each prints its seeded variant on the shared tab, three variants in all', () => {
     const variants = new Set();
-    for (const i of [10, 11, 41]) {
+    for (const i of [10, 11, 35]) {
       const owner = birth(i).settlement;
       const note = criminalStructureOf(owner)?.note;
       expect(typeof note === 'string' && note.length > 0, `soak1k-${i}: anchored, the town has an organized ring`).toBe(true);
@@ -53,7 +55,7 @@ describe('the organized-ring note: the shared Defense tab prints the owner\'s se
     }
     expect(variants.size).toBe(3);
   });
-  it('an unstamped shared record renders the note locally, as before (no seed: the original sentence)', () => {
+  it('an unstamped shared record renders the note locally, as before (no seed; since point 124 keyed on the id the share keeps)', () => {
     const owner = birth(10).settlement;
     const unstamped = projectShareVeil(toPublicSafe(owner), null);
     const local = criminalStructureOf(unstamped)?.note;
