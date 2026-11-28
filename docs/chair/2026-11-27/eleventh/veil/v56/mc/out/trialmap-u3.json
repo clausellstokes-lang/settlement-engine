@@ -1,0 +1,58 @@
+{
+ "db": "mct_u3",
+ "phases": [
+  {
+   "label": "as built",
+   "unmarked": {
+    "wallMs": 60973,
+    "perMemberMs": 435.5,
+    "members": 140,
+    "md5": "bb7f595c44f61caf26994aba6b394cd6"
+   },
+   "marked": {
+    "wallMs": 61477,
+    "perMemberMs": 439.1,
+    "members": 140,
+    "md5": "251c236663712e28c64c973c4b3c43fa"
+   }
+  },
+  {
+   "label": "trial-roster.sql",
+   "unmarked": {
+    "wallMs": 49490,
+    "perMemberMs": 353.5,
+    "members": 140,
+    "md5": "bb7f595c44f61caf26994aba6b394cd6"
+   },
+   "marked": {
+    "wallMs": 48616,
+    "perMemberMs": 347.3,
+    "members": 140,
+    "md5": "251c236663712e28c64c973c4b3c43fa"
+   },
+   "sameAsBuilt": {
+    "unmarked": true,
+    "marked": true
+   }
+  },
+  {
+   "label": "trial-sanit.sql",
+   "unmarked": {
+    "wallMs": 47319,
+    "perMemberMs": 338,
+    "members": 140,
+    "md5": "bb7f595c44f61caf26994aba6b394cd6"
+   },
+   "marked": {
+    "wallMs": 46431,
+    "perMemberMs": 331.7,
+    "members": 140,
+    "md5": "251c236663712e28c64c973c4b3c43fa"
+   },
+   "sameAsBuilt": {
+    "unmarked": true,
+    "marked": true
+   }
+  }
+ ]
+}
