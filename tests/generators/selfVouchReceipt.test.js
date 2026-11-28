@@ -16,6 +16,7 @@ import { beforeAll, describe, expect, it } from 'vitest';
 import { birth, ensureLaws } from '../../scripts/audit/soak-review/corpus.mjs';
 import { generalDeskLines } from '../../src/components/new/generalDeskRead.js';
 import { poolMemberTexts } from '../helpers/drawnProse.js';
+import { criticalIssuesOf } from '../../src/domain/display/validationOnPage.js';
 
 // Re-keyed at W5 HIS's style pass (2026-11-07): the three vouch lines of DS-GEN-11 `criticalIssueCount zero`, plainly worded.
 const VOUCH = /contradicts anything else|nothing contradicting anything else|nothing about it fails to add up|account of itself (?:is|stays) clean/;
@@ -55,7 +56,7 @@ describe('the self-vouch line follows the receipt\'s battery judgment', () => {
     // RE-KEYED BY CAUSE (URBAN-FIX B-P1, 1b3436acd): the tier-noun finding was the Shadows District's "Old town or
     // slums" on this city, the instrument's false positive the licence row cured; one contradiction remains.
     expect(judgment.findings.map((f) => f.path)).toEqual(['battery.tier-noun']);
-    expect(verdict(settlement)).not.toMatch(VOUCH); // anchored: the next lines pin the live contradiction verdict
+    expect(verdict(settlement)).not.toMatch(VOUCH); // anchored: the verdict is pinned exactly at the end of this case
     // RE-KEYED BY CAUSE (point 89, e7096fe96: BUILD-1 appended DS-GEN-11's contradiction members v4..v7, and the draw is a hash
     // over the eligible members): the anchor was one member's wording (/cannot all be true/, v1 and v3) and the page now
     // prints v4. It is COMPUTED from the pool's own members, filled with the record's own name (`{band}` stays reserved,
@@ -69,6 +70,12 @@ describe('the self-vouch line follows the receipt\'s battery judgment', () => {
     // the staff panel; the Outlook tab lists no contradiction here) no longer prints the contradiction pool: the page neither
     // vouches (above) nor claims a contradiction it does not name. The members are computed above, so this is not vacuous.
     expect(contradiction.some((line) => verdict(settlement).includes(line)), `the verdict prints a contradiction member: ${verdict(settlement)}`).toBe(false);
+    // THE POSITIVE ANCHOR (RULING 122-B-2, F6, UNIT 2 (d)): both expects above are negatives, so an empty verdict passes them.
+    // What the verdict DOES print for this town at the tip is nothing: the battery says "needs review", the receipt is not
+    // clean, and the Outlook lists no critical issue by title (R7's key, generalStateProse.js :: criticalIssuePoolKey), so
+    // the contradiction lens is silent. Pinned exactly: a verdict that ever prints here, vouching or not, reds.
+    expect(criticalIssuesOf(settlement.economicViability).filter((i) => i?.type !== 'stress_consequence' && i?.title)).toEqual([]);
+    expect(generalDeskLines(settlement).viability.verdictLines).toEqual([]);
   });
 
   // 2026-11-04 (chair's ruling P1): SOAK-3 re-dealt the corpus (the de-aliased cellFor), so the old seed no longer carries this case's premise; re-pointed to the first seed of the new corpus that does (a record the battery finds clean that prints this line): was soak1k-278. Re-picked 2026-11-04 after x46-1b and x46-3 composed (the budget moved the corpus again).
