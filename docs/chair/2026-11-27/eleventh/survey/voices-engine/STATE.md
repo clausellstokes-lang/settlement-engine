@@ -10,4 +10,7 @@
   my test files; typecheck ratchet; domain strict; build; bootSmoke 9+2 skipped; vendorPdfLazy has the base's four reds.
 - MEASURED (MEASURE.md): C and V, errors 0, RECORDS MOVED 0, lines outside the quotes moved 0, share quotes 0, caps held.
 - NOT MINE (red on 003fd3b07): proseCorpusBytes, proseComposed.
-- NEXT: the "TIP?" has been sent (TIP.md); wait for the chair and the independent reader.
+- AFTER THE TIP (the chair accepted 56cb9876c; the independent reader reads 96cb62121; these are the delta on top):
+  G1-7 (786f7b26e) the Tonight sheet holds no quote in print; G1-5 (ae7b4d01e) the PDF worker carries no lines (+1,334 B
+  against 003fd3b07; the first paint within a few bytes of the base); G1-6 SAMENESS.md (measuring only).
+- NEXT: C and V PDF counts again (vm/chain7), MEASURE.md, then a short "TIP?" (at most 150 words).
