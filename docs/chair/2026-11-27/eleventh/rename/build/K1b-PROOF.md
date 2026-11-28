@@ -43,7 +43,8 @@ Every count is a script's (CONFIRMED).
 ## Named, not changed
 
 - **A share stamped before K1b** keeps its old traditions rows until the next save, because `PUBLIC_PROSE_VERSION` is not bumped (the chair's ruling K1-1 (iv)). The stamp is re-composed on 150 of 150 (above). This is named for the share lane.
-- **faithObservationFloorWf0:** red 2 of 15 under K1b, and green with K1b reverted. Its corpus is the soak's own seed. It awaits the chair's word (`K1b-REKEYS.md`).
+- **faithObservationFloorWf0: RED 2 of 15 under K1b, NAMED** (the chair's ruling K1b-4). The two reds are TRUE: under the id-keyed draw the soak's planned patron host soak-a founds no rite that draws pilgrims (the K1b-2 table in `K1b-REKEYS.md`). The test is green with K1b reverted. The fixture and both test files are untouched.
+  - The two seatings that would make it green are kept for the owner's soak redo, with what each breaks: `tools/K1b-WF0-PATCHES.md`.
 - **Goldens:** none is re-recorded.
   - The goldens and pins that read the founding draw are green on BOTH trees, so K1b moves none of them (CONFIRMED): `tests/property/traditionsDormancyGolden` (the golden-pinned founding leaf), `traditionsTabCustomMerge`, `facts/water` and `customFoundingTraditions`.
   - The record goldens cannot move, since 0 births moved (above).

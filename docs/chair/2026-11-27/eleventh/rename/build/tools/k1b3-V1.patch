@@ -1,0 +1,24 @@
+--- a/scripts/audit/whole-world-soak-deity-fixture.mjs
++++ b/scripts/audit/whole-world-soak-deity-fixture.mjs
+@@ -99,8 +99,8 @@
+ export const WF0_DEITY_BEARING_CASE = Object.freeze({
+   id: WF0_DEITY_BEARING_CASE_ID,
+   customContent: Object.freeze({ deities: Object.freeze([DAWN_WARDEN, ASH_TYRANT]) }),
+-  patronHostId: 'soak-a',
+-  rivalHostId: 'soak-b',
++  patronHostId: 'soak-b',
++  rivalHostId: 'soak-a',
+ });
+ 
+ /**
+--- a/tests/domain/faithObservationFloorWf0.test.js
++++ b/tests/domain/faithObservationFloorWf0.test.js
+@@ -387,7 +387,7 @@
+   test('the patron host holds a qualifying grand observance with a mapped, reachable neighbour, and the live draw is above zero', () => {
+     const { saves, plan } = bearing();
+     expect(plan.preconditionsMet).toBe(true);
+-    expect(plan.patronHostId).toBe('soak-a');
++    expect(plan.patronHostId).toBe('soak-b');
+     const digest = buildWholeWorldSoakSpatialCanon(saves).spatialDigest;
+     expect(digest, 'the case is not spatially canonized').toBeTruthy();
+     const host = saves.find((save) => save.id === plan.patronHostId);

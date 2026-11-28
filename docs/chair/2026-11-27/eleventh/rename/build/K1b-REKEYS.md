@@ -66,7 +66,9 @@ Rule: in each series, the first seed from 0 that meets EVERY arm of the block. "
 - **The variants** (scratch copy, the file's 15 cases):
   - V1, host choice only (`patronHostId: 'soak-b'`, `rivalHostId: 'soak-a'`, test line 390): (e) and (f) green, (c) RED (it pins the patron host's deity as the Dawn Warden). 14 of 15.
   - V2, the case mirrored onto soak-b (soak-a the Ash Tyrant; soak-b the Dawn Warden with an Ash Tyrant cult; soak-c a Dawn Warden cult): 15 of 15.
-- V2 is beyond "host choice only", so it was sent to the chair at 11:12 UTC. Nothing is changed until the chair's word.
+- V2 is beyond "host choice only", so it was sent to the chair at 11:12 UTC.
+- The chair's K1b-3 then accepted V2. But V2 also turns the fixture's other consumer, statecraftExposureBand, red (scandals 95 against at most 57), so it was stopped (13:33).
+- **RULED K1b-4** (it withdraws K1b-3): the fixture and both test files stay as they are, and the two reds are TRUE and NAMED. Both patches are kept for the owner's soak redo: `tools/K1b-WF0-PATCHES.md`.
 
 ## The mutants (`/home/user/scratch/mut-k1b.sh`; each in a scratch copy of the tree, then restored)
 

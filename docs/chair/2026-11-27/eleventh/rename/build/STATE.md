@@ -14,6 +14,6 @@ Branch `lane/stack-124-rename-wip-2026-11-28`, cut at 5ad631588. Scratch: `/home
   - PROVEN (`K2-PROOF.md`): on 300 + 300, 0 pages print the old name, a rename back restores every record and page byte for byte, and no other name moves. F3 on 1,800: no stored home holds the old name (1 receipt leaf, kept by rule); the receipt unchanged. A re-saved share holds the old name on 0 of 300 + 300 pages; a share stamped before the rename holds it on 300 + 300.
 - **K3:** MEASURED (`K3-MEASURE.md`; 300 + 300). A power's rename moves 235 and 229 pages beyond the name. The ruler kind is read off the renamed government label on 279 and 288; `familiesHeldOf` reads names; the door id is the name's slug. Proposal: the rename writes `kindName` once; three readers read `kindNameOf`; the veil is untouched. Not built.
 - **Rulings of 13:19** (K1b-3, K2-2, K-REG, K3-1): K2-2 DONE (122f38fbe). K-REG: `K-REGISTERS.md`, outputs under `registers/`.
-  - K1b-3: V2 turns statecraftExposureBand red (scandals 95 vs at most 57), so it is STOPPED (patch `tools/k1b3-V2.patch`, sent 13:33).
-  - K3-1 (1) measured: the classifiers run LIVE on the reader's shared page, so it is STOPPED on condition (2) (sent 13:52).
-- **NEXT:** the chair's words on K1b-3 and K3; then "TIP?" for point 124 whole.
+  - K1b-4 (withdraws K1b-3): WF-0 stays red, NAMED; the V1 and V2 patches are kept (`tools/K1b-WF0-PATCHES.md`).
+  - K3-1 (1) measured: the classifiers run LIVE on the reader's page, so it is STOPPED; K3 is HELD for the ruling reader, and nothing is built.
+- **NEXT:** `tests/lint` whole on the tip, then "TIP?" for point 124 as K1, K1b and K2 (the chair, 13:48). K3 becomes its own point.
