@@ -103,3 +103,12 @@
   EXPLOITATION high 89 | 68; DS-ECO-12 religious houses 8 | 35). Caveat (its own): a first pool's null is listed even where
   a fallback pool printed. OWED, with point 125 or the survey's second wave: read each kind against the rendered page
   (does the reader see a gap), then lines for the true gaps, the empty pool first.
+- **A TOWN WHOSE NAME OPENS ON Ö OR Á LOSES ITS DESK LINES (found by RENAME-BUILD's proof, 09:58 UTC on 2026-11-28; the
+  cause PLAUSIBLE by its reading):** each desk's `properFill` refuses a fill that does not open on ASCII `/^[A-Z]/`
+  (`powerStateProse.js:190`, `generalStateProse.js:172`, `economyStateProse.js:354`, `stressorsStateProse.js:153`), so
+  every line that names `{settlement}` drops: C dp-thorp-21 "Ögedeidavan" and dp-hamlet-49 "Ögedeikum" print no "The shape
+  of authority", no "Rule and succession", one History line and one Economics line fewer (five more Ö towns of C not yet
+  measured: dp-town-22, dp-city-29, dp-city-31, dp-city-116, dp-metropolis-133). `defenseStateProse.js:166` was cured long
+  ago with `/^\p{Lu}/u`; the other four never were. OWED, A SMALL CURE OF ITS OWN (with point 125's builder or before):
+  MEASURE on C and V (towns, slots, lines restored), the four desks take the Unicode test through ONE shared helper, a
+  guard that no desk carries its own ASCII test, red first on the two towns. Print only; no record moves.
