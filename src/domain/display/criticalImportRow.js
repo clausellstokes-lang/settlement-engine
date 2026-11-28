@@ -91,3 +91,14 @@ export function criticalImportRow(imports) {
   }).filter((row) => row.good && row.reason);
   return rows.find((row) => row.institution) || rows.find((row) => TERRAIN_ONLY_RE.test(row.reason)) || null;
 }
+
+/**
+ * A record label as it sits inside a sentence, where it is only a FILL (RULING 122-B-2 unit 4; 122-B-3 unit 4 (b)): a slash
+ * between two words is said "or" ("gold/silver ore" -> "gold or silver ore"). Never applied to a key (a lookup, a sort, a
+ * comparison): the record keeps its label. Read by the scarcity tension (`tensionDescriptionShown.js`) and the economy
+ * desk's critical-import and exploitation fills. A non-string is handed back as it is.
+ * @template T @param {T} label @returns {T|string}
+ */
+export function slashInProse(label) {
+  return typeof label === 'string' && label.includes('/') ? label.split('/').map((w) => w.trim()).filter(Boolean).join(' or ') : label;
+}

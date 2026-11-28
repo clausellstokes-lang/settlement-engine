@@ -29,7 +29,7 @@
  * whole, trimmed and in lower case) prints the stored sentence. Every other good is named as before. The import adds no
  * module to a closure that holds this leaf: the PDF render worker and Foundry's export hold the tonight sheet already.
  */
-import { criticalImportRow } from './criticalImportRow.js'; // RULING 122-B-2 (F7): the leaf, not the desk
+import { criticalImportRow, slashInProse } from './criticalImportRow.js'; // RULING 122-B-2 (F7): the leaf, not the desk
 import { foodStoresWords } from '../summary/tonightSheet.js';
 
 /** The one good the stores reader names: a granary's stores are "months of grain". */
@@ -68,14 +68,5 @@ export function tensionDescriptionShown(settlement, tension) {
   if (typeof description !== 'string' || !STORED.has(description)) return description;
   const imports = /** @type {{ resourceAnalysis?: { imports?: unknown } | null } | null | undefined} */ (settlement)?.resourceAnalysis?.imports;
   const good = criticalImportRow(/** @type {Parameters<typeof criticalImportRow>[0]} */ (imports))?.good;
-  return good && !storesHold(settlement, good) ? `A critical resource, ${inProse(good)}, ${description.slice(LEAD.length)}` : description;
-}
-
-/**
- * A good's record label as it sits inside the sentence (RULING 122-B-2, UNIT 4): a slash between two words is said "or"
- * ("gold/silver ore" -> "gold or silver ore", V dp-town-16, dp-city-58, dp-city-90); the record keeps its label.
- * @param {string} good @returns {string}
- */
-function inProse(good) {
-  return good.split('/').map((w) => w.trim()).filter(Boolean).join(' or ');
+  return good && !storesHold(settlement, good) ? `A critical resource, ${slashInProse(good)}, ${description.slice(LEAD.length)}` : description;
 }

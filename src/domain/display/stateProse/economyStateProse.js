@@ -271,7 +271,7 @@ export const SLOT_FILL_TABLES = Object.freeze({
 
 // RULING 122-B-2 (F7): the bare-common and proper fills live in the leaf `display/criticalImportRow.js` (so the scarcity
 // tension's helper reads the critical import without carrying this desk); this desk imports them back.
-import { bareCommonFill, properFill, criticalImportRow, TERRAIN_ONLY_RE } from '../criticalImportRow.js';
+import { bareCommonFill, properFill, criticalImportRow, TERRAIN_ONLY_RE, slashInProse } from '../criticalImportRow.js';
 
 /**
  * A `bare-common` fill that must also take a SINGULAR verb and a singular pronoun.
@@ -1173,7 +1173,7 @@ export function economyStateProse(settlement, readings = {}, options = {}) {
   // and is false. So the row's fills override the bag for this lens and for no other.
   const exploitSlots = leading
     ? {
-      resource: singularBareCommonFill(text(leading.row?.rawResource)),
+      resource: slashInProse(singularBareCommonFill(text(leading.row?.rawResource))), // RULING 122-B-3: the fill in prose; the sort keeps the key
       good: bareCommonFill(text(leading.row?.finalProducts?.[0])),
       institution: properFill(text(leading.row?.processingInstitutions?.[0])),
     }
@@ -1216,7 +1216,7 @@ export function economyStateProse(settlement, readings = {}, options = {}) {
   const famineSlots = famineKey ? { good: FOOD_SOURCE_WORDS[text(foodRecord?.failedSource)] } : null;
   const sourcesSlots = sourcesKey ? { good: FOOD_SOURCE_WORDS[text(recordSources?.[0])] } : null;
   const conditionSlots = conditionKey ? { resource: bareCommonFill(text(depletedRow?.label).toLowerCase()) } : null;
-  const criticalSlots = criticalKey ? { good: criticalRow?.good, institution: criticalRow?.institution } : null;
+  const criticalSlots = criticalKey ? { good: slashInProse(criticalRow?.good), institution: criticalRow?.institution } : null; // RULING 122-B-3: a fill, said in prose
   const upstreamSlots = upstreamKey ? { chain: upstreamNoun } : null;
 
   return Object.freeze({
