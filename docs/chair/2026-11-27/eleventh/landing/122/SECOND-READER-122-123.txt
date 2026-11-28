@@ -1,0 +1,27 @@
+READER 122-123: 9 findings; 122 does not stand; 123 stands; branch lane/reader-122-2026-11-28 at this commit
+
+FINDINGS (all CONFIRMED by my run or render; C|V)
+1. 122 `src/domain/display/tensionDescriptionShown.js :: tensionDescriptionShown`: V dp-city-21 "A critical resource, grain, is running short…" beside "Stores: a granary, about nine months of grain." (11 towns). Cured at 123; dp-city-49, dp-metropolis-25 hold R6's fault again.
+2. 122 `src/domain/display/stateProse/economyStateProse.js :: SOLVENT_LINES`: B2's replacement is a margin line beside a debt in force. C dp-metropolis-138 "With a little left over each year, Teoticoatl gets by…" beside "owes a heavy debt to an outside power" (13|5 towns). Not cured at 123. Defense is outside the table: C dp-town-133 "had money laid by".
+3. 122 `src/domain/display/solvencyShown.js :: nothingLaidByShown`: 74|31 pages lose a savings line though no debt and no "nothing laid by" prints; slots left empty 2|18.
+4. 122 `src/domain/display/publicProse.js :: PUBLIC_PROSE_VERSION`: a shared page stamped earlier keeps B2, A4, T (C 109, 94, 234).
+5. 123 `src/domain/display/tradeListDisplay.js :: importsAsPrinted`: NOT ONLY AT BIRTH. Saved towns lose "luxury goods" from the need list at print (120|37); 13 saved palm towns of V lose "grain" made, keep "Desert grain" exported.
+6. 123 `src/data/resourceData.js :: date_palms`: keys its message does not name: `imports.critical` gains "Bulk grain and foodstuffs" (V, 6 towns), `incomeSources` loses "Grain Sales" (3), a gap row (dp-city-55).
+7. `src/domain/display/galleryVeil.js :: applyVeil`: a function-eye-only house is still served; rows differ in 198|127 planted towns. The farmland half: 55->0 at 123.
+8. TESTS: nothing holds A3 at the Overview, PDF, search row; five of B1's exclusions; B2's MODERATE row and CRITICAL band.
+9. BUNDLE (esbuild): 122 PDF worker +124,696 B, advance worker +86,577 B; 123 generation worker +2,564 B; first paint nothing.
+
+POINT 122 (base->tip, owner's tabs)
+(1) A1 12->0|9->0; A2 892->0|893->0; B1 12->0|6->0; A4 94->0|78->0; B3 0|19->0; A3 12->6|14->5 (past events); B2 165->75|89->45 (a person's debt 58|36, a past debt 24|14, dp-town-133); T rows dropped 261->0|226->0.
+(2) records moved 0|0; unexplained lines 0|0. (3) findings 1, 2. (4) every surface cured but finding 4 and the AI grounding (A1 10|6).
+(5) 480 births, 238,086 addresses: rows moved 0; old towns equal 1,800/1,800. (6) 386->421 cases, none dropped; 46/57 mutants red. (7) no ceiling, no golden; doors exit 0. (8) finding 9.
+
+POINT 123 (122 tip->123 tip)
+(1) C1 243->0|210->0; C2 0|14->0; C3 120->0|37->0.
+(2) births moved 261|226 (C1 243|210 towns, C3 25|4, C2 0|17; no item: 0); unexplained values, lines 0|0.
+(3) C1: surname 345|276, given name 7|9; all read whole. (4) finding 5.
+(5) 122,272 addresses: rows moved 0; old towns unmoved 1,800/1,800.
+(6) 137->150 cases, none dropped; 18/18 mutants red (re-pointed pins included).
+(7) doors exit 0; one exemption added by hand (`chainPrintSites.walker`). (8) findings 6, 9.
+ADDED: build exit 0; boot smoke 9 passed, 0 failed, 2 skipped (flagged bundle); leaf == printed need list 841/841|725/725; its famine reading == `crisisOf` 1,800/1,800; its four mutants red in faultsNeed ("its famine in force is `crisisOf`'s answer").
+NOT CHECKED: whole suite, goldens, real browser, PDF bytes, hosted share, flagged bundle.

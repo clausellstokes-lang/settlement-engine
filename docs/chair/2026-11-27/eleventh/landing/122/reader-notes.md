@@ -403,3 +403,196 @@ from shown in 0 towns, every way; owner's shown != shared rows 0. The clandestin
 (dp-village-16: ["The Feast of the First Landing","The Contest of the Hearth"] against [… ,"The Vigil of the Forge"]). The criminal
 'Farmland': 49 of 900 (dp-hamlet-42: "The Furrow Offering" against "The Long Sun Contest"); with no grain among the food sources 117 of 900.
 (C: 198, 55, 269. Both are the base's too: (5) on C.) So, C and V together, 480 births walked, 238,086 addresses, 1,800 towns planted six ways.
+
+# POINT 123 — `lane/stack-123-wip-2026-11-28` at 003fd3b071b340c46b59650f22b63915cf58fd0e (found on origin at 05:54 UTC; it holds 777733a2a)
+`git diff --stat 777733a2a 003fd3b07`: 20 files, +409 −61 (7 under src, 10 test files, 3 registers); 25 commits (2 merges: 97c9223a2 R-BIRTH,
+6db89ad83 B4). WHAT IT IS, BY READING THE WHOLE DIFF (it is MORE than the three birth items the brief names):
+- C1 `src/data/people/personMention.js :: mentionOf`: a later mention takes the card's role only where the role carries its article
+  (/^the\s/); a name that is itself a description ("The Veteran Soldier") is printed whole; a bracket qualifier is set aside before the
+  surname is read (`bareWords`). Called by `secondMentions` (the generators' `goals.js`, `npcData.js`): AT BIRTH.
+- C2 `src/data/resourceData.js`: `date_palms` commodities ["dates"] (grain gone); its third trade good "Pressed dates" (was "Desert grain").
+- C3 `src/domain/display/tradeListDisplay.js :: importsAsPrinted` (AT PRINT): a need the place's own commodities meet (`commoditiesShown`, not
+  failed) leaves `needed`; `src/domain/facts/needNotBroughtIn.js` (the eager leaf, read AT BIRTH): the same rule in the record's words
+  (`ownCommodities`, `FAILED_FOOD_COPY`), and `famineInForceOf` (FIX-123, ruling 123-J-1: the leaf's own reader of the famine in force, in
+  place of an import of `crisisKind.js` that closed a chunk cycle); `factLayers.js` declares `stress` and `stressors` for the leaf.
+- RULING 122-A-2 (the cure of my finding of 04:31) `display/tensionDescriptionShown.js :: storesHold`: the twin is not printed where the good
+  is "grain" and the stores reader (`tonightSheet.js :: foodStoresWords`) reports a granary. AT PRINT.
+- RULING 122-T-5 (the cure of my note of 03:46, the farmland half) `traditions/genesis.js :: fieldRiteRefused`: the farmland atom is asked of
+  the floor. RULING 123-J-2: the needs memo typed. RULING 122-T-4: the needs-held test's seed loops collect every failing seed.
+- Registers: writer-reach, the lighting census, the tuning inventory. One exemption row added to `tests/lint/chainPrintSites.walker.test.js`.
+
+## (2) 123, THE BIRTHS OF C — CONFIRMED (`an-births.mjs`, `an-attr.mjs`, `an-c1.mjs`; the page harness's rec lines, all 900, both tips)
+RECORDS MOVED: 261 of 900 (thorp 4, hamlet 30, village 36, town 75, city 57, metropolis 59). THE KEYS THAT MOVED, seven paths and no other:
+relationships[].tension (182 values, 169 towns), relationships[].description (147, 136), prominentRelationship.phrasing (7), .tension (7),
+.full (5), pressureSentence (4), institutions[].desc (25, 25). The stamp a save composes differs in 1 town (economy:economics).
+BY ITEM, BY RE-BIRTH (the 261 moved towns re-born on the 123 tip with ONE item alone, the other two reverted in memory at bundle time, and
+with NONE: `plants/onlyC1.json` …): with no item the birth equals point 122's in 261 of 261; C1 alone bears 352 of the moved values, in 243
+towns (every relationships / prominentRelationship / pressureSentence value); C3 alone bears 25, in 25 towns (every institutions[].desc: the
+Annual fair's line, "A yearly fair for regional merchants. The luxuries the town wants do not reach it." -> "Regional merchants. Luxury goods
+available."); C2 none (C holds no date palms); a value more than one item bears 0; A VALUE NO ITEM BEARS: 0.
+C1's FILLS (352 strings): what left: Lord Mayor 82, Elder 74, Mayor 56, First Magnate 48, Master of the Guilds 43, Headman 18, Alderman 11,
+Speaker of the Assembly 9, First Councillor 6, Reeve 5. What came: the person's SURNAME 345, the GIVEN NAME 7 (where the two named share
+the surname: dp-village-9 "Eudokia Chortasmenos taught Photeine Chortasmenos everything, including how to get the better of Eudokia.");
+none of another kind. dp-thorp-132: "Giolla Sullivan has begun teaching Tadhg Kelly's methods as Elder's own." -> "… as Sullivan's own."
+A patronymic keeps its last word only: dp-metropolis-122 "… what favour Huda ibn Abbas owes Rashida ibn Arabi, and now has a hold on Abbas too."
+
+## 123, THE NEED LEAF (the chair's added question) — corpus C, CONFIRMED (`tools/hN.jsx`, `scripts/an-need.mjs`, `an-need-rendered.mjs`)
+On the 900 births of the 123 tip: `needListOf(record)` == `importsAsPrinted(record).needed` (the page's reader), item by item, 900 of 900.
+AGAINST THE RENDERED TAB: the Economics tab's line "Needed, and not brought in: …" (through the tab's own display pass, `neededNamesShown` over
+`plainGoodName(resourceDisplayName(n))`) equals the leaf's list in 841 of the 841 towns that print one; the page prints none and the leaf
+holds none in the other 59; a page with a list and no leaf answer, or the reverse: 0. The shared page: 841, 59, 0.
+On the SAVED births of point 122 read at the 123 tip (C and V, 1,800): leaf == page reader 1,800 of 1,800.
+
+## (2) 123, THE BIRTHS OF V — CONFIRMED (the same scripts; point 122's V births against the 123 tip's)
+RECORDS MOVED: 226 of 900 (thorp 3, hamlet 32, village 45, town 46, city 52, metropolis 48). The stamp a save composes differs in 1 town.
+BY ITEM, BY RE-BIRTH: with no item the birth equals point 122's in 226 of 226. C1 alone bears 285 values in 210 towns (relationships[]
+.tension 143, .description 129, prominentRelationship.full / .phrasing / .tension 4 each, pressureSentence 1). C3 alone bears 4, in 4 towns
+(institutions[].desc, the fair's line). C2 alone bears every other moved value, in the 17 palm towns whose record moved: A VALUE NO ITEM
+BEARS: 0.
+C2's KEYS (17 towns; `an-c2.mjs`): economicState.primaryExports ("Desert grain" -> "Pressed dates", 16 towns); economicState.localProduction
+and resourceAnalysis.availableResources ("grain" gone, 15 towns each); AND THREE THE COMMIT's MESSAGE DOES NOT NAME:
+- resourceAnalysis.imports.critical gains "Bulk grain and foodstuffs" in SIX towns (dp-town-118, dp-town-147, dp-city-54, dp-city-55,
+  dp-city-77, dp-city-113; reason "Desert/Arid terrain cannot produce this locally"), and in dp-city-55 also "grain" ("Required by Mill but
+  not available in Desert/Arid terrain") with a gap row for its Mill;
+- economicState.incomeSources loses "Grain Sales" in THREE (dp-town-118, dp-city-55, dp-city-77), the other shares re-weighted (dp-city-55:
+  26% -> 27%, 10% -> 11%, 3% -> 4%);
+- resourceAnalysis.gaps gains one row (dp-city-55).
+  On the page (dp-city-55): exports "Date harvest · Pressed dates …"; "grain" gone from what it makes and from the Resources chips; the
+  critical-import line now names grain ("A good part of the grain Kitatang's work uses must come from elsewhere…", was iron ore). Each
+  follows from the palms giving no grain. A palm town beside grain fields keeps its grain (dp-thorp-68: the chip moves from the palms to
+  "Extensive Grain Fields").
+C1's FILLS ON V (285 strings): surname 276, given name 9; none of another kind. What left: Elder 51, Master of the Guilds 50, First Magnate
+24, Alderman 18, Lord Mayor 18, Elder Priest 13, Archmage of the Senate 13, Mayor 11, Lord Marshal 11, First Councillor 11, Household Elder
+10, Speaker of the Assembly 10, Warden of the Council 8, Reeve 7, Headman 7, Lord Protector of the Faith 7, Burgomaster 4, Lord Warden 3,
+Doge 3, Lord Burgomaster 3, Archmage of the Council 2, Captain-Mayor 1.
+
+## (2) 123, EVERY PRINTED LINE THAT DIFFERS between the two tips' pages of their own births — CONFIRMED (`an-diff123.mjs`)
+C, owner's tabs (the fresh shared page beside it): C1 680 lines in 243 towns (676 in 241): World/Relationships, and the Overview's
+prominent-relationship and pressure lines; C3 at birth, the fair's line, 50 lines in 25 towns (Institutions); C3 at print, the need line, 200
+lines in 100 towns (the line without "luxury goods") and 20 towns where the line goes whole (it stood alone); and ONE KNOCK-ON OF C3, 2 lines
+in 1 town: dp-town-0, Daily Life, "Xiaxian feeds itself and has nothing to spare. Some of what its work needs does not reach it, and there is
+no line for anything else." -> "Money is short in Xiaxian, and most households spend what they earn as soon as it comes in." (the standing-of
+-living line whose mark reads the need list: the list is empty now). LINES NO ITEM EXPLAINS: 0.
+V, owner's tabs (shared): C1 554 lines in 210 towns (544 in 208); C2 118 lines in 17 towns (Economics and Resources: the chip lists, three
+income shares, the "Grain Sales" row gone in three); C3 at birth 8 lines in 4 towns; C3 at print 66 lines in 33 towns and 4 lines gone whole;
+RULING 122-A-2, the grain twin back to the stored sentence, 44 lines in 11 towns (Overview and History). LINES NO ITEM EXPLAINS: 0.
+
+## 123, THE NEED LEAF — corpus V, and its crisis reading — CONFIRMED
+V, the 900 births of the 123 tip: `needListOf` == `importsAsPrinted(record).needed` 900 of 900; the rendered Economics line equals the leaf's
+list in 725 of the 725 towns that print one; none and none in 175; a mismatch either way 0; the shared page 725, 175, 0. (C: 841, 59, 0.)
+THE LEAF's CRISIS READING (`needNotBroughtIn.js :: famineInForceOf`) against its home (`crisisKind.js :: crisisOf(record).has('famine')`),
+record by record (`tools/hF.jsx`): C 900 of 900 (11 with a famine in force); V 900 of 900 (34).
+MUTANTS OF THE CRISIS READING against `tests/generators/faultsNeed.test.js` (12 cases; baseline green):
+- the famine never in force -> 2 red: "its famine in force is `crisisOf`'s answer: each crisis kind and none, and every town of the sample"
+  and "a constructed record: each branch of the page's reader, the leaf beside it";
+- it reads the plague for the famine -> the same 2;
+- `stress` read before `stressors` -> 1 red ("its famine in force is `crisisOf`'s answer …");
+- any crisis fails the food -> 1 red (the same case);
+- the leaf never leaves the failed food out -> 1 red (faultsNeed).
+
+## (6) 123, THE TESTS — CONFIRMED (`test-cases.mjs 777733a2a 003fd3b07`; `mut/mutants-123.json` in a scratch tree of the 123 tip)
+Ten test files: cases 137 -> 150, expects 453 -> 520, TITLES GONE 0, no skip / only / todo; 13 new cases; bodies changed 7 (traditionNeedsHeld
+5: each seed loop wrapped in `collectSeedFailures` / `expectNoSeedFailures`, the same expects inside (RULING 122-T-4); faultsNeed 2: the
+copies' equality and the constructed record gain C3's rows). At file level: `faultsRows.test.js` FR3's UNMET table: FIVE ROWS RE-POINTED to
+other seeds (r2r-town-10 -> r2r-town-61, r2s-monster_pressure-town-3 -> -57, r2s-wartime-town-2 -> -7, bar0-town-occupied-rand-35 -> -78,
+r2r-town-50 -> r2r-town-87: "the first seed of its own arm for which `luxuryUnmet` reads true and the fair prints the twin"), and one row's
+good renamed ("Desert grain" -> "Pressed dates"); `bar6SeamEcon` the anchor's good renamed; `chainPrintSites.walker` ONE EXEMPTION ROW ADDED
+BY HAND (`tradeListDisplay.js`: 1, "not a chain": ruling 123-J-1 STOP 2).
+MUTANTS (baseline 0 red of 158 cases in 12 files): ALL 18 RED.
+- C1: any role stands for its card again -> personMention (2); a description-name takes a "surname" -> personMention (1); the bracket
+  qualifier not set aside -> personMention (1).
+- C2: the palms give grain again -> tailDefeconCatalogueCommodities (2); the third trade good "Desert grain" again -> bar6SeamEcon,
+  tailDefeconCatalogueCommodities (3).
+- C3: the page's list forgets the place's own commodities -> faultsNeed, needMetUnderAnotherName (3); the page counts a FAILED commodity ->
+  faultsNeed (1); the leaf forgets them -> faultsNeed (2); the leaf's luxury key never answers -> faultsNeed and faultsRows' UNMET case (2):
+  SO THE RE-POINTED ROWS CAN FAIL.
+- the leaf's crisis reading: four mutants, above (all red). The failed food never left out -> faultsNeed (1).
+- 122-A-2: the grain named beside its granary again -> historyTab (1); any good unnamed beside a granary -> historyTab (1).
+- 122-T-5: the field rite asks the full roster again -> traditionDescriptionSharedPage "THE PROPERTY" (1 of 81).
+- 122-T-4: no record asks the needs -> traditionNeedsHeld 3 red of 6 (the loops as re-written still fail).
+NOT HELD, AS AT 122: A3's call sites other than the History tab (the Overview, the PDF, the search row): the new 122-A-2 cases render HistoryTab only.
+
+## (7) 123, THE REGISTERS, by reading (the doors' run: below)
+`scripts/.writer-reach-baseline.json`: the freeze sha and digest; closureSizes campaign-pdf 228 -> 230, world-book 243 -> 245; five scan
+counts; ONE surfaceReach row gains two surfaces (`availableResources on resourceAnalysis`: + campaign-pdf, world-book). No ceiling, no cohort.
+FROZEN AT 6db89ad83 (the merge), BEFORE three later source commits (060177c71, 8396beb02, cdddc3b8b): its door's verdict at the tip is below.
+`tests/lint/.lighting-census-baseline.json`: titles 32,138 -> 32,151 (+13: the thirteen new cases), suiteTitles 8,939 -> 8,943.
+`tests/lint/.tuning-inventory.json`: one dependents list gains `tensionDescriptionShown.js`; two line numbers. No value moved.
+GOLDENS / FIXTURES: none in the diff (`git diff --stat 777733a2a 003fd3b07 -- tests/fixtures '*.snap' '*golden*'` is empty), though births move.
+
+## (8) 123, WHAT IS IMPORTED ANEW — CONFIRMED (esbuild's metafile and each entry bundled alone: a proxy, not the chair's five sizes)
+FIRST PAINT (`src/main.jsx`): the same 259 files (+1,025 source bytes: `personMention.js`, `resourceData.js`). THE GENERATION WORKER: 464 ->
+466 files: `display/resourceDisplayName.js` and `display/labelCase.js` anew (the eager need leaf imports the Resources tab's labels): +2,564
+B minified. PDF render worker +1,933 B; advance worker +1,250 B; Foundry +1,928 B: no module anew (122-A-2's import of `tonightSheet.js`
+was already reached). The message of 060177c71 says the labels' table "rides engine-core (eager): left as it is".
+
+## (1) 123, EACH ITEM's OWN COUNT, the 122 tip's pages against the 123 tip's (each of its own births) — CONFIRMED (`an-items.mjs`, `an-r13rec.mjs`)
+C1 (R13): owner's tabs C 243 -> 0, V 210 -> 0; shared 241 -> 0, 208 -> 0; table / session / Tonight 4 -> 0, 1 -> 0; AI grounding 135 -> 0, 124
+  -> 0. AT THE RECORD (the tie strings every surface prints: relationships[].tension / .description, prominentRelationship, pressureSentence):
+  towns holding a bare role where a name belongs C 243 -> 0 (352 strings), V 210 -> 0 (285). My page port still fires on the PDF (C 594 -> 465,
+  V 509 -> 399), Foundry (737 -> 735, 673 -> 671) and the search text (776, 702, unmoved): there it meets OTHER constructions, the base's too
+  (an apposition, "One person worth knowing: Moira MacDonald, the head shepherd, Elder, first of Elder Council."; the search's role field): no
+  tie line among them.
+C2 (R11): owner V 14 -> 0 (C holds no palms); shared 14 -> 0; Foundry 14 -> 0; PDF 19 -> 10 by my port, and the ten are the IMPORTS row
+  "Grain" of palm towns that now buy the grain they do not grow (dp-town-118: "IMPORTS · Grain · Salt"): no page prints grain as made or sold.
+C3 (R8b): owner C 120 -> 0, V 37 -> 0; shared the same.
+THE ITEMS OF POINT 122 at the 123 tip: A1, A2, A4, B1, B2, B3 as at 122 (C: 0, 0, 0, 0, 75, 0; V: 0, 0, 0, 0, 45, 0). A3 (R6a) C 6 -> 6; V 5 -> 7
+  owner (4 -> 6 shared, 5 -> 7 PDF): RULING 122-A-2 sends the eleven grain twins of V back to the stored unnamed sentence, and on two of
+  those pages another line names the short good, so the measure's own test counts them again.
+
+## 123, A SAVED TOWN READ AT THE 123 TIP — the off-tab surfaces, all 1,800 saved births of point 122 (`an-site123.mjs`, `an-need.mjs`) — CONFIRMED
+POINT 123 IS NOT ONLY AT BIRTH. The same saved records, read on the 122 tip and on the 123 tip:
+- C3 AT PRINT: the page's need list loses "luxury goods" in 120 saved towns of C and 37 of V (the PDF's Economics and Resources chapters lose
+  the item; where it stood alone its heading goes: "IMPORT DEPENDENCIES" 6 + 1, "CRITICAL DEPENDENCIES" 1), and one line more: C dp-town-0's
+  standing-of-living line (above), whose mark reads the list. (The leaf equals the page's reader on all 1,800 saved records.)
+- RULING 122-A-2 AT PRINT: 11 saved towns of V print the stored scarcity sentence where the 122 tip named grain (PDF 22 lines, Foundry 22).
+- C2 AT PRINT: 13 saved palm towns of V lose "Grain" from the PDF's "LOCAL PRODUCTION" list though their record still holds it (dp-hamlet-102,
+  dp-town-118 …): a reader of the list asks the catalogue at view.
+- C1: nothing (the tie strings are stored). Foundry, table, session, Tonight, AI, search, the lit Traditions chapter: no other line differs.
+- THE TRADITIONS DRAW of the saved records (as born, re-stamped 0.9.0, stampless): unmoved on 900 of 900, C and V (the `site` block's
+  traditions keys: 0 moved): RULING 122-T-5 moves no born town and no old town of the corpora.
+The tabs of a sample of these saved towns: below.
+
+## 123, A SAVED TOWN ON THE TABS — a sample of point 122's births and stamps (C 251, V 207: every sixth town and every town whose off-tab
+## surfaces moved), rendered by ONE harness on the 122 tip and on the 123 tip (`tools/h123s.jsx`, `scripts/run-saved.sh`, `an-saved.mjs`) — CONFIRMED
+C: 131 pages with no line differing. The need line: re-listed without "luxury goods" in 100 towns, gone whole in 20 (owner's tab and the
+shared page alike: the line is read at view). ONE line more, on the owner's tab only: dp-town-0's standing-of-living line (the shared page
+keeps the stamped "Some of what its work needs does not reach it …" above a need list that is now empty, until its owner saves).
+V: 146 pages with no line differing. The need line 33 + 4 towns; RULING 122-A-2's grain twin back to the stored sentence in 11 (Overview
+and History, owner and shared); AND C2 AT PRINT: 13 saved palm towns lose "grain" from the Economics tab's made-here list (dp-hamlet-102:
+"grain · dates · medicinal herbs …" -> "dates · medicinal herbs …"), on the owner's tab and the shared page, while the saved record still
+holds it and the stored export "Desert grain" still prints. Nothing else differs on any sampled page.
+SO, OF A SAVED TOWN AT POINT 123: its record is not touched; its PAGE is, at print, by C3 (120 | 37 towns), by 122-A-2 (0 | 11) and by C2
+(0 | 13). The brief's "a saved town is not touched" holds of the record and of C1 only.
+
+## (5) 123, THE TRADITIONS DRAW AND THE VEIL at the 123 tip — the 900 births of C on that tip — CONFIRMED (`run-trad.sh`, `an-plants.mjs`)
+THE WALK: 240 births, 122,272 addresses hidden one at a time and all at once: the reader's rows moved 0; the owner's drawn set moved 0; the
+served rows equal the composed rows 240/240. All 900: the owner's shown set == the shared rows 900/900; a row naming a hideable house 0.
+THE PLANTS: the DM-made market, the criminal market, the criminal smith: 0 towns differ, every way. THE CRIMINAL 'Farmland' (RULING 122-T-5):
+the reader's rows differ between shown and hidden in 0 of 900 (55 at the 122 tip); with no grain among the food sources 0 of 900 (269). The
+field rite refused with the house shown 226, with the house gone 226. THE CLANDESTINE-BY-FACET SMITH (the function eye): 198 of 900 still
+(`galleryVeil.js` is not in point 123's diff): dp-thorp-20 ["The Sun Feast","The Feast of the Harvest"] against [… ,"The Offering of the Forge"].
+THE OLD TOWNS at the 123 tip: the saved births re-stamped 0.9.0 and stampless draw, show and share as at the 122 tip on 1,800 of 1,800 (the
+`site` block's traditions keys, C and V: 0 moved), and the 122 tip equals the base (above): so, as the base.
+
+## 123, THE BUILT APP BOOTS (the chair's added question) — CONFIRMED (in the worktree of the 123 tip; no tracked file changed after)
+`npm run build`: exit 0 ("built in 41.41s"; the prerender wrote 313 static route documents). `VERIFY_DIST=1 npx vitest run
+tests/build/bootSmoke.test.js`: exit 0; 11 cases: 9 passed, 0 failed, 2 skipped (the two FLAGGED-bundle cases, which ask
+VERIFY_ENGINE_REMOTE_DIST=1: the production artifact built with VITE_ENGINE_REMOTE=true was NOT built or booted by me). Passed among them:
+"the built bundle boots: scripts/boot-smoke.mjs passes against dist/ (acyclic chunk graph · every chunk initialises · the shell mounts)" and
+"boot smoke is not vacuously skipped". Vite's own sizes at this tip, for the record (the five sizes are the chair's): pdfRender.worker
+3,150.64 kB; advanceInterval.worker 3,054.90 kB; generation.worker 2,744.09 kB; engine-core 323.11 kB; coherence-lazy 298.77 kB.
+
+## (7) 123, THE DOORS, RUN BY ME IN CHECK MODE on a clean tree of the 123 tip (/home/user/doors123; `scripts/doors123.sh`; no tracked file changed after)
+`check-writer-reach.mjs` exit 0 (the register, frozen at the merge 6db89ad83, still agrees with the tree at the tip); `check-observed-shape-
+readers.mjs` exit 0; `wiring-census.mjs --check` exit 0; `generate-dossier-state-prose.mjs --check` exit 0; `stable-pick-ids-door.mjs` exit 0.
+The walkers, each alone: chainPrintSites 6/6; tuningRegister 76/76; samenessHideable 31/31; proseWiringCensus 79/79; writerReach 52/52;
+observedShapeBaseline 59/59; sovereigntyLightingContract 34/34; stablePickIds 33/33. `dossierStateProseProjection.contract`: the same two red
+of 79 with the same messages as at the base and at the 122 tip (the owner-gated shift register: "expected 3183 to be 3182"): not this point's.
+So at 123: no ceiling raised; no shrink-only register widened; no golden re-recorded (none is in the diff: the goldens of a lane branch are
+signed at the merge point, and I ran none); ONE exemption row added by hand to `tests/lint/chainPrintSites.walker.test.js`.
+
+## WHAT I DID NOT CHECK
+The whole suite (not mine to run); any golden at the merge point; a real browser; the PDF's bytes (the document's element tree stood for
+it); the hosted share and the edge function; the FLAGGED production bundle (VITE_ENGINE_REMOTE=true); `npm run build` at the 122 tip alone;
+the old towns rendered on V (function level only there; rendered on C); the commit 13f06f00d's red boot (taken from the message of 060177c71).
