@@ -79,14 +79,14 @@ export function renameSettlementImpl(get, set, id, newName) {
   if (!trimmed) return false;
   const now = new Date().toISOString();
   let recorded = false;
-  let persist = null;
+  let persist = null; let renamed = null; // K2 (K2-1): the AI narrative follows, as the person's and the power's renames do
   set(state => {
     const idx = state.savedSettlements.findIndex(s => String(s.id) === String(id));
     const isActive = String(state.activeSaveId || '') === String(id);
     const save = idx !== -1 ? state.savedSettlements[idx] : null;
     const oldName = save?.settlement?.name || save?.name
       || (isActive ? state.settlement?.name : '') || '';
-    if (trimmed === oldName) return;
+    if (trimmed === oldName) return; if (save) renamed = { saveId: save.id, oldName };
     const currentCampaignState = save?.campaignState
       || (isActive ? { phase: state.phase, eventLog: state.eventLog } : {});
     const isCanon = (currentCampaignState.phase || (isActive ? state.phase : 'draft')) === 'canon';
@@ -149,7 +149,7 @@ export function renameSettlementImpl(get, set, id, newName) {
   });
   // R2: a change-queue flush replays renameSettlement and owns the single
   // atomic commit, so defer this row's cloud write while suppressed.
-  if (persist && !get().flushSuppressPersist) persistSaveUpdate(id, persist);
+  if (persist && !get().flushSuppressPersist) persistSaveUpdate(id, persist); if (renamed?.oldName) get().applyCosmeticRename?.({ saveId: renamed.saveId, oldName: renamed.oldName, newName: trimmed });
   return recorded;
 }
 
