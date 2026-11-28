@@ -210,8 +210,9 @@ export const LEAVES = Object.freeze({
   criticalImportBroughtIn: home('criticalImportBroughtIn', 4, ['resourceAnalysis', 'economicState']),
   // FAULTS-NEED (FR2): the page's own need list names a need of the family (`needNotBroughtIn.js`: the resource analysis's
   // critical list and gap rows, stored at layer 3, the economy's lists and chains, the live roster and its service rows, the
-  // tier the luxury class's band reads, and the config the failed venture's pick reads)
-  needNotBroughtIn: home('needNotBroughtIn', 4, ['resourceAnalysis', 'economicState', 'institutions', 'availableServices', 'config', 'tier']),
+  // tier the luxury class's band reads, and the config the failed venture's pick reads; RULING-R (R8 luxury) and FIX-123
+  // (ruling 123-J-1): the crisis container its famine in force reads, `stress` and `stressors`, stored at stratum 0)
+  needNotBroughtIn: home('needNotBroughtIn', 4, ['resourceAnalysis', 'economicState', 'institutions', 'availableServices', 'config', 'tier', 'stress', 'stressors']),
   // FAULTS-ROWS (FR12 (3)): the town's fish is bought in (`fishBoughtIn.js`: the grounds read from the config's resource record
   // and the roster, the imports the narratives step writes at layer 3; the swap of the service rows reads the same function)
   fishBoughtIn: home('fishBoughtIn', 4, ['config', 'economicState', 'institutions', 'resourceAnalysis']),
