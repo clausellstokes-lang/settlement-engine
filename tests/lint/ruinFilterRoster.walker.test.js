@@ -81,6 +81,8 @@ const COMPLIANT_RE = /institutionRoster|_worldPulseInactive/;
 // Readers that touch the raw roster for a NON-crediting purpose. Frozen 2026-07-19 from a
 // 3-batch consumer census (every read-site read in full). Each value is the reason category.
 const RUIN_AGNOSTIC_EXEMPT = Object.freeze({
+  // SURVEY S-A-2 (2026-11-28): a COPY of every house, ruins included, each carrying the description its page prints; aggregates nothing
+  'src/domain/display/printRecord.js': 'display — the print copy of the roster (every house as stored, its description re-answered); no count, no provider read',
   // ── delegates: routes the roster through a helper that already filters ──────────
   'src/domain/worldPulse/navalStrength.js': 'delegates — navalLayer.isStanding filters _worldPulseInactive/status',
   'src/domain/worldPulse/tradeWar.js': 'delegates — institutionTolerance.institutionConscience skips !isStandingInstitution',
@@ -543,7 +545,9 @@ describe('ruin-filter roster ratchet (structural-prevention Pattern 2)', () => {
     // `_worldPulseInactive` standing guard). The arm "every reader is COMPLIANT or EXEMPT" is green on both.
     // DAILY-2 B1b C3 (2026-11-20, LINES-1 § gathering_places): 115 -> 114, src/domain/dailyLife.js no longer reads
     // `.institutions` (its gathering lines name houses from `liveInstitutions`, the ruin filter); its EXEMPT row is deleted.
-    expect(readers.length).toBe(114);
+    // SURVEY S-A-2 (2026-11-28, lane/survey-final-wip-2026-11-28): 114 -> 115, src/domain/display/printRecord.js :: printRecordOf's roster
+    // copy (EXEMPT above: the whole-document surfaces' record, every house kept), measured by this file's own scan.
+    expect(readers.length).toBe(115);
   });
 
   test('exempt honesty: every exempt entry still reads .institutions and is not already compliant', () => {

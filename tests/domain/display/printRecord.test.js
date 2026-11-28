@@ -28,7 +28,9 @@ describe('printRecordOf', () => {
       if (own) expect(inst.desc.trim(), inst.name).toBe(institutionDescShown(metro.institutions[k], metro));
     });
     expect(collectPlotHooks(printRecordOf(hamlet)).map((h) => h.text)).toEqual(collectPlotHooksShown(hamlet).map((h) => h.text));
-    expect(printRecordOf(hamlet).history.historicalEvents.flatMap((e) => (e.plotHooks || []).map(plotHookText))).not.toContain('Someone is sabotaging both guilds to destabilize the market for a third party');
+    const GUILD = 'Someone is sabotaging both guilds to destabilize the market for a third party';
+    expect(hamlet.history.historicalEvents.flatMap((e) => (e.plotHooks || []).map(plotHookText))).toContain(GUILD); // the stored record carries it
+    expect(printRecordOf(hamlet).history.historicalEvents.flatMap((e) => (e.plotHooks || []).map(plotHookText))).not.toContain(GUILD); // anchored: the line above proves the same walk over the stored record holds it
   });
 
   it('a copy: the stored record is untouched; the same record gives the same copy', () => {

@@ -27,6 +27,7 @@ const bornTown = (plan, seed) => {
 };
 const GUILD_HOOK = 'Someone is sabotaging both guilds to destabilize the market for a third party';
 const LOYALTY_HOOK = /^Three guards have gone missing in the same district on night patrol/;
+const LOYALTY_IN_TEXT = /Three guards have gone missing in the same district on night patrol/; // unanchored: for a chapter read as JSON
 const texts = (hooks) => hooks.map((h) => h.text);
 
 describe('S-A site 2: a stored hook re-answered on the final record', () => {
@@ -45,7 +46,7 @@ describe('S-A site 2: a stored hook re-answered on the final record', () => {
   });
 
   it('THE OWNER\'s Plot Hooks: the guild hook is gone (every hook of its pool needs a guild), the loyalty hook takes the next admitted line', () => {
-    expect(texts(collectPlotHooksShown(hamlet))).not.toContain(GUILD_HOOK);
+    expect(texts(collectPlotHooksShown(hamlet))).not.toContain(GUILD_HOOK); // anchored: NOT VACUOUS above stores it, and the ungated collector prints it (the shared-page case)
     const shown = texts(collectPlotHooksShown(town));
     expect(shown.some((t) => LOYALTY_HOOK.test(t))).toBe(false);
     const stored = town.npcs.flatMap((n) => (n.plotHooks || []).map(plotHookText));
@@ -53,8 +54,10 @@ describe('S-A site 2: a stored hook re-answered on the final record', () => {
   });
 
   it('THE PDF, handed the gated record (S-A-2: printRecordOf on the caller\'s thread), prints the owner\'s hooks; handed the raw record it prints what it is given', () => {
-    expect(JSON.stringify(buildViewModel({ settlement: printRecordOf(hamlet) }).hooks)).not.toContain(GUILD_HOOK);
-    expect(JSON.stringify(buildViewModel({ settlement: printRecordOf(town) }).hooks)).not.toMatch(LOYALTY_HOOK);
+    expect(JSON.stringify(buildViewModel({ settlement: hamlet }).hooks)).toContain(GUILD_HOOK); // handed the raw record, the PDF prints it
+    expect(JSON.stringify(buildViewModel({ settlement: town }).hooks)).toMatch(LOYALTY_IN_TEXT);
+    expect(JSON.stringify(buildViewModel({ settlement: printRecordOf(hamlet) }).hooks)).not.toContain(GUILD_HOOK); // anchored: two lines above, the same chapter of the raw record holds it
+    expect(JSON.stringify(buildViewModel({ settlement: printRecordOf(town) }).hooks)).not.toMatch(LOYALTY_IN_TEXT); // anchored: two lines above, the same chapter of the raw record holds it
     expect(buildViewModel({ settlement: printRecordOf(hamlet) }).hooks.all.map((h) => h.hook)).toEqual(texts(collectPlotHooksShown(hamlet)));
     expect(JSON.stringify(buildViewModel({ settlement: hamlet }).hooks)).toContain(GUILD_HOOK);
   });

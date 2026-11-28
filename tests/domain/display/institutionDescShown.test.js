@@ -41,7 +41,7 @@ describe('S-A site 1: a stored house description re-answered on the final record
     const m = t['dp-metropolis-4'];
     expect(factsOf(m).hasInstitution('docks')).toBe(true);
     expect(houseOf(m, 'Customs house').desc).toMatch(/by road,|by the main roads|main roads\./);
-    expect(houseOf(m, 'Customs house').desc).not.toMatch(/harbour|port/);
+    expect(houseOf(m, 'Customs house').desc).not.toMatch(/harbour|port/); // anchored: the line above proves the description is the stored "by road" line
     expect(factsOf(t['dp-hamlet-12']).terrain).toBe('forest');
     expect(houseOf(t['dp-hamlet-12'], 'Charcoal burner').desc).toMatch(/whenever wood can be had/);
     expect(houseOf(t['dp-town-36'], 'Toll bridge').desc).toMatch(/though no one has crossed since the roads were cut\.$/); // the control: right as stored

@@ -13,5 +13,15 @@
   regeneration, run in a throw-away worktree of 35faf3361 and not committed, moves ONE field: `producerIndexFiles`
   1468 -> 1472 (the four new src modules: lineOnFinal, institutionDescShown, storedHookShown, printRecord).
   `PROOF-wiringCensus-diff.txt`.
-- LIGHTING CENSUS (`tests/lint/sovereigntyLightingContract.walker.test.js`, door `LIGHTING_CENSUS_REFREEZE`): see the
-  whole-lint sweep's line for it in the TIP report.
+- LIGHTING CENSUS (`tests/lint/sovereigntyLightingContract.walker.test.js`, door `LIGHTING_CENSUS_REFREEZE`;
+  `PROOF-lightingCensus-walker.txt`): files 3,827 -> 3,834 (the seven new test files: lineOnFinal, institutionDescShown,
+  institutionDescSharedPage, storedHookShown, finalRecordCensus, finalLinesPrintGate, printRecord); the walker stops at
+  that first figure, so credited and the title counts move with them, unmeasured here. Not re-taken.
+- THE PROSE WIRING CENSUS WALKER (`tests/lint/proseWiringCensus.walker.test.js`; `PROOF-proseWiringCensus-walker.txt`):
+  red for the same stale file as the wiring census above (`producerIndexFiles` only). Not re-taken.
+- WALKER TABLES MOVED IN THE UNIT THAT NEEDED THEM (not registers with a door; each said in its commit):
+  `ruinFilterRoster.walker.test.js` gains an EXEMPT row for `printRecord.js` (a print copy of the roster) and its reader
+  count re-pinned 114 -> 115 by its own scan, as every lane that added a reader did; `scripts/mutation-coverage-manifest.json`
+  names the three new invariant files under one rationale (TOTALITY).
+- RED ON THE BASE TOO, NOT MINE: `domainAnyCastBaseline` (genesis.js 1 any), `proseComposed`, `proseCorpusBytes`,
+  `seedLoopTotality`, `siteCoherenceRatchet`.
