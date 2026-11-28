@@ -74,3 +74,15 @@
 - **THE ROTATION OVER ADMITTED LINES (only if a frame table is ever to hold a declared line):** `traditionDescription.js ::
   drawTurn` rotates only where every line of the pool is colour; point 121 pins that (ruling 121-4, F1). A frame that
   claims something needs the rotation rebuilt over the lines the record admits, first.
+- **THE SOLVENCY LINES (S-B2, given to SURVEY-TABLE; from the reader of point 122, ruling 122-B-2):** refusing a savings or
+  surplus line beside a place debt leaves a weaker claim or an EMPTY SLOT (the standing-of-living tile: 2 | 18 towns of C | V
+  at point 122's tip; the header after the cure: counted by CURE-122B, `U1-table.tsv`). The Defense desk's `DS-DEF-2
+  Economic Survival: STRONG` was never reached ("money in hand" 10 | 9, "enough in hand" 11 | 4, "had money laid by" 1 | 0,
+  "money it had put by" 0 | 1 beside a place debt: 22 | 14 towns, as on the base); the treasury tile's "accounts still
+  balance" 11 | 8. OWED: each such line declares `excludes: place debt`; NEW LINES THAT SAY THE DEBT (six, the chair's
+  words, in the message to SURVEY-TABLE of 2026-11-28; each for the owner's veto); the page clash census holds the pair and
+  the empty slots at 0.
+- **THE AI GROUNDING AND THE SEARCH INDEX READ THE RECORD, NOT THE PAGE (from the same reader):** the AI grounding text
+  still carries a crisis reason WITH the builder's note (10 | 6 towns) and the stored, unnamed scarcity sentence (24 of 36);
+  the search's index text holds the stored sentence (36 of 36; the rendered row prints the shown one). Not printed to a
+  reader. OWED: a measure of what the grounding text is built from and whether it should take the shown sentences.

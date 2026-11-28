@@ -924,3 +924,25 @@ See section 4, newest last.
   the release; the surveyor is the unquoted author; quotes inside existing cards, one slot, not every card; a quote is a
   passing remark, plain, few "I"s, the tempers genuinely different; "in the rest of all the prose … have you limited things
   this way as well?" (answered: RANGE; point 125).
+
+## V32 (06:06 UTC on 2026-11-28): READER 122-123's INTERIM RULED (**122-B-2**); CURE-122B BUILDING ON THE JOIN's TREE; S-B2 (THE SOLVENCY LINES) GIVEN TO SURVEY-TABLE
+- **THE READER's INTERIM (05:57 UTC; filed `landing/122/READER-INTERIM-0557.txt`, its notes beside it):** point 122 read
+  whole on C and V: records moved 0 | 0; lines no item explains 0 | 0; every cure in force on every surface but a page
+  stamped before the change (A18) and the AI grounding; the traditions draw and the veil hold on 480 births and 238,086
+  addresses; old towns equal 1,800 of 1,800; no ceiling raised, no golden. SEVEN FINDINGS, "122 does not stand as joined".
+- **RULING 122-B-2 (`landing/RULING-122-B-2.txt`, also the builder's brief):** F1 grain: cured already (122-A-2). F2: where
+  "pays its way" was refused the pool drew "With a little left over each year … argue over how to spend it" beside a debt
+  in force (13 | 5 towns): A FAULT OF THE CURE. THE RULE: beside a place debt in force no line claims money in hand, a
+  yearly surplus, or freedom from debt; on `owes` C3 refuses vids 1 and 2, the treasury tile vids 1 and 3. The Defense
+  desk's lines (22 | 14, as on the base) and the slots left empty go to the survey (S-B2), and point 122's claim in the
+  landing record is narrowed to the economy desk's header and tiles and the Outlook's row. F3: the band is the fact, right
+  as built. F4, F5: the share lane's. F6: every missing test written, red on its mutant. F7: the two imports that carried
+  a desk into the PDF and advance workers move to leaves, with a guard and a real build. The slash in "gold/silver ore".
+  A2's re-cased headings and B1's second slot: read, no fault.
+- **CURE-122B:** a fresh local Opus builder on `/home/user/wt/line` (from 003fd3b07), four units, red first, pushes
+  nothing. WHEN IT REPORTS: the chair reads the diff, pushes the transport branch `lane/stack-123-wip-2026-11-28`, sends
+  the reader the tip for ONE SHORT DELTA READ (asked already), files `U1-table.tsv` under `landing/122/`.
+- **S-B2 to SURVEY-TABLE** (queued after S-C): the measure, the exclusions, six new lines in the chair's words, the census
+  pair and the empty slots at 0; it merges the line when 122 and 123 land and carries the two new refusals as declarations.
+- **STILL OWED TO THE CHAIR:** the reader's report on point 123; VOICES-ENGINE's split of the walker's classes (G1-2);
+  the "TIP?"s of SURVEY-TABLE (S-C, S-B2), SURVEY-FINAL (S-A), RENAME-BUILD (K1 to K3), VOICES-ENGINE.
