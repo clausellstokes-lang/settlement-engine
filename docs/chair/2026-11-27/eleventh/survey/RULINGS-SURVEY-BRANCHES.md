@@ -51,3 +51,32 @@ Earlier rulings: S-A-1, S-B-1, S-B-2 in `CHAIR-HANDOFF-ELEVENTH.md` (V30 to V35)
 ## BOTH
 - Every hour from `date -u`. End your turn at least once an hour. Hold your code tips as they are (a518d4244; b2a9010fe):
   docs commits only, after them, until the chair writes.
+
+## 13:45 UTC: S-D's MONEY AND PROSPERITY, RULED (SURVEY-TABLE's measure: `survey/table/S-D-PROSPERITY.md` 6d89637b2, `S-D-MONEY.md` 4f6dafcc8). BUILT ONLY AFTER THE MERGE (the line's points 122 and 123 landed, and the survey's reader reported).
+- **PROSPERITY: (i) MIS-CAST, CURED AS MEASURED.** The short purse clause declares `prosperity: ≤ poor` but its reader
+  (`keptGuardLine` through `purseWordOfBand`) answers it from the Economic Survival band, never the rung: the two short lines
+  declare `nothing laid by`, "paid to keep the peace" declares `no nothing laid by`, and the facts answer them from the band.
+  Census 29 to 0, pages moved 0, empties 0; `upkeepHired.test.js` re-pinned with the meaning said. THE RULE THIS APPLIES (said
+  once): A LINE DECLARES THE ATOM ITS READER ACTUALLY READS. The two `≤ comfortable` purse lines are the same mis-cast (11 pages
+  beside Prosperous or Wealthy, which the census cannot see): they declare the survival-band atom their reader reads; if none
+  of the vocabulary's atoms is that band, ONE new atom for it, named plainly, built by the vocabulary's door and listed for
+  the owner's veto as a word.
+- **MONEY, REAL (the softer side declares):** C1#2 "money to spare" `excludes: place debt` (4 | 3 move); MODERATE#4 "accounts
+  still balance" `excludes: place debt` (a balanced account is the claim "pays its way": ruling 122-B-2 F2); WEALTHY#3 ("a crisis
+  elsewhere is an expense here", a claim of reserves) `excludes: nothing laid by` (0 | 8), AND ITS TILE MUST NOT GO EMPTY:
+  measure it; if it does, the pool gains "{settlement} is rich, and spends what it has as fast as it comes in."
+  (`needs: nothing laid by`); PROSPEROUS#1 and #3 beside CRITICAL (4 pages): if they claim reserves, the same exclusion, and
+  if the slot empties, "Trade makes {settlement} prosperous, but it keeps nothing back." (`needs: nothing laid by`; both lines
+  the chair's words, for the owner's veto); STRUGGLING#5, which says a debt on 27 pages with none in force: `needs: place
+  debt` (its siblings fill; measure the empties).
+- **MONEY, SOFT (no cure, said with the reason):** STRONG#2 (23), ADEQUATE#1 to 3, POOR#4 beside Adequate (47): a margin or a
+  middling grade beside a middling grade is no contradiction (RULING-R's R5 soft pair).
+- **A HOOK IS A SEED, NOT A STATE (the rule 122-B-5 already applies, said here for the census):** the trade dispute's hook "a
+  debt no one here wants to acknowledge" (`historyData.js:1683`) and the old Debt Crisis's hooks ("A creditor's agent is in
+  town…") are the DM's seeds on the owner's Plot Hooks tab: a hidden or old debt beside the town's public solvency is the
+  stuff of a plot, not a contradiction. NO DECLARATION IS ADDED TO A HOOK; the census's money row does not count a hook as
+  a side. (Where a hook's words claim a debt IN FORCE in the present tense on an event decades old, that is the hooks'
+  own wording fault, named in the prerelease list for the second wave.)
+- **DS-GEN-3, 7 and 11** (the reader's lines that print on no owner page, only the glance mount): MEASURE the glance mount
+  and the PDF before anything is declared.
+- **AT THE MERGE** (unchanged): `place debt` takes 122-B-5; re-measure everything above on the merged tree before building.
