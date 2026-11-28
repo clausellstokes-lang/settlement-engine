@@ -16,4 +16,4 @@ Branch `lane/stack-124-rename-wip-2026-11-28`, cut at 5ad631588. Scratch: `/home
 - **Rulings of 13:19** (K1b-3, K2-2, K-REG, K3-1): K2-2 DONE (122f38fbe). K-REG: `K-REGISTERS.md`, outputs under `registers/`.
   - K1b-4 (withdraws K1b-3): WF-0 stays red, NAMED; the V1 and V2 patches are kept (`tools/K1b-WF0-PATCHES.md`).
   - K3-1 (1) measured: the classifiers run LIVE on the reader's page, so it is STOPPED; K3 is HELD for the ruling reader, and nothing is built.
-- **TIP? sent** for point 124 as K1, K1b and K2 (`tests/lint` whole on the tip: 3 base reds plus the 7 named registers, nothing else). K3 is HELD as its own point. NEXT: the independent reader's findings, and the ruling reader on K3.
+- **TIP? 124 71620fe4d ACCEPTED AS BUILT** (the chair, 14:27). THE BRANCH IS HELD: no code commit until the chair writes (the reader reads 71620fe4d by hash; docs commits are allowed). TIP? was sent as K1, K1b and K2 (`tests/lint` whole on the tip: 3 base reds plus the 7 named registers, nothing else). K3 is HELD as its own point. NEXT: the independent reader's findings, and the ruling reader on K3.
