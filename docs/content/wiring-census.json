@@ -4,7 +4,7 @@
     "files": {
       "src/domain/display/stateProse/generalStateProse.js": "e18b83084fe8b7b3dad1853a55e746bd8e5605cccf4140941b01be082cbac677",
       "src/domain/display/stateProse/powerStateProse.js": "d169fbc542f074cb8303231a93df214aeb0653954bb2e829bee631c7b18adc78",
-      "src/domain/display/stateProse/economyStateProse.js": "52a6eac064e875929b8aa5f57bb456fca9e29221a742557802cc68e683f3ed9b",
+      "src/domain/display/stateProse/economyStateProse.js": "ff9a0888fd41d9c014893f6bea1cbadb4df0c150f770c558cca231a18556f568",
       "src/domain/display/stateProse/defenseStateProse.js": "38e43f8ccbf0efd6a32da2b3eef4512863eead2a511f9d83d554cd24fd682e53",
       "src/domain/display/stateProse/stressorsStateProse.js": "e35010d5433bd9cdbde3f6b67c82302bef32d95f51f5b25cb58b0bb1a063d212",
       "src/domain/display/stateProse/warFaithStateProse.js": "e3c17afb8e07d402d4fb8b3a342d9d2c03bc958151b3bb3e0bcbe199eaedeac9",
@@ -18,7 +18,7 @@
       "src/domain/display/stateProse/stressorsStateProseCandidates.js": "ee0548fc8b662da76e4bf85a1fae30433e9f738277c774e16c6a7abd7fb93552",
       "src/domain/display/stateProse/warFaithStateProseCandidates.js": "b5b193dd2a2c83d077da5f82fd4a5fc5f5ad15a3b6a214725daf41ede442324b"
     },
-    "producerIndexFiles": 1468
+    "producerIndexFiles": 1469
   },
   "totals": {
     "pools": 861,
@@ -30,7 +30,7 @@
     "resolvedWithCleanPredicate": 321,
     "keyFunctions": 151,
     "keyFunctionsConsulted": 151,
-    "keyTables": 41,
+    "keyTables": 40,
     "slotless": 69,
     "bagless": 129,
     "predicatesOverUnreadFields": 108,
@@ -12126,7 +12126,8 @@
       "lineDeclares": {
         "crisis: any": 1,
         "market": 1,
-        "no crisis": 1
+        "no crisis": 1,
+        "no place debt": 1
       },
       "undeclared": 0,
       "crisisScoped": true
@@ -14888,7 +14889,9 @@
       "lineDeclares": {
         "crisis": 1,
         "crisis: any": 2,
-        "no crisis": 2
+        "no crisis": 2,
+        "no nothing laid by": 1,
+        "no place debt": 1
       },
       "undeclared": 0,
       "crisisScoped": true
@@ -14943,9 +14946,10 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 1,
         "food: ≥ secure": 2,
         "no crisis: indebted": 1,
+        "no nothing laid by": 2,
+        "no place debt": 2,
         "stores: < 3": 1,
         "stores: ≥ 3": 1
       },
