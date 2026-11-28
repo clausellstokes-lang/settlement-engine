@@ -54,7 +54,7 @@ function provenanceLine(rec) {
 /**
  * @param {{ settlement?: { traditions?: unknown, name?: string }, narrativeMode?: boolean, vm?: unknown }} props
  */
-export function Traditions({ settlement, narrativeMode }) {
+export function Traditions({ settlement, narrativeMode, voices = null }) {
   const mirror = settlement && Array.isArray(settlement.traditions) ? settlement.traditions : null;
   if (!mirror || !mirror.length) return null; // dormant / draft ⇒ byte-identical off-state.
   const descriptionSet = descriptionSetOf(settlement, 'owner', []);
@@ -103,7 +103,7 @@ export function Traditions({ settlement, narrativeMode }) {
               </Text>
             )}
             {/* THE CARD'S ONE QUOTE (S-G1): a lit town's rite, as the screen's row carries it */}
-            <CardVoice town={settlement} kind="tradition" id={traditionCardId(rec, true)} />
+            <CardVoice quotes={voices} kind="tradition" id={traditionCardId(rec, true)} />
             <Text style={{ ...type.body, fontSize: pt['9'], color: palette.second, lineHeight: 1.4 }}>
               Kept in {describeTraditionWindow(rec && rec.window)}.{owner ? ` · Owner: ${owner}` : ''}{outcome ? ` · Last held: ${outcome}` : ''}
             </Text>

@@ -54,6 +54,9 @@ import { normalizeSettlement } from '../domain/normalizeSettlement.js';
 // keeps the first-paint closure that tests/build/vendorPdfLazy.test.js prices untouched —
 // this module is only ever reached by dynamic import().
 import { buildPrintProse } from '../domain/display/stateProse/printProse.js';
+// THE CARDS' QUOTES (S-G1, G1-5), the same: the voices' plan and its lines load with this module (itself reached only by
+// dynamic import, so never on the first paint: tests/build/voicesLinesLazy.test.js), and the worker gets strings.
+import { printedQuotesOf } from '../domain/voices/voicePlan.js';
 import { governanceStressTypesOf } from '../domain/display/governanceAccount.js';
 import { resolvePrimaryStress } from '../generators/stressPriority.js';
 import { slugify } from '../kernel/slugify.js';
@@ -290,6 +293,16 @@ export async function generateSettlementPDF(settlement, options = {}) {
   // posted to the worker plain, structured-cloneable data.
   const normalizedSettlement = normalizeSettlement(settlement);
 
+  // ⭐ THE CARDS' QUOTES, BUILT HERE AND NOT IN THE DOCUMENT (S-G1; the chair's G1-5: the PDF worker carries no lines),
+  // as `stateProse` is: the plan runs on THIS thread and the worker is handed the quotes it prints as plain strings,
+  // never a liar's line. A plan that throws prints no quote; the export itself never fails for it.
+  let voiceQuotes;
+  try {
+    voiceQuotes = printedQuotesOf(normalizedSettlement);
+  } catch {
+    voiceQuotes = null;
+  }
+
   const props = {
     settlement: normalizedSettlement,
     aiSettlement,
@@ -315,6 +328,7 @@ export async function generateSettlementPDF(settlement, options = {}) {
     // main-thread fallback receives the identical props object.
     // The governance paragraph's primary stress, ranked here (src/pdf may not reach the generators' ranking).
     primaryStress: resolvePrimaryStress(governanceStressTypesOf(normalizedSettlement)),
+    voiceQuotes,
     stateProse: buildPrintProse(normalizedSettlement, {
       worldState: campaign?.worldState || null,
       // The premium faith seam, so the builder withholds the two deity-naming positions on a

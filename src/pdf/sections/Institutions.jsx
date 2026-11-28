@@ -42,7 +42,7 @@ const STATUS_TONE = {
   impaired: 'bad', critical: 'bad',
 };
 
-export function Institutions({ settlement, narrativeMode, vm }) {
+export function Institutions({ settlement, narrativeMode, vm, voices = null }) {
   const s = vm.services;
   const index = vm.entityIndex; // Phase-D id»card resolver
   const detailed = s.detailed || [];
@@ -117,7 +117,7 @@ export function Institutions({ settlement, narrativeMode, vm }) {
         return (
           <View key={`cat-${cat}`} style={{ marginBottom: space.sm }}>
             <CategoryHeader cat={cat} count={list.length} stats={catStats} />
-            <CategoryGrid items={list} catKey={cat} entityIndex={index} servicesByHouse={servicesByHouse} backsByHouse={backsByHouse} town={settlement} rawById={rawById} />
+            <CategoryGrid items={list} catKey={cat} entityIndex={index} servicesByHouse={servicesByHouse} backsByHouse={backsByHouse} town={settlement} rawById={rawById} voices={voices} />
           </View>
         );
       })}
@@ -165,7 +165,7 @@ function CategoryHeader({ cat, count, stats }) {
  * category sections stack tighter and the chapter fits on one page in
  * the common case.
  */
-function CategoryGrid({ items, catKey, entityIndex, servicesByHouse, backsByHouse, town, rawById }) {
+function CategoryGrid({ items, catKey, entityIndex, servicesByHouse, backsByHouse, town, rawById, voices = null }) {
   const rows = [];
   for (let i = 0; i < items.length; i += 2) {
     rows.push([items[i], items[i + 1] || null]);
@@ -175,10 +175,10 @@ function CategoryGrid({ items, catKey, entityIndex, servicesByHouse, backsByHous
       {rows.map((pair, ri) => (
         <View key={`r-${catKey}-${ri}`} style={{ flexDirection: 'row', marginBottom: 3 }}>
           <View style={{ flex: 1, marginRight: 4 }}>
-            {pair[0] && <InstitutionCard inst={pair[0]} idx={`${catKey}-${ri}-a`} entityIndex={entityIndex} services={servicesByHouse?.get(pair[0].name)} backs={backsByHouse?.get(institutionDisplayName(pair[0]))} town={town} raw={rawById?.get(pair[0].id)} />}
+            {pair[0] && <InstitutionCard inst={pair[0]} idx={`${catKey}-${ri}-a`} entityIndex={entityIndex} services={servicesByHouse?.get(pair[0].name)} backs={backsByHouse?.get(institutionDisplayName(pair[0]))} town={town} raw={rawById?.get(pair[0].id)} voices={voices} />}
           </View>
           <View style={{ flex: 1 }}>
-            {pair[1] && <InstitutionCard inst={pair[1]} idx={`${catKey}-${ri}-b`} entityIndex={entityIndex} services={servicesByHouse?.get(pair[1].name)} backs={backsByHouse?.get(institutionDisplayName(pair[1]))} town={town} raw={rawById?.get(pair[1].id)} />}
+            {pair[1] && <InstitutionCard inst={pair[1]} idx={`${catKey}-${ri}-b`} entityIndex={entityIndex} services={servicesByHouse?.get(pair[1].name)} backs={backsByHouse?.get(institutionDisplayName(pair[1]))} town={town} raw={rawById?.get(pair[1].id)} voices={voices} />}
           </View>
         </View>
       ))}
@@ -186,7 +186,7 @@ function CategoryGrid({ items, catKey, entityIndex, servicesByHouse, backsByHous
   );
 }
 
-function InstitutionCard({ inst, idx, entityIndex, services = [], backs = [], town = null, raw = null }) {
+function InstitutionCard({ inst, idx, entityIndex, services = [], backs = [], town = null, raw = null, voices = null }) {
   const status = (inst.status || 'healthy').toLowerCase();
   // Phase-D: this card is the anchor TARGET for any institution id reference.
   const anchor = anchorTarget(entityIndex, inst.id);
@@ -265,7 +265,7 @@ function InstitutionCard({ inst, idx, entityIndex, services = [], backs = [], to
       )}
       {/* THE CARD'S ONE QUOTE (S-G1), as the screen's card carries it */}
       {raw && (
-        <CardVoice town={town} kind="institution" id={institutionCardId(raw)} />
+        <CardVoice quotes={voices} kind="institution" id={institutionCardId(raw)} />
       )}
 
       {inst.statusReason && (

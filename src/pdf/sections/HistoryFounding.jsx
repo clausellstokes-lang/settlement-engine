@@ -42,7 +42,7 @@ const FOUNDING_FIELDS = [
 // render an empty header strip when the engine emits `{ summary: '' }` etc.
 const nonBlank = (v) => typeof v === 'string' ? v.trim().length > 0 : !!v;
 
-export function HistoryFounding({ settlement, narrativeMode, vm, stateProse }) {
+export function HistoryFounding({ settlement, narrativeMode, vm, stateProse, voices = null }) {
   const h = vm.history;
   // The view-model slice renames the fields (title, hooks; tensions' hooks), so it is handed to
   // the shared derivation in the record's own spelling: one function marks screen and print.
@@ -187,7 +187,7 @@ export function HistoryFounding({ settlement, narrativeMode, vm, stateProse }) {
             Live tensions · {h.tensions.length}
           </Text>
           {tensions.map((t, i) => (
-            <TensionRow key={`t-${i}`} tension={t} idx={i} town={settlement} cardId={tensionCardId((settlement?.history?.currentTensions || [])[i])} />
+            <TensionRow key={`t-${i}`} tension={t} idx={i} voices={voices} cardId={tensionCardId((settlement?.history?.currentTensions || [])[i])} />
           ))}
         </View>
       )}
@@ -276,7 +276,7 @@ function EventRow({ ev, idx }) {
   );
 }
 
-function TensionRow({ tension, idx, town = null, cardId = '' }) {
+function TensionRow({ tension, idx, voices = null, cardId = '' }) {
   const sevTone = severityTone(tension.severity);
   return (
     <View
@@ -310,7 +310,7 @@ function TensionRow({ tension, idx, town = null, cardId = '' }) {
         />
       )}
       {/* THE CARD'S ONE QUOTE (S-G1), as the screen's History card carries it */}
-      <CardVoice town={town} kind="tension" id={cardId} />
+      <CardVoice quotes={voices} kind="tension" id={cardId} />
       {/* VERIFIER F12 (X-2): the tension's hooks print in the Plot Hooks chapter only. */}
     </View>
   );

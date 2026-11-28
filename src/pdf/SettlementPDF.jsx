@@ -113,6 +113,10 @@ export function SettlementPDF({
   // src/pdf may not reach src/generators (the print boundary) and the domain may not either (MERGE-TRAIN, 2026-11-09).
   // Null: the paragraph takes the record's first stress.
   primaryStress = null,
+  // ⭐ THE CARDS' QUOTES (S-G1; the chair's G1-5: the PDF worker carries no lines), `<kind>:<id>` → text and signature,
+  // built by the CALLER (`utils/generateSettlementPDF.js` → `domain/voices/voicePlan.js :: printedQuotesOf`) on its own
+  // thread and posted as plain data, never a liar's line. Null (every other caller): no card prints a quote.
+  voiceQuotes = null,
 }) {
   const safe = settlement || {};
   const vm = buildViewModel({
@@ -196,18 +200,18 @@ export function SettlementPDF({
       {showState                  && <SystemStateSnapshot  settlement={safe} narrativeMode={useAi} vm={vm} causalDetail={stateCausalDetail} />}
       {inc('plotHooks')           && <PlotHooks            settlement={safe} narrativeMode={useAi} vm={vm} stateProse={stateProse} />}
       {inc('services')            && <Services             settlement={safe} narrativeMode={useAi} vm={vm} stateProse={stateProse} />}
-      {inc('institutions')        && <Institutions         settlement={safe} narrativeMode={useAi} vm={vm} />}
+      {inc('institutions')        && <Institutions         settlement={safe} narrativeMode={useAi} vm={vm} voices={voiceQuotes} />}
       {inc('economicsTrade')      && <EconomicsTrade       settlement={safe} narrativeMode={useAi} vm={vm} stateProse={stateProse} />}
       {inc('resourcesProduction') && <ResourcesProduction  settlement={safe} narrativeMode={useAi} vm={vm} stateProse={stateProse} />}
-      {inc('powerStructure')      && <PowerStructure       settlement={safe} narrativeMode={useAi} vm={vm} stateProse={stateProse} primaryStress={primaryStress} />}
+      {inc('powerStructure')      && <PowerStructure       settlement={safe} narrativeMode={useAi} vm={vm} stateProse={stateProse} primaryStress={primaryStress} voices={voiceQuotes} />}
       {inc('defenseSecurity')     && <DefenseSecurity      settlement={safe} narrativeMode={useAi} vm={vm} stateProse={stateProse} />}
       {inc('viabilityAssessment') && <ViabilityAssessment  settlement={safe} narrativeMode={useAi} vm={vm} stateProse={stateProse} />}
       {inc('npcQuickRef')         && <NPCQuickRef          settlement={safe} narrativeMode={useAi} vm={vm} />}
-      {inc('notableNpcs')         && <NotableNPCs          settlement={safe} narrativeMode={useAi} vm={vm} />}
+      {inc('notableNpcs')         && <NotableNPCs          settlement={safe} narrativeMode={useAi} vm={vm} voices={voiceQuotes} />}
       {inc('relationships')       && <Relationships        settlement={safe} narrativeMode={useAi} vm={vm} stateProse={stateProse} />}
       {inc('identityDailyLife')   && <IdentityDailyLife    settlement={safe} narrativeMode={useAi} vm={vm} stateProse={stateProse} />}
-      {showTraditions             && <Traditions           settlement={safe} narrativeMode={useAi} vm={vm} />}
-      {inc('historyFounding')     && <HistoryFounding      settlement={safe} narrativeMode={useAi} vm={vm} stateProse={stateProse} />}
+      {showTraditions             && <Traditions           settlement={safe} narrativeMode={useAi} vm={vm} voices={voiceQuotes} />}
+      {inc('historyFounding')     && <HistoryFounding      settlement={safe} narrativeMode={useAi} vm={vm} stateProse={stateProse} voices={voiceQuotes} />}
       {/* ⛔ THE FAITH PROSE HAS ONE HOME PER VARIANT, and this is where that is decided,
           because `inc` lives here and no chapter can see the variant. Chapter 15 (Identity &
           Daily Life) carries it wherever the variant includes that chapter; `campaign_state`

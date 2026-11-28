@@ -61,7 +61,7 @@ function TextRow({ label: l, value, multiline = false, labelWidth = 90, marginBo
   );
 }
 
-export function NotableNPCs({ settlement, narrativeMode, vm }) {
+export function NotableNPCs({ settlement, narrativeMode, vm, voices = null }) {
   const all = vm.npcs.sorted; // already sorted desc by power
   const index = vm.entityIndex; // Phase-D: id»card resolver (anchors + links)
   // Relative tiering: top 3 (or any with power ≥ 8) → major; next 4 → notable.
@@ -109,7 +109,7 @@ export function NotableNPCs({ settlement, narrativeMode, vm }) {
             MAJOR FIGURES
           </Text>
           {major.map((npc, i) => (
-            <FullCard key={`maj-${i}`} npc={npc} index={index} town={settlement} />
+            <FullCard key={`maj-${i}`} npc={npc} index={index} voices={voices} />
           ))}
         </View>
       )}
@@ -120,7 +120,7 @@ export function NotableNPCs({ settlement, narrativeMode, vm }) {
           <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
             NOTABLE FIGURES
           </Text>
-          <CompactGrid items={notable} index={index} town={settlement} />
+          <CompactGrid items={notable} index={index} voices={voices} />
         </View>
       )}
 
@@ -137,7 +137,7 @@ export function NotableNPCs({ settlement, narrativeMode, vm }) {
   );
 }
 
-function FullCard({ npc, index, town = null }) {
+function FullCard({ npc, index, voices = null }) {
   const name = safe(npc.name || 'Unnamed');
   const title = safe(npc.title || '');
   // Phase-D: this card is the anchor TARGET for any npc.id reference.
@@ -187,7 +187,7 @@ function FullCard({ npc, index, town = null }) {
         </View>
       </View>
       {/* THE CARD'S ONE QUOTE (S-G1), as the screen's person card carries it */}
-      <CardVoice town={town} kind="person" id={personCardId(npc)} />
+      <CardVoice quotes={voices} kind="person" id={personCardId(npc)} />
 
       {/* Identity meta line */}
       <KeyValRow
@@ -344,7 +344,7 @@ function OtherNameRow({ npc, index }) {
  * vertical footprint so the chapter fits more characters per page without
  * crowding the Major Figures cards.
  */
-function CompactGrid({ items, index, town = null }) {
+function CompactGrid({ items, index, voices = null }) {
   const rows = [];
   for (let i = 0; i < items.length; i += 2) {
     rows.push([items[i], items[i + 1] || null]);
@@ -354,10 +354,10 @@ function CompactGrid({ items, index, town = null }) {
       {rows.map((pair, ri) => (
         <View key={`cg-${ri}`} style={{ flexDirection: 'row', marginBottom: 4 }}>
           <View style={{ flex: 1, marginRight: 5 }}>
-            {pair[0] && <CompactCard npc={pair[0]} index={index} town={town} />}
+            {pair[0] && <CompactCard npc={pair[0]} index={index} voices={voices} />}
           </View>
           <View style={{ flex: 1 }}>
-            {pair[1] && <CompactCard npc={pair[1]} index={index} town={town} />}
+            {pair[1] && <CompactCard npc={pair[1]} index={index} voices={voices} />}
           </View>
         </View>
       ))}
@@ -365,7 +365,7 @@ function CompactGrid({ items, index, town = null }) {
   );
 }
 
-function CompactCard({ npc, index, town = null }) {
+function CompactCard({ npc, index, voices = null }) {
   const name = safe(npc.name || 'Unnamed');
   const title = safe(npc.title || '');
   const anchor = anchorTarget(index, npc.id);
@@ -405,7 +405,7 @@ function CompactCard({ npc, index, town = null }) {
         </View>
       )}
       {/* THE CARD'S ONE QUOTE (S-G1), as the screen's person card carries it */}
-      <CardVoice town={town} kind="person" id={personCardId(npc)} />
+      <CardVoice quotes={voices} kind="person" id={personCardId(npc)} />
       {npc.motivation && (
         <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.muted, marginTop: 2, lineHeight: 1.3 }}>
           <Text style={{ color: palette.faint }}>Motive: </Text>

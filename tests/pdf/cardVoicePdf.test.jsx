@@ -29,7 +29,7 @@ import { CrisisSections } from '../../src/pdf/sections/CrisisSections.jsx';
 import { NotableNPCs } from '../../src/pdf/sections/NotableNPCs.jsx';
 import { TonightAtTheTable } from '../../src/pdf/sections/TonightAtTheTable.jsx';
 import { buildViewModel } from '../../src/pdf/lib/viewModel.js';
-import { quoteFor, voicePlanOf } from '../../src/domain/voices/voicePlan.js';
+import { printedQuotesOf, quoteFor, voicePlanOf } from '../../src/domain/voices/voicePlan.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 
@@ -51,11 +51,11 @@ beforeAll(async () => {
 }, 120_000);
 
 const CHAPTERS = /** @type {const} */ ([
-  ['Institutions', (/** @type {any} */ s, /** @type {any} */ vm) => <Institutions settlement={s} narrativeMode={false} vm={vm} />],
-  ['PowerStructure', (/** @type {any} */ s, /** @type {any} */ vm) => <PowerStructure settlement={s} narrativeMode={false} vm={vm} />],
-  ['HistoryFounding', (/** @type {any} */ s, /** @type {any} */ vm) => <HistoryFounding settlement={s} narrativeMode={false} vm={vm} />],
+  ['Institutions', (/** @type {any} */ s, /** @type {any} */ vm, /** @type {any} */ v) => <Institutions settlement={s} narrativeMode={false} vm={vm} voices={v} />],
+  ['PowerStructure', (/** @type {any} */ s, /** @type {any} */ vm, /** @type {any} */ v) => <PowerStructure settlement={s} narrativeMode={false} vm={vm} voices={v} />],
+  ['HistoryFounding', (/** @type {any} */ s, /** @type {any} */ vm, /** @type {any} */ v) => <HistoryFounding settlement={s} narrativeMode={false} vm={vm} voices={v} />],
   ['CrisisSections', (/** @type {any} */ s) => <CrisisSections settlement={s} />],
-  ['NotableNPCs', (/** @type {any} */ s, /** @type {any} */ vm) => <NotableNPCs settlement={s} narrativeMode={false} vm={vm} />],
+  ['NotableNPCs', (/** @type {any} */ s, /** @type {any} */ vm, /** @type {any} */ v) => <NotableNPCs settlement={s} narrativeMode={false} vm={vm} voices={v} />],
 ]);
 
 describe('the print twin carries the screen\'s quote, card for card', () => {
@@ -64,22 +64,23 @@ describe('the print twin carries the screen\'s quote, card for card', () => {
     for (const [seed, s] of towns) {
       const vm = buildViewModel({ settlement: s, dmView: true });
       const plan = voicePlanOf(s, { audience: 'owner' });
+      const voices = printedQuotesOf(s); // built on the caller's thread, as generateSettlementPDF builds it (G1-5)
       for (const [name, el] of CHAPTERS) {
-        for (const node of find(el(s, vm), (n) => n.type === CardVoicePdf)) {
+        for (const node of find(el(s, vm, voices), (n) => n.type === CardVoicePdf)) {
           slots += 1;
-          const { town, kind, id } = node.props;
-          expect(town, `${seed} ${name}: the slot is handed the record`).toBe(s);
+          const { quotes, kind, id } = node.props;
+          expect(quotes, `${seed} ${name}: the slot is handed the caller's quotes`).toBe(voices);
           const want = quoteFor(plan, kind, id);
-          const got = printedQuoteOf(town, kind, id);
+          const got = printedQuoteOf(quotes, kind, id);
           if (want && !want.liar) {
             printed += 1;
-            expect([got?.lineId, got?.speaker.id], `${seed} ${name} ${kind}:${id}`).toEqual([want.lineId, want.speaker.id]);
+            expect(got, `${seed} ${name} ${kind}:${id}`).toEqual({ text: want.text, name: want.speaker.name, role: want.speaker.role });
           } else {
             expect(got, `${seed} ${name} ${kind}:${id}`).toBeNull();
           }
         }
       }
-      for (const q of plan.quotes.values()) if (q.liar) expect(printedQuoteOf(s, q.kind, q.id)).toBeNull();
+      for (const q of plan.quotes.values()) if (q.liar) expect(printedQuoteOf(voices, q.kind, q.id)).toBeNull();
     }
     expect(slots).toBeGreaterThan(20);
     expect(printed).toBeGreaterThan(3);
@@ -106,4 +107,25 @@ describe('the Tonight sheet holds no quote in print (ruling 5, G1-7)', () => {
     expect(page.includes(`“${said.text}”`)).toBe(false);
     expect(page).not.toMatch(/” — /);
   }, 120_000);
+});
+
+describe('the quotes handed to the worker (G1-5: the PDF worker carries no lines)', () => {
+  it('PARITY: the map holds the screen plan\'s every quote but the liar\'s, as text and signature, and nothing else', () => {
+    for (const [seed, s] of towns) {
+      const plan = voicePlanOf(s, { audience: 'owner' });
+      const want = Object.fromEntries([...plan.quotes.values()].filter((q) => !q.liar).map((q) => [`${q.kind}:${q.id}`, { text: q.text, name: q.speaker.name, role: q.speaker.role }]));
+      const got = printedQuotesOf(s);
+      expect(got, seed).toEqual(want);
+      expect(JSON.stringify(got), `${seed}: no DM note`).not.toMatch(/inTruth|liar/);
+      expect(structuredClone(got), `${seed}: plain data, as a worker message`).toEqual(got);
+    }
+    expect([...towns.values()].some((s) => [...voicePlanOf(s, { audience: 'owner' }).quotes.values()].some((q) => q.liar)), 'a liar stands in the towns').toBe(true);
+    expect(printedQuotesOf(null)).toEqual({});
+  });
+
+  it('a document built without the map prints no quote', () => {
+    const s = towns.get('dp-village-5');
+    const vm = buildViewModel({ settlement: s, dmView: true });
+    for (const [, el] of CHAPTERS) for (const node of find(el(s, vm, null), (n) => n.type === CardVoicePdf)) expect(printedQuoteOf(node.props.quotes, node.props.kind, node.props.id)).toBeNull();
+  });
 });

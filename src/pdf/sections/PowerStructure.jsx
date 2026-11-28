@@ -32,7 +32,7 @@ import { governingModifierWordsOf } from '../../domain/display/governingModifier
 import { WhoRunsThisTown } from './WhoRunsThisTown.jsx';
 import { governanceAccountOf } from '../../domain/display/governanceAccount.js';
 
-export function PowerStructure({ settlement, narrativeMode, vm, stateProse, primaryStress = null }) {
+export function PowerStructure({ settlement, narrativeMode, vm, stateProse, primaryStress = null, voices = null }) {
   const p = vm.power;
   const index = vm.entityIndex; // Phase-D id»card resolver
   const governing = p.factions.find(f => f.isGoverning);
@@ -153,7 +153,7 @@ export function PowerStructure({ settlement, narrativeMode, vm, stateProse, prim
         POWERS
       </Text>
       {p.factions.map((f, i) => (
-        <FactionCard key={`f-${i}`} faction={f} index={i} entityIndex={index} town={settlement} />
+        <FactionCard key={`f-${i}`} faction={f} index={i} entityIndex={index} voices={voices} />
       ))}
 
       {/* Current tensions and active conflicts print in the History and Relationships
@@ -213,7 +213,7 @@ function RuleAndSuccession({ lineage, occupied }) {
   );
 }
 
-function FactionCard({ faction, index, entityIndex, town = null }) {
+function FactionCard({ faction, index, entityIndex, voices = null }) {
   const f = faction;
   const accent = factionColors[f.category] || (f.isGoverning ? palette.gold : palette.muted);
   // Phase-D: this card is the anchor TARGET for any faction id reference.
@@ -271,7 +271,7 @@ function FactionCard({ faction, index, entityIndex, town = null }) {
         />
       )}
       {/* THE CARD'S ONE QUOTE (S-G1), as the screen's roster row carries it */}
-      <CardVoice town={town} kind="power" id={powerCardId(f.name)} />
+      <CardVoice quotes={voices} kind="power" id={powerCardId(f.name)} />
       {f.modifiers?.length > 0 && (
         <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 3, marginTop: 3 }}>
           {f.modifiers.map((m, mi) => (

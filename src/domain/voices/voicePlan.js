@@ -197,6 +197,23 @@ export function quoteFor(plan, kind, id) {
 }
 
 /**
+ * THE QUOTES A PRINTED DOCUMENT CARRIES (the chair's ruling G1-5: the PDF worker carries no lines). Built on the CALLER's
+ * thread (`utils/generateSettlementPDF.js`) from the owner's plan, and handed to the render worker as plain data, one
+ * entry a card, `<kind>:<id>` → its text and signature. A liar's line is never in it, and so neither is an `inTruth`:
+ * print cannot keep the DM's mark from the table (ruling 11).
+ * @param {Record<string, any> | null | undefined} settlement
+ * @returns {Record<string, { text: string, name: string, role: string }>}
+ */
+export function printedQuotesOf(settlement) {
+  /** @type {Record<string, { text: string, name: string, role: string }>} */ const out = {};
+  if (!settlement || typeof settlement !== 'object') return out;
+  for (const q of voicePlanOf(settlement, { audience: OWNER_AUDIENCE }).quotes.values()) {
+    if (!q.liar) out[`${q.kind}:${q.id}`] = { text: q.text, name: q.speaker.name, role: q.speaker.role };
+  }
+  return out;
+}
+
+/**
  * The liar: the one lawful person with a criminal tie, by rank on the town's key; their line by the tie's way and their
  * house's family, and by the criminal house's kind, by rank. Null where the town holds none, or no line fits.
  * @param {Record<string, any>} settlement @param {Record<string, any>[]} npcs @param {string} key
