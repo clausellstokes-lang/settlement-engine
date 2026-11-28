@@ -28,3 +28,10 @@ Run alone on the base, these are red there too (CONFIRMED), and point 124 does n
 - `noLegacyFactionReaders`, and observed-shape's live scan (4 NEW rows): `townRename.js` read the legacy `factions` and two keys no born record carries. Cured in 987d5a68d.
 - `domainAnyCastBaseline` (3 `any`): cured in 01cc209a6.
 - `ruinFilterRoster`: an EXEMPT row (name-lookup), 114 -> 115, in 122f38fbe (the chair's ruling K2-2). At the join with SURVEY-FINAL's `printRecord` row the count is 116.
+
+## `tests/lint` whole on the tip (14:21 UTC; `registers/tests-lint-whole-tip.txt`)
+
+- 10 files red, 11 tests.
+- 3 are red on the base and unmoved: proseComposed, proseCorpusBytes, siteCoherenceRatchet.
+- The other 7 are exactly the registers above, each on exactly the named arms: proseWiringCensus (2), sovereigntyLightingContract (1), newsHeadlineContract, newsVoiceContract, proseFamilyContract (1), observedShapeReaders ("the producers ran", the executed corpus, 1), writerReach (2).
+- Every K2 walker is green.
