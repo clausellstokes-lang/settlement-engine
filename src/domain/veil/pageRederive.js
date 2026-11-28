@@ -14,7 +14,10 @@
  *                                               served prosperity band, chains and the food record's own months)
  *   economicState.compound.economyOutput        getInstFlags(config, the served houses)
  *   activeConditions[].severity                 VR37: drawn FROM THE BAND, which is served (tier 2): the band's own
- *                                               default severity (activeConditions.js :: defaultSeverityForBand)
+ *                                               default severity (activeConditions.js :: defaultSeverityForBand),
+ *                                               marked `severityFromBand: true` (V29 (1), V33 (A): the default is not
+ *                                               the stored number; the rows that read it take the interval test,
+ *                                               display/severityInterval.js)
  * A value is put back only where the served document lacks it and the object that holds it was served (a grouping that
  * removed the defence profile is never undone); a value the served document cannot decide stays absent (not drawn).
  * The gates (`economicGates`), which the Defense tab's law and guard lines read (tests/components/publicProseEquality.test.jsx,
@@ -237,6 +240,9 @@ export function rederiveForPage(doc, { unveiled = false } = {}) {
     const cond = recOf(c);
     if (cond && !('severity' in cond) && typeof cond.severityBand === 'string' && BANDS.includes(cond.severityBand)) {
       cond.severity = defaultSeverityForBand(cond.severityBand);
+      // THE FALSE BAND (RULING V29 (1), V33 (A)): the default is not the stored number, so the page marks what it drew;
+      // a Foundations row that reads it prints only where both ends of the band agree (display/severityInterval.js)
+      cond.severityFromBand = true;
     }
   }
   return doc;

@@ -15,9 +15,15 @@
  * THE CLASSES (C): the Foundations' "Criminal opportunity", "Law & order" (the black market's capture) and "Defense
  * readiness" (the readiness score) rows; the Daily Life's recent-changes default (the legacy and its siege sentence);
  * the Defense tab's siege order sentence (the capture, through the law's band). The ring note is
- * tests/components/defenseRingNoteProjection.test.jsx's. STOPPED (reported, not here): "Labor capacity" and the
- * severity half of "Defense readiness" (r2r-hamlet-36, r2s-insurgency-town-0, r2s-occupied-town-0): the page re-derives a
- * condition's severity from its served band on every read (pageRederive.js, VR37), so the key is never absent on the page.
+ * tests/components/defenseRingNoteProjection.test.jsx's.
+ *
+ * THE FALSE BAND (RULING V29 (1); its rule, THE INTERVAL TEST, V33 (A); VEIL-56's PG): the page re-derives a condition's
+ * severity from its served band on every read (pageRederive.js, VR37), the band's fixed default, so a Foundations row that
+ * reads it can print a band the owner's page does not ("Trade connectivity" Strained beside the owner's Adequate). Such a
+ * row prints only where it prints the same at both ends of the served band's interval (`activeConditions.js ::
+ * severityBand`'s cuts). THE ORACLE is the same page with each condition's severity set to the OWNER'S STORED one, never
+ * the rule respelled. Births: the slice's r2r-hamlet-36, and the tell gate's seeds as PG's two pools born them
+ * (docs/chair/2026-11-27/eleventh/veil/v56/pg/PG-REPORT.md, M1).
  */
 import React from 'react';
 import { afterEach, beforeAll, describe, expect, it } from 'vitest';
@@ -96,11 +102,22 @@ const CRIME = ['r2r-city-24', 'r2r-city-36', 'r2r-hamlet-0'];
 const READINESS = ['r2r-thorp-0', 'r2r-thorp-48', 'r2s-indebted-thorp-0', 'r2s-slave_revolt-thorp-0'];
 const LAW = ['r2r-town-0', 'r2s-infiltrated-thorp-0', 'r2s-wartime-town-0'];
 const LEGACY = ['r2r-city-12', 'r2r-thorp-48'];
+/** The tell gate's seeds (`r3m-<size>-<crisis>-<k>-<idx>`), born as PG's pools were (the dump door's configs). */
+const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
+function birthR3m(seed) {
+  const [, size, crisis] = /^r3m-([a-z]+)-([a-z_]+)-\d+-\d+$/.exec(seed) || [];
+  const cfg = { ...DEFAULT_CONFIG, ...DIALS, settType: size, ...(crisis !== 'none' ? { selectedStresses: [crisis], selectedStressesRandom: false } : {}) };
+  const town = generateSettlementPipeline(birthConfig(cfg), null, { seed, customContent: {} });
+  return clone(withPublicProse(town, composePublicProse(town)));
+}
+/** The false band's births (PG's M1: the page printed a band the owner's stored severity does not give). */
+const FALSE_BAND = { 'r3m-metropolis-wartime-1-139': 'Trade connectivity', 'r3m-town-insurgency-0-24': 'Defense readiness', 'r3m-village-indebted-0-6': 'Trade connectivity', 'r3m-town-under_siege-1-88': 'Defense readiness' };
 const SIEGE = 'r2s-under_siege-town-0';
 
 beforeAll(async () => {
   await loadGenerationLawPayloads();
-  for (const seed of new Set([...CRIME, ...READINESS, ...LAW, ...LEGACY, SIEGE])) PAGES.set(seed, pagesOf(birth(seed)));
+  for (const seed of new Set([...CRIME, ...READINESS, ...LAW, ...LEGACY, SIEGE, 'r2r-hamlet-36'])) PAGES.set(seed, pagesOf(birth(seed)));
+  for (const seed of Object.keys(FALSE_BAND)) PAGES.set(seed, pagesOf(birthR3m(seed)));
 }, 600_000);
 
 describe('the Foundations: a row whose band reads an absent, always-withheld key is not printed', () => {
@@ -170,5 +187,44 @@ describe('the Defense tab\'s siege order sentence: nothing where the capture is 
   });
   it('the owner\'s own record prints the clause as before', () => {
     expect(defenseParagraphs(pages(SIEGE).rec, {}).join('\n')).toContain(`${OWNER} ${REST}`);
+  });
+});
+
+describe('THE FALSE BAND (V29 (1), the interval test V33 (A)): a row that reads a re-derived severity prints only where both ends of the served band agree', () => {
+  /** The page with each condition's severity set to the owner's stored one, the page's mark taken off (the oracle). */
+  const withStoredSeverity = (rec, page) => {
+    const p = clone(page);
+    for (const c of p.activeConditions || []) { const o = (rec.activeConditions || []).find((x) => x?.id === c?.id); if (o && typeof o.severity === 'number') { c.severity = o.severity; delete c.severityFromBand; } }
+    return p;
+  };
+  it('the page prints no false band: the row the re-derived default moved is not printed, and every row it prints is the row the stored severity gives (four births of the pools, r2r-hamlet-36)', () => {
+    for (const [seed, label] of Object.entries(FALSE_BAND)) {
+      const { rec, P1 } = pages(seed);
+      const oracle = foundations(withStoredSeverity(rec, P1));
+      const page = foundations(P1);
+      expect(page[label], `${seed} P1: no false "${label}" (the stored severity gives ${oracle[label]})`).toBeUndefined();
+      for (const [l, b] of Object.entries(page)) expect(b, `${seed} P1 "${l}"`).toBe(oracle[l]);
+    }
+    for (const seed of ['r2r-hamlet-36', ...CRIME, ...READINESS]) {
+      const { rec, P1 } = pages(seed);
+      const oracle = foundations(withStoredSeverity(rec, P1));
+      for (const [l, b] of Object.entries(foundations(P1))) expect(b, `${seed} P1 "${l}"`).toBe(oracle[l]);
+    }
+  });
+  it('a row whose two ends agree still prints (the interval test, not the blunt rule): "Public legitimacy" and "Strength of the powers" read the re-derived severity and print on the pools\' births', () => {
+    let printed = 0;
+    for (const seed of Object.keys(FALSE_BAND)) {
+      const page = foundations(pages(seed).P1);
+      if (page['Public legitimacy']) printed += 1;
+    }
+    expect(printed, 'the legitimacy row stays where both ends agree').toBeGreaterThan(0);
+  });
+  it('the owner\'s own record prints every row as before (no condition carries the page\'s re-derive mark; the four births and r2r-hamlet-36)', () => {
+    for (const seed of [...Object.keys(FALSE_BAND), 'r2r-hamlet-36']) {
+      const { rec, P0 } = pages(seed);
+      expect((rec.activeConditions || []).some((c) => c && 'severityFromBand' in c), `${seed}: the owner's record carries no mark`).toBe(false);
+      expect(foundations(rec)[FALSE_BAND[seed] || 'Labor capacity'], `${seed} owner`).toBe(foundations(P0)[FALSE_BAND[seed] || 'Labor capacity'] ?? foundations(rec)[FALSE_BAND[seed] || 'Labor capacity']);
+      expect(Object.keys(foundations(rec)).length, `${seed} owner: every row`).toBeGreaterThanOrEqual(14);
+    }
   });
 });

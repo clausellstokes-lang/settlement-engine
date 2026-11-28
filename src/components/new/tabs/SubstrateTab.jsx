@@ -29,6 +29,7 @@ import { foundationBandShown, foundationRowWithheld } from '../../../domain/disp
 import { offersFoodSurplus } from '../../../domain/foodSurplus.js';
 import { foodWordShown } from '../../../domain/display/foodWordShown.js';
 import { rulingAuthorityBandShown } from '../../../domain/display/rulingAuthorityShown.js';
+import { severityUnsettledRows } from '../../../domain/display/severityInterval.js';
 import NameColumns from '../../primitives/NameColumns.jsx';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 
@@ -145,6 +146,35 @@ function siegeCrisisWord(settlement) {
 }
 
 /**
+ * The band a row prints for its variable (the rows and THE INTERVAL TEST read it alike).
+ * @param {any} settlement @param {string} key @param {{ band: string }} v @returns {string}
+ */
+function rowBand(settlement, key, v) {
+  // FOOD-EXPORTS residue (the chair's ruling, 2026-11-04): the shared band ladder's top rung
+  // reads "Food · Surplus", a claim on the food record. Food is graded Surplus only where
+  // the record holds one (domain/foodSurplus.js :: offersFoodSurplus); otherwise Adequate.
+  return key === 'food_security' && v.band === 'surplus'
+    && !offersFoodSurplus(settlement?.economicState?.foodSecurity?.foodRecord) ? 'adequate'
+    // THE RULING AUTHORITY ROW IS NOT PRINTED ABOVE WHAT THE RECORD SAYS OF THE SAME GOVERNMENT (the chair's
+    // ruling X8, 2026-11-14): the cap is the one leaf's (domain/display/rulingAuthorityShown.js).
+    : key === 'ruling_authority' ? rulingAuthorityBandShown(settlement, v.band)
+      // BAR3-LABELS L2: healing, law, criminal opportunity and labour are not printed above what the page says of them
+      // (domain/display/foundationBandShown.js: no healer kept, a crime wave, conscription)
+      : foundationBandShown(settlement, key, v.band);
+}
+
+/**
+ * The word a row's pill prints (BandPill's): the record's own word where the row reads one, else the band's word.
+ * @param {any} settlement @param {string} key @param {string} band @returns {string}
+ */
+function printedWord(settlement, key, band) {
+  const recordRead = key === 'food_security' ? foodRecordWord(settlement)
+    : key === 'public_legitimacy' ? legitimacyRecordWord(settlement)
+    : key === 'trade_connectivity' ? siegeCrisisWord(settlement) : null;
+  return recordRead?.word || tokenCase(causalBandWord(key, band));
+}
+
+/**
  * @param {{ settlement: any }} props
  */
 export default function SubstrateTab({ settlement }) {
@@ -154,6 +184,14 @@ export default function SubstrateTab({ settlement }) {
   const mobile = useIsMobile();
   const model = useMemo(() => (settlement ? deriveCausalState(settlement) : null), [settlement]);
 
+  // THE FALSE BAND (RULING V29 (1), V33 (A)): a row that reads a severity the shared page drew from its band prints only where
+  // it prints the same at both ends of the band's interval (domain/display/severityInterval.js); the owner's record carries
+  // no such severity, so every row prints there as before
+  const unsettled = useMemo(() => (settlement ? severityUnsettledRows(settlement, (s) => {
+    const m = deriveCausalState(s);
+    return Object.fromEntries(Object.entries(m?.variables || {}).map(([key, v]) => [key, printedWord(s, key, rowBand(s, key, v))]));
+  }) : new Set()), [settlement]);
+
   const rows = useMemo(() => {
     if (!model?.variables) return [];
     // ONE PREDICATE, ASKED ONCE (lane MAGIC, chair ruling 1, 2026-11-03): the variable list
@@ -162,21 +200,11 @@ export default function SubstrateTab({ settlement }) {
     return magicRowsGated(settlement, Object.entries(model.variables), ([key]) => key)
       // FAIL-CLOSED PAGES (VEIL-53, RULING V6 (b)): a row whose band reads an always-withheld key the page does not hold
       // is not printed (domain/display/foundationBandShown.js :: foundationRowWithheld); the owner's record holds it
-      .filter(([key]) => !foundationRowWithheld(settlement, key))
+      .filter(([key]) => !foundationRowWithheld(settlement, key) && !unsettled.has(key))
       .map(([key, v]) => ({
         key,
         label: VAR_LABEL[key] || humanizeToken(key) || 'Recorded condition',
-        // FOOD-EXPORTS residue (the chair's ruling, 2026-11-04): the shared band ladder's top rung
-        // reads "Food · Surplus", a claim on the food record. Food is graded Surplus only where
-        // the record holds one (domain/foodSurplus.js :: offersFoodSurplus); otherwise Adequate.
-        band: key === 'food_security' && v.band === 'surplus'
-          && !offersFoodSurplus(settlement?.economicState?.foodSecurity?.foodRecord) ? 'adequate'
-          // THE RULING AUTHORITY ROW IS NOT PRINTED ABOVE WHAT THE RECORD SAYS OF THE SAME GOVERNMENT (the chair's
-          // ruling X8, 2026-11-14): the cap is the one leaf's (domain/display/rulingAuthorityShown.js).
-          : key === 'ruling_authority' ? rulingAuthorityBandShown(settlement, v.band)
-            // BAR3-LABELS L2: healing, law, criminal opportunity and labour are not printed above what the page says of them
-            // (domain/display/foundationBandShown.js: no healer kept, a crime wave, conscription)
-            : foundationBandShown(settlement, key, v.band),
+        band: rowBand(settlement, key, v),
         score: typeof v.score === 'number' ? v.score : (model.scores?.[key] ?? null),
       }))
       // Pressures first: worst band, then worst polarity-oriented score, then
@@ -185,7 +213,7 @@ export default function SubstrateTab({ settlement }) {
         (BAND_RANK[a.band] ?? 5) - (BAND_RANK[b.band] ?? 5)
         || healthOrientedScore(a) - healthOrientedScore(b)
         || a.label.localeCompare(b.label));
-  }, [model, settlement]);
+  }, [model, settlement, unsettled]);
   // THE ONE RELIANCE READING (lane MAGIC, chair ruling 2): the same word the Overview and the
   // Magic tab print, from the one derivation; absent where magic does not work.
   const magicReliance = useMemo(() => deriveMagicRelianceView(settlement), [settlement]);

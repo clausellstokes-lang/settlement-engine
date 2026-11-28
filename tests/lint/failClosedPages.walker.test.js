@@ -36,8 +36,8 @@
  * readers (`dossierViewModel.js :: outlookFactsOf`, `guardLineUnderTheLaw.js :: guardLineUnderTheBand`, `safetyShown.js`),
  * not on the slice.
  *
- * IN IT, by the brief: readiness and severity (V6: a wrong band is not a listed loss; severity is re-derived on every page,
- * its class STOPPED in commit 1); cure A's governance paragraph (a HAND row, its arm fortuneLastingSentence's); VEIL-55's
+ * IN IT, by the brief: readiness and severity (V6: a wrong band is not a listed loss; severity is re-derived on every page
+ * from its band, and the rows that read it take THE INTERVAL TEST, V29 (1) / V33 (A): a HAND row, severityInterval.js); cure A's governance paragraph (a HAND row, its arm fortuneLastingSentence's); VEIL-55's
  * item: `governanceAccount.js :: BREAKDOWN_WITHHELD_TERMS` held EQUAL to the registry row `legitimacy.breakdown`'s withheld
  * terms and to `withholdAlways`' (a term added to the row later reds). The plant (a control `it`): a new reader of a
  * withheld key in a scratch copy of the scope reds the census.
@@ -150,6 +150,7 @@ const ARMS = Object.freeze({
   siege: `${ARM_FILE} :: P0 prints the clause the law\\'s band gives; P1 prints neither the clause nor its stored form`,
   ring: 'tests/components/defenseRingNoteProjection.test.jsx :: an unstamped shared record (no shipped note, no seed) prints NO organised-ring note',
   governance: 'tests/domain/fortuneLastingSentence.test.js :: a veiled read (the served read, the widest veil) names no cause, and every sentence is whole',
+  falseBand: `${ARM_FILE} :: the page prints no false band: the row the re-derived default moved is not printed, and every row it prints is the row the stored severity gives`,
 });
 const SCORES_WHY = 'reads the defence profile\'s scores, which the page puts back from the served document before any reader runs (pageRederive.js :: rederiveForPage, PAGE_DRAWN_SCORES, the engine\'s generateDefenseProfile); absent only where the engine cannot read the served document (listed, PLAUSIBLE unreached: every served document carries the config and the economy it reads)';
 const DESK_WHY = 'a desk run on the OWNER\'S record at the save (publicProseCompose.js) and on the owner\'s own page; a shared page prints the shipped lens and never re-draws it (the desk read\'s public branch: an absent lens key reads null, SILENT)';
@@ -214,7 +215,8 @@ const REGISTER = Object.freeze({
  */
 const HAND = Object.freeze({
   'src/domain/display/foundationBandShown.js :: foundationRowWithheld': { holds: ['captureWithheld(settlement)', 'readinessScoreWithheld(settlement)'], arm: ARMS.law, why: 'the Foundations rows "Criminal opportunity" and "Law & order" (causalState.js reads the capture by an alias) and "Defense readiness" (defenseLedger.js reads the score); SubstrateTab filters on it' },
-  'src/components/new/tabs/SubstrateTab.jsx :: SubstrateTab': { holds: ['.filter(([key]) => !foundationRowWithheld(settlement, key))'], arm: ARMS.crime, why: 'the Foundations tab prints no row foundationRowWithheld names' },
+  'src/components/new/tabs/SubstrateTab.jsx :: SubstrateTab': { holds: ['.filter(([key]) => !foundationRowWithheld(settlement, key) && !unsettled.has(key))', 'severityUnsettledRows(settlement,'], arm: ARMS.crime, why: 'the Foundations tab prints no row foundationRowWithheld names, nor a row the interval test cannot decide' },
+  'src/domain/display/severityInterval.js :: severityUnsettledRows': { holds: ['c.severityFromBand === true', 'corners.some((w) => w[k] !== corners[0][k])', 'marked.length > CORNER_LIMIT'], arm: ARMS.falseBand, why: 'THE FALSE BAND (V29 (1), V33 (A)): a condition\'s severity is withheld and re-derived from its band (pageRederive.js marks it severityFromBand); a Foundations row reading it prints only where both ends of the band\'s interval agree' },
   'src/domain/display/guardLineUnderTheLaw.js :: safetyLineAsPrinted': { holds: ['captureWithheld(record)', "out.replace(SIEGE_ORDER_SENTENCE, '')"], arm: ARMS.siege, why: 'the Defense tab\'s siege order sentence reads the law\'s band (facts/lawBand.js), which reads the capture through causalState.js' },
   'src/domain/dailyLife.js :: deriveRecentChanges': { holds: ['!legacyWithheld(s)'], arm: ARMS.legacy, why: 'the recent-changes beat reads the legacy in historyBeats.js (outside the scope); the calm default is not said where it is withheld' },
   'src/components/new/defenseDeskRead.js :: criminalRingNoteRead': { holds: ["options.publicDossier && csd?.key === 'organized'"], arm: ARMS.ring, why: 'THE RING NOTE (the chair\'s class of 23:27): the organised ring\'s vantage is drawn by the seed, which no shared read carries; no shipped note and no seed, no note' },
