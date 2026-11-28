@@ -20,3 +20,9 @@
 - ANY unknown atom: 23 refusals, 23 pages, ONE pool (`troubleHooks:TROUBLE_HOOKS:outside_debt`, "A wealthy household offers to pay the debt itself…", needs `prosperity: ≥ prosperous`, drawn at birth before prosperity is written). Fail-open on JUDGMENT unknown lifts 23; on JUDGMENT-or-BOTH unknown also 23.
 - the 23 read against the page's printed prosperity (an/dsample.mjs; Economics field 1): 19 below prosperous (refusal TRUE), 4 at Prosperous (dp-thorp-17, dp-village-21, dp-village-27, dp-town-16: refusal FALSE). The line printed on none of the 23 (its sibling hooks filled the three).
 - declared-excludes clashes (ledger): `guild` 4 pages, `crisis: under_siege` 6 pages (owner = share).
+
+## V corpus, sweep, B and D (2026-11-28 01:20 UTC), CONFIRMED by script
+- V: 900 pages, 0 errors; refusals 80,718, median 91; judgment-unknown 20 (20 pages, same pool, same line). C + V: 161,557 refusals; 43 JUDGMENT-unknown.
+- births sweep (tools3/sweep.jsx, bundle4): 1,800 births, 0 errors. 10 atoms answer UNKNOWN on a final record: 7 context atoms (by construction) and 3 UNKNOWN BY DESIGN (clay kilns, charcoal kilns, critical import brought in: undefined silences line and twin). Every other atom answers on all 1,800.
+- D readings of the 43 (against the printed prosperity): TRUE 33, FALSE 5, CANNOT TELL 5.
+- V run log: React warned of two children with the same key `Thieves' Guild` (one metropolis-tier chunk, 793..868): a page lists one Thieves' Guild twice (not chased: out of the seven).
