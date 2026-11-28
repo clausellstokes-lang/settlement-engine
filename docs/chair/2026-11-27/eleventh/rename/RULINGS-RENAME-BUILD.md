@@ -111,3 +111,16 @@ what a served record holds goes to a Fable reader before it binds).**
 THE RULING READER (`prompts/START-RULING-READER-K3.txt`) judges K3-1 cold, in parallel with the builder's measure. THE BUILDER
 goes on (measure first, then build, red first) but sends NO "TIP?" for K3 until the chair has passed or amended K3-1 on that
 reader's report.
+
+**K1b-4 (13:33 UTC; WITHDRAWS K1b-3): THE SOAK's FIXTURE IS NOT TOUCHED; `faithObservationFloorWf0` STAYS RED (2 of 15) AND IS
+NAMED FOR THE SOAK's OWNER.** The builder showed (13:33 UTC, CONFIRMED) that the fixture has a second consumer,
+`tests/property/statecraftExposureBand.test.js`: V1 (the host ids alone) keeps it green but reds the faith arm (c); V2 (the
+deities mirrored) keeps the faith file green but moves statecraft's measured scandal band (95 against a ceiling of 57). No
+choice inside the fixture keeps both files word for word. AND THE FAITH FILE's TWO REDS ARE TRUE: (e) and (f) check that the
+soak's own planned case still meets its precondition (a patron host whose founding set draws pilgrims), and under K1b's
+id-keyed draw soak-a's does not. Re-seating the case to turn the test green would hide that from the owner's soak redo. SO:
+the fixture and both test files stay as they are; the two reds join the line's list at point 124's landing as ONE row
+group, with the cause (K1b re-deals each 0.10.0 town's founding rites once; the soak's patron host soak-a no longer founds a
+grand observance; soak-b does), the measure (`K1b-2`'s table) and BOTH patches kept for the owner
+(`rename/build/tools/k1b3-V2.patch` and V1's), so that at his soak redo he chooses the seating, and re-measures
+statecraft's band if he takes V2. A small call (it adds no rule; point 124's reader checks it).
