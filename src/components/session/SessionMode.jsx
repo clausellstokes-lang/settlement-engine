@@ -29,6 +29,8 @@
  */
 
 import { useMemo } from 'react';
+import CardVoice, { VoicesAudience } from '../primitives/CardVoice.jsx';
+import { personCardId } from '../../domain/voices/cardIds.js';
 import { useStore } from '../../store/index.js';
 import { FS, ELEV, swatch } from '../theme.js';
 import { formatCount } from '../../domain/formatNumber.js';
@@ -186,6 +188,9 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
   // leaf), the event tail, each NPC's temperament / want / secret, and the
   // hook bodies. Eyebrows, kind tags, band figures and PWR counts are glanced at.
   const mobile = useIsMobile();
+  // THE VOICES (S-G1): the session view is the DM's own (it prints secrets), so its person cards hear the owner's plan;
+  // the liar's line is not shown here (the screen may face the table: `dm={false}`)
+  const sessionVoices = useMemo(() => ({ audience: 'owner', settlement }), [settlement]);
 
   const phase = useStore(s => s.phase);
   const systemState = useStore(s => s.systemState);
@@ -388,6 +393,7 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
           )}
 
           {npcs.length > 0 && (
+            <VoicesAudience value={sessionVoices}>
             <section id="sf-session-npcs" aria-label="Key NPCs">
               <SectionTitle>The people at the table&apos;s elbow</SectionTitle>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 8 }}>
@@ -404,6 +410,8 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
                         <span style={{ fontSize: chromeFontSize(FS.nano, mobile), fontWeight: 800, color: MUTED, flexShrink: 0 }}>PWR {n?.power || 0}</span>
                       </div>
                       {(n?.role || n?.title) && <div style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, marginBottom: 3 }}>{n.role || n.title}</div>}
+                      {/* THE CARD'S ONE QUOTE (S-G1), as the dossier's person card carries it */}
+                      <CardVoice kind="person" id={personCardId(n)} dm={false} />
                       {temperament && <div style={{ fontSize: proseFontSize(FS.sm, mobile), color: BODY, lineHeight: 1.45 }}>{temperament}</div>}
                       {/* "Wants" reads the same way here as on the dossier NPC card and
                           as the SECRET label directly below: a bold inline label, no
@@ -419,6 +427,7 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
                 })}
               </div>
             </section>
+            </VoicesAudience>
           )}
 
           {hooks.length > 0 && (
