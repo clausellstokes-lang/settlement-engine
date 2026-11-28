@@ -1,17 +1,15 @@
 # VOICES-ENGINE STATE (S-G1; branch lane/survey-voices-wip-2026-11-28, cut at 003fd3b07)
-- RULINGS: every ruling the chair gave this seat is in ONE file on the chair's record (lane/chair-2026-11-08):
-  `docs/chair/2026-11-27/eleventh/survey/RULINGS-VOICES-ENGINE.md`. G1-4 and the 09:05 candle ruling came as messages
-  (both recorded in CLASS-HITS.md).
-- BUILT: U1-U1e, the lines as data (197 said, 40 liar; none ineligible; CHANGED_WORDS and CLASS_ANSWERS in the
-  generator); U2, the id guard's `versions` mode (re-banked by the door); U3-U3e, the leaf (V-1 (a), (b)); U4a-e,
-  CardVoice, the six sites, the PDF twin, the session card and the share plant; the tuning row (draft) and its inventory,
-  each by its door; the presumption-classes VOICE SCOPE (2641c202f) with its guards; the ineligible plant (count 0).
-- PROVEN at 96cb62121: presumptionClasses 16/16, presumedThings, stablePickIds, tuningRegister 76/76, pageCensus 14/14;
-  my test files; typecheck ratchet; domain strict; build; bootSmoke 9+2 skipped; vendorPdfLazy has the base's four reds.
-- MEASURED (MEASURE.md): C and V, errors 0, RECORDS MOVED 0, lines outside the quotes moved 0, share quotes 0, caps held.
+- RULINGS: all in ONE file on the chair's record (lane/chair-2026-11-08): `docs/chair/2026-11-27/eleventh/survey/
+  RULINGS-VOICES-ENGINE.md` (through G1-9). The chair's 14:11 UTC message also ruled: OLD-REWORD-A's 18 rows all meant;
+  the crisis lists in the `crisis` channel are right; any-short.2 takes the negated card word.
+- BUILT, ACCEPTED at 7dad3b372: the lines, the guard's mode, the leaf (V-1), CardVoice and its sites, the PDF twin (the
+  worker carries no lines), the session card, the share plant, the tuning row (draft), the voice scope, SAMENESS.md.
+- BUILT SINCE (G1-8, G1-9): fabdf14ef the card answers B's house words, the negated house word and A's power-kind words;
+  9ebe1e7e6 the second writers' lines imported (310 said, 53 liar, 0 ineligible; CELL_READING; 24 re-wordings with
+  sha256; crisis lists in the `crisis` channel); 8dba98fca the id guard by its door (+126, 23 re-worded); d54b266ab
+  any-short.2's card-not.
+- PROVEN at d54b266ab: presumptionClasses 16/16 (no voice hit), presumedThings 43/43, stablePickIds 37/37, voicesLines
+  10/10, voicePlan 20/20, cardWordsMore 13/13, voicesIneligible, component, PDF, share and build tests, both typechecks.
 - NOT MINE (red on 003fd3b07): proseCorpusBytes, proseComposed.
-- AFTER THE TIP (the chair accepted 56cb9876c; the independent reader reads 96cb62121; these are the delta on top):
-  G1-7 (786f7b26e) the Tonight sheet holds no quote in print; G1-5 (ae7b4d01e) the PDF worker carries no lines (+1,334 B
-  against 003fd3b07; the first paint within a few bytes of the base); G1-6 SAMENESS.md (measuring only).
-- MEASURED after the tip (MEASURE.md): PDF 3,237 · 3,156 quotes, 0 differing (the crisis quotes are gone from print).
-- NEXT: the short "TIP?" has been sent; wait for the chair and the reader.
+- NEXT: C and V measured at d54b266ab (vm/chain9); SAMENESS.md again (top share by pool); the twelve towns; a real build
+  with the sizes; bootSmoke; then "TIP?".
