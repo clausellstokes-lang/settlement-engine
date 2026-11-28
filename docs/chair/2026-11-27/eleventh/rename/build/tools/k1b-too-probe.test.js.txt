@@ -1,0 +1,30 @@
+import { it } from 'vitest';
+import { writeFileSync } from 'node:fs';
+import { describeTradition } from '../../src/domain/traditions/traditionDescription.js';
+import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { shownTraditionsOf, sharedTraditionRowsOf, descriptionSetOf } from '../../src/domain/traditions/shownTraditions.js';
+import * as DESCRIPTION_TABLE from '../../src/data/traditionDescriptionTable.js';
+import { CULTURE_PROFILE_KEYS } from '../../src/domain/cultureProfiles.js';
+const KEEPER_FRAMES_TOO = DESCRIPTION_TABLE.KEEPER_FRAMES_TOO || {};
+const sentences = (text) => String(text).split(/(?<=\.)\s+/).filter(Boolean);
+const twice = (texts) => { const seen = new Map(); for (const text of texts) for (const s of String(text || '').split(/(?<=\.) (?=\p{Lu})/u).filter(Boolean)) seen.set(s, (seen.get(s) || 0) + 1); return [...seen].filter(([, n]) => n >= 2).map(([s, n]) => `${n}x ${s}`); };
+const bornAt = (settType, culture, seed) => generateSettlementPipeline({ settType, culture, terrainOverride: 'auto', tradeRouteAccess: 'random_trade', monsterThreat: 'civilized' }, null, { seed, customContent: {} });
+const tooRe = Object.values(KEEPER_FRAMES_TOO).flat().map((l) => new RegExp(`^${l.text.replace(/[.*+?^$()|[\]\\]/g, '\\$&').replace(/\{\w+\}/g, '.+?')}$`));
+const isToo = (s) => tooRe.some((re) => re.test(s));
+it('PTOO', () => {
+  const out = [];
+  for (const tier of ['city', 'metropolis']) for (const culture of [...CULTURE_PROFILE_KEYS, 'mediterranean']) for (const L of ['a', 'b', 'c', 'd', 'e', 'f']) {
+    const seed = `trad-${L}-${tier}-${culture}`; const t = bornAt(tier, culture, seed);
+    const found = []; let printed = 0;
+    const recs = shownTraditionsOf(t, []).recs;
+    for (const s of twice(recs.map((rec) => describeTradition(rec, t, { audience: 'owner', set: recs })?.text ?? ''))) found.push(`owner twice: ${s}`);
+    for (const s of twice((sharedTraditionRowsOf(t) || []).map((r) => r.text))) found.push(`reader twice: ${s}`);
+    for (const audience of ['owner', 'reader']) { const set = descriptionSetOf(t, audience, []); const seen = new Set();
+      for (const rec of set) { const alone = describeTradition(rec, t, { audience }); const d = describeTradition(rec, t, { audience, set });
+        if (alone && sentences(alone.text).some(isToo)) found.push(`${audience} alone: ${rec.name}`); if (!d) continue;
+        const keeper = JSON.stringify([d.parts.keeper, d.named.houses, d.named.powers]); const tooHere = sentences(d.text).some(isToo);
+        if (tooHere) printed += 1; if (tooHere && !seen.has(keeper)) found.push(`${audience} first of its keeper: ${rec.name}`); seen.add(keeper); } }
+    out.push({ seed, name: t.name, tier, culture, printed, found });
+  }
+  writeFileSync('/home/user/scratch/p_too.json', JSON.stringify(out, null, 1));
+}, 7200000);

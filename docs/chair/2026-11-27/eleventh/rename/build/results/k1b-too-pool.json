@@ -1,0 +1,1154 @@
+[
+ {
+  "seed": "trad-a-city-germanic",
+  "name": "Eisenbrücke",
+  "tier": "city",
+  "culture": "germanic",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-b-city-germanic",
+  "name": "Goldholz",
+  "tier": "city",
+  "culture": "germanic",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-c-city-germanic",
+  "name": "Althausen",
+  "tier": "city",
+  "culture": "germanic",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-d-city-germanic",
+  "name": "Großkirche",
+  "tier": "city",
+  "culture": "germanic",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-e-city-germanic",
+  "name": "Rundsee",
+  "tier": "city",
+  "culture": "germanic",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-f-city-germanic",
+  "name": "Kaltenmoor",
+  "tier": "city",
+  "culture": "germanic",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-a-city-latin",
+  "name": "Fontelitus",
+  "tier": "city",
+  "culture": "latin",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-b-city-latin",
+  "name": "Cerrocivitas",
+  "tier": "city",
+  "culture": "latin",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-c-city-latin",
+  "name": "Cerroorum",
+  "tier": "city",
+  "culture": "latin",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-d-city-latin",
+  "name": "Magnaoppidum",
+  "tier": "city",
+  "culture": "latin",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-e-city-latin",
+  "name": "Cerromare",
+  "tier": "city",
+  "culture": "latin",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-f-city-latin",
+  "name": "Sanctanovum",
+  "tier": "city",
+  "culture": "latin",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-a-city-celtic",
+  "name": "Neadwood",
+  "tier": "city",
+  "culture": "celtic",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-b-city-celtic",
+  "name": "Gortwood",
+  "tier": "city",
+  "culture": "celtic",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-c-city-celtic",
+  "name": "Pensike",
+  "tier": "city",
+  "culture": "celtic",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-d-city-celtic",
+  "name": "Knockton",
+  "tier": "city",
+  "culture": "celtic",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-e-city-celtic",
+  "name": "Ringthwaite",
+  "tier": "city",
+  "culture": "celtic",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-f-city-celtic",
+  "name": "Drumglen",
+  "tier": "city",
+  "culture": "celtic",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-a-city-arabic",
+  "name": "Ribatkot",
+  "tier": "city",
+  "culture": "arabic",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-b-city-arabic",
+  "name": "Karakqala",
+  "tier": "city",
+  "culture": "arabic",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-c-city-arabic",
+  "name": "Bab-al-oasis",
+  "tier": "city",
+  "culture": "arabic",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-d-city-arabic",
+  "name": "Qaryatbazaar",
+  "tier": "city",
+  "culture": "arabic",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-e-city-arabic",
+  "name": "Qal'atmahal",
+  "tier": "city",
+  "culture": "arabic",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-f-city-arabic",
+  "name": "Rasdarya",
+  "tier": "city",
+  "culture": "arabic",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-a-city-norse",
+  "name": "Morkthorpe",
+  "tier": "city",
+  "culture": "norse",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-b-city-norse",
+  "name": "Ormfoss",
+  "tier": "city",
+  "culture": "norse",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-c-city-norse",
+  "name": "Ormfoss",
+  "tier": "city",
+  "culture": "norse",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-d-city-norse",
+  "name": "Víkgarde",
+  "tier": "city",
+  "culture": "norse",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-e-city-norse",
+  "name": "Tyrbrekka",
+  "tier": "city",
+  "culture": "norse",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-f-city-norse",
+  "name": "Skaldnes",
+  "tier": "city",
+  "culture": "norse",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-a-city-slavic",
+  "name": "Velikoka",
+  "tier": "city",
+  "culture": "slavic",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-b-city-slavic",
+  "name": "Ravenki",
+  "tier": "city",
+  "culture": "slavic",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-c-city-slavic",
+  "name": "Celoka",
+  "tier": "city",
+  "culture": "slavic",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-d-city-slavic",
+  "name": "Vysokonitsa",
+  "tier": "city",
+  "culture": "slavic",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-e-city-slavic",
+  "name": "Lipoin",
+  "tier": "city",
+  "culture": "slavic",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-f-city-slavic",
+  "name": "Ravenvich",
+  "tier": "city",
+  "culture": "slavic",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-a-city-east_asian",
+  "name": "Shanhu",
+  "tier": "city",
+  "culture": "east_asian",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-b-city-east_asian",
+  "name": "Linmen",
+  "tier": "city",
+  "culture": "east_asian",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-c-city-east_asian",
+  "name": "Shangjin",
+  "tier": "city",
+  "culture": "east_asian",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-d-city-east_asian",
+  "name": "Shanjin",
+  "tier": "city",
+  "culture": "east_asian",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-e-city-east_asian",
+  "name": "Taigou",
+  "tier": "city",
+  "culture": "east_asian",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-f-city-east_asian",
+  "name": "Hugou",
+  "tier": "city",
+  "culture": "east_asian",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-a-city-mesoamerican",
+  "name": "Tulumucan",
+  "tier": "city",
+  "culture": "mesoamerican",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-b-city-mesoamerican",
+  "name": "Kulubtitlan",
+  "tier": "city",
+  "culture": "mesoamerican",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-c-city-mesoamerican",
+  "name": "Petentlan",
+  "tier": "city",
+  "culture": "mesoamerican",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-d-city-mesoamerican",
+  "name": "Dzibcoatl",
+  "tier": "city",
+  "culture": "mesoamerican",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-e-city-mesoamerican",
+  "name": "Quirigmal",
+  "tier": "city",
+  "culture": "mesoamerican",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-f-city-mesoamerican",
+  "name": "Kulubtzin",
+  "tier": "city",
+  "culture": "mesoamerican",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-a-city-south_asian",
+  "name": "Purikund",
+  "tier": "city",
+  "culture": "south_asian",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-b-city-south_asian",
+  "name": "Amarnagar",
+  "tier": "city",
+  "culture": "south_asian",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-c-city-south_asian",
+  "name": "Vedapura",
+  "tier": "city",
+  "culture": "south_asian",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-d-city-south_asian",
+  "name": "Varapuram",
+  "tier": "city",
+  "culture": "south_asian",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-e-city-south_asian",
+  "name": "Jayagram",
+  "tier": "city",
+  "culture": "south_asian",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-f-city-south_asian",
+  "name": "Padmapuram",
+  "tier": "city",
+  "culture": "south_asian",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-a-city-steppe",
+  "name": "Vatankum",
+  "tier": "city",
+  "culture": "steppe",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-b-city-steppe",
+  "name": "Saraiserai",
+  "tier": "city",
+  "culture": "steppe",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-c-city-steppe",
+  "name": "Jalalserai",
+  "tier": "city",
+  "culture": "steppe",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-d-city-steppe",
+  "name": "Saraihiid",
+  "tier": "city",
+  "culture": "steppe",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-e-city-steppe",
+  "name": "Saraibash",
+  "tier": "city",
+  "culture": "steppe",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-f-city-steppe",
+  "name": "Zoltanobo",
+  "tier": "city",
+  "culture": "steppe",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-a-city-greek",
+  "name": "Megalopolis",
+  "tier": "city",
+  "culture": "greek",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-b-city-greek",
+  "name": "Eleftagio",
+  "tier": "city",
+  "culture": "greek",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-c-city-greek",
+  "name": "Aristopolis",
+  "tier": "city",
+  "culture": "greek",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-d-city-greek",
+  "name": "Chrissoanthi",
+  "tier": "city",
+  "culture": "greek",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-e-city-greek",
+  "name": "Panteopolis",
+  "tier": "city",
+  "culture": "greek",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-f-city-greek",
+  "name": "Evangepolis",
+  "tier": "city",
+  "culture": "greek",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-a-city-mediterranean",
+  "name": "Portaorum",
+  "tier": "city",
+  "culture": "mediterranean",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-b-city-mediterranean",
+  "name": "Serravilla",
+  "tier": "city",
+  "culture": "mediterranean",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-c-city-mediterranean",
+  "name": "Capominus",
+  "tier": "city",
+  "culture": "mediterranean",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-d-city-mediterranean",
+  "name": "Saltovallis",
+  "tier": "city",
+  "culture": "mediterranean",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-e-city-mediterranean",
+  "name": "Saltocivitas",
+  "tier": "city",
+  "culture": "mediterranean",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-f-city-mediterranean",
+  "name": "Pratoaltum",
+  "tier": "city",
+  "culture": "mediterranean",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-a-metropolis-germanic",
+  "name": "Weißmoor",
+  "tier": "metropolis",
+  "culture": "germanic",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-b-metropolis-germanic",
+  "name": "Breitenhausen",
+  "tier": "metropolis",
+  "culture": "germanic",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-c-metropolis-germanic",
+  "name": "Steinstadt",
+  "tier": "metropolis",
+  "culture": "germanic",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-d-metropolis-germanic",
+  "name": "Obermoor",
+  "tier": "metropolis",
+  "culture": "germanic",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-e-metropolis-germanic",
+  "name": "Unterplatz",
+  "tier": "metropolis",
+  "culture": "germanic",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-f-metropolis-germanic",
+  "name": "Breitkoppel",
+  "tier": "metropolis",
+  "culture": "germanic",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-a-metropolis-latin",
+  "name": "Torrilitus",
+  "tier": "metropolis",
+  "culture": "latin",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-b-metropolis-latin",
+  "name": "Villafundus",
+  "tier": "metropolis",
+  "culture": "latin",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-c-metropolis-latin",
+  "name": "Pianoripa",
+  "tier": "metropolis",
+  "culture": "latin",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-d-metropolis-latin",
+  "name": "Torrialtum",
+  "tier": "metropolis",
+  "culture": "latin",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-e-metropolis-latin",
+  "name": "Albacivitas",
+  "tier": "metropolis",
+  "culture": "latin",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-f-metropolis-latin",
+  "name": "Castelcolonia",
+  "tier": "metropolis",
+  "culture": "latin",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-a-metropolis-celtic",
+  "name": "Balglen",
+  "tier": "metropolis",
+  "culture": "celtic",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-b-metropolis-celtic",
+  "name": "Ardthwaite",
+  "tier": "metropolis",
+  "culture": "celtic",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-c-metropolis-celtic",
+  "name": "Tighburn",
+  "tier": "metropolis",
+  "culture": "celtic",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-d-metropolis-celtic",
+  "name": "Drumbury",
+  "tier": "metropolis",
+  "culture": "celtic",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-e-metropolis-celtic",
+  "name": "Knockfield",
+  "tier": "metropolis",
+  "culture": "celtic",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-f-metropolis-celtic",
+  "name": "Maghwick",
+  "tier": "metropolis",
+  "culture": "celtic",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-a-metropolis-arabic",
+  "name": "Jabalabad",
+  "tier": "metropolis",
+  "culture": "arabic",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-b-metropolis-arabic",
+  "name": "Karakmela",
+  "tier": "metropolis",
+  "culture": "arabic",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-c-metropolis-arabic",
+  "name": "Tallbazaar",
+  "tier": "metropolis",
+  "culture": "arabic",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-d-metropolis-arabic",
+  "name": "Hadithabazaar",
+  "tier": "metropolis",
+  "culture": "arabic",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-e-metropolis-arabic",
+  "name": "Jabalkarez",
+  "tier": "metropolis",
+  "culture": "arabic",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-f-metropolis-arabic",
+  "name": "Qaryatnagar",
+  "tier": "metropolis",
+  "culture": "arabic",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-a-metropolis-norse",
+  "name": "Ingiby",
+  "tier": "metropolis",
+  "culture": "norse",
+  "printed": 2,
+  "found": []
+ },
+ {
+  "seed": "trad-b-metropolis-norse",
+  "name": "Grímstrand",
+  "tier": "metropolis",
+  "culture": "norse",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-c-metropolis-norse",
+  "name": "Bergstrand",
+  "tier": "metropolis",
+  "culture": "norse",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-d-metropolis-norse",
+  "name": "Grímfjord",
+  "tier": "metropolis",
+  "culture": "norse",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-e-metropolis-norse",
+  "name": "Norddal",
+  "tier": "metropolis",
+  "culture": "norse",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-f-metropolis-norse",
+  "name": "Ormberg",
+  "tier": "metropolis",
+  "culture": "norse",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-a-metropolis-slavic",
+  "name": "Divomir",
+  "tier": "metropolis",
+  "culture": "slavic",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-b-metropolis-slavic",
+  "name": "Kalimir",
+  "tier": "metropolis",
+  "culture": "slavic",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-c-metropolis-slavic",
+  "name": "Lyssoya",
+  "tier": "metropolis",
+  "culture": "slavic",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-d-metropolis-slavic",
+  "name": "Kalika",
+  "tier": "metropolis",
+  "culture": "slavic",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-e-metropolis-slavic",
+  "name": "Lyssonitsa",
+  "tier": "metropolis",
+  "culture": "slavic",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-f-metropolis-slavic",
+  "name": "Bregno",
+  "tier": "metropolis",
+  "culture": "slavic",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-a-metropolis-east_asian",
+  "name": "Haiba",
+  "tier": "metropolis",
+  "culture": "east_asian",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-b-metropolis-east_asian",
+  "name": "Kitaqiao",
+  "tier": "metropolis",
+  "culture": "east_asian",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-c-metropolis-east_asian",
+  "name": "Zhongmen",
+  "tier": "metropolis",
+  "culture": "east_asian",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-d-metropolis-east_asian",
+  "name": "Xinhu",
+  "tier": "metropolis",
+  "culture": "east_asian",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-e-metropolis-east_asian",
+  "name": "Xiaji",
+  "tier": "metropolis",
+  "culture": "east_asian",
+  "printed": 2,
+  "found": []
+ },
+ {
+  "seed": "trad-f-metropolis-east_asian",
+  "name": "Zhongbu",
+  "tier": "metropolis",
+  "culture": "east_asian",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-a-metropolis-mesoamerican",
+  "name": "Teotikin",
+  "tier": "metropolis",
+  "culture": "mesoamerican",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-b-metropolis-mesoamerican",
+  "name": "Teotiha",
+  "tier": "metropolis",
+  "culture": "mesoamerican",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-c-metropolis-mesoamerican",
+  "name": "Yaxchkin",
+  "tier": "metropolis",
+  "culture": "mesoamerican",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-d-metropolis-mesoamerican",
+  "name": "Muulich",
+  "tier": "metropolis",
+  "culture": "mesoamerican",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-e-metropolis-mesoamerican",
+  "name": "Yaxchtun",
+  "tier": "metropolis",
+  "culture": "mesoamerican",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-f-metropolis-mesoamerican",
+  "name": "Chalhuacan",
+  "tier": "metropolis",
+  "culture": "mesoamerican",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-a-metropolis-south_asian",
+  "name": "Vishnughat",
+  "tier": "metropolis",
+  "culture": "south_asian",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-b-metropolis-south_asian",
+  "name": "Gangamandal",
+  "tier": "metropolis",
+  "culture": "south_asian",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-c-metropolis-south_asian",
+  "name": "Kashipuram",
+  "tier": "metropolis",
+  "culture": "south_asian",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-d-metropolis-south_asian",
+  "name": "Bhagapuram",
+  "tier": "metropolis",
+  "culture": "south_asian",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-e-metropolis-south_asian",
+  "name": "Aryabari",
+  "tier": "metropolis",
+  "culture": "south_asian",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-f-metropolis-south_asian",
+  "name": "Rajipeth",
+  "tier": "metropolis",
+  "culture": "south_asian",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-a-metropolis-steppe",
+  "name": "Gantulgager",
+  "tier": "metropolis",
+  "culture": "steppe",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-b-metropolis-steppe",
+  "name": "Erdenserai",
+  "tier": "metropolis",
+  "culture": "steppe",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-c-metropolis-steppe",
+  "name": "Gankhuubuurt",
+  "tier": "metropolis",
+  "culture": "steppe",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-d-metropolis-steppe",
+  "name": "Ögedeiserai",
+  "tier": "metropolis",
+  "culture": "steppe",
+  "printed": 2,
+  "found": []
+ },
+ {
+  "seed": "trad-e-metropolis-steppe",
+  "name": "Erdenbash",
+  "tier": "metropolis",
+  "culture": "steppe",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-f-metropolis-steppe",
+  "name": "Ulankotan",
+  "tier": "metropolis",
+  "culture": "steppe",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-a-metropolis-greek",
+  "name": "Olymprion",
+  "tier": "metropolis",
+  "culture": "greek",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-b-metropolis-greek",
+  "name": "Hagiolathra",
+  "tier": "metropolis",
+  "culture": "greek",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-c-metropolis-greek",
+  "name": "Neapolis",
+  "tier": "metropolis",
+  "culture": "greek",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-d-metropolis-greek",
+  "name": "Kallichori",
+  "tier": "metropolis",
+  "culture": "greek",
+  "printed": 2,
+  "found": []
+ },
+ {
+  "seed": "trad-e-metropolis-greek",
+  "name": "Ioannoagio",
+  "tier": "metropolis",
+  "culture": "greek",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-f-metropolis-greek",
+  "name": "Palaioakra",
+  "tier": "metropolis",
+  "culture": "greek",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-a-metropolis-mediterranean",
+  "name": "Pianostagnum",
+  "tier": "metropolis",
+  "culture": "mediterranean",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-b-metropolis-mediterranean",
+  "name": "Pratosinum",
+  "tier": "metropolis",
+  "culture": "mediterranean",
+  "printed": 2,
+  "found": []
+ },
+ {
+  "seed": "trad-c-metropolis-mediterranean",
+  "name": "Collevetum",
+  "tier": "metropolis",
+  "culture": "mediterranean",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-d-metropolis-mediterranean",
+  "name": "Ripacastra",
+  "tier": "metropolis",
+  "culture": "mediterranean",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-e-metropolis-mediterranean",
+  "name": "Sanctaurbs",
+  "tier": "metropolis",
+  "culture": "mediterranean",
+  "printed": 0,
+  "found": []
+ },
+ {
+  "seed": "trad-f-metropolis-mediterranean",
+  "name": "Ventomagnum",
+  "tier": "metropolis",
+  "culture": "mediterranean",
+  "printed": 0,
+  "found": []
+ }
+]

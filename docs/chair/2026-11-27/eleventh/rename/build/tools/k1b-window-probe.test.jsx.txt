@@ -1,0 +1,23 @@
+/** @vitest-environment jsdom */
+import { it } from 'vitest';
+import { writeFileSync } from 'node:fs';
+import { normalizeSettlement } from '../../src/domain/normalizeSettlement.js';
+import { birth, ensureLaws } from '../../scripts/audit/soak-review/corpus.mjs';
+import { shownTraditionsOf, sameWindowPlan, calendarLineOf } from '../../src/domain/traditions/shownTraditions.js';
+it('P', async () => {
+  await ensureLaws();
+  let two = null; let three = null;
+  for (let i = 0; i < 6000 && !(two && three); i++) {
+    let s; try { s = normalizeSettlement(birth(i).settlement); } catch { continue; }
+    const recs = shownTraditionsOf(s, []).recs; const plan = sameWindowPlan(recs);
+    const lines = recs.map((r) => calendarLineOf(r, plan.get(String(r.id)) || null));
+    const later = recs.filter((r) => plan.has(String(r.id)));
+    // two in one window (soak1k-48's shape): one window line once, the second names the first
+    if (!two) for (const r of later) { const first = plan.get(String(r.id)); const firstRec = recs.find((x) => x.name === first);
+      const own = calendarLineOf(firstRec, null); if (lines.filter((l) => l === own).length === 1 && (Number(r.window?.weeks) || 1) >= 2 && later.length === 1) { two = { i, own, sameAs: calendarLineOf(r, first), names: recs.map((x) => x.name) }; break; } }
+    // three in one two-week window (soak1k-5441's shape): two different "same weeks as" lines, each once
+    if (!three) { const same = lines.filter((l) => l.startsWith('Kept in the same weeks as')); const byWindow = new Map(); for (const r of later) { const k = JSON.stringify(r.window); byWindow.set(k, (byWindow.get(k) || 0) + 1); }
+      if ([...byWindow.values()].some((n) => n >= 2) && new Set(same).size >= 2 && same.every((l) => lines.filter((x) => x === l).length === 1)) three = { i, same: [...new Set(same)] }; }
+  }
+  writeFileSync('/home/user/scratch/p_window.json', JSON.stringify({ two, three }, null, 1));
+}, 7200000);

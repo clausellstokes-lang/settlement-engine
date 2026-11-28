@@ -1,0 +1,80 @@
+{
+ "plant2_010": [
+  [
+   "trad-plant2-town-latin-0",
+   true
+  ],
+  [
+   "trad-plant2-village-arabic-0",
+   true
+  ]
+ ],
+ "u4b_010": [
+  [
+   "trad-plant2-town-latin-0",
+   2
+  ]
+ ],
+ "t5": [
+  [
+   "trad-farm-village-latin-26",
+   true
+  ],
+  [
+   "trad-farm-town-latin-2",
+   true
+  ],
+  [
+   "trad-farm-city-latin-4",
+   true
+  ]
+ ],
+ "dead": [
+  [
+   "trad-dead-city-arabic-0",
+   true,
+   2
+  ],
+  [
+   "trad-dead-city-latin-4",
+   true,
+   1
+  ],
+  [
+   "trad-dead-metropolis-latin-0",
+   true,
+   1
+  ]
+ ],
+ "u7a": [
+  [
+   "trad-f-town-germanic",
+   "nocontrol"
+  ],
+  [
+   "trad-c-town-greek",
+   "nocontrol"
+  ],
+  [
+   "trad-dead-city-arabic-0",
+   true
+  ],
+  [
+   "trad-dead-city-latin-4",
+   true
+  ],
+  [
+   "trad-dead-metropolis-latin-0",
+   "nocontrol"
+  ]
+ ],
+ "u7b": {
+  "religious": [
+   "trad-curate-thorp"
+  ],
+  "merchant": [
+   "trad-curate-town"
+  ],
+  "readerSame": true
+ }
+}

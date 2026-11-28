@@ -1,0 +1,60 @@
+{
+ "P2m": {
+  "A": "trad-dead-metropolis-latin-2",
+  "B": null
+ },
+ "P2g": null,
+ "P2gn": "trad-c-town-greek-27",
+ "P5cur": [
+  [
+   "trad-curate-thorp",
+   [
+    false,
+    false
+   ],
+   true
+  ],
+  [
+   "trad-curate-hamlet",
+   [
+    false,
+    false
+   ],
+   true
+  ],
+  [
+   "trad-curate-village",
+   [
+    false,
+    false
+   ],
+   true
+  ],
+  [
+   "trad-curate-town",
+   [
+    false,
+    false
+   ],
+   true
+  ]
+ ],
+ "P5both": [
+  [
+   "trad-curate-thorp",
+   null
+  ],
+  [
+   "trad-curate-hamlet",
+   null
+  ],
+  [
+   "trad-curate-village",
+   null
+  ],
+  [
+   "trad-curate-town",
+   "trad-curate-town-84"
+  ]
+ ]
+}
