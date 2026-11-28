@@ -77,3 +77,21 @@ covert towns): the orphan rule on every public read, the link included, is a CUR
 **E23 (the chair's, sent to VEIL-56 at 00:08 UTC):** D1 (the Overview's "Governed by <power>" gaining the seat's holder) is
 TAKEN OUT of the town points and given to the lane's A19 unit at the join: the line is stamped by the owner's browser for the
 shared page (`publicProse` 'overview:identity'), so it is cut once with `holderOf`'s readers and A18's `PUBLIC_PROSE_VERSION`.
+
+**A20 AND A21, NAMED FOR THE LANE's RESUMPTION (03:50 UTC on 2026-11-28; from READER 122-123's early note, by execution on C's
+900 births; BOTH ARE THE SAME ON THE BASE aef8f9962, so neither is new at point 122; both need a DM-MADE or custom house: 0
+of 1,558 hideable houses of C are of this kind).**
+- **A20: `src/domain/display/galleryVeil.js :: applyVeil`: A HOUSE WHOSE HIDEABLE CLASS IS CARRIED ONLY BY A FUNCTION-EYE FIELD
+  STAYS ON THE SERVED PAGE UNDER THE DEFAULT VEIL.** Plant: `{ name: 'The Hidden Forge', category: 'Crafts', facets: {
+  clandestine: 'clandestine' } }` (or the tag `facet:clandestine:clandestine`): `isHideableHouse` true; the default veil lists
+  its `card:` and its `function` eye; yet `projectShareVeil(toPublicSafe(town), writeShareVeil(null, []))` still holds the
+  house (keys name, category): `card:` alone removes it; `card:` with `field:…:function` leaves it (the eye strips `facets`
+  and `tags` BEFORE the card's class is re-checked). The control (a criminal house by category) is removed. CONSEQUENCE FOR
+  THE TRADITIONS FLOOR (ruling 122-T-2): on such a house (the town's only smith) the floor's answer changes with the eye: the
+  reader's rows differ between shown and the eye shut in 198 of 900 planted towns at point 122's tip (186 on the base).
+  THE CURE IS THE VEIL's (the browser's `applyVeil` and its SQL twin, rule for rule): the class is read before the strip.
+  NOT CURED IN THE TOWN POINTS (it would cut the browser veil without its twin).
+- **A21: `src/domain/traditions/genesis.js :: fieldRiteRefused` read the full roster, not the floor** (a criminal house named
+  'Farmland', the only farmland: the reader's rows differ shown against hidden in 55 of 900; 269 with the food record's
+  sources set to no grain): CURED IN POINT 122 BY RULING 122-T-5 (the same floor helper; in work at the time of writing):
+  recorded here so the lane's proof counts it.
