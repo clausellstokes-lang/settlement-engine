@@ -139,7 +139,8 @@ describe('(d) the AI narrative follows too (the chair\'s ruling K2-1): the town\
     store.setState((s) => { s.applyCosmeticRename = cosmetic; });
     store.getState().renameSettlement('save-1', NEW);
     expect(cosmetic).toHaveBeenCalledTimes(1);
-    expect(cosmetic).toHaveBeenCalledWith({ saveId: 'save-1', oldName: rec.name, newName: NEW });
+    // RE-POINTED (the chair's ruling K2-3 (B)): the town's rename names its kind, so the narrative's writer takes the town's rule
+    expect(cosmetic).toHaveBeenCalledWith({ saveId: 'save-1', oldName: rec.name, newName: NEW, kind: 'town' });
     // anchored: a rename to the name it already holds asks nothing
     store.getState().renameSettlement('save-1', NEW);
     expect(cosmetic).toHaveBeenCalledTimes(1);

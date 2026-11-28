@@ -149,7 +149,7 @@ export function renameSettlementImpl(get, set, id, newName) {
   });
   // R2: a change-queue flush replays renameSettlement and owns the single
   // atomic commit, so defer this row's cloud write while suppressed.
-  if (persist && !get().flushSuppressPersist) persistSaveUpdate(id, persist); if (renamed?.oldName) get().applyCosmeticRename?.({ saveId: renamed.saveId, oldName: renamed.oldName, newName: trimmed });
+  if (persist && !get().flushSuppressPersist) persistSaveUpdate(id, persist); if (renamed?.oldName) get().applyCosmeticRename?.({ saveId: renamed.saveId, oldName: renamed.oldName, newName: trimmed, kind: 'town' });
   return recorded;
 }
 

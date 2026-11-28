@@ -840,14 +840,19 @@ export const createAiSlice = (set, get) => ({
    * This is the cosmetic tier of the AI-2 change classifier — mechanical
    * substitution is semantically safe, no credit spend, no user confirm.
    */
-  applyCosmeticRename: async ({ saveId, oldName, newName }) => {
+  applyCosmeticRename: async ({ saveId, oldName, newName, kind }) => {
     if (!saveId || !oldName || oldName === newName) return;
     const state = get();
     const entry = state.savedSettlements.find(s => s.id === saveId);
     if (!entry) return;
 
-    const { applyRenameToAiData } = await import('../lib/narrativeMutations.js');
-    const nextAiData = applyRenameToAiData(entry.aiData, oldName, newName);
+    const { applyRenameToAiData, applyTownRenameToAiData } = await import('../lib/narrativeMutations.js');
+    // POINT 124's cure (K2-3 (B)): a TOWN's rename takes the record's cascade rule (its shields, its do-nothing rule) by the
+    // one helper, over the saved record's other names; the person's and the power's renames keep their own path.
+    const { townNameRewrite } = kind === 'town' ? await import('../domain/townRename.js') : { townNameRewrite: null };
+    const nextAiData = townNameRewrite
+      ? applyTownRenameToAiData(entry.aiData, oldName, newName, townNameRewrite(entry.settlement, oldName, newName))
+      : applyRenameToAiData(entry.aiData, oldName, newName);
     // If nothing changed (no narrative, or the name didn't appear anywhere),
     // skip the network round-trip.
     if (nextAiData === entry.aiData) return;

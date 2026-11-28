@@ -127,6 +127,40 @@ export function applyRenameToAiData(aiData, oldName, newName) {
 }
 
 /**
+ * THE TOWN's RENAME OF THE AI NARRATIVE (point 124's cure, the chair's ruling K2-3 (B)): the same rule as the record's
+ * cascade, by its one helper (`domain/townRename.js :: townNameRewrite`, handed in as `rewrite`): whole word, the record's
+ * other stored names shielding ("Ana Ford", "Ford Abbey"), and nothing rewritten where the old name IS another stored name
+ * (`rewrite` null: then only the copy's own top-level `name` moves, as the record's does). The AI copy's NAME FIELDS of
+ * its people, houses and powers (`name`, `faction` on a list's entry) are never touched by a town's rename.
+ * @param {any} aiData @param {string} oldName @param {string} newName
+ * @param {((v: unknown) => unknown) | null} rewrite
+ */
+export function applyTownRenameToAiData(aiData, oldName, newName, rewrite) {
+  if (!aiData || !oldName || oldName === newName) return aiData;
+  if (!(aiData.aiSettlement || aiData.aiDailyLife)) return aiData;
+  const NAME_KEYS = new Set(['name', 'faction']);
+  /** @param {unknown} v @param {boolean} entry an entry of a list (a person, a house, a power) */
+  const walk = (v, entry) => {
+    if (typeof v === 'string') return rewrite ? rewrite(v) : v;
+    if (Array.isArray(v)) return v.map((x) => walk(x, true));
+    if (v && typeof v === 'object') {
+      /** @type {Record<string, unknown>} */ const out = {};
+      for (const [k, x] of Object.entries(v)) out[k] = entry && NAME_KEYS.has(k) ? x : walk(x, false);
+      return out;
+    }
+    return v;
+  };
+  /** @param {any} copy */
+  const ownName = (copy) => (copy && typeof copy === 'object' && copy.name === oldName ? { ...copy, name: newName } : copy);
+  const settlement = aiData.aiSettlement ? (rewrite ? walk(aiData.aiSettlement, false) : ownName(aiData.aiSettlement)) : aiData.aiSettlement;
+  return {
+    ...aiData,
+    aiSettlement: settlement,
+    aiDailyLife: aiData.aiDailyLife && rewrite ? walk(aiData.aiDailyLife, false) : aiData.aiDailyLife,
+  };
+}
+
+/**
  * Apply multiple cosmetic renames in one pass. Useful when a single edit
  * triggers several substitutions (e.g. renaming a faction also renames
  * cross-settlement references to it).
