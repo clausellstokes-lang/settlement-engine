@@ -597,11 +597,17 @@ describe('TRAD-3 UNIT 4, THE SET (the chair\'s cure B): the rows drawn for the s
   const stripped = { ...t, institutions: t.institutions.map((i) => (i.name === 'The Lantern Exchange' ? { name: i.name, category: i.category } : i)) };
   const veiled = applyVeil(t, new Set([`field:institution:${CARD_KINDS.institution.idOf({ name: 'The Lantern Exchange' })}:function`]));
   const motifs = (s) => shownTraditionsOf(s, []).recs.map((r) => `${r.coreMotif.element}/${r.coreMotif.act}`);
+  const [t10, stripped10] = [t, stripped];
 
+  // RULING 122-T-2: this arm pins the OLD draw, so it reads the record as an earlier engine bore it (0.9.0, or no stamp);
+  // a 0.10.0 draw asks the floor (the arm 'RULING 122-T-2 ... one set' below).
   it('the OWNER\'s set is as it was: it admits the market rites by the house\'s own tags (genesis derives the same three rites either way)', () => {
-    expect(deriveFoundingTraditions(stripped).map((r) => r.id)).toEqual(deriveFoundingTraditions(t).map((r) => r.id));
-    expect(motifs(t)).toEqual(['first-landing/feast', 'market/fair', 'tide/fair']);
-    expect(motifs(stripped)).toEqual(['first-landing/feast']); // the owner's page reads the record it is handed
+    for (const restamp of [(s) => ({ ...s, generatorVersion: '0.9.0' }), ({ generatorVersion: _v, ...s }) => s]) {
+      const [t, stripped] = [restamp(t10), restamp(stripped10)];
+      expect(deriveFoundingTraditions(stripped).map((r) => r.id)).toEqual(deriveFoundingTraditions(t).map((r) => r.id));
+      expect(motifs(t)).toEqual(['first-landing/feast', 'market/fair', 'tide/fair']);
+      expect(motifs(stripped)).toEqual(['first-landing/feast']); // the owner's page reads the record it is handed
+    }
   }, 120000);
 
   it('the drawn rows are byte-identical with the house\'s tags present, hidden by applyVeil, and removed by hand', () => {
@@ -750,6 +756,41 @@ describe('TRAD-3 UNIT 4b, THE FLOOR EXCLUDES THE HIDEABLE CLASS (the chair\'s ru
     expect(rows.map((r) => r.name)).toEqual(shownTraditionsOf(t, []).recs.filter((r) => r.coreMotif.element === 'first-landing').map((r) => r.name));
     expect(rows.filter(standsOnMarket).map((r) => r.name)).toEqual([]);
     expect(JSON.stringify(sharedTraditionRowsOf(hidden))).toBe(JSON.stringify(rows));
+  }, 120000);
+});
+
+describe('RULING 122-T-2: at 0.10.0 THE DRAW ASKS THE FLOOR: the owner\'s set and the shared page\'s rows are one set under every veil', () => {
+  // Genesis at 0.10.0 holds a motif only where its needs answer at the floor (no house of the hideable class, every house
+  // less its function eye), so a hide or a tag veil cannot move the drawn set, and the owner's view-time drop removes none
+  // of it. RED FIRST (19e7a799f, the draw over the full record): the 4b town's rows were 1 shown, 3 hidden.
+  const lantern = { name: 'The Lantern Exchange', category: 'Economy', tags: ['market'] };
+  const criminal = { name: 'Weekly market', category: 'Criminal', priorityCategory: 'criminal' };
+  const b = born('town', 'latin', 'trad-plant2-town-latin-0');
+  const plant = (house) => ({ ...b, institutions: [...b.institutions.filter((i) => !isMarketInstitution(i)), { ...house }] });
+  const idOf = (house) => CARD_KINDS.institution.idOf(house);
+  const p2 = plant(lantern);
+  const p4 = plant(criminal);
+  const GROUPS = [
+    ['plant 2: tags shown, veiled, removed by hand', [p2, applyVeil(p2, new Set([`field:institution:${idOf(lantern)}:function`])),
+      { ...p2, institutions: p2.institutions.map((i) => (i.name === lantern.name ? { name: i.name, category: i.category } : i)) }]],
+    ['plant 4b: the hideable house shown, hidden whole, tag-veiled', [p4, applyVeil(p4, new Set([`card:institution:${idOf(criminal)}`])),
+      applyVeil(p4, new Set([`field:institution:${idOf(criminal)}:function`]))]],
+  ];
+  const names = (recs) => (recs || []).map((r) => r.name);
+
+  it('the premise: births of this engine, stamped 0.10.0, and the hide reaches the house', () => {
+    for (const [, group] of GROUPS) for (const x of group) expect(x.generatorVersion).toBe('0.10.0');
+    expect(GROUPS[1][1][1].institutions.some((i) => i.name === criminal.name)).toBe(false);
+  }, 120000);
+
+  it('the owner\'s set is the shared page\'s drawn set, and the row count a reader sees is the same shown, hidden and veiled', () => {
+    for (const [label, group] of GROUPS) {
+      const counts = group.map((x) => (sharedTraditionRowsOf(x) || []).length);
+      expect(counts, `${label}: rows`).toEqual(counts.map(() => counts[0]));
+      for (const x of group) expect(names(shownTraditionsOf(x, []).recs), label).toEqual(names(sharedTraditionRowsOf(x)));
+      const rows = JSON.stringify(sharedTraditionRowsOf(group[0]));
+      for (const x of group.slice(1)) expect(JSON.stringify(sharedTraditionRowsOf(x)), label).toBe(rows);
+    }
   }, 120000);
 });
 
