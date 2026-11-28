@@ -751,3 +751,51 @@ See section 4, newest last.
 - NEXT FOR THE CHAIR: FIX-123's report; push `lane/stack-123-wip-2026-11-28`; the whole suite ONCE on that tip in four
   shards (it holds point 122); the reader's report; the two rows; the line's push; then the first wave's measures and "TIP?"s.
   RENAME-MEASURE has still not reported (a55d32a39 at 00:30 UTC).
+
+## V27 (03:48 UTC on 2026-11-28): THE WHOLE SUITE ON POINTS 122 AND 123 JOINED (63 failed: 57 on the list, 6 new: 5 cured, 1 A GOLDEN FOR THE OWNER); THE QUOTE LINES WRITTEN AFTER FIVE RULINGS OF THE OWNER's; THE RANGE MEASURE STARTED
+- **THE JOINED TIP IS d8d05d4cc (LOCAL on `/home/user/wt/line`, pushed as transport `lane/stack-123-wip-2026-11-28`; THE LINE ON
+  ORIGIN IS STILL aef8f9962).** Above 777733a2a (point 122's joined tip): 97c9223a2 and 6db89ad83 (point 123's two merges),
+  4b612c569 and c84f7ab20 (writer-reach, the lighting census), 13f06f00d (a comment); FIX-123: 060177c71 (the need leaf reads
+  the famine in force by a local reader held equal to `crisisOf` by its guard: THE APP BOOTS AGAIN), 673ff1f11 (the EXEMPT row),
+  da74d8aa2 (two reads on the layer table: `stress`, `stressors`), b693c4605 (the lighting census); 034830dba (ruling 122-T-4:
+  six bare seed loops of `tests/domain/traditionNeedsHeld.test.js` collect); d8d05d4cc (ruling 123-J-2: the needs memo of
+  `genesis.js` typed: no any-cast; the shrink-only baseline untouched).
+- THE SIX SIZES AT b693c4605 against point 122's joined tip: first paint 1,196,447 raw (+3,054) / 381,476 gzip (+913) / 320,320
+  Brotli (+901); the generation worker 2,744,088 (+2,485); the engine chunk 937,247 (0); the PDF render worker 3,150,399
+  (+1,710). `tests/build` 13 red, all on the list. NAMED FOR THE OWNER's SIZE SIGNING.
+- **THE WHOLE SUITE AT b693c4605, FOUR SHARDS ("LAND123", 02:53 to 03:38 UTC; lists filed: `shards/LAND123/`,
+  `shards/results/LAND123-on.tsv`, `-new.tsv`; the template now counts skipped tests):** 3,827 files, 43,968 tests, 63 failed:
+  57 ON THE LIST, 6 NEW: (1) `seedLoopTotality.walker`: cured (034830dba); (2 to 5) `domainAnyCastBaseline`, four cases, one
+  cause: cured (d8d05d4cc); (6) **`tests/property/heraldKnowledgeDeskGolden.test.js`, "THE REFILE MOVES NO CONTENT BYTE, AND
+  EXACTLY THE DECLARED ITEMS CHANGE DESK": A GOLDEN, MOVED BY THE TRADITIONS DRAW (first red at the merge a838e7079):** in the
+  reader-corpus realm rr-fresh-full advanced one year, Berghavn's founding rite is re-drawn from The Long Contest to The
+  Long Vigil; one tradition news item is replaced and three travellers' errands re-deal (9 items in, 8 out, 2 changed; 474
+  items for 473). ITS DOOR NEEDS A SIGNED SHIFT RECORD (`GOLDEN_SHIFT_SIGNED=… UPDATE_GOLDEN=1`): **THE OWNER's; NOT RUN; IT
+  JOINS THE LIST AS A NEW ROW AT POINT 122, NAMED WITH THIS CAUSE.** (TRAD-MEASURE had said, PLAUSIBLE, that the first-lit
+  mint would follow the new draw: this is that.) AFTER THE TWO CURES, RE-RUN ON THE TIP: the two walkers and their files green.
+- **THE OWNER, FIVE MORE MESSAGES ON THE QUOTES (verbatim in `SURVEY-CHARTER.md`, his seventh to ninth, and one question):**
+  a quote is a PASSING REMARK, not an interview, with few "I" statements (L-2); PLAINER words, one sentence, fewer second
+  sentences (L-3); THE TEMPERS WERE TOO ALIKE: each must notice a different thing (L-4: the chair's own instruction to keep
+  them close was the fault, withdrawn); and "in the rest of all the prose of the entire project have you limited things
+  this way as well?": ANSWERED PLAINLY (probably yes in another way; not measured; three things the chair itself did that
+  narrowed), and A MEASURE STARTED: **RANGE-MEASURE** session_01FE9mEuFNVzXKRx6gJcVSJ3 (Opus, high;
+  `prompts/START-RANGE-MEASURE.txt`; `lane/range-measure-2026-11-28`): variants (paraphrase, angles, distinct) weighted by
+  prints; depth; sameness across towns; the direction of travel in six weeks; the thirty keys where new lines buy the most.
+  ITS EARLY FIGURE (PLAUSIBLE): pool lines GREW from 9,427 to 13,307 in six weeks and declared lines from 654 to 3,686: "fewer
+  lines" looks wrong; whether the new lines differ is what it measures. One refusal by its own permission check (a package
+  install) stood.
+- **VOICES-LINES: DONE AND STOPPED (4116f40b2; filed whole: `survey/lines/`):** `C-said-lines.tsv`: 197 lines in four tempers
+  (warm; counting the cost; guarded; curt), keyed by card kind and state, with `seen` (the working) and `needs` (a thing the
+  town must hold: 28 lines); `D-liar-lines.tsv`: 40; `E-read.md`: its own cold read and notes for the engine (the crisis card
+  ranked first; a page-level variety rule; two thin states filled). THE CHAIR READ (C) WHOLE; rulings L-1 to L-5 are in the
+  messages and the charter. THREE SAMPLES are kept (`B-sample.tsv`, `-2`, `-3`): the register's history.
+- VOICES-CARDS' EARLY NOTE (02:47 UTC): most cards have NO stable id (institutions, powers, tensions are keyed by NAME; a
+  tradition's id is an index into a view-time draw): a rename re-deals "does it speak"; the share cannot compute a seeded
+  pick (`toPublicSafe` strips `_seed`): quotes there must be STAMPED at publish (the veil lane's unit); no shared card
+  primitive: one slot component at about twelve sites, screen and PDF. Its report is not in.
+- SURVEY-TABLE's MEASURE OF S-B RULED (S-B-1, by message, 02:45 UTC): the atoms `place debt` (answered at
+  `facts/factsAnswered.js`, the desks' door: an import cycle forbids `factsOf`; a pin that no birth pool declares it) and
+  `nothing laid by`; the layer rows re-placed only if the walker's own rule takes it; the prose-bytes register NOT appended
+  (the owner's). SURVEY-FINAL: no measure yet. READER 122-123: no report yet. RENAME-MEASURE: silent since 00:30 UTC.
+- NEXT: the reader's report (it takes point 123's tip from origin: now d8d05d4cc); then the two rows, the red list's new
+  row, the line's push, CI by name. THE SECOND WAVE of the survey after the first wave's "TIP?"s.
