@@ -30,13 +30,10 @@ const isDesk = (rel) => rel.startsWith('src/data/dossierStateProse/')
   || rel === 'src/domain/display/galleryVeil.js';
 
 describe('a helper carries no desk (RULING 122-B-2, F7)', () => {
-  for (const helper of ['src/domain/display/tensionDescriptionShown.js']) {
-    it(`${helper} reaches no corpus, desk, description table or veil through its static imports`, () => {
-      const entry = join(ROOT, helper);
-      const { seen, parent } = importClosure([entry], FOLLOW_STATIC);
-      const reached = [...seen].map((f) => relative(ROOT, f).replace(/\\/g, '/'));
-      expect(reached.length, 'the walk reads the helper\'s imports (not vacuous)').toBeGreaterThan(1);
-      expect([...seen].filter((f) => isDesk(relative(ROOT, f).replace(/\\/g, '/'))).map((f) => chainTo(parent, f, ROOT))).toEqual([]);
-    });
-  }
+  it('src/domain/display/tensionDescriptionShown.js reaches no corpus, desk, description table or veil through its static imports', () => {
+    const { seen, parent } = importClosure([join(ROOT, 'src/domain/display/tensionDescriptionShown.js')], FOLLOW_STATIC);
+    const reached = [...seen].map((f) => relative(ROOT, f).replace(/\\/g, '/'));
+    expect(reached.length, 'the walk reads the helper\'s imports (not vacuous)').toBeGreaterThan(1);
+    expect([...seen].filter((f) => isDesk(relative(ROOT, f).replace(/\\/g, '/'))).map((f) => chainTo(parent, f, ROOT))).toEqual([]);
+  });
 });

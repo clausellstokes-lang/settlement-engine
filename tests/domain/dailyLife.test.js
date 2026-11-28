@@ -399,14 +399,25 @@ describe('recent_changes behavior', () => {
     expect(deriveDailyLifeSlot('recent_changes', rec).text.includes(T2), 'the control prints T2').toBe(true);
     expect(deriveDailyLifeSlot('recent_changes', { ...rec, stress: [{ type: 'plague_onset' }] }).text.includes(T2)).toBe(false);
   });
-  for (const form of ['overrun', 'frontier']) for (const id of ['T0', 'T1']) {
-    it(`monster pressure ${form} imminent ${id} is refused where a monster crisis is in force`, () => {
-      const line = RECENT_CHANGES[`threat.monster_pressure.${form}.imminent`].find((l) => l.id === id);
-      const admitted = (/** @type {any} */ rec) => filterDeclared([line], { facts: () => factsOf(rec), poolId: `dailyLife.recent_changes.threat.monster_pressure.${form}.imminent`, surface: 'dailyLife' }).length;
-      const rec = { name: 'Ashford', config: { monsterThreat: form === 'overrun' ? 'plagued' : 'frontier' } };
-      expect([admitted(rec), admitted({ ...rec, stress: [{ type: 'monster_pressure' }] })]).toEqual([1, 0]);
-    });
-  }
+  /** @param {'overrun'|'frontier'} form @param {string} id @returns {number[]} admitted beside no crisis, beside a monster crisis */
+  const monsterDoor = (form, id) => {
+    const line = RECENT_CHANGES[`threat.monster_pressure.${form}.imminent`].find((l) => l.id === id);
+    const admitted = (/** @type {any} */ rec) => filterDeclared([line], { facts: () => factsOf(rec), poolId: `dailyLife.recent_changes.threat.monster_pressure.${form}.imminent`, surface: 'dailyLife' }).length;
+    const rec = { name: 'Ashford', config: { monsterThreat: form === 'overrun' ? 'plagued' : 'frontier' } };
+    return [admitted(rec), admitted({ ...rec, stress: [{ type: 'monster_pressure' }] })];
+  };
+  it('monster pressure overrun imminent T0 is refused where a monster crisis is in force', () => {
+    expect(monsterDoor('overrun', 'T0')).toEqual([1, 0]);
+  });
+  it('monster pressure overrun imminent T1 is refused where a monster crisis is in force', () => {
+    expect(monsterDoor('overrun', 'T1')).toEqual([1, 0]);
+  });
+  it('monster pressure frontier imminent T0 is refused where a monster crisis is in force', () => {
+    expect(monsterDoor('frontier', 'T0')).toEqual([1, 0]);
+  });
+  it('monster pressure frontier imminent T1 is refused where a monster crisis is in force', () => {
+    expect(monsterDoor('frontier', 'T1')).toEqual([1, 0]);
+  });
 });
 
 // ── Composer ───────────────────────────────────────────────────────────
