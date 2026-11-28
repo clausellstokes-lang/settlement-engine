@@ -1,0 +1,43 @@
+set /var/tmp/v52/out/stored-today tpl v52dsql; documents 140; all done true; faults 0
+towns whose raw record holds a covert tie: 69; of them, raw prominentRelationship tells one: 7, raw pressureSentence tells one: 69
+RED (covert towns only, Reveal off): copy | door | towns | no body | served PR tells | served PS tells | (cross-check: = raw telling PR | = raw telling PS)
+  M | gallery | 69 | 0 | 7 | 69 | (7 | 69)  e.g. r3m-city-infiltrated-0-32, r3m-city-none-0-31, r3m-city-none-1-107, r3m-city-politically_fractured-0-40, r3m-city-wartime-0-39, r3m-metropolis-indebted-0-56
+  M | import | 69 | 0 | 7 | 69 | (7 | 69)  e.g. r3m-city-infiltrated-0-32, r3m-city-none-0-31, r3m-city-none-1-107, r3m-city-politically_fractured-0-40, r3m-city-wartime-0-39, r3m-metropolis-indebted-0-56
+  M | map | 69 | 0 | 7 | 69 | (7 | 69)  e.g. r3m-city-infiltrated-0-32, r3m-city-none-0-31, r3m-city-none-1-107, r3m-city-politically_fractured-0-40, r3m-city-wartime-0-39, r3m-metropolis-indebted-0-56
+  M | link | 69 | 0 | 0 | 0 | (0 | 0)
+  T | gallery | 69 | 0 | 0 | 0 | (0 | 0)
+  T | import | 69 | 0 | 0 | 0 | (0 | 0)
+  T | map | 69 | 0 | 0 | 0 | (0 | 0)
+  T | link | 69 | 0 | 0 | 0 | (0 | 0)
+  live | gallery | 69 | 0 | 0 | 0 | (0 | 0)
+  live | import | 69 | 0 | 0 | 0 | (0 | 0)
+  live | map | 69 | 0 | 0 | 0 | (0 | 0)
+  live | link | 69 | 0 | 0 | 0 | (0 | 0)
+THE RULE (every town, Reveal off): copy | door | reads | PR served | PS served | LEAKS LEFT PR | PS | clean withheld PR a/b/c/d | PS a/b/c/d | telling withheld PR | PS
+  M | gallery | 140 | 87 | 135 | 0 | 0 | 0/0/0/0 (any 0) | 0/0/0/0 (any 0) | 7 | 69
+  M | import | 140 | 87 | 135 | 0 | 0 | 0/0/0/0 (any 0) | 0/0/0/0 (any 0) | 7 | 69
+  M | map | 140 | 87 | 135 | 0 | 0 | 0/0/0/0 (any 0) | 0/0/0/0 (any 0) | 7 | 69
+  M | link | 140 | 80 | 66 | 0 | 0 | 0/0/0/0 (any 0) | 0/0/0/0 (any 0) | 0 | 0
+  T | gallery | 140 | 80 | 66 | 0 | 0 | 0/0/0/0 (any 0) | 0/0/0/0 (any 0) | 0 | 0
+  T | import | 140 | 80 | 66 | 0 | 0 | 0/0/0/0 (any 0) | 0/0/0/0 (any 0) | 0 | 0
+  T | map | 140 | 80 | 66 | 0 | 0 | 0/0/0/0 (any 0) | 0/0/0/0 (any 0) | 0 | 0
+  T | link | 140 | 80 | 66 | 0 | 0 | 0/0/0/0 (any 0) | 0/0/0/0 (any 0) | 0 | 0
+  live | gallery | 140 | 80 | 66 | 0 | 0 | 0/0/0/0 (any 0) | 0/0/0/0 (any 0) | 0 | 0
+  live | import | 140 | 80 | 66 | 0 | 0 | 0/0/0/0 (any 0) | 0/0/0/0 (any 0) | 0 | 0
+  live | map | 140 | 80 | 66 | 0 | 0 | 0/0/0/0 (any 0) | 0/0/0/0 (any 0) | 0 | 0
+  live | link | 140 | 80 | 66 | 0 | 0 | 0/0/0/0 (any 0) | 0/0/0/0 (any 0) | 0 | 0
+A2 WRITER: towns 140; stored sentence is a tie's phrasing: 78; a COVERT tie's: 69; of those the name test misses: 0; a sentence two ties could have written: 0
+  covert-phrasing towns: r3m-city-infiltrated-0-32, r3m-city-none-0-31, r3m-city-none-1-107, r3m-city-politically_fractured-0-40, r3m-city-wartime-0-39, r3m-metropolis-indebted-0-56, r3m-metropolis-infiltrated-0-52, r3m-metropolis-none-0-51, r3m-metropolis-none-0-63, r3m-metropolis-none-1-127, r3m-metropolis-politically_fractured-0-60, r3m-metropolis-under_siege-0-58, r3m-metropolis-wartime-0-59, r3m-town-insurgency-0-14, r3m-town-none-0-23, r3m-city-indebted-0-46, r3m-city-infiltrated-0-42, r3m-city-insurgency-0-44, r3m-city-none-0-33, r3m-city-occupied-0-45, r3m-city-under_siege-0-48, r3m-city-wartime-0-49, r3m-metropolis-indebted-0-66, r3m-metropolis-infiltrated-0-62, r3m-metropolis-none-0-53, r3m-metropolis-none-1-131, r3m-metropolis-occupied-0-65, r3m-metropolis-politically_fractured-0-70, r3m-metropolis-under_siege-0-68, r3m-metropolis-wartime-0-69, r3m-town-none-1-91, r3m-town-under_siege-0-28, r3m-town-wartime-0-29, r3m-city-indebted-1-106, r3m-city-infiltrated-1-102, r3m-city-insurgency-1-104, r3m-city-none-0-37, r3m-city-none-1-101, r3m-city-none-1-113, r3m-city-politically_fractured-1-110, r3m-city-under_siege-1-108, r3m-city-wartime-1-109, r3m-metropolis-indebted-1-126, r3m-metropolis-infiltrated-1-122, r3m-metropolis-insurgency-1-124, r3m-metropolis-none-0-57, r3m-metropolis-none-1-121, r3m-metropolis-occupied-1-125, r3m-metropolis-politically_fractured-1-130, r3m-metropolis-under_siege-1-128, r3m-metropolis-wartime-1-129, r3m-town-none-0-17, r3m-town-occupied-1-85, r3m-city-insurgency-1-114, r3m-city-none-1-117, r3m-city-politically_fractured-1-120, r3m-city-under_siege-1-118, r3m-city-wartime-1-119, r3m-metropolis-indebted-1-136, r3m-metropolis-infiltrated-1-132, r3m-metropolis-insurgency-1-134, r3m-metropolis-none-0-61, r3m-metropolis-none-1-137, r3m-metropolis-occupied-1-135, r3m-metropolis-politically_fractured-1-140, r3m-metropolis-under_siege-1-138, r3m-metropolis-wartime-1-139, r3m-town-none-0-21, r3m-town-under_siege-1-98
+A2 SERVED (a LEAK is a served sentence that is a covert tie's phrasing): copy | door | reads with a body | PS served | served covert phrasing (LEAK)
+  M | gallery | 140 | 135 | 69  LEAK r3m-city-infiltrated-0-32, r3m-city-none-0-31, r3m-city-none-1-107, r3m-city-politically_fractured-0-40, r3m-city-wartime-0-39
+  M | import | 140 | 135 | 69  LEAK r3m-city-infiltrated-0-32, r3m-city-none-0-31, r3m-city-none-1-107, r3m-city-politically_fractured-0-40, r3m-city-wartime-0-39
+  M | map | 140 | 135 | 69  LEAK r3m-city-infiltrated-0-32, r3m-city-none-0-31, r3m-city-none-1-107, r3m-city-politically_fractured-0-40, r3m-city-wartime-0-39
+  M | link | 140 | 66 | 0
+  T | gallery | 140 | 66 | 0
+  T | import | 140 | 66 | 0
+  T | map | 140 | 66 | 0
+  T | link | 140 | 66 | 0
+  live | gallery | 140 | 66 | 0
+  live | import | 140 | 66 | 0
+  live | map | 140 | 66 | 0
+  live | link | 140 | 66 | 0
