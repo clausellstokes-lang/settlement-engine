@@ -8,4 +8,7 @@
 - (D) `D-liar-lines.tsv`: 40 liar lines, each keyed by what the tie touches: the holder's own house by its `via` (front 6, office 6,
   retainer 4) or the criminal house's kind (smuggling 4, black market 4, theft 4, extortion 4, secrets 3, killing 3, tunnels 2);
   each with its false claim and its `in truth` for the DM; names no house, person or power.
-- NEXT: (E) `E-read.md` (the ten towns), then the DONE report.
+- (E) `E-read.md`: the ten towns read with (C) and (D).
+- SUPERSEDED BY L-4 (03:20 UTC): (C), (D) and (E) above were written in the L-3 register; L-4 asks each temper to notice a
+  different thing, five lines for the commonest states (about 190), and a `seen` column. They stand as drafts only.
+- NEXT: `B-sample-3.tsv` (the sixty to L-4); the chair reads it; then (C), (D), (E) re-done.
