@@ -11,4 +11,5 @@
 - (E) `E-read.md`: the ten towns read with (C) and (D).
 - SUPERSEDED BY L-4 (03:20 UTC): (C), (D) and (E) above were written in the L-3 register; L-4 asks each temper to notice a
   different thing, five lines for the commonest states (about 190), and a `seen` column. They stand as drafts only.
-- NEXT: `B-sample-3.tsv` (the sixty to L-4); the chair reads it; then (C), (D), (E) re-done.
+- (B3) `B-sample-3.tsv`: the sixty to L-4, with `seen`; 0 pairs of versions share two content words; 0 lines with I/me/my.
+- NEXT: the chair reads B3; then (C) at about 190 (five a state where commonest), (D), (E) re-done.
