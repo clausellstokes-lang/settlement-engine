@@ -36,6 +36,7 @@ import { waterAccessKind } from '../tradeRouteSemantics.js';
 import { bornAtOrAfter } from '../settlement.schema.js'; // B1(ii) (G64 (3), G72 (1)): the floor reader of the engine's stamp
 import { factsOf } from '../facts/factsOf.js'; // B1(ii): farmland on the roster, through its atom's own reader
 import { atomHolds } from '../facts/factVocabulary.js'; // B1(ii)
+import { traditionFloorOf } from './traditionFloor.js'; // RULING 122-T-2: the needs are asked of the floor
 import { evil01, chaos01 } from '../worldPulse/deityAxes.js';
 import { seasonForTick } from '../worldPulse/worldState.js';
 import { popToTier, TIER_ORDER } from '../../data/constants.js';
@@ -193,6 +194,10 @@ const FIELD_ELEMENT = 'field';
 
 // The engine that first carried the field rule (G72 (1)): a literal, never the build's GENERATOR_VERSION, so the next release keeps the rule for places 0.10.0 bore.
 const FIELD_RITE_SINCE = '0.10.0';
+
+// RULING 122-T: the engine that first draws only rites the place can hold. A literal (as FIELD_RITE_SINCE): a place an
+// earlier engine bore keeps its whole drawn set, and the tab's view-time drop (shownTraditions.js) stands for it.
+const NEEDS_SINCE = '0.10.0';
 
 /**
  * B1(ii), NO TRADITION BLESSES FIELDS THE PLACE DOES NOT HAVE (the tenth chair's G64 (2), (3)): the place's own food record
@@ -392,6 +397,14 @@ export function deriveFoundingTraditions(settlement) {
 
   const foundingCandidates = TRADITION_ELEMENTS.filter((e) => e.foundingFit);
   const refusesFieldRite = fieldRiteRefused(settlement); // B1(ii) (G64): false for a record an earlier engine bore
+  // THE DRAW KNOWS THE NEEDS (NEEDS_SINCE). A motif whose element or act declares a fact (`needs`, the corpus; the
+  // tab's own rule, shownTraditions.js :: motifNeeds) the record does not hold is not taken; the next attempt's draw is.
+  // ASKED OF THE FLOOR (RULING 122-T-2, traditionFloor.js), for every audience: no veil state can move the drawn set.
+  const askNeeds = bornAtOrAfter(settlement, NEEDS_SINCE);
+  /** @type {any} */ let factsMemo = null;
+  /** @param {TraditionElement} e @param {TraditionAct} a @returns {boolean} the place holds every fact the motif declares */
+  const heldBy = (e, a) => !askNeeds || [...(e.needs || []), ...(a.needs || [])]
+    .every((x) => atomHolds(x, (factsMemo ||= /** @type {Parameters<typeof atomHolds>[1]} */ (factsOf(/** @type {Parameters<typeof factsOf>[0]} */ (traditionFloorOf(settlement)))))) === true);
   const usedNames = new Set();
   const usedMotifs = new Set();
   /** @type {TraditionRec[]} */
@@ -415,6 +428,12 @@ export function deriveFoundingTraditions(settlement) {
         /** @type {TraditionAct[]} */ ([...TRADITION_ACTS]),
         TRADITION_ACTS.map((a) => actWeight(a, el, id, true)),
       );
+      // A founding motif the place cannot hold takes the first held of ten further draws on forks of their own.
+      for (let k = 1; k <= 10 && !heldBy(el, act); k += 1) {
+        const e = rng.fork(`el:${k}`).weightedPick(/** @type {TraditionElement[]} */ (foundingCandidates), foundingCandidates.map((x) => foundingElementWeight(x, id)));
+        const a = rng.fork(`act:${k}`).weightedPick(/** @type {TraditionAct[]} */ ([...TRADITION_ACTS]), TRADITION_ACTS.map((x) => actWeight(x, e, id, true)));
+        if (heldBy(e, a)) [el, act] = [e, a];
+      }
     } else {
       /** @param {number} k @returns {[TraditionElement, TraditionAct]} attempt k's draw, on its own two forks */
       const drawAt = (k) => {
@@ -443,12 +462,14 @@ export function deriveFoundingTraditions(settlement) {
       // attempts. It takes the first that is ADMITTED and whose motif the town has not used (the reroll's own test,
       // `motifUnused`: the base never shows one town a motif twice), else the first admitted; if all ten draw a refused rite,
       // the row keeps its first draw (never dropped). The chair's ruling on B1II-119's finding 1.
-      if (refusesFieldRite && el.id === FIELD_ELEMENT) {
+      /** @param {TraditionElement} e @param {TraditionAct} a */
+      const admits = (e, a) => !(refusesFieldRite && e.id === FIELD_ELEMENT) && heldBy(e, a); // and its needs held (NEEDS_SINCE)
+      if (!admits(el, act)) {
         const first = Math.min(attempt, 4);
         /** @type {[TraditionElement, TraditionAct] | null} */ let admitted = null;
         for (let k = first + 1; k <= first + 10; k += 1) { // ten further attempts (G64 (1))
           const [e, a] = drawAt(k);
-          if (e.id === FIELD_ELEMENT) continue;
+          if (!admits(e, a)) continue;
           if (motifUnused(e, a)) { admitted = [e, a]; break; }
           admitted ||= [e, a];
         }
