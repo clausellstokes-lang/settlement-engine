@@ -9,6 +9,8 @@
  * Institutions keeps each chapter focused — Services is the player-facing
  * "what can I buy" page, Institutions is the DM-facing "who's in charge" page.
  */
+import CardVoice from '../primitives/CardVoice.jsx';
+import { institutionCardId } from '../../domain/voices/cardIds.js';
 import { View, Text } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
 import {
@@ -260,6 +262,10 @@ function InstitutionCard({ inst, idx, entityIndex, services = [], backs = [], to
         <Text style={{ ...type.body, fontSize: pt['8.5'], color: palette.second, marginTop: 2, lineHeight: 1.35 }}>
           {description}
         </Text>
+      )}
+      {/* THE CARD'S ONE QUOTE (S-G1), as the screen's card carries it */}
+      {raw && (
+        <CardVoice town={town} kind="institution" id={institutionCardId(raw)} />
       )}
 
       {inst.statusReason && (

@@ -6,6 +6,8 @@
  * composeCrisisPage): the event, the cast with each reason, the stakes, the levers, what the
  * players see first, if nothing is done. Nothing prints for a calm town.
  */
+import CardVoice from '../primitives/CardVoice.jsx';
+import { crisisCardId } from '../../domain/voices/cardIds.js';
 import { View, Text } from '@react-pdf/renderer';
 import { type, palette, space, pt } from '../theme.js';
 import { composeCrisisPage, CRISIS_PAGE_COPY } from '../../domain/crisis/crisisPage.js';
@@ -35,6 +37,8 @@ export function CrisisSections({ settlement, printedFacts = [] }) {
         <View key={s.id} style={{ marginBottom: space.sm, padding: 6, borderLeft: `2pt solid ${palette.bad}` }}>
           <Text style={{ ...type.body_em, color: palette.bad, fontSize: pt['10.5'] }}>{s.line}</Text>
           {s.summary ? <Line>{s.summary}</Line> : null}
+          {/* THE CARD'S ONE QUOTE (S-G1), as the screen's crisis card carries it */}
+          <CardVoice town={settlement} kind="crisis" id={crisisCardId(s)} />
           <Label>{CRISIS_PAGE_COPY.cast}</Label>
           {s.cast.length ? s.cast.map((r) => <Line key={`${r.role}-${r.id}`}>{`${r.roleLabel}: ${r.kind === 'institution' ? institutionHouseLabel(r.name) : r.name} · ${r.reason}`}</Line>) : <Line>{CRISIS_PAGE_COPY.nobody}</Line>}
           {s.stakes.length ? <Label>{CRISIS_PAGE_COPY.stakes}</Label> : null}

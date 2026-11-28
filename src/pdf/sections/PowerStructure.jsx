@@ -10,6 +10,8 @@
  *     modifiers with deltas, sub-faction members
  *   - (tensions and conflicts print in History / Relationships since 2026-10-30, X-4)
  */
+import CardVoice from '../primitives/CardVoice.jsx';
+import { powerCardId } from '../../domain/voices/cardIds.js';
 import { View, Text } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
 import {
@@ -151,7 +153,7 @@ export function PowerStructure({ settlement, narrativeMode, vm, stateProse, prim
         POWERS
       </Text>
       {p.factions.map((f, i) => (
-        <FactionCard key={`f-${i}`} faction={f} index={i} entityIndex={index} />
+        <FactionCard key={`f-${i}`} faction={f} index={i} entityIndex={index} town={settlement} />
       ))}
 
       {/* Current tensions and active conflicts print in the History and Relationships
@@ -211,7 +213,7 @@ function RuleAndSuccession({ lineage, occupied }) {
   );
 }
 
-function FactionCard({ faction, index, entityIndex }) {
+function FactionCard({ faction, index, entityIndex, town = null }) {
   const f = faction;
   const accent = factionColors[f.category] || (f.isGoverning ? palette.gold : palette.muted);
   // Phase-D: this card is the anchor TARGET for any faction id reference.
@@ -268,6 +270,8 @@ function FactionCard({ faction, index, entityIndex }) {
           style={{ ...type.caption, fontSize: pt['8.5'], color: palette.muted, marginTop: 2 }}
         />
       )}
+      {/* THE CARD'S ONE QUOTE (S-G1), as the screen's roster row carries it */}
+      <CardVoice town={town} kind="power" id={powerCardId(f.name)} />
       {f.modifiers?.length > 0 && (
         <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 3, marginTop: 3 }}>
           {f.modifiers.map((m, mi) => (

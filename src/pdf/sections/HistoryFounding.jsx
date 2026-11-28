@@ -11,6 +11,8 @@
  *   - history.event.<i>.lasting.<j>
  *   - history.tension.<i>.description
  */
+import CardVoice from '../primitives/CardVoice.jsx';
+import { tensionCardId } from '../../domain/voices/cardIds.js';
 import { View, Text } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
 import {
@@ -185,7 +187,7 @@ export function HistoryFounding({ settlement, narrativeMode, vm, stateProse }) {
             Live tensions · {h.tensions.length}
           </Text>
           {tensions.map((t, i) => (
-            <TensionRow key={`t-${i}`} tension={t} idx={i} />
+            <TensionRow key={`t-${i}`} tension={t} idx={i} town={settlement} cardId={tensionCardId((settlement?.history?.currentTensions || [])[i])} />
           ))}
         </View>
       )}
@@ -274,7 +276,7 @@ function EventRow({ ev, idx }) {
   );
 }
 
-function TensionRow({ tension, idx }) {
+function TensionRow({ tension, idx, town = null, cardId = '' }) {
   const sevTone = severityTone(tension.severity);
   return (
     <View
@@ -307,6 +309,8 @@ function TensionRow({ tension, idx }) {
           style={{ ...type.body, fontSize: pt['9'] }}
         />
       )}
+      {/* THE CARD'S ONE QUOTE (S-G1), as the screen's History card carries it */}
+      <CardVoice town={town} kind="tension" id={cardId} />
       {/* VERIFIER F12 (X-2): the tension's hooks print in the Plot Hooks chapter only. */}
     </View>
   );

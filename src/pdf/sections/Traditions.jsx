@@ -23,6 +23,8 @@
  * owner's set (shownTraditions.js :: descriptionSetOf, TRAD-4 unit 10), as the tab describes them, so no sentence of the
  * town is printed in two of its rites and the export reads as the owner's page does.
  */
+import CardVoice from '../primitives/CardVoice.jsx';
+import { traditionCardId } from '../../domain/voices/cardIds.js';
 import { View, Text } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
 import { ChapterBand, ChapterHeadline } from '../primitives/Dense.jsx';
@@ -100,6 +102,8 @@ export function Traditions({ settlement, narrativeMode }) {
                 {described.text}
               </Text>
             )}
+            {/* THE CARD'S ONE QUOTE (S-G1): a lit town's rite, as the screen's row carries it */}
+            <CardVoice town={settlement} kind="tradition" id={traditionCardId(rec, true)} />
             <Text style={{ ...type.body, fontSize: pt['9'], color: palette.second, lineHeight: 1.4 }}>
               Kept in {describeTraditionWindow(rec && rec.window)}.{owner ? ` · Owner: ${owner}` : ''}{outcome ? ` · Last held: ${outcome}` : ''}
             </Text>
