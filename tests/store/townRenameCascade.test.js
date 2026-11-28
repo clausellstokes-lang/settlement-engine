@@ -26,6 +26,7 @@ import { renameDetailSettlement } from '../../src/components/settlements/helpers
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const NEW = 'Quillmarsh';
 const SIZES = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
@@ -74,7 +75,9 @@ const rest = (s) => { const r = clone(s); delete r.name; delete r.arrivalScene; 
 describe('(a) a saved town: the rename rewrites the stored sentences on the row, the live record and the write', () => {
   test('no home holds the old name; nothing else moved; a rename back restores the record', async () => {
     let homesSeen = 0;
-    for (const { seed, rec } of births) {
+    /** @type {string[]} */ const failures = [];
+    // seed-loop: collected — the store's write is awaited, so the helper (synchronous only) cannot hold it: each seed's checks run in a try and push into `failures`, asserted once after the loop
+    for (const { seed, rec } of births) try {
       const old = rec.name;
       homesSeen += homes(rec).filter((t) => word(old).test(t)).length;
       const store = storeWith(rec, true);
@@ -92,14 +95,17 @@ describe('(a) a saved town: the rename rewrites the stored sentences on the row,
       expect(homes(written).filter((t) => word(old).test(t)), `${seed}: the persisted write`).toEqual([]);
       store.getState().renameSettlement('save-1', old);
       expect(JSON.stringify(store.getState().savedSettlements[0].settlement), `${seed}: a rename back`).toBe(JSON.stringify(rec));
-    }
+    } catch (e) { failures.push(`${seed}: ${String(/** @type {Error} */ (e)?.message ?? e).split('\n')[0]}`); }
+    expect(failures, 'the saved town\'s rename on every birth').toEqual([]);
     expect(homesSeen, 'the arm met stored sentences holding the name').toBeGreaterThan(0);
   }, HEAVY);
 });
 
 describe('(b) an unsaved town: the pending edit\'s rename rewrites them too', () => {
   test('the live record holds the new name in its homes and nothing else moved', async () => {
-    for (const { seed, rec } of births) {
+    /** @type {string[]} */ const failures = [];
+    // seed-loop: collected — the pending edit is awaited, so the helper (synchronous only) cannot hold it: each seed's checks run in a try and push into `failures`, asserted once after the loop
+    for (const { seed, rec } of births) try {
       const store = storeWith(rec, false);
       await store.getState().queueEdit('rename-settlement', { newName: NEW });
       await store.getState().commitPendingEdits();
@@ -107,19 +113,21 @@ describe('(b) an unsaved town: the pending edit\'s rename rewrites them too', ()
       expect(live.name, seed).toBe(NEW);
       expect(homes(live).filter((t) => word(rec.name).test(t)), seed).toEqual([]);
       expect(rest(live), seed).toEqual(rest(rec));
-    }
+    } catch (e) { failures.push(`${seed}: ${String(/** @type {Error} */ (e)?.message ?? e).split('\n')[0]}`); }
+    expect(failures, 'the unsaved town\'s rename on every birth').toEqual([]);
   }, HEAVY);
 });
 
 describe('(c) the saved view\'s detail copy says what the store holds', () => {
   test('renameDetailSettlement rewrites the homes of its settlement and its saveData', () => {
-    for (const { seed, rec } of births) {
+    const failures = collectSeedFailures(births, ({ seed, rec }) => {
       const detail = renameDetailSettlement({ settlement: clone(rec), saveData: { name: rec.name, settlement: clone(rec) } }, NEW);
       for (const s of [detail.settlement, detail.saveData.settlement]) {
         expect(s.name, seed).toBe(NEW);
         expect(homes(s).filter((t) => word(rec.name).test(t)), seed).toEqual([]);
       }
-    }
+    });
+    expectNoSeedFailures(failures, 'the detail copy says what the store holds on every birth');
   });
 });
 
