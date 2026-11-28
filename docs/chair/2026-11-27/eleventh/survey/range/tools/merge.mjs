@@ -14,7 +14,7 @@ const { HISTORY_DESC_VARIANTS } = await import(join(TREE, 'src/data/historyDescV
 const { HISTORICAL_EVENTS_DATA } = await import(join(TREE, 'src/data/historyData.js'));
 const groups = new Map(); // signature -> { name, texts }
 for (const f of INSTITUTION_FAMILIES) for (const [tier, at] of Object.entries(f.at || {})) {
-  const name = at.name || f.shared?.name; const desc = at.desc; const v = INSTITUTION_DESC_VARIANTS[`${tier}|${f.shelf}|${name}`];
+  const name = at.name || f.shared?.name; const desc = at.desc || f.shared?.desc; const v = INSTITUTION_DESC_VARIANTS[`${tier}|${f.shelf}|${name}`];
   if (!desc || !v) continue;
   const texts = [desc, ...v]; const sig = texts.join('\u0000');
   if (!groups.has(sig)) groups.set(sig, { name: `src/data/institutionDescVariants.js :: [joined] ${tier}|${f.shelf}|${name}`, texts });

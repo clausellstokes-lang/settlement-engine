@@ -1,0 +1,743 @@
+#1 [4579] data/npcData.js :: NPC_FACTION_LOYALTY.other  n=40 prints=28626 seen=40 J=0.02 O=0.04 script=DISTINCT
+   0* They overheard two people they know settle a bribe, and do not know whom to tell.
+   1* A regular customer has stopped coming. The reason they've been given doesn't make sense.
+   2* Someone left an item in their care and hasn't returned. The item is valuable. The absence is now suspicious.
+   3* Three different people have asked them the same unusual question. None of them knew each other.
+   4* They found something hidden in a place it shouldn't be. They put it back. They haven't told anyone.
+   5* A traveller passed through asking which nights their door is left unbarred, and was gone by morning.  {excludes:crisis: under_siege,crisis: plague_onset}
+   … 34 more
+#2 [1969] data/dossierStateProse/economy.generated.js :: DOSSIER_STATE_PROSE_ECONOMY.DS-ECO-11.pools.STRATEGIC VALUE: the generator's assessment, framed  n=6 prints=878 seen=4 J=0.10 O=0.20 script=DISTINCT
+   0* Others want {settlement} for what it controls. The people who live there see little of that value.
+   1  Anyone who looks at {settlement}'s position can see why someone would want to hold it.
+   2* The people of {settlement} know what their ground is worth to others, and know that is reason enough for someone to come for it.
+   3* A newcomer to {settlement} soon hears what its ground is worth to the powers around it, and how little of that worth stays in the town.  {marks:no crisis: under_siege}
+   4  For as long as others value {settlement}'s position, the town will have to reckon with who wants it and what they will offer for it.  {marks:colour}
+   5* {settlement}'s position is worth watching over: whoever holds the ground holds what the assessment below names.  {marks:colour}
+#3 [4573] data/npcData.js :: NPC_FACTION_LOYALTY.government  n=24 prints=8192 seen=24 J=0.01 O=0.03 script=DISTINCT
+   0* A sealed letter arrived for them three weeks ago. They haven't opened it. They won't say why.
+   1* They've been quietly buying up property in a district that hasn't been announced as a development site. Yet.  {needs:population: ≥ middling}
+   2* One of their staff has started asking questions about records from seven years ago. They've been reassigned twice already.  {needs:tier: ≥ village}
+   3* A merchant they spoke against has started praising them in public, and will not say why.  {needs:market}
+   4* Their most trusted advisor hasn't been seen in four days. The official story changes each time it's told.  {needs:tier: ≥ village}
+   5* They know who committed a crime the guard is currently investigating. They're not telling the guard.  {needs:guardPresence}
+   … 18 more
+#4 [3014] data/institutionDescVariants.js :: PAIRS.293  n=2 prints=172 seen=2 J=0.25 O=0.40 script=ANGLES
+   0* A prostitution quarter, lawful or merely suffered.
+   1* A quarter given to prostitution, whether licensed or just tolerated.
+#5 [4760] data/people/goalFamilies.js :: GOAL_FAMILY_LINES.TIES.rival_enemy.short  n=5 prints=3614 seen=5 J=0.01 O=0.02 script=DISTINCT
+   0* Beat {other} at something this season, in front of people who matter.
+   1* Find the weak spot in what {other} is doing, and press on it.
+   2* Win over one of {other}'s friends.
+   3* Keep {other} from getting the thing they want most this season.
+   4* Learn what {other} has been saying about them, and to whom.
+#6 [4576] data/npcData.js :: NPC_FACTION_LOYALTY.economy  n=24 prints=13712 seen=23 J=0.01 O=0.02 script=DISTINCT
+   0* A shipment they weren't expecting arrived and is now in their warehouse. They don't know who sent it or what to do.  {excludes:crisis: under_siege,route: isolated}
+   1* A business rival has offered them a partnership with terms so good it must be a trap. They can't find the trap.
+   2* One of their most reliable suppliers has gone dark. The goods are still arriving. Someone else is sending them.  {excludes:crisis: under_siege,route: isolated}
+   3* They have evidence of price-fixing across the whole market. Publishing it helps their competition as much as their customers.  {needs:market}
+   4* A young trader has been undercutting them in ways that shouldn't be possible on their claimed capital.
+   5* Someone is buying up their debts. Quietly. They don't know who, or why, or when they plan to call them in.
+   … 18 more
+#7 [13209] generators/structuralValidator.js :: checkInstCompat  n=2 prints=226 seen=2 J=0.06 O=0.13 script=ANGLES
+   0* The walls are serious. High stone, maintained, with watchtowers spaced to cover every angle.  {needs:walls}
+   1* The citadel on the high ground makes clear that this settlement has been defended before and expects to be again.
+#8 [8539] domain/display/crisisStoppedRow.js :: MARK_LINES  n=5 prints=1856 seen=5 J=0.13 O=0.20 script=ANGLES
+   0* Stopped by the siege.  {needs:crisis: under_siege}
+   1* Curtailed by the outbreak.  {needs:crisis: plague_onset}
+   2* Scarce in the famine.  {needs:crisis: famine}
+   3* Curtailed by the siege.  {needs:crisis: under_siege}
+   4* Curtailed by the war.  {needs:crisis: wartime}
+#9 [4575] data/npcData.js :: NPC_FACTION_LOYALTY.religious  n=18 prints=3770 seen=18 J=0.01 O=0.01 script=DISTINCT
+   0* A parishioner confessed something to them three months ago. The information is dangerous. They cannot act on it.
+   1* The holy relic in their keeping is not what everyone believes it is. Only they know this.
+   2* Someone has been leaving offerings at the shrine that shouldn't be possible. The site has been sealed.  {needs:institution: temple}
+   3* A novice has the gift. They know what that means for the novice. They're not sure what to do.
+   4* They received a directive from the hierarchy that contradicts their own theology. Compliance is expected.
+   5* A healing they performed was successful in a way they cannot explain. It's happened twice now.
+   … 12 more
+#10 [4792] data/people/goalFamilies.js :: GOAL_FAMILY_LINES.PERSONALITY.grudge.short  n=4 prints=1238 seen=4 J=0.02 O=0.06 script=DISTINCT
+   0* Pay someone back for a wrong done to them.
+   1* See someone who wronged them lose face in public this season.
+   2* Learn the secret of someone they envy.
+   3* Take one thing from a person they resent.
+#11 [4736] data/people/goalFamilies.js :: GOAL_FAMILY_LINES.POWER.competitive.short  n=6 prints=754 seen=6 J=0.01 O=0.01 script=DISTINCT
+   0* Gain ground for {power} at the expense of {rival} before the season is out.
+   1* Take one piece of business from {rival} and bring it to {power}.
+   2* Beat {rival} to the next opportunity, and win the credit for {power}.
+   3* Lure one capable person away from {rival} to work for {power}.
+   4* Get to whatever both {power} and {rival} want this season first.
+   5* Learn why people favour {rival}, and do better for {power}.
+#12 [1749] data/dossierStateProse/defense.generated.js :: DOSSIER_STATE_PROSE_DEFENSE.DS-DEF-5.pools.arcane defense ABSENT  n=7 prints=910 seen=6 J=0.05 O=0.09 script=DISTINCT
+   0* {settlement} has no arcane defense: what arrives unseen here goes undetected and therefore unanswered.
+   1* {settlement} keeps no defence against anything it cannot see.
+   2* Anything unseen that came at {settlement} would find nothing to meet it: the town keeps no wards or seers to notice it.
+   3* Whatever defence {settlement} keeps, a visitor would find nothing arcane in it.
+   4  {settlement}'s protection reaches as far as ordinary eyes and hands reach, and no further.
+   5* Ask at {settlement} who would answer a threat worked by magic, and the answer is that nobody would.
+   … 1 more
+#13 [4732] data/people/goalFamilies.js :: GOAL_FAMILY_LINES.RANK.enter.short  n=6 prints=5568 seen=6 J=0.04 O=0.08 script=DISTINCT
+   0* Do one thing for {power} this season that the people who lead {power|it|them} cannot ignore.
+   1* Be in the room the next time {power} must decide something that matters.
+   2* Find a patron among those who lead {power}, and make {self} useful to them.
+   3* Bring {power} a piece of news before anyone else does.
+   4* Take on the work in {power} that no one else wants, and do it without complaint.
+   5* Be asked for an opinion by those who lead {power}, once, this season.
+#14 [4750] data/people/goalFamilies.js :: GOAL_FAMILY_LINES.SUPPLY.impaired.short  n=6 prints=754 seen=6 J=0.08 O=0.17 script=ANGLES
+   0* Find a new source of supply for the work at {house} before what is left runs out.  {excludes:crisis: siege}
+   1* Keep the work going at {house} through the season, whatever it takes.
+   2* Bring in from outside what the work at {house} can no longer get close to home.  {excludes:crisis: siege}
+   3* Ration what is left at {house} so the work lasts until new supply arrives.
+   4* Find whoever can still supply {house}, and pay them what they ask.  {excludes:crisis: siege}
+   5* Waste nothing at {house} while the supply is short.
+#15 [13796] data/institutionDescVariants.js :: [joined] town|Economy|Weekly market  n=3 prints=286 seen=2 J=0.16 O=0.32 script=ANGLES
+   0  Charter required. Major economic driver.
+   1* Held by charter. The heart of the town's trade.
+   2* Requires a market charter. A principal source of the town's trade.
+#16 [2907] data/institutionDescVariants.js :: PAIRS.68  n=2 prints=104 seen=2 J=0.31 O=0.53 script=PARAPHRASE
+   0* Musters hunting parties across the lands about the settlement, selling venison, pelts, and game at market. It is also where the wilderness is known be
+   1* Whenever game can be had, it sends out hunting parties over the surrounding country and brings back venison, pelts, and game to sell. It doubles as th
+#17 [4746] data/people/goalFamilies.js :: GOAL_FAMILY_LINES.INSTITUTION.charter.short  n=6 prints=4964 seen=6 J=0.09 O=0.18 script=ANGLES
+   0* Get the rights of {house} written down and sealed by those who govern, this season.
+   1* Have those who govern confirm, in writing, who may give orders at {house}.
+   2* Get {house} excused from one tax or levy this season.
+   3* Make sure no new rule from those who govern costs {house} anything this season.
+   4* Win {house} first call on any help those who govern can give this season.
+   5* Have the old rights of {house} read out and recognised before anyone challenges them.
+#18 [13869] data/institutionDescVariants.js :: [joined] hamlet|Religious|Access to parish church  n=3 prints=300 seen=3 J=0.30 O=0.51 script=PARAPHRASE
+   0* Services mean the walk to the village house of worship, usually a few miles off.
+   1* The nearest house of worship is the village's, usually a few miles off.
+   2* None of its own; the village's lies usually a few miles away.
+#19 [1728] data/dossierStateProse/defense.generated.js :: DOSSIER_STATE_PROSE_DEFENSE.DS-DEF-4.pools.structure null (nothing organized recognized)  n=3 prints=294 seen=2 J=0.02 O=0.06 script=ANGLES
+   0  {settlement}'s books record no gang, guild or racket: what wrongdoing the town has, people do on their own account.  {marks:no organised crime,no criminal income}
+   1* What goes wrong at {settlement} goes wrong one thing at a time and belongs to whoever did it.  {marks:no criminal income}
+   2* Ask at {settlement} who runs things on the quiet and you get blank looks; either nobody does, or the town hides it very well.  {marks:colour}
+#20 [13916] data/institutionDescVariants.js :: [joined] metropolis|Infrastructure|Advanced water infrastructure  n=3 prints=486 seen=3 J=0.31 O=0.52 script=PARAPHRASE
+   0* Multiple aqueducts, cisterns, and distributed fountains. City-wide water management at scale.
+   1* Aqueducts, cisterns, and fountains throughout. Water managed across the whole city at scale.
+   2* Several aqueducts feed cisterns and fountains spread across the districts, a water system built for a city's size.
+#21 [2963] data/institutionDescVariants.js :: PAIRS.225  n=2 prints=398 seen=2 J=0.25 O=0.43 script=ANGLES
+   0* Several inn districts, given over to merchants, travellers, and those who stay long.
+   1* More than one quarter of inns, serving the merchant, the traveller, and the lingering guest.
+#22 [13160] generators/safetyProfile.js :: COURT_AND_PRISON()  n=4 prints=530 seen=4 J=0.11 O=0.22 script=ANGLES
+   0*  A functioning court and prison mean crimes carry real consequences.
+   1*  A wrong done here goes before the court, and the guilty can be locked up for it.
+   2*  Offenders the  catches are tried at the court and held in the prison.
+   3*  Thieves here know that the court sits and the cells are real.
+#23 [1381] data/dailyLife/commonerResentments.js :: COMMONER_RESENTMENTS.legitimacy  n=15 prints=582 seen=15 J=0.06 O=0.14 script=ANGLES
+   0* Commoners resent the council's indifference to ordinary complaints.  {needs:ruling body}
+   1* Many here feel that {gov} no longer listens to people like them.  {needs:government named}
+   2* Ordinary people grumble that {gov} {gov|looks|look} after {gov|its|their} own first.  {needs:government named}
+   3* People bring their complaints to {gov} and expect little to come of them.  {needs:government named}
+   4* People do as {gov} {gov|says|say}, but few of them think well of {gov|it|them}.  {needs:government named}
+   5* Few here would say that {gov} {gov|speaks|speak} for them.  {needs:government named}
+   … 9 more
+#24 [1931] data/dossierStateProse/economy.generated.js :: DOSSIER_STATE_PROSE_ECONOMY.DS-ECO-9.pools.HOW THE NEED IS MET: much of it brought in  n=3 prints=372 seen=2 J=0.21 O=0.38 script=ANGLES
+   0  Food comes into {settlement} most days, and it matters: a good part of what the town eats is grown elsewhere and brought in.  {marks:no crisis: plague_onset}
+   1* {settlement} grows only part of what it eats; the rest comes in from the farms around it and from trade.  {marks:no crisis: plague_onset,no crisis: famine}
+   2* A good part of what {settlement} eats is brought in, and everyone knows when the next load is due.  {marks:no crisis: plague_onset}
+#25 [3005] data/institutionDescVariants.js :: PAIRS.280  n=2 prints=292 seen=2 J=0.00 O=0.00 script=DISTINCT
+   0* Scholars and researchers, gathered in number.
+   1* A cluster of learned men and their researches.
+#26 [5503] data/seatHolderLines.js :: SEAT_HOLDER_LINES.relation  n=6 prints=482 seen=4 J=0.00 O=0.00 script=DISTINCT
+   0* The {form} is the office here, and {holder} {holder|holds|hold} it.
+   1  {holder} {holder|sits|sit} in the {form} and {holder|makes|make} its rulings.
+   2* The {form's} seats are filled by {holder}.
+   3* Whoever comes before the {form} comes before {holder}.
+   4* The {form} is how this place is ruled, and {holder} {holder|rules|rule} through it.
+   5  It is {holder} who {holder|sits|sit} in the {form}.
+#27 [13871] data/institutionDescVariants.js :: [joined] town|Religious|Parish churches (2-5)  n=3 prints=300 seen=3 J=0.20 O=0.25 script=ANGLES
+   0* Several houses of worship within town.
+   1* Several quarters, each with its house of worship.
+   2* The town divided among a handful of congregations.
+#28 [4742] data/people/goalFamilies.js :: GOAL_FAMILY_LINES.INSTITUTION.solvency.short  n=6 prints=5500 seen=6 J=0.05 O=0.10 script=ANGLES
+   0* Get {house} through the season without borrowing.
+   1* Collect what is owed to {house} before the season is out.
+   2* Cut the spending at {house} by a tenth this season, and keep the work going.
+   3* Find {house} one more source of money.
+   4* Pay every hand at {house} in full and on time this season.
+   5* Keep the accounts of {house} balanced, and show them to anyone who asks.
+#29 [1387] data/dailyLife/dawnWork.js :: DAWN_WORK.defence  n=15 prints=926 seen=15 J=0.15 O=0.27 script=ANGLES
+   0* The walls claim the first hours: the watch musters thin at first light, and ordinary work waits until the rounds are walked.  {needs:walls,guardPresence,watch}
+   1* Before any other work, someone walks the length of the walls at first light and looks for gaps.  {needs:walls}
+   2* Those who keep guard are out at first light, and the rest wait for their word before going out to work.  {needs:guardPresence}
+   3* Those sworn to turn out in danger meet briefly at first light before going to their own work.  {needs:militia}
+   4* The gates stay shut until it is fully light, and the day's work waits on them.  {needs:gate}
+   5* Before anyone goes out to work, each household looks to its own door and sees that all is as it was left.  {needs:institution: dwellings}
+   … 9 more
+#30 [4756] data/people/goalFamilies.js :: GOAL_FAMILY_LINES.SUPPLY.expansion.short  n=6 prints=1972 seen=6 J=0.06 O=0.11 script=DISTINCT
+   0* Take on more hands at {house}, and keep them busy all season.  {excludes:crisis: siege,crisis: famine}
+   1* Win new business for {house} beyond the people who already come.  {excludes:crisis: siege}
+   2* Get the most out of the work at {house} while it runs well, and put the gains by.  {excludes:crisis: siege,crisis: famine}
+   3* Grow the work at {house} by one more pair of hands, then another.  {excludes:crisis: siege,crisis: famine}
+   4* Train an apprentice at {house} to take on part of the work.
+   5* Look for a way to do more at {house} with the same hands.
+#31 [13806] data/institutionDescVariants.js :: [joined] city|Economy|Banking houses  n=3 prints=338 seen=3 J=0.50 O=0.67 script=PARAPHRASE
+   0* Loans, currency exchange, letters of credit. Basic banking.
+   1* Loans, coin exchange, and letters of credit. The beginnings of banking.
+   2* Lending, currency exchange, and credit by letter. Rudimentary banking.
+#32 [4762] data/people/goalFamilies.js :: GOAL_FAMILY_LINES.TIES.debtor.short  n=5 prints=1700 seen=5 J=0.08 O=0.16 script=ANGLES
+   0* Pay {other} back one part of what is owed before the season ends.
+   1* Do {other} a favour big enough to count against what is owed.
+   2* Keep {other} from calling in what is owed this season.
+   3* Find out what {other} really wants in return.
+   4* Make sure no one else learns how much is owed to {other}.
+#33 [2960] data/institutionDescVariants.js :: PAIRS.219  n=2 prints=592 seen=2 J=0.16 O=0.27 script=ANGLES
+   0* Fur processors, traders, and retailers gathered into one quarter. It is high-value work, for good fur is a luxury good.
+   1* Those who dress, trade, and sell fur, all pressed into one district. The trade runs high, quality pelts being luxuries.
+#34 [4772] data/people/goalFamilies.js :: GOAL_FAMILY_LINES.PERSONALITY.greed.short  n=4 prints=978 seen=4 J=0.04 O=0.07 script=DISTINCT
+   0* Put away more coin this season than last.
+   1* Find one more way to be paid for work already being done.
+   2* Get the better side of every bargain struck this season.
+   3* Collect every coin they are owed, however small.
+#35 [1668] data/dossierStateProse/defense.generated.js :: DOSSIER_STATE_PROSE_DEFENSE.DS-DEF-2.pools.Beasts & Monsters: frontier, credible deterrence  n=4 prints=300 seen=4 J=0.09 O=0.20 script=ANGLES
+   0* The tally of raids at {settlement} is short for a frontier town: with a wall and armed people behind it, most of what comes out of the wild country tu  {marks:crisis: any,no crisis: threat}
+   1* The town takes the frontier seriously and has taken it seriously long enough that the arrangements are ordinary rather than anxious.  {marks:crisis: any,no crisis: threat}
+   2* Very little reaches {settlement} out of the wild country, and the reason is that the arrangements are visible from a long way off.  {marks:crisis: any,no crisis: threat}
+   3* The arrangements that kept {settlement} safe on the frontier are being tested in earnest now, and so far they are holding.  {marks:threat,crisis: any,no crisis: occupied}
+#36 [12699] generators/narrativeGenerator.js :: thorpPressures  n=7 prints=308 seen=3 J=0.01 O=0.02 script=DISTINCT
+   0  A dispute over grazing rights and water access has been running for two seasons without resolution.  {needs:livestock; excludes:grain}
+   1  The harvest was thin this year. Everyone knows it. Nobody is saying it directly.  {excludes:food: ≥ secure}
+   2* A family moved away last spring. The reason is not discussed, but it affected the dynamics here.
+   3  The question of who tends the shared fields when the miller's household falls ill has never been properly settled.  {needs:institution: mill}
+   4* Two families have been in a quiet feud over a boundary marker for longer than anyone can clearly remember.
+   5  The last frost came late and damaged the seedstock. Recovery is possible but the margin is narrow.  {excludes:food: ≥ secure}
+   … 1 more
+#37 [13839] data/institutionDescVariants.js :: [joined] town|Crafts|Jeweller  n=3 prints=148 seen=3 J=0.32 O=0.51 script=PARAPHRASE
+   0* Works precious metals and gemstones into rings, necklaces, seals, and luxury items. Accepts commissions, appraises stones, and occasionally buys stole
+   1* Sets precious metal and gemstones into rings, necklaces, seals, and other luxuries. The work is to commission; stones are valued, and now and then bou
+   2* Rings, necklaces, seals, and finery, worked from gold and gemstone. Orders are taken, stones appraised, and the occasional purchase from a discreet se
+#38 [4766] data/people/goalFamilies.js :: GOAL_FAMILY_LINES.TIES.ally.short  n=5 prints=2774 seen=5 J=0.00 O=0.00 script=DISTINCT
+   0* Stand by {other} in their next quarrel, whoever it is with.
+   1* Warn {other} of any trouble before it reaches them.
+   2* Do {other} one useful favour this season, unasked.
+   3* Bring {other} together with someone who can help them.
+   4* Keep the friendship with {other} quiet, where it does the most good.
+#39 [4794] data/people/goalFamilies.js :: GOAL_FAMILY_LINES.PERSONALITY.impulse.short  n=4 prints=604 seen=4 J=0.04 O=0.13 script=DISTINCT
+   0* Have some fun this season, whatever it costs.
+   1* Do something no one here expects of them.
+   2* Get out of the work they have been given, and let someone else do it.
+   3* Try their luck at something new before the season is out.
+#40 [12653] generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS.road  n=5 prints=2508 seen=5 J=0.07 O=0.14 script=ANGLES
+   0* Established along a road route. Trade flows in, goods flow out, people pass through.
+   1* The road was here first. The settlement grew along its verge, and its news has always come on somebody else's cart.
+   2* It stands roadside, where the day is measured in traffic: what arrives before noon, what leaves before dusk, and what stops for the night.
+   3* A road settlement: other people's journeys pass its doors, and some of them stop for a meal on the way.
+   4* Sited on a route already worn deep before anyone built here; a road that old is not soon abandoned.
+#41 [13890] data/institutionDescVariants.js :: [joined] thorp|Government|Informal elder consensus  n=3 prints=44 seen=3 J=0.30 O=0.42 script=ANGLES
+   0* The eldest or most respected farmer guides communal decisions by consensus.
+   1* The oldest or best-regarded farmer steers the common decisions, and does it by agreement.
+   2* Communal matters fall to the eldest or most respected farmer, who guides them to consensus.
+#42 [12680] generators/narrativeGenerator.js :: FOUNDERS_BY_TIER.town  n=5 prints=80 seen=2 J=0.03 O=0.05 script=DISTINCT
+   0  merchants recognising economic potential before anyone else did
+   1  a noble granted lands by the crown with the resources to develop them
+   2  military veterans given land grants who brought their skills with them
+   3* a merchant consortium that needed a waypoint and decided to own it
+   4* religious authorities who wanted a centre for their regional operations
+#43 [13950] data/institutionDescVariants.js :: [joined] hamlet|Adventuring|Adventurers' charter hall  n=3 prints=252 seen=3 J=0.34 O=0.52 script=PARAPHRASE
+   0* A rough hall operating under a regional adventurers' charter. Posts bounties, shelters monster hunters, and coordinates local defense where no garriso
+   1* A plain hall held under a regional adventurers' charter. It posts bounties, houses monster hunters, and takes up the local defence no garrison is here
+   2* Chartered by the region's adventuring order and little more than a rough hall for it. Bounties go up on its board, monster hunters bed down inside, an
+#44 [4574] data/npcData.js :: NPC_FACTION_LOYALTY.military  n=24 prints=4910 seen=24 J=0.01 O=0.03 script=DISTINCT
+   0* Three guards have gone missing in the same district on night patrol. The report filed says they deserted.  {needs:guardPresence,population: ≥ middling}
+   1* Weapons from the armoury have been disappearing in small quantities for months. The inventory matches, somehow.  {needs:guardPresence,garrison}
+   2* They received orders from above that contradict what they know to be right. They haven't acted on either yet.
+   3* A prisoner in their custody knows something valuable. So does someone with reason to ensure they never speak.  {needs:guardPresence}
+   4* They've noticed the same group of faces at multiple locations where incidents occurred. No one else has.
+   5* Someone is paying their soldiers more than their salary. The soldiers aren't saying who.  {needs:guardPresence}
+   … 18 more
+#45 [4578] data/npcData.js :: NPC_FACTION_LOYALTY.magic  n=8 prints=2916 seen=8 J=0.01 O=0.02 script=DISTINCT
+   0* An experiment failed in a way that shouldn't be possible. The results have been sealed. They're still thinking.
+   1* A student asked them a question three weeks ago that they still cannot answer, and the student has not asked again.
+   2* Something in the settlement is absorbing ambient magical energy. The readings are increasing.  {needs:magic}
+   3* They've been approached by someone who knows things about their research that were never made public.
+   4* An old colleague has sent a message asking for a meeting. The colleague was declared dead six years ago.
+   5* The ward on their vaults was not broken but bypassed, which only someone who knew how it was made could do.  {needs:magic}
+   … 2 more
+#46 [3004] data/institutionDescVariants.js :: PAIRS.279  n=2 prints=568 seen=2 J=0.30 O=0.60 script=PARAPHRASE
+   0* Specialised kit for the delving trade. Warded weapons, silver weapons, and the like.
+   1* Gear for those who go underground. Warded weapons, silver weapons, and such.
+#47 [1813] data/dossierStateProse/defense.generated.js :: DOSSIER_STATE_PROSE_DEFENSE.DS-DEF-8.pools.override active, viability intact  n=3 prints=450 seen=3 J=0.07 O=0.15 script=ANGLES
+   0* {settlement} should come through this crisis if nothing else goes wrong, though it has had to change its ways to meet it.
+   1* Life in the town goes on through the crisis: people work, eat and sleep, and the defence makes do with what is left over.  {marks:guardPresence,no crisis: occupied}
+   2* {settlement} is shaken by this trouble, but it is still standing and means to stay that way.  {marks:no crisis: occupied}
+#48 [8661] domain/display/governanceAccount.js :: governanceAccountOf()  n=3 prints=3144 seen=3 J=0.67 O=0.78 script=PARAPHRASE
+   0*  is governed by .  holds its seat.
+   1*  holds the seat of .  governs .
+   2*  governs . Its seat is held by .
+#49 [4695] data/npcStructureVariants.js :: CONSTRAINT_VARIANTS.military__stable__dominant  n=11 prints=488 seen=11 J=0.05 O=0.09 script=DISTINCT
+   0* Cannot raise more hands or more pay without the council, and in quiet years the council is careful with coin.  {needs:ruling body; excludes:crisis}
+   1* Must keep {house} fed and paid out of what the seat allows, and the seat allows what quiet years seem to need.  {needs:own house; excludes:crisis}
+   2* The walls want upkeep every year; the coin for it has to be asked for, and in quiet years it comes slowly.  {needs:walls; excludes:crisis}
+   3* The place can afford its guard, but while nothing threatens, every extra hand must be argued for.  {needs:prosperity: ≥ comfortable; excludes:crisis}
+   4* There is enough for the hands already under arms and little over; a larger force would mean new dues.  {needs:prosperity: moderate; excludes:crisis}
+   5* Much of its strength is neighbours who turn out when called, and they have fields and trades to get back to.  {needs:militia; excludes:crisis,paid watch}
+   … 5 more
+#50 [4784] data/people/goalFamilies.js :: GOAL_FAMILY_LINES.PERSONALITY.mastery.short  n=4 prints=390 seen=4 J=0.02 O=0.03 script=DISTINCT
+   0* Solve a problem this season that has beaten everyone else.
+   1* Do one piece of work so well that no one could find fault with it.
+   2* Learn a new skill from someone who knows it better.
+   3* Put their own work in order, down to the last detail.
+#51 [5491] data/safetyDescLines.js :: MIXED_FORCE.watch  n=9 prints=162 seen=8 J=0.40 O=0.63 script=PARAPHRASE
+   0* The watch covers the main paths; quieter spots after dark carry genuine risk.  {needs:watch}
+   1* The watch covers the main streets; the quiet ones after dark carry real risk.  {needs:watch,tier: ≥ village}
+   2* The watch keeps to the main streets; the side lanes after dark are another matter.  {needs:watch,tier: ≥ village}
+   3* Watchmen walk the main streets; away from them, after dark, the risk is real.  {needs:watch,tier: ≥ village}
+   4* The watch holds the gates and walks the main streets; quieter spots after dark carry real risk.  {needs:watch,gate,tier: ≥ village}
+   5  The watch is seen on the main streets by day; quieter spots after dark carry genuine risk.  {needs:watch,force walks by day,tier: ≥ village}
+   … 3 more
+#52 [1751] data/dossierStateProse/defense.generated.js :: DOSSIER_STATE_PROSE_DEFENSE.DS-DEF-5.pools.FIXTURE: charter hall  n=7 prints=378 seen=7 J=0.25 O=0.44 script=ANGLES
+   0* Adventurers at {settlement} take their contracts at the charter hall, and the town posts its worst problems there.
+   1* The charter hall at {settlement} keeps a book of the bounties the town has posted, and every unclaimed one is a danger still at large.
+   2* A visitor walking into {settlement}'s charter hall finds the place's paid work posted up where anyone can read it.
+   3* The charter hall at {settlement} is where the place and those who take its contracts meet, and neither has to go looking for the other.
+   4* Contracts go up at {settlement}'s charter hall and come down again as they are taken, and what is posted there is never the same for long.
+   5* The charter hall at {settlement} takes up only what is posted there; a trouble nobody posts is a trouble the hall never hears of.
+   … 1 more
+#53 [5505] data/seatHolderLines.js :: SEAT_HOLDER_LINES.standing  n=5 prints=836 seen=5 J=0.03 O=0.08 script=DISTINCT
+   0* They hold the {form's} seat, and answer for what it does.
+   1* They sit in the {form} themselves, and its rulings are their own.
+   2* They govern through the {form}, and what it orders is their order.
+   3* They hold the {form}, and nothing it decides is decided without them.
+   4* They are the ones who sit in the {form}, and its word is theirs.
+#54 [13801] data/institutionDescVariants.js :: [joined] metropolis|Economy|International trade center  n=3 prints=298 seen=3 J=0.20 O=0.36 script=ANGLES
+   0* Hub for international merchant representatives, trade arbitration, and commodity exchange.
+   1* Where foreign merchant agents gather, trade disputes are arbitrated, and commodities change hands.
+   2* A centre for overseas trade representatives, the settling of commercial disputes, and dealing in commodities.
+#55 [13876] data/institutionDescVariants.js :: [joined] village|Religious|Graveyard  n=3 prints=536 seen=3 J=0.08 O=0.31 script=ANGLES
+   0* Consecrated ground beside the house of worship, on its own plot, with a resident priest to close it. The rite is held on the day of the death, with no
+   1* Hallowed ground about the church.
+   2* Consecrated earth ringing the church.
+#56 [1485] data/dailyLife/recentChanges.js :: RECENT_CHANGES.beat  n=9 prints=1352 seen=9 J=0.04 O=0.08 script=DISTINCT
+   0* The place still lives with what {event} left behind.  {needs:}
+   1* People here still talk of {event}, and of what it changed.  {needs:}
+   2* What {event} left behind is still part of daily life here.  {needs:}
+   3* {Event} still shapes how people here go about things.  {needs:}
+   4* Talk here still comes back, sooner or later, to {event}.  {needs:}
+   5* Much of how the place works now goes back to {event}.  {needs:}
+   … 3 more
+#57 [13788] data/institutionDescVariants.js :: [joined] hamlet|Economy|Mine (open cast)  n=3 prints=166 seen=3 J=0.35 O=0.53 script=PARAPHRASE
+   0* A shallow excavation or shaft dug to extract iron ore, coal, or stone. Employs the poorest labourers. Dangerous, dirty, and essential.
+   1* A shallow working or shaft sunk for iron ore, coal, or stone. It takes on the poorest hands, and the work is dangerous, filthy, and indispensable.
+   2* Iron ore, coal, or stone dug from a shallow pit or shaft. The labour falls to the poorest, and it is perilous, grimy, and needed all the same.
+#58 [13857] data/institutionDescVariants.js :: [joined] town|Crafts|Glassblower  n=3 prints=88 seen=3 J=0.47 O=0.71 script=PARAPHRASE
+   0* Small-scale glasswork, when sand can be had: bottles, window panes, goblets. Requires silica sand, potash, and a skilled furnace operator.
+   1* Glass worked on a small scale, whenever sand reaches the furnace: bottles, window panes, goblets. It calls for silica sand, potash, and a skilled hand
+   2* A modest glassworks for bottles, panes, and goblets, dependent on silica sand, potash, and a practised furnace operator.
+#59 [4577] data/npcData.js :: NPC_FACTION_LOYALTY.criminal  n=18 prints=5736 seen=18 J=0.02 O=0.04 script=DISTINCT
+   0* One of their people is talking to the guard. They don't know which one yet. They're watching.  {needs:guardPresence}
+   1* A valuable item came through their network recently. Three different parties have asked about it quietly.
+   2* Someone in the government takes their money and someone else's, and they do not know which side will be sold first.
+   3* A job went wrong in a way that suggests information was leaked. They have three suspects.
+   4* They're protecting someone from something worse. The someone doesn't know and wouldn't thank them.
+   5* The same new face has turned up at three of their jobs, and they have put someone on to follow the newcomer.
+   … 12 more
+#60 [2414] data/dossierStateProse/stressors.generated.js :: DOSSIER_STATE_PROSE_STRESSORS.DS-CND-1.pools.DIRECTION: worsening · CRISIS: monster_pressure  n=4 prints=40 seen=3 J=0.05 O=0.10 script=DISTINCT
+   0* The attacks around {settlement} come more often now and closer in, and each one is bolder than the last.
+   1  More of {settlement}'s outlying families have come in from the farms, and fewer people work the far fields.
+   2* Fewer carts reach {settlement} each week; the drivers will not take the roads where the attacks have been.
+   3* On the road to {settlement} you pass a farmstead in ashes, and it was not the first this season.
+#61 [4770] data/people/goalFamilies.js :: GOAL_FAMILY_LINES.TIES.mentor_student.short  n=5 prints=2094 seen=5 J=0.03 O=0.07 script=DISTINCT
+   0* Spend an evening with {other} this season and talk over the work as they once did.
+   1* Ask {other} for advice on one hard decision this season.
+   2* Show {other} how far they have both come since the lessons ended.
+   3* Make sure {other} is not left behind by the changes in the work.
+   4* Keep the old lessons between them and {other} private.
+#62 [13832] data/institutionDescVariants.js :: [joined] thorp|Crafts|Access to external mill  n=3 prints=500 seen=3 J=0.32 O=0.56 script=PARAPHRASE
+   0* Must travel to manor/village mill. Home grinding often illegal.
+   1* Grain goes to the manor or village mill; grinding it at home is commonly against the law.
+   2* No mill of its own. The manor's or the village's must serve, and milling at home is often forbidden.
+#63 [1493] data/dailyLife/unspokenTopics.js :: UNSPOKEN_TOPICS.wound.magical_controversy  n=3 prints=54 seen=3 J=0.12 O=0.23 script=ANGLES
+   0* How far magic should be allowed is a question people do not raise in company.  {needs:}
+   1* Nobody wants to start the argument over magic again, so nobody mentions it.  {needs:}
+   2* Talk of magic, and of who should be allowed to use it, is kept away from strangers.  {needs:}
+#64 [1678] data/dossierStateProse/defense.generated.js :: DOSSIER_STATE_PROSE_DEFENSE.DS-DEF-2.pools.Internal Security: full legal chain (court AND prison)  n=4 prints=536 seen=3 J=0.13 O=0.25 script=ANGLES
+   0* Offenders brought in at {settlement} are heard and held, and each case is written down, so the accused can expect a hearing, not a beating.  {marks:court,court sits,prison,law: > collapsed}
+   1* A case that reaches the court at {settlement} gets a hearing, and it is settled there rather than by the watch's temper.  {marks:watch,court,prison,law: > collapsed}
+   2* Bring a complaint at {settlement} and there is a court to hear it and a cell for whoever it finds against.  {marks:court,court sits,prison,law: > collapsed}
+   3  {settlement} has a court and a cell, but with the law as it stands, few complaints brought there are ever heard.  {marks:court,prison,law: = collapsed}
+#65 [13811] data/institutionDescVariants.js :: [joined] town|Economy|Inn (multiple)  n=3 prints=300 seen=3 J=0.13 O=0.22 script=ANGLES
+   0* Lodging for traveling merchants.
+   1* Beds for merchants on the road.
+   2* Lodging for the travelling trade.
+#66 [5488] data/safetyDescLines.js :: TINY_MODERATE  n=16 prints=396 seen=15 J=0.05 O=0.11 script=DISTINCT
+   0* The neighbours keep an eye on one another, and what trouble there is, everyone soon hears of.
+   1* Everyone here knows everyone, so what trouble there is is hard to hide.
+   2* In a place this small, a wrong done is known to all by nightfall.
+   3* Order here rests with the neighbours: little happens that someone does not see.
+   4* The households look out for one another, and a quarrel or a theft is soon talked of.
+   5* Strangers are noticed here, and so is anything that goes missing.
+   … 10 more
+#67 [10440] domain/foodways.js :: FRAMES.one  n=2 prints=208 seen=2 J=0.00 O=0.00 script=DISTINCT
+   0* Its own food is {A}.
+   1* What it puts on the table itself is {A}.
+#68 [12698] generators/narrativeGenerator.js :: SMALL_PLACE_TIER_LINES  n=5 prints=600 seen=5 J=0.03 O=0.07 script=DISTINCT
+   0* Every household here has its work, and there is little to spare.
+   1* A handful of houses; you could greet everyone in it before noon.
+   2* Everyone here knows every household by name, and none has much put by.
+   3* What little the place grows or makes is mostly used at home; there is not much left to sell.
+   4* A newcomer is noticed by the second day here, and asked what work they mean to do.
+#69 [4680] data/npcStructureVariants.js :: POSITION_VARIANTS.government__stable__dominant  n=8 prints=984 seen=8 J=0.19 O=0.36 script=ANGLES
+   0* Holds the seat with the council beside it; in quiet times the work is the ordinary business.  {needs:ruling body; excludes:crisis}
+   1* Holds the seat; the market days run and the dues come in.  {needs:market; excludes:crisis}
+   2* Holds the seat; quarrels that need judging go to the court.  {needs:court sits; excludes:crisis}
+   3* Holds the seat, and in a place this small everyone knows it; most quarrels end at its door.  {needs:population: small; excludes:crisis}
+   4* Holds the seat in good years; the place is comfortable, and the seat's costs are met.  {needs:prosperity: ≥ comfortable; excludes:crisis}
+   5* Holds the seat; there is enough coin for the everyday work, if little over.  {needs:prosperity: moderate; excludes:crisis}
+   … 2 more
+#70 [5004] data/personHooksByTitle.js :: PERSON_HOOKS_BY_TITLE.the glassmaker  n=4 prints=6 seen=1 J=0.03 O=0.06 script=DISTINCT
+   0  A batch of their glass has come out with a colour they cannot make again, and a buyer wants more.
+   1  Their furnace was found cold one morning with the door barred from inside.
+   2* An apprentice has run off with the recipe for their clearest glass.
+   3  A buyer has ordered panes cut to one exact size, many of them, for a building nobody has heard of.
+#71 [2984] data/institutionDescVariants.js :: PAIRS.247  n=2 prints=392 seen=2 J=0.50 O=0.83 script=PARAPHRASE
+   0* Every ward has its bakehouses, with weights and prices set by the guild.
+   1* Bakehouses throughout the wards, the loaf's weight and price fixed by guild rule.
+#72 [13846] data/institutionDescVariants.js :: [joined] village|Crafts|Bowyer & fletcher  n=3 prints=168 seen=3 J=0.44 O=0.64 script=PARAPHRASE
+   0* Makes bows, crossbows, and arrows. Sells finished ammunition and takes custom bow commissions. The first stop for any adventurer whose quiver is empty
+   1* Bows, crossbows, and arrows all made here. Finished ammunition sells off the shelf, and custom bows are made to order. Any adventurer with an empty qu
+   2* Turns out bows, crossbows, and arrows, selling ready-made ammunition and taking commissions for bespoke bows. The first door an adventurer knocks on w
+#73 [13833] data/institutionDescVariants.js :: [joined] hamlet|Crafts|Access to external mill  n=3 prints=300 seen=3 J=0.34 O=0.61 script=PARAPHRASE
+   0* Grain is taken out of the hamlet to be ground.
+   1* The hamlet's grain is carried elsewhere to be ground.
+   2* Nothing is ground here; the grain goes out of the hamlet for grinding.
+#74 [2943] data/institutionDescVariants.js :: PAIRS.169  n=2 prints=1168 seen=1 J=0.29 O=0.50 script=PARAPHRASE
+   0  Spins hemp, flax, and other plant fibres into rope and cordage. Ships, building work, and farming all depend on it.
+   1* Rope and cordage twisted from hemp, flax, or whatever plant fibre comes to hand. Nothing sails, rises, or is harvested without it.
+#75 [13966] data/institutionDescVariants.js :: [joined] city|Criminal|Black market  n=3 prints=152 seen=2 J=0.17 O=0.27 script=ANGLES
+   0  Illicit goods trade. Hidden locations.
+   1* Trade in forbidden goods, conducted out of sight.
+   2* Illicit wares, bought and sold in hidden places.
+#76 [13087] generators/power/conflictIssues.js :: BASE_ISSUES.43.hooks  n=2 prints=38 seen=2 J=0.08 O=0.17 script=ANGLES
+   0* The ruling was given in writing, and the copy that was posted is not the one that was signed.
+   1* A man sent to enforce the ruling was turned away, and has asked for others to go with him.
+#77 [4728] data/people/goalFamilies.js :: GOAL_FAMILY_LINES.RANK.climb.short  n=6 prints=2824 seen=6 J=0.03 O=0.05 script=DISTINCT
+   0* Take over one of {above}'s duties in {power} this season, and be seen to do it well.
+   1* Win two more people in {power} over to their side before {above} notices.
+   2* Be the one {above} sends whenever something must be done for {power} this season.
+   3* Fix a problem {above} has left standing in {power}, and make sure everyone knows who fixed it.
+   4* Speak for {power} in one dispute this season where {above} would usually speak.
+   5* Show the rest of {power} that {above} can be wrong, without ever saying so aloud.
+#78 [13929] data/institutionDescVariants.js :: [joined] town|Defense|Town walls  n=3 prints=952 seen=3 J=0.12 O=0.22 script=ANGLES
+   0* Stone fortifications with gates. Expensive to build and maintain.
+   1* Gated stone defences. Costly to raise and no cheaper to keep up.
+   2* Masonry walls pierced by gates. Dear to build, dearer to maintain.
+#79 [2967] data/institutionDescVariants.js :: PAIRS.230  n=2 prints=380 seen=2 J=0.14 O=0.33 script=ANGLES
+   0* Where merchant goods are stored.
+   1* Storage set aside for the merchants' stock.
+#80 [4689] data/npcStructureVariants.js :: POSITION_VARIANTS.government__economic_stress__dominant  n=5 prints=20 seen=4 J=0.26 O=0.47 script=ANGLES
+   0* Holds the seat while money is short, in a place that lives on what it gets for its {export}.  {needs:export good; excludes:}
+   1* Holds the seat while money is short, and {import} must still be bought in at whatever it costs.  {needs:import good; excludes:}
+   2  Holds the seat in a small place gone short of coin, where everyone knows what has gone unpaid.  {needs:population: small; excludes:}
+   3* Holds the seat while money is short, and every council meeting comes back to the same few coins.  {needs:ruling body; excludes:}
+   4* Holds the seat in lean years, and every cost it asks is counted.  {needs:; excludes:}
+#81 [13914] data/institutionDescVariants.js :: [joined] town|Infrastructure|Multiple water sources  n=3 prints=300 seen=3 J=0.63 O=0.83 script=PARAPHRASE
+   0* Wells, fountains, or piped water.
+   1* Water from wells, fountains, or pipe.
+   2* Wells and fountains, or water carried in by pipe.
+#82 [12988] generators/power/claimStanding.js :: SEAT_UNDER_CRISIS.0  n=2 prints=454 seen=2 J=0.50 O=0.70 script=PARAPHRASE
+   0* The oldest heads of the community decide things together; people follow them out of respect and custom, not law.
+   1* The oldest heads of the community still decide things together, but fewer and fewer people accept their word.
+#83 [13210] generators/structuralValidator.js :: checkInstCompat  n=2 prints=208 seen=2 J=0.00 O=0.00 script=DISTINCT
+   0* A wall circuit, unremarkable but intact.  {needs:walls; excludes:crisis: under_siege}
+   1* The gatehouse arch frames the main road.  {needs:gate}
+#84 [1370] data/dailyLife/childWarnings.js :: CHILD_WARNINGS.unrest  n=11 prints=602 seen=11 J=0.01 O=0.03 script=DISTINCT
+   0* crowds that gather quickly  {needs:population: ≥ middling}
+   1* getting mixed up in the grown-ups' quarrels  {needs:}
+   2* repeating what they hear said at home about those in charge  {needs:}
+   3* hanging about {market} when tempers are short  {needs:market}
+   4* loitering by {inn} when voices are raised  {needs:institution: tavern}
+   5* taking sides in arguments that are not theirs  {needs:}
+   … 5 more
+#85 [2983] data/institutionDescVariants.js :: PAIRS.246  n=2 prints=418 seen=2 J=0.33 O=0.60 script=PARAPHRASE
+   0* Meat markets and shambles kept under strict civic rules.
+   1* The shambles and meat markets, closely regulated by the city.
+#86 [2977] data/institutionDescVariants.js :: PAIRS.240  n=2 prints=374 seen=2 J=0.50 O=0.75 script=PARAPHRASE
+   0* Silks, spices, and other precious goods.
+   1* The trade in silk, spice, and precious things.
+#87 [2227] data/dossierStateProse/general.generated.js :: DOSSIER_STATE_PROSE_GENERAL.DS-GEN-17.pools.GREAT HOUSE: cathedral  n=4 prints=252 seen=3 J=0.07 O=0.16 script=ANGLES
+   0  The cathedral stands taller than anything else in {settlement}, and travellers see it long before they arrive.  {marks:institution: temple,no crisis: threat}
+   1* {settlement} sets its days by the cathedral bells: the feasts, the burials and the hours of work all follow them.  {marks:institution: temple}
+   2* Ask the way anywhere in {settlement} and you will be given it from the cathedral.  {marks:institution: temple}
+   3* {settlement} keeps a cathedral, a bishop's church that the clergy of the whole district answer to.  {marks:institution: temple}
+#88 [13830] data/institutionDescVariants.js :: [joined] town|Economy|Assay office  n=3 prints=76 seen=3 J=0.44 O=0.64 script=PARAPHRASE
+   0* Tests the purity of precious metals brought to the town. Essential infrastructure for banking and minting. Charges fees per assay.
+   1* Tests the purity of precious metals brought in. Infrastructure without which banking and minting cannot work. It charges by the assay.
+   2* Precious metals are proved here for their fineness, a necessity for any bank or mint. A fee is taken on each test.
+#89 [1400] data/dailyLife/outsiderImpressions.js :: OUTSIDER_IMPRESSIONS.power  n=11 prints=1398 seen=11 J=0.03 O=0.06 script=DISTINCT
+   0* Outsiders notice the mark of {power} on every door that matters.  {needs:}
+   1* A visitor soon learns that little happens here without {power}.  {needs:}
+   2* Ask who decides things here, and the answer is {power}.  {needs:}
+   3* Strangers with business here are sent to {power} sooner or later.  {needs:}
+   4* It does not take a visitor long to see who holds sway here: {power}.  {needs:}
+   5* Whatever a visitor wants done, {power} {power|has|have} a say in it.  {needs:}
+   … 5 more
+#90 [13835] data/institutionDescVariants.js :: [joined] town|Crafts|Mills (2-5)  n=3 prints=300 seen=3 J=0.51 O=0.67 script=PARAPHRASE
+   0* Grain ground at several sites.
+   1* Several sites grind the town's grain.
+   2* The town's grain is ground at a handful of sites.
+#91 [2998] data/institutionDescVariants.js :: PAIRS.272  n=2 prints=820 seen=2 J=0.09 O=0.17 script=ANGLES
+   0* A standing force of the law, roughly one in a hundred residents.
+   1* Full-time keepers of order, about one for every hundred people in the city.
+#92 [13782] data/institutionDescVariants.js :: [joined] village|Economy|Dairy farmer  n=3 prints=140 seen=3 J=0.65 O=0.84 script=PARAPHRASE
+   0* A dairy for milk, butter, and soft cheese, from cattle or goats, whenever livestock can be had. Any surplus goes to neighbours.
+   1* Milk, butter, and soft cheese from cattle or goats, whenever livestock can be had. What isn't used is sold on.
+   2* A herd of cattle or goats, whenever livestock can be had, for milk, butter, and soft cheese. Any surplus is sold on.
+#93 [13952] data/institutionDescVariants.js :: [joined] town|Adventuring|Adventurers' charter hall  n=3 prints=408 seen=3 J=0.45 O=0.62 script=PARAPHRASE
+   0* A chartered hall serving as the primary adventuring hub for the region. Posts contracts, grades monster threats, maintains gear, and coordinates large
+   1* A chartered hall that serves as the region's chief adventuring hub. It posts contracts, grades the monster threats, keeps gear in repair, and runs the
+   2* The region's principal adventuring hub, working under charter. Contracts are posted here, monster threats graded, equipment maintained, and the great 
+#94 [1860] data/dossierStateProse/economy.generated.js :: DOSSIER_STATE_PROSE_ECONOMY.DS-ECO-1.pools.COMBINATION C3: the middle rungs  n=3 prints=1058 seen=3 J=0.06 O=0.13 script=ANGLES
+   0* With a little left over each year, {settlement} gets by on a {complexity}, and every year people argue over how to spend it.  {marks:crisis: any}
+   1* {settlement} pays its way from year to year, and nobody here calls the town poor.
+   2* Nothing about {settlement} looks rich or poor: the {access} is busy enough, the market is open, and nobody is building or selling up.  {marks:no crisis,market}
+#95 [2962] data/institutionDescVariants.js :: PAIRS.222  n=2 prints=374 seen=2 J=0.22 O=0.40 script=ANGLES
+   0* Merchants from abroad. Letters of credit are honoured.
+   1* Foreign traders attend, and credit by letter is taken.
+#96 [13781] data/institutionDescVariants.js :: [joined] hamlet|Economy|Dairy farmer  n=3 prints=280 seen=3 J=0.64 O=0.85 script=PARAPHRASE
+   0* A dairy for milk, butter, and cheese from cattle or goats, whenever livestock can be had. Seasonal. Production peaks in summer.
+   1* Milk, butter, and cheese from cattle or goats, whenever livestock can be had. The work is seasonal, and heaviest in summer.
+   2* A dairy for milk, butter, and cheese, from a herd of cattle or goats, whenever livestock can be had. Seasonal work, cresting in the summer months.
+#97 [4734] data/people/goalFamilies.js :: GOAL_FAMILY_LINES.POWER.tense.short  n=6 prints=2154 seen=6 J=0.01 O=0.03 script=DISTINCT
+   0* Stop {rival} from taking anything more from {power} this season.
+   1* Learn the plans of {rival} against {power} before they can act on them.
+   2* Win one ally of {rival} over to the side of {power}.
+   3* Keep the quarrel between {power} and {rival} from turning into open trouble this season.
+   4* Answer the next move by {rival} against {power}, quickly and in public.
+   5* Find out which members of {power} are still friendly with {rival}, and why.
+#98 [13877] data/institutionDescVariants.js :: [joined] town|Religious|Parish burial grounds  n=3 prints=696 seen=3 J=0.34 O=0.68 script=PARAPHRASE
+   0* Each congregation keeps its own burial ground, and one that has filled its ground buries beyond the town's edge instead. The sexton holds the register
+   1* A ground for each congregation, and burial out beyond the houses where a ground has filled. The sexton's register of who lies where is the town's long
+   2* Each congregation buries its own, and the sexton keeps the roll that inheritance disputes are settled from. Guilds buy plots together so their members
+#99 [1979] data/dossierStateProse/economy.generated.js :: DOSSIER_STATE_PROSE_ECONOMY.DS-ECO-12.pools.INCOME MIX: two or three sources between them  n=3 prints=546 seen=3 J=0.09 O=0.21 script=ANGLES
+   0* {settlement}'s biggest trade earns a real portion of its living, but none of its trades could carry the place alone.
+   1* Ask what {settlement} lives on and you will hear more than one trade named.
+   2* No one trade earns half of what {settlement} makes, so a bad year in any one of them would hurt without ruining it.
+#100 [13917] data/institutionDescVariants.js :: [joined] town|Infrastructure|Town hall  n=3 prints=300 seen=3 J=0.08 O=0.17 script=ANGLES
+   0* Meeting place and administrative center.
+   1* Where the town meets and its business is done.
+   2* The seat of assembly and administration.
+#101 [2913] data/institutionDescVariants.js :: PAIRS.89  n=2 prints=486 seen=2 J=0.27 O=0.43 script=ANGLES
+   0* Finishes woven cloth, cleaning and thickening it, the work often driven by water. Raw weave leaves as hard-wearing textile.
+   1* Cleans and felts fresh-woven cloth to finish it, frequently by water power, turning loose weave into a durable fabric.
+#102 [1951] data/dossierStateProse/economy.generated.js :: DOSSIER_STATE_PROSE_ECONOMY.DS-ECO-10.pools.POSTURE: established  n=9 prints=1412 seen=9 J=0.09 O=0.23 script=ANGLES
+   0* {settlement} sells more than one thing beyond the town.  {marks:no hunger}
+   1* The yards here are full of goods bound out and no two of them are the same. This is a town that sells.  {marks:tier: ≥ village,no crisis: under_siege,no crisis: fami}
+   2* There is always something going out, and not always the same thing.  {marks:no crisis: under_siege,no crisis: famine,no crisis: pl}
+   3* The carts that leave {settlement} carry several kinds of goods, not one.  {marks:no crisis: under_siege,no crisis: famine,no crisis: pl}
+   4* Buyers from outside come to {settlement} for more than one thing.  {marks:no crisis: under_siege,no crisis: famine,no crisis: pl}
+   5* A merchant who comes to {settlement} for one thing usually leaves with two or three.  {marks:no crisis: under_siege,no crisis: famine,no crisis: pl}
+   … 3 more
+#103 [2978] data/institutionDescVariants.js :: PAIRS.241  n=2 prints=338 seen=2 J=0.60 O=0.75 script=PARAPHRASE
+   0* Guild-organised carpenters, joiners, and furniture makers for building and fitting out.
+   1* Builders' carpenters, joiners, and furniture makers, each trade organised under its guild.
+#104 [1726] data/dossierStateProse/defense.generated.js :: DOSSIER_STATE_PROSE_DEFENSE.DS-DEF-4.pools.structure semi-organized  n=7 prints=316 seen=5 J=0.07 O=0.15 script=ANGLES
+   0* Criminal work at {settlement} is coordinated enough to hold routes and territories, though not yet tight enough to run the whole town.
+   1* Everyone at {settlement} knows someone takes a cut, but who it is changes by street and by season.
+   2* Rival crews at {settlement} are fighting over who runs the streets, and until one wins, people pay both the cut and the brawling.  {marks:tier: ≥ village,rival rings,no crisis: occupied,law: ≤}
+   3  Whatever crime is organised at {settlement} has no rival, and no crew is contesting the streets with it.  {marks:tier: ≥ village,no rival rings,crime: = organized}
+   4* The crews at {settlement} that would fight over the streets keep out of sight under the occupation, and their quarrel waits.  {marks:tier: ≥ village,rival rings,crisis: occupied}
+   5  More than one crew works {settlement}, but the town's law is heavier than any of them, and none of them can fight for the streets in the open.  {marks:tier: ≥ village,rival rings,no crisis: occupied,law: s}
+   … 1 more
+#105 [1398] data/dailyLife/gatheringPlaces.js :: GATHERING_NAMED  n=33 prints=1420 seen=32 J=0.19 O=0.37 script=ANGLES
+   0* By midday people are gathered on the steps of {church}, at {market} and at {inn}: talking, trading, and watching.  {needs:church,market,institution: tavern}
+   1* Most days people stop to talk by {sacred} on their way to and from their work.  {needs:sacredHouse}
+   2* People meet where the water is drawn and again by {sacred}, and most news passes between them.  {needs:sacredHouse,institution: waterSource}
+   3* In the evenings people gather at {inn}, where the day's news is passed around.  {needs:institution: tavern}
+   4* People gather at {market} as much to talk as to buy.  {needs:market}
+   5* People meet at {market} by day and at {inn} once the work is done.  {needs:market,institution: tavern}
+   … 27 more
+#106 [4730] data/people/goalFamilies.js :: GOAL_FAMILY_LINES.RANK.defend.short  n=6 prints=1172 seen=6 J=0.02 O=0.05 script=DISTINCT
+   0* Keep {below} busy with real work for {power}, too busy to gather friends of their own.
+   1* Find out whether {below} has been meeting anyone from {power} in private.
+   2* Give {below} one task this season that will show whether they can be trusted.
+   3* Settle one quarrel inside {power} before {below} can settle it and take the credit.
+   4* Make sure every decision of {power} this season goes out under their own name.
+   5* Keep {below} in second place by giving them enough to want and nothing to take.
+#107 [2276] data/dossierStateProse/power.generated.js :: DOSSIER_STATE_PROSE_POWER.DS-POW-5.pools.merchant_league  n=4 prints=324 seen=4 J=0.02 O=0.06 script=DISTINCT
+   0* The {seat} at {settlement} is run by the houses that keep the account books, and it decides things the way a business does: by what pays.  {marks:no crisis: occupied}
+   1* The people who run {settlement} are also the people who trade in it, and they do not keep the two apart.
+   2* What the {seat} at {settlement} fears most is running out of money, and every decision is made with that in mind.
+   3* The {seat} at {settlement} has let quarrels drop that it could have won, because winning would have cost more than it was worth.
+#108 [2926] data/institutionDescVariants.js :: PAIRS.131  n=2 prints=692 seen=2 J=0.26 O=0.44 script=ANGLES
+   0* Built for the road: relay stabling, coaches on a schedule, meals at set hours, and a room for waiting passengers. Horses are changed here, not merely 
+   1* A house made for travellers by coach: fresh horses stabled, departures timed, fixed mealtimes, and a passengers' waiting room. The teams are swapped o
+#109 [2968] data/institutionDescVariants.js :: PAIRS.231  n=2 prints=496 seen=2 J=0.22 O=0.38 script=ANGLES
+   0* Heated communal baths. Some cultures make them a social hub, others suspect them of vice; either way they are the district's best place for rumour and
+   1* A public bathhouse with hot water, a gathering place in some cultures and a suspected den of vice in others. Nowhere in the district hears more news.
+#110 [4778] data/people/goalFamilies.js :: GOAL_FAMILY_LINES.PERSONALITY.forbidden_patron.short  n=4 prints=516 seen=4 J=0.04 O=0.07 script=DISTINCT
+   0* Learn one secret this season that someone would pay to keep.
+   1* Get someone else to take the blame for a mistake of theirs.
+   2* Win someone's trust this season, and keep a use for it.
+   3* Tell the right story to the right person, and watch it spread.
+#111 [13909] data/institutionDescVariants.js :: [joined] city|Infrastructure|Housing (500-4000 households)  n=3 prints=282 seen=2 J=0.39 O=0.60 script=PARAPHRASE
+   0  Multi-story buildings. Tenements for poor.
+   1* Buildings of several storeys. Tenements house the poor.
+   2* Multi-storey construction, with tenements for the poor.
+#112 [13799] data/institutionDescVariants.js :: [joined] town|Economy|Market square  n=3 prints=300 seen=3 J=0.41 O=0.58 script=PARAPHRASE
+   0* Central plaza for weekly markets and fairs.
+   1* The central plaza where the weekly market and the fairs are held.
+   2* A broad open square given over to market days and fairs.
+#113 [13776] data/institutionDescVariants.js :: [joined] thorp|Economy|Communal root cellar  n=3 prints=212 seen=3 J=0.28 O=0.45 script=ANGLES
+   0* A shared underground store for grain, roots, and preserved food. Vital buffer against a bad harvest.
+   1* A shared cellar for grain, roots, and preserved food. It is what stands between the thorp and a failed harvest.
+   2* Grain, roots, and preserves kept in a common underground store. The settlement's guard against a bad year.
+#114 [13883] data/institutionDescVariants.js :: [joined] metropolis|Religious|Major monasteries (5-10)  n=3 prints=288 seen=3 J=0.32 O=0.49 script=PARAPHRASE
+   0* Five to ten major monastic houses: scholarly, contemplative, and charitable functions at scale.
+   1* Between five and ten great monastic houses, each given to scholarship, contemplation, and charity at scale.
+   2* Five to ten major monasteries, their scholarly, contemplative, and charitable work carried out on a grand scale.
+#115 [13888] data/institutionDescVariants.js :: [joined] metropolis|Religious|Hospital network  n=3 prints=394 seen=3 J=0.40 O=0.62 script=PARAPHRASE
+   0* Multiple hospitals and infirmaries across districts. Organized medical care at population scale.
+   1* Hospitals and infirmaries across the districts, medical care organised for a city's numbers.
+   2* A spread of hospitals and infirmaries throughout the quarters, ordered medical care at population scale.
+#116 [1266] data/cultureProfiles.js :: CULTURE_PROFILES.latin.foodways  n=2 prints=76 seen=1 J=0.00 O=0.00 script=DISTINCT
+   0  Bread grains, pulses, garden produce, oil or rendered fats, wine, and preserved fish form the staple pattern.
+   1* Market vendors and shared dining customs make food distribution visibly civic.  {needs:market}
+#117 [2265] data/dossierStateProse/power.generated.js :: DOSSIER_STATE_PROSE_POWER.DS-POW-4.pools.riskLabel: Contested  n=4 prints=308 seen=4 J=0.05 O=0.11 script=ANGLES
+   0* {counterpart} could now take the hall from {faction} at {settlement}; {faction} keeps it only because the office is still its own.
+   1* {settlement} is no longer sure the hall belongs to {faction}, and {faction} governs as though it is not sure either.
+   2* The challenger at {settlement} could now take the hall, but the {seat} has not changed hands yet. What happens next depends on who moves first.
+   3* Visitors to {settlement} are quietly told to stay polite to {counterpart} as well as to {faction}, and nobody says why.  {marks:no crisis: under_siege}
+#118 [13872] data/institutionDescVariants.js :: [joined] city|Religious|Parish churches (10-30)  n=3 prints=208 seen=2 J=0.00 O=0.00 script=DISTINCT
+   0  One per neighborhood.
+   1* A house of worship to every quarter.
+   2* One for each neighbourhood.
+#119 [13163] generators/safetyProfile.js :: NO_WATCH_SMALL  n=4 prints=964 seen=3 J=0.09 O=0.18 script=ANGLES
+   0  There is no watch. The old families keep the peace, and anyone who breaks it answers to all the neighbours at once; when the families fall out among t
+   1* There is no watch. When someone does wrong, the neighbours deal with it themselves, and the oldest families have the last word.
+   2* Nobody here is paid to keep order. A quarrel goes to the heads of the oldest families, and most are settled before they come to blows.
+   3* There is no watch here. A thief is known by name within a day, and everyone shuns them until they make it right.
+#120 [1497] data/dailyLife/unspokenTopics.js :: UNSPOKEN_TOPICS.wound.disputed_land  n=3 prints=68 seen=3 J=0.14 O=0.26 script=ANGLES
+   0* The old charter and the land it claims are not discussed with outsiders.  {needs:}
+   1* Whose land is whose, under the old charter or the present holding, is a question nobody raises lightly.  {needs:}
+   2* Nobody brings up the disputed land in company; both sides have a case and both know it.  {needs:}
+#121 [2997] data/institutionDescVariants.js :: PAIRS.270  n=2 prints=176 seen=2 J=0.09 O=0.20 script=ANGLES
+   0* Drains laid underground. Uncommon, and vital to public health.
+   1* Buried drainage. A rarity, and one the city's health depends on.
+#122 [2957] data/institutionDescVariants.js :: PAIRS.216  n=2 prints=98 seen=2 J=0.00 O=0.00 script=DISTINCT
+   0* Combat outside the law, or barely within it, held underground.
+   1* Fights unlawful or half-lawful, staged in hidden places.
+#123 [13773] data/institutionDescVariants.js :: [joined] village|Economy|Farmland  n=3 prints=300 seen=3 J=0.40 O=0.62 script=PARAPHRASE
+   0* Open-field agriculture with crop rotation.
+   1* Open fields worked in rotation.
+   2* Farmed in open fields, the crops rotated.
+#124 [13934] data/institutionDescVariants.js :: [joined] hamlet|Defense|Citizen militia  n=3 prints=44 seen=3 J=0.23 O=0.37 script=ANGLES
+   0* Able-bodied residents drill and muster against local threats. Part-time service.
+   1* Fit residents train and turn out when trouble comes near. Service is part-time.
+   2* The able-bodied drill together and assemble against local danger. Nobody does it full-time.
+#125 [13775] data/institutionDescVariants.js :: [joined] village|Economy|Common grazing land  n=3 prints=300 seen=3 J=0.32 O=0.50 script=PARAPHRASE
+   0* Shared pasture for village livestock, held in common alongside the open fields.
+   1* Pasture the whole village grazes in common, lying beside the open fields.
+   2* Common grazing held by the village as a whole, next to the open fields, for every household's beasts.
+#126 [1900] data/dossierStateProse/economy.generated.js :: DOSSIER_STATE_PROSE_ECONOMY.DS-ECO-6.pools.TIER: minor shadow activity (≥3)  n=6 prints=62 seen=3 J=0.08 O=0.18 script=ANGLES
+   0  Some petty theft goes on here, and some trading without a licence. It is a nuisance, nothing more.  {marks:no organised crime,no crisis: famine,no crisis: under_}
+   1* Some of {settlement}'s trade is done out of sight, and nobody has organised it into anything more.  {marks:dm-only,no organised crime}
+   2  There is some thieving and some selling without a licence. Every town this size has both.  {marks:dm-only,no organised crime}
+   3* What passes for a shadow economy here has never grown into one. There is unlicensed trade and nothing organised behind it.  {marks:dm-only,no organised crime}
+   4  Little of {settlement}'s trade goes unrecorded, but what does goes through the same organised hands each time.  {marks:crime: ≥ organized}
+   5* The shadow trade at {settlement} is small, but it is not casual: somebody organises it.  {marks:organised crime}
+#127 [10441] domain/foodways.js :: FRAMES.oneTilled  n=2 prints=196 seen=2 J=0.56 O=0.83 script=PARAPHRASE
+   0* Each holding grows for its own table, and beyond that its food is {A}.
+   1* What each holding grows goes to its own table; beyond that, what it puts on the table itself is {A}.
+#128 [13827] data/institutionDescVariants.js :: [joined] town|Economy|Merchant warehouses  n=3 prints=228 seen=3 J=0.27 O=0.44 script=ANGLES
+   0* Warehouse facilities for merchants storing goods awaiting sale, transit, or seasonal distribution. Essential infrastructure for any trade route settle
+   1* Storage for merchants' goods held back for sale, transit, or the season's distribution. No trade-route settlement does without it.
+   2* Warehouses where traders keep stock awaiting sale, shipment, or seasonal release. Indispensable to any town on a trade route.
+#129 [2996] data/institutionDescVariants.js :: PAIRS.267  n=2 prints=394 seen=2 J=0.00 O=0.00 script=DISTINCT
+   0* A commanding seat of civic government.
+   1* An imposing hall for the city's affairs.
+#130 [13162] generators/safetyProfile.js :: STANDARD_PATROL()  n=4 prints=1366 seen=4 J=0.05 O=0.11 script=ANGLES
+   0* The   standard patrol coverage. Effective against opportunistic crime; less effective against organized operations that can plan around patrol route
+   1* The   the usual rounds. That stops a pickpocket or a brawl; anyone who has learned the rounds can work between them.
+   2* The   on a regular round, so petty theft is often caught and planned crime seldom is.
+   3* You will see the  on the rounds most hours of the day;  the careful.
+#131 [13880] data/institutionDescVariants.js :: [joined] village|Religious|Priest (resident)  n=3 prints=600 seen=3 J=0.24 O=0.43 script=ANGLES
+   0* Performs sacraments, collects tithes. Often only literate person.
+   1* Administers the sacraments and gathers the tithe. Frequently the sole person here who can read.
+   2* Says the sacraments, takes the tithe. Usually the one literate soul in the village.
+#132 [4752] data/people/goalFamilies.js :: GOAL_FAMILY_LINES.SUPPLY.dependency.short  n=6 prints=1574 seen=6 J=0.04 O=0.12 script=DISTINCT
+   0* Find a second supplier of {resource}, so one lost cart cannot stop the work at {house}.  {excludes:crisis: siege}
+   1* Lay in a season of {resource} at {house} while it can still be had.  {excludes:crisis: siege}
+   2* Buy {resource} at the market in bulk this season, while the price is still fair.  {needs:market; excludes:crisis: siege}
+   3* Learn who controls the supply of {resource}, and get on good terms with them.
+   4* Keep {house} working through the season even if the supply of {resource} should fail.
+   5* Find a way to make do with less {resource} at {house}.
+#133 [13915] data/institutionDescVariants.js :: [joined] city|Infrastructure|Aqueduct or water system  n=3 prints=206 seen=2 J=0.52 O=0.67 script=PARAPHRASE
+   0  Engineered water supply. Conduits, cisterns, fountains.
+   1* A built water supply: conduits, cisterns, and fountains.
+   2* Engineered waterworks: conduits feeding cisterns and fountains.
+#134 [8677] domain/display/guardLineUnderTheLaw.js :: FAMILIES_UNHELD.0  n=2 prints=348 seen=2 J=0.82 O=1.00 script=PARAPHRASE
+   0* There is no watch. The old families keep the peace, and anyone who breaks it answers to all the neighbours at once; when the families fall out among t
+   1* There is no watch. The neighbours keep the peace, and anyone who breaks it answers to all of them at once; when they fall out among themselves, nobody
+#135 [1809] data/dossierStateProse/defense.generated.js :: DOSSIER_STATE_PROSE_DEFENSE.DS-DEF-8.pools.override: WAR FOOTING  n=3 prints=74 seen=3 J=0.06 O=0.14 script=ANGLES
+   0* {settlement} is on a war footing: what it makes, what it stores and who is free to work are all decided by the war.
+   1* {settlement} has given up several ordinary things for the war, and people have stopped remarking on it.
+   2* The war's demands at {settlement} keep reaching further, into trades and households that thought themselves untouched.
+#136 [5494] data/safetyDescLines.js :: MIXED_CORNERS  n=13 prints=752 seen=13 J=0.09 O=0.19 script=ANGLES
+   0* Residents know which corners to avoid.
+   1* People who live here know where not to go.
+   2* Locals know which lanes to keep out of.  {needs:tier: ≥ village}
+   3* Those who live here soon learn where not to linger.
+   4* Most people here know where trouble is likely, and keep clear of it.
+   5* The people here know their own streets, and which to keep away from.  {needs:tier: ≥ village}
+   … 7 more
+#137 [13159] generators/safetyProfile.js :: SMUGGLING_HOOKS  n=4 prints=612 seen=4 J=0.09 O=0.18 script=ANGLES
+   0* The smuggling network is moving something unusual this week, not the normal contraband. Someone wants to know what it is before it arrives.
+   1* A smuggler wants one crate moved quietly and will pay well, but will not say what is in it.
+   2* The smugglers have stopped moving their usual goods this week, and nobody can say why.
+   3* A smuggled load went missing on the way in, and the people who paid for it are asking questions.
+#138 [2999] data/institutionDescVariants.js :: PAIRS.274  n=2 prints=616 seen=2 J=0.14 O=0.29 script=ANGLES
+   0* Sellsword companies under proper organisation, mustering hundreds to thousands.
+   1* Organised bands of hired blades. Major forces, hundreds to thousands strong.
+#139 [4694] data/npcStructureVariants.js :: CONSTRAINT_VARIANTS.government__stable__dominant  n=14 prints=1020 seen=13 J=0.03 O=0.07 script=DISTINCT
+   0* Cannot act alone: nothing is done here until the rest of the council agrees.  {needs:ruling body; excludes:crisis}
+   1* Does not set the prices or the wages of the trades; for anything touching them, the seat must deal with the guild.  {needs:guild; excludes:crisis}
+   2* Has no say over the church or its clergy; whatever the seat wants from the faith, it must ask for.  {needs:church; excludes:crisis,ruler: priest}
+   3* There is coin for the everyday work and little over; any new building or hire means asking the households for more.  {needs:prosperity: moderate; excludes:crisis}
+   4* The coffers bear the everyday work and more, but every new cost must still be argued for before those who pay it.  {needs:prosperity: ≥ comfortable; excludes:crisis}
+   5* Has no paid hands to see its word kept; what the seat decides, the neighbours must be willing to carry out.  {needs:militia; excludes:crisis,paid watch,garrison,mercenary}
+   … 8 more
+#140 [2914] data/institutionDescVariants.js :: PAIRS.90  n=2 prints=668 seen=2 J=0.28 O=0.45 script=ANGLES
+   0* Colours cloth, whether raw fibre or finished weave. Without it there is nothing but undyed grey wool.
+   1* Puts colour into wool and cloth, raw or woven. Anything beyond plain grey wool depends on the work.
+#141 [2305] data/dossierStateProse/power.generated.js :: DOSSIER_STATE_PROSE_POWER.DS-POW-6.pools.GM ADVISORY: the commander is a political actor  n=5 prints=106 seen=5 J=0.03 O=0.07 script=DISTINCT
+   0* The commander at {settlement} is a political player in their own right. Whatever the {seat} plans needs the commander's backing, and that backing has   {marks:dm-only,commander}
+   1* Treat the commander at {settlement} as a power, not a servant: the {seat} cannot act against the soldiers' wishes, and anyone who wins the commander o  {marks:dm-only,commander}
+   2* {faction} answers to the {seat} at {settlement} in name only: whatever the {seat} plans needs its consent, and that consent is bargained for.  {marks:dm-only,no crisis: occupied}
+   3* Nothing the {seat} orders at {settlement} goes ahead if {faction} refuses it, and whoever can win {faction} over can steer the place.  {marks:dm-only,colour}
+   4* {faction} has grown stronger than the {seat} at {settlement}, and both know it; the {seat} keeps the title while {faction} decides what is enforced.  {marks:dm-only,colour}
+#142 [4790] data/people/goalFamilies.js :: GOAL_FAMILY_LINES.PERSONALITY.sway.short  n=4 prints=1396 seen=4 J=0.00 O=0.00 script=DISTINCT
+   0* Have the last word in the next argument that matters.
+   1* Get people doing things their way this season without being asked twice.
+   2* Be the one others look to when something goes wrong.
+   3* Put someone who slighted them back in their place.
+#143 [13925] data/institutionDescVariants.js :: [joined] metropolis|Infrastructure|Great library  n=3 prints=274 seen=3 J=0.37 O=0.53 script=PARAPHRASE
+   0* Largest repository of knowledge in the region: thousands of volumes, map archives, historical records.
+   1* The region's greatest store of learning: thousands of volumes, archives of maps, and the historical record.
+   2* No larger collection of knowledge exists in the region: thousands of books, a map archive, and the histories.
+#144 [2980] data/institutionDescVariants.js :: PAIRS.243  n=2 prints=564 seen=2 J=0.61 O=0.79 script=PARAPHRASE
+   0* Guild bowyers and fletchers selling arrows by the sheaf, special broadheads, and composite bows to order, supplying the watch, the garrison, and the c
+   1* Arrows by the sheaf, specialty broadheads, and commissioned composite bows from the guild's bowyers and fletchers. The watch, the garrison, and the ca
+#145 [2985] data/institutionDescVariants.js :: PAIRS.248  n=2 prints=624 seen=2 J=0.27 O=0.43 script=ANGLES
+   0* Windows, vessels, and mirrors. The craft demands real skill.
+   1* Glass for windows, vessels, and mirrors. Expert work, not casual.
+#146 [13780] data/institutionDescVariants.js :: [joined] thorp|Economy|Shepherd collective  n=3 prints=410 seen=3 J=0.21 O=0.37 script=ANGLES
+   0* Communal flock management. The rhythms of the settlement follow the grazing calendar.
+   1* The flock is held and worked in common, and the thorp keeps time by the grazing calendar.
+   2* One shared flock, tended together. The grazing seasons set the rhythm of the place.
+#147 [13945] data/institutionDescVariants.js :: [joined] metropolis|Magic|Mages' district  n=3 prints=752 seen=3 J=0.42 O=0.59 script=PARAPHRASE
+   0* Quarter inhabited by arcane practitioners: towers, workshops, libraries, reagent merchants.
+   1* A whole quarter of arcane practitioners, all towers, workshops, libraries, and reagent sellers.
+   2* The magic-workers keep to one district. Its towers, workshops, libraries, and reagent merchants mark it out.
+#148 [4684] data/npcStructureVariants.js :: POSITION_VARIANTS.economy__stable__dominant  n=4 prints=122 seen=4 J=0.51 O=0.75 script=PARAPHRASE
+   0* Heads {house}, the leading house in the trade, in a steady season.  {needs:own house; excludes:crisis}
+   1* Heads the leading house in a trade that sends {export} out of the place.  {needs:export good; excludes:crisis}
+   2* Heads the leading house in the trade of a large place, with many smaller houses behind it.  {needs:population: large; excludes:crisis}
+   3* Heads the leading house in the trade while business is steady and no one presses it.  {needs:; excludes:crisis}
+#149 [13938] data/institutionDescVariants.js :: [joined] city|Defense|Garrison  n=3 prints=600 seen=3 J=0.31 O=0.47 script=PARAPHRASE
+   0* A professional force, under arms full-time.
+   1* A professional force, kept under arms for pay.
+   2* A standing force, paid to bear arms.
+#150 [13875] data/institutionDescVariants.js :: [joined] hamlet|Religious|Burial ground  n=3 prints=784 seen=3 J=0.30 O=0.59 script=PARAPHRASE
+   0* A walled plot at the edge of the settlement, gated against livestock and kept by the households in turn. The rite is held when a priest comes through,
+   1* A walled plot gated against livestock, kept by the households in turn. The rite waits for a priest passing through; the burial does not.
+   2* A gated ground at the settlement edge, tended household by household. Families lie in rows by house, whatever their standing; that is custom here, not

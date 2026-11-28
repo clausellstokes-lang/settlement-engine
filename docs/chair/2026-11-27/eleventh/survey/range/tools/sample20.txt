@@ -1,0 +1,111 @@
+#1 [4469] data/npcData.js :: STRESS_ECONOMIC_EFFECTS.mutual_leverage.desc  n=5 prints=1630 seen=4 J=0.01 O=0.02 script=DISTINCT
+   0*  cannot finish what they have started without 's help, and  cannot finish theirs without 's. Neither lets the other forget it.  {colour:true}
+   1   needs 's goodwill this year, and  will need 's the next. Both of them have counted the years.  {colour:true}
+   2*  hears of trouble early and  hears of opportunity early, and each passes the word to the other a day before anyone else.  {colour:true}
+   3*  and  know exactly what each would refuse the other, and so neither ever asks for it.  {colour:true}
+   4*  can open doors for  that  could never open alone, and  does the same for  in other places. Each uses the other sparingly.  {colour:true}
+#2 [14134] data/institutionDescVariants.js :: [joined] metropolis|Economy|State granary complex  n=3 prints=300 seen=3 J=0.31 O=0.48 script=PARAPHRASE
+   0* State-administered granary network holding strategic reserves.
+   1* A network of granaries run by the state, holding reserves against emergency.
+   2* State-managed grain stores, kept as a strategic reserve.
+#3 [1800] data/dossierStateProse/defense.generated.js :: DOSSIER_STATE_PROSE_DEFENSE.DS-DEF-9.pools.magicDependency false  n=8 prints=698 seen=6 J=0.10 O=0.21 script=ANGLES
+   0* Nothing structural at {settlement} depends on arcane work. What the town makes it makes with hands and ground, and would go on making without a practi  {marks:no magic supply}
+   1* Whatever magic reaches {settlement}, the town does not rest on it: nothing it lives by would stop without it.  {marks:magic,no magic supply}
+   2* The town would go on as it is if the arcane went away; nothing it lives by waits on a spell.  {marks:no magic supply}
+   3  {settlement}'s own work does not lean on magic, but no trade road reaches it, and some of what it lives on is brought in by magic.  {marks:magic supply}
+   4* A visitor may meet magic at {settlement}, but nothing the place needs in order to live is waiting on it.  {marks:no magic supply}
+   5* Without any magic at all, {settlement} would still keep its living.  {marks:no magic supply}
+   … 2 more
+#4 [1102] data/arrivalProse.js :: ARRIVAL_SENSES.7.lines  n=8 prints=378 seen=8 J=0.01 O=0.02 script=DISTINCT
+   0* Sheep call to one another from the grazing beyond the houses.  {excludes:crisis: under_siege,crisis: monster_pressure; crisi}
+   1* A dog drives a handful of animals across the road, and you wait for them.  {excludes:crisis: under_siege; crisis:any}
+   2* The smell of the byres reaches you on the breeze.  {crisis:any}
+   3* Someone is churning butter in a doorway, and the rhythm of it carries.  {needs:trade at work: dairy; excludes:failed: livestock; cris}
+   4* Someone is mending a hurdle in a doorway, and the knock of the mallet carries.  {twinOf:Someone is churning butter in a doorway, and the rhyt}
+   5* Hoofprints and dung mark the lane, and you learn quickly to watch where you step.  {crisis:any}
+   … 2 more
+#5 [1725] data/dossierStateProse/defense.generated.js :: DOSSIER_STATE_PROSE_DEFENSE.DS-DEF-5.pools.watch PRESENT  n=3 prints=310 seen=3 J=0.04 O=0.08 script=DISTINCT
+   0* {settlement} keeps a watch, which is a matter of order rather than of war. It answers what happens inside the town and is not built for what arrives f  {marks:colour}
+   1* There are people walking the town at {settlement} at night, and the town's sense of itself rests more on that than on anything at the gate.  {marks:gate}
+   2* Anyone walking {settlement} late is watched, not stopped, and the watchmen make sure you know it.  {marks:watch,no crisis: occupied,no crisis: wartime}
+#6 [4477] data/npcData.js :: STRESS_ECONOMIC_EFFECTS.genuine_respect.tension  n=8 prints=6080 seen=8 J=0.01 O=0.01 script=DISTINCT
+   0*  and  are about to be on opposite sides of an important decision.  {colour:true}
+   1*  is being pressed to act against , and has not mentioned it.  {colour:true}
+   2*  and  still respect each other, but what each of them wants is pulling apart, and both can see it.  {colour:true}
+   3*  has learned something about 's family that  does not know.  {colour:true}
+   4*  has been offered 's post by people who want  gone.  {colour:true}
+   5*  has made a mistake that  is bound to report.  has not reported it.  {colour:true}
+   … 2 more
+#7 [4466] data/npcData.js :: STRESS_ECONOMIC_EFFECTS.mentor_legacy.tension  n=8 prints=12206 seen=8 J=0.01 O=0.02 script=DISTINCT
+   0*  now operates in ways  would not approve of. Neither discusses the divergence directly.  {colour:true}
+   1*  has one favour left to call in, and is saving it.  knows, and is watching for it.  {colour:true}
+   2* A third party has asked , quietly, whether  can be trusted. The answer took too long.  {colour:true}
+   3*  has taken on a client  turned away on principle.  {colour:true}
+   4*  has taken a new apprentice, and  has heard the apprentice is being taught things  never was.  {colour:true}
+   5*  corrected  in public last month, and was right.  {colour:true}
+   … 2 more
+#8 [4478] data/npcData.js :: STRESS_ECONOMIC_EFFECTS.old_debt.desc  n=8 prints=9192 seen=8 J=0.05 O=0.10 script=ANGLES
+   0*  owes  a great deal, and neither has ever said so aloud.  {colour:true}
+   1* Years ago  did  a favour too large to repay, and  has been paying it back in small ways ever since.  {colour:true}
+   2*  owes  for an old kindness. Neither mentions it, and both know exactly how much is still owed.  {colour:true}
+   3*  paid 's bail eleven years ago and has never mentioned it.  mentions it to no one.  {colour:true}
+   4*  owes  a large sum in coin, borrowed in a bad year and repaid in small amounts ever since.  {colour:true}
+   5*  kept 's name out of a scandal that ruined two others.  has voted with  ever since.  {needs:ruling body; excludes:ruler: lord,ruler: occupier}
+   … 2 more
+#9 [14188] data/institutionDescVariants.js :: [joined] village|Crafts|Brickmaker  n=3 prints=1742 seen=3 J=0.31 O=0.52 script=PARAPHRASE
+   0* Moulds and fires clay bricks for construction whenever clay can be had. Enables more permanent buildings. Requires clay and fuel.
+   1* Shapes and fires clay into bricks for building, whenever clay can be had. With them, structures can be made to last. Clay and fuel are needed.
+   2* Moulds and a kiln for building brick, fired whenever clay can be had; brick allows sturdier, more lasting construction. The work depends on clay and f
+#10 [14195] data/institutionDescVariants.js :: [joined] town|Crafts|Bakers (5-15)  n=3 prints=96 seen=2 J=0.43 O=0.70 script=PARAPHRASE
+   0  Bread production. Guild-regulated prices.
+   1* The town's bread. Prices fixed by the guild.
+   2* Bread baked for sale, with the guild setting the price.
+#11 [14365] data/institutionDescVariants.js :: [joined] city|Entertainment|Bardic college  n=3 prints=236 seen=2 J=0.35 O=0.53 script=PARAPHRASE
+   0  Formal musical education. Amphitheater, dormitories.
+   1* Music taught in the formal way, with an amphitheatre and dormitories.
+   2* A formal schooling in music: amphitheatre, dormitories, and all.
+#12 [14343] data/institutionDescVariants.js :: [joined] city|Criminal|Multiple criminal factions  n=3 prints=164 seen=2 J=0.17 O=0.32 script=PARAPHRASE
+   0  Competing gangs. Turf disputes.
+   1* Rival gangs, forever disputing their turf.
+   2* Several gangs at odds, quarrelling over ground.
+#13 [14078] data/institutionDescVariants.js :: [joined] hamlet|Economy|Salt works  n=3 prints=52 seen=3 J=0.36 O=0.60 script=PARAPHRASE
+   0* Evaporates saline brine, whenever brine can be had, into the raw salt used for preservation. It works best where brine lies near.
+   1* Boils or dries saline brine whenever brine can be had, yielding the raw salt that preserves food. It works best where workable brine lies close by.
+   2* Evaporates brine, whenever brine can be had, to leave salt behind: the raw mineral used to preserve nearly everything. A strong brine source close by 
+#14 [4474] data/npcData.js :: STRESS_ECONOMIC_EFFECTS.wary_alliance.tension  n=8 prints=7588 seen=7 J=0.01 O=0.03 script=DISTINCT
+   0* Someone else is working to pull  and  apart.  {colour:true}
+   1* The threat that brought  and  together is gone. Neither has said so aloud.  {excludes:crisis: threat,crisis: wartime}
+   2*  has taken a precaution against  that  was not meant to discover.  has discovered it.  {colour:true}
+   3*  has been dining with 's rivals.  heard about it from a servant.  {colour:true}
+   4   wants to bring a third member into the alliance.  thinks the newcomer would take 's place.  {colour:true}
+   5*  voted against  on a small matter last week.  is waiting to see whether it was small.  {needs:ruling body; excludes:ruler: lord,ruler: occupier}
+   … 2 more
+#15 [12838] generators/economy/outlookHookSiblings.js :: PEACE_IRON_HOOKS.1  n=2 prints=64 seen=1 J=0.67 O=0.83 script=PARAPHRASE
+   0  The iron carts are three weeks late and the carters will not say why. What iron there is goes out in rations, and work waits on mended tools.
+   1* The iron carts are three weeks late and the carters will not say why. Broken tools stay broken, and work waits.
+#16 [4471] data/npcData.js :: STRESS_ECONOMIC_EFFECTS.mutual_leverage.tension  n=5 prints=2022 seen=5 J=0.03 O=0.07 script=DISTINCT
+   0*  wants the arrangement with  written down and witnessed.  would rather keep it a matter of word.  {colour:true}
+   1* 's year of need has come early, and  has not yet decided how generous to be.  {colour:true}
+   2*  learned of something last week and told  a day late.  has noticed the day.  {colour:true}
+   3*  needs something this season that lies just past what  has always refused.  {colour:true}
+   4*  has asked  for an introduction  would rather keep to .  {colour:true}
+#17 [14168] data/institutionDescVariants.js :: [joined] village|Crafts|Apothecary  n=3 prints=244 seen=3 J=0.43 O=0.63 script=PARAPHRASE
+   0* Sells herbal medicines, poultices, and common remedies. No magical compounds, no acid flasks. Knows which roots treat fever and which mushrooms kill. 
+   1* Herbal medicines, poultices, and everyday remedies for sale. Nothing magical here, no acid flasks. The proprietor knows the roots that break a fever a
+   2* Sells poultices, common cures, and medicines drawn from herbs. Magical compounds and acid are no part of this trade. Its keeper can name which root tr
+#18 [14147] data/institutionDescVariants.js :: [joined] town|Economy|Listening post  n=3 prints=256 seen=3 J=0.13 O=0.27 script=PARAPHRASE
+   0* A licensed house that pays for road news and keeps the register: who arrived, from where, and what they carried word of. Cheap to run and openly taxed
+   1* A small licensed register office among much larger trades. It pays for arrivals and writes them down: who, from where, and carrying word of what.
+   2* The modest end of the news trade. A paid register of who came into the city and what they reported, kept openly and taxed like any other counter.
+#19 [14077] data/institutionDescVariants.js :: [joined] town|Economy|Stone quarry  n=3 prints=396 seen=3 J=0.79 O=1.00 script=PARAPHRASE
+   0* A stone quarry and its dressing yards, worked whenever good stone can be had.
+   1* A stone quarry, with yards beside it for dressing the stone, worked whenever good stone can be had.
+   2* Yards for dressing stone stand beside the quarry face, at work whenever good stone can be had.
+#20 [4460] data/npcData.js :: STRESS_ECONOMIC_EFFECTS.peer_rivalry.desc  n=8 prints=6992 seen=7 J=0.01 O=0.03 script=DISTINCT
+   0*  and  want the same thing and compete hard for it, but neither has let it turn into hatred.  {colour:true}
+   1* Only one of  and  can come out ahead, and both know it. They stay polite and give no ground.  {colour:true}
+   2* Every gain  makes,  answers within the season, and people here have learned to expect it.  {colour:true}
+   3*  and  bid for the same contracts and sit at the same tables. Each counts the other's wins more carefully than their own.  {colour:true}
+   4*  and  trained together and have competed ever since. The settlement keeps score, and so do they.  {colour:true}
+   5   wants 's position, and  wants 's reputation. They are civil in public and unforgiving in private.  {colour:true}
+   … 2 more

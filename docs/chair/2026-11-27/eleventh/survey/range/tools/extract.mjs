@@ -41,6 +41,7 @@ const unwrap = (n) => { while (n && n.type === 'CallExpression' && n.arguments.l
 function strOf(node) {
   node = unwrap(node);
   if (!node) return null;
+  if (node.type === 'ArrowFunctionExpression' && node.body && node.body.type !== 'BlockStatement') return strOf(node.body);
   if (node.type === 'StringLiteral') return node.value;
   if (node.type === 'TemplateLiteral') return node.quasis.map((q) => q.value.cooked ?? q.value.raw).join(SLOT);
   if (node.type === 'BinaryExpression' && node.operator === '+') {
