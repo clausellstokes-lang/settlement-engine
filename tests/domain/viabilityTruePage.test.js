@@ -22,6 +22,8 @@ import { generalDeskLines } from '../../src/components/new/generalDeskRead.js';
 import { economyDeskRead } from '../../src/components/new/economyDeskRead.js';
 import { DOSSIER_STATE_PROSE_POWER } from '../../src/data/dossierStateProse/power.generated.js';
 import { safetyLineSaidOnce } from '../../src/domain/display/guardLineUnderTheLaw.js';
+import { owesDebtShown, nothingLaidByShown } from '../../src/domain/display/solvencyShown.js';
+import { DOSSIER_STATE_PROSE_ECONOMY } from '../../src/data/dossierStateProse/economy.generated.js';
 import { variantByVid } from '../helpers/drawnProse.js';
 import { birth as soakBirth, ensureLaws } from '../../scripts/audit/soak-review/corpus.mjs';
 
@@ -191,4 +193,51 @@ describe('RULING-R B2: no savings or pays-its-way line beside a present place de
     const v2 = String(pool.find((/** @type {any} */ v) => v.vid === 2).text);
     expect([/^The town's debts/.test(v2), /^Debts run up in one house here/.test(v2)]).toEqual([false, true]);
   });
+});
+
+// RULING 122-B-2 (the eleventh chair, 2026-11-28; the independent reader's F2): BESIDE A PLACE DEBT IN FORCE
+// (`owesDebtShown`) NO LINE CLAIMS MONEY IN HAND, A YEARLY SURPLUS, OR FREEDOM FROM DEBT. A yearly surplus is the same claim
+// as "pays its way": on `owes`, DS-ECO-1 C3 refuses v1 AND v2, DS-ECO-8 MODERATE refuses v1 as well as v3. MODERATE v1 beside
+// "nothing laid by" alone is ruled no fault (RULING-R R5's soft pair), and a place with neither fact prints what it printed.
+// The vid a rung prints is read off the pool's own templates (never a literal anchor). RED FIRST at 003fd3b07: C dp-thorp-0
+// printed C3 v1 and MODERATE v1, dp-thorp-29 MODERATE v1, dp-metropolis-138 and dp-town-83 C3 v1, each beside a place debt.
+describe('RULING 122-B-2: no yearly-surplus line beside a place debt in force', () => {
+  const C3 = 'COMBINATION C3: the middle rungs';
+  /** @param {string} blockId @param {string} poolKey @param {any} rung @returns {number|null} the vid the rung prints */
+  const vidOf = (blockId, poolKey, rung) => {
+    if (!rung?.sentence || rung.provenance?.poolKey !== poolKey) return null;
+    const esc = (/** @type {string} */ t) => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/\\\{\w+\\\}/g, '.*?');
+    const hits = (/** @type {any} */ (DOSSIER_STATE_PROSE_ECONOMY)[blockId].pools[poolKey])
+      .filter((/** @type {any} */ v) => new RegExp(`^${esc(String(v.text))}$`).test(rung.sentence));
+    return hits.length === 1 ? hits[0].vid : -1;
+  };
+  /** @param {any} s */
+  const slots = (s) => {
+    const d = economyDeskRead(s);
+    return { header: [d.prosperityHeader?.provenance?.poolKey ?? null, vidOf('DS-ECO-1', C3, d.prosperityHeader)],
+      rung: [d.prosperityRung?.provenance?.poolKey ?? null, vidOf('DS-ECO-8', 'MODERATE', d.prosperityRung)] };
+  };
+  // [seed, the slot's pool at the tip, the slot]: each printed a refused vid beside a place debt at 003fd3b07
+  const OWES = /** @type {Array<[string, 'header'|'rung']>} */ ([
+    ['dp-thorp-0', 'header'], ['dp-thorp-0', 'rung'], ['dp-thorp-29', 'rung'], ['dp-metropolis-138', 'header'], ['dp-town-83', 'header'],
+  ]);
+  test('C dp-thorp-0, dp-thorp-29, dp-metropolis-138, dp-town-83 (a place debt in force): no C3 v1/v2 header, no MODERATE v1/v3 tile', () => {
+    /** @type {Array<[string, string, boolean, boolean]>} */ const got = [];
+    for (const [seed, slot] of OWES) {
+      const s = c(seed);
+      const [pool, vid] = slots(s)[slot];
+      const refused = slot === 'header' ? [1, 2] : [1, 3];
+      // the premise: the place owes, and the slot keys the pool (or stands empty: a refusal may leave no line, UNIT 1's count)
+      got.push([seed, slot, owesDebtShown(s) && [slot === 'header' ? C3 : 'MODERATE', null].includes(pool), refused.includes(Number(vid))]);
+    }
+    expect(got).toEqual(OWES.map(([seed, slot]) => [seed, slot, true, false]));
+  }, 300000);
+  test('the edge: C dp-thorp-19 (nothing laid by alone) still prints MODERATE v1', () => {
+    const s = c('dp-thorp-19');
+    expect([owesDebtShown(s), nothingLaidByShown(s), slots(s).rung]).toEqual([false, true, ['MODERATE', 1]]);
+  }, 120000);
+  test('a place with neither fact: C dp-village-19 prints C3 v1 and MODERATE v1, as it printed', () => {
+    const s = c('dp-village-19');
+    expect([owesDebtShown(s), nothingLaidByShown(s), slots(s)]).toEqual([false, false, { header: [C3, 1], rung: ['MODERATE', 1] }]);
+  }, 120000);
 });
