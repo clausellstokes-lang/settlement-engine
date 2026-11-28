@@ -33,6 +33,8 @@ import { DAWN_WORK } from '../../src/data/dailyLife/dawnWork.js';
 import { CHILD_WARNINGS } from '../../src/data/dailyLife/childWarnings.js';
 import { UNSPOKEN_TOPICS } from '../../src/data/dailyLife/unspokenTopics.js';
 import { RECENT_CHANGES } from '../../src/data/dailyLife/recentChanges.js';
+import { filterDeclared } from '../../src/domain/facts/drawDeclared.js';
+import { factsOf } from '../../src/domain/facts/factsOf.js';
 
 // ── Catalog ────────────────────────────────────────────────────────────
 
@@ -384,6 +386,27 @@ describe('recent_changes behavior', () => {
     expect(IMMINENT_OF('plague').filter((t) => text.includes(t))).toEqual([]);
     expect(text).toBe('A fever has begun to go round, and people are keeping their distance.');
   });
+
+  // RULING 122-B-2 (F6, UNIT 2 (b)): THE FIVE EXCLUSIONS NO CASE HELD (the independent reader): plague T2 (it needs a sick
+  // house, so the control above never draws it), and the monster pressure's overrun and frontier imminent lines T0 and T1.
+  // Plague T2 is held on the slot as the others are (Ashford with a hospital draws T2). The overrun and frontier imminent
+  // branches are reached only by `config.monsterThreat`, whose severities are fixed (threatProfile.js step 1: plagued 0.85,
+  // realized; frontier 0.45, active), so no record draws them today: each line is held at its door (`filterDeclared`, the
+  // slot's own filter, dailyLifeNewLines.test.js (b)'s form): admitted beside no crisis, refused beside a monster crisis.
+  it('plague T2 ("the healers fear it will get worse") is not said where a plague is in force', () => {
+    const T2 = RECENT_CHANGES['threat.plague.any.imminent'].find((l) => l.id === 'T2')?.text ?? '';
+    const rec = { name: 'Ashford', institutions: [{ name: 'Hospital', category: 'Medical' }], defenseProfile: { threats: [{ name: 'Pressure', type: 'plague', severity: 0.7, visibility: 'open' }] } };
+    expect(deriveDailyLifeSlot('recent_changes', rec).text.includes(T2), 'the control prints T2').toBe(true);
+    expect(deriveDailyLifeSlot('recent_changes', { ...rec, stress: [{ type: 'plague_onset' }] }).text.includes(T2)).toBe(false);
+  });
+  for (const form of ['overrun', 'frontier']) for (const id of ['T0', 'T1']) {
+    it(`monster pressure ${form} imminent ${id} is refused where a monster crisis is in force`, () => {
+      const line = RECENT_CHANGES[`threat.monster_pressure.${form}.imminent`].find((l) => l.id === id);
+      const admitted = (/** @type {any} */ rec) => filterDeclared([line], { facts: () => factsOf(rec), poolId: `dailyLife.recent_changes.threat.monster_pressure.${form}.imminent`, surface: 'dailyLife' }).length;
+      const rec = { name: 'Ashford', config: { monsterThreat: form === 'overrun' ? 'plagued' : 'frontier' } };
+      expect([admitted(rec), admitted({ ...rec, stress: [{ type: 'monster_pressure' }] })]).toEqual([1, 0]);
+    });
+  }
 });
 
 // ── Composer ───────────────────────────────────────────────────────────
