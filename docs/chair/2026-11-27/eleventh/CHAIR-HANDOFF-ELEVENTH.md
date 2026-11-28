@@ -702,3 +702,52 @@ See section 4, newest last.
   e096d4a96, cures B 1b0241706, the traditions draw f1ccc5bda), the doors, the local gate, the sizes. THEN: the chair pushes
   the joined tip as transport, ONE independent reader (the top tier, max effort) reads it with point 123's joined tip, the
   whole suite in four shards, the row, the push. RENAME-MEASURE is at (D) and (F) (a55d32a39), not reported.
+
+## V26 (02:36 UTC on 2026-11-28): THE OWNER: "Can we start them in parallel? I leave those to your judgement": THE SURVEY's FIRST WAVE AND THE READER STARTED; POINT 122 JOINED (777733a2a); **POINT 123's JOIN STOPPED: THE BUILD DOES NOT BOOT** (a fix seat is on it); CI ON POINT 121 READ: 71, ALL ON THE LIST
+- **HIS WORDS (about 02:28 UTC):** "Where are we at with everything what are the next steps? Can we start them in parallel? I
+  leave those to your judgement". ANSWERED FIRST, IN FULL (the table of states; the five next steps; YES, in two waves; the
+  one risk said again: parallel spends the week's window sooner; a stop loses nothing because every seat pushes at each
+  step). THE WINDOW READ `allowed_warning` AGAIN at 02:30 UTC (no overage; resets 2026-12-04). HE HAS NOT SAID "extra usage".
+- **CI ON THE LINE's TIP aef8f9962 (run 46094183060, number 1305; 01:39:18 to 02:12:06 UTC):** 71 failing rows by name (the
+  test ratchet 49, build and dist 13, coverage floors 8, the golden master under tr_TR 1): ALL 71 ON THE LIST, NONE NEW, NO
+  LIST ROW GREEN. Filed: `ci/ci-read-121.py`, `ci/run-aef8f9962.tsv`; `LINE-NOW.md` carries the bullet.
+- **POINT 122 IS JOINED ON THE LINE's LOCAL TREE AT 777733a2a AND PUSHED AS TRANSPORT `lane/stack-122-wip-2026-11-28`**
+  (LAND-122; `prompts/START-LAND-122.txt`; scratch `…/landing/122/land/`): merges fe2cf8c3c (cures A), d999f3143 (cures B:
+  two register conflicts, the line's side taken and both re-taken by their doors; one plain union in
+  `proseWiringCensus.walker.test.js`), a838e7079 (the traditions draw); doors c1f2f9d6d (wiring census), 59ec13a60
+  (observed-shape), 07ad791a6 (writer-reach: cohort 1366 to 1366), 777733a2a (the lighting census: files 3,827, titles
+  32,138). Ratchet 167, strict 1113, packets 257, lint 0 errors, build clean, `tests/build` 13 red all on the list, the
+  eight proof files green. SIZES against point 121: first paint 1,193,393 raw (+438) / 380,563 (+131) / 319,419 (+92);
+  the generation worker 2,741,603 (+561); the engine chunk 937,247 (0); the PDF render worker 3,148,689 (+3,922). The
+  traditions unit alone: +0 on the worker and the engine chunk. The home page's town did not move. THE TUNING INVENTORY
+  ROSE 4 (cures A's re-freeze: a new dependent, no value): NAMED FOR THE OWNER.
+- **POINT 123's JOIN (LAND-123; `prompts/START-LAND-123.txt`; scratch `…/landing/123/land/`): on 777733a2a: merges
+  97c9223a2 (R-BIRTH 1e8576d08) and 6db89ad83 (B4 c2194a352), no conflict; writer-reach 4b612c569; the lighting census
+  c84f7ab20; a comment 13f06f00d. THREE STOPS AT 13f06f00d:** (1) **THE BUILT APP DOES NOT BOOT**: a chunk cycle
+  coherence-lazy, engine-core, coherence-lazy; the first paint 3,529,267 bytes; nine tests of tests/build not on the list red
+  from it. Cause as read: B4 put an import of `facts/crisisKind.js` (pinned lazy) into the EAGER leaf
+  `facts/needNotBroughtIn.js`, which that leaf's own head forbids. NO BUILDER HAD BUILT B4. (2) `chainPrintSites` asks a row
+  for `tradeListDisplay.js`; (3) `factLayers` asks three reads on the `needNotBroughtIn` leaf. **RULED 123-J-1
+  (`landing/RULING-123-J-1.txt`): the cure is IN THE LEAF by its own rule (a local reader held equal to `crisisOf` by the
+  guard `faultsNeed.test.js`); NO row in `vite.config.js`; an EXEMPT row for the commodity's label; the three reads added
+  (stratum 0 below layer 4).** FIX-123 (a fresh local Opus seat) is on it, on the line's local tree. ON THE NAMED FILES:
+  the golden master (525 configs), `generationForkCensus` A1 and `siteCoherenceRatchet` C1 red, ALL ON THE LIST; nothing
+  re-recorded. **A LESSON: a birth cure is BUILT (`npm run build`, boot smoke) by its builder before "done".**
+- **R-BIRTH DONE (C2 at 1e8576d08):** V 17 of 900 births move (date-palm places), C 0; besides the goods: `imports.critical`
+  gains grain in 7 towns (a palm place that no longer makes grain brings it in), income shares 3, one gap line; golden 0 of
+  525; R11 14 pages to 0; one test re-pointed (`bar6SeamEcon`). ITS tests/domain RE-RUN WAS STOPPED UNFINISHED (the whole
+  suite at the join stands in for it). R-CURES-B's last commit c2194a352 (FR3's five seeds re-pointed, 15 rows before and
+  after). BOTH SEATS STOPPED.
+- **STARTED 02:33 TO 02:36 UTC, ALL ON `lane/stack-122-wip-2026-11-28` (777733a2a):**
+  READER 122-123 session_01FE9mEwUutkT4X3codynXn5 (`claude-fable-5-2`, max; `prompts/START-READER-122-123-CHILD.txt`; it
+  reads point 122 first and takes point 123's tip from origin `lane/stack-123-wip-2026-11-28` WHEN THAT BRANCH EXISTS: the
+  chair pushes it after FIX-123; an added question: the app boots, and the need leaf equals the page's list);
+  SURVEY-TABLE session_01FE9mEwGNazLwRoRVsDL9n7 (S-B, S-C; `lane/survey-table-wip-2026-11-28`);
+  SURVEY-FINAL session_01FE9mEwXWuVSLqCkiwCFHPU (S-A, measure first; `lane/survey-final-wip-2026-11-28`);
+  VOICES-CARDS session_01FE9mEwGXGhSq8sTUs8eEWN (the measure of the cards; `lane/voices-cards-measure-2026-11-28`);
+  VOICES-LINES session_01FE9mEvgmzi3hz9pULwAyXq (the writer; a sample of sixty to the chair first;
+  `lane/voices-lines-2026-11-28`). Briefs: `prompts/START-SURVEY-COMMON.txt` and each seat's own. All Opus at high but the
+  reader. THE SECOND WAVE (after these): S-D's four families, S-E, S-F, S-G1.
+- NEXT FOR THE CHAIR: FIX-123's report; push `lane/stack-123-wip-2026-11-28`; the whole suite ONCE on that tip in four
+  shards (it holds point 122); the reader's report; the two rows; the line's push; then the first wave's measures and "TIP?"s.
+  RENAME-MEASURE has still not reported (a55d32a39 at 00:30 UTC).
