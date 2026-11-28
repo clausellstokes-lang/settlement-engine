@@ -298,6 +298,24 @@
   ],
   "moduleSideCitation": "§725.1 — the owner ruled no map leg in launch tuning at all; every map constant is module-side. These ids are enrolled by totality but are REFUSED `signed` and never reach the sitting's desk.",
   "tables": {
+    "src/domain/voices/voicesTuning.js#VOICES_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "odds.weighty": "probability",
+        "odds.lesser": "probability",
+        "sizeFactor.thorp": "multiplier",
+        "sizeFactor.hamlet": "multiplier",
+        "sizeFactor.village": "multiplier",
+        "tabBudget.weighty": "count",
+        "tabBudget.lesser": "count",
+        "tabCap": "count",
+        "personCap": "count"
+      },
+      "band": null,
+      "note": "S-G1 VOICES-ENGINE (the eleventh chair's rulings E28 point 2 and G1-1, 2026-11-28): the townspeople's quotes, view time only (no birth reads it). odds: the chance a card of each weight speaks (weighty 0.75, lesser 0.25); sizeFactor: small places quieter (thorp 0.5, hamlet 0.5, village 0.75; larger 1); tabBudget: a tab expects at most this many quotes of each weight (weighty 2, lesser 1); tabCap: at most 3 quotes a tab; personCap: one quote a person a page. VOICES-CARDS' proposals as ruled; registered DRAFT, signed by none, the owner's to sign."
+    },
     "src/data/informationBrokerageTuning.js#INFORMATION_BROKERAGE_TUNING": {
       "role": null,
       "status": "draft",
