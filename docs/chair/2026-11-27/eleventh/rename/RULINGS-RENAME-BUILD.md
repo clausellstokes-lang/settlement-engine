@@ -133,3 +133,9 @@ KIND, not the old name: `kind: { ruler, families, archetype, face }`; it may tra
 door id and the A15/A30 keys stay on the name and re-deal, named) is with the RULING READER (rule V37 (4)); the chair rules
 on its report. POINT 124 = K1, K1b and K2 (with K2-2, K-REG and K1b-4); its "TIP?" and its independent reader go ahead now;
 K3 becomes its own small point after the ruling.
+
+**"TIP? 124 71620fe4d" (K1, K1b, K2; received 14:25 UTC): ACCEPTED AS BUILT (14:26 UTC).** The chair read `pickKey.js`,
+`townRename.js`, the K1b gate in `genesis.js`, the Daily Life key and the rename helpers' calls (rule V37 (1)). THE INDEPENDENT
+READER OF POINT 124 is started on Opus at max (`prompts/START-READER-124.txt`). HOLD THE BRANCH: no code commit until the
+chair writes; K3 stays held for the ruling reader. Sizes named for the owner: the first paint gains `pickKey.js` and
+`townRename.js` (about 7 kB unminified, the builder's figure; the reader measures the real build).
