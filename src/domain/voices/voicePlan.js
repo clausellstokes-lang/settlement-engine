@@ -25,7 +25,9 @@
  *
  * THE CRISIS CARD FIRST (ruling 8), then tab order: Institutions, Power, NPCs, Traditions, History.
  * A THORP's QUIET (ruling 6): the size factor stands, but a page with a lawful speaker and a card that can speak shows at
- * least one quote: the weightiest such card (the draw's order among equals) is given one if the draw gave the page none.
+ * least one quote: where the draw gave the page none, the cards are tried weightiest first (the draw's order among equals),
+ * the mouths spent on silent cards given back, until one speaks. This is the ONE place the plan lets a pool's lines move a
+ * speaker (a page that would otherwise be silent); everywhere else a line added to a pool moves no speaks and no speaker.
  *
  * THE LIAR (ruling 11): at most one a town, the one person with a criminal tie who sits in a lawful house
  * (`people/allegiance.js :: allegianceOf`), chosen explicitly by rank on the town's key; the false line by the tie's way
@@ -331,16 +333,18 @@ function composePlan(s, options) {
     }
   }
 
-  // A THORP's QUIET (ruling 6): at least one quote where a lawful speaker and a card that can speak stand
+  // A THORP's QUIET (ruling 6): at least one quote where a lawful speaker and a card that can speak stand. Where the draw
+  // gave the page none, the speakers it spent on cards that printed nothing are given back, and the cards are tried in
+  // weight, tab and draw order until one speaks (THE ONE PLACE a pool's lines can move a speaker: said in the head).
   if (quotes.size === 0 && npcs.some((n) => isLawfulSpeaker(n))) {
-    const order = cards.filter((c) => !c.silent && outcome.get(ck(c)) !== 'no-line')
+    for (const [k, id] of speakers) if (outcome.get(k) === 'no-line') spoken.set(id, 0);
+    const tries = cards.filter((c) => !c.silent && outcome.get(ck(c)) !== 'no-line')
       .sort((a, b) => (weightRank(a) - weightRank(b)) || (VOICE_TABS.indexOf(a.tab) - VOICE_TABS.indexOf(b.tab))
         || (/** @type {number} */ (u.get(ck(a))) - /** @type {number} */ (u.get(ck(b)))));
-    for (const c of order) {
+    for (const c of tries) {
       if (!chooseSpeaker(c, new Set())) continue;
       speak(c, new Set());
-      if (quotes.has(ck(c))) outcome.set(ck(c), 'quote:floor');
-      break;
+      if (quotes.has(ck(c))) { outcome.set(ck(c), 'quote:floor'); break; }
     }
   }
   return { quotes, outcome, speakers, order, cards };

@@ -22,7 +22,7 @@ import { factsOf } from '../../../src/domain/facts/factsOf.js';
 
 /** C's plan rows (`rmeasure/tools/plan-C.json`: the config is the tier alone). */
 const TOWNS = Object.freeze([
-  ['dp-thorp-3', 'thorp'], ['dp-hamlet-85', 'hamlet'], ['dp-village-5', 'village'], ['dp-town-40', 'town'], ['dp-city-59', 'city'],
+  ['dp-thorp-3', 'thorp'], ['dp-hamlet-85', 'hamlet'], ['dp-hamlet-12', 'hamlet'], ['dp-village-5', 'village'], ['dp-town-40', 'town'], ['dp-city-59', 'city'],
 ]);
 /** @type {Map<string, Record<string, any>>} */ const born = new Map();
 
@@ -59,7 +59,7 @@ describe('the plan is pure, seeded, and keyed on the town', () => {
     expect(dealt, 'another id deals another page').toBeGreaterThan(0);
   });
 
-  it('quotes something on every town of the five, and finds each card\'s quote by its kind and id', () => {
+  it('quotes something on every town of the six, and finds each card\'s quote by its kind and id', () => {
     for (const { seed, plan } of plans()) {
       expect(plan.quotes.size, seed).toBeGreaterThan(0);
       for (const q of plan.quotes.values()) expect(quoteFor(plan, q.kind, q.id)).toBe(q);
@@ -206,15 +206,20 @@ describe('STABLE UNDER A POOL EDIT: a line added to every pool moves no "speaks"
     });
     const edited = await import('../../../src/domain/voices/voicePlan.js');
     let moved = 0;
+    let floors = 0;
     for (const { seed, plan } of before) {
       const s = born.get(seed);
       const after = edited.voicePlanOf(structuredClone(s), { audience: OWNER_AUDIENCE });
+      // THE ONE EXCEPTION, said in the leaf's head: a page the draw left silent, given its one quote by the floor (ruling
+      // 6), may move with the lines; it still speaks
+      if ([...plan.outcome.values()].includes('quote:floor')) { floors += 1; expect(after.quotes.size, seed).toBeGreaterThan(0); continue; }
       const won = (/** @type {string} */ o) => (o === 'not-drawn' || o === 'capped' || o.startsWith('silent:') || o === 'no-speaker' ? o : 'won');
       expect([...after.outcome].map(([k, o]) => [k, won(o)]), seed).toEqual([...plan.outcome].map(([k, o]) => [k, won(o)]));
       expect([...after.speakers], seed).toEqual([...plan.speakers]);
       for (const [k, q] of after.quotes) if (plan.quotes.get(k)?.lineId !== q.lineId) moved += 1;
     }
     expect(moved, 'the added lines do take some cards (the test has teeth)').toBeGreaterThan(0);
+    expect(floors, 'most of the towns are held whole').toBeLessThan(before.length / 2);
     vi.doUnmock('../../../src/data/voices/saidLines.js');
   }, 60_000);
 });
