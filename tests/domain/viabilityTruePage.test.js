@@ -254,7 +254,8 @@ describe('SURVEY S-B: `place debt` and `nothing laid by`, two atoms with one rea
  * the state-prose leaves every desk draws through `factsAnswered`. @param {Record<string, string>} planted */
 function placeDebtDeclaredOffTheDoor(planted) {
   const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
-  const DOOR = /^src\/data\/dossierStateProse\/[a-z]+\.generated\.js$|^src\/domain\/facts\/factVocabulary\.js$/;
+  // SURVEY S-C: the table of exclusions names the atom as DATA (`claimExclusions.js`); it is never drawn, so it declares nothing
+  const DOOR = /^src\/data\/dossierStateProse\/[a-z]+\.generated\.js$|^src\/domain\/facts\/(factVocabulary|claimExclusions)\.js$/;
   /** @param {string} d @param {string[]} out */
   const walk = (d, out) => { for (const e of readdirSync(join(ROOT, d), { withFileTypes: true })) { const p = `${d}/${e.name}`; if (e.isDirectory()) walk(p, out); else if (/\.(js|jsx|mjs)$/.test(e.name)) out.push(p); } return out; };
   const files = Object.fromEntries(walk('src', []).map((p) => [p, readFileSync(join(ROOT, p), 'utf8')]));

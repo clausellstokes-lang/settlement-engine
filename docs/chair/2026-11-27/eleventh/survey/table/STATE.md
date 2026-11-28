@@ -1,9 +1,8 @@
 # SURVEY-TABLE STATE (lane/survey-table-wip-2026-11-28, cut at 777733a2a; units S-B and S-C)
-- RULED: S-B-1 (the chair, 02:44 UTC): `place debt` answered at factsAnswered.js (the desks' door) with a pin; `nothing laid by`;
-  the three pool-table rows re-placed (the walker took it: green); prose bytes NOT mine (name the growth in TIP?).
-- BUILT AND COMMITTED (S-B, its byte proof still RENDERING: the commit is transport until it reads 0): atoms `place debt` / `nothing laid by` (vocabulary, factsOf getter, factsAnswered
-  `deskFactsOf`, facts/nothingLaidBy.js home, factLayers rows); DS-ECO-8 COMFORTABLE v1 v2, MODERATE v3, DS-ECO-1 C3 v2 declare;
-  SOLVENT_LINES retired. Red first: viabilityTruePage "SURVEY S-B" 4 arms red on 777733a2a.
-- PROVING: base pages of C and V (777733a2a) rendering; then the S-B tree's pages (bundle built from the S-B tree) to diff.
-- S-C: drafted outside the tree (table, census script + renderer + shared reading, walker, property test).
-- NEXT: S-B byte-equality on 1,800 pages -> commit S-B -> S-C.
+- S-B COMMITTED AND PUSHED: 6cb01c881 (atoms, declarations, SOLVENT_LINES retired), ca70d6086 (calm double + kernel ref
+  re-points), f24acc325 (wiring census, its door), 6fee24b4e (observed-shape baseline, its door).
+- S-B PROOF: corpus C, 900 owner + 900 share pages against 777733a2a: 0 records, 0 pages, 0 printed lines moved (CONFIRMED,
+  render of the committed src). `place debt` held on 88 C pages, `nothing laid by` on 421 (the declarations were exercised).
+  Corpus V: rendering. Known red, not S-B's: proseCorpusBytes (economy +229 raw/+34 gzip: owner's), proseComposed, the shift pins.
+- S-C: in the tree, uncommitted (table, census script + renderer + shared reading, two walkers, the property test).
+- NEXT: V proof -> report S-B to the chair -> S-C red first -> the census over the 1,800 by its door (--write) -> TIP?.
