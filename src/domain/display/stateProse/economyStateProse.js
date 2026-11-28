@@ -1479,6 +1479,10 @@ import { houseSentenceName } from '../../../data/houseSentenceName.js';
 // row, the pays-its-way line on a present place debt alone (beside the Weak grade alone it is ruled no fault). The pool's
 // other lines draw as they would (the rendezvous over the vids left), so only a refused page moves. At the end of the
 // file, so no cited line moves.
+// RULING 122-B-2 (F2): BESIDE A PLACE DEBT IN FORCE NO LINE CLAIMS MONEY IN HAND, A YEARLY SURPLUS, OR FREEDOM FROM DEBT. A
+// yearly surplus is the same claim as "pays its way", so on `owes` the margin lines stand down too (C3 v1, MODERATE v1);
+// MODERATE v1 beside "nothing laid by" alone is ruled no fault (RULING-R R5's soft pair). Where two rows of one pool hold,
+// the refused vids are their union.
 import { owesDebtShown, nothingLaidByShown } from '../solvencyShown.js';
 
 /** @type {ReadonlyArray<{ block: string, pool: string, vids: ReadonlyArray<number>, on: ReadonlyArray<'owes'|'nothingLaidBy'> }>} */
@@ -1487,21 +1491,24 @@ const SOLVENT_LINES = Object.freeze([
   Object.freeze({ block: 'DS-ECO-8', pool: 'COMFORTABLE', vids: Object.freeze([1, 2]), on: Object.freeze(/** @type {const} */ (['owes', 'nothingLaidBy'])) }),
   // "The town pays its own way and has a little in hand." (v3)
   Object.freeze({ block: 'DS-ECO-8', pool: 'MODERATE', vids: Object.freeze([3]), on: Object.freeze(/** @type {const} */ (['owes', 'nothingLaidBy'])) }),
-  // "{settlement} pays its way from year to year, and nobody here calls the town poor." (v2)
-  Object.freeze({ block: 'DS-ECO-1', pool: 'COMBINATION C3: the middle rungs', vids: Object.freeze([2]), on: Object.freeze(/** @type {const} */ (['owes'])) }),
+  // "{settlement}'s treasury takes in a little more than it pays out each year." (v1): a yearly surplus (RULING 122-B-2)
+  Object.freeze({ block: 'DS-ECO-8', pool: 'MODERATE', vids: Object.freeze([1]), on: Object.freeze(/** @type {const} */ (['owes'])) }),
+  // "With a little left over each year, {settlement} gets by …" (v1, RULING 122-B-2); "{settlement} pays its way from year
+  // to year, and nobody here calls the town poor." (v2)
+  Object.freeze({ block: 'DS-ECO-1', pool: 'COMBINATION C3: the middle rungs', vids: Object.freeze([1, 2]), on: Object.freeze(/** @type {const} */ (['owes'])) }),
 ]);
 
 /**
- * The corpus a line draws from: the desk's own, or, where a row of SOLVENT_LINES refuses this pool's vids, a copy of it
- * with those vids out of that one pool (nothing else of the corpus is copied or moved).
+ * The corpus a line draws from: the desk's own, or, where rows of SOLVENT_LINES refuse this pool's vids, a copy of it
+ * with the union of those vids out of that one pool (nothing else of the corpus is copied or moved).
  * @param {typeof CORPUS} corpus @param {string} blockId @param {string} poolKey
  * @param {{ owes: boolean, nothingLaidBy: boolean }} solvency @returns {typeof CORPUS}
  */
 function solventCorpus(corpus, blockId, poolKey, solvency) {
-  const row = SOLVENT_LINES.find((r) => r.block === blockId && r.pool === poolKey && r.on.some((f) => solvency[f]));
-  const block = row ? /** @type {{ pools?: Record<string, ReadonlyArray<{ vid?: unknown }>> } | undefined} */ (/** @type {Record<string, unknown>} */ (corpus)[blockId]) : undefined;
+  const refused = SOLVENT_LINES.filter((r) => r.block === blockId && r.pool === poolKey && r.on.some((f) => solvency[f])).flatMap((r) => r.vids);
+  const block = refused.length ? /** @type {{ pools?: Record<string, ReadonlyArray<{ vid?: unknown }>> } | undefined} */ (/** @type {Record<string, unknown>} */ (corpus)[blockId]) : undefined;
   const lines = block?.pools?.[poolKey];
-  if (!row || !block || !lines) return corpus;
-  const pool = lines.filter((v) => !row.vids.includes(Number(v.vid)));
+  if (!refused.length || !block || !lines) return corpus;
+  const pool = lines.filter((v) => !refused.includes(Number(v.vid)));
   return /** @type {typeof CORPUS} */ ({ ...corpus, [blockId]: { ...block, pools: { ...block.pools, [poolKey]: pool } } });
 }
