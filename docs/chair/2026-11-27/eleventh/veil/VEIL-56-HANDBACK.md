@@ -7,6 +7,19 @@ judging anything. Every hour here is read from `date -u`.
 
 ## 1. WHERE THE LANE STANDS (my memory; current at this push, 2026-11-27T23:26:27Z)
 
+**THE LANE IS PAUSED AGAIN (2026-11-28T01:11:59Z) BY THE OWNER's WORD through the chair: "Wait the veil comes after everything else but before the
+release." THE WHOLE STATE AT THE PAUSE IS `v56/PAUSE-2026-11-28.md` (this branch): the tip dbd4cd9e5 (NOTHING MERGED in this resumption);
+each seat's branches and last commits (its section 7); what is owed in order (its section 3); what was CONFIRMED and by whom (its section
+4); the recipe (its section 5). RULINGS V1 TO V34 STAND. ALL FOUR CHILDREN ARE STOPPED and wait for "GO <seat>" (their sessions may be
+gone at the resumption: each is re-seated from its brief and its state section, from origin alone). Nothing of mine is half-done: no run in
+flight, no scheduled task live, my local PostgreSQL stopped. OWED BY THE LANE OWNER AT THE RESUMPTION, before any builder goes on:
+"MASK-RULE" (my lean: accept U45B's proposal; then named to the chair); the V7-2 pin's re-statement named to the chair with unit 3's hunk;
+every `-wip` branch's diff read WHOLE by the lane owner (none was read by me). THE NEXT COMMAND AT THE RESUMPTION: the chair's word; then
+`sh v56/restore.sh` detached, re-read `START-VEIL-56.txt`, this section, the pause page and RULING-V30.md (V30 to V34); ask the chair for
+the line's tip; then the pause page's section 3 in order. EVERYTHING BELOW THIS PARAGRAPH IN THIS SECTION IS THE RECORD OF THE THREE HOURS
+BEFORE THE PAUSE, superseded by the pause page where they differ.**
+
+
 **NOW (2026-11-27T23:48:23Z): THE ACCOUNT's WEEKLY WINDOW IS AT ITS WARNING LEVEL (the chair; it resets 2026-12-04 about 09:00 UTC). THE CHAIR's
 ORDER: every seat pushes at every step boundary; AT MOST TWO BUILDERS WORK: U3R and U45; PG and MC finish the measure in hand, push a
 five-line state note and STOP until the chair says (then my "GO PG" / "GO MC"); no reader is started until a "TIP?" is truly ready; no long
@@ -151,3 +164,4 @@ THE NEXT COMMAND: read each child's first report as it lands; relay the chair's 
   Its next command is in the file. SENT TO THE CHAIR with my recommendation on timing: (1) into U3R's hunk now on its "COUNTER IN";
   (2) and (3) one later hunk after units 3 and 4+5 merge; (5) on its word.
 - 2026-11-28T00:33:32Z: RULING V34 taken; "COUNTER IN" relayed to U3R as one more commit of its hunk.
+- 2026-11-28T01:11:59Z: THE LANE PAUSED BY THE OWNER's WORD. All four seats stopped (three needed an interrupting message: priority "next" did not reach them); the pause page written with each seat's last commit; "VEIL LANE PAUSED" sent to the chair.
