@@ -401,7 +401,7 @@ export function deriveFoundingTraditions(settlement) {
   // tab's own rule, shownTraditions.js :: motifNeeds) the record does not hold is not taken; the next attempt's draw is.
   // ASKED OF THE FLOOR (RULING 122-T-2, traditionFloor.js), for every audience: no veil state can move the drawn set.
   const askNeeds = bornAtOrAfter(settlement, NEEDS_SINCE);
-  /** @type {any} */ let factsMemo = null;
+  /** @type {Parameters<typeof atomHolds>[1] | null} */ let factsMemo = null;
   /** @param {TraditionElement} e @param {TraditionAct} a @returns {boolean} the place holds every fact the motif declares */
   const heldBy = (e, a) => !askNeeds || [...(e.needs || []), ...(a.needs || [])]
     .every((x) => atomHolds(x, (factsMemo ||= /** @type {Parameters<typeof atomHolds>[1]} */ (factsOf(/** @type {Parameters<typeof factsOf>[0]} */ (traditionFloorOf(settlement)))))) === true);
