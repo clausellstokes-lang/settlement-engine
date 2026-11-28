@@ -137,3 +137,9 @@ THE NEXT COMMAND: read each child's first report as it lands; relay the chair's 
   `v56/briefs/U45B-BRIEF.md` (from V27 (5): term (b), the mask gap proposed first, A5's cut, unit 5, the arms, A16, the hand-in).
 - 2026-11-28T00:23:32Z: U45B SEATED: session_01FE9mEvPzwiDTuiAah2gzqN (opus-5-5, high) on `-u45-wip` 535c7e956. U45 (session_01FE9mEtsxe2wE8icsSaauPj)
   told it is done and pushes nothing more. ORIGIN NOW: `-door2-wip` e492c6f8e, `-u3r-docs` 4e8033d3f, `-pg-docs` 126d3f01b, `-mc-docs` 63ff56e9d.
+- 2026-11-28T00:32:22Z: MY CHECK-IN: U3R, U45B, PG, MC running; U45 completed (its documents tip is 07439c3dc). PG HAD PUSHED NO CODE (no `-pages-wip`
+  on origin after its first green): told to push now and at every step. U45B's SURPRISE on 535c7e956 (CONFIRMED by it):
+  `tests/security/rosterChoiceInversion.pglite.test.js` "VR26 ... TOTAL: every diffuse row is re-derived here or names what is not
+  served" RED with ['power.label'] (merge M made it a diffuse row; not in U45's table). MY RULING: unit 4's own red, cured by its cause
+  as its own commit after V27 (5): re-derived and asserted EQUAL to the stored value on both pools if the served document allows it,
+  else named as not served with the row's reason; never a name added to turn the arm green.
