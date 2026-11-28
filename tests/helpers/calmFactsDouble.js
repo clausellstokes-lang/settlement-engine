@@ -55,6 +55,11 @@ export const CALM_FACTS_ADMIT_ALL = Object.freeze({
   // exactly as the kernel sweep's pre-cure reference refuses it (`stateProseKernel.test.js :: excludesPresence`).
   // `danger coming` (`dangerComing.js`) is a TROUBLE, read like the crisis above: a calm place has none on its way.
   dangerComing: false,
+  // SURVEY S-B (2026-11-28, RULING S-B-1): `place debt` and `nothing laid by` arrived after the double, unanswered (fail-closed: the
+  // projection contract's thin-state ratchet rose 28 -> 29 on DS-ECO-8's savings lines). Each is a TROUBLE, read like `danger
+  // coming`: a calm place owes no one and has something laid by.
+  placeDebt: false,
+  nothingLaidBy: false,
   magicSupply: true,
   criminalIncome: true,
   // BAR4-CLOSE-SWEEP (2026-11-16): three more presence atoms arrived after the double, unanswered here (so fail-closed, and

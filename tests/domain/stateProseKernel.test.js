@@ -75,7 +75,11 @@ const needsCrisis = (variant) => {
  * DS-DEF-4 structure null v1) is refused by the calm double, which holds every presence atom;
  * the calm reference sets it aside, as it sets aside a crisis-needing variant above.
  */
-const excludesPresence = (variant) => variantFactDeclaration(variant).excludes.some((a) => !/^crisis\b/.test(a));
+// SURVEY S-B (2026-11-28, RULING S-B-1): read on the double itself, as `needsCategorical` below is: a presence the double answers
+// FALSE (a TROUBLE a calm place has none of: `danger coming`, and S-B's `place debt` and `nothing laid by`) does not refuse its
+// `no X` line, so the reference keeps that line exactly as the kernel does.
+const excludesPresence = (variant) => variantFactDeclaration(variant).excludes.some((a) => !/^crisis\b/.test(a)
+  && declarationAdmits({ needs: [], excludes: [a], crisis: [] }, CALM_FACTS_ADMIT_ALL).refused.length > 0);
 /**
  * LANDING-R2 (2026-11-07): a variant that NEEDS one value of a categorical fact — a band or a keyed presence
  * (`tier: >= town`, `population: small`, `migration: influx`; census-3c unit 4 586bedd7f, census-2b item 2 db3ed88c1) —
