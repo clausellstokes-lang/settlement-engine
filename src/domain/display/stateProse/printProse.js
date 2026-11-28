@@ -98,7 +98,7 @@ import { generalDeskLines } from '../../../components/new/generalDeskRead.js';
 import { economyDeskRead } from '../../../components/new/economyDeskRead.js';
 import { relationshipsDeskLists } from './relationshipsDeskRead.js';
 import { FALL_SENTENCE, faithPanelModel, trimFaithDeskToPanel } from '../../../components/settlement/faithPanelModel.js';
-import { HOOK_FRAMING } from '../hookFraming.js';
+import { HOOK_FRAMING } from '../hookFraming.js'; import { pickKeyOf } from '../pickKey.js';
 
 /**
  * ⭐⭐ THE CHAIR'S PRINT RULING, 2026-09-18, under the owner's "impliment every fix" —
@@ -318,10 +318,10 @@ export function buildPrintProse(settlement, ctx = {}) {
   const r = settlement || {};
   if (!settlement) return Object.freeze({});
   const worldState = ctx.worldState || null;
-  const seed = String(
+  const seed = String(pickKeyOf(r,
     /** @type {{_seed?: unknown, id?: unknown}} */ (r)._seed
     ?? /** @type {{id?: unknown}} */ (r).id ?? '',
-  );
+  ));
   // ⛔ THE AUDIENCE IS THE DM'S, STATED RATHER THAN DEFAULTED. §0e is "DM-truth by default"
   // and a printed dossier is the DM's document — there is no player view to export. The
   // covert cells the pools doc withholds from print are withheld by the ruling above, at the

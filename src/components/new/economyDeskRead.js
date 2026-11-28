@@ -42,7 +42,7 @@ import { economyStateProse } from '../../domain/display/stateProse/economyStateP
 import { deriveExportPosture } from '../../domain/display/exportPosture.js';
 import { deriveNotableAbsences } from '../../domain/display/servicesDisplay.js';
 import { tierNounFor } from '../../domain/display/stateProse/weaveBlock.js';
-import { publicProseOf } from '../../domain/display/publicProse.js';
+import { publicProseOf } from '../../domain/display/publicProse.js'; import { pickKeyOf } from '../../domain/display/pickKey.js';
 
 /**
  * THE SILENT DESK — what a free, anonymous viewer gets, and what a host gets before it has
@@ -137,7 +137,7 @@ export function economyDeskRead(settlement, options = {}) {
       impairedInstitution: options.impairedInstitution ?? null,
     },
     {
-      seed: String(settlement._seed ?? settlement.id ?? ''),
+      seed: String(pickKeyOf(settlement, settlement._seed ?? settlement.id ?? '')),
       audience: options.playerView ? 'player' : 'dm',
       // ⛔ FORWARDED, NEVER DERIVED (§934.22 addendum). The settlement's own tier noun is a
       // READER-FACING choice, and this reader has a second kind of caller: the composed-prose

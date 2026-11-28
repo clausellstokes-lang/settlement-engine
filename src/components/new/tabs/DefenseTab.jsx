@@ -21,7 +21,7 @@ import useIsMobile from '../../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 import { edged } from '../../../design/edgedBox.js';
 import { isVeiled } from '../../../domain/display/galleryVeil.js';
-import { crisisSummaryForSurface } from '../../../domain/crisis/crisisSummaryVantage.js';
+import { crisisSummaryForSurface } from '../../../domain/crisis/crisisSummaryVantage.js'; import { pickKeyOf } from '../../../domain/display/pickKey.js';
 // THE FORCE CARD PRINTS A HOUSE AS THE ROSTER DOES (R3-TABS-5, the chair's ruling (a)): through the label seam.
 import { institutionDisplayName } from '../../../domain/display/institutionDisplayName.js';
 // THE ONE PARAGRAPH RENDERER (owner finding 2026-09-18). Every position on this tab used to
@@ -352,7 +352,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier: publicD
   const stressStatus = activeStress ? STRESS_STATUS[activeStress] : null;
   const stressEntry  = stresses.find(s=>s?.type===activeStress);
   // #29 (STYLE-RULINGS §1(c)): Defence prints the watch's vantage of the crisis summary; the Crisis tab keeps the full text.
-  const stressObj    = stressEntry ? { ...stressEntry, summary: crisisSummaryForSurface(stressEntry, r?.name, 'defence') } : stressEntry;
+  const stressObj    = stressEntry ? { ...stressEntry, summary: crisisSummaryForSurface(stressEntry, r?.name, 'defence', undefined, pickKeyOf(r, r?.name)) } : stressEntry;
 
   // Supporting capabilities (shared with the PDF viewModel)
   // T2-23: Economic Backing restated the Threat Assessment's Economic Survival row (one

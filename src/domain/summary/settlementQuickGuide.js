@@ -24,7 +24,7 @@ import { waterAccessKind } from '../tradeRouteSemantics.js';
 import { resolveTerrain } from '../resolveTerrain.js';
 import { populationBandOf } from '../facts/populationBand.js';
 import { pickRendezvous } from '../../kernel/proseHash.js';
-import { foodBandOf, voicedLineOf } from './tonightSheet.js';
+import { foodBandOf, voicedLineOf } from './tonightSheet.js'; import { pickKeyOf } from '../display/pickKey.js';
 
 const INFLUENCE_RANK = Object.freeze({
   high: 0,
@@ -213,7 +213,7 @@ export function cultureScopeLine(settlement) {
   if (!label) return sentence(upperLead(phrase));
   // THE SEED CHOOSES (WIRING-RULINGS §8(3)): the same town prints the same frame forever; a record
   // with no seed (every hand-built caller) gets frame 0, the line as it always read.
-  const seed = cleanText(/** @type {{ _seed?: unknown }} */ (source)._seed);
+  const seed = cleanText(pickKeyOf(source, /** @type {{ _seed?: unknown }} */ (source)._seed));
   // SCOPE_LINE_FRAMES is a frozen five-row pool, so the pick is never the empty pool's undefined. The row of the highest
   // rendezvous rank of (the key, its id) (point 121, TAIL-PICKS); a record with no seed takes the first ('plain').
   const frame = /** @type {ScopeLineFrame} */ (pickRendezvous(SCOPE_LINE_FRAMES, seed ? `${seed}::culture-scope-line` : null, (f) => f.id));

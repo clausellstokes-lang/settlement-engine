@@ -24,7 +24,7 @@ import { customSupplyChainViewModel } from './customSupplyChains.js';
 import { stressArray, foodCore, avgScore } from './viewModelPrimitives.js';
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
 import { resourceGapLines, exploitationGroupsShown, housesStillNeeded } from '../../domain/display/validationOnPage.js';
-import { crisisSummaryForSurface } from '../../domain/crisis/crisisSummaryVantage.js';
+import { crisisSummaryForSurface } from '../../domain/crisis/crisisSummaryVantage.js'; import { pickKeyOf } from '../../domain/display/pickKey.js';
 import { deriveProsperityPosture } from '../../domain/display/dossierViewModel.js'; import { outputInWords } from '../../domain/display/outputInWords.js';
 import { foodBlockShown } from '../../domain/display/foodCarrier.js'; // TAIL-EXPORTS-PDF batch 1
 import { tradeListsAsPrinted } from '../../domain/display/tradeListDisplay.js'; // TAIL-EXPORTS-PDF batch 1
@@ -170,7 +170,7 @@ export function defenseSlice(active) {
   // #29 (STYLE-RULINGS §1(c)): Defence prints the watch's vantage of the crisis summary; the crisis
   // page keeps the full text.
   const militaryEntry = stress.find(x => DEFENSE_STRESS_STATUS[x?.type]);
-  const militaryStress = militaryEntry ? { ...militaryEntry, summary: crisisSummaryForSurface(militaryEntry, s?.name, 'defence') } : militaryEntry;
+  const militaryStress = militaryEntry ? { ...militaryEntry, summary: crisisSummaryForSurface(militaryEntry, s?.name, 'defence', undefined, pickKeyOf(s, s?.name)) } : militaryEntry;
 
   // Criminal architecture. Operations come from the safety profile's criminal
   // institutions (the source the web Defense tab uses), each carrying an

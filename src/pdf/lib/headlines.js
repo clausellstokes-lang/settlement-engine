@@ -14,7 +14,7 @@ import { coverageRatioPct } from './foodCoverage.js';
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
 import { plotHookSourcePage } from '../../domain/dossier/plotHooks.js';
 import { withPowerSentenceNames, powerSentenceName } from '../../domain/display/powerSentenceName.js';
-import { pickRendezvous } from '../../kernel/proseHash.js';
+import { pickRendezvous } from '../../kernel/proseHash.js'; import { pickKeyOf } from '../../domain/display/pickKey.js';
 
 // ── Shared plain-word helpers (the owner's style law of 2026-11-07: the label stays as the
 // first word, the machinery leaves, the town's own nouns fill the slots) ──────────────────
@@ -166,7 +166,7 @@ export function overviewHeadline(o, identity) {
     // One crisis: the clause follows a colon. Several: the nouns are listed and the first crisis's
     // clause is its own sentence, so the colon never pins one crisis's evidence on the list.
     const after = seen ? (crises.length === 1 ? `: ${seen}` : `. ${capFirst(seen)}`) : '';
-    body = seedPick(name || tierWord || '', OVERVIEW_HEADLINES).say({ where, what, after, seen, single: crises.length === 1 });
+    body = seedPick(pickKeyOf(identity, name || tierWord || ''), OVERVIEW_HEADLINES).say({ where, what, after, seen, single: crises.length === 1 });
   } else {
     body = `${capFirst(where)} has no crisis on its hands this season`;
   }
@@ -431,7 +431,7 @@ export function npcsHeadline(npcs) {
   const named = `${top.name}${who ? `, ${who},` : ''}`;
   if (total === 1) return `One person worth knowing: ${named.replace(/,$/, '')}.`;
   const count = capFirst(countWord(total));
-  return seedPick(String(top.name || ''), NPCS_HEADLINES).say({ count, total, named });
+  return seedPick(pickKeyOf(top, String(top.name || '')), NPCS_HEADLINES).say({ count, total, named }); // the person's id (point 124)
 }
 
 // ── Hooks ──────────────────────────────────────────────────────────────────

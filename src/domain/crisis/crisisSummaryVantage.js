@@ -568,17 +568,17 @@ function siegeMotionTwin(kind, surface, vantage, facts) {
  * @param {{ type?: unknown, summary?: unknown, direction?: unknown }|null|undefined} entry one `stress[]` entry
  * @param {unknown} name the settlement's name
  * @param {'cover'|'overview'|'defence'|'tonight'} surface
- * @param {Parameters<typeof atomHolds>[1]} [facts] the record's facts
+ * @param {Parameters<typeof atomHolds>[1]} [facts] the record's facts @param {unknown} [key] the column's key: the town's pick key (point 124, `pickKeyOf(town, town.name)`, its id: a rename keeps the column); the name where none is handed
  * @returns {string|null}
  */
-export function crisisSummaryForSurface(entry, name, surface, facts) {
+export function crisisSummaryForSurface(entry, name, surface, facts, key) {
   const stored = clean(entry?.summary) || null;
   const place = clean(name);
   const columns = SURFACE_VANTAGE_COLUMNS[/** @type {keyof typeof SURFACE_VANTAGE_COLUMNS} */ (surface)];
   const set = crisisSummaryPoolsOf(entry);
   if (!columns || !set || !place) return stored;
   const kind = clean(entry?.type);
-  const vantage = columns[summaryColumnOf(place, kind)];
+  const vantage = columns[summaryColumnOf(clean(key) || place, kind)];
   const twins = /** @type {Record<string, Record<string, Record<string, string>>>} */ (NO_GRAIN_TWINS)[kind]?.[surface];
   const twin = (twins?.[vantage] && facts && atomHolds('grain', facts) === false ? twins[vantage] : '')
     || siegeMotionTwin(kind, surface, vantage, facts);

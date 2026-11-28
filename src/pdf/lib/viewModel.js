@@ -52,7 +52,7 @@ import { ownerGenerationContracts } from './generationContracts.js';
 import { economicsSlice, defenseSlice, servicesSlice, resourcesSlice } from './viewModelBodySlices.js';
 import { stressArray, foodCore, avgScore } from './viewModelPrimitives.js';
 import { crisisHookFor } from '../../domain/crisis/crisisHooks.js';
-import { crisisSummaryForSurface } from '../../domain/crisis/crisisSummaryVantage.js';
+import { crisisSummaryForSurface } from '../../domain/crisis/crisisSummaryVantage.js'; import { pickKeyOf } from '../../domain/display/pickKey.js';
 import { dmPowerViewOf } from '../../domain/people/patronage.js'; import { safetyShownOf } from '../../domain/display/safetyShown.js'; // PAGE-1 SAFETY (F3a): the label's one reader, and the owner's line
 
 // Human labels for the publicLegitimacy breakdown factors
@@ -239,7 +239,7 @@ function summarySlice(active, ai, useAi, aiDailyLife) {
       active: true,
       chips: stress.map(x => ({
         // #29 (STYLE-RULINGS §1(c)): the cover prints the traveller's vantage; the crisis page keeps the full text.
-        icon: x?.icon, label: x?.label, summary: crisisSummaryForSurface(x, s?.name, 'cover'), hook: crisisHookFor(s, x),
+        icon: x?.icon, label: x?.label, summary: crisisSummaryForSurface(x, s?.name, 'cover', undefined, pickKeyOf(s, s?.name)), hook: crisisHookFor(s, x),
       })),
     } : { active: false, chips: [] },
     arrivalScene: useAi ? (ai?.arrivalScene || ai?.aiNarrative?.arrivalScene || null) : null,
@@ -287,7 +287,7 @@ function identitySlice(s, canonical = s) {
   const food = deriveFoodBalance(s);
   const governing = getGoverningFaction(s);
   return {
-    name:           s?.name || 'Unnamed Settlement',
+    name:           s?.name || 'Unnamed Settlement', id: s?.id ?? null, // the town's id: the headlines' pick key (point 124)
     tier:           s?.tier ? (TIER_LABELS[s.tier] || s.tier) : null,
     tierKey:        s?.tier || null,
     population:     s?.population || 0,
@@ -342,7 +342,7 @@ function overviewSlice(active, ai, useAi) {
     icon:    x?.icon,
     label:   x?.label,
     // #29 (STYLE-RULINGS §1(c)): the Overview prints the local's vantage; the crisis page keeps the full text.
-    summary: crisisSummaryForSurface(x, s?.name, 'overview'),
+    summary: crisisSummaryForSurface(x, s?.name, 'overview', undefined, pickKeyOf(s, s?.name)),
     hook:    crisisHookFor(s, x),
   }));
   const tensions = (s?.history?.currentTensions || []).map(t => ({

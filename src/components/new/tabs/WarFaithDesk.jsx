@@ -60,7 +60,7 @@ import { publicProseOf } from '../../../domain/display/publicProse.js';
 import { FALL_SENTENCE, faithPanelModel } from '../../settlement/faithPanelModel.js';
 import { BODY, BORDER, CARD, FS, MUTED, sans } from '../../theme.js';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
-import useIsMobile from '../../../hooks/useIsMobile.js';
+import useIsMobile from '../../../hooks/useIsMobile.js'; import { pickKeyOf } from '../../../domain/display/pickKey.js';
 import ProseBlock from '../ProseBlock.jsx'; // the shared one-paragraph renderer (see DeskLines)
 
 /** The war tab's three positions. Bound once so the reachability arm counts one literal. */
@@ -119,7 +119,7 @@ export function warFaithDeskRungs({
   return publicDossier
     ? publicWarFaithDesk(settlement, publicSite)
     : warFaithStateProse(settlement, readings, {
-      seed: String(settlement?._seed ?? settlement?.id ?? ''), audience,
+      seed: String(pickKeyOf(settlement, settlement?._seed ?? settlement?.id ?? '')), audience,
       tierNoun: tierNounFor(settlement?.tier),
     });
 }

@@ -62,7 +62,7 @@ import { nativeSemanticName } from './content/customContentSemanticAuthority.js'
 import { isHideableHouse, isVeiledPower } from './people/cardVeil.js';
 import { leaderLeadOfRecord } from './facts/leaderLead.js';
 import { institutionSentenceNoun } from './display/institutionSentenceNoun.js';
-import { pickRendezvous } from '../kernel/proseHash.js';
+import { pickRendezvous } from '../kernel/proseHash.js'; import { pickKeyOf } from './display/pickKey.js';
 
 // ── Local typedefs ───────────────────────────────────────────────────────
 
@@ -422,9 +422,9 @@ function houseFinder(s) {
  */
 function pickNameable(s, admitted, slotKey, branch, house, stated) {
   const eligible = admitted.filter((l) => housesNamedIn(l.text).every((k) => !!house(k)));
-  const name = /** @type {{ name?: unknown }} */ (s).name;
   // the rendezvous (point 120, D13 STABLE-PICKS): the eligible line whose own `id` hashes highest with the slot's key
-  const pick = pickRendezvous(eligible, typeof name === 'string' && name ? `${name}::dailyLife.${slotKey}::${branch}` : null, (l) => l.id);
+  // (point 124: the key stands on the town's id, spelled once, by `pickKey` below)
+  const pick = pickRendezvous(eligible, pickKey(s, slotKey, branch), (l) => l.id);
   const k = pick ? statesOf(slotKey, branch) : null;
   if (k) stated?.add(k);
   return pick;
@@ -677,10 +677,10 @@ function threatForm(t, s) {
   return form === 'config' ? (MONSTER_CONFIG_FORMS[String(s.config?.monsterThreat ?? '')] ?? 'frontier') : form;
 }
 
-/** @param {DailyLifeSettlement} s @param {string} slotKey @param {string} branch @returns {string|null} the pick's key */
+/** @param {DailyLifeSettlement} s @param {string} slotKey @param {string} branch @returns {string|null} every Daily Life pick's key: the town's id (point 124, `pickKeyOf`), else its name, else null, as before */
 const pickKey = (s, slotKey, branch) => {
-  const name = /** @type {{ name?: unknown }} */ (s).name;
-  return typeof name === 'string' && name ? `${name}::dailyLife.${slotKey}::${branch}` : null;
+  const name = /** @type {{ name?: unknown }} */ (s).name, town = pickKeyOf(s, typeof name === 'string' && name ? name : null);
+  return town ? `${town}::dailyLife.${slotKey}::${branch}` : null;
 };
 
 /**

@@ -32,7 +32,7 @@ import { factsOf } from '../facts/factsOf.js';
 import { textOf } from '../facts/textOf.js';
 import { meritsOf, weatheredCatastrophe } from '../fortune/fortuneMerits.js';
 import { FORTUNE_LAW_TUNING } from '../fortune/fortuneLaw.js';
-import { pickRendezvous } from '../../kernel/proseHash.js';
+import { pickRendezvous } from '../../kernel/proseHash.js'; import { pickKeyOf } from './pickKey.js';
 import { FORTUNE_MERIT_LINES, FORTUNE_MERIT_RECENT_YEARS, FORTUNE_MERIT_TIME_WORDS } from '../../data/fortuneMeritLines.js';
 import { FORTUNE_LASTING_CENTURIES_YEARS, FORTUNE_LASTING_LINES, FORTUNE_LASTING_TIME_WORDS } from '../../data/fortuneLastingLines.js';
 
@@ -310,7 +310,7 @@ export function governanceAccountOf(settlement, opts = {}) {
   const place = text(s.name) || 'this place';
   const ruler = powerNameInProse(governing);
   const sentences = [];
-  const seed = String(s._seed ?? s.id ?? s.name ?? '');
+  const seed = String(pickKeyOf(s, s._seed ?? s.id ?? s.name ?? ''));
   /** @param {string} slot @param {number} n */
   const pick = (slot, n) => arrangementOf(seed, slot, n);
 
@@ -381,7 +381,7 @@ export function governanceAccountOf(settlement, opts = {}) {
         : yearsAgo <= FORTUNE_LAW_TUNING.standing.weatheredWithinYears ? FORTUNE_MERIT_TIME_WORDS.generation : null;
     let meritPrinted = false;
     if (event && band) {
-      const identity = `${place}::${event}::${yearsAgo}`;
+      const identity = `${pickKeyOf(s, place)}::${event}::${yearsAgo}`; // the town's id (point 124), the name in the text
       const { line } = drawDeclared(FORTUNE_MERIT_LINES, {
         // the pool declares nothing, so the door never refuses: A LINE THAT EVER DECLARES A NEED MOVES THIS DRAW TO `rankKey` (point 121's bar)
         draw: (pool) => pickRendezvous(pool, identity, (l) => l.id),
@@ -409,7 +409,7 @@ export function governanceAccountOf(settlement, opts = {}) {
     const age = meritRecord.history?.age;
     if (merits.includes('lasting') && typeof age === 'number') {
       const both = meritPrinted;
-      const identity = `${place}::${age}`;
+      const identity = `${pickKeyOf(s, place)}::${age}`;
       const lasting = both ? FORTUNE_LASTING_LINES.find((l) => l.when === 'both') : drawDeclared(FORTUNE_LASTING_LINES, {
         // the pool declares nothing, so the door never refuses: A LINE THAT EVER DECLARES A NEED MOVES THIS DRAW TO `rankKey` (point 121's bar)
         draw: (pool) => pickRendezvous(pool.filter((l) => l.when === 'alone'), identity, (l) => l.id),

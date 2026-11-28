@@ -91,7 +91,7 @@ import { catalogIdForName } from '../../data/institutionalCatalog.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { drawDeclared, lineText } from '../facts/drawDeclared.js';
 import { factsOf } from '../facts/factsOf.js';
-import { isColourLine } from '../facts/factVocabulary.js';
+import { isColourLine } from '../facts/factVocabulary.js'; import { pickKeyOf } from '../display/pickKey.js';
 import {
   ACT_LEADS, CRISIS_SCOPED_ACTS, ELEMENT_GLOSS, CRISIS_SCOPED_ELEMENTS, KEEPER_HOUSES, HOUSE_FRAMES, POWER_FRAMES,
   OWNER_FRAMES, CAUSE_FRAMES, DEAD_EVENT_TYPES, DEAD_EVENT_SEVERITIES, DEAD_EVENT_PHRASES, ECONOMY_FIT, ECONOMY_FRAMES,
@@ -261,7 +261,7 @@ export function holdsAName(eventName, names) {
  * sharedTraditionRowsOf) runs on this same owner's record: the owner's page and the reader's drawn row share one key.
  * @param {Rec} settlement @returns {string}
  */
-const settlementSeedOf = (settlement) => String(settlement._seed ?? settlement.id ?? '');
+const settlementSeedOf = (settlement) => String(pickKeyOf(settlement, settlement._seed ?? settlement.id ?? ''));
 
 /**
  * THE ONE DRAW (CTR10; point 121, TAIL-PICKS): the door's RANKED mode on `seed::slot` (the settlement's identity then the

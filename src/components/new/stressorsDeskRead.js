@@ -23,7 +23,7 @@
 import { stressorsStateProse } from '../../domain/display/stateProse/stressorsStateProse.js';
 import { deriveAllActiveConditions } from '../../domain/activeConditions.js';
 import { tierNounFor } from '../../domain/display/stateProse/weaveBlock.js';
-import { publicProseOf } from '../../domain/display/publicProse.js';
+import { publicProseOf } from '../../domain/display/publicProse.js'; import { pickKeyOf } from '../../domain/display/pickKey.js';
 
 /**
  * THE SILENT DESK: every key the desk returns, all null. Written out, as the economy desk's is,
@@ -75,6 +75,6 @@ export function stressorsDeskRead(settlement, options = {}) {
       worldStressor: options.worldStressor ?? null,
     },
     // The audience follows kernel law 2's fail-closed default, stated: the PowerTab term.
-    { seed: String(s._seed ?? s.id ?? ''), audience: options.playerView ? 'player' : 'dm', tierNoun: tierNounFor(options.tier) },
+    { seed: String(pickKeyOf(s, s._seed ?? s.id ?? '')), audience: options.playerView ? 'player' : 'dm', tierNoun: tierNounFor(options.tier) },
   );
 }

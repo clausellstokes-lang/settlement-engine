@@ -345,7 +345,7 @@ function speakHooks(collected, facts, settlement) {
   }
   if (refusedFamine && !keptFoodHook && facts.foodGap) {
     push(out, {
-      text: foodGapHookLine({ name: settlement.name, band: facts.foodBand }, () => factsOf(settlement)),
+      text: foodGapHookLine({ name: settlement.name, id: /** @type {{ id?: unknown }} */ (settlement).id, band: facts.foodBand }, () => factsOf(settlement)),
       source: 'Economy',
       role: '',
       category: 'economics',

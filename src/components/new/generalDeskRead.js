@@ -39,7 +39,7 @@ import { drawnAtMount } from '../../domain/display/stateProse/dossierMounts.js';
 import { resolvePrimaryStress } from '../../generators/stressPriority.js';
 import { tierNounFor } from '../../domain/display/stateProse/weaveBlock.js';
 import { byDesignItemsOf } from '../../domain/display/validationOnPage.js'; // SW-B1 (B1(c)): the one reader of the by-design rows
-import { publicProseOf } from '../../domain/display/publicProse.js';
+import { publicProseOf } from '../../domain/display/publicProse.js'; import { pickKeyOf } from '../../domain/display/pickKey.js';
 
 /**
  * The general desk's OVERVIEW positions. Bound once each: the registry's reachability arm
@@ -325,7 +325,7 @@ export function generalDeskLines(settlement, options = {}) {
       populationTrend: options.populationTrend,
     },
     {
-      seed: String(r?._seed ?? r?.id ?? ''),
+      seed: String(pickKeyOf(r, r?._seed ?? r?.id ?? '')),
       audience: options.playerView ? 'player' : 'dm',
       // FORWARDED, NEVER DERIVED — the sibling economy reader's note carries the reason, and
       // why a screen forwards `tier` rather than a resolved noun (SIZE lane, 2026-11-03).

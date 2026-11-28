@@ -23,7 +23,7 @@ import {
 } from '../../domain/display/stateProse/defenseStateProse.js';
 import { tierNounFor } from '../../domain/display/stateProse/weaveBlock.js';
 import { publicProseOf } from '../../domain/display/publicProse.js';
-import { publicVeiledRecordOf } from '../../domain/display/publicSafe.js';
+import { publicVeiledRecordOf } from '../../domain/display/publicSafe.js'; import { pickKeyOf } from '../../domain/display/pickKey.js';
 
 /**
  * THE SILENT LENSES, written out (the gate never depends on a desk staying silent over garbage).
@@ -71,7 +71,7 @@ export function defenseDeskRead(settlement, options = {}) {
   // ⭐ THE OPTION BAG, SPELLED ONCE (ODQ §934.22 addendum): the settlement's own noun, the
   // stated audience (kernel law 2's fail-closed default), the stable seed.
   const deskOpts = {
-    seed: String(r._seed ?? r.id ?? ''),
+    seed: String(pickKeyOf(r, r._seed ?? r.id ?? '')),
     audience: options.playerView ? 'player' : 'dm',
     tierNoun: tierNounFor(options.tier),
   };

@@ -29,7 +29,7 @@ import { seatLensOf } from '../../domain/spatial/cohesionWeave.js'; // SW-7 (STY
 import { settlementBlocs as politicsBlocsOf } from '../../domain/display/politicsRead.js';
 import { governanceAccountOf, governanceStressTypesOf } from '../../domain/display/governanceAccount.js';
 import { resolvePrimaryStress } from '../../generators/stressPriority.js';
-import { ladderRungsOf, ladderInstabilityOf, ladderFactionKeyOf } from '../../domain/townMap/ladderRead.js';
+import { ladderRungsOf, ladderInstabilityOf, ladderFactionKeyOf } from '../../domain/townMap/ladderRead.js'; import { pickKeyOf } from '../../domain/display/pickKey.js';
 
 /** THE SILENT DESK: every key the desk returns, all null (written out). */
 export const SILENT_POWER_DESK = Object.freeze({
@@ -71,7 +71,7 @@ export function powerDeskRead(settlement, options = {}) {
   // (publicSafe.js :: publicVeiledRecordOf), so not even a silent DS-POW-6 rung's presence says
   // the hall's hold; the seed stays the owner's.
   return options.publicDossier ? publicPowerDesk(s) : powerStateProse(options.playerView ? (options.veiledRecord ?? publicVeiledRecordOf(s)) : s, options.readings ?? {}, {
-    seed: String(s._seed ?? s.id ?? ''), audience: options.playerView ? 'player' : 'dm', tierNoun: tierNounFor(s.tier),
+    seed: String(pickKeyOf(s, s._seed ?? s.id ?? '')), audience: options.playerView ? 'player' : 'dm', tierNoun: tierNounFor(s.tier),
   });
 }
 
@@ -89,7 +89,7 @@ export function powerDeskRead(settlement, options = {}) {
  */
 export function powerLadderRead(settlement, options) {
   const s = /** @type {any} */ (settlement);
-  const deskSeed = String(s?._seed ?? s?.id ?? '');
+  const deskSeed = String(pickKeyOf(s, s?._seed ?? s?.id ?? ''));
   return options.publicDossier ? publicLadderRung(s, options.factionName) : powerLadderRung(
     s,
     { factionName: options.factionName, rungs: options.rungs, instability: options.instability },

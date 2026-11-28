@@ -36,7 +36,7 @@
  * PURE: no rng, no clock, no store, no React.
  */
 
-import { fnv1a32 } from '../../kernel/proseHash.js';
+import { fnv1a32 } from '../../kernel/proseHash.js'; import { pickKeyOf } from '../display/pickKey.js';
 import { drawDeclared, lineText } from '../facts/drawDeclared.js';
 import { pluralPowerName } from '../display/governanceAccount.js';
 import { powerNameWithArticle, powerSentenceName } from '../../data/people/powerSentenceName.js';
@@ -280,14 +280,14 @@ export function createConflictHookDraw(facts = null) {
  * The food-gap line for one settlement: a draw-free fnv offset on the place's own name and
  * band, so two settlements with the same shortfall do not read the same sentence. Drawn over
  * the full pool and resolved through `drawDeclared` (CENSUS-1d unit 2, row 90, kind H).
- * @param {{ name?: unknown, band?: unknown }} place
+ * @param {{ name?: unknown, id?: unknown, band?: unknown }} place
  * @param {object|null|(() => object|null)} [facts] `factsOf(settlement)` (or a thunk)
  * @returns {string}
  */
 export function foodGapHookLine(place, facts = null) {
   const name = typeof place?.name === 'string' ? place.name : '';
   const band = typeof place?.band === 'string' ? place.band : '';
-  const seed = `${name}::${band}::food-gap`;
+  const seed = `${pickKeyOf(place, name)}::${band}::food-gap`; // the town's id (point 124)
   const drawn = drawDeclared(FOOD_GAP_LINES, {
     draw: (p) => p[fnv1a32(seed) % p.length], facts, key: seed,
     poolId: 'HOOK_LINE_POOLS.foodGap', surface: 'plot_hooks', drawKind: 'H',

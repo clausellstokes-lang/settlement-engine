@@ -675,7 +675,7 @@ export const ORGANIZED_RING_NOTES = Object.freeze([
  * @returns {{ key: string, label: string, color: string, bg: string, note: string }}
  */
 function withRingVantage(row, settlement) {
-  const seed = settlement?._seed;
+  const seed = pickKeyOf(settlement, settlement?._seed);
   if (row.key !== 'organized' || typeof seed !== 'string' || !seed) return row;
   // POINT 121: the vantages in rendezvous rank; the first the place can print (the list door asked one row at a time, so
   // only the printed row is noted; RING-2's streets also need quiet streets, TAIL-DEFECON-D #B11428); none: the table's note.
@@ -991,7 +991,7 @@ export function criminalOpMark(settlement, name) {
     .find((h) => String(h?.name ?? '').trim().toLowerCase() === key);
   return house ? rowMarkText(/** @type {never} */ (settlement), 'house', /** @type {never} */ (house)) : null;
 }
-import { rowMarkText } from './crisisStoppedRow.js';
+import { rowMarkText } from './crisisStoppedRow.js'; import { pickKeyOf } from './pickKey.js';
 
 /**
  * (c) the chair's HK1: the diffuse note beside the hook "The crime wave is coordinated" speaks of appearances.

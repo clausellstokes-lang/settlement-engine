@@ -17,7 +17,7 @@
 import { defenseIsolationSupportProse } from '../../domain/display/stateProse/defenseStateProse.js';
 import { deriveViability } from '../../domain/display/dossierViewModel.js';
 import { tierNounFor } from '../../domain/display/stateProse/weaveBlock.js';
-import { publicProseOf } from '../../domain/display/publicProse.js';
+import { publicProseOf } from '../../domain/display/publicProse.js'; import { pickKeyOf } from '../../domain/display/pickKey.js';
 
 /** THE SILENT DESK (written out). */
 export const SILENT_ISOLATION_DESK = Object.freeze({ isolationSupply: null });
@@ -38,7 +38,7 @@ export function isolationDeskRead(settlement, options = {}) {
   if (!settlement) return SILENT_ISOLATION_DESK;
   // ⛔ THE GATE IS IN THE READ'S OWN STATEMENT (ARM 3).
   return options.publicDossier ? publicIsolationDesk(settlement) : defenseIsolationSupportProse(settlement, {
-    seed: String(settlement?._seed ?? settlement?.id ?? ''),
+    seed: String(pickKeyOf(settlement, settlement?._seed ?? settlement?.id ?? '')),
     audience: options.playerView ? 'player' : 'dm',
     tierNoun: tierNounFor(settlement.tier),
   });

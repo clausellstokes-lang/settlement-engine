@@ -386,7 +386,7 @@ function viabilityName(settlement) {
 /** @param {DossierSettlementView | null | undefined} settlement @returns {string} */
 function viabilitySeed(settlement) {
   const s = settlement;
-  const seed = s?._seed ?? s?.id ?? s?.name ?? '';
+  const seed = pickKeyOf(s, s?._seed ?? s?.id ?? s?.name ?? '');
   return seed ? `${seed}|viability` : '';
 }
 
@@ -910,7 +910,7 @@ import { bandForVariable } from '../causalState.js'; import { foundationBandShow
 // W2-A-LEAVES (row 3): the leaf the Magic tab's reliance line names its source from (an import at the foot, so the
 // lines the prose wiring census cites above keep their numbers).
 import { magicSourceOf } from '../facts/magicSource.js';
-import { institutionDisplayName } from './institutionDisplayName.js';
+import { institutionDisplayName } from './institutionDisplayName.js'; import { pickKeyOf } from './pickKey.js';
 import { rowMarkText } from './crisisStoppedRow.js'; // BAR8 MARKS-2 item 6: the supplier's mark (at the foot: no cited line moves)
 
 /**
