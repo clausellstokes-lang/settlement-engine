@@ -197,7 +197,7 @@ export function drawDeclared(pool, options) {
   }
   if (typeof options.rankKey === 'string') {
     // BOUND BEFORE IT IS RETURNED, on purpose: presumedThings.shared.mjs's trace reads a direct `return drawRanked(…)`
-    // as another reach: 5,348 hits, not 5,359; 19 keys differ (18 institutionServices.js: 14 gone, 4 new; 1 holderTable.js)
+    // as another reach: 5,348 hits, not 5,359; 19 keys differ in two files this door does not touch (ruling 121-4, F3)
     const ranked = drawRanked(list, domain, options, declared, admitter(options, tagged, scoped, poolAtoms, isHeld));
     return ranked;
   }
