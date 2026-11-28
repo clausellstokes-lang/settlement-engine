@@ -234,7 +234,7 @@ export const SAID_LINES = deepFreeze({
     { id: 'SAID.inst.hall-ordinary.5', speaker: ['keeper', 'works-there'],
       versions: {
         welcoming: { text: 'The clerks work late to get everyone seen.', card: ['clerks'] },
-        transactional: { text: 'The lights burn late there, most nights.' },
+        transactional: { text: 'The lights burn here long after dark, and someone pays for them.' },
         cautious: { text: 'Old records here have a way of going missing.' },
         dismissive: { text: 'The papers never stop coming.' },
       } },

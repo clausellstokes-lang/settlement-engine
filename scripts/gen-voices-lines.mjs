@@ -96,7 +96,7 @@ export const CHANGED_WORDS = Object.freeze(/** @type {Record<string, { from: str
   'LIE.front.trade.1 welcoming': { from: 'Anyone may look at the books, and plenty have.', to: 'Anyone may look at the accounts, and plenty have.' },
   'LIE.front.trade.1 cautious': { from: 'The books here have never had a question asked of them.', to: 'The accounts here have never had a question asked of them.' },
   'LIE.front.trade.1 inTruth': { from: 'the books hide the criminal house\'s money passing through', to: 'the accounts hide the criminal house\'s money passing through' },
-  'SAID.inst.hall-ordinary.5 transactional': { from: 'Candles burn here long after dark, and someone pays for them.', to: 'The lights burn late there, most nights.', drops: ['candles'] },
+  'SAID.inst.hall-ordinary.5 transactional': { from: 'Candles burn here long after dark, and someone pays for them.', to: 'The lights burn here long after dark, and someone pays for them.', drops: ['candles'] },
   'SAID.inst.inn-ordinary.2 transactional': { from: 'Late nights burn a lot of candles.', to: 'Keeping the lamps lit late costs a fair bit.', drops: ['candles'] },
   'SAID.trad.vigil.3 transactional': { from: 'Candles for the vigil cost more each year.', to: 'Lighting the vigil costs more each year.' },
   'SAID.trad.vigil.3 welcoming': { from: 'Families take turns keeping the candles lit.', to: 'Families take turns tending the lights all night.' },

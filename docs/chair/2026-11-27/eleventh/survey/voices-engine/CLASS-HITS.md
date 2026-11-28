@@ -66,11 +66,11 @@ a `plenty`: a speaker's word, exempt.
 | LIE.front.trade.1 C | The books here have never had a question asked of them. | The accounts here have never had a question asked of them. |
 | LIE.front.trade.1 N | the books hide the criminal house's money passing through | the accounts hide the criminal house's money passing through |
 
-THE FOUR CANDLE VERSIONS: "candles" is taken out and the late light kept, each a different remark (L-4). PROPOSED for your read:
+THE FOUR CANDLE VERSIONS: "candles" is taken out and the late light kept, each a different remark (L-4). ACCEPTED by the chair at 09:05 UTC, with the hall's line changed as below:
 
 | line · version | old | new |
 |---|---|---|
-| SAID.inst.hall-ordinary.5 T | Candles burn here long after dark, and someone pays for them. | The lights burn late there, most nights. (yours) |
+| SAID.inst.hall-ordinary.5 T | Candles burn here long after dark, and someone pays for them. | The lights burn here long after dark, and someone pays for them. (the chair's, 09:05 UTC: the remark kept, only the word moved) |
 | SAID.inst.inn-ordinary.2 T | Late nights burn a lot of candles. | Keeping the lamps lit late costs a fair bit. |
 | SAID.trad.vigil.3 T | Candles for the vigil cost more each year. | Lighting the vigil costs more each year. |
 | SAID.trad.vigil.3 W | Families take turns keeping the candles lit. | Families take turns tending the lights all night. |
