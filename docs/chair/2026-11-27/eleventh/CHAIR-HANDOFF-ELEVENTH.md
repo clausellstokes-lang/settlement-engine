@@ -1052,3 +1052,45 @@ See section 4, newest last.
   cure of its own); hooks of old events worded as happening now.
 - **FOUR TOP-TIER READERS HAVE RUN OR RUN NOW** (122-123 holding for its delta; SURVEY-1; VOICES); the account read
   `allowed_warning` at 08:39; read it again before point 124's reader.
+
+## V36 (13:21 UTC on 2026-11-28): THE OWNER MOVED THE CHAIR TO OPUS ("Continue the work with opus as chair"); THE CURE OF 122 AND 123 PUSHED (a03ba9359) FOR THE READER's DELTA, THE WHOLE SUITE IN FOUR SHARDS ON IT; TWO WRITERS FOR MORE QUOTE LINES; EVERY WAITING SEAT ANSWERED
+- **THE CHAIR's MODEL:** the owner switched this session to `claude-opus-5-5` (his /model, then "Continue the work with opus
+  as chair", read at 13:09 UTC). Nothing else changes: builders stay Opus, readers stay on the top tier at max effort,
+  mechanical helpers on Sonnet; what is his stays his. Commit trailers from here: `Co-Authored-By: Claude Opus 5.5`.
+- **THE CONTAINER's WORKER RESTARTED SEVERAL TIMES between 10:31 and 13:09 UTC**; nine messages waited; nothing was lost.
+- **CURE-122B DONE (local agent; its last report 122-B-5):** the hook leg out, 122-B-4's plumbing out (the three files
+  equal 003fd3b07 again), its test kept as the guard; owner-side towns moved 24 of 25 | 13 of 18 (the hook-only towns, by
+  slot: header 21 | 8, rung 7 | 3, Outlook 13 | 9, the PDF's view model 13 | 9); the reader's stamp moved 0; towns with the
+  stress or the tension 0; records 0; THE EMPTY HEADERS FALL 45 to 29 | 23 to 17, the standing-of-living tile 2 | 18 to
+  2 | 17 (still a release blocker by name until S-B2 lands); sizes: first paint 1,196,447, generation 2,744,088, engine
+  937,247, PDF worker 3,150,371; boot smoke green; reds left all on the list (`tests/lint` four, `dossierProseManifest`
+  three, `safetyReaderBytes`). THE CHAIR READ `solvencyShown.js` at the tip: the stress or the tension, nothing else.
+- **PUSHED:** `lane/stack-123-wip-2026-11-28` 003fd3b07 to **a03ba9359** (a fast-forward; 39 commits). READER 122-123
+  (session_01FE9mEwUutkT4X3codynXn5) has it for its DELTA (asked: B2 by its own tests, records, lines by unit, the palm
+  towns, the floor's copy under its veil plants, the DM-edited tension, real build bytes, mutants). **THE WHOLE SUITE IN
+  FOUR SHARDS ON a03ba9359** (LAND122C; briefs `shards/prompts/LAND122C-<k>.txt`; Sonnet: sessions
+  session_01FE9mEwdwsaJbvHgnBTYHRY, session_01FE9mEv8ZWTg7tihDBwHbsY, session_01FE9mEsspgUpHqrizutJVw7,
+  session_01FE9mEu1LAJ5f8gnf2t5nnt). THEN THE LANDING (V31's plan): the two rows and gate paragraphs in
+  `docs/chair/2026-11-17/sixth/LANDINGS-SIXTH.md` on the line (122: the cures at print, its claim narrowed as 122-B-2
+  says; 123: "AT BIRTH AND AT PRINT" (C3's need list reaches saved towns); the real build figures, not the proxy's);
+  `RED-AT-LINE.tsv` and `LINE-NOW.md` on the record (the herald golden's row joins: 72 rows, plus any new red the shards
+  name, each with its cause); the line fast-forwarded; CI read by name.
+- **SURVEY-TABLE "TIP? S-B-3 a518d4244" and SURVEY-FINAL "TIP? b2a9010fe": ACCEPTED AS BUILT**; their rulings since the first
+  tips in ONE file `survey/RULINGS-SURVEY-BRANCHES.md` (the neighbour table ruled: v6 a different thing beside the food
+  line and beside C3 v1; COMFORTABLE v4 beside "some to put by" a real, older clash of the FOOD family). BOTH NOW MEASURE
+  S-D (no build): TABLE money's residue and prosperity (the 29 census pages: a mis-cast row or a true clash?), FINAL food
+  and safety. READER SURVEY-1 has both delta tips.
+- **VOICES-ENGINE "TIP? 7dad3b372" ACCEPTED** (G1-7, G1-5: PDF worker +1,334 B, G1-6); **G1-8: TWO WRITERS ADD LINES**
+  (`prompts/START-VOICES-LINES-2.txt`: every printing pool to five lines, the seventeen most-printed to eight, each a
+  different thing noticed; a sample of twelve each to the chair first): VOICES-LINES-2 A session_01FE9mEu6oZMQtnKwqSwuKou
+  (powers, tensions, crises), B session_01FE9mEw1jmhuAwDt7Qrp8NG (houses, traditions, people, liars). The engine holds its
+  tip; READER VOICES (session_01FE9mEvfWM77zpPcUGf5FSK) has the delta.
+- **RENAME-BUILD:** K1b-3 (the soak's case on soak-b, mirrored: accepted), K2-2 (the exempt row), K-REG (no register re-taken
+  on a branch; check outputs saved; the chair re-takes at the landing after the reader), **K3-1 (BUILD: a rename keeps the
+  power's kind: `kindName` at the first rename, never sent to a non-owner; measure first where each name classifier runs;
+  stop on any live reader-side classifier)**; all in `rename/RULINGS-RENAME-BUILD.md`. Then "TIP?" for point 124 whole and
+  ITS READER (to be briefed).
+- **NAMED FOR THE VEIL:** A24 (a house's hideable class can be read from its name).
+- **THE ACCOUNT:** `allowed_warning` at 13:10 UTC, no overage (resets 2026-12-04). Seats running now: READER 122-123,
+  four shards, READER SURVEY-1, READER VOICES, RENAME-BUILD, two writers, SURVEY-TABLE and SURVEY-FINAL (measures),
+  VOICES-ENGINE (holding).
