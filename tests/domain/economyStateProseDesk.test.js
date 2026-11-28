@@ -1507,3 +1507,29 @@ describe('G72 (5): DS-ECO-1 COMBINATION C4 v8', () => {
       .toEqual({ angle: 'street', slots: ['settlement'], marks: ['no crisis: under_siege', 'no crisis: plague_onset'] });
   });
 });
+
+// RULING 122-B-3 (UNIT 4 (b)): a slash label that is only a FILL in a desk sentence is said with "or" ("gold/silver ore" ->
+// "gold or silver ore"), by the one function the scarcity tension uses (criticalImportRow.js :: slashInProse); a label that is
+// also a KEY (the exploitation sort, the critical import's lookups) is untouched. Births as V bears them (the second corpus's
+// dials: DEFAULT_CONFIG with randomised priorities). RED FIRST at 9712c4085: both pages printed "gold/silver ore".
+describe('RULING 122-B-3: a slash label is said in prose at the desk\'s two fills', () => {
+  /** @param {string} seed */
+  const v = async (seed) => {
+    const { DEFAULT_CONFIG } = await import('../../src/store/configSlice.js');
+    await loadGenerationLawPayloads();
+    return generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: seed.split('-')[1], _randomizePriorities: true }), null, { seed, customContent: {} });
+  };
+  /** @param {any} rung @returns {[boolean, boolean]} names the good in prose, names it with its slash */
+  const said = (rung) => [String(rung?.sentence ?? '').includes('gold or silver ore'), String(rung?.sentence ?? '').includes('gold/silver')];
+  it('DS-ECO-12 critical import (V dp-town-16): "gold or silver ore", and the record keeps its key', async () => {
+    const s = await v('dp-town-16');
+    expect(s.resourceAnalysis.imports.critical).toContain('gold/silver ore');
+    expect(said(economyDeskRead(s, { tier: s.tier, ...economicsDeskArgs(s) }).criticalImport)).toEqual([true, false]);
+  }, 120000);
+  it('DS-ECO-11 exploitation (V dp-thorp-18): "gold or silver ore", and the row keeps its rawResource', async () => {
+    const s = await v('dp-thorp-18');
+    const rows = Object.values(s.resourceAnalysis.exploitation || {}).flat().map((/** @type {any} */ r) => r?.rawResource);
+    expect(rows).toContain('gold/silver ore');
+    expect(said(economyDeskRead(s, { tier: s.tier, ...economicsDeskArgs(s) }).exploitation)).toEqual([true, false]);
+  }, 120000);
+});
