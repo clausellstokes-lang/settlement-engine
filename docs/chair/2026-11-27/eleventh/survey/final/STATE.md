@@ -14,4 +14,14 @@
   - `S-D-SAFETY.md`: the Very Safe sentence "…there is little crime" (`safetyProfile.js:316`, undeclared) beside an
     organised syndicate or a crime wave on V 20 pages; two DS-DEF-3 lines and the calm Daily Life line lack
     `no crime wave`; the "nothing threatens" NPC rows beside a live `danger coming` (C 2; birth-time: would move births).
-- NEXT: wait for the chair's word. No build.
+- **S-D RULED** (the chair, 15:45 UTC; chair's record 705fcf277, `survey/RULINGS-SURVEY-BRANCHES.md`, last section):
+  F1 as named (stores ≥ 3 as now; under 3 "…, though little of it is kept for a bad year.", for the owner's veto); S4
+  the same side or the same words; COMFORTABLE#4 stays. Y1: "…there is little crime" dropped (or words proposed) where
+  a crime wave or an organised criminal house stands; DS-DEF-3 Safe#4, Very Safe#5, calm C3 take `excludes: crime wave`.
+  The "nothing threatens" NPC rows: a later birth unit. **BUILD NOTHING YET:** built on the merged tree after the line
+  lands and the survey's reader reports.
+- Y1 WORDS PROPOSED for the chair's read (sent 15:45 UTC): the drop form "Visitors can walk anywhere at any hour; the
+  {force} sees to that." (no force: "Visitors can walk anywhere at any hour."); a replacement, if the chair wants the
+  crime said: "Visitors can walk anywhere at any hour, though what crime there is keeps to the back rooms; the {force}
+  sees to the streets."
+- NEXT: hold the code tip (b2a9010fe); wait for the merged tree and the chair's word to build.
