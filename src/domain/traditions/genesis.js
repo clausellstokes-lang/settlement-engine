@@ -203,8 +203,8 @@ const NEEDS_SINCE = '0.10.0';
  * B1(ii), NO TRADITION BLESSES FIELDS THE PLACE DOES NOT HAVE (the tenth chair's G64 (2), (3)): the place's own food record
  * NAMES its sources (`economicState.foodSecurity.foodRecord.foodSources`, the native keys the generator writes, never a
  * user's good by name) and `grain` is not among them, and no farmland stands on the roster (the atom `institution:
- * farmland`, through its own reader: FARMLAND ADMITS THE RITE). An empty or absent source list is unanswered, and so is an
- * unanswered farmland atom: the rite stands. ASKED ONLY OF A RECORD BORN AT OR AFTER THE ENGINE THAT FIRST CARRIED THE RULE
+ * farmland`, through its own reader, over the FLOOR (RULING 122-T-5): FARMLAND ADMITS THE RITE). An empty or absent
+ * source list is unanswered, and so is an unanswered farmland atom: the rite stands. ASKED ONLY OF A RECORD BORN AT OR AFTER THE ENGINE THAT FIRST CARRIED THE RULE
  * (`settlement.schema.js :: bornAtOrAfter`, `FIELD_RITE_SINCE`; G72 (1)): a place an earlier engine bore keeps its whole set.
  * @param {unknown} settlement @returns {boolean}
  */
@@ -213,7 +213,9 @@ export function fieldRiteRefused(settlement) {
   const sources = /** @type {{ economicState?: { foodSecurity?: { foodRecord?: { foodSources?: unknown } | null } | null } | null }} */ (settlement)
     .economicState?.foodSecurity?.foodRecord?.foodSources;
   if (!Array.isArray(sources) || sources.length === 0 || sources.includes('grain')) return false;
-  const facts = /** @type {Parameters<typeof atomHolds>[1]} */ (factsOf(/** @type {Parameters<typeof factsOf>[0]} */ (settlement)));
+  // RULING 122-T-5: the farmland atom is asked of the FLOOR (traditionFloor.js), as `heldBy` asks it: a house a DM can hide
+  // whole is no farmland, so no veil state can move the rite of the fields. The food record's sources above are no house.
+  const facts = /** @type {Parameters<typeof atomHolds>[1]} */ (factsOf(/** @type {Parameters<typeof factsOf>[0]} */ (traditionFloorOf(settlement))));
   return atomHolds('institution: farmland', facts) === false;
 }
 
