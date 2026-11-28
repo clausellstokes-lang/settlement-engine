@@ -1,0 +1,149 @@
+candidate pool (home)	STREET line-prints, C+V	subject: what its lines are about (line-prints)	strict rung 1: the house's own named connection	strict rung 2: a member of the power it backs	strict rung 3: a neighbouring trade	strict rung 4: an unnamed voice	loose: unnamed (a subjectless line goes to anyone)	who the ranking offers (an example role per subject)
+src/data/dailyLife/outsiderImpressions.js :: OUTSIDER_IMPRESSIONS	3797	outsiders 1107, power 959, safety 574, general 539, rule 227, health 211, house 154, trade 26	59%	6%	2%	33%	19%	power: the head shepherd; safety: the occupying governor; trade: the head shepherd; rule: the head shepherd; outsiders: the innkeeper; health: the priest; house: the crier
+src/data/historyData.js :: HISTORICAL_EVENTS_DATA	3162	general 1323, trade 907, safety 624, rule 150, health 150, food 8	49%	2%	4%	46%	4%	rule: the head shepherd; trade: the head shepherd; safety: the reeve; health: the apothecary; food: the granary reeve
+src/generators/narrativeText.js :: POLITICAL_FLAVOR	2074	general 1414, trade 230, outsiders 174, rule 100, health 72, faith 60, food 14, house 10	20%	3%	3%	74%	6%	rule: the head shepherd; trade: the head shepherd; food: the head shepherd; faith: the head shepherd; outsiders: the innkeeper; house: the cooper; health: the hospitaller
+src/data/dossierStateProse/economy.generated.js :: DOSSIER_STATE_PROSE_ECONOMY :: DS-ECO-12	1726	trade 958, general 421, outsiders 295, faith 46, food 6	53%	4%	6%	37%	13%	trade: the head shepherd; faith: the head shepherd; outsiders: the innkeeper; food: the miller
+src/data/dossierStateProse/defense.generated.js :: DOSSIER_STATE_PROSE_DEFENSE :: DS-DEF-2	1635	safety 1171, general 450, rule 8, outsiders 3, food 2, trade 1	49%	2%	0%	49%	21%	safety: the reeve; trade: the horse-coper; outsiders: the tavern keeper; rule: the granary reeve; food: the miller
+src/domain/dossier/faithReading.js :: observanceOf	1421	faith 1421	69%	31%	0%	0%	0%	faith: the head shepherd
+src/data/dailyLife/unspokenTopics.js :: UNSPOKEN_TOPICS	1419	general 444, outsiders 421, trade 238, rule 186, safety 73, health 36, faith 20, house 1	43%	7%	2%	47%	16%	rule: the head shepherd; trade: the head shepherd; safety: the master of the hunt; outsiders: the innkeeper; faith: the alewife; health: the apothecary; house: the mine captain
+src/data/dossierStateProse/defense.generated.js :: DOSSIER_STATE_PROSE_DEFENSE :: DS-DEF-5	1389	safety 919, trade 181, general 162, outsiders 127	70%	2%	0%	29%	17%	safety: the reeve; trade: the alewife; outsiders: the innkeeper
+src/data/dailyLife/gatheringPlaces.js :: GATHERING_NAMED	1334	house 611, general 339, faith 218, trade 105, food 39, safety 22	59%	15%	1%	25%	0%	house: the head shepherd; food: the head shepherd; trade: the stable keeper; faith: the priest; safety: the chief magistrate
+src/data/dossierStateProse/economy.generated.js :: DOSSIER_STATE_PROSE_ECONOMY :: DS-ECO-11	1293	general 881, outsiders 378, food 29, trade 5	21%	1%	0%	78%	10%	trade: the head shepherd; outsiders: the innkeeper; food: the dairy farmer
+src/data/historyDescVariants.js :: HISTORY_DESC_VARIANTS	1286	general 1023, trade 234, rule 27, food 2	20%	1%	0%	80%	0%	rule: the head shepherd; trade: the master fishmonger; food: the miller
+src/data/dossierStateProse/economy.generated.js :: DOSSIER_STATE_PROSE_ECONOMY :: DS-ECO-9	1275	food 1275	91%	9%	0%	0%	0%	food: the head shepherd
+src/data/dossierStateProse/defense.generated.js :: DOSSIER_STATE_PROSE_DEFENSE :: DS-DEF-3	1059	safety 553, general 217, outsiders 216, rule 26, food 20, health 14, faith 8, trade 5	43%	3%	0%	53%	33%	safety: the occupying governor; trade: the head shepherd; rule: the head shepherd; food: the head shepherd; outsiders: the eldest; health: the priest; faith: the priest
+src/data/dailyLife/commonerResentments.js :: COMMONER_RESENTMENTS	970	power 519, rule 161, food 105, house 94, general 81, trade 10	74%	18%	0%	8%	0%	power: the head shepherd; rule: the head shepherd; food: the head shepherd; house: the smelt master; trade: the cobbler
+src/generators/economy/incomeLineSiblings.js :: OWN_HARVEST_LINE	829	food 789, general 40	75%	21%	0%	5%	0%	food: the head shepherd
+src/generators/safetyProfile.js :: generateSafetyProfile	765	general 201, trade 193, house 113, outsiders 97, food 86, safety 59, faith 16	48%	8%	6%	38%	12%	trade: the head shepherd; food: the head shepherd; faith: the head shepherd; outsiders: the innkeeper; safety: the master of the hunt; house: the militia captain
+src/data/dossierStateProse/power.generated.js :: DOSSIER_STATE_PROSE_POWER :: DS-POW-5	746	power 493, house 119, trade 96, faith 16, safety 13, rule 9	89%	11%	0%	0%	0%	power: the head shepherd; trade: the bowyer; house: the customs collector; faith: the priest; safety: the granary reeve; rule: the council's fixer
+src/data/dailyLife/foodCulture.js :: FOOD_CULTURE	702	food 666, general 36	82%	13%	0%	5%	0%	food: the head shepherd
+src/data/dailyLife/recentChanges.js :: RECENT_CHANGES	690	general 427, rule 79, safety 61, health 39, trade 37, food 35, outsiders 12	24%	6%	4%	65%	3%	food: the head shepherd; trade: the head shepherd; rule: the head shepherd; health: the priest; outsiders: the innkeeper; safety: the reeve
+src/generators/economy/economicState.js :: generateEconomicState	634	trade 633, faith 1	92%	0%	6%	2%	2%	trade: the head shepherd; faith: the dean
+src/domain/display/defenseDisplay.js :: deriveSupportingCapabilities	591	health 591	0%	0%	0%	100%	100%	
+src/data/dossierStateProse/defense.generated.js :: DOSSIER_STATE_PROSE_DEFENSE :: DS-DEF-9	585	trade 415, safety 170	79%	2%	3%	16%	16%	safety: the reeve; trade: the brewer
+src/domain/dossier/faithReading.js :: faithLinesOf	546	faith 546	0%	100%	0%	0%	0%	faith: the head shepherd
+src/data/dossierStateProse/general.generated.js :: DOSSIER_STATE_PROSE_GENERAL :: DS-GEN-14	540	general 537, trade 3	0%	0%	0%	99%	0%	trade: the head shepherd
+src/data/dossierStateProse/defense.generated.js :: DOSSIER_STATE_PROSE_DEFENSE :: DS-DEF-4	534	safety 361, outsiders 108, general 65	56%	2%	0%	42%	30%	safety: the reeve; outsiders: the tavern keeper
+src/data/safetyDescLines.js :: MIXED_CORNERS	510	general 457, outsiders 53	8%	0%	0%	92%	2%	outsiders: the apothecary
+src/data/dossierStateProse/general.generated.js :: DOSSIER_STATE_PROSE_GENERAL :: DS-GEN-13	503	trade 380, general 121, food 2	54%	3%	15%	28%	4%	trade: the head shepherd; food: the granary reeve
+src/generators/power/conflictIssues.js :: BASE_ISSUES	495	general 319, outsiders 45, safety 39, trade 37, food 26, power 21, faith 5, house 3	34%	1%	0%	65%	1%	safety: the master of the hunt; faith: the priest; trade: the senior craft-guild master; outsiders: the innkeeper; food: the miller; power: the castellan; house: the granary reeve
+src/data/dossierStateProse/power.generated.js :: DOSSIER_STATE_PROSE_POWER :: DS-POW-4	493	power 310, general 135, house 48	64%	9%	0%	27%	0%	power: the head shepherd; house: the brewer
+src/data/dailyLife/childWarnings.js :: CHILD_WARNINGS	460	general 291, rule 72, outsiders 30, food 25, house 21, trade 10, safety 8, health 3	25%	9%	1%	65%	2%	rule: the head shepherd; food: the head shepherd; house: the stable keeper; health: the priest; safety: the granary reeve; trade: the boat-headman; outsiders: the innkeeper
+src/data/dailyLife/dawnWork.js :: DAWN_WORK	445	trade 316, food 83, house 40, safety 6	56%	10%	29%	5%	5%	trade: the head shepherd; food: the head shepherd; house: the alewife; safety: the granary reeve
+src/generators/economy/foodBalance.js :: deriveSupplyRiskAnalysis	418	general 240, trade 120, food 58	42%	0%	0%	57%	0%	trade: the smith; food: the eldest
+src/domain/display/guardLineUnderTheLaw.js :: GUARD_LAW_SIBLINGS	416	safety 416	15%	5%	0%	80%	80%	safety: the occupying governor
+src/generators/narrativeGenerator.js :: SMALL_PLACE_TIER_LINES	364	trade 250, general 114	11%	2%	43%	43%	12%	trade: the head shepherd
+src/generators/power/claimStanding.js :: ARCANE_ADVISORY	352	general 352	0%	0%	0%	100%	0%	
+src/generators/stressNarrative.js :: RENDERERS	343	general 129, rule 105, trade 64, food 45	42%	17%	4%	38%	0%	rule: the head shepherd; trade: the head shepherd; food: the head shepherd
+src/data/dailyLife/gatheringPlaces.js :: GATHERING_PLAIN	330	general 130, food 85, trade 83, rule 21, safety 7, house 4	21%	14%	18%	48%	8%	trade: the head shepherd; food: the head shepherd; rule: the head shepherd; house: the head shepherd; safety: the master of the hunt
+src/data/cultureProfiles.js :: CULTURE_PROFILES	327	general 295, house 31, food 1	10%	0%	0%	90%	0%	house: the mine captain; food: the master of granaries
+src/domain/crisis/crisisSummaryVantage.js :: CRISIS_SUMMARY_POOLS	314	general 89, outsiders 79, safety 60, rule 27, food 25, trade 21, faith 9, health 4	47%	8%	2%	43%	15%	trade: the head shepherd; rule: the head shepherd; food: the head shepherd; safety: the occupying governor; faith: the head shepherd; outsiders: the alewife; health: the archdruid
+src/data/dossierStateProse/economy.generated.js :: DOSSIER_STATE_PROSE_ECONOMY :: DS-ECO-8	300	trade 217, general 83	45%	0%	13%	41%	13%	trade: the head shepherd
+src/domain/display/validationOnPage.js :: resourceGapLines	287	general 287	0%	0%	0%	100%	0%	
+src/data/people/dealingLines.js :: NPC_DEALING_LINES	287	general 281, trade 6	2%	0%	0%	98%	0%	trade: the bowyer
+src/data/dailyLife/commonerResentmentsDm.js :: COMMONER_RESENTMENTS_DM	285	safety 141, rule 67, general 41, trade 36	65%	6%	0%	29%	14%	rule: the head shepherd; safety: the master of the hunt; trade: the master tanner
+src/data/powerSiblings.js :: BASELINE_CONFLICT_SIBLINGS	279	trade 203, general 64, house 12	35%	1%	30%	34%	11%	trade: the boat-headman; house: the miller
+src/data/safetyDescLines.js :: TINY_MODERATE	276	general 133, safety 115, outsiders 28	8%	0%	0%	92%	44%	safety: the reeve; outsiders: the innkeeper
+src/data/inlandDescriptions.js :: AUCTION	270	trade 270	100%	0%	0%	0%	0%	trade: the senior guild master
+src/components/new/tabs/EconomicsTab.jsx :: shortWords	261	general 217, food 44	14%	3%	0%	83%	0%	food: the head shepherd
+src/generators/safetyProfile.js :: SMUGGLING_HOOKS	259	trade 140, general 119	54%	0%	0%	46%	0%	trade: the tanner
+src/data/dossierStateProse/defense.generated.js :: DOSSIER_STATE_PROSE_DEFENSE :: DS-DEF-1	253	safety 106, outsiders 95, general 51, trade 1	30%	5%	0%	64%	44%	outsiders: the innkeeper; safety: the master of the hunt; trade: the tailor
+src/generators/narrativeText.js :: PRESSURE_ROWS	224	trade 64, general 52, power 44, food 38, safety 9, rule 7, house 5, health 3, faith 2	62%	8%	6%	24%	1%	food: the head shepherd; power: the head shepherd; trade: the head shepherd; rule: the head shepherd; faith: the head shepherd; health: the apothecary; safety: the garrison commander; house: the watch commander
+src/data/dossierStateProse/stressors.generated.js :: DOSSIER_STATE_PROSE_STRESSORS :: DS-CND-1	221	general 127, trade 34, food 14, outsiders 14, rule 11, health 9, safety 6, faith 6	29%	6%	1%	64%	6%	food: the head shepherd; faith: the head shepherd; rule: the mine captain; trade: the smith; health: the priest; outsiders: the master fishmonger; safety: the watch captain
+src/domain/display/incomeOrdinaryLines.js :: LOCAL_ORE_LINE	216	trade 211, general 5	98%	0%	0%	2%	0%	trade: the smith
+src/data/dossierStateProse/general.generated.js :: DOSSIER_STATE_PROSE_GENERAL :: DS-GEN-18	213	trade 213	82%	2%	3%	12%	12%	trade: the eldest
+src/domain/resourceSemantics.js :: RESOURCE_SEMANTICS	206	general 97, food 72, house 29, safety 7, trade 1	53%	0%	0%	47%	0%	food: the miller; safety: the watch captain; house: the mine captain; trade: the master weaver
+src/generators/economy/foodBalance.js :: deriveFoodBalanceAnalysis	204	food 158, general 46	65%	13%	0%	23%	0%	food: the head shepherd
+src/data/narrativeData.js :: STRESS_NOTES	196	general 106, rule 50, safety 22, trade 16, faith 2	24%	15%	1%	60%	6%	rule: the head shepherd; trade: the head shepherd; safety: the peat-reeve; faith: the priest
+src/data/dossierStateProse/power.generated.js :: DOSSIER_STATE_PROSE_POWER :: DS-POW-6	177	trade 84, health 38, power 36, house 19	80%	13%	5%	2%	2%	health: the apothecary; trade: the cobbler; power: the watcher; house: the smelt master
+src/data/dossierStateProse/defense.generated.js :: DOSSIER_STATE_PROSE_DEFENSE :: DS-DEF-8	174	general 76, safety 38, trade 23, food 21, rule 15, outsiders 1	41%	9%	3%	47%	3%	rule: the head shepherd; trade: the head shepherd; food: the dairy farmer; safety: the master of the hunt; outsiders: the miller
+src/generators/density/applyDensityLaw.js :: A_SECOND_WATCH	173	safety 173	100%	0%	0%	0%	0%	safety: the watch commander
+src/domain/summary/settlementQuickGuide.js :: SCOPE_LINE_FRAMES	169	general 130, trade 17, house 16, faith 4, rule 2	12%	9%	2%	77%	0%	rule: the steward; faith: the priest; house: the watch captain; trade: the senior guild master
+src/generators/power/governanceNarrative.js :: applyStressStability	158	power 67, rule 46, health 25, house 12, safety 8	78%	13%	3%	7%	7%	power: the head shepherd; rule: the head shepherd; health: the priest; house: the mine captain; safety: the militia captain
+src/generators/economy/incomeLineSiblings.js :: QUARRY_LINE	151	house 151	100%	0%	0%	0%	0%	house: the quarry master
+src/generators/economy/incomeLineSiblings.js :: TIMBER_LINE	148	trade 125, house 19, general 4	97%	0%	0%	3%	0%	house: the sawyer; trade: the warehouse factor
+src/domain/crisis/crisisCast.js :: CAST_REASONS	144	rule 85, power 42, general 14, house 3	64%	26%	0%	10%	0%	rule: the head shepherd; power: the mine captain; house: the master carpenter
+src/generators/narrativeGenerator.js :: generatePressureSentence	132	general 97, outsiders 35	2%	0%	0%	98%	25%	outsiders: the innkeeper
+src/data/dossierStateProse/economy.generated.js :: DOSSIER_STATE_PROSE_ECONOMY :: DS-ECO-1	131	trade 70, food 58, general 3	79%	7%	12%	2%	0%	food: the head shepherd; trade: the head shepherd
+src/data/safetyDescLines.js :: MIXED_FORCE	131	general 68, safety 45, house 14, trade 4	23%	2%	0%	75%	23%	safety: the peat-reeve; trade: the tanner; house: the garrison commander
+src/data/dossierStateProse/economy.generated.js :: DOSSIER_STATE_PROSE_ECONOMY :: DS-ECO-6	129	house 53, general 33, trade 24, safety 19	33%	33%	0%	34%	9%	trade: the senior craft-guild master; house: the district madam; safety: the chief magistrate
+src/data/narrativeData.js :: STRESS_DESCS	128	general 87, rule 26, trade 10, safety 3, health 2	26%	5%	2%	68%	0%	rule: the head shepherd; trade: the dairy farmer; safety: the garrison commander; health: the hospital's master
+src/generators/power/governanceNarrative.js :: deriveBaselineConflict	126	safety 103, general 12, food 10, rule 1	86%	5%	0%	10%	0%	food: the boat-headman; safety: the militia captain; rule: the dairy farmer
+src/generators/safetyLineTruth.js :: SMUGGLING_HOOK_SIEGE_TWINS	117	general 117	0%	0%	0%	100%	0%	
+src/generators/economy/incomeLineSiblings.js :: WOOL_LOCAL_LINE	106	house 106	100%	0%	0%	0%	0%	house: the fuller
+src/generators/power/governanceNarrative.js :: buildStressNarratives	105	food 36, health 28, rule 21, trade 19, power 1	52%	31%	8%	9%	9%	rule: the head shepherd; food: the head shepherd; health: the priest; trade: the potter; power: the impresario
+src/data/dossierStateProse/general.generated.js :: DOSSIER_STATE_PROSE_GENERAL :: DS-GEN-16	103	general 63, rule 35, health 5	16%	21%	2%	61%	0%	rule: the head shepherd; health: the apothecary
+src/generators/structuralValidator.js :: checkInstCompat	100	general 100	0%	0%	0%	100%	0%	
+src/domain/dailyLife.js :: deriveChildWarnings	94	general 87, house 6, trade 1	6%	1%	0%	93%	0%	house: the master fishmonger; trade: the tanner
+src/data/fortuneLastingLines.js :: FORTUNE_LASTING_LINES	92	power 79, house 13	86%	14%	0%	0%	0%	power: the head shepherd; house: the watch captain
+src/data/fortuneMeritLines.js :: FORTUNE_MERIT_LINES	91	power 75, house 16	87%	13%	0%	0%	0%	power: the head shepherd; house: the watch captain
+src/data/dossierStateProse/general.generated.js :: DOSSIER_STATE_PROSE_GENERAL :: DS-GEN-11	83	general 49, outsiders 34	24%	0%	0%	76%	17%	outsiders: the innkeeper
+src/domain/display/incomeOrdinaryLines.js :: LOCAL_COAL_LINE	82	trade 82	100%	0%	0%	0%	0%	trade: the master fishmonger
+src/data/dossierStateProse/general.generated.js :: DOSSIER_STATE_PROSE_GENERAL :: DS-GEN-17	82	general 81, trade 1	1%	0%	0%	99%	0%	trade: the tailor
+src/generators/economy/foodBalance.js :: NEWCOMERS_EAT_NOTE	81	food 81	99%	1%	0%	0%	0%	food: the dairy farmer
+src/generators/power/governingStressVignettes.js :: buildMigrationNarrative	74	general 37, power 24, trade 8, house 5	41%	7%	3%	50%	0%	power: the peat-reeve; house: the watch captain; trade: the dairy farmer
+src/data/powerSiblings.js :: GOV_DESC_OF_UNNAMED_SEAT	64	rule 64	41%	59%	0%	0%	0%	rule: the mine captain
+src/generators/power/governingStressVignettes.js :: buildWartimeNarrative	63	general 63	0%	0%	0%	100%	0%	
+src/generators/economy/incomeLineSiblings.js :: ALCHEMIST_SUPPLEMENTS_LINE	59	trade 58, general 1	98%	0%	0%	2%	0%	trade: the tanner
+src/data/dossierStateProse/economy.generated.js :: DOSSIER_STATE_PROSE_ECONOMY :: DS-SUP-2	58	trade 52, food 6	100%	0%	0%	0%	0%	trade: the innkeeper; food: the master baker
+src/data/dossierStateProse/warFaith.generated.js :: DOSSIER_STATE_PROSE_WAR_FAITH :: DS-FTH-4	58	faith 24, trade 16, safety 13, general 4, outsiders 1	84%	9%	0%	7%	0%	faith: the steward; trade: the alchemist; safety: the watch captain; outsiders: the exchange's steward
+src/generators/safetyProfile.js :: SAFETY_LINE_SIBLINGS	56	trade 31, general 13, safety 12	61%	2%	4%	34%	11%	safety: the master of the hunt; trade: the innkeeper
+src/generators/economy/incomeLineSiblings.js :: WOOL_LOCAL_WORKED_LINE	55	food 55	100%	0%	0%	0%	0%	food: the miller
+src/generators/power/rulingStructure.js :: generatePowerStructure	55	trade 55	100%	0%	0%	0%	0%	trade: the innkeeper
+src/data/safetyDescLines.js :: UNSAFE_ADVICE	55	outsiders 43, trade 12	98%	0%	0%	2%	2%	outsiders: the toll-keeper; trade: the senior craft-guild master
+src/generators/stressNarrative.js :: WARTIME_VARIANTS	54	rule 54	54%	46%	0%	0%	0%	rule: the head shepherd
+src/domain/display/guardLineUnderTheLaw.js :: FAMILIES_UNHELD	53	safety 53	15%	8%	0%	77%	77%	safety: the reeve
+src/data/stressTypes.js :: STRESS_TYPE_MAP	52	safety 52	52%	4%	0%	44%	44%	safety: the master of the hunt
+src/data/cultureProfiles.js :: CULTURE_LINE_SIBLINGS	51	general 33, safety 18	8%	2%	0%	90%	25%	safety: the peat-reeve
+src/generators/power/governanceNarrative.js :: buildBetrayalNarrative	50	general 17, house 17, power 16	36%	30%	0%	34%	0%	power: the carriers' master; house: the watch captain
+src/generators/economy/foodBalance.js :: OCCUPIERS_EAT_NOTE	49	food 49	94%	6%	0%	0%	0%	food: the head shepherd
+src/generators/economy/viability.js :: generatePowerDynamics	49	general 49	0%	0%	0%	100%	0%	
+src/generators/safetyLineTruth.js :: THEFT_NETWORK_DESC	49	food 49	100%	0%	0%	0%	0%	food: the miller
+src/generators/servicesGenerator.js :: PAY_A_LOCAL_STRONGMAN_A_NEIGHBOR_OR_A_GANG_FOR_SOME_MEASURE_OF_SAFETY_NO_CONTRACTS_NO_GUARANTEES	40	safety 40	68%	3%	0%	30%	30%	safety: the reeve
+src/data/dossierStateProse/economy.generated.js :: DOSSIER_STATE_PROSE_ECONOMY :: DS-SUP-3	38	outsiders 38	76%	0%	0%	24%	24%	outsiders: the innkeeper
+src/generators/stressNarrative.js :: STRESS_SUMMARY_SIBLINGS	37	trade 37	81%	0%	16%	3%	3%	trade: the alewife
+src/data/stressTypesMeta.js :: STRESS_TYPE_META	37	food 37	97%	3%	0%	0%	0%	food: the dairy farmer
+src/generators/stressNarrative.js :: MIGRATION_HOOK_BY_DIRECTION	37	trade 37	81%	0%	16%	3%	3%	trade: the master of the hunt
+src/generators/safetyLineTruth.js :: NO_DOMINANT	36	safety 36	67%	11%	0%	22%	22%	safety: the garrison commander
+src/data/powerSiblings.js :: REEVE_ANSWERS_TO_ELECTORS	35	trade 35	77%	9%	14%	0%	0%	trade: the tanner
+src/data/powerSiblings.js :: CRISIS_BODY_SIBLINGS	32	general 32	0%	0%	0%	100%	0%	
+src/generators/power/claimStanding.js :: MERCHANTS_AT_MARGINS	30	trade 30	100%	0%	0%	0%	0%	trade: the bowyer
+src/generators/safetyProfile.js :: DEBT_EVASION_NO_NETWORK_DESC	29	general 29	0%	0%	0%	100%	0%	
+src/domain/display/incomeOrdinaryLines.js :: TIMBER_SAWN_LINE	28	trade 28	96%	4%	0%	0%	0%	trade: the innkeeper
+src/data/dossierStateProse/defense.generated.js :: DOSSIER_STATE_PROSE_DEFENSE :: DS-DEF-12	27	general 17, food 5, trade 5	33%	4%	0%	63%	0%	food: the eldest; trade: the tailor
+src/generators/safetyProfile.js :: DEBT_EVASION_DESC	25	safety 25	92%	0%	0%	8%	8%	safety: the watch captain
+src/data/dossierStateProse/defense.generated.js :: DOSSIER_STATE_PROSE_DEFENSE :: DS-DEF-11	25	safety 25	100%	0%	0%	0%	0%	safety: the granary reeve
+src/generators/economy/incomeLineSiblings.js :: ENTREPOT_PLAIN_LINE	24	trade 24	96%	0%	4%	0%	0%	trade: the tanner
+src/generators/economy/incomeLineSiblings.js :: GRAIN_SURPLUS_LINE	23	food 23	100%	0%	0%	0%	0%	food: the miller
+src/generators/narrative/foundingRowAdmits.js :: ORIGIN_AGENT_KINDS	18	food 17, trade 1	100%	0%	0%	0%	0%	trade: the master tanner; food: the boat-headman
+src/generators/narrativeText.js :: famineFoodIsPower	16	food 16	19%	81%	0%	0%	0%	food: the dairy farmer
+src/domain/display/guardLineUnderTheLaw.js :: SIEGE_ORDER_FRAME	14	food 12, house 2	79%	21%	0%	0%	0%	food: the salt master; house: the garrison commander
+src/generators/safetyLineTruth.js :: NO_DOMINANT_TWIN	13	safety 13	100%	0%	0%	0%	0%	safety: the granary reeve
+src/domain/display/guardLineUnderTheLaw.js :: QUARREL_UNDER_COLLAPSE	12	safety 12	0%	8%	0%	92%	92%	safety: the bowyer
+src/generators/safetyLineTruth.js :: MONSTER_THREAT_NO_DRILL	12	safety 12	92%	0%	0%	8%	8%	safety: the militia captain
+src/generators/economy/incomeLineSiblings.js :: GRAIN_OWN_FIELDS_LINE	11	food 11	100%	0%	0%	0%	0%	food: the miller
+src/generators/economy/foodBalance.js :: NO_FOOD_BY_TRADE_HOOK	11	food 11	100%	0%	0%	0%	0%	food: the head shepherd
+src/data/dossierStateProse/general.generated.js :: DOSSIER_STATE_PROSE_GENERAL :: DS-GEN-9	10	trade 10	60%	0%	40%	0%	0%	trade: the wildfowler
+src/domain/display/incomeOrdinaryLines.js :: TIMBER_PLAIN_LINE	10	trade 10	100%	0%	0%	0%	0%	trade: the innkeeper
+src/data/stressPowerFaces.js :: STRESS_POWER_FACES	9	general 8, faith 1	11%	0%	0%	89%	0%	faith: the dean
+src/generators/power/conflictIssues.js :: STRESS_ISSUES	9	outsiders 5, power 4	100%	0%	0%	0%	0%	outsiders: the coaching-inn keeper; power: the master weaver
+src/generators/density/applyDensityLaw.js :: RIVAL_DESC_OF_HOST	8	safety 4, trade 3, general 1	88%	0%	0%	13%	0%	safety: the garrison commander; trade: the luxury merchant
+src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS	8	food 8	100%	0%	0%	0%	0%	food: the granary reeve
+src/domain/dossier/faithReading.js :: QUIET_OBSERVANCES_LINE	7	general 7	0%	0%	0%	100%	0%	
+src/generators/power/governingStressVignettes.js :: buildInsurgencyNarrative	7	general 7	0%	0%	0%	100%	0%	
+src/generators/power/settlementNarrative.js :: genSuccessionNarr	7	power 5, house 2	71%	29%	0%	0%	0%	power: the dairy farmer; house: the senior craft-guild master
+src/generators/power/militaryForceLine.js :: MERCHANTS_OF_LITTLE_WEIGHT_LARGE	7	trade 7	100%	0%	0%	0%	0%	trade: the master tanner
+src/generators/safetyLineTruth.js :: NO_WATCH_OCCUPIED	4	safety 4	0%	100%	0%	0%	0%	safety: the occupying governor
+src/generators/economy/incomeLineSiblings.js :: TIMBER_MANAGED_LINE	4	trade 4	25%	0%	75%	0%	0%	trade: the carpenter
+src/generators/stressNarrative.js :: WARTIME_SACRIFICE_ISOLATED	4	rule 4	50%	50%	0%	0%	0%	rule: the steward
+src/data/powerSiblings.js :: FACTION_DESC_SIBLINGS	4	trade 4	100%	0%	0%	0%	0%	trade: the master weaver
+src/generators/economy/incomeLineSiblings.js :: ALCHEMY_UNDER_SIEGE_LINE	3	general 3	0%	0%	0%	100%	0%	
+src/generators/stressNarrative.js :: RELIGIOUS_CONVERSION_VARIANTS	2	faith 2	100%	0%	0%	0%	0%	faith: the dean
+src/domain/dossier/hookLines.js :: JURISDICTION_LINES	2	power 2	100%	0%	0%	0%	0%	power: the dean
+src/domain/dossier/hookLines.js :: PEOPLE_LINES	2	power 2	100%	0%	0%	0%	0%	power: the dean
+src/domain/dossier/faithReading.js :: quietOf	2	general 2	0%	0%	0%	100%	0%	
+src/generators/power/claimStanding.js :: ARCANE_WITHOUT_PRACTITIONERS	2	general 2	0%	0%	0%	100%	0%	
+src/domain/dossier/hookLines.js :: REVENUE_LINES	1	house 1	0%	100%	0%	0%	0%	house: the exchange master
+src/generators/safetyLineTruth.js :: RELIGIOUS_FRAUD_NO_CHURCH	1	faith 1	0%	100%	0%	0%	0%	faith: the alewife
+src/generators/narrative/foundingRowAdmits.js :: FOUNDING_REASON_ADMITS	1	house 1	0%	100%	0%	0%	0%	house: the boat-headman
+src/domain/worldPulse/warHomeCosts.js :: applyHomeWarCosts	1	rule 1	100%	0%	0%	0%	0%	rule: the chief magistrate

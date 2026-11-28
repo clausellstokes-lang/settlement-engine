@@ -1,0 +1,482 @@
+home (path :: symbol [:: table key])	lines	lines printed (C,V,surfaces)	SUMMARY	FACT	STREET	OTHER	STREET gated (declares a need/exclude)	STREET colour	STREET printed	max pages one line C/900	max pages one line V/900	max pages surfaces	authored angles	views printed on	barred area
+src/domain/crisis/crisisSummaryVantage.js :: CRISIS_SUMMARY_POOLS	256	110	0	135	121	0	0	121	47	17	11	24		Systems/Defense, Tonight/sheet	
+src/data/dailyLife/outsiderImpressions.js :: OUTSIDER_IMPRESSIONS	96	73	1	19	76	0	21	55	56	103	81	155		World/Daily Life, PDF/daily life	
+src/data/dailyLife/unspokenTopics.js :: UNSPOKEN_TOPICS	78	78	1	12	65	0	4	61	65	28	35	59		World/Daily Life, PDF/daily life	
+src/data/dossierStateProse/stressors.generated.js :: DOSSIER_STATE_PROSE_STRESSORS :: DS-CND-1	288	59	6	125	58	99	18	40	24	13	12	23	ledger 6, visitor 5, local 65, trade 25, traveller 11, counterforce 3, unfolding 5, official 43, watch 10, newcomer 5, street 4, elder 3, threshold 1	Summary/Overview, PDF/state prose	
+src/data/dossierStateProse/defense.generated.js :: DOSSIER_STATE_PROSE_DEFENSE :: DS-DEF-3	121	73	9	49	48	15	32	16	33	78	63	141	street 35, visitor 26, ledger 33, counterforce 2, threshold 2, unfolding 3	Systems/Defense, PDF/state prose	
+src/data/cultureProfiles.js :: CULTURE_PROFILES	198	44	0	152	45	1	13	32	3	98	86	0		Systems/Economics, Summary/Overview	
+src/generators/safetyProfile.js :: generateSafetyProfile	184	96	1	124	43	16	1	42	25	255	202	36		Systems/Defense, Systems/Economics, Summary/Plot Hooks, Tonight/sheet, Session/hooks	
+src/generators/narrativeText.js :: POLITICAL_FLAVOR	83	67	9	29	42	3	0	42	34	55	64	0		Summary/Overview, World/History	
+src/data/dailyLife/recentChanges.js :: RECENT_CHANGES	155	55	1	113	41	0	4	37	18	91	92	177		World/Daily Life, PDF/daily life	
+src/generators/narrativeText.js :: PRESSURE_ROWS	113	82	2	62	41	8	12	29	33	14	14	0		Summary/Overview	
+src/data/dossierStateProse/general.generated.js :: DOSSIER_STATE_PROSE_GENERAL :: DS-GEN-9	81	1	2	39	34	6	8	26	1	7	3	8	elder 20, ledger 19, street 20, visitor 8, counterforce 4, unfolding 3	Summary/Overview, PDF/state prose	
+src/data/dailyLife/gatheringPlaces.js :: GATHERING_NAMED	33	33	0	1	32	0	32	0	32	42	44	81		World/Daily Life, PDF/daily life	
+src/data/dossierStateProse/stressors.generated.js :: DOSSIER_STATE_PROSE_STRESSORS :: DS-STR-1	117	3	4	77	30	6	14	16	0	4	4	8	visitor 31, ledger 25, street 31, unfolding 9, trade 1, official 4, counterforce 7, threshold 1, local 1	Summary/Overview, PDF/state prose	
+src/data/dailyLife/commonerResentments.js :: COMMONER_RESENTMENTS	32	31	0	2	30	0	21	9	29	34	46	74		World/Daily Life, PDF/daily life	
+src/data/dossierStateProse/defense.generated.js :: DOSSIER_STATE_PROSE_DEFENSE :: DS-DEF-2	195	104	40	94	29	32	16	13	22	127	120	238	ledger 51, street 43, unfolding 18, visitor 24, counterforce 8, threshold 2	Systems/Defense, PDF/state prose	
+src/data/historyData.js :: HISTORICAL_EVENTS_DATA	293	239	1	189	26	77	1	25	26	172	193	362		World/History, Summary/Overview, Session/hooks, Summary/Plot Hooks, Tonight/sheet	
+src/data/dailyLife/foodCulture.js :: FOOD_CULTURE	57	45	2	29	26	0	11	15	19	96	90	164		World/Daily Life, PDF/daily life	
+src/data/dailyLife/childWarnings.js :: CHILD_WARNINGS	68	54	0	15	25	28	18	7	25	57	50	98		World/Daily Life, PDF/daily life	
+src/data/dossierStateProse/economy.generated.js :: DOSSIER_STATE_PROSE_ECONOMY :: DS-ECO-12	100	44	2	48	24	26	21	3	17	162	135	297	ledger 21, street 16, threshold 6, visitor 11, counterforce 8, unfolding 5	Systems/Economics, PDF/state prose	
+src/data/dossierStateProse/power.generated.js :: DOSSIER_STATE_PROSE_POWER :: DS-POW-5	70	28	1	45	24	0	13	11	11	269	224	493	ledger 16, street 20, unfolding 8, visitor 7, counterforce 14, threshold 1, watch 1	Systems/Power, PDF/state prose	
+src/generators/power/conflictIssues.js :: BASE_ISSUES	139	125	0	78	23	38	0	23	23	55	50	101		Summary/Overview, Systems/Power, World/Relationships, Session/hooks, Summary/Plot Hooks, Tonight/sheet	
+src/data/powerSiblings.js :: BASELINE_CONFLICT_SIBLINGS	36	9	0	16	20	0	15	5	6	30	67	48		Summary/Overview, Systems/Power, Tonight/sheet	
+src/data/dossierStateProse/defense.generated.js :: DOSSIER_STATE_PROSE_DEFENSE :: DS-DEF-8	81	58	35	17	19	10	12	7	15	111	100	211	ledger 22, street 27, unfolding 19, visitor 2	Systems/Defense, PDF/state prose	
+src/generators/power/governanceNarrative.js :: deriveBaselineConflict	36	13	0	17	19	0	0	19	6	25	43	21		Systems/Power, Summary/Overview, Tonight/sheet	
+src/data/dailyLife/gatheringPlaces.js :: GATHERING_PLAIN	20	19	0	2	18	0	18	0	17	19	20	34		World/Daily Life, PDF/daily life	
+src/data/people/dealingLines.js :: NPC_DEALING_LINES	70	57	0	53	17	0	0	17	14	95	81	0		World/NPCs	
+src/data/dailyLife/dawnWork.js :: DAWN_WORK	63	58	0	46	17	0	14	3	15	61	36	85		World/Daily Life, PDF/daily life	
+src/data/dossierStateProse/general.generated.js :: DOSSIER_STATE_PROSE_GENERAL :: DS-GEN-13	57	34	0	34	17	6	17	0	10	107	106	213	street 13, ledger 15, visitor 11, elder 1, counterforce 3, threshold 6, unfolding 1	Summary/Overview, PDF/state prose	
+src/data/narrativeData.js :: STRESS_DESCS	109	80	6	87	16	0	1	15	13	22	18	3		Summary/Overview, PDF/state prose	
+src/data/dossierStateProse/defense.generated.js :: DOSSIER_STATE_PROSE_DEFENSE :: DS-DEF-6	95	3	17	36	15	27	5	10	0	0	23	23	ledger 22, street 18, counterforce 10, unfolding 11, threshold 1, visitor 5	Systems/Defense, PDF/state prose	
+src/data/dossierStateProse/economy.generated.js :: DOSSIER_STATE_PROSE_ECONOMY :: DS-ECO-9	85	36	18	46	15	6	14	1	10	164	138	302	ledger 30, street 22, visitor 5, threshold 3, counterforce 2, unfolding 8	Systems/Economics, PDF/state prose	
+src/data/narrativeData.js :: STRESS_NOTES	45	42	2	28	15	0	0	15	14	18	14	0		World/History	
+src/data/dossierStateProse/defense.generated.js :: DOSSIER_STATE_PROSE_DEFENSE :: DS-DEF-5	96	82	28	46	14	8	9	5	13	187	135	322	visitor 16, ledger 25, street 26, counterforce 7, threshold 5, unfolding 6	Systems/Defense, PDF/state prose	
+src/data/safetyDescLines.js :: TINY_MODERATE	16	15	0	3	13	0	2	11	12	19	17	0		Systems/Defense	
+src/data/dailyLife/commonerResentmentsDm.js :: COMMONER_RESENTMENTS_DM	13	12	0	0	13	0	7	6	12	18	57	0		World/Daily Life	
+src/generators/safetyProfile.js :: SAFETY_LINE_SIBLINGS	65	13	0	53	12	0	0	12	4	256	151	0		Systems/Defense	
+src/generators/narrative/foundingRowAdmits.js :: FOUNDING_REASON_ADMITS	46	6	0	27	12	7	0	12	1	5	16	0		World/History	
+src/data/dossierStateProse/warFaith.generated.js :: DOSSIER_STATE_PROSE_WAR_FAITH :: DS-FTH-4	27	15	0	15	12	0	10	2	9	0	16	16	unfolding 1, street 4, counterforce 1, elder 1, ledger 3, visitor 1, watch 4, local 7, newcomer 3, official 1	World/Faith, PDF/state prose	
+src/data/dossierStateProse/economy.generated.js :: DOSSIER_STATE_PROSE_ECONOMY :: DS-ECO-11	94	25	1	66	11	16	6	5	5	164	164	165	visitor 17, ledger 21, street 21, counterforce 6, threshold 5, unfolding 5	Systems/Resources, PDF/state prose	
+src/data/dossierStateProse/economy.generated.js :: DOSSIER_STATE_PROSE_ECONOMY :: DS-ECO-6	40	21	0	21	11	8	11	0	7	23	42	352	ledger 9, street 11, visitor 5, unfolding 1, canonical 2, counterforce 1	Systems/Economics, PDF/state prose	
+src/domain/display/guardLineUnderTheLaw.js :: GUARD_LAW_SIBLINGS	19	11	0	8	11	0	0	11	7	95	73	0		Systems/Defense	
+src/generators/stressNarrative.js :: RENDERERS	26	19	0	13	10	3	0	10	9	29	34	54		Summary/Crisis, PDF/crisis, Tonight/sheet	
+src/data/safetyDescLines.js :: MIXED_CORNERS	13	13	0	3	10	0	2	8	10	37	28	0		Systems/Defense	
+src/data/dossierStateProse/power.generated.js :: DOSSIER_STATE_PROSE_POWER :: DS-POW-4	50	17	1	26	9	14	2	7	4	85	92	177	ledger 11, street 10, counterforce 4, unfolding 4, visitor 3, threshold 2, elder 1	Systems/Power, PDF/state prose	
+src/generators/power/settlementNarrative.js :: genSuccessionNarr	34	5	0	21	9	4	0	9	1	0	37	37		Summary/Overview, Tonight/sheet	
+src/data/dossierStateProse/economy.generated.js :: DOSSIER_STATE_PROSE_ECONOMY :: DS-ECO-8	56	37	17	28	8	3	8	0	5	167	75	241	street 11, visitor 10, ledger 12, local 2, official 1, trade 2, newcomer 1, counterforce 1, threshold 2, unfolding 4	World/Daily Life, PDF/state prose	
+src/data/dossierStateProse/defense.generated.js :: DOSSIER_STATE_PROSE_DEFENSE :: DS-DEF-1	54	25	20	11	8	15	6	2	5	105	82	187	visitor 8, ledger 12, street 10, counterforce 5, threshold 2, unfolding 1	Systems/Defense, PDF/state prose	
+src/data/dossierStateProse/defense.generated.js :: DOSSIER_STATE_PROSE_DEFENSE :: DS-DEF-4	46	27	5	31	8	2	8	0	4	132	127	259	street 13, ledger 14, visitor 5, counterforce 2, unfolding 9	Systems/Defense, PDF/state prose	
+src/data/dossierStateProse/economy.generated.js :: DOSSIER_STATE_PROSE_ECONOMY :: DS-SUP-3	39	8	0	19	8	12	2	6	1	19	32	51	ledger 8, visitor 6, street 7, threshold 2, unfolding 3	Systems/Services, PDF/state prose	
+src/data/safetyDescLines.js :: MIXED_FORCE	36	32	0	26	8	2	4	4	7	24	23	0		Systems/Defense	
+src/data/dossierStateProse/general.generated.js :: DOSSIER_STATE_PROSE_GENERAL :: DS-GEN-17	23	8	3	12	8	0	4	4	1	88	71	159	ledger 3, visitor 6, street 3, elder 1, counterforce 1, traveller 2, local 2, newcomer 2, official 2	Summary/Overview, PDF/state prose	
+src/generators/economy/foodBalance.js :: deriveSupplyRiskAnalysis	14	8	1	4	8	1	0	8	6	87	48	130		Summary/Plot Hooks, Tonight/sheet, Session/hooks	
+src/data/dossierStateProse/power.generated.js :: DOSSIER_STATE_PROSE_POWER :: DS-POW-6	87	48	7	45	7	28	5	2	7	106	82	188	ledger 23, street 14, visitor 4, threshold 1, unfolding 7, counterforce 7	Systems/Power, PDF/state prose	
+src/domain/resourceSemantics.js :: RESOURCE_SEMANTICS	66	21	0	33	7	26	0	7	6	60	43	0		Systems/Economics	
+src/data/historyDescVariants.js :: HISTORY_DESC_VARIANTS	58	47	2	49	7	0	0	7	6	159	170	49		World/History, Summary/Overview, Session/hooks	
+src/generators/economy/viability.js :: generatePowerDynamics	44	14	1	26	7	10	0	7	1	0	49	0		Systems/Outlook	
+src/data/dossierStateProse/defense.generated.js :: DOSSIER_STATE_PROSE_DEFENSE :: DS-DEF-9	27	16	2	14	7	4	1	6	5	98	84	180	ledger 8, street 6, unfolding 3, visitor 3, counterforce 1, threshold 1	Systems/Magic, PDF/state prose	
+src/data/stressTypesMeta.js :: STRESS_TYPE_META	18	1	1	9	7	1	0	7	1	18	19	37		Summary/Crisis, PDF/crisis	
+src/data/cultureProfiles.js :: CULTURE_LINE_SIBLINGS	76	17	0	67	6	3	5	1	3	16	12	0		Summary/Overview	
+src/generators/economy/economicState.js :: generateEconomicState	48	27	0	36	6	6	0	6	4	450	450	0		Systems/Economics, Systems/Services	
+src/data/dossierStateProse/general.generated.js :: DOSSIER_STATE_PROSE_GENERAL :: DS-GEN-11	31	5	2	15	6	8	0	6	2	29	28	57	ledger 6, visitor 6, street 5, counterforce 2, threshold 3	Systems/Outlook, PDF/state prose	
+src/data/dossierStateProse/defense.generated.js :: DOSSIER_STATE_PROSE_DEFENSE :: DS-DEF-12	25	11	6	13	6	0	4	2	4	0	17	17	ledger 8, unfolding 1, street 8, visitor 7	Systems/Outlook, PDF/state prose	
+src/generators/power/governanceNarrative.js :: buildStressNarratives	19	16	1	12	6	0	0	6	5	23	27	0		Systems/Power	
+src/domain/dossier/faithReading.js :: observanceOf	12	9	0	4	6	2	0	6	6	861	230	1050		World/Faith, PDF/state prose	
+src/generators/structuralValidator.js :: checkStructuralValidity	47	2	1	38	5	3	0	5	0	0	49	0		Systems/Defense	
+src/data/dossierStateProse/general.generated.js :: DOSSIER_STATE_PROSE_GENERAL :: DS-GEN-16	32	15	0	27	5	0	0	5	1	157	156	279	street 11, unfolding 1, visitor 3, elder 5, ledger 10, counterforce 1	World/History, PDF/state prose	
+src/generators/narrative/foundingRowAdmits.js :: ORIGIN_AGENT_KINDS	21	4	0	15	5	1	0	5	2	2	27	0		World/History	
+src/components/new/tabs/EconomicsTab.jsx :: shortWords	10	6	4	1	5	0	0	5	3	30	187	0		Systems/Economics	
+src/generators/narrativeGenerator.js :: generatePressureSentence	7	3	0	2	5	0	2	3	3	43	8	50		Summary/Overview, Tonight/sheet	
+src/generators/density/applyDensityLaw.js :: RIVAL_DESC_OF_HOST	6	4	0	1	5	0	0	5	3	7	19	0		Systems/Power	
+src/generators/power/governingStressVignettes.js :: buildMigrationNarrative	6	5	0	1	5	0	0	5	4	18	11	0		Systems/Power	
+src/generators/power/rulingStructure.js :: generatePowerStructure	112	59	0	108	4	0	0	4	1	117	107	0		Systems/Power, Summary/Overview	
+src/generators/economy/foodBalance.js :: deriveFoodBalanceAnalysis	59	12	2	26	4	27	0	4	2	59	78	45		Systems/Outlook, Summary/Overview, World/History, Session/hooks, Summary/Plot Hooks, Tonight/sheet	
+src/domain/crisis/crisisCast.js :: CAST_REASONS	42	27	2	21	4	15	0	4	4	74	70	144		Summary/Crisis, PDF/crisis, Summary/Plot Hooks, Tonight/sheet, Session/hooks	
+src/data/dossierStateProse/economy.generated.js :: DOSSIER_STATE_PROSE_ECONOMY :: DS-ECO-1	35	23	12	16	4	3	3	1	4	386	206	592	visitor 6, ledger 8, street 5, counterforce 2, threshold 2, unfolding 1	Systems/Economics, PDF/state prose	
+src/data/dossierStateProse/economy.generated.js :: DOSSIER_STATE_PROSE_ECONOMY :: DS-SUP-2	30	6	0	26	4	0	2	2	1	37	34	70	ledger 8, street 7, visitor 5, threshold 3, unfolding 3, counterforce 1	Systems/Economics, PDF/state prose	
+src/data/dossierStateProse/general.generated.js :: DOSSIER_STATE_PROSE_GENERAL :: DS-GEN-18	23	16	0	19	4	0	2	2	3	140	106	246	unfolding 3, ledger 4, street 4, visitor 4, counterforce 2, threshold 1, trade 2, local 1, newcomer 1	Systems/Economics, PDF/state prose	
+src/data/stressPowerFaces.js :: STRESS_POWER_FACES	20	6	0	13	4	3	0	4	3	7	3	0		Systems/Power	
+src/data/dossierStateProse/general.generated.js :: DOSSIER_STATE_PROSE_GENERAL :: DS-GEN-14	13	9	0	9	4	0	0	4	2	151	151	302	ledger 2, visitor 2, street 2, elder 2, traveller 1, local 1, newcomer 1, official 1	World/History, PDF/state prose	
+src/data/powerSiblings.js :: CRISIS_BODY_SIBLINGS	12	4	0	8	4	0	3	1	1	19	13	0		Systems/Power	
+src/domain/dossier/hookLines.js :: PEOPLE_LINES	5	3	0	1	4	0	0	4	2	1	1	1		Summary/Plot Hooks, Session/hooks	
+src/data/safetyDescLines.js :: UNSAFE_ADVICE	4	4	0	0	4	0	4	0	4	12	6	0		Systems/Defense	
+src/domain/display/guardLineUnderTheLaw.js :: FAMILIES_UNHELD	4	2	0	0	4	0	0	4	2	24	20	0		Systems/Defense	
+src/data/powerSiblings.js :: GOV_DESC_OF_UNNAMED_SEAT	6	4	0	3	3	0	0	3	1	53	38	0		Systems/Power	
+src/domain/dossier/hookLines.js :: REVENUE_LINES	5	1	0	2	3	0	0	3	1	1	0	1		Summary/Plot Hooks, Session/hooks	
+src/generators/narrativeGenerator.js :: SMALL_PLACE_TIER_LINES	5	5	0	2	3	0	0	3	3	63	63	0		Summary/Overview	
+src/data/fortuneLastingLines.js :: FORTUNE_LASTING_LINES	4	4	0	1	3	0	0	3	3	25	17	0		Systems/Power	
+src/domain/dossier/faithReading.js :: faithLinesOf	4	3	0	1	3	0	0	3	3	273	250	523		World/Faith, PDF/state prose	
+src/generators/safetyProfile.js :: SMUGGLING_HOOKS	4	2	0	1	3	0	0	3	2	75	65	140		Summary/Plot Hooks, Session/hooks	
+src/data/fortuneMeritLines.js :: FORTUNE_MERIT_LINES	3	3	0	0	3	0	0	3	3	14	19	0		Systems/Power	
+src/generators/power/stressFactions.js :: applyStressEventFactions	57	37	0	52	2	3	0	2	0	28	24	0		Systems/Power	
+src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS	55	40	6	47	2	0	0	2	1	319	125	0		Summary/Overview	
+src/data/dossierStateProse/economy.generated.js :: DOSSIER_STATE_PROSE_ECONOMY :: DS-ECO-10	41	19	2	37	2	0	1	1	0	173	109	279	ledger 12, visitor 10, street 8, threshold 3, trade 1, local 1, newcomer 1, unfolding 2	Systems/Economics, PDF/state prose	
+src/components/home/landingFixture.js :: fixture	33	1	0	18	2	13	0	2	0	0	42	32		Summary/Overview, Systems/Power, Tonight/sheet	
+src/domain/worldPulse/warHomeCosts.js :: applyHomeWarCosts	30	1	0	22	2	6	0	2	1	0	1	0		World/Relationships	yes
+src/generators/power/governanceNarrative.js :: applyStressStability	13	12	0	1	2	10	0	2	2	37	34	0		Summary/Overview, Systems/Power	
+src/data/powerSiblings.js :: FACTION_DESC_SIBLINGS	8	4	0	6	2	0	0	2	1	262	136	0		Systems/Power	
+src/generators/narrativeGenerator.js :: genCoherence	6	2	1	3	2	0	0	2	0	7	11	0		Summary/Overview	
+src/generators/power/governingStressVignettes.js :: buildWartimeNarrative	6	3	0	4	2	0	0	2	1	37	26	0		Systems/Power	
+src/domain/dossier/hookLines.js :: JURISDICTION_LINES	5	4	0	3	2	0	0	2	2	1	1	2		Summary/Plot Hooks, Session/hooks, Tonight/sheet	
+src/domain/dossier/hookLines.js :: PROPERTY_LINES	5	1	0	3	2	0	0	2	0	1	1	2		Summary/Plot Hooks, Session/hooks	
+src/generators/power/governanceNarrative.js :: buildBetrayalNarrative	5	4	0	2	2	1	0	2	2	18	15	0		Systems/Power	
+src/domain/dossier/faithReading.js :: quietOf	4	2	0	2	2	0	0	2	1	10	35	45		World/Faith, PDF/state prose	
+src/generators/safetyLineTruth.js :: SMUGGLING_HOOK_SIEGE_TWINS	4	3	0	2	2	0	1	1	2	66	50	116		Summary/Plot Hooks, Session/hooks	
+src/generators/stressNarrative.js :: MIGRATION_HOOK_BY_DIRECTION	2	1	0	0	2	0	0	2	1	18	19	37		Summary/Crisis, PDF/crisis	
+src/domain/worldPulse/eventProse.js :: UPSWING_NEWS	39	1	0	31	1	7	0	1	0	0	2	0		Summary/Overview	yes
+src/data/stressTypes.js :: STRESS_TYPE_MAP	30	24	1	27	1	1	0	1	1	37	34	68		Summary/Crisis, PDF/crisis, Summary/Plot Hooks, Tonight/sheet, Session/hooks	
+src/data/dossierStateProse/defense.generated.js :: DOSSIER_STATE_PROSE_DEFENSE :: DS-DEF-11	26	23	13	12	1	0	1	0	1	163	189	271	ledger 11, street 4, visitor 5, elder 1, unfolding 3, counterforce 1	Systems/Defense, PDF/state prose	
+src/generators/power/claimStanding.js :: CLAIM_RUNGS	26	17	0	25	1	0	0	1	0	58	76	0		Systems/Power	
+src/generators/servicesGenerator.js :: generateAvailableServices	23	20	0	22	1	0	0	1	0	289	189	0		Systems/Services	
+src/domain/display/defenseDisplay.js :: deriveSupportingCapabilities	19	9	0	18	1	0	0	1	1	485	500	0		Systems/Defense	
+src/generators/power/conflictIssues.js :: STRESS_ISSUES	19	12	0	7	1	11	0	1	1	1	2	3		Summary/Overview, World/Relationships, Session/hooks, Summary/Plot Hooks, Systems/Power, Tonight/sheet	
+src/generators/power/settlementNarrative.js :: TIE_GLOSS	18	13	0	9	1	8	0	1	0	46	25	23		Summary/Overview, Tonight/sheet	
+src/generators/structuralValidator.js :: checkInstCompat	16	10	0	15	1	0	0	1	1	59	54	0		Summary/Overview	
+src/domain/dossier/hookLines.js :: STANDING_LINES	6	1	0	5	1	0	0	1	0	0	1	1		Summary/Plot Hooks, Session/hooks	
+src/generators/stressNarrative.js :: RELIGIOUS_CONVERSION_VARIANTS	6	6	0	3	1	2	0	1	1	7	5	12		Summary/Crisis, PDF/crisis	
+src/generators/power/governingStressVignettes.js :: buildInsurgencyNarrative	5	5	0	4	1	0	0	1	1	15	20	0		Systems/Power	
+src/generators/narrativeText.js :: famineFoodIsPower	4	3	0	2	1	1	0	1	1	4	15	0		Summary/Overview	
+src/domain/display/validationOnPage.js :: resourceGapLines	3	3	0	2	1	0	0	1	1	144	198	0		Systems/Resources	
+src/generators/stressNarrative.js :: STRESS_SUMMARY_SIBLINGS	3	3	0	2	1	0	1	0	1	29	25	54		Summary/Crisis, PDF/crisis	
+src/generators/stressNarrative.js :: WARTIME_VARIANTS	3	3	0	2	1	0	0	1	1	29	29	58		Summary/Crisis, PDF/crisis	
+src/domain/crisis/crisisSummaryVantage.js :: NO_GRAIN_TWINS	2	1	0	1	1	0	0	1	1	0	0	9		Tonight/sheet	
+src/domain/dailyLife.js :: deriveChildWarnings	2	1	0	0	1	1	0	1	1	44	50	94		World/Daily Life, PDF/daily life	
+src/domain/display/guardLineUnderTheLaw.js :: SIEGE_ORDER_FRAME	2	1	0	0	1	1	0	1	1	4	10	0		Systems/Defense	
+src/domain/summary/settlementQuickGuide.js :: SCOPE_LINE_FRAMES	2	1	0	1	1	0	0	1	1	83	86	0		Summary/Overview	
+src/generators/power/claimStanding.js :: ARCANE_WITHOUT_PRACTITIONERS	2	1	0	1	1	0	0	1	1	0	2	0		Systems/Power	
+src/data/inlandDescriptions.js :: AUCTION	1	1	0	0	1	0	0	1	1	177	93	0		Systems/Institutions	
+src/data/powerSiblings.js :: REEVE_ANSWERS_TO_ELECTORS	1	1	0	0	1	0	0	1	1	17	18	0		Systems/Power	
+src/domain/display/guardLineUnderTheLaw.js :: QUARREL_UNDER_COLLAPSE	1	1	0	0	1	0	0	1	1	3	9	0		Systems/Defense	
+src/domain/display/incomeOrdinaryLines.js :: LOCAL_COAL_LINE	1	1	0	0	1	0	0	1	1	44	38	0		Systems/Economics	
+src/domain/display/incomeOrdinaryLines.js :: LOCAL_ORE_LINE	1	1	0	0	1	0	0	1	1	119	97	0		Systems/Economics	
+src/domain/display/incomeOrdinaryLines.js :: TIMBER_PLAIN_LINE	1	1	0	0	1	0	0	1	1	0	10	0		Systems/Economics	
+src/domain/display/incomeOrdinaryLines.js :: TIMBER_SAWN_LINE	1	1	0	0	1	0	0	1	1	0	28	0		Systems/Economics	
+src/domain/dossier/faithReading.js :: QUIET_OBSERVANCES_LINE	1	1	0	0	1	0	0	1	1	3	4	7		World/Faith, PDF/state prose	
+src/generators/density/applyDensityLaw.js :: A_SECOND_WATCH	1	1	0	0	1	0	0	1	1	95	78	0		Systems/Power	
+src/generators/economy/foodBalance.js :: NO_FOOD_BY_TRADE_HOOK	1	1	0	0	1	0	0	1	1	0	11	11		Summary/Plot Hooks, Tonight/sheet, Session/hooks	
+src/generators/economy/foodBalance.js :: OCCUPIERS_EAT_NOTE	1	1	0	0	1	0	0	1	1	12	9	14		Summary/Overview, Systems/Outlook, World/History, Session/hooks	
+src/generators/economy/foodBalance.js :: NEWCOMERS_EAT_NOTE	1	1	0	0	1	0	0	1	1	18	19	22		Summary/Overview, Systems/Outlook, World/History, Session/hooks	
+src/generators/economy/incomeLineSiblings.js :: GRAIN_SURPLUS_LINE	1	1	0	0	1	0	0	1	1	22	1	0		Systems/Economics	
+src/generators/economy/incomeLineSiblings.js :: GRAIN_OWN_FIELDS_LINE	1	1	0	0	1	0	0	1	1	4	7	0		Systems/Economics	
+src/generators/economy/incomeLineSiblings.js :: ALCHEMIST_SUPPLEMENTS_LINE	1	1	0	0	1	0	0	1	1	6	53	0		Systems/Economics	
+src/generators/economy/incomeLineSiblings.js :: ALCHEMY_UNDER_SIEGE_LINE	1	1	0	0	1	0	0	1	1	2	1	0		Systems/Economics	
+src/generators/economy/incomeLineSiblings.js :: WOOL_LOCAL_LINE	1	1	0	0	1	0	0	1	1	62	44	0		Systems/Economics	
+src/generators/economy/incomeLineSiblings.js :: WOOL_LOCAL_WORKED_LINE	1	1	0	0	1	0	0	1	1	27	28	0		Systems/Economics	
+src/generators/economy/incomeLineSiblings.js :: ENTREPOT_PLAIN_LINE	1	1	0	0	1	0	0	1	1	0	24	0		Systems/Economics	
+src/generators/economy/incomeLineSiblings.js :: QUARRY_LINE	1	1	0	0	1	0	0	1	1	87	64	0		Systems/Economics	
+src/generators/economy/incomeLineSiblings.js :: TIMBER_LINE	1	1	0	0	1	0	0	1	1	108	40	0		Systems/Economics	
+src/generators/economy/incomeLineSiblings.js :: TIMBER_MANAGED_LINE	1	1	0	0	1	0	0	1	1	0	4	0		Systems/Economics	
+src/generators/economy/incomeLineSiblings.js :: OWN_HARVEST_LINE	1	1	0	0	1	0	0	1	1	409	420	0		Systems/Economics	
+src/generators/power/claimStanding.js :: MERCHANTS_AT_MARGINS	1	1	0	0	1	0	0	1	1	9	21	0		Systems/Power	
+src/generators/power/claimStanding.js :: ARCANE_ADVISORY	1	1	0	0	1	0	0	1	1	210	142	0		Systems/Power	
+src/generators/power/militaryForceLine.js :: MERCHANTS_OF_LITTLE_WEIGHT_LARGE	1	1	0	0	1	0	0	1	1	0	7	0		Systems/Power	
+src/generators/safetyLineTruth.js :: THEFT_NETWORK_DESC	1	1	0	0	1	0	0	1	1	0	49	0		Systems/Defense	
+src/generators/safetyLineTruth.js :: NO_WATCH_OCCUPIED	1	1	0	0	1	0	1	0	1	2	2	0		Systems/Defense	
+src/generators/safetyLineTruth.js :: NO_DOMINANT	1	1	0	0	1	0	0	1	1	12	24	0		Systems/Defense	
+src/generators/safetyLineTruth.js :: NO_DOMINANT_TWIN	1	1	0	0	1	0	0	1	1	4	9	0		Systems/Defense	
+src/generators/safetyLineTruth.js :: MONSTER_THREAT_NO_DRILL	1	1	0	0	1	0	0	1	1	0	12	0		Systems/Defense	
+src/generators/safetyLineTruth.js :: RELIGIOUS_FRAUD_NO_CHURCH	1	1	0	0	1	0	0	1	1	0	1	0		Systems/Defense	
+src/generators/safetyProfile.js :: DEBT_EVASION_DESC	1	1	0	0	1	0	0	1	1	16	9	0		Systems/Defense	
+src/generators/safetyProfile.js :: DEBT_EVASION_NO_NETWORK_DESC	1	1	0	0	1	0	0	1	1	9	20	0		Systems/Defense	
+src/generators/servicesGenerator.js :: PAY_A_LOCAL_STRONGMAN_A_NEIGHBOR_OR_A_GANG_FOR_SOME_MEASURE_OF_SAFETY_NO_CONTRACTS_NO_GUARANTEES	1	1	0	0	1	0	0	1	1	11	29	0		Systems/Services	
+src/generators/stressNarrative.js :: WARTIME_SACRIFICE_ISOLATED	1	1	0	0	1	0	0	1	1	0	4	4		Summary/Crisis, PDF/crisis	
+src/data/people/titleSecretsPresentations.js :: ROWS	1768	749	0	0	0	1768	0	0	0	221	202	3		World/NPCs, Tonight/sheet	
+src/data/institutionServices.js :: INSTITUTION_SERVICES	984	484	1	832	0	151	0	0	0	450	450	0		Systems/Services	
+src/data/institutionDescVariants.js :: PAIRS	664	167	6	658	0	0	0	0	0	129	109	0		Systems/Institutions, Systems/Defense	
+src/data/people/goalFamilies.js :: GOAL_FAMILY_LINES	528	257	0	0	0	528	0	0	0	465	444	269		World/NPCs, Tonight/sheet, Systems/Power, PDF/state prose	
+src/data/institutionDescColour.js :: DESC_VARIANT_COLOUR_DECLARATIONS	481	470	5	476	0	0	0	0	0	292	191	0		Systems/Institutions, Systems/Defense	
+src/data/institutionalCatalog.js :: INSTITUTION_FAMILIES	388	267	2	360	0	26	0	0	0	156	147	0		Systems/Institutions, Systems/Defense	
+src/data/arrivalProse.js :: ARRIVAL_SENSES	385	131	0	0	0	385	0	0	0	38	25	0		Summary/Overview	
+src/data/npcData.js :: STRESS_ECONOMIC_EFFECTS	326	296	0	0	0	326	0	0	0	471	461	26		World/Relationships, Summary/Overview, Tonight/sheet	
+src/generators/npcStructure.js :: (module)	228	112	0	0	0	228	0	0	0	100	78	0		World/NPCs	
+src/data/institutionDescVariants.js :: DESC_VARIANT_SIBLINGS	220	57	0	220	0	0	0	0	0	139	112	0		Systems/Institutions, Systems/Defense	
+src/data/stressInstitutionEffects.js :: STRESS_INSTITUTION_EFFECTS	200	77	0	0	0	200	0	0	0	24	21	14		World/NPCs, Tonight/sheet	
+src/data/personHooksByTitle.js :: PERSON_HOOKS_BY_TITLE	183	58	0	0	0	183	0	0	0	32	20	50		Summary/Plot Hooks, Session/hooks	
+src/data/npcData.js :: NPC_FACTION_LOYALTY	174	174	0	0	0	174	0	0	0	467	451	918		Summary/Plot Hooks, Session/hooks, Tonight/sheet	
+src/data/institutionDescVariants.js :: DESC_LATE_SIBLINGS	162	32	7	145	0	10	0	0	0	131	121	0		Systems/Institutions	
+src/data/npcData.js :: NPC_CRIMINAL_SECRETS_BY_HOLDER	124	62	0	0	0	124	0	0	0	295	292	8		World/NPCs, Tonight/sheet	
+src/data/people/goalSecretRefusals.js :: GOAL_SECRET_REFUSAL_ROWS	121	107	0	0	0	121	0	0	0	164	152	17		World/NPCs, Tonight/sheet	
+src/generators/demandProfile.js :: FACTION_DEMAND	120	5	0	0	0	120	0	0	0	8	5	1		Systems/Economics, PDF/state prose	
+src/data/historyData.js :: HISTORY_DESC_SIBLINGS	111	19	0	98	0	13	0	0	0	130	145	56		World/History, Summary/Overview, Session/hooks, Summary/Plot Hooks	
+src/data/rareSecrets.js :: RARE_NATURES	108	50	0	0	0	108	0	0	0	5	4	1		World/NPCs, Tonight/sheet	
+src/data/arrivalProse.js :: ARRIVAL_PEOPLE	100	82	0	0	0	100	0	0	0	24	20	0		Summary/Overview	
+src/data/rareSecrets.js :: RARE_DEEDS	93	42	0	0	0	93	0	0	0	6	5	0		World/NPCs	
+src/data/rareSecrets.js :: RARE_TIES	83	36	0	0	0	83	0	0	0	7	7	1		World/NPCs, Tonight/sheet	
+src/data/npcStructureVariants.js :: CONSTRAINT_VARIANTS	78	76	0	0	0	78	0	0	0	86	58	0		World/NPCs	
+src/generators/narrativeGenerator.js :: genArrivalDetail	75	17	0	0	0	75	0	0	0	265	193	0		World/History	
+src/data/institutionServices.js :: SERVICE_DESC_SIBLINGS	72	14	0	68	0	4	0	0	0	159	119	0		Systems/Services	
+src/data/people/handlerTieLines.js :: HANDLER_TIE_LINES	70	56	0	0	0	70	0	0	0	169	140	0		World/Relationships, World/NPCs	
+src/data/economicData.js :: TRADE_DEPENDENCY_NEEDS	65	4	0	8	0	57	0	0	0	300	300	18		Systems/Services, Systems/Power, Systems/Economics, World/NPCs, Summary/Crisis, PDF/crisis, Systems/Defense	
+src/data/troubleHooks.js :: TROUBLE_HOOKS	65	63	0	0	0	65	0	0	0	66	83	146		Summary/Plot Hooks, Tonight/sheet, Session/hooks	
+src/data/npcStructureVariants.js :: POSITION_VARIANTS	59	59	0	0	0	59	0	0	0	107	82	0		World/NPCs	
+src/data/rareSecrets.js :: RARE_OUTSIDERS	51	12	0	0	0	51	0	0	0	2	2	0		World/NPCs	
+src/data/narrativeData.js :: ARRIVAL_SCENES	50	44	0	0	0	50	0	0	0	59	31	0		Summary/Overview	
+src/data/narrativeData.js :: TERRAIN_NARRATIVE_HOOKS	48	41	0	0	0	48	0	0	0	293	70	0		World/History	
+src/data/npcData.js :: NPC_DEALING_BY_TRAIT	48	48	0	0	0	48	0	0	0	257	251	0		World/NPCs	
+src/data/rareSecrets.js :: RARE_MASTERS	48	4	0	0	0	48	0	0	0	7	4	1		World/NPCs, Tonight/sheet	
+src/data/resourceData.js :: RESOURCE_DATA	45	4	1	39	0	5	0	0	0	167	114	0		Systems/Resources, Systems/Economics	
+src/data/faceHonorifics.js :: FACE_HONORIFICS	41	16	0	0	0	41	0	0	0	450	450	867		World/Relationships, Systems/Institutions, Systems/Power, World/NPCs, World/Traditions, Session/hooks, Tonight/sheet	
+src/data/people/goalFamilies.js :: GOAL_RESERVE_LINES	41	10	0	0	0	41	0	0	0	297	262	10		World/NPCs, Tonight/sheet	
+src/data/arrivalProse.js :: ARRIVAL_MEMORIES	39	33	0	0	0	39	0	0	0	18	20	0		Summary/Overview	
+src/copy/deityAuthoring.js :: deityAuthoring	34	1	0	0	0	34	0	0	0	900	900	0		Systems/Power	
+src/domain/crisis/crisisCast.js :: STAKE_REASONS	34	26	0	20	0	14	0	0	0	243	222	465		Summary/Crisis, PDF/crisis, Summary/Plot Hooks, Tonight/sheet, Session/hooks	
+src/data/supplyChainData.js :: SUPPLY_CHAIN_NEEDS	33	12	0	23	0	10	0	0	0	163	202	0		Systems/Economics	
+src/generators/power/factionStanding.js :: annotateFactionStanding	32	28	0	31	0	1	0	0	0	339	234	0		Systems/Power	
+src/data/traditionDescriptionTable.js :: ELEMENT_GLOSS	31	20	0	2	0	29	0	0	0	83	99	0		World/Traditions	
+src/data/arrivalProse.js :: ARRIVAL_TENSIONS	29	23	0	0	0	29	0	0	0	12	22	0		Summary/Overview	
+src/data/geographyData.js :: TERRAIN_DATA	29	1	0	11	0	18	0	0	0	0	14	0		Systems/Economics	
+src/domain/display/governanceAccount.js :: governanceAccountOf	28	19	0	28	0	0	0	0	0	77	46	0		Systems/Power	
+src/domain/display/dossierViewModel.js :: deriveViability	27	22	7	18	0	2	0	0	0	124	122	0		Systems/Outlook	
+src/domain/facts/founder.js :: FOUNDER_KIND	26	26	0	24	0	2	0	0	0	75	55	0		World/Traditions, World/History	
+src/domain/summary/settlementQuickGuide.js :: scopeAgainstRecord	25	3	0	3	0	22	0	0	0	53	69	0		Summary/Overview	
+src/generators/factionDynamics.js :: computeFactionRelationships	25	17	0	23	0	2	0	0	0	370	136	0		Systems/Power	
+src/domain/crisis/crisisCast.js :: RAISED_BY_CRISIS	24	1	0	15	0	9	0	0	0	1	7	0		Systems/Power	
+src/data/traditionDescriptionTable.js :: ACT_LEADS	22	17	0	0	0	22	0	0	0	91	91	0		World/Traditions	
+src/generators/historyGenerator.js :: generateRelationshipEvent	22	8	0	0	0	22	0	0	0	44	34	78		Summary/Plot Hooks, Session/hooks	
+src/generators/npcGenerator.js :: STRESS_GOAL_OVERRIDES	22	11	0	0	0	22	0	0	0	11	14	8		World/NPCs, Tonight/sheet	
+src/data/people/dmPowerLines.js :: CAPTURE_LINES	20	8	0	0	0	20	0	0	0	685	641	0		Systems/Power	
+src/data/crisisDependence.js :: SERVICE_DEPENDENCE	18	11	0	0	0	18	0	0	0	450	450	1		Systems/Services, Systems/Institutions, Systems/Economics, PDF/state prose	
+src/data/finishedGoodsCategory.js :: INSTITUTION_FINISHED_GOODS_DEMAND	18	13	0	4	0	14	0	0	0	41	48	16		Systems/Economics, PDF/state prose	
+src/data/npcData.js :: NPC_PRESENTATION_MODES	18	7	0	0	0	18	0	0	0	120	115	0		World/NPCs	
+src/data/seatHolderLines.js :: SEAT_HOLDER_LINES	18	15	0	18	0	0	0	0	0	94	80	0		Systems/Power	
+src/data/traditionDescriptionTable.js :: KEEPER_FRAMES_TOO	18	3	0	18	0	0	0	0	0	6	4	0		World/Traditions	
+src/domain/facts/magicSource.js :: MAGIC_NOTE_TRADITION	16	9	0	5	0	11	0	0	0	3	5	0		Systems/Economics, Systems/Magic	
+src/domain/region/goodsCatalog.js :: GOOD_CATALOG	16	2	0	0	0	16	0	0	0	9	5	0		Systems/Economics	
+src/domain/summary/settlementQuickGuide.js :: scopeAgainstRule	16	5	0	1	0	15	0	0	0	20	31	0		Summary/Overview	
+src/data/institutionServiceKeys.generated.js :: INSTITUTION_SERVICE_KEYS	15	1	0	0	0	15	0	0	0	150	150	0		Systems/Institutions, Systems/Services, Systems/Power	
+src/data/traditionDescriptionTable.js :: HOUSE_FRAMES	15	9	0	15	0	0	0	0	0	195	208	0		World/Traditions	
+src/data/institutionBacking.js :: ROWS	14	3	0	0	0	14	0	0	0	209	202	0		Systems/Institutions, Systems/Services, Systems/Economics, Systems/Power, World/NPCs, World/Traditions	
+src/domain/crisis/crisisCast.js :: CAST_ABSENCES	14	8	0	4	0	10	0	0	0	27	28	51		Summary/Crisis, PDF/crisis	
+src/domain/summary/settlementQuickGuide.js :: scopeAtSize	14	8	0	4	0	10	0	0	0	40	33	0		Summary/Overview	
+src/generators/power/factionStanding.js :: LADDER	14	9	0	12	0	2	0	0	0	298	222	0		Systems/Power	
+src/domain/display/governanceAccount.js :: standingSentence	13	6	0	13	0	0	0	0	0	96	94	0		Systems/Power	
+src/domain/dossier/powerSupport.js :: ALIGNED_BASIS	13	8	0	0	0	13	0	0	0	538	531	0		Systems/Power	
+src/domain/summary/tonightSheet.js :: CAST_WANTS	13	2	0	0	0	13	0	0	0	0	0	44		Tonight/sheet	
+src/domain/crisis/crisisPage.js :: CRISIS_PAGE_COPY	12	7	0	1	0	11	0	0	0	293	287	0		Summary/Crisis	
+src/generators/npcGenerator.js :: NPC_GOAL_SIBLINGS	12	2	0	12	0	0	0	0	0	6	4	5		World/NPCs, Tonight/sheet	
+src/data/safetyDescLines.js :: MIXED_OPENING	11	11	2	9	0	0	0	0	0	41	43	0		Systems/Defense	
+src/domain/crisis/crisisHooks.js :: CRISIS_HOOK_SLOTS	11	4	0	0	0	11	0	0	0	5	4	9		Summary/Crisis, PDF/crisis	
+src/domain/display/defenseDisplay.js :: criminalOpNote	11	9	0	11	0	0	0	0	0	288	249	0		Systems/Defense	
+src/domain/summary/settlementQuickGuide.js :: SCOPE_PHRASE	11	7	0	11	0	0	0	0	0	48	51	0		Summary/Overview	
+src/components/new/tabs/EconomicsTab.jsx :: foodSentence	10	6	0	6	0	4	0	0	0	465	296	0		Systems/Economics	
+src/domain/dossier/plotHooks.js :: ECHO_PREFIXES	10	1	0	0	0	10	0	0	0	12	14	26		Summary/Plot Hooks, Tonight/sheet, Session/hooks	
+src/domain/foodways.js :: FRAMES	10	7	0	10	0	0	0	0	0	79	82	0		Systems/Economics	
+src/domain/people/allegiance.js :: leaveAllegianceReceipts	10	2	0	7	0	3	0	0	0	254	205	0		Systems/Power	
+src/copy/sectionHelp.js :: SECTION_HELP	9	8	0	0	0	9	0	0	0	900	900	0		Summary/Overview, Summary/Foundations, Systems/Institutions, Systems/Services, Systems/Economics, Systems/Power, World/NPCs	
+src/data/officeTitles.js :: OFFICE_TITLES	9	5	0	0	0	9	0	0	0	59	47	107		Systems/Institutions, Systems/Power, World/Relationships, Tonight/sheet, Session/hooks, World/NPCs	
+src/data/safetyDescLines.js :: MODERATE_WALLS	9	9	0	9	0	0	0	0	0	51	37	0		Systems/Defense	
+src/data/traditionDescriptionTable.js :: CAUSE_FRAMES	9	3	0	9	0	0	0	0	0	34	33	0		World/Traditions	
+src/domain/display/chainNeedShown.js :: chainNeedLine	9	4	0	7	0	2	0	0	0	433	425	0		Systems/Economics	
+src/generators/power/conflicts.js :: buildConflictPlotHooks	9	4	0	6	0	3	0	0	0	15	53	67		Summary/Plot Hooks, Session/hooks, Tonight/sheet	
+src/components/new/tabs/EconomicsTab.jsx :: EconomicsTab	8	4	0	0	0	8	0	0	0	5	124	62		Systems/Economics, PDF/state prose	
+src/data/npcData.js :: NPC_HOOK_SIBLINGS	8	1	0	0	0	8	0	0	0	178	124	302		Summary/Plot Hooks, Session/hooks, Tonight/sheet	
+src/domain/crisis/crisisCast.js :: CAST_REASON_SIBLINGS	8	2	0	0	0	8	0	0	0	1	5	6		Summary/Crisis, PDF/crisis, Summary/Plot Hooks, Tonight/sheet, Session/hooks	
+src/domain/display/labelBands.js :: COMPLEXITY_LABEL	8	7	0	2	0	6	0	0	0	300	250	0		Systems/Economics	
+src/domain/foodways.js :: SOURCE_PHRASES	8	8	0	1	0	7	0	0	0	63	38	0		Systems/Economics	
+src/generators/computeActiveChains.js :: INSTITUTIONAL_SERVICE_MAP	8	5	0	0	0	8	0	0	0	271	240	0		Systems/Economics	
+src/generators/npcGenerator.js :: generateCrimeLevel	8	4	0	0	0	8	0	0	0	536	530	10		World/NPCs, Tonight/sheet	
+src/generators/power/claimStanding.js :: SEAT_WORDS	8	3	0	8	0	0	0	0	0	86	9	0		Systems/Power	
+src/components/new/tabs/EconomicsTab.jsx :: GROWN_BANDS	7	6	0	0	0	7	0	0	0	10	46	0		Systems/Economics	
+src/data/people/dmPowerLines.js :: PATRONAGE_LINES	7	6	0	0	0	7	0	0	0	356	274	0		Systems/Power	
+src/data/traditionDescriptionTable.js :: ECONOMY_FRAMES	7	5	0	7	0	0	0	0	0	214	155	0		World/Traditions	
+src/domain/display/cardStandingRead.js :: powerWeightHere	7	5	0	0	0	7	0	0	0	326	299	0		World/NPCs	
+src/domain/display/magicProvisionShown.js :: foodNoteAsWorded	7	5	0	3	0	4	0	0	0	41	20	0		Systems/Economics, Systems/Magic	
+src/domain/summary/settlementQuickGuide.js :: scopeAgainstRoster	7	4	0	0	0	7	0	0	0	35	36	0		Summary/Overview	
+src/generators/economy/outlookHookSiblings.js :: OUTLOOK_HOOK_SIBLINGS	7	4	0	0	0	7	0	0	0	120	34	154		Summary/Plot Hooks, Session/hooks, Tonight/sheet	
+src/generators/power/governingStressVignettes.js :: buildReligiousConversionNarrative	7	5	0	7	0	0	0	0	0	7	5	0		Systems/Power	
+src/generators/safetyProfile.js :: STANDARD_PATROL	7	4	0	5	0	2	0	0	0	129	82	0		Systems/Defense	
+src/data/historyData.js :: LEGITIMACY_HELD_TWINS	6	2	0	6	0	0	0	0	0	5	20	25		Summary/Overview, World/History, Session/hooks, Summary/Plot Hooks, Tonight/sheet	
+src/domain/display/defenseDisplay.js :: foodEnduranceLine	6	2	0	5	0	1	0	0	0	877	885	0		Systems/Defense	
+src/domain/people/patronage.js :: HANDLER_TIE_WORDS	6	5	0	0	0	6	0	0	0	47	42	0		Systems/Power	
+src/generators/economy/outlookHookSiblings.js :: PEACE_IRON_HOOKS	6	3	0	0	0	6	0	0	0	21	9	25		Summary/Plot Hooks, Session/hooks	
+src/generators/npcGenerator.js :: SIEGE_GOALS	6	3	0	5	0	1	0	0	0	16	10	8		World/NPCs, Tonight/sheet	
+src/generators/power/governanceNarrative.js :: deriveBaselineStability	6	5	0	0	0	6	0	0	0	0	47	0		Summary/Overview, Systems/Power	
+src/generators/priorityHelpers.js :: evaluateWaterDependency	6	1	0	6	0	0	0	0	0	0	1	0		Systems/Outlook	
+src/generators/safetyLineTruth.js :: CRIME_WAVE_TWINS	6	5	0	6	0	0	0	0	0	23	52	0		Systems/Defense, Systems/Economics	
+src/pdf/primitives/StateProse.jsx :: SCREEN_KICKER	6	1	0	0	0	6	0	0	0	900	900	0		Systems/Defense	
+src/domain/crisis/crisisHooks.js :: LINE_ROLE_CLAUSE	5	5	0	0	0	5	0	0	0	21	28	78		Summary/Plot Hooks, Tonight/sheet, Session/hooks	
+src/domain/display/crisisStoppedRow.js :: MARK_LINES	5	5	0	0	0	5	0	0	0	23	27	0		Systems/Institutions, Systems/Services, World/NPCs, Systems/Economics, Systems/Defense	
+src/domain/display/governanceAccount.js :: OCCUPIED_SEAT	5	3	0	5	0	0	0	0	0	5	6	0		Systems/Power	
+src/domain/display/magicProvisionShown.js :: NOT_FOOD_NOTES	5	4	0	3	0	2	0	0	0	24	43	0		Systems/Economics, Systems/Magic	
+src/domain/summary/tonightSheet.js :: foodStoresWords	5	1	0	0	0	5	0	0	0	7	6	13		Summary/Crisis, Systems/Economics, PDF/crisis, Tonight/sheet	
+src/generators/economy/foodBalance.js :: plagueFoodNote	5	5	0	5	0	0	0	0	0	11	5	11		Systems/Outlook, Summary/Overview, World/History, Session/hooks	
+src/generators/economy/incomeLineSiblings.js :: HOUSE_OF_WORK_LINES	5	5	0	5	0	0	0	0	0	4	2	0		Systems/Economics	
+src/generators/economy/viability.js :: generateEconomicViability	5	2	0	3	0	2	0	0	0	0	6	4		Summary/Overview, Systems/Outlook, World/History, Session/hooks	
+src/generators/factionDynamics.js :: govCriminalRelation	5	4	0	5	0	0	0	0	0	27	59	0		Systems/Power	
+src/generators/narrativeGenerator.js :: generateSettlementReason	5	2	0	5	0	0	0	0	0	150	150	0		Summary/Overview	
+src/generators/safetyLineTruth.js :: patrolTwin	5	4	0	5	0	0	0	0	0	7	5	0		Systems/Defense	
+src/components/new/tabs/PowerTab.jsx :: PowerTab	4	2	0	0	0	4	0	0	0	816	834	0		Systems/Power	
+src/data/crisisDependence.js :: SERVICE_DEPENDENCE_BY_DESC	4	4	0	3	0	1	0	0	0	182	178	0		Systems/Services	
+src/data/foodwaysPrintSiblings.js :: FOODWAYS_PRINT_SIBLINGS	4	3	0	4	0	0	0	0	0	6	4	0		Systems/Economics	
+src/data/npcData.js :: NPC_PLOT_HOOKS_DATA	4	4	0	0	0	4	0	0	0	94	82	0		World/NPCs	
+src/data/people/dmPowerLines.js :: askerLine	4	3	0	0	0	4	0	0	0	322	212	0		Systems/Power	
+src/data/people/dmPowerLines.js :: boostWords	4	2	0	0	0	4	0	0	0	361	282	0		Systems/Power	
+src/data/people/dmPowerLines.js :: CAPTURE_RUNG_LABELS	4	1	0	0	0	4	0	0	0	810	736	0		Systems/Power	
+src/data/revenueHomes.js :: REVENUE_HOMES	4	2	0	4	0	0	0	0	0	0	17	0		Systems/Economics	
+src/data/safetyDescLines.js :: UNSAFE_OPENING	4	4	0	4	0	0	0	0	0	11	6	0		Systems/Defense	
+src/data/safetyDescLines.js :: UNSAFE_GARRISON	4	4	0	4	0	0	0	0	0	11	7	0		Systems/Defense	
+src/data/stressTypes.js :: STRESS_TYPE_SIBLINGS	4	4	0	4	0	0	0	0	0	6	23	27		Summary/Crisis, PDF/crisis	
+src/data/traditionDescriptionTable.js :: POWER_FRAMES	4	2	0	4	0	0	0	0	0	275	332	0		World/Traditions	
+src/domain/coherence/pageCensusFindings.js :: F4_TESTS	4	1	0	0	0	4	0	0	0	115	96	0		Systems/Economics	
+src/domain/display/governanceAccount.js :: FRACTURE_BLOCS	4	2	0	4	0	0	0	0	0	28	24	0		Systems/Power	
+src/domain/display/guardLineUnderTheLaw.js :: FOOTHOLD_BY_KEY	4	2	0	4	0	0	0	0	0	0	3	0		Systems/Defense	
+src/domain/display/outputInWords.js :: outputInWords	4	4	0	4	0	0	0	0	0	397	370	0		Systems/Economics	
+src/domain/display/safetyShown.js :: LAW_CLAUSE	4	2	0	0	0	4	0	0	0	17	40	0		Summary/Overview, Systems/Defense	
+src/domain/dossier/faithReading.js :: factionLine	4	4	0	4	0	0	0	0	0	293	296	513		Systems/Power, World/Faith, PDF/state prose	
+src/generators/factionDynamics.js :: criminalMilitaryRelation	4	4	0	4	0	0	0	0	0	25	24	0		Systems/Power	
+src/generators/factionDynamics.js :: MERCHANT_CRAFT_VOTE	4	3	0	3	0	1	0	0	0	58	94	0		Systems/Power	
+src/generators/narrativeText.js :: POLITICAL_FLAVOR_SIBLINGS	4	1	0	4	0	0	0	0	0	0	1	0		Summary/Overview, World/History	
+src/generators/npcStructure.js :: LOW_STANDING_TWIN	4	2	0	0	0	4	0	0	0	1	2	0		World/NPCs	
+src/generators/safetyLineTruth.js :: payTruth	4	1	0	2	0	2	0	0	0	1	37	0		Systems/Defense	
+src/generators/safetyLineTruth.js :: patrolTruth	4	1	0	2	0	2	0	0	0	5	56	0		Systems/Defense	
+src/generators/safetyProfile.js :: COURT_AND_PRISON	4	1	0	4	0	0	0	0	0	77	78	0		Systems/Defense	
+src/components/new/npcComponents.jsx :: NPCInlineCard	3	1	0	0	0	3	0	0	0	749	739	0		World/NPCs	
+src/components/new/tabs/DefenseTab.jsx :: DefenseTab	3	3	0	0	0	3	0	0	0	900	900	0		Systems/Defense	
+src/components/new/tabs/MagicTab.jsx :: MagicTab	3	1	0	0	0	3	0	0	0	900	900	0		Systems/Magic	
+src/components/new/tabs/RumorsTab.jsx :: RumorsTab	3	2	0	0	0	3	0	0	0	900	900	0		World/Rumors & News	
+src/components/new/tabs/TraditionsTab.jsx :: TraditionsTab	3	1	0	0	0	3	0	0	0	57	47	0		World/Traditions	
+src/components/new/tabs/WhoRunsThisTownPanel.jsx :: WhoRunsThisTownPanel	3	2	0	0	0	3	0	0	0	900	900	0		Systems/Power	
+src/components/new/tabs/power/PowerStrata.jsx :: ThePowers	3	3	0	0	0	3	0	0	0	900	900	0		Systems/Power	
+src/components/settlement/eventComposer/EventComposerDeityField.jsx :: UpsellOrEmpty	3	1	0	0	0	3	0	0	0	900	900	0		Systems/Power	
+src/data/historyData.js :: livelihoodLead	3	1	0	3	0	0	0	0	0	4	17	21		Summary/Overview, World/History, Session/hooks	
+src/data/informationBrokerageTuning.js :: RUMOR_SOURCE_INSTITUTIONS	3	2	0	0	0	3	0	0	0	129	130	0		Systems/Services, Systems/Power, World/NPCs	
+src/data/people/dmPowerLines.js :: rulingHeadOf	3	2	0	0	0	3	0	0	0	647	646	0		Systems/Power	
+src/data/people/powerSentenceName.js :: PROSE_FORMS	3	3	0	0	0	3	0	0	0	1	1	1		Systems/Power, World/NPCs, PDF/crisis, Session/hooks	
+src/data/people/titleSecretsPresentations.js :: TITLE_LINE_TWINS	3	1	0	0	0	3	0	0	0	0	18	0		World/NPCs	
+src/data/safetyDescLines.js :: UNSAFE_WALLS	3	3	0	3	0	0	0	0	0	16	6	0		Systems/Defense	
+src/domain/display/defenseDisplay.js :: CRIM_STRUCTURE_DATA	3	3	0	3	0	0	0	0	0	197	139	0		Systems/Defense	
+src/domain/display/defenseDisplay.js :: ORGANIZED_RING_NOTES	3	3	0	3	0	0	0	0	0	32	32	0		Systems/Defense	
+src/domain/display/defenseDisplay.js :: headedPowerAmongRivals	3	1	0	2	0	1	0	0	0	12	33	0		Systems/Defense	
+src/domain/dossier/powerStrata.js :: rulingChainOf	3	1	0	2	0	1	0	0	0	28	20	0		Systems/Power	
+src/domain/facts/supplyStory.js :: VENTURE_WORDS	3	2	0	3	0	0	0	0	0	9	12	0		Systems/Resources	
+src/domain/summary/settlementQuickGuide.js :: INLAND_SCOPE_PHRASE	3	1	0	3	0	0	0	0	0	85	44	0		Summary/Overview	
+src/domain/summary/storesSpanWords.js :: storesSpanWords	3	2	0	0	0	3	0	0	0	284	225	509		Summary/Crisis, Systems/Economics, PDF/crisis, Tonight/sheet	
+src/generators/economy/foodBalance.js :: siegeStoresNote	3	2	0	3	0	0	0	0	0	20	12	0		Systems/Outlook	
+src/generators/factionDynamics.js :: withConflictRelations	3	2	0	2	0	1	0	0	0	185	70	0		Systems/Power	
+src/generators/isolationGenerator.js :: MAINTAINER_DESC	3	1	0	3	0	0	0	0	0	0	8	0		Systems/Institutions, Systems/Defense	
+src/generators/narrative/settlementOriginProse.js :: CHANNEL_OF_PATH	3	2	0	0	0	3	0	0	0	0	5	0		Summary/Overview	
+src/generators/power/claimStanding.js :: SEAT_UNDER_CRISIS	3	3	0	3	0	0	0	0	0	208	132	0		Systems/Power	
+src/generators/safetyLineTruth.js :: paperTruth	3	2	0	3	0	0	0	0	0	0	54	0		Systems/Defense	
+src/generators/safetyProfile.js :: COURT_NO_PRISON	3	3	0	3	0	0	0	0	0	45	38	0		Systems/Defense	
+src/components/new/tabs/DailyLifeTab.jsx :: DailyLifeTab	2	1	0	0	0	2	0	0	0	900	900	0		Systems/Power, World/Daily Life	
+src/components/new/tabs/RelationshipsTab.jsx :: RelationshipsTab	2	1	0	0	0	2	0	0	0	151	161	0		World/Relationships	
+src/components/new/tabs/ServicesTab.jsx :: ServicesTab	2	1	0	0	0	2	0	0	0	49	82	0		Systems/Services	
+src/components/new/tabs/SubstrateTab.jsx :: SubstrateTab	2	1	0	0	0	2	0	0	0	900	900	0		Summary/Foundations	
+src/components/new/tabs/power/PowerStrata.jsx :: seatListTitle	2	1	0	0	0	2	0	0	0	632	611	0		Systems/Power	
+src/data/crisisDependence.js :: SIEGE_TWINS_ON_OFFER	2	2	0	2	0	0	0	0	0	5	3	0		Systems/Services	
+src/data/fishTradeTwinLines.js :: FISH_TRADE_TWIN_LINES	2	1	0	2	0	0	0	0	0	1	0	0		Systems/Institutions	
+src/data/holderTitleForms.js :: HOLDER_TITLE_FORMS	2	2	0	0	0	2	0	0	0	80	71	155		World/Relationships, Systems/Power, Session/hooks, Tonight/sheet	
+src/data/powerSiblings.js :: noGrazingQuarrelOf	2	1	0	2	0	0	0	0	0	49	35	51		Summary/Overview, Systems/Power, Tonight/sheet	
+src/data/traditionDescriptionTable.js :: ECONOMY_FIT	2	1	0	0	0	2	0	0	0	0	3	0		World/Traditions	
+src/domain/crimeSignal.js :: withoutCriminalGuild	2	1	0	1	0	1	0	0	0	11	9	0		World/NPCs	
+src/domain/crisis/crisisHooks.js :: leverSentence	2	2	0	0	0	2	0	0	0	27	49	76		Summary/Plot Hooks, Tonight/sheet, Session/hooks	
+src/domain/crisis/crisisSummaryVantage.js :: SIEGE_MOTION_TWINS	2	1	0	2	0	0	0	0	0	0	0	11		Tonight/sheet	
+src/domain/display/crisisStoppedRow.js :: ordinaryTimesLine	2	1	0	0	0	2	0	0	0	55	58	0		Systems/Institutions, Systems/Services, Systems/Economics	
+src/domain/display/defenseDisplay.js :: NO_SEAT_RING_NOTE	2	2	0	2	0	0	0	0	0	58	41	0		Systems/Defense	
+src/domain/display/guardLineUnderTheLaw.js :: OLDEST_UNHELD	2	1	0	0	0	2	0	0	0	11	21	0		Systems/Defense	
+src/domain/display/institutionDisplayName.js :: INSTITUTION_DISPLAY_NAMES	2	1	0	0	0	2	0	0	0	287	259	0		Systems/Institutions, Systems/Services, Systems/Economics, Systems/Power, Systems/Magic	
+src/domain/display/magicMeasuresApart.js :: magicMeasuresApartLine	2	2	0	2	0	0	0	0	0	46	131	0		Summary/Overview	
+src/domain/display/safetyShown.js :: SEAT_CLAUSE	2	2	0	2	0	0	0	0	0	7	24	0		Summary/Overview, Systems/Defense	
+src/domain/display/stateProse/economyStateProse.js :: COMPLEXITY_NOUN	2	2	0	0	0	2	0	0	0	3	4	6		Systems/Economics, PDF/state prose	
+src/domain/facts/houseInputAtHand.js :: CHAIN_INPUTS	2	2	0	0	0	2	0	0	0	0	2	0		Systems/Resources	
+src/domain/facts/supplyStory.js :: ventureMarkText	2	2	0	2	0	0	0	0	0	9	12	0		Systems/Institutions, Systems/Services, World/NPCs, Systems/Economics	
+src/domain/people/seatKeeper.js :: seatKeeperLineOf	2	1	0	2	0	0	0	0	0	28	20	0		Systems/Power	
+src/domain/summary/tonightSheet.js :: castTail	2	1	0	0	0	2	0	0	0	0	0	101		Tonight/sheet	
+src/generators/factionDynamics.js :: boycottReadsRelation	2	2	0	2	0	0	0	0	0	326	65	132		Systems/Power, Summary/Overview, Tonight/sheet	
+src/generators/npc/factionLeaderSecret.js :: SAFE_SECRET_FALLBACK	2	1	0	0	0	2	0	0	0	1	0	0		World/NPCs	
+src/generators/power/claimStanding.js :: nobleMinorRung	2	2	0	2	0	0	0	0	0	51	29	0		Systems/Power	
+src/generators/power/claimStanding.js :: settleClaimsToLabel	2	2	0	0	0	2	0	0	0	0	10	0		Systems/Power	
+src/generators/power/factionStanding.js :: occupierStanding	2	1	0	2	0	0	0	0	0	1	9	0		Systems/Power	
+src/generators/power/governanceNarrative.js :: annotateMonsterThreat	2	2	0	0	0	2	0	0	0	0	70	0		Summary/Overview, Systems/Power	
+src/generators/resourceGenerator.js :: evaluateInstitutionDeps	2	2	0	1	0	1	0	0	0	143	197	0		Systems/Resources	
+src/generators/safetyLineTruth.js :: DESERTERS_UNFED	2	1	0	2	0	0	0	0	0	0	1	0		Systems/Defense	
+src/generators/safetyLineTruth.js :: gatesSmugglersLine	2	2	0	2	0	0	0	0	0	265	181	0		Systems/Defense	
+src/generators/steps/cascadePass.js :: MARITIME_INSTS	2	2	0	2	0	0	0	0	0	0	24	0		Systems/Institutions	
+src/components/new/tabs/EconomicsTab.jsx :: NeedsNotMet	1	1	0	0	0	1	0	0	0	861	715	0		Systems/Economics	
+src/components/new/tabs/InstitutionsTab.jsx :: InstitutionsTab	1	1	0	0	0	1	0	0	0	900	900	0		Systems/Institutions	
+src/components/new/tabs/ResourcesTab.jsx :: ResourcesTab	1	1	0	0	0	1	0	0	0	334	686	0		Systems/Resources	
+src/components/new/tabs/ViabilityTab.jsx :: FIRST_SURVEY_LABEL	1	1	0	0	0	1	0	0	0	900	900	0		Systems/Outlook	
+src/components/new/tabs/WarTab.jsx :: WarLaunchTeaser	1	1	0	0	0	1	0	0	0	900	900	0		World/War	
+src/components/new/tabs/power/PowerStrata.jsx :: TheWeb	1	1	0	0	0	1	0	0	0	623	579	0		Systems/Power	
+src/copy/sectionHelp.js :: SYSTEMS_HEALTH_VINTAGE	1	1	0	0	0	1	0	0	0	900	900	0		Summary/Overview	
+src/data/houseSentenceName.js :: HOUSE_PROSE_FORMS	1	1	0	0	0	1	0	0	0	0	76	0		Systems/Resources	
+src/data/inlandDescriptions.js :: INLAND_DESCRIPTIONS	1	1	0	1	0	0	0	0	0	21	11	0		Systems/Institutions	
+src/data/people/goalFamilies.js :: GOAL_LINE_MIN_MEMBERS	1	1	0	0	0	1	0	0	0	184	162	8		World/NPCs, Tonight/sheet	
+src/data/powerData.js :: FACTION_DESCRIPTORS	1	1	0	0	0	1	0	0	0	18	24	42		Systems/Power, World/NPCs, Summary/Overview, Summary/Plot Hooks, Session/hooks, PDF/crisis, Tonight/sheet	
+src/domain/coherence/crisisFactFindings.js :: ROLE_OF_LABEL	1	1	0	0	0	1	0	0	0	0	0	21		PDF/crisis, Tonight/sheet	
+src/domain/crimeSignal.js :: withTownsOwnUnderworld	1	1	0	0	0	1	0	0	0	57	29	0		World/NPCs	
+src/domain/crisis/crisisCast.js :: STAND_IN_ROLE	1	1	0	0	0	1	0	0	0	3	3	6		World/NPCs, Tonight/sheet	
+src/domain/crisis/crisisNoun.js :: CRISIS_NOUN	1	1	0	0	0	1	0	0	0	0	2	2		Summary/Plot Hooks, Tonight/sheet, Session/hooks	
+src/domain/defense/defenseFacts.js :: HELD_STORES_WORDS	1	1	0	0	0	1	0	0	0	1	2	3		Summary/Crisis, Systems/Economics, PDF/crisis, Tonight/sheet	
+src/domain/display/conditionWords.js :: conditionsSentence	1	1	0	1	0	0	0	0	0	293	287	0		Summary/Foundations	
+src/domain/display/crisisStoppedRow.js :: SUPPLIED_LINE	1	1	0	0	0	1	0	0	0	162	192	0		Systems/Institutions, Systems/Services, Systems/Economics	
+src/domain/display/crisisStoppedRow.js :: shortMarkText	1	1	0	0	0	1	0	0	0	9	9	0		Systems/Institutions, Systems/Services, World/NPCs, Systems/Economics	
+src/domain/display/defenseDisplay.js :: ARCANE_NONE	1	1	0	1	0	0	0	0	0	596	550	0		Systems/Defense	
+src/domain/display/defenseDisplay.js :: ARCANE_NONE_WITH_SERVICE	1	1	0	1	0	0	0	0	0	2	64	0		Systems/Defense	
+src/domain/display/defenseDisplay.js :: RING_AMONG_RIVAL_GANGS_NOTE	1	1	0	1	0	0	0	0	0	0	11	0		Systems/Defense	
+src/domain/display/guardLineUnderTheLaw.js :: COURT_AND_PRISON_UNDER_COLLAPSE	1	1	0	1	0	0	0	0	0	0	1	0		Systems/Defense	
+src/domain/display/guardLineUnderTheLaw.js :: MILITIA_TURNS_OUT	1	1	0	1	0	0	0	0	0	0	16	0		Systems/Defense	
+src/domain/display/guardLineUnderTheLaw.js :: DIFFUSE_NOTE_COORDINATED	1	1	0	1	0	0	0	0	0	5	2	0		Systems/Defense	
+src/domain/display/guardLineUnderTheLaw.js :: FUNDED_EMBATTLED_SHOWN	1	1	0	1	0	0	0	0	0	0	9	0		Systems/Defense	
+src/domain/display/guardLineUnderTheLaw.js :: FUNDED_EMBATTLED_VOLUNTEERS	1	1	0	1	0	0	0	0	0	0	18	0		Systems/Defense	
+src/domain/display/impairedListShown.js :: impairedListMarked	1	1	0	1	0	0	0	0	0	8	5	0		Systems/Outlook	
+src/domain/display/incomeOrdinaryLines.js :: CLOTH_SHORT_LINE	1	1	0	1	0	0	0	0	0	5	0	0		Systems/Economics	
+src/domain/display/incomeOrdinaryLines.js :: CLOTH_WORKED_LINE	1	1	0	1	0	0	0	0	0	292	268	0		Systems/Economics	
+src/domain/display/incomeOrdinaryLines.js :: IRON_IMPORTED_LINE	1	1	0	1	0	0	0	0	0	94	173	0		Systems/Economics	
+src/domain/display/incomeOrdinaryLines.js :: METAL_WORKED_LINE	1	1	0	1	0	0	0	0	0	134	103	0		Systems/Economics	
+src/domain/display/incomeOrdinaryLines.js :: METAL_SHORT_LINE	1	1	0	1	0	0	0	0	0	1	0	0		Systems/Economics	
+src/domain/display/magicMeasuresApart.js :: magicHeadlineScope	1	1	0	1	0	0	0	0	0	900	900	0		Systems/Magic	
+src/domain/display/magicProvisionShown.js :: religiousAcceptanceShown	1	1	0	0	0	1	0	0	0	198	196	0		Systems/Magic	
+src/domain/display/safetyShown.js :: WAVE_CLAUSE	1	1	0	1	0	0	0	0	0	82	83	0		Summary/Overview, Systems/Defense	
+src/domain/display/tradeListDisplay.js :: ONLY_FOOD_IMPORTED	1	1	0	1	0	0	0	0	0	0	10	0		Systems/Economics	
+src/domain/dossier/faithReading.js :: FAITH_YOURS_LINE	1	1	0	1	0	0	0	0	0	887	859	1746		World/Faith, PDF/state prose	
+src/domain/dossier/plotHooks.js :: collectPlotHooks	1	1	0	0	0	1	0	0	0	0	0	1305		Session/hooks	
+src/domain/dossier/powerStrata.js :: crisisNoteFor	1	1	0	1	0	0	0	0	0	4	10	0		Systems/Power	
+src/domain/dossier/powerSupport.js :: FOUNDED_BASIS	1	1	0	0	0	1	0	0	0	45	71	0		Systems/Power	
+src/domain/dossier/powerSupport.js :: DEFAULT_BASIS	1	1	0	1	0	0	0	0	0	410	450	0		Systems/Power	
+src/domain/foodways.js :: composeFoodwaysLine	1	1	0	1	0	0	0	0	0	244	197	0		Systems/Economics	
+src/domain/foodways.js :: FARMED_CLAUSE	1	1	0	1	0	0	0	0	0	1	7	0		Systems/Economics	
+src/domain/summary/settlementQuickGuide.js :: OCCUPIED_RULE	1	1	0	0	0	1	0	0	0	6	3	0		Summary/Overview	
+src/domain/summary/tonightSheet.js :: defenceFact	1	1	0	0	0	1	0	0	0	125	97	631		Summary/Crisis, PDF/crisis, Tonight/sheet	
+src/domain/traditions/shownTraditions.js :: calendarLineOf	1	1	0	1	0	0	0	0	0	39	46	0		World/Traditions	
+src/generators/economy/economicState.js :: POOR_ROAD_SUPPLY_LINE	1	1	0	1	0	0	0	0	0	0	6	0		Systems/Services	
+src/generators/economy/economicState.js :: ARCANE_INDUSTRY_LINE	1	1	0	1	0	0	0	0	0	156	93	0		Systems/Economics	
+src/generators/economy/foodBalance.js :: ESTABLISH_SEASONAL_ACCESS_PATRONAGE_OR_A_DEPENDABLE_TRADE_ROUTE	1	1	0	1	0	0	0	0	0	23	40	0		Systems/Outlook	
+src/generators/economy/foodBalance.js :: SIEGE_CUT	1	1	0	1	0	0	0	0	0	23	15	0		Systems/Outlook	
+src/generators/economy/incomeLineSiblings.js :: LOCAL_COAL_SOLD_LINE	1	1	0	1	0	0	0	0	0	2	2	0		Systems/Economics	
+src/generators/economy/incomeLineSiblings.js :: ALCHEMY_TRADE_LINE	1	1	0	1	0	0	0	0	0	105	77	0		Systems/Economics	
+src/generators/economy/incomeLineSiblings.js :: REMEDIES_LINE	1	1	0	1	0	0	0	0	0	298	234	0		Systems/Economics	
+src/generators/economy/incomeLineSiblings.js :: REMEDIES_SHORT_LINE	1	1	0	1	0	0	0	0	0	7	17	0		Systems/Economics	
+src/generators/economy/incomeLineSiblings.js :: GRAIN_BOUGHT_LINE	1	1	0	1	0	0	0	0	0	145	133	0		Systems/Economics	
+src/generators/economy/incomeLineSiblings.js :: WOOL_BOUGHT_LINE	1	1	0	1	0	0	0	0	0	0	14	0		Systems/Economics	
+src/generators/economy/incomeLineSiblings.js :: FISH_EXPORT_LINE	1	1	0	1	0	0	0	0	0	0	65	0		Systems/Economics	
+src/generators/economy/incomeLineSiblings.js :: FISH_LANDED_LINE	1	1	0	1	0	0	0	0	0	0	22	0		Systems/Economics	
+src/generators/economy/incomeLineSiblings.js :: FISH_SOLD_LINE	1	1	0	1	0	0	0	0	0	0	79	0		Systems/Economics	
+src/generators/economy/incomeLineSiblings.js :: FISH_BOUGHT_LINE	1	1	0	1	0	0	0	0	0	0	37	0		Systems/Economics	
+src/generators/economy/incomeLineSiblings.js :: ENTREPOT_LINE	1	1	0	1	0	0	0	0	0	0	70	0		Systems/Economics	
+src/generators/economy/incomeLineSiblings.js :: QUARRY_OWN_LINE	1	1	0	1	0	0	0	0	0	2	1	0		Systems/Economics	
+src/generators/economy/incomeLineSiblings.js :: TITHES_RENTS_PLAIN_LINE	1	1	0	1	0	0	0	0	0	0	20	0		Systems/Economics	
+src/generators/economy/outlookHookSiblings.js :: MODERATE_GAP_TWIN	1	1	0	0	0	1	0	0	0	28	107	135		Summary/Plot Hooks, Tonight/sheet, Session/hooks	
+src/generators/economy/outlookHookSiblings.js :: TIMBER_SHORT_HOOK	1	1	0	0	0	1	0	0	0	34	12	46		Summary/Plot Hooks, Session/hooks, Tonight/sheet	
+src/generators/economy/primaryTradeLists.js :: GRAIN_TOP_UP	1	1	0	0	0	1	0	0	0	9	4	0		Systems/Economics	
+src/generators/economy/tradeGoods.js :: generateTradeIncomeStreams	1	1	0	1	0	0	0	0	0	0	20	0		Systems/Economics	
+src/generators/historyGenerator.js :: TRADE_COLLAPSE_AT_FOUNDING	1	1	1	0	0	0	0	0	0	1	5	0		World/History	
+src/generators/narrative/historyCoherence.js :: stressProfileDrawn	1	1	0	0	0	1	0	0	0	8	10	0		Summary/Overview, World/History	
+src/generators/power/claimStanding.js :: CLERGY_AT_MARGINS	1	1	0	1	0	0	0	0	0	240	146	0		Systems/Power	
+src/generators/power/claimStanding.js :: CLERGY_WITH_WEIGHT	1	1	0	1	0	0	0	0	0	45	12	0		Systems/Power	
+src/generators/power/claimStanding.js :: LESSER_LANDED	1	1	0	1	0	0	0	0	0	89	47	0		Systems/Power	
+src/generators/power/claimStanding.js :: LOCAL_MERCHANTS	1	1	0	1	0	0	0	0	0	50	71	0		Systems/Power	
+src/generators/power/claimStanding.js :: LEADING_LOCAL_MERCHANTS	1	1	0	1	0	0	0	0	0	0	44	0		Systems/Power	
+src/generators/power/claimStanding.js :: ARCANE_ADVISORY_UNDER_ARCANE_SEAT	1	1	0	1	0	0	0	0	0	0	21	0		Systems/Power	
+src/generators/power/claimStanding.js :: CRIMINAL_IN_SHADOWS	1	1	0	1	0	0	0	0	0	0	18	0		Systems/Power	
+src/generators/power/claimStanding.js :: CRIMINAL_KEEPS_OUT_OF_SIGHT	1	1	0	1	0	0	0	0	0	0	5	0		Systems/Power	
+src/generators/power/claimStanding.js :: UNDERWORLD_CLAIM	1	1	0	1	0	0	0	0	0	0	7	0		Systems/Power	
+src/generators/power/claimStanding.js :: UNDERWORLD_UNDER_STRONGER_SEAT	1	1	0	1	0	0	0	0	0	0	6	0		Systems/Power	
+src/generators/power/claimStanding.js :: CRAFT_SECONDARY	1	1	0	1	0	0	0	0	0	0	118	0		Systems/Power	
+src/generators/power/claimStanding.js :: CRAFT_AT_MARGINS	1	1	0	1	0	0	0	0	0	91	52	0		Systems/Power	
+src/generators/power/conflicts.js :: UNPAID_GUARD_HOOK_PAID_TWIN	1	1	0	1	0	0	0	0	0	3	2	5		Summary/Plot Hooks, Tonight/sheet, Session/hooks	
+src/generators/power/factionStanding.js :: SEAT_CONTESTED_STANDING	1	1	0	1	0	0	0	0	0	0	14	0		Systems/Power	
+src/generators/power/governingStressVignettes.js :: OCCUPIED_SEAT	1	1	0	1	0	0	0	0	0	12	9	0		Systems/Power	
+src/generators/power/militaryForceLine.js :: NO_PATROL_LINE	1	1	1	0	0	0	0	0	0	28	8	0		Systems/Power	
+src/generators/power/militaryForceLine.js :: NO_FORCE_LINE	1	1	0	1	0	0	0	0	0	0	2	0		Systems/Power	
+src/generators/power/settlementNarrative.js :: TIE_GLOSS_NO_SHARED_TRADE	1	1	0	1	0	0	0	0	0	26	22	16		Summary/Overview, Tonight/sheet	
+src/generators/safetyLineTruth.js :: SIEGE_NO_FORCE_ORDER	1	1	0	1	0	0	0	0	0	12	3	0		Systems/Defense	
+src/generators/safetyLineTruth.js :: PAID_IN_FULL	1	1	0	1	0	0	0	0	0	0	5	0		Systems/Defense	
+src/generators/safetyLineTruth.js :: VACUUM	1	1	0	1	0	0	0	0	0	0	1	0		Systems/Defense	
+src/generators/safetyLineTruth.js :: VACUUM_TWIN	1	1	0	1	0	0	0	0	0	0	5	0		Systems/Defense	
+src/generators/safetyLineTruth.js :: DESERTERS_FED_TINY	1	1	0	1	0	0	0	0	0	16	14	0		Systems/Defense	
+src/generators/safetyLineTruth.js :: DESERTERS_FED	1	1	0	1	0	0	0	0	0	21	16	0		Systems/Defense	
+src/generators/safetyLineTruth.js :: GATES_KEPT_SMUGGLERS_BENEATH	1	1	0	1	0	0	0	0	0	0	11	0		Systems/Defense	
+src/generators/safetyLineTruth.js :: SETTLED_BEFORE_BLOWS	1	1	0	1	0	0	0	0	0	22	24	0		Systems/Defense	
+src/generators/safetyLineTruth.js :: quarrelUnderViolence	1	1	0	1	0	0	0	0	0	4	3	0		Systems/Defense	
+src/generators/safetyProfile.js :: DESPERATION_THEFT_DESC	1	1	0	1	0	0	0	0	0	9	18	0		Systems/Defense	
+src/generators/services/serviceRollMaterialization.js :: THERE_IS_NO_OFFICIAL_RECOURSE_HERE_DISPUTES_END_WITH_WHOEVER_CAN_APPLY_MORE_VIOLENCE_OR_PAY_MORE_FOR_PROTECTION	1	1	0	1	0	0	0	0	0	11	22	0		Systems/Services	
+src/generators/services/serviceRollMaterialization.js :: SLOW_LAW_DESC	1	1	0	1	0	0	0	0	0	0	7	0		Systems/Services	
+src/generators/servicesGenerator.js :: ASK_AROUND_AT_THE_RIGHT_TAVERN_SOMEONE_MOVES_GOODS_WITHOUT_QUESTIONS	1	1	0	1	0	0	0	0	0	24	35	0		Systems/Services	
+src/generators/servicesGenerator.js :: ASK_AROUND_QUIETLY_SOMEONE_MOVES_GOODS_WITHOUT_QUESTIONS	1	1	0	1	0	0	0	0	0	1	11	0		Systems/Services	
+src/generators/servicesGenerator.js :: INFORMAL_NO_CONTRACT_VIOLENCE_AVAILABLE_FOR_COIN_TO_THOSE_WHO_KNOW_WHERE_TO_ASK	1	1	0	1	0	0	0	0	0	9	15	0		Systems/Services	
+src/generators/servicesGenerator.js :: HOLDING_CELLS_UNTIL_FINE	1	1	0	1	0	0	0	0	0	6	6	0		Systems/Services	
+src/generators/stressNarrative.js :: WARTIME_PRICES	1	1	0	1	0	0	0	0	0	0	1	1		Summary/Crisis, PDF/crisis	
+src/generators/stressNarrative.js :: WARTIME_CARAVANS	1	1	0	1	0	0	0	0	0	29	25	54		Summary/Crisis, PDF/crisis
+ALL (480 pools; 162 hold a STREET line; 2 homes in a barred area flagged)	15785	8148	335	6910	1543	6997	473	1070	963						
