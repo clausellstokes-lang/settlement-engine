@@ -223,17 +223,19 @@ describe('HistoryTab — the still-relevant mark is a hook marker (X-14b)', () =
   });
 });
 
-describe('the print history chapter marks the same events (X-14b, chair item 3)', () => {
-  function collectText(node, out = []) {
-    if (node == null || typeof node === 'boolean') return out;
-    if (typeof node === 'string' || typeof node === 'number') { out.push(String(node)); return out; }
-    if (Array.isArray(node)) { for (const n of node) collectText(n, out); return out; }
-    if (typeof node === 'object') {
-      if (typeof node.type === 'function') return collectText(node.type(node.props), out);
-      return collectText(node.props?.children, out);
-    }
-    return out;
+/** The text a print section's element tree spells (its function components called through). */
+function collectText(node, out = []) {
+  if (node == null || typeof node === 'boolean') return out;
+  if (typeof node === 'string' || typeof node === 'number') { out.push(String(node)); return out; }
+  if (Array.isArray(node)) { for (const n of node) collectText(n, out); return out; }
+  if (typeof node === 'object') {
+    if (typeof node.type === 'function') return collectText(node.type(node.props), out);
+    return collectText(node.props?.children, out);
   }
+  return out;
+}
+
+describe('the print history chapter marks the same events (X-14b, chair item 3)', () => {
   it('HistoryFounding spells "Still relevant today" on exactly the events the screen marks', async () => {
     const { HistoryFounding } = await import('../../src/pdf/sections/HistoryFounding.jsx');
     const { eventHasOpenThread } = await import('../../src/domain/display/historyOpenThreads.js');
@@ -336,6 +338,45 @@ describe('HistoryTab — the scarcity tension names the good the record holds sh
       const named = `A critical resource, grapes, ${stored.slice('A critical resource '.length)}`;
       expect(screen.getByText(named)).toBeTruthy();
       expectAbsentWithAnchor(document.body.textContent || '', stored, named, 'a good the stores do not hold is named');
+    });
+  });
+  // RULING 122-B-2 (F6, UNIT 2 (a)): THE HELPER AT ITS FOUR OTHER CALL SITES. The independent reader put each call site back to
+  // the stored sentence and 0 of 517 cases went red; each case below reds on its own mutant: the Overview tab's tension list
+  // (OverviewTab.jsx), the PDF view model's three slices (viewModel.js :: overviewSlice, powerSlice, historySlice), the search
+  // row (DossierSearchResults.jsx: the row is handed the settlement), and the PDF chapter's de-dup of an event a live tension
+  // carries (HistoryFounding.jsx: it compares the SHOWN sentence).
+  describe('the helper at its four other call sites (RULING 122-B-2, F6)', () => {
+    const SAWMILL = { critical: ['timber'], reasons: { timber: 'Required by Sawmill but not available in Plains terrain' } };
+    const NAMED_LIVE = 'A critical resource, timber, is running short, and some are hoarding it while others cannot pay the prices asked';
+    const NAMED_PAST = 'A critical resource, timber, became scarce, causing hoarding and price gouging';
+    const town = () => townWith(LIVE, SAWMILL);
+    it('the Overview tab prints the helper\'s sentence, not the stored one', async () => {
+      const { OverviewTab } = await import('../../src/components/new/tabs/OverviewTab.jsx');
+      render(<OverviewTab settlement={town()} narrativeNote={null} />);
+      expect(screen.getByText(NAMED_LIVE)).toBeTruthy();
+      expectAbsentWithAnchor(document.body.textContent || '', LIVE, NAMED_LIVE, 'the Overview prints the named twin');
+    });
+    it('the PDF view model\'s three slices (overview, power, history) carry the helper\'s sentence', async () => {
+      const { buildViewModel } = await import('../../src/pdf/lib/viewModel.js');
+      const vm = buildViewModel({ settlement: town() });
+      expect([vm.overview.tensions, vm.power.tensions, vm.history.tensions].map((ts) => ts.map((t) => t.description)))
+        .toEqual([[NAMED_LIVE], [NAMED_LIVE], [NAMED_LIVE]]);
+    });
+    it('the search row is handed the settlement: a found tension prints the helper\'s sentence', async () => {
+      const { default: DossierSearchResults } = await import('../../src/components/dossier/DossierSearchResults.jsx');
+      render(<DossierSearchResults settlement={town()} query="hoarding" tabs={[{ id: 'history', label: 'History' }]} onOpenTab={() => {}} />);
+      expect(screen.getByText(NAMED_LIVE)).toBeTruthy();
+      expectAbsentWithAnchor(document.body.textContent || '', LIVE, NAMED_LIVE, 'the search row prints the named twin');
+    });
+    it('the PDF chapter\'s de-dup reads the shown sentence: an event a live tension carries prints there only', async () => {
+      const { HistoryFounding } = await import('../../src/pdf/sections/HistoryFounding.jsx');
+      const h = {
+        age: 300, historicalCharacter: null, founding: {}, timeline: [],
+        events: [{ title: 'The Lean Year', type: 'economic', yearsAgo: 2, severity: 'minor', hooks: [], lastingEffects: [], description: PAST }],
+        tensions: [{ label: 'resource_scarcity', description: NAMED_PAST, hooks: [] }],
+      };
+      const text = collectText(HistoryFounding({ settlement: townWith(PAST, SAWMILL), vm: { history: h }, stateProse: null })).join(' ');
+      expectAbsentWithAnchor(text, PAST, NAMED_PAST, 'the event\'s sentence prints with the tension only');
     });
   });
 });
