@@ -33,7 +33,7 @@ import { createPRNG } from '../../kernel/prng.js';
 import { slugify } from '../../kernel/slugify.js';
 import { resolveTerrain } from '../resolveTerrain.js';
 import { waterAccessKind } from '../tradeRouteSemantics.js';
-import { bornAtOrAfter } from '../settlement.schema.js'; // B1(ii) (G64 (3), G72 (1)): the floor reader of the engine's stamp
+import { bornAtOrAfter } from '../settlement.schema.js'; import { pickKeyOf } from '../display/pickKey.js'; // B1(ii) (G64 (3), G72 (1)): the floor reader of the engine's stamp
 import { factsOf } from '../facts/factsOf.js'; // B1(ii): farmland on the roster, through its atom's own reader
 import { atomHolds } from '../facts/factVocabulary.js'; // B1(ii)
 import { traditionFloorOf } from './traditionFloor.js'; // RULING 122-T-2: the needs are asked of the floor
@@ -197,7 +197,7 @@ const FIELD_RITE_SINCE = '0.10.0';
 
 // RULING 122-T: the engine that first draws only rites the place can hold. A literal (as FIELD_RITE_SINCE): a place an
 // earlier engine bore keeps its whole drawn set, and the tab's view-time drop (shownTraditions.js) stands for it.
-const NEEDS_SINCE = '0.10.0';
+const NEEDS_SINCE = '0.10.0'; const FOUNDING_ID_KEY_SINCE = '0.10.0'; // POINT 124 K1b: the engine whose founding draw keys on the town's id (the copy founds the owner's set)
 
 /**
  * B1(ii), NO TRADITION BLESSES FIELDS THE PLACE DOES NOT HAVE (the tenth chair's G64 (2), (3)): the place's own food record
@@ -384,7 +384,7 @@ function assembleRec(p) {
 export function deriveFoundingTraditions(settlement) {
   if (!settlement || typeof settlement !== 'object') return [];
 
-  const seed = String(settlement._seed ?? settlement.id ?? settlement.identity?.seed ?? 'tradition-seedless');
+  const before = String(settlement._seed ?? settlement.id ?? settlement.identity?.seed ?? 'tradition-seedless'), seed = bornAtOrAfter(settlement, FOUNDING_ID_KEY_SINCE) ? String(pickKeyOf(settlement, before)) : before; // K1b: 0.10.0 on keys on the id; an earlier engine, the chain it drew on
   const slug = slugify(seed, { sep: '_', max: 40, fallback: 'seedless' });
   const rootRng = createPRNG(`${seed}::tradition:genesis`);
   const id = readIdentity(settlement);
