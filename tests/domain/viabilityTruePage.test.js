@@ -24,6 +24,7 @@ import { DOSSIER_STATE_PROSE_POWER } from '../../src/data/dossierStateProse/powe
 import { safetyLineSaidOnce } from '../../src/domain/display/guardLineUnderTheLaw.js';
 import { owesDebtShown, nothingLaidByShown } from '../../src/domain/display/solvencyShown.js';
 import { economicSurvivalBandOf } from '../../src/domain/display/defenseScoreBands.js';
+import { composePublicProse } from '../../src/components/new/publicProseCompose.js';
 import { DOSSIER_STATE_PROSE_ECONOMY } from '../../src/data/dossierStateProse/economy.generated.js';
 import { variantByVid } from '../helpers/drawnProse.js';
 import { birth as soakBirth, ensureLaws } from '../../scripts/audit/soak-review/corpus.mjs';
@@ -251,4 +252,33 @@ describe('RULING 122-B-2: no yearly-surplus line beside a place debt in force', 
     const s = c('dp-village-19');
     expect([owesDebtShown(s), nothingLaidByShown(s), slots(s)]).toEqual([false, false, { header: [C3, 1], rung: ['MODERATE', 1] }]);
   }, 120000);
+});
+
+// RULING 122-B-4 (the eleventh chair, 2026-11-28; the survey's independent reader): THE HOOK LEG IS THE OWNER's EYE ONLY.
+// `owesDebtShown` reads a past Debt Crisis as owing where its HOOK prints; a plot hook never travels on a player share, so
+// what is composed FOR A READER (the shared page's stamp, `composePublicProse`; the player view) answers `owes` from the
+// stress and the tension alone, while the owner's own tabs keep all three legs. On a town that owes by the hook alone the
+// stamp is byte-equal with the Debt Crisis hook on the record and taken off (the plant); the owner's desk still moves.
+// RED FIRST at 3f3e17099: the stamp of both towns moved with the hook.
+describe('RULING 122-B-4: the shared page does not learn the hook', () => {
+  /** @param {any} s the record with every hook of its outside_debt events taken off (the plant) */
+  const unhooked = (s) => {
+    const t = structuredClone(s);
+    for (const e of t.history?.historicalEvents || []) if (e?.templateType === 'outside_debt') e.plotHooks = [];
+    return t;
+  };
+  /** @param {any} s @returns {string} the stamp's economy desk and Outlook verdict sites */
+  const stamped = (s) => {
+    const blocks = /** @type {Record<string, unknown>} */ (composePublicProse(s)?.blocks || {});
+    return JSON.stringify(Object.entries(blocks).filter(([k]) => k.startsWith('economy:') || k === 'viewModel:viability'));
+  };
+  for (const seed of ['dp-thorp-8', 'dp-town-48']) {
+    test(`C ${seed} (owes by the hook alone): the stamp is byte-equal with the hook on and off; the owner's desk is not`, () => {
+      const s = c(seed);
+      const off = unhooked(s);
+      expect([owesDebtShown(s), owesDebtShown(off)], 'the premise: the hook alone makes the place owe').toEqual([true, false]);
+      expect(stamped(s)).toBe(stamped(off));
+      expect(JSON.stringify(economyDeskRead(s)) === JSON.stringify(economyDeskRead(off)), 'the owner\'s eye keeps the leg').toBe(false);
+    }, 120000);
+  }
 });
