@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "cdddc3b8b4981449b8aced0713ce825ec3dd0a26",
-  "measuredBy": "RULING 122-A-2 (the eleventh chair, unit A3)",
+  "measuredAtSha": "fbf76d6f6220c3d779379d5b667edcd9276140f7",
+  "measuredBy": "VOICES-ENGINE",
   "date": "2026-11-28",
-  "note": "A3 (RULING 122-A-2): src/domain/display/tensionDescriptionShown.js imports foodStoresWords from summary/tonightSheet.js, so the dependents of WANT_MAX_WORDS gain it; no value, leaf or digest moved",
+  "note": "S-G1: VOICES_TUNING, a new P1 table (src/domain/voices/voicesTuning.js), registered DRAFT; nothing else moves",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -1609,6 +1609,8 @@
         "src/domain/people/patronage.js",
         "src/domain/settlementMigrations.js",
         "src/domain/tableLedger.js",
+        "src/domain/voices/cardsOf.js",
+        "src/domain/voices/voicePlan.js",
         "src/domain/worldPulse/npcAgency.js",
         "src/generators/generateSettlementPipeline.js",
         "src/generators/narrativeGenerator.js",
@@ -3039,6 +3041,30 @@
         "src/domain/undercity/monotoneComponents.js"
       ],
       "namedDependents": []
+    },
+    "src/domain/voices/voicesTuning.js#VOICES_TUNING": {
+      "exported": true,
+      "idiom": "literal",
+      "keys": 5,
+      "line": 21,
+      "spanDigest": "46ee703312f3c4e475892f5bae7da6eed214e573a91fcac98871e13a01e8039f",
+      "leaves": {
+        "odds.weighty": 0.75,
+        "odds.lesser": 0.25,
+        "sizeFactor.thorp": 0.5,
+        "sizeFactor.hamlet": 0.5,
+        "sizeFactor.village": 0.75,
+        "tabBudget.weighty": 2,
+        "tabBudget.lesser": 1,
+        "tabCap": 3,
+        "personCap": 1
+      },
+      "dependents": [
+        "src/domain/voices/voicePlan.js"
+      ],
+      "namedDependents": [
+        "src/domain/voices/voicePlan.js"
+      ]
     },
     "src/domain/worldPulse/anticipatedReactions.js#REACTION_TUNING": {
       "exported": true,
@@ -9454,8 +9480,8 @@
   },
   "unclosed": [],
   "totals": {
-    "tables": 284,
-    "keys": 2305,
+    "tables": 285,
+    "keys": 2310,
     "unregisteredNamed": 541,
     "bareDecimals": 6875,
     "zeroDependentTables": 10,
