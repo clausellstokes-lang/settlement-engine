@@ -1,0 +1,323 @@
+{
+ "label": "C",
+ "births": 900,
+ "errors": 0,
+ "byVar": {
+  "T": {
+   "births": 300,
+   "skipped": 0,
+   "pagesMoved": 300,
+   "pagesRedealt": 2,
+   "linesMoved": 15683,
+   "linesNameOnly": 15650,
+   "linesRedealt": 33,
+   "redealtByView": {
+    "Summary/Overview": 3,
+    "Systems/Economics": 2,
+    "Systems/Power": 11,
+    "World/History": 4,
+    "PDF/printProse": 13
+   },
+   "pickSites": {},
+   "examples": {},
+   "lineExamples": [
+    {
+     "seed": "dp-thorp-21",
+     "view": "Summary/Overview",
+     "came": "There is no market at Quillmarsh to gather its trade in one place. The thorp keeps few institutions and needs few.",
+     "gone": []
+    },
+    {
+     "seed": "dp-thorp-21",
+     "view": "Systems/Economics",
+     "came": "Ask where Quillmarsh gets its salt and somebody will point you at the carts.",
+     "gone": []
+    },
+    {
+     "seed": "dp-thorp-21",
+     "view": "Systems/Power",
+     "came": "RulerFeudal StewardshipGovernmentDominant▲",
+     "gone": [
+      "RulerFeudal StewardshipGovernmentDominantUncontested▲"
+     ]
+    },
+    {
+     "seed": "dp-thorp-21",
+     "view": "Systems/Power",
+     "came": "The shape of authority",
+     "gone": [
+      "RulerFeudal StewardshipGovernmentDominantUncontested▲"
+     ]
+    },
+    {
+     "seed": "dp-thorp-21",
+     "view": "Systems/Power",
+     "came": "The Feudal Stewardship at Quillmarsh watches the thorp's temper closely: what it fears is the thorp turning on it.",
+     "gone": [
+      "RulerFeudal StewardshipGovernmentDominantUncontested▲"
+     ]
+    },
+    {
+     "seed": "dp-thorp-21",
+     "view": "Systems/Power",
+     "came": "Rule and succession",
+     "gone": [
+      "RulerFeudal StewardshipGovernmentDominantUncontested▲"
+     ]
+    },
+    {
+     "seed": "dp-thorp-21",
+     "view": "Systems/Power",
+     "came": "If anyone at Quillmarsh asked who might replace the Feudal Stewardship, the thorp would have no contender to name.",
+     "gone": [
+      "RulerFeudal StewardshipGovernmentDominantUncontested▲"
+     ]
+    },
+    {
+     "seed": "dp-thorp-21",
+     "view": "World/History",
+     "came": "Everything in Quillmarsh looks recently built, because most of it was.",
+     "gone": []
+    },
+    {
+     "seed": "dp-thorp-21",
+     "view": "World/History",
+     "came": "Nobody in Quillmarsh has finished putting right the legacy the religious conflict left, and that legacy is a generation old.",
+     "gone": []
+    },
+    {
+     "seed": "dp-thorp-21",
+     "view": "PDF/printProse",
+     "came": "There is no market at Quillmarsh to gather its trade in one place. The thorp keeps few institutions and needs few.",
+     "gone": []
+    },
+    {
+     "seed": "dp-thorp-21",
+     "view": "PDF/printProse",
+     "came": "The Feudal Stewardship at Quillmarsh watches the thorp's temper closely: what it fears is the thorp turning on it.",
+     "gone": []
+    },
+    {
+     "seed": "dp-thorp-21",
+     "view": "PDF/printProse",
+     "came": "If anyone at Quillmarsh asked who might replace the Feudal Stewardship, the thorp would have no contender to name.",
+     "gone": []
+    },
+    {
+     "seed": "dp-thorp-21",
+     "view": "PDF/printProse",
+     "came": "Ask where Quillmarsh gets its salt and somebody will point you at the carts.",
+     "gone": []
+    },
+    {
+     "seed": "dp-thorp-21",
+     "view": "PDF/printProse",
+     "came": "Everything in Quillmarsh looks recently built, because most of it was.",
+     "gone": []
+    },
+    {
+     "seed": "dp-thorp-21",
+     "view": "PDF/printProse",
+     "came": "Nobody in Quillmarsh has finished putting right the legacy the religious conflict left, and that legacy is a generation old.",
+     "gone": []
+    },
+    {
+     "seed": "dp-hamlet-49",
+     "view": "Summary/Overview",
+     "came": "Each week more of Quillmarsh falls sick, and those in charge still cannot agree on how to stop it.",
+     "gone": [
+      "Above everything else, this is what the hamlet is living through now."
+     ]
+    },
+    {
+     "seed": "dp-hamlet-49",
+     "view": "Summary/Overview",
+     "came": "A visitor with goods to sell at Quillmarsh finds no stall to take and no market day to wait for. The hamlet keeps few institutions and needs few.",
+     "gone": [
+      "Above everything else, this is what the hamlet is living through now."
+     ]
+    },
+    {
+     "seed": "dp-hamlet-49",
+     "view": "Systems/Economics",
+     "came": "Ask where Quillmarsh gets its salt and somebody will point you at the carts.",
+     "gone": []
+    },
+    {
+     "seed": "dp-hamlet-49",
+     "view": "Systems/Power",
+     "came": "RulerElder CouncilGovernmentDominant▲",
+     "gone": [
+      "RulerElder CouncilGovernmentDominantContested▲",
+      "RulerElder CouncilGovernmentDominantContested▼"
+     ]
+    },
+    {
+     "seed": "dp-hamlet-49",
+     "view": "Systems/Power",
+     "came": "The shape of authority",
+     "gone": [
+      "RulerElder CouncilGovernmentDominantContested▲",
+      "RulerElder CouncilGovernmentDominantContested▼"
+     ]
+    },
+    {
+     "seed": "dp-hamlet-49",
+     "view": "Systems/Power",
+     "came": "The Elder Council at Quillmarsh has left obvious decisions untaken because its members cannot agree on them.",
+     "gone": [
+      "RulerElder CouncilGovernmentDominantContested▲",
+      "RulerElder CouncilGovernmentDominantContested▼"
+     ]
+    },
+    {
+     "seed": "dp-hamlet-49",
+     "view": "Systems/Power",
+     "came": "Rule and succession",
+     "gone": [
+      "RulerElder CouncilGovernmentDominantContested▲",
+      "RulerElder CouncilGovernmentDominantContested▼"
+     ]
+    },
+    {
+     "seed": "dp-hamlet-49",
+     "view": "Systems/Power",
+     "came": "The Elder Council at Quillmarsh holds because no rival yet outweighs the Elder Council, and the weighing is done again every season.",
+     "gone": [
+      "RulerElder CouncilGovernmentDominantContested▲",
+      "RulerElder CouncilGovernmentDominantContested▼"
+     ]
+    },
+    {
+     "seed": "dp-hamlet-49",
+     "view": "Systems/Power",
+     "came": "RulerElder CouncilGovernmentDominant▼",
+     "gone": [
+      "RulerElder CouncilGovernmentDominantContested▲",
+      "RulerElder CouncilGovernmentDominantContested▼"
+     ]
+    },
+    {
+     "seed": "dp-hamlet-49",
+     "view": "World/History",
+     "came": "Ask in Quillmarsh why it is here and people will tell you its first reason, though the place has long outgrown it.",
+     "gone": []
+    },
+    {
+     "seed": "dp-hamlet-49",
+     "view": "World/History",
+     "came": "Nobody in Quillmarsh has finished putting right the legacy the wild magic left, and that legacy is older than all but the oldest alive.",
+     "gone": []
+    },
+    {
+     "seed": "dp-hamlet-49",
+     "view": "PDF/printProse",
+     "came": "A visitor with goods to sell at Quillmarsh finds no stall to take and no market day to wait for. The hamlet keeps few institutions and needs few.",
+     "gone": [
+      "Above everything else, this is what the hamlet is living through now."
+     ]
+    },
+    {
+     "seed": "dp-hamlet-49",
+     "view": "PDF/printProse",
+     "came": "Each week more of Quillmarsh falls sick, and those in charge still cannot agree on how to stop it.",
+     "gone": [
+      "Above everything else, this is what the hamlet is living through now."
+     ]
+    },
+    {
+     "seed": "dp-hamlet-49",
+     "view": "PDF/printProse",
+     "came": "The Elder Council at Quillmarsh has left obvious decisions untaken because its members cannot agree on them.",
+     "gone": [
+      "Above everything else, this is what the hamlet is living through now."
+     ]
+    },
+    {
+     "seed": "dp-hamlet-49",
+     "view": "PDF/printProse",
+     "came": "The Elder Council at Quillmarsh holds because no rival yet outweighs the Elder Council, and the weighing is done again every season.",
+     "gone": [
+      "Above everything else, this is what the hamlet is living through now."
+     ]
+    },
+    {
+     "seed": "dp-hamlet-49",
+     "view": "PDF/printProse",
+     "came": "Ask where Quillmarsh gets its salt and somebody will point you at the carts.",
+     "gone": [
+      "Above everything else, this is what the hamlet is living through now."
+     ]
+    },
+    {
+     "seed": "dp-hamlet-49",
+     "view": "PDF/printProse",
+     "came": "Ask in Quillmarsh why it is here and people will tell you its first reason, though the place has long outgrown it.",
+     "gone": [
+      "Above everything else, this is what the hamlet is living through now."
+     ]
+    },
+    {
+     "seed": "dp-hamlet-49",
+     "view": "PDF/printProse",
+     "came": "Nobody in Quillmarsh has finished putting right the legacy the wild magic left, and that legacy is older than all but the oldest alive.",
+     "gone": [
+      "Above everything else, this is what the hamlet is living through now."
+     ]
+    }
+   ]
+  },
+  "P": {
+   "births": 300,
+   "skipped": 0,
+   "pagesMoved": 300,
+   "pagesRedealt": 0,
+   "linesMoved": 9169,
+   "linesNameOnly": 9169,
+   "linesRedealt": 0,
+   "redealtByView": {},
+   "pickSites": {},
+   "examples": {},
+   "lineExamples": []
+  },
+  "H": {
+   "births": 0,
+   "skipped": 0,
+   "pagesMoved": 0,
+   "pagesRedealt": 0,
+   "linesMoved": 0,
+   "linesNameOnly": 0,
+   "linesRedealt": 0,
+   "redealtByView": {},
+   "pickSites": {},
+   "examples": {},
+   "lineExamples": []
+  },
+  "F": {
+   "births": 0,
+   "skipped": 0,
+   "pagesMoved": 0,
+   "pagesRedealt": 0,
+   "linesMoved": 0,
+   "linesNameOnly": 0,
+   "linesRedealt": 0,
+   "redealtByView": {},
+   "pickSites": {},
+   "examples": {},
+   "lineExamples": []
+  }
+ },
+ "share": {
+  "births": 300,
+  "sharePagesMoved": 300,
+  "shareRedealt": 2,
+  "ownerShareNewDiff": 0,
+  "ownerShareNewDiffLines": 0,
+  "byView": {},
+  "examples": [],
+  "sharePickSites": {}
+ },
+ "baseShare": {
+  "pagesDiffer": 300
+ }
+}
