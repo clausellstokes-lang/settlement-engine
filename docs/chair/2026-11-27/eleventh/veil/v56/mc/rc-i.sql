@@ -133,7 +133,7 @@ as $$
     group by settlement_id
   ) rx on rx.settlement_id = s.id
   where s.is_public = true and s.id = p_id;
-$;
+$$;
 revoke execute on function public._gallery_public_tile_row(uuid) from public;
 create or replace function public.get_gallery_dossier(dossier_slug text)
 returns table (

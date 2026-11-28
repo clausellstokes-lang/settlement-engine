@@ -12,7 +12,7 @@ const [F147, F212, O] = process.argv.slice(2);
 const t147 = readFileSync(F147, 'utf8'); const t212 = readFileSync(F212, 'utf8');
 const HDR = '-- MC LOCAL TRIAL ONLY (never applied but to a local test database)\n';
 const cut = (t, head, end) => { const a = t.indexOf(head); if (a < 0) throw new Error(`no ${head}`); const b = t.indexOf(end, a); return t.slice(a, b + end.length); };
-const rep = (s, a, b, label) => { const n = s.split(a).length - 1; if (n !== 1) throw new Error(`${label}: found ${n} times`); return s.replace(a, b); };
+const rep = (s, a, b, label) => { const n = s.split(a).length - 1; if (n !== 1) throw new Error(`${label}: found ${n} times`); return s.replace(a, () => b); };
 const helper = cut(t147, 'create or replace function public._gallery_public_tile_rows()', '\n$$;');
 writeFileSync(`${O}/rc-keep-old.sql`, HDR + helper.replace('public._gallery_public_tile_rows()', 'public._gallery_public_tile_rows_old()') + '\n');
 // (i)

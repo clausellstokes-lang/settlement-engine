@@ -11,7 +11,7 @@ import { readFileSync, writeFileSync } from 'node:fs';
 const [F212, F210, O] = process.argv.slice(2);
 const t212 = readFileSync(F212, 'utf8'); const t210 = readFileSync(F210, 'utf8');
 const cut = (t, head, end = 'end $$;') => { const a = t.indexOf(head); if (a < 0) throw new Error(`no ${head}`); return t.slice(a, t.indexOf(end, a) + end.length); };
-const rep = (s, a, b, label) => { const n = s.split(a).length - 1; if (n !== 1) throw new Error(`${label}: found ${n} times`); return s.replace(a, b); };
+const rep = (s, a, b, label) => { const n = s.split(a).length - 1; if (n !== 1) throw new Error(`${label}: found ${n} times`); return s.replace(a, () => b); };
 const HDR = '-- MC LOCAL TRIAL ONLY (never applied but to a local test database)\n';
 
 let v = cut(t212, 'create or replace function public._gallery_veil(pub jsonb, overrides jsonb, link boolean, copy boolean default false)');

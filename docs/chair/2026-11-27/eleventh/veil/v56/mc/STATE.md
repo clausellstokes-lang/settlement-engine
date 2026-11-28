@@ -1,0 +1,16 @@
+# MC (VEIL-56): WHERE THIS SEAT STANDS (written 2026-11-28T00:32:21Z, date -u; brought current at every push)
+
+1. BRANCH: `lane/veil-56-2026-11-27-mc-docs` (documents only), tip = the commit that carries this file. Stood on 2f849aa53; nothing pushed elsewhere; no SQL applied but to local databases.
+2. CONFIRMED (executed): `B-STEPS-RERUN.md` (unit 3's 140-member map 63.1 s tracked, VEIL-52's 68.0; roster choices ~46%, sanitiser ~23%, name search ~13%; the tip's unmarked map 15.6 s, unit 3's x4.1); `LOCK.md` (8 readers of one map as built end at 5.9..50.9 s; the UPDATE after the read, 13.3..13.6 s); `LIMITS.md` (a map is the sum of its members; unit 3 passes 3 s at ~6 average members, 8 s at ~17; tip unmarked 25 / 69, tip marked 7 / 20; production unknown).
+3. CANDIDATES MEASURED (untracked, 140-member map, unit 3, same bytes served at both markers): roster hoist 61.0 -> 49.5 s (-19%); then the sanitiser's scalar skip -> 47.3 s (-4% more). The four-door differential of both: RUNNING (base started 00:10 UTC; result written here when it ends).
+4. NOT BEGUN OR NOT RUN (stopped by VEIL-56's word, ~00:31 UTC): PROPOSAL.md; READ-COST's trials (i), (ii), (ii') (built; only the as-built phase ran: list 6.1 s, dossier 5.8 s at 840 rows); the sanitiser built once (`trial-sanit2.sql`) and its differential; the roster probe (`roster-probe.mjs`). Work 5 DONE: `C-OWNER-COUNTS-READ.md`.
+5. NEXT COMMAND (on "GO MC"): `sh mc/run3.sh trialmap2 probe diff2`, then `sh mc/run2.sh readcost`, from /home/user/settlement-engine, detached.
+
+## THE COST PROPOSAL (at most 200 words; the chair rules it)
+
+1. **The counter after the read**: 212's `get_gallery_map`, one statement moved before its two returns. Measured: 8 concurrent readers 50.9 s -> 13.6 s; the count still rises once a read. No served byte moves. ~0.5 seat-hour.
+2. **The roster choices hoisted**: 212's `_gallery_veil_roster_choices` restated; its four N x N searches of `pub` (conflicts, tensions, goals, memberships) run `_gallery_veil_copy_names` once a call into a short list. The same predicate, and-ed in another order. Measured -19%. ~2 seat-hours with the differential.
+3. **The sanitiser skips scalar children**: `_gallery_sanitize_public_json` (210's) restated in 212: a scalar child is returned as the function's last line returns it. -4% more. Master's reads gain too. ~1 seat-hour.
+Risk to "every door equal to the link's": none by construction; proven by the four-door differential, 840 rows (item 3 above).
+4. **The x4.1 on unmarked members is VR23's veil**: not skipped. After 1-3, ~338 ms a member: 3 s at ~8 members.
+5. **The floor**: members served in pages (a client change). The only bound independent of document size. Sized after the chair's word.
