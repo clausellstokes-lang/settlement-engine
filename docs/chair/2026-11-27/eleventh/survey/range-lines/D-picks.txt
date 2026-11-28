@@ -1,0 +1,170 @@
+
+### C-dp-city-59 (city) Grudko
+HOUSE Furrier's district | today: Those who dress, trade, and sell fur, all pressed into one district. The trade runs high, quality pelts being luxuries. | -> Pelts hang in rows from the ceilings, sorted by kind and colour.
+HOUSE Multiple market squares | today: Multiple permanent market squares serve different districts. | -> Market officers walk the stalls checking weights.
+HOUSE Inns and taverns (district) | today: More than one quarter of inns, serving the merchant, the traveller, and the lingering guest. | -> (today's stays)
+HOUSE Warehouse district | today: Where merchant goods are stored. | -> Hoists swing sacks and bales up to the top floors.
+HOUSE Mills (2-5) | today: Wheels turn on every usable stream, many licensed by guild or city. | -> A broken wheel stops a mill until a wright can mend it.
+HOUSE Carpenters (5-15) | today: Construction carpenters, joiners, and furniture makers, organised by guild. | -> (today's stays)
+HOUSE Apothecary district | today: A cluster of apothecaries pressed close enough that competition drives them apart in trade, some to surgery, some to herb-work, some to medicines brought from abroad. Herbalism kits, medicinal herbs, surgical supplies, and basic antidotes are all to be had. | -> The air smells of drying herbs, vinegar and smoke.
+HOUSE Sawmill (commercial) | today: A water- or ox-powered mill producing planks and beams for the construction trade. Employs a permanent crew. | -> Timber is stacked high in the yard, sorted by length and kind.
+HOUSE Butchers (3-8) | today: Meat markets and shambles kept under strict civic rules. | -> (today's stays)
+HOUSE Bakers (5-15) | today: Every ward has its bakehouses, with weights and prices set by the guild. | -> (today's stays)
+HOUSE Glassmakers | today: Glass for windows, vessels, and mirrors. Expert work, not casual. | -> It burns more fuel than almost any other craft.
+HOUSE City walls and gates | today: Masonry walls with towers. Multiple gatehouses. | -> From the towers the country can be watched for miles.
+HOUSE Professional city watch | today: A standing force of the law, roughly one in a hundred residents. | -> (today's stays)
+HOUSE Garrison | today: A professional force, kept under arms for pay. | -> Its captains keep the rolls: every soldier's name, pay and kit is written down.
+HOUSE Blacksmiths (3-10) | today: Farriers, toolsmiths, and general forges in every quarter. | -> Charcoal and iron are its two great costs.
+VIEW OUTSIDER_IMPRESSIONS.power | today: {Power} {power|carries|carry} the most weight here, and nobody pretends otherwise. | -> When {power} {power|wants|want} something done, people here hurry to do it.
+VIEW RECENT_CHANGES.beat | today: {Event} is still remembered here, and not lightly. | -> (today's stays)
+VIEW DOSSIER_STATE_PROSE_ECONOMY.DS-ECO-10.pools.POSTURE: establi | today: A merchant who comes to {settlement} for one thing usually leaves with two or three. | -> (today's stays)
+VIEW STANDARD_PATROL() | today: The {…} {…} on a regular round, so petty theft is often caught and planned crime seldom is. | -> The {lawRef} {walk|walks} the usual rounds, so people know roughly when to expect them.
+VIEW DOSSIER_STATE_PROSE_DEFENSE.DS-DEF-5.pools.FIXTURE: gates | today: The wall at {settlement} is entered by its gates, and the gate tolls are counted there; a gate left unwatched is a toll lost. | -> News reaches {settlement} first at its gates, from whoever has just come in.
+VIEW MIXED_CORNERS | today: Locals know which lanes to keep out of. | -> Most trouble here is a quarrel or a theft, and it rarely goes further.
+VIEW DOSSIER_STATE_PROSE_ECONOMY.DS-ECO-9.pools.FOOD SOURCES: one | today: {settlement} leans first on its {good} for its food, so a bad season for the {good} is felt at every table. | -> In {settlement}, talk at table turns on the {good} more than on anything else.
+VIEW MODERATE_WALLS | today:  The gates are watched, so trouble from outside rarely gets in; what there is starts within. | ->  Whoever is caught inside the walls after the gates close has nowhere to run.
+SEAT today: Grudko is governed by the City Council. Olga Đorđević, the senior guild master and Lord Mayor, holds its seat. | -> (today's stays)
+HALL(DM) -> None of those who lead {ruler} has a hidden tie to a criminal house.
+LENDS(DM) today: Olga Đorđević heads the City Council and also holds a full share in the Merchant Guilds, so what the Merchant Guilds want from the City Council goes straight to the top. | -> When {ruler} and {power} want different things, {name}, {place}, has {share} in {power} to think of.
+LENDS(DM) today: Anton Lazić is third in the City Council and holds a third share in the Merchant Guilds, and carries the Merchant Guilds' requests to the two above. | -> {name}, {place}, holds {share} in {power}, so what {power} {gains|gain} is partly {name}'s own gain.
+charter true crises  lends 2
+F-town tabs printed: World/Daily Life, Systems/Economics, Systems/Defense
+
+### C-dp-hamlet-85 (hamlet) Copanchihua
+HOUSE Burial ground | today: A walled plot at the edge of the settlement, gated against livestock and kept by the households in turn. The rite is held when a priest comes through, and the burial itself does not wait for one. Families lie in rows by household, whatever their standing. That is the custom here, and has nothing to do with being poor. | -> (today's stays)
+VIEW OUTSIDER_IMPRESSIONS.power | today: Newcomers soon notice how often talk here comes round to {power}. | -> When {power} {power|wants|want} something done, people here hurry to do it.
+VIEW RECENT_CHANGES.beat | today: People here still talk of {event}, and of what it changed. | -> People here still disagree about what {event} meant for them.
+VIEW DOSSIER_STATE_PROSE_DEFENSE.DS-DEF-5.pools.arcane defense AB | today: {settlement} has no arcane defense: what arrives unseen here goes undetected and therefore unanswered. | -> A practitioner could walk into {settlement} and no one would know what they were.
+VIEW DOSSIER_STATE_PROSE_DEFENSE.DS-DEF-5.pools.charter hall ABSE | today: {settlement} knows it needs specialists against the creatures, and has none of its own to send. | -> (today's stays)
+SEAT today: Copanchihua is governed by the Feudal Stewardship. Malinalxochitl Chan, the steward, holds its seat. | -> Orders in {place} go out in the name of {ruler}. {who} sits at its head.
+HALL(DM) -> {Ruler} {takes|take} no money and no orders from a criminal house.
+LENDS(DM) today: Malinalxochitl Chan heads the Feudal Stewardship and also holds a large share in the Manor Household, so what the Manor Household wants from the Feudal Stewardship goes straight to the top. | -> {name}, {place}, also holds {share} in {power}, so {ruler} {hears|hear} what {power} {wants|want} early.
+charter false crises  lends 1
+F-town tabs printed: World/Daily Life, Systems/Defense, World/History
+
+### C-dp-village-128 (village) Glenfield
+HOUSE Mill | today: Water or wind drives the grindstones, and with them goes the sole right to grind. Whoever keeps them tends to be the richest in the village, and the least loved. | -> The grindstones wear down and must be re-cut by hand with a chisel.
+HOUSE Graveyard | today: Hallowed ground about the church. | -> Each family cuts the grass around its own graves.
+HOUSE Priest (resident) | today: Administers the sacraments and gathers the tithe. Frequently the sole person here who can read. | -> The priest's house is the first door many people knock on in trouble.
+VIEW OUTSIDER_IMPRESSIONS.power | today: A visitor soon learns that little happens here without {power}. | -> Those who fall out with {power} soon find doors closing to them.
+VIEW RECENT_CHANGES.beat | today: Much of how the place works now goes back to {event}. | -> Some here would rather {event} were not brought up.
+VIEW DOSSIER_STATE_PROSE_ECONOMY.DS-ECO-10.pools.POSTURE: establi | today: Buyers from outside come to {settlement} for more than one thing. | -> The workshops that sell beyond {settlement} are not all of one kind, and they do not share their buyers.
+VIEW COMMONER_RESENTMENTS.legitimacy | today: People put up with {gov}, but they expect little of {gov|it|them}. | -> Some here have started taking their troubles to someone other than {gov}.
+SEAT today: Seamus Nolan, the master fishmonger and Elder, holds the seat of the Elder Council. The Elder Council governs Glenfield. | -> Orders in {place} go out in the name of {ruler}. {who} sits at its head.
+HALL(DM) -> {Ruler} {takes|take} no money and no orders from a criminal house.
+charter false crises  lends 0
+F-town tabs printed: World/Daily Life, Systems/Economics, Summary/Crisis
+
+### V-dp-metropolis-149 (metropolis) Chernoko
+HOUSE Cemetery network | today: Burial has left the walls entirely: grounds beyond every gate, each with its own road, its own gatekeepers, and a trade in plots that the revenue office watches. The local registers are copied into a central roll because no single ground can any longer say where its own dead are. Wards are assigned to grounds, so a family that moves across the city can find itself divided by the assignment. | -> Old grounds are cleared in turn, and the bones carried to charnel houses.
+HOUSE Massive walls and fortifications | today: A defence built in layers, an outer wall and an inner wall, with gatehouses throughout. | -> (today's stays)
+HOUSE Multiple garrisons | today: Garrisons spread through the quarters; no single barracks could secure a city this size. | -> The barracks wake to a drum or a bell before dawn.
+HOUSE Academy of magic | today: Formal institution of arcane learning. Full curriculum, research facilities, visiting scholars. | -> Fees are high, and most students come from families that can pay them.
+VIEW OUTSIDER_IMPRESSIONS.power | today: {Power} {power|carries|carry} the most weight here, and nobody pretends otherwise. | -> Those who fall out with {power} soon find doors closing to them.
+VIEW RECENT_CHANGES.beat | today: Much of how the place works now goes back to {event}. | -> Some here would rather {event} were not brought up.
+VIEW DOSSIER_STATE_PROSE_ECONOMY.DS-ECO-10.pools.POSTURE: establi | today: The carts that leave {settlement} carry several kinds of goods, not one. | -> The trades that sell outward from {settlement} argue over which of them matters most.
+VIEW DOSSIER_STATE_PROSE_DEFENSE.DS-DEF-5.pools.FIXTURE: gates | today: Come to {settlement} by the road and you come in by a gate, where someone sees you come. | -> A gate is the weakest place in any wall, so {settlement} guards its gates more closely than the rest.
+VIEW DOSSIER_STATE_PROSE_DEFENSE.DS-DEF-5.pools.charter hall PRES | today: {settlement} keeps a charter for specialist work. The things ordinary arms are wrong for go to people retained to handle exactly them. | -> Not everyone who sets out from {settlement}'s charter hall comes back.
+VIEW COMMONER_RESENTMENTS.legitimacy | today: People say the council is slow to listen and quick to decide without them. | -> Jokes about {gov} go down well among neighbours here.
+SEAT today: The Grand Military Council governs Chernoko. Its seat is held by Iskra Stepanov, the watch commander and Lord Marshal. | -> (today's stays)
+charter true crises  lends 0
+F-town tabs printed: World/Daily Life, Systems/Economics, Systems/Defense
+
+### V-dp-metropolis-41 (metropolis) Grudka
+HOUSE Cemetery network | today: Burial has left the walls entirely: grounds beyond every gate, each with its own road, its own gatekeepers, and a trade in plots that the revenue office watches. The local registers are copied into a central roll because no single ground can any longer say where its own dead are. Wards are assigned to grounds, so a family that moves across the city can find itself divided by the assignment. | -> Mourners walk out through the gates in the morning and come back at dusk.
+HOUSE Massive walls and fortifications | today: Walls within walls: an outer line and an inner line, with gatehouses at every stage. | -> (today's stays)
+HOUSE Multiple garrisons | today: Garrison forces distributed across quarters. No single barracks can secure a metropolis. | -> Soldiers off duty fill the taverns and cookshops near each barracks.
+HOUSE Mages' district | today: Quarter inhabited by arcane practitioners: towers, workshops, libraries, reagent merchants. | -> Many of its practitioners work through the night.
+VIEW OUTSIDER_IMPRESSIONS.power | today: Visitors learn early that it pays to stay on good terms with {power}. | -> A favour from {power} counts for more here than coin.
+VIEW RECENT_CHANGES.beat | today: People here still talk of {event}, and of what it changed. | -> Those too young to remember {event} have heard about it all the same.
+SEAT today: The Grand Guild Consortium governs Grudka. Its seat is held by Marina Osipov, the exchange master and Master of the Guilds. | -> (today's stays)
+HALL(DM) -> {Ruler} {takes|take} no money and no orders from a criminal house.
+LENDS(DM) today: Marina Osipov heads the Grand Guild Consortium and also holds a full share in the Merchant Guilds, so what the Merchant Guilds want from the Grand Guild Consortium goes straight to the top. | -> {name}, {place}, also holds {share} in {power}, so {ruler} {hears|hear} what {power} {wants|want} early.
+LENDS(DM) today: Guido Zhukov is third in the Grand Guild Consortium and holds a third share in the Guard, and carries the Guard's requests to the two above. | -> While {name}, {place}, holds {share} in {power}, {power}{possessive} requests to {ruler} are seldom refused.
+charter true crises  lends 2
+F-town tabs printed: World/Daily Life, World/History, Summary/Overview
+
+### V-dp-metropolis-91 (metropolis) Wadizamin
+HOUSE Cemetery network | today: Burial has left the walls entirely: grounds beyond every gate, each with its own road, its own gatekeepers, and a trade in plots that the revenue office watches. The local registers are copied into a central roll because no single ground can any longer say where its own dead are. Wards are assigned to grounds, so a family that moves across the city can find itself divided by the assignment. | -> Old grounds are cleared in turn, and the bones carried to charnel houses.
+HOUSE Massive walls and fortifications | today: Layered wall systems: an outer wall and an inner wall, with gatehouses along both. | -> The ground between the two walls holds gardens, sheds and some of the poorest houses.
+HOUSE Multiple garrisons | today: Garrison forces distributed across quarters. No single barracks can secure a metropolis. | -> The barracks wake to a drum or a bell before dawn.
+HOUSE Mages' district | today: The magic-workers keep to one district. Its towers, workshops, libraries, and reagent merchants mark it out. | -> Accidents happen, and neighbours learn to keep their distance from certain doors.
+HOUSE Academy of magic | today: A chartered school of the arcane, with a full course of study, laboratories, and scholars come from abroad. | -> The practice rooms have thick walls, and their floors are scorched.
+VIEW RECENT_CHANGES.beat | today: The place still lives with what {event} left behind. | -> Some families here are still paying for {event}.
+VIEW STANDARD_PATROL() | today: The {…} {…} the usual rounds. That stops a pickpocket or a brawl; anyone who has learned the rounds can work between them. | -> The {lawRef} {walk|walks} the usual rounds, so people know roughly when to expect them.
+VIEW DOSSIER_STATE_PROSE_DEFENSE.DS-DEF-5.pools.FIXTURE: gates | today: Come to {settlement} by the road and you come in by a gate, where someone sees you come. | -> In the mornings, carts wait in line at {settlement}'s gates.
+VIEW DOSSIER_STATE_PROSE_DEFENSE.DS-DEF-5.pools.charter hall PRES | today: {settlement} keeps a chartered hall for trouble that ordinary arms cannot handle, and the hall is busy. | -> Those who sign on at {settlement}'s charter hall carry arms, but they are hired hands, not a standing force.
+VIEW COMMONER_RESENTMENTS.legitimacy | today: People put up with {gov}, but they expect little of {gov|it|them}. | -> When the harvest or the weather goes wrong, {gov} {gov|gets|get} the blame for that too.
+SEAT today: Wadizamin is governed by the Democratic assembly. Kausar al-Najdi, the exchange master and Speaker of the Assembly, holds its seat. | -> (today's stays)
+HALL(DM) -> A complaint against a criminal, brought to {ruler}, is heard like any other.
+LENDS(DM) today: Kausar al-Najdi heads the Democratic assembly and also holds a full share in the Guild Alliance, so what the Guild Alliance wants from the Democratic assembly goes straight to the top. | -> {name}, {place}, also holds {share} in {power}, so {ruler} {hears|hear} what {power} {wants|want} early.
+LENDS(DM) today: Ruqayya ibn Ali is third in the Democratic assembly and holds a half share in the Arcane Orders, and carries the Arcane Orders' requests to the two above. | -> While {name}, {place}, holds {share} in {power}, {power}{possessive} requests to {ruler} are seldom refused.
+charter true crises  lends 2
+F-town tabs printed: World/Daily Life, Systems/Defense, World/History
+
+### V-dp-thorp-21 (thorp) Niederbach
+VIEW OUTSIDER_IMPRESSIONS.power | today: Nothing of weight is agreed here without the leave of {power}. | -> (today's stays)
+VIEW RECENT_CHANGES.beat | today: {Event} still shapes how people here go about things. | -> Some families here are still paying for {event}.
+VIEW DOSSIER_STATE_PROSE_DEFENSE.DS-DEF-5.pools.arcane defense AB | today: {settlement} keeps no defence against anything it cannot see. | -> A practitioner could walk into {settlement} and no one would know what they were.
+VIEW DOSSIER_STATE_PROSE_ECONOMY.DS-ECO-9.pools.FOOD SOURCES: one | today: {settlement}'s own food comes from its {good} and from the holdings its families till, so a bad season for either is felt at every table. | -> (today's stays)
+SEAT today: The Feudal Stewardship governs Niederbach. Its seat is held by Dietrich Weber, the reeve. | -> Asked who governs {place}, people name {ruler}. Its seat is held by {whoEnd}.
+HALL(DM) -> {Ruler} {takes|take} no money and no orders from a criminal house.
+LEGACY religious conflict 26y -> In {settlement}, the {calamity} is still spoken of as unfinished business. It is {timeband_age}.
+charter false crises  lends 0
+F-town tabs printed: World/Daily Life, Systems/Defense, Systems/Economics
+
+### V-dp-town-8 (town) Flachwalde
+HOUSE Cobbler's guild | today: Organised shoemakers producing boots, shoes, and sandals for the urban population. Strictly regulated quality. | -> Most of the work is mending: new soles, new heels, stitching that has given way.
+HOUSE Tailor's guild | today: A guild of master clothiers who make up finished cloth into everything from labourers' wear to noble livery. | -> The guild decides who may set up as a master, and the years of training come first.
+HOUSE Ropemaker | today: Rope and cordage twisted from hemp, flax, or whatever plant fibre comes to hand. Nothing sails, rises, or is harvested without it. | -> The work needs a long, straight walk, where the strands are laid out and twisted.
+HOUSE Parish burial grounds | today: A ground for each congregation, and burial out beyond the houses where a ground has filled. The sexton's register of who lies where is the town's longest unbroken record. | -> Some families keep watch over a new grave for the first few nights.
+HOUSE Town walls | today: Masonry walls pierced by gates. Dear to build, dearer to maintain. | -> A walk runs along the top, wide enough for two to pass.
+VIEW OUTSIDER_IMPRESSIONS.power | today: A visitor soon learns that little happens here without {power}. | -> (today's stays)
+VIEW RECENT_CHANGES.beat | today: The place still lives with what {event} left behind. | -> Some families here are still paying for {event}.
+VIEW STANDARD_PATROL() | today: You will see the {…} on the rounds most hours of the day; {…} the careful. | -> The {lawRef} {patrol|patrols} on a regular round, and a shout usually brings someone within minutes.
+VIEW DOSSIER_STATE_PROSE_DEFENSE.DS-DEF-5.pools.arcane defense AB | today: {settlement}'s protection reaches as far as ordinary eyes and hands reach, and no further. | -> A practitioner could walk into {settlement} and no one would know what they were.
+VIEW DOSSIER_STATE_PROSE_DEFENSE.DS-DEF-5.pools.FIXTURE: gates | today: Whatever reaches {settlement} by road reaches it at a gate, and the gates can be closed against it. | -> News reaches {settlement} first at its gates, from whoever has just come in.
+VIEW DOSSIER_STATE_PROSE_DEFENSE.DS-DEF-5.pools.charter hall ABSE | today: {settlement} sends whoever it can against things they are not trained for, and pays for it each time. | -> When the creatures come close to {settlement}, everyone who can hold a spear is needed.
+VIEW MIXED_CORNERS | today: Those born here know which turnings to leave alone after dark. | -> Most fights here start over drink and are over the same night.
+VIEW MODERATE_WALLS | today:  The walls see to what comes from outside; what trouble there is starts at home. | ->  Whoever is caught inside the walls after the gates close has nowhere to run.
+SEAT today: The Guild Council governs Flachwalde. Its seat is held by Ortwin Friedmann, the senior guild master and Alderman. | -> Asked who governs {place}, people name {ruler}. Its seat is held by {whoEnd}.
+HALL(DM) -> Whatever trouble crime brings here, it does not start in the hall.
+LENDS(DM) today: Ortwin Friedmann heads the Guild Council and also holds a full share in the Merchant Guilds, so what the Merchant Guilds want from the Guild Council goes straight to the top. | -> While {name}, {place}, holds {share} in {power}, {power}{possessive} requests to {ruler} are seldom refused.
+LENDS(DM) today: Yolanda Braun is third in the Guild Council and holds a large share in the Guard, and carries the Guard's requests to the two above. | -> {name}, {place}, holds {share} in {power}, so what {power} {gains|gain} is partly {name}'s own gain.
+charter false crises  lends 2
+F-town tabs printed: World/Daily Life, Systems/Defense, Summary/Overview
+
+### V-dp-village-23 (village) Celoets
+HOUSE Mill | today: Milling here is a monopoly, water or wind powered. Its keeper is usually the wealthiest villager and, for that reason, the most begrudged. | -> The miller keeps a share of every sack as the fee, and people watch the measure closely.
+HOUSE Graveyard | today: Hallowed ground about the church. | -> Each family cuts the grass around its own graves.
+HOUSE Priest (resident) | today: Performs sacraments, collects tithes. Often only literate person. | -> The priest keeps the names of those born, married and buried.
+VIEW OUTSIDER_IMPRESSIONS.power | today: {Power} {power|carries|carry} the most weight here, and nobody pretends otherwise. | -> When {power} {power|wants|want} something done, people here hurry to do it.
+VIEW RECENT_CHANGES.beat | today: What {event} left behind is still part of daily life here. | -> Some families here are still paying for {event}.
+VIEW DOSSIER_STATE_PROSE_DEFENSE.DS-DEF-5.pools.arcane defense AB | today: {settlement} keeps no defence against anything it cannot see. | -> (today's stays)
+VIEW NO_WATCH_SMALL | today: There is no watch. When someone does wrong, the neighbours deal with it themselves, and the oldest families have the last word. | -> There is no watch. A face nobody knows is noticed at once, and talked about.
+VIEW DOSSIER_STATE_PROSE_DEFENSE.DS-DEF-5.pools.charter hall ABSE | today: {settlement} knows it needs specialists against the creatures, and has none of its own to send. | -> (today's stays)
+VIEW COMMONER_RESENTMENTS.legitimacy | today: People bring their complaints to {gov} and expect little to come of them. | -> Jokes about {gov} go down well among neighbours here.
+SEAT today: Radmila Aleksandrov, the miller and Elder, holds the seat of the Elder Council. The Elder Council governs Celoets. | -> {Ruler} governs {place}. Its seat has one holder at a time, and today that is {whoEnd}.
+HALL(DM) -> Whatever trouble crime brings here, it does not start in the hall.
+LEGACY siege 55y -> Some of what troubles {settlement} today began with the {calamity}, which is {timeband_age}.
+MARK wartime: Curtailed by the war.
+charter false crises wartime lends 0
+F-town tabs printed: World/Daily Life, Systems/Defense, Systems/Economics
+
+### V-dp-village-76 (village) Megachorio
+HOUSE Mill | today: Milling here is a monopoly, water or wind powered. Its keeper is usually the wealthiest villager and, for that reason, the most begrudged. | -> (today's stays)
+HOUSE Potter | today: A wheel and a modest kiln for domestic ware: plates, jugs, and storage jars, made whenever clay can be had. | -> Broken pots go on a heap behind the workshop, and the heap only grows.
+HOUSE Graveyard | today: Consecrated ground beside the house of worship, on its own plot, with a resident priest to close it. The rite is held on the day of the death, with no wait for a travelling clergyman, and the congregation has begun keeping the names in the same book as the births. The ground nearest the wall is spoken for generations ahead, and everyone here can say who holds it. | -> Each family cuts the grass around its own graves.
+HOUSE Priest (resident) | today: Says the sacraments, takes the tithe. Usually the one literate soul in the village. | -> Services are held early, before the day's work begins.
+VIEW RECENT_CHANGES.beat | today: {Event} is still remembered here, and not lightly. | -> (today's stays)
+VIEW DOSSIER_STATE_PROSE_ECONOMY.DS-ECO-10.pools.POSTURE: establi | today: With the famine on, every trade {settlement} sells outward is judged by one thing: what it can bring back to eat. | -> (today's stays)
+VIEW DOSSIER_STATE_PROSE_DEFENSE.DS-DEF-5.pools.arcane defense AB | today: {settlement}'s protection reaches as far as ordinary eyes and hands reach, and no further. | -> If magic were ever turned on {settlement}, help would have to be sent for, and paid for.
+VIEW DOSSIER_STATE_PROSE_DEFENSE.DS-DEF-5.pools.charter hall ABSE | today: {settlement} knows it needs specialists against the creatures, and has none of its own to send. | -> (today's stays)
+VIEW COMMONER_RESENTMENTS.legitimacy | today: People bring their complaints to {gov} and expect little to come of them. | -> Jokes about {gov} go down well among neighbours here.
+VIEW DOSSIER_STATE_PROSE_ECONOMY.DS-ECO-9.pools.FOOD SOURCES: one | today: Of the food {settlement} raises for itself, its {good} comes first, and after a poor season for the {good} there is less to go round. | -> Children at {settlement} are put to work at the {good} young.
+SEAT today: The Feudal Stewardship governs Megachorio. Its seat is held by Nikolaos Chrysoberges, the steward. | -> {Ruler} governs {place}. Its seat has one holder at a time, and today that is {whoEnd}.
+HALL(DM) -> (today's stays)
+LEGACY trade collapse 7y -> The {calamity} is {timeband_age}, and what it left unmended in {settlement} could still get worse.
+MARK famine: Less of it each week of the famine. [famine; needs crisis: famine]
+charter false crises famine lends 0
+F-town tabs printed: World/Daily Life, Systems/Economics, Systems/Defense
