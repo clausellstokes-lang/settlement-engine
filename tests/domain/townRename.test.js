@@ -67,4 +67,17 @@ describe('renameTownInRecord: the stored sentences follow the name, by whole wor
     expect(renameTownInRecord(s, 'Ford', 'Ford')).toEqual(s);
     expect(renameTownInRecord(s, 'Ford', '   ')).toEqual(s);
   });
+  it('a name the DM typed (a note, an edited description) is NOT rewritten: the cascade touches only the measured homes (K2-1 (iv))', () => {
+    const s = town({
+      dmNotes: 'Ford owes me a favour.', dossierNotes: 'Remember Ford at the next session.', narrativeNotes: 'Ford, in my own words.',
+      institutions: [{ name: 'Mill', desc: 'The old mill of Ford, as I rewrote it.' }],
+      _userEdits: { 'institution:0': { desc: 'The old mill of Ford, as I rewrote it.' } },
+    });
+    const after = renameTownInRecord(s, 'Ford', 'Quillmarsh');
+    expect([after.dmNotes, after.dossierNotes, after.narrativeNotes]).toEqual([s.dmNotes, s.dossierNotes, s.narrativeNotes]);
+    expect(after.institutions).toEqual(s.institutions);
+    expect(after._userEdits).toEqual(s._userEdits);
+    // anchored: the same rename DID rewrite the measured homes of this record
+    expect(after.arrivalScene).toBe('Quillmarsh sits where the road meets the river.');
+  });
 });
