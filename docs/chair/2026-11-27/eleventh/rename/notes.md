@@ -11,3 +11,6 @@
 - (D) done: D-C/D-V (300 each, 0 errors); owner vs share restricted to rendered tabs (the non-DOM surfaces are owner-only); the 39 owner/share differences after rename all = the owner-only DM resentments slot (A6). Classifier decodes HTML entities.
 - (F) done: 4 stored homes hold the town name (arrivalScene, stress.summary, pressureSentence, stress[].summary); 300/300 C, 295/300 V pages still print the old name.
 - (E) running: E-base-C/V then E-rekey-C/V (900 each, chunks of 40).
+
+- 02:27 UTC: the first E run was stopped by the harness's background time limit at E-rekey-C 637/900 (E-base-C and E-base-V complete, 900 each). Resumed from line 637 with run-e.sh (it resumes from existing lines; torn line trim); rekey-V follows.
+- E done: run-e.log `exit 0`, 4 x 900 lines, 0 errors. analyze-e.mjs C / V and analyze-e-groups.mjs C / V. The cure moves 900 / 900 pages once in each corpus. tools/rekey.patch is the scratch re-key (diff of cccda7569 src against /tmp/rename/rekey/src), never applied to any tracked tree.

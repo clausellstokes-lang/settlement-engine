@@ -1,0 +1,77 @@
+{
+ "corpus": "C",
+ "pairs": 900,
+ "errors": 0,
+ "pagesMoved": 900,
+ "tabsMoved": 900,
+ "bySurface": {
+  "tabs": 900,
+  "PDF": 900,
+  "Foundry": 539,
+  "Tonight": 225
+ },
+ "bySize": {
+  "thorp": {
+   "births": 150,
+   "moved": 150
+  },
+  "hamlet": {
+   "births": 150,
+   "moved": 150
+  },
+  "village": {
+   "births": 150,
+   "moved": 150
+  },
+  "town": {
+   "births": 150,
+   "moved": 150
+  },
+  "city": {
+   "births": 150,
+   "moved": 150
+  },
+  "metropolis": {
+   "births": 150,
+   "moved": 150
+  }
+ },
+ "linesMoved": 28031,
+ "byView": {
+  "World/Daily Life": 900,
+  "PDF/dailyLife": 900,
+  "PDF/headlines": 513,
+  "Foundry/Overview": 274,
+  "Systems/Defense": 225,
+  "Foundry/Tonight": 225,
+  "Foundry/NPC Quick Reference": 391,
+  "Tonight/sheet": 225,
+  "Systems/Power": 66
+ },
+ "sites": {
+  "FNV src/domain/crisis/crisisSummaryVantage.js :: summaryColumnOf": {
+   "pages": 293,
+   "moved": 293
+  },
+  "RZ src/domain/dailyLife.js :: pickNameable": {
+   "pages": 900,
+   "moved": 900
+  },
+  "RZ src/domain/dailyLife.js :: yields": {
+   "pages": 900,
+   "moved": 272
+  },
+  "RZ src/pdf/lib/headlines.js :: seedPick [overview: town key]": {
+   "pages": 293,
+   "moved": 223
+  },
+  "RZ src/pdf/lib/headlines.js :: seedPick [people: person key]": {
+   "pages": 758,
+   "moved": 391
+  },
+  "RZ src/domain/display/governanceAccount.js :: underOccupation": {
+   "pages": 93,
+   "moved": 66
+  }
+ }
+}

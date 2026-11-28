@@ -1,0 +1,87 @@
+diff -ru base-src/src/domain/crisis/crisisSummaryVantage.js rekey/src/domain/crisis/crisisSummaryVantage.js
+--- base-src/src/domain/crisis/crisisSummaryVantage.js	2026-11-27 19:59:22.000000000 +0000
++++ rekey/src/domain/crisis/crisisSummaryVantage.js	2026-11-27 23:36:21.356577820 +0000
+@@ -498,7 +498,7 @@
+  * @param {string} place @param {string} kind @returns {number} 0..SUMMARY_COLUMNS-1
+  */
+ export function summaryColumnOf(place, kind) {
+-  return fnv1a32(`${place}::${kind}`) % SUMMARY_COLUMNS;
++  return fnv1a32(`${globalThis.__TOWN_ID || place}::${kind}`) % SUMMARY_COLUMNS;
+ }
+ 
+ /**
+diff -ru base-src/src/domain/dailyLife.js rekey/src/domain/dailyLife.js
+--- base-src/src/domain/dailyLife.js	2026-11-27 19:59:22.000000000 +0000
++++ rekey/src/domain/dailyLife.js	2026-11-27 23:36:21.356111114 +0000
+@@ -424,7 +424,7 @@
+   const eligible = admitted.filter((l) => housesNamedIn(l.text).every((k) => !!house(k)));
+   const name = /** @type {{ name?: unknown }} */ (s).name;
+   // the rendezvous (point 120, D13 STABLE-PICKS): the eligible line whose own `id` hashes highest with the slot's key
+-  const pick = pickRendezvous(eligible, typeof name === 'string' && name ? `${name}::dailyLife.${slotKey}::${branch}` : null, (l) => l.id);
++  const pick = pickRendezvous(eligible, typeof name === 'string' && name ? `${(globalThis.__TOWN_ID || name)}::dailyLife.${slotKey}::${branch}` : null, (l) => l.id);
+   const k = pick ? statesOf(slotKey, branch) : null;
+   if (k) stated?.add(k);
+   return pick;
+@@ -680,7 +680,7 @@
+ /** @param {DailyLifeSettlement} s @param {string} slotKey @param {string} branch @returns {string|null} the pick's key */
+ const pickKey = (s, slotKey, branch) => {
+   const name = /** @type {{ name?: unknown }} */ (s).name;
+-  return typeof name === 'string' && name ? `${name}::dailyLife.${slotKey}::${branch}` : null;
++  return typeof name === 'string' && name ? `${(globalThis.__TOWN_ID || name)}::dailyLife.${slotKey}::${branch}` : null;
+ };
+ 
+ /**
+diff -ru base-src/src/domain/display/governanceAccount.js rekey/src/domain/display/governanceAccount.js
+--- base-src/src/domain/display/governanceAccount.js	2026-11-27 19:59:22.000000000 +0000
++++ rekey/src/domain/display/governanceAccount.js	2026-11-27 23:36:21.357388350 +0000
+@@ -381,7 +381,7 @@
+         : yearsAgo <= FORTUNE_LAW_TUNING.standing.weatheredWithinYears ? FORTUNE_MERIT_TIME_WORDS.generation : null;
+     let meritPrinted = false;
+     if (event && band) {
+-      const identity = `${place}::${event}::${yearsAgo}`;
++      const identity = `${globalThis.__TOWN_ID || place}::${event}::${yearsAgo}`;
+       const { line } = drawDeclared(FORTUNE_MERIT_LINES, {
+         // the pool declares nothing, so the door never refuses: A LINE THAT EVER DECLARES A NEED MOVES THIS DRAW TO `rankKey` (point 121's bar)
+         draw: (pool) => pickRendezvous(pool, identity, (l) => l.id),
+@@ -409,7 +409,7 @@
+     const age = meritRecord.history?.age;
+     if (merits.includes('lasting') && typeof age === 'number') {
+       const both = meritPrinted;
+-      const identity = `${place}::${age}`;
++      const identity = `${globalThis.__TOWN_ID || place}::${age}`;
+       const lasting = both ? FORTUNE_LASTING_LINES.find((l) => l.when === 'both') : drawDeclared(FORTUNE_LASTING_LINES, {
+         // the pool declares nothing, so the door never refuses: A LINE THAT EVER DECLARES A NEED MOVES THIS DRAW TO `rankKey` (point 121's bar)
+         draw: (pool) => pickRendezvous(pool.filter((l) => l.when === 'alone'), identity, (l) => l.id),
+diff -ru base-src/src/domain/dossier/hookLines.js rekey/src/domain/dossier/hookLines.js
+--- base-src/src/domain/dossier/hookLines.js	2026-11-27 19:59:22.000000000 +0000
++++ rekey/src/domain/dossier/hookLines.js	2026-11-27 23:36:21.357595195 +0000
+@@ -287,7 +287,7 @@
+ export function foodGapHookLine(place, facts = null) {
+   const name = typeof place?.name === 'string' ? place.name : '';
+   const band = typeof place?.band === 'string' ? place.band : '';
+-  const seed = `${name}::${band}::food-gap`;
++  const seed = `${globalThis.__TOWN_ID || name}::${band}::food-gap`;
+   const drawn = drawDeclared(FOOD_GAP_LINES, {
+     draw: (p) => p[fnv1a32(seed) % p.length], facts, key: seed,
+     poolId: 'HOOK_LINE_POOLS.foodGap', surface: 'plot_hooks', drawKind: 'H',
+diff -ru base-src/src/pdf/lib/headlines.js rekey/src/pdf/lib/headlines.js
+--- base-src/src/pdf/lib/headlines.js	2026-11-27 19:59:22.000000000 +0000
++++ rekey/src/pdf/lib/headlines.js	2026-11-27 23:36:21.358166682 +0000
+@@ -166,7 +166,7 @@
+     // One crisis: the clause follows a colon. Several: the nouns are listed and the first crisis's
+     // clause is its own sentence, so the colon never pins one crisis's evidence on the list.
+     const after = seen ? (crises.length === 1 ? `: ${seen}` : `. ${capFirst(seen)}`) : '';
+-    body = seedPick(name || tierWord || '', OVERVIEW_HEADLINES).say({ where, what, after, seen, single: crises.length === 1 });
++    body = seedPick(globalThis.__TOWN_ID || name || tierWord || '', OVERVIEW_HEADLINES).say({ where, what, after, seen, single: crises.length === 1 });
+   } else {
+     body = `${capFirst(where)} has no crisis on its hands this season`;
+   }
+@@ -431,7 +431,7 @@
+   const named = `${top.name}${who ? `, ${who},` : ''}`;
+   if (total === 1) return `One person worth knowing: ${named.replace(/,$/, '')}.`;
+   const count = capFirst(countWord(total));
+-  return seedPick(String(top.name || ''), NPCS_HEADLINES).say({ count, total, named });
++  return seedPick(String(top.id || top.name || ''), NPCS_HEADLINES).say({ count, total, named });
+ }
+ 
+ // ── Hooks ──────────────────────────────────────────────────────────────────
