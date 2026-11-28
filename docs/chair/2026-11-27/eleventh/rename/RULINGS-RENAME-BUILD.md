@@ -101,3 +101,13 @@ CONDITIONS:
 THE HOUSE: no product action renames a house: nothing is built for houses. THE VEIL's NOTE (a house's hideable class can be
 inferred from its NAME, `cohesionWeave.js:421`, so a future house rename could move a house into or out of
 "clandestine"): named for the share lane as A24, not yours.
+
+**13:24 UTC: K3-1 GAINS A FIFTH CONDITION, AND IS PUT TO A TOP-TIER READER (the chair's rule V37 (4): a call that touches
+what a served record holds goes to a Fable reader before it binds).**
+ (5) `kindName` SURVIVES EVERY OWNER PATH: save and reload, the cloud's admit, the JSON export and import, the gallery
+     import by its owner, the persist projection, the schema and its migrations, normalisation: a round-trip case for each
+     path the measure finds (a field that a save drops would undo the cure at the first save). It is stripped ONLY on the
+     paths a non-owner reads.
+THE RULING READER (`prompts/START-RULING-READER-K3.txt`) judges K3-1 cold, in parallel with the builder's measure. THE BUILDER
+goes on (measure first, then build, red first) but sends NO "TIP?" for K3 until the chair has passed or amended K3-1 on that
+reader's report.
