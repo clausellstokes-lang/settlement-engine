@@ -4,6 +4,7 @@
  */
 import { describe, it, expect } from 'vitest';
 import { renameTownInRecord } from '../../src/domain/townRename.js';
+import { applyUserEdit } from '../../src/domain/userEdits.js';
 
 /** @param {Record<string, unknown>} over */
 const town = (over = {}) => ({
@@ -67,17 +68,22 @@ describe('renameTownInRecord: the stored sentences follow the name, by whole wor
     expect(renameTownInRecord(s, 'Ford', 'Ford')).toEqual(s);
     expect(renameTownInRecord(s, 'Ford', '   ')).toEqual(s);
   });
-  it('a name the DM typed (a note, an edited description) is NOT rewritten: the cascade touches only the measured homes (K2-1 (iv))', () => {
-    const s = town({
-      dmNotes: 'Ford owes me a favour.', dossierNotes: 'Remember Ford at the next session.', narrativeNotes: 'Ford, in my own words.',
-      institutions: [{ name: 'Mill', desc: 'The old mill of Ford, as I rewrote it.' }],
-      _userEdits: { 'institution:0': { desc: 'The old mill of Ford, as I rewrote it.' } },
-    });
+  it('a name the DM typed (a note, an edited description, an edited home) is NOT rewritten: each edit made through the ledger\'s own writer, applyUserEdit; an edited home\'s ledger original follows the rename (K2-1 (iv), K2-3 (A))', () => {
+    // RE-POINTED (the chair's ruling K2-3: "a test of an edit makes the edit through the ledger's own writer"): the case built
+    // `_userEdits` by hand and edited no home; it now edits through applyUserEdit, the arrival home among them. The notes' and the
+    // house's expects are kept; the old "`_userEdits` unchanged" is replaced by K2-3's rule (the edited home's original follows).
+    const s = town({ dmNotes: 'Ford owes me a favour.', dossierNotes: 'Remember Ford at the next session.', narrativeNotes: 'Ford, in my own words.',
+      institutions: [{ name: 'Mill', desc: 'The mill of Ford.' }] });
+    applyUserEdit(s.institutions[0], 'desc', 'The old mill of Ford, as I rewrote it.');
+    applyUserEdit(s, 'arrivalScene', 'Ford, as I described it to my table.');
     const after = renameTownInRecord(s, 'Ford', 'Quillmarsh');
     expect([after.dmNotes, after.dossierNotes, after.narrativeNotes]).toEqual([s.dmNotes, s.dossierNotes, s.narrativeNotes]);
     expect(after.institutions).toEqual(s.institutions);
-    expect(after._userEdits).toEqual(s._userEdits);
-    // anchored: the same rename DID rewrite the measured homes of this record
-    expect(after.arrivalScene).toBe('Quillmarsh sits where the road meets the river.');
+    expect(after.arrivalScene, 'an edited home keeps the DM\'s words').toBe('Ford, as I described it to my table.');
+    expect(after._userEdits.arrivalScene.value).toBe('Ford, as I described it to my table.');
+    expect(after._userEdits.arrivalScene.originalValue, 'the engine\'s sentence follows the rename').toBe('Quillmarsh sits where the road meets the river.');
+    expect(s._userEdits.arrivalScene.originalValue, 'the record handed in is not mutated').toBe('Ford sits where the road meets the river.');
+    // anchored: the same rename DID rewrite an unedited home of this record
+    expect(after.pressureSentence).toBe("Quillmarsh's debt grows, and the salt runs short.");
   });
 });
