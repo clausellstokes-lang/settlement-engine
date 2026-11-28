@@ -14,10 +14,16 @@
  *     "Ana Ford", "Ford Abbey") is masked and left as it is;
  *   - where the old name IS another stored name (a house called what the town is called), nothing but `name` is
  *     rewritten: the sentence cannot say which it means, and the rename does not guess.
+ *   - a home the DM EDITED (`userEdits.js :: EDITABLE_FIELDS.settlement`, the ledger `_userEdits[home]`) is not rewritten:
+ *     the field and the ledger's `value` are the DM's words, as typed; the ledger's `originalValue` (the engine's sentence)
+ *     follows the rename through the ledger's own writer (`rekeyUserEditOriginal`), so a revert prints it under the new name
+ *     (point 124's cure, the chair's ruling K2-3);
+ *   - the AI narrative takes the same rewrite (`townNameRewrite`, read by `lib/narrativeMutations.js :: applyTownRenameToAiData`).
  * A rename back restores the record byte for byte where the new name was in none of the homes before.
  * Pure: the record handed in is never mutated.
  */
 import { substituteWholeWord } from '../lib/narrativeMutations.js';
+import { isEdited, rekeyUserEditOriginal } from './userEdits.js';
 
 /** The stored sentence homes of a town's own name, each a top-level key whose value is a sentence. */
 export const TOWN_NAME_SENTENCE_KEYS = Object.freeze(['arrivalScene', 'pressureSentence']);
@@ -67,6 +73,24 @@ function rewrite(sentence, oldName, newName, shields) {
 }
 
 /**
+ * THE ONE RULE OF A TOWN's RENAME, for any text: whole word, the record's other stored names shielding, and NOTHING
+ * rewritten where the old name IS another stored name (the do-nothing rule: `null`). The record's cascade below and the AI
+ * narrative's (`narrativeMutations.js :: applyTownRenameToAiData`) both read it, so the two follow one rule.
+ * @param {object} settlement the town's record (before or after the rename: its other names are the same)
+ * @param {string} oldName @param {string} newName
+ * @returns {((v: unknown) => unknown) | null} the rewrite of a text (a non-string is handed back), or null where nothing is rewritten
+ */
+export function townNameRewrite(settlement, oldName, newName) {
+  const from = text(oldName);
+  const to = text(newName);
+  if (!settlement || typeof settlement !== 'object' || !from || !to || from === to) return null;
+  const others = otherNamesOf(/** @type {Parameters<typeof otherNamesOf>[0]} */ (settlement));
+  if (others.includes(from)) return null;
+  const shields = others.filter((n) => n !== from && substituteWholeWord(n, from, '\uE001') !== n);
+  return (v) => (typeof v === 'string' ? rewrite(v, from, to, shields) : v);
+}
+
+/**
  * The record under its new name, the stored sentences that held the old one rewritten.
  * @template {object} T
  * @param {T} settlement the town's record
@@ -78,15 +102,21 @@ export function renameTownInRecord(settlement, oldName, newName) {
   if (!settlement || typeof settlement !== 'object') return settlement;
   const from = text(oldName);
   const to = text(newName);
-  const out = /** @type {Record<string, unknown>} */ ({ ...settlement });
+  let out = /** @type {Record<string, unknown>} */ ({ ...settlement });
   if (to || !('name' in out)) out.name = to || out.name;
-  if (!from || !to || from === to) return /** @type {T} */ (out);
-  const others = otherNamesOf(/** @type {Parameters<typeof otherNamesOf>[0]} */ (settlement));
-  if (others.includes(from)) return /** @type {T} */ (out);
-  const shields = others.filter((n) => n !== from && substituteWholeWord(n, from, '\uE001') !== n);
-  /** @param {unknown} v */
-  const said = (v) => (typeof v === 'string' ? rewrite(v, from, to, shields) : v);
-  for (const k of TOWN_NAME_SENTENCE_KEYS) if (typeof out[k] === 'string') out[k] = said(out[k]);
+  const said = townNameRewrite(settlement, from, to);
+  if (!said) return /** @type {T} */ (out);
+  let copied = false;
+  for (const k of TOWN_NAME_SENTENCE_KEYS) {
+    if (isEdited(out, k)) {
+      // EDITED (K2-3 (A)): the DM's words stay; the engine's original follows through the ledger's own writer, on a copy of
+      // the record (the one handed in is never mutated; an edited home is rare, so the copy is taken only then)
+      if (!copied) { out = JSON.parse(JSON.stringify(out)); copied = true; } // JSON, not structuredClone: the store hands in an immer draft, which structuredClone refuses (the record is JSON-safe: it is saved as JSON)
+      rekeyUserEditOriginal(out, k, said);
+      continue;
+    }
+    if (typeof out[k] === 'string') out[k] = said(out[k]);
+  }
   /** @param {{ summary?: unknown } | null | undefined} e @returns {unknown} a crisis entry, its `summary` said under the new name */
   const entry = (e) => (e && typeof e === 'object' && typeof e.summary === 'string' ? { ...e, summary: said(e.summary) } : e);
   /** @param {unknown} v a crisis container: one entry or a list (TOWN_NAME_CRISIS_KEYS) */

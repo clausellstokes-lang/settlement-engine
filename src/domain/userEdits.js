@@ -245,6 +245,27 @@ export function rekeyUserEdit(entity, path, rewrite) {
 }
 
 /**
+ * RE-KEY one edit's ORIGINAL, for a rename the engine's sentence follows while the DM's words stay (point 124, the chair's
+ * ruling K2-3). The town's rename does not rewrite a home the DM edited: the field and the record's `value` are the DM's
+ * words, left as typed. The record's `originalValue` is the ENGINE's sentence, which the rename moves, so a revert prints
+ * the engine's sentence under the new name. Not the DM editing: `value`, `editedAt` and the field are untouched. The rename
+ * calls this rather than writing the record itself: the edit record has one writer, this module.
+ *
+ * @param {EditableEntity | null | undefined} entity
+ * @param {string} path
+ * @param {(value: unknown) => unknown} rewrite the new original, or the SAME value when nothing moves
+ * @returns {boolean} whether anything moved
+ */
+export function rekeyUserEditOriginal(entity, path, rewrite) {
+  const record = getEditRecord(entity, path);
+  if (!record || typeof record !== 'object') return false;
+  const next = rewrite(record.originalValue);
+  if (next === record.originalValue) return false;
+  record.originalValue = next;
+  return true;
+}
+
+/**
  * Revert a user edit at `path` to its original value. Removes the
  * `_userEdits` record. If no edits remain on the entity, clears
  * `_userEdits` and `_authored` so canonStatus reverts to inferring
@@ -299,7 +320,8 @@ export function getEditedPaths(entity) {
  * @param {EditableEntity | null | undefined} entity @param {string} path @returns {boolean}
  */
 export function isEdited(entity, path) {
-  return !!(entity && entity._userEdits && Object.prototype.hasOwnProperty.call(entity._userEdits, path));
+  const ledger = entity ? entity._userEdits : undefined; // read ONCE (point 124's cure: the ledger's readers stay at the shape register's ceiling)
+  return !!(ledger && Object.prototype.hasOwnProperty.call(ledger, path));
 }
 
 /**

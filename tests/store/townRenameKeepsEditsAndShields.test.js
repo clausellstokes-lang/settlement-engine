@@ -55,7 +55,7 @@ describe('(A) a home the DM edited keeps the DM\'s words; its ledger\'s original
   /** @type {any} */ let born;
   beforeAll(async () => {
     await loadGenerationLawPayloads();
-    born = generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: 'village' }), null, { seed: 'town-rename-keeps-edits-0', customContent: {} });
+    born = generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: 'village' }), null, { seed: 'town-rename-keeps-edits-10', customContent: {} }); // the first of the series (from 0) whose two homes both name the town (probed), so the anchor below meets an engine sentence on each
   }, HEAVY);
 
   test('arrivalScene and pressureSentence, each edited through applyUserEdit, the rename, then a revert', () => {
