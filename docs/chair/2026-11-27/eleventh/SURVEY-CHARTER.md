@@ -11,7 +11,7 @@
    rather than qualifiers: […] What are your thoughts?"
 3. (about 21:55 UTC) "Then I approve of all of this as planned and to be implemented prerelease"
 
-4. (about 01:00 UTC on 2026-11-28, after the chair told him the voices measure's cold read: "quoting everything does not
+4. (about 00:50 UTC on 2026-11-28, after the chair told him the voices measure's cold read: "quoting everything does not
    work") "Rather than quoting everything which includes the surveyor, think that the surveyor is inherently understood as
    the author of everything except the quoted voices. The pages are his recordings, remarks, and anecdotes rather than
    explicitly attributing everything to the surveyor as to quote him."
