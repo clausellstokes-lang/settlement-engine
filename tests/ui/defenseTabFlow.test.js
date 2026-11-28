@@ -45,6 +45,7 @@ import { projectShareVeil, writeShareVeil, isVeiled } from '../../src/domain/dis
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { magicWorksAt } from '../../src/domain/worldPulse/magicWorksAt.js';
+import { pickKeyOf } from '../../src/domain/display/pickKey.js'; // point 124: the desks' seed is the town's pick key
 
 const e = React.createElement;
 const HERE = dirname(fileURLToPath(import.meta.url));
@@ -57,7 +58,7 @@ const ROUTER_SRC = join(HERE, '../../src/components/OutputContainer.jsx');
  * would make every arm below assert against a sentence no surface produces.
  */
 const opts = (s) => ({
-  seed: String(s?._seed ?? s?.id ?? ''), audience: 'dm', tierNoun: tierNounFor(s?.tier),
+  seed: String(pickKeyOf(s, s?._seed ?? s?.id ?? '')), audience: 'dm', tierNoun: tierNounFor(s?.tier),
 });
 
 /** Open a collapsed `Section` by its title, so its children reach the DOM. */

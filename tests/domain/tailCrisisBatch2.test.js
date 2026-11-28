@@ -14,6 +14,7 @@ import { composeTonightSheet } from '../../src/domain/summary/tonightSheet.js';
 import { crisisSummaryForSurface } from '../../src/domain/crisis/crisisSummaryVantage.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { pickKeyOf } from '../../src/domain/display/pickKey.js'; // point 124: the vantage's column keys on the town's pick key
 
 const SIZE = '(thorp|hamlet|village|town|city|metropolis)';
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -49,7 +50,7 @@ const FALSE = [
   // estates: an elder's, a priest's or a council's rule, no lord and no landed power standing (09631 03978 09633 09630 09632 09626)
   ['r2s-plague_onset-hamlet-1', 'run by its estates', 'Germanic-inspired. Ask about the place and you are told it is built in timber and stone.'],
   ['r2r-village-21', 'run by its estates', 'built in timber and stone.'],
-  ['r2s-under_siege-metropolis-0', 'run by guild and estate', 'Germanic-inspired, and it shows: built in timber and stone.'],
+  ['r2s-under_siege-metropolis-6', 'run by guild and estate', 'Germanic-inspired, and it shows: built in timber and stone.'], // point 124 (the pick keys on the town's id): re-keyed by identity from r2s-under_siege-metropolis-0, probed
   ['r2s-under_siege-city-3', 'run by guild and estate', 'built in timber and stone.'],
   ['r2r-thorp-45', 'run by its estates', 'built in timber and stone.'],
   // under an occupation: who holds the place (09628 B03858 18585 18583 18459 12540 10066 10049 10048)
@@ -58,12 +59,12 @@ const FALSE = [
   ['r2s-occupied-hamlet-0', 'held by clan and caravan', 'built on clan lines, held, for now, by another power.'], // TAIL-CRISIS-4 (K19): re-keyed by identity (no herds, no pasture)
   ['r2s-occupied-metropolis-2', 'held by clan and caravan', 'built on clan lines, held, for now, by another power.'],
   ['r2s-occupied-metropolis-3', 'under temple and guild', 'in quarters by trade, held, for now, by another power.'],
-  ['r2r-thorp-24', 'run by patronage and law', 'Latin-inspired. Ask about the place and you are told it is held, for now, by another power.'],
+  ['r2r-thorp-1', 'run by patronage and law', 'Latin-inspired. Ask about the place and you are told it is held, for now, by another power.'], // point 124 (the pick keys on the town's id): re-keyed by identity from r2r-thorp-24, probed
   ['r2r-thorp-27', 'run by civic association', 'built on riverside ground, held, for now, by another power.'],
   ['r2s-occupied-metropolis-1', 'run by civic association', 'on hillside ground, held, for now, by another power.'],
   ['r2s-occupied-metropolis-0', 'run by civic association', 'in forest country, held, for now, by another power.'],
   // patronage and law under household consensus or elders: custom (12545 12542)
-  ['r2r-thorp-54', 'run by patronage and law', 'Latin-inspired; people here live in a place run by custom more than by law.'],
+  ['r2r-thorp-35', 'run by patronage and law', 'Latin-inspired; people here live in a place run by custom more than by law.'], // point 124 (the pick keys on the town's id): re-keyed by identity from r2r-thorp-54, probed
   ['r2s-religious_conversion-thorp-3', 'run by patronage and law', 'run by custom more than by law.'],
   // civic association under an elder, a headman or a household council (03984 10044 03987 10045 10072 10046)
   ['r2s-under_siege-thorp-2', 'run by civic association', 'built on hillside ground.'],
@@ -74,7 +75,7 @@ const FALSE = [
   ['r2s-politically_fractured-hamlet-3', 'run by civic association', 'built on the open plain.'],
   // the harbour with no docks (10071 10054)
   ['r2s-indebted-village-3', 'built around the harbour', 'built on the coast.'],
-  ['r2s-mass_migration-hamlet-1', 'built around the harbour', 'Greek-inspired. Ask about the place and you are told it is built on the coast.'],
+  ['r2s-mass_migration-hamlet-1', 'built around the harbour', 'Greek-inspired, built on the coast.'], // point 124: the scope line's FRAME (A29) keys on the town's id; the clause it bears is the same
   // a hall that no roster holds (15013 03970 15016 15015 15026 03969)
   ['r2s-indebted-thorp-1', 'built around the hall', 'built on kin, oath and the assembly.'],
   ['r2s-recently_betrayed-thorp-1', 'built around the hall', 'built on kin, oath and the assembly.'],
@@ -106,14 +107,14 @@ const KEEP = [
 const stores = (s) => (composeTonightSheet(s).facts.find((f) => f.id === 'food') || { text: '' }).text;
 
 /** @param {any} s */
-const vantages = (s) => [].concat(s.stress || []).flatMap((e) => ['cover', 'overview', 'defence', 'tonight'].map((k) => crisisSummaryForSurface(e, s.name, /** @type {any} */ (k)) || '')).join(' ');
+const vantages = (s) => [].concat(s.stress || []).flatMap((e) => ['cover', 'overview', 'defence', 'tonight'].map((k) => crisisSummaryForSurface(e, s.name, /** @type {any} */ (k), undefined, pickKeyOf(s, s.name)) || '')).join(' ');
 
 /** [seed, surface, the line as it printed at 9c07f7461, what prints now] */
 const NOW = [
   // K11: a hamlet, a village and a thorp with no office on the roster
-  ['r2s-succession_void-hamlet-2', vantages, 'and each office does as it sees fit meanwhile.', 'until the seat is filled, and meanwhile everyone does as they see fit.'],
-  ['r2s-succession_void-village-0', vantages, 'and each office does as it sees fit meanwhile.', 'until the seat is filled, and meanwhile everyone does as they see fit.'],
-  ['r2s-succession_void-thorp-0', vantages, 'now runs itself, and no one has the standing to make them answer.', 'has the standing to make anyone answer.'],
+  ['r2s-succession_void-hamlet-0', vantages, 'and each office does as it sees fit meanwhile.', 'until the seat is filled, and meanwhile everyone does as they see fit.'], // point 124 (the pick keys on the town's id): re-keyed by identity from r2s-succession_void-hamlet-2, probed
+  ['r2s-succession_void-village-3', vantages, 'and each office does as it sees fit meanwhile.', 'until the seat is filled, and meanwhile everyone does as they see fit.'], // point 124 (the pick keys on the town's id): re-keyed by identity from r2s-succession_void-village-0, probed
+  ['r2s-succession_void-thorp-6', vantages, 'now runs itself, and no one has the standing to make them answer.', 'has the standing to make anyone answer.'], // point 124 (the pick keys on the town's id): re-keyed by identity from r2s-succession_void-thorp-0, probed
   // K1/K7 (READ-ALL 18671): the granary under a famine, and under a siege that leaves a gap
   ['r2s-famine-town-2', stores, 'about five months of grain.', 'Stores: a granary, about five months of grain, and the famine is eating into them.'],
   ['r2s-famine-town-3', stores, 'about three months of grain.', 'Stores: a granary, about three months of grain, and the famine is eating into them.'],

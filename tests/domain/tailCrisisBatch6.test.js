@@ -17,6 +17,7 @@ import { cultureScopeLine } from '../../src/domain/summary/settlementQuickGuide.
 import { crisisHookFor } from '../../src/domain/crisis/crisisHooks.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { pickKeyOf } from '../../src/domain/display/pickKey.js'; // point 124: the vantage's column keys on the town's pick key
 
 const SIZE = '(thorp|hamlet|village|town|city|metropolis)';
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -51,7 +52,7 @@ beforeAll(async () => {
 const named = (s, text) => text.replaceAll(String(s.name ?? '\u0000'), '{name}');
 /** Every vantage line the town prints for its crises (the Defense tab, the exports, the Tonight sheet). @param {any} s */
 const vantages = (s) => named(s, [].concat(s.stress || []).filter(Boolean)
-  .flatMap((e) => ['cover', 'overview', 'defence', 'tonight'].map((surface) => crisisSummaryForSurface(e, s.name, /** @type {any} */ (surface)) || ''))
+  .flatMap((e) => ['cover', 'overview', 'defence', 'tonight'].map((surface) => crisisSummaryForSurface(e, s.name, /** @type {any} */ (surface), undefined, pickKeyOf(s, s.name)) || ''))
   .join('\n'));
 /** The quick guide's culture line. @param {any} s */
 const scope = (s) => cultureScopeLine(s);
@@ -63,11 +64,11 @@ const cast = (s) => [].concat(s.stress || []).filter(Boolean)
 /** [seed, surface, words that must NOT print, what prints in their place] */
 const FALSE = [
   // K18: beside "Street-level confrontations between insurgent supporters and the watch" (Dangerous — Insurgency)
-  ['r2r-thorp-22', vantages, 'you would not see the quarrel over who is really in charge', 'Travellers in {name} are pressed, sooner or later, to say which side they are on, and both sides take note of the answer.'],
-  ['r2r-thorp-22', vantages, 'Nobody in {name} fights in the open', 'In {name} both the government and those who defy it press people to say which side they are on, and those watching count who has stopped obeying.'],
-  ['r2r-thorp-25', vantages, 'There is no fighting in {name}', 'In {name} the quarrel over who is in charge has turned to violence, and orders go unheeded and dues unpaid.'],
-  ['r2r-thorp-25', vantages, '{name} looks calm', 'In {name} orders go unanswered, and some of its people have turned against those in charge.'],
-  ['r2r-village-26', vantages, 'grows quietly', 'The defiance of {name}\'s government grows, and those watching it count who still obeys and who has stopped.'],
+  ['r2r-thorp-52', vantages, 'you would not see the quarrel over who is really in charge', 'Travellers in {name} are pressed, sooner or later, to say which side they are on, and both sides take note of the answer.'], // point 124 (the vantage keys on the town's id): re-keyed by identity from r2r-thorp-22, probed
+  ['r2r-thorp-52', vantages, 'Nobody in {name} fights in the open', 'In {name} both the government and those who defy it press people to say which side they are on, and those watching count who has stopped obeying.'], // point 124 (the vantage keys on the town's id): re-keyed by identity from r2r-thorp-22, probed
+  ['r2r-thorp-75', vantages, 'There is no fighting in {name}', 'In {name} the quarrel over who is in charge has turned to violence, and orders go unheeded and dues unpaid.'], // point 124 (the vantage keys on the town's id): re-keyed by identity from r2r-thorp-25, probed
+  ['r2r-thorp-75', vantages, '{name} looks calm', 'In {name} orders go unanswered, and some of its people have turned against those in charge.'], // point 124 (the vantage keys on the town's id): re-keyed by identity from r2r-thorp-25, probed
+  ['r2r-village-29', vantages, 'grows quietly', 'The defiance of {name}\'s government grows, and those watching it count who still obeys and who has stopped.'], // point 124 (the vantage keys on the town's id): re-keyed by identity from r2r-village-26, probed
   // K19: the tank (wells and springs only), the pastoral life (no herds, no pasture: a coastal port fed by its fish)
   ['r2r-town-7', scope, 'the tank and the bazaar', 'built around the bazaar, in quarters by trade, under temple and guild'],
   ['r2r-village-1', scope, 'the tank and the bazaar', 'built around the bazaar, under the temple'],
@@ -81,7 +82,7 @@ const FALSE = [
 
 /** [seed, surface, a true sibling that must still print] */
 const KEEP = [
-  ['r2r-city-33', vantages, 'In {name} people keep out of the quarrel between the government and those who defy it, and away from anyone asking questions.'],
+  ['r2r-thorp-25', vantages, 'In {name} people keep out of the quarrel between the government and those who defy it, and away from anyone asking questions.'], // point 124 (the vantage keys on the town's id): re-keyed by identity from r2r-city-33, probed
   ['r2s-plague_onset-metropolis-1', scope, 'built around the tank and the bazaar'],
   ['r2r-thorp-29', scope, 'built for a pastoral life half-settled and half-moving'],
 ];

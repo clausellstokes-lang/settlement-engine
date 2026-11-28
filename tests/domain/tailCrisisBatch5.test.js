@@ -10,6 +10,7 @@ import { beforeAll, describe, expect, it } from 'vitest';
 import { crisisSummaryForSurface } from '../../src/domain/crisis/crisisSummaryVantage.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { pickKeyOf } from '../../src/domain/display/pickKey.js'; // point 124: the vantage's column keys on the town's pick key
 
 const SIZE = '(thorp|hamlet|village|town|city|metropolis)';
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -42,7 +43,7 @@ beforeAll(async () => {
 
 /** Every vantage line the town prints for its crises, on the export surfaces and the Tonight sheet. @param {any} s */
 const lines = (s) => [].concat(s.stress || []).filter(Boolean)
-  .flatMap((e) => ['cover', 'overview', 'defence', 'tonight'].map((surface) => crisisSummaryForSurface(e, s.name, /** @type {any} */ (surface)) || ''))
+  .flatMap((e) => ['cover', 'overview', 'defence', 'tonight'].map((surface) => crisisSummaryForSurface(e, s.name, /** @type {any} */ (surface), undefined, pickKeyOf(s, s.name)) || ''))
   .join('\n').replaceAll(String(born.get(lastSeed)?.name ?? '\u0000'), '{name}');
 /** @type {string} */
 let lastSeed = '';
@@ -51,11 +52,11 @@ const said = (seed) => { lastSeed = seed; return lines(birth(seed)); };
 
 /** [seed, words that must NOT print, what prints in their place] (READ-ALL-3 row ids) */
 const FALSE = [
-  ['r2s-mass_migration-thorp-3', 'Food in {name} is running short', '{name} has many more mouths to feed than it had, and there is not work enough for the newcomers.'], // 10399 16309
-  ['r2s-mass_migration-thorp-2', 'food is running short', 'With so many new mouths in {name}, there is not work for everyone who wants it.'], // 31407
+  ['r2s-mass_migration-thorp-4', 'Food in {name} is running short', '{name} has many more mouths to feed than it had, and there is not work enough for the newcomers.'], // 10399 16309 // point 124 (the vantage keys on the town's id): re-keyed by identity from r2s-mass_migration-thorp-3, probed
+  ['r2s-mass_migration-thorp-3', 'food is running short', 'With so many new mouths in {name}, there is not work for everyone who wants it.'], // 31407 // point 124 (the vantage keys on the town's id): re-keyed by identity from r2s-mass_migration-thorp-2, probed
   ['r2s-wartime-thorp-2', 'the food stores are guarded day and night', 'In {name} whatever food is put by is watched day and night, and nobody carrying a sack goes unquestioned.'], // 13667
   ['r2s-plague_onset-thorp-0', 'Fewer people come to market', 'Fewer people come to {name} since the sickness began, and fewer goods come with them.'], // 09896
-  ['r2s-plague_onset-thorp-2', 'fewer come to market', 'Travel is discouraged in {name}, and fewer come and go than before the sickness.'], // 29529 08228
+  ['r2s-plague_onset-thorp-5', 'fewer come to market', 'Travel is discouraged in {name}, and fewer come and go than before the sickness.'], // 29529 08228 // point 124 (the vantage keys on the town's id): re-keyed by identity from r2s-plague_onset-thorp-2, probed
   ['r2s-monster_pressure-thorp-3', 'Lookouts around', 'People in {name} keep an eye on the roads and the edges of the fields, and nobody lingers outside once the light goes.'], // 15776
 ];
 

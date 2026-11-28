@@ -17,6 +17,7 @@ import { composeTonightSheet } from '../../../src/domain/summary/tonightSheet.js
 import { crisisSummaryForSurface } from '../../../src/domain/crisis/crisisSummaryVantage.js';
 import { factsOf } from '../../../src/domain/facts/factsOf.js';
 import { atomHolds } from '../../../src/domain/facts/factVocabulary.js';
+import { pickKeyOf } from '../../../src/domain/display/pickKey.js'; // point 124: the vantage's column keys on the town's pick key
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
 /** The reader's cfgFor for the two seed families used here. @param {string} seed */
@@ -45,7 +46,7 @@ beforeAll(async () => {
   towns = SEEDS.map((seed) => {
     const s = /** @type {any} */ (generateSettlementPipeline(cfgFor(seed), null, { seed, customContent: {} }));
     const famine = [].concat(s.stress || []).find((/** @type {any} */ e) => e?.type === 'famine');
-    return { seed, town: String(s.name), grain: atomHolds('grain', factsOf(s)) !== false, bare: String(famine ? crisisSummaryForSurface(famine, s.name, 'tonight') : ''), sheet: String(composeTonightSheet(s).opening || '') };
+    return { seed, town: String(s.name), grain: atomHolds('grain', factsOf(s)) !== false, bare: String(famine ? crisisSummaryForSurface(famine, s.name, 'tonight', undefined, pickKeyOf(s, s.name)) : ''), sheet: String(composeTonightSheet(s).opening || '') };
   });
 }, 600000);
 

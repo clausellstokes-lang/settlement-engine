@@ -39,6 +39,7 @@ import { buildThreatAssessment } from '../../src/domain/display/threatAssessment
 import { institutionsPoolKey } from '../../src/domain/display/stateProse/generalStateProse.js';
 import { generalDeskLines } from '../../src/components/new/generalDeskRead.js';
 import { variantByVid } from '../helpers/drawnProse.js';
+import { pickKeyOf } from '../../src/domain/display/pickKey.js'; // point 124: the desks' seed is the town's pick key
 
 const SIZE = '(thorp|hamlet|village|town|city|metropolis)';
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -222,7 +223,7 @@ describe('5 · the Legal row\'s prison is the live roster\'s (the chair\'s item 
   /** @param {any} r */
   const legal = (r) => deriveSupportingCapabilities(r).find((c) => c.label === 'Legal Infrastructure');
   /** @param {any} r */
-  const internalKey = (r) => pk(defenseThreatProse(r, { seed: String(r._seed ?? r.id ?? '') }).internal);
+  const internalKey = (r) => pk(defenseThreatProse(r, { seed: String(pickKeyOf(r, r._seed ?? r.id ?? '')) }).internal);
   it('POSITIVE: r2r-city-41 with its prison ruined: the row says no prison stands, and the desk draws the court-only pool, in all three views', () => {
     const born = BORN.get('r2r-city-41');
     const s = prisonRuined(born);
@@ -267,7 +268,8 @@ describe('5 · the Legal row\'s prison is the live roster\'s (the chair\'s item 
     const s = BORN.get('r2r-city-41');
     expect(internalLine(s)).toMatch(/Arrest, trial and gaol all work here\.$/);
     expect(genKey(s)).toBe('ADMINISTERED');
-    expect(gen17(s)).toContain(variantByVid({ leaf: 'general', blockId: 'DS-GEN-17', poolKey: 'ADMINISTERED', vid: 1, slots: { settlement: String(s.name) } }).replace(/[.,;].*$/, ''));
+    // point 124 (the desks key on the town's id): the full chain is now v2 (`court sits` + `prison`, as v1), the draw's own pick
+    expect(gen17(s)).toContain(variantByVid({ leaf: 'general', blockId: 'DS-GEN-17', poolKey: 'ADMINISTERED', vid: 2, slots: { settlement: String(s.name) } }).replace(/[.,;].*$/, ''));
   });
   it('FR19 item 6 · POSITIVE (born): where the stamped flag calls a town hall a court, the threat line says what the Legal row says', () => {
     const failures = collectSeedFailures([

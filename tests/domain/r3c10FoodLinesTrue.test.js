@@ -52,6 +52,7 @@ import { foodwaysLineOf, sourcesNamedIn } from '../../src/domain/foodways.js';
 import { crisisSummaryForSurface } from '../../src/domain/crisis/crisisSummaryVantage.js';
 import { factsOf } from '../../src/domain/facts/factsOf.js';
 import { atomHolds } from '../../src/domain/facts/factVocabulary.js';
+import { pickKeyOf } from '../../src/domain/display/pickKey.js'; // point 124: the vantage's column keys on the town's pick key
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
 const SIZES = '(thorp|hamlet|village|town|city|metropolis)';
@@ -198,11 +199,29 @@ describe('(b) the fished-out water: a foodways line names no catch from a water 
   });
 });
 
+/**
+ * POINT 124 (the vantage's column keys on the town's id, no longer its name): each of these towns keeps its facts (no grain, or
+ * grain) and is held under a STATED ID that draws the harvest column, found by the key's hash (probed: the first `<seed>#<k>`), as
+ * the name drew it before; a deriver that lets the harvest line through, or loses it, still reds here. The rest key on their own id.
+ * @type {Record<string, string>}
+ */
+const STATED_ID = {
+  'rr3-thorp-under_siege-rand-3': 'rr3-thorp-under_siege-rand-3#0',
+  'rr3-thorp-famine-port-1': 'rr3-thorp-famine-port-1#0',
+  'r2s-famine-town-3': 'r2s-famine-town-3#1',
+  'rr3-metropolis-under_siege+famine-rand-1': 'rr3-metropolis-under_siege+famine-rand-1#0',
+  'rr3-thorp-under_siege+famine-rand-2': 'rr3-thorp-under_siege+famine-rand-2#2',
+  'rr3-metropolis-famine-port-1': 'rr3-metropolis-famine-port-1#1',
+  'rr3-hamlet-under_siege+famine-rand-2': 'rr3-hamlet-under_siege+famine-rand-2#2',
+  'rr3-town-famine-rand-0': 'rr3-town-famine-rand-0#2',
+  'rr3-metropolis-famine-rand-4': 'rr3-metropolis-famine-rand-4#0',
+};
 /** @param {string} seed @param {'tonight'|'overview'} surface @param {boolean} withFacts */
 const famineLine = (seed, surface, withFacts) => {
-  const { s } = /** @type {{ s: any }} */ (famineTowns.find((t) => t.seed === seed));
+  const { s: born } = /** @type {{ s: any }} */ (famineTowns.find((t) => t.seed === seed));
+  const s = STATED_ID[seed] ? { ...born, id: STATED_ID[seed] } : born;
   const entry = [].concat(s.stress || []).find((/** @type {any} */ e) => e?.type === 'famine');
-  return { town: s.name, grain: atomHolds('grain', factsOf(s)), line: String(withFacts ? crisisSummaryForSurface(entry, s.name, surface, factsOf(s)) : crisisSummaryForSurface(entry, s.name, surface)) };
+  return { town: s.name, grain: atomHolds('grain', factsOf(s)), line: String(withFacts ? crisisSummaryForSurface(entry, s.name, surface, factsOf(s), pickKeyOf(s, s.name)) : crisisSummaryForSurface(entry, s.name, surface, undefined, pickKeyOf(s, s.name))) };
 };
 const HARVEST = { tonight: /has lost a second harvest\./, overview: /^The harvest in .+ has failed, and its leaders are rationing/ };
 const SHORT = { tonight: /^.+ has gone short of food for a second season\. Its leaders have begun rationing, while the families who can afford it hoard what they have\.$/,

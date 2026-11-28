@@ -14,6 +14,7 @@ import { faithLinesOf, faithReadingOf } from '../../src/domain/dossier/faithRead
 import { crisisSummaryForSurface } from '../../src/domain/crisis/crisisSummaryVantage.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { pickKeyOf } from '../../src/domain/display/pickKey.js'; // point 124: the vantage's column keys on the town's pick key
 
 const SIZE = '(thorp|hamlet|village|town|city|metropolis)';
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -49,7 +50,7 @@ const faith = (s) => faithLinesOf(faithReadingOf(s), { tierNoun: s.tier }).join(
 /** @param {any} s */
 const summary = (s) => [].concat(s.stress || []).map((e) => e?.summary || '').join(' ');
 /** @param {any} s */
-const vantages = (s) => [].concat(s.stress || []).flatMap((e) => ['cover', 'overview', 'defence', 'tonight'].map((k) => crisisSummaryForSurface(e, s.name, /** @type {any} */ (k)) || '')).join(' ');
+const vantages = (s) => [].concat(s.stress || []).flatMap((e) => ['cover', 'overview', 'defence', 'tonight'].map((k) => crisisSummaryForSurface(e, s.name, /** @type {any} */ (k), undefined, pickKeyOf(s, s.name)) || '')).join(' ');
 /** @param {any} s */
 const hooks = (s) => (s.economicViability?.plotHooks || []).map((/** @type {any} */ h) => (typeof h === 'string' ? h : h.hook)).join(' ');
 
@@ -68,12 +69,12 @@ const FALSE = [
   // (its outlook draws no starving hook); the lowest r2r-thorp under a siege whose outlook draws the starving hook is
   // thorp-84 (of 200; the others draw it under a famine), the row's own pair restored
   ['r2r-thorp-84', hooks, 'The settlement is starving, and its hungriest are turning to banditry.', 'The settlement is starving, and its hungriest steal what food they can find.'],
-  ['r2r-thorp-52', vantages, 'officials who will not act', 'orders go unheeded and dues unpaid'], // TAIL-CRISIS-4 (K18): re-keyed by identity (the line now says the quarrel has turned to violence)
-  ['r2r-thorp-52', vantages, 'one of its strongest powers is defying them', 'some of its people are defying them'],
-  ['r2s-monster_pressure-thorp-0', vantages, 'the lookouts count the days between attacks', 'and people count the days between attacks'],
+  ['r2r-thorp-75', vantages, 'officials who will not act', 'orders go unheeded and dues unpaid'], // TAIL-CRISIS-4 (K18): re-keyed by identity (the line now says the quarrel has turned to violence) // point 124 (the vantage keys on the town's id): re-keyed by identity from r2r-thorp-52, probed
+  ['r2r-thorp-75', vantages, 'one of its strongest powers is defying them', 'some of its people are defying them'], // point 124 (the vantage keys on the town's id): re-keyed by identity from r2r-thorp-52, probed
+  ['r2s-monster_pressure-thorp-2', vantages, 'the lookouts count the days between attacks', 'and people count the days between attacks'], // point 124 (the vantage keys on the town's id): re-keyed by identity from r2s-monster_pressure-thorp-0, probed
   ['r2s-monster_pressure-thorp-3', vantages, 'Every cart that fails to reach', 'goes without more of what it needs, and the shortfall grows'],
-  ['r2r-thorp-22', vantages, 'offices no longer send their revenue on', 'no longer reaches it, and the government runs on less each season'],
-  ['r2s-indebted-thorp-2', vantages, 'before you meet its own officials', 'before you meet anyone who speaks for the place'],
+  ['r2r-thorp-52', vantages, 'offices no longer send their revenue on', 'no longer reaches it, and the government runs on less each season'], // point 124 (the vantage keys on the town's id): re-keyed by identity from r2r-thorp-22, probed
+  ['r2s-indebted-thorp-6', vantages, 'before you meet its own officials', 'before you meet anyone who speaks for the place'], // point 124 (the vantage keys on the town's id): re-keyed by identity from r2s-indebted-thorp-2, probed
 ];
 
 /** [seed, surface, true sibling that must still print] */

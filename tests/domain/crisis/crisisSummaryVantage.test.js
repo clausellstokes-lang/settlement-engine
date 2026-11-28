@@ -20,6 +20,7 @@ import { birthConfig, loadGenerationLawPayloads } from '../../../src/domain/dens
 import { DEFAULT_CONFIG } from '../../../src/store/configSlice.js';
 import { deriveArmedForces } from '../../../src/domain/display/defenseDisplay.js';
 import { hasMarketInstitution } from '../../../src/domain/facts/market.js';
+import { pickKeyOf } from '../../../src/domain/display/pickKey.js'; // point 124: the vantage's column keys on the town's pick key
 
 const KINDS = Object.keys(STRESS_TYPE_MAP);
 const SURFACES = /** @type {const} */ (['cover', 'overview', 'defence', 'tonight']);
@@ -119,9 +120,10 @@ describe('#29 and the §8 floor — the crisis summary by surface, four vantages
       const tonight = composeTonightSheet(s).opening;
       const page = composeCrisisPage(s).find((x) => x.type === kind)?.summary;
       expect(page, `${kind}: the crisis page keeps the stored summary`).toBe(entry.summary);
-      expect(cover).toBe(crisisSummaryForSurface(entry, s.name, 'cover'));
-      expect(overview).toBe(crisisSummaryForSurface(entry, s.name, 'overview'));
-      expect(tonight).toContain(crisisSummaryForSurface(entry, s.name, 'tonight'));
+      const key = pickKeyOf(s, s.name); // the column's key, as every surface hands it (point 124)
+      expect(cover).toBe(crisisSummaryForSurface(entry, s.name, 'cover', undefined, key));
+      expect(overview).toBe(crisisSummaryForSurface(entry, s.name, 'overview', undefined, key));
+      expect(tonight).toContain(crisisSummaryForSurface(entry, s.name, 'tonight', undefined, key));
       expect(new Set([cover, overview, entry.summary]).size, `${kind}: no surface repeats another`).toBe(3);
     });
     expectNoSeedFailures(failures, 'every surface prints its own line of the crisis');
@@ -140,7 +142,7 @@ describe('R3-CODE-C-3: a vantage promises no force, no merchant and no streets i
     return generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: m[1], selectedStressesRandom: false, selectedStresses: stresses, _randomizePriorities: true }), null, { seed, customContent: {} });
   };
   const linesOf = (s) => (Array.isArray(s.stress) ? s.stress : s.stress ? [s.stress] : [])
-    .flatMap((e) => SURFACES.map((sf) => crisisSummaryForSurface(e, s.name, sf) || ''));
+    .flatMap((e) => SURFACES.map((sf) => crisisSummaryForSurface(e, s.name, sf, undefined, pickKeyOf(s, s.name)) || ''));
   it('the four lines, reworded', () => {
     const reworded = [
       ['famine.defence.official', CRISIS_SUMMARY_POOLS.famine.defence.official, /keep order|guard/i],
@@ -181,7 +183,7 @@ describe('R3-CODE-C-5: no line of the table promises a force, a merchant or a st
     return generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...DIALS, selectedStresses: [m[1]], selectedStressesRandom: false, settType: m[2] }), null, { seed, customContent: {} });
   };
   const printed = (s) => (Array.isArray(s.stress) ? s.stress : s.stress ? [s.stress] : [])
-    .flatMap((e) => SURFACES.map((sf) => crisisSummaryForSurface(e, s.name, sf) || ''));
+    .flatMap((e) => SURFACES.map((sf) => crisisSummaryForSurface(e, s.name, sf, undefined, pickKeyOf(s, s.name)) || ''));
   it('no line names a body that keeps order, but the occupation\'s own', () => {
     expect(lines(SETS).filter(([, l]) => /\bkeep(?:s|ing)? order\b/i.test(l)).map(([k]) => k)).toEqual(['occupied.defence.official']);
   });

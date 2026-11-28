@@ -14,7 +14,7 @@
  *   (c) THE ROUTE (ruling 11): every printed sentence of the two slots is its branch's line of the slot's own pool
  *       (`src/data/dailyLife/foodCulture.js`, `src/data/dailyLife/commonerResentments.js`), admitted by its declared
  *       atoms (`facts/drawDeclared.js :: filterDeclared`) and picked by `pickRendezvous` keyed
- *       `<record.name>::dailyLife.<slot>::<branch>`; `{gov}` the government's label with its article.
+ *       `<the town's pick key: its id (point 124)>::dailyLife.<slot>::<branch>`; `{gov}` the government's label with its article.
  *   (d) No "town" at a place smaller than a town, no bracket.
  *   (e) THE CHAIR'S LINES OF B3 F1 (`DAILY-3-HANDBACK.md` § 2 items 4 and 5; the dispatch `B3-F1-DAILY-3-DISPATCH.md`):
  *       food A4, A12, T9, C5 and resentments F0 are in their pools with the ruled texts and needs, and none prints where
@@ -34,6 +34,7 @@ import { rulingBodyOf } from '../../src/domain/facts/rulingBody.js';
 import { tradeRouteOf } from '../../src/domain/facts/terrain.js';
 import { filterDeclared } from '../../src/domain/facts/drawDeclared.js';
 import { pickRendezvous } from '../../src/kernel/proseHash.js';
+import { pickKeyOf } from '../../src/domain/display/pickKey.js'; // point 124: the town's pick key
 import { fillAgreement, powerNameWithArticle } from '../../src/domain/display/powerSentenceName.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
@@ -141,7 +142,7 @@ describe('food_culture and commoner_resentments: the route, from the slots\' own
       /** @param {string} slot @param {Readonly<Record<string, ReadonlyArray<{ text: string }>>>} pools @param {string} branch */
       const expected = (slot, pools, branch) => {
         // CLOSE-7 THE MIRROR: the deriver hands the pools the capacity profile (`food production`, C7 and K2), so the oracle does
-        const pick = pickRendezvous(filterDeclared(pools[branch], { facts, ctx: { capacities } }), `${x.rec.name}::dailyLife.${slot}::${branch}`, (/** @type {any} */ l) => l.id);
+        const pick = pickRendezvous(filterDeclared(pools[branch], { facts, ctx: { capacities } }), `${pickKeyOf(x.rec, x.rec.name)}::dailyLife.${slot}::${branch}`, (/** @type {any} */ l) => l.id);
         return pick ? say(pick.text) : '';
       };
       const { food, resent } = branchesOf(x.rec);

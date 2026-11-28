@@ -27,6 +27,7 @@ import { factsOf } from '../../src/domain/facts/factsOf.js';
 import { REGISTERED_WORDS } from '../../src/domain/facts/registeredWords.js';
 import { crisisSummaryForSurface } from '../../src/domain/crisis/crisisSummaryVantage.js';
 import { checkStructuralValidity } from '../../src/generators/structuralValidator.js';
+import { pickKeyOf } from '../../src/domain/display/pickKey.js'; // point 124: the vantage's column keys on the town's pick key
 
 const WAR_LINE = 'With men called away to the war, {name} has fewer hands than before to see to its own safety.';
 const OCCUPIERS_LINE = 'Everything sold in {name} pays the occupiers their due first, and those who sell keep their prices and their opinions to themselves.';
@@ -44,7 +45,7 @@ const born = (seed, settType, stresses) => generateSettlementPipeline(birthConfi
 
 /** Every vantage line a born town prints, with the town. */
 const vantagePrints = (s) => [].concat(s.stress || []).flatMap((entry) => SURFACES.map((surface) => ({
-  text: crisisSummaryForSurface(entry, s.name, surface), surface, kind: entry?.type,
+  text: crisisSummaryForSurface(entry, s.name, surface, undefined, pickKeyOf(s, s.name)), surface, kind: entry?.type,
 })));
 
 /** @type {Array<any>} */ let towns = [];

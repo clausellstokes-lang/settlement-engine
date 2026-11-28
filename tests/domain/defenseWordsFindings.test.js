@@ -40,6 +40,7 @@ import { defenseDeskRead } from '../../src/components/new/defenseDeskRead.js';
 import { buildPrintProse } from '../../src/domain/display/stateProse/printProse.js';
 import { pageTextsOf } from '../helpers/oppositeSentencePairs.mjs';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { pickKeyOf } from '../../src/domain/display/pickKey.js'; // point 124: the desks' seed is the town's pick key
 
 const SMALL = ['thorp', 'hamlet', 'village'];
 
@@ -58,7 +59,7 @@ function born(tier, i) {
  * @returns {string[]}
  */
 function ownedDefenseText(r) {
-  const opts = { seed: String(r?._seed ?? ''), audience: 'dm', tierNoun: tierNounFor(r.tier) };
+  const opts = { seed: String(pickKeyOf(r, r?._seed ?? '')), audience: 'dm', tierNoun: tierNounFor(r.tier) };
   /** @type {string[]} */
   const out = [];
   /** @param {string} mount @param {any} rung */
@@ -411,11 +412,12 @@ describe('MATCHER · a defence term is a finding only as a claim about this plac
 describe('G6 #9: one no-wall line on the Defense tab (the second yields)', () => {
   const V = (/** @type {string} */ seed) => generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: seed.split('-')[1], _randomizePriorities: true }), null, { seed, customContent: {} });
   const C = (/** @type {string} */ seed) => generateSettlementPipeline(birthConfig({ settType: seed.split('-')[1] }), null, { seed, customContent: {} });
-  const opts = (/** @type {any} */ s) => ({ seed: String(s?._seed ?? s?.id ?? ''), audience: 'dm', tierNoun: tierNounFor(s?.tier) }); // defenseDeskRead.js's option bag
+  const opts = (/** @type {any} */ s) => ({ seed: String(pickKeyOf(s, s?._seed ?? s?.id ?? '')), audience: 'dm', tierNoun: tierNounFor(s?.tier) }); // defenseDeskRead.js's option bag
   const noWall = (/** @type {unknown} */ t) => typeof t === 'string' && /has no wall/.test(t);
-  it('V dp-hamlet-114, -115, -126: the beasts row says no wall, and the wall line is silent', async () => {
+  it('V dp-hamlet-114, -115, -121: the beasts row says no wall, and the wall line is silent', async () => {
     await loadGenerationLawPayloads();
-    for (const seed of ['dp-hamlet-114', 'dp-hamlet-115', 'dp-hamlet-126']) {
+    // point 124 (the desks key on the town's id): -126's beasts row no longer draws a no-wall line; -121 does, so it stands in
+    for (const seed of ['dp-hamlet-114', 'dp-hamlet-115', 'dp-hamlet-121']) {
       const s = V(seed);
       const desk = defenseDeskRead(s, { tier: s.tier });
       expect(noWall(desk.threat.beasts?.sentence), `${seed}: the beasts row says it`).toBe(true);

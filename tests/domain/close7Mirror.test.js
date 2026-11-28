@@ -56,7 +56,9 @@ const CELL = /** @type {const} */ ([
   ['V', 'dp-hamlet-100', 'adequate'], ['V', 'dp-hamlet-139', 'adequate'], ['V', 'dp-village-76', 'adequate'],
 ]);
 /** The cell's places whose Dawn Work stands on F6's index of the food branch (measured: `close-7/mirror/`). */
-const K1_PLACES = new Set(['C dp-village-76', 'C dp-village-54', 'V dp-hamlet-100']); // D13 STABLE-PICKS: the K1 drawers under the rendezvous
+// point 124 (the pick keys on the town's id, no longer its name), measured: the K1 drawers under the id are C dp-hamlet-117,
+// C dp-village-51, V dp-hamlet-100 and V dp-hamlet-139 (they were C dp-village-76, C dp-village-54 and V dp-hamlet-100 by name)
+const K1_PLACES = new Set(['C dp-hamlet-117', 'C dp-village-51', 'V dp-hamlet-100', 'V dp-hamlet-139']); // D13 STABLE-PICKS: the K1 drawers under the rendezvous
 
 beforeAll(async () => { await loadGenerationLawPayloads(); }, 120000);
 
@@ -115,12 +117,13 @@ describe('(c) where the chair\'s lines print', () => {
   }
   // THE VACUOUS ROW (RULING-R, the eleventh chair, 2026-11-27; R-MEASURE): no cell place of C or V holds fish, so the rows
   // above could not tell C7 from K2. The measure's hand-set record: V dp-hamlet-139 with fish its one food source stays in the
-  // cell (Famine, production adequate, the atom `fish`), and under the stated name 'Frostdale' (the pick is keyed by the
-  // town's NAME, D13 STABLE-PICKS) it draws K2 and K1, so a deriver that lets C7 back in, or loses K2, reds here.
-  it('V dp-hamlet-139 with fish, under the stated name Frostdale: the fare prints K2 and not C7; Dawn Work prints K1 and not F6', () => {
+  // cell (Famine, production adequate, the atom `fish`), and under the stated id 'frostdale-36' (the pick is keyed by the
+  // town's ID since point 124, its NAME before: found by the key's hash) it draws K2 and K1, so a deriver that lets C7 back in,
+  // or loses K2, reds here.
+  it('V dp-hamlet-139 with fish, under the stated id frostdale-36: the fare prints K2 and not C7; Dawn Work prints K1 and not F6', () => {
     const born = birth('dp-hamlet-139', 'V');
     const food = born.economicState.foodSecurity;
-    const s = { ...born, name: 'Frostdale', economicState: { ...born.economicState, foodSecurity: { ...food, foodRecord: { ...food.foodRecord, foodSources: ['fish'] } } } };
+    const s = { ...born, id: 'frostdale-36', name: 'Frostdale', economicState: { ...born.economicState, foodSecurity: { ...food, foodRecord: { ...food.foodRecord, foodSources: ['fish'] } } } };
     expect(atomHolds('food: = famine', factsOf(s))).toBe(true);
     expect(deriveAllCapacities(s).capacities.food_production.band).toBe('adequate');
     expect(atomHolds('fish', factsOf(s))).toBe(true);
@@ -135,10 +138,10 @@ describe('(c) where the chair\'s lines print', () => {
 
 describe('(d) C7 and F6 stay where the source did fail', () => {
   it('V dp-thorp-70: Famine over strained production keeps C7 and F6', () => {
-    // D13 STABLE-PICKS (point 120): the pick is keyed by the town's NAME, and under the rendezvous the record's own name
-    // (Darhannuur) draws C2 and F1, though C7 and F6 are both admitted. The SAME record under the stated name 'Ashfield' draws
+    // D13 STABLE-PICKS (point 120): the pick is keyed by the town's ID since point 124 (its NAME before), and under the rendezvous
+    // the record's own id draws neither C7 nor F6, though both are admitted. The SAME record under the stated id 'ashfield-18' draws
     // C7 and F6 (found by the keys' hashes), so a deriver that drops C7 or F6 where the source failed reds this row.
-    const s = { ...birth('dp-thorp-70', 'V'), name: 'Ashfield' };
+    const s = { ...birth('dp-thorp-70', 'V'), id: 'ashfield-18', name: 'Ashfield' };
     expect(atomHolds('food: = famine', factsOf(s))).toBe(true);
     expect(deriveAllCapacities(s).capacities.food_production.band).toBe('strained');
     const slots = slotsOf(s);
@@ -146,8 +149,8 @@ describe('(d) C7 and F6 stay where the source did fail', () => {
     expect(String(slots.dawn_work?.text)).toContain(String(dawnOf('F6')?.text));
   }, 120000);
   it('C dp-village-52: Famine over strained production keeps F6', () => {
-    // D13 STABLE-PICKS: the record's own name (Bayarserai) draws F1 under the rendezvous; under the stated name 'Ashby' the
-    // same record draws F6 (found by the key's hash), so a deriver that drops F6 where the source failed reds this row
+    // D13 STABLE-PICKS: keyed by the town's id since point 124, the record's own id draws F6 (measured; the stated name 'Ashby'
+    // drew it while the name was the key, and it no longer steers the pick), so a deriver that drops F6 where the source failed reds this row
     const s = { ...birth('dp-village-52', 'C'), name: 'Ashby' };
     expect(atomHolds('food: = famine', factsOf(s))).toBe(true);
     expect(deriveAllCapacities(s).capacities.food_production.band).toBe('strained');

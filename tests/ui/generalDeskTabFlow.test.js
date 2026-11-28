@@ -51,6 +51,7 @@ import { crisisBannerPoolKey } from '../../src/domain/display/stateProse/stresso
 import { tierNounFor, weaveBlock } from '../../src/domain/display/stateProse/weaveBlock.js';
 // The collector and its source-page grouping, as the Plot Hooks page uses them.
 import { collectPlotHooks, groupPlotHooksBySourcePage } from '../../src/domain/dossier/plotHooks.js';
+import { pickKeyOf } from '../../src/domain/display/pickKey.js'; // point 124: every anchor is drawn on the desk's own key, the town's pick key
 
 const e = React.createElement;
 afterEach(cleanup);
@@ -131,13 +132,13 @@ function onPage(sentence, lines, settlement) {
  * would render BARE and dimension-less on every settlement ever generated.
  */
 const SPEAKING = Object.freeze({
-  // The seed reaches the draw and nothing else (`generalDeskRead.js`:
-  // `String(r?._seed ?? r?.id)`); `id` stays `steinmark` because the ledger lookups and the
-  // rendered NAME are keyed on it. EIGHT pools are pinned off this one seed — the seven of the
+  // The seed reaches the draw and nothing else (`generalDeskRead.js`: `String(r?._seed ?? r?.id)`). Since point 124 the
+  // draw keys on the town's id first (`pickKeyOf`), so `id` carries the seed's own string (it was 'steinmark', which no
+  // reader of this file looks up) and every draw is the one the seed pinned. EIGHT pools are pinned off this one seed — the seven of the
   // Overview loop and DS-POP-3 through `COUNTED` — and since car 8a-13 every one of their
   // anchors is computed from this same seed rather than transcribed, so the seed may be
   // changed freely without searching for one that satisfies all eight at once.
-  id: 'steinmark', name: 'Steinmark', _seed: 'steinmark-16jm', tier: 'town',
+  id: 'steinmark-16jm', name: 'Steinmark', _seed: 'steinmark-16jm', tier: 'town',
   prominentRelationship: {
     npc1: 'Mugain', npc2: 'Felix', type: 'Outstanding Debt',
     phrasing: 'Mugain and Felix are connected by something neither discusses openly.',
@@ -215,7 +216,7 @@ const {
   // CENSUS-2b item 2 (db3ed88c1): MARKET-OPEN's brace group declares `market`, which the kernel
   // reads against `facts` fail-closed — so the spec hands in `factsOf(SPEAKING)`, exactly what the
   // desk hands in at its entry (`generalStateProse.js` → `factsAnswered`).
-}, { leaf: 'general', seed: SPEAKING._seed, slots: SPEAKING_SLOTS, facts: factsOf(SPEAKING) });
+}, { leaf: 'general', seed: pickKeyOf(SPEAKING, SPEAKING._seed), slots: SPEAKING_SLOTS, facts: factsOf(SPEAKING) });
 
 /** The desk's own Overview lines for the speaking fixture. */
 const desk0 = () => generalDeskLines(SPEAKING, { publicDossier: false, stresses: [] }).overview;
@@ -626,7 +627,7 @@ describe('THE FIXTURE IS SHAPED LIKE A REAL TOWN (the desk law\'s trap 4)', () =
 const CHRONICLED = Object.freeze({
   // Four history pins ride this seed — DS-GEN-9's identity and marker, DS-GEN-14 and
   // DS-GEN-16 — and each is computed from it since car 8a-13 rather than transcribed.
-  id: 'steinmark', name: 'Steinmark', _seed: 'steinmark-w', tier: 'town',
+  id: 'steinmark-w', name: 'Steinmark', _seed: 'steinmark-w', tier: 'town', // point 124: id = the seed (the pick key)
   history: {
     age: 285,
     historicalCharacter: 'A town that has outlasted its own explanations.',
@@ -688,7 +689,7 @@ const {
   },
   FOUNDED: { blockId: 'DS-GEN-14', poolKey: 'FOUNDED-OLD' },
   RECORD: { blockId: 'DS-GEN-16', poolKey: 'ANCHORED-RECENT', slots: RECORD_SLOTS },
-}, { leaf: 'general', seed: CHRONICLED._seed, slots: CHRONICLED_SLOTS, facts: factsOf(CHRONICLED) }); // BAR6-CULTURE (2026-11-16): DS-GEN-9's founding lens declares a size (`tier: >= village`, its oldest streets), so the read hands the fixture's facts, as the desk does (drawnProse.js cause 5)
+}, { leaf: 'general', seed: pickKeyOf(CHRONICLED, CHRONICLED._seed), slots: CHRONICLED_SLOTS, facts: factsOf(CHRONICLED) }); // BAR6-CULTURE (2026-11-16): DS-GEN-9's founding lens declares a size (`tier: >= village`, its oldest streets), so the read hands the fixture's facts, as the desk does (drawnProse.js cause 5)
 
 /** @param {boolean} publicDossier */
 const renderHistory = (publicDossier) => render(e(HistoryTab, {
@@ -771,7 +772,7 @@ describe('THE HISTORY CHAPTER DRAWS ON THE HISTORY TAB — and is silent for a f
  */
 const UNVIABLE = Object.freeze({
   // DS-GEN-11's three lenses ride this seed, and each anchor is computed from it (car 8a-13).
-  id: 'steinmark', name: 'Steinmark', _seed: 'steinmark-c',
+  id: 'steinmark-c', name: 'Steinmark', _seed: 'steinmark-c', // point 124: id = the seed (the pick key)
   economicViability: {
     viable: false,
     summary: '✗ NOT VIABLE: the sums do not close',
@@ -794,7 +795,7 @@ const { VERDICT, CONTRADICTIONS, FIRST_SURVEY } = drawnMembers({
   CONTRADICTIONS: { poolKey: 'criticalIssueCount: critical contradictions on the record' },
   FIRST_SURVEY: { poolKey: 'THE FIRST-SURVEY QUALIFICATION' },
 }, {
-  leaf: 'general', blockId: 'DS-GEN-11', seed: UNVIABLE._seed, slots: { settlement: 'Steinmark' },
+  leaf: 'general', blockId: 'DS-GEN-11', seed: pickKeyOf(UNVIABLE, UNVIABLE._seed), slots: { settlement: 'Steinmark' },
 });
 
 describe('THE VIABILITY VERDICT DRAWS — and is silent for a free viewer', () => {
@@ -922,7 +923,7 @@ const FORGE = Object.freeze({
  * naming the slot is dropped by anchored liveness and the pool speaks through the other.
  */
 const CRAFT = drawnMember({
-  leaf: 'general', blockId: 'DS-GEN-18', poolKey: 'STALLED', seed: FORGE._seed,
+  leaf: 'general', blockId: 'DS-GEN-18', poolKey: 'STALLED', seed: pickKeyOf(FORGE, FORGE._seed),
   slots: { settlement: 'Forge Town', institution: 'Smelter' },
   // RE-KEYED BY IDENTITY (W2-WRITE-11, the lane's red of HANDBACK-9: "NOTHING DRAWS ... no facts"): STALLED v2 and v3
   // declare `no crisis: under_siege`, which the kernel reads fail-closed, and v1 names `{resource}` (not in the bag), so a
@@ -1051,7 +1052,7 @@ const { REMNANT, RUIN, STEADING } = drawnMembers({
     slots: { settlement: 'Ashfall', steading: 'Brackenfold' },
   },
 }, {
-  leaf: 'general', blockId: 'DS-GEN-8', seed: FALLEN._seed, slots: { settlement: 'Ashfall' },
+  leaf: 'general', blockId: 'DS-GEN-8', seed: pickKeyOf(FALLEN, FALLEN._seed), slots: { settlement: 'Ashfall' },
 });
 
 describe('DS-GEN-8 DRAWS IN THE STEADINGS SECTION — and is silent for a free viewer', () => {
@@ -1120,7 +1121,7 @@ const LINKED = Object.freeze({
   // DS-REL-1's three pins ride this seed, and so does the arm that the OTHER end's sentence
   // never appears — that one is an exclusion whose anchor is the client-end draw, so it holds
   // only while the client end still draws. All four follow the draw since car 8a-13.
-  id: 'steinmark', name: 'Steinmark', _seed: 'steinmark-v', history: {},
+  id: 'steinmark-v', name: 'Steinmark', _seed: 'steinmark-v', history: {}, // point 124: id = the seed (the pick key)
   neighbourNetwork: [{
     id: 'n1', name: 'Thornmere', neighbourName: 'Thornmere', neighbourTier: 'town',
     relationshipType: 'patron', localRelationshipRole: 'client',
@@ -1147,10 +1148,10 @@ const LINK_SLOTS = Object.freeze({
 const { TIE, CONTACTS } = drawnMembers({
   TIE: { poolKey: 'client' },
   CONTACTS: { poolKey: 'cross-settlement NPC contacts' },
-}, { leaf: 'general', blockId: 'DS-REL-1', seed: LINKED._seed, slots: LINK_SLOTS });
+}, { leaf: 'general', blockId: 'DS-REL-1', seed: pickKeyOf(LINKED, LINKED._seed), slots: LINK_SLOTS });
 const ENGAGEMENT = drawnMember({
   leaf: 'general', blockId: 'DS-REL-1', poolKey: 'cross-settlement engagements',
-  seed: LINKED._seed,
+  seed: pickKeyOf(LINKED, LINKED._seed),
   slots: { settlement: 'Steinmark', counterpart: 'Thornmere', faction: 'The Guild' },
 });
 /** Every wording of the OTHER end's standing — none of which may reach this town's page. */
@@ -1203,7 +1204,7 @@ const COUNTED = Object.freeze({
 /** DS-POP-3's RISING-OPEN reading, and every wording of the LEVEL default it must not print. */
 const DIRECTION = drawnMember({
   leaf: 'general', blockId: 'DS-POP-3', poolKey: 'RISING-OPEN',
-  seed: COUNTED._seed, slots: { settlement: 'Steinmark' },
+  seed: pickKeyOf(COUNTED, COUNTED._seed), slots: { settlement: 'Steinmark' },
 });
 const LEVEL_LINES = poolMemberTexts({
   leaf: 'general', blockId: 'DS-POP-3', poolKey: 'LEVEL', slots: { settlement: 'Steinmark' },

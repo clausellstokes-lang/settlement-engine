@@ -148,6 +148,7 @@ describe('the chair\'s condition (e), 2026-11-09: seed-chosen arrangements of th
   const seeded = (seed) => {
     const s = planted({ relationships: TWO_ESTRANGED });
     s._seed = seed;
+    s.id = seed; // point 124: the arrangement keys on the town's id first (`pickKeyOf`), so the key the arm varies is the id
     return governanceAccountOf(s).text;
   };
   it('one seed reads one arrangement, every time', () => {

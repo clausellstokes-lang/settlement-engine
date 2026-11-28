@@ -606,14 +606,16 @@ describe('describeTradition — derived at render: pure, deterministic, writes n
     expect(JSON.stringify({ t, recs })).toBe(before);
   });
 
-  it('THE DRAW KEY carries the settlement\'s identity (String(_seed ?? id), the desks\' convention): the same rite id in two towns may read differently, and one town reads the same before a save, after it and after a reload', () => {
+  it('THE DRAW KEY carries the settlement\'s identity (point 124: the town\'s pick key, its id, else String(_seed ?? id), the desks\' convention): the same rite id in two towns may read differently, and one town reads the same before a save, after it and after a reload', () => {
     const rec = rite(1, 'the-dead', 'vigil');
     const texts = new Set();
     for (let i = 0; i < 12; i += 1) texts.add(describeTradition(rec, town({ _seed: `ashford-${i}` }), { audience: 'owner' }).text);
     // a constant key (the record's id alone) gives every town the same frames: one text for twelve seeds
     expect(texts.size).toBeGreaterThan(1);
-    const unsaved = town({ _seed: 'ashford-7' });
-    const saved = { ...unsaved, id: 'b1f0c2d4-save-row' }; // a save stamps an id; the seed stands first, so nothing moves
+    // point 124: a born town holds its id from birth (idFromSeed(_seed), RENAME-BUILD's measure (i)) and a save keeps it, so
+    // the key, its id, is the same before a save, after it and after a reload (the id-less records above key on their seeds)
+    const unsaved = town({ _seed: 'ashford-7', id: 's_born_ashford_7' });
+    const saved = { ...unsaved, saveRowId: 'b1f0c2d4-save-row' };
     const reloaded = JSON.parse(JSON.stringify(saved));
     for (const audience of ['owner', 'reader']) {
       const before = describeTradition(rec, unsaved, { audience }).text;

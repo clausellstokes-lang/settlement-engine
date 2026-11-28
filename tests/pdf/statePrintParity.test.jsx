@@ -64,6 +64,7 @@ import { structuralLensOf } from '../../src/domain/spatial/cohesionWeave.js';
 import { collectPlotHooks } from '../../src/domain/dossier/plotHooks.js';
 import { deriveEscalationClocks } from '../../src/domain/hookEscalation.js';
 import { magicWorksAt } from '../../src/domain/worldPulse/magicWorksAt.js';
+import { pickKeyOf } from '../../src/domain/display/pickKey.js'; // point 124: the desks' seed is the town's pick key
 
 /** The positions the ruling withholds from print WHOLE. Written out, not imported: an arm
  *  that imported the builder's own list would agree with it by construction. */
@@ -161,7 +162,7 @@ function copiesInDocument(props, paragraph) {
 const DEITY_NAME = 'The Iron Lord';
 
 const VM_FOR = (s) => buildViewModel({ settlement: s, phase: 'canon', eventLog: [] });
-const OPTS = (s) => ({ seed: String(s?._seed ?? s?.id ?? ''), audience: 'dm' });
+const OPTS = (s) => ({ seed: String(pickKeyOf(s, s?._seed ?? s?.id ?? '')), audience: 'dm' });
 const PAID = { publicDossier: false, playerView: false };
 
 /**

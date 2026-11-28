@@ -34,6 +34,7 @@ import { rulingChainOf } from '../../src/domain/dossier/powerStrata.js';
 import { meritsOf, weatheredCatastrophe } from '../../src/domain/fortune/fortuneMerits.js';
 import { FORTUNE_LAW_CONFIG_KEY, FORTUNE_LAW_TUNING } from '../../src/domain/fortune/fortuneLaw.js';
 import { pickRendezvous } from '../../src/kernel/proseHash.js';
+import { pickKeyOf } from '../../src/domain/display/pickKey.js'; // point 124: the town's pick key
 
 /** The line's own id: the pick is the rendezvous on it (point 121, TAIL-PICKS). @param {any} l @returns {string} */
 const idOfLine = (l) => l.id;
@@ -144,7 +145,7 @@ describe('U5b (a): the merit\'s sentence, directly after the standing', () => {
     const failures = collectSeedFailures(SIX, ({ seed, record }) => {
       expect(meritsOf(record).includes('weathered'), seed).toBe(true);
       const ev = /** @type {any} */ (weatheredCatastrophe(record));
-      const picked = pickRendezvous(POOL, `${String(record.name).trim()}::${String(ev.name).trim()}::${ev.yearsAgo}`, idOfLine);
+      const picked = pickRendezvous(POOL, `${pickKeyOf(record, String(record.name).trim())}::${String(ev.name).trim()}::${ev.yearsAgo}`, idOfLine);
       const sentence = /** @type {string} */ (fillOf(POOL, TIMES, record, picked));
       // the first merit's own paragraph: the second merit's input taken away (U7b prints LASTING's line after this one)
       const merited = paragraphOf({ ...record, history: { ...record.history, age: undefined } });
@@ -218,7 +219,7 @@ describe('U5b (c): the neutral reading no longer contradicts the merit (visitor-
     const { merits: _merits, ...terms } = leg.breakdown;
     const unmerited = { ...record, powerStructure: { ...record.powerStructure, publicLegitimacy: { ...leg, breakdown: terms } } };
     expect(legitimacyReadingPoolKey(governanceLedger(unmerited), unmerited.powerStructure.publicLegitimacy)).toBe('neutral baseline (nothing pulling either way)');
-    const opts = { seed: String(record._seed ?? record.id ?? ''), audience: /** @type {'dm'} */ ('dm') };
+    const opts = { seed: String(pickKeyOf(record, record._seed ?? record.id ?? '')), audience: /** @type {'dm'} */ ('dm') };
     const neutral = powerStateProse(unmerited, {}, opts).legitimacyReading?.sentence;
     expect(typeof neutral === 'string' && neutral.length > 0).toBe(true);
     expect(String(buildPrintProse(unmerited).power?.['power.criminalUnderside'] ?? '')).toContain(/** @type {string} */ (neutral));
@@ -268,12 +269,12 @@ describe('U5b (e): once on the page; every wording reachable', () => {
     expectNoSeedFailures(failures, 'the sentence is printed once on the page');
   });
 
-  it('each of the three wordings is reached (the same merited record under other names)', () => {
+  it('each of the three wordings is reached (the same merited record under other ids: point 124 keys the pick on the id)', () => {
     expect(POOL).toBeTruthy();
     const record = SIX[0].record;
     const reached = new Set();
     for (let i = 0; i < 60 && reached.size < POOL.length; i += 1) {
-      const renamed = { ...record, name: `Place ${i}` };
+      const renamed = { ...record, id: `place-${i}` };
       const text = paragraphOf(renamed);
       for (const line of POOL) if (text.includes(/** @type {string} */ (fillOf(POOL, TIMES, renamed, line)))) reached.add(line.id);
     }
