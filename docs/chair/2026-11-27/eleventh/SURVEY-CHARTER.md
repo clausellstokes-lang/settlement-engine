@@ -23,6 +23,22 @@
    tab.") "And I would say that randomly, not everything needs a quote: […] So here and there, on the pieces that are less
    severe, randomly remove one before generating. Keeps it organic."
 
+7. (about 02:58 UTC on 2026-11-28, on four lines of the quote writer's sample that the chair had accepted and shown him: "I have
+   learned to say I have eaten already, so someone younger gets my share. Most of us have." and its three other manners)
+   "Regarding these it's not an interview it's just their response. You're using a lot of I statements. That's not necessary
+   and too much. Be more organic. It should be the person saying something I. Passing not as though they are being
+   interrogated" [the chair reads "something I. Passing" as "something in passing"]
+
+## A QUOTE IS A PASSING REMARK, NOT AN ANSWER (his seventh message; the chair's ruling L-2 to the writer, said back to him)
+- THE CHAIR HAD ACCEPTED AN INTERVIEW REGISTER (its ruling L-1): WITHDRAWN IN THAT PART. A quote is a remark made in passing
+  that the surveyor happened to hear: to a neighbour, to nobody, under the breath. Nobody is being asked anything.
+- NEVER ADDRESSED TO THE SURVEYOR OR THE READER. "I" IS RARE (at most one line in four holds "I", "me" or "my"; none opens on
+  "I"): the line is about the thing, not the speaker. THE FOUR MANNERS ARE FOUR TEMPERS OF ONE REMARK (warm; counting the
+  cost; guarded; curt), not four ways of treating a questioner. Shorter and looser: 5 to 16 words; fragments welcome.
+- THE EXAMPLE SHOWN HIM: "The young ones eat first here. Nobody had to be told." / "A share given to a child costs less than
+  watching one go without." / "Everyone says they've eaten already. Nobody asks twice." / "Eaten already. So they all say."
+- THE WRITER RE-DOES THE WHOLE SAMPLE OF SIXTY BEFORE IT WRITES ON; the chair reads it again.
+
 ## NOT EVERY CARD SPEAKS (his sixth message; the chair's reading, said back to him the same minute; vetoable)
 - A SLOT IS A PLACE A QUOTE MAY APPEAR, NOT A PROMISE. BEFORE ANY LINE IS CHOSEN the engine decides which cards speak; the
   rest stay in the surveyor's voice alone.
