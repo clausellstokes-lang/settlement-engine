@@ -499,6 +499,11 @@ describe('TRAD-2 UNIT 2, PROVEN BORN: with EVERY address the curate screen can h
  */
 import { isMarketInstitution } from '../../src/domain/facts/market.js';
 import { catalogIdForName } from '../../src/data/institutionalCatalog.js';
+import { traditionFloorOf } from '../../src/domain/traditions/traditionFloor.js';
+import { factsOf } from '../../src/domain/facts/factsOf.js';
+
+/** RULING 122-T-3: a record as an earlier engine bore it (the old draw, which still serves every town made before 0.10.0). */
+const oldDraw = (s) => ({ ...s, generatorVersion: '0.9.0' });
 
 describe('TRAD-3 UNIT 4, PLANT 1: a hideable house\'s name written into history.founding.foundedBy', () => {
   const towns = ['town', 'city', 'metropolis'].flatMap((tier) => [0, 1, 2].map((j) => born(tier, 'latin', `trad-inversion-${tier === 'town' ? 'city' : tier}-${j}`)))
@@ -552,10 +557,11 @@ describe('TRAD-3 UNIT 4, PLANT 1: a hideable house\'s name written into history.
 });
 
 describe('TRAD-3 UNIT 4, PLANT 2: a DM-authored house tagged market, the town\'s only market, its function eye hidden', () => {
+  // RULING 122-T-3: read over 0.9.0 records: the old draw deals the market rite these premises need; 0.10.0's twin follows.
   const HOUSE = { name: 'The Lantern Exchange', category: 'Economy', tags: ['market'] };
   const towns = [['town', 'latin', 'trad-plant2-town-latin-0'], ['village', 'arabic', 'trad-plant2-village-arabic-0']].map(([tier, culture, seed]) => {
     const t = born(tier, culture, seed);
-    return { ...t, institutions: [...t.institutions.filter((i) => !isMarketInstitution(i)), { ...HOUSE }] };
+    return oldDraw({ ...t, institutions: [...t.institutions.filter((i) => !isMarketInstitution(i)), { ...HOUSE }] });
   });
   const id = CARD_KINDS.institution.idOf(HOUSE);
   const veiled = (t) => applyVeil(t, new Set([`field:institution:${id}:function`]));
@@ -580,6 +586,52 @@ describe('TRAD-3 UNIT 4, PLANT 2: a DM-authored house tagged market, the town\'s
     for (const t of towns) {
       expect(texts(t, veiled(t), 'reader'), `${t.name}: applyVeil`).toBe(texts(t, t, 'reader'));
       expect(texts(t, byHand(t), 'reader'), `${t.name}: by hand`).toBe(texts(t, t, 'reader'));
+    }
+  }, 120000);
+});
+
+describe('TRAD-3 UNIT 4, PLANT 2 at 0.10.0 (RULING 122-T-3): the draw asks the floor, so the hidden tags reach no rite', () => {
+  const HOUSE = { name: 'The Lantern Exchange', category: 'Economy', tags: ['market'] };
+  const SPECS = [['town', 'latin', 'trad-plant2-town-latin-0'], ['village', 'arabic', 'trad-plant2-village-arabic-0']];
+  const plantWith = (house) => SPECS.map(([tier, culture, seed]) => {
+    const t = born(tier, culture, seed);
+    return { ...t, institutions: [...t.institutions.filter((i) => !isMarketInstitution(i)), { ...house }] };
+  });
+  const towns = plantWith(HOUSE);
+  const id = CARD_KINDS.institution.idOf(HOUSE);
+  const veiled = (t) => applyVeil(t, new Set([`field:institution:${id}:function`]));
+  const byHand = (t) => ({ ...t, institutions: t.institutions.map((i) => (i.name === HOUSE.name ? { name: HOUSE.name, category: HOUSE.category } : i)) });
+  const onMarket = (r) => r.coreMotif?.element === 'market' || r.coreMotif?.act === 'fair';
+  const texts = (t, s, audience) => JSON.stringify(shownTraditionsOf(t, []).recs.map((r) => describeTradition(r, s, { audience })?.text ?? ''));
+
+  it('0.10.0 NOT VACUOUS: the full record holds the market (the house, the only one), the floor does not, and the eye reaches the tags', () => {
+    for (const t of towns) {
+      expect(t.generatorVersion, t.name).toBe('0.10.0');
+      expect(t.institutions.filter((i) => isMarketInstitution(i)).map((i) => i.name), t.name).toEqual([HOUSE.name]);
+      expect(factsOf(t).market, `${t.name}: the full record`).toBe(true);
+      expect(factsOf(traditionFloorOf(t)).market, `${t.name}: the floor`).toBe(false);
+      expect(veiled(t).institutions.find((i) => i.name === HOUSE.name).tags, t.name).toBeUndefined(); // the eye reaches the tags
+    }
+  }, 120000);
+
+  it('0.10.0 THE PROPERTY: no drawn rite stands on the market, and the reader\'s and the owner\'s descriptions are byte-identical tags present, veiled and removed by hand', () => {
+    for (const t of towns) {
+      expect(shownTraditionsOf(t, []).recs.filter(onMarket).map((r) => r.name), `${t.name}: the owner's set`).toEqual([]);
+      expect(deriveFoundingTraditions(t).filter(onMarket).map((r) => r.name), `${t.name}: the drawn set`).toEqual([]);
+      expect((sharedTraditionRowsOf(t) || []).filter((r) => r.element === 'market' || /\bFair\b/.test(`${r.name} ${r.chip}`)).map((r) => r.name), `${t.name}: the shared rows`).toEqual([]);
+      for (const audience of ['reader', 'owner']) {
+        expect(texts(t, veiled(t), audience), `${t.name}: ${audience}, applyVeil`).toBe(texts(t, t, audience));
+        expect(texts(t, byHand(t), audience), `${t.name}: ${audience}, by hand`).toBe(texts(t, t, audience));
+      }
+    }
+  }, 120000);
+
+  it('0.10.0 CONTROL: a non-hideable catalogue market in the plant\'s place does draw a market rite (the plant reaches the draw)', () => {
+    const MARKET = { name: 'Weekly market', category: 'Economy' };
+    expect(isHideableHouse(MARKET)).toBe(false);
+    for (const t of plantWith(MARKET)) {
+      expect(factsOf(traditionFloorOf(t)).market, `${t.name}: the floor`).toBe(true);
+      expect(deriveFoundingTraditions(t).filter(onMarket).length, t.name).toBeGreaterThan(0);
     }
   }, 120000);
 });
@@ -733,9 +785,10 @@ describe('TRAD-3 UNIT 4b, THE FLOOR EXCLUDES THE HIDEABLE CLASS (the chair\'s ru
   // The plant: a DM-made CRIMINAL house named like a catalogue market (the catalogue knows the name and tags it market),
   // the town's only market. Before the cure its name admitted the market rites into the drawn rows; a hide of the house
   // (card:institution:<id>, X-21e: it goes whole) would then have told the reader the rites stood on it.
+  // RULING 122-T-3: read over a 0.9.0 record: the old draw deals the market rites the floor must drop; 0.10.0's twin follows.
   const HOUSE = { name: 'Weekly market', category: 'Criminal', priorityCategory: 'criminal' };
   const b = born('town', 'latin', 'trad-plant2-town-latin-0');
-  const t = { ...b, institutions: [...b.institutions.filter((i) => !isMarketInstitution(i)), { ...HOUSE }] };
+  const t = oldDraw({ ...b, institutions: [...b.institutions.filter((i) => !isMarketInstitution(i)), { ...HOUSE }] });
   const hidden = applyVeil(t, new Set([`card:institution:${CARD_KINDS.institution.idOf(HOUSE)}`]));
   // a rite that stands on a market: the market element, or the fair act (shownTraditions.js :: ACT_NEEDS), read off the row
   const standsOnMarket = (r) => r.element === 'market' || /\bFair\b/.test(`${r.name} ${r.chip}`);
@@ -756,6 +809,36 @@ describe('TRAD-3 UNIT 4b, THE FLOOR EXCLUDES THE HIDEABLE CLASS (the chair\'s ru
     expect(rows.map((r) => r.name)).toEqual(shownTraditionsOf(t, []).recs.filter((r) => r.coreMotif.element === 'first-landing').map((r) => r.name));
     expect(rows.filter(standsOnMarket).map((r) => r.name)).toEqual([]);
     expect(JSON.stringify(sharedTraditionRowsOf(hidden))).toBe(JSON.stringify(rows));
+  }, 120000);
+});
+
+describe('TRAD-3 UNIT 4b at 0.10.0 (RULING 122-T-3): the draw asks the floor, so the hideable house reaches no rite', () => {
+  const HOUSE = { name: 'Weekly market', category: 'Criminal', priorityCategory: 'criminal' };
+  const b = born('town', 'latin', 'trad-plant2-town-latin-0');
+  const plantWith = (house) => ({ ...b, institutions: [...b.institutions.filter((i) => !isMarketInstitution(i)), { ...house }] });
+  const t = plantWith(HOUSE);
+  const hidden = applyVeil(t, new Set([`card:institution:${CARD_KINDS.institution.idOf(HOUSE)}`]));
+  const standsOnMarket = (r) => r.element === 'market' || /\bFair\b/.test(`${r.name} ${r.chip}`);
+
+  it('0.10.0 NOT VACUOUS: the house is of the hideable class, the catalogue knows its name, it is the only market, and the hide takes it whole', () => {
+    expect(t.generatorVersion).toBe('0.10.0');
+    expect(isHideableHouse(HOUSE)).toBe(true);
+    expect(catalogIdForName(HOUSE.name)).toBeTruthy();
+    expect(t.institutions.filter((i) => isMarketInstitution(i)).map((i) => i.name)).toEqual([HOUSE.name]);
+    expect(hidden.institutions.some((i) => i.name === HOUSE.name)).toBe(false);
+  }, 120000);
+
+  it('0.10.0 THE PROPERTY: the drawn rows hold no rite that stands on the hideable house, are byte-identical with it hidden and shown, and are the owner\'s set', () => {
+    const rows = sharedTraditionRowsOf(t);
+    expect(rows.filter(standsOnMarket).map((r) => r.name)).toEqual([]);
+    expect(JSON.stringify(sharedTraditionRowsOf(hidden))).toBe(JSON.stringify(rows));
+    expect(rows.map((r) => r.name)).toEqual(shownTraditionsOf(t, []).recs.map((r) => r.name));
+  }, 120000);
+
+  it('0.10.0 CONTROL: a non-hideable catalogue market in the criminal house\'s place draws a rite that stands on the market', () => {
+    const MARKET = { name: 'Weekly market', category: 'Economy' };
+    expect(isHideableHouse(MARKET)).toBe(false);
+    expect((sharedTraditionRowsOf(plantWith(MARKET)) || []).filter(standsOnMarket).length).toBeGreaterThan(0);
   }, 120000);
 });
 
