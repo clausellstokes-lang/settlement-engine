@@ -1,0 +1,15 @@
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 17627 after 14 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+maskmeasure tree=/home/user/wt/u45c mask="an unseen interest" 2026-11-28T00:57:12.016Z
+POOL /var/tmp/v51/out/p1/stored-today: docs 140; stored descs holding the mask raw 0; NOTHING-HIDDEN reads 280 (1388 served descs), served with the mask 0
+  HIDING reads 1228 (place x hidden power x Reveal), served descs 6334; served WITH THE MASK 0: GAP (the stored base names the hidden power) 0, CLEAN (it does not) 0
+  PLANT (unknown-form tail naming the hidden power): 1196 reads, served 1026 (with the mask 503, with the name 523)
+  PLANT e.g. r3m-city-indebted-0-36.json hide=Merchant Guilds dm=false: "t each other when they can. Their quarrel with an unseen interest is older than the walls."
+  PLANT e.g. r3m-city-indebted-0-36.json hide=Merchant Guilds dm=true: "inst each other when they can. Their quarrel with Merchant Guilds is older than the walls."
+  PLANT e.g. r3m-city-indebted-0-36.json hide=Military/Guard dm=false: "ions and procedure instead. Their quarrel with an unseen interest is older than the walls."
+POOL /var/tmp/v51/out/p1/stored-master: docs 140; stored descs holding the mask raw 0; NOTHING-HIDDEN reads 280 (1402 served descs), served with the mask 0
+  HIDING reads 1250 (place x hidden power x Reveal), served descs 6425; served WITH THE MASK 0: GAP (the stored base names the hidden power) 0, CLEAN (it does not) 0
+  PLANT (unknown-form tail naming the hidden power): 1226 reads, served 1043 (with the mask 512, with the name 531)
+  PLANT e.g. r3m-city-indebted-0-36.json hide=Merchant Guilds dm=false: "r operated at lower volume. Their quarrel with an unseen interest is older than the walls."
+  PLANT e.g. r3m-city-indebted-0-36.json hide=Merchant Guilds dm=true: "ther operated at lower volume. Their quarrel with Merchant Guilds is older than the walls."
+  PLANT e.g. r3m-city-indebted-0-36.json hide=Military/Guard dm=false: "ry to push through council. Their quarrel with an unseen interest is older than the walls."
+rc=0 01:06:09
