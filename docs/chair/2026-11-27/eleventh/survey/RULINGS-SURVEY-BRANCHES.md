@@ -80,3 +80,21 @@ Earlier rulings: S-A-1, S-B-1, S-B-2 in `CHAIR-HANDOFF-ELEVENTH.md` (V30 to V35)
 - **DS-GEN-3, 7 and 11** (the reader's lines that print on no owner page, only the glance mount): MEASURE the glance mount
   and the PDF before anything is declared.
 - **AT THE MERGE** (unchanged): `place debt` takes 122-B-5; re-measure everything above on the merged tree before building.
+
+## 15:45 UTC: S-D's FOOD AND SAFETY, RULED (SURVEY-FINAL's measure: `survey/final/S-D-FOOD.md`, `S-D-SAFETY.md`, c63888fde). BUILT ONLY AFTER THE MERGE, as the money family.
+- **FOOD F1, CURED AS NAMED: THE ECONOMICS TAIL READS THE STORES.** `EconomicsTab.jsx:787`'s code-composed tail "…with some to put
+  by against a bad year" reads no stores figure and prints where the stores are under three (408 | 283 pages), so it is the
+  side wrong for the record (and it clashes with COMFORTABLE#4, "nobody here keeps more in store than the coming season
+  needs", on 183 | 55 pages). THE TAIL IS CHOSEN BY THE SAME `stores` READING COMFORTABLE#4 DECLARES: three or more, as now;
+  under three, the chair's words (for the owner's veto): "…, though little of it is kept for a bad year." No slot empties
+  (the sentence keeps its head). S4 "shared or put by" (undeclared; 24 | 28 of its pages under three months) declares the
+  same `stores` side, or takes the same low-stores words where its sentence allows. COMFORTABLE#4 itself is right and stays.
+  The PDF and Foundry do not print the tail: say so in the proof.
+- **SAFETY Y1, CURED: "little crime" yields to crime in force.** The Very Safe sentence's "…there is little crime"
+  (`safetyProfile.js:316`, undeclared, code-composed) beside an organised syndicate or a crime wave (20 pages of V, e.g. dp-city-104
+  beside "The crime wave is coordinated"): where the record holds the crime wave or an organised criminal house, the clause is
+  DROPPED (the sentence keeps its other clauses) or replaced by words SURVEY-FINAL proposes for the chair's read; the grade
+  itself (computed) stands. DS-DEF-3 Safe#4, Very Safe#5 and calm C3 take `excludes: crime wave` (1 to 3 pages each).
+- **THE NPC ROWS "nothing threatens" beside a danger coming** (2 pages of C): written at birth; a cure would move births: NAMED
+  for a later birth unit, not cured here.
+- AT THE MERGE: each family re-measured on the merged tree before it is built; the census's pairs count each at 0 after.
