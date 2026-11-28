@@ -873,3 +873,54 @@ See section 4, newest last.
   keys; its house sample of forty READ AND ACCEPTED (plain; each line a different thing; shown to the owner); three rulings
   (alternates of one rule-branch with a ranked pick to be added; one wording a town for the crisis mark; twins for the seat
   sentence). It is writing the 72 keys.
+
+## V31 (05:38 UTC on 2026-11-28): WHERE EVERYTHING STANDS (written as the chair's own record nears its compaction; A SUCCESSOR OR THE CHAIR AFTER A SUMMARY STARTS HERE)
+- **THE LINE ON ORIGIN: aef8f9962 (point 121). THE JOINED TIP OF POINTS 122 AND 123: 003fd3b07, LOCAL on `/home/user/wt/line`
+  (branch `lane/join-2026-11-14`) and pushed as transport `lane/stack-123-wip-2026-11-28`. NOT LANDED: it waits ONLY for
+  READER 122-123's final report** (session_01FE9mEwUutkT4X3codynXn5; its notes on `lane/reader-122-2026-11-28`; it reads
+  point 122 at 777733a2a first and takes point 123's tip from that transport branch). THE LANDING THEN: any cure the report
+  asks (a local Opus seat on the line's tree, red first); if `src` changes after 003fd3b07, re-run the files it touches and
+  `tests/lint` whole (the whole suite ran at b693c4605: 63 failed, 57 on the list, 5 cured since, 1 golden named); the TWO
+  ROWS (122, 123) and their gate paragraphs in `docs/chair/2026-11-17/sixth/LANDINGS-SIXTH.md` (the form: point 121's row);
+  **`RED-AT-LINE.tsv` GAINS ONE ROW: `tests/property/heraldKnowledgeDeskGolden.test.js`, "THE REFILE MOVES NO CONTENT BYTE,
+  AND EXACTLY THE DECLARED ITEMS CHANGE DESK" (a golden moved by the traditions draw; the owner's signed shift record)**;
+  the fast-forward push of `lane/join-2026-11-14`; `LINE-NOW.md`; CI read by name (`ci/ci-read-121.py` is the form).
+- **FOR THE OWNER's HAND, NAMED SO FAR AT 122 AND 123:** the sizes (first paint 1,196,447 raw at b693c4605, +3,492 on point
+  121; the worker 2,744,088; the PDF worker 3,150,639 after 122-A-2); the herald golden; the tuning inventory re-frozen
+  twice by its door (dependents added, no value); `economy.generated.js` +229 B (S-B, not yet joined); the sameness row
+  re-keyed by hand; the words: "Pressed dates", DS-POW-6 v2, the two named-scarcity sentences, "the hunters' game".
+- **SEATS RUNNING (each pushes at every step; each has a STATE.md on its branch):**
+  SURVEY-TABLE session_01FE9mEwGNazLwRoRVsDL9n7 (`lane/survey-table-wip-2026-11-28`): S-B DONE; S-C (the table, the readers'
+  property, the page clash census by its door, the walker) in work: owes "TIP?".
+  SURVEY-FINAL session_01FE9mEwXWuVSLqCkiwCFHPU (`lane/survey-final-wip-2026-11-28`): S-A building under S-A-1; its
+  correction: 46 owner pages and 26 share pages move (the toll bridge was a false match); site 1 green with its shared-page
+  proof: owes "TIP?".
+  RENAME-BUILD session_01FE9mExGyajCPjWwDu5tx2Y (`lane/stack-124-rename-wip-2026-11-28`): K1 under K1-1 (keys on the id;
+  K1b the traditions' draw on the id, measure first); then K2, K3 (measure and propose only): owes "TIP? K1".
+  VOICES-ENGINE session_01FE9mEupU53vbaDrXb8eaSE (`lane/survey-voices-wip-2026-11-28`): U1, U2 pushed; U3 green locally;
+  rulings G1-1 (a draft tuning row; card-level words answered by the card from the catalogue; two tension states of their
+  own) and **G1-2** (each version `{ text, needs }` with the rule book's atoms; THE JUDGMENT-WORD WALKER GAINS A VOICE SCOPE
+  BY RULE: under `src/data/voices/` the judgment classes are the speaker's and exempt, the thing classes are declared: THE
+  CHAIR CONFIRMS THE BUILDER's SPLIT OF CLASSES BEFORE THE RULE IS WRITTEN; a guard that a SAID line never prints outside
+  the quote slot): **OWES THE CHAIR THAT SPLIT NOW**, then "TIP?" with ten towns' pages for the owner.
+- **SEATS DONE AND STOPPED, THEIR WORK FILED HERE:** SURVEY-MEASURE, VOICES-MEASURE, TRAD-MEASURE, RENAME-MEASURE,
+  RANGE-MEASURE, VOICES-CARDS, VOICES-LINES (`survey/lines/`: 197 said lines, 40 liar lines), **RANGE-LINES (93a1bc3fd;
+  `survey/range-lines/C-range-lines.tsv`: 288 lines for the 72 most-printed paraphrase keys; THE CHAIR READ ALL: E29,
+  ACCEPTED AS POINT 125's DRAFT; notes for its builder: "They took the seat" becomes "hold"; lines leaning on a thing the
+  house may lack are checked against the catalogue line and `needs`; count sense themes across a tab; one wording a town for
+  the crisis mark; ranked picks to be added for the rule-set branches)**, R-CURES-A, R-CURES-B, R-BIRTH, both readers of 120
+  and 121, VEIL-56 and its four seats (PAUSED: the owner: the veil LAST, before the release).
+- **NOT YET STARTED, IN ORDER:** (1) the one independent reader over the survey's first half and point 124 when their "TIP?"s
+  are in (top tier, max effort); (2) POINT 125's builder (after 122 and 123 land): the house-description pick onto stable
+  ids, MEASURE FIRST (where the description is stored, who may edit it, what moves at birth), then the 288 lines through
+  the door and the guard; (3) the survey's second wave: S-D's four claim families (after S-C's census exists), S-E (the kinds
+  column; the frame line at the head of the dossier and the PDF), S-F (the promise's copy: `survey/measure/G-promise.tsv`,
+  every changed line to the owner first); (4) COLD-READ-20; (5) THE SHARE VEIL (its pause page:
+  `veil/v56/PAUSE-2026-11-28.md` on `lane/veil-56-2026-11-27`; rulings V30 to V34 and A20, A21 in `veil/RULING-V30.md`;
+  VOICES-ON-SHARE and D1 are its units); (6) the close and the owner's signings, migrations, merge, deploy.
+- **THE ACCOUNT:** the weekly window read `allowed_warning` at 05:37 UTC (no overage; resets 2026-12-04). THE OWNER HAS BEEN
+  TOLD THREE TIMES AND HAS NOT SAID "extra usage"; he said "Can we start them in parallel? I leave those to your judgement".
+- **HIS STANDING WORDS THIS SESSION (verbatim in `SURVEY-CHARTER.md` and in V24):** the veil after everything else, before
+  the release; the surveyor is the unquoted author; quotes inside existing cards, one slot, not every card; a quote is a
+  passing remark, plain, few "I"s, the tempers genuinely different; "in the rest of all the prose … have you limited things
+  this way as well?" (answered: RANGE; point 125).
