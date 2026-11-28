@@ -1094,3 +1094,20 @@ See section 4, newest last.
 - **THE ACCOUNT:** `allowed_warning` at 13:10 UTC, no overage (resets 2026-12-04). Seats running now: READER 122-123,
   four shards, READER SURVEY-1, READER VOICES, RENAME-BUILD, two writers, SURVEY-TABLE and SURVEY-FINAL (measures),
   VOICES-ENGINE (holding).
+
+## V37 (13:22 UTC on 2026-11-28): THE OWNER: "Use the appropriate opus effort to substitute for what we lost on fable as chair": THE CHAIR's FOUR COMPENSATIONS (binding on this chair and any successor on Opus)
+- **EFFORT:** the chair runs on Opus at `max` (the session reads `effort_level: max`), the highest there is; it stays there.
+- **(1) THE CHAIR READS THE WORK ITSELF** before it accepts a "TIP?" or a cure: the diff of `src` and every register or
+  test file whose meaning moved, not only the seat's report. A report alone is never an acceptance.
+- **(2) THE INDEPENDENT READERS STAY ON THE TOP TIER** (`claude-fable-5-2`, `max`), and EVERY READER's BRIEF FROM NOW ON
+  CARRIES ONE MORE QUESTION: "THE CHAIR's RULINGS: of the rulings this change builds on or was shaped by (named in your
+  brief's files), is any wrong, too wide, too narrow, or blind to a case you executed? Say which, why, and with what
+  numbers." The three readers running at this hour were sent the question by message.
+- **(3) MEASURE FIRST, RULE SECOND, THE REASON WRITTEN WITH THE RULING** (as before, now without exception), so that a
+  wrong call is found and undone by its own words.
+- **(4) A BIG CALL GOES TO A TOP-TIER READER BEFORE IT BINDS:** a design change, the overturning of a ruling, a new rule of
+  a walker or a register, and anything that touches what a shared page or a served record shows. The ruling is written as
+  a file first; a Fable reader at `max`, told nothing of the chair's reasons beyond the file, judges it; then it binds.
+  (Small calls, which a reader's later read will check anyway, bind at once as before.)
+- **BUILDERS STAY ON OPUS AT `high`** (the readers check them); mechanical helpers on Sonnet. IF THE OWNER MOVED THE CHAIR
+  TO SAVE USAGE, he says so and the readers move down too; until then they stay where they are.
