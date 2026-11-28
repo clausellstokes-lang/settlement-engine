@@ -117,7 +117,7 @@ all spent stays silent.
    cards of that weight on the tab. The page falls to 6 to 8 quotes in towns and up (C; V 6 to 7), and a tab exceeds three
    in 30 to 55 towns of 150 (C; V 32 to 52), mostly on NPCs, where weighty people are many. The thorp and hamlet numbers do not move. I would put the
    budget to the owner beside the odds, as a fourth tuning value.
-3. **Small places are quiet without help.** A thorp averages 0.8 quotes a page (at most 2) and a hamlet 1.5. That is
+3. **Small places are quiet without help.** A thorp averages 0.8 quotes a page (at most 2 on C, 3 on V) and a hamlet 1.5. That is
    because there is nobody to speak: one named person (1.3 a thorp), and **one quote a person a page**. The size factor
    barely matters below the village. The rule that binds there is "one quote a person".
 4. **Cards that would speak but have no lawful speaker:** 1.4 to 7 a town. They are mostly institutions without a face
