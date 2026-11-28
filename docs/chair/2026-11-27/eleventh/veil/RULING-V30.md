@@ -47,3 +47,19 @@ person ids re-keyed by the same call's bijection) is built once on unit 4's five
 stored id. ALSO ACCEPTED IN PRINCIPLE (read with the hunk): the orphan rule on every public read, the link included.
 U3R re-ran VEIL-52's measure (A) on this account: every table byte-identical; code WIP `lane/veil-56-2026-11-27-door2-wip`
 5ab9caeb7.
+
+**V33 (00:06 UTC on 2026-11-28): V31's TWO TABLES (PG; `pg/PG-REPORT.md` on `lane/veil-56-2026-11-27-pg-docs` 126d3f01b).**
+(A) THE INTERVAL TEST IS THE RULE: the bands' cuts are clean (0.25 / 0.5 / 0.75), 0 wrong rows printed on both pools at every
+marker by the oracle; rows lost 37 (born today) and 30 (born on master) against about 375 for the blunt rule. Built red first.
+(B) THE CAUSE IS THE ENGINE: today's writers (`generateDefenseProfile`, `generateSafetyProfile` / `settleCrimeLinesToSignal`,
+`generatePowerStructure` / `governanceNarrative`) moved since master with no law gating them; master's own writers reproduce
+a master-born record's stored values 140 of 140; the owner's page prints the STORED value (not a town fault). So re-deriving a
+withheld key is faithful only where the engine that reads is the engine that wrote, and EVERY TOWN LIVE TODAY was written by
+master's engine. RULED: (1) FAIL CLOSED BY PROVENANCE: a record without this release's law markers is not re-derived on a
+shared page: its rows that read a re-derived key (all but `economyOutput`'s) are not printed; listed under V4 for the
+put-back; counted by row name on the master-born pool before the merge into the tip; WRITTEN FOR THE OWNER as what the
+shared page of a town made before this release no longer shows. The marker test must not be met by an old record merely
+re-saved or imported under this release (checked and said). (2) A STANDING ARM: "present is right" on TWELVE committed stored
+records born at this release (two a size), its own door; a reference record NAMED FOR THE OWNER's SIGNING at the close. NOT
+serving the stored values; NOT shipping master's writers. Three guards owed (two "Critical" badges and "Infrastructure
+condition" print a band from nothing): built with (A).
