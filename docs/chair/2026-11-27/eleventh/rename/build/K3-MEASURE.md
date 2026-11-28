@@ -85,3 +85,41 @@ Pages are counted on the 300 + 300 where the reader's lines moved (attribution b
 - The stable-pick-ids door, if A15 and A30 are re-keyed.
 
 **Houses:** no product action renames one, so nothing is proposed for the product. If a house rename is ever wired, the same field and helper serve it, and the name-only `catalogIdForName` sites move to the existing `catalogId ||` idiom (0 moves on born records, whose `catalogId` is `catalogIdForName(name)` at birth, `assembleInstitutions.js:983`).
+
+## K3-1 (1): WHERE EACH NAME CLASSIFIER RUNS, by execution. THE STOP.
+
+**The run** (CONFIRMED: `tools/k3m-harness.jsx`, `tools/build-k3m.mjs`; `results/K3-1-where-it-runs.json`):
+- The first 60 births of C, each in three phases with every call logged:
+  - **stamp:** `composePublicProse`, the prose composed at save;
+  - **owner:** the owner's page;
+  - **share:** the shared page rendered from the served record (`toPublicSafe` plus the veil's projection).
+
+**What runs where** (towns, calls, by phase):
+
+| classifier | stamp | owner | **share (LIVE on a reader's page)** |
+|---|---|---|---|
+| `rulerKindOfLabel` (the ruler kind, through `rulerKindOf`) | 60, 1,100 | 60, 5,824 | **60, 922** |
+| `factionArchetype` | 60, 150 | 60, 3,426 | **60, 1,544** |
+| `familiesHeldOf` | | 49, 98 | **49, 49** |
+| `stressPowerRowOf` | | 1, 7 | **1, 7** |
+| `factionIdFromName` (the door id, `npcProfile.js`) | | 60, 1,140 | **60, 380** |
+| `isCriminalPower` | | 60, 124 | |
+
+**Other name readers** (by grep, PLAUSIBLE, not instrumented):
+- `rulingBody.js:33` (RULED_BY_A_BODY over the government label);
+- `seatCircumstances.js:155` (/creditor/);
+- `powerStrata.js:414` (/claimant/);
+- `worldPulse/thievesGuild.js:28` (CRIMINAL_NAME_RE; it already reads a bought hall's old name);
+- `allegiance.js:160` (/thie/).
+
+**Where the door id is STORED**
+- A born power carries no `id` (0 of 64).
+- A born record stores `faction.<slug>` references at one path: `simulationTrace[].targetId`, on 60 of 60 towns, written at birth by `neighbourFactions.js:96/134`.
+
+**THE STOP (the ruling's condition (2)).** Four of the five classifiers, and the door-id mint, run LIVE on the reader's page from the served record. `kindName` may not travel there, so a built K3 would hold the owner's page and leave the reader's page re-classing by the new name.
+
+What a power's rename moves on the SHARED page today (re-saved, the stamp composed after the rename; `tools/k3s-harness.jsx`; `results/K3-1-shared-page-moves.txt`; the first 60 of C):
+- **40 of 60 pages**, 107 lines beyond the name;
+- by view: Defense 48 (`familiesHeldOf`), Overview 32 (the ruler kind, the rule clause), Daily Life 16, Power 9, NPCs 2.
+
+Under K3 as ruled, those 40 reader pages would differ from the owner's page by those lines. **Not built**; this is reported.

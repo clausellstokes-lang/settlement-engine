@@ -1,0 +1,54 @@
+{
+ "stamp|rulerKindOfLabel@domain/facts/rulerKindLabel.js": {
+  "towns": 60,
+  "calls": 1100
+ },
+ "stamp|factionArchetype@domain/factionArchetypes.js": {
+  "towns": 60,
+  "calls": 150
+ },
+ "owner|rulerKindOfLabel@domain/facts/rulerKindLabel.js": {
+  "towns": 60,
+  "calls": 5824
+ },
+ "owner|factionArchetype@domain/factionArchetypes.js": {
+  "towns": 60,
+  "calls": 3426
+ },
+ "owner|factionIdFromName@domain/npcProfile.js": {
+  "towns": 60,
+  "calls": 1140
+ },
+ "owner|isCriminalPower@domain/people/allegiance.js": {
+  "towns": 60,
+  "calls": 124
+ },
+ "owner|familiesHeldOf@domain/display/guardLineUnderTheLaw.js": {
+  "towns": 49,
+  "calls": 98
+ },
+ "share|rulerKindOfLabel@domain/facts/rulerKindLabel.js": {
+  "towns": 60,
+  "calls": 922
+ },
+ "share|factionArchetype@domain/factionArchetypes.js": {
+  "towns": 60,
+  "calls": 1544
+ },
+ "share|factionIdFromName@domain/npcProfile.js": {
+  "towns": 60,
+  "calls": 380
+ },
+ "share|familiesHeldOf@domain/display/guardLineUnderTheLaw.js": {
+  "towns": 49,
+  "calls": 49
+ },
+ "owner|stressPowerRowOf@domain/people/stressPowerFaces.js": {
+  "towns": 1,
+  "calls": 7
+ },
+ "share|stressPowerRowOf@domain/people/stressPowerFaces.js": {
+  "towns": 1,
+  "calls": 7
+ }
+}

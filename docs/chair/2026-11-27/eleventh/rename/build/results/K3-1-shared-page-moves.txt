@@ -1,0 +1,12 @@
+== C {"births":60,"errors":0,"stored":{"powerCategory":0,"powerArchetype":0,"houseCategory":0,"houseCatalogId":0,"houseTags":0,"houseFacets":0,"power":0,"house":0}}
+ F {"renamed":60,"skip":{},"pagesMoved":40,"linesMoved":107,"pagesMovedNoReader":40}
+   byView {"Systems/Defense":48,"Summary/Overview":32,"World/Daily Life":16,"Systems/Power":9,"World/NPCs":2}
+   pagesByReader {}
+   readerChanged {}
+   ex dp-thorp-0 Elder Council->The Ashen Compact: Summary/Overview,Summary/Plot Hooks,Systems/Institutions,Systems/Power,Systems/Defense,World/NPCs,World/Daily Life,World/Traditions | dp-thorp-1 Occupation Authority->The Ashen Compact: Summary/Plot Hooks,Systems/Power,World/NPCs,World/Daily Life | dp-thorp-2 Elder Council->The Ashen Compact: Summary/Overview,Systems/Institutions,Systems/Power,World/NPCs,World/Daily Life,World/Traditions | dp-thorp-4 Elder Council->The Ashen Compact: Summary/Overview,Systems/Institutions,Systems/Power,Systems/Defense,World/NPCs,World/Daily Life,World/Traditions
+   lines:
+     dp-thorp-0 Systems/Defense GONE There is no watch. The old families keep the peace, and anyone who breaks it answers to all the neighbours at once; when the families fall out among t
+     dp-thorp-1 Systems/Power GONE Dominik Bauer, the head shepherd and Elder, holds the seat of the Elder Council. The Elder Council answers to the occupiers of Rotbach. In Rotbach, th
+     dp-thorp-1 World/NPCs GONE Governor
+     dp-thorp-2 World/Daily Life GONE Matters of any weight are talked over at the elder's door, where people gather of an evening.
+     dp-thorp-4 Systems/Defense GONE Nobody here is paid to keep order. A quarrel goes to the heads of the oldest families, and most are settled before they come to blows.

@@ -1,0 +1,82 @@
+diff --git a/scripts/audit/whole-world-soak-deity-fixture.mjs b/scripts/audit/whole-world-soak-deity-fixture.mjs
+index 133dfc2a6..4473ce605 100644
+--- a/scripts/audit/whole-world-soak-deity-fixture.mjs
++++ b/scripts/audit/whole-world-soak-deity-fixture.mjs
+@@ -14,25 +14,33 @@
+  * deity and the fourth (soak-d) stays deity-free, the dormancy control every WF
+  * fixture carries beside its positive arm:
+  *
+- *   soak-a — SET_PRIMARY_DEITY(The Dawn Warden)                      [patron host]
+- *   soak-b — SET_PRIMARY_DEITY(The Ash Tyrant) + IMPOSE_CULT(The Dawn Warden)  [rival host]
+- *   soak-c — IMPOSE_CULT(The Ash Tyrant)
++ *   soak-a — SET_PRIMARY_DEITY(The Ash Tyrant)                       [rival host]
++ *   soak-b — SET_PRIMARY_DEITY(The Dawn Warden) + IMPOSE_CULT(The Ash Tyrant)  [patron host]
++ *   soak-c — IMPOSE_CULT(The Dawn Warden)
+  *   soak-d — deity-free
+  *
++ * SEATED ON soak-b, THE TWO DEITIES MIRRORED (point 124 K1b, the chair's ruling K1b-3; NAMED FOR THE OWNER: at the soak
++ * redo the case runs there). The founding draw of a 0.10.0 town keys on the town's id (genesis.js, FOUNDING_ID_KEY_SINCE),
++ * not on its `_seed`. Under the `_seed`-keyed draw soak-a held the grand observance WF-2 needs; under the id-keyed draw
++ * soak-a holds none and soak-b holds one (The Bright Fair, founding/fair, band 3: measured, RENAME-BUILD's
++ * `rename/build/results/wf0-measure-K1b.json`). So the case's patron (the Dawn Warden) is seated on soak-b and the rival
++ * (the Ash Tyrant) on soak-a, each cult on the other side as before: the bearer sets (patrons a and b, cults b and c, both
++ * kinds on b), soak-d's dormancy and every assertion stand as they were; only which deity sits where is mirrored.
++ *
+  * soak-a and soak-b are the TWO PATRON HOSTS sacredClaim.js's `natural_enemy` quadrant
+  * needs (a rival PATRON, not merely a cult — a cult embed carries no `primaryDeitySnapshot`
+  * for `patronRefOf` to read); soak-b's cult additionally makes it the one settlement
+  * bearing BOTH kinds (the mutant's half-predicate control: a bearer count collapsed to
+  * either half alone must still read two, never three, on this fixture).
+  *
+- * soak-a is the PATRON HOST for WF-2's precondition: its seeded genesis founding set
++ * soak-b is the PATRON HOST for WF-2's precondition: its seeded genesis founding set
+  * (deriveFoundingTraditions, off the soak's own archetype + seed, AS SEATED — genesis
+  * is deterministic from the settlement's current identity including its embedded
+  * patron, so the same call the pulse makes at first-lit-mint is the call this fixture
+  * previews) already carries a grand observance (scaleBand >= 3, act in {procession,
+  * offering, fair} — pilgrimage.js's own drawsPilgrims bar, DESIGN_FP_ARCH_WF.md V24)
+- * with soak-b/soak-c mapped and reachable through the soak's spatial canon. MEASURED,
+- * not authored: soak-a (city/germanic/river/crossroads) draws five qualifying records
++ * with soak-a/soak-c mapped and reachable through the soak's spatial canon. MEASURED,
++ * not authored: soak-b (town/germanic/grassland/road) draws one qualifying record (soak-a drew five under the `_seed` key)
+  * under this exact case; the case selects among the historical grid's fixed archetypes
+  * rather than forcing a motif.
+  *
+@@ -90,17 +98,17 @@ const ASH_TYRANT = Object.freeze({
+  * copy that would only coincidentally match).
+  */
+ const SEAT_PLAN = Object.freeze([
+-  Object.freeze({ saveId: 'soak-a', type: 'SET_PRIMARY_DEITY', raw: DAWN_WARDEN }),
+-  Object.freeze({ saveId: 'soak-b', type: 'SET_PRIMARY_DEITY', raw: ASH_TYRANT }),
+-  Object.freeze({ saveId: 'soak-b', type: 'IMPOSE_CULT', raw: DAWN_WARDEN }),
+-  Object.freeze({ saveId: 'soak-c', type: 'IMPOSE_CULT', raw: ASH_TYRANT }),
++  Object.freeze({ saveId: 'soak-a', type: 'SET_PRIMARY_DEITY', raw: ASH_TYRANT }),
++  Object.freeze({ saveId: 'soak-b', type: 'SET_PRIMARY_DEITY', raw: DAWN_WARDEN }),
++  Object.freeze({ saveId: 'soak-b', type: 'IMPOSE_CULT', raw: ASH_TYRANT }),
++  Object.freeze({ saveId: 'soak-c', type: 'IMPOSE_CULT', raw: DAWN_WARDEN }),
+ ]);
+ 
+ export const WF0_DEITY_BEARING_CASE = Object.freeze({
+   id: WF0_DEITY_BEARING_CASE_ID,
+   customContent: Object.freeze({ deities: Object.freeze([DAWN_WARDEN, ASH_TYRANT]) }),
+-  patronHostId: 'soak-a',
+-  rivalHostId: 'soak-b',
++  patronHostId: 'soak-b', // K1b-3: the id-keyed founding draw gives soak-b the grand observance (see the header)
++  rivalHostId: 'soak-a',
+ });
+ 
+ /**
+diff --git a/tests/domain/faithObservationFloorWf0.test.js b/tests/domain/faithObservationFloorWf0.test.js
+index e61ef4575..0d8a010b0 100644
+--- a/tests/domain/faithObservationFloorWf0.test.js
++++ b/tests/domain/faithObservationFloorWf0.test.js
+@@ -387,7 +387,8 @@ describe('WF-0 (e) — WF-2\'s preconditions, on drawsPilgrims\' live bar', () =
+   test('the patron host holds a qualifying grand observance with a mapped, reachable neighbour, and the live draw is above zero', () => {
+     const { saves, plan } = bearing();
+     expect(plan.preconditionsMet).toBe(true);
+-    expect(plan.patronHostId).toBe('soak-a');
++    // RE-KEYED BY IDENTITY (point 124 K1b, the chair's ruling K1b-3): the case is seated on soak-b, the deities mirrored (the fixture's header)
++    expect(plan.patronHostId).toBe('soak-b');
+     const digest = buildWholeWorldSoakSpatialCanon(saves).spatialDigest;
+     expect(digest, 'the case is not spatially canonized').toBeTruthy();
+     const host = saves.find((save) => save.id === plan.patronHostId);

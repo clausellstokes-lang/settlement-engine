@@ -1,0 +1,48 @@
+[gate-tail] start:  13:36:13 up 16 min,  0 user,  load average: 1.26, 1.10, 0.76 · cores: 4
+
+ RUN  v4.1.8 /home/user/settlement-engine
+
+ ❯ tests/lint/proseFamilyContract.walker.test.js (8 tests | 1 failed) 49067ms
+     × A1 reconstructs the exact four-family AO-0 corpus twice from one build 30ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/lint/proseFamilyContract.walker.test.js > four durable prose-family exact-totality contract > A1 reconstructs the exact four-family AO-0 corpus twice from one build
+AssertionError: expected { scalarRows: 38587, …(8) } to deeply equal { scalarRows: 38197, …(8) }
+
+- Expected
++ Received
+
+@@ -2,10 +2,10 @@
+    "aiChronicle": 1,
+    "canonEventLogEntries": 1,
+    "pulseHistory": 12,
+    "regionalEventLog": 71,
+    "regionalEventLogUnique": 71,
+-   "scalarRows": 38197,
+-   "wizardNewsAccumulatedEntries": 2627,
+-   "wizardNewsFinalEntries": 417,
+-   "wizardNewsUnique": 419,
++   "scalarRows": 38587,
++   "wizardNewsAccumulatedEntries": 2661,
++   "wizardNewsFinalEntries": 422,
++   "wizardNewsUnique": 424,
+  }
+
+ ❯ tests/lint/proseFamilyContract.walker.test.js:80:25
+     78|   it('A1 reconstructs the exact four-family AO-0 corpus twice from one…
+     79|     expect(second).toEqual(live);
+     80|     expect(live.corpus).toEqual(baseline.corpus);
+       |                         ^
+     81|     expect(live).toMatchObject({ familyTotals: baseline.familyTotals, …
+     82|     const roots = [...new Set(scalarRows.map((row) => `${row.root}:${r…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 7 passed (8)
+   Start at  13:36:14
+   Duration  50.31s (transform 6.91s, setup 67ms, import 1.06s, tests 49.07s, environment 0ms)
+
+[gate-tail] end:  13:37:05 up 17 min,  0 user,  load average: 1.52, 1.21, 0.82

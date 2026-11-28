@@ -1,0 +1,49 @@
+[gate-tail] start:  13:41:13 up 21 min,  0 user,  load average: 1.30, 1.23, 0.93 · cores: 4
+
+ RUN  v4.1.8 /home/user/settlement-engine
+
+ ❯ tests/lint/writerReach.walker.test.js (52 tests | 2 failed) 101919ms
+     × the frozen shapesDigest EQUALS the in-process digest of corpus.shapes — two executions of one builder are one corpus by bit, not by count 41ms
+     × the lit arm changes no draw: the walker corpus is byte-identical beside the lit one, and the dials are passed on the arm’s own configs 8ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the frozen register > the frozen shapesDigest EQUALS the in-process digest of corpus.shapes — two executions of one builder are one corpus by bit, not by count
+AssertionError: expected '76c3328f29b5839fe75ce216097da837ec7fc…' to be '08f7da56b2160301febc02295cbbbfe5d550c…' // Object.is equality
+
+Expected: "08f7da56b2160301febc02295cbbbfe5d550cc5531df11bfbd41a373d77bf584"
+Received: "76c3328f29b5839fe75ce216097da837ec7fc19a477210d6826a37ed0c525173"
+
+ ❯ tests/lint/writerReach.walker.test.js:228:48
+    226|
+    227|   test('the frozen shapesDigest EQUALS the in-process digest of corpus…
+    228|     expect(shapesDigestOf(live.corpus.shapes)).toBe(baseline.shapesDig…
+       |                                                ^
+    229|     for (const key of Object.keys(osrBaseline.corpusMeta)) {
+    230|       expect(live.corpus.meta[key], `live corpusMeta.${key} still equa…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the lit-dial arm > the lit arm changes no draw: the walker corpus is byte-identical beside the lit one, and the dials are passed on the arm’s own configs
+AssertionError: expected '76c3328f29b5839fe75ce216097da837ec7fc…' to be '08f7da56b2160301febc02295cbbbfe5d550c…' // Object.is equality
+
+Expected: "08f7da56b2160301febc02295cbbbfe5d550cc5531df11bfbd41a373d77bf584"
+Received: "76c3328f29b5839fe75ce216097da837ec7fc19a477210d6826a37ed0c525173"
+
+ ❯ tests/lint/writerReach.walker.test.js:1330:48
+    1328|
+    1329|   test('the lit arm changes no draw: the walker corpus is byte-identic…
+    1330|     expect(shapesDigestOf(live.corpus.shapes)).toBe(baseline.shapesDig…
+       |                                                ^
+    1331|     // THE PROMISE: a fixed reference world is never silently re-rolle…
+    1332|     // flips NEW_SETTLEMENT_*; it passes explicit versions on in-memor…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 50 passed (52)
+   Start at  13:41:14
+   Duration  103.26s (transform 7.17s, setup 54ms, import 1.13s, tests 101.92s, environment 0ms)
+
+[gate-tail] end:  13:42:58 up 23 min,  0 user,  load average: 1.15, 1.19, 0.95

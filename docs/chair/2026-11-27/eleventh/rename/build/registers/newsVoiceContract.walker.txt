@@ -1,0 +1,28 @@
+[gate-tail] start:  13:35:19 up 15 min,  0 user,  load average: 1.23, 1.06, 0.72 · cores: 4
+
+ RUN  v4.1.8 /home/user/settlement-engine
+
+ ❯ tests/lint/newsVoiceContract.walker.test.js (8 tests | 8 skipped) 52389ms
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/lint/newsVoiceContract.walker.test.js > cross-home Wizard News voice contract
+Error: Wizard News introductions drifted: expected 419, got 424
+ ❯ reconstructWizardNewsIntroductions scripts/lib/news-voice-contract.mjs:387:41
+    385|   const result = { pulseRoots: snapshots.length, introductions: introd…
+    386|   for (const [key, expected] of Object.entries(CORPUS)) {
+    387|     if (result[key] !== expected) throw new Error(`Wizard News ${key} …
+       |                                         ^
+    388|   }
+    389|   if (result.introductions - result.retirements !== result.finalEntrie…
+ ❯ tests/lint/newsVoiceContract.walker.test.js:53:56
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  8 skipped (8)
+   Start at  13:35:20
+   Duration  53.39s (transform 7.79s, setup 72ms, import 791ms, tests 52.39s, environment 0ms)
+
+[gate-tail] end:  13:36:13 up 16 min,  0 user,  load average: 1.26, 1.10, 0.76

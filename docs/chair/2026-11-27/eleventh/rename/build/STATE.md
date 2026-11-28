@@ -16,5 +16,9 @@ Branch `lane/stack-124-rename-wip-2026-11-28`, cut at 5ad631588. Scratch: `/home
   - 0acc29494 (red), ee6fe4dc6 (cure), 29c9aa139 + f7649f61e (AI narrative), 890442017 (type fix), 580af8b2e (seed loops), the any-cast fix (domainAnyCastBaseline, the chair's check).
   - PROVEN (`K2-PROOF.md`): on 300 + 300, 0 pages print the old name, a rename back restores every record and page byte for byte, and no other name moves. F3 on 1,800: no stored home holds the old name (1 receipt leaf, kept by rule); the receipt unchanged. A re-saved share holds the old name on 0 of 300 + 300 pages; a share stamped before the rename holds it on 300 + 300.
 - **K3:** MEASURED (`K3-MEASURE.md`; 300 + 300). A power's rename moves 235 and 229 pages beyond the name. The ruler kind is read off the renamed government label on 279 and 288; `familiesHeldOf` reads names; the door id is the name's slug. Proposal: the rename writes `kindName` once; three readers read `kindNameOf`; the veil is untouched. Not built.
-- **`tests/lint` whole on the tip** (12:13 UTC): 9 red files are mine, bisected and sent 12:33. K2's static reads are cured (01cc209a6, 987d5a68d); ruinFilterRoster awaits the word. K1 moved proseWiringCensus and the sovereignty test count; K1b moved the AO-0 news, prose-family and writer corpora (the chair's registers, named).
-- **NEXT:** the chair's words on WF-0 (V2), ruinFilterRoster, and the two doors; then "TIP? K2". The K3 proposal was sent 12:35.
+- **Rulings of 13:19** (K1b-3, K2-2, K-REG, K3-1):
+  - K2-2 is DONE (122f38fbe).
+  - K-REG: `K-REGISTERS.md` plus each door's check output under `registers/`.
+  - K1b-3: V2 turns statecraftExposureBand red (scandals 95 vs at most 57), so it is STOPPED (patch `tools/k1b3-V2.patch`, sent 13:33).
+  - K3-1 (1) measured: the classifiers run LIVE on the reader's shared page, so it is STOPPED on condition (2) (sent 13:52).
+- **NEXT:** the chair's words on K1b-3 and K3; then "TIP?" for point 124 whole.

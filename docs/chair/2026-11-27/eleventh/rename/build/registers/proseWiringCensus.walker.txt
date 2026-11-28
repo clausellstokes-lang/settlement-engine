@@ -1,0 +1,54 @@
+[gate-tail] start:  13:33:57 up 14 min,  0 user,  load average: 0.88, 0.97, 0.67 · cores: 4
+
+ RUN  v4.1.8 /home/user/settlement-engine
+
+ ❯ tests/lint/proseWiringCensus.walker.test.js (79 tests | 2 failed) 11115ms
+     × ⭐ THE DRY READ: both modes, and the one that writes is not among them 100ms
+     × the committed census is byte-identical to a fresh build, and the stamp is live 56ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/lint/proseWiringCensus.walker.test.js > SEAM car 5b — THE HOLDER CENSUS: the source of each construction (SITTING §Q) > ⭐ THE DRY READ: both modes, and the one that writes is not among them
+AssertionError: the committed register is current at this tip: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/lint/proseWiringCensus.walker.test.js:2329:73
+    2327|     const text = readFileSync(CENSUS_JSON, 'utf8');
+    2328|     const current = censusDry(text, committed);
+    2329|     expect(current.ok, 'the committed register is current at this tip'…
+       |                                                                         ^
+    2330|     expect(current.rowsMoved, 'and no row would move').toBe(0);
+    2331|     expect(current.sections, 'and no section would move').toEqual([]);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/lint/proseWiringCensus.walker.test.js > car 0 — the committed JSON and its interlock > the committed census is byte-identical to a fresh build, and the stamp is live
+AssertionError: the committed file is current: expected 'stale-bytes' to be '' // Object.is equality
+
+- Expected
++ Received
+
++ stale-bytes
+
+ ❯ tests/lint/proseWiringCensus.walker.test.js:2409:61
+    2407|     const text = readFileSync(CENSUS_JSON, 'utf8');
+    2408|     const verdict = censusCheck(text, committed);
+    2409|     expect(verdict.reason, 'the committed file is current').toBe('');
+       |                                                             ^
+    2410|     expect(verdict.ok).toBe(true);
+    2411|     expect(text, 'and byte-identical to what the script would write').…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 77 passed (79)
+   Start at  13:33:58
+   Duration  20.44s (transform 4.70s, setup 53ms, import 9.16s, tests 11.12s, environment 0ms)
+
+[gate-tail] end:  13:34:19 up 14 min,  0 user,  load average: 0.99, 0.99, 0.68

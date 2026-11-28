@@ -1,0 +1,41 @@
+[gate-tail] start:  13:38:17 up 18 min,  0 user,  load average: 1.28, 1.22, 0.86 · cores: 4
+
+ RUN  v4.1.8 /home/user/settlement-engine
+
+ ❯ tests/lint/observedShapeReaders.walker.test.js (47 tests | 1 failed) 118071ms
+     × the producers ran and the corpus is not empty 66ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/lint/observedShapeReaders.walker.test.js > reader-with-no-writer ratchet: the EXECUTED corpus > the producers ran and the corpus is not empty
+AssertionError: expected { canonEventLogEntries: 1, …(7) } to deeply equal { canonEventLogEntries: 1, …(7) }
+
+- Expected
++ Received
+
+@@ -2,9 +2,9 @@
+    "aiChronicle": 1,
+    "canonEventLogEntries": 1,
+    "pulseHistory": 12,
+    "regionalEventLog": 71,
+    "regionalEventLogUnique": 71,
+-   "wizardNewsAccumulatedEntries": 2627,
+-   "wizardNewsFinalEntries": 417,
+-   "wizardNewsUnique": 419,
++   "wizardNewsAccumulatedEntries": 2661,
++   "wizardNewsFinalEntries": 422,
++   "wizardNewsUnique": 424,
+  }
+
+ ❯ tests/lint/observedShapeReaders.walker.test.js:700:37
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 46 passed (47)
+   Start at  13:38:18
+   Duration  119.32s (transform 7.26s, setup 62ms, import 1.03s, tests 118.07s, environment 0ms)
+
+[gate-tail] end:  13:40:17 up 20 min,  0 user,  load average: 1.12, 1.19, 0.90
