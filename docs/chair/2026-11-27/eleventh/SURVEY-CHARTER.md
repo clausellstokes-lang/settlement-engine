@@ -19,6 +19,21 @@
 5. (about 01:05 UTC on 2026-11-28) "Also all quotes are added to cards and not between them or making new cards. Just for
    aesthetic simplicity and uniformity."
 
+6. (about 01:07 UTC on 2026-11-28, quoting the chair's "One quote slot per card, in one fixed place and style, the same on every
+   tab.") "And I would say that randomly, not everything needs a quote: […] So here and there, on the pieces that are less
+   severe, randomly remove one before generating. Keeps it organic."
+
+## NOT EVERY CARD SPEAKS (his sixth message; the chair's reading, said back to him the same minute; vetoable)
+- A SLOT IS A PLACE A QUOTE MAY APPEAR, NOT A PROMISE. BEFORE ANY LINE IS CHOSEN the engine decides which cards speak; the
+  rest stay in the surveyor's voice alone.
+- SEEDED AND STABLE: by the town and the card's own id (the ranked pick's way: the same town always shows the same quotes; a
+  later edit to a pool re-deals none). A speaker is spent only where the card won a quote.
+- WEIGHTED BY HOW MUCH THE PIECE MATTERS: a crisis, a severe tension, a ruling power usually keeps its quote; lesser pieces
+  mostly go without.
+- THE NUMBERS ARE TUNING VALUES, HIS TO SIGN (the chair's starting point from the cold read's "two or three a tab"): about
+  three in four of the weightiest cards speak; about one in four of the lesser; small places quieter still. Named constants in
+  the tuning inventory, listed for his signing with the rest.
+
 ## WHERE A QUOTE SITS (his fifth message; the chair's reading, said back to him the same minute; vetoable)
 - A QUOTE ALWAYS SITS INSIDE A CARD THAT ALREADY EXISTS: never a free-standing block between cards, never a new kind of card.
 - It goes on the card of THE THING IT IS ABOUT, signed by the speaker. ONE QUOTE SLOT A CARD, in one fixed place and style, the
