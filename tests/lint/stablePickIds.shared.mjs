@@ -14,8 +14,9 @@
  *               the function's pools).
  *   IMPORTED POOLS  point 121's pools, named one by one in `IMPORTED_POOLS` (a module, an export, a scope, a layout:
  *               a flat array, or a record whose values are arrays), read by IMPORT at run time; a row is an object
- *               with a string `id` and its words: a `text`, or a `say` function (fingerprinted by its own source text,
- *               `String(row.say)`, normalised as the text is). ONE RUNTIME (RULING 121-6): the family is read under
+ *               with a string `id` and its words: a `text`, a `say` function (fingerprinted by its own source text,
+ *               `String(row.say)`, normalised as the text is), or (S-G1, the voices' lines) `versions`, four strings
+ *               keyed on the stored dispositions, read in one fixed order and joined. ONE RUNTIME (RULING 121-6): the family is read under
  *               PLAIN NODE on both sides: the door imports it itself; the walker takes it from a plain-node child,
  *               `node scripts/stable-pick-ids-door.mjs --print-tree`, never from its own import under the test loader
  *               (which rewrites an imported binding and adds semicolons inside a function's source).
@@ -111,7 +112,9 @@ export const DAILY_LIFE_EXPORTS = Object.freeze({
 /**
  * THE IMPORTED POOLS (point 121, TAIL-PICKS): every pool held by import, its scope, its layout and where its words are.
  * `flat`: the export is an array of rows; `record`: an object whose values are arrays of rows (its keys are not scopes).
- * @typedef {{ module: string, export: string, scope: string, layout: 'flat' | 'record', words: 'text' | 'say' }} ImportedPool
+ * Words: `text` (a string), `say` (a function, by its source), or `versions` (S-G1: an object of FOUR strings keyed on the
+ * stored dispositions, `VERSION_KEYS`, read in that order and joined: a re-wording of any one is a re-wording of the row).
+ * @typedef {{ module: string, export: string, scope: string, layout: 'flat' | 'record', words: 'text' | 'say' | 'versions' }} ImportedPool
  * @type {ReadonlyArray<ImportedPool>}
  */
 export const IMPORTED_POOLS = Object.freeze([
@@ -126,7 +129,25 @@ export const IMPORTED_POOLS = Object.freeze([
   { module: 'src/pdf/lib/headlines.js', export: 'ECONOMICS_HEADLINES', scope: 'pdf.headlines.economics', layout: 'flat', words: 'say' },
   { module: 'src/pdf/lib/headlines.js', export: 'NPCS_HEADLINES', scope: 'pdf.headlines.npcs', layout: 'flat', words: 'say' },
   { module: 'src/domain/summary/settlementQuickGuide.js', export: 'SCOPE_LINE_FRAMES', scope: 'quickGuide.scopeLine', layout: 'flat', words: 'say' },
+  { module: 'src/data/voices/saidLines.js', export: 'SAID_LINES', scope: 'voices.said', layout: 'record', words: 'versions' },
+  { module: 'src/data/voices/liarLines.js', export: 'LIAR_LINES', scope: 'voices.liar', layout: 'record', words: 'versions' },
 ].map((r) => Object.freeze(r)));
+
+/** THE FOUR VERSIONS of a voices line (S-G1), in the order they are read: the stored dispositions (`npc.presentation.disposition`). */
+export const VERSION_KEYS = Object.freeze(['welcoming', 'transactional', 'cautious', 'dismissive']);
+/** What joins the four versions before the fingerprint (no version holds it; whitespace alone would collapse). */
+export const VERSIONS_JOIN = ' ¦ ';
+
+/**
+ * A `versions` row's words: its four versions in `VERSION_KEYS` order, joined; null unless all four are non-empty strings.
+ * @param {unknown} versions @returns {string | null}
+ */
+export function versionsWordsOf(versions) {
+  if (!versions || typeof versions !== 'object' || Array.isArray(versions)) return null;
+  const v = /** @type {Record<string, unknown>} */ (versions);
+  const words = VERSION_KEYS.map((k) => v[k]);
+  return words.every((w) => typeof w === 'string' && w.trim() !== '') ? words.join(VERSIONS_JOIN) : null;
+}
 
 /** An id's form: a prefix of letters and a number (`P3`, `SS1`; lower case counted too). */
 export const ID_FORM = /^[A-Za-z]{1,4}[0-9]+$/;
@@ -465,9 +486,11 @@ export function importedPoolsTreeOf(modules, table) {
     /** @type {TreeLine[]} */ const lines = scopes.get(pool.scope) ?? [];
     for (const [k, rows] of branches) {
       /** @type {unknown[]} */ (rows).forEach((row, i) => {
-        const r = /** @type {{ id?: unknown, text?: unknown, say?: unknown } | null} */ (row);
-        const words = !r ? null : pool.words === 'text' ? (typeof r.text === 'string' ? r.text : null) : (typeof r.say === 'function' ? String(r.say) : null);
-        if (!r || typeof r.id !== 'string' || words === null) { problems.push(`${where}${k}[${i}]: a row without a string id and its ${pool.words === 'text' ? 'text' : '`say` function'}`); return; }
+        const r = /** @type {{ id?: unknown, text?: unknown, say?: unknown, versions?: unknown } | null} */ (row);
+        const words = !r ? null : pool.words === 'text' ? (typeof r.text === 'string' ? r.text : null)
+          : pool.words === 'versions' ? versionsWordsOf(r.versions) : (typeof r.say === 'function' ? String(r.say) : null);
+        const what = pool.words === 'text' ? 'text' : pool.words === 'versions' ? 'four versions' : '`say` function';
+        if (!r || typeof r.id !== 'string' || words === null) { problems.push(`${where}${k}[${i}]: a row without a string id and its ${what}`); return; }
         const bad = idProblem(r.id);
         if (bad) { problems.push(`${where}${k}[${i}]: the id ${JSON.stringify(r.id)} is not an id (${bad}: an id is a non-empty string with no space at either end and no line break)`); return; }
         lines.push({ id: r.id, fp: fingerprintOf(words) });

@@ -19,7 +19,7 @@ import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'no
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import {
-  BASELINE_REL, DAILY_LIFE_EXPORTS, IMPORTED_POOLS, ROOT, VIABILITY_SCOPE, baselineProblems, dailyLifeTreeOf, doorPlan,
+  BASELINE_REL, DAILY_LIFE_EXPORTS, IMPORTED_POOLS, ROOT, VERSIONS_JOIN, VERSION_KEYS, VIABILITY_SCOPE, baselineProblems, dailyLifeTreeOf, doorPlan,
   findings, fingerprintOf, idProblem, importedPoolsTreeFromChild, importedPoolsTreeOf, readBaseline, readTree, viabilityRowsIn, viabilityTreeOf,
 } from './stablePickIds.shared.mjs';
 
@@ -352,6 +352,42 @@ describe('guard-the-guard: the imported pools (point 121)', () => {
     const onlyTwo = { scopes: { 'x.flat': BANK.scopes['x.flat'], 'x.byRole': BANK.scopes['x.byRole'] } };
     const added = doorPlan(poolTree(mods()), onlyTwo);
     expect([added.refusals, added.added]).toEqual([[], ['x.frames plain', 'x.frames told']]);
+  });
+});
+
+// ── GUARD-THE-GUARD: a row of four VERSIONS (S-G1, the voices' lines; the eleventh chair's ruling E28 point 10) ──────────
+
+describe('guard-the-guard: a `versions` row is fingerprinted by all four of its versions', () => {
+  const VT = /** @type {ReadonlyArray<ImportedPool>} */ ([{ module: 'm/v.js', export: 'SAID', scope: 'x.said', layout: 'record', words: 'versions' }]);
+  const four = (/** @type {string} */ w) => ({ welcoming: `${w} warmly.`, transactional: `${w} at a cost.`, cautious: `${w}, maybe.`, dismissive: `${w}.` });
+  /** @param {unknown} said */
+  const vTree = (said) => importedPoolsTreeOf({ 'm/v.js': { exports: { SAID: said } } }, VT);
+  const base = { 'a.one': [{ id: 'V.a.1', versions: four('One') }, { id: 'V.a.2', versions: four('Two') }], 'b.two': [{ id: 'V.b.1', versions: four('Three') }] };
+  const VBANK = /** @type {Baseline} */ ({ scopes: Object.fromEntries([...vTree(base).scopes].map(([s, l]) => [s, { present: Object.fromEntries(l.map((x) => [x.id, x.fp])), retired: [] }])) });
+
+  test('the record is read into one scope, each row by the four versions in the tempers\' order', () => {
+    const t = vTree(base);
+    expect(t.problems).toEqual([]);
+    expect([...t.scopes].map(([s, l]) => `${s}:${l.map((x) => x.id).join(',')}`)).toEqual(['x.said:V.a.1,V.a.2,V.b.1']);
+    expect(t.scopes.get('x.said')?.[0].fp).toBe(fingerprintOf(VERSION_KEYS.map((k) => four('One')[/** @type {'welcoming'} */ (k)]).join(VERSIONS_JOIN)));
+    expect(VERSION_KEYS).toEqual(['welcoming', 'transactional', 'cautious', 'dismissive']);
+  });
+
+  test('ANY ONE version re-worded in place is red until the door re-banks it; a swap of two rows is a move', () => {
+    for (const k of VERSION_KEYS) {
+      const v = { ...four('One'), [k]: 'Something else.' };
+      const reworded = vTree({ ...base, 'a.one': [{ id: 'V.a.1', versions: v }, base['a.one'][1]] });
+      expect(kinds(reworded, VBANK), k).toEqual(['reworded V.a.1']);
+    }
+    const swapped = vTree({ ...base, 'a.one': [{ id: 'V.a.2', versions: four('One') }, { id: 'V.a.1', versions: four('Two') }] });
+    expect(kinds(swapped, VBANK)).toEqual(['moved V.a.1', 'moved V.a.2']);
+  });
+
+  test('FAIL-CLOSED: a row missing a version, an empty or non-string version, or no versions at all is red', () => {
+    const { dismissive: _d, ...three } = four('One');
+    for (const versions of [three, { ...four('One'), cautious: '' }, { ...four('One'), welcoming: 7 }, undefined, 'One.']) {
+      expect(vTree({ 'a.one': [{ id: 'V.a.1', versions }] }).problems.join('\n'), JSON.stringify(versions)).toMatch(/SAID\.a\.one\[0\]: a row without a string id and its four versions/);
+    }
   });
 });
 
