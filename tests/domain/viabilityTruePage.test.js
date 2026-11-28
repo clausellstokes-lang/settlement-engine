@@ -272,11 +272,17 @@ describe('RULING 122-B-4: the shared page does not learn the hook', () => {
     const blocks = /** @type {Record<string, unknown>} */ (composePublicProse(s)?.blocks || {});
     return JSON.stringify(Object.entries(blocks).filter(([k]) => k.startsWith('economy:') || k === 'viewModel:viability'));
   };
+  // THE HOOK LEG FAILS CLOSED (the chair's last step on 122-B-4): it is asked for BY NAME, the owner's audience ('dm', the
+  // desks' own token); a call that states no audience answers from the stress and the tension alone.
+  test('C dp-thorp-8: the debt reader with no audience does not read the hook; the owner\'s audience does', () => {
+    const s = c('dp-thorp-8');
+    expect([owesDebtShown(s), owesDebtShown(s, { audience: 'player' }), owesDebtShown(s, { audience: 'dm' })]).toEqual([false, false, true]);
+  }, 120000);
   for (const seed of ['dp-thorp-8', 'dp-town-48']) {
     test(`C ${seed} (owes by the hook alone): the stamp is byte-equal with the hook on and off; the owner's desk is not`, () => {
       const s = c(seed);
       const off = unhooked(s);
-      expect([owesDebtShown(s), owesDebtShown(off)], 'the premise: the hook alone makes the place owe').toEqual([true, false]);
+      expect([owesDebtShown(s, { audience: 'dm' }), owesDebtShown(off, { audience: 'dm' })], 'the premise: the hook alone makes the place owe').toEqual([true, false]);
       expect(stamped(s)).toBe(stamped(off));
       expect(JSON.stringify(economyDeskRead(s)) === JSON.stringify(economyDeskRead(off)), 'the owner\'s eye keeps the leg').toBe(false);
     }, 120000);
