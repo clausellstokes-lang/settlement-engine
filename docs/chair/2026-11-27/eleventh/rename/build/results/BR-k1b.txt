@@ -1,0 +1,4 @@
+BR-k1 R2 towns 10 pages moved 10 lines 217 World/Traditions 217
+BR-k1 R4 towns 10 pages moved 10 lines 3458 World/Traditions 217
+BR-k1b R2 towns 10 pages moved 0 lines 0 World/Traditions 0
+BR-k1b R4 towns 10 pages moved 10 lines 3241 World/Traditions 0

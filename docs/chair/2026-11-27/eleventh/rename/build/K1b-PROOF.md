@@ -27,7 +27,8 @@ Every count is a script's (CONFIRMED).
 | pages moved | 150 of 150, 1,823 lines | 150 of 150, 1,861 lines |
 | lines moved outside World/Traditions (the tabs, the PDF, Foundry, Tonight) | **0** | **0** |
 | the shared stamp (`publicProse`) re-composed | 150 of 150 | 150 of 150 |
-| ten towns, every road (`tools/roads-render.jsx`) | see below | |
+| ten towns of C, the owner's page against the copy's after the JSON import (R2), every tab (`tools/roads-render.jsx`; `results/BR-k1b.txt`) | K1: 10 of 10 pages moved, 217 lines, all World/Traditions. **K1b: 0 of 10, 0 lines** | |
+| the same after the gallery import (R4) | K1: 3,458 lines (the public projection's own losses plus 217 on World/Traditions). **K1b: 3,241, World/Traditions 0**; every other view's count identical to K1's | |
 
 ## A lit world
 
@@ -43,4 +44,7 @@ Every count is a script's (CONFIRMED).
 
 - **A share stamped before K1b** keeps its old traditions rows until the next save, because `PUBLIC_PROSE_VERSION` is not bumped (the chair's ruling K1-1 (iv)). The stamp is re-composed on 150 of 150 (above). This is named for the share lane.
 - **faithObservationFloorWf0:** red 2 of 15 under K1b, and green with K1b reverted. Its corpus is the soak's own seed. It awaits the chair's word (`K1b-REKEYS.md`).
-- **Goldens:** see below. None is re-recorded.
+- **Goldens:** none is re-recorded.
+  - The goldens and pins that read the founding draw are green on BOTH trees, so K1b moves none of them (CONFIRMED): `tests/property/traditionsDormancyGolden` (the golden-pinned founding leaf), `traditionsTabCustomMerge`, `facts/water` and `customFoundingTraditions`.
+  - The record goldens cannot move, since 0 births moved (above).
+  - `dossier-prose-manifest-golden`, red on the base (`K1-PROOF.md`), would also take K1b's World/Traditions cells (PLAUSIBLE). It is named, as at K1.

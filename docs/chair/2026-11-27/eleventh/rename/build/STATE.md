@@ -13,9 +13,8 @@ Branch `lane/stack-124-rename-wip-2026-11-28`, cut at 5ad631588. Scratch: `/home
   - Proof (`K1b-PROOF.md`): the copy founds the owner's set 1,800 of 1,800; the old and stampless forms are identical; 0 records moved; only World/Traditions moves; the WF-0 lit world keeps its minted set.
   - faithObservationFloorWf0 (ruling K1b-2): measured. soak-b bears the case only with the seat plan mirrored (V2: 15 of 15); the host choice alone leaves arm (c) red. Awaiting the chair's word (sent 11:12 UTC). Nothing changed.
 - **K2:** COMMITTED.
-  - 0acc29494 (red), ee6fe4dc6 (cure), 29c9aa139 + f7649f61e (AI narrative), 890442017 (type fix), 580af8b2e (seed loops).
+  - 0acc29494 (red), ee6fe4dc6 (cure), 29c9aa139 + f7649f61e (AI narrative), 890442017 (type fix), 580af8b2e (seed loops), the any-cast fix (domainAnyCastBaseline, the chair's check).
   - PROVEN (`K2-PROOF.md`): on 300 + 300, 0 pages print the old name, a rename back restores every record and page byte for byte, and no other name moves. F3 on 1,800: no stored home holds the old name (1 receipt leaf, kept by rule); the receipt unchanged. A re-saved share holds the old name on 0 of 300 + 300 pages; a share stamped before the rename holds it on 300 + 300.
-- **NEXT:**
-  1. K3 is running (k3-harness, 300 + 300): measure and proposal only;
-  2. then the roads run (10 towns, K1b), the golden checks, domainAnyCastBaseline, and `tests/lint` whole once on the tip (the chair's word);
-  3. then "TIP? K2".
+- **K3:** MEASURED (`K3-MEASURE.md`; 300 + 300). A power's rename moves 235 and 229 pages beyond the name. The ruler kind is read off the renamed government label on 279 and 288; `familiesHeldOf` reads names; the door id is the name's slug. Proposal: the rename writes `kindName` once; three readers read `kindNameOf`; the veil is untouched. Not built.
+- K1b roads (10 towns): the JSON-imported copy moves 0 lines (K1: 217). The traditions goldens are green on both trees.
+- **NEXT:** `tests/lint` whole once on the tip (the chair's word); push; then "TIP? K2" and the K3 proposal to the chair. WF-0 awaits the chair's word.

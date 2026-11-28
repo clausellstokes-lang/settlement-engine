@@ -1,0 +1,86 @@
+H: residual GONE lines placed by source file (pages, lines), unplaced 3032
+   UN 474  Systems/Economics| Subsistence farming
+   UN 473  Systems/Economics| Honey and beeswaxForaged goods
+   UN 275  Systems/Economics| Outputs
+   UN 159  Systems/Economics| medicinal herbshoneyHoney and beeswaxForaged goods
+   UN 128  Systems/Economics| honeymedicinal herbsHoney and beeswaxForaged goods
+   UN 85  Foundry/Identity & Daily Life| - **Foodways:** Each holding grows for its own table, and beyond that 
+   UN 79  Systems/Economics| What each holding grows goes to its own table; beyond that, what it pu
+   UN 79  Foundry/Identity & Daily Life| - **Foodways:** What each holding grows goes to its own table; beyond 
+   UN 48  Foundry/Services| *Seven institutions: subsistence farming, shepherd collective, access 
+   UN 39  Foundry/Services| *Eight institutions: subsistence farming, shepherd collective, access 
+   UN 35  Systems/Economics| grainmedicinal herbshoneyHoney and beeswaxForaged goods
+   UN 25  Systems/Economics| Each holding grows for its own table, and beyond that its food is game
+   UN 25  Systems/Economics| Each holding grows for its own table, and beyond that its food is the 
+   UN 24  Foundry/Services| *Eight institutions: subsistence farming, common grazing land, access 
+   UN 23  Systems/Economics| honeyHoney and beeswaxForaged goods
+   UN 22  PDF/dailyLife| child_warnings: Children are warned about the far edges of the fields 
+   UN 19  World/Traditions| ▦
+   UN 19  World/Traditions| Field
+   UN 18  Foundry/Services| *Seven institutions: subsistence farming, access to external mill, acc
+   UN 16  World/Daily Life| Children are warned about the far edges of the fields after dark.
+   UN 13  World/Daily Life| People talk in the fields while they work, and gather by the wayside s
+   UN 13  PDF/dailyLife| gathering_places: People talk in the fields while they work, and gathe
+   UN 13  Foundry/Services| *Seven institutions: subsistence farming, fishing community, access to
+   UN 12  Systems/Economics| Each holding grows for its own table, and beyond that its food is chee
+   UN 11  Foundry/Services| *Eight institutions: subsistence farming, communal root cellar, shephe
+   UN 11  Systems/Institutions| ServicesMalted barley
+   UN 10  Systems/Economics| Each holding grows for its own table, and beyond that its food is meat
+   UN 10  Foundry/Services| *Seven institutions: subsistence farming, common grazing land, access 
+   UN 10  Systems/Economics| Each holding grows for its own table, and beyond that its food is fish
+   UN 9  Systems/Economics| Normally yields
+  576 pages, 3032 lines  UNPLACED
+      C dp-thorp-0 Systems/Economics: medicinal herbshoneyHoney and beeswaxForaged goods
+      C dp-thorp-0 Systems/Economics: Subsistence farming
+  97 pages, 194 lines  src/data/dailyLife/gatheringPlaces.js
+      C dp-thorp-10 World/Daily Life: Most talk happens in the fields while the work goes on, and again where the water is drawn.
+      C dp-thorp-10 PDF/dailyLife: gathering_places: Most talk happens in the fields while the work goes on, and again where the water is drawn.
+  83 pages, 166 lines  src/data/dailyLife/dawnWork.js
+      C dp-thorp-8 World/Daily Life: The first light goes to walking the edges of the fields; the ordinary work begins once that is done.
+      C dp-thorp-8 PDF/dailyLife: dawn_work: The first light goes to walking the edges of the fields; the ordinary work begins once that is done.
+  73 pages, 146 lines  src/data/dailyLife/outsiderImpressions.js
+      C dp-thorp-0 World/Daily Life: A visitor soon learns that little happens here without the Elder Council. Travellers here talk of beasts seen at the edge of the settled lan
+      C dp-thorp-0 PDF/dailyLife: outsider_impressions: A visitor soon learns that little happens here without the Elder Council. Travellers here talk of beasts seen at the e
+  29 pages, 58 lines  src/data/dailyLife/foodCulture.js
+      C dp-hamlet-7 World/Daily Life: The hunters bring in more than enough, and game is often in the pot.
+      C dp-hamlet-7 PDF/dailyLife: food_culture: The hunters bring in more than enough, and game is often in the pot.
+  22 pages, 26 lines  src/components/new/tabs/power/PowerStrata.jsx
+      C dp-thorp-14 Systems/Power: Institutions behind this power (3)
+      C dp-thorp-70 Systems/Power: Institutions behind this power (7)
+  21 pages, 42 lines  src/data/cultureProfiles.js + src/data/foodwaysPrintSiblings.js
+      C dp-thorp-32 Systems/Economics: What each holding grows goes to its own table; beyond that, what it puts on the table itself is the hunters' game. Water access and preserva
+      C dp-thorp-32 Foundry/Identity & Daily Life: - **Foodways:** What each holding grows goes to its own table; beyond that, what it puts on the table itself is the hunters' game. Water acc
+  21 pages, 42 lines  src/domain/foodways.js
+      V dp-thorp-4 Systems/Economics: What each holding grows goes to its own table; beyond that, what it puts on the table itself is the day's catch.
+      V dp-thorp-4 Foundry/Identity & Daily Life: - **Foodways:** What each holding grows goes to its own table; beyond that, what it puts on the table itself is the day's catch.
+  16 pages, 32 lines  src/data/cultureProfiles.js
+      C dp-thorp-112 Systems/Economics: What each holding grows goes to its own table; beyond that, what it puts on the table itself is meat and milk from the herds. Herd cycles an
+      C dp-thorp-112 Foundry/Identity & Daily Life: - **Foodways:** What each holding grows goes to its own table; beyond that, what it puts on the table itself is meat and milk from the herds
+  11 pages, 11 lines  src/data/institutionServices.js
+      C dp-hamlet-8 Systems/Services: Sprouted and kiln-dried barley. The basis of all ale.
+      C dp-hamlet-24 Systems/Services: Sprouted and kiln-dried barley. The basis of all ale.
+  10 pages, 10 lines  src/data/dossierStateProse/economy.generated.js
+      C dp-thorp-22 PDF/printProse: Kleinthal is fed, but what it keeps put by would not outlast a run of poor harvests. Of the food Kleinthal raises for itself, its herds and 
+      C dp-thorp-78 PDF/printProse: Birqala grows far less food than it needs, and with the roads cut by the siege nothing comes in to make up the difference. Of the food Birqa
+  9 pages, 9 lines  src/data/institutionDescVariants.js
+      C dp-hamlet-8 Systems/Institutions: Malts barley for brewing on a modest scale, supplying the alehouses nearby. It needs grain to spare before it can work at all.
+      C dp-hamlet-65 Systems/Institutions: Malts barley for brewing on a modest scale, supplying the alehouses nearby. It needs grain to spare before it can work at all.
+  6 pages, 6 lines  src/copy/sectionHelp.js
+      C dp-hamlet-117 Systems/Economics: Economic Flows (2 active · 1 impaired)▲?What is made here and what it depends on.
+      V dp-hamlet-40 Systems/Economics: Economic Flows (1 active · 1 impaired)▲?What is made here and what it depends on.
+  4 pages, 8 lines  src/data/dailyLife/childWarnings.js
+      V dp-thorp-58 World/Daily Life: Children are warned about the usual things: the water's edge, the far fields, and being home before dark.
+      V dp-thorp-58 PDF/dailyLife: child_warnings: Children are warned about the usual things: the water's edge, the far fields, and being home before dark.
+  2 pages, 4 lines  src/data/foodwaysPrintSiblings.js
+      C dp-thorp-78 Systems/Economics: What each holding grows goes to its own table; beyond that, what it puts on the table itself is the herds' milk and mutton. Water access and
+      C dp-thorp-78 Foundry/Identity & Daily Life: - **Foodways:** What each holding grows goes to its own table; beyond that, what it puts on the table itself is the herds' milk and mutton. 
+  2 pages, 2 lines  src/data/institutionDescVariants.js + src/data/institutionalCatalog.js
+      C dp-hamlet-24 Systems/Institutions: Converts barley into malt for brewing. Small operation supplying local alehouses. Requires grain surplus.
+      V dp-hamlet-24 Systems/Institutions: Converts barley into malt for brewing. Small operation supplying local alehouses. Requires grain surplus.
+  2 pages, 2 lines  src/generators/power/rulingStructure.js
+      V dp-thorp-127 Foundry/Services: *Seven institutions: subsistence farming, access to external mill, burial ground, head-of-household consensus, dwellings, water source and p
+      V dp-thorp-130 Foundry/Services: *Eight institutions: subsistence farming, fishing community, access to external mill, burial ground, head-of-household consensus, dwellings,
+  1 pages, 1 lines  src/domain/traditions/shownTraditions.js
+      V dp-thorp-83 World/Traditions: Kept in Seedtime, the eighth week.
+  1 pages, 1 lines  src/components/new/tabs/DailyLifeTab.jsx + src/data/dailyLife/commonerResentments.js + src/data/dailyLife/commonerResentmentsDm.js
+      V dp-hamlet-102 PDF/dailyLife: commoner_resentments: 

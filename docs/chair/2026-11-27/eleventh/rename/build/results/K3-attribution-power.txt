@@ -1,0 +1,92 @@
+F: residual GONE lines placed by source file (pages, lines), unplaced 632
+   UN 81  PDF/crisis| doorId":"faction.elder_council
+   UN 40  PDF/crisis| doorId":"faction.household_council
+   UN 18  World/Daily Life| Matters of any weight are talked over at the elder's door, where peopl
+   UN 18  PDF/dailyLife| gathering_places: Matters of any weight are talked over at the elder's
+   UN 17  PDF/crisis| doorId":"faction.free_elder_council
+   UN 15  PDF/crisis| doorId":"faction.headman_s_authority
+   UN 14  PDF/crisis| doorId":"faction.the_independent_bloc
+   UN 14  PDF/crisis| doorId":"faction.feudal_stewardship
+   UN 13  Summary/Plot Hooks| Political Event
+   UN 12  World/Daily Life| People stop at the elder's door at first light, and the day's work is 
+   UN 12  PDF/dailyLife| dawn_work: People stop at the elder's door at first light, and the day
+   UN 11  Summary/Overview| Latin-inspired. Ask about the place and you are told it is run by cust
+   UN 10  Summary/Overview| Latin-inspired, and it shows: run by custom more than by law. Governed
+   UN 9  Summary/Overview| Steppe-inspired. Ask about the place and you are told it is built on c
+   UN 8  Summary/Overview| Steppe-inspired: built on clan lines, held by clan and caravan. Govern
+   UN 8  Tonight/sheet| Political Event
+   UN 7  Session/threads| Political event
+   UN 7  World/NPCs| Elder
+   UN 6  World/NPCs| Governor
+   UN 6  PDF/crisis| doorId":"faction.occupation_authority
+   UN 6  Summary/Overview| Latin-inspired; people here live in a place run by custom more than by
+   UN 5  Summary/Overview| Latin-inspired: run by custom more than by law. Governed by Elder Coun
+   UN 4  Summary/Overview| Latin-inspired, run by custom more than by law. Governed by Elder Coun
+   UN 4  Summary/Overview| Steppe-inspired, built on clan lines, held by clan and caravan. Govern
+   UN 4  Summary/Overview| Greek-inspired. Ask about the place and you are told it is built on th
+   UN 4  PDF/crisis| doorId":"faction.grain_holders
+   UN 4  Summary/Overview| Greek-inspired, built on the open plain. Governed by Elder Council · S
+   UN 4  PDF/crisis| doorId":"faction.war_council
+   UN 4  Foundry/Plot Hooks| - Someone is poisoning the ruler slowly, and someone in the household 
+   UN 4  Summary/Overview| Steppe-inspired, and it shows: built on clan lines, held by clan and c
+  372 pages, 632 lines  UNPLACED
+      C dp-thorp-0 PDF/crisis: doorId":"faction.elder_council
+      C dp-thorp-1 World/NPCs: Governor
+  94 pages, 94 lines  src/generators/safetyProfile.js + src/domain/display/guardLineUnderTheLaw.js
+      C dp-thorp-0 Systems/Defense: There is no watch. The old families keep the peace, and anyone who breaks it answers to all the neighbours at once; when the families fall o
+      C dp-thorp-6 Systems/Defense: There is no watch. When someone does wrong, the neighbours deal with it themselves, and the oldest families have the last word.
+  34 pages, 68 lines  src/data/dailyLife/dawnWork.js
+      C dp-thorp-9 World/Daily Life: The elder is asked at first light whether all is well before anyone goes out to work.
+      C dp-thorp-9 PDF/dailyLife: dawn_work: The elder is asked at first light whether all is well before anyone goes out to work.
+  30 pages, 30 lines  src/generators/safetyLineTruth.js + src/generators/safetyProfile.js + src/domain/display/guardLineUnderTheLaw.js
+      C dp-thorp-4 Systems/Defense: Nobody here is paid to keep order. A quarrel goes to the heads of the oldest families, and most are settled before they come to blows.
+      C dp-thorp-30 Systems/Defense: Nobody here is paid to keep order. A quarrel goes to the heads of the oldest families, and most are settled before they come to blows.
+  27 pages, 27 lines  src/generators/power/governanceNarrative.js
+      C dp-thorp-1 Systems/Power: Dominik Bauer, the head shepherd and Elder, holds the seat of the Elder Council. The Elder Council answers to the occupiers of Rotbach. In R
+      C dp-thorp-81 Systems/Power: The Elder Council answers to the occupiers of Qaryahtappa. Its seat is held by Oula al-Qadir, the head shepherd and Elder. In Qaryahtappa, t
+  24 pages, 48 lines  src/data/dailyLife/commonerResentments.js
+      C dp-thorp-88 World/Daily Life: Common folk say the elders decide among themselves and tell everyone else afterwards.
+      C dp-thorp-88 PDF/dailyLife: commoner_resentments: Common folk say the elders decide among themselves and tell everyone else afterwards.
+  13 pages, 13 lines  src/domain/display/guardLineUnderTheLaw.js
+      C dp-thorp-12 Systems/Defense: Nobody here is paid to keep order. A quarrel no longer goes to the heads of the oldest families; it is settled by whoever is stronger.
+      C dp-thorp-78 Systems/Defense: Nobody here is paid to keep order. A quarrel no longer goes to the heads of the oldest families; it is settled by whoever is stronger.
+  13 pages, 44 lines  src/data/historyData.js
+      C dp-thorp-134 Summary/Plot Hooks: The ailing ruler wants a final errand completed before naming a successor
+      C dp-thorp-134 Foundry/Tonight: - The ailing ruler wants a final errand completed before naming a successor. *(Political Event)*
+  10 pages, 10 lines  src/data/stressPowerFaces.js
+      C dp-thorp-19 Systems/Power: ↳It has no one leader yet: the commons speak for it in the street, and no one can treat with it.
+      C dp-thorp-70 Systems/Power: ↳It is no one body: it is every household and dealer with a full bin.
+  5 pages, 5 lines  src/data/troubleHooks.js
+      C dp-hamlet-7 Session/threads: Someone nobody here knows has been asking about the paths in and out, and has asked for a bed for the night
+      C dp-hamlet-51 Session/threads: A rider brings fresh news of the danger tonight, and it does not match what the last one said
+  4 pages, 8 lines  src/data/dailyLife/outsiderImpressions.js
+      C dp-thorp-70 World/Daily Life: The Grain Holders carry the most weight here, and nobody pretends otherwise. People here know the wild country well, and they warn a visitor
+      C dp-thorp-70 PDF/dailyLife: outsider_impressions: The Grain Holders carry the most weight here, and nobody pretends otherwise. People here know the wild country well, a
+  4 pages, 4 lines  src/generators/power/governingStressVignettes.js
+      C dp-hamlet-54 Systems/Power: The Elder Council governs Becanche. Its seat is held by Mazatl Dzul, the dairy farmer and Elder. Insecurity has left the Elder Council's rig
+      V dp-thorp-1 Foundry/Power: - **Household Council** *(governing)*: The Household Council keeps the seat, but under the occupation nothing it decides stands without the 
+  4 pages, 12 lines  src/domain/coherence/hookTruth.js
+      C dp-hamlet-124 Summary/Plot Hooks: What survives from that time says: someone is poisoning the ruler slowly, and someone in the household knows
+      C dp-hamlet-124 Foundry/Plot Hooks: - What survives from that time says: someone is poisoning the ruler slowly, and someone in the household knows *(Political Event)*
+  3 pages, 3 lines  src/domain/summary/settlementQuickGuide.js
+      C dp-thorp-46 Summary/Overview: Steppe-inspired, and it shows: built for a pastoral life half-settled and half-moving, held by clan and caravan. Governed by Elder Council ·
+      C dp-hamlet-107 Summary/Overview: Steppe-inspired, built for a pastoral life half-settled and half-moving, held by clan and caravan. Governed by Free Elder Council · Tense (r
+  3 pages, 11 lines  src/generators/historyGenerator.js + src/domain/dossier/plotHooks.js
+      C dp-hamlet-7 Summary/Plot Hooks: A letter found this year tells it this way: someone is poisoning the ruler slowly, and someone in the household knows
+      C dp-hamlet-7 Foundry/Tonight: - A letter found this year tells it this way: someone is poisoning the ruler slowly, and someone in the household knows. *(Political Event)*
+  2 pages, 2 lines  src/generators/power/governanceNarrative.js + src/domain/facts/monsterFrontier.js
+      V dp-thorp-30 Summary/Overview: Greek-inspired, and it shows: built on the coast. Governed by Feudal Stewardship · Tense — regional monster threat
+      V dp-hamlet-77 Summary/Overview: Greek-inspired, built on the coast. Governed by Headman's Authority · Tense — regional monster threat
+  1 pages, 1 lines  src/generators/factionDynamics.js + src/domain/dossier/powerStrata.js
+      C dp-hamlet-43 Systems/Power: The Guard no longer takes orders from the Feudal Stewardship. The Feudal Stewardship keeps the title; the Guard makes the decisions that mat
+  1 pages, 2 lines  src/data/dossierStateProse/power.generated.js
+      C dp-hamlet-43 Systems/Power: Ainmela is too poor to pay the few people who hold office here, and anyone with money to spare could buy their goodwill cheaply. The Guard h
+      C dp-hamlet-43 PDF/printProse: Ainmela is too poor to pay the few people who hold office here, and anyone with money to spare could buy their goodwill cheaply. The Guard h
+  1 pages, 3 lines  src/pdf/lib/headlines.js
+      C dp-hamlet-43 PDF/headlines: npcs: Eight people worth knowing; Latifa al-Malik, the militia captain, first of The Guard, carries the most weight.
+      C dp-hamlet-43 PDF/headlines: power: Feudal Stewardship holds the seat, but more weight lies with The Guard.
+  1 pages, 2 lines  src/components/new/tabs/EconomicsTab.jsx + src/data/dossierStateProse/economy.generated.js
+      V dp-hamlet-137 Systems/Economics: A good part of the trade here goes unrecorded, and merchants who pay their duties and guild fees are undersold by those who do not.
+      V dp-hamlet-137 PDF/printProse: A good part of the trade here goes unrecorded, and merchants who pay their duties and guild fees are undersold by those who do not.
+  1 pages, 1 lines  src/domain/causalState.js
+      V dp-hamlet-137 PDF/crisis: doorId":"faction.merchant_guilds
