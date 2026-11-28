@@ -38,3 +38,26 @@ AND the line's own `needs` admit that house: a smuggling line never lands on an 
 
 **THE PDF WORKER's +103,698 B (the lines):** named for the owner's size signing. The "TIP?" says what fetching the lines
 only when a page holds a quote would cost to build; it is not built.
+
+**"TIP? 56cb9876c" (code tip 96cb62121), received 10:27 UTC: ACCEPTED AS BUILT; THE INDEPENDENT READER IS STARTED ON
+96cb62121** (brief: `prompts/START-READER-VOICES.txt`). Two things more, both on top of 96cb62121 (the reader reads the delta):
+
+**G1-5: THE PDF WORKER CARRIES NO LINES** (the same rule as the survey's S-A-2: a worker carries no table). Build the shape
+TIP.md describes: the plan is computed on the caller's thread; the PDF worker is handed the quotes it prints (kind, id,
+text, signature; never a liar's line, never an `inTruth`) beside the town; the twin reads them from its props and imports
+no line. Red first: a guard that the PDF worker's static closure reaches nothing under `src/data/voices/` (the
+repository's import-walking helper); a parity case (the PDF's quotes equal the screen's on the measure's towns). PROOF: a
+real build, the PDF worker's bytes against 003fd3b07 to the byte (expect about +2 kB, not +105,951), first paint
+unchanged, boot smoke green; PDF 3,421 · 3,344 quotes and 0 differing still.
+
+**G1-6: A SAMENESS TABLE, measuring only** (`survey/voices-engine/SAMENESS.md`): the thirty most-printed quote sentences on
+C and on V with the towns printing each; for each pool (card kind, state), the number of lines and of versions the record
+can admit, and the share of towns that print its most common sentence; the pools where one sentence prints in more than
+one town in ten that print the pool (the offering's "Children are taught to give something, however small." printed in
+three of the twelve towns of TEN-TOWNS.md). It decides how many lines the writer adds before the owner's sample.
+
+THE CHAIR's OWN READ OF TEN-TOWNS.md (for the record; none stops the tip): the remarks are plain and pass as remarks. To
+look at with the reader's report: the courthouse liar ("Nothing gets past the checks here without being seen." / "waves
+the criminal house's loads through": a customs lie in a court's mouth); the governor of an insurgent city remarking on
+back-door business as a bystander; "Everyone pays, and nobody likes how it's spent." on two different tensions in two of
+twelve towns.
