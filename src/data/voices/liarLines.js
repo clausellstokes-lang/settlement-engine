@@ -73,16 +73,16 @@ export const LIAR_LINES = deepFreeze({
       } },
   ],
   'front.trade': [
-    { id: 'LIE.front.trade.1', inTruth: 'the books hide the criminal house\'s money passing through',
+    { id: 'LIE.front.trade.1', inTruth: 'the accounts hide the criminal house\'s money passing through',
       versions: {
-        welcoming: { text: 'Anyone may look at the books, and plenty have.' },
+        welcoming: { text: 'Anyone may look at the accounts, and plenty have.' },
         transactional: { text: 'Every sale gets written down, however small.' },
-        cautious: { text: 'The books here have never had a question asked of them.' },
+        cautious: { text: 'The accounts here have never had a question asked of them.' },
         dismissive: { text: 'Clean books.' },
       } },
     { id: 'LIE.front.trade.2', inTruth: 'loads for the criminal house come in after dark',
       versions: {
-        welcoming: { text: 'The carts come in daylight, where everyone can wave.', excludes: ['crisis: under_siege'] },
+        welcoming: { text: 'The carts come in daylight, where everyone can wave.', needs: ['route open'], excludes: ['crisis: under_siege'] },
         transactional: { text: 'Every load here is bought and paid for in full.' },
         cautious: { text: 'Nothing comes into this yard after dark.' },
         dismissive: { text: 'Daytime deliveries only.' },
@@ -156,7 +156,7 @@ export const LIAR_LINES = deepFreeze({
       } },
   ],
   'smuggling': [
-    { id: 'LIE.smuggling.1', inTruth: 'smuggled goods come in untaxed',
+    { id: 'LIE.smuggling.1', inTruth: 'smuggled goods come in untaxed', needs: ['house: smuggling'],
       versions: {
         welcoming: { text: 'Everything that comes in here pays its way honestly.' },
         transactional: { text: 'Every load pays its toll, and the tolls are high.' },
@@ -179,7 +179,7 @@ export const LIAR_LINES = deepFreeze({
       } },
     { id: 'LIE.smuggling.4', inTruth: 'much of what comes from outside comes in hidden',
       versions: {
-        welcoming: { text: 'Outside goods come in the proper way, like everything else.' },
+        welcoming: { text: 'Outside goods come in the proper way, like everything else.', needs: ['imports'] },
         transactional: { text: 'Outside goods cost what they cost because they pay their toll.' },
         cautious: { text: 'Nothing from outside turns up here that shouldn\'t.' },
         dismissive: { text: 'Proper way only.' },

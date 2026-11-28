@@ -116,7 +116,7 @@ export const SAID_LINES = deepFreeze({
     { id: 'SAID.inst.care-ordinary.4', speaker: ['keeper', 'works-there'],
       versions: {
         welcoming: { text: 'There\'s always someone here to sit with the sick.' },
-        transactional: { text: 'Clean cloths and herbs cost more every season.' },
+        transactional: { text: 'Clean cloths and herbs cost more every season.', card: ['medicine'] },
         cautious: { text: 'It\'s hard to say which medicines really help.', card: ['medicine'] },
         dismissive: { text: 'Too many to look after.' },
       } },
@@ -189,7 +189,7 @@ export const SAID_LINES = deepFreeze({
       } },
     { id: 'SAID.inst.grain-ordinary.4', speaker: ['keeper', 'works-there'],
       versions: {
-        welcoming: { text: 'The first carts of the day get a friendly wave.' },
+        welcoming: { text: 'The first carts of the day get a friendly wave.', needs: ['grain'], excludes: ['crisis: under_siege'] },
         transactional: { text: 'Work starts before dawn, and the pay doesn\'t change.' },
         cautious: { text: 'Next year\'s harvest may not be as good.' },
         dismissive: { text: 'Up before dawn, again.' },
@@ -234,7 +234,7 @@ export const SAID_LINES = deepFreeze({
     { id: 'SAID.inst.hall-ordinary.5', speaker: ['keeper', 'works-there'],
       versions: {
         welcoming: { text: 'The clerks work late to get everyone seen.', card: ['clerks'] },
-        transactional: { text: 'Candles burn here long after dark, and someone pays for them.', ineligible: ['candles'] },
+        transactional: { text: 'The lights burn late there, most nights.' },
         cautious: { text: 'Old records here have a way of going missing.' },
         dismissive: { text: 'The papers never stop coming.' },
       } },
@@ -250,22 +250,22 @@ export const SAID_LINES = deepFreeze({
     { id: 'SAID.inst.inn-ordinary.2', speaker: ['keeper', 'works-there'],
       versions: {
         welcoming: { text: 'The regulars always make room for a new face.' },
-        transactional: { text: 'Late nights burn a lot of candles.', ineligible: ['candles'] },
+        transactional: { text: 'Keeping the lamps lit late costs a fair bit.' },
         cautious: { text: 'New faces get watched until someone knows their business.' },
         dismissive: { text: 'Same regulars. Same stories.' },
       } },
     { id: 'SAID.inst.inn-ordinary.3', speaker: ['keeper', 'works-there'],
       versions: {
-        welcoming: { text: 'Travellers always bring a story, and someone\'s always glad to hear it.' },
+        welcoming: { text: 'Travellers always bring a story, and someone\'s always glad to hear it.', needs: ['route open'], excludes: ['crisis: under_siege'] },
         transactional: { text: 'News costs nothing here. Feeding the people who bring it does.' },
         cautious: { text: 'Most of the news that comes in turns out wrong.' },
         dismissive: { text: 'More rumours today.' },
       } },
     { id: 'SAID.inst.inn-ordinary.4', speaker: ['keeper', 'works-there'],
       versions: {
-        welcoming: { text: 'Wet travellers get a warm spot first.' },
+        welcoming: { text: 'Wet travellers get a warm spot first.', needs: ['route open'], excludes: ['crisis: under_siege'] },
         transactional: { text: 'Late arrivals keep everyone up, and they rarely pay extra.' },
-        cautious: { text: 'Some travellers leave before dawn, without a word.' },
+        cautious: { text: 'Some travellers leave before dawn, without a word.', needs: ['route open'], excludes: ['crisis: under_siege'] },
         dismissive: { text: 'Mud on everything.' },
       } },
     { id: 'SAID.inst.inn-ordinary.5', speaker: ['keeper', 'works-there'],
@@ -561,7 +561,7 @@ export const SAID_LINES = deepFreeze({
       versions: {
         welcoming: { text: 'Customers bring their broken things in like old friends.' },
         transactional: { text: 'Repairs pay less than new work, but they keep the doors open.' },
-        cautious: { text: 'Prices are hard to judge these days.' },
+        cautious: { text: 'Prices are hard to guess these days.' },
         dismissive: { text: 'Rush jobs, always rush jobs.' },
       } },
     { id: 'SAID.inst.workshop-ordinary.5', speaker: ['keeper', 'works-there'],
@@ -1389,13 +1389,13 @@ export const SAID_LINES = deepFreeze({
     { id: 'SAID.trad.feast.2', speaker: ['anyone'],
       versions: {
         welcoming: { text: 'Old enemies sit at the same table for the feast.' },
-        transactional: { text: 'Plenty of drink goes round, and someone always pays for it after.' },
+        transactional: { text: 'Plenty of drink goes round, and someone always pays for it after.', excludes: ['crisis: hunger'] },
         cautious: { text: 'Quarrels wait until the morning after the feast.' },
         dismissive: { text: 'Sore heads the next day.' },
       } },
     { id: 'SAID.trad.feast.3', speaker: ['anyone'],
       versions: {
-        welcoming: { text: 'Neighbours lend each other pots and pans for the feast.' },
+        welcoming: { text: 'Neighbours lend each other pans and dishes for the feast.' },
         transactional: { text: 'The cooking takes days, and the fuel costs plenty.' },
         cautious: { text: 'There may not be enough for everyone this year.' },
         dismissive: { text: 'The cooking never stops.' },
@@ -1478,8 +1478,8 @@ export const SAID_LINES = deepFreeze({
       } },
     { id: 'SAID.trad.vigil.3', speaker: ['anyone'],
       versions: {
-        welcoming: { text: 'Families take turns keeping the candles lit.' },
-        transactional: { text: 'Candles for the vigil cost more each year.' },
+        welcoming: { text: 'Families take turns tending the lights all night.' },
+        transactional: { text: 'Lighting the vigil costs more each year.' },
         cautious: { text: 'Not everyone who says they sat the whole night did.' },
         dismissive: { text: 'Wax everywhere after.' },
       } },
@@ -1487,7 +1487,7 @@ export const SAID_LINES = deepFreeze({
   'person.powerface': [
     { id: 'SAID.person.powerface.1', speaker: ['own-person'],
       versions: {
-        welcoming: { text: 'People come with favours to ask, and most get a hearing.' },
+        welcoming: { text: 'People come with favours to ask, and most are heard.' },
         transactional: { text: 'Every message carried for our people takes a day\'s work.' },
         cautious: { text: 'Some who come asking favours are really asking for someone else.' },
         dismissive: { text: 'Always someone wanting something.' },

@@ -11,7 +11,7 @@ import { SAID_LINES } from '../../src/data/voices/saidLines.js';
 import { LIAR_LINES } from '../../src/data/voices/liarLines.js';
 import { assertDeclarable } from '../../src/domain/facts/factVocabulary.js';
 import { CARD_WORDS } from '../../src/domain/voices/cardWords.js';
-import { NEEDS_ATOM, NOUN_DECLARATION, SPEAKER_KEY, TEMPERS, needsTermsOf, liarGroupOf, nounDeclarationOf } from '../../scripts/gen-voices-lines.mjs';
+import { CHANGED_WORDS, CLASS_ANSWERS, NEEDS_ATOM, NOUN_DECLARATION, SPEAKER_KEY, TEMPERS, needsTermsOf, liarGroupOf, nounDeclarationOf } from '../../scripts/gen-voices-lines.mjs';
 
 const said = Object.entries(SAID_LINES).flatMap(([pool, rows]) => rows.map((row) => ({ pool, row })));
 const liar = Object.entries(LIAR_LINES).flatMap(([group, rows]) => rows.map((row) => ({ group, row })));
@@ -66,11 +66,26 @@ describe('the said lines (the first load: 197 lines, 53 pools)', () => {
 
   it('answers each needs word by an atom, by the card, or nowhere; a word answered nowhere leaves its VERSION out (ruling G1-2)', () => {
     const out = said.flatMap(({ row }) => TEMPERS.filter((t) => row.versions[t].ineligible).map((t) => `${row.id} ${t}: ${row.versions[t].ineligible.join(',')}`));
-    expect(out).toEqual(['SAID.inst.hall-ordinary.5 transactional: candles', 'SAID.inst.inn-ordinary.2 transactional: candles']);
+    // none since the four candle versions were reworded (the chair's G1-4 (d)): the count is pinned with its list in
+    // tests/domain/voices/voicesIneligible.test.js
+    expect(out).toEqual([]);
     const carded = said.flatMap(({ row }) => TEMPERS.flatMap((t) => row.versions[t].card || []));
     for (const w of carded) expect(Object.keys(CARD_WORDS)).toContain(w);
     expect(new Set(carded).size).toBe(8);
     for (const { row } of said) expect(row.ineligible, row.id).toBeUndefined();
+  });
+
+  it('carries the changed words (G1-3 (3), G1-4) and the class answers (G1-3 (1), (2)) onto the versions they name', () => {
+    const all = [...said, ...liar].map(({ row }) => row);
+    const at = (/** @type {string} */ k) => { const [id, w] = k.split(' '); const row = all.find((r) => r.id === id); return w === 'inTruth' ? { text: row.inTruth, needs: row.needs, excludes: row.excludes } : row.versions[w]; };
+    for (const [k, c] of Object.entries(CHANGED_WORDS)) expect(at(k).text, k).toBe(c.to);
+    for (const [k, a] of Object.entries(CLASS_ANSWERS)) {
+      for (const x of a.needs || []) expect(at(k).needs, k).toContain(x);
+      for (const x of a.excludes || []) expect(at(k).excludes, k).toContain(x);
+      for (const x of a.card || []) expect(at(k).card, k).toContain(x);
+    }
+    expect(Object.keys(CHANGED_WORDS).length).toBe(10);
+    expect(Object.keys(CLASS_ANSWERS).length).toBe(9);
   });
 
   it('reads the writer\'s needs cell: a word, its gloss, and the tempers that need it', () => {

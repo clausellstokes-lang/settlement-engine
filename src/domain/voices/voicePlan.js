@@ -221,8 +221,11 @@ export function liarOf(settlement, npcs, key, instByName) {
   // criminal house's kind only where the holder's house has no line, so a smuggling line never lands on an arts college.
   // Each asked of the record through the one door, as every line is (its note's nouns and its version's).
   const temper = temperOf(npc);
+  const catalogId = str(instByName.get(house)?.catalogId) || null;
   for (const group of [way, kind]) {
-    const lines = /** @type {Record<string, any>[]} */ (group ? LIAR_LINES[/** @type {keyof typeof LIAR_LINES} */ (group)] || [] : []);
+    // as every line: a line or a version marked ineligible is never spoken, and a card word must hold for the house
+    const lines = /** @type {Record<string, any>[]} */ (group ? LIAR_LINES[/** @type {keyof typeof LIAR_LINES} */ (group)] || [] : [])
+      .filter((l) => !l.ineligible && !l.versions[temper].ineligible && (l.versions[temper].card || []).every((/** @type {string} */ w) => cardWordHolds(w, catalogId)));
     if (!lines.length) continue;
     const domain = lines.map((l) => ({ id: str(l.id), text: str(l.versions[temper].text), line: l,
       needs: [...(l.needs || []), ...(l.versions[temper].needs || [])], excludes: [...(l.excludes || []), ...(l.versions[temper].excludes || [])] }));
@@ -286,7 +289,7 @@ function composePlan(s, options) {
       const v = l.versions[temper];
       // a version answered nowhere is out; a card-level word must hold for this card (ruling G1-1 (2)); a speaker never
       // speaks out of temper: another LINE is taken
-      if (v.ineligible || (v.card || []).some((/** @type {string} */ w) => !cardWordHolds(w, card.catalogId))) return [];
+      if (l.ineligible || v.ineligible || (v.card || []).some((/** @type {string} */ w) => !cardWordHolds(w, card.catalogId))) return [];
       const text = filled(v.text, card.fill);
       if (text === null) return [];
       return [{ id: str(l.id), text, needs: v.needs || [], excludes: v.excludes || [] }];

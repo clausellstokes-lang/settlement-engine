@@ -83,6 +83,64 @@ export const NOUN_DECLARATION = Object.freeze(/** @type {Record<string, { needs?
 }));
 
 /**
+ * THE CHANGED WORDS (the chair's rulings G1-3 (3) and G1-4 of 2026-11-28, each on the owner's veto list as changed words):
+ * a false hit of the presumption-classes walker, or a thing answered nowhere that a plain rewording keeps (the four candle
+ * versions: "candles" out, the late light kept, each a different remark, L-4), is cured by the LINE's words, never by the
+ * rule book. Keyed `<line id> <temper | inTruth>`. The TSV's own text must be `from` (a TSV that changed stops the
+ * generator); `drops` names the writer's needs words the old text alone called for.
+ */
+export const CHANGED_WORDS = Object.freeze(/** @type {Record<string, { from: string, to: string, drops?: string[] }>} */ ({
+  'SAID.inst.workshop-ordinary.4 cautious': { from: 'Prices are hard to judge these days.', to: 'Prices are hard to guess these days.' },
+  'SAID.trad.feast.3 welcoming': { from: 'Neighbours lend each other pots and pans for the feast.', to: 'Neighbours lend each other pans and dishes for the feast.' },
+  'SAID.person.powerface.1 welcoming': { from: 'People come with favours to ask, and most get a hearing.', to: 'People come with favours to ask, and most are heard.' },
+  'LIE.front.trade.1 welcoming': { from: 'Anyone may look at the books, and plenty have.', to: 'Anyone may look at the accounts, and plenty have.' },
+  'LIE.front.trade.1 cautious': { from: 'The books here have never had a question asked of them.', to: 'The accounts here have never had a question asked of them.' },
+  'LIE.front.trade.1 inTruth': { from: 'the books hide the criminal house\'s money passing through', to: 'the accounts hide the criminal house\'s money passing through' },
+  'SAID.inst.hall-ordinary.5 transactional': { from: 'Candles burn here long after dark, and someone pays for them.', to: 'The lights burn late there, most nights.', drops: ['candles'] },
+  'SAID.inst.inn-ordinary.2 transactional': { from: 'Late nights burn a lot of candles.', to: 'Keeping the lamps lit late costs a fair bit.', drops: ['candles'] },
+  'SAID.trad.vigil.3 transactional': { from: 'Candles for the vigil cost more each year.', to: 'Lighting the vigil costs more each year.' },
+  'SAID.trad.vigil.3 welcoming': { from: 'Families take turns keeping the candles lit.', to: 'Families take turns tending the lights all night.' },
+}));
+
+/**
+ * THE CLASS ANSWERS (the chair's rulings G1-3 (1) and (2) of 2026-11-28; the table the chair read, the seat's
+ * `CLASS-HITS.md`): what a version presumes where the presumption-classes walker reads a THING class in its words (goods,
+ * office, outside …), or where a speaker's word states a MATERIAL fact of the town (drink in plenty): an atom of the
+ * vocabulary, asked of the record through the one door like any line's, or the card that answers it
+ * (`domain/voices/cardWords.js`). Keyed `<line id> <temper | inTruth>`; an `inTruth` answer is the LINE's (its note
+ * prints with every version).
+ */
+export const CLASS_ANSWERS = Object.freeze(/** @type {Record<string, { needs?: string[], excludes?: string[], card?: string[] }>} */ ({
+  // drink in plenty, a material fact: the hunger family (famine, under_siege) shut out
+  'SAID.trad.feast.2 transactional': { excludes: ['crisis: hunger'] },
+  // a healer's herbs and clean cloths: a healer, an apothecary or a hospital (never an almshouse)
+  'SAID.inst.care-ordinary.4 transactional': { card: ['medicine'] },
+  // the first carts of the day at a mill or a granary: the town grows grain, and no siege shuts the gate
+  'SAID.inst.grain-ordinary.4 welcoming': { needs: ['grain'], excludes: ['crisis: under_siege'] },
+  // an inn's travellers: a route at all, and no siege
+  'SAID.inst.inn-ordinary.3 welcoming': { needs: ['route open'], excludes: ['crisis: under_siege'] },
+  'SAID.inst.inn-ordinary.4 welcoming': { needs: ['route open'], excludes: ['crisis: under_siege'] },
+  'SAID.inst.inn-ordinary.4 cautious': { needs: ['route open'], excludes: ['crisis: under_siege'] },
+  // a lie about outside goods still needs goods to come in (G1-3 (2))
+  'LIE.smuggling.4 welcoming': { needs: ['imports'] },
+  'LIE.front.trade.2 welcoming': { needs: ['route open'] },
+  'LIE.smuggling.1 inTruth': { needs: ['house: smuggling'] },
+}));
+
+/** @param {string} id @param {string} where @param {string} text @returns {string} the text, changed where ruled */
+function changedText(id, where, text) {
+  const c = Object.hasOwn(CHANGED_WORDS, `${id} ${where}`) ? CHANGED_WORDS[`${id} ${where}`] : null;
+  if (!c) return text;
+  if (c.from !== text) throw new Error(`gen-voices-lines: ${id} ${where} is no longer "${c.from}" in the TSV: "${text}"`);
+  return c.to;
+}
+/** @param {string} id @param {string} where @returns {{ needs: string[], excludes: string[], card: string[] }} */
+function classAnswerOf(id, where) {
+  const a = Object.hasOwn(CLASS_ANSWERS, `${id} ${where}`) ? CLASS_ANSWERS[`${id} ${where}`] : {};
+  return { needs: [...(a.needs || [])], excludes: [...(a.excludes || [])], card: [...(a.card || [])] };
+}
+
+/**
  * THE SPEAKER RULES AS KEYS (the writer's words for a mouth, each to the one key the plan reads). A mouth the map does not
  * name stops the generator.
  */
@@ -182,18 +240,23 @@ function saidLineOf(r) {
     if (Object.hasOwn(TYPE_STATE, term.word)) { state = TYPE_STATE[/** @type {keyof typeof TYPE_STATE} */ (term.word)]; continue; }
     const atom = Object.hasOwn(NEEDS_ATOM, term.word) ? NEEDS_ATOM[/** @type {keyof typeof NEEDS_ATOM} */ (term.word)] : null;
     for (const tp of term.tempers || TEMPERS) {
+      if (CHANGED_WORDS[`${id} ${tp}`]?.drops?.includes(term.word)) continue; // the changed words no longer name it
       if (atom) add(per[tp].atoms, atom);
       else if (Object.hasOwn(CARD_WORDS, term.word)) add(per[tp].card, term.word);
       else add(per[tp].nowhere, term.word);
     }
   }
-  const texts = { welcoming: w.trim(), transactional: t.trim(), cautious: c.trim(), dismissive: d.trim() };
+  const texts = { welcoming: changedText(id, 'welcoming', w.trim()), transactional: changedText(id, 'transactional', t.trim()),
+    cautious: changedText(id, 'cautious', c.trim()), dismissive: changedText(id, 'dismissive', d.trim()) };
   /** @type {Record<string, object>} */ const versions = {};
   for (const tp of TEMPERS) {
     const own = nounDeclarationOf(texts[/** @type {'welcoming'} */ (tp)], `${id} ${tp}`);
+    const ans = classAnswerOf(id, tp);
     const vn = [...per[tp].atoms];
-    for (const a of own.needs) if (!vn.includes(a)) vn.push(a);
-    versions[tp] = { ...versionOf(texts[/** @type {'welcoming'} */ (tp)], vn, own.excludes),
+    for (const a of [...own.needs, ...ans.needs]) if (!vn.includes(a)) vn.push(a);
+    const ve = [...own.excludes]; for (const a of ans.excludes) if (!ve.includes(a)) ve.push(a);
+    for (const x of ans.card) add(per[tp].card, x);
+    versions[tp] = { ...versionOf(texts[/** @type {'welcoming'} */ (tp)], vn, ve),
       ...(per[tp].card.length ? { card: per[tp].card } : {}), ...(per[tp].nowhere.length ? { ineligible: per[tp].nowhere } : {}) };
   }
   const sl = slotsOf(slots);
@@ -209,14 +272,20 @@ export function liarGroupOf(id) {
 /** @param {string[]} r @returns {object} one liar line, as data (the writer's notes, `touches`, `fits` and the false claim, stay in the TSV) */
 function liarLineOf(r) {
   const [id, , , , , w, t, c, d, , inTruth] = r;
-  const note = nounDeclarationOf(inTruth.trim(), `${id} inTruth`);
-  const texts = { welcoming: w.trim(), transactional: t.trim(), cautious: c.trim(), dismissive: d.trim() };
+  const truth = changedText(id, 'inTruth', inTruth.trim());
+  const note = nounDeclarationOf(truth, `${id} inTruth`);
+  { const ans = classAnswerOf(id, 'inTruth'); for (const a of ans.needs) if (!note.needs.includes(a)) note.needs.push(a); for (const a of ans.excludes) if (!note.excludes.includes(a)) note.excludes.push(a); }
+  const texts = { welcoming: changedText(id, 'welcoming', w.trim()), transactional: changedText(id, 'transactional', t.trim()),
+    cautious: changedText(id, 'cautious', c.trim()), dismissive: changedText(id, 'dismissive', d.trim()) };
   /** @type {Record<string, object>} */ const versions = {};
   for (const tp of TEMPERS) {
     const own = nounDeclarationOf(texts[/** @type {'welcoming'} */ (tp)], `${id} ${tp}`);
-    versions[tp] = versionOf(texts[/** @type {'welcoming'} */ (tp)], own.needs, own.excludes);
+    const ans = classAnswerOf(id, tp);
+    const vn = [...own.needs]; for (const a of ans.needs) if (!vn.includes(a)) vn.push(a);
+    const ve = [...own.excludes]; for (const a of ans.excludes) if (!ve.includes(a)) ve.push(a);
+    versions[tp] = versionOf(texts[/** @type {'welcoming'} */ (tp)], vn, ve);
   }
-  return { id, group: liarGroupOf(id), inTruth: inTruth.trim(), ...(note.needs.length ? { needs: note.needs } : {}), ...(note.excludes.length ? { excludes: note.excludes } : {}), versions };
+  return { id, group: liarGroupOf(id), inTruth: truth, ...(note.needs.length ? { needs: note.needs } : {}), ...(note.excludes.length ? { excludes: note.excludes } : {}), versions };
 }
 
 /** @param {unknown} v @returns {string} a JS literal of a plain value (frozen whole by the file's own \`deepFreeze\`) */
@@ -304,6 +373,9 @@ export function generate(saidTsv, liarTsv) {
     if (!liar.has(line.group)) liar.set(line.group, []);
     /** @type {object[]} */ (liar.get(line.group)).push(line);
   }
+  // every changed word and every class answer names a line and a place that exist (a key misspelled stops the generator)
+  const places = new Set([...said.values(), ...liar.values()].flat().flatMap((/** @type {any} */ l) => [...TEMPERS, ...(l.inTruth ? ['inTruth'] : [])].map((w) => `${l.id} ${w}`)));
+  for (const k of [...Object.keys(CHANGED_WORDS), ...Object.keys(CLASS_ANSWERS)]) if (!places.has(k)) throw new Error(`gen-voices-lines: '${k}' names no line's version or note`);
   const n = (/** @type {Map<string, object[]>} */ m) => [...m.values()].reduce((a, v) => a + v.length, 0);
   return {
     said: `${SAID_HEAD}\n${recordOf(said, 'SAID_LINES')}`,
