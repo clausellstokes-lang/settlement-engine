@@ -119,3 +119,7 @@ of 1,558 hideable houses of C are of this kind).**
   out of reach. A seed TYPED by a user is as weak as what was typed. The measure owes: every time-like field a share
   serves, and what else a re-birth needs that is served (the config). TODAY's live site sends the hidden things anyway, so
   this binds only once the veil hides on the server: it is the lane's, in its phase 1.
+- **A24 (from RENAME-BUILD's K3 measure, 12:35 UTC on 2026-11-28): A HOUSE's HIDEABLE CLASS CAN BE READ FROM ITS NAME**
+  (`isHideableHouse` reads `facetOf('clandestine')`, which is the declared facet, else an inference over the NAME,
+  `cohesionWeave.js:421`). No product action renames a house today; the day one does, a DM's rename could move a house into
+  or out of the hidden class. OWED TO THE LANE: say whether the class must be read only from stored facts, and pin it.
