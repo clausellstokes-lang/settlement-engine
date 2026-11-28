@@ -98,3 +98,10 @@ Earlier rulings: S-A-1, S-B-1, S-B-2 in `CHAIR-HANDOFF-ELEVENTH.md` (V30 to V35)
 - **THE NPC ROWS "nothing threatens" beside a danger coming** (2 pages of C): written at birth; a cure would move births: NAMED
   for a later birth unit, not cured here.
 - AT THE MERGE: each family re-measured on the merged tree before it is built; the census's pairs count each at 0 after.
+- **S-D-Y1 (15:50 UTC), THE WORDS AND A CONDITION:** (i) a crime wave in force: "The {force} keeps order in the streets, but crime is
+  rising all the same." (no force named: "Order holds in the streets, but crime is rising all the same."); (ii) an organised
+  criminal house only: "Visitors can walk anywhere at any hour, though what crime there is keeps to the back rooms; the
+  {force} sees to the streets." (no force named: the same without its last clause). For the owner's veto. THE CONDITION (the
+  floor lesson): a criminal house is hideable by class, so ANY composition for a reader (the stamp, the player view) reads the
+  criminal-house fact through the veil-invariant floor, never the full record, and a hideable tension likewise; a security
+  case holds the reader's line byte-identical shown against hidden.
