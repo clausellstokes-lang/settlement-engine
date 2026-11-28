@@ -70,3 +70,29 @@ twelve from each first, then the rest. VOICES-ENGINE does nothing with them unti
 then it imports them through the generator (ids append-only), re-runs the walker, the id guard by its door, and the
 measures (quotes a page, the caps, sameness again, the twelve towns), and sends "TIP?". UNTIL THEN: HOLD the code tip at
 7dad3b372's code (no commit), and end your turn at least once an hour.
+
+**G1-8 HANDED OVER (13:41 UTC): THE ACCEPTED LINES.** Both writers are done and the chair read every line
+(`survey/RULINGS-VOICES-LINES-2.md`). TAKE, from their branches' tips as they stand:
+- A: `lane/voices-lines-2-a-2026-11-28` at a093e4913: `survey/lines-2/C2-said-lines-A.tsv` (65 lines) and
+  `OLD-REWORD-A.tsv` (17 re-wordings of old versions: all accepted).
+- B: `lane/voices-lines-2-b-2026-11-28` at 9b172584e: `survey/lines-2/C2-said-lines-B.tsv` (48 lines),
+  `D2-liar-lines-B.tsv` (13), `OLD-REWORD-B.tsv` (6: all accepted), `INN-CARD-B.tsv` (the old inn versions' card words).
+**G1-9: WHAT THE LINES DECLARE THAT THE ENGINE DOES NOT YET ANSWER IS BUILT, AS DECLARED, RED FIRST** (otherwise those versions
+are silently ineligible, which is no cure):
+- HOUSE CARD WORDS (B), in `cardWords.js` with the catalogue ids exactly as B lists them: `lodging` (8 ids), `food and
+  drink` (10), `company` (those 10 and the bathhouse), and the NEGATED `card-not: digs or grows its own` (17 ids). A case
+  per word: a house of a listed id admits the version, one outside it does not.
+- POWER-KIND CARD WORDS (A), read from the power's card through `factionArchetypes.js :: factionArchetype` (the stored
+  category first): "a body with members and meetings" (government, civic, merchant, craft, labor, religious, arcane),
+  "not an occupier" (any kind but occupation), "an old order" (noble, religious, civic). A case per word. (Point 124's K3
+  will make `factionArchetype`'s NAME fallback read `kindNameOf`; nothing for you now: say in a comment which reader the
+  word uses.)
+- ATOMS through the fact vocabulary's own door (`assertDeclarable`, `NEEDS_ATOM`): `tier: ≤ town` (A), `tier: ≥ town`,
+  `prosperity: ≤ moderate`, the crisis-kind lists and `excludes crisis: hunger` (B). Where an atom is not yet a word of the
+  vocabulary, add it by the vocabulary's own rule; IF THAT RULE NEEDS A REGISTER's DOOR OR A WALKER's ROW, STOP ON IT AND
+  REPORT (name the register).
+- THE OLD RE-WORDINGS (A 17, B 6) through the generator's changed-words table (both sha256 per line), so the id guard holds.
+THEN: the walker, the id guard by its door, the measures again (quotes a page; the caps; a person or a line twice: 0; the
+share: 0; THE SAMENESS TABLE AGAIN, each pool's top share, the target being one town in ten or fewer for the eight-line
+pools; the twelve towns re-rendered), a real build with the sizes, and "TIP?". The reader of the voices will be sent the
+delta.
