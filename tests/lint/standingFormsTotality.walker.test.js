@@ -42,11 +42,21 @@
  *      (`'^(.*?)(?:^| )(' || rre[ir] || ')$'`), and the twin (galleryWithholdAlways.js :: STANDING_ROWS) compiles the same.
  *      So every row matching at a step's chosen start spans [that start, the end]: one span, at most a same-span tie (one
  *      reading), and no runtime "withhold whole" branch is written for the different-span tie (it would be dead code).
+ *   6. THE WRITER ORACLE (RULING V27 (5), the tenth chair, 07:19 UTC 2026-11-25; VEIL-51's 91605fd9c, rebuilt by VEIL-56's
+ *      U45B), a MEASURE, run only under STANDWALK_POOLS and STANDWALK_MASTER_TREE=<a checkout of db832c892>. The census
+ *      above found its tails with the table's own patterns, so a tail the patterns could not see was never looked for (class
+ *      (iii): master's lower-case qualifier). Here THE ORACLE IS THE WRITER, not the table: for each stored power of each
+ *      record (both lists, a hidden or masked row included) the tail its BIRTH writer derives is computed (the tree's
+ *      factionStanding.js :: annotateFactionStanding on today-born places; MASTER's, imported from the master checkout, on
+ *      master-born), over the stored roster as each writer orders it (and over the served roster, the census's form: the
+ *      union of both readings' sentences), and THE SERVED DESCRIPTION, as the twin's last pass serves it
+ *      (galleryWithholdAlways.js :: withholdAlways on the stored document; a hidden or masked row serves none), holds NO
+ *      SENTENCE of it. LEFTOVER_BY_ORACLE counts the descriptions that still hold one: 0 on both pools.
  */
 import { describe, it, expect } from 'vitest';
 import { appendFileSync, readFileSync, readdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import {
   readTable,
   deriveForms,
@@ -64,6 +74,7 @@ const TIP_PATH = 'src/generators/power/factionStanding.js';
 const FIXTURE_PATH = 'tests/fixtures/standingForms.master-db832c892.json';
 const POOLS = process.env.STANDWALK_POOLS || '';
 const MEASURES = process.env.STANDWALK_MEASURES || '';
+const MASTER_TREE = process.env.STANDWALK_MASTER_TREE || '';
 
 /** The planted sentence: a standing form no writer has ever written (the red-first control's subject). */
 const PLANTED = 'They keep a seat nobody recalls granting them, and nobody has yet asked for it back.';
@@ -380,5 +391,94 @@ describe('standing forms: the table is total over the writers (V14 (2)) and the 
     const findings = (/** @type {any} */ o) => o.cases.filter((c) => ['UNCUT', 'DIFFERENT-SPAN TIE', 'WRONG', 'UNREAD'].includes(c.class));
     expect(findings(today), `today-born: ${line('today', todayDir, today)}`).toEqual([]);
     expect(findings(master), `master-born: ${line('master', masterDir, master)}`).toEqual([]);
+  }, 600000);
+
+  it.skipIf(!POOLS || !MASTER_TREE)('6. THE WRITER ORACLE (RULING V27 (5); a measure: runs only under STANDWALK_POOLS and STANDWALK_MASTER_TREE): no served description holds a sentence of the tail its birth writer derives, both pools', async () => {
+    const [todayDir, masterDir] = POOLS.split(':');
+    expect(todayDir && masterDir, 'STANDWALK_POOLS=<today-born pool>:<master-born pool>').toBeTruthy();
+    const { withholdAlways } = await import('../../src/domain/display/galleryWithholdAlways.js');
+    const { servedRosterOf } = await import('../../src/domain/veil/pageRederive.js');
+    const { standingRosterOf, standingForceOf } = await import('../../src/generators/power/rosterText.js');
+    const tipWriter = await import('../../src/generators/power/factionStanding.js');
+    const at = (/** @type {string} */ p) => pathToFileURL(join(MASTER_TREE, p)).href;
+    const masterWriter = await import(at('src/generators/power/factionStanding.js'));
+    const { defenseFactsOf, forceWordsOf } = await import(at('src/domain/defense/defenseFacts.js'));
+    const { isMaterializedCustomContent } = await import(at('src/domain/content/customContentSemanticAuthority.js'));
+    expect(masterWriter.annotateFactionStanding, 'the master checkout holds master\'s writer').toBeTypeOf('function');
+    expect(String(masterWriter.annotateFactionStanding) !== String(tipWriter.annotateFactionStanding), 'master\'s writer is its own, not the tree\'s').toBe(true);
+
+    /** A writer's tail split into its sentences (each ends in . ! or ?, the next opens on a capital). @param {string} tail */
+    const sentencesOf = (tail) => tail.split(/(?<=[.!?]) (?=[A-Z])/).map((x) => x.trim()).filter((x) => x !== '');
+    /** Seats with no description, in the order given. @param {any[]} rows */
+    const seatsOf = (rows) => rows.map((f) => ({ faction: String(f?.faction || ''), power: Number(f?.power) || 0, isGoverning: f?.isGoverning === true, desc: '' })).filter((f) => f.faction);
+    /** Each power's sentences, by name, the union over the readings given. @param {Array<() => any[]>} readings */
+    const tailsOf = (readings) => {
+      /** @type {Map<string, Set<string>>} */
+      const out = new Map();
+      for (const read of readings) {
+        for (const f of read()) {
+          if (!out.has(f.faction)) out.set(f.faction, new Set());
+          for (const x of sentencesOf(String(f.desc || ''))) out.get(f.faction)?.add(x);
+        }
+      }
+      return out;
+    };
+    const today = (/** @type {any} */ doc) => {
+      const seat = { publicLegitimacy: doc.powerStructure?.publicLegitimacy };
+      const force = standingForceOf(doc.institutions);
+      const run = (/** @type {any[]} */ rows) => () => { const s = standingRosterOf(rows).map((f) => ({ ...f, desc: '' })); tipWriter.annotateFactionStanding(s, force, seat); return s; };
+      return tailsOf([run(doc.powerStructure?.factions || []), run(servedRosterOf(doc))]);
+    };
+    const master = (/** @type {any} */ doc) => {
+      const native = (Array.isArray(doc.institutions) ? doc.institutions : []).filter((h) => !isMaterializedCustomContent(h));
+      const force = forceWordsOf(defenseFactsOf({ institutions: native }));
+      const byPower = (/** @type {any[]} */ rows) => seatsOf(rows).sort((a, b) => b.power - a.power);
+      // master's normalizeAndAnnotateFactions: the governing power first, then by power
+      const governingFirst = (/** @type {any[]} */ rows) => seatsOf(rows).sort((a, b) => (a.isGoverning ? -1 : b.isGoverning ? 1 : b.power - a.power));
+      const run = (/** @type {any[]} */ s) => () => { masterWriter.annotateFactionStanding(s, force); return s; };
+      const stored = doc.powerStructure?.factions || [];
+      return tailsOf([run(governingFirst(stored)), run(byPower(stored)), run(byPower(servedRosterOf(doc)))]);
+    };
+
+    const filesOf = (/** @type {string} */ dir) => readdirSync(dir).filter((f) => /^r3m-.*\.json$/.test(f)).sort();
+    const judge = (/** @type {string} */ name, /** @type {string} */ dir, /** @type {(doc: any) => Map<string, Set<string>>} */ writer) => {
+      const o = { name, docs: 0, judged: 0, leftover: 0, noTail: 0, cases: /** @type {any[]} */ ([]), faults: /** @type {string[]} */ ([]) };
+      for (const file of filesOf(dir)) {
+        const doc = JSON.parse(readFileSync(join(dir, file), 'utf8'));
+        o.docs += 1;
+        const tails = writer(doc);
+        const served = withholdAlways(structuredClone(doc));
+        for (const list of [['powerStructure', 'factions'], ['factions']]) {
+          const rows = list.reduce((v, k) => (v && typeof v === 'object' ? v[k] : undefined), doc);
+          const out = list.reduce((v, k) => (v && typeof v === 'object' ? v[k] : undefined), served);
+          if (!Array.isArray(rows)) continue;
+          if (!Array.isArray(out) || out.length !== rows.length) { o.faults.push(`${file}: ${list.join('.')}: the twin's pass changed the list's length`); continue; }
+          rows.forEach((f, i) => {
+            if (!f || typeof f.desc !== 'string') return;
+            o.judged += 1;
+            const sentences = [...(tails.get(String(f.faction ?? f.name ?? '')) || [])];
+            if (!sentences.length) o.noTail += 1;
+            const desc = out[i] && typeof out[i].desc === 'string' ? out[i].desc : '';
+            const left = sentences.filter((x) => desc.includes(x));
+            if (left.length) {
+              o.leftover += 1;
+              o.cases.push({ pool: name, file, list: list.join('.'), faction: f.faction ?? f.name, served: desc, left });
+            }
+          });
+        }
+      }
+      return o;
+    };
+    const t = judge('today', todayDir, today);
+    const m = judge('master', masterDir, master);
+    const line = `standwalk oracle ${new Date().toISOString()} ${[t, m].map((o) => `${o.name} docs=${o.docs} judged=${o.judged} writer_no_tail=${o.noTail} LEFTOVER_BY_ORACLE=${o.leftover}`).join(' ')} tree=${MASTER_TREE}\n`;
+    if (MEASURES) {
+      appendFileSync(MEASURES, line);
+      for (const c of [...t.cases, ...m.cases]) appendFileSync(MEASURES, `  oracle case ${JSON.stringify(c)}\n`);
+    }
+    expect([...t.faults, ...m.faults], 'the twin\'s pass keeps every power row in place').toEqual([]);
+    expect(t.docs > 0 && m.docs > 0 && t.judged > 0 && m.judged > 0, 'both pools hold stored power descriptions').toBe(true);
+    expect(t.cases, `today-born: ${line}`).toEqual([]);
+    expect(m.cases, `master-born: ${line}`).toEqual([]);
   }, 600000);
 });
