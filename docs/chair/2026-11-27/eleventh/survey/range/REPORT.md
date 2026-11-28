@@ -1,4 +1,4 @@
-RANGE-MEASURE DONE: branch lane/range-measure-2026-11-28 at <sha: the commit that carries this file; see the message>
+RANGE-MEASURE DONE: branch lane/range-measure-2026-11-28 at 64ff0422c (the report's commit; this line filled in the next)
 
 Tree b693c4605; C and V rendered on it (1,800 pages, 0 errors). CONFIRMED = a script counted; PLAUSIBLE = my reading.
 
