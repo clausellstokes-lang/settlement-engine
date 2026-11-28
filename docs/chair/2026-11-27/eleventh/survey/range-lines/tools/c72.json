@@ -1,0 +1,434 @@
+[
+ {
+  "key": "src/domain/display/governanceAccount.js :: governanceAccountOf()",
+  "n": 3,
+  "prints": 3175,
+  "lines": "{…} is governed by {…}. {…} holds its seat. ‖ {…} holds the seat of {…}. {…} governs {…}. ‖ {…} governs {…}. Its seat is held by {…}."
+ },
+ {
+  "key": "src/data/institutionDescVariants.js :: [joined] village|Crafts|Brickmaker",
+  "n": 3,
+  "prints": 1679,
+  "lines": "Moulds and fires clay bricks for construction whenever clay can be had. Enables more permanent buildings. Requires clay and fuel. ‖ Shapes and fires clay into bricks for building, whenever clay can be had. With them, structures can be made to last. Clay and fuel are needed. ‖ Moulds and a kiln for building brick, fired whenever clay can be had; brick allows sturdier, more lasting construction. The work depends on clay and fuel."
+ },
+ {
+  "key": "src/domain/display/crisisStoppedRow.js :: MARK_LINES",
+  "n": 5,
+  "prints": 1593,
+  "lines": "Stopped by the siege. ‖ Curtailed by the outbreak. ‖ Scarce in the famine. ‖ Curtailed by the siege. ‖ Curtailed by the war."
+ },
+ {
+  "key": "src/data/institutionDescVariants.js :: [joined] city|Defense|Professional city watch",
+  "n": 3,
+  "prints": 1580,
+  "lines": "Full-time law enforcement. About one officer for every hundred people. ‖ A standing force of the law, roughly one in a hundred residents. ‖ Full-time keepers of order, about one for every hundred people in the city."
+ },
+ {
+  "key": "src/data/people/dmPowerLines.js :: CAPTURE_LINES.none",
+  "n": 3,
+  "prints": 1546,
+  "lines": "Nobody at the head of {…} answers to a criminal house, and no criminal power here is strong enough to push {…}. ‖ None of the head, the second and the third of {…} takes orders from the criminals. ‖ No criminal house gives {…} its orders. One that wants something from {…} has to ask, pay or wait like anyone else."
+ },
+ {
+  "key": "src/data/institutionDescVariants.js :: [joined] city|Crafts|Apothecary district",
+  "n": 3,
+  "prints": 1526,
+  "lines": "Multiple apothecary shops clustered together. Competition drives specialization. Some focus on chirurgery, others on herbal preparations, others on imported medicines. Herbalism kits, medicinal herbs, surgical supplies, and basic antidotes all available. ‖ Apothecary shops crowded into one quarter, where competition forces each to specialise. One leans to chirurgery, another to herbal preparations, a third to imported medicines. Between them they carry herbalism kits, medicinal herbs, surgical supplies, and basic antidotes. ‖ A cluster of apothecaries pressed close enough that competition drives them apart in trade, some to surgery, some to herb-work, some to medicines brought from abroad. Herbalism kits, medicinal herbs, surgical supplies, and basic antidotes are all to be had."
+ },
+ {
+  "key": "src/data/dailyLife/outsiderImpressions.js :: OUTSIDER_IMPRESSIONS.power",
+  "n": 11,
+  "prints": 1421,
+  "lines": "Outsiders notice the mark of {power} on every door that matters. ‖ A visitor soon learns that little happens here without {power}. ‖ Ask who decides things here, and the answer is {power}. ‖ Strangers with business here are sent to {power} sooner or later. ‖ It does not take a visitor long to see who holds sway here: {power}. ‖ Whatever a visitor wants done, {power} {power|has|have} a say in it. ‖ Visitors learn early that it pays to stay on good terms with {power}. ‖ {Power} {power|carries|carry} the most weight here, and nobody pretends otherwise. ‖ A visitor who wants anything settled here is told to speak to {power} first. ‖ Nothing of weight is agreed here without the leave of {power}. ‖ Newcomers soon notice how often talk here comes round to {power}."
+ },
+ {
+  "key": "src/data/dailyLife/recentChanges.js :: RECENT_CHANGES.beat",
+  "n": 9,
+  "prints": 1359,
+  "lines": "The place still lives with what {event} left behind. ‖ People here still talk of {event}, and of what it changed. ‖ What {event} left behind is still part of daily life here. ‖ {Event} still shapes how people here go about things. ‖ Talk here still comes back, sooner or later, to {event}. ‖ Much of how the place works now goes back to {event}. ‖ The mark {event} left on the place has not faded. ‖ Ask how things came to be as they are here, and {event} soon comes up. ‖ {Event} is still remembered here, and not lightly."
+ },
+ {
+  "key": "src/data/institutionDescVariants.js :: [joined] town|Magic|Scroll scribe",
+  "n": 3,
+  "prints": 1188,
+  "lines": "Spell scrolls for sale. The smallest charm costs what a craftsman earns in a month; a greater working, a merchant’s year. ‖ Sells spell scrolls. A minor charm costs a craftsman a month's earnings; a greater working, a merchant's year. ‖ Scrolls of spells across the counter: the smallest charm at a craftsman's month of pay, a greater working at a merchant's year."
+ },
+ {
+  "key": "src/data/dossierStateProse/economy.generated.js :: DOSSIER_STATE_PROSE_ECONOMY.DS-ECO-10.pools.POSTURE: established",
+  "n": 9,
+  "prints": 1183,
+  "lines": "{settlement} sells more than one thing beyond the town. ‖ The yards here are full of goods bound out and no two of them are the same. This is a town that sells. ‖ There is always something going out, and not always the same thing. ‖ The carts that leave {settlement} carry several kinds of goods, not one. ‖ Buyers from outside come to {settlement} for more than one thing. ‖ A merchant who comes to {settlement} for one thing usually leaves with two or three. ‖ {settlement} had several trades selling outward before the siege, and none of them can reach a buyer now. ‖ {settlement} has more than one trade sending goods out, and the famine has made every one of them harder to keep going. ‖ With the famine on, every trade {settlement} sells outward is judged by one thing: what it can bring back to eat."
+ },
+ {
+  "key": "src/data/institutionDescVariants.js :: [joined] town|Infrastructure|Workhouse",
+  "n": 3,
+  "prints": 1149,
+  "lines": "The able-bodied poor receive shelter and food in exchange for compulsory labour: textile work, grinding, construction. Not a prison but the line is blurry. Reduces vagrancy and produces goods. Conditions are deliberately harsh to discourage dependency. ‖ The able-bodied poor are given shelter and food, and made to earn it at compulsory labour: textile work, grinding, construction. It is not a prison, though the distinction is thin. It thins the ranks of vagrants and turns out goods besides, and its conditions are kept harsh on purpose, so that none grow too content to leave. ‖ In return for a roof and a meal, the able-bodied poor are set to forced work: textiles, milling, construction. Not quite a gaol, but the line blurs. It cuts vagrancy and yields product, and the deliberately grim conditions are the point: dependency is meant to sting."
+ },
+ {
+  "key": "src/data/institutionDescVariants.js :: [joined] town|Crafts|Ropemaker",
+  "n": 3,
+  "prints": 1116,
+  "lines": "Twists fibres (hemp, flax, or plant matter) into rope and cordage. Essential for ships, construction, and agriculture. ‖ Spins hemp, flax, and other plant fibres into rope and cordage. Ships, building work, and farming all depend on it. ‖ Rope and cordage twisted from hemp, flax, or whatever plant fibre comes to hand. Nothing sails, rises, or is harvested without it."
+ },
+ {
+  "key": "src/generators/safetyProfile.js :: STANDARD_PATROL()",
+  "n": 4,
+  "prints": 1107,
+  "lines": "The {…} {…} standard patrol coverage. Effective against opportunistic crime; less effective against organized operations that can plan around patrol routes. ‖ The {…} {…} the usual rounds. That stops a pickpocket or a brawl; anyone who has learned the rounds can work between them. ‖ The {…} {…} on a regular round, so petty theft is often caught and planned crime seldom is. ‖ You will see the {…} on the rounds most hours of the day; {…} the careful."
+ },
+ {
+  "key": "src/data/institutionDescVariants.js :: [joined] village|Crafts|Dyer",
+  "n": 3,
+  "prints": 1106,
+  "lines": "Applies colour to raw or woven cloth. Essential for producing anything beyond undyed grey wool. ‖ Colours cloth, whether raw fibre or finished weave. Without it there is nothing but undyed grey wool. ‖ Puts colour into wool and cloth, raw or woven. Anything beyond plain grey wool depends on the work."
+ },
+ {
+  "key": "src/data/institutionDescVariants.js :: [joined] village|Crafts|Midwife",
+  "n": 3,
+  "prints": 1106,
+  "lines": "Assists with births, manages difficult labours, and provides basic gynecological care. The most-used medical service in any settlement. ‖ Attends births, handles the hard labours, and gives what women's care there is. No medical service in a settlement is called upon more. ‖ Sees mothers through childbirth, works the difficult deliveries, and tends the ordinary complaints of women. The most-used healer anywhere."
+ },
+ {
+  "key": "src/data/institutionDescVariants.js :: [joined] city|Economy|Public bathhouse",
+  "n": 3,
+  "prints": 1046,
+  "lines": "Communal bathing facility with heated water. In some cultures a social hub; in others suspect as a venue for vice. Either way, the best place in the district to hear rumour and news. ‖ Heated communal baths. Some cultures make them a social hub, others suspect them of vice; either way they are the district's best place for rumour and news. ‖ A public bathhouse with hot water, a gathering place in some cultures and a suspected den of vice in others. Nowhere in the district hears more news."
+ },
+ {
+  "key": "src/data/institutionDescVariants.js :: [joined] town|Economy|Coaching inn",
+  "n": 3,
+  "prints": 1024,
+  "lines": "Purpose-built for road travellers: stabling for relay horses, scheduled coach departures, meals served at fixed hours, and a passenger waiting room. Horses changed here, not just rested. ‖ Built for the road: relay stabling, coaches on a schedule, meals at set hours, and a room for waiting passengers. Horses are changed here, not merely rested. ‖ A house made for travellers by coach: fresh horses stabled, departures timed, fixed mealtimes, and a passengers' waiting room. The teams are swapped out, not just given a rest."
+ },
+ {
+  "key": "src/data/institutionDescVariants.js :: [joined] village|Crafts|Fuller",
+  "n": 3,
+  "prints": 966,
+  "lines": "Finishes woven cloth by cleaning and thickening it. Often water-powered. Transforms raw weave into durable textile. ‖ Finishes woven cloth, cleaning and thickening it, the work often driven by water. Raw weave leaves as hard-wearing textile. ‖ Cleans and felts fresh-woven cloth to finish it, frequently by water power, turning loose weave into a durable fabric."
+ },
+ {
+  "key": "src/data/dossierStateProse/defense.generated.js :: DOSSIER_STATE_PROSE_DEFENSE.DS-DEF-5.pools.arcane defense ABSENT",
+  "n": 7,
+  "prints": 932,
+  "lines": "{settlement} has no arcane defense: what arrives unseen here goes undetected and therefore unanswered. ‖ {settlement} keeps no defence against anything it cannot see. ‖ Anything unseen that came at {settlement} would find nothing to meet it: the town keeps no wards or seers to notice it. ‖ Whatever defence {settlement} keeps, a visitor would find nothing arcane in it. ‖ {settlement}'s protection reaches as far as ordinary eyes and hands reach, and no further. ‖ Ask at {settlement} who would answer a threat worked by magic, and the answer is that nobody would. ‖ Whoever defends {settlement}, none of them works with magic."
+ },
+ {
+  "key": "src/data/institutionDescVariants.js :: [joined] city|Economy|Furrier's district",
+  "n": 3,
+  "prints": 928,
+  "lines": "Fur processors, traders, and retailers concentrated in one area. High-value trade. Quality furs are luxury goods. ‖ Fur processors, traders, and retailers gathered into one quarter. It is high-value work, for good fur is a luxury good. ‖ Those who dress, trade, and sell fur, all pressed into one district. The trade runs high, quality pelts being luxuries."
+ },
+ {
+  "key": "src/data/institutionDescVariants.js :: [joined] town|Defense|Citadel",
+  "n": 3,
+  "prints": 926,
+  "lines": "Inner fortress. Last refuge in siege. ‖ The inner fortress, and the last refuge when a siege closes in. ‖ An innermost stronghold, the city's final hold under siege."
+ },
+ {
+  "key": "src/data/institutionDescVariants.js :: [joined] town|Crafts|Tailor's guild",
+  "n": 3,
+  "prints": 923,
+  "lines": "Master clothiers producing garments from finished cloth. Produces everything from working clothes to livery. ‖ Master clothiers cutting garments from finished cloth, working clothes and household livery alike. ‖ A guild of master clothiers who make up finished cloth into everything from labourers' wear to noble livery."
+ },
+ {
+  "key": "src/data/dossierStateProse/economy.generated.js :: DOSSIER_STATE_PROSE_ECONOMY.DS-ECO-11.pools.STRATEGIC VALUE: the generator's assessment, framed",
+  "n": 6,
+  "prints": 880,
+  "lines": "Others want {settlement} for what it controls. The people who live there see little of that value. ‖ Anyone who looks at {settlement}'s position can see why someone would want to hold it. ‖ The people of {settlement} know what their ground is worth to others, and know that is reason enough for someone to come for it. ‖ A newcomer to {settlement} soon hears what its ground is worth to the powers around it, and how little of that worth stays in the town. ‖ For as long as others value {settlement}'s position, the town will have to reckon with who wants it and what they will offer for it. ‖ {settlement}'s position is worth watching over: whoever holds the ground holds what the assessment below names."
+ },
+ {
+  "key": "src/data/institutionDescVariants.js :: [joined] city|Economy|Mint (official)",
+  "n": 3,
+  "prints": 843,
+  "lines": "State or noble-chartered coin production. Standardises currency across the region. Its seigniorage is revenue while precious metal reaches the dies. ‖ Coin struck under state or noble charter. It sets a single standard of currency across the region and returns a steady revenue through seigniorage. ‖ Chartered by state or noble to make coin, it standardises the region's currency and yields significant ongoing revenue by seigniorage."
+ },
+ {
+  "key": "src/data/dossierStateProse/defense.generated.js :: DOSSIER_STATE_PROSE_DEFENSE.DS-DEF-5.pools.FIXTURE: gates",
+  "n": 5,
+  "prints": 832,
+  "lines": "Road traffic in and out of {settlement} goes through its gates, and that is where anyone arriving by road is first seen. ‖ The wall at {settlement} is entered by its gates, and the gate tolls are counted there; a gate left unwatched is a toll lost. ‖ Come to {settlement} by the road and you come in by a gate, where someone sees you come. ‖ Whatever reaches {settlement} by road reaches it at a gate, and the gates can be closed against it. ‖ {settlement}'s gates are shut and barred, and nothing has come through them since the siege began."
+ },
+ {
+  "key": "src/data/institutionDescVariants.js :: [joined] town|Crafts|Vintner",
+  "n": 3,
+  "prints": 830,
+  "lines": "Presses and ages wine from local grapes or imported must, in any year that either reaches the cellar. What it makes is sold in bulk, and by the bottle to wealthy clients. ‖ A cellar of presses and casks for wine, from grapes grown near or must brought in, whenever either can be had. Such wine as it holds goes by the barrel, and by the bottle to the rich. ‖ Wine pressed and matured from local fruit or imported must, when either comes to the cellar, and sold in bulk or direct to wealthy houses."
+ },
+ {
+  "key": "src/data/institutionDescVariants.js :: [joined] metropolis|Magic|Academy of magic",
+  "n": 3,
+  "prints": 824,
+  "lines": "Formal institution of arcane learning. Full curriculum, research facilities, visiting scholars. ‖ A chartered school of the arcane, with a full course of study, laboratories, and scholars come from abroad. ‖ A formal college of magic. A complete curriculum, rooms for research, and a stream of visiting adepts."
+ },
+ {
+  "key": "src/data/institutionDescVariants.js :: [joined] town|Crafts|Chandler",
+  "n": 3,
+  "prints": 818,
+  "lines": "Makes candles from tallow and beeswax. Also produces soap and rope from similar raw materials. Essential for lighting. ‖ Candles from tallow and beeswax, and soap and rope besides from much the same stock. Without it there is no light. ‖ Makes candles of tallow and beeswax, and turns like materials to soap and rope. The town depends on it for lighting."
+ },
+ {
+  "key": "src/generators/safetyProfile.js :: NO_WATCH_SMALL",
+  "n": 4,
+  "prints": 814,
+  "lines": "There is no watch. The old families keep the peace, and anyone who breaks it answers to all the neighbours at once; when the families fall out among themselves, nobody keeps it. ‖ There is no watch. When someone does wrong, the neighbours deal with it themselves, and the oldest families have the last word. ‖ Nobody here is paid to keep order. A quarrel goes to the heads of the oldest families, and most are settled before they come to blows. ‖ There is no watch here. A thief is known by name within a day, and everyone shuns them until they make it right."
+ },
+ {
+  "key": "src/data/institutionDescVariants.js :: [joined] metropolis|Defense|Multiple garrisons",
+  "n": 3,
+  "prints": 812,
+  "lines": "Garrison forces distributed across quarters. No single barracks can secure a metropolis. ‖ Garrisons spread through the quarters; no single barracks could secure a city this size. ‖ Troops quartered in several places at once, a metropolis being far too large for one garrison."
+ },
+ {
+  "key": "src/data/institutionDescVariants.js :: [joined] town|Defense|Town walls",
+  "n": 3,
+  "prints": 810,
+  "lines": "Stone fortifications with gates. Expensive to build and maintain. ‖ Gated stone defences. Costly to raise and no cheaper to keep up. ‖ Masonry walls pierced by gates. Dear to build, dearer to maintain."
+ },
+ {
+  "key": "src/data/institutionDescVariants.js :: [joined] village|Defense|Veteran's lodge",
+  "n": 3,
+  "prints": 808,
+  "lines": "A drinking hall where retired soldiers and mercenaries gather. Informal security, bar brawls, and the occasional job offer for a group needing swords. ‖ A drinking hall for old soldiers and mercenaries put out to pasture. It offers rough security, the odd brawl, and now and then work for a party in want of swords. ‖ Where retired soldiers and sellswords do their drinking. Security of a sort, the occasional brawl, and, from time to time, a job for anyone needing hired blades."
+ },
+ {
+  "key": "src/data/seatHolderLines.js :: SEAT_HOLDER_LINES.standing",
+  "n": 5,
+  "prints": 787,
+  "lines": "They hold the {form's} seat, and answer for what it does. ‖ They sit in the {form} themselves, and its rulings are their own. ‖ They govern through the {form}, and what it orders is their order. ‖ They hold the {form}, and nothing it decides is decided without them. ‖ They are the ones who sit in the {form}, and its word is theirs."
+ },
+ {
+  "key": "src/data/institutionDescVariants.js :: [joined] hamlet|Religious|Burial ground",
+  "n": 3,
+  "prints": 784,
+  "lines": "A walled plot at the edge of the settlement, gated against livestock and kept by the households in turn. The rite is held when a priest comes through, and the burial itself does not wait for one. Families lie in rows by household, whatever their standing. That is the custom here, and has nothing to do with being poor. ‖ A walled plot gated against livestock, kept by the households in turn. The rite waits for a priest passing through; the burial does not. ‖ A gated ground at the settlement edge, tended household by household. Families lie in rows by house, whatever their standing; that is custom here, not want."
+ },
+ {
+  "key": "src/data/dossierStateProse/defense.generated.js :: DOSSIER_STATE_PROSE_DEFENSE.DS-DEF-5.pools.charter hall PRESENT (specialist monster response)",
+  "n": 3,
+  "prints": 782,
+  "lines": "{settlement} keeps a charter for specialist work. The things ordinary arms are wrong for go to people retained to handle exactly them. ‖ There is somewhere at {settlement} to take the problems that are not soldiers' problems, and the town uses it more than it likes to say. ‖ {settlement} keeps a chartered hall for trouble that ordinary arms cannot handle, and the hall is busy."
+ },
+ {
+  "key": "src/data/people/dmPowerLines.js :: PATRONAGE_LINES.open",
+  "n": 2,
+  "prints": 771,
+  "lines": "{…}, {…}, also holds {…} in {…}, and that lends {…} weight {…} would not have on {…} own. ‖ {…} serves {…} and {…} at once. While {…} holds both places, {…} {…} for more here than {…} own members would make {…}."
+ },
+ {
+  "key": "src/data/institutionDescVariants.js :: [joined] village|Crafts|Woodcarver",
+  "n": 3,
+  "prints": 738,
+  "lines": "Carves functional and decorative items from wood: tool handles, religious figures, furniture inlays. Produces sacred images and reliquaries for the church. ‖ Works wood into the useful and the ornamental alike (tool handles, holy figures, inlay for furniture) and makes the sacred images and reliquaries the church requires. ‖ Carves both plain and decorative pieces from wood: handles for tools, religious figures, furniture inlay. Sacred images and reliquaries are carved here too."
+ },
+ {
+  "key": "src/data/dossierStateProse/defense.generated.js :: DOSSIER_STATE_PROSE_DEFENSE.DS-DEF-5.pools.charter hall ABSENT where the country warrants one",
+  "n": 3,
+  "prints": 732,
+  "lines": "{settlement} retains no specialists. Whatever comes out of the country is met by whoever the town has, whether or not they are the right answer to it. ‖ {settlement} knows it needs specialists against the creatures, and has none of its own to send. ‖ {settlement} sends whoever it can against things they are not trained for, and pays for it each time."
+ },
+ {
+  "key": "src/data/institutionDescVariants.js :: [joined] city|Crafts|Bakers (5-15)",
+  "n": 3,
+  "prints": 730,
+  "lines": "Bakehouses in every ward. Guild-regulated weights and prices. ‖ Every ward has its bakehouses, with weights and prices set by the guild. ‖ Bakehouses throughout the wards, the loaf's weight and price fixed by guild rule."
+ },
+ {
+  "key": "src/data/institutionDescVariants.js :: [joined] city|Economy|Chroniclers' exchange",
+  "n": 3,
+  "prints": 712,
+  "lines": "A guild house for news: paid correspondents on several roads, an archive that cross-checks one road against another, and a standing rate for a written answer. Expensive to keep, and the only counter in the city where a claim is graded before it is sold. ‖ A guild house of the listening trade. Correspondents kept on several roads, an archive that sets one report against another, and a fixed price for an answer in writing. Costly, and the only counter that grades a claim before selling it. ‖ A chartered house of correspondents. Reports arrive from several roads and are checked against each other before anything is sold. The written answer carries a standing rate and a grade."
+ },
+ {
+  "key": "src/generators/economy/foodBalance.js :: deriveSupplyRiskAnalysis.hook",
+  "n": 3,
+  "prints": 702,
+  "lines": "Iron has doubled in price this season, and tools are being mended with scrap. Work slows, and people are starting to complain. ‖ The iron carts are three weeks late and the carters will not say why. What iron there is goes out in rations, and work waits on mended tools. ‖ A new toll on the iron road has made metal dear. People blame whoever set it, and the tools still need mending."
+ },
+ {
+  "key": "src/data/institutionDescVariants.js :: [joined] town|Crafts|Tanner (established)",
+  "n": 3,
+  "prints": 700,
+  "lines": "Full-scale tannery with multiple vats and a guild-trained workforce. Produces high-quality leather for shoes, armour, and saddlery. ‖ A full tannery of many vats and a guild-trained workforce, turning out fine leather for shoes, armour, and saddlery. ‖ Multiple vats, trained hands from the guild. A proper tannery whose leather is good enough for footwear, armour, and saddlery."
+ },
+ {
+  "key": "src/data/institutionDescVariants.js :: [joined] town|Religious|Parish burial grounds",
+  "n": 3,
+  "prints": 696,
+  "lines": "Each congregation keeps its own burial ground, and one that has filled its ground buries beyond the town's edge instead. The sexton holds the register of who lies where, which is the town's longest unbroken record and the one it reaches for in an inheritance dispute. Guilds buy plots together so their members lie among their trade. ‖ A ground for each congregation, and burial out beyond the houses where a ground has filled. The sexton's register of who lies where is the town's longest unbroken record. ‖ Each congregation buries its own, and the sexton keeps the roll that inheritance disputes are settled from. Guilds buy plots together so their members lie among their trade."
+ },
+ {
+  "key": "src/data/dailyLife/commonerResentments.js :: COMMONER_RESENTMENTS.legitimacy",
+  "n": 15,
+  "prints": 688,
+  "lines": "Commoners resent the council's indifference to ordinary complaints. ‖ Many here feel that {gov} no longer listens to people like them. ‖ Ordinary people grumble that {gov} {gov|looks|look} after {gov|its|their} own first. ‖ People bring their complaints to {gov} and expect little to come of them. ‖ People do as {gov} {gov|says|say}, but few of them think well of {gov|it|them}. ‖ Few here would say that {gov} {gov|speaks|speak} for them. ‖ Talk among neighbours turns, sooner or later, to what {gov} {gov|has|have} got wrong lately. ‖ Common folk say the elders decide among themselves and tell everyone else afterwards. ‖ People grumble that the headman listens to friends first and everyone else last. ‖ The mayor is blamed for most of what goes wrong, fairly or not. ‖ People say the reeve they chose has forgotten who chose them. ‖ The lord's steward is obeyed, but not much liked. ‖ People say the council is slow to listen and quick to decide without them. ‖ There is little trust here that {gov} will do right by ordinary people. ‖ People put up with {gov}, but they expect little of {gov|it|them}."
+ },
+ {
+  "key": "src/data/institutionDescVariants.js :: [joined] city|Adventuring|Dungeon delving supply district",
+  "n": 3,
+  "prints": 688,
+  "lines": "Specialized adventuring gear. Warded weapons, silver weapons, etc. ‖ Specialised kit for the delving trade. Warded weapons, silver weapons, and the like. ‖ Gear for those who go underground. Warded weapons, silver weapons, and such."
+ },
+ {
+  "key": "src/data/institutionDescVariants.js :: [joined] village|Crafts|Potter",
+  "n": 3,
+  "prints": 680,
+  "lines": "A wheel and a small kiln for domestic pottery: plates, jugs, storage vessels, made whenever clay can be had. ‖ Pottery for the household (plates, jugs, vessels for storage), thrown at the wheel and fired in a small kiln whenever clay can be had. ‖ A wheel and a modest kiln for domestic ware: plates, jugs, and storage jars, made whenever clay can be had."
+ },
+ {
+  "key": "src/data/institutionDescVariants.js :: [joined] town|Economy|Stable district",
+  "n": 3,
+  "prints": 666,
+  "lines": "Concentrated stabling, horse trading, and farriery. Serves merchants, military, and travelers needing fresh mounts. ‖ Stabling, horse-dealing, and farriery gathered in one quarter, serving merchants, soldiers, and travellers in want of a fresh mount. ‖ A district given to stables, horse-trade, and the farrier's craft, for any merchant, soldier, or traveller needing a new mount."
+ },
+ {
+  "key": "src/data/safetyDescLines.js :: MIXED_CORNERS",
+  "n": 13,
+  "prints": 661,
+  "lines": "Residents know which corners to avoid. ‖ People who live here know where not to go. ‖ Locals know which lanes to keep out of. ‖ Those who live here soon learn where not to linger. ‖ Most people here know where trouble is likely, and keep clear of it. ‖ The people here know their own streets, and which to keep away from. ‖ Residents give the worst corners a wide berth. ‖ Anyone who lives here can say which ways are best avoided. ‖ Locals can tell a newcomer which places to steer clear of. ‖ Those born here know which turnings to leave alone after dark. ‖ Residents keep to the places they know once night falls. ‖ Ask anyone who lives here, and they will name the spots to avoid. ‖ Long-time residents know the risky spots, and keep away from them."
+ },
+ {
+  "key": "src/data/institutionDescVariants.js :: [joined] town|Crafts|Cobbler's guild",
+  "n": 3,
+  "prints": 656,
+  "lines": "Organised shoemakers producing boots, shoes, and sandals for the urban population. Strictly regulated quality. ‖ A guild of shoemakers turning out boots, shoes, and sandals for the townsfolk. Its quality is strictly regulated. ‖ Organised cobblers who shoe the town in boots, shoes, and sandals, with quality kept under strict regulation."
+ },
+ {
+  "key": "src/data/institutionDescVariants.js :: [joined] city|Crafts|Sawmill (commercial)",
+  "n": 3,
+  "prints": 650,
+  "lines": "A water- or ox-powered mill producing planks and beams for the construction trade. Employs a permanent crew. ‖ Planks and beams for the building trade, sawn by water or ox power at a mill with a permanent crew. ‖ A mill turned by water or oxen that saws planks and beams for construction and keeps a standing crew."
+ },
+ {
+  "key": "src/data/institutionDescVariants.js :: [joined] metropolis|Magic|Mages' district",
+  "n": 3,
+  "prints": 650,
+  "lines": "Quarter inhabited by arcane practitioners: towers, workshops, libraries, reagent merchants. ‖ A whole quarter of arcane practitioners, all towers, workshops, libraries, and reagent sellers. ‖ The magic-workers keep to one district. Its towers, workshops, libraries, and reagent merchants mark it out."
+ },
+ {
+  "key": "src/data/institutionDescVariants.js :: [joined] city|Criminal|Whisper market",
+  "n": 3,
+  "prints": 646,
+  "lines": "A covert guild of brokers who buy and sell knowledge by the piece, grade what they sell, and will manufacture a claim for a patron who pays enough. It sites itself where the talk already is, among the fences, the late houses, and the inns that ask nothing. ‖ A covert guild. Brokers deal in knowledge by the piece, attach a grade to it, and will build a claim to order for a patron with the coin. It settles where the talk already runs thickest. ‖ A hidden guild of information brokers. They sell by the piece, grade what they sell, and take commissions to put a story into circulation. Always sited among the fences and the houses that keep late hours."
+ },
+ {
+  "key": "src/data/dossierStateProse/defense.generated.js :: DOSSIER_STATE_PROSE_DEFENSE.DS-DEF-9.pools.magicDependency false",
+  "n": 8,
+  "prints": 644,
+  "lines": "Nothing structural at {settlement} depends on arcane work. What the town makes it makes with hands and ground, and would go on making without a practitioner in it. ‖ Whatever magic reaches {settlement}, the town does not rest on it: nothing it lives by would stop without it. ‖ The town would go on as it is if the arcane went away; nothing it lives by waits on a spell. ‖ {settlement}'s own work does not lean on magic, but no trade road reaches it, and some of what it lives on is brought in by magic. ‖ A visitor may meet magic at {settlement}, but nothing the place needs in order to live is waiting on it. ‖ Without any magic at all, {settlement} would still keep its living. ‖ The work that keeps {settlement} fed and busy is done by ordinary labour, whatever magic is about the place. ‖ Set {settlement}'s trades against the help they draw on, and magic is not a thing any of them needs."
+ },
+ {
+  "key": "src/data/institutionDescVariants.js :: [joined] town|Economy|Post relay station",
+  "n": 3,
+  "prints": 615,
+  "lines": "Maintains a team of horses for rapid message relay out of the coaching inn. Letters and small packages travel far faster than foot traffic. ‖ Keeps relay horses at the coaching inn for fast message riders. Letters and small parcels move far faster than anyone on foot. ‖ A relay of fresh horses stabled at the coaching inn carries letters and small packages far faster than foot traffic could."
+ },
+ {
+  "key": "src/data/institutionDescVariants.js :: [joined] city|Crafts|Glassmakers",
+  "n": 3,
+  "prints": 602,
+  "lines": "Windows, vessels, mirrors. Requires expertise. ‖ Windows, vessels, and mirrors. The craft demands real skill. ‖ Glass for windows, vessels, and mirrors. Expert work, not casual."
+ },
+ {
+  "key": "src/data/institutionDescVariants.js :: [joined] metropolis|Religious|Cemetery network",
+  "n": 3,
+  "prints": 602,
+  "lines": "Burial has left the walls entirely: grounds beyond every gate, each with its own road, its own gatekeepers, and a trade in plots that the revenue office watches. The local registers are copied into a central roll because no single ground can any longer say where its own dead are. Wards are assigned to grounds, so a family that moves across the city can find itself divided by the assignment. ‖ Burial has left the walls: grounds beyond every gate, each with its road and its gatekeepers, and a trade in plots the revenue office keeps an eye on. ‖ One central roll now holds what the local grounds can no longer track. Wards are assigned to grounds, so a family that moves across the city may find itself divided by the assignment."
+ },
+ {
+  "key": "src/data/institutionDescVariants.js :: [joined] city|Economy|Multiple market squares",
+  "n": 3,
+  "prints": 600,
+  "lines": "Multiple permanent market squares serve different districts. ‖ Several standing market squares, one to a district. ‖ Permanent markets in more than one square, each serving its own quarter."
+ },
+ {
+  "key": "src/data/institutionDescVariants.js :: [joined] city|Economy|Inns and taverns (district)",
+  "n": 3,
+  "prints": 600,
+  "lines": "Multiple inn districts catering to merchants, travelers, and long-term visitors. ‖ Several inn districts, given over to merchants, travellers, and those who stay long. ‖ More than one quarter of inns, serving the merchant, the traveller, and the lingering guest."
+ },
+ {
+  "key": "src/data/institutionDescVariants.js :: [joined] city|Economy|Warehouse district",
+  "n": 3,
+  "prints": 600,
+  "lines": "Storage for merchant goods. ‖ Where merchant goods are stored. ‖ Storage set aside for the merchants' stock."
+ },
+ {
+  "key": "src/data/institutionDescVariants.js :: [joined] village|Crafts|Mill",
+  "n": 3,
+  "prints": 600,
+  "lines": "Water or windmill with monopoly milling rights. The miller is often the wealthiest and most resented figure in the village. ‖ Water or wind drives the grindstones, and with them goes the sole right to grind. Whoever keeps them tends to be the richest in the village, and the least loved. ‖ Milling here is a monopoly, water or wind powered. Its keeper is usually the wealthiest villager and, for that reason, the most begrudged."
+ },
+ {
+  "key": "src/data/institutionDescVariants.js :: [joined] city|Crafts|Mills (2-5)",
+  "n": 3,
+  "prints": 600,
+  "lines": "Wheels turn on every usable watercourse, many under guild or civic licence. ‖ Wheels turn on every usable stream, many licensed by guild or city. ‖ Every workable watercourse turns a wheel, most under a guild's or the city's licence."
+ },
+ {
+  "key": "src/data/institutionDescVariants.js :: [joined] village|Religious|Priest (resident)",
+  "n": 3,
+  "prints": 600,
+  "lines": "Performs sacraments, collects tithes. Often only literate person. ‖ Administers the sacraments and gathers the tithe. Frequently the sole person here who can read. ‖ Says the sacraments, takes the tithe. Usually the one literate soul in the village."
+ },
+ {
+  "key": "src/data/institutionDescVariants.js :: [joined] city|Defense|City walls and gates",
+  "n": 3,
+  "prints": 600,
+  "lines": "Masonry walls with towers. Multiple gatehouses. ‖ Towered stone walls. Several gatehouses along their length. ‖ Masonry ramparts studded with towers and pierced by many gates."
+ },
+ {
+  "key": "src/data/institutionDescVariants.js :: [joined] metropolis|Defense|Massive walls and fortifications",
+  "n": 3,
+  "prints": 600,
+  "lines": "Layered wall systems: an outer wall and an inner wall, with gatehouses along both. ‖ Walls within walls: an outer line and an inner line, with gatehouses at every stage. ‖ A defence built in layers, an outer wall and an inner wall, with gatehouses throughout."
+ },
+ {
+  "key": "src/data/institutionDescVariants.js :: [joined] city|Defense|Garrison",
+  "n": 3,
+  "prints": 600,
+  "lines": "A professional force, under arms full-time. ‖ A professional force, kept under arms for pay. ‖ A standing force, paid to bear arms."
+ },
+ {
+  "key": "src/data/dossierStateProse/general.generated.js :: DOSSIER_STATE_PROSE_GENERAL.DS-GEN-16.pools.LEGACY-UNRESOLVED",
+  "n": 2,
+  "prints": 566,
+  "lines": "The {calamity} left a legacy of trouble in {settlement} that has never been fully put right, and that legacy is {timeband_age}. ‖ Nobody in {settlement} has finished putting right the legacy the {calamity} left, and that legacy is {timeband_age}."
+ },
+ {
+  "key": "src/data/institutionDescVariants.js :: [joined] city|Crafts|Butchers (3-8)",
+  "n": 3,
+  "prints": 564,
+  "lines": "Shambles and meat markets under strict civic regulation. ‖ Meat markets and shambles kept under strict civic rules. ‖ The shambles and meat markets, closely regulated by the city."
+ },
+ {
+  "key": "src/data/dossierStateProse/economy.generated.js :: DOSSIER_STATE_PROSE_ECONOMY.DS-ECO-9.pools.FOOD SOURCES: one source",
+  "n": 7,
+  "prints": 554,
+  "lines": "{settlement}'s own food comes first of all from its {good}, so one bad year for the {good} is felt across the whole town. ‖ Of the food {settlement} raises for itself, its {good} comes first, and after a poor season for the {good} there is less to go round. ‖ {settlement} leans first on its {good} for its food, so a bad season for the {good} is felt at every table. ‖ {settlement}'s own food once came first from its {good}, and the grounds are worked out: what the town still raises for itself is the less for it. ‖ {settlement} has worked out the grounds of its {good}, and there is less of its own food on every table for it. ‖ {settlement}'s own food comes from its {good} and from the holdings its families till, so a bad season for either is felt at every table. ‖ Of the food {settlement} raises for itself, its {good} and what each family grows on its own holding come first, and a poor season in either means less to go round."
+ },
+ {
+  "key": "src/data/institutionDescVariants.js :: [joined] city|Crafts|Carpenters (5-15)",
+  "n": 3,
+  "prints": 552,
+  "lines": "Construction carpenters, joiners, and furniture makers, organised by guild. ‖ Guild-organised carpenters, joiners, and furniture makers for building and fitting out. ‖ Builders' carpenters, joiners, and furniture makers, each trade organised under its guild."
+ },
+ {
+  "key": "src/data/institutionDescVariants.js :: [joined] city|Crafts|Blacksmiths (3-10)",
+  "n": 3,
+  "prints": 537,
+  "lines": "Farriers, toolsmiths, and general forges in every quarter. ‖ General forges, farriers, and toolsmiths in each quarter. ‖ Every quarter has its forges: farriers, toolsmiths, and general smiths."
+ },
+ {
+  "key": "src/data/institutionDescVariants.js :: [joined] village|Religious|Graveyard",
+  "n": 3,
+  "prints": 536,
+  "lines": "Consecrated ground beside the house of worship, on its own plot, with a resident priest to close it. The rite is held on the day of the death, with no wait for a travelling clergyman, and the congregation has begun keeping the names in the same book as the births. The ground nearest the wall is spoken for generations ahead, and everyone here can say who holds it. ‖ Hallowed ground about the church. ‖ Consecrated earth ringing the church."
+ },
+ {
+  "key": "src/data/safetyDescLines.js :: MODERATE_WALLS",
+  "n": 9,
+  "prints": 528,
+  "lines": " The walls keep the trouble inside, off the roads beyond. ‖  The palisade keeps out what comes from beyond; what trouble there is starts within. ‖  Behind the palisade, what trouble there is comes from within. ‖  The walls see to what comes from outside; what trouble there is starts at home. ‖  The walls keep the outside out; the trouble there is starts within. ‖  The gates are watched, so trouble from outside rarely gets in; what there is starts within. ‖  The walls see to the approaches; the risk that remains is within. ‖  Whoever comes in passes the gates; the trouble that remains is the place's own. ‖  The garrison keeps the walls; within them, the risk is the place's own."
+ }
+]

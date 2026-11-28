@@ -1,0 +1,10 @@
+import { readFileSync, writeFileSync } from 'node:fs';
+const T = '/home/user/settlement-engine';
+const w = await import(`${T}/src/domain/facts/registeredWords.js`);
+const c = await import(`${T}/tests/lint/presumptionClasses.shared.mjs`);
+const walk = (t) => { const s = t.replace(/\[.*?\]/g, '').replace(/\{[^}]*\}/g, 'X'); const th = [...w.thingsNamedIn(s)]; const cl = c.classesOf(s); return (th.length ? `things: ${th.join(', ')}` : '') + (cl.length ? `${th.length ? '; ' : ''}classes: ${cl.join(', ')}` : '') || 'none'; };
+const f = process.argv[2]; const rows = readFileSync(f, 'utf8').replace(/\n+$/, '').split('\n').map((r) => r.split('\t'));
+rows[0].push("walkers' matchers (thingsNamedIn; classesOf)");
+for (const r of rows.slice(1)) r.push(walk(r[5]));
+writeFileSync(f, `${rows.map((r) => r.join('\t')).join('\n')}\n`);
+for (const r of rows.slice(1)) console.log(r[0].slice(0, 30), '|', r.at(-1), '|', r[5].slice(0, 80));
