@@ -35,3 +35,15 @@ do-nothing cases each get a case. Then K3's measure as briefed.
 **"TIP? K1 52d8d175a" (received 09:24 UTC): ACCEPTED AS BUILT**, pending the independent reader of point 124 (started when
 K1b and K2 are in). The two Ö-named towns of C whose base pages lack desk blocks: named as an older defect: give the
 chair the two keys, the missing blocks and the cause in three lines (a measure, no cure).
+
+**K1b-2 (sent 10:13 UTC), `tests/domain/faithObservationFloorWf0.test.js` (2 of 15 red under K1b: the soak's host soak-a no
+longer founds a grand observance that draws pilgrims).** MEASURE which of the soak's own hosts (soak-a to soak-d; `SEED =
+'w0-soak'` does not move, the soak's script does not move, arm (g) stays green) founds such a set under K1b and holds
+`seatDeityBearingCase`'s other preconditions. IF ONE DOES: the manifest is widened by ONE file, the fixture
+`whole-world-soak-deity-fixture.mjs`, for its HOST CHOICE ONLY (a comment says why, and that the old host bore it under the
+name-keyed draw); both cases green; ledgered; NAMED FOR THE OWNER (his held soak redo seats the case on the new host). IF
+NONE DOES: red and named, with the measure, for the soak's owner; nothing changed. The lit-worlds proof gains one line: a
+world lit before K1b whose patron host is soak-a keeps its minted set.
+
+**Before "TIP?" (10:27 UTC):** `domainAnyCastBaseline` green after the cast of 890442017 (type it properly if not);
+`tests/lint` whole once on the final tip.
