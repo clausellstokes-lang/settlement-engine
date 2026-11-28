@@ -192,8 +192,9 @@ FOUR THAT NOTICE FOUR DIFFERENT THINGS (a demonstration only, not for shipping):
   PARAPHRASE keys hold half its prints; at four lines each, 288 lines.** 50 of the 72 are house descriptions; the rest: 5
   defence-annex keys, 3 economy-annex keys, 2 DM power lines, 2 patrol frames, 2 safety lines, the seat sentence, the crisis
   row mark, an outsider-impression key and a recent-change key.
-- Halving PARAPHRASE prints moves about 18% of all pool prints (35.7% -> about 18%), which is 6 to 7% of a page's sentences.
-  It does not touch the other sameness in C (a DISTINCT pool drawn twenty times a page; catalogue text printed word for word).
+- The PARAPHRASE keys here (my class where read, else v2) print 125,338 times: 29.8% of the prints of keys of 2+ lines
+  (35.7% hand-calibrated, A), 15.4% of all page sentences. Halving them changes about 7.7% of a page's sentences. It does not
+  touch the other sameness in C (a DISTINCT pool drawn twenty times a page; catalogue text printed word for word).
 
 ## WHAT THE DECLARATION RULES COST A WRITER (CONFIRMED where counted; the reading of the rules PLAUSIBLE)
 1. **THE TWO WALKERS.** A new line in `src/data`, `src/generators`, `src/domain` or `src/components` reds the presumed-things

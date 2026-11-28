@@ -1,0 +1,101 @@
+[
+ {
+  "ki": 8559,
+  "demo": [
+   "{Ruler} governs {place}. Its word is given by {whoEnd}.",
+   "{Ruler} governs {place}. Anyone with business before it goes to {whoEnd}.",
+   "{Ruler} governs {place}. {whoEnd} answers for how it is run.",
+   "Ask who governs {place} and the answer is {ruler}. Ask who decides, and the answer is {whoEnd}."
+  ]
+ },
+ {
+  "ki": 14188,
+  "demo": [
+   "Rows of brick dry under cover until there is enough to fire. Work stops when the clay runs out.",
+   "A firing eats more fuel than any hearth in the village, and takes a day and a night to cool.",
+   "Its brick goes into chimneys, floors and walls meant to outlast the people who raise them.",
+   "Hot, dirty work at the pit and the kiln, done by one family and whoever they can hire for a firing."
+  ]
+ },
+ {
+  "ki": 4531,
+  "demo": [
+   "The criminal houses here have no friend at the head of {power}, and they know it.",
+   "Money from a criminal house buys nothing at the top of {power}.",
+   "A criminal house that wants something from {power} has to win it in the open, like anyone else.",
+   "Take it as settled: whoever runs {power} answers to no one in the underworld."
+  ]
+ },
+ {
+  "ki": 14302,
+  "demo": [
+   "Officers in the same coat on every main street, about one for every hundred people.",
+   "The watch works in shifts, so the streets are walked by night as well as by day.",
+   "Its pay comes out of the city's dues, and every year someone says it costs too much.",
+   "Most officers know the streets they walk, and the people who live on them."
+  ]
+ },
+ {
+  "ki": 14170,
+  "demo": [
+   "The street smells of drying herbs and vinegar from one end to the other.",
+   "Buyers walk the length of the street before they choose, and the shops know it.",
+   "Most of the trade is ordinary: poultices, fever draughts, a salve for a burn.",
+   "The shop that sells imported medicines keeps them behind the counter and names its price only when asked."
+  ]
+ },
+ {
+  "ki": 14320,
+  "demo": [
+   "Few customers, and most leave without buying: the smallest charm costs a craftsman a month's pay.",
+   "The scribe works at a slanted desk by the best window, and one slip spoils the whole sheet.",
+   "A greater working is written to order, paid half in advance; it costs a merchant a year.",
+   "A single scroll can take days of careful copying."
+  ]
+ },
+ {
+  "ki": 4525,
+  "demo": [
+   "Whatever {other} wants from {ruling}, it asks through {face}, who sits in both.",
+   "{face} hears the business of {ruling} before it is decided, and {other} hears it soon after.",
+   "If {face} gave up either place, {other} would lose most of the weight it carries here.",
+   "Members of {other} go to {face} first when they want something from the rulers here."
+  ]
+ },
+ {
+  "ki": 14288,
+  "demo": [
+   "The door is locked at night, though nobody inside has been charged with anything.",
+   "Its yarn and ground meal sell cheaply, and the town's own trades complain of it.",
+   "Those who enter give up their own clothes and work in the house's.",
+   "Gruel at dawn and at dusk, and a day of grinding or hauling in between."
+  ]
+ },
+ {
+  "ki": 14201,
+  "demo": [
+   "A long straight walk behind the shop, where the strands are twisted as the ropemaker walks backward.",
+   "Well, cart and plough all need its rope, and the hay is tied with its twine.",
+   "The finished coils hang from pegs and are sold by the length.",
+   "Hard on the hands: a ropemaker's palms are as rough as the hemp."
+  ]
+ },
+ {
+  "ki": 14108,
+  "demo": [
+   "A horn from the road gives the yard a few minutes to have fresh horses ready.",
+   "The fare buys a seat and a meal; a bed is extra, and most passengers do not stay.",
+   "Ostlers, a cook and a clerk with the coach book: the house runs to the timetable, not to the guest.",
+   "News comes in with every coach, and the waiting room hears it before the rest of the town."
+  ]
+ },
+ {
+  "ki": 14185,
+  "demo": [
+   "The vats stain the dyer's arms to the elbow, and the ground behind the shop is never one colour.",
+   "A deep red or a true blue costs far more than brown, and most of the village wears brown.",
+   "Cloth comes in grey from the looms of half the village and goes home in colour.",
+   "On a dyeing day the smell of the vats reaches the next house."
+  ]
+ }
+]
