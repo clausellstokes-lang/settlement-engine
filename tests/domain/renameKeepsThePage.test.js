@@ -37,6 +37,7 @@ import { deriveCriminalStructure } from '../../src/domain/display/defenseDisplay
 import { deriveFoundingTraditions } from '../../src/domain/traditions/genesis.js';
 import { describeTraditions } from '../../src/domain/traditions/traditionDescription.js';
 import { applyNpcRenameToSettlement } from '../../src/domain/factionRename.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const SIZES = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
 const NEW_TOWN = 'Quillmarsh';
@@ -93,35 +94,37 @@ describe('(a) the helper: the id, else the site\'s own key', () => {
 
 describe('(b) a town\'s rename re-deals no pick', () => {
   it('every K1 surface of the renamed town is the base town\'s with the new name in the old one\'s place', () => {
-    for (const { seed, rec } of births) {
+    const failures = collectSeedFailures(births, ({ seed, rec }) => {
       const base = townSurfaces(rec);
       const renamed = townSurfaces({ ...clone(rec), name: NEW_TOWN });
       expect(swap(renamed, NEW_TOWN, rec.name), `${seed} (${rec.name})`).toEqual(base);
-    }
+    });
+    expectNoSeedFailures(failures, 'a town\'s rename re-deals no pick on any birth');
   }, HEAVY);
 });
 
 describe('(c) a person\'s rename leaves the people headline', () => {
   it('the headline of the renamed top person is the base headline with the new name in the old one\'s place', () => {
     let seen = 0;
-    for (const { seed, rec } of births) {
+    const failures = collectSeedFailures(births, ({ seed, rec }) => {
       const vm = vmOf(rec);
       const top = vm.npcs?.sorted?.[0] ?? vm.npcs?.all?.[0];
-      if (!top?.name || (vm.npcs?.all || []).length < 2) continue;
+      if (!top?.name || (vm.npcs?.all || []).length < 2) return;
       seen += 1;
       const before = String(npcsHeadline(vm.npcs) ?? '');
       const copy = clone(rec);
       applyNpcRenameToSettlement(copy, top.name, NEW_PERSON);
       const after = String(npcsHeadline(vmOf(copy).npcs) ?? '');
       expect(after.split(NEW_PERSON).join(top.name), `${seed} (${top.name})`).toBe(before);
-    }
+    });
+    expectNoSeedFailures(failures, 'a person\'s rename leaves the people headline on every birth');
     expect(seen, 'the arm saw a people headline that picks').toBeGreaterThan(0);
   }, HEAVY);
 });
 
 describe('(d) an imported copy prints the owner\'s line at every `_seed` site', () => {
   it('the desks (print prose), viability, the governance arrangement, the scope line, the ring note and the tradition draws', () => {
-    for (const { seed, rec } of births) {
+    const failures = collectSeedFailures(births, ({ seed, rec }) => {
       const copy = { ...clone(rec), _seed: undefined };
       delete copy._seed;
       const set = deriveFoundingTraditions(rec);
@@ -130,16 +133,18 @@ describe('(d) an imported copy prints the owner\'s line at every `_seed` site', 
         scope: cultureScopeLine(s), ring: deriveCriminalStructure(s), traditions: describeTraditions(set, s),
       });
       expect(of(copy), `${seed} (${rec.name})`).toBe(of(rec));
-    }
+    });
+    expectNoSeedFailures(failures, 'an imported copy prints the owner\'s line at every `_seed` site');
   }, HEAVY);
 });
 
 describe('(e) the fallback: a record with no id keys as it did', () => {
   it('Daily Life of an id-less record is the Daily Life of the same record whose id is its name (the name key)', () => {
-    for (const { seed, rec } of births) {
+    const failures = collectSeedFailures(births, ({ seed, rec }) => {
       const idless = clone(rec); delete idless.id;
       const named = { ...clone(rec), id: rec.name };
       expect(deriveDailyLife(idless, { audience: 'owner' }), seed).toEqual(deriveDailyLife(named, { audience: 'owner' }));
-    }
+    });
+    expectNoSeedFailures(failures, 'an id-less record keys as it did on every birth');
   }, HEAVY);
 });
