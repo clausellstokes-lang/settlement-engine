@@ -112,3 +112,7 @@
   ago with `/^\p{Lu}/u`; the other four never were. OWED, A SMALL CURE OF ITS OWN (with point 125's builder or before):
   MEASURE on C and V (towns, slots, lines restored), the four desks take the Unicode test through ONE shared helper, a
   guard that no desk carries its own ASCII test, red first on the two towns. Print only; no record moves.
+- **HOOKS OF OLD EVENTS WORDED AS HAPPENING NOW (from READER SURVEY-1's at-once no. 4):** "a creditor's agent is in town
+  conducting a quiet assessment before enforcement" on a debt crisis 53 to 73 years back; only some hooks carry an age frame
+  ("An old story from that time: …", "A letter found this year tells it this way: …"). The reader is counting them by event
+  type. OWED: the count, then a rule for a hook's frame by the event's age (measure first; the hooks are stored at birth).
