@@ -1,10 +1,8 @@
 # SURVEY-FINAL STATE (S-A "THE FINAL RECORD"; branch lane/survey-final-wip-2026-11-28, cut at 777733a2a)
-- RULING S-A-1 (the chair, 04:39 UTC): purse lines keep their own reader (0 move); build the helper at the hooks and the
-  description leaf; the shared page re-answers only what no veil reaches; the self-check's blind spot if under ~20 lines.
-- BUILT, PUSHED: unit 1 (1cc025537): `facts/lineOnFinal.js` + `display/institutionDescShown.js` (Institutions tab, its
-  search card, the PDF through `buildViewModel`); shared page re-answers terrain/crisis sets only (62-birth proof).
-- BUILT, NOT YET COMMITTED: unit 2: `dossier/storedHookShown.js` in `collectPlotHooks` (reader: as stored).
-- CORRECTION SENT: the 4 toll-bridge pages were a prefix false positive: site 1 moves 42 owner / 26 share; hooks 4 / 0.
-- NEXT: unit 2's walkers, commit, push; the census test; the guard site (left: 0 today, would import generators); the
-  self-check blind spot (named: the fix would surface 362 rung-read findings the purse reader rules out); the 1,800
-  re-birth proof (records 0) and the before/after render of the moved towns; the build sizes; "TIP?".
+- RULING S-A-1 followed: purse lines keep their own reader (0 move); the helper at the hooks and the descriptions.
+- BUILT, PUSHED: 1cc025537 (helper + descriptions + shared-page proof), ccbc2582b (hooks), e7972509d (an admitted
+  stored line stays; the census at 0), and the proof commit (PROOF.md).
+- PROVEN: records moved 0 of 1,800; lines moved 42 descriptions (41 towns) + 4 hook towns = 45 owner pages, 26 share,
+  45 PDF, 1 Tonight, controls 0. Sizes: first paint +17 B; THE PDF WORKER +171,326 B (named).
+- NAMED, NOT BUILT: the guard site; the self-check's band blind spot; the source cures; the PDF worker's weight.
+- NEXT: "SURVEY-FINAL TIP?" sent to the chair; wait for the chair's word.

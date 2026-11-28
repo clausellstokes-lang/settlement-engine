@@ -1,0 +1,15 @@
+births 1800 errors 0 records moved 0
+desc owner towns 41 share towns 26 hook towns 4 union owner 45 C 1 V 44
+ D 11 Charcoal burner | A collier's kilns under their turf, turn -> Charcoal from woodland kilns feeds the s
+ D 8 Charcoal burner | Turf-covered kilns for burning wood slow -> Kiln crews in the surrounding woodland s
+ D 8 Customs house | Levies charged on all trade in and out b -> Levies charged on all trade in and out b
+ D 7 Charcoal burner | Charcoal kilns, tended day and night whi -> Crews tend kilns out in the woods and se
+ D 5 Customs house | Levies duties on goods entering and leav -> Levies duties on goods entering and leav
+ D 3 Customs house | Duties are taken here on goods passing a -> Duties are taken here on goods passing t
+ S 26 Charcoal burner
+ H 1 gone: Someone is sabotaging both guilds to destabilize the market 
+ H 1 gone: A journeyman denied mastership has proof the exam was rigged
+ H 1 gone: Three guards have gone missing in the same district on night
+ H 1 came: A prisoner in their custody knows something valuable. So doe
+ H 1 gone: A shipment they weren't expecting arrived and is now in thei
+ H 1 came: A business rival has offered them a partnership with terms s

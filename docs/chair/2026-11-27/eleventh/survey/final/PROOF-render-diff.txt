@@ -1,0 +1,82 @@
+C:dp-hamlet-26 owner 2 share 0 pdf 1 tonight 0
+V:dp-hamlet-12 owner 2 share 2 pdf 1 tonight 0
+V:dp-hamlet-106 owner 2 share 0 pdf 1 tonight 0
+V:dp-village-121 owner 2 share 2 pdf 1 tonight 0
+V:dp-town-36 owner 2 share 2 pdf 1 tonight 0
+V:dp-town-38 owner 2 share 2 pdf 1 tonight 0
+V:dp-town-84 owner 2 share 2 pdf 1 tonight 0
+V:dp-town-107 owner 2 share 0 pdf 1 tonight 2
+V:dp-town-141 owner 2 share 2 pdf 1 tonight 0
+V:dp-city-21 owner 2 share 2 pdf 1 tonight 0
+V:dp-city-24 owner 2 share 2 pdf 1 tonight 0
+V:dp-city-25 owner 2 share 2 pdf 1 tonight 0
+V:dp-city-26 owner 2 share 2 pdf 1 tonight 0
+V:dp-city-62 owner 2 share 2 pdf 1 tonight 0
+V:dp-city-75 owner 2 share 2 pdf 1 tonight 0
+V:dp-city-86 owner 2 share 2 pdf 1 tonight 0
+V:dp-city-101 owner 2 share 2 pdf 1 tonight 0
+V:dp-metropolis-4 owner 2 share 0 pdf 1 tonight 0
+V:dp-metropolis-13 owner 2 share 2 pdf 1 tonight 0
+V:dp-metropolis-19 owner 2 share 0 pdf 1 tonight 0
+V:dp-metropolis-21 owner 2 share 2 pdf 1 tonight 0
+V:dp-metropolis-27 owner 2 share 2 pdf 1 tonight 0
+V:dp-metropolis-29 owner 2 share 0 pdf 1 tonight 0
+V:dp-metropolis-32 owner 2 share 0 pdf 1 tonight 0
+V:dp-metropolis-40 owner 2 share 2 pdf 1 tonight 0
+V:dp-metropolis-43 owner 2 share 0 pdf 1 tonight 0
+V:dp-metropolis-44 owner 2 share 0 pdf 1 tonight 0
+V:dp-metropolis-49 owner 2 share 0 pdf 1 tonight 0
+V:dp-metropolis-56 owner 2 share 0 pdf 1 tonight 0
+V:dp-metropolis-62 owner 2 share 0 pdf 1 tonight 0
+V:dp-metropolis-66 owner 2 share 2 pdf 1 tonight 0
+V:dp-metropolis-71 owner 2 share 0 pdf 1 tonight 0
+V:dp-metropolis-82 owner 2 share 0 pdf 1 tonight 0
+V:dp-metropolis-86 owner 2 share 2 pdf 1 tonight 0
+V:dp-metropolis-96 owner 4 share 2 pdf 2 tonight 0
+V:dp-metropolis-101 owner 2 share 0 pdf 1 tonight 0
+V:dp-metropolis-103 owner 2 share 2 pdf 1 tonight 0
+V:dp-metropolis-105 owner 2 share 0 pdf 1 tonight 0
+V:dp-metropolis-115 owner 2 share 2 pdf 1 tonight 0
+V:dp-metropolis-126 owner 2 share 2 pdf 1 tonight 0
+V:dp-metropolis-127 owner 2 share 0 pdf 1 tonight 0
+V:dp-metropolis-136 owner 2 share 2 pdf 1 tonight 0
+V:dp-metropolis-138 owner 2 share 0 pdf 1 tonight 0
+V:dp-metropolis-140 owner 2 share 2 pdf 1 tonight 0
+V:dp-metropolis-148 owner 2 share 0 pdf 1 tonight 0
+towns 55 errors 0 | owner pages moved 45 | share 26 | pdf 45 | tonight 1
+11 owner Systems/Institutions A collier's kilns under their turf, turning wood 
+11 owner Systems/Institutions Charcoal from woodland kilns feeds the smelters, 
+11 share Systems/Institutions A collier's kilns under their turf, turning wood 
+11 share Systems/Institutions Charcoal from woodland kilns feeds the smelters, 
+11 pdf Charcoal from woodland kilns feeds the smelters, the smithies, and the
+8 owner Systems/Institutions Turf-covered kilns for burning wood slowly down t
+8 owner Systems/Institutions Kiln crews in the surrounding woodland supply cha
+8 share Systems/Institutions Turf-covered kilns for burning wood slowly down t
+8 share Systems/Institutions Kiln crews in the surrounding woodland supply cha
+8 pdf Kiln crews in the surrounding woodland supply charcoal to the smelters
+8 owner Systems/Institutions Levies charged on all trade in and out by road, c
+8 owner Systems/Institutions Levies charged on all trade in and out by road or
+8 pdf Levies charged on all trade in and out by road or harbour, collected b
+7 owner Systems/Institutions Charcoal kilns, tended day and night while a burn
+7 owner Systems/Institutions Crews tend kilns out in the woods and sell charco
+7 share Systems/Institutions Charcoal kilns, tended day and night while a burn
+7 share Systems/Institutions Crews tend kilns out in the woods and sell charco
+7 pdf Crews tend kilns out in the woods and sell charcoal to smelters, smith
+5 owner Systems/Institutions Levies duties on goods entering and leaving by th
+5 owner Systems/Institutions Levies duties on goods entering and leaving via t
+5 pdf Levies duties on goods entering and leaving via the port or main roads
+3 owner Systems/Institutions Duties are taken here on goods passing along the 
+3 owner Systems/Institutions Duties are taken here on goods passing through th
+3 pdf Duties are taken here on goods passing through the port or the main ro
+2 owner Summary/Plot Hooks - Economic Event
+2 pdf Economic Event
+1 owner Summary/Plot Hooks - Someone is sabotaging both guilds to destabilize 
+1 owner Summary/Plot Hooks - A journeyman denied mastership has proof the exam
+1 owner Summary/Plot Hooks - Three guards have gone missing in the same distri
+1 owner Summary/Plot Hooks + A prisoner in their custody knows something valua
+1 pdf A prisoner in their custody knows something valuable. So does someone 
+1 tonight Three guards have gone missing in the same district on night patrol. T
+1 tonight A prisoner in their custody knows something valuable. So does someone 
+1 owner Summary/Plot Hooks - A shipment they weren't expecting arrived and is 
+1 owner Summary/Plot Hooks + A business rival has offered them a partnership w
+1 pdf A business rival has offered them a partnership with terms so good it 
