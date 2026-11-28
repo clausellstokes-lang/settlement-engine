@@ -335,6 +335,7 @@ export function localProductionAsPrinted(settlement) {
     .flatMap((c) => (Array.isArray(c.outputs) ? c.outputs : []).map((o) => String(o).toLowerCase())));
   const outputs = new Set(chains.flatMap((c) => (Array.isArray(c.outputs) ? c.outputs : []).map((o) => String(o).toLowerCase())));
   const bought = new Set(arrivingOf(settlement).map((x) => fold(tradeMarkOf(x).label)));
+  const storedGrounds = storedGroundsOf(settlement); // RULING 123-C2-1: what the record says each of its grounds gives
   // BAR5-FOOD (L3.failedFood): the food a famine in force failed is not made here this year (`commoditiesShown.js ::
   // failedFoodGoodsOf`, the one reading the Resources tab's commodity list marks): "Produced locally" leaves it.
   const failedFood = failedFoodGoodsOf(settlement).map((g) => new RegExp(`\\b${g}\\b`));
@@ -346,7 +347,7 @@ export function localProductionAsPrinted(settlement) {
     if (everyMakerShortHere(settlement, item)) return false; // BAR7-ECON item 5 (8j.local): every maker marked short
     if (!pillBorneOut(raw, 'local', settlement)) return false; // W2-C-LEAVES-4 item 2: the one pill reader (below)
     if (outputs.has(raw.toLowerCase())) return made.has(raw.toLowerCase());
-    const keys = RESOURCES_YIELDING.get(item);
+    const keys = yieldingHere(item, storedGrounds); // RULING 123-C2-1: the catalogue's grounds and the record's own
     const makers = HOUSE_MAKES[item];
     if (!keys && !makers) return true;
     const worked = !!keys && rawWorkedNow(settlement, keys, item); // (i): the leaf, read with the card's crisis state
@@ -373,6 +374,34 @@ const RESOURCES_YIELDING = (() => {
   }
   return m;
 })();
+/**
+ * RULING 123-C2-1: A STORED ITEM IS NOT DROPPED ON THE CATALOGUE's WORD. The catalogue is read at view, so a town saved
+ * before a row of it changed (R11: the palms gave grain and dates) stores goods its grounds no longer give by today's row,
+ * and the local list dropped them ("grain · dates · …" became "dates · …" on 13 saved palm towns of V). The record says
+ * what each of its grounds gave at its birth: `resourceAnalysis.availableResources` holds each ground's key followed by
+ * the goods it added (`resourceGenerator.js :: resolveNearbyCommodities`). Those grounds join the catalogue's for the good,
+ * and the good is then read as before (worked, bought, failed). A town born on today's catalogue stores only what today's
+ * rows give, so nothing is added for it.
+ * @param {unknown} settlement @returns {Map<string, string[]>} each stored good (spaced, lower case) -> the record's grounds
+ */
+function storedGroundsOf(settlement) {
+  const list = /** @type {{ resourceAnalysis?: { availableResources?: unknown } | null } | null | undefined} */ (settlement)
+    ?.resourceAnalysis?.availableResources;
+  /** @type {Map<string, string[]>} */ const m = new Map();
+  let ground = '';
+  for (const raw of Array.isArray(list) ? list : []) {
+    const v = String(raw);
+    if (Object.hasOwn(RESOURCE_DATA, v)) { ground = v; continue; }
+    const k = v.toLowerCase().replace(/_/g, ' ');
+    if (ground) m.set(k, [...(m.get(k) || []), ground]);
+  }
+  return m;
+}
+/** @param {string} item @param {Map<string, string[]>} stored @returns {string[] | undefined} the grounds that yield it */
+function yieldingHere(item, stored) {
+  const keys = [...(RESOURCES_YIELDING.get(item) || []), ...(stored.get(item) || [])];
+  return keys.length ? [...new Set(keys)] : undefined;
+}
 /** The maker words of the generator's house-made commodities (`generators/economy/tradeGoods.js :: deriveLocalCommodities`). */
 const HOUSE_MAKES = Object.freeze(/** @type {Record<string, ReadonlyArray<string>>} */ ({
   flour: ['mill', 'baker'], ironwork: ['smith', 'metalwork'], leather: ['tanner', 'leather'], cloth: ['weaver', 'textile'],
