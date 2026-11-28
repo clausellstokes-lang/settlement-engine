@@ -1927,16 +1927,17 @@
       },
       "declares": [],
       "lineDeclares": {
-        "crisis": 4,
+        "crisis": 3,
         "crisis: famine": 3,
         "crisis: indebted": 3,
         "crisis: occupied": 1,
         "food: ≥ secure": 1,
         "no crisis": 2,
-        "no crisis: debt": 5,
+        "no crisis: debt": 4,
         "no crisis: famine": 3,
+        "no crisis: indebted": 1,
         "no crisis: occupied": 3,
-        "no place debt": 8,
+        "no place debt": 9,
         "place debt": 1,
         "prosperity: ≥ moderate": 1,
         "prosperity: ≥ poor": 1
@@ -14951,7 +14952,6 @@
       },
       "declares": [],
       "lineDeclares": {
-        "food: < secure": 1,
         "food: ≥ secure": 2,
         "no crisis: indebted": 1,
         "no nothing laid by": 2,
