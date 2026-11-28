@@ -19,8 +19,35 @@
  * THE TWO STORED SENTENCES ARE HELD HERE, word for word, and `historyData.js` is NOT imported (RULING 122-A-1: the table
  * would ride into the PDF's render worker, 31 KB). tests/components/historyTab.test.jsx asserts each equals the table's
  * string, so a re-wording of the table reds until these follow.
+ *
+ * NOT WHERE THE PAGE'S OWN STORES HOLD THE GOOD (RULING 122-A-2, the independent reader by rendering: eleven towns of V named
+ * grain beside the Tonight sheet's "Stores: a granary, about nine months of grain"; the record's grain there is an input its
+ * work brings in, not a want of food). The stores line's one reader is `summary/tonightSheet.js :: foodStoresWords` over
+ * `economicState.foodSecurity.foodRecord`; the one good it names is grain, the granary's (its held form, "a granary of …",
+ * is the same store). The reader is ASKED, not copied: its line is read with the record's granary and again without it, and
+ * where the two differ it reports a granary. There, a short good spelt "grain" (the import key's bare-common fill, matched
+ * whole, trimmed and in lower case) prints the stored sentence. Every other good is named as before. The import adds no
+ * module: this leaf already reaches the tonight sheet (economyStateProse → foodWordShown → tonightSheet).
  */
 import { criticalImportRow } from './stateProse/economyStateProse.js';
+import { foodStoresWords } from '../summary/tonightSheet.js';
+
+/** The one good the stores reader names: a granary's stores are "months of grain". */
+const STORES_GOOD = 'grain';
+
+/**
+ * Whether the stores reader reports a store of `good` for this record.
+ * @param {unknown} settlement @param {string} good @returns {boolean}
+ */
+function storesHold(settlement, good) {
+  if (good.trim().toLowerCase() !== STORES_GOOD) return false;
+  const record = /** @type {{ economicState?: { foodSecurity?: { foodRecord?: unknown } | null } | null } | null | undefined} */ (settlement)
+    ?.economicState?.foodSecurity?.foodRecord;
+  if (!record || typeof record !== 'object') return false;
+  const rec = /** @type {Parameters<typeof foodStoresWords>[0]} */ (record);
+  const line = foodStoresWords(rec);
+  return line !== '' && line !== foodStoresWords({ ...rec, hasGranary: false });
+}
 
 /** `HISTORICAL_EVENTS_DATA` resource_scarcity `description`, as stored. */
 export const SCARCITY_STORED_PAST = 'A critical resource became scarce, causing hoarding and price gouging';
@@ -32,7 +59,7 @@ const LEAD = 'A critical resource ';
 const STORED = new Set([SCARCITY_STORED_PAST, SCARCITY_STORED_LIVE]);
 
 /**
- * @param {unknown} settlement the record (its `resourceAnalysis.imports` is read)
+ * @param {unknown} settlement the record (its `resourceAnalysis.imports` and `economicState.foodSecurity.foodRecord` are read)
  * @param {unknown} tension a current tension (its `description` is read)
  * @returns {unknown} the description as printed; a non-string description is handed back untouched
  */
@@ -41,5 +68,5 @@ export function tensionDescriptionShown(settlement, tension) {
   if (typeof description !== 'string' || !STORED.has(description)) return description;
   const imports = /** @type {{ resourceAnalysis?: { imports?: unknown } | null } | null | undefined} */ (settlement)?.resourceAnalysis?.imports;
   const good = criticalImportRow(/** @type {Parameters<typeof criticalImportRow>[0]} */ (imports))?.good;
-  return good ? `A critical resource, ${good}, ${description.slice(LEAD.length)}` : description;
+  return good && !storesHold(settlement, good) ? `A critical resource, ${good}, ${description.slice(LEAD.length)}` : description;
 }
