@@ -115,3 +115,13 @@ THE NEXT COMMAND: read each child's first report as it lands; relay the chair's 
   five-argument `_gallery_veil` after both units merge. U3R HOLDS THE CHRONICLE, measures (raw town as oracle: served / withheld; any served
   entry naming a withheld thing or carrying a stored id; what 211's member serves today), then A2, A3, B.
 - 2026-11-27T23:54:29Z: RULING V32 taken and relayed to U3R. MC work 3 (`mc/LIMITS.md` e25394167; figures CONFIRMED by it, the platform's limits PLAUSIBLE): one member with unit 3: mean 448 ms, median 308, max 2,048; a visitor's 3 s passes at about 6 average members, a signed-in user's 8 s at about 17; on the tip unmarked 25 / 69, marked 7 / 20. MC finishes its running cure trials, writes `mc/STATE.md` with a 200-word proposal, and stops.
+- 2026-11-28T00:03:38Z: PG STOPPED with M1 and M2 (`-pg-docs` 126d3f01b, its state note at the top of `pg/PG-REPORT.md`; CONFIRMED by it). M1: THE
+  INTERVAL TEST meets V31 (A)'s condition (cuts 0.25 / 0.5 / 0.75 off `severityBand`; 0 wrong rows on both pools; rows lost 37 born today,
+  30 on master, against about 375). M2: laws are NOT the cause; TODAY's ENGINE is (same wrong values over the owner's full record; master's
+  writers reproduce the stored values 140 of 140; `generateDefenseProfile`, `generateSafetyProfile` / `settleCrimeLinesToSignal`,
+  `generatePowerStructure` / `governanceNarrative` moved since master with no law); the owner's page prints the stored value: THE VEIL's
+  FAULT. Served fields that tell the pools apart: `_seatLawVersion` / `_fortuneLawVersion`, `publicProse`. SENT TO THE CHAIR with MY
+  RECOMMENDATION for (B): FAIL CLOSED BY PROVENANCE (a record without this release's law markers: its rows reading a re-derived key are not
+  printed on a shared page, counted first) AND a standing "present is right" arm on a small committed set of stored records.
+  PG's QUEUE AT "GO PG": the interval test built red first; (B) as ruled; the three guards; the Defense sentence from an absent crime list
+  measured on default-veil pages; the totality arm.
