@@ -979,3 +979,41 @@ See section 4, newest last.
   voice-scope rule; C and V running. PDF worker +103,516 B (the lines): asked what a lazy fetch would cost.
 - **RENAME-BUILD (06:14):** K1 cured at d1ad508bf, 30 test files re-pointed (ledger `rename/build/K1-REPOINTS.md`), the
   wider 345 files and the corpora running.
+
+## V34 (09:39 UTC on 2026-11-28): THE CONTAINER RESTARTED AT ABOUT 08:25 (nothing committed was lost); THREE MORE RULINGS ON THE LINE's CURE; THE SURVEY's READER STARTED AND FOUND A TELL AT ONCE; EVERY SEAT's RULINGS NOW IN FILES
+- **THE RESTART:** the chair's own container was restarted; CURE-122B's commits stood (tip then 1892c3af7); only its closing
+  runs were lost; the agent was resumed by message (local agent aab064d54c282b400) and re-runs them. Child seats on their
+  own machines were not touched.
+- **CURE-122B, WHAT IT HOLDS NOW (the join's tree, NOT pushed):** round 1 (V33); round 2: 122-B-3 (the floor's own leaf,
+  `functionEyeCopy` guard), unit 4b (the slash at the desk's two fills), 123-C2-1 (a stored item is not dropped on the
+  catalogue's word); AND GIVEN SINCE: **122-A-3** (a DM-edited tension description is not rewritten: found by
+  SURVEY-FINAL's reading and confirmed by the survey's reader on C dp-city-22) and **122-B-4** (THE HOOK LEG OF THE DEBT IS
+  THE OWNER's EYE ONLY). All five rulings are in `landing/RULING-122-B-2.txt` (two addenda). IT OWES ONE REPORT; then the
+  chair reads the diff, pushes `lane/stack-123-wip-2026-11-28` ONCE, and READER 122-123 (holding its machine; it looks at
+  the branch every twenty minutes) makes its delta read. ITS CORRECTION (09:19): by real builds point 122 put +3,922 B on
+  the PDF worker (not the proxy's 124,696) and +48,838 B on the advance worker: the landing record uses the real figures.
+- **READER SURVEY-1 (session_01FE9mExJmjB286Pcc1tGnTj, top tier, max; brief `prompts/START-READER-SURVEY-1.txt`; started
+  08:39 on TABLE 2a474aaf9 and FINAL 35faf3361):** AT ONCE (08:57): `owesDebtShown`'s third leg reads the DM's hook, and the
+  stamped shared page states the debt in 25 of 900 towns of C by that leg alone: RULED 122-B-4, cured on the line first,
+  TABLE's atom takes it at its merge. Status 09:27: the merge of the two tips is clean; the PDF worker carries no table;
+  a DM's typed description prints as typed on every surface; eleven of the table's twelve rows are an atom against its own
+  negation (the readers' property cannot fail there); 26 more desk lines claim money or a surplus undeclared (counts to
+  come). Its report is owed.
+- **SURVEY-TABLE:** "TIP? S-B2 2a474aaf9" ACCEPTED AS BUILT (empties 2 | 18 to 0 | 0; innocents 0; per-line counts for the
+  owner); HOLDS ITS BRANCH; the empty-slot census filed by it (`survey/table/EMPTY-SLOTS.tsv`, 1d2bb471c; in the prerelease
+  list). **SURVEY-FINAL:** "TIP? 35faf3361" ACCEPTED AS BUILT (S-A-2: the PDF worker +132 B; S-A-3); writerReach red on
+  its branch, left for the join's door; HOLDS ITS BRANCH; a small measure (the 29 prosperity pages) asked.
+- **VOICES-ENGINE** (its context summarised at 08:56): "TIP? b53f26f39" received; ALL ITS RULINGS IN
+  `survey/RULINGS-VOICES-ENGINE.md` (the draft tuning row; V-1; **G1-3** the split confirmed and the voice scope of the
+  presumption walker, with the chair's word under BG1; **G1-4** three rewordings and the four candle versions reworded, an
+  `ineligible` status pinned at 0). It builds those, then a new "TIP?", then ITS READER (to be briefed: S-G).
+- **RENAME-BUILD:** "TIP? K1 52d8d175a" ACCEPTED AS BUILT; ALL ITS RULINGS IN `rename/RULINGS-RENAME-BUILD.md` (**K1b-1**,
+  **K2-1**); the identity is `idFromSeed(_seed)`, minted at birth, unchanged at save, import and share; K1b building; K2
+  built (its proof running); K3's measure next; then THE READER OF POINT 124 (to be briefed).
+- **FOR THE VEIL's RESUMPTION:** **A22** (the served id is a fast hash of the seed; the seed's secret part is 31 bits once
+  the mint's millisecond is known: a measure owed, a candidate stopper under R3) and **A23** (stamped reader prose composed
+  on the full record: the hook leg cured, the rest the lane's), in `veil/RULING-V30.md`.
+- **LESSON, NOW A RULE OF THE CHAIR:** a message to a seat waits behind its running turn (three seats asked again for a word
+  already sent). Every seat's rulings go in ONE FILE on the record as they are given, and every brief tells the seat to
+  end its turn at least hourly.
+- **THE ACCOUNT:** `allowed_warning`, no overage, at 08:39 UTC.
