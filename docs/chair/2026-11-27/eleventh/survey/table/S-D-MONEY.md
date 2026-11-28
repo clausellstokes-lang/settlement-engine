@@ -166,3 +166,43 @@ was removed and never committed.
 - **Two other hits, unread.** The PDF holds two fragments of OTHER lines of these blocks: DS-GEN-3 scores.monster CRITICAL#1
   on 208 towns, and DS-GEN-7 structuralSuggestions#2 on 42. Neither is a money line. They are probably a fragment shared
   with another printed sentence. I did not read them further.
+
+## 6. THE HIGH RUNGS BESIDE A PLACE DEBT (the chair's addition at 14:55: the line's delta reader)
+
+**THE RULING.** The middle rungs' rule applies: each line that claims a surplus, reserves or money in hand EXCLUDES
+`place debt`, not only the crisis.
+
+**METHOD.** As in §1: the slots are read at the tip from the function-level picks, and the facts from the final record.
+"Today" is `place debt` with its hook leg. "After 122-B-5" counts only pages whose debt is the indebted stress (I) or a
+printed outside_debt tension (T). Pages marked (H?) print neither, so they stand on the hook leg, or on a tension whose
+words my text match does not catch. The ids are vids, so they match the reader's own.
+
+| line | pages C\|V | beside place debt, today C\|V | after 122-B-5 (I or T) | the reader's towns | my reading → cure |
+|---|---|---|---|---|---|
+| DS-ECO-1 C1 v2 "…ends each year with money to spare." | 20\|29 | 4\|3 | 3\|1 (+ C:dp-village-27 H?) | C dp-thorp-113, dp-hamlet-8, dp-village-27, dp-village-94; V dp-city-126 | a surplus → `excludes: place debt` (as ruled at 13:45) |
+| C1 v7 "…nobody there counts the margin closely." | 19\|46 | 2\|4 | 2\|3 | 2 C, 3 V | a comfortable margin is the yearly surplus → **`excludes: place debt`** |
+| C1 v6 "…a lean year would cost it comfort, not bread." | 29\|47 | 3\|3 | 2\|1 | (not named) | SOFT: it claims resilience, no money in hand → no cure |
+| C1 v5 "…its approach serves it, and the place does well on it." | 18\|30 | 0\|3 | 0\|2 | (not named) | SOFT: no money claim → no cure |
+| DS-ECO-8 PROSPEROUS v3 "There is money here … Nobody argues about whether a thing can be afforded…" | 20\|18 | 2\|1 | 2\|1 | 2 C, 1 V | money in hand → `excludes: place debt` (and `nothing laid by`, as ruled for the CRITICAL pages) |
+| PROSPEROUS v5 "Nothing … is left to fall into disrepair for want of money." | 21\|25 | 2\|1 | 1\|0 | C dp-thorp-113 | money enough → `excludes: place debt` |
+| PROSPEROUS v7 "Money keeps going into what … has built, and the upkeep never waits on it." | 27\|29 | 2\|2 | 1\|1 (+1\|1 H?) | 2 C, 1 V | money in hand → `excludes: place debt` |
+| PROSPEROUS v1 "…has money to spend…" | 14\|19 | 0\|0 | 0\|0 | (not named) | `excludes: nothing laid by` (as ruled); place debt 0 here, but the same claim → also `excludes: place debt` |
+| PROSPEROUS v2, v4 "…visibly well off…" | 8\|20, 14\|14 | 1\|0, 1\|0 | 1\|0, 1\|0 | (not named) | SOFT: what the place looks like, not money in hand → no cure |
+| PROSPEROUS v6 "…spends freely on itself, and keeps no great hoard." | 27\|24 | 1\|4 | 1\|3 | (not named) | SOFT: it disclaims a reserve; spending is not a surplus claim → no cure |
+| DS-ECO-8 WEALTHY v1 "…reserves deep enough to ride out most of what could happen to it." | 0\|19 | 0\|1 | 0\|1 | V dp-city-126 | reserves → `excludes: place debt` (I had called it SOFT at §1; the ruling stands over my reading) |
+| WEALTHY v3 "…What would be a crisis elsewhere is an expense here." | 0\|38 | 0\|3 | 0\|1 | V dp-village-133 | `excludes: place debt` and `excludes: nothing laid by` (13:45) |
+| WEALTHY v2 "The wealth here is not the kind a stranger has to look for…" | 0\|17 | 0\|2 | 0\|1 | (not named) | SOFT: appearance → no cure |
+
+**THE NO-EMPTY-TILE RULE, BY READING THE MARKS** (each is to be measured on the merged tree before the build):
+- **C1 header: no empty.** Without v2 and v7, the header still has v1 (no mark), v3 (`no hunger`), v5 and v6
+  (`no crisis: indebted`), all of which hold on a page whose debt is a tension.
+- **PROSPEROUS tile: no empty.** Without v1, v3, v5 and v7, v2 (`walls`) and v4 (`no walls`) are complementary, so one
+  always holds. v6 (colour) is also left.
+- **WEALTHY tile: an EMPTY IS POSSIBLE.** Without v1 and v3, only v2 is left, and it needs `gate, market, crisis: any`.
+  The chair's fill line, "{settlement} is rich, and spends what it has as fast as it comes in.", is `needs: nothing laid
+  by`. That does not hold on a place-debt page whose band is Strong or Adequate. V:dp-city-126 (STRONG v14, place debt)
+  is such a page: there, neither v1, v3 nor the fill line stands, so only v2 can, if the town has a gate and a market.
+  **Measure on the merged tree.** If it empties, the fill needs a reading that covers a debt as well (the chair's word).
+- **The census after the build.** Every line above declares the `place debt` row's side b, so the row counts them. They
+  are refused wherever `place debt` holds, so the census's money pair is 0. That is to be shown by the census run on the
+  merged tree.
