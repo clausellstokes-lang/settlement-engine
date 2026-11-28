@@ -13,4 +13,8 @@
 - S-D, MEASURE ONLY (the rulings file): S-D-PROSPERITY.md (6d89637b2: the 29 are the row MIS-CASTING the clause, which
   stands on the survival band; cure 29 -> 0, 0 pages move) and S-D-MONEY.md (REAL pairs: C1#2 7, MODERATE#4 2, WEALTHY#3 8,
   the trade-dispute hook 61; held: 4 CRITICAL pages; at the merge, 122-B-5 admits solvency lines beside the Debt Crisis hooks).
-- NEXT: wait for the chair (rulings on S-D; the landed tip of 122 and 123).
+- S-D RULED (13:45, chair's record 8c12e72f6, the rulings file's last section): prosperity cured as measured (a line declares
+  the atom its reader reads; the two `≤ comfortable` lines too, one new band atom only if none exists); money REAL: C1#2,
+  MODERATE#4 exclude place debt; WEALTHY#3, PROSPEROUS#1/#3 exclude nothing laid by (chair's two fill lines if a tile empties);
+  STRUGGLING#5 needs place debt; SOFT no cure; A HOOK IS A SEED: no hook declares. BUILT ONLY ON THE MERGED TREE.
+- NEXT: measure DS-GEN-3/7/11's glance mount and the PDF (ruled first); then wait for the tip of 122 and 123.
