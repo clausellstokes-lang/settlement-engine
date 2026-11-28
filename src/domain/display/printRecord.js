@@ -46,7 +46,7 @@ export function printRecordOf(settlement) {
   const institutions = Array.isArray(s.institutions)
     ? s.institutions.map((/** @type {Row} */ inst) => {
       const own = typeof inst?.desc === 'string' ? inst.desc.trim() : '';
-      const shown = own ? institutionDescShown(inst, /** @type {Parameters<typeof institutionDescShown>[1]} */ (s)) : own;
+      const shown = own ? institutionDescShown(inst, /** @type {Parameters<typeof institutionDescShown>[1]} */ (s), { audience: 'owner' }) : own;
       return own && shown !== own ? { ...inst, desc: shown } : inst;
     })
     : s.institutions;

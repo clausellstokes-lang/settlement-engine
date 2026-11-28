@@ -25,7 +25,7 @@ describe('printRecordOf', () => {
     const p = printRecordOf(metro);
     p.institutions.forEach((inst, k) => {
       const own = typeof metro.institutions[k].desc === 'string' ? metro.institutions[k].desc.trim() : '';
-      if (own) expect(inst.desc.trim(), inst.name).toBe(institutionDescShown(metro.institutions[k], metro));
+      if (own) expect(inst.desc.trim(), inst.name).toBe(institutionDescShown(metro.institutions[k], metro, { audience: 'owner' }));
     });
     expect(collectPlotHooks(printRecordOf(hamlet)).map((h) => h.text)).toEqual(collectPlotHooksShown(hamlet).map((h) => h.text));
     const GUILD = 'Someone is sabotaging both guilds to destabilize the market for a third party';

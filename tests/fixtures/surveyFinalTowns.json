@@ -128,5 +128,53 @@
   "config": {
    "settType": "city"
   }
+ },
+ {
+  "plan": "V",
+  "seed": "dp-metropolis-105",
+  "config": {
+   "settType": "metropolis",
+   "population": 1500,
+   "tradeRouteAccess": "random_trade",
+   "culture": "random_culture",
+   "contentProfile": "grounded",
+   "contentBoundaries": null,
+   "settlementAgeMode": "auto",
+   "settlementAgeYears": 0,
+   "monsterThreat": "random_threat",
+   "priorityEconomy": 50,
+   "priorityMilitary": 50,
+   "priorityMagic": 50,
+   "priorityReligion": 50,
+   "priorityCriminal": 50,
+   "magicExists": true,
+   "nearbyResourcesRandom": true,
+   "nearbyResources": null,
+   "nearbyResourcesDepleted": [],
+   "nearbyResourcesState": {},
+   "selectedStresses": [],
+   "selectedStressesRandom": true,
+   "customName": "",
+   "customInstitutions": [],
+   "customResources": [],
+   "customTradeRoutes": [],
+   "powerDynamicsConfig": null,
+   "defenseScenarioConfig": null,
+   "_randomizePriorities": true
+  }
+ },
+ {
+  "plan": "C",
+  "seed": "dp-village-0",
+  "config": {
+   "settType": "village"
+  }
+ },
+ {
+  "plan": "C",
+  "seed": "dp-town-0",
+  "config": {
+   "settType": "town"
+  }
  }
 ]

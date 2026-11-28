@@ -48,27 +48,27 @@ describe('S-A site 1: a stored house description re-answered on the final record
   });
 
   it('THE OWNER\'s PAGE (the Institutions tab) prints the line the final record admits', () => {
-    expect(institutionDescription(houseOf(t['dp-metropolis-4'], 'Customs house'), t['dp-metropolis-4'])).toBe('Levies charged on all trade in and out by road or harbour, collected by officials of crown or town.');
-    expect(institutionDescription(houseOf(t['dp-hamlet-12'], 'Charcoal burner'), t['dp-hamlet-12'])).toMatch(/^Kiln crews in the surrounding woodland supply charcoal/);
-    expect(institutionDescription(houseOf(t['dp-town-36'], 'Toll bridge'), t['dp-town-36'])).toBe(houseOf(t['dp-town-36'], 'Toll bridge').desc.trim()); // the control: unchanged
+    expect(institutionDescription(houseOf(t['dp-metropolis-4'], 'Customs house'), t['dp-metropolis-4'], { audience: 'owner' })).toBe('Levies charged on all trade in and out by road or harbour, collected by officials of crown or town.');
+    expect(institutionDescription(houseOf(t['dp-hamlet-12'], 'Charcoal burner'), t['dp-hamlet-12'], { audience: 'owner' })).toMatch(/^Kiln crews in the surrounding woodland supply charcoal/);
+    expect(institutionDescription(houseOf(t['dp-town-36'], 'Toll bridge'), t['dp-town-36'], { audience: 'owner' })).toBe(houseOf(t['dp-town-36'], 'Toll bridge').desc.trim()); // the control: unchanged
   });
 
   it('THE PDF, handed the record gated on the caller\'s thread (S-A-2), prints the same line as the tab', () => {
     for (const [seed, name] of [['dp-metropolis-4', 'Customs house'], ['dp-hamlet-12', 'Charcoal burner'], ['dp-town-36', 'Toll bridge']]) {
-      expect(pdfDescOf(t[seed], name), `${seed} ${name}`).toBe(institutionDescription(houseOf(t[seed], name), t[seed]));
+      expect(pdfDescOf(t[seed], name), `${seed} ${name}`).toBe(institutionDescription(houseOf(t[seed], name), t[seed], { audience: 'owner' }));
     }
   });
 
   it('THE SHARED PAGE: a set that reads the roster (the docks) prints AS STORED; a terrain set is re-answered', () => {
     const customs = houseOf(t['dp-metropolis-4'], 'Customs house');
-    expect(institutionDescShown(customs, t['dp-metropolis-4'], { reader: true })).toBe(customs.desc.trim());
-    expect(institutionDescShown(houseOf(t['dp-hamlet-12'], 'Charcoal burner'), t['dp-hamlet-12'], { reader: true })).toMatch(/^Kiln crews in the surrounding woodland/);
-    expect(institutionDescShown(houseOf(t['dp-town-36'], 'Toll bridge'), t['dp-town-36'], { reader: true })).toBe(houseOf(t['dp-town-36'], 'Toll bridge').desc.trim());
+    expect(institutionDescShown(customs, t['dp-metropolis-4'], { audience: 'reader' })).toBe(customs.desc.trim());
+    expect(institutionDescShown(houseOf(t['dp-hamlet-12'], 'Charcoal burner'), t['dp-hamlet-12'], { audience: 'reader' })).toMatch(/^Kiln crews in the surrounding woodland/);
+    expect(institutionDescShown(houseOf(t['dp-town-36'], 'Toll bridge'), t['dp-town-36'], { audience: 'reader' })).toBe(houseOf(t['dp-town-36'], 'Toll bridge').desc.trim());
   });
 
   it('a DM\'s edited description (the DM\'s own words, which no table holds) prints as written', () => {
-    expect(institutionDescShown({ name: 'Customs house', desc: 'Our own words.', _userEdits: { desc: { originalValue: 'x' } } }, t['dp-metropolis-4'])).toBe('Our own words.');
-    expect(institutionDescShown({ name: 'Customs house', desc: 'Our own words.' }, t['dp-metropolis-4'])).toBe('Our own words.');
+    expect(institutionDescShown({ name: 'Customs house', desc: 'Our own words.', _userEdits: { desc: { originalValue: 'x' } } }, t['dp-metropolis-4'], { audience: 'owner' })).toBe('Our own words.');
+    expect(institutionDescShown({ name: 'Customs house', desc: 'Our own words.' }, t['dp-metropolis-4'], { audience: 'owner' })).toBe('Our own words.');
   });
 
   it('S-A-3: A DM\'s WORDS ARE NEVER RE-ANSWERED: a table line the DM typed verbatim, for a house the final record refuses, prints as the DM wrote it', () => {
@@ -76,9 +76,9 @@ describe('S-A site 1: a stored house description re-answered on the final record
     const typed = 'Levies charged on all trade in and out by road, collected by officials of crown or town.'; // the docks-less twin, verbatim
     const edited = { ...m, institutions: m.institutions.map((i) => (i.name === 'Customs house' ? { ...i, desc: typed, _userEdits: { desc: { originalValue: i.desc, editedAt: '2026-11-28T00:00:00Z' } } } : i)) };
     const house = houseOf(edited, 'Customs house');
-    expect(institutionDescShown({ ...house, _userEdits: undefined }, edited)).not.toBe(typed); // CONTROL: unmarked, the final record re-answers it
-    expect(institutionDescShown(house, edited)).toBe(typed);
-    expect(institutionDescription(house, edited)).toBe(typed);
+    expect(institutionDescShown({ ...house, _userEdits: undefined }, edited, { audience: 'owner' })).not.toBe(typed); // CONTROL: unmarked, the final record re-answers it
+    expect(institutionDescShown(house, edited, { audience: 'owner' })).toBe(typed);
+    expect(institutionDescription(house, edited, { audience: 'owner' })).toBe(typed);
   });
 
   it('NO BIRTH MOVES: the records are untouched by the print', () => {

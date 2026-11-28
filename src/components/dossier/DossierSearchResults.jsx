@@ -80,7 +80,7 @@ const RENDERERS = Object.freeze({
     Component: InstitutionCard,
     props: (o, ctx) => {
       const house = ctx.houses.get(o.raw);
-      return house ? { ...house, sets: ctx.sets, settlement: ctx.settlement } : null; // SURVEY S-A: the description as the final record admits it
+      return house ? { ...house, sets: ctx.sets, settlement: ctx.settlement, audience: ctx.audience } : null; // SURVEY S-A-4: the page's audience, as the Institutions tab states it
     },
   },
   service: {
@@ -205,7 +205,7 @@ export default function DossierSearchResults({ settlement, query, tabs, publicDo
     [enumeration, query, tabSignature],
   );
   const baseCtx = useMemo(() => renderContext(enumeration.settlement), [enumeration.settlement]);
-  const ctx = { ...baseCtx, npc: npcProps, navigateToEntity };
+  const ctx = { ...baseCtx, npc: npcProps, navigateToEntity, audience: publicDossier ? 'reader' : 'owner' }; // SURVEY S-A-4: one source, the page's publicDossier
   const labelOf = (tabId) => (tabs || []).find((t) => t.id === tabId)?.label || tabId;
   const q = String(query || '').trim();
   if (!isSearchActive(query)) return children;

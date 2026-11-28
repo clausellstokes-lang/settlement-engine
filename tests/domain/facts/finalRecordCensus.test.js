@@ -79,7 +79,7 @@ describe('S-A census: the final record refuses no stored line the page prints (a
   });
 
   it('THE TARGET: 0 refused-and-printed lines on the owner\'s page', () => {
-    const printed = towns.flatMap(({ id, town }) => findings(town, (i) => institutionDescShown(i, town), collectPlotHooksShown(town).map((h) => h.text)).map((x) => `${id} ${x}`));
+    const printed = towns.flatMap(({ id, town }) => findings(town, (i) => institutionDescShown(i, town, { audience: 'owner' }), collectPlotHooksShown(town).map((h) => h.text)).map((x) => `${id} ${x}`));
     expect(printed).toEqual([]);
   });
 
@@ -88,7 +88,7 @@ describe('S-A census: the final record refuses no stored line the page prints (a
       const vm = buildViewModel({ settlement: printRecordOf(town) });
       const desc = new Map(vm.services.detailed.map((d, k) => [town.institutions[k], d.description]));
       expect(vm.hooks.all.map((h) => h.hook), id).toEqual(collectPlotHooksShown(town).map((h) => h.text));
-      for (const inst of town.institutions || []) if (typeof inst.desc === 'string' && inst.desc.trim()) expect(desc.get(inst), `${id} ${inst.name}`).toBe(institutionDescShown(inst, town));
+      for (const inst of town.institutions || []) if (typeof inst.desc === 'string' && inst.desc.trim()) expect(desc.get(inst), `${id} ${inst.name}`).toBe(institutionDescShown(inst, town, { audience: 'owner' }));
       return findings(town, (i) => String(desc.get(i) || ''), vm.hooks.all.map((h) => h.hook)).map((x) => `${id} ${x}`);
     });
     expect(printed).toEqual([]);

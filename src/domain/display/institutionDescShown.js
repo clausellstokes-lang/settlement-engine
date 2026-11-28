@@ -11,6 +11,8 @@
  * line (the slot is never emptied, as at the draw). A description the DM edited (the edits ledger's institution record
  * at `desc`, S-A-3) and one the tables do not know (a custom house's) print as written. No birth moves.
  *
+ * THE AUDIENCE IS STATED (S-A-4): every caller says whose page it prints (`owner` or `reader`), from the page's own
+ * source (`OutputContainer`'s `publicDossier`); a caller that states none prints the description AS STORED.
  * THE SHARED PAGE (the chair's condition (3)): a reader's page re-answers ONLY a set whose every atom reads what no veil
  * address reaches (the config's terrain, the stress record's crisis: `SHARE_SAFE_DIMENSIONS`); a set that reads the
  * roster (the docks, the walls, a gate) prints there AS STORED, so no re-answer lets a reader count a hidden house.
@@ -45,14 +47,17 @@ const SHARE_SAFE_SIBLINGS = Object.freeze(Object.fromEntries(Object.entries(DESC
 /**
  * @param {{ desc?: unknown } | null | undefined} inst the house as the record holds it
  * @param {{ tier?: unknown } | null | undefined} settlement the FINAL record the page reads
- * @param {{ reader?: boolean }} [options] `reader`: the shared page (the served record)
+ * @param {{ audience?: 'owner' | 'reader' }} [options] THE AUDIENCE, STATED BY EVERY CALLER (S-A-4): `owner`, the owner's
+ *   page and the whole-document surfaces (every set re-answered); `reader`, a shared page (only the share-safe sets).
+ *   NONE STATED FAILS CLOSED: the description prints as stored.
  * @returns {string} the description to print ('' when the house carries none)
  */
 export function institutionDescShown(inst, settlement, options = {}) {
   const own = typeof inst?.desc === 'string' ? inst.desc.trim() : '';
-  if (!own || !settlement || typeof settlement !== 'object' || editedDescsOf(settlement).has(/** @type {object} */ (inst))) return own; // S-A-3: a DM's words are never re-answered
+  const audience = options.audience === 'owner' || options.audience === 'reader' ? options.audience : null;
+  if (!own || !audience || !settlement || typeof settlement !== 'object' || editedDescsOf(settlement).has(/** @type {object} */ (inst))) return own; // S-A-4: no audience, as stored; S-A-3: a DM's words are never re-answered
   const noun = tierNounFor(/** @type {never} */ (settlement.tier)) ?? '';
-  const set = indexOf(options.reader === true ? SHARE_SAFE_SIBLINGS : DESC_VARIANT_SIBLINGS, noun).get(own);
+  const set = indexOf(audience === 'reader' ? SHARE_SAFE_SIBLINGS : DESC_VARIANT_SIBLINGS, noun).get(own);
   if (!set) return own;
   const shown = lineOnFinal(own, { siblings: { [own]: set }, keep: true, speak: (t) => speakTierNoun(t, noun) },
     () => factsOf(/** @type {never} */ (settlement)));
