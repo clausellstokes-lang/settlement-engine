@@ -819,3 +819,35 @@ See section 4, newest last.
   122-T-5:** it reads the floor: a local Opus seat is building it on the line's local tree, above d8d05d4cc). WHAT THE NOTE
   CONFIRMS OF 122-T AT 777733a2a: 122,272 addresses hidden one at a time on 240 births: the reader's rows moved 0; rows
   dropped at view 261 to 0; short of the band 154 to 0; showing none 57 to 0; 0.9.0 and stampless equal to the base 900 of 900.
+
+## V29 (04:58 UTC on 2026-11-28): RANGE-MEASURE DONE (64ff0422c; filed: `survey/range/`): THE OWNER's SUSPICION IS MOSTLY TRUE BY KEY; **E27: POINT 125, "RANGE", RULED FOR THIS RELEASE (his to veto)**; THE READER FOUND A FAULT OF POINT 122 (grain named beside a full granary): CURED; S-A's MEASURE RULED
+- **RANGE-MEASURE (on b693c4605; 1,800 pages):** 1,059 keys of two or more co-eligible lines print; by a hand read of 170 keys
+  PARAPHRASE is 60% of keys and 36% of pool prints (about a fifth of a page); the house descriptions are three wordings of
+  one sentence BY DESIGN (292 of 305); the seat sentence is one fact in three word orders on 93% of pages; 96% of a page's
+  sentences print word for word (names aside) in another town of its size, 77% in a tenth of them; least repeated: Daily
+  Life 25%, Traditions 27%. WRONG BY WEIGHT: the most-printed pools (secrets, goals, ties) are DISTINCT; the larger sameness
+  is catalogue text and pools drawn more often than they are deep. SIX WEEKS on the keys that print: lines 1,953 to 4,500,
+  declared 22 to 1,563, 2 removed (the chair's "fewer lines" was wrong). TO HALVE THE PARAPHRASE A READER MEETS: 288 lines
+  (four each in the 72 most-printed keys). THE HOUSE DESCRIPTIONS ARE DRAWN AT BIRTH BY HASH MODULO LENGTH: an added line
+  moves births: the pick is made ranked or view-time FIRST.
+- **E27:** told to the owner in full with the numbers (he had asked the question): BEFORE THE RELEASE, as point 125: (1) a
+  WRITER now: RANGE-LINES (`prompts/START-RANGE-LINES.txt`; `lane/range-lines-2026-11-28`): four new lines for each view-time
+  key of the thirty, a sample of ten house keys to the chair first, then the 72 keys; the surveyor's voice, plain, each line
+  noticing a different thing, nothing the key does not guarantee; (2) AFTER POINTS 122 AND 123 LAND: a builder moves the
+  house-description pick onto stable ids (measure first: where the description is stored, who edits it, what moves), then
+  adds the lines through the door and the guard. A GUESS: 20 to 25 seat-hours on top of the survey's 80.
+- **POINT 122, A FAULT FOUND BY THE READER (04:31 UTC) AND CURED:** unit A3 named the scarce good in a current scarcity
+  tension; in ELEVEN towns of V the good is grain and the same page prints "Stores: a granary, about nine months of grain".
+  **RULING 122-A-2:** the named twin does not print where the page's own stores reader (`summary/tonightSheet.js ::
+  foodStoresWords`) reports that good; the stored sentence prints there as on the base. Cured at cdddc3b8b (test dbf53d635
+  red first on V dp-city-21); named C 36 to 36, V 45 to 34; other lines moved 0; records 0; the tuning inventory re-frozen by
+  its door a1cbf16d5 (a dependent added, no value: NAMED FOR THE OWNER); the lighting census 003fd3b07. **THE JOINED TIP IS
+  003fd3b07** (65 commits above the line's aef8f9962), pushed as `lane/stack-123-wip-2026-11-28`. Also on it: ruling 122-T-5
+  (6afafb5cc, 8396beb02, 5ad631588: `fieldRiteRefused` asks the floor; 0 of 1,800 towns moved).
+- **SURVEY-FINAL's MEASURE RULED (S-A-1, by message, 04:40 UTC):** the purse clauses are NOT late writes (they stand on the
+  Economic Survival band, the tenth chair's ruling A): they keep their reader, 0 move, the soft pair stays named for the
+  owner; the TRUE late writes that print are about 50 owner pages of 1,800 (a charcoal twin 26, a customs twin 16, a toll
+  bridge 4, guild hooks 2, loyalty hooks 2): one helper `facts/lineOnFinal.js` at three print sites; ON A SHARED PAGE a line
+  whose atom reads anything a DM can hide prints AS STORED (a test holds it); the self-check's blind spot (`no <band>`
+  excludes dropped) cured if small.
+- STILL OUT: READER 122-123 (final); SURVEY-TABLE ("TIP?"); VOICES-CARDS; RENAME-BUILD (K1's measure).
