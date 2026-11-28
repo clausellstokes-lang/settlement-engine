@@ -122,3 +122,18 @@ describe('(c) the saved view\'s detail copy says what the store holds', () => {
     }
   });
 });
+
+describe('(d) the AI narrative follows too (the chair\'s ruling K2-1): the town\'s rename hands it to applyCosmeticRename', () => {
+  test('the saved town\'s rename asks the narrative\'s own writer for the old name and the new, once', async () => {
+    const { rec } = births[0];
+    const store = storeWith(rec, true);
+    const cosmetic = vi.fn();
+    store.setState((s) => { s.applyCosmeticRename = cosmetic; });
+    store.getState().renameSettlement('save-1', NEW);
+    expect(cosmetic).toHaveBeenCalledTimes(1);
+    expect(cosmetic).toHaveBeenCalledWith({ saveId: 'save-1', oldName: rec.name, newName: NEW });
+    // anchored: a rename to the name it already holds asks nothing
+    store.getState().renameSettlement('save-1', NEW);
+    expect(cosmetic).toHaveBeenCalledTimes(1);
+  }, HEAVY);
+});
