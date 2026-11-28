@@ -2650,7 +2650,7 @@ own entailment and licenses nothing about who runs it.
 
 **operation role `unlicensed revenue`** {colour}
 1. `[ledger]` There is gambling at {settlement} that nobody licenses, and it funds a good deal more than itself.
-2. `[street]` The town's debts start in one house and are collected in another, and the two are the same concern.
+2. `[street]` Debts run up in one house here are collected in another, and the two are the same concern.
 3. `[unfolding]` The money lost at {settlement}'s gambling tables pays for far more than the tables, and every unpaid debt pulls someone in deeper.
 
 **operation role `money laundering`** {colour}

@@ -1123,6 +1123,7 @@ export function leadingGoodNoun(exports_) {
 export function economyStateProse(settlement, readings = {}, options = {}) {
   // F10 + F12: the walls and the five crisis dimensions answered once, from the defence and crisis readers (stateProseKernel law 5).
   options = factsAnswered(settlement, crisisAnswered(settlement, wallsAnswered(settlement, options)));
+  const solvency = { owes: owesDebtShown(settlement), nothingLaidBy: nothingLaidByShown(settlement) }; // RULING-R (R5): SOLVENT_LINES' two facts
   const eco = settlement?.economicState || {};
   const name = text(settlement?.name);
   const prosperity = typeof eco.prosperity === 'string' ? eco.prosperity : text(eco.prosperity?.tier);
@@ -1176,7 +1177,7 @@ export function economyStateProse(settlement, readings = {}, options = {}) {
    * @returns {import('./composeStateProse.js').ComposedUnit|null}
    */
   const line = (blockId, poolKey, extra = null) => (poolKey
-    ? composeStateProse(CORPUS, blockId, {
+    ? composeStateProse(solventCorpus(CORPUS, blockId, poolKey, solvency), blockId, {
       ...options,
       slots: extra ? { ...slots, ...extra } : slots,
       spineKey: poolKey,
@@ -1471,3 +1472,36 @@ export function entrepotUnderNoImport(key, settlement, posture) {
   return sold === 0 ? 'POSTURE: none' : p.access === 'isolated' ? 'POSTURE: vulnerable' : sold === 1 ? 'POSTURE: limited' : 'POSTURE: established';
 }
 import { houseSentenceName } from '../../../data/houseSentenceName.js';
+
+// RULING-R (the eleventh chair, 2026-11-27), R5 / R10 / R12 (unit B2): A LINE THAT SAYS THE PLACE HAS SAVINGS OR PAYS ITS WAY
+// STANDS DOWN WHERE THE PAGE'S OTHER SIDE SAYS IT OWES OR HAS NOTHING LAID BY (`solvencyShown.js`). Each row is one pool's
+// vids and the facts that refuse them: the savings lines on a present place debt or a Weak or Critical Economic Survival
+// row, the pays-its-way line on a present place debt alone (beside the Weak grade alone it is ruled no fault). The pool's
+// other lines draw as they would (the rendezvous over the vids left), so only a refused page moves. At the end of the
+// file, so no cited line moves.
+import { owesDebtShown, nothingLaidByShown } from '../solvencyShown.js';
+
+/** @type {ReadonlyArray<{ block: string, pool: string, vids: ReadonlyArray<number>, on: ReadonlyArray<'owes'|'nothingLaidBy'> }>} */
+const SOLVENT_LINES = Object.freeze([
+  // "…purse closes every year ahead … there is money laid by behind it" (v1); "People here put things by, and can." (v2)
+  Object.freeze({ block: 'DS-ECO-8', pool: 'COMFORTABLE', vids: Object.freeze([1, 2]), on: Object.freeze(/** @type {const} */ (['owes', 'nothingLaidBy'])) }),
+  // "The town pays its own way and has a little in hand." (v3)
+  Object.freeze({ block: 'DS-ECO-8', pool: 'MODERATE', vids: Object.freeze([3]), on: Object.freeze(/** @type {const} */ (['owes', 'nothingLaidBy'])) }),
+  // "{settlement} pays its way from year to year, and nobody here calls the town poor." (v2)
+  Object.freeze({ block: 'DS-ECO-1', pool: 'COMBINATION C3: the middle rungs', vids: Object.freeze([2]), on: Object.freeze(/** @type {const} */ (['owes'])) }),
+]);
+
+/**
+ * The corpus a line draws from: the desk's own, or, where a row of SOLVENT_LINES refuses this pool's vids, a copy of it
+ * with those vids out of that one pool (nothing else of the corpus is copied or moved).
+ * @param {typeof CORPUS} corpus @param {string} blockId @param {string} poolKey
+ * @param {{ owes: boolean, nothingLaidBy: boolean }} solvency @returns {typeof CORPUS}
+ */
+function solventCorpus(corpus, blockId, poolKey, solvency) {
+  const row = SOLVENT_LINES.find((r) => r.block === blockId && r.pool === poolKey && r.on.some((f) => solvency[f]));
+  const block = row ? /** @type {{ pools?: Record<string, ReadonlyArray<{ vid?: unknown }>> } | undefined} */ (/** @type {Record<string, unknown>} */ (corpus)[blockId]) : undefined;
+  const lines = block?.pools?.[poolKey];
+  if (!row || !block || !lines) return corpus;
+  const pool = lines.filter((v) => !row.vids.includes(Number(v.vid)));
+  return /** @type {typeof CORPUS} */ ({ ...corpus, [blockId]: { ...block, pools: { ...block.pools, [poolKey]: pool } } });
+}

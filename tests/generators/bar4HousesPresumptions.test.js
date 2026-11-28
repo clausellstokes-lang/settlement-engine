@@ -103,12 +103,25 @@ describe('BAR4-HOUSES H1: a house\'s description and the foodways line presume n
     expect(tab).toBe('Each holding grows for its own table, and beyond that its food is game from the woods.');
     expect(pdfAndFoundry).toBe(tab);
     expect(stored).toBe(tab);
-    // and over the 720 the stored identity is the reader's own line
+    // and over the 720 the stored identity is the reader's own line, read as assembly reads it (the roster and the economy).
+    // RULING-R (the eleventh chair, 2026-11-27), R8 woods: the surfaces, which hand the record's config, print "the hunters'
+    // game" in place of "game from the woods" where the record holds no woodland (a print-time cure: the stored lines stay),
+    // and differ from the stored identity there alone.
+    const WOODLAND = ['managed_forest', 'ancient_grove', 'shipbuilding_timber', 'mountain_timber'];
+    /** @param {any} s */
+    const woodless = (s) => !(s.config.nearbyResources || []).some((/** @type {string} */ r) => WOODLAND.includes(r)) && !/forest|jungle|wood/.test(String(s.config.terrainType || ''));
+    /** @type {string[]} */ const swapped = [];
     const failures = collectSeedFailures(SEEDS, (seed) => {
       const s = born(seed);
-      if (s.culturalIdentity && foodwaysLineOf(s)) expect(s.culturalIdentity.foodways).toBe(foodwaysLineOf(s));
+      if (!(s.culturalIdentity && foodwaysLineOf(s))) return;
+      const stored = String(s.culturalIdentity.foodways);
+      expect(stored).toBe(foodwaysLineOf({ institutions: s.institutions, economicState: s.economicState }));
+      const shown = woodless(s) ? stored.replace('game from the woods', 'the hunters\' game').replace(/^Game from the woods/, 'The hunters\' game') : stored;
+      if (shown !== stored) swapped.push(seed);
+      expect(foodwaysLineOf(s)).toBe(shown);
     });
-    expectNoSeedFailures(failures, 'the stored foodways identity is the line the surfaces print');
+    expectNoSeedFailures(failures, 'the stored foodways identity is the line the surfaces print, save the woods phrase where no woodland stands');
+    expect(swapped.length).toBeGreaterThan(0); // the arm met the R8 class it states
   }, 600000);
 
   it('(e) each key of the print-time foodways table is a culture profile\'s own foodways row, spelled once more', () => {

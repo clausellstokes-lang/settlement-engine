@@ -19,6 +19,8 @@ import { foodRowShown } from '../../src/domain/display/foodRowShown.js';
 import { carriersOf } from '../../src/domain/display/foodCarrier.js';
 import { isFoodSourceGood } from '../../src/domain/display/commoditiesShown.js';
 import { generalDeskLines } from '../../src/components/new/generalDeskRead.js';
+import { economyDeskRead } from '../../src/components/new/economyDeskRead.js';
+import { DOSSIER_STATE_PROSE_POWER } from '../../src/data/dossierStateProse/power.generated.js';
 import { safetyLineSaidOnce } from '../../src/domain/display/guardLineUnderTheLaw.js';
 import { variantByVid } from '../helpers/drawnProse.js';
 import { birth as soakBirth, ensureLaws } from '../../scripts/audit/soak-review/corpus.mjs';
@@ -136,5 +138,57 @@ describe('G72 (6): no feeds-itself line beside an arriving "Preserved provisions
   test('provisions and game are food by the whole word; provisioning, gaming, salt and hides are not', () => {
     expect(['Preserved provisions', 'Game and hides (furs, leather)', 'Provisions', 'game meat', 'Gaming tables', 'Salt', 'Hides', 'Ship provisioning'].map(isFoodSourceGood))
       .toEqual([true, true, true, true, false, false, false, false]);
+  });
+});
+
+// RULING-R (the eleventh chair, 2026-11-27), R5 / R10 / R12 (unit B2): a line that says the place HAS SAVINGS (DS-ECO-8
+// COMFORTABLE v1 "money laid by", v2 "put things by"; MODERATE v3 "a little in hand") stands down where the record holds a
+// present place debt (the indebted stress, the outside_debt tension or the timeline's outside_debt event) or an Economic
+// Survival row of Weak or Critical (DS-DEF-2's "nothing laid by" / "would have to borrow"); a line that says it PAYS ITS WAY
+// or OWES NO ONE (DS-ECO-1 C3 v2; the Outlook's L1, L2, L4, L5) stands down on the debt alone (beside the Weak grade alone it
+// is ruled no fault). The forbidden words are computed from the pools (never a literal anchor). The named places are the
+// measure's own (rmeasure/R-REPORT.md, R5): each printed the savings or pays-its-way line beside the other side at 42883b5c4.
+describe('RULING-R B2: no savings or pays-its-way line beside a present place debt or nothing laid by', () => {
+  /** @param {string} blockId @param {string} poolKey @param {number} vid @param {any} s */
+  const words = (blockId, poolKey, vid, s) => variantByVid({ leaf: 'economy', blockId, poolKey, vid, slots: { settlement: String(s.name) } }).split('. ')[0];
+  /** @param {any} s @returns {string} every economy desk line the owner's page draws, and the Outlook's verdict */
+  const printed = (s) => `${JSON.stringify(economyDeskRead(s))} ${deriveViability(s).summary}`;
+  const NAMED = /** @type {Array<[string, string, Array<[string, string, number]>]>} */ ([
+    // [seed, the other side the record holds, the lines it printed beside it]
+    ['dp-thorp-3', 'Economic Survival Weak', [['DS-ECO-8', 'COMFORTABLE', 1]]],
+    ['dp-thorp-42', 'the timeline\'s outside_debt event; Economic Survival Weak', [['DS-ECO-8', 'COMFORTABLE', 2], ['DS-ECO-1', 'COMBINATION C3: the middle rungs', 2]]],
+    ['dp-thorp-99', 'the outside_debt tension', [['DS-ECO-1', 'COMBINATION C3: the middle rungs', 2]]],
+    ['dp-village-141', 'the outside_debt tension', [['DS-ECO-8', 'COMFORTABLE', 1]]],
+  ]);
+  for (const [seed, side, lines] of NAMED) {
+    test(`C ${seed} (${side}): the savings and pays-its-way lines stand down, and the rung still speaks`, () => {
+      const s = c(seed);
+      const page = printed(s);
+      expect(lines.map(([b, k, v]) => [b, v, page.includes(words(b, k, v, s))])).toEqual(lines.map(([b, , v]) => [b, v, false]));
+      expect(economyDeskRead(s).prosperityRung).toBeTruthy(); // another line of the rung prints in its place
+    }, 120000);
+  }
+  test('C dp-thorp-42 (the outside_debt event alone): the Outlook says no "pays its way"', () => {
+    const s = c('dp-thorp-42');
+    expect((s.history.historicalEvents || []).map((/** @type {any} */ e) => e.templateType)).toContain('outside_debt');
+    expect(String(deriveViability(s).summary)).toMatch(/^VIABLE/);
+    expect(/pays its (own )?way|owes no one|what it spends it earns/.test(String(deriveViability(s).summary))).toBe(false);
+  }, 120000);
+  // RULING 122-B-1 (i), the chair, 2026-11-27: the timeline's outside_debt event is the place owing only where its page says
+  // the creditor is collecting NOW, its hook printed on the Plot Hooks tab (`collectPlotHooks`). An old Debt Crisis whose
+  // event carries no hook prints only its past in the History timeline: there "pays its way" still prints.
+  test('C dp-thorp-4 and dp-town-120 (an old Debt Crisis, no hook printed): "pays its way" still prints', () => {
+    const thorp = c('dp-thorp-4');
+    const ev = (thorp.history.historicalEvents || []).filter((/** @type {any} */ e) => e.templateType === 'outside_debt');
+    expect(ev.map((/** @type {any} */ e) => [e.yearsAgo, (e.plotHooks || []).length])).toEqual([[83, 0]]);
+    expect(String(deriveViability(thorp).summary)).toMatch(/feeds itself and pays its own way\./);
+    const town = c('dp-town-120');
+    expect(printed(town).includes(words('DS-ECO-1', 'COMBINATION C3: the middle rungs', 2, town))).toBe(true);
+  }, 120000);
+  test('DS-POW-6 "operation role unlicensed revenue" v2 no longer says the town owes (re-worded in place, its vid kept)', () => {
+    const pool = /** @type {any} */ (DOSSIER_STATE_PROSE_POWER)['DS-POW-6'].pools['operation role unlicensed revenue'];
+    expect(pool.map((/** @type {any} */ v) => v.vid)).toEqual([1, 2, 3]);
+    const v2 = String(pool.find((/** @type {any} */ v) => v.vid === 2).text);
+    expect([/^The town's debts/.test(v2), /^Debts run up in one house here/.test(v2)]).toEqual([false, true]);
   });
 });

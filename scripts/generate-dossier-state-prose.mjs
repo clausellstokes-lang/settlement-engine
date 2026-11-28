@@ -592,6 +592,9 @@ const sha256 = (text) => createHash('sha256').update(text).digest('hex');
  * @type {ReadonlyArray<{pool: string, vid: number, from: string, to: string, ruling: string}>}
  */
 const WORD_CORRECTIONS = Object.freeze([
+  // RULING-R (the eleventh chair, 2026-11-27), R10 (unit B2): DS-POW-6 'operation role unlicensed revenue' v2 said "The town's
+  // debts" (the gambling house's debts read as the town owing, beside "money laid by"); re-worded in place so the debts are the gamblers', not the town's
+  { pool: 'DS-POW-6 :: operation role unlicensed revenue', vid: 2, from: '2e380625627741894b4b92065daf750adc1313ab5bb0aa70b66bfd9b82e8fb42', to: 'df37236e7c07e23fb0146335aadc3abd8807fefa2e2043329113641b7f84b442', ruling: 'RULING-R, the eleventh chair, 2026-11-27' },
   // FR18 (1), the chair's ruling of 2026-11-18: DS-DEF-3 Unsafe v4's words (the twin of b86d8122d), corrected in place
   { pool: 'DS-DEF-3 :: Unsafe', vid: 4, from: '4bad941347dd4b9259d2aae2873bb678fd6f48a7ddf73bf3a28411dd9f6033d2', to: '214b6eabc4403e1c31abbc03fe102943eb6136d844aaa15445777c78b4aff6a3', ruling: 'FR18' },
   // LR6 (1), the chair's ruling of 2026-11-18 (after READ-LAST): DS-DEF-3 Moderate v9 (LAST-VARIETY's line) said the safety
