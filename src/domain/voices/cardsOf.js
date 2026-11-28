@@ -38,6 +38,7 @@ import { isCriminalPower } from '../people/allegiance.js';
 import { seatHouseFaceOf } from '../dossier/seatHolder.js';
 import { derivePowerStrata } from '../dossier/powerStrata.js';
 import { composeCrisisPage } from '../crisis/crisisPage.js';
+import { STAKE_REASONS } from '../crisis/crisisCast.js';
 import { crisisNounOf, isVentureMark, rowShortOf, rowStoppedBy, stoppingCrisesOf } from '../display/crisisStoppedRow.js';
 import { shownTraditionsOf } from '../traditions/shownTraditions.js';
 import { describeTraditions } from '../traditions/traditionDescription.js';
@@ -179,10 +180,19 @@ export function cardsOf(settlement, options = {}) {
   for (const c of crises) {
     const group = Object.hasOwn(CRISIS_GROUP, c.type) ? CRISIS_GROUP[c.type] : null;
     const cast = c.cast.filter((r) => r.kind === 'npc').map((r) => byId.get(str(r.id))).filter(Boolean);
+    // THE CHAIR'S RULING V-2: the cause of a crisis never voices it as one who suffers it. The cause on the record is the
+    // power its stakes name as the cause (the occupier for an occupation, `gainsOccupier`; the power a revolt raised to
+    // lead it, `leadsRevolt`) and its cast's instigators (the power that stopped obeying, for an insurgency or a rising:
+    // the cast draws them from that power's members). None of their people voices the card; the floor takes the next
+    // speaker, or the card is silent. (A power that merely profits, a `gains` stake of another reason, is no cause.)
+    const causePowers = new Set(c.stakes.filter((k) => k.reason === STAKE_REASONS.gainsOccupier || k.reason === STAKE_REASONS.leadsRevolt).map((k) => str(k.factionId)));
+    const instigators = new Set(c.cast.filter((r) => r.kind === 'npc' && r.role === 'instigator').map((r) => str(r.id)));
+    for (const n of npcs) if (instigators.has(str(n.id))) for (const m of Array.isArray(n.memberships) ? n.memberships : []) if (m && str(m.power)) causePowers.add(str(m.power));
+    const cause = new Set(npcs.filter((n) => instigators.has(str(n.id)) || [...causePowers].some((p) => holdsMembership(n, p))).map((n) => str(n.id)));
     push({
       kind: 'crisis', id: crisisCardId(c), tab: 'crisis', label: c.label, state: group || '', pools: group ? [`crisis.${group}`] : [],
       weight: 'weighty', silent: group ? null : 'no-pool', tiers: [/** @type {Record<string, any>[]} */ (cast), npcs],
-      fill: { crisisNoun: crisisNounOf(c.type) || '' },
+      fill: { crisisNoun: crisisNounOf(c.type) || '' }, exclude: cause,
     });
   }
 

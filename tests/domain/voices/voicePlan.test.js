@@ -21,6 +21,9 @@ import { allegianceOf } from '../../../src/domain/people/allegiance.js';
 import { cardHouseOf } from '../../../src/domain/people/cardPowers.js';
 import { declarationAdmits } from '../../../src/domain/facts/factVocabulary.js';
 import { factsOf } from '../../../src/domain/facts/factsOf.js';
+import { composeCrisisPage } from '../../../src/domain/crisis/crisisPage.js';
+import { STAKE_REASONS } from '../../../src/domain/crisis/crisisCast.js';
+import { crisisCardId } from '../../../src/domain/voices/cardIds.js';
 
 /** C's plan rows (`rmeasure/tools/plan-C.json`: the config is the tier alone). */
 const TOWNS = Object.freeze([
@@ -224,6 +227,37 @@ describe('the chair\'s readings V-1', () => {
     // the tie's way through the house (office, front or retainer), never the criminal house's kind
     expect(lie.lineId).toMatch(/^LIE\.(office|front|retainer)\./);
     expect(lie.lineId).not.toMatch(/^LIE\.smuggling\./);
+  });
+});
+
+describe('the chair\'s ruling V-2: the cause of a crisis never voices it as one who suffers it', () => {
+  /** The people of a crisis's cause, read off the page's own record independently of the leaf. @param {any} s @param {any} c */
+  const causeOf = (s, c) => {
+    const powers = new Set(c.stakes.filter((k) => [STAKE_REASONS.gainsOccupier, STAKE_REASONS.leadsRevolt].includes(k.reason)).map((k) => k.factionId));
+    const instigators = new Set(c.cast.filter((r) => r.kind === 'npc' && r.role === 'instigator').map((r) => r.id));
+    for (const n of s.npcs) if (instigators.has(n.id)) for (const m of n.memberships || []) powers.add(m.power);
+    return new Set(s.npcs.filter((n) => instigators.has(n.id) || (n.memberships || []).some((m) => powers.has(m.power))).map((n) => n.id));
+  };
+
+  it('Prabhakund (occupied): the occupying governor never voices the occupation\'s crisis card; the card takes the next speaker or is silent', () => {
+    const s = born.get('dp-hamlet-12');
+    const plan = voicePlanOf(s, { audience: OWNER_AUDIENCE });
+    const c = composeCrisisPage(s).find((x) => x.type === 'occupied');
+    const cause = causeOf(s, c);
+    expect(cause.has('npc_power_occupation_authority'), 'the occupier is the cause on the record').toBe(true);
+    const card = plan.cards.find((x) => x.kind === 'crisis' && x.id === crisisCardId(c));
+    expect(card.exclude.has('npc_power_occupation_authority')).toBe(true);
+    const q = plan.quotes.get(`crisis:${card.id}`);
+    expect(q ? cause.has(q.speaker.id) : false, `the crisis card's speaker: ${q && q.speaker.name}`).toBe(false);
+  });
+
+  it('on every town of the seven, no crisis card is voiced by a person of its cause', () => {
+    for (const { seed, s, plan } of plans()) {
+      for (const c of composeCrisisPage(s)) {
+        const q = plan.quotes.get(`crisis:${crisisCardId(c)}`);
+        if (q) expect(causeOf(s, c).has(q.speaker.id), `${seed} ${c.type}: ${q.speaker.name}`).toBe(false);
+      }
+    }
   });
 });
 
