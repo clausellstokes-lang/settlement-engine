@@ -1,0 +1,16 @@
+id	temper	text (as the engine holds it)	card word (NEW: defined in C2-said-lines-B.tsv's inn rows)	why
+SAID.inst.inn-ordinary.1	welcoming	Nobody arriving late is ever turned away.	lodging	a late arrival is someone come for a bed
+SAID.inst.inn-ordinary.1	transactional	The talk is free. Everything else goes on the bill.	food and drink	the bill is for food and drink
+SAID.inst.inn-ordinary.1	cautious	Plenty gets said here that shouldn't be repeated.	company	people sit and talk there
+SAID.inst.inn-ordinary.2	welcoming	The regulars always make room for a new face.	company	regulars who sit together
+SAID.inst.inn-ordinary.2	cautious	New faces get watched until someone knows their business.	company	a room where newcomers are watched
+SAID.inst.inn-ordinary.2	dismissive	Same regulars. Same stories.	company	regulars telling stories
+SAID.inst.inn-ordinary.3	welcoming	Travellers always bring a story, and someone's always glad to hear it.	company	(beside its route open atom) someone sits to hear the story
+SAID.inst.inn-ordinary.3	transactional	News costs nothing here. Feeding the people who bring it does.	food and drink	the house feeds people
+SAID.inst.inn-ordinary.4	welcoming	Wet travellers get a warm spot first.	company	(beside its route open atom) a room with a warm spot to sit in
+SAID.inst.inn-ordinary.4	transactional	Late arrivals keep everyone up, and they rarely pay extra.	lodging	people asleep under the roof
+SAID.inst.inn-ordinary.4	cautious	Some travellers leave before dawn, without a word.	lodging	(beside its route open atom) travellers who stayed the night
+SAID.inst.inn-ordinary.5	welcoming	The regulars settle up when they can, and that's fine.	company	regulars running a tab
+# the card words: lodging = wayside_inn, caravanserai, travelers_inn, waystation, inn_multiple, coaching_inn, post_relay_station, inns_and_taverns_district; food and drink = wayside_inn, alehouse, ale_house, travelers_inn, inn_multiple, taverns_5_20, coaching_inn, inns_and_taverns_district, caravanserai, waystation; company = the food-and-drink ids and public_bathhouse. Read off houseFamilyOf over data/institutionalCatalog.js (the inn family's 20 ids); a stable, a toll bridge, a carrier, a pack-animal trader or a stable district holds none of them.
+# needing nothing (any inn-family house): inn.1 D, inn.2 T, inn.3 C and D, inn.4 D, inn.5 T, C and D.
+# THE SAME RULE ELSEWHERE (read, not asked for): SAID.inst.any-short.2 cautious "Some say the {good} is going elsewhere, for a better price." reads as a house that buys the good in; on a mine or a farm short of its own good it wants the same card-not as any-short.4 and .8 (C2's rows).

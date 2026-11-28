@@ -79,3 +79,10 @@ The placing is mine, by hand: PLAUSIBLE (the engine's draw would pick among the 
 8. `LIE.office.hall.5` (the lists): right for a court, a council or a customs house, thinner for a watch or a garrison.
 9. `SAID.trad.procession.5` T "Some houses charge a coin to watch from their windows.": in a hamlet's procession it presumes a street of windows.
 10. `SAID.trad.fair.7` (hiring at the fair): not every fair is a hiring fair. It is a remark, but it is a claim about what the fair does.
+
+## AFTER THE CHAIR's READ (13:36 UTC): THE FIFTEEN FIXES
+The chair's read answered the ten above: each is now declared (an atom of `facts/factVocabulary.js`, checked with
+`assertDeclarable`), or tied to its card (NEW card words, `INN-CARD-B.tsv`), or reworded so it leans on nothing.
+Items 1 to 5 and 10 of the ten are closed that way. Item 6 stands as the chair's words. Items 7 and 8 stand, for the
+chair's read. Item 9 is declared `tier: ≥ town`. The hiring fair (item 10 of the ten) is reworded to a remark any
+fair holds.
