@@ -1,11 +1,18 @@
 # PG (VEIL-56's builder seat): FAIL-CLOSED PAGES' ARM UNDER RULING V29
 
-## STATE NOTE (2026-11-28T00:01:53Z, `date -u`): STOPPED until "GO PG"
-1. BRANCHES: code `lane/veil-56-2026-11-27-pages-wip` = 04fa8d60e, unchanged, nothing to push (origin has no ref of that name; no commit of mine). Docs `lane/veil-56-2026-11-27-pg-docs` = this push.
-2. CONFIRMED: the predecessor's red (1ffb2328b) and green (04fa8d60e, 17/17); both pools of 140; V29 (1) and (2)(a)(b)(c) measured; M1 (the interval test: 0 wrong, 37 / 30 rows lost); M2 (the cause is the ENGINE between master and this tree; the owner's page prints the stored values: the veil's fault).
-3. NOT BEGUN: M3 (V29 (2)'s totality arm and its plant guards); V29 (1)'s build (waits for the chair's BAND-RULE).
-4. NEXT COMMAND on "GO PG": the branch the chair names. For the interval rule: red first in `tests/components/failClosedSharedPage.test.jsx`, the cure in `foundationBandShown.js` and `pageRederive.js`.
-5. The machine: pools at /var/tmp/v56/stored-{today,master}; master worktree /home/user/master56; recipe in section 3.
+## STATE (2026-11-28T01:11Z by `date -u`): PAUSED BY THE OWNER'S WORD (about 00:35 UTC); STOPPED until "GO PG"
+1. TIPS: code `lane/veil-56-2026-11-27-pages-wip` 1fad48428 (on 04fa8d60e: 820672334 the interval test, 1fad48428 its JSDoc types); docs `lane/veil-56-2026-11-27-pg-docs` = this push.
+2. BUILT AND PROVEN, step 1 (THE INTERVAL TEST): RED at 04fa8d60e (`r3m-metropolis-wartime-1-139 P1: no false "Trade connectivity" ...: expected 'Strained' to be undefined`); GREEN at 820672334 (failClosedSharedPage 11/11, the walker 18/18; the 30 files naming a changed src: 658 passed, 3 failed = the known publicProseEquality daily_life soak1k-1/7/8). Both pools, every marker, the built code: 0 rows printed wrong, rows not printed 37 / 30 (table below).
+3. BUILT, UNPROVEN: 1fad48428 (types only; its re-run stopped by the pause). tests/lint WHOLE NOT FINISHED (stopped at 17 min). IT SHOWED ONE RED: `factLayers.walker` "READERS: every file reads exactly its banked LINES" (PLAUSIBLE: my new reader severityInterval.js unbanked; not read yet). Typecheck (full) not run.
+4. NOT BEGUN: step 2 (the three guards and the Defense sentence on default-veil pages; only its red test drafted, scratch, not in the tree); step 3 (provenance: its RE-SAVE CHECK read, not tested: `birthConfig` alone mints `_seatLawVersion`/`_fortuneLawVersion` and strips incoming ones; the import keeps the source config's); step 4 (the totality arm); step 5 (the standing arm of twelve).
+5. NEXT COMMAND on "GO PG": `sh scripts/gate-mutex.sh --run -- npx vitest run --maxWorkers=1 tests/lint/factLayers.walker.test.js` (read the red, bank or cure), then tests/lint whole.
+6. MACHINE: pools /var/tmp/v56/stored-{today,master} (section 3's recipe; dump.sh at d71a3ee44 with probe/rv9.vitest.config.mjs at /var/tmp/v18/rv9/); master worktree /home/user/master56 (db832c892); the gate lock may read STALE (a killed run): `--run` reclaims it.
+
+### STEP 1's ROWS NOT PRINTED (the built code; by row name; default / all-shown / widest)
+| pool | total | by row |
+|---|---|---|
+| today-born | 37 / 37 / 37 | Trade connectivity 16 / 16 / 16, Defense readiness 7 / 8 / 7, Social trust 6 / 6 / 6, Labor capacity 5 / 5 / 5, Strength of the powers 3 / 2 / 3 |
+| master-born | 30 / 30 / 30 | Trade connectivity 9, Social trust 8, Labor capacity 6, Defense readiness 4, Strength of the powers 3 (each marker) |
 
 ## 1. WHERE THIS SEAT STANDS (written 2026-11-27T23:41:40Z by `date -u`)
 - Code branch `lane/veil-56-2026-11-27-pages-wip`: AT 04fa8d60e (the predecessor's tip). NOTHING CHANGED YET. NOT PUSHED (no commit to send).
