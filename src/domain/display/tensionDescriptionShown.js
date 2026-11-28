@@ -5,7 +5,7 @@
  * The resource-scarcity template's two stored sentences (`historyData.js :: HISTORICAL_EVENTS_DATA` resource_scarcity: its
  * `description`, and `byMemory.unanchored.description`, the words a tension takes where the timeline holds no event of its
  * own) say "a critical resource" and never which, while the Economics tab names the good the record holds short (the
- * DS-ECO shortfall line, through `economyStateProse.js :: criticalImportRow`). Where that reader names a good, the sentence
+ * DS-ECO shortfall line, through `criticalImportRow.js :: criticalImportRow`). Where that reader names a good, the sentence
  * prints a named twin, the good set beside "a critical resource"; the stored string stays as it is. Where the record names
  * no good, or the description is any other sentence (a DM's edit, the words the selection wrote for this town), it prints
  * as stored. Print-time only: no record moves, and a saved town is reached.
@@ -27,9 +27,9 @@
  * is the same store). The reader is ASKED, not copied: its line is read with the record's granary and again without it, and
  * where the two differ it reports a granary. There, a short good spelt "grain" (the import key's bare-common fill, matched
  * whole, trimmed and in lower case) prints the stored sentence. Every other good is named as before. The import adds no
- * module: this leaf already reaches the tonight sheet (economyStateProse → foodWordShown → tonightSheet).
+ * module to a closure that holds this leaf: the PDF render worker and Foundry's export hold the tonight sheet already.
  */
-import { criticalImportRow } from './stateProse/economyStateProse.js';
+import { criticalImportRow } from './criticalImportRow.js'; // RULING 122-B-2 (F7): the leaf, not the desk
 import { foodStoresWords } from '../summary/tonightSheet.js';
 
 /** The one good the stores reader names: a granary's stores are "months of grain". */
