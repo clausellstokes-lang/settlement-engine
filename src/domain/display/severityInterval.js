@@ -48,13 +48,13 @@ function bandIntervals() {
  * @returns {Set<string>}
  */
 export function severityUnsettledRows(settlement, wordsOf) {
-  const list = Array.isArray(settlement?.activeConditions) ? settlement.activeConditions : [];
+  /** @type {any[]} */ const list = Array.isArray(settlement?.activeConditions) ? settlement.activeConditions : [];
   const iv = bandIntervals();
-  const marked = list.map((c, i) => (c && typeof c === 'object' && c.severityFromBand === true && iv[c.severityBand] ? i : -1)).filter((i) => i >= 0);
+  /** @type {number[]} */ const marked = list.map((/** @type {any} */ c, /** @type {number} */ i) => (c && typeof c === 'object' && c.severityFromBand === true && iv[c.severityBand] ? i : -1)).filter((/** @type {number} */ i) => i >= 0);
   /** @type {Set<string>} */ const out = new Set();
   if (!marked.length) return out;
   if (marked.length > CORNER_LIMIT) {
-    const ids = new Set(marked.map((i) => list[i].id));
+    const ids = new Set(marked.map((/** @type {number} */ i) => list[i].id));
     for (const c of deriveAllActiveConditions(settlement)) {
       if (!ids.has(c.id)) continue;
       for (const k of c.affectedSystems || []) out.add(k);
@@ -64,8 +64,8 @@ export function severityUnsettledRows(settlement, wordsOf) {
   }
   /** @type {Array<Record<string, string>>} */ const corners = [];
   for (let m = 0; m < (1 << marked.length); m += 1) {
-    const at = new Map(marked.map((i, j) => [i, iv[list[i].severityBand][(m >> j) & 1]]));
-    corners.push(wordsOf({ ...settlement, activeConditions: list.map((c, i) => (at.has(i) ? { ...c, severity: at.get(i) } : c)) }));
+    const at = new Map(marked.map((/** @type {number} */ i, /** @type {number} */ j) => [i, iv[list[i].severityBand][(m >> j) & 1]]));
+    corners.push(wordsOf({ ...settlement, activeConditions: list.map((/** @type {any} */ c, /** @type {number} */ i) => (at.has(i) ? { ...c, severity: at.get(i) } : c)) }));
   }
   const keys = new Set(corners.flatMap((w) => Object.keys(w)));
   for (const k of keys) if (corners.some((w) => w[k] !== corners[0][k])) out.add(k);
