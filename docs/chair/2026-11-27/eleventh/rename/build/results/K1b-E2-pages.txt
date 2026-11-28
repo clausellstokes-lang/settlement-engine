@@ -1,0 +1,8 @@
+== C {"births":150,"errors":0,"recordsMoved":0,"stampsMoved":150,"pagesMoved":150,"linesMoved":1823}
+  lines by view {"World/Traditions":1823}
+  pages by view {"World/Traditions":150}
+  World/Traditions: dp-thorp-0: -The Great Offering | +The Moon Feast || dp-thorp-1: -⌂ | +✒
+== V {"births":150,"errors":0,"recordsMoved":0,"stampsMoved":150,"pagesMoved":150,"linesMoved":1861}
+  lines by view {"World/Traditions":1861}
+  pages by view {"World/Traditions":150}
+  World/Traditions: dp-thorp-0: -The Great Offering | +The Amber Feast || dp-thorp-1: -⌂ | +✒

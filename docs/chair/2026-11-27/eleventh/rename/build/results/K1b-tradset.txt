@@ -1,0 +1,2 @@
+C {"births":900,"missing":0,"notGv10":0,"mirrorAtBirth":0,"oldDiffers":0,"bareDiffers":0,"bornFoundingMoved":900,"bornShownMoved":900,"bornSharedMoved":900,"copyIsOwnerK1":0,"copyIsOwnerK1b":900,"sharedErr":0} 
+V {"births":900,"missing":0,"notGv10":0,"mirrorAtBirth":0,"oldDiffers":0,"bareDiffers":0,"bornFoundingMoved":900,"bornShownMoved":900,"bornSharedMoved":900,"copyIsOwnerK1":0,"copyIsOwnerK1b":900,"sharedErr":0} 
