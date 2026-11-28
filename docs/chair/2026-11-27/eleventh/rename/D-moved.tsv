@@ -1,0 +1,28 @@
+corpus	rename	births	pages with any moved line	pages with a line moved OTHER than by printing the new name	lines moved	lines moved by the name only	lines moved otherwise	otherwise, by view (top 6)
+C	town	300	300	300	19606	15264	4342	World/Daily Life 1937; PDF/dailyLife 1929; Foundry/Overview 146; PDF/headlines 75; Systems/Defense 69; Foundry/Tonight 69
+C	ruler or first person	300	300	39	9169	9091	78	PDF/headlines 39; Foundry/NPC Quick Reference 39
+C	first house (institution)	300	300	298	2190	996	1194	Systems/Economics 498; World/Daily Life 190; PDF/dailyLife 190; PDF/printProse 100; Foundry/Identity & Daily Life 98; World/Traditions 44
+C	first power	300	300	179	10377	10013	364	Systems/Defense 72; Summary/Overview 61; Systems/Power 58; PDF/printProse 50; World/Daily Life 40; PDF/dailyLife 40
+C	town: SHARED page	300	300	300				owner's page vs shared page after the rename (rendered tabs; beyond their differences before it): 8 pages, 8 lines: {"World/Daily Life":8}
+V	town	300	300	300	20354	15830	4524	World/Daily Life 2012; PDF/dailyLife 1981; Foundry/Overview 176; PDF/headlines 87; Systems/Defense 82; Foundry/Tonight 82
+V	ruler or first person	300	300	36	9209	9137	72	PDF/headlines 36; Foundry/NPC Quick Reference 36
+V	first house (institution)	300	300	279	2252	1020	1232	Systems/Economics 457; World/Daily Life 208; PDF/dailyLife 208; PDF/printProse 135; Foundry/Identity & Daily Life 126; Systems/Power 59
+V	first power	300	300	175	10762	10422	340	Summary/Overview 68; Systems/Defense 65; World/Daily Life 46; PDF/dailyLife 46; PDF/printProse 39; Systems/Power 37
+V	town: SHARED page	300	300	300				owner's page vs shared page after the rename (rendered tabs; beyond their differences before it): 31 pages, 31 lines: {"World/Daily Life":31}
+
+corpus	rename	site (A)	call site (pick log)	pages whose key holds the name	picks with the name	picks re-dealt	pages re-dealt at this site	worked example: key before -> after, line id before -> after
+C	town	A1-A7, A9, A10 Daily Life slots	RZ src/domain/dailyLife.js :: pickNameable	300	4818	3997	300	dp-thorp-0: `Linyuan::dailyLife.food_culture::adequate` -> `Quillmarsh::dailyLife.food_culture::adequate`: A5 -> A4
+C	town	A18 crisis summary vantage	FNV src/domain/crisis/crisisSummaryVantage.js :: summaryColumnOf	97	489	489	97	key e.g. `Linyuan::indebted` (a raw FNV: the column moves with its key)
+C	town	A8 Daily Life outsider impressions (which option is second)	RZ src/domain/dailyLife.js :: yields	300	308	162	158	dp-thorp-0: `Linyuan::dailyLife.outsider_impressions::second` -> `Quillmarsh::dailyLife.outsider_impressions::second`: services.healing -> services.defense
+C	town	A26 overview headline (T) / A28 people headline (P)	RZ src/pdf/lib/headlines.js :: seedPick	97	194	150	75	dp-thorp-0: `Linyuan` -> `Quillmarsh`: local -> traveller
+C	town	A19/A20 fortune lines (the resolver names the enclosing function; the key is `<place>::<age>` / `<place>::<event>::<years>`)	RZ src/domain/display/governanceAccount.js :: underOccupation	34	34	15	15	dp-thorp-62: `Al-bazaar::295` -> `Quillmarsh::295`: C -> A
+C	ruler or first person	A26 overview headline (T) / A28 people headline (P)	RZ src/pdf/lib/headlines.js :: seedPick	84	168	78	39	dp-thorp-22: `Otto Fischer` -> `Odalric Venn`: official -> newcomer
+C	first power	A30 card honorific (the card's institution or power name in the key)	PV src/data/faceHonorifics.js :: honorificOfTitle	22	22	6	6	dp-thorp-1: `npc_power_occupation_authority::Occupation Authority` -> `npc_power_occupation_authority::The Ashen Compact`: 0/2 -> 1/2
+V	town	A1-A7, A9, A10 Daily Life slots	RZ src/domain/dailyLife.js :: pickNameable	300	5070	4110	300	dp-thorp-0: `Wadihaven::dailyLife.food_culture::adequate` -> `Quillmarsh::dailyLife.food_culture::adequate`: A6 -> A4
+V	town	A18 crisis summary vantage	FNV src/domain/crisis/crisisSummaryVantage.js :: summaryColumnOf	109	559	559	109	key e.g. `Wadihaven::indebted` (a raw FNV: the column moves with its key)
+V	town	A8 Daily Life outsider impressions (which option is second)	RZ src/domain/dailyLife.js :: yields	300	317	174	162	dp-thorp-0: `Wadihaven::dailyLife.outsider_impressions::second` -> `Quillmarsh::dailyLife.outsider_impressions::second`: services.administrative -> services.defense
+V	town	A26 overview headline (T) / A28 people headline (P)	RZ src/pdf/lib/headlines.js :: seedPick	109	218	174	87	dp-thorp-0: `Wadihaven` -> `Quillmarsh`: local -> traveller
+V	town	A19/A20 fortune lines (the resolver names the enclosing function; the key is `<place>::<age>` / `<place>::<event>::<years>`)	RZ src/domain/display/governanceAccount.js :: underOccupation	28	28	22	22	dp-thorp-27: `Kalivich::291` -> `Quillmarsh::291`: B -> C
+V	ruler or first person	A26 overview headline (T) / A28 people headline (P)	RZ src/pdf/lib/headlines.js :: seedPick	84	168	72	36	dp-thorp-30: `Philippos Argyros` -> `Odalric Venn`: official -> newcomer
+V	first power	A30 card honorific (the card's institution or power name in the key)	PV src/data/faceHonorifics.js :: honorificOfTitle	33	33	7	7	dp-thorp-2: `npc_seat::Household Council` -> `npc_seat::The Ashen Compact`: 0/2 -> 1/2
+V	first power	?	FNV src/domain/dossier/hookLines.js :: createConflictHookDraw	1	1	1	1	key e.g. `Elder Council>Merchant Guilds::Authority over military conscription lists::jurisdiction` (a raw FNV: the column moves with its key)

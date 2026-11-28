@@ -799,3 +799,23 @@ See section 4, newest last.
   (the owner's). SURVEY-FINAL: no measure yet. READER 122-123: no report yet. RENAME-MEASURE: silent since 00:30 UTC.
 - NEXT: the reader's report (it takes point 123's tip from origin: now d8d05d4cc); then the two rows, the red list's new
   row, the line's push, CI by name. THE SECOND WAVE of the survey after the first wave's "TIP?"s.
+
+## V28 (04:00 UTC on 2026-11-28): RENAME-MEASURE DONE (6f32e6ca0; filed: `rename/`); **E26: POINT 124, "A RENAME KEEPS THE PAGE", RULED FOR THIS RELEASE**; THE READER's EARLY NOTE: TWO VEIL FACTS (A20 to the lane; A21 cured in point 122 by ruling 122-T-5, in work)
+- RENAME-MEASURE (on cccda7569; 33 view-time picks, 30 print; 24 keyed on a NAME): a town's rename re-deals 300 of 300 pages
+  (Daily Life every time); a person's 39 and 36; a house's 298 and 279 and a power's 179 and 175 (THE NAME IS READ AS THE
+  KIND); an imported copy re-deals 10 of 10 (`_seed` is dropped by the JSON import, the share and the gallery import; `id`
+  survives every road; houses and powers have none); after a town's rename the OLD NAME STILL PRINTS on 300 and 295 of 300
+  (stored sentences). ITS CURE, TRIED IN A SCRATCH COPY: the town-name sites keyed on the town's `id`, the people headline
+  on the person's `id`: every page moves ONCE (900 of 900 in both corpora; 28,031 and 28,670 lines), then no rename moves a pick.
+- **E26:** built before the release (after it, a second move for every saved town). Brief `prompts/START-RENAME-BUILD.txt`:
+  K1 the keys stand on the id (measure first: is the id minted at birth and stable through the first save; the `_seed`
+  sites re-keyed in the same move if every page moves anyway); K2 the rename cascades over the stored sentences (whole-word,
+  hazards measured first); K3 a power's kind does not hang on its name (MEASURE AND PROPOSE ONLY: it touches the veil's
+  ground); K4 the person's rename confirmed 0. An independent reader before it lands. THE SEAT IS STARTED WHEN THE JOINED TIP
+  HOLDS RULING 122-T-5's CURE.
+- READER 122-123's EARLY NOTE (03:46 UTC; by execution on C; both facts are the same on the base, both need a DM-made house):
+  A20 (`galleryVeil.js :: applyVeil` leaves on the served page a house whose hideable class is carried only by a function-eye
+  field: recorded in `veil/RULING-V30.md` for the lane) and A21 (`genesis.js :: fieldRiteRefused` read the full roster: **RULING
+  122-T-5:** it reads the floor: a local Opus seat is building it on the line's local tree, above d8d05d4cc). WHAT THE NOTE
+  CONFIRMS OF 122-T AT 777733a2a: 122,272 addresses hidden one at a time on 240 births: the reader's rows moved 0; rows
+  dropped at view 261 to 0; short of the band 154 to 0; showing none 57 to 0; 0.9.0 and stampless equal to the base 900 of 900.
