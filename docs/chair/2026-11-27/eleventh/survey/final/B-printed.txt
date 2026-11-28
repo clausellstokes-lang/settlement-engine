@@ -1,0 +1,61 @@
+362	362	362	362	0	safety purse :: Hired swords back the garrison.
+		views: {"Systems/Defense":362}
+		instead 362: "Hired swords back the garrison when the purse allows."
+		ex C:dp-city-1 (rung comfortable) "Hired swords back the garrison." -> "Hired swords back the garrison when the purse allows."
+		ex C:dp-city-2 (rung comfortable) "Hired swords back the garrison." -> "Hired swords back the garrison when the purse allows."
+40	40	40	40	0	safety purse :: The adventurers' charter hall takes bounty work against thre
+		views: {"Systems/Defense":40}
+		instead 24: "The adventurers' charter hall takes bounty work against threats, as far as the purse runs."
+		instead 16: "The adventurers' charter hall coordinates emergency response to threats."
+		ex C:dp-hamlet-2 (rung comfortable) "The adventurers' charter hall takes bounty work against threats, but t" -> "The adventurers' charter hall takes bounty work against threats, as far as the purse runs."
+		ex C:dp-hamlet-3 (rung comfortable) "The adventurers' charter hall takes bounty work against threats, but t" -> "The adventurers' charter hall takes bounty work against threats, as far as the purse runs."
+27	26	26	26	0	institution desc :: no terrain: forest :: Charcoal burner
+		views: {"Systems/Institutions":26}
+		instead 8: "Kiln crews in the surrounding woodland supply charcoal to the smelters, smiths, and bakers. Metalworking here burns through a fore"
+		instead 8: "Crews tend kilns out in the woods and sell charcoal to smelters, smiths, and bakers. The metal trades here use up a forest a gener"
+		instead 11: "Charcoal from woodland kilns feeds the smelters, the smithies, and the bake ovens. At this pace of metalwork, a forest lasts a gen"
+		ex V:dp-hamlet-12 (rung prosperous) "Turf-covered kilns for burning wood slowly down to charcoal whenever w" -> "Kiln crews in the surrounding woodland supply charcoal to the smelters, smiths, and bakers. Metalworking here burns through a fore"
+		ex V:dp-village-121 (rung wealthy) "Charcoal kilns, tended day and night while a burn lasts, whenever wood" -> "Crews tend kilns out in the woods and sell charcoal to smelters, smiths, and bakers. The metal trades here use up a forest a gener"
+20	16	16	16	0	institution desc :: no institution: docks :: Customs house
+		views: {"Systems/Institutions":16}
+		instead 8: "Levies charged on all trade in and out by road or harbour, collected by officials of crown or town."
+		instead 8: "Levies duties on goods entering and leaving via the port or main roads. Run by royal or municipal officials."
+		instead 4: "Duties are taken here on goods passing through the port or the main roads. Royal or municipal officers run it."
+		ex V:dp-metropolis-4 (rung comfortable) "Levies charged on all trade in and out by road, collected by officials" -> "Levies charged on all trade in and out by road or harbour, collected by officials of crown or town."
+		ex V:dp-metropolis-19 (rung comfortable) "Levies charged on all trade in and out by road, collected by officials" -> "Levies charged on all trade in and out by road or harbour, collected by officials of crown or town."
+8	2	0	2	0	history event hook (guild_conflict) :: guild
+		views: {"Summary/Plot Hooks":2}
+		instead 8: (a pool: next admitted by the door)
+		ex C:dp-hamlet-26 (rung moderate) "Someone is sabotaging both guilds to destabilize the market for a thir" -> (a pool: next admitted by the door)
+		ex V:dp-hamlet-106 (rung prosperous) "A journeyman denied mastership has proof the exam was rigged" -> (a pool: next admitted by the door)
+4	4	0	4	0	stressTypes:STRESS_TYPE_SIBLINGS :: institution: temple
+		views: {"Summary/Crisis":4}
+		instead 4: nothing
+		ex C:dp-thorp-147 (rung moderate) "The contested religious authority has left a gap in the institutions t" -> nothing
+		ex C:dp-hamlet-58 (rung moderate) "The contested religious authority has left a gap in the institutions t" -> nothing
+4	4	4	4	0	institution desc :: no crisis: under_siege :: Toll bridge
+		views: {"Systems/Institutions":4}
+		instead 2: "A bridge with a toll house upon it. The keeper takes the passage fees and sees to simple upkeep, though no one has crossed since t"
+		instead 2: "A bridge with a toll house. The keeper collects passage fees and performs basic maintenance. With the roads held, no one crosses a"
+		ex C:dp-town-36 (rung struggling) "A bridge with a toll house upon it. The keeper takes the passage fees " -> "A bridge with a toll house upon it. The keeper takes the passage fees and sees to simple upkeep, though no one has crossed since t"
+		ex C:dp-city-53 (rung struggling) "A bridge with a toll house. The keeper collects passage fees and perfo" -> "A bridge with a toll house. The keeper collects passage fees and performs basic maintenance. With the roads held, no one crosses a"
+3	1	1	3	0	historyData:HISTORY_DESC_SIBLINGS :: guild
+		views: {"World/History":1}
+		instead 1: "After years of disputed grain prices, the major farming families agreed a formal compact regulating grain sale and storage. It hel"
+		instead 2: "The quarrymen's families retain unusual civic influence"
+		ex V:dp-hamlet-84 (rung moderate) "After years of disputed grain prices, the major farming families and t" -> "After years of disputed grain prices, the major farming families agreed a formal compact regulating grain sale and storage. It hel"
+2	0	0	0	0	institution desc :: no crisis: under_siege :: Annual fair
+		views: {}
+		instead 2: "A yearly gathering of the region's merchants, cut off while the siege holds the roads."
+2	0	0	0	0	institution desc :: no crisis: under_siege :: Burial grounds and charnel house
+		views: {}
+		instead 2: "The old grounds filled generations ago, so the dead are lifted once their term is up and their bones stacked in the charnel house "
+1	1	0	1	1	npcData:NPC_FACTION_LOYALTY :: population: ≥ middling
+		views: {"Summary/Plot Hooks":1}
+		instead 1: (a pool: next admitted by the door)
+		ex V:dp-town-107 (rung prosperous) "Three guards have gone missing in the same district on night patrol. T" -> (a pool: next admitted by the door)
+1	1	0	1	0	npcData:NPC_FACTION_LOYALTY :: no route: isolated
+		views: {"Summary/Plot Hooks":1}
+		instead 1: (a pool: next admitted by the door)
+		ex V:dp-metropolis-127 (rung comfortable) "A shipment they weren't expecting arrived and is now in their warehous" -> (a pool: next admitted by the door)
+pages printing a refused stored line: owner 441 share 434
