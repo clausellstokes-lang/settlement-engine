@@ -1,0 +1,7 @@
+id	temper	old words	proposed words	why	classes (proposed, classesOf at the voices branch)
+SAID.inst.any-crisisunmarked.3	cautious	Nobody knows what the {crisisNoun} will bring next.	The {crisisNoun} could still get worse.	the pool's guarded versions open on the hint 3 times in 8 (cap 2: a third); the same worry, said without the formula	none; 6 words
+SAID.inst.any-crisismarked.1	cautious	Nobody knows how long the {crisisNoun} will keep things shut.	The {crisisNoun} could keep things shut for a long while yet.	2 hints in 5 (cap 1); the same doubt about how long, without the opener	none; 11 words
+SAID.trad.offering.2	cautious	Some give much less than they could, people say.	A few give much less than they could afford.	2 hints in 5 (cap 1); this one carries the hint twice (opens "Some", ends "people say")	none; 9 words
+SAID.trad.any-crisis.3	cautious	Some may stay away this year, worried about the {crisisNoun}.	Fear of the {crisisNoun} may keep people away this year.	2 hints in 5 (cap 1); the same thought, its subject moved to the fear	none; 10 words
+SAID.person.powerface.2	cautious	Some people talk differently once they know who we answer to.	People talk differently once they know who we answer to.	2 hints in 5 (cap 1); only the opening "Some" is taken out	none; 10 words
+LIE.office.hall.4	cautious	Nobody important has ever had a ruling bent for them here.	Rulings here have never been bent for anyone important.	2 hints in 5 (cap 1); the same false claim, turned round	none; 9 words
