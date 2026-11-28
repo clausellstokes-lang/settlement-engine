@@ -656,7 +656,7 @@ See section 4, newest last.
   (8e810d384). TRAD-MEASURE DONE (cab2b5788; filed: `trad/`; ruling 122-T, E22; R14 closed as the measure's own fault).
 - POINT 122 IS NOW: cures A, cures B (B1 to B3), the traditions draw (122-T). POINT 123: C1, C2, C3 (B4). D1 is the lane's.
 
-## V25 (02:05 UTC on 2026-11-28): **POINT 121 LANDED: THE LINE IS aef8f9962** (pushed 01:39 UTC); THE SURVEY's TWO MEASURES IN AND ITS DESIGN WRITTEN (`SURVEY-DESIGN.md`: ABOUT 80 SEAT-HOURS); THE VEIL LANE PAUSED; POINT 122's JOIN STARTED
+## V25 (01:50 UTC on 2026-11-28): **POINT 121 LANDED: THE LINE IS aef8f9962** (pushed 01:39 UTC); THE SURVEY's TWO MEASURES IN AND ITS DESIGN WRITTEN (`SURVEY-DESIGN.md`: ABOUT 80 SEAT-HOURS); THE VEIL LANE PAUSED; POINT 122's JOIN STARTED
 - **POINT 121:** the row and the gate paragraph are in `docs/chair/2026-11-17/sixth/LANDINGS-SIXTH.md` at aef8f9962; the
   landing itself is 1b2d534da0; `LINE-NOW.md` brought to it. THE TEST COUNT WAS SETTLED BY NAME (`vitest list` on
   `/home/user/wt/base120` at 682667fe2 and on the tip): outside tests/build 43,260 names to 43,292; six titles re-worded,
@@ -696,7 +696,7 @@ See section 4, newest last.
   the 0.9.0 and stampless draws identical on 1,800 of 1,800; the floor proved a floor under every veil address; the security
   file 58 of 58. TO WATCH AT THE JOIN: `genesis.js` now reaches `traditionDescription.js` through the floor helper (sizes).
 - **R-CURES-B: ACCEPTED at 1b0241706 (point 122); B4 at 855ff1bed on `lane/stack-123-b4-wip-2026-11-27` with ONE COMMIT
-  OWED (ruling 123-C3-1: `faultsRows.test.js` FR3's seed table re-pointed, 5 of 15 rows).** R-BIRTH: asked at 02:03 UTC for
+  OWED (ruling 123-C3-1: `faultsRows.test.js` FR3's seed table re-pointed, 5 of 15 rows).** R-BIRTH: asked at 01:47 UTC for
   its report of C2 (its branch at 1e8576d08 since 23:02 UTC).
 - **POINT 122's JOIN: LAND-122** (a local Opus helper; `prompts/START-LAND-122.txt`): on aef8f9962, three merges (cures A
   e096d4a96, cures B 1b0241706, the traditions draw f1ccc5bda), the doors, the local gate, the sizes. THEN: the chair pushes
