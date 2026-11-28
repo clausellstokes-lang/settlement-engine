@@ -9,7 +9,12 @@
  * title (type label when unnamed) and the description always reads in full.
  */
 
-import { describe, it, expect, afterEach } from 'vitest';
+import { describe, it, expect, afterEach, beforeAll } from 'vitest';
+import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
+import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { foodStoresWords } from '../../src/domain/summary/tonightSheet.js';
+import { criticalImportRow } from '../../src/domain/display/stateProse/economyStateProse.js';
 import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 import { HistoryTab } from '../../src/components/new/tabs/HistoryTab.jsx';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
@@ -302,5 +307,35 @@ describe('HistoryTab — the scarcity tension names the good the record holds sh
   it('where the record names no short good, the stored words print as they are', () => {
     render(<HistoryTab settlement={townWith(PAST, null)} />);
     expect(screen.getByText(PAST)).toBeTruthy();
+  });
+  // RULING 122-A-2 (the independent reader, by rendering): in eleven towns of V the named good was grain while the same page's
+  // stores line (`summary/tonightSheet.js :: foodStoresWords`) printed a full granary of grain. Where that reader reports a store
+  // of the named good the stored, unnamed sentence prints; a good it does not store (C dp-town-4's grapes, beside a granary of
+  // grain) is still named. Births as the corpora bear them (rmeasure/tools: `birthConfig(row.config)`, `{ seed, customContent: {} }`).
+  describe('a birth: the good is not named where the page\'s own stores hold it', () => {
+    beforeAll(async () => { await loadGenerationLawPayloads(); });
+    const bear = (/** @type {any} */ config, /** @type {string} */ seed) => generateSettlementPipeline(birthConfig(config), null, { seed, customContent: {} });
+    const scarcityOf = (/** @type {any} */ town) => town.history.currentTensions.find((/** @type {any} */ t) => t.type === 'resource_scarcity');
+    it('V dp-city-21 (granary, about nine months of grain; the short good grain): the stored sentence prints, grain is not named', () => {
+      const town = bear({ ...DEFAULT_CONFIG, settType: 'city', _randomizePriorities: true }, 'dp-city-21');
+      expect(foodStoresWords(town.economicState.foodSecurity.foodRecord)).toBe('Stores: a granary, about nine months of grain.');
+      expect(criticalImportRow(town.resourceAnalysis.imports)?.good).toBe('grain');
+      expect(scarcityOf(town).description).toBe(LIVE);
+      render(<HistoryTab settlement={town} />);
+      expect(screen.getByText(LIVE)).toBeTruthy();
+      expectAbsentWithAnchor(document.body.textContent || '', 'A critical resource, grain,', LIVE, 'a good the stores hold is not named');
+      expect(scarcityOf(town).description).toBe(LIVE);
+    });
+    it('C dp-town-4 (granary of grain; the short good grapes): the good is still named', () => {
+      const town = bear({ settType: 'town' }, 'dp-town-4');
+      expect(foodStoresWords(town.economicState.foodSecurity.foodRecord)).toBe('Stores: a granary, about six months of grain.');
+      expect(criticalImportRow(town.resourceAnalysis.imports)?.good).toBe('grapes');
+      const stored = scarcityOf(town).description;
+      expect([PAST, LIVE]).toContain(stored);
+      render(<HistoryTab settlement={town} />);
+      const named = `A critical resource, grapes, ${stored.slice('A critical resource '.length)}`;
+      expect(screen.getByText(named)).toBeTruthy();
+      expectAbsentWithAnchor(document.body.textContent || '', stored, named, 'a good the stores do not hold is named');
+    });
   });
 });
