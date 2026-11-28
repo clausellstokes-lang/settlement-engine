@@ -85,7 +85,7 @@ describe('the said lines (the first load, 197 lines, and the second writers\' 65
       for (const x of a.card || []) expect(at(k).card, k).toContain(x);
     }
     expect(Object.keys(CHANGED_WORDS).length).toBe(10 + 24); // and the second writers' old re-wordings, A 18 and B 6 (G1-8)
-    expect(Object.keys(CLASS_ANSWERS).length).toBe(9 + 9); // and B's card words on nine more old inn versions (G1-8)
+    expect(Object.keys(CLASS_ANSWERS).length).toBe(9 + 9 + 3); // and B's card words on nine more old inn versions (G1-8), and any-short.2's three (14:11)
   });
 
   it('carries every hand-read cell of the second files onto the versions it names (CELL_READING, G1-9)', () => {
@@ -106,6 +106,13 @@ describe('the said lines (the first load, 197 lines, and the second writers\' 65
       }
     }
     expect(Object.keys(CELL_READING).length).toBe(25);
+  });
+
+  it('gives SAID.inst.any-short.2\'s delivery and buying versions the negated card word (the chair\'s 14:11 ruling, inside G1-9)', () => {
+    const v = said.find(({ row }) => row.id === 'SAID.inst.any-short.2').row.versions;
+    // W "until the {good} comes" and D "Waiting on {good}." wait on a delivery; C "going elsewhere, for a better price" is buying
+    for (const t of ['welcoming', 'cautious', 'dismissive']) expect(v[t].cardNot, t).toEqual(['digs or grows its own']);
+    expect(v.transactional.cardNot, 'T names no delivery: "Without {good}, the work is worse and sells for less."').toBeUndefined();
   });
 
   it('reads the writer\'s needs cell: a word, its gloss, and the tempers that need it', () => {

@@ -140,7 +140,7 @@ export const CHANGED_WORDS = Object.freeze(/** @type {Record<string, { from: str
  * (`domain/voices/cardWords.js`). Keyed `<line id> <temper | inTruth>`; an `inTruth` answer is the LINE's (its note
  * prints with every version).
  */
-export const CLASS_ANSWERS = Object.freeze(/** @type {Record<string, { needs?: string[], excludes?: string[], card?: string[] }>} */ ({
+export const CLASS_ANSWERS = Object.freeze(/** @type {Record<string, { needs?: string[], excludes?: string[], card?: string[], cardNot?: string[] }>} */ ({
   // drink in plenty, a material fact: the hunger family (famine, under_siege) shut out
   'SAID.trad.feast.2 transactional': { excludes: ['crisis: hunger'] },
   // a healer's herbs and clean cloths: a healer, an apothecary or a hospital (never an almshouse)
@@ -163,6 +163,11 @@ export const CLASS_ANSWERS = Object.freeze(/** @type {Record<string, { needs?: s
   'SAID.inst.inn-ordinary.3 transactional': { card: ['food and drink'] },
   'SAID.inst.inn-ordinary.4 transactional': { card: ['lodging'] },
   'SAID.inst.inn-ordinary.5 welcoming': { card: ['company'] },
+  // B's note, ruled by the chair at 14:11 UTC (inside G1-9): the versions that wait on a delivery or buy the good take the
+  // same negated house word as any-short.4 and .8: a house that digs or grows its own is never short of a delivery
+  'SAID.inst.any-short.2 welcoming': { cardNot: ['digs or grows its own'] }, // "…until the {good} comes."
+  'SAID.inst.any-short.2 cautious': { cardNot: ['digs or grows its own'] }, // "…going elsewhere, for a better price."
+  'SAID.inst.any-short.2 dismissive': { cardNot: ['digs or grows its own'] }, // "Waiting on {good}."
   // a lie about outside goods still needs goods to come in (G1-3 (2))
   'LIE.smuggling.4 welcoming': { needs: ['imports'] },
   'LIE.front.trade.2 welcoming': { needs: ['route open'] },
@@ -179,10 +184,10 @@ function changedText(id, where, text) {
   }
   return c.to;
 }
-/** @param {string} id @param {string} where @returns {{ needs: string[], excludes: string[], card: string[] }} */
+/** @param {string} id @param {string} where @returns {{ needs: string[], excludes: string[], card: string[], cardNot: string[] }} */
 function classAnswerOf(id, where) {
   const a = Object.hasOwn(CLASS_ANSWERS, `${id} ${where}`) ? CLASS_ANSWERS[`${id} ${where}`] : {};
-  return { needs: [...(a.needs || [])], excludes: [...(a.excludes || [])], card: [...(a.card || [])] };
+  return { needs: [...(a.needs || [])], excludes: [...(a.excludes || [])], card: [...(a.card || [])], cardNot: [...(a.cardNot || [])] };
 }
 
 /**
@@ -439,6 +444,7 @@ function saidLineOf(r, file) {
     for (const a of [...own.needs, ...ans.needs]) if (!vn.includes(a)) vn.push(a);
     const ve = [...own.excludes]; for (const a of [...per[tp].excludes, ...ans.excludes]) if (!ve.includes(a)) ve.push(a);
     for (const x of ans.card) add(per[tp].card, x);
+    for (const x of ans.cardNot) add(per[tp].cardNot, x);
     versions[tp] = { ...versionOf(texts[/** @type {'welcoming'} */ (tp)], vn, ve), ...(per[tp].crisis.length ? { crisis: per[tp].crisis } : {}),
       ...(per[tp].card.length ? { card: per[tp].card } : {}), ...(per[tp].cardNot.length ? { cardNot: per[tp].cardNot } : {}),
       ...(per[tp].power.length ? { power: per[tp].power } : {}), ...(per[tp].nowhere.length ? { ineligible: per[tp].nowhere } : {}) };

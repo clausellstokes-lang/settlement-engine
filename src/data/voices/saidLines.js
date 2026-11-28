@@ -130,10 +130,10 @@ export const SAID_LINES = deepFreeze({
       } },
     { id: 'SAID.inst.any-short.2', speaker: ['keeper', 'works-there'], slots: ['good'],
       versions: {
-        welcoming: { text: 'The others help out where they can, until the {good} comes.' },
+        welcoming: { text: 'The others help out where they can, until the {good} comes.', cardNot: ['digs or grows its own'] },
         transactional: { text: 'Without {good}, the work is worse and sells for less.' },
-        cautious: { text: 'Some say the {good} is going elsewhere, for a better price.' },
-        dismissive: { text: 'Waiting on {good}.' },
+        cautious: { text: 'Some say the {good} is going elsewhere, for a better price.', cardNot: ['digs or grows its own'] },
+        dismissive: { text: 'Waiting on {good}.', cardNot: ['digs or grows its own'] },
       } },
     { id: 'SAID.inst.any-short.3', speaker: ['keeper', 'works-there'], slots: ['good'],
       versions: {
