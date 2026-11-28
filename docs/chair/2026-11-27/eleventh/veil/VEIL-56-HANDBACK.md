@@ -126,3 +126,7 @@ THE NEXT COMMAND: read each child's first report as it lands; relay the chair's 
   PG's QUEUE AT "GO PG": the interval test built red first; (B) as ruled; the three guards; the Defense sentence from an absent crime list
   measured on default-veil pages; the totality arm.
 - 2026-11-28T00:04:29Z: RULING V33 taken; "GO PG" sent with the build's five steps (interval test; three guards and the Defense sentence measured on default-veil pages; provenance with the re-save check first; the totality arm; the standing arm of twelve). THREE SEATS NOW BUILD (U3R, U45, PG) by the chair's word; MC stopping after its state note.
+- 2026-11-28T00:06:48Z: U3R's A3 (THE DRIFT PLANT), A SURPRISE (CONFIRMED by it on unit 3 as built): a covert tie DELETED from the live row leaves
+  its copy in `prominentRelationship`, served at Reveal off at EVERY door, THE LINK AND LIVE MODE included (7 of 69 at gallery / import / map
+  / link). The orphan rule on every public read (already built at 5ab9caeb7) is what closes it: A CURE AT THE LINK now, not a listed change.
+  Told the chair (no ruling asked). Asked of U3R for its table: the renamed-end case, the sentence under drift at the link, one line on reach.
