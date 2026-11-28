@@ -29,6 +29,20 @@
    and too much. Be more organic. It should be the person saying something I. Passing not as though they are being
    interrogated" [the chair reads "something I. Passing" as "something in passing"]
 
+8. (about 03:00 UTC on 2026-11-28, on the chair's four re-done lines: "The young ones eat first here. Nobody had to be told." /
+   "A share given to a child costs less than watching one go without." / "Everyone says they've eaten already. Nobody asks
+   twice." / "Eaten already. So they all say.") "Also make the language more plainer overall: Make it more readable and easily
+   interpretable by an average person: […] What do you think? Also some secondary sentences are unnecessary."
+
+## PLAIN WORDS, ONE SENTENCE (his eighth message; the chair's ruling L-3 to the writer, said back to him)
+- EVERYDAY WORDS (nothing a twelve-year-old would stumble on); no proverb, no turned phrase, no irony to decode; THE MEANING
+  LANDS ON FIRST READ. ONE SHORT SENTENCE (4 to 12 words) is the norm; a second ONLY where it adds a new fact.
+- THE FOUR TEMPERS STAY, their difference small and plain. THE EXAMPLE NOW: "The children eat first here." / "We feed the
+  children first, even when it leaves us short." / "People say they've already eaten. Mostly they haven't." / "Children eat
+  first. That's all."
+- THE CHAIR's READING, SAID TO HIM: this is the rule for EVERY QUOTE. THE SURVEYOR's OWN PROSE IS NOT REWRITTEN in this release
+  (the design's section 3); if he means his pages too, it is sized separately.
+
 ## A QUOTE IS A PASSING REMARK, NOT AN ANSWER (his seventh message; the chair's ruling L-2 to the writer, said back to him)
 - THE CHAIR HAD ACCEPTED AN INTERVIEW REGISTER (its ruling L-1): WITHDRAWN IN THAT PART. A quote is a remark made in passing
   that the surveyor happened to hear: to a neighbour, to nobody, under the breath. Nobody is being asked anything.
