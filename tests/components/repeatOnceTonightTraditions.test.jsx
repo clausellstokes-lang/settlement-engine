@@ -66,13 +66,16 @@ describe('F2: a sentence printed once per tab', () => {
     expect(text).toContain(`Wants the same as ${first.name}.`);
   });
 
-  it('soak1k-48: the Traditions tab prints "Kept in Seedtime, the eleventh and twelfth weeks." once, and the second tradition names the first', async () => {
+  // RE-KEYED BY IDENTITY (point 124 K1b, RULING K1b-1 (c)): at 0.10.0 the founding draw keys on the town's id, and soak1k-48
+  // holds two traditions in one window no longer (one rite, a one-week window). soak1k-53 is the first soak seed from 0 with the
+  // same shape (probed): one later tradition, in a window of two weeks, whose first's own line prints once. Every expect kept.
+  it('soak1k-53: the Traditions tab prints "Kept in Highsun, the sixth and seventh weeks." once, and the second tradition names the first', async () => {
     await ensureLaws();
-    const s = normalizeSettlement(birth(48).settlement);
+    const s = normalizeSettlement(birth(53).settlement);
     const { container } = render(<TraditionsTab settlement={s} />);
     const text = container.textContent || '';
-    expect(countOf(text, 'Kept in Seedtime, the eleventh and twelfth weeks.')).toBe(1);
-    expect(text).toContain('Kept in the same weeks as The Common Procession.');
-    expect(text).toContain('The Old Greening Contest');
+    expect(countOf(text, 'Kept in Highsun, the sixth and seventh weeks.')).toBe(1);
+    expect(text).toContain('Kept in the same weeks as The Long Contest.');
+    expect(text).toContain('The Procession of the Market');
   });
 });

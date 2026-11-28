@@ -836,7 +836,14 @@ describe('ONE TOWN, NO SENTENCE TWICE (TRAD-4 unit 10; the chair, reading the ow
   const EIGHT = [['Ravenvich', 'city', 'slavic', 'trad-f-city-slavic'], ['Pianoripa', 'metropolis', 'latin', 'trad-c-metropolis-latin'],
     ['Castelcolonia', 'metropolis', 'latin', 'trad-f-metropolis-latin'], ['Ardthwaite', 'metropolis', 'celtic', 'trad-b-metropolis-celtic'],
     ['Jabalabad', 'metropolis', 'arabic', 'trad-a-metropolis-arabic'], ['Zhongmen', 'metropolis', 'east_asian', 'trad-c-metropolis-east_asian'],
-    ['Bhagapuram', 'metropolis', 'south_asian', 'trad-d-metropolis-south_asian'], ['Collevetum', 'metropolis', 'mediterranean', 'trad-c-metropolis-mediterranean']];
+    ['Bhagapuram', 'metropolis', 'south_asian', 'trad-d-metropolis-south_asian'], ['Collevetum', 'metropolis', 'mediterranean', 'trad-c-metropolis-mediterranean'],
+    // RE-KEYED BY IDENTITY (point 124 K1b, RULING K1b-1 (c)): at 0.10.0 the founding draw keys on the town's id, and none of the
+    // eight above runs out its keeper any more (a "too" wording printed: 0 of 8). The towns of the same pool (its cities and
+    // metropolises, 144, as the eight were) whose keeper runs out under the id key are these five (probed: each prints one, and
+    // none breaks the law). They stand beside the eight; no case is dropped.
+    ['Ingiby', 'metropolis', 'norse', 'trad-a-metropolis-norse'], ['Xiaji', 'metropolis', 'east_asian', 'trad-e-metropolis-east_asian'],
+    ['Ögedeiserai', 'metropolis', 'steppe', 'trad-d-metropolis-steppe'], ['Kallichori', 'metropolis', 'greek', 'trad-d-metropolis-greek'],
+    ['Pratosinum', 'metropolis', 'mediterranean', 'trad-b-metropolis-mediterranean']];
   const eightBorn = new Map();
   const bornEight = ([, settType, culture, seed]) => { if (!eightBorn.has(seed)) eightBorn.set(seed, bornAt(settType, culture, seed)); return eightBorn.get(seed); };
 

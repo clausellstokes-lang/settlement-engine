@@ -137,11 +137,42 @@ describe('CTR9: the owner\'s set and the reader\'s descriptions travel as text',
     expect(rows.some((r) => r.text)).toBe(true);
   });
 
-  it('the party link serves those rows byte for byte, and they are the owner\'s set, not one derived from id', () => {
+  // RULING K1b-1 (a), as ruling 122-T-3 did at point 122: this case is KEPT VERBATIM over the record as an earlier engine bore it
+  // (re-stamped 0.9.0) and over a stampless one: there the founding draw's old chain still runs (`_seed ?? id ?? ...`), the
+  // seed never travels, and the derivation from the served record still differs. Its 0.10.0 TWIN follows.
+  for (const [form, restamp] of /** @type {Array<[string, (r: any) => any]>} */ ([['0.9.0', (r) => ({ ...r, generatorVersion: '0.9.0' })], ['stampless', ({ generatorVersion: _v, ...r }) => r]])) {
+    const old = restamp(t);
+    const savedOld = withPublicProse(old, composePublicProse(old));
+    it(`the party link serves those rows byte for byte, and they are the owner's set, not one derived from id (${form}: the old draw)`, () => {
+      const served = partyLink(savedOld);
+      expect(publicProseOf(served, 'traditions')).toEqual(savedOld.publicProse.blocks.traditions);
+      // the derivation the shared page used to make: a different set (the seed never travels)
+      expect(deriveFoundingTraditions(served).map((r) => r.name)).not.toEqual(savedOld.publicProse.blocks.traditions.map((r) => r.name));
+    });
+  }
+
+  // THE 0.10.0 TWIN (RULING K1b-1 (a)): born at 0.10.0, the founding draw keys on the town's id (point 124 K1b), which every
+  // served document keeps, so the derivation from the served record is now the OWNER's set, under every veil state the file
+  // plants: the party link's default veil, every address hidden whole, the function eye (veil-22's added eyes) and each class
+  // alone. It is equal because the key survives and the draw asks only the FLOOR for its facts (ruling 122-T-2: no veil state
+  // moves the drawn set), not because the floor removes what the veil removes.
+  it('0.10.0 TWIN: the party link serves those rows byte for byte, and the derivation from the served record IS the owner\'s set, under every veil', () => {
+    expect(t.generatorVersion).toBe('0.10.0');
+    const owner = deriveFoundingTraditions(t).map((r) => r.name);
+    expect(owner.length).toBeGreaterThan(0);
     const served = partyLink(saved);
     expect(publicProseOf(served, 'traditions')).toEqual(saved.publicProse.blocks.traditions);
-    // the derivation the shared page used to make: a different set (the seed never travels)
-    expect(deriveFoundingTraditions(served).map((r) => r.name)).not.toEqual(saved.publicProse.blocks.traditions.map((r) => r.name));
+    expect(deriveFoundingTraditions(served).map((r) => r.name)).toEqual(owner);
+    const pub = galleryPayloadFor(saved);
+    const all = [...new Set([...modelAddresses(pub), ...veil22Addresses(pub)])];
+    const eyes = veil22Addresses(pub).filter((a) => !modelAddresses(pub).includes(a));
+    const veils = /** @type {Array<[string, any]>} */ ([
+      ['hidden whole', resolveVeil(defaultVeilFor(pub), all.map((address) => ({ address, hidden: true })))],
+      ['the function eye', resolveVeil(null, eyes.map((address) => ({ address, hidden: true })))],
+      ...[...new Set(all.map(classOf))].map((cls) => [`class ${cls}`, resolveVeil(null, all.filter((a) => classOf(a) === cls).map((address) => ({ address, hidden: true })))]),
+    ]);
+    expect(eyes.length, 'the function eye is planted').toBeGreaterThan(0);
+    for (const [form, veil] of veils) expect(deriveFoundingTraditions(applyVeil(pub, veil)).map((r) => r.name), form).toEqual(owner);
   });
 
   it('every key under the drawn traditions is clear of the private-key denylist (the projection keeps them all)', () => {
@@ -592,7 +623,10 @@ describe('TRAD-3 UNIT 4, PLANT 2: a DM-authored house tagged market, the town\'s
 
 describe('TRAD-3 UNIT 4, PLANT 2 at 0.10.0 (RULING 122-T-3): the draw asks the floor, so the hidden tags reach no rite', () => {
   const HOUSE = { name: 'The Lantern Exchange', category: 'Economy', tags: ['market'] };
-  const SPECS = [['town', 'latin', 'trad-plant2-town-latin-0'], ['village', 'arabic', 'trad-plant2-village-arabic-0']];
+  // RE-KEYED BY IDENTITY (point 124 K1b, RULING K1b-1 (b)): the 0.10.0 draw keys on the town's id, and trad-plant2-town-latin-0
+  // (Altapolis) and trad-plant2-village-arabic-0 no longer draw a market rite over a catalogue market (the CONTROL); the first
+  // seed of each series from 0 that meets every arm of this block is -1 (probed). The 0.9.0 form above keeps the -0 towns.
+  const SPECS = [['town', 'latin', 'trad-plant2-town-latin-1'], ['village', 'arabic', 'trad-plant2-village-arabic-1']];
   const plantWith = (house) => SPECS.map(([tier, culture, seed]) => {
     const t = born(tier, culture, seed);
     return { ...t, institutions: [...t.institutions.filter((i) => !isMarketInstitution(i)), { ...house }] };
@@ -685,7 +719,12 @@ describe('TRAD-3 UNIT 4, THE DEAD\'S CAUSE (the chair\'s item 3): the reader nam
   // (Qal'atqala) holds no rite of the dead. By the rule above, the first seed of its series from 0 that meets both blocks'
   // predicates (a rite of the dead, a graded event, a hideable house, every plant reaching the owner, the granary CONTROL
   // recalled) is trad-dead-city-arabic-0 (Khanqila), which holds a rite of the dead again. Every assertion stands word for word.
-  const SPECS = [['city', 'arabic', 'trad-dead-city-arabic-0'], ['city', 'latin', 'trad-dead-city-latin-4'], ['metropolis', 'latin', 'trad-dead-metropolis-latin-0']];
+  // RE-KEYED BY IDENTITY (point 124 K1b, RULING K1b-1 (b)): the founding draw keys on the town's id at 0.10.0, and none of the
+  // three meets these blocks' predicates any more. By the same rule, the first seed of each series from 0 that meets BOTH
+  // blocks' predicates (probed): arabic-0 -> arabic-2 (2 born causes), latin-4 -> latin-6 (1), metropolis-latin-0 ->
+  // metropolis-latin-2 (it holds a granary, so in UNIT 7 (1) it is no control, as trad-f-town-germanic is not). Every
+  // assertion stands word for word.
+  const SPECS = [['city', 'arabic', 'trad-dead-city-arabic-2'], ['city', 'latin', 'trad-dead-city-latin-6'], ['metropolis', 'latin', 'trad-dead-metropolis-latin-2']];
   const DEAD = ['great_fire', 'great_flood', 'plague_years', 'external_threat'];
   const graded = (e) => DEAD.includes(e.templateType) && ['major', 'catastrophic'].includes(e.severity);
   const towns = SPECS.map(([tier, culture, seed]) => {
@@ -747,7 +786,9 @@ describe('TRAD-3 UNIT 4, THE DRAWN ROWS ARE NUMBERED DENSE (the chair\'s item 5)
   // a lit mirror whose MIDDLE rite is the market fair (admitted by the DM-authored house's own tags on the owner's set,
   // dropped by the floor on the drawn set) and whose last rite stands either way.
   const b = born('town', 'latin', 'trad-plant2-town-latin-0');
-  const [first, market] = deriveFoundingTraditions(b).filter((r) => ['first-landing', 'market'].includes(r.coreMotif.element));
+  // POINT 124 K1b (RULING K1b-1 (b)): the lit mirror is one minted BEFORE the founding draw keyed on the town's id (a stored
+  // set, which K1b never re-derives), so its rites are the ones the old draw deals: read off the record as an earlier engine bore it
+  const [first, market] = deriveFoundingTraditions(oldDraw(b)).filter((r) => ['first-landing', 'market'].includes(r.coreMotif.element));
   const harvest = { ...market, id: market.id.replace(/\.\d+$/, '.2'), name: 'The Harvest Feast', coreMotif: { element: 'harvest', act: 'feast' } };
   const HOUSE = { name: 'The Lantern Exchange', category: 'Economy', tags: ['market'] };
   const t = { ...b, institutions: [...b.institutions.filter((i) => !isMarketInstitution(i)), HOUSE], traditions: [first, market, harvest] };
@@ -814,7 +855,10 @@ describe('TRAD-3 UNIT 4b, THE FLOOR EXCLUDES THE HIDEABLE CLASS (the chair\'s ru
 
 describe('TRAD-3 UNIT 4b at 0.10.0 (RULING 122-T-3): the draw asks the floor, so the hideable house reaches no rite', () => {
   const HOUSE = { name: 'Weekly market', category: 'Criminal', priorityCategory: 'criminal' };
-  const b = born('town', 'latin', 'trad-plant2-town-latin-0');
+  // RE-KEYED BY IDENTITY (point 124 K1b, RULING K1b-1 (b)): under the id key trad-plant2-town-latin-0 draws no market rite over a
+  // catalogue market (the CONTROL); -1 is the first of its series from 0 that meets every arm of this block (probed). The 0.9.0
+  // form above keeps -0.
+  const b = born('town', 'latin', 'trad-plant2-town-latin-1');
   const plantWith = (house) => ({ ...b, institutions: [...b.institutions.filter((i) => !isMarketInstitution(i)), { ...house }] });
   const t = plantWith(HOUSE);
   const hidden = applyVeil(t, new Set([`card:institution:${CARD_KINDS.institution.idOf(HOUSE)}`]));
@@ -888,7 +932,10 @@ describe('RULING 122-T-5: the rite of the fields asks the FLOOR for its farmland
   const FARM = /\bfarmland\b|\bsubsistence farming\b/i; // facts/institutions.js :: INSTITUTION_KIND_PATTERNS.farmland
   const HOUSE = { name: 'Farmland', category: 'Criminal', priorityCategory: 'criminal' };
   const FIELDS = { name: 'Farmland', category: 'Economy' };
-  const TOWNS = [['village', 'latin', 'trad-farm-village-latin-26'], ['town', 'latin', 'trad-farm-town-latin-2'], ['city', 'latin', 'trad-farm-city-latin-4']]
+  // RE-KEYED BY IDENTITY (point 124 K1b, RULING K1b-1 (b)): under the id key none of village-26, town-2, city-4 draws the rite of
+  // the fields over a non-hideable farmland (the CONTROL, 3 of 3 red); the first seed of each series from 0 that meets every arm
+  // of this block (probed): village-0, town-34, city-1.
+  const TOWNS = [['village', 'latin', 'trad-farm-village-latin-0'], ['town', 'latin', 'trad-farm-town-latin-34'], ['city', 'latin', 'trad-farm-city-latin-1']]
     .map(([tier, culture, seed]) => [seed, born(tier, culture, seed)]);
   const SEEDS = TOWNS.map(([seed]) => seed);
   const BORN = new Map(TOWNS);
@@ -953,8 +1000,11 @@ describe('RULING 122-T-5: the rite of the fields asks the FLOOR for its farmland
 describe('TRAD-4 UNIT 7 (1): the dead\'s event named by a hidden house\'s bare form, a plural, a possessive, a three-letter name', () => {
   // RE-ANCHORED (CLOSE-7 BATCH, by cause): the two city seeds as in TRAD-3 UNIT 4 above (R24-B1(ii) left them no rite of the dead)
   // RE-KEYED BY IDENTITY (CLOSE-8 ANCHORS-5, 2026-11-26; cause R24-B1(i)): trad-dead-city-arabic-22 -> trad-dead-city-arabic-0, as above
-  const SPECS = [['town', 'germanic', 'trad-f-town-germanic'], ['town', 'greek', 'trad-c-town-greek'],
-    ['city', 'arabic', 'trad-dead-city-arabic-0'], ['city', 'latin', 'trad-dead-city-latin-4'], ['metropolis', 'latin', 'trad-dead-metropolis-latin-0']];
+  // RE-KEYED BY IDENTITY (point 124 K1b, RULING K1b-1 (b)): the three dead seeds as in TRAD-3 UNIT 4 above. trad-c-town-greek fails
+  // this block under the id key; trad-c-town-greek-27 is the first of its series from 0 that meets every arm. It holds a granary, so
+  // it is no control. No seed of the series to 400 is both (probed). trad-f-town-germanic is kept.
+  const SPECS = [['town', 'germanic', 'trad-f-town-germanic'], ['town', 'greek', 'trad-c-town-greek-27'],
+    ['city', 'arabic', 'trad-dead-city-arabic-2'], ['city', 'latin', 'trad-dead-city-latin-6'], ['metropolis', 'latin', 'trad-dead-metropolis-latin-2']];
   const bareOf = (name) => String(name).replace(/\s*\([^)]*\)\s*$/, '');
   /** The town with its first hideable house renamed and a graded great fire, two years ago, named `eventName`. */
   const plant = (t, houseName, eventName) => {
@@ -1039,8 +1089,11 @@ describe('TRAD-4 UNIT 7 (2): a DM-made power with no mapped category whose descr
     ['religious', { faction: 'The Lantern Circle', category: 'other', power: 99, description: 'A temple brotherhood of priests who keep the shrines.' }],
     ['merchantry', { faction: 'The Lantern Circle', category: 'other', power: 99, description: 'A merchant guild of caravan traders.' }],
   ];
+  // RE-KEYED BY IDENTITY (point 124 K1b, RULING K1b-1 (b)): under the id key none of the four towns moves the owner's keeper
+  // for either archetype (the CONTROL: 0 and 0 towns moved). trad-curate-town -> trad-curate-town-84, the first seed of its
+  // series from 0 where BOTH plants move the owner's keeper and the reader's texts stand (probed); the other three are kept.
   const towns = [['thorp', 'celtic', 'trad-curate-thorp'], ['hamlet', 'slavic', 'trad-curate-hamlet'], ['village', 'germanic', 'trad-curate-village'],
-    ['town', 'arabic', 'trad-curate-town']].map(([tier, culture, seed]) => born(tier, culture, seed));
+    ['town', 'arabic', 'trad-curate-town-84']].map(([tier, culture, seed]) => born(tier, culture, seed));
   const withPower = (t, power) => ({ ...t, powerStructure: { ...t.powerStructure, factions: [...(t.powerStructure?.factions || []), power] } });
   const noDescription = (power) => { const { description, ...rest } = power; return rest; };
   const rites = (t) => shownTraditionsOf(t, []).recs;

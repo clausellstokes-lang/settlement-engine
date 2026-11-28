@@ -62,13 +62,29 @@ describe('THE PUBLIC SEARCH reads only the rows the owner\'s save drew', () => {
     objects.forEach((o, i) => expect(o.text).toEqual([rows[i].chip, rows[i].text].filter(Boolean)));
   });
 
-  it('searching the name of a rite the id-derived set holds but the owner\'s set does not finds nothing', () => {
-    const derivedOnly = deriveFoundingTraditions(served).map((r) => r.name).filter((n) => !shownNames.has(n));
-    expect(derivedOnly.length).toBeGreaterThan(0); // the derivation the shared page must not make differs here
-    for (const name of derivedOnly) {
-      // anchored: the first arm above finds a served row by a word of its description on this same page
-      expect(traditionHits(searchDossier(served, name, { publicDossier: true })).map((o) => o.names[0]), name).toEqual([]);
-    }
+  // POINT 124 K1b (RULING K1b-1, as ruling 122-T-3 did): this arm is KEPT VERBATIM over the record as an earlier engine bore it
+  // (re-stamped 0.9.0) and over a stampless one, where the founding draw's old chain still runs and the id-derived set differs;
+  // its 0.10.0 TWIN follows (the id-derived set IS the owner's set, so there is no such rite).
+  for (const [form, restamp] of /** @type {Array<[string, (r: any) => any]>} */ ([['0.9.0', (r) => ({ ...r, generatorVersion: '0.9.0' })], ['stampless', ({ generatorVersion: _v, ...r }) => r]])) {
+    const old = restamp(t);
+    const servedOld = partyLink(withPublicProse(old, composePublicProse(old)));
+    const shownOld = new Set((publicProseOf(servedOld, 'traditions') || []).map((r) => r.name));
+    it(`searching the name of a rite the id-derived set holds but the owner's set does not finds nothing (${form}: the old draw)`, () => {
+      const derivedOnly = deriveFoundingTraditions(servedOld).map((r) => r.name).filter((n) => !shownOld.has(n));
+      expect(derivedOnly.length).toBeGreaterThan(0); // the derivation the shared page must not make differs here
+      for (const name of derivedOnly) {
+        // anchored: the first arm above finds a served row by a word of its description on this same page
+        expect(traditionHits(searchDossier(servedOld, name, { publicDossier: true })).map((o) => o.names[0]), name).toEqual([]);
+      }
+    });
+  }
+
+  it('0.10.0 TWIN: the id-derived set IS the owner\'s set, so no rite stands that the served rows do not print', () => {
+    expect(t.generatorVersion).toBe('0.10.0');
+    expect(deriveFoundingTraditions(served).map((r) => r.name)).toEqual(deriveFoundingTraditions(t).map((r) => r.name));
+    expect(deriveFoundingTraditions(served).map((r) => r.name).filter((n) => !shownNames.has(n)), 'no derived-only rite').toEqual([]);
+    // anchored: the served rows are the owner's set (the arm above), and every one of them is found by its own name
+    for (const r of rows) expect(traditionHits(searchDossier(served, r.name, { publicDossier: true })).map((o) => o.names[0]), r.name).toContain(r.name);
   });
 
   it('a shared page saved before the traditions were drawn indexes no tradition', () => {

@@ -729,7 +729,9 @@ const DESKTOP_BASELINE = Object.freeze({
   "World/Daily Life":    { measured: 8, sub14: 8 },
   "World/Rumors & News": { measured: 1, sub14: 1 }, // X-7a launch teaser (BUILD-T1 registers it always)
   "World/War":           { measured: 1, sub14: 1 }, // X-7a launch teaser, same
-  "World/Traditions":    { measured: 5, sub14: 5 },
+  // ── RE-MEASURED 2026-11-28 (point 124 K1b): World/Traditions measured/sub14 5 -> 7. CAUSE: the founding traditions key on the
+  // town's id (genesis.js, a 0.10.0 birth): this fixed seed's town founds another set, with two more rites; nothing else moved.
+  "World/Traditions":    { measured: 7, sub14: 7 },
   "World/History":       { measured: 18, sub14: 18 },
   "Notes/Chronicle":     { measured: 0, sub14: 0 }, // 1 -> 0: the empty-state pitch cut (BUILD-T3 U4)
 });
@@ -915,7 +917,8 @@ const MOBILE_BASELINE = Object.freeze({
   "World/Daily Life":    { prose: 8, chrome: 0, sub14: 0, sub12: 0 },
   "World/Rumors & News": { prose: 1, chrome: 0, sub14: 0, sub12: 0 },
   "World/War":           { prose: 1, chrome: 0, sub14: 0, sub12: 0 },
-  "World/Traditions":    { prose: 5, chrome: 0, sub14: 0, sub12: 0 },
+  // ── RE-MEASURED 2026-11-28 (point 124 K1b): World/Traditions prose 5 -> 7, sub14 and sub12 still 0. CAUSE: as DESKTOP_BASELINE's.
+  "World/Traditions":    { prose: 7, chrome: 0, sub14: 0, sub12: 0 },
   "World/History":       { prose: 16, chrome: 2, sub14: 2, sub12: 0 },
   "Notes/Chronicle":     { prose: 0, chrome: 0, sub14: 0, sub12: 0 }, // 1 -> 0: the pitch cut (BUILD-T3 U4)
 });

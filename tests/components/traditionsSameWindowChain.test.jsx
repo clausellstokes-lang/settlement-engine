@@ -45,12 +45,15 @@ describe('X-50: three traditions in one window print three different calendar li
       .toBe('Kept in the same week as The Common Offering.');
   });
 
-  it('soak1k-5441: the same over a two-week window', async () => {
+  // RE-KEYED BY IDENTITY (point 124 K1b, RULING K1b-1 (c)): at 0.10.0 the founding draw keys on the town's id, and soak1k-5441
+  // holds three in one window no longer. soak1k-3478 is the first soak seed from 0 that does (probed): three traditions in the
+  // two-week window of Seedtime's eighth and ninth weeks, two different "same weeks as" lines, each printed once. Every expect kept.
+  it('soak1k-3478: the same over a two-week window', async () => {
     await ensureLaws();
-    const s = normalizeSettlement(birth(5441).settlement);
+    const s = normalizeSettlement(birth(3478).settlement);
     const { container } = render(<TraditionsTab settlement={s} />);
     const text = container.textContent || '';
-    expect(countOf(text, 'Kept in the same weeks as The Old Procession.')).toBe(1);
-    expect(countOf(text, 'Kept in the same weeks as The Hearth Contest.')).toBe(1);
+    expect(countOf(text, 'Kept in the same weeks as The Founding Feast.')).toBe(1);
+    expect(countOf(text, 'Kept in the same weeks as The Greening Procession.')).toBe(1);
   });
 });
