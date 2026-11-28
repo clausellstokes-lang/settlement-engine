@@ -18,12 +18,12 @@
       "src/domain/display/stateProse/stressorsStateProseCandidates.js": "ee0548fc8b662da76e4bf85a1fae30433e9f738277c774e16c6a7abd7fb93552",
       "src/domain/display/stateProse/warFaithStateProseCandidates.js": "b5b193dd2a2c83d077da5f82fd4a5fc5f5ad15a3b6a214725daf41ede442324b"
     },
-    "producerIndexFiles": 1469
+    "producerIndexFiles": 1470
   },
   "totals": {
     "pools": 861,
     "blocks": 69,
-    "variants": 3183,
+    "variants": 3189,
     "resolved": 492,
     "unresolved": 369,
     "resolvedWithPredicate": 321,
@@ -1879,7 +1879,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 13,
+      "variants": 14,
       "grammars": 3,
       "predicate": [
         {
@@ -1927,15 +1927,17 @@
       },
       "declares": [],
       "lineDeclares": {
-        "crisis": 3,
+        "crisis": 4,
         "crisis: famine": 3,
         "crisis: indebted": 3,
         "crisis: occupied": 1,
         "food: ≥ secure": 1,
         "no crisis": 2,
-        "no crisis: debt": 4,
+        "no crisis: debt": 5,
         "no crisis: famine": 3,
         "no crisis: occupied": 3,
+        "no place debt": 8,
+        "place debt": 1,
         "prosperity: ≥ moderate": 1,
         "prosperity: ≥ poor": 1
       },
@@ -12079,7 +12081,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
+      "variants": 5,
       "grammars": 1,
       "predicate": [],
       "branchReads": [
@@ -12124,10 +12126,11 @@
       },
       "declares": [],
       "lineDeclares": {
-        "crisis: any": 1,
+        "crisis: any": 3,
         "market": 1,
         "no crisis": 1,
-        "no place debt": 1
+        "no place debt": 2,
+        "place debt": 2
       },
       "undeclared": 0,
       "crisisScoped": true
@@ -14852,8 +14855,8 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 4,
-      "grammars": 1,
+      "variants": 5,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -14888,10 +14891,12 @@
       "declares": [],
       "lineDeclares": {
         "crisis": 1,
-        "crisis: any": 2,
+        "crisis: any": 3,
         "no crisis": 2,
+        "no crisis: indebted": 1,
         "no nothing laid by": 1,
-        "no place debt": 1
+        "no place debt": 2,
+        "place debt": 1
       },
       "undeclared": 0,
       "crisisScoped": true
@@ -14911,7 +14916,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 4,
+      "variants": 6,
       "grammars": 1,
       "predicate": [],
       "branchReads": [],
@@ -14946,10 +14951,13 @@
       },
       "declares": [],
       "lineDeclares": {
+        "food: < secure": 1,
         "food: ≥ secure": 2,
         "no crisis: indebted": 1,
         "no nothing laid by": 2,
         "no place debt": 2,
+        "nothing laid by": 1,
+        "place debt": 1,
         "stores: < 3": 1,
         "stores: ≥ 3": 1
       },
@@ -56468,7 +56476,7 @@
         "DS-DEF-2 :: Economic Survival: WEAK",
         "DS-DEF-2 :: Economic Survival: CRITICAL"
       ],
-      "variants": 25,
+      "variants": 26,
       "grammars": 6,
       "blocks": [
         "DS-DEF-2"
@@ -67609,7 +67617,7 @@
         "scoreBand(economicScore) (via ECONOMIC_ROW_POOL in defenseStateProse.js)"
       ],
       "readingFunction": "ECONOMIC_ROW_POOL",
-      "count": "13 variant(s) · 3 grammar(s) · slots {settlement}"
+      "count": "14 variant(s) · 3 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -69033,7 +69041,7 @@
       "subject": "COMBINATION C3: the middle rungs",
       "fields": [],
       "readingFunction": "prosperityHeaderPoolKey",
-      "count": "3 variant(s) · 1 grammar(s) · slots {access, complexity, settlement}"
+      "count": "5 variant(s) · 1 grammar(s) · slots {access, complexity, settlement}"
     },
     {
       "tier": "COVERED",
@@ -69405,7 +69413,7 @@
       "subject": "MODERATE",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "5 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -69413,7 +69421,7 @@
       "subject": "COMFORTABLE",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "6 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
