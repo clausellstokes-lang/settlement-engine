@@ -29,7 +29,7 @@ const text = (v) => (typeof v === 'string' ? v.trim() : '');
 
 /**
  * Every other proper name the record stores: its people, houses, powers, quarters and neighbours.
- * @param {Record<string, any>} s @returns {string[]}
+ * @param {{ npcs?: unknown, institutions?: unknown, factions?: unknown, powerStructure?: { factions?: unknown } | null, spatialLayout?: { quarters?: unknown } | null, neighbourNetwork?: unknown, interSettlementRelationships?: unknown }} s @returns {string[]}
  */
 function otherNamesOf(s) {
   /** @type {string[]} */
@@ -70,7 +70,7 @@ function rewrite(sentence, oldName, newName, shields) {
 
 /**
  * The record under its new name, the stored sentences that held the old one rewritten.
- * @template {Record<string, any>} T
+ * @template {object} T
  * @param {T} settlement the town's record
  * @param {string} oldName its name before the rename
  * @param {string} newName its name after it
@@ -80,10 +80,10 @@ export function renameTownInRecord(settlement, oldName, newName) {
   if (!settlement || typeof settlement !== 'object') return settlement;
   const from = text(oldName);
   const to = text(newName);
-  /** @type {Record<string, any>} */
-  const out = { ...settlement, name: to || settlement.name };
+  const out = /** @type {Record<string, unknown>} */ ({ ...settlement });
+  if (to || !('name' in out)) out.name = to || out.name;
   if (!from || !to || from === to) return /** @type {T} */ (out);
-  const others = otherNamesOf(settlement);
+  const others = otherNamesOf(/** @type {Parameters<typeof otherNamesOf>[0]} */ (settlement));
   if (others.includes(from)) return /** @type {T} */ (out);
   const shields = others.filter((n) => n !== from && substituteWholeWord(n, from, '\uE001') !== n);
   /** @param {unknown} v */
@@ -91,8 +91,8 @@ export function renameTownInRecord(settlement, oldName, newName) {
   for (const k of TOWN_NAME_SENTENCE_KEYS) if (typeof out[k] === 'string') out[k] = said(out[k]);
   for (const k of TOWN_NAME_CRISIS_KEYS) {
     const v = out[k];
-    /** @param {any} e */
-    const entry = (e) => (e && typeof e === 'object' && typeof e.summary === 'string' ? { ...e, summary: said(e.summary) } : e);
+    /** @param {unknown} e */
+    const entry = (e) => { const r = /** @type {Record<string, unknown>} */ (e && typeof e === 'object' ? e : {}); return typeof r.summary === 'string' ? { ...r, summary: said(r.summary) } : e; };
     if (Array.isArray(v)) out[k] = v.map(entry);
     else if (v && typeof v === 'object') out[k] = entry(v);
   }
