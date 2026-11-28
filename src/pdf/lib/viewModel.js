@@ -98,7 +98,7 @@ function coerceProse(v) {
  * enum + tone are unchanged — only the prose is reconciled.
  */
 function viabilitySummaryFor(settlement) {
-  if (flag('canonicalViewModel')) return deriveViability(settlement).summary;
+  if (flag('canonicalViewModel')) return deriveViability(settlement, { audience: 'dm' }).summary; // RULING 122-B-4: the owner's PDF
   return settlement?.economicViability?.summary || null;
 }
 

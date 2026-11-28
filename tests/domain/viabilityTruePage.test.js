@@ -156,7 +156,7 @@ describe('RULING-R B2: no savings or pays-its-way line beside a present place de
   /** @param {string} blockId @param {string} poolKey @param {number} vid @param {any} s */
   const words = (blockId, poolKey, vid, s) => variantByVid({ leaf: 'economy', blockId, poolKey, vid, slots: { settlement: String(s.name) } }).split('. ')[0];
   /** @param {any} s @returns {string} every economy desk line the owner's page draws, and the Outlook's verdict */
-  const printed = (s) => `${JSON.stringify(economyDeskRead(s))} ${deriveViability(s).summary}`;
+  const printed = (s) => `${JSON.stringify(economyDeskRead(s))} ${deriveViability(s, { audience: 'dm' }).summary}`; // the owner's page (RULING 122-B-4: the hook leg by name)
   const NAMED = /** @type {Array<[string, string, Array<[string, string, number]>]>} */ ([
     // [seed, the other side the record holds, the lines it printed beside it]
     ['dp-thorp-3', 'Economic Survival Weak', [['DS-ECO-8', 'COMFORTABLE', 1]]],
@@ -185,8 +185,8 @@ describe('RULING-R B2: no savings or pays-its-way line beside a present place de
   test('C dp-thorp-42 (the outside_debt event alone): the Outlook says no "pays its way"', () => {
     const s = c('dp-thorp-42');
     expect((s.history.historicalEvents || []).map((/** @type {any} */ e) => e.templateType)).toContain('outside_debt');
-    expect(String(deriveViability(s).summary)).toMatch(/^VIABLE/);
-    expect(/pays its (own )?way|owes no one|what it spends it earns/.test(String(deriveViability(s).summary))).toBe(false);
+    expect(String(deriveViability(s, { audience: 'dm' }).summary)).toMatch(/^VIABLE/); // the owner's Outlook (RULING 122-B-4)
+    expect(/pays its (own )?way|owes no one|what it spends it earns/.test(String(deriveViability(s, { audience: 'dm' }).summary))).toBe(false);
   }, 120000);
   // RULING 122-B-1 (i), the chair, 2026-11-27: the timeline's outside_debt event is the place owing only where its page says
   // the creditor is collecting NOW, its hook printed on the Plot Hooks tab (`collectPlotHooks`). An old Debt Crisis whose

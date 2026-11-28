@@ -21,10 +21,11 @@ import { economicSurvivalBandOf } from './defenseScoreBands.js';
 import { collectPlotHooks } from '../dossier/plotHooks.js';
 
 /**
- * RULING 122-B-4 (the eleventh chair, 2026-11-28): THE HOOK LEG IS THE OWNER's EYE ONLY. A plot hook never travels on a
- * player share, so for a READER (`audience: 'player'`: the shared page's stamp, `composePublicProse`, and the player view)
- * the place owes by the stress and the tension alone; the owner's tabs, the PDF and Foundry (any other audience) keep the
- * hook leg too.
+ * RULING 122-B-4 (the eleventh chair, 2026-11-28): THE HOOK LEG IS THE OWNER's EYE ONLY, AND IT FAILS CLOSED. A plot hook
+ * never travels on a player share, so the hook leg is read only when the caller asks for it BY NAME, the owner's audience
+ * (`audience: 'dm'`, the desks' own token, `stateProseKernel.js :: AUDIENCE_DM`): the owner's tabs, the PDF and Foundry
+ * say so. Any other call (a reader's composition, the player view, a caller that states nothing) answers from the stress
+ * and the tension alone.
  * @param {unknown} settlement @param {{ audience?: unknown }} [options] @returns {boolean} the page says the place owes a debt now
  */
 export function owesDebtShown(settlement, options = {}) {
@@ -37,7 +38,7 @@ export function owesDebtShown(settlement, options = {}) {
   const debts = new Set((Array.isArray(events) ? events : [])
     .filter((e) => /** @type {{ templateType?: unknown } | null} */ (e)?.templateType === 'outside_debt')
     .map((e) => /** @type {{ name?: unknown }} */ (e).name).filter((n) => typeof n === 'string' && n !== ''));
-  if (!debts.size || options.audience === 'player') return false;
+  if (!debts.size || options.audience !== 'dm') return false;
   return collectPlotHooks(/** @type {Parameters<typeof collectPlotHooks>[0]} */ (settlement)).some((h) => h.category === 'history'
     && (h.parties || []).some((p) => p.kind === 'history' && debts.has(String(/** @type {{ eventId?: unknown }} */ (p).eventId))));
 }

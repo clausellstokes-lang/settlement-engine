@@ -217,7 +217,7 @@ export function deriveFoodBalance(settlement) {
  * ignores a food deficit — which is the contradiction this corrects.
  *
  * @param {DossierSettlementView | null | undefined} settlement
- * @param {{ audience?: string }} [options] RULING 122-B-4: `audience: 'player'` for a reader's composition (no hook leg)
+ * @param {{ audience?: string }} [options] RULING 122-B-4: `audience: 'dm'` for the owner's eye (the hook leg); any other, none
  */
 export function deriveViability(settlement, options = {}) {
   /** @type {NonNullable<DossierSettlementView['economicViability']>} */
@@ -682,7 +682,7 @@ export function deriveDossierViewModel(settlement, { aiOverlay: _aiOverlay = nul
   return {
     foodBalance: deriveFoodBalance(settlement),
     exportPosture: deriveExportPosture(settlement),
-    viability: deriveViability(settlement),
+    viability: deriveViability(settlement, { audience: 'dm' }), // RULING 122-B-4: the owner's view model asks the hook leg by name
     magic: deriveMagicPosture(settlement),
     magicReliance: deriveMagicRelianceView(settlement),
     blockade: deriveBlockadeRelief(settlement),
@@ -999,7 +999,7 @@ function foodPoundsShown(settlement) {
  * @param {unknown} settlement @param {string} [audience] @returns {boolean}
  */
 function owesDebtShown(settlement, audience) {
-  return placeOwesShown(settlement, { audience }); // RULING 122-B-4: a reader's Outlook asks without the hook leg // RULING-R (the eleventh chair, 2026-11-27), R5: the reader moved to `solvencyShown.js`, which the Economy desk reads too; it also reads the timeline's `outside_debt` event
+  return placeOwesShown(settlement, { audience }); // RULING 122-B-4: only the owner's audience ('dm') reads the hook leg // RULING-R (the eleventh chair, 2026-11-27), R5: the reader moved to `solvencyShown.js`, which the Economy desk reads too; it also reads the timeline's `outside_debt` event
 }
 /** VIABILITY-TRUE (G61): the Economics tab's printed arriving list. @param {unknown} settlement @returns {string[]} */
 function arrivingShown(settlement) {
