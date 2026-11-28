@@ -139,3 +139,36 @@ K3 becomes its own small point after the ruling.
 READER OF POINT 124 is started on Opus at max (`prompts/START-READER-124.txt`). HOLD THE BRANCH: no code commit until the
 chair writes; K3 stays held for the ruling reader. Sizes named for the owner: the first paint gains `pickKey.js` and
 `townRename.js` (about 7 kB unminified, the builder's figure; the reader measures the real build).
+
+**K3-2 (14:28 UTC; REPLACES K3-1, on the RULING READER's report "amend": `rename/RULING-READER-K3.md`, filed; rule V37 (4)
+satisfied): BUILD K3 AS THE STORED KIND, WITH THE READER's FIVE AMENDMENTS.**
+- A1 THE RENAME STORES THE KIND, NEVER THE NAME: `kind: { ruler, families, face, archetype? }` on the power, written once,
+  only where absent. IT TRAVELS (each verdict is one a reader's born page already derives from public fields and prints;
+  a hidden power's row leaves the served record whole). The old name never travels. No migration.
+- A2 IT IS WRITTEN BY THE DM's ACTION ONLY (`store/settlementRenameHelpers.js :: renameFactionImpl`, or the writer behind an
+  explicit option), NEVER by `applyFactionRenameToSettlement` as the birth calls it (`generators/power/factionLabelClose.js:45`
+  renames a refused label at close): BIRTHS MOVE 0, proven.
+- A3 A COUP DROPS IT: `transferRulingPower`'s re-formed seat (`rulingPower.js:552-560`, the non-kept branch) drops `kind`; the
+  demoted house row and the kept form keep it. Proven on the reader's 40 coups (the seat's kind then follows the new
+  government).
+- A4 THE KIND IS READ WHERE THE NAME WAS READ, never before a field a later writer owns: `factionArchetype` = category, then
+  `kind.archetype`, then the name; `rulerKindOf` = the governing row's `kind.ruler`, else `government`; `familiesHeldOf` ORs
+  each power's `kind.families` into its record-level test. ONE LEAF (`facts/powerKind.js`: `powerKindOf(p)`, the writer's
+  `kindFromName(name)`) and A WALKER in `tests/architecture`: any regex or name-table read of a power's `.faction` or `.name`
+  outside the leaf reds unless listed EXEMPT with its reason (the door id, the name shields, the cascade). NAMED LIMIT (no
+  second field): a classifier added later re-classes towns renamed before it landed; towns renamed before K3 lands keep
+  their already-moved kind.
+- A5 THE DOOR ID STAYS ON THE NAME; its two stored references are named: `simulationTrace[].targetId` (owner-only; the
+  explanation of a renamed power loses its causes: named) and THE SHARE VEIL's STORED DELTAS (below, K4).
+- THE PROOF as K3-1 (3), ON THE SMALLEST SIZES ABOVE ALL (thorps, hamlets, villages: where the fault lives, 16 | 19 of 30 in
+  the reader's run), with a coup and a second rename in it; red first, each its own commit; registers by K-REG.
+**K4 (NEW; a SECURITY ROW, from the ruling reader's A5, CONFIRMED on TODAY's code): A RENAME LIFTS THE DM's HIDE.** The share
+veil's stored deltas (`card:faction:faction.<slug>`, `field:faction:faction.<slug>:<field>`, `galleryVeil.js:191`) live in the
+save row's `gallery_member_overrides`, keyed on the power's name; after a rename the hide of the ruling power's description
+stops hiding on 59 of 60 towns. MEASURE FIRST (a table, no build): every address kind the overrides hold and which are keyed
+on a NAME a rename changes (a power, a person, a house, the town); each rename path against each; the count on C and V;
+WHERE the overrides are written and by what path (the client store and the same write the curate screen uses, or a server
+function, an RPC, SQL). THEN: IF the cure needs only the app's own existing write path, BUILD IT IN K4 (the rename carries
+every affected address to the new key, as the cascade carries the stored prose; red first; a security case that a hide
+made before a rename still hides after it, on the shared page as rendered); IF IT NEEDS SQL, A SERVER FUNCTION OR A
+MIGRATION, STOP: it goes to the share lane as its first unit with this measure (a migration is the owner's hand).

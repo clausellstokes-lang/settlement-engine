@@ -123,3 +123,8 @@ of 1,558 hideable houses of C are of this kind).**
   (`isHideableHouse` reads `facetOf('clandestine')`, which is the declared facet, else an inference over the NAME,
   `cohesionWeave.js:421`). No product action renames a house today; the day one does, a DM's rename could move a house into
   or out of the hidden class. OWED TO THE LANE: say whether the class must be read only from stored facts, and pin it.
+- **A25 (14:27 UTC on 2026-11-28; the K3 ruling reader's A5, CONFIRMED on today's code): A RENAME LIFTS THE DM's HIDE.** The
+  veil's stored deltas in the save row's `gallery_member_overrides` are keyed on a power's NAME (`card:faction:faction.<slug>`,
+  `galleryVeil.js:191`); after the power's rename the DM's hide of the ruling power's description stops hiding on 59 of 60
+  towns. Given to RENAME-BUILD as K4 (measure first; built there only if the app's own write path suffices; otherwise it is
+  this lane's first unit on resumption).
