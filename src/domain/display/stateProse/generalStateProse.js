@@ -769,19 +769,24 @@ export function viabilityVerdictPoolKey(viable) {
  * SOAK-1000 row 9, A-12: printed over 250 of 1,000 contradicted records). All three of its
  * lines say the record holds together, and a zero `criticalIssueCount` only says viability
  * found no critical issue. So the zero pool is chosen only when the receipt's
- * `record_coherence_battery` judgment passed (`recordClean === true`); a judgment that found
- * contradictions takes the contradiction pool, whose one slot-free line is true of such a
- * record; a record with no such judgment (a save older than it) was not asked, and renders
- * nothing.
- * @param {unknown} count @param {unknown} [recordClean] @returns {string|null}
+ * `record_coherence_battery` judgment passed (`recordClean === true`); a record with no such
+ * judgment (a save older than it) was not asked, and renders nothing.
+ *
+ * ⛔ THE CONTRADICTION POOL NEEDS A CONTRADICTION THE PAGE NAMES (R7, RULING-R, the eleventh chair,
+ * 2026-11-27). Its lines say the accounts of the place do not square, and the reader is shown
+ * which only by the Outlook tab's Critical Issues list, by title. So it is keyed by `listed`, the
+ * critical issues that list names that are not a stress consequence (the crisis itself, not a
+ * contradiction): never by the raw count, which counts those too, and never by the
+ * battery's "needs review" alone, whose findings print only on the staff panel (lane SELF-VOUCH
+ * keyed it so; R7 overturns that arm). Else the pool is silent.
+ * @param {unknown} count @param {unknown} [recordClean] @param {unknown} [listed] @returns {string|null}
  */
-export function criticalIssuePoolKey(count, recordClean) {
+export function criticalIssuePoolKey(count, recordClean, listed) {
   if (typeof count !== 'number' || !Number.isFinite(count)) return null;
-  if (count <= 0 && recordClean !== true && recordClean !== false) return null;
-  const key = count > 0 || recordClean === false
-    ? 'criticalIssueCount: critical contradictions on the record'
-    : 'criticalIssueCount zero';
-  return CORPUS['DS-GEN-11'].pools[key] ? key : null;
+  const key = typeof listed === 'number' && listed > 0 ? 'criticalIssueCount: critical contradictions on the record'
+    : count <= 0 && recordClean === true ? 'criticalIssueCount zero'
+      : null;
+  return key && CORPUS['DS-GEN-11'].pools[key] ? key : null;
 }
 
 // ── DS-HK-1 · Plot hooks › The state a hook is framed FROM ──────────────────────────
@@ -2181,7 +2186,7 @@ export function generalStateProse(settlement, readings = {}, options = {}) {
     viability: Object.freeze({
       verdict: Object.freeze([
         rung('DS-GEN-11', viabilityVerdictPoolKey(readings.viable), ''),
-        rung('DS-GEN-11', criticalIssuePoolKey(readings.criticalIssueCount, readings.recordClean), ''),
+        rung('DS-GEN-11', criticalIssuePoolKey(readings.criticalIssueCount, readings.recordClean, criticalIssuesOf(/** @type {{ economicViability?: Parameters<typeof criticalIssuesOf>[0] }} */ (settlement)?.economicViability).filter((i) => i?.type !== 'stress_consequence' && text(i?.title)).length), ''), // R7: the contradictions the Outlook lists by title
         rung('DS-GEN-11', 'THE FIRST-SURVEY QUALIFICATION', ''),
       ].filter((line) => line && line.sentence)),
     }),
@@ -2234,3 +2239,4 @@ export function generalStateProse(settlement, readings = {}, options = {}) {
     }),
   });
 }
+import { criticalIssuesOf } from '../validationOnPage.js'; // R7 (RULING-R, the eleventh chair): the Outlook tab's one critical list; at the end of the file, so no cited line moves

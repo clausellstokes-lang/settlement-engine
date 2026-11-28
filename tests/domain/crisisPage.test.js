@@ -7,6 +7,7 @@
 import { beforeAll, describe, it, expect } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { composeCrisisPage, hasActiveCrisis, CRISIS_PAGE_COPY } from '../../src/domain/crisis/crisisPage.js';
+import { CAST_REASONS } from '../../src/domain/crisis/crisisCast.js';
 import { buildDossierEntityIndex, TYPE_TO_TAB } from '../../src/domain/dossier/entityLinks.js';
 import { _resolveEntity } from '../../src/store/settlementSliceHelpers.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
@@ -125,5 +126,20 @@ describe('R3-CODE-C-3: an empty cast and an empty lever list claim no zero the r
     expect(section.cast).toEqual([]);
     expect((s.npcs || []).some((n) => /infiltrat/i.test(String(n?.secret?.what ?? '')))).toBe(true);
     expect(CRISIS_PAGE_COPY.nobody).toBe('no one yet named');
+  });
+});
+
+// R1 (RULING-R, the eleventh chair, 2026-11-27; R-MEASURE's worked example, C dp-village-5): a cast row whose first choice
+// was passed over stores its reason with "; next in line, …", the builder's note. The page prints the reason without it;
+// the stored reason is not re-worded and no birth moves.
+describe('R1: the Crisis page never prints the next-in-line note of a stored cast reason', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  it('C dp-village-5: the brunt\'s row reads "its people tend the sick", and the record keeps the note', () => {
+    const s = generateSettlementPipeline(birthConfig({ settType: 'village' }), null, { seed: 'dp-village-5', customContent: {} });
+    const stored = entriesOf(s).flatMap((e) => e.cast.roles).filter((r) => r.reason.endsWith(`; ${CAST_REASONS.nextInLine}`));
+    expect(stored.map((r) => `${r.role} ${r.name}`)).toEqual(['brunt Religious Authorities']);
+    const rows = composeCrisisPage(s).flatMap((x) => x.cast);
+    expect(rows.filter((r) => r.reason.includes(CAST_REASONS.nextInLine))).toEqual([]);
+    expect(rows.find((r) => r.role === 'brunt' && r.name === 'Religious Authorities')?.reason).toBe('its people tend the sick');
   });
 });

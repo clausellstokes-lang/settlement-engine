@@ -26,7 +26,7 @@
  */
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { describe, expect, it } from 'vitest';
+import { beforeAll, describe, expect, it } from 'vitest';
 
 import {
   GENERAL_STATE_PROSE_SILENT,
@@ -95,6 +95,9 @@ import { deriveEscalationClocks } from '../../src/domain/hookEscalation.js';
 import { populationTrendBand } from '../../src/domain/display/trendLens.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { FOOD_SECURITY_BANDS, READINESS_BANDS } from '../../src/data/bandLadders.js';
+import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js'; // R7 (RULING-R): the measure's towns, born as it bore them
+import { generalDeskLines } from '../../src/components/new/generalDeskRead.js';
+import { criticalIssuesOf } from '../../src/domain/display/validationOnPage.js';
 import { mustExtract } from '../helpers/sourceContract.js';
 import { factsOf } from '../../src/domain/facts/factsOf.js';
 import { fillShapeViolation, mergeSlotShapes, parseSlotShapes } from '../../scripts/lib/dossier-slot-shapes.mjs';
@@ -1392,15 +1395,19 @@ describe('the viability verdict and the hook framing', () => {
       'the MARGINAL fall-through arm of the shared verdict',
     );
     // The contradiction count: two pools, and a non-number is NOT a zero.
-    expect(criticalIssuePoolKey(2)).toBe('criticalIssueCount: critical contradictions on the record');
-    expect(criticalIssuePoolKey(2, true)).toBe('criticalIssueCount: critical contradictions on the record');
+    // RE-KEYED BY R7 (RULING-R, the eleventh chair, 2026-11-27): a count alone no longer opens the contradiction pool; the
+    // contradictions the Outlook tab lists by title do (the third argument; the R7 block at the foot of this file).
+    expect(criticalIssuePoolKey(2)).toBeNull();
+    expect(criticalIssuePoolKey(2, true)).toBeNull();
+    expect(criticalIssuePoolKey(2, true, 2)).toBe('criticalIssueCount: critical contradictions on the record');
     // The zero pool vouches for the record, so it needs the receipt's battery judgment
     // (lane SELF-VOUCH): passed → zero; contradicted → the contradiction pool; unasked → nothing.
     // STYLE-2 FIRST-IMPRESSIONS (B·#28, 2026-11-09): the zero pool LEAVES — beside a by-design
     // list it vouched falsely, and on a clean record the header already says COHERENT; the key
     // resolves to no pool, so a battery-clean record prints no coherence line.
     expect(criticalIssuePoolKey(0, true)).toBeNull();
-    expect(criticalIssuePoolKey(0, false)).toBe('criticalIssueCount: critical contradictions on the record');
+    // RE-KEYED BY R7: the battery's "needs review" alone (its findings print only on the staff panel) is silent
+    expect(criticalIssuePoolKey(0, false)).toBeNull();
     expect(criticalIssuePoolKey(0), 'a record the battery never read vouched for').toBeNull();
     expect(criticalIssuePoolKey(undefined), 'an unmeasured record read as zero').toBeNull();
     expect(criticalIssuePoolKey(undefined, true), 'an unmeasured record read as zero').toBeNull();
@@ -1408,7 +1415,7 @@ describe('the viability verdict and the hook framing', () => {
     // TOTAL the other way: the six pools are claimed by these three lenses and no other.
     expect([...new Set([
       viabilityVerdictPoolKey(true), viabilityVerdictPoolKey(false), viabilityVerdictPoolKey(undefined),
-      criticalIssuePoolKey(1), 'THE FIRST-SURVEY QUALIFICATION',
+      criticalIssuePoolKey(1, undefined, 1), 'THE FIRST-SURVEY QUALIFICATION',
     ])].sort()).toEqual(poolsOf('DS-GEN-11').sort());
   });
 
@@ -2177,5 +2184,50 @@ describe('⛔ DS-POP-1 and DS-POP-2 stay dark — a written fence and a ledger w
     expect(src('src/domain/worldPulse/demographicsHerald.js')).toContain('export const QUANTITY_BANDS');
     expect(UNMOUNTED_BLOCKS).toContain('DS-POP-1');
     expect(sentenceMountForBlock('DS-POP-1')).toBeNull();
+  });
+});
+
+// R7 (RULING-R, the eleventh chair, 2026-11-27; R-MEASURE R7: C 94, V 78 pages): DS-GEN-11's contradiction pool says the
+// accounts of the place do not square, and the reader is shown which only by the Outlook tab's Critical Issues list, by
+// title. It printed where the count held only stress consequences (the crisis, not a contradiction) and where the count
+// was 0 and the battery said "needs review" alone (its findings print only on the staff panel). It is keyed now by the
+// critical issues the Outlook lists by title that are not a stress consequence; else it is silent.
+describe('R7: the contradiction pool prints only beside a contradiction the Outlook tab lists by title', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); }, 120000);
+  /** @param {string} seed */
+  const bornC = (seed) => generateSettlementPipeline(birthConfig({ settType: seed.split('-')[1] }), null, { seed, customContent: {} });
+  /** @param {any} s */
+  const printed = (s) => generalDeskLines(s).viability.verdictLines.length;
+  /** @param {any} s */
+  const listed = (s) => criticalIssuesOf(s.economicViability).filter((i) => i?.type !== 'stress_consequence' && i?.title);
+  /** @param {any} s */
+  const battery = (s) => (s.generationCoherenceReceipt?.judgments || []).find((j) => j?.id === 'record_coherence_battery')?.status;
+  it('C dp-thorp-12 (the guard): a listed non-stress critical issue keeps the pool', () => {
+    const s = bornC('dp-thorp-12');
+    expect(listed(s).map((i) => i.title)).toEqual(['Uncovered Local Food Deficit']);
+    expect(printed(s)).toBe(1);
+  }, 120000);
+  it('C dp-thorp-28 (the measure\'s worked example): count 0 and the battery\'s "needs review" alone: the pool is silent', () => {
+    const s = bornC('dp-thorp-28');
+    expect(s.economicViability.metrics.criticalIssueCount).toBe(0);
+    expect(battery(s)).toBe('needs_review');
+    // anchored: the guard above prints the pool through the same reader, so a silence here is the key's, not the desk's
+    expect(printed(s)).toBe(0);
+  }, 120000);
+  it('C dp-hamlet-117: only stress consequences are critical: the pool is silent', () => {
+    const s = bornC('dp-hamlet-117');
+    const critical = criticalIssuesOf(s.economicViability);
+    expect(critical.length).toBeGreaterThan(0);
+    expect(critical.every((i) => i.type === 'stress_consequence')).toBe(true);
+    expect(printed(s)).toBe(0);
+  }, 120000);
+  it('the key: only a listed contradiction opens the pool; neither the raw count nor the battery alone does', () => {
+    const CONTRA = 'criticalIssueCount: critical contradictions on the record';
+    expect(criticalIssuePoolKey(2, true, 1)).toBe(CONTRA);
+    expect(criticalIssuePoolKey(0, false, 1)).toBe(CONTRA);
+    expect(criticalIssuePoolKey(2, true, 0), 'stress consequences only').toBeNull();
+    expect(criticalIssuePoolKey(2, undefined), 'a count with no listed contradiction').toBeNull();
+    expect(criticalIssuePoolKey(0, false, 0), 'the battery\'s needs review alone').toBeNull();
+    expect(criticalIssuePoolKey(undefined, false, 1), 'an unmeasured record').toBeNull();
   });
 });

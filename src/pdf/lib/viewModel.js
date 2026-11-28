@@ -349,7 +349,7 @@ function overviewSlice(active, ai, useAi) {
     label: t?.label || t?.type,
     type: t?.type,
     severity: normSeverity(t?.severity),
-    description: t?.description,
+    description: tensionDescriptionShown(s, t),
     parties: t?.factions || t?.parties || [],
     hooks: cleanHooks(t?.plotHooks),
   }));
@@ -512,7 +512,7 @@ function powerSlice(active) {
   const tensions = (s?.history?.currentTensions || []).map(t => ({
     label: t?.label || t?.type,
     severity: normSeverity(t?.severity),
-    description: t?.description,
+    description: tensionDescriptionShown(s, t),
     parties: t?.factions || t?.parties || [],
     hooks: cleanHooks(t?.plotHooks),
   }));
@@ -706,7 +706,7 @@ function historySlice(active) {
     tensions: (h?.currentTensions || []).map(t => ({
       label: t?.label || t?.type,
       severity: t?.severity,
-      description: t?.description,
+      description: tensionDescriptionShown(s, t),
       parties: t?.factions || t?.parties || [],
       hooks: t?.plotHooks || [],
     })),
@@ -1020,3 +1020,4 @@ function firstSentence(s) {
 
 export default buildViewModel;
 import { scoresAsShown } from '../../domain/facts/beastsReadiness.js'; // P9 (RULING G22): the scores as printed (the beasts grade read against the need); at the end of the file, so no cited line moves
+import { tensionDescriptionShown } from '../../domain/display/tensionDescriptionShown.js'; // R6 (RULING-R, the eleventh chair): the scarcity tension names its good; at the end of the file, so no cited line moves

@@ -2,7 +2,7 @@
   "schema": "wiring-census/1",
   "stamp": {
     "files": {
-      "src/domain/display/stateProse/generalStateProse.js": "2fa40304134c2fce318467e62f500f0147127326c2283a53df46bd6ca0faf01e",
+      "src/domain/display/stateProse/generalStateProse.js": "e18b83084fe8b7b3dad1853a55e746bd8e5605cccf4140941b01be082cbac677",
       "src/domain/display/stateProse/powerStateProse.js": "d169fbc542f074cb8303231a93df214aeb0653954bb2e829bee631c7b18adc78",
       "src/domain/display/stateProse/economyStateProse.js": "f9787b2a4acce9547c8c32995b98f62721a2c7cbdfb1c6b9be22efb5ee4fbce7",
       "src/domain/display/stateProse/defenseStateProse.js": "38e43f8ccbf0efd6a32da2b3eef4512863eead2a511f9d83d554cd24fd682e53",
@@ -18,7 +18,7 @@
       "src/domain/display/stateProse/stressorsStateProseCandidates.js": "ee0548fc8b662da76e4bf85a1fae30433e9f738277c774e16c6a7abd7fb93552",
       "src/domain/display/stateProse/warFaithStateProseCandidates.js": "b5b193dd2a2c83d077da5f82fd4a5fc5f5ad15a3b6a214725daf41ede442324b"
     },
-    "producerIndexFiles": 1465
+    "producerIndexFiles": 1466
   },
   "totals": {
     "pools": 861,
@@ -51,7 +51,7 @@
     "absent": {
       "measured": 597,
       "default": 3,
-      "not-produced": 55,
+      "not-produced": 54,
       "method-call": 18
     },
     "zeroK": 85,
@@ -71,7 +71,7 @@
       ],
       [
         "viability",
-        39
+        40
       ],
       [
         "history",
@@ -29837,10 +29837,10 @@
       "grammars": 1,
       "predicate": [],
       "branchReads": [
-        "readings.criticalIssueCount",
-        "readings.recordClean"
+        "readings.criticalIssueCount"
       ],
       "fieldsRead": [
+        "listed",
         "readings.criticalIssueCount",
         "readings.recordClean"
       ],
@@ -29849,14 +29849,12 @@
       "keyFunction": "criticalIssuePoolKey",
       "rung": "literal",
       "reads": [
-        "readings.criticalIssueCount",
-        "readings.recordClean"
+        "readings.criticalIssueCount"
       ],
       "readsGrain": "branch",
       "narrowed": false,
       "absent": {
-        "readings.criticalIssueCount": "measured",
-        "readings.recordClean": "not-produced"
+        "readings.criticalIssueCount": "measured"
       },
       "covert": false,
       "objectClasses": [],
@@ -29865,7 +29863,7 @@
         "viability.verdict"
       ],
       "attach": [],
-      "k": 1,
+      "k": 2,
       "rateBp": 2057,
       "departure": null,
       "source": {
@@ -29874,8 +29872,7 @@
           "treasury"
         ],
         "fields": {
-          "readings.criticalIssueCount": "treasury",
-          "readings.recordClean": ""
+          "readings.criticalIssueCount": "treasury"
         },
         "holder": null,
         "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
@@ -58627,11 +58624,9 @@
       },
       {
         "field": "readings.recordClean",
-        "mountsSpine": 1,
-        "mountsModifier": 30,
-        "spineTabs": [
-          "viability"
-        ],
+        "mountsSpine": 0,
+        "mountsModifier": 33,
+        "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
           "economics.craftReason",
@@ -58662,7 +58657,10 @@
           "overview.stressorLifecycle",
           "overview.systemsHealth",
           "overview.warnings",
-          "relationships.network"
+          "relationships.network",
+          "viability.isolationSupport",
+          "viability.magicDependency",
+          "viability.verdict"
         ]
       },
       {
@@ -59627,7 +59625,7 @@
       ],
       [
         "viability",
-        39
+        40
       ],
       [
         "history",
@@ -59848,9 +59846,9 @@
     {
       "block": "DS-GEN-11",
       "spines": 4,
-      "facts": 3,
+      "facts": 2,
       "spinesReachedBp": 10000,
-      "meanReachBp": 5833
+      "meanReachBp": 5000
     },
     {
       "block": "DS-GEN-12",
@@ -62521,20 +62519,12 @@
     {
       "block": "DS-GEN-11",
       "spines": 4,
-      "facts": 3,
+      "facts": 2,
       "spinesReachedBp": 10000,
-      "meanReachBp": 5833,
+      "meanReachBp": 5000,
       "byFact": [
         {
           "field": "readings.criticalIssueCount",
-          "attach": [
-            "viable: true: the arithmetic closes",
-            "the MARGINAL arm: neither verdict returned",
-            "viable: false: the arithmetic does not close"
-          ]
-        },
-        {
-          "field": "readings.recordClean",
           "attach": [
             "viable: true: the arithmetic closes",
             "the MARGINAL arm: neither verdict returned",
@@ -64479,11 +64469,11 @@
       ],
       [
         1,
-        103
+        102
       ],
       [
         2,
-        304
+        305
       ]
     ]
   },
@@ -64527,11 +64517,11 @@
         ],
         [
           1,
-          103
+          102
         ],
         [
           2,
-          304
+          305
         ]
       ],
       "blocksWithSpine": 55,
@@ -64555,7 +64545,7 @@
         "DS-SUP-2",
         "DS-WAR-3"
       ],
-      "readPaths": 851,
+      "readPaths": 850,
       "modifierEligibleFactsByTab": [
         [
           "economics",
@@ -64563,7 +64553,7 @@
         ],
         [
           "viability",
-          39
+          40
         ],
         [
           "history",
@@ -64612,7 +64602,7 @@
       ]
     },
     "function": {
-      "zeroK": 169,
+      "zeroK": 170,
       "executable": 492,
       "notExecutable": 369,
       "histogram": [
@@ -64638,11 +64628,11 @@
         ],
         [
           0,
-          84
+          85
         ],
         [
           1,
-          102
+          101
         ],
         [
           2,
@@ -64673,7 +64663,7 @@
         "DS-SUP-2",
         "DS-WAR-3"
       ],
-      "readPaths": 1150,
+      "readPaths": 1151,
       "modifierEligibleFactsByTab": [
         [
           "economics",
@@ -65073,7 +65063,7 @@
       "fields": {
         "LICENSED": 233,
         "OFFICE": 5,
-        "SOURCE-UNRESOLVED": 857
+        "SOURCE-UNRESOLVED": 856
       },
       "byKind": [
         [
@@ -65118,7 +65108,7 @@
         ]
       ],
       "unresolvedGrounds": {
-        "no-mapping": 857,
+        "no-mapping": 856,
         "no-institution-in-roster": 0
       },
       "twoSourceRows": 10,
@@ -66509,8 +66499,8 @@
       "leafBoth": 0,
       "leafEither": 3,
       "leafRows": [],
-      "deskRoots": 109,
-      "deskSegments": 279
+      "deskRoots": 108,
+      "deskSegments": 278
     }
   },
   "ratifiedAliases": {
@@ -66833,11 +66823,6 @@
       "book",
       "books",
       "record"
-    ],
-    "readings.recordClean": [
-      "books",
-      "chest",
-      "purse"
     ],
     "readings.structuralSuggestions": [
       "book",

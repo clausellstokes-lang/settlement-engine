@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "f3b45352ebc8224a5794c779f792a2024064a597",
-  "measuredBy": "LAND-115 (by the owner's yes of 2026-11-24)",
-  "date": "2026-11-24",
-  "note": "K4-JOIN: regenHistoryPipeline imports withRecordTroubleLaw, so generateSettlementPipeline.js is a new dependent of the trouble leaf (LAW_ONE_TROUBLE_BARS, TROUBLE_WEIGHT_TUNING); no value moves",
+  "measuredAtSha": "5fbb7fd896f15af4eb866abb6e33345d0a5bb025",
+  "measuredBy": "R-CURES-A (the eleventh chair, unit A3)",
+  "date": "2026-11-27",
+  "note": "A3 (RULING-R R6): src/domain/display/tensionDescriptionShown.js imports criticalImportRow from economyStateProse.js, so the dependents of LEADER_FROM and SOLE_EARNER_FROM gain it; no value, leaf or digest moved",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -1254,7 +1254,8 @@
         "value": 50
       },
       "dependents": [
-        "src/components/new/economyDeskRead.js"
+        "src/components/new/economyDeskRead.js",
+        "src/domain/display/tensionDescriptionShown.js"
       ],
       "namedDependents": []
     },
@@ -1268,7 +1269,8 @@
         "value": 20
       },
       "dependents": [
-        "src/components/new/economyDeskRead.js"
+        "src/components/new/economyDeskRead.js",
+        "src/domain/display/tensionDescriptionShown.js"
       ],
       "namedDependents": []
     },
@@ -8734,7 +8736,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 3,
-      "line": 78,
+      "line": 87,
       "spanDigest": "9ce244b1dbb17502d5534d5ea33f9f9bafe8cec4c191d4f934be6e6673dbba1e",
       "leaves": {
         "base.RANK": 1,
@@ -8773,7 +8775,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 5,
-      "line": 103,
+      "line": 112,
       "spanDigest": "9959eec349933f6bf2320b936780466dfea07d1f4bedbbed8da671fd806ce7ab",
       "leaves": {
         "strengthFull": 30,

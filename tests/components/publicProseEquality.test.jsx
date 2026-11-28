@@ -48,6 +48,13 @@ import { powerDeskRead, powerDeskReadings, governanceAccountRead } from '../../s
 afterEach(cleanup);
 
 const TOWNS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+/**
+ * R7 (RULING-R, the eleventh chair, 2026-11-27): the viability site (DS-GEN-11's contradiction line) prints only beside a
+ * contradiction the Outlook tab lists by title, and none of the twelve holds one; soak1k-24, the first of the corpus that
+ * does (probed 0..24), joins that site's rows, so its arms stay live.
+ * @type {Record<string, number[]>}
+ */
+const SITE_TOWNS = { viability: [...TOWNS, 24] };
 
 /**
  * The lit tabs, each as the router mounts it (OutputContainer.jsx's cases).
@@ -114,7 +121,7 @@ function shippedStrings(record, site) {
 const towns = {};
 beforeAll(async () => {
   await ensureLaws();
-  for (const i of TOWNS) {
+  for (const i of new Set([...TOWNS, ...Object.values(SITE_TOWNS).flat()])) {
     const owner = birth(i).settlement;
     const stamped = withPublicProse(owner, composePublicProse(owner));
     towns[i] = {
@@ -150,7 +157,7 @@ describe('the shared page prints the owner\'s player view, line for line', () =>
 
 describe('each lit family: what the owner\'s player view prints from it, the shared page prints', () => {
   for (const [tab, sites] of Object.entries(SITES)) {
-    it.each(TOWNS)(`${tab} (${sites.join(', ')}), soak1k-%i`, (i) => {
+    it.each(SITE_TOWNS[tab] || TOWNS)(`${tab} (${sites.join(', ')}), soak1k-%i`, (i) => {
       const { owner, shared } = towns[i];
       const a = proseLines(TABS[tab](owner, { playerView: true })).join('\n');
       const b = proseLines(TABS[tab](shared, { publicDossier: true, playerView: true })).join('\n');
@@ -161,7 +168,7 @@ describe('each lit family: what the owner\'s player view prints from it, the sha
   it('the family arm is not vacuous: every lit site prints somewhere on the twelve', () => {
     for (const [tab, sites] of Object.entries(SITES)) {
       for (const site of sites) {
-        const hits = TOWNS.filter((i) => {
+        const hits = (SITE_TOWNS[tab] || TOWNS).filter((i) => {
           const a = proseLines(TABS[tab](towns[i].owner, { playerView: true })).join('\n');
           return shippedStrings(towns[i].shared, site).some((str) => a.includes(str));
         });

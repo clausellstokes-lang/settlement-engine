@@ -113,6 +113,24 @@ describe('(c) where the chair\'s lines print', () => {
       expect(fare.includes(String(lineOf('critical', 'C7')?.text)) || fare.includes(K2), key).toBe(false);
     }, 120000);
   }
+  // THE VACUOUS ROW (RULING-R, the eleventh chair, 2026-11-27; R-MEASURE): no cell place of C or V holds fish, so the rows
+  // above could not tell C7 from K2. The measure's hand-set record: V dp-hamlet-139 with fish its one food source stays in the
+  // cell (Famine, production adequate, the atom `fish`), and under the stated name 'Frostdale' (the pick is keyed by the
+  // town's NAME, D13 STABLE-PICKS) it draws K2 and K1, so a deriver that lets C7 back in, or loses K2, reds here.
+  it('V dp-hamlet-139 with fish, under the stated name Frostdale: the fare prints K2 and not C7; Dawn Work prints K1 and not F6', () => {
+    const born = birth('dp-hamlet-139', 'V');
+    const food = born.economicState.foodSecurity;
+    const s = { ...born, name: 'Frostdale', economicState: { ...born.economicState, foodSecurity: { ...food, foodRecord: { ...food.foodRecord, foodSources: ['fish'] } } } };
+    expect(atomHolds('food: = famine', factsOf(s))).toBe(true);
+    expect(deriveAllCapacities(s).capacities.food_production.band).toBe('adequate');
+    expect(atomHolds('fish', factsOf(s))).toBe(true);
+    const slots = slotsOf(s);
+    const dawn = String(slots.dawn_work?.text || ''); const fare = String(slots.food_culture?.text || '');
+    expect(fare).toContain(K2);
+    expect(fare.includes(String(lineOf('critical', 'C7')?.text))).toBe(false); // anchored: K2 above is the same slot's line
+    expect(dawn).toContain(K1);
+    expect(dawn.includes(String(dawnOf('F6')?.text))).toBe(false); // anchored: K1 above is the same slot's line
+  }, 120000);
 });
 
 describe('(d) C7 and F6 stay where the source did fail', () => {

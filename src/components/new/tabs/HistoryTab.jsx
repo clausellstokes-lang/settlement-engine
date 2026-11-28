@@ -69,7 +69,7 @@ const eventTitle = (evt) => {
  * One current-tension row, extracted verbatim from the tab (BUILD-W2-SEARCH U2, no behaviour
  * change) so the dossier search mounts a tension through its own row.
  */
-export function TensionRow({t}) {
+export function TensionRow({t, settlement}) {
   const mobile = useIsMobile();
   // The table above names ten tension types and the engine writes more than ten
   // (the campaign path adds `external_threat` and its siblings), so the fallback
@@ -95,7 +95,7 @@ export function TensionRow({t}) {
         {sevOne&&<span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:SEV_COLORS[sevOne]||'#6b5340',background:`${SEV_COLORS[sevOne]||'#6b5340'}18`,padding:'0 5px',letterSpacing:'0.04em'}}>{sevOne}</span>}
       </div>
       {/* Description. The tension's plot hooks live on the Plot Hooks tab (X-2). */}
-      <p style={{fontSize:proseFontSize(FS.md, mobile),color:swatch.inkMag2,lineHeight:1.55,margin:'0 0 6px'}}><MentionText text={typeof t==='object'?t.description||t.issue||t.type:String(t)}/></p>
+      <p style={{fontSize:proseFontSize(FS.md, mobile),color:swatch.inkMag2,lineHeight:1.55,margin:'0 0 6px'}}><MentionText text={typeof t==='object'?tensionDescriptionShown(settlement,t)||t.issue||t.type:String(t)}/></p>
       {/* Factions */}
       {t.factions?.length>0&&<div style={{display:'flex',gap:4,flexWrap:'wrap'}}>
         {t.factions.map((f,j)=><span key={j} style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:600,color:swatch['#7A5010'],background:swatch['#F5E8C0'],padding:'1px 6px'}}><MentionText text={f} structural/></span>)}
@@ -282,7 +282,7 @@ export function HistoryTab({settlement:r, narrativeNote, onReroll, publicDossier
       {/* ── CURRENT TENSIONS (most DM-relevant — first) ──────────────────── */}
       {currentTensions.length>0&&<Section title={`Current Tensions (${currentTensions.length})`} collapsible defaultOpen accent="#b8860b">
         <div style={{display:'flex',flexDirection:'column',gap:10}}>
-          {currentTensions.map((t,i)=><TensionRow key={i} t={t}/>)}
+          {currentTensions.map((t,i)=><TensionRow key={i} t={t} settlement={r}/>)}
         </div>
       </Section>}
 
@@ -330,3 +330,4 @@ export function HistoryTab({settlement:r, narrativeNote, onReroll, publicDossier
 }
 
 export default React.memo(HistoryTab);
+import { tensionDescriptionShown } from '../../../domain/display/tensionDescriptionShown.js'; // R6 (RULING-R, the eleventh chair): the scarcity tension names its good; at the end of the file, so no cited line moves

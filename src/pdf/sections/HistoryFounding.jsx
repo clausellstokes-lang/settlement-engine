@@ -53,7 +53,7 @@ export function HistoryFounding({ settlement, narrativeMode, vm, stateProse }) {
   const threadHistory = { currentTensions: tensions.map(t => ({ description: t?.description, plotHooks: t?.hooks || [] })) };
   const events = [...(h.events || [])]
     .sort((a, b) => (a?.yearsAgo ?? 0) - (b?.yearsAgo ?? 0))
-    .map(ev => ({ ...ev, open: eventHasOpenThread({ name: ev?.title, plotHooks: ev?.hooks }, threadHistory), description: tensions.some(t => t?.description && t.description === ev?.description) ? null : ev?.description })); // B4: a sentence a live tension carries prints there only
+    .map(ev => ({ ...ev, open: eventHasOpenThread({ name: ev?.title, plotHooks: ev?.hooks }, threadHistory), description: tensions.some(t => t?.description && t.description === tensionDescriptionShown(settlement, ev)) ? null : ev?.description })); // B4: a sentence a live tension carries prints there only (R6: read as the tension prints it)
   const hasFoundingDetail = FOUNDING_FIELDS.some(f => nonBlank(h.founding?.[f.key]));
   const hasFoundingSummary = nonBlank(h.founding?.summary);
 
@@ -402,3 +402,4 @@ export default HistoryFounding;
 function isSeverityRange(s) {
   return Array.isArray(s) && new Set(s.filter(Boolean)).size > 1;
 }
+import { tensionDescriptionShown } from '../../domain/display/tensionDescriptionShown.js'; // R6 (RULING-R, the eleventh chair): the scarcity tension names its good; at the end of the file, so no cited line moves

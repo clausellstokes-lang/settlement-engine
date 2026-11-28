@@ -13,6 +13,8 @@ import { describe, it, expect, afterEach } from 'vitest';
 import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 import { HistoryTab } from '../../src/components/new/tabs/HistoryTab.jsx';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { HISTORICAL_EVENTS_DATA } from '../../src/data/historyData.js';
+import { SCARCITY_STORED_LIVE, SCARCITY_STORED_PAST } from '../../src/domain/display/tensionDescriptionShown.js';
 
 const LONG_DESC =
   'Rights to the local iron deposits became the subject of a prolonged dispute between the settlement and a rival lord.';
@@ -262,5 +264,43 @@ describe('the print history chapter marks the same events (X-14b, chair item 3)'
     expectAbsentWithAnchor(text, 'A clause is missing from the sealed copy.', 'Tolls halved', 'F12 event hooks in print');
     expectAbsentWithAnchor(text, 'A guild clerk wants the old charter burned.', 'The guilds still quarrel.', 'F12 tension hooks in print');
     expectAbsentWithAnchor(text, 'Plot hooks', 'Still relevant today', 'the print hooks kicker');
+  });
+});
+
+// R6 (RULING-R, the eleventh chair, 2026-11-27): the resource-scarcity tension's stored words name no good ("A critical
+// resource …"), while the Economics tab names the one the record holds short (the DS-ECO shortfall line's reader,
+// economyStateProse.js :: criticalImportRow). Where the record names the good, the tension prints a named twin; the
+// stored string stays; where it names none, the line prints as stored.
+describe('HistoryTab — the scarcity tension names the good the record holds short (R6)', () => {
+  const PAST = 'A critical resource became scarce, causing hoarding and price gouging';
+  const LIVE = 'A critical resource is running short, and some are hoarding it while others cannot pay the prices asked';
+  const townWith = (description, imports) => ({
+    ...settlementWith([]),
+    history: { ...settlementWith([]).history, currentTensions: [{ type: 'resource_scarcity', description, factions: [], severity: ['minor'] }] },
+    ...(imports ? { resourceAnalysis: { imports } } : {}),
+  });
+  const SAWMILL = { critical: ['timber', 'stone'], reasons: { timber: 'Required by Sawmill but not available in Plains terrain', stone: 'Plains terrain cannot produce this locally' } };
+  it('both stored forms print the good by name, and the record keeps its words', () => {
+    for (const [stored, shown] of [
+      [PAST, 'A critical resource, timber, became scarce, causing hoarding and price gouging'],
+      [LIVE, 'A critical resource, timber, is running short, and some are hoarding it while others cannot pay the prices asked'],
+    ]) {
+      const s = townWith(stored, SAWMILL);
+      render(<HistoryTab settlement={s} />);
+      expect(screen.getByText(shown)).toBeTruthy();
+      expectAbsentWithAnchor(document.body.textContent || '', stored, shown);
+      expect(s.history.currentTensions[0].description).toBe(stored);
+      cleanup();
+    }
+  });
+  it('the helper\'s two held sentences equal the table\'s, word for word (RULING 122-A-1: the table is not imported)', () => {
+    const scarcity = HISTORICAL_EVENTS_DATA.find((e) => e.type === 'resource_scarcity');
+    expect(SCARCITY_STORED_PAST).toBe(scarcity.description);
+    expect(SCARCITY_STORED_LIVE).toBe(scarcity.byMemory.unanchored.description);
+    expect([PAST, LIVE]).toEqual([SCARCITY_STORED_PAST, SCARCITY_STORED_LIVE]);
+  });
+  it('where the record names no short good, the stored words print as they are', () => {
+    render(<HistoryTab settlement={townWith(PAST, null)} />);
+    expect(screen.getByText(PAST)).toBeTruthy();
   });
 });
