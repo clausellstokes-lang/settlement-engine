@@ -86,3 +86,7 @@
   still carries a crisis reason WITH the builder's note (10 | 6 towns) and the stored, unnamed scarcity sentence (24 of 36);
   the search's index text holds the stored sentence (36 of 36; the rendered row prints the shown one). Not printed to a
   reader. OWED: a measure of what the grounding text is built from and whether it should take the shown sentences.
+- **A RELEASE BLOCKER BY NAME: THE EMPTY ECONOMY SLOTS.** After ruling 122-B-2's cure the line refuses the surplus lines
+  beside a place debt and has no line that says the debt: the Economics header prints nothing in 45 | 23 towns of C | V and
+  the standing-of-living tile in 2 | 18 (`landing/122/U1-table.tsv`). S-B2 (SURVEY-TABLE) fills every one. THE RELEASE DOES
+  NOT GO while the page clash census's empty-slot row reads over 0 on the line.
