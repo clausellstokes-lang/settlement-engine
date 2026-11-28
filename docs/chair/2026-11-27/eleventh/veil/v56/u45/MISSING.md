@@ -1,5 +1,30 @@
 # U45: WHAT WAS LOST, WHAT SURVIVES, WHAT I REBUILD (seat U45 of VEIL-56; written before any build)
 
+## WHERE THIS SEAT STANDS (current at every push; the full table with each step's red and green is U45-REPORT.md section 1)
+- Code `lane/veil-56-2026-11-27-u45-wip` at 535c7e956 (on dbd4cd9e5). Docs `lane/veil-56-2026-11-27-u45-docs` (this file,
+  U45-REPORT.md, receipts/). `scratch/u45-a5-trial` 2e4766ca2: LOCAL, never pushed.
+- DONE AND PROVED (red first, then green): merge M, M3, M4, DESCARM, STANDWALK, N1, N2, N2b, N3, item 5, V27 (1) (+ its
+  walker registration 203e24e3c), term (a)'s doors walker (red by design only on 211's get_gallery_map). Clean slices at
+  da1582d40: DESCARM 2/2, galleryWithholdAlways 9/9, galleryRosterChoices 39/39, domain-strict rc 0.
+- HALF-DONE: none.
+- NOT BEGUN: V27 (5) the writer-oracle census; term (b) corrected; N4's arms and the mask proposal (to VEIL-56 first);
+  A5's cut; unit 5 (U1-U3, V20's six terms); THE ARMS; A16; the proofs and the hand-in.
+- NEXT COMMAND: `git -C <checkout> fetch origin lane/veil-56-2026-11-27-u45-wip` and build V27 (5) by VEIL-51's
+  v51/u4/v27oracle.sh (red first on the pre-N2b table: master 3; then 0 of 754, 0 of 765).
+- VEIL-56's RULINGS TO THIS SEAT (2026-11-27 23:34 and 23:48 UTC, by message): (1) births on the scratch tree count as THE
+  BASE's MEASURE of the field cut, named "scratch, never pushed; A5's writer as it applies to dbd4cd9e5" in U45-PROOFS.md,
+  NOT the release's proof (owed on the joined tree, re-born pools); the measure states, both Reveals, every door and the
+  twin: descriptions served with a tail 0, `dmStanding` served 0, and the fail-closed count (a description not ending with
+  its non-empty field) with its cause if not 0 (anything but 0 is a finding, to VEIL-56 before going on); the COMMITTED
+  proof stays the four plants on stored documents. (2) Push at every step boundary; this section current at every push;
+  no long suite re-run speculatively; the pools' re-measures once, at the end.
+
+## FOR THE JOIN (VEIL-56's order): A5's merge is read against what this base lacks
+- `src/generators/power/factionStanding.js :: settleSeatHolderToRecord` (with `RANK_STANDINGS`, `cutLine`): absent on dbd4cd9e5.
+- `src/generators/power/rosterText.js :: settleStandingToLegitimacy`: absent on dbd4cd9e5.
+- `tests/generators/seat/seatHolderLines.test.js`: absent on dbd4cd9e5 (A5's 6de78192c edits it).
+On the joined tree those two settlers write `dmStanding` too, so the field cut's births there are the release's proof.
+
 Hour from `date -u`: 2026-11-27T23:32Z. Seat stands on `lane/veil-56-2026-11-27-tip` = dbd4cd9e5. Code branch (to be cut):
 `lane/veil-56-2026-11-27-u45-wip` at dbd4cd9e5. This file: `lane/veil-56-2026-11-27-u45-docs`.
 CONFIRMED = executed by me in this container; PLAUSIBLE = read only.
