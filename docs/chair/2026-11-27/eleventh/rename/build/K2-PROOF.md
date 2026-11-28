@@ -24,12 +24,28 @@ RENAME-BUILD, 2026-11-28. Base: 5ad631588 (with K1).
 | a rename back: records not byte for byte (K2-1 (i), asked on 200) | **0 of 300** | **0 of 300** |
 | another stored name changed (people, houses, powers, quarters, neighbours) | **0** | **0** |
 | lines moved otherwise than by the name (`tools/analyze-k2-else.mjs`) | 3 pages, explained below | 1 page, explained below |
-| (ii) every stored home of the 1,800 after the rename holds the old name nowhere; the receipt unchanged | see F3 below | |
-| (iii) the shared page of a renamed, re-saved town | see F3 below | |
+| (ii) births renamed (all 900 of each corpus, `tools/analyze-f3.mjs`) | 900, 0 errors | 900, 0 errors |
+| (ii) stored string leaves still holding the old name, whole word, any path (`name` aside) | **1 leaf on 1 town: `generationCoherenceReceipt.judgments[].findings[].evidence`**, left alone by rule (M3-K2) | **0** |
+| (ii) the generation receipt changed | **0 of 900** | **0 of 900** |
+| (iii) the SHARED page of a renamed town re-saved (its stamp composed after the rename; the first 300): pages holding the old name | **0 of 300** (0 lines; the stamp holds it 0 times) | **0 of 300** (0; 0) |
+| (iii) a share whose stamp was composed BEFORE the rename (the same record): pages holding the old name | **300 of 300**, 7,107 lines; the stamp holds it 300 times | **300 of 300**, 7,373 lines; 300 |
 
 **What the lines moved count.** These are lines moved otherwise than by the old name put to the new by whole word. A line where the page glues the name to the next word ("Linyuanthorp", 600 lines on each corpus) is counted as moved by the name. The pages left:
 - **C, dp-thorp-21 Ögedeidavan and dp-hamlet-49 Ögedeikum:** the desk lines a name opening on "Ö" loses (the defect sent to the chair at the K1 TIP: `properFill`'s ASCII `/^[A-Z]/`) come back under "Quillmarsh". They are K1's two pages, and not a K2 move.
 - **C and V, dp-thorp-148 Qal'atoasis:** Foundry prints the apostrophe as `&#39;`. Unescaped, the line is the name substitution, so the count is my analyser's, not a move.
+
+**What a share stamped BEFORE the rename shows.** The shared page prints its stamped prose (`publicProse`, composed at save), so a share stamped before the rename prints the old name until the next save re-stamps it. The persisting write the rename makes (`persistSaveUpdate`, then `supabaseUpdate`) re-stamps the save it renames (PLAUSIBLE, by reading). A share composed before the rename and never re-saved is the case counted above. These are its lines by view, on C (V in brackets):
+- Defense 2,328 (2,461);
+- Economics 1,524 (1,526);
+- Power 896 (912);
+- History 558 (562);
+- Overview 396 (416);
+- Traditions 370 (335);
+- Outlook 308 (340);
+- Resources 300 (300);
+- Magic 269 (272);
+- Daily Life 156 (246);
+- Services 2 (3).
 
 ## The cases (`tests/domain/townRename.test.js`, `tests/store/townRenameCascade.test.js`)
 

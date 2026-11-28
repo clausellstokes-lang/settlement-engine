@@ -33,6 +33,11 @@ Every count is a script's (CONFIRMED).
 
 - A ledger minted before K1b is stored (`worldState` traditions). A tick carries it, and it is shown identically on K1 and on K1b: 5 of 5 towns, measured before the build and sent.
 - K1b re-derives no stored set. The first lit tick of a town not yet lit mints the id-keyed set.
+- **The WF-0 world** (the chair's ruling K1b-2; `results/wf0-lit-world.json`), with its patron host soak-a:
+  - It is lit on the K1 tree: a live year through the product's advance entry. soak-a's ledger is minted at the first lit tick: 5 rites, 4 drawing pilgrims.
+  - It is then advanced a further year on the K1b tree (ticks 52 -> 104). It keeps soak-a's minted set identical: 5 of 5 rites, id, name, motif and band, and 4 still drawing pilgrims.
+  - A fresh K1b derivation of soak-a would hold none.
+  - So no saved lit world loses its pilgrimage.
 
 ## Named, not changed
 

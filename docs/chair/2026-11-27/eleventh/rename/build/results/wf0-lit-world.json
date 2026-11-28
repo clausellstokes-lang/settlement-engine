@@ -1,0 +1,27 @@
+{
+ "before": [
+  "tradition.w0_soak_0.0:The Elder Fair:charter:fair:4",
+  "tradition.w0_soak_0.1:The Greening Fair:greening:fair:4",
+  "tradition.w0_soak_0.2:The Dead Vigil:the-dead:vigil:4",
+  "tradition.w0_soak_0.3:The Long Hearth Offering:hearth:offering:4",
+  "tradition.w0_soak_0.4:The Charter Offering:charter:offering:4"
+ ],
+ "after": [
+  "tradition.w0_soak_0.0:The Elder Fair:charter:fair:4",
+  "tradition.w0_soak_0.1:The Greening Fair:greening:fair:4",
+  "tradition.w0_soak_0.2:The Dead Vigil:the-dead:vigil:4",
+  "tradition.w0_soak_0.3:The Long Hearth Offering:hearth:offering:4",
+  "tradition.w0_soak_0.4:The Charter Offering:charter:offering:4"
+ ],
+ "sameIdentity": true,
+ "pilgrimsBefore": 4,
+ "pilgrimsAfter": 4,
+ "tickBefore": 52,
+ "tickAfter": 104,
+ "idKeyedSetWouldBe": [
+  "The Bright Founding Feast",
+  "The Quiet Market Vigil",
+  "The Ninth Feast",
+  "The Lesser Contest"
+ ]
+}

@@ -1,0 +1,60 @@
+import { test } from 'vitest';
+import { writeFileSync, readFileSync } from 'node:fs';
+import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { deriveFoundingTraditions } from '../../src/domain/traditions/genesis.js';
+import { drawsPilgrims, pilgrimageDraw } from '../../src/domain/traditions/pilgrimage.js';
+import { getSpatialLedger, isMapped, pathCost } from '../../src/domain/spatial/distanceRead.js';
+import { simulateCampaignWorldInterval } from '../../src/domain/worldPulse/advanceInterval.js';
+import { SIMULATION_RULE_PRESETS } from '../../src/domain/worldPulse/simulationRules.js';
+import { ensureRegionalGraph } from '../../src/domain/region/index.js';
+import { composeSoakRules, soakAdvanceEpoch } from '../../scripts/audit/soakRules.mjs';
+import { buildWholeWorldSoakSpatialCanon } from '../../scripts/audit/whole-world-soak-spatial-fixture.mjs';
+import { WF0_DEITY_BEARING_CASE, seatDeityBearingCase, planDeityBearingSeats } from '../../scripts/audit/whole-world-soak-deity-fixture.mjs';
+const NOW = '2026-07-12T00:00:00.000Z'; const SEED = 'w0-soak';
+const REGION_ARCHETYPES = [
+  { settType: 'city', culture: 'germanic', terrain: 'river', tradeRouteAccess: 'crossroads' },
+  { settType: 'town', culture: 'germanic', terrain: 'grassland', tradeRouteAccess: 'road' },
+  { settType: 'town', culture: 'celtic', terrain: 'coastal', tradeRouteAccess: 'port' },
+  { settType: 'village', culture: 'norse', terrain: 'mountains', tradeRouteAccess: 'road' }];
+const SEQ_IDS = ['soak-a', 'soak-b', 'soak-c', 'soak-d'];
+const realm = (cc) => REGION_ARCHETYPES.map((config, i) => { const settlement = generateSettlementPipeline(config, null, { seed: `${SEED}-${i}`, customContent: cc });
+  return { id: SEQ_IDS[i], name: settlement.name || SEQ_IDS[i], phase: 'canon', settlement, campaignState: { phase: 'canon', eventLog: [], locks: {} } }; });
+async function year(saves, worldState, y) {
+  const { fullRules } = composeSoakRules({ preset: SIMULATION_RULE_PRESETS.full_simulation.rules, seasons: 'preset', overlay: {} });
+  const campaign = { id: 'wf0-live-year', name: 'WF-0 live year', settlementIds: saves.map((s) => s.id), regionalGraph: ensureRegionalGraph({ edges: [], channels: [] }, { now: NOW }),
+    wizardNews: { currentTick: 0, entries: [] },
+    worldState: worldState || { rngSeed: SEED, tick: 0, canonizedAt: NOW, ...buildWholeWorldSoakSpatialCanon(saves), simulationRules: fullRules, stressors: [] } };
+  const result = await simulateCampaignWorldInterval({ campaign, saves, interval: 'one_year', commit: true, now: NOW, autoResolve: true, advanceEpoch: soakAdvanceEpoch({ simulationRules: fullRules, seed: SEED, year: y }) });
+  const byId = new Map((result.settlementUpdates || []).map((u) => [String(u.saveId), u.settlement]));
+  return { worldState: result.worldState, finalSaves: saves.map((s) => (byId.has(String(s.id)) ? { ...s, settlement: byId.get(String(s.id)) } : s)) };
+}
+const brief = (recs) => recs.map((r) => `${r.name} [${r.coreMotif?.element}/${r.coreMotif?.act} band ${r.scaleBand}]${drawsPilgrims(r) ? ' *PILGRIMS*' : ''}`);
+test('WF0-MEASURE', () => {
+  const generated = realm(WF0_DEITY_BEARING_CASE.customContent);
+  const { saves } = seatDeityBearingCase(generated, WF0_DEITY_BEARING_CASE, { now: NOW });
+  const digest = buildWholeWorldSoakSpatialCanon(saves).spatialDigest; const out = {};
+  for (const id of SEQ_IDS) { const seated = saves.find((s) => s.id === id); const raw = generated.find((s) => s.id === id);
+    const q = deriveFoundingTraditions(seated.settlement).filter(drawsPilgrims); const reach = saves.filter((s) => s.id !== id && isMapped(digest, s.id) && pathCost(digest, id, s.id) != null).map((s) => s.id);
+    out[id] = { name: seated.name, patron: Boolean(seated.settlement?.config?.primaryDeitySnapshot), cults: (seated.settlement?.config?.cultDeitySnapshots || []).length,
+      seatedSet: brief(deriveFoundingTraditions(seated.settlement)), unseatedSet: brief(deriveFoundingTraditions(raw.settlement)), seatedQualifying: q.length,
+      unseatedQualifying: deriveFoundingTraditions(raw.settlement).filter(drawsPilgrims).length, mapped: isMapped(digest, id), reachable: reach,
+      draw: q.length ? pilgrimageDraw({ hostId: id, hostRec: q[0], settlements: saves.map((s) => ({ id: s.id, settlement: s.settlement })), digest }) : null };
+    for (const host of ['soak-a', 'soak-b']) out[`plan:${host}`] = planDeityBearingSeats(generated, { ...WF0_DEITY_BEARING_CASE, patronHostId: host }, { now: NOW }).preconditionsMet; }
+  writeFileSync(process.env.WF0_OUT, JSON.stringify(out, null, 1));
+}, 600000);
+test('WF0-LIT1', async () => {
+  const { saves } = seatDeityBearingCase(realm(WF0_DEITY_BEARING_CASE.customContent), WF0_DEITY_BEARING_CASE, { now: NOW });
+  const { worldState, finalSaves } = await year(saves, null, 1);
+  writeFileSync('/home/user/scratch/wf0-lit-K1.json', JSON.stringify({ worldState, finalSaves }));
+  writeFileSync('/home/user/scratch/wf0-lit-K1-ledger.json', JSON.stringify(getSpatialLedger(worldState, 'traditions')?.['soak-a'] || []));
+}, 600000);
+test('WF0-LIT2', async () => {
+  const { worldState, finalSaves } = JSON.parse(readFileSync('/home/user/scratch/wf0-lit-K1.json', 'utf8'));
+  const before = getSpatialLedger(worldState, 'traditions')?.['soak-a'] || [];
+  const next = await year(finalSaves, worldState, 2);
+  const after = getSpatialLedger(next.worldState, 'traditions')?.['soak-a'] || [];
+  const key = (recs) => recs.map((r) => `${r.id}:${r.name}:${r.coreMotif?.element}:${r.coreMotif?.act}:${r.scaleBand}`);
+  writeFileSync('/home/user/scratch/wf0-lit-K1b.json', JSON.stringify({ before: key(before), after: key(after), sameIdentity: JSON.stringify(key(before)) === JSON.stringify(key(after)),
+    pilgrimsBefore: before.filter(drawsPilgrims).length, pilgrimsAfter: after.filter(drawsPilgrims).length, tickBefore: worldState.tick, tickAfter: next.worldState.tick,
+    idKeyedSetWouldBe: deriveFoundingTraditions(finalSaves.find((s) => s.id === 'soak-a').settlement).map((r) => r.name) }, null, 1));
+}, 600000);

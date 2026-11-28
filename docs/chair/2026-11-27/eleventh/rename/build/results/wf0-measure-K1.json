@@ -1,0 +1,102 @@
+{
+ "soak-a": {
+  "name": "Waldbrücke",
+  "patron": true,
+  "cults": 0,
+  "seatedSet": [
+   "The Elder Fair [charter/fair band 4] *PILGRIMS*",
+   "The Greening Fair [greening/fair band 4] *PILGRIMS*",
+   "The Dead Vigil [the-dead/vigil band 4]",
+   "The Long Hearth Offering [hearth/offering band 4] *PILGRIMS*",
+   "The Charter Offering [charter/offering band 4] *PILGRIMS*"
+  ],
+  "unseatedSet": [
+   "The Elder Fair [charter/fair band 4] *PILGRIMS*",
+   "The Long Sun Fair [long-sun/fair band 4] *PILGRIMS*",
+   "The Dead Vigil [the-dead/vigil band 4]",
+   "The Long Hearth Offering [hearth/offering band 4] *PILGRIMS*",
+   "The Greening Fair [greening/fair band 4] *PILGRIMS*"
+  ],
+  "seatedQualifying": 4,
+  "unseatedQualifying": 4,
+  "mapped": true,
+  "reachable": [
+   "soak-b",
+   "soak-c",
+   "soak-d"
+  ],
+  "draw": 0.025811948386847933
+ },
+ "plan:soak-a": true,
+ "plan:soak-b": true,
+ "soak-b": {
+  "name": "Grünbach",
+  "patron": true,
+  "cults": 1,
+  "seatedSet": [
+   "The Bright Feast [founding/feast band 3]",
+   "The Long Long Sun Vigil [long-sun/vigil band 3]",
+   "The Bright Offering [greening/offering band 3] *PILGRIMS*"
+  ],
+  "unseatedSet": [
+   "The Bright Feast [founding/feast band 3]",
+   "The Long Hunt Procession [hunt/procession band 3] *PILGRIMS*",
+   "The Bright Offering [greening/offering band 3] *PILGRIMS*"
+  ],
+  "seatedQualifying": 1,
+  "unseatedQualifying": 2,
+  "mapped": true,
+  "reachable": [
+   "soak-a",
+   "soak-c",
+   "soak-d"
+  ],
+  "draw": 0.03530858131918962
+ },
+ "soak-c": {
+  "name": "Caerbridge",
+  "patron": false,
+  "cults": 1,
+  "seatedSet": [
+   "The Great Vigil [first-landing/vigil band 3]",
+   "The Common Dead Offering [the-dead/offering band 3] *PILGRIMS*",
+   "The Landfall Procession [first-landing/procession band 3] *PILGRIMS*"
+  ],
+  "unseatedSet": [
+   "The Great Vigil [first-landing/vigil band 3]",
+   "The Common Dead Offering [the-dead/offering band 3] *PILGRIMS*",
+   "The Landfall Procession [first-landing/procession band 3] *PILGRIMS*"
+  ],
+  "seatedQualifying": 2,
+  "unseatedQualifying": 2,
+  "mapped": true,
+  "reachable": [
+   "soak-a",
+   "soak-b",
+   "soak-d"
+  ],
+  "draw": 0.03690329553697925
+ },
+ "soak-d": {
+  "name": "Grímli",
+  "patron": false,
+  "cults": 0,
+  "seatedSet": [
+   "The Wolf Feast [charter/feast band 2]",
+   "The Iron Feast [field/feast band 2]"
+  ],
+  "unseatedSet": [
+   "The Wolf Feast [charter/feast band 2]",
+   "The Iron Feast [field/feast band 2]"
+  ],
+  "seatedQualifying": 0,
+  "unseatedQualifying": 0,
+  "mapped": true,
+  "reachable": [
+   "soak-a",
+   "soak-b",
+   "soak-c"
+  ],
+  "draw": null
+ }
+}

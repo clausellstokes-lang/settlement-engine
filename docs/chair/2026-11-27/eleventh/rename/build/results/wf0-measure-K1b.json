@@ -1,0 +1,100 @@
+{
+ "soak-a": {
+  "name": "Waldbrücke",
+  "patron": true,
+  "cults": 0,
+  "seatedSet": [
+   "The Bright Founding Feast [founding/feast band 4]",
+   "The Quiet Market Vigil [market/vigil band 3]",
+   "The Ninth Feast [hunt/feast band 4]",
+   "The Lesser Contest [harvest/contest band 1]"
+  ],
+  "unseatedSet": [
+   "The Bright Founding Feast [founding/feast band 4]",
+   "The Quiet Market Vigil [market/vigil band 3]",
+   "The Ninth Contest [field/contest band 4]",
+   "The Lesser Contest [harvest/contest band 1]"
+  ],
+  "seatedQualifying": 0,
+  "unseatedQualifying": 0,
+  "mapped": true,
+  "reachable": [
+   "soak-b",
+   "soak-c",
+   "soak-d"
+  ],
+  "draw": null
+ },
+ "plan:soak-a": false,
+ "plan:soak-b": true,
+ "soak-b": {
+  "name": "Grünbach",
+  "patron": true,
+  "cults": 1,
+  "seatedSet": [
+   "The Bright Fair [founding/fair band 3] *PILGRIMS*",
+   "The Old Dead Contest [the-dead/contest band 3]",
+   "The Common Feast [hearth/feast band 3]"
+  ],
+  "unseatedSet": [
+   "The Bright Fair [founding/fair band 3] *PILGRIMS*",
+   "The Old Standing Stone Contest [stone/contest band 3]",
+   "The Common Feast [hearth/feast band 3]"
+  ],
+  "seatedQualifying": 1,
+  "unseatedQualifying": 1,
+  "mapped": true,
+  "reachable": [
+   "soak-a",
+   "soak-c",
+   "soak-d"
+  ],
+  "draw": 0.03530858131918962
+ },
+ "soak-c": {
+  "name": "Caerbridge",
+  "patron": false,
+  "cults": 1,
+  "seatedSet": [
+   "The Old Fair [first-landing/fair band 3] *PILGRIMS*",
+   "The Contest of the First Landing [first-landing/contest band 1]",
+   "The Feast of the Harvest [harvest/feast band 3]"
+  ],
+  "unseatedSet": [
+   "The Old Fair [first-landing/fair band 3] *PILGRIMS*",
+   "The Contest of the First Landing [first-landing/contest band 1]",
+   "The Feast of the Harvest [harvest/feast band 3]"
+  ],
+  "seatedQualifying": 1,
+  "unseatedQualifying": 1,
+  "mapped": true,
+  "reachable": [
+   "soak-a",
+   "soak-b",
+   "soak-d"
+  ],
+  "draw": 0.03690329553697925
+ },
+ "soak-d": {
+  "name": "Grímli",
+  "patron": false,
+  "cults": 0,
+  "seatedSet": [
+   "The Long Feast [charter/feast band 2]",
+   "The Lesser Hearth Vigil [hearth/vigil band 2]"
+  ],
+  "unseatedSet": [
+   "The Long Feast [charter/feast band 2]",
+   "The Lesser Hearth Vigil [hearth/vigil band 2]"
+  ],
+  "seatedQualifying": 0,
+  "unseatedQualifying": 0,
+  "mapped": true,
+  "reachable": [
+   "soak-a",
+   "soak-b",
+   "soak-c"
+  ],
+  "draw": null
+ }
+}

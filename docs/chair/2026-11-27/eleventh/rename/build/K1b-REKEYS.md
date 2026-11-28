@@ -53,7 +53,20 @@ Rule: in each series, the first seed from 0 that meets EVERY arm of the block. "
 
 - With K1b, 2 of 15 fail: (e) `plan.preconditionsMet` is false, and (f) the patron host's minted set holds no `drawsPilgrims` observance.
 - With K1b reverted (M0): 15 of 15 pass.
-- The corpus is the soak's own: `w0-soak-<i>`, pinned to `scripts/audit/whole-world-soak.mjs` by arm (g). The host choice is `whole-world-soak-deity-fixture.mjs`'s. Both are outside the manifest, so I await the chair's word.
+- The corpus is the soak's own: `w0-soak-<i>`, pinned to `scripts/audit/whole-world-soak.mjs` by arm (g). The host choice is `whole-world-soak-deity-fixture.mjs`'s. Both are outside the manifest.
+- **The chair's ruling K1b-2** was to measure first. The measure (`tools/k1b-wf0-probe.test.js.txt`; `results/wf0-measure-K1b.json`, and `-K1.json` for the K1 tree) counts, for each host, the rites drawing pilgrims, seated / unseated:
+
+  | host | K1b | K1 | its K1b set, and what it lacks |
+  |---|---|---|---|
+  | soak-a | 0 / 0 | 4 / 4 | founding/feast 4, market/vigil 3, hunt/feast 4, harvest/contest 1: no procession, offering or fair at band 3 or more |
+  | soak-b | **1 / 1** | 1 / 2 | The Bright Fair, founding/fair 3. A patron host, mapped, reaches a, c and d; draw 0.035; the plan's precondition holds |
+  | soak-c | 1 / 1 | 2 / 2 | no patron (a cult only) |
+  | soak-d | 0 / 0 | 0 / 0 | the deity-free control |
+
+- **The variants** (scratch copy, the file's 15 cases):
+  - V1, host choice only (`patronHostId: 'soak-b'`, `rivalHostId: 'soak-a'`, test line 390): (e) and (f) green, (c) RED (it pins the patron host's deity as the Dawn Warden). 14 of 15.
+  - V2, the case mirrored onto soak-b (soak-a the Ash Tyrant; soak-b the Dawn Warden with an Ash Tyrant cult; soak-c a Dawn Warden cult): 15 of 15.
+- V2 is beyond "host choice only", so it was sent to the chair at 11:12 UTC. Nothing is changed until the chair's word.
 
 ## The mutants (`/home/user/scratch/mut-k1b.sh`; each in a scratch copy of the tree, then restored)
 

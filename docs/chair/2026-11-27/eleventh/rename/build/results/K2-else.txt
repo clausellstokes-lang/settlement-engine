@@ -1,0 +1,20 @@
+C {"births":300,"pagesElse":3,"linesElse":42,"linesByName":15724,"linesGlued":600,"pages":["dp-thorp-21 Ögedeidavan","dp-thorp-148 Qal'atoasis","dp-hamlet-49 Ögedeikum"]} 
+   dp-thorp-21 Summary/Overview CAME: There is no market at Quillmarsh to gather its trade in one place. The thorp keeps few institutions and needs few.
+   dp-thorp-21 Systems/Economics CAME: Ask where Quillmarsh gets its salt and somebody will point you at the carts.
+   dp-thorp-21 Systems/Power GONE: RulerFeudal StewardshipGovernmentDominantUncontested▲
+   dp-thorp-21 Systems/Power CAME: RulerFeudal StewardshipGovernmentDominant▲
+   dp-thorp-21 Systems/Power CAME: The shape of authority
+   dp-thorp-21 Systems/Power CAME: The Feudal Stewardship at Quillmarsh watches the thorp's temper closely: what it fears is the thorp turning on it.
+   dp-thorp-21 Systems/Power CAME: Rule and succession
+   dp-thorp-21 Systems/Power CAME: If anyone at Quillmarsh asked who might replace the Feudal Stewardship, the thorp would have no contender to name.
+   dp-thorp-21 World/History CAME: Everything in Quillmarsh looks recently built, because most of it was.
+   dp-thorp-21 World/History CAME: Nobody in Quillmarsh has finished putting right the legacy the religious conflict left, and that legacy is a generation old.
+   dp-thorp-21 PDF/printProse CAME: There is no market at Quillmarsh to gather its trade in one place. The thorp keeps few institutions and needs few.
+   dp-thorp-21 PDF/printProse CAME: The Feudal Stewardship at Quillmarsh watches the thorp's temper closely: what it fears is the thorp turning on it.
+   dp-thorp-21 PDF/printProse CAME: If anyone at Quillmarsh asked who might replace the Feudal Stewardship, the thorp would have no contender to name.
+   dp-thorp-21 PDF/printProse CAME: Ask where Quillmarsh gets its salt and somebody will point you at the carts.
+V {"births":300,"pagesElse":1,"linesElse":4,"linesByName":16447,"linesGlued":600,"pages":["dp-thorp-148 Qal'atoasis"]} 
+   dp-thorp-148 Foundry/Overview GONE: *Moderate. Qal&#39;atoasis, a thorpe of 25, has no crisis on its hands this season.*
+   dp-thorp-148 Foundry/Overview CAME: *Moderate. Quillmarsh, a thorpe of 25, has no crisis on its hands this season.*
+   dp-thorp-148 Foundry/Viability Assessment GONE: Qal&#39;atoasis grows less than it eats, and part of the difference arrives by road.
+   dp-thorp-148 Foundry/Viability Assessment CAME: Quillmarsh grows less than it eats, and part of the difference arrives by road.
