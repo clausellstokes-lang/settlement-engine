@@ -851,3 +851,25 @@ See section 4, newest last.
   whose atom reads anything a DM can hide prints AS STORED (a test holds it); the self-check's blind spot (`no <band>`
   excludes dropped) cured if small.
 - STILL OUT: READER 122-123 (final); SURVEY-TABLE ("TIP?"); VOICES-CARDS; RENAME-BUILD (K1's measure).
+
+## V30 (05:20 UTC on 2026-11-28): VOICES-CARDS DONE (b34abe13a; filed: `survey/cards/`); **E28: THE VOICES ENGINE's SHAPE RULED** (`prompts/START-VOICES-ENGINE.txt`); SURVEY-TABLE's S-B DONE (0 of 1,800 pages moved); RENAME-BUILD's K1 MEASURES RULED (K1-1); RANGE-LINES' SAMPLE ACCEPTED
+- VOICES-CARDS: six card kinds, each with a fitting slot; no shared card primitive (one component at about twelve sites);
+  under the ruled odds the cap of three decides in nearly every town of size (a TAB BUDGET is needed); tensions have no
+  lawful speaker 73 to 93%% of the time by "a member of the power"; institutions, powers and tensions carry no record id;
+  the share strips `_seed`. ITS PROPOSAL (F) IS ACCEPTED AS THE DESIGN WITH TWELVE RULINGS (E28, in the brief): the seed is
+  the town's id; a tab budget as tuning; who voices a tension; one card a thing; a quote only where the card shows; a
+  thorp shows at least one; the crisis card first; a page-level variety rule; the lines as data fingerprinted by the guard,
+  a `needs` word with no atom makes its line ineligible; the liar's DM mark; THE SHARED PAGE SHOWS NO QUOTE, held by a test.
+  ITS SIX QUESTIONS "FOR THE OWNER" WERE DECIDED BY THE CHAIR AND TOLD TO HIM (vetoable).
+- SURVEY-TABLE, S-B DONE (6cb01c881, ca70d6086, f24acc325, 6fee24b4e on `lane/survey-table-wip-2026-11-28`): `place debt`
+  (at `factsAnswered.js`) and `nothing laid by` (`facts/nothingLaidBy.js`) are atoms; the solvent lines declare them;
+  `SOLVENT_LINES` retired; C and V rendered whole before and after: 0 records, 0 owner pages, 0 share pages, 0 lines moved.
+  Named: `economy.generated.js` +229 B raw (the prose-bytes register is the owner's). S-C in work (the census runs an hour).
+- RENAME-BUILD, K1's measures (bc34e3aa6): the id is minted at birth (`idFromSeed(_seed)`) and holds on every road; the
+  `_seed` sites are re-keyed in K1 too. **RULING K1-1:** the traditions' own draw (`genesis.js`, keyed on `_seed`: an
+  imported copy gets OTHER founding traditions) is re-keyed to the id as unit K1b, gated by the stamp floor; older records
+  byte for byte; goldens that follow are NAMED, never re-recorded; a saved lit world's mirror must not change (else STOP).
+- RANGE-LINES (session_01FE9mEw4PmKhSRZahqEDfzP; `lane/range-lines-2026-11-28` b86e28eef): (A) 24 lines for six view-time
+  keys; its house sample of forty READ AND ACCEPTED (plain; each line a different thing; shown to the owner); three rulings
+  (alternates of one rule-branch with a ranked pick to be added; one wording a town for the crisis mark; twins for the seat
+  sentence). It is writing the 72 keys.
