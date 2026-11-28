@@ -1,0 +1,22 @@
+READER 122-123's INTERIM REPORT, as received by the chair at 05:57 UTC on 2026-11-28 (session_01FE9mEwUutkT4X3codynXn5; its notes on lane/reader-122-2026-11-28 at 990d64f3e, a copy beside this file). Ruled in ../RULING-122-B-2.txt.
+
+READER 122-123 INTERIM: point 122 (777733a2a against aef8f9962) read whole on C and V; 7 findings; 122 does not stand as joined (1, 2). Point 123's branch found at 05:54 UTC at 003fd3b07; I am reading it now, with the two cures it carries (122-A-2, 122-T-5).
+
+FINDINGS (all CONFIRMED: executed or rendered by me)
+1. A3 (sent 04:31): `tensionDescriptionShown.js :: tensionDescriptionShown`. V dp-city-21, owner's tabs and shared page: Overview and History "A critical resource, grain, is running short, and some are hoarding it…"; Economics "Stores: a granary, about nine months of grain." All 11 grain twins of V.
+2. B2's REPLACEMENT IS A MARGIN LINE BESIDE A DEBT IN FORCE: `economyStateProse.js :: SOLVENT_LINES` (C3 refuses v2 only). C dp-metropolis-138: base "Teoticoatl pays its way from year to year…"; tip "With a little left over each year, Teoticoatl gets by on a broad base of trades, and every year people argue over how to spend it." beside "owes a heavy debt to an outside power, and the power is preparing to collect". C 13 towns, V 5. The Defense desk is outside the table: C dp-town-133 "Altfurt had money laid by before this trouble began…" beside the same debt; by a wider test of mine (money in hand, enough in hand, put by) C 22 towns, V 14, as on the base.
+3. B2 SILENCES ON THE BAND, NOT THE WORDS: a savings line goes on 172 | 83 pages (C | V); on 74 | 31 the tip's page prints neither a place debt nor "nothing laid by" / "would have to borrow" (Defense says "short of money for years" or "could not find the wages"). Slots left EMPTY: 2 | 18.
+4. A SHARED PAGE STAMPED BEFORE THE CHANGE keeps B2, A4, T as stamped (C: 109, 94, 234 pages) until its owner saves; A1, A3, B1, B3 reach it.
+5. THE VEIL (sent 03:46; the base's too): function-eye-only house stays on the served page; rows differ in 198 | 127 of 900 planted towns; criminal 'Farmland' 55 | 49.
+6. TESTS: no test holds A3 at the Overview, the PDF or the search row; five of B1's thirteen exclusions; B2's MODERATE row and CRITICAL band (11 of 57 mutants green, wider sets too). `selfVouchReceipt` 'soak1k-8' now asserts two negatives.
+7. BUNDLE (esbuild proxy): PDF render worker +124,696 B minified (A3's helper imports the economy desk); advance worker +86,577 B (`traditionFloor.js` imports `traditionDescription.js`); first paint nothing new.
+
+IN NUMBERS, C | V, base -> tip, owner's tabs
+(1) A1 12->0 | 9->0; A2 892->0 | 893->0; B1 12->0 | 6->0; A4 94->0 | 78->0; B3 0 | 19->0; A3 12->6 | 14->5 (past events, 122-A-1); B2 165->75 | 89->45 (a person's own debt 58 | 36; a past debt's History line 24 | 14; dp-town-133). T: rows dropped 261->0 | 226->0; short of band 154->0 | 123->0; none 57->0 | 47->0.
+(2) records moved 0 | 0; lines no item explains 0 | 0 (1,780 | 1,488 lines differ).
+(4) cured on player view, saved dossier, fresh and DM share, PDF, Foundry, Tonight, table, session, search rows; the AI grounding keeps A1's note (10 | 6).
+(5) 480 births, 238,086 addresses: rows moved 0; owner's set == shared rows 1,800/1,800; old towns (0.9.0, stampless) equal 1,800/1,800; refused by the floor 0.
+(6) 18 files, cases 386->421, none dropped; security cases word for word, twins verbatim.
+(7) no ceiling raised, no golden; the hand-keyed row is a re-key; every door re-run exits 0.
+(8) A2 re-cases 5,063 | 5,225 headings that are no person; B1 also moves the Outsider Impressions slot (12 | 6).
+NOT CHECKED at 122: the whole suite, a real browser, PDF bytes, the hosted share, `npm run build`; old towns rendered on V (function level only).
