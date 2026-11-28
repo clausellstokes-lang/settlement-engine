@@ -37,6 +37,8 @@
  * the engine's answer to "who put this here" (R7). Same audience as the Services tab: every
  * fact here is public roster and catalogue data, so no public or player gate applies.
  */
+import CardVoice from '../../primitives/CardVoice.jsx';
+import { institutionCardId } from '../../../domain/voices/cardIds.js';
 import { useMemo, useState } from 'react';
 import { FS, swatch, MUTED, GOLD_TINT, GOLD_DEEP } from '../../theme.js';
 import { useStore } from '../../../store/index.js';
@@ -293,6 +295,8 @@ export function InstitutionCard({ inst, category, label, services, sets, backs =
       {description && (
         <p data-testid="institution-desc" style={{ fontSize: proseFontSize(FS.xs, mobile), color: swatch.inkMag3, lineHeight: 1.4, margin: '2px 0 0' }}><MentionText text={description} selfId={selfId} /></p>
       )}
+      {/* THE CARD'S ONE QUOTE (S-G1): under the description; nothing when the card is silent */}
+      <CardVoice kind="institution" id={institutionCardId(inst)} />
       {/* THE FACE ROW (PEOPLE-6 LINKS, the owner's word of 2026-11-07): the house's representative
           as "Pastor Robert Thomas" — the honorific of its title (src/data/faceHonorifics.js), then
           the full name — a door to its NPC card (EntityLink, by the card's own id). A house with no

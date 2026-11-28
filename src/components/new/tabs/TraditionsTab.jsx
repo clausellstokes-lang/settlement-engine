@@ -20,6 +20,8 @@
  * bytes; the genesis leaf + corpus ride this chunk, never the eager graph.
  */
 
+import CardVoice from '../../primitives/CardVoice.jsx';
+import { traditionCardId } from '../../../domain/voices/cardIds.js';
 import { useMemo } from 'react';
 import { motifGlyph } from '../../../domain/traditions/genesis.js';
 import { shownTraditionsOf, sameWindowPlan, calendarLineOf, motifChipOf, descriptionSetOf } from '../../../domain/traditions/shownTraditions.js';
@@ -99,6 +101,8 @@ export function TraditionRow({ rec, preview, sameWindowAs = null, description = 
           {description}
         </p>
       )}
+      {/* THE CARD'S ONE QUOTE (S-G1): under the description */}
+      <CardVoice kind="tradition" id={traditionCardId(rec, !preview)} />
       {!preview && (
         <div style={{ marginTop: 6, display: 'flex', gap: 14, flexWrap: 'wrap', color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 750 }}>
           <span>Owner: <MentionText text={owner} structural /></span>

@@ -40,6 +40,8 @@ import { RANK_WORD } from '../../../../domain/people/cardPowers.js';
 import { entityIdFor } from '../../../../domain/dossier/entityLinks.js';
 import { chromeFontSize, proseFontSize } from '../../../../design/proseScale.js';
 import { powerNameInProse } from '../../../../domain/display/governanceAccount.js';
+import CardVoice from '../../../primitives/CardVoice.jsx';
+import { powerCardId } from '../../../../domain/voices/cardIds.js';
 
 // The parchment seam between flush cards. Imported (never a re-declared hex) so
 // it tracks the design token — the forked-color rule.
@@ -357,6 +359,9 @@ export function FactionRow({ settlement, r, i, last = false, isExp, onToggle, ro
           <span style={{ fontSize: proseFontSize(FS.xxs, mobile), color: swatch.inkMag3 }}>{leaderless}</span>
         </div>
       )}
+
+      {/* THE CARD'S ONE QUOTE (S-G1; ruling 4: the roster row, never the seat card): under the members line */}
+      <CardVoice kind="power" id={powerCardId(r.name)} inset={24} />
 
       {isExp && expandable && (
         <div id={`roster-faction-${i}-detail`} style={{ padding: '4px 12px 8px 26px', background: swatch['#FAF8F4'] }}>

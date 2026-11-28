@@ -2,7 +2,7 @@
  * components/primitives/CardVoice.jsx — THE ONE QUOTE SLOT OF A CARD (S-G1; the owner's fifth message: "all quotes are
  * added to cards and not between them or making new cards"; the chair's rulings E28 on VOICES-CARDS' F).
  *
- *   <CardVoice settlement={s} kind="institution" id={cardId} />
+ *   <CardVoice kind="institution" id={institutionCardId(inst)} />     (the ids: `domain/voices/cardIds.js`)
  *
  * One italic line in quotation marks and its signature, "— <Name>, <role>", placed and styled by this component alone,
  * the same on every card and every tab. It RENDERS NOTHING when the card is silent (no reserved height: the NPCs tab's
@@ -25,7 +25,7 @@ import { FS, MUTED, swatch } from '../theme.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
-/** @typedef {{ audience: string, customTraditions?: unknown }} VoicesAudienceValue */
+/** @typedef {{ audience: string, settlement?: unknown, customTraditions?: unknown }} VoicesAudienceValue */
 /** THE AUDIENCE OF A PAGE'S VOICES: 'owner' alone hears them. Default: a reader (fail-closed). */
 export const VoicesAudienceContext = createContext(/** @type {VoicesAudienceValue} */ ({ audience: 'reader' }));
 /** The dossier's provider. @param {{ value: VoicesAudienceValue, children?: import('react').ReactNode }} props */
@@ -59,11 +59,14 @@ const DM_INK = swatch['#4A1A4A'];
 const DM_LINE = Object.freeze({ borderLeft: `3px solid ${DM_INK}`, paddingLeft: 6, marginTop: 2, fontStyle: 'normal' });
 
 /**
- * @param {{ settlement: any, kind: string, id: string | null | undefined, dm?: boolean }} props
- *   `dm`: whether this surface may show the DM's mark (the owner's screen: yes); without it the liar's card is silent
+ * @param {{ settlement?: any, kind: string, id: string | null | undefined, dm?: boolean, inset?: number | string }} props
+ *   `settlement`: the record (else the provider's: the dossier gives its record once); `dm`: whether this surface may
+ *   show the DM's mark (the owner's screen: yes), without it the liar's card is silent; `inset`: the card's own left
+ *   indent, so the line aligns with the card's text (placement only; the style is this component's)
  */
-export default function CardVoice({ settlement, kind, id, dm = true }) {
-  const { audience, customTraditions } = useContext(VoicesAudienceContext);
+export default function CardVoice({ settlement: own = null, kind, id, dm = true, inset = 0 }) {
+  const { audience, customTraditions, settlement: given = null } = useContext(VoicesAudienceContext);
+  const settlement = own || given;
   const owner = audience === 'owner' && !!settlement && !!id;
   const mod = useVoicesModule(owner);
   const mobile = useIsMobile();
@@ -73,7 +76,7 @@ export default function CardVoice({ settlement, kind, id, dm = true }) {
   const { name, role } = quote.speaker;
   return (
     <div data-testid="card-voice" data-voice-line={quote.lineId} data-voice-kind={kind}
-      style={{ marginTop: 4, fontSize: proseFontSize(FS.xs, mobile), color: swatch.inkMag3, lineHeight: 1.4 }}>
+      style={{ marginTop: 4, paddingLeft: inset, fontSize: proseFontSize(FS.xs, mobile), color: swatch.inkMag3, lineHeight: 1.4 }}>
       <span style={{ fontStyle: 'italic' }}>{`“${quote.text}”`}</span>
       <span data-testid="card-voice-by" style={{ color: MUTED }}>{` — ${name}${role ? `, ${role}` : ''}`}</span>
       {quote.liar && (

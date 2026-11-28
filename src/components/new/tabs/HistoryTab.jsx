@@ -1,3 +1,5 @@
+import CardVoice from '../../primitives/CardVoice.jsx';
+import { tensionCardId } from '../../../domain/voices/cardIds.js';
 import React, { useState, useMemo } from 'react';
 import { FS, swatch, MUTED } from '../../theme.js';
 import { serif, Collapsible, Section, Empty } from '../Primitives';
@@ -96,6 +98,8 @@ export function TensionRow({t, settlement}) {
       </div>
       {/* Description. The tension's plot hooks live on the Plot Hooks tab (X-2). */}
       <p style={{fontSize:proseFontSize(FS.md, mobile),color:swatch.inkMag2,lineHeight:1.55,margin:'0 0 6px'}}><MentionText text={typeof t==='object'?tensionDescriptionShown(settlement,t)||t.issue||t.type:String(t)}/></p>
+      {/* THE CARD'S ONE QUOTE (S-G1; ruling 4: the History card, never the Overview's row) */}
+      {typeof t==='object'&&<CardVoice kind="tension" id={tensionCardId(t)} />}
       {/* Factions */}
       {t.factions?.length>0&&<div style={{display:'flex',gap:4,flexWrap:'wrap'}}>
         {t.factions.map((f,j)=><span key={j} style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:600,color:swatch['#7A5010'],background:swatch['#F5E8C0'],padding:'1px 6px'}}><MentionText text={f} structural/></span>)}

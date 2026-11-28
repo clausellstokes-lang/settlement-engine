@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback, lazy, Suspense } from 'react';
+import { VoicesAudience } from './primitives/CardVoice.jsx';
 import { FS, MUTED, SP, sans, swatch } from './theme.js';
 import { runTemplateNarrative } from '../generators/aiLayer';
 import { MapPin, Coins, Building2, Shield, Swords, Users, History, Package, CircleCheckBig, Compass, Cog, StickyNote, Sparkles, Drama, ScrollText, Clock } from 'lucide-react';
@@ -449,6 +450,14 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   // is stripped from the payload unless the owner opted into shareDm, so this can
   // never reveal more than is already shared.
   const publicDossier = readOnly && !saveId;
+  // THE VOICES' AUDIENCE (S-G1, the chair's ruling E28 point 12): the owner's own page hears the townspeople's quotes;
+  // the shared page and the player view hear none. Given ONCE, here, with the record every card's slot reads.
+  const voicesCustomTraditions = useStore(s => s.customContent?.traditions);
+  const voicesAudience = React.useMemo(() => ({
+    audience: !playerView && !publicDossier ? 'owner' : 'reader',
+    settlement: rawSettlement,
+    customTraditions: voicesCustomTraditions,
+  }), [playerView, publicDossier, rawSettlement, voicesCustomTraditions]);
   // THE LAUNCH TONE (the owner, 2026-11-01, ODQ §934.103): the World tabs that are still
   // "Available at launch" teasers wear a purple hue in the strip (dossier/useLaunchTones.js).
   // The deity embed is read ONCE here (the observed-shape instrument banks this file's read of
@@ -1019,10 +1028,12 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
                 tabIndex={0}
                 style={{ opacity: aiRegenerating ? 0.6 : 1, transition: 'opacity 0.2s' }}
               >
+                <VoicesAudience value={voicesAudience}>
                 {searchQuery.trim() ? (
                   <DossierSearchResults settlement={activeSettlement} query={searchQuery} tabs={allTabs} publicDossier={publicDossier} playerView={playerView}
                     npcProps={{ pinnedIds, onTogglePin, canAuthorNpc: npcAuthoringAllowed }} onOpenTab={setActiveTab}>{renderTab()}</DossierSearchResults>
                 ) : renderTab()}
+                </VoicesAudience>
               </div>
             </FeatureErrorBoundary>
           </Suspense>

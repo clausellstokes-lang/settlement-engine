@@ -1,3 +1,5 @@
+import CardVoice from '../primitives/CardVoice.jsx';
+import { personCardId } from '../../domain/voices/cardIds.js';
 import { Fragment, useState, useMemo } from 'react';
 import { FS, MUTED, swatch } from '../theme.js';
 import { edged } from '../../design/edgedBox.js';
@@ -463,8 +465,11 @@ export function NPCInlineCard({
           house line, said once; the person's sentences below print as written. */}
       {houseMark && <div data-testid="npc-house-mark" style={{fontSize:proseFontSize(FS.xs, mobile),color:swatch.inkMag3,fontStyle:'italic'}}>{houseMark}</div>}
       {honorific && <div data-testid="npc-role" style={{fontSize:chromeFontSize(FS.xs, mobile),color:MUTED}}>{honorific}</div>}
+      {/* THE CARD'S ONE QUOTE (S-G1): a line of the person's own, on the visible face; nothing when silent */}
+      <CardVoice kind="person" id={personCardId(npc)} />
         </div>
       )}
+      {!hasSubline && <CardVoice kind="person" id={personCardId(npc)} inset={12} />}
       {open && (
         <div style={{padding:'0 12px 10px',borderTop:`1px solid ${color}15`}}>
           {flag('settlementWorkbench') && canAuthorNpc && npc?.id != null && (

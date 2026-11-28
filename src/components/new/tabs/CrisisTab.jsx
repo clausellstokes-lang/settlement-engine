@@ -21,6 +21,8 @@
  * the ✎ YOU mark shows where the DM spoke, and "As the engine has it" reverts it. No free text.
  * This tab is the cast's only editor.
  */
+import CardVoice from '../../primitives/CardVoice.jsx';
+import { crisisCardId } from '../../../domain/voices/cardIds.js';
 import { useMemo, useState } from 'react';
 import { FS } from '../../theme.js';
 import { useStore } from '../../../store/index.js';
@@ -118,6 +120,8 @@ export function CrisisSection({ section, canAuthor = false, roster = [] }) {
       style={{ ...FLUSH, background: MARK.ground, borderLeft: `3px solid ${MARK.ink}`, padding: '10px 12px' }}>
       <div data-testid="crisis-event" style={{ fontSize: proseFontSize(FS.md, mobile), fontWeight: 800, color: MARK.ink, lineHeight: 1.3 }}>{section.line}</div>
       {section.summary && <p style={prose}>{section.summary}</p>}
+      {/* THE CARD'S ONE QUOTE (S-G1; ruling 8: the crisis card is ranked first): under the summary */}
+      <CardVoice kind="crisis" id={crisisCardId(section)} />
 
       <Heading>{CRISIS_PAGE_COPY.cast}</Heading>
       <div data-testid="crisis-cast">

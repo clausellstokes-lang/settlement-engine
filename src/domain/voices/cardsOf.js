@@ -43,7 +43,7 @@ import { shownTraditionsOf } from '../traditions/shownTraditions.js';
 import { describeTraditions } from '../traditions/traditionDescription.js';
 import { legitimacyCrisisOf } from '../facts/legitimacyCrisis.js';
 import { powerNameWithArticle } from '../display/powerSentenceName.js';
-import { factionIdFromName } from '../../lib/entities.js';
+import { crisisCardId, institutionCardId, personCardId, powerCardId, tensionCardId, traditionCardId } from './cardIds.js';
 
 /** The tabs a quote can sit on, in the plan's order (ruling 8: the crisis card first, then tab order). */
 export const VOICE_TABS = Object.freeze(['crisis', 'institutions', 'power', 'npcs', 'traditions', 'history']);
@@ -172,7 +172,7 @@ export function cardsOf(settlement, options = {}) {
     const group = Object.hasOwn(CRISIS_GROUP, c.type) ? CRISIS_GROUP[c.type] : null;
     const cast = c.cast.filter((r) => r.kind === 'npc').map((r) => byId.get(str(r.id))).filter(Boolean);
     push({
-      kind: 'crisis', id: c.id, tab: 'crisis', label: c.label, state: group || '', pools: group ? [`crisis.${group}`] : [],
+      kind: 'crisis', id: crisisCardId(c), tab: 'crisis', label: c.label, state: group || '', pools: group ? [`crisis.${group}`] : [],
       weight: 'weighty', silent: group ? null : 'no-pool', tiers: [/** @type {Record<string, any>[]} */ (cast), npcs],
       fill: { crisisNoun: crisisNounOf(c.type) || '' },
     });
@@ -199,7 +199,7 @@ export function cardsOf(settlement, options = {}) {
     const face = faces.get(name) || seatHouseFaceOf(/** @type {never} */ (s), name) || null;
     const people = peopleOf(name).filter((n) => n !== face);
     push({
-      kind: 'institution', id: str(inst.catalogId) || name, tab: 'institutions', label: name, state: `${cond.family}-${cond.state}`,
+      kind: 'institution', id: institutionCardId(inst), tab: 'institutions', label: name, state: `${cond.family}-${cond.state}`,
       pools: cond.pools, silent: cond.silent, weight: WEIGHTY.institution({ crisisRole: lever.has(name), marked: cond.marked }) ? 'weighty' : 'lesser',
       tiers: [face ? [face] : [], people], house: name, fill: cond.fill,
     });
@@ -211,7 +211,7 @@ export function cardsOf(settlement, options = {}) {
   for (const r of strata.roster) {
     const name = str(r.name);
     if (!name) continue;
-    const id = factionIdFromName(name) || name;
+    const id = powerCardId(name);
     const members = membersByRank(npcs, name);
     const memberIds = new Set(members.map((n) => str(n.id)));
     const others = npcs.filter((n) => !memberIds.has(str(n.id)));
@@ -239,7 +239,7 @@ export function cardsOf(settlement, options = {}) {
 
   // ── THE PEOPLE (a person's own card: a line of their own trade; the power's own face, three of its own) ──
   for (const npc of npcs) {
-    const id = str(npc.id);
+    const id = personCardId(npc);
     if (!id || !str(npc.name)) continue;
     const house = cardHouseOf(npc);
     const inst = house ? instByName.get(house) : null;
@@ -269,7 +269,7 @@ export function cardsOf(settlement, options = {}) {
     ];
     const pools = [...(TRADITION_ACT_POOLS.includes(act) ? [`tradition.${act}`] : []), ...(crises.length ? ['tradition.any-crisis'] : [])];
     push({
-      kind: 'tradition', id: lit && str(r.id) ? str(r.id) : `${element}.${act}`, tab: 'traditions', label: str(r.name), state: act,
+      kind: 'tradition', id: traditionCardId(r, lit), tab: 'traditions', label: str(r.name), state: act,
       pools, silent: pools.length ? null : 'no-pool', weight: WEIGHTY.tradition({ element }) ? 'weighty' : 'lesser',
       tiers: [/** @type {Record<string, any>[]} */ (keepers), npcs], fill: { crisisNoun }, keeperTier0: 'keeper',
     });
@@ -291,7 +291,7 @@ export function cardsOf(settlement, options = {}) {
     const fit = group && Object.hasOwn(WRONGED_FIT, group) ? WRONGED_FIT[group] : [];
     const fitted = fit.length ? npcs.filter((n) => fit.includes(houseFamilyOf(instByName.get(cardHouseOf(n) || '') || null) || '')) : [];
     push({
-      kind: 'tension', id: type, tab: 'history', label: type, state: group || '', pools: group ? [`tension.${group}`] : [],
+      kind: 'tension', id: tensionCardId(t), tab: 'history', label: type, state: group || '', pools: group ? [`tension.${group}`] : [],
       silent: group ? null : 'no-pool', weight: WEIGHTY.tension({ severity }) ? 'weighty' : 'lesser',
       tiers: fitted.length ? [fitted, npcs] : [npcs], exclude, wrongedFit: fit, fill: {},
     });
