@@ -172,3 +172,27 @@ function, an RPC, SQL). THEN: IF the cure needs only the app's own existing writ
 every affected address to the new key, as the cascade carries the stored prose; red first; a security case that a hide
 made before a rename still hides after it, on the shared page as rendered); IF IT NEEDS SQL, A SERVER FUNCTION OR A
 MIGRATION, STOP: it goes to the share lane as its first unit with this measure (a migration is the owner's hand).
+
+**K2-3 (14:51 UTC; a LANDING-STOPPER of point 124 from its reader, 14:50 UTC, CONFIRMED through the store's own actions):
+POINT 124 IS CURED BEFORE IT LANDS; THIS COMES BEFORE K4 AND K3.**
+- (A) THE DM's OWN WORDS. `arrivalScene` and `pressureSentence` are DM-editable (`domain/userEdits.js :: EDITABLE_FIELDS.settlement`;
+  `applyUserEdit` writes the DM's text into the field and keeps `_userEdits[path] = { value, originalValue }`). The cascade
+  rewrote the field alone: the DM's text was changed, the ledger kept the old words, and a revert put the OLD town name back
+  on the page. RULED (K2-1 (iv) stands, now built right): A HOME THE LEDGER MARKS EDITED IS NOT REWRITTEN: the field and the
+  ledger's `value` (the DM's words) stay exactly as typed; THE LEDGER's `originalValue` (the engine's sentence) FOLLOWS THE
+  RENAME, through the edits ledger's own writer (`userEdits.js`, as `rekeyUserEdit` keeps both homes of an edit moving
+  together under one writer), so the field and the ledger agree and a revert prints the engine's sentence under the NEW
+  name. Red first, by the READER's OWN PROBE made a test (Rathcombe: the DM's arrival text, a rename to Quillmarsh, the field
+  untouched, then a revert: the engine's sentence with "Quillmarsh"); the same for `pressureSentence`. THE LESSON, A RULE: A TEST
+  OF AN EDIT MAKES THE EDIT THROUGH THE LEDGER's OWN WRITER (`applyUserEdit`), never a hand-made `_userEdits` shape; the old
+  case 'a name the DM typed…' is re-pointed to that.
+- (B) THE AI NARRATIVE. `narrativeMutations.js :: applyRenameToAiData` rewrote every string leaf with no shield and no
+  do-nothing rule ("Ana Ford" became "Ana Quillmarsh", "Ford Abbey" became "Quillmarsh Abbey", and where the old name IS a
+  house the AI copy renamed the house). RULED: the town's rename of the AI copy takes THE SAME RULES AS THE RECORD's CASCADE,
+  by the one helper (`townRename.js`'s rewrite with its shields from the RECORD's other stored names, and its do-nothing
+  rule where the old name is another stored name); the AI copy's own NAME FIELDS of people, houses and powers are never
+  touched by a town's rename. The person's and the power's renames keep their own paths. Red first: the reader's Ford probe
+  (the saved `aiData` and the session's `aiSettlement` alike). And a DM-edited AI narrative, if one can be edited: the same
+  rule as (A).
+- PROOF: the reader's counts on the 1,800 births (it is measuring them) reproduced on the cure; K2's proof re-run; the
+  registers by K-REG. THEN "TIP? 124 (cure)" and the reader reads the delta.
