@@ -131,3 +131,7 @@ THE NEXT COMMAND: read each child's first report as it lands; relay the chair's 
   / link). The orphan rule on every public read (already built at 5ab9caeb7) is what closes it: A CURE AT THE LINK now, not a listed change.
   Told the chair (no ruling asked). Asked of U3R for its table: the renamed-end case, the sentence under drift at the link, one line on reach.
 - 2026-11-28T00:07:10Z: THE CHAIR: the orphan rule on every public read, the link included, IS A CURE (taken). D1 (the Overview's governed-by line naming the seat's holder) added to this lane and placed in the A19 unit at the join.
+- 2026-11-28T00:23:12Z: U45 AT ITS MARK, HANDS OVER AT A STEP's END: code `-u45-wip` 535c7e956 (15 commits on the tip: merge M to term (a)'s walker;
+  V27 (1)'s stored belt in), documents `-u45-docs` f1dac6e98 (`u45/U45-REPORT.md` section 1 current). Both tips CONFIRMED on origin by
+  ls-remote. Its one surprise (the belt's site unregistered in standingReaders) cured in 203e24e3c. SUCCESSOR U45B seated on
+  `v56/briefs/U45B-BRIEF.md` (from V27 (5): term (b), the mask gap proposed first, A5's cut, unit 5, the arms, A16, the hand-in).
