@@ -17,6 +17,7 @@ import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { deriveFoundingTraditions } from '../../src/domain/traditions/genesis.js';
 import { shownTraditionsOf, sharedTraditionRowsOf } from '../../src/domain/traditions/shownTraditions.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const SIZES = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
 const HEAVY = 600_000;
@@ -36,24 +37,26 @@ beforeAll(async () => {
 
 describe('(a) a 0.10.0 town and its copy without `_seed` found, show and share the same traditions', () => {
   it('the drawn set, the shown set and the shared rows are the owner\'s', () => {
-    for (const { seed, rec } of births) {
+    const failures = collectSeedFailures(births, ({ seed, rec }) => {
       expect(rec.generatorVersion, `${seed}: born at 0.10.0`).toBe('0.10.0');
       const copy = seedless(rec);
       expect(deriveFoundingTraditions(copy), `${seed}: the drawn set`).toEqual(deriveFoundingTraditions(rec));
       expect(shownTraditionsOf(copy, []), `${seed}: the shown set`).toEqual(shownTraditionsOf(rec, []));
       expect(sharedTraditionRowsOf(copy), `${seed}: the shared rows`).toEqual(sharedTraditionRowsOf(rec));
-    }
+    });
+    expectNoSeedFailures(failures, 'a copy without `_seed` founds, shows and shares the owner\'s traditions');
   }, HEAVY);
 });
 
 describe('(b) an earlier engine\'s record, and a stampless one, draw on the chain they drew on before', () => {
   it('re-stamped 0.9.0, or with no stamp, the set does not read the id', () => {
-    for (const { seed, rec } of births) {
+    const failures = collectSeedFailures(births, ({ seed, rec }) => {
       for (const [form, r] of /** @type {Array<[string, any]>} */ ([['0.9.0', { ...clone(rec), generatorVersion: '0.9.0' }], ['stampless', (() => { const c = clone(rec); delete c.generatorVersion; return c; })()]])) {
         expect(deriveFoundingTraditions(idless(r)), `${seed} ${form}`).toEqual(deriveFoundingTraditions(r));
         // anchored: without `_seed`, the old chain falls to the id, so the set the copy draws is NOT the owner's (the defect kept)
         expect(deriveFoundingTraditions(seedless(r)).map((x) => x.name), `${seed} ${form}: the old chain`).not.toEqual(deriveFoundingTraditions(r).map((x) => x.name));
       }
-    }
+    });
+    expectNoSeedFailures(failures, 'an earlier engine\'s record and a stampless one draw on the old chain');
   }, HEAVY);
 });
