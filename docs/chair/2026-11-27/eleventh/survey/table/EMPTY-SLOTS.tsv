@@ -1,0 +1,150 @@
+desk block	pool	towns C	towns V	crisis in force (towns)	why every line refuses (commonest; each variant once)	towns (first 6)
+DS-CND-1	PROVENANCE: causes[] or triggeredAt.sourceEventType populated	293	287	wartime 66; politically_fractured 53; recently_betrayed 52; indebted 51; monster_pressure 48; succession_void 48; insurgency 42; famine 41; mass_migration 36; under_siege 36; infiltrated 28; plague_onset 28; occupied 21; religious_conversion 16; infiltrated,monster_pressure 3; under_siege,infiltrated 2; insurgency,recently_betrayed 2; indebted,infiltrated 2; monster_pressure,famine 1; wartime,famine 1; succession_void,famine 1; indebted,famine 1; wartime,mass_migration 1	slot unfilled	C:dp-city-1 C:dp-city-10 C:dp-city-111 C:dp-city-113 C:dp-city-115 C:dp-city-117
+DS-DEF-1	readiness STRONG	124	174	calm 217; recently_betrayed 15; succession_void 14; indebted 8; insurgency 8; infiltrated 7; politically_fractured 7; mass_migration 7; monster_pressure 6; plague_onset 3; famine 3; wartime 2; infiltrated,monster_pressure 1	the pool holds no line	C:dp-city-1 C:dp-city-102 C:dp-city-107 C:dp-city-112 C:dp-city-114 C:dp-city-115
+DS-ECO-11	EXPLOITATION: unexploited, exportValue: high	89	68	calm 100; wartime 12; politically_fractured 6; occupied 6; famine 6; under_siege 5; indebted 5; recently_betrayed 4; religious_conversion 4; infiltrated 3; monster_pressure 2; plague_onset 2; succession_void 1; mass_migration 1	slot unfilled	C:dp-hamlet-104 C:dp-hamlet-105 C:dp-hamlet-43 C:dp-hamlet-47 C:dp-hamlet-52 C:dp-hamlet-65
+DS-ECO-12	INCOME WEIGHT: the religious houses	8	35	calm 20; under_siege 10; famine 4; politically_fractured 2; under_siege,infiltrated 1; monster_pressure 1; insurgency,recently_betrayed 1; indebted,famine 1; succession_void 1; infiltrated 1; wartime,mass_migration 1	no sacredHouse | tier: ≥ village (and 2 other reading(s))	C:dp-hamlet-103 C:dp-hamlet-123 C:dp-hamlet-43 C:dp-hamlet-91 C:dp-thorp-117 C:dp-thorp-12
+DS-GEN-6	river	0	33	calm 19; wartime 4; monster_pressure 3; plague_onset 1; mass_migration 1; insurgency 1; recently_betrayed 1; occupied 1; indebted,infiltrated 1; religious_conversion 1	admitted (yet nothing drew) | speaks over another deficit (and 1 other reading(s))	V:dp-city-10 V:dp-city-114 V:dp-city-121 V:dp-city-41 V:dp-city-46 V:dp-city-73
+DS-GEN-5	river	0	33	calm 19; wartime 4; monster_pressure 3; plague_onset 1; mass_migration 1; insurgency 1; recently_betrayed 1; occupied 1; indebted,infiltrated 1; religious_conversion 1	admitted (yet nothing drew) (and 1 other reading(s))	V:dp-city-10 V:dp-city-114 V:dp-city-121 V:dp-city-41 V:dp-city-46 V:dp-city-73
+DS-POW-5	council	17	10	politically_fractured 14; calm 6; succession_void 4; plague_onset 1; succession_void,famine 1; monster_pressure 1	no crisis: succession | no ruler: lord+no seat members | ruling body+no ruler: lord (and 3 other reading(s))	C:dp-city-117 C:dp-city-124 C:dp-city-29 C:dp-city-8 C:dp-hamlet-2 C:dp-hamlet-49
+DS-DEF-12	CAPACITY: enough	0	24	famine 20; monster_pressure,famine 1; wartime,famine 1; succession_void,famine 1; indebted,famine 1	food: ≥ pressured | food: ≥ pressured+food surplus	V:dp-hamlet-10 V:dp-hamlet-100 V:dp-hamlet-107 V:dp-hamlet-111 V:dp-hamlet-112 V:dp-hamlet-117
+DS-GEN-9	founding	8	9	calm 13; plague_onset 1; religious_conversion 1; famine 1; monster_pressure 1	slot unfilled	C:dp-city-116 C:dp-city-29 C:dp-city-31 C:dp-hamlet-49 C:dp-metropolis-133 C:dp-thorp-21
+DS-GEN-9	historicalCharacter	8	9	calm 13; plague_onset 1; religious_conversion 1; famine 1; monster_pressure 1	slot unfilled	C:dp-city-116 C:dp-city-29 C:dp-city-31 C:dp-hamlet-49 C:dp-metropolis-133 C:dp-thorp-21
+DS-REL-2	flagDriven count zero	8	9	calm 13; plague_onset 1; religious_conversion 1; famine 1; monster_pressure 1	slot unfilled	C:dp-city-116 C:dp-city-29 C:dp-city-31 C:dp-hamlet-49 C:dp-metropolis-133 C:dp-thorp-21
+DS-POW-5	governing body name: a SLOT, never a baked noun	8	9	calm 13; plague_onset 1; religious_conversion 1; famine 1; monster_pressure 1	slot unfilled	C:dp-city-116 C:dp-city-29 C:dp-city-31 C:dp-hamlet-49 C:dp-metropolis-133 C:dp-thorp-21
+DS-POW-7	layer DORMANT (no ledger materialized)	8	9	calm 13; plague_onset 1; religious_conversion 1; famine 1; monster_pressure 1	slot unfilled	C:dp-city-116 C:dp-city-29 C:dp-city-31 C:dp-hamlet-49 C:dp-metropolis-133 C:dp-thorp-21
+DS-GEN-3	economicViability.viable: true	8	8	calm 13; plague_onset 1; religious_conversion 1; monster_pressure 1	slot unfilled	C:dp-city-116 C:dp-city-29 C:dp-city-31 C:dp-hamlet-49 C:dp-metropolis-133 C:dp-thorp-21
+DS-GEN-3	foodSecurity.label: Secure	8	8	calm 13; plague_onset 1; religious_conversion 1; monster_pressure 1	slot unfilled	C:dp-city-116 C:dp-city-29 C:dp-city-31 C:dp-hamlet-49 C:dp-metropolis-133 C:dp-thorp-21
+DS-GEN-14	FOUNDED-OLD	7	9	calm 12; plague_onset 1; religious_conversion 1; famine 1; monster_pressure 1	slot unfilled	C:dp-city-116 C:dp-city-29 C:dp-city-31 C:dp-hamlet-49 C:dp-metropolis-133 C:dp-town-22
+DS-POW-2	recentConflict present	6	9	calm 11; plague_onset 1; religious_conversion 1; famine 1; monster_pressure 1	slot unfilled	C:dp-city-116 C:dp-city-29 C:dp-city-31 C:dp-hamlet-49 C:dp-metropolis-133 C:dp-town-22
+DS-POW-4	riskLabel: Holding	7	7	calm 12; plague_onset 1; religious_conversion 1	slot unfilled	C:dp-city-116 C:dp-city-29 C:dp-city-31 C:dp-hamlet-49 C:dp-metropolis-133 C:dp-town-22
+DS-DEF-2	Invasion & War: neither walls nor force	9	5	occupied 14	no crisis: occupied | no crisis: threat | speaks over another threat | watch+no crisis: occupied	C:dp-hamlet-12 C:dp-hamlet-140 C:dp-thorp-1 C:dp-thorp-132 C:dp-thorp-81 C:dp-thorp-87
+DS-GEN-16	LAYERED-ANCHORED	5	7	calm 10; famine 1; monster_pressure 1	slot unfilled	C:dp-city-116 C:dp-city-29 C:dp-city-31 C:dp-metropolis-133 C:dp-town-22 V:dp-city-122
+DS-POW-2	stable matched	7	5	calm 12	slot unfilled	C:dp-city-116 C:dp-city-29 C:dp-city-31 C:dp-metropolis-133 C:dp-thorp-21 C:dp-town-22
+DS-DEF-5	NO organized force at all	7	5	occupied 12	crisis: under_siege | crisis: under_siege, wartime | no crisis: occupied	C:dp-hamlet-12 C:dp-thorp-1 C:dp-thorp-132 C:dp-thorp-81 C:dp-thorp-87 C:dp-village-116
+DS-REL-2	prominentRelationship present	6	5	calm 8; plague_onset 1; famine 1; monster_pressure 1	slot unfilled	C:dp-city-116 C:dp-city-29 C:dp-hamlet-49 C:dp-metropolis-133 C:dp-thorp-21 C:dp-town-22
+DS-GEN-3	scores.economic: STRONG	4	6	calm 9; religious_conversion 1	slot unfilled	C:dp-city-116 C:dp-city-29 C:dp-city-31 C:dp-metropolis-133 V:dp-city-122 V:dp-city-146
+DS-GEN-6	road	8	2	calm 9; plague_onset 1	slot unfilled	C:dp-city-116 C:dp-city-29 C:dp-city-31 C:dp-hamlet-49 C:dp-metropolis-133 C:dp-thorp-21
+DS-GEN-2	intensity: moderate	4	6	calm 7; plague_onset 1; religious_conversion 1; famine 1	slot unfilled	C:dp-city-116 C:dp-city-31 C:dp-hamlet-49 C:dp-town-22 V:dp-city-122 V:dp-city-146
+DS-GEN-5	ordinary (route road and the default)	8	2	calm 9; plague_onset 1	slot unfilled	C:dp-city-116 C:dp-city-29 C:dp-city-31 C:dp-hamlet-49 C:dp-metropolis-133 C:dp-thorp-21
+DS-GEN-13	MARKET-OPEN	5	5	calm 9; religious_conversion 1	slot unfilled	C:dp-city-116 C:dp-city-29 C:dp-city-31 C:dp-metropolis-133 C:dp-town-22 V:dp-city-46
+DS-GEN-13	WAREHOUSES	5	5	calm 9; religious_conversion 1	slot unfilled	C:dp-city-116 C:dp-city-29 C:dp-city-31 C:dp-metropolis-133 C:dp-town-22 V:dp-city-122
+DS-GEN-3	prosperity: Comfortable / Prosperous	7	3	calm 8; plague_onset 1; religious_conversion 1	slot unfilled	C:dp-city-29 C:dp-city-31 C:dp-hamlet-49 C:dp-metropolis-133 C:dp-thorp-21 C:dp-town-22
+DS-POW-1	breakdown dominated by PROSPERITY, favourable	6	4	calm 10	slot unfilled	C:dp-city-29 C:dp-city-31 C:dp-metropolis-133 C:dp-thorp-21 C:dp-town-22 C:dp-village-21
+DS-POW-6	operation role duty evasion	6	4	under_siege 6; calm 4	no crisis: under_siege (and 2 other reading(s))	C:dp-city-29 C:dp-city-31 C:dp-city-53 C:dp-city-81 C:dp-city-98 C:dp-metropolis-133
+DS-GEN-12	OPEN-GROUND	8	1	calm 7; plague_onset 1; monster_pressure 1	slot unfilled	C:dp-city-116 C:dp-city-29 C:dp-city-31 C:dp-hamlet-49 C:dp-metropolis-133 C:dp-thorp-21
+DS-GEN-16	LEGACY-SHIFTED	4	5	calm 7; religious_conversion 1; famine 1	slot unfilled	C:dp-city-116 C:dp-city-29 C:dp-city-31 C:dp-town-22 V:dp-city-122 V:dp-city-146
+DS-ECO-1	COMBINATION C4: a low rung on a working approach	3	6	plague_onset 9	crisis: under_siege | no crisis: plague_onset | no exports+no crisis: plague_onset | no market+no exports+no crisis: plague_onset (and 1 other reading(s))	C:dp-city-5 C:dp-metropolis-65 C:dp-thorp-129 V:dp-city-10 V:dp-city-72 V:dp-hamlet-49
+DS-GEN-3	safetyProfile.safetyLabel: head word in {Secure, Controlled, Quarantined}	6	3	occupied 9	no crisis: threat | tier: >= village | watch+tier: >= village	C:dp-hamlet-12 C:dp-hamlet-140 C:dp-thorp-1 C:dp-thorp-132 C:dp-thorp-81 C:dp-thorp-87
+DS-GEN-18	BOUGHT-IN	4	5	calm 5; plague_onset 1; religious_conversion 1; famine 1; monster_pressure 1	slot unfilled	C:dp-hamlet-49 C:dp-thorp-21 C:dp-town-22 C:dp-village-21 V:dp-city-146 V:dp-town-142
+DS-GEN-3	scores.military: STRONG	4	4	calm 8	slot unfilled	C:dp-city-116 C:dp-city-29 C:dp-city-31 C:dp-metropolis-133 V:dp-city-122 V:dp-city-146
+DS-GEN-3	scores.monster: STRONG	4	4	calm 8	slot unfilled	C:dp-city-116 C:dp-city-29 C:dp-city-31 C:dp-metropolis-133 V:dp-city-122 V:dp-city-146
+DS-GEN-9	recency framing: Living memory	3	5	calm 7; monster_pressure 1	slot unfilled	C:dp-city-116 C:dp-city-29 C:dp-thorp-21 V:dp-city-122 V:dp-city-146 V:dp-city-46
+DS-GEN-18	STALLED	4	4	calm 8	slot unfilled	C:dp-city-116 C:dp-city-29 C:dp-city-31 C:dp-metropolis-133 V:dp-city-122 V:dp-city-46
+DS-GEN-17	GARRISONED	4	4	calm 4; occupied 3; religious_conversion 1	slot unfilled (and 1 other reading(s))	C:dp-city-116 C:dp-city-23 C:dp-metropolis-132 C:dp-town-22 V:dp-town-142 V:dp-town-145
+DS-POW-1	Tolerated	6	2	calm 6; plague_onset 1; religious_conversion 1	slot unfilled	C:dp-city-116 C:dp-city-29 C:dp-hamlet-49 C:dp-metropolis-133 C:dp-thorp-21 C:dp-town-22
+DS-POW-4	legitimacyHold: public opinion neither helps nor hurts	6	2	calm 6; plague_onset 1; religious_conversion 1	slot unfilled	C:dp-city-116 C:dp-city-29 C:dp-hamlet-49 C:dp-metropolis-133 C:dp-thorp-21 C:dp-town-22
+DS-GEN-13	COMMERCE: a bank	4	3	calm 7	slot unfilled	C:dp-city-116 C:dp-city-29 C:dp-city-31 C:dp-metropolis-133 V:dp-city-122 V:dp-city-146
+DS-GEN-3	scores.internal: STRONG	3	4	calm 7	slot unfilled	C:dp-city-29 C:dp-city-31 C:dp-metropolis-133 V:dp-city-122 V:dp-city-146 V:dp-city-46
+DS-GEN-17	ADMINISTERED	3	4	calm 7	slot unfilled	C:dp-city-29 C:dp-city-31 C:dp-metropolis-133 V:dp-city-122 V:dp-city-146 V:dp-city-46
+DS-ECO-12	CRITICAL IMPORT: a house needs what the land lacks	4	3	under_siege 7	no crisis: under_siege | no crisis: under_siege+no critical import brought in | stores: < 6 (and 1 other reading(s))	C:dp-city-53 C:dp-city-81 C:dp-city-98 C:dp-town-36 V:dp-city-53 V:dp-city-81
+DS-GEN-6	tier overlay: other tiers	2	5	calm 4; religious_conversion 1; famine 1; monster_pressure 1	slot unfilled	C:dp-town-22 C:dp-village-21 V:dp-town-142 V:dp-town-145 V:dp-town-27 V:dp-village-120
+DS-GEN-6	tier overlay: city	3	3	calm 6	slot unfilled	C:dp-city-116 C:dp-city-29 C:dp-city-31 V:dp-city-122 V:dp-city-146 V:dp-city-46
+DS-GEN-9	recency framing: Last century	3	3	calm 4; plague_onset 1; famine 1	slot unfilled	C:dp-city-31 C:dp-hamlet-49 C:dp-town-22 V:dp-metropolis-1 V:dp-town-27 V:dp-village-120
+DS-POW-4	legitimacyHold: public backing hardens the hold	2	4	calm 6	slot unfilled	C:dp-city-31 C:dp-village-21 V:dp-city-122 V:dp-city-146 V:dp-metropolis-1 V:dp-town-27
+DS-GEN-12	WATER-EDGE	0	6	calm 5; religious_conversion 1	slot unfilled	V:dp-city-122 V:dp-city-146 V:dp-city-46 V:dp-metropolis-1 V:dp-town-142 V:dp-town-27
+DS-ECO-11	EXPLOITATION: unexploited, exportValue: medium or low	0	6	calm 5; politically_fractured 1	slot unfilled	V:dp-city-44 V:dp-hamlet-140 V:dp-thorp-134 V:dp-town-83 V:dp-village-31 V:dp-village-34
+DS-GEN-3	scores.magical: WEAK	3	2	calm 5	slot unfilled	C:dp-city-116 C:dp-town-22 C:dp-village-21 V:dp-city-146 V:dp-city-46
+DS-POW-5	merchant_league	2	3	calm 4; religious_conversion 1	slot unfilled	C:dp-city-116 C:dp-city-31 V:dp-metropolis-1 V:dp-town-142 V:dp-town-27
+DS-DEF-2	Invasion & War: walls AND professional garrison	2	3	occupied 5	crisis: under_siege | no crisis: occupied	C:dp-city-23 C:dp-metropolis-132 V:dp-city-23 V:dp-metropolis-132 V:dp-town-32
+DS-GEN-3	defenseProfile.readiness.label: Fortress	3	2	calm 5	slot unfilled	C:dp-city-29 C:dp-city-31 C:dp-metropolis-133 V:dp-city-122 V:dp-metropolis-1
+DS-GEN-3	scores.military: WEAK	3	2	calm 3; plague_onset 1; famine 1	slot unfilled	C:dp-hamlet-49 C:dp-town-22 C:dp-village-21 V:dp-town-145 V:dp-village-120
+DS-GEN-3	scores.internal: CRITICAL	2	3	calm 2; plague_onset 1; famine 1; monster_pressure 1	slot unfilled	C:dp-hamlet-49 C:dp-village-21 V:dp-town-27 V:dp-village-120 V:dp-village-128
+DS-GEN-3	scores.magical: CRITICAL	2	3	calm 2; plague_onset 1; religious_conversion 1; monster_pressure 1	slot unfilled	C:dp-hamlet-49 C:dp-thorp-21 V:dp-town-142 V:dp-town-145 V:dp-village-128
+DS-GEN-9	event type: magical	1	4	calm 3; plague_onset 1; famine 1	slot unfilled	C:dp-hamlet-49 V:dp-city-122 V:dp-metropolis-1 V:dp-town-27 V:dp-village-120
+DS-GEN-13	NO-MARKET	3	2	calm 2; plague_onset 1; famine 1; monster_pressure 1	slot unfilled	C:dp-hamlet-49 C:dp-thorp-21 C:dp-village-21 V:dp-village-120 V:dp-village-128
+DS-GEN-17	BARE	3	2	calm 2; plague_onset 1; famine 1; monster_pressure 1	slot unfilled	C:dp-hamlet-49 C:dp-thorp-21 C:dp-village-21 V:dp-village-120 V:dp-village-128
+DS-GEN-13	COMMERCE: a merchant guild, no bank	1	4	calm 4; religious_conversion 1	slot unfilled	C:dp-town-22 V:dp-city-46 V:dp-town-142 V:dp-town-145 V:dp-town-27
+DS-POW-6	capture pressure RECOVERING (strong security, prosperity)	0	5	calm 5	watch (and 1 other reading(s))	V:dp-metropolis-1 V:dp-village-148 V:dp-village-39 V:dp-village-9 V:dp-village-91
+DS-DEF-2	Beasts & Monsters: frontier, credible deterrence	2	2	occupied 4	no crisis: occupied | no crisis: threat	C:dp-city-23 C:dp-metropolis-132 V:dp-city-23 V:dp-metropolis-132
+DS-GEN-3	scores.magical: ADEQUATE	2	2	calm 3; famine 1	slot unfilled	C:dp-city-29 C:dp-city-31 V:dp-town-27 V:dp-village-120
+DS-GEN-2	intensity: high	2	2	calm 4	slot unfilled	C:dp-city-29 C:dp-metropolis-133 V:dp-city-122 V:dp-metropolis-1
+DS-POW-1	Approved	2	2	calm 4	slot unfilled	C:dp-city-31 C:dp-village-21 V:dp-city-122 V:dp-city-146
+DS-GEN-3	defenseProfile.readiness.label: Vulnerable	3	1	calm 2; plague_onset 1; famine 1	slot unfilled	C:dp-hamlet-49 C:dp-thorp-21 C:dp-village-21 V:dp-village-120
+DS-GEN-7	structuralSuggestions[]	3	1	calm 2; plague_onset 1; monster_pressure 1	slot unfilled	C:dp-hamlet-49 C:dp-thorp-21 C:dp-village-21 V:dp-village-128
+DS-GEN-16	LEGACY-UNRESOLVED	2	2	calm 2; plague_onset 1; monster_pressure 1	slot unfilled	C:dp-hamlet-49 C:dp-thorp-21 V:dp-town-145 V:dp-village-128
+DS-GEN-13	ENTREPOT	0	4	calm 2; under_siege 2	slot unfilled (and 1 other reading(s))	V:dp-city-122 V:dp-city-146 V:dp-city-95 V:dp-town-11
+DS-ECO-9	HOW THE NEED IS MET: much of it brought in	0	4	plague_onset 4	no crisis: plague_onset	V:dp-city-72 V:dp-metropolis-65 V:dp-town-28 V:dp-town-99
+DS-GEN-3	defenseProfile.readiness.label: Well-Defended	1	2	calm 3	slot unfilled	C:dp-city-116 V:dp-city-146 V:dp-city-46
+DS-GEN-3	scores.internal: ADEQUATE	1	2	calm 2; religious_conversion 1	slot unfilled	C:dp-city-116 V:dp-town-142 V:dp-town-145
+DS-GEN-9	event type: political	2	1	calm 2; monster_pressure 1	slot unfilled	C:dp-city-116 C:dp-village-21 V:dp-village-128
+DS-GEN-3	safetyProfile.safetyLabel: head word in {Tense, Strained, Restricted, Unsafe}	1	2	plague_onset 1; calm 1; religious_conversion 1	slot unfilled	C:dp-hamlet-49 V:dp-city-146 V:dp-town-142
+DS-GEN-3	scores.monster: WEAK	2	1	calm 2; plague_onset 1	slot unfilled	C:dp-hamlet-49 C:dp-town-22 V:dp-town-145
+DS-POW-2	no token matched: unclassified (the plain-description floor)	1	2	plague_onset 1; religious_conversion 1; monster_pressure 1	slot unfilled	C:dp-hamlet-49 V:dp-town-142 V:dp-village-128
+DS-GEN-3	scores.magical: STRONG	1	2	calm 3	slot unfilled	C:dp-metropolis-133 V:dp-city-122 V:dp-metropolis-1
+DS-GEN-9	recency framing: Ancient	2	1	calm 2; religious_conversion 1	slot unfilled	C:dp-metropolis-133 C:dp-village-21 V:dp-town-142
+DS-GEN-3	scores.monster: CRITICAL	2	1	calm 2; monster_pressure 1	slot unfilled	C:dp-thorp-21 C:dp-village-21 V:dp-village-128
+DS-GEN-3	scores.economic: WEAK	1	2	calm 1; famine 1; monster_pressure 1	slot unfilled	C:dp-thorp-21 V:dp-village-120 V:dp-village-128
+DS-GEN-3	scores.economic: ADEQUATE	2	1	calm 3	slot unfilled	C:dp-town-22 C:dp-village-21 V:dp-town-145
+DS-GEN-3	scores.monster: ADEQUATE	0	3	religious_conversion 1; calm 1; famine 1	slot unfilled	V:dp-town-142 V:dp-town-27 V:dp-village-120
+DS-GEN-3	prosperity: Struggling / Poor	0	3	calm 1; famine 1; monster_pressure 1	slot unfilled	V:dp-town-145 V:dp-village-120 V:dp-village-128
+DS-POW-4	legitimacyHold: public rejection is breaking the hold	0	3	calm 1; famine 1; monster_pressure 1	slot unfilled	V:dp-town-145 V:dp-village-120 V:dp-village-128
+DS-GEN-3	prosperity: Moderate / Modest	1	1	calm 2	slot unfilled	C:dp-city-116 V:dp-city-46
+DS-POW-6	neutral baseline (nothing pulling either way)	1	1	calm 2	slot unfilled	C:dp-city-116 V:dp-city-46
+DS-GEN-9	event type: economic	1	1	calm 1; religious_conversion 1	slot unfilled	C:dp-city-29 V:dp-town-142
+DS-GEN-9	event type: disaster	1	1	calm 2	slot unfilled	C:dp-city-31 V:dp-town-145
+DS-GEN-6	tier overlay: thorp / hamlet	2	0	plague_onset 1; calm 1	slot unfilled	C:dp-hamlet-49 C:dp-thorp-21
+DS-POW-1	breakdown dominated by SAFETY, adverse	1	1	plague_onset 1; religious_conversion 1	slot unfilled	C:dp-hamlet-49 V:dp-town-142
+DS-GEN-6	tier overlay: metropolis	1	1	calm 2	slot unfilled	C:dp-metropolis-133 V:dp-metropolis-1
+DS-GEN-9	event type: religious	2	0	calm 2	slot unfilled	C:dp-metropolis-133 C:dp-thorp-21
+DS-GEN-17	GREAT HOUSE: cathedral	1	1	calm 2	slot unfilled	C:dp-metropolis-133 V:dp-city-46
+DS-GEN-17	GREAT HOUSE: monastery	1	1	calm 1; religious_conversion 1	slot unfilled	C:dp-metropolis-133 V:dp-town-142
+DS-GEN-16	LEGACY-SHIFTED-MARKED	1	1	calm 2	slot unfilled	C:dp-metropolis-133 V:dp-metropolis-1
+DS-GEN-3	scores.military: CRITICAL	1	1	calm 1; monster_pressure 1	slot unfilled	C:dp-thorp-21 V:dp-village-128
+DS-GEN-3	scores.internal: WEAK	2	0	calm 2	slot unfilled	C:dp-thorp-21 C:dp-town-22
+DS-GEN-16	ANCHORED-RECENT	1	1	calm 2	slot unfilled	C:dp-thorp-21 V:dp-metropolis-1
+DS-POW-2	governing faction holds a DOMINANT share	2	0	calm 2	slot unfilled	C:dp-thorp-21 C:dp-village-21
+DS-GEN-3	defenseProfile.readiness.label: Lightly Defended	1	1	calm 2	slot unfilled	C:dp-town-22 V:dp-town-145
+DS-GEN-16	ANCHORED-OLD	1	1	calm 1; religious_conversion 1	slot unfilled	C:dp-village-21 V:dp-town-142
+DS-GEN-16	LEGACY-RECOVERED	1	1	calm 2	slot unfilled	C:dp-village-21 V:dp-city-46
+DS-GEN-3	prosperity: Wealthy / Thriving	0	2	calm 2	slot unfilled	V:dp-city-146 V:dp-metropolis-1
+DS-GEN-9	event type: demographic	0	2	calm 2	slot unfilled	V:dp-city-146 V:dp-city-46
+DS-POW-1	Endorsed	0	2	calm 2	slot unfilled	V:dp-metropolis-1 V:dp-town-27
+DS-GEN-3	defenseProfile.readiness.label: Defensible	0	2	religious_conversion 1; calm 1	slot unfilled	V:dp-town-142 V:dp-town-27
+DS-GEN-3	scores.military: ADEQUATE	0	2	religious_conversion 1; calm 1	slot unfilled	V:dp-town-142 V:dp-town-27
+DS-GEN-3	safetyProfile.safetyLabel: head word in {Dangerous, Desperate}	0	2	famine 1; monster_pressure 1	slot unfilled	V:dp-village-120 V:dp-village-128
+DS-POW-1	Legitimacy Crisis	0	2	famine 1; monster_pressure 1	slot unfilled	V:dp-village-120 V:dp-village-128
+DS-POW-1	governanceFractured true	0	2	famine 1; monster_pressure 1	slot unfilled	V:dp-village-120 V:dp-village-128
+DS-POW-6	capture pressure ADVANCING (weak security, poor prosperity)	0	2	famine 1; monster_pressure 1	slot unfilled	V:dp-village-120 V:dp-village-128
+DS-POW-4	riskLabel: Contested	0	2	famine 1; monster_pressure 1	slot unfilled	V:dp-village-120 V:dp-village-128
+DS-GEN-3	scores.economic: CRITICAL	1	0	plague_onset 1	slot unfilled	C:dp-hamlet-49
+DS-CND-1	DIRECTION: worsening · CRISIS: plague_onset	1	0	plague_onset 1	slot unfilled	C:dp-hamlet-49
+DS-GEN-14	FOUNDED-YOUNG	1	0	calm 1	slot unfilled	C:dp-thorp-21
+DS-POW-4	riskLabel: Stable (no challengers)	1	0	calm 1	slot unfilled	C:dp-thorp-21
+DS-GEN-9	event type: occupation_infiltration	1	0	calm 1	slot unfilled	C:dp-town-22
+DS-POW-5	autocrat	1	0	calm 1	slot unfilled	C:dp-town-22
+DS-GEN-6	crossroads	0	1	calm 1	slot unfilled	V:dp-city-122
+DS-GEN-5	market (route crossroads)	0	1	calm 1	slot unfilled	V:dp-city-122
+DS-GEN-6	port	0	1	calm 1	slot unfilled	V:dp-city-146
+DS-GEN-5	port	0	1	calm 1	slot unfilled	V:dp-city-146
+DS-POW-6	operation role money laundering	0	1	calm 1	slot unfilled	V:dp-city-146
+DS-POW-6	operation role criminal revenue stream (unclassified)	0	1	calm 1	slot unfilled	V:dp-city-46
+DS-FTH-4	FLAG: religiousFraud	0	1	calm 1	institution: temple	V:dp-hamlet-20
+DS-DEF-2	Beasts & Monsters: settled, nothing organized	0	1	under_siege 1	no crisis: under_siege | speaks over another threat	V:dp-hamlet-41
+DS-CND-1	DIRECTION: stable · CRISIS: religious_conversion	0	1	religious_conversion 1	slot unfilled	V:dp-town-142
+DS-GEN-12	DRY-GROUND	0	1	calm 1	slot unfilled	V:dp-town-145
+DS-POW-1	Contested	0	1	calm 1	slot unfilled	V:dp-town-145
+DS-POW-1	breakdown dominated by PROSPERITY, adverse	0	1	calm 1	slot unfilled	V:dp-town-145
+DS-POW-2	unstable matched	0	1	calm 1	slot unfilled	V:dp-town-27
+DS-POW-5	FLAG: merchantCriminalBlur	0	1	calm 1	slot unfilled	V:dp-town-27
+DS-DEF-11	WALLED-STRAINED	0	1	occupied 1	crisis: under_siege | no crisis: occupied | no guardPresence+no crisis: occupied | no soldiers+crisis: under_siege | no soldiers+no crisis: occupied | no watch+no crisis: occupied	V:dp-town-32
+DS-GEN-3	economicViability.viable: false	0	1	famine 1	slot unfilled	V:dp-village-120
+DS-GEN-3	foodSecurity.label: Deficit × Active Famine	0	1	famine 1	slot unfilled	V:dp-village-120
+DS-GEN-6	isolated	0	1	famine 1	slot unfilled	V:dp-village-120
+DS-GEN-12	WOODLAND	0	1	famine 1	slot unfilled	V:dp-village-120
+DS-GEN-11	viable: false: the arithmetic does not close	0	1	famine 1	slot unfilled	V:dp-village-120
+DS-CND-1	DIRECTION: worsening · CRISIS: famine	0	1	famine 1	slot unfilled	V:dp-village-120
+DS-GEN-5	smoke (route isolated / mountain_pass)	0	1	famine 1	slot unfilled	V:dp-village-120
+DS-POW-2	Desperate matched	0	1	famine 1	slot unfilled	V:dp-village-120
+DS-GEN-3	defenseProfile.readiness.label: Undefended	0	1	monster_pressure 1	slot unfilled	V:dp-village-128
+DS-CND-1	DIRECTION: worsening · CRISIS: monster_pressure	0	1	monster_pressure 1	slot unfilled	V:dp-village-128
+DS-ECO-8	WEALTHY	0	1	infiltrated 1	crisis: calm | gate | stores: ≥ 3	V:dp-village-58
