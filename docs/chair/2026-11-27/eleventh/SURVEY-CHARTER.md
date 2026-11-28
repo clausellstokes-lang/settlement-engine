@@ -16,6 +16,18 @@
    the author of everything except the quoted voices. The pages are his recordings, remarks, and anecdotes rather than
    explicitly attributing everything to the surveyor as to quote him."
 
+5. (about 01:05 UTC on 2026-11-28) "Also all quotes are added to cards and not between them or making new cards. Just for
+   aesthetic simplicity and uniformity."
+
+## WHERE A QUOTE SITS (his fifth message; the chair's reading, said back to him the same minute; vetoable)
+- A QUOTE ALWAYS SITS INSIDE A CARD THAT ALREADY EXISTS: never a free-standing block between cards, never a new kind of card.
+- It goes on the card of THE THING IT IS ABOUT, signed by the speaker. ONE QUOTE SLOT A CARD, in one fixed place and style, the
+  same on every tab. Running prose with no cards (the Summary's opening paragraph) carries no quote: it stays the surveyor's.
+- THE CAP FOLLOWS FROM THE SLOT (a tab cannot become a roll-call). The PDF and the shared page follow the cards.
+- HIDING: a hidden card takes its quote with it; AND a quote is not shown where its SPEAKER is hidden from that reader.
+- THE CHAIR's ONE CHOICE, his to veto: a person's own card may carry one line in their own voice (of themselves or their
+  trade); everywhere else the quote is on the subject's card, not the speaker's.
+
 ## THE FRAME AS HIS FOURTH MESSAGE SETS IT (the chair's reading, said back to him the same minute; vetoable)
 - THE SURVEYOR IS NEVER QUOTED AND NEVER NAMED LINE BY LINE: every unmarked sentence is his by default; nothing says "the
   surveyor notes". ONLY TOWNSPEOPLE ARE QUOTED, sparingly.
