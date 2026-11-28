@@ -11,18 +11,21 @@
  * its `needs`. The TSVs are the source of the FIRST load only: after it, the two data files are the lines' home (a line
  * re-worded there is re-banked by the id guard's own door, `scripts/stable-pick-ids-door.mjs`).
  *
- * THE `needs` WORDS (ruling 10: "map each `needs` word of the TSV to an atom of the vocabulary; a word with NO atom makes
- * its line INELIGIBLE … never a new atom invented"). `NEEDS_ATOM` below is that map, and the whole of it: a word it
- * names maps to ONE atom of `facts/factVocabulary.js` (checked declarable by the data test); a word it does not name
- * makes the line INELIGIBLE (`ineligible: '<word>: no atom'`), kept in the data so the id guard banks it and the chair
- * can rule it, never drawn. A word written with tempers, `(W,T)`, needs its atom only in those versions
- * (`versionNeeds`); a word written bare needs it in all four (`needs`). The `{good}` slot's "needs: named good" is a
- * slot rule, not a fact (the leaf refuses the line where the mark's good is not a named good).
+ * THE `needs` WORDS (ruling 10, as the chair's rulings G1-1 and G1-2 shaped it): each word is answered ONE of three ways,
+ * per version (a word written with tempers, `(W,T)`, holds for those versions only; a bare word for all four):
+ *   an ATOM      a town-level noun, through `NEEDS_ATOM` to one atom of `facts/factVocabulary.js` (asked of the record
+ *                through the door; checked declarable by the data test): the version's `needs`;
+ *   the CARD     what KIND of house the card is (`domain/voices/cardWords.js :: CARD_WORDS`, answered by the card's own
+ *                catalogue id): the version's `card`;
+ *   NOWHERE      the version's `ineligible` (kept, banked by the id guard, never spoken; another line is taken).
+ * A word naming the tension's TYPE (`TYPE_STATE`) is a STATE, not a need: the line is filed under that state. No atom is
+ * invented. The `{good}` slot's "needs: named good" is a slot rule (the leaf refuses a version whose slot has no value).
  *
  * Deterministic: the same two TSVs write the same two files, byte for byte.
  */
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { REGISTERED_WORDS, newWordsNamedIn, thingsNamedIn } from '../src/domain/facts/registeredWords.js';
+import { CARD_WORDS } from '../src/domain/voices/cardWords.js';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -48,6 +51,17 @@ export const NEEDS_ATOM = Object.freeze({
   preachers: 'crisis body: religious_conversion',
   'charms sold': 'enchanting',
   'a hearing': 'court sits',
+  // the chair's ruling G1-1 (2): the vocabulary holds the food source (`foodSources`)
+  livestock: 'livestock',
+});
+
+/**
+ * THE TENSION TYPES THAT ARE STATES OF THEIR OWN (the chair's ruling G1-1 (3)): a line whose `needs` names the tension's
+ * TYPE is filed under its own state, keyed on the type by the leaf (`cardsOf.js :: TENSION_GROUP`): a key, not an atom.
+ */
+export const TYPE_STATE = Object.freeze({
+  'type: corruption_scandal': 'graft',
+  'type: infiltration_fear or occupation_legacy': 'mistrust',
 });
 
 /**
@@ -157,31 +171,33 @@ const poolKeyOf = (kind, state) => `${kind}.${state}`;
 
 /** @param {string[]} r @returns {object} one said line, as data */
 function saidLineOf(r) {
-  const [id, kind, state, speaker, , w, t, c, d, slots, , , needsCell] = r;
-  /** @type {string[]} */ const needs = [];
-  /** @type {Record<string, string[]>} */ const versionNeeds = {};
-  /** @type {string[]} */ const missing = [];
+  const [id, kind, stateCell, speaker, , w, t, c, d, slots, , , needsCell] = r;
+  let state = stateCell;
+  // the needs of every version, then of one version alone, by kind: an atom of the vocabulary (asked through the door),
+  // a word the CARD answers (`domain/voices/cardWords.js`), or a word answered nowhere (that version is ineligible)
+  /** @type {Record<string, { atoms: string[], card: string[], nowhere: string[] }>} */
+  const per = Object.fromEntries(TEMPERS.map((tp) => [tp, { atoms: [], card: [], nowhere: [] }]));
+  const add = (/** @type {string[]} */ list, /** @type {string} */ x) => { if (!list.includes(x)) list.push(x); };
   for (const term of needsTermsOf(needsCell)) {
+    if (Object.hasOwn(TYPE_STATE, term.word)) { state = TYPE_STATE[/** @type {keyof typeof TYPE_STATE} */ (term.word)]; continue; }
     const atom = Object.hasOwn(NEEDS_ATOM, term.word) ? NEEDS_ATOM[/** @type {keyof typeof NEEDS_ATOM} */ (term.word)] : null;
-    if (!atom) { missing.push(term.word.replace(/\s+/g, '-')); continue; }
-    if (!term.tempers) { if (!needs.includes(atom)) needs.push(atom); continue; }
-    for (const tp of term.tempers) (versionNeeds[tp] ||= []).includes(atom) || versionNeeds[tp].push(atom);
+    for (const tp of term.tempers || TEMPERS) {
+      if (atom) add(per[tp].atoms, atom);
+      else if (Object.hasOwn(CARD_WORDS, term.word)) add(per[tp].card, term.word);
+      else add(per[tp].nowhere, term.word);
+    }
   }
   const texts = { welcoming: w.trim(), transactional: t.trim(), cautious: c.trim(), dismissive: d.trim() };
   /** @type {Record<string, object>} */ const versions = {};
   for (const tp of TEMPERS) {
     const own = nounDeclarationOf(texts[/** @type {'welcoming'} */ (tp)], `${id} ${tp}`);
-    const vn = [...needs, ...(versionNeeds[tp] || [])];
+    const vn = [...per[tp].atoms];
     for (const a of own.needs) if (!vn.includes(a)) vn.push(a);
-    versions[tp] = versionOf(texts[/** @type {'welcoming'} */ (tp)], vn, own.excludes);
+    versions[tp] = { ...versionOf(texts[/** @type {'welcoming'} */ (tp)], vn, own.excludes),
+      ...(per[tp].card.length ? { card: per[tp].card } : {}), ...(per[tp].nowhere.length ? { ineligible: per[tp].nowhere } : {}) };
   }
   const sl = slotsOf(slots);
-  return {
-    id, kind, state, speaker: speakerTokensOf(speaker, id),
-    ...(sl.length ? { slots: sl } : {}),
-    ...(missing.length ? { ineligible: missing } : {}),
-    versions,
-  };
+  return { id, kind, state, speaker: speakerTokensOf(speaker, id), ...(sl.length ? { slots: sl } : {}), versions };
 }
 
 /** @param {string} id @returns {string} the liar line's group: `office.hall`, `front.trade`, `retainer`, `theft` … */
@@ -246,10 +262,11 @@ const SAID_HEAD = `/**
  *
  * Filed by pool, \`<card kind>.<state>\` (the keys of \`survey/lines/A-keys.md\` as ruled L-1 to L-4). Each line: its \`id\`; its
  * speaker rule (\`speaker\`: its mouths in the writer's order, as the generator's \`SPEAKER_KEY\` keys them); its \`slots\`
- * where it has any; \`ineligible\` (the writer's needs words that have no atom: the line is kept and never drawn, ruling 10);
- * and its four \`versions\`, keyed on the speaker's stored disposition (\`npc.presentation.disposition\`), each
- * \`{ text, needs, excludes }\`: the atoms that version presumes, asked of the record through the one door (the writer's
- * needs words through \`NEEDS_ATOM\`, and the nouns the text names through \`NOUN_DECLARATION\`). An absent field is empty.
+ * where it has any; and its four \`versions\`, keyed on the speaker's stored disposition (\`npc.presentation.disposition\`),
+ * each \`{ text, needs, excludes, card, ineligible }\`: the atoms that version presumes, asked of the record through the one
+ * door (the writer's needs words through \`NEEDS_ATOM\`, the nouns the text names through \`NOUN_DECLARATION\`); the
+ * card-level words its card must answer (\`domain/voices/cardWords.js\`); the words answered nowhere (that version is
+ * never spoken). An absent field is empty.
  *
  * Pure data, no logic. Read by \`domain/voices/voicePlan.js\` alone (lazily, with the tab: never on the first paint).
  */
@@ -275,8 +292,8 @@ export function generate(saidTsv, liarTsv) {
   /** @type {Map<string, object[]>} */ const said = new Map();
   let ineligible = 0;
   for (const r of readTsv(saidTsv)) {
-    const line = /** @type {{ kind: string, state: string, ineligible?: string[] }} */ (saidLineOf(r));
-    if (line.ineligible) ineligible += 1;
+    const line = /** @type {{ kind: string, state: string, versions: Record<string, { ineligible?: string[] }> }} */ (saidLineOf(r));
+    if (Object.values(line.versions).some((v) => v.ineligible)) ineligible += 1;
     const k = poolKeyOf(line.kind, line.state);
     if (!said.has(k)) said.set(k, []);
     /** @type {object[]} */ (said.get(k)).push(line);

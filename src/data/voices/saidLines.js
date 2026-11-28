@@ -6,10 +6,11 @@
  *
  * Filed by pool, `<card kind>.<state>` (the keys of `survey/lines/A-keys.md` as ruled L-1 to L-4). Each line: its `id`; its
  * speaker rule (`speaker`: its mouths in the writer's order, as the generator's `SPEAKER_KEY` keys them); its `slots`
- * where it has any; `ineligible` (the writer's needs words that have no atom: the line is kept and never drawn, ruling 10);
- * and its four `versions`, keyed on the speaker's stored disposition (`npc.presentation.disposition`), each
- * `{ text, needs, excludes }`: the atoms that version presumes, asked of the record through the one door (the writer's
- * needs words through `NEEDS_ATOM`, and the nouns the text names through `NOUN_DECLARATION`). An absent field is empty.
+ * where it has any; and its four `versions`, keyed on the speaker's stored disposition (`npc.presentation.disposition`),
+ * each `{ text, needs, excludes, card, ineligible }`: the atoms that version presumes, asked of the record through the one
+ * door (the writer's needs words through `NEEDS_ATOM`, the nouns the text names through `NOUN_DECLARATION`); the
+ * card-level words its card must answer (`domain/voices/cardWords.js`); the words answered nowhere (that version is
+ * never spoken). An absent field is empty.
  *
  * Pure data, no logic. Read by `domain/voices/voicePlan.js` alone (lazily, with the tab: never on the first paint).
  */
@@ -91,10 +92,10 @@ export const SAID_LINES = deepFreeze({
       } },
   ],
   'institution.care-ordinary': [
-    { id: 'SAID.inst.care-ordinary.1', speaker: ['keeper', 'works-there'], ineligible: ['medicine'],
+    { id: 'SAID.inst.care-ordinary.1', speaker: ['keeper', 'works-there'],
       versions: {
-        welcoming: { text: 'Rest does more good than most medicine.' },
-        transactional: { text: 'Medicines cost more every season, and people pay late.' },
+        welcoming: { text: 'Rest does more good than most medicine.', card: ['medicine'] },
+        transactional: { text: 'Medicines cost more every season, and people pay late.', card: ['medicine'] },
         cautious: { text: 'Rest usually works, if people stay in bed long enough.' },
         dismissive: { text: 'Nobody rests.' },
       } },
@@ -112,17 +113,17 @@ export const SAID_LINES = deepFreeze({
         cautious: { text: 'Some days there isn\'t room for everyone.' },
         dismissive: { text: 'Full again.' },
       } },
-    { id: 'SAID.inst.care-ordinary.4', speaker: ['keeper', 'works-there'], ineligible: ['medicine'],
+    { id: 'SAID.inst.care-ordinary.4', speaker: ['keeper', 'works-there'],
       versions: {
         welcoming: { text: 'There\'s always someone here to sit with the sick.' },
         transactional: { text: 'Clean cloths and herbs cost more every season.' },
-        cautious: { text: 'It\'s hard to say which medicines really help.' },
+        cautious: { text: 'It\'s hard to say which medicines really help.', card: ['medicine'] },
         dismissive: { text: 'Too many to look after.' },
       } },
-    { id: 'SAID.inst.care-ordinary.5', speaker: ['keeper', 'works-there'], ineligible: ['medicine'],
+    { id: 'SAID.inst.care-ordinary.5', speaker: ['keeper', 'works-there'],
       versions: {
         welcoming: { text: 'People bring eggs or bread to say thanks.' },
-        transactional: { text: 'Gifts of food don\'t pay for medicine.' },
+        transactional: { text: 'Gifts of food don\'t pay for medicine.', card: ['medicine'] },
         cautious: { text: 'Who knows how many get better at home.' },
         dismissive: { text: 'No thanks, mostly.' },
       } },
@@ -149,12 +150,12 @@ export const SAID_LINES = deepFreeze({
         cautious: { text: 'Even the best guesses about the weather go wrong.' },
         dismissive: { text: 'The rain never stops when it should.' },
       } },
-    { id: 'SAID.inst.field-ordinary.4', speaker: ['keeper', 'works-there'], ineligible: ['fences'],
+    { id: 'SAID.inst.field-ordinary.4', speaker: ['keeper', 'works-there'],
       versions: {
-        welcoming: { text: 'Neighbours mend each other\'s fences without being asked.' },
-        transactional: { text: 'Every broken fence costs a day of work.' },
-        cautious: { text: 'These fences won\'t last another wet winter.' },
-        dismissive: { text: 'Fences down again.' },
+        welcoming: { text: 'Neighbours mend each other\'s fences without being asked.', card: ['fences'] },
+        transactional: { text: 'Every broken fence costs a day of work.', card: ['fences'] },
+        cautious: { text: 'These fences won\'t last another wet winter.', card: ['fences'] },
+        dismissive: { text: 'Fences down again.', card: ['fences'] },
       } },
     { id: 'SAID.inst.field-ordinary.5', speaker: ['keeper', 'works-there'],
       versions: {
@@ -165,17 +166,17 @@ export const SAID_LINES = deepFreeze({
       } },
   ],
   'institution.grain-ordinary': [
-    { id: 'SAID.inst.grain-ordinary.1', speaker: ['keeper', 'works-there'], ineligible: ['flour-or-bread'],
+    { id: 'SAID.inst.grain-ordinary.1', speaker: ['keeper', 'works-there'],
       versions: {
-        welcoming: { text: 'The poorer families get a little extra flour, quietly.' },
+        welcoming: { text: 'The poorer families get a little extra flour, quietly.', card: ['flour or bread'] },
         transactional: { text: 'Damp and rats cost more grain than anyone admits.' },
         cautious: { text: 'People watch the scales very closely here.' },
-        dismissive: { text: 'Flour gets in everything.' },
+        dismissive: { text: 'Flour gets in everything.', card: ['flour or bread'] },
       } },
-    { id: 'SAID.inst.grain-ordinary.2', speaker: ['depends', 'anyone'], ineligible: ['flour-or-bread'],
+    { id: 'SAID.inst.grain-ordinary.2', speaker: ['depends', 'anyone'],
       versions: {
         welcoming: { text: 'When the sacks are full, everyone\'s in a better mood.' },
-        transactional: { text: 'Bread stays at the usual price while the stores hold.' },
+        transactional: { text: 'Bread stays at the usual price while the stores hold.', card: ['flour or bread'] },
         cautious: { text: 'People glance in at the door to see how much is left.' },
         dismissive: { text: 'Sacks, sacks, sacks.' },
       } },
@@ -230,10 +231,10 @@ export const SAID_LINES = deepFreeze({
         cautious: { text: 'Judgments here depend on who\'s asking, some say.' },
         dismissive: { text: 'More fines.' },
       } },
-    { id: 'SAID.inst.hall-ordinary.5', speaker: ['keeper', 'works-there'], ineligible: ['clerks', 'candles'],
+    { id: 'SAID.inst.hall-ordinary.5', speaker: ['keeper', 'works-there'],
       versions: {
-        welcoming: { text: 'The clerks work late to get everyone seen.' },
-        transactional: { text: 'Candles burn here long after dark, and someone pays for them.' },
+        welcoming: { text: 'The clerks work late to get everyone seen.', card: ['clerks'] },
+        transactional: { text: 'Candles burn here long after dark, and someone pays for them.', ineligible: ['candles'] },
         cautious: { text: 'Old records here have a way of going missing.' },
         dismissive: { text: 'The papers never stop coming.' },
       } },
@@ -246,10 +247,10 @@ export const SAID_LINES = deepFreeze({
         cautious: { text: 'Plenty gets said here that shouldn\'t be repeated.' },
         dismissive: { text: 'Comings and goings, all day.' },
       } },
-    { id: 'SAID.inst.inn-ordinary.2', speaker: ['keeper', 'works-there'], ineligible: ['candles'],
+    { id: 'SAID.inst.inn-ordinary.2', speaker: ['keeper', 'works-there'],
       versions: {
         welcoming: { text: 'The regulars always make room for a new face.' },
-        transactional: { text: 'Late nights burn a lot of candles.' },
+        transactional: { text: 'Late nights burn a lot of candles.', ineligible: ['candles'] },
         cautious: { text: 'New faces get watched until someone knows their business.' },
         dismissive: { text: 'Same regulars. Same stories.' },
       } },
@@ -438,19 +439,19 @@ export const SAID_LINES = deepFreeze({
         cautious: { text: 'Some worries brought here have no easy answer.' },
         dismissive: { text: 'Worries, all day long.' },
       } },
-    { id: 'SAID.inst.temple-ordinary.3', speaker: ['keeper', 'works-there'], ineligible: ['burials'],
+    { id: 'SAID.inst.temple-ordinary.3', speaker: ['keeper', 'works-there'],
       versions: {
-        welcoming: { text: 'Nobody is buried here without someone to mourn them.' },
-        transactional: { text: 'Burials cost more than poor families can pay.' },
+        welcoming: { text: 'Nobody is buried here without someone to mourn them.', card: ['burials'] },
+        transactional: { text: 'Burials cost more than poor families can pay.', card: ['burials'] },
         cautious: { text: 'Nobody likes to think about who might be next.' },
-        dismissive: { text: 'Another burial this week.' },
+        dismissive: { text: 'Another burial this week.', card: ['burials'] },
       } },
-    { id: 'SAID.inst.temple-ordinary.4', speaker: ['keeper', 'works-there'], ineligible: ['weddings'],
+    { id: 'SAID.inst.temple-ordinary.4', speaker: ['keeper', 'works-there'],
       versions: {
-        welcoming: { text: 'Weddings here bring everyone out, even the grumblers.' },
-        transactional: { text: 'A proper wedding costs a family a great deal.' },
-        cautious: { text: 'Not every match made here will be a happy one.' },
-        dismissive: { text: 'More weddings than money.' },
+        welcoming: { text: 'Weddings here bring everyone out, even the grumblers.', card: ['weddings'] },
+        transactional: { text: 'A proper wedding costs a family a great deal.', card: ['weddings'] },
+        cautious: { text: 'Not every match made here will be a happy one.', card: ['weddings'] },
+        dismissive: { text: 'More weddings than money.', card: ['weddings'] },
       } },
     { id: 'SAID.inst.temple-ordinary.5', speaker: ['keeper', 'works-there'],
       versions: {
@@ -489,11 +490,11 @@ export const SAID_LINES = deepFreeze({
         cautious: { text: 'The new recruits might not hold in a real fight.' },
         dismissive: { text: 'Boring, mostly.' },
       } },
-    { id: 'SAID.inst.watch-ordinary.5', speaker: ['keeper', 'watch-officer', 'works-there'], ineligible: ['weapons-kept'],
+    { id: 'SAID.inst.watch-ordinary.5', speaker: ['keeper', 'watch-officer', 'works-there'],
       versions: {
-        welcoming: { text: 'The weapons get cleaned and oiled with care.' },
-        transactional: { text: 'Rust ruins more weapons than fighting does.' },
-        cautious: { text: 'Not every weapon on the rack would last a real fight.' },
+        welcoming: { text: 'The weapons get cleaned and oiled with care.', card: ['weapons kept'] },
+        transactional: { text: 'Rust ruins more weapons than fighting does.', card: ['weapons kept'] },
+        cautious: { text: 'Not every weapon on the rack would last a real fight.', card: ['weapons kept'] },
         dismissive: { text: 'Rust eats everything here.' },
       } },
   ],
@@ -512,12 +513,12 @@ export const SAID_LINES = deepFreeze({
         cautious: { text: 'The water looks calm long before it really is.' },
         dismissive: { text: 'Too rough to go out today.' },
       } },
-    { id: 'SAID.inst.water-ordinary.3', speaker: ['keeper', 'works-there'], ineligible: ['fish'],
+    { id: 'SAID.inst.water-ordinary.3', speaker: ['keeper', 'works-there'],
       versions: {
         welcoming: { text: 'The old hands tell the best stories off the water.' },
         transactional: { text: 'Stories are free. Only the goods pay.' },
         cautious: { text: 'Who knows what the water will bring in next.' },
-        dismissive: { text: 'Fish stories.' },
+        dismissive: { text: 'Fish stories.', card: ['fish'] },
       } },
     { id: 'SAID.inst.water-ordinary.4', speaker: ['keeper', 'works-there'],
       versions: {
@@ -805,21 +806,23 @@ export const SAID_LINES = deepFreeze({
         cautious: { text: 'Some say the guards look the other way, for a price.', needs: ['guardPresence'] },
         dismissive: { text: 'Nobody does anything.' },
       } },
-    { id: 'SAID.tension.crime.6', speaker: ['wronged-not-officer'], ineligible: ['type:-corruption_scandal'],
+  ],
+  'tension.graft': [
+    { id: 'SAID.tension.crime.6', speaker: ['wronged-not-officer'],
       versions: {
         welcoming: { text: 'Honest officials still exist, and people know who they are.' },
         transactional: { text: 'Every favour from an official costs something extra now.' },
         cautious: { text: 'Nobody\'s sure which officials can still be trusted.' },
         dismissive: { text: 'Bribes, bribes, bribes.' },
       } },
-    { id: 'SAID.tension.crime.7', speaker: ['wronged-not-officer'], ineligible: ['type:-corruption_scandal'],
+    { id: 'SAID.tension.crime.7', speaker: ['wronged-not-officer'],
       versions: {
         welcoming: { text: 'People are standing behind the ones who spoke up.' },
         transactional: { text: 'The officials\' new clothes didn\'t come from their pay.' },
         cautious: { text: 'The hearing keeps getting put off, and people wonder why.', needs: ['court sits'] },
         dismissive: { text: 'Nothing will come of it.' },
       } },
-    { id: 'SAID.tension.crime.8', speaker: ['wronged-not-officer'], ineligible: ['type:-corruption_scandal'],
+    { id: 'SAID.tension.crime.8', speaker: ['wronged-not-officer'],
       versions: {
         welcoming: { text: 'A few honest traders kept every receipt, bless them.' },
         transactional: { text: 'Traders pay the tax and the bribe on top.' },
@@ -909,21 +912,23 @@ export const SAID_LINES = deepFreeze({
         cautious: { text: 'Some people are keeping lists of who said what.' },
         dismissive: { text: 'Nobody trusts anybody.' },
       } },
-    { id: 'SAID.tension.neighbours.6', speaker: ['anyone'], ineligible: ['type:-infiltration_fear-or-occupation_legacy'],
+  ],
+  'tension.mistrust': [
+    { id: 'SAID.tension.neighbours.6', speaker: ['anyone'],
       versions: {
         welcoming: { text: 'Most people still give their neighbours the benefit of the doubt.' },
         transactional: { text: 'Suspicion costs friendships, and nobody trades with the suspected.' },
         cautious: { text: 'Nobody\'s sure who might be passing on what\'s said.' },
         dismissive: { text: 'Nobody talks freely now.' },
       } },
-    { id: 'SAID.tension.neighbours.7', speaker: ['anyone'], ineligible: ['type:-infiltration_fear-or-occupation_legacy'],
+    { id: 'SAID.tension.neighbours.7', speaker: ['anyone'],
       versions: {
         welcoming: { text: 'Old wrongs are slowly being forgiven, house by house.' },
         transactional: { text: 'The families who sided with the wrong people still pay for it.' },
         cautious: { text: 'Some old informers still live here, people say.' },
         dismissive: { text: 'Nobody\'s forgotten.' },
       } },
-    { id: 'SAID.tension.neighbours.8', speaker: ['anyone'], ineligible: ['type:-infiltration_fear-or-occupation_legacy'],
+    { id: 'SAID.tension.neighbours.8', speaker: ['anyone'],
       versions: {
         welcoming: { text: 'Most people still welcome a stranger who\'s open about their business.' },
         transactional: { text: 'Strangers struggle to find work while the suspicion lasts.' },
@@ -1144,12 +1149,12 @@ export const SAID_LINES = deepFreeze({
         cautious: { text: 'Some noises at night turn out to be nothing. Some don\'t.' },
         dismissive: { text: 'Nobody sleeps.' },
       } },
-    { id: 'SAID.crisis.raids.3', speaker: ['anyone'], ineligible: ['livestock'],
+    { id: 'SAID.crisis.raids.3', speaker: ['anyone'],
       versions: {
         welcoming: { text: 'Every evening everyone is counted, and nobody\'s forgotten.' },
-        transactional: { text: 'Each animal lost is a season\'s work gone.' },
+        transactional: { text: 'Each animal lost is a season\'s work gone.', needs: ['livestock'] },
         cautious: { text: 'Some tracks near the houses are bigger than anyone likes.' },
-        dismissive: { text: 'Another animal missing.' },
+        dismissive: { text: 'Another animal missing.', needs: ['livestock'] },
       } },
   ],
   'crisis.rising': [

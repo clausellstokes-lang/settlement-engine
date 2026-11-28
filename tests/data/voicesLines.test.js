@@ -10,20 +10,23 @@ import { describe, expect, it } from 'vitest';
 import { SAID_LINES } from '../../src/data/voices/saidLines.js';
 import { LIAR_LINES } from '../../src/data/voices/liarLines.js';
 import { assertDeclarable } from '../../src/domain/facts/factVocabulary.js';
+import { CARD_WORDS } from '../../src/domain/voices/cardWords.js';
 import { NEEDS_ATOM, NOUN_DECLARATION, SPEAKER_KEY, TEMPERS, needsTermsOf, liarGroupOf, nounDeclarationOf } from '../../scripts/gen-voices-lines.mjs';
 
 const said = Object.entries(SAID_LINES).flatMap(([pool, rows]) => rows.map((row) => ({ pool, row })));
 const liar = Object.entries(LIAR_LINES).flatMap(([group, rows]) => rows.map((row) => ({ group, row })));
 
-describe('the said lines (the first load: 197 lines, 51 pools)', () => {
+describe('the said lines (the first load: 197 lines, 53 pools)', () => {
   it('holds every line of the writer once, filed by its kind and state', () => {
     expect(said).toHaveLength(197);
-    expect(Object.keys(SAID_LINES)).toHaveLength(51);
+    expect(Object.keys(SAID_LINES)).toHaveLength(53);
     expect(new Set(said.map(({ row }) => row.id)).size).toBe(197);
     const ABBR = { inst: 'institution', trad: 'tradition' };
     for (const { pool, row } of said) {
       const [, kind, state] = /^SAID\.(\w+)\.([\w-]+)\.\d+$/.exec(row.id) || [];
-      expect(`${ABBR[kind] || kind}.${state}`, row.id).toBe(pool);
+      // the six lines of a tension's own type moved to their own state (ruling G1-1 (3)); their ids stand
+      const moved = { 'SAID.tension.crime': 'tension.graft', 'SAID.tension.neighbours': 'tension.mistrust' }[row.id.replace(/\.\d+$/, '')];
+      expect([`${ABBR[kind] || kind}.${state}`, moved].includes(pool), row.id).toBe(true);
     }
   });
 
@@ -61,10 +64,13 @@ describe('the said lines (the first load: 197 lines, 51 pools)', () => {
     expect(streets.versions.transactional.needs).toBeUndefined();
   });
 
-  it('makes a line whose needs word has no atom INELIGIBLE, and no other line (19 of the first load, listed for the chair)', () => {
-    const ineligible = said.filter(({ row }) => row.ineligible).map(({ row }) => row.id);
-    expect(ineligible).toHaveLength(19);
-    for (const { row } of said) if (row.ineligible) for (const w of row.ineligible) expect(Object.keys(NEEDS_ATOM)).not.toContain(w);
+  it('answers each needs word by an atom, by the card, or nowhere; a word answered nowhere leaves its VERSION out (ruling G1-2)', () => {
+    const out = said.flatMap(({ row }) => TEMPERS.filter((t) => row.versions[t].ineligible).map((t) => `${row.id} ${t}: ${row.versions[t].ineligible.join(',')}`));
+    expect(out).toEqual(['SAID.inst.hall-ordinary.5 transactional: candles', 'SAID.inst.inn-ordinary.2 transactional: candles']);
+    const carded = said.flatMap(({ row }) => TEMPERS.flatMap((t) => row.versions[t].card || []));
+    for (const w of carded) expect(Object.keys(CARD_WORDS)).toContain(w);
+    expect(new Set(carded).size).toBe(8);
+    for (const { row } of said) expect(row.ineligible, row.id).toBeUndefined();
   });
 
   it('reads the writer\'s needs cell: a word, its gloss, and the tempers that need it', () => {
