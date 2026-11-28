@@ -14,6 +14,7 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { RESOURCE_DATA } from '../../src/data/resourceData.js';
+import { localProductionAsPrinted, tradeListsAsPrinted } from '../../src/domain/display/tradeListDisplay.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
@@ -161,4 +162,39 @@ describe('R11: the date palms give dates, not grain', () => {
       expect(madeIn(seed), `${seed} still lists "grain"`).toContain('grain');
     }), 'R11: a palm town with grain fields still makes grain');
   });
+});
+
+/**
+ * RULING 123-C2-1 (the eleventh chair, 2026-11-28; the reader's final report on point 123): A STORED ITEM OF THE RECORD's
+ * OWN LIST IS NOT DROPPED ON THE CATALOGUE's WORD. The catalogue is read at view, so a town SAVED before R11 (born with the
+ * palms' commodities grain and dates) keeps "grain" in `economicState.localProduction`, and the made-here reader
+ * (`tradeListDisplay.js :: localProductionAsPrinted`, the Economics tab's list and the PDF's LOCAL PRODUCTION) dropped it:
+ * no ground the catalogue says yields grain is the town's. 13 saved palm towns of V lost it (V dp-hamlet-102: "grain ·
+ * dates · medicinal herbs …" became "dates · medicinal herbs …"). The saved town is a real birth on the OLD catalogue: the
+ * palms' row is put back in memory for the birth only, and the page is read on today's. A town born today holds no grain
+ * from its palms and prints none. RED FIRST at c5845b771: the saved town printed no grain.
+ */
+describe('RULING 123-C2-1: a saved palm town keeps the grain its own record says it makes', () => {
+  const V = (/** @type {string} */ seed) => generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: seed.split('-')[1], _randomizePriorities: true }), null, { seed, customContent: {} });
+  /** @param {string} seed a birth on the catalogue before R11 (the palms' row put back for the birth only) */
+  const savedBefore = (seed) => {
+    const row = /** @type {any} */ (RESOURCE_DATA).date_palms;
+    const now = { commodities: row.commodities, tradeGoods: row.tradeGoods };
+    row.commodities = ['grain', 'dates']; row.tradeGoods = ['Date harvest', 'Dried fruit', 'Desert grain'];
+    try { return V(seed); } finally { row.commodities = now.commodities; row.tradeGoods = now.tradeGoods; }
+  };
+  test('V dp-hamlet-102 saved before R11: its stored "grain" prints among what it makes, tab and PDF alike', () => {
+    const s = savedBefore('dp-hamlet-102');
+    expect(/** @type {any} */ (RESOURCE_DATA).date_palms.commodities).toEqual(['dates']); // the view reads today's catalogue
+    expect(s.economicState.localProduction, 'the record says it makes grain').toContain('grain');
+    expect(s.economicState.primaryExports).toContain('Desert grain');
+    expect(localProductionAsPrinted(s)).toContain('grain');
+    expect(tradeListsAsPrinted(s).local).toEqual(localProductionAsPrinted(s));
+  }, 120000);
+  test('V dp-hamlet-102 born today: no grain from its palms, none printed', () => {
+    const s = V('dp-hamlet-102');
+    expect(s.config.nearbyResources).toContain('date_palms');
+    expect([s.economicState.localProduction.includes('grain'), localProductionAsPrinted(s).includes('grain')]).toEqual([false, false]);
+    expect(localProductionAsPrinted(s)).toContain('dates');
+  }, 120000);
 });
