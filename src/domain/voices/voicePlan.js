@@ -245,7 +245,8 @@ export function liarOf(settlement, npcs, key, instByName) {
       .filter((l) => !l.ineligible && !l.versions[temper].ineligible && cardAdmits(l.versions[temper], { catalogId, archetype: null }));
     if (!lines.length) continue;
     const domain = lines.map((l) => ({ id: str(l.id), text: str(l.versions[temper].text), line: l,
-      needs: [...(l.needs || []), ...(l.versions[temper].needs || [])], excludes: [...(l.excludes || []), ...(l.versions[temper].excludes || [])] }));
+      needs: [...(l.needs || []), ...(l.versions[temper].needs || [])], excludes: [...(l.excludes || []), ...(l.versions[temper].excludes || [])],
+      crisis: [...(l.crisis || []), ...(l.versions[temper].crisis || [])] }));
     const drawn = drawDeclared(domain, { rankKey: `${key}::voices.liar.line`, facts: () => factsOf(settlement), poolId: 'voices.liar', surface: 'voices' });
     if (drawn.line) return { npc, house, line: drawn.line.line, text: drawn.line.text };
   }
@@ -309,7 +310,7 @@ function composePlan(s, options) {
       if (l.ineligible || v.ineligible || !cardAdmits(v, card)) return [];
       const text = filled(v.text, card.fill);
       if (text === null) return [];
-      return [{ id: str(l.id), text, needs: v.needs || [], excludes: v.excludes || [] }];
+      return [{ id: str(l.id), text, needs: v.needs || [], excludes: v.excludes || [], crisis: v.crisis || [] }];
     });
     if (!domain.length) return null;
     const drawn = drawDeclared(domain, { rankKey: `${key}::voices.line::${card.kind}:${card.id}`, taken, facts, poolId: 'voices.said', surface: 'voices' });

@@ -11,16 +11,16 @@ import { SAID_LINES } from '../../src/data/voices/saidLines.js';
 import { LIAR_LINES } from '../../src/data/voices/liarLines.js';
 import { assertDeclarable } from '../../src/domain/facts/factVocabulary.js';
 import { CARD_WORDS } from '../../src/domain/voices/cardWords.js';
-import { CHANGED_WORDS, CLASS_ANSWERS, NEEDS_ATOM, NOUN_DECLARATION, SPEAKER_KEY, TEMPERS, needsTermsOf, liarGroupOf, nounDeclarationOf } from '../../scripts/gen-voices-lines.mjs';
+import { CELL_READING, CHANGED_WORDS, CLASS_ANSWERS, NEEDS_ATOM, routeOf, NOUN_DECLARATION, SPEAKER_KEY, TEMPERS, needsTermsOf, liarGroupOf, nounDeclarationOf } from '../../scripts/gen-voices-lines.mjs';
 
 const said = Object.entries(SAID_LINES).flatMap(([pool, rows]) => rows.map((row) => ({ pool, row })));
 const liar = Object.entries(LIAR_LINES).flatMap(([group, rows]) => rows.map((row) => ({ group, row })));
 
-describe('the said lines (the first load: 197 lines, 53 pools)', () => {
+describe('the said lines (the first load, 197 lines, and the second writers\' 65 and 48, appended: 310 in 53 pools)', () => {
   it('holds every line of the writer once, filed by its kind and state', () => {
-    expect(said).toHaveLength(197);
+    expect(said).toHaveLength(197 + 65 + 48);
     expect(Object.keys(SAID_LINES)).toHaveLength(53);
-    expect(new Set(said.map(({ row }) => row.id)).size).toBe(197);
+    expect(new Set(said.map(({ row }) => row.id)).size).toBe(310);
     const ABBR = { inst: 'institution', trad: 'tradition' };
     for (const { pool, row } of said) {
       const [, kind, state] = /^SAID\.(\w+)\.([\w-]+)\.\d+$/.exec(row.id) || [];
@@ -71,7 +71,7 @@ describe('the said lines (the first load: 197 lines, 53 pools)', () => {
     expect(out).toEqual([]);
     const carded = said.flatMap(({ row }) => TEMPERS.flatMap((t) => row.versions[t].card || []));
     for (const w of carded) expect(Object.keys(CARD_WORDS)).toContain(w);
-    expect(new Set(carded).size).toBe(8);
+    expect(new Set(carded).size).toBe(11); // the first eight, and B's lodging, food and drink and company (G1-9)
     for (const { row } of said) expect(row.ineligible, row.id).toBeUndefined();
   });
 
@@ -84,8 +84,28 @@ describe('the said lines (the first load: 197 lines, 53 pools)', () => {
       for (const x of a.excludes || []) expect(at(k).excludes, k).toContain(x);
       for (const x of a.card || []) expect(at(k).card, k).toContain(x);
     }
-    expect(Object.keys(CHANGED_WORDS).length).toBe(10);
-    expect(Object.keys(CLASS_ANSWERS).length).toBe(9);
+    expect(Object.keys(CHANGED_WORDS).length).toBe(10 + 24); // and the second writers' old re-wordings, A 18 and B 6 (G1-8)
+    expect(Object.keys(CLASS_ANSWERS).length).toBe(9 + 9); // and B's card words on nine more old inn versions (G1-8)
+  });
+
+  it('carries every hand-read cell of the second files onto the versions it names (CELL_READING, G1-9)', () => {
+    const all = [...said, ...liar].map(({ row }) => row);
+    for (const [key, { terms }] of Object.entries(CELL_READING)) {
+      const [id, col] = key.split(' ');
+      const row = all.find((r) => r.id === id);
+      for (const { word, tempers } of terms) {
+        const road = routeOf(word);
+        expect(road.road, `${key}: ${word}`).not.toBe('nowhere');
+        if (road.road === 'type' || road.road === 'state') continue;
+        for (const t of tempers || TEMPERS) {
+          const v = row.versions[t];
+          const crisisList = road.road === 'atom' && /^crisis:\s*[^,]+,/.test(road.value) ? road.value.replace(/^crisis:\s*/, '').split(',').map((x) => x.trim()) : null;
+          const got = col === 'excludes' ? v.excludes : crisisList ? v.crisis : { atom: v.needs, card: v.card, cardNot: v.cardNot, power: v.power }[road.road];
+          for (const want of crisisList || [road.value]) expect(got, `${key} ${t}`).toContain(want);
+        }
+      }
+    }
+    expect(Object.keys(CELL_READING).length).toBe(25);
   });
 
   it('reads the writer\'s needs cell: a word, its gloss, and the tempers that need it', () => {
@@ -103,8 +123,8 @@ describe('the said lines (the first load: 197 lines, 53 pools)', () => {
 
 describe('the liar\'s lines (the first load: 40 lines)', () => {
   it('holds every liar line once, filed by its group, each with the DM\'s truth', () => {
-    expect(liar).toHaveLength(40);
-    expect(new Set(liar.map(({ row }) => row.id)).size).toBe(40);
+    expect(liar).toHaveLength(40 + 13); // and writer B's thirteen (G1-8)
+    expect(new Set(liar.map(({ row }) => row.id)).size).toBe(53);
     for (const { group, row } of liar) {
       expect(group).toBe(liarGroupOf(row.id));
       expect(Object.keys(row.versions)).toEqual([...TEMPERS]);

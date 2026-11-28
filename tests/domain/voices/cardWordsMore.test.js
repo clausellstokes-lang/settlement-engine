@@ -8,7 +8,8 @@
  *   • the POWER-KIND words of writer A, read off the power's card through `factionArchetypes.js :: factionArchetype` (the
  *     stored category first): "a body with members and meetings", "not an occupier", "an old order".
  * A case per word: a card that holds it admits the version, one that does not refuses it. THE PLANT: on two born towns, the
- * version that wins a card, marked with a word its card does not hold, prints nowhere.
+ * version that wins a card, marked with a word its card does not hold, prints nowhere; and a version said under crisis
+ * kinds its town does not hold (the vocabulary's own `crisis` channel, `declarationOf`) prints nowhere.
  */
 import { afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
 import {
@@ -139,4 +140,17 @@ describe('THE PLANT: a winning version marked with a word its card does not hold
     const after = await planOver(town, said);
     for (const [line, t, id] of marked) expect([...after.quotes.values()].filter((q) => q.lineId === id && versionPrinted(line, q.text) === t), id).toEqual([]);
   }, 120_000);
+
+  it('a winning version said under crisis kinds its town does not hold (the vocabulary\'s crisis channel) prints nowhere (dp-village-5)', async () => {
+    const town = /** @type {Record<string, any>} */ (born.get('dp-village-5'));
+    const kinds = new Set([town.stress].flat().map((x) => (x && typeof x === 'object' ? String(x.type || '') : String(x || ''))));
+    const absent = ['plague_onset', 'slave_revolt', 'mass_migration'].find((k) => !kinds.has(k));
+    const plan = await planOver(town);
+    const q = [...plan.quotes.values()].find((x) => !x.liar);
+    const line = lineIn(SAID_LINES, q.lineId); const t = versionPrinted(line, q.text);
+    const said = structuredClone(SAID_LINES); lineIn(said, q.lineId).versions[t].crisis = [absent];
+    const after = await planOver(town, said);
+    expect([...after.quotes.values()].filter((x) => x.lineId === q.lineId && versionPrinted(line, x.text) === t)).toEqual([]);
+  }, 120_000);
 });
+

@@ -199,8 +199,9 @@ describe('a card-level word is answered by the card (ruling G1-1 (2)); a word an
     expect(TENSION_GROUP.corruption_scandal).toBe('graft');
     expect(TENSION_GROUP.infiltration_fear).toBe('mistrust');
     expect(TENSION_GROUP.occupation_legacy).toBe('mistrust');
-    expect(SAID_LINES['tension.graft'].map((l) => l.id)).toEqual(['SAID.tension.crime.6', 'SAID.tension.crime.7', 'SAID.tension.crime.8']);
-    expect(SAID_LINES['tension.mistrust'].map((l) => l.id)).toEqual(['SAID.tension.neighbours.6', 'SAID.tension.neighbours.7', 'SAID.tension.neighbours.8']);
+    // the first load's three each, and writer A's two each after them (G1-8: ids append-only)
+    expect(SAID_LINES['tension.graft'].map((l) => l.id)).toEqual(['SAID.tension.crime.6', 'SAID.tension.crime.7', 'SAID.tension.crime.8', 'SAID.tension.crime.9', 'SAID.tension.crime.10']);
+    expect(SAID_LINES['tension.mistrust'].map((l) => l.id)).toEqual(['SAID.tension.neighbours.6', 'SAID.tension.neighbours.7', 'SAID.tension.neighbours.8', 'SAID.tension.neighbours.9', 'SAID.tension.neighbours.10']);
   });
 });
 
