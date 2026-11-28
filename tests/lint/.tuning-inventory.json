@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "5fbb7fd896f15af4eb866abb6e33345d0a5bb025",
-  "measuredBy": "R-CURES-A (the eleventh chair, unit A3)",
-  "date": "2026-11-27",
-  "note": "A3 (RULING-R R6): src/domain/display/tensionDescriptionShown.js imports criticalImportRow from economyStateProse.js, so the dependents of LEADER_FROM and SOLE_EARNER_FROM gain it; no value, leaf or digest moved",
+  "measuredAtSha": "cdddc3b8b4981449b8aced0713ce825ec3dd0a26",
+  "measuredBy": "RULING 122-A-2 (the eleventh chair, unit A3)",
+  "date": "2026-11-28",
+  "note": "A3 (RULING 122-A-2): src/domain/display/tensionDescriptionShown.js imports foodStoresWords from summary/tonightSheet.js, so the dependents of WANT_MAX_WORDS gain it; no value, leaf or digest moved",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -1278,7 +1278,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 994,
+      "line": 999,
       "spanDigest": "d8ad20f683ec92a4a0b123ebd6748169b8712e96577f567cd56d3cdd08f76113",
       "leaves": {
         "value": 0.05
@@ -2696,7 +2696,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 1,
-      "line": 193,
+      "line": 196,
       "spanDigest": "00c0e1f99fc53d650cd628cdac047d1e9e3d7d94218abe8ed2eed18c7a49b8ea",
       "leaves": {
         "value": 18
@@ -2712,6 +2712,7 @@
         "src/domain/coherence/readerBattery.js",
         "src/domain/crisis/crisisPage.js",
         "src/domain/display/foodWordShown.js",
+        "src/domain/display/tensionDescriptionShown.js",
         "src/domain/summary/settlementQuickGuide.js",
         "src/foundry/journalPages.js",
         "src/pdf/SettlementPDF.jsx",
