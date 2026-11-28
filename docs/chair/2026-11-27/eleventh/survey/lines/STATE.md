@@ -1,9 +1,9 @@
 # VOICES-LINES STATE (S-G2; branch lane/voices-lines-2026-11-28; cut from the chair's record at 97b66bef0)
-- BUILT: (A) `A-keys.md` (the card kinds, their states and counts over C+V, the slots' values, the line arithmetic);
-  (B) `B-sample.tsv` (60 lines, ten a card kind, four versions each, every sentence checked: 6-22 words, no digit, slots declared).
-- PROVEN: births of C and V on 777733a2a with a read-only measure, 1,800 of 1,800, 0 errors; tie-holder towns C 318 / V 253
-  agree with the voices measure. Nothing in src or tests touched.
-- SENT: (A) and (B) to the chair (this push).
-- WAITING: the chair's ruling on the register (B) and on the line count (A's arithmetic: 192 as keyed, 153, or 110).
-- NEXT: on the ruling, (C) `C-said-lines.tsv`, then (D) `D-liar-lines.tsv`, then (E) `E-read.md`; push after each.
-- SCRATCH (not pushed): births, `keys.mjs`, `fam.cjs`, the sample's source and builder, under my session scratchpad.
+- BUILT: (A) `A-keys.md`; (B) `B-sample.tsv` (the first register, kept as it is); (B2) `B-sample-2.tsv`: the same sixty ids
+  re-written to rulings L-2 and L-3 (a remark made in passing; plain words; never to the surveyor; 0 of 60 lines hold I/me/my;
+  71 of 240 versions have two sentences; 233 of 240 are 12 words or fewer).
+- RULED: L-1 (the count: 153 lines, people draw their own house's keeper lines; nouns guaranteed; {seat} as object; no
+  denomination; silent cards as proposed), L-2 and L-3 (the register), all from the chair 02:50-03:10 UTC.
+- WAITING: the chair's (and the owner's) read of B-sample-2 before (C).
+- NEXT: (C) `C-said-lines.tsv`, 153 lines, in the B2 register (a draft in the first register exists in my scratch and is to be
+  re-done, not shipped); then (D) the liar's lines; then (E) the cold read; push after each.
