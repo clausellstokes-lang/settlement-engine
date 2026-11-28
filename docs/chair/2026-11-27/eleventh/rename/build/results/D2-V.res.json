@@ -1,0 +1,72 @@
+{
+ "label": "V",
+ "births": 900,
+ "errors": 0,
+ "byVar": {
+  "T": {
+   "births": 300,
+   "skipped": 0,
+   "pagesMoved": 300,
+   "pagesRedealt": 0,
+   "linesMoved": 16314,
+   "linesNameOnly": 16314,
+   "linesRedealt": 0,
+   "redealtByView": {},
+   "pickSites": {},
+   "examples": {},
+   "lineExamples": []
+  },
+  "P": {
+   "births": 300,
+   "skipped": 0,
+   "pagesMoved": 300,
+   "pagesRedealt": 0,
+   "linesMoved": 9209,
+   "linesNameOnly": 9209,
+   "linesRedealt": 0,
+   "redealtByView": {},
+   "pickSites": {},
+   "examples": {},
+   "lineExamples": []
+  },
+  "H": {
+   "births": 0,
+   "skipped": 0,
+   "pagesMoved": 0,
+   "pagesRedealt": 0,
+   "linesMoved": 0,
+   "linesNameOnly": 0,
+   "linesRedealt": 0,
+   "redealtByView": {},
+   "pickSites": {},
+   "examples": {},
+   "lineExamples": []
+  },
+  "F": {
+   "births": 0,
+   "skipped": 0,
+   "pagesMoved": 0,
+   "pagesRedealt": 0,
+   "linesMoved": 0,
+   "linesNameOnly": 0,
+   "linesRedealt": 0,
+   "redealtByView": {},
+   "pickSites": {},
+   "examples": {},
+   "lineExamples": []
+  }
+ },
+ "share": {
+  "births": 300,
+  "sharePagesMoved": 300,
+  "shareRedealt": 0,
+  "ownerShareNewDiff": 0,
+  "ownerShareNewDiffLines": 0,
+  "byView": {},
+  "examples": [],
+  "sharePickSites": {}
+ },
+ "baseShare": {
+  "pagesDiffer": 300
+ }
+}

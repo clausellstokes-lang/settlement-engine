@@ -1,0 +1,110 @@
+{
+ "corpus": "V",
+ "birthsMoved": 0,
+ "stampsMoved": 900,
+ "pairs": 900,
+ "errors": 0,
+ "pagesMoved": 900,
+ "tabsMoved": 900,
+ "bySurface": {
+  "tabs": 900,
+  "PDF": 900,
+  "Foundry": 720,
+  "Tonight": 212
+ },
+ "bySize": {
+  "thorp": {
+   "births": 150,
+   "moved": 150
+  },
+  "hamlet": {
+   "births": 150,
+   "moved": 150
+  },
+  "village": {
+   "births": 150,
+   "moved": 150
+  },
+  "town": {
+   "births": 150,
+   "moved": 150
+  },
+  "city": {
+   "births": 150,
+   "moved": 150
+  },
+  "metropolis": {
+   "births": 150,
+   "moved": 150
+  }
+ },
+ "linesMoved": 98212,
+ "byView": {
+  "Summary/Overview": 894,
+  "Systems/Economics": 900,
+  "Systems/Resources": 835,
+  "Systems/Power": 886,
+  "Systems/Defense": 900,
+  "World/Daily Life": 900,
+  "World/Traditions": 898,
+  "World/History": 803,
+  "PDF/printProse": 900,
+  "PDF/dailyLife": 900,
+  "PDF/headlines": 498,
+  "Foundry/Overview": 268,
+  "Foundry/Tonight": 212,
+  "Tonight/sheet": 212,
+  "Systems/Magic": 712,
+  "Systems/Outlook": 487,
+  "Foundry/NPC Quick Reference": 377,
+  "Foundry/Viability Assessment": 453,
+  "Systems/Services": 67,
+  "World/Faith": 45
+ },
+ "sites": {
+  "RZ src/domain/summary/settlementQuickGuide.js :: cultureScopeLine": {
+   "pages": 900,
+   "moved": 737
+  },
+  "FNV src/domain/crisis/crisisSummaryVantage.js :: summaryColumnOf": {
+   "pages": 287,
+   "moved": 287
+  },
+  "RZ src/domain/dailyLife.js :: pickNameable": {
+   "pages": 900,
+   "moved": 900
+  },
+  "RZ src/domain/dailyLife.js :: yields": {
+   "pages": 900,
+   "moved": 397
+  },
+  "RK src/domain/traditions/traditionDescription.js :: draw": {
+   "pages": 900,
+   "moved": 900
+  },
+  "RK src/domain/traditions/traditionDescription.js :: drawTurn": {
+   "pages": 619,
+   "moved": 593
+  },
+  "RZ src/pdf/lib/headlines.js :: seedPick [overview: town key]": {
+   "pages": 287,
+   "moved": 215
+  },
+  "RZ src/domain/display/dossierViewModel.js :: pick": {
+   "pages": 749,
+   "moved": 453
+  },
+  "RZ src/pdf/lib/headlines.js :: seedPick [people: person key]": {
+   "pages": 765,
+   "moved": 377
+  },
+  "RZ src/domain/display/governanceAccount.js :: underOccupation": {
+   "pages": 90,
+   "moved": 56
+  },
+  "RK src/domain/display/defenseDisplay.js :: facts": {
+   "pages": 197,
+   "moved": 194
+  }
+ }
+}
