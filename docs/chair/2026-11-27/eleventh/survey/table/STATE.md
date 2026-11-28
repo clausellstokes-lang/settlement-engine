@@ -10,11 +10,11 @@
   longer reaches plotHooks, the atom may move onto plain factsOf (the cycle gone): ask the chair, do not do it unasked.
   Re-measure: `place debt` on 63 | 61 towns (not 88 | 79); the six lines' counts fall; empties 0 | 0; innocents 0;
   the merged tree prints what this branch prints otherwise (0 lines differ on 1,800, function level).
-- S-D, MEASURE ONLY (the rulings file): S-D-PROSPERITY.md (6d89637b2: the 29 are the row MIS-CASTING the clause, which
-  stands on the survival band; cure 29 -> 0, 0 pages move) and S-D-MONEY.md (REAL pairs: C1#2 7, MODERATE#4 2, WEALTHY#3 8,
-  the trade-dispute hook 61; held: 4 CRITICAL pages; at the merge, 122-B-5 admits solvency lines beside the Debt Crisis hooks).
+- S-D MEASURED: S-D-PROSPERITY.md (the 29 are the row mis-casting the clause) and S-D-MONEY.md (§1-§6).
 - S-D RULED (13:45, chair's record 8c12e72f6, the rulings file's last section): prosperity cured as measured (a line declares
   the atom its reader reads; the two `≤ comfortable` lines too, one new band atom only if none exists); money REAL: C1#2,
   MODERATE#4 exclude place debt; WEALTHY#3, PROSPEROUS#1/#3 exclude nothing laid by (chair's two fill lines if a tile empties);
   STRUGGLING#5 needs place debt; SOFT no cure; A HOOK IS A SEED: no hook declares. BUILT ONLY ON THE MERGED TREE.
-- DS-GEN-3/7/11 MEASURED (S-D-MONEY.md §5): drawn, printed on 0 screens, 0 PDFs. NEXT: the chair's tip of 122 and 123.
+- §5 DS-GEN-3/7/11: drawn, printed nowhere. §6 high rungs ACCEPTED (15:01); WEALTHY fills: "…spends what it has as fast as
+  it comes in." (needs nothing laid by) and "{settlement} is wealthy, but it owes a great deal." (needs place debt), the
+  chair's words for the owner's veto; any other empty on the merged tree: name the towns, the chair gives words. NEXT: the tip.
