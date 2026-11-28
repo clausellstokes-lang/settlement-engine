@@ -34,6 +34,19 @@
    twice." / "Eaten already. So they all say.") "Also make the language more plainer overall: Make it more readable and easily
    interpretable by an average person: […] What do you think? Also some secondary sentences are unnecessary."
 
+9. (about 03:11 UTC on 2026-11-28, on twelve lines of the writer's second sample, each in four tempers that differed by a
+   word or two) "I think you are radically limiting the different tempers can't you take more time to find variations?"
+
+## FOUR TEMPERS, FOUR DIFFERENT REMARKS (his ninth message; the chair's ruling L-4 to the writer, said back to him)
+- THE FAULT WAS THE CHAIR's: it had told the writer a curt line may be the warm one with words taken out. WITHDRAWN.
+- EACH TEMPER SAYS A DIFFERENT THING ABOUT THE SAME SUBJECT, what that kind of person would notice: warm: people and small
+  kindnesses; counting the cost: what it takes, what is running out; guarded: what is not being said, what might go wrong;
+  curt: one bare fact, or plainly fed up. Still plain, one short sentence, in passing.
+- THE EXAMPLE NOW: "The children eat first here." / "Every loaf is cut thinner than last week." / "Nobody says how much flour
+  is left." / "Soup again. Mostly water."
+- MORE TIME, MORE LINES: five lines a state where cards are commonest, three elsewhere (about 190 lines). FOUR TEMPERS STAY
+  (the engine stores four ways of dealing: the chair's choice, said to him): the range comes from what each notices.
+
 ## PLAIN WORDS, ONE SENTENCE (his eighth message; the chair's ruling L-3 to the writer, said back to him)
 - EVERYDAY WORDS (nothing a twelve-year-old would stumble on); no proverb, no turned phrase, no irony to decode; THE MEANING
   LANDS ON FIRST READ. ONE SHORT SENTENCE (4 to 12 words) is the norm; a second ONLY where it adds a new fact.
