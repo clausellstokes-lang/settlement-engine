@@ -1111,3 +1111,23 @@ See section 4, newest last.
   (Small calls, which a reader's later read will check anyway, bind at once as before.)
 - **BUILDERS STAY ON OPUS AT `high`** (the readers check them); mechanical helpers on Sonnet. IF THE OWNER MOVED THE CHAIR
   TO SAVE USAGE, he says so and the readers move down too; until then they stay where they are.
+
+## V38 (14:10 UTC on 2026-11-28): **THE ACCOUNT's FABLE ALLOWANCE IS SPENT UNTIL 4 DECEMBER 09:00 UTC**: EVERY TOP-TIER READER STOPPED AT ABOUT 13:23 UTC; V37 (2) AND (4) AMENDED: READERS RUN ON OPUS AT `max` UNTIL THE RESET; THREE RESTARTED; THE WHOLE SUITE ON a03ba9359 GREEN AGAINST THE LIST
+- **WHAT HAPPENED:** READER 122-123, READER SURVEY-1, READER VOICES and RULING READER K3 (all `claude-fable-5-2`) each ended
+  with "You've hit your Fable limit · resets Dec 4, 9am (UTC)" (`rate_limit_info`: seven_day_overage_included, rejected).
+  The owner's move of the chair to Opus at 13:09 fits this. Opus still reads `allowed_warning`.
+- **V37 AMENDED:** (2) the independent readers run on `claude-opus-5-5` at `max` until the Fable reset; each brief still
+  says nothing of the chair's reasons and carries the rulings question; (4) a big call goes to an Opus `max` reader before
+  it binds. A same-tier reader is still a real check: a fresh context, told nothing but the files, proving by execution.
+- **RESTARTED ON OPUS max:** READER 122-123 DELTA (`prompts/START-READER-122-123-DELTA.txt`: the cure 003fd3b07..a03ba9359;
+  the line waits on it); RULING READER K3 (the same brief `prompts/START-RULING-READER-K3.txt`, with the builder's 13:48
+  facts); READER SURVEY-1B (`prompts/START-READER-SURVEY-1B.txt`: it finishes the first reader's questions from its notes
+  and findings, and reads both deltas). **NOT RESTARTED: READER VOICES** (it had barely begun): a fresh Opus `max` reader
+  reads the voices engine ONCE, after G1-8/G1-9 land, so the final engine and lines are read together.
+- **THE WHOLE SUITE AT a03ba9359 (LAND122C, four Sonnet shards, 13:15 to 14:07 UTC):** 3,829 files, 44,003 tests, 58 failed:
+  57 ON THE LIST, ONE NEW: `heraldKnowledgeDeskGolden` ("THE REFILE MOVES NO CONTENT BYTE…": the golden the traditions
+  draw moved at a838e7079; the owner's signing): it joins RED-AT-LINE as a row at the landing. The five other new reds of
+  LAND123 (seed loops, any-casts) are cured. Matched by `shards/results/sort.py LAND122C 4`.
+- **IF OPUS's ALLOWANCE RUNS OUT TOO,** every seat stops until 4 December unless the owner turns on extra usage: the order
+  of what the chair keeps running is: the landing of 122 and 123; the ruling on K3; the survey's read; point 124's read;
+  the voices; then the rest.
