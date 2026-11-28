@@ -51,3 +51,28 @@ surveyor's own voice to the DM (no `inTruth` holds a speaker hit today).
 | LIE.smuggling.4 W | outside | liar's house | Outside goods come in the proper way, like everything else. | ATOM needs `imports` |
 | LIE.front.trade.2 W | outside | liar's house | The carts come in daylight, where everyone can wave. | ATOM needs `route open` (keeps excludes `crisis: under_siege`) |
 | LIE.smuggling.1 N | outside | (DM note) | smuggled goods come in untaxed | ATOM needs `house: smuggling`, on the LINE (its N prints with every version) |
+
+## The chair's ruling G1-4 (09:00 UTC): the changed words, for the owner's veto list
+
+Every new text below is CONFIRMED to hold no class word (`classesOf`). The one exception is the liar's W, which keeps
+a `plenty`: a speaker's word, exempt.
+
+| line · version | old | new |
+|---|---|---|
+| SAID.inst.workshop-ordinary.4 C | Prices are hard to judge these days. | Prices are hard to guess these days. |
+| SAID.trad.feast.3 W | Neighbours lend each other pots and pans for the feast. | Neighbours lend each other pans and dishes for the feast. |
+| SAID.person.powerface.1 W | People come with favours to ask, and most get a hearing. | People come with favours to ask, and most are heard. (no `court sits`) |
+| LIE.front.trade.1 W | Anyone may look at the books, and plenty have. | Anyone may look at the accounts, and plenty have. |
+| LIE.front.trade.1 C | The books here have never had a question asked of them. | The accounts here have never had a question asked of them. |
+| LIE.front.trade.1 N | the books hide the criminal house's money passing through | the accounts hide the criminal house's money passing through |
+
+THE FOUR CANDLE VERSIONS: "candles" is taken out and the late light kept, each a different remark (L-4). PROPOSED for your read:
+
+| line · version | old | new |
+|---|---|---|
+| SAID.inst.hall-ordinary.5 T | Candles burn here long after dark, and someone pays for them. | The lights burn late there, most nights. (yours) |
+| SAID.inst.inn-ordinary.2 T | Late nights burn a lot of candles. | Keeping the lamps lit late costs a fair bit. |
+| SAID.trad.vigil.3 T | Candles for the vigil cost more each year. | Lighting the vigil costs more each year. |
+| SAID.trad.vigil.3 W | Families take turns keeping the candles lit. | Families take turns tending the lights all night. |
+
+With these, NO version is ineligible: the count pinned in the leaf's test is 0.
