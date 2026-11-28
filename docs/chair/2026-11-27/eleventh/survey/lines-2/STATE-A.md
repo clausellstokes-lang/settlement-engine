@@ -8,4 +8,4 @@
 - (E) `E2-read-A.md`: six towns read; the ten I trust least.
 - (M) `M2-check-A.md`: the per-pool table. `OLD-REWORD-A.tsv`: 18 old versions re-worded so every pool is under the
   formula caps (the chair's rule (b)).
-- DONE 13:35 UTC. NEXT: the chair's read; nothing else is open.
+- DONE (13:43 UTC); the chair's 13:38 fixes 1-7 applied 13:40 UTC. NEXT: the chair's read; nothing else is open.
