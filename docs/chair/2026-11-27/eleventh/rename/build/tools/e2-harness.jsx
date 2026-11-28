@@ -28,7 +28,7 @@ export async function run(plan, out) {
           const v = rn[k]; if (!v || v.skip) { vars[k] = { skip: v?.skip || 'none' }; continue; }
           const O = await ownerPage(stamp(v.rec));
           vars[k] = { old: v.old, neu: v.neu, how: v.how, diff: diffViews(P.views, O.views), picks: O.picks };
-          if (k === 'T') { const S0 = await sharePage(t); const S1 = await sharePage(stamp(v.rec)); vars.T.ownerVsShare = diffViews(O.views, S1.views); vars.T.baseOwnerVsShare = diffViews(P.views, S0.views); vars.T.shareDiff = diffViews(S0.views, S1.views); vars.T.sharePicks = S1.picks; }
+          if (k === 'T') { const S0 = await sharePage(t); const S1 = await sharePage(stamp(v.rec)); vars.T.ownerVsShare = diffViews(O.views, S1.views); line.baseOwnerVsShare = diffViews(P.views, S0.views); line.shareViews = S0.views; vars.T.shareDiff = diffViews(S0.views, S1.views); vars.T.sharePicks = S1.picks; }
         }
         line.vars = vars;
       }
