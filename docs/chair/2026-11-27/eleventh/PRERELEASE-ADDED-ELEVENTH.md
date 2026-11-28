@@ -95,3 +95,11 @@
   dp-city-5, dp-metropolis-65; V dp-hamlet-49, dp-village-111, dp-town-99, dp-city-10, dp-city-72, dp-metropolis-65); V
   dp-village-58's WEALTHY tile under `infiltrated`. SURVEY-TABLE is listing every desk slot that prints nothing on C or V
   (`survey/table/EMPTY-SLOTS.tsv`). OWED: a line for each, or a ruling that the slot may be silent there.
+- **THE EMPTY-SLOT CENSUS (SURVEY-TABLE, docs commit 1d2bb471c on `lane/survey-table-wip-2026-11-28`:
+  `survey/table/EMPTY-SLOTS.tsv`; all 1,800 owner pages as the app renders them):** 149 pools asked by a desk drew nothing,
+  over 1,900 town-slots. By kind: 129 pools (1,359) where every line needs a slot the record does not fill (chiefly
+  DS-CND-1 PROVENANCE, 293 | 287 towns); ONE POOL THAT HOLDS NO LINE AT ALL, DS-DEF-1 `readiness STRONG` (124 | 174 towns);
+  13 pools (104) of crisis refusals (the nine C4 headers under plague); 6 pools (139) of fact refusals (DS-ECO-11
+  EXPLOITATION high 89 | 68; DS-ECO-12 religious houses 8 | 35). Caveat (its own): a first pool's null is listed even where
+  a fallback pool printed. OWED, with point 125 or the survey's second wave: read each kind against the rendered page
+  (does the reader see a gap), then lines for the true gaps, the empty pool first.
