@@ -143,3 +143,10 @@ THE NEXT COMMAND: read each child's first report as it lands; relay the chair's 
   served" RED with ['power.label'] (merge M made it a diffuse row; not in U45's table). MY RULING: unit 4's own red, cured by its cause
   as its own commit after V27 (5): re-derived and asserted EQUAL to the stored value on both pools if the served document allows it,
   else named as not served with the row's reason; never a name added to turn the arm green.
+- 2026-11-28T00:33:03Z: MC STOPPED (until "GO MC"): `mc/STATE.md` on `-mc-docs` 8410c8ecf (READ BY ME): its five-line state and THE COST PROPOSAL:
+  (1) the counter's UPDATE after the read (8 readers 50.9 s -> 13.6 s; no served byte moves; ~0.5 seat-hour); (2) the roster choices
+  hoisted (-19%; ~2 seat-hours); (3) the sanitiser skips scalar children (-4% more; ~1 seat-hour); (4) the x4.1 is VR23's veil, not
+  skipped: after 1-3 about 338 ms a member, 3 s at about 8 members; (5) the floor: members in pages (a client change). A four-door
+  differential of 2 and 3 still running; READ-COST's trials built, only the as-built phase run (list 6.1 s, dossier 5.8 s at 840 rows).
+  Its next command is in the file. SENT TO THE CHAIR with my recommendation on timing: (1) into U3R's hunk now on its "COUNTER IN";
+  (2) and (3) one later hunk after units 3 and 4+5 merge; (5) on its word.
