@@ -46,7 +46,7 @@ THE SEATS (briefs in `v56/briefs/`; each child reads COMMON-V56.txt first; sessi
 PLACED AT THE JOIN (item 6): V23/V26's hunk (`lane/veil-53-2026-11-24-grants-wip` d2316f101 sits on the OLD TRIAL JOIN, not the tip: it is
 read whole by me at the join, then a second reader, then the chair); A19 (39 shared pages deny a seat-holder in the seat box and name him
 beside it: measured on the joined tree, cure D re-routes `holderOf`'s readers; a client unit before the pool proof); A17 (the Defense line
-of point 119, 10 of 600); A18 (`PUBLIC_PROSE_VERSION`). ASK THE CHAIR FOR THE LINE's TIP when I reach the join.
+of point 119, 10 of 600); A18 (`PUBLIC_PROSE_VERSION`). D1 ADDED BY THE CHAIR (its E23), PLACED IN THE A19 UNIT AT THE JOIN: the Overview's "Governed by <power>" gains the seat's holder ("Governed by <power>; <name> holds the seat"; `summary/settlementQuickGuide.js :: governsLine` through `overviewIdentity.js`; the share reads the STAMPED `publicProse` 'overview:identity'): the line names the holder the READER's `holderOf` returns; the power alone where the seat is empty or the face is withheld from that reader; the Overview never a third place that names a withheld holder; cut ONCE with `holderOf`'s readers (A19) and A18's `PUBLIC_PROSE_VERSION`, never before. ASK THE CHAIR FOR THE LINE's TIP when I reach the join.
 
 EVERY DATABASE CHANGE: read whole by me, then a blind top-tier reader of my own starting (told only the code and the questions), then
 "TIP? <unit> <commit>" to the chair with the hunk's commit, the proofs' table and the reader's report's path.
@@ -130,3 +130,4 @@ THE NEXT COMMAND: read each child's first report as it lands; relay the chair's 
   its copy in `prominentRelationship`, served at Reveal off at EVERY door, THE LINK AND LIVE MODE included (7 of 69 at gallery / import / map
   / link). The orphan rule on every public read (already built at 5ab9caeb7) is what closes it: A CURE AT THE LINK now, not a listed change.
   Told the chair (no ruling asked). Asked of U3R for its table: the renamed-end case, the sentence under drift at the link, one line on reach.
+- 2026-11-28T00:07:10Z: THE CHAIR: the orphan rule on every public read, the link included, IS A CURE (taken). D1 (the Overview's governed-by line naming the seat's holder) added to this lane and placed in the A19 unit at the join.
