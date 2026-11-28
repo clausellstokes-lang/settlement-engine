@@ -20,7 +20,7 @@
  * of the faithful, a ledger's `books`, a bare `its members`, "of this size" (relative, true everywhere).
  *
  * A LINE'S STATUS FOR A CLASS (one a class its words fall in):
- *   declared · twin · scoped · gate · keyed · bound · negated · record   — answered (not a hit)
+ *   declared · twin · scoped · gate · keyed · bound · negated · record · speaker · ineligible — answered (not a hit)
  *   none · other · colour · any · one-kind · band                         — THE STOCK (a hit)
  * A hit's key is `file \t class \t literalHash(text)` (the presumed-things walker's hash). Today's stock is banked in
  * `tests/lint/presumptionClasses.register.json` (shrink-only) through `scripts/presumption-classes-door.mjs`.
@@ -32,6 +32,7 @@ import { pathToFileURL } from 'node:url';
 
 import { literalHash } from './presumedThings.shared.mjs';
 import { negates, sentencesOf } from '../../src/domain/facts/registeredWords.js';
+import { CARD_WORDS } from '../../src/domain/voices/cardWords.js';
 import { parseAtom, STATE_MARK_DIMENSIONS, TIER_WORDS, POPULATION_WORDS, CRISIS_FAMILY_KINDS, FACT_DIMENSIONS } from '../../src/domain/facts/factVocabulary.js';
 
 export const REGISTER_REL = 'tests/lint/presumptionClasses.register.json';
@@ -202,7 +203,34 @@ export function negatedFor(cls, text) {
   return hitSentences.every((s) => negates(s, re) || (cls === 'plenty' && [...s.matchAll(new RegExp(re.source, 'ig'))].every((m) => /\b(little|nothing|none|never|nobody|no one)\b/i.test(s.slice(Math.max(0, (m.index ?? 0) - 40), m.index ?? 0)))));
 }
 
-export const ANSWERED = Object.freeze(new Set(['declared', 'twin', 'scoped', 'gate', 'keyed', 'bound', 'negated', 'record']));
+// ---- THE VOICE SCOPE (the eleventh chair's ruling G1-3 of 2026-11-28, his word under BG1 for this ONE rule; S-G1,
+// VOICES-ENGINE): the lines a person SAYS inside a card's slot (`src/data/voices/`). It stands BESIDE `NOT_PAGE`, never
+// in it: every line of the tree is still read, and nothing here banks a row or moves the ceiling. Under this root:
+//   • a SPEAKER's class (plenty, ease, threat, work) in a SPOKEN text (a version's `text`) is no hit: a person may
+//     judge, the surveyor may not (a liar's `inTruth` note is the surveyor's own voice to the DM: never exempt);
+//   • a THING class is answered as any line's is, by the version's own `needs` / `excludes` (ARM 3's families closed),
+//     or BY ITS CARD: a version whose `card` words are the card's own (`domain/voices/cardWords.js`, each a set of
+//     catalogue ids) prints only inside that house's slot (the slot guard holds it), so the binding answers its goods,
+//     resource, office, iron or animals word, as ARM 5's bound rule answers the house's own line; never a size, outside
+//     or crisis word;
+//   • a version marked `ineligible` (a word answered nowhere) is never spoken (the leaf's `chooseLine` skips it), so it
+//     is no hit; it is listed in the seat's report instead.
+export const VOICE_ROOT = 'src/data/voices/';
+export const inVoices = (rel) => rel.startsWith(VOICE_ROOT);
+export const SPEAKER_CLASSES = Object.freeze(new Set(['plenty', 'ease', 'threat', 'work']));
+/**
+ * The source of an object `[a, b)` at its OWN level: every nested object blanked (read on the masked source, so a brace
+ * inside a string is no brace), so a line's own keys are not its versions'.
+ * @param {string} src @param {string} masked @param {number} a @param {number} b
+ */
+const ownLevel = (src, masked, a, b) => {
+  let braces = 0; let out = '';
+  for (let k = a; k < b; k++) { const ch = masked[k]; if (ch === '{') braces++; out += braces <= 1 ? src[k] : ' '; if (ch === '}') braces--; }
+  return out;
+};
+const wordsOfKey = (text, key) => { const m = text.match(new RegExp(`\\b${key}\\s*:\\s*\\[([^\\]]*)\\]`)); return m ? [...m[1].matchAll(/['"`]([^'"`]+)['"`]/g)].map((x) => x[1]) : []; };
+
+export const ANSWERED = Object.freeze(new Set(['declared', 'twin', 'scoped', 'gate', 'keyed', 'bound', 'negated', 'record', 'speaker', 'ineligible']));
 export const STOCK_STATUSES = Object.freeze(['none', 'other', 'colour', 'any', 'one-kind', 'band']);
 
 /** One status for one class of one line. @param {string} cls @param {object} d the line's declaration @param {{file:string,pool:string,text:string}} at */
@@ -211,6 +239,8 @@ export function statusFor(cls, d, at) {
   const { dims, any, real, crisis, band } = readDeclaration(atoms);
   if (negatedFor(cls, at.text)) return 'negated';
   if (recordFactRule(at.file, at.pool, cls)) return 'record';
+  if (inVoices(at.file) && d.ineligible) return 'ineligible';
+  if (inVoices(at.file) && d.spoken && SPEAKER_CLASSES.has(cls)) return 'speaker';
   const answering = CLASS_DIMS[cls].filter((x) => dims.has(x));
   if (cls === 'size' && answering.length) return bandAnswers(at.text, band) ? 'declared' : 'band';
   if (answering.length) {
@@ -222,7 +252,7 @@ export function statusFor(cls, d, at) {
   if (CRISIS_CLASSES.has(cls) && scoped) return 'scoped';
   if (cls === 'size' && tierKey) return 'gate';
   if (['goods', 'resource', 'iron', 'animals'].includes(cls) && keyGate) return 'keyed';
-  if (BOUND_CLASSES.has(cls) && BOUND_FILES.test(at.file)) return 'bound';
+  if (BOUND_CLASSES.has(cls) && (BOUND_FILES.test(at.file) || (inVoices(at.file) && d.cardBound))) return 'bound';
   if (colour) return 'colour';
   if (CRISIS_CLASSES.has(cls) && any) return 'any';
   if (real || any || twin) return 'other';
@@ -305,7 +335,10 @@ export function scanSource(rel, src, chan = new Map()) {
     if (/^\s*(import|export)\b|^[@#]|^(https?:|\.\/|\.\.\/)/.test(t)) continue;
     if (/^\s*:/.test(src.slice(l.end, l.end + 3))) continue; // a key of a channel: read where it prints
     if (!classesOf(t).length) continue;
-    const ob = enclosingObject(masked, l.start, l.end); const objText = ob && ob[1] - ob[0] < 1500 ? src.slice(ob[0], ob[1]) : '';
+    const ob = enclosingObject(masked, l.start, l.end);
+    // a voice line is read at its object's OWN level (a line's `inTruth` by the line's keys, never its versions')
+    const voice = inVoices(rel);
+    const objText = voice ? (ob ? ownLevel(src, masked, ob[0], ob[1]) : '') : (ob && ob[1] - ob[0] < 1500 ? src.slice(ob[0], ob[1]) : '');
     const near = src.slice(Math.max(0, l.start - 200), l.start);
     const atoms = []; let twin = false, colour = false;
     for (const k of ['needs', 'excludes', 'crisis', 'tags', 'poolDeclares']) {
@@ -323,7 +356,9 @@ export function scanSource(rel, src, chan = new Map()) {
     let keyGate = false; { const ks = src.lastIndexOf('{ key: ', l.start); if (ks >= 0 && l.start - ks < 6000 && /institutions:\s*\[/.test(src.slice(ks, Math.min(l.start, ks + 1200)))) keyGate = true; }
     const tierKey = TIER_KEY.test(sub) || /\b(tier|TIER|population|isSmall|smallPlace|SMALL)\b/.test(src.slice(Math.max(0, l.start - 300), l.start));
     const tk = tierKeyOf(src, l.start); if (tk) atoms.push(`tier: = ${tk}`);
-    rows.push({ file: rel, pool: sub ? `${pool}.${sub}` : pool, line: src.slice(0, l.start).split('\n').length, text: t, decl: { atoms, twin, colour, keyGate, tierKey } });
+    const cardWords = voice ? wordsOfKey(objText, 'card') : [];
+    const said = voice ? { spoken: /\btext\s*:\s*$/.test(src.slice(Math.max(0, l.start - 16), l.start)), cardBound: cardWords.length > 0 && cardWords.every((w) => Object.hasOwn(CARD_WORDS, w)), ineligible: wordsOfKey(objText, 'ineligible').length > 0 } : {};
+    rows.push({ file: rel, pool: sub ? `${pool}.${sub}` : pool, line: src.slice(0, l.start).split('\n').length, text: t, decl: { atoms, twin, colour, keyGate, tierKey, ...said } });
   }
   return rows;
 }
@@ -425,7 +460,7 @@ export function listFiles(root) {
  * class takes the best status any occurrence earns), and return the HITS: one per (file, class, text) whose status
  * is stock. @param {Array<object>} rows
  */
-const RANK = { declared: 6, twin: 5, scoped: 5, negated: 5, record: 5, gate: 4, keyed: 4, bound: 4, colour: 2, any: 2, 'one-kind': 2, band: 2, other: 1, none: 0 };
+const RANK = { declared: 6, twin: 5, scoped: 5, negated: 5, record: 5, speaker: 5, ineligible: 5, gate: 4, keyed: 4, bound: 4, colour: 2, any: 2, 'one-kind': 2, band: 2, other: 1, none: 0 };
 export function hitsOf(rows) {
   for (const r of rows) { r.classes = classesOf(r.text); r.status = Object.fromEntries(r.classes.map((c) => [c, statusFor(c, r.decl, r)])); }
   const best = new Map();

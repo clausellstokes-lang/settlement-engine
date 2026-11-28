@@ -22,7 +22,10 @@
  *     BAR6-DEFDESK's size atom), the small words ("a small group of traders") a town or smaller;
  *   • ARM 5 WIDENS: an exemption is a RULE (a negated mention; a line bound to its house, title or chain, for a goods,
  *     resource, office, iron or animals word only; the record's own fact printed back, `RECORD_FACT_POOLS`), never a
- *     row: the rules are pinned here as they stand;
+ *     row: the rules are pinned here as they stand; and THE VOICE SCOPE (the eleventh chair's ruling G1-3 of
+ *     2026-11-28, his word under BG1 for this one rule), beside `NOT_PAGE`: under `src/data/voices/` a speaker's class
+ *     in a SPOKEN text is no hit (a person may judge, the surveyor may not), a thing class is answered by the version's
+ *     own atoms or by its card, and a version marked ineligible is never spoken;
  *   • the register holds a STALE row (a cure leaves its row: the round's close removes it through the door's
  *     `--shrink`; BG1: no other seat edits the walker or its register), a row of an unknown shape or status, or more
  *     rows than its ceiling, or the ceiling rises over the count banked at the base.
@@ -34,7 +37,7 @@ import { fileURLToPath } from 'node:url';
 import { beforeAll, describe, expect, test } from 'vitest';
 
 import {
-  BOUND_CLASSES, CLASS_DIMS, CLASS_FAMILIES, CLASS_IDS, NAMED_ATOMS, NOT_PAGE, RECORD_FACT_POOLS, REGISTER_REL, ROOTS, STOCK_STATUSES,
+  BOUND_CLASSES, SPEAKER_CLASSES, VOICE_ROOT, CLASS_DIMS, CLASS_FAMILIES, CLASS_IDS, NAMED_ATOMS, NOT_PAGE, RECORD_FACT_POOLS, REGISTER_REL, ROOTS, STOCK_STATUSES,
   bankedKeys, classesOf, gateAtomsOfPoolKey, hitsOf, knownDimension, notPage, rowKey, scanAnnex, scanSource, scanTree,
 } from './presumptionClasses.shared.mjs';
 
@@ -129,6 +132,27 @@ describe('the five arms, planted', () => {
       'src/generators/structuralValidator.js :: FUNDED_EMBATTLED :: office',
       'src/domain/summary/settlementQuickGuide.js :: scopeAtSize :: size',
     ]);
+    // THE VOICE SCOPE (the chair's ruling G1-3, 2026-11-28): by rule, beside NOT_PAGE; it banks no row
+    expect(VOICE_ROOT).toBe('src/data/voices/');
+    expect([...SPEAKER_CLASSES].sort()).toEqual(['ease', 'plenty', 'threat', 'work']);
+    const V = 'src/data/voices/plantedLines.js';
+    const said = (/** @type {string} */ version, line = '') => planted(V, `export const SAID_LINES = {\n  'tension.graft': [\n    { id: 'SAID.tension.graft.9',${line} versions: {\n      welcoming: ${version},\n    } },\n  ],\n};\n`);
+    const p = 'There is plenty on every table this week.';
+    expect(said(`{ text: '${p}' }`)).toEqual([]); // a speaker's word passes in a voices file …
+    expect(one(F, `{ text: '${p}' }`)).toEqual([`plenty:none :: ${p}`]); // … and still reds in a surveyor's line
+    const g = 'They sell wine by the cask behind the hall.';
+    expect(said(`{ text: '${g}' }`)).toEqual([`goods:none :: ${g}`]); // a thing word on a tension card, undeclared: red
+    expect(said(`{ text: '${g}', needs: ['market'] }`)).toEqual([]); // answered by the version's own atom
+    expect(said(`{ text: '${g}', card: ['weapons kept'] }`)).toEqual([]); // answered by its card (a word of cardWords.js)
+    expect(said(`{ text: '${g}', card: ['a word no card keeps'] }`)).toEqual([`goods:none :: ${g}`]);
+    expect(said(`{ text: '${g}', ineligible: ['wine'] }`)).toEqual([]); // never spoken
+    const t = 'Travellers stop here on the way to the coast.';
+    expect(said(`{ text: '${t}', card: ['weapons kept'] }`)).toEqual([`outside:none :: ${t}`]); // a card answers no outside word
+    expect(said(`{ text: '${t}', excludes: ['crisis: under_siege'] }`)).toEqual([`outside:one-kind :: ${t}`]); // ARM 3 as for any line
+    // a liar's `inTruth` is the surveyor's note: a speaker's word there reds; the LINE's own atoms answer it, never a version's
+    expect(said(`{ text: 'Nothing to see.' }`, ` inTruth: 'there is plenty hidden in the cellar',`)).toEqual(['plenty:none :: there is plenty hidden in the cellar']);
+    expect(said(`{ text: 'Nothing to see.', needs: ['route open'] }`, ` inTruth: 'smuggled goods come in at night',`)).toEqual(['outside:none :: smuggled goods come in at night']);
+    expect(said(`{ text: 'Nothing to see.' }`, ` inTruth: 'smuggled goods come in at night', needs: ['house: smuggling'],`)).toEqual([]);
   });
   test('a key names its band or its gate: the verified tier key, and the annex pool keyed by its gate', () => {
     expect(planted(F, `const LAYOUT_BY_TIER = {\n  city: {\n    hills: 'Hill town: the old quarter below the heights',\n  },\n  hamlet: {\n    hills: 'A hamlet: the old quarter below the heights',\n  },\n};\n`))
