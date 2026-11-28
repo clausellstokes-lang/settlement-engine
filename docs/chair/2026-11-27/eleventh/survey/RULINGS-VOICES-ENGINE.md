@@ -61,3 +61,12 @@ look at with the reader's report: the courthouse liar ("Nothing gets past the ch
 the criminal house's loads through": a customs lie in a court's mouth); the governor of an insurgent city remarking on
 back-door business as a bystander; "Everyone pays, and nobody likes how it's spent." on two different tensions in two of
 twelve towns.
+
+**"TIP? 7dad3b372" (received 11:52 UTC, read 13:20 UTC): ACCEPTED AS BUILT** (G1-7 the Tonight sheet prints no quote; G1-5 the
+PDF worker carries no lines, +1,334 B against 003fd3b07; G1-6 the sameness table). THE READER is told of the delta.
+**G1-8 (from G1-6's numbers): MORE LINES, BY TWO WRITERS** (`prompts/START-VOICES-LINES-2.txt`): every printing pool to at
+least five lines, the seventeen most-printed to eight, each new line a different thing noticed; the chair reads a sample of
+twelve from each first, then the rest. VOICES-ENGINE does nothing with them until the chair hands it the accepted files;
+then it imports them through the generator (ids append-only), re-runs the walker, the id guard by its door, and the
+measures (quotes a page, the caps, sameness again, the twelve towns), and sends "TIP?". UNTIL THEN: HOLD the code tip at
+7dad3b372's code (no commit), and end your turn at least once an hour.
