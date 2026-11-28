@@ -620,3 +620,38 @@ See section 4, newest last.
 - STILL OUT, NOT REPORTED: R-CURES-A (re-rendering after 122-A-1), R-CURES-B (B4's corpora), R-BIRTH (pushing 1e8576d08),
   SURVEY-MEASURE, VOICES-MEASURE. OWED BY THE CHAIR AFTER THEM: the whole read of the final cure branches; D1 (the
   Overview's "Governed by", after point 121 lands); ONE independent reader over points 122 and 123; their landings.
+
+## V24 (00:45 UTC on 2026-11-28): **THE OWNER: "Wait the veil comes after everything else but before the release."** THE SHARE VEIL IS PAUSED AGAIN; POINT 121's WHOLE SUITE IN (TWO NEW REDS, BOTH CURED; ONE QUESTION OPEN BEFORE THE PUSH)
+- **HIS WORDS, VERBATIM (about 00:43 UTC on 2026-11-28, this session):** "Wait the veil comes after everything else but
+  before the release." ANSWERED FIRST, IN FULL. THE CHAIR HAD RESUMED THE LANE AT 23:17 UTC ON ITS OWN JUDGEMENT (E18): THAT
+  IS WITHDRAWN. **THE ORDER NOW, HIS: every town item, the survey and the cold read FIRST; THE SHARE VEIL LAST, BEFORE THE
+  RELEASE.** A successor does not re-open the lane until the town work, THE SURVEY and COLD-READ-20 are done, or he says so.
+- THE PAUSE (sent 00:44 UTC to VEIL-56 at once): each seat finishes only the step in hand, pushes it with a state section,
+  and stops; VEIL-56 writes `veil/v56/PAUSE-2026-11-28.md` on `lane/veil-56-2026-11-27` (the form of VEIL-55's page) and
+  answers "VEIL LANE PAUSED". NOTHING IS WITHDRAWN: rulings V30 to V34 (`veil/RULING-V30.md`) stand for the resumption, and
+  E23 (D1 goes to the lane's A19 unit) with them. WHAT THE THREE HOURS FOUND IS IN THAT FILE AND IN V23 ABOVE: the lost work
+  is a true rebuild; the tip's merge base with the line is point 73; a covert tie deleted from the live row is served by
+  every door, the party link included (cured in U3R's WIP, not merged); shared pages re-derive wrongly for towns made
+  before this release (V33: fail closed by provenance); the false band reaches five rows (V31: the interval test).
+- **POINT 121, THE WHOLE SUITE AT 04fe78096 (four shards, 23:46 to 00:33 UTC; lists filed: `shards/LAND121/`,
+  `shards/results/LAND121-on.tsv`, `-new.tsv`):** 3,826 files, 43,853 tests, 59 failed: 57 ON THE LIST, 2 NEW, BOTH CURED BY
+  THE CHAIR ON THE LINE's LOCAL TREE: (1) `proseWiringCensus` (e) THE FENCE read the door comment's module name (the
+  chair's own ruling 121-4 U3 had put it there) as a reach into the prose island: the comment re-worded, c436fa21a;
+  (2) `tests/architecture/layerBoundaries.test.js`, the PDF boundary's census of reached trees: `pdf/lib/headlines.js`
+  reaches `src/kernel` since point 121 (`pickRendezvous`): RULED LAWFUL (the kernel is the lowest headless layer) and the
+  census row added with its reason, 1b2d534da. `tests/lint` WHOLE re-run on c436fa21a: 3,430 tests, 4 failed, the list's
+  four. **THE LINE's LOCAL TIP IS 1b2d534da; NOT PUSHED.**
+- **OPEN BEFORE THE PUSH: 43,853 TESTS RAN AGAINST 43,889 AT POINT 120 (36 FEWER) THOUGH POINT 121 ADDED TESTS.** The chair
+  is naming them: `vitest list --json` on a worktree of 682667fe2 (`/home/user/wt/base120`) and on the line's tip, the two
+  lists compared by name (`…/scratchpad/landing/121/chair/list-120.json`, `list-121.json`). THE LINE DOES NOT MOVE UNTIL
+  EVERY VANISHED TEST IS NAMED AND RULED.
+- TRAD-BUILD (a local Opus seat; `/home/user/wt/trad`, `lane/stack-122-trad-wip-2026-11-27`): built the measured cure
+  (19e7a799f, four commits) and STOPPED RIGHTLY on `tests/security/traditionDescriptionSharedPage.test.js`: the draw read a
+  house's hideable fields, so a shared page's row count changed with the veil (1 row shown, 3 hidden). **RULED 122-T-2 (by
+  message): THE DRAW ASKS THE FLOOR** (only facts that are the same under every veil state: the floor the shared page's
+  drawn set already reads, one shared helper, for every audience); the security file green as written; a new arm that the
+  owner's drawn set equals the shared one under every marker; the corpora re-run. In flight.
+- R-CURES-A: DONE AND ACCEPTED at e096d4a96 (its round on 122-A-1 read whole). R-CURES-B pushed B4 to
+  `lane/stack-123-b4-wip-2026-11-27` (855ff1bed), not reported. R-BIRTH not reported. VOICES-MEASURE pushed first parts
+  (8e810d384). TRAD-MEASURE DONE (cab2b5788; filed: `trad/`; ruling 122-T, E22; R14 closed as the measure's own fault).
+- POINT 122 IS NOW: cures A, cures B (B1 to B3), the traditions draw (122-T). POINT 123: C1, C2, C3 (B4). D1 is the lane's.
