@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "6dfcf115f0a4873ce3d4ce44270ac0123dc7035d",
+ "frozenAtSha": "59ec13a6049ee2df6dd0dba926a13284e7f54b23",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -24,7 +24,7 @@
  },
  "shapesDigest": "08f7da56b2160301febc02295cbbbfe5d550cc5531df11bfbd41a373d77bf584",
  "detectorDigest": "ef804a6642b3a2a2045c233036156113bf391d135a8edd59ff81c061bde34893",
- "verdictDigest": "c973fdaee8ae8fe08c14fb363dfbb85c67fe688cc4acc7476d4b3ae454efc4b2",
+ "verdictDigest": "1cb6ca1cfe903793a5a5f902297f3d87ccb253a42d253053e61154c8903b0825",
  "surfaceRoots": {
   "web": [
    "src/main.jsx"
@@ -72,12 +72,12 @@
   "json-export"
  ],
  "closureSizes": {
-  "web-display": 806,
-  "web-transitive": 1105,
-  "dossier-pdf": 660,
+  "web-display": 807,
+  "web-transitive": 1106,
+  "dossier-pdf": 662,
   "campaign-pdf": 228,
   "world-book": 243,
-  "foundry": 539,
+  "foundry": 540,
   "json-export": 12,
   "news": 29
  },
@@ -91,15 +91,15 @@
   "knownShapes": 545
  },
  "scanStats": {
-  "files": 1912,
-  "sites": 44861,
-  "propRead": 42576,
+  "files": 1914,
+  "sites": 44894,
+  "propRead": 42609,
   "elemRead": 2,
   "destructure": 2262,
   "inOp": 21,
-  "rGrades": 8071,
-  "nGrades": 1896996,
-  "resolvedReceivers": 8972
+  "rGrades": 8078,
+  "nGrades": 1898413,
+  "resolvedReceivers": 8979
  },
  "registerDigest": "66919206e4d932964430d33786b44f7d6de17566cc52e83fc5ee83647e2cfbf5",
  "pendingSurfaceCeiling": 0,
@@ -9484,7 +9484,7 @@
   "name on historicalEvents": "campaign-pdf=R dossier-pdf=R foundry=R json-export=N news=R web-display=R web-transitive=R world-book=R",
   "plotHooks on historicalEvents": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "severity on historicalEvents": "campaign-pdf=R dossier-pdf=R foundry=R news=N web-display=R web-transitive=R world-book=R",
-  "templateType on historicalEvents": "campaign-pdf=R dossier-pdf=R foundry=R web-transitive=R world-book=R",
+  "templateType on historicalEvents": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "type on historicalEvents": "campaign-pdf=R dossier-pdf=R foundry=R json-export=N news=N web-display=R web-transitive=R world-book=R",
   "yearsAgo on historicalEvents": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "age on history": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
