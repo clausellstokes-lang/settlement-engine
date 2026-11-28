@@ -371,6 +371,9 @@ export const ARM1_NOT_PRINTED = Object.freeze([
  */
 export const ARM1_RULE_BOOK = Object.freeze({
   'src/domain/facts/registeredWords.js': 'the registered words, their atoms and their leaves: the walker\'s and the page check\'s rule book, imported by no printing file',
+  // SURVEY S-C (2026-11-28): the table of exclusions between atoms, the vocabulary's own data: its rows' plain lines of why and
+  // their sources name things, but no printing file imports it (its readers: its property test, its walker, the page clash census)
+  'src/domain/facts/claimExclusions.js': 'the table of exclusions between claims (SURVEY S-C): atoms, their reasons and sources, read only by its tests and the page clash census, imported by no printing file',
 });
 
 /**

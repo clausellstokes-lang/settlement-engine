@@ -194,7 +194,8 @@ describe('the rule book', () => {
     const src = "export const W = { leaf: 'crisisKind.js (occupied) · rulerKind.js (occupier) under occupation' };";
     expect(scanSource('src/domain/facts/registeredWords.js', src)).toEqual([]);
     expect(scanSource('src/domain/facts/elsewhere.js', src).map((h) => h.thing)).toEqual(['occupation']);
-    expect(Object.keys(ARM1_RULE_BOOK)).toEqual(['src/domain/facts/registeredWords.js']);
+    // SURVEY S-C (2026-11-28): the table of exclusions joins the rule book; its own pin is below (no file under src imports it)
+    expect(Object.keys(ARM1_RULE_BOOK)).toEqual(['src/domain/facts/registeredWords.js', 'src/domain/facts/claimExclusions.js']);
     const importers = [];
     const walk = (rel) => {
       for (const e of readdirSync(join(ROOT, rel)).sort()) {
@@ -205,6 +206,16 @@ describe('the rule book', () => {
     };
     walk('src');
     expect(importers, 'a printing file imports the rule book').toEqual(['src/domain/coherence/vocabularyPageFindings.js']);
+    const tableImporters = [];
+    const walkTable = (rel) => {
+      for (const e of readdirSync(join(ROOT, rel)).sort()) {
+        const p = `${rel}/${e}`;
+        if (statSync(join(ROOT, p)).isDirectory()) walkTable(p);
+        else if (/\.(?:js|jsx|mjs)$/.test(e) && /from '[^']*facts\/claimExclusions\.js'/.test(readFileSync(join(ROOT, p), 'utf8'))) tableImporters.push(p);
+      }
+    };
+    walkTable('src');
+    expect(tableImporters, 'a file under src imports the table of exclusions (SURVEY S-C: only its tests and the census read it)').toEqual([]);
   });
 
   /**

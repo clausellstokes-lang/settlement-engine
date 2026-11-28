@@ -408,6 +408,7 @@ export const NOT_PAGE = Object.freeze([
   ['src/components/HomeHero.jsx', 'the home screen'],
   ['src/components/HowToUse.jsx', 'the how-to screen'],
   ['src/components/ConfigurationPanel.jsx', 'the generation form: configuration chrome'],
+  ['src/domain/facts/claimExclusions.js', "the table of exclusions between claims (SURVEY S-C, 2026-11-28): atoms, their reasons and sources, read only by its tests and the page clash census; admitted as presumedThings' ARM1_RULE_BOOK"],
   ['src/data/people/goalSecretRefusals.js', "the goals lane's closed list of venal secrets: a matcher, never printed (its texts copy live pool lines, which this walker reads where they stand); admitted as presumedThings' ARM1_INSTRUMENTS, parity arm '(i) PARITY' of tests/data/goalSecretRefusals.test.js; the chair's ruling of 2026-11-20 16:04 UTC (GOALS-3, R2)"],
 ]);
 export const notPage = (rel) => NOT_PAGE.some(([p]) => (p.endsWith('/') ? rel.startsWith(p) : rel === p));
