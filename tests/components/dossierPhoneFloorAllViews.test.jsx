@@ -683,7 +683,10 @@ const DESKTOP_BASELINE = Object.freeze({
   // from the base's 47: the line's 47 -> 46 (point 47, COHERENCE-AGREE, e382be4b3) and the lane's 47 -> 48 -> 46 (R2-CODE-B-3
   // item 2a, the stores' span crosses the measured length; R2-CODE-B-SIDE items 1 and 2, 2ed36a430 and a245e05fb, the chain
   // card's upstream note and its "Import: <a chain's label>" From line left the card). Measured by this walk at the merged tip.
-  "Systems/Economics":   { measured: 44, sub14: 44 },
+  // 44 -> 43 (RULING 122-B-2 unit 1, b5753e7cc): the fixture city owes (owesDebtShown) and its header drew DS-ECO-1 C3 v1
+  // ("With a little left over each year …"), now refused beside a place debt; the pool has no line left, so the header
+  // keeps its label and prints no sentence (one of the 45 | 23 empty slots of the unit's measure). No token moved.
+  "Systems/Economics":   { measured: 43, sub14: 43 },
   // 28 -> 22 (2026-10-30, UX consolidation U5, T2-17..T2-19): Current Tensions, Active Conflicts and the
   // duplicate governing rows left the page; no token moved.
   "Systems/Power":       { measured: 33, sub14: 32 }, // 30 -> 29 OWNER-WORDS-DOSSIER item 3 (2026-11-09): the vignette line and the DS-POW-1/2 readings became one paragraph
@@ -876,7 +879,8 @@ const MOBILE_BASELINE = Object.freeze({
   // chrome 7 -> 6, sub14 7 -> 6 (2026-11-14, R2-CODE-B-7, the merge 0aa0cce00), composed from the base's 39/8/8: the line's
   // chrome 8 -> 7 (point 47, e382be4b3) and the lane's prose 39 -> 40 -> 39, chrome 8 -> 7 (R2-CODE-B-3 item 2a, the stores
   // line; the side items 1 and 2: the upstream note (prose) and the "Import:" From line (chrome) left the card). sub12 holds 0.
-  "Systems/Economics":   { prose: 38, chrome: 6, sub14: 6, sub12: 0 },
+  // prose 38 -> 37 (RULING 122-B-2 unit 1, b5753e7cc): the header's refused C3 v1 beside the fixture city's debt (above).
+  "Systems/Economics":   { prose: 37, chrome: 6, sub14: 6, sub12: 0 },
   // prose 27 -> 21 (2026-10-30, UX consolidation U5): tensions, conflicts and the duplicate rows left.
   "Systems/Power":       { prose: 32, chrome: 1, sub14: 0, sub12: 0 }, // 29 -> 28 OWNER-WORDS-DOSSIER item 3 (2026-11-09): the governance block is one paragraph
   // prose 27 -> 25, chrome 1 -> 2 (2026-10-30, UX consolidation U6): the criminal faction is now one
