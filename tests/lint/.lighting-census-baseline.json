@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "78a4d4908244ba4f58d53e2f465280d0f5ec588a",
-  "measuredBy": "122-B-2",
+  "measuredAtSha": "6cf6f5c434948f6e9a0475b058029c988466bfe9",
+  "measuredBy": "122-B-3",
   "date": "2026-11-28",
-  "note": "RULING 122-B-2 (CURE-122B): the new file tests/architecture/helperCarriesNoDesk.test.js and the new cases of units 1, 2 and 4 (viabilityTruePage, historyTab, dailyLife, selfVouchReceipt)",
-  "files": 3828,
+  "note": "RULING 122-B-3 (CURE-122B): the new file tests/security/functionEyeCopy.test.js, the floor case of helperCarriesNoDesk.test.js and the two slash cases of economyStateProseDesk.test.js",
+  "files": 3829,
   "parked": 509,
-  "credited": 3319,
-  "titles": 32162,
-  "suiteTitles": 8945
+  "credited": 3320,
+  "titles": 32167,
+  "suiteTitles": 8947
 }
