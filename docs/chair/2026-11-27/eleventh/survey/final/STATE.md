@@ -24,4 +24,13 @@
   {force} sees to that." (no force: "Visitors can walk anywhere at any hour."); a replacement, if the chair wants the
   crime said: "Visitors can walk anywhere at any hour, though what crime there is keeps to the back rooms; the {force}
   sees to the streets."
+- **Y1 RULED (S-D-Y1, the chair 15:50 UTC; for the owner's veto).** (i) a crime wave in force: "The {force} keeps order in
+  the streets, but crime is rising all the same." / no force: "Order holds in the streets, but crime is rising all the
+  same." (ii) an organised criminal house only: "Visitors can walk anywhere at any hour, though what crime there is
+  keeps to the back rooms; the {force} sees to the streets." / no force: "...keeps to the back rooms." BINDING: a
+  reader's composition (shared-page stamp, player view) reads the criminal house through the veil-invariant floor
+  (`traditions/traditionFloor.js`: the record less every hideable house) and the crime wave the same way: the tension
+  IS hideable by the curate screen (`galleryVeil.js:211`, kind `tension` over `history.currentTensions`: PLAUSIBLE, by
+  source). SECURITY CASE to build: the reader's line byte-identical shown vs hidden for a planted criminal house and a
+  hidden crime-wave tension; the owner's line still names them. Built after the merge, with the rest of S-D.
 - NEXT: hold the code tip (b2a9010fe); wait for the merged tree and the chair's word to build.
