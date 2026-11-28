@@ -126,7 +126,9 @@ export function speakerAdmits(tokens, npc, card, ctx, tier0) {
   return tokens.some((t) => {
     switch (t) {
       case 'anyone': return true;
-      case 'keeper': case 'works-there': case 'watch-officer': return ofHouse;
+      // a house's keeper is its own people, and its FACE (the card's first tier: the Connection row's person, who may be
+      // the seat's holder of another house where the seat's house is faced by its leader)
+      case 'keeper': case 'works-there': case 'watch-officer': return ofHouse || (card.kind === 'institution' && tier0);
       case 'member': return ofPower;
       case 'not-member': return !!card.power && !ofPower;
       case 'not-seat': return !ofSeat;

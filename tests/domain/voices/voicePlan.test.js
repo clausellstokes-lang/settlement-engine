@@ -11,7 +11,7 @@
  */
 import { beforeAll, describe, expect, it, vi } from 'vitest';
 import { VOICES_TUNING } from '../../../src/domain/voices/voicesTuning.js';
-import { KNOWN_MOUTHS, OWNER_AUDIENCE, pickKeyOf, quoteFor, temperOf, voicePlanOf } from '../../../src/domain/voices/voicePlan.js';
+import { KNOWN_MOUTHS, OWNER_AUDIENCE, pickKeyOf, quoteFor, speakerAdmits, temperOf, voicePlanOf } from '../../../src/domain/voices/voicePlan.js';
 import { VOICE_TABS, isLawfulSpeaker } from '../../../src/domain/voices/cardsOf.js';
 import { SAID_LINES } from '../../../src/data/voices/saidLines.js';
 import { LIAR_LINES } from '../../../src/data/voices/liarLines.js';
@@ -142,6 +142,23 @@ describe('the page rules', () => {
 
   it('knows every mouth the lines name (a mouth it does not know takes no one)', () => {
     for (const l of said) for (const t of l.speaker) expect(KNOWN_MOUTHS, `${l.id}: ${t}`).toContain(t);
+  });
+});
+
+describe('a house\'s keeper lines', () => {
+  it('take the house\'s own face even where the face is the seat\'s holder of another house (the Connection row\'s person)', () => {
+    const face = { id: 'npc_reeve', name: 'A Reeve', institution: { kind: 'house', key: 'Lord\'s reeve' } };
+    const card = { kind: 'institution', id: 'subsistence_farming', house: 'Subsistence farming', power: null, exclude: new Set(), npc: null, keeperTier0: null };
+    const ctx = { seatName: '', seatMembers: new Set(), instByName: new Map() };
+    expect(speakerAdmits(['keeper', 'works-there'], face, card, ctx, true)).toBe(true);
+    expect(speakerAdmits(['keeper', 'works-there'], face, card, ctx, false)).toBe(false);
+  });
+
+  it('leave no one-person place silent because its one person was spent on a card with no line for them', () => {
+    for (const { seed, s, plan } of plans()) {
+      if (s.npcs.length !== 1) continue;
+      expect([...plan.outcome.values()].filter((o) => o === 'no-line'), seed).toEqual([]);
+    }
   });
 });
 
