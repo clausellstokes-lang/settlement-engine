@@ -144,8 +144,8 @@ export function PlotHookSourceCard({ source, hooks }) {
   );
 }
 
-export default function PlotHooksTab({ settlement }) {
-  const groups = useMemo(() => groupPlotHooksBySourcePage(collectPlotHooks(settlement || {})), [settlement]);
+export default function PlotHooksTab({ settlement, publicDossier = false }) {
+  const groups = useMemo(() => groupPlotHooksBySourcePage(collectPlotHooks(settlement || {}, { reader: publicDossier === true })), [settlement, publicDossier]); // SURVEY S-A: a reader's page prints stored hooks as stored
 
   if (!groups.length) {
     return (

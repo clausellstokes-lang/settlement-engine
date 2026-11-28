@@ -10,6 +10,7 @@ import { crisisHooksOf, leverAndLoserOf } from '../crisis/crisisHooks.js';
 import { effectiveCastOf } from '../crisis/crisisCast.js';
 import { firstPowerOf as cardFirstPowerOf, powerOrderOf } from '../people/cardPowers.js';
 import { humanizeToken } from '../display/humanizeEngineTokens.js';
+import { eventHookShown, npcHookShown } from './storedHookShown.js';
 
 const TENSION_LABELS = Object.freeze({
   crime_wave: 'Crime Wave',
@@ -473,7 +474,8 @@ const CRISIS_LINK_KINDS = new Set(['npc', 'faction']);
 
 /**
  * @param {PlotHookSettlement} [settlement]
- * @param {{ retention?: boolean }} [options] `retention: true` engages the HK-2
+ * @param {{ retention?: boolean, reader?: boolean }} [options] `reader: true`: the shared page (stored hooks print as
+ *   stored; SURVEY S-A). `retention: true` engages the HK-2
  *   theme-retention layer (src/domain/dossier/hookRetention.js). It is OFF by
  *   default and every existing caller leaves it off, so this function's output
  *   is byte-identical to its pre-HK-2 output — see the seam note at the tail.
@@ -517,9 +519,17 @@ export function collectPlotHooks(settlement = {}, options = {}) {
   // each card carries ONE, drawn at birth by its house's title (people/poolMap.js :: hookPoolFor);
   // its party is the person. `links` stays beside `parties` so the surfaces render until PEOPLE-5
   // reads `parties`.
+  // SURVEY S-A (the chair's ruling S-A-1): a hook stored at birth is re-answered on the FINAL record (storedHookShown.js);
+  // a reader's page (`options.reader`) prints it as stored.
+  const finalFacts = (() => { /** @type {any} */ let f = null; return () => (f ??= factsOf(settlement)); })();
+  const heldHooks = new Set([
+    ...(settlement.npcs || []).flatMap((npc) => (npc.plotHooks || []).map(plotHookText)),
+    ...(settlement.history?.historicalEvents || []).flatMap((event) => (event.plotHooks || []).map(plotHookText)),
+  ].filter((t) => typeof t === 'string'));
+  const onFinal = (/** @type {unknown} */ text, /** @type {(t: string) => string | null} */ shown) => (options.reader === true || typeof text !== 'string' ? text : shown(text));
   (settlement.npcs || []).forEach((npc) => {
     (npc.plotHooks || []).forEach((hook) => push(hooks, {
-      text: plotHookText(hook),
+      text: onFinal(plotHookText(hook), (t) => npcHookShown(t, settlement, finalFacts, heldHooks)),
       source: npc.name || 'NPC',
       role: npc.role || npc.title || '',
       sub: [
@@ -607,7 +617,7 @@ export function collectPlotHooks(settlement = {}, options = {}) {
   (settlement.history?.historicalEvents || []).forEach((event) => {
     const label = EVENT_LABELS[/** @type {keyof typeof EVENT_LABELS} */ (event.type)] || EVENT_LABELS.political;
     (event.plotHooks || []).forEach((hook) => push(hooks, {
-      text: plotHookText(hook),
+      text: onFinal(plotHookText(hook), (t) => eventHookShown(t, event.type, settlement, finalFacts, heldHooks)),
       source: `${label} Event`,
       role: event.yearsAgo ? `${event.yearsAgo}y ago` : '',
       sub: event.anchored ? 'Still affecting this settlement' : null,
