@@ -28,13 +28,19 @@ const SIEGE_A = 'A yearly fair for regional merchants. None can reach it while t
 const LINE_C = 'A yearly draw for regional traders, with fine goods on offer.';
 const TWIN_C = 'A yearly draw for regional traders, though the fine goods the town wants do not reach it.';
 
-/** THE LUXURY UNMET: the fair's line drawn, the need list names a luxury not brought in. [seed, the line drawn, its twin] */
+/** THE LUXURY UNMET: the fair's line drawn, the need list names a luxury not brought in. [seed, the line drawn, its twin]
+ * RE-POINTED (RULING 123-C3-1, 2026-11-28): since B4 a town whose own resources supply its luxury (gemstone deposits,
+ * precious metals) no longer lists it as needed, so five rows' towns now hold the need. Each is re-pointed to the first
+ * seed of its own arm (same configOf shape, same line) for which this file's own `luxuryUnmet` reads true and the fair
+ * prints the twin: r2r-town-10 -> r2r-town-61, r2s-monster_pressure-town-3 -> r2s-monster_pressure-town-57,
+ * r2s-wartime-town-2 -> r2s-wartime-town-7, bar0-town-occupied-rand-35 -> bar0-town-occupied-rand-78, r2r-town-50 ->
+ * r2r-town-87. Fifteen rows before and after; no matcher changed. */
 const UNMET = Object.freeze([
   ['bar0-town-calm-rand-45', LINE_A, TWIN_A], ['r2r-town-56', LINE_A, TWIN_A], ['r2r-town-57', LINE_A, TWIN_A],
-  ['r2s-recently_betrayed-town-0', LINE_A, TWIN_A], ['r2r-town-10', LINE_B, TWIN_B], ['r2s-monster_pressure-town-3', LINE_B, TWIN_B],
-  ['r2s-wartime-town-2', LINE_B, TWIN_B],
+  ['r2s-recently_betrayed-town-0', LINE_A, TWIN_A], ['r2r-town-61', LINE_B, TWIN_B], ['r2s-monster_pressure-town-57', LINE_B, TWIN_B],
+  ['r2s-wartime-town-7', LINE_B, TWIN_B],
   ['bar0-town-calm-rand-46', LINE_C, TWIN_C], ['bar0-town-occupied-rand-46', LINE_C, TWIN_C], ['bar0-town-occupied-rand-47', LINE_C, TWIN_C],
-  ['bar0-town-occupied-rand-35', LINE_C, TWIN_C], ['r2r-town-47', LINE_C, TWIN_C], ['r2r-town-50', LINE_C, TWIN_C],
+  ['bar0-town-occupied-rand-78', LINE_C, TWIN_C], ['r2r-town-47', LINE_C, TWIN_C], ['r2r-town-87', LINE_C, TWIN_C],
   ['r2s-famine-town-1', LINE_C, TWIN_C], ['r2s-indebted-town-1', LINE_C, TWIN_C],
 ]);
 /** THE NEGATIVES: the fair's line drawn and the need list names no luxury (salt, gold/silver ore, livestock, stone, nothing). */
