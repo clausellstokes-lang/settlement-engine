@@ -1,0 +1,86 @@
+{
+ "label": "V",
+ "births": 300,
+ "pagesOld": 295,
+ "linesOld": 735,
+ "ownerPagesOld": 295,
+ "byHome": {
+  "pressureSentence": {
+   "lines": 99,
+   "pages": 97,
+   "surfaces": {
+    "owner page (tabs)": 97,
+    "Foundry": 1,
+    "Tonight": 1
+   },
+   "ex": {
+    "seed": "dp-thorp-0",
+    "old": "Wadihaven",
+    "neu": "Quillmarsh",
+    "view": "Summary/Overview",
+    "line": "The interest on Wadihaven's debt now outpaces what the timber can bring in; the numbers have been quietly rearranged twice to hide it, and there is no third arrangement that works."
+   }
+  },
+  "stress.summary": {
+   "lines": 306,
+   "pages": 102,
+   "surfaces": {
+    "owner page (tabs)": 102,
+    "PDF": 102,
+    "Foundry": 102
+   },
+   "ex": {
+    "seed": "dp-thorp-0",
+    "old": "Wadihaven",
+    "neu": "Quillmarsh",
+    "view": "Summary/Crisis",
+    "line": "Wadihaven owes an outside power more than it can ever repay, and the debt now decides what it can and cannot do."
+   }
+  },
+  "arrivalScene": {
+   "lines": 287,
+   "pages": 287,
+   "surfaces": {
+    "owner page (tabs)": 287
+   },
+   "ex": {
+    "seed": "dp-thorp-1",
+    "old": "Kilton",
+    "neu": "Quillmarsh",
+    "view": "Summary/Overview",
+    "line": "Kilton's notices are posted in two languages now, the local one second. The new lettering is neat, official, and on every door that matters, which is how you learn the occupation intends to stay. Hoofprints and dung mark the lane, and you learn quickly to watch where you step. A boy is introduced to"
+   }
+  },
+  "stress[].summary": {
+   "lines": 42,
+   "pages": 7,
+   "surfaces": {
+    "owner page (tabs)": 14,
+    "PDF": 14,
+    "Foundry": 14
+   },
+   "ex": {
+    "seed": "dp-thorp-108",
+    "old": "Tulumha",
+    "neu": "Quillmarsh",
+    "view": "Summary/Crisis",
+    "line": "Tulumha has gone short of food for a second season. Rationing has begun, the wealthy are hoarding, and the children are visibly hungry."
+   }
+  }
+ },
+ "bySurface": {
+  "owner page (tabs)": 501,
+  "PDF": 116,
+  "Foundry": 117,
+  "Tonight": 1
+ },
+ "unmatched": 1,
+ "unmatchedEx": [
+  {
+   "seed": "dp-hamlet-94",
+   "view": "Summary/Overview",
+   "line": "The first person you meet on the road into Darhanörtöö wants to know your business, and the second already knows it. Corrals and open assembly ground occupy as much space as the permanent halls. Herders show their animals at the edge of the settlement, where herders and townsfolk meet."
+  }
+ ],
+ "pagesByHome": {}
+}

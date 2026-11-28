@@ -41,7 +41,7 @@ function renamer(oldName, neu) {
   const slug = (x) => strip(x).toLowerCase().replace(/[^a-z0-9]+/g, '_');
   toks.push([String(neu).toLowerCase().replace(/[^a-z0-9]+/g, '_'), '⟨N⟩'], [String(oldName).toLowerCase().replace(/[^a-z0-9]+/g, '_'), '⟨N⟩'], [slug(neu), '⟨N⟩'], [slug(oldName), '⟨N⟩'], [strip(neu), '⟨N⟩'], [strip(oldName), '⟨N⟩']);
   if (o.length >= 2 && n.length >= 2) toks.push([n[0], '⟨F⟩'], [o[0], '⟨F⟩'], [n[n.length - 1], '⟨L⟩'], [o[o.length - 1], '⟨L⟩']);
-  return (line) => { let x = String(line); for (const [a, b] of toks) x = x.replace(new RegExp(esc(a), 'gi'), b); return x.replace(/the[\s_]+(⟨N⟩)/gi, '$1').toLowerCase(); };
+  return (line) => { let x = String(line).replace(/&#39;/g, "'").replace(/&quot;/g, '"').replace(/&amp;/g, '&'); for (const [a, b] of toks) x = x.replace(new RegExp(esc(a), 'gi'), b); return x.replace(/the[\s_]+(⟨N⟩)/gi, '$1').toLowerCase(); };
 }
 const has = (line, nm) => new RegExp(esc(nm), 'i').test(line);
 
@@ -112,9 +112,11 @@ for await (const l of rl) {
       if (shRe) Sh.shareRedealt++;
       // owner vs share AFTER the rename, less the differences the two already had before it
       const baseDiffKey = new Set();
-      for (const [view, d] of Object.entries(j.baseOwnerVsShare || {})) { for (const g of d.gone) baseDiffKey.add(`${view}|o|${back(g)}`); for (const c of d.came) baseDiffKey.add(`${view}|s|${back(c)}`); }
+      for (const [view, d] of Object.entries(j.baseOwnerVsShare || {})) {
+        if (/^(PDF|Foundry|Tonight|Session)\//.test(view)) continue; for (const g of d.gone) baseDiffKey.add(`${view}|o|${back(g)}`); for (const c of d.came) baseDiffKey.add(`${view}|s|${back(c)}`); }
       let newDiff = 0;
       for (const [view, d] of Object.entries(v.ownerVsShare)) {
+        if (/^(PDF|Foundry|Tonight|Session)\//.test(view)) continue; // the non-DOM surfaces are the owner's alone: not a page the share renders
         for (const g of d.gone) { if (!baseDiffKey.has(`${view}|o|${back(g)}`)) { newDiff++; Sh.byView[view] = (Sh.byView[view] || 0) + 1; if (Sh.examples.length < 20) Sh.examples.push({ seed: j.seed, view, ownerOnly: g.slice(0, 300) }); } }
         for (const c of d.came) { if (!baseDiffKey.has(`${view}|s|${back(c)}`)) { newDiff++; Sh.byView[view] = (Sh.byView[view] || 0) + 1; if (Sh.examples.length < 20) Sh.examples.push({ seed: j.seed, view, shareOnly: c.slice(0, 300) }); } }
       }

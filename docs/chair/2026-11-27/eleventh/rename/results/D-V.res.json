@@ -1,0 +1,2392 @@
+{
+ "label": "V",
+ "births": 300,
+ "errors": 0,
+ "byVar": {
+  "T": {
+   "births": 300,
+   "skipped": 0,
+   "pagesMoved": 300,
+   "pagesRedealt": 300,
+   "linesMoved": 20354,
+   "linesNameOnly": 15830,
+   "linesRedealt": 4524,
+   "redealtByView": {
+    "Systems/Defense": 82,
+    "World/Daily Life": 2012,
+    "PDF/dailyLife": 1981,
+    "PDF/headlines": 87,
+    "Foundry/Overview": 176,
+    "Foundry/Tonight": 82,
+    "Tonight/sheet": 82,
+    "Systems/Power": 22
+   },
+   "pickSites": {
+    "FNV src/domain/crisis/crisisSummaryVantage.js :: summaryColumnOf": {
+     "picksWithName": 559,
+     "pagesWithName": 109,
+     "moved": 559,
+     "pagesMoved": 109,
+     "keyExample": "Wadihaven::indebted",
+     "ex": null
+    },
+    "RZ src/domain/dailyLife.js :: pickNameable": {
+     "picksWithName": 5070,
+     "pagesWithName": 300,
+     "moved": 4110,
+     "pagesMoved": 300,
+     "keyExample": "Wadihaven::dailyLife.food_culture::adequate",
+     "ex": {
+      "seed": "dp-thorp-0",
+      "key": "Wadihaven::dailyLife.food_culture::adequate",
+      "before": "A6",
+      "keyAfter": "Quillmarsh::dailyLife.food_culture::adequate",
+      "after": "A4"
+     }
+    },
+    "RZ src/domain/dailyLife.js :: yields": {
+     "picksWithName": 317,
+     "pagesWithName": 300,
+     "moved": 174,
+     "pagesMoved": 162,
+     "keyExample": "Wadihaven::dailyLife.outsider_impressions::second",
+     "ex": {
+      "seed": "dp-thorp-0",
+      "key": "Wadihaven::dailyLife.outsider_impressions::second",
+      "before": "services.administrative",
+      "keyAfter": "Quillmarsh::dailyLife.outsider_impressions::second",
+      "after": "services.defense"
+     }
+    },
+    "RZ src/pdf/lib/headlines.js :: seedPick": {
+     "picksWithName": 218,
+     "pagesWithName": 109,
+     "moved": 174,
+     "pagesMoved": 87,
+     "keyExample": "Wadihaven",
+     "ex": {
+      "seed": "dp-thorp-0",
+      "key": "Wadihaven",
+      "before": "local",
+      "keyAfter": "Quillmarsh",
+      "after": "traveller"
+     }
+    },
+    "RZ src/domain/display/governanceAccount.js :: underOccupation": {
+     "picksWithName": 28,
+     "pagesWithName": 28,
+     "moved": 22,
+     "pagesMoved": 22,
+     "keyExample": "Khanhiid::281",
+     "ex": {
+      "seed": "dp-thorp-27",
+      "key": "Kalivich::291",
+      "before": "B",
+      "keyAfter": "Quillmarsh::291",
+      "after": "C"
+     }
+    }
+   },
+   "examples": {},
+   "lineExamples": [
+    {
+     "seed": "dp-thorp-0",
+     "view": "Systems/Defense",
+     "came": "People in Quillmarsh hide what little they have saved, in case the creditor's agents come asking.",
+     "gone": [
+      "Those who answer for Wadihaven must answer to the creditor too, and the people know it."
+     ]
+    },
+    {
+     "seed": "dp-thorp-0",
+     "view": "World/Daily Life",
+     "came": "Ask who decides things here, and the answer is the Elder Council. A visitor soon learns that the country beyond is not to be walked carelessly. Nobody here is paid to keep the peace, and it shows.",
+     "gone": [
+      "Outsiders notice the mark of the Elder Council on every door that matters. Travellers here talk of beasts seen at the edge of the settled land. Any business with the Elder Council means a long wait, and visitors are warned of it.",
+      "The first light goes to walking the edges of the fields; the ordinary work begins once that is done.",
+      "A pot of stew over the fire is the usual supper, and there is usually enough to go round."
+     ]
+    },
+    {
+     "seed": "dp-thorp-0",
+     "view": "World/Daily Life",
+     "came": "The elder is asked at first light whether all is well before anyone goes out to work.",
+     "gone": [
+      "Outsiders notice the mark of the Elder Council on every door that matters. Travellers here talk of beasts seen at the edge of the settled land. Any business with the Elder Council means a long wait, and visitors are warned of it.",
+      "The first light goes to walking the edges of the fields; the ordinary work begins once that is done.",
+      "A pot of stew over the fire is the usual supper, and there is usually enough to go round."
+     ]
+    },
+    {
+     "seed": "dp-thorp-0",
+     "view": "World/Daily Life",
+     "came": "Food is steady here, if not generous, and every household has enough with little left over.",
+     "gone": [
+      "Outsiders notice the mark of the Elder Council on every door that matters. Travellers here talk of beasts seen at the edge of the settled land. Any business with the Elder Council means a long wait, and visitors are warned of it.",
+      "The first light goes to walking the edges of the fields; the ordinary work begins once that is done.",
+      "A pot of stew over the fire is the usual supper, and there is usually enough to go round."
+     ]
+    },
+    {
+     "seed": "dp-thorp-0",
+     "view": "World/Daily Life",
+     "came": "News is passed from door to door here, and most of it is known by nightfall.",
+     "gone": [
+      "Outsiders notice the mark of the Elder Council on every door that matters. Travellers here talk of beasts seen at the edge of the settled land. Any business with the Elder Council means a long wait, and visitors are warned of it.",
+      "The first light goes to walking the edges of the fields; the ordinary work begins once that is done.",
+      "A pot of stew over the fire is the usual supper, and there is usually enough to go round."
+     ]
+    },
+    {
+     "seed": "dp-thorp-0",
+     "view": "World/Daily Life",
+     "came": "Children are warned about breaking or spoiling what cannot easily be replaced, and about leaving a door unbarred at night.",
+     "gone": [
+      "Outsiders notice the mark of the Elder Council on every door that matters. Travellers here talk of beasts seen at the edge of the settled land. Any business with the Elder Council means a long wait, and visitors are warned of it.",
+      "The first light goes to walking the edges of the fields; the ordinary work begins once that is done.",
+      "A pot of stew over the fire is the usual supper, and there is usually enough to go round."
+     ]
+    },
+    {
+     "seed": "dp-thorp-0",
+     "view": "World/Daily Life",
+     "came": "What is owed to outsiders, and what happens when it is called in, is spoken of quietly if at all.",
+     "gone": [
+      "Outsiders notice the mark of the Elder Council on every door that matters. Travellers here talk of beasts seen at the edge of the settled land. Any business with the Elder Council means a long wait, and visitors are warned of it.",
+      "The first light goes to walking the edges of the fields; the ordinary work begins once that is done.",
+      "A pot of stew over the fire is the usual supper, and there is usually enough to go round."
+     ]
+    },
+    {
+     "seed": "dp-thorp-0",
+     "view": "World/Daily Life",
+     "came": "A place that owes dues here has stopped paying them reliably.",
+     "gone": [
+      "Outsiders notice the mark of the Elder Council on every door that matters. Travellers here talk of beasts seen at the edge of the settled land. Any business with the Elder Council means a long wait, and visitors are warned of it.",
+      "The first light goes to walking the edges of the fields; the ordinary work begins once that is done.",
+      "A pot of stew over the fire is the usual supper, and there is usually enough to go round."
+     ]
+    },
+    {
+     "seed": "dp-thorp-0",
+     "view": "PDF/dailyLife",
+     "came": "outsider_impressions: Ask who decides things here, and the answer is the Elder Council. A visitor soon learns that the country beyond is not to be walked carelessly. Nobody here is paid to keep the peace, and it shows.",
+     "gone": [
+      "outsider_impressions: Outsiders notice the mark of the Elder Council on every door that matters. Travellers here talk of beasts seen at the edge of the settled land. Any business with the Elder Council means a long wait, and visitors are warned of it.",
+      "dawn_work: The first light goes to walking the edges of the fields; the ordinary work begins once that is done.",
+      "food_culture: A pot of stew over the fire is the usual supper, and there is usually enough to go round."
+     ]
+    },
+    {
+     "seed": "dp-thorp-0",
+     "view": "PDF/dailyLife",
+     "came": "dawn_work: The elder is asked at first light whether all is well before anyone goes out to work.",
+     "gone": [
+      "outsider_impressions: Outsiders notice the mark of the Elder Council on every door that matters. Travellers here talk of beasts seen at the edge of the settled land. Any business with the Elder Council means a long wait, and visitors are warned of it.",
+      "dawn_work: The first light goes to walking the edges of the fields; the ordinary work begins once that is done.",
+      "food_culture: A pot of stew over the fire is the usual supper, and there is usually enough to go round."
+     ]
+    },
+    {
+     "seed": "dp-thorp-0",
+     "view": "PDF/dailyLife",
+     "came": "food_culture: Food is steady here, if not generous, and every household has enough with little left over.",
+     "gone": [
+      "outsider_impressions: Outsiders notice the mark of the Elder Council on every door that matters. Travellers here talk of beasts seen at the edge of the settled land. Any business with the Elder Council means a long wait, and visitors are warned of it.",
+      "dawn_work: The first light goes to walking the edges of the fields; the ordinary work begins once that is done.",
+      "food_culture: A pot of stew over the fire is the usual supper, and there is usually enough to go round."
+     ]
+    },
+    {
+     "seed": "dp-thorp-0",
+     "view": "PDF/dailyLife",
+     "came": "gathering_places: News is passed from door to door here, and most of it is known by nightfall.",
+     "gone": [
+      "outsider_impressions: Outsiders notice the mark of the Elder Council on every door that matters. Travellers here talk of beasts seen at the edge of the settled land. Any business with the Elder Council means a long wait, and visitors are warned of it.",
+      "dawn_work: The first light goes to walking the edges of the fields; the ordinary work begins once that is done.",
+      "food_culture: A pot of stew over the fire is the usual supper, and there is usually enough to go round."
+     ]
+    },
+    {
+     "seed": "dp-thorp-0",
+     "view": "PDF/dailyLife",
+     "came": "child_warnings: Children are warned about breaking or spoiling what cannot easily be replaced, and about leaving a door unbarred at night.",
+     "gone": [
+      "outsider_impressions: Outsiders notice the mark of the Elder Council on every door that matters. Travellers here talk of beasts seen at the edge of the settled land. Any business with the Elder Council means a long wait, and visitors are warned of it.",
+      "dawn_work: The first light goes to walking the edges of the fields; the ordinary work begins once that is done.",
+      "food_culture: A pot of stew over the fire is the usual supper, and there is usually enough to go round."
+     ]
+    },
+    {
+     "seed": "dp-thorp-0",
+     "view": "PDF/dailyLife",
+     "came": "unspoken_topics: What is owed to outsiders, and what happens when it is called in, is spoken of quietly if at all.",
+     "gone": [
+      "outsider_impressions: Outsiders notice the mark of the Elder Council on every door that matters. Travellers here talk of beasts seen at the edge of the settled land. Any business with the Elder Council means a long wait, and visitors are warned of it.",
+      "dawn_work: The first light goes to walking the edges of the fields; the ordinary work begins once that is done.",
+      "food_culture: A pot of stew over the fire is the usual supper, and there is usually enough to go round."
+     ]
+    },
+    {
+     "seed": "dp-thorp-0",
+     "view": "PDF/dailyLife",
+     "came": "recent_changes: A place that owes dues here has stopped paying them reliably.",
+     "gone": [
+      "outsider_impressions: Outsiders notice the mark of the Elder Council on every door that matters. Travellers here talk of beasts seen at the edge of the settled land. Any business with the Elder Council means a long wait, and visitors are warned of it.",
+      "dawn_work: The first light goes to walking the edges of the fields; the ordinary work begins once that is done.",
+      "food_culture: A pot of stew over the fire is the usual supper, and there is usually enough to go round."
+     ]
+    },
+    {
+     "seed": "dp-thorp-0",
+     "view": "PDF/headlines",
+     "came": "overview: Poor. You reach Quillmarsh, a thorpe of 9, and it shows at once: what is owed abroad is paid before anything the people here need.",
+     "gone": [
+      "overview: Poor. In Wadihaven, a thorpe of 9, the talk is all of the debt to outsiders: what is owed abroad is paid before anything the people here need."
+     ]
+    },
+    {
+     "seed": "dp-thorp-0",
+     "view": "Foundry/Overview",
+     "came": "*Poor. You reach Quillmarsh, a thorpe of 9, and it shows at once: what is owed abroad is paid before anything the people here need.*",
+     "gone": [
+      "*Poor. In Wadihaven, a thorpe of 9, the talk is all of the debt to outsiders: what is owed abroad is paid before anything the people here need.*",
+      "- **Indebted to Outside Power**: Whatever Wadihaven sells, a share is set aside for the creditor before anyone else is paid. *Hook: The creditor has sent someone to collect, not money but something particular, and the locals are split between handing it over and refusing.*"
+     ]
+    },
+    {
+     "seed": "dp-thorp-0",
+     "view": "Foundry/Overview",
+     "came": "- **Indebted to Outside Power**: Quillmarsh&#39;s leaders spend more of their time answering the creditor than governing their own people. *Hook: The creditor has sent someone to collect, not money but something particular, and the locals are split between handing it over and refusing.*",
+     "gone": [
+      "*Poor. In Wadihaven, a thorpe of 9, the talk is all of the debt to outsiders: what is owed abroad is paid before anything the people here need.*",
+      "- **Indebted to Outside Power**: Whatever Wadihaven sells, a share is set aside for the creditor before anyone else is paid. *Hook: The creditor has sent someone to collect, not money but something particular, and the locals are split between handing it over and refusing.*"
+     ]
+    },
+    {
+     "seed": "dp-thorp-0",
+     "view": "Foundry/Tonight",
+     "came": "Indebted to Outside Power. Someone new in Quillmarsh could be a way out of the debt or the creditor&#39;s next collector, and people will want to know which. Majid al-Qadir is the one who would come to terms.",
+     "gone": [
+      "Indebted to Outside Power. The creditor&#39;s people in Wadihaven are watching for anything worth taking in place of payment. Majid al-Qadir is the one who would come to terms."
+     ]
+    },
+    {
+     "seed": "dp-thorp-0",
+     "view": "Tonight/sheet",
+     "came": "Indebted to Outside Power. Someone new in Quillmarsh could be a way out of the debt or the creditor's next collector, and people will want to know which. Majid al-Qadir is the one who would come to terms.",
+     "gone": [
+      "Indebted to Outside Power. The creditor's people in Wadihaven are watching for anything worth taking in place of payment. Majid al-Qadir is the one who would come to terms."
+     ]
+    },
+    {
+     "seed": "dp-thorp-1",
+     "view": "Systems/Defense",
+     "came": "Keeping order in Quillmarsh is the occupiers' business now, and the locals are not trusted to help.",
+     "gone": [
+      "The occupiers watch Kilton closely, and the resistance watches them back, careful never to be caught."
+     ]
+    },
+    {
+     "seed": "dp-thorp-1",
+     "view": "World/Daily Life",
+     "came": "Power here does not sit in one pair of hands, and a visitor learns to ask around. Order here depends on people keeping it among themselves.",
+     "gone": [
+      "Power here does not sit in one pair of hands, and a visitor learns to ask around. Getting anything decided here takes time, for those who decide are few and busy.",
+      "The first light goes to walking the edges of the fields; the ordinary work begins once that is done.",
+      "There is less to eat than people would like, and nothing is thrown away."
+     ]
+    },
+    {
+     "seed": "dp-thorp-1",
+     "view": "World/Daily Life",
+     "came": "Those who keep guard are out at first light, and the rest wait for their word before going out to work.",
+     "gone": [
+      "Power here does not sit in one pair of hands, and a visitor learns to ask around. Getting anything decided here takes time, for those who decide are few and busy.",
+      "The first light goes to walking the edges of the fields; the ordinary work begins once that is done.",
+      "There is less to eat than people would like, and nothing is thrown away."
+     ]
+    },
+    {
+     "seed": "dp-thorp-1",
+     "view": "World/Daily Life",
+     "came": "Families here have little money, and they eat less than they would like.",
+     "gone": [
+      "Power here does not sit in one pair of hands, and a visitor learns to ask around. Getting anything decided here takes time, for those who decide are few and busy.",
+      "The first light goes to walking the edges of the fields; the ordinary work begins once that is done.",
+      "There is less to eat than people would like, and nothing is thrown away."
+     ]
+    },
+    {
+     "seed": "dp-thorp-1",
+     "view": "World/Daily Life",
+     "came": "News is passed from door to door here, and most of it is known by nightfall.",
+     "gone": [
+      "Power here does not sit in one pair of hands, and a visitor learns to ask around. Getting anything decided here takes time, for those who decide are few and busy.",
+      "The first light goes to walking the edges of the fields; the ordinary work begins once that is done.",
+      "There is less to eat than people would like, and nothing is thrown away."
+     ]
+    },
+    {
+     "seed": "dp-thorp-1",
+     "view": "World/Daily Life",
+     "came": "Children are warned about leaving a door unbarred at night, and about breaking or spoiling what cannot easily be replaced.",
+     "gone": [
+      "Power here does not sit in one pair of hands, and a visitor learns to ask around. Getting anything decided here takes time, for those who decide are few and busy.",
+      "The first light goes to walking the edges of the fields; the ordinary work begins once that is done.",
+      "There is less to eat than people would like, and nothing is thrown away."
+     ]
+    },
+    {
+     "seed": "dp-thorp-1",
+     "view": "World/Daily Life",
+     "came": "Many here feel that the Household Council no longer listens to people like them. Many households are eating less than they would like, and they say so.",
+     "gone": [
+      "Power here does not sit in one pair of hands, and a visitor learns to ask around. Getting anything decided here takes time, for those who decide are few and busy.",
+      "The first light goes to walking the edges of the fields; the ordinary work begins once that is done.",
+      "There is less to eat than people would like, and nothing is thrown away."
+     ]
+    },
+    {
+     "seed": "dp-thorp-1",
+     "view": "World/Daily Life",
+     "came": "What is running short here is a sore subject, and visitors are not told much about it.",
+     "gone": [
+      "Power here does not sit in one pair of hands, and a visitor learns to ask around. Getting anything decided here takes time, for those who decide are few and busy.",
+      "The first light goes to walking the edges of the fields; the ordinary work begins once that is done.",
+      "There is less to eat than people would like, and nothing is thrown away."
+     ]
+    },
+    {
+     "seed": "dp-thorp-1",
+     "view": "World/Daily Life",
+     "came": "An overlord's demands have grown, and the place feels the draw on its purse. Travel has become dangerous: the land around is thick with beasts.",
+     "gone": [
+      "Power here does not sit in one pair of hands, and a visitor learns to ask around. Getting anything decided here takes time, for those who decide are few and busy.",
+      "The first light goes to walking the edges of the fields; the ordinary work begins once that is done.",
+      "There is less to eat than people would like, and nothing is thrown away."
+     ]
+    },
+    {
+     "seed": "dp-thorp-1",
+     "view": "PDF/dailyLife",
+     "came": "outsider_impressions: Power here does not sit in one pair of hands, and a visitor learns to ask around. Order here depends on people keeping it among themselves.",
+     "gone": [
+      "outsider_impressions: Power here does not sit in one pair of hands, and a visitor learns to ask around. Getting anything decided here takes time, for those who decide are few and busy.",
+      "dawn_work: The first light goes to walking the edges of the fields; the ordinary work begins once that is done.",
+      "food_culture: There is less to eat than people would like, and nothing is thrown away."
+     ]
+    },
+    {
+     "seed": "dp-thorp-1",
+     "view": "PDF/dailyLife",
+     "came": "dawn_work: Those who keep guard are out at first light, and the rest wait for their word before going out to work.",
+     "gone": [
+      "outsider_impressions: Power here does not sit in one pair of hands, and a visitor learns to ask around. Getting anything decided here takes time, for those who decide are few and busy.",
+      "dawn_work: The first light goes to walking the edges of the fields; the ordinary work begins once that is done.",
+      "food_culture: There is less to eat than people would like, and nothing is thrown away."
+     ]
+    },
+    {
+     "seed": "dp-thorp-1",
+     "view": "PDF/dailyLife",
+     "came": "food_culture: Families here have little money, and they eat less than they would like.",
+     "gone": [
+      "outsider_impressions: Power here does not sit in one pair of hands, and a visitor learns to ask around. Getting anything decided here takes time, for those who decide are few and busy.",
+      "dawn_work: The first light goes to walking the edges of the fields; the ordinary work begins once that is done.",
+      "food_culture: There is less to eat than people would like, and nothing is thrown away."
+     ]
+    },
+    {
+     "seed": "dp-thorp-1",
+     "view": "PDF/dailyLife",
+     "came": "gathering_places: News is passed from door to door here, and most of it is known by nightfall.",
+     "gone": [
+      "outsider_impressions: Power here does not sit in one pair of hands, and a visitor learns to ask around. Getting anything decided here takes time, for those who decide are few and busy.",
+      "dawn_work: The first light goes to walking the edges of the fields; the ordinary work begins once that is done.",
+      "food_culture: There is less to eat than people would like, and nothing is thrown away."
+     ]
+    },
+    {
+     "seed": "dp-thorp-1",
+     "view": "PDF/dailyLife",
+     "came": "child_warnings: Children are warned about leaving a door unbarred at night, and about breaking or spoiling what cannot easily be replaced.",
+     "gone": [
+      "outsider_impressions: Power here does not sit in one pair of hands, and a visitor learns to ask around. Getting anything decided here takes time, for those who decide are few and busy.",
+      "dawn_work: The first light goes to walking the edges of the fields; the ordinary work begins once that is done.",
+      "food_culture: There is less to eat than people would like, and nothing is thrown away."
+     ]
+    },
+    {
+     "seed": "dp-thorp-1",
+     "view": "PDF/dailyLife",
+     "came": "commoner_resentments: Many here feel that the Household Council no longer listens to people like them. Many households are eating less than they would like, and they say so.",
+     "gone": [
+      "outsider_impressions: Power here does not sit in one pair of hands, and a visitor learns to ask around. Getting anything decided here takes time, for those who decide are few and busy.",
+      "dawn_work: The first light goes to walking the edges of the fields; the ordinary work begins once that is done.",
+      "food_culture: There is less to eat than people would like, and nothing is thrown away."
+     ]
+    },
+    {
+     "seed": "dp-thorp-1",
+     "view": "PDF/dailyLife",
+     "came": "unspoken_topics: What is running short here is a sore subject, and visitors are not told much about it.",
+     "gone": [
+      "outsider_impressions: Power here does not sit in one pair of hands, and a visitor learns to ask around. Getting anything decided here takes time, for those who decide are few and busy.",
+      "dawn_work: The first light goes to walking the edges of the fields; the ordinary work begins once that is done.",
+      "food_culture: There is less to eat than people would like, and nothing is thrown away."
+     ]
+    },
+    {
+     "seed": "dp-thorp-1",
+     "view": "PDF/dailyLife",
+     "came": "recent_changes: An overlord's demands have grown, and the place feels the draw on its purse. Travel has become dangerous: the land around is thick with beasts.",
+     "gone": [
+      "outsider_impressions: Power here does not sit in one pair of hands, and a visitor learns to ask around. Getting anything decided here takes time, for those who decide are few and busy.",
+      "dawn_work: The first light goes to walking the edges of the fields; the ordinary work begins once that is done.",
+      "food_culture: There is less to eat than people would like, and nothing is thrown away."
+     ]
+    },
+    {
+     "seed": "dp-thorp-1",
+     "view": "PDF/headlines",
+     "came": "overview: Poor. You reach Quillmarsh, a thorpe of 14, and it shows at once: foreign officials give the orders, and the locals say as little as they can.",
+     "gone": [
+      "overview: Poor. Those in charge of Kilton, a thorpe of 14, have the occupation on their hands: foreign officials give the orders, and the locals say as little as they can."
+     ]
+    },
+    {
+     "seed": "dp-thorp-1",
+     "view": "Foundry/Overview",
+     "came": "*Poor. You reach Quillmarsh, a thorpe of 14, and it shows at once: foreign officials give the orders, and the locals say as little as they can.*",
+     "gone": [
+      "*Poor. Those in charge of Kilton, a thorpe of 14, have the occupation on their hands: foreign officials give the orders, and the locals say as little as they can.*",
+      "- **Under Occupation**: In Kilton people answer to foreign officials now, and mind what they say out of doors. *Hook: A resistance cell needs outside help: people who aren&#39;t known faces. The occupation&#39;s local collaborators include someone the players will recognise.*"
+     ]
+    },
+    {
+     "seed": "dp-thorp-1",
+     "view": "Foundry/Overview",
+     "came": "- **Under Occupation**: The occupiers take Quillmarsh&#39;s revenue, and the local offices work only under their eye. *Hook: A resistance cell needs outside help: people who aren&#39;t known faces. The occupation&#39;s local collaborators include someone the players will recognise.*",
+     "gone": [
+      "*Poor. Those in charge of Kilton, a thorpe of 14, have the occupation on their hands: foreign officials give the orders, and the locals say as little as they can.*",
+      "- **Under Occupation**: In Kilton people answer to foreign officials now, and mind what they say out of doors. *Hook: A resistance cell needs outside help: people who aren&#39;t known faces. The occupation&#39;s local collaborators include someone the players will recognise.*"
+     ]
+    },
+    {
+     "seed": "dp-thorp-1",
+     "view": "Foundry/Tonight",
+     "came": "Under Occupation. The occupiers watch Quillmarsh for the resistance, and the resistance watches for its chance. The occupier&#39;s orders come through Orla O&#39;Connor.",
+     "gone": [
+      "Under Occupation. Kilton is governed by an outside power. Its own leaders keep their titles and do as they are told. The occupier&#39;s orders come through Orla O&#39;Connor."
+     ]
+    },
+    {
+     "seed": "dp-thorp-1",
+     "view": "Tonight/sheet",
+     "came": "Under Occupation. The occupiers watch Quillmarsh for the resistance, and the resistance watches for its chance. The occupier's orders come through Orla O'Connor.",
+     "gone": [
+      "Under Occupation. Kilton is governed by an outside power. Its own leaders keep their titles and do as they are told. The occupier's orders come through Orla O'Connor."
+     ]
+    },
+    {
+     "seed": "dp-thorp-2",
+     "view": "World/Daily Life",
+     "came": "Ask who decides things here, and the answer is the Household Council. A visitor soon learns that the country beyond is not to be walked carelessly. Order here depends on people keeping it among themselves.",
+     "gone": [
+      "Outsiders notice the mark of the Household Council on every door that matters. People here are used to living close to the wild, and they tell a visitor where not to go. Its defences are thin, and a visitor sees how little stands ready.",
+      "The first light goes to walking the edges of the fields; the ordinary work begins once that is done.",
+      "Meals are plain and filling, and little goes to waste."
+     ]
+    },
+    {
+     "seed": "dp-thorp-2",
+     "view": "World/Daily Life",
+     "came": "Those who keep guard are out at first light, and the rest wait for their word before going out to work.",
+     "gone": [
+      "Outsiders notice the mark of the Household Council on every door that matters. People here are used to living close to the wild, and they tell a visitor where not to go. Its defences are thin, and a visitor sees how little stands ready.",
+      "The first light goes to walking the edges of the fields; the ordinary work begins once that is done.",
+      "Meals are plain and filling, and little goes to waste."
+     ]
+    },
+    {
+     "seed": "dp-thorp-2",
+     "view": "World/Daily Life",
+     "came": "Food is steady here, if not generous, and every household has enough with little left over.",
+     "gone": [
+      "Outsiders notice the mark of the Household Council on every door that matters. People here are used to living close to the wild, and they tell a visitor where not to go. Its defences are thin, and a visitor sees how little stands ready.",
+      "The first light goes to walking the edges of the fields; the ordinary work begins once that is done.",
+      "Meals are plain and filling, and little goes to waste."
+     ]
+    },
+    {
+     "seed": "dp-thorp-2",
+     "view": "World/Daily Life",
+     "came": "News is passed from door to door here, and most of it is known by nightfall.",
+     "gone": [
+      "Outsiders notice the mark of the Household Council on every door that matters. People here are used to living close to the wild, and they tell a visitor where not to go. Its defences are thin, and a visitor sees how little stands ready.",
+      "The first light goes to walking the edges of the fields; the ordinary work begins once that is done.",
+      "Meals are plain and filling, and little goes to waste."
+     ]
+    },
+    {
+     "seed": "dp-thorp-2",
+     "view": "World/Daily Life",
+     "came": "Children are warned about leaving a door unbarred at night.",
+     "gone": [
+      "Outsiders notice the mark of the Household Council on every door that matters. People here are used to living close to the wild, and they tell a visitor where not to go. Its defences are thin, and a visitor sees how little stands ready.",
+      "The first light goes to walking the edges of the fields; the ordinary work begins once that is done.",
+      "Meals are plain and filling, and little goes to waste."
+     ]
+    },
+    {
+     "seed": "dp-thorp-2",
+     "view": "PDF/dailyLife",
+     "came": "outsider_impressions: Ask who decides things here, and the answer is the Household Council. A visitor soon learns that the country beyond is not to be walked carelessly. Order here depends on people keeping it among themselves.",
+     "gone": [
+      "outsider_impressions: Outsiders notice the mark of the Household Council on every door that matters. People here are used to living close to the wild, and they tell a visitor where not to go. Its defences are thin, and a visitor sees how little stands ready.",
+      "dawn_work: The first light goes to walking the edges of the fields; the ordinary work begins once that is done.",
+      "food_culture: Meals are plain and filling, and little goes to waste."
+     ]
+    },
+    {
+     "seed": "dp-thorp-2",
+     "view": "PDF/dailyLife",
+     "came": "dawn_work: Those who keep guard are out at first light, and the rest wait for their word before going out to work.",
+     "gone": [
+      "outsider_impressions: Outsiders notice the mark of the Household Council on every door that matters. People here are used to living close to the wild, and they tell a visitor where not to go. Its defences are thin, and a visitor sees how little stands ready.",
+      "dawn_work: The first light goes to walking the edges of the fields; the ordinary work begins once that is done.",
+      "food_culture: Meals are plain and filling, and little goes to waste."
+     ]
+    },
+    {
+     "seed": "dp-thorp-2",
+     "view": "PDF/dailyLife",
+     "came": "food_culture: Food is steady here, if not generous, and every household has enough with little left over.",
+     "gone": [
+      "outsider_impressions: Outsiders notice the mark of the Household Council on every door that matters. People here are used to living close to the wild, and they tell a visitor where not to go. Its defences are thin, and a visitor sees how little stands ready.",
+      "dawn_work: The first light goes to walking the edges of the fields; the ordinary work begins once that is done.",
+      "food_culture: Meals are plain and filling, and little goes to waste."
+     ]
+    },
+    {
+     "seed": "dp-thorp-2",
+     "view": "PDF/dailyLife",
+     "came": "gathering_places: News is passed from door to door here, and most of it is known by nightfall.",
+     "gone": [
+      "outsider_impressions: Outsiders notice the mark of the Household Council on every door that matters. People here are used to living close to the wild, and they tell a visitor where not to go. Its defences are thin, and a visitor sees how little stands ready.",
+      "dawn_work: The first light goes to walking the edges of the fields; the ordinary work begins once that is done.",
+      "food_culture: Meals are plain and filling, and little goes to waste."
+     ]
+    },
+    {
+     "seed": "dp-thorp-2",
+     "view": "PDF/dailyLife",
+     "came": "child_warnings: Children are warned about leaving a door unbarred at night.",
+     "gone": [
+      "outsider_impressions: Outsiders notice the mark of the Household Council on every door that matters. People here are used to living close to the wild, and they tell a visitor where not to go. Its defences are thin, and a visitor sees how little stands ready.",
+      "dawn_work: The first light goes to walking the edges of the fields; the ordinary work begins once that is done.",
+      "food_culture: Meals are plain and filling, and little goes to waste."
+     ]
+    },
+    {
+     "seed": "dp-thorp-3",
+     "view": "Systems/Defense",
+     "came": "With Quillmarsh's seat empty, no order to call everyone to its defence would be obeyed by all.",
+     "gone": [
+      "Rivals for Portamonte's empty seat are gathering followers, and it may come to blows before anyone is chosen."
+     ]
+    },
+    {
+     "seed": "dp-thorp-3",
+     "view": "World/Daily Life",
+     "came": "Ask who decides things here, and the answer is the Elder Council. With a leading figure gone, a visitor finds people unsure whose word counts now. Order here depends on people keeping it among themselves.",
+     "gone": [
+      "Nothing of weight is agreed here without the leave of the Elder Council. With a leading figure gone, a visitor finds people unsure whose word counts now. Keeping the peace here rests on goodwill more than on any force.",
+      "Doors are opened late and with care, and the day's work starts a little after first light.",
+      "There is more than enough to eat, and nobody here goes to bed hungry."
+     ]
+    },
+    {
+     "seed": "dp-thorp-3",
+     "view": "World/Daily Life",
+     "came": "Those who keep guard are out at first light, and the rest wait for their word before going out to work.",
+     "gone": [
+      "Nothing of weight is agreed here without the leave of the Elder Council. With a leading figure gone, a visitor finds people unsure whose word counts now. Keeping the peace here rests on goodwill more than on any force.",
+      "Doors are opened late and with care, and the day's work starts a little after first light.",
+      "There is more than enough to eat, and nobody here goes to bed hungry."
+     ]
+    },
+    {
+     "seed": "dp-thorp-3",
+     "view": "World/Daily Life",
+     "came": "Most households eat well, and what is left over is shared or put by.",
+     "gone": [
+      "Nothing of weight is agreed here without the leave of the Elder Council. With a leading figure gone, a visitor finds people unsure whose word counts now. Keeping the peace here rests on goodwill more than on any force.",
+      "Doors are opened late and with care, and the day's work starts a little after first light.",
+      "There is more than enough to eat, and nobody here goes to bed hungry."
+     ]
+    },
+    {
+     "seed": "dp-thorp-3",
+     "view": "World/Daily Life",
+     "came": "News is passed from door to door here, and most of it is known by nightfall.",
+     "gone": [
+      "Nothing of weight is agreed here without the leave of the Elder Council. With a leading figure gone, a visitor finds people unsure whose word counts now. Keeping the peace here rests on goodwill more than on any force.",
+      "Doors are opened late and with care, and the day's work starts a little after first light.",
+      "There is more than enough to eat, and nobody here goes to bed hungry."
+     ]
+    },
+    {
+     "seed": "dp-thorp-3",
+     "view": "World/Daily Life",
+     "came": "Children are warned about taking sides in arguments that are not theirs, and about leaving a door unbarred at night.",
+     "gone": [
+      "Nothing of weight is agreed here without the leave of the Elder Council. With a leading figure gone, a visitor finds people unsure whose word counts now. Keeping the peace here rests on goodwill more than on any force.",
+      "Doors are opened late and with care, and the day's work starts a little after first light.",
+      "There is more than enough to eat, and nobody here goes to bed hungry."
+     ]
+    },
+    {
+     "seed": "dp-thorp-3",
+     "view": "World/Daily Life",
+     "came": "Many here feel that the Elder Council no longer listens to people like them.",
+     "gone": [
+      "Nothing of weight is agreed here without the leave of the Elder Council. With a leading figure gone, a visitor finds people unsure whose word counts now. Keeping the peace here rests on goodwill more than on any force.",
+      "Doors are opened late and with care, and the day's work starts a little after first light.",
+      "There is more than enough to eat, and nobody here goes to bed hungry."
+     ]
+    },
+    {
+     "seed": "dp-thorp-3",
+     "view": "World/Daily Life",
+     "came": "The place still lives with what the Arcane Incident left behind. With a leading figure gone, the question of who comes next is open.",
+     "gone": [
+      "Nothing of weight is agreed here without the leave of the Elder Council. With a leading figure gone, a visitor finds people unsure whose word counts now. Keeping the peace here rests on goodwill more than on any force.",
+      "Doors are opened late and with care, and the day's work starts a little after first light.",
+      "There is more than enough to eat, and nobody here goes to bed hungry."
+     ]
+    }
+   ]
+  },
+  "P": {
+   "births": 300,
+   "skipped": 0,
+   "pagesMoved": 300,
+   "pagesRedealt": 36,
+   "linesMoved": 9209,
+   "linesNameOnly": 9137,
+   "linesRedealt": 72,
+   "redealtByView": {
+    "PDF/headlines": 36,
+    "Foundry/NPC Quick Reference": 36
+   },
+   "pickSites": {
+    "RZ src/pdf/lib/headlines.js :: seedPick": {
+     "picksWithName": 168,
+     "pagesWithName": 84,
+     "moved": 72,
+     "pagesMoved": 36,
+     "keyExample": "Junia Cicero",
+     "ex": {
+      "seed": "dp-thorp-30",
+      "key": "Philippos Argyros",
+      "before": "official",
+      "keyAfter": "Odalric Venn",
+      "after": "newcomer"
+     }
+    }
+   },
+   "examples": {},
+   "lineExamples": [
+    {
+     "seed": "dp-thorp-30",
+     "view": "PDF/headlines",
+     "came": "npcs: Ask who matters here and you hear two names; Odalric Venn, the reeve, first of Feudal Stewardship, comes first.",
+     "gone": [
+      "npcs: Two people worth knowing; Philippos Argyros, the reeve, first of Feudal Stewardship, carries the most weight."
+     ]
+    },
+    {
+     "seed": "dp-thorp-30",
+     "view": "Foundry/NPC Quick Reference",
+     "came": "*Ask who matters here and you hear two names; Odalric Venn, the reeve, first of Feudal Stewardship, comes first.*",
+     "gone": [
+      "*Two people worth knowing; Philippos Argyros, the reeve, first of Feudal Stewardship, carries the most weight.*"
+     ]
+    },
+    {
+     "seed": "dp-thorp-66",
+     "view": "PDF/headlines",
+     "came": "npcs: Ask who matters here and you hear two names; Odalric Venn, the reeve, first of Feudal Stewardship, comes first.",
+     "gone": [
+      "npcs: Two people worth knowing; Liqian Taichiud, the reeve, first of Feudal Stewardship, carries the most weight."
+     ]
+    },
+    {
+     "seed": "dp-thorp-66",
+     "view": "Foundry/NPC Quick Reference",
+     "came": "*Ask who matters here and you hear two names; Odalric Venn, the reeve, first of Feudal Stewardship, comes first.*",
+     "gone": [
+      "*Two people worth knowing; Liqian Taichiud, the reeve, first of Feudal Stewardship, carries the most weight.*"
+     ]
+    },
+    {
+     "seed": "dp-thorp-90",
+     "view": "PDF/headlines",
+     "came": "npcs: Ask who matters here and you hear two names; Odalric Venn, the reeve, first of Feudal Stewardship, comes first.",
+     "gone": [
+      "npcs: Two people worth knowing; Malati Ahuja, the reeve, first of Feudal Stewardship, carries the most weight."
+     ]
+    },
+    {
+     "seed": "dp-thorp-90",
+     "view": "Foundry/NPC Quick Reference",
+     "came": "*Ask who matters here and you hear two names; Odalric Venn, the reeve, first of Feudal Stewardship, comes first.*",
+     "gone": [
+      "*Two people worth knowing; Malati Ahuja, the reeve, first of Feudal Stewardship, carries the most weight.*"
+     ]
+    },
+    {
+     "seed": "dp-thorp-99",
+     "view": "PDF/headlines",
+     "came": "npcs: Ask who matters here and you hear two names; Odalric Venn, the reeve, first of Feudal Stewardship, comes first.",
+     "gone": [
+      "npcs: Two people worth knowing; Naya Kereit, the reeve, first of Feudal Stewardship, carries the most weight."
+     ]
+    },
+    {
+     "seed": "dp-thorp-99",
+     "view": "Foundry/NPC Quick Reference",
+     "came": "*Ask who matters here and you hear two names; Odalric Venn, the reeve, first of Feudal Stewardship, comes first.*",
+     "gone": [
+      "*Two people worth knowing; Naya Kereit, the reeve, first of Feudal Stewardship, carries the most weight.*"
+     ]
+    },
+    {
+     "seed": "dp-thorp-101",
+     "view": "PDF/headlines",
+     "came": "npcs: Ask who matters here and you hear two names; Odalric Venn, the eldest householder, first of Household Council, comes first.",
+     "gone": [
+      "npcs: Two people worth knowing; Saidhbhín Sullivan, the eldest householder, first of Household Council, carries the most weight."
+     ]
+    },
+    {
+     "seed": "dp-thorp-101",
+     "view": "Foundry/NPC Quick Reference",
+     "came": "*Ask who matters here and you hear two names; Odalric Venn, the eldest householder, first of Household Council, comes first.*",
+     "gone": [
+      "*Two people worth knowing; Saidhbhín Sullivan, the eldest householder, first of Household Council, carries the most weight.*"
+     ]
+    },
+    {
+     "seed": "dp-thorp-107",
+     "view": "PDF/headlines",
+     "came": "npcs: Ask who matters here and you hear two names; Odalric Venn, the boat-headman, Elder, first of Elder Council, comes first.",
+     "gone": [
+      "npcs: Two people worth knowing; Naresh Basu, the boat-headman, Elder, first of Elder Council, carries the most weight."
+     ]
+    },
+    {
+     "seed": "dp-thorp-107",
+     "view": "Foundry/NPC Quick Reference",
+     "came": "*Ask who matters here and you hear two names; Odalric Venn, the boat-headman, Elder, first of Elder Council, comes first.*",
+     "gone": [
+      "*Two people worth knowing; Naresh Basu, the boat-headman, Elder, first of Elder Council, carries the most weight.*"
+     ]
+    },
+    {
+     "seed": "dp-thorp-108",
+     "view": "PDF/headlines",
+     "came": "npcs: Ask who matters here and you hear three names; Odalric Venn, the eldest householder, first of Household Council, comes first.",
+     "gone": [
+      "npcs: Three people worth knowing; Underworld Queen Balam, the eldest householder, first of Household Council, carries the most weight."
+     ]
+    },
+    {
+     "seed": "dp-thorp-108",
+     "view": "Foundry/NPC Quick Reference",
+     "came": "*Ask who matters here and you hear three names; Odalric Venn, the eldest householder, first of Household Council, comes first.*",
+     "gone": [
+      "*Three people worth knowing; Underworld Queen Balam, the eldest householder, first of Household Council, carries the most weight.*"
+     ]
+    },
+    {
+     "seed": "dp-thorp-121",
+     "view": "PDF/headlines",
+     "came": "npcs: Ask who matters here and you hear two names; Odalric Venn, the head shepherd, Household Elder, first of Household Council, comes first.",
+     "gone": [
+      "npcs: Two people worth knowing; Xavier Müller, the head shepherd, Household Elder, first of Household Council, carries the most weight."
+     ]
+    },
+    {
+     "seed": "dp-thorp-121",
+     "view": "Foundry/NPC Quick Reference",
+     "came": "*Ask who matters here and you hear two names; Odalric Venn, the head shepherd, Household Elder, first of Household Council, comes first.*",
+     "gone": [
+      "*Two people worth knowing; Xavier Müller, the head shepherd, Household Elder, first of Household Council, carries the most weight.*"
+     ]
+    },
+    {
+     "seed": "dp-thorp-135",
+     "view": "PDF/headlines",
+     "came": "npcs: Ask who matters here and you hear two names; Odalric Venn, the reeve, first of Feudal Stewardship, comes first.",
+     "gone": [
+      "npcs: Two people worth knowing; Manish Bajaj, the reeve, first of Feudal Stewardship, carries the most weight."
+     ]
+    },
+    {
+     "seed": "dp-thorp-135",
+     "view": "Foundry/NPC Quick Reference",
+     "came": "*Ask who matters here and you hear two names; Odalric Venn, the reeve, first of Feudal Stewardship, comes first.*",
+     "gone": [
+      "*Two people worth knowing; Manish Bajaj, the reeve, first of Feudal Stewardship, carries the most weight.*"
+     ]
+    },
+    {
+     "seed": "dp-thorp-139",
+     "view": "PDF/headlines",
+     "came": "npcs: Ask who matters here and you hear two names; Odalric Venn, the boat-master, Elder, first of Elder Council, comes first.",
+     "gone": [
+      "npcs: Two people worth knowing; Anjali Bakshi, the boat-master, Elder, first of Elder Council, carries the most weight."
+     ]
+    },
+    {
+     "seed": "dp-thorp-139",
+     "view": "Foundry/NPC Quick Reference",
+     "came": "*Ask who matters here and you hear two names; Odalric Venn, the boat-master, Elder, first of Elder Council, comes first.*",
+     "gone": [
+      "*Two people worth knowing; Anjali Bakshi, the boat-master, Elder, first of Elder Council, carries the most weight.*"
+     ]
+    },
+    {
+     "seed": "dp-thorp-146",
+     "view": "PDF/headlines",
+     "came": "npcs: Ask who matters here and you hear two names; Odalric Venn, the reeve, first of Feudal Stewardship, comes first.",
+     "gone": [
+      "npcs: Two people worth knowing; Itzel Chan, the reeve, first of Feudal Stewardship, carries the most weight."
+     ]
+    },
+    {
+     "seed": "dp-thorp-146",
+     "view": "Foundry/NPC Quick Reference",
+     "came": "*Ask who matters here and you hear two names; Odalric Venn, the reeve, first of Feudal Stewardship, comes first.*",
+     "gone": [
+      "*Two people worth knowing; Itzel Chan, the reeve, first of Feudal Stewardship, carries the most weight.*"
+     ]
+    },
+    {
+     "seed": "dp-hamlet-1",
+     "view": "PDF/headlines",
+     "came": "npcs: Ask who matters here and you hear eight names; Odalric Venn, the mine captain, Elder, first of Elder Council, comes first.",
+     "gone": [
+      "npcs: Eight people worth knowing; Qutlugh Kereit, the mine captain, Elder, first of Elder Council, carries the most weight."
+     ]
+    },
+    {
+     "seed": "dp-hamlet-1",
+     "view": "Foundry/NPC Quick Reference",
+     "came": "*Ask who matters here and you hear eight names; Odalric Venn, the mine captain, Elder, first of Elder Council, comes first.*",
+     "gone": [
+      "*Eight people worth knowing; Qutlugh Kereit, the mine captain, Elder, first of Elder Council, carries the most weight.*"
+     ]
+    },
+    {
+     "seed": "dp-hamlet-6",
+     "view": "PDF/headlines",
+     "came": "npcs: Ask who matters here and you hear four names; Odalric Venn, the dairy farmer, Elder, first of Elder Council, comes first.",
+     "gone": [
+      "npcs: Four people worth knowing; Thunder Batab, the dairy farmer, Elder, first of Elder Council, carries the most weight."
+     ]
+    },
+    {
+     "seed": "dp-hamlet-6",
+     "view": "Foundry/NPC Quick Reference",
+     "came": "*Ask who matters here and you hear four names; Odalric Venn, the dairy farmer, Elder, first of Elder Council, comes first.*",
+     "gone": [
+      "*Four people worth knowing; Thunder Batab, the dairy farmer, Elder, first of Elder Council, carries the most weight.*"
+     ]
+    },
+    {
+     "seed": "dp-hamlet-8",
+     "view": "PDF/headlines",
+     "came": "npcs: Ask who matters here and you hear five names; Odalric Venn, the alewife, Elder, first of Free Elder Council, comes first.",
+     "gone": [
+      "npcs: Five people worth knowing; Marina Andreyev, the alewife, Elder, first of Free Elder Council, carries the most weight."
+     ]
+    },
+    {
+     "seed": "dp-hamlet-8",
+     "view": "Foundry/NPC Quick Reference",
+     "came": "*Ask who matters here and you hear five names; Odalric Venn, the alewife, Elder, first of Free Elder Council, comes first.*",
+     "gone": [
+      "*Five people worth knowing; Marina Andreyev, the alewife, Elder, first of Free Elder Council, carries the most weight.*"
+     ]
+    },
+    {
+     "seed": "dp-hamlet-16",
+     "view": "PDF/headlines",
+     "came": "npcs: Ask who matters here and you hear four names; Odalric Venn, the boat-master, Elder, first of Elder Council, comes first.",
+     "gone": [
+      "npcs: Four people worth knowing; Dimitra Dalassenos, the boat-master, Elder, first of Elder Council, carries the most weight."
+     ]
+    },
+    {
+     "seed": "dp-hamlet-16",
+     "view": "Foundry/NPC Quick Reference",
+     "came": "*Ask who matters here and you hear four names; Odalric Venn, the boat-master, Elder, first of Elder Council, comes first.*",
+     "gone": [
+      "*Four people worth knowing; Dimitra Dalassenos, the boat-master, Elder, first of Elder Council, carries the most weight.*"
+     ]
+    },
+    {
+     "seed": "dp-hamlet-22",
+     "view": "PDF/headlines",
+     "came": "npcs: Ask who matters here and you hear five names; Odalric Venn, the boat-master, Elder, first of Elder Council, comes first.",
+     "gone": [
+      "npcs: Five people worth knowing; Kaikeyyi Acharya, the boat-master, Elder, first of Elder Council, carries the most weight."
+     ]
+    },
+    {
+     "seed": "dp-hamlet-22",
+     "view": "Foundry/NPC Quick Reference",
+     "came": "*Ask who matters here and you hear five names; Odalric Venn, the boat-master, Elder, first of Elder Council, comes first.*",
+     "gone": [
+      "*Five people worth knowing; Kaikeyyi Acharya, the boat-master, Elder, first of Elder Council, carries the most weight.*"
+     ]
+    },
+    {
+     "seed": "dp-hamlet-24",
+     "view": "PDF/headlines",
+     "came": "npcs: Ask who matters here and you hear four names; Odalric Venn, the mine captain, Household Elder, first of Household Council, comes first.",
+     "gone": [
+      "npcs: Four people worth knowing; Judith Becker, the mine captain, Household Elder, first of Household Council, carries the most weight."
+     ]
+    },
+    {
+     "seed": "dp-hamlet-24",
+     "view": "Foundry/NPC Quick Reference",
+     "came": "*Ask who matters here and you hear four names; Odalric Venn, the mine captain, Household Elder, first of Household Council, comes first.*",
+     "gone": [
+      "*Four people worth knowing; Judith Becker, the mine captain, Household Elder, first of Household Council, carries the most weight.*"
+     ]
+    },
+    {
+     "seed": "dp-hamlet-30",
+     "view": "PDF/headlines",
+     "came": "npcs: Ask who matters here and you hear two names; Odalric Venn, the boat-master, Household Elder, first of Household Council, comes first.",
+     "gone": [
+      "npcs: Two people worth knowing; Teodora Ivanov, the boat-master, Household Elder, first of Household Council, carries the most weight."
+     ]
+    },
+    {
+     "seed": "dp-hamlet-30",
+     "view": "Foundry/NPC Quick Reference",
+     "came": "*Ask who matters here and you hear two names; Odalric Venn, the boat-master, Household Elder, first of Household Council, comes first.*",
+     "gone": [
+      "*Two people worth knowing; Teodora Ivanov, the boat-master, Household Elder, first of Household Council, carries the most weight.*"
+     ]
+    },
+    {
+     "seed": "dp-hamlet-39",
+     "view": "PDF/headlines",
+     "came": "npcs: Ask who matters here and you hear six names; Odalric Venn, the mine captain, Elder, first of Elder Council, comes first.",
+     "gone": [
+      "npcs: Six people worth knowing; Ibrahim al-Qadir, the mine captain, Elder, first of Elder Council, carries the most weight."
+     ]
+    },
+    {
+     "seed": "dp-hamlet-39",
+     "view": "Foundry/NPC Quick Reference",
+     "came": "*Ask who matters here and you hear six names; Odalric Venn, the mine captain, Elder, first of Elder Council, comes first.*",
+     "gone": [
+      "*Six people worth knowing; Ibrahim al-Qadir, the mine captain, Elder, first of Elder Council, carries the most weight.*"
+     ]
+    },
+    {
+     "seed": "dp-hamlet-49",
+     "view": "PDF/headlines",
+     "came": "npcs: Ask who matters here and you hear four names; Odalric Venn, the head shepherd, Elder, first of Elder Council, comes first.",
+     "gone": [
+      "npcs: Four people worth knowing; Eun Liu, the head shepherd, Elder, first of Elder Council, carries the most weight."
+     ]
+    },
+    {
+     "seed": "dp-hamlet-49",
+     "view": "Foundry/NPC Quick Reference",
+     "came": "*Ask who matters here and you hear four names; Odalric Venn, the head shepherd, Elder, first of Elder Council, comes first.*",
+     "gone": [
+      "*Four people worth knowing; Eun Liu, the head shepherd, Elder, first of Elder Council, carries the most weight.*"
+     ]
+    },
+    {
+     "seed": "dp-hamlet-61",
+     "view": "PDF/headlines",
+     "came": "npcs: Ask who matters here and you hear three names; Odalric Venn, the peat-reeve, Elder, first of Free Elder Council, comes first.",
+     "gone": [
+      "npcs: Three people worth knowing; Vandansüren Kiyad, the peat-reeve, Elder, first of Free Elder Council, carries the most weight."
+     ]
+    },
+    {
+     "seed": "dp-hamlet-61",
+     "view": "Foundry/NPC Quick Reference",
+     "came": "*Ask who matters here and you hear three names; Odalric Venn, the peat-reeve, Elder, first of Free Elder Council, comes first.*",
+     "gone": [
+      "*Three people worth knowing; Vandansüren Kiyad, the peat-reeve, Elder, first of Free Elder Council, carries the most weight.*"
+     ]
+    },
+    {
+     "seed": "dp-hamlet-72",
+     "view": "PDF/headlines",
+     "came": "npcs: Ask who matters here and you hear two names; Odalric Venn, the smith, Elder, first of Free Elder Council, comes first.",
+     "gone": [
+      "npcs: Two people worth knowing; Grata Nero, the smith, Elder, first of Free Elder Council, carries the most weight."
+     ]
+    },
+    {
+     "seed": "dp-hamlet-72",
+     "view": "Foundry/NPC Quick Reference",
+     "came": "*Ask who matters here and you hear two names; Odalric Venn, the smith, Elder, first of Free Elder Council, comes first.*",
+     "gone": [
+      "*Two people worth knowing; Grata Nero, the smith, Elder, first of Free Elder Council, carries the most weight.*"
+     ]
+    },
+    {
+     "seed": "dp-hamlet-73",
+     "view": "PDF/headlines",
+     "came": "npcs: Ask who matters here and you hear four names; Odalric Venn, the dairy farmer, Headman, first of Headman's Authority, comes first.",
+     "gone": [
+      "npcs: Four people worth knowing; Elica Alexeyev, the dairy farmer, Headman, first of Headman's Authority, carries the most weight."
+     ]
+    },
+    {
+     "seed": "dp-hamlet-73",
+     "view": "Foundry/NPC Quick Reference",
+     "came": "*Ask who matters here and you hear four names; Odalric Venn, the dairy farmer, Headman, first of Headman&#39;s Authority, comes first.*",
+     "gone": [
+      "*Four people worth knowing; Elica Alexeyev, the dairy farmer, Headman, first of Headman&#39;s Authority, carries the most weight.*"
+     ]
+    },
+    {
+     "seed": "dp-hamlet-83",
+     "view": "PDF/headlines",
+     "came": "npcs: Ask who matters here and you hear seven names; Odalric Venn, the mine captain, Elder, first of Elder Council, comes first.",
+     "gone": [
+      "npcs: Seven people worth knowing; Aditi Chatterjee, the mine captain, Elder, first of Elder Council, carries the most weight."
+     ]
+    },
+    {
+     "seed": "dp-hamlet-83",
+     "view": "Foundry/NPC Quick Reference",
+     "came": "*Ask who matters here and you hear seven names; Odalric Venn, the mine captain, Elder, first of Elder Council, comes first.*",
+     "gone": [
+      "*Seven people worth knowing; Aditi Chatterjee, the mine captain, Elder, first of Elder Council, carries the most weight.*"
+     ]
+    },
+    {
+     "seed": "dp-hamlet-85",
+     "view": "PDF/headlines",
+     "came": "npcs: Ask who matters here and you hear seven names; Odalric Venn, the steward, first of Feudal Stewardship, comes first.",
+     "gone": [
+      "npcs: Seven people worth knowing; Flavia Brutus, the steward, first of Feudal Stewardship, carries the most weight."
+     ]
+    },
+    {
+     "seed": "dp-hamlet-85",
+     "view": "Foundry/NPC Quick Reference",
+     "came": "*Ask who matters here and you hear seven names; Odalric Venn, the steward, first of Feudal Stewardship, comes first.*",
+     "gone": [
+      "*Seven people worth knowing; Flavia Brutus, the steward, first of Feudal Stewardship, carries the most weight.*"
+     ]
+    },
+    {
+     "seed": "dp-hamlet-87",
+     "view": "PDF/headlines",
+     "came": "npcs: Ask who matters here and you hear seven names; Odalric Venn, the mine captain, Household Elder, first of Household Council, comes first.",
+     "gone": [
+      "npcs: Seven people worth knowing; Narayanan Choudhry, the mine captain, Household Elder, first of Household Council, carries the most weight."
+     ]
+    },
+    {
+     "seed": "dp-hamlet-87",
+     "view": "Foundry/NPC Quick Reference",
+     "came": "*Ask who matters here and you hear seven names; Odalric Venn, the mine captain, Household Elder, first of Household Council, comes first.*",
+     "gone": [
+      "*Seven people worth knowing; Narayanan Choudhry, the mine captain, Household Elder, first of Household Council, carries the most weight.*"
+     ]
+    },
+    {
+     "seed": "dp-hamlet-90",
+     "view": "PDF/headlines",
+     "came": "npcs: Ask who matters here and you hear two names; Odalric Venn, the headman, first of Headman's Authority, comes first.",
+     "gone": [
+      "npcs: Two people worth knowing; Uilleam Murray, the headman, first of Headman's Authority, carries the most weight."
+     ]
+    },
+    {
+     "seed": "dp-hamlet-90",
+     "view": "Foundry/NPC Quick Reference",
+     "came": "*Ask who matters here and you hear two names; Odalric Venn, the headman, first of Headman&#39;s Authority, comes first.*",
+     "gone": [
+      "*Two people worth knowing; Uilleam Murray, the headman, first of Headman&#39;s Authority, carries the most weight.*"
+     ]
+    },
+    {
+     "seed": "dp-hamlet-122",
+     "view": "PDF/headlines",
+     "came": "npcs: Ask who matters here and you hear two names; Odalric Venn, the boat-headman, Household Elder, first of Household Council, comes first.",
+     "gone": [
+      "npcs: Two people worth knowing; Hugh MacDonald, the boat-headman, Household Elder, first of Household Council, carries the most weight."
+     ]
+    },
+    {
+     "seed": "dp-hamlet-122",
+     "view": "Foundry/NPC Quick Reference",
+     "came": "*Ask who matters here and you hear two names; Odalric Venn, the boat-headman, Household Elder, first of Household Council, comes first.*",
+     "gone": [
+      "*Two people worth knowing; Hugh MacDonald, the boat-headman, Household Elder, first of Household Council, carries the most weight.*"
+     ]
+    },
+    {
+     "seed": "dp-hamlet-127",
+     "view": "PDF/headlines",
+     "came": "npcs: Ask who matters here and you hear three names; Odalric Venn, the boat-master, Elder, first of Elder Council, comes first.",
+     "gone": [
+      "npcs: Three people worth knowing; Viktoriya Fedorov, the boat-master, Elder, first of Elder Council, carries the most weight."
+     ]
+    },
+    {
+     "seed": "dp-hamlet-127",
+     "view": "Foundry/NPC Quick Reference",
+     "came": "*Ask who matters here and you hear three names; Odalric Venn, the boat-master, Elder, first of Elder Council, comes first.*",
+     "gone": [
+      "*Three people worth knowing; Viktoriya Fedorov, the boat-master, Elder, first of Elder Council, carries the most weight.*"
+     ]
+    },
+    {
+     "seed": "dp-hamlet-128",
+     "view": "PDF/headlines",
+     "came": "npcs: Ask who matters here and you hear two names; Odalric Venn, the headman, first of Headman's Authority, comes first.",
+     "gone": [
+      "npcs: Two people worth knowing; Jayan Barlas, the headman, first of Headman's Authority, carries the most weight."
+     ]
+    },
+    {
+     "seed": "dp-hamlet-128",
+     "view": "Foundry/NPC Quick Reference",
+     "came": "*Ask who matters here and you hear two names; Odalric Venn, the headman, first of Headman&#39;s Authority, comes first.*",
+     "gone": [
+      "*Two people worth knowing; Jayan Barlas, the headman, first of Headman&#39;s Authority, carries the most weight.*"
+     ]
+    }
+   ]
+  },
+  "H": {
+   "births": 300,
+   "skipped": 0,
+   "pagesMoved": 300,
+   "pagesRedealt": 279,
+   "linesMoved": 2252,
+   "linesNameOnly": 1020,
+   "linesRedealt": 1232,
+   "redealtByView": {
+    "Systems/Economics": 457,
+    "World/Daily Life": 208,
+    "PDF/dailyLife": 208,
+    "Systems/Power": 59,
+    "PDF/printProse": 135,
+    "Foundry/Identity & Daily Life": 126,
+    "World/Traditions": 7,
+    "Systems/Institutions": 12,
+    "Systems/Services": 6,
+    "World/NPCs": 4,
+    "Foundry/Economics & Trade": 9,
+    "Foundry/NPC — Kinich Ek": 1
+   },
+   "pickSites": {},
+   "examples": {},
+   "lineExamples": [
+    {
+     "seed": "dp-thorp-0",
+     "view": "Systems/Economics",
+     "came": "medicinal herbshoney",
+     "gone": [
+      "medicinal herbshoneyHoney and beeswaxForaged goods",
+      "Subsistence farming",
+      "Outputs"
+     ]
+    },
+    {
+     "seed": "dp-thorp-0",
+     "view": "World/Daily Life",
+     "came": "Outsiders notice the mark of the Elder Council on every door that matters. Travellers here talk of beasts seen at the edge of the settled land. The sick are not well provided for here, and a visitor notices it.",
+     "gone": [
+      "Outsiders notice the mark of the Elder Council on every door that matters. Travellers here talk of beasts seen at the edge of the settled land. Any business with the Elder Council means a long wait, and visitors are warned of it.",
+      "The first light goes to walking the edges of the fields; the ordinary work begins once that is done."
+     ]
+    },
+    {
+     "seed": "dp-thorp-0",
+     "view": "World/Daily Life",
+     "came": "Before the day's work begins, someone looks out over the country around to see that nothing is stirring.",
+     "gone": [
+      "Outsiders notice the mark of the Elder Council on every door that matters. Travellers here talk of beasts seen at the edge of the settled land. Any business with the Elder Council means a long wait, and visitors are warned of it.",
+      "The first light goes to walking the edges of the fields; the ordinary work begins once that is done."
+     ]
+    },
+    {
+     "seed": "dp-thorp-0",
+     "view": "PDF/dailyLife",
+     "came": "outsider_impressions: Outsiders notice the mark of the Elder Council on every door that matters. Travellers here talk of beasts seen at the edge of the settled land. The sick are not well provided for here, and a visitor notices it.",
+     "gone": [
+      "outsider_impressions: Outsiders notice the mark of the Elder Council on every door that matters. Travellers here talk of beasts seen at the edge of the settled land. Any business with the Elder Council means a long wait, and visitors are warned of it.",
+      "dawn_work: The first light goes to walking the edges of the fields; the ordinary work begins once that is done."
+     ]
+    },
+    {
+     "seed": "dp-thorp-0",
+     "view": "PDF/dailyLife",
+     "came": "dawn_work: Before the day's work begins, someone looks out over the country around to see that nothing is stirring.",
+     "gone": [
+      "outsider_impressions: Outsiders notice the mark of the Elder Council on every door that matters. Travellers here talk of beasts seen at the edge of the settled land. Any business with the Elder Council means a long wait, and visitors are warned of it.",
+      "dawn_work: The first light goes to walking the edges of the fields; the ordinary work begins once that is done."
+     ]
+    },
+    {
+     "seed": "dp-thorp-1",
+     "view": "Systems/Economics",
+     "came": "medicinal herbshoney",
+     "gone": [
+      "medicinal herbshoneyHoney and beeswaxForaged goods",
+      "Subsistence farming",
+      "Outputs"
+     ]
+    },
+    {
+     "seed": "dp-thorp-1",
+     "view": "World/Daily Life",
+     "came": "Power here does not sit in one pair of hands, and a visitor learns to ask around. Those who keep order here are spread thin, and a visitor can tell.",
+     "gone": [
+      "Power here does not sit in one pair of hands, and a visitor learns to ask around. Getting anything decided here takes time, for those who decide are few and busy.",
+      "The first light goes to walking the edges of the fields; the ordinary work begins once that is done."
+     ]
+    },
+    {
+     "seed": "dp-thorp-1",
+     "view": "World/Daily Life",
+     "came": "Before anyone goes out to work, each household looks to its own door and sees that all is as it was left.",
+     "gone": [
+      "Power here does not sit in one pair of hands, and a visitor learns to ask around. Getting anything decided here takes time, for those who decide are few and busy.",
+      "The first light goes to walking the edges of the fields; the ordinary work begins once that is done."
+     ]
+    },
+    {
+     "seed": "dp-thorp-1",
+     "view": "PDF/dailyLife",
+     "came": "outsider_impressions: Power here does not sit in one pair of hands, and a visitor learns to ask around. Those who keep order here are spread thin, and a visitor can tell.",
+     "gone": [
+      "outsider_impressions: Power here does not sit in one pair of hands, and a visitor learns to ask around. Getting anything decided here takes time, for those who decide are few and busy.",
+      "dawn_work: The first light goes to walking the edges of the fields; the ordinary work begins once that is done."
+     ]
+    },
+    {
+     "seed": "dp-thorp-1",
+     "view": "PDF/dailyLife",
+     "came": "dawn_work: Before anyone goes out to work, each household looks to its own door and sees that all is as it was left.",
+     "gone": [
+      "outsider_impressions: Power here does not sit in one pair of hands, and a visitor learns to ask around. Getting anything decided here takes time, for those who decide are few and busy.",
+      "dawn_work: The first light goes to walking the edges of the fields; the ordinary work begins once that is done."
+     ]
+    },
+    {
+     "seed": "dp-thorp-2",
+     "view": "Systems/Economics",
+     "came": "medicinal herbshoney",
+     "gone": [
+      "medicinal herbshoneyHoney and beeswaxForaged goods",
+      "Each holding grows for its own table, and beyond that its food is meat and milk from the herds.",
+      "Ventoium's own food comes from its herds and from the holdings its families till, so a bad season for either is felt at every table."
+     ]
+    },
+    {
+     "seed": "dp-thorp-2",
+     "view": "Systems/Economics",
+     "came": "Its own food is meat and milk from the herds.",
+     "gone": [
+      "medicinal herbshoneyHoney and beeswaxForaged goods",
+      "Each holding grows for its own table, and beyond that its food is meat and milk from the herds.",
+      "Ventoium's own food comes from its herds and from the holdings its families till, so a bad season for either is felt at every table."
+     ]
+    },
+    {
+     "seed": "dp-thorp-2",
+     "view": "Systems/Economics",
+     "came": "Of the food Ventoium raises for itself, its herds comes first, and after a poor season for the herds there is less to go round.",
+     "gone": [
+      "medicinal herbshoneyHoney and beeswaxForaged goods",
+      "Each holding grows for its own table, and beyond that its food is meat and milk from the herds.",
+      "Ventoium's own food comes from its herds and from the holdings its families till, so a bad season for either is felt at every table."
+     ]
+    },
+    {
+     "seed": "dp-thorp-2",
+     "view": "Systems/Power",
+     "came": "Under the ruling power, with no power of its own kind here",
+     "gone": []
+    },
+    {
+     "seed": "dp-thorp-2",
+     "view": "World/Daily Life",
+     "came": "Everyone keeps within call of the houses in the first hours, and the farther work waits until later in the day.",
+     "gone": [
+      "The first light goes to walking the edges of the fields; the ordinary work begins once that is done."
+     ]
+    },
+    {
+     "seed": "dp-thorp-2",
+     "view": "PDF/printProse",
+     "came": "Ventoium is fed, but what it keeps put by would not outlast a run of poor harvests. Of the food Ventoium raises for itself, its herds comes first, and after a poor season for the herds there is less to go round.",
+     "gone": [
+      "Ventoium is fed, but what it keeps put by would not outlast a run of poor harvests. The thorp's own food comes from its herds and from the holdings its families till, so a bad season for either is felt at every table."
+     ]
+    },
+    {
+     "seed": "dp-thorp-2",
+     "view": "PDF/dailyLife",
+     "came": "dawn_work: Everyone keeps within call of the houses in the first hours, and the farther work waits until later in the day.",
+     "gone": [
+      "dawn_work: The first light goes to walking the edges of the fields; the ordinary work begins once that is done."
+     ]
+    },
+    {
+     "seed": "dp-thorp-2",
+     "view": "Foundry/Identity & Daily Life",
+     "came": "- **Foodways:** Its own food is meat and milk from the herds.",
+     "gone": [
+      "- **Foodways:** Each holding grows for its own table, and beyond that its food is meat and milk from the herds."
+     ]
+    },
+    {
+     "seed": "dp-thorp-3",
+     "view": "Systems/Economics",
+     "came": "honey",
+     "gone": [
+      "honeyHoney and beeswaxForaged goods",
+      "Subsistence farming",
+      "Outputs"
+     ]
+    },
+    {
+     "seed": "dp-thorp-4",
+     "view": "Systems/Economics",
+     "came": "medicinal herbshoney",
+     "gone": [
+      "medicinal herbshoneyHoney and beeswaxForaged goods",
+      "What each holding grows goes to its own table; beyond that, what it puts on the table itself is the day's catch.",
+      "Steindorf's own food comes from its fishing and from the holdings its families till, so a bad season for either is felt at every table."
+     ]
+    },
+    {
+     "seed": "dp-thorp-4",
+     "view": "Systems/Economics",
+     "came": "What it puts on the table itself is the day's catch.",
+     "gone": [
+      "medicinal herbshoneyHoney and beeswaxForaged goods",
+      "What each holding grows goes to its own table; beyond that, what it puts on the table itself is the day's catch.",
+      "Steindorf's own food comes from its fishing and from the holdings its families till, so a bad season for either is felt at every table."
+     ]
+    },
+    {
+     "seed": "dp-thorp-4",
+     "view": "Systems/Economics",
+     "came": "Steindorf leans first on its fishing for its food, so a bad season for the fishing is felt at every table.",
+     "gone": [
+      "medicinal herbshoneyHoney and beeswaxForaged goods",
+      "What each holding grows goes to its own table; beyond that, what it puts on the table itself is the day's catch.",
+      "Steindorf's own food comes from its fishing and from the holdings its families till, so a bad season for either is felt at every table."
+     ]
+    },
+    {
+     "seed": "dp-thorp-4",
+     "view": "World/Daily Life",
+     "came": "Those who fish are out before first light and back with the catch by mid-morning.",
+     "gone": [
+      "Most people are in the fields by first light; the rest of the work fits around them."
+     ]
+    },
+    {
+     "seed": "dp-thorp-4",
+     "view": "PDF/printProse",
+     "came": "Steindorf is fed, but what it keeps put by would not outlast a run of poor harvests. The thorp leans first on its fishing for its food, so a bad season for the fishing is felt at every table.",
+     "gone": [
+      "Steindorf is fed, but what it keeps put by would not outlast a run of poor harvests. The thorp's own food comes from its fishing and from the holdings its families till, so a bad season for either is felt at every table."
+     ]
+    },
+    {
+     "seed": "dp-thorp-4",
+     "view": "PDF/dailyLife",
+     "came": "dawn_work: Those who fish are out before first light and back with the catch by mid-morning.",
+     "gone": [
+      "dawn_work: Most people are in the fields by first light; the rest of the work fits around them."
+     ]
+    },
+    {
+     "seed": "dp-thorp-4",
+     "view": "Foundry/Identity & Daily Life",
+     "came": "- **Foodways:** What it puts on the table itself is the day&#39;s catch.",
+     "gone": [
+      "- **Foodways:** What each holding grows goes to its own table; beyond that, what it puts on the table itself is the day&#39;s catch."
+     ]
+    },
+    {
+     "seed": "dp-thorp-5",
+     "view": "Systems/Economics",
+     "came": "medicinal herbshoney",
+     "gone": [
+      "medicinal herbshoneyHoney and beeswaxForaged goods",
+      "What each holding grows goes to its own table; beyond that, what it puts on the table itself is cheese and smoked meat from the grazing herds.",
+      "Of the food Agiosvrysi raises for itself, its herds and what each family grows on its own holding come first, and a poor season in either means less to go round."
+     ]
+    },
+    {
+     "seed": "dp-thorp-5",
+     "view": "Systems/Economics",
+     "came": "What it puts on the table itself is cheese and smoked meat from the grazing herds.",
+     "gone": [
+      "medicinal herbshoneyHoney and beeswaxForaged goods",
+      "What each holding grows goes to its own table; beyond that, what it puts on the table itself is cheese and smoked meat from the grazing herds.",
+      "Of the food Agiosvrysi raises for itself, its herds and what each family grows on its own holding come first, and a poor season in either means less to go round."
+     ]
+    },
+    {
+     "seed": "dp-thorp-5",
+     "view": "Systems/Economics",
+     "came": "Agiosvrysi leans first on its herds for its food, so a bad season for the herds is felt at every table.",
+     "gone": [
+      "medicinal herbshoneyHoney and beeswaxForaged goods",
+      "What each holding grows goes to its own table; beyond that, what it puts on the table itself is cheese and smoked meat from the grazing herds.",
+      "Of the food Agiosvrysi raises for itself, its herds and what each family grows on its own holding come first, and a poor season in either means less to go round."
+     ]
+    },
+    {
+     "seed": "dp-thorp-5",
+     "view": "World/Daily Life",
+     "came": "Children are warned about slipping out of doors once it is dark.",
+     "gone": [
+      "Children are warned about the far edges of the fields after dark."
+     ]
+    },
+    {
+     "seed": "dp-thorp-5",
+     "view": "PDF/printProse",
+     "came": "Food is not what keeps Agiosvrysi's people awake: whether the place grows it or buys it, the need is met. The thorp leans first on its herds for its food, so a bad season for the herds is felt at every table.",
+     "gone": [
+      "Food is not what keeps Agiosvrysi's people awake: whether the place grows it or buys it, the need is met. Of the food Agiosvrysi raises for itself, its herds and what each family grows on its own holding come first, and a poor season in either means less to go round."
+     ]
+    },
+    {
+     "seed": "dp-thorp-5",
+     "view": "PDF/dailyLife",
+     "came": "child_warnings: Children are warned about slipping out of doors once it is dark.",
+     "gone": [
+      "child_warnings: Children are warned about the far edges of the fields after dark."
+     ]
+    },
+    {
+     "seed": "dp-thorp-5",
+     "view": "Foundry/Identity & Daily Life",
+     "came": "- **Foodways:** What it puts on the table itself is cheese and smoked meat from the grazing herds.",
+     "gone": [
+      "- **Foodways:** What each holding grows goes to its own table; beyond that, what it puts on the table itself is cheese and smoked meat from the grazing herds."
+     ]
+    },
+    {
+     "seed": "dp-thorp-6",
+     "view": "Systems/Economics",
+     "came": "What it puts on the table itself is salted fish.",
+     "gone": [
+      "What each holding grows goes to its own table; beyond that, what it puts on the table itself is salted fish.",
+      "Agiichori's own food comes from its fishing and from the holdings its families till, so a bad season for either is felt at every table."
+     ]
+    },
+    {
+     "seed": "dp-thorp-6",
+     "view": "Systems/Economics",
+     "came": "Agiichori leans first on its fishing for its food, so a bad season for the fishing is felt at every table.",
+     "gone": [
+      "What each holding grows goes to its own table; beyond that, what it puts on the table itself is salted fish.",
+      "Agiichori's own food comes from its fishing and from the holdings its families till, so a bad season for either is felt at every table."
+     ]
+    },
+    {
+     "seed": "dp-thorp-6",
+     "view": "PDF/printProse",
+     "came": "In an ordinary season Agiichori has enough to eat, or near enough. The thorp leans first on its fishing for its food, so a bad season for the fishing is felt at every table.",
+     "gone": [
+      "In an ordinary season Agiichori has enough to eat, or near enough. The thorp's own food comes from its fishing and from the holdings its families till, so a bad season for either is felt at every table."
+     ]
+    },
+    {
+     "seed": "dp-thorp-6",
+     "view": "Foundry/Identity & Daily Life",
+     "came": "- **Foodways:** What it puts on the table itself is salted fish.",
+     "gone": [
+      "- **Foodways:** What each holding grows goes to its own table; beyond that, what it puts on the table itself is salted fish."
+     ]
+    },
+    {
+     "seed": "dp-thorp-8",
+     "view": "Systems/Economics",
+     "came": "medicinal herbshoney",
+     "gone": [
+      "medicinal herbshoneyHoney and beeswaxForaged goods",
+      "What each holding grows goes to its own table; beyond that, what it puts on the table itself is the hunters' game.",
+      "Of the food Farofundus raises for itself, its hunting and what each family grows on its own holding come first, and a poor season in either means less to go round."
+     ]
+    },
+    {
+     "seed": "dp-thorp-8",
+     "view": "Systems/Economics",
+     "came": "What it puts on the table itself is the hunters' game.",
+     "gone": [
+      "medicinal herbshoneyHoney and beeswaxForaged goods",
+      "What each holding grows goes to its own table; beyond that, what it puts on the table itself is the hunters' game.",
+      "Of the food Farofundus raises for itself, its hunting and what each family grows on its own holding come first, and a poor season in either means less to go round."
+     ]
+    },
+    {
+     "seed": "dp-thorp-8",
+     "view": "Systems/Economics",
+     "came": "Farofundus leans first on its hunting for its food, so a bad season for the hunting is felt at every table.",
+     "gone": [
+      "medicinal herbshoneyHoney and beeswaxForaged goods",
+      "What each holding grows goes to its own table; beyond that, what it puts on the table itself is the hunters' game.",
+      "Of the food Farofundus raises for itself, its hunting and what each family grows on its own holding come first, and a poor season in either means less to go round."
+     ]
+    },
+    {
+     "seed": "dp-thorp-8",
+     "view": "World/Daily Life",
+     "came": "Strangers with business here are sent to the Elder Council sooner or later. Travellers here talk of beasts seen at the edge of the settled land. Keeping the peace here rests on goodwill more than on any force.",
+     "gone": [
+      "Strangers with business here are sent to the Elder Council sooner or later. Travellers here talk of beasts seen at the edge of the settled land. Petitions and permissions take a long time here, and visitors are told to wait."
+     ]
+    },
+    {
+     "seed": "dp-thorp-8",
+     "view": "PDF/printProse",
+     "came": "In an ordinary season Farofundus has enough to eat, or near enough. The thorp leans first on its hunting for its food, so a bad season for the hunting is felt at every table.",
+     "gone": [
+      "In an ordinary season Farofundus has enough to eat, or near enough. Of the food Farofundus raises for itself, its hunting and what each family grows on its own holding come first, and a poor season in either means less to go round."
+     ]
+    },
+    {
+     "seed": "dp-thorp-8",
+     "view": "PDF/dailyLife",
+     "came": "outsider_impressions: Strangers with business here are sent to the Elder Council sooner or later. Travellers here talk of beasts seen at the edge of the settled land. Keeping the peace here rests on goodwill more than on any force.",
+     "gone": [
+      "outsider_impressions: Strangers with business here are sent to the Elder Council sooner or later. Travellers here talk of beasts seen at the edge of the settled land. Petitions and permissions take a long time here, and visitors are told to wait."
+     ]
+    },
+    {
+     "seed": "dp-thorp-8",
+     "view": "Foundry/Identity & Daily Life",
+     "came": "- **Foodways:** What it puts on the table itself is the hunters&#39; game.",
+     "gone": [
+      "- **Foodways:** What each holding grows goes to its own table; beyond that, what it puts on the table itself is the hunters&#39; game."
+     ]
+    },
+    {
+     "seed": "dp-thorp-9",
+     "view": "Systems/Economics",
+     "came": "honeymedicinal herbs",
+     "gone": [
+      "honeymedicinal herbsHoney and beeswaxForaged goods",
+      "Subsistence farming",
+      "Outputs"
+     ]
+    },
+    {
+     "seed": "dp-thorp-10",
+     "view": "Systems/Economics",
+     "came": "grainmedicinal herbshoney",
+     "gone": [
+      "grainmedicinal herbshoneyHoney and beeswaxForaged goods",
+      "Subsistence farming",
+      "Honey and beeswaxForaged goods"
+     ]
+    },
+    {
+     "seed": "dp-thorp-10",
+     "view": "Systems/Power",
+     "came": "Under the ruling power, with no power of its own kind here",
+     "gone": []
+    },
+    {
+     "seed": "dp-thorp-11",
+     "view": "Systems/Economics",
+     "came": "medicinal herbshoney",
+     "gone": [
+      "medicinal herbshoneyHoney and beeswaxForaged goods",
+      "Subsistence farming",
+      "Outputs"
+     ]
+    },
+    {
+     "seed": "dp-thorp-12",
+     "view": "Systems/Economics",
+     "came": "peathoneymedicinal herbs",
+     "gone": [
+      "peathoneymedicinal herbsHoney and beeswaxForaged goods",
+      "Subsistence farming",
+      "Outputs"
+     ]
+    },
+    {
+     "seed": "dp-thorp-12",
+     "view": "Systems/Power",
+     "came": "Under the ruling power, with no power of its own kind here",
+     "gone": []
+    },
+    {
+     "seed": "dp-thorp-12",
+     "view": "World/Daily Life",
+     "came": "Ask who decides things here, and the answer is the Elder Council. A visitor soon learns that the country beyond is not to be walked carelessly. A visitor who falls sick here will find no healer to call on.",
+     "gone": [
+      "Ask who decides things here, and the answer is the Elder Council. A visitor soon learns that the country beyond is not to be walked carelessly. Petitions and permissions take a long time here, and visitors are told to wait."
+     ]
+    },
+    {
+     "seed": "dp-thorp-12",
+     "view": "PDF/dailyLife",
+     "came": "outsider_impressions: Ask who decides things here, and the answer is the Elder Council. A visitor soon learns that the country beyond is not to be walked carelessly. A visitor who falls sick here will find no healer to call on.",
+     "gone": [
+      "outsider_impressions: Ask who decides things here, and the answer is the Elder Council. A visitor soon learns that the country beyond is not to be walked carelessly. Petitions and permissions take a long time here, and visitors are told to wait."
+     ]
+    },
+    {
+     "seed": "dp-thorp-13",
+     "view": "Systems/Power",
+     "came": "Under the ruling power, with no power of its own kind here",
+     "gone": []
+    },
+    {
+     "seed": "dp-thorp-13",
+     "view": "World/Daily Life",
+     "came": "The Independent Bloc carries the most weight here, and nobody pretends otherwise. Care for the sick is short here, and people know better than to fall ill.",
+     "gone": [
+      "The Independent Bloc carries the most weight here, and nobody pretends otherwise. Petitions and permissions take a long time here, and visitors are told to wait.",
+      "Children are warned about repeating what they hear said at home about those in charge, and about the far edges of the fields after dark."
+     ]
+    },
+    {
+     "seed": "dp-thorp-13",
+     "view": "World/Daily Life",
+     "came": "Children are warned about repeating what they hear said at home about those in charge, and about the road past sundown.",
+     "gone": [
+      "The Independent Bloc carries the most weight here, and nobody pretends otherwise. Petitions and permissions take a long time here, and visitors are told to wait.",
+      "Children are warned about repeating what they hear said at home about those in charge, and about the far edges of the fields after dark."
+     ]
+    },
+    {
+     "seed": "dp-thorp-13",
+     "view": "PDF/dailyLife",
+     "came": "outsider_impressions: The Independent Bloc carries the most weight here, and nobody pretends otherwise. Care for the sick is short here, and people know better than to fall ill.",
+     "gone": [
+      "outsider_impressions: The Independent Bloc carries the most weight here, and nobody pretends otherwise. Petitions and permissions take a long time here, and visitors are told to wait.",
+      "child_warnings: Children are warned about repeating what they hear said at home about those in charge, and about the far edges of the fields after dark."
+     ]
+    },
+    {
+     "seed": "dp-thorp-13",
+     "view": "PDF/dailyLife",
+     "came": "child_warnings: Children are warned about repeating what they hear said at home about those in charge, and about the road past sundown.",
+     "gone": [
+      "outsider_impressions: The Independent Bloc carries the most weight here, and nobody pretends otherwise. Petitions and permissions take a long time here, and visitors are told to wait.",
+      "child_warnings: Children are warned about repeating what they hear said at home about those in charge, and about the far edges of the fields after dark."
+     ]
+    },
+    {
+     "seed": "dp-thorp-14",
+     "view": "Systems/Economics",
+     "came": "honey",
+     "gone": [
+      "honeyHoney and beeswaxForaged goods",
+      "Subsistence farming",
+      "Outputs"
+     ]
+    },
+    {
+     "seed": "dp-thorp-14",
+     "view": "World/Daily Life",
+     "came": "The households are up at first light, and the day's work starts close to home.",
+     "gone": [
+      "The day begins with the walk out to the fields, and the work there runs on until midday."
+     ]
+    },
+    {
+     "seed": "dp-thorp-14",
+     "view": "PDF/dailyLife",
+     "came": "dawn_work: The households are up at first light, and the day's work starts close to home.",
+     "gone": [
+      "dawn_work: The day begins with the walk out to the fields, and the work there runs on until midday."
+     ]
+    }
+   ]
+  },
+  "F": {
+   "births": 300,
+   "skipped": 0,
+   "pagesMoved": 300,
+   "pagesRedealt": 175,
+   "linesMoved": 10762,
+   "linesNameOnly": 10422,
+   "linesRedealt": 340,
+   "redealtByView": {
+    "Systems/Defense": 65,
+    "World/Daily Life": 46,
+    "PDF/dailyLife": 46,
+    "Summary/Overview": 68,
+    "World/NPCs": 7,
+    "Systems/Power": 37,
+    "PDF/printProse": 39,
+    "Foundry/Tonight": 7,
+    "Foundry/Plot Hooks": 8,
+    "Tonight/sheet": 9,
+    "Summary/Plot Hooks": 1,
+    "Session/threads": 2,
+    "Summary/Crisis": 1,
+    "Systems/Economics": 1,
+    "PDF/crisis": 2,
+    "Foundry/Crisis": 1
+   },
+   "pickSites": {
+    "PV src/data/faceHonorifics.js :: honorificOfTitle": {
+     "picksWithName": 33,
+     "pagesWithName": 33,
+     "moved": 7,
+     "pagesMoved": 7,
+     "keyExample": "npc_seat::Household Council",
+     "ex": {
+      "seed": "dp-thorp-2",
+      "key": "npc_seat::Household Council",
+      "before": "0/2",
+      "keyAfter": "npc_seat::The Ashen Compact",
+      "after": "1/2"
+     }
+    },
+    "FNV src/domain/dossier/hookLines.js :: createConflictHookDraw": {
+     "picksWithName": 1,
+     "pagesWithName": 1,
+     "moved": 1,
+     "pagesMoved": 1,
+     "keyExample": "Elder Council>Merchant Guilds::Authority over military conscription lists::jurisdiction",
+     "ex": null
+    }
+   },
+   "examples": {},
+   "lineExamples": [
+    {
+     "seed": "dp-thorp-0",
+     "view": "Systems/Defense",
+     "came": "There is no watch. The neighbours keep the peace, and anyone who breaks it answers to all of them at once; when they fall out among themselves, nobody keeps it.",
+     "gone": [
+      "There is no watch. The old families keep the peace, and anyone who breaks it answers to all the neighbours at once; when the families fall out among themselves, nobody keeps it."
+     ]
+    },
+    {
+     "seed": "dp-thorp-1",
+     "view": "World/Daily Life",
+     "came": "People meet at the field edges at midday, when the work stops for a while.",
+     "gone": [
+      "Matters of any weight are talked over at the elder's door, where people gather of an evening."
+     ]
+    },
+    {
+     "seed": "dp-thorp-1",
+     "view": "PDF/dailyLife",
+     "came": "gathering_places: People meet at the field edges at midday, when the work stops for a while.",
+     "gone": [
+      "gathering_places: Matters of any weight are talked over at the elder's door, where people gather of an evening."
+     ]
+    },
+    {
+     "seed": "dp-thorp-2",
+     "view": "Summary/Overview",
+     "came": "Latin-inspired, run by patronage and law. Governed by The Ashen Compact · Stable",
+     "gone": [
+      "Latin-inspired, run by custom more than by law. Governed by Household Council · Stable"
+     ]
+    },
+    {
+     "seed": "dp-thorp-2",
+     "view": "World/NPCs",
+     "came": "Head of the Household",
+     "gone": [
+      "Elder"
+     ]
+    },
+    {
+     "seed": "dp-thorp-3",
+     "view": "Summary/Overview",
+     "came": "Latin-inspired, run by patronage and law. Governed by The Ashen Compact · Volatile — power is available to whoever moves first",
+     "gone": [
+      "Latin-inspired, run by custom more than by law. Governed by Elder Council · Volatile — power is available to whoever moves first"
+     ]
+    },
+    {
+     "seed": "dp-thorp-4",
+     "view": "Systems/Defense",
+     "came": "Nobody here is paid to keep order. A quarrel goes to the heads of households, and most are settled before they come to blows.",
+     "gone": [
+      "Nobody here is paid to keep order. A quarrel goes to the heads of the oldest families, and most are settled before they come to blows."
+     ]
+    },
+    {
+     "seed": "dp-thorp-5",
+     "view": "Summary/Overview",
+     "came": "Greek-inspired, and it shows: built on hillside ground, and run by civic association. Governed by The Ashen Compact · Stable",
+     "gone": [
+      "Greek-inspired, and it shows: built on hillside ground. Governed by Elder Council · Stable"
+     ]
+    },
+    {
+     "seed": "dp-thorp-6",
+     "view": "Summary/Overview",
+     "came": "Greek-inspired: built on the coast, and run by civic association. Governed by The Ashen Compact · Vulnerable (prosperous but underdefended)",
+     "gone": [
+      "Greek-inspired: built on the coast. Governed by Elder Council · Vulnerable (prosperous but underdefended)"
+     ]
+    },
+    {
+     "seed": "dp-thorp-7",
+     "view": "Summary/Overview",
+     "came": "Latin-inspired, run by patronage and law. Governed by The Ashen Compact · Stable",
+     "gone": [
+      "Latin-inspired, run by custom more than by law. Governed by Household Council · Stable"
+     ]
+    },
+    {
+     "seed": "dp-thorp-8",
+     "view": "Summary/Overview",
+     "came": "Latin-inspired. Ask about the place and you are told it is run by patronage and law. Governed by The Ashen Compact · Tense (monster pressure from surrounding region)",
+     "gone": [
+      "Latin-inspired. Ask about the place and you are told it is run by custom more than by law. Governed by Elder Council · Tense (monster pressure from surrounding region)"
+     ]
+    },
+    {
+     "seed": "dp-thorp-8",
+     "view": "World/Daily Life",
+     "came": "When the flocks are brought in, people gather to help and to talk.",
+     "gone": [
+      "Matters of any weight are talked over at the elder's door, where people gather of an evening."
+     ]
+    },
+    {
+     "seed": "dp-thorp-8",
+     "view": "PDF/dailyLife",
+     "came": "gathering_places: When the flocks are brought in, people gather to help and to talk.",
+     "gone": [
+      "gathering_places: Matters of any weight are talked over at the elder's door, where people gather of an evening."
+     ]
+    },
+    {
+     "seed": "dp-thorp-9",
+     "view": "Systems/Defense",
+     "came": "There is no watch. The neighbours keep the peace, and anyone who breaks it answers to all of them at once; when they fall out among themselves, nobody keeps it.",
+     "gone": [
+      "There is no watch. The old families keep the peace, and anyone who breaks it answers to all the neighbours at once; when the families fall out among themselves, nobody keeps it."
+     ]
+    },
+    {
+     "seed": "dp-thorp-10",
+     "view": "Systems/Defense",
+     "came": "There is no watch. When someone does wrong, the neighbours deal with it themselves, and the heads of households have the last word.",
+     "gone": [
+      "There is no watch. When someone does wrong, the neighbours deal with it themselves, and the oldest families have the last word."
+     ]
+    },
+    {
+     "seed": "dp-thorp-11",
+     "view": "Summary/Overview",
+     "came": "Steppe-inspired; people here live in a place built on clan lines. Governed by The Ashen Compact · Stable",
+     "gone": [
+      "Steppe-inspired; people here live in a place built on clan lines, held by clan and caravan. Governed by Elder Council · Stable"
+     ]
+    },
+    {
+     "seed": "dp-thorp-11",
+     "view": "World/Daily Life",
+     "came": "Before anyone goes out to work, each household looks to its own door and sees that all is as it was left.",
+     "gone": [
+      "The elder is asked at first light whether all is well before anyone goes out to work."
+     ]
+    },
+    {
+     "seed": "dp-thorp-11",
+     "view": "PDF/dailyLife",
+     "came": "dawn_work: Before anyone goes out to work, each household looks to its own door and sees that all is as it was left.",
+     "gone": [
+      "dawn_work: The elder is asked at first light whether all is well before anyone goes out to work."
+     ]
+    },
+    {
+     "seed": "dp-thorp-12",
+     "view": "World/Daily Life",
+     "came": "People bring their complaints to the Ashen Compact and expect little to come of them. Thin meals and short portions are the grievance nearly everyone shares.",
+     "gone": [
+      "Common folk say the elders decide among themselves and tell everyone else afterwards. Thin meals and short portions are the grievance nearly everyone shares."
+     ]
+    },
+    {
+     "seed": "dp-thorp-12",
+     "view": "PDF/dailyLife",
+     "came": "commoner_resentments: People bring their complaints to the Ashen Compact and expect little to come of them. Thin meals and short portions are the grievance nearly everyone shares.",
+     "gone": [
+      "commoner_resentments: Common folk say the elders decide among themselves and tell everyone else afterwards. Thin meals and short portions are the grievance nearly everyone shares."
+     ]
+    },
+    {
+     "seed": "dp-thorp-15",
+     "view": "Systems/Power",
+     "came": "The Ashen Compact at Qingmiao has left obvious decisions untaken, and nobody there can make it take them.",
+     "gone": [
+      "The Feudal Stewardship at Qingmiao watches the thorp's temper closely: what it fears is the thorp turning on it."
+     ]
+    },
+    {
+     "seed": "dp-thorp-15",
+     "view": "World/Daily Life",
+     "came": "Commoners resent the council's indifference to ordinary complaints.",
+     "gone": [
+      "Few here would say that the Feudal Stewardship speaks for them."
+     ]
+    },
+    {
+     "seed": "dp-thorp-15",
+     "view": "PDF/printProse",
+     "came": "The Ashen Compact at Qingmiao has left obvious decisions untaken, and nobody there can make it take them.",
+     "gone": [
+      "The Feudal Stewardship at Qingmiao watches the thorp's temper closely: what it fears is the thorp turning on it."
+     ]
+    },
+    {
+     "seed": "dp-thorp-15",
+     "view": "PDF/dailyLife",
+     "came": "commoner_resentments: Commoners resent the council's indifference to ordinary complaints.",
+     "gone": [
+      "commoner_resentments: Few here would say that the Feudal Stewardship speaks for them."
+     ]
+    },
+    {
+     "seed": "dp-thorp-16",
+     "view": "Summary/Overview",
+     "came": "Latin-inspired, and it shows: run by patronage and law. Governed by The Ashen Compact · Stable",
+     "gone": [
+      "Latin-inspired, and it shows: run by custom more than by law. Governed by Elder Council · Stable"
+     ]
+    },
+    {
+     "seed": "dp-thorp-16",
+     "view": "Systems/Defense",
+     "came": "There is no watch. When someone does wrong, the neighbours deal with it themselves, and the heads of households have the last word.",
+     "gone": [
+      "There is no watch. When someone does wrong, the neighbours deal with it themselves, and the oldest families have the last word."
+     ]
+    },
+    {
+     "seed": "dp-thorp-18",
+     "view": "Summary/Overview",
+     "came": "Steppe-inspired, and it shows: built on clan lines. Governed by The Ashen Compact · Stable",
+     "gone": [
+      "Steppe-inspired, and it shows: built on clan lines, held by clan and caravan. Governed by Elder Council · Stable"
+     ]
+    },
+    {
+     "seed": "dp-thorp-20",
+     "view": "World/NPCs",
+     "came": "Head of the Household",
+     "gone": [
+      "Elder"
+     ]
+    },
+    {
+     "seed": "dp-thorp-20",
+     "view": "World/Daily Life",
+     "came": "Ordinary people grumble that the Ashen Compact looks after its own first. Thin meals and short portions are the grievance nearly everyone shares.",
+     "gone": [
+      "Common folk say the elders decide among themselves and tell everyone else afterwards. Thin meals and short portions are the grievance nearly everyone shares."
+     ]
+    },
+    {
+     "seed": "dp-thorp-20",
+     "view": "PDF/dailyLife",
+     "came": "commoner_resentments: Ordinary people grumble that the Ashen Compact looks after its own first. Thin meals and short portions are the grievance nearly everyone shares.",
+     "gone": [
+      "commoner_resentments: Common folk say the elders decide among themselves and tell everyone else afterwards. Thin meals and short portions are the grievance nearly everyone shares."
+     ]
+    },
+    {
+     "seed": "dp-thorp-21",
+     "view": "Summary/Overview",
+     "came": "Germanic-inspired. Ask about the place and you are told it is built in timber and stone. Governed by The Ashen Compact · Vulnerable (prosperous but underdefended)",
+     "gone": [
+      "Germanic-inspired. Ask about the place and you are told it is built in timber and stone, and run by its estates. Governed by Feudal Stewardship · Vulnerable (prosperous but underdefended)"
+     ]
+    },
+    {
+     "seed": "dp-thorp-21",
+     "view": "Systems/Power",
+     "came": "The Ashen Compact at Niederbach has left obvious decisions untaken because its members cannot agree on them.",
+     "gone": [
+      "The Feudal Stewardship at Niederbach watches the thorp's temper closely: what it fears is the thorp turning on it."
+     ]
+    },
+    {
+     "seed": "dp-thorp-21",
+     "view": "PDF/printProse",
+     "came": "The Ashen Compact at Niederbach has left obvious decisions untaken because its members cannot agree on them.",
+     "gone": [
+      "The Feudal Stewardship at Niederbach watches the thorp's temper closely: what it fears is the thorp turning on it."
+     ]
+    },
+    {
+     "seed": "dp-thorp-22",
+     "view": "Summary/Overview",
+     "came": "Steppe-inspired, and it shows: built on clan lines. Governed by The Ashen Compact · Tense (monster pressure from surrounding region)",
+     "gone": [
+      "Steppe-inspired, and it shows: built on clan lines, held by clan and caravan. Governed by Household Council · Tense (monster pressure from surrounding region)"
+     ]
+    },
+    {
+     "seed": "dp-thorp-23",
+     "view": "Systems/Defense",
+     "came": "Nobody here is paid to keep order. A quarrel goes to the heads of households, and most are settled before they come to blows.",
+     "gone": [
+      "Nobody here is paid to keep order. A quarrel goes to the heads of the oldest families, and most are settled before they come to blows."
+     ]
+    },
+    {
+     "seed": "dp-thorp-25",
+     "view": "World/Daily Life",
+     "came": "People talk wherever the day's work brings them together, and the news goes round with them.",
+     "gone": [
+      "Matters of any weight are talked over at the elder's door, where people gather of an evening."
+     ]
+    },
+    {
+     "seed": "dp-thorp-25",
+     "view": "PDF/dailyLife",
+     "came": "gathering_places: People talk wherever the day's work brings them together, and the news goes round with them.",
+     "gone": [
+      "gathering_places: Matters of any weight are talked over at the elder's door, where people gather of an evening."
+     ]
+    },
+    {
+     "seed": "dp-thorp-28",
+     "view": "Systems/Defense",
+     "came": "There is no watch. When someone does wrong, the neighbours deal with it themselves, and the heads of households have the last word.",
+     "gone": [
+      "There is no watch. When someone does wrong, the neighbours deal with it themselves, and the oldest families have the last word."
+     ]
+    },
+    {
+     "seed": "dp-thorp-29",
+     "view": "Summary/Overview",
+     "came": "Latin-inspired, and it shows: run by patronage and law. Governed by The Ashen Compact · Strained — the creditors have a say in every decision",
+     "gone": [
+      "Latin-inspired, and it shows: run by custom more than by law. Governed by Household Council · Strained — the creditors have a say in every decision"
+     ]
+    },
+    {
+     "seed": "dp-thorp-30",
+     "view": "Summary/Overview",
+     "came": "Greek-inspired: built on the coast, and run by civic association. Governed by The Ashen Compact · Tense — regional monster threat",
+     "gone": [
+      "Greek-inspired: built on the coast. Governed by Feudal Stewardship · Tense — regional monster threat"
+     ]
+    },
+    {
+     "seed": "dp-thorp-30",
+     "view": "Systems/Power",
+     "came": "Decisions at Olympambelos are slow because the whole Ashen Compact must agree, and once made they are rarely undone.",
+     "gone": [
+      "The Feudal Stewardship at Olympambelos watches the thorp's temper closely: what it fears is the thorp turning on it."
+     ]
+    },
+    {
+     "seed": "dp-thorp-30",
+     "view": "PDF/printProse",
+     "came": "Decisions at Olympambelos are slow because the whole Ashen Compact must agree, and once made they are rarely undone.",
+     "gone": [
+      "The Feudal Stewardship at Olympambelos watches the thorp's temper closely: what it fears is the thorp turning on it."
+     ]
+    },
+    {
+     "seed": "dp-thorp-31",
+     "view": "Summary/Overview",
+     "came": "Latin-inspired, and it shows: run by patronage and law. Governed by The Ashen Compact · Strained — the creditors have a say in every decision",
+     "gone": [
+      "Latin-inspired, and it shows: run by custom more than by law. Governed by Elder Council · Strained — the creditors have a say in every decision"
+     ]
+    },
+    {
+     "seed": "dp-thorp-32",
+     "view": "Systems/Defense",
+     "came": "There is no watch. The neighbours keep the peace, and anyone who breaks it answers to all of them at once; when they fall out among themselves, nobody keeps it.",
+     "gone": [
+      "There is no watch. The old families keep the peace, and anyone who breaks it answers to all the neighbours at once; when the families fall out among themselves, nobody keeps it."
+     ]
+    },
+    {
+     "seed": "dp-thorp-33",
+     "view": "Summary/Overview",
+     "came": "Greek-inspired, and it shows: built on desert ground, and run by civic association. Governed by The Ashen Compact · Vulnerable (prosperous but underdefended); monsters on the roads",
+     "gone": [
+      "Greek-inspired, and it shows: built on desert ground. Governed by Elder Council · Vulnerable (prosperous but underdefended); monsters on the roads"
+     ]
+    },
+    {
+     "seed": "dp-thorp-33",
+     "view": "Systems/Defense",
+     "came": "There is no watch. The neighbours keep the peace, and anyone who breaks it answers to all of them at once; when they fall out among themselves, nobody keeps it.",
+     "gone": [
+      "There is no watch. The old families keep the peace, and anyone who breaks it answers to all the neighbours at once; when the families fall out among themselves, nobody keeps it."
+     ]
+    },
+    {
+     "seed": "dp-thorp-34",
+     "view": "Systems/Defense",
+     "came": "Nobody here is paid to keep order. A quarrel goes to the heads of households, and most are settled before they come to blows.",
+     "gone": [
+      "Nobody here is paid to keep order. A quarrel goes to the heads of the oldest families, and most are settled before they come to blows."
+     ]
+    },
+    {
+     "seed": "dp-thorp-34",
+     "view": "World/Daily Life",
+     "came": "There is little trust here that the Ashen Compact will do right by ordinary people. Many feel that those in charge should be doing more to see everyone fed.",
+     "gone": [
+      "Common folk say the elders decide among themselves and tell everyone else afterwards. Many feel that those in charge should be doing more to see everyone fed."
+     ]
+    },
+    {
+     "seed": "dp-thorp-34",
+     "view": "PDF/dailyLife",
+     "came": "commoner_resentments: There is little trust here that the Ashen Compact will do right by ordinary people. Many feel that those in charge should be doing more to see everyone fed.",
+     "gone": [
+      "commoner_resentments: Common folk say the elders decide among themselves and tell everyone else afterwards. Many feel that those in charge should be doing more to see everyone fed."
+     ]
+    },
+    {
+     "seed": "dp-thorp-36",
+     "view": "Summary/Overview",
+     "came": "Latin-inspired. Ask about the place and you are told it is run by patronage and law. Governed by The Ashen Compact · Tense (monster pressure from surrounding region)",
+     "gone": [
+      "Latin-inspired. Ask about the place and you are told it is run by custom more than by law. Governed by Elder Council · Tense (monster pressure from surrounding region)"
+     ]
+    },
+    {
+     "seed": "dp-thorp-38",
+     "view": "Systems/Defense",
+     "came": "There is no watch. When someone does wrong, nobody makes them answer for it, and the heads of households no longer have the last word.",
+     "gone": [
+      "There is no watch. When someone does wrong, nobody makes them answer for it, and the oldest families no longer have the last word."
+     ]
+    },
+    {
+     "seed": "dp-thorp-40",
+     "view": "Systems/Defense",
+     "came": "There is no watch. When someone does wrong, the neighbours deal with it themselves, and the heads of households have the last word.",
+     "gone": [
+      "There is no watch. When someone does wrong, the neighbours deal with it themselves, and the oldest families have the last word."
+     ]
+    },
+    {
+     "seed": "dp-thorp-41",
+     "view": "World/Daily Life",
+     "came": "Most talk happens in the fields while the work goes on, and again where the water is drawn.",
+     "gone": [
+      "Matters of any weight are talked over at the elder's door, where people gather of an evening."
+     ]
+    },
+    {
+     "seed": "dp-thorp-41",
+     "view": "PDF/dailyLife",
+     "came": "gathering_places: Most talk happens in the fields while the work goes on, and again where the water is drawn.",
+     "gone": [
+      "gathering_places: Matters of any weight are talked over at the elder's door, where people gather of an evening."
+     ]
+    },
+    {
+     "seed": "dp-thorp-43",
+     "view": "Systems/Defense",
+     "came": "Nobody here is paid to keep order. A quarrel goes to the heads of households, and most are settled before they come to blows.",
+     "gone": [
+      "Nobody here is paid to keep order. A quarrel goes to the heads of the oldest families, and most are settled before they come to blows."
+     ]
+    },
+    {
+     "seed": "dp-thorp-44",
+     "view": "Systems/Defense",
+     "came": "There is no watch. The neighbours keep the peace, and anyone who breaks it answers to all of them at once; when they fall out among themselves, nobody keeps it.",
+     "gone": [
+      "There is no watch. The old families keep the peace, and anyone who breaks it answers to all the neighbours at once; when the families fall out among themselves, nobody keeps it."
+     ]
+    },
+    {
+     "seed": "dp-thorp-46",
+     "view": "Summary/Overview",
+     "came": "Latin-inspired, run by patronage and law. Governed by The Ashen Compact · Stable",
+     "gone": [
+      "Latin-inspired, run by custom more than by law. Governed by Elder Council · Stable"
+     ]
+    },
+    {
+     "seed": "dp-thorp-46",
+     "view": "Systems/Defense",
+     "came": "There is no watch. When someone does wrong, the neighbours deal with it themselves, and the heads of households have the last word.",
+     "gone": [
+      "There is no watch. When someone does wrong, the neighbours deal with it themselves, and the oldest families have the last word."
+     ]
+    },
+    {
+     "seed": "dp-thorp-48",
+     "view": "Systems/Defense",
+     "came": "There is no watch. When someone does wrong, the neighbours deal with it themselves, and the heads of households have the last word.",
+     "gone": [
+      "There is no watch. When someone does wrong, the neighbours deal with it themselves, and the oldest families have the last word."
+     ]
+    },
+    {
+     "seed": "dp-thorp-51",
+     "view": "Systems/Defense",
+     "came": "Nobody here is paid to keep order. A quarrel goes to the heads of households, and most are settled before they come to blows.",
+     "gone": [
+      "Nobody here is paid to keep order. A quarrel goes to the heads of the oldest families, and most are settled before they come to blows."
+     ]
+    }
+   ]
+  }
+ },
+ "share": {
+  "births": 300,
+  "sharePagesMoved": 300,
+  "shareRedealt": 300,
+  "ownerShareNewDiff": 31,
+  "ownerShareNewDiffLines": 31,
+  "byView": {
+   "World/Daily Life": 31
+  },
+  "examples": [
+   {
+    "seed": "dp-thorp-10",
+    "view": "World/Daily Life",
+    "ownerOnly": "Honest folk say that crime pays better here than work."
+   },
+   {
+    "seed": "dp-thorp-38",
+    "view": "World/Daily Life",
+    "ownerOnly": "Honest folk say that crime pays better here than work."
+   },
+   {
+    "seed": "dp-thorp-90",
+    "view": "World/Daily Life",
+    "ownerOnly": "Honest folk say that crime pays better here than work."
+   },
+   {
+    "seed": "dp-thorp-128",
+    "view": "World/Daily Life",
+    "ownerOnly": "Honest folk say that crime pays better here than work."
+   },
+   {
+    "seed": "dp-thorp-130",
+    "view": "World/Daily Life",
+    "ownerOnly": "Honest folk say that crime pays better here than work."
+   },
+   {
+    "seed": "dp-thorp-133",
+    "view": "World/Daily Life",
+    "ownerOnly": "Honest folk say that crime pays better here than work."
+   },
+   {
+    "seed": "dp-thorp-135",
+    "view": "World/Daily Life",
+    "ownerOnly": "Honest folk say that crime pays better here than work."
+   },
+   {
+    "seed": "dp-thorp-136",
+    "view": "World/Daily Life",
+    "ownerOnly": "Honest folk say that crime pays better here than work."
+   },
+   {
+    "seed": "dp-thorp-143",
+    "view": "World/Daily Life",
+    "ownerOnly": "Honest folk say that crime pays better here than work."
+   },
+   {
+    "seed": "dp-hamlet-2",
+    "view": "World/Daily Life",
+    "ownerOnly": "Honest folk say that crime pays better here than work."
+   },
+   {
+    "seed": "dp-hamlet-6",
+    "view": "World/Daily Life",
+    "ownerOnly": "Honest folk say that crime pays better here than work."
+   },
+   {
+    "seed": "dp-hamlet-11",
+    "view": "World/Daily Life",
+    "ownerOnly": "Honest carriers resent waiting their turn while smugglers come and go as they please."
+   },
+   {
+    "seed": "dp-hamlet-12",
+    "view": "World/Daily Life",
+    "ownerOnly": "Honest carriers resent waiting their turn while smugglers come and go as they please."
+   },
+   {
+    "seed": "dp-hamlet-16",
+    "view": "World/Daily Life",
+    "ownerOnly": "Honest folk say that crime pays better here than work."
+   },
+   {
+    "seed": "dp-hamlet-25",
+    "view": "World/Daily Life",
+    "ownerOnly": "Honest folk say that crime pays better here than work."
+   },
+   {
+    "seed": "dp-hamlet-46",
+    "view": "World/Daily Life",
+    "ownerOnly": "Honest folk say that crime pays better here than work."
+   },
+   {
+    "seed": "dp-hamlet-52",
+    "view": "World/Daily Life",
+    "ownerOnly": "Honest folk say that crime pays better here than work."
+   },
+   {
+    "seed": "dp-hamlet-67",
+    "view": "World/Daily Life",
+    "ownerOnly": "Honest folk say that crime pays better here than work."
+   },
+   {
+    "seed": "dp-hamlet-79",
+    "view": "World/Daily Life",
+    "ownerOnly": "Honest folk say that crime pays better here than work."
+   },
+   {
+    "seed": "dp-hamlet-81",
+    "view": "World/Daily Life",
+    "ownerOnly": "Honest carriers resent waiting their turn while smugglers come and go as they please."
+   }
+  ],
+  "sharePickSites": {
+   "FNV src/domain/crisis/crisisSummaryVantage.js :: summaryColumnOf": 109,
+   "RZ src/domain/dailyLife.js :: pickNameable": 3141,
+   "RZ src/domain/dailyLife.js :: yields": 300
+  }
+ },
+ "baseShare": {
+  "pagesDiffer": 300
+ }
+}

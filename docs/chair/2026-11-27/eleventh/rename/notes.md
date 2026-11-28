@@ -8,3 +8,6 @@
 - (D) running: work/D-C.jsonl then D-V.jsonl, first 300 of each plan (= thorps and hamlets only: the plans are ordered by size). Process peaks ~2.0 GB at chunk 75.
 - house = institution; its writer (institutionRename.js) has no UI caller; (D) uses the writer.
 - (C) done: nameless by JSON import CONFIRMED (N.jsonl). (E) scratch tree /tmp/rename/rekey (git archive of cccda7569 + 7 key edits, never committed); bundles e-base.mjs / e-rekey.mjs tested.
+- (D) done: D-C/D-V (300 each, 0 errors); owner vs share restricted to rendered tabs (the non-DOM surfaces are owner-only); the 39 owner/share differences after rename all = the owner-only DM resentments slot (A6). Classifier decodes HTML entities.
+- (F) done: 4 stored homes hold the town name (arrivalScene, stress.summary, pressureSentence, stress[].summary); 300/300 C, 295/300 V pages still print the old name.
+- (E) running: E-base-C/V then E-rekey-C/V (900 each, chunks of 40).

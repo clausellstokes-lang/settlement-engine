@@ -1,0 +1,103 @@
+{
+ "label": "C",
+ "births": 300,
+ "pagesOld": 300,
+ "linesOld": 676,
+ "ownerPagesOld": 300,
+ "byHome": {
+  "pressureSentence": {
+   "lines": 85,
+   "pages": 85,
+   "surfaces": {
+    "owner page (tabs)": 85
+   },
+   "ex": {
+    "seed": "dp-thorp-0",
+    "old": "Linyuan",
+    "neu": "Quillmarsh",
+    "view": "Summary/Overview",
+    "line": "The interest on Linyuan's debt now outpaces what the timber can bring in; the numbers have been quietly rearranged twice to hide it, and there is no third arrangement that works."
+   }
+  },
+  "stress.summary": {
+   "lines": 282,
+   "pages": 94,
+   "surfaces": {
+    "owner page (tabs)": 94,
+    "PDF": 94,
+    "Foundry": 94
+   },
+   "ex": {
+    "seed": "dp-thorp-0",
+    "old": "Linyuan",
+    "neu": "Quillmarsh",
+    "view": "Summary/Crisis",
+    "line": "Linyuan owes an outside power more than it can ever repay, and the debt now decides what it can and cannot do."
+   }
+  },
+  "arrivalScene": {
+   "lines": 292,
+   "pages": 292,
+   "surfaces": {
+    "owner page (tabs)": 292
+   },
+   "ex": {
+    "seed": "dp-thorp-1",
+    "old": "Rotbach",
+    "neu": "Quillmarsh",
+    "view": "Summary/Overview",
+    "line": "Rotbach's notices are posted in two languages now, the local one second. The new lettering is neat, official, and on every door that matters, which is how you learn the occupation intends to stay. Someone leads a single beast along the lane on a halter, talking to it the whole way. A pedlar has open"
+   }
+  },
+  "stress[].summary": {
+   "lines": 12,
+   "pages": 2,
+   "surfaces": {
+    "owner page (tabs)": 4,
+    "PDF": 4,
+    "Foundry": 4
+   },
+   "ex": {
+    "seed": "dp-hamlet-60",
+    "old": "Bjornmark",
+    "neu": "Quillmarsh",
+    "view": "Summary/Crisis",
+    "line": "Some in Bjornmark have stopped obeying the government. They stall, their taxes go unpaid, and they wait."
+   }
+  }
+ },
+ "bySurface": {
+  "owner page (tabs)": 478,
+  "PDF": 99,
+  "Foundry": 99
+ },
+ "unmatched": 5,
+ "unmatchedEx": [
+  {
+   "seed": "dp-thorp-21",
+   "view": "Summary/Overview",
+   "line": "The first building you pass on the way into Ögedeidavan is somebody's house, and so is the second, and so, it turns out, is most of the rest. Corrals and open assembly ground occupy as much space as the permanent halls. Someone leads a single beast along the lane on a halter, talking to it the whole"
+  },
+  {
+   "seed": "dp-hamlet-49",
+   "view": "Summary/Overview",
+   "line": "Ögedeikum smells of vinegar and woodsmoke. Doors that should be open are shut, and the people who do come out keep a careful distance from one another, and from you. The heat of a working kiln reaches you from across the lane. Felt tents stand beside the houses, and their owners seem at home in eith"
+  },
+  {
+   "seed": "dp-hamlet-49",
+   "view": "Summary/Crisis",
+   "line": "Something is spreading in Ögedeikum. It is not yet a plague, but it will be if nothing changes. The sick outnumber those who can tend them. The origin is disputed. Quarantine measures are being resisted."
+  },
+  {
+   "seed": "dp-hamlet-49",
+   "view": "PDF/crisis",
+   "line": "summary\":\"Something is spreading in Ögedeikum. It is not yet a plague, but it will be if nothing changes. The sick outnumber those who can tend them. The origin is disputed. Quarantine measures are being resisted."
+  },
+  {
+   "seed": "dp-hamlet-49",
+   "view": "Foundry/Crisis",
+   "line": "Something is spreading in Ögedeikum. It is not yet a plague, but it will be if nothing changes. The sick outnumber those who can tend them. The origin is disputed. Quarantine measures are being resisted."
+  }
+ ],
+ "pagesByHome": {}
+}
