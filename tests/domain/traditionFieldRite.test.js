@@ -16,11 +16,13 @@ import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 
 /** The seed's identity: a plains road town whose row 1 draws a rite of the fields. */
 const IDENTITY = { _seed: 'furrow-4', tier: 'town', population: 3000, config: { culture: 'celtic', terrainType: 'plains', tradeRouteAccess: 'road' } };
+/** RULING 122-T: the place holds what its other rows presume (a market, a smith), so only the field rule moves a row. */
+const HELD = [{ name: 'Tavern' }, { name: 'Weekly market' }, { name: 'Blacksmith' }];
 /** @param {unknown} foodSources @param {Record<string, unknown>} [over] */
 const place = (foodSources, over = {}) => ({
   ...IDENTITY,
   generatorVersion: GENERATOR_VERSION,
-  institutions: [{ name: 'Tavern' }],
+  institutions: HELD,
   economicState: { foodSecurity: { foodRecord: { foodSources } } },
   ...over,
 });
@@ -50,7 +52,7 @@ describe('B1(ii): a born place that names no grain and holds no farmland shows n
 describe('B1(ii): the twins keep their whole set', () => {
   const same = (/** @type {unknown} */ s) => expect(JSON.stringify(deriveFoundingTraditions(/** @type {any} */ (s)))).toBe(JSON.stringify(before));
   test('a place that grows grain', () => same(place(['grain', 'fish'])));
-  test('a place with farmland and no grain', () => same(place(['livestock'], { institutions: [{ name: 'Tavern' }, { name: 'Farmland' }] })));
+  test('a place with farmland and no grain', () => same(place(['livestock'], { institutions: [...HELD, { name: 'Farmland' }] })));
   test('a place whose source list is empty, or absent (unanswered)', () => {
     same(place([]));
     same(place(undefined));
