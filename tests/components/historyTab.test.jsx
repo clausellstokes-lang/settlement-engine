@@ -20,6 +20,7 @@ import { HistoryTab } from '../../src/components/new/tabs/HistoryTab.jsx';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { HISTORICAL_EVENTS_DATA } from '../../src/data/historyData.js';
 import { SCARCITY_STORED_LIVE, SCARCITY_STORED_PAST } from '../../src/domain/display/tensionDescriptionShown.js';
+import { applyUserEdit, isEdited } from '../../src/domain/userEdits.js';
 
 const LONG_DESC =
   'Rights to the local iron deposits became the subject of a prolonged dispute between the settlement and a rival lord.';
@@ -350,6 +351,44 @@ describe('HistoryTab — the scarcity tension names the good the record holds sh
     expect(screen.getByText(named)).toBeTruthy();
     expectAbsentWithAnchor(document.body.textContent || '', 'gold/silver ore', named, 'no slash inside the sentence');
     expect(s.resourceAnalysis.imports.critical).toEqual(['gold/silver ore']);
+  });
+  // RULING 122-A-3 (the eleventh chair, 2026-11-28): A DM's OWN WORDS ARE NEVER RE-ANSWERED. A tension's description is a
+  // field the DM can edit (userEdits.js :: EDITABLE_FIELDS.currentTension), marked on the tension's own ledger; where the DM
+  // typed the engine's scarcity sentence by hand, every surface prints the DM's words as typed (the ledger read through
+  // userEdits.js :: isEdited, the reader guardLineAsPrinted uses). RED FIRST at 1892c3af7: the named twin replaced them.
+  describe('a DM-typed scarcity sentence is printed as typed (RULING 122-A-3)', () => {
+    const SAW = { critical: ['timber'], reasons: { timber: 'Required by Sawmill but not available in Plains terrain' } };
+    const NAMED = 'A critical resource, timber, is running short, and some are hoarding it while others cannot pay the prices asked';
+    const typed = () => {
+      const s = townWith('A tension the engine wrote', SAW);
+      applyUserEdit(s.history.currentTensions[0], 'description', LIVE, { editedAt: '2026-11-28T00:00:00.000Z' });
+      return s;
+    };
+    it('the Overview, the History row, the PDF view model and the search row print the DM\'s words; an unedited town is named', async () => {
+      const { OverviewTab } = await import('../../src/components/new/tabs/OverviewTab.jsx');
+      const { buildViewModel } = await import('../../src/pdf/lib/viewModel.js');
+      const { default: DossierSearchResults } = await import('../../src/components/dossier/DossierSearchResults.jsx');
+      const s = typed();
+      expect(isEdited(s.history.currentTensions[0], 'description')).toBe(true);
+      /** @type {Array<[string, string]>} */ const got = [];
+      for (const [name, el] of /** @type {Array<[string, any]>} */ ([
+        ['overview', <OverviewTab settlement={s} narrativeNote={null} />],
+        ['history', <HistoryTab settlement={s} />],
+        ['search', <DossierSearchResults settlement={s} query="hoarding" tabs={[{ id: 'history', label: 'History' }]} onOpenTab={() => {}} />],
+      ])) {
+        render(el);
+        const text = document.body.textContent || '';
+        got.push([name, text.includes(NAMED) ? 'named' : text.includes(LIVE) ? 'typed' : 'none']);
+        cleanup();
+      }
+      const vm = buildViewModel({ settlement: s });
+      for (const [name, ts] of /** @type {Array<[string, any[]]>} */ ([['pdf overview', vm.overview.tensions], ['pdf power', vm.power.tensions], ['pdf history', vm.history.tensions]])) {
+        got.push([name, ts[0]?.description === LIVE ? 'typed' : ts[0]?.description === NAMED ? 'named' : 'none']);
+      }
+      expect(got).toEqual([['overview', 'typed'], ['history', 'typed'], ['search', 'typed'], ['pdf overview', 'typed'], ['pdf power', 'typed'], ['pdf history', 'typed']]);
+      render(<HistoryTab settlement={townWith(LIVE, SAW)} />); // the control: the engine's own sentence, unedited, is named
+      expect(screen.getByText(NAMED)).toBeTruthy();
+    });
   });
   // RULING 122-B-2 (F6, UNIT 2 (a)): THE HELPER AT ITS FOUR OTHER CALL SITES. The independent reader put each call site back to
   // the stored sentence and 0 of 517 cases went red; each case below reds on its own mutant: the Overview tab's tension list
