@@ -46,6 +46,7 @@ const REGISTER = Object.freeze({
   'src/domain/display/galleryWithholdAlways.js :: withholdAlways': { n: 1, verdict: 'veil', why: 'cuts the standing off every served desc on every non-owner read (registry: power.desc)' },
   'src/domain/display/galleryRosterChoices.js :: (module)': { n: 1, verdict: 'veil', why: 'the belt\'s import of the twin\'s cut (212 (38) (e))' },
   'src/domain/display/galleryRosterChoices.js :: withholdPowerCopies': { n: 1, verdict: 'veil', why: 'the belt: a desc whose base, as the cut leaves it, still names a withheld power leaves whole (212 (38) (e))' },
+  'src/domain/display/galleryRosterChoices.js :: withholdStoredNamedDescs': { n: 1, verdict: 'veil', why: 'THE STORED BELT (RULING V27 (1), 212 (38)): a desc naming a stored power no served list names, whose base as the cut leaves it still names one, leaves whole' },
   'src/generators/power/factionStanding.js :: annotateFactionStanding': { n: 1, verdict: 'owner-only', why: 'THE WRITER itself, run at birth only (V15: the ONE reader calls no writer)' },
   'src/generators/power/normalizeAndAnnotateFactions.js :: (module)': { n: 1, verdict: 'owner-only', why: BIRTH_WHY },
   'src/generators/power/normalizeAndAnnotateFactions.js :: normalizeAndAnnotateFactions': { n: 1, verdict: 'owner-only', why: BIRTH_WHY },
