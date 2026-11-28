@@ -1,35 +1,10 @@
-== C records moved 0 innocent slot moves 0 empty before {"header":3,"rung":2,"survival":0} after {"header":3,"rung":0,"survival":0} towns moved 78
-   2 alone rung: EMPTY -> COMFORTABLE#6
-   3 debt header: COMBINATION C3: the middle rungs#1 -> COMBINATION C3: the middle rungs#3
-   20 debt header: COMBINATION C3: the middle rungs#1 -> COMBINATION C3: the middle rungs#4
-   39 debt header: COMBINATION C3: the middle rungs#1 -> COMBINATION C3: the middle rungs#5
-   4 debt header: COMBINATION C3: the middle rungs#3 -> COMBINATION C3: the middle rungs#4
-   6 debt header: COMBINATION C3: the middle rungs#3 -> COMBINATION C3: the middle rungs#5
-   13 debt rung: COMFORTABLE#3 -> COMFORTABLE#5
-   9 debt rung: COMFORTABLE#4 -> COMFORTABLE#5
-   1 debt rung: MODERATE#1 -> MODERATE#2
-   16 debt rung: MODERATE#1 -> MODERATE#5
-   1 debt rung: MODERATE#2 -> MODERATE#5
-   10 debt rung: MODERATE#4 -> MODERATE#5
-   9 debt survival: Economic Survival: STRONG#1 -> Economic Survival: STRONG#2
-   1 debt survival: Economic Survival: STRONG#12 -> Economic Survival: STRONG#14
-   1 debt survival: Economic Survival: STRONG#3 -> Economic Survival: STRONG#14
-   11 debt survival: Economic Survival: STRONG#8 -> Economic Survival: STRONG#2
-== V records moved 0 innocent slot moves 0 empty before {"header":6,"rung":19,"survival":0} after {"header":6,"rung":1,"survival":0} towns moved 56
-   11 alone rung: EMPTY -> COMFORTABLE#6
-   1 debt header: COMBINATION C3: the middle rungs#1 -> COMBINATION C3: the middle rungs#3
-   12 debt header: COMBINATION C3: the middle rungs#1 -> COMBINATION C3: the middle rungs#4
-   17 debt header: COMBINATION C3: the middle rungs#1 -> COMBINATION C3: the middle rungs#5
-   4 debt header: COMBINATION C3: the middle rungs#3 -> COMBINATION C3: the middle rungs#4
-   1 debt header: COMBINATION C3: the middle rungs#3 -> COMBINATION C3: the middle rungs#5
-   3 debt rung: COMFORTABLE#3 -> COMFORTABLE#5
-   1 debt rung: COMFORTABLE#4 -> COMFORTABLE#5
-   6 debt rung: EMPTY -> COMFORTABLE#5
-   1 debt rung: EMPTY -> COMFORTABLE#6
-   1 debt rung: MODERATE#1 -> MODERATE#2
-   8 debt rung: MODERATE#1 -> MODERATE#5
-   1 debt rung: MODERATE#2 -> MODERATE#5
-   6 debt rung: MODERATE#4 -> MODERATE#5
-   9 debt survival: Economic Survival: STRONG#1 -> Economic Survival: STRONG#2
-   4 debt survival: Economic Survival: STRONG#8 -> Economic Survival: STRONG#2
-   1 debt survival: Economic Survival: STRONG#9 -> Economic Survival: STRONG#14
+== C: records moved 0; towns moved: debt 77, nothing laid by alone 89, INNOCENTS 0
+   empty before {"header":3,"rung":2} after {"header":3}
+   per new line: {"COMBINATION C3: the middle rungs#4":24,"COMBINATION C3: the middle rungs#5":45,"MODERATE#5":27,"COMFORTABLE#5":16,"COMFORTABLE#6":97,"Economic Survival: STRONG#14":20}
+   header on a town that owes (C3): {"COMBINATION C3: the middle rungs#5":45,"COMBINATION C3: the middle rungs#4":24,"COMBINATION C3: the middle rungs#3":8}
+   every empty slot now: dp-thorp-129 header (prosperity Poor; alone) | dp-city-5 header (prosperity Poor; neither) | dp-metropolis-65 header (prosperity Poor; neither)
+== V: records moved 0; towns moved: debt 45, nothing laid by alone 38, INNOCENTS 0
+   empty before {"rung":19,"header":6} after {"header":6,"rung":1}
+   per new line: {"COMBINATION C3: the middle rungs#4":16,"COMBINATION C3: the middle rungs#5":18,"MODERATE#5":15,"COMFORTABLE#5":10,"COMFORTABLE#6":39,"Economic Survival: STRONG#14":15}
+   header on a town that owes (C3): {"COMBINATION C3: the middle rungs#4":16,"COMBINATION C3: the middle rungs#5":18,"COMBINATION C3: the middle rungs#3":5}
+   every empty slot now: dp-hamlet-49 header (prosperity Poor; alone) | dp-village-58 rung (prosperity Wealthy; alone) | dp-village-111 header (prosperity Poor; alone) | dp-town-99 header (prosperity Struggling; neither) | dp-city-10 header (prosperity Poor; neither) | dp-city-72 header (prosperity Struggling; neither) | dp-metropolis-65 header (prosperity Poor; neither)

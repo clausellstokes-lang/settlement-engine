@@ -3080,8 +3080,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         {
           "angle": "street",
           "marks": [
-            "nothing laid by",
-            "food: < secure"
+            "nothing laid by"
           ],
           "text": "The town lives comfortably from year to year and keeps nothing back for a bad one.",
           "slots": [],

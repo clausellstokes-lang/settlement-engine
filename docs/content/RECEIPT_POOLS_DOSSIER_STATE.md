@@ -1267,7 +1267,7 @@ contradict** it (R-DST-C).
 3. `[visitor · food: ≥ secure · stores: ≥ 3]` The town is plainly comfortable. The buildings are finished rather than patched, and the stores are more than the season needs.
 4. `[visitor · food: ≥ secure · stores: < 3]` The town is plainly comfortable. Its buildings are well kept, though nobody here keeps more in store than the coming season needs.
 5. `[visitor · place debt]` The town is comfortable to look at, and it owes money all the same.
-6. `[street · nothing laid by · food: < secure]` The town lives comfortably from year to year and keeps nothing back for a bad one.
+6. `[street · nothing laid by]` The town lives comfortably from year to year and keeps nothing back for a bad one.
 
 **PROSPEROUS** — *surplus funds institutions and defenses*
 1. `[ledger · no crisis: indebted]` {settlement} has money to spend, and spends it on the town's buildings and their upkeep.
@@ -3057,8 +3057,8 @@ supplies the ancestry.
 10. `[street · crisis: famine · no place debt]` Hunger has come to the town, but its money has not run out: what food can be bought, it buys.
 11. `[visitor · crisis: famine · no place debt]` Food is dear and hard to find here, but whatever food reaches the town is bought: the money is there for it.
 12. `[street · crisis · no crisis: debt · no crisis: famine · no crisis: occupied · no place debt]` The town went into this trouble with money in hand, and so far the money has held.
-13. `[ledger · crisis: occupied]` {settlement} had money laid by when the occupiers came; what the town earns now goes to them.
-14. `[ledger · crisis · no crisis: debt · place debt]` {settlement} has money in hand, but it is owed elsewhere: a hard season and the debt would have to be met from the same purse.
+13. `[ledger · crisis: occupied · no place debt]` {settlement} had money laid by when the occupiers came; what the town earns now goes to them.
+14. `[ledger · no crisis: indebted · place debt]` {settlement} has money in hand, but it is owed elsewhere: a hard season and the debt would have to be met from the same purse.
 
 **`Economic Survival`: `ADEQUATE`** {colour}
 1. `[ledger]` {settlement} can fund a short crisis. A long one begins eating reserves within a few months, and the reserves are not deep enough to hide that from anybody.

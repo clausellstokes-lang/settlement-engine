@@ -1664,7 +1664,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "crisis: occupied"
+            "crisis: occupied",
+            "no place debt"
           ],
           "text": "{settlement} had money laid by when the occupiers came; what the town earns now goes to them.",
           "slots": [
@@ -1675,8 +1676,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "crisis",
-            "no crisis: debt",
+            "no crisis: indebted",
             "place debt"
           ],
           "text": "{settlement} has money in hand, but it is owed elsewhere: a hard season and the debt would have to be met from the same purse.",

@@ -31,7 +31,7 @@ const CORPORA = [DOSSIER_STATE_PROSE_DEFENSE, DOSSIER_STATE_PROSE_ECONOMY, DOSSI
 const ALLOWED = Object.freeze({
   // SURVEY S-B2: STRONG#3 ("…the trouble is still being paid for from it") now declares `no place debt`, and left this list.
   'DS-DEF-2::Economic Survival: STRONG#14 place debt b': 'SURVEY S-B2\'s line that SAYS the debt beside the money ("has money in hand, but it is owed elsewhere"): it needs `place debt`, the row\'s other side',
-  'DS-DEF-2::Economic Survival: STRONG#13 place debt b': 'past tense ("had money laid by when the occupiers came"): a sequence (E-clashes row 9, TENSE); S-D\'s',
+  // SURVEY S-B2 (the chair's ruling S-B-2): STRONG#13 now declares `no place debt` too, and left this list.
   'DS-GEN-3::prosperity: Poverty / Impoverished#2 place debt b': '"pays its way only by doing without": the money family\'s residue, S-D\'s (RULING S-B-1: DS-GEN\'s lines to S-D); declaring it would move pages',
   'DS-GEN-3::prosperity: Moderate / Modest#1 place debt b': '"pays its way and keeps little over": S-D\'s (RULING S-B-1); declaring it would move pages',
   'DS-GEN-11::viable: true: the arithmetic closes#3 place debt b': '"The town works, and pays its way.": S-D\'s (RULING S-B-1); declaring it would move pages',
