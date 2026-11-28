@@ -800,7 +800,7 @@ See section 4, newest last.
 - NEXT: the reader's report (it takes point 123's tip from origin: now d8d05d4cc); then the two rows, the red list's new
   row, the line's push, CI by name. THE SECOND WAVE of the survey after the first wave's "TIP?"s.
 
-## V28 (04:00 UTC on 2026-11-28): RENAME-MEASURE DONE (6f32e6ca0; filed: `rename/`); **E26: POINT 124, "A RENAME KEEPS THE PAGE", RULED FOR THIS RELEASE**; THE READER's EARLY NOTE: TWO VEIL FACTS (A20 to the lane; A21 cured in point 122 by ruling 122-T-5, in work)
+## V28 (03:53 UTC on 2026-11-28): RENAME-MEASURE DONE (6f32e6ca0; filed: `rename/`); **E26: POINT 124, "A RENAME KEEPS THE PAGE", RULED FOR THIS RELEASE**; THE READER's EARLY NOTE: TWO VEIL FACTS (A20 to the lane; A21 cured in point 122 by ruling 122-T-5, in work)
 - RENAME-MEASURE (on cccda7569; 33 view-time picks, 30 print; 24 keyed on a NAME): a town's rename re-deals 300 of 300 pages
   (Daily Life every time); a person's 39 and 36; a house's 298 and 279 and a power's 179 and 175 (THE NAME IS READ AS THE
   KIND); an imported copy re-deals 10 of 10 (`_seed` is dropped by the JSON import, the share and the gallery import; `id`
