@@ -11,3 +11,12 @@
 - Trial 3 births: 8 s mean (thorp 8 s first-run, village 3 s, metropolis 13 s); 100-130 unique refusals a page; 0 hook errors.
 - Corpus run: runboth.sh (C then V, chunks of 75, niced, one process at a time), log /tmp/survey/run.log.
 - (G) method: a TypeScript-AST sweep of every string literal and JSX text under src (comments are not read) for coher|contradict|consistent|self-check|trust|accurate|reconcil (411 hits; most are town prose: "trust" between people, import "reconcile" UI); kept only the lines where the PRODUCT speaks about the page or the engine; plus the landing copy read whole (src/copy/landing.js, src/copy/en.js hero), the About ("trust") and Bounty pages read whole, the page's own self-check pool DS-GEN-11 (all 22 vids, incl. THE FIRST-SURVEY QUALIFICATION, which already frames the page as a survey: "This town has been described once; nobody has been back to check."), the verdict badge, the PDF's Viability front lines. The PDF Cover carries no promise line ("AI NARRATIVE EDITION", "Free preview…"). docs/content holds only receipt/census docs (no user copy). 80 rows.
+- 22:5x first D reading on C's first 300 pages (thorp, hamlet): 30,750 unique refusals (median 102 a page); 3 with an UNKNOWN atom (prosperity: ≥ prosperous, troubleHooks outside_debt); every other refusal is an atom the record ANSWERS. The charter's fail-open would lift 3 of 30,750 there.
+
+## C corpus complete (900 pages, 2026-11-27 23:59 UTC), CONFIRMED by script (an/d.mjs, an/e-ledger.mjs)
+- refusals (unique per page/phase key): 80,839; per page median 91 (47..140).
+- primary bucket: noun-answered 46,875; both-answered 20,007; state-answered 7,564; judgment-answered 5,067; held 1,048; other-answered 255; judgment-unknown 23.
+- by door: filter 57,419; draw 14,302; kswap 7,674; direct 1,362; kempty 82.
+- ANY unknown atom: 23 refusals, 23 pages, ONE pool (`troubleHooks:TROUBLE_HOOKS:outside_debt`, "A wealthy household offers to pay the debt itself…", needs `prosperity: ≥ prosperous`, drawn at birth before prosperity is written). Fail-open on JUDGMENT unknown lifts 23; on JUDGMENT-or-BOTH unknown also 23.
+- the 23 read against the page's printed prosperity (an/dsample.mjs; Economics field 1): 19 below prosperous (refusal TRUE), 4 at Prosperous (dp-thorp-17, dp-village-21, dp-village-27, dp-town-16: refusal FALSE). The line printed on none of the 23 (its sibling hooks filled the three).
+- declared-excludes clashes (ledger): `guild` 4 pages, `crisis: under_siege` 6 pages (owner = share).
