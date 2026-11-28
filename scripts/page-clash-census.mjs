@@ -126,7 +126,10 @@ if (isMain) {
     console.log(`page-clash-census --sample: ${drift.length ? 'DIFFERS from the register' : 'equals the register'} (${((Date.now() - t0) / 1000).toFixed(0)} s)`);
     process.exit(drift.length ? 1 : 0);
   }
-  writeFileSync(join(out, 'counts.json'), JSON.stringify({ pages: read.length, counts, sample }, null, 1));
+  // WHAT IT COULD NOT READ, in numbers: the notes standing on an atom whose text the census never had, counted as printed
+  const notes = read.reduce((n, r) => n + (r.notes || 0), 0); const unconfirmed = read.reduce((n, r) => n + (r.unconfirmedNotes || 0), 0);
+  console.log(`page-clash-census: ${notes} notes stand on an atom over ${read.length} pages; ${unconfirmed} of them (${notes ? ((100 * unconfirmed) / notes).toFixed(1) : 0} %) could not be confirmed printed and are counted as printed`);
+  writeFileSync(join(out, 'counts.json'), JSON.stringify({ pages: read.length, counts, sample, notes, unconfirmed }, null, 1));
   if (rose.length) { console.log(`page-clash-census: ROSE on ${rose.join(', ')}: the register is shrink-only${write ? '; nothing written' : ''}`); process.exit(1); }
   if (write) {
     const rows = Object.fromEntries(registerRowIds(CLAIM_EXCLUSIONS).map((id) => [id, counts[id] || { pages: 0, C: 0, V: 0, unconfirmed: 0, towns: [] }]));

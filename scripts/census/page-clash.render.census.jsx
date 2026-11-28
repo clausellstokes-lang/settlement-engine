@@ -127,6 +127,6 @@ for (const row of PLAN) {
     const noted = noteClaims([...birth, ...stamp, ...owner], pageText, TEXTS, V);
     const clashes = pageClashes(CLAIM_EXCLUSIONS, noted, (atom) => V.atomHolds(atom.replace(/^no\s+/i, ''), facts) === undefined ? undefined
       : /^no\s+/i.test(atom) ? !V.atomHolds(atom.replace(/^no\s+/i, ''), facts) : V.atomHolds(atom, facts), V);
-    writeFileSync(`${OUT}/${row.corpus}-${row.seed}.json`, JSON.stringify({ corpus: row.corpus, seed: row.seed, size: row.size, recordHash, pageHash: sha(views), notes: noted.length, clashes, empty }));
+    writeFileSync(`${OUT}/${row.corpus}-${row.seed}.json`, JSON.stringify({ corpus: row.corpus, seed: row.seed, size: row.size, recordHash, pageHash: sha(views), notes: noted.length, unconfirmedNotes: noted.filter((n) => !n.confirmed).length, clashes, empty }));
   }, 600000);
 }
