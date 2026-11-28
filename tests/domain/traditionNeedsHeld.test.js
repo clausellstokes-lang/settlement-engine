@@ -25,6 +25,7 @@ import { traditionFloorOf } from '../../src/domain/traditions/traditionFloor.js'
 import { TRADITION_ELEMENTS, TRADITION_ACTS } from '../../src/data/traditionCorpus.js';
 import { applyVeil, CARD_KINDS, curateModelFor, resolveVeil } from '../../src/domain/display/galleryVeil.js';
 import { toPublicSafe } from '../../src/domain/display/publicSafe.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const SIZES = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
 /** The seeds that drop at least one drawn row on the base (B-count's keys). */
@@ -77,19 +78,25 @@ describe('RULING 122-T: a 0.10.0 birth draws only what the place holds', () => {
   });
 
   test('(i) at 0.10.0 every drawn rite is one the place holds, so the shown set is the drawn set', () => {
-    for (const [seed, town] of born) {
+    const failures = collectSeedFailures([...born.keys()], (seed) => {
+      const town = born.get(seed);
       const t = stamped(town, '0.10.0');
       expect(unheld(t).map((r) => `${r.name} [${motifNeeds(r).join(', ')}]`), seed).toEqual([]);
       expect(shownTraditionsOf(t, []).recs.map((r) => r.id), seed).toEqual(deriveFoundingTraditions(t).map((r) => r.id));
-    }
+    });
+    expectNoSeedFailures(failures, 'a 0.10.0 birth drew a rite the place does not hold, or showed other than it drew');
   });
 
   test('(ii) at 0.10.0 no town of the list shows no tradition', () => {
-    for (const [seed, town] of born) expect(shownTraditionsOf(stamped(town, '0.10.0'), []).recs.length, seed).toBeGreaterThan(0);
+    const failures = collectSeedFailures([...born.keys()], (seed) => {
+      const town = born.get(seed);
+      expect(shownTraditionsOf(stamped(town, '0.10.0'), []).recs.length, seed).toBeGreaterThan(0);
+    });
+    expectNoSeedFailures(failures, 'a 0.10.0 town showed no tradition');
   });
 
   test('(iii) re-stamped 0.9.0, or with no stamp, the old draw stands: it still holds a rite the place lacks', () => {
-    for (const seed of OLD_DROPPERS) {
+    const failures = collectSeedFailures(OLD_DROPPERS, (seed) => {
       for (const stamp of ['0.9.0', null]) {
         const t = stamped(born.get(seed), stamp);
         expect(unheld(t).length, `${seed} at ${stamp ?? 'no stamp'}`).toBeGreaterThan(0);
@@ -97,20 +104,24 @@ describe('RULING 122-T: a 0.10.0 birth draws only what the place holds', () => {
       }
       expect(JSON.stringify(deriveFoundingTraditions(stamped(born.get(seed), null))), seed)
         .toBe(JSON.stringify(deriveFoundingTraditions(stamped(born.get(seed), '0.9.0'))));
-    }
+    });
+    expectNoSeedFailures(failures, 'an old-stamped dropper lost its old draw or the tab\'s drop');
   });
 
   test('(iv) the founding rite: no fair in a place with no market at 0.10.0', () => {
-    for (const seed of FOUNDING_FAIRS) {
+    const premiseFailures = collectSeedFailures(FOUNDING_FAIRS, (seed) => {
       const town = born.get(seed);
       expect(factsOf(town).market, `${seed}: the premise, no market`).toBe(false);
       expect(deriveFoundingTraditions(stamped(town, '0.9.0'))[0].name, `${seed}: the old founding row`).toBe('The Founding Fair');
-    }
-    for (const [seed, town] of born) {
-      if (factsOf(town).market === true) continue;
+    });
+    expectNoSeedFailures(premiseFailures, 'a founding-fair premise seed has a market or another old founding row');
+    const failures = collectSeedFailures([...born.keys()], (seed) => {
+      const town = born.get(seed);
+      if (factsOf(town).market === true) return;
       const fairs = deriveFoundingTraditions(stamped(town, '0.10.0')).filter((r) => r.coreMotif.act === 'fair').map((r) => r.name);
       expect(fairs, seed).toEqual([]);
-    }
+    });
+    expectNoSeedFailures(failures, 'a 0.10.0 town with no market drew a fair');
   });
 });
 
@@ -145,7 +156,8 @@ describe('RULING 122-T-2: the floor the draw asks is the same under every veil',
   test('every declared atom answers at the floor as unveiled, each address alone and all at once', () => {
     expect(ATOMS, 'the atoms the corpus declares').toEqual(expect.arrayContaining(['market', 'institution: smith', 'navigable', 'river', 'coast']));
     let runs = 0; let houseHides = 0;
-    for (const [seed, town] of born) {
+    const failures = collectSeedFailures([...born.keys()], (seed) => {
+      const town = born.get(seed);
       const base = answers(town);
       const all = addressesOf(town);
       for (const a of all) {
@@ -154,7 +166,8 @@ describe('RULING 122-T-2: the floor the draw asks is the same under every veil',
         expect(answers(applyVeil(town, new Set([a]))), `${seed}: ${a}`).toEqual(base);
       }
       expect(answers(applyVeil(town, resolveVeil(null, all.map((address) => ({ address, hidden: true }))))), `${seed}: all at once`).toEqual(base);
-    }
+    });
+    expectNoSeedFailures(failures, 'a veil moved an atom\'s answer at the floor');
     expect(houseHides, 'anchored: every house of every town was hidden in turn').toBeGreaterThan(born.size);
     expect(runs).toBeGreaterThan(houseHides);
   }, 600000);
