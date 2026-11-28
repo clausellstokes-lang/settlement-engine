@@ -1,0 +1,9 @@
+file:///home/user/settlement-engine/scripts/wiring-census.mjs:1576
+    if (!verdict.ok) throw new Error(verdict.detail);
+                           ^
+
+Error: docs/content/wiring-census.json is stale; run `node scripts/wiring-census.mjs`.
+    at main (file:///home/user/settlement-engine/scripts/wiring-census.mjs:1576:28)
+    at async file:///home/user/settlement-engine/scripts/wiring-census.mjs:1586:71
+
+Node.js v22.23.5
