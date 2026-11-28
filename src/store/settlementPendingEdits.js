@@ -26,7 +26,7 @@ import {
 import { applyEditOp } from './settlementPendingEditWriters.js';
 import { getEffectiveValue, isEditablePath } from '../domain/userEdits.js';
 import { resolveFactionForRename } from '../domain/factionRename.js';
-import { _resolveEntity } from './settlementSliceHelpers.js';
+import { _resolveEntity } from './settlementSliceHelpers.js'; import { renameTownInRecord } from '../domain/townRename.js'; // point 124 K2
 
 const RECEIPT_LIMIT = 100;
 const WORLD_NPC_KINDS = new Set(['ransom-npc', 'rescue-npc', 'champion-npc', 'recall-npc']);
@@ -345,7 +345,7 @@ async function applyRename(get, set, intent) {
     get().renameSettlement?.(saveId, payload.newName);
   } else {
     set((state) => {
-      if (state.settlement) state.settlement.name = payload.newName;
+      if (state.settlement) state.settlement = renameTownInRecord(state.settlement, state.settlement.name, payload.newName); // K2: the stored sentences follow
     });
   }
   return get().settlement?.name === payload.newName

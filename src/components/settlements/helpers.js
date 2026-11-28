@@ -3,7 +3,7 @@ import {
   applyNpcRenameToPartner,
   factionRenameChanges,
   npcRenameChanges,
-} from '../../domain/factionRename.js';
+} from '../../domain/factionRename.js'; import { renameTownInRecord } from '../../domain/townRename.js'; // point 124 K2
 
 // ── Save migration ─────────────────────────────────────────────────────────
 // MG-3f (leak L8): the magicExists inference used to be spelled here, in
@@ -173,9 +173,9 @@ export function renameDetailSettlement(detail, newName) {
   if (!detail || !trimmed) return detail;
   return {
     ...detail,
-    settlement: { ...(detail.settlement || {}), name: trimmed },
+    settlement: renameTownInRecord(detail.settlement || {}, detail.settlement?.name, trimmed), // point 124 K2: the stored sentences follow
     saveData: detail.saveData
-      ? { ...detail.saveData, name: trimmed, settlement: { ...(detail.saveData.settlement || {}), name: trimmed } }
+      ? { ...detail.saveData, name: trimmed, settlement: renameTownInRecord(detail.saveData.settlement || {}, detail.saveData.settlement?.name, trimmed) }
       : detail.saveData,
   };
 }

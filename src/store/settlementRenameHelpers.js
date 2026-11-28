@@ -42,7 +42,7 @@
  * They hold no store state: each takes the slice's `get`/`set` pair. The module
  * never imports settlementSlice, so there is no cycle.
  */
-import { cloneJson, persistSaveUpdate } from './settlementSliceHelpers.js';
+import { cloneJson, persistSaveUpdate } from './settlementSliceHelpers.js'; import { renameTownInRecord } from '../domain/townRename.js'; // point 124 K2
 
 // NO STATIC IMPORT OF ../domain/factionRename.js — see the FIRST-PAINT note on
 // renameFactionImpl. This module is reached from the EAGER settlementSlice, so a
@@ -117,7 +117,7 @@ export function renameSettlementImpl(get, set, id, newName) {
     }
 
     if (save) {
-      const nextSettlement = { ...(save.settlement || {}), name: trimmed };
+      const nextSettlement = renameTownInRecord(save.settlement || {}, save.settlement?.name || oldName, trimmed); // K2: the stored sentences follow
       const campaignState = isCanon
         ? { ...currentCampaignState, phase: currentCampaignState.phase || 'canon', eventLog, editedAt: now }
         : save.campaignState;
@@ -140,7 +140,7 @@ export function renameSettlementImpl(get, set, id, newName) {
     }
 
     if (isActive && state.settlement) {
-      state.settlement = { ...state.settlement, name: trimmed };
+      state.settlement = renameTownInRecord(state.settlement, state.settlement.name || oldName, trimmed);
       if (isCanon) {
         state.eventLog = eventLog;
         state.editedAt = now;
