@@ -340,6 +340,17 @@ describe('HistoryTab — the scarcity tension names the good the record holds sh
       expectAbsentWithAnchor(document.body.textContent || '', stored, named, 'a good the stores do not hold is named');
     });
   });
+  // RULING 122-B-2 (F1's cold read, UNIT 4): a good whose record label holds a slash ("gold/silver ore", V dp-town-16,
+  // dp-city-58, dp-city-90) is named in prose form inside the sentence: "gold or silver ore". The record keeps its label.
+  it('a slash label is named in prose: "gold/silver ore" prints as "gold or silver ore"', () => {
+    const MINT = { critical: ['gold/silver ore'], reasons: { 'gold/silver ore': 'Required by Mint but not available in Plains terrain' } };
+    const s = townWith(LIVE, MINT);
+    render(<HistoryTab settlement={s} />);
+    const named = 'A critical resource, gold or silver ore, is running short, and some are hoarding it while others cannot pay the prices asked';
+    expect(screen.getByText(named)).toBeTruthy();
+    expectAbsentWithAnchor(document.body.textContent || '', 'gold/silver ore', named, 'no slash inside the sentence');
+    expect(s.resourceAnalysis.imports.critical).toEqual(['gold/silver ore']);
+  });
   // RULING 122-B-2 (F6, UNIT 2 (a)): THE HELPER AT ITS FOUR OTHER CALL SITES. The independent reader put each call site back to
   // the stored sentence and 0 of 517 cases went red; each case below reds on its own mutant: the Overview tab's tension list
   // (OverviewTab.jsx), the PDF view model's three slices (viewModel.js :: overviewSlice, powerSlice, historySlice), the search
