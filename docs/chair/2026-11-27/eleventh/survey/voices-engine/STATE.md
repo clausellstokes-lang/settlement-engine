@@ -13,4 +13,5 @@
 - AFTER THE TIP (the chair accepted 56cb9876c; the independent reader reads 96cb62121; these are the delta on top):
   G1-7 (786f7b26e) the Tonight sheet holds no quote in print; G1-5 (ae7b4d01e) the PDF worker carries no lines (+1,334 B
   against 003fd3b07; the first paint within a few bytes of the base); G1-6 SAMENESS.md (measuring only).
-- NEXT: C and V PDF counts again (vm/chain7), MEASURE.md, then a short "TIP?" (at most 150 words).
+- MEASURED after the tip (MEASURE.md): PDF 3,237 · 3,156 quotes, 0 differing (the crisis quotes are gone from print).
+- NEXT: the short "TIP?" has been sent; wait for the chair and the reader.

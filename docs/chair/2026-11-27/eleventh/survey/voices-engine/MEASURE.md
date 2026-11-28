@@ -96,3 +96,26 @@ seven towns (CONFIRMED there; PLAUSIBLE across the corpora).
 The lines never reach the first paint (`tests/build/voicesLinesLazy.test.js`). `VERIFY_DIST=1 vendorPdfLazy` shows the
 same four reds on the base and the tip: the three first-paint budgets and the engine-chunk arm. `npm run build` exits 0;
 `VERIFY_DIST=1 bootSmoke`: 9 passed, 2 skipped.
+
+## AFTER THE TIP: G1-7 AND G1-5 (dbf90ddb2; C and V re-rendered 10:43-11:48 UTC, the PDF walked AS THE EXPORT BUILDS IT)
+The PDF is now walked on the normalised record, with the quotes built on the caller's thread (`printedQuotesOf`) and handed
+to the chapters. Each printed quote is checked against the screen plan's quote for that card: its text and its signature.
+| | C | V |
+|---|---|---|
+| PDF quotes | 3,237 (was 3,421) | 3,156 (was 3,344) |
+| differing from the screen's | 0 | 0 |
+| the fall, in crisis quotes | 184 | 188 |
+| session quotes, differing | 703, 0 | 742, 0 |
+| errors; RECORDS MOVED; lines outside the quotes moved; share quotes | 0; 0; 0; 0 | 0; 0; 0; 0 |
+Each fall is exactly that corpus's crisis cards that won a quote: G1-7, the Tonight sheet holds none in print. The
+crisis card's quote lives on the screen's Summary/Crisis card, so by design the print carries fewer.
+
+THE SIZES (a build at ae7b4d01e's code, 10:41 UTC, against 003fd3b07):
+| | base | tip | difference |
+|---|---|---|---|
+| PDF render worker | 3,150,639 | 3,151,973 | +1,334 (was +105,951: the worker carries no line) |
+| first paint, raw / gzip / Brotli | 1,196,447 / 381,473 / 320,262 | 1,196,443 / 381,453 / 320,264 | -4 / -20 / +2 |
+| generation worker | 2,744,088 | 2,744,088 | 0 |
+| engine chunk | 937,247 | 937,247 | 0 |
+`npm run build` exits 0; `VERIFY_DIST=1 bootSmoke`: 9 passed, 2 skipped; `VERIFY_DIST=1 vendorPdfLazy` shows the base's
+four reds.
