@@ -36,6 +36,7 @@ import { waterAccessKind } from '../tradeRouteSemantics.js';
 import { bornAtOrAfter } from '../settlement.schema.js'; // B1(ii) (G64 (3), G72 (1)): the floor reader of the engine's stamp
 import { factsOf } from '../facts/factsOf.js'; // B1(ii): farmland on the roster, through its atom's own reader
 import { atomHolds } from '../facts/factVocabulary.js'; // B1(ii)
+import { traditionFloorOf } from './traditionFloor.js'; // RULING 122-T-2: the needs are asked of the floor
 import { evil01, chaos01 } from '../worldPulse/deityAxes.js';
 import { seasonForTick } from '../worldPulse/worldState.js';
 import { popToTier, TIER_ORDER } from '../../data/constants.js';
@@ -398,11 +399,12 @@ export function deriveFoundingTraditions(settlement) {
   const refusesFieldRite = fieldRiteRefused(settlement); // B1(ii) (G64): false for a record an earlier engine bore
   // THE DRAW KNOWS THE NEEDS (NEEDS_SINCE). A motif whose element or act declares a fact (`needs`, the corpus; the
   // tab's own rule, shownTraditions.js :: motifNeeds) the record does not hold is not taken; the next attempt's draw is.
+  // ASKED OF THE FLOOR (RULING 122-T-2, traditionFloor.js), for every audience: no veil state can move the drawn set.
   const askNeeds = bornAtOrAfter(settlement, NEEDS_SINCE);
   /** @type {any} */ let factsMemo = null;
   /** @param {TraditionElement} e @param {TraditionAct} a @returns {boolean} the place holds every fact the motif declares */
   const heldBy = (e, a) => !askNeeds || [...(e.needs || []), ...(a.needs || [])]
-    .every((x) => atomHolds(x, (factsMemo ||= /** @type {Parameters<typeof atomHolds>[1]} */ (factsOf(/** @type {Parameters<typeof factsOf>[0]} */ (settlement))))) === true);
+    .every((x) => atomHolds(x, (factsMemo ||= /** @type {Parameters<typeof atomHolds>[1]} */ (factsOf(/** @type {Parameters<typeof factsOf>[0]} */ (traditionFloorOf(settlement)))))) === true);
   const usedNames = new Set();
   const usedMotifs = new Set();
   /** @type {TraditionRec[]} */

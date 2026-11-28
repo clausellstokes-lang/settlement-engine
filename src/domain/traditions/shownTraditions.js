@@ -24,9 +24,8 @@
  */
 import { deriveFoundingTraditions, describeTraditionWindow } from './genesis.js';
 import { mergeCustomFoundingTraditions } from './customFounding.js';
-import { describeTraditions, withoutFunction } from './traditionDescription.js';
-import { liveInstitutions } from '../institutions/institutionRoster.js';
-import { isHideableHouse } from '../people/cardVeil.js';
+import { describeTraditions } from './traditionDescription.js';
+import { traditionFloorOf } from './traditionFloor.js';
 import { TRADITION_ELEMENTS, TRADITION_ACTS } from '../../data/traditionCorpus.js';
 import { filterDeclared } from '../facts/drawDeclared.js';
 import { factsOf } from '../facts/factsOf.js';
@@ -144,14 +143,7 @@ export function calendarLineOf(rec, sameWindowAs) {
  * @param {AnyRec|null|undefined} settlement the owner's record @returns {AnyRec[]}
  */
 function drawnSetOf(settlement) {
-  const floor = settlement && typeof settlement === 'object'
-    ? {
-      ...settlement,
-      institutions: liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (settlement))
-        .filter((i) => !isHideableHouse(/** @type {Record<string, unknown>} */ (i))).map(withoutFunction),
-    }
-    : settlement;
-  return shownOver(settlement, [], floor).recs;
+  return shownOver(settlement, [], traditionFloorOf(settlement)).recs; // the floor: traditionFloor.js (RULING 122-T-2)
 }
 
 /**
