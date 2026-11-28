@@ -11,5 +11,5 @@
 - PROVEN at d54b266ab: presumptionClasses 16/16 (no voice hit), presumedThings 43/43, stablePickIds 37/37, voicesLines
   10/10, voicePlan 20/20, cardWordsMore 13/13, voicesIneligible, component, PDF, share and build tests, both typechecks.
 - NOT MINE (red on 003fd3b07): proseCorpusBytes, proseComposed.
-- NEXT: C and V measured at d54b266ab (vm/chain9); SAMENESS.md again (top share by pool); the twelve towns; a real build
-  with the sizes; bootSmoke; then "TIP?".
+- MEASURED at d54b266ab: MEASURE.md (all zeros held), SAMENESS.md (8-line pools median 8.8% · 8.4%), TEN-TOWNS.md, sizes.
+- NEXT: the "TIP?" has been sent; the independent reader reads the delta.

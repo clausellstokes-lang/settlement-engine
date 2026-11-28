@@ -119,3 +119,87 @@ THE SIZES (a build at ae7b4d01e's code, 10:41 UTC, against 003fd3b07):
 | engine chunk | 937,247 | 937,247 | 0 |
 `npm run build` exits 0; `VERIFY_DIST=1 bootSmoke`: 9 passed, 2 skipped; `VERIFY_DIST=1 vendorPdfLazy` shows the base's
 four reds.
+
+## AFTER G1-8 AND G1-9: THE SECOND LINES (d54b266ab; C 14:33-15:06, V 15:06-15:44 UTC)
+The lines are 310 said and 53 liar, with none ineligible, and the card answers the second writers' words. The tables are
+the script's, whole.
+## C: 900 towns rendered on the voices tree, 900 on the base
+errors: 0
+
+| quotes (mean/max) | thorp | hamlet | village | town | city | metropolis |
+|---|---|---|---|---|---|---|
+| a page | 1.07/2 | 1.83/6 | 4.04/9 | 7.22/13 | 8.77/13 | 8.99/14 |
+| crisis | 0.17/1 | 0.17/2 | 0.24/1 | 0.29/2 | 0.25/2 | 0.23/1 |
+| institutions | 0.15/1 | 0.51/3 | 0.79/3 | 1.37/3 | 2.01/3 | 2.20/3 |
+| power | 0.41/1 | 0.41/2 | 0.99/3 | 1.59/3 | 1.88/3 | 1.81/3 |
+| npcs | 0.12/1 | 0.33/3 | 0.94/3 | 2.16/3 | 2.22/3 | 2.19/3 |
+| traditions | 0.17/2 | 0.25/2 | 0.65/2 | 1.13/3 | 1.46/3 | 1.57/3 |
+| history | 0.07/1 | 0.15/1 | 0.43/2 | 0.69/2 | 0.95/3 | 0.99/3 |
+| tabs over the cap of 3 | 0 | 0 | 0 | 0 | 0 | 0 |
+| a person twice on a page | 0 | 0 | 0 | 0 | 0 | 0 |
+| a line twice on a page | 0 | 0 | 0 | 0 | 0 | 0 |
+| towns with no quote | 0 | 0 | 0 | 0 | 0 | 0 |
+| towns the floor (ruling 6) gave their one quote | 24 | 22 | 0 | 0 | 0 | 0 |
+| towns with the liar quoted | 0 | 0 | 1 | 46 | 123 | 148 |
+| two quotes of one temper on a tab | 0 | 4 | 28 | 87 | 101 | 128 |
+
+| cards (sum over the corpus) | won a quote | silent: no lawful speaker | silent: no line | capped | not drawn | silent by kind or state |
+|---|---|---|---|---|---|---|
+| crisis | 201 | 0 | 0 | 0 | 96 | 0 |
+| institution | 1053 | 302 | 6 | 134 | 28800 | 4112 |
+| power | 1063 | 43 | 0 | 37 | 2282 | 45 |
+| person | 1194 | 285 | 7 | 164 | 24121 | 1620 |
+| tradition | 784 | 49 | 0 | 12 | 1922 | 0 |
+| tension | 493 | 61 | 0 | 0 | 988 | 0 |
+
+surfaces: screen quotes not in the plan 0; plan quotes not seen on the walked owner's screen 0; PDF quotes 3226, differing from the screen's 0, chapter errors 0; session quotes 698, differing 0; quotes on the SHARED page 0
+
+against the base (900 towns): RECORDS MOVED 0; owner views whose lines OUTSIDE the quotes moved 0 (0 lines); shared views moved 0
+
+## V: 900 towns rendered on the voices tree, 900 on the base
+errors: 0
+
+| quotes (mean/max) | thorp | hamlet | village | town | city | metropolis |
+|---|---|---|---|---|---|---|
+| a page | 1.05/2 | 1.63/5 | 3.88/8 | 6.75/13 | 8.33/14 | 8.90/14 |
+| crisis | 0.21/1 | 0.17/2 | 0.19/2 | 0.29/2 | 0.23/2 | 0.23/1 |
+| institutions | 0.16/1 | 0.43/2 | 0.68/3 | 1.33/3 | 1.91/3 | 2.11/3 |
+| power | 0.33/1 | 0.32/2 | 0.89/3 | 1.35/3 | 1.79/3 | 1.77/3 |
+| npcs | 0.06/1 | 0.34/2 | 1.16/3 | 2.11/3 | 2.21/3 | 2.27/3 |
+| traditions | 0.24/1 | 0.25/2 | 0.55/2 | 1.07/3 | 1.29/3 | 1.58/3 |
+| history | 0.05/1 | 0.11/1 | 0.40/2 | 0.59/2 | 0.89/3 | 0.95/3 |
+| tabs over the cap of 3 | 0 | 0 | 0 | 0 | 0 | 0 |
+| a person twice on a page | 0 | 0 | 0 | 0 | 0 | 0 |
+| a line twice on a page | 0 | 0 | 0 | 0 | 0 | 0 |
+| towns with no quote | 0 | 0 | 0 | 0 | 0 | 0 |
+| towns the floor (ruling 6) gave their one quote | 47 | 20 | 2 | 0 | 0 | 0 |
+| towns with the liar quoted | 0 | 4 | 1 | 36 | 104 | 104 |
+| two quotes of one temper on a tab | 0 | 4 | 36 | 92 | 94 | 119 |
+
+| cards (sum over the corpus) | won a quote | silent: no lawful speaker | silent: no line | capped | not drawn | silent by kind or state |
+|---|---|---|---|---|---|---|
+| crisis | 197 | 0 | 0 | 0 | 100 | 0 |
+| institution | 994 | 318 | 6 | 95 | 27523 | 4163 |
+| power | 969 | 62 | 0 | 27 | 1943 | 207 |
+| person | 1224 | 250 | 7 | 166 | 22853 | 1718 |
+| tradition | 747 | 40 | 0 | 13 | 1967 | 0 |
+| tension | 449 | 63 | 0 | 0 | 1018 | 0 |
+
+surfaces: screen quotes not in the plan 0; plan quotes not seen on the walked owner's screen 0; PDF quotes 3145, differing from the screen's 0, chapter errors 0; session quotes 737, differing 0; quotes on the SHARED page 0
+
+against the base (900 towns): RECORDS MOVED 0; owner views whose lines OUTSIDE the quotes moved 0 (0 lines); shared views moved 0
+
+AGAINST THE LAST TIP (7dad3b372): quotes a page and a tab hardly move (C 4,786 → 4,788 quotes in all; the caps are the
+tuning's, untouched). The floor's towns go from C 25 · 23 to 24 · 22, and from V 47 · 21 · 2 to 47 · 20 · 2. The liar towns
+stand at C 318 and V 249. PDF quotes are C 3,237 → 3,226 and V 3,156 → 3,145, with 0 differing. Sameness: SAMENESS.md.
+
+THE SIZES (a build of d54b266ab's code, 15:47 UTC, against 003fd3b07):
+| | base | tip | difference |
+|---|---|---|---|
+| first paint, raw / gzip / Brotli | 1,196,447 / 381,473 / 320,262 | 1,196,443 / 381,457 / 320,364 | -4 / -16 / +102 |
+| generation worker | 2,744,088 | 2,744,088 | 0 |
+| engine chunk | 937,247 | 937,247 | 0 |
+| PDF render worker | 3,150,639 | 3,151,973 | +1,334 (unchanged since G1-5: no line) |
+| the lazy data chunk (the lines ride it, with the tab) | 2,028,350 | 2,154,274 | +125,924 |
+`npm run build` exits 0; `VERIFY_DIST=1 bootSmoke`: 9 passed, 2 skipped; `voicesLinesLazy` passes 4/4 (the first paint
+carries no line); `VERIFY_DIST=1 vendorPdfLazy` shows the base's four reds.
