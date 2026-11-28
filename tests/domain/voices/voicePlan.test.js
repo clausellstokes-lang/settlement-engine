@@ -22,7 +22,7 @@ import { factsOf } from '../../../src/domain/facts/factsOf.js';
 
 /** C's plan rows (`rmeasure/tools/plan-C.json`: the config is the tier alone). */
 const TOWNS = Object.freeze([
-  ['dp-thorp-3', 'thorp'], ['dp-hamlet-85', 'hamlet'], ['dp-hamlet-12', 'hamlet'], ['dp-village-5', 'village'], ['dp-town-40', 'town'], ['dp-city-59', 'city'],
+  ['dp-thorp-3', 'thorp'], ['dp-hamlet-85', 'hamlet'], ['dp-hamlet-12', 'hamlet'], ['dp-thorp-52', 'thorp'], ['dp-village-5', 'village'], ['dp-town-40', 'town'], ['dp-city-59', 'city'],
 ]);
 /** @type {Map<string, Record<string, any>>} */ const born = new Map();
 
@@ -59,7 +59,7 @@ describe('the plan is pure, seeded, and keyed on the town', () => {
     expect(dealt, 'another id deals another page').toBeGreaterThan(0);
   });
 
-  it('quotes something on every town of the six, and finds each card\'s quote by its kind and id', () => {
+  it('quotes something on every town of the seven, and finds each card\'s quote by its kind and id', () => {
     for (const { seed, plan } of plans()) {
       expect(plan.quotes.size, seed).toBeGreaterThan(0);
       for (const q of plan.quotes.values()) expect(quoteFor(plan, q.kind, q.id)).toBe(q);
@@ -155,10 +155,13 @@ describe('a house\'s keeper lines', () => {
   });
 
   it('leave no one-person place silent because its one person was spent on a card with no line for them', () => {
+    let seen = 0;
     for (const { seed, s, plan } of plans()) {
-      if (s.npcs.length !== 1) continue;
-      expect([...plan.outcome.values()].filter((o) => o === 'no-line'), seed).toEqual([]);
+      if (s.npcs.filter((n) => isLawfulSpeaker(n)).length !== 1) continue;
+      seen += 1;
+      expect(plan.quotes.size, seed).toBe(1);
     }
+    expect(seen).toBeGreaterThan(0);
   });
 });
 

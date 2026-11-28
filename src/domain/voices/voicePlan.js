@@ -79,7 +79,8 @@ export const OWNER_AUDIENCE = 'owner';
  * @property {Map<string, Quote>} quotes by `<kind>:<id>`
  * @property {Map<string, string>} outcome every card's outcome: quote, quote:floor, silent:<why>, not-drawn, capped,
  *   no-speaker, no-line
- * @property {Map<string, string>} speakers every card that won a speaker → the speaker's id (a no-line card's too)
+ * @property {Map<string, string>} speakers every card that won a speaker → the speaker's id (a no-line card's too, but
+ *   for the mouths the floor gave back)
  * @property {string[]} order the cards that won a speaker, in the order they spoke
  * @property {VoiceCard[]} cards
  */
@@ -337,7 +338,14 @@ function composePlan(s, options) {
   // gave the page none, the speakers it spent on cards that printed nothing are given back, and the cards are tried in
   // weight, tab and draw order until one speaks (THE ONE PLACE a pool's lines can move a speaker: said in the head).
   if (quotes.size === 0 && npcs.some((n) => isLawfulSpeaker(n))) {
-    for (const [k, id] of speakers) if (outcome.get(k) === 'no-line') spoken.set(id, 0);
+    const giveBack = (/** @type {string} */ k) => {
+      const id = speakers.get(k);
+      if (!id) return;
+      spoken.set(id, 0);
+      speakers.delete(k);
+      order.splice(order.indexOf(k), 1);
+    };
+    for (const k of [...speakers.keys()]) if (outcome.get(k) === 'no-line') giveBack(k);
     const tries = cards.filter((c) => !c.silent && outcome.get(ck(c)) !== 'no-line')
       .sort((a, b) => (weightRank(a) - weightRank(b)) || (VOICE_TABS.indexOf(a.tab) - VOICE_TABS.indexOf(b.tab))
         || (/** @type {number} */ (u.get(ck(a))) - /** @type {number} */ (u.get(ck(b)))));
@@ -345,6 +353,7 @@ function composePlan(s, options) {
       if (!chooseSpeaker(c, new Set())) continue;
       speak(c, new Set());
       if (quotes.has(ck(c))) { outcome.set(ck(c), 'quote:floor'); break; }
+      giveBack(ck(c)); // the card printed nothing: its mouth is given back for the next
     }
   }
   return { quotes, outcome, speakers, order, cards };
