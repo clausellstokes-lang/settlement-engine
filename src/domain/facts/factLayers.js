@@ -236,6 +236,12 @@ export const LEAVES = Object.freeze({
   uprising: home('uprising', 4, ['history']),
   // BAR6-DEFDESK (7a): the page itself prints the country's beasts as a threat (`monsterFrontier.js`: the config and the monster score)
   monsterFrontier: home('monsterFrontier', 3, ['config', 'defenseProfile']),
+  // SURVEY S-B (RULING S-B-1, 2026-11-28): nothing laid by, the Economic Survival row Weak or Critical (`nothingLaidBy.js`)
+  nothingLaidBy: home('nothingLaidBy', 3, ['defenseProfile']),
+  // SURVEY S-B (RULING S-B-1): the page says the place owes a debt now (`solvencyShown.js :: owesDebtShown`, the atom `place debt`).
+  // Not a `factsOf` getter: the desks' door answers it (`factsAnswered.js`), so the walker calls the reader itself.
+  placeDebt: leaf({ layer: 5, module: 'domain/display/solvencyShown.js', exported: 'owesDebtShown', call: 'record', reads: ['config', 'conflicts', 'defenseProfile', 'economicState', 'economicState.safetyProfile', 'economicViability', 'history', 'institutions', 'npcs', 'powerStructure', 'stress', 'tier'],
+    note: 'the reads of the reader that decides whether a Debt Crisis hook prints (`plotHooks.js :: collectPlotHooks`), as the grid traces them: the conflicts (layer 4) set its layer' }),
   // BAR6-CULTURE (10g-legacy): the blow the record's top legacy names destroyed something (`legacyRuin.js`)
   legacyRuin: home('legacyRuin', 4, ['history']),
   // W2-A-LEAVES-2 (REVIEW-W2A F3): an official in a criminal's pay, the cast's own fact; the crime desk's lines

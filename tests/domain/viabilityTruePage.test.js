@@ -24,6 +24,15 @@ import { DOSSIER_STATE_PROSE_POWER } from '../../src/data/dossierStateProse/powe
 import { safetyLineSaidOnce } from '../../src/domain/display/guardLineUnderTheLaw.js';
 import { variantByVid } from '../helpers/drawnProse.js';
 import { birth as soakBirth, ensureLaws } from '../../scripts/audit/soak-review/corpus.mjs';
+import { readFileSync, readdirSync } from 'node:fs'; // SURVEY S-B: the pin's scan
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { DOSSIER_STATE_PROSE_ECONOMY as DOSSIER_STATE_PROSE_ECONOMY_SB } from '../../src/data/dossierStateProse/economy.generated.js';
+import { variantFactDeclaration } from '../../src/domain/display/stateProse/stateProseKernel.js';
+import { FACT_DIMENSIONS, atomHolds, parseAtom } from '../../src/domain/facts/factVocabulary.js';
+import { factsOf } from '../../src/domain/facts/factsOf.js';
+import { factsAnswered } from '../../src/domain/facts/factsAnswered.js';
+import { owesDebtShown, nothingLaidByShown } from '../../src/domain/display/solvencyShown.js';
 
 /** C's birth (`birthConfig({ settType })`, the close's make-plan.mjs) @param {string} seed */
 const c = (seed) => generateSettlementPipeline(birthConfig({ settType: seed.split('-')[1] }), null, { seed, customContent: {} });
@@ -192,3 +201,65 @@ describe('RULING-R B2: no savings or pays-its-way line beside a present place de
     expect([/^The town's debts/.test(v2), /^Debts run up in one house here/.test(v2)]).toEqual([false, true]);
   });
 });
+
+// SURVEY S-B (the eleventh chair's SURVEY-DESIGN §5; RULING S-B-1 of 2026-11-28): THE TWO MISSING CLAIMS ARE ATOMS. `place debt`
+// (the page says the place owes a debt now: `solvencyShown.js :: owesDebtShown`, called, never re-spelled) and `nothing laid by`
+// (the Economic Survival row Weak or Critical: `nothingLaidByShown`, moved to its fact home). The savings and pays-its-way lines
+// DECLARE them on the excludes side in their own pools, so the door refuses them; the economy desk's code table is retired.
+// `place debt` is answered at the desks' door (`factsAnswered.js`) ONLY: a `factsOf` getter would close an import cycle through
+// `plotHooks.js` (shrink-only, `tests/architecture/layerBoundaries.test.js`), so plain `factsOf` answers it UNKNOWN (fail-closed).
+describe('SURVEY S-B: `place debt` and `nothing laid by`, two atoms with one reader each, declared by the lines that say otherwise', () => {
+  const ECO = /** @type {any} */ (DOSSIER_STATE_PROSE_ECONOMY_SB);
+  /** @param {string} b @param {string} k @param {number} vid */
+  const decl = (b, k, vid) => variantFactDeclaration(ECO[b].pools[k].find((/** @type {any} */ v) => v.vid === vid));
+  test('both atoms parse, and each dimension has its reader', () => {
+    expect([parseAtom('place debt')?.dimension, parseAtom('nothing laid by')?.dimension]).toEqual(['place debt', 'nothing laid by']);
+    expect([typeof FACT_DIMENSIONS['place debt']?.reader, typeof FACT_DIMENSIONS['nothing laid by']?.reader]).toEqual(['function', 'function']);
+  });
+  test('the readers ARE the page\'s two functions, on every side of each (planted records and C births)', () => {
+    const debtStress = { stress: [{ type: 'indebted' }] };
+    const debtTension = { history: { currentTensions: [{ type: 'outside_debt' }] } };
+    const weak = { defenseProfile: { scores: { economic: 1 } } };
+    const strong = { defenseProfile: { scores: { economic: 99 } } };
+    const records = [debtStress, debtTension, weak, strong, {}, ...['dp-thorp-3', 'dp-thorp-42', 'dp-thorp-99', 'dp-village-141', 'dp-thorp-4'].map(c)];
+    for (const r of records) {
+      const facts = factsAnswered(r, {}).facts;
+      expect([atomHolds('place debt', facts), atomHolds('nothing laid by', facts)]).toEqual([owesDebtShown(r), nothingLaidByShown(r)]);
+    }
+    expect(records.map((r) => atomHolds('place debt', factsAnswered(r, {}).facts)).slice(0, 5)).toEqual([true, true, false, false, false]);
+    expect(records.map((r) => atomHolds('nothing laid by', factsAnswered(r, {}).facts)).slice(0, 5)).toEqual([false, false, true, false, false]);
+  }, 240000);
+  test('plain `factsOf` answers `place debt` UNKNOWN (fail-closed) and `nothing laid by` from its home', () => {
+    const r = { stress: [{ type: 'indebted' }], defenseProfile: { scores: { economic: 1 } } };
+    expect([atomHolds('place debt', factsOf(r)), atomHolds('nothing laid by', factsOf(r))]).toEqual([undefined, true]);
+  });
+  test('the savings and pays-its-way lines declare them (excludes) in their own pools; the savings street line is no longer colour', () => {
+    expect([...decl('DS-ECO-8', 'COMFORTABLE', 1).excludes].sort()).toEqual(['crisis: indebted', 'nothing laid by', 'place debt']);
+    expect([...decl('DS-ECO-8', 'COMFORTABLE', 2).excludes].sort()).toEqual(['nothing laid by', 'place debt']);
+    expect(ECO['DS-ECO-8'].pools.COMFORTABLE.find((/** @type {any} */ v) => v.vid === 2).marks).toEqual(['no place debt', 'no nothing laid by']); // was ['colour']
+    expect([...decl('DS-ECO-8', 'MODERATE', 3).excludes].sort()).toEqual(['nothing laid by', 'place debt']);
+    expect([...decl('DS-ECO-1', 'COMBINATION C3: the middle rungs', 2).excludes]).toEqual(['place debt']); // beside the Weak grade alone it is no fault
+  });
+  // THE PIN (RULING S-B-1 (1)): a pool drawn through plain `factsOf` (a birth draw) that declared `place debt` on either side
+  // would be refused there SILENTLY (the atom is unanswered off the desks' door). So the atom is declared only in the state-prose
+  // leaves, which every desk draws through `factsAnswered`. The plant below proves the scan sees a declaration.
+  test('THE PIN: `place debt` is declared only where the desks\' door answers it (red by a plant)', () => {
+    const plant = { 'src/data/somePool.js': "export const POOL = [{ text: 'The place is in hock.', needs: ['place debt'] }];" };
+    expect(placeDebtDeclaredOffTheDoor(plant)).toEqual(['src/data/somePool.js']);
+    expect(placeDebtDeclaredOffTheDoor({})).toEqual([]);
+  }, 60000);
+});
+
+/** Every source file of `src/` (and the planted ones) that spells `place debt` as an atom, outside the homes that answer it and
+ * the state-prose leaves every desk draws through `factsAnswered`. @param {Record<string, string>} planted */
+function placeDebtDeclaredOffTheDoor(planted) {
+  const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
+  const DOOR = /^src\/data\/dossierStateProse\/[a-z]+\.generated\.js$|^src\/domain\/facts\/factVocabulary\.js$/;
+  /** @param {string} d @param {string[]} out */
+  const walk = (d, out) => { for (const e of readdirSync(join(ROOT, d), { withFileTypes: true })) { const p = `${d}/${e.name}`; if (e.isDirectory()) walk(p, out); else if (/\.(js|jsx|mjs)$/.test(e.name)) out.push(p); } return out; };
+  const files = Object.fromEntries(walk('src', []).map((p) => [p, readFileSync(join(ROOT, p), 'utf8')]));
+  Object.assign(files, planted);
+  /** @param {string} t a source text without its comments (a comment may name the atom; only code declares it) */
+  const code = (t) => t.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '').replace(/\s\/\/ .*$/gm, '');
+  return Object.entries(files).filter(([p, s]) => !DOOR.test(p) && /['"`](?:no\s+)?place debt['"`]/.test(code(s))).map(([p]) => p).sort();
+}

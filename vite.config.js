@@ -605,6 +605,12 @@ export const FIRSTPAINT2_LAZY_DOMAIN = [
   //   tests/build/engineChunkLazy.test.js (no first-paint-reachable excision is left unpinned).
   '/src/domain/facts/crisisBody.js',
   '/src/domain/people/stressPowerFaces.js',
+  // SURVEY S-B (2026-11-28; the eleventh chair's RULING S-B-1). THE SAME PREMISE as sickCare.js above: facts/nothingLaidBy.js (the
+  // one reading of `nothing laid by`) is a new leaf of facts/factsOf.js (pinned here), so the derivation walked it into EAGER
+  // engine-core, and it statically imports display/defenseScoreBands.js, which rides coherence-lazy
+  // (tests/architecture/engineCoreLazyEdge.test.js reddened on the edge). Its importers: facts/factsOf.js and display/solvencyShown.js
+  // (a re-export), neither eager. @guarded-by tests/architecture/engineCoreLazyEdge.test.js.
+  '/src/domain/facts/nothingLaidBy.js',
 ];
 for (const frag of ENGINE_SHARED_DOMAIN_EXCISIONS) ENGINE_SHARED_DOMAIN.delete(frag);
 for (const frag of FIRSTPAINT2_LAZY_DOMAIN) ENGINE_SHARED_DOMAIN.delete(frag);

@@ -146,6 +146,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
+          "marks": [
+            "no place debt"
+          ],
           "text": "{settlement} pays its way from year to year, and nobody here calls the town poor.",
           "slots": [
             "settlement"
@@ -2955,7 +2958,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         {
           "angle": "visitor",
           "marks": [
-            "no crisis"
+            "no crisis",
+            "no place debt",
+            "no nothing laid by"
           ],
           "text": "Nothing about {settlement}'s condition asks to be remarked on. The town pays its own way and has a little in hand.",
           "slots": [
@@ -2980,7 +2985,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "no crisis: indebted"
+            "no crisis: indebted",
+            "no place debt",
+            "no nothing laid by"
           ],
           "text": "{settlement}'s purse closes every year ahead. The margin is not large but it is dependable, and there is money laid by behind it.",
           "slots": [
@@ -2991,7 +2998,8 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         {
           "angle": "street",
           "marks": [
-            "colour"
+            "no place debt",
+            "no nothing laid by"
           ],
           "text": "People here put things by, and can. That is the difference between this town and a poorer one.",
           "slots": [],

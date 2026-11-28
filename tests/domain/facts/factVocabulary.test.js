@@ -11,6 +11,7 @@
  */
 import { describe, expect, it } from 'vitest';
 import * as V from '../../../src/domain/facts/factVocabulary.js';
+import { deskFactsOf } from '../../../src/domain/facts/factsAnswered.js'; // SURVEY S-B: the desks' door
 import { STATE_MARK_DIMENSIONS as KERNEL_MARKS } from '../../../src/domain/display/stateProse/stateProseKernel.js';
 import { STRESS_TYPE_MAP } from '../../../src/data/stressTypes.js';
 import { TIER_ORDER } from '../../../src/data/constants.js';
@@ -42,13 +43,19 @@ describe('the spelled ladders equal their homes', () => {
   });
 });
 
+/** The homes answered at the desks' door only (SURVEY S-B). */
+const DESK_DOOR_HOMES = Object.freeze(['placeDebt']);
 describe('every dimension is answered by one home, or cannot be declared', () => {
   const facts = factsOf({ tier: 'town', institutions: [], config: { terrainType: 'hills', tradeRouteAccess: 'port' } });
   it('a homed dimension names a factsOf getter', () => {
     for (const [name, dim] of Object.entries(V.FACT_DIMENSIONS)) {
       if (dim.reader === null) { expect(dim.home, name).toBe(''); continue; }
+      // SURVEY S-B (RULING S-B-1): `place debt` alone is answered at the desks' door (`factsAnswered.js :: deskFactsOf`), whose
+      // facts are `factsOf`'s and one getter more: a `factsOf` getter would close an import cycle through `plotHooks.js`.
+      if (DESK_DOOR_HOMES.includes(dim.home)) { expect(dim.home in facts, `${name}: not on plain factsOf`).toBe(false); expect(dim.home in deskFactsOf({}), `${name} → deskFactsOf(record).${dim.home}`).toBe(true); continue; }
       expect(dim.home in facts, `${name} → factsOf(record).${dim.home}`).toBe(true);
     }
+    expect(Object.values(V.FACT_DIMENSIONS).filter((d) => DESK_DOOR_HOMES.includes(d.home)).length).toBe(1);
   });
   it('an unknown word is no atom; an unhomed atom cannot be declared', () => {
     expect(V.parseAtom('moat')).toBeNull();

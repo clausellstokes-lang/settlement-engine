@@ -825,7 +825,7 @@ the access.
 
 **COMBINATION C3: the middle rungs** {crisis-scoped}
 1. `[street · crisis: any]` With a little left over each year, {settlement} gets by on a {complexity}, and every year people argue over how to spend it.
-2. `[ledger]` {settlement} pays its way from year to year, and nobody here calls the town poor.
+2. `[ledger · no place debt]` {settlement} pays its way from year to year, and nobody here calls the town poor.
 3. `[visitor · no crisis · market]` Nothing about {settlement} looks rich or poor: the {access} is busy enough, the market is open, and nobody is building or selling up.
 
 **COMBINATION C4: a low rung on a working approach**
@@ -1255,12 +1255,12 @@ contradict** it (R-DST-C).
 **MODERATE** — *steady, thin margin* {crisis-scoped}
 1. `[ledger · crisis: any]` {settlement}'s treasury takes in a little more than it pays out each year. It is enough, and no more.
 2. `[street · no crisis]` Money at {settlement} is neither comfortable nor tight, and that is what people here expect of it.
-3. `[visitor · no crisis]` Nothing about {settlement}'s condition asks to be remarked on. The town pays its own way and has a little in hand.
+3. `[visitor · no crisis · no place debt · no nothing laid by]` Nothing about {settlement}'s condition asks to be remarked on. The town pays its own way and has a little in hand.
 4. `[visitor · crisis · crisis: any]` {settlement}'s accounts still balance, and that is the one thing about the town the crisis has not yet reached.
 
 **COMFORTABLE** — *reliable surplus, reserves exist*
-1. `[ledger · no crisis: indebted]` {settlement}'s purse closes every year ahead. The margin is not large but it is dependable, and there is money laid by behind it.
-2. `[street · colour]` People here put things by, and can. That is the difference between this town and a poorer one.
+1. `[ledger · no crisis: indebted · no place debt · no nothing laid by]` {settlement}'s purse closes every year ahead. The margin is not large but it is dependable, and there is money laid by behind it.
+2. `[street · no place debt · no nothing laid by]` People here put things by, and can. That is the difference between this town and a poorer one.
 3. `[visitor · food: ≥ secure · stores: ≥ 3]` The town is plainly comfortable. The buildings are finished rather than patched, and the stores are more than the season needs.
 4. `[visitor · food: ≥ secure · stores: < 3]` The town is plainly comfortable. Its buildings are well kept, though nobody here keeps more in store than the coming season needs.
 

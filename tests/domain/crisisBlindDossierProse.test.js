@@ -158,6 +158,10 @@ const PRESENCE_SETTER = {
   'need not brought in': (f, a, want) => ({ ...f, needNotBroughtIn: { ...(f.needNotBroughtIn || {}), [a.key]: want } }),
   // FAULTS-ROWS (FR12 (3)): `fish bought in` (`fishBoughtIn.js`), declared by the fish market's card (DESC_LATE_SIBLINGS)
   'fish bought in': (f, _a, want) => ({ ...f, fishBoughtIn: want }),
+  // SURVEY S-B (2026-11-28, RULING S-B-1): the two missing claims, one-home facts each, declared (excludes) by DS-ECO-8 COMFORTABLE
+  // v1 v2, MODERATE v3 and DS-ECO-1 C3 v2: `place debt` (answered at the desks' door, `factsAnswered.js`) and `nothing laid by`
+  'place debt': (f, _a, want) => ({ ...f, placeDebt: want }),
+  'nothing laid by': (f, _a, want) => ({ ...f, nothingLaidBy: want }),
   // BAR8-DESKS-2 (2026-11-18, the chair's ruling BR34): `trade at work` (keyed; `tradeAtWork.js`), now declared by a crisis-scoped
   // pool (DS-ECO-8 POOR v3: `no trade at work: building`); the key's answer set, every other key as it was
   'trade at work': (f, a, want) => { const prior = f.tradeAtWork; return { ...f, tradeAtWork: (k) => (k === a.key ? want : (typeof prior === 'function' ? prior(k) : undefined)) }; },

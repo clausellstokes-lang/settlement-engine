@@ -160,7 +160,7 @@ describe('item 3 · the ledger line says money and keeps its words', () => {
     expect(v1.pool).toBe('COMFORTABLE');
     expect(v1.v.text).toMatch(/^\{settlement\}'s purse closes every year ahead\./);
     expect(v1.v.text).toMatch(/money laid by/);
-    expect(v1.v.marks).toEqual(['no crisis: indebted']);
+    expect(v1.v.marks).toEqual(['no crisis: indebted', 'no place debt', 'no nothing laid by']); // SURVEY S-B (S-B-1): the crisis exclusion kept, the two missing claims declared beside it
   });
   // RE-PICKED BY THE PREMISE (THE FLIP, CLOSE-6 F-FORTUNE, 2026-11-23): lit, C27960's town bar0-metropolis-calm-rand-43 reads
   // Moderate, so the COMFORTABLE rung is not its pool. Re-scanned bar0-metropolis-calm-rand-0..199 lit for the case's own

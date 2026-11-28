@@ -16,8 +16,11 @@
  *     nothing laid by to pay for a long defence", "would have to borrow the money first").
  * A pays-its-way line beside the Weak GRADE alone is ruled no fault (one is a margin, the other a shock), so the
  * viability rows read the debt alone; the savings lines read both. Pure, display only.
+ * SURVEY S-B (RULING S-B-1, 2026-11-28): each is now the ONE reader of an atom of the fact vocabulary: `place debt` is
+ * `owesDebtShown` (answered at the desks' door, `facts/factsAnswered.js`: a `factsOf` getter here would close an import cycle
+ * through `plotHooks.js`), and `nothing laid by` is `nothingLaidByShown`, moved to its fact home (`facts/nothingLaidBy.js`) and
+ * re-exported below. The lines that say otherwise declare them on the excludes side.
  */
-import { economicSurvivalBandOf } from './defenseScoreBands.js';
 import { collectPlotHooks } from '../dossier/plotHooks.js';
 
 /**
@@ -38,10 +41,4 @@ export function owesDebtShown(settlement) {
     && (h.parties || []).some((p) => p.kind === 'history' && debts.has(String(/** @type {{ eventId?: unknown }} */ (p).eventId))));
 }
 
-/**
- * @param {unknown} settlement @returns {boolean} the Economic Survival row reads Weak or Critical
- */
-export function nothingLaidByShown(settlement) {
-  const band = economicSurvivalBandOf(/** @type {Parameters<typeof economicSurvivalBandOf>[0]} */ (settlement));
-  return band === 'WEAK' || band === 'CRITICAL';
-}
+export { nothingLaidByShown } from '../facts/nothingLaidBy.js'; // SURVEY S-B: moved to its fact home, re-exported for its callers

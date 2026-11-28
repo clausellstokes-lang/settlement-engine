@@ -251,7 +251,7 @@ export const ROUTE_WORDS = Object.freeze(['road', 'river', 'port', 'crossroads',
  * @property {Readonly<import('../dossier/faithReading.js').FaithReading>} [faith] @property {boolean} [guardPresence]
  * @property {boolean} [guild] @property {boolean} [sacredHouse] @property {boolean} [rivalPower] @property {(key: string) => boolean|undefined} [crisisBody] @property {boolean} [seatOutranked] @property {boolean} [forceWalksByDay] @property {boolean} [sovereign] @property {boolean} [seatMembers] @property {boolean} [ironAtHand] @property {boolean} [timberAtHand]
  * @property {boolean} [timberReachesSawmill] @property {boolean} [enchanting] @property {(key: string) => boolean|undefined} [tradeAtWork] @property {(key: string) => boolean|undefined} [goodExported] @property {boolean} [legitimacyCrisis] @property {boolean} [legalHouse] @property {boolean} [appointedPost]
- * @property {boolean} [dangerComing] @property {boolean} [uprising] @property {boolean} [legacyRuin] @property {boolean} [courtSits] @property {boolean} [courtOrGaol] @property {boolean} [sickCare] @property {(capacities: unknown) => string|undefined} [foodProduction] @property {boolean} [magicSupply] @property {string} [magicRelianceShown] @property {boolean} [criminalIncome]
+ * @property {boolean} [dangerComing] @property {boolean} [uprising] @property {boolean} [legacyRuin] @property {boolean} [courtSits] @property {boolean} [courtOrGaol] @property {boolean} [sickCare] @property {boolean} [placeDebt] @property {boolean} [nothingLaidBy] @property {(capacities: unknown) => string|undefined} [foodProduction] @property {boolean} [magicSupply] @property {string} [magicRelianceShown] @property {boolean} [criminalIncome]
  * @property {ReadonlyArray<string>} [foodSources] @property {string|null} [failedSource] @property {boolean} [leadingSourceSpent] @property {boolean} [ownPlots] @property {ReadonlyArray<unknown>} [imports]
  * @property {ReadonlyArray<unknown>} [exports] @property {string|null} [culture] @property {string} [crime]
  * @property {string} [lawBand] BAR5-SAFETY: `lawBand.js :: lawBandOf`
@@ -446,6 +446,16 @@ export const FACT_DIMENSIONS = Object.freeze({
   // tension of the history (`dangerComing.js`), which the crisis record's threat family does not see. "Nothing threatens it"
   // presumes its absence (REVIEW-BAR-4 C18744, C45642).
   'danger coming': dim({ shape: 'presence', home: 'dangerComing', reader: (f) => bool(f.dangerComing) }),
+  // SURVEY S-B (the eleventh chair's RULING S-B-1 of 2026-11-28; vetoable by the owner, on the veto list as new vocabulary for
+  // two facts the page already prints), beside the crisis states held as presences: THE TWO MISSING CLAIMS of the survey's
+  // measure (E-clashes rows 10 to 12). `place debt`: the page says the PLACE owes a debt now (the `indebted` stress, the
+  // `outside_debt` tension, a Debt Crisis whose hook prints: `display/solvencyShown.js :: owesDebtShown`, the one reader; never
+  // a person's debt). ANSWERED AT THE DESKS' DOOR ONLY (`factsAnswered.js`): plain `factsOf` answers it UNKNOWN, so a birth draw
+  // refuses it fail-closed and no birth pool may declare it (the pin: `tests/domain/viabilityTruePage.test.js`, SURVEY S-B).
+  // `nothing laid by`: the Economic Survival row reads Weak or Critical (`facts/nothingLaidBy.js`). A savings or pays-its-way
+  // line excludes them.
+  'place debt': dim({ shape: 'presence', home: 'placeDebt', reader: (/** @type {FactsLike} */ f) => bool(f.placeDebt) }),
+  'nothing laid by': dim({ shape: 'presence', home: 'nothingLaidBy', reader: (/** @type {FactsLike} */ f) => bool(f.nothingLaidBy) }),
   // BAR8-DESKS-DEF (BAR8-AUDIT-K rule 12e; the chair's ruling BR14 (c); vetoable by the owner, on the veto list as new
   // vocabulary), beneath `danger coming`, the history's other live tension: the common people are pressing, or have risen,
   // against those in charge (`uprising.js`: a live `popular_uprising` tension), which the desk's `unrest` dimension (three crisis
