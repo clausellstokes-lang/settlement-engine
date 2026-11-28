@@ -181,7 +181,7 @@ export function buildViewModel({
     power:         powerSlice(active),
     economics:     economicsSlice(active),
     defense:       defenseSlice(active),
-    services:      servicesSlice(active),
+    services:      withDescsShown(servicesSlice(active), active), // SURVEY S-A: each house's description as the final record admits it
     resources:     resourcesSlice(active),
     viability:     viabilitySlice(active),
     history:       historySlice(active),
@@ -1021,3 +1021,4 @@ function firstSentence(s) {
 export default buildViewModel;
 import { scoresAsShown } from '../../domain/facts/beastsReadiness.js'; // P9 (RULING G22): the scores as printed (the beasts grade read against the need); at the end of the file, so no cited line moves
 import { tensionDescriptionShown } from '../../domain/display/tensionDescriptionShown.js'; // R6 (RULING-R, the eleventh chair): the scarcity tension names its good; at the end of the file, so no cited line moves
+import { withDescsShown } from '../../domain/display/institutionDescShown.js'; // SURVEY S-A: at the end of the file, so no cited line moves

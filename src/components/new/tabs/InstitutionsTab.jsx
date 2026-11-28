@@ -51,6 +51,7 @@ import { computeChainSets } from '../tabHelpers';
 import EconomyFreshnessNote from '../EconomyFreshnessNote.jsx';
 import { institutionHouseLabel } from '../../../domain/display/institutionDisplayName.js';
 import { identityForInstitution } from '../../../domain/display/institutionVocabulary.js';
+import { institutionDescShown } from '../../../domain/display/institutionDescShown.js';
 import { institutionProvenanceOf } from '../../../domain/provenance/rosterProvenance.js';
 import { isFabricInstitution } from '../../../data/institutionalCatalog.js';
 import { entityAnchor, entityIdFor, serviceEntityOf } from '../../../domain/dossier/entityLinks.js';
@@ -206,12 +207,15 @@ export function houseStatus(services, sets) {
 /**
  * The house's general description (X-35): the catalogue's own line for this instance when the
  * engine wrote one, else the authored identity one-liner, else nothing (a custom house with no
- * description honestly prints no line).
+ * description honestly prints no line). SURVEY S-A: the stored line as the FINAL record admits it
+ * (`institutionDescShown.js`; the shared page's rule is the leaf's), when the card is handed the record.
  * @param {{ desc?: unknown, name?: string }} inst
+ * @param {object | null} [settlement] the record the page reads
+ * @param {{ reader?: boolean }} [options] `reader`: the shared page
  * @returns {string|null}
  */
-export function institutionDescription(inst) {
-  const own = typeof inst?.desc === 'string' ? inst.desc.trim() : '';
+export function institutionDescription(inst, settlement = null, options = {}) {
+  const own = settlement ? institutionDescShown(inst, settlement, options) : (typeof inst?.desc === 'string' ? inst.desc.trim() : '');
   return own || identityForInstitution(inst) || null;
 }
 
@@ -252,7 +256,7 @@ function BacksEditor({ label, powers, selected, authored, onDone, onRevert, onCl
  * is the house's list from `houseBacksShownOf`; `canAuthor` and `index` arm the editor. `fabric` (X-46
  * car 3) marks the place rather than a house: no Backs line and no editor.
  */
-export function InstitutionCard({ inst, category, label, services, sets, backs = [], authored = false, canAuthor = false, index = -1, powers = [], fabric = false, face = null, seatFaced: seatFacedRow = false, settlement = null, crisisMark = null, serviceStoppedBy = null, serviceShortBy = null }) {
+export function InstitutionCard({ inst, category, label, services, sets, backs = [], authored = false, canAuthor = false, index = -1, powers = [], fabric = false, face = null, seatFaced: seatFacedRow = false, settlement = null, crisisMark = null, serviceStoppedBy = null, serviceShortBy = null, reader = false }) {
   const mobile = useIsMobile();
   // COHERENCE-POWERS: a face that is not this house's own (the seat's house, faced by the dual-hat leader)
   const seatFaced = seatFacedRow && !!face && !!cardOfficeOf(face);
@@ -264,7 +268,7 @@ export function InstitutionCard({ inst, category, label, services, sets, backs =
   const { ref: focusRef } = useEntityFocus(entityIdFor('institution', inst));
   const selfId = entityIdFor('institution', inst);
   // TAIL-SERVICES (ruling S1): under a crisis that stops what the house lives on, its mark leads the description of ordinary times.
-  const description = crisisMark ? markedDescription(crisisMark, institutionDescription(inst)) : institutionDescription(inst);
+  const shownDesc = institutionDescription(inst, settlement, { reader }); const description = crisisMark ? markedDescription(crisisMark, shownDesc) : shownDesc; // SURVEY S-A
   const status = houseStatus(services, sets);
   // X-45: the editor is offered to a viewer who may author, in edit mode, on a house the
   // roster can address (the NPC card's own gate, `authorEditMode`).
@@ -358,7 +362,7 @@ export function InstitutionCard({ inst, category, label, services, sets, backs =
   );
 }
 
-export default function InstitutionsTab({ settlement, canAuthor = false }) {
+export default function InstitutionsTab({ settlement, canAuthor = false, publicDossier = false }) {
   const mobile = useIsMobile(); // bound above the early return: the ordinary-times line is prose, and keeps its phone floor
   const entries = useMemo(() => institutionsWithServices(settlement), [settlement]);
   const houses = useMemo(() => entries.filter((entry) => !entry.fabric), [entries]);
@@ -400,7 +404,7 @@ export default function InstitutionsTab({ settlement, canAuthor = false }) {
       <div data-testid="institutions-stack" style={FLUSH_STACK}>
         {houses.map(({ inst, category, label, services, backs, authored, face, seatFaced }, i) => (
           <InstitutionCard key={`${inst.name}-${i}`} inst={inst} category={category} label={label} services={services} backs={backs} authored={authored} sets={sets}
-            canAuthor={canAuthor} index={roster.indexOf(inst)} powers={powers} face={face} seatFaced={seatFaced} settlement={settlement} crisisMark={markOf(inst)} serviceStoppedBy={serviceStoppedBy} serviceShortBy={serviceShortBy} />
+            canAuthor={canAuthor} index={roster.indexOf(inst)} powers={powers} face={face} seatFaced={seatFaced} settlement={settlement} crisisMark={markOf(inst)} serviceStoppedBy={serviceStoppedBy} serviceShortBy={serviceShortBy} reader={publicDossier} />
         ))}
       </div>
       {/* THE FABRIC OF THE PLACE (X-46 car 3): the dwellings, the well, the church walk — the place
@@ -410,7 +414,7 @@ export default function InstitutionsTab({ settlement, canAuthor = false }) {
           <div data-testid="institutions-fabric-heading" style={{ ...literaryTitle(FS.sm), color: MUTED, padding: '10px 12px 4px' }}>The fabric of the place</div>
           <div style={FLUSH_STACK}>
             {fabric.map(({ inst, category, label, services }, i) => (
-              <InstitutionCard key={`fabric-${i}`} inst={inst} category={category} label={label} services={services} sets={sets} fabric crisisMark={markOf(inst)} serviceStoppedBy={serviceStoppedBy} serviceShortBy={serviceShortBy} />
+              <InstitutionCard key={`fabric-${i}`} inst={inst} category={category} label={label} services={services} sets={sets} fabric settlement={settlement} crisisMark={markOf(inst)} serviceStoppedBy={serviceStoppedBy} serviceShortBy={serviceShortBy} reader={publicDossier} />
             ))}
           </div>
         </section>

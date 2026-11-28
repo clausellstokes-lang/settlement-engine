@@ -79,7 +79,7 @@ const RENDERERS = Object.freeze({
     Component: InstitutionCard,
     props: (o, ctx) => {
       const house = ctx.houses.get(o.raw);
-      return house ? { ...house, sets: ctx.sets } : null;
+      return house ? { ...house, sets: ctx.sets, settlement: ctx.settlement } : null; // SURVEY S-A: the description as the final record admits it
     },
   },
   service: {

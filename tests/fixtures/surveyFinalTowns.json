@@ -1,0 +1,132 @@
+[
+ {
+  "plan": "V",
+  "seed": "dp-metropolis-4",
+  "config": {
+   "settType": "metropolis",
+   "population": 1500,
+   "tradeRouteAccess": "random_trade",
+   "culture": "random_culture",
+   "contentProfile": "grounded",
+   "contentBoundaries": null,
+   "settlementAgeMode": "auto",
+   "settlementAgeYears": 0,
+   "monsterThreat": "random_threat",
+   "priorityEconomy": 50,
+   "priorityMilitary": 50,
+   "priorityMagic": 50,
+   "priorityReligion": 50,
+   "priorityCriminal": 50,
+   "magicExists": true,
+   "nearbyResourcesRandom": true,
+   "nearbyResources": null,
+   "nearbyResourcesDepleted": [],
+   "nearbyResourcesState": {},
+   "selectedStresses": [],
+   "selectedStressesRandom": true,
+   "customName": "",
+   "customInstitutions": [],
+   "customResources": [],
+   "customTradeRoutes": [],
+   "powerDynamicsConfig": null,
+   "defenseScenarioConfig": null,
+   "_randomizePriorities": true
+  }
+ },
+ {
+  "plan": "V",
+  "seed": "dp-hamlet-12",
+  "config": {
+   "settType": "hamlet",
+   "population": 1500,
+   "tradeRouteAccess": "random_trade",
+   "culture": "random_culture",
+   "contentProfile": "grounded",
+   "contentBoundaries": null,
+   "settlementAgeMode": "auto",
+   "settlementAgeYears": 0,
+   "monsterThreat": "random_threat",
+   "priorityEconomy": 50,
+   "priorityMilitary": 50,
+   "priorityMagic": 50,
+   "priorityReligion": 50,
+   "priorityCriminal": 50,
+   "magicExists": true,
+   "nearbyResourcesRandom": true,
+   "nearbyResources": null,
+   "nearbyResourcesDepleted": [],
+   "nearbyResourcesState": {},
+   "selectedStresses": [],
+   "selectedStressesRandom": true,
+   "customName": "",
+   "customInstitutions": [],
+   "customResources": [],
+   "customTradeRoutes": [],
+   "powerDynamicsConfig": null,
+   "defenseScenarioConfig": null,
+   "_randomizePriorities": true
+  }
+ },
+ {
+  "plan": "C",
+  "seed": "dp-town-36",
+  "config": {
+   "settType": "town"
+  }
+ },
+ {
+  "plan": "C",
+  "seed": "dp-hamlet-26",
+  "config": {
+   "settType": "hamlet"
+  }
+ },
+ {
+  "plan": "V",
+  "seed": "dp-town-107",
+  "config": {
+   "settType": "town",
+   "population": 1500,
+   "tradeRouteAccess": "random_trade",
+   "culture": "random_culture",
+   "contentProfile": "grounded",
+   "contentBoundaries": null,
+   "settlementAgeMode": "auto",
+   "settlementAgeYears": 0,
+   "monsterThreat": "random_threat",
+   "priorityEconomy": 50,
+   "priorityMilitary": 50,
+   "priorityMagic": 50,
+   "priorityReligion": 50,
+   "priorityCriminal": 50,
+   "magicExists": true,
+   "nearbyResourcesRandom": true,
+   "nearbyResources": null,
+   "nearbyResourcesDepleted": [],
+   "nearbyResourcesState": {},
+   "selectedStresses": [],
+   "selectedStressesRandom": true,
+   "customName": "",
+   "customInstitutions": [],
+   "customResources": [],
+   "customTradeRoutes": [],
+   "powerDynamicsConfig": null,
+   "defenseScenarioConfig": null,
+   "_randomizePriorities": true
+  }
+ },
+ {
+  "plan": "C",
+  "seed": "dp-hamlet-33",
+  "config": {
+   "settType": "hamlet"
+  }
+ },
+ {
+  "plan": "C",
+  "seed": "dp-city-1",
+  "config": {
+   "settType": "city"
+  }
+ }
+]
