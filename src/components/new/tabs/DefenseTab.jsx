@@ -375,7 +375,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier: publicD
   const ForceCard = ({inst:i,accent}) => (
     <div style={{background:swatch['#FAF8F4'],border:'1px solid #e0d0b0',borderLeft:`3px solid ${accent||'#6b5340'}`,padding:'9px 12px',marginBottom:6}}>
       <div style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag,marginBottom:i.desc?2:0}}>{institutionDisplayName(i)}</div>
-      {i.desc&&<div style={{fontSize: proseFontSize(FS['11.5'], isMobile),color:swatch.inkMag3,lineHeight:1.4}}>{i.desc}</div>}
+      {i.desc&&<div style={{fontSize: proseFontSize(FS['11.5'], isMobile),color:swatch.inkMag3,lineHeight:1.4}}>{institutionDescShown(i, r, { audience: publicDossierPassed ? 'reader' : 'owner' })}</div>}
     </div>
   );
 
@@ -737,3 +737,4 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier: publicD
 
 export default React.memo(DefenseTab);
 import { beastsReadinessOf } from '../../../domain/facts/beastsReadiness.js'; // P9 (RULING G22): the beasts grade read against the need; at the end of the file, so no cited line moves
+import { institutionDescShown } from '../../../domain/display/institutionDescShown.js'; // SURVEY S-A-4: the one reader of a house's description; at the END, so no cited line moves

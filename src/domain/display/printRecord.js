@@ -53,8 +53,20 @@ export function printRecordOf(settlement) {
   const npcs = Array.isArray(s.npcs) ? s.npcs.map((/** @type {Row} */ n) => { const h = hooksOf(n?.plotHooks, { kind: 'npc' }); return h === n?.plotHooks ? n : { ...n, plotHooks: h }; }) : s.npcs;
   const events = s.history?.historicalEvents;
   const historicalEvents = Array.isArray(events) ? events.map((/** @type {Row} */ e) => { const h = hooksOf(e?.plotHooks, { kind: 'event', type: e?.type }); return h === e?.plotHooks ? e : { ...e, plotHooks: h }; }) : events;
+  // S-A-4: the defence profile's copies of the houses (`defenseProfile.institutions.<kind>[]`), which the Defense chapter
+  // prints, carry the same description and read the same way
+  const dp = /** @type {{ institutions?: Record<string, unknown> } | null | undefined} */ (s.defenseProfile);
+  const kinds = dp && dp.institutions && typeof dp.institutions === 'object' ? dp.institutions : null;
+  const defenceCopies = kinds ? Object.fromEntries(Object.entries(kinds).map(([kind, rows]) => [kind, Array.isArray(rows)
+    ? rows.map((/** @type {Row} */ row) => {
+      const own = typeof row?.desc === 'string' ? row.desc.trim() : '';
+      const shown = own ? institutionDescShown(row, /** @type {Parameters<typeof institutionDescShown>[1]} */ (s), { audience: 'owner' }) : own;
+      return own && shown !== own ? { ...row, desc: shown } : row;
+    })
+    : rows])) : null;
   const out = {
     ...s,
+    ...(kinds ? { defenseProfile: { ...dp, institutions: defenceCopies } } : {}),
     ...(Array.isArray(s.institutions) ? { institutions } : {}),
     ...(Array.isArray(s.npcs) ? { npcs } : {}),
     ...(Array.isArray(events) ? { history: { ...s.history, historicalEvents } } : {}),
