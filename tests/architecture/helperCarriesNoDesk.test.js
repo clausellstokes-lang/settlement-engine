@@ -13,9 +13,9 @@
  * (`src/data/dossierStateProse/`), a desk (`src/domain/display/stateProse/*StateProse.js`), the traditions' description
  * table (`src/data/traditionDescriptionTable.js`) or the gallery veil (`src/domain/display/galleryVeil.js`).
  *
- * NOT GUARDED HERE: `traditions/traditionFloor.js`. Its `withoutFunction` names the fields it strips by reading the veil's
- * own declaration (`galleryVeil.js :: CARD_KINDS.institution.fields.function`), so it cannot move to a leaf without a copy
- * of a veil declaration, which waits on the chair's word (RULING 122-B-2 UNIT 3 (b): stopped).
+ * `traditions/traditionFloor.js` is guarded the same way since RULING 122-B-3: its `withoutFunction` is its own leaf's
+ * (`traditions/functionEye.js`), whose copy of the veil's function-eye names tests/security/functionEyeCopy.test.js holds
+ * equal to the declaration.
  */
 import { describe, expect, it } from 'vitest';
 import { join, relative, resolve } from 'node:path';
@@ -34,6 +34,14 @@ describe('a helper carries no desk (RULING 122-B-2, F7)', () => {
     const { seen, parent } = importClosure([join(ROOT, 'src/domain/display/tensionDescriptionShown.js')], FOLLOW_STATIC);
     const reached = [...seen].map((f) => relative(ROOT, f).replace(/\\/g, '/'));
     expect(reached.length, 'the walk reads the helper\'s imports (not vacuous)').toBeGreaterThan(1);
+    expect([...seen].filter((f) => isDesk(relative(ROOT, f).replace(/\\/g, '/'))).map((f) => chainTo(parent, f, ROOT))).toEqual([]);
+  });
+  // RULING 122-B-3: the floor takes withoutFunction from its own leaf (traditions/functionEye.js), held equal to the veil's
+  // declaration by tests/security/functionEyeCopy.test.js
+  it('src/domain/traditions/traditionFloor.js reaches no corpus, desk, description table or veil through its static imports', () => {
+    const { seen, parent } = importClosure([join(ROOT, 'src/domain/traditions/traditionFloor.js')], FOLLOW_STATIC);
+    const reached = [...seen].map((f) => relative(ROOT, f).replace(/\\/g, '/'));
+    expect(reached.length, 'the walk reads the floor\'s imports (not vacuous)').toBeGreaterThan(1);
     expect([...seen].filter((f) => isDesk(relative(ROOT, f).replace(/\\/g, '/'))).map((f) => chainTo(parent, f, ROOT))).toEqual([]);
   });
 });
