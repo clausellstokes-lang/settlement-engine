@@ -655,3 +655,50 @@ See section 4, newest last.
   `lane/stack-123-b4-wip-2026-11-27` (855ff1bed), not reported. R-BIRTH not reported. VOICES-MEASURE pushed first parts
   (8e810d384). TRAD-MEASURE DONE (cab2b5788; filed: `trad/`; ruling 122-T, E22; R14 closed as the measure's own fault).
 - POINT 122 IS NOW: cures A, cures B (B1 to B3), the traditions draw (122-T). POINT 123: C1, C2, C3 (B4). D1 is the lane's.
+
+## V25 (02:05 UTC on 2026-11-28): **POINT 121 LANDED: THE LINE IS aef8f9962** (pushed 01:39 UTC); THE SURVEY's TWO MEASURES IN AND ITS DESIGN WRITTEN (`SURVEY-DESIGN.md`: ABOUT 80 SEAT-HOURS); THE VEIL LANE PAUSED; POINT 122's JOIN STARTED
+- **POINT 121:** the row and the gate paragraph are in `docs/chair/2026-11-17/sixth/LANDINGS-SIXTH.md` at aef8f9962; the
+  landing itself is 1b2d534da0; `LINE-NOW.md` brought to it. THE TEST COUNT WAS SETTLED BY NAME (`vitest list` on
+  `/home/user/wt/base120` at 682667fe2 and on the tip): outside tests/build 43,260 names to 43,292; six titles re-worded,
+  NONE VANISHED; the shards' totals are not comparable between landings (LAND121's fourth helper left 68 skipped tests out
+  of its total). **A FIX OWED TO THE SHARD TEMPLATE: `tests` must be the reporter's `numTotalTests`, skipped included.**
+  CI's RUN ON aef8f9962 IS NOT YET READ (a check-in is set for 02:30 UTC; expected the list's 71 rows).
+  A SLIP OF THE CHAIR's, NO HARM: a `vitest run` given an empty file list began the whole suite on this machine at about
+  01:35 UTC; stopped after five minutes; nothing written.
+- **THE OWNER, 2026-11-28, FOUR MORE MESSAGES (verbatim in `SURVEY-CHARTER.md`, each with the chair's reading):** the
+  surveyor is the unquoted author of everything but the quoted voices (recordings, remarks, anecdotes); every quote sits
+  inside an existing card, one slot a card; not every card speaks (seeded, the lesser pieces mostly silent). HE ALSO ASKED,
+  AND WAS ANSWERED IN FULL: how the chair would describe a dossier (as it is; as designed), its value against other tools,
+  and how it compares with random-table generators; on his "check again" the chair CORRECTED its list of where table rollers
+  win from the product's own code (one click and free without an account are true here too; the true gaps: unlimited free
+  rolls and free export; a user's own tables of text; small standalone generators): named for AFTER the release, no scope.
+- **SURVEY-MEASURE (06e8ab679) AND VOICES-MEASURE (4fc044951): DONE, FILED WHOLE (`survey/measure/`, `survey/voices/`), BOTH
+  SEATS STOPPED.** SURVEY-MEASURE REFUTED THE CHARTER's PICTURE IN FIVE PLACES (fail-open is not the lever: 43 refusals in
+  1,800 pages, 33 wrong lines for 5 right; the classes are four; `stated` is a no-repeat set; the clashes are late writes
+  and claims with no atom; a rule on pool lines sees a third of the page): THE OWNER WAS TOLD PLAINLY. VOICES-MEASURE: quoting
+  every street line reads worse; two or three quotes a tab read well; the four dispositions are a STORED field.
+- **E25: `SURVEY-DESIGN.md` (S1) IS WRITTEN AND PUT TO THE OWNER AS ONE NUMBER: ABOUT 80 SEAT-HOURS, THREE TO FOUR DAYS:**
+  the record is the only arbiter (no run-time arbiter between lines); a table of exclusions between claims that drives a
+  PAGE CLASH CENSUS at 0; unknown stays silent; the surveyor's three kinds as a classing; voices in existing cards; THE
+  SHARED PAGE SHOWS NO QUOTE UNTIL THE VEIL LANDS; units S-A to S-I; no birth moves. IT STARTS AFTER POINTS 122 AND 123 ARE
+  THROUGH THEIR READER, the promise's half first (about 35 seat-hours) if the account's window binds. HE HAS NOT ANSWERED
+  THE WINDOW QUESTION (extra usage on, or the week stretched).
+- **THE VEIL LANE IS PAUSED (01:12 UTC):** VEIL-56's page `veil/v56/PAUSE-2026-11-28.md` at 468fd902a on
+  `lane/veil-56-2026-11-27`; NOTHING MERGED (the tip dbd4cd9e5); each seat's last commits are in that page. Three seats
+  worked about thirty minutes past the order (the first pause messages were queued behind their runs): nothing merged or
+  lost. THREE THINGS IN THE PAGE THE CHAIR HAS NOT RULED (for the resumption): `galleryVeilHandRows` V7-2 arm (2) pins the old
+  design against V30; "MASK-RULE" owed by the lane's owner; "A5-SHAPE: B" ruled by VEIL-56 itself.
+- **TRAD-BUILD: ACCEPTED (E24), the chair read its source whole:** `lane/stack-122-trad-wip-2026-11-27` at f1ccc5bda
+  (LOCAL, `/home/user/wt/trad`): the draw asks the floor (`traditions/traditionFloor.js`, one helper for the draw and the
+  shared page's drawn set); rulings 122-T, 122-T-2, 122-T-3 (the last corrects the chair's own: four tests of the security
+  file pinned the old draw: kept word for word on records re-stamped 0.9.0, each with a 0.10.0 twin that keeps the security
+  expects verbatim); corpora: rows dropped 0 and 0 (owner, shared), towns short 0, showing none 0, born records moved 0,
+  the 0.9.0 and stampless draws identical on 1,800 of 1,800; the floor proved a floor under every veil address; the security
+  file 58 of 58. TO WATCH AT THE JOIN: `genesis.js` now reaches `traditionDescription.js` through the floor helper (sizes).
+- **R-CURES-B: ACCEPTED at 1b0241706 (point 122); B4 at 855ff1bed on `lane/stack-123-b4-wip-2026-11-27` with ONE COMMIT
+  OWED (ruling 123-C3-1: `faultsRows.test.js` FR3's seed table re-pointed, 5 of 15 rows).** R-BIRTH: asked at 02:03 UTC for
+  its report of C2 (its branch at 1e8576d08 since 23:02 UTC).
+- **POINT 122's JOIN: LAND-122** (a local Opus helper; `prompts/START-LAND-122.txt`): on aef8f9962, three merges (cures A
+  e096d4a96, cures B 1b0241706, the traditions draw f1ccc5bda), the doors, the local gate, the sizes. THEN: the chair pushes
+  the joined tip as transport, ONE independent reader (the top tier, max effort) reads it with point 123's joined tip, the
+  whole suite in four shards, the row, the push. RENAME-MEASURE is at (D) and (F) (a55d32a39), not reported.
