@@ -26,9 +26,40 @@ vi.mock('../../src/generators/aiLayer', () => ({ runTemplateNarrative: vi.fn() }
 vi.mock('../../src/lib/analytics.js', () => ({ track: vi.fn(), Funnel: { track: vi.fn() }, EVENTS: new Proxy({}, { get: (_t, k) => String(k) }) }));
 // THE OWNER'S NOTES: a ledger cannot stay open across an awaited render (`withPresumptionLedger` is synchronous), so a TAP
 // keeps every note made while no other ledger is open (a nested "quiet" ledger keeps its own notes, as it does in the app).
+// `activePresumptionLedger` answers the tap there too, since a draw notes only where a ledger is open (`drawDeclared.js :: note`).
 vi.mock('../../src/domain/facts/presumptionLedger.js', async (importOriginal) => {
   const real = /** @type {any} */ (await importOriginal());
-  return { ...real, notePresumption: (/** @type {any} */ e) => { if (mocks.tap && real.activePresumptionLedger() === null) mocks.tap.push(e); real.notePresumption(e); } };
+  return {
+    ...real,
+    activePresumptionLedger: () => real.activePresumptionLedger() ?? mocks.tap,
+    notePresumption: (/** @type {any} */ e) => { if (mocks.tap && real.activePresumptionLedger() === null) mocks.tap.push(e); real.notePresumption(e); },
+  };
+});
+// THE TEXT OF A NOTE: a note carries its pool and line id, not its words. Each draw of `drawDeclared.js` is wrapped: the notes it
+// adds to the open ledger (or the tap) gain the TEXT of the line they name (the pool's line by id or index, else what the draw
+// returned), so the census can tell whether that line is on the page (`page-clash.shared.mjs :: noteClaims`). Nothing drawn moves.
+vi.mock('../../src/domain/facts/drawDeclared.js', async (importOriginal) => {
+  const real = /** @type {any} */ (await importOriginal());
+  const L = /** @type {any} */ (await import('../../src/domain/facts/presumptionLedger.js'));
+  const textOf = (/** @type {unknown} */ l) => { if (l == null) return undefined; try { const t = real.lineText(l); return typeof t === 'string' ? t : undefined; } catch { return undefined; } };
+  /** @param {(...a: any[]) => any} fn */
+  const wrap = (fn) => (/** @type {any[]} */ ...args) => {
+    const ledger = L.activePresumptionLedger();
+    const from = Array.isArray(ledger) ? ledger.length : 0;
+    const out = fn(...args);
+    if (Array.isArray(ledger)) {
+      const pool = Array.isArray(args[0]) ? args[0] : null;
+      const returned = typeof out === 'string' ? out : out && typeof out === 'object' && 'line' in out ? textOf(out.line) : typeof args[0] === 'string' ? args[0] : undefined;
+      for (let i = from; i < ledger.length; i += 1) {
+        const n = ledger[i]; if (!n || typeof n.text === 'string') continue;
+        const own = pool ? (typeof n.lineId === 'number' && n.lineId >= 0 ? pool[n.lineId] : pool.find((l) => l && typeof l === 'object' && l.id === n.lineId)) : undefined;
+        const text = textOf(own) ?? returned;
+        if (typeof text === 'string') ledger[i] = { ...n, text };
+      }
+    }
+    return out;
+  };
+  return Object.fromEntries(Object.entries(real).map(([k, v]) => [k, typeof v === 'function' && k !== 'lineText' ? wrap(v) : v]));
 });
 
 import OutputContainer from '../../src/components/OutputContainer.jsx';

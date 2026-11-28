@@ -12,10 +12,10 @@
  * (the page prints it from the record: the crisis card, the debt tension, the graded row, the rung).
  * THE PAGE'S NOTES are the owner page's: the birth's, the public prose stamp's, and the owner render's (the measure's method,
  * `survey/measure/E-clashes.md`, source 1).
- * PRINTED: a note of the state-prose kernel (`drawKind` K, a vid of a `DS-*` pool) is confirmed printed when the longest fixed
- * fragment of its template (fifteen characters or more, the slots cut out) is on the page. Every other note is COUNTED AS
- * PRINTED: the census cannot tell from a note whether a table row drawn at birth still prints (E-clashes row 16's kind); it says
- * so by row (`unconfirmed`).
+ * PRINTED: a note whose line's TEXT is known is kept only where a fixed fragment of it is on the page: the kernel's notes by
+ * their vid (`kernelTexts`), every other note by the text the renderer reads off the draw that made it (`text`, set on the
+ * note by `page-clash.render.census.jsx`'s wrap of `drawDeclared.js`). A note whose text is still unknown is COUNTED AS
+ * PRINTED: the census cannot tell whether such a line prints; it says so by row (`unconfirmed`).
  */
 
 /** Pool keys that ARE a fact: the line stands on the atom by its key (the order of hardness: a keyed prose line, rank 5). */
@@ -42,18 +42,21 @@ export function claimOf(word, V) {
     return { dim: 'crisis', neg: !!m, key: null, kinds: atom.values ? kinds : null, raw: w };
   }
   if (d.shape === 'presence') return { dim: atom.dimension, neg: !!m, key: atom.key, raw: w };
-  // band: the range of rungs (indices) or numbers the atom admits
+  // band: the ranges of rungs (indices) or numbers the atom admits; `no <band atom>` (an excludes column's band atom, as the
+  // ledger writes it) admits the complement, which may be two ranges
   const order = d.order || null;
   const at = order ? order.indexOf(atom.value) : Number(atom.value);
-  const top = order ? order.length - 1 : Infinity;
-  const ranges = { '=': [at, at], '≥': [at, top], '>': [order ? at + 1 : at + 1e-9, top], '≤': [order ? 0 : -Infinity, at], '<': [order ? 0 : -Infinity, order ? at - 1 : at - 1e-9] };
-  return { dim: atom.dimension, neg: false, band: true, range: ranges[atom.op], raw: w };
+  const bottom = order ? 0 : -Infinity; const top = order ? order.length - 1 : Infinity; const step = order ? 1 : 1e-9;
+  const ranges = { '=': [at, at], '≥': [at, top], '>': [at + step, top], '≤': [bottom, at], '<': [bottom, at - step] };
+  const r = ranges[atom.op];
+  const out = !m ? [r] : [[bottom, r[0] - step], [r[1] + step, top]].filter(([lo, hi]) => lo <= hi);
+  return { dim: atom.dimension, neg: false, band: true, ranges: out, raw: w };
 }
 
-/** @param {[number, number]} a @param {[number, number]} b */
-const meets = (a, b) => a[0] <= b[1] && b[0] <= a[1];
-/** @param {[number, number]} inner @param {[number, number]} outer */
-const within = (inner, outer) => inner[0] >= outer[0] && inner[1] <= outer[1];
+/** Do two sets of ranges share a value? @param {ReadonlyArray<[number, number]>} a @param {ReadonlyArray<[number, number]>} b */
+const meets = (a, b) => a.some((x) => b.some((y) => x[0] <= y[1] && y[0] <= x[1]));
+/** Does every range of `inner` lie inside one of `outer`? @param {ReadonlyArray<[number, number]>} inner @param {ReadonlyArray<[number, number]>} outer */
+const within = (inner, outer) => inner.every((x) => outer.some((y) => x[0] >= y[0] && x[1] <= y[1]));
 
 /**
  * Does a claim stand on a row's side atom? A presence claim on its own atom and polarity; a band claim whose range lies inside
@@ -63,7 +66,7 @@ const within = (inner, outer) => inner[0] >= outer[0] && inner[1] <= outer[1];
  */
 export function standsOn(c, side) {
   if (!c || !side || c.dim !== side.dim) return false;
-  if (side.band) return !!c.band && within(c.range, side.range);
+  if (side.band) return !!c.band && within(c.ranges, side.ranges);
   if (side.dim === 'crisis') {
     if (!side.kinds || side.kinds.length !== 1) return false;
     if (c.neg !== side.neg || !c.kinds) return false;
@@ -73,12 +76,12 @@ export function standsOn(c, side) {
 }
 
 /**
- * The template's longest fixed fragment (slots cut out), or null under fifteen characters.
+ * The template's fixed fragments of fifteen characters or more (cut at its slots and at the tier nouns a line is spoken
+ * with); a line is printed when ANY is on the page (a generous reading: it can only over-count).
  * @param {string} text
  */
-export function fragmentOf(text) {
-  const parts = String(text).split(/\{[^}]*\}/).map((p) => p.trim()).sort((a, b) => b.length - a.length);
-  return parts[0] && parts[0].length >= 15 ? parts[0] : null;
+export function fragmentsOf(text) {
+  return String(text).split(/\{[^}]*\}|\b(?:thorp|hamlet|village|town|city|metropolis|settlement)s?\b/i).map((p) => p.trim()).filter((p) => p.length >= 15);
 }
 
 /**
@@ -108,11 +111,11 @@ export function noteClaims(notes, pageText, texts, V) {
     if (KEYED_POOLS[e.pool]) words.push(KEYED_POOLS[e.pool]);
     const claims = words.map((w) => claimOf(w, V)).filter(Boolean);
     if (!claims.length) continue;
-    const text = e.drawKind === 'K' ? texts.get(`${e.pool}#${e.lineId}`) : undefined;
-    const frag = text ? fragmentOf(text) : null;
-    const printed = frag ? pageText.includes(frag) : true;
+    const text = e.drawKind === 'K' ? texts.get(`${e.pool}#${e.lineId}`) : typeof e.text === 'string' ? e.text : undefined;
+    const frags = text ? fragmentsOf(text) : [];
+    const printed = frags.length ? frags.some((f) => pageText.includes(f)) : true;
     if (!printed) continue;
-    out.push({ note: `${e.pool}#${e.lineId}`, claims, printed, confirmed: !!frag });
+    out.push({ note: `${e.pool}#${e.lineId}`, claims, printed, confirmed: frags.length > 0 });
   }
   return out;
 }
@@ -150,7 +153,7 @@ export function pageClashes(table, noted, holds, V) {
       for (const y of all) {
         if (isNamed(y.c)) continue;
         const clash = row.generic === 'presence' ? (!x.c.band && x.c.dim !== 'crisis' && x.c.dim === y.c.dim && x.c.key === y.c.key && !x.c.neg && y.c.neg)
-          : row.generic === 'band' ? (x.c.band && y.c.band && x.c.dim === y.c.dim && !meets(x.c.range, y.c.range))
+          : row.generic === 'band' ? (x.c.band && y.c.band && x.c.dim === y.c.dim && !meets(x.c.ranges, y.c.ranges))
             : (x.c.dim === 'crisis' && y.c.dim === 'crisis' && !x.c.neg && y.c.neg && x.c.kinds?.length === 1 && y.c.kinds?.includes(x.c.kinds[0]));
         if (clash) { out[row.id] = { a: `${x.n.note} (${x.c.raw})`, b: `${y.n.note} (${y.c.raw})`, confirmed: x.n.confirmed && y.n.confirmed }; break; }
       }
