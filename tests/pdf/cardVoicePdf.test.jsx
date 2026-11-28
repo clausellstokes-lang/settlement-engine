@@ -6,6 +6,10 @@
  * Over two born towns of C, each PDF chapter that prints a card kind is walked as the PDF's own tests walk a chapter (every
  * function component executed): every card the PDF prints carries the SAME quote the screen's plan gives it (the line and
  * the speaker), the slot sits on the card itself, and the liar's line is never printed.
+ *
+ * THE TONIGHT SHEET HOLDS NO QUOTE, IN PRINT AS ON SCREEN (ruling 5; the chair's G1-7 of 2026-11-28): the PDF's crisis
+ * block lives only in chapter 02, the one Tonight sheet, so the print has no crisis card that may speak. The crisis
+ * card's quote lives on the screen's Summary/Crisis card alone, so it is by design that the print has fewer quotes.
  */
 import { beforeAll, describe, expect, it, vi } from 'vitest';
 
@@ -23,6 +27,7 @@ import { PowerStructure } from '../../src/pdf/sections/PowerStructure.jsx';
 import { HistoryFounding } from '../../src/pdf/sections/HistoryFounding.jsx';
 import { CrisisSections } from '../../src/pdf/sections/CrisisSections.jsx';
 import { NotableNPCs } from '../../src/pdf/sections/NotableNPCs.jsx';
+import { TonightAtTheTable } from '../../src/pdf/sections/TonightAtTheTable.jsx';
 import { buildViewModel } from '../../src/pdf/lib/viewModel.js';
 import { quoteFor, voicePlanOf } from '../../src/domain/voices/voicePlan.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
@@ -78,5 +83,27 @@ describe('the print twin carries the screen\'s quote, card for card', () => {
     }
     expect(slots).toBeGreaterThan(20);
     expect(printed).toBeGreaterThan(3);
+  }, 120_000);
+});
+
+/** Every string under a react(-pdf) tree, function components executed. @param {any} n @param {string[]} acc */
+const textsOf = (n, acc = []) => {
+  if (n == null || typeof n === 'boolean') return acc;
+  if (typeof n === 'string' || typeof n === 'number') { acc.push(String(n)); return acc; }
+  if (Array.isArray(n)) { for (const x of n) textsOf(x, acc); return acc; }
+  if (typeof n.type === 'function') return textsOf(n.type(n.props), acc);
+  return textsOf(n.props?.children, acc);
+};
+
+describe('the Tonight sheet holds no quote in print (ruling 5, G1-7)', () => {
+  it('a town in crisis whose screen crisis card speaks (dp-village-2): chapter 02 holds no slot and no quote text', () => {
+    const s = generateSettlementPipeline(birthConfig({ settType: 'village' }), null, { seed: 'dp-village-2', customContent: {} });
+    const said = [...voicePlanOf(s, { audience: 'owner' }).quotes.values()].find((q) => q.kind === 'crisis');
+    expect(said, 'the screen\'s crisis card speaks (the plant)').toBeTruthy();
+    const el = <TonightAtTheTable settlement={s} narrativeMode={false} vm={buildViewModel({ settlement: s, dmView: true })} />;
+    expect(find(el, (n) => n.type === CardVoicePdf)).toEqual([]);
+    const page = textsOf(el).join('');
+    expect(page.includes(`“${said.text}”`)).toBe(false);
+    expect(page).not.toMatch(/” — /);
   }, 120_000);
 });

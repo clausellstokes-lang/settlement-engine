@@ -3,7 +3,9 @@
  * points 5 and 11). The same plan as the screen's slot (`domain/voices/voicePlan.js`, the owner's audience: the PDF is the
  * owner's own document, built `dmView`), so a card the PDF prints carries the same quote the screen does: one italic line in
  * quotation marks and its signature. A card the PDF does not print (a person on a name row, a tradition of a town not lit)
- * has no slot, and so no quote (ruling 5).
+ * has no slot, and so no quote (ruling 5). THE TONIGHT SHEET HOLDS NONE, in print as on screen (ruling 5; the chair's G1-7):
+ * the print's crisis block lives only in chapter 02, the Tonight sheet, so the crisis card's quote is the screen's alone
+ * (Summary/Crisis) and the print, by design, carries fewer.
  *
  * THE LIAR'S LINE IS NOT PRINTED: a printed page cannot keep the DM's mark from the table, so the liar's card is silent
  * in print (ruling 11: "where the mark cannot be shown safely on a surface, the liar's line is not shown there").
