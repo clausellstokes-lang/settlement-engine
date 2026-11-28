@@ -90,3 +90,8 @@
   beside a place debt and has no line that says the debt: the Economics header prints nothing in 45 | 23 towns of C | V and
   the standing-of-living tile in 2 | 18 (`landing/122/U1-table.tsv`). S-B2 (SURVEY-TABLE) fills every one. THE RELEASE DOES
   NOT GO while the page clash census's empty-slot row reads over 0 on the line.
+- **EMPTY SLOTS ELSEWHERE (found by S-B2's measure; lines owed, the survey's second wave):** nine Economics headers in the
+  C4 pool (Poor) print nothing under `plague_onset` (every C4 line excludes the plague or needs a siege: C dp-thorp-129,
+  dp-city-5, dp-metropolis-65; V dp-hamlet-49, dp-village-111, dp-town-99, dp-city-10, dp-city-72, dp-metropolis-65); V
+  dp-village-58's WEALTHY tile under `infiltrated`. SURVEY-TABLE is listing every desk slot that prints nothing on C or V
+  (`survey/table/EMPTY-SLOTS.tsv`). OWED: a line for each, or a ruling that the slot may be silent there.
