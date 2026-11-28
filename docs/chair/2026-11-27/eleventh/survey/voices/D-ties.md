@@ -37,7 +37,7 @@ The `via` of the allegiances (how the tie reaches the person's own house; `alleg
 
 **What this does to "at most one a place".** The cap binds in most places that have a liar at all: more than one holder in C 256 of 318 towns and V 186 of 253. The holders cluster in towns and up: on C 0 thorps, 0 hamlets, 1 village; on V 0, 4, 1. **The deliberately false quote is a town-and-city feature.** Small places, which are most of what a DM reads by count, will almost never carry one.
 
-**Would the ranking give a holder a line at all?** With (B)'s strict ranking (C / V): a holder speaks in 232 of 318 / 189 of 253 such towns; 374 of 972 / 412 of 1,009 holders speak, 476 / 556 lines in all. Of those lines, 56 / 88 are about safety or crime, and 28 / 29 name the holder's own house. So the liar's line is there to be had, but the plain ranking hands the holder an ordinary line on their own trade far more often than one the tie touches. The lie needs its own pick: choose the holder, then the one line the tie touches. Do not hope the ranking lands on it.
+**Would the ranking give a holder a line at all?** With (B)'s strict ranking (C / V): a holder speaks in 182 of 318 / 168 of 253 such towns; 266 of 972 / 321 of 1,009 holders speak, 313 / 398 lines in all. Of those lines, 44 / 70 are about safety or crime, and 13 / 16 name the holder's own house. So the liar's line is there to be had, but the plain ranking hands the holder an ordinary line on their own trade far more often than one the tie touches. The lie needs its own pick: choose the holder, then the one line the tie touches. Do not hope the ranking lands on it.
 
 ## What the tie "touches", as the record can name it
 
