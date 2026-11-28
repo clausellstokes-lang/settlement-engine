@@ -34,12 +34,12 @@ Tree 682667fe2 (point 120). Script counts CONFIRMED (`c-static.mjs`, `cd/cd.mjs`
 | towns where two still read alike with 4 tags a drive | 1 | 9 | 38 | 129 | 150 | 150 | 477 |
 | ... with 6 tags a drive | 1 | 6 | 26 | 120 | 149 | 150 | 452 |
 | towns where two SPEAKERS (B, loose) share a cell | 1 | 26 | 86 | 144 | 150 | 150 | 557 |
-| ... still alike with 4 tags | 1 | 9 | 35 | 102 | 135 | 139 | 421 |
-| tabs with a speaker (B, loose) | 945 | 1006 | 1174 | 1295 | 1498 | 1624 | 7542 |
-| tabs with two or more speakers | 92 | 499 | 626 | 750 | 915 | 983 | 3865 |
-| tabs where two speakers share a cell | 3 | 39 | 81 | 136 | 192 | 200 | 651 |
-| tabs where two speakers still read alike with 4 tags | 3 | 11 | 26 | 44 | 58 | 50 | 192 |
-| towns with at least one such tab | 1 | 9 | 21 | 35 | 51 | 44 | 161 |
+| ... still alike with 4 tags | 1 | 9 | 35 | 104 | 135 | 140 | 424 |
+| tabs with a speaker (B, loose) | 1083 | 1177 | 1181 | 1306 | 1501 | 1624 | 7872 |
+| tabs with two or more speakers | 99 | 625 | 630 | 758 | 918 | 986 | 4016 |
+| tabs where two speakers share a cell | 3 | 45 | 84 | 153 | 195 | 197 | 677 |
+| tabs where two speakers still read alike with 4 tags | 3 | 13 | 26 | 47 | 58 | 49 | 196 |
+| towns with at least one such tab | 1 | 9 | 21 | 39 | 50 | 41 | 161 |
 | towns where two people share a speech pattern | 0 | 0 | 0 | 33 | 144 | 150 | 327 |
 | towns where two share a mannerism | 0 | 0 | 0 | 32 | 144 | 150 | 326 |
 
@@ -53,18 +53,18 @@ Tree 682667fe2 (point 120). Script counts CONFIRMED (`c-static.mjs`, `cd/cd.mjs`
 | ... reading the drive flaw-first (the engine own order) | 1 | 19 | 90 | 149 | 150 | 150 | 559 |
 | towns where two still read alike with 4 tags a drive | 0 | 6 | 39 | 130 | 149 | 150 | 474 |
 | ... with 6 tags a drive | 0 | 3 | 22 | 104 | 150 | 150 | 429 |
-| towns where two SPEAKERS (B, loose) share a cell | 1 | 18 | 83 | 146 | 149 | 150 | 547 |
-| ... still alike with 4 tags | 0 | 5 | 34 | 105 | 131 | 144 | 419 |
-| tabs with a speaker (B, loose) | 943 | 1034 | 1222 | 1322 | 1453 | 1491 | 7465 |
-| tabs with two or more speakers | 94 | 499 | 687 | 757 | 922 | 960 | 3919 |
-| tabs where two speakers share a cell | 3 | 26 | 93 | 138 | 205 | 215 | 680 |
-| tabs where two speakers still read alike with 4 tags | 0 | 7 | 24 | 37 | 57 | 59 | 184 |
-| towns with at least one such tab | 0 | 5 | 20 | 35 | 47 | 44 | 151 |
+| towns where two SPEAKERS (B, loose) share a cell | 1 | 19 | 83 | 146 | 150 | 150 | 549 |
+| ... still alike with 4 tags | 0 | 6 | 34 | 108 | 130 | 145 | 423 |
+| tabs with a speaker (B, loose) | 1093 | 1222 | 1228 | 1326 | 1454 | 1491 | 7814 |
+| tabs with two or more speakers | 104 | 588 | 695 | 763 | 924 | 965 | 4039 |
+| tabs where two speakers share a cell | 3 | 31 | 97 | 140 | 211 | 228 | 710 |
+| tabs where two speakers still read alike with 4 tags | 0 | 10 | 25 | 36 | 54 | 65 | 190 |
+| towns with at least one such tab | 0 | 5 | 21 | 34 | 45 | 48 | 153 |
 | towns where two people share a speech pattern | 0 | 0 | 0 | 40 | 142 | 150 | 332 |
 | towns where two share a mannerism | 0 | 0 | 0 | 40 | 142 | 150 | 332 |
 
 ## Is four tags a drive enough?
 
-- **Over a whole town, no tag count is enough above a village, and none is needed below one.** From the town size up, two legitimate people share a cell in 146–150 of 150 places, and 4 tags leave a same-sounding pair in 129–150 of 150 (C). That is arithmetic: a town holds about 25 people and 17 cells are in use. In thorps and hamlets the cells almost never collide (1 and 26 of 150 on C).
-- **On a tab, which is where a reader hears two people side by side, 4 tags are nearly enough.** Of the tabs that carry two or more speakers, 651 of 3,865 (C) have two of them in one cell, and 192 (5.0%) still read alike with 4 tags. On V the figures are 680, and 184 of 3,919 (4.7%). The share of towns with at least one such tab is C 161 of 900 (18%) and V 151 of 900 (17%), most of them towns, cities and metropolises. 6 tags lower the whole-town share only a little (C 477 to 452).
+- **Over a whole town, no tag count is enough above a village, and none is needed below one.** From the town size up, two legitimate people share a cell in 146–150 of 150 places, and 4 tags leave a same-sounding pair in 129–150 of 150 (C, all legitimate people). That is arithmetic: a town holds about 25 people and 17 cells are in use. In thorps and hamlets the cells almost never collide (1 and 26 of 150 on C).
+- **On a tab, which is where a reader hears two people side by side, 4 tags are nearly enough.** Of the tabs that carry two or more speakers, 677 of 4,016 (C) have two of them in one cell, and 196 (4.9%) still read alike with 4 tags. On V the figures are 710, and 190 of 4,039 (4.7%). The share of towns with at least one such tab is C 161 of 900 (18%) and V 153 of 900 (17%), most of them towns, cities and metropolises. 6 tags lower the whole-town share only a little (C 477 to 452).
 - **The cure is not more tags, and not more sentence versions.** The stored `speech` line is unique in every place up to 30 people, and (B) shows the larger fault is one person saying too much in a small place, not two people sounding alike in a big one. CONFIRMED (the counts); the judgment is PLAUSIBLE.
