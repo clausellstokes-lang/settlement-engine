@@ -75,7 +75,7 @@ grow). It has a react-pdf twin, `src/pdf/primitives/CardVoice.jsx`, fed the same
 
 1. **Long tabs.** "1 in 4 of the lesser" is 6 to 20 quotes on Institutions and 5 to 16 on NPCs in towns and up, so the
    cap would choose. *May the odds be bounded by a tab budget (2 weighty, 1 lesser), a fourth number for him to sign?*
-2. **Tensions have no speaker** in 73 to 90% of cases (their parties are words, not powers). *Who voices a tension: the
+2. **Tensions have no speaker** in 73 to 93% of cases (C and V) (their parties are words, not powers). *Who voices a tension: the
    aggrieved by trade, or nobody (the surveyor's alone)?*
 3. **Two cards of one thing on a page** (a seat power; a tension on Overview and History). *Is "the roster row and the
    History card, and no other" right?*

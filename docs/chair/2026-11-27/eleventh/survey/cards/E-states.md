@@ -16,201 +16,211 @@ are proposed.
 
 ### crisis
 
-| state | C |
-|---|---|
-| wartime | 37 |
-| monster_pressure | 29 |
-| succession_void | 28 |
-| politically_fractured | 28 |
-| recently_betrayed | 28 |
-| indebted | 25 |
-| under_siege | 23 |
-| mass_migration | 18 |
-| plague_onset | 17 |
-| insurgency | 16 |
-| infiltrated | 16 |
-| occupied | 12 |
-| famine | 11 |
-| religious_conversion | 9 |
+| state | C | V |
+|---|---|---|
+| wartime | 37 | 31 |
+| monster_pressure | 29 | 23 |
+| succession_void | 28 | 21 |
+| politically_fractured | 28 | 25 |
+| recently_betrayed | 28 | 26 |
+| indebted | 25 | 29 |
+| under_siege | 23 | 15 |
+| mass_migration | 18 | 19 |
+| plague_onset | 17 | 11 |
+| insurgency | 16 | 28 |
+| infiltrated | 16 | 19 |
+| occupied | 12 | 9 |
+| famine | 11 | 34 |
+| religious_conversion | 9 | 7 |
 
 ### tension
 
-| state | C |
-|---|---|
-| guild_conflict · major | 122 |
-| crime_wave · major | 119 |
-| resource_scarcity · major | 110 |
-| external_threat · catastrophic | 106 |
-| succession_crisis · major | 69 |
-| corruption_scandal · major | 69 |
-| outside_debt · major | 63 |
-| legitimacy_crisis · catastrophic | 63 |
-| great_flood · catastrophic | 56 |
-| tyranny · catastrophic | 54 |
-| religious_tension · major | 53 |
-| infiltration_fear · major | 47 |
-| plague_years · catastrophic | 47 |
-| magical_controversy · major | 47 |
-| disputed_land · major | 45 |
-| generational_divide · minor | 44 |
-| heresy_trial · major | 40 |
-| great_fire · catastrophic | 39 |
-| popular_uprising · catastrophic | 38 |
-| leadership_vacuum · catastrophic | 36 |
-| trade_collapse · major | 36 |
-| occupation_legacy · catastrophic | 36 |
-| wild_magic · major | 35 |
-| market_crash · major | 33 |
-| population_friction · major | 30 |
-| pilgrimage_surge · major | 30 |
-| trade_dispute · major | 29 |
-| economic_disparity · major | 28 |
-| demographic_pressure · major | 18 |
+| state | C | V |
+|---|---|---|
+| guild_conflict · major | 122 | 124 |
+| crime_wave · major | 119 | 122 |
+| resource_scarcity · major | 110 | 149 |
+| external_threat · catastrophic | 106 | 90 |
+| succession_crisis · major | 69 | 69 |
+| corruption_scandal · major | 69 | 54 |
+| outside_debt · major | 63 | 60 |
+| legitimacy_crisis · catastrophic | 63 | 79 |
+| great_flood · catastrophic | 56 | 34 |
+| tyranny · catastrophic | 54 | 42 |
+| religious_tension · major | 53 | 46 |
+| infiltration_fear · major | 47 | 33 |
+| plague_years · catastrophic | 47 | 45 |
+| magical_controversy · major | 47 | 60 |
+| disputed_land · major | 45 | 33 |
+| generational_divide · minor | 44 | 42 |
+| heresy_trial · major | 40 | 49 |
+| great_fire · catastrophic | 39 | 48 |
+| popular_uprising · catastrophic | 38 | 46 |
+| leadership_vacuum · catastrophic | 36 | 46 |
+| trade_collapse · major | 36 | 29 |
+| occupation_legacy · catastrophic | 36 | 25 |
+| wild_magic · major | 35 | 32 |
+| market_crash · major | 33 | 21 |
+| population_friction · major | 30 | 39 |
+| pilgrimage_surge · major | 30 | 31 |
+| trade_dispute · major | 29 | 38 |
+| economic_disparity · major | 28 | 25 |
+| demographic_pressure · major | 18 | 19 |
 
 ### tensionType
 
-| state | C |
-|---|---|
-| guild_conflict | 122 |
-| crime_wave | 119 |
-| resource_scarcity | 110 |
-| external_threat | 106 |
-| succession_crisis | 69 |
-| corruption_scandal | 69 |
-| outside_debt | 63 |
-| legitimacy_crisis | 63 |
-| great_flood | 56 |
-| tyranny | 54 |
-| religious_tension | 53 |
-| infiltration_fear | 47 |
-| plague_years | 47 |
-| magical_controversy | 47 |
-| disputed_land | 45 |
-| generational_divide | 44 |
-| heresy_trial | 40 |
-| great_fire | 39 |
-| popular_uprising | 38 |
-| leadership_vacuum | 36 |
-| trade_collapse | 36 |
-| occupation_legacy | 36 |
-| wild_magic | 35 |
-| market_crash | 33 |
-| population_friction | 30 |
-| pilgrimage_surge | 30 |
-| trade_dispute | 29 |
-| economic_disparity | 28 |
-| demographic_pressure | 18 |
+| state | C | V |
+|---|---|---|
+| guild_conflict | 122 | 124 |
+| crime_wave | 119 | 122 |
+| resource_scarcity | 110 | 149 |
+| external_threat | 106 | 90 |
+| succession_crisis | 69 | 69 |
+| corruption_scandal | 69 | 54 |
+| outside_debt | 63 | 60 |
+| legitimacy_crisis | 63 | 79 |
+| great_flood | 56 | 34 |
+| tyranny | 54 | 42 |
+| religious_tension | 53 | 46 |
+| infiltration_fear | 47 | 33 |
+| plague_years | 47 | 45 |
+| magical_controversy | 47 | 60 |
+| disputed_land | 45 | 33 |
+| generational_divide | 44 | 42 |
+| heresy_trial | 40 | 49 |
+| great_fire | 39 | 48 |
+| popular_uprising | 38 | 46 |
+| leadership_vacuum | 36 | 46 |
+| trade_collapse | 36 | 29 |
+| occupation_legacy | 36 | 25 |
+| wild_magic | 35 | 32 |
+| market_crash | 33 | 21 |
+| population_friction | 30 | 39 |
+| pilgrimage_surge | 30 | 31 |
+| trade_dispute | 29 | 38 |
+| economic_disparity | 28 | 25 |
+| demographic_pressure | 18 | 19 |
 
 ### power
 
-| state | C |
-|---|---|
-| bound · Minor | 720 |
-| none · Minor | 554 |
-| contender · Minor | 328 |
-| ruler · Minor | 313 |
-| ruler · Dominant | 303 |
-| none · Significant | 254 |
-| none · Suppressed | 202 |
-| ruler · Significant | 157 |
-| bound · Significant | 127 |
-| none · Strong | 109 |
-| bound · Strong | 84 |
-| contender · Significant | 79 |
-| ruler · Strong | 64 |
-| contender · Dominant | 48 |
-| contender · Strong | 40 |
-| ruler · Suppressed | 16 |
-| ruler · Strong · legitimacy crisis | 15 |
-| ruler · Minor · legitimacy crisis | 12 |
-| ruler · Significant · legitimacy crisis | 11 |
-| none · Dominant | 10 |
-| contender · Suppressed | 8 |
-| ruler · Dominant · legitimacy crisis | 7 |
-| none · Minor · legitimacy crisis | 5 |
-| ruler · Suppressed · legitimacy crisis | 2 |
-| bound · Suppressed | 2 |
+| state | C | V |
+|---|---|---|
+| bound · Minor | 720 | 391 |
+| none · Minor | 554 | 316 |
+| contender · Minor | 328 | 387 |
+| ruler · Minor | 313 | 152 |
+| ruler · Dominant | 303 | 348 |
+| none · Significant | 254 | 89 |
+| none · Suppressed | 202 | 227 |
+| ruler · Significant | 157 | 161 |
+| bound · Significant | 127 | 145 |
+| none · Strong | 109 | 193 |
+| bound · Strong | 84 | 83 |
+| contender · Significant | 79 | 143 |
+| ruler · Strong | 64 | 96 |
+| contender · Dominant | 48 | 21 |
+| contender · Strong | 40 | 65 |
+| ruler · Suppressed | 16 | 16 |
+| ruler · Strong · legitimacy crisis | 15 | 29 |
+| ruler · Minor · legitimacy crisis | 12 | 22 |
+| ruler · Significant · legitimacy crisis | 11 | 19 |
+| none · Dominant | 10 | 109 |
+| contender · Suppressed | 8 | 55 |
+| ruler · Dominant · legitimacy crisis | 7 | 55 |
+| none · Minor · legitimacy crisis | 5 | 19 |
+| ruler · Suppressed · legitimacy crisis | 2 | 2 |
+| bound · Suppressed | 2 | 49 |
+| bound · Dominant | 0 | 1 |
+| none · Strong · legitimacy crisis | 0 | 1 |
+| none · Significant · legitimacy crisis | 0 | 12 |
+| none · Suppressed · legitimacy crisis | 0 | 2 |
 
 ### institution
 
-| state | C |
-|---|---|
-| standing | 28749 |
-| Vulnerable | 5112 |
-| marked | 232 |
-| short | 213 |
-| stopped | 73 |
-| Impaired | 28 |
+| state | C | V |
+|---|---|---|
+| standing | 28749 | 26975 |
+| Vulnerable | 5112 | 5562 |
+| marked | 232 | 169 |
+| short | 213 | 287 |
+| stopped | 73 | 49 |
+| Impaired | 28 | 57 |
 
 ### institutionCategory
 
-| state | C |
-|---|---|
-| Crafts | 10565 |
-| Economy | 9385 |
-| Infrastructure | 3494 |
-| Religious | 2962 |
-| Defense | 2039 |
-| Entertainment | 1693 |
-| Criminal | 1558 |
-| Adventuring | 949 |
-| Magic | 876 |
-| Government | 874 |
-| Exotic | 12 |
+| state | C | V |
+|---|---|---|
+| Crafts | 10565 | 9789 |
+| Economy | 9385 | 9056 |
+| Infrastructure | 3494 | 3451 |
+| Religious | 2962 | 2793 |
+| Defense | 2039 | 2119 |
+| Entertainment | 1693 | 1652 |
+| Criminal | 1558 | 1361 |
+| Adventuring | 949 | 955 |
+| Magic | 876 | 798 |
+| Government | 874 | 832 |
+| Exotic | 12 | 293 |
 
 ### tradition
 
-| state | C |
-|---|---|
-| founding | 473 |
-| greening | 229 |
-| founding · under a crisis | 227 |
-| harvest | 215 |
-| field | 178 |
-| charter | 163 |
-| market | 128 |
-| forge | 109 |
-| greening · under a crisis | 105 |
-| field · under a crisis | 94 |
-| the-dead | 92 |
-| harvest · under a crisis | 88 |
-| stars | 86 |
-| charter · under a crisis | 78 |
-| hunt | 67 |
-| long-sun | 65 |
-| market · under a crisis | 61 |
-| stone | 48 |
-| forge · under a crisis | 48 |
-| hearth | 41 |
-| stars · under a crisis | 39 |
-| the-dead · under a crisis | 37 |
-| hunt · under a crisis | 30 |
-| stone · under a crisis | 23 |
-| hearth · under a crisis | 22 |
-| long-sun · under a crisis | 21 |
+| state | C | V |
+|---|---|---|
+| founding | 473 | 370 |
+| greening | 229 | 130 |
+| founding · under a crisis | 227 | 171 |
+| harvest | 215 | 129 |
+| field | 178 | 58 |
+| charter | 163 | 169 |
+| market | 128 | 136 |
+| forge | 109 | 80 |
+| greening · under a crisis | 105 | 51 |
+| field · under a crisis | 94 | 36 |
+| the-dead | 92 | 90 |
+| harvest · under a crisis | 88 | 54 |
+| stars | 86 | 97 |
+| charter · under a crisis | 78 | 78 |
+| hunt | 67 | 97 |
+| long-sun | 65 | 65 |
+| market · under a crisis | 61 | 52 |
+| stone | 48 | 134 |
+| forge · under a crisis | 48 | 37 |
+| hearth | 41 | 51 |
+| stars · under a crisis | 39 | 34 |
+| the-dead · under a crisis | 37 | 42 |
+| hunt · under a crisis | 30 | 40 |
+| stone · under a crisis | 23 | 48 |
+| hearth · under a crisis | 22 | 19 |
+| long-sun · under a crisis | 21 | 29 |
+| first-landing | 0 | 201 |
+| first-landing · under a crisis | 0 | 99 |
+| tide · under a crisis | 0 | 24 |
+| river | 0 | 56 |
+| river · under a crisis | 0 | 27 |
+| tide | 0 | 63 |
 
 ### person
 
-| state | C |
-|---|---|
-| transactional | 8390 |
-| cautious | 8273 |
-| welcoming | 7955 |
-| dismissive | 2742 |
-| none | 31 |
+| state | C | V |
+|---|---|---|
+| transactional | 8390 | 8071 |
+| cautious | 8273 | 7957 |
+| welcoming | 7955 | 7442 |
+| dismissive | 2742 | 2708 |
+| none | 31 | 40 |
 
 ### personCategory
 
-| state | C |
-|---|---|
-| other | 13423 |
-| economy | 4801 |
-| government | 2542 |
-| criminal | 2273 |
-| military | 1777 |
-| religious | 1559 |
-| magic | 985 |
-| civic | 31 |
+| state | C | V |
+|---|---|---|
+| other | 13423 | 12671 |
+| economy | 4801 | 4611 |
+| government | 2542 | 2590 |
+| criminal | 2273 | 2042 |
+| military | 1777 | 1801 |
+| religious | 1559 | 1412 |
+| magic | 985 | 1051 |
+| civic | 31 | 40 |
 
 
 

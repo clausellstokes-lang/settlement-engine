@@ -10,56 +10,55 @@ column is my reading of the components (PLAUSIBLE where it says "would"). The to
 The table of every card, surface by surface, is `A-cards.tsv`.
 
 **How far the corpus run got.** C: 900 of 900 rendered, 0 errors. For each of the six kinds below, the mounted count
-equals the count from the record's own reader on 900 of 900 towns. V: see `STATE.md`. Until V lands, its columns read
-"…".
+equals the count from the record's own reader on 900 of 900 towns. V: 900 of 900 rendered, 0 errors, census equal to the record on 900 of 900. Every cell gives C · V.
 
 ## The card kinds, and how many a town shows (owner's dossier; C · V, mean/max)
 
 | card (surface): the thing | thorp | hamlet | village | town | city | metropolis |
 |---|---|---|---|---|---|---|
-| dossier Systems/Institutions: an institution | 8.36/11 · … | 11.17/18 · … | 14.61/26 · … | 32.79/50 · … | 69.23/91 · … | 93.23/100 · … |
-| dossier Systems/Services: a service row of a house | 6.93/13 · … | 11.83/22 · … | 16.87/34 · … | 49.05/74 · … | 109.03/152 · … | 157.81/177 · … |
-| dossier Systems/Power: a power | 1.09/2 · … | 1.23/2 · … | 2.37/3 · … | 3.97/5 · … | 6.44/8 · … | 8.03/10 · … |
-| dossier Systems/Power: a power that holds or contests the seat | 1.09/2 · … | 1.18/2 · … | 2.17/3 · … | 3.15/4 · … | 3.98/4 · … | 4/4 · … |
-| dossier World/NPCs: a person | 1.28/3 · … | 3.57/11 · … | 7.99/20 · … | 24.93/41 · … | 60.92/83 · … | 83.93/92 · … |
-| dossier World/Relationships: a tie between two people | 0.4/3 · … | 3.27/10 · … | 7.95/20 · … | 24.93/41 · … | 60.92/83 · … | 83.93/92 · … |
-| dossier World/Relationships: a conflict between two powers | 0.01/1 · … | 0.06/1 · … | 0.29/2 · … | 1.15/3 · … | 1.73/3 · … | 2.13/3 · … |
-| dossier World/History: a current tension | 1.03/2 · … | 1.05/2 · … | 1.59/2 · … | 1.56/3 · … | 2.53/3 · … | 2.51/3 · … |
-| dossier World/History: a historical event | 2.43/4 · … | 2.41/5 · … | 3.41/6 · … | 4.91/8 · … | 7.25/12 · … | 11.36/17 · … |
-| dossier World/Traditions: a tradition | 1.47/2 · … | 1.51/2 · … | 2/2 · … | 3/3 · … | 4.5/5 · … | 5.97/7 · … |
-| dossier Summary/Crisis: a crisis in force | 0.33/1 · … | 0.33/2 · … | 0.37/1 · … | 0.35/2 · … | 0.32/2 · … | 0.27/1 · … |
-| dossier Summary/Plot Hooks: a plot hook | 2.35/5 · … | 5.07/13 · … | 9.95/22 · … | 27.97/45 · … | 65.57/90 · … | 89.59/101 · … |
-| dossier Systems/Resources: a resource chain | 0.81/3 · … | 0.81/3 · … | 0.83/4 · … | 1.18/4 · … | 1.35/4 · … | 0.82/4 · … |
-| PDF ch.06 Institutions: an institution | - · … | - · … | - · … | - · … | - · … | - · … |
-| PDF Power: a power | - · … | - · … | - · … | - · … | - · … | - · … |
-| PDF Notable NPCs: a major person | - · … | - · … | - · … | - · … | - · … | - · … |
-| PDF Notable NPCs: a notable person | - · … | - · … | - · … | - · … | - · … | - · … |
-| PDF Notable NPCs: every other person | - · … | - · … | - · … | - · … | - · … | - · … |
-| PDF History: a current tension | - · … | - · … | - · … | - · … | - · … | - · … |
-| PDF History: a historical event | - · … | - · … | - · … | - · … | - · … | - · … |
-| PDF Traditions: a tradition | - · … | - · … | - · … | - · … | - · … | - · … |
-| PDF Crisis: a crisis | - · … | - · … | - · … | - · … | - · … | - · … |
-| PDF Plot Hooks: a plot hook | - · … | - · … | - · … | - · … | - · … | - · … |
-| PDF Relationships: a tie | - · … | - · … | - · … | - · … | - · … | - · … |
-| Tonight sheet: a person to voice | - · … | - · … | - · … | - · … | - · … | - · … |
-| Tonight sheet: a plot hook | - · … | - · … | - · … | - · … | - · … | - · … |
-| session view: a person | - · … | - · … | - · … | - · … | - · … | - · … |
-| session view: a plot hook | - · … | - · … | - · … | - · … | - · … | - · … |
-| shared page (Institutions): an institution | 8.36/11 · … | 11.17/18 · … | 14.61/26 · … | 32.79/50 · … | 69.23/91 · … | 93.23/100 · … |
-| shared page (Power): a power | 1.09/2 · … | 1.23/2 · … | 2.37/3 · … | 3.97/5 · … | 6.44/8 · … | 8.02/10 · … |
-| shared page (NPCs): a person | 1.28/3 · … | 3.57/11 · … | 7.99/20 · … | 24.93/41 · … | 60.92/83 · … | 83.93/92 · … |
-| shared page (History): a current tension | 1.03/2 · … | 1.05/2 · … | 1.59/2 · … | 1.56/3 · … | 2.53/3 · … | 2.51/3 · … |
-| shared page (Traditions): a tradition | 1.47/2 · … | 1.51/2 · … | 2/2 · … | 3/3 · … | 4.5/5 · … | 5.97/7 · … |
-| shared page (Crisis): - | 0/0 · … | 0/0 · … | 0/0 · … | 0/0 · … | 0/0 · … | 0/0 · … |
+| dossier Systems/Institutions: an institution | 8.36/11 · 8.07/12 | 11.17/18 · 10.93/19 | 14.61/26 · 14.85/27 | 32.79/50 · 31.68/47 | 69.23/91 · 65.92/92 | 93.23/100 · 89.21/110 |
+| dossier Systems/Services: a service row of a house | 6.93/13 · 6.31/11 | 11.83/22 · 10.62/22 | 16.87/34 · 16.6/35 | 49.05/74 · 47.37/77 | 109.03/152 · 102.94/152 | 157.81/177 · 148.41/189 |
+| dossier Systems/Power: a power | 1.09/2 · 1.07/3 | 1.23/2 · 1.24/2 | 2.37/3 · 2.22/3 | 3.97/5 · 3.83/5 | 6.44/8 · 5.97/8 | 8.03/10 · 7.06/10 |
+| dossier Systems/Power: a power that holds or contests the seat | 1.09/2 · 1.07/3 | 1.18/2 · 1.19/2 | 2.17/3 · 2.01/3 | 3.15/4 · 2.93/4 | 3.98/4 · 3.81/4 | 4/4 · 3.93/4 |
+| dossier World/NPCs: a person | 1.28/3 · 1.29/5 | 3.57/11 · 3.38/11 | 7.99/20 · 8.09/19 | 24.93/41 · 24.52/39 | 60.92/83 · 57.57/82 | 83.93/92 · 79.93/99 |
+| dossier World/Relationships: a tie between two people | 0.4/3 · 0.35/5 | 3.27/10 · 3.01/11 | 7.95/20 · 8.06/19 | 24.93/41 · 24.52/39 | 60.92/83 · 57.57/82 | 83.93/92 · 79.93/99 |
+| dossier World/Relationships: a conflict between two powers | 0.01/1 · 0.01/1 | 0.06/1 · 0.05/1 | 0.29/2 · 0.23/2 | 1.15/3 · 1.11/3 | 1.73/3 · 1.63/3 | 2.13/3 · 2.03/3 |
+| dossier World/History: a current tension | 1.03/2 · 1.06/2 | 1.05/2 · 1.05/2 | 1.59/2 · 1.55/2 | 1.56/3 · 1.5/3 | 2.53/3 · 2.53/3 | 2.51/3 · 2.51/3 |
+| dossier World/History: a historical event | 2.43/4 · 2.47/4 | 2.41/5 · 2.37/5 | 3.41/6 · 3.33/6 | 4.91/8 · 4.75/8 | 7.25/12 · 7.14/12 | 11.36/17 · 11.11/18 |
+| dossier World/Traditions: a tradition | 1.47/2 · 1.47/2 | 1.51/2 · 1.51/2 | 2/2 · 2/2 | 3/3 · 3/3 | 4.5/5 · 4.5/5 | 5.97/7 · 5.97/7 |
+| dossier Summary/Crisis: a crisis in force | 0.33/1 · 0.37/2 | 0.33/2 · 0.41/2 | 0.37/1 · 0.3/2 | 0.35/2 · 0.35/2 | 0.32/2 · 0.29/2 | 0.27/1 · 0.27/1 |
+| dossier Summary/Plot Hooks: a plot hook | 2.35/5 · 2.36/8 | 5.07/13 · 5.01/12 | 9.95/22 · 9.71/22 | 27.97/45 · 27.57/44 | 65.57/90 · 61.68/89 | 89.59/101 · 84.57/105 |
+| dossier Systems/Resources: a resource chain | 0.81/3 · 1.32/5 | 0.81/3 · 1.29/5 | 0.83/4 · 1.41/5 | 1.18/4 · 1.41/4 | 1.35/4 · 1.65/5 | 0.82/4 · 1.03/4 |
+| PDF ch.06 Institutions: an institution | - · - | - · - | - · - | - · - | - · - | - · - |
+| PDF Power: a power | - · - | - · - | - · - | - · - | - · - | - · - |
+| PDF Notable NPCs: a major person | - · - | - · - | - · - | - · - | - · - | - · - |
+| PDF Notable NPCs: a notable person | - · - | - · - | - · - | - · - | - · - | - · - |
+| PDF Notable NPCs: every other person | - · - | - · - | - · - | - · - | - · - | - · - |
+| PDF History: a current tension | - · - | - · - | - · - | - · - | - · - | - · - |
+| PDF History: a historical event | - · - | - · - | - · - | - · - | - · - | - · - |
+| PDF Traditions: a tradition | - · - | - · - | - · - | - · - | - · - | - · - |
+| PDF Crisis: a crisis | - · - | - · - | - · - | - · - | - · - | - · - |
+| PDF Plot Hooks: a plot hook | - · - | - · - | - · - | - · - | - · - | - · - |
+| PDF Relationships: a tie | - · - | - · - | - · - | - · - | - · - | - · - |
+| Tonight sheet: a person to voice | - · - | - · - | - · - | - · - | - · - | - · - |
+| Tonight sheet: a plot hook | - · - | - · - | - · - | - · - | - · - | - · - |
+| session view: a person | - · - | - · - | - · - | - · - | - · - | - · - |
+| session view: a plot hook | - · - | - · - | - · - | - · - | - · - | - · - |
+| shared page (Institutions): an institution | 8.36/11 · 8.07/12 | 11.17/18 · 10.93/19 | 14.61/26 · 14.85/27 | 32.79/50 · 31.68/47 | 69.23/91 · 65.92/92 | 93.23/100 · 89.21/110 |
+| shared page (Power): a power | 1.09/2 · 1.07/3 | 1.23/2 · 1.24/2 | 2.37/3 · 2.22/3 | 3.97/5 · 3.8/5 | 6.44/8 · 5.97/8 | 8.02/10 · 7.05/10 |
+| shared page (NPCs): a person | 1.28/3 · 1.29/5 | 3.57/11 · 3.38/11 | 7.99/20 · 8.09/19 | 24.93/41 · 24.52/39 | 60.92/83 · 57.57/82 | 83.93/92 · 79.93/99 |
+| shared page (History): a current tension | 1.03/2 · 1.06/2 | 1.05/2 · 1.05/2 | 1.59/2 · 1.55/2 | 1.56/3 · 1.5/3 | 2.53/3 · 2.53/3 | 2.51/3 · 2.51/3 |
+| shared page (Traditions): a tradition | 1.47/2 · 1.47/2 | 1.51/2 · 1.51/2 | 2/2 · 2/2 | 3/3 · 3/3 | 4.5/5 · 4.5/5 | 5.97/7 · 5.97/7 |
+| shared page (Crisis): - | 0/0 · 0/0 | 0/0 · 0/0 | 0/0 · 0/0 | 0/0 · 0/0 | 0/0 · 0/0 | 0/0 · 0/0 |
 
 Reading the table:
-- **The Crisis tab exists only in a crisis.** It mounted in 293 of C's 900 towns (about one in three at every size), and
+- **The Crisis tab exists only in a crisis.** It mounted in 293 of C's 900 towns and 287 of V's (about one in three at every size), and
   never on the shared page.
 - **The shared page shows the same cards in the same numbers**, with one exception: the Plot Hooks tab. It appears in
   about 40 of 150 shares at each size and shows 0 to 0.3 hooks, against 2 to 90 on the owner's page. The Crisis and Faith
   tabs are not on the shared page at all.
 - **People and ties match one for one from the town size up**, because the record holds one tie per person.
-- **Traditions on the PDF: none for any born town.** `src/pdf/sections/Traditions.jsx:56` reads only the lit mirror
+- **Traditions on the PDF: none for any born town** (0 of 1,800). `src/pdf/sections/Traditions.jsx:56` reads only the lit mirror
   (`settlement.traditions`). The screen shows the view-time draw: 1.5 to 6 traditions a town.
 
 ## The six of the design's first cut, component by component
